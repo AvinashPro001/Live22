@@ -1,0 +1,78 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Customer List</legend>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-lg-2">
+                    <input type='text' class="form-control" (keyup)="searchHandler($event)" placeholder="Search" />
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
+                           [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator">
+                <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <div class="row col-md-12" style="margin-right:0px">
+                        <label class="col-md-3">
+                            <button id="viewbtn" data-id="customerData[rowIndex].id" class="mb-1 btn btn-success" type="button" data-toggle="modal" title="View" (click)='show(customerData[rowIndex],content)'>
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                        <label class="col-md-3">
+                            <button id="acceptBtn" data-id="customerData[rowIndex].id" class="mb-1 btn btn-success" type="button" data-toggle="modal" title="Edit" (click)='navigateEdit(customerData[rowIndex])'>
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                        <label class="col-md-3">
+                            <button id="rejectBtn" data-id="customerData[rowIndex].id" class="mb-1 btn btn-danger" type="button" data-toggle="modal" style="margin-left:5px" title="Delete" (click)='openRejectConfirmationDialog(customerData[rowIndex].id)'>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                        <label class="col-md-3">
+                            <ui-switch [(ngModel)]="customerData[rowIndex].active" (change)="manualUpdateEvent(customerData[rowIndex].id,$event)" data-toggle="modal" data-id="customerData[rowIndex].id"></ui-switch>
+                        </label>
+                    </div>
+                </ng-template>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">View Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="col-12">
+                <label class="col-3"><b>Username</b></label>
+                <label class="col-3">{{viewData.username}}</label>
+                <label class="col-3"><b>Full Name</b></label>
+                <label class="col-3">{{viewData.name}}</label>
+                <label class="col-3"><b>Mobile No</b></label>
+                <label class="col-3">{{viewData.mobileNo}}</label>
+                <label class="col-3"><b>Account Name</b></label>
+                <label class="col-3">{{viewData.accountName}}</label>
+                <label class="col-3"><b>Bank Account</b></label>
+                <label class="col-3">{{viewData.bankAccount}}</label>
+                <label class="col-3"><b>Bank Name</b></label>
+                <label class="col-3">{{viewData.bankName}}</label>
+                <label class="col-3"><b>Role</b></label>
+                <label class="col-3">{{viewData.role}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

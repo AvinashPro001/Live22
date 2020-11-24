@@ -1,0 +1,60 @@
+﻿@page
+@{
+    ViewData["Title"] = "Promotion";
+    Layout = "~/Pages/Shared/LayoutMobile.cshtml";
+}
+<title>Webet333 - @ViewData["Title"] </title>
+@*<script src="~/js/mobile/m_home.js"></script>*@
+<script>
+    document.getElementById("Translation_Option").innerHTML = "";
+    
+    promotionList();
+</script>
+<script>
+
+    function myFunction(id) {
+        document.getElementById(id).style.visibility = "hidden";
+        document.getElementById('promotions-bannner').style.display = "block";
+    }
+
+    function OpenFunction(id) {
+        document.getElementById(id).style.visibility = "inherit";
+        document.getElementById(id).style.top = "0";
+        document.getElementById('promotions-bannner').style.display = "none";
+    }
+</script>
+<style>
+    .table tbody tr:first-child td {
+        background: #858585;
+    }
+
+    table {
+        background: #e5e5e5 !important;
+        text-align: center;
+        width: 100%;
+    }
+</style>
+
+<div id="promotion-description">
+
+</div>
+
+<div class="promotion-title black-bg text-center">
+    <div class="container">
+        <h4 class="white-text lang" key="Promotion"></h4>
+    </div>
+</div>
+
+<div class="account-reg white-bg radius-border" style="padding:5px;" id="promotions-bannner">
+    <div class="container" style="padding:0px;">
+        <div class="panel-group" id="accordion">
+        </div>
+    </div>
+</div>
+
+<script>
+    setTimeout(function () {
+        $('#promotionPagebottom').addClass("active-link");
+    }, 2000);
+  
+</script>

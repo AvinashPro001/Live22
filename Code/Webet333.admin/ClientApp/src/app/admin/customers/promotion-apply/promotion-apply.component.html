@@ -1,0 +1,98 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Promotion Apply List</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">Filter by status</h4>
+                    <select class="form-control" id="status">
+                        <option disabled value="">--select status--</option>
+                        <option *ngFor="let c of listType" [ngValue]="c">{{c.status}}</option>
+                    </select>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">From Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()"  type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">To Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()"  type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='filter()' type="button">Filter</button>
+                </div>
+            </div>
+            <div>
+                <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7">
+                   
+                </ngx-datatable>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Receipts</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig">
+            <div ngxSlickItem *ngFor="let image of imagesUrl" class="slide">
+                <img [src]="image" alt="">
+            </div>
+        </ngx-slick>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<!--Remarks modal code starts-->
+<ng-template #remark let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Please confirm..</h4>
+        <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group m-form__group has-danger row">
+            <label class="col-form-label col-lg-9" for="inputDanger1">Do you really want to verify deposit ?</label>
+        </div>
+        <div class="form-group m-form__group has-danger row">
+            <label class="col-form-label col-lg-3" for="inputDanger1">Remarks: </label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control m-input" name="name" id="txt_remarks" [(ngModel)]="remarkval">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="decline()">No</button>
+        <button type="button" [disabled]="disabled" class="btn btn-primary" (click)="RegisteAfterAccept()">Yes</button>
+    </div>
+</ng-template>
+<!--Remarks modal code ends-->

@@ -1,0 +1,19 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Last Update Betting Details List</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+            </div>
+            <div>
+                <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="50">
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
+</div>

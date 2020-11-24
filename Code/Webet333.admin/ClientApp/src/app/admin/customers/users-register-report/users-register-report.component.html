@@ -1,0 +1,69 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">User Register Report</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">From Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">To Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='FilterData()' type="button">Filter</button>
+                </div>
+            </div>
+
+            <div class="row col-12 ">
+                <div class="row col-md-2">
+                        <label>OTP Verified User :</label>
+                    <div class="input-group col-1">
+                        <label class="container">
+                            <input type="checkbox" id="Verified">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row col-md-2">
+                    <label>OTP Unverified User :</label>
+                    <div class="input-group col-1">
+                        <label class="container">
+                            <input type="checkbox" id="Unverified">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="50"
+                           [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
+
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,484 @@
+/* You can add global styles to this file, and also import other style files */
+
+//== Vendor
+@import '~font-awesome/css/font-awesome.css';
+@import '~simple-line-icons/css/simple-line-icons.css';
+//== Bootstrap
+@import "./app/shared/styles/bootstrap.scss";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+//== Application
+@import "./app/shared/styles/app.scss";
+@import '~angular2-toaster/toaster.css';
+@import '~spinkit/css/spinkit.css';
+@import '~loaders.css/loaders.css';
+@import '~ng2-dnd/bundles/style.css';
+@import '~ag-grid/dist/styles/ag-grid.css';
+@import '~ag-grid/dist/styles/theme-fresh.css';
+@import '~jqcloud2/dist/jqcloud.css';
+@import '~summernote/dist/summernote.css';
+@import '~fullcalendar/dist/fullcalendar.min.css';
+@import '~codemirror/lib/codemirror.css';
+@import '~sweetalert/dist/sweetalert.css';
+.main-title {
+    margin-left: 15px;
+}
+
+.backdrop {
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    z-index: 1;
+}
+
+.requried {
+    font-size: large;
+    color: red;
+}
+
+.section-container .modal {
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+
+.modal-content {
+    width: 200% !important;
+    align-content: center;
+    margin-top: 100px;
+    margin-left: -140px;
+}
+
+.dark-modal .slick-slide img {
+    margin: 0 auto;
+    max-width: 450px;
+    max-height: 300px;
+}
+
+.model-dialog {
+    max-width: 1500px !important;
+    margin: 1.75rem auto !important;
+}
+
+.slick-prev {
+    left: -50px !important;
+}
+
+.slick-next {
+    right: -35px !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-size: 35px !important;
+}
+
+.radio-align {
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.btn-primary {
+    background-color: #f47d3a;
+    border-color: #f47d3a;
+}
+
+.btn-info {
+    background-color: #f47d3a;
+    border-color: #f47d3a;
+}
+
+.btn-info:hover {
+    background-color: #ff5e03;
+    border-color: #ff5e03;
+}
+
+.btn-primary:hover {
+    background-color: #ff5e03;
+    border-color: #ff5e03;
+}
+
+a {
+    color: #f47d3a
+}
+
+.topnavbar {
+    background-color: #0B1729 !important;
+    background-image: none !important;
+}
+
+.sidebar {
+    background-color: #0B1729 !important;
+}
+
+.sidebar-nav>li.active,
+.sidebar-nav>li.active>a,
+.sidebar-nav>li.active>.nav-item,
+.sidebar-nav>li.active .sidebar-nav,
+.sidebar-nav>li.open,
+.sidebar-nav>li.open>a,
+.sidebar-nav>li.open>.nav-item,
+.sidebar-nav>li.open .sidebar-nav {
+    background-color: #f47d3a !important;
+    color: #ffffff !important;
+}
+
+.sidebar-nav>li.active {
+    border-left-color: #ffffff !important;
+}
+
+.sidebar-nav>li.active>.nav-item>em,
+.sidebar-nav>li.active>a>em,
+.sidebar-nav>li.open>.nav-item>em,
+.sidebar-nav>li.open>a>em {
+    color: #ffffff !important;
+}
+
+.user-block .user-block-info .user-block-name {
+    color: #ffffff !important;
+}
+
+.sidebar-nav>li>a:focus,
+.sidebar-nav>li>a:hover,
+.sidebar-nav>li>.nav-item:focus,
+.sidebar-nav>li>.nav-item:hover,
+.sidebar-nav>li>a,
+.sidebar-nav>li>.nav-item {
+    color: #ffffff !important;
+}
+
+.sidebar-subnav {
+    background-color: #f47d3a !important;
+}
+
+.sidebar-subnav>li>a,
+.sidebar-subnav>li>.nav-item {
+    display: block;
+    position: relative;
+    padding: 10px 20px;
+    padding-left: 53px;
+    font-weight: normal;
+    background-color: #F7D158 !important;
+    color: rgb(81, 82, 83);
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled).active a,
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled):hover a {
+    background-color: #f47d3a;
+    border-color: #f47d3a;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager a {
+    color: #f47d3a;
+}
+
+.switch input:checked+span {
+    background-color: #f47d3a;
+    border-color: #f47d3a;
+}
+
+.bg-dark {
+    background-color: #0B1729 !important;
+}
+
+.card-flat {
+    margin-top: 200px !important;
+}
+
+.deposit-inner {
+    width: 100%;
+}
+
+.deposit-inner h2 {
+    font-size: 25px;
+    line-height: 32px;
+    color: #000;
+}
+
+.deposit-inner .step-seection {
+    margin: 20px 0px;
+}
+
+.h20 {
+    height: 20px;
+}
+
+.border h2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.deposit-details ul {
+    padding: 0px;
+}
+
+.deposit-details li {
+    margin: 15px 0px;
+    list-style: none;
+    overflow: hidden;
+}
+
+.left-part {
+    float: left;
+    width: 33.33%;
+    text-transform: uppercase;
+}
+
+.right-part {
+    float: left;
+    width: 66.66%;
+}
+
+.right-part .mb-4 {
+    margin-bottom: 0px !important;
+}
+
+.step-seection p {
+    margin: 15px 0px;
+}
+
+.right-part label {
+    width: 100%;
+}
+
+.right-part label.custom {
+    margin: 0px 5px;
+    width: auto;
+}
+
+.right-part select.form-control {
+    width: 100%;
+    max-width: 100%;
+}
+
+.right-part input[type="text"] {
+    width: 100%;
+    border: 1px solid #dde6e9;
+    padding: 0.375rem 1rem;
+    border-radius: 0.25rem;
+}
+
+label input[type="radio"] {
+    vertical-align: middle;
+}
+
+.select-checkboxes ul {
+    padding-left: 0px;
+}
+
+.select-checkboxes li {
+    list-style: none;
+}
+
+.submit-btn input {
+    padding: 10px 15px;
+    font-size: 17px;
+    line-height: 25px;
+    text-transform: uppercase;
+}
+
+.full-img {
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 10px
+}
+
+.no-mar {
+    margin: 0px;
+    padding-left: 10px
+}
+
+.mar-btm-ten {
+    margin-bottom: 10px;
+}
+
+.ngx-datatable.bootstrap {}
+
+.ngx-datatable .datatable-header .datatable-header-cell .datatable-header-cell-template-wrap {
+    height: inherit;
+    text-align: center;
+}
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell {
+    text-align: center;
+    padding: 0px;
+    vertical-align: middle;
+}
+
+.ngx-datatable *,
+.ngx-datatable *:before,
+.ngx-datatable *:after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+}
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row.datatable-row-even {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.ngx-dropdown-container[_ngcontent-c11] .ngx-dropdown-list-container[_ngcontent-c11] {
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    z-index: 999999999;
+    width: 100%;
+    background-clip: padding-box;
+    background: white;
+    position: absolute;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.21);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.21);
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.21);
+    overflow-y: auto;
+    height: 500px;
+}
+
+.ngx-dropdown-container[_ngcontent-c11] .ngx-dropdown-list-container[_ngcontent-c11] ul.selected-items[_ngcontent-c11] li[_ngcontent-c11] {
+    background-color: #f47d3a !important;
+    color: white;
+    margin-bottom: 2px;
+}
+
+.form-control:focus {
+    border-color: #f47d3a;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #f47d3a;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(93, 156, 236, 0.25);
+}
+
+.ngx-datatable.bootstrap .datatable-body .progress-linear {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 5px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+}
+
+.ngx-datatable.bootstrap .datatable-body .progress-linear .container {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    height: 10px;
+    -webkit-transform: translate(0, 0) scale(1, 1);
+    transform: translate(0, 0) scale(1, 1);
+    background-color: #f47d3a;
+}
+
+.ngx-datatable.bootstrap .datatable-body .progress-linear .container .bar {
+    transition: all .2s linear;
+    -webkit-animation: query 0.8s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
+    animation: query 0.8s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
+    transition: -webkit-transform .2s linear;
+    transition: transform .2s linear;
+    background-color: #ffffff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+}
+
+
+/**
+ * Progress bar animations
+ */
+
+@keyframes query {
+    0% {
+        opacity: 1;
+        transform: translateX(35%) scale(0.3, 1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0, 1);
+    }
+}
+
+::ng-deep {
+    .progress-linear {
+        position: relative !important;
+        .container {
+            max-width: 100% !important;
+        }
+    }
+}
+
+.ngx-datatable {
+    overflow-y: visible;
+}
+
+.approved {
+    // border-radius: 50px;
+    // border-style: solid;
+    // border-width: 1px;
+    //top: 5px;
+    color: green;
+    position: relative;
+    padding: 5px;
+    font-weight: 800;
+}
+
+.pending {
+    // border-radius: 50px;
+    // border-style: solid;
+    // border-width: 1px;
+    //top: 5px;
+    color: #f5be00;
+    position: relative;
+    padding: 5px;
+    font-weight: 800;
+}
+
+.rejected {
+    // border-radius: 50px;
+    // border-style: solid;
+    // border-width: 1px;
+    //top: 5px;
+    color: red;
+    position: relative;
+    padding: 5px;
+    font-weight: 800;
+}
+
+.method-promotion {
+    color: #f47d3a;
+    font-weight: 800;
+}
+
+.method-bank-transfer {
+    color: #f7d158;
+    font-weight: 800;
+}
+
+.notAvailable{
+    color:red;
+}
+
+.Available {
+    color: green;
+}
+
+#edit-slider .slick-prev {
+    height: 45px;
+    width: 45px;
+    color: blueviolet;
+    background-color:gray;
+}
+
+#edit-slider .slick-next {
+    height: 45px;
+    width: 45px;
+    color: blueviolet;
+    background-color: gray;
+    left: 155px !important;
+}

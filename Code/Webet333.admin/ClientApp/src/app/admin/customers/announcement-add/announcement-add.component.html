@@ -1,0 +1,50 @@
+﻿<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/admin/customers/announcement-list">Announcement List</a>
+    </li>
+    <li class="breadcrumb-item">
+        Add Announcement
+    </li>
+</ol>
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Announcement Add</legend>
+                </div>
+            </div>
+        </div>
+
+        <div class="row card-body">
+            <div class="col-md-12">
+                <form class="border border-light p-5" name="myForm">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="col-md-8">
+                                <div class="deposit-details">
+                                    <div class="left-part">Announcement </div>
+                                    <div class="right-part" style="display:flex">
+                                        <input type="text" name="name" id="txt_reference" autocomplete="off" />
+                                        <span class="requried"><sup>&nbsp;&nbsp;*</sup></span>
+                                    </div>
+                                </div>
+                                <br /><br /><br />
+                                <div class="deposit-details">
+                                    <div class="left-part">Language</div>
+                                    <div class="right-part"  style="display:flex">
+                                        <select class="form-control" id="ddlLanguage">
+                                            <option [value]="c.id" *ngFor="let c of Language" [ngValue]="c">{{c.name}}</option>
+                                        </select>
+                                        <span class="requried"><sup>&nbsp;&nbsp;*</sup></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)="addAnnouncement()" style="max-width:200px;align-content:center">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+.bold{
+    font-style:italic;
+    font-family:'Times New Roman', Times, serif;
+    font-size:18px;
+}
+.row-flex .row {
+    -webkit-align-items: inherit;
+    align-items: center;
+    margin: 15px 0;
+}

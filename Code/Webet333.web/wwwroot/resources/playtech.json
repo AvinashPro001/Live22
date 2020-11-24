@@ -1,0 +1,799 @@
+{
+  "games": [
+    {
+      "sequence": "1",
+      "name": "bjl",
+      "fullName": "Blackjack Live"
+    },
+    {
+      "sequence": "2",
+      "name": "rol",
+      "fullName": "Roulette Live"
+    },
+    {
+      "sequence": "3",
+      "name": "rofl",
+      "fullName": "Roulette French Live"
+    },
+    {
+      "sequence": "4",
+      "name": "bal",
+      "fullName": "Mini Baccarat Live"
+    },
+    {
+      "sequence": "5",
+      "name": "7bal",
+      "fullName": "7 Seat Baccarat Live"
+    },
+    {
+      "sequence": "6",
+      "name": "aztec",
+      "fullName": "Inca Jackpot (New!)"
+    },
+    {
+      "sequence": "7",
+      "name": "gtsje",
+      "fullName": "Jade Emperor (New!)"
+    },
+    {
+      "sequence": "8",
+      "name": "ririshc",
+      "fullName": "Ri Ri Sheng Cai (New!)"
+    },
+    {
+      "sequence": "9",
+      "name": "sfh",
+      "fullName": "Safari Heat (New!)"
+    },
+    {
+      "sequence": "10",
+      "name": "gtsswk",
+      "fullName": "Sun Wu Kong (New!)"
+    },
+    {
+      "sequence": "11",
+      "name": "gtsgme",
+      "fullName": "The Great Ming Empire (New!)"
+    },
+    {
+      "sequence": "12",
+      "name": "zcjbjp",
+      "fullName": "Zhao Cai Jin Bao Jackpot (New!)"
+    },
+    {
+      "sequence": "13",
+      "name": "fday",
+      "fullName": "Fortune Day (New!)"
+    },
+    {
+      "sequence": "14",
+      "name": "ttc",
+      "fullName": "Top Trump Celebs (New!)"
+    },
+    {
+      "sequence": "15",
+      "name": "frtln",
+      "fullName": "Fortune Lions (New!)"
+    },
+    {
+      "sequence": "16",
+      "name": "hotktv",
+      "fullName": "Hot KTV (New!)"
+    },
+    {
+      "sequence": "17",
+      "name": "heavru",
+      "fullName": "Heavenly Ruler (New!)"
+    },
+    {
+      "sequence": "18",
+      "name": "slion",
+      "fullName": "Super Lion (New!)"
+    },
+    {
+      "sequence": "19",
+      "name": "trpmnk",
+      "fullName": "Triple Monkey"
+    },
+    {
+      "sequence": "20",
+      "name": "bs",
+      "fullName": "Bai Shi"
+    },
+    {
+      "sequence": "21",
+      "name": "chao",
+      "fullName": "Chaoji 888"
+    },
+    {
+      "sequence": "22",
+      "name": "ftg",
+      "fullName": "Five Tiger"
+    },
+    {
+      "sequence": "24",
+      "name": "gemq",
+      "fullName": "Gem Queen"
+    },
+    {
+      "sequence": "25",
+      "name": "jqw",
+      "fullName": "Jin Qian Wa"
+    },
+    {
+      "sequence": "26",
+      "name": "kfp",
+      "fullName": "Liu Fu Shou"
+    },
+    {
+      "sequence": "27",
+      "name": "longlong",
+      "fullName": "Long Long Long"
+    },
+    {
+      "sequence": "28",
+      "name": "qnw",
+      "fullName": "Queen Of Wands"
+    },
+    {
+      "sequence": "29",
+      "name": "ririjc",
+      "fullName": "Ri Ri Jin Cai"
+    },
+    {
+      "sequence": "30",
+      "name": "sx",
+      "fullName": "Si Xiang"
+    },
+    {
+      "sequence": "31",
+      "name": "wlcsh",
+      "fullName": "Wu Lu Cai Shen"
+    },
+    {
+      "sequence": "32",
+      "name": "zctz",
+      "fullName": "Zhao Cai Tong Zi"
+    },
+    {
+      "sequence": "33",
+      "name": "fkmj",
+      "fullName": "Feng Kuang"
+    },
+    {
+      "sequence": "34",
+      "name": "nian",
+      "fullName": "Nian Nian You Yu"
+    },
+    {
+      "sequence": "35",
+      "name": "gtsflzt",
+      "fullName": "Fei Long Zai Tian"
+    },
+    {
+      "sequence": "36",
+      "name": "gtsjxb",
+      "fullName": "Ji Xiang 8"
+    },
+    {
+      "sequence": "37",
+      "name": "fcgz",
+      "fullName": "Fei Cui Gong Zhu"
+    },
+    {
+      "sequence": "38",
+      "name": "zcjb",
+      "fullName": "Zhao Cai Jin Bao"
+    },
+    {
+      "sequence": "39",
+      "name": "ght_a",
+      "fullName": "Lie Yan Zuan Shi"
+    },
+    {
+      "sequence": "40",
+      "name": "wlg",
+      "fullName": "Wu Long"
+    },
+    {
+      "sequence": "41",
+      "name": "mgstk",
+      "fullName": "Magical Stacks"
+    },
+    {
+      "sequence": "42",
+      "name": "gtsdgk",
+      "fullName": "Dragon Kingdom"
+    },
+    {
+      "sequence": "43",
+      "name": "tpd2",
+      "fullName": "Thai Paradise"
+    },
+    {
+      "sequence": "44",
+      "name": "tht",
+      "fullName": "Thai Temple"
+    },
+    {
+      "sequence": "45",
+      "name": "ges",
+      "fullName": "Geisha Story"
+    },
+    {
+      "sequence": "46",
+      "name": "aogs",
+      "fullName": "Age of the Gods"
+    },
+    {
+      "sequence": "47",
+      "name": "ftsis",
+      "fullName": "AOG Fate Sisters"
+    },
+    {
+      "sequence": "48",
+      "name": "furf",
+      "fullName": "AOG Furious 4"
+    },
+    {
+      "sequence": "49",
+      "name": "athn",
+      "fullName": "AOG Goddess"
+    },
+    {
+      "sequence": "50",
+      "name": "kolymp",
+      "fullName": "AOG King"
+    },
+    {
+      "sequence": "51",
+      "name": "hrcls",
+      "fullName": "AOG Prince"
+    },
+    {
+      "sequence": "52",
+      "name": "aogro",
+      "fullName": "AOG Roulette"
+    },
+    {
+      "sequence": "53",
+      "name": "bib",
+      "fullName": "Great Blue"
+    },
+    {
+      "sequence": "54",
+      "name": "ct",
+      "fullName": "Captains Treasure"
+    },
+    {
+      "sequence": "55",
+      "name": "fm",
+      "fullName": "Funky Monkey"
+    },
+    {
+      "sequence": "56",
+      "name": "hk",
+      "fullName": "Highway Kings"
+    },
+    {
+      "sequence": "57",
+      "name": "gos",
+      "fullName": "Golden Tours"
+    },
+    {
+      "sequence": "58",
+      "name": "arc",
+      "fullName": "Archer"
+    },
+    {
+      "sequence": "60",
+      "name": "bob",
+      "fullName": "Bonus Bears"
+    },
+    {
+      "sequence": "61",
+      "name": "dnr",
+      "fullName": "Dolphin Reef"
+    },
+    {
+      "sequence": "62",
+      "name": "pmn",
+      "fullName": "Panther Moon"
+    },
+    {
+      "sequence": "63",
+      "name": "sis",
+      "fullName": "Silent Samurai"
+    },
+    {
+      "sequence": "64",
+      "name": "hlf",
+      "fullName": "Halloween F."
+    },
+    {
+      "sequence": "65",
+      "name": "eas",
+      "fullName": "Easter Surprise"
+    },
+    {
+      "sequence": "66",
+      "name": "vcstd",
+      "fullName": "Vacation Station D."
+    },
+    {
+      "sequence": "67",
+      "name": "c7",
+      "fullName": "Crazy 7"
+    },
+    {
+      "sequence": "68",
+      "name": "ssp",
+      "fullName": "Santa Surprise"
+    },
+    {
+      "sequence": "69",
+      "name": "hb",
+      "fullName": "A Night Out"
+    },
+    {
+      "sequence": "70",
+      "name": "ashadv",
+      "fullName": "Adventures"
+    },
+    {
+      "sequence": "71",
+      "name": "ashamw",
+      "fullName": "Amazon Wild"
+    },
+    {
+      "sequence": "72",
+      "name": "art",
+      "fullName": "Arctic Treasure"
+    },
+    {
+      "sequence": "73",
+      "name": "gtsatq",
+      "fullName": "Atlantis Queen"
+    },
+    {
+      "sequence": "74",
+      "name": "bl",
+      "fullName": "Beach Life"
+    },
+    {
+      "sequence": "75",
+      "name": "bt",
+      "fullName": "Bermuda Triangle"
+    },
+    {
+      "sequence": "76",
+      "name": "ashbob",
+      "fullName": "Bounty Beanstalk"
+    },
+    {
+      "sequence": "77",
+      "name": "bfb",
+      "fullName": "Buffalo Blitz"
+    },
+    {
+      "sequence": "78",
+      "name": "ctiv",
+      "fullName": "Cat In Vegas"
+    },
+    {
+      "sequence": "79",
+      "name": "catqc",
+      "fullName": "Cat Queen"
+    },
+    {
+      "sequence": "80",
+      "name": "chl",
+      "fullName": "Cherry Love"
+    },
+    {
+      "sequence": "81",
+      "name": "ashcpl",
+      "fullName": "Chests of Plenty"
+    },
+    {
+      "sequence": "82",
+      "name": "cm",
+      "fullName": "Chinese Kitchen"
+    },
+    {
+      "sequence": "83",
+      "name": "gtscnb",
+      "fullName": "Cops N' Bandits"
+    },
+    {
+      "sequence": "84",
+      "name": "gtscbl",
+      "fullName": "Cowboys Aliens"
+    },
+    {
+      "sequence": "85",
+      "name": "gtsdrdv",
+      "fullName": "Daring Dave"
+    },
+    {
+      "sequence": "86",
+      "name": "mobdt",
+      "fullName": "Desert Treasure"
+    },
+    {
+      "sequence": "87",
+      "name": "donq",
+      "fullName": "Don Quixote"
+    },
+    {
+      "sequence": "88",
+      "name": "dlm",
+      "fullName": "Dr Love More"
+    },
+    {
+      "sequence": "89",
+      "name": "esm",
+      "fullName": "Esmeralda"
+    },
+    {
+      "sequence": "90",
+      "name": "evj",
+      "fullName": "Everybody's JP"
+    },
+    {
+      "sequence": "91",
+      "name": "ashfta",
+      "fullName": "Fairest"
+    },
+    {
+      "sequence": "92",
+      "name": "gtsfc",
+      "fullName": "Football Carnival"
+    },
+    {
+      "sequence": "93",
+      "name": "fbr",
+      "fullName": "Football Rules"
+    },
+    {
+      "sequence": "94",
+      "name": "fow",
+      "fullName": "Forest of Wonders"
+    },
+    {
+      "sequence": "95",
+      "name": "frtf",
+      "fullName": "Fortunate Five"
+    },
+    {
+      "sequence": "96",
+      "name": "foy",
+      "fullName": "Fountain of Youth"
+    },
+    {
+      "sequence": "97",
+      "name": "fxf",
+      "fullName": "Foxy Fortunes"
+    },
+    {
+      "sequence": "98",
+      "name": "fdt",
+      "fullName": "Frankie Dettori's"
+    },
+    {
+      "sequence": "99",
+      "name": "fdtjg",
+      "fullName": "Frankie Jackpot"
+    },
+    {
+      "sequence": "100",
+      "name": "fmn",
+      "fullName": "Fruit Mania"
+    },
+    {
+      "sequence": "101",
+      "name": "ashfmf",
+      "fullName": "Full Moon"
+    },
+    {
+      "sequence": "102",
+      "name": "fnfrj",
+      "fullName": "Funky Fruits"
+    },
+    {
+      "sequence": "103",
+      "name": "fff",
+      "fullName": "Funky Fruits Farm"
+    },
+    {
+      "sequence": "104",
+      "name": "glrj",
+      "fullName": "Gladiator Jackpot"
+    },
+    {
+      "sequence": "105",
+      "name": "ashglss",
+      "fullName": "Glass Slipper"
+    },
+    {
+      "sequence": "106",
+      "name": "grel",
+      "fullName": "Gold Rally"
+    },
+    {
+      "sequence": "107",
+      "name": "glg",
+      "fullName": "Golden Games"
+    },
+    {
+      "sequence": "108",
+      "name": "gro",
+      "fullName": "Greatest Odyssey"
+    },
+    {
+      "sequence": "109",
+      "name": "hlf2",
+      "fullName": "Halloween F. II"
+    },
+    {
+      "sequence": "110",
+      "name": "hh",
+      "fullName": "Haunted House"
+    },
+    {
+      "sequence": "111",
+      "name": "ashhotj",
+      "fullName": "Heart of Jungle"
+    },
+    {
+      "sequence": "112",
+      "name": "gts50",
+      "fullName": "Hot Gems"
+    },
+    {
+      "sequence": "113",
+      "name": "ir",
+      "fullName": "Ice Run"
+    },
+    {
+      "sequence": "114",
+      "name": "irl",
+      "fullName": "Irish Luck"
+    },
+    {
+      "sequence": "115",
+      "name": "jpgt",
+      "fullName": "Jackpot Giant"
+    },
+    {
+      "sequence": "116",
+      "name": "gtsjhw",
+      "fullName": "John Wayne"
+    },
+    {
+      "sequence": "117",
+      "name": "kkg",
+      "fullName": "Kong"
+    },
+    {
+      "sequence": "118",
+      "name": "lndg",
+      "fullName": "Land of Gold"
+    },
+    {
+      "sequence": "119",
+      "name": "ashlob",
+      "fullName": "Life of Brian"
+    },
+    {
+      "sequence": "120",
+      "name": "lm",
+      "fullName": "Lotto Madness"
+    },
+    {
+      "sequence": "121",
+      "name": "gtsmrln",
+      "fullName": "Marilyn Monroe"
+    },
+    {
+      "sequence": "122",
+      "name": "mfrt",
+      "fullName": "Miss Fortune"
+    },
+    {
+      "sequence": "123",
+      "name": "mrcb",
+      "fullName": "Mr. Cashback"
+    },
+    {
+      "sequence": "124",
+      "name": "nk",
+      "fullName": "Neptunes"
+    },
+    {
+      "sequence": "125",
+      "name": "pgv",
+      "fullName": "Penguin Vacation"
+    },
+    {
+      "sequence": "126",
+      "name": "pst",
+      "fullName": "Pharaoh's Secrets"
+    },
+    {
+      "sequence": "127",
+      "name": "paw",
+      "fullName": "Piggies"
+    },
+    {
+      "sequence": "128",
+      "name": "pnp",
+      "fullName": "Pink Panther"
+    },
+    {
+      "sequence": "129",
+      "name": "gtspor",
+      "fullName": "Plenty O'Fortune"
+    },
+    {
+      "sequence": "130",
+      "name": "phot",
+      "fullName": "Purple Hot"
+    },
+    {
+      "sequence": "131",
+      "name": "rky",
+      "fullName": "Rocky"
+    },
+    {
+      "sequence": "132",
+      "name": "rng2",
+      "fullName": "Rome and Glory"
+    },
+    {
+      "sequence": "133",
+      "name": "gtssmbr",
+      "fullName": "Samba Brazil"
+    },
+    {
+      "sequence": "134",
+      "name": "samz",
+      "fullName": "Secrets of Amazon"
+    },
+    {
+      "sequence": "135",
+      "name": "shmst",
+      "fullName": "Sherlock Mystery"
+    },
+    {
+      "sequence": "136",
+      "name": "sib",
+      "fullName": "Silver Bullet"
+    },
+    {
+      "sequence": "137",
+      "name": "ashsbd",
+      "fullName": "Sinbad's"
+    },
+    {
+      "sequence": "138",
+      "name": "srcg",
+      "fullName": "Spud OReilly's"
+    },
+    {
+      "sequence": "139",
+      "name": "sol",
+      "fullName": "Streak of Luck"
+    },
+    {
+      "sequence": "140",
+      "name": "cnpr",
+      "fullName": "Sweet Party"
+    },
+    {
+      "sequence": "141",
+      "name": "dcv",
+      "fullName": "The Discovery"
+    },
+    {
+      "sequence": "142",
+      "name": "lvb",
+      "fullName": "The Love Boat"
+    },
+    {
+      "sequence": "143",
+      "name": "tmqd",
+      "fullName": "Three Musketeers"
+    },
+    {
+      "sequence": "144",
+      "name": "ashtmd",
+      "fullName": "Time for a Deal"
+    },
+    {
+      "sequence": "145",
+      "name": "topg",
+      "fullName": "Top Gun"
+    },
+    {
+      "sequence": "147",
+      "name": "er",
+      "fullName": "Vacation Station"
+    },
+    {
+      "sequence": "148",
+      "name": "gts52",
+      "fullName": "Vikingmania"
+    },
+    {
+      "sequence": "149",
+      "name": "whk",
+      "fullName": "White King"
+    },
+    {
+      "sequence": "150",
+      "name": "gtswg",
+      "fullName": "Wild Gambler"
+    },
+    {
+      "sequence": "151",
+      "name": "ashwgaa",
+      "fullName": "Wild Gambler 2"
+    },
+    {
+      "sequence": "152",
+      "name": "wis",
+      "fullName": "Wild Spirit"
+    },
+    {
+      "sequence": "153",
+      "name": "gtswng",
+      "fullName": "Wings Of Gold"
+    },
+    {
+      "sequence": "154",
+      "name": "ba",
+      "fullName": "Baccarat"
+    },
+    {
+      "sequence": "155",
+      "name": "mobbj",
+      "fullName": "Blackjack"
+    },
+    {
+      "sequence": "156",
+      "name": "cheaa",
+      "fullName": "Casino Hold 'Em"
+    },
+    {
+      "sequence": "157",
+      "name": "mobro",
+      "fullName": "European Roulette"
+    },
+    {
+      "sequence": "158",
+      "name": "rodz_g",
+      "fullName": "P. American"
+    },
+    {
+      "sequence": "159",
+      "name": "ro_g",
+      "fullName": "P. European"
+    },
+    {
+      "sequence": "160",
+      "name": "bjp",
+      "fullName": "Perfect Blackjack"
+    },
+    {
+      "sequence": "161",
+      "name": "ash3brg",
+      "fullName": "Three Card Brag"
+    },
+    {
+      "sequence": "162",
+      "name": "cashfi",
+      "fullName": "Cash Fish"
+    }
+  ]
+}

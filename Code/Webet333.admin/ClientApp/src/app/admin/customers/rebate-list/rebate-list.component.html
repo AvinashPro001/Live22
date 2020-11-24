@@ -1,0 +1,80 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Rebate List</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">Game Category</h4>
+                    <select class="form-control" id="gameCategory">
+                        <option disabled="disabled" value="">-select game-</option>
+                        <option *ngFor="let c of listType" [ngValue]="c">{{c.Category}}</option>
+                    </select>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">From Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">To Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='Filter()' type="button">Filter</button>
+                </div>
+                <div class="p-2 col-md-2" style="position:absolute;right:0px;margin-top:35px">
+                    <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Add</button>
+                </div>
+            </div>
+            <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator">
+                <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <label>
+                        <button id="acceptBtn" data-id="rebateData[rowIndex].Id" class="mb-1 button btn-success" type="button" (click)="ViewData(rebateData[rowIndex].Id,content)" data-toggle="modal">
+                            <i class="fa fa-newspaper-o" aria-hidden="true" title="View"></i>
+                        </button>
+                    </label>
+                    <label>
+                        <button id="rejectBtn" data-id="rebateData[rowIndex].Id" [disabled]="disable" class="mb-1 button btn-danger" type="button" data-toggle="modal" (click)="Delete(rebateData[rowIndex].Id)" title="Reject" style="margin-left:5px">
+                            <i class="fa fa-ban" aria-hidden="true" title="Delete"></i>
+                        </button>
+                    </label>
+                </ng-template>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">View Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ngx-datatable class="material bootstrap no-detail-row" #tableDetails [rows]="rowDetails" [loadingIndicator]="loadingIndicator" [columns]="columnDetails" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7">
+        </ngx-datatable>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

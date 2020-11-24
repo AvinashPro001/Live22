@@ -1,0 +1,59 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Betting Details Check</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">Game <span class="text-danger">*</span></h4>
+                    <select class="form-control" id="GameName" (change)="onGameChange($event)">
+                        <option [disabled]="true" [ngValue]="">select Game</option>
+                        <option *ngFor="let c of listType" [ngValue]="c">{{c.gameName}}</option>
+                    </select>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">Username <span class="text-danger">*</span></h4>
+                    <!--<div class="input-group">-->
+                        <ngx-select-dropdown tabindex="0" [multiple]="false" class=""
+                                             [config]="config" [options]="customerData" (change)="onChange($event)"></ngx-select-dropdown>
+                    <!--</div>-->
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">From Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" [owlDateTime]="dt2"  placeholder="Date Time" type="text" id="txt_fromdatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt2" type="button"></button>
+                        </div>
+                        <owl-date-time  #dt2></owl-date-time>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">To Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" type="datetime" [owlDateTime]="dt1"  placeholder="Date Time" type="text" id="txt_todatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt1" type="button"></button>
+                        </div>
+                        <owl-date-time  #dt1></owl-date-time>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='BettingDetails()' type="button">Get</button>
+                </div>
+            </div>
+            <div>
+                <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'70'" [limit]="20" [scrollbarH]="true" >
+                    
+                </ngx-datatable>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,155 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Withdrawal List{{withdrawStatus!=null?' / '+withdrawStatus:""}}</legend>
+                </div>
+                <div class="col-lg-5">
+                </div>
+                <div class="col-lg-3" style="display: flex;">
+                    <div class="">
+                        <label class="container">
+                            <input type="checkbox" [checked]="AutoRefersh" id="chk_autorefersh" (change)="AutoRefershUpdate()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div><b>Auto Refersh and Ding Ding Notification</b></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">Filter by status</h4>
+                    <select class="form-control" [(ngModel)]="selectedList" (change)="onChange($event)">
+                        <option *ngFor="let c of listType" [ngValue]="c">{{c.verified}}</option>
+                    </select>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">Search</h4>
+                    <input class="form-control" type="text" (keyup)='searchHandler($event)'>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">From Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp" [(ngModel)]="model2" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" (change)='searchHandlerByDate()' type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">To Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp" [(ngModel)]="model1" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" (change)='searchHandlerByDate()' type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='searchHandlerByDate()' type="button">Filter</button>
+                </div>
+                <div class="p-2 col-md-2" style="position:absolute;right:0px;margin-top:35px">
+                    <button id="acceptBtn" data-id="withdrawData[rowIndex].id" class="mb-1 btn btn-success" type="button" (click)=' navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Add Withdraw</button>
+                </div>
+            </div>
+
+            <ngx-datatable #table class='bootstrap no-detail-row ' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
+                           [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator" [sortType]="'multi'" [headerHeight]="50">
+                <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <label>
+                        <button id="acceptBtn" data-id="withdrawData[rowIndex].id" class="mb-1 button btn-success" type="button" (click)="openremark(remark,withdrawData[rowIndex].id,withdrawData[rowIndex].orderId,withdrawData[rowIndex].userName,withdrawData[rowIndex].walletName,withdrawData[rowIndex].withdrawalAmount,'accept')" data-toggle="modal" title="Accept">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </button>
+                    </label>
+                    <label>
+                        <button id="rejectBtn" data-id="withdrawData[rowIndex].id" class="mb-1 button btn-danger" type="button"
+                                data-toggle="modal" (click)="openremark(remark,withdrawData[rowIndex].id,withdrawData[rowIndex].orderId,withdrawData[rowIndex].userName,withdrawData[rowIndex].walletName,withdrawData[rowIndex].withdrawalAmount,'reject')" style="margin-left:5px" title="Reject">
+                            <i class="fa fa-ban" aria-hidden="true"></i>
+                        </button>
+                    </label>
+                </ng-template>
+
+
+
+                <ng-template #action let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <label>
+                        <input type="button" id="similarButton" data-id="withdrawData[rowIndex].id" class="mb-1 button btn-success round" (click)="GetSimilarName(similarnamelist,withdrawData[rowIndex].id)" title="similar Percentage" value=" {{withdrawData[rowIndex].SimilarPercentage}} %" />
+                    </label>
+                </ng-template>
+
+            </ngx-datatable>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<!--Remarks modal code starts-->
+<ng-template #remark let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Please confirm..</h4>
+        <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group m-form__group has-danger row">
+            <label class="col-form-label col-lg-9" for="inputDanger1">Do you really want to verify deposit ?</label>
+        </div>
+        <div class="form-group m-form__group has-danger row">
+            <label class="col-form-label col-lg-3" for="inputDanger1">Remarks: </label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control m-input" name="name" id="txt_remarks" [(ngModel)]="remarkval">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="decline()">No</button>
+        <button type="button" [disabled]="disabled" class="btn btn-primary" (click)="accept()">Yes</button>
+    </div>
+</ng-template>
+<!--Remarks modal code ends-->
+
+<ng-template #similarnamelist let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">View Similar Name</h4>
+        <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="col-12">
+                <ol >
+                    <li>Compare bank name similar % only, we do not compare bank account number.</li>
+                    <li>ONLY compare was succeeded withdraw bank account name only</li>
+                    <li>Compare user's bank account name with/without apply promotion.</li>
+                    <li>If the similar name more than the % which manager told u, please contact manager to assist u.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-12">
+                <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rowsSimilar" [columns]="columnsSimilar" [columnMode]="'force'" [footerHeight]="60"
+                               [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator" [sortType]="'multi'" [headerHeight]="50">
+
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info" (click)="dismiss()">close</button>
+    </div>
+</ng-template>
+

@@ -1,0 +1,58 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Bonus List</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">Total Bonus</h4>
+                    <label style="font-size:large">{{totalBonus}}</label>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">From Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp" [(ngModel)]="model2" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" (change)='searchHandlerByDate()' type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">To Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp" [(ngModel)]="model1" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" (change)='searchHandlerByDate()' type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='searchHandlerByDate()' type="button">Filter</button>
+                </div>
+                <div class="p-2 col-md-2" style="position:absolute;right:0px;margin-top:35px">
+                    <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Add Bonus</button>
+                </div>
+            </div>
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
+                           [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator">
+                <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <label>
+                        <button id="rejectBtn" data-id="bonusData[rowIndex].id" class="mb-1 button btn-danger" type="button" (click)='openRejectConfirmationDialog(bonusData[rowIndex].id)' title="Reject" style="margin-left:5px">
+                            <i class="fa fa-ban" aria-hidden="true"></i>
+                        </button>
+                    </label>
+                </ng-template>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+

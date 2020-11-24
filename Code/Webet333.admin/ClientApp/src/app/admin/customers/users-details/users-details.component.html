@@ -1,0 +1,548 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <ngx-select-dropdown tabindex="0" [multiple]="false"
+                                 [config]="config" [options]="customerData" (change)="onChange($event)"></ngx-select-dropdown>
+        </div>
+        <div class="col-1">
+            <button class="mb-1 btn btn-success" (click)='RetoreBalance()' type="button">Restore</button>
+        </div>
+        <div class="col-2">
+            <button class="mb-1 btn btn-outline-primary" (click)="show(content)" type="button">Withdraw Amount &nbsp;&nbsp; <span id="lockIcon" class=""></span>&nbsp;&nbsp;{{totalWithdrawAmountWithMYR}}</button>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="container-fluid">
+    <div class="row">
+        <!--<div class="col-1"></div>-->
+        <div class="col-2">
+            <div class="text-center"><b>Main Wallet</b></div><div class="text-center"><b class="balance">{{userWalletBalance == null || userWalletBalance == undefined? 'N/A' : convertDecimal(userWalletBalance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>918 Kiss Wallet</b></div><div class="text-center"><b class="balance">{{kiss918balance == null || kiss918balance == undefined? 'N/A' : convertDecimal(kiss918balance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>Playtech Wallet</b></div><div class="text-center"><b class="balance">{{Playtechbalance == null || Playtechbalance == undefined? 'N/A' : convertDecimal(Playtechbalance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>AG Wallet</b></div><div class="text-center"><b class="balance">{{AGbalance == null || AGbalance == undefined? 'N/A' : convertDecimal(AGbalance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>Joker Wallet</b></div><div class="text-center"><b class="balance">{{Jokerbalance == null || Jokerbalance == undefined? 'N/A' : convertDecimal(Jokerbalance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>Maxbet Wallet</b></div><div class="text-center"><b class="balance">{{Maxbetbalance == null || Maxbetbalance == undefined ? 'N/A' : convertDecimal(Maxbetbalance)}}</b></div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-2">
+            <div class="text-center"><b>M8 Wallet</b></div><div class="text-center"><b class="balance">{{M8balance == null || M8balance == undefined? 'N/A' : convertDecimal(M8balance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>Mega888 Wallet</b></div><div class="text-center"><b class="balance">{{Mega888balance == null || Mega888balance == undefined? 'N/A' : convertDecimal(Mega888balance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>DG Wallet</b></div><div class="text-center"><b class="balance">{{DGbalance == null || DGbalance == undefined? 'N/A' : convertDecimal(DGbalance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>Sexy Baccarat Wallet</b></div><div class="text-center"><b class="balance">{{Sexybaccaratbalance == null || Sexybaccaratbalance == undefined? 'N/A' : convertDecimal(Sexybaccaratbalance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>SA Wallet</b></div><div class="text-center"><b class="balance">{{SAbalance == null || SAbalance == undefined? 'N/A' : convertDecimal(SAbalance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>Pussy Wallet</b></div><div class="text-center"><b class="balance">{{Pussy888balance == null || Pussy888balance == undefined? 'N/A' : convertDecimal(Pussy888balance)}}</b></div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-2">
+            <div class="text-center"><b>AllBet Wallet</b></div><div class="text-center"><b class="balance">{{allbetbalance == null || allbetbalance == undefined? 'N/A' : convertDecimal(allbetbalance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>WM Wallet</b></div><div class="text-center"><b class="balance">{{wmbalance == null || wmbalance == undefined? 'N/A' : convertDecimal(wmbalance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>Pragmatic Wallet</b></div><div class="text-center"><b class="balance">{{pragmaticbalance == null || pragmaticbalance == undefined? 'N/A' : convertDecimal(pragmaticbalance)}}</b></div>
+        </div>
+    </div>
+
+</div>
+<br />
+<br />
+<div class="tabs">
+    <button class="tablink" id="profiletab" (click)="openPage('Profile', 'profiletab')">Profile</button>
+    <button class="tablink" id="deposittab" (click)="openPage('Deposit', 'deposittab')">Deposit</button>
+    <button class="tablink" id="withdrawtab" (click)="openPage('Withdraw', 'withdrawtab')">Withdraw</button>
+    <button class="tablink" id="transfertab" (click)="openPage('Transfer', 'transfertab')">Transfer</button>
+    <button class="tablink" id="promotiontab" (click)="openPage('Promotion', 'promotiontab')">Promotion</button>
+    <button class="tablink" id="statementtab" (click)="openPage('Statement', 'statementtab')">Statement</button>
+    <button class="tablink" id="rebatetab" (click)="openPage('Rebate', 'rebatetab')">Rebate</button>
+    <button class="tablink" id="BettingDetailstab" (click)="openPage('BettingDetails', 'BettingDetailstab')">BettingDetails</button>
+</div>
+
+<div id="Profile" class="tabcontent ">
+    <div class="row col-12">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-12">
+                    <h3>Personal Information</h3>
+                </div>
+
+            </div>
+            <div class="col-11 offset-1">
+
+                <div class="row">
+                    <h4 class="col-5 h4">Name :</h4>
+                    <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.name }}</h4>
+                </div>
+
+                <div class="row">
+                    <h4 class="col-5 h4">Mobile No :</h4>
+                    <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.mobileNo }}</h4>
+                </div>
+
+
+                <div class="row">
+                    <h4 class="col-5 h4">Role :</h4>
+                    <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.role }}</h4>
+                </div>
+
+
+                <div class="row">
+                    <h4 class="col-5 h4">Username :</h4>
+                    <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.username }}</h4>
+                </div>
+            </div>
+            <br /><br /><br />
+            <div class="row">
+                <div class="col-12">
+                    <h3>Bank Information</h3>
+                </div>
+
+            </div>
+            <div class="col-11 offset-1">
+                <div class="row">
+                    <h4 class="col-5 h4">Account Name :</h4>
+                    <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.accountName }}</h4>
+                </div>
+
+                <div class="row">
+                    <h4 class="col-5 h4">Account No :</h4>
+                    <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.accountNo }}</h4>
+                </div>
+
+                <div class="row">
+                    <h4 class="col-5 h4">Bank Account :</h4>
+                    <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.bankAccount }}</h4>
+                </div>
+            </div>
+
+            <br /><br /><br />
+            <div class="row">
+                <div class="col-12">
+                    <h3>User Unfinished Game</h3>
+                </div>
+
+            </div>
+            <div class="col-11 offset-1">
+                <div class="row">
+                    <h4 class="col-5 h4">Playtech Status :</h4>
+                    <h4 class="col-6 h4">{{userPlaytechUnfinished}} &nbsp;&nbsp;&nbsp; <span (click)="unfinishedShow(playtechUnfinishedList)" class="fa fa-question-circle"></span></h4>
+                </div>
+
+                <div class="row">
+                    <h4 class="col-5 h4">Pragmatic Status :</h4>
+                    <h4 class="col-6 h4">{{userPragmaticUnfinished}} &nbsp;&nbsp;&nbsp; <span (click)="unfinishedShow(pragmaticUnfinishedList)" class="fa fa-question-circle"></span></h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-12">
+                    <h3>Game Username</h3>
+                </div>
+            </div>
+            <div class="col-11 offset-1">
+                <div class="row">
+                    <h4 class="col-5 h4">AG Game:</h4>
+                    <h4 class="col-6 h4">{{agUsername== null ? 'Select username.' : agUsername }}</h4>
+                </div>
+                <div class="row">
+                    <h4 class="col-5 h4">DG Game:</h4>
+                    <h4 class="col-6 h4">{{dgUsername== null ? 'Select username.' : dgUsername }}</h4>
+                </div>
+                <div class="row">
+                    <h4 class="col-5 h4">Playtech Game:</h4>
+                    <h4 class="col-6 h4">{{playtechUsername== null ? 'Select username.' : playtechUsername }}</h4>
+                </div>
+                <div class="row">
+                    <h4 class="col-5 h4">SA Game:</h4>
+                    <h4 class="col-6 h4">{{saUsername== null ? 'Select username.' : saUsername }}</h4>
+                </div>
+                <div class="row">
+                    <h4 class="col-5 h4">Sexy Bacc. Game:</h4>
+                    <h4 class="col-6 h4">{{sexyUsername== null ? 'Select username.' : sexyUsername }}</h4>
+                </div>
+                <div class="row">
+                    <h4 class="col-5 h4">918 Kiss Game:</h4>
+                    <h4 class="col-6 h4">{{kiss918Username== null ? 'Select username.' : kiss918Username }}</h4>
+                </div>
+                <div class="row">
+                    <h4 class="col-5 h4">Joker Game:</h4>
+                    <h4 class="col-6 h4">{{jokerUsername== null ? 'Select username.' :jokerUsername }}</h4>
+                </div>
+                <div class="row">
+                    <h4 class="col-5 h4">Mega Game:</h4>
+                    <h4 class="col-6 h4">{{mega888Username== null ? 'Select username.' : mega888Username }}</h4>
+                </div>
+                <div class="row">
+                    <h4 class="col-5 h4">Maxbet Game:</h4>
+                    <h4 class="col-6 h4">{{maxbetUsername== null ? 'Select username.' : maxbetUsername }}</h4>
+                </div>
+                <div class="row">
+                    <h4 class="col-5 h4">M8 Game:</h4>
+                    <h4 class="col-6 h4">{{m8Username== null ? 'Select username.' : m8Username }}</h4>
+                </div>
+                <div class="row">
+                    <h4 class="col-5 h4">Pussy888 Game:</h4>
+                    <h4 class="col-6 h4">{{pussyUsername== null ? 'Select username.' : pussyUsername }}</h4>
+                </div>
+                <div class="row">
+                    <h4 class="col-5 h4">Allbet Game:</h4>
+                    <h4 class="col-6 h4">{{allbetUsername== null ? 'Select username.' : allbetUsername }}</h4>
+                </div>
+                <div class="row">
+                    <h4 class="col-5 h4">WM Game:</h4>
+                    <h4 class="col-6 h4">{{wmUsername== null ? 'Select username.' : wmUsername }}</h4>
+                </div>
+                <div class="row">
+                    <h4 class="col-5 h4">Pragmatic Game:</h4>
+                    <h4 class="col-6 h4">{{pragmaticUsername== null ? 'Select username.' : pragmaticUsername }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="Deposit" class="tabcontent">
+    <div class="row">
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">From Date</h4>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" ngbDatepicker #d_1="ngbDatepicker" id="d_fromdatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">To Date</h4>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" ngbDatepicker #d_2="ngbDatepicker" id="d_todatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='searchHandlerByDate("Deposit")' type="button">Filter</button>
+        </div>
+    </div>
+    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="depositRows" [loadingIndicator]="loadingIndicator" [columns]="depositColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
+    </ngx-datatable>
+</div>
+
+<div id="Withdraw" class="tabcontent">
+    <div class="row">
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">From Date</h4>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" ngbDatepicker #w_1="ngbDatepicker" id="w_fromdatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="w_1.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">To Date</h4>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" ngbDatepicker #w_2="ngbDatepicker" id="w_todatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="w_2.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='searchHandlerByDate("Withdraw")' type="button">Filter</button>
+        </div>
+    </div>
+
+    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="withdrawRows" [loadingIndicator]="loadingIndicator" [columns]="withdrawColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
+    </ngx-datatable>
+</div>
+
+<div id="Transfer" class="tabcontent">
+    <div class="row">
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">From Date</h4>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" ngbDatepicker #t_1="ngbDatepicker" id="t_fromdatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="t_1.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">To Date</h4>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" ngbDatepicker #t_2="ngbDatepicker" id="t_todatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="t_2.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='searchHandlerByDate("Transfer")' type="button">Filter</button>
+        </div>
+    </div>
+
+    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="transferRows" [loadingIndicator]="loadingIndicator" [columns]="transferColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
+    </ngx-datatable>
+</div>
+
+<div id="Promotion" class="tabcontent">
+    <div class="row">
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">From Date</h4>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" ngbDatepicker #p_1="ngbDatepicker" id="p_fromdatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="p_1.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">To Date</h4>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" ngbDatepicker #p_2="ngbDatepicker" id="p_todatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="p_2.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='searchHandlerByDate("Promotion")' type="button">Filter</button>
+        </div>
+    </div>
+
+    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="promotionRows" [loadingIndicator]="loadingIndicator" [columns]="promotionColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
+        <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                     ngx-datatable-row-detail-template>
+            <label>
+                <button id="rejectBtn" data-id="depositData[rowIndex].id" class="mb-1 button btn-danger" type="button" data-toggle="modal" (click)="ExpierPromoton(promotiondata[rowIndex].Id)" title="Expier Promotion" style="margin-left:5px">
+                    <i class="fa fa-ban" aria-hidden="true"></i>
+                </button>
+            </label>
+        </ng-template>
+    </ngx-datatable>
+</div>
+
+<div id="Statement" class="tabcontent">
+    <div class="row">
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">From Date</h4>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" ngbDatepicker #s_1="ngbDatepicker" id="s_fromdatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="s_1.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">To Date</h4>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" ngbDatepicker #s_2="ngbDatepicker" id="s_todatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="s_2.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='searchHandlerByDate("Statement")' type="button">Filter</button>
+        </div>
+    </div>
+
+    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="statementRows" [loadingIndicator]="loadingIndicator" [columns]="statementColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
+    </ngx-datatable>
+</div>
+
+<div id="Rebate" class="tabcontent">
+    <div class="row">
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">From Date</h4>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" ngbDatepicker #r_1="ngbDatepicker" id="r_fromdatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="r_1.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">To Date</h4>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" ngbDatepicker #r_2="ngbDatepicker" id="r_todatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="r_2.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='searchHandlerByDate("Rebate")' type="button">Filter</button>
+        </div>
+    </div>
+
+    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rebateRows" [loadingIndicator]="loadingIndicator" [columns]="rebateColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
+    </ngx-datatable>
+</div>
+
+<div id="BettingDetails" class="tabcontent">
+    <!--<div class="row col-12">
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">Game</h4>
+            <select class="form-control" id="GameName" (change)="onGameChange($event)">
+                <option [disabled]="true" [ngValue]="">select Game</option>
+                <option *ngFor="let c of listType" [ngValue]="c">{{c.gameName}}</option>
+            </select>
+        </div>
+        <div class="p-2 col-md-2" id="fromDate" style="display:none">
+            <h4 class="text-muted text-thin">From Date</h4>
+            <div class="input-group">
+                <input class="form-control" [owlDateTime]="dt2" [disabled]="disable" placeholder="Date Time" type="text" id="txt_fromdatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt2" type="button"></button>
+                </div>
+                <owl-date-time [disabled]="disable" #dt2></owl-date-time>
+            </div>
+        </div>
+        <div class="p-2 col-md-2" id="toDate" style="display:none">
+            <h4 class="text-muted text-thin">To Date</h4>
+            <div class="input-group">
+                <input class="form-control" type="datetime" [owlDateTime]="dt1" [disabled]="disable" placeholder="Date Time" type="text" id="txt_todatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt1" type="button"></button>
+                </div>
+                <owl-date-time [disabled]="disable" #dt1></owl-date-time>
+            </div>
+        </div>
+
+
+
+        <div class="p-2 col-md-2" id="startDate" style="display:none">
+            <h4 class="text-muted text-thin">Start Date</h4>
+            <div class="input-group">
+                <input class="form-control" type="datetime" [owlDateTime]="dt3" placeholder="Date Time" type="text" id="txt_startdatetime">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt3" type="button"></button>
+                </div>
+                <owl-date-time #dt3></owl-date-time>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="p-2 col-md-2" id="gmtDiv" style="display:none">
+            <h4 class="text-muted text-thin">GMT</h4>
+            <select class="form-control" id="Gmt" [disabled]="gmtDisable" (change)="SelectGMT($event)">
+                <option [disabled]="true" [ngValue]="">select GMT</option>
+                <option *ngFor="let c of gmtList" [ngValue]="c">{{c.gmt}}</option>
+            </select>
+        </div>
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='BettingDetails()' type="button">Betting Details</button>
+        </div>
+    </div>
+    <div>
+        <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'70'" [limit]="7" [scrollbarH]="true">
+        </ngx-datatable>
+
+    </div>-->
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">View Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li>Total Available Withdraw Amount : 50</li>
+            <li> You are only allowed to withdraw the amount that has no wagering requirement. Other balance will be locked until bonus requirement has been meet</li>
+            <li>Before Promotion balance is the balance remaining before you had applied new promotion,it is available to withdraw Amount</li>
+        </ul>
+        <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="PromotionApplyRows" [loadingIndicator]="loadingIndicator" [columns]="PromotionApplyColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7">
+        </ngx-datatable>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #pragmaticUnfinishedList let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">View Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="unfinishedPragmaticRows" [loadingIndicator]="loadingIndicator" [columns]="unfinishedPragmaticColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7">
+        </ngx-datatable>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #playtechUnfinishedList let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">View Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="unfinishedPlaytechRows" [loadingIndicator]="loadingIndicator" [columns]="unfinishedPlaytechColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7">
+        </ngx-datatable>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

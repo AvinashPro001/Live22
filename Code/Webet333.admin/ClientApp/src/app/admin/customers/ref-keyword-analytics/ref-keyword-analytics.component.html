@@ -1,0 +1,68 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-default">
+                <div class="card-body">
+                    <fieldset class="b0" style="border-bottom:groove">
+                        <legend>Analytics</legend>
+                    </fieldset>
+                    <div class="row ">
+                        <div class="container col-12">
+                            <div class="col-lg-12">
+                                <form class="border border-light p-lg-5">
+                                    <div class="row">
+                                        <h3>Filter :</h3>&nbsp;&nbsp;&nbsp;
+                                        <div style="display:inline-flex">
+                                            <input class="form-control" placeholder="yyyy-mm-dd"
+                                                   name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d_1.toggle()" type="button"></button>
+                                            </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input class="form-control" placeholder="yyyy-mm-dd"
+                                                   name="dp" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d_2.toggle()" type="button"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <button class="btn btn-success" type="submit" (click)="filter()">Filter</button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <button class="btn btn-success" type="submit" (click)="refersh()"><span class="fa fa-refresh"></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div style="display:flex">
+                                    <div class="col-8">
+                                        <ngx-datatable #table class='bootstrap no-detail-row' [rows]="refRows" [columns]="refColumns" [columnMode]="'force'" [footerHeight]="60" [rowHeight]="'auto'" [limit]="9" [loadingIndicator]="loadingIndicator">
+                                            <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                                                         ngx-datatable-row-detail-template>
+                                            </ng-template>
+                                            <ng-template #action let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                                                         ngx-datatable-row-detail-template>
+                                            </ng-template>
+                                        </ngx-datatable>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <ngx-datatable #table class='bootstrap no-detail-row' [rows]="Rows" [columns]="Columns" [columnMode]="'force'" [footerHeight]="60" [rowHeight]="'auto'" [limit]="9" [loadingIndicator]="loadingIndicator">
+                                            <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                                                         ngx-datatable-row-detail-template>
+                                            </ng-template>
+                                            <ng-template #action let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                                                         ngx-datatable-row-detail-template>
+                                            </ng-template>
+                                        </ngx-datatable>
+
+                                        <h6><b>Total New User Register: {{totalNewUser}}</b></h6>
+                                        <h6><b>Total Not Verified Register Users: {{totalNotVerfiedUser}}</b></h6>
+                                        <h6><b>Total Verified Register Users: {{totalVerfiedUser}}</b></h6>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

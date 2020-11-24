@@ -1,0 +1,56 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Approval Duration Details</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">From Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp"  ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">To Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                               name="dp" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">Filter by Type</h4>
+                    <select class="form-control" id="type" (change)="onChange($event)">
+                        <option disabled="disabled" >-Select Type-</option>
+                        <option *ngFor="let c of listType" [ngValue]="c">{{c.Type}}</option>
+                    </select>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">> Second</h4>
+                    <input class="form-control" type="text" id="txt_second">
+                </div>
+
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='Search()' type="button">Search</button>
+                </div>
+            </div>
+            <div>
+                <ngx-datatable class="material bootstrap no-detail-row" (dblclick)="edit($event)" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7">
+                </ngx-datatable>
+
+            </div>
+        </div>
+    </div>
+</div>

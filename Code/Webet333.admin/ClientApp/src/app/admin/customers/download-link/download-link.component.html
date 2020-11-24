@@ -1,0 +1,51 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Download App Link List</legend>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+        <div class="card-body">
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
+                           [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
+                <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <div class="row col-md-12" style="margin-right:0px">
+                        <label class="col-md-12">
+                            <button id="viewbtn" data-id="downloadLinkData[rowIndex].id" class="mb-1 btn btn-success" type="button" data-toggle="modal" title="View" (click)='show(downloadLinkData[rowIndex],content)'>
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                    </div>
+                </ng-template>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Update Link</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-10 font-increas"><input type='text' id="txt_downloadlink" class="form-control" value="{{editData.value}}" /></div>
+                    <div class="col-2 font-increas"><button class="mb-1 btn btn-success" (click)="UpdateDownload()">Update Link</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

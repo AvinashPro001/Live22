@@ -1,0 +1,82 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/admin/customers/promotion-grouping-list">Promotion Group List</a>
+    </li>
+    <li class="breadcrumb-item">
+        Add Grouping Information
+    </li>
+</ol>
+<div class="my-container col-md-12">
+    <div class="card card-default">
+        <div class="card-body">
+            <legend style="align-content:center">Add Grouping Information</legend>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form class="text-center border border-light p-5">
+                        <div class="row col-md-12">
+                            <input type="checkbox" id="chk_active" class="form-control col-md-1" style="margin-top:12px" placeholder="" value="">
+                            <label class="col-md-4" style="text-align:left;font-size:20px;padding-bottom:10px;padding-left:0px" for="chk_active">Active</label>
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="col-md-3" style="text-align:left;font-size:20px">Grouping Name</label>
+                            <input type="text" id="txt_groupingName" class="form-control col-md-6 mb-4" placeholder="" value="">
+                        </div>
+                        <div class="row container">
+                            <ul>
+                                In Grouping
+                                <li *ngFor="let item of InGroup"
+                                    [class.item-selected]="item.selected"
+                                    (click)="toggleSelection(item, 1)">
+                                    <table >
+                                        <tr>
+                                            <td>
+                                                {{item.Text}}
+                                            </td>
+                                            
+                                        </tr>
+                                    </table>
+                                </li>
+                            </ul>
+                            <div class="buttons-container">
+                                <button class="fa fa-angle-right" (click)="moveSelected('right')"></button>
+                                <button class="fa fa-angle-double-right" (click)="moveAll('right')"></button>
+                                <button class="fa fa-angle-left" (click)="moveSelected('left')"></button>
+                                <button class="fa fa-angle-double-left" (click)="moveAll('left')"></button>
+                            </div>
+                            <ul>
+                                Not In Group
+                                <li *ngFor="let item of NotInGroup"
+                                    [class.item-selected]="item.selected"
+                                    (click)="toggleSelection(item, 2)">
+                                    <table >
+                                        <tr>
+                                            <td>
+                                                {{item.Text}}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row col-md-12">
+                            <input type="checkbox" id="chk_only_one" class="form-control col-md-1" style="margin-top:6px" placeholder="" value="">
+                            <label class="col-md-11" style="text-align:left;font-size:16px;padding-bottom:10px;padding-left:0px" for="chk_only_one">Only can claim one promotion in the group per user(ONLY 1 TIME PER USER FOR LIFE TIME)</label>
+                        </div>
+                        <div class="row col-md-12">
+                            <input type="checkbox" id="chk_daily_claimable" class="form-control col-md-1" style="margin-top:6px" placeholder="" value="">
+                            <label class="col-md-11" style="text-align:left;font-size:16px;padding-bottom:10px;padding-left:0px" for="chk_daily_claimable">only can claim one daily promotion in the group per user(DAILY CLAIMABLE)</label>
+                        </div>
+                        <div class="row col-md-12">
+                            <button class="btn btn-info col-md-4" type="submit" (click)="AddPromotionGroup()">Save</button>
+                            <div class="col-1"></div>
+                            <button class="btn btn-danger col-md-4" type="submit" (click)="navigateCancle()">Cancel</button>
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="col-md-12" style="text-align:left;font-size:14px;margin-top:10px;padding-left:0px" for="chk_daily_claimable">**promotion only can add into one group, so not in group list will not show which promotion are having group</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

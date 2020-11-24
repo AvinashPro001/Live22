@@ -1,0 +1,97 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">MaxBet Set Limit</legend>
+                </div>
+            </div>
+        </div>
+
+        <div class="row card-body">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="block-center">
+                        <h4 class="col-12">Sports Type 1</h4>
+                    </div>
+
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-2"></label>
+                    <input class="col-2 form-control" id="sporttype1min" placeholder="Min per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="sporttype1max" placeholder="Max per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="sporttype1match" placeholder="Max per Match" type="number" />
+                    <label class="col-2"></label>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="block-center">
+                        <h4 class="col-12">Sports</h4>
+                    </div>
+
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-2"></label>
+                    <input class="col-2 form-control" id="sportmin" placeholder="Min per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="sportmax" placeholder="Max per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="sportmatch" placeholder="Max per Match" type="number" />
+                    <label class="col-2"></label>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="block-center">
+                        <h4 class="col-12">Others Sports</h4>
+                    </div>
+
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-2"></label>
+                    <input class="col-2 form-control" id="othersportmin" placeholder="Min per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="othersportmax" placeholder="Max per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="othersportmatch" placeholder="Max per Match" type="number" />
+                    <label class="col-2"></label>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-2"></label>
+                    <input class="col-8 form-control" id="othersportball" placeholder="Max per ball (only for 161)" type="number" />
+                    <label class="col-2"></label>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="block-center">
+                        <h4 class="col-12">Max Parley</h4>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-2"></label>
+                    <input class="col-2 form-control" id="maxparleymin" placeholder="Min per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="maxparleymax" placeholder="Max per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="maxparleymatch" placeholder="Max per Match" type="number" />
+                    <label class="col-2"></label>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-4"></label>
+                    <button class="col-1 btn btn-success" (click)="SetLimit()">START</button>
+                    <label class="col-2"></label>
+                    <button class="col-1 btn btn-warning" (click)="ResetLimit()">RESET <span class="fa fa-refresh"></span></button>
+                    <label class="col-4"></label>
+                </div>
+                <br /><br />
+            </div>
+        </div>
+    </div>
+</div>

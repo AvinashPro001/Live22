@@ -1,0 +1,133 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">M8 Users Set Limit</legend>
+                </div>
+            </div>
+        </div>
+
+        <div class="row card-body">
+            <div class="col-md-12">
+                <div class="row row-flex">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label>Max1 (Max Bet HDP /OU/OE)  :</label></div>
+                            <div class="col-6"><input class="form-control" id="Max1" type="number" /></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label class="right">Max2 (Max Single Bet Limit Parlay)  :</label></div>
+                            <div class="col-6"><input class="form-control" id="Max2" type="number" /></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-flex">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label>Max3 (Max Bet Correct Score)  :</label></div>
+                            <div class="col-6"><input class="form-control" id="Max3" type="number" /></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label class="right">Max4 (Max Bet Step)  :</label></div>
+                            <div class="col-6"><input class="form-control" id="Max4" type="number" /></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-flex">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label>Max5 (Max Bet 1D)  :</label></div>
+                            <div class="col-6"><input class="form-control" id="Max5" type="number" /></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label class="right">Max6 (Max Bet 2D)  :</label></div>
+                            <div class="col-6"><input class="form-control" id="Max6" type="number" /></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-flex">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label>Max7 (Max Bet 3D)  :</label></div>
+                            <div class="col-6"><input class="form-control" id="Max7" type="number" /></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label class="right">Suspend (0: no suspend, 1:suspend) :</label></div>
+                            <div class="col-6">
+                                <select class="form-control" id="Suspend">
+                                    <option disabled value="">-select value-</option>
+                                    <option *ngFor="let c of suspendList" [ngValue]="c">{{c.suspend}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-flex">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label>Lim1 (Max Per Match HDP/OU/OE) :</label></div>
+                            <div class="col-6"><input class="form-control" id="Lim1" type="number" /></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label class="right">Lim2(Mix Parlay Limit Per Combination)</label></div>
+                            <div class="col-6"><input class="form-control" id="Lim2" type="number" /></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-flex">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label>Lim3 (Max Per Match Correct Score) :</label></div>
+                            <div class="col-6"><input class="form-control" id="Lim3" type="number" /></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label class="right">Lim4 (Step Limit Per Combination)   :</label></div>
+                            <div class="col-6"><input class="form-control" id="Lim4" type="number" /></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-flex">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label>ComType (A,B,C,D,E,F,4,V for HDP/OU/OE):</label></div>
+                            <div class="col-6">
+                                <select class="form-control" id="ComType">
+                                    <option disabled value="">-select value-</option>
+                                    <option *ngFor="let c of comType" [ngValue]="c">{{c.comtype}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-4"><label class="right">Com1 to Com9  :</label></div>
+                            <div class="col-6"><input class="form-control" id="Com" type="number" /></div>
+                        </div>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-4"></label>
+                    <button class="col-1 btn btn-success" (click)="SetLimit()">START</button>
+                    <label class="col-2"></label>
+                    <button class="col-1 btn btn-warning" (click)="ResetLimit()">RESET <span class="fa fa-refresh"></span></button>
+                    <label class="col-4"></label>
+                </div>
+                <br /><br />
+            </div>
+        </div>
+    </div>
+</div>

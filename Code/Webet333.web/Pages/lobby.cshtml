@@ -1,0 +1,146 @@
+﻿@page
+@{
+    ViewData["Title"] = "Playtech Slots";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>Webet333 - @ViewData["Title"] </title>
+    <link rel="apple-touch-icon" sizes="57x57" href="../../images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../../images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../../images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../../images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../../images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../../images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../../images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon/favicon-16x16.png">
+    <link href="~/css/PlaytechGame/master.css" rel="stylesheet" />
+    <script src="~/js/helpers/crypto-js.js"></script>
+    <script src="~/js/helpers/storageHelpers.js"></script>
+    <script src="~/js/constants/SecurityConsts.js"></script>
+
+    <script src="~/js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (localStorage.getItem('currentUser') != null)
+                images();
+            else {
+                alert("Please Login !");
+                location.href = "/Home/home";
+            }
+        });
+
+        async function openGame(game) {
+            var languageCode = (GetLocalStorage('language') === "zh-Hans" ? "ZH-CN" : "EN")
+            var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
+            let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
+            var usernamePrifix = globalParameters.data.playtechGamePrefix
+            var username = (usernamePrifix + res.data.username).toUpperCase();
+            var password = dec(GetLocalStorage('currentUserData'));
+            var mobiledomain = "ld176988.com";
+            var systemidvar = "424";
+            async function login() {
+                iapiSetCallout('Login', calloutLogin);
+                iapiSetClientPlatform("mobile&deliveryPlatform=HTML5");
+                var realMode = 1;
+                iapiLogin(username, password, realMode, languageCode);
+            }
+
+            function launchMobileClient(temptoken) {
+
+                var clientUrl = 'http://hub.' + mobiledomain + '/igaming/' + '?gameId=' + game + '&real=1' + '&username=' + username + '&lang=' + languageCode + '&tempToken=' + temptoken + '&lobby=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'lobby.html' + '&support=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'support.html' + '&logout=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'logout.html' + '&deposit=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'deposit.html';
+                document.location = clientUrl;
+            }
+
+            await login(1);
+
+            function calloutLogin(response) {
+                if (response.errorCode) {
+                    alert("Error message: " + response.errorText + " Error code: " + response.errorCode);
+                } else {
+                    launchMobileClient(response.rootSessionToken.sessionToken);
+                }
+            }
+        }
+
+        function images() {
+            var url_string = window.location;
+            var url = new URL(url_string);
+            var username = url.searchParams.get("username");
+            if (username != null) {
+                var imageDiv = document.getElementById('playtechGames');
+                $.ajax({
+                    url: '../../resources/playtech.json',
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+                        json = data.games;
+                        var SlotGame = localStorage.getItem('slotGame');
+                        if (SlotGame === "true") {
+                            for (i = 5; i < json.length; i++) {
+                                if (imageDiv !== null)
+                                    imageDiv.innerHTML +=
+                                        '<div class="b-game-list__item game-page-thumb">' +
+                                        '<div class="b-game-thumb">' +
+                                        '<div class="b-game-thumb__wrapper">' +
+                                        '<a class="b-game-thumb__link" data-target="modal" onclick="openGame(\'' + json[i].name + '\')" >' +
+                                        '<img src="http://images.webet333.com/all_918_games/playtech/' + json[i].name + '.png" alt="' + json[i].fullName + '" class="lazy" />' +
+                                        '</a>' +
+                                        '</div>' +
+                                        '<div class="b-game-thumb__caption">' +
+                                        '<div class="b-game-thumb__title" itemprop="name">' +
+                                        '' + json[i].fullName + '' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>'
+                            }
+                        }
+                        else {
+                            openGame("7bal");
+                        }
+                    }
+                });
+            }
+            else {
+                location.href = "/Home/home";
+            }
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <div class="dragon__header">
+        <div class="dragon__header__container">
+            <div class="dragon__logo">
+                <div>
+                    <img alt="weplay-logo" class="dragon__logo-left" src="~/images/logo.gif" />
+                </div>
+                <div>
+                    <img alt="joker" class="dragon__logo-right" src="~/images/Playtech.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dragon__games__container">
+        <div class="games__list b-game-list" id="playtechGames">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Announcement List</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2 offset-11">
+                    <button id="acceptbtn" class="mb-1 btn  btn-success" type="button" (click)='navigateAdd()' data-toggle="modal">Add Announcement</button>
+                </div>
+            </div>
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
+                           [rowHeight]="'auto'">
+                <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <label>
+                        <button id="rejectBtn" data-id="announcementData[rowIndex].id" class="mb-1 button btn-danger" type="button" (click)='openRejectConfirmationDialog(announcementData[rowIndex].id)' title="Reject" style="margin-left:5px">
+                            <i class="fa fa-ban" aria-hidden="true"></i>
+                        </button>
+                    </label>
+
+                    <label>
+                        <button id="editBtn" data-id="announcementData[rowIndex].id" (click)='edit(announcementData[rowIndex])' class="mb-1 button btn-success" type="button"  title="Accept" style="margin-left:5px">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
+                    </label>
+                </ng-template>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+

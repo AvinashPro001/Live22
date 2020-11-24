@@ -1,0 +1,36 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">MaxBet Betting Details</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">Version Key</h4>
+                    <div class="input-group">
+                        <input class="form-control" id="txt_versionkey" type="text" value="{{versionKey}}" />
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='BettingDetails()' type="button">Betting Details</button>
+                </div>
+                <div class="p-2 col-md-2" style="position:absolute;right:0px;margin-top:35px">
+                    <button id="acceptBtn" class="mb-1 btn btn-success" (click)="Save()" type="button" data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Save</button>
+                </div>
+            </div>
+            <div>
+                <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7" [scrollbarH]="true">
+                </ngx-datatable>
+            </div>
+            <div>
+                <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rowsDetails" [loadingIndicator]="loadingIndicator" [columns]="columnsDetails" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7" [scrollbarH]="true">
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
+</div>

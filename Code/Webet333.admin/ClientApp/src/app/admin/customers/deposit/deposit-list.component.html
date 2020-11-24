@@ -1,0 +1,172 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Deposit List{{depositStatus!=null?' / '+depositStatus:""}}</legend>
+                </div>
+                <div class="col-lg-5">
+                </div>
+                <div class="col-lg-3" style="display: flex;">
+                    <div class="">
+                        <label class="container">
+                            <input type="checkbox" [checked]="AutoRefersh" id="chk_autorefersh" (change)="AutoRefershUpdate()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div><b>Auto Refersh and Ding Ding Notification</b></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">Filter by status</h4>
+                    <select class="form-control" [(ngModel)]="selectedList" (change)="onChange($event)">
+                        <option *ngFor="let c of listType" [ngValue]="c">{{c.verified}}</option>
+                    </select>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">Search</h4>
+                    <input class="form-control" type="text" (keyup)='searchHandler($event)'>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">From Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model2" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" (change)='searchHandlerByDate()' type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">To Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model1" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" (change)='searchHandlerByDate()' type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='searchHandlerByDate()' type="button">Filter</button>
+                </div>
+                <div class="p-2 col-md-2" style="position:absolute;right:0px;margin-top:35px">
+                    <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Add Deposit</button>
+                </div>
+            </div>
+            <div>
+                <ngx-datatable class="table table-responsive material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7">
+                    <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <label>
+                            <button id="acceptBtn" data-id="depositData[rowIndex].id" class="mb-1 button btn-success" type="button" (click)="openremark(remark,depositData[rowIndex].id,'accept',depositData[rowIndex].username,depositData[rowIndex].walletName,depositData[rowIndex].amount)" data-toggle="modal">
+                                <i class="fa fa-check" aria-hidden="true" title="Accept"></i>
+                            </button>
+                        </label>
+                        <label>
+                            <button id="rejectBtn" data-id="depositData[rowIndex].id" class="mb-1 button btn-danger" type="button" data-toggle="modal" (click)="openremark(remark,depositData[rowIndex].id,'reject',depositData[rowIndex].username,depositData[rowIndex].walletName,depositData[rowIndex].amount)" title="Reject" style="margin-left:5px">
+                                <i class="fa fa-ban" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                    </ng-template>
+                    <ng-template #receipt let-rowIndex="rowIndex" let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <label>
+                            <button data-id="depositData[rowIndex].id" class="mb-1 button btn-success" (click)="receiptview(depositData[rowIndex].id,content)" style="margin-left:5px;">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                    </ng-template>
+
+                    <ng-template #addreceipt let-rowIndex="rowIndex" let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <label>
+                            <button data-id="depositData[rowIndex].id" class="mb-1 button btn-success" (click)="openModelAddRecipt(depositData[rowIndex].id,addReceipt)">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                    </ng-template>
+
+                </ngx-datatable>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Receipts</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig">
+            <div ngxSlickItem *ngFor="let image of imagesUrl" class="slide">
+                <img [src]="image.includes('.pdf')?imageIcon:image" (click)="ImageOpenNewTab(image)" alt="">
+            </div>
+        </ngx-slick>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #addReceipt let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Receipts</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ul style="list-style:none">
+            <li>
+                <div class="left-part">*Scanned Receipt</div>
+                <form id="imageform">
+                    <div class="right-part">
+                        <input type="file" multiple (change)="selectfile($event)">
+                    </div>
+                </form>
+            </li>
+
+            <li *ngFor="let filename of filenames" style="margin-left:50px">
+                <div id="files">
+                    <p>{{filename}}</p>
+                    <button (click)="removefile(filename)">remove</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" [disabled]="disable" (click)="uploadReceipt()">Upload</button>
+        <button type="button" class="btn btn-light" (click)="closeModel()">Close</button>
+    </div>
+</ng-template>
+
+<!--Remarks modal code starts-->
+<ng-template #remark let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Please confirm..</h4>
+        <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group m-form__group has-danger row">
+            <label class="col-form-label col-lg-9" for="inputDanger1">Do you really want to verify deposit ?</label>
+        </div>
+        <div class="form-group m-form__group has-danger row">
+            <label class="col-form-label col-lg-3" for="inputDanger1">Remarks: </label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control m-input" name="name" id="txt_remarks" [(ngModel)]="remarkval">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="decline()">No</button>
+        <button type="button" [disabled]="disabled" class="btn btn-primary" (click)="RegisteAfterAccept()">Yes</button>
+    </div>
+</ng-template>
+<!--Remarks modal code ends-->

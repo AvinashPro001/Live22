@@ -1,0 +1,57 @@
+﻿@page
+@{
+    ViewData["Title"] = "Verified Mobile Number";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<title>Webet333 - @ViewData["Title"] </title>
+<script src="../../js/pages/bank.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        authorize();
+    });
+    function authorize() {
+
+        if (GetLocalStorage('currentUser') === null) {
+            window.location.href = "/";
+        }
+        else {
+        }
+    }
+</script>
+<div class="account-reg white-bg-tab-panel pad-comman-fifteen mar-fifty">
+    <h4 class="symbol mar-btm-ten lang" key="otp_verification"></h4>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="info-form reg-bank-ac">
+                <p class="big-text no-mar"><strong><span class="lang" key="otp_text"></span></strong></p>
+                <label class="mendatory">
+                    <input id="txt_otp" name="txt_account_number" type="number" class="reg-form lang"  placeholder="OTP">
+                </label>
+                <br />
+            </div>
+            <div class="text-center mar-comman">
+                <button type="button" id="button_resend" name="" value="Send OTP" class="submit" onclick="SendOTP(1)">
+                    <span class="lang" key="send_otp"></span>
+                    <span id="counter_txt"></span>
+                </button>
+                <button type="button" name="" value="Verified OTP" class="submit" onclick="VerifiedOTP()"><span class="lang" key="verified_otp"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="container">
+    <div id="MessageNavigate" class="modal fade">
+        <div class="modal-dialog mail-width">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <p>Do you want to deposit your wallet.</p>
+                    <ul class="list-inline pad-top-ten">
+                        <li><button class="submit"><a asp-page="/Account/Profile" asp-fragment="deposit">Yes</a></button></li>
+                        <li><button class="submit"><a asp-page="/Home/home">No</a></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@

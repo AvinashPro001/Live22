@@ -1,0 +1,85 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">MaxBet Minimum & Maximum Set</legend>
+                </div>
+            </div>
+        </div>
+        <br /><br /><br />
+        <div class="row card-body">
+            <div class="col-md-12">
+                <div class="row">
+                    <label class="col-3"></label>
+                    <label class="col-2"><span class="bold">Minimum value :</span></label>
+                    <label class="col-1"><span class="bold">{{minimum}}</span></label>
+                    <label class="col-2"><span class="bold">Maximum value :</span></label>
+                    <label class="col-1"><span class="bold">{{maximum}}</span></label>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-4"></label>
+                    <label class="col-1">Minimum value :</label>
+                    <input class="col-2 form-control" id="txt_min" placeholder="Minimum value" type="number" />
+                </div>
+                <br />
+                <div class="row">
+                    <label class="col-4"></label>
+                    <label class="col-1">Maximum value :</label>
+                    <input class="col-2 form-control" id="txt_max" placeholder="Maximum value" type="number" />
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-5"></label>
+                    <button class="col-1 btn btn-success" (click)="SetLimit()">SET</button>
+                    <label class="col-2"></label>
+                    <label class="col-4"></label>
+                </div>
+                <br /><br />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-6">
+                    <legend class="main-title">MaxBet Minimum & Maximum Set for User</legend>
+                </div>
+            </div>
+        </div>
+        <br /><br /><br />
+        <div class="row card-body">
+            <div class="col-md-12">
+                <div class="row">
+                    <label class="col-4"></label>
+                    <ngx-select-dropdown tabindex="0" [multiple]="false" class="col-4 form-control"
+                                         [config]="config" [options]="customerData" (change)="onChange($event)"></ngx-select-dropdown>
+                </div>
+                <br />
+                <div class="row">
+                    <label class="col-4"></label>
+                    <label class="col-2">Minimum value :</label>
+                    <input class="col-2 form-control" id="txt_user_min" placeholder="Minimum value" type="number" />
+                </div>
+                <br />
+                <div class="row">
+                    <label class="col-4"></label>
+                    <label class="col-2">Maximum value :</label>
+                    <input class="col-2 form-control" id="txt_user_max" placeholder="Maximum value" type="number" />
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-5"></label>
+                    <button class="col-1 btn btn-success" (click)="updateUserLimit()">SET</button>
+                    <label class="col-2"></label>
+                    <label class="col-4"></label>
+                </div>
+                <br /><br />
+            </div>
+        </div>
+    </div>
+</div>

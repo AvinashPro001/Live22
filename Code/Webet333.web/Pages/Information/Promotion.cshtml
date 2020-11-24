@@ -1,0 +1,104 @@
+﻿@page
+@{
+    ViewData["Title"] = "Promotion";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<title>Webet333 - @ViewData["Title"] </title>
+<script src="../../js/pages/promotion.js" type="text/javascript"></script>
+<script>
+    setInterval(function () { ddlShowBalance() }, 1000);
+</script>
+<style>
+    #promotiom_description_section .table tbody tr:first-child td {
+        background: #858585;
+    }
+
+    #promotiom_description_section table {
+        background: #e5e5e5 !important;
+        text-align: center;
+        width: 100%;
+    }
+
+    #accordion {
+        padding-top: 30px;
+        background-color: rgb(0, 0, 0,0.5);
+    }
+
+    .full-img {
+        filter: brightness(1.2);
+        border-radius: 25px;
+        cursor: pointer;
+    }
+
+    .modal-body {
+        max-height: 500px;
+        overflow-y: scroll;
+    }
+
+
+
+    @@media only screen and (min-width: 600px) {
+        .modal-dialog {
+            width: 70vw;
+        }
+
+        #promotiom_description_section table {
+            width: 70% !important;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .promotion-detail {
+            padding: 0px 50px 0px 35px;
+        }
+    }
+
+
+    @@media only screen and (max-width: 720px) {
+        .modal-dialog {
+            width: 95vw;
+        }
+
+        .promotion-detail {
+            /*padding: 0px 50px 0px 35px;*/
+        }
+    }
+
+</style>
+
+<div id="accordion" class="panel-group promotion-detail">
+    <div class="row" id="promotionList">
+
+    </div>
+</div>
+
+
+<div id="promotiom_description_section">
+    @*<div class="form-login modal fade" id="gameLogin" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><span class="lang" key="alert"></span></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="lang" key="noLogin"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-login modal fade" id="gameLogin" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><span class="lang" key="alert"></span></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="lang" key="noLogin"></p>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+</div>

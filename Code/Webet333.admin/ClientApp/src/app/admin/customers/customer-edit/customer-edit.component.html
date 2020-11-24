@@ -1,0 +1,247 @@
+﻿<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/admin/customers/list">Customer List</a>
+    </li>
+    <li class="breadcrumb-item">
+        Edit Customer
+    </li>
+</ol>
+<div class="my-container col-md-12">
+    <div class="card card-default">
+        <div class="card-body">
+                <legend style="align-content:center" >Edit Customer</legend>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="edit-slider" class="col-lg-6 offset-5" style="align-items:center;">
+                        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" style="width:150px;height:150px;">
+                            <div ngxSlickItem *ngFor="let image of imagePath" class="slide">
+                                <img [src]="image.icImageBanner" width="150px" height="150px" (click)="ImageOpenNewTab(image.icImageBanner)" alt="">
+                            </div>
+                        </ngx-slick>
+                    </div>
+                    <form class="text-center border border-light p-5">
+
+                        <div class="row col-md-12" style="height:60px;">
+                            <label class="col-md-4" style="text-align:right;font-size:20px">Balance</label>
+                            <label class="col-md-2" style="text-align:right;font-size:20px" id="balance"></label>
+                            <label class="col-md-1 mb-1" style="text-align:left;font-size:20px"><span class="fa fa-refresh" (click)="refeshBalance()"></span></label>
+                            <button class="btn btn-success offset-3 col-md-2" type="submit" (click)="openWindowCustomClass(uploadicimage)">Upload IC Image</button>
+                        </div>
+                        <br /><br />
+                        <div class="row col-md-12">
+                            <label class="col-md-4" style="text-align:right;font-size:20px">Username</label>
+                            <input type="text" id="txt_username" disabled class="form-control col-md-4 mb-4" placeholder="" value="{{data.username}}">
+                            <label class="col-md-1 mb-1" style="text-align:left;font-size:20px"></label>
+                            <button class="btn btn-success offset-1 col-md-2" type="submit"  (click)="openWindowCustomClass(updateicno)">Change IC No</button>
+                        </div>
+                        <br />
+                        <div class="row col-md-12">
+                            <label class="col-md-4" style="text-align:right;font-size:20px">Old Password</label>
+                            <label class="col-md-4 mb-4" style="text-align:left;font-size:20px">*********</label>
+                            <label class="col-md-1 mb-1" style="text-align:left;font-size:20px"></label>
+                            <button class="btn btn-success offset-1 col-md-2" type="submit" (click)="ResetPassword()">Reset Password</button>
+                        </div>
+                        <br />
+                        <div class="row col-md-12">
+                            <label class="col-md-4" style="text-align:right;font-size:20px">Full Name</label>
+                            <label class="col-md-4 mb-4" style="text-align:left;font-size:20px">{{data.name}}</label>
+                            <label class="col-md-1 mb-1" style="text-align:left;font-size:20px"></label>
+                            <button class="btn btn-success offset-1 col-md-2" type="submit" (click)="openWindowCustomClass(changename)">Change Name</button>
+                        </div>
+                        <br />
+                        <div class="row col-md-12">
+                            <label class="col-md-4" style="text-align:right;font-size:20px">Mobile Number</label>
+                            <label class="col-md-4 mb-4" style="text-align:left;font-size:20px">{{mobileNumber}}</label>
+                            <label class="col-md-1 mb-1" style="text-align:left;font-size:20px"></label>
+                            <button class="btn btn-success offset-1 col-md-2" type="submit" (click)="openWindowCustomClass(changephonenumber)">Reset Phone Number</button>
+                        </div>
+                        <br />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #uploadicimage let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Upload IC Image</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-md-3">Upload Image</label>
+                    <input type="file" id="txt_ic_image" (change)="selectfile($event)" class="form-control col-md-6 mb-6" placeholder="" autocomplete="off" />
+                </div>
+                <br />
+                <div class="col-md-12 col-sm-12" >
+                    <li *ngFor="let filename of filenames" style="margin-left:50px">
+                        <div id="files" style="display:flex;">
+                            <p>{{filename}}</p>&nbsp;&nbsp;&nbsp;
+                            <button (click)="removefile(filename)">remove</button>
+                        </div>
+                    </li>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-4"></label>
+                    <button class="btn btn-success col-lg-3" (click)="UploadIcImage()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+
+<ng-template #updateicno let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Upload IC Number</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-md-3">IC no</label>
+                    <label class="col-md-3">{{ICNumber}}</label>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-md-3">Upload Image</label>
+                    <input type="text" id="txt_ic_no" class="form-control col-md-6 mb-6" placeholder="" autocomplete="off" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-4"></label>
+                    <button class="btn btn-success col-lg-3" (click)="UpdateICNo()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #changephonenumber let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Change Phone Number</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-md-3">Register Name</label>
+                    <label class="col-md-3">{{data.name}}</label>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-md-3">New Phone Number</label>
+                    <input type="number" id="txt_PhoneNumber" class="form-control col-md-6 mb-6" placeholder="" autocomplete="off" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-md-3">Confirm Phone Number</label>
+                    <input type="number" id="txt_confirmPhoneNumber" class="form-control col-md-6 mb-6" placeholder="" autocomplete="off" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-md-3">Identity Card Image</label>
+                    <input type="file"  (change)="selectfile($event)" class="form-control col-md-6 mb-6" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-3"></label>
+                    <button class="btn btn-success col-lg-3" (click)="UpdatePhoneNumber()">Reset Phone Number</button>
+                    <label class="col-1"></label>
+                    <button class="btn btn-success col-lg-3" (click)="clear()">Clear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #changename let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Change Name</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-md-3">Old Name</label>
+                    <input type="text" id="txt_oldname" class="form-control col-md-6 mb-6" placeholder="" autocomplete="off" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-md-3">New Name</label>
+                    <input type="text" id="txt_newname" class="form-control col-md-6 mb-6" placeholder="" autocomplete="off" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-md-3">Identity Card Image</label>
+                    <input type="file" (change)="selectfile($event)" class="form-control col-md-6 mb-6" />
+                </div>
+               
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="containers col-md-1">
+                        <input type="checkbox" id="chk_condition" (change)="checkCheckbox()">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="col-md-11 alert-message">If new name applied promotion, user may cannot Withraw money</label>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="display:flex">
+                    <label class="col-3"></label>
+                    <button class="btn btn-success col-lg-3" [disabled]="disabled" (click)="UpdateName()">Change Name</button>
+                    <label class="col-1"></label>
+                    <button class="btn btn-success col-lg-3" (click)="clear()">Clear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

@@ -1,0 +1,200 @@
+﻿@page
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<title>Webet333 - @ViewData["Title"] </title>
+<script src="../../js/constants/SMSConsts.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    if (localStorage.getItem('currentUser') != null)
+        location.href = "/Home/home";
+
+    function activateButton() {
+        var recaptcha = document.getElementById("checkRecaptcha");
+        if (!recaptcha.checked) {
+            event.preventDefault();
+            return ShowError(ChangeErroMessage("recaptcha"));
+        }
+        var checkbox = document.getElementById("checkbox");
+        if (checkbox.checked) {
+            DoRegister();
+        }
+        else {
+            ShowError(ChangeErroMessage("team_conditon_agree"))
+        }
+    }
+
+    //function validationEmail() {
+    //    var email = document.getElementById('txt_reg_email');
+    //    var filter = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+    //    if (!filter.test(email.value)) {
+    //        email.classList.remove("valid");
+    //        email.classList.add("error");
+    //    } else {
+    //        email.classList.remove("error");
+    //        email.classList.add("valid");
+    //    }
+    //}
+
+    //function validationNumber() {
+    //    var number = document.getElementById('txt_mobile');
+    //    var filter = /^(\+?6?01)[0|1|2|3|4|6|7|8|9]\-*[0-9]{7,8}$/;
+    //    if (filter.test(number.value)) {
+    //        number.classList.remove("valid");
+    //        number.classList.add("error");
+    //    } else {
+    //        number.classList.remove("error");
+    //        number.classList.add("valid");
+    //    }
+    //}
+    function space() {
+        var regex = new RegExp("^[a-zA-Z0-9]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    }
+
+    function validationRegister(i) {
+        if (event.keyCode == 9) {
+            if (i === 0) {
+                var username = document.getElementById('txt_username');
+                if (username.value === "") {
+                    username.classList.remove("valid");
+                    username.classList.add("error");
+                } else {
+                    username.classList.remove("error");
+                    username.classList.add("valid");
+                }
+            }
+            if (i === 1) {
+                var password = document.getElementById('txt_password');
+                if (password.value === "") {
+                    password.classList.remove("valid");
+                    password.classList.add("error");
+                } else {
+                    password.classList.remove("error");
+                    password.classList.add("valid");
+                }
+            }
+            if (i === 2) {
+                var passwordConfirm = document.getElementById('txt_confirm_password');
+                if (passwordConfirm.value === "") {
+                    passwordConfirm.classList.remove("valid");
+                    passwordConfirm.classList.add("error");
+                } else {
+                    passwordConfirm.classList.remove("error");
+                    passwordConfirm.classList.add("valid");
+                }
+            }
+            if (i === 3) {
+                var nricName = document.getElementById('txt_nric');
+                if (nricName.value === "") {
+                    nricName.classList.remove("valid");
+                    nricName.classList.add("error");
+                } else {
+                    nricName.classList.remove("error");
+                    nricName.classList.add("valid");
+                }
+            }
+            if (i === 4) {
+                var mobile = document.getElementById('txt_mobile');
+                if (mobile.value === "") {
+                    mobile.classList.remove("valid");
+                    mobile.classList.add("error");
+                } else {
+                    mobile.classList.remove("error");
+                    mobile.classList.add("valid");
+                }
+            }
+        }
+    }
+</script>
+
+<!-- Account Registration Start -->
+<div class="account-reg pad-comman-fifteen mar-fifty white-bg-tab-panel">
+    <h4 class="register symbol mar-btm-ten"><span class="lang" key="register_account"></span></h4>
+    <div role="form" method="post" id="register">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="info-form">
+                    <p class="big-text no-mar"><strong><span class="lang" key="account_information"></span></strong></p>
+                    <label class="user mendatory"><input id="txt_username" name="txt_username" onkeydown="validationRegister(0)" data-translate="username_placeholder" type="text" class="reg-form" placeholder="Username" value="" required="" onkeypress="space()"><p class="star">*</p></label>
+                    <p class="note no-mar mar-btm-ten"><span class="lang" key="username_instruction"></span></p>
+                    <label class="lock mendatory"><input id="txt_password" name="txt_password" onkeydown="validationRegister(1)" data-translate="password_placeholder" autocomplete="new-password"  type="password"    class="reg-form" placeholder="Password" onChange="checkPasswordMatch();" required ><p class="star">*</p></label>
+                    <p class="note no-mar mar-btm-ten"><span class="lang" key="password_instruction"></span></p>
+                    <p class="note no-mar mar-btm-ten"><span class="lang" key="password_alpha_instruction"></span></p>
+                    <p class="note no-mar mar-btm-ten"><span class="lang" key="password_username_same"></span></p>
+                    <label class="lock mendatory"><input id="txt_confirm_password" name="" onkeydown="validationRegister(2)" data-translate="confirm_password_placeholder" autocomplete="new-password"  type="password"    class="reg-form" placeholder="Confirm Password" required><p class="star">*</p></label>
+                    <label style="color:#ff0000;font-weight:bold" class="registrationFormAlert" id="divCheckPasswordMatch"> </label>
+                    <br />
+                    @*<p class="big-text no-mar"><strong><span class="lang" key="basic_information"></span></strong></p>
+        <label class="mar-btm-no user mendatory"><input id="txt_nric" name="txt_nric" onkeydown="validationRegister(3)" data-translate="nric_placeholder" type="text" class="reg-form" placeholder="Full Name as NRIC" value="" required=""><p class="star">*</p></label>
+        <p class="note no-mar lang" key="name_instruction"></p>*@
+                    <p class="big-text no-mar"><strong><span class="lang" key="contact_details"></span></strong></p>
+                    <p class="note no-mar mar-btm-ten"><span class="lang" key="contact_instruction"></span></p>
+                    <label class="num mendatory">
+                        <input id="txt_mobile" name="txt_mobile" type="number" pattern="\d*" class="reg-form" onkeydown="validationRegister(4)" placeholder="01234567891" value="" required="">
+                        <p class="star">*</p>
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="info-form">
+                    @*<p class="big-text no-mar"><strong><span class="lang" key="contact_details"></span></strong></p>
+                    <p class="note no-mar mar-btm-ten"><span class="lang" key="contact_instruction"></span></p>
+                    <label class="num mendatory">
+                        <input id="txt_mobile" name="txt_mobile" type="text" class="reg-form" onkeydown="validationRegister(4)" placeholder="6012-123456789" value="" required="">
+                        <p class="star">*</p>
+                    </label>*@
+
+                    <p class="big-text no-mar"><strong><span class="lang" key="basic_information"></span></strong></p>
+                    <label class="mar-btm-no user mendatory"><input id="txt_nric" name="txt_nric" onkeydown="validationRegister(3)" data-translate="nric_placeholder" type="text" class="reg-form" placeholder="Full Name as NRIC" value="" required=""><p class="star">*</p></label>
+                    <p class="note no-mar lang" key="name_instruction"></p>
+
+                    @*<span class="register-important">Important</span><br />
+        <ul class="register-notes-list pad-top-btm-10">
+            <li class="register-important-notes">Phone number is to retrieve your password when you are forgotten.</li>
+            <li class="register-important-notes">Any New rebate credit to your account, will get a SMS notification</li>
+            <li class="register-important-notes">Phone number is your identity, it is very important. please write a phone number you can receive SMS</li>
+        </ul>*@
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="info-form register-notice deposit-section pad-top-twentyfive" style="background-color: #eeeeee; border-radius: 6px;">
+                                <div class="pad-lr-comman">
+                                    <h6 class="info-notice">Information Notice</h6>
+                                    <ol class="register-notes-list">
+                                        <li>Phone number is to retrieve your password when you are forgotten.</li>
+                                        <li>Any New rebate credit to your account, will get a SMS notification</li>
+                                        <li>Phone number is your identity, it is very important. please write a phone number you can receive SMS</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-offset-1 col-lg-5">
+                <div class="captcha-code">
+                    <label class="checkbox-inline"><input type="checkbox" id="checkRecaptcha" value="">I'm not a robot</label>
+                    <div class="captcha-icon">
+                        <div class="captcha-content">
+                            <p>reCAPTCHA</p>
+                            <p class="small">Privacy - Terms</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="checkbox">
+            <label class="tick-note"><input name="checkbox" id="checkbox" type="checkbox" value="0" required=""><span key="terms_condition_accept" class="lang"></span></label>
+        </div>
+        <div class="text-center mar-comman" style="margin-left:30px">
+            <button type="button" id="button" name="Save" value="Submit" class="submit" onclick="activateButton()"><span class="lang" key="submit_button"></span></button>
+        </div>
+    </div>
+</div>

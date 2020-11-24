@@ -1,0 +1,149 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">MaxBet Default Betting Limit</legend>
+                </div>
+            </div>
+        </div>
+
+        <div class="row card-body">
+            <div class="col-md-12">
+                <div class="row">
+                    <label class="col-2"><span class="bold">Sports Min Bet :</span></label>
+                    <label class="col-1"><span class="bold">{{sportmin}}</span></label>
+                    <label class="col-2"><span class="bold">Sports Max Bet :</span></label>
+                    <label class="col-1"><span class="bold">{{sportmax}}</span></label>
+                    <label class="col-2"><span class="bold">Sports Match Bet :</span></label>
+                    <label class="col-1"><span class="bold">{{sportmatch}}</span></label>
+                    <label class="col-2"><span class="bold">Others Sport Min :</span></label>
+                    <label class="col-1"><span class="bold">{{othersportmin}}</span></label>
+                    <label class="col-2"><span class="bold">Others Sport Max:</span></label>
+                    <label class="col-1"><span class="bold">{{othersportmax}}</span></label>
+                    <label class="col-2"><span class="bold">Others Sport Match:</span></label>
+                    <label class="col-1"><span class="bold">{{othersportmatch}}</span></label>
+                    <label class="col-2"><span class="bold">Others Sport Ball :</span></label>
+                    <label class="col-1"><span class="bold">{{othersportball}}</span></label>
+                    <label class="col-2"><span class="bold">Parley Min :</span></label>
+                    <label class="col-1"><span class="bold">{{maxparleymin}}</span></label>
+                    <label class="col-2"><span class="bold">Parley Max :</span></label>
+                    <label class="col-1"><span class="bold">{{maxparleymax}}</span></label>
+                    <label class="col-2"><span class="bold">Parley Matxhs :</span></label>
+                    <label class="col-1"><span class="bold">{{maxparleymatch}}</span></label>
+
+
+
+
+                    <label class="col-2"><span class="bold">Sport Type 1 Min :</span></label>
+                    <label class="col-1"><span class="bold">{{sporttype1min}}</span></label>
+                    <label class="col-2"><span class="bold">Sport Type 1 Max :</span></label>
+                    <label class="col-1"><span class="bold">{{sporttype1max}}</span></label>
+                    <label class="col-2"><span class="bold">Sport Type 1 Match :</span></label>
+                    <label class="col-1"><span class="bold">{{sporttype1match}}</span></label>
+                </div>
+                <br />
+                <!--<div class="row">
+                    <label class="col-2"><span class="bold"></span></label>
+                    <label class="col-1"><span class="bold">Others Sport Max:</span></label>
+                    <label class="col-1"><span class="bold">{{othersportmax}}</span></label>
+                    <label class="col-1"><span class="bold">Others Sport Match:</span></label>
+                    <label class="col-1"><span class="bold">{{othersportmatch}}</span></label>
+                    <label class="col-1"><span class="bold">Others Sport Ball :</span></label>
+                    <label class="col-1"><span class="bold">{{othersportball}}</span></label>
+                    <label class="col-1"><span class="bold">Parley Min :</span></label>
+                    <label class="col-1"><span class="bold">{{maxparleymin}}</span></label>
+                    <label class="col-2"><span class="bold"></span></label>
+                </div>
+                <br />
+                <div class="row">
+                    <label class="col-4"><span class="bold"></span></label>
+                    <label class="col-1"><span class="bold">Parley Max :</span></label>
+                    <label class="col-1"><span class="bold">{{maxparleymax}}</span></label>
+                    <label class="col-1"><span class="bold">Parley Matxhs :</span></label>
+                    <label class="col-1"><span class="bold">{{maxparleymatch}}</span></label>
+                    <label class="col-4"><span class="bold"></span></label>
+                </div>
+                <br />-->
+                <div class="row">
+                    <div class="block-center">
+                        <h4 class="col-12">Sports Type 1</h4>
+                    </div>
+
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-2"></label>
+                    <input class="col-2 form-control" id="sporttype1min" placeholder="Min per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="sporttype1max" placeholder="Max per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="sporttype1match" placeholder="Max per Match" type="number" />
+                    <label class="col-2"></label>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="block-center">
+                        <h4 class="col-12">Sports</h4>
+                    </div>
+
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-2"></label>
+                    <input class="col-2 form-control" id="sportmin" placeholder="Min per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="sportmax" placeholder="Max per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="sportmatch" placeholder="Max per Match" type="number" />
+                    <label class="col-2"></label>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="block-center">
+                        <h4 class="col-12">Others Sports</h4>
+                    </div>
+
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-2"></label>
+                    <input class="col-2 form-control" id="othersportmin" placeholder="Min per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="othersportmax" placeholder="Max per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="othersportmatch" placeholder="Max per Match" type="number" />
+                    <label class="col-2"></label>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-2"></label>
+                    <input class="col-8 form-control" id="othersportball" placeholder="Max per ball (only for 161)" type="number" />
+                    <label class="col-2"></label>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="block-center">
+                        <h4 class="col-12">Max Parley</h4>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-2"></label>
+                    <input class="col-2 form-control" id="maxparleymin" placeholder="Min per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="maxparleymax" placeholder="Max per Bet" type="number" />
+                    <label class="col-1"></label>
+                    <input class="col-2 form-control" id="maxparleymatch" placeholder="Max per Match" type="number" />
+                    <label class="col-2"></label>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <label class="col-5"></label>
+                    <button class="col-2 btn btn-success" (click)="Update()">Update</button>
+                </div>
+                <br /><br />
+            </div>
+        </div>
+    </div>
+</div>

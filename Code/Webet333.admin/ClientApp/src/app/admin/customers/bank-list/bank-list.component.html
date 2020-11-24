@@ -1,0 +1,37 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Bank List</legend>
+                </div>
+            </div>
+        </div>
+        <div class="row col-12">
+            <div class="p-2 col-md-12">
+                <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Add Bank</button>
+            </div>
+        </div><br />
+        <div class="card-body">
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
+                           [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator">
+                <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <div class="row col-md-12" style="margin-right:100px">
+                        <label class="col-md-3">
+                            <button id="acceptBtn" data-id="bankData[rowIndex].Id" class="mb-1 btn btn-success" type="button" data-toggle="modal" title="Edit" (click)='navigateEdit(bankData[rowIndex])'>
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                        </label>
+
+                        <label class="col-md-6">
+                            <ui-switch [(ngModel)]="bankData[rowIndex].Active" (change)="manualUpdateEvent(bankData[rowIndex].Id,$event)" data-toggle="modal" data-id="bankData[rowIndex].Id"></ui-switch>
+                        </label>
+                    </div>
+                </ng-template>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+
+

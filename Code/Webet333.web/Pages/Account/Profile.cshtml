@@ -1,0 +1,1327 @@
+﻿@page
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<title>Webet333 - @ViewData["Title"] </title>
+<script src="../../js/pages/bank.js" type="text/javascript"></script>
+<script src="../../js/pages/account.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        authorize();
+        UserBankDetails();
+    });
+
+    function authorize() {
+        if (GetLocalStorage('currentUser') === null) {
+            window.location.href = "/";
+        }
+    }
+
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    document.onkeydown = function (e) {
+        if (event.keyCode == 123) {
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+            return false;
+        }
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+            return false;
+        }
+    }
+
+
+</script>
+
+<style>
+    .button {
+        background-color: #0b7498; /* Green */
+        border: none;
+        color: white;
+        padding: 5px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+
+    #promotionInfo table {
+        background: #e5e5e5 !important;
+        text-align: center;
+        width: 50%;
+    }
+
+    #promotionInfo strong {
+        font-weight: 800;
+    }
+
+    #promotionInfo table tr:first-child td {
+        background: #858585;
+    }
+
+    .cursor-pointor {
+        cursor: pointer;
+    }
+
+    select.main-wallet.jcf-hidden {
+        display: none;
+    }
+
+    @@media only screen and (max-width: 600px) {
+        .modal-content {
+            width: 95vw !important;
+        }
+    }
+</style>
+
+<div class="wallet text-center white-text" id="ul_reloadbalance">
+    <p class="big">Main wallet</p>
+    <ul class="random-value list-inline">
+        <li><button title="Restore" class="restort-btn" style="background:#efefef;" data-toggle="modal" data-target="#RestoreConfirmation"><img src="~/images/restore_icon_pink.png" /> <lable class="restore"><span class="lang" key="restore"></span> </lable></button></li>
+        <li class="reset-value">
+            <ul class="random-number d-flex">
+                <li><h4>MYR</h4></li>
+                <li><h4><span id="lbl_mainWalletbalanceDeposite"></span></h4></li>
+            </ul>
+        </li>
+        <li class="reset-value cursor-pointor"><a title="Refresh" onClick='SelectWallet();' id="link_reloadblance"><img src="../../images/reset-purple.png" alt="reset"></a></li>
+    </ul>
+    <ul class="list-inline">
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="JokerRefershImg" src="/images/loading.gif" height="30" /><span class="values" id="lbl_JokerWalletbalanceDeposite"></span></p>
+            <p>Joker</p>
+        </li>
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="PlaytechRefershImg" src="~/images/loading.gif" height="30" /><span class="values" id="lbl_PlaytechWalletbalanceDeposite"></span></p>
+            <p>PlayTech</p>
+        </li>
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="KissRefershImg" src="~/images/loading.gif" height="30" /><span class="values" id="lbl_918kissWalletbalanceDeposite"></span></p>
+            <p>918Kiss</p>
+        </li>
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="AgRefershImg" src="~/images/loading.gif" height="30" /><span class="values" id="lbl_AGWalletbalanceDeposite"></span></p>
+            <p>AG</p>
+        </li>
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="M8RefershImg" src="~/images/loading.gif" height="30" /><span class="values" id="lbl_M8WalletbalanceDeposite"></span></p>
+            <p>M8</p>
+        </li>
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="MaxbetRefershImg" src="~/images/loading.gif" height="30" /><span class="values" id="lbl_MaxbetWalletbalanceDeposite"></span></p>
+            <p>MaxBet</p>
+        </li>
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="MegaRefershImg" src="~/images/loading.gif" height="30" /><span class="values" id="lbl_Mega888WalletbalanceDeposite"></span></p>
+            <p>Mega888</p>
+        </li>
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="DgRefershImg" src="~/images/loading.gif" height="30" /><span class="values" id="lbl_DGWalletbalanceDeposite"></span></p>
+            <p>DG</p>
+        </li>
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="SexyRefershImg" src="~/images/loading.gif" height="30" /><span class="values" id="lbl_SexyWalletbalanceDeposite"></span></p>
+            <p>Sexy Baccarat</p>
+        </li>
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="SaRefershImg" src="~/images/loading.gif" height="30" /><span class="values" id="lbl_SAWalletbalanceDeposite"></span></p>
+            <p>SA </p>
+        </li>
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="Pussy888RefershImg" src="~/images/loading.gif" height="30" /><span class="values" id="lbl_Pussy888WalletbalanceDeposite"></span></p>
+            <p>Pussy888 </p>
+        </li>
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="AllBetRefershImg" src="~/images/loading.gif" height="30" /><span class="values" id="lbl_AllBetWalletbalanceDeposite"></span></p>
+            <p>AllBet </p>
+        </li>
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="WMRefershImg" src="~/images/loading.gif" height="30" /><span class="values" id="lbl_WMWalletbalanceDeposite"></span></p>
+            <p>WM</p>
+        </li>
+        <li class="mar-comman">
+            <p class="big-text"><img class="img_load" id="PragmaticRefershImg" src="~/images/loading.gif" height="30" /><span class="values" id="lbl_PragmaticWalletbalanceDeposite"></span></p>
+            <p>Pragmatic</p>
+        </li>
+    </ul>
+</div>
+
+<div class="profile-subdetail">
+
+    <div class="tab white-bg-tab-panel">
+        <h4 class="mar-btm-fifteen">BANKING</h4>
+        <button class="tablinks account-reg deposit" onclick="openCity(event, 'Deposit');" id="depositOpen"><span class="lang" key="deposit"></span></button>
+        <button class="tablinks account-reg withdrawal" onclick="openCity(event, 'Withdrawal');" id="withdrawalOpen"><span class="lang" key="withdrawal_title"></span></button>
+        <button class="tablinks account-reg transfer" onclick="openCity(event, 'Transfer');" id="transferOpen"><span class="lang" key="transfer_title"></span></button>
+        <h4 class="mar-btm-fifteen">USER PROFILE</h4>
+        <button class="tablinks account-reg profile" onclick="openCity(event, 'Profile');" id="profileOpen"><span class="lang" key="profile_title"></span></button>
+        <button class="tablinks mar-btm-fifteen account-reg history" onclick="openCity(event, 'History'); " id="historyOpen"><span class="lang" key="history"></span></button>
+
+    </div>
+
+    <div id="Profile" class="tabcontent account-reg white-bg-tab-panel">
+        <div class="info-form marginb-none">
+            <h4 class="profile-sub bg-no-repeat symbol blk-text lang" key="profile_title"></h4>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-lg-9">
+                <div class="info-form change-pass">
+                    <div class="pad-lr-comman">
+                        <h5 class="blk-text no-mar lang" key="profile_change_password"></h5>
+                        <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
+                            <li class="mar-btm-fifteen">
+                                <label class="fleft"><p class="big no-mar lang" key="profile_current_password"></p></label>
+                                <label class="fright mar-btm-no lock"><input id="txt_currentPassword" name="txt_currentPassword" type="password" class="reg-form" placeholder="Current Password" value=""></label>
+                            </li>
+                            <li class="mar-btm-fifteen">
+                                <label class="fleft"><p class="big no-mar lang" key="profile_new_password"></p></label>
+                                <label class="fright lock"><input id="txt_newPassword" name="txt_newPassword" autocomplete="new-password" type="password" class="reg-form" placeholder="New Password"></label>
+                            </li>
+                            <li class="mar-btm-fifteen">
+                                <label class="fleft"><p class="big no-mar lang" key="profile_confirm_password"></p></label>
+                                <label class="fright lock"><input id="txt_confirmPassword" name="txt_confirmPassword" autocomplete="new-password" type="password" class="reg-form" placeholder="Confirm Password"></label>
+                            </li>
+                            <li class="mar-btm-fifteen">
+                                <div class="fright"><button name="" class="submit" data-toggle="modal" data-target="#profilemyModal" onclick="ChangePassword()"><span class="lang" key="profile_confirm_change_password"></span></button></div>
+                            </li>
+                        </ul>
+                        <h5 class="blk-text no-mar lang" key="profile_update_personal_details"></h5>
+                        <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
+                            <li class="mar-btm-fifteen pad-top-ten pad-btm-ten">
+                                <label class="fleft"><p class="big no-mar lang" key="profile_username"></p></label>
+                                <label class="fright"><p class="big-text no-mar"><strong><span id="lbl_userName"></span></strong></p></label>
+                            </li>
+                            <li class="mar-btm-fifteen pad-top-ten pad-btm-ten">
+                                <label class="fleft"><p class="big no-mar lang" key="profile_full_name"></p></label>
+                                <label class="fright"><p class="big-text no-mar"><strong><span id="lbl_fullName"></span></strong></p></label>
+                            </li>
+                            <li class="mar-btm-fifteen">
+                                <label class="fleft"><p class="big no-mar lang" key="profile_mobile"></p></label>
+                                <label class="fright tel-icon"><input id="txt_mobileUpdate" name="txt_mobileUpdate" pattern="\d*" type="number" class="reg-form" placeholder="Enter new Mobile number"></label>
+                            </li>
+                            <li class="mar-btm-fifteen">
+                                <div class="fright"><button name="" class="submit" data-toggle="modal" data-target="#ConfirmUpdateProfie"><span class="lang" key="profile_update_personal_details_button"></span></button></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Deposit" class="tabcontent account-reg white-bg-tab-panel">
+        <div class="info-form marginb-none">
+            <h4 class="deposit-sub symbol bg-no-repeat blk-text lang" key="deposit_title"></h4>
+        </div>
+        <div id="formDiposit" class="row">
+            <div class="col-sm-12">
+                <div class="info-form deposit-section">
+                    <div class="tab-content ">
+                        <div class="tab-pane active">
+                            <div class="col-lg-8 col-md-8">
+                                <ul class="deposit-bank-listing deposite-bank-sec password-upadte blk-text pad-top-ten">
+                                    <li>
+                                        <label class="fleft mob-padr-5"><p class="big no-mar lang" key="deposit_company_bank_name" style="margin-left: -5px;"></p></label>
+                                        <label class="company-deposit-list">
+                                            <ul class="nav nav-tabs">
+                                                <li class="tablinks">
+                                                    <a class="thm-txt" href="#EeziePay" data-toggle="tab">
+                                                        <figure>
+                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank-icon-detail/vaderpay2.jpg" alt="" />
+                                                        </figure>
+                                                        <p>Vaderpay</p>
+                                                    </a>
+                                                </li>
+                                                <li class="active tablinks">
+                                                    <a class="thm-txt" href="#Bank-Transfer" data-toggle="tab">
+                                                        <figure>
+                                                            <img class="tab-bankicon" src="~/images/bank-icon-detail/bank_transfer_ori.png" alt="" />
+                                                        </figure>
+                                                        <p>Bank-Transfer</p>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="Bank-Transfer" class="tabcontent active">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-8">
+                                        <ul class="deposit-bank-listing password-upadte white-text">
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft"><p class="big no-mar lang blk-text" key="withdrawal_bankname"></p></label>
+                                                <label class="fright">
+                                                    <div class="bank-selection">
+                                                        <ul class="bank-listing step-2-desc highlight-bank" id="Depsoit_bank_list">
+                                                        </ul>
+                                                    </div>
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft"><p class="big no-mar blk-text lang">Bank Account :</p></label>
+                                                <label class="fright mendatory black-text">
+                                                    <p><span id="account_name"></span> <i onclick='copyText("account_name")' class="fa fa-files-o" aria-hidden="true" style="margin-left: 20px;cursor:pointer;"></i></p><br />
+                                                    <p id="copy_text"><span id="account_number"></span><i onclick='copyText("account_number")' class="fa fa-files-o" aria-hidden="true" style="margin-left: 20px;cursor:pointer;"></i></p>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_amount">Amount :</p></label>
+                                                <label class="fright card-number mendatory">
+                                                    <input id="txt_amount" pattern="\d*" name="txt_mail" type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00"><p class="star">*</p>
+                                                    <div class="min-max-limit">
+                                                        <ul class="d-flex">
+                                                            <li class="data-blog" onclick="setValue(50, false)">50</li>
+                                                            <li class="data-blog" onclick="setValue(100, false)">100</li>
+                                                            <li class="data-blog" onclick="setValue(300, false)">300</li>
+                                                            <li class="data-blog" onclick="setValue(500, false)">500</li>
+                                                            <li class="data-blog" onclick="setValue(1000, false)">1000</li>
+                                                        </ul>
+                                                    </div>
+                                                </label>
+                                            </li>
+                                            <br />
+                                            <li class="pad-btm-ten">
+                                                <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_date_time"></p></label>
+                                                <label class="fright">
+                                                    <label class="calender-part mendatory">
+                                                        <input size="16" id="txt_datetime" name="txt_datetime" type="text" class="form_datetime reg-form main-wallet" readonly placeholder="select date.">
+                                                        <p class="star">*</p>
+                                                    </label>
+                                                </label>
+                                            </li>
+                                            <li class="pad-btm-ten">
+                                                <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_reference_number"></p></label>
+                                                <label class="fright card-number mendatory">
+                                                    <input id="txt_reference_number" name="txt_reference_number" type="text" class="reg-form " placeholder="Enter Reference Number" autocomplete="new-password">
+                                                    <p class="star">*</p>
+                                                </label>
+                                            </li>
+                                            <li class="pad-btm-ten scanned-file">
+                                                <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_scanned_receipt"></p></label>
+                                                <div class="fright upload">
+                                                    <div class="d-flex">
+                                                        <div class="fake-upload-btn upload-btn">
+                                                            <span class="lang" key="deposit_upload_receipt"></span>
+                                                            <input class="jcf-ignore" type="file" id="receipt" multiple />
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div>
+                                                        <ul id="selectedFiles"></ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="col-md-4 col-lg-4">
+                                        <div class="info-form notice-bank-transfer deposit-section pad-top-twentyfive" style="background-color: #eeeeee; border-radius: 6px;">
+                                            <div class="pad-lr-comman">
+                                                <h6 class="info-notice"><span class="lang" key="important_notice"></span></h6>
+                                                <ol>
+                                                    <li><span class="lang" key="instruction_1"></span></li>
+                                                    <li><span class="lang" key="instruction_2"></span></li>
+                                                    <li><span class="lang" key="instruction_3"></span></li>
+                                                    <li><span class="lang" key="instruction_4"></span></li>
+                                                    <li><span class="lang" key="instruction_5"></span></li>
+                                                    <li>
+                                                        <span class="lang" key="instruction_6A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+        'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a> <span class="lang" key="instruction_6B"></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="lang" key="instruction_7A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+        'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a><span class="lang" key="instruction_7B"></span>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <section class="select-checkboxes">
+                                            <h3 class="mar-top-15">Please select Promotion below:</h3>
+                                            <ul class="mar-top-15 promotion-choose" id="promotion"></ul>
+                                        </section>
+                                        <div class="text-center mar-comman"><button name="" value="submit" class="submit lang" key="deposit_submit" data-toggle="modal" data-target="#profilemyModal" onclick="Deposit(false)"></button></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="EeziePay" class="tabcontent" style="display: none;text-align:center">
+                                <div class="text-center" id="vaderpayMainteanceSection" style="display:none">
+                                    <h3 class="text-center">Under Maintenance</h3>
+                                </div>
+                                <div class="row" id="vaderpaySection">
+                                    <div class="col-lg-8 col-md-8">
+                                        <ul class="deposit-bank-listing password-upadte white-text">
+                                            <li>
+                                                <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_amount">Amount :</p></label>
+                                                <label class="fright card-number mendatory">
+                                                    <input id="online_txt_amount" pattern="\d*" name="txt_mail" type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00"><p class="star">*</p>
+                                                    <div class="min-max-limit">
+                                                        <ul class="d-flex">
+                                                            <li class="data-blog" onclick="setValue(50,true)">50</li>
+                                                            <li class="data-blog" onclick="setValue(100,true)">100</li>
+                                                            <li class="data-blog" onclick="setValue(300,true)">300</li>
+                                                            <li class="data-blog" onclick="setValue(500,true)">500</li>
+                                                            <li class="data-blog" onclick="setValue(1000,true)">1000</li>
+                                                        </ul>
+                                                    </div>
+                                                </label>
+                                            </li>
+                                            <br />
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row" id="vaderpayPromotionSection">
+                                    <div class="col-lg-12">
+                                        <section class="select-checkboxes">
+                                            <h3 class="mar-top-15">Please select Promotion below:</h3>
+                                            <ul class="mar-top-15 promotion-choose" id="onlinePromotion"></ul>
+                                        </section>
+                                        <div class="text-center mar-comman"><button name="" value="submit" class="submit lang" key="deposit_submit" data-toggle="modal" data-target="#profilemyModal" onclick="Deposit(true)"></button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="Withdrawal" class="tabcontent account-reg white-bg-tab-panel">
+        <div class="info-form marginb-none">
+            <h4 class="withdrawal-sub bg-no-repeat symbol lang" key="withdrawal_title"></h4>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-lg-8">
+                @* <div class="info-form">
+                        <div class="pad-lr-comman">
+                            <div class="step-portion">
+                                <h5 class="mar-btm-ten"><div class="lang" key="withdrawal_step"></div><span>1</span></h5>
+                            </div>
+                            <p class="big-text lang" key="withdrawal_please_verify_your_bank_details"></p>
+                            <ul class="banking mar-btm-twentyfive">
+                                <li>
+                                    <p class="big blue-bg text-center no-mar">Banking</p>
+                                    <table id="customerBankdetail" class="table table-bordered text-center">
+                                        <tbody class="white-bg">
+                                            <tr><td><span class="lang" key="withdrawal_bankname"></span></td></tr>
+                                            <tr><td><span class="lang" key="withdrawal_account_holder"></span></td></tr>
+                                            <tr><td><span class="lang" key="withdrawal_account_number"></span></td></tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </ul>
+                            <div class="step-portion">
+                                <h5 class="mar-btm-ten"><div class="lang" key="withdrawal_step"></div><span>2</span></h5>
+                            </div>
+                            <p class="big-text lang" key="withdrawal_please_fill_following_form"></p>
+                        </div>
+                    </div> *@
+                <div class="bank-multi-list">
+                    <div class="pad-lr-comman">
+                        <form id="formWithdrawal">
+                            <ul class="password-upadte pad-top-ten">
+                                <li>
+                                    <label class="fleft"><p class="big no-mar lang" key="withdrawal_bankname"></p></label>
+                                    <label class="fright">
+                                        <div class="bank-selection">
+                                            <ul class="bank-listing highlight-bank" id="withdraw_bank_list">
+                                            </ul>
+                                        </div>
+                                    </label>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+                <div class="info-form bank-remain-list">
+                    <div class="pad-lr-comman">
+                        <form id="formWithdrawal">
+                            <ul class="password-upadte pad-btm-ten pad-top-ten">
+                                @*<li class="mar-btm-fifteen">
+                                        <label class="fleft"><p class="big no-mar lang" key="profile_account_holder"></p></label>
+                                        <label class="fright bank-name mendatory">
+                                            <input id="lbl_accountHolder" name="txt_name" type="text" class="reg-form" placeholder="Enter Account Name"><p class="star">*</p>
+                                        </label>
+                                    </li>*@
+                                <li class="mar-btm-fifteen" id="displayAccountNumber">
+                                    <label class="fleft"><p class="big no-mar lang" key="withdrawal_account_number"></p></label>
+                                    <label class="fright card-number mendatory"><input id="txt_withdrawalAccountNumber" name="txt_amount" type="number" pattern="\d*" class="reg-form" placeholder="Enter Account Number"><p class="star">*</p></label>
+                                </li>
+                                <li class="mar-btm-fifteen">
+                                    <label class="fleft"><p class="big no-mar lang" key="withdrawal_from"></p></label>
+                                    <label class="fright bank-name mendatory">
+                                        Main Wallet
+                                    </label>
+                                </li>
+                                <li class="mar-btm-fifteen">
+                                    <label class="fleft"><p class="big no-mar lang" key="withdrawal_amount"></p></label>
+                                    <label class="fright card-number mendatory"><input id="txt_withdrawalAmount" name="txt_amount" type="number" class="reg-form" pattern="\d*" placeholder="Min/Max Limit: 10.00/ 30,000.00"><p class="star">*</p></label>
+                                </li>
+                                <li class="mar-btm-fifteen">
+                                    <label class="fleft"></label>
+                                    <label class="fright"><span class="fa fa-lock" id="lock_icon"></span><span class="fa fa-unlock" id="unlock_icon"></span>&nbsp;<span data-toggle="modal" data-target="#WithdrawAmountList" id="WithdrawAmount">MYR 700</span></label>
+                                </li>
+                                <li class="mar-btm-fifteen">
+                                    <div class="fright">
+                                        <button class="submit lang" key="withdrawal_submit" data-toggle="modal" data-target="#profilemyModal" onclick="Withdrawal()" type="button"></button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class="info-form deposit-section pad-top-twentyfive" style="background-color: #eeeeee; border-radius: 6px;">
+                    <div class="pad-lr-comman">
+                        <h6 class="info-notice"><span class="lang" key="important_notice"></span></h6>
+                        <ol>
+                            <li>
+                                <span class="lang" key="instruction_6A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+        'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a> <span class="lang" key="instruction_6B"></span>
+                            </li>
+                            <li>
+                                <span class="lang" key="instruction_7A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+        'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a><span class="lang" key="instruction_7B"></span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Transfer" class="tabcontent account-reg white-bg-tab-panel">
+        <div class="info-form marginb-none switch-middle">
+            <h4 class="transfer-sub bg-no-repeat symbol lang" key="transfer_title"></h4>
+
+            <div class="switch-middle">
+                <img src="~/images/icon-smart.png" />
+                <p>Main Wallet Auto Transfer</p>
+                <div class="col-lg-1 switch" onclick="onclickSet(0)" id="checkSwitch">
+                    <div class="switch-circle" id="circle-move">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="info-form">
+                    <div class="pad-lr-comman">
+                        <div class="step-portion">
+                            <h5 class="mar-btm-ten lang" key="transfer_transfer_details"></h5>
+                        </div>
+                        <p class="big-text lang" key="transfer_please_fill_in_the_following_form"></p>
+                        <form id="formTransfer">
+                            <ul class="password-upadte transfer-page">
+                                <li class="mar-btm-fifteen">
+                                    <label class="fleft"><p class="big no-mar lang" key="transfer_from"></p></label>
+                                    <label class="fright bank-icon bank-name mendatory">
+                                        <select class="main-wallet" data-jcf='{"wrapNative": false, "wrapNativeOnMobile": false}' id="ddl_transferFromWallet" onchange="select()">
+                                            <option value="">-- Select --</option>
+                                        </select>
+                                        <p class="star">*</p>
+                                    </label>
+                                </li>
+                                <li class="mar-btm-fifteen">
+                                    <label class="fleft"><p class="big no-mar lang" key="transfer_to"></p></label>
+                                    <label class="fright bank-icon bank-name mendatory">
+                                        <select class="main-wallet" data-jcf='{"wrapNative": false, "wrapNativeOnMobile": false}' id="ddl_transferToWallet">
+                                            <option value="">-- Select --</option>
+                                        </select>
+                                        <p class="star">*</p>
+                                    </label>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="info-form no-mar">
+                    <div class="pad-lr-comman">
+                        <form id="transferAmount">
+                            <ul class="password-upadte transfer-ammount">
+                                <li class="mar-btm-fifteen">
+                                    <label class="fleft"><p class="big no-mar lang" key="transfer_amount"></p></label>
+                                    <label class="fleft minimum-ammount card-number mendatory">
+                                        <input id="txt_transferAmount" name="txt_transferAmount" type="number" pattern="\d*" class="reg-form" placeholder="Max Limit: From Wallet">
+                                        <p class="star">*</p>
+                                        <span>Add Minimum 1 MYR</span>
+                                    </label>
+                                    <label class="fright mar-btm-fifteen transfer-max hidden-xs" onclick="TransferValidation()"><a><span class="lang" key="transfer_max"></span></a></label>
+                                </li>
+                                <li class="mar-btm-fifteen transfer-btns">
+                                    <div class="fleft visible-xs">
+                                        <label class="no-mar-top transfer-max" onclick="TransferValidation()"><a><span class="lang" key="transfer_max"></span></a></label>
+                                    </div>
+                                    <div class="fright"><button class="submit lang" data-toggle="modal" key="transfer_button" data-target="#profilemyModal" onclick="Checkbalance()" type="button"></button></div>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-4 col-lg-offset-8 ">
+                <div class="total-turnover">
+                    <div class="total-turnover-chips">
+                        <ul class="list-style d-flex">
+                            <li>Total Daily Turnover</li>
+                            <li><label id="TotalTurnover"></label></li>
+                            <li><span id="spin-refesh" class="fa fa-refresh" onclick="UserGameTurnover()"></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>Joker</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('Joker Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="JokerInWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>Daily Winover</li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="jokerTurnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>Playtech</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('PlayTech Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="PlaytechInWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>Daily Turnover</li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="playtechTurnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>918 Kiss</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('918Kiss Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="918KissInWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>Daily Winover</li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="kiss918Turnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>AG</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('AG Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="AGInWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>Daily Turnover</li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="agTurnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>M8</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('M8 Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="M8InWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>Daily Turnover</li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="m8Turnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>Maxbet</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('MaxBet Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="MaxbetInWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>Daily Turnover</li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="maxbetTurnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>Mega</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('Mega888 Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="Mega888InWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>Daily Winover</li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="mega888Turnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>DG</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('DG Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="DGInWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>Daily Turnover</li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="dgTurnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>Sexy</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('Sexy Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="SexyInWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>Daily Turnover</li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="sexyTurnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>SA</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('SA Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="SAInWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>Daily Turnover</li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="saTurnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>Pussy888</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('Pussy888 Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="Pussy888InWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>
+                                    Daily Winover
+                                </li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="Pussy888Turnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>AllBet</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('AllBet Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="AllBetInWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>
+                                    Daily Turnover
+                                </li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="AllBetTurnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>WM</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('WM Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="WMInWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>
+                                    Daily Turnover
+                                </li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="WMTurnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-lg-3">
+                    <div class="in-wallet-chips">
+                        <div class="chip-margin">
+                            <ul>
+                                <li><b>Pragmatic</b></li>
+                                <li class="text-primary"><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('Pragmatic Wallet')">ALL In</button></li>
+                            </ul>
+                            <ul>
+                                <li class="text-primary">MYR</li>
+                                <li class="text-primary" id="PragmaticInWallet">0.00</li>
+                            </ul>
+
+                        </div>
+                        <div class="box-title">
+                            <ul class="list-style">
+                                <li>
+                                    Daily Turnover
+                                </li>
+                            </ul>
+                            <ul class="list-style">
+                                <li id="PragmaticTurnover">-</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="History" class="tabcontent account-reg white-bg-tab-panel">
+        <div class="info-form marginb-none">
+            <h4 class="history-sub bg-no-repeat symbol lang" key="history"></h4>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="info-form history-tabs">
+                    <ul class="nav nav-tabs overflow-x-history-tab" id="history_tabs">
+                        <li><a data-toggle="tab" href="#profileStatement"><span>ALL</span></a></li>
+                        <li class="active"><a data-toggle="tab" href="#profileDeposit"><span class="lang" key="deposit"></span></a></li>
+                        <li><a data-toggle="tab" href="#profilewithdrawal"><span key="withdrawal_title" class="lang"></span></a></li>
+                        <li><a data-toggle="tab" href="#profileTransfer"><span key="transfer_title" class="lang"></span></a></li>
+                        @*<li><a data-toggle="tab" href="#profileRestore"><span key="restore_history" class="lang"></span></a></li>*@
+                        <li><a data-toggle="tab" href="#profileRebate"><span key="rebate" class="lang"></span></a></li>
+                        <li><a data-toggle="tab" href="#profilePromotion"><span key="menu_promotion" class="lang"></span></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="profileTransfer" class="tab-pane fade in ">
+                            <div class="table-responsive overflow-hidden">
+                                <table class="table table-bordered text-center" id="tbl_transferHistory">
+                                    <thead>
+                                        <tr class="blue-bg">
+                                            <th class="white-text text-center">No</th>
+                                            <th class="white-text text-center">Transaction No</th>
+                                            <th class="white-text text-center">From</th>
+                                            <th class="white-text text-center">Where</th>
+                                            <th class="white-text text-center">Amount</th>
+                                            <th class="white-text text-center">Status</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="profilewithdrawal" class="tab-pane fade">
+                            <div class="table-responsive overflow-hidden">
+                                <table class="table table-bordered text-center" id="tbl_withdrawHistory">
+                                    <thead>
+                                        <tr class="blue-bg">
+                                            <th class="white-text text-center">No</th>
+                                            <th class="white-text text-center">Withdraw No</th>
+                                            <th class="white-text text-center">Bank Name</th>
+                                            <th class="white-text text-center">Wallet Name</th>
+                                            <th class="white-text text-center">Amount</th>
+                                            <th class="white-text text-center">Status</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="profileDeposit" class="tab-pane fade in active">
+                            <div class="table-responsive overflow-hidden">
+                                <table class="table table-bordered text-center" id="tbl_depositHistory">
+                                    <thead>
+                                        <tr class="blue-bg">
+                                            <th class="white-text text-center">No</th>
+                                            <th class="white-text text-center">Deposit No</th>
+                                            <th class="white-text text-center">Wallet Name</th>
+                                            <th class="white-text text-center">Bank Name</th>
+                                            <th class="white-text text-center">Deposit Method</th>
+                                            <th class="white-text text-center">Amount</th>
+                                            <th class="white-text text-center">Verified</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="profileStatement" class="tab-pane fade in ">
+                            <div class="table-responsive overflow-hidden">
+                                <table class="table table-bordered text-center" id="tbl_transactionHistory">
+                                    <thead>
+                                        <tr class="blue-bg">
+                                            <th class="white-text text-center">No.</th>
+                                            <th class="white-text text-center">Date Time</th>
+                                            <th class="white-text text-center">Transaction Number</th>
+                                            <th class="white-text text-center">Type</th>
+                                            <th class="white-text text-center">From</th>
+                                            <th class="white-text text-center">To</th>
+                                            <th class="white-text text-center">Amount</th>
+                                            <th class="white-text text-center">Balance</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        @*<div id="profileRestore" class="tab-pane fade in ">
+                                <div class="table-responsive overflow-hidden">
+                                    <table class="table table-bordered text-center" id="tbl_Restore">
+                                        <thead>
+                                            <tr class="blue-bg promotion-tab">
+
+                                                <th class="white-text text-center">No.</th>
+                                                <th class="white-text text-center">Joker</th>
+                                                <th class="white-text text-center">Playtech</th>
+                                                <th class="white-text text-center">Kiss918</th>
+                                                <th class="white-text text-center">AG</th>
+                                                <th class="white-text text-center">M8</th>
+                                                <th class="white-text text-center">Maxbet</th>
+                                                <th class="white-text text-center">Mega888</th>
+                                                <th class="white-text text-center">DG</th>
+                                                <th class="white-text text-center">Sexy</th>
+                                                <th class="white-text text-center">SA</th>
+                                                <th class="white-text text-center">Created</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>*@
+                        <div id="profileRebate" class="tab-pane fade in ">
+                            <div class="table-responsive overflow-hidden">
+                                <table class="table table-bordered text-center" id="tbl_rebateHistory">
+                                    <thead>
+                                        <tr class="blue-bg">
+                                            <th class="white-text text-center">No.</th>
+                                            <th class="white-text text-center">GameName</th>
+                                            <th class="white-text text-center">Turnover</th>
+                                            <th class="white-text text-center">Rolling</th>
+                                            <th class="white-text text-center">Bet</th>
+                                            <th class="white-text text-center">WinLose</th>
+                                            <th class="white-text text-center">CommAmount</th>
+                                            <th class="white-text text-center">Created</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="profilePromotion" class="tab-pane fade in ">
+                            <div class="table-responsive overflow-hidden">
+                                <table class="table table-bordered text-center" id="tbl_promotionHistory">
+                                    <thead>
+                                        <tr class="blue-bg promotion-tab">
+                                            <th class="white-text text-center">No.</th>
+                                            <th class="white-text text-center">Turnover</th>
+                                            <th class="white-text text-center">Title</th>
+                                            <th class="white-text text-center">TurnoverTime</th>
+                                            <th class="white-text text-center">TurnoverTarget</th>
+                                            <th class="white-text text-center">WinTurn</th>
+                                            <th class="white-text text-center">TurnTarget</th>
+                                            <th class="white-text text-center">Status</th>
+                                            <th class="white-text text-center">RemainingDay</th>
+                                            <th class="white-text text-center">Created</th>
+                                            <th class="white-text text-center">ExpieryDate</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container">
+    <div id="AllInConfirmation" class="modal fade">
+        <div class="modal-dialog mail-width">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <p> Are you sure to proceed ?</p>
+                    <ul class="list-inline pad-top-ten">
+                        <li><button onclick="TransferInAllWallet()" data-dismiss="modal" class="submit"><a asp-page="/Account/Profile" asp-fragment="deposit">Yes</a></button></li>
+                        <li><button class="submit" data-dismiss="modal"><a asp-page="/Home/home">No</a></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="WithdrawAmountList" class="modal fade">
+        <div class="modal-dialog withdrawamount-model-width">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div id="WithdrawAmountList" class="tab-pane fade in ">
+                        <div class="table-responsive overflow-hidden">
+                            <table class="table table-bordered text-center" id="tbl_WithdrawAmountList">
+                                <thead>
+                                    <tr class="blue-bg">
+                                        <th class="white-text text-center">No</th>
+                                        <th class="white-text text-center">Title</th>
+                                        <th class="white-text text-center">Before Promotion balance</th>
+                                        <th class="white-text text-center">Apply Date</th>
+                                        <th class="white-text text-center">Status</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <p><span class="fa fa-info-circle"></span> You are only allowed to withdraw the amount that has no wagering requirement. Other balance will be locked until bonus requirement has been meet</p>
+                        <p><span class="fa fa-info-circle"></span> Before Promotion balance is the balance remaining before you had applied new promotion,it is available to withdraw Amount</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="promotionNavigate" class="modal fade">
+        <div class="modal-dialog mail-width">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <p>You have no selected any promotion, Are you sure to proceed ?</p>
+                    <ul class="list-inline pad-top-ten">
+                        <li><button onclick="DepositAfterPromotion()" data-dismiss="modal" class="submit"><a asp-page="/Account/Profile" asp-fragment="deposit">Yes</a></button></li>
+                        <li><button class="submit" data-dismiss="modal"><a asp-page="/Home/home">No</a></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="promotionExpieryModel" class="modal fade">
+        <div class="modal-dialog mail-width">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <img src="~/images/warning.png" />
+                    <p><span class="lang" key="show_waring_deposit"></span></p>
+                    <ul class="list-inline pad-top-ten">
+                        <li><button onclick="PromotionApplyInsert()" data-dismiss="modal" class="submit">Yes I Know</button></li>
+                        <li><button class="submit" data-dismiss="modal">Cancel</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="WithoutPromotionDeposit" class="modal fade">
+        <div class="modal-dialog mail-width">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <img src="~/images/warning.png" />
+                    <p><span class="lang" key="show_waring_deposit_withoutpromotion"></span></p>
+                    <ul class="list-inline pad-top-ten">
+                        <li><button onclick="DepositAfterPromotion()" data-dismiss="modal" class="submit">Yes I Know</button></li>
+                        <li><button class="submit" data-dismiss="modal">Cancel</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="ConfirmUpdateProfie" class="modal fade">
+        <div class="modal-dialog mail-width">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div><button type="button" class="close" data-dismiss="modal">&times;</button></div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-12" style="display:inline-flex;">
+                            <p class=" col-lg-4">Password</p>
+                            <input id="chk_login_password" name="txt_login_password" class="form-control col-lg-6" data-translate="password_placeholder" placeholder="Password" autocomplete="off" tabindex="2" onkeypress="DoLoginOnEnter();" type="password" />
+                        </div>
+
+                    </div>
+                    <br />
+                    <ul class="list-inline pad-top-ten">
+                        <li><button data-dismiss="modal" onclick="UpdateProfile()" class="submit">Update</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="promotionDetails" class="modal fade" style="overflow-y: hidden;">
+        <div class="modal-dialog" style="width:65%;">
+            <div class="modal-content">
+                <div class="modal-body" style="padding-right: 0px;">
+                    <div><button type="button" class="close" data-dismiss="modal">&times;</button></div>
+                    <div id="promotionInfo" style="overflow-y: scroll;max-height:700px;margin-top: 50px !important;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Add smooth scrolling to all links
+        $(document).ready(function () {
+            if (window.location.hash) {
+                var hash = window.location.hash.substring(1).toUpperCase();
+                if (hash == 'DEPOSIT') {
+                    document.getElementById("depositOpen").click();
+                } if (hash == 'WITHDRAWAL') {
+                    document.getElementById("withdrawalOpen").click();
+                } if (hash == 'TRANSFER') {
+                    document.getElementById("transferOpen").click();
+                } if (hash == 'HISTORY') {
+                    document.getElementById("historyOpen").click();
+                    //openCity(event, 'History');
+                }
+                if (hash == 'RESTORE') {
+                    document.getElementById("restoreOpen").click();
+                }
+                if (hash == 'STATEMENT') {
+                    document.getElementById("statementOpen").click();
+                }
+                if (hash == 'REBATE') {
+                    document.getElementById("restoreOpen").click();
+                }
+                if (hash == 'PROMOTION') {
+                    document.getElementById("promotionOpen").click();
+                }
+            }
+            else
+                document.getElementById("profileOpen").click();
+
+
+        });
+
+        var $radioButtons = $('input[type="radio"]');
+        $radioButtons.click(function () {
+            $radioButtons.each(function () {
+                $(this).parent().toggleClass('active', this.checked);
+            });
+        });
+        $('.bank-listing input[type="radio"]').change(function () {
+            if ($(this).is(':checked')) {
+                $('.bank-listing li').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+        })
+
+        $("#historyOpen").click(function () {
+            if (localStorage.getItem("language") == "en-US" || localStorage.getItem("language") == "ms-MY") {
+                document.getElementById("history_tabs").style.display = "flex";
+                document.getElementById("history_tabs").style.overflowY = "hidden";
+            }
+            DepositHistory();
+            PromotionHistory();
+            TransferHistory();
+            Statement();
+            RebateHistory();
+            WithdrawHistory();
+
+        });
+
+        $("#withdrawalOpen").click(function () {
+            CheckWithdrawAmountList();
+        });
+
+    });
+
+    function myFunction() {
+        var copyText = document.getElementById("copy_text");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+    }
+    CheckMainteance();
+</script>

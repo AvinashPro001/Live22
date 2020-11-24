@@ -1,0 +1,452 @@
+﻿@page
+@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Pages/Shared/_LayoutHome.cshtml";
+}
+
+<script src="../../js/pages/home.js" type="text/javascript"></script>
+<title>Webet333 -🥇 Trusted Online Casino Malaysia </title>
+<script>
+    $(document).ready(function () {
+        requestDesktopSite();
+    });
+    function requestDesktopSite() {
+        if (document.getElementsByTagName('meta')['viewport'].content == 'width= 1440px;') {
+            document.getElementsByTagName('meta')['viewport'].content = 'width= 400px;';
+        } else {
+            document.getElementsByTagName('meta')['viewport'].content = 'width= 1440px;';
+        }
+    }
+</script>
+<div class="banner-inner">
+    <div class="home-slider text-center">
+        <div class="" id="slider_promotion" style="height:250px;"></div>
+    </div>
+</div>
+<div>
+    <div class="how-win" id="beforeLoginPanel">
+        <ul>
+            <li class="text-center">
+                <h5 class="white-text"><strong><span key="how_to_win" class="lang"></span></strong></h5>
+                <p class="white-text"><strong><span class="lang" key="game_process"></span></strong></p>
+            </li>
+            <li>
+                <div class="process-game step-1">
+                    <a asp-page="/Account/Register">
+                        <figure class="text-center"><img src="~/images/register-icon.png"></figure>
+                        <h4 class="lang" key="register_home"></h4>
+                        <p class="white-text lang" key="for_an_account"></p>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="process-game step-2">
+                    <a href="#" data-toggle="modal" data-target="#loginRegister">
+                        <figure class="text-center"><img src="~/images/deposit-icon.png"></figure>
+                        <h4>DEPOSIT</h4>
+                        <p class="white-text lang" key="your_fund"></p>
+                    </a>
+                </div>
+            </li>
+            <li class="custom">
+                <div class="process-game step-3">
+                    <a asp-page="/Information/SlotGame">
+                        <figure class="text-center"><img src="~/images/play-icon.png"></figure>
+                        <h4 class="lang" key="play_home"></h4>
+                        <p class="white-text">Games</p>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="process-game step-4">
+                    <a href="#" data-toggle="modal" data-target="#loginRegister">
+                        <figure class="tex  t-center"><img src="~/images/withdraw-icon.png"></figure>
+                        <h4 class="lang" key="withdraw_home"></h4>
+                        <p class="white-text lang" key="your_winnings"></p>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="how-win" id="afterLoginPanel">
+        <ul>
+            <li class="text-center">
+                <h5 class="white-text"><strong><span key="how_to_win" class="lang"></span></strong></h5>
+                <p class="white-text"><strong><span class="lang" key="game_process"></span></strong></p>
+            </li>
+            <li>
+                <div class="process-game step-1">
+                    <a asp-page="/Account/Register">
+                        <figure class="text-center"><img src="~/images/register-icon.png"></figure>
+                        <h4 class="lang" key="register_home"></h4>
+                        <p class="white-text lang" key="for_an_account"></p>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="process-game step-2">
+                    <a asp-page="/Account/Profile" asp-fragment="deposit">
+                        <figure class="text-center"><img src="~/images/deposit-icon.png"></figure>
+                        <h4 class="lang" key="deposit_home"></h4>
+                        <p class="white-text lang" key="your_fund"></p>
+                    </a>
+                </div>
+            </li>
+            <li class="custom">
+                <div class="process-game step-3">
+                    <a asp-page="/Information/SlotGame">
+                        <figure class="text-center"><img src="~/images/play-icon.png"></figure>
+                        <h4 class="lang" key="play_home"></h4>
+                        <p class="white-text lang" key="game"></p>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="process-game step-4">
+                    <a asp-page="/Account/Profile" asp-fragment="withdrawal">
+                        <figure class="text-center"><img src="~/images/withdraw-icon.png"></figure>
+                        <h4 class="lang" key="withdraw_home"></h4>
+                        <p class="white-text lang" key="your_winnings"></p>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="game-process-sec">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="info-card">
+                <div class="front">
+                    <div  onclick="logingGame('DG')" style="background-image: url(/images/games/DGCasino.jpg);cursor:pointer;" class="rolex-game hover box-border">
+                        <a class="fancybox" href="#">
+                            <p class="white-text text-center big-text"><span class="lang" key="dg_game"></span></p>
+                        </a>
+                    </div>
+                </div>
+                <a class="back" onclick="logingGame('DG')">
+                    <img class="img-responsive box-border" src="~/images/games/dg-back.jpg" alt="DG casino background">
+                    <div class="home-banner-lable"><b><span class="lang" key="click_play"></b></div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="info-card">
+                <div class="front">
+                    <div  onclick="logingGame('SA')" style="background-image: url(/images/games/SA.jpg);cursor:pointer;" class="rolex-game hover box-border">
+                        @*<a href="#" class="home-banner-lable-coming-soon"><b><span class="lang" key="coming_soon"></b></a>*@
+                        <a class="fancybox" href="#">
+                            <p class="white-text text-center big-text"><span class="lang" key="sa_game"></span></p>
+                        </a>
+                    </div>
+                </div>
+                <a class="back" onclick="logingGame('SA')">
+                    <img class="img-responsive box-border" src="~/images/games/sa-back2.png" alt="SA background">
+                    <div class="home-banner-lable"><b><span class="lang" key="click_play"></b></div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="info-card">
+                <div class="front">
+                    <div onclick="logingGame('SexyBaccarat')" style="background-image: url(/images/games/SexyBacc.jpg);cursor:pointer;" class="rolex-game hover box-border">
+                        @*<a href="#" class="home-banner-lable-coming-soon"><b><span class="lang" key="coming_soon"></b></a>*@
+                        <a class="fancybox" href="#">
+                            <p class="white-text text-center big-text"><span class="lang" key="sexybaccarat_game"></span></p>
+                        </a>
+                    </div>
+                </div>
+                <a class="back" onclick="logingGame('SexyBaccarat')">
+                    <img class="img-responsive box-border" src="~/images/games/sexy-back.png" alt="ag background">
+                    <div class="home-banner-lable"><b><span class="lang" key="click_play"></b></div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="info-card">
+                <div class="front">
+                    <div onclick="PlaytechIdentifiy(false)" style="background-image: url(/images/games/paytech.jpg);cursor:pointer;" class="rolex-game hover box-border">
+                        <a class="fancybox" href="#">
+                            <p class="white-text text-center big-text"><span class="lang" key="playtechlive_game"></span></p>
+                        </a>
+                    </div>
+                </div>
+                <a class="back" onclick="PlaytechIdentifiy(false)" href="#">
+                    <img class="img-responsive box-border" src="~/images/games/playtech-casino-bg.png" alt="playtech casino background">
+                    <div class="home-banner-lable"><b><span class="lang" key="click_play"></b></div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="info-card">
+                <div class="front">
+                    <div onclick="logingGame('M8')" style="background-image: url(/images/games/m8bet.png);cursor:pointer;" class="rolex-game hover box-border">
+                        <a class="fancybox" href="#">
+                            <p class="white-text text-center big-text"><span class="lang" key="m8_game"></span></p>
+                        </a>
+                    </div>
+                </div>
+                <a class="back" onclick="logingGame('M8')" href="#">
+                    <img class="img-responsive box-border" src="/images/games/m8bet-backgroung.png" alt="m8 background">
+                    <div class="home-banner-lable"><b><span class="lang" key="click_play"></b></div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="info-card">
+                <div class="front">
+                    <div onclick="AG(1)" style="background-image: url(/images/games/ag.jpg);cursor:pointer;" class="rolex-game hover box-border">
+                        <a class="fancybox" href="#">
+                            <p class="white-text text-center big-text"><span class="lang" key="aglive_game"></span></p>
+                        </a>
+                    </div>
+                </div>
+                <a class="back" onclick="AG(1)" href="#">
+                    <img class="img-responsive box-border" src="~/images/games/ag-backgroung.png" alt="ag background">
+                    <div class="home-banner-lable"><b><span class="lang" key="click_play"></b></div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="info-card">
+                <div class="front">
+                    <div onclick="PlaytechIdentifiy(true)" style="background-image: url(/images/games/slot-pt-banner.png);cursor:pointer;" class="rolex-game hover box-border">
+                        <a class="fancybox" href="#">
+                            <p class="white-text text-center big-text"><span class="lang" key="playtechslot_game"></span></p>
+                        </a>
+                    </div>
+                </div>
+                <a class="back" href="#" onclick="PlaytechIdentifiy(true)">
+                    <img class="img-responsive box-border" src="/images/games/playtech-bg.png" alt="playtech background">
+                    <div class="home-banner-lable"><b><span class="lang" key="click_play"></b></div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="info-card">
+                <div class="front">
+                    <div onclick="logingGame('MaxBet')" style="background-image: url(/images/games/maxbet-banner.jpg);cursor:pointer;" class="rolex-game hover box-border">
+                        <a class="fancybox" href="#">
+                            <p class="white-text text-center big-text"><span class="lang" key="maxbet_game"></span></p>
+                        </a>
+                    </div>
+                </div>
+                <a class="back" href="#" onclick="logingGame('MaxBet')">
+                    <img class="img-responsive box-border" src="/images/games/maxbet-back.png" alt="max-bet background">
+                    <div class="home-banner-lable"><b><span class="lang" key="click_play"></b></div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="info-card">
+                <div class="front">
+                    <div onclick="AG(8)" style="background-image: url(/images/games/AGSlotFront.jpg);cursor:pointer;" class="rolex-game hover box-border">
+                        <a class="fancybox" href="#">
+                            <p class="white-text text-center big-text"><span class="lang" key="agslot_game"></span></p>
+                        </a>
+                    </div>
+                </div>
+                <a class="back" onclick="AG(8)" href="#">
+                    <img class="img-responsive box-border" src="~/images/games/AGSlotBack.jpg" alt="ag background">
+                    <div class="home-banner-lable"><b><span class="lang" key="click_play"></b></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="kiss-918-section">
+    <ul class="card symbol">
+        <li><h4 class="white-text">918 KISS</h4></li>
+        <li><a class="more-btn common-btn" href="/Information/SlotGame" target="_blank"><span class="lang" key="load_more"></span><i class="fa fa-play" aria-hidden="true"></i></a></li>
+    </ul>
+    <div class="download-section">
+        <div class="rolex-inner mar-top-ten">
+            <div class="row">
+                <div class="col-sm-3 text-center">
+                    <a asp-page="/Information/SlotGame"><img class="kiss-pink-logo" src="~/images/918kiss-main.png" alt="918kiss-main"></a>
+                    <div class="btn-download">
+                        <a asp-page="/Information/Download" class="common-btn"><span class="lang" key="download"></span></a>
+                    </div>
+                    <div>
+                        <img width="200px;" src="~/images/googleAppleDownlaodlogo.png" alt="apple download logo" />
+                    </div><br />
+                    <div style="color:white;">
+                        <span class="lang" key="username"></span>: <span id="_918userName"></span>
+                    </div>
+                    <div style="color:white;">
+                        <span class="lang" key="password"></span>: <span id="_918resetpasswordDownload"></span>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div id="image">
+                        <div class="row">
+                        </div>
+                    </div>
+                    <div class="scroll-down-visible " id="downImage">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="kiss-918-section">
+    <ul class="card symbol">
+        <li><h4 class="white-text">Pussy888</h4></li>
+
+    </ul>
+    <div class="download-section">
+        <div class="rolex-inner mar-top-ten">
+            <div class="row">
+                <div class="col-sm-3 text-center">
+                    <a asp-page="/Information/Download#PussyDownloadOpen"><img class="kiss-pink-logo" src="~/images/pussy882.png" alt="mega888-main"></a>
+                    <div class="btn-download">
+                        <a asp-page="/Information/Download#PussyDownloadOpen" class="common-btn"><span class="lang" key="download"></span></a>
+                    </div>
+                    <div>
+                        <img width="200px;" src="~/images/googleAppleDownlaodlogo.png" alt="apple download logo" />
+                    </div><br />
+                    <div style="color:white;">
+                        <span class="lang" key="username"></span>: <span id="Pussy888userName"></span>
+                    </div>
+                    <div style="color:white;">
+                        <span class="lang" key="password"></span>: <span id="PussyresetpasswordDownload"></span>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="row">
+                        <img class="mega-banner" src="~/images/pussy888.jpg" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="kiss-918-section">
+    <ul class="card symbol">
+        <li><h4 class="white-text">Mega888</h4></li>
+       
+    </ul>
+    <div class="download-section">
+        <div class="rolex-inner mar-top-ten">
+            <div class="row">
+                <div class="col-sm-3 text-center">
+                    <a asp-page="/Information/Download#MegaDownload"><img class="kiss-pink-logo" src="~/images/mega888-main.png" alt="mega888-main"></a>
+                    <div class="btn-download">
+                        <a asp-page="/Information/Download#MegaDownload" class="common-btn"><span class="lang" key="download"></span></a>
+                    </div>
+                    <div>
+                        <img width="200px;" src="~/images/googleAppleDownlaodlogo.png" alt="apple download logo" />
+                    </div><br />
+                    <div style="color:white;">
+                        <span class="lang" key="username"></span>: <span id="mega888username"></span>
+                    </div>
+                    <div style="color:white;">
+                        <span class="lang" key="password"></span>: <span id="mega888password">Your webet333.com Password</span>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                        <div class="row">
+                            <img class="mega-banner" src="~/images/MEGA888-banner.jpg"/>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="kiss-918-section">
+    <ul class="card symbol">
+        <li><h4 class="white-text">Joker</h4></li>
+        <li><a class="more-btn common-btn" href="/Information/joker" target="_blank"><span class="lang" key="load_more"></span><i class="fa fa-play" aria-hidden="true"></i></a></li>
+    </ul>
+    <div class="download-section">
+        <div class="rolex-inner mar-top-ten">
+            <div class="row">
+                <div class="col-sm-3 text-center">
+                    <a asp-page="/Information/joker"><img class="kiss-pink-logo" src="~/images/Joker-main.png" alt="Joker-main"></a>
+                    <div class="btn-download">
+                        <a asp-page="/Information/Download" class="common-btn"><span class="lang" key="download"></span></a>
+                    </div>
+                    <div>
+                        <img width="200px;" src="~/images/googleAppleDownlaodlogo.png" alt="apple download logo" />
+                    </div><br />
+                    <div style="color:white;">
+                        <span class="lang" key="username"></span>: <span id="JokeruserName"></span>
+                    </div>
+                    <div style="color:white;">
+                        <span class="lang" key="password"></span> : <span id="Jokerresetpassword">Your webet333.com Password</span>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div id="imageJoker"></div>
+                    <div class="scroll-down-visible " id="downImageJoker">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="kiss-918-section">
+    <ul class="card symbol">
+        <li><h4 class="white-text">PlayTech</h4></li>
+        <li><a class="more-btn common-btn" onclick="PlaytechIdentifiy(false)"><span class="lang" key="load_more"></span> <i class="fa fa-play" aria-hidden="true"></i></a></li>
+    </ul>
+    <div class="download-section">
+        <div class="rolex-inner mar-top-ten">
+            <div class="row">
+                <div class="col-sm-3 text-center">
+                    <a asp-page="/Information/newtoen"><img class="kiss-pink-logo" src="~/images/playtech-main.png" alt="newtown-main"></a>
+                    <div class="btn-download">
+                        <a href="#" onclick="PlaytechIdentifiy(false)" class="common-btn"><span class="lang" key="play_now"></span></a>
+                    </div><br />
+                    <div>
+                        <img class="playtechbrowser" src="~/images/chrome.png" alt="chrome" />
+                        <img class="playtechbrowser" src="~/images/edge.png" alt="edge" />
+                        <img class="playtechbrowser" src="~/images/firefox.png" alt="firefox" />
+                        <img class="playtechbrowser" src="~/images/vivaldi.png" alt="vivaldi" />
+                        <img class="playtechbrowser" src="~/images/safari.png" alt="safari" />
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div id="imagenewtown"></div>
+                    <div class="scroll-down-visible " id="downImagenewtown">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer_nav text-center pad-comman">
+    <p class="white-text text-center pad-comman casino-text lang" key="Description"></p>
+    <ul class="list-inline text-center"></ul>
+</div>
+<button type="button" class="open-modal" data-toggle="modal" data-target="#video" style="display: none;">Open Modal</button>
+
+<div class="container">
+    <div id="loginRegister" class="modal fade">
+        <div class="modal-dialog mail-width">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <p><span class="lang" key="notLoggedIn"></span></p>
+                    <ul class="list-inline pad-top-ten">
+                        <li><button class="submit" type="button"><a asp-page="/Account/Register"><span class="lang" key="register"></span></a></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../js/slick.js" type="text/javascript" charset="utf-8"></script>

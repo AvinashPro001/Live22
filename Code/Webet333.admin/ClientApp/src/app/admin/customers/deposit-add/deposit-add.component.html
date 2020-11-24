@@ -1,0 +1,262 @@
+﻿<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/admin/customers/deposit-list">Deposit</a>
+    </li>
+    <li class="breadcrumb-item">
+        Add Deposit
+    </li>
+</ol>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-default">
+                <div class="card-body">
+                    <fieldset class="b0" style="border-bottom:groove">
+                        <legend>Add Deposit</legend>
+                    </fieldset>
+                    <div class="row">
+                        <form class="border border-light p-5">
+                            <div class="row col-md-6">
+                                <h3 class="col-md-4">Username :</h3>
+                                <div class="form-control col-md-5 mb-4">
+                                    <ngx-select-dropdown tabindex="0" [multiple]="false"
+                                                         [config]="config" [options]="customerData" (change)="onChange($event)"></ngx-select-dropdown>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="col-md-8">
+                                        <h3>Current Balance</h3>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-lg-3"><h5>Main Wallet :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{mainBal == null ? 'N/A' : mainBal}}</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>918 Kiss :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{kissBal == null ? 'N/A' : kissBal}}</h5></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-lg-3"><h5>Palytech :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{playtechBal == null ? 'N/A' : playtechBal}}</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>M8 :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{m8Bal == null ? 'N/A' : m8Bal}}</h5></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-lg-3"><h5>Joker :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{jokerBal == null ? 'N/A' : jokerBal}}</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>AG :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{agBal == null ? 'N/A' : agBal}}</h5></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-lg-3"><h5>MaxBet :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{maxbetBal == null ? 'N/A' : maxbetBal}}</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>Mega888 :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{mega888Bal == null ? 'N/A' : mega888Bal}}</h5></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-lg-3"><h5>DG :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{dgBal == null ? 'N/A' : dgBal}}</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>Sexy Baccarat :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{sexybaccaratBal == null ? 'N/A' : sexybaccaratBal}}</h5></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-lg-3"><h5>SA :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{saBal == null ? 'N/A' : saBal}}</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>Pussy888 :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{Pussy888Bal == null ? 'N/A' : Pussy888Bal}}</h5></div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-3 col-lg-3"><h5>AllBet :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{allbetBal == null ? 'N/A' : allbetBal}}</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>WM :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{wmBal == null ? 'N/A' : wmBal}}</h5></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-lg-3"><h5>Pragmatic :</h5></div>
+                                            <div class="col-sm-3 col-lg-3"><h5>{{pragmaticBal == null ? 'N/A' : pragmaticBal}}</h5></div>
+                                            
+                                        </div>
+
+                                        <!--</div>-->
+                                        <br />
+                                        <div class="step-seection">
+                                            <h3>Step:1</h3>
+                                            <p style="font-size:18px">Please check latest bank detail from our website, or contact our customer service shall you need to update the relevant information.</p>
+                                            <h3>Step:2</h3>
+                                            <p style="font-size:18px">Please fill in the deposit details.</p>
+                                        </div>
+                                        <div class="deposit-details">
+                                            <ul>
+                                                <li>
+                                                    <div class="left-part">*Bank</div>
+                                                    <div class="right-part">
+                                                        <select class="form-control" [(ngModel)]="selectedList" [ngModelOptions]="{standalone: true}" id="ddl_bank">
+                                                            <option [ngValue]="undefined" disabled selected> Please select Bank. </option>
+                                                            <option *ngFor="let b of bank" [value]="b.id">{{b.bankName}}</option>
+                                                        </select>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="left-part">Request</div>
+                                                    <div class="right-part">
+                                                        <label>Main Wallet</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="left-part">Amount</div>
+                                                    <div class="right-part">
+                                                        <input type="text" name="name" id="txt_amount" />
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="left-part">*Scanned Receipt</div>
+                                                    <form id="imageform">
+                                                        <div class="right-part">
+                                                            <input type="file" multiple (change)="selectfile($event)">
+                                                        </div>
+                                                    </form>
+                                                </li>
+
+                                                <li *ngFor="let filename of filenames" style="margin-left:50px">
+                                                    <div id="files">
+                                                        <p>{{filename}}</p>
+                                                        <button (click)="removefile(filename)">remove</button>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="left-part">Reference Number</div>
+                                                    <div class="right-part  ">
+                                                        <input type="text" name="name" id="txt_reference" />
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="left-part">Remark</div>
+                                                    <div class="right-part  ">
+                                                        <input type="text" name="name" id="txt_remark" />
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <div class="left-part">Date</div>
+                                            <div class="input-group" style="width:66%">
+                                                <input class="form-control" [owlDateTime]="dt2" placeholder="Date Time" type="text" id="txt_datetime">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt2" type="button"></button>
+                                                </div>
+                                                <owl-date-time #dt2></owl-date-time>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="step-seection">
+                                        <p>Step:3 <br />Choose your promotion (Optional)</p>
+                                    </div>
+                                    <section class="select-checkboxes" style="overflow-y:auto;height: 700px">
+                                        <ul class="promotion-choose" *ngFor="let item of promotionList; let i=index">
+                                            <li class='mar-btm-ten'>
+                                                <input type='radio' name='promotion' id={{this.promotionList[i].id}} value={{this.promotionList[i].id}} />
+                                                <div class='border promotion-content' for='rad1'>
+                                                    <img class='full-img' style="height:100px" src='{{this.promotionList[i].bannerImage }}' />
+                                                    <p class='no-mar'>"{{this.promotionList[i].promotionTitle}}"</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul>
+                                            <li><input type='radio' name='promotion' id='rad1' value="" checked /><div class='border promotion-content' ng-model='myVar' for='rad1'><p class='no-mar'>No Promotion</p></div></li>
+                                        </ul>
+                                    </section>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)=" RegisterAfterDeposite()" style="max-width:200px;align-content:center">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm</h4>
+                <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p>You have no selected any promotion, Are you sure to proceed ?</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">No</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="ConfirmDeposit()">Yes</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="myModal" [style.display]="promotionshowModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm</h4>
+                <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <img src="../../../assets/img/warning.png" width="100px" height="100px" style="margin-left:40%" />
+                <p>Please be reminded, if there is balance in your account and you can apply new promotion, the balance Would not be able to Withdraw until you completed the new promotion turnover/winturn reqirement.</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">No</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="PromotionApplyCheck()">Yes I know</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal" id="myModal" [style.display]="withoutPromotionshowModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm</h4>
+                <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <img src="../../../assets/img/warning.png" width="100px" height="100px" style="margin-left:40%" />
+                <p>Please be Reminded, If You DEPOSIT Now, You have to Complete the Turnover/Winover Requirement Before You are Able to Withdraw</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">No</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="ConfirmDeposit()">Yes I know</button>
+            </div>
+        </div>
+    </div>
+</div>

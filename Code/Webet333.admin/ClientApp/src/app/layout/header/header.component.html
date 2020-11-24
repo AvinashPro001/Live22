@@ -1,0 +1,69 @@
+<!-- START Top Navbar-->
+<nav class="navbar topnavbar" role="navigation">
+    <!-- START navbar header-->
+    <div class="navbar-header">
+        <a class="navbar-brand" href="admin/dashboard">
+            <div class="brand-logo">
+                <img style="width:200px" class="img-fluid" src="../../../assets/img/logo.gif" alt="App Logo" />
+            </div>
+            <div class="brand-logo-collapsed">
+                <img class="img-fluid" src="../../../assets/img/favicon_small.png" alt="App Logo" />
+            </div>
+        </a>
+    </div>
+    <!-- END navbar header-->
+    <!-- START Left navbar-->
+    <ul class="navbar-nav mr-auto flex-row">
+        <li class="nav-item">
+            <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+            <a class="toggle d-none d-md-block d-lg-block d-xl-block" trigger-resize="" (click)="toggleCollapsedSideabar()" *ngIf="!isCollapsedText()">
+                <em class="fa fa-navicon"></em>
+            </a>
+        </li>
+    </ul>
+    <!-- END Left navbar-->
+    <!-- START Right Navbar-->
+    <ul class="navbar-nav flex-row">
+        <!-- START Alert menu-->
+         <li class="nav-item dropdown dropdown-list" dropdown>
+            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" dropdownToggle>
+                <em class="icon-user">&nbsp; <label>{{name}}</label>&nbsp;<span class="fa fa-chevron-circle-down"></span></em>
+            </a> 
+            <!-- START Dropdown menu-->
+             <div *dropdownMenu class="dropdown-menu dropdown-menu-right animated flipInX">
+                <div class="dropdown-item"> 
+                    <!-- START list group-->
+                     <div class="list-group"> 
+                       <!-- list item-->
+                        <div class="list-group-item list-group-item-action">
+                          <div class="media" (click)="ChangePassword()">
+                             <div class="align-self-start mr-2">
+                                <em class="fa fa-key fa-2x text-info"></em>
+                             </div>
+                             <div class="media-body" >
+                                <label class="m-lg-0" >Change Password</label>
+                                
+                             </div>
+                          </div>
+                       </div> 
+                       <!-- list item-->
+                        <div class="list-group-item list-group-item-action">
+                          <div class="media" (click)="logout()">
+                             <div class="align-self-start mr-2">
+                                <em class="fa icon-logout fa-2x text-warning"></em>
+                             </div>
+                             <div class="media-body" >
+                                <label class="m-0" >Logout</label>
+                             </div>
+                          </div>
+                       </div> 
+                    </div> 
+                    <!-- END list group-->
+                 </div>
+            </div> 
+      
+    </ul>
+    <app-navsearch [visible]="getNavSearchVisible()" (onclose)="setNavSearchVisible(false)"></app-navsearch>
+
+</nav>
+<!-- END Top Navbar-->

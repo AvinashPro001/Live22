@@ -1,0 +1,35 @@
+﻿@page
+@{
+    ViewData["Title"] = "New Town";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<title>Webet333 - @ViewData["Title"] </title>
+<script src="~/js/pages/newtown.js"></script>
+<script>
+    setInterval(function () { ddlShowBalance() }, 1000);
+</script>
+<div class="account-reg pad-comman-fifteen mar-fifty">
+    <h4 class="card symbol white-text mar-btm-twentyfive"><strong>NEWTOWN</strong></h4>
+    <div class="download-section">
+        <div class="bunch-games">
+            <div class="text-center mar-btm-twentyfive">
+                <img class="kiss-pink-logo" src="../../images/newtown.png" />
+                <div class="btn-download">
+                    <a href="/Information/Download" class="common-btn"><span key="play_now" class="lang"></span></a>
+                    <a href="/Information/Download" class="common-btn"><span key="download" class="lang"></span></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10 col-md-offset-1 col-sm-offset-1">
+                    <div class="rolex-part">
+                        <div id="slotImage"></div>
+                        <div class="scroll-down-visible" id="slotDownImage"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-center down-arrow">
+    <a id="more-arrow"><img src="~/images/down-arrow.png"></a>
+</div>

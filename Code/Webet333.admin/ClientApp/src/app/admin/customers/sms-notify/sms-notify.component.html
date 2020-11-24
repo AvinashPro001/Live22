@@ -1,0 +1,49 @@
+
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">SMS Announcement</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+
+                <div class="p-2 col-md-2">
+                    <input class="form-control" type="number" id="minute" placeholder="Minutes">
+                </div>
+                <div class="p-1 col-md-2">
+                    <button class="mb-1 btn btn-success" (click)='GetUsers()' type="button">Select </button>
+                </div>
+            </div>
+            <br /><br />
+            <div>
+                Total User Selected: {{TotalUser}}
+            </div>
+            <br /><br />
+            <div>
+                <textarea class="form-control" id="msg" style="height:150px" maxlength="255" (keyup)="lengthCount()"></textarea>
+                <label>Charater:- {{totaCharaters}}/255</label>
+            </div>
+            <br /><br />
+            <div class="row col-12">
+                <div class="col-3">
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-success" (click)='SendSMS()'>Send</button>
+                </div>
+                <div class="col-1">
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-primary" (click)='ClearData()'>Clear</button>
+                </div>
+                <div class="col-2">
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</div>

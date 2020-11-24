@@ -1,0 +1,54 @@
+<div class="wrapper">
+    <div class="block-center mt-4 wd-xl">
+        <!-- START card-->
+        <div class="card card-flat">
+            <div class="card-header text-center bg-dark">
+                <a href="#">
+                    <img style="width:200px" class="block-center rounded" src="../../assets/img/logo.gif" alt="Image" />
+                </a>
+            </div>
+            <div class="card-body"> 
+                <p class="text-center py-2" style="font-size:large">SIGN IN TO CONTINUE.</p>
+                <form [formGroup]="loginForm" class="form-validate mb-3" role="form" name="loginForm" novalidate="" (submit)="login(loginForm.value)">
+                    <div class="form-group">
+                        <div class="input-group with-focus">
+                            <input class="form-control border-right-0" id="userName" type="text" name="username" placeholder="Enter Username" autocomplete="off" formControlName="userName" required="" />
+                            <div class="input-group-append">
+                                <span class="input-group-text fa fa-user text-muted bg-transparent border-left-0"></span>
+                            </div>
+                        </div>
+                        <div class="text-danger" *ngIf="loginForm.controls['userName'].hasError('required') && (loginForm.controls['userName'].dirty || loginForm.controls['userName'].touched)">This field is required</div>
+                        <div class="text-danger" *ngIf="loginForm.controls['userName'].hasError('userName') && (loginForm.controls['userName'].dirty || loginForm.controls['userName'].touched)">This field must be a valid Username address</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group with-focus">
+                            <input class="form-control border-right-0" id="password" type="password" name="password" placeholder="password" formControlName="password" required="" />
+                            <div class="input-group-append">
+                                <span class="input-group-text fa fa-lock text-muted bg-transparent border-left-0"></span>
+                            </div>
+                        </div>
+                        <div class="text-danger" *ngIf="loginForm.controls['password'].hasError('required') && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">This field is required</div>
+                        <div class="text-danger" *ngIf="loginForm.controls['password'].hasError('minlength') && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">This value is too short. It should have 6 characters or more</div>
+                        <div class="text-danger" *ngIf="loginForm.controls['password'].hasError('maxlength') && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">This value is too long. It should have 128 characters or fewer</div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="float-right">
+                            <a class="text-muted" [routerLink]="'/recover'">Forgot your password?</a>
+                        </div>
+                    </div>
+                    <button class="btn btn-block btn-primary mt-3" type="submit" [disabled]="!loginbtn" ><i
+                        class="fa fa-spinner fa-spin" *ngIf="showloader"></i>{{showloader? '' : 'Login In'}}</button>
+                </form>
+            </div>
+        </div>
+        <!-- END card-->
+        <div class="p-3 text-center">
+            <span>&copy;</span>
+            <span>{{ settings.app.year }}</span>
+            <span class="mx-2">-</span>
+            <span>{{ settings.app.name }}</span>
+            <br/>
+            <span>{{ settings.app.description }}</span>
+        </div>
+    </div>
+</div>

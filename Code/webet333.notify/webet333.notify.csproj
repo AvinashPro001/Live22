@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Configurations>Debug;Release;Stag</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Sendgrid" Version="9.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Webet333.logs.interfaces\Webet333.logs.interfaces.csproj" />
+    <ProjectReference Include="..\Webet333.models\Webet333.models.csproj" />
+    <ProjectReference Include="..\Webet333.notify.interfaces\Webet333.notify.interfaces.csproj" />
+    <ProjectReference Include="..\Webet333.queue\Webet333.queue.csproj" />
+  </ItemGroup>
+
+</Project>

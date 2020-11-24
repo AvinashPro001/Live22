@@ -1,0 +1,320 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/admin/customers/promotion-list">Promotion List</a>
+    </li>
+    <li class="breadcrumb-item">
+        Edit Promotion
+    </li>
+</ol>
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Promotion Edit</legend>
+                </div>
+            </div>
+        </div>
+        <div class="row card-body">
+            <div class="col-md-12">
+                <form class="border border-light p-5">
+                    <div class="row col-md-12">
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Start Date :</label>
+                            </div>
+                            <div class="input-group col-9">
+                                <input class="form-control" placeholder="yyyy-mm-dd"
+                                       name="dp" ngbDatepicker #d="ngbDatepicker" value="{{startDate}}" id="dp_startDate">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">End Date :</label>
+                            </div>
+                            <div class="input-group col-9">
+                                <input class="form-control" placeholder="yyyy-mm-dd"
+                                       name="dp" ngbDatepicker #d_1="ngbDatepicker" value="{{endDate}}" id="dp_endDate">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" type="button"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-md-12">
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px;margin-top:35px">Start Time :</label>
+                            </div>
+                            <div class="input-group col-1">
+                                <ngb-timepicker [(ngModel)]="timeStart" [meridian]="meridian" name="time" id="tp_startTime" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
+                            </div>
+                        </div>
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px;margin-top:35px">End Time :</label>
+                            </div>
+                            <div class="input-group col-1">
+                                <ngb-timepicker [(ngModel)]="timeEnd" [meridian]="true" name="time" id="tp_endTime" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row col-md-12">
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Daily Onces Promotions :</label>
+                            </div>
+                            <div class="input-group col-1">
+                                <label class="container">
+                                    <input type="checkbox" [checked]="data.isdailyavail" id="chk_isdaily">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <span id="question" class="fa fa-question-circle" title="user only can apply this promotion for daily once, if user apply by today,after tomorrow 12:00AM, will consider as new day, user can apply promotion again."></span>
+                        </div>
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Hide on Deposit Page :</label>
+                            </div>
+                            <div class="input-group col-1">
+                                <label class="container">
+                                    <input type="checkbox" [checked]="data.isdepositpage" id="chk_isdepositpage">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <span id="question" class="fa fa-question-circle" title="this promotion will not displayed on user and admin deposit page"></span>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row col-md-12">
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Admin Only :</label>
+                            </div>
+                            <div class="input-group col-1">
+                                <label class="container">
+                                    <input type="checkbox" [checked]="data.isadmin" id="chk_isAdmin">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <span id="question" class="fa fa-question-circle" title="only admin page will display this promotion, user cannot see on this promotion."></span>
+                        </div>
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Per User Only :</label>
+                            </div>
+                            <div class="input-group col-1">
+                                <label class="container">
+                                    <input type="checkbox" [checked]="data.isperuseronly" id="chk_isPerUser">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <span id="question" class="fa fa-question-circle" title="one user only can apply this promotion one time, if user applied this promotion before, user permanant cannot apply this promotion any more"></span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-md-12">
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Bank Account Claim Once:</label>
+                            </div>
+                            <div class="input-group col-1">
+                                <label class="container">
+                                    <input type="checkbox" [checked]="data.bankAccountClaimOnce" id="chk_isBankAccountClaimOnce">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <span id="question" class="fa fa-question-circle" title="if user A apply for this promotion A, and completed the promotion A and withdraw the monney with bank account numbers with 1234567890, and he create a new user B, apply for the same promotion A again, when user B complete promotion A, he cannot withdraw the money, will prompt error message,' your bank account number was applied for this promotion before, u cannot withdraw your money with this bank account...'"></span>
+                        </div>
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Banner Show on Main Page:</label>
+                            </div>
+                            <div class="input-group col-1">
+                                <label class="container">
+                                    <input type="checkbox" [checked]="data.isMain" id="chk_isMainPage">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <span id="question" class="fa fa-question-circle" title="if this checkbox is checked, this promotion banner image will show on home page's promotion slide show."></span>
+                        </div>
+                    </div>
+
+                    <div class="row col-md-12">
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Discount Type :</label>
+                            </div>
+                            <div class="input-group col-9">
+                                <select class="form-control" id="txt_discountTypeId" [(ngModel)]="data.discountType" [ngModelOptions]="{standalone: true}">
+                                    <option [value]="c.id" *ngFor="let c of Type" [selected]="c.id==data.discountType" [ngValue]="c">{{c.type}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Discount :</label>
+                            </div>
+                            <div class="input-group col-9">
+                                <input id="txt_discountId" type="number" value="{{data.discount}}" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-md-12">
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Title :</label>
+                            </div>
+                            <div class="input-group col-9">
+                                <input id="txt_titleId" type="text" value="{{data.title}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Sequence :</label>
+                            </div>
+                            <div class="input-group col-9">
+                                <select class="form-control" [(ngModel)]="data.sequence" [ngModelOptions]="{standalone: true}" id="ddlSequence">
+                                    <option [value]="c.id" *ngFor="let c of listType" [ngValue]="c">{{c.sequence}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-md-12">
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Upload Desktop Files :</label>
+                            </div>
+                            <div class="input-group col-9">
+                                <input type="file" (change)="fileSelectDesktop($event)" />
+                            </div>
+                        </div>
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Language :</label>
+                            </div>
+                            <div class="input-group col-9">
+                                <select class="form-control" id="ddlLanguage">
+                                    <option [value]="c.id" *ngFor="let c of Language" [ngValue]="c" [selected]="c.id==data.languageId">{{c.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-md-12">
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Upload Mobile Files :</label>
+                            </div>
+                            <div class="input-group col-9">
+                                <input type="file" (change)="fileSelectMobile($event)" />
+                            </div>
+                        </div>
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Turnover Time :</label>
+                            </div>
+                            <div class="input-group col-9">
+                                <div class="form-control">
+                                    <ngx-select-dropdown tabindex="0" [multiple]="false"
+                                                         [(ngModel)]="selectedTurnOverValue" [ngModelOptions]="{standalone: true}" [config]="config" (change)="OnSelect($event)" [options]="quantities"></ngx-select-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-md-12">
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Max Bonus :</label>
+                            </div>
+                            <div class="input-group col-9">
+                                <input id="txt_maxbonus" value="{{data.maxbonus}}" type="number" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">WinTurn :</label>
+                            </div>
+                            <div class="input-group col-9">
+                                <div class="form-control">
+                                    <ngx-select-dropdown tabindex="0" [multiple]="false" [(ngModel)]="selectedWinTurnValue" [ngModelOptions]="{standalone: true}"
+                                                         [config]="configWinTurn" (change)="OnSelectWinTurn($event)" [options]="WinTurnquantities"></ngx-select-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br /><br />
+                    <div class="row col-md-12" [style.display]="displayCategory ? 'flex' : 'none'" style="transition: display 2s;">
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px"></label>
+                            </div>
+                            <div class="input-group col-9">
+
+                            </div>
+                        </div>
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Promotion Category :</label>
+                            </div>
+                            <div class="input-group col-9">
+
+
+
+
+                                <div class="col-2">
+                                    <label style="float:right;clear:both;padding-top:6px">Live </label>
+                                </div>
+                                <div class="input-group col-1">
+                                    <label class="container">
+                                        <input type="checkbox"  [checked]="data.isLiveCategory" id="chk_isLiveCategory">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <label style="float:right;clear:both;padding-top:6px">Sports </label>
+                                </div>
+                                <div class="input-group col-1">
+                                    <label class="container">
+                                        <input type="checkbox"  [checked]="data.isSportsCategory" id="chk_isSportsCategory">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row col-md-12">
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Description :</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-left: 100px;margin-right: 105px; background-color:aliceblue">
+                        <ckeditor id="txt_descriptionId" [editor]="Editor" data="{{data.description}}" (ready)="onReady($event)" (change)="onChange($event)"></ckeditor>
+                    </div>
+                    <hr />
+                    <div align="center">
+                        <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)="UpdatePromotion()" style="max-width:200px;align-content:center">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

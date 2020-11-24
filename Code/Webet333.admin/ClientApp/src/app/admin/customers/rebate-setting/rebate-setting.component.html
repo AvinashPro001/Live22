@@ -1,0 +1,79 @@
+<div class="my-container col-md-12">
+    <div class="card card-default">
+        <div class="card-body">
+            <legend style="align-content:center">Rebate Setting</legend>
+            <div class="row">
+                <div class="row col-lg-12">
+                    <label class="col-md-2" style="font-size:15px">Sports Turnover Comm</label>
+                    <label class="col-md-1" style="font-size:15px">{{sportsvalue}}</label>
+                    <label class="col-md-2" style="font-size:15px">Live Turnover Comm</label>
+                    <label class="col-md-1" style="font-size:15px">{{livevalue}}</label>
+                    <label class="col-md-2" style="font-size:15px">Slots Turnover Comm</label>
+                    <label class="col-md-1" style="font-size:15px">{{slotsvalue}}</label>
+                    <label class="col-md-2" style="font-size:15px">Rebate Time</label>
+                    <label class="col-md-1" style="font-size:15px">{{Timevalue}}</label>
+                </div>
+                <div class="col-lg-12">
+                    <form class="text-center border border-light p-5">
+
+                        <div class="row col-md-12">
+                            <label class="col-md-5" style="font-size:20px">Sports Turnover Comm</label>
+                            <input class="col-md-5 form-control" style="text-align:center;font-size:20px" id="sportpercentage" type="number" placeholder="Sports Turnover Comm %" />
+                        </div>
+                        <br /><br />
+                        <div class="row col-md-12">
+                            <label class="col-md-5" style="font-size:20px">Live Turnover Comm</label>
+                            <input class="col-md-5 form-control" style="text-align:center;font-size:20px" id="livepercentage" type="number" placeholder="Live Turnover Comm %" />
+                        </div>
+                        <br />
+                        <div class="row col-md-12">
+                            <label class="col-md-5" style="font-size:20px">Slots Turnover Comm</label>
+                            <input class="col-md-5 form-control" style="text-align:center;font-size:20px" id="slotspercentage" type="number" placeholder="Slots Turnover Comm %" />
+                        </div>
+                        <br />
+                        <div class="row col-md-12">
+                            <label class="col-md-5" style="font-size:20px">Everyday Time Execute Rebate (24 Hours Format)</label>
+
+                            <!--<input class="col-md-1 form-control" style="text-align:right;font-size:20px" type="number" />-->
+                            <select class="col-md-1 form-control" id="hours" (change)="HourChange($event)">
+                                <option [disabled]="true" [ngValue]="">Hours</option>
+                                <option *ngFor="let c of Hours" [ngValue]="c">{{c.hour}}</option>
+                            </select>
+
+                            <label class="col-md-1"></label>
+
+                            <!--<input class="col-md-1 form-control" style="text-align:right;font-size:20px" type="number" />-->
+                            <select class="col-md-1 form-control" id="minutes" (change)="MinuteChange($event)">
+                                <option [disabled]="true" [ngValue]="">Minutes</option>
+                                <option *ngFor="let c of Minutes" [ngValue]="c">{{c.minute}}</option>
+                            </select>
+
+                            <label class="col-md-1"></label>
+
+
+                            <!--<input class="col-md-1 form-control" style="text-align:right;font-size:20px" type="number" />-->
+                            <select class="col-md-1 form-control" id="seconds" (change)="SecondChange($event)">
+                                <option [disabled]="true" [ngValue]="">Seconds</option>
+                                <option *ngFor="let c of Seconds" [ngValue]="c">{{c.second}}</option>
+                            </select>
+                            <label class="col-md-1"></label>
+                        </div>
+                        <br />
+
+                        <br />
+                        <div class="row col-md-12">
+                            <label class="col-md-6" style="text-align:right;font-size:20px"></label>
+                            <button class="col-md-1 btn btn-outline-primary" (click)="SaveRebateBetting()">Save</button>
+                            <label class="col-md-4 mb-1" style="text-align:left;font-size:20px"></label>
+                        </div>
+                        <br />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

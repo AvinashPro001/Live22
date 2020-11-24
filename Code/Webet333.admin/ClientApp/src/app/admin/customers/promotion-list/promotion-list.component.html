@@ -1,0 +1,35 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Promotion List</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2 offset-11">
+                    <button id="acceptbtn" class="mb-1  btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal">Add Promotion</button>
+                </div>
+            </div>
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
+                           [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator">
+                <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <label class="col-md-3">
+                        <button id="acceptBtn" data-id="promotionData[rowIndex].id" class="mb-1 button btn-success" type="button" data-toggle="modal" title="Edit" (click)='navigateEdit(promotionData[rowIndex])'>
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
+                    </label>
+                    <label>
+                        <button id="rejectBtn" data-id="promotionData[rowIndex].id" class="mb-1 button btn-danger" type="button" (click)='openRejectConfirmationDialog(promotionData[rowIndex].id)' title="Reject" style="margin-left:5px">
+                            <i class="fa fa-ban" aria-hidden="true"></i>
+                        </button>
+                    </label>
+                </ng-template>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+

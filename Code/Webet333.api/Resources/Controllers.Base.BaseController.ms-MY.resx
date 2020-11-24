@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="app_name" xml:space="preserve">
+    <value>WeBet333</value>
+  </data>
+  <data name="bad_response_account_delete" xml:space="preserve">
+    <value>Akaun anda telah dipadam oleh admin.</value>
+  </data>
+  <data name="bad_response_account_inactive" xml:space="preserve">
+    <value>Akaun anda belum aktif.</value>
+  </data>
+  <data name="bad_response_account_not_confirmed" xml:space="preserve">
+    <value>Sila sahkan e-mel anda untuk menerus</value>
+  </data>
+  <data name="bad_response_keyword_not_found" xml:space="preserve">
+    <value>Kata Kunci Media Sosial tidak tersedia</value>
+  </data>
+  <data name="bad_response_something_wrong" xml:space="preserve">
+    <value>Kita menghadapi beberapa masalah semasa memproses permintaan anda, sila cuba lagi kemudian.</value>
+  </data>
+  <data name="email_sub_admin_invite" xml:space="preserve">
+    <value>Anda dijemput</value>
+  </data>
+  <data name="email_sub_change_email" xml:space="preserve">
+    <value>Ubah alamat e-mel anda</value>
+  </data>
+  <data name="email_sub_change_password" xml:space="preserve">
+    <value>Kata laluan anda ditukar</value>
+  </data>
+  <data name="email_sub_confirm_email" xml:space="preserve">
+    <value>Sahkan alamat e-mel anda</value>
+  </data>
+  <data name="email_sub_reset_password" xml:space="preserve">
+    <value>Tetapkan semula kata laluan anda</value>
+  </data>
+  <data name="error_access_token_expired" xml:space="preserve">
+    <value>Token akses anda tamat tempoh, sila log masuk sekali lagi.</value>
+  </data>
+  <data name="error_account_not_verified_by_admin" xml:space="preserve">
+    <value>Akaun anda tidak disahkan oleh admin.</value>
+  </data>
+  <data name="error_bad_response_invalid_in" xml:space="preserve">
+    <value>Nilai tidak sah dalam {0}.</value>
+  </data>
+  <data name="error_email_already_used" xml:space="preserve">
+    <value>E-mel sudah digunakan.</value>
+  </data>
+  <data name="error_empty_keyword" xml:space="preserve">
+    <value>Sila masukkan kata kunci.</value>
+  </data>
+  <data name="error_empty_request" xml:space="preserve">
+    <value>Sila isi semua medan yang diperlukan.</value>
+  </data>
+  <data name="error_game_logout_failed" xml:space="preserve">
+    <value>Logout Permainan Gagal.</value>
+  </data>
+  <data name="error_game_maintenance" xml:space="preserve">
+    <value>Permainan sedang jalan maintenance</value>
+  </data>
+  <data name="error_ic_number_exists" xml:space="preserve">
+    <value>Nombor IC Sudah Ada</value>
+  </data>
+  <data name="error_image_extension" xml:space="preserve">
+    <value>Imej tidak sah. Sila muat naik fail Jpeg, Jpg atau Png.</value>
+  </data>
+  <data name="error_image_invalid" xml:space="preserve">
+    <value>Fail tidak ditemui atau ditangani.</value>
+  </data>
+  <data name="error_image_size" xml:space="preserve">
+    <value>Imej terlalu besar.</value>
+  </data>
+  <data name="error_insufficient_balance" xml:space="preserve">
+    <value>Baki tidak mencukupi dalam wallet.</value>
+  </data>
+  <data name="error_invaild_amount" xml:space="preserve">
+    <value>Anda telah memasukkan Jumlah tidak sah.</value>
+  </data>
+  <data name="error_invaild_method" xml:space="preserve">
+    <value>Anda telah memasukkan Kaedah tidak sah.</value>
+  </data>
+  <data name="error_invalid_email" xml:space="preserve">
+    <value>Anda telah memasukkan alamat e-mel yang tidak sah.</value>
+  </data>
+  <data name="error_invalid_email_password" xml:space="preserve">
+    <value>Alamat e-mel atau kata laluan tidak sah.</value>
+  </data>
+  <data name="error_invalid_grant_type" xml:space="preserve">
+    <value>Anda telah memasukkan jenis pemberian tidak sah.</value>
+  </data>
+  <data name="error_invalid_login" xml:space="preserve">
+    <value>Nama pengguna atau kata laluan tidak sah.</value>
+  </data>
+  <data name="error_invalid_mobile" xml:space="preserve">
+    <value>No telefon bimbit tidak ada</value>
+  </data>
+  <data name="error_invalid_mobile_no" xml:space="preserve">
+    <value>Anda telah memasukkan nombor yang tidak sah.</value>
+  </data>
+  <data name="error_invalid_modelstate" xml:space="preserve">
+    <value>Sila berikan data yang betul.</value>
+  </data>
+  <data name="error_invalid_password" xml:space="preserve">
+    <value>Kata laluan tidak sah.</value>
+  </data>
+  <data name="error_invalid_role" xml:space="preserve">
+    <value>Peranan tidak wujud dalam pangkalan data</value>
+  </data>
+  <data name="error_invalid_unique_id" xml:space="preserve">
+    <value>Token akses anda tamat tempoh.</value>
+  </data>
+  <data name="error_invalid_userid" xml:space="preserve">
+    <value>Id pengguna tidak sah atau anda tidak dibenarkan.</value>
+  </data>
+  <data name="error_invalid_value" xml:space="preserve">
+    <value>Anda telah memasukkan nilai tidak sah dalam permintaan.</value>
+  </data>
+  <data name="error_invalid_value_gender" xml:space="preserve">
+    <value>Sila pilih Jantina [Lelaki atau Perempuan]</value>
+  </data>
+  <data name="error_mega888_invaild_login" xml:space="preserve">
+    <value>LoginId atau Kata Laluan tidak sah.</value>
+  </data>
+  <data name="error_mega888_invaild_SN" xml:space="preserve">
+    <value>Nombor Serial tidak sah.</value>
+  </data>
+  <data name="error_mega888_invalid_method" xml:space="preserve">
+    <value>Kaedah tidak sah.</value>
+  </data>
+  <data name="error_mobileNo_already_used" xml:space="preserve">
+    <value>Nombor sudah diguna.</value>
+  </data>
+  <data name="error_not_giveup" xml:space="preserve">
+    <value>Pengguna tidak boleh berputus asa Promosi</value>
+  </data>
+  <data name="error_old_password_same" xml:space="preserve">
+    <value>Kata laluan baru mesti berbeza.</value>
+  </data>
+  <data name="error_otp_expire" xml:space="preserve">
+    <value>OTP anda telah tamat tempoh.</value>
+  </data>
+  <data name="error_otp_incorrect" xml:space="preserve">
+    <value>Anda telah memasukkan OTP yang tidak sah.</value>
+  </data>
+  <data name="error_password_length" xml:space="preserve">
+    <value>Kata laluan anda hendaklah sekurang-kurangnya 6 perkataan.</value>
+  </data>
+  <data name="error_password_required" xml:space="preserve">
+    <value>Kata laluan diperlukan. Kata laluan anda hendaklah sekurang-kurangnya 6 perkataan.</value>
+  </data>
+  <data name="error_promotion_withdraw_already_claim" xml:space="preserve">
+    <value>Anda tidak dapat menarik balik kerana anda telah mendakwa bonus selamat datang sebelum ini. Sila hubungi sokongan langsung kami</value>
+  </data>
+  <data name="error_sequence_already_used" xml:space="preserve">
+    <value>Nombor urutan sudah digunakan.</value>
+  </data>
+  <data name="error_token_already_exists" xml:space="preserve">
+    <value>Token anda sudah wujud.</value>
+  </data>
+  <data name="error_token_expired" xml:space="preserve">
+    <value>Token anda tamat tempoh.</value>
+  </data>
+  <data name="error_transaction_failed" xml:space="preserve">
+    <value>Transaksi anda belum diselesaikan.</value>
+  </data>
+  <data name="error_transfer_same_wallet" xml:space="preserve">
+    <value>Dari dan Untuk wallet tidak boleh sama.</value>
+  </data>
+  <data name="error_transfer_unsucces" xml:space="preserve">
+    <value>Pengalihan anda tidak berjaya diselesaikan.</value>
+  </data>
+  <data name="error_try_after_some_time" xml:space="preserve">
+    <value>Sila Cuba Deposit Selepas Beberapa Masa !!</value>
+  </data>
+  <data name="error_username_already_used" xml:space="preserve">
+    <value>Nama pengguna sudah digunakan.</value>
+  </data>
+  <data name="error_user_already_register" xml:space="preserve">
+    <value>Pengguna sudah mendaftar</value>
+  </data>
+  <data name="error_user_have_not_sufficient_balance_to_process_this_request" xml:space="preserve">
+    <value>Pengguna tidak mempunyai keseimbangan yang mencukupi untuk memproses permintaan ini</value>
+  </data>
+  <data name="error_user_not_found" xml:space="preserve">
+    <value>Pengguna tidak dijumpai</value>
+  </data>
+  <data name="error_user_not_found_game" xml:space="preserve">
+    <value>Pengguna tidak mendaftar dalam permainan.</value>
+  </data>
+  <data name="error_wallet_not_found" xml:space="preserve">
+    <value>Jenis Wallet Tidak Ditemui</value>
+  </data>
+  <data name="e_400" xml:space="preserve">
+    <value>tidak ada parameter</value>
+  </data>
+  <data name="e_401" xml:space="preserve">
+    <value>Nama pengguna, kata laluan atau ServID tidak sah</value>
+  </data>
+  <data name="e_402" xml:space="preserve">
+    <value>Kredit tidak mencukupi</value>
+  </data>
+  <data name="e_403" xml:space="preserve">
+    <value>Alamat IP Pelanggan tidak sah (* hanya berlaku untuk pelanggan yang mempunyai pemeriksaan IP)</value>
+  </data>
+  <data name="e_404" xml:space="preserve">
+    <value>Panjang ID Pengirim tidak sah</value>
+  </data>
+  <data name="e_405" xml:space="preserve">
+    <value>Mesej Tidak Sah. Jenis (hanya sesuai untuk jenis mesej 0, 5 &amp; 6 untuk semua negara. Kod pendek siri 6 Malaysia tidak</value>
+  </data>
+  <data name="e_406" xml:space="preserve">
+    <value>Panjang MSISDN tidak sah</value>
+  </data>
+  <data name="e_408" xml:space="preserve">
+    <value>Ralat Sistem. Sila hubungi Teknikal.</value>
+  </data>
+  <data name="e_409" xml:space="preserve">
+    <value>Ralat Sistem. Sila hubungi Teknikal.</value>
+  </data>
+  <data name="e_411" xml:space="preserve">
+    <value>MSISDN / Pelanggan yang disenaraihitamkan tidak menerima mesej promosi</value>
+  </data>
+  <data name="e_412" xml:space="preserve">
+    <value>Akaun digantung</value>
+  </data>
+  <data name="e_413" xml:space="preserve">
+    <value>Siaran tidak dibenarkan masa ini.</value>
+  </data>
+  <data name="e_414" xml:space="preserve">
+    <value>Akaun tidak aktif</value>
+  </data>
+  <data name="e_415" xml:space="preserve">
+    <value>Tiada perkhidmatan aktif</value>
+  </data>
+  <data name="e_416" xml:space="preserve">
+    <value>Akaun belum dikonfigurasikan untuk liputan ini.</value>
+  </data>
+  <data name="e_417" xml:space="preserve">
+    <value>Ralat Sistem. Sila hubungi Teknikal.</value>
+  </data>
+  <data name="e_418" xml:space="preserve">
+    <value>Ralat Sistem. Sila hubungi Teknikal.</value>
+  </data>
+  <data name="e_419" xml:space="preserve">
+    <value>Ralat Sistem. Sila hubungi Teknikal.</value>
+  </data>
+  <data name="e_420" xml:space="preserve">
+    <value>Ralat Sistem. Sila hubungi Teknikal.</value>
+  </data>
+  <data name="e_421" xml:space="preserve">
+    <value>Ralat Sistem. Sila hubungi Teknikal.</value>
+  </data>
+  <data name="e_422" xml:space="preserve">
+    <value>Pelanggan tidak mempunyai dompet aktif</value>
+  </data>
+  <data name="e_423" xml:space="preserve">
+    <value>Dompet tidak mempunyai baki yang mencukupi</value>
+  </data>
+  <data name="e_424" xml:space="preserve">
+    <value>Penjual semula belum dikonfigurasikan untuk liputan ini</value>
+  </data>
+  <data name="e_425" xml:space="preserve">
+    <value>Ralat Sistem. Sila hubungi Teknikal.</value>
+  </data>
+  <data name="e_427" xml:space="preserve">
+    <value>Tajuk siaran tidak sah</value>
+  </data>
+  <data name="e_500" xml:space="preserve">
+    <value>Ralat pelayan dalaman</value>
+  </data>
+  <data name="e_ACCEPTED" xml:space="preserve">
+    <value>Mesej telah dihantar ke SMSC (Pusat Khidmat Pesanan Ringkas).</value>
+  </data>
+  <data name="e_PROCESSING" xml:space="preserve">
+    <value>Message is yet to be delivered to SMSC, and still on queue at MACROKIOSK gateway</value>
+  </data>
+  <data name="e_UNDELIVERED" xml:space="preserve">
+    <value>Mesej gagal dihantar ke telefon bimbit.</value>
+  </data>
+  <data name="forbid_error_access" xml:space="preserve">
+    <value>Anda tidak dibenarkan mengakses kandungan ini.</value>
+  </data>
+  <data name="MAXBetCode0" xml:space="preserve">
+    <value>okey</value>
+  </data>
+  <data name="MAXBetCode1" xml:space="preserve">
+    <value>Kunci rahsia dan / atau alamat IP tidak disenaraikan putih</value>
+  </data>
+  <data name="MAXBetCode2" xml:space="preserve">
+    <value>Token sesi tidak dijumpai di Pangkalan Data vendor.</value>
+  </data>
+  <data name="MAXBetCode3" xml:space="preserve">
+    <value>Token Sesi tidak sah</value>
+  </data>
+  <data name="MAXBetCode4" xml:space="preserve">
+    <value>ID Pengendali tidak sah</value>
+  </data>
+  <data name="msg_register_msg" xml:space="preserve">
+    <value>Dear {0}, selamat datang ke WB333.
+Sila Hubungi Perkhidmatan Pelanggan kami jika anda mempunyai pertanyaan. Anda boleh menghubungi kami di WhatsApp bit.ly/3owgr7K atau ID wechat: WB333MY.</value>
+  </data>
+  <data name="not_found_response" xml:space="preserve">
+    <value>Sumber yang anda cari sama ada dialih keluar, atau tidak dijumpai.</value>
+  </data>
+  <data name="ok_response_forgot_password" xml:space="preserve">
+    <value>Anda akan menerima e-mel dengan arahan kata laluan semula, jika id email anda wujud dalam sistem kami.</value>
+  </data>
+  <data name="ok_response_success" xml:space="preserve">
+    <value>Permintaan anda telah berjaya dihantar.</value>
+  </data>
+</root>

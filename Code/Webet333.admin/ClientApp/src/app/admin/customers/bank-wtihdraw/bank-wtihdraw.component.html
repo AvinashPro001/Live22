@@ -1,0 +1,77 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Withdraw Statics</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">From Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" [owlDateTime]="dt2" placeholder="Date Time" type="text" id="txt_fromdatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt2" type="button"></button>
+                        </div>
+                        <owl-date-time  #dt2></owl-date-time>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">To Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" type="datetime" [owlDateTime]="dt1" placeholder="Date Time" type="text" id="txt_todatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt1" type="button"></button>
+                        </div>
+                        <owl-date-time  #dt1></owl-date-time>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='GetDetails()' type="button">Filter</button>
+                </div>
+            </div>
+            <div>
+                <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7">
+                    <ng-template #receipt let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                                 ngx-datatable-row-detail-template>
+                        <label>
+                            <button id="ViewBtn" data-id="Data[rowIndex].BankName" class="mb-1 button btn-success" (click)="ViewData(Data[rowIndex].bankName,receipt)" style="margin-left:5px;" data-toggle="modal">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                    </ng-template>
+                </ngx-datatable>
+            </div>
+            <div class="row col-12">
+                <div>
+                    <label><b>Unique Id:   </b>{{uniqueId}} </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><b>Total Withdraw Amount:   </b> {{totalWithdrawAmount}} </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><b>Total Withdraw:     </b> {{totalWithdraw}} </label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Remarks modal code starts-->
+<ng-template #receipt let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">View Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ngx-datatable class="material bootstrap no-detail-row" #tableDetails [rows]="rowDetails" [loadingIndicator]="loadingIndicator" [columns]="columnDetails" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="50">
+        </ngx-datatable>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+<!--Remarks modal code ends-->

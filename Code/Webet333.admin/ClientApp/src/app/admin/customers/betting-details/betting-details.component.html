@@ -1,0 +1,90 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Betting Details</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">Game</h4>
+                    <select class="form-control" id="GameName" (change)="onChange($event)">
+                        <option [disabled]="true" [ngValue]="">select Game</option>
+                        <option *ngFor="let c of listType" [ngValue]="c">{{c.gameName}}</option>
+                    </select>
+                </div>
+                <div class="p-2 col-md-2" id="fromDate" style="display:none">
+                    <h4 class="text-muted text-thin">From Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" [owlDateTime]="dt2" [disabled]="disable" placeholder="Date Time" type="text" id="txt_fromdatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt2" type="button"></button>
+                        </div>
+                        <owl-date-time [disabled]="disable" #dt2></owl-date-time>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2" id="toDate" style="display:none">
+                    <h4 class="text-muted text-thin">To Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" type="datetime" [owlDateTime]="dt1" [disabled]="disable" placeholder="Date Time" type="text" id="txt_todatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt1" type="button"></button>
+                        </div>
+                        <owl-date-time [disabled]="disable" #dt1></owl-date-time>
+                    </div>
+                </div>
+
+
+
+                <div class="p-2 col-md-2" id="startDate" style="display:none">
+                    <h4 class="text-muted text-thin">Start Date</h4>
+                    <div class="input-group">
+                        <input class="form-control" type="datetime" [owlDateTime]="dt3" placeholder="Date Time" type="text" id="txt_startdatetime">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt3" type="button"></button>
+                        </div>
+                        <owl-date-time #dt3></owl-date-time>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="p-2 col-md-2" id="gmtDiv" style="display:none">
+                    <h4 class="text-muted text-thin">GMT</h4>
+                    <select class="form-control" id="Gmt" [disabled]="gmtDisable" (change)="SelectGMT($event)">
+                        <option [disabled]="true" [ngValue]="">select GMT</option>
+                        <option *ngFor="let c of gmtList" [ngValue]="c">{{c.gmt}}</option>
+                    </select>
+                </div>
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='BettingDetails()' type="button">Betting Details</button>
+                </div>
+                <div class="p-2 col-md-2" style="position:absolute;right:0px;margin-top:35px">
+                    <button id="acceptBtn" class="mb-1 btn btn-success" (click)="Save()" type="button" data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Save</button>
+                </div>
+            </div>
+            <div>
+                <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'70'" [limit]="7" [scrollbarH]="true">
+                    <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                                 ngx-datatable-row-detail-template>
+                        <div class="row col-md-6">
+                            <div class="input-group col-9">
+                                <label class="container">
+                                    <input type="checkbox" (change)="onSelect($event, row.FetchId)"  id="chk_isdaily">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngx-datatable>
+                
+            </div>
+        </div>
+    </div>
+</div>

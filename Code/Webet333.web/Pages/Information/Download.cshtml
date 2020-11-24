@@ -1,0 +1,298 @@
+﻿@page
+@{
+    ViewData["Title"] = "Download";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<title>Webet333 - @ViewData["Title"] </title>
+<script src="../../js/pages/download.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    setInterval(function () { ddlShowBalance() }, 1000);
+</script>
+<div class="test">
+
+    <div class="profile-subdetail mar-fifty">
+
+        <div class="tab white-bg-tab-panel profile-category">
+            <button class="tablinks account-reg radius-none " onclick="openCity(event, '918Download');" id="defaultOpen" ;><span class="lang">918KISS</span></button>
+            <button class="tablinks account-reg radius-none " onclick="openCity(event, 'JokerDownload');" id="JokerDownloadOpen" ;><span class="lang">JOKER</span></button>
+            <button class="tablinks account-reg radius-none " onclick="openCity(event, 'MegaDownload');" id="MegaDownloadOpen" ;><span class="lang">MEGA888</span></button>
+            <button class="tablinks account-reg radius-none " onclick="openCity(event, 'Pussy888Download');" id="PussyDownloadOpen" ;><span class="lang">PUSSY888</span></button>
+        </div>
+
+        <div id="918Download" class="tabcontent white-bg-tab-panel account-reg radius-none">
+            <div class="info-form marginb-none">
+                <h4 class=" bg-no-repeat symbol lang download-icon mar-btm-ten"><strong class="lang" key="menu_download">DOWNLOAD</strong></h4>
+            </div>
+            <div id="download-process">
+                <ul>
+                    <li class="playstore">
+                        <div>
+                            <i class="fa fa-android text-green" style="font-size:24px;"></i><label class="text-center mar-top-ten">Android</label>
+                        </div>
+                        <figure>
+                            <img id="918KissAndroidBarcode" class="Qrcode" src="~/images/game-barcode.jpg" alt="barcode">
+                        </figure>
+                        <div class="mar-top-15">
+                            <button id="bt_down_apk_918" type="button" class="btn btn-block btn-success btn-lg btn-barcode">Android</button>
+                        </div>
+                    </li>
+                    <li class="playstore">
+                        <div>
+                            <i class="fa fa-apple text-red" style="font-size:24px;"></i><label class="text-center mar-top-ten">IOS(Iphone 5s+)</label>
+                        </div>
+                        <figure>
+                            <img id="918KissIOS64Barcode" class="Qrcode" src="~/images/game-barcode.jpg" alt="barcode">
+                        </figure>
+                        <div class="mar-top-15">
+                            <button id="bt_down_ios_918" type="button" class="btn btn-block btn-danger btn-lg btn-barcode">IOS 64 Bit</button>
+                        </div>
+                    </li>
+                    <li class="playstore">
+                        <div>
+                            <i class="fa fa-apple text-yellow" style="font-size:24px;"></i><label class="text-center mar-top-ten">IOS(Iphone 5 Or 5-)</label>
+                        </div>
+                        <figure>
+                            <img id="918KissIOSBarcode" class="Qrcode" src="~/images/game-barcode.jpg" alt="barcode">
+                        </figure>
+                        <div class="mar-top-15">
+                            <button id="bt_down_ios32__918" type="button" class="btn btn-block btn-yellow btn-lg btn-barcode">IOS 32 Bit</button>
+                        </div>
+                    </li>
+                    <div class="clear-fix"></div>
+                </ul>
+
+                <div class="access-info download-info">
+                    <p class="white-text blue-bg text-center no-mar"><spam class="lang" key="your_access_information"></spam></p>
+                    <div class="row border-bottom no-mar">
+                        <div class="col-sm-5">
+                            <p class="grey-text"><span>918Kiss <span class="lang" key="username"></span></span></p>
+                        </div>
+                        <div class="col-sm-7" style="border-left:1px solid #d7d7d7">
+                            <p class="grey-text text-center" id="_918userName"></p>
+                        </div>
+                    </div>
+                    <div class="row no-mar">
+                        <div class="col-sm-5">
+                            <p class="grey-text"><span>918Kiss <span class="lang" key="password"></span></span></p>
+                        </div>
+                        <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7">
+                            <p class="grey-text text-center" id="_918resetpassword">
+                                <label id="_918resetpasswordDownload" class="grey-text text-center"></label>
+                                <label class="grey-text text-center" id="reset918password">
+                                    <a onclick="ChangePassword(1)" class="grey-text">&nbsp;&nbsp;&nbsp;&nbsp;Reset</a>
+                                </label>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="JokerDownload" class="tabcontent white-bg-tab-panel account-reg radius-none">
+            <div class="info-form marginb-none">
+                <h4 class=" bg-no-repeat symbol lang download-icon mar-btm-ten"><strong class="lang" key="menu_download">DOWNLOAD</strong></h4>
+            </div>
+            <div id="download-process">
+                <ul class="mar-btm-twentyfive">
+                    <li class="playstore">
+                        <div>
+                            <i class="fa fa-android text-green" style="font-size:24px;"></i><label class="text-center mar-top-ten">Android</label>
+                        </div>
+                        <figure>
+                            <img id="JokerAndroidBarcode" class="Qrcode" src="~/images/game-barcode.jpg" alt="barcode">
+                        </figure>
+                        <div class="text-center mar-top-15">
+                            <button id="bt_down_apk_joker" type="button" class="btn btn-block btn-success btn-lg btn-barcode" onfocus="this.blur()">Android</button>
+                        </div>
+                    </li>
+                    <li class="appstore">
+                        <div class="text-center">
+                            <i class="fa fa-apple text-red" style="font-size:24px;"></i><label class="text-center mar-top-ten">IOS</label>
+                        </div>
+                        <figure>
+                            <img id="JokerIOSBarcode" class="Qrcode" src="~/images/game-barcode.jpg" alt="barcode">
+                        </figure>
+                        <div class="text-center mar-top-15">
+                            <button id="bt_down_ios_joker" type="button" class="btn btn-block btn-danger btn-lg btn-barcode" onfocus="this.blur()">IOS 64 Bit</button>
+                        </div>
+                    </li>
+                    <div class="clear-fix"></div>
+                </ul>
+                <div class="access-info  download-info">
+                    <p class="white-text blue-bg text-center no-mar"><spam class="lang" key="your_access_information"></spam></p>
+                    <div class="row border-bottom no-mar">
+                        <div class="col-sm-5">
+                            <p class="grey-text"><span>Joker <span class="lang" key="username"></span></span></p>
+                        </div>
+                        <div class="col-sm-7" style="border-left:1px solid #d7d7d7">
+                            <p class="grey-text text-center" id="JokeruserName"></p>
+                        </div>
+                    </div>
+                    <div class="row no-mar">
+                        <div class="col-sm-5">
+                            <p class="grey-text"><span>Joker <span class="lang" key="password"></span></span></p>
+                        </div>
+                        <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7">
+                            <p class="grey-text text-center" id="Jokerresetpassword">
+                                <a href="#" class="grey-text">Your WEBET333.COM Password</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="MegaDownload" class="tabcontent white-bg-tab-panel account-reg radius-none">
+            <div class="info-form marginb-none">
+                <h4 class=" bg-no-repeat symbol lang download-icon mar-btm-ten"><strong class="lang" key="menu_download">DOWNLOAD</strong></h4>
+            </div>
+            <div id="download-process">
+                <ul>
+                    <li class="playstore">
+                        <div>
+                            <i class="fa fa-android text-green" style="font-size:24px;"></i><label class="text-center mar-top-ten">Android</label>
+                        </div>
+                        <figure>
+                            <img id="Mega888AndroidBarcode" class="Qrcode" src="~/images/game-barcode.jpg" alt="barcode">
+                        </figure>
+                        <div class="mar-top-15">
+                            <button id="bt_down_apk_mega" type="button" class="btn btn-block btn-success btn-lg btn-barcode" onfocus="this.blur()">Android</button>
+                        </div>
+                    </li>
+                    <li class="playstore">
+                        <div>
+                            <i class="fa fa-apple text-red" style="font-size:24px;"></i><label class="text-center mar-top-ten">IOS(Iphone 5s+)</label>
+                        </div>
+                        <figure>
+                            <img id="MegaIOS64Barcode" class="Qrcode" src="~/images/game-barcode.jpg" alt="barcode">
+                        </figure>
+                        <div class="mar-top-15">
+                            <button id="bt_down_ios_mega" type="button" class="btn btn-block btn-danger btn-lg btn-barcode" onfocus="this.blur()">IOS 64 Bit</button>
+                        </div>
+                    </li>
+                    <li class="playstore">
+                        <div>
+                            <i class="fa fa-apple text-yellow" style="font-size:24px;"></i><label class="text-center mar-top-ten">IOS(Iphone 5 Or 5-)</label>
+                        </div>
+                        <figure>
+                            <img id="MegaIOSBarcode" class="Qrcode" src="~/images/game-barcode.jpg" alt="barcode">
+                        </figure>
+                        <div class="mar-top-15">
+                            <button id="bt_down_ios32_mega" type="button" class="btn btn-block btn-yellow btn-lg btn-barcode" onfocus="this.blur()">IOS 32 Bit</button>
+                        </div>
+                    </li>
+                    <div class="clear-fix"></div>
+                </ul>
+
+                <div class="access-info download-info">
+                    <p class="white-text blue-bg text-center no-mar"><spam class="lang" key="your_access_information"></spam></p>
+                    <div class="row border-bottom no-mar">
+                        <div class="col-sm-5">
+                            <p class="grey-text"><span>Mega888 <span class="lang" key="username"></span></span></p>
+                        </div>
+                        <div class="col-sm-7" style="border-left:1px solid #d7d7d7">
+                            <p class="grey-text text-center" id="mega888username">&nbsp;</p>
+                        </div>
+                    </div>
+                    <div class="row no-mar">
+                        <div class="col-sm-5">
+                            <p class="grey-text"><span>Mega888 <span class="lang" key="password"></span></span></p>
+                        </div>
+                        <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7">
+                            <p class="grey-text text-center" id="mega888password">
+                                <a href="#" class="grey-text">Your WEBET333.COM Password</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="Pussy888Download" class="tabcontent white-bg-tab-panel account-reg radius-none">
+            <div class="info-form marginb-none">
+                <h4 class=" bg-no-repeat symbol lang download-icon mar-btm-ten"><strong class="lang" key="menu_download">DOWNLOAD</strong></h4>
+            </div>
+            <div id="download-process">
+                <ul class="mar-btm-twentyfive">
+                    <li class="playstore">
+                        <div>
+                            <i class="fa fa-android text-green" style="font-size:24px;"></i><label class="text-center mar-top-ten">Android</label>
+                        </div>
+                        <figure>
+                            <img id="Pussy888AndroidBarcode" class="Qrcode" src="~/images/game-barcode.jpg" alt="barcode">
+                        </figure>
+                        <div class="text-center mar-top-15">
+                            <button id="bt_down_apk_pussy888" type="button" class="btn btn-block btn-success btn-lg btn-barcode" onfocus="this.blur()">Android</button>
+                        </div>
+                    </li>
+                    <li class="appstore">
+                        <div class="text-center">
+                            <i class="fa fa-apple text-red" style="font-size:24px;"></i><label class="text-center mar-top-ten">IOS</label>
+                        </div>
+                        <figure>
+                            <img id="Pussy888IOSBarcode" class="Qrcode" src="~/images/game-barcode.jpg" alt="barcode">
+                        </figure>
+                        <div class="text-center mar-top-15">
+                            <button id="bt_down_ios_pussy888" type="button" class="btn btn-block btn-danger btn-lg btn-barcode" onfocus="this.blur()">IOS 64 Bit</button>
+                        </div>
+                    </li>
+                    <div class="clear-fix"></div>
+                </ul>
+                <div class="access-info  download-info">
+                    <p class="white-text blue-bg text-center no-mar"><spam class="lang" key="your_access_information"></spam></p>
+                    <div class="row border-bottom no-mar">
+                        <div class="col-sm-5">
+                            <p class="grey-text"><span>Pussy888 <span class="lang" key="username"></span></span></p>
+                        </div>
+                        <div class="col-sm-7" style="border-left:1px solid #d7d7d7">
+                            <p class="grey-text text-center" id="Pussy888userName"></p>
+                        </div>
+                    </div>
+                    <div class="row no-mar">
+                        <div class="col-sm-5">
+                            <p class="grey-text"><span>Pussy888 <span class="lang" key="password"></span></span></p>
+                        </div>
+                        <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7">
+                            <p class="grey-text text-center" id="pussyresetpassword">
+
+                                <label id="PussyresetpasswordDownload" class="grey-text text-center"></label>
+                                <label class="grey-text text-center" id="Pussy888password">
+                                    <a onclick="ResetPasswordPussy888()" class="grey-text">&nbsp;&nbsp;&nbsp;&nbsp;Reset</a>
+                                </label>
+
+                                <a href="#" class="grey-text"></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.tablinks').click(function () {
+            //var offset = $('body').offset();
+            //window.scrollTo(offset);
+        });
+    })
+    $(document).ready(function () {
+
+        // Add smooth scrolling to all links
+        $(document).ready(function () {
+            if (window.location.hash) {
+                var hash = window.location.hash.substring(1);
+                if (hash == 'JokerDownload') {
+                    document.getElementById("JokerDownloadOpen").click();
+                }
+                if (hash == 'MegaDownload') {
+                    document.getElementById("MegaDownloadOpen").click();
+                }
+                if (hash == 'Pussy888Download') {
+                    document.getElementById("PussyDownloadOpen").click();
+                }
+            }
+        });
+    });
+</script>

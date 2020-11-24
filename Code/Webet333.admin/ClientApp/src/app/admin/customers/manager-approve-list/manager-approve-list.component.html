@@ -1,0 +1,112 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Manager List</legend>
+                </div>
+                <div class="col-lg-5">
+                </div>
+                <div class="col-lg-3" style="display: flex;">
+                    
+                    <div class="">
+                        <label class="container">
+                            <input type="checkbox" [checked]="AutoRefersh" id="chk_autorefersh" (change)="AutoRefershUpdate()">
+                            <span class="checkmark"></span>
+                        </label>
+
+                    </div>
+                    <div><b>Auto Refersh and Ding Ding Notification</b></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2">
+                    <h4 class="text-muted text-thin">Filter by status</h4>
+                    <select class="form-control" [(ngModel)]="selectedList" (change)="onChange($event)">
+                        <option *ngFor="let c of listType" [ngValue]="c">{{c.verified}}</option>
+                    </select>
+                </div>
+                
+            </div>
+            <div>
+                <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7">
+                    <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                                 ngx-datatable-row-detail-template>
+                        <label>
+                            <button id="acceptBtn" data-id="managerData[rowIndex].id" class="mb-1 button btn-success" type="button" (click)="OpenWindows(remark,managerData[rowIndex].id,'accept')" data-toggle="modal">
+                                <i class="fa fa-check" aria-hidden="true" title="Accept"></i>
+                            </button>
+                        </label>
+                        <label>
+                            <button id="rejectBtn" data-id="managerData[rowIndex].id" class="mb-1 button btn-danger" type="button" data-toggle="modal" (click)="OpenWindows(remark,managerData[rowIndex].id,'reject')" title="Reject" style="margin-left:5px">
+                                <i class="fa fa-ban" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                    </ng-template>
+                    <ng-template #receipt let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                                 ngx-datatable-row-detail-template>
+                        <label>
+                            <button data-id="managerData[rowIndex].id" class="mb-1 button btn-success" (click)="receiptview(managerData[rowIndex].identityProof,content)" style="margin-left:5px;">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                    </ng-template>
+                </ngx-datatable>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Receipts</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig">
+            <div ngxSlickItem *ngFor="let image of imagesUrl" class="slide">
+                <img [src]="image" id="ImageLoad" (click)="ImageOpenNewTab(image)" alt="">
+            </div>
+        </ngx-slick>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<!--Remarks modal code starts-->
+<ng-template #remark let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Please confirm..</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.close('Close click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12 col-sm-12" style="display:flex">
+                <label class="col-md-3">Manager Username</label>
+                <input type="text" id="txt_managerUsername" class="form-control col-md-6 mb-6" placeholder="" autocomplete="off" />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12 col-sm-12" style="display: flex">
+                <label class="col-md-3">Manager Password</label>
+                <input type="password" id="txt_managerPassword" class="form-control col-md-6 mb-6" placeholder="" autocomplete="off" />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+
+        <button type="button" class="btn btn-success" (click)="Accept()">Yes</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">No</button>
+    </div>
+</ng-template>
+<!--Remarks modal code ends-->

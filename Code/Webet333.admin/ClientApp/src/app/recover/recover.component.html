@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <div class="block-center mt-4 wd-xl">
+        <!-- START card-->
+        <div class="card card-flat">
+            <div class="card-header text-center bg-dark">
+                <a href="#">
+                    <img class="block-center rounded" style="width:200px" src="../../assets/img/logo.gif" alt="Image" />
+                </a>
+            </div>
+            <div class="card-body">
+                <p class="text-center py-2" style="font-size:large">FORGOT PASSWORD</p>
+                <form [formGroup]="forgetPwdForm" class="form-validate" role="form" name="recoverForm" novalidate="" (submit)="forgetPwdSubmit(forgetPwdForm.value)">
+                    <p class="text-center">Fill with your mail to receive instructions on how to reset your password.</p>
+                    <div class="form-group">
+                        <label class="text-muted">Email address</label>
+                        <div class="input-group with-focus">
+                            <input class="form-control border-right-0" type="email" name="email" placeholder="Enter email" autocomplete="off" formControlName="Email" />
+                            <div class="input-group-append">
+                                <span class="input-group-text fa fa-envelope text-muted bg-transparent border-left-0"></span>
+                            </div>
+                        </div>
+                        <div class="text-danger" *ngIf="forgetPwdForm.controls['Email'].hasError('required') && (forgetPwdForm.controls['Email'].dirty || forgetPwdForm.controls['Email'].touched)">This field is required</div>
+                        <div class="text-danger" *ngIf="forgetPwdForm.controls['Email'].hasError('Email') && (forgetPwdForm.controls['Email'].dirty || forgetPwdForm.controls['Email'].touched)">This field must be a valid email address</div>
+                    </div>
+                    <button class="btn btn-block btn-primary" type="submit">Reset</button>
+                </form>
+            </div>
+        </div>
+        <!-- END card-->
+        <div class="p-3 text-center">
+            <span>&copy;</span>
+            <span>{{ settings.app.year }}</span>
+            <span class="mx-2">-</span>
+            <span>{{ settings.app.name }}</span>
+            <br/>
+            <span>{{ settings.app.description }}</span>
+        </div>
+    </div>
+</div>
