@@ -289,6 +289,11 @@ const Report = {
             icon: 'fa fa-rocket'
         },
         {
+            text: 'User Behavior Report',
+            link: 'customers/users-behaviour-report',
+            icon: 'fa fa-rocket'
+        },
+        {
             text: 'LastUpdate Betails',
             link: 'customers/betdetails-lastupdate-list',
             icon: 'fa fa-clock-o'

@@ -218,6 +218,7 @@ exports.customer = {
     promotionGroupSelect: exports.environment.apiUrl + 'promotions/group/select',
     promotionGroupDelete: exports.environment.apiUrl + 'promotions/group/delete',
     userRegisterReport: exports.environment.apiUrl + 'account/users_register_report',
+    userBehaviorReport: exports.environment.apiUrl + 'account/users_behaviour_report',
     promotionReport: exports.environment.apiUrl + 'promotions/report',
     BettingDetailsByUsername: exports.environment.apiUrl + 'Game/GetBettingDetails',
     CustomerICNumberAdd: exports.environment.apiUrl + 'account/icnumber/insert',

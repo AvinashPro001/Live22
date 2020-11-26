@@ -4,11 +4,11 @@ import { AdminService } from '../../admin.service';
 import { customer } from '../../../../environments/environment';
 
 @Component({
-    selector: 'app-users-register-report',
-    templateUrl: './users-register-report.component.html',
-    styleUrls: ['./users-register-report.component.scss']
+  selector: 'app-users-behaviour-reports',
+  templateUrl: './users-behaviour-reports.component.html',
+  styleUrls: ['./users-behaviour-reports.component.scss']
 })
-export class UsersRegisterReportComponent implements OnInit {
+export class UsersBehaviourReportsComponent implements OnInit {
 
     rows = [];
     columns = [];
@@ -33,10 +33,9 @@ export class UsersRegisterReportComponent implements OnInit {
             { prop: 'Name' },
             { prop: 'MobileNo' },
             { prop: 'UserICNumber' },
-            { prop: 'MobileNoConfirmed' },
             { prop: 'TotalDepositAmount' },
             { prop: 'TotalWithdrawAmount' },
-            { prop: 'Created' },
+            { prop: 'TotalBonusAmount' },
         ];
 
     }
@@ -50,19 +49,18 @@ export class UsersRegisterReportComponent implements OnInit {
         let i = 0;
         let data = {
         }
-        this.adminService.add<any>(customer.userRegisterReport, data).subscribe(res => {
-            this.Data = res.data;
-            res.data.forEach(el => {
+        this.adminService.add<any>(customer.userBehaviorReport, data).subscribe(res => {
+            this.Data = res.data.res;
+            res.data.res.forEach(el => {
                 this.rows.push({
                     No: ++i,
-                    Username: el.Username,
-                    Name: el.Name,
-                    MobileNo: el.MobileNo,
-                    UserICNumber: el.UserICNumber,
-                    MobileNoConfirmed: el.MobileNoConfirmed ? "<b class='Available'>" + el.MobileNoConfirmed + "</lable>" : "<lable class='notAvailable'>" + el.MobileNoConfirmed + "</lable>",
-                    TotalDepositAmount: el.TotalDeposit,
-                    TotalWithdrawAmount: el.TotalWithdraw,
-                    Created: el.Created,
+                    Username: el.username,
+                    Name: el.name,
+                    MobileNo: el.mobileNo,
+                    UserICNumber: el.userICNumber,
+                    TotalDepositAmount: el.totalDeposit,
+                    TotalWithdrawAmount: el.totalWithdraw,
+                    TotalBonusAmount: el.totalBonus,
                 });
 
             });
@@ -78,39 +76,32 @@ export class UsersRegisterReportComponent implements OnInit {
         this.rows = [];
         this.loadingIndicator = true;
         let i = 0;
-        
-        var otpCheck;
-
-        var verified = (document.getElementById("Verified") as HTMLInputElement).checked
-        var unverified = (document.getElementById("Unverified") as HTMLInputElement).checked
-
-        if (verified)
-            otpCheck = verified;
-
-        if (unverified)
-            otpCheck = unverified;        
-
-        if (unverified && unverified)
-            otpCheck = null;
 
         let data = {
             fromdate: (document.getElementById("txt_fromdatetime") as HTMLInputElement).value == "" ? null : (document.getElementById("txt_fromdatetime") as HTMLInputElement).value,
             todate: (document.getElementById("txt_todatetime") as HTMLInputElement).value == "" ? null : (document.getElementById("txt_todatetime") as HTMLInputElement).value,
-            otpVerified: otpCheck
+            depositTimes: (document.getElementById("depositTimes") as HTMLInputElement).value == "" ? 0 : (document.getElementById("depositTimes") as HTMLInputElement).value,
+            promotionApply: (document.getElementById("applypromotion") as HTMLInputElement).checked,
+            playSlot: (document.getElementById("isslot") as HTMLInputElement).checked,
+            playSports: (document.getElementById("issport") as HTMLInputElement).checked,
+            playLiveCasino: (document.getElementById("islive") as HTMLInputElement).checked,
+            depositAmount: (document.getElementById("depositamount") as HTMLInputElement).value == "" ? 0 : (document.getElementById("depositamount") as HTMLInputElement).value,
+            loseAmount: (document.getElementById("loseamount") as HTMLInputElement).value == "" ? 0 : (document.getElementById("loseamount") as HTMLInputElement).value,
+            winAmount: (document.getElementById("winamount") as HTMLInputElement).value == "" ? 0 : (document.getElementById("winamount") as HTMLInputElement).value,
         }
-        this.adminService.add<any>(customer.userRegisterReport, data).subscribe(res => {
-            this.Data = res.data;
-            res.data.forEach(el => {
+
+        this.adminService.add<any>(customer.userBehaviorReport, data).subscribe(res => {
+            this.Data = res.data.res;
+            res.data.res.forEach(el => {
                 this.rows.push({
                     No: ++i,
-                    Username: el.Username,
-                    Name: el.Name,
-                    MobileNo: el.MobileNo,
-                    UserICNumber: el.UserICNumber,
-                    MobileNoConfirmed: el.MobileNoConfirmed ? "<b class='Available'>" + el.MobileNoConfirmed + "</lable>" : "<lable class='notAvailable'>" + el.MobileNoConfirmed + "</lable>",
-                    TotalDepositAmount: el.TotalDeposit,
-                    TotalWithdrawAmount: el.TotalWithdraw,
-                    Created: el.Created,
+                    Username: el.username,
+                    Name: el.name,
+                    MobileNo: el.mobileNo,
+                    UserICNumber: el.userICNumber,
+                    TotalDepositAmount: el.totalDeposit,
+                    TotalWithdrawAmount: el.totalWithdraw,
+                    TotalBonusAmount: el.totalBonus,
                 });
 
             });
@@ -127,11 +118,11 @@ export class UsersRegisterReportComponent implements OnInit {
 
         let data = {
             json: this.Data,
-            fileName: "Users-Register"
+            fileName:"Users-Behaviour"
         }
 
         this.adminService.add<any>(customer.DownlaodExcel, data).subscribe(res => {
-
+            
             window.self.location = res.data.path;
         }, error => {
             this.loadingIndicator = false;

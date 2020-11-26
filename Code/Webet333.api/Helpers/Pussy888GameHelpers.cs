@@ -57,11 +57,35 @@ namespace Webet333.api.Helpers
 
         #endregion
 
+        #region Randon Password Genrate
+        public static string genrate6DigitPassword()
+        {
+            string charsetOne = "0123456789", charsetTwo = "0123456789",  randomstring = "";
+            Random rand = new Random();
+
+            for (int i = 0; i < 3; i++)
+            {
+                int rnumOne = (int)Math.Floor(rand.NextDouble() * charsetOne.Length);
+                randomstring += charsetOne.Substring(rnumOne, 1);
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                int rnumTwo = (int)Math.Floor(rand.NextDouble() * charsetTwo.Length);
+                randomstring += charsetTwo.Substring(rnumTwo, 1);
+            }
+
+            return randomstring;
+        }
+
+        #endregion
+
         #region Pussy888 Game Register API
 
-        internal static async Task<UserRegisterResponse> CallRegisterAPI(string MobileNo, string Name)
+        internal static async Task<UserRegisterResponse> CallRegisterAPI(string MobileNo, string Name,string Pass)
         {
-            var Password = genratePassword();
+            //var Password = genratePassword();
+            var Password = "WB3@" + Pass;
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             var RandomUsernameUrl = $"{GameConst.Pussy888.BaseUrl}{GameConst.Pussy888.RandomUsername}" +
                 $"&userName={GameConst.Pussy888.agent}" +
@@ -77,7 +101,7 @@ namespace Webet333.api.Helpers
                 var username = randomUsernameResponse.account;
                 var url = $"{GameConst.Pussy888.BaseUrl}{GameConst.Pussy888.Register}" +
                     $"&agent={GameConst.Pussy888.agent}" +
-                    $"&PassWd={Password}" +
+                    $"&PassWd={Password.Substring(0,14)}" +
                     $"&userName={username}" +
                     $"&Name={Name}" +
                     $"&Tel={MobileNo}" +
@@ -203,7 +227,6 @@ namespace Webet333.api.Helpers
         }
 
         #endregion
-
 
         #region House Keeping
 

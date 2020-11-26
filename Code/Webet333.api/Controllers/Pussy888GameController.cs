@@ -43,14 +43,15 @@ namespace Webet333.api.Controllers
                 if (string.IsNullOrEmpty(request.Id))
                     return BadResponse("error_invalid_modelstate");
 
-            string username, MobileNo;
+            string username, MobileNo,password;
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
                 username = user.Pussy888GamePrefix + user.Username;
                 MobileNo = user.MobileNo;
+                password = user.Password;
             }
-            var result = await Pussy888GameHelpers.CallRegisterAPI(MobileNo, username);
+            var result = await Pussy888GameHelpers.CallRegisterAPI(MobileNo, username, password);
             using (var pussy888_helper = new Pussy888GameHelpers(Connection))
             {
                 if (result.Code != 0) return BadResponse(JsonConvert.SerializeObject(result));

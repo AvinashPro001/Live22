@@ -272,6 +272,7 @@ export const customer = {
     promotionGroupDelete: environment.apiUrl + 'promotions/group/delete',
 
     userRegisterReport: environment.apiUrl + 'account/users_register_report',
+    userBehaviorReport: environment.apiUrl + 'account/users_behaviour_report',
 
     promotionReport: environment.apiUrl + 'promotions/report',
     BettingDetailsByUsername: environment.apiUrl + 'Game/GetBettingDetails',

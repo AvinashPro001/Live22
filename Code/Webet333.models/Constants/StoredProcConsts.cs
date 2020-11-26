@@ -79,6 +79,8 @@
 
             public const string AdminUsersRegisterSelect = "[dbo].[Admin_Users_Register_Report]";
 
+            public const string AdminUsersBehaviourSelect = "[dbo].[Admin_Users_Behaviour_Report]";
+
             public const string SMSUserList = "[dbo].[Sms_Users_Select]";
 
             public const string LastLoginTimeUpdate = "[dbo].[User_LastLoginTime_Update]";

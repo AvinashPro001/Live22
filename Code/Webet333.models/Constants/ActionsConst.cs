@@ -60,6 +60,10 @@
 
             public const string AdminRegisterReportSelect = "account/users_register_report";
 
+            public const string AdminBehaviourReportSelect = "account/users_behaviour_report";
+
+            public const string ExcelDownload = "excel/download";
+
             public const string SmsList = "account/sms/users/list";
 
             public const string SendSMS = "account/sms/send/";

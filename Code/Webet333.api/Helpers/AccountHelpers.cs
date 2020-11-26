@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
@@ -372,6 +378,28 @@ namespace Webet333.api.Helpers
             }
         }
 
+        public async Task<dynamic> AdminBehaviourReportSelect(AdminBehaviourReportRequest request)
+        {
+            using (var repository = new DapperRepository<AdminBehaviourReportResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Account.AdminUsersBehaviourSelect, new { request.ToDate, request.FromDate, request.DepositAmount, request.WinAmount, request.DepositTimes, request.PromotionApply, request.LoseAmount, request.PlayLiveCasino, request.PlaySlot, request.PlaySports });
+                var res= result.ToList();
+                var totalUser = res.Count();
+                var totalDeposit = res.Sum(x=>x.TotalDeposit);
+                var totalWithdraw= res.Sum(x => x.TotalWithdraw);
+                var totalBonus = res.Sum(x => x.TotalBonus);
+
+                return new
+                {
+                    totalUser,
+                    totalDeposit,
+                    totalWithdraw,
+                    totalBonus,
+                    res
+                };
+            }
+        }
+
         public async Task<List<SmsUsersList>> SmsUserList(SmsListRequest request)
         {
             using (var repository = new DapperRepository<SmsUsersList>(Connection))
@@ -464,6 +492,59 @@ namespace Webet333.api.Helpers
                 return icImageResponse;
             }
 
+        }
+
+        public static async Task SaveExcelFile(string fileName,string Path,dynamic json)
+        {
+            if (!Directory.Exists(Path))
+                Directory.CreateDirectory(Path);
+            string fullpath = Path + fileName;
+            DataTable table = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(json), (typeof(DataTable)));
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(fullpath, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                var sheetData = new SheetData();
+                worksheetPart.Worksheet = new Worksheet(sheetData);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Sheet1" };
+
+                sheets.Append(sheet);
+
+                Row headerRow = new Row();
+
+                List<String> columns = new List<string>();
+                foreach (System.Data.DataColumn column in table.Columns)
+                {
+
+                    columns.Add(column.ColumnName);
+                    Cell cell = new Cell();
+                    cell.DataType = CellValues.String;
+                    cell.CellValue = new CellValue(column.ColumnName);
+                    headerRow.AppendChild(cell);
+                }
+
+                sheetData.AppendChild(headerRow);
+
+                foreach (DataRow dsrow in table.Rows)
+                {
+                    Row newRow = new Row();
+                    foreach (String col in columns)
+                    {
+                        Cell cell = new Cell();
+                        cell.DataType = CellValues.String;
+                        cell.CellValue = new CellValue(dsrow[col].ToString());
+                        newRow.AppendChild(cell);
+                    }
+
+                    sheetData.AppendChild(newRow);
+                }
+
+                workbookPart.Workbook.Save();
+            }
         }
 
         #region Send SMS API

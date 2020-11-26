@@ -10,6 +10,8 @@
 
         public string ImageLocalPath { get; set; }
 
+        public string ExcelLocalPath { get; set; }
+
         public string BankImage { get; set; }
 
         public string BankIconImage { get; set; }
@@ -32,5 +34,7 @@
         public string ManagerProof { get; set; }
 
         public string UserICImage { get; set; }
+
+        public string ExcelFilesPath { get; set; }
     }
 }

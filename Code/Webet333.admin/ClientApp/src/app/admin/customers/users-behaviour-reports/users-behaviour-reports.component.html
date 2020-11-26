@@ -3,7 +3,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-lg-4">
-                    <legend class="main-title">User Register Report</legend>
+                    <legend class="main-title">User Behaviour Report</legend>
                 </div>
             </div>
         </div>
@@ -35,31 +35,75 @@
                     <button class="mb-1 btn btn-success" (click)='FilterData()' type="button">Filter</button>&nbsp;&nbsp;
                     <button class="mb-1 btn btn-outline-green" (click)='DownloadExcel()' type="button">Download Excel</button>
                 </div>
+
+
             </div>
+
+            <br /><br />
 
             <div class="row col-12 ">
                 <div class="row col-md-2">
-                        <label>OTP Verified User :</label>
+                    <label>No Apply Promotion :</label>
                     <div class="input-group col-1">
                         <label class="container">
-                            <input type="checkbox" id="Verified">
+                            <input type="checkbox" id="applypromotion">
                             <span class="checkmark"></span>
                         </label>
                     </div>
                 </div>
                 <div class="row col-md-2">
-                    <label>OTP Unverified User :</label>
+                    <label>Play Slot Game :</label>
                     <div class="input-group col-1">
                         <label class="container">
-                            <input type="checkbox" id="Unverified">
+                            <input type="checkbox" id="isslot">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row col-md-2">
+                    <label>Play Live Casino Game :</label>
+                    <div class="input-group col-1">
+                        <label class="container">
+                            <input type="checkbox" id="islive">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row col-md-2">
+                    <label>Play Sport Game :</label>
+                    <div class="input-group col-1">
+                        <label class="container">
+                            <input type="checkbox" id="issport">
                             <span class="checkmark"></span>
                         </label>
                     </div>
                 </div>
             </div>
 
+            <br /><br />
+            <div class="row col-12 ">
 
+                <div class="row col-md-3">
+                    <label style="margin-top:5px">Deposit More Than Times :</label>&nbsp;&nbsp;&nbsp;
+                    <input class="form-control col-md-3" type="number" id="depositTimes">
+                </div>
 
+                <div class="row col-md-3">
+                    <label style="margin-top:5px">Deposit More Than :</label>&nbsp;&nbsp;&nbsp;
+                    <input class="form-control col-md-3" type="number" id="depositamount">
+                </div>
+
+                <div class="row col-md-3">
+                    <label style="margin-top:5px">Lose More Than :</label>&nbsp;&nbsp;&nbsp;
+                    <input class="form-control col-md-3" type="number" id="loseamount">
+                </div>
+
+                <div class="row col-md-3">
+                    <label style="margin-top:5px">Win More Than :</label>&nbsp;&nbsp;&nbsp;
+                    <input class="form-control col-md-3" type="number" id="winamount">
+                </div>
+            </div>
+            <br /><br />
             <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="50"
                            [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
 

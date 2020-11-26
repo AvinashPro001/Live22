@@ -21,6 +21,11 @@ using Webet333.models.Request.Payments;
 using Webet333.models.Response.Account;
 using Webet333.notify.interfaces.Email;
 using Webet333.models.Response.SMS;
+using System.Data;
+using Newtonsoft.Json;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml;
 
 namespace Webet333.api.Controllers
 {
@@ -838,6 +843,36 @@ namespace Webet333.api.Controllers
         }
 
         #endregion 
+
+        #region Admin User Behaviour Select
+
+        [Authorize]
+        [HttpPost(ActionsConst.Account.AdminBehaviourReportSelect)]
+        public async Task<IActionResult> AdminBehaviourReportSelect([FromBody] AdminBehaviourReportRequest request)
+        {
+            await CheckUserRole();
+            using (var account_help = new AccountHelpers(Connection))
+            {
+                var result = await account_help.AdminBehaviourReportSelect(request);
+                return OkResponse(result);
+            }
+        }
+
+        #endregion 
+
+
+        #region Download Excel File
+
+        [HttpPost(ActionsConst.Account.ExcelDownload)]
+        public async Task<IActionResult> DownloadExcel([FromBody] ExcelExportRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOption)
+        {
+            var fileName = request.FileName + "-" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + ".xlsx";
+            await AccountHelpers.SaveExcelFile(fileName, BaseUrlConfigsOption.Value.ExcelLocalPath + "\\", request.json);
+            return OkResponse(new { path = BaseUrlConfigsOption.Value.ImageBase + BaseUrlConfigsOption.Value.ExcelFilesPath + "/" + fileName });
+        }
+
+        #endregion
+
 
 
         //#region check password
