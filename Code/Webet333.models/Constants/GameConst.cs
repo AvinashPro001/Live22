@@ -374,6 +374,8 @@
 
             public const string BettingDetails = "ashx/AgentTotalReport.ashx?";
 
+            public const string PlayerLog = "ashx/GameLog.ashx?";
+
             public const string agent = "webetapi";
         }
 

@@ -267,6 +267,8 @@
 
             public const string GetAllGameUsers = "[dbo].[gameUser_Select]";
 
+            public const string Kiss918UserPasswordResetSelect = "[dbo].[Kiss918_User_Password_Reset_Select]";
+
             public const string ManuallyPromotionExpiery = "[dbo].[Manually_Promotion_Expiery]";
 
             public const string GameLastBettingUpdate = "[dbo].[Game_LastBetting_Update]";

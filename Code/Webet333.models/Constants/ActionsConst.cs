@@ -294,6 +294,8 @@
 
             public const string Kiss918_ResetPassword = "Game/Kiss918/ResetPassword";
 
+            public const string AllUsers_Kiss918_ResetPassword = "Game/Kiss918_AllUsers/ResetPassword";
+
             public const string GameJokerRegister = "Game/Joker/Register";
 
             public const string GamePlaytechRegister = "Game/Playtech/Register";

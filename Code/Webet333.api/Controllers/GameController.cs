@@ -2951,6 +2951,47 @@ namespace Webet333.api.Controllers
 
         #endregion
 
+        #region All 918 Kiss game users password reset
+
+        [Authorize]
+        [HttpGet(ActionsConst.Game.AllUsers_Kiss918_ResetPassword)]
+        public async Task<IActionResult> Kiss918GameAllUsersPasswordReset()
+        {
+            await ValidateUser();
+            using (var game_helper = new GameHelpers(Connection))
+            {
+                var users = await game_helper.GetAllKiss918Usersname();
+                
+
+                List<Kiss918PasswordResetResponse> list = new List<Kiss918PasswordResetResponse>();
+                foreach (var user in users)
+                {
+                    var newPassword = "WB3@" + SecurityHelpers.DecryptPassword(user.Password);
+                    if (newPassword.Length > 14)
+                        newPassword = newPassword.Substring(0, 14);
+
+                    var request = new ProfileResponse();
+                    request.Password918 = user.KissPassword;
+                    request.UserName918 = user.KissUsername;
+                    request.UserName = user.Username;
+
+                    var result = await game_helper.Kiss918GamePasswordReset(request, newPassword);
+                    if (result.code == 0)
+                    {
+                        var profileUpdateRequest = new ProfileEditRequest();
+                        profileUpdateRequest.Id = user.Id;
+                        profileUpdateRequest.Password918 = newPassword;
+                        using (var user_help = new UserHelpers(Connection))
+                            await user_help.UpdateProfile(profileUpdateRequest);
+                    }
+                    list.Add(result);
+                }
+                return OkResponse(new { list });
+            }
+        }
+
+        #endregion
+
         #region 918 Kiss Player Log
 
         [HttpPost(ActionsConst.Game.Kiss918PlayerLog)]

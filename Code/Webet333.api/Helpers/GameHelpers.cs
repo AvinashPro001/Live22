@@ -1314,6 +1314,19 @@ namespace Webet333.api.Helpers
 
         #endregion
 
+        #region GET ALL 918 Kiss GAME USERS
+
+        public async Task<List<Kiss918GamePasswordResetResponse>> GetAllKiss918Usersname()
+        {
+            using (var repository = new DapperRepository<Kiss918GamePasswordResetResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Game.Kiss918UserPasswordResetSelect, new {  });
+                return result.ToList(); ;
+            }
+        }
+
+        #endregion
+
         #region Get users List of Promotion Expiery
         internal async Task<List<ExpieryPromotionResponse>> GetListPromotionExpiery()
         {
