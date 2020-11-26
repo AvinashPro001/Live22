@@ -2525,7 +2525,7 @@ namespace Webet333.api.Controllers
                     if (expieryUsersList.Joker)
                     {
                         var resultJoker = await gamebalanceHelper.CallJokerGameBalance(JokerGamePrefix + expieryUsersList.Username);
-                        expieryUsersList.JokerBalance = Convert.ToDecimal(resultJoker);
+                        expieryUsersList.JokerBalance = Convert.ToDecimal(resultJoker.JokerBalance);
                     }
 
                     if (expieryUsersList.Pussy888)

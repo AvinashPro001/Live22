@@ -139,6 +139,7 @@ export const customer = {
 
     pragmaticBrokenStatus: environment.apiUrl + 'pragmatic/broken',
     playtechBrokenStatus: environment.apiUrl + 'playtech/broken',
+    jokerBrokenStatus: environment.apiUrl + 'joker/broken',
 
 
     depositDdl: environment.apiUrl + 'payments/deposit/dropdown_deposit',

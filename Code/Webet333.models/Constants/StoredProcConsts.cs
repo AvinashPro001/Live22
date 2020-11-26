@@ -434,6 +434,11 @@
             public const string BrokenStatus = "[dbo].[Pragmatic_BrokenToken_Update]";
         }
 
+        public class Joker
+        {
+            public const string BrokenStatus = "[dbo].[Joker_Broken_Status_Check]";
+        }
+
         public class WM
         {
             public const string Register = "[dbo].[Users_Insert_WM]";

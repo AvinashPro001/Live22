@@ -115,7 +115,7 @@ namespace Webet333.api.Helpers
 
         #region Call API of Joker game
 
-        public async Task<string> CallJokerGameBalance(string username)
+        public async Task<dynamic> CallJokerGameBalance(string username)
         {
             DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
@@ -126,18 +126,20 @@ namespace Webet333.api.Helpers
                             $"AppID={GameConst.Joker.AppID}&" +
                             $"Signature={GameHelpers.GenerateHas(perameter)}";
 
-            string JokerBalance = null;
+            string JokerBalance = null,status=null;
             try
             {
                 dynamic resultJoker = JsonConvert.DeserializeObject(await GameBalanceHelpers.CallThirdPartyApi(jokerURL, stringContent));
                 JokerBalance = resultJoker.Credit == null ? null : resultJoker.Credit;
+                status=Convert.ToDecimal(resultJoker.OutstandingCredit) > 0 ? "completed" : "waiting";
             }
             catch (Exception ex)
             {
                 JokerBalance = null;
+                status = "waiting";
             }
 
-            return JokerBalance;
+            return new { JokerBalance,status };
         }
 
         #endregion
@@ -469,11 +471,11 @@ namespace Webet333.api.Helpers
 
         #region Joker balance update
 
-        internal async Task<dynamic> JokerBalanceUpdate(string UserId, string Amount)
+        internal async Task<dynamic> JokerBalanceUpdate(string UserId, string Amount,string Status)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                return await repository.FindAsync(StoredProcConsts.GameBalance.JokerGameBalanceUpdate, new { UserId, Amount });
+                return await repository.FindAsync(StoredProcConsts.GameBalance.JokerGameBalanceUpdate, new { UserId, Amount, Status });
             }
         }
 

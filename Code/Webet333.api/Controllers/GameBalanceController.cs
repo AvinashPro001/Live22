@@ -125,11 +125,11 @@ namespace Webet333.api.Controllers
             {
                 using (var gamehelper = new GameBalanceHelpers(Connection))
                 {
-                    string JokerBalance = await gamehelper.CallJokerGameBalance(request.Username);
+                    dynamic JokerBalance = await gamehelper.CallJokerGameBalance(request.Username);
 
-                    previousBalance = await gamehelper.JokerBalanceUpdate(request.Id, JokerBalance);
+                    previousBalance = await gamehelper.JokerBalanceUpdate(request.Id, JokerBalance.JokerBalance,JokerBalance.status);
 
-                    return OkResponse(new { balance = JokerBalance, previousBalance.PreviousBalance });
+                    return OkResponse(new { balance = JokerBalance.JokerBalance, previousBalance.PreviousBalance });
                 }
             }
             string response = null;

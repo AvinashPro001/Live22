@@ -354,7 +354,8 @@ async function DoRegister() {
         //WEBET333 Account Create
         var res = await PostMethodRegister(apiEndPoints.register, model);
         if (res !== null && res !== undefined) {
-
+            if ((res.data.messageResponse.statusCode.split(",").length - 1) == 0)
+                ShowError(res.data.messageResponse.smsMessage);
             let model = {
                 userName: $('#m_regsiter_username').val(),
                 password: $("#m_regsiter_password").val(),

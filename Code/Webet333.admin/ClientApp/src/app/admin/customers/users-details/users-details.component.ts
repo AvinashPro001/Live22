@@ -21,6 +21,7 @@ export class UsersDetailsComponent implements OnInit {
 
     userPlaytechUnfinished: any;
     userPragmaticUnfinished: any;
+    userJokerUnfinished: any;
 
     userWalletBalance: any;
 
@@ -1369,7 +1370,7 @@ export class UsersDetailsComponent implements OnInit {
 
     unfinishedShow(content) {
         if (this.userid != null && this.userid != undefined) {
-                this.openWindowCustomClass(content);
+            this.openWindowCustomClass(content);
         }
         else
             this.toasterService.pop('error', 'Error', "Select Username");
@@ -1390,7 +1391,7 @@ export class UsersDetailsComponent implements OnInit {
             this.unfinishedPlaytechRows = [];
             res.data.response.result.forEach(el => {
                 this.unfinishedPlaytechRows.push({
-                    No:++i,
+                    No: ++i,
                     Playername: el.playername,
                     Bet: el.bet,
                     Brokengametype: el.brokengametype,
@@ -1424,5 +1425,15 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
         });
+
+
+        let dataJoker = {
+            id: this.userid
+        }
+        this.adminService.add<any>(customer.jokerBrokenStatus, dataJoker).subscribe(res => {
+            this.userJokerUnfinished = res.data.BrokenStatus;
+        });
+
+
     }
 }

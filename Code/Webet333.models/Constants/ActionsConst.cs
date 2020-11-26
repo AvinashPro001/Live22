@@ -478,6 +478,11 @@
             public const string Broken = "pragmatic/broken";
         }
 
+        public class Joker
+        {
+            public const string Broken = "joker/broken";
+        }
+
         public class WM
         {
             public const string Register = "wm/register";
