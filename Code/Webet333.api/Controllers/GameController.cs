@@ -337,6 +337,10 @@ namespace Webet333.api.Controllers
             var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
 
             string bodyParameter = $"EndDate={request.ToDate.ToString("yyyy-MM-dd")}&Method=RWL&StartDate={request.FromDate.ToString("yyyy-MM-dd")}&Timestamp={temp}";
+
+            if (request.Username != null)
+                bodyParameter += $"&Username={request.Username}";
+
             var url = $"{GameConst.Joker.jokerBaseUrl}?" +
                       $"AppID={GameConst.Joker.AppID}" +
                       $"&Signature={GameHelpers.GenerateHas(bodyParameter)}";
@@ -408,6 +412,10 @@ namespace Webet333.api.Controllers
                             $"&startdate={request.FromDate.ToString("yyyy-MM-dd HH:mm:ss")}" +
                             $"&enddate={request.ToDate.ToString("yyyy-MM-dd HH:mm:ss")}" +
                             $"&page={i}";
+
+                if (request.Username != null)
+                    url += $"&playername={request.Username.ToUpper()}";
+
                 DefaultHelper defaultHelper = new DefaultHelper(_hostingEnvironment);
                 string responseString = await defaultHelper.PlaytechAPICertificate(url, true);
 
@@ -619,6 +627,9 @@ namespace Webet333.api.Controllers
             dict.Add("endTime", request.ToDate);
             dict.Add("platform", "SEXYBCRT");
 
+            if (request.Username != null)
+                dict.Add("userId", request.Username);
+
 
             HttpClientHandler handler = new HttpClientHandler()
             {
@@ -655,6 +666,9 @@ namespace Webet333.api.Controllers
                     $"&Time={time}" +
                     $"&FromTime={request.FromDate:yyyy-MM-dd HH:mm:ss}" +
                     $"&ToTime={request.ToDate:yyyy-MM-dd HH:mm:ss}";
+
+            if (request.Username != null)
+                qs += $"&Username={request.Username}";
 
             var q = HttpUtility.UrlEncode(SecurityHelpers.DESEncrptText(qs, GameConst.SAConst.DESEncrptKey));
             var s = SecurityHelpers.MD5EncrptText(qs + GameConst.SAConst.MD5Key + time + GameConst.SAConst.SecretKey);
@@ -2961,7 +2975,7 @@ namespace Webet333.api.Controllers
             using (var game_helper = new GameHelpers(Connection))
             {
                 var users = await game_helper.GetAllKiss918Usersname();
-                
+
 
                 List<Kiss918PasswordResetResponse> list = new List<Kiss918PasswordResetResponse>();
                 foreach (var user in users)
@@ -3052,12 +3066,13 @@ namespace Webet333.api.Controllers
                     }
                 }
 
-                if (result.results != null)
-                    if (result.results.Count > 0)
-                        using (var game_helper = new GameHelpers(Connection))
-                        {
-                            game_helper.Kiss918PlayerLogInsert(result.results, kiss918UserName);
-                        }
+                if (!request.SaveInDB)
+                    if (result.results != null)
+                        if (result.results.Count > 0)
+                            using (var game_helper = new GameHelpers(Connection))
+                            {
+                                game_helper.Kiss918PlayerLogInsert(result.results, kiss918UserName);
+                            }
             }
 
 

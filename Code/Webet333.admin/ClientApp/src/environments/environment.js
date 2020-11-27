@@ -7,9 +7,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.Game = exports.account = exports.environment = void 0;
 exports.environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
     //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:55861/api/v1/'
+    apiUrl: 'http://localhost:55861/api/v1/'
 };
 exports.account = {
     login: exports.environment.apiUrl + 'account/login',
@@ -179,6 +179,8 @@ exports.customer = {
     PlaytechBettingDetails: exports.environment.apiUrl + 'Game/Manually/Playtech_Betting_Details',
     M8BettingDetails: exports.environment.apiUrl + 'Game/Manually/M8_Betting_Details',
     MaxbetBettingDetails: exports.environment.apiUrl + 'Game/Manually/Maxbet_Betting_Details',
+    Kiss918PlayerLog: exports.environment.apiUrl + '918kiss/playerlog',
+    Pussy888PlayerLog: exports.environment.apiUrl + 'pussy888/playerlog',
     MaxbetDefaultBettingLimit: exports.environment.apiUrl + 'MaxBet/DefaultBettingLimitSet',
     MaxbetGetDefaultVariable: exports.environment.apiUrl + 'MaxBet/GetDefaultVariable',
     SaveJokerBettingDetails: exports.environment.apiUrl + 'Game/JokerBettingDetailsSave',

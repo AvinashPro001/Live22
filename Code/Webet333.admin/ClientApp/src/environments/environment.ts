@@ -5,9 +5,9 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
     //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:55861/api/v1/'
+    apiUrl: 'http://localhost:55861/api/v1/'
 };
 
 export const account = {
@@ -216,6 +216,9 @@ export const customer = {
     PlaytechBettingDetails: environment.apiUrl + 'Game/Manually/Playtech_Betting_Details',
     M8BettingDetails: environment.apiUrl + 'Game/Manually/M8_Betting_Details',
     MaxbetBettingDetails: environment.apiUrl + 'Game/Manually/Maxbet_Betting_Details',
+
+    Kiss918PlayerLog: environment.apiUrl + '918kiss/playerlog',
+    Pussy888PlayerLog: environment.apiUrl + 'pussy888/playerlog',
 
     MaxbetDefaultBettingLimit: environment.apiUrl + 'MaxBet/DefaultBettingLimitSet',
     MaxbetGetDefaultVariable: environment.apiUrl + 'MaxBet/GetDefaultVariable',

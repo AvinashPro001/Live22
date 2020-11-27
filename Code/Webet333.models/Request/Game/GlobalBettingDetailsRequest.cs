@@ -13,6 +13,10 @@ namespace Webet333.models.Request.Game
         [Required]
         [JsonProperty(PropertyName ="todate")]
         public DateTime ToDate { get; set; }
+
+        
+        [JsonProperty(PropertyName = "username")]
+        public string Username { get; set; }
     }
 
     public class PragmaticBettingDetailsRequest

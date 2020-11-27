@@ -12,5 +12,7 @@ namespace Webet333.models.Request.Game
 
         public DateTime EndDate { get; set; }
 
+        public bool SaveInDB  { get; set; }
+
     }
 }

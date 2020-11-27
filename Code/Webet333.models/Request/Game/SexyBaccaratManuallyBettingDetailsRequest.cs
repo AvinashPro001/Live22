@@ -12,5 +12,7 @@ namespace Webet333.models.Request.Game
         [Required]
         [JsonProperty(PropertyName = "todate")]
         public string ToDate { get; set; }
+
+        public string Username { get; set; }
     }
 }
