@@ -41,7 +41,6 @@ async function SliderPromotion() {
             ismobile: true,
             ismain: true
         };
-        debugger;
         var resPanel = await PostMethod(apiEndPoints.promotionsList, model);
         if (resPanel !== null && resPanel !== undefined) {
             var panelData = resPanel.data;

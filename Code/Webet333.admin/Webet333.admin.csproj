@@ -12,6 +12,7 @@
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
     <Configurations>Debug;Release;Stag</Configurations>
     <TypeScriptExperimentalDecorators>true</TypeScriptExperimentalDecorators>
+    <UserSecretsId>10c6d92e-f71d-4d34-b889-eab0753c163e</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />

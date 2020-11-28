@@ -5,9 +5,9 @@
 
 export const environment = {
     production: false,
-    //apiUrl: 'http://api.webet333.com/api/v1/'
+    apiUrl: 'http://api.webet333.com/api/v1/'
     //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    apiUrl: 'http://localhost:55861/api/v1/'
+    //apiUrl: 'http://localhost:55861/api/v1/'
 };
 
 export const account = {
@@ -141,7 +141,6 @@ export const customer = {
     playtechBrokenStatus: environment.apiUrl + 'playtech/broken',
     jokerBrokenStatus: environment.apiUrl + 'joker/broken',
 
-
     depositDdl: environment.apiUrl + 'payments/deposit/dropdown_deposit',
     addDeposit: environment.apiUrl + 'payments/deposit',
     promotionApplyCheck: environment.apiUrl + 'promotions/promotionapply/check',
@@ -172,7 +171,7 @@ export const customer = {
     userBank: environment.apiUrl + 'customer/bank',
     userReceipt: environment.apiUrl + 'payments/deposit/image',
 
-    
+
 
     promotionList: environment.apiUrl + 'promotions/retrieve',
     promotionAdminList: environment.apiUrl + 'promotions/admin/retrive',
@@ -217,6 +216,9 @@ export const customer = {
     PlaytechBettingDetails: environment.apiUrl + 'Game/Manually/Playtech_Betting_Details',
     M8BettingDetails: environment.apiUrl + 'Game/Manually/M8_Betting_Details',
     MaxbetBettingDetails: environment.apiUrl + 'Game/Manually/Maxbet_Betting_Details',
+
+    Kiss918PlayerLog: environment.apiUrl + '918kiss/playerlog',
+    Pussy888PlayerLog: environment.apiUrl + 'pussy888/playerlog',
 
     MaxbetDefaultBettingLimit: environment.apiUrl + 'MaxBet/DefaultBettingLimitSet',
     MaxbetGetDefaultVariable: environment.apiUrl + 'MaxBet/GetDefaultVariable',
@@ -266,7 +268,7 @@ export const customer = {
     GetUsername: environment.apiUrl + 'account/game/username',
 
     ICImage: environment.apiUrl + 'account/icimage/select',
-    
+
     promotionGroupInsert: environment.apiUrl + 'promotions/group/insert',
     promotionGroupUpdate: environment.apiUrl + 'promotions/group/update',
     promotionGroupSelect: environment.apiUrl + 'promotions/group/select',
@@ -274,6 +276,8 @@ export const customer = {
 
     userRegisterReport: environment.apiUrl + 'account/users_register_report',
     userBehaviorReport: environment.apiUrl + 'account/users_behaviour_report',
+
+    DownlaodExcel: environment.apiUrl + 'excel/download',
 
     promotionReport: environment.apiUrl + 'promotions/report',
     BettingDetailsByUsername: environment.apiUrl + 'Game/GetBettingDetails',
@@ -350,11 +354,11 @@ export const gameBalance = {
     AllBet: environment.apiUrl + "gamebalance/allbet",
     WM: environment.apiUrl + "gamebalance/wm",
     Pragmatic: environment.apiUrl + "gamebalance/pragmatic",
-    walletBalance: environment.apiUrl +  "customer/wallet/balance",
+    walletBalance: environment.apiUrl + "customer/wallet/balance",
 }
 
 export const smsConst = {
-    SMSbaseUrl : 'http://cloudsms.trio-mobile.com/index.php/api/bulk_mt?',
+    SMSbaseUrl: 'http://cloudsms.trio-mobile.com/index.php/api/bulk_mt?',
     action: 'action=send',
     api_key: 'api_key=NUC13010100006272b6dac990a5a38519c724051e6d82d30e',
     sender_id: 'sender_id=CLOUDSMS',

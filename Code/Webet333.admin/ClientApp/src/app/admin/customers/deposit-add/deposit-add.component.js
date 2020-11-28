@@ -94,6 +94,7 @@ var DepositAddComponent = /** @class */ (function () {
                 _this.pussyUsername = res.data.pussy888Username;
                 _this.allbetUsername = res.data.allbetUsername;
                 _this.wmUsername = res.data.wmUsername;
+                _this.pragmaticUsername = res.data.pragmaticUsername;
                 _this.Kiss918Balance(newVal);
                 _this.Mega888(newVal);
                 _this.Maxbet(newVal);
@@ -108,6 +109,7 @@ var DepositAddComponent = /** @class */ (function () {
                 _this.Pussy888(newVal);
                 _this.AllBet(newVal);
                 _this.WM(newVal);
+                _this.Pragmatic(newVal);
             });
         });
     };
@@ -505,6 +507,16 @@ var DepositAddComponent = /** @class */ (function () {
         };
         this.adminService.add(environment_1.gameBalance.WM, data).subscribe(function (res) {
             _this.wmBal = res.data.balance;
+        });
+    };
+    DepositAddComponent.prototype.Pragmatic = function (id) {
+        var _this = this;
+        var data = {
+            id: id,
+            username: this.pragmaticUsername
+        };
+        this.adminService.add(environment_1.gameBalance.Pragmatic, data).subscribe(function (res) {
+            _this.pragmaticBal = res.data.balance;
         });
     };
     DepositAddComponent = __decorate([
