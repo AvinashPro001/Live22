@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
@@ -11,6 +12,8 @@ using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.User;
+using Webet333.models.Response.Account;
+using Webet333.models.Response.Game;
 
 namespace Webet333.api.Controllers
 {
@@ -49,7 +52,7 @@ namespace Webet333.api.Controllers
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
                 username = user.Pussy888GamePrefix + user.Username;
                 MobileNo = user.MobileNo;
-                password = user.Password;
+                password = SecurityHelpers.DecryptPassword(user.Password);
             }
             var result = await Pussy888GameHelpers.CallRegisterAPI(MobileNo, username, password);
             using (var pussy888_helper = new Pussy888GameHelpers(Connection))
@@ -80,5 +83,47 @@ namespace Webet333.api.Controllers
         }
 
         #endregion
+
+
+
+        #region All Pussy888 game users password reset
+
+//        [Authorize]
+        [HttpGet(ActionsConst.Pussy888.AllUsers_Pussy888_ResetPassword)]
+        public async Task<IActionResult> Kiss918GameAllUsersPasswordReset()
+        {
+            //await ValidateUser();
+            using (var pussygame_helper = new Pussy888GameHelpers(Connection))
+            {
+                var users = await pussygame_helper.GetAllPussy888Usersname();
+
+
+                List<Kiss918PasswordResetResponse> list = new List<Kiss918PasswordResetResponse>();
+                foreach (var user in users)
+                {
+                    var newPassword = "WB3@" + SecurityHelpers.DecryptPassword(user.Password);
+                    if (newPassword.Length > 14)
+                        newPassword = newPassword.Substring(0, 14);
+
+                    var request = new ProfileResponse();
+                    request.PasswordPussy888 = user.KissPassword;
+                    request.UserNamePussy888 = user.KissUsername;
+                    request.UserName = user.Username;
+
+                    
+                    var result = await pussygame_helper.Pussy888GamePasswordReset(request, newPassword);
+                    if (result.code == 0)
+                    {
+                        await pussygame_helper.Pussy888PasswordUpdate(user.Id.ToString(), newPassword);
+                    }
+                    list.Add(result);
+                }
+                return OkResponse(new { list });
+            }
+        }
+
+        #endregion
+
+
     }
 }

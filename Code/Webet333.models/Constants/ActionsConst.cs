@@ -458,6 +458,7 @@
         {
             public const string Register = "pussy888/register";
             public const string ResetPassword = "pussy888/ResetPassword";
+            public const string AllUsers_Pussy888_ResetPassword = "pussy888/AllUsers_Pussy888_ResetPassword";
         }
 
         public class AllBet

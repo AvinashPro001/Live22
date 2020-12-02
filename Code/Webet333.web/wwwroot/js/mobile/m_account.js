@@ -594,11 +594,14 @@ async function regisrationGame() {
 
                     var password = "WB3@" + dec(GetLocalStorage("currentUserData"));
 
+                    if (password.length > 14)
+                        password = password.substring(0, 14)
+
                     var result981Kiss = await _918KissPostMethod("account.ashx?" + _918KissActionConst.AddUser + "&" + _918KissConstParameter.agent + "&" + "userName=" + randamUserName + "&" + "PassWd=" + password.substring(0, 14) + "&" + "Name=" + resUserData.data.name + "&" + "Tel=" + resUserData.data.mobileNo + "&" + "Memo=" + null + "&" + "UserType=" + _918KissUserType.realplayer + "&" + "UserAreaId=" + _918KissUserAreaId.Malaysia + "&" + "time=" + UTCTime + "&" + _918KissConstParameter.authcode + "&" + "sign=" + generateHasValue(randamUserName) + "&" + _918KissConstParameter.pwdtype);
                     if (result981Kiss.code == 0) {
                         var modelUpdateProfile = {
                             username918: randamUserName,
-                            password918: randomPasswordString
+                            password918: password
                         };
                         var updateProfile = await PostMethod(apiEndPoints.updateProfile, modelUpdateProfile);
                         let model918Kiss = {

@@ -19,6 +19,8 @@
 
             public const string UserICImageSelect = "[dbo].[User_IC_Image_Select]";
 
+            public const string SMSServiceSelect = "[dbo].[SMSService_Select]";
+
             public const string GenrateOtp = "[dbo].[User_OTP_Genrate]";
 
             public const string VerifiedOtp = "[dbo].[User_OTP_Verified]";
@@ -449,6 +451,8 @@
             public const string Register = "[dbo].[Users_Insert_Pussy888]";
 
             public const string PasswordUpdate = "[dbo].[User_PussyPassword_Reset]";
+
+            public const string Pussy888UserPasswordResetSelect = "[dbo].[Pussy888_User_Password_Reset_Select]";
         }
 
         public class SexyBaccarat

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
-import { account } from '../../../../environments/environment';
+import { account, customer } from '../../../../environments/environment';
 import { error } from 'util';
 @Component({
     selector: 'app-maintenance',
@@ -27,6 +27,9 @@ export class MaintenanceComponent implements OnInit {
 
     VaderPayMainteance: boolean;
 
+    EtrackerMainteance: boolean;
+    TrioMainteance: boolean;
+
     SAId: boolean;
     jokerId: any;
     PragmaticId: any;
@@ -51,6 +54,7 @@ export class MaintenanceComponent implements OnInit {
     ngOnInit() {
         this.setData();
         this.VaderPay();
+        this.GetSMSSetting();
     }
 
     setData() {
@@ -143,6 +147,41 @@ export class MaintenanceComponent implements OnInit {
             value: value
         }
         this.adminService.add<any>(account.VaderPayParameterUpdate, model).subscribe(res => {
+            this.toasterService.pop('success', 'Success', res.message);
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
+    GetSMSSetting() {
+        let etrackerModel = {
+            name: "Etracker"
+        }
+        this.adminService.add<any>(customer.GlobalparameterSelect, etrackerModel).subscribe(res => {
+            
+            this.EtrackerMainteance = res.data.value == "true" ? true : false;
+            
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+
+        let trioModel = {
+            name: "Trio"
+        }
+        this.adminService.add<any>(customer.GlobalparameterSelect, trioModel).subscribe(res => {
+            this.TrioMainteance = res.data.value == "true" ? true : false;
+            
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
+    UpdateSMSSetting(Name, Value) {
+        let Model = {
+            name: Name,
+            value: Value
+        }
+        this.adminService.add<any>(customer.GlobalparameterUpdate, Model).subscribe(res => {
             this.toasterService.pop('success', 'Success', res.message);
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);

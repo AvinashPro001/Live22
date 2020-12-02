@@ -97,7 +97,7 @@ namespace Webet333.api.Controllers
 
                 if (Role != RoleConst.Admin)
                 {
-                    if (GetUserId(User)!= request.UserId && request.UserId != Guid.Empty)
+                    if (GetUserId(User) != request.UserId && request.UserId != Guid.Empty)
                         throw new ApiException("error_invalid_userid", 400);
                     DepositId = await payment_help.Deposit(request, GetUserId(User).ToString(), GetUserId(User).ToString());
                     await _hubContext.Clients.All.SendAsync("DepositApprovalList");
@@ -254,7 +254,10 @@ namespace Webet333.api.Controllers
                 if (request.Approved == "approved")
                 {
                     var res = await payment_help.GetMobileNumberByWithdrawId(request.Id.ToString());
-                    AccountHelpers.SendSMSAPI(res.MobileNo, $"Hello {res.Username},%0aSUCCESSFULLY WITHDRAWAL RM{res.Amount} from your Account,%0aPlease check your bank account balance.%0aBest Regards,%0aWEBET333 ");
+                    using (var account_help = new AccountHelpers(Connection))
+                    {
+                        account_help.SendSMSAPI(res.MobileNo, $"Hello {res.Username},%0aSUCCESSFULLY WITHDRAWAL RM{res.Amount} from your Account,%0aPlease check your bank account balance.%0aBest Regards,%0aWEBET333 ");
+                    }
                 }
             }
 
@@ -392,7 +395,7 @@ namespace Webet333.api.Controllers
             if (!ModelState.IsValid) return BadResponse(ModelState);
             using (var payment_helper = new PaymentHelpers(Connection))
             {
-                await payment_helper.ApprovalTimeInsert(request.UserId, GetUserId(User).ToString(), request.Username, request.Type,request.Id);
+                await payment_helper.ApprovalTimeInsert(request.UserId, GetUserId(User).ToString(), request.Username, request.Type, request.Id);
                 return OkResponse();
             }
         }

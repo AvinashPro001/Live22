@@ -383,10 +383,10 @@ namespace Webet333.api.Helpers
             using (var repository = new DapperRepository<AdminBehaviourReportResponse>(Connection))
             {
                 var result = await repository.GetDataAsync(StoredProcConsts.Account.AdminUsersBehaviourSelect, new { request.ToDate, request.FromDate, request.DepositAmount, request.WinAmount, request.DepositTimes, request.PromotionApply, request.LoseAmount, request.PlayLiveCasino, request.PlaySlot, request.PlaySports });
-                var res= result.ToList();
+                var res = result.ToList();
                 var totalUser = res.Count();
-                var totalDeposit = res.Sum(x=>x.TotalDeposit);
-                var totalWithdraw= res.Sum(x => x.TotalWithdraw);
+                var totalDeposit = res.Sum(x => x.TotalDeposit);
+                var totalWithdraw = res.Sum(x => x.TotalWithdraw);
                 var totalBonus = res.Sum(x => x.TotalBonus);
 
                 return new
@@ -484,17 +484,18 @@ namespace Webet333.api.Helpers
         {
             using (var dapperRepository = new DapperRepository<IcImageList>(Connection))
             {
-                var result= await dapperRepository.GetDataAsync(StoredProcConsts.Account.UserICImageSelect, new { UserId });
+                var result = await dapperRepository.GetDataAsync(StoredProcConsts.Account.UserICImageSelect, new { UserId });
                 var icImageResponse = result.ToList();
-                icImageResponse.ForEach(icImage => { 
-                    icImage.ICImageBanner= (!string.IsNullOrEmpty(icImage.ICImageBanner)) ? $"{baseUrl.ImageBase}{baseUrl.UserICImage}/{icImage.ICImageBanner}" : "";
+                icImageResponse.ForEach(icImage =>
+                {
+                    icImage.ICImageBanner = (!string.IsNullOrEmpty(icImage.ICImageBanner)) ? $"{baseUrl.ImageBase}{baseUrl.UserICImage}/{icImage.ICImageBanner}" : "";
                 });
                 return icImageResponse;
             }
 
         }
 
-        public static async Task SaveExcelFile(string fileName,string Path,dynamic json)
+        public static async Task SaveExcelFile(string fileName, string Path, dynamic json)
         {
             if (!Directory.Exists(Path))
                 Directory.CreateDirectory(Path);
@@ -549,18 +550,49 @@ namespace Webet333.api.Helpers
 
         #region Send SMS API
 
-        public static async Task<string> SendSMSAPI(string MobileNo, string Message)
+        public async Task<string> SendSMSAPI(string MobileNo, string Message)
         {
 
             MobileNo = MobileNo.Trim().Replace("+", "").Replace("-", "");
             if (MobileNo.Substring(0, 1) != "6")
                 MobileNo = "6" + MobileNo;
 
-            var URL = $"{GameConst.SMSConst.Url}user={GameConst.SMSConst.User}&pass={GameConst.SMSConst.Password}&type={GameConst.SMSConst.Type}&to={MobileNo}&from={GameConst.SMSConst.From}&text={Message}&servid={GameConst.SMSConst.ServId}&title={GameConst.SMSConst.Title}";
-            return await GameHelpers.CallThirdPartyApi(URL);
+            List<GlobalParameterResponse> response;
+            using (var dapperRepository = new DapperRepository<GlobalParameterResponse>(Connection))
+            {
+                var res = await dapperRepository.GetDataAsync(StoredProcConsts.Account.SMSServiceSelect, new { });
+                response = res.ToList();
+            }
+
+            bool Etracker = Convert.ToBoolean(response.Single(x => x.Name == "Etracker").Value);
+            bool Trio = Convert.ToBoolean(response.Single(x => x.Name == "Trio").Value);
+
+            if (Etracker)
+            {
+                var URL = $"{GameConst.SMSConst.Url}user={GameConst.SMSConst.User}&pass={GameConst.SMSConst.Password}&type={GameConst.SMSConst.Type}&to={MobileNo}&from={GameConst.SMSConst.From}&text={Message}&servid={GameConst.SMSConst.ServId}&title={GameConst.SMSConst.Title}";
+                return await GameHelpers.CallThirdPartyApi(URL);
+            }
+
+            if (Trio)
+            {
+                var URL = $"{GameConst.SMSConst.TrioUrl}api_key={GameConst.SMSConst.TrioApiKey}&action=send&to={MobileNo}&msg={Message}&sender_id={GameConst.SMSConst.TrioSenderId}&content_type=1&mode=shortcode&campaign=";
+                var apiResponse = await GameHelpers.CallThirdPartyApi(URL);
+                if (apiResponse.Length > 3)
+                    return MobileNo + "," + apiResponse.Replace("\n\n","") + "," + "200";
+
+                return apiResponse;
+            }
+
+            return string.Empty;
         }
 
         #endregion Send SMS API
+
+        #region Check Active SMS Services
+
+
+
+        #endregion
 
         #region House Keeping
         public void Dispose()

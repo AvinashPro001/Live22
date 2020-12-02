@@ -535,20 +535,23 @@ namespace Webet333.api.Helpers
 
             var responseList = new List<RebateCalculateResponse>();
 
-            foreach (var d in data)
+            using (var account_help = new AccountHelpers(Connection))
             {
-                var result = await RebateMainWalletDepositWithdraw(d.Username, d.CommAmount, "Deposit");
-                if (result.ErrorCode == 0)
+                foreach (var d in data)
                 {
-                    responseList.Add(d);
-                    try
+                    var result = await RebateMainWalletDepositWithdraw(d.Username, d.CommAmount, "Deposit");
+                    if (result.ErrorCode == 0)
                     {
-                        var Message = "Hi MR/MS {0}, %0aWe are from WB333 Customer Service, Kindly inform :%0aWe had credited DAILY REBATE RM{1} in your Main wallet.";
-                        await AccountHelpers.SendSMSAPI(d.MobileNo, string.Format(Message, d.Username, Math.Round(d.CommAmount, 2)));
-                    }
-                    catch (Exception ex)
-                    {
+                        responseList.Add(d);
+                        try
+                        {
+                            var Message = "Hi MR/MS {0}, %0aWe are from WB333 Customer Service, Kindly inform :%0aWe had credited DAILY REBATE RM{1} in your Main wallet.";
+                            await account_help.SendSMSAPI(d.MobileNo, string.Format(Message, d.Username, Math.Round(d.CommAmount, 2)));
+                        }
+                        catch (Exception ex)
+                        {
 
+                        }
                     }
                 }
             }

@@ -221,14 +221,14 @@ namespace Webet333.api.Controllers
             {
                 var user = await account_help.AddUser(Connection, request, RoleConst.Users);
 
-                #region Sending email in queue
+                #region Sending SMS in queue
                 if (user == null) return OkResponse();
 
                 await account_help.SendOtp(user.Id.ToString(), user.MobileNo);
 
                 var registerMessage = Localizer["msg_register_msg"].Value;
 
-                var messageResponse = await AccountHelpers.SendSMSAPI(request.Mobile, String.Format(registerMessage, request.Username));
+                var messageResponse = await account_help.SendSMSAPI(request.Mobile, String.Format(registerMessage, request.Username));
                 var count = messageResponse.Count(f => f == ',');
 
                 var user_token = new TokenHelpers(Connection).GetAccessToken(AuthConfigOptions.Value, user, Guid.NewGuid().ToString());
@@ -274,20 +274,21 @@ namespace Webet333.api.Controllers
             ProfileResponseByMobile updateUser;
             using (var account_help = new AccountHelpers(Connection))
             {
-                request.NewPassword = Pussy888GameHelpers.genratePassword();
+                request.NewPassword = Pussy888GameHelpers.genrate6DigitPassword();
                 updateUser = await account_help.updatePasswordByMobielNumber(request);
 
-            }
-            var messageResponse = await AccountHelpers.SendSMSAPI(updateUser.MobileNo, $"Your Username is :" + updateUser.UserName + ".  Your New Password is: " + SecurityHelpers.DecryptPassword(updateUser.Password) + ",  It's Your Temporary Password. It will Expire After Some Time, So Please Change Your Password After Successfully Login.");
-            var count = messageResponse.Count(f => f == ',');
-            return OkResponse(new
-            {
-                messageResponse = new SMSResponse
+                var messageResponse = await account_help.SendSMSAPI(updateUser.MobileNo, $"Your Username is :" + updateUser.UserName + ".  Your New Password is: " + SecurityHelpers.DecryptPassword(updateUser.Password) + ",  It's Your Temporary Password. It will Expire After Some Time, So Please Change Your Password After Successfully Login.");
+                var count = messageResponse.Count(f => f == ',');
+                return OkResponse(new
                 {
-                    smsMessage = Localizer["e_" + messageResponse].Value,
-                    statusCode = messageResponse
-                }
-            });
+                    messageResponse = new SMSResponse
+                    {
+                        smsMessage = Localizer["e_" + messageResponse].Value,
+                        statusCode = messageResponse
+                    }
+
+                });
+            }
         }
 
         #endregion Get user and Update Password
@@ -568,28 +569,30 @@ namespace Webet333.api.Controllers
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
+            using (var account_helper = new AccountHelpers(Connection))
+            {
+                var messageResponse = await account_helper.SendSMSAPI(request.MobileNo, request.Message);
 
-            var messageResponse = await AccountHelpers.SendSMSAPI(request.MobileNo, request.Message);
+                if (request.Username != null)
+                    return OkResponse(new
+                    {
+                        request.Username,
+                        messageResponse = new SMSResponse
+                        {
+                            smsMessage = Localizer["e_" + messageResponse].Value,
+                            statusCode = messageResponse
+                        }
+                    });
 
-            if (request.Username != null)
                 return OkResponse(new
                 {
-                    request.Username,
                     messageResponse = new SMSResponse
                     {
                         smsMessage = Localizer["e_" + messageResponse].Value,
                         statusCode = messageResponse
                     }
                 });
-
-            return OkResponse(new
-            {
-                messageResponse = new SMSResponse
-                {
-                    smsMessage = Localizer["e_" + messageResponse].Value,
-                    statusCode = messageResponse
-                }
-            });
+            }
 
         }
 

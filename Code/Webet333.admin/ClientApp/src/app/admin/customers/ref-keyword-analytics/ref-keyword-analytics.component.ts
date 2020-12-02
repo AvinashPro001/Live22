@@ -104,6 +104,8 @@ export class RefKeywordAnalyticsComponent implements OnInit {
         if (RefFilterModel.fromdate !== "" && RefFilterModel.todate !== "") {
             this.adminService.add<any>(account.analytics, RefFilterModel).subscribe(res => {
                 this.totalNewUser = res.data.totalNewUser;
+                this.totalVerfiedUser = res.data.totalVerfiedUser;
+                this.totalNotVerfiedUser = res.data.totalNotVerfiedUser;
                 this.refRows = [];
                 this.Rows = [];
                 res.data.refkeyword.forEach(el => {

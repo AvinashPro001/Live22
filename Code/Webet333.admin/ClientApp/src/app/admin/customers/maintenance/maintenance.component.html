@@ -156,16 +156,12 @@
     </div>
 </div>
 
-
-
-
-
 <div class="my-container">
     <div class="card card-default">
         <div class="card-header">
             <div class="row">
                 <div class="col-lg-4">
-                    <legend class="main-title">Game Maintenance</legend>
+                    <legend class="main-title">Payment Gateway Maintenance</legend>
                 </div>
             </div>
         </div><br /><br /><br />
@@ -187,7 +183,36 @@
     </div>
 </div>
 
-
-
-
-
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">SMS Gateway Maintenance</legend>
+                </div>
+            </div>
+        </div><br /><br /><br />
+        <div class="row ">
+            <div class="container col-12 offset-4">
+                <div class="col-lg-12" style="display:inline-flex">
+                    <div class="col-lg-2">
+                        <div>
+                            <h3>ETracker</h3>
+                        </div>
+                        <div>
+                            <ui-switch [checked]="EtrackerMainteance" (change)="UpdateSMSSetting('Etracker',$event)"></ui-switch>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div>
+                            <h3>TRIO</h3>
+                        </div>
+                        <div>
+                            <ui-switch [checked]="TrioMainteance" (change)="UpdateSMSSetting('Trio',$event)"></ui-switch>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><br /><br /><br />
+    </div>
+</div>

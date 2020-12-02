@@ -1,9 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
+using Webet333.models.Request.Game;
 using Webet333.models.Response.Account;
 using Webet333.models.Response.Game;
 using Webet333.models.Response.Game.Pussy888;
@@ -60,7 +63,7 @@ namespace Webet333.api.Helpers
         #region Randon Password Genrate
         public static string genrate6DigitPassword()
         {
-            string charsetOne = "0123456789", charsetTwo = "0123456789",  randomstring = "";
+            string charsetOne = "0123456789", charsetTwo = "0123456789", randomstring = "";
             Random rand = new Random();
 
             for (int i = 0; i < 3; i++)
@@ -82,10 +85,14 @@ namespace Webet333.api.Helpers
 
         #region Pussy888 Game Register API
 
-        internal static async Task<UserRegisterResponse> CallRegisterAPI(string MobileNo, string Name,string Pass)
+        internal static async Task<UserRegisterResponse> CallRegisterAPI(string MobileNo, string Name, string Pass)
         {
             //var Password = genratePassword();
             var Password = "WB3@" + Pass;
+
+            if (Password.Length > 14)
+                Password = Password.Substring(0, 14);
+
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             var RandomUsernameUrl = $"{GameConst.Pussy888.BaseUrl}{GameConst.Pussy888.RandomUsername}" +
                 $"&userName={GameConst.Pussy888.agent}" +
@@ -101,7 +108,7 @@ namespace Webet333.api.Helpers
                 var username = randomUsernameResponse.account;
                 var url = $"{GameConst.Pussy888.BaseUrl}{GameConst.Pussy888.Register}" +
                     $"&agent={GameConst.Pussy888.agent}" +
-                    $"&PassWd={Password.Substring(0,14)}" +
+                    $"&PassWd={Password}" +
                     $"&userName={username}" +
                     $"&Name={Name}" +
                     $"&Tel={MobileNo}" +
@@ -197,7 +204,7 @@ namespace Webet333.api.Helpers
                    $"&Name={request.UserName}" +
                    $"&time={timestamp}" +
                    $"&authcode={GameConst.Pussy888.AuthCode}" +
-                   $"&sign={SecurityHelpers.MD5EncrptText(GameConst.Pussy888.AuthCode.ToLower() + request.UserNamePussy888+ timestamp + GameConst.Pussy888.SecertKey.ToLower()).ToUpper()}" +
+                   $"&sign={SecurityHelpers.MD5EncrptText(GameConst.Pussy888.AuthCode.ToLower() + request.UserNamePussy888 + timestamp + GameConst.Pussy888.SecertKey.ToLower()).ToUpper()}" +
                    $"&pwdtype=1";
             var response = JsonConvert.DeserializeObject<Kiss918PasswordResetResponse>(await GameHelpers.CallThirdPartyApi(url));
             return response;
@@ -222,11 +229,25 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Pussy888.PasswordUpdate, new { UserId, Password});
+                await repository.AddOrUpdateAsync(StoredProcConsts.Pussy888.PasswordUpdate, new { UserId, Password });
             }
         }
 
         #endregion
+
+        #region GET ALL Pussy GAME USERS
+
+        public async Task<List<Kiss918GamePasswordResetResponse>> GetAllPussy888Usersname()
+        {
+            using (var repository = new DapperRepository<Kiss918GamePasswordResetResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Pussy888.Pussy888UserPasswordResetSelect, new { });
+                return result.ToList(); ;
+            }
+        }
+
+        #endregion
+
 
         #region House Keeping
 

@@ -943,6 +943,12 @@
             public const string ServId = "MES01";
 
             public const string Title = "WEBET333";
+
+            public const string TrioUrl = "http://cloudsms.trio-mobile.com/index.php/api/bulk_mt?";
+
+            public const string TrioApiKey = "NUC13010100006272b6dac990a5a38519c724051e6d82d30e";
+
+            public const string TrioSenderId = "CLOUDSMS";
         }
     }
 #endif
