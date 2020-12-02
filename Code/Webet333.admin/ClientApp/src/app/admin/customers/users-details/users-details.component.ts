@@ -19,7 +19,8 @@ export class UsersDetailsComponent implements OnInit {
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
 
-
+    Kiss918Password: any = "XXXXXXXXXXX";
+    Pussy888Password: any = "XXXXXXXXXXX";
 
     userid: any;
     customerData: any;
@@ -695,20 +696,24 @@ export class UsersDetailsComponent implements OnInit {
         }
         else if (selectedList == "Pussy888") {
             this.columns = [
-                { prop: "Account" },
-                { prop: "Agentwin" },
-                { prop: "Idx" },
-                { prop: "Jtime" },
-                { prop: "Memo" },
-                { prop: "Mydate" },
-                { prop: "Name" },
-                { prop: "Press" },
-                { prop: "Pump" },
-                { prop: "Selfwin" },
-                { prop: "Tel" },
-                { prop: "Type" },
-                { prop: "Win" },
-                { prop: "Yield" },
+                { prop: 'BeginBlance' },
+                { prop: 'Bet' },
+                { prop: 'ClassID' },
+                { prop: 'Cday' },
+                { prop: 'Cno' },
+                { prop: 'CreateTime' },
+                { prop: 'EndBlance' },
+                { prop: 'GameID' },
+                { prop: 'GameName' },
+                { prop: 'Id' },
+                { prop: 'LineNum' },
+                { prop: 'LogDataStr' },
+                { prop: 'LogDataType' },
+                { prop: 'RoundNO' },
+                { prop: 'Rownum' },
+                { prop: 'TableID' },
+                { prop: 'Uuid' },
+                { prop: 'Win' }
             ];
         }
         else if (selectedList == "AllBet") {
@@ -1190,155 +1195,244 @@ export class UsersDetailsComponent implements OnInit {
 
     //#region Wallet Balance
     async ManiWalletBalance(id) {
-
-        let data = {
-            id: id
+        try {
+            let data = {
+                id: id
+            }
+            this.adminService.add<any>(gameBalance.walletBalance, data).subscribe(res => {
+                var balance = res.data.filter(x => x.walletName == "Main Wallet");
+                this.userWalletBalance = balance[0].amount;
+            })
         }
-        this.adminService.add<any>(gameBalance.walletBalance, data).subscribe(res => {
-            var balance = res.data.filter(x => x.walletName == "Main Wallet");
-            this.userWalletBalance = balance[0].amount;
-        })
+        catch (e) {
+
+        }
     }
 
     async Kiss918Balance(id) {
-        let data = {
-            id: id,
-            username: this.kiss918Username
+        try {
+            let data = {
+                id: id,
+                username: this.kiss918Username
+            }
+            this.adminService.add<any>(gameBalance.Kiss918, data).subscribe(res => {
+                this.kiss918balance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.Kiss918, data).subscribe(res => {
-            this.kiss918balance = res.data.balance;
-        })
+        catch (e) {
+
+        }
     }
 
     async Mega888(id) {
-        let data = {
-            id: id,
-            username: this.mega888Username
+
+        try {
+            let data = {
+                id: id,
+                username: this.mega888Username
+            }
+            this.adminService.add<any>(gameBalance.Mega888, data).subscribe(res => {
+                this.Mega888balance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.Mega888, data).subscribe(res => {
-            this.Mega888balance = res.data.balance;
-        })
+        catch (e) {
+
+        }
+
+
     }
 
     async Maxbet(id) {
-        let data = {
-            id: id,
-            username: this.maxbetUsername
+        try {
+            let data = {
+                id: id,
+                username: this.maxbetUsername
+            }
+            this.adminService.add<any>(gameBalance.Maxbet, data).subscribe(res => {
+                this.Maxbetbalance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.Maxbet, data).subscribe(res => {
-            this.Maxbetbalance = res.data.balance;
-        })
+        catch (e) {
+
+        }
+
     }
 
     async M8(id) {
-        let data = {
-            id: id,
-            username: this.m8Username
+        try {
+            let data = {
+                id: id,
+                username: this.m8Username
+            }
+            this.adminService.add<any>(gameBalance.m8, data).subscribe(res => {
+                this.M8balance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.m8, data).subscribe(res => {
-            this.M8balance = res.data.balance;
-        })
+        catch (e) {
+
+        }
+
     }
 
     async AG(id) {
-        let data = {
-            id: id,
-            username: this.agUsername
+        try {
+            let data = {
+                id: id,
+                username: this.agUsername
+            }
+            this.adminService.add<any>(gameBalance.AG, data).subscribe(res => {
+                this.AGbalance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.AG, data).subscribe(res => {
-            this.AGbalance = res.data.balance;
-        })
+        catch (e) {
+
+        }
+
     }
 
     async DG(id) {
-        let data = {
-            id: id,
-            username: this.dgUsername
+        try {
+            let data = {
+                id: id,
+                username: this.dgUsername
+            }
+            this.adminService.add<any>(gameBalance.DG, data).subscribe(res => {
+                this.DGbalance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.DG, data).subscribe(res => {
-            this.DGbalance = res.data.balance;
-        })
+        catch (e) {
+
+        }
+
     }
 
     async Playtech(id) {
-        let data = {
-            id: id,
-            username: this.playtechUsername
+        try {
+            let data = {
+                id: id,
+                username: this.playtechUsername
+            }
+            this.adminService.add<any>(gameBalance.Playtech, data).subscribe(res => {
+                this.Playtechbalance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.Playtech, data).subscribe(res => {
-            this.Playtechbalance = res.data.balance;
-        })
+        catch (e) {
+
+        }
+
     }
 
     async Joker(id) {
-        let data = {
-            id: id,
-            username: this.jokerUsername
+        try {
+            let data = {
+                id: id,
+                username: this.jokerUsername
+            }
+            this.adminService.add<any>(gameBalance.Joker, data).subscribe(res => {
+                this.Jokerbalance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.Joker, data).subscribe(res => {
-            this.Jokerbalance = res.data.balance;
-        })
+        catch (e) {
+
+        }
+
     }
 
     async Sexybaccarat(id) {
-        let data = {
-            id: id,
-            username: this.sexyUsername
+        try {
+            let data = {
+                id: id,
+                username: this.sexyUsername
+            }
+            this.adminService.add<any>(gameBalance.SexyBaccarat, data).subscribe(res => {
+                this.Sexybaccaratbalance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.SexyBaccarat, data).subscribe(res => {
-            this.Sexybaccaratbalance = res.data.balance;
-        })
+        catch (e) {
+
+        }
+
     }
 
     async SA(id) {
-        let data = {
-            id: id,
-            username: this.saUsername
+        try {
+            let data = {
+                id: id,
+                username: this.saUsername
+            }
+            this.adminService.add<any>(gameBalance.SA, data).subscribe(res => {
+                this.SAbalance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.SA, data).subscribe(res => {
-            this.SAbalance = res.data.balance;
-        })
+        catch (e) {
+
+        }
+
     }
 
     async Pussy888(id) {
-        let data = {
-            id: id,
-            username: this.pussyUsername
+        try {
+            let data = {
+                id: id,
+                username: this.pussyUsername
+            }
+            this.adminService.add<any>(gameBalance.Pussy888, data).subscribe(res => {
+                this.Pussy888balance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.Pussy888, data).subscribe(res => {
-            this.Pussy888balance = res.data.balance;
-        })
+        catch (e) {
+
+        }
+
     }
 
     async AllBet(id) {
-        let data = {
-            id: id,
-            username: this.allbetUsername,
-            password: this.userPassword
+        try {
+            let data = {
+                id: id,
+                username: this.allbetUsername,
+                password: this.userPassword
+            }
+            this.adminService.add<any>(gameBalance.AllBet, data).subscribe(res => {
+                this.allbetbalance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.AllBet, data).subscribe(res => {
-            this.allbetbalance = res.data.balance;
-        })
+        catch (e) {
+
+        }
+
     }
 
     async WM(id) {
-        let data = {
-            id: id,
-            username: this.wmUsername,
+        try {
+            let data = {
+                id: id,
+                username: this.wmUsername,
+            }
+            this.adminService.add<any>(gameBalance.WM, data).subscribe(res => {
+                this.wmbalance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.WM, data).subscribe(res => {
-            this.wmbalance = res.data.balance;
-        })
+        catch (e) {
+
+        }
+
     }
 
     async Pragmatic(id) {
-        let data = {
-            id: id,
-            username: this.pragmaticUsername,
+        try {
+            let data = {
+                id: id,
+                username: this.pragmaticUsername,
+            }
+            this.adminService.add<any>(gameBalance.Pragmatic, data).subscribe(res => {
+                this.pragmaticbalance = res.data.balance;
+            })
         }
-        this.adminService.add<any>(gameBalance.Pragmatic, data).subscribe(res => {
-            this.pragmaticbalance = res.data.balance;
-        })
+        catch (e) {
+
+        }
+
     }
 
     //#endregion Wallet Balance
@@ -1450,7 +1544,11 @@ export class UsersDetailsComponent implements OnInit {
     //#region Open Model
 
     openWindowCustomClass(content) {
-        this.modalService.open(content, { windowClass: 'dark-modal', });
+        if (this.userid != null && this.userid != undefined) {
+            this.modalService.open(content, { windowClass: 'dark-modal', });
+        }
+        else
+            this.toasterService.pop('error', 'Error', "Select Username");
     }
 
     //#endregion
@@ -1465,24 +1563,26 @@ export class UsersDetailsComponent implements OnInit {
             this.userPlaytechUnfinished = res.data.status;
             var i = 0;
             this.unfinishedPlaytechRows = [];
-            res.data.response.result.forEach(el => {
-                this.unfinishedPlaytechRows.push({
-                    No: ++i,
-                    Playername: el.playername,
-                    Bet: el.bet,
-                    Brokengametype: el.brokengametype,
-                    Clienttype: el.clienttype,
-                    Finishedgamecode: el.finishedgamecode,
-                    Finishedgamedate: el.finishedgamedate,
-                    Game: el.game,
-                    Gamedate: el.gamedate,
-                    Infobet: el.infobet,
-                    Jackpotbet: el.jackpotbet,
-                    Remoteip: el.remoteip,
-                    Rnum: el.rnum,
-                    Status: el.status,
+            if (res.data.response.result != null) {
+                res.data.response.result.forEach(el => {
+                    this.unfinishedPlaytechRows.push({
+                        No: ++i,
+                        Playername: el.playername,
+                        Bet: el.bet,
+                        Brokengametype: el.brokengametype,
+                        Clienttype: el.clienttype,
+                        Finishedgamecode: el.finishedgamecode,
+                        Finishedgamedate: el.finishedgamedate,
+                        Game: el.game,
+                        Gamedate: el.gamedate,
+                        Infobet: el.infobet,
+                        Jackpotbet: el.jackpotbet,
+                        Remoteip: el.remoteip,
+                        Rnum: el.rnum,
+                        Status: el.status,
+                    });
                 });
-            });
+            }
         });
 
         let dataPragmatic = {
@@ -1492,14 +1592,16 @@ export class UsersDetailsComponent implements OnInit {
             this.userPragmaticUnfinished = res.data.status;
             var i = 0;
             this.unfinishedPragmaticRows = [];
-            res.data.response.data.forEach(el => {
-                this.unfinishedPragmaticRows.push({
-                    No: ++i,
-                    BetAmount: el.betAmount,
-                    GameId: el.gameId,
-                    PlaySessionID: el.playSessionID
+            if (res.data.response.data != null) {
+                res.data.response.data.forEach(el => {
+                    this.unfinishedPragmaticRows.push({
+                        No: ++i,
+                        BetAmount: el.betAmount,
+                        GameId: el.gameId,
+                        PlaySessionID: el.playSessionID
+                    });
                 });
-            });
+            }
         });
 
 
@@ -1698,7 +1800,7 @@ export class UsersDetailsComponent implements OnInit {
                         todate: this.toDate,
                         username: this.jokerUsername
                     }
-                    this.adminService.add<any>(customer.JokerBettingDetails, JokerModel ).subscribe(res => {
+                    this.adminService.add<any>(customer.JokerBettingDetails, JokerModel).subscribe(res => {
                         this.rows = [];
                         if (res.data.winloss.length > 0) {
 
@@ -1760,10 +1862,9 @@ export class UsersDetailsComponent implements OnInit {
                         startDate: this.fromDate,
                         endDate: this.toDate,
                         username: this.kiss918Username,
-                        saveInDB:true
+                        saveInDB: true
                     }
                     this.adminService.add<any>(customer.Kiss918PlayerLog, Kiss918Model).subscribe(res => {
-                        debugger
                         this.loadingIndicator = true;
                         this.rows = [];
                         if (res.data.results.length > 0) {
@@ -1805,7 +1906,7 @@ export class UsersDetailsComponent implements OnInit {
                     this.adminService.get<any>(customer.DGBettingDetails).subscribe(res => {
                         this.rows = [];
                         if (res.data.list !== null) {
-                            
+
                             var list = res.data.list.filter(s => s.userName == this.dgUsername.toUpperCase())
                             list.forEach(el => {
                                 this.rows.push({
@@ -1939,28 +2040,34 @@ export class UsersDetailsComponent implements OnInit {
                 }
                 case 'Pussy888': {
                     let pussy888Model = {
-                        fromdate: this.fromDate,
-                        todate: this.toDate
+                        startDate: this.fromDate,
+                        endDate: this.toDate,
+                        username: this.pussyUsername,
+                        saveInDB: true
                     }
-                    this.adminService.add<any>(customer.Pussy888BettingDetails, pussy888Model).subscribe(res => {
+                    this.adminService.add<any>(customer.Pussy888PlayerLog, pussy888Model).subscribe(res => {
                         this.rows = [];
                         if (res.data.results.length > 0) {
                             res.data.results.forEach(el => {
                                 this.rows.push({
-                                    Account: el.account,
-                                    Agentwin: el.agentwin,
-                                    Idx: el.idx,
-                                    Jtime: el.jtime,
-                                    Memo: el.memo,
-                                    Mydate: el.mydate,
-                                    Name: el.name,
-                                    Press: el.press,
-                                    Pump: el.pump,
-                                    Selfwin: el.selfwin,
-                                    Tel: el.tel,
-                                    Type: el.type,
-                                    Win: el.win,
-                                    Yield: el.yield,
+                                    BeginBlance: el.beginBlance,
+                                    Bet: el.bet,
+                                    ClassID: el.classID,
+                                    Cday: el.cday,
+                                    Cno: el.cno,
+                                    CreateTime: el.createTime,
+                                    EndBlance: el.endBlance,
+                                    GameID: el.gameID,
+                                    GameName: el.gameName,
+                                    Id: el.id,
+                                    LineNum: el.lineNum,
+                                    LogDataStr: el.logDataStr,
+                                    LogDataType: el.logDataType,
+                                    RoundNO: el.roundNO,
+                                    Rownum: el.rownum,
+                                    TableID: el.tableID,
+                                    Uuid: el.uuid,
+                                    Win: el.win
                                 });
                             });
                             this.rows = [...this.rows];
@@ -2020,7 +2127,8 @@ export class UsersDetailsComponent implements OnInit {
                 case 'WM': {
                     let wmModel = {
                         fromdate: this.fromDate,
-                        todate: this.toDate
+                        todate: this.toDate,
+                        username: this.wmUsername
                     }
                     this.adminService.add<any>(customer.WMBettingDetails, wmModel).subscribe(res => {
                         this.rows = [];
@@ -2072,8 +2180,9 @@ export class UsersDetailsComponent implements OnInit {
                     }
                     this.adminService.add<any>(customer.PragmaticBettingDetails, pragmaticModel).subscribe(res => {
                         this.rows = [];
+                        var list = res.data.filter(s => s.extPlayerID == this.m8Username)
                         if (res.data.length > 0) {
-                            res.data.forEach(el => {
+                            list.forEach(el => {
                                 this.rows.push({
                                     Bet: el.bet,
                                     BonusCode: el.bonusCode,
@@ -2110,4 +2219,36 @@ export class UsersDetailsComponent implements OnInit {
         else
             this.toasterService.pop('error', 'Error', "Select Username");
     }
+
+    GamePasswordShow() {
+        if (this.userid != null && this.userid != undefined) {
+
+            var Username = ((document.getElementById("txt_managerUsername") as HTMLInputElement).value)
+            var Password = ((document.getElementById("txt_managerPassword") as HTMLInputElement).value)
+
+            if (Username == "")
+                return this.toasterService.pop('error', 'Error', "Username Required");
+
+            if (Password == "")
+                return this.toasterService.pop('error', 'Error', "Password Required");
+
+
+            let data = {
+                id: this.userid,
+                managerUsername: Username,
+                managerPassword: Password
+            }
+            this.adminService.add<any>(customer.managerApprovalShowPassword, data).subscribe(res => {
+                this.modalService.dismissAll();
+                this.Kiss918Password = res.data[0].PasswordKiss918;
+                this.Pussy888Password = res.data[0].PasswordPussy888;
+            }, error => {
+                    this.modalService.dismissAll();
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
+        }
+        else
+            this.toasterService.pop('error', 'Error', "Select Username");
+    }
+
 }

@@ -867,6 +867,8 @@
 
             public const string BettingDetails = "betlog_pieceof_histories_in30days";
 
+            public const string BettingDetailsByUser = "client_betlog_query";
+
             public const string PropertyId = "5470471";
 
             public const string DESKey = "IMQOgJ6JEyU78vLCZ0w0+E+AJhpGkc74";

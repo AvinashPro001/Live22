@@ -79,6 +79,8 @@
 
             public const string ManagerOperationUpdate = "[dbo].[Manager_Operation_Update]";
 
+            public const string ManagerApprovalPasswordSelect = "[dbo].[ManagerApproval_Password_Select]";
+
             public const string AdminUsersRegisterSelect = "[dbo].[Admin_Users_Register_Report]";
 
             public const string AdminUsersBehaviourSelect = "[dbo].[Admin_Users_Behaviour_Report]";

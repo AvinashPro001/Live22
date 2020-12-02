@@ -700,16 +700,37 @@ namespace Webet333.api.Controllers
 
             return OkResponse(response);
         }
+
+        #region Allbet game betting details By user
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.Manually_AllBet_Betting_Details_ByUser)]
+        public async Task<IActionResult> ManuallyAllBetBettingDetailsByUser([FromBody] GlobalBettingDetailsRequest request)
+        {
+            await CheckUserRole();
+
+            if (request.ToDate.Subtract(request.FromDate).Minutes > 59)
+                return BadResponse("Time differenct more than 60 minute");
+
+            if (request.ToDate.Subtract(request.FromDate).TotalDays < 0)
+                return BadResponse("From Date is greater than To date");
+
+            var response = await AllBetGameHelpers.BettingDetailsByUserCallAPI(request.FromDate.ToString("yyyy-MM-dd HH:mm:ss"), request.ToDate.ToString("yyyy-MM-dd HH:mm:ss"), request.Username);
+
+            return OkResponse(response);
+        }
+        #endregion Allbet game betting details By user
+
         #endregion Allbet Betting Details
 
         #region WM game
 
-        //[Authorize]
+        [Authorize]
         [HttpPost(ActionsConst.Game.Manually_WM_Betting_Details)]
         public async Task<IActionResult> ManuallyWMBettingDetails([FromBody] GlobalBettingDetailsRequest request)
         {
 
-            //await CheckUserRole();
+            await CheckUserRole();
 
             if (request.ToDate.Subtract(request.FromDate).Minutes > 1439)
                 return BadResponse("Time differenct more than  minute");
@@ -717,7 +738,7 @@ namespace Webet333.api.Controllers
             if (request.ToDate.Subtract(request.FromDate).TotalDays < 0)
                 return BadResponse("From Date is greater than To date");
 
-            var response = await WMGameHelpers.BettingDetailsCallAPI(request.FromDate.ToString("yyyyMMddHHmmss"), request.ToDate.ToString("yyyyMMddHHmmss"));
+            var response = await WMGameHelpers.BettingDetailsCallAPI(request.FromDate.ToString("yyyyMMddHHmmss"), request.ToDate.ToString("yyyyMMddHHmmss"),request.Username);
 
             return OkResponse(response);
         }
@@ -3082,7 +3103,7 @@ namespace Webet333.api.Controllers
 
         #endregion 918 Kiss Player Log
 
-        #region Pussy Betting Details
+        #region Pussy888 Player Log
 
         [HttpPost(ActionsConst.Game.Pussy888PlayerLog)]
         public async Task<IActionResult> Pussy888PlayerLog([FromBody] SlotsPlayerLogRequest request)
@@ -3130,11 +3151,13 @@ namespace Webet333.api.Controllers
                     }
                 }
 
-                if (result.results.Count > 0)
-                    using (var game_helper = new GameHelpers(Connection))
-                    {
-                        game_helper.PussyPlayerLogInsert(result.results, userName);
-                    }
+                if (!request.SaveInDB)
+                    if (result.results != null)
+                        if (result.results.Count > 0)
+                            using (var game_helper = new GameHelpers(Connection))
+                            {
+                                game_helper.PussyPlayerLogInsert(result.results, userName);
+                            }
             }
             return OkResponse(result);
         }

@@ -10,6 +10,8 @@ import { error } from 'util';
 })
 export class MaintenanceComponent implements OnInit {
 
+    radioSelected: string;
+
     jokerMainteance: boolean;
     WMMainteance: boolean;
     M8Mainteance: boolean;
@@ -44,7 +46,7 @@ export class MaintenanceComponent implements OnInit {
     Mega888Id: any;
     Pussy888Id: any;
     AllBetId: any;
-    
+
 
     constructor(
         private adminService: AdminService,
@@ -55,6 +57,7 @@ export class MaintenanceComponent implements OnInit {
         this.setData();
         this.VaderPay();
         this.GetSMSSetting();
+        console.log(document.getElementsByName("radio").item);
     }
 
     setData() {
@@ -121,7 +124,7 @@ export class MaintenanceComponent implements OnInit {
     }
 
     WalletMaintenanceUpdate(Id, value: boolean) {
-        
+
         let model = {
             id: Id,
             maintenance: value
@@ -158,9 +161,9 @@ export class MaintenanceComponent implements OnInit {
             name: "Etracker"
         }
         this.adminService.add<any>(customer.GlobalparameterSelect, etrackerModel).subscribe(res => {
-            
+
             this.EtrackerMainteance = res.data.value == "true" ? true : false;
-            
+
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
@@ -170,13 +173,30 @@ export class MaintenanceComponent implements OnInit {
         }
         this.adminService.add<any>(customer.GlobalparameterSelect, trioModel).subscribe(res => {
             this.TrioMainteance = res.data.value == "true" ? true : false;
-            
+
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
 
     UpdateSMSSetting(Name, Value) {
+
+        if (Name == "Etracker" && Value) {
+            let Model = {
+                name: "Trio",
+                value: false
+            }
+            this.adminService.add<any>(customer.GlobalparameterUpdate, Model).subscribe(res => {});
+        }
+
+        if (Name == "Trio" && Value) {
+            let Model = {
+                name: "Etracker",
+                value: false
+            }
+            this.adminService.add<any>(customer.GlobalparameterUpdate, Model).subscribe(res => {});
+        }
+
         let Model = {
             name: Name,
             value: Value

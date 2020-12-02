@@ -21,7 +21,7 @@ export class SettingsService {
         // App Settings
         // -----------------------------------
         this.app = {
-            name: 'Webet333 | Admin Panel',
+            name: 'Account Management System | Admin Panel',
             // description: 'Play Bold',
             year: ((new Date()).getFullYear())
         };

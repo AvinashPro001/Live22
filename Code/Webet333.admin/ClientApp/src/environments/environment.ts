@@ -171,7 +171,7 @@ export const customer = {
     userBank: environment.apiUrl + 'customer/bank',
     userReceipt: environment.apiUrl + 'payments/deposit/image',
 
-    
+    managerApprovalShowPassword: environment.apiUrl + 'account/manager/gamepassword/show',
 
     promotionList: environment.apiUrl + 'promotions/retrieve',
     promotionAdminList: environment.apiUrl + 'promotions/admin/retrive',

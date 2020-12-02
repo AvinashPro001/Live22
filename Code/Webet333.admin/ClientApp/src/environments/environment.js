@@ -143,6 +143,7 @@ exports.customer = {
     addWithdrawal: exports.environment.apiUrl + 'payments/withdraw',
     userBank: exports.environment.apiUrl + 'customer/bank',
     userReceipt: exports.environment.apiUrl + 'payments/deposit/image',
+    managerApprovalShowPassword: exports.environment.apiUrl + 'account/manager/gamepassword/show',
     promotionList: exports.environment.apiUrl + 'promotions/retrieve',
     promotionAdminList: exports.environment.apiUrl + 'promotions/admin/retrive',
     promotionDailyList: exports.environment.apiUrl + 'promotions/daily/list',

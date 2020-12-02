@@ -418,6 +418,14 @@ namespace Webet333.api.Helpers
             }
         }
 
+        public async Task<dynamic> ManagerApprovalGamePasswordSelect(ManagerApprovalGamePasswordRequest request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.GetDataAsync(StoredProcConsts.Account.ManagerApprovalPasswordSelect, request);
+            }
+        }
+
         public async Task UserLastLoginTime(string UserId)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))

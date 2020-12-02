@@ -58,6 +58,8 @@
 
             public const string ManagerOperationUpdate = "account/manager/update";
 
+            public const string ManagerGamePasswordShow = "account/manager/gamepassword/show";
+
             public const string AdminRegisterReportSelect = "account/users_register_report";
 
             public const string AdminBehaviourReportSelect = "account/users_behaviour_report";
@@ -355,6 +357,8 @@
             public const string Manually_SA_Betting_Details = "Game/Manually/SA_Betting_Details";
 
             public const string Manually_AllBet_Betting_Details = "Game/Manually/AllBet_Betting_Details";
+
+            public const string Manually_AllBet_Betting_Details_ByUser = "Game/Manually/AllBet_Betting_Details_ByUser";
 
             public const string Manually_WM_Betting_Details = "Game/Manually/WM_Betting_Details";
 

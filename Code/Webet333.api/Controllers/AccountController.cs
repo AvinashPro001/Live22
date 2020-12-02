@@ -875,7 +875,21 @@ namespace Webet333.api.Controllers
 
         #endregion
 
+        #region Manager GamePassword Show
 
+        [Authorize]
+        [HttpPost(ActionsConst.Account.ManagerGamePasswordShow)]
+        public async Task<IActionResult> ManagerGamePasswordShow([FromBody] ManagerApprovalGamePasswordRequest request)
+        {
+            await CheckUserRole();
+            using (var account_help = new AccountHelpers(Connection))
+            {
+               var response= await account_help.ManagerApprovalGamePasswordSelect(request);
+                return OkResponse(response);
+            }
+        }
+
+        #endregion 
 
         //#region check password
 

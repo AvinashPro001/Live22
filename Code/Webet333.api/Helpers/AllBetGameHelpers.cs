@@ -133,7 +133,7 @@ namespace Webet333.api.Helpers
 
         #region Call Login Third Party API
 
-        public static async Task<AllbetGameLoginResponse> LoginCallAPI(string Username, string Password,string LanguageCode,int AppType)
+        public static async Task<AllbetGameLoginResponse> LoginCallAPI(string Username, string Password, string LanguageCode, int AppType)
         {
             var Parameter = $"random={Random()}&client={Username}&password={Password}&language={LanguageCode}&appType={AppType}";
             var Url = $"{GameConst.AllBet.Url}{GameConst.AllBet.Login}";
@@ -144,15 +144,34 @@ namespace Webet333.api.Helpers
 
         #region Call Betting Details Third Party API
 
-        public static async Task<AllBetServicesResponse> BettingDetailsCallAPI(string StartTime=null, string EndTime= null)
+        public static async Task<AllBetServicesResponse> BettingDetailsCallAPI(string StartTime = null, string EndTime = null)
         {
             if (StartTime == null)
-                StartTime=DateTime.Now.AddMinutes(-5).ToString("yyyy-MM-dd HH:mm:ss");
-            if (EndTime== null)
+                StartTime = DateTime.Now.AddMinutes(-5).ToString("yyyy-MM-dd HH:mm:ss");
+            if (EndTime == null)
                 EndTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
             var Parameter = $"random={Random()}&startTime={StartTime}&endTime={EndTime}&agent={GameConst.AllBet.Agent}";
             var Url = $"{GameConst.AllBet.Url}{GameConst.AllBet.BettingDetails}";
             return JsonConvert.DeserializeObject<AllBetServicesResponse>(await CallAPI(Url, Parameter));
+
+        }
+
+        #endregion Call Login Third Party API
+
+
+        #region Call Betting Details Third Party API
+
+        public static async Task<dynamic> BettingDetailsByUserCallAPI(string StartTime = null, string EndTime = null, string Username = null)
+        {
+            if (StartTime == null)
+                StartTime = DateTime.Now.AddMinutes(-5).ToString("yyyy-MM-dd HH:mm:ss");
+            if (EndTime == null)
+                EndTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+            var Parameter = $"random={Random()}&client={Username}&startTime={StartTime}&endTime={EndTime}&pageIndex=1&pageSize=100";
+            var Url = $"{GameConst.AllBet.Url}{GameConst.AllBet.BettingDetailsByUser}";
+            return JsonConvert.DeserializeObject(await CallAPI(Url, Parameter));
         }
 
         #endregion Call Login Third Party API

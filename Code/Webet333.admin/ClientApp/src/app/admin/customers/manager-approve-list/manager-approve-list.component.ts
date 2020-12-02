@@ -183,7 +183,6 @@ export class ManagerApproveListComponent implements OnInit {
     }
 
     OpenWindows(Content, id, verified) {
-        debugger
         this.openWindowCustomClass(Content);
         this.rowId = id;
         this.verified = verified == "accept" ? "Approved" : "Rejected";

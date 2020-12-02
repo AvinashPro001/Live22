@@ -131,7 +131,7 @@ namespace Webet333.api.Helpers
             {
                 dynamic resultJoker = JsonConvert.DeserializeObject(await GameBalanceHelpers.CallThirdPartyApi(jokerURL, stringContent));
                 JokerBalance = resultJoker.Credit == null ? null : resultJoker.Credit;
-                status=Convert.ToDecimal(resultJoker.OutstandingCredit) > 0 ? "completed" : "waiting";
+                status=Convert.ToDecimal(resultJoker.OutstandingCredit) > 0 ? "waiting" : "completed";
             }
             catch (Exception ex)
             {
