@@ -16,5 +16,9 @@ namespace Webet333.models.Request.Account
         [Required]
         [JsonProperty(PropertyName = "managerPassword")]
         public string ManagerPassword { get; set; }
+
+        [Required]
+        [JsonProperty(PropertyName = "gameName")]
+        public string GameName { get; set; }
     }
 }

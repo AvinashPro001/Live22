@@ -296,6 +296,8 @@
 
             public const string Kiss918_ResetPassword = "Game/Kiss918/ResetPassword";
 
+            public const string Kiss918_ResetPassword_By_Admin = "Game/Kiss918/ResetPassword/ByAdmin";
+
             public const string AllUsers_Kiss918_ResetPassword = "Game/Kiss918_AllUsers/ResetPassword";
 
             public const string GameJokerRegister = "Game/Joker/Register";
@@ -462,6 +464,7 @@
         {
             public const string Register = "pussy888/register";
             public const string ResetPassword = "pussy888/ResetPassword";
+            public const string ResetPasswordByAdmin = "pussy888/ResetPassword/ByAdmin";
             public const string AllUsers_Pussy888_ResetPassword = "pussy888/AllUsers_Pussy888_ResetPassword";
         }
 

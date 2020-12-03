@@ -2986,6 +2986,37 @@ namespace Webet333.api.Controllers
 
         #endregion
 
+        #region 918 Kiss game password reset by Admin
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.Kiss918_ResetPassword_By_Admin)]
+        public async Task<IActionResult> Kiss918GamePasswordResetByAdmin([FromBody] SlotsGamePasswordResertByAdmin request)
+        {
+            await ValidateUser(role:RoleConst.Admin);
+            using (var game_helper = new GameHelpers(Connection))
+            {
+                var newPassword = Pussy888GameHelpers.genratePassword();
+
+                var PasswordUpdateRequest = new ProfileResponse { 
+                    UserName=request.Username,
+                    UserName918= request.GameUsername,
+                    Password918 = request.GamePassword,
+                };
+                
+                var result = await game_helper.Kiss918GamePasswordReset(PasswordUpdateRequest, newPassword);
+                if (result.code != 0) return BadResponse(result.msg);
+                var profileUpdateRequest = new ProfileEditRequest();
+                profileUpdateRequest.Id =request.UserId;
+                profileUpdateRequest.Password918 = newPassword;
+                using (var user_help = new UserHelpers(Connection))
+                    await user_help.UpdateProfile(profileUpdateRequest);
+                await game_helper.ResetPasswordStatusUpdate(true, request.RowId);
+                return OkResponse(new { newPassword });
+            }
+        }
+
+        #endregion
+
         #region All 918 Kiss game users password reset
 
         [Authorize]

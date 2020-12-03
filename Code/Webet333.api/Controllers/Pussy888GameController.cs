@@ -11,6 +11,7 @@ using Webet333.api.Helpers;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
+using Webet333.models.Request.Game;
 using Webet333.models.Request.User;
 using Webet333.models.Response.Account;
 using Webet333.models.Response.Game;
@@ -84,7 +85,35 @@ namespace Webet333.api.Controllers
 
         #endregion
 
+        #region Pussy888 game password reset by Admin
 
+        [Authorize]
+        [HttpPost(ActionsConst.Pussy888.ResetPasswordByAdmin)]
+        public async Task<IActionResult> Pussy888GamePasswordResetByAdmin([FromBody] SlotsGamePasswordResertByAdmin request)
+        {
+            await ValidateUser(role: RoleConst.Admin);
+            using (var pussygame_helper = new Pussy888GameHelpers(Connection))
+            {
+                var newPassword = Pussy888GameHelpers.genratePassword();
+
+                var PasswordUpdateRequest = new ProfileResponse
+                {
+                    UserName = request.Username,
+                    UserNamePussy888 = request.GameUsername,
+                    PasswordPussy888= request.GamePassword,
+                };
+
+
+                var result = await pussygame_helper.Pussy888GamePasswordReset(PasswordUpdateRequest, newPassword);
+                if (result.code != 0) return BadResponse(result.msg);
+                
+                await pussygame_helper.Pussy888PasswordUpdate(request.UserId.ToString(), newPassword);
+                await pussygame_helper.ResetPasswordStatusUpdate(true, request.RowId);
+                return OkResponse(new { newPassword });
+            }
+        }
+
+        #endregion
 
         #region All Pussy888 game users password reset
 
@@ -122,7 +151,6 @@ namespace Webet333.api.Controllers
         }
 
         #endregion
-
 
     }
 }

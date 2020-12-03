@@ -5,9 +5,9 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
     //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:55861/api/v1/'
+    apiUrl: 'http://localhost:55861/api/v1/'
 };
 
 export const account = {
@@ -135,6 +135,10 @@ export const customer = {
 
     paymentStatics: environment.apiUrl + 'payments/statics',
     paymentStaticsDetails: environment.apiUrl + 'payments/statics/details',
+
+
+    kiss918PasswordReset: environment.apiUrl + 'Game/Kiss918/ResetPassword/ByAdmin',
+    pussy888PasswordReset: environment.apiUrl + 'pussy888/ResetPassword/ByAdmin',
 
 
     pragmaticBrokenStatus: environment.apiUrl + 'pragmatic/broken',

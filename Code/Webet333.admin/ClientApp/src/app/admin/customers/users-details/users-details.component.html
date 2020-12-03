@@ -265,7 +265,7 @@
                     <td>918 Kiss Game:</td>
                     <td>{{kiss918Username== null ? 'Select username.' : kiss918Username }}</td>
                     <!--<td>{{Kiss918Password}}</td>-->
-                    <td><button>918Kiss Pass</button><button>Reset</button></td>
+                    <td><button (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Kiss918')">918Kiss Pass</button><button (click)="ResetPassword('Kiss918')">Reset</button></td>
                 </tr>
                 <tr>
                     <td>Joker Game:</td>
@@ -291,7 +291,7 @@
                     <td>Pussy888 Game:</td>
                     <td>{{pussyUsername== null ? 'Select username.' : pussyUsername }}</td>
                     <!--<td>{{Pussy888Password}}</td>-->
-                    <td><button>Pussy Pass</button><button>Reset</button></td>
+                    <td><button (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Pussy888')">Pussy Pass</button><button (click)="ResetPassword('Pussy888')">Reset</button></td>
                 </tr>
                 <tr>
                     <td>Allbet Game:</td>
@@ -312,7 +312,7 @@
             </table>
             <table style="text-align: center; margin-top: 10px;">
                 <tr>
-                    <td><button (click)="openWindowCustomClass(ManagerDailog)" class="btn btn-success">Unlock</button></td>
+                    <td><button  class="btn btn-success">Unlock</button></td>
                 </tr>
             </table>
         </div>
@@ -519,7 +519,7 @@
 </div>
 
 <div id="BettingDetails" class="tabcontent">
-    <div class="row col-12">
+    <!--<div class="row col-12">
         <div class="p-2 col-md-2">
             <h4 class="text-muted text-thin">Game</h4>
             <select class="form-control" id="GameName" (change)="onGameChange($event)">
@@ -581,7 +581,7 @@
         <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'70'" [limit]="7" [scrollbarH]="true">
         </ngx-datatable>
 
-    </div>
+    </div>-->
 </div>
 
 <ng-template #content let-modal>
@@ -648,6 +648,13 @@
         </button>
     </div>
     <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12 col-sm-12" style="display:flex">
+                <label class="col-md-3">{{GameName}} Username</label>
+                <label class="col-md-3">{{GameName=="Pussy888"?Pussy888Password:(GameName=="Kiss918"?Kiss918Password:null)}}</label>
+            </div>
+        </div>
+        <br />
         <div class="row">
             <div class="col-md-12 col-sm-12" style="display:flex">
                 <label class="col-md-3">Manager Username</label>

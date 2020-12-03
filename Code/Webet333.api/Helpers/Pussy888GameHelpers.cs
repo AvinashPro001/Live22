@@ -235,6 +235,18 @@ namespace Webet333.api.Helpers
 
         #endregion
 
+        #region  Pussy888 game Password Status Update
+
+        internal async Task ResetPasswordStatusUpdate(bool ResetPassword,string RowId)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.Global.ResetPasswordStatusUpdate, new { ResetPassword, RowId });
+            }
+        }
+
+        #endregion
+
         #region GET ALL Pussy GAME USERS
 
         public async Task<List<Kiss918GamePasswordResetResponse>> GetAllPussy888Usersname()
@@ -247,7 +259,6 @@ namespace Webet333.api.Helpers
         }
 
         #endregion
-
 
         #region House Keeping
 

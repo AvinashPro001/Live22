@@ -19,8 +19,11 @@ export class UsersDetailsComponent implements OnInit {
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
 
+    GameName: any;
     Kiss918Password: any = "XXXXXXXXXXX";
     Pussy888Password: any = "XXXXXXXXXXX";
+    Kiss918PasswordRowId: any;
+    Pussy888PasswordRowId: any;
 
     userid: any;
     customerData: any;
@@ -224,7 +227,8 @@ export class UsersDetailsComponent implements OnInit {
         try {
             this.newVal = event.value.id;
             this.userPassword = event.value.password;
-
+            this.Pussy888PasswordRowId = null;
+            this.Kiss918PasswordRowId = null;
             this.OnType(this.newVal);
         }
         catch{
@@ -240,6 +244,8 @@ export class UsersDetailsComponent implements OnInit {
             var someElement = document.getElementById("lockIcon");
             someElement.className = "";
             this.Resetvalue();
+            this.Pussy888PasswordRowId = null;
+            this.Kiss918PasswordRowId = null;
         }
     }
     //retriveUserbank(newVal: any) {
@@ -1541,6 +1547,19 @@ export class UsersDetailsComponent implements OnInit {
 
     //#endregion
 
+    //#region Open Unfinished Show Dailog Box
+
+    ManagerPasswordVerifiedShow(content, GameName) {
+        if (this.userid != null && this.userid != undefined) {
+            this.openWindowCustomClass(content);
+            this.GameName = GameName;
+        }
+        else
+            this.toasterService.pop('error', 'Error', "Select Username");
+    }
+
+    //#endregion
+
     //#region Open Model
 
     openWindowCustomClass(content) {
@@ -2236,16 +2255,61 @@ export class UsersDetailsComponent implements OnInit {
             let data = {
                 id: this.userid,
                 managerUsername: Username,
-                managerPassword: Password
+                managerPassword: Password,
+                gameName: this.GameName
             }
             this.adminService.add<any>(customer.managerApprovalShowPassword, data).subscribe(res => {
-                this.modalService.dismissAll();
-                this.Kiss918Password = res.data[0].PasswordKiss918;
-                this.Pussy888Password = res.data[0].PasswordPussy888;
+                if (this.GameName == "Pussy888") {
+                    this.Pussy888Password = res.data[0].PasswordPussy888;
+                    this.Pussy888PasswordRowId = res.data[0].RowId;
+                }
+
+                if (this.GameName == "Kiss918") {
+                    this.Kiss918Password = res.data[0].PasswordKiss918;
+                    this.Kiss918PasswordRowId = res.data[0].RowId;
+                }
             }, error => {
-                    this.modalService.dismissAll();
+                this.modalService.dismissAll();
                 this.toasterService.pop('error', 'Error', error.error.message);
             });
+        }
+        else
+            this.toasterService.pop('error', 'Error', "Select Username");
+    }
+
+    ResetPassword(GameName) {
+        if (this.userid != null && this.userid != undefined) {
+            if (GameName == "Pussy888") {
+                let data = {
+                    userId: this.userid,
+                    gameUsername: this.pussyUsername,
+                    gamePassword: this.Pussy888Password,
+                    username: this.userdata.username,
+                    rowId: this.Pussy888PasswordRowId
+                }
+                this.adminService.add<any>(customer.pussy888PasswordReset, data).subscribe(res => {
+                    this.toasterService.pop('success', 'Success', res.message);
+                }, error => {
+                    this.modalService.dismissAll();
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
+            }
+
+            if (GameName == "Kiss918") {
+                let data = {
+                    userId: this.userid,
+                    gameUsername: this.kiss918Username,
+                    gamePassword: this.Kiss918Password,
+                    username: this.userdata.username,
+                    rowId: this.Kiss918PasswordRowId
+                }
+                this.adminService.add<any>(customer.kiss918PasswordReset, data).subscribe(res => {
+                    this.toasterService.pop('success', 'Success', res.message);
+                }, error => {
+                    this.modalService.dismissAll();
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
+            }
         }
         else
             this.toasterService.pop('error', 'Error', "Select Username");

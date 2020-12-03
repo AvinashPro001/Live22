@@ -9,6 +9,8 @@
             public const string UpdateGlobalParamters = "[dbo].[Global_Variable_Update]";
 
             public const string ApiLog = "[dbo].[ApiLog_Insert]";
+
+            public const string ResetPasswordStatusUpdate = "[dbo].[Reset_Password_Status]";
         }
 
         public class Account

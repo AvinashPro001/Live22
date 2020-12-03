@@ -1417,6 +1417,18 @@ namespace Webet333.api.Helpers
         }
         #endregion 918 Kiss game password reset
 
+        #region  KISS918 game Password Status Update
+
+        internal async Task ResetPasswordStatusUpdate(bool ResetPassword, string RowId)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.Global.ResetPasswordStatusUpdate, new { ResetPassword, RowId });
+            }
+        }
+
+        #endregion
+
         #region House Keeping
 
         public void Dispose()
