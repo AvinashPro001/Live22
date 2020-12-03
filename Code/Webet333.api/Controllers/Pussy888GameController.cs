@@ -88,20 +88,19 @@ namespace Webet333.api.Controllers
 
         #region All Pussy888 game users password reset
 
-//        [Authorize]
+        [Authorize]
         [HttpGet(ActionsConst.Pussy888.AllUsers_Pussy888_ResetPassword)]
         public async Task<IActionResult> Kiss918GameAllUsersPasswordReset()
         {
-            //await ValidateUser();
+            await ValidateUser();
             using (var pussygame_helper = new Pussy888GameHelpers(Connection))
             {
                 var users = await pussygame_helper.GetAllPussy888Usersname();
 
-
                 List<Kiss918PasswordResetResponse> list = new List<Kiss918PasswordResetResponse>();
                 foreach (var user in users)
                 {
-                    var newPassword = "WB3@" + SecurityHelpers.DecryptPassword(user.Password);
+                    var newPassword = "Wb3@" + SecurityHelpers.DecryptPassword(user.Password);
                     if (newPassword.Length > 14)
                         newPassword = newPassword.Substring(0, 14);
 

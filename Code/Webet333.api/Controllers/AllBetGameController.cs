@@ -86,5 +86,34 @@ namespace Webet333.api.Controllers
         }
 
         #endregion 
+
+        #region AllBet game Login
+
+        [Authorize]
+        [HttpPost(ActionsConst.AllBet.ChangePassword)]
+        public async Task<IActionResult> ALLBetChangePassword([FromBody] GameLoginRequest request)
+        {
+            var Role = GetUserRole(User);
+
+            if (Role == RoleConst.Users)
+                request.Id = GetUserId(User).ToString();
+
+            if (Role == RoleConst.Admin)
+                if (string.IsNullOrEmpty(request.Id))
+                    return BadResponse("error_invalid_modelstate");
+
+            string username, password;
+            using (var account_helper = new AccountHelpers(Connection))
+            {
+                var user = await account_helper.UserGetBalanceInfo(request.Id);
+                username = user.AllBetGamePrefix + user.UserId;
+                password = SecurityHelpers.DecryptPassword(user.Password);
+            }
+            
+            var result = await AllBetGameHelpers.ChangePasswordCallAPI(username, password);
+            return OkResponse(result);
+        }
+
+        #endregion 
     }
 }

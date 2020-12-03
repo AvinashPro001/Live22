@@ -592,7 +592,7 @@ async function regisrationGame() {
 
                     var randomPasswordString = randomPassword();
 
-                    var password = "WB3@" + dec(GetLocalStorage("currentUserData"));
+                    var password = "Wb3@" + dec(GetLocalStorage("currentUserData"));
 
                     if (password.length > 14)
                         password = password.substring(0, 14)

@@ -88,7 +88,7 @@ namespace Webet333.api.Helpers
         internal static async Task<UserRegisterResponse> CallRegisterAPI(string MobileNo, string Name, string Pass)
         {
             //var Password = genratePassword();
-            var Password = "WB3@" + Pass;
+            var Password = "Wb3@" + Pass;
 
             if (Password.Length > 14)
                 Password = Password.Substring(0, 14);

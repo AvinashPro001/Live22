@@ -3001,7 +3001,7 @@ namespace Webet333.api.Controllers
                 List<Kiss918PasswordResetResponse> list = new List<Kiss918PasswordResetResponse>();
                 foreach (var user in users)
                 {
-                    var newPassword = "WB3@" + SecurityHelpers.DecryptPassword(user.Password);
+                    var newPassword = "Wb3@" + SecurityHelpers.DecryptPassword(user.Password);
                     if (newPassword.Length > 14)
                         newPassword = newPassword.Substring(0, 14);
 

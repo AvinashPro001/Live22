@@ -276,7 +276,7 @@ namespace Webet333.api.Controllers
             {
                 request.NewPassword = Pussy888GameHelpers.genrate6DigitPassword();
                 updateUser = await account_help.updatePasswordByMobielNumber(request);
-
+                await account_help.UserGamePasswordChange(updateUser.Id.ToString(), request.NewPassword, _hostingEnvironment);
                 var messageResponse = await account_help.SendSMSAPI(updateUser.MobileNo, $"Your Username is :" + updateUser.UserName + ".  Your New Password is: " + SecurityHelpers.DecryptPassword(updateUser.Password) + ",  It's Your Temporary Password. It will Expire After Some Time, So Please Change Your Password After Successfully Login.");
                 var count = messageResponse.Count(f => f == ',');
                 return OkResponse(new
@@ -286,7 +286,6 @@ namespace Webet333.api.Controllers
                         smsMessage = Localizer["e_" + messageResponse].Value,
                         statusCode = messageResponse
                     }
-
                 });
             }
         }

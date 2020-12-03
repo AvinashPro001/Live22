@@ -470,6 +470,8 @@
             public const string Register = "allbet/register";
 
             public const string Login = "allbet/login";
+
+            public const string ChangePassword = "allbet/changepassword";
         }
 
         public class Pragmatic
