@@ -801,6 +801,17 @@ namespace Webet333.api.Helpers
         }
         #endregion
 
+
+        #region UserBalance IsBegin Update
+        public async Task UserBalanceIsBeginUpdate(string UserId, bool IsBegin)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.TransferMoney.UserBalanceIsBeginUpdate, new { UserId, IsBegin});
+            }
+        }
+        #endregion
+
         #region House Keeping
         public void Dispose()
         {

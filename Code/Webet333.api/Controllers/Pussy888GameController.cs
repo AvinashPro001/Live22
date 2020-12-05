@@ -73,9 +73,19 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> PussyGamePasswordReset()
         {
             await ValidateUser();
+            string  password;
+            using (var account_helper = new AccountHelpers(Connection))
+            {
+                var user = await account_helper.UserGetBalanceInfo(UserEntity.Id.ToString());
+                password = SecurityHelpers.DecryptPassword(user.Password);
+            }
             using (var pussygame_helper = new Pussy888GameHelpers(Connection))
             {
-                var newPassword = Pussy888GameHelpers.genratePassword();
+                var newPassword = "Wb3@" + SecurityHelpers.DecryptPassword(password);
+
+                if (newPassword.Length > 14)
+                    newPassword = newPassword.Substring(0, 14);
+
                 var result = await pussygame_helper.Pussy888GamePasswordReset(UserEntity, newPassword);
                 if (result.code != 0) return BadResponse(result.msg);
                 await pussygame_helper.Pussy888PasswordUpdate(UserEntity.Id.ToString(), newPassword);
@@ -94,7 +104,10 @@ namespace Webet333.api.Controllers
             await ValidateUser(role: RoleConst.Admin);
             using (var pussygame_helper = new Pussy888GameHelpers(Connection))
             {
-                var newPassword = Pussy888GameHelpers.genratePassword();
+                var newPassword = "Wb3@" + SecurityHelpers.DecryptPassword(request.Password);
+
+                if (newPassword.Length > 14)
+                    newPassword = newPassword.Substring(0, 14);
 
                 var PasswordUpdateRequest = new ProfileResponse
                 {

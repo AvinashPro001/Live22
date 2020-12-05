@@ -60,6 +60,9 @@
 
             public const string ManagerGamePasswordShow = "account/manager/gamepassword/show";
 
+            //GameResetPasswordSelect
+            public const string GameResetPasswordSelect = "account/gamepassword/select";
+
             public const string AdminRegisterReportSelect = "account/users_register_report";
 
             public const string AdminBehaviourReportSelect = "account/users_behaviour_report";

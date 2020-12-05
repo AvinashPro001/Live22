@@ -883,12 +883,28 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
             using (var account_help = new AccountHelpers(Connection))
             {
-               var response= await account_help.ManagerApprovalGamePasswordSelect(request);
+                var response = await account_help.ManagerApprovalGamePasswordSelect(request);
                 return OkResponse(response);
             }
         }
 
-        #endregion 
+        #endregion
+
+        #region Manager resert List
+
+        [Authorize]
+        [HttpPost(ActionsConst.Account.GameResetPasswordSelect)]
+        public async Task<IActionResult> GameResetPasswordSelect([FromBody] SearchGlobalRequest request)
+        {
+            await CheckUserRole();
+            using (var account_help = new AccountHelpers(Connection))
+            {
+                var response = await account_help.GameResetPasswordSelect(request);
+                return OkResponse(response);
+            }
+        }
+
+        #endregion
 
         //#region check password
 

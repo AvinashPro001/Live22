@@ -83,6 +83,8 @@
 
             public const string ManagerApprovalPasswordSelect = "[dbo].[ManagerApproval_Password_Select]";
 
+            public const string GameResetPasswordSelect = "[dbo].[GameResetPassword_Select]";
+
             public const string AdminUsersRegisterSelect = "[dbo].[Admin_Users_Register_Report]";
 
             public const string AdminUsersBehaviourSelect = "[dbo].[Admin_Users_Behaviour_Report]";
@@ -476,6 +478,8 @@
             public const string MainWalletTransfer = "[dbo].[MainWallet_Withdraw_Deposit]";
 
             public const string TransferInsert = "[dbo].[UsersTransfer_Insert]";
+
+            public const string UserBalanceIsBeginUpdate = "[dbo].[UserBalance_IsBegin_Update]";
         }
     }
 }

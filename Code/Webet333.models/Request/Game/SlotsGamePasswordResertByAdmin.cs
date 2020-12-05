@@ -19,5 +19,8 @@ namespace Webet333.models.Request.Game
 
         [JsonProperty(PropertyName = "rowId")]
         public string RowId { get; set; }
+
+        [JsonProperty(PropertyName = "password")]
+        public string Password { get; set; }
     }
 }

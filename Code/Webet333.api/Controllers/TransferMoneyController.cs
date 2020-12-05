@@ -60,6 +60,7 @@ namespace Webet333.api.Controllers
 
             using (var transferMoney_helper = new TransferMoneyHelpers(Connection,Localizer))
             {
+                transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, true);
                 //Withdraw From Wallete
                 var WithdrawResponse = await transferMoney_helper.WithdrawFromWallet(userDetails, userDetails.FromWalletName, request.Amount, request.UserId.ToString(), _hostingEnvironment);
                 if (string.IsNullOrEmpty(WithdrawResponse.ErrorMessage) && string.IsNullOrEmpty(WithdrawResponse.GameName) && string.IsNullOrEmpty(WithdrawResponse.GameResponse))
@@ -83,17 +84,23 @@ namespace Webet333.api.Controllers
                         {
                             //Deposit In Main Wallet and Insert into DB Row 
                             await transferMoney_helper.DepositInWallet(userDetails, "Main Wallet", request.Amount, request.UserId.ToString(), _hostingEnvironment);
+                            transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
                             return BadResponse("Completed Transaction Is Failed So We Add Money in Main Wallet");
                         }
+                        transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
                         return BadResponse(DepositResponse.GameName + " Deposit Api Failed \n" + DepositResponse.ErrorMessage );
                     }
                 }
                 else
                 {
+                    transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
                     return BadResponse(WithdrawResponse.GameName + " Withdraw Api Failed \n" + WithdrawResponse.ErrorMessage);
                 }
+                transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
+                return OkResponse();
             }
-            return OkResponse();
+            
+            
         }
 
     }

@@ -17,6 +17,7 @@ using Webet333.dapper;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Entities;
+using Webet333.models.Request;
 using Webet333.models.Request.Account;
 using Webet333.models.Request.Game;
 using Webet333.models.Request.Payments;
@@ -423,6 +424,14 @@ namespace Webet333.api.Helpers
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
                 return await repository.GetDataAsync(StoredProcConsts.Account.ManagerApprovalPasswordSelect, request);
+            }
+        }
+
+        public async Task<dynamic> GameResetPasswordSelect(SearchGlobalRequest request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.GetDataAsync(StoredProcConsts.Account.GameResetPasswordSelect,new { request.Keyword,request.FromDate,request.ToDate });
             }
         }
 

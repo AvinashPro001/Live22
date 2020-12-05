@@ -20,31 +20,6 @@ const CustomerDatabase = {
             link: 'customers/users-details',
             icon: 'fa fa-address-card'
         },
-        //{
-        //    text: 'Maunal Betting Details',
-        //    link: 'customers/betting-details',
-        //    icon: 'fa fa-rocket'
-        //},
-        //{
-        //    text: 'Check Betting Details',
-        //    link: 'customers/bettingdetails-check',
-        //    icon: 'fa fa-rocket'
-        //},
-        //{
-        //    text: 'Report',
-        //    link: 'customers/promotion-report',
-        //    icon: 'fa fa-rocket'
-        //},
-        //{
-        //    text: 'LastUpdate Betails',
-        //    link: 'customers/betdetails-lastupdate-list',
-        //    icon: 'fa fa-clock-o'
-        //},
-        //{
-        //    text: 'Game Last Details ',
-        //    link: 'customers/game-last-betting-update',
-        //    icon: 'fa fa-clock-o'
-        //}
     ]
 }
 
@@ -162,48 +137,6 @@ const ManagerTab = {
             link: 'customers/tracking-list',
             icon: 'fa fa-clock-o'
         },
-        //{
-        //    text: 'Approval Duration',
-        //    link: 'customers/approval-duration',
-        //    icon: 'fa fa-clock-o'
-        //},
-        //{
-        //    text: 'Manager Approv List',
-        //    link: 'customers/manager-approvel-list',
-        //    icon: 'fa fa-stack-exchange'
-        //},
-        //{
-        //    text: 'Payment Statics',
-        //    icon: 'fa fa-angle-right',
-        //    submenu: [
-        //        {
-        //            text: 'Bank Withdraw',
-        //            link: 'customers/bank-withdraw',
-        //            icon: 'fa fa-info'
-        //        },
-        //        {
-        //            text: 'Bank Depsoit',
-        //            link: 'customers/bank-deposit',
-        //            icon: 'fa fa-info'
-        //        },
-        //    ]
-        //},
-        //{
-        //    text: 'Analytics',
-        //    icon: 'fa fa-angle-right',
-        //    submenu: [
-        //        {
-        //            text: 'Reference Keyword',
-        //            link: 'customers/refkeyword-add',
-        //            icon: 'fa fa-bar-chart'
-        //        },
-        //        {
-        //            text: 'Reference Analytics',
-        //            link: 'customers/refkeyword-analytics',
-        //            icon: 'fa fa-bar-chart'
-        //        }
-        //    ]
-        //}
     ]
 }
 
@@ -313,6 +246,13 @@ const Report = {
             link: 'customers/manager-approvel-list',
             icon: 'fa fa-stack-exchange'
         },
+
+        {
+            text: 'Resert Password List',
+            link: 'customers/gamereset-password-report',
+            icon: 'fa fa-stack-exchange'
+        },
+
         {
             text: 'Users Winlose Report',
             link: 'customers/users-winlose-report',

@@ -2500,10 +2500,15 @@ namespace Webet333.api.Controllers
                     UserId = Guid.Parse(request.UserId)
                 };
 
-                using (var playment_helper = new PaymentHelpers(Connection))
+                using (var payment_helper = new PaymentHelpers(Connection))
                 {
-                    await playment_helper.MainWalletDepositWithdraw(transferRequest.UserId.ToString(), Convert.ToDecimal(transferRequest.Amount), "Withdraw");
-                    await playment_helper.Transfer(transferRequest, request.UserId, request.UserId, request.UserId);
+                    using (var transferMoney_helper = new TransferMoneyHelpers(Connection, Localizer))
+                    {
+                        transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, true);
+                        await payment_helper.MainWalletDepositWithdraw(transferRequest.UserId.ToString(), Convert.ToDecimal(transferRequest.Amount), "Withdraw");
+                        await payment_helper.Transfer(transferRequest, request.UserId, request.UserId, request.UserId);
+                        transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
+                    }
                 }
                 return OkResponse(updateMainWallet);
             }
@@ -2970,9 +2975,19 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> Kiss918GamePasswordReset()
         {
             await ValidateUser();
+            string password;
+            using (var account_helper = new AccountHelpers(Connection))
+            {
+                var user = await account_helper.UserGetBalanceInfo(UserEntity.Id.ToString());
+                password = SecurityHelpers.DecryptPassword(user.Password);
+            }
             using (var game_helper = new GameHelpers(Connection))
             {
-                var newPassword = Pussy888GameHelpers.genratePassword();
+                var newPassword = "Wb3@" + SecurityHelpers.DecryptPassword(password);
+
+                if (newPassword.Length > 14)
+                    newPassword = newPassword.Substring(0, 14);
+
                 var result = await game_helper.Kiss918GamePasswordReset(UserEntity, newPassword);
                 if (result.code != 0) return BadResponse(result.msg);
                 var profileUpdateRequest = new ProfileEditRequest();
@@ -2995,7 +3010,10 @@ namespace Webet333.api.Controllers
             await ValidateUser(role:RoleConst.Admin);
             using (var game_helper = new GameHelpers(Connection))
             {
-                var newPassword = Pussy888GameHelpers.genratePassword();
+                var newPassword = "Wb3@" + SecurityHelpers.DecryptPassword(request.Password);
+
+                if (newPassword.Length > 14)
+                    newPassword = newPassword.Substring(0, 14);
 
                 var PasswordUpdateRequest = new ProfileResponse { 
                     UserName=request.Username,

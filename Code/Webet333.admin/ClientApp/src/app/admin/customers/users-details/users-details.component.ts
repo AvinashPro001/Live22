@@ -2107,9 +2107,10 @@ export class UsersDetailsComponent implements OnInit {
                         todate: this.toDate
                     }
                     this.adminService.add<any>(customer.AllBetBettingDetails, allbetModel).subscribe(res => {
+                        var list = res.data.histories.filter(s => s.client == this.allbetUsername.toLowerCase())
                         this.rows = [];
                         if (res.data.histories.length > 0) {
-                            res.data.histories.forEach(el => {
+                            list.forEach(el => {
                                 this.rows.push({
                                     AppType: el.appType,
                                     BetAmount: el.betAmount,
@@ -2285,7 +2286,8 @@ export class UsersDetailsComponent implements OnInit {
                     gameUsername: this.pussyUsername,
                     gamePassword: this.Pussy888Password,
                     username: this.userdata.username,
-                    rowId: this.Pussy888PasswordRowId
+                    rowId: this.Pussy888PasswordRowId,
+                    password: this.userPassword
                 }
                 this.adminService.add<any>(customer.pussy888PasswordReset, data).subscribe(res => {
                     this.toasterService.pop('success', 'Success', res.message);
@@ -2301,7 +2303,8 @@ export class UsersDetailsComponent implements OnInit {
                     gameUsername: this.kiss918Username,
                     gamePassword: this.Kiss918Password,
                     username: this.userdata.username,
-                    rowId: this.Kiss918PasswordRowId
+                    rowId: this.Kiss918PasswordRowId,
+                    password: this.userPassword
                 }
                 this.adminService.add<any>(customer.kiss918PasswordReset, data).subscribe(res => {
                     this.toasterService.pop('success', 'Success', res.message);
