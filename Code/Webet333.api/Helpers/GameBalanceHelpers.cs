@@ -115,7 +115,7 @@ namespace Webet333.api.Helpers
 
         #region Call API of Joker game
 
-        public async Task<dynamic> CallJokerGameBalance(string username)
+        public async Task<dynamic> CallJokerGameBalance(string username,bool returnData=false)
         {
             DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
@@ -130,6 +130,10 @@ namespace Webet333.api.Helpers
             try
             {
                 dynamic resultJoker = JsonConvert.DeserializeObject(await GameBalanceHelpers.CallThirdPartyApi(jokerURL, stringContent));
+
+                if (returnData)
+                    return resultJoker;
+
                 JokerBalance = resultJoker.Credit == null ? null : resultJoker.Credit;
                 status=Convert.ToDecimal(resultJoker.OutstandingCredit) > 0 ? "waiting" : "completed";
             }
@@ -138,6 +142,10 @@ namespace Webet333.api.Helpers
                 JokerBalance = null;
                 status = "waiting";
             }
+
+            if (returnData)
+                return null;
+
 
             return new { JokerBalance,status };
         }

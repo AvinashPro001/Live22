@@ -494,6 +494,8 @@
         public class Joker
         {
             public const string Broken = "joker/broken";
+
+            public const string BrokenDetails = "joker/broken/details";
         }
 
         public class WM

@@ -65,6 +65,9 @@ export class UsersDetailsComponent implements OnInit {
     unfinishedPragmaticColumns: any;
     unfinishedPragmaticRows: any;
 
+    unfinishedJokerColumns: any;
+    unfinishedJokerRows: any;
+
     loadingIndicator: boolean = false;
 
     promotiondata: any;
@@ -1547,7 +1550,7 @@ export class UsersDetailsComponent implements OnInit {
 
     //#endregion
 
-    //#region Open Unfinished Show Dailog Box
+    //#region Manager password Show Dailog Box
 
     ManagerPasswordVerifiedShow(content, GameName) {
         if (this.userid != null && this.userid != undefined) {

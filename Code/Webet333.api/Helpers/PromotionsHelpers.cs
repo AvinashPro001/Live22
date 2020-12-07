@@ -30,7 +30,7 @@ namespace Webet333.api.Helpers
                 var result = await repository.GetMultiDataAsync(StoredProcConsts.Promotions.Retrieve, new { Id, Keyword, LanguageCode });
                 promotions = result.Read<PromotionResponse>();
 
-                promotions = promotions.Where(x => x.IsAdmin == false).ToList();
+                //promotions = promotions.Where(x => x.IsAdmin == false).ToList();
 
                 if (promotions != null && promotions.Count > 0)
                 {

@@ -7,6 +7,7 @@ using Webet333.api.Helpers;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
+using Webet333.models.Request.GameBalance;
 
 namespace Webet333.api.Controllers
 {
@@ -35,7 +36,22 @@ namespace Webet333.api.Controllers
             }
         }
 
+        #endregion
+
+        #region Joker Broken Status details
+
+        [HttpPost(ActionsConst.Joker.BrokenDetails)]
+        public async Task<IActionResult> JokerBrokenGameStatusDetails([FromBody] UserBalanceRequest request)
+        {
+            using (var joker_helper = new GameBalanceHelpers(Connection))
+            {
+                var res = await joker_helper.CallJokerGameBalance(request.Username,true);
+                return OkResponse(res);
+            }
+        }
+
         #endregion 
+
 
     }
 }

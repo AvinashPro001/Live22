@@ -161,7 +161,7 @@
                 </div>
                 <div class="row">
                     <h4 class="col-5 h4">Joker Status :</h4>
-                    <h4 class="col-6 h4">{{userJokerUnfinished}}</h4>
+                    <h4 class="col-6 h4">{{userJokerUnfinished}} &nbsp;&nbsp;&nbsp; <span (click)="unfinishedShow(pragmaticUnfinishedList)" class="fa fa-question-circle"></span></h4>
                 </div>
             </div>
         </div>
@@ -630,6 +630,22 @@
     </div>
     <div class="modal-body">
         <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="unfinishedPlaytechRows" [loadingIndicator]="loadingIndicator" [columns]="unfinishedPlaytechColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7">
+        </ngx-datatable>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #playtechUnfinishedList let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">View Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="unfinishedJokerRows" [loadingIndicator]="loadingIndicator" [columns]="unfinishedJokerColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7">
         </ngx-datatable>
     </div>
     <div class="modal-footer">
