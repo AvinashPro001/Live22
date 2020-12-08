@@ -738,7 +738,7 @@ namespace Webet333.api.Controllers
             if (request.ToDate.Subtract(request.FromDate).TotalDays < 0)
                 return BadResponse("From Date is greater than To date");
 
-            var response = await WMGameHelpers.BettingDetailsCallAPI(request.FromDate.ToString("yyyyMMddHHmmss"), request.ToDate.ToString("yyyyMMddHHmmss"),request.Username);
+            var response = await WMGameHelpers.BettingDetailsCallAPI(request.FromDate.ToString("yyyyMMddHHmmss"), request.ToDate.ToString("yyyyMMddHHmmss"), request.Username);
 
             return OkResponse(response);
         }
@@ -2231,6 +2231,42 @@ namespace Webet333.api.Controllers
         }
         #endregion M8 Game Register
 
+        #region Pragmatic Game Register
+        [HttpGet(ActionsConst.Game.GameRegisterPragmaticRemains)]
+        public async Task<IActionResult> GameRegisterPragmatic()
+        {
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+            //if (request == null) return BadResponse("error_empty_request");
+            using (var game_helper = new GameHelpers(Connection: Connection))
+            {
+                var result = await game_helper.PragmaticNotRegisterUsers();
+                if (result.Count == 0)
+                {
+                    return OkResponse("All Users registered with Pragmatic Game.");
+                }
+                else
+                {
+                    for (int i = 0; i < result.Count; i++)
+                    {
+                        string username;
+                        using (var account_helper = new AccountHelpers(Connection))
+                        {
+                            var user = await account_helper.UserGetBalanceInfo(result[i].Id.ToString());
+                            username = user.PragmaticGamePrefix + user.UserId;
+                        }
+                        var resultRegister = await PragmaticGameHelpers.RegisterCallAPI(username);
+                        using (var pragmatic_helper = new PragmaticGameHelpers(Connection))
+                        {
+                            if (resultRegister.error == "0")
+                                await pragmatic_helper.PragmaticRegister(result[i].Id.ToString(), username, JsonConvert.SerializeObject(resultRegister));
+                        }
+                    }
+                }
+                return OkResponse(result);
+            }
+        }
+        #endregion Pragmatic Game Register
+
         #endregion All game Register
 
         #region M8 Bet Default Limit Update
@@ -3007,7 +3043,7 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.Kiss918_ResetPassword_By_Admin)]
         public async Task<IActionResult> Kiss918GamePasswordResetByAdmin([FromBody] SlotsGamePasswordResertByAdmin request)
         {
-            await ValidateUser(role:RoleConst.Admin);
+            await ValidateUser(role: RoleConst.Admin);
             using (var game_helper = new GameHelpers(Connection))
             {
                 var newPassword = "Wb3@" + SecurityHelpers.DecryptPassword(request.Password);
@@ -3015,16 +3051,17 @@ namespace Webet333.api.Controllers
                 if (newPassword.Length > 14)
                     newPassword = newPassword.Substring(0, 14);
 
-                var PasswordUpdateRequest = new ProfileResponse { 
-                    UserName=request.Username,
-                    UserName918= request.GameUsername,
+                var PasswordUpdateRequest = new ProfileResponse
+                {
+                    UserName = request.Username,
+                    UserName918 = request.GameUsername,
                     Password918 = request.GamePassword,
                 };
-                
+
                 var result = await game_helper.Kiss918GamePasswordReset(PasswordUpdateRequest, newPassword);
                 if (result.code != 0) return BadResponse(result.msg);
                 var profileUpdateRequest = new ProfileEditRequest();
-                profileUpdateRequest.Id =request.UserId;
+                profileUpdateRequest.Id = request.UserId;
                 profileUpdateRequest.Password918 = newPassword;
                 using (var user_help = new UserHelpers(Connection))
                     await user_help.UpdateProfile(profileUpdateRequest);

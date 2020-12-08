@@ -269,6 +269,10 @@
 
             public const string GameRegisterAG = "Game/Register/AG";
 
+            public const string GameRegisterPragmatic = "Game/Register/Pragmatic";
+
+            public const string GameRegisterPragmaticRemains = "Game/Register/Pragmatic/Remains";
+
             public const string GameRegisterPlaytech = "Game/Register/Playtech";
 
             public const string GameRegister918Kiss = "Game/Register/918Kiss";

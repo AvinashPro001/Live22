@@ -1197,6 +1197,15 @@ namespace Webet333.api.Helpers
             }
         }
 
+        internal async Task<List<UsersResponseGameRegisterResponse>> PragmaticNotRegisterUsers()
+        {
+            using (var repository = new DapperRepository<UsersResponseGameRegisterResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Game.PragmaticGameNotRegistredUsers,new { });
+                return result.ToList();
+            }
+        }
+
         #region update download link
         internal async Task<dynamic> UpdateLink(AppDownloadLinkUpdateRequest request)
         {
