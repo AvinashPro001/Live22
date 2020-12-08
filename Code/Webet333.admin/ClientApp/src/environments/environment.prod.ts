@@ -5,8 +5,8 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
+    apiUrl: 'http://uatapi.webet333.com/api/v1/'
     //apiUrl: 'http://localhost:55861/api/v1/'
 };
 
@@ -144,6 +144,7 @@ export const customer = {
     pragmaticBrokenStatus: environment.apiUrl + 'pragmatic/broken',
     playtechBrokenStatus: environment.apiUrl + 'playtech/broken',
     jokerBrokenStatus: environment.apiUrl + 'joker/broken',
+    jokerBrokenStatusDetails: environment.apiUrl + 'joker/broken/details',
 
     depositDdl: environment.apiUrl + 'payments/deposit/dropdown_deposit',
     addDeposit: environment.apiUrl + 'payments/deposit',

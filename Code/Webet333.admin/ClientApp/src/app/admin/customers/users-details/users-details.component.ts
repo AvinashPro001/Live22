@@ -472,6 +472,14 @@ export class UsersDetailsComponent implements OnInit {
             { prop: 'PlaySessionID' },
         ];
 
+        this.unfinishedJokerColumns = [
+            { prop: 'Username' },
+            { prop: 'Credit' },
+            { prop: 'OutstandingCredit' },
+            { prop: 'FreeCredit' },
+            { prop: 'OutstandingFreeCredit' }
+        ];
+
         this.unfinishedPlaytechColumns = [
             { prop: 'No' },
             { prop: 'Playername' },
@@ -1634,6 +1642,20 @@ export class UsersDetailsComponent implements OnInit {
             this.userJokerUnfinished = res.data.BrokenStatus;
         });
 
+        let dataJokerDetails = {
+            username: this.jokerUsername
+        }
+        this.adminService.add<any>(customer.jokerBrokenStatusDetails, dataJokerDetails).subscribe(res => {
+            this.unfinishedJokerRows = [];
+            this.unfinishedJokerRows.push({
+                    Username: res.data.Username,
+                    Credit: res.data.Credit,
+                    OutstandingCredit: res.data.OutstandingCredit,
+                    FreeCredit: res.data.FreeCredit,
+                    OutstandingFreeCredit: res.data.OutstandingFreeCredit,
+                });
+
+        });
 
     }
 

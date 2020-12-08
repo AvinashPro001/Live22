@@ -395,6 +395,8 @@
 
             public const string BettingDetails = "betlog_pieceof_histories_in30days";
 
+            public const string BettingDetailsByUser = "client_betlog_query";
+
             public const string PropertyId = "2842514";
 
             public const string DESKey = "vO+n2krxCNmFMSXqMdY9zadAUX8s/Uo0";
@@ -471,6 +473,12 @@
             public const string ServId = "MES01";
 
             public const string Title = "WEBET333";
+
+            public const string TrioUrl = "http://cloudsms.trio-mobile.com/index.php/api/bulk_mt?";
+
+            public const string TrioApiKey = "NUC13010100006272b6dac990a5a38519c724051e6d82d30e";
+
+            public const string TrioSenderId = "CLOUDSMS";
         }
     }
 #elif STAG

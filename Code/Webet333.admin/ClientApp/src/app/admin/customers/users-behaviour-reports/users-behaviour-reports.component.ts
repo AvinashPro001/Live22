@@ -40,9 +40,6 @@ export class UsersBehaviourReportsComponent implements OnInit {
 
     }
 
-
-
-
     setPageData() {
         this.rows = [];
         this.loadingIndicator = true;

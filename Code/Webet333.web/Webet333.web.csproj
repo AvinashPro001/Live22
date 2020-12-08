@@ -6,6 +6,7 @@
     <Configurations>Debug;Release;Stag</Configurations>
     <SignAssembly>false</SignAssembly>
     <DelaySign>true</DelaySign>
+    <UserSecretsId>9b01d7cf-dabc-41c8-b430-0f8d6bffb84b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -161,7 +161,7 @@
                 </div>
                 <div class="row">
                     <h4 class="col-5 h4">Joker Status :</h4>
-                    <h4 class="col-6 h4">{{userJokerUnfinished}} &nbsp;&nbsp;&nbsp; <span (click)="unfinishedShow(pragmaticUnfinishedList)" class="fa fa-question-circle"></span></h4>
+                    <h4 class="col-6 h4">{{userJokerUnfinished}} &nbsp;&nbsp;&nbsp; <span (click)="unfinishedShow(jokerUnfinishedList)" class="fa fa-question-circle"></span></h4>
                 </div>
             </div>
         </div>
@@ -171,65 +171,6 @@
                     <h3>Game Username</h3>
                 </div>
             </div>
-            <!--<div class="col-11 offset-1">
-                <div class="row">
-                    <h4 class="col-5 h4">AG Game:</h4>
-                    <h4 class="col-6 h4">{{agUsername== null ? 'Select username.' : agUsername }}</h4>
-                </div>
-                <div class="row">
-                    <h4 class="col-5 h4">DG Game:</h4>
-                    <h4 class="col-6 h4">{{dgUsername== null ? 'Select username.' : dgUsername }}</h4>
-                </div>
-                <div class="row">
-                    <h4 class="col-5 h4">Playtech Game:</h4>
-                    <h4 class="col-6 h4">{{playtechUsername== null ? 'Select username.' : playtechUsername }}</h4>
-                </div>
-                <div class="row">
-                    <h4 class="col-5 h4">SA Game:</h4>
-                    <h4 class="col-6 h4">{{saUsername== null ? 'Select username.' : saUsername }}</h4>
-                </div>
-                <div class="row">
-                    <h4 class="col-5 h4">Sexy Bacc. Game:</h4>
-                    <h4 class="col-6 h4">{{sexyUsername== null ? 'Select username.' : sexyUsername }}</h4>
-                </div>
-                <div class="row">
-                    <h4 class="col-5 h4">918 Kiss Game:</h4>
-                    <h4 class="col-5 h4">{{kiss918Username== null ? 'Select username.' : kiss918Username }}</h4>
-                    <h4 class="col-2 h4">XXXXXXX</h4>
-                </div>
-                <div class="row">
-                    <h4 class="col-5 h4">Joker Game:</h4>
-                    <h4 class="col-6 h4">{{jokerUsername== null ? 'Select username.' :jokerUsername }}</h4>
-                </div>
-                <div class="row">
-                    <h4 class="col-5 h4">Mega Game:</h4>
-                    <h4 class="col-6 h4">{{mega888Username== null ? 'Select username.' : mega888Username }}</h4>
-                </div>
-                <div class="row">
-                    <h4 class="col-5 h4">Maxbet Game:</h4>
-                    <h4 class="col-6 h4">{{maxbetUsername== null ? 'Select username.' : maxbetUsername }}</h4>
-                </div>
-                <div class="row">
-                    <h4 class="col-5 h4">M8 Game:</h4>
-                    <h4 class="col-6 h4">{{m8Username== null ? 'Select username.' : m8Username }}</h4>
-                </div>
-                <div class="row">
-                    <h4 class="col-5 h4">Pussy888 Game:</h4>
-                    <h4 class="col-6 h4">{{pussyUsername== null ? 'Select username.' : pussyUsername }}</h4>
-                </div>
-                <div class="row">
-                    <h4 class="col-5 h4">Allbet Game:</h4>
-                    <h4 class="col-6 h4">{{allbetUsername== null ? 'Select username.' : allbetUsername }}</h4>
-                </div>
-                <div class="row">
-                    <h4 class="col-5 h4">WM Game:</h4>
-                    <h4 class="col-6 h4">{{wmUsername== null ? 'Select username.' : wmUsername }}</h4>
-                </div>
-                <div class="row">
-                    <h4 class="col-5 h4">Pragmatic Game:</h4>
-                    <h4 class="col-6 h4">{{pragmaticUsername== null ? 'Select username.' : pragmaticUsername }}</h4>
-                </div>
-            </div>-->
             <table class="table-format" border="1">
                 <tr>
                     <th>GameName</th>
@@ -265,7 +206,7 @@
                     <td>918 Kiss Game:</td>
                     <td>{{kiss918Username== null ? 'Select username.' : kiss918Username }}</td>
                     <!--<td>{{Kiss918Password}}</td>-->
-                    <td><button (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Kiss918')">918Kiss Pass</button><button (click)="ResetPassword('Kiss918')">Reset</button></td>
+                    <td><button class="btn btn-primary" (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Kiss918')">918Kiss Pass</button>&nbsp;<button class="btn btn-primary" (click)="ResetPassword('Kiss918')">Reset</button></td>
                 </tr>
                 <tr>
                     <td>Joker Game:</td>
@@ -291,7 +232,7 @@
                     <td>Pussy888 Game:</td>
                     <td>{{pussyUsername== null ? 'Select username.' : pussyUsername }}</td>
                     <!--<td>{{Pussy888Password}}</td>-->
-                    <td><button (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Pussy888')">Pussy Pass</button><button (click)="ResetPassword('Pussy888')">Reset</button></td>
+                    <td><button class="btn btn-primary" (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Pussy888')">Pussy Pass</button>&nbsp;<button class="btn btn-primary" (click)="ResetPassword('Pussy888')">Reset</button></td>
                 </tr>
                 <tr>
                     <td>Allbet Game:</td>
@@ -637,7 +578,7 @@
     </div>
 </ng-template>
 
-<ng-template #playtechUnfinishedList let-modal>
+<ng-template #jokerUnfinishedList let-modal>
     <div class="modal-header">
         <h4 class="modal-title">View Details</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">

@@ -168,7 +168,7 @@ export class PromotionAddComponent implements OnInit {
             isSportsCategory: (document.getElementById("chk_isSportsCategory") as HTMLInputElement).checked,
         }
 
-        
+
 
         if (dataSelect.turnovertime == undefined && dataSelect.winturn == undefined) {
             this.disabled = false;
@@ -287,4 +287,25 @@ export class PromotionAddComponent implements OnInit {
             temporaryFileReader.readAsDataURL(file);
         });
     }
+
+
+    empList: Array<{ GameName: string, GameValue: number }> = [];
+
+    makeModelJsonString(event, gamename) {
+        //this.JsonModel = [];
+        //this.JsonModel = this.JsonModel.push({
+        //    GamName: gamename,
+        //    GameValue: event.target.checked
+        //});
+        //let customObj = new Custom();
+        //customObj.GameName = gamename;
+        //customObj.GameValue = event.target.checked
+
+        if (!this.empList.some((item) => item.GameName == gamename)) {
+        }
+
+        this.empList.push({ GameName: gamename, GameValue: event.target.checked });
+        console.log(JSON.stringify(this.empList));
+    }
+
 }

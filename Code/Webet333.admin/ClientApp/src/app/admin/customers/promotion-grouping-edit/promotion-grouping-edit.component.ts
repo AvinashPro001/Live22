@@ -42,6 +42,7 @@ export class PromotionGroupingEditComponent implements OnInit {
             this.PromotionGroupingData.details.forEach(EL => {
                 NotInGroupList = NotInGroupList.filter(i => i.id != EL.promotionId);
                 InGroupList.push(res.data.filter(i => i.id == EL.promotionId)[0]);
+                InGroupList = InGroupList.filter(i => i != undefined);
             })
             NotInGroupList.forEach(el => {
                 this.NotInGroup.push({
