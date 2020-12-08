@@ -7,9 +7,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.Game = exports.account = exports.environment = void 0;
 exports.environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
     //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:55861/api/v1/'
+    apiUrl: 'http://localhost:55861/api/v1/'
 };
 exports.account = {
     login: exports.environment.apiUrl + 'account/login',
@@ -123,6 +123,7 @@ exports.customer = {
     pragmaticBrokenStatus: exports.environment.apiUrl + 'pragmatic/broken',
     playtechBrokenStatus: exports.environment.apiUrl + 'playtech/broken',
     jokerBrokenStatus: exports.environment.apiUrl + 'joker/broken',
+    jokerBrokenStatusDetails: exports.environment.apiUrl + 'joker/broken/details',
     depositDdl: exports.environment.apiUrl + 'payments/deposit/dropdown_deposit',
     addDeposit: exports.environment.apiUrl + 'payments/deposit',
     promotionApplyCheck: exports.environment.apiUrl + 'promotions/promotionapply/check',
@@ -154,6 +155,7 @@ exports.customer = {
     promotionDelete: exports.environment.apiUrl + 'promotions/delete',
     promotionUpdate: exports.environment.apiUrl + 'promotions/update',
     promotionImageUpdate: exports.environment.apiUrl + 'promotions/image/update',
+    promotionHtml: exports.environment.apiUrl + 'promotions/html/retrieve',
     M8SetLimit: exports.environment.apiUrl + 'Game/M8/SetDefaultLimit',
     M8GetLimit: exports.environment.apiUrl + 'Game/M8/GetDefaultLimit',
     M8UsersLimitReset: exports.environment.apiUrl + 'Game/M8/ResetSetlimit',

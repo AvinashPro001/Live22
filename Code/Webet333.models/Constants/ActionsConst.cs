@@ -187,6 +187,8 @@
 
         public class Promotions
         {
+            public const string HtmlRetrive = "promotions/html/retrieve";
+
             public const string Retrive = "promotions/retrieve";
 
             public const string Insert = "promotions/insert";

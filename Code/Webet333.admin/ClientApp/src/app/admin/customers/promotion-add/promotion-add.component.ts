@@ -70,6 +70,8 @@ export class PromotionAddComponent implements OnInit {
     //#region ngOnInit
     ngOnInit() {
         this.getLanguage();
+        this.getHtml();
+
         for (let i = 0; i <= 100; i++) {
             this.quantities.push(i + "X")
             this.WinTurnquantities.push(i + "X")
@@ -292,20 +294,21 @@ export class PromotionAddComponent implements OnInit {
     empList: Array<{ GameName: string, GameValue: number }> = [];
 
     makeModelJsonString(event, gamename) {
-        //this.JsonModel = [];
-        //this.JsonModel = this.JsonModel.push({
-        //    GamName: gamename,
-        //    GameValue: event.target.checked
-        //});
-        //let customObj = new Custom();
-        //customObj.GameName = gamename;
-        //customObj.GameValue = event.target.checked
-
-        if (!this.empList.some((item) => item.GameName == gamename)) {
+        if (this.empList.some((item) => item.GameName == gamename)) {
+            this.empList = this.empList.filter(x => x.GameName != gamename);
         }
 
         this.empList.push({ GameName: gamename, GameValue: event.target.checked });
         console.log(JSON.stringify(this.empList));
+    }
+
+    getHtml() {
+        this.adminService.getAll<any>(customer.promotionHtml).subscribe(res => {
+            debugger
+            document.getElementById("turnover_CheckBoxs").innerHTML = res.data.turnoverHtml;
+            document.getElementById("winover_CheckBoxs").innerHTML = res.data.winover;
+        }, error => {
+        });
     }
 
 }
