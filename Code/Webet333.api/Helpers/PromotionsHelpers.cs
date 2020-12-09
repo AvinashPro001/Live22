@@ -229,32 +229,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<dynamic> PromotionHtml()
-        {
-            using (var repository = new DapperRepository<PromotionHtmlWalletResponse>(Connection))
-            {
-                var walletList = await repository.GetDataAsync(StoredProcConsts.Promotions.WalletRetriveForHtml, new { });
-
-                string turnoverHtml = string.Empty, winover = string.Empty;
-
-                foreach (var wallet in walletList)
-                {
-                    wallet.WalletType = wallet.WalletType.Replace(" Wallet", "").ToLower();
-                    if (wallet.IsType == "live" || wallet.IsType == "sports")
-                    {
-                        turnoverHtml += $@"<div class=""col-md-2"" style=""font-size:20px; ""><input type=""checkbox"" style=""height:20px;width:20px;"" id=""{wallet.WalletType}_id"" (change)=""makeModelJsonString($event,'{wallet.WalletType}')"" /> &nbsp; &nbsp;<label> {wallet.WalletType} </label></div>";
-                    }
-
-                    if (wallet.IsType == "slots")
-                    {
-                        winover += $@"<div class=""col-md-2"" style=""font-size:20px; ""><input type=""checkbox"" style=""height:20px;width:20px;"" id=""{wallet.WalletType}_id"" (change)=""makeModelJsonString($event,'{wallet.WalletType}')"" /> &nbsp; &nbsp;<label> {wallet.WalletType} </label></div>";
-                    }
-                }
-
-                return new { turnoverHtml, winover };
-            }
-        }
-
         public void Dispose()
         {
             GC.SuppressFinalize(this);

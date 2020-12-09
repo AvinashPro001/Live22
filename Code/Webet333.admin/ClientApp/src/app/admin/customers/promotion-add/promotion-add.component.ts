@@ -5,6 +5,7 @@ import { customer, account } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
+import { DomSanitizer } from "@angular/platform-browser";
 
 class ImageSnippet {
     pending: boolean = false;
@@ -27,6 +28,9 @@ export class PromotionAddComponent implements OnInit {
         );
     }
 
+    selectOverCategory: any;
+    overValue: any;
+
     public hasBaseDropZoneOver: boolean = false;
     public hasAnotherDropZoneOver: boolean = false;
     timeStart = { hour: 13, minute: 30 };
@@ -48,7 +52,8 @@ export class PromotionAddComponent implements OnInit {
         this.meridian = !this.meridian;
     }
 
-    displayCategory: boolean = false;
+    displayTurnoverCategory: boolean = false;
+    displayWinoverCategory: boolean = false;
     public quantities: Array<string> = [];
     public WinTurnquantities: Array<string> = [];
 
@@ -70,7 +75,6 @@ export class PromotionAddComponent implements OnInit {
     //#region ngOnInit
     ngOnInit() {
         this.getLanguage();
-        this.getHtml();
 
         for (let i = 0; i <= 100; i++) {
             this.quantities.push(i + "X")
@@ -93,23 +97,70 @@ export class PromotionAddComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private router: Router
+        private router: Router,
+        private sanitizer: DomSanitizer
     ) { }
     //#endregion
 
     OnSelect(event) {
         this.turnoverValue = event.value != undefined ? Number(event.value.replace("X", "")) : event.value;
-        if (this.turnoverValue == undefined) {
-            this.displayCategory = false;
-        }
-        else {
-            this.displayCategory = true;
-        }
+        //if (this.turnoverValue == undefined) {
+        //    this.displayTurnoverCategory = false;
+        //    this.displayWinoverCategory = false;
+        //}
+        //else {
+        //    this.displayTurnoverCategory = true;
+        //    this.displayWinoverCategory = false;
+        //}
     }
 
     OnSelectWinTurn(event) {
-        this.WinTurn = event.value != undefined ? Number(event.value.replace("X", "")) : event.value;
+        this.overValue = event.value != undefined ? Number(event.value.replace("X", "")) : event.value;
+        //if (this.WinTurn == undefined) {
+        //    this.displayTurnoverCategory = false;
+        //    this.displayWinoverCategory = false;
+        //}
+        //else {
+        //    this.displayTurnoverCategory = false;
+        //    this.displayWinoverCategory = true;
+        //}
+        if (this.selectOverCategory == 'Winover') {
+            this.WinTurn = this.overValue ;
+            this.turnoverValue = 0;
+        }
+
+        if (this.selectOverCategory == 'Turnover') {
+            this.WinTurn = 0;
+            this.turnoverValue = this.overValue ;
+        }
+
+
     }
+
+    UpdateOverSetting(Name, Value) {
+        if (Name == 'Winover' && Value == true) {
+            this.displayTurnoverCategory = false;
+            this.displayWinoverCategory = true;
+            this.selectOverCategory = Name;
+        }
+
+        if (Name == 'Turnover' && Value == true) {
+            this.displayTurnoverCategory = true;
+            this.displayWinoverCategory = false;
+            this.selectOverCategory = Name;
+        }
+
+        if (this.selectOverCategory == 'Winover') {
+            this.WinTurn = this.overValue ;
+            this.turnoverValue = 0;
+        }
+
+        if (this.selectOverCategory == 'Turnover') {
+            this.WinTurn = 0;
+            this.turnoverValue = this.overValue ;
+        }
+    }
+
 
     config = {
         displayKey: this.quantities, //if objects array passed which key to be displayed defaults to description
@@ -166,10 +217,56 @@ export class PromotionAddComponent implements OnInit {
             isperuseronly: (document.getElementById("chk_isPerUser") as HTMLInputElement).checked,
             bankAccountClaimOnce: (document.getElementById("chk_isBankAccountClaimOnce") as HTMLInputElement).checked,
             winturn: this.WinTurn,
-            isLiveCategory: (document.getElementById("chk_isLiveCategory") as HTMLInputElement).checked,
-            isSportsCategory: (document.getElementById("chk_isSportsCategory") as HTMLInputElement).checked,
+
+            isAG: (document.getElementById("ag_id") as HTMLInputElement).checked,
+            isDG: (document.getElementById("dg_id") as HTMLInputElement).checked,
+            isSA: (document.getElementById("sa_id") as HTMLInputElement).checked,
+            isPlaytech: (document.getElementById("playtech_id") as HTMLInputElement).checked,
+            isPragmatic: (document.getElementById("pragmatic_id") as HTMLInputElement).checked,
+            isSexyBaccarat: (document.getElementById("sexybaccarat_id") as HTMLInputElement).checked,
+            isWM: (document.getElementById("wm_id") as HTMLInputElement).checked,
+            isAllBet: (document.getElementById("allbet_id") as HTMLInputElement).checked,
+            isMaxbet: (document.getElementById("maxbet_id") as HTMLInputElement).checked,
+            isM8: (document.getElementById("m8") as HTMLInputElement).checked,
+            is918Kiss: (document.getElementById("918Kiss_id") as HTMLInputElement).checked,
+            isPussy888: (document.getElementById("joker_id") as HTMLInputElement).checked,
+            isMega888: (document.getElementById("mega888_id") as HTMLInputElement).checked,
+            isJoker: (document.getElementById("pussy888_id") as HTMLInputElement).checked,
+
+            isNewMember: (document.getElementById("newmember_id") as HTMLInputElement).checked,
+            isSports: (document.getElementById("sports_id") as HTMLInputElement).checked,
+            isCasino: (document.getElementById("casino_id") as HTMLInputElement).checked,
+            isSlots: (document.getElementById("slot_id") as HTMLInputElement).checked,
+            isRebate: (document.getElementById("rebate_id") as HTMLInputElement).checked,
+            isLimitedTime: (document.getElementById("limitedtime_id") as HTMLInputElement).checked,
+
+            isNormal: (document.getElementById("normal_id") as HTMLInputElement).checked,
+            isBronze: (document.getElementById("Bronze_id") as HTMLInputElement).checked,
+            isSilver: (document.getElementById("silver_id") as HTMLInputElement).checked,
+            isGold: (document.getElementById("gold_id") as HTMLInputElement).checked,
+            isPlatinum: (document.getElementById("platinum_id") as HTMLInputElement).checked,
+            isDiamond: (document.getElementById("diamond_id") as HTMLInputElement).checked,
         }
 
+        if (this.selectOverCategory == 'Winover') {
+            dataSelect.isAG = false;
+            dataSelect.isDG = false;
+            dataSelect.isSA = false;
+            dataSelect.isPlaytech = false;
+            dataSelect.isPragmatic = false;
+            dataSelect.isSexyBaccarat = false;
+            dataSelect.isWM = false;
+            dataSelect.isAllBet = false;
+            dataSelect.isMaxbet = false;
+            dataSelect.isM8 = false;
+        }
+
+        if (this.selectOverCategory == 'Turnover') {
+            dataSelect.is918Kiss = false;
+            dataSelect.isPussy888 = false;
+            dataSelect.isMega888 = false;
+            dataSelect.isJoker = false;
+        }
 
 
         if (dataSelect.turnovertime == undefined && dataSelect.winturn == undefined) {
@@ -186,13 +283,7 @@ export class PromotionAddComponent implements OnInit {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', "Please Select only one value either Turnover Times Or Winturn");
         }
-
-        if (dataSelect.turnovertime != 0) {
-            if (dataSelect.isSportsCategory == false && dataSelect.isLiveCategory == false) {
-                this.disabled = false;
-                return this.toasterService.pop('error', 'Error', "Please Select Atleast one category !!");
-            }
-        }
+        
 
         if (dataSelect.startDate === "NaN") {
             this.disabled = false;
@@ -287,27 +378,6 @@ export class PromotionAddComponent implements OnInit {
                 resolve(temporaryFileReader.result);
             };
             temporaryFileReader.readAsDataURL(file);
-        });
-    }
-
-
-    empList: Array<{ GameName: string, GameValue: number }> = [];
-
-    makeModelJsonString(event, gamename) {
-        if (this.empList.some((item) => item.GameName == gamename)) {
-            this.empList = this.empList.filter(x => x.GameName != gamename);
-        }
-
-        this.empList.push({ GameName: gamename, GameValue: event.target.checked });
-        console.log(JSON.stringify(this.empList));
-    }
-
-    getHtml() {
-        this.adminService.getAll<any>(customer.promotionHtml).subscribe(res => {
-            debugger
-            document.getElementById("turnover_CheckBoxs").innerHTML = res.data.turnoverHtml;
-            document.getElementById("winover_CheckBoxs").innerHTML = res.data.winover;
-        }, error => {
         });
     }
 

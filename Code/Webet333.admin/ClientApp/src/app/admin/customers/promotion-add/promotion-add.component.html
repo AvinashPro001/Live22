@@ -221,27 +221,28 @@
                         </div>
                         <div class="row col-md-6">
                             <div class="col-3">
-                                <label style="float:right;clear:both;padding-top:6px">Turnover Time :</label>
-                            </div>
-                            <div class="input-group col-9">
-                                <div class="form-control">
-                                    <ngx-select-dropdown tabindex="0" [multiple]="false"
-                                                         [config]="config" (change)="OnSelect($event)" [options]="quantities"></ngx-select-dropdown>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row col-md-12">
-                        <div class="row col-md-6">
-                            <div class="col-3">
                                 <label style="float:right;clear:both;padding-top:6px">Max Bonus :</label>
                             </div>
                             <div class="input-group col-9">
                                 <input id="txt_maxbonus" type="number" class="form-control" />
                             </div>
                         </div>
-                        <div class="row col-md-6">
+                        <!--<div class="row col-md-6">
+        <div class="col-3">
+            <label style="float:right;clear:both;padding-top:6px">Turnover Time :</label>
+        </div>
+        <div class="input-group col-9">
+            <div class="form-control">
+                <ngx-select-dropdown tabindex="0" [multiple]="false"
+                                     [config]="config" (change)="OnSelect($event)" [options]="quantities"></ngx-select-dropdown>
+            </div>
+        </div>
+    </div>-->
+                    </div>
+                    <br />
+                    <div class="row col-md-12">
+                      
+                        <!--<div class="row col-md-6">
                             <div class="col-3">
                                 <label style="float:right;clear:both;padding-top:6px">WinTurn :</label>
                             </div>
@@ -251,62 +252,137 @@
                                                          [config]="configWinTurn" (change)="OnSelectWinTurn($event)" [options]="WinTurnquantities"></ngx-select-dropdown>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     <br />
 
-                    <div class="row col-md-12" [style.display]="displayCategory ? 'flex' : 'none'" style="transition: display 2s;">
-                        <div class="row col-md-6">
-                            <div class="col-3">
-                                <label style="float:right;clear:both;padding-top:6px"></label>
-                            </div>
-                            <div class="input-group col-9">
-
-                            </div>
-                        </div>
-                        <div class="row col-md-6">
-                            <div class="col-3">
-                                <label style="float:right;clear:both;padding-top:6px">Promotion Category :</label>
-                            </div>
-                            <div class="input-group col-9">
 
 
-
-
-                                <div class="col-2">
-                                    <label style="float:right;clear:both;padding-top:6px">Live </label>
-                                </div>
-                                <div class="input-group col-1">
-                                    <label class="container">
-                                        <input type="checkbox" id="chk_isLiveCategory">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="col-2">
-                                    <label style="float:right;clear:both;padding-top:6px">Sports </label>
-                                </div>
-                                <div class="input-group col-1">
-                                    <label class="container">
-                                        <input type="checkbox" id="chk_isSportsCategory">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-
-
+                    <div class="col-11 offset-1">
+                        <form name="demo" style="display:flex;">
+                            <label class="container col-1 remover-margin ">
+                                Turnover
+                                <input type="radio" name="radio" (change)="UpdateOverSetting('Turnover',$event.target.checked)">
+                                <span class="checkmarkRadio"></span>
+                            </label>
+                            <label class="container col-1 remover-margin ">
+                                Winover
+                                <input type="radio" name="radio" (change)="UpdateOverSetting('Winover',$event.target.checked)">
+                                <span class="checkmarkRadio"></span>
+                            </label>
+                        </form>
+                        <br /><br />
+                        <div class="input-group col-2">
+                            <div class="form-control">
+                                <ngx-select-dropdown tabindex="0" [multiple]="false"
+                                                     [config]="configWinTurn" (change)="OnSelectWinTurn($event)" [options]="WinTurnquantities"></ngx-select-dropdown>
                             </div>
                         </div>
+                        <br /><br />
+                        <h3>Game</h3>
+
+                        <div class="row col-md-12" id="turnover_CheckBoxs" [style.display]="displayTurnoverCategory ? 'flex' : 'none'">
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="ag_id" /> &nbsp; &nbsp;
+                                <label> AG </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="dg_id" /> &nbsp; &nbsp;<label> DG </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="sa_id" /> &nbsp; &nbsp;<label> SA </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="playtech_id" /> &nbsp; &nbsp;<label> Playtech </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="sexybaccarat_id" /> &nbsp; &nbsp;<label> Sexy B. </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="wm_id" /> &nbsp; &nbsp;<label> WM </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="allbet_id" /> &nbsp; &nbsp;<label> AllBet </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="pragmatic_id" /> &nbsp; &nbsp;<label> Pragmatic </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="maxbet_id" /> &nbsp; &nbsp;<label> Maxbet </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="m8" /> &nbsp; &nbsp;<label> M8 </label>
+                            </div>
+                        </div>
+
+                        <div class="row col-md-12" id="winover_CheckBoxs" [style.display]="displayWinoverCategory ? 'flex' : 'none'">
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="918Kiss_id" /> &nbsp; &nbsp;<label> 918Kiss </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="joker_id" /> &nbsp; &nbsp;<label> Joker </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="mega888_id" /> &nbsp; &nbsp;<label> Mega888 </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="pussy888_id" /> &nbsp; &nbsp;<label> Pussy888 </label>
+                            </div>
+                        </div>
+
+
+                        <br /><br />
+                        <h3>Promotion Category</h3>
+
+                        <div class="row col-md-12">
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="newmember_id" /> &nbsp; &nbsp;
+                                <label> New Member </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="sports_id" /> &nbsp; &nbsp;<label> Sports </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="casino_id" /> &nbsp; &nbsp;<label> Casino </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="slot_id" /> &nbsp; &nbsp;<label> Slot </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="rebate_id" /> &nbsp; &nbsp;<label> Rebate </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="limitedtime_id" /> &nbsp; &nbsp;<label> Limited Time </label>
+                            </div>
+                        </div>
+
+
+                        <br /><br />
+                        <h3>Applly For User Level Promotion</h3>
+
+                        <div class="row col-md-12">
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="normal_id" /> &nbsp; &nbsp;
+                                <label> Normal </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="Bronze_id" /> &nbsp; &nbsp;<label> Bronze </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="silver_id" /> &nbsp; &nbsp;<label> Silver </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="gold_id" /> &nbsp; &nbsp;<label> Gold </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="platinum_id" /> &nbsp; &nbsp;<label> Platinum </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="diamond_id" /> &nbsp; &nbsp;<label> Diamond </label>
+                            </div>
+                        </div>
+
                     </div>
-
-
-
-                    <div class="row col-md-12" id="turnover_CheckBoxs">
-
-                    </div>
-
-                    <div class="row col-md-12" id="winover_CheckBoxs">
-
-                    </div>
-
 
                     <br />
                     <div class="row col-md-12">

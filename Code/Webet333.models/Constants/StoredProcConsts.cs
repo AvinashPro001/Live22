@@ -206,7 +206,6 @@
 
         public class Promotions
         {
-            public const string WalletRetriveForHtml = "[dbo].[WalletTypes_Select_for_html]";
 
             public const string Retrieve = "[dbo].[Promotion_Select]";
 

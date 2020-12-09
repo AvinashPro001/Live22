@@ -88,6 +88,87 @@ namespace Webet333.models.Response.Promotions
         public List<Notes> Terms { get; set; }
 
 
+
+
+        [JsonProperty(PropertyName = "isAG")]
+        public bool IsAG { get; set; }
+
+        [JsonProperty(PropertyName = "isDG")]
+        public bool IsDG { get; set; }
+
+        [JsonProperty(PropertyName = "isSA")]
+        public bool IsSA { get; set; }
+
+        [JsonProperty(PropertyName = "isPlaytech")]
+        public bool IsPlaytech { get; set; }
+
+        [JsonProperty(PropertyName = "isPragmatic")]
+        public bool IsPragmatic { get; set; }
+
+        [JsonProperty(PropertyName = "isSexyBaccarat")]
+        public bool IsSexyBaccarat { get; set; }
+
+        [JsonProperty(PropertyName = "isWM")]
+        public bool IsWM { get; set; }
+
+        [JsonProperty(PropertyName = "isAllBet")]
+        public bool IsAllBet { get; set; }
+
+        [JsonProperty(PropertyName = "isMaxbet")]
+        public bool IsMaxbet { get; set; }
+
+        [JsonProperty(PropertyName = "isM8")]
+        public bool IsM8 { get; set; }
+
+        [JsonProperty(PropertyName = "is918Kiss")]
+        public bool Is918Kiss { get; set; }
+
+        [JsonProperty(PropertyName = "isPussy888")]
+        public bool IsPussy888 { get; set; }
+
+        [JsonProperty(PropertyName = "isMega888")]
+        public bool IsMega888 { get; set; }
+
+        [JsonProperty(PropertyName = "isJoker")]
+        public bool IsJoker { get; set; }
+
+        [JsonProperty(PropertyName = "isNewMember")]
+        public bool IsNewMember { get; set; }
+
+        [JsonProperty(PropertyName = "isSports")]
+        public bool IsSports { get; set; }
+
+        [JsonProperty(PropertyName = "isCasino")]
+        public bool IsCasino { get; set; }
+
+        [JsonProperty(PropertyName = "isSlots")]
+        public bool IsSlots { get; set; }
+
+        [JsonProperty(PropertyName = "isRebate")]
+        public bool IsRebate { get; set; }
+
+        [JsonProperty(PropertyName = "isLimitedTime")]
+        public bool IsLimitedTime { get; set; }
+
+        [JsonProperty(PropertyName = "isNormal")]
+        public bool IsNormal { get; set; }
+
+        [JsonProperty(PropertyName = "isBronze")]
+        public bool IsBronze { get; set; }
+
+        [JsonProperty(PropertyName = "isSilver")]
+        public bool IsSilver { get; set; }
+
+        [JsonProperty(PropertyName = "isGold")]
+        public bool IsGold { get; set; }
+
+        [JsonProperty(PropertyName = "isPlatinum")]
+        public bool IsPlatinum { get; set; }
+
+        [JsonProperty(PropertyName = "isDiamond")]
+        public bool IsDiamond { get; set; }
+
+
     }
 
     public class Notes

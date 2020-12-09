@@ -14,6 +14,9 @@ import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 })
 export class PromotionEditComponent implements OnInit {
 
+    selectOverCategory: any;
+    overValue: any;
+
     data: any;
     editorData: any;
     startDate: any;
@@ -35,9 +38,15 @@ export class PromotionEditComponent implements OnInit {
     selectedWinTurnValue: any;
     turnoverValue: any;
     WinTurn: any;
-    displayCategory: boolean;
+    displayTurnoverCategory: boolean = false;
+    displayWinoverCategory: boolean = false;
     public quantities: Array<string> = [];
     public WinTurnquantities: Array<string> = [];
+
+
+    turnoverCheck: boolean;
+    winoverCheck: boolean;
+
     public onReady(editor) {
         editor.ui.getEditableElement().parentElement.insertBefore(
             editor.ui.view.toolbar.element,
@@ -75,18 +84,43 @@ export class PromotionEditComponent implements OnInit {
         });
     }
 
-    OnSelect(event) {
-        this.turnoverValue = event.value != undefined ? Number(event.value.replace("X", "")) : event.value;
-        if (this.turnoverValue == undefined) {
-            this.displayCategory = false;
+    OnSelectWinTurn(event) {
+        this.overValue = event.value != undefined ? Number(event.value.replace("X", "")) : event.value;
+        if (this.selectOverCategory == 'Winover') {
+            this.WinTurn = this.overValue;
+            this.turnoverValue = 0;
         }
-        else {
-            this.displayCategory = true;
+
+        if (this.selectOverCategory == 'Turnover') {
+            this.WinTurn = 0;
+            this.turnoverValue = this.overValue;
         }
+
+
     }
 
-    OnSelectWinTurn(event) {
-        this.WinTurn = event.value != undefined ? Number(event.value.replace("X", "")) : event.value;
+    UpdateOverSetting(Name, Value) {
+        if (Name == 'Winover' && Value == true) {
+            this.displayTurnoverCategory = false;
+            this.displayWinoverCategory = true;
+            this.selectOverCategory = Name;
+        }
+
+        if (Name == 'Turnover' && Value == true) {
+            this.displayTurnoverCategory = true;
+            this.displayWinoverCategory = false;
+            this.selectOverCategory = Name;
+        }
+
+        if (this.selectOverCategory == 'Winover') {
+            this.WinTurn = this.overValue;
+            this.turnoverValue = 0;
+        }
+
+        if (this.selectOverCategory == 'Turnover') {
+            this.WinTurn = 0;
+            this.turnoverValue = this.overValue;
+        }
     }
 
     config = {
@@ -135,15 +169,34 @@ export class PromotionEditComponent implements OnInit {
         this.timeStart = { hour: Number(startTime[0]), minute: Number(startTime[1]) };
         var endTime = this.data.endTime.split(":", 2);
         this.timeEnd = { hour: Number(endTime[0]), minute: Number(endTime[1]) };
+
         this.selectedTurnOverValue = this.data.turnovertime + "X";
         this.selectedWinTurnValue = this.data.winturn + "X";
+
         this.turnoverValue = this.data.turnovertime;
         this.WinTurn = this.data.winturn;
+
+
+        //turnoverCheck: boolean;
+        //winoverCheck: boolean;
+
+
         if (this.turnoverValue == 0) {
-            this.displayCategory = false;
+            this.turnoverCheck = false;
+            this.winoverCheck = true;
+            this.selectedWinTurnValue = this.data.winturn + "X";
+            this.selectOverCategory = 'Winover';
+            this.displayTurnoverCategory = false;
+            this.displayWinoverCategory = true;
         }
-        else {
-            this.displayCategory =true;
+
+        if (this.WinTurn == 0) {
+            this.turnoverCheck = true;
+            this.winoverCheck = false;
+            this.selectedWinTurnValue = this.data.turnovertime + "X";
+            this.displayTurnoverCategory = true;
+            this.displayWinoverCategory = false;
+            this.selectOverCategory = 'Turnover';
         }
     }
 
@@ -171,9 +224,59 @@ export class PromotionEditComponent implements OnInit {
             isperuseronly: (document.getElementById("chk_isPerUser") as HTMLInputElement).checked,
             bankAccountClaimOnce: (document.getElementById("chk_isBankAccountClaimOnce") as HTMLInputElement).checked,
             winturn: this.WinTurn,
-            isLiveCategory: (document.getElementById("chk_isLiveCategory") as HTMLInputElement).checked,
-            isSportsCategory: (document.getElementById("chk_isSportsCategory") as HTMLInputElement).checked,
+
+
+            isAG: (document.getElementById("ag_id") as HTMLInputElement).checked,
+            isDG: (document.getElementById("dg_id") as HTMLInputElement).checked,
+            isSA: (document.getElementById("sa_id") as HTMLInputElement).checked,
+            isPlaytech: (document.getElementById("playtech_id") as HTMLInputElement).checked,
+            isPragmatic: (document.getElementById("pragmatic_id") as HTMLInputElement).checked,
+            isSexyBaccarat: (document.getElementById("sexybaccarat_id") as HTMLInputElement).checked,
+            isWM: (document.getElementById("wm_id") as HTMLInputElement).checked,
+            isAllBet: (document.getElementById("allbet_id") as HTMLInputElement).checked,
+            isMaxbet: (document.getElementById("maxbet_id") as HTMLInputElement).checked,
+            isM8: (document.getElementById("m8") as HTMLInputElement).checked,
+            is918Kiss: (document.getElementById("918Kiss_id") as HTMLInputElement).checked,
+            isPussy888: (document.getElementById("joker_id") as HTMLInputElement).checked,
+            isMega888: (document.getElementById("mega888_id") as HTMLInputElement).checked,
+            isJoker: (document.getElementById("pussy888_id") as HTMLInputElement).checked,
+
+            isNewMember: (document.getElementById("newmember_id") as HTMLInputElement).checked,
+            isSports: (document.getElementById("sports_id") as HTMLInputElement).checked,
+            isCasino: (document.getElementById("casino_id") as HTMLInputElement).checked,
+            isSlots: (document.getElementById("slot_id") as HTMLInputElement).checked,
+            isRebate: (document.getElementById("rebate_id") as HTMLInputElement).checked,
+            isLimitedTime: (document.getElementById("limitedtime_id") as HTMLInputElement).checked,
+
+            isNormal: (document.getElementById("normal_id") as HTMLInputElement).checked,
+            isBronze: (document.getElementById("Bronze_id") as HTMLInputElement).checked,
+            isSilver: (document.getElementById("silver_id") as HTMLInputElement).checked,
+            isGold: (document.getElementById("gold_id") as HTMLInputElement).checked,
+            isPlatinum: (document.getElementById("platinum_id") as HTMLInputElement).checked,
+            isDiamond: (document.getElementById("diamond_id") as HTMLInputElement).checked,
         }
+
+        if (this.selectOverCategory == 'Winover') {
+            dataSelect.isAG = false;
+            dataSelect.isDG = false;
+            dataSelect.isSA = false;
+            dataSelect.isPlaytech = false;
+            dataSelect.isPragmatic = false;
+            dataSelect.isSexyBaccarat = false;
+            dataSelect.isWM = false;
+            dataSelect.isAllBet = false;
+            dataSelect.isMaxbet = false;
+            dataSelect.isM8 = false;
+        }
+
+        if (this.selectOverCategory == 'Turnover') {
+            dataSelect.is918Kiss = false;
+            dataSelect.isPussy888 = false;
+            dataSelect.isMega888 = false;
+            dataSelect.isJoker = false;
+        }
+
+
         if (dataSelect.turnovertime == 0 && dataSelect.winturn == 0) {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', "Please Select Turnover Times Or Winturn");
@@ -184,12 +287,6 @@ export class PromotionEditComponent implements OnInit {
             return this.toasterService.pop('error', 'Error', "Please Select only one value either Turnover Times Or Winturn");
         }
 
-        if (dataSelect.turnovertime != 0) {
-            if (dataSelect.isSportsCategory == false && dataSelect.isLiveCategory == false) {
-                this.disabled = false;
-                return this.toasterService.pop('error', 'Error', "Please Select Atleast one category !!");
-            }
-        }
 
         if (dataSelect.startDate === "NaN") {
             this.disabled = false;

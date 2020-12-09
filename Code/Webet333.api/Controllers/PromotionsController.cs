@@ -345,21 +345,5 @@ namespace Webet333.api.Controllers
 
         #endregion Promotion Report List
 
-        #region Html return
-
-        //[Authorize]
-        [HttpGet(ActionsConst.Promotions.HtmlRetrive)]
-        public async Task<IActionResult> PromotionHtml()
-        {
-            //await CheckUserRole();
-
-            using (var promotion_helper = new PromotionsHelpers(Connection))
-            {
-                var result = await promotion_helper.PromotionHtml();
-                return OkResponse(result);
-            }
-        }
-
-        #endregion Promotion Report List
     }
 }
