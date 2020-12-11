@@ -607,9 +607,9 @@ namespace Webet333.api.Helpers
 
         #region User Rebate History
 
-        internal async Task<List<dynamic>> getUserRebateHistory(GlobalListRequest request)
+        internal async Task<List<UserRebateHistoryResponse>> getUserRebateHistory(GlobalListRequest request)
         {
-            using (var GetRepository = new DapperRepository<dynamic>(Connection))
+            using (var GetRepository = new DapperRepository<UserRebateHistoryResponse>(Connection))
             {
                 var users = await GetRepository.GetDataAsync(StoredProcConsts.Game.UsersRebateHistory, new { request.UserId, request.FromDate, request.ToDate });
                 return users.ToList();

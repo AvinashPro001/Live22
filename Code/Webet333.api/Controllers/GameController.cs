@@ -317,7 +317,17 @@ namespace Webet333.api.Controllers
 
             using (var game_helper = new GameHelpers(Connection: Connection))
             {
-                return OkResponse(await game_helper.getUserRebateHistory(request));
+                var response = await game_helper.getUserRebateHistory(request);
+                if (Role == RoleConst.Users)
+                {
+                    var trunoverRebate = response.Where(x => x.GameType == "LIVE CASINO" || x.GameType == "SPORTS");
+                    var slotRebate = response.Where(x => x.GameType == "Slot");
+                    return OkResponse(new { trunoverRebate, slotRebate });
+                }
+                else
+                {
+                    return OkResponse(response);
+                }
             }
         }
 

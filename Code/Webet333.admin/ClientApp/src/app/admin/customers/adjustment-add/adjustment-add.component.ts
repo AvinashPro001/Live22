@@ -23,7 +23,7 @@ export class AdjustmentAddComponent implements OnInit {
     customerWallet: any;
     mainBal: any;
     kissBal: any;
-sexybaccaratBal:any;
+    sexybaccaratBal:any;
     maxbetBal: any;
     playtechBal: any;
     singleSelect: any = [];
