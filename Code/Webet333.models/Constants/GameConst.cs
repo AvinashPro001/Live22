@@ -254,7 +254,7 @@
 
             public const string APIBettingURL = "http://api.sa-rpt.com/api/api.aspx";
 
-            public const string GameLaunchURL = "https://wb3.sa-api9.com/app.aspx";
+            public const string GameLaunchURL = "https://www.sai.slgaming.net/app.aspx";
 
             public const string DESEncrptKey = "g9G16nTs";
 

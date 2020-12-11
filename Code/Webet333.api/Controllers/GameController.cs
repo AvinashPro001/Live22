@@ -321,8 +321,8 @@ namespace Webet333.api.Controllers
                 if (Role == RoleConst.Users)
                 {
                     var trunoverRebate = response.Where(x => x.GameType == "LIVE CASINO" || x.GameType == "SPORTS");
-                    var slotRebate = response.Where(x => x.GameType == "Slot");
-                    return OkResponse(new { trunoverRebate, slotRebate });
+                    var winloseRebate = response.Where(x => x.GameType == "Slot");
+                    return OkResponse(new { trunoverRebate, winloseRebate });
                 }
                 else
                 {

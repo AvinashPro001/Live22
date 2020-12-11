@@ -113,7 +113,7 @@ namespace Webet333.api.Controllers
                     var token = response.Descendants("Token").Single().Value;
                     var displayName = response.Descendants("DisplayName").Single().Value;
                     var language = Language.Name == "English" ? "en_US" : Language.Name == "Malay" ? "ms" : "zh_CN";
-                    var launchUrl = $"{GameConst.SAConst.GameLaunchURL}?username={displayName}&token={token}&lobby=A2717&lang={language}&returnurl=http://webet333.com&mobile={request.IsMobile}";
+                    var launchUrl = $"{GameConst.SAConst.GameLaunchURL}?username={displayName}&token={token}&lobby=A2717&lang={language}&returnurl={GameConst.BaseUrl}&mobile={request.IsMobile}";
                     return OkResponse(new SALoginResponse { Url = launchUrl, status = response.Descendants("ErrorMsgId").Single().Value, Message = response.Descendants("ErrorMsg").Single().Value });
                 }
                 return OkResponse(new SALoginResponse { status = response.Descendants("ErrorMsgId").Single().Value, Message = response.Descendants("ErrorMsg").Single().Value });
