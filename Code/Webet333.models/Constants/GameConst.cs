@@ -252,7 +252,7 @@
         {
             public const string APIURL = "http://sai-api.sa-apisvr.com/api/api.aspx";
 
-            public const string APIBettingURL = "http://api.sa-rpt.com/api/api.aspx";
+            public const string APIBettingURL = "http://sai-api.sa-apisvr.com/api/api.aspx";
 
             public const string GameLaunchURL = "https://www.sai.slgaming.net/app.aspx";
 
