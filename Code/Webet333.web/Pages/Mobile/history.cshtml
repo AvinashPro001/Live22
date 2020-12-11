@@ -5,12 +5,12 @@
 }
 <script src="~/js/mobile/m_bank.js"></script>
 <script>
-        DepositHistory(); 
-        //StatementHistory();
-        //PromotionHistory();
-        //WithdrawHistory();
-        //TransferHistory();
-        //RebateHistory();
+    DepositHistory();
+    //StatementHistory();
+    //PromotionHistory();
+    //WithdrawHistory();
+    //TransferHistory();
+    //RebateHistory();
 
     document.getElementById("navbarhide").style.display = "none";
     document.getElementById("hideBody").style.padding = "0px";
@@ -35,8 +35,8 @@
     </div>
     <div class="info-form history-tabs">
         <ul class="nav nav-tabs">
-            <li onclick="DepositHistory()" class="active"><a data-toggle="tab" href="#profileDeposit"><span key="deposit" class="lang"></span></a></li>    
-            <li onclick="WithdrawHistory()"><a  data-toggle="tab" href="#profilewithdrawal"><span key="withdrawal_title" class="lang"></span></a></li>
+            <li onclick="DepositHistory()" class="active"><a data-toggle="tab" href="#profileDeposit"><span key="deposit" class="lang"></span></a></li>
+            <li onclick="WithdrawHistory()"><a data-toggle="tab" href="#profilewithdrawal"><span key="withdrawal_title" class="lang"></span></a></li>
             <li onclick="TransferHistory()"><a data-toggle="tab" href="#profileTransfer"><span key="transfer_title" class="lang"></span></a></li>
             <li onclick="PromotionHistory()"><a data-toggle="tab" href="#promotion-apply"><span key="menu_promotion" class="lang"></span></a></li>
             <li onclick="RebateHistory()"><a data-toggle="tab" href="#rebate"><span key="rebate" class="lang"></span></a></li>
@@ -63,7 +63,7 @@
 
             <div id="profileDeposit" class="tab-pane fade in active">
                 <div style="text-align:center;">
-                    <img src="~/images/loading.gif" id="depositRefreshImage" style="display:none"/>
+                    <img src="~/images/loading.gif" id="depositRefreshImage" style="display:none" />
                 </div>
                 <div class="container full-height listing extra-bottom-padding" id="depositHistory">
 
@@ -77,8 +77,25 @@
             </div>
 
             <div id="rebate" class="tab-pane fade in">
-                <div class="container full-height listing extra-bottom-padding" id="rebateHistory">
-
+                <div class="container full-height listing extra-bottom-padding">
+                    <div class="info-form history-tabs">
+                        <ul class="nav nav-tabs">
+                            <li class="active" ><a data-toggle="tab" href="#loseRebate"><span key="loseRebate" class="lang"></span></a></li>
+                            <li><a data-toggle="tab" href="#turnOverCommissionRebate"><span key="turnoverCommissionRebate" class="lang"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="history-tabs">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in" id="loseRebate">
+                                <div class="container full-height listing extra-bottom-padding">
+                                </div>
+                            </div>
+                            <div class="tab-pane fade in" id="turnOverCommissionRebate">
+                                <div class="container full-height listing extra-bottom-padding">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -89,32 +106,32 @@
             </div>
 
             @*<div id="restore" class="tab-pane fade in ">
-                <div class="container full-height listing" id="restoreHistory">
-                    <div class="row transfer-content">
-                        <div class="col-xs-1 display-flex">
-                            <div class="back-btn rotate">
-                                <a href="">
-                                    <img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" />
-                                </a>
+                    <div class="container full-height listing" id="restoreHistory">
+                        <div class="row transfer-content">
+                            <div class="col-xs-1 display-flex">
+                                <div class="back-btn rotate">
+                                    <a href="">
+                                        <img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" />
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-4 display-flex">
-                            <div class="game-name">
-                                <p>652525</p>
-                                <div class="game-time">5525</div>
-                                <div class="game-date">4555555</div>
+                            <div class="col-xs-4 display-flex">
+                                <div class="game-name">
+                                    <p>652525</p>
+                                    <div class="game-time">5525</div>
+                                    <div class="game-date">4555555</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-4 display-flex">
-                            <p class="bank-name-detail">3625255</p>
-                            <div class="bank-name-amount">2222</div>
-                        </div><div class="col-xs-2">
-                            <div class="success-btn text-success">2522</div>
-                            <div class="text-d">Mainbalance</div>
+                            <div class="col-xs-4 display-flex">
+                                <p class="bank-name-detail">3625255</p>
+                                <div class="bank-name-amount">2222</div>
+                            </div><div class="col-xs-2">
+                                <div class="success-btn text-success">2522</div>
+                                <div class="text-d">Mainbalance</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
 
         </div>
     </div>

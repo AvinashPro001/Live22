@@ -1356,17 +1356,31 @@ async function RebateHistory() {
     LoaderShow();
     var model = {};
     var res = await PostMethodWithParameter(apiEndPoints.rebateHistory, model);
-    var result = res.data;
-    var rebateHistory = document.getElementById("rebateHistory");
-    rebateHistory.innerHTML = "";
-    if (result.length > 0) {
-        for (i = 0; i < result.length; i++) {
-            rebateHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].GameName + '</p><div class="game-time">' + parseFloat(result[i].Turnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + parseFloat(result[i].Rolling).toFixed(2) + '</p><div class="bank-name-amount">' + parseFloat(result[i].Bet).toFixed(2); + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + parseFloat(result[i].WinLose).toFixed(2) + '</div><div class="text-primary">' + parseFloat(result[i].CommAmount).toFixed(2); + '</div></div></div>'
+    var resultRebateLoseRebate = res.data.slotRebate;
+    var resultRebateTurnOverCommissionRebate = res.data.trunoverRebate;
+    var rebateLoseRebate = document.getElementById("loseRebate");
+    var rebateTurnOverCommissionRebate = document.getElementById("turnOverCommissionRebate");
+    rebateLoseRebate.innerHTML = "";
+    rebateTurnOverCommissionRebate.innerHTML = "";
+
+    if (resultRebateLoseRebate.length > 0) {
+        for (i = 0; i < resultRebateLoseRebate.length; i++) {
+            rebateLoseRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + resultRebateLoseRebate[i].gameName + '</p><div class="game-time">' + parseFloat(resultRebateLoseRebate[i].turnover).toFixed(2) + '</div><div class="game-date">' + (resultRebateLoseRebate[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + parseFloat(resultRebateLoseRebate[i].rolling).toFixed(2) + '</p><div class="bank-name-amount">' + parseFloat(resultRebateLoseRebate[i].bet).toFixed(2); + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + parseFloat(resultRebateLoseRebate[i].winLose).toFixed(2) + '</div><div class="text-primary">' + parseFloat(resultRebateLoseRebate[i].commAmount).toFixed(2); + '</div></div></div>'
         }
     }
     else {
-        rebateHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_rebate"></span></p></div></div>'
+        rebateLoseRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_rebate"></span></p></div></div>'
     }
+
+    if (resultRebateTurnOverCommissionRebate.length > 0) {
+        for (i = 0; i < resultRebateTurnOverCommissionRebate.length; i++) {
+            rebateTurnOverCommissionRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + resultRebateTurnOverCommissionRebate[i].gameName + '</p><div class="game-time">' + parseFloat(resultRebateTurnOverCommissionRebate[i].turnover).toFixed(2) + '</div><div class="game-date">' + (resultRebateTurnOverCommissionRebate[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + parseFloat(resultRebateTurnOverCommissionRebate[i].rolling).toFixed(2) + '</p><div class="bank-name-amount">' + parseFloat(resultRebateTurnOverCommissionRebate[i].bet).toFixed(2); + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + parseFloat(resultRebateTurnOverCommissionRebate[i].winLose).toFixed(2) + '</div><div class="text-primary">' + parseFloat(resultRebateTurnOverCommissionRebate[i].commAmount).toFixed(2); + '</div></div></div>'
+        }
+    }
+    else {
+        rebateTurnOverCommissionRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_rebate"></span></p></div></div>'
+    }
+
     get();
     LoaderHide();
 }

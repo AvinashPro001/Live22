@@ -1189,7 +1189,6 @@ async function Statement() {
 
 //#region Rebate History
 async function RebateHistory() {
-
     var contentToRemove = document.querySelectorAll("#navRebate");
     $(contentToRemove).remove();
 
@@ -1197,24 +1196,43 @@ async function RebateHistory() {
 
     };
     var res = await PostMethodWithParameter(apiEndPoints.rebateHistory, model);
-    $("#tbl_rebateHistory").find("tr:gt(0)").remove();
+    $("#tbl_loseRebate").find("tr:gt(0)").remove();
+    $("#tbl_turnOverCommissionRebate").find("tr:gt(0)").remove();
     var RowCount = 0;
-    var table = document.getElementById("tbl_rebateHistory");
-    var result = res.data;
-    for (i = 0; i < result.length; i++) {
+    var table = document.getElementById("tbl_loseRebate");
+    var tableTurnoverCommision = document.getElementById("tbl_turnOverCommissionRebate");
+    var resultSlotRebate = res.data.slotRebate;
+    var resultTrunoverRebate = res.data.trunoverRebate;
+    for (i = 0; i < resultSlotRebate.length; i++) {
         var row = table.insertRow(RowCount + 1);
-        $("#tbl_rebateHistory").addClass('white-bg');
-        $("#tbl_rebateHistory td").addClass('half-width text-center white-bg');
+        $("#tbl_loseRebate").addClass('white-bg');
+        $("#tbl_loseRebate td").addClass('half-width text-center white-bg');
         row.insertCell(0).innerHTML = i + 1;
-        row.insertCell(1).innerHTML = result[i].GameName;
-        row.insertCell(2).innerHTML = parseFloat(result[i].Turnover).toFixed(2);
-        row.insertCell(3).innerHTML = parseFloat(result[i].Rolling).toFixed(2);
-        row.insertCell(4).innerHTML = parseFloat(result[i].Bet).toFixed(2);
-        row.insertCell(5).innerHTML = parseFloat(result[i].WinLose).toFixed(2);
-        row.insertCell(6).innerHTML = parseFloat(result[i].CommAmount).toFixed(2);
-        row.insertCell(7).innerHTML = (result[i].Created).replace("T", " ");
+        row.insertCell(1).innerHTML = resultSlotRebate[i].GameName;
+        row.insertCell(2).innerHTML = parseFloat(resultSlotRebate[i].turnover).toFixed(2);
+        row.insertCell(3).innerHTML = parseFloat(resultSlotRebate[i].rolling).toFixed(2);
+        row.insertCell(4).innerHTML = parseFloat(resultSlotRebate[i].bet).toFixed(2);
+        row.insertCell(5).innerHTML = parseFloat(resultSlotRebate[i].winLose).toFixed(2);
+        row.insertCell(6).innerHTML = parseFloat(resultSlotRebate[i].commAmount).toFixed(2);
+        row.insertCell(7).innerHTML = (resultSlotRebate[i].created).replace("T", " ");
         RowCount++;
     }
+
+    for (i = 0; i < resultTrunoverRebate.length; i++) {
+        var row = tableTurnoverCommision.insertRow(RowCount + 1);
+        $("#tbl_turnOverCommissionRebate").addClass('white-bg');
+        $("#tbl_turnOverCommissionRebate td").addClass('half-width text-center white-bg');
+        row.insertCell(0).innerHTML = i + 1;
+        row.insertCell(1).innerHTML = resultTrunoverRebate[i].gameName;
+        row.insertCell(2).innerHTML = parseFloat(resultTrunoverRebate[i].turnover).toFixed(2);
+        row.insertCell(3).innerHTML = parseFloat(resultTrunoverRebate[i].rolling).toFixed(2);
+        row.insertCell(4).innerHTML = parseFloat(resultTrunoverRebate[i].bet).toFixed(2);
+        row.insertCell(5).innerHTML = parseFloat(resultTrunoverRebate[i].winLose).toFixed(2);
+        row.insertCell(6).innerHTML = parseFloat(resultTrunoverRebate[i].commAmount).toFixed(2);
+        row.insertCell(7).innerHTML = (resultTrunoverRebate[i].created).replace("T", " ");
+        RowCount++;
+    }
+
     var pageNum;
     $('#tbl_rebateHistory').after('<div id="navRebate"  class="pagination"></div>');
     var rowsShown = 11;
