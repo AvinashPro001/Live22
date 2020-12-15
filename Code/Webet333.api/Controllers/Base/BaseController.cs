@@ -23,6 +23,9 @@ namespace Webet333.api.Controllers.Base
     {
         #region Object declaration and constructor
         protected string Connection { get; set; }
+
+        protected string Connection120 { get; set; }
+
         protected Language Language { get; set; }
         protected ProfileResponse UserEntity { get; set; }
         protected IStringLocalizer<BaseController> Localizer { get; set; }
@@ -31,6 +34,7 @@ namespace Webet333.api.Controllers.Base
         public BaseController(ConnectionConfigs ConnectionStrings = null, IStringLocalizer<BaseController> Localizer = null)
         {
             this.Connection = ConnectionStrings.DefaultConnection;
+            this.Connection120 = ConnectionStrings.DefaultConnection120;
             this.Localizer = Localizer;
             this.Language = GetLanguage();
         }

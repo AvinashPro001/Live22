@@ -14,7 +14,7 @@ namespace Webet333.dapper
     {
         #region Object declarion and constructor.
         private readonly IDbConnection connection;
-        private int? commandTimeout = null;
+        private int? commandTimeout = 120;
         private IDbTransaction dbTransaction = null;
         /// <summary>
         /// Manager query Constructor.

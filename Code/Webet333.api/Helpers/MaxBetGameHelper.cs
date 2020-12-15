@@ -339,7 +339,7 @@ namespace Webet333.api.Helpers
 
         internal static async Task<string> CallThirdPartyApi(string Url, string Parameter)
         {
-           
+
                 var data = Encoding.ASCII.GetBytes(Parameter);
                 var request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
                 if (request == null) throw new Exception("Non HTTP WebRequest");
@@ -356,6 +356,7 @@ namespace Webet333.api.Helpers
                 var resStreamReader = new StreamReader(resStream);
                 var resString = resStreamReader.ReadToEnd();
                 return resString;
+
         }
 
         #region House Keeping

@@ -181,12 +181,12 @@ namespace Webet333.api.Controllers
 
         #region Rebate Calculate
 
-        [Authorize]
+        //[Authorize]
         [HttpPost(ActionsConst.Game.RebateCalculate)]
         public async Task<IActionResult> GetCalculateData([FromBody] RebateCalculateRequest request)
         {
-            await CheckUserRole();
-            using (var game_helper = new GameHelpers(Connection: Connection))
+           // await CheckUserRole();
+            using (var game_helper = new GameHelpers(Connection: Connection120))
             {
                 var calculateData = await game_helper.GetCalculateData(request);
 
@@ -209,7 +209,7 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> GetRebate([FromBody] RebateCalculateRequest request)
         {
             await CheckUserRole();
-            using (var game_helper = new GameHelpers(Connection: Connection))
+            using (var game_helper = new GameHelpers(Connection: Connection120))
             {
                 var data = await game_helper.RebateOperation(request);
 
@@ -229,7 +229,7 @@ namespace Webet333.api.Controllers
         {
             if (request.Username.Equals("CustomerServicesAutoRebate") && request.Password.Equals("Customer!@#$%12345%$#@!Services"))
             {
-                using (var game_helper = new GameHelpers(Connection: Connection))
+                using (var game_helper = new GameHelpers(Connection: Connection120))
                 {
                     var data = await game_helper.RebateOperation(request);
 
@@ -782,12 +782,13 @@ namespace Webet333.api.Controllers
         [HttpGet(ActionsConst.Game.AG_Betting_Details)]
         public async Task<IActionResult> AGBettingDetails()
         {
-
+            var startTime = DateTime.Now.AddMinutes(-5).ToString("yyyy-MM-dd HH:mm:ss");
+            var endTime = DateTime.Now.AddMinutes(5).ToString("yyyy-MM-dd HH:mm:ss");
             var url = $"{GameConst.AG.baseURL}getBetDetail?" +
                         $"vendor_id={GameConst.AG.VendorId}" +
                         $"&operator_id={GameConst.AG.OperatorId}" +
-                        $"&from={DateTime.Now.AddMinutes(-5).ToString("yyyy-MM-dd HH:mm:ss")}" +
-                        $"&to={DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}";
+                        $"&from={startTime}" +
+                        $"&to={endTime}";
 
             var responseString = await GameHelpers.CallThirdPartyApi(url);
 
@@ -801,8 +802,8 @@ namespace Webet333.api.Controllers
                 var urlWithPage = $"{GameConst.AG.baseURL}getBetDetail?" +
                         $"vendor_id={GameConst.AG.VendorId}" +
                         $"&operator_id={GameConst.AG.OperatorId}" +
-                        $"&from={DateTime.Now.AddMinutes(-5).ToString("yyyy-MM-dd HH:mm:ss")}" +
-                        $"&to={DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}" +
+                        $"&from={startTime}" +
+                        $"&to={endTime}"+
                         $"&page={i}";
 
 
