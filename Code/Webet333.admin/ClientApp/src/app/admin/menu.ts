@@ -124,6 +124,11 @@ const Settings = {
             text: 'SMS Announcement',
             link: 'customers/sms-notify',
             icon: 'fa fa-bullhorn'
+        },
+        {
+            text: 'VIP Level',
+            link: 'customers/vip-page-setting',
+            icon: 'fa fa-bullhorn'
         }
     ]
 }

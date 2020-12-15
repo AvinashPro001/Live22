@@ -484,5 +484,10 @@
 
             public const string UserBalanceIsBeginUpdate = "[dbo].[UserBalance_IsBegin_Update]";
         }
+
+        public class VIPCategory
+        {
+            public const string VIPCategoryInsert = "[dbo].[Insert_VIP_Category_Values]";
+        }
     }
 }

@@ -614,5 +614,10 @@
         {
             public const string Broken = "playtech/broken";
         }
+
+        public class VIPCategory
+        {
+            public const string Insert = "vipcategory/insert";
+        }
     }
 }
