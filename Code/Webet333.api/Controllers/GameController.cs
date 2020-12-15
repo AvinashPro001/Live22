@@ -181,11 +181,11 @@ namespace Webet333.api.Controllers
 
         #region Rebate Calculate
 
-        //[Authorize]
+        [Authorize]
         [HttpPost(ActionsConst.Game.RebateCalculate)]
         public async Task<IActionResult> GetCalculateData([FromBody] RebateCalculateRequest request)
         {
-           // await CheckUserRole();
+            await CheckUserRole();
             using (var game_helper = new GameHelpers(Connection: Connection120))
             {
                 var calculateData = await game_helper.GetCalculateData(request);
