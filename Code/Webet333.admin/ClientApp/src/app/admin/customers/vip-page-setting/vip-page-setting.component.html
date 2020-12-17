@@ -231,7 +231,7 @@
                     <h3>WEEKLY FREE CREDIT MIN DEPOSIT AMOUNT</h3>
                 </div>
                 <div class="col-1">
-                    <input type="number" />
+                    <input id="weeklyFreeCreditMinDepositAmount" type="number" />
                 </div>
             </div>
             <div class="row col-12">
@@ -240,10 +240,10 @@
                 </div>
                 <div class="col-lg-2 col-xs-4">
                     <ngx-select-dropdown tabindex="0" [multiple]="false"
-                                         [config]="config" [options]="promotionData" (change)="onChange($event)"></ngx-select-dropdown>
+                                         [config]="config" [options]="promotionData" id="addPromotionTypeBonus"></ngx-select-dropdown>
                 </div>
             </div>
         </div>
     </div>
-    <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)="addtransferal()" style="max-width:200px;align-content:center">Submit</button>
+    <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)="addVIPcategory()" style="max-width:200px;align-content:center">Submit</button>
 </div>
