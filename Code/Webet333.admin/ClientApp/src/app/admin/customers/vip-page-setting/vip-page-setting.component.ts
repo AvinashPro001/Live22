@@ -92,7 +92,7 @@ export class VipPageComponent implements OnInit {
             kissandPussyRebateNormal: (document.getElementById("kissandPussyRebateNormal") as HTMLInputElement).value,
             kissandPussyRebateBrooze: (document.getElementById("kissandPussyRebateBrooze") as HTMLInputElement).value,
             kissandPussyRebateSilver: (document.getElementById("kissandPussyRebateSilver") as HTMLInputElement).value,
-            kissandPussyRebateGold: (document.getElementById("") as HTMLInputElement).value,
+            kissandPussyRebateGold: (document.getElementById("kissandPussyRebateGold") as HTMLInputElement).value,
             kissandPussyRebatePlatinum: (document.getElementById("kissandPussyRebatePlatinum") as HTMLInputElement).value,
             kissandPussyRebateDiamond: (document.getElementById("kissandPussyRebateDiamond") as HTMLInputElement).value,
             withdrawTimeNormal: (document.getElementById("withdrawTimeNormal") as HTMLInputElement).value,
@@ -106,14 +106,20 @@ export class VipPageComponent implements OnInit {
             withdrawAmountSilver: (document.getElementById("withdrawAmountSilver") as HTMLInputElement).value,
             withdrawAmountGold: (document.getElementById("withdrawAmountGold") as HTMLInputElement).value,
             withdrawAmountPlatinum: (document.getElementById("withdrawAmountPlatinum") as HTMLInputElement).value,
-            withdrawAmountDiamond: (document.getElementById("withdrawAmountDiamond") as HTMLInputElement).value 
+            withdrawAmountDiamond: (document.getElementById("withdrawAmountDiamond") as HTMLInputElement).value,
+            weeklyFreeCreditMinDepositAmount: (document.getElementById("weeklyFreeCreditMinDepositAmount") as HTMLInputElement).value,
         }
         this.adminService.add<any>(VIPSetting.addVIP, dataSelect).subscribe(res => {
+            this.disabled = false;
             this.toasterService.pop('success', 'Success', res.message);
         }, error => {
             this.disabled = false;
             this.ngOnInit();
             this.toasterService.pop('error', 'Error', error.error.message);
         });
+    }
+
+    addtransferal() {
+
     }
 }

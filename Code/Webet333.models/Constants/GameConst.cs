@@ -293,7 +293,7 @@
 
             public const string APIURL = "https://testapi.onlinegames22.com/";
 
-            public const string BettingDetailsURL = "https://fetch.onlinegames22.com/";
+            public const string BettingDetailsURL = "https://tttint.onlinegames22.com/";
 
             public const string RedirectURL = "http://webet333.com/";
 

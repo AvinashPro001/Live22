@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { account, customer, gameBalance } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 import { debug } from 'util';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-users-details',
@@ -171,17 +172,17 @@ export class UsersDetailsComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private modalService: NgbModal,
+        private calendar: NgbCalendar
     ) { }
 
     //#endregion
 
     //#region OnInit Method
 
+    datemodel: NgbDateStruct;
+
     ngOnInit() {
-        const now = new Date();
-        var value = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
-        this.defaultStartDate = value;
-        this.defaultEndDate = value;
+        this.datemodel = this.calendar.getToday();
 
         document.getElementById("profiletab").click();
         this.customerUser();

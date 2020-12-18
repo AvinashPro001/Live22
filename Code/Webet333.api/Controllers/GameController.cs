@@ -37,6 +37,7 @@ using Webet333.models.Response.Game.DG;
 using Webet333.models.Response.Game.Kiss918;
 using Webet333.models.Response.Game.Pussy888;
 using Webet333.models.Response.Game.SexyBaccarat;
+using Webet333.queue;
 
 namespace Webet333.api.Controllers
 {
@@ -44,14 +45,18 @@ namespace Webet333.api.Controllers
     [Route(ActionsConst.ApiVersion)]
     public class GameController : BaseController
     {
+
         #region Global variable and Constructor
+
+        private SerialQueue Queue { get; set; }
 
         private static readonly HttpClient client = new HttpClient();
 
         private IHostingEnvironment _hostingEnvironment;
 
-        public GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment) : base(ConnectionStringsOptions.Value, Localizer)
+        public GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, SerialQueue queue) : base(ConnectionStringsOptions.Value, Localizer)
         {
+            this.Queue = queue;
             this.Localizer = Localizer;
             _hostingEnvironment = environment;
         }
@@ -803,7 +808,7 @@ namespace Webet333.api.Controllers
                         $"vendor_id={GameConst.AG.VendorId}" +
                         $"&operator_id={GameConst.AG.OperatorId}" +
                         $"&from={startTime}" +
-                        $"&to={endTime}"+
+                        $"&to={endTime}" +
                         $"&page={i}";
 
 
@@ -2340,46 +2345,51 @@ namespace Webet333.api.Controllers
                 var users = await game_helper.GetAllM8UsersSetLimit();
                 if (users != null)
                 {
-                    var m8UsersSetBettingLimitsRequest = new List<M8UsersSetBettingLimitsRequest>();
-                    foreach (var user in users)
+                    Queue.Enqueue(async () =>
                     {
-                        var Url = $"{GameConst.M8.baseURL}?" +
-                                    $"secret={GameConst.M8.Secret}&" +
-                                    $"action={GameConst.M8.Update}&" +
-                                    $"agent={GameConst.M8.agent}&" +
-                                    $"username={user.Username}&" +
-                                    $"max1={request.Max1}&" +
-                                    $"max2={request.Max2}&" +
-                                    $"max3={request.Max3}&" +
-                                    $"max4={request.Max4}&" +
-                                    $"max5={request.Max5}&" +
-                                    $"max6={request.Max6}&" +
-                                    $"max7={request.Max7}&" +
-                                    $"lim1={request.Lim1}&" +
-                                    $"lim2={request.Lim2}&" +
-                                    $"lim3={request.Lim3}&" +
-                                    $"lim4={request.Lim4}&" +
-                                    $"com1={request.Com}&" +
-                                    $"com2={request.Com}&" +
-                                    $"com3={request.Com}&" +
-                                    $"com4={request.Com}&" +
-                                    $"com5={request.Com}&" +
-                                    $"com6={request.Com}&" +
-                                    $"com7={request.Com}&" +
-                                    $"com8={request.Com}&" +
-                                    $"com9={request.Com}&" +
-                                    $"comtype={request.Comtype}&" +
-                                    $"suspend={request.Suspend}";
-                        var result = XDocument.Parse(await GameHelpers.CallThirdPartyApi(Url, null));
+                        int i = 1;
+                        var m8UsersSetBettingLimitsRequest = new List<M8UsersSetBettingLimitsRequest>();
+                        foreach (var user in users)
+                        {
+                            var Url = $"{GameConst.M8.baseURL}?" +
+                                        $"secret={GameConst.M8.Secret}&" +
+                                        $"action={GameConst.M8.Update}&" +
+                                        $"agent={GameConst.M8.agent}&" +
+                                        $"username={user.Username}&" +
+                                        $"max1={request.Max1}&" +
+                                        $"max2={request.Max2}&" +
+                                        $"max3={request.Max3}&" +
+                                        $"max4={request.Max4}&" +
+                                        $"max5={request.Max5}&" +
+                                        $"max6={request.Max6}&" +
+                                        $"max7={request.Max7}&" +
+                                        $"lim1={request.Lim1}&" +
+                                        $"lim2={request.Lim2}&" +
+                                        $"lim3={request.Lim3}&" +
+                                        $"lim4={request.Lim4}&" +
+                                        $"com1={request.Com}&" +
+                                        $"com2={request.Com}&" +
+                                        $"com3={request.Com}&" +
+                                        $"com4={request.Com}&" +
+                                        $"com5={request.Com}&" +
+                                        $"com6={request.Com}&" +
+                                        $"com7={request.Com}&" +
+                                        $"com8={request.Com}&" +
+                                        $"com9={request.Com}&" +
+                                        $"comtype={request.Comtype}&" +
+                                        $"suspend={request.Suspend}";
+                            var result = XDocument.Parse(await GameHelpers.CallThirdPartyApi(Url, null));
 
-                        if (result.Descendants("errcode").Single().Value == "0")
-                            m8UsersSetBettingLimitsRequest.Add(new M8UsersSetBettingLimitsRequest { Id = user.Id.ToString(), SetLimit = true });
-                    }
-                    using (var gamehelper = new GameHelpers(Connection))
-                    {
-                        await gamehelper.M8LimitSet(m8UsersSetBettingLimitsRequest);
-                    }
-                    return OkResponse(m8UsersSetBettingLimitsRequest);
+                            if (result.Descendants("errcode").Single().Value == "0")
+                                m8UsersSetBettingLimitsRequest.Add(new M8UsersSetBettingLimitsRequest { Id = user.Id.ToString(), SetLimit = true });
+
+                        }
+                        using (var gamehelper = new GameHelpers(Connection))
+                        {
+                            await gamehelper.M8LimitSet(m8UsersSetBettingLimitsRequest);
+                        }
+                    });
+                    return OkResponse();
                 }
                 return NotFoundResponse("Users Not Found");
             }
@@ -2976,8 +2986,8 @@ namespace Webet333.api.Controllers
                     WMTurover = WMGame.Count > 0 ? WMGame.FirstOrDefault().Turnover : 0,
                     PragmaticTurover = PragmaticGame.Count > 0 ? PragmaticGame.FirstOrDefault().Turnover : 0,
                 };
-
-                return OkResponse(new { response, Total = result.Select(x => x.Turnover).Sum(x => x) });
+                decimal total = response.agTurover + response.m8Turover + response.maxbetTurover + response.playtechTurover + response.dgTurover + response.saTurover + response.sexyTurover + response.AllBetTurover + response.WMTurover + response.PragmaticTurover;
+                return OkResponse(new { response, Total = total });
             }
         }
         #endregion

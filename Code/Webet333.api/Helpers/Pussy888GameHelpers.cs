@@ -159,15 +159,15 @@ namespace Webet333.api.Helpers
         internal static async Task<TransferMoneyResponse> CallTransferAPI(string Username, decimal Amount)
         {
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            var DisableUserUrl = $"{GameConst.Pussy888.BaseUrl}{GameConst.Pussy888.DisableUser}" +
-                $"&userName={Username}" +
-                $"&time={timestamp}" +
-                $"&authcode={GameConst.Pussy888.AuthCode}" +
-                $"&sign={SecurityHelpers.MD5EncrptText(GameConst.Pussy888.AuthCode.ToLower() + Username + timestamp + GameConst.Pussy888.SecertKey.ToLower()).ToUpper()}";
+            //var DisableUserUrl = $"{GameConst.Pussy888.BaseUrl}{GameConst.Pussy888.DisableUser}" +
+            //    $"&userName={Username}" +
+            //    $"&time={timestamp}" +
+            //    $"&authcode={GameConst.Pussy888.AuthCode}" +
+            //    $"&sign={SecurityHelpers.MD5EncrptText(GameConst.Pussy888.AuthCode.ToLower() + Username + timestamp + GameConst.Pussy888.SecertKey.ToLower()).ToUpper()}";
 
-            var DisableUser = JsonConvert.DeserializeObject<UserResponseAPI>(await GameHelpers.CallThirdPartyApi(DisableUserUrl));
-            if (DisableUser.code == 0)
-            {
+            //var DisableUser = JsonConvert.DeserializeObject<UserResponseAPI>(await GameHelpers.CallThirdPartyApi(DisableUserUrl));
+            //if (DisableUser.code == 0)
+            //{
                 var url = $"{GameConst.Pussy888.BaseUrl}{GameConst.Pussy888.TransferMoney}" +
                              $"&scoreNum={Amount}" +
                              $"&userName={Username}" +
@@ -178,16 +178,16 @@ namespace Webet333.api.Helpers
                              $"&sign={SecurityHelpers.MD5EncrptText(GameConst.Pussy888.AuthCode.ToLower() + Username + timestamp + GameConst.Pussy888.SecertKey.ToLower()).ToUpper()}";
                 var response = JsonConvert.DeserializeObject<TransferMoneyResponse>(await GameHelpers.CallThirdPartyApi(url));
                 return response;
-            }
-            else
-            {
-                return new TransferMoneyResponse
-                {
-                    code = DisableUser.code,
-                    msg = DisableUser.msg,
-                    success = DisableUser.success
-                };
-            }
+            //}
+            //else
+            //{
+            //    return new TransferMoneyResponse
+            //    {
+            //        code = DisableUser.code,
+            //        msg = DisableUser.msg,
+            //        success = DisableUser.success
+            //    };
+            //}
         }
 
         #endregion

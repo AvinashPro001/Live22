@@ -6,8 +6,8 @@
 export const environment = {
     production: false,
     //apiUrl: 'http://api.webet333.com/api/v1/'
-    apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:55861/api/v1/'
+    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    apiUrl: 'http://localhost:55861/api/v1/'
 };
 
 export const account = {
@@ -186,6 +186,8 @@ export const customer = {
     promotionDelete: environment.apiUrl + 'promotions/delete',
     promotionUpdate: environment.apiUrl + 'promotions/update',
     promotionImageUpdate: environment.apiUrl + 'promotions/image/update',
+
+    promotionHtml: environment.apiUrl + 'promotions/html/retrieve',
 
     M8SetLimit: environment.apiUrl + 'Game/M8/SetDefaultLimit',
     M8GetLimit: environment.apiUrl + 'Game/M8/GetDefaultLimit',
@@ -372,4 +374,8 @@ export const smsConst = {
     content_type: 'content_type=1',
     mode: 'mode=shortcode',
     campaign: 'campaign=Webet333'
+}
+
+export const VIPSetting = {
+    addVIP: environment.apiUrl + "vipcategory/insert"
 }

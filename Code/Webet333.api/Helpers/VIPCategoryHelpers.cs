@@ -20,7 +20,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.User.RegisterBank, request);
+                await repository.AddOrUpdateAsync(StoredProcConsts.VIPCategory.VIPCategoryInsert, request);
             }
         }
         #endregion VIP Category Insert
