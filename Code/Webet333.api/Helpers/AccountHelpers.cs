@@ -297,6 +297,8 @@ namespace Webet333.api.Helpers
             await DGGameHelpers.CallUpdateuserAPI(info.DGGamePrefix + info.Username, Password);
 
             await AllBetGameHelpers.ChangePasswordCallAPI(info.AllBetGamePrefix + info.UserId, Password);
+
+            await WMGameHelpers.ChangePasswordCallAPI(info.WMGamePrefix + info.UserId, Password);
         }
 
         #endregion User Game Password Update

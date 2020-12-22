@@ -405,7 +405,7 @@ async function logingGame(gameName) {
         if (checkedValue) {
             if (gameName == "M8")
                 TransferInAllWallet("M8 Wallet");
-            if (gameName == "Maxbet")
+            if (gameName == "MaxBet")
                 TransferInAllWallet("MaxBet Wallet");
             if (gameName == "SexyBaccarat")
                 TransferInAllWallet("Sexy Wallet");
@@ -419,6 +419,8 @@ async function logingGame(gameName) {
                 TransferInAllWallet("Mega888 Wallet");
             if (gameName == "Joker")
                 TransferInAllWallet("Joker Wallet");
+            if (gameName == "Pussy888")
+                TransferInAllWallet("Pussy888 Wallet");
             if (gameName == "AllBet")
                 TransferInAllWallet("AllBet Wallet");
             if (gameName == "WM")

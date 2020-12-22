@@ -101,6 +101,24 @@
         }
     </script>
 
+    <!-- Event snippet for Sign-up conversion page
+    In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+    <script>
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof (url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-480804860/17uwCMrko-4BEPz_oeUB',
+                'event_callback': callback
+            });
+            return false;
+        }
+        gtag_report_conversion(window.location.href);
+    </script>
+
     @RenderSection("Header", false)
 </head>
 <body onload="getLanguage()" class="home-page">
@@ -218,7 +236,7 @@
                                 <div class="after-logion">
                                     <ul class="money-type list-inline">
 
-                                        <li class="common-btn restore-btn remove-border layout-btn"><label><a data-toggle="modal" data-target="#RestoreConfirmation"><img class="icon-home" src="~/images/restore_icon_mob-white.png" /><span class="lang" key="restore"></span></a></label></li>
+                                        <li class="common-btn restore-btn remove-border layout-btn" onclick="RestoreBalance()"><label><a><img class="icon-home" src="~/images/restore_icon_mob-white.png" /><span class="lang" key="restore"></span></a></label></li>
                                         <li class="currency" data-toggle="collapse" data-target="#myDropdown">
                                             <div class="select-balance">
                                                 <button onclick="WalletBalance()" class="dropbtn layout-btn"><span class="lang" key="currentbalance"></span> &nbsp;&nbsp;<span class="fa fa-chevron-down"></span></button>
@@ -555,6 +573,7 @@
                         <li><img src="../../images/public-bank.jpg" alt="Public bank"></li>
                         <li><img src="../../images/hong-leong-bank.jpg" alt="Hong Leong bank"></li>
                         <li><img src="../../images/cimb-bank.jpg" alt="Cimb bank"></li>
+                        <li><img src="../../images/RHB.jpg" alt="RHB"></li>
                     </ul>
                     <h5 class="white-text"><span>C</span>ERTIFIED BY</h5>
                     <ul class="list-inline bank-us" >

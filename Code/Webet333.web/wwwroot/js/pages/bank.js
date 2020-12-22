@@ -877,6 +877,7 @@ async function select() {
         jcf.getInstance($("#ddl_transferToWallet")).refresh();
     }
 }
+
 async function TransferValidation() {
     LoaderShow();
     await WalletBalanceMaxTransfer();

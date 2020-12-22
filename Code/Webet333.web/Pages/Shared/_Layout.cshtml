@@ -107,6 +107,24 @@
             }
         }
         /**/</script>
+
+    <!-- Event snippet for Sign-up conversion page
+    In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+    <script>
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof (url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-480804860/17uwCMrko-4BEPz_oeUB',
+                'event_callback': callback
+            });
+            return false;
+        }
+        gtag_report_conversion(window.location.href);
+    </script>
     @RenderSection("Header", false)
 
 </head>
@@ -216,7 +234,7 @@
                                 </ul>
                                 <div class="after-logion">
                                     <ul class="money-type list-inline">
-                                        <button class="common-btn restore-btn remove-border layout-btn " data-toggle="modal" data-target="#RestoreConfirmation"><img class="icon-home" src="~/images/restore_icon_mob-white.png" /><span class="lang" key="restore"></span></button>
+                                        <button class="common-btn restore-btn remove-border layout-btn " onclick="RestoreBalance()" ><img class="icon-home" src="~/images/restore_icon_mob-white.png" /><span class="lang" key="restore"></span></button>
                                         <li class="currency" data-toggle="collapse" data-target="#myDropdown">
                                             <div class="select-balance">
                                                 <button onclick="WalletBalance()" class="dropbtn layout-btn"><span class="lang" key="currentbalance"></span> &nbsp;&nbsp;<span class="fa fa-chevron-down"></span></button>
@@ -553,7 +571,7 @@
         <ul class="account-icon list-inline text-center">
             <li class="mobile-icon deposit_icon"><a asp-page="/Account/Profile" asp-fragment="deposit" onclick="openCity(event, 'Deposit',1);window.location = '#Deposit';"><span data-translate="mobile_menu_deposit">DEPOSIT</span></a></li>
             <li class="mobile-icon transfer_icon"><a asp-page="/Account/Profile" asp-fragment="transfer" onclick="openCity(event, 'Transfer',3);window.location = '#Transfer';"><span data-translate="mobile_menu_Transfer">TRANSFER</span></a></li>
-            <li class="mobile-icon restore_icon"><a data-toggle="modal" data-target="#RestoreConfirmation" href="#"><span data-translate="mobile_menu_Restore">RESTORE</span></a></li>
+            <li class="mobile-icon restore_icon" onclick="RestoreBalance()" ><a href="#"><span data-translate="mobile_menu_Restore">RESTORE</span></a></li>
             <li class="mobile-icon withdraw_icon"><a asp-page="/Account/Profile" asp-fragment="withdrawal" onclick="openCity(event, 'Withdrawal',2);window.location = '#Withdrawal';"><span data-translate="mobile_menu_Withdraw">WITHDRAWAL</span></a></li>
             <li class="mobile-icon history_icon"><a asp-page="/Account/Profile" asp-fragment="history" onclick="openCity(event, 'History',4);window.location = '#History';"><span data-translate="mobile_menu_History">HISTORY</span></a></li>
 
@@ -722,6 +740,7 @@
                         <li><img src="../../images/public-bank.jpg" alt="Public bank"></li>
                         <li><img src="../../images/hong-leong-bank.jpg" alt="Hong Leong bank"></li>
                         <li><img src="../../images/cimb-bank.jpg" alt="Cimb bank"></li>
+                        <li><img src="../../images/RHB.jpg" alt="RHB"></li>
                     </ul>
                     <h5 class="white-text"><span>C</span>ERTIFIED BY</h5>
                     <ul class="list-inline bank-us">

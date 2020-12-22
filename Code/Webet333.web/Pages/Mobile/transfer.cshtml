@@ -40,7 +40,7 @@
                     <ul class="margin-top">
                         <li class="text-center black-text">Main Wallet</li>
                         <li class="text-center menuwallet">MYR <span id="menuMainWallet" class="menu-main-wallet"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="fa fa-refresh refersh-btn"></span></li>
-                        <li class="text-center"><button class="btn btn-default" data-toggle="modal" data-target="#RestoreConfirmation"><span class="lang" key="mobile_menu_Restore"></span></button></li>
+                        <li class="text-center"><button class="btn btn-default"  onclick="RestoreBalance()"><span class="lang" key="mobile_menu_Restore"></span></button></li>
                     </ul>
             </div>
             </div>
@@ -138,7 +138,7 @@
                             <li class="">918 Kiss</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="918KissWallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('918Kiss Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button class="btn btn-default btn-default-border" onclick="TransferInAllWallet('918Kiss Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Winover</label>
@@ -153,7 +153,7 @@
                             <li class="">Joker</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="JokerWallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('Joker Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button class="btn btn-default btn-default-border" onclick="TransferInAllWallet('Joker Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Winover</label>
@@ -167,7 +167,7 @@
                             <li class="">Mega888</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="Mega888Wallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('Mega888 Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button class="btn btn-default btn-default-border" onclick="TransferInAllWallet('Mega888 Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Winover</label>
@@ -181,7 +181,7 @@
                             <li class="">AG</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="AGWallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('AG Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button class="btn btn-default btn-default-border" onclick="TransferInAllWallet('AG Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Turnover</label>
@@ -195,7 +195,7 @@
                             <li class="">Playtech</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="PlaytechWallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('PlayTech Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button class="btn btn-default btn-default-border" onclick="TransferInAllWallet('PlayTech Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Turnover</label>
@@ -209,7 +209,7 @@
                             <li class="">M8</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="M8Wallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('M8 Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button class="btn btn-default btn-default-border" onclick="TransferInAllWallet('M8 Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Turnover</label>
@@ -223,7 +223,7 @@
                             <li class="">Maxbet</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="MaxBetWallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('MaxBet Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button class="btn btn-default btn-default-border" onclick="TransferInAllWallet('MaxBet Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Turnover</label>
@@ -237,7 +237,7 @@
                             <li class="">DG</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="DGWallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('DG Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button class="btn btn-default btn-default-border" onclick="TransferInAllWallet('DG Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Turnover</label>
@@ -251,7 +251,7 @@
                             <li class="">Sexy B.</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="SexyWallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('Sexy Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button class="btn btn-default btn-default-border" onclick="TransferInAllWallet('Sexy Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Turnover</label>
@@ -265,7 +265,7 @@
                             <li class="">SA</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="SAWallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('SA Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button class="btn btn-default btn-default-border" onclick="TransferInAllWallet('SA Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Turnover</label>
@@ -279,7 +279,7 @@
                             <li class="">Pussy888</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="Pussy888Wallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('Pussy888 Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button class="btn btn-default btn-default-border" onclick="TransferInAllWallet('Pussy888 Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Winover</label>
@@ -293,7 +293,7 @@
                             <li class="">AllBet</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="AllBetWallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('AllBet Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button class="btn btn-default btn-default-border" onclick="TransferInAllWallet('AllBet Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Turnover</label>
@@ -307,7 +307,7 @@
                             <li class="">WM</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="WMWallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('WM Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button class="btn btn-default btn-default-border" onclick="TransferInAllWallet('WM Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Turnover</label>
@@ -322,7 +322,7 @@
                             <li class="">Pragmatic</li>
                             <li class="text-primary">MYR</li>
                             <li class="text-primary" id="PragmaticWallet">0.00</li>
-                            <li><button class="btn btn-default btn-default-border" onclick="OpenModelTransferWallet('Pragmatic Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                            <li><button  class="btn btn-default btn-default-border" onclick="TransferInAllWallet('Pragmatic Wallet')"><span class="text-primary">ALL IN</span></button></li>
                         </ul>
                         <div class="turnover-show">
                             <label>Daily Winover</label>

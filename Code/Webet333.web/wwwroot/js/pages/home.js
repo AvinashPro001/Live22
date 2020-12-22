@@ -105,7 +105,12 @@ async function getReference() {
         }
     }
     if (name !== null)
-        location.href = 'http://webet333.com/';
+        if (screen.width < 480) {
+            location.href = 'http://www.webet333.com/Mobile/home';
+        }
+        else {
+            location.href = 'http://webet333.com/';
+        }
 }
 
 //#region DetectMobileBrowser
@@ -516,7 +521,8 @@ async function logingGame(gameName) {
                 TransferInAllWallet("AllBet Wallet");
             if (gameName == "WM")
                 TransferInAllWallet("WM Wallet");
-            if (gameName == "Pragmatic") {
+            if (gameName == "Pragmatic")
+            {
                 PragmaticBrokenStatusInterval();
                 TransferInAllWallet("Pragmatic Wallet");
             }
