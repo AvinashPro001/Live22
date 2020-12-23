@@ -4,11 +4,11 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.Game = exports.account = exports.environment = void 0;
+exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.Game = exports.account = exports.environment = void 0;
 exports.environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
+    apiUrl: 'http://uatapi.webet333.com/api/v1/'
     //apiUrl: 'http://localhost:55861/api/v1/'
 };
 exports.account = {
@@ -306,5 +306,8 @@ exports.smsConst = {
     content_type: 'content_type=1',
     mode: 'mode=shortcode',
     campaign: 'campaign=Webet333'
+};
+exports.VIPSetting = {
+    addVIP: exports.environment.apiUrl + "vipcategory/insert"
 };
 //# sourceMappingURL=environment.js.map

@@ -6,7 +6,6 @@ import { DatePipe } from '@angular/common';
 import { account, customer, gameBalance } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 import { debug } from 'util';
-import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-users-details',
@@ -172,18 +171,13 @@ export class UsersDetailsComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private modalService: NgbModal,
-        private calendar: NgbCalendar
     ) { }
 
     //#endregion
 
     //#region OnInit Method
 
-    datemodel: NgbDateStruct;
-
     ngOnInit() {
-        this.datemodel = this.calendar.getToday();
-
         document.getElementById("profiletab").click();
         this.customerUser();
         this.coloumSet();
@@ -235,7 +229,7 @@ export class UsersDetailsComponent implements OnInit {
             this.Kiss918PasswordRowId = null;
             this.OnType(this.newVal);
         }
-        catch{
+        catch {
             this.depositRows = [];
             this.withdrawRows = [];
             this.transferRows = [];
@@ -1649,12 +1643,12 @@ export class UsersDetailsComponent implements OnInit {
         this.adminService.add<any>(customer.jokerBrokenStatusDetails, dataJokerDetails).subscribe(res => {
             this.unfinishedJokerRows = [];
             this.unfinishedJokerRows.push({
-                    Username: res.data.Username,
-                    Credit: res.data.Credit,
-                    OutstandingCredit: res.data.OutstandingCredit,
-                    FreeCredit: res.data.FreeCredit,
-                    OutstandingFreeCredit: res.data.OutstandingFreeCredit,
-                });
+                Username: res.data.Username,
+                Credit: res.data.Credit,
+                OutstandingCredit: res.data.OutstandingCredit,
+                FreeCredit: res.data.FreeCredit,
+                OutstandingFreeCredit: res.data.OutstandingFreeCredit,
+            });
 
         });
 
