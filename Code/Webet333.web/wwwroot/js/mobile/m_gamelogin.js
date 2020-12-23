@@ -76,24 +76,29 @@ async function GameInMaintenance(i) {
         if (walletData.data[i].walletType == "M8 Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('m8sports').style.filter = "grayscale(1)";
             document.getElementById('m8sportslogin').style.filter = "grayscale(1)";
+            
         }
         else if (walletData.data[i].walletType == "M8 Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('m8sports').style.filter = "";
             document.getElementById('m8sportslogin').style.filter = "";
+            
         }
 
         if (walletData.data[i].walletType == "MaxBet Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('maxbetsports').style.filter = "grayscale(1)";
             document.getElementById('maxbetsportslogin').style.filter = "grayscale(1)";
+            
         }
         else if (walletData.data[i].walletType == "MaxBet Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('maxbetsports').style.filter = "";
             document.getElementById('maxbetsportslogin').style.filter = "";
+            
         }
 
         if (walletData.data[i].walletType == "Sexy Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('sexylive').style.filter = "grayscale(1)";
             document.getElementById('sexylivelogin').style.filter = "grayscale(1)";
+            
         }
         else if (walletData.data[i].walletType == "Sexy Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('sexylive').style.filter = "";
@@ -113,10 +118,12 @@ async function GameInMaintenance(i) {
         if (walletData.data[i].walletType == "DG Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('dglive').style.filter = "grayscale(1)";
             document.getElementById('dglivelogin').style.filter = "grayscale(1)";
+            
         }
         else if (walletData.data[i].walletType == "DG Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('dglive').style.filter = "";
             document.getElementById('dglivelogin').style.filter = "";
+            
         }
 
         if (walletData.data[i].walletType == "918Kiss Wallet" && walletData.data[i].isMaintenance == true) {
@@ -180,6 +187,169 @@ async function GameInMaintenance(i) {
         else if (walletData.data[i].walletType == "Pragmatic Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('pragmaticslot').style.filter = "";
             document.getElementById('pragmaticslotlogin').style.filter = "";
+        }
+
+    }
+}
+
+async function AllInButtonDisable(i) {
+    if (i == 0)
+        walletData = await GetMethodWithReturn(apiEndPoints.walletSelect);
+    for (i = 0; i < walletData.data.length; i++) {
+
+        if (walletData.data[i].walletType == "AG Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("agallin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "AG Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("agallin").disabled = false;
+            }
+        }
+
+        if (walletData.data[i].walletType == "PlayTech Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("playtechallin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "PlayTech Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("playtechallin").disabled = false;
+            }
+        }
+
+        if (walletData.data[i].walletType == "M8 Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("m8allin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "M8 Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("m8allin").disabled = false;
+            }
+        }
+
+        if (walletData.data[i].walletType == "MaxBet Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("maxbetallin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "MaxBet Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("maxbetallin").disabled = false;
+            }
+        }
+
+        if (walletData.data[i].walletType == "Sexy Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("sexyallin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "Sexy Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("sexyallin").disabled = false;
+            }
+        }
+
+        if (walletData.data[i].walletType == "SA Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("saallin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "SA Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("saallin").disabled = false;
+            }
+        }
+
+
+        if (walletData.data[i].walletType == "DG Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("dgallin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "DG Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("dgallin").disabled = false;
+            }
+        }
+
+        if (walletData.data[i].walletType == "918Kiss Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("kiss918allin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "918Kiss Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("kiss918allin").disabled = false;
+            }
+        }
+
+        if (walletData.data[i].walletType == "Mega888 Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("mega888allin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "Mega888 Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("mega888allin").disabled = false;
+            }
+        }
+
+        if (walletData.data[i].walletType == "Joker Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("jokerallin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "Joker Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("jokerallin").disabled = false;
+            }
+        }
+
+        if (walletData.data[i].walletType == "Pussy888 Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("pussy888allin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "Pussy888 Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("pussy888allin").disabled = false;
+            }
+        }
+
+        if (walletData.data[i].walletType == "AllBet Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("allbetallin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "AllBet Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("allbetallin").disabled = false;
+            }
+        }
+
+        if (walletData.data[i].walletType == "WM Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("wmallin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "WM Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("wmallin").disabled = false;
+            }
+        }
+
+        if (walletData.data[i].walletType == "Pragmatic Wallet" && walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("pragmaticallin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "Pragmatic Wallet" && walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
+                document.getElementById("pragmaticallin").disabled = false;
+            }
         }
 
     }

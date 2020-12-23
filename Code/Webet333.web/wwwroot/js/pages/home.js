@@ -339,12 +339,18 @@ async function GameInMaintenance(i) {
             document.getElementById('agslot').style.filter = "grayscale(1)";
             document.getElementById('aglive').title = "Game In Maintenance.";
             document.getElementById('agslot').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("agallin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "AG Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('aglive').style.filter = "";
             document.getElementById('agslot').style.filter = "";
             document.getElementById('aglive').title = "";
             document.getElementById('agslot').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("agallin").disabled = false;
+            }
         }
 
         if (walletData.data[i].walletType == "PlayTech Wallet" && walletData.data[i].isMaintenance == true) {
@@ -352,120 +358,198 @@ async function GameInMaintenance(i) {
             document.getElementById('playtechslot').src = "/images/Playtech gray.png";
             document.getElementById('playtechlive').title = "Game In Maintenance.";
             document.getElementById('playtechslot').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("playtechallin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "PlayTech Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('playtechlive').src = "/images/Playtech.png";
             document.getElementById('playtechslot').src = "/images/Playtech.png";
             document.getElementById('playtechlive').title = "";
             document.getElementById('playtechslot').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("playtechallin").disabled = false;
+            }
         }
 
         if (walletData.data[i].walletType == "M8 Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('m8sports').style.filter = "grayscale(1)";
             document.getElementById('m8sports').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("m8allin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "M8 Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('m8sports').style.filter = "";
             document.getElementById('m8sports').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("m8allin").disabled = false;
+            }
         }
 
         if (walletData.data[i].walletType == "MaxBet Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('maxbetsports').style.filter = "grayscale(1)";
             document.getElementById('maxbetsports').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("maxbetallin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "MaxBet Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('maxbetsports').style.filter = "";
             document.getElementById('maxbetsports').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("maxbetallin").disabled = false;
+            }
         }
 
         if (walletData.data[i].walletType == "Sexy Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('sexylive').style.filter = "grayscale(1)";
             document.getElementById('sexylive').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("sexyallin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "Sexy Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('sexylive').style.filter = "";
             document.getElementById('sexylive').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("sexyallin").disabled = false;
+            }
         }
 
         if (walletData.data[i].walletType == "SA Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('salive').style.filter = "grayscale(1)";
             document.getElementById('salive').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("saallin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "SA Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('salive').style.filter = "";
             document.getElementById('salive').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("saallin").disabled = false;
+            }
         }
 
         if (walletData.data[i].walletType == "DG Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('dglive').style.filter = "grayscale(1)";
             document.getElementById('dglive').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("dgallin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "DG Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('dglive').style.filter = "";
             document.getElementById('dglive').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("dgallin").disabled = false;
+            }
         }
 
         if (walletData.data[i].walletType == "918Kiss Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('kiss918slot').style.filter = "grayscale(1)";
             document.getElementById('kiss918slot').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("kiss918allin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "918Kiss Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('kiss918slot').style.filter = "";
             document.getElementById('kiss918slot').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("kiss918allin").disabled = false;
+            }
         }
 
         if (walletData.data[i].walletType == "Mega888 Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('megaslot').style.filter = "grayscale(1)";
             document.getElementById('megaslot').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("mega888allin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "Mega888 Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('megaslot').style.filter = "";
             document.getElementById('megaslot').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("mega888allin").disabled = false;
+            }
         }
 
         if (walletData.data[i].walletType == "Joker Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('jokerslot').style.filter = "grayscale(1)";
             document.getElementById('jokerslot').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("jokerallin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "Joker Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('jokerslot').style.filter = "";
             document.getElementById('jokerslot').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("jokerallin").disabled = false;
+            }
         }
 
         if (walletData.data[i].walletType == "Pussy888 Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('pussy888slot').style.filter = "grayscale(1)";
             document.getElementById('pussy888slot').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("pussy888allin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "Pussy888 Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('pussy888slot').style.filter = "";
             document.getElementById('pussy888slot').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("pussy888allin").disabled = false;
+            }
         }
 
         if (walletData.data[i].walletType == "AllBet Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('AllbetGame').style.filter = "grayscale(1)";
             document.getElementById('AllbetGame').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("allbetallin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "AllBet Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('AllbetGame').style.filter = "";
             document.getElementById('AllbetGame').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("allbetallin").disabled = false;
+            }
         }
 
         if (walletData.data[i].walletType == "WM Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('WMGame').style.filter = "grayscale(1)";
             document.getElementById('WMGame').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("wmallin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "WM Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('WMGame').style.filter = "";
             document.getElementById('WMGame').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("wmallin").disabled = false;
+            }
         }
 
         if (walletData.data[i].walletType == "Pragmatic Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('pragmaticslot').style.filter = "grayscale(1)";
             document.getElementById('pragmaticslot').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("pragmaticallin").disabled = true;
+            }
         }
         else if (walletData.data[i].walletType == "Pragmatic Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('pragmaticslot').style.filter = "";
             document.getElementById('pragmaticslot').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) {
+                document.getElementById("pragmaticallin").disabled = false;
+            }
         }
     }
 }
