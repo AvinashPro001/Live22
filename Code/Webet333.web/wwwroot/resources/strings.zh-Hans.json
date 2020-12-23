@@ -83,7 +83,7 @@
   "account_number_placeholder": "户口号码",
   "register_bank_details": "银行注册详情",
 
-  "otp_verification": "OTP验证",
+  "otp_verification": "验证OTP",
 
   "profile_title": "基本信息",
   "profile_change_password": "更改密码",
@@ -294,7 +294,7 @@
   "Insufficient_balance_wallet": "钱包余额不足。",
   "file_format_error": "不支援档案格式仅PDF和图像允许",
   "send_otp": "重新发送OTP",
-  "verified_otp": "验证过的OTP",
+  "verified_otp": "验证OTP",
   "error_otp_required": "请插入OTP ！！",
   "otp_text": "输入发送到您手机号码的OTP",
   "otp_send_success": "OTP已发送至注册手机号码，请输入有效的OTP以激活该帐户。",

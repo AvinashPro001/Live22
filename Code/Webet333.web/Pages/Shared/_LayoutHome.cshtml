@@ -101,10 +101,19 @@
         }
     </script>
 
-    <!-- Event snippet for Sign-up conversion page
+    <!-- Global site tag (gtag.js) - Google Ads: 480804860 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-480804860"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-480804860');
+    </script>
+    <!-- Event snippet for youtube signup conversion page
     In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
     <script>
-        async function gtag_report_conversion(url) {
+        function gtag_report_conversion(url) {
             var callback = function () {
                 if (typeof (url) != 'undefined') {
                     window.location = url;
@@ -194,7 +203,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="login-item signin form-icon"><button class="btn-login" onclick="DoLogin(0)" tabindex="3" id="Sign"><span class="lang" key="login"></span></button></li>
+                                    <li class="login-item signin form-icon"><button class="btn-login" onclick="DoLogin(0);" tabindex="3" id="Sign"><span class="lang" key="login"></span></button></li>
                                     <li Class="login-item register my-account" onclick="window.location.href = '/Account/Register'"><button class="btn-register"><a asp-page="/Account/Register"><span class="lang" key="register"></span></a></button></li>
                                     <li class="login-item country">
                                         <div class="col">
