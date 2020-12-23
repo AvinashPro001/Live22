@@ -104,13 +104,14 @@ async function getReference() {
             history.pushState(null, null, "http://localhost:27100/");
         }
     }
-    if (name !== null)
+    if (name !== null) {
         if (screen.width < 480) {
             location.href = 'http://www.webet333.com/Mobile/home';
         }
         else {
             location.href = 'http://webet333.com/';
         }
+    }
 }
 
 //#region DetectMobileBrowser
