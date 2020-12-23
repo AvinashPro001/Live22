@@ -37,6 +37,7 @@ export class BankAddComponent implements OnInit {
             accountName: ((document.getElementById("txt_accountname") as HTMLInputElement).value),
             accountNo: ((document.getElementById("txt_accountno") as HTMLInputElement).value),
             bankName: ((document.getElementById("txt_bankname") as HTMLInputElement).value),
+            bankCode: ((document.getElementById("txt_bankcode") as HTMLInputElement).value),
         }
         this.adminService.add<any>(account.adminbankadd, dataSelect).subscribe(res => {
             if (this.urls.length > 0 || this.IconUrls.length > 0) {

@@ -13,6 +13,9 @@ namespace Webet333.models.Request.Settings
 
         [JsonProperty(PropertyName = "accountNo")]
         public string AccountNo { get; set; }
+
+        [JsonProperty(PropertyName = "bankCode")]
+        public string BankCode { get; set; }
     }
 
     public class UpdateUserBankRequest: InsertUserBankRequest
