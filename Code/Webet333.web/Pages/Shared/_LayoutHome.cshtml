@@ -104,7 +104,7 @@
     <!-- Event snippet for Sign-up conversion page
     In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
     <script>
-        function gtag_report_conversion(url) {
+        async function gtag_report_conversion(url) {
             var callback = function () {
                 if (typeof (url) != 'undefined') {
                     window.location = url;
@@ -116,7 +116,6 @@
             });
             return false;
         }
-        gtag_report_conversion(window.location.href);
     </script>
 
     @RenderSection("Header", false)
@@ -576,9 +575,9 @@
                         <li><img src="../../images/RHB.jpg" alt="RHB"></li>
                     </ul>
                     <h5 class="white-text"><span>C</span>ERTIFIED BY</h5>
-                    <ul class="list-inline bank-us" >
-                        <li><img src="../../images/footer-pagcor-certificate.png" style="max-width:100px;"  alt="pagcor certified"></li>
-                        <li><img src="../../images/footer-certified.jpg"  alt="certified"></li>
+                    <ul class="list-inline bank-us">
+                        <li><img src="../../images/footer-pagcor-certificate.png" style="max-width:100px;" alt="pagcor certified"></li>
+                        <li><img src="../../images/footer-certified.jpg" alt="certified"></li>
                     </ul>
 
                     <h5 class="white-text"><span>F</span>ollow us</h5>
@@ -804,7 +803,7 @@
 
 
     <script>
-        
+
     </script>
 
     @RenderSection("Scripts", required: false)

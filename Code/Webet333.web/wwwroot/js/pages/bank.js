@@ -23,7 +23,7 @@ function CheckUserVerified() {
                 window.location = "../Account/VerfiedOtp";
         }
     }
-    catch{ }
+    catch { }
 }
 
 async function CheckWithdrawAmountList() {
@@ -663,7 +663,7 @@ async function DepositAfterPromotion() {
     if (onlinePayment) {
         var res = await PostMethod(apiEndPoints.onlinePayment, depositModel);
         if (res !== null && res !== undefined) {
-            window.open("../PaymentStatus?url="+res.data.redirect_to)
+            window.open("../PaymentStatus?url=" + res.data.redirect_to)
             //window.open("../PaymentGateway")
         }
     }
@@ -1484,14 +1484,16 @@ async function VerifiedOTP() {
     }
     try {
         var res = await PostMethod(apiEndPoints.VerifiedOTP, model);
+
+        if (res.data.errorCode == 0) {
+            var Details = await GetMethod(apiEndPoints.getProfile);
+            sessionStorage.setItem('UserDetails', enc(JSON.stringify(Details)));
+            await gtag_report_conversion("../");
+            window.location.href = "/";
+        }
     }
-    catch{
+    catch {
         document.getElementById("txt_otp").value = "";
-    }
-    if (res.data.errorCode == 0) {
-        var Details = await GetMethod(apiEndPoints.getProfile);
-        sessionStorage.setItem('UserDetails', enc(JSON.stringify(Details)));
-        window.location = "/";
     }
     LoaderHide();
 }
@@ -1505,6 +1507,6 @@ async function CheckMainteance() {
         document.getElementById("vaderpayMainteanceSection").style.display = "";
         document.getElementById("vaderpaySection").style.display = "none";
         document.getElementById("vaderpayPromotionSection").style.display = "none";
-        
+
     }
 }

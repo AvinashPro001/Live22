@@ -297,8 +297,11 @@ async function DoRegister() {
         var res = await PostMethodRegister(apiEndPoints.register, model);
         
         if (res !== null && res !== undefined) {
-            if ((res.data.messageResponse.statusCode.split(",").length - 1) == 0)
-                ShowError(res.data.messageResponse.smsMessage);
+            try {
+                if ((res.data.messageResponse.statusCode.split(",").length - 1) == 0)
+                    ShowError(res.data.messageResponse.smsMessage);
+            }
+            catch (e) {}
             let model = {
                 userName: $('#txt_username').val(),
                 password: $("#txt_password").val(),

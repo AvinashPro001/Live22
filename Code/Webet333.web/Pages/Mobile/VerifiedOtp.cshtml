@@ -60,14 +60,16 @@
         if (res.data.errorCode == 0) {
             var Details = await GetMethod(apiEndPoints.getProfile);
             sessionStorage.setItem('UserDetails', enc(JSON.stringify(Details)));
+            await gtag_report_conversion("../Mobile/home");
             window.location = "../Mobile/home";
+            
         }
         LoaderHide();
     }
 
 
     if (GetLocalStorage('currentUser') === null) {
-        window.location.href = "/";
+        window.location.href = "../Mobile/home";
     }
     else {
         
