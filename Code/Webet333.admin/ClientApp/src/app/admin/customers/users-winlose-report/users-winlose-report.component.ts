@@ -12,6 +12,7 @@ export class UsersWinloseReportComponent implements OnInit {
     rows = [];
     loadingIndicator: boolean;
     columns = [];
+    tableLimit: any = 10;
 
     constructor(
         private adminService: AdminService,
@@ -65,5 +66,41 @@ export class UsersWinloseReportComponent implements OnInit {
 
     ReplaceTime(Date) {
         return Date.replace("T", " ")
+    }
+
+    filterdata() {
+        this.rows = [];
+        this.loadingIndicator = true;
+        let fromdate, todate
+        fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value
+        todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value
+        let data = {
+            toDate: todate,
+            fromDate: fromdate
+        }
+        this.adminService.add<any>(customer.customerWinloseReport, data).subscribe(res => {
+            this.rows = [];
+            let i = 0;
+            res.data.forEach(el => {
+                this.rows.push({
+                    No: ++i,
+                    Username: el.UserName,
+                    PromotionName: el.PromotionTitle == null ? "Not Available" : el.PromotionTitle,
+                    Deposit: el.TotalDeposit,
+                    Withdraw: el.TotalWithdraw,
+                    Winlose: el.WinLose,
+                    DateTime: this.ReplaceTime(el.Created)
+                });
+            })
+            this.rows = [...this.rows];
+            this.loadingIndicator = false;
+        }, error => {
+            this.loadingIndicator = false;
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
+    setLimit() {
+        this.tableLimit = (document.getElementById("viewLimit") as HTMLInputElement).value;
     }
 }

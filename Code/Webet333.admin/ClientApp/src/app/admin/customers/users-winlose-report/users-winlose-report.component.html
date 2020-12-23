@@ -6,11 +6,8 @@
                     <legend class="main-title">Users Winlose Report</legend>
                 </div>
                 <div class="col-lg-12">
-                    <!--<div class="row col-12">
-                        <div class="p-2 col-md-2">
-                            <h4 class="text-muted text-thin">Search</h4>
-                            <input class="form-control" type="text" (keyup)='searchHandler($event)'>
-                        </div>
+                    <div class="row col-12">
+
                         <div class="p-2 col-md-2">
                             <h4 class="text-muted text-thin">From Date</h4>
                             <div class="input-group">
@@ -33,18 +30,26 @@
                         </div>
                         <div class="p-2 col-md-2">
                             <h4 class="text-muted text-thin">&nbsp;</h4>
-                            <button class="mb-1 btn btn-success" (click)='searchHandlerByDate()' type="button">Filter</button>
+                            <button class="mb-1 btn btn-success" (click)='filterdata()' type="button">Filter</button>
                         </div>
                         <div class="p-2 col-md-2" style="position:absolute;right:0px;">
-                            <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large;">Add Transfer</button>
+                            <h4 class="text-muted text-thin">&nbsp;</h4>
+                            <select class="form-control" id="viewLimit" (change)="setLimit()">
+                                <option value="10">View 10 </option>
+                                <option value="20">View 20 </option>
+                                <option value="50">View 50 </option>
+                                <option value="100">View 100 </option>
+                                <option value="150">View 150 </option>
+                                <option value="200">View 200 </option>
+                            </select>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
             </div>
         </div>
         <div class="card-body">
             <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
-                           [rowHeight]="'auto'" [limit]="20" [loadingIndicator]="loadingIndicator">
+                           [rowHeight]="'auto'" [limit]="tableLimit" [loadingIndicator]="loadingIndicator">
             </ngx-datatable>
         </div>
     </div>
