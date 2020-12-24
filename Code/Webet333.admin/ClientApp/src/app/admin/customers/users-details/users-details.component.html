@@ -249,11 +249,11 @@
                     <td>{{pragmaticUsername== null ? 'Select username.' : pragmaticUsername }}</td>
                     <td></td>
                 </tr>
-                
+
             </table>
             <table style="text-align: center; margin-top: 10px;">
                 <tr>
-                    <td><button  class="btn btn-success">Unlock</button></td>
+                    <td><button class="btn btn-success">Unlock</button></td>
                 </tr>
             </table>
         </div>
@@ -265,7 +265,8 @@
         <div class="p-2 col-md-2">
             <h4 class="text-muted text-thin">From Date</h4>
             <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="datemodel"
+
+                <input class="form-control" placeholder="yyyy-mm-dd"
                        name="dp" ngbDatepicker #d_1="ngbDatepicker" id="d_fromdatetime" >
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" type="button"></button>
