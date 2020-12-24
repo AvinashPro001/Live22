@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
 import { customer } from '../../../../environments/environment';
-import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
-import { debounce } from 'rxjs/operators';
-import { debug } from 'util';
+
 
 @Component({
     selector: 'app-admin/promotion/retrive-list',
@@ -15,6 +14,7 @@ import { debug } from 'util';
     styleUrls: ['./promotion-list.component.scss']
 })
 export class PromotionListComponent implements OnInit {
+
 
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
@@ -39,6 +39,7 @@ export class PromotionListComponent implements OnInit {
     res: any;
     data: any;
     final: any;
+    viewData: any;
     listType: any = [
         { verified: "pending" },
         { verified: "approved" },
@@ -53,7 +54,8 @@ export class PromotionListComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private confirmationDialogService: ConfirmationDialogService
+        private confirmationDialogService: ConfirmationDialogService,
+        private modalService: NgbModal,
     ) { }
     //#endregion
 
@@ -68,20 +70,20 @@ export class PromotionListComponent implements OnInit {
     setColumn() {
         this.columns = [
             { prop: 'No', width: 90 },
-            { prop: 'DateStart' },
-            { prop: 'DateEnd' },
-            { prop: 'TimeStart' },
-            { prop: 'TimeEnd' },
+            //{ prop: 'DateStart' },
+            //{ prop: 'DateEnd' },
+            //{ prop: 'TimeStart' },
+            //{ prop: 'TimeEnd' },
             { prop: 'Title' },
             { prop: 'Banner' },
             { prop: 'MobileBanner' },
             { prop: 'Amount' },
-            { prop: 'Type' },
-            { prop: 'TurnoverTime' },
-            { prop: 'Winturn' },
+            //{ prop: 'Type' },
+            //{ prop: 'TurnoverTime' },
+            //{ prop: 'Winturn' },
             { prop: 'Language' },
-            { prop: 'Sequence' },
-            { prop: 'Actions', cellTemplate: this.status, sortable: false, width: 250 },
+            //{ prop: 'Sequence' },
+            { prop: 'Actions', cellTemplate: this.status, sortable: true, width: 250 },
         ];
     }
     //#endregion
@@ -91,27 +93,27 @@ export class PromotionListComponent implements OnInit {
         this.loadingIndicator = true;
         let data = {
         }
-        this.adminService.get<any>(customer.promotionAdminList).subscribe(res => {
+        this.adminService.add<any>(customer.promotionAdminList,data).subscribe(res => {
             this.rows = [];
             let i = 0;
             this.promotionData = res.data;
             res.data.forEach(el => {
                 this.rows.push({
                     No: ++i,
-                    DateStart: this.replaceDate(el.startDate),
-                    DateEnd: this.replaceDate(el.endDate),
-                    TimeStart: el.startTime,
-                    TimeEnd: el.endTime,
+                    //DateStart: this.replaceDate(el.startDate),
+                    //DateEnd: this.replaceDate(el.endDate),
+                    //TimeStart: el.startTime,
+                    //TimeEnd: el.endTime,
                     Title: el.title,
                     Banner: "<img src= '" + el.banner + "' height=30px width=60px />",
                     MobileBanner: "<img src= '" + el.mobilebanner + "' height=30px width=60px/>",
                     Amount: el.discount,
-                    Type: el.discountType,
-                    Sequence: el.sequence,
+                    //Type: el.discountType,
+                    //Sequence: el.sequence,
                     Language: el.languageName,
                     id: el.id,
-                    TurnoverTime: el.turnovertime + "X",
-                    Winturn: el.winturn + "X"
+                    //TurnoverTime: el.turnovertime + "X",
+                    //Winturn: el.winturn + "X"
                 });
             });
             this.loadingIndicator = false;
@@ -203,6 +205,34 @@ export class PromotionListComponent implements OnInit {
             });
     }
     //#endregion
+
+    promotionActive(id, event) {
+        let data = {
+            id: id,
+            active: event
+        }
+        this.adminService.add<any>(customer.promotionUpdateStatus, data).subscribe(res => {
+            this.toasterService.pop('success', 'Success', res.message);
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
+    show(row, content) {
+        this.viewData = row;
+        this.openWindowCustomClass(content);
+    }
+
+    openWindowCustomClass(content) {
+        this.modalService.open(content, { windowClass: 'dark-modal', });
+    }
+
+    returnlable(value) {
+        if (value)
+            return '<label style="color:green">True</label>';
+        else 
+            return '<label style="color:red">False</label>';
+    }
 }
 
 

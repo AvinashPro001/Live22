@@ -64,6 +64,7 @@ namespace Webet333.models.Mapping.Promotions
                 IsGold = x.IsGold,
                 IsPlatinum = x.IsPlatinum,
                 IsDiamond = x.IsDiamond,
+                Active=x.Active
             }).ToList();
             return response;
         }

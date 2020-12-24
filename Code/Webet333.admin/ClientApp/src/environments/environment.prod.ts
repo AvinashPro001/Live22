@@ -5,9 +5,9 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
     //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:55861/api/v1/'
+    apiUrl: 'http://localhost:55861/api/v1/'
 };
 
 export const account = {
@@ -185,6 +185,7 @@ export const customer = {
     promotionImage: environment.apiUrl + 'promotions/image',
     promotionDelete: environment.apiUrl + 'promotions/delete',
     promotionUpdate: environment.apiUrl + 'promotions/update',
+    promotionUpdateStatus: environment.apiUrl + 'promotions/update/status',
     promotionImageUpdate: environment.apiUrl + 'promotions/image/update',
 
     promotionHtml: environment.apiUrl + 'promotions/html/retrieve',

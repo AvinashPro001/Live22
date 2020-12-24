@@ -95,6 +95,14 @@ namespace Webet333.api.Helpers
             }
         }
 
+        public async Task UpdateStatus(PromotionUpdateStatusRequest request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.Promotions.UpdateActiveStatus, new { request.Id,request.Active });
+            }
+        }
+
         public async Task<dynamic> SelectPromotion(BaseUrlConfigs baseUrl, string languageId, UsersPromotionRetrive request, string role)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -112,12 +120,12 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<dynamic> RetrieveAdmin(BaseUrlConfigs baseUrl)
+        public async Task<dynamic> RetrieveAdmin(PromotionAdminRetriveRequest request,BaseUrlConfigs baseUrl)
         {
             var promotions = new List<PromotionResponse>();
             using (var repository = new DapperRepository<PromotionResponse>(Connection))
             {
-                var result = await repository.GetMultiDataAsync(StoredProcConsts.Promotions.Retrieve, new { });
+                var result = await repository.GetMultiDataAsync(StoredProcConsts.Promotions.AdminRetrieve, request);
                 promotions = result.Read<PromotionResponse>();
 
                 if (promotions != null && promotions.Count > 0)

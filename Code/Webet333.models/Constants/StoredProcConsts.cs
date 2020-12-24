@@ -173,7 +173,7 @@
 
         }
 
-        public  class PaymentGateway
+        public class PaymentGateway
         {
             public const string SaveToken = "[dbo].[PaymentToken_Insert]";
 
@@ -209,6 +209,8 @@
 
             public const string Retrieve = "[dbo].[Promotion_Select]";
 
+            public const string AdminRetrieve = "[dbo].[Promotion_Admin_Select]";
+
             public const string RetrieveById = "[dbo].[Promotion_Select_By_Id]";
 
             public const string Insert = "[dbo].[Promotion_Insert]";
@@ -216,6 +218,8 @@
             public const string Image = "[dbo].[Promotion_Update_Image]";
 
             public const string Delete = "[dbo].[Promotion_Delete]";
+
+            public const string UpdateActiveStatus = "[dbo].[Promotion_Update_Active_Status]";
 
             public const string Update = "[dbo].[Promotion_Update]";
 
@@ -235,13 +239,13 @@
 
             public const string PromotionGroupSelect = "[dbo].[PromotionGroup_SELECT]";
 
-            public const string PromotionGroupDelete= "[dbo].[PromotionGroup_Delete]";
+            public const string PromotionGroupDelete = "[dbo].[PromotionGroup_Delete]";
 
         }
 
         public class GameBalance
         {
-            public const string Kiss918GameBalanceUpdate= "[dbo].[Balance_Kiss918_Update]";
+            public const string Kiss918GameBalanceUpdate = "[dbo].[Balance_Kiss918_Update]";
 
             public const string Pussy888GameBalanceUpdate = "[dbo].[Balance_Pussy888_Update]";
 
@@ -249,17 +253,17 @@
 
             public const string WMGameBalanceUpdate = "[dbo].[Balance_WM_Update]";
 
-            public const string Mega888GameBalanceUpdate= "[dbo].[Balance_MEGA_Update]";
+            public const string Mega888GameBalanceUpdate = "[dbo].[Balance_MEGA_Update]";
 
-            public const string M8GameBalanceUpdate= "[dbo].[Balance_M8_Update]";
+            public const string M8GameBalanceUpdate = "[dbo].[Balance_M8_Update]";
 
-            public const string MaxbetGameBalanceUpdate= "[dbo].[Balance_MaxBet_Update]";
+            public const string MaxbetGameBalanceUpdate = "[dbo].[Balance_MaxBet_Update]";
 
-            public const string AgGameBalanceUpdate= "[dbo].[Balance_AG_Update]";
+            public const string AgGameBalanceUpdate = "[dbo].[Balance_AG_Update]";
 
-            public const string PlaytechGameBalanceUpdate= "[dbo].[Balance_PlayTech_Update]";
+            public const string PlaytechGameBalanceUpdate = "[dbo].[Balance_PlayTech_Update]";
 
-            public const string JokerGameBalanceUpdate= "[dbo].[Balance_Joker_Update]";
+            public const string JokerGameBalanceUpdate = "[dbo].[Balance_Joker_Update]";
 
             public const string DGGameBalanceUpdate = "[dbo].[Balance_DG_Update]";
 
@@ -336,7 +340,7 @@
 
             public const string DGBettingDetailsInsertUpdate = "[dbo].[DG_BettingDetails_Insert]";
 
-            public const string SexyBettingDetailsInsert= "[dbo].[SexyBaccarat_BettindDetails_Insert]";
+            public const string SexyBettingDetailsInsert = "[dbo].[SexyBaccarat_BettindDetails_Insert]";
 
             public const string PlaytechBettingDetailsInsertUpdate = "[dbo].[Playtech_BettingDetails_Insert]";
 
