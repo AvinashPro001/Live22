@@ -168,7 +168,7 @@ body                                        { background-color: #ffffff; padding
 .login-top-slider .slick-prev               { left: 25px; }
 .login-top-slider .slick-next               { right: 25px; }
 /* Promotion Page */
-.promotion-bg                               { background: no-repeat center center / 100% 100%;height: 100px;filter: drop-shadow(2px 4px 6px black);border-radius:10px;}
+.promotion-bg                               { background: no-repeat center center / 100% 100%;height: 100px;filter: drop-shadow(2px 4px 6px black);border-radius:10px;width:90%;margin-left:5%}
 .promotion-bg a                             { display: block; height: 100%; }
 .promotion-bg:not(:last-child)              { margin-bottom: 10px; }
 .logowithback .row                          { display: flex; align-items: center; }
