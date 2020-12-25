@@ -185,6 +185,7 @@ export const customer = {
     promotionImage: environment.apiUrl + 'promotions/image',
     promotionDelete: environment.apiUrl + 'promotions/delete',
     promotionUpdate: environment.apiUrl + 'promotions/update',
+    promotionUpdateStatus: environment.apiUrl + 'promotions/update/status',
     promotionImageUpdate: environment.apiUrl + 'promotions/image/update',
 
     promotionHtml: environment.apiUrl + 'promotions/html/retrieve',

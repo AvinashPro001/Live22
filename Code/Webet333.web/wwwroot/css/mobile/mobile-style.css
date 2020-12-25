@@ -112,7 +112,7 @@ body                                        { background-color: #ffffff; padding
 .game-title                                 { padding: 10px 5px 5px; font-size: 11px; line-height: 10px; background: #fff; border-radius: 30px;
                                             box-shadow: 0px 5px 5px #ccc; display: block; color: #000; margin-top: -10px; border: 0px; 
                                             width: 100%; }
-.hero-banner .slick-initialized .slick-slide { height: 100px;}
+/*.hero-banner .slick-initialized .slick-slide { height: 100px;}*/
 /* Footer */
 .footer-widget                              { background-image: linear-gradient(to bottom right,#ffb701 ,#ff9600);}
 .footer-widget ul                           { padding: 0px;}
@@ -236,4 +236,23 @@ select.main-wallet.jcf-hidden,
 #beforelogin_mobile .hero-banner .slick-dots li, #afterlogin_mobile .hero-banner .slick-dots li {
     width: 7px;
     height: 7px;
+}
+
+
+
+.promotion-hero-banner .full-img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    filter: drop-shadow(2px 4px 6px black);
+    border-radius: 10px;
+}
+
+.promotion-slide-hero-banner{
+    margin-bottom:-5px;
+}
+
+.promotion-slide-hero-banner .full-img {
+    width: 100%;
+    height: auto;
 }

@@ -32,6 +32,7 @@ export class UsersWinloseReportComponent implements OnInit {
             { prop: 'Username' },
             { prop: 'PromotionName' },
             { prop: 'Deposit' },
+            { prop: 'Bonus' },
             { prop: 'Withdraw' },
             { prop: 'Winlose' },
         ];
@@ -52,6 +53,7 @@ export class UsersWinloseReportComponent implements OnInit {
                     PromotionName: el.PromotionTitle == null ? "Not Available" : el.PromotionTitle,
                     Deposit: el.TotalDeposit,
                     Withdraw: el.TotalWithdraw,
+                    Bonus: el.TotalBonus,
                     Winlose: el.WinLose,
                     DateTime: this.ReplaceTime(el.Created)
                 });
@@ -88,6 +90,7 @@ export class UsersWinloseReportComponent implements OnInit {
                     PromotionName: el.PromotionTitle == null ? "Not Available" : el.PromotionTitle,
                     Deposit: el.TotalDeposit,
                     Withdraw: el.TotalWithdraw,
+                    Bonus: el.TotalBonus,
                     Winlose: el.WinLose,
                     DateTime: this.ReplaceTime(el.Created)
                 });

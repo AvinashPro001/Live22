@@ -197,6 +197,8 @@
 
             public const string Delete = "promotions/delete";
 
+            public const string UpdateStatus = "promotions/update/status";
+
             public const string Update = "promotions/update";
 
             public const string SelectDaily = "promotions/daily/list";

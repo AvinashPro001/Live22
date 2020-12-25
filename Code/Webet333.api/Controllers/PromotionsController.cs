@@ -164,6 +164,22 @@ namespace Webet333.api.Controllers
 
         #endregion Promotion Delete
 
+        #region Promotion Status Active
+
+        [HttpPost(ActionsConst.Promotions.UpdateStatus)]
+        public async Task<IActionResult> UpdateStatus([FromBody] PromotionUpdateStatusRequest request)
+        {
+            await CheckUserRole();
+
+            using (var promotion_help = new PromotionsHelpers(Connection))
+            {
+                await promotion_help.UpdateStatus(request);
+                return OkResponse();
+            }
+        }
+
+        #endregion Promotion Status Active
+
         #region Promotion Select For User
 
         [Authorize]
@@ -189,8 +205,8 @@ namespace Webet333.api.Controllers
         #region Admin Promotion Retrive
 
         [Authorize]
-        [HttpGet(ActionsConst.Promotions.AdminRetrive)]
-        public async Task<IActionResult> SelectPromotionsForAdmin([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        [HttpPost(ActionsConst.Promotions.AdminRetrive)]
+        public async Task<IActionResult> SelectPromotionsForAdmin([FromBody] PromotionAdminRetriveRequest request ,[FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
@@ -198,7 +214,7 @@ namespace Webet333.api.Controllers
 
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
-                var promotions = await promotion_help.RetrieveAdmin(BaseUrlConfigsOptions.Value);
+                var promotions = await promotion_help.RetrieveAdmin(request,BaseUrlConfigsOptions.Value);
                 return OkResponse(promotions);
             }
         }

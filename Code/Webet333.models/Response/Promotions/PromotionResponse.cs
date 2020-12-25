@@ -60,6 +60,9 @@ namespace Webet333.models.Response.Promotions
         [JsonProperty(PropertyName = "isadmin")]
         public bool IsAdmin { get; set; }
 
+        [JsonProperty(PropertyName = "active")]
+        public bool Active { get; set; }
+
         [JsonProperty(PropertyName = "bankAccountClaimOnce")]
         public bool BankAccountClaimOnce { get; set; }
 
