@@ -25,6 +25,9 @@ async function DoLogin() {
     };
     let res = await PostMethod(apiEndPoints.login, model);
     if (res !== null && res !== undefined) {
+
+        
+
         await TrackingLoginRegister("Login", model.userName, "loginCookies");
 
         localStorage.setItem('currentUser', res.data.access_token);
@@ -32,20 +35,19 @@ async function DoLogin() {
 
         localStorage.setItem('currentUserData', enc($("#m_txt_password").val()));
 
-        remember_me();
-
-
         var resUserDataMobile = await GetMethod(apiEndPoints.getProfile);
+        if (resUserDataMobile.data.mobilenoConfirmed)
+            window.location = "../Mobile/home";
+        else
+            window.location = "../Mobile/VerifiedOtp";
 
         sessionStorage.setItem('UserDetails', enc(JSON.stringify(resUserDataMobile)));
         localStorage.setItem('currentUserName', resUserDataMobile.data.username);
         //window.location = "../Mobile/home";
 
+        remember_me();
 
-        if (resUserDataMobile.data.mobilenoConfirmed)
-            window.location = "../Mobile/home";
-        else
-            window.location = "../Mobile/VerifiedOtp";
+       
     }
     LoaderHide();
 }
@@ -398,6 +400,15 @@ async function logoutMain(i) {
 
     //Get Username
     try {
+        if (i === 1) {
+            getLanguage();
+            localStorage.clear();
+            window.location = '../../Mobile/home';
+        } else {
+            getLanguage();
+            localStorage.clear();
+            window.location = '/';
+        }
         var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
         var globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
         var username = res.data.username;
@@ -417,16 +428,9 @@ async function logoutMain(i) {
         var perameter = 'Method=' + jokerMethodConst.Signout + '&Timestamp=' + timestamp + '&Username=' + JokerUsername;
         await JokerPostMethod('?' + jokerConstParameter.AppID + '&Signature=' + generateSignature(jokerMethodConst.Signout, JokerUsername), perameter);
 
-        localStorage.clear();
         sessionStorage.clear();
         SetLocalStorage('language', language);
-        if (i === 1) {
-            getLanguage();
-            window.location = '../../Mobile/home';
-        } else {
-            getLanguage();
-            window.location = '/';
-        }
+      
         LoaderHide();
     }
     catch{

@@ -920,7 +920,7 @@ header .sticky-header {
     }
 
     .profile-subdetail .info-form.history-tabs .nav > li.active > a {
-        background-image: linear-gradient(-180deg,#0e92bf 0, #064357 100%);
+        background-image: linear-gradient(-180deg,#feb801 0, #feb801 100%);
         color: #fff;
     }
 
@@ -940,9 +940,17 @@ header .sticky-header {
     }
 
         .profile-subdetail .info-form.history-tabs .nav > li > a:hover {
-            background-image: linear-gradient(-180deg,#0e92bf 0,#064357 100%);
+            background-image: linear-gradient(-180deg,#feb801 0,#feb801 100%);
             color: #fff;
         }
+
+.title-bg {
+    background-image: linear-gradient(-180deg,#feb801 0,#feb801 100%)!important; 
+    padding: 10px;
+}
+body {
+     background-color: #ffffff !important;
+}
 
 .hide-header {
     display: none;
@@ -1451,9 +1459,18 @@ header .sticky-header {
 }
 
 .btn-default-border {
-    border-color: #148be5;
+    border-color: #ffb701;
 }
 
+.text-primary {
+    color: #ffb701 !important;
+}
+
+/*a {
+    color: #337ab7 !important;
+    text-decoration: none !important;
+}
+*/
 .transfer-header {
     background: #003b79;
     color: white;

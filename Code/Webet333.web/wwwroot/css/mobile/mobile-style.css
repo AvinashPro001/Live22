@@ -1,5 +1,5 @@
 body                                        { background-color: #ffffff; padding-top: 40px; }
-.scroll-content .join-now-section .myr-quote { margin-top: 5px; }
+.scroll-content .join-now-section .myr-quote { margin-top: 10px; }
 .transfer-header                            { background-color: #feb801; }
 .menu-main-wallet,
 .menuwallet                                 { color: #000000; }
@@ -40,7 +40,7 @@ body                                        { background-color: #ffffff; padding
 .join-now-section .account-icon             { display: flex; justify-content: space-around; padding-bottom: 10px;}
 .join-now-section .account-icon > li        { width: calc(100% / 5 - 5px);}
 .join-now-section                           { padding-bottom: 0px;}
-.login-join-btn-row                         { margin-bottom: 0px; background: #1d1d1d; padding: 15px 0px 5px; display: flex; 
+.login-join-btn-row                         { margin-bottom: 0px; background: #1d1d1d; padding: 10px 0px 10px; display: flex; 
                                             justify-content: center; }
 .login-join-btn-row .btn                    { padding: 10px 40px 10px 30px; border-radius: 30px; color: #ffffff; transition: 0.5s; width: 43%;
                                             border-bottom: 1px solid #8f0000; position: relative; text-transform: uppercase; margin: 0 5px;
