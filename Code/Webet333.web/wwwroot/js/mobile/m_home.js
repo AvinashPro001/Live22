@@ -54,7 +54,8 @@ async function SliderPromotion() {
             if (panel !== null) {
                 for (i = 0; i < panelData.length; i++) {
                     panel.innerHTML +=
-                        '<a href = "/Mobile/promotions"><div class="promotion-bg" style="background-image: url(' + panelData[i].banner + ');" ></div></a>';
+                        //'<a href = "/Mobile/promotions"><div class="promotion-bg" style="background-image: url(' + panelData[i].banner + ');" ></div></a>';
+                        '<div class="promotion-slide-hero-banner" ><a href="#"> <img src="' + panelData[i].banner+'" class="full-img"></a></div>'
                 }
 
                 if (GetLocalStorage('currentUser') !== null)
@@ -328,7 +329,8 @@ async function promotionList() {
         }
 
         for (i = 0; i < panelData.length; i++) {
-            panel.innerHTML += '<div class="promotion-bg" style="background-image: url(' + panelData[i].banner + ');" onclick="OpenFunction(\'' + panelData[i].id + '\')" ><a href="#"></a></div>'
+            //panel.innerHTML += '<div class="promotion-bg" style="background-image: url(' + panelData[i].banner + ');" onclick="OpenFunction(\'' + panelData[i].id + '\')" ><a href="#"></a></div>'
+            panel.innerHTML += '<div class="promotion-hero-banner" onclick="OpenFunction(\'' + panelData[i].id + '\')" ><a href="#"> <img src="' + panelData[i].banner+'" class="full-img"></a></div>'
         }
     }
 }
