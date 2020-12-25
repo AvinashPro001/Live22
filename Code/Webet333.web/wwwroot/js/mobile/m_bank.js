@@ -930,7 +930,7 @@ async function RebateHistory() {
     LoaderShow();
     var model = {};
     var res = await PostMethodWithParameter(apiEndPoints.rebateHistory, model);
-    var resultRebateLoseRebate = res.data.slotRebate;
+    var resultRebateLoseRebate = res.data.winloseRebate;
     var resultRebateTurnOverCommissionRebate = res.data.trunoverRebate;
     var rebateLoseRebate = document.getElementById("loseRebate");
     var rebateTurnOverCommissionRebate = document.getElementById("turnOverCommissionRebate");
