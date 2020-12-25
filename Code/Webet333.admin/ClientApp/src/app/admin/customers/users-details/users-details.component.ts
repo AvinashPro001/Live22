@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, Injectable} from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterService } from 'angular2-toaster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,6 +6,66 @@ import { DatePipe } from '@angular/common';
 import { account, customer, gameBalance } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 import { debug } from 'util';
+import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { now } from 'core-js/fn/date';
+
+
+
+@Injectable()
+export class CustomAdapter extends NgbDateAdapter<string> {
+
+    readonly DELIMITER = '-';
+
+    fromModel(value: string | null): NgbDateStruct | null {
+        if (value) {
+            let date = value.split(this.DELIMITER);
+            return {
+                day: parseInt(date[0], 10),
+                month: parseInt(date[1], 10),
+                year: parseInt(date[2], 10)
+            };
+        }
+        return null;
+    }
+
+    toModel(date: NgbDateStruct | null): string | null {
+        return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
+    }
+}
+
+/**
+ * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
+ */
+@Injectable()
+export class CustomDateParserFormatter extends NgbDateParserFormatter {
+
+    readonly DELIMITER = '/';
+
+    parse(value: string): NgbDateStruct | null {
+        if (value) {
+            let date = value.split(this.DELIMITER);
+            return {
+                day: parseInt(date[0], 10),
+                month: parseInt(date[1], 10),
+                year: parseInt(date[2], 10)
+            };
+        }
+        return null;
+    }
+
+    format(date: NgbDateStruct | null): string {
+        return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
+    }
+}
+
+
+
+
+
+
+
+
+
 
 @Component({
     selector: 'app-users-details',
@@ -24,6 +84,8 @@ export class UsersDetailsComponent implements OnInit {
     Pussy888Password: any = "XXXXXXXXXXX";
     Kiss918PasswordRowId: any;
     Pussy888PasswordRowId: any;
+
+    valuedate: any;
 
     userid: any;
     customerData: any;
@@ -166,22 +228,35 @@ export class UsersDetailsComponent implements OnInit {
         { gmt: "-01:00" },
     ];
 
+    model: NgbDateStruct;
+    date: { year: number, month: number };
+
     constructor(
         private datePipe: DatePipe,
         private adminService: AdminService,
         private toasterService: ToasterService,
         private modalService: NgbModal,
+        private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>
     ) { }
+
+
 
     //#endregion
 
-    //#region OnInit Method
+    
+    datePicker: string;
 
+    
+    //#region OnInit Method
     ngOnInit() {
         document.getElementById("profiletab").click();
         this.customerUser();
         this.coloumSet();
         var someElement = document.getElementById("lockIcon");
+    }
+
+    get today() {
+        return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
     }
 
     //#endregion
@@ -228,6 +303,7 @@ export class UsersDetailsComponent implements OnInit {
             this.Pussy888PasswordRowId = null;
             this.Kiss918PasswordRowId = null;
             this.OnType(this.newVal);
+            this.datePicker = this.today
         }
         catch {
             this.depositRows = [];
@@ -342,6 +418,8 @@ export class UsersDetailsComponent implements OnInit {
     //#region onclick page set in tab menu
 
     openPage(pageName, elmnt) {
+        this.datePicker = this.today
+        
         var tabcontent, tablinks, pageNameDiv;
         tabcontent = document.getElementsByClassName('tabcontent') as HTMLCollectionOf<HTMLElement>;
         for (var i = 0; i < tabcontent.length; i++) {
@@ -1057,13 +1135,13 @@ export class UsersDetailsComponent implements OnInit {
             res.data.forEach(el => {
                 this.rebateRows.push({
                     No: ++i,
-                    GameName: el.GameName,
-                    Turnover: el.Turnover,
-                    Rolling: el.Rolling,
-                    Bet: el.Bet,
-                    WinLose: el.WinLose,
-                    CommAmount: el.CommAmount,
-                    Created: this.replaceDateTime(el.Created),
+                    GameName: el.gameName,
+                    Turnover: el.turnover,
+                    Rolling: el.rolling,
+                    Bet: el.bet,
+                    WinLose: el.winLose,
+                    CommAmount: el.commAmount,
+                    Created: this.replaceDateTime(el.created),
                 });
             });
             this.rebateRows = [...this.rebateRows];
