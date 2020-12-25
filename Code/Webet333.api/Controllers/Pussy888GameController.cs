@@ -113,13 +113,13 @@ namespace Webet333.api.Controllers
                 {
                     UserName = request.Username,
                     UserNamePussy888 = request.GameUsername,
-                    PasswordPussy888= request.GamePassword,
+                    PasswordPussy888 = request.GamePassword,
                 };
 
 
                 var result = await pussygame_helper.Pussy888GamePasswordReset(PasswordUpdateRequest, newPassword);
                 if (result.code != 0) return BadResponse(result.msg);
-                
+
                 await pussygame_helper.Pussy888PasswordUpdate(request.UserId.ToString(), newPassword);
                 await pussygame_helper.ResetPasswordStatusUpdate(true, request.RowId);
                 return OkResponse(new { newPassword });

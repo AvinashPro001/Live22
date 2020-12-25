@@ -28,6 +28,11 @@ const Settings = {
     icon: 'fa fa-angle-right',
     submenu: [
         {
+            text: 'Add Keyword',
+            link: 'customers/refkeyword-add',
+            icon: 'fa fa-bar-chart'
+        },
+        {
             text: 'Game Maintenance',
             link: 'customers/maintenance',
             icon: 'fa fa-wrench'
@@ -133,17 +138,17 @@ const Settings = {
     ]
 }
 
-const ManagerTab = {
-    text: 'Managers Tab',
-    icon: 'fa fa-angle-right',
-    submenu: [
-        {
-            text: 'Tracking',
-            link: 'customers/tracking-list',
-            icon: 'fa fa-clock-o'
-        },
-    ]
-}
+//const ManagerTab = {
+//    text: 'Managers Tab',
+//    icon: 'fa fa-angle-right',
+//    submenu: [
+//        {
+//            text: 'Tracking',
+//            link: 'customers/tracking-list',
+//            icon: 'fa fa-clock-o'
+//        },
+//    ]
+//}
 
 const Transactions = {
     text: 'Transactions',
@@ -206,6 +211,16 @@ const Report = {
     text: 'Report',
     icon: 'fa fa-angle-right',
     submenu: [
+        {
+            text: 'Keyword Report',
+            link: 'customers/refkeyword-analytics',
+            icon: 'fa fa-bar-chart'
+        },
+        {
+            text: 'Duplication Report',
+            link: 'customers/tracking-list',
+            icon: 'fa fa-clock-o'
+        },
         {
             text: 'Maunal Betting Details',
             link: 'customers/betting-details',
@@ -279,29 +294,13 @@ const Report = {
                 },
             ]
         },
-        {
-            text: 'Analytics',
-            icon: 'fa fa-angle-right',
-            submenu: [
-                {
-                    text: 'Reference Keyword',
-                    link: 'customers/refkeyword-add',
-                    icon: 'fa fa-bar-chart'
-                },
-                {
-                    text: 'Reference Analytics',
-                    link: 'customers/refkeyword-analytics',
-                    icon: 'fa fa-bar-chart'
-                }
-            ]
-        }
+       
     ]
 }
 
 const menu = [
     CustomerDatabase,
     Settings,
-    ManagerTab,
     Transactions,
     Report
 ]

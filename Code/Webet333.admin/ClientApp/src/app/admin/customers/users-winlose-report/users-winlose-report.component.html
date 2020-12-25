@@ -32,7 +32,7 @@
                             <h4 class="text-muted text-thin">&nbsp;</h4>
                             <button class="mb-1 btn btn-success" (click)='filterdata()' type="button">Filter</button>
                         </div>
-                        <div class="p-2 col-md-2" style="position:absolute;right:0px;">
+                        <!--<div class="p-2 col-md-2" style="position:absolute;right:0px;">
                             <h4 class="text-muted text-thin">&nbsp;</h4>
                             <select class="form-control" id="viewLimit" (change)="setLimit()">
                                 <option value="10">View 10 </option>
@@ -42,14 +42,14 @@
                                 <option value="150">View 150 </option>
                                 <option value="200">View 200 </option>
                             </select>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-body">
             <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
-                           [rowHeight]="'auto'" [limit]="tableLimit" [loadingIndicator]="loadingIndicator">
+                           [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
             </ngx-datatable>
         </div>
     </div>
