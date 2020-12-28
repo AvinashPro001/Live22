@@ -7,6 +7,9 @@ namespace Webet333.models.Response.User
 {
     public class WinloseReportResponse
     {
+        [JsonProperty(PropertyName = "promotionTitle")]
+        public string PromotionTitle { get; set; }
+
         [JsonProperty(PropertyName ="username")]
         public string UserName { get; set; }
 
