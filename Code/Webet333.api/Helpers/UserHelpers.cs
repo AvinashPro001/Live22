@@ -9,6 +9,7 @@ using Webet333.models.Request;
 using Webet333.models.Request.Account;
 using Webet333.models.Request.User;
 using Webet333.models.Response;
+using Webet333.models.Response.User;
 
 namespace Webet333.api.Helpers
 {
@@ -90,13 +91,17 @@ namespace Webet333.api.Helpers
         }
 
         #region Get User's List
-        public async Task<List<dynamic>> GetUsersWinloseReport(string FromDate, string ToDate)
+        public async Task<dynamic> GetUsersWinloseReport(string FromDate, string ToDate)
         {
             using (var repository = new DapperRepository<GlobalJsonResponse>(Connection))
             {
                 var result = await repository.FindAsync(StoredProcConsts.User.GetUsersWinloseReport, new { FromDate, ToDate});
-                var users = JsonConvert.DeserializeObject<List<dynamic>>(result.DocumentListSerialized);
-                return users;
+                var users = JsonConvert.DeserializeObject<List<WinloseReportResponse>>(result.DocumentListSerialized);
+                decimal totalDeposit = users.Sum(x => x.TotalDeposit);
+                decimal totalWithdraw = users.Sum(x => x.TotalWithdraw);
+                decimal totalBonus = users.Sum(x => x.TotalBonus);
+                decimal totalWinlose= users.Sum(x => x.WinLose);
+                return new { totalDeposit, totalWithdraw, totalBonus, totalWinlose,users };
             }
         }
         #endregion
