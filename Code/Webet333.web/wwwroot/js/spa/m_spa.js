@@ -7,11 +7,8 @@
         type: "Get",
         dataType: "text",
         success: function (response) {
-            console.log("response came");
-            $('.content').html(response);
             history.pushState(null, null, "/Mobile/Home");
             $('.loadingImage').hide();
-            console.log("currentUserData=>" + cUser);
             if (cUser == null) {
                 setTimeout(() => {
                     $('#beforelogin_mobile').hide();
