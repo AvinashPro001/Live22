@@ -60,7 +60,6 @@ export class AppComponent implements OnInit {
                 if (AutoRefersh == true)
                     this.playAudio(2);
             });
-
         });
 
         Connection.on("DepositApprovalList", () => {
@@ -72,7 +71,6 @@ export class AppComponent implements OnInit {
                 if (AutoRefersh == true)
                     this.playAudio(1);
             });
-
         });
 
         Connection.start().then(res =>

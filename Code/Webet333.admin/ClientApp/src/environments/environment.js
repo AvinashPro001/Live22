@@ -154,6 +154,7 @@ exports.customer = {
     promotionImage: exports.environment.apiUrl + 'promotions/image',
     promotionDelete: exports.environment.apiUrl + 'promotions/delete',
     promotionUpdate: exports.environment.apiUrl + 'promotions/update',
+    promotionUpdateStatus: exports.environment.apiUrl + 'promotions/update/status',
     promotionImageUpdate: exports.environment.apiUrl + 'promotions/image/update',
     promotionHtml: exports.environment.apiUrl + 'promotions/html/retrieve',
     M8SetLimit: exports.environment.apiUrl + 'Game/M8/SetDefaultLimit',

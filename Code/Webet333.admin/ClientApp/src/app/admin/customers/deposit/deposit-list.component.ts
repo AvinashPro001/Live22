@@ -150,15 +150,16 @@ export class DepositListComponent implements OnInit {
 
     hubConnection() {
         let Connection = new HubConnectionBuilder().withUrl("http://api.webet333.com/signalrhub").build();
-
+        
         Connection.on("DepositApprovalList", () => {
             this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
             if (this.AutoRefersh == true || this.AutoRefersh == "true")
                 this.playAudio();
         });
+
         Connection.start().then(res =>
             console.log("Connection started")
-        );
+        ).catch(err => this.hubConnection());
     }
 
     playAudio() {
@@ -166,7 +167,7 @@ export class DepositListComponent implements OnInit {
         audio.src = "../../../assets/audio/notification.mp3";
         audio.load();
         audio.play();
-        this.toasterService.pop('info', 'Deposit Approval Pending', "New Approval Request Arrive");
+        //this.toasterService.pop('info', 'Deposit Approval Pending', "New Approval Request Arrive");
         this.depositStatus == 'Pending'
         this.selectedList = this.listType[0];
         this.setColumn(this.selectedList.verified);
@@ -240,6 +241,7 @@ export class DepositListComponent implements OnInit {
     //#endregion
 
     //#region setPageData
+
     setPageData(selectedList, search, fromdate, todate) {
         this.loadingIndicator = true;
         this.rows = [];
@@ -286,6 +288,7 @@ export class DepositListComponent implements OnInit {
         });
 
     }
+
     //#endregion
 
     //#region timeFormat

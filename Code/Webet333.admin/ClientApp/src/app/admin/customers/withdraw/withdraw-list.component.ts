@@ -138,6 +138,7 @@ export class WithdrawListComponent implements OnInit {
         Connection.start().then(res =>
             console.log("Connection started")
         );
+
     }
 
     playAudio() {
@@ -145,7 +146,7 @@ export class WithdrawListComponent implements OnInit {
         audio.src = "../../../assets/audio/notification.mp3";
         audio.load();
         audio.play();
-        this.toasterService.pop('info', 'Withdraw Approval Pending', "New Approval Request Arrive");
+        //this.toasterService.pop('info', 'Withdraw Approval Pending', "New Approval Request Arrive");
         this.withdrawStatus == 'Pending'
         this.selectedList = this.listType[0];
         this.setColumn(this.selectedList.verified);

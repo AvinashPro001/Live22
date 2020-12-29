@@ -14,6 +14,11 @@ export class UsersWinloseReportComponent implements OnInit {
     columns = [];
     tableLimit: any = 10;
 
+    totalDeposit: any;
+    totalBonus: any;
+    totalWithdraw: any;
+    totalWinlose: any;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -46,16 +51,20 @@ export class UsersWinloseReportComponent implements OnInit {
         this.adminService.add<any>(customer.customerWinloseReport, data).subscribe(res => {
             this.rows = [];
             let i = 0;
-            res.data.forEach(el => {
+            this.totalDeposit = res.data.totalDeposit;
+            this.totalBonus = res.data.totalBonus;
+            this.totalWithdraw = res.data.totalWithdraw;
+            this.totalWinlose = res.data.totalWinlose;
+            res.data.users.forEach(el => {
                 this.rows.push({
                     No: ++i,
-                    Username: el.UserName,
-                    PromotionName: el.PromotionTitle == null ? "Not Available" : el.PromotionTitle,
-                    Deposit: el.TotalDeposit,
-                    Withdraw: el.TotalWithdraw,
-                    Bonus: el.TotalBonus,
-                    Winlose: el.WinLose,
-                    DateTime: this.ReplaceTime(el.Created)
+                    Username: el.username,
+                    PromotionName: el.promotionTitle == null ? "Not Available" : el.promotionTitle,
+                    Deposit: el.totalDeposit,
+                    Withdraw: el.totalWithdraw,
+                    Bonus: el.totalBonus,
+                    Winlose: el.winlose,
+                    DateTime: this.ReplaceTime(el.created)
                 });
             })
             this.rows = [...this.rows];
@@ -83,16 +92,20 @@ export class UsersWinloseReportComponent implements OnInit {
         this.adminService.add<any>(customer.customerWinloseReport, data).subscribe(res => {
             this.rows = [];
             let i = 0;
-            res.data.forEach(el => {
+            this.totalDeposit = res.data.totalDeposit;
+            this.totalBonus = res.data.totalBonus;
+            this.totalWithdraw = res.data.totalWithdraw;
+            this.totalWinlose = res.data.totalWinlose;
+            res.data.users.forEach(el => {
                 this.rows.push({
                     No: ++i,
-                    Username: el.UserName,
-                    PromotionName: el.PromotionTitle == null ? "Not Available" : el.PromotionTitle,
-                    Deposit: el.TotalDeposit,
-                    Withdraw: el.TotalWithdraw,
-                    Bonus: el.TotalBonus,
-                    Winlose: el.WinLose,
-                    DateTime: this.ReplaceTime(el.Created)
+                    Username: el.username,
+                    PromotionName: el.promotionTitle == null ? "Not Available" : el.promotionTitle,
+                    Deposit: el.totalDeposit,
+                    Withdraw: el.totalWithdraw,
+                    Bonus: el.totalBonus,
+                    Winlose: el.winlose,
+                    DateTime: this.ReplaceTime(el.created)
                 });
             })
             this.rows = [...this.rows];
