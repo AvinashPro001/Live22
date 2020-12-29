@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 //#region Users Bank Details
 async function UserBankDetails() {
-    LoaderShow();
+    
     var model = {
     };
     var res = await PostMethod(apiEndPoints.userBankDetail, model);
@@ -24,7 +24,7 @@ async function UserBankDetails() {
         }
     }
     WithdrawUsernameSet();
-    LoaderHide();
+    
 }
 //#endregion Users Bank Details
 
@@ -181,11 +181,11 @@ async function CheckWithdrawAmountList() {
 //#region GetProfile
 var User_BankName;
 async function GetProfile() {
-    LoaderShow();
+    
     var res = await GetMethod(apiEndPoints.getProfile);
     User_BankName = res.data.name;;
     SetLocalStorage('918Username', res.data.username918);
-    LoaderHide();
+    
 }
 //#endregion
 
@@ -468,7 +468,7 @@ async function Deposit(online) {
         amountId = "#txt_amount";
     onlinePayment = online;
     if ($(amountId).val() <= 30000 && $(amountId).val() >= 10) {
-        LoaderShow();
+        
         if ($(amountId).val() > 0) {
             var radioValue = $("input[name='promotion']:checked").val();
             var model;
@@ -492,22 +492,22 @@ async function Deposit(online) {
             }
             if (!online) {
                 if (model.bankId === null || model.bankId === "" || model.bankId === undefined) {
-                    LoaderHide();
+                    
                     return ShowError(ChangeErroMessage("plz_selet_bnk_error"));
                 }
 
                 if (model.depositeTime === "NaN") {
-                    LoaderHide();
+                    
                     return ShowError(ChangeErroMessage("select_date_time_error"));
                 }
 
                 if (model.referenceNo === "") {
-                    LoaderHide();
+                    
                     return ShowError(ChangeErroMessage("refer_no_error"));
                 }
 
                 if (filter_array(TableData).length === 0) {
-                    LoaderHide();
+                    
                     return ShowError(ChangeErroMessage("receipt_required_error"));
                 }
             }
@@ -532,7 +532,7 @@ async function Deposit(online) {
                         }
                         else {
                             if (walletData.data.Staus != null && walletData.data.CheckPromotionRemind == true) {
-                                LoaderHide();
+                                
                                 return ShowError(ChangeErroMessage("promot_active_error"));
                             }
 
@@ -550,12 +550,12 @@ async function Deposit(online) {
                         }
                     }
                     else {
-                        LoaderHide();
+                        
                         return ShowError(ChangeErroMessage("game_in_maintenance_new_promotion"));
                     }
                 }
                 else {
-                    LoaderHide();
+                    
                     return ShowError(ChangeErroMessage("pending_sports_deposit_error"));
                 }
             }
@@ -564,12 +564,12 @@ async function Deposit(online) {
                 }
                 var walletData = await PostMethodWithParameter(apiEndPoints.DepositCheckWithoutPromotion, data);
                 if (walletData.data.CheckPopupWithoutPromotion == true) {
-                    LoaderHide();
+                    
                     depositModel = model;
 
                 }
                 else {
-                    LoaderHide();
+                    
                     depositModel = model;
                     $("#promotionNavigate").modal();
                     return 0;
@@ -592,7 +592,7 @@ async function Deposit(online) {
         else {
             ShowError(ChangeErroMessage("amount_greater_zero_error"));
         }
-        LoaderHide();
+        
     }
     else {
         ShowError(ChangeErroMessage("min_max_amount_error"));
@@ -604,7 +604,7 @@ async function PromotionApplyInsert() {
 }
 
 async function DepositAfterPromotion() {
-    LoaderShow();
+    
     if (onlinePayment) {
         var res = await PostMethod(apiEndPoints.onlinePayment, depositModel);
         if (res !== null && res !== undefined) {
@@ -625,14 +625,14 @@ async function DepositAfterPromotion() {
             }, 2000);
         }
     }
-    LoaderHide();
+    
 }
 //#endregion Deposit 
 
 //#region Withdrawal
 async function Withdrawal() {
     if ($('#txt_withdrawalAmount').val() <= 30000 && $('#txt_withdrawalAmount').val() >= 10) {
-        LoaderShow();
+        
         //await regisrationGame();
         if ($('#txt_withdrawalAmount').val() > 0) {
             var model = {
@@ -644,21 +644,21 @@ async function Withdrawal() {
             };
 
             if (model.bankId === "" || model.bankId === null || model.bankId === undefined) {
-                LoaderHide();
+                
                 return ShowError(ChangeErroMessage("bnk_name_required_error"));
             }
             if (model.amount === "") {
-                LoaderHide();
+                
                 return ShowError(ChangeErroMessage("amt_req_error"));
             }
 
             if (model.accountNumber === "") {
-                LoaderHide();
+                
                 return ShowError(ChangeErroMessage("acc_no_req_error"));
             }
 
             if (model.amount < 0) {
-                LoaderHide();
+                
                 return ShowError(ChangeErroMessage("amount_greater_zero_error"));
             }
 
@@ -669,7 +669,7 @@ async function Withdrawal() {
 
             //var CheckPromotionApply = await PostMethodWithParameter(apiEndPoints.promotionApplyCheck, promotionModel);
             //if (CheckPromotionApply.data.Staus != null && CheckPromotionApply.data.TotalPromotionRow > 0) {
-            //    LoaderHide();
+            //    
             //    return ShowError(ChangeErroMessage("promo_ongoing_withdraw_error"));
             //}
 
@@ -686,7 +686,7 @@ async function Withdrawal() {
         else {
             ShowError(ChangeErroMessage("amount_greater_zero_error"));
         }
-        LoaderHide();
+        
     }
     else {
         ShowError(ChangeErroMessage("min_max_amount_error"));
@@ -699,10 +699,10 @@ async function Checkbalance() {
     if ($('#ddl_transferFromWallet').val() != "") {
         if ($('#ddl_transferToWallet').val() != "") {
             if ($('#txt_transferAmount').val() >= 1) {
-                LoaderShow();
+                
                 //WalletBalance();
                 await TransferAmount();
-                LoaderHide();
+                
             }
             else {
                 ShowError(ChangeErroMessage("min1_max1000_amount_error"));
@@ -718,7 +718,7 @@ async function Checkbalance() {
 }
 
 async function TransferAmount() {
-    LoaderShow();
+    
     // Game register
     //await regisrationGame();
     var modelBalance = {};
@@ -758,7 +758,7 @@ async function TransferAmount() {
     else {
         ShowError(ChangeErroMessage("amount_greater_zero_error"));
     }
-    LoaderHide();
+    
 }
 
 function generate(n) {
@@ -786,7 +786,7 @@ function generateGuid() {
 
 //#region DepositHistory
 async function DepositHistory() {
-    LoaderShow();
+    
     var model = {};
     var res = await PostMethod(apiEndPoints.depositHistory, model);
     var result = res.data;
@@ -808,13 +808,13 @@ async function DepositHistory() {
         depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
     }
     getLanguage();
-    LoaderHide();
+    
 }
 //#endregion
 
 //#region WithdrawHistory
 async function WithdrawHistory() {
-    LoaderShow();
+    
     var model = {};
     var res = await PostMethod(apiEndPoints.withdrawHistory, model);
     var result = res.data;
@@ -836,13 +836,13 @@ async function WithdrawHistory() {
         withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_withdraw"></span></p></div></div>'
     }
     getLanguage();
-    LoaderHide();
+    
 }
 //#endregion
 
 //#region TransferHistory
 async function TransferHistory() {
-    LoaderShow();
+    
     var model = {};
     var res = await PostMethod(apiEndPoints.transferHistory, model);
     var result = res.data;
@@ -864,13 +864,13 @@ async function TransferHistory() {
         transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_transfer"></span></p></div></div>'
     }
     getLanguage();
-    LoaderHide();
+    
 }
 //#endregion
 
 //#region PromotionHistory
 async function PromotionHistory() {
-    LoaderShow();
+    
     var model = {};
     var res = await PostMethodWithParameter(apiEndPoints.promotionHistory, model);
     var result = res.data;
@@ -898,13 +898,13 @@ async function PromotionHistory() {
 
     }
     get();
-    LoaderHide();
+    
 }
 //#endregion
 
 //#region StatementHistory
 async function StatementHistory() {
-    LoaderShow();
+    
     var model = {};
     var res = await PostMethodWithParameter(apiEndPoints.transactionHistory, model);
     var result = res.data;
@@ -921,13 +921,13 @@ async function StatementHistory() {
 
     }
     get();
-    LoaderHide();
+    
 }
 //#endregion
 
 //#region RebateHistory
 async function RebateHistory() {
-    LoaderShow();
+    
     var model = {};
     var res = await PostMethodWithParameter(apiEndPoints.rebateHistory, model);
     var resultRebateLoseRebate = res.data.winloseRebate;
@@ -956,13 +956,13 @@ async function RebateHistory() {
     }
 
     get();
-    LoaderHide();
+    
 }
 //#endregion
 
 //#region TransferValidation
 async function select() {
-    LoaderShow();
+    
     await TransferValidation();
     var fromSel = document.getElementById("ddl_transferFromWallet");
     $('#ddl_transferToWallet').html('');
@@ -1008,11 +1008,11 @@ async function TransferValidation() {
         var nameFromWalletAmount = valueFromWalletName[0].amount;
         document.getElementById('txt_transferAmount').value = nameFromWalletAmount;
         document.getElementById('walletBalance').innerHTML = nameFromWalletAmount;
-        LoaderHide();
+        
     }
     else {
         ShowError(ChangeErroMessage("select_from_wallet_error"));
-        LoaderHide();
+        
     }
 }
 //#endregion
@@ -1030,14 +1030,14 @@ async function TransferInAllWallet(GameWalletName) {
         GameName = walletNameTransferInWallet;
     else
         GameName = GameWalletName
-    LoaderShow();
+    
     await WalletBalance();
     let model = {
         walletName: GameName
     }
     var res = await PostMethod(apiEndPoints.AllInWallet, model);
     await WalletBalance();
-    LoaderHide();
+    
 }
 //#endregion Transfer Main Wallet to Any Wallet
 
