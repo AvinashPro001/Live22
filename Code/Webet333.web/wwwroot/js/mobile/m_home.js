@@ -18,7 +18,6 @@ $(document).ready(function () {
     if (GetLocalStorage('language') === null) SetLocalStorage('language', 'en-US');
     getLanguage();
     announcement();
-
 });
 //#endregion
 
@@ -285,7 +284,6 @@ function load_em() {
 }
 
 //#endregion
-
 
 //#region announcement
 async function announcement() {

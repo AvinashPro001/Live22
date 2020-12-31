@@ -94,7 +94,7 @@ function mDeposit() {
         dataType: "text",
         success: function (response) {
             $('body').attr('id', 'hideBody');
-            history.pushState(null, null, "/Mobile/Deposit");
+            history.pushState(null, null, "/mobile/deposit");
             $('.content').html(response);
             $('body').attr('id', 'hideBody');
             $("html").removeClass("intro");
@@ -117,7 +117,7 @@ function mWithdraw() {
         dataType: "text",
         success: function (response) {
             $('body').attr('id', 'hideBody');
-            history.pushState(null, null, "/Mobile/Withdraw");
+            history.pushState(null, null, "/mobile/withdraw");
             $('.content').html(response);
             $("html").removeClass("intro");
         },
@@ -139,7 +139,7 @@ function mHistory() {
         dataType: "text",
         success: function (response) {
             $('body').attr('id', 'hideBody');
-            history.pushState(null, null, "/Mobile/History");
+            history.pushState(null, null, "/mobile/history");
             $('.content').html(response);
             $("html").removeClass("intro");
 
@@ -160,7 +160,7 @@ function backToHome() {
         dataType: "text",
         success: function (response) {
             $('.content').html(response);
-            history.pushState(null, null, "/Mobile/Home");
+            history.pushState(null, null, "/mobile/home");
             $('.loadingImage').hide();
             if (cUser != null) {
                 $('#afterlogin_mobile').hide();
@@ -189,7 +189,7 @@ function mProHome() {
         dataType: "text",
         success: function (response) {
             $('#comContent').html(response);
-            history.pushState(null, null, "/Mobile/Home");
+            history.pushState(null, null, "/mobile/home");
             $('.loadingImage').hide();
             if (cUser == null) {
                 setTimeout(() => {
@@ -220,7 +220,7 @@ function mProPromotions() {
         dataType: "text",
         success: function (response) {
             $('#comContent').html(response);
-            history.pushState(null, null, "/Mobile/promotions");
+            history.pushState(null, null, "/mobile/promotions");
             $('.loadingImage').hide();
             $("html").removeClass("intro");
         },
@@ -264,7 +264,7 @@ function backToHomeSM() {
         success: function (response) {
             $('body').attr('id', 'hideBody');
             $('.content').html(response);
-            history.pushState(null, null, "/Mobile/Home");
+            history.pushState(null, null, "/mobile/home");
             $('.loadingImage').hide();
             if (cUser != null) {
                 $('#afterlogin_mobile').hide();
@@ -416,7 +416,7 @@ function smLogin() {
         success: function (response) {
             $('body').attr('id', 'hideBody');
             $('.content').html(response);
-            history.pushState(null, null, "/Mobile/Login");
+            history.pushState(null, null, "/mobile/login");
             $('.loadingImage').hide();
             $("html").removeClass("intro");
 
