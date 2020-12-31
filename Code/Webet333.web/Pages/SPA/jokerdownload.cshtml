@@ -1,0 +1,69 @@
+﻿@page
+@{
+    ViewData["Title"] = "Joker Slots Apps Download";
+    Layout = "~/Pages/Shared/LayoutMobile.cshtml";
+}
+<title>Webet333 - @ViewData["Title"] </title>
+<script>
+    if (localStorage.getItem('currentUser') == null) {
+        location.href = 'home';
+    }
+    else {
+        document.getElementById('login').style.display = "none";
+        document.getElementById('AccountBeforeLogin').style.display = "none";
+        document.getElementById('balanceBeforeShow').style.display = "none";
+    }
+</script>
+<div id="JokerDownload" class="tabcontent account-reg radius-none downloadbanner">
+    <div class="info-form marginb-none">
+        <h5 class=" bg-no-repeat symbol white-text lang download-icon mar-btm-ten"><strong>DOWNLOAD</strong></h5>
+    </div>
+    <div class="download-process">
+        <ul class="mar-btm-twentyfive">
+            <li class="playstore">
+                <div class="text-center">
+                    <label class="white-text text-center mar-top-ten">Android</label>
+                </div>
+                <figure>
+                    <img style="width:70%" src="~/images/game-barcode.jpg" alt="barcode">
+                </figure>
+                <div class="text-center">
+                    <label class="white-text text-center mar-top-ten"><a onclick="downloadgame(2); return false;" class="white-text text-center mar-top-ten">Click to Download</a></label>
+                </div>
+            </li>
+            <li class="appstore">
+                <div class="text-center">
+                    <label class="white-text text-center mar-top-ten">IOS</label>
+                </div>
+                <figure>
+                    <img style="width:70%" src="~/images/game-barcode.jpg" alt="barcode">
+                </figure>
+                <div class="text-center">
+                    <label class="white-text text-center mar-top-ten"><a onclick="downloadgame(2); return false;" class="white-text text-center mar-top-ten">Click to Download</a></label>
+                </div>
+            </li>
+            <div class="clear-fix"></div>
+        </ul>
+        <div class="access-info">
+            <p class="white-text blue-bg text-center no-mar">Your Access Information</p>
+            <div class="row border-bottom no-mar">
+                <div class="col-sm-5">
+                    <p class="grey-text" style="text-align:center;">Joker Username : <span id="JokeruserName"></span></p>
+                </div>
+                <div class="col-sm-7" style="border-left:1px solid #d7d7d7">
+                    <p class="grey-text text-center" id="_918userName" style="display:none;"></p>
+                    <p class="grey-text text-center" id="_918resetpasswordDownload" style="display:none;"></p>
+
+                </div>
+            </div>
+            <div class="row no-mar">
+                <div class="col-sm-5">
+                    <p class="grey-text">Joker Password : <span id="Jokerresetpassword"><a href="#" class="grey-text">Your WEBET333.COM Password</a></span></p>
+                </div>
+                <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

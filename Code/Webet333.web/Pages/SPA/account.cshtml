@@ -1,0 +1,94 @@
+﻿@page
+@{
+    ViewData["Title"] = "Account";
+    Layout = "~/Pages/Shared/LayoutMobile.cshtml";
+}
+<link href="~/css/style.css" rel="stylesheet" />
+<link href="~/css/mobile/mobile-style.css" rel="stylesheet" />
+
+<script>
+    //document.getElementById("navbarhide").style.display = "none";
+    //document.getElementById("hideBody").style.padding = "0px";
+    document.getElementById("Translation_Option").innerHTML = "";
+    GetUser();
+    if (GetLocalStorage('currentUser') === null)
+        window.location = "../Mobile/home";
+</script>
+
+
+<div id="Profile" class="account-reg white-bg radius-border flexible-height account-page-extra-padding profile-page">
+    <div class="info-form profile-area">
+        <h4 class="profile-sub bg-no-repeat text-center white-text lang" key="profile_title"></h4>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="profile-subdetail">
+                <div class="col-md-10 col-lg-9">
+                    <div class="info-form change-pass">
+                        <div class="pad-lr-comman">
+                            <h5 class="blk-text no-mar lang" key="profile_change_password"></h5>
+                            <ul class="password-upadte blk-text pad-top-ten">
+                                <li class="mar-btm-fifteen">
+                                    <label class="fleft"><p class="big no-mar lang" key="profile_current_password"></p></label>
+                                    <label class="fright mar-btm-no lock"><input id="txt_currentPassword" name="txt_currentPassword" type="password" class="reg-form" style="border-style: solid;border-radius: 3px;border-width: 1px;" placeholder="Current Password" value=""></label>
+                                </li>
+                                <li class="mar-btm-fifteen">
+                                    <label class="fleft"><p class="big no-mar lang" key="profile_new_password"></p></label>
+                                    <label class="fright lock"><input id="txt_newPassword" name="txt_newPassword" autocomplete="new-password"  type="password"    class="reg-form" style="border-style: solid;border-radius: 3px;border-width: 1px;" placeholder="New Password"></label>
+                                </li>
+                                <li class="mar-btm-fifteen">
+                                    <label class="fleft"><p class="big no-mar lang" key="profile_confirm_password"></p></label>
+                                    <label class="fright lock"><input id="txt_confirmPassword" name="txt_confirmPassword" autocomplete="new-password"  type="password"    class="reg-form" style="border-style: solid;border-radius: 3px;border-width: 1px;" placeholder="Confirm Password"></label>
+                                </li>
+                                <li class="mar-btm-fifteen">
+                                    <div class="fright"><button name="" class="submit" data-toggle="modal" data-target="#profilemyModal" onclick="ChangePassword()"><span class="lang" key="profile_confirm_change_password"></span></button></div>
+                                </li>
+                            </ul>
+                            <h5 class="blk-text no-mar lang" key="profile_update_personal_details"></h5>
+                            <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
+                                <li class="pad-top-ten pad-btm-ten">
+                                    <label class="fleft"><p class="big no-mar lang" key="profile_username"></p></label>
+                                    <label class="fright"><p class="big-text no-mar"><strong><span id="lbl_userName"></span></strong></p></label>
+                                </li>
+                                <li class="pad-top-ten pad-btm-ten">
+                                    <label class="fleft"><p class="big no-mar lang" key="profile_full_name"></p></label>
+                                    <label class="fright"><p class="big-text no-mar"><strong><span id="lbl_fullName"></span></strong></p></label>
+                                </li>
+                                <li class="mar-btm-fifteen">
+                                    <label class="fleft"><p class="big no-mar lang" key="profile_mobile"></p></label>
+                                    <label class="fright tel-icon"><input id="txt_mobileUpdate" name="txt_mobileUpdate" type="number" pattern="\d*" style="border-style: solid;border-radius: 3px;border-width: 1px;" class="reg-form" placeholder="Enter new Mobile number"></label>
+                                </li>
+                                <li class="mar-btm-fifteen">
+                                    <div class="fright"><button name="" class="submit" data-toggle="modal" data-target="#ConfirmUpdateProfie" ><span class="lang" key="profile_update_personal_details_button"></span></button></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="ConfirmUpdateProfie" class="modal fade">
+        <div class="modal-dialog mail-width">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div><button type="button" class="close" data-dismiss="modal">&times;</button></div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-12" style="display:inline-flex;">
+                            <p class=" col-lg-4">Password</p>
+                            <input id="chk_login_password" name="txt_login_password" class="form-control col-lg-6" data-translate="password_placeholder" placeholder="Password" autocomplete="off" tabindex="2" onkeypress="DoLoginOnEnter();" type="password" />
+                        </div>
+                    </div>
+                    <br />
+                    <ul class="list-inline pad-top-ten">
+                        <li><button data-dismiss="modal" onclick="UpdateProfile()" class="submit">Update</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
