@@ -2,6 +2,7 @@
 
 $(document).ready(function () {
     if (!window.location.href.includes('Information/Game')) {
+        getReference();
         if (GetLocalStorage('currentUser') !== null) {
             var div = document.getElementById("beforelogin");
             div.parentNode.removeChild(div);
@@ -12,7 +13,7 @@ $(document).ready(function () {
         }
         WalletSignalR();
         Walletdate();
-        getReference();
+        
         getDetails();
         ValidateUrl();
         navaigateRegister();

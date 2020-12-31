@@ -80,9 +80,9 @@ export class RebateListComponent implements OnInit {
                     CommAmount: el.CommAmount,
                     Created: this.ReplaceDateTime(el.Created)
                 });
-                this.loadingIndicator = false;
                 this.rows = [...this.rows]
             });
+            this.loadingIndicator = false;
         });
         this.loadingIndicator = false;
     }
@@ -107,7 +107,7 @@ export class RebateListComponent implements OnInit {
         let model = {
             fromDate: (document.getElementById("txt_fromdatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_fromdatetime") as HTMLInputElement).value,
             toDate: (document.getElementById("txt_todatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_todatetime") as HTMLInputElement).value,
-            gamename: (document.getElementById("gameCategory") as HTMLInputElement).value
+            gamename: (document.getElementById("gameCategory") as HTMLInputElement).value === "" ? null : (document.getElementById("gameCategory") as HTMLInputElement).value,
         }
 
         if (model.fromDate === null && model.toDate === null && model.gamename === "") {
@@ -135,6 +135,7 @@ export class RebateListComponent implements OnInit {
                 this.rows = [...this.rows]
             });
         });
+        this.loadingIndicator = false;
     }
 
     ViewData(id, content) {

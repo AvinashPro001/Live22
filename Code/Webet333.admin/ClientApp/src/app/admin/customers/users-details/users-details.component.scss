@@ -125,4 +125,26 @@ table {
     text-align: center;
 }
 
+.active {
+    color: blue;
+}
 
+.rejected {
+    color: red;
+}
+
+.expired {
+    color: red;
+}
+
+.approved  {
+    color: forestgreen;
+}
+
+.completed {
+    color: forestgreen;
+}
+
+.pending {
+    color: yellow;
+}

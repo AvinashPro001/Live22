@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, Injectable} from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, Injectable } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterService } from 'angular2-toaster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -243,10 +243,11 @@ export class UsersDetailsComponent implements OnInit {
 
     //#endregion
 
-    
-    datePicker: string;
 
-    
+    datePickerfromdate: string;
+    datePickertodate: string;
+
+
     //#region OnInit Method
     ngOnInit() {
         document.getElementById("profiletab").click();
@@ -303,7 +304,8 @@ export class UsersDetailsComponent implements OnInit {
             this.Pussy888PasswordRowId = null;
             this.Kiss918PasswordRowId = null;
             this.OnType(this.newVal);
-            this.datePicker = this.today
+            this.datePickerfromdate = this.today;
+            this.datePickertodate = this.today;
         }
         catch {
             this.depositRows = [];
@@ -418,8 +420,9 @@ export class UsersDetailsComponent implements OnInit {
     //#region onclick page set in tab menu
 
     openPage(pageName, elmnt) {
-        this.datePicker = this.today
-        
+        this.datePickerfromdate = this.today
+        this.datePickertodate = this.today
+
         var tabcontent, tablinks, pageNameDiv;
         tabcontent = document.getElementsByClassName('tabcontent') as HTMLCollectionOf<HTMLElement>;
         for (var i = 0; i < tabcontent.length; i++) {
@@ -436,7 +439,7 @@ export class UsersDetailsComponent implements OnInit {
         (document.getElementById(elmnt) as HTMLElement).style.backgroundColor = "#F47D3A";
         (document.getElementById(elmnt) as HTMLElement).style.color = "black"
 
-        this.searchHandlerByDate(pageName);
+        this.OpenPageLoadData(pageName);
     }
 
     //#endregion onclick page set in tab menu
@@ -882,6 +885,52 @@ export class UsersDetailsComponent implements OnInit {
 
     //#region Filter data
 
+    OpenPageLoadData(Tab) {
+        if (this.userid !== undefined && this.userid !== "") {
+            if (Tab === "Deposit") {
+                this.depositlist(null, null);
+            }
+
+            if (Tab === "Withdraw") {
+                this.withdrawlist(null, null);
+            }
+
+            if (Tab === "Transfer") {
+                this.transferlist(null, null);
+            }
+
+            if (Tab === "Promotion") {
+                this.promotionlist(null, null);
+            }
+
+            if (Tab === "Rebate") {
+                this.rebatelist(null, null);
+            }
+
+            if (Tab === "Statement") {
+                this.statementlist(null, null);
+            }
+
+            if (Tab === "Restore") {
+                this.restorelist();
+            }
+        }
+        else {
+            this.depositRows = [];
+            this.withdrawRows = [];
+            this.transferRows = [];
+            this.promotionRows = [];
+            this.statementRows = [];
+            this.rebateRows = [];
+            this.restoreRows = [];
+            this.PromotionApplyRows = [];
+            this.totalWithdrawAmountWithMYR = "";
+            var someElement = document.getElementById("lockIcon");
+            someElement.className += "";
+            this.Resetvalue();
+        }
+    }
+
     searchHandlerByDate(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
             var fromdate, todate;
@@ -1009,8 +1058,8 @@ export class UsersDetailsComponent implements OnInit {
                     DepositMethod: el.depositMethod,
                     Amount: el.amount,
                     Created: this.replaceDateTime(el.created),
-                    PromotionTitle: el.promotionTitle,
-                    Verified: el.verified,
+                    PromotionTitle: el.promotionTitle == null ? "<b class='notAvailable'>Not Available</b>" : el.promotionTitle,
+                    Verified: "<b class='" + el.verified.toLowerCase() + "'>" + el.verified + "</b>",
                 });
             });
             this.depositRows = [...this.depositRows];
@@ -1040,10 +1089,10 @@ export class UsersDetailsComponent implements OnInit {
                     BankName: el.bankName,
                     WalletName: el.walletName,
                     Amount: el.withdrawalAmount,
-                    Status: el.verified,
+                    Status: "<b class='" + el.verified.toLowerCase() + "'>" + el.verified+"</b>",
                     AccountNo: el.accountNo,
                     Created: this.replaceDateTime(el.created),
-                    AdminRemark: el.adminRemarks
+                    AdminRemark: el.adminRemarks == null ? "<b class='notAvailable'>Not Available</b>" : el.adminRemarks    ,
                 });
             });
             this.withdrawRows = [...this.withdrawRows];
@@ -1109,7 +1158,7 @@ export class UsersDetailsComponent implements OnInit {
                     RemaininggDay: el.RemainingDay,
                     ExpieryDate: this.replaceDateTime(el.ExpiryDate),
                     Created: this.replaceDateTime(el.Created),
-                    Status: el.Staus,
+                    Status: "<b class='" + el.Staus.toLowerCase() + "'>" + el.Staus + "</b>",
                 });
             });
             this.promotionRows = [...this.promotionRows];
