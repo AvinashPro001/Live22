@@ -177,7 +177,7 @@
     <div id="mComContent">
         @*<div class="loadingImage" style="z-index: 2147483643;"></div>*@
 
-        @*<div id="success_snackbar">
+        <div id="success_snackbar">
             <div>
                 <span><img class="Image" width="100px" height="100px" src="~/images/success.png" /></span>
             </div>
@@ -195,7 +195,7 @@
                 <span id="ErrorMessage">
                 </span>
             </div>
-        </div>*@
+        </div>
 
         <div id="afterlogin_mobile">
             <div class="sidebar">
@@ -389,19 +389,19 @@
         <div class="footer-widget" id="footerWidget">
             <ul class="list-inline text-center">
                 <li id="homePagebottom">
-                    <a onclick="mProHome()">
+                    <a href="~/Mobile/home" rel="prefetch">
                         <i class="fa fa-home"></i>
                         <p class="white-text no-mar" data-translate="menu_home">Home</p>
                     </a>
                 </li>
                 <li id="promotionPagebottom" class="">
-                    <a onclick="mProPromotions()">
+                    <a href="~/Mobile/promotions" rel="prefetch">
                         <i class="fa fa-gift"></i>
                         <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
                     </a>
                 </li>
                 <li id="contactusPagebottom">
-                    <a onclick="mProContactus()">
+                    <a href="~/mobile/contactus" rel="prefetch">
                         <i class="fa fa-user"></i>
                         <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
                     </a>

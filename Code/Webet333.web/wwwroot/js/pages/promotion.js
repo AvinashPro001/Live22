@@ -17,9 +17,9 @@ async function promotionList() {
         var panelData = resPanel.data;
         var panel = document.getElementById('promotionList');
         var descriptionPanel = document.getElementById('promotiom_description_section');
-        var height = "180px";
+        var height = "auto";
         if (x < 600)
-            height = "150px";
+            height = "auto";
         for (i = 0; i < panelData.length; i++) {
             panel.innerHTML += "<div class='col-sm-6'><div class='panel'> " +
                 //"<a data-toggle='collapse' data-parent='#accordion' onclick='myFunction(" + i + ")' class='unchecked' id='panel" + i + "' href='#" + panelData[i].id + "'>" +
