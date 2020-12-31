@@ -1,4 +1,4 @@
-﻿                                                           @page
+﻿@page
 @{
     Layout = null;
 }
@@ -33,10 +33,8 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="~/images/mobile/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-
-    <script type="text/javascript" charset="utf-8" src="~/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/signalr/dist/browser/signalr.js"></script>
-
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <link href="~/css/jcf.css" rel="stylesheet" />
     <link href="~/css/fontawesome.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
@@ -45,35 +43,33 @@
     <link href="~/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/mobile/mob-style.css" rel="stylesheet" />
     <link href="~/css/mobile/mobile-style.css" rel="stylesheet" />
-    <link href="../../css/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
-    <link href="../../css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
 
-    <script type="text/javascript" charset="utf-8" src="../../js/datepicker.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../../js/bootstrap-datetimepicker.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../../js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/constants/apiConsts.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/helpers/toastrHelpers.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/helpers/apiHelpers.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/helpers/storageHelpers.js"></script>
+    <script src="~/js/constants/apiConsts.js"></script>
+    <script src="~/js/helpers/toastrHelpers.js"></script>
+    <script src="~/js/helpers/apiHelpers.js"></script>
+    <script src="~/js/helpers/storageHelpers.js"></script>
 
-    <script type="text/javascript" charset="utf-8" src="~/js/bootstrap.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/constants/SecurityConsts.js"></script>
-
-    <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_gamelogin.js"></script>
-    <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_getbalance.js"></script>
-                                                   
-    <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_home.js"></script>
-    <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_account.js"></script>
-    <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_bank.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/constants/M8Consts.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/constants/918KissConsts.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/constants/AGConsts.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/constants/apiConsts.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/constants/JokerConsts.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/constants/PlaytechConsts.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/constants/SMSConsts.js"></script>
-    <script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
-
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/mobile/m_home.js"></script>
+    <script src="~/js/mobile/m_account.js"></script>
+    <script src="~/js/mobile/m_gamelogin.js"></script>
+    <script src="~/js/mobile/m_getbalance.js"></script>
+    <script src="~/js/mobile/m_bank.js"></script>
+    <script src="~/js/constants/M8Consts.js"></script>
+    <script src="~/js/constants/918KissConsts.js"></script>
+    <script src="~/js/constants/AGConsts.js"></script>
+    <script src="~/js/constants/apiConsts.js"></script>
+    <script src="~/js/constants/JokerConsts.js"></script>
+    <script src="~/js/constants/PlaytechConsts.js"></script>
+    <script src="~/js/constants/SMSConsts.js"></script>
+    <script src="~/js/constants/SecurityConsts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    @*<script src="https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88" type="text/javascript" charset="utf-8"></script>*@
+    <script type="text/javascript">
+        $(window).load(function () {
+            $(".loadingImage").fadeOut("slow");;
+        });
+    </script>
     <script>
         function language(value) {
             SetLocalStorage('language', value);
@@ -175,472 +171,95 @@
 </head>
 
 <body onload="get()">
-    <div class="content">
-    </div>
-    <div id="home">
-        @*<div class="loadingImage" style="z-index: 2147483643;"></div>*@
+    <div class="loadingImage" style="z-index: 2147483643;"></div>
 
-        @*<div id="success_snackbar">
-            <div>
-                <span><img class="Image" width="100px" height="100px" src="~/images/success.png" /></span>
-            </div>
-            <div class="message">
-                <span id="SuccessMessage">
-                </span>
+    <div id="success_snackbar">
+        <div>
+            <span><img class="Image" width="100px" height="100px" src="~/images/success.png" /></span>
+        </div>
+        <div class="message">
+            <span id="SuccessMessage">
+            </span>
+        </div>
+    </div>
+
+    <div id="error_snackbar">
+        <div>
+            <span><img class="Image" width="100px" height="100px" src="~/images/Error.png" /></span>
+        </div>
+        <div class="message">
+            <span id="ErrorMessage">
+            </span>
+        </div>
+    </div>
+
+
+    <div id="afterlogin_mobile">
+        <div class="sidebar">
+            <div class="navbar-collapse" id="myNavbar">
+                <ul class="nav text-center mob-menu">
+                    <li><a href="~/../Mobile/Login" rel="prefetch"><i class="fa fa-sign-in" aria-hidden="true"></i><p class="lang" key="sidebar_login"></p></a></li>
+                    <li><a href="~/Mobile/home" rel="prefetch"><img src="~/images/images-mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
+                    <li><a href="~/Home/home" rel="prefetch"><img src="~/images/images-mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/images-mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
+                    <li><a href="~/Mobile/about" rel="prefetch"><img src="~/images/images-mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
+                    <li><a href="~/Mobile/TermandCondtion" rel="prefetch"><img src="~/images/images-mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
+                </ul>
             </div>
         </div>
-
-        <div id="error_snackbar">
-            <div>
-                <span><img class="Image" width="100px" height="100px" src="~/images/Error.png" /></span>
-            </div>
-            <div class="message">
-                <span id="ErrorMessage">
-                </span>
-            </div>
-        </div>*@
-
-
-        <div id="afterlogin_mobile">
-            <div class="sidebar">
-                <div class="navbar-collapse" id="myNavbar">
-                    <ul class="nav text-center mob-menu">
-                        <li><a onclick="smLogin()"><i class="fa fa-sign-in" aria-hidden="true"></i><p class="lang" key="sidebar_login"></p></a></li>
-                        <li><a onclick="mProHome()"><img src="~/images/images-mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
-                        <li><a href="~/Home/home" rel="prefetch"><img src="~/images/images-mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/images-mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
-                        <li><a onclick="mAboutUs()"><img src="~/images/images-mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
-                        <li><a onclick="mTermandCondtion()" @*href="~/Mobile/TermandCondtion" rel="prefetch"*@><img src="~/images/images-mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="main-content">
-                <nav class="navbar navbar-default navbar-fixed-top">
-                    <div class="navbar-header mob-layout">
-                        <ul>
-                            <li>
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            </li>
-                            <li>
-                                <a href="/Mobile/home" class="navbar-brand"><img class="logo" style="margin-left:-30px;" src="~/images/webet-main-logo.png" alt="WEBET 333.com"></a>
-                            </                                                                                                                                                                                                                                                                                                                                                li>
-                            <li><div class="dropdown"></div></li>
-                        </ul>
-                    </div>
-                </nav>
-                <div class="scroll-content">
-                    <div class="join-now-section">
-                        <div class="hero-banner">
-                            <div class="login-top-slider slider" id="mobilePromotionSlider">
-                            </div>
-                        </div>
-                        <div class="login-join-btn-row">
-                            <button onclick="mregister()" class="btn btn-success join-btn "><span class="lang" key="signup">Sign Up</span></button>
-                            <button onclick="mLogin()" class="btn btn-primary login-btn"><span class="lang" key="login">LOGIN</span></button>
-                        </div>
-                        <div class="nav-tabs-outer">
-                            <ul class="nav nav-tabs js-tabs game-tab-panel">
-                                <li class="active text-center casino"><a href="#casino-tile" data-toggle="tab"><span class="lang" key="gamecategory_casino">Casino</span></a></li>
-                                <li class="text-center sport"><a href="#sport-tile" data-toggle="tab"><span class="lang" key="gamecategory_sports">Sports</span></a></li>
-                                <li class="text-center slot"><a href="#slot-tile" data-toggle="tab"><span class="lang" key="gamecategory_slots">Slots</span></a></li>
-                                <li class="text-center fishing"><a href="#fishing-tile" data-toggle="tab"><span class="lang" key="gamecategory_fishing">Fishing</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="white-bg">
-                            <div class="container">
-                                <div class="annunce-section d-flex">
-                                    <p class="annunce-title"><img src="~/images/images-mobile/announcement.png" alt=""></p>
-                                    <p class="annunce-text mobile-announcment "><marquee class="announcment-font" behavior="scroll" direction="left" scrollamount="10" id="p_announcement_mobile"></marquee></p>
-                                    <div class="clear-fix"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="body-content">
-                        @* Tab Content *@
-                        <div class="tab-area">
-                            <div class="tab-content">
-                                <div id="casino-tile" role="tabpanel" class="tab-pane active fade in">
-                                    <ul class="game-series">
-                                        <li data-toggle="modal" data-target="#gameLogin" id="playtechlive">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/pt.png" alt="playtech">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="playtechlive_game"></span></button>
-                                            </a>
-                                        </li>
-                                        <li data-toggle="modal" data-target="#gameLogin" id="aglive">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/ag.png" alt="Asia Gaming">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="aglive_game"></span></button>
-                                            </a>
-                                        </li>
-                                        <li data-toggle="modal" data-target="#gameLogin" id="dglive">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/dg.png" alt="Dream Gaming">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="dg_game"></span></button>
-                                            </a>
-                                        </li>
-                                        <li data-toggle="modal" data-target="#gameLogin" id="salive">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/sa.png" alt="SA Gaming">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="sa_game"></span></button>
-                                            </a>
-                                        </li>
-                                        <li data-toggle="modal" data-target="#gameLogin" id="sexylive">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/sexy.png" alt="Sexy">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="sexybaccarat_game"></span></button>
-                                            </a>
-                                        </li>
-                                        <li data-toggle="modal" data-target="#gameLogin" id="allbetlive">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/allbet.png" alt="allbet">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="allBet_game"></span></button>
-                                            </a>
-                                        </li>
-                                        <li data-toggle="modal" data-target="#gameLogin" id="wmlive">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/wm.png" alt="WM">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="wm_game"></span></button>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div id="sport-tile" role="tabpanel" class="tab-pane fade in">
-                                    <ul class="game-series">
-                                        <li data-toggle="modal" data-target="#gameLogin" id="m8sports">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/m8.png" alt="M8 Bet">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="m8_game"></span></button>
-                                            </a>
-                                        </li>
-                                        <li data-toggle="modal" data-target="#gameLogin" id="maxbetsports">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/maxbet.png" alt="maxbet">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="maxbet_game"></span></button>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div id="slot-tile" role="tabpanel" class="tab-pane fade in">
-                                    <ul class="game-series">
-                                        <li data-toggle="modal" data-target="#gameLogin" id="kiss918slot">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/918kiss.png" alt="918kiss">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="kiss918slot_game"></span></button>
-                                            </a>
-                                        </li>
-                                        <li data-toggle="modal" data-target="#gameLogin" id="megaslot">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/mega888.png" alt="Mega888">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="mega888slot_game"></span></button>
-                                            </a>
-                                        </li>
-                                        <li data-toggle="modal" data-target="#gameLogin" id="pussy88slot">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/pussy888.png" alt="Pussy888">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="pussy888slot_game"></span></button>
-
-                                            </a>
-                                        </li>
-                                        <li data-toggle="modal" data-target="#gameLogin" id="playtechslot">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/playtech.png" alt="Playtech">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="playtechslot_game"></span></button>
-                                            </a>
-                                        </li>
-                                        <li data-toggle="modal" data-target="#gameLogin" id="agslot">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/ag-game.png" alt="Asia Gaming">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="agslot_game"></span></button>
-                                            </a>
-                                        </li>
-                                        <li data-toggle="modal" data-target="#gameLogin" id="jokerslot">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/joker.png" alt="joker">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="jokerslot_game"></span></button>
-                                            </a>
-                                        </li>
-                                        <li data-toggle="modal" data-target="#gameLogin" id="pragmaticslot">
-                                            <a>
-                                                <figure>
-                                                    <img src="~/images/images-mobile/Pragmatic.png" alt="Pragmatic">
-                                                </figure>
-                                                <button class="game-title"><span class="lang" key="pragmaticslot_game"></span></button>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                                <div id="fishing-tile" role="tabpanel" class="tab-pane fade in">
-                                    <ul class="game-series">
-                                        <li></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="footer-quote">
-                            <p class="text-center"><img class="footer-copyright-section-img" src="~/images/images-mobile/reco-pagcor.png" /></p>
-                            <p class="text-center footer-copyright-section-p">WEBET333 offer wide range of highest quality gaming products to our players. Our Customer Support Team is available to assist you 24 hours a day. All personal information will be treated and stored at the strictest and most confidential way.</p>
-                        </div>
-                        <div class="footer-quote">
-                            <p class="text-center copyright-text">Copyright WEBET333 @@ 2020. All rights reserved</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="footer-widget">
-                    <ul class="list-inline text-center">
-                        <li id="homePagebottom">
-                            <a onclick="mHome()">
-                                <i class="fa fa-home"></i>
-                                <p class="white-text no-mar" data-translate="menu_home">Home</p>
-                            </a>
-                        </li>
-                        <li id="promotionPagebottom">
-                            <a onclick="mPromotions()">
-                                <i class="fa fa-gift"></i>
-                                <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
-                            </a>
-                        </li>
-                        <li id="contactusPagebottom">
-                            <a onclick="mContactus()">
-                                <i class="fa fa-user"></i>
-                                <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
-                            </a>
+        <div class="main-content">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="navbar-header mob-layout">
+                    <ul>
+                        <li>
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
                         </li>
                         <li>
-                            <a href="#" onclick="whatsapp()">
-                                <figure><img src="~/images/images-mobile/whatsapp.png" alt="Whats App" /></figure>
-                                <p class="white-text no-mar">Whatsapp</p>
-                            </a>
+                            <a href="/Mobile/home" class="navbar-brand"><img class="logo" style="margin-left:-30px;" src="~/images/webet-main-logo.png" alt="WEBET 333.com"></a>
                         </li>
-                        <li class="live-chat">
-                            <a class="live-chat-icon">
-                                <p class="white-text no-mar" data-translate="Live_chat">Live Chat</p>
-                            </a>
-                        </li>
+                        <li><div class="dropdown"></div></li>
                     </ul>
                 </div>
-            </div>
-            <div class="canvas-overlay"></div>
-        </div>
-        <div id="content"></div>
-        <div>
-            <span style="display:none;" id="urlSportbook"></span>
-            <span style="display:none;" id="AGGame"></span>
-            <span style="display:none;" id="PTGame"></span>
-            <span style="display:none;" id="PTGameSlot"></span>
-            <span style="display:none;" id="918Game"></span>
-            <span style="display:none;" id="JokerGame"></span>
-            <span style="display:none;" id="MaxBetGame"></span>
-        </div>
-        <div id="beforelogin_mobile">
-            <div class="sidebar">
-                <div class="navbar-collapse" id="myNavbar">
-                    <ul class="nav text-center mob-menu">
-                        <li><a onclick="logoutMain(1)"><img src="~/images/images-mobile/logout.png" alt="mn-logout"><p class="lang" key="sidebar_Logout"></p></a></li>
-                        <li><a onclick="mProHome()"><img src="~/images/images-mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
-                        <li><a href="~/Mobile/download?id=918DownloadTab" rel="prefetch"><img src="~/images/images-mobile/download.png" alt="mn-download"><p class="lang" key="sidebar_Download"></p></a></li>
-                        <li><a href="~/Home/home" rel="prefetch"><img src="~/images/images-mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/images-mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
-                        <li><a onclick="mAboutUs()"><img src="~/images/images-mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US" rel="prefetch"></p></a></li>
-                        <li><a onclick="mTermandCondtion()" @*href="~/Mobile/TermandCondtion" rel="prefetch"*@><img src="~/images/images-mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
-                        <li><a onclick="mAccount()" @*href="~/Mobile/Account" rel="prefetch"*@><img src="~/images/images-mobile/profile.png" alt="Profile"><p class="lang" key="sidebar_Profile"></p></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="main-content">
-                <nav class="navbar navbar-default navbar-fixed-top">
-                    <div class="navbar-header mob-layout">
-                        <ul>
-                            <li>
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            </li>
-                            <li>
-                                <a href="/Mobile/home" class="navbar-brand"><img class="logo" src="~/images/webet-main-logo.png" alt="WEBET 333.com"></a>
-                            </li>
-                            <li>
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle wallet" type="button" data-toggle="dropdown"><figure><img src="~/images/images-mobile/wallet.png" alt="f-wallet"></figure></i></button>
-                                    <ul class="dropdown-menu wallet-dropdown">
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>Main Wallet</strong></li>
-                                                <li class="fright" id="ddlmainWallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>918Kiss Wallet</strong></li>
-                                                <li class="fright" id="ddl918KissWallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>AG Wallet</strong></li>
-                                                <li class="fright" id="ddlAGWallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>M8 Wallet</strong></li>
-                                                <li class="fright" id="ddlM8Wallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>Joker Wallet</strong></li>
-                                                <li class="fright" id="ddlJokerWallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>Playtech Wallet</strong></li>
-                                                <li class="fright" id="ddlPlaytechWallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>MaxBet Wallet</strong></li>
-                                                <li class="fright" id="ddlMaxBetWallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>Mega888 Wallet</strong></li>
-                                                <li class="fright" id="ddlMega888Wallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>DG Wallet</strong></li>
-                                                <li class="fright" id="ddlDgWallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>Sexy B. Wallet</strong></li>
-                                                <li class="fright" id="ddlSexyWallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>SA Wallet</strong></li>
-                                                <li class="fright" id="ddlSAWallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>Pussy888 Wallet</strong></li>
-                                                <li class="fright" id="ddlPussy888Wallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>AllBet Wallet</strong></li>
-                                                <li class="fright" id="ddlAllbetWallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>WM Wallet</strong></li>
-                                                <li class="fright" id="ddlWMWallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li><strong>Pragmatic Wallet</strong></li>
-                                                <li class="fright" id="ddlPragmaticWallet">feching...</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+            </nav>
+            <div class="scroll-content">
+                <div class="join-now-section">
+                    <div class="hero-banner">
+                        <div class="login-top-slider slider" id="mobilePromotionSlider">
+                        </div>
+                    </div>
+                    <div class="login-join-btn-row">
+                        <button onclick="document.location.href='~/../register';" rel="prefetch" class="btn btn-success join-btn "><span class="lang" key="signup">Sign Up</span></button>
+                        <button onclick="document.location.href='~/../Login';" rel="prefetch" class="btn btn-primary login-btn"><span class="lang" key="login">LOGIN</span></button>
+                    </div>
+                    <div class="nav-tabs-outer">
+                        <ul class="nav nav-tabs js-tabs game-tab-panel">
+                            <li class="active text-center casino"><a href="#casino-tile" data-toggle="tab"><span class="lang" key="gamecategory_casino">Casino</span></a></li>
+                            <li class="text-center sport"><a href="#sport-tile" data-toggle="tab"><span class="lang" key="gamecategory_sports">Sports</span></a></li>
+                            <li class="text-center slot"><a href="#slot-tile" data-toggle="tab"><span class="lang" key="gamecategory_slots">Slots</span></a></li>
+                            <li class="text-center fishing"><a href="#fishing-tile" data-toggle="tab"><span class="lang" key="gamecategory_fishing">Fishing</span></a></li>
                         </ul>
                     </div>
-                </nav>
-                <div class="scroll-content">
-                    <div class="join-now-section">
-                        <div class="text-center myr-quote">
-                            <h4>MYR <span id="menuMainWallet"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="fa fa-refresh"></span></h4>
-                        </div>
-                        <ul class="account-icon list-inline text-center">
-                            <li class="mobile-icon deposit_icon"><a onclick="mDeposit()"><img src="~/images/images-mobile/menu-images/deposit.png" /><span data-translate="mobile_menu_deposit"></span></a></li>
-                            <li class="mobile-icon transfer_icon"><a onclick="mTransfer()"><img src="~/images/images-mobile/menu-images/transfer.png" /><span data-translate="mobile_menu_Transfer"></span></a></li>
-                            <li class="mobile-icon restore_icon"><a data-toggle="modal" data-target="#RestoreConfirmation" href="#"><img src="~/images/images-mobile/menu-images/restore.png" /><span data-translate="mobile_menu_Restore"></span></a></li>
-                            <li class="mobile-icon withdraw_icon"><a onclick="mWithdraw()"><img src="~/images/images-mobile/menu-images/withdraw.png" /><span data-translate="mobile_menu_Withdraw"></span></a></li>
-                            <li class="mobile-icon history_icon"><a onclick="mHistory()"><img src="~/images/images-mobile/menu-images/history.png" /><span data-translate="mobile_menu_History"></span></a></li>
-                        </ul>
-
-                        <div class="hero-banner">
-                            <div class="login-top-slider slider" id="mobilePromotionSliderLogin">
-                            </div>
-                        </div>
-
-                        <div class="nav-tabs-outer">
-                            <ul class="nav nav-pills game-tab-panel">
-                                <li class="active text-center casino"><a data-toggle="pill" href="#casino-tile-before"><span data-translate="gamecategory_casino">Casino</span></a></li>
-                                <li class="text-center sport"><a data-toggle="pill" href="#menu1"><span data-translate="gamecategory_sports">Sports</span></a></li>
-                                <li class="text-center slot"><a data-toggle="pill" href="#menu2"><span data-translate="gamecategory_slots">Slots</span></a></li>
-                                <li class="text-center fishing"><a data-toggle="pill" href="#menu3"><span data-translate="gamecategory_fishing">Fishing</span></a></li>
-                            </ul>
-                        </div>
-
-                        <div class="white-bg"></div>
+                    <div class="white-bg">
                         <div class="container">
                             <div class="annunce-section d-flex">
                                 <p class="annunce-title"><img src="~/images/images-mobile/announcement.png" alt=""></p>
-                                <p class="annunce-text mobile-announcment"><marquee class="announcment-font" behavior="scroll" direction="left" scrollamount="10" id="p_announcement_mobile_one"></marquee></p>
+                                <p class="annunce-text mobile-announcment "><marquee class="announcment-font" behavior="scroll" direction="left" scrollamount="10" id="p_announcement_mobile"></marquee></p>
                                 <div class="clear-fix"></div>
-                                @*<p class="white-text mar-top-ten text-center">Welcome <span id="lbl_usernameHeader"></span></p>*@
                             </div>
                         </div>
                     </div>
-                    <div class="body-content">
+                </div>
+                <div class="body-content">
+                    @* Tab Content *@
+                    <div class="tab-area">
                         <div class="tab-content">
-                            <div id="casino-tile-before" class="tab-pane fade in active">
+                            <div id="casino-tile" role="tabpanel" class="tab-pane active fade in">
                                 <ul class="game-series">
-                                    <li onclick="PlaytechIdentifiy(false)" id="playtechlivelogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="playtechlive">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/pt.png" alt="playtech">
@@ -648,7 +267,7 @@
                                             <button class="game-title"><span class="lang" key="playtechlive_game"></span></button>
                                         </a>
                                     </li>
-                                    <li onclick="AG(1)" id="aglivelogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="aglive">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/ag.png" alt="Asia Gaming">
@@ -656,7 +275,7 @@
                                             <button class="game-title"><span class="lang" key="aglive_game"></span></button>
                                         </a>
                                     </li>
-                                    <li onclick="logingGame('DG')" id="dglivelogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="dglive">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/dg.png" alt="Dream Gaming">
@@ -664,7 +283,7 @@
                                             <button class="game-title"><span class="lang" key="dg_game"></span></button>
                                         </a>
                                     </li>
-                                    <li onclick="logingGame('SA')" id="salivelogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="salive">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/sa.png" alt="SA Gaming">
@@ -672,7 +291,7 @@
                                             <button class="game-title"><span class="lang" key="sa_game"></span></button>
                                         </a>
                                     </li>
-                                    <li onclick="logingGame('SexyBaccarat')" id="sexylivelogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="sexylive">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/sexy.png" alt="Sexy">
@@ -680,7 +299,7 @@
                                             <button class="game-title"><span class="lang" key="sexybaccarat_game"></span></button>
                                         </a>
                                     </li>
-                                    <li onclick="logingGame('AllBet')" id="allbetlivelogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="allbetlive">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/allbet.png" alt="allbet">
@@ -688,7 +307,7 @@
                                             <button class="game-title"><span class="lang" key="allBet_game"></span></button>
                                         </a>
                                     </li>
-                                    <li onclick="logingGame('WM')" id="wmlivelogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="wmlive">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/wm.png" alt="WM">
@@ -698,9 +317,9 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div id="menu1" class="tab-pane fade">
+                            <div id="sport-tile" role="tabpanel" class="tab-pane fade in">
                                 <ul class="game-series">
-                                    <li onclick="logingGame('M8')" id="m8sportslogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="m8sports">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/m8.png" alt="M8 Bet">
@@ -708,7 +327,7 @@
                                             <button class="game-title"><span class="lang" key="m8_game"></span></button>
                                         </a>
                                     </li>
-                                    <li onclick="logingGame('MaxBet')" id="maxbetsportslogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="maxbetsports">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/maxbet.png" alt="maxbet">
@@ -718,9 +337,9 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div id="menu2" class="tab-pane fade">
+                            <div id="slot-tile" role="tabpanel" class="tab-pane fade in">
                                 <ul class="game-series">
-                                    <li onclick="logingGame('918kiss')" id="kiss918slotlogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="kiss918slot">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/918kiss.png" alt="918kiss">
@@ -728,7 +347,7 @@
                                             <button class="game-title"><span class="lang" key="kiss918slot_game"></span></button>
                                         </a>
                                     </li>
-                                    <li onclick="logingGame('Mega888')" id="megaslotlogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="megaslot">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/mega888.png" alt="Mega888">
@@ -736,7 +355,7 @@
                                             <button class="game-title"><span class="lang" key="mega888slot_game"></span></button>
                                         </a>
                                     </li>
-                                    <li onclick="logingGame('Pussy888')" id="pussy88slotlogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="pussy88slot">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/pussy888.png" alt="Pussy888">
@@ -745,7 +364,7 @@
 
                                         </a>
                                     </li>
-                                    <li onclick="PlaytechIdentifiy(true)" id="playtechslotlogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="playtechslot">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/playtech.png" alt="Playtech">
@@ -753,7 +372,7 @@
                                             <button class="game-title"><span class="lang" key="playtechslot_game"></span></button>
                                         </a>
                                     </li>
-                                    <li onclick="AG(8)" id="agslotlogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="agslot">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/ag-game.png" alt="Asia Gaming">
@@ -761,7 +380,7 @@
                                             <button class="game-title"><span class="lang" key="agslot_game"></span></button>
                                         </a>
                                     </li>
-                                    <li onclick="logingGame('Joker')" id="jokerslotlogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="jokerslot">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/joker.png" alt="joker">
@@ -769,8 +388,7 @@
                                             <button class="game-title"><span class="lang" key="jokerslot_game"></span></button>
                                         </a>
                                     </li>
-
-                                    <li onclick="logingGame('Pragmatic')" id="pragmaticslotlogin">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="pragmaticslot">
                                         <a>
                                             <figure>
                                                 <img src="~/images/images-mobile/Pragmatic.png" alt="Pragmatic">
@@ -778,153 +396,528 @@
                                             <button class="game-title"><span class="lang" key="pragmaticslot_game"></span></button>
                                         </a>
                                     </li>
+
                                 </ul>
                             </div>
-                            <div id="menu3" class="tab-pane fade">
+                            <div id="fishing-tile" role="tabpanel" class="tab-pane fade in">
                                 <ul class="game-series">
                                     <li></li>
                                 </ul>
                             </div>
                         </div>
-
-                        <div class="footer-quote">
-                            <p class="text-center"><img class="footer-copyright-section-img" src="~/images/images-mobile/reco-pagcor.png" /></p>
-                            <p class="text-center footer-copyright-section-p">WEBET333 offer wide range of highest quality gaming products to our players. Our Customer Support Team is available to assist you 24 hours a day. All personal information will be treated and stored at the strictest and most confidential way.</p>
-                        </div>
-                        <div class="footer-quote">
-                            <p class="text-center copyright-text">Copyright WEBET333 @@ 2020. All rights reserved</p>
-                        </div>
                     </div>
+
+                    <div class="footer-quote">
+                        <p class="text-center"><img class="footer-copyright-section-img" src="~/images/images-mobile/reco-pagcor.png" /></p>
+                        <p class="text-center footer-copyright-section-p">WEBET333 offer wide range of highest quality gaming products to our players. Our Customer Support Team is available to assist you 24 hours a day. All personal information will be treated and stored at the strictest and most confidential way.</p>
+                    </div>
+                    <div class="footer-quote">
+                        <p class="text-center copyright-text">Copyright WEBET333 @@ 2020. All rights reserved</p>
+                    </div>
+
                 </div>
-                <div class="footer-widget">
-                    <ul class="list-inline text-center">
-                        <li id="homeLoginPagebottom">
-                            <a onclick="mHome()">
-                                <i class="fa fa-home"></i>
-                                <p class="white-text no-mar" data-translate="menu_home">Home</p>
-                            </a>
-                        </li>
-                        <li id="promotionPagebottom">
-                            <a onclick="mPromotions()">
-                                <i class="fa fa-gift"></i>
-                                <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
-                            </a>
-                        </li>
-                        <li id="contactusPagebottom">
-                            <a onclick="mContactus()">
-                                <i class="fa fa-user"></i>
-                                <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
-                            </a>
+            </div>
+            <div class="footer-widget">
+                <ul class="list-inline text-center">
+                    <li id="homePagebottom">
+                        <a href="~/Mobile/home" rel="prefetch">
+                            <i class="fa fa-home"></i>
+                            <p class="white-text no-mar" data-translate="menu_home">Home</p>
+                        </a>
+                    </li>
+                    <li id="promotionPagebottom">
+                        <a href="~/Mobile/promotions" rel="prefetch">
+                            <i class="fa fa-gift"></i>
+                            <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
+                        </a>
+                    </li>
+                    <li id="contactusPagebottom">
+                        <a href="~/mobile/contactus" rel="prefetch">
+                            <i class="fa fa-user"></i>
+                            <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="whatsapp()">
+                            <figure><img src="~/images/images-mobile/whatsapp.png" alt="Whats App" /></figure>
+                            <p class="white-text no-mar">Whatsapp</p>
+                        </a>
+                    </li>
+                    <li class="live-chat">
+                        <a class="live-chat-icon">
+                            <p class="white-text no-mar" data-translate="Live_chat">Live Chat</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="canvas-overlay"></div>
+    </div>
+    <div>
+        <span style="display:none;" id="urlSportbook"></span>
+        <span style="display:none;" id="AGGame"></span>
+        <span style="display:none;" id="PTGame"></span>
+        <span style="display:none;" id="PTGameSlot"></span>
+        <span style="display:none;" id="918Game"></span>
+        <span style="display:none;" id="JokerGame"></span>
+        <span style="display:none;" id="MaxBetGame"></span>
+    </div>
+    <div id="beforelogin_mobile">
+        <div class="sidebar">
+            <div class="navbar-collapse" id="myNavbar">
+                <ul class="nav text-center mob-menu">
+                    <li><a onclick="logoutMain(1)"><img src="~/images/images-mobile/logout.png" alt="mn-logout"><p class="lang" key="sidebar_Logout"></p></a></li>
+                    <li><a href="~/Mobile/home" rel="prefetch"><img src="~/images/images-mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
+                    <li><a href="~/Mobile/download?id=918DownloadTab" rel="prefetch"><img src="~/images/images-mobile/download.png" alt="mn-download"><p class="lang" key="sidebar_Download"></p></a></li>
+                    <li><a href="~/Home/home" rel="prefetch"><img src="~/images/images-mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/images-mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
+                    <li><a href="~/Mobile/about"><img src="~/images/images-mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US" rel="prefetch"></p></a></li>
+                    <li><a href="~/Mobile/TermandCondtion" rel="prefetch"><img src="~/images/images-mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
+                    <li><a href="~/Mobile/Account" rel="prefetch"><img src="~/images/images-mobile/profile.png" alt="Profile"><p class="lang" key="sidebar_Profile"></p></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-content">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="navbar-header mob-layout">
+                    <ul>
+                        <li>
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
                         </li>
                         <li>
-                            <a href="#" onclick="whatsapp()">
-                                <figure><img src="~/images/images-mobile/whatsapp.png" alt="Whats App" /></figure>
-                                <p class="white-text no-mar">Whatsapp</p>
-                            </a>
+                            <a href="/Mobile/home" class="navbar-brand"><img class="logo" src="~/images/webet-main-logo.png" alt="WEBET 333.com"></a>
                         </li>
-                        <li class="live-chat">
-                            <a class="live-chat-icon"><p class="white-text no-mar" data-translate="Live_chat">Live Chat</p></a>
+                        <li>
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle wallet" type="button" data-toggle="dropdown"><figure><img src="~/images/images-mobile/wallet.png" alt="f-wallet"></figure></i></button>
+                                <ul class="dropdown-menu wallet-dropdown">
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Main Wallet</strong></li>
+                                            <li class="fright" id="ddlmainWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>918Kiss Wallet</strong></li>
+                                            <li class="fright" id="ddl918KissWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>AG Wallet</strong></li>
+                                            <li class="fright" id="ddlAGWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>M8 Wallet</strong></li>
+                                            <li class="fright" id="ddlM8Wallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Joker Wallet</strong></li>
+                                            <li class="fright" id="ddlJokerWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Playtech Wallet</strong></li>
+                                            <li class="fright" id="ddlPlaytechWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>MaxBet Wallet</strong></li>
+                                            <li class="fright" id="ddlMaxBetWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Mega888 Wallet</strong></li>
+                                            <li class="fright" id="ddlMega888Wallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>DG Wallet</strong></li>
+                                            <li class="fright" id="ddlDgWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Sexy B. Wallet</strong></li>
+                                            <li class="fright" id="ddlSexyWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>SA Wallet</strong></li>
+                                            <li class="fright" id="ddlSAWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Pussy888 Wallet</strong></li>
+                                            <li class="fright" id="ddlPussy888Wallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>AllBet Wallet</strong></li>
+                                            <li class="fright" id="ddlAllbetWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>WM Wallet</strong></li>
+                                            <li class="fright" id="ddlWMWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Pragmatic Wallet</strong></li>
+                                            <li class="fright" id="ddlPragmaticWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div class="canvas-overlay"></div>
-        </div>
-
-        <div class="form-login modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><span class="lang" key="login"></span></h4>
+            </nav>
+            <div class="scroll-content">
+                <div class="join-now-section">
+                    <div class="text-center myr-quote">
+                        <h4>MYR <span id="menuMainWallet"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="fa fa-refresh"></span></h4>
                     </div>
-                    <div class="modal-body">
-                        <div role="form">
-                            <div class="info-form">
-                                <label class="user"><input id="txt_login_username" name="txt_username" type="text" class="reg-form" data-translate="username_placeholder" placeholder="Username" value=""></label>
-                                <label class="lock"><input id="txt_login_password" name="txt_password" autocomplete="new-password" type="password" class="reg-form" data-translate="password_placeholder" placeholder="Password"></label>
-                                <div class="checkbox">
-                                    <label style="margin-left:15px"><input id="remember_me" type="checkbox" value=""><span class="lang" key="remember"></span></label>
-                                </div>
-                                <a class="forgot-pass" data-toggle="modal" data-target="#forgot-password"><span class="lang" key="forgot_pasword"></span></a>
-                                <div class="log_in text-center">
-                                    <button class="log_in" onclick="DoLogin(1)"><span class="lang" key="login"></span></button>
-                                </div>
+                    <ul class="account-icon list-inline text-center">
+                        <li class="mobile-icon deposit_icon"><a href="~/Mobile/Deposit" rel="prefetch"><img src="~/images/images-mobile/menu-images/deposit.png" /><span data-translate="mobile_menu_deposit"></span></a></li>
+                        <li class="mobile-icon transfer_icon"><a href="~/Mobile/Transfer" rel="prefetch"><img src="~/images/images-mobile/menu-images/transfer.png" /><span data-translate="mobile_menu_Transfer"></span></a></li>
+                        <li class="mobile-icon restore_icon"  onclick="RestoreBalance()"><a  href="#"><img src="~/images/images-mobile/menu-images/restore.png" /><span data-translate="mobile_menu_Restore"></span></a></li>
+                        <li class="mobile-icon withdraw_icon"><a href="~/Mobile/Withdraw" rel="prefetch"><img src="~/images/images-mobile/menu-images/withdraw.png" /><span data-translate="mobile_menu_Withdraw"></span></a></li>
+                        <li class="mobile-icon history_icon"><a href="~/Mobile/History" rel="prefetch"><img src="~/images/images-mobile/menu-images/history.png" /><span data-translate="mobile_menu_History"></span></a></li>
+                    </ul>
+
+
+                    <div class="hero-banner">
+                        <div class="login-top-slider slider" id="mobilePromotionSliderLogin">
+                        </div>
+                    </div>
+
+                    <div class="nav-tabs-outer">
+                        <ul class="nav nav-pills game-tab-panel">
+                            <li class="active text-center casino"><a data-toggle="pill" href="#home"><span data-translate="gamecategory_casino">Casino</span></a></li>
+                            <li class="text-center sport"><a data-toggle="pill" href="#menu1"><span data-translate="gamecategory_sports">Sports</span></a></li>
+                            <li class="text-center slot"><a data-toggle="pill" href="#menu2"><span data-translate="gamecategory_slots">Slots</span></a></li>
+                            <li class="text-center fishing"><a data-toggle="pill" href="#menu3"><span data-translate="gamecategory_fishing">Fishing</span></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="white-bg"></div>
+                    <div class="container">
+                        <div class="annunce-section d-flex">
+                            <p class="annunce-title"><img src="~/images/images-mobile/announcement.png" alt=""></p>
+                            <p class="annunce-text mobile-announcment"><marquee class="announcment-font" behavior="scroll" direction="left" scrollamount="10" id="p_announcement_mobile_one"></marquee></p>
+                            <div class="clear-fix"></div>
+                            @*<p class="white-text mar-top-ten text-center">Welcome <span id="lbl_usernameHeader"></span></p>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="body-content">
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                            <ul class="game-series">
+                                <li onclick="PlaytechIdentifiy(false)" id="playtechlivelogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/pt.png" alt="playtech">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="playtechlive_game"></span></button>
+                                    </a>
+                                </li>
+                                <li onclick="AG(1)" id="aglivelogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/ag.png" alt="Asia Gaming">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="aglive_game"></span></button>
+                                    </a>
+                                </li>
+                                <li onclick="logingGame('DG')" id="dglivelogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/dg.png" alt="Dream Gaming">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="dg_game"></span></button>
+                                    </a>
+                                </li>
+                                <li onclick="logingGame('SA')" id="salivelogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/sa.png" alt="SA Gaming">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="sa_game"></span></button>
+                                    </a>
+                                </li>
+                                <li onclick="logingGame('SexyBaccarat')" id="sexylivelogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/sexy.png" alt="Sexy">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="sexybaccarat_game"></span></button>
+                                    </a>
+                                </li>
+                                <li onclick="logingGame('AllBet')" id="allbetlivelogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/allbet.png" alt="allbet">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="allBet_game"></span></button>
+                                    </a>
+                                </li>
+                                <li onclick="logingGame('WM')" id="wmlivelogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/wm.png" alt="WM">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="wm_game"></span></button>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="menu1" class="tab-pane fade">
+                            <ul class="game-series">
+                                <li onclick="logingGame('M8')" id="m8sportslogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/m8.png" alt="M8 Bet">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="m8_game"></span></button>
+                                    </a>
+                                </li>
+                                <li onclick="logingGame('MaxBet')" id="maxbetsportslogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/maxbet.png" alt="maxbet">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="maxbet_game"></span></button>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                            <ul class="game-series">
+                                <li onclick="logingGame('918kiss')" id="kiss918slotlogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/918kiss.png" alt="918kiss">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="kiss918slot_game"></span></button>
+                                    </a>
+                                </li>
+                                <li onclick="logingGame('Mega888')" id="megaslotlogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/mega888.png" alt="Mega888">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="mega888slot_game"></span></button>
+                                    </a>
+                                </li>
+                                <li onclick="logingGame('Pussy888')" id="pussy88slotlogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/pussy888.png" alt="Pussy888">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="pussy888slot_game"></span></button>
+
+                                    </a>
+                                </li>
+                                <li onclick="PlaytechIdentifiy(true)" id="playtechslotlogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/playtech.png" alt="Playtech">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="playtechslot_game"></span></button>
+                                    </a>
+                                </li>
+                                <li onclick="AG(8)" id="agslotlogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/ag-game.png" alt="Asia Gaming">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="agslot_game"></span></button>
+                                    </a>
+                                </li>
+                                <li onclick="logingGame('Joker')" id="jokerslotlogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/joker.png" alt="joker">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="jokerslot_game"></span></button>
+                                    </a>
+                                </li>
+
+                                <li onclick="logingGame('Pragmatic')" id="pragmaticslotlogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/Pragmatic.png" alt="Pragmatic">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="pragmaticslot_game"></span></button>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="menu3" class="tab-pane fade">
+                            <ul class="game-series">
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="footer-quote">
+                        <p class="text-center"><img class="footer-copyright-section-img" src="~/images/images-mobile/reco-pagcor.png" /></p>
+                        <p class="text-center footer-copyright-section-p">WEBET333 offer wide range of highest quality gaming products to our players. Our Customer Support Team is available to assist you 24 hours a day. All personal information will be treated and stored at the strictest and most confidential way.</p>
+                    </div>
+                    <div class="footer-quote">
+                        <p class="text-center copyright-text">Copyright WEBET333 @@ 2020. All rights reserved</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-widget">
+                <ul class="list-inline text-center">
+                    <li id="homeLoginPagebottom">
+                        <a href="~/Mobile/home" rel="prefetch">
+                            <i class="fa fa-home"></i>
+                            <p class="white-text no-mar" data-translate="menu_home">Home</p>
+                        </a>
+                    </li>
+                    <li id="promotionPagebottom">
+                        <a href="~/Mobile/promotions" rel="prefetch">
+                            <i class="fa fa-gift"></i>
+                            <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
+                        </a>
+                    </li>
+                    <li id="contactusPagebottom">
+                        <a href="~/mobile/contactus" rel="prefetch">
+                            <i class="fa fa-user"></i>
+                            <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="whatsapp()">
+                            <figure><img src="~/images/images-mobile/whatsapp.png" alt="Whats App" /></figure>
+                            <p class="white-text no-mar">Whatsapp</p>
+                        </a>
+                    </li>
+                    <li class="live-chat">
+                        <a class="live-chat-icon"><p class="white-text no-mar" data-translate="Live_chat">Live Chat</p></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="canvas-overlay"></div>
+    </div>
+
+    <div class="form-login modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="lang" key="login"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <div role="form">
+                        <div class="info-form">
+                            <label class="user"><input id="txt_login_username" name="txt_username" type="text" class="reg-form" data-translate="username_placeholder" placeholder="Username" value=""></label>
+                            <label class="lock"><input id="txt_login_password" name="txt_password" autocomplete="new-password" type="password" class="reg-form" data-translate="password_placeholder" placeholder="Password"></label>
+                            <div class="checkbox">
+                                <label style="margin-left:15px"><input id="remember_me" type="checkbox" value=""><span class="lang" key="remember"></span></label>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-login modal fade" id="gameLogin" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><span class="lang" key="alert"></span></h4>
-                    </div>
-                    <div class="modal-body">
-                        <p class="lang" key="noLogin"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div id="forgot-password" class="modal fade">
-                <div class="modal-dialog mail-width">
-                    <div class="modal-content">
-                        <div class="modal-body text-center">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <p data-translate="forgtopasswordststic"></p>
-                            <label class="num pad-top-ten"><input id="txt_forgot_email" name="txt_forgot_email" type="text" class="reg-form" data-translate="forgtopassword_placeholder" value=""></label>
-                            <ul class="list-inline pad-top-ten">
-                                <li><button class="submit" type="button" onclick="DoForgotPassword()" data-translate="forgtopassworbutton"></button></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container-fluid" id="laguage">
-            <div id="language" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-body text-center lang-modal">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <p>Select Language.</p>
-                            <ul class="list-inline pad-top-ten">
-                                <li><button id="englishbtn" class="submit" type="button" data-dismiss="modal" onclick="language('en-US')">English</button></li>
-                                <li><button id="malaybtn" class="submit" type="button" data-dismiss="modal" onclick="language('ms-MY')">Malay</button></li>
-                                <li><button id="chinesebtn" class="submit" type="button" data-dismiss="modal" onclick="language('zh-Hans')">Chinese</button></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="container">
-            <div id="RestoreConfirmation" class="modal fade">
-                <div class="modal-dialog mail-width">
-                    <div class="modal-content">
-                        <div class="modal-body text-center">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <p><span class="lang" key="msg_restore"></span></p>
-                            <ul class="list-inline pad-top-ten">
-                                <li><button onclick="RestoreBalance()" data-dismiss="modal" class="submit"><a asp-page="/Account/Profile" asp-fragment="deposit">Yes</a></button></li>
-                                <li><button class="submit" data-dismiss="modal"><a asp-page="/Home/home">No</a></button></li>
-                            </ul>
+                            <a class="forgot-pass" data-toggle="modal" data-target="#forgot-password"><span class="lang" key="forgot_pasword"></span></a>
+                            <div class="log_in text-center">
+                                <button class="log_in" onclick="DoLogin(1)"><span class="lang" key="login"></span></button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="form-login modal fade" id="gameLogin" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="lang" key="alert"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <p class="lang" key="noLogin"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="forgot-password" class="modal fade">
+            <div class="modal-dialog mail-width">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <p data-translate="forgtopasswordststic"></p>
+                        <label class="num pad-top-ten"><input id="txt_forgot_email" name="txt_forgot_email" type="text" class="reg-form" data-translate="forgtopassword_placeholder" value=""></label>
+                        <ul class="list-inline pad-top-ten">
+                            <li><button class="submit" type="button" onclick="DoForgotPassword()" data-translate="forgtopassworbutton"></button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="laguage">
+        <div id="language" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body text-center lang-modal">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <p>Select Language.</p>
+                        <ul class="list-inline pad-top-ten">
+                            <li><button id="englishbtn" class="submit" type="button" data-dismiss="modal" onclick="language('en-US')">English</button></li>
+                            <li><button id="malaybtn" class="submit" type="button" data-dismiss="modal" onclick="language('ms-MY')">Malay</button></li>
+                            <li><button id="chinesebtn" class="submit" type="button" data-dismiss="modal" onclick="language('zh-Hans')">Chinese</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <div id="RestoreConfirmation" class="modal fade">
+            <div class="modal-dialog mail-width">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <p><span class="lang" key="msg_restore"></span></p>
+                        <ul class="list-inline pad-top-ten">
+                            <li><button onclick="RestoreBalance()" data-dismiss="modal" class="submit"><a asp-page="/Account/Profile" asp-fragment="deposit">Yes</a></button></li>
+                            <li><button class="submit" data-dismiss="modal"><a asp-page="/Home/home">No</a></button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -964,13 +957,13 @@
             jQuery("#more-arrow").toggleClass("rotate");
         });
     </script>
-    <script src="~/js/spa/m_spa.js"></script>
+
     <!-- //Modal For Video -->
-    <script type="text/javascript" charset="utf-8" src="~/js/slick.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/jcf/jcf.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/jcf/jcf.select.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/js/jcf/jcf.checkbox.js"></script>
-    <script type="text/javascript" charset="utf-8">
+    <script src="~/js/slick.js"></script>
+    <script src="~/js/jcf/jcf.js"></script>
+    <script src="~/js/jcf/jcf.select.js"></script>
+    <script src="~/js/jcf/jcf.checkbox.js"></script>
+    <script type="text/javascript">
         $(document).ready(function () {
             $(function () {
                 jcf.replaceAll();
@@ -1021,12 +1014,31 @@
             if (GetLocalStorage('currentUser') !== null)
                 await PostMethodWithParameter(apiEndPoints.userLastTimeUpdate, {});
         });
-        
+        $(document).on('ready', function () {
+            // $(".login-top-slider").slick({
+            //     infinite: true,
+            //     autoplay: true,
+            //     autoplaySpeed: 1000,
+            //     speed: 1000,
+            //     slidesToShow: 1,
+            //     slidesToScroll: 1,
+            //     pauseOnHover: false,
+            //      pauseOnFocus: false,
+            //      adaptiveHeight: true,
+            //      fade: true,
+            //
+            // });
+        });
+
         setTimeout(function () {
             $('#homePagebottom').addClass("active-link");
             $('#homeLoginPagebottom').addClass("active-link");
 
         }, 2000);
+                            //$('#footerWidget').click(function () {
+                            //    $('li').addClass("active");
+                            //    $('li').removeClass("active");
+                            //});
     </script>
 </body>
 </html>

@@ -27,11 +27,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\SPA\" />
     <Folder Include="wwwroot\fonts\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Pages\SPA\home.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="wwwroot\js\jquery.min.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
