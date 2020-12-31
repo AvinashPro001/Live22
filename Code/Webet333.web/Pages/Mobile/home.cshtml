@@ -48,35 +48,32 @@
     <link href="../../css/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
     <link href="../../css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
 
-    <script src="../../js/datepicker.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../../js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../../js/bootstrap-datetimepicker.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="~/js/constants/apiConsts.js"></script>
-    <script src="~/js/helpers/toastrHelpers.js"></script>
-    <script src="~/js/helpers/apiHelpers.js"></script>
-    <script src="~/js/helpers/storageHelpers.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../js/datepicker.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/constants/apiConsts.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/helpers/toastrHelpers.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/helpers/apiHelpers.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/helpers/storageHelpers.js"></script>
 
-    <script src="~/js/bootstrap.js"></script>
-    <script src="~/js/mobile/m_home.js"></script>
-    <script src="~/js/mobile/m_account.js"></script>
-    <script src="~/js/mobile/m_gamelogin.js"></script>
-    <script src="~/js/mobile/m_getbalance.js"></script>
-    <script src="~/js/mobile/m_bank.js"></script>
-    <script src="~/js/constants/M8Consts.js"></script>
-    <script src="~/js/constants/918KissConsts.js"></script>
-    <script src="~/js/constants/AGConsts.js"></script>
-    <script src="~/js/constants/apiConsts.js"></script>
-    <script src="~/js/constants/JokerConsts.js"></script>
-    <script src="~/js/constants/PlaytechConsts.js"></script>
-    <script src="~/js/constants/SMSConsts.js"></script>
-    <script src="~/js/constants/SecurityConsts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
-    @*<script src="https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88" type="text/javascript" charset="utf-8"></script>*@
-    <script type="text/javascript">
-        //$(window).load(function () {
-        //    $(".loadingImage").fadeOut("slow");;
-        //});
-    </script>
+    <script type="text/javascript" charset="utf-8" src="~/js/bootstrap.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/constants/SecurityConsts.js"></script>
+
+    <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_gamelogin.js"></script>
+    <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_getbalance.js"></script>
+                                                   
+    <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_home.js"></script>
+    <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_account.js"></script>
+    <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_bank.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/constants/M8Consts.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/constants/918KissConsts.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/constants/AGConsts.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/constants/apiConsts.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/constants/JokerConsts.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/constants/PlaytechConsts.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/constants/SMSConsts.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+
     <script>
         function language(value) {
             SetLocalStorage('language', value);
@@ -969,11 +966,11 @@
     </script>
     <script src="~/js/spa/m_spa.js"></script>
     <!-- //Modal For Video -->
-    <script src="~/js/slick.js"></script>
-    <script src="~/js/jcf/jcf.js"></script>
-    <script src="~/js/jcf/jcf.select.js"></script>
-    <script src="~/js/jcf/jcf.checkbox.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" charset="utf-8" src="~/js/slick.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/jcf/jcf.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/jcf/jcf.select.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/js/jcf/jcf.checkbox.js"></script>
+    <script type="text/javascript" charset="utf-8">
         $(document).ready(function () {
             $(function () {
                 jcf.replaceAll();
@@ -1024,31 +1021,12 @@
             if (GetLocalStorage('currentUser') !== null)
                 await PostMethodWithParameter(apiEndPoints.userLastTimeUpdate, {});
         });
-        $(document).on('ready', function () {
-            // $(".login-top-slider").slick({
-            //     infinite: true,
-            //     autoplay: true,
-            //     autoplaySpeed: 1000,
-            //     speed: 1000,
-            //     slidesToShow: 1,
-            //     slidesToScroll: 1,
-            //     pauseOnHover: false,
-            //      pauseOnFocus: false,
-            //      adaptiveHeight: true,
-            //      fade: true,
-            //
-            // });
-        });
-
+        
         setTimeout(function () {
             $('#homePagebottom').addClass("active-link");
             $('#homeLoginPagebottom').addClass("active-link");
 
         }, 2000);
-                                            //$('#footerWidget').click(function () {
-                                            //    $('li').addClass("active");
-                                            //    $('li').removeClass("active");
-                                            //});
     </script>
 </body>
 </html>
