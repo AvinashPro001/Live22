@@ -50,7 +50,7 @@ export class AdjustmentListComponent implements OnInit {
         ];
     }
 
-    searchHandlerByDate() {        let fromdate, todate        fromdate = Date.parse((document.getElementById("txt_fromdatetime") as HTMLInputElement).value).toString()        todate = Date.parse((document.getElementById("txt_todatetime") as HTMLInputElement).value).toString()        if (isNaN(todate) === true)            todate = fromdate;        if (isNaN(fromdate) === true)            fromdate = todate;        if (isNaN(fromdate) === true && isNaN(todate) === true)            this.toasterService.pop('error', 'Error', "Please select Date.");        else if ((fromdate !== undefined && todate !== null) || (todate !== null && fromdate !== null)) {            this.setPageData("", fromdate, todate);        }        else {            this.setPageData("", null, null);        }    }
+    searchHandlerByDate() {        let fromdate, todate        fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value;        todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value;        if (fromdate === "" && todate === "")            this.toasterService.pop('error', 'Error', "Please select Date.");        else if ((fromdate !== undefined && todate !== null && todate !== "") || (todate !== undefined && fromdate !== null && fromdate !== "")) {            this.setPageData("", fromdate, todate);        }        else {            this.setPageData("", null, null);        }    }
 
     navigateAdd() {
         this.router.navigate(['/admin/customers/adjustment-add']);

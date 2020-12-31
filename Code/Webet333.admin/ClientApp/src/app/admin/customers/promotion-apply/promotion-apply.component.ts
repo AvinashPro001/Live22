@@ -98,9 +98,12 @@ export class PromotionApplyComponent implements OnInit {
                 this.rows.push({
                     No: ++i,
                     UserName: el.Username,
-                    Turnover: el.UserTurnover,
+                    UserTurnover: el.UserTurnover,
                     Title: el.Title,
                     TurnoverTime: el.TurnoverTime,
+                    WinTurn: el.WinTurn,
+                    TurnoverTarget: el.TurnoverTarget,
+                    WinTarget: el.TurnTarget,
                     Created: this.replaceDateTime(el.Created),
                     Status: el.Staus,
                 });
