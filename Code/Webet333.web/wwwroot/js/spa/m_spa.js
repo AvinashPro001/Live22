@@ -3,18 +3,18 @@
     $('#home').empty();
     var cUser = GetLocalStorage('currentUser');
     $.ajax({
-        url: '/Mobile/Home',
+        url: '/SPA/Home',
         type: "Get",
         dataType: "text",
         success: function (response) {
-            history.pushState(null, null, "/Mobile/Home");
+            history.pushState(null, null, "/SPA/Home");
             $('.loadingImage').hide();
             if (cUser == null) {
                 setTimeout(() => {
-                    $('#beforelogin_mobile').hide();
+                    $('#beforelogin_SPA').hide();
                 }, 5000);
             } else {
-                $('#afterlogin_mobile').hide();
+                $('#afterlogin_SPA').hide();
             }
             $("html").removeClass("intro");
         },
@@ -28,12 +28,12 @@ function mPromotions() {
     $('#home').empty();
 
     $.ajax({
-        url: '/Mobile/promotions',
+        url: '/SPA/promotions',
         type: "Get",
         dataType: "text",
         success: function (response) {
             $('.content').html(response);
-            history.pushState(null, null, "/Mobile/promotions");
+            history.pushState(null, null, "/SPA/promotions");
             $('.loadingImage').hide();
             $("html").removeClass("intro");
         },
@@ -47,13 +47,13 @@ function mContactus() {
     $('#home').empty();
 
     $.ajax({
-        url: '/mobile/contactus',
+        url: '/SPA/contactus',
         type: "Get",
         dataType: "text",
 
         success: function (response) {
             $('.content').html(response);
-            history.pushState(null, null, "/mobile/contactus");
+            history.pushState(null, null, "/SPA/contactus");
             $('.loadingImage').hide();
             $("html").removeClass("intro");
         },
@@ -67,12 +67,12 @@ function mTransfer() {
     $('#home').empty();
 
     $.ajax({
-        url: '/Mobile/Transfer',
+        url: '/SPA/Transfer',
         type: "Get",
         dataType: "text",
         success: function (response) {
             $('body').attr('id', 'hideBody');
-            history.pushState(null, null, "/Mobile/Transfer");
+            history.pushState(null, null, "/SPA/Transfer");
             $('.content').html(response);
             $("html").removeClass("intro");
         },
@@ -89,12 +89,12 @@ function mDeposit() {
     $('#home').empty();
 
     $.ajax({
-        url: '/Mobile/Deposit',
+        url: '/SPA/Deposit',
         type: "Get",
         dataType: "text",
         success: function (response) {
             $('body').attr('id', 'hideBody');
-            history.pushState(null, null, "/mobile/deposit");
+            history.pushState(null, null, "/SPA/deposit");
             $('.content').html(response);
             $('body').attr('id', 'hideBody');
             $("html").removeClass("intro");
@@ -112,12 +112,12 @@ function mWithdraw() {
     $('#home').empty();
 
     $.ajax({
-        url: '/Mobile/Withdraw',
+        url: '/SPA/Withdraw',
         type: "Get",
         dataType: "text",
         success: function (response) {
             $('body').attr('id', 'hideBody');
-            history.pushState(null, null, "/mobile/withdraw");
+            history.pushState(null, null, "/SPA/withdraw");
             $('.content').html(response);
             $("html").removeClass("intro");
         },
@@ -134,12 +134,12 @@ function mHistory() {
     $('#home').empty();
 
     $.ajax({
-        url: '/Mobile/History',
+        url: '/SPA/History',
         type: "Get",
         dataType: "text",
         success: function (response) {
             $('body').attr('id', 'hideBody');
-            history.pushState(null, null, "/mobile/history");
+            history.pushState(null, null, "/SPA/history");
             $('.content').html(response);
             $("html").removeClass("intro");
 
@@ -155,18 +155,18 @@ function mHistory() {
 function backToHome() {
     var cUser = GetLocalStorage('currentUser');
     $.ajax({
-        url: '/Mobile/Home',
+        url: '/SPA/Home',
         type: "Get",
         dataType: "text",
         success: function (response) {
             $('.content').html(response);
-            history.pushState(null, null, "/mobile/home");
+            history.pushState(null, null, "/SPA/home");
             $('.loadingImage').hide();
             if (cUser != null) {
-                $('#afterlogin_mobile').hide();
+                $('#afterlogin_SPA').hide();
             }
             else {
-                $('#beforelogin_mobile').hide();
+                $('#beforelogin_SPA').hide();
             }
             $("html").removeClass("intro");
             $('#hideBody').css('padding-top', '40px');
@@ -184,20 +184,20 @@ function mProHome() {
     $('#comContent').empty();
     $("#mComContent").empty();
     $.ajax({
-        url: '/Mobile/Home',
+        url: '/SPA/Home',
         type: "Get",
         dataType: "text",
         success: function (response) {
             $('#comContent').html(response);
-            history.pushState(null, null, "/mobile/home");
+            history.pushState(null, null, "/SPA/home");
             $('.loadingImage').hide();
             if (cUser == null) {
                 setTimeout(() => {
-                    $('#beforelogin_mobile').hide();
+                    $('#beforelogin_SPA').hide();
                 }, 5000);
 
             } else {
-                $('#afterlogin_mobile').hide();
+                $('#afterlogin_SPA').hide();
 
             }
             $("html").removeClass("intro");
@@ -215,12 +215,12 @@ function mProPromotions() {
     $('#comContent').empty();
     $("#mComContent").empty();
     $.ajax({
-        url: '/Mobile/promotions',
+        url: '/SPA/promotions',
         type: "Get",
         dataType: "text",
         success: function (response) {
             $('#comContent').html(response);
-            history.pushState(null, null, "/mobile/promotions");
+            history.pushState(null, null, "/SPA/promotions");
             $('.loadingImage').hide();
             $("html").removeClass("intro");
         },
@@ -237,13 +237,13 @@ function mProContactus() {
     $('#comContent').empty();
     $("#mComContent").empty();
     $.ajax({
-        url: '/mobile/contactus',
+        url: '/SPA/contactus',
         type: "Get",
         dataType: "text",
 
         success: function (response) {
             $('#comContent').html(response);
-            history.pushState(null, null, "/mobile/contactus");
+            history.pushState(null, null, "/SPA/contactus");
             $('.loadingImage').hide();
             $("html").removeClass("intro");
         },     
@@ -258,19 +258,19 @@ function mProContactus() {
 function backToHomeSM() {
     var cUser = GetLocalStorage('currentUser');
     $.ajax({
-        url: '/Mobile/Home',
+        url: '/SPA/Home',
         type: "Get",
         dataType: "text",
         success: function (response) {
             $('body').attr('id', 'hideBody');
             $('.content').html(response);
-            history.pushState(null, null, "/mobile/home");
+            history.pushState(null, null, "/SPA/home");
             $('.loadingImage').hide();
             if (cUser != null) {
-                $('#afterlogin_mobile').hide();
+                $('#afterlogin_SPA').hide();
             }
             else {
-                $('#beforelogin_mobile').hide();
+                $('#beforelogin_SPA').hide();
             }
             $("html").removeClass("intro");
         },
@@ -289,7 +289,7 @@ function mAboutUs() {
     $('#home').empty();
 
     $.ajax({
-        url: '/Mobile/about',
+        url: '/SPA/about',
         type: "Get",
         dataType: "text",
 
@@ -312,7 +312,7 @@ function mTermandCondtion() {
     $('#home').empty();
 
     $.ajax({
-        url: '/Mobile/TermandCondtion',
+        url: '/SPA/TermandCondtion',
         type: "Get",
         dataType: "text",
 
@@ -336,7 +336,7 @@ function mLogin() {
     $('#home').empty();
 
     $.ajax({
-        url: '/Mobile/Login',
+        url: '/SPA/Login',
         type: "Get",
         dataType: "text",
 
@@ -378,14 +378,14 @@ function mregister() {
         }
     });
 }
-//~/Mobile/Account
+//~/SPA/Account
 
 function mAccount() {
     $('.content').empty();
     $('#home').empty();
 
     $.ajax({
-        url: '/Mobile/Account',
+        url: '/SPA/Account',
         type: "Get",
         dataType: "text",
 
@@ -409,14 +409,14 @@ function smLogin() {
     $('#home').empty();
 
     $.ajax({
-        url: '/Mobile/Login',
+        url: '/SPA/Login',
         type: "Get",
         dataType: "text",
 
         success: function (response) {
             $('body').attr('id', 'hideBody');
             $('.content').html(response);
-            history.pushState(null, null, "/mobile/login");
+            history.pushState(null, null, "/SPA/login");
             $('.loadingImage').hide();
             $("html").removeClass("intro");
 
