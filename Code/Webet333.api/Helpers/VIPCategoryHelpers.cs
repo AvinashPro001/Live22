@@ -16,6 +16,7 @@ namespace Webet333.api.Helpers
         }
 
         #region VIP Category Insert
+
         public async Task VIPCategoryInsert(VIPCategoryInsertRequest request)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -24,6 +25,18 @@ namespace Webet333.api.Helpers
             }
         }
         #endregion VIP Category Insert
+
+        #region VIP Category Select
+
+        public async Task<dynamic> VIPCategorySelect()
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+               var res= await repository.FindAsync(StoredProcConsts.VIPCategory.VIPCategorySelect, new { });
+                return res;
+            }
+        }
+        #endregion VIP Category Select
 
         #region House Keeping
         public void Dispose()

@@ -24,7 +24,7 @@ namespace Webet333.api.Controllers
     {
         #region Variable
         private IHubContext<SignalRHub> _hubContext;
-        public PaymentController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHubContext<SignalRHub> hubContext) : base(ConnectionStringsOptions.Value, Localizer)
+        public PaymentController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHubContext<SignalRHub> hubContext, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
             _hubContext = hubContext;

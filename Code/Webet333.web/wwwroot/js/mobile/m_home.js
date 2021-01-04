@@ -133,12 +133,12 @@ async function getReference() {
     }
     if (Langauge != null) {
         SetLocalStorage('language', Langauge == "cn" ? "zh-Hans" : (Langauge == "my" ? "ms-MY" : "en-US"));
-        try {
-            history.pushState(null, null, "http://webet333.com/");
-        }
-        catch{
-            history.pushState(null, null, "http://http://localhost:27100/");
-        }
+        //try {
+        //    history.pushState(null, null, "http://webet333.com/");
+        //}
+        //catch{
+        //    history.pushState(null, null, "http://http://localhost:27100/");
+        //}
     }
 }
 

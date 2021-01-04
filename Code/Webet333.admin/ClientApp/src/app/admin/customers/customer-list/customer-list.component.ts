@@ -193,11 +193,20 @@ export class CustomerListComponent implements OnInit {
                 this.setPageData(data.SearchParam)
             }
         }
+        if (event.target.value.length == 0) {
+            data = {
+                SearchParam: ""
+            }
+            this.setPageData(data.SearchParam)
+        }
     }
 
     show(row, content) {
-        this.viewData = row;
-        this.openWindowCustomClass(content);
+        //this.viewData = row;
+        //this.openWindowCustomClass(content);
+
+        localStorage.setItem('id', JSON.stringify(row));
+        window.open('admin/customers/users-details','_blank');
     }
 
     openWindowCustomClass(content) {

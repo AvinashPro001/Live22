@@ -23,7 +23,7 @@ namespace Webet333.api.Controllers
         #region Variable
         private IHostingEnvironment _hostingEnvironment;
 
-        public UserController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment) : base(ConnectionStringsOptions.Value, Localizer)
+        public UserController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
             _hostingEnvironment = environment;

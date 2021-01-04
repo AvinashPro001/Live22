@@ -50,8 +50,13 @@
         public string withdrawAmountGold { get; set; }
         public string withdrawAmountPlatinum { get; set; }
         public string withdrawAmountDiamond { get; set; }
+        public string weeklyFreeCreditMinDepositAmountNormal { get; set; }
+        public string weeklyFreeCreditMinDepositAmountBrooze { get; set; }
+        public string weeklyFreeCreditMinDepositAmountSilver { get; set; }
+        public string weeklyFreeCreditMinDepositAmountGold { get; set; }
+        public string weeklyFreeCreditMinDepositAmountPlatinum { get; set; }
+        public string weeklyFreeCreditMinDepositAmountDiamond { get; set; }
 
-        public string weeklyFreeCreditMinDepositAmount { get; set; }
         public string addPromotionTypeBonus { get; set; }
     }
 }
