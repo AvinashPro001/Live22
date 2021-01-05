@@ -16,6 +16,7 @@ export class VipPageComponent implements OnInit {
     userList: any;
     totaCharaters: any = 0;
     promotionData: any;
+    vipData: any;
     constructor(
         private datePipe: DatePipe,
         private adminService: AdminService,
@@ -24,6 +25,7 @@ export class VipPageComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.getVIPcategory();
         this.promotionList();
     }
 
@@ -44,7 +46,6 @@ export class VipPageComponent implements OnInit {
     promotionList() {
         var model = {};
         this.adminService.add<any>(customer.promotionList, model).subscribe(res => {
-            console.log(res.data)
             this.promotionData = res.data;
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
@@ -56,11 +57,78 @@ export class VipPageComponent implements OnInit {
 
     }
 
+    getVIPcategory() {
+        this.adminService.get<any>(VIPSetting.getVIP).subscribe(res => {
+            this.vipData = res.data;
+                (document.getElementById("depositNormal") as HTMLInputElement).value = this.vipData.NormalDeposit,
+                (document.getElementById("weekelyCredNormal") as HTMLInputElement).value = this.vipData.NormalWeeklyExtraFreeCREDIT,
+                (document.getElementById("birthdayBonusNormal") as HTMLInputElement).value = this.vipData.NormalBirthdayBonus,
+                (document.getElementById("liveCasinoSportRebateNormal") as HTMLInputElement).value = this.vipData.NormalLiveCasicnoSlotRebate,
+                (document.getElementById("sportBookRebateNormal") as HTMLInputElement).value = this.vipData.NormalSportBookRebate,
+                (document.getElementById("kissandPussyRebateNormal") as HTMLInputElement).value = this.vipData.NormalKiss918AndPussyLoseReabate,
+                (document.getElementById("withdrawTimeNormal") as HTMLInputElement).value = this.vipData.NormalWithdrawTimes,
+                (document.getElementById("withdrawAmountNormal") as HTMLInputElement).value = this.vipData.NormalWithdrawAmount,
+                (document.getElementById("weeklyFreeCreditMinDepositAmountNormal") as HTMLInputElement).value = this.vipData.NormalWeeklyFreeCreditMinDepositAmount,
+
+                (document.getElementById("depositBrooze") as HTMLInputElement).value = this.vipData.BronzeDeposit,
+                (document.getElementById("weekelyCredBrooze") as HTMLInputElement).value = this.vipData.BronzeWeeklyExtraFreeCREDIT,
+                (document.getElementById("birthdayBonusBrooze") as HTMLInputElement).value = this.vipData.BronzeBirthdayBonus,
+                (document.getElementById("liveCasinoSportRebateBrooze") as HTMLInputElement).value = this.vipData.BronzeLiveCasicnoSlotRebate,
+                (document.getElementById("sportBookRebateBrooze") as HTMLInputElement).value = this.vipData.BronzeSportBookRebate,
+                (document.getElementById("kissandPussyRebateBrooze") as HTMLInputElement).value = this.vipData.BronzeKiss918AndPussyLoseReabate,
+                (document.getElementById("withdrawTimeBrooze") as HTMLInputElement).value = this.vipData.BronzeWithdrawTimes,
+                (document.getElementById("withdrawAmountBrooze") as HTMLInputElement).value = this.vipData.BronzeWithdrawAmount,
+                (document.getElementById("weeklyFreeCreditMinDepositAmountBrooze") as HTMLInputElement).value = this.vipData.BronzeWeeklyFreeCreditMinDepositAmount,
+
+                (document.getElementById("weekelyCredSilver") as HTMLInputElement).value = this.vipData.SilverWeeklyExtraFreeCREDIT,
+                (document.getElementById("depositSilver") as HTMLInputElement).value = this.vipData.SilverDeposit,
+                (document.getElementById("birthdayBonusSilver") as HTMLInputElement).value = this.vipData.SilverBirthdayBonus,
+                (document.getElementById("liveCasinoSportRebateSilver") as HTMLInputElement).value = this.vipData.SilverKiss918AndPussyLoseReabate,
+                (document.getElementById("sportBookRebateSilver") as HTMLInputElement).value = this.vipData.SilverSportBookRebate,
+                (document.getElementById("kissandPussyRebateSilver") as HTMLInputElement).value = this.vipData.SilverWithdrawAmount,
+                (document.getElementById("withdrawTimeSilver") as HTMLInputElement).value = this.vipData.SilverWithdrawTimes,
+                (document.getElementById("withdrawAmountSilver") as HTMLInputElement).value = this.vipData.SilverLiveCasicnoSlotRebate,
+                (document.getElementById("weeklyFreeCreditMinDepositAmountSilver") as HTMLInputElement).value = this.vipData.SilverWeeklyFreeCreditMinDepositAmount,
+
+                (document.getElementById("depositGold") as HTMLInputElement).value = this.vipData.GoldDeposit,
+                (document.getElementById("weekelyCredGold") as HTMLInputElement).value = this.vipData.GoldWeeklyExtraFreeCREDIT,
+                (document.getElementById("birthdayBonusGold") as HTMLInputElement).value = this.vipData.GoldBirthdayBonus,
+                (document.getElementById("liveCasinoSportRebateGold") as HTMLInputElement).value = this.vipData.GoldLiveCasicnoSlotRebate,
+                (document.getElementById("sportBookRebateGold") as HTMLInputElement).value = this.vipData.GoldSportBookRebate,
+                (document.getElementById("kissandPussyRebateGold") as HTMLInputElement).value = this.vipData.GoldKiss918AndPussyLoseReabate,
+                (document.getElementById("withdrawTimeGold") as HTMLInputElement).value = this.vipData.GoldWithdrawTimes,
+                (document.getElementById("withdrawAmountGold") as HTMLInputElement).value = this.vipData.GoldWithdrawAmount,
+                (document.getElementById("weeklyFreeCreditMinDepositAmountGold") as HTMLInputElement).value = this.vipData.GoldWeeklyFreeCreditMinDepositAmount,
+
+                (document.getElementById("depositPlatinum") as HTMLInputElement).value = this.vipData.PlatinumDeposit,
+                (document.getElementById("weekelyCredPlatinum") as HTMLInputElement).value = this.vipData.PlatinumWeeklyExtraFreeCREDIT,
+                (document.getElementById("birthdayBonusPlatinum") as HTMLInputElement).value = this.vipData.PlatinumBirthdayBonus,
+                (document.getElementById("liveCasinoSportRebatePlatinum") as HTMLInputElement).value = this.vipData.PlatinumLiveCasicnoSlotRebate,
+                (document.getElementById("sportBookRebatePlatinum") as HTMLInputElement).value = this.vipData.PlatinumSportBookRebate,
+                (document.getElementById("kissandPussyRebatePlatinum") as HTMLInputElement).value = this.vipData.PlatinumKiss918AndPussyLoseReabate,
+                (document.getElementById("withdrawTimePlatinum") as HTMLInputElement).value = this.vipData.PlatinumWithdrawTimes,
+                (document.getElementById("withdrawAmountPlatinum") as HTMLInputElement).value = this.vipData.PlatinumWithdrawAmount,
+                (document.getElementById("weeklyFreeCreditMinDepositAmountPlatinum") as HTMLInputElement).value = this.vipData.PlatinumWeeklyFreeCreditMinDepositAmount,
+
+                (document.getElementById("depositDiamond") as HTMLInputElement).value = this.vipData.DiamondDeposit,
+                (document.getElementById("weekelyCredDiamond") as HTMLInputElement).value = this.vipData.DiamondWeeklyExtraFreeCREDIT,
+                (document.getElementById("birthdayBonusDiamond") as HTMLInputElement).value = this.vipData.DiamondBirthdayBonus,
+                (document.getElementById("liveCasinoSportRebateDiamond") as HTMLInputElement).value = this.vipData.DiamondLiveCasicnoSlotRebate,
+                (document.getElementById("sportBookRebateDiamond") as HTMLInputElement).value = this.vipData.DiamondSportBookRebate,
+                (document.getElementById("kissandPussyRebateDiamond") as HTMLInputElement).value = this.vipData.DiamondKiss918AndPussyLoseReabate,
+                (document.getElementById("withdrawTimeDiamond") as HTMLInputElement).value = this.vipData.DiamondWithdrawTimes,
+                (document.getElementById("withdrawAmountDiamond") as HTMLInputElement).value = this.vipData.DiamondWithdrawAmount,
+                (document.getElementById("weeklyFreeCreditMinDepositAmountDiamond") as HTMLInputElement).value = this.vipData.DiamondWeeklyFreeCreditMinDepositAmount
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
     addVIPcategory() {
         this.disabled = true;
         let dataSelect = {
             depositNormal: (document.getElementById("depositNormal") as HTMLInputElement).value,
-            depositBrooze: (document.getElementById("depositBrooze") as HTMLInputElement).value ,
+            depositBrooze: (document.getElementById("depositBrooze") as HTMLInputElement).value,
             depositSilver: (document.getElementById("depositSilver") as HTMLInputElement).value,
             depositGold: (document.getElementById("depositGold") as HTMLInputElement).value,
             depositPlatinum: (document.getElementById("depositPlatinum") as HTMLInputElement).value,
@@ -107,7 +175,12 @@ export class VipPageComponent implements OnInit {
             withdrawAmountGold: (document.getElementById("withdrawAmountGold") as HTMLInputElement).value,
             withdrawAmountPlatinum: (document.getElementById("withdrawAmountPlatinum") as HTMLInputElement).value,
             withdrawAmountDiamond: (document.getElementById("withdrawAmountDiamond") as HTMLInputElement).value,
-            weeklyFreeCreditMinDepositAmount: (document.getElementById("weeklyFreeCreditMinDepositAmount") as HTMLInputElement).value,
+            weeklyFreeCreditMinDepositAmountNormal: (document.getElementById("weeklyFreeCreditMinDepositAmountNormal") as HTMLInputElement).value,
+            weeklyFreeCreditMinDepositAmountBrooze: (document.getElementById("weeklyFreeCreditMinDepositAmountBrooze") as HTMLInputElement).value,
+            weeklyFreeCreditMinDepositAmountSilver: (document.getElementById("weeklyFreeCreditMinDepositAmountSilver") as HTMLInputElement).value,
+            weeklyFreeCreditMinDepositAmountGold: (document.getElementById("weeklyFreeCreditMinDepositAmountGold") as HTMLInputElement).value,
+            weeklyFreeCreditMinDepositAmountPlatinum: (document.getElementById("weeklyFreeCreditMinDepositAmountPlatinum") as HTMLInputElement).value,
+            weeklyFreeCreditMinDepositAmountDiamond: (document.getElementById("weeklyFreeCreditMinDepositAmountDiamond") as HTMLInputElement).value
         }
         this.adminService.add<any>(VIPSetting.addVIP, dataSelect).subscribe(res => {
             this.disabled = false;
@@ -117,9 +190,5 @@ export class VipPageComponent implements OnInit {
             this.ngOnInit();
             this.toasterService.pop('error', 'Error', error.error.message);
         });
-    }
-
-    addtransferal() {
-
     }
 }

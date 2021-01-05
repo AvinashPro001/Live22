@@ -278,7 +278,7 @@ export const customer = {
     GetUsername: environment.apiUrl + 'account/game/username',
 
     ICImage: environment.apiUrl + 'account/icimage/select',
-    
+
     promotionGroupInsert: environment.apiUrl + 'promotions/group/insert',
     promotionGroupUpdate: environment.apiUrl + 'promotions/group/update',
     promotionGroupSelect: environment.apiUrl + 'promotions/group/select',
@@ -364,11 +364,11 @@ export const gameBalance = {
     AllBet: environment.apiUrl + "gamebalance/allbet",
     WM: environment.apiUrl + "gamebalance/wm",
     Pragmatic: environment.apiUrl + "gamebalance/pragmatic",
-    walletBalance: environment.apiUrl +  "customer/wallet/balance",
+    walletBalance: environment.apiUrl + "customer/wallet/balance",
 }
 
 export const smsConst = {
-    SMSbaseUrl : 'http://cloudsms.trio-mobile.com/index.php/api/bulk_mt?',
+    SMSbaseUrl: 'http://cloudsms.trio-mobile.com/index.php/api/bulk_mt?',
     action: 'action=send',
     api_key: 'api_key=NUC13010100006272b6dac990a5a38519c724051e6d82d30e',
     sender_id: 'sender_id=CLOUDSMS',
@@ -378,5 +378,6 @@ export const smsConst = {
 }
 
 export const VIPSetting = {
-    addVIP: environment.apiUrl + "vipcategory/insert"
+    addVIP: environment.apiUrl + "vipcategory/insert",
+    getVIP: environment.apiUrl + "vipcategory/select"
 }

@@ -5,8 +5,8 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
+    apiUrl: 'http://uatapi.webet333.com/api/v1/'
     //apiUrl: 'http://localhost:55861/api/v1/'
 };
 
@@ -378,5 +378,6 @@ export const smsConst = {
 }
 
 export const VIPSetting = {
-    addVIP: environment.apiUrl + "vipcategory/insert"
+    addVIP: environment.apiUrl + "vipcategory/insert",
+    getVIP: environment.apiUrl + "vipcategory/select"
 }
