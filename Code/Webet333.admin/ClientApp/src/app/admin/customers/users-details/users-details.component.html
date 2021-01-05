@@ -152,16 +152,30 @@
             <div class="col-11 offset-1">
                 <div class="row">
                     <h4 class="col-5 h4">Playtech Status :</h4>
-                    <h4 class="col-6 h4">{{userPlaytechUnfinished}} &nbsp;&nbsp;&nbsp; <span (click)="unfinishedShow(playtechUnfinishedList)" class="fa fa-question-circle"></span></h4>
+                    <h4 class="col-6 h4">{{userPlaytechUnfinished == null ? 'Select username.' : userPlaytechUnfinished }}&nbsp;&nbsp;&nbsp; <span (click)="unfinishedShow(playtechUnfinishedList)" class="fa fa-question-circle"></span></h4>
                 </div>
 
                 <div class="row">
                     <h4 class="col-5 h4">Pragmatic Status :</h4>
-                    <h4 class="col-6 h4">{{userPragmaticUnfinished}} &nbsp;&nbsp;&nbsp; <span (click)="unfinishedShow(pragmaticUnfinishedList)" class="fa fa-question-circle"></span></h4>
+                    <h4 class="col-6 h4">{{userPragmaticUnfinished == null ? 'Select username.' : userPragmaticUnfinished }}&nbsp;&nbsp;&nbsp; <span (click)="unfinishedShow(pragmaticUnfinishedList)" class="fa fa-question-circle"></span></h4>
                 </div>
                 <div class="row">
                     <h4 class="col-5 h4">Joker Status :</h4>
-                    <h4 class="col-6 h4">{{userJokerUnfinished}} &nbsp;&nbsp;&nbsp; <span (click)="unfinishedShow(jokerUnfinishedList)" class="fa fa-question-circle"></span></h4>
+                    <h4 class="col-6 h4">{{userPragmaticUnfinished == null ? 'Select username.' : userPragmaticUnfinished }} &nbsp;&nbsp;&nbsp; <span (click)="unfinishedShow(jokerUnfinishedList)" class="fa fa-question-circle"></span></h4>
+                </div>
+            </div>
+
+            <br /><br /><br />
+            <div class="row">
+                <div class="col-12">
+                    <h3>VIP Level</h3>
+                </div>
+
+            </div>
+            <div class="col-11 offset-1">
+                <div class="row">
+                    <h4 class="col-5 h4">User's V IP Level :</h4>
+                    <h4 class="col-6 h4">{{userPragmaticUnfinished == null ? 'Select username.' : userPragmaticUnfinished }}&nbsp;&nbsp;&nbsp; <button (click)="unfinishedShow(jokerUnfinishedList)" class="btn btn-primary">Change VIP Level</button></h4>
                 </div>
             </div>
         </div>
