@@ -59,14 +59,6 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 }
 
 
-
-
-
-
-
-
-
-
 @Component({
     selector: 'app-users-details',
     templateUrl: './users-details.component.html',
@@ -75,6 +67,8 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 export class UsersDetailsComponent implements OnInit {
 
     //#region Variable and Constructor
+
+    ShowDropDown: boolean = true;
 
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
@@ -170,7 +164,7 @@ export class UsersDetailsComponent implements OnInit {
 
     defaultStartDate: any;
     defaultEndDate: any;
-
+    Userdata: any;
     rows = [];
     columns = [];
     selectedList = "";
@@ -250,10 +244,22 @@ export class UsersDetailsComponent implements OnInit {
 
     //#region OnInit Method
     ngOnInit() {
+        let dataCustomer = JSON.parse(localStorage.getItem('id'));
+        this.Userdata = dataCustomer as object[];
+        
+        if (this.Userdata != null) {
+            this.ShowDropDown = false;
+            this.onChange(this.Userdata);
+        }
+        else {
+            this.ShowDropDown = true;
+            this.customerUser();
+        }
+
         document.getElementById("profiletab").click();
-        this.customerUser();
         this.coloumSet();
         var someElement = document.getElementById("lockIcon");
+        localStorage.removeItem('id');
     }
 
     get today() {
@@ -299,11 +305,11 @@ export class UsersDetailsComponent implements OnInit {
     //#region onChange
     onChange(event) {
         try {
-            this.newVal = event.value.id;
-            this.userPassword = event.value.password;
+            this.newVal = event.id;
+            this.userPassword = event.password;
             this.Pussy888PasswordRowId = null;
             this.Kiss918PasswordRowId = null;
-            this.OnType(this.newVal);
+            this.OnType(event);
             this.datePickerfromdate = this.today;
             this.datePickertodate = this.today;
         }
@@ -324,10 +330,34 @@ export class UsersDetailsComponent implements OnInit {
             this.Kiss918PasswordRowId = null;
         }
     }
-    //retriveUserbank(newVal: any) {
-    //    throw new Error("Method not implemented.");
-    //}
 
+    onChangeDropDown(event) {
+        try {
+            this.newVal = event.value.id;
+            this.userPassword = event.value.password;
+            this.Pussy888PasswordRowId = null;
+            this.Kiss918PasswordRowId = null;
+            this.OnTypeDropDown(this.newVal);
+            this.datePickerfromdate = this.today;
+            this.datePickertodate = this.today;
+        }
+        catch {
+            this.depositRows = [];
+            this.withdrawRows = [];
+            this.transferRows = [];
+            this.promotionRows = [];
+            this.statementRows = [];
+            this.rebateRows = [];
+            this.restoreRows = [];
+            this.PromotionApplyRows = [];
+            this.totalWithdrawAmountWithMYR = "";
+            var someElement = document.getElementById("lockIcon");
+            someElement.className = "";
+            this.Resetvalue();
+            this.Pussy888PasswordRowId = null;
+            this.Kiss918PasswordRowId = null;
+        }
+    }
 
     config = {
         displayKey: "username", //if objects array passed which key to be displayed defaults to description
@@ -356,7 +386,28 @@ export class UsersDetailsComponent implements OnInit {
 
     //#region Set data on select username
 
-    OnType(event) {
+    OnType(list) {
+        //let list = this.customerData.filter(x => x.id === event)[0];
+        if (list != undefined) {
+            this.userid = list.id;
+            this.userdata = list;
+            this.getUsername(this.userid);
+            this.depositlist(null, null);
+            this.withdrawlist(null, null);
+            this.transferlist(null, null);
+            this.promotionlist(null, null);
+            this.statementlist(null, null);
+            this.rebatelist(null, null);
+            this.WithdrawAmountList(this.userid);
+        }
+        else {
+            this.userid = "";
+            this.searchHandlerByDate("");
+        }
+    }
+
+
+    OnTypeDropDown(event) {
         let list = this.customerData.filter(x => x.id === event)[0];
         if (list != undefined) {
             this.userid = list.id;
@@ -375,6 +426,7 @@ export class UsersDetailsComponent implements OnInit {
             this.searchHandlerByDate("");
         }
     }
+
 
     //#endregion
 
@@ -1089,10 +1141,10 @@ export class UsersDetailsComponent implements OnInit {
                     BankName: el.bankName,
                     WalletName: el.walletName,
                     Amount: el.withdrawalAmount,
-                    Status: "<b class='" + el.verified.toLowerCase() + "'>" + el.verified+"</b>",
+                    Status: "<b class='" + el.verified.toLowerCase() + "'>" + el.verified + "</b>",
                     AccountNo: el.accountNo,
                     Created: this.replaceDateTime(el.created),
-                    AdminRemark: el.adminRemarks == null ? "<b class='notAvailable'>Not Available</b>" : el.adminRemarks    ,
+                    AdminRemark: el.adminRemarks == null ? "<b class='notAvailable'>Not Available</b>" : el.adminRemarks,
                 });
             });
             this.withdrawRows = [...this.withdrawRows];

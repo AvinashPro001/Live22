@@ -27,7 +27,7 @@ namespace Webet333.api.Controllers
 
         static GetBalanceUserResponse UserDetails { get; set; }
 
-        public GameBalanceController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment) : base(ConnectionStringsOptions.Value, Localizer)
+        public GameBalanceController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
             _hostingEnvironment = environment;

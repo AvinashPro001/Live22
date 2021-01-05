@@ -492,6 +492,8 @@
         public class VIPCategory
         {
             public const string VIPCategoryInsert = "[dbo].[Insert_VIP_Category_Values]";
+
+            public const string VIPCategorySelect = "[dbo].[VIPCategorySetting_Select]";
         }
     }
 }

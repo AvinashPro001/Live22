@@ -32,10 +32,11 @@ namespace Webet333.api.Controllers
     [Route(ActionsConst.ApiVersion)]
     public class AccountController : BaseController
     {
+
         #region Global Variable
         private IHostingEnvironment _hostingEnvironment;
         private IHubContext<SignalRHub> _hubContext;
-        public AccountController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, IHubContext<SignalRHub> hubContext) : base(ConnectionStringsOptions.Value, Localizer)
+        public AccountController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, IHubContext<SignalRHub> hubContext,IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer,BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
             _hostingEnvironment = environment;
@@ -43,7 +44,6 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Global Variable
-
 
         #region User Login
 
@@ -167,7 +167,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Account.Profile)]
-        public async Task<IActionResult> Profile([FromBody] GetProfileRequest request)
+        public async Task<IActionResult> Profile([FromBody] GetProfileRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOption)
         {
             await ValidateUser();
             if (request.Id == null && request.Username == null) return OkResponse(UserEntity);
@@ -176,6 +176,7 @@ namespace Webet333.api.Controllers
                 using (var account_help = new AccountHelpers(Connection))
                 {
                     var users = await account_help.FindUser(userId: request.Id, userName: request.Username);
+                    users.VIPBanner= (!string.IsNullOrEmpty(users.VIPBanner)) ? $"{BaseUrlConfigsOption.Value.ImageBase}{BaseUrlConfigsOption.Value.VIPIcon}/{users.VIPLevel}{users.VIPBanner}" : "";
                     if (users != null)
                         return OkResponse(users);
                 }

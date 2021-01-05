@@ -31,7 +31,7 @@ namespace Webet333.api.Controllers
 
         private readonly IOptions<ConnectionConfigs> ConnectionOptions;
 
-        public Mega888GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionstringsOptions) : base(ConnectionstringsOptions.Value, Localizer)
+        public Mega888GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionstringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionstringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
             ConnectionOptions = ConnectionstringsOptions;

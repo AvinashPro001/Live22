@@ -61,5 +61,14 @@ namespace Webet333.models.Response.Account
 
         [JsonProperty(PropertyName = "userId")]
         public string UserId { get; set; }
+
+        [JsonProperty(PropertyName = "vipLevel")]
+        public Guid VIPLevel { get; set; }
+
+        [JsonProperty(PropertyName = "vipBanner")]
+        public string VIPBanner { get; set; }
+
+        [JsonProperty(PropertyName = "vipLevelName")]
+        public string VIPLevelName { get; set; }
     }
 }

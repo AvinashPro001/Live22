@@ -54,7 +54,7 @@ namespace Webet333.api.Controllers
 
         private IHostingEnvironment _hostingEnvironment;
 
-        public GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, SerialQueue queue) : base(ConnectionStringsOptions.Value, Localizer)
+        public GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, SerialQueue queue, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Queue = queue;
             this.Localizer = Localizer;

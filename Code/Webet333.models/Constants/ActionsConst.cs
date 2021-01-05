@@ -620,6 +620,8 @@
         public class VIPCategory
         {
             public const string Insert = "vipcategory/insert";
+
+            public const string Select = "vipcategory/select";
         }
     }
 }

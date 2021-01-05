@@ -30,12 +30,14 @@ namespace Webet333.api.Controllers.Base
         protected ProfileResponse UserEntity { get; set; }
         protected IStringLocalizer<BaseController> Localizer { get; set; }
         protected string UserRole = string.Empty;
+        protected BaseUrlConfigs baseUrlConfigs { get; set; }
 
-        public BaseController(ConnectionConfigs ConnectionStrings = null, IStringLocalizer<BaseController> Localizer = null)
+        public BaseController(ConnectionConfigs ConnectionStrings = null, IStringLocalizer<BaseController> Localizer = null,BaseUrlConfigs baseUrlConfigs=null)
         {
             this.Connection = ConnectionStrings.DefaultConnection;
             this.Connection120 = ConnectionStrings.DefaultConnection120;
             this.Localizer = Localizer;
+            this.baseUrlConfigs = baseUrlConfigs;
             this.Language = GetLanguage();
         }
         #endregion
@@ -108,7 +110,10 @@ namespace Webet333.api.Controllers.Base
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 using (var account_help = new AccountHelpers(Connection))
+                {
                     user = await account_help.FindUser(uniqueId: GetUniqueId(User), grantType: GetUserRole(User));
+                    user.VIPBanner = (!string.IsNullOrEmpty(user.VIPBanner)) ? $"{baseUrlConfigs.ImageBase}{baseUrlConfigs.VIPIcon}/{user.VIPLevel}{user.VIPBanner}" : "";
+                }
             }
             if (user == null) BadResponse("error_access_token_expired");
             //if (!user.EmailConfirmed) BadResponse("bad_response_account_not_confirmed");

@@ -36,5 +36,7 @@
         public string UserICImage { get; set; }
 
         public string ExcelFilesPath { get; set; }
+
+        public string VIPIcon { get; set; }
     }
 }
