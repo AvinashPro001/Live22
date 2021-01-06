@@ -908,7 +908,7 @@ namespace Webet333.api.Controllers
 
         #endregion
 
-        //#region check password
+        //#region Check password
 
         //[HttpPost("testpassword")]
         //public IActionResult checkpassword(string password)

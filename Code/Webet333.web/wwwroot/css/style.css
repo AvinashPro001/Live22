@@ -6091,3 +6091,8 @@ iframe{
         font-size: 10px;
     }
 }
+
+.viplevelImage{
+    width:50px;
+    margin:-15px;
+}

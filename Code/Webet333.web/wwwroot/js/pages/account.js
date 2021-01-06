@@ -8,6 +8,7 @@
     else {
         setCookie("ref", null, 1000);
     }
+    
 });
 
 //#region DoLogin
@@ -435,6 +436,9 @@ function getCookie(cname) {
 
 //#region RegistrationGame
 //var interval = setInterval(await regisrationGame() , 3000);
+
+
+
 
 async function regisrationGame() {
     try {
