@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Webet333.dapper;
+using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request.VIPCategory;
 
 namespace Webet333.api.Helpers
 {
-    public class VIPCategoryHelpers: IDisposable
+    public class VIPCategoryHelpers : IDisposable
     {
         private string Connection = string.Empty;
 
@@ -32,11 +35,41 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-               var res= await repository.FindAsync(StoredProcConsts.VIPCategory.VIPCategorySelect, new { });
+                var res = await repository.FindAsync(StoredProcConsts.VIPCategory.VIPCategorySettingSelect, new { });
                 return res;
             }
         }
         #endregion VIP Category Select
+
+        #region Get VIP Level List
+
+        public async Task<List<dynamic>> GetVIPLevelList(BaseUrlConfigs baseUrlConfigs)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.VIPCategory.VIPCategorySelect, new { });
+                var response = result.ToList();
+                response.ForEach(x =>
+                {
+                    x.Icon = (x.Icon != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.VIPIcon + "/" + x.Id + x.Icon : null);
+                });
+                return response;
+            }
+        }
+
+        #endregion Get VIP Level List
+
+        #region VIP Level Update
+
+        public async Task UserVIPLevelUpdate(UserVIPLevelUpdateRequest request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.VIPCategory.VIPCategorySelect, request);
+            }
+        }
+
+        #endregion VIP Level Update
 
         #region House Keeping
         public void Dispose()

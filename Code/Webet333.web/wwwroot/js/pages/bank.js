@@ -14,6 +14,8 @@ $(document).ready(function () {
 });
 //#endregion
 
+
+
 function CheckUserVerified() {
     try {
         var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));

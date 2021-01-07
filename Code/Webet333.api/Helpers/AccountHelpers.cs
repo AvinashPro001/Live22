@@ -335,6 +335,14 @@ namespace Webet333.api.Helpers
             }
         }
 
+        public async Task TrackingLoginRegisterUpdate()
+        {
+            using (var dapperRepository = new DapperRepository<dynamic>(Connection))
+            {
+                await dapperRepository.AddOrUpdateAsync(StoredProcConsts.Account.TranckingLoginRegister_Update, new { });
+            }
+        }
+
         public async Task<dynamic> TrackingSelect(TrackingSelectRequest request)
         {
             using (var dapperRepository = new DapperRepository<dynamic>(Connection))

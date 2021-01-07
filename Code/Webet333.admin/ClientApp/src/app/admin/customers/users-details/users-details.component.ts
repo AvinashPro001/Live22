@@ -176,6 +176,12 @@ export class UsersDetailsComponent implements OnInit {
     disable: boolean = false;
     gmtDisable: boolean = true;
 
+    datePickerfromdate: string;
+    datePickertodate: string;
+
+    vipLevelImage: any;
+    vipLevel: any;
+
     listType: any = [
         { gameName: "M8" },
         { gameName: "AG" },
@@ -238,8 +244,7 @@ export class UsersDetailsComponent implements OnInit {
     //#endregion
 
 
-    datePickerfromdate: string;
-    datePickertodate: string;
+
 
 
     //#region OnInit Method
@@ -250,6 +255,7 @@ export class UsersDetailsComponent implements OnInit {
         if (this.Userdata != null) {
             this.ShowDropDown = false;
             this.onChange(this.Userdata);
+            
         }
         else {
             this.ShowDropDown = true;
@@ -306,6 +312,11 @@ export class UsersDetailsComponent implements OnInit {
     onChange(event) {
         try {
             this.newVal = event.id;
+            debugger
+            
+            this.vipLevelImage = event.VIPLevelName == "Normal" ? "" : event.VIPBanner;
+            this.vipLevel = event.VIPLevelName;
+
             this.userPassword = event.password;
             this.Pussy888PasswordRowId = null;
             this.Kiss918PasswordRowId = null;
@@ -314,6 +325,8 @@ export class UsersDetailsComponent implements OnInit {
             this.datePickertodate = this.today;
         }
         catch {
+            this.vipLevelImage = "";
+            this.vipLevel = "";
             this.depositRows = [];
             this.withdrawRows = [];
             this.transferRows = [];
@@ -334,6 +347,10 @@ export class UsersDetailsComponent implements OnInit {
     onChangeDropDown(event) {
         try {
             this.newVal = event.value.id;
+            
+            this.vipLevelImage = event.value.VIPLevelName=="Normal"?"": event.value.VIPBanner;
+            this.vipLevel = event.value.VIPLevelName;
+
             this.userPassword = event.value.password;
             this.Pussy888PasswordRowId = null;
             this.Kiss918PasswordRowId = null;
@@ -342,6 +359,8 @@ export class UsersDetailsComponent implements OnInit {
             this.datePickertodate = this.today;
         }
         catch {
+            this.vipLevelImage = "";
+            this.vipLevel = "";
             this.depositRows = [];
             this.withdrawRows = [];
             this.transferRows = [];

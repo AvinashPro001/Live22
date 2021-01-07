@@ -52,5 +52,32 @@ namespace Webet333.api.Controllers
                 return OkResponse(res);
             }
         }
+
+
+
+        [HttpGet(ActionsConst.VIPCategory.VIPLevelSelect)]
+        public async Task<IActionResult> VIPSelect([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            using (var vipCategory_help = new VIPCategoryHelpers(Connection))
+            {
+                var data = await vipCategory_help.GetVIPLevelList(BaseUrlConfigsOptions.Value);
+                return OkResponse(data);
+            }
+        }
+
+        [Authorize]
+        [HttpPost(ActionsConst.VIPCategory.VIPLevelUserUpdate)]
+        public async Task<IActionResult> VIPLevelUpdate([FromBody]UserVIPLevelUpdateRequest request)
+        {
+            request.Role = GetUserRole(User);
+            request.UniqueId = GetUniqueId(User);
+
+            using (var vipCategory_help = new VIPCategoryHelpers(Connection))
+            {
+                 await vipCategory_help.UserVIPLevelUpdate(request);
+                return OkResponse();
+            }
+        }
+
     }
 }

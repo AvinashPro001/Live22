@@ -4,12 +4,14 @@ $(document).ready(function () {
     if (!window.location.href.includes('Information/Game')) {
         getReference();
         if (GetLocalStorage('currentUser') !== null) {
+
             var div = document.getElementById("beforelogin");
             div.parentNode.removeChild(div);
             GetUser();
             if (localStorage.getItem('IsExecute') == "true" || localStorage.getItem('IsExecute') == true || localStorage.getItem('IsExecute') == null) {
                 localStorage.setItem('IsExecute', false);
             }
+            VIPBanner();
         }
         WalletSignalR();
         Walletdate();
@@ -29,6 +31,14 @@ $(document).ready(function () {
     }
 });
 //#endregion
+
+function VIPBanner() {
+    var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
+    try {
+        document.getElementById("viplevel_icon").src = resUserData.data.vipBanner;
+    }
+    catch (e) {}
+}
 
 function pageloadEvery(t) {
     setTimeout('location.reload(true)', t);
@@ -138,7 +148,6 @@ function slider() {
 }
 //#endregion
 
-
 function ChangeErroMessage(key) {
     var ErrorMessage = "";
     $.ajax({
@@ -158,8 +167,6 @@ function SetDefaultLanguage(ddlLanguages) {
     getLanguage();
     window.location.reload();
 }
-
-
 
 function getLanguage() {
 
@@ -260,7 +267,7 @@ async function GetUser() {
             document.getElementById("lbl_usernameHeader").innerText = data.data.username;
         if (document.getElementById("txt_account_holder") !== null)
             document.getElementById("txt_account_holder").value = data.data.name;
-
+        VIPBanner();
         PlaytechBrokenStatus();
         PragmaticBrokenStatus()
     }
@@ -274,6 +281,7 @@ async function GetUser() {
         var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
         sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
         getDetails();
+        VIPBanner();
         PlaytechBrokenStatus();
         PragmaticBrokenStatus();
     }

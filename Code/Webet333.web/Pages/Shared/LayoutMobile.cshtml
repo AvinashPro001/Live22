@@ -77,6 +77,12 @@
     <script type="text/javascript" charset="utf-8" src="~/js/constants/PlaytechConsts.js"></script>
     <script type="text/javascript" charset="utf-8" src="~/js/constants/SMSConsts.js"></script>
     <script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $(".loadingImage").fadeOut("slow");;
+        });
+    </script>
+
     <script>
         function language(value) {
             SetLocalStorage('language', value);
@@ -186,7 +192,7 @@
 <body onload="get()" id="hideBody">
     <div id="comContent"></div>
     <div id="mComContent">
-        @*<div class="loadingImage" style="z-index: 2147483643;"></div>*@
+        <div class="loadingImage" style="z-index: 2147483643;"></div>
 
         <div id="success_snackbar">
             <div>

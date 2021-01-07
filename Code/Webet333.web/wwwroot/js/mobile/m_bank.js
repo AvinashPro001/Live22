@@ -32,8 +32,8 @@ async function UserBankDetails() {
 async function WithdrawUsernameSet() {
     if (location.href.toLowerCase().includes("mobile/withdraw"))
         if (UserAccountName != null && UserAccountName != undefined && UserAccountName != "") {
-            document.getElementById("lbl_accountHolder").disabled = true;
-            document.getElementById("lbl_accountHolder").value = UserAccountName;
+            //document.getElementById("lbl_accountHolder").disabled = true;
+            //document.getElementById("lbl_accountHolder").value = UserAccountName;
         }
 }
 //#endregion Withdraw Username
@@ -1025,6 +1025,7 @@ function OpenModelTransferWallet(GameName) {
 }
 
 async function TransferInAllWallet(GameWalletName) {
+    LoaderShow();
     var GameName;
     if (GameWalletName == undefined)
         GameName = walletNameTransferInWallet;
@@ -1037,7 +1038,7 @@ async function TransferInAllWallet(GameWalletName) {
     }
     var res = await PostMethod(apiEndPoints.AllInWallet, model);
     await WalletBalance();
-    
+    LoaderHide();
 }
 //#endregion Transfer Main Wallet to Any Wallet
 

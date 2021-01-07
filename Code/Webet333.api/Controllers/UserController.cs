@@ -40,7 +40,7 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
             using (var user_help = new UserHelpers(Connection))
             {
-                var users = await user_help.GetUsers(RoleConst.Users, request?.Keyword ?? null, BaseUrlConfigsOptions.Value.ImageBase+ BaseUrlConfigsOptions.Value.UserICImage);
+                var users = await user_help.GetUsers(RoleConst.Users, request?.Keyword ?? null, BaseUrlConfigsOptions.Value);
 
                 if (users != null )
                     return OkResponse(users);

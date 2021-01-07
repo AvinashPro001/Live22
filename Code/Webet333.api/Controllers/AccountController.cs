@@ -26,6 +26,7 @@ using Newtonsoft.Json;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
+using Webet333.queue;
 
 namespace Webet333.api.Controllers
 {
@@ -34,11 +35,14 @@ namespace Webet333.api.Controllers
     {
 
         #region Global Variable
+
         private IHostingEnvironment _hostingEnvironment;
         private IHubContext<SignalRHub> _hubContext;
-        public AccountController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, IHubContext<SignalRHub> hubContext,IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer,BaseUrlConfigsOption.Value)
+        private SerialQueue Queue { get; set; }
+        public AccountController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, IHubContext<SignalRHub> hubContext, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, SerialQueue queue) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
+            this.Queue = queue;
             _hostingEnvironment = environment;
             _hubContext = hubContext;
         }
@@ -176,7 +180,7 @@ namespace Webet333.api.Controllers
                 using (var account_help = new AccountHelpers(Connection))
                 {
                     var users = await account_help.FindUser(userId: request.Id, userName: request.Username);
-                    users.VIPBanner= (!string.IsNullOrEmpty(users.VIPBanner)) ? $"{BaseUrlConfigsOption.Value.ImageBase}{BaseUrlConfigsOption.Value.VIPIcon}/{users.VIPLevel}{users.VIPBanner}" : "";
+                    users.VIPBanner = (!string.IsNullOrEmpty(users.VIPBanner)) ? $"{BaseUrlConfigsOption.Value.ImageBase}{BaseUrlConfigsOption.Value.VIPIcon}/{users.VIPLevel}{users.VIPBanner}" : "";
                     if (users != null)
                         return OkResponse(users);
                 }
@@ -445,6 +449,13 @@ namespace Webet333.api.Controllers
             using (var accounthelper = new AccountHelpers(Connection))
             {
                 await accounthelper.TrackingInsert(request);
+                Queue.Enqueue(async () =>
+                {
+                    using (var helper = new AccountHelpers(Connection))
+                    {
+                        await helper.TrackingLoginRegisterUpdate();
+                    }
+                });
             }
             return OkResponse();
         }
@@ -908,7 +919,7 @@ namespace Webet333.api.Controllers
 
         #endregion
 
-        //#region check password
+        //#region Check password
 
         //[HttpPost("testpassword")]
         //public IActionResult checkpassword(string password)

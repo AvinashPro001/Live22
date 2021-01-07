@@ -255,6 +255,8 @@
             public const string AnnouncementUpdate = "settings/announcement/update";
 
             public const string AnnouncementDelete = "settings/announcement/delete";
+
+            
         }
 
         public class Game
@@ -619,9 +621,13 @@
 
         public class VIPCategory
         {
-            public const string Insert = "vipcategory/insert";
+            public const string Insert = "vipcategorysetting/insert";
 
-            public const string Select = "vipcategory/select";
+            public const string Select = "vipcategorysetting/select";
+
+            public const string VIPLevelSelect = "viplevel/select";
+
+            public const string VIPLevelUserUpdate= "viplevel/user/update";
         }
     }
 }

@@ -7,6 +7,7 @@ $(document).ready(function () {
         if (localStorage.getItem('IsExecute') == "true" || localStorage.getItem('IsExecute') == true || localStorage.getItem('IsExecute') == null) {
             localStorage.setItem('IsExecute', false);
         }
+        VIPBanner();
     }
     if (window.location.href.toLowerCase().includes("mobile/home")) {
         SliderPromotion();
@@ -20,6 +21,15 @@ $(document).ready(function () {
     announcement();
 });
 //#endregion
+
+function VIPBanner() {
+    var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
+    try {
+        document.getElementById("viplevel_icon").src = resUserData.data.vipBanner;
+    }
+    catch (e) { }
+}
+
 
 function CheckUserVerified() {
     try {
