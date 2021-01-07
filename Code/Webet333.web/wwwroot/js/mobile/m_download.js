@@ -210,7 +210,7 @@ function LaunchGameAndroid(gameid) {
     }
     if (gameid == 2) {
         try {
-            window.location = "pussy888:pussy888.com?account=" + resUserData.data.usernamePussy888 + "&password=" + resUserData.data.passwordPussy888
+            window.location = "pussy888://pussy888.com?user=" + resUserData.data.usernamePussy888 + "&password=" + resUserData.data.passwordPussy888
         }
         catch{
             self.location = pussy888_apkURL;
@@ -237,7 +237,7 @@ function LaunchGameIOS64(gameid) {
 
     if (gameid == 2) {
         try {
-            window.location = "pussy888:pussy888.com?account=" + resUserData.data.usernamePussy888 + "&password=" + resUserData.data.passwordPussy888
+            window.location = "pussy888://pussy888.com?user" + resUserData.data.usernamePussy888 + "&password=" + resUserData.data.passwordPussy888
         }
         catch{
             self.location = pussy888_iosURL;
