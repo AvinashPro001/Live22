@@ -73,6 +73,7 @@ import { UsersRegisterReportComponent } from './users-register-report/users-regi
 import { UsersBehaviourReportsComponent } from './users-behaviour-reports/users-behaviour-reports.component';
 import { GameresetPasswordReportComponent } from './gamereset-password-report/gamereset-password-report.component';
 import { VipPageComponent } from './vip-page-setting/vip-page-setting.component';
+import { TestingPaginationComponent } from './testing-pagination/testing-pagination.component';
 
 const routes: Routes = [
     { path: 'list', component: CustomerListComponent },
@@ -132,6 +133,7 @@ const routes: Routes = [
     { path: 'users-behaviour-report', component: UsersBehaviourReportsComponent },
     { path: 'gamereset-password-report', component: GameresetPasswordReportComponent },
     { path: 'vip-page-setting', component: VipPageComponent },
+    { path: 'testing-pagination', component: TestingPaginationComponent },
 ];
 
 @NgModule({
@@ -153,7 +155,7 @@ const routes: Routes = [
         SelectDropDownModule,
         ButtonsModule,
     ],
-    declarations: [CustomerListComponent, DepositListComponent, WithdrawListComponent, TransferListComponent, CustomerEditComponent, DepositAddComponent, WithdrawAddComponent, ConfirmationDialogComponent, PromotionListComponent, PromotionAddComponent, BonusAddComponent, BonusListComponent, AnnouncementListComponent, TransferAddComponent, AnnouncementAddComponent, AdjustmentListComponent, AdjustmentAddComponent, MaintenanceComponent, BankListComponent, BankAddComponent, BankEditComponent, RefKeywordAddComponent, MaxbetLimitComponent, RefKeywordAnalyticsComponent, PromotionEditComponent, MaxbetMinmaxComponent, RebateCalculateComponent, RebateListComponent, BettingDetailsComponent, MaxbetBettingDetailsComponent, ApprovalDurationComponent, TrackingListComponent, BetdetailsLastupdateListComponent, UsersDetailsComponent, AnnouncementEditComponent, PromotionApplyComponent, DownloadLinkComponent, LoseRebateCalcComponent, m8LimitComponent, m8MinmaxComponent, MaxbetBettingLimitComponent, GameLastBettingUpdateComponent, BankWtihdrawComponent, BankDepositComponent, ManagerApproveListComponent, AllGameSetBetlimitComponent, SmsNotifyComponent, PromotionGroupingListComponent, PromotionGroupAddComponent, PromotionGroupingEditComponent, PromotionReportComponent, BettingdetailsCheckComponent, UsersWinloseReportComponent, RebateSettingComponent, UsersRegisterReportComponent, UsersBehaviourReportsComponent, GameresetPasswordReportComponent, VipPageComponent
+    declarations: [CustomerListComponent, DepositListComponent, WithdrawListComponent, TransferListComponent, CustomerEditComponent, DepositAddComponent, WithdrawAddComponent, ConfirmationDialogComponent, PromotionListComponent, PromotionAddComponent, BonusAddComponent, BonusListComponent, AnnouncementListComponent, TransferAddComponent, AnnouncementAddComponent, AdjustmentListComponent, AdjustmentAddComponent, MaintenanceComponent, BankListComponent, BankAddComponent, BankEditComponent, RefKeywordAddComponent, MaxbetLimitComponent, RefKeywordAnalyticsComponent, PromotionEditComponent, MaxbetMinmaxComponent, RebateCalculateComponent, RebateListComponent, BettingDetailsComponent, MaxbetBettingDetailsComponent, ApprovalDurationComponent, TrackingListComponent, BetdetailsLastupdateListComponent, UsersDetailsComponent, AnnouncementEditComponent, PromotionApplyComponent, DownloadLinkComponent, LoseRebateCalcComponent, m8LimitComponent, m8MinmaxComponent, MaxbetBettingLimitComponent, GameLastBettingUpdateComponent, BankWtihdrawComponent, BankDepositComponent, ManagerApproveListComponent, AllGameSetBetlimitComponent, SmsNotifyComponent, PromotionGroupingListComponent, PromotionGroupAddComponent, PromotionGroupingEditComponent, PromotionReportComponent, BettingdetailsCheckComponent, UsersWinloseReportComponent, RebateSettingComponent, UsersRegisterReportComponent, UsersBehaviourReportsComponent, GameresetPasswordReportComponent, VipPageComponent, TestingPaginationComponent
     ],
     providers: [ConfirmationDialogService],
     entryComponents: [ConfirmationDialogComponent],

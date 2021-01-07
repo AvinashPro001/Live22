@@ -193,6 +193,7 @@ export class DepositListComponent implements OnInit {
                 { prop: 'Amount' },
                 { prop: 'ReferenceNo' },
                 { prop: 'Time' },
+                { prop: 'Tracking' },
                 { prop: 'Operator' },
                 { prop: 'Promotion' },
                 { prop: 'Remarks' },
@@ -211,6 +212,7 @@ export class DepositListComponent implements OnInit {
                 { prop: 'Amount' },
                 { prop: 'ReferenceNo' },
                 { prop: 'Time' },
+                { prop: 'Tracking' },
                 { prop: 'Operator' },
                 { prop: 'Promotion' },
                 { prop: 'Status' },
@@ -230,6 +232,7 @@ export class DepositListComponent implements OnInit {
                 { prop: 'Amount' },
                 { prop: 'ReferenceNo' },
                 { prop: 'Time' },
+                { prop: 'Tracking' },
                 { prop: 'Status' },
                 { prop: 'Promotion' },
                 { prop: 'Verified', cellTemplate: this.status, sortable: true },
@@ -271,6 +274,7 @@ export class DepositListComponent implements OnInit {
                     Status: (el.verified=="approved"?"<span class='approved'>"+el.verified+"</span>":(el.verified=="pending"?"<span class='pending'>"+el.verified+"</span>":"<span class='rejected'>"+el.verified+"</span>")),
                     //Status: el.verified,
                     Operator: el.operatorName,
+                    Tracking: el.trackingLoginRegister == true ? '<img class="tracking-img" src="../../../../assets/img/warning.png"/>' : '<img class="tracking-img"  src="../../../../assets/img/success.png"/>',
                     Remarks: el.adminRemarks === null || el.adminRemarks === "" ? 'No Remarks' : el.adminRemarks,
                     Promotion: el.promotionTitle === null ? 'No Promotion' : el.promotionTitle,
                     Created: this.ReplaceTime(el.created),
@@ -611,223 +615,7 @@ export class DepositListComponent implements OnInit {
 
     //#endregion Add Receipt or Remover Receipt images
 
-    ////#region M8
-    //callApi(apiurl, postData) {
-    //    if (postData == false) {
-    //        let model = {
-    //            url: apiurl
-    //        };
-    //        return new Promise((resolve, reject) => {
-    //            this.adminService.add<any>('http://api.webet333.com/api/Default', model).subscribe(res => {
-    //                resolve({
-    //                    'error': false,
-    //                    'data': res
-    //                });
-    //            }), error => {
-    //                reject({
-    //                    'error': true,
-    //                    'data': error
-    //                });
-    //            }
-    //        });
-    //    } else {
-    //        return new Promise((resolve, reject) => {
-
-    //            this.adminService.add<any>(apiurl, postData).subscribe(res => {
-    //                resolve({
-    //                    'error': false,
-    //                    'data': res
-    //                });
-    //            }, error => {
-    //                reject({
-    //                    'error': true,
-    //                    'data': error
-    //                });
-    //            });
-    //        });
-    //    }
-    //}
-    ////#endregion M8
-
-    ////#region Playtech
-    //callApiPlaytech(apiurl, postData) {
-    //    if (postData == false) {
-    //        let model = {
-    //            url: apiurl
-    //        };
-    //        return new Promise((resolve, reject) => {
-    //            this.adminService.add<any>('http://api.webet333.com/api/Default/playtech', model).subscribe(res => {
-    //                resolve({
-
-    //                    'error': false,
-    //                    'data': res
-    //                });
-    //            }), error => {
-    //                reject({
-    //                    'error': true,
-    //                    'data': error
-    //                });
-    //            }
-    //        });
-    //    } else {
-    //        return new Promise((resolve, reject) => {
-    //            this.adminService.add<any>(apiurl, postData).subscribe(res => {
-    //                resolve({
-    //                    'error': false,
-    //                    'data': res.message
-    //                });
-    //            }, error => {
-    //                reject({
-    //                    'error': true,
-    //                    'data': error.message
-    //                });
-    //            });
-    //        });
-    //    }
-    //}
-    ////#endregion Playtech
-
-    ////#region AG
-    //callAG(apiurl, postData) {
-    //    if (postData == false) {
-    //        let model = {
-    //            url: apiurl
-    //        };
-    //        return new Promise((resolve, reject) => {
-    //            this.adminService.add<any>('http://api.webet333.com/api/Default/ag', model).subscribe(res => {
-    //                resolve({
-    //                    'error': false,
-    //                    'data': res
-    //                });
-    //            }), error => {
-    //                reject({
-    //                    'error': true,
-    //                    'data': error
-    //                });
-    //            }
-    //        });
-    //    } else {
-    //        return new Promise((resolve, reject) => {
-    //            this.adminService.add<any>(apiurl, postData).subscribe(res => {
-    //                resolve({
-    //                    'error': false,
-    //                    'data': res.message
-    //                });
-    //            }, error => {
-    //                reject({
-    //                    'error': true,
-    //                    'data': error.message
-    //                });
-    //            });
-    //        });
-    //    }
-    //}
-    ////#endregion AG
-
-    ////#region 918Kiss
-    //call918Kiss(apiurl, postData) {
-    //    if (postData == false) {
-    //        let model = {
-    //            url: apiurl
-    //        };
-    //        return new Promise((resolve, reject) => {
-    //            this.adminService.add<any>('http://api.webet333.com/api/Default/ag', model).subscribe(res => {
-    //                resolve({
-    //                    'error': false,
-    //                    'data': res
-    //                });
-    //            }), error => {
-    //                reject({
-    //                    'error': true,
-    //                    'data': error.mes
-    //                });
-    //            }
-    //        });
-    //    } else {
-    //        return new Promise((resolve, reject) => {
-    //            this.adminService.add<any>(apiurl, postData).subscribe(res => {
-    //                resolve({
-    //                    'error': false,
-    //                    'data': res.message
-    //                });
-    //            }, error => {
-    //                reject({
-    //                    'error': true,
-    //                    'data': error.message
-    //                });
-    //            });
-    //        });
-    //    }
-    //}
-    ////#endregion
-
-    ////#region Joker
-    //callJoker(apiurl, parameter, postData) {
-    //    if (postData == false) {
-    //        let model = {
-    //            url: apiurl,
-    //            model: parameter
-    //        };
-    //        return new Promise((resolve, reject) => {
-    //            this.adminService.add<any>('http://api.webet333.com/api/Default/joker', model).subscribe(res => {
-    //                resolve({
-    //                    'error': false,
-    //                    'data': res
-    //                });
-    //            }), error => {
-    //                reject({
-    //                    'error': true,
-    //                    'data': error
-    //                });
-    //            }
-    //        });
-    //    } else {
-    //        return new Promise((resolve, reject) => {
-    //            this.adminService.add<any>(apiurl, postData).subscribe(res => {
-    //                resolve({
-    //                    'error': false,
-    //                    'data': res.message
-    //                });
-    //            }, error => {
-    //                reject({
-    //                    'error': true,
-    //                    'data': error.message
-    //                });
-    //            });
-    //        });
-    //    }
-    //}
-    ////#endregion
-
-    ////#region Generate GUID
-    //generateGuid() {
-    //    var result, i, j;
-    //    result = '';
-    //    for (j = 0; j < 32; j++) {
-    //        if (j === 8 || j === 12 || j === 16 || j === 20)
-    //            result = result + '-';
-    //        i = Math.floor(Math.random() * 16).toString(16).toUpperCase();
-    //        result = result + i;
-    //    }
-    //    return result;
-    //}
-    ////#endregion
-
-    ////#region Generate Number
-    //generate(n) {
-    //    var add = 1, max = 12 - add;   // 12 is the min safe number Math.random() can generate without it starting to pad the end with zeros.
-
-    //    if (n > max) {
-    //        return this.generate(max) + this.generate(n - max);
-    //    }
-
-    //    max = Math.pow(10, n + add);
-    //    var min = max / 10; // Math.pow(10, n) basically
-    //    var number = Math.floor(Math.random() * (max - min + 1)) + min;
-
-    //    return ("" + number).substring(add);
-    //}
-    ////#endregion Generate Number
+    
 
     //#region Dismiss
     dismiss() {
@@ -835,21 +623,4 @@ export class DepositListComponent implements OnInit {
     }
     //#endregion Dismiss
 
-    //#region MaxBet
-    //MaxBet(apiurl, model) {
-    //    return new Promise((resolve, reject) => {
-    //        return this.adminService.add<any>(apiurl, model).toPromise().then(res => {
-    //            resolve({
-    //                'error': false,
-    //                'data': res
-    //            });
-    //        }).catch(error => {
-    //            reject({
-    //                'error': true,
-    //                'data': error
-    //            })
-    //        });
-    //    });
-    //}
-    //#endregion MaxBet
 }
