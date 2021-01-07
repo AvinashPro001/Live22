@@ -77,6 +77,9 @@ namespace Webet333.models.Response.Payments
 
         [JsonProperty(PropertyName = "modified")]
         public DateTime Modified { get; set; }
+
+        [JsonProperty(PropertyName = "trackingLoginRegister")]
+        public bool TrackingLoginRegister { get; set; }
     }
 
     public class DepositReceipts

@@ -174,8 +174,9 @@
             </div>
             <div class="col-11 offset-1">
                 <div class="row">
-                    <h4 class="col-5 h4">User's V IP Level :</h4>
-                    <h4 class="col-6 h4">{{userPragmaticUnfinished == null ? 'Select username.' : userPragmaticUnfinished }}&nbsp;&nbsp;&nbsp; <button (click)="unfinishedShow(jokerUnfinishedList)" class="btn btn-primary">Change VIP Level</button></h4>
+                    <h4 class="col-3 h4">User's V IP Level :</h4>
+                    <h4 class="col-9 h4"><img style="width:150px;margin-top:-50px;margin-bottom:-50px;" src="{{vipLevelImage}}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {{vipLevel == null ? 'Select username.' : vipLevel }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button (click)="unfinishedShow(jokerUnfinishedList)" class="btn btn-primary">Change VIP Level</button></h4>
                 </div>
             </div>
         </div>
@@ -246,6 +247,8 @@
                     <td>Pussy888 Game:</td>
                     <td>{{pussyUsername== null ? 'Select username.' : pussyUsername }}</td>
                     <!--<td>{{Pussy888Password}}</td>-->
+                    
+
                     <td><button class="btn btn-primary" (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Pussy888')">Pussy Pass</button>&nbsp;<button class="btn btn-primary" (click)="ResetPassword('Pussy888')">Reset</button></td>
                 </tr>
                 <tr>

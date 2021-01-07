@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webet333.dapper;
+using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Account;
@@ -23,7 +24,7 @@ namespace Webet333.api.Helpers
         }
 
         #region Get User's List
-        public async Task<List<dynamic>> GetUsers(string Role, string Keyword, string ImagePath)
+        public async Task<List<dynamic>> GetUsers(string Role, string Keyword, BaseUrlConfigs baseUrlConfigs)
         {
             using (var repository = new DapperRepository<GlobalJsonResponse>(Connection))
             {
@@ -31,7 +32,8 @@ namespace Webet333.api.Helpers
                 var users = JsonConvert.DeserializeObject<List<dynamic>>(result.DocumentListSerialized);
                 users.ForEach(user =>
                 {
-                    user.userICImage = (user.userICImage != null ? ImagePath + "/" +  user.userICImage : null);
+                    user.userICImage = (user.userICImage != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.UserICImage + "/" + user.userICImage : null);
+                    user.VIPBanner = (user.VIPBanner != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.VIPIcon + "/" + user.VIPLevel + user.VIPBanner : null);
                 });
                 return users;
             }
@@ -95,13 +97,13 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<GlobalJsonResponse>(Connection))
             {
-                var result = await repository.FindAsync(StoredProcConsts.User.GetUsersWinloseReport, new { FromDate, ToDate});
+                var result = await repository.FindAsync(StoredProcConsts.User.GetUsersWinloseReport, new { FromDate, ToDate });
                 var users = JsonConvert.DeserializeObject<List<WinloseReportResponse>>(result.DocumentListSerialized);
                 decimal totalDeposit = users.Sum(x => x.TotalDeposit);
                 decimal totalWithdraw = users.Sum(x => x.TotalWithdraw);
                 decimal totalBonus = users.Sum(x => x.TotalBonus);
-                decimal totalWinlose= users.Sum(x => x.WinLose);
-                return new { totalDeposit, totalWithdraw, totalBonus, totalWinlose,users };
+                decimal totalWinlose = users.Sum(x => x.WinLose);
+                return new { totalDeposit, totalWithdraw, totalBonus, totalWinlose, users };
             }
         }
         #endregion

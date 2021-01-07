@@ -69,6 +69,8 @@
 
             public const string ReferenceKeywordDelete = "[dbo].[RefKeyword_Delete]";
 
+            public const string TranckingLoginRegister_Update = "[dbo].[TranckingLoginRegister_Update]";
+
             public const string TrackingInsert = "[dbo].[Tracking_Insert]";
 
             public const string TrackingSelect = "[dbo].[Tracking_Select]";
@@ -493,7 +495,11 @@
         {
             public const string VIPCategoryInsert = "[dbo].[Insert_VIP_Category_Values]";
 
-            public const string VIPCategorySelect = "[dbo].[VIPCategorySetting_Select]";
+            public const string VIPCategorySettingSelect = "[dbo].[VIPCategorySetting_Select]";
+
+            public const string VIPCategorySelect = "[dbo].[VIPCategory_Select]";
+
+            public const string UserVIPLevelUpdate = "[dbo].[User_VIPLevel_Update]";
         }
     }
 }
