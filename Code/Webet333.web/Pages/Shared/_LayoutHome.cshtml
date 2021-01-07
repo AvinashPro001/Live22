@@ -112,7 +112,7 @@
     </script>
     <!-- Event snippet for youtube signup conversion page
     In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-    <script>
+    <!--<script>
         function gtag_report_conversion(url) {
             var callback = function () {
                 if (typeof (url) != 'undefined') {
@@ -125,6 +125,19 @@
             });
             return false;
         }
+    </script>-->
+    <!-- Event snippet for Sign-up conversion page -->
+    <!-- Global site tag (gtag.js) - Google Ads: 527506130 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-527506130"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-527506130');
+    </script>
+    <script>
+        gtag('event', 'conversion', { 'send_to': 'AW-527506130/BFpFCPDPiuQBENK1xPsB' });
     </script>
 
     @RenderSection("Header", false)
