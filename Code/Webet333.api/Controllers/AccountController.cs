@@ -470,6 +470,9 @@ namespace Webet333.api.Controllers
         {
             await CheckUserRole();
 
+            request.UniqueId = GetUniqueId(User);
+            request.Role = GetUserRole(User);
+
             using (var accounthelper = new AccountHelpers(Connection))
             {
                 return OkResponse(await accounthelper.TrackingSelect(request));

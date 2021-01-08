@@ -25,12 +25,21 @@ export class DepositListComponent implements OnInit {
     @ViewChild('receipt') receipt: TemplateRef<any>;
     @ViewChild('action') action: TemplateRef<any>;
     @ViewChild('addreceipt') addreceipt: TemplateRef<any>;
+
+    @ViewChild('tracking') tracking: TemplateRef<any>;
     toaster: any;
     toasterConfig: any;
     toasterconfig: ToasterConfig = new ToasterConfig({
         positionClass: 'toast-bottom-right',
         showCloseButton: true
     });
+
+    rowsTacking = [];
+    columnsTacking = [];
+
+    warningImagePath = "../../../../assets/img/warning.png";
+    successImagePath = "../../../../assets/img/success.png";
+
     depositStatus: any;
     rows = [];
     columns = [];
@@ -85,7 +94,7 @@ export class DepositListComponent implements OnInit {
     //currentDateTime: any;
     AutoRefersh: any;
     setAutorefersh: any;
-    imageIcon: any ="../../../assets/img/pdficon.svg";
+    imageIcon: any = "../../../assets/img/pdficon.svg";
     //#endregion
 
     //#region constructor
@@ -150,7 +159,7 @@ export class DepositListComponent implements OnInit {
 
     hubConnection() {
         let Connection = new HubConnectionBuilder().withUrl("http://api.webet333.com/signalrhub").build();
-        
+
         Connection.on("DepositApprovalList", () => {
             this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
             if (this.AutoRefersh == true || this.AutoRefersh == "true")
@@ -181,6 +190,13 @@ export class DepositListComponent implements OnInit {
 
     //#region setCoumn
     setColumn(selectedList) {
+        this.columnsTacking = [
+            { prop: 'No' },
+            { prop: 'UserName' },
+            { prop: 'Process' },
+            { prop: 'Created' },
+        ];
+
         if (selectedList == "Approved") {
             this.columns = [
                 { prop: 'No' },
@@ -193,7 +209,7 @@ export class DepositListComponent implements OnInit {
                 { prop: 'Amount' },
                 { prop: 'ReferenceNo' },
                 { prop: 'Time' },
-                { prop: 'Tracking' },
+                { prop: 'Tracking', cellTemplate: this.tracking, sortable: false },
                 { prop: 'Operator' },
                 { prop: 'Promotion' },
                 { prop: 'Remarks' },
@@ -212,7 +228,7 @@ export class DepositListComponent implements OnInit {
                 { prop: 'Amount' },
                 { prop: 'ReferenceNo' },
                 { prop: 'Time' },
-                { prop: 'Tracking' },
+                { prop: 'Tracking', cellTemplate: this.tracking, sortable: false },
                 { prop: 'Operator' },
                 { prop: 'Promotion' },
                 { prop: 'Status' },
@@ -232,7 +248,7 @@ export class DepositListComponent implements OnInit {
                 { prop: 'Amount' },
                 { prop: 'ReferenceNo' },
                 { prop: 'Time' },
-                { prop: 'Tracking' },
+                { prop: 'Tracking', cellTemplate: this.tracking, sortable: false },
                 { prop: 'Status' },
                 { prop: 'Promotion' },
                 { prop: 'Verified', cellTemplate: this.status, sortable: true },
@@ -265,16 +281,16 @@ export class DepositListComponent implements OnInit {
                     DepositNo: el.orderId,
                     WalletName: el.walletName,
                     BankName: el.bankName,
-                    Method: el.depositMethod=="Promotion"?"<span class='method-promotion'>"+el.depositMethod+"</span>":"<span class='method-bank-transfer'>"+el.depositMethod+"</span>",
+                    Method: el.depositMethod == "Promotion" ? "<span class='method-promotion'>" + el.depositMethod + "</span>" : "<span class='method-bank-transfer'>" + el.depositMethod + "</span>",
                     Amount: el.amount,
                     ReferenceNo: el.referenceNo,
                     Time: this.time(el.depositTime, "Y-m-d H:i"),
                     Verified: el.verified,
                     id: el.id,
-                    Status: (el.verified=="approved"?"<span class='approved'>"+el.verified+"</span>":(el.verified=="pending"?"<span class='pending'>"+el.verified+"</span>":"<span class='rejected'>"+el.verified+"</span>")),
+                    Status: (el.verified == "approved" ? "<span class='approved'>" + el.verified + "</span>" : (el.verified == "pending" ? "<span class='pending'>" + el.verified + "</span>" : "<span class='rejected'>" + el.verified + "</span>")),
                     //Status: el.verified,
                     Operator: el.operatorName,
-                    Tracking: el.trackingLoginRegister == true ? '<img class="tracking-img" src="../../../../assets/img/warning.png"/>' : '<img class="tracking-img"  src="../../../../assets/img/success.png"/>',
+                    Tracking: el.trackingLoginRegister == true ? '<img (click)=DuplicateDetails("' + el.username + '") class="tracking-img" src="../../../../assets/img/warning.png"/>' : '<img (click)=DuplicateDetails("' + el.username + '") class="tracking-img"  src="../../../../assets/img/success.png"/>',
                     Remarks: el.adminRemarks === null || el.adminRemarks === "" ? 'No Remarks' : el.adminRemarks,
                     Promotion: el.promotionTitle === null ? 'No Promotion' : el.promotionTitle,
                     Created: this.ReplaceTime(el.created),
@@ -483,7 +499,7 @@ export class DepositListComponent implements OnInit {
         let model = {}
         //this.adminService.add<any>(customer.customerList, model).subscribe(res => {
         //    this.adminService.add<any>(account.profile, this.userModel).subscribe(async resUser => {
-                await this.accept();
+        await this.accept();
         //    });
         //});
     }
@@ -510,7 +526,7 @@ export class DepositListComponent implements OnInit {
                         this.adminService.add<any>(customer.depositVerify, this.remarkdata).subscribe(res => {
                             this.toasterService.pop('success', 'Successfully', res.message);
                             this.disabled = false;
-                           // this.stopwatch.stop();
+                            // this.stopwatch.stop();
                             this.ngOnInit();
                             this.ApprovalTime(resUser.data.id, resUser.data.username, "Deposit", this.remarkid);
                         });
@@ -536,7 +552,7 @@ export class DepositListComponent implements OnInit {
     }
     //#endregion
 
-    ApprovalTime(UserId, UserName, Type,Id) {
+    ApprovalTime(UserId, UserName, Type, Id) {
         let model = {
             userid: UserId,
             username: UserName,
@@ -569,7 +585,7 @@ export class DepositListComponent implements OnInit {
             this.ngOnInit();
             this.toasterService.pop('success', 'Success', res.message);
         }, error => {
-                this.disable = false;
+            this.disable = false;
             this.modalService.dismissAll();
             this.toasterService.pop('error', 'Error', error.error.message);
         });
@@ -615,12 +631,43 @@ export class DepositListComponent implements OnInit {
 
     //#endregion Add Receipt or Remover Receipt images
 
-    
-
     //#region Dismiss
     dismiss() {
         this.modalService.dismissAll();
     }
     //#endregion Dismiss
+
+    DuplicateDetails(trancking, username, trackingLoginRegister) {
+        if (trackingLoginRegister) {
+            this.loadingIndicator = true;
+
+            let data = {
+                username: username
+            }
+            this.rowsTacking = [];
+            this.adminService.add<any>(customer.trackingSelect, data).subscribe(res => {
+                let i = 0;
+                res.data.forEach(el => {
+                    this.rowsTacking.push({
+                        No: ++i,
+                        UserName: el.Usernames,
+                        Process: el.Process,
+                        Created: this.ReplaceTime(el.Created),
+                    });
+                });
+                this.rowsTacking = [...this.rowsTacking];
+                this.loadingIndicator = false;
+            }, error => {
+                this.rowsTacking = [];
+                this.toasterService.pop('error', 'Error', error.error.message)
+                this.loadingIndicator = false;
+
+            });
+            this.modalService.open(trancking, { windowClass: 'dark-modal' });
+        }
+        else {
+            this.toasterService.pop('error', 'Error', 'No Duplicate Record !!!');
+        }
+    }
 
 }

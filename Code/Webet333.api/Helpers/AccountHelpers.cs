@@ -347,7 +347,7 @@ namespace Webet333.api.Helpers
         {
             using (var dapperRepository = new DapperRepository<dynamic>(Connection))
             {
-                return await dapperRepository.GetDataAsync(StoredProcConsts.Account.TrackingSelect, new { request.FromDate, request.ToDate, request.Process });
+                return await dapperRepository.GetDataAsync(StoredProcConsts.Account.TrackingSelect, request);
             }
         }
 
