@@ -29,6 +29,7 @@ button.calendar:active {
             padding: 0;
             margin: 0;
             position: absolute;
+
             .container {
                 display: block;
                 position: relative;
@@ -38,6 +39,7 @@ button.calendar:active {
                 -webkit-transform: translate(0, 0) scale(1, 1);
                 transform: translate(0, 0) scale(1, 1);
                 background-color: #00ABE8;
+
                 .bar {
                     transition: all .15s linear;
                     -webkit-animation: query 0.5s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
@@ -67,6 +69,7 @@ button.calendar:active {
         opacity: 1;
         transform: translateX(35%) scale(0.3, 1);
     }
+
     100% {
         opacity: 0;
         transform: translateX(-50%) scale(0, 1);
@@ -112,14 +115,14 @@ button.calendar:active {
 
 /* On mouse-over, add a grey background color */
 
-.container:hover input~.checkmark {
+.container:hover input ~ .checkmark {
     background-color: #aaa;
 }
 
 
 /* When the checkbox is checked, add a blue background */
 
-.container input:checked~.checkmark {
+.container input:checked ~ .checkmark {
     background-color: #FF5E03;
 }
 
@@ -135,7 +138,7 @@ button.calendar:active {
 
 /* Show the checkmark when checked */
 
-.container input:checked~.checkmark:after {
+.container input:checked ~ .checkmark:after {
     display: block;
 }
 
@@ -161,4 +164,10 @@ button.calendar:active {
     top: 50px;
     color: green;
     position: relative;
+}
+
+
+
+.tracking-img {
+    width: 30px !important;
 }

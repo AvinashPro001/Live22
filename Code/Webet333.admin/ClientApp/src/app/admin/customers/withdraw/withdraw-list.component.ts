@@ -22,6 +22,7 @@ export class WithdrawListComponent implements OnInit {
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
     @ViewChild('action') action: TemplateRef<any>;
+    @ViewChild('tracking') tracking: TemplateRef<any>;
     toaster: any;
     toasterConfig: any;
     toasterconfig: ToasterConfig = new ToasterConfig({
@@ -29,6 +30,10 @@ export class WithdrawListComponent implements OnInit {
         showCloseButton: true
     });
     withdrawStatus: any;
+    rowsTacking = [];
+    columnsTacking = [];
+    warningImagePath = "../../../../assets/img/warning.png";
+    successImagePath = "../../../../assets/img/success.png";
     rows = [];
     columns = [];
     rowsSimilar = [];
@@ -164,6 +169,13 @@ export class WithdrawListComponent implements OnInit {
             { prop: 'Amount' },
             { prop: 'SimilarPercentage' },
         ];
+
+        this.columnsTacking = [
+            { prop: 'No' },
+            { prop: 'UserName' },
+            { prop: 'Process' },
+            { prop: 'Created' },
+        ];
     }
 
     //#region Set Column Datatable
@@ -180,7 +192,8 @@ export class WithdrawListComponent implements OnInit {
                 { prop: 'WalletName' },
                 { prop: 'Amount' },
                 { prop: 'PromotionTitle' },
-                { prop: 'similar%', cellTemplate: this.action, sortable: false},
+                { prop: 'similar%', cellTemplate: this.action, sortable: false },
+                { prop: 'Tracking', cellTemplate: this.tracking, sortable: false },
                 { prop: 'Status' },
                 { prop: 'Operator' },
                 { prop: 'Modified' },
@@ -199,6 +212,7 @@ export class WithdrawListComponent implements OnInit {
                 { prop: 'Amount' },
                 { prop: 'PromotionTitle' },
                 { prop: 'similar%', cellTemplate: this.action, sortable: false },
+                { prop: 'Tracking', cellTemplate: this.tracking, sortable: false },
                 { prop: 'Status' },
                 { prop: 'Operator' },
                 { prop: 'Modified' },
@@ -218,6 +232,7 @@ export class WithdrawListComponent implements OnInit {
                 { prop: 'Amount' },
                 { prop: 'PromotionTitle' },
                 { prop: 'similar%', cellTemplate: this.action, sortable: false },
+                { prop: 'Tracking', cellTemplate: this.tracking, sortable: false },
                 { prop: 'Status' },
                 { prop: 'Remarks' },
                 { prop: 'Verified', cellTemplate: this.status, sortable: false },
@@ -250,6 +265,7 @@ export class WithdrawListComponent implements OnInit {
                     WalletName: el.walletName,
                     Amount: el.withdrawalAmount,
                     PromotionTitle: el.PromotionTitle == null ? 'No Promotion' : el.PromotionTitle,
+                    Tracking: el.TrackingLoginRegister == true ? '<img (click)=DuplicateDetails("' + el.username + '") class="tracking-img" src="../../../../assets/img/warning.png"/>' : '<img (click)=DuplicateDetails("' + el.username + '") class="tracking-img"  src="../../../../assets/img/success.png"/>',
                     Verified: el.verified,
                     Status: el.verified,
                     Operator: el.operatorName,
@@ -442,4 +458,35 @@ export class WithdrawListComponent implements OnInit {
         this.adminService.add<any>(customer.approvalTimeInsert, model).subscribe(res => {
         });
     }    //#region Close All    dismiss() {        this.modalService.dismissAll();    }
-    //#endregion Close All}
+    //#endregion Close All    DuplicateDetails(trancking, username, trackingLoginRegister) {
+        if (trackingLoginRegister) {
+            this.loadingIndicator = true;
+
+            let data = {
+                username: username
+            }
+            this.rowsTacking = [];
+            this.adminService.add<any>(customer.trackingSelect, data).subscribe(res => {
+                let i = 0;
+                res.data.forEach(el => {
+                    this.rowsTacking.push({
+                        No: ++i,
+                        UserName: el.Usernames,
+                        Process: el.Process,
+                        Created: this.ReplaceTime(el.Created),
+                    });
+                });
+                this.rowsTacking = [...this.rowsTacking];
+                this.loadingIndicator = false;
+            }, error => {
+                this.rowsTacking = [];
+                this.toasterService.pop('error', 'Error', error.error.message)
+                this.loadingIndicator = false;
+
+            });
+            this.modalService.open(trancking, { windowClass: 'dark-modal' });
+        }
+        else {
+            this.toasterService.pop('error', 'Error', 'No Duplicate Record !!!');
+        }
+    }}

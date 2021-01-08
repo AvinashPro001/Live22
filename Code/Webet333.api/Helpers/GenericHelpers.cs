@@ -49,19 +49,43 @@ namespace Webet333.api.Helpers
         }
         #endregion
 
+        #region Get Image
+
         public void GetImage(IUploadManager uploadManager, string file, string folder, string name)
         {
             uploadManager.Store(file, name, folder);
         }
+
+        #endregion
+
+        #region Delete Image
 
         public void DeleteImage(IUploadManager uploadManager, string file, string folder)
         {
             uploadManager.Delete(file, folder);
         }
 
-        public void GetImageWithExtension(IUploadManager uploadManager, string file, string folder, string name,string extension)
+        #endregion
+
+        #region Get Image With Extension
+
+        public void GetImageWithExtension(IUploadManager uploadManager, string file, string folder, string name, string extension)
         {
-            uploadManager.StoreWithExtension(file, name, folder,extension);
+            uploadManager.StoreWithExtension(file, name, folder, extension);
         }
+
+        #endregion
+
+        #region Calculate Total page
+
+        public static int CalculateTotalPages(dynamic total,int? pageSize)
+        {
+            var pages = Convert.ToDecimal(total) / pageSize;
+            var response = pages < 1 ? 1 : Convert.ToInt32(Math.Ceiling(pages));
+            return response;
+        }
+
+        #endregion
+
     }
 }
