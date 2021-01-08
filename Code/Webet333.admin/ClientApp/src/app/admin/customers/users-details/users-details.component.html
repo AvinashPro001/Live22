@@ -175,8 +175,10 @@
             <div class="col-11 offset-1">
                 <div class="row">
                     <h4 class="col-3 h4">User's V IP Level :</h4>
-                    <h4 class="col-9 h4"><img style="width:150px;margin-top:-50px;margin-bottom:-50px;" src="{{vipLevelImage}}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    {{vipLevel == null ? 'Select username.' : vipLevel }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button (click)="unfinishedShow(jokerUnfinishedList)" class="btn btn-primary">Change VIP Level</button></h4>
+                    <h4 class="col-9 h4">
+                        <img style="width:150px;margin-top:-50px;margin-bottom:-50px;" src="{{vipLevelImage}}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{vipLevel == null ? 'Select username.' : vipLevel }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button (click)="ShowVIPLevelDailogBox(VIPLevel)" class="btn btn-primary">Change VIP Level</button>
+                    </h4>
                 </div>
             </div>
         </div>
@@ -247,7 +249,7 @@
                     <td>Pussy888 Game:</td>
                     <td>{{pussyUsername== null ? 'Select username.' : pussyUsername }}</td>
                     <!--<td>{{Pussy888Password}}</td>-->
-                    
+
 
                     <td><button class="btn btn-primary" (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Pussy888')">Pussy Pass</button>&nbsp;<button class="btn btn-primary" (click)="ResetPassword('Pussy888')">Reset</button></td>
                 </tr>
@@ -611,8 +613,6 @@
     </div>
 </ng-template>
 
-
-
 <!--Remarks modal code starts-->
 <ng-template #ManagerDailog let-modal>
     <div class="modal-header">
@@ -647,6 +647,48 @@
 
         <button type="button" class="btn btn-success" (click)="GamePasswordShow()">Yes</button>
         <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">No</button>
+    </div>
+</ng-template>
+<!--Remarks modal code ends-->
+
+
+<!--Remarks modal code starts-->
+<ng-template #VIPLevel let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Please confirm..</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.close('Close click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12 col-sm-12" style="display:flex">
+                <label class="col-md-3">Manager Username</label>
+                <input type="text" id="txt_managerUsername" class="form-control col-md-6 mb-6" placeholder="" autocomplete="off" />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12 col-sm-12" style="display: flex">
+                <label class="col-md-3">Manager Password</label>
+                <input type="password" id="txt_managerPassword" class="form-control col-md-6 mb-6" placeholder="" autocomplete="off" />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12 col-sm-12" style="display: flex">
+                <label class="col-md-3">Select VIP Level</label>
+                <select class="form-control col-md-6 mb-6" id="vipLevel">
+                    <option *ngFor="let c of vipLevelList" [ngValue]="c">{{c.Name}}</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+
+        <button type="button" class="btn btn-success" (click)="VIPLevelUpdate()">Update</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cancel</button>
     </div>
 </ng-template>
 <!--Remarks modal code ends-->

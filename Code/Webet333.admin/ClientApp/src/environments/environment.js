@@ -8,8 +8,8 @@ exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss =
 exports.environment = {
     production: false,
     //apiUrl: 'http://api.webet333.com/api/v1/'
-    apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:49841/api/v1/'
+    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    apiUrl: 'http://localhost:49841/api/v1/'
 };
 exports.account = {
     login: exports.environment.apiUrl + 'account/login',
@@ -309,7 +309,9 @@ exports.smsConst = {
     campaign: 'campaign=Webet333'
 };
 exports.VIPSetting = {
-    addVIP: exports.environment.apiUrl + "vipcategory/insert",
-    getVIP: exports.environment.apiUrl + "vipcategory/select"
+    addVIP: exports.environment.apiUrl + "vipcategorysetting/insert",
+    getVIP: exports.environment.apiUrl + "vipcategorysetting/select",
+    VIPLevelList: exports.environment.apiUrl + 'viplevel/select',
+    UserVIPLevelUpdate: exports.environment.apiUrl + 'viplevel/user/update',
 };
 //# sourceMappingURL=environment.js.map
