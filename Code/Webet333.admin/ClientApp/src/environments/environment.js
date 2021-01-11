@@ -309,7 +309,7 @@ exports.smsConst = {
     campaign: 'campaign=Webet333'
 };
 exports.VIPSetting = {
-    addVIP: exports.environment.apiUrl + "vipcategory/insert",
-    getVIP: exports.environment.apiUrl + "vipcategory/select"
+    addVIP: exports.environment.apiUrl + "vipcategorysetting/insert",
+    getVIP: exports.environment.apiUrl + "vipcategorysetting/select"
 };
 //# sourceMappingURL=environment.js.map

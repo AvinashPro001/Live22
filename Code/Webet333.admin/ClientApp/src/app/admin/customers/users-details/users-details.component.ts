@@ -238,14 +238,7 @@ export class UsersDetailsComponent implements OnInit {
         private modalService: NgbModal,
         private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>
     ) { }
-
-
-
     //#endregion
-
-
-
-
 
     //#region OnInit Method
     ngOnInit() {
@@ -312,8 +305,6 @@ export class UsersDetailsComponent implements OnInit {
     onChange(event) {
         try {
             this.newVal = event.id;
-            debugger
-            
             this.vipLevelImage = event.VIPLevelName == "Normal" ? "" : event.VIPBanner;
             this.vipLevel = event.VIPLevelName;
 
@@ -427,6 +418,7 @@ export class UsersDetailsComponent implements OnInit {
 
 
     OnTypeDropDown(event) {
+        this.customerUser();
         let list = this.customerData.filter(x => x.id === event)[0];
         if (list != undefined) {
             this.userid = list.id;
@@ -445,8 +437,6 @@ export class UsersDetailsComponent implements OnInit {
             this.searchHandlerByDate("");
         }
     }
-
-
     //#endregion
 
     //#region Get all game Username

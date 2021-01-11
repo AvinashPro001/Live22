@@ -378,6 +378,6 @@ export const smsConst = {
 }
 
 export const VIPSetting = {
-    addVIP: environment.apiUrl + "vipcategory/insert",
-    getVIP: environment.apiUrl + "vipcategory/select"
+    addVIP: environment.apiUrl + "vipcategorysetting/insert",
+    getVIP: environment.apiUrl + "vipcategorysetting/select"
 }

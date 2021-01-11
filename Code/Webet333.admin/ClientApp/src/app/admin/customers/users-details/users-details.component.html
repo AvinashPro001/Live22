@@ -10,8 +10,15 @@
         <div class="col-lg-2 col-xs-4">
             <button class="mb-1 btn btn-outline-primary" (click)="show(content)" type="button">Withdraw Amount &nbsp;&nbsp; <span id="lockIcon" class=""></span>&nbsp;&nbsp;{{totalWithdrawAmountWithMYR}}</button>
         </div>
+        <div class="col-2">
+            <div class="text-center"><b>Total Deposit</b></div><div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalDepositAmount }}</b></div>
+        </div>
     </div>
 </div>
+<br />
+<br />
+<br />
+<br />
 <br />
 <br />
 <div class="container-fluid">
@@ -174,9 +181,11 @@
             </div>
             <div class="col-11 offset-1">
                 <div class="row">
-                    <h4 class="col-3 h4">User's V IP Level :</h4>
-                    <h4 class="col-9 h4"><img style="width:150px;margin-top:-50px;margin-bottom:-50px;" src="{{vipLevelImage}}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    {{vipLevel == null ? 'Select username.' : vipLevel }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button (click)="unfinishedShow(jokerUnfinishedList)" class="btn btn-primary">Change VIP Level</button></h4>
+                    <h4 class="col-2 h4">User's VIP Level :</h4>
+                    <h4 class="col-10 h4">
+                        <img style="width:100px;margin-top:-50px;margin-bottom:-50px;" src="{{vipLevelImage}}" />&nbsp;&nbsp;&nbsp;
+                        {{vipLevel == null ? 'Select username.' : vipLevel }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button (click)="unfinishedShow(jokerUnfinishedList)" class="btn btn-primary">Change VIP Level</button>
+                    </h4>
                 </div>
             </div>
         </div>
@@ -220,6 +229,8 @@
                 <tr>
                     <td>918 Kiss Game:</td>
                     <td>{{kiss918Username== null ? 'Select username.' : kiss918Username }}</td>
+
+
                     <!--<td>{{Kiss918Password}}</td>-->
                     <td><button class="btn btn-primary" (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Kiss918')">918Kiss Pass</button>&nbsp;<button class="btn btn-primary" (click)="ResetPassword('Kiss918')">Reset</button></td>
                 </tr>
@@ -246,8 +257,10 @@
                 <tr>
                     <td>Pussy888 Game:</td>
                     <td>{{pussyUsername== null ? 'Select username.' : pussyUsername }}</td>
+
+
                     <!--<td>{{Pussy888Password}}</td>-->
-                    
+
 
                     <td><button class="btn btn-primary" (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Pussy888')">Pussy Pass</button>&nbsp;<button class="btn btn-primary" (click)="ResetPassword('Pussy888')">Reset</button></td>
                 </tr>
