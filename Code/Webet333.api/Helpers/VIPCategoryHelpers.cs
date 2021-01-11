@@ -65,7 +65,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.VIPCategory.VIPCategorySelect, request);
+                await repository.AddOrUpdateAsync(StoredProcConsts.VIPCategory.UserVIPLevelUpdate, request);
             }
         }
 

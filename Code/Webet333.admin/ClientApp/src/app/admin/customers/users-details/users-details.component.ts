@@ -3,7 +3,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterService } from 'angular2-toaster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
-import { account, customer, gameBalance } from '../../../../environments/environment';
+import { account, customer, gameBalance, VIPSetting } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 import { debug } from 'util';
 import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -228,6 +228,8 @@ export class UsersDetailsComponent implements OnInit {
         { gmt: "-01:00" },
     ];
 
+    vipLevelList: any;
+
     model: NgbDateStruct;
     date: { year: number, month: number };
 
@@ -244,17 +246,17 @@ export class UsersDetailsComponent implements OnInit {
     ngOnInit() {
         let dataCustomer = JSON.parse(localStorage.getItem('id'));
         this.Userdata = dataCustomer as object[];
-        
+
         if (this.Userdata != null) {
             this.ShowDropDown = false;
             this.onChange(this.Userdata);
-            
+
         }
         else {
             this.ShowDropDown = true;
             this.customerUser();
         }
-
+        this.LoadVIPCategory();
         document.getElementById("profiletab").click();
         this.coloumSet();
         var someElement = document.getElementById("lockIcon");
@@ -265,6 +267,18 @@ export class UsersDetailsComponent implements OnInit {
         return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
     }
 
+
+    LoadVIPCategory() {
+        this.adminService.getAll<any>(VIPSetting.VIPLevelList).subscribe(res => {
+            this.vipLevelList = res.data;
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
+    ShowVIPLevelDailogBox(content) {
+        this.openWindowCustomClass(content);
+    }
     //#endregion
 
     //#region Betting Details Game Change Method
@@ -338,8 +352,8 @@ export class UsersDetailsComponent implements OnInit {
     onChangeDropDown(event) {
         try {
             this.newVal = event.value.id;
-            
-            this.vipLevelImage = event.value.VIPLevelName=="Normal"?"": event.value.VIPBanner;
+
+            this.vipLevelImage = event.value.VIPLevelName == "Normal" ? "" : event.value.VIPBanner;
             this.vipLevel = event.value.VIPLevelName;
 
             this.userPassword = event.value.password;
@@ -2521,6 +2535,44 @@ export class UsersDetailsComponent implements OnInit {
                     this.toasterService.pop('error', 'Error', error.error.message);
                 });
             }
+        }
+        else
+            this.toasterService.pop('error', 'Error', "Select Username");
+    }
+
+    VIPLevelUpdate() {
+        if (this.userid != null && this.userid != undefined) {
+
+            var Username = ((document.getElementById("txt_managerUsername") as HTMLInputElement).value)
+            var Password = ((document.getElementById("txt_managerPassword") as HTMLInputElement).value)
+            var vipLevel = ((document.getElementById("vipLevel") as HTMLInputElement).value)
+
+
+            if (Username == "")
+                return this.toasterService.pop('error', 'Error', "Username Required");
+
+            if (Password == "")
+                return this.toasterService.pop('error', 'Error', "Password Required");
+
+            if (vipLevel == "")
+                return this.toasterService.pop('error', 'Error', "VIP Level Required");
+
+            var vipLevelId = this.vipLevelList.filter(x => x.Name == vipLevel);
+
+            let data = {
+                userId: this.userid,
+                managerUsername: Username,
+                managerPassword: Password,
+                levelId: vipLevelId[0].Id
+            }
+            this.adminService.add<any>(VIPSetting.UserVIPLevelUpdate, data).subscribe(res => {
+                this.toasterService.pop('success', 'Successfully', res.message);
+                this.modalService.dismissAll();
+                this.ngOnInit();
+            }, error => {
+                this.modalService.dismissAll();
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
         else
             this.toasterService.pop('error', 'Error', "Select Username");
