@@ -94,7 +94,10 @@ export class WithdrawListComponent implements OnInit {
 
     ngOnInit() {
         this.getAutoRefershUpdate();
-        this.hubConnection();
+        //this.hubConnection();
+        setInterval(() => {
+            this.CheckWithdraw();
+        }, 5000)
         this.withdrawStatus = this.route.snapshot.queryParamMap.get('withdrawStatus')
         if (this.withdrawStatus != null) {
             if (this.withdrawStatus == 'Approved') {
@@ -144,6 +147,22 @@ export class WithdrawListComponent implements OnInit {
             console.log("Connection started")
         );
 
+    }
+
+    CheckWithdraw() {
+        let data = {
+            status: 'Pending',
+            keyword: null,
+            fromDate: null,
+            toDate: null
+        }
+        this.adminService.add<any>(customer.withdrawList, data).subscribe(res => {
+            if (res.data.length > 0) {
+                this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
+                if (this.AutoRefersh == true || this.AutoRefersh == "true")
+                    this.playAudio();
+            }
+        })
     }
 
     playAudio() {

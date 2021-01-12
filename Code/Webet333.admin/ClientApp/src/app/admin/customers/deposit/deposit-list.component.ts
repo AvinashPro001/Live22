@@ -114,8 +114,12 @@ export class DepositListComponent implements OnInit {
 
     //#region Init
     ngOnInit() {
-        this.hubConnection();
+        //this.hubConnection();
         this.getAutoRefershUpdate();
+
+        setInterval(() => {
+            this.CheckDeposit();
+        }, 5000)
 
         //this.generate(12);
         this.depositStatus = this.route.snapshot.queryParamMap.get('depositStatus')
@@ -137,6 +141,25 @@ export class DepositListComponent implements OnInit {
         setTimeout(() => { this.loadingIndicator = false; }, 1500);
     }
     //#endregion
+
+    CheckDeposit() {
+        let data = {
+            status: 'Pending',
+            keyword: null,
+            fromDate: null,
+            toDate: null
+        }
+        this.adminService.add<any>(customer.depositList, data).subscribe(res => {
+            if (res.data.length > 0) {
+                this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
+                if (this.AutoRefersh == true || this.AutoRefersh == "true") {
+                    this.playAudio();
+                }
+            }
+        })
+    }
+
+
 
     AutoRefershUpdate() {
 
@@ -171,7 +194,7 @@ export class DepositListComponent implements OnInit {
         ).catch(err => this.hubConnection());
     }
 
-    playAudio() {
+    async playAudio() {
         let audio = new Audio();
         audio.src = "../../../assets/audio/notification.mp3";
         audio.load();
@@ -262,7 +285,7 @@ export class DepositListComponent implements OnInit {
     //#region setPageData
 
     setPageData(selectedList, search, fromdate, todate) {
-        this.loadingIndicator = true;
+        //this.loadingIndicator = true;
         this.rows = [];
         let data = {
             status: selectedList,
@@ -298,12 +321,12 @@ export class DepositListComponent implements OnInit {
                 });
             });
             this.rows = [...this.rows];
-            this.loadingIndicator = false;
+          //  this.loadingIndicator = false;
 
 
 
         }, error => {
-            this.loadingIndicator = false;
+           // this.loadingIndicator = false;
             this.toasterService.pop('error', 'Error', error.error.message);
         });
 
