@@ -1,4 +1,5 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { ToasterService } from 'angular2-toaster';
 import { AdminService } from '../../src/app/admin/admin.service';
@@ -37,7 +38,7 @@ export class AppComponent implements OnInit {
         tapToDismiss: false,
         timeout: 5000
     });
-    constructor(public settings: SettingsService, private spinner: NgxSpinnerService, private toasterService: ToasterService, private adminService: AdminService,) { }
+    constructor(public settings: SettingsService, private spinner: NgxSpinnerService, private toasterService: ToasterService, private adminService: AdminService, private titleService: Title) { }
 
     ngOnInit() {
         //this.hubConnection();
@@ -53,8 +54,6 @@ export class AppComponent implements OnInit {
             this.CheckWithdraw();
         },5000)
     }
-
-
 
     hubConnection() {
         let Connection = new HubConnectionBuilder().withUrl("http://api.webet333.com/signalrhub").build();
@@ -91,13 +90,10 @@ export class AppComponent implements OnInit {
         audio.src = "../../src/assets/audio/notification.mp3";
         audio.load();
         audio.play();
-
-        if (process === 2)
-            this.toasterService.pop('info', 'Withdraw Approval Pending', "New Approval Request Arrive");
-
-        if (process === 1)
-            this.toasterService.pop('info', 'Deposit Approval Pending', "New Approval Request Arrive");
     }
+
+    intvDeposit: any;
+    intvWithdraw: any;
 
     CheckDeposit() {
         let data = {
@@ -106,21 +102,38 @@ export class AppComponent implements OnInit {
             fromDate: null,
             toDate: null
         }
-        this.adminService.add<any>(customer.depositList, data).subscribe(res => {
-            if (res.data.length > 0) {
+        this.adminService.add<any>(customer.depositList, data).subscribe(resDeposit => {
+            if (resDeposit.data.length > 0) {
                 let data = {
                     name: "DepositAutoRefersh",
                 }
                 this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(res => {
                     var AutoRefersh = res.data.value == "true" ? true : false;
                     if (AutoRefersh == true) {
-                        this.changeTitile = "Deposit Request (" + res.data.length + ")";
-                        this.playAudio(1);
-                        this.changeTitile = "Account Managment System";
+                        this.blink("Deposit Request (" + resDeposit.data.length + ")", 10);
+                        //this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+                       // this.titleService.setTitle(" ");
+                        //this.intvDeposit = window.setInterval(function () {
+                        //    document.title = this.titleService.getTitle() != "" ? this.titleService.setTitle(""): "Deposit Request (" + resDeposit.data.length + ")";
+                        //}, 1000);
                     }
                 });
             }
+            else {
+                //this.stopBlinkDeposit();
+                this.titleService.setTitle("Account Managment System");
+            }
         })
+    }
+
+    stopBlinkDeposit() {
+        window.clearInterval(this.intvDeposit);
+        document.title = "Account Managment System";
+    }
+
+    stopBlinkWithdraw() {
+        window.clearInterval(this.intvWithdraw);
+        document.title = "Account Managment System";
     }
 
     CheckWithdraw() {
@@ -130,20 +143,49 @@ export class AppComponent implements OnInit {
             fromDate: null,
             toDate: null
         }
-        this.adminService.add<any>(customer.withdrawList, data).subscribe(res => {
-            if (res.data.length > 0) {
+        this.adminService.add<any>(customer.withdrawList, data).subscribe(resWithdraw => {
+            if (resWithdraw.data.length > 0) {
                 let data = {
                     name: "WithdrawAutoRefersh",
                 }
                 this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(res => {
                     var AutoRefersh = res.data.value == "true" ? true : false;
                     if (AutoRefersh == true) {
-                        this.changeTitile = "Withdraw Request (" + res.data.length + ")";
-                        this.playAudio(2);
-                        this.changeTitile = "Account Managment System";
+                       // this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+                        //this.titleService.setTitle(" ");
+                        //this.intvWithdraw = window.setInterval(function () {
+                        //    document.title = "Withdraw Request (" + resWithdraw.data.length + ")";
+                        //}, 500);
+                        this.blink("Withdraw Request (" + resWithdraw.data.length + ")", 10);
                     }
                 });
+            } else {
+                this.stopBlinkWithdraw();
+                //this.titleService.setTitle("Account Managment System");
             }
         })
+    }
+
+    private timeout;
+
+
+    blink(msg: string, count: number = 5): void {
+        const prevTitle = this.titleService.getTitle();
+
+        const step = () => {
+            const newTitle = this.titleService.getTitle() === prevTitle ?
+                msg : prevTitle;
+
+            this.titleService.setTitle(newTitle);
+
+            if (--count) {
+                this.timeout = setTimeout(step.bind(this), 1000);
+            } else {
+                this.titleService.setTitle(prevTitle);
+            }
+        };
+
+        clearTimeout(this.timeout);
+        step();
     }
 }

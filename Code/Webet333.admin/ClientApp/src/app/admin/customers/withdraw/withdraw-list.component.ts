@@ -158,9 +158,12 @@ export class WithdrawListComponent implements OnInit {
         }
         this.adminService.add<any>(customer.withdrawList, data).subscribe(res => {
             if (res.data.length > 0) {
-                this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
-                if (this.AutoRefersh == true || this.AutoRefersh == "true")
-                    this.playAudio();
+                if (window.location.href.toLowerCase().includes("admin/customers/withdraw-list")) {
+                    this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
+                    if (this.AutoRefersh == true || this.AutoRefersh == "true") {
+                        this.playAudio();
+                    }
+                }
             }
         })
     }
@@ -260,8 +263,8 @@ export class WithdrawListComponent implements OnInit {
     }
 
     setPageData(selectedList, search, fromdate, todate) {
-        this.loadingIndicator = true;
-        this.rows = [];
+        //this.loadingIndicator = true;
+        //this.rows = [];
         let data = {
             status: selectedList,
             keyword: search,
@@ -294,9 +297,9 @@ export class WithdrawListComponent implements OnInit {
                 });
             });
             this.rows = [...this.rows];
-            this.loadingIndicator = false;
+            //this.loadingIndicator = false;
         }, error => {
-            this.loadingIndicator = false;
+            //this.loadingIndicator = false;
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
