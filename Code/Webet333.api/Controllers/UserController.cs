@@ -120,14 +120,15 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Users.UsersBank)]
         public async Task<IActionResult> UsersBank([FromBody]GetByIdRequest request)
         {
-            //if (request == null) return BadResponse("error_empty_request");
-            //if (!ModelState.IsValid) return BadResponse(ModelState);
-            await ValidateUser();
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            string userRole = GetUserRole(User);
             using (var user_help = new UserHelpers(Connection))
             {
-                if (UserEntity.Role != RoleConst.Admin)
-                    return OkResponse(await user_help.GetData(StoredProcConsts.User.GetUsersBank, GetUserId(User), UserEntity.Name));
-                return OkResponse(await user_help.GetData(StoredProcConsts.User.GetUsersBank, Guid.Parse(request.Id), UserEntity.Name));
+                if (userRole != RoleConst.Admin)
+                    return OkResponse(await user_help.GetData(StoredProcConsts.User.GetUsersBank, GetUserId(User), GetUniqueId(User), GetUserRole(User)));
+                return OkResponse(await user_help.GetData(StoredProcConsts.User.GetUsersBank, Guid.Parse(request.Id), GetUniqueId(User), GetUserRole(User)));
             }
         }
 

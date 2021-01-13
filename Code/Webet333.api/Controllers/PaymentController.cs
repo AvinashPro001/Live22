@@ -37,10 +37,9 @@ namespace Webet333.api.Controllers
         [HttpGet(ActionsConst.Payments.DropdownDeposit)]
         public async Task<IActionResult> DropdownDeposit([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
-            await ValidateUser();
             using (var payment_help = new PaymentHelpers(Connection))
             {
-                var walletTypes = await payment_help.DropdownDeposit(BaseUrlConfigsOptions.Value);
+                var walletTypes = await payment_help.DropdownDeposit(BaseUrlConfigsOptions.Value,GetUniqueId(User),GetUserRole(User));
                 return OkResponse(walletTypes);
             }
         }

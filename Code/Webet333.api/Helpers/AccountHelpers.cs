@@ -441,7 +441,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                return await repository.GetDataAsync(StoredProcConsts.Account.GameResetPasswordSelect,new { request.Keyword,request.FromDate,request.ToDate });
+                return await repository.GetDataAsync(StoredProcConsts.Account.GameResetPasswordSelect, new { request.Keyword, request.FromDate, request.ToDate });
             }
         }
 
@@ -605,7 +605,7 @@ namespace Webet333.api.Helpers
                 var URL = $"{GameConst.SMSConst.TrioUrl}api_key={GameConst.SMSConst.TrioApiKey}&action=send&to={MobileNo}&msg={Message}&sender_id={GameConst.SMSConst.TrioSenderId}&content_type=1&mode=shortcode&campaign=";
                 var apiResponse = await GameHelpers.CallThirdPartyApi(URL);
                 if (apiResponse.Length > 3)
-                    return MobileNo + "," + apiResponse.Replace("\n\n","") + "," + "200";
+                    return MobileNo + "," + apiResponse.Replace("\n\n", "") + "," + "200";
 
                 return apiResponse;
             }

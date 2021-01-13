@@ -26,11 +26,11 @@ namespace Webet333.api.Helpers
         #endregion variable
 
         #region Get Wallet Type
-        public async Task<dynamic> DropdownDeposit(BaseUrlConfigs baseUrl, bool Restricted = false)
+        public async Task<dynamic> DropdownDeposit(BaseUrlConfigs baseUrl,string UniqueId,string Role, bool Restricted = false)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result = await repository.GetMultiDataAsync(StoredProcConsts.Payments.WalletTypes, new { Restricted });
+                var result = await repository.GetMultiDataAsync(StoredProcConsts.Payments.WalletTypes, new { Restricted,UniqueId,Role });
                 List<dynamic> bankDetails = result.Read<dynamic>();
                 if (bankDetails != null && bankDetails.Count > 0)
                 {
@@ -40,10 +40,10 @@ namespace Webet333.api.Helpers
                 List<DepositMethod> depositMethods = result.Read<DepositMethod>();
                 depositMethods = depositMethods.Where(x => x.Restricted == false).ToList();
                 var walletTypes = result.Read<dynamic>();
-                List<dynamic> promotions = result.Read<dynamic>();
-                if (promotions != null && promotions.Count > 0)
-                    promotions.ForEach(promotion => promotion.bannerImage = (promotion.bannerImage != null && !string.IsNullOrEmpty(promotion.bannerImage)) ? $"{baseUrl.ImageBase}{baseUrl.PromotionImage}/{promotion.id}{promotion.bannerImage}" : "");
-                return new { bankDetails, depositMethods, walletTypes, promotions };
+                //List<dynamic> promotions = result.Read<dynamic>();
+                //if (promotions != null && promotions.Count > 0)
+                //    promotions.ForEach(promotion => promotion.bannerImage = (promotion.bannerImage != null && !string.IsNullOrEmpty(promotion.bannerImage)) ? $"{baseUrl.ImageBase}{baseUrl.PromotionImage}/{promotion.id}{promotion.bannerImage}" : "");
+                return new { bankDetails, depositMethods, walletTypes };
             }
         }
 

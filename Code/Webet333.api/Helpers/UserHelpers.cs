@@ -83,11 +83,11 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<List<dynamic>> GetData(string sp_name, Guid UserId, string FullName)
+        public async Task<List<dynamic>> GetData(string sp_name, Guid UserId, string UniqueId, string Role)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result = await repository.GetDataAsync(sp_name, new { UserId });
+                var result = await repository.GetDataAsync(sp_name, new { UserId , UniqueId, Role });
                 return result.ToList();
             }
         }
