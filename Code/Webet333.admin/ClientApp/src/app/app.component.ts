@@ -41,8 +41,6 @@ export class AppComponent implements OnInit {
     constructor(public settings: SettingsService, private spinner: NgxSpinnerService, private toasterService: ToasterService, private adminService: AdminService, private titleService: Title) { }
 
     ngOnInit() {
-        //this.hubConnection();
-
         $(document).on('click', '[href="#"]', e => e.preventDefault());
         this.spinner.show();
         setTimeout(() => {
@@ -52,7 +50,7 @@ export class AppComponent implements OnInit {
         setInterval(() => {
             this.CheckDeposit();
             this.CheckWithdraw();
-        },5000)
+        }, 5000)
     }
 
     hubConnection() {
@@ -92,8 +90,8 @@ export class AppComponent implements OnInit {
         audio.play();
     }
 
-    intvDeposit: any;
-    intvWithdraw: any;
+    depositCount: Number = 0;
+    withdrawCount: Number = 0;
 
     CheckDeposit() {
         let data = {
@@ -103,37 +101,50 @@ export class AppComponent implements OnInit {
             toDate: null
         }
         this.adminService.add<any>(customer.depositList, data).subscribe(resDeposit => {
+            this.depositCount = resDeposit.data.length;
             if (resDeposit.data.length > 0) {
                 let data = {
                     name: "DepositAutoRefersh",
                 }
-                this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(res => {
+                this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(async res => {
                     var AutoRefersh = res.data.value == "true" ? true : false;
                     if (AutoRefersh == true) {
-                        this.blink("Deposit Request (" + resDeposit.data.length + ")", 10);
-                        //this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
-                       // this.titleService.setTitle(" ");
-                        //this.intvDeposit = window.setInterval(function () {
-                        //    document.title = this.titleService.getTitle() != "" ? this.titleService.setTitle(""): "Deposit Request (" + resDeposit.data.length + ")";
-                        //}, 1000);
+                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
                     }
                 });
             }
             else {
-                //this.stopBlinkDeposit();
-                this.titleService.setTitle("Account Managment System");
+                if (this.withdrawCount == 0)
+                    this.titleService.setTitle("Account Managment System");
             }
         })
-    }
-
-    stopBlinkDeposit() {
-        window.clearInterval(this.intvDeposit);
-        document.title = "Account Managment System";
-    }
-
-    stopBlinkWithdraw() {
-        window.clearInterval(this.intvWithdraw);
-        document.title = "Account Managment System";
     }
 
     CheckWithdraw() {
@@ -144,48 +155,54 @@ export class AppComponent implements OnInit {
             toDate: null
         }
         this.adminService.add<any>(customer.withdrawList, data).subscribe(resWithdraw => {
+            this.withdrawCount = resWithdraw.data.length;
             if (resWithdraw.data.length > 0) {
                 let data = {
                     name: "WithdrawAutoRefersh",
                 }
-                this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(res => {
+                this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(async res => {
                     var AutoRefersh = res.data.value == "true" ? true : false;
                     if (AutoRefersh == true) {
-                       // this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
-                        //this.titleService.setTitle(" ");
-                        //this.intvWithdraw = window.setInterval(function () {
-                        //    document.title = "Withdraw Request (" + resWithdraw.data.length + ")";
-                        //}, 500);
-                        this.blink("Withdraw Request (" + resWithdraw.data.length + ")", 10);
+                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+                        
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
                     }
                 });
             } else {
-                this.stopBlinkWithdraw();
-                //this.titleService.setTitle("Account Managment System");
+                if (this.depositCount == 0)
+                 this.titleService.setTitle("Account Managment System");
             }
         })
     }
 
-    private timeout;
-
-
-    blink(msg: string, count: number = 5): void {
-        const prevTitle = this.titleService.getTitle();
-
-        const step = () => {
-            const newTitle = this.titleService.getTitle() === prevTitle ?
-                msg : prevTitle;
-
-            this.titleService.setTitle(newTitle);
-
-            if (--count) {
-                this.timeout = setTimeout(step.bind(this), 1000);
-            } else {
-                this.titleService.setTitle(prevTitle);
-            }
-        };
-
-        clearTimeout(this.timeout);
-        step();
+    async delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
+
 }
