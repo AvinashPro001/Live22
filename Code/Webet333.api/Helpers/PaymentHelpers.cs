@@ -47,21 +47,21 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<dynamic> DropdownBonus(BaseUrlConfigs baseUrl, bool Restricted = false)
+        public async Task<dynamic> DropdownBonus(BaseUrlConfigs baseUrl, string UniqueId, string Role, bool Restricted = false)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result = await repository.GetMultiDataAsync(StoredProcConsts.Payments.WalletTypes, new { Restricted });
+                var result = await repository.GetMultiDataAsync(StoredProcConsts.Payments.WalletTypes, new { Restricted, UniqueId, Role });
                 List<dynamic> bankDetails = result.Read<dynamic>();
                 if (bankDetails != null && bankDetails.Count > 0)
                     bankDetails.ForEach(bank => bank.bankLogo = (bank.bankLogo != null && !string.IsNullOrEmpty(bank.bankLogo)) ? $"{baseUrl.ImageBase}{baseUrl.BankImage}/{bank.id}{bank.bankLogo}" : "");
                 List<DepositMethod> depositMethods = result.Read<DepositMethod>();
                 depositMethods = depositMethods.Where(x => x.Restricted == true).ToList();
                 var walletTypes = result.Read<dynamic>();
-                List<dynamic> promotions = result.Read<dynamic>();
-                if (promotions != null && promotions.Count > 0)
-                    promotions.ForEach(promotion => promotion.bannerImage = (promotion.bannerImage != null && !string.IsNullOrEmpty(promotion.bannerImage)) ? $"{baseUrl.ImageBase}{baseUrl.PromotionImage}/{promotion.id}{promotion.bannerImage}" : "");
-                return new { bankDetails, depositMethods, walletTypes, promotions };
+                //List<dynamic> promotions = result.Read<dynamic>();
+                //if (promotions != null && promotions.Count > 0)
+                //    promotions.ForEach(promotion => promotion.bannerImage = (promotion.bannerImage != null && !string.IsNullOrEmpty(promotion.bannerImage)) ? $"{baseUrl.ImageBase}{baseUrl.PromotionImage}/{promotion.id}{promotion.bannerImage}" : "");
+                return new { bankDetails, depositMethods, walletTypes };
             }
         }
 
