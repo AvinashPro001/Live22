@@ -619,11 +619,16 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Account.LastLoginTimeUpdate)]
         public async Task<IActionResult> LastLoginTimeUpdate([FromBody] GetByIdRequest request)
         {
-            using (var account_help = new AccountHelpers(Connection))
+            var userId = GetUserId(User).ToString();
+            Queue.Enqueue(async () =>
             {
-                await account_help.UserLastLoginTime(GetUserId(User).ToString());
-                return OkResponse();
-            }
+                using (var account_help = new AccountHelpers(Connection))
+                {
+                    await account_help.UserLastLoginTime(userId);
+                }
+            });
+
+            return OkResponse();
         }
 
         #endregion 

@@ -461,6 +461,7 @@ function filter_array(test_array) {
 var depositModel;
 var onlinePayment;
 async function Deposit(online) {
+    LoaderShow();
     var amountId;
     if (online)
         amountId = "#online_txt_amount";
@@ -492,22 +493,22 @@ async function Deposit(online) {
             }
             if (!online) {
                 if (model.bankId === null || model.bankId === "" || model.bankId === undefined) {
-                    
+                    LoaderHide();
                     return ShowError(ChangeErroMessage("plz_selet_bnk_error"));
                 }
 
                 if (model.depositeTime === "NaN") {
-                    
+                    LoaderHide();
                     return ShowError(ChangeErroMessage("select_date_time_error"));
                 }
 
                 if (model.referenceNo === "") {
-                    
+                    LoaderHide();
                     return ShowError(ChangeErroMessage("refer_no_error"));
                 }
 
                 if (filter_array(TableData).length === 0) {
-                    
+                    LoaderHide();
                     return ShowError(ChangeErroMessage("receipt_required_error"));
                 }
             }
@@ -532,7 +533,7 @@ async function Deposit(online) {
                         }
                         else {
                             if (walletData.data.Staus != null && walletData.data.CheckPromotionRemind == true) {
-                                
+                                LoaderHide();
                                 return ShowError(ChangeErroMessage("promot_active_error"));
                             }
 
@@ -550,12 +551,12 @@ async function Deposit(online) {
                         }
                     }
                     else {
-                        
+                        LoaderHide();
                         return ShowError(ChangeErroMessage("game_in_maintenance_new_promotion"));
                     }
                 }
                 else {
-                    
+                    LoaderHide();
                     return ShowError(ChangeErroMessage("pending_sports_deposit_error"));
                 }
             }
@@ -564,12 +565,12 @@ async function Deposit(online) {
                 }
                 var walletData = await PostMethodWithParameter(apiEndPoints.DepositCheckWithoutPromotion, data);
                 if (walletData.data.CheckPopupWithoutPromotion == true) {
-                    
+                    LoaderHide();
                     depositModel = model;
 
                 }
                 else {
-                    
+                    LoaderHide();
                     depositModel = model;
                     $("#promotionNavigate").modal();
                     return 0;
@@ -592,7 +593,7 @@ async function Deposit(online) {
         else {
             ShowError(ChangeErroMessage("amount_greater_zero_error"));
         }
-        
+        LoaderHide();
     }
     else {
         ShowError(ChangeErroMessage("min_max_amount_error"));
@@ -604,7 +605,7 @@ async function PromotionApplyInsert() {
 }
 
 async function DepositAfterPromotion() {
-    
+    LoaderShow();
     if (onlinePayment) {
         var res = await PostMethod(apiEndPoints.onlinePayment, depositModel);
         if (res !== null && res !== undefined) {
@@ -625,12 +626,13 @@ async function DepositAfterPromotion() {
             }, 2000);
         }
     }
-    
+    LoaderHide();
 }
 //#endregion Deposit 
 
 //#region Withdrawal
 async function Withdrawal() {
+    //LoaderShow();
     if ($('#txt_withdrawalAmount').val() <= 30000 && $('#txt_withdrawalAmount').val() >= 10) {
         
         //await regisrationGame();
@@ -644,21 +646,21 @@ async function Withdrawal() {
             };
 
             if (model.bankId === "" || model.bankId === null || model.bankId === undefined) {
-                
+                //LoaderHide();
                 return ShowError(ChangeErroMessage("bnk_name_required_error"));
             }
             if (model.amount === "") {
-                
+                //LoaderHide();
                 return ShowError(ChangeErroMessage("amt_req_error"));
             }
 
             if (model.accountNumber === "") {
-                
+                //LoaderHide();
                 return ShowError(ChangeErroMessage("acc_no_req_error"));
             }
 
             if (model.amount < 0) {
-                
+                //LoaderHide();
                 return ShowError(ChangeErroMessage("amount_greater_zero_error"));
             }
 
@@ -691,11 +693,13 @@ async function Withdrawal() {
     else {
         ShowError(ChangeErroMessage("min_max_amount_error"));
     }
+    //LoaderHide();
 }
 //#endregion
 
 //#region TransferAmount
 async function Checkbalance() {
+    LoaderShow();
     if ($('#ddl_transferFromWallet').val() != "") {
         if ($('#ddl_transferToWallet').val() != "") {
             if ($('#txt_transferAmount').val() >= 1) {
@@ -715,10 +719,10 @@ async function Checkbalance() {
     else {
         ShowError(ChangeErroMessage("select_from_wallet_error"));
     }
+    LoaderHide();
 }
 
 async function TransferAmount() {
-    
     // Game register
     //await regisrationGame();
     var modelBalance = {};

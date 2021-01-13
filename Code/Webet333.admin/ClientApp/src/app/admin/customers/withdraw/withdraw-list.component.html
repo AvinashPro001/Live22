@@ -61,7 +61,7 @@
             </div>
 
             <ngx-datatable #table class='bootstrap no-detail-row ' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
-                           [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator" [sortType]="'multi'" [headerHeight]="50">
+                           [rowHeight]="'auto'" [limit]="7"  [sortType]="'multi'" [headerHeight]="50">
                 <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
                              ngx-datatable-row-detail-template>
                     <label>

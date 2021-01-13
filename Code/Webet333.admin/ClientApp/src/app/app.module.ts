@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule ,Title} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
@@ -89,7 +89,8 @@ export function createTranslateLoader(http: HttpClient) {
         CommonService,
         ToasterService,
         CookieService,
-        DatePipe
+        DatePipe,
+        Title
     ],
     bootstrap: [AppComponent]
 })
