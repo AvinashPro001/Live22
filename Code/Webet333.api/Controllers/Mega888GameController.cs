@@ -43,7 +43,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Mega888Game.Mega888Register)]
-        public async Task<IActionResult> Mega888Register([FromBody]GetByIdRequest request)
+        public async Task<IActionResult> Mega888Register([FromBody] GetByIdRequest request)
         {
             var Role = GetUserRole(User);
 
@@ -62,7 +62,7 @@ namespace Webet333.api.Controllers
             }
 
             var apiResponse = await Mega888GameHelpers.CallRegisterAPI(username);
-            var result=JsonConvert.DeserializeObject(apiResponse);
+            var result = JsonConvert.DeserializeObject(apiResponse);
             string error = Convert.ToString(result.error);
 
             if (error != "")
@@ -85,7 +85,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Mega888Game.Mega888DepositWithdraw)]
-        public async Task<IActionResult> WithdrawDepsoit([FromBody]DepsoitWihtdrawRequest request)
+        public async Task<IActionResult> WithdrawDepsoit([FromBody] DepsoitWihtdrawRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
             if (request.Amount == 0) return BadResponse("error_invaild_amount");
@@ -106,7 +106,7 @@ namespace Webet333.api.Controllers
             if (request.Method == 1)
                 request.Amount = -Math.Abs(request.Amount);
 
-            var response =await Mega888GameHelpers.CallWithdrawDepositAPI(user.Mega888LoginId, request.Amount);
+            var response = await Mega888GameHelpers.CallWithdrawDepositAPI(user.Mega888LoginId, request.Amount);
 
             //var error = Convert.ToString(response.error);
 
@@ -120,6 +120,19 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Mega888 Depsoit Withdraw Amount
+
+        #region Mega888 game Register
+
+
+        [HttpPost("bettingdetails")]
+        public async Task<IActionResult> Mega888details()
+        {
+            var apiResponse = await Mega888GameHelpers.CallgetBettingdetailsAPI();
+            return OkResponse(JsonConvert.DeserializeObject(apiResponse));
+
+        }
+
+        #endregion Mega888 game Register
 
         #region Mega888 Game Login
 
@@ -194,9 +207,9 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Mega888Game.Mega888Logout)]
-        public async Task<IActionResult> Mega888Logout([FromBody]GetByIdRequest request)
+        public async Task<IActionResult> Mega888Logout([FromBody] GetByIdRequest request)
         {
-            
+
 
             if (!ModelState.IsValid) return BadResponse(ModelState);
 

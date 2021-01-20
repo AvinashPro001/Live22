@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 //#region Users Bank Details
 async function UserBankDetails() {
-    
+
     var model = {
     };
     var res = await PostMethod(apiEndPoints.userBankDetail, model);
@@ -24,7 +24,7 @@ async function UserBankDetails() {
         }
     }
     WithdrawUsernameSet();
-    
+
 }
 //#endregion Users Bank Details
 
@@ -42,6 +42,8 @@ async function WithdrawUsernameSet() {
 var depositMethodId, UserBankName, SelectBankWithdrawl, SelectBankDeposit, UserAccountNumber, UserAccountName, SelectPromotion = "";
 
 TableData = new Array();
+
+var allWalletList;
 
 async function BankList() {
 
@@ -67,6 +69,7 @@ async function BankList() {
             });
 
         var wallet = res.data.walletTypes;
+        allWalletList = res.data.walletTypes;
         $.each(wallet, function () {
             $("#ddl_transferFromWallet").append($("<option />").val(this.id).text(this.walletType));
         });
@@ -181,11 +184,11 @@ async function CheckWithdrawAmountList() {
 //#region GetProfile
 var User_BankName;
 async function GetProfile() {
-    
+
     var res = await GetMethod(apiEndPoints.getProfile);
     User_BankName = res.data.name;;
     SetLocalStorage('918Username', res.data.username918);
-    
+
 }
 //#endregion
 
@@ -469,7 +472,7 @@ async function Deposit(online) {
         amountId = "#txt_amount";
     onlinePayment = online;
     if ($(amountId).val() <= 30000 && $(amountId).val() >= 10) {
-        
+
         if ($(amountId).val() > 0) {
             var radioValue = $("input[name='promotion']:checked").val();
             var model;
@@ -634,7 +637,7 @@ async function DepositAfterPromotion() {
 async function Withdrawal() {
     //LoaderShow();
     if ($('#txt_withdrawalAmount').val() <= 30000 && $('#txt_withdrawalAmount').val() >= 10) {
-        
+
         //await regisrationGame();
         if ($('#txt_withdrawalAmount').val() > 0) {
             var model = {
@@ -688,7 +691,7 @@ async function Withdrawal() {
         else {
             ShowError(ChangeErroMessage("amount_greater_zero_error"));
         }
-        
+
     }
     else {
         ShowError(ChangeErroMessage("min_max_amount_error"));
@@ -703,10 +706,10 @@ async function Checkbalance() {
     if ($('#ddl_transferFromWallet').val() != "") {
         if ($('#ddl_transferToWallet').val() != "") {
             if ($('#txt_transferAmount').val() >= 1) {
-                
+
                 //WalletBalance();
                 await TransferAmount();
-                
+
             }
             else {
                 ShowError(ChangeErroMessage("min1_max1000_amount_error"));
@@ -762,7 +765,7 @@ async function TransferAmount() {
     else {
         ShowError(ChangeErroMessage("amount_greater_zero_error"));
     }
-    
+
 }
 
 function generate(n) {
@@ -790,7 +793,7 @@ function generateGuid() {
 
 //#region DepositHistory
 async function DepositHistory() {
-    
+
     var model = {};
     var res = await PostMethod(apiEndPoints.depositHistory, model);
     var result = res.data;
@@ -812,13 +815,13 @@ async function DepositHistory() {
         depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
     }
     getLanguage();
-    
+
 }
 //#endregion
 
 //#region WithdrawHistory
 async function WithdrawHistory() {
-    
+
     var model = {};
     var res = await PostMethod(apiEndPoints.withdrawHistory, model);
     var result = res.data;
@@ -840,13 +843,13 @@ async function WithdrawHistory() {
         withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_withdraw"></span></p></div></div>'
     }
     getLanguage();
-    
+
 }
 //#endregion
 
 //#region TransferHistory
 async function TransferHistory() {
-    
+
     var model = {};
     var res = await PostMethod(apiEndPoints.transferHistory, model);
     var result = res.data;
@@ -868,13 +871,13 @@ async function TransferHistory() {
         transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_transfer"></span></p></div></div>'
     }
     getLanguage();
-    
+
 }
 //#endregion
 
 //#region PromotionHistory
 async function PromotionHistory() {
-    
+
     var model = {};
     var res = await PostMethodWithParameter(apiEndPoints.promotionHistory, model);
     var result = res.data;
@@ -902,13 +905,13 @@ async function PromotionHistory() {
 
     }
     get();
-    
+
 }
 //#endregion
 
 //#region StatementHistory
 async function StatementHistory() {
-    
+
     var model = {};
     var res = await PostMethodWithParameter(apiEndPoints.transactionHistory, model);
     var result = res.data;
@@ -925,13 +928,13 @@ async function StatementHistory() {
 
     }
     get();
-    
+
 }
 //#endregion
 
 //#region RebateHistory
 async function RebateHistory() {
-    
+
     var model = {};
     var res = await PostMethodWithParameter(apiEndPoints.rebateHistory, model);
     var resultRebateLoseRebate = res.data.winloseRebate;
@@ -960,29 +963,30 @@ async function RebateHistory() {
     }
 
     get();
-    
+
 }
 //#endregion
 
+var userbalance;
 //#region TransferValidation
 async function select() {
-    
-    await TransferValidation();
     var fromSel = document.getElementById("ddl_transferFromWallet");
+    var fromName = $("#ddl_transferFromWallet option:selected").text();
+    await TransferValidation(fromName);
     $('#ddl_transferToWallet').html('');
     if (fromSel.value !== null) {
-        var res = await GetMethod(apiEndPoints.depositDdl);
-        var wallet = res.data.walletTypes;
+        //var res = await GetMethod(apiEndPoints.depositDdl);
+        //var wallet = res.data.walletTypes;
         var setAmount = false;
         var modelBalance = {};
-        var fromSel1 = $('#ddl_transferFromWallet').val();
-        var resBalance = await PostMethod(apiEndPoints.walletBalance, modelBalance);
-        var valueFromWalletName = resBalance.data.filter(function (walletName) { return walletName.walletId === fromSel1; });
+        var fromSel1 = fromSel.value;
+        //var resBalance = await PostMethod(apiEndPoints.walletBalance, modelBalance);
+        var valueFromWalletName = userbalance.data.filter(function (walletName) { return walletName.walletId === fromSel1; });
         var nameFromWalletAmount = valueFromWalletName[0].amount;
         document.getElementsByName('txt_transferAmount')[0].placeholder = 'Max Limit:' + nameFromWalletAmount;
         $('#ddl_transferToWallet option:not(:first)').remove();
         $("#ddl_transferToWallet").append('<option value="" selected>-- Select --</option>');
-        $.each(wallet, function () {
+        $.each(allWalletList, function () {
             if (this.id !== fromSel.value) {
                 $("#ddl_transferToWallet").append($("<option />").val(this.id).text(this.walletType));
             }
@@ -997,26 +1001,26 @@ async function select() {
     }
 }
 
-async function TransferValidation() {
-    await WalletBalanceMaxTransfer();
+async function TransferValidation(walletName) {
+    WalletBalanceMaxTransfer(walletName);
     var fromWallet = $('#ddl_transferFromWallet').val();
     if (fromWallet !== null && fromWallet !== "") {
         //await WalletBalance();
         var modelBalance = {};
-        var resBalance = await PostMethod(apiEndPoints.walletBalance, modelBalance);
+        userbalance = await PostMethod(apiEndPoints.walletBalance, modelBalance);
         var fromSel = $('#ddl_transferFromWallet').val();
         if (fromSel === null || fromSel === undefined) {
             ShowError(ChangeErroMessage("select_from_wallet_error"));
         }
-        var valueFromWalletName = resBalance.data.filter(function (walletName) { return walletName.walletId === fromSel; });
+        var valueFromWalletName = userbalance.data.filter(function (walletName) { return walletName.walletId === fromSel; });
         var nameFromWalletAmount = valueFromWalletName[0].amount;
         document.getElementById('txt_transferAmount').value = nameFromWalletAmount;
         document.getElementById('walletBalance').innerHTML = nameFromWalletAmount;
-        
+
     }
     else {
         ShowError(ChangeErroMessage("select_from_wallet_error"));
-        
+
     }
 }
 //#endregion
@@ -1035,7 +1039,7 @@ async function TransferInAllWallet(GameWalletName) {
         GameName = walletNameTransferInWallet;
     else
         GameName = GameWalletName
-    
+
     await WalletBalance();
     let model = {
         walletName: GameName

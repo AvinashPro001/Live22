@@ -2,7 +2,7 @@ import { link } from "fs";
 import { text } from "@angular/core/src/render3/instructions";
 
 const CustomerDatabase = {
-    text: 'Customer Database',
+    text: 'Main Menu',
     icon: 'fa fa-angle-right',
     submenu: [
         {
@@ -11,7 +11,7 @@ const CustomerDatabase = {
             icon: 'fa fa-dashboard'
         },
         {
-            text: 'Customers',
+            text: 'Customer List',
             link: 'customers/list',
             icon: 'fa fa-user'
         },
@@ -137,18 +137,6 @@ const Settings = {
         }
     ]
 }
-
-//const ManagerTab = {
-//    text: 'Managers Tab',
-//    icon: 'fa fa-angle-right',
-//    submenu: [
-//        {
-//            text: 'Tracking',
-//            link: 'customers/tracking-list',
-//            icon: 'fa fa-clock-o'
-//        },
-//    ]
-//}
 
 const Transactions = {
     text: 'Transactions',
@@ -279,30 +267,25 @@ const Report = {
             icon: 'fa fa-stack-exchange'
         },
         {
-            text: 'Payment Statics',
-            icon: 'fa fa-angle-right',
-            submenu: [
-                {
-                    text: 'Bank Withdraw',
-                    link: 'customers/bank-withdraw',
-                    icon: 'fa fa-info'
-                },
-                {
-                    text: 'Bank Depsoit',
-                    link: 'customers/bank-deposit',
-                    icon: 'fa fa-info'
-                },
-            ]
+            text: 'Bank Withdraw',
+            link: 'customers/bank-withdraw',
+            icon: 'fa fa-info'
         },
+        {
+            text: 'Bank Depsoit',
+            link: 'customers/bank-deposit',
+            icon: 'fa fa-info'
+        },
+     
        
     ]
 }
 
 const menu = [
     CustomerDatabase,
-    Settings,
     Transactions,
-    Report
+    Report,
+    Settings
 ]
 
 export { menu }

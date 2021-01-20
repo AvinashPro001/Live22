@@ -11,9 +11,9 @@
         <div class="card-body">
             <div class="row mb-4">
                 <div class="col-lg-2">
-                    <input type='text' class="form-control" (keyup)="searchHandler($event)" placeholder="Search" />
+                    <input type='text' id="searchText" class="form-control" placeholder="Search" />
                 </div>
-                <div class="col-lg-4"></div>
+                <div class="col-lg-4"> <button (click)="searchHandler()" class="btn btn-success">Search</button></div>
             </div>
             <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
                            [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">

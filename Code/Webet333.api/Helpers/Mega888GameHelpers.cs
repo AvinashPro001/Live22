@@ -67,6 +67,31 @@ namespace Webet333.api.Helpers
 
         #region Call Withdraw Deposit API of Mega888
 
+        internal static async Task<dynamic> CallgetBettingdetailsAPI()
+        {
+            var random = Guid.NewGuid().ToString();
+            var StartTime = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd HH:mm:ss");
+            var EndTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            var bizId = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+            var url = $"{GameConst.Mega888.BaseUrl}{GameConst.Mega888.DepositWithdraw}"
+                       + $"?random={random}"
+                       + $"&sn={GameConst.Mega888.SN}"
+                       + $"&loginId=13501185858"
+                       + $"&method=open.mega.video.order.page"
+                       + $"&startTime={StartTime}"
+                       + $"&endTime={EndTime}"
+                       + $"&pageIndex=1"
+                       + $"&endTime=100"
+                       + $"&digest={SecurityHelpers.MD5EncrptText(random + GameConst.Mega888.SN + "13501185858" + GameConst.Mega888.SecretKey)}";
+
+            return JsonConvert.DeserializeObject<dynamic>(await GameHelpers.CallThirdPartyApi(url, null));
+        }
+
+        #endregion
+
+        #region Call Withdraw Deposit API of Mega888
+
         internal static async Task<dynamic> CallLogoutAPI(string Mega888LoginId)
         {
             var random = Guid.NewGuid().ToString();

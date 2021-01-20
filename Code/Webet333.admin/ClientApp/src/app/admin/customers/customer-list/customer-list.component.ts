@@ -44,22 +44,22 @@ export class CustomerListComponent implements OnInit {
         private router: Router,
         private confirmationDialogService: ConfirmationDialogService,
         private modalService: NgbModal,
-    ) { 
+    ) {
     }
 
     ngOnInit() {
         this.setColumn();
-        this.setPageData("");
+        // this.setPageData("");
     }
 
     setColumn() {
         this.columns = [
             { prop: 'No', sortable: false },
             { prop: 'Username', sortable: false },
-            { prop: 'FullName' , sortable: false },
-            { prop: 'ICNumber' , sortable: false },
-            { prop: 'MobileNo' , sortable: false },
-            { prop: 'BankName' , sortable: false },
+            { prop: 'FullName', sortable: false },
+            { prop: 'ICNumber', sortable: false },
+            { prop: 'MobileNo', sortable: false },
+            { prop: 'BankName', sortable: false },
             { prop: 'BankAccount', sortable: false },
             { prop: 'RegisterDate', sortable: false },
             { prop: 'Action', cellTemplate: this.status, sortable: true, width: 250 }
@@ -91,6 +91,7 @@ export class CustomerListComponent implements OnInit {
                 this.loadingIndicator = false;
             })
         }, error => {
+            this.rows = [];
             this.loadingIndicator = false;
             this.toasterService.pop('error', 'Error', error.error.message);
         });
@@ -176,27 +177,13 @@ export class CustomerListComponent implements OnInit {
     }
 
 
-    searchHandler(event) {
-        let data;
-        
-        if (event.target.value.length >= 3) {
-            if (event.target.value) {
-                data = {
-                    SearchParam: event.target.value,
-                }
-                this.searchString = event.target.value,
-                    this.setPageData(data.SearchParam)
-            } else {
-                data = {
-                    SearchParam: ""
-                }
-                this.setPageData(data.SearchParam)
+    searchHandler() {
+        var parameter = ((document.getElementById("searchText") as HTMLInputElement).value)
+        if (parameter != "") {
+            var data = {
+                SearchParam: parameter,
             }
-        }
-        if (event.target.value.length == 0) {
-            data = {
-                SearchParam: ""
-            }
+
             this.setPageData(data.SearchParam)
         }
     }
@@ -206,7 +193,7 @@ export class CustomerListComponent implements OnInit {
         //this.openWindowCustomClass(content);
 
         localStorage.setItem('id', JSON.stringify(row));
-        window.open('admin/customers/users-details','_blank');
+        window.open('admin/customers/users-details', '_blank');
     }
 
     openWindowCustomClass(content) {
