@@ -1197,6 +1197,16 @@ namespace Webet333.api.Helpers
             }
         }
 
+
+        internal async Task<dynamic> GetSupportGameOfUser(string userId)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Game.UserPromotionGameSupportDetails, new { userId });
+                return result.ToList();
+            }
+        }
+
         internal async Task<List<UsersResponseGameRegisterResponse>> PragmaticNotRegisterUsers()
         {
             using (var repository = new DapperRepository<UsersResponseGameRegisterResponse>(Connection))

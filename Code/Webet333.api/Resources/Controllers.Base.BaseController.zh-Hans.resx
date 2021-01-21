@@ -264,6 +264,9 @@
   <data name="error_password_required" xml:space="preserve">
     <value>密码为必填项。密码长度必须为6个字符</value>
   </data>
+  <data name="error_promotion_not_supported_game" xml:space="preserve">
+    <value>您的优惠不支持此游戏</value>
+  </data>
   <data name="error_promotion_withdraw_already_claim" xml:space="preserve">
     <value>您无法提款，因为您之前曾领取过欢迎奖金。请联系我们的实时支持</value>
   </data>

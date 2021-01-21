@@ -301,6 +301,8 @@
 
             public const string DailyTurnover = "Game/DailyTurnover";
 
+            public const string UserGameSupport = "Game/User/GameSupport";
+
             public const string GlobalParameter = "Game/GlobalParameters";
 
             public const string GetBettingLimit = "Game/GetBettingLimit";
@@ -549,6 +551,8 @@
             public const string Mega888Register = "mega888/register";
 
             public const string Mega888DepositWithdraw = "mega888/deposit_withdraw";
+
+            public const string Mega888UsersWin = "mega888/users/totalwin";
 
             public const string Mega888Login = "mega888/login";
 

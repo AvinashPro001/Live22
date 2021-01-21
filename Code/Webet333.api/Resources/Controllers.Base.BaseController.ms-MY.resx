@@ -264,6 +264,9 @@
   <data name="error_password_required" xml:space="preserve">
     <value>Kata laluan diperlukan. Kata laluan anda hendaklah sekurang-kurangnya 6 perkataan.</value>
   </data>
+  <data name="error_promotion_not_supported_game" xml:space="preserve">
+    <value>Promosi anda tidak boleh memainkan game tersebut</value>
+  </data>
   <data name="error_promotion_withdraw_already_claim" xml:space="preserve">
     <value>Anda tidak dapat menarik balik kerana anda telah mendakwa bonus selamat datang sebelum ini. Sila hubungi sokongan langsung kami</value>
   </data>

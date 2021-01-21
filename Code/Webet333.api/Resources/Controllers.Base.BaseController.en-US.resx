@@ -264,6 +264,9 @@
   <data name="error_password_required" xml:space="preserve">
     <value>The password field is required. The Password must be at least 6 character long</value>
   </data>
+  <data name="error_promotion_not_supported_game" xml:space="preserve">
+    <value>Your applied promotion is not supported this game.</value>
+  </data>
   <data name="error_promotion_withdraw_already_claim" xml:space="preserve">
     <value>You are unable to withdraw as you had claim the welcome bonus before. Please contact our live support</value>
   </data>

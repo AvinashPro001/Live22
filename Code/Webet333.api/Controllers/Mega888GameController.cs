@@ -17,6 +17,7 @@ using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Game.Mega888;
 using Webet333.models.Response.Account;
+using Webet333.models.Response.Game;
 using Webet333.models.Response.Game.Mega888;
 
 namespace Webet333.api.Controllers
@@ -121,18 +122,36 @@ namespace Webet333.api.Controllers
 
         #endregion Mega888 Depsoit Withdraw Amount
 
-        #region Mega888 game Register
+        #region Mega888 User Betting Details Total Win
 
-
-        [HttpPost("bettingdetails")]
-        public async Task<IActionResult> Mega888details()
+        [HttpPost(ActionsConst.Mega888Game.Mega888UsersWin)]
+        public async Task<IActionResult> UserTotalBettingWin([FromBody] MegaUserBettingWinoverRequest request)
         {
-            var apiResponse = await Mega888GameHelpers.CallgetBettingdetailsAPI();
-            return OkResponse(JsonConvert.DeserializeObject(apiResponse));
+            if (!ModelState.IsValid) return BadResponse(ModelState);
 
+
+            var date = DateTime.UtcNow.AddHours(8);
+            var StartTime = request.StartTime.ToString("yyyy-MM-dd HH:mm:ss");
+            var EndTime = date.ToString("yyyy-MM-dd HH:mm:ss");
+            var random = Guid.NewGuid().ToString();
+            var mega888URL = $"{GameConst.Mega888.BaseUrl}{GameConst.Mega888.TotalBettingReport}" +
+                             $"?random={random}"
+                             + $"&digest={SecurityHelpers.MD5EncrptText(random + GameConst.Mega888.SN +GameConst.Mega888.AgentLoginId + GameConst.Mega888.SecretKey)}"
+                             + $"&sn={GameConst.Mega888.SN}"
+                             + $"&agentLoginId={GameConst.Mega888.AgentLoginId}"
+                             + $"&type=1"
+                             + $"&method={GameConst.Mega888.TotalBettingReport}"
+                             + $"&startTime={StartTime}"
+                             + $"&endTime={EndTime}";
+
+            Mega888ServicesResponse mega888Response = JsonConvert.DeserializeObject<Mega888ServicesResponse>(await GameHelpers.CallThirdPartyApi(mega888URL, null));
+
+            var response = mega888Response.result.Where(x => x.loginId == request.Mega888Username);
+
+            return OkResponse(response);
         }
 
-        #endregion Mega888 game Register
+        #endregion Mega888 User Betting Details Total Win
 
         #region Mega888 Game Login
 

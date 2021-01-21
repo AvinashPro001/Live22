@@ -843,6 +843,7 @@ function generateGuid() {
 async function SelectWallet() {
     $('.values').html('');
     $('.img_load').css('display', 'block');
+    CheckSupportGame();
     await reloadbalance();
 }
 //#endregion SelectWallet
@@ -1502,7 +1503,6 @@ async function VerifiedOTP() {
 
 //#endregion 
 
-
 async function CheckMainteance() {
     var res = await GetMethodWithReturn(apiEndPoints.VaderPayMainteanceSelect);
     if (res.data.vaderPay.value == "true") {
@@ -1510,5 +1510,44 @@ async function CheckMainteance() {
         document.getElementById("vaderpaySection").style.display = "none";
         document.getElementById("vaderpayPromotionSection").style.display = "none";
 
+    }
+}
+
+async function CheckSupportGame() {
+    let model = {}
+    var res = await PostMethod(apiEndPoints.GetGameSupport, model);
+
+    if (res.data.length > 0) {
+        document.getElementById("kiss918allin").disabled = !res.data[0].Is918Kiss ? true : false;
+        document.getElementById("agallin").disabled = !res.data[0].IsAG ? true : false;
+        document.getElementById("allbetallin").disabled = !res.data[0].IsAllBet ? true : false;
+        document.getElementById("dgallin").disabled = !res.data[0].IsDG ? true : false;
+        document.getElementById("jokerallin").disabled = !res.data[0].IsJoker ? true : false;
+        document.getElementById("m8allin").disabled = !res.data[0].IsM8 ? true : false;
+        document.getElementById("maxbetallin").disabled = !res.data[0].IsMaxbet ? true : false;
+        document.getElementById("mega888allin").disabled = !res.data[0].IsMega888 ? true : false;
+        document.getElementById("playtechallin").disabled = !res.data[0].IsPlaytech ? true : false;
+        document.getElementById("pragmaticallin").disabled = !res.data[0].IsPragmatic ? true : false;
+        document.getElementById("pussy888allin").disabled = !res.data[0].IsPussy888 ? true : false;
+        document.getElementById("saallin").disabled = !res.data[0].IsSA ? true : false;
+        document.getElementById("sexyallin").disabled = !res.data[0].IsSexyBaccarat ? true : false;
+        document.getElementById("wmallin").disabled = !res.data[0].IsWM ? true : false;
+    }
+    else {
+        document.getElementById("kiss918allin").disabled = false;
+        document.getElementById("agallin").disabled = false;
+        document.getElementById("allbetallin").disabled = false;
+        document.getElementById("dgallin").disabled = false;
+        document.getElementById("jokerallin").disabled = false;
+        document.getElementById("m8allin").disabled = false;
+        document.getElementById("maxbetallin").disabled = false;
+        document.getElementById("mega888allin").disabled = false;
+        document.getElementById("playtechallin").disabled = false;
+        document.getElementById("pragmaticallin").disabled = false;
+        document.getElementById("pussy888allin").disabled = false;
+        document.getElementById("saallin").disabled = false;
+        document.getElementById("sexyallin").disabled = false;
+        document.getElementById("wmallin").disabled = false;
+        GameInMaintenance(0);
     }
 }

@@ -1,5 +1,5 @@
-﻿//var baseUrl = "http://uatapi.webet333.com/api/v1/";
-var baseUrl = "http://api.webet333.com/api/v1/";
+﻿var baseUrl = "http://uatapi.webet333.com/api/v1/";
+//var baseUrl = "http://api.webet333.com/api/v1/";
 //var baseUrl ="http://localhost:55861/api/v1/"
 
 var apiEndPoints = {
@@ -145,5 +145,7 @@ var apiEndPoints = {
     SendOTP: "account/send/otp",
     VerifiedOTP: "account/verified/otp",
 
-    VaderPayMainteanceSelect: "account/vaderpay/maintenance/select"
+    VaderPayMainteanceSelect: "account/vaderpay/maintenance/select",
+
+    GetGameSupport: "Game/User/GameSupport"
 };

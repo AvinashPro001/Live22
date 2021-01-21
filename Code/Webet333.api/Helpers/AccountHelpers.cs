@@ -262,11 +262,11 @@ namespace Webet333.api.Helpers
 
         #region User Info Get for GetBalance 
 
-        public async Task<GetBalanceUserResponse> UserGetBalanceInfo(string UserId)
+        public async Task<GetBalanceUserResponse> UserGetBalanceInfo(string UserId, string ToWalletName = null)
         {
             using (var Repository = new DapperRepository<GetBalanceUserResponse>(Connection))
             {
-                return await Repository.FindAsync(StoredProcConsts.Account.GameBalanceInfo, new { UserId });
+                return await Repository.FindAsync(StoredProcConsts.Account.GameBalanceInfo, new { UserId, ToWalletName });
             }
         }
 

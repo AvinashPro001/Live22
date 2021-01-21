@@ -292,6 +292,8 @@
 
             public const string DailyTurnover = "[dbo].[Daily_Turnover]";
 
+            public const string UserPromotionGameSupportDetails = "[dbo].[User_Promotion_Game_SupportDetails]";
+
             public const string GameRebate = "[dbo].[Rebate_Insert_Master_AND_Details]";
 
             public const string ExpieryPromotionList = "[dbo].[PromotionExpieryList]";
@@ -482,7 +484,7 @@
 
         public class TransferMoney
         {
-            public const string UserDetails = "[dbo].[User_TransferInformation_Select]";
+            public const string UserDetails = "[dbo].[User_TransferInformation_Select_1]";
 
             public const string MainWalletTransfer = "[dbo].[MainWallet_Withdraw_Deposit]";
 
