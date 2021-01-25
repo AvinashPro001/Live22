@@ -229,9 +229,9 @@ export class PromotionAddComponent implements OnInit {
             isMaxbet: (document.getElementById("maxbet_id") as HTMLInputElement).checked,
             isM8: (document.getElementById("m8") as HTMLInputElement).checked,
             is918Kiss: (document.getElementById("918Kiss_id") as HTMLInputElement).checked,
-            isPussy888: (document.getElementById("joker_id") as HTMLInputElement).checked,
+            isPussy888: (document.getElementById("pussy888_id") as HTMLInputElement).checked,
             isMega888: (document.getElementById("mega888_id") as HTMLInputElement).checked,
-            isJoker: (document.getElementById("pussy888_id") as HTMLInputElement).checked,
+            isJoker: (document.getElementById("joker_id") as HTMLInputElement).checked,
 
             isNewMember: (document.getElementById("newmember_id") as HTMLInputElement).checked,
             isSports: (document.getElementById("sports_id") as HTMLInputElement).checked,

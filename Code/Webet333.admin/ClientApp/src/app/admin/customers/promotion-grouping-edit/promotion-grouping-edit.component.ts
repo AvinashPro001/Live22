@@ -36,7 +36,7 @@ export class PromotionGroupingEditComponent implements OnInit {
 
         let data = {
         }
-        this.adminService.get<any>(customer.promotionAdminList).subscribe(res => {
+        this.adminService.add<any>(customer.promotionAdminList,data).subscribe(res => {
             var NotInGroupList = res.data;
             var InGroupList = [];
             this.PromotionGroupingData.details.forEach(EL => {

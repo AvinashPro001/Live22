@@ -124,7 +124,7 @@ namespace Webet333.api.Helpers
                 $"&operator_id={GameConst.AG.OperatorId}" +
                 $"&user_id={userName}" +
                 $"&currency={GameConst.AG.Currency}" +
-                $"&credit={amount}" +
+                $"&credit={Math.Round(amount,2)}" +
                 $"&billno={genrate()}" +
                 $"&type={Type}";
 
