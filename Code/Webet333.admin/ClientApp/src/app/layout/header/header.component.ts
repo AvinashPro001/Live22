@@ -53,6 +53,18 @@ export class HeaderComponent implements OnInit {
                 localStorage.removeItem('currentUser');
                 this.router.navigate(['/']);
             }
+            else if (error.error.message === "Your account is not active.") {
+                localStorage.removeItem('currentUser');
+                this.router.navigate(['/']);
+                }
+            else if (error.error.message === "You are not authorised to access this content.") {
+                localStorage.removeItem('currentUser');
+                this.router.navigate(['/']);
+                }
+            else if (error.error.message === "Your account is deleted by the administrator.") {
+                localStorage.removeItem('currentUser');
+                this.router.navigate(['/']);
+            }
         });
     }
 
