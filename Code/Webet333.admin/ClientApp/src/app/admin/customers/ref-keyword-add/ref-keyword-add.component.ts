@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
-import { ToasterService, ToasterConfig } from 'angular2-toaster';
-import { Router, ActivatedRoute } from '@angular/router';
-import { customer, account } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-ref-keyword-add',
@@ -10,7 +10,6 @@ import { customer, account } from '../../../../environments/environment';
     styleUrls: ['./ref-keyword-add.component.scss']
 })
 export class RefKeywordAddComponent implements OnInit {
-
     @ViewChild('status') status: TemplateRef<any>;
     rows = [];
     columns = [];
@@ -20,12 +19,14 @@ export class RefKeywordAddComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private router: Router,
+        private router: Router
     ) { }
 
-    ngOnInit() {
-        this.setColumn();
-        this.setPageData();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setColumn();
+            this.setPageData();
+        }
     }
 
     setColumn() {
@@ -38,15 +39,20 @@ export class RefKeywordAddComponent implements OnInit {
         ];
     }
 
-    addKeyword() {
-        let RefModel = {
-            keyword: ((document.getElementById("txt_keyword") as HTMLInputElement).value),
+    async addKeyword() {
+        if (await this.checkAddPermission()) {
+            let RefModel = {
+                keyword: ((document.getElementById("txt_keyword") as HTMLInputElement).value),
+            }
+            this.adminService.add<any>(customer.refKeywordAdd, RefModel).toPromise().then(res => {
+                this.toasterService.pop('success', 'Successfully', res.message);
+                this.ngOnInit()
+            }).catch(error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+                this.ngOnInit()
+            });
         }
-        this.adminService.add<any>(customer.refKeywordAdd, RefModel).toPromise().then(res => {
-            this.toasterService.pop('success', 'Successfully', res.message);
-            this.ngOnInit()
-        }).catch(error => {            this.toasterService.pop('error', 'Error', error.error.message);            this.ngOnInit()        });    }
-
+    }
 
     setPageData() {
         this.rows = [];
@@ -70,20 +76,76 @@ export class RefKeywordAddComponent implements OnInit {
         });
     }
 
-    Delete(Id) {
-        let model = {
-            id: Id
+    async Delete(Id) {
+        if (await this.checkUpdatePermission()) {
+            let model = {
+                id: Id
+            }
+            this.adminService.add<any>(customer.refKeywordDelete, model).subscribe(res => {
+                this.toasterService.pop('success', 'Successfully', res.message);
+                this.ngOnInit();
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-        this.adminService.add<any>(customer.refKeywordDelete, model).subscribe(res => {
-            this.toasterService.pop('success', 'Successfully', res.message);
-            this.ngOnInit();
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
-
 
     ReplaceTime(Date) {
         return Date.replace("T", " ")
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[0].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[0].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[0].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

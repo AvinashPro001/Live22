@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
-import { customer, account } from '../../../../environments/environment';
+import { customer, account, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
@@ -73,16 +73,18 @@ export class PromotionAddComponent implements OnInit {
     //#endregion
 
     //#region ngOnInit
-    ngOnInit() {
-        this.getLanguage();
+    async ngOnInit() {
+        if (await this.checkAddPermission()) {
+            this.getLanguage();
 
-        for (let i = 0; i <= 100; i++) {
-            this.quantities.push(i + "X")
-            this.WinTurnquantities.push(i + "X")
+            for (let i = 0; i <= 100; i++) {
+                this.quantities.push(i + "X")
+                this.WinTurnquantities.push(i + "X")
+            }
+            Array(40).fill(0).map((x, i) => {
+                this.listType.push({ id: i + 1, sequence: i + 1 })
+            });
         }
-        Array(40).fill(0).map((x, i) => {
-            this.listType.push({ id: i + 1, sequence: i + 1 })
-        });
     }
 
     //#endregion
@@ -125,13 +127,13 @@ export class PromotionAddComponent implements OnInit {
         //    this.displayWinoverCategory = true;
         //}
         if (this.selectOverCategory == 'Winover') {
-            this.WinTurn = this.overValue ;
+            this.WinTurn = this.overValue;
             this.turnoverValue = 0;
         }
 
         if (this.selectOverCategory == 'Turnover') {
             this.WinTurn = 0;
-            this.turnoverValue = this.overValue ;
+            this.turnoverValue = this.overValue;
         }
 
 
@@ -151,13 +153,13 @@ export class PromotionAddComponent implements OnInit {
         }
 
         if (this.selectOverCategory == 'Winover') {
-            this.WinTurn = this.overValue ;
+            this.WinTurn = this.overValue;
             this.turnoverValue = 0;
         }
 
         if (this.selectOverCategory == 'Turnover') {
             this.WinTurn = 0;
-            this.turnoverValue = this.overValue ;
+            this.turnoverValue = this.overValue;
         }
     }
 
@@ -283,7 +285,7 @@ export class PromotionAddComponent implements OnInit {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', "Please Select only one value either Turnover Times Or Winturn");
         }
-        
+
 
         if (dataSelect.startDate === "NaN") {
             this.disabled = false;
@@ -381,4 +383,79 @@ export class PromotionAddComponent implements OnInit {
         });
     }
 
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[7].Permissions[0].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[7].submenu[0].Permissions[0].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[7].Permissions[1].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[7].submenu[0].Permissions[1].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[7].Permissions[2].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[7].submenu[0].Permissions[2].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

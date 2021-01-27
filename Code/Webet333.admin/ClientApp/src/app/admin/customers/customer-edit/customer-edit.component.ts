@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AdminService } from '../../admin.service';
-import { customer, gameBalance, smsConst, account } from '../../../../environments/environment';
+import { customer, gameBalance, smsConst, account, ErrorMessages } from '../../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -79,8 +79,8 @@ export class CustomerEditComponent implements OnInit {
     //#endregion
 
     //#region Init
-    ngOnInit() {
-        this.getProfile();
+    async ngOnInit() {
+        if (await this.checkUpdatePermission()) this.getProfile();
     }
     //#endregion
 
@@ -606,4 +606,59 @@ export class CustomerEditComponent implements OnInit {
             }, 3000);
         })
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[0].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[0].submenu[1].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[0].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[0].submenu[1].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[0].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[0].submenu[1].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

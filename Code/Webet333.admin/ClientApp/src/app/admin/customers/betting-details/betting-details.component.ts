@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages } from '../../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-betting-details',
@@ -72,11 +73,12 @@ export class BettingDetailsComponent implements OnInit {
     constructor(
         private datePipe: DatePipe,
         private adminService: AdminService,
-        private toasterService: ToasterService
+        private toasterService: ToasterService,
+        private router: Router
     ) { }
 
-    ngOnInit() {
-        this.setColumn(this.selectedList);
+    async ngOnInit() {
+        if (await this.checkViewPermission()) this.setColumn(this.selectedList);
     }
 
     //#region setCoumn
@@ -898,7 +900,7 @@ export class BettingDetailsComponent implements OnInit {
                 }
                 this.adminService.add<any>(customer.WMBettingDetails, wmModel).subscribe(res => {
                     this.rows = [];
-                    
+
                     if (res.data.result.length > 0) {
                         this.TableData = res.data.result;
                         res.data.result.forEach(el => {
@@ -992,229 +994,286 @@ export class BettingDetailsComponent implements OnInit {
             this.FetchIdList = this.FetchIdList.filter(item => item != row);
     }
 
-    Save() {
-        if (this.TableData === undefined || this.TableData === null)
-            return this.toasterService.pop('error', 'Error', "Please Get The Betting Details of games");
+    async Save() {
+        if (await this.checkAddPermission()) {
+            if (this.TableData === undefined || this.TableData === null)
+                return this.toasterService.pop('error', 'Error', "Please Get The Betting Details of games");
 
-        let model = {
-            jsondata: JSON.stringify(this.TableData)
-        }
-        switch (this.selectedList) {
-            case 'M8': {
-                let m8Model = {
-                    jsondata: model.jsondata,
-                    fetchId: this.FetchIdList
+            let model = {
+                jsondata: JSON.stringify(this.TableData)
+            }
+            switch (this.selectedList) {
+                case 'M8': {
+                    let m8Model = {
+                        jsondata: model.jsondata,
+                        fetchId: this.FetchIdList
+                    }
+                    this.adminService.add<any>(customer.SaveM8BettingDetails, m8Model).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
                 }
-                this.adminService.add<any>(customer.SaveM8BettingDetails, m8Model).subscribe(res => {
-                    this.toasterService.pop('success', 'Successfully', res.message);
-                    this.loadingIndicator = false;
-                    this.rows = [];
-                    this.setColumn("");
-                    this.TableData = null;
-                }, error => {
-                    this.loadingIndicator = false;
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                    this.rows = [];
-                    this.setColumn("");
-                });
-                break;
-            }
-            case 'AG': {
-                console.log(model);
-                this.adminService.add<any>(customer.SaveAGBettingDetails, model).subscribe(res => {
-                    this.toasterService.pop('success', 'Successfully', res.message);
-                    this.loadingIndicator = false;
-                    this.rows = [];
-                    this.setColumn("");
-                    this.TableData = null;
-                }, error => {
-                    this.loadingIndicator = false;
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                    this.rows = [];
-                    this.setColumn("");
-                });
-                break;
-            }
-            case 'Playtech': {
-                this.adminService.add<any>(customer.SavePlaytechBettingDetails, model).subscribe(res => {
-                    this.toasterService.pop('success', 'Successfully', res.message);
-                    this.loadingIndicator = false;
-                    this.rows = [];
-                    this.setColumn("");
-                    this.TableData = null;
-                }, error => {
-                    this.loadingIndicator = false;
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                    this.rows = [];
-                    this.setColumn("");
-                });
-                break;
-            }
-            case 'Joker': {
-                this.adminService.add<any>(customer.SaveJokerBettingDetails, model).subscribe(res => {
-                    this.toasterService.pop('success', 'Successfully', res.message);
-                    this.loadingIndicator = false;
-                    this.rows = [];
-                    this.setColumn("");
-                    this.TableData = null;
-                }, error => {
-                    this.loadingIndicator = false;
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                    this.rows = [];
-                    this.setColumn("");
-                });
-                break;
-            }
-            case 'Mega888': {
-                this.adminService.add<any>(customer.SaveMega888BettingDetails, model).subscribe(res => {
-                    this.toasterService.pop('success', 'Successfully', res.message);
-                    this.loadingIndicator = false;
-                    this.rows = [];
-                    this.setColumn("");
-                    this.TableData = null;
-                }, error => {
-                    this.loadingIndicator = false;
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                    this.rows = [];
-                    this.setColumn("");
-                });
-                break;
-            }
-            case '918 Kiss': {
-                this.adminService.add<any>(customer.SaveKiss918BettingDetails, model).subscribe(res => {
-                    this.toasterService.pop('success', 'Successfully', res.message);
-                    this.loadingIndicator = false;
-                    this.rows = [];
-                    this.setColumn("");
-                    this.TableData = null;
-                }, error => {
-                    this.loadingIndicator = false;
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                    this.rows = [];
-                    this.setColumn("");
-                });
-                break;
-            }
-            case 'DG': {
-                this.adminService.add<any>(customer.SaveDGBettingDetails, model).subscribe(res => {
-                    this.toasterService.pop('success', 'Successfully', res.message);
-                    this.loadingIndicator = false;
-                    this.rows = [];
-                    this.setColumn("");
-                    this.TableData = null;
-                }, error => {
-                    this.loadingIndicator = false;
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                    this.rows = [];
-                    this.setColumn("");
-                });
-                break;
-            }
-            case 'Sexy Baccarat': {
-                this.adminService.add<any>(customer.SaveSABettingDetails, model).subscribe(res => {
-                    this.toasterService.pop('success', 'Successfully', res.message);
-                    this.loadingIndicator = false;
-                    this.rows = [];
-                    this.setColumn("");
-                    this.TableData = null;
-                }, error => {
-                    this.loadingIndicator = false;
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                    this.rows = [];
-                    this.setColumn("");
-                });
-                break;
-            }
-            case 'SA': {
-                let saModel = {
-                    jsondata: this.TableData
+                case 'AG': {
+                    console.log(model);
+                    this.adminService.add<any>(customer.SaveAGBettingDetails, model).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
                 }
-                this.adminService.add<any>(customer.SaveSABettingDetails, saModel).subscribe(res => {
-                    this.toasterService.pop('success', 'Successfully', res.message);
-                    this.loadingIndicator = false;
-                    this.rows = [];
-                    this.setColumn("");
-                    this.TableData = null;
-                }, error => {
-                    this.loadingIndicator = false;
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                    this.rows = [];
-                    this.setColumn("");
-                });
-                break;
-            }
-            case 'Pussy888': {
-                this.adminService.add<any>(customer.SavePussy888BettingDetails, model).subscribe(res => {
-                    this.toasterService.pop('success', 'Successfully', res.message);
-                    this.loadingIndicator = false;
-                    this.rows = [];
-                    this.setColumn("");
-                    this.TableData = null;
-                }, error => {
-                    this.loadingIndicator = false;
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                    this.rows = [];
-                    this.setColumn("");
-                });
-                break;
-            }
-            case 'AllBet': {
-                let allbetModel = {
-                    jsondata: this.TableData
+                case 'Playtech': {
+                    this.adminService.add<any>(customer.SavePlaytechBettingDetails, model).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
                 }
-                this.adminService.add<any>(customer.SaveAllbetBettingDetails, allbetModel).subscribe(res => {
-                    this.toasterService.pop('success', 'Successfully', res.message);
-                    this.loadingIndicator = false;
-                    this.rows = [];
-                    this.setColumn("");
-                    this.TableData = null;
-                }, error => {
-                    this.loadingIndicator = false;
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                    this.rows = [];
-                    this.setColumn("");
-                });
-                break;
-            }
-            case 'WM': {
-                let wmModel = {
-                    jsondata: this.TableData
+                case 'Joker': {
+                    this.adminService.add<any>(customer.SaveJokerBettingDetails, model).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
                 }
-                this.adminService.add<any>(customer.SaveWMBettingDetails, wmModel).subscribe(res => {
-                    this.toasterService.pop('success', 'Successfully', res.message);
-                    this.loadingIndicator = false;
-                    this.rows = [];
-                    this.setColumn("");
-                    this.TableData = null;
-                }, error => {
-                    this.loadingIndicator = false;
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                    this.rows = [];
-                    this.setColumn("");
-                });
-                break;
-            }
-            case 'Pragmatic': {
-                let wmModel = {
-                    jsondata: this.TableData
+                case 'Mega888': {
+                    this.adminService.add<any>(customer.SaveMega888BettingDetails, model).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
                 }
-                this.adminService.add<any>(customer.SavePragmaticBettingDetails, wmModel).subscribe(res => {
-                    this.toasterService.pop('success', 'Successfully', res.message);
-                    this.loadingIndicator = false;
-                    this.rows = [];
-                    this.setColumn("");
-                    this.TableData = null;
-                }, error => {
-                    this.loadingIndicator = false;
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                    this.rows = [];
-                    this.setColumn("");
-                });
-                break;
-            }
-            default: {
-                this.toasterService.pop('error', 'Error', "Please Select Game !!!!");
+                case '918 Kiss': {
+                    this.adminService.add<any>(customer.SaveKiss918BettingDetails, model).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
+                }
+                case 'DG': {
+                    this.adminService.add<any>(customer.SaveDGBettingDetails, model).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
+                }
+                case 'Sexy Baccarat': {
+                    this.adminService.add<any>(customer.SaveSABettingDetails, model).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
+                }
+                case 'SA': {
+                    let saModel = {
+                        jsondata: this.TableData
+                    }
+                    this.adminService.add<any>(customer.SaveSABettingDetails, saModel).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
+                }
+                case 'Pussy888': {
+                    this.adminService.add<any>(customer.SavePussy888BettingDetails, model).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
+                }
+                case 'AllBet': {
+                    let allbetModel = {
+                        jsondata: this.TableData
+                    }
+                    this.adminService.add<any>(customer.SaveAllbetBettingDetails, allbetModel).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
+                }
+                case 'WM': {
+                    let wmModel = {
+                        jsondata: this.TableData
+                    }
+                    this.adminService.add<any>(customer.SaveWMBettingDetails, wmModel).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
+                }
+                case 'Pragmatic': {
+                    let wmModel = {
+                        jsondata: this.TableData
+                    }
+                    this.adminService.add<any>(customer.SavePragmaticBettingDetails, wmModel).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
+                }
+                default: {
+                    this.toasterService.pop('error', 'Error', "Please Select Game !!!!");
+                }
             }
         }
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[2].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[2].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[2].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

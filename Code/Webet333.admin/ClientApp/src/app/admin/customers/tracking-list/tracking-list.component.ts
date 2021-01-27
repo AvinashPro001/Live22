@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
 
 @Component({
-  selector: 'app-tracking-list',
-  templateUrl: './tracking-list.component.html',
-  styleUrls: ['./tracking-list.component.scss']
+    selector: 'app-tracking-list',
+    templateUrl: './tracking-list.component.html',
+    styleUrls: ['./tracking-list.component.scss']
 })
 export class TrackingListComponent implements OnInit {
-
     rows = [];
     columns = [];
     listType: any = [
@@ -22,11 +22,14 @@ export class TrackingListComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
+        private router: Router
     ) { }
 
-    ngOnInit() {
-        this.setColoum();
-        this.setData();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setColoum();
+            this.setData();
+        }
     }
 
     setColoum() {
@@ -58,14 +61,12 @@ export class TrackingListComponent implements OnInit {
             this.rows = [];
             this.toasterService.pop('error', 'Error', error.error.message)
             this.loadingIndicator = false;
-
         });
     }
 
     replaceDate(date) {
         return date.replace("T", " ");
     }
-
 
     Search() {
         this.loadingIndicator = true;
@@ -96,4 +97,59 @@ export class TrackingListComponent implements OnInit {
     onChange(event) {
         this.selectedlist = event.target.value;
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[1].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[1].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[1].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
             this.commonService.add<any>(account.login, value).subscribe((res) => {
                 this.showloader = true;
                 localStorage.setItem('currentUser', JSON.stringify(res.data));
+                localStorage.setItem('isReload', 'true');
                 this.router.navigate(['/admin/dashboard']);
             }, error => {
                 this.showloader = false;

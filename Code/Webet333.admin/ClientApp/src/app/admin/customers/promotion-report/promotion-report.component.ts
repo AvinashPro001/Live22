@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
-import { debug } from 'util';
 
 @Component({
     selector: 'app-promotion-report',
@@ -11,7 +10,6 @@ import { debug } from 'util';
     styleUrls: ['./promotion-report.component.scss']
 })
 export class PromotionReportComponent implements OnInit {
-
     rows = [];
     columns = [];
 
@@ -22,7 +20,6 @@ export class PromotionReportComponent implements OnInit {
     NewUserTotalWithdraw: any;
     OldUserTotalDeposit: any;
     OldUserTotalWithdraw: any;
-
 
     totalDepositAmount: any;
     totalIssueBonus: any;
@@ -36,11 +33,12 @@ export class PromotionReportComponent implements OnInit {
         private router: Router,
     ) { }
 
-    ngOnInit() {
-        this.setColumn();
-        this.setPageData();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setColumn();
+            this.setPageData();
+        }
     }
-
 
     setColumn() {
         this.columns = [
@@ -96,12 +94,11 @@ export class PromotionReportComponent implements OnInit {
                     WithdrawPromotionCount: el.withdrawPromotionCount,
                     WithdrawPromotionCountPercentage: el.withdrawPromotionCountPercentage.toFixed(2) + " %",
 
-                    TotalDepositAmount: el.totalDepositAmount ,
-                    TotalWithdrawAmount: el.totalWithdrawAmount ,
-                    TotalIssueBonus: el.bonusIssue ,
+                    TotalDepositAmount: el.totalDepositAmount,
+                    TotalWithdrawAmount: el.totalWithdrawAmount,
+                    TotalIssueBonus: el.bonusIssue,
                     WinLose: el.winLose
                 });
-                
             });
             this.Totalrows = [...this.Totalrows];
             this.rows = [...this.rows];
@@ -112,8 +109,6 @@ export class PromotionReportComponent implements OnInit {
         });
     }
     //#endregion
-
-
 
     FilterData() {
         this.rows = [];
@@ -136,7 +131,6 @@ export class PromotionReportComponent implements OnInit {
         }
 
         this.adminService.add<any>(customer.promotionReport, data).subscribe(res => {
-
             this.Totalrows.push({
                 NewUserTotalDeposit: res.data.newUserTotalDeposit,
                 NewUserTotalWithdraw: res.data.newUserTotalWithdraw,
@@ -168,4 +162,59 @@ export class PromotionReportComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[4].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[4].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[4].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

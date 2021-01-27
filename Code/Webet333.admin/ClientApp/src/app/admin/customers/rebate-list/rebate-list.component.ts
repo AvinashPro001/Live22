@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router  } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-rebate-list',
@@ -27,10 +27,12 @@ export class RebateListComponent implements OnInit {
         private modalService: NgbModal,
     ) { }
 
-    ngOnInit() {
-        this.setColumn();
-        this.setGameCategoryList();
-        this.setPagedata();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setColumn();
+            this.setGameCategoryList();
+            this.setPagedata();
+        }
     }
 
     setColumn() {
@@ -165,27 +167,101 @@ export class RebateListComponent implements OnInit {
         this.openWindowCustomClass(content);
     }
 
-    Delete(Id) {
-        this.disable = true;
-        let model = {
-            id: Id
+    async Delete(Id) {
+        if (await this.checkUpdatePermission()) {
+            this.disable = true;
+            let model = {
+                id: Id
+            }
+            this.adminService.add<any>(customer.RebateDelete, model).subscribe(res => {
+                this.toasterService.pop('success', 'Successfully', res.message);
+                this.disable = false;
+                this.ngOnInit();
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+                this.disable = false;
+            });
         }
-        this.adminService.add<any>(customer.RebateDelete, model).subscribe(res => {
-            this.toasterService.pop('success', 'Successfully', res.message);
-            this.disable = false;
-            this.ngOnInit();
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-            this.disable = false;
-        });
     }
 
     openWindowCustomClass(content) {
         this.modalService.open(content, { windowClass: 'dark-modal', });
-
     }
 
-    navigateAdd() {
-        this.router.navigate(['/admin/customers/rebate-calculate']);
+    async navigateAdd() {
+        if (await this.checkAddPermission()) this.router.navigate(['/admin/customers/rebate-calculate']);
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[5].Permissions[0].IsChecked === true) {
+                if (usersPermissions.permissionsList[2].submenu[5].submenu[0].Permissions[0].IsChecked === true) {
+                    return true;
+                } else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[5].Permissions[1].IsChecked === true) {
+                if (usersPermissions.permissionsList[2].submenu[5].submenu[0].Permissions[1].IsChecked === true) {
+                    return true;
+                } else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[5].Permissions[2].IsChecked === true) {
+                if (usersPermissions.permissionsList[2].submenu[5].submenu[0].Permissions[2].IsChecked === true) {
+                    return true;
+                } else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

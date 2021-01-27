@@ -19,7 +19,7 @@ import { MenuService } from '../../core/menu/menu.service';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-   
+
     name: any;
     navCollapsed = true; // for horizontal layout
     menuItems = []; // for horizontal layout
@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
     isNavSearchVisible: boolean;
     @ViewChild('fsbutton') fsbutton;  // the fullscreen button
 
-    constructor(public menu: MenuService, public userblockService: UserblockService, public settings: SettingsService, private adminService: AdminService, private toasterService: ToasterService,private router: Router) {
+    constructor(public menu: MenuService, public userblockService: UserblockService, public settings: SettingsService, private adminService: AdminService, private toasterService: ToasterService, private router: Router) {
 
         // show only a few items on demo
         this.menuItems = menu.getMenu().slice(0, 4); // for horizontal layout
@@ -48,6 +48,11 @@ export class HeaderComponent implements OnInit {
             this.name = res.data.username
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
+
+            if (error.error.message === "Your access token is expired, please login again.") {
+                localStorage.removeItem('currentUser');
+                this.router.navigate(['/']);
+            }
         });
     }
 

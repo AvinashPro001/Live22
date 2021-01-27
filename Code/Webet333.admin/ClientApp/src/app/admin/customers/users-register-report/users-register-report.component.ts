@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToasterService } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages } from '../../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-users-register-report',
@@ -17,14 +18,15 @@ export class UsersRegisterReportComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
+        private router: Router
     ) { }
 
-    ngOnInit() {
-        this.setColumn();
-        this.setPageData();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setColumn();
+            this.setPageData();
+        }
     }
-
-
 
     setColumn() {
         this.columns = [
@@ -40,9 +42,6 @@ export class UsersRegisterReportComponent implements OnInit {
         ];
 
     }
-
-
-
 
     setPageData() {
         this.rows = [];
@@ -78,7 +77,7 @@ export class UsersRegisterReportComponent implements OnInit {
         this.rows = [];
         this.loadingIndicator = true;
         let i = 0;
-        
+
         var otpCheck;
 
         var verified = (document.getElementById("Verified") as HTMLInputElement).checked
@@ -88,7 +87,7 @@ export class UsersRegisterReportComponent implements OnInit {
             otpCheck = verified;
 
         if (unverified)
-            otpCheck = unverified;        
+            otpCheck = unverified;
 
         if (unverified && unverified)
             otpCheck = null;
@@ -122,7 +121,6 @@ export class UsersRegisterReportComponent implements OnInit {
         });
     }
 
-
     DownloadExcel() {
 
         let data = {
@@ -138,4 +136,59 @@ export class UsersRegisterReportComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[5].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[5].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[5].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
+import { account, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
-import { ToasterService, ToasterConfig } from 'angular2-toaster';
-import { Router, ActivatedRoute } from '@angular/router';
-import { account } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-ref-keyword-analytics',
@@ -25,14 +25,16 @@ export class RefKeywordAnalyticsComponent implements OnInit {
         private router: Router,
     ) { }
 
-    ngOnInit() {
-        this.setColumn();
-        this.setPageData();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setColumn();
+            this.setPageData();
+        }
     }
 
     setColumn() {
         this.refColumns = [
-            { prop: 'Keyword'},
+            { prop: 'Keyword' },
             { prop: 'TotalClick' },
             { prop: 'RegisterUser' },
             { prop: 'TotalDepoist' },
@@ -45,7 +47,6 @@ export class RefKeywordAnalyticsComponent implements OnInit {
             { prop: 'Platform', width: 50 },
             { prop: 'Total' }
         ];
-
     }
 
     refersh() {
@@ -92,7 +93,6 @@ export class RefKeywordAnalyticsComponent implements OnInit {
         });
     }
 
-
     filter() {
         this.loadingIndicator = true;
         this.Rows = [];
@@ -113,10 +113,10 @@ export class RefKeywordAnalyticsComponent implements OnInit {
                         Keyword: el.refkeyword,
                         TotalClick: el.total,
                         RegisterUser: el.totaluser,
-            TotalDepoist: el.totalDepoist,
-                    TotalWithdraw: el.totalWithdraw,
-                    TotalBonus: el.totalBonus,
-                    totalWinLose: el.totalWinLose
+                        TotalDepoist: el.totalDepoist,
+                        TotalWithdraw: el.totalWithdraw,
+                        TotalBonus: el.totalBonus,
+                        totalWinLose: el.totalWinLose
                     });
                     this.refRows = [...this.refRows]
                 })
@@ -139,4 +139,59 @@ export class RefKeywordAnalyticsComponent implements OnInit {
             this.toasterService.pop('error', 'Error', "Please Provide From Date and To Date !!!");
         }
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[0].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[0].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[0].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

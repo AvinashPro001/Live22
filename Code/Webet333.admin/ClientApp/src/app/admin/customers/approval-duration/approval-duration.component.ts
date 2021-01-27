@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToasterService } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { error } from 'protractor';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-approval-duration',
@@ -23,11 +24,14 @@ export class ApprovalDurationComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
+        private router: Router
     ) { }
 
-    ngOnInit() {
-        this.setColoum();
-        this.setData();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setColoum();
+            this.setData();
+        }
     }
 
     setColoum() {
@@ -65,7 +69,7 @@ export class ApprovalDurationComponent implements OnInit {
                     Duration: el.Duration
                 });
             });
-            
+
         }, error => {
             this.rows = [];
             this.toasterService.pop('error', 'Error', error.error.message)
@@ -115,4 +119,59 @@ export class ApprovalDurationComponent implements OnInit {
     edit(data) {
         debugger;
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[9].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[9].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[9].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

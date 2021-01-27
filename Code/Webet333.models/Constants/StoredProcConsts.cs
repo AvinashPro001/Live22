@@ -120,7 +120,9 @@
 
             public const string ProfileDelete = "[dbo].[Users_Update_Delete]";
 
+            public const string SelectDefaultPermission = "[dbo].[DefaultPermissions_Select]";
 
+            public const string UsersAdminPersist = "[dbo].[Users_Admin_Persist]";
         }
 
         public class Payments

@@ -25,7 +25,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
         private commonService: CommonService,
         public menu: MenuService, public settings: SettingsService, public injector: Injector) {
 
-        this.menuItems = menu.getMenu();
+        this.menuItems = this.menu.getMenu();
+
+        //#region       Reload page again to get slider menu
+
+        var isReload = localStorage.getItem('isReload');
+        if (isReload) {
+            localStorage.removeItem('isReload');
+            window.location.reload();
+        }
+
+        //#endregion
 
     }
 
@@ -163,7 +173,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
                     e.preventDefault(); // prevents page reload on click
                     // get the exact route path to navigate
                     let routeTo = $(this).attr('route');
-                    if (routeTo) self.router.navigate(['admin/'+routeTo]);
+                    if (routeTo) self.router.navigate(['admin/' + routeTo]);
                 });
 
             this.listenForExternalClicks();

@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 
 
@@ -60,9 +60,11 @@ export class PromotionListComponent implements OnInit {
     //#endregion
 
     //#region Init
-    ngOnInit() {
-        this.setColumn();
-        this.setPageData();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setColumn();
+            this.setPageData();
+        }
     }
     //#endregion
 
@@ -93,7 +95,7 @@ export class PromotionListComponent implements OnInit {
         this.loadingIndicator = true;
         let data = {
         }
-        this.adminService.add<any>(customer.promotionAdminList,data).subscribe(res => {
+        this.adminService.add<any>(customer.promotionAdminList, data).subscribe(res => {
             this.rows = [];
             let i = 0;
             this.promotionData = res.data;
@@ -161,9 +163,11 @@ export class PromotionListComponent implements OnInit {
     //#endregion
 
     //#region navigateAdd
-    navigateAdd() {
-        this.router.navigate(['/admin/customers/promotion-add']);
-        //this.openUnderconstructionDialog();
+    async navigateAdd() {
+        if (await this.checkAddPermission()) {
+            this.router.navigate(['/admin/customers/promotion-add']);
+            //this.openUnderconstructionDialog();
+        }
     }
     //#endregion
 
@@ -190,15 +194,18 @@ export class PromotionListComponent implements OnInit {
     //#endregion
 
     //#region navigate Edit
-    navigateEdit(promotionData) {
-        localStorage.setItem('promotionData', JSON.stringify(promotionData));
-        this.router.navigate(['/admin/customers/promotion-edit']);
+    async navigateEdit(promotionData) {
+        if (await this.checkUpdatePermission()) {
+            localStorage.setItem('promotionData', JSON.stringify(promotionData));
+            this.router.navigate(['/admin/customers/promotion-edit']);
+        }
     }
     //#endregion 
 
     //#region openRejectConfirmationDialog
-    openRejectConfirmationDialog(id) {
-        this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to Delete Promotion ?')
+
+    async openRejectConfirmationDialog(id) {
+        if (await this.checkUpdatePermission()) this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to Delete Promotion ?')
             .then((confirmed) => {
                 this.final = confirmed
                 this.promotionDelete(id)
@@ -206,21 +213,25 @@ export class PromotionListComponent implements OnInit {
     }
     //#endregion
 
-    promotionActive(id, event) {
-        let data = {
-            id: id,
-            active: event
+    async promotionActive(id, event) {
+        if (await this.checkUpdatePermission()) {
+            let data = {
+                id: id,
+                active: event
+            }
+            this.adminService.add<any>(customer.promotionUpdateStatus, data).subscribe(res => {
+                this.toasterService.pop('success', 'Success', res.message);
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-        this.adminService.add<any>(customer.promotionUpdateStatus, data).subscribe(res => {
-            this.toasterService.pop('success', 'Success', res.message);
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
 
-    show(row, content) {
-        this.viewData = row;
-        this.openWindowCustomClass(content);
+    async show(row, content) {
+        if (await this.checkViewPermission()) {
+            this.viewData = row;
+            this.openWindowCustomClass(content);
+        }
     }
 
     openWindowCustomClass(content) {
@@ -230,9 +241,85 @@ export class PromotionListComponent implements OnInit {
     returnlable(value) {
         if (value)
             return '<label style="color:green">True</label>';
-        else 
+        else
             return '<label style="color:red">False</label>';
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[7].Permissions[0].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[7].submenu[0].Permissions[0].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[7].Permissions[1].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[7].submenu[0].Permissions[1].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[7].Permissions[2].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[7].submenu[0].Permissions[2].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }
 
 

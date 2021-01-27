@@ -69,8 +69,15 @@ namespace Webet333.api.Controllers
                 await ValidateUser(user, request.GrantType.ToString());
                 var user_token = new TokenHelpers(Connection).GetAccessToken(AuthConfigOptions.Value, user, uniqueId.ToString());
 
+                #region User Permission
+
+                if (!string.IsNullOrEmpty(user.Permissions))
+                    user.PermissionsList = new GenericHelpers(Connection).BindPermissionList(user.Permissions, user.DefaultPermission).Where(x => x.IsChecked).ToList();
+
+                #endregion User Permission
+
                 if (request.GrantType == models.Enums.GrantTypeEnums.admin)
-                    return OkResponse(new { access_token = user_token });
+                    return OkResponse(new { access_token = user_token, user.PermissionsList });
 
                 return OkResponse(new { access_token = user_token, totalBankAccount = user.BankAccount });
             }
@@ -124,7 +131,7 @@ namespace Webet333.api.Controllers
                 #region Sending email in queue
                 var user = await account_help.FindUser(userId: userId);
                 new EmailHelpers(Localizer, messages).SendAccountEmail(user, null, EmailTypeConst.ChangePassword);
-                #endregion
+                #endregion 
             }
             return OkResponse();
         }
@@ -524,7 +531,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion
 
         #region Manager Operation Select
 
@@ -541,7 +548,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion
 
         #region Manager Operation update
 
@@ -558,7 +565,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion
 
         #region SMS Users Select
 
@@ -575,7 +582,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion
 
         #region SMS SEND
 
@@ -611,7 +618,7 @@ namespace Webet333.api.Controllers
 
         }
 
-        #endregion 
+        #endregion
 
         #region Last Login Update
 
@@ -631,7 +638,7 @@ namespace Webet333.api.Controllers
             return OkResponse();
         }
 
-        #endregion 
+        #endregion
 
         #region Notification Select
 
@@ -648,7 +655,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion
 
         #region Notification Update
 
@@ -665,7 +672,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion
 
         #region Game Username
 
@@ -865,7 +872,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion
 
         #region Admin User Behaviour Select
 
@@ -881,7 +888,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion
 
         #region Download Excel File
 
@@ -935,6 +942,6 @@ namespace Webet333.api.Controllers
         //    return OkResponse(SecurityHelpers.DecryptPassword(password));
         //}
 
-        //#endregion 
+        //#endregion
     }
 }

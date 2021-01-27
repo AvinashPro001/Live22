@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages, account } from '../../../../environments/environment';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 import { debounce } from 'rxjs/operators';
 
@@ -47,9 +47,25 @@ export class CustomerListComponent implements OnInit {
     ) {
     }
 
-    ngOnInit() {
-        this.setColumn();
-        // this.setPageData("");
+    async ngOnInit() {
+        this.Profile();     // To check user token expire or not.
+        if (await this.checkViewPermission()) {
+            this.setColumn();
+            // this.setPageData("");
+        }
+    }
+
+    Profile() {
+        let data = {}
+        this.adminService.add<any>(account.profile, data).subscribe(res => {
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+
+            if (error.error.message === "Your access token is expired, please login again.") {
+                localStorage.removeItem('currentUser');
+                this.router.navigate(['/']);
+            }
+        });
     }
 
     setColumn() {
@@ -143,8 +159,8 @@ export class CustomerListComponent implements OnInit {
         }
     }
 
-    openRejectConfirmationDialog(id) {
-        this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to delete customer?')
+    async openRejectConfirmationDialog(id) {
+        if (await this.checkUpdatePermission()) this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to delete customer?')
             .then((confirmed) => {
                 this.final = confirmed
                 this.deleteCustomer(id)
@@ -167,36 +183,96 @@ export class CustomerListComponent implements OnInit {
         });
     }
 
-    navigateEdit(customerData) {
-        localStorage.setItem('data', JSON.stringify(customerData));
-        this.router.navigate(['/admin/customers/customer-edit']);
-    }
-
-    manualUpdateEvent(id, value: boolean) {
-        this.rejectCustomer(id, value)
-    }
-
-
-    searchHandler() {
-        var parameter = ((document.getElementById("searchText") as HTMLInputElement).value)
-        if (parameter != "") {
-            var data = {
-                SearchParam: parameter,
-            }
-
-            this.setPageData(data.SearchParam)
+    async navigateEdit(customerData) {
+        if (await this.checkUpdatePermission()) {
+            localStorage.setItem('data', JSON.stringify(customerData));
+            this.router.navigate(['/admin/customers/customer-edit']);
         }
     }
 
-    show(row, content) {
-        //this.viewData = row;
-        //this.openWindowCustomClass(content);
+    async manualUpdateEvent(id, value: boolean) {
+        if (await this.checkUpdatePermission()) this.rejectCustomer(id, value);
+    }
 
-        localStorage.setItem('id', JSON.stringify(row));
-        window.open('admin/customers/users-details', '_blank');
+    async searchHandler() {
+        if (await this.checkUpdatePermission()) {
+            var parameter = ((document.getElementById("searchText") as HTMLInputElement).value)
+            if (parameter != "") {
+                var data = {
+                    SearchParam: parameter,
+                }
+
+                this.setPageData(data.SearchParam)
+            }
+        }
+    }
+
+    async show(row, content) {
+        if (await this.checkViewPermission()) {
+            //this.viewData = row;
+            //this.openWindowCustomClass(content);
+
+            localStorage.setItem('id', JSON.stringify(row));
+            window.open('admin/customers/users-details', '_blank');
+        }
     }
 
     openWindowCustomClass(content) {
         this.modalService.open(content, { windowClass: 'dark-modal', });
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[0].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[0].submenu[1].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[0].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[0].submenu[1].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[0].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[0].submenu[1].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

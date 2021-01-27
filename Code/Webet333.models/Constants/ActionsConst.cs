@@ -183,6 +183,14 @@
             public const string ProfileDelete = "customer/profile/delete";
 
             public const string UserWinloseReport = "customer/winlose/report";
+
+            public const string AdminAdd = "admin/add";
+
+            public const string AdminRetrieve = "admin/list";
+
+            public const string DefaultPermissionList = "user/default_permission/retrieve";
+
+            public const string AdminUpdate = "admin/update";
         }
 
         public class Promotions
@@ -256,7 +264,7 @@
 
             public const string AnnouncementDelete = "settings/announcement/delete";
 
-            
+
         }
 
         public class Game

@@ -1,7 +1,8 @@
 import { Component, OnInit, } from '@angular/core';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages } from '../../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-maxbet-betting-details',
@@ -20,11 +21,12 @@ export class MaxbetBettingDetailsComponent implements OnInit {
     loadingIndicator: boolean = true;
     constructor(
         private adminService: AdminService,
-        private toasterService: ToasterService
+        private toasterService: ToasterService,
+        private router: Router
     ) { }
 
-    ngOnInit() {
-
+    async ngOnInit() {
+        await this.checkViewPermission();
     }
 
     setColumn() {
@@ -203,25 +205,103 @@ export class MaxbetBettingDetailsComponent implements OnInit {
         });
     }
 
-    Save() {
-        if ((this.BettingDetailList === null || this.BettingDetailList === undefined) && (this.BettingNumberDetailList === null || this.BettingNumberDetailList === undefined)) {
-            return this.toasterService.pop('error', 'Error', "No data Available");
+    async Save() {
+        if (await this.checkAddPermission()) {
+            if ((this.BettingDetailList === null || this.BettingDetailList === undefined) && (this.BettingNumberDetailList === null || this.BettingNumberDetailList === undefined)) {
+                return this.toasterService.pop('error', 'Error', "No data Available");
+            }
+            let model = {
+                bettingDetailsJsonData: JSON.stringify(this.BettingDetailList),
+                bettingNumberDetailsJsonData: JSON.stringify(this.BettingNumberDetailList),
+                versionKey: this.versionKey
+            }
+            this.adminService.add<any>(customer.SaveMaxBetBettingDetails, model).subscribe(res => {
+                this.toasterService.pop('success', 'Successfully', res.message);
+                this.loadingIndicator = false;
+                this.rows = [];
+                this.BettingDetailList = null;
+                this.BettingNumberDetailList = null;
+            }, error => {
+                this.loadingIndicator = false;
+                this.toasterService.pop('error', 'Error', error.error.message);
+                this.rows = [];
+            });
         }
-        let model = {
-            bettingDetailsJsonData: JSON.stringify(this.BettingDetailList),
-            bettingNumberDetailsJsonData: JSON.stringify(this.BettingNumberDetailList),
-            versionKey: this.versionKey
-        }
-        this.adminService.add<any>(customer.SaveMaxBetBettingDetails, model).subscribe(res => {
-            this.toasterService.pop('success', 'Successfully', res.message);
-            this.loadingIndicator = false;
-            this.rows = [];
-            this.BettingDetailList = null;
-            this.BettingNumberDetailList = null;
-        }, error => {
-            this.loadingIndicator = false;
-            this.toasterService.pop('error', 'Error', error.error.message);
-            this.rows = [];
-        });
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[5].Permissions[0].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[5].submenu[3].Permissions[0].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[5].Permissions[1].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[5].submenu[3].Permissions[1].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[5].Permissions[2].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[5].submenu[3].Permissions[2].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

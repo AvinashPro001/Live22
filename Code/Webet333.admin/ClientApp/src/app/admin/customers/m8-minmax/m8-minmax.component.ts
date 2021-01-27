@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { ToasterService } from 'angular2-toaster';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { debug } from 'util';
 import { Number } from 'core-js';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-m8-minmax',
@@ -49,15 +50,16 @@ export class m8MinmaxComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
+        private router: Router
     ) { }
 
-    ngOnInit() {
-        this.GetData();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) this.GetData();
     }
 
     GetData() {
         this.adminService.getAll<any>(customer.M8GetLimit).subscribe(res => {
-                this.com = res.data.com,
+            this.com = res.data.com,
                 this.comtype = res.data.comtype,
                 this.lim1 = res.data.lim1,
                 this.lim2 = res.data.lim2,
@@ -74,32 +76,108 @@ export class m8MinmaxComponent implements OnInit {
         });
     }
 
-    Update() {
-        let dataSelect = {
-            com: (document.getElementById("Com") as HTMLInputElement).value === "" ? null : (document.getElementById("Com") as HTMLInputElement).value,
-            comtype: (document.getElementById("ComType") as HTMLInputElement).value === "" ? null : (document.getElementById("ComType") as HTMLInputElement).value,
-            lim1: (document.getElementById("Lim1") as HTMLInputElement).value === "" ? null : (document.getElementById("Lim1") as HTMLInputElement).value,
-            lim2: (document.getElementById("Lim2") as HTMLInputElement).value === "" ? null : (document.getElementById("Lim2") as HTMLInputElement).value,
-            lim3: (document.getElementById("Lim3") as HTMLInputElement).value === "" ? null : (document.getElementById("Lim3") as HTMLInputElement).value,
-            lim4: (document.getElementById("Lim4") as HTMLInputElement).value === "" ? null : (document.getElementById("Lim4") as HTMLInputElement).value,
-            max1: (document.getElementById("Max1") as HTMLInputElement).value === "" ? null : (document.getElementById("Max1") as HTMLInputElement).value,
-            max2: (document.getElementById("Max2") as HTMLInputElement).value === "" ? null : (document.getElementById("Max2") as HTMLInputElement).value,
-            max3: (document.getElementById("Max3") as HTMLInputElement).value === "" ? null : (document.getElementById("Max3") as HTMLInputElement).value,
-            max4: (document.getElementById("Max4") as HTMLInputElement).value === "" ? null : (document.getElementById("Max4") as HTMLInputElement).value,
-            max5: (document.getElementById("Max5") as HTMLInputElement).value === "" ? null : (document.getElementById("Max5") as HTMLInputElement).value,
-            max6: (document.getElementById("Max6") as HTMLInputElement).value === "" ? null : (document.getElementById("Max6") as HTMLInputElement).value,
-            max7: (document.getElementById("Max7") as HTMLInputElement).value === "" ? null : (document.getElementById("Max7") as HTMLInputElement).value,
-            suspend: (document.getElementById("Suspend") as HTMLInputElement).value === "" ? null : (document.getElementById("Suspend") as HTMLInputElement).value
-        }
+    async Update() {
+        if (await this.checkUpdatePermission()) {
+            let dataSelect = {
+                com: (document.getElementById("Com") as HTMLInputElement).value === "" ? null : (document.getElementById("Com") as HTMLInputElement).value,
+                comtype: (document.getElementById("ComType") as HTMLInputElement).value === "" ? null : (document.getElementById("ComType") as HTMLInputElement).value,
+                lim1: (document.getElementById("Lim1") as HTMLInputElement).value === "" ? null : (document.getElementById("Lim1") as HTMLInputElement).value,
+                lim2: (document.getElementById("Lim2") as HTMLInputElement).value === "" ? null : (document.getElementById("Lim2") as HTMLInputElement).value,
+                lim3: (document.getElementById("Lim3") as HTMLInputElement).value === "" ? null : (document.getElementById("Lim3") as HTMLInputElement).value,
+                lim4: (document.getElementById("Lim4") as HTMLInputElement).value === "" ? null : (document.getElementById("Lim4") as HTMLInputElement).value,
+                max1: (document.getElementById("Max1") as HTMLInputElement).value === "" ? null : (document.getElementById("Max1") as HTMLInputElement).value,
+                max2: (document.getElementById("Max2") as HTMLInputElement).value === "" ? null : (document.getElementById("Max2") as HTMLInputElement).value,
+                max3: (document.getElementById("Max3") as HTMLInputElement).value === "" ? null : (document.getElementById("Max3") as HTMLInputElement).value,
+                max4: (document.getElementById("Max4") as HTMLInputElement).value === "" ? null : (document.getElementById("Max4") as HTMLInputElement).value,
+                max5: (document.getElementById("Max5") as HTMLInputElement).value === "" ? null : (document.getElementById("Max5") as HTMLInputElement).value,
+                max6: (document.getElementById("Max6") as HTMLInputElement).value === "" ? null : (document.getElementById("Max6") as HTMLInputElement).value,
+                max7: (document.getElementById("Max7") as HTMLInputElement).value === "" ? null : (document.getElementById("Max7") as HTMLInputElement).value,
+                suspend: (document.getElementById("Suspend") as HTMLInputElement).value === "" ? null : (document.getElementById("Suspend") as HTMLInputElement).value
+            }
 
-        this.adminService.add<any>(customer.M8SetLimit, dataSelect).subscribe(res => {
-            this.toasterService.pop('success', 'Success', res.message);
-            this.GetData();
-        }, error => {
-            this.ngOnInit();
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
+            this.adminService.add<any>(customer.M8SetLimit, dataSelect).subscribe(res => {
+                this.toasterService.pop('success', 'Success', res.message);
+                this.GetData();
+            }, error => {
+                this.ngOnInit();
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
+        }
     }
 
+    //#region Check Permission
 
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[6].Permissions[0].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[6].submenu[0].Permissions[0].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[6].Permissions[1].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[6].submenu[0].Permissions[1].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[6].Permissions[2].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[6].submenu[0].Permissions[2].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

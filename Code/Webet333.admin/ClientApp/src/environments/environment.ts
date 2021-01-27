@@ -5,8 +5,8 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
+    apiUrl: 'http://uatapi.webet333.com/api/v1/'
     //apiUrl: 'http://localhost:49841/api/v1/'
 };
 
@@ -295,6 +295,11 @@ export const customer = {
 
     CustomerICNumberAdd: environment.apiUrl + 'account/icnumber/insert',
     CustomerICImageAdd: environment.apiUrl + 'account/icimage/insert',
+
+    adminList: environment.apiUrl + 'admin/list',
+    adminAdd: environment.apiUrl + 'admin/add',
+    adminUpdate: environment.apiUrl + 'admin/update',
+    defaultPermissionList: environment.apiUrl + 'user/default_permission/retrieve',
 }
 
 export const playtech = {
@@ -383,4 +388,8 @@ export const VIPSetting = {
 
     VIPLevelList: environment.apiUrl + 'viplevel/select',
     UserVIPLevelUpdate: environment.apiUrl + 'viplevel/user/update',
+}
+
+export const ErrorMessages = {
+    unAuthorized: "You are not authorized to access this page!!"
 }

@@ -1,14 +1,15 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { ToasterService, ToasterConfig } from 'angular2-toaster';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
+
 @Component({
     selector: 'app-rebate-setting',
     templateUrl: './rebate-setting.component.html',
     styleUrls: ['./rebate-setting.component.scss']
 })
 export class RebateSettingComponent implements OnInit {
-
     hoursValue: any;
     minuteValue: any;
     secondValue: any;
@@ -20,7 +21,8 @@ export class RebateSettingComponent implements OnInit {
 
     constructor(
         private adminService: AdminService,
-        private toasterService: ToasterService
+        private toasterService: ToasterService,
+        private router: Router
     ) { }
 
     Hours: any = [
@@ -76,8 +78,8 @@ export class RebateSettingComponent implements OnInit {
         { second: "54" }, { second: "55" }, { second: "56" }, { second: "57" }, { second: "58" }, { second: "59" },
     ];
 
-    ngOnInit() {
-        this.GetSetting();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) this.GetSetting();
     }
 
     HourChange($event) {
@@ -106,7 +108,7 @@ export class RebateSettingComponent implements OnInit {
         }
 
         this.adminService.add<any>(customer.GlobalparameterSelect, LiveModel).subscribe(res => {
-            this.livevalue= res.data.value;
+            this.livevalue = res.data.value;
         });
 
         let sportsModel = {
@@ -126,80 +128,130 @@ export class RebateSettingComponent implements OnInit {
         });
     }
 
-    SaveRebateBetting() {
+    async SaveRebateBetting() {
+        if (await this.checkUpdatePermission()) {
+            if (this.hoursValue == undefined)
+                return this.toasterService.pop('error', 'Error', "Please Select Hours");
 
-        if (this.hoursValue == undefined)
-            return this.toasterService.pop('error', 'Error', "Please Select Hours");
+            if (this.minuteValue == undefined)
+                return this.toasterService.pop('error', 'Error', "Please Select minute");
 
-        if (this.minuteValue == undefined)
-            return this.toasterService.pop('error', 'Error', "Please Select minute");
+            if (this.secondValue == undefined)
+                return this.toasterService.pop('error', 'Error', "Please Select Second");
 
-        if (this.secondValue == undefined)
-            return this.toasterService.pop('error', 'Error', "Please Select Second");
-
-        let Model = {
-            dateTime: this.hoursValue + this.minuteValue + this.secondValue
-        }
-
-        try {
-            let slotModel={
-                name: "SlotsRebatePercentage",
-                value: ((document.getElementById("slotspercentage") as HTMLInputElement).value)
+            let Model = {
+                dateTime: this.hoursValue + this.minuteValue + this.secondValue
             }
 
-            this.adminService.add<any>(customer.GlobalparameterUpdate, slotModel).subscribe(res => {
-                this.toasterService.pop('success', 'Success', res.message);
-            }, error => {
-                this.toasterService.pop('error', 'Error', error.error.message);
-            });
-        }
-        catch{
+            try {
+                let slotModel = {
+                    name: "SlotsRebatePercentage",
+                    value: ((document.getElementById("slotspercentage") as HTMLInputElement).value)
+                }
 
-        }
-
-        try {
-            let liveModel = {
-                name: "LiveRebatePercentage",
-                value: ((document.getElementById("livepercentage") as HTMLInputElement).value)
+                this.adminService.add<any>(customer.GlobalparameterUpdate, slotModel).subscribe(res => {
+                    this.toasterService.pop('success', 'Success', res.message);
+                }, error => {
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
+            }
+            catch {
             }
 
-            this.adminService.add<any>(customer.GlobalparameterUpdate, liveModel).subscribe(res => {
-                this.toasterService.pop('success', 'Success', res.message);
-            }, error => {
-                this.toasterService.pop('error', 'Error', error.error.message);
-            });
-        }
-        catch{
+            try {
+                let liveModel = {
+                    name: "LiveRebatePercentage",
+                    value: ((document.getElementById("livepercentage") as HTMLInputElement).value)
+                }
 
-        }
-
-        try {
-
-            let sportsModel = {
-                name: "SportsRebatePercentage",
-                value: ((document.getElementById("sportpercentage") as HTMLInputElement).value)
+                this.adminService.add<any>(customer.GlobalparameterUpdate, liveModel).subscribe(res => {
+                    this.toasterService.pop('success', 'Success', res.message);
+                }, error => {
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
             }
-            this.adminService.add<any>(customer.GlobalparameterUpdate, sportsModel).subscribe(res => {
-                this.toasterService.pop('success', 'Success', res.message);
-            }, error => {
-                this.toasterService.pop('error', 'Error', error.error.message);
-            });
-        }
-        catch{
+            catch {
+            }
 
-        }
+            try {
+                let sportsModel = {
+                    name: "SportsRebatePercentage",
+                    value: ((document.getElementById("sportpercentage") as HTMLInputElement).value)
+                }
+                this.adminService.add<any>(customer.GlobalparameterUpdate, sportsModel).subscribe(res => {
+                    this.toasterService.pop('success', 'Success', res.message);
+                }, error => {
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
+            }
+            catch {
+            }
 
-        try {
-            this.adminService.add<any>(customer.RebateSettingUpdate, Model).subscribe(res => {
-                this.toasterService.pop('success', 'Success', res.message);
-            }, error => {
-                this.toasterService.pop('error', 'Error', error.error.message);
-            });
-        }
-        catch{
+            try {
+                this.adminService.add<any>(customer.RebateSettingUpdate, Model).subscribe(res => {
+                    this.toasterService.pop('success', 'Success', res.message);
+                }, error => {
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
+            }
+            catch {
+            }
 
+            this.ngOnInit();
         }
-
-        this.ngOnInit();
     }
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[2].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[2].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[2].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

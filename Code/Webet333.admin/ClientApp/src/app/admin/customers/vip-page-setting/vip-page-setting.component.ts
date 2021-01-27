@@ -2,8 +2,9 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterService } from 'angular2-toaster';
-import { customer, VIPSetting } from '../../../../environments/environment';
+import { customer, VIPSetting, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-vip-page-setting',
@@ -22,11 +23,14 @@ export class VipPageComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private modalService: NgbModal,
+        private router: Router
     ) { }
 
-    ngOnInit() {
-        this.getVIPcategory();
-        this.promotionList();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.getVIPcategory();
+            this.promotionList();
+        }
     }
 
     config = {
@@ -60,7 +64,7 @@ export class VipPageComponent implements OnInit {
     getVIPcategory() {
         this.adminService.get<any>(VIPSetting.getVIP).subscribe(res => {
             this.vipData = res.data;
-                (document.getElementById("depositNormal") as HTMLInputElement).value = this.vipData.NormalDeposit,
+            (document.getElementById("depositNormal") as HTMLInputElement).value = this.vipData.NormalDeposit,
                 (document.getElementById("weekelyCredNormal") as HTMLInputElement).value = this.vipData.NormalWeeklyExtraFreeCREDIT,
                 (document.getElementById("birthdayBonusNormal") as HTMLInputElement).value = this.vipData.NormalBirthdayBonus,
                 (document.getElementById("liveCasinoSportRebateNormal") as HTMLInputElement).value = this.vipData.NormalLiveCasicnoSlotRebate,
@@ -124,71 +128,129 @@ export class VipPageComponent implements OnInit {
         });
     }
 
-    addVIPcategory() {
-        this.disabled = true;
-        let dataSelect = {
-            depositNormal: (document.getElementById("depositNormal") as HTMLInputElement).value,
-            depositBrooze: (document.getElementById("depositBrooze") as HTMLInputElement).value,
-            depositSilver: (document.getElementById("depositSilver") as HTMLInputElement).value,
-            depositGold: (document.getElementById("depositGold") as HTMLInputElement).value,
-            depositPlatinum: (document.getElementById("depositPlatinum") as HTMLInputElement).value,
-            depositDiamond: (document.getElementById("depositDiamond") as HTMLInputElement).value,
-            weekelyCredNormal: (document.getElementById("weekelyCredNormal") as HTMLInputElement).value,
-            weekelyCredBrooze: (document.getElementById("weekelyCredBrooze") as HTMLInputElement).value,
-            weekelyCredSilver: (document.getElementById("weekelyCredSilver") as HTMLInputElement).value,
-            weekelyCredGold: (document.getElementById("weekelyCredGold") as HTMLInputElement).value,
-            weekelyCredPlatinum: (document.getElementById("weekelyCredPlatinum") as HTMLInputElement).value,
-            weekelyCredDiamond: (document.getElementById("weekelyCredDiamond") as HTMLInputElement).value,
-            birthdayBonusNormal: (document.getElementById("birthdayBonusNormal") as HTMLInputElement).value,
-            birthdayBonusBrooze: (document.getElementById("birthdayBonusBrooze") as HTMLInputElement).value,
-            birthdayBonusSilver: (document.getElementById("birthdayBonusSilver") as HTMLInputElement).value,
-            birthdayBonusGold: (document.getElementById("birthdayBonusGold") as HTMLInputElement).value,
-            birthdayBonusPlatinum: (document.getElementById("birthdayBonusPlatinum") as HTMLInputElement).value,
-            birthdayBonusDiamond: (document.getElementById("birthdayBonusDiamond") as HTMLInputElement).value,
-            liveCasinoSportRebateNormal: (document.getElementById("liveCasinoSportRebateNormal") as HTMLInputElement).value,
-            liveCasinoSportRebateBrooze: (document.getElementById("liveCasinoSportRebateBrooze") as HTMLInputElement).value,
-            liveCasinoSportRebateSilver: (document.getElementById("liveCasinoSportRebateSilver") as HTMLInputElement).value,
-            liveCasinoSportRebateGold: (document.getElementById("liveCasinoSportRebateGold") as HTMLInputElement).value,
-            liveCasinoSportRebatePlatinum: (document.getElementById("liveCasinoSportRebatePlatinum") as HTMLInputElement).value,
-            liveCasinoSportRebateDiamond: (document.getElementById("liveCasinoSportRebateDiamond") as HTMLInputElement).value,
-            sportBookRebateNormal: (document.getElementById("sportBookRebateNormal") as HTMLInputElement).value,
-            sportBookRebateBrooze: (document.getElementById("sportBookRebateBrooze") as HTMLInputElement).value,
-            sportBookRebateSilver: (document.getElementById("sportBookRebateSilver") as HTMLInputElement).value,
-            sportBookRebateGold: (document.getElementById("sportBookRebateGold") as HTMLInputElement).value,
-            sportBookRebatePlatinum: (document.getElementById("sportBookRebatePlatinum") as HTMLInputElement).value,
-            sportBookRebateDiamond: (document.getElementById("sportBookRebateDiamond") as HTMLInputElement).value,
-            kissandPussyRebateNormal: (document.getElementById("kissandPussyRebateNormal") as HTMLInputElement).value,
-            kissandPussyRebateBrooze: (document.getElementById("kissandPussyRebateBrooze") as HTMLInputElement).value,
-            kissandPussyRebateSilver: (document.getElementById("kissandPussyRebateSilver") as HTMLInputElement).value,
-            kissandPussyRebateGold: (document.getElementById("kissandPussyRebateGold") as HTMLInputElement).value,
-            kissandPussyRebatePlatinum: (document.getElementById("kissandPussyRebatePlatinum") as HTMLInputElement).value,
-            kissandPussyRebateDiamond: (document.getElementById("kissandPussyRebateDiamond") as HTMLInputElement).value,
-            withdrawTimeNormal: (document.getElementById("withdrawTimeNormal") as HTMLInputElement).value,
-            withdrawTimeBrooze: (document.getElementById("withdrawTimeBrooze") as HTMLInputElement).value,
-            withdrawTimeSilver: (document.getElementById("withdrawTimeSilver") as HTMLInputElement).value,
-            withdrawTimeGold: (document.getElementById("withdrawTimeGold") as HTMLInputElement).value,
-            withdrawTimePlatinum: (document.getElementById("withdrawTimePlatinum") as HTMLInputElement).value,
-            withdrawTimeDiamond: (document.getElementById("withdrawTimeDiamond") as HTMLInputElement).value,
-            withdrawAmountNormal: (document.getElementById("withdrawAmountNormal") as HTMLInputElement).value,
-            withdrawAmountBrooze: (document.getElementById("withdrawAmountBrooze") as HTMLInputElement).value,
-            withdrawAmountSilver: (document.getElementById("withdrawAmountSilver") as HTMLInputElement).value,
-            withdrawAmountGold: (document.getElementById("withdrawAmountGold") as HTMLInputElement).value,
-            withdrawAmountPlatinum: (document.getElementById("withdrawAmountPlatinum") as HTMLInputElement).value,
-            withdrawAmountDiamond: (document.getElementById("withdrawAmountDiamond") as HTMLInputElement).value,
-            weeklyFreeCreditMinDepositAmountNormal: (document.getElementById("weeklyFreeCreditMinDepositAmountNormal") as HTMLInputElement).value,
-            weeklyFreeCreditMinDepositAmountBrooze: (document.getElementById("weeklyFreeCreditMinDepositAmountBrooze") as HTMLInputElement).value,
-            weeklyFreeCreditMinDepositAmountSilver: (document.getElementById("weeklyFreeCreditMinDepositAmountSilver") as HTMLInputElement).value,
-            weeklyFreeCreditMinDepositAmountGold: (document.getElementById("weeklyFreeCreditMinDepositAmountGold") as HTMLInputElement).value,
-            weeklyFreeCreditMinDepositAmountPlatinum: (document.getElementById("weeklyFreeCreditMinDepositAmountPlatinum") as HTMLInputElement).value,
-            weeklyFreeCreditMinDepositAmountDiamond: (document.getElementById("weeklyFreeCreditMinDepositAmountDiamond") as HTMLInputElement).value
+    async addVIPcategory() {
+        if (await this.checkUpdatePermission()) {
+            this.disabled = true;
+            let dataSelect = {
+                depositNormal: (document.getElementById("depositNormal") as HTMLInputElement).value,
+                depositBrooze: (document.getElementById("depositBrooze") as HTMLInputElement).value,
+                depositSilver: (document.getElementById("depositSilver") as HTMLInputElement).value,
+                depositGold: (document.getElementById("depositGold") as HTMLInputElement).value,
+                depositPlatinum: (document.getElementById("depositPlatinum") as HTMLInputElement).value,
+                depositDiamond: (document.getElementById("depositDiamond") as HTMLInputElement).value,
+                weekelyCredNormal: (document.getElementById("weekelyCredNormal") as HTMLInputElement).value,
+                weekelyCredBrooze: (document.getElementById("weekelyCredBrooze") as HTMLInputElement).value,
+                weekelyCredSilver: (document.getElementById("weekelyCredSilver") as HTMLInputElement).value,
+                weekelyCredGold: (document.getElementById("weekelyCredGold") as HTMLInputElement).value,
+                weekelyCredPlatinum: (document.getElementById("weekelyCredPlatinum") as HTMLInputElement).value,
+                weekelyCredDiamond: (document.getElementById("weekelyCredDiamond") as HTMLInputElement).value,
+                birthdayBonusNormal: (document.getElementById("birthdayBonusNormal") as HTMLInputElement).value,
+                birthdayBonusBrooze: (document.getElementById("birthdayBonusBrooze") as HTMLInputElement).value,
+                birthdayBonusSilver: (document.getElementById("birthdayBonusSilver") as HTMLInputElement).value,
+                birthdayBonusGold: (document.getElementById("birthdayBonusGold") as HTMLInputElement).value,
+                birthdayBonusPlatinum: (document.getElementById("birthdayBonusPlatinum") as HTMLInputElement).value,
+                birthdayBonusDiamond: (document.getElementById("birthdayBonusDiamond") as HTMLInputElement).value,
+                liveCasinoSportRebateNormal: (document.getElementById("liveCasinoSportRebateNormal") as HTMLInputElement).value,
+                liveCasinoSportRebateBrooze: (document.getElementById("liveCasinoSportRebateBrooze") as HTMLInputElement).value,
+                liveCasinoSportRebateSilver: (document.getElementById("liveCasinoSportRebateSilver") as HTMLInputElement).value,
+                liveCasinoSportRebateGold: (document.getElementById("liveCasinoSportRebateGold") as HTMLInputElement).value,
+                liveCasinoSportRebatePlatinum: (document.getElementById("liveCasinoSportRebatePlatinum") as HTMLInputElement).value,
+                liveCasinoSportRebateDiamond: (document.getElementById("liveCasinoSportRebateDiamond") as HTMLInputElement).value,
+                sportBookRebateNormal: (document.getElementById("sportBookRebateNormal") as HTMLInputElement).value,
+                sportBookRebateBrooze: (document.getElementById("sportBookRebateBrooze") as HTMLInputElement).value,
+                sportBookRebateSilver: (document.getElementById("sportBookRebateSilver") as HTMLInputElement).value,
+                sportBookRebateGold: (document.getElementById("sportBookRebateGold") as HTMLInputElement).value,
+                sportBookRebatePlatinum: (document.getElementById("sportBookRebatePlatinum") as HTMLInputElement).value,
+                sportBookRebateDiamond: (document.getElementById("sportBookRebateDiamond") as HTMLInputElement).value,
+                kissandPussyRebateNormal: (document.getElementById("kissandPussyRebateNormal") as HTMLInputElement).value,
+                kissandPussyRebateBrooze: (document.getElementById("kissandPussyRebateBrooze") as HTMLInputElement).value,
+                kissandPussyRebateSilver: (document.getElementById("kissandPussyRebateSilver") as HTMLInputElement).value,
+                kissandPussyRebateGold: (document.getElementById("kissandPussyRebateGold") as HTMLInputElement).value,
+                kissandPussyRebatePlatinum: (document.getElementById("kissandPussyRebatePlatinum") as HTMLInputElement).value,
+                kissandPussyRebateDiamond: (document.getElementById("kissandPussyRebateDiamond") as HTMLInputElement).value,
+                withdrawTimeNormal: (document.getElementById("withdrawTimeNormal") as HTMLInputElement).value,
+                withdrawTimeBrooze: (document.getElementById("withdrawTimeBrooze") as HTMLInputElement).value,
+                withdrawTimeSilver: (document.getElementById("withdrawTimeSilver") as HTMLInputElement).value,
+                withdrawTimeGold: (document.getElementById("withdrawTimeGold") as HTMLInputElement).value,
+                withdrawTimePlatinum: (document.getElementById("withdrawTimePlatinum") as HTMLInputElement).value,
+                withdrawTimeDiamond: (document.getElementById("withdrawTimeDiamond") as HTMLInputElement).value,
+                withdrawAmountNormal: (document.getElementById("withdrawAmountNormal") as HTMLInputElement).value,
+                withdrawAmountBrooze: (document.getElementById("withdrawAmountBrooze") as HTMLInputElement).value,
+                withdrawAmountSilver: (document.getElementById("withdrawAmountSilver") as HTMLInputElement).value,
+                withdrawAmountGold: (document.getElementById("withdrawAmountGold") as HTMLInputElement).value,
+                withdrawAmountPlatinum: (document.getElementById("withdrawAmountPlatinum") as HTMLInputElement).value,
+                withdrawAmountDiamond: (document.getElementById("withdrawAmountDiamond") as HTMLInputElement).value,
+                weeklyFreeCreditMinDepositAmountNormal: (document.getElementById("weeklyFreeCreditMinDepositAmountNormal") as HTMLInputElement).value,
+                weeklyFreeCreditMinDepositAmountBrooze: (document.getElementById("weeklyFreeCreditMinDepositAmountBrooze") as HTMLInputElement).value,
+                weeklyFreeCreditMinDepositAmountSilver: (document.getElementById("weeklyFreeCreditMinDepositAmountSilver") as HTMLInputElement).value,
+                weeklyFreeCreditMinDepositAmountGold: (document.getElementById("weeklyFreeCreditMinDepositAmountGold") as HTMLInputElement).value,
+                weeklyFreeCreditMinDepositAmountPlatinum: (document.getElementById("weeklyFreeCreditMinDepositAmountPlatinum") as HTMLInputElement).value,
+                weeklyFreeCreditMinDepositAmountDiamond: (document.getElementById("weeklyFreeCreditMinDepositAmountDiamond") as HTMLInputElement).value
+            }
+            this.adminService.add<any>(VIPSetting.addVIP, dataSelect).subscribe(res => {
+                this.disabled = false;
+                this.toasterService.pop('success', 'Success', res.message);
+            }, error => {
+                this.disabled = false;
+                this.ngOnInit();
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-        this.adminService.add<any>(VIPSetting.addVIP, dataSelect).subscribe(res => {
-            this.disabled = false;
-            this.toasterService.pop('success', 'Success', res.message);
-        }, error => {
-            this.disabled = false;
-            this.ngOnInit();
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[11].Permissions[0].IsChecked === true) {
+                return true;
+            }
+            else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[11].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[11].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

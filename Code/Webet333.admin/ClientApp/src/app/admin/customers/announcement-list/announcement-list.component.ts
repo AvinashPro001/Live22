@@ -3,7 +3,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 
@@ -49,9 +49,11 @@ export class AnnouncementListComponent implements OnInit {
     //#endregion
 
     //#region Init
-    ngOnInit() {
-        this.setColumn();
-        this.setPageData();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setColumn();
+            this.setPageData();
+        }
     }
     //#endregion
 
@@ -84,26 +86,30 @@ export class AnnouncementListComponent implements OnInit {
     //#endregion
 
     //#region navigateAdd
-    navigateAdd() {
-        this.router.navigate(['/admin/customers/announcement-add']);
-        //this.openUnderconstructionDialog();
+    async navigateAdd() {
+        if (await this.checkAddPermission()) {
+            this.router.navigate(['/admin/customers/announcement-add']);
+            //this.openUnderconstructionDialog();
+        }
     }
     //#endregion
 
 
     //#region rejectRequest
-    rejectRequest(id) {
-        if (this.final == true) {
-            let data = {
-                id: id,
-                approved: "rejected"
+    async rejectRequest(id) {
+        if (await this.checkUpdatePermission()) {
+            if (this.final == true) {
+                let data = {
+                    id: id,
+                    approved: "rejected"
+                }
+                this.adminService.add<any>(customer.announcementDelete, data).subscribe(res => {
+                    this.toasterService.pop('success', 'Success', res.message);
+                    this.ngOnInit();
+                }, error => {
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
             }
-            this.adminService.add<any>(customer.announcementDelete, data).subscribe(res => {
-                this.toasterService.pop('success', 'Success', res.message);
-                this.ngOnInit();
-            }, error => {
-                this.toasterService.pop('error', 'Error', error.error.message);
-            });
         }
     }
     //#endregion
@@ -119,9 +125,11 @@ export class AnnouncementListComponent implements OnInit {
     }
     //#endregion
 
-    edit(data) {
-        localStorage.setItem('announcementData', JSON.stringify(data));
-        this.router.navigate(['/admin/customers/announcement-edit']);
+    async edit(data) {
+        if (await this.checkUpdatePermission()) {
+            localStorage.setItem('announcementData', JSON.stringify(data));
+            this.router.navigate(['/admin/customers/announcement-edit']);
+        }
     }
 
     //#region openUnderconstructionDialog
@@ -129,6 +137,62 @@ export class AnnouncementListComponent implements OnInit {
         this.confirmationDialogService.alert('Alert!!!!', 'The Add Deposit is under development.')
     }
     //#endregion
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[9].Permissions[0].IsChecked === true) {
+                return true;
+            }
+            else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[9].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[9].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }
 
 

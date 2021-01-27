@@ -3,7 +3,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 
@@ -59,9 +59,11 @@ export class BonusListComponent implements OnInit {
     //#endregion
 
     //#region Init
-    ngOnInit() {
-        this.setColumn();
-        this.setPageData(null, null);
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setColumn();
+            this.setPageData(null, null);
+        }
     }
     //#endregion
 
@@ -146,9 +148,11 @@ export class BonusListComponent implements OnInit {
     //#endregion
 
     //#region navigateAdd
-    navigateAdd() {
-        this.router.navigate(['/admin/customers/bonus-add']);
-        //this.openUnderconstructionDialog();
+    async navigateAdd() {
+        if (await this.checkAddPermission()) {
+            this.router.navigate(['/admin/customers/bonus-add']);
+            //this.openUnderconstructionDialog();
+        }
     }
     //#endregion
 
@@ -167,5 +171,76 @@ export class BonusListComponent implements OnInit {
     }
     //#endregion
 
-    searchHandlerByDate() {        let fromdate, todate        fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value        todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value        if (todate === "")            todate = fromdate;        if (fromdate === "")            fromdate = todate;        if (fromdate === "" && todate === "")            this.toasterService.pop('error', 'Error', "Please select Date.");        else if ((fromdate !== undefined && todate !== null) || (todate !== null && fromdate !== null)) {            this.setPageData(fromdate, todate);        }        else {            this.setPageData(null, null)        }    }
+    searchHandlerByDate() {
+        let fromdate, todate
+        fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value
+        todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value
+        if (todate === "")
+            todate = fromdate;
+        if (fromdate === "")
+            fromdate = todate;
+        if (fromdate === "" && todate === "")
+            this.toasterService.pop('error', 'Error', "Please select Date.");
+        else if ((fromdate !== undefined && todate !== null) || (todate !== null && fromdate !== null)) {
+            this.setPageData(fromdate, todate);
+        }
+        else {
+            this.setPageData(null, null)
+        }
+    }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[3].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[3].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[3].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

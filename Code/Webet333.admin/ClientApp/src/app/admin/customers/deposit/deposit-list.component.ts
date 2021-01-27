@@ -5,7 +5,7 @@ import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Stopwatch } from "ts-stopwatch";
 import { AdminService } from '../../admin.service';
 import { DatePipe } from '@angular/common';
-import { account, customer } from '../../../../environments/environment';
+import { account, customer, ErrorMessages } from '../../../../environments/environment';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HubConnectionBuilder } from '@aspnet/signalr';
@@ -113,32 +113,34 @@ export class DepositListComponent implements OnInit {
 
 
     //#region Init
-    ngOnInit() {
-        //this.hubConnection();
-        this.getAutoRefershUpdate();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            //this.hubConnection();
+            this.getAutoRefershUpdate();
 
-        setInterval(() => {
-            this.CheckDeposit();
-        }, 5000)
+            setInterval(() => {
+                this.CheckDeposit();
+            }, 5000)
 
-        //this.generate(12);
-        this.depositStatus = this.route.snapshot.queryParamMap.get('depositStatus')
-        if (this.depositStatus != null) {
-            if (this.depositStatus == 'Approved') {
-                this.depositStatus = this.listType[1].verified;
+            //this.generate(12);
+            this.depositStatus = this.route.snapshot.queryParamMap.get('depositStatus')
+            if (this.depositStatus != null) {
+                if (this.depositStatus == 'Approved') {
+                    this.depositStatus = this.listType[1].verified;
+                }
+                else if (this.depositStatus == 'Rejected') {
+                    this.depositStatus = this.listType[2].verified;
+                }
             }
-            else if (this.depositStatus == 'Rejected') {
-                this.depositStatus = this.listType[2].verified;
+            else {
+                this.depositStatus = this.listType[0].verified;
             }
+            this.depositStatus == 'Pending' ? this.selectedList = this.listType[0] : this.depositStatus == 'Approved' ? this.selectedList = this.listType[1] : this.depositStatus == 'Rejected' ? this.selectedList = this.listType[2] : this.selectedList = this.listType[0];
+            this.setColumn(this.selectedList.verified);
+            this.setPageData(this.selectedList.verified, "", null, null);
+            this.curDate = new Date();
+            setTimeout(() => { this.loadingIndicator = false; }, 1500);
         }
-        else {
-            this.depositStatus = this.listType[0].verified;
-        }
-        this.depositStatus == 'Pending' ? this.selectedList = this.listType[0] : this.depositStatus == 'Approved' ? this.selectedList = this.listType[1] : this.depositStatus == 'Rejected' ? this.selectedList = this.listType[2] : this.selectedList = this.listType[0];
-        this.setColumn(this.selectedList.verified);
-        this.setPageData(this.selectedList.verified, "", null, null);
-        this.curDate = new Date();
-        setTimeout(() => { this.loadingIndicator = false; }, 1500);
     }
     //#endregion
 
@@ -323,12 +325,12 @@ export class DepositListComponent implements OnInit {
                 });
             });
             this.rows = [...this.rows];
-          //  this.loadingIndicator = false;
+            //  this.loadingIndicator = false;
 
 
 
         }, error => {
-           // this.loadingIndicator = false;
+            // this.loadingIndicator = false;
             this.toasterService.pop('error', 'Error', error.error.message);
         });
 
@@ -412,8 +414,8 @@ export class DepositListComponent implements OnInit {
     //#endregion
 
     //#region navigateAdd
-    navigateAdd() {
-        this.router.navigate(['/admin/customers/deposit-add']);
+    async navigateAdd() {
+        if (await this.checkAddPermission()) this.router.navigate(['/admin/customers/deposit-add']);
     }
     //#endregion
 
@@ -498,13 +500,15 @@ export class DepositListComponent implements OnInit {
     //#endregion
 
     //#region open remark modal event
-    openremark(remark, id, type, username, walletName, amount) {
-        this.remarktype = type,
-            this.remarkid = id,
-            this.modalService.open(remark, { windowClass: 'dark-modal' }),
-            this.Username = username,
-            this.WalletName = walletName,
-            this.Amount = amount
+    async openremark(remark, id, type, username, walletName, amount) {
+        if (await this.checkUpdatePermission()) {
+            this.remarktype = type,
+                this.remarkid = id,
+                this.modalService.open(remark, { windowClass: 'dark-modal' }),
+                this.Username = username,
+                this.WalletName = walletName,
+                this.Amount = amount
+        }
     }
 
     decline() {
@@ -589,9 +593,11 @@ export class DepositListComponent implements OnInit {
     }
 
     //#region Add Receipt or Remover Receipt images
-    openModelAddRecipt(id, AddReceipt) {
-        this.RowId = id;
-        this.modalService.open(AddReceipt, { windowClass: 'dark-modal' });
+    async openModelAddRecipt(id, AddReceipt) {
+        if (await this.checkUpdatePermission()) {
+            this.RowId = id;
+            this.modalService.open(AddReceipt, { windowClass: 'dark-modal' });
+        }
     }
 
     uploadReceipt() {
@@ -695,4 +701,58 @@ export class DepositListComponent implements OnInit {
         }
     }
 
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[0].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[0].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[0].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

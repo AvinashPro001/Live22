@@ -3,11 +3,12 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterService } from 'angular2-toaster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
-import { account, customer, gameBalance, VIPSetting } from '../../../../environments/environment';
+import { account, customer, gameBalance, VIPSetting, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 import { debug } from 'util';
 import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { now } from 'core-js/fn/date';
+import { Router } from '@angular/router';
 
 
 
@@ -238,29 +239,33 @@ export class UsersDetailsComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private modalService: NgbModal,
-        private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>
+        private ngbCalendar: NgbCalendar,
+        private dateAdapter: NgbDateAdapter<string>,
+        private router: Router,
     ) { }
     //#endregion
 
     //#region OnInit Method
-    ngOnInit() {
-        let dataCustomer = JSON.parse(localStorage.getItem('id'));
-        this.Userdata = dataCustomer as object[];
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            let dataCustomer = JSON.parse(localStorage.getItem('id'));
+            this.Userdata = dataCustomer as object[];
 
-        if (this.Userdata != null) {
-            this.ShowDropDown = false;
-            this.onChange(this.Userdata);
+            if (this.Userdata != null) {
+                this.ShowDropDown = false;
+                this.onChange(this.Userdata);
 
+            }
+            else {
+                this.ShowDropDown = true;
+                this.customerUser();
+            }
+            this.LoadVIPCategory();
+            document.getElementById("profiletab").click();
+            this.coloumSet();
+            var someElement = document.getElementById("lockIcon");
+            localStorage.removeItem('id');
         }
-        else {
-            this.ShowDropDown = true;
-            this.customerUser();
-        }
-        this.LoadVIPCategory();
-        document.getElementById("profiletab").click();
-        this.coloumSet();
-        var someElement = document.getElementById("lockIcon");
-        localStorage.removeItem('id');
     }
 
     get today() {
@@ -1654,45 +1659,47 @@ export class UsersDetailsComponent implements OnInit {
     //#region Restore Balance of user
 
     async RetoreBalance() {
-        if (this.userid !== null && this.userid !== undefined) {
-            var id = this.userid;
-            await this.Kiss918Balance(id);
-            await this.Mega888(id);
-            await this.Maxbet(id);
-            await this.M8(id);
-            await this.AG(id);
-            await this.DG(id);
-            await this.Playtech(id);
-            await this.Joker(id);
-            await this.Sexybaccarat(id);
-            await this.SA(id);
-            await this.Pussy888(id);
-            await this.AllBet(id);
-            await this.WM(id)
-            await this.Pragmatic(id)
-            let data = {
-                kiss918wallet: this.kiss918balance == null ? 0.0 : this.kiss918balance,
-                maxbetwallet: this.Maxbetbalance == null ? 0.0 : this.Maxbetbalance,
-                jokerwallet: this.Jokerbalance == null ? 0.0 : this.Jokerbalance,
-                agwallet: this.AGbalance == null ? 0.0 : this.AGbalance,
-                m8wallet: this.M8balance == null ? 0.0 : this.M8balance,
-                playtechwallet: this.Playtechbalance == null ? 0.0 : this.Playtechbalance,
-                mega888wallet: this.Mega888balance == null ? 0.0 : this.Mega888balance,
-                dgwallet: this.DGbalance == null ? 0.0 : this.DGbalance,
-                sexywallet: this.Sexybaccaratbalance == null ? 0.0 : this.Sexybaccaratbalance,
-                sawallet: this.SAbalance == null ? 0.0 : this.SAbalance,
-                pussy888wallet: this.Pussy888balance == null ? 0.0 : this.Pussy888balance,
-                allbetwallet: this.allbetbalance == null ? 0.0 : this.allbetbalance,
-                WMwallet: this.wmbalance == null ? 0.0 : this.wmbalance,
-                pragmaticwallet: this.pragmaticbalance == null ? 0.0 : this.pragmaticbalance,
-                id: id
+        if (await this.checkUpdatePermission()) {
+            if (this.userid !== null && this.userid !== undefined) {
+                var id = this.userid;
+                await this.Kiss918Balance(id);
+                await this.Mega888(id);
+                await this.Maxbet(id);
+                await this.M8(id);
+                await this.AG(id);
+                await this.DG(id);
+                await this.Playtech(id);
+                await this.Joker(id);
+                await this.Sexybaccarat(id);
+                await this.SA(id);
+                await this.Pussy888(id);
+                await this.AllBet(id);
+                await this.WM(id)
+                await this.Pragmatic(id)
+                let data = {
+                    kiss918wallet: this.kiss918balance == null ? 0.0 : this.kiss918balance,
+                    maxbetwallet: this.Maxbetbalance == null ? 0.0 : this.Maxbetbalance,
+                    jokerwallet: this.Jokerbalance == null ? 0.0 : this.Jokerbalance,
+                    agwallet: this.AGbalance == null ? 0.0 : this.AGbalance,
+                    m8wallet: this.M8balance == null ? 0.0 : this.M8balance,
+                    playtechwallet: this.Playtechbalance == null ? 0.0 : this.Playtechbalance,
+                    mega888wallet: this.Mega888balance == null ? 0.0 : this.Mega888balance,
+                    dgwallet: this.DGbalance == null ? 0.0 : this.DGbalance,
+                    sexywallet: this.Sexybaccaratbalance == null ? 0.0 : this.Sexybaccaratbalance,
+                    sawallet: this.SAbalance == null ? 0.0 : this.SAbalance,
+                    pussy888wallet: this.Pussy888balance == null ? 0.0 : this.Pussy888balance,
+                    allbetwallet: this.allbetbalance == null ? 0.0 : this.allbetbalance,
+                    WMwallet: this.wmbalance == null ? 0.0 : this.wmbalance,
+                    pragmaticwallet: this.pragmaticbalance == null ? 0.0 : this.pragmaticbalance,
+                    id: id
+                }
+                this.adminService.add<any>(gameBalance.restoreBalance, data).subscribe(res => {
+                    this.WalletBalance(id);
+                });
             }
-            this.adminService.add<any>(gameBalance.restoreBalance, data).subscribe(res => {
-                this.WalletBalance(id);
-            });
-        }
-        else {
-            this.toasterService.pop('error', 'Error', "Select Username");
+            else {
+                this.toasterService.pop('error', 'Error', "Select Username");
+            }
         }
     }
 
@@ -1745,25 +1752,29 @@ export class UsersDetailsComponent implements OnInit {
 
     //#region Open Unfinished Show Dailog Box
 
-    unfinishedShow(content) {
-        if (this.userid != null && this.userid != undefined) {
-            this.openWindowCustomClass(content);
+    async unfinishedShow(content) {
+        if (await this.checkUpdatePermission()) {
+            if (this.userid != null && this.userid != undefined) {
+                this.openWindowCustomClass(content);
+            }
+            else
+                this.toasterService.pop('error', 'Error', "Select Username");
         }
-        else
-            this.toasterService.pop('error', 'Error', "Select Username");
     }
 
     //#endregion
 
     //#region Manager password Show Dailog Box
 
-    ManagerPasswordVerifiedShow(content, GameName) {
-        if (this.userid != null && this.userid != undefined) {
-            this.openWindowCustomClass(content);
-            this.GameName = GameName;
+    async ManagerPasswordVerifiedShow(content, GameName) {
+        if (await this.checkUpdatePermission()) {
+            if (this.userid != null && this.userid != undefined) {
+                this.openWindowCustomClass(content);
+                this.GameName = GameName;
+            }
+            else
+                this.toasterService.pop('error', 'Error', "Select Username");
         }
-        else
-            this.toasterService.pop('error', 'Error', "Select Username");
     }
 
     //#endregion
@@ -2500,44 +2511,46 @@ export class UsersDetailsComponent implements OnInit {
             this.toasterService.pop('error', 'Error', "Select Username");
     }
 
-    ResetPassword(GameName) {
-        if (this.userid != null && this.userid != undefined) {
-            if (GameName == "Pussy888") {
-                let data = {
-                    userId: this.userid,
-                    gameUsername: this.pussyUsername,
-                    gamePassword: this.Pussy888Password,
-                    username: this.userdata.username,
-                    rowId: this.Pussy888PasswordRowId,
-                    password: this.userPassword
+    async ResetPassword(GameName) {
+        if (await this.checkUpdatePermission()) {
+            if (this.userid != null && this.userid != undefined) {
+                if (GameName == "Pussy888") {
+                    let data = {
+                        userId: this.userid,
+                        gameUsername: this.pussyUsername,
+                        gamePassword: this.Pussy888Password,
+                        username: this.userdata.username,
+                        rowId: this.Pussy888PasswordRowId,
+                        password: this.userPassword
+                    }
+                    this.adminService.add<any>(customer.pussy888PasswordReset, data).subscribe(res => {
+                        this.toasterService.pop('success', 'Success', res.message);
+                    }, error => {
+                        this.modalService.dismissAll();
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                    });
                 }
-                this.adminService.add<any>(customer.pussy888PasswordReset, data).subscribe(res => {
-                    this.toasterService.pop('success', 'Success', res.message);
-                }, error => {
-                    this.modalService.dismissAll();
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                });
-            }
 
-            if (GameName == "Kiss918") {
-                let data = {
-                    userId: this.userid,
-                    gameUsername: this.kiss918Username,
-                    gamePassword: this.Kiss918Password,
-                    username: this.userdata.username,
-                    rowId: this.Kiss918PasswordRowId,
-                    password: this.userPassword
+                if (GameName == "Kiss918") {
+                    let data = {
+                        userId: this.userid,
+                        gameUsername: this.kiss918Username,
+                        gamePassword: this.Kiss918Password,
+                        username: this.userdata.username,
+                        rowId: this.Kiss918PasswordRowId,
+                        password: this.userPassword
+                    }
+                    this.adminService.add<any>(customer.kiss918PasswordReset, data).subscribe(res => {
+                        this.toasterService.pop('success', 'Success', res.message);
+                    }, error => {
+                        this.modalService.dismissAll();
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                    });
                 }
-                this.adminService.add<any>(customer.kiss918PasswordReset, data).subscribe(res => {
-                    this.toasterService.pop('success', 'Success', res.message);
-                }, error => {
-                    this.modalService.dismissAll();
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                });
             }
+            else
+                this.toasterService.pop('error', 'Error', "Select Username");
         }
-        else
-            this.toasterService.pop('error', 'Error', "Select Username");
     }
 
     VIPLevelUpdate() {
@@ -2578,4 +2591,58 @@ export class UsersDetailsComponent implements OnInit {
             this.toasterService.pop('error', 'Error', "Select Username");
     }
 
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[0].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[0].submenu[2].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[0].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[0].submenu[2].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[0].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[0].submenu[2].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

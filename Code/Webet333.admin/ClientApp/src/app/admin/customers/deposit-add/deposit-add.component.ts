@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterService } from 'angular2-toaster';
-import { AGGame, customer, gameBalance } from '../../../../environments/environment';
+import { AGGame, customer, gameBalance, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 
 
@@ -95,11 +95,12 @@ export class DepositAddComponent implements OnInit {
     //#endregion
 
     //#region ngOnInit
-    ngOnInit() {
-        this.customerUser();
-        this.retrieveDepositpage();
-        this.filenames = [];
-
+    async ngOnInit() {
+        if (await this.checkAddPermission()) {
+            this.customerUser();
+            this.retrieveDepositpage();
+            this.filenames = [];
+        }
     }
     //#endregion
 
@@ -187,7 +188,7 @@ export class DepositAddComponent implements OnInit {
                 this.WM(newVal);
                 this.Pragmatic(newVal);
             })
-            
+
         });
     }
     //#endregion
@@ -375,7 +376,7 @@ export class DepositAddComponent implements OnInit {
             });
 
 
-           
+
         }
 
     }
@@ -388,7 +389,7 @@ export class DepositAddComponent implements OnInit {
         //    promotionid: dataSelect.promotionId
         //};
         //this.adminService.add<any>(customer.promotionApplyInsert, promotionModel2).subscribe(walletData => {
-            this.ConfirmDeposit();
+        this.ConfirmDeposit();
         //});
     }
 
@@ -620,4 +621,59 @@ export class DepositAddComponent implements OnInit {
     }
 
     //#endregion Wallet Balance
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[0].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[0].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[0].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

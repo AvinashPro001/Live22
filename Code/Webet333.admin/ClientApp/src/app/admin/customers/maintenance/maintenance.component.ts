@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
-import { account, customer } from '../../../../environments/environment';
+import { account, customer, ErrorMessages } from '../../../../environments/environment';
 import { error } from 'util';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-maintenance',
     templateUrl: './maintenance.component.html',
@@ -51,13 +52,16 @@ export class MaintenanceComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
+        private router: Router
     ) { }
 
-    ngOnInit() {
-        this.setData();
-        this.VaderPay();
-        this.GetSMSSetting();
-        console.log(document.getElementsByName("radio").item);
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setData();
+            this.VaderPay();
+            this.GetSMSSetting();
+            console.log(document.getElementsByName("radio").item);
+        }
     }
 
     setData() {
@@ -123,17 +127,18 @@ export class MaintenanceComponent implements OnInit {
         })
     }
 
-    WalletMaintenanceUpdate(Id, value: boolean) {
-
-        let model = {
-            id: Id,
-            maintenance: value
+    async WalletMaintenanceUpdate(Id, value: boolean) {
+        if (await this.checkUpdatePermission()) {
+            let model = {
+                id: Id,
+                maintenance: value
+            }
+            this.adminService.add<any>(account.walletMainteanceUpdat, model).subscribe(res => {
+                this.toasterService.pop('success', 'Success', res.message);
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-        this.adminService.add<any>(account.walletMainteanceUpdat, model).subscribe(res => {
-            this.toasterService.pop('success', 'Success', res.message);
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
 
     VaderPay() {
@@ -144,16 +149,17 @@ export class MaintenanceComponent implements OnInit {
         });
     }
 
-    VaderPayMaintenanceUpdate(value: boolean) {
-
-        let model = {
-            value: value
+    async VaderPayMaintenanceUpdate(value: boolean) {
+        if (await this.checkUpdatePermission()) {
+            let model = {
+                value: value
+            }
+            this.adminService.add<any>(account.VaderPayParameterUpdate, model).subscribe(res => {
+                this.toasterService.pop('success', 'Success', res.message);
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-        this.adminService.add<any>(account.VaderPayParameterUpdate, model).subscribe(res => {
-            this.toasterService.pop('success', 'Success', res.message);
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
 
     GetSMSSetting() {
@@ -179,32 +185,88 @@ export class MaintenanceComponent implements OnInit {
         });
     }
 
-    UpdateSMSSetting(Name, Value) {
-
-        if (Name == "Etracker" && Value) {
-            let Model = {
-                name: "Trio",
-                value: false
+    async UpdateSMSSetting(Name, Value) {
+        if (await this.checkUpdatePermission()) {
+            if (Name == "Etracker" && Value) {
+                let Model = {
+                    name: "Trio",
+                    value: false
+                }
+                this.adminService.add<any>(customer.GlobalparameterUpdate, Model).subscribe(res => {});
             }
-            this.adminService.add<any>(customer.GlobalparameterUpdate, Model).subscribe(res => {});
-        }
 
-        if (Name == "Trio" && Value) {
-            let Model = {
-                name: "Etracker",
-                value: false
+            if (Name == "Trio" && Value) {
+                let Model = {
+                    name: "Etracker",
+                    value: false
+                }
+                this.adminService.add<any>(customer.GlobalparameterUpdate, Model).subscribe(res => {});
             }
-            this.adminService.add<any>(customer.GlobalparameterUpdate, Model).subscribe(res => {});
-        }
 
-        let Model = {
-            name: Name,
-            value: Value
+            let Model = {
+                name: Name,
+                value: Value
+            }
+            this.adminService.add<any>(customer.GlobalparameterUpdate, Model).subscribe(res => {
+                this.toasterService.pop('success', 'Success', res.message);
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-        this.adminService.add<any>(customer.GlobalparameterUpdate, Model).subscribe(res => {
-            this.toasterService.pop('success', 'Success', res.message);
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[1].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[1].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[1].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

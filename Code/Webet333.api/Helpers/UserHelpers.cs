@@ -7,7 +7,6 @@ using Webet333.dapper;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
-using Webet333.models.Request.Account;
 using Webet333.models.Request.User;
 using Webet333.models.Response;
 using Webet333.models.Response.User;
@@ -24,23 +23,34 @@ namespace Webet333.api.Helpers
         }
 
         #region Get User's List
-        public async Task<List<dynamic>> GetUsers(string Role, string Keyword, BaseUrlConfigs baseUrlConfigs)
+
+        /// <summary>
+        /// UserId use when admin call API to get Admin list.
+        /// </summary>
+        public async Task<List<dynamic>> GetUsers(string Role, string Keyword, BaseUrlConfigs baseUrlConfigs, string UserId = null)
         {
             using (var repository = new DapperRepository<GlobalJsonResponse>(Connection))
             {
-                var result = await repository.FindAsync(StoredProcConsts.User.GetUsersByRole, new { Role, Keyword });
-                var users = JsonConvert.DeserializeObject<List<dynamic>>(result.DocumentListSerialized);
-                users.ForEach(user =>
+                var result = await repository.FindAsync(StoredProcConsts.User.GetUsersByRole, new { Role, Keyword, UserId });
+
+                if (result != null && result.DocumentListSerialized != null)
                 {
-                    user.userICImage = (user.userICImage != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.UserICImage + "/" + user.userICImage : null);
-                    user.VIPBanner = (user.VIPBanner != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.VIPIcon + "/" + user.VIPLevel + user.VIPBanner : null);
-                });
-                return users;
+                    var users = JsonConvert.DeserializeObject<List<dynamic>>(result.DocumentListSerialized);
+                    users.ForEach(user =>
+                    {
+                        user.userICImage = (user.userICImage != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.UserICImage + "/" + user.userICImage : null);
+                        user.VIPBanner = (user.VIPBanner != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.VIPIcon + "/" + user.VIPLevel + user.VIPBanner : null);
+                    });
+                    return users;
+                }
+                else return new List<dynamic>();
             }
         }
-        #endregion
+
+        #endregion Get User's List
 
         #region User's Bank data
+
         public async Task BankRegister(RegisterBankRequest request)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -48,7 +58,8 @@ namespace Webet333.api.Helpers
                 await repository.AddOrUpdateAsync(StoredProcConsts.User.RegisterBank, request);
             }
         }
-        #endregion
+
+        #endregion User's Bank data
 
         public async Task UpdateProfile(ProfileEditRequest request)
         {
@@ -93,6 +104,7 @@ namespace Webet333.api.Helpers
         }
 
         #region Get User's List
+
         public async Task<dynamic> GetUsersWinloseReport(string FromDate, string ToDate)
         {
             using (var repository = new DapperRepository<GlobalJsonResponse>(Connection))
@@ -106,9 +118,11 @@ namespace Webet333.api.Helpers
                 return new { totalDeposit, totalWithdraw, totalBonus, totalWinlose, users };
             }
         }
-        #endregion
+
+        #endregion Get User's List
 
         #region House Keeping
+
         public void Dispose()
         {
             Dispose(true);
@@ -122,6 +136,7 @@ namespace Webet333.api.Helpers
                 Connection = string.Empty;
             }
         }
-        #endregion
+
+        #endregion House Keeping
     }
 }

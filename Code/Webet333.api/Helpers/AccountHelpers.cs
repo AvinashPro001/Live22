@@ -35,7 +35,7 @@ namespace Webet333.api.Helpers
         {
             this.Connection = Connection;
         }
-        #endregion
+        #endregion 
 
         #region User Management
         public async Task<ProfileResponse> AddUser(string Connection, RegisterRequest request, string Role)
@@ -55,6 +55,16 @@ namespace Webet333.api.Helpers
             using (var GetProfileRepository = new DapperRepository<ProfileResponse>(Connection))
             {
                 ProfileResponse user = await GetProfileRepository.FindAsync(StoredProcConsts.Account.GetProfile, new { email, Password = SecurityHelpers.EncryptPassword(password), userId, userName, uniqueId, Role = grantType, mobileNo, userName918, Password918 = password918 });
+
+                if (user != null)
+                {
+                    if (!string.IsNullOrEmpty(user.Permissions))
+                    {
+                        var permissionsList = JsonConvert.DeserializeObject<ICollection<MenusResponse>>(user.Permissions);
+                        user.PermissionsList = permissionsList.Where(x => x.IsChecked).ToList();
+                    }
+                }
+
                 return user;
             }
         }
@@ -161,7 +171,7 @@ namespace Webet333.api.Helpers
 
         #endregion
 
-        #region Get User's By Mobile Number and update password 
+        #region Get User's By Mobile Number and update password
         public async Task<ProfileResponseByMobile> GetUsersByMobile(EmailRequest request)
         {
             using (var repository = new DapperRepository<ProfileResponseByMobile>(Connection))
@@ -173,7 +183,6 @@ namespace Webet333.api.Helpers
                 return users;
             }
         }
-
 
         public async Task<ProfileResponseByMobile> updatePasswordByMobielNumber(EmailRequest request)
         {
@@ -260,7 +269,7 @@ namespace Webet333.api.Helpers
 
         #endregion
 
-        #region User Info Get for GetBalance 
+        #region User Info Get for GetBalance
 
         public async Task<GetBalanceUserResponse> UserGetBalanceInfo(string UserId, string ToWalletName = null)
         {
@@ -270,7 +279,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion User Info Get for GetBalance 
+        #endregion User Info Get for GetBalance
 
         #region User Game Password Update
 

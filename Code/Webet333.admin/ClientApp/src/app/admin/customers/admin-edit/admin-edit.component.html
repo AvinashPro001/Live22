@@ -1,0 +1,209 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/admin/customers/admin-list">Admin List</a>
+    </li>
+    <li class="breadcrumb-item">
+        Edit Admin
+    </li>
+</ol>
+
+<div class="my-container col-md-12">
+    <div class="card card-default">
+        <div class="card-body">
+            <legend style="align-content:center">Edit Admin</legend>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form class="text-center border border-light p-5">
+                        <div class="row col-md-12">
+                            <label class="col-md-4" style="text-align:right;font-size:20px">Username</label>
+                            <input type="text" id="txt_username" class="form-control col-md-4 mb-4" placeholder="" value="{{data.username}}" disabled>
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="col-md-4" style="text-align:right;font-size:20px">Password</label>
+                            <input type="text" id="txt_password" class="form-control col-md-4 mb-4" placeholder="" value="">
+                        </div>
+                        <div class="row col-lg-12">
+                            <span class="col-md-5"></span>
+                            <button class="btn btn-info col-md-2 mb-2" style="text-align:right;font-size:20px" type="submit" (click)="changePassword()">Change Password</button>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="text-center border border-dark p-5">
+
+                                        <div class="row col-lg-12">
+                                            <span class="col-md-6 mb-4">
+                                                <button class="btn btn-info col-md-8 mb-2" style="text-align:center;font-size:20px" type="submit" (click)="checkUncheckAll()">Clear all</button>
+                                            </span>
+                                            <span class="col-md-6 mb-4">
+                                                <button class="btn btn-info col-md-8 mb-2" style="text-align: center;font-size: 20px" type="submit" (click)="changePermission()">Save Changes</button>
+                                            </span>
+                                        </div>
+
+                                        <div class="row col-md-12" style="margin:10px 0 0 0;">
+                                            <p style="text-align:center;font-size: 20px;">
+                                                <u>Page Access right</u>
+                                            </p>
+                                        </div>
+
+                                        <div class="row col-md-12" style="margin:10px 0 0 0;">
+                                            <p style="text-align:center;font-size: 20px;">
+                                                Note: To access the child menu you must have to give permission to their parent menu.
+                                            </p>
+                                        </div>
+
+                                        <div class="row col-md-12 table-responsive">
+                                            <table class="table">
+
+                                                <thead>
+                                                    <tr>
+                                                        <td><h5></h5></td>
+                                                        <td>
+                                                            <div class="col-lg-3" style="display: flex;">
+                                                                <div class="">
+                                                                    <label class="container">
+                                                                        <h5 style="font-weight: 600; font-size: 16px;">View</h5>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-lg-3" style="display: flex;">
+                                                                <div class="">
+                                                                    <label class="container">
+                                                                        <h5 style="font-weight: 600; font-size: 16px;">Change/Delete</h5>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-lg-3" style="display: flex;">
+                                                                <div class="">
+                                                                    <label class="container">
+                                                                        <h5 style="font-weight: 600; font-size: 16px;">Add</h5>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody style="text-align:left">
+                                                    <ng-container *ngFor='let item of defaultPermissionsList; let i = index'>
+
+                                                        <!--<ng-container *ngIf="item.IsChecked">-->
+                                                        <tr>
+                                                            <td><h5 style="font-weight: 600; font-size: 16px;">{{item.text}}</h5></td>
+                                                            <td *ngFor='let defaultPermissions of item.Permissions; let j = index'>
+                                                                <div class="col-lg-3" style="display: flex;">
+                                                                    <div class="">
+                                                                        <label class="container">
+                                                                            <input type="checkbox"
+                                                                                   id={{defaultPermissions.Id}}
+                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList)"
+                                                                                   name="{{defaultPermissions.text}}-{{i}}-{{j}}"
+                                                                                   [(ngModel)]="defaultPermissions.IsChecked">
+                                                                            <span class="checkmark"></span>
+                                                                            <!--<span> {{defaultPermissions.text}}</span>-->
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <ng-container *ngIf="item.submenu">
+                                                            <ng-container *ngFor='let subitem of item.submenu; let k = index'>
+                                                                <!--<ng-container *ngIf="subitem.IsChecked">-->
+                                                                <tr>
+                                                                    <td><h5 style="font-weight: 600; font-size: 16px; margin-left:50px">{{subitem.text}}</h5></td>
+                                                                    <td *ngFor='let defaultPermissions of subitem.Permissions; let l = index'>
+                                                                        <div class="col-lg-3" style="display: flex;">
+                                                                            <div class="">
+                                                                                <label class="container">
+                                                                                    <input type="checkbox"
+                                                                                           id={{defaultPermissions.Id}}
+                                                                                           (change)="getUpdatedPermissionsList(defaultPermissionsList)"
+                                                                                           name="{{defaultPermissions.text}}-{{i}}-{{j}}-{{k}}-{{l}}"
+                                                                                           [(ngModel)]="defaultPermissions.IsChecked">
+                                                                                    <span class="checkmark"></span>
+                                                                                    <!--<span> {{defaultPermissions.text}}</span>-->
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <ng-container *ngIf="subitem.submenu">
+                                                                    <ng-container *ngFor='let subsubitem of subitem.submenu; let m = index'>
+
+                                                                        <!--<ng-container *ngIf="subsubitem.IsChecked">-->
+                                                                        <tr>
+                                                                            <td><h5 style="font-weight: 600; font-size: 16px; margin-left: 100px;">{{subsubitem.text}}</h5></td>
+                                                                            <td *ngFor='let defaultPermissions of subsubitem.Permissions; let n = index'>
+                                                                                <div class="col-lg-3" style="display: flex;">
+                                                                                    <div class="">
+                                                                                        <label class="container">
+                                                                                            <input type="checkbox"
+                                                                                                   id={{defaultPermissions.Id}}
+                                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList)"
+                                                                                                   name="{{defaultPermissions.text}}-{{i}}-{{j}}-{{k}}-{{l}}-{{m}}-{{n}}"
+                                                                                                   [(ngModel)]="defaultPermissions.IsChecked">
+                                                                                            <span class="checkmark"></span>
+                                                                                            <!--<span> {{defaultPermissions.text}}</span>-->
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                        <!--</ng-container>-->
+                                                                    </ng-container>
+                                                                </ng-container>
+                                                                <!--</ng-container>-->
+                                                            </ng-container>
+                                                        </ng-container>
+
+                                                        <!--</ng-container>-->
+                                                    </ng-container>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- Google -->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="row col-md-12" style="margin:10px 0 0 0;">
+                                                        <p style="text-align:center;font-size: 20px;"> <u>Manager Approve Permission</u></p>
+                                                    </div>
+                                                    <div class="text-center border border-dark p-5">
+                                                        <div class="row col-md-12" style="text-align:center">
+                                                            <input type="checkbox" (change)="getUpdatedPermissionsList(defaultPermissionsList)" style="height:25px; width:25px" />
+                                                            <p style="text-align:center;font-size: 20px; margin-left:10px;">Google Authenticator</p>
+                                                            <div class="row col-md-12">
+                                                                <input type="text" id="txt_google_authenticator" class="form-control col-md-12 mb-4" placeholder="" value="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row col-lg-12">
+                                                            <span class="col-md-6 mb-4">
+                                                                <button class="btn btn-info col-md-8 mb-2" style="text-align:center;font-size:20px" type="submit">Active</button>
+                                                            </span>
+                                                            <span class="col-md-6 mb-4">
+                                                                <button class="btn btn-info col-md-8 mb-2" style="text-align: center;font-size: 20px" type="submit">Suspend</button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

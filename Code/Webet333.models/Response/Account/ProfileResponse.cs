@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace Webet333.models.Response.Account
 {
@@ -70,5 +71,92 @@ namespace Webet333.models.Response.Account
 
         [JsonProperty(PropertyName = "vipLevelName")]
         public string VIPLevelName { get; set; }
+
+        public ICollection<MenusResponse> PermissionsList { get; set; }
+
+        [JsonIgnore]
+        public string Permissions { get; set; }
+
+        [JsonIgnore]
+        public string DefaultPermission { get; set; }
     }
+
+    #region Permission Management
+
+    public class Submenu
+    {
+        [JsonProperty("Id")]
+        public string Id { get; set; }
+
+        [JsonProperty("text")]
+        public string Text { get; set; }
+
+        [JsonProperty("link", NullValueHandling = NullValueHandling.Ignore)]
+        public string Link { get; set; }
+
+        [JsonProperty("icon")]
+        public string Icon { get; set; }
+
+        [JsonProperty("IsChecked")]
+        public bool IsChecked { get; set; }
+
+        [JsonProperty("Priority")]
+        public long Priority { get; set; }
+
+        [JsonProperty("IsActive")]
+        public long IsActive { get; set; }
+
+        [JsonProperty("Permissions")]
+        public ICollection<Permission> Permissions { get; set; }
+
+        [JsonProperty("submenu", NullValueHandling = NullValueHandling.Ignore)]
+        public ICollection<MenusResponse> SubmenuSubmenu { get; set; }
+
+        [JsonProperty("target", NullValueHandling = NullValueHandling.Ignore)]
+        public string Target { get; set; }
+    }
+
+    public class MenusResponse
+    {
+        [JsonProperty("Id")]
+        public string Id { get; set; }
+
+        [JsonProperty("text")]
+        public string Text { get; set; }
+
+        [JsonProperty("icon")]
+        public string Icon { get; set; }
+
+        [JsonProperty("IsChecked")]
+        public bool IsChecked { get; set; }
+
+        [JsonProperty("Priority")]
+        public long Priority { get; set; }
+
+        [JsonProperty("IsActive")]
+        public long IsActive { get; set; }
+
+        [JsonProperty("Permissions")]
+        public ICollection<Permission> Permissions { get; set; }
+
+        [JsonProperty("submenu", NullValueHandling = NullValueHandling.Ignore)]
+        public ICollection<Submenu> Submenu { get; set; }
+
+        [JsonProperty("link", NullValueHandling = NullValueHandling.Ignore)]
+        public string Link { get; set; }
+    }
+
+    public class Permission
+    {
+        [JsonProperty("Id")]
+        public Guid Id { get; set; }
+
+        [JsonProperty("text")]
+        public string Text { get; set; }
+
+        [JsonProperty("IsChecked")]
+        public bool IsChecked { get; set; }
+    }
+
+    #endregion Permission Management
 }

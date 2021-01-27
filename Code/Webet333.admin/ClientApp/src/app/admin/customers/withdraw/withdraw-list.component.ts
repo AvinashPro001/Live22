@@ -5,7 +5,7 @@ import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Stopwatch } from "ts-stopwatch";
 import { AdminService } from '../../admin.service';
 import { DatePipe } from '@angular/common';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { account, playtech } from '../../../../environments/environment';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -92,28 +92,30 @@ export class WithdrawListComponent implements OnInit {
 
     //#region onInit
 
-    ngOnInit() {
-        this.getAutoRefershUpdate();
-        //this.hubConnection();
-        setInterval(() => {
-            this.CheckWithdraw();
-        }, 5000)
-        this.withdrawStatus = this.route.snapshot.queryParamMap.get('withdrawStatus')
-        if (this.withdrawStatus != null) {
-            if (this.withdrawStatus == 'Approved') {
-                this.withdrawStatus = this.listType[1].verified;
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.getAutoRefershUpdate();
+            //this.hubConnection();
+            setInterval(() => {
+                this.CheckWithdraw();
+            }, 5000)
+            this.withdrawStatus = this.route.snapshot.queryParamMap.get('withdrawStatus')
+            if (this.withdrawStatus != null) {
+                if (this.withdrawStatus == 'Approved') {
+                    this.withdrawStatus = this.listType[1].verified;
+                }
+                else if (this.withdrawStatus == 'Rejected') {
+                    this.withdrawStatus = this.listType[2].verified;
+                }
             }
-            else if (this.withdrawStatus == 'Rejected') {
-                this.withdrawStatus = this.listType[2].verified;
+            else {
+                this.withdrawStatus = this.listType[0].verified;
             }
+            this.withdrawStatus == 'Pending' ? this.selectedList = this.listType[0] : this.withdrawStatus == 'Approved' ? this.selectedList = this.listType[1] : this.withdrawStatus == 'Rejected' ? this.selectedList = this.listType[2] : this.selectedList = this.listType[0];
+            this.setColumn(this.selectedList.verified);
+            this.setSimilarNameColoum()
+            this.setPageData(this.selectedList.verified, "", null, null);
         }
-        else {
-            this.withdrawStatus = this.listType[0].verified;
-        }
-        this.withdrawStatus == 'Pending' ? this.selectedList = this.listType[0] : this.withdrawStatus == 'Approved' ? this.selectedList = this.listType[1] : this.withdrawStatus == 'Rejected' ? this.selectedList = this.listType[2] : this.selectedList = this.listType[0];
-        this.setColumn(this.selectedList.verified);
-        this.setSimilarNameColoum()
-        this.setPageData(this.selectedList.verified, "", null, null);
     }
     //#endregion
 
@@ -210,7 +212,7 @@ export class WithdrawListComponent implements OnInit {
                 { prop: 'AccountName' },
                 { prop: 'WithdrawalNo' },
                 { prop: 'Bank' },
-{ prop: 'AccountNo' },
+                { prop: 'AccountNo' },
                 { prop: 'WalletName' },
                 { prop: 'Amount' },
                 { prop: 'PromotionTitle' },
@@ -229,7 +231,7 @@ export class WithdrawListComponent implements OnInit {
                 { prop: 'AccountName' },
                 { prop: 'WithdrawalNo' },
                 { prop: 'Bank' },
-{ prop: 'AccountNo' },
+                { prop: 'AccountNo' },
                 { prop: 'WalletName' },
                 { prop: 'Amount' },
                 { prop: 'PromotionTitle' },
@@ -329,7 +331,7 @@ export class WithdrawListComponent implements OnInit {
             else {
                 this.toasterService.pop('success', 'Success', res.message);
             }
-            
+
             this.loadingIndicator = false;
         }, error => {
             this.loadingIndicator = false;
@@ -431,26 +433,82 @@ export class WithdrawListComponent implements OnInit {
     //#endregion onchange
 
     //#region navigateAdd
-    navigateAdd() {
-        this.router.navigate(['/admin/customers/withdraw-add']);
+    async navigateAdd() {
+        if (await this.checkAddPermission()) this.router.navigate(['/admin/customers/withdraw-add']);
     }
     //#endregion
 
     //#region search
-    searchHandler(event) {        let data;        if (event.target.value) {            data = {                SearchParam: event.target.value,            }            this.searchString = event.target.value,                this.setPageData(this.selectedList.verified, data.SearchParam, null, null)        } else {            data = {                SearchParam: ""            }            this.setPageData(this.selectedList.verified, data.SearchParam, null, null)        }    }
+    searchHandler(event) {
+        let data;
+        if (event.target.value) {
+            data = {
+                SearchParam: event.target.value,
+            }
+            this.searchString = event.target.value,
+                this.setPageData(this.selectedList.verified, data.SearchParam, null, null)
+        } else {
+            data = {
+                SearchParam: ""
+            }
+            this.setPageData(this.selectedList.verified, data.SearchParam, null, null)
+        }
+    }
 
-    searchHandlerByDate() {        let fromdate, todate        fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value        todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value        if (todate === "")            todate = fromdate;        if (fromdate === "")            fromdate = todate;        if (fromdate === "" && todate === "")            this.toasterService.pop('error', 'Error', "Please select Date.");        else if ((fromdate !== undefined && todate !== null) || (todate !== null && fromdate !== null)) {            this.setPageData(this.selectedList.verified, "", fromdate, todate);        }        else {            this.setPageData(this.selectedList.verified, "", null, null)        }
+    searchHandlerByDate() {
+        let fromdate, todate
+        fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value
+        todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value
+        if (todate === "")
+            todate = fromdate;
+        if (fromdate === "")
+            fromdate = todate;
+        if (fromdate === "" && todate === "")
+            this.toasterService.pop('error', 'Error', "Please select Date.");
+        else if ((fromdate !== undefined && todate !== null) || (todate !== null && fromdate !== null)) {
+            this.setPageData(this.selectedList.verified, "", fromdate, todate);
+        }
+        else {
+            this.setPageData(this.selectedList.verified, "", null, null)
+        }
     }
     //#endregion search
 
     //#region Open Remark Model
-    openremark(remark, id, orderId, name, walletName, _amount, type) {        this.remarktype = type        this.remarkid = id        this.OrderID = orderId        this.userName = name        this.WalletName = walletName        this.amountWithdraw = _amount        this.modalService.open(remark, { windowClass: 'dark-modal' });    }    //#endregion Open Remark Model
-    //#region Close Remark Model
-    decline() {        this.modalService.dismissAll();    }    //#endregion Close Remark Model
+    async openremark(remark, id, orderId, name, walletName, _amount, type) {
+        if (await this.checkUpdatePermission()) {
+            this.remarktype = type
+            this.remarkid = id
+            this.OrderID = orderId
+            this.userName = name
+            this.WalletName = walletName
+            this.amountWithdraw = _amount
+            this.modalService.open(remark, { windowClass: 'dark-modal' });
+        }
+    }
+    //#endregion Open Remark Model
+
+    //#region Close Remark Model
+    decline() {
+        this.modalService.dismissAll();
+    }
+    //#endregion Close Remark Model
 
     //#region AcceptReject
-    async accept() {        this.disabled = true;        //if remark type is accept        if (this.remarktype == 'reject') {            this.remarkdata = {                id: this.remarkid,                approved: "rejected",                adminRemarks: this.remarkval            }            let userModel = {                username: this.userName
-            }            this.adminService.add<any>(account.profile, userModel).subscribe(async resUser => {                switch (this.WalletName) {
+    async accept() {
+        this.disabled = true;
+        //if remark type is accept
+        if (this.remarktype == 'reject') {
+            this.remarkdata = {
+                id: this.remarkid,
+                approved: "rejected",
+                adminRemarks: this.remarkval
+            }
+            let userModel = {
+                username: this.userName
+            }
+            this.adminService.add<any>(account.profile, userModel).subscribe(async resUser => {
+                switch (this.WalletName) {
                     case 'Main Wallet': {
                         this.adminService.add<any>(customer.withdrawVerify, this.remarkdata).subscribe(res => {
                             this.toasterService.pop('success', 'Successfully', res.message);
@@ -459,8 +517,20 @@ export class WithdrawListComponent implements OnInit {
                         });
                     }; break;
                 }
-            });        }        //if remark type is rejection        else {            this.remarkdata = {                id: this.remarkid,                approved: "approved",                adminRemarks: this.remarkval            }            let userModel = {                username: this.userName
-            }            this.adminService.add<any>(account.profile, userModel).subscribe(async resUser => {                await this.adminService.add<any>(customer.withdrawVerify, this.remarkdata).subscribe(res => {
+            });
+        }
+        //if remark type is rejection
+        else {
+            this.remarkdata = {
+                id: this.remarkid,
+                approved: "approved",
+                adminRemarks: this.remarkval
+            }
+            let userModel = {
+                username: this.userName
+            }
+            this.adminService.add<any>(account.profile, userModel).subscribe(async resUser => {
+                await this.adminService.add<any>(customer.withdrawVerify, this.remarkdata).subscribe(res => {
                     this.toasterService.pop('success', 'Successfully', res.message);
                     this.disabled = false;
                     this.ngOnInit();
@@ -469,8 +539,13 @@ export class WithdrawListComponent implements OnInit {
                     this.toasterService.pop('error', 'Error', error.error.message);
                     this.disabled = false;
                 });
-            });        }        this.decline();    }    //#endregion AcceptReject
-    ApprovalTime(UserId, UserName, Type, Id) {
+            });
+        }
+        this.decline();
+    }
+    //#endregion AcceptReject
+
+    ApprovalTime(UserId, UserName, Type, Id) {
         let model = {
             userid: UserId,
             username: UserName,
@@ -479,8 +554,16 @@ export class WithdrawListComponent implements OnInit {
         }
         this.adminService.add<any>(customer.approvalTimeInsert, model).subscribe(res => {
         });
-    }    //#region Close All    dismiss() {        this.modalService.dismissAll();    }
-    //#endregion Close All    DuplicateDetails(trancking, username, trackingLoginRegister) {
+    }
+
+
+    //#region Close All
+    dismiss() {
+        this.modalService.dismissAll();
+    }
+    //#endregion Close All
+
+    DuplicateDetails(trancking, username, trackingLoginRegister) {
         if (trackingLoginRegister) {
             this.loadingIndicator = true;
 
@@ -511,4 +594,60 @@ export class WithdrawListComponent implements OnInit {
         else {
             this.toasterService.pop('error', 'Error', 'No Duplicate Record !!!');
         }
-    }}
+    }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[1].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[1].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[1].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
+}

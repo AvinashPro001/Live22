@@ -3,7 +3,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 import { debounce } from 'rxjs/operators';
@@ -52,9 +52,11 @@ export class PromotionGroupingListComponent implements OnInit {
     //#endregion
 
     //#region Init
-    ngOnInit() {
-        this.setColumn();
-        this.setPageData();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setColumn();
+            this.setPageData();
+        }        
     }
     //#endregion
 
@@ -139,9 +141,11 @@ export class PromotionGroupingListComponent implements OnInit {
     //#endregion
 
     //#region navigateAdd
-    navigateAdd() {
-        this.router.navigate(['/admin/customers/promotion-group-add']);
-        //this.openUnderconstructionDialog();
+    async navigateAdd() {
+        if (await this.checkAddPermission()) {
+            this.router.navigate(['/admin/customers/promotion-group-add']);
+            //this.openUnderconstructionDialog();
+        }
     }
     //#endregion
 
@@ -155,7 +159,7 @@ export class PromotionGroupingListComponent implements OnInit {
     promotionDelete(id) {
         console.log(id);
         let data = {
-            id:id
+            id: id
         }
         this.adminService.add<any>(customer.promotionGroupDelete, data).subscribe(res => {
             this.ngOnInit();
@@ -167,21 +171,99 @@ export class PromotionGroupingListComponent implements OnInit {
     //#endregion
 
     //#region navigate Edit
-    navigateEdit(promotionData) {
-        localStorage.setItem('promotionGroupData', JSON.stringify(promotionData));
-        this.router.navigate(['/admin/customers/promotion-grouping-edit']);
+    async navigateEdit(promotionData) {
+        if (await this.checkUpdatePermission()) {
+            localStorage.setItem('promotionGroupData', JSON.stringify(promotionData));
+            this.router.navigate(['/admin/customers/promotion-grouping-edit']);
+        }
     }
     //#endregion 
 
     //#region openRejectConfirmationDialog
-    openRejectConfirmationDialog(id) {
-        this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to Delete Promotion ?')
+    async openRejectConfirmationDialog(id) {
+        if (await this.checkUpdatePermission()) this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to Delete Promotion ?')
             .then((confirmed) => {
                 this.final = confirmed
                 this.promotionDelete(id)
             });
     }
     //#endregion
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[7].Permissions[0].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[7].submenu[2].Permissions[0].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[7].Permissions[1].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[7].submenu[2].Permissions[1].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[7].Permissions[2].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[7].submenu[2].Permissions[2].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }
 
 

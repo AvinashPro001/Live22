@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
-import { account } from '../../../../environments/environment';
+import { account, ErrorMessages } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-bank-edit',
@@ -24,8 +24,8 @@ export class BankEditComponent implements OnInit {
         private router: Router
     ) { }
 
-    ngOnInit() {
-        this.getBank();
+    async ngOnInit() {
+        if (await this.checkUpdatePermission()) this.getBank();
     }
 
     getBank() {
@@ -60,7 +60,14 @@ export class BankEditComponent implements OnInit {
     }
 
     async fileSelect(event) {
-        if (event.target.files.length >= 0) {            var filesAmount = event.target.files.length;            for (let i = 0; i < filesAmount; i++) {                let files = event.target.files[i];                this.base64(files);                this.filenames.push(event.target.files[i].name);            }        }
+        if (event.target.files.length >= 0) {
+            var filesAmount = event.target.files.length;
+            for (let i = 0; i < filesAmount; i++) {
+                let files = event.target.files[i];
+                this.base64(files);
+                this.filenames.push(event.target.files[i].name);
+            }
+        }
     }
 
     async fileSelectIcon(event) {
@@ -97,7 +104,12 @@ export class BankEditComponent implements OnInit {
     }
 
     base64(file) {
-        let reader = new FileReader();        reader.onload = (e: any) => {            this.urls.push({ base64images: e.target.result });        }        reader.readAsDataURL(file);    }
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+            this.urls.push({ base64images: e.target.result });
+        }
+        reader.readAsDataURL(file);
+    }
 
     base64Icon(file) {
         let reader = new FileReader();
@@ -106,4 +118,59 @@ export class BankEditComponent implements OnInit {
         }
         reader.readAsDataURL(file);
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[3].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[3].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[3].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

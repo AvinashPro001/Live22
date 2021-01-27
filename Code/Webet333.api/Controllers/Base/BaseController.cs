@@ -102,7 +102,7 @@ namespace Webet333.api.Controllers.Base
             var role = GetUserRole(User);
             if (role != RoleConst.Admin) BadResponse("forbid_error_access");
         }
-        #endregion
+        #endregion 
 
         #region Validate User
         protected async Task ValidateUser(ProfileResponse user = null, string role = null)
@@ -112,7 +112,8 @@ namespace Webet333.api.Controllers.Base
                 using (var account_help = new AccountHelpers(Connection))
                 {
                     user = await account_help.FindUser(uniqueId: GetUniqueId(User), grantType: GetUserRole(User));
-                    user.VIPBanner = (!string.IsNullOrEmpty(user.VIPBanner)) ? $"{baseUrlConfigs.ImageBase}{baseUrlConfigs.VIPIcon}/{user.VIPLevel}{user.VIPBanner}" : "";
+
+                    if (user != null) user.VIPBanner = (!string.IsNullOrEmpty(user.VIPBanner)) ? $"{baseUrlConfigs.ImageBase}{baseUrlConfigs.VIPIcon}/{user.VIPLevel}{user.VIPBanner}" : "";
                 }
             }
             if (user == null) BadResponse("error_access_token_expired");
@@ -133,7 +134,7 @@ namespace Webet333.api.Controllers.Base
         protected IActionResult OkResponse(object data) => OkResponse(Localizer["ok_response_success"].Value, data);
 
         protected IActionResult OkResponse(string message, object data) => Ok(new { message, data });
-        #endregion
+        #endregion 
 
         #region NotFoundResponse
         protected IActionResult NotFoundResponse() => StatusCodeResult("not_found_response", 404);
@@ -155,7 +156,7 @@ namespace Webet333.api.Controllers.Base
 
         #region Custom Status Code
         protected IActionResult StatusCodeResult(string Message, int Code) => throw new Filters.ApiException(Message, Code);
-        #endregion
+        #endregion 
         #endregion
     }
 }

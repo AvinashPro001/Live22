@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { ToasterService } from 'angular2-toaster';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages } from '../../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-maxbet-minmax',
@@ -17,11 +18,14 @@ export class MaxbetMinmaxComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
+        private router: Router
     ) { }
 
-    ngOnInit() {
-        this.Getlimit();
-        this.customerUser();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.Getlimit();
+            this.customerUser();
+        }
     }
 
     Getlimit() {
@@ -34,31 +38,31 @@ export class MaxbetMinmaxComponent implements OnInit {
     }
 
     async SetLimit() {
-        var minVal = ((document.getElementById("txt_min") as HTMLInputElement).value);
-        var maxVal = ((document.getElementById("txt_max") as HTMLInputElement).value)
+        if (await this.checkUpdatePermission()) {
+            var minVal = ((document.getElementById("txt_min") as HTMLInputElement).value);
+            var maxVal = ((document.getElementById("txt_max") as HTMLInputElement).value)
 
-        if (minVal === "" || maxVal === "")
-            return this.toasterService.pop('error', 'Error', "Please Provide both value Minimum and Maximum !!!");
+            if (minVal === "" || maxVal === "")
+                return this.toasterService.pop('error', 'Error', "Please Provide both value Minimum and Maximum !!!");
 
-        if (+minVal <= 0 || +maxVal <= 0)
-            return this.toasterService.pop('error', 'Error', "Please Insert Positive Number !!!");
+            if (+minVal <= 0 || +maxVal <= 0)
+                return this.toasterService.pop('error', 'Error', "Please Insert Positive Number !!!");
 
-        if (+minVal === +maxVal)
-            return this.toasterService.pop('error', 'Error', "Please Provide different Numbers !!!");
+            if (+minVal === +maxVal)
+                return this.toasterService.pop('error', 'Error', "Please Provide different Numbers !!!");
 
-        let model = {
-            minValue: minVal,
-            maxValue: maxVal
+            let model = {
+                minValue: minVal,
+                maxValue: maxVal
+            }
+
+            await this.adminService.add<any>(customer.maxbetMinMaxSet, model).toPromise().then(res => {
+                this.toasterService.pop('success', 'Successfully', res.message);
+                this.ngOnInit();
+            }).catch(error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-
-        await this.adminService.add<any>(customer.maxbetMinMaxSet, model).toPromise().then(res => {
-            this.toasterService.pop('success', 'Successfully', res.message);
-            this.ngOnInit();
-        }).catch(error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
-
-
     }
 
     onChange(event) {
@@ -90,31 +94,109 @@ export class MaxbetMinmaxComponent implements OnInit {
     }
 
     async updateUserLimit() {
-        var minVal = ((document.getElementById("txt_user_min") as HTMLInputElement).value);
-        var maxVal = ((document.getElementById("txt_user_max") as HTMLInputElement).value)
+        if (await this.checkUpdatePermission()) {
+            var minVal = ((document.getElementById("txt_user_min") as HTMLInputElement).value);
+            var maxVal = ((document.getElementById("txt_user_max") as HTMLInputElement).value)
 
-        if (minVal === "" || maxVal === "")
-            return this.toasterService.pop('error', 'Error', "Please Provide both value Minimum and Maximum !!!");
+            if (minVal === "" || maxVal === "")
+                return this.toasterService.pop('error', 'Error', "Please Provide both value Minimum and Maximum !!!");
 
-        if (+minVal <= 0 || +maxVal <= 0)
-            return this.toasterService.pop('error', 'Error', "Please Insert Positive Number !!!");
+            if (+minVal <= 0 || +maxVal <= 0)
+                return this.toasterService.pop('error', 'Error', "Please Insert Positive Number !!!");
 
-        if (+minVal === +maxVal)
-            return this.toasterService.pop('error', 'Error', "Please Provide different Numbers !!!");
+            if (+minVal === +maxVal)
+                return this.toasterService.pop('error', 'Error', "Please Provide different Numbers !!!");
 
-        let model = {
-            userId: this.newVal,
-            minValue: minVal,
-            maxValue: maxVal
+            let model = {
+                userId: this.newVal,
+                minValue: minVal,
+                maxValue: maxVal
+            }
+
+            await this.adminService.add<any>(customer.maxbetUserMinMax, model).toPromise().then(res => {
+                if (res.data.error_code == 0)
+                    this.toasterService.pop('success', 'Successfully', res.message);
+                else
+                    this.toasterService.pop('error', 'Error', res.data.message);
+            }).catch(error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-        debugger
-        await this.adminService.add<any>(customer.maxbetUserMinMax, model).toPromise().then(res => {
-            if (res.data.error_code==0)
-                this.toasterService.pop('success', 'Successfully', res.message);
-            else
-                this.toasterService.pop('error', 'Error', res.data.message);
-        }).catch(error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[5].Permissions[0].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[5].submenu[0].Permissions[0].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[5].Permissions[1].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[5].submenu[0].Permissions[1].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[5].Permissions[2].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[5].submenu[0].Permissions[2].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

@@ -3,7 +3,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
-import { account } from '../../../../environments/environment';
+import { account, ErrorMessages } from '../../../../environments/environment';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 import { debounce } from 'rxjs/operators';
 
@@ -25,9 +25,11 @@ export class BankListComponent implements OnInit {
         private toasterService: ToasterService,
         private router: Router) { }
 
-    ngOnInit() {
-        this.setColumn();
-        this.setPageData();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setColumn();
+            this.setPageData();
+        }
     }
 
     setColumn() {
@@ -69,29 +71,87 @@ export class BankListComponent implements OnInit {
         });
     }
 
-    navigateEdit(BankData) {
-        localStorage.setItem('data', JSON.stringify(BankData));
-        this.router.navigate(['/admin/customers/bank-edit']);
-    }
-
-    manualUpdateEvent(id, value: boolean) {
-        let data = {
-            id: id,
-            active: value
+    async navigateEdit(BankData) {
+        if (await this.checkUpdatePermission()) {
+            localStorage.setItem('data', JSON.stringify(BankData));
+            this.router.navigate(['/admin/customers/bank-edit']);
         }
-        this.adminService.add<any>(account.adminBankStatus, data).subscribe(res => {
-            if (value == true)
-                this.toasterService.pop('success', 'Success', "Bank is active.");
-            else
-                this.toasterService.pop('success', 'Success', "Bank is deactive.");
-
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
 
-    navigateAdd() {
-        this.router.navigate(['/admin/customers/bank-add']);
+    async manualUpdateEvent(id, value: boolean) {
+        if (await this.checkUpdatePermission()) {
+            let data = {
+                id: id,
+                active: value
+            }
+            this.adminService.add<any>(account.adminBankStatus, data).subscribe(res => {
+                if (value == true)
+                    this.toasterService.pop('success', 'Success', "Bank is active.");
+                else
+                    this.toasterService.pop('success', 'Success', "Bank is deactive.");
+
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
+        }
     }
 
+    async navigateAdd() {
+        if (await this.checkAddPermission()) this.router.navigate(['/admin/customers/bank-add']);
+    }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[3].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[3].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[3].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

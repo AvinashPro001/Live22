@@ -4,11 +4,11 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.Game = exports.account = exports.environment = void 0;
+exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.Game = exports.account = exports.environment = void 0;
 exports.environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
+    apiUrl: 'http://uatapi.webet333.com/api/v1/'
     //apiUrl: 'http://localhost:49841/api/v1/'
 };
 exports.account = {
@@ -234,6 +234,10 @@ exports.customer = {
     BettingDetailsByUsername: exports.environment.apiUrl + 'Game/GetBettingDetails',
     CustomerICNumberAdd: exports.environment.apiUrl + 'account/icnumber/insert',
     CustomerICImageAdd: exports.environment.apiUrl + 'account/icimage/insert',
+    adminList: exports.environment.apiUrl + 'admin/list',
+    adminAdd: exports.environment.apiUrl + 'admin/add',
+    adminUpdate: exports.environment.apiUrl + 'admin/update',
+    defaultPermissionList: exports.environment.apiUrl + 'user/default_permission/retrieve',
 };
 exports.playtech = {
     playtechUrl: "http://api.webet333.com/api/Default/playtech",
@@ -313,5 +317,8 @@ exports.VIPSetting = {
     getVIP: exports.environment.apiUrl + "vipcategorysetting/select",
     VIPLevelList: exports.environment.apiUrl + 'viplevel/select',
     UserVIPLevelUpdate: exports.environment.apiUrl + 'viplevel/user/update',
+};
+exports.ErrorMessages = {
+    unAuthorized: "You are not authorized to access this page!!"
 };
 //# sourceMappingURL=environment.js.map

@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { account, playtech, AGGame, M8Game, Joker, _918Kiss, gameBalance } from '../../../../environments/environment';
 import { debounce } from 'rxjs/operators';
@@ -93,8 +93,8 @@ export class WithdrawAddComponent implements OnInit {
     //#endregion
 
     //#region ngOnInit
-    ngOnInit() {
-        this.customerUser();
+    async ngOnInit() {
+        if (await this.checkAddPermission()) this.customerUser();
     }
     //#endregion
 
@@ -180,9 +180,9 @@ export class WithdrawAddComponent implements OnInit {
 
     //#region walletData
     walletData(newVal) {
-         var data = {
-                id: newVal,
-            }
+        var data = {
+            id: newVal,
+        }
         this.adminService.add<any>(customer.GetUsername, data).subscribe(res => {
             this.agUsername = res.data.agUsername;
             this.playtechUsername = res.data.playtechUsername;
@@ -651,7 +651,7 @@ export class WithdrawAddComponent implements OnInit {
         })
     }
 
-     Pussy888(id) {
+    Pussy888(id) {
         let data = {
             id: id,
             username: this.pussyUsername
@@ -661,7 +661,7 @@ export class WithdrawAddComponent implements OnInit {
         })
     }
 
-     AllBet(id) {
+    AllBet(id) {
         let data = {
             id: id,
             username: this.allbetUsername,
@@ -693,4 +693,59 @@ export class WithdrawAddComponent implements OnInit {
     }
 
     //#endregion Wallet Balance
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[1].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[1].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[1].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

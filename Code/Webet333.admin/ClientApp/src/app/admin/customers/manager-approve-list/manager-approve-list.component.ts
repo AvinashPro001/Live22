@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AdminService } from '../../admin.service';
 import { ToasterService } from 'angular2-toaster';
-import { account, customer } from '../../../../environments/environment';
+import { account, customer, ErrorMessages } from '../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HubConnectionBuilder } from '@aspnet/signalr';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-manager-approve-list',
@@ -36,15 +37,18 @@ export class ManagerApproveListComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private router: Router
     ) { }
 
-    ngOnInit() {
-        this.getAutoRefershUpdate();
-        this.hubConnection();
-        this.selectedList = this.listType[0];
-        this.setColumn(this.selectedList);
-        this.setPageData(this.selectedList);
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.getAutoRefershUpdate();
+            this.hubConnection();
+            this.selectedList = this.listType[0];
+            this.setColumn(this.selectedList);
+            this.setPageData(this.selectedList);
+        }
     }
 
     AutoRefershUpdate() {
@@ -71,7 +75,7 @@ export class ManagerApproveListComponent implements OnInit {
         Connection.on("ManagerApprovalList", () => {
             this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
             if (this.AutoRefersh == true || this.AutoRefersh == "true")
-            this.playAudio();
+                this.playAudio();
         });
         Connection.start().then(res =>
             console.log("Connection started")
@@ -221,4 +225,59 @@ export class ManagerApproveListComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[10].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[10].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[10].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

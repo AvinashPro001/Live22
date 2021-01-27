@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { Router } from '@angular/router';
-import { customer } from '../../../../environments/environment';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { debug } from 'util';
+import { async } from 'rxjs/internal/scheduler/async';
 
 
 @Component({
@@ -31,9 +32,11 @@ export class AdjustmentListComponent implements OnInit {
             private adminService: AdminService
         ) { }
 
-    ngOnInit() {
-        this.setColumn();
-        this.setPageData("", null,null);
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.setColumn();
+            this.setPageData("", null,null);
+        }
     }
 
     setColumn() {
@@ -50,15 +53,33 @@ export class AdjustmentListComponent implements OnInit {
         ];
     }
 
-    searchHandlerByDate() {        let fromdate, todate        fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value;        todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value;        if (fromdate === "" && todate === "")            this.toasterService.pop('error', 'Error', "Please select Date.");        else if ((fromdate !== undefined && todate !== null && todate !== "") || (todate !== undefined && fromdate !== null && fromdate !== "")) {            this.setPageData("", fromdate, todate);        }        else {            this.setPageData("", null, null);        }    }
+    searchHandlerByDate() {
+        let fromdate, todate
+        fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value;
+        todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value;
+        if (fromdate === "" && todate === "")
+            this.toasterService.pop('error', 'Error', "Please select Date.");
+        else if ((fromdate !== undefined && todate !== null && todate !== "") || (todate !== undefined && fromdate !== null && fromdate !== "")) {
+            this.setPageData("", fromdate, todate);
+        }
+        else {
+            this.setPageData("", null, null);
+        }
+    }
 
-    navigateAdd() {
-        this.router.navigate(['/admin/customers/adjustment-add']);
+    async navigateAdd() {
+        if (await this.checkAddPermission()) this.router.navigate(['/admin/customers/adjustment-add']);
     }
 
 
 
-    searchHandler(event) {        if (event.target.value) {            this.setPageData(event.target.value, null, null)        } else {            this.setPageData("", null, null)        }    }
+    searchHandler(event) {
+        if (event.target.value) {
+            this.setPageData(event.target.value, null, null)
+        } else {
+            this.setPageData("", null, null)
+        }
+    }
 
     setPageData(keyword, toDate, fromDate) {
         this.rows = [];
@@ -124,5 +145,59 @@ export class AdjustmentListComponent implements OnInit {
             .replace(/v/gm, ('0000' + (d.getMilliseconds() % 1000)).substr(-3));
     }
     //#endregion
-}
 
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[4].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[4].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[2].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[2].submenu[4].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
+}

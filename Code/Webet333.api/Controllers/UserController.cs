@@ -3,16 +3,20 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
+using Webet333.dapper;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Account;
+using Webet333.models.Request.Base;
 using Webet333.models.Request.Payments;
 using Webet333.models.Request.User;
+using Webet333.models.Response.User;
 
 namespace Webet333.api.Controllers
 {
@@ -99,7 +103,7 @@ namespace Webet333.api.Controllers
         {
             //if (request == null) return BadResponse("error_empty_request");
             //if (!ModelState.IsValid) return BadResponse(ModelState);
-            
+
             using (var user_help = new UserHelpers(Connection))
             {
                 var Role = GetUserRole(User);
@@ -229,7 +233,128 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Users Retrive
+        #endregion Users Winlose report
+
+        #region Permission Management
+
+        #region Permission Retrieve Based on Role
+
+        [HttpPost(ActionsConst.Users.DefaultPermissionList)]
+        public async Task<IActionResult> DefaultPermissionList(
+           [FromBody] BaseRoleRequest request,
+           [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            await ValidateUser(role: RoleConst.Admin);
+
+            using (var repository = new DapperRepository<PermissionResponse>(Connection))
+            {
+                var result = await repository.FindAsync(StoredProcConsts.User.SelectDefaultPermission, request);
+
+                if (result == null
+                    || string.IsNullOrEmpty(result.DefaultPermission))
+                    return OkResponse(result);
+
+                var defaultPermissions = new GenericHelpers(Connection).BindDefaultPermissionList(result.DefaultPermission);
+
+                return OkResponse(new
+                {
+                    id = result.Id,
+                    permissionsList = defaultPermissions
+                });
+            }
+        }
+
+        #endregion Permission Retrieve Based on Role
+
+        #region Add Admin
+
+        [HttpPost(ActionsConst.Users.AdminAdd)]
+        public async Task<IActionResult> AdminAdd(
+            [FromBody] RegisterAdminRequest request,
+            [FromServices] IOptions<AuthConfig> AuthConfigOptions)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            request.UniqueId = GetUniqueId(User);
+            request.UserId = GetUserId(User);
+            request.Role = RoleConst.Admin;
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.User.UsersAdminPersist,
+                    new
+                    {
+                        Password = SecurityHelpers.EncryptPassword(request.Password),
+                        Permissions = JsonConvert.SerializeObject(request.PermissionsList),
+                        request.UniqueId,
+                        request.UserId,
+                        request.Username,
+                        request.Role
+                    });
+            }
+
+            return OkResponse();
+        }
+
+        #endregion Add Admin
+
+        #region Admin Retrive
+
+        [HttpPost(ActionsConst.Users.AdminRetrieve)]
+        public async Task<IActionResult> AdminRetrieve(
+            [FromBody] SearchRequest request,
+            [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            await ValidateUser(role: RoleConst.Admin);
+
+            using (var user_help = new UserHelpers(Connection))
+            {
+                var users = await user_help.GetUsers(RoleConst.Admin, request?.Keyword ?? null, BaseUrlConfigsOptions.Value, GetUserId(User).ToString());
+
+                return OkResponse(users);
+            }
+        }
+
+        #endregion Admin Retrive
+
+        #region Update
+
+        [HttpPost(ActionsConst.Users.AdminUpdate)]
+        public async Task<IActionResult> AdminUpdateAsync(
+            [FromBody] UpdateAdminRequest request,
+            [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            request.UniqueId = GetUniqueId(User);
+            request.UserId = GetUserId(User);
+
+            if (request.PermissionsList == null) request.PermissionsList = null;
+
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.User.UsersAdminPersist,
+                    new
+                    {
+                        Id = request.Id,
+                        Password = SecurityHelpers.EncryptPassword(request.Password),
+                        Permissions = request.PermissionsList == null ? null : JsonConvert.SerializeObject(request.PermissionsList),
+                        request.UniqueId,
+                        request.UserId,
+                        request.Username
+                    });
+            }
+
+            return OkResponse();
+        }
+
+        #endregion MyRegion
+
+        #endregion Permission Management
     }
 }
-
