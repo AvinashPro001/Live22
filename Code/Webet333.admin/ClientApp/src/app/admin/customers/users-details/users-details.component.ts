@@ -1011,6 +1011,133 @@ export class UsersDetailsComponent implements OnInit {
         }
     }
 
+    setToday(Tab) {
+        debugger;
+
+        if (this.userid !== undefined && this.userid !== "") {
+            var fromdate = new Date().getFullYear() + '-' + new Date().getMonth() + 1 + '-' + new Date().getDate();
+            var todate = new Date().getFullYear() + '-' + new Date().getMonth() + 1 + '-' + new Date().getDate();
+
+            if (Tab === "Deposit") this.depositlist(fromdate, todate);
+        }
+        else {
+            this.depositRows = [];
+            this.withdrawRows = [];
+            this.transferRows = [];
+            this.promotionRows = [];
+            this.statementRows = [];
+            this.rebateRows = [];
+            this.restoreRows = [];
+            this.PromotionApplyRows = [];
+            this.totalWithdrawAmountWithMYR = "";
+            var someElement = document.getElementById("lockIcon");
+            someElement.className += "";
+            this.Resetvalue();
+        }
+    }
+
+    setYesterday(Tab) {
+        debugger;
+
+        var lastday = function (y, m) {
+            return new Date(y, m + 1, 0).getDate();
+        }
+
+        if (this.userid !== undefined && this.userid !== "") {
+            var preDate = new Date().getDate() - 1;
+            var preMonth = new Date().getMonth() + 1;
+            var preYear = new Date().getFullYear();
+
+            preDate = 1 - 1;
+            preMonth = 0;
+            preYear = 2021;
+
+
+            if (preDate === 0) {
+
+                preMonth = preMonth - 1
+
+                if (preMonth === -1) {
+
+                    preYear = preYear - 1;
+                    preMonth = 12;
+                    preDate = lastday(preYear, preMonth);
+                }
+            }
+
+            var fromdate = preYear + '-' + preMonth + '-' + preDate;
+            var todate = preYear + '-' + preMonth + '-' + preDate;
+
+            if (Tab === "Deposit") this.depositlist(fromdate, todate);
+        }
+        else {
+            this.depositRows = [];
+            this.withdrawRows = [];
+            this.transferRows = [];
+            this.promotionRows = [];
+            this.statementRows = [];
+            this.rebateRows = [];
+            this.restoreRows = [];
+            this.PromotionApplyRows = [];
+            this.totalWithdrawAmountWithMYR = "";
+            var someElement = document.getElementById("lockIcon");
+            someElement.className += "";
+            this.Resetvalue();
+        }
+    }
+
+    setThisWeek(Tab) {
+        if (this.userid !== undefined && this.userid !== "") {
+            var fromdate = new Date().getFullYear() + '-' + new Date().getMonth() + 1 + '-' + new Date().getDate();
+            var todate = new Date().getFullYear() + '-' + new Date().getMonth() + 1 + '-' + new Date().getDate();
+            if (Tab === "Deposit") {
+                fromdate = (document.getElementById("d_fromdatetime") as HTMLInputElement).value;
+                todate = (document.getElementById("d_todatetime") as HTMLInputElement).value;
+                this.depositlist(fromdate == "" ? null : fromdate, todate == "" ? null : todate);
+            }
+        }
+        else {
+            this.depositRows = [];
+            this.withdrawRows = [];
+            this.transferRows = [];
+            this.promotionRows = [];
+            this.statementRows = [];
+            this.rebateRows = [];
+            this.restoreRows = [];
+            this.PromotionApplyRows = [];
+            this.totalWithdrawAmountWithMYR = "";
+            var someElement = document.getElementById("lockIcon");
+            someElement.className += "";
+            this.Resetvalue();
+        }
+    }
+
+    setThisYear(Tab) {
+        if (this.userid !== undefined && this.userid !== "") {
+            var fromdate = new Date().getFullYear() + '-' + new Date().getMonth() + 1 + '-' + new Date().getDate();
+            var todate = new Date().getFullYear() + '-' + new Date().getMonth() + 1 + '-' + new Date().getDate();
+            if (Tab === "Deposit") {
+                fromdate = (document.getElementById("d_fromdatetime") as HTMLInputElement).value;
+                todate = (document.getElementById("d_todatetime") as HTMLInputElement).value;
+                this.depositlist(fromdate == "" ? null : fromdate, todate == "" ? null : todate);
+            }
+        }
+        else {
+            this.depositRows = [];
+            this.withdrawRows = [];
+            this.transferRows = [];
+            this.promotionRows = [];
+            this.statementRows = [];
+            this.rebateRows = [];
+            this.restoreRows = [];
+            this.PromotionApplyRows = [];
+            this.totalWithdrawAmountWithMYR = "";
+            var someElement = document.getElementById("lockIcon");
+            someElement.className += "";
+            this.Resetvalue();
+        }
+    }
+
     searchHandlerByDate(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
             var fromdate, todate;
@@ -1357,57 +1484,59 @@ export class UsersDetailsComponent implements OnInit {
     //#region Promotion Expier
 
     async ExpierPromoton(promotionId) {
-        this.loadingIndicator = true;
-        let data = {
-            id: this.userid
-        }
-        var id = this.userid;
-        await this.Kiss918Balance(id);
-        await this.Mega888(id);
-        await this.Maxbet(id);
-        await this.M8(id);
-        await this.AG(id);
-        await this.DG(id);
-        await this.Playtech(id);
-        await this.Joker(id);
-        await this.Sexybaccarat(id);
-        await this.SA(id);
-        await this.Pussy888(id);
-        await this.AllBet(id);
-        await this.WM(id)
-        await this.Pragmatic(id)
-
-        let balanceRestore = {
-            kiss918wallet: this.kiss918balance == null ? 0.0 : this.kiss918balance,
-            maxbetwallet: this.Maxbetbalance == null ? 0.0 : this.Maxbetbalance,
-            jokerwallet: this.Jokerbalance == null ? 0.0 : this.Jokerbalance,
-            agwallet: this.AGbalance == null ? 0.0 : this.AGbalance,
-            m8wallet: this.M8balance == null ? 0.0 : this.M8balance,
-            playtechwallet: this.Playtechbalance == null ? 0.0 : this.Playtechbalance,
-            mega888wallet: this.Mega888balance == null ? 0.0 : this.Mega888balance,
-            dgwallet: this.DGbalance == null ? 0.0 : this.DGbalance,
-            sexywallet: this.Sexybaccaratbalance == null ? 0.0 : this.Sexybaccaratbalance,
-            sawallet: this.SAbalance == null ? 0.0 : this.SAbalance,
-            pussy888wallet: this.Pussy888balance == null ? 0.0 : this.Pussy888balance,
-            allbetwallet: this.allbetbalance == null ? 0.0 : this.allbetbalance,
-            WMwallet: this.wmbalance == null ? 0.0 : this.wmbalance,
-            pragmaticwallet: this.pragmaticbalance == null ? 0.0 : this.pragmaticbalance,
-            id: id
-        }
-
-        this.adminService.add<any>(account.RestoreBalance, balanceRestore).subscribe(res => {
-            let promotionExpiery = {
-                userId: this.userid,
-                promotionId: promotionId
+        if (await this.checkUpdatePermission()) {
+            this.loadingIndicator = true;
+            let data = {
+                id: this.userid
             }
-            this.adminService.add<any>(customer.ManuallyPromotionExpiery, promotionExpiery).subscribe(res => {
-                this.loadingIndicator = false;
-                this.toasterService.pop('success', 'Success', res.message);
-            }, error => {
-                this.loadingIndicator = false;
-                this.toasterService.pop('error', 'Error', error.error.message);
+            var id = this.userid;
+            await this.Kiss918Balance(id);
+            await this.Mega888(id);
+            await this.Maxbet(id);
+            await this.M8(id);
+            await this.AG(id);
+            await this.DG(id);
+            await this.Playtech(id);
+            await this.Joker(id);
+            await this.Sexybaccarat(id);
+            await this.SA(id);
+            await this.Pussy888(id);
+            await this.AllBet(id);
+            await this.WM(id)
+            await this.Pragmatic(id)
+
+            let balanceRestore = {
+                kiss918wallet: this.kiss918balance == null ? 0.0 : this.kiss918balance,
+                maxbetwallet: this.Maxbetbalance == null ? 0.0 : this.Maxbetbalance,
+                jokerwallet: this.Jokerbalance == null ? 0.0 : this.Jokerbalance,
+                agwallet: this.AGbalance == null ? 0.0 : this.AGbalance,
+                m8wallet: this.M8balance == null ? 0.0 : this.M8balance,
+                playtechwallet: this.Playtechbalance == null ? 0.0 : this.Playtechbalance,
+                mega888wallet: this.Mega888balance == null ? 0.0 : this.Mega888balance,
+                dgwallet: this.DGbalance == null ? 0.0 : this.DGbalance,
+                sexywallet: this.Sexybaccaratbalance == null ? 0.0 : this.Sexybaccaratbalance,
+                sawallet: this.SAbalance == null ? 0.0 : this.SAbalance,
+                pussy888wallet: this.Pussy888balance == null ? 0.0 : this.Pussy888balance,
+                allbetwallet: this.allbetbalance == null ? 0.0 : this.allbetbalance,
+                WMwallet: this.wmbalance == null ? 0.0 : this.wmbalance,
+                pragmaticwallet: this.pragmaticbalance == null ? 0.0 : this.pragmaticbalance,
+                id: id
+            }
+
+            this.adminService.add<any>(account.RestoreBalance, balanceRestore).subscribe(res => {
+                let promotionExpiery = {
+                    userId: this.userid,
+                    promotionId: promotionId
+                }
+                this.adminService.add<any>(customer.ManuallyPromotionExpiery, promotionExpiery).subscribe(res => {
+                    this.loadingIndicator = false;
+                    this.toasterService.pop('success', 'Success', res.message);
+                }, error => {
+                    this.loadingIndicator = false;
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
             });
-        });
+        }
     }
 
     //#endregion

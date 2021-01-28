@@ -9,19 +9,22 @@
             </div>
         </div>
         <div class="row col-12">
-            <div class="p-2 col-md-12">
+            <div class="p-2 col-md-2">
+                <input type='text' class="form-control" (keyup)="searchHandler($event)" placeholder="Search" />
+            </div>
+            <div class="p-2 col-md-10">
                 <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Add Admin</button>
             </div>
         </div>
         <br />
         <div class="card-body">
             <!--<div class="row mb-4">
-                <div class="col-lg-2">
-                    <input type='text' class="form-control" (keyup)="searchHandler($event)" placeholder="Search" />
-                </div>
-                <div class="col-lg-10">
-                    <button id="addBtn" data-id="withdrawData[rowIndex].id" class="mb-1 btn btn-success" type="button" (click)=' navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large"> Add Admin </button>
-                </div>-->
+            <div class="col-lg-2">
+                <input type='text' class="form-control" (keyup)="searchHandler($event)" placeholder="Search" />
+            </div>
+            <div class="col-lg-10">
+                <button id="addBtn" data-id="withdrawData[rowIndex].id" class="mb-1 btn btn-success" type="button" (click)=' navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large"> Add Admin </button>
+            </div>-->
             <!--<div class="col-lg-4"></div>-->
             <!--</div>-->
             <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"

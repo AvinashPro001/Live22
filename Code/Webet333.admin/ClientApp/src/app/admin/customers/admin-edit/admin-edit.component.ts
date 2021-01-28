@@ -140,28 +140,28 @@ export class AdminEditComponent implements OnInit {
 
     //#region Check Unchecked All
 
-    checkUncheckAll() {
+    checkUncheckAll(value) {
         for (var i = 0; i < this.defaultPermissionsListUpdate.length; i++) {
-            //this.defaultPermissionsListUpdate[i].IsChecked = false;
+            //this.defaultPermissionsListUpdate[i].IsChecked = value;
 
             for (var j = 0; j < this.defaultPermissionsListUpdate[i].Permissions.length; j++) {
-                this.defaultPermissionsListUpdate[i].Permissions[j].IsChecked = false;
+                this.defaultPermissionsListUpdate[i].Permissions[j].IsChecked = value;
             }
 
             if (this.defaultPermissionsListUpdate[i].submenu) {
                 for (var k = 0; k < this.defaultPermissionsListUpdate[i].submenu.length; k++) {
-                    //this.defaultPermissionsListUpdate[i].submenu[k].IsChecked = false;
+                    //this.defaultPermissionsListUpdate[i].submenu[k].IsChecked = value;
 
                     for (var l = 0; l < this.defaultPermissionsListUpdate[i].submenu[k].Permissions.length; l++) {
-                        this.defaultPermissionsListUpdate[i].submenu[k].Permissions[l].IsChecked = false;
+                        this.defaultPermissionsListUpdate[i].submenu[k].Permissions[l].IsChecked = value;
                     }
 
                     if (this.defaultPermissionsListUpdate[i].submenu[k].submenu) {
                         for (var m = 0; m < this.defaultPermissionsListUpdate[i].submenu[k].submenu.length; m++) {
-                            //this.defaultPermissionsListUpdate[i].submenu[k].submenu[m].IsChecked = false;
+                            //this.defaultPermissionsListUpdate[i].submenu[k].submenu[m].IsChecked = value;
 
                             for (var n = 0; n < this.defaultPermissionsListUpdate[i].submenu[k].submenu[m].Permissions.length; n++) {
-                                this.defaultPermissionsListUpdate[i].submenu[k].submenu[m].Permissions[n].IsChecked = false;
+                                this.defaultPermissionsListUpdate[i].submenu[k].submenu[m].Permissions[n].IsChecked = value;
                             }
                         }
                     }
@@ -176,7 +176,44 @@ export class AdminEditComponent implements OnInit {
 
     //#region Get Updated PermissionsList
 
-    getUpdatedPermissionsList(permissionsList) {
+    getUpdatedPermissionsList(permissionsList, menuList) {
+
+        var viewPermission = menuList.Permissions[0].IsChecked;
+        var updatePermission = menuList.Permissions[1].IsChecked;
+        var addPermission = menuList.Permissions[2].IsChecked;
+
+        for (var i = 0; i < 1; i++) {
+
+            for (var j = 0; j < menuList.Permissions.length; j = j + 3) {
+                menuList.Permissions[j].IsChecked = viewPermission;
+                menuList.Permissions[j + 1].IsChecked = updatePermission;
+                menuList.Permissions[j + 2].IsChecked = addPermission;
+            }
+
+            if (menuList.submenu) {
+
+                for (var k = 0; k < menuList.submenu.length; k++) {
+
+                    for (var l = 0; l < menuList.submenu[k].Permissions.length; l = l + 3) {
+                        menuList.submenu[k].Permissions[l].IsChecked = viewPermission;
+                        menuList.submenu[k].Permissions[l + 1].IsChecked = updatePermission;
+                        menuList.submenu[k].Permissions[l + 2].IsChecked = addPermission;
+                    }
+
+                    if (menuList.submenu[k].submenu) {
+                        for (var m = 0; m < menuList.submenu[k].submenu.length; m++) {
+
+                            for (var n = 0; n < menuList.submenu[k].submenu[m].Permissions.length; n = n + 3) {
+                                menuList.submenu[k].submenu[m].Permissions[n].IsChecked = viewPermission;
+                                menuList.submenu[k].submenu[m].Permissions[n + 1].IsChecked = updatePermission;
+                                menuList.submenu[k].submenu[m].Permissions[n + 2].IsChecked = addPermission;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         this.defaultPermissionsListUpdate = permissionsList;
 
         console.log(this.defaultPermissionsListUpdate);
