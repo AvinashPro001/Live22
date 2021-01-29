@@ -83,14 +83,12 @@ export class AdminAddComponent implements OnInit {
     //#region Get Updated PermissionsList
 
     getUpdatedPermissionsList(permissionsList, menuList) {
-
         //debugger;
         var viewPermission = menuList.Permissions[0].IsChecked;
         var updatePermission = menuList.Permissions[1].IsChecked;
         var addPermission = menuList.Permissions[2].IsChecked;
 
         for (var i = 0; i < 1; i++) {
-
             for (var j = 0; j < menuList.Permissions.length; j = j + 3) {
                 menuList.Permissions[j].IsChecked = viewPermission;
                 menuList.Permissions[j + 1].IsChecked = updatePermission;
@@ -98,9 +96,7 @@ export class AdminAddComponent implements OnInit {
             }
 
             if (menuList.submenu) {
-
                 for (var k = 0; k < menuList.submenu.length; k++) {
-
                     for (var l = 0; l < menuList.submenu[k].Permissions.length; l = l + 3) {
                         menuList.submenu[k].Permissions[l].IsChecked = viewPermission;
                         menuList.submenu[k].Permissions[l + 1].IsChecked = updatePermission;
@@ -109,7 +105,6 @@ export class AdminAddComponent implements OnInit {
 
                     if (menuList.submenu[k].submenu) {
                         for (var m = 0; m < menuList.submenu[k].submenu.length; m++) {
-
                             for (var n = 0; n < menuList.submenu[k].submenu[m].Permissions.length; n = n + 3) {
                                 menuList.submenu[k].submenu[m].Permissions[n].IsChecked = viewPermission;
                                 menuList.submenu[k].submenu[m].Permissions[n + 1].IsChecked = updatePermission;
@@ -167,7 +162,6 @@ export class AdminAddComponent implements OnInit {
     //#region Add Admin
 
     addAdmin() {
-
         this.loadingIndicator = true;
 
         let data =
@@ -181,6 +175,12 @@ export class AdminAddComponent implements OnInit {
             this.disabled = false;
             this.ngOnInit();
             return this.toasterService.pop('error', 'Error', "Please fill password filed");
+        }
+
+        if (data.password.length < 6) {
+            this.disabled = false;
+            this.ngOnInit();
+            return this.toasterService.pop('error', 'Error', "This value is too short. It should have 6 characters or more");
         }
 
         if (data.username == null || data.username == undefined || data.username == '') {
