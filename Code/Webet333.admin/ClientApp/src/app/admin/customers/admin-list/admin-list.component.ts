@@ -177,13 +177,11 @@ export class AdminListComponent implements OnInit {
     }
 
     async show(row, content) {
-        if (await this.checkViewPermission()) {
-            //this.viewData = row;
-            //this.openWindowCustomClass(content);
+        //this.viewData = row;
+        //this.openWindowCustomClass(content);
 
-            localStorage.setItem('id', JSON.stringify(row));
-            window.open('admin/customers/users-details', '_blank');
-        }
+        localStorage.setItem('id', JSON.stringify(row));
+        window.open('admin/customers/users-details', '_blank');
     }
 
     openWindowCustomClass(content) {

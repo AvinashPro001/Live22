@@ -62,63 +62,61 @@ export class RebateCalculateComponent implements OnInit {
         })
     }
 
-    async Calculate() {
-        if (await this.checkUpdatePermission()) {
-            this.disable = true;
-            this.fromDate = this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
-            this.toDate = this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
-            this.gameType = (document.getElementById("gameCategory") as HTMLInputElement).value;
-            this.RebatePercentage = Number((document.getElementById("txt_rebate") as HTMLInputElement).value);
-            let model = {
-                fromdate: this.fromDate,
-                todate: this.toDate,
-                gametype: this.gameType,
-                rebate: this.RebatePercentage
-            }
-            if (model.rebate <= 0) {
-                return this.toasterService.pop('error', 'Error', "Please Insert Rebate value Greater Then 0 !!!");
-            }
-
-            if (model.fromdate === "" || model.todate === "" || model.rebate === 0) {
-                return this.toasterService.pop('error', 'Error', "Please Fill All Mandatory Field !!!");
-            }
-
-            if (model.fromdate === model.todate) {
-                return this.toasterService.pop('error', 'Error', "Please Select Different Dates !!!");
-            }
-
-            this.rows = [];
-            this.loadingIndicator = true;
-            this.adminService.add<any>(customer.RebateCalculate, model).subscribe(res => {
-                let i = 0;
-                this.TotolBetAmount = res.data.betTotal;
-                this.TotolCommAmount = res.data.commTotal;
-                this.TotolRollingAmount = res.data.rollingTotal;
-                this.TotolTurnoverAmount = res.data.turrnoverTotal;
-                this.TotolWinloseAmount = res.data.winLoseTotal;
-                this.rebateData = res.data.calculateData;
-                res.data.calculateData.forEach(el => {
-                    this.rows.push({
-                        No: ++i,
-                        UserName: el.username,
-                        GameName: el.gameName,
-                        APIUserName: el.apiUsername,
-                        Turnover: el.turnover,
-                        BetAmount: el.bet,
-                        Rolling: el.rolling,
-                        WinLose: el.winLose,
-                        CommAmount: el.commAmount
-                    });
-                    this.rows = [...this.rows]
-                });
-                this.loadingIndicator = false;
-                this.disable = false;
-            })
+    Calculate() {
+        this.disable = true;
+        this.fromDate = this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
+        this.toDate = this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
+        this.gameType = (document.getElementById("gameCategory") as HTMLInputElement).value;
+        this.RebatePercentage = Number((document.getElementById("txt_rebate") as HTMLInputElement).value);
+        let model = {
+            fromdate: this.fromDate,
+            todate: this.toDate,
+            gametype: this.gameType,
+            rebate: this.RebatePercentage
         }
+        if (model.rebate <= 0) {
+            return this.toasterService.pop('error', 'Error', "Please Insert Rebate value Greater Then 0 !!!");
+        }
+
+        if (model.fromdate === "" || model.todate === "" || model.rebate === 0) {
+            return this.toasterService.pop('error', 'Error', "Please Fill All Mandatory Field !!!");
+        }
+
+        if (model.fromdate === model.todate) {
+            return this.toasterService.pop('error', 'Error', "Please Select Different Dates !!!");
+        }
+
+        this.rows = [];
+        this.loadingIndicator = true;
+        this.adminService.add<any>(customer.RebateCalculate, model).subscribe(res => {
+            let i = 0;
+            this.TotolBetAmount = res.data.betTotal;
+            this.TotolCommAmount = res.data.commTotal;
+            this.TotolRollingAmount = res.data.rollingTotal;
+            this.TotolTurnoverAmount = res.data.turrnoverTotal;
+            this.TotolWinloseAmount = res.data.winLoseTotal;
+            this.rebateData = res.data.calculateData;
+            res.data.calculateData.forEach(el => {
+                this.rows.push({
+                    No: ++i,
+                    UserName: el.username,
+                    GameName: el.gameName,
+                    APIUserName: el.apiUsername,
+                    Turnover: el.turnover,
+                    BetAmount: el.bet,
+                    Rolling: el.rolling,
+                    WinLose: el.winLose,
+                    CommAmount: el.commAmount
+                });
+                this.rows = [...this.rows]
+            });
+            this.loadingIndicator = false;
+            this.disable = false;
+        })
     }
 
     async Rebate() {
-        if (await this.checkUpdatePermission()) {
+        if (await this.checkAddPermission()) {
             this.disable = true;
             let model = {
                 fromdate: this.fromDate,

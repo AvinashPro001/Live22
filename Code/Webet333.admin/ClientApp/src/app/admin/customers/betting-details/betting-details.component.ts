@@ -390,6 +390,10 @@ export class BettingDetailsComponent implements OnInit {
             (document.getElementById("toDate") as HTMLInputElement).style.display = "none";
             (document.getElementById("startDate") as HTMLInputElement).style.display = "none";
             (document.getElementById("gmtDiv") as HTMLInputElement).style.display = "none";
+            (document.getElementById("todayFilter") as HTMLInputElement).style.display = "none";
+            (document.getElementById("yesterdayFilter") as HTMLInputElement).style.display = "none";
+            (document.getElementById("thisWeekFilter") as HTMLInputElement).style.display = "none";
+            (document.getElementById("thisYearFilter") as HTMLInputElement).style.display = "none";
         }
         else {
             this.disable = false;
@@ -397,10 +401,18 @@ export class BettingDetailsComponent implements OnInit {
             (document.getElementById("fromDate") as HTMLInputElement).style.display = "";
             (document.getElementById("toDate") as HTMLInputElement).style.display = "";
             (document.getElementById("gmtDiv") as HTMLInputElement).style.display = "none";
+            (document.getElementById("todayFilter") as HTMLInputElement).style.display = "";
+            (document.getElementById("yesterdayFilter") as HTMLInputElement).style.display = "";
+            (document.getElementById("thisWeekFilter") as HTMLInputElement).style.display = "";
+            (document.getElementById("thisYearFilter") as HTMLInputElement).style.display = "";
         }
 
         if ($event.target.value === "Pragmatic") {
             (document.getElementById("startDate") as HTMLInputElement).style.display = "";
+            (document.getElementById("todayFilter") as HTMLInputElement).style.display = "";
+            (document.getElementById("yesterdayFilter") as HTMLInputElement).style.display = "";
+            (document.getElementById("thisWeekFilter") as HTMLInputElement).style.display = "";
+            (document.getElementById("thisYearFilter") as HTMLInputElement).style.display = "";
         }
 
         if ($event.target.value === "Sexy Baccarat") {
@@ -415,7 +427,81 @@ export class BettingDetailsComponent implements OnInit {
         this.gmtlist = $event.target.value;
     }
 
-    BettingDetails() {
+    //#region       Filter Data
+
+    setToday() {
+        var preDate = new Date().getDate();
+        var preMonth = new Date().getMonth() + 1;
+        var preYear = new Date().getFullYear();
+
+        var fromdate = preYear + '-' + preMonth + '-' + preDate;
+        var todate = preYear + '-' + preMonth + '-' + preDate;
+
+        this.BettingDetails(fromdate, todate);
+    }
+
+    setYesterday() {
+        var lastday = function (y, m) { return new Date(y, m, 0).getDate(); }
+
+        var preDate = new Date().getDate() - 1;
+        var preMonth = new Date().getMonth() + 1;
+        var preYear = new Date().getFullYear();
+
+        //#region Testing
+
+        //preDate = 1 - 1;
+        //preMonth = 1;
+        //preYear = 2021;
+
+        //#endregion Testing
+
+        if (preDate === 0) {
+            preMonth = preMonth - 1
+            if (preMonth === 0) {
+
+                preYear = preYear - 1;
+                preMonth = 12;
+                preDate = lastday(preYear, preMonth);
+            }
+            else {
+                preDate = lastday(preYear, preMonth);
+            }
+        }
+
+        var fromdate = preYear + '-' + preMonth + '-' + preDate;
+        var todate = preYear + '-' + preMonth + '-' + preDate;
+
+        this.BettingDetails(fromdate, todate);
+    }
+
+    setThisWeek() {
+
+        //#region Get start date and end date of week.
+
+        var curr = new Date; // get current date
+        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+        var last = first + 6; // last day is the first day + 6
+        var firstday = new Date(curr.setDate(first));
+        var lastday = new Date(curr.setDate(last));
+
+        //#endregion Get start date and end date of week.
+
+        var fromdate = firstday.getFullYear() + '-' + firstday.getMonth() + 1 + '-' + firstday.getDate();
+        var todate = lastday.getFullYear() + '-' + lastday.getMonth() + 1 + '-' + lastday.getDate();
+
+        this.BettingDetails(fromdate, todate);
+    }
+
+    setThisYear() {
+        var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1;
+        var todate = new Date().getFullYear() + '-' + 12 + '-' + 31;
+
+        this.BettingDetails(fromdate, todate);
+    }
+
+    //#endregion
+
+    BettingDetails(startingDate = null, endingDate = null) {
         this.loadingIndicator = true;
         this.rows = [];
 
@@ -423,6 +509,12 @@ export class BettingDetailsComponent implements OnInit {
         this.toDate = this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
 
         this.startdate = this.datePipe.transform((document.getElementById("txt_startdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
+
+        if (startingDate !== null && endingDate !== null) {
+            this.fromDate = startingDate;
+            this.toDate = endingDate;
+            this.startdate = startingDate;
+        }
 
         let Model = {
             fromdate: this.fromDate,

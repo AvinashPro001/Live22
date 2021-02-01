@@ -61,7 +61,7 @@ export class SmsNotifyComponent implements OnInit {
     }
 
     async SendSMS() {
-        if (await this.checkUpdatePermission()) {
+        if (await this.checkAddPermission()) {
             this.userList.forEach(el => {
                 var SMSMessage = ((document.getElementById("msg") as HTMLInputElement).value);
                 let data = {

@@ -59,7 +59,7 @@ export class CustomerListComponent implements OnInit {
         let data = {}
         this.adminService.add<any>(account.profile, data).subscribe(res => {
         }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
+                this.toasterService.pop('error', 'Error', error.error.message);
 
             if (error.error.message === "Your access token is expired, please login again.") {
                 localStorage.removeItem('currentUser');
@@ -194,7 +194,7 @@ export class CustomerListComponent implements OnInit {
         if (await this.checkUpdatePermission()) this.rejectCustomer(id, value);
     }
 
-    async searchHandler() {
+    searchHandler() {
         var parameter = ((document.getElementById("searchText") as HTMLInputElement).value)
         if (parameter != "") {
             var data = {
@@ -205,14 +205,12 @@ export class CustomerListComponent implements OnInit {
         }
     }
 
-    async show(row, content) {
-        if (await this.checkViewPermission()) {
-            //this.viewData = row;
-            //this.openWindowCustomClass(content);
+    show(row, content) {
+        //this.viewData = row;
+        //this.openWindowCustomClass(content);
 
-            localStorage.setItem('id', JSON.stringify(row));
-            window.open('admin/customers/users-details', '_blank');
-        }
+        localStorage.setItem('id', JSON.stringify(row));
+        window.open('admin/customers/users-details', '_blank');
     }
 
     openWindowCustomClass(content) {

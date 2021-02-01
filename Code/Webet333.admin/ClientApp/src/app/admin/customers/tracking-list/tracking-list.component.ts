@@ -68,13 +68,93 @@ export class TrackingListComponent implements OnInit {
         return date.replace("T", " ");
     }
 
-    Search() {
+    //#region       Filter Data
+
+    setToday() {
+        var preDate = new Date().getDate();
+        var preMonth = new Date().getMonth() + 1;
+        var preYear = new Date().getFullYear();
+
+        var fromdate = preYear + '-' + preMonth + '-' + preDate;
+        var todate = preYear + '-' + preMonth + '-' + preDate;
+
+        this.Search(fromdate, todate);
+    }
+
+    setYesterday() {
+        var lastday = function (y, m) { return new Date(y, m, 0).getDate(); }
+
+        var preDate = new Date().getDate() - 1;
+        var preMonth = new Date().getMonth() + 1;
+        var preYear = new Date().getFullYear();
+
+        //#region Testing
+
+        //preDate = 1 - 1;
+        //preMonth = 1;
+        //preYear = 2021;
+
+        //#endregion Testing
+
+        if (preDate === 0) {
+            preMonth = preMonth - 1
+            if (preMonth === 0) {
+
+                preYear = preYear - 1;
+                preMonth = 12;
+                preDate = lastday(preYear, preMonth);
+            }
+            else {
+                preDate = lastday(preYear, preMonth);
+            }
+        }
+
+        var fromdate = preYear + '-' + preMonth + '-' + preDate;
+        var todate = preYear + '-' + preMonth + '-' + preDate;
+
+        this.Search(fromdate, todate);
+    }
+
+    setThisWeek() {
+
+        //#region Get start date and end date of week.
+
+        var curr = new Date; // get current date
+        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+        var last = first + 6; // last day is the first day + 6
+        var firstday = new Date(curr.setDate(first));
+        var lastday = new Date(curr.setDate(last));
+
+        //#endregion Get start date and end date of week.
+
+        var fromdate = firstday.getFullYear() + '-' + firstday.getMonth() + 1 + '-' + firstday.getDate();
+        var todate = lastday.getFullYear() + '-' + lastday.getMonth() + 1 + '-' + lastday.getDate();
+
+        this.Search(fromdate, todate);
+    }
+
+    setThisYear() {
+        var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1;
+        var todate = new Date().getFullYear() + '-' + 12 + '-' + 31;
+
+        this.Search(fromdate, todate);
+    }
+
+    //#endregion
+
+    Search(startingDate = null, endingDate = null) {
         this.loadingIndicator = true;
         let data = {
             process: this.selectedlist === undefined ? null : this.selectedlist,
             fromdate: (document.getElementById("txt_fromdatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_fromdatetime") as HTMLInputElement).value,
             todate: (document.getElementById("txt_todatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_todatetime") as HTMLInputElement).value
         }
+
+        if (startingDate !== null && endingDate !== null) {
+            data.fromdate = startingDate;
+            data.todate = endingDate
+        }
+
         this.adminService.add<any>(customer.trackingSelect, data).subscribe(res => {
             this.rows = [];
             let i = 0;

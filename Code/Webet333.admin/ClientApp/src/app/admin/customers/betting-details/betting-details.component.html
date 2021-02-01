@@ -37,8 +37,6 @@
                     </div>
                 </div>
 
-
-
                 <div class="p-2 col-md-2" id="startDate" style="display:none">
                     <h4 class="text-muted text-thin">Start Date</h4>
                     <div class="input-group">
@@ -50,10 +48,6 @@
                     </div>
                 </div>
 
-
-
-
-
                 <div class="p-2 col-md-2" id="gmtDiv" style="display:none">
                     <h4 class="text-muted text-thin">GMT</h4>
                     <select class="form-control" id="Gmt" [disabled]="gmtDisable" (change)="SelectGMT($event)">
@@ -61,11 +55,29 @@
                         <option *ngFor="let c of gmtList" [ngValue]="c">{{c.gmt}}</option>
                     </select>
                 </div>
-                <div class="p-2 col-md-2">
+
+                <div class="p-2">
                     <h4 class="text-muted text-thin">&nbsp;</h4>
                     <button class="mb-1 btn btn-success" (click)='BettingDetails()' type="button">Betting Details</button>
                 </div>
-                <div class="p-2 col-md-2" style="position:absolute;right:0px;margin-top:35px">
+                <div class="p-2" id="todayFilter" style="display:none">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setToday()' type="button">Today</button>
+                </div>
+                <div class="p-2" id="yesterdayFilter" style="display:none">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setYesterday()' type="button">Yesterday</button>
+                </div>
+                <div class="p-2" id="thisWeekFilter" style="display:none">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setThisWeek()' type="button">This Week</button>
+                </div>
+                <div class="p-2" id="thisYearFilter" style="display:none">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setThisYear()' type="button">This Year</button>
+                </div>
+
+                <div class="p-2" style="position:absolute;right:0px;margin-top:35px">
                     <button id="acceptBtn" class="mb-1 btn btn-success" (click)="Save()" type="button" data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Save</button>
                 </div>
             </div>
@@ -76,14 +88,13 @@
                         <div class="row col-md-6">
                             <div class="input-group col-9">
                                 <label class="container">
-                                    <input type="checkbox" (change)="onSelect($event, row.FetchId)"  id="chk_isdaily">
+                                    <input type="checkbox" (change)="onSelect($event, row.FetchId)" id="chk_isdaily">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                         </div>
                     </ng-template>
                 </ngx-datatable>
-                
             </div>
         </div>
     </div>
