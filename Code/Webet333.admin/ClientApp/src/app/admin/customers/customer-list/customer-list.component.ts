@@ -195,15 +195,13 @@ export class CustomerListComponent implements OnInit {
     }
 
     async searchHandler() {
-        if (await this.checkUpdatePermission()) {
-            var parameter = ((document.getElementById("searchText") as HTMLInputElement).value)
-            if (parameter != "") {
-                var data = {
-                    SearchParam: parameter,
-                }
-
-                this.setPageData(data.SearchParam)
+        var parameter = ((document.getElementById("searchText") as HTMLInputElement).value)
+        if (parameter != "") {
+            var data = {
+                SearchParam: parameter,
             }
+
+            this.setPageData(data.SearchParam)
         }
     }
 

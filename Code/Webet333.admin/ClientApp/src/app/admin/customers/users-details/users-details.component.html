@@ -312,9 +312,25 @@
                 </div>
             </div>
         </div>
-        <div class="p-2 col-md-2">
+        <div class="p-2">
             <h4 class="text-muted text-thin">&nbsp;</h4>
             <button class="mb-1 btn btn-success" (click)='searchHandlerByDate("Deposit")' type="button">Filter</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setToday("Deposit")' type="button">Today</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setYesterday("Deposit")' type="button">Yesterday</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisWeek("Deposit")' type="button">This Week</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisYear("Deposit")' type="button">This Year</button>
         </div>
     </div>
     <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="depositRows" [loadingIndicator]="loadingIndicator" [columns]="depositColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
@@ -661,8 +677,6 @@
     </div>
 </ng-template>
 <!--Remarks modal code ends-->
-
-
 <!--Remarks modal code starts-->
 <ng-template #VIPLevel let-modal>
     <div class="modal-header">

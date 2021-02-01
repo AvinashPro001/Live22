@@ -45,20 +45,18 @@ export class SmsNotifyComponent implements OnInit {
     }
 
     async GetUsers() {
-        if (await this.checkUpdatePermission()) {
-            let data = {
-                minute: ((document.getElementById("minute") as HTMLInputElement).value)
-            }
-            if (data.minute != "") {
-                this.adminService.add<any>(customer.SmsUserList, data).subscribe(res => {
-                    this.userList = res.data.result;
-                    this.TotalUser = res.data.toalUser;
-                }, error => {
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                });
-            } else {
-                this.toasterService.pop('error', 'Error', "Please Insert Minute !!");
-            }
+        let data = {
+            minute: ((document.getElementById("minute") as HTMLInputElement).value)
+        }
+        if (data.minute != "") {
+            this.adminService.add<any>(customer.SmsUserList, data).subscribe(res => {
+                this.userList = res.data.result;
+                this.TotalUser = res.data.toalUser;
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
+        } else {
+            this.toasterService.pop('error', 'Error', "Please Insert Minute !!");
         }
     }
 

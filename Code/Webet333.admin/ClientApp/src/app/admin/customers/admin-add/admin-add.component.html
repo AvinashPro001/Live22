@@ -33,10 +33,13 @@
                                     <div class="text-center border border-dark p-5">
 
                                         <div class="row col-lg-12">
-                                            <span class="col-md-6 mb-4">
-                                                <button class="btn btn-info col-md-8 mb-2" style="text-align:center;font-size:20px" type="submit" (click)="checkUncheckAll()">Clear all</button>
+                                            <span class="col-md-4 mb-4">
+                                                <button class="btn btn-info col-md-8 mb-2" style="text-align:center;font-size:20px" type="submit" (click)="checkUncheckAll(false)">Clear all</button>
                                             </span>
-                                            <span class="col-md-6 mb-4">
+                                            <span class="col-md-4 mb-4">
+                                                <button class="btn btn-info col-md-8 mb-2" style="text-align: center;font-size: 20px" type="submit" (click)="checkUncheckAll(true)">Check All</button>
+                                            </span>
+                                            <span class="col-md-4 mb-4">
                                                 <button class="btn btn-info col-md-8 mb-2" style="text-align: center;font-size: 20px" type="submit" (click)="addAdmin()">Save Changes</button>
                                             </span>
                                         </div>
@@ -146,7 +149,7 @@
                                                                         <label class="container">
                                                                             <input type="checkbox"
                                                                                    id={{defaultPermissions.Id}}
-                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList)"
+                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList,item)"
                                                                                    name="{{defaultPermissions.text}}-{{i}}-{{j}}"
                                                                                    [(ngModel)]="defaultPermissions.IsChecked">
                                                                             <span class="checkmark"></span>
@@ -168,7 +171,7 @@
                                                                                 <label class="container">
                                                                                     <input type="checkbox"
                                                                                            id={{defaultPermissions.Id}}
-                                                                                           (change)="getUpdatedPermissionsList(defaultPermissionsList)"
+                                                                                           (change)="getUpdatedPermissionsList(defaultPermissionsList,subitem)"
                                                                                            name="{{defaultPermissions.text}}-{{i}}-{{j}}-{{k}}-{{l}}"
                                                                                            [(ngModel)]="defaultPermissions.IsChecked">
                                                                                     <span class="checkmark"></span>
@@ -190,7 +193,7 @@
                                                                                         <label class="container">
                                                                                             <input type="checkbox"
                                                                                                    id={{defaultPermissions.Id}}
-                                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList)"
+                                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList,subsubitem)"
                                                                                                    name="{{defaultPermissions.text}}-{{i}}-{{j}}-{{k}}-{{l}}-{{m}}-{{n}}"
                                                                                                    [(ngModel)]="defaultPermissions.IsChecked">
                                                                                             <span class="checkmark"></span>
