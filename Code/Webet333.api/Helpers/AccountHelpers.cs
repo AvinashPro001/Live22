@@ -454,11 +454,11 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task UserLastLoginTime(string UserId)
+        public async Task UserLastLoginTime(string UserId,string LanguageCode)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Account.LastLoginTimeUpdate, new { UserId });
+                await repository.AddOrUpdateAsync(StoredProcConsts.Account.LastLoginTimeUpdate, new { UserId , LanguageCode });
             }
         }
 
