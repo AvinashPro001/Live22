@@ -31,7 +31,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<GlobalJsonResponse>(Connection))
             {
-                var result = await repository.FindAsync(StoredProcConsts.User.GetUsersByRole, new { Role, Keyword, UserId });
+                var result = await repository.FindAsync(StoredProcConsts.User.GetUsersByRole, new { Role, Keyword });
 
                 if (result != null && result.DocumentListSerialized != null)
                 {

@@ -433,7 +433,7 @@ async function logoutMain(i) {
       
         LoaderHide();
     }
-    catch{
+    catch(e){
         sessionStorage.clear();
         localStorage.clear();
         SetLocalStorage('language', language);
@@ -654,7 +654,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.mega888Register, userMegaa88Model);
                 }
-                catch{
+                catch(e){
 
                 }
             }
@@ -666,7 +666,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.dgRegister, model);
                 }
-                catch{
+                catch (e){
 
                 }
             }
@@ -678,7 +678,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.sexyRegister, model);
                 }
-                catch{
+                catch (e){
 
                 }
             }
@@ -690,7 +690,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.saRegister, model);
                 }
-                catch{
+                catch (e){
 
                 }
             }
@@ -702,7 +702,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.pussyRegister, model);
                 }
-                catch{
+                catch (e){
 
                 }
             }
@@ -714,7 +714,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.allBetRegister, model);
                 }
-                catch{
+                catch (e){
 
                 }
             }
@@ -726,7 +726,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.WMRegister, model);
                 }
-                catch{
+                catch (e){
 
                 }
             }
@@ -738,7 +738,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.pragmaticRegister, model);
                 }
-                catch{
+                catch (e){
 
                 }
             }
@@ -746,7 +746,7 @@ async function regisrationGame() {
             localStorage.setItem('IsExecute', false);
         }
     }
-    catch{
+    catch (e){
 
     }
 }

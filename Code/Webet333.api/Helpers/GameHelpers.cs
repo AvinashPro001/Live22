@@ -391,7 +391,6 @@ namespace Webet333.api.Helpers
 
         #endregion
 
-
         #region Pussy Player Log Insert
 
         internal async Task<int> PussyPlayerLogInsert(List<PlayerGameLogResult> request, string Username)

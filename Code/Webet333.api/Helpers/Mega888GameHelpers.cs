@@ -1,7 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
@@ -65,6 +68,54 @@ namespace Webet333.api.Helpers
 
         #endregion
 
+        #region Call Get Player Log URL of Mega888
+
+        internal static async Task<Mega888PlayerLogURLResponse> CallPlayerLogURLAPI(string Mega888LoginId, string StartTime,string EndTime)
+        {
+            var random = Guid.NewGuid().ToString();
+            var mega888URL = $"{GameConst.Mega888.BaseUrl}open.mega.player.game.lo.url.get" +
+                              $"?random={random}"
+                              + $"&digest={SecurityHelpers.MD5EncrptText(random + GameConst.Mega888.SN + Mega888LoginId + GameConst.Mega888.SecretKey)}"
+                              + $"&sn={GameConst.Mega888.SN}"
+                              + $"&loginId={Mega888LoginId}"
+                              + $"&type=1"
+                              + $"&method=open.mega.player.game.log.url.get"
+                              + $"&startTime={StartTime}"
+                              + $"&endTime={EndTime}";
+
+            return JsonConvert.DeserializeObject<Mega888PlayerLogURLResponse>(await GameHelpers.CallThirdPartyApi(mega888URL, null));
+        }
+
+        #endregion
+
+        #region Call Get Player Log  of Mega888
+
+        internal static async Task<string> CallPlayerLogAPI(string QueryString)
+        {
+            HttpWebRequest httmlRequest = WebRequest.Create(GameConst.Mega888.BaseUrlPlayerLog) as HttpWebRequest;
+
+            httmlRequest.Method = "POST";
+            httmlRequest.ContentType = "application/x-www-form-urlencoded";
+
+            byte[] payload = Encoding.UTF8.GetBytes(QueryString);
+            httmlRequest.ContentLength = payload.Length;
+
+            Stream outStream = httmlRequest.GetRequestStream();
+            outStream.Write(payload, 0, payload.Length);
+            outStream.Close();
+
+            HttpWebResponse response = httmlRequest.GetResponse() as HttpWebResponse;
+
+            Stream responseStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+            var result = reader.ReadToEnd();
+            reader.Close();
+            responseStream.Close();
+            return result;
+        }
+
+        #endregion
+
         #region Call Logout API of Mega888
 
         internal static async Task<dynamic> CallLogoutAPI(string Mega888LoginId)
@@ -109,7 +160,7 @@ namespace Webet333.api.Helpers
 
         #endregion Mega888 Game Login Check
 
-        #region Mega888 Response Method
+        #region Mega888 Login Response Method
 
         public static Mega888LoginResponse Mega888LoginResponse(string id, string success, string msg)
         {
@@ -130,6 +181,23 @@ namespace Webet333.api.Helpers
                 response.result.sessionId = Guid.NewGuid().ToString("N").ToUpper();
 
             return response;
+        }
+
+        #endregion
+
+        #region Mega888 Player Log Insert
+
+        internal async Task<int> Mega888PlayerLogInsert(List<Mega888PlayerLogResult> request, string Username)
+        {
+            if (request.Count > 0)
+            {
+                var response = JsonConvert.SerializeObject(request);
+                using (var repository = new DapperRepository<dynamic>(Connection))
+                {
+                    var res = await repository.AddOrUpdateAsync(StoredProcConsts.Mega888.PlayerLogInsert, new { jsonString = response, username = Username });
+                }
+            }
+            return 0;
         }
 
         #endregion

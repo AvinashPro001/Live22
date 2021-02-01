@@ -29,7 +29,7 @@ async function UserGameTurnover() {
         document.getElementById("PragmaticTurnover").innerHTML = parseFloat(turnover.data.response.pragmaticTurover).toFixed(2);
         document.getElementById("spinrefesh").classList.remove("fa-spin");
     }
-    catch {
+    catch(e) {
         document.getElementById("spinrefesh").classList.remove("fa-spin");
         document.getElementById("TotalTurnover").innerHTML = "0.0";
         document.getElementById("jokerTurnover").innerHTML = "0.0";
@@ -255,7 +255,7 @@ function numberWithCommas(x) {
         try {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-        catch {
+        catch (e) {
             return "N/A"
         }
     }

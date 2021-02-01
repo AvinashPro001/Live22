@@ -28,7 +28,7 @@
 
             public const string Currency = "2";
 
-            #region Betting limit Constant
+    #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -57,7 +57,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-            #endregion Betting limit Constant
+    #endregion Betting limit Constant
 
         }
 
@@ -196,6 +196,8 @@
         {
             public const string BaseUrl = "http://mgt3.36ozhushou.com/mega-cloud/api/";
 
+            public const string BaseUrlPlayerLog = "https://10mega888.com/ashx/log/GameLog.ashx";
+
             public const string Register = "open.mega.user.create";
 
             public const string Balance = "open.mega.balance.get";
@@ -213,6 +215,8 @@
             public const string AgentLoginId = "Mega1-350";
 
             public const string TotalBettingReport = "open.mega.player.total.report";
+
+            public const string PlayerLogURL = "open.mega.player.game.log.url.get";
 
         }
 
@@ -509,7 +513,7 @@
 
             public const string Currency = "2";
 
-    #region Betting limit Constant
+            #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -537,7 +541,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-    #endregion Betting limit Constant
+            #endregion Betting limit Constant
 
         }
 
@@ -676,6 +680,8 @@
         {
             public const string BaseUrl = "http://mgt3.36ozhushou.com/mega-cloud/api/";
 
+            public const string BaseUrlPlayerLog = "https://10mega888.com/ashx/log/GameLog.ashx";
+
             public const string Register = "open.mega.user.create";
 
             public const string Balance = "open.mega.balance.get";
@@ -693,6 +699,8 @@
             public const string AgentLoginId = "Mega1-350";
 
             public const string TotalBettingReport = "open.mega.player.total.report";
+
+            public const string PlayerLogURL = "open.mega.player.game.log.url.get";
 
         }
 

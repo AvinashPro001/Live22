@@ -33,7 +33,7 @@ function WalletSignalR() {
             return console.error(err.toString());
         });
     }
-    catch{
+    catch(e){
         WalletSignalR();
     }
 }
@@ -863,7 +863,7 @@ async function GameLoginMobile(gamename) {
                     try {
                         var res = await PostMethodWithParameter(apiEndPoints.pussyRegister, model);
                     }
-                    catch{
+                    catch (e){
 
                     }
                     window.location.href = "/Mobile/download?id=Pussy888DownloadTab";

@@ -40,7 +40,7 @@ function CheckUserVerified() {
                 window.location = "../mobile/VerifiedOtp";
         }
     }
-    catch{ }
+    catch(e){ }
 }
 
 async function SliderPromotion() {
@@ -244,7 +244,7 @@ async function GetUser() {
             document.getElementById("txt_mobileUpdate").value = data.data.mobileNo;
 
         }
-        catch{ }
+        catch(e){ }
         PlaytechBrokenStatus();
         PragmaticBrokenStatus();
     }
@@ -263,7 +263,7 @@ async function GetUser() {
             document.getElementById("txt_mobileUpdate").value = res.data.mobileNo;
 
         }
-        catch{ }
+        catch(e){ }
 
     }
 

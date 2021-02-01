@@ -6,15 +6,18 @@ using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
 using Webet333.logs;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
+using Webet333.models.Request.Game;
 using Webet333.models.Request.Game.Mega888;
 using Webet333.models.Response.Account;
 using Webet333.models.Response.Game;
@@ -124,31 +127,53 @@ namespace Webet333.api.Controllers
 
         #region Mega888 User Betting Details Total Win
 
-        [HttpPost(ActionsConst.Mega888Game.Mega888UsersWin)]
-        public async Task<IActionResult> UserTotalBettingWin([FromBody] MegaUserBettingWinoverRequest request)
+        [HttpPost(ActionsConst.Mega888Game.Mega888PlayerLog)]
+        public async Task<IActionResult> UserTotalBettingWin([FromBody] SlotsPlayerLogRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
+            var StartTime = request.StartDate.AddMinutes(-5).ToString("yyyy-MM-dd HH:mm:ss");
+            var EndTime = request.EndDate.ToString("yyyy-MM-dd HH:mm:ss");
 
-            var date = DateTime.UtcNow.AddHours(8);
-            var StartTime = request.StartTime.ToString("yyyy-MM-dd HH:mm:ss");
-            var EndTime = date.ToString("yyyy-MM-dd HH:mm:ss");
-            var random = Guid.NewGuid().ToString();
-            var mega888URL = $"{GameConst.Mega888.BaseUrl}{GameConst.Mega888.TotalBettingReport}" +
-                             $"?random={random}"
-                             + $"&digest={SecurityHelpers.MD5EncrptText(random + GameConst.Mega888.SN +GameConst.Mega888.AgentLoginId + GameConst.Mega888.SecretKey)}"
-                             + $"&sn={GameConst.Mega888.SN}"
-                             + $"&agentLoginId={GameConst.Mega888.AgentLoginId}"
-                             + $"&type=1"
-                             + $"&method={GameConst.Mega888.TotalBettingReport}"
-                             + $"&startTime={StartTime}"
-                             + $"&endTime={EndTime}";
+            var urlResponse = await Mega888GameHelpers.CallPlayerLogURLAPI(request.Username, StartTime, EndTime);
+            if (urlResponse.Id == null)
+            {
+                Uri myUri = new Uri(urlResponse.Result);
+                string sign = HttpUtility.ParseQueryString(myUri.Query).Get("sign");
+                string timeStamp = HttpUtility.ParseQueryString(myUri.Query).Get("time");
 
-            Mega888ServicesResponse mega888Response = JsonConvert.DeserializeObject<Mega888ServicesResponse>(await GameHelpers.CallThirdPartyApi(mega888URL, null));
+                string QueryString = $"action=playerGameLog&user={request.Username}&sDate={StartTime}&eDate={EndTime}&time={timeStamp}&sign={sign}&pageIndex=1";
 
-            var response = mega888Response.result.Where(x => x.loginId == request.Mega888Username);
+                var result = JsonConvert.DeserializeObject<Mega888PlayerLogResponse>(await Mega888GameHelpers.CallPlayerLogAPI(QueryString));
 
-            return OkResponse(response);
+                if (result.Success && result.Total > 20)
+                {
+                    int totalPages = (result.Total / 20) + 1;
+
+                    for (int i = 2; i <= totalPages; i++)
+                    {
+                        string queryData = $"action=playerGameLog&user={request.Username}&sDate={StartTime}&eDate={EndTime}&time={timeStamp}&sign={sign}&pageIndex={i}";
+
+                        var paginationData = JsonConvert.DeserializeObject<Mega888PlayerLogResponse>(await Mega888GameHelpers.CallPlayerLogAPI(queryData));
+
+                        if (paginationData.Success)
+                            if (paginationData.Results.Count > 0)
+                                result.Results.AddRange(paginationData.Results);
+                    }
+                }
+
+                if (request.SaveInDB)
+                    if (result.Results.Count > 0)
+                    {
+                        using (var mega888Helper = new Mega888GameHelpers(Connection))
+                        {
+                            mega888Helper.Mega888PlayerLogInsert(result.Results, request.Username);
+                        }
+                    }
+
+                return OkResponse(result);
+            }
+            return OkResponse();
         }
 
         #endregion Mega888 User Betting Details Total Win

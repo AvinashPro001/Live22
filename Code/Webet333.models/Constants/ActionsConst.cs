@@ -560,7 +560,7 @@
 
             public const string Mega888DepositWithdraw = "mega888/deposit_withdraw";
 
-            public const string Mega888UsersWin = "mega888/users/totalwin";
+            public const string Mega888PlayerLog = "mega888/playerlog";
 
             public const string Mega888Login = "mega888/login";
 

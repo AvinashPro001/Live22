@@ -431,6 +431,8 @@
             public const string Register = "[dbo].[Mega888Users_Insert]";
 
             public const string LoginCheck = "[dbo].[Mega888_Login_Check]";
+
+            public const string PlayerLogInsert = "[dbo].[Mega888_PlayerLog_Insert]";
         }
 
         public class DG
