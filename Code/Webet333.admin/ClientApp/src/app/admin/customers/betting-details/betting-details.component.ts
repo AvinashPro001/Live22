@@ -1,17 +1,17 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { ToasterService, ToasterConfig } from 'angular2-toaster';
-import { AdminService } from '../../admin.service';
-import { customer, ErrorMessages } from '../../../../environments/environment';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
+import { customer, ErrorMessages } from '../../../../environments/environment';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-betting-details',
     templateUrl: './betting-details.component.html',
     styleUrls: ['./betting-details.component.scss']
 })
-export class BettingDetailsComponent implements OnInit {
 
+export class BettingDetailsComponent implements OnInit {
     rows = [];
     columns = [];
     selectedList = "";
@@ -434,8 +434,8 @@ export class BettingDetailsComponent implements OnInit {
         var preMonth = new Date().getMonth() + 1;
         var preYear = new Date().getFullYear();
 
-        var fromdate = preYear + '-' + preMonth + '-' + preDate;
-        var todate = preYear + '-' + preMonth + '-' + preDate;
+        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
+        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
 
         this.BettingDetails(fromdate, todate);
     }
@@ -458,7 +458,6 @@ export class BettingDetailsComponent implements OnInit {
         if (preDate === 0) {
             preMonth = preMonth - 1
             if (preMonth === 0) {
-
                 preYear = preYear - 1;
                 preMonth = 12;
                 preDate = lastday(preYear, preMonth);
@@ -468,33 +467,41 @@ export class BettingDetailsComponent implements OnInit {
             }
         }
 
-        var fromdate = preYear + '-' + preMonth + '-' + preDate;
-        var todate = preYear + '-' + preMonth + '-' + preDate;
+        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
+        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
 
         this.BettingDetails(fromdate, todate);
     }
 
     setThisWeek() {
-
         //#region Get start date and end date of week.
 
         var curr = new Date; // get current date
+
         var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-        var last = first + 6; // last day is the first day + 6
         var firstday = new Date(curr.setDate(first));
-        var lastday = new Date(curr.setDate(last));
+
+        var lastdayTemp = curr.getDate() - (curr.getDay() - 1) + 6;
+        var lastday = new Date(curr.setDate(lastdayTemp));
 
         //#endregion Get start date and end date of week.
 
-        var fromdate = firstday.getFullYear() + '-' + firstday.getMonth() + 1 + '-' + firstday.getDate();
-        var todate = lastday.getFullYear() + '-' + lastday.getMonth() + 1 + '-' + lastday.getDate();
+        var weekStartYear = firstday.getFullYear();
+        var weekStartMonth = firstday.getMonth() + 1;
+        var weekStartDate = firstday.getDate();
+        var fromdate = weekStartYear + '-' + weekStartMonth + '-' + weekStartDate + ' ' + '00:00:00';
+
+        var weekEndYear = lastday.getFullYear();
+        var weekEndMonth = lastday.getMonth() + 1;
+        var weekEndDate = lastday.getDate();
+        var todate = weekEndYear + '-' + weekEndMonth + '-' + weekEndDate + ' ' + '23:59:59';
 
         this.BettingDetails(fromdate, todate);
     }
 
     setThisYear() {
-        var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1;
-        var todate = new Date().getFullYear() + '-' + 12 + '-' + 31;
+        var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1 + ' ' + '00:00:00';;
+        var todate = new Date().getFullYear() + '-' + 12 + '-' + 31 + ' ' + '23:59:59';
 
         this.BettingDetails(fromdate, todate);
     }
@@ -514,6 +521,9 @@ export class BettingDetailsComponent implements OnInit {
             this.fromDate = startingDate;
             this.toDate = endingDate;
             this.startdate = startingDate;
+            (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = null;
+            (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
+            (document.getElementById("txt_startdatetime") as HTMLInputElement).value = null;
         }
 
         let Model = {
@@ -521,7 +531,7 @@ export class BettingDetailsComponent implements OnInit {
             todate: this.toDate
         }
 
-        if (this.selectedList !== "M8" && this.selectedList !== "DG" && this.selectedList  !== "Pragmatic")
+        if (this.selectedList !== "M8" && this.selectedList !== "DG" && this.selectedList !== "Pragmatic")
             if (Model.fromdate === null || Model.todate === null) {
                 return this.toasterService.pop('error', 'Error', "Please Select To Date and From Date");
             }
@@ -568,7 +578,6 @@ export class BettingDetailsComponent implements OnInit {
                                 LeagueName: el.leaguename["#cdata-section"],
                                 HomeName: el.homename["#cdata-section"],
                                 AwayName: el.awayname["#cdata-section"],
-
                             });
                         });
                         this.rows = [...this.rows];
@@ -659,7 +668,6 @@ export class BettingDetailsComponent implements OnInit {
                             });
                         });
                         this.rows = [...this.rows];
-
                     }
                     else {
                         this.setColumn("");
@@ -674,10 +682,8 @@ export class BettingDetailsComponent implements OnInit {
             }
             case 'Joker': {
                 this.adminService.add<any>(customer.JokerBettingDetails, Model).subscribe(res => {
-
                     this.rows = [];
                     if (res.data.winloss.length > 0) {
-
                         this.TableData = res.data.winloss;
                         res.data.winloss.forEach(el => {
                             this.rows.push({
@@ -822,7 +828,7 @@ export class BettingDetailsComponent implements OnInit {
                 }
                 this.adminService.add<any>(customer.SexyBettingDetails, sexyModel).subscribe(res => {
                     this.rows = [];
-                    if (res.data.response.transactions.length >0) {
+                    if (res.data.response.transactions.length > 0) {
                         this.TableData = res.data.response;
                         res.data.response.transactions.forEach(el => {
                             this.rows.push({
@@ -1076,7 +1082,6 @@ export class BettingDetailsComponent implements OnInit {
                 this.toasterService.pop('error', 'Error', "Please Select Game !!!!");
             }
         }
-
     }
 
     onSelect(event, row) {

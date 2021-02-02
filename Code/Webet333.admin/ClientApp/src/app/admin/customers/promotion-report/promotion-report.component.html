@@ -50,14 +50,12 @@
                     <button class="mb-1 btn btn-success" (click)='setThisYear()' type="button">This Year</button>
                 </div>
             </div>
-            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="50" 
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="50"
                            [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
-
             </ngx-datatable>
 
             <ngx-datatable #table class='bootstrap no-detail-row' [rows]="Totalrows" [columns]="Totalcolumns" [columnMode]="'force'" [footerHeight]="50"
                            [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
-
             </ngx-datatable>
             <br />
             <br />
@@ -82,4 +80,3 @@
         </div>
     </div>
 </div>
-

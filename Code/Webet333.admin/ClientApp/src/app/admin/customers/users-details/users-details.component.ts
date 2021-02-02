@@ -10,11 +10,8 @@ import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } fr
 import { now } from 'core-js/fn/date';
 import { Router } from '@angular/router';
 
-
-
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
-
     readonly DELIMITER = '-';
 
     fromModel(value: string | null): NgbDateStruct | null {
@@ -39,7 +36,6 @@ export class CustomAdapter extends NgbDateAdapter<string> {
  */
 @Injectable()
 export class CustomDateParserFormatter extends NgbDateParserFormatter {
-
     readonly DELIMITER = '/';
 
     parse(value: string): NgbDateStruct | null {
@@ -59,14 +55,12 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
     }
 }
 
-
 @Component({
     selector: 'app-users-details',
     templateUrl: './users-details.component.html',
     styleUrls: ['./users-details.component.scss']
 })
 export class UsersDetailsComponent implements OnInit {
-
     //#region Variable and Constructor
 
     ShowDropDown: boolean = true;
@@ -254,7 +248,6 @@ export class UsersDetailsComponent implements OnInit {
             if (this.Userdata != null) {
                 this.ShowDropDown = false;
                 this.onChange(this.Userdata);
-
             }
             else {
                 this.ShowDropDown = true;
@@ -271,7 +264,6 @@ export class UsersDetailsComponent implements OnInit {
     get today() {
         return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
     }
-
 
     LoadVIPCategory() {
         this.adminService.getAll<any>(VIPSetting.VIPLevelList).subscribe(res => {
@@ -327,7 +319,6 @@ export class UsersDetailsComponent implements OnInit {
         }
 
         this.selectedList = $event.target.value;
-
     }
 
     //#endregion
@@ -447,7 +438,6 @@ export class UsersDetailsComponent implements OnInit {
         }
     }
 
-
     OnTypeDropDown(event) {
         this.customerUser();
         let list = this.customerData.filter(x => x.id === event)[0];
@@ -539,7 +529,6 @@ export class UsersDetailsComponent implements OnInit {
     //#region Column set on all tables
 
     coloumSet() {
-
         this.depositColumns = [
             { prop: 'No' },
             { prop: 'WalletName' },
@@ -664,7 +653,6 @@ export class UsersDetailsComponent implements OnInit {
             { prop: 'Rnum' },
             { prop: 'Status' },
         ];
-
     }
 
     setBettingDetailsColumn(selectedList) {
@@ -1025,13 +1013,12 @@ export class UsersDetailsComponent implements OnInit {
 
     setToday(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
-
             var preDate = new Date().getDate();
             var preMonth = new Date().getMonth() + 1;
             var preYear = new Date().getFullYear();
 
-            var fromdate = preYear + '-' + preMonth + '-' + preDate;
-            var todate = preYear + '-' + preMonth + '-' + preDate;
+            var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
+            var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
 
             if (Tab === "Deposit") this.depositlist(fromdate, todate);
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
@@ -1063,7 +1050,6 @@ export class UsersDetailsComponent implements OnInit {
         }
 
         if (this.userid !== undefined && this.userid !== "") {
-
             var preDate = new Date().getDate() - 1;
             var preMonth = new Date().getMonth() + 1;
             var preYear = new Date().getFullYear();
@@ -1079,7 +1065,6 @@ export class UsersDetailsComponent implements OnInit {
             if (preDate === 0) {
                 preMonth = preMonth - 1
                 if (preMonth === 0) {
-
                     preYear = preYear - 1;
                     preMonth = 12;
                     preDate = lastday(preYear, preMonth);
@@ -1089,8 +1074,8 @@ export class UsersDetailsComponent implements OnInit {
                 }
             }
 
-            var fromdate = preYear + '-' + preMonth + '-' + preDate;
-            var todate = preYear + '-' + preMonth + '-' + preDate;
+            var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
+            var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
 
             if (Tab === "Deposit") this.depositlist(fromdate, todate);
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
@@ -1118,19 +1103,27 @@ export class UsersDetailsComponent implements OnInit {
 
     setThisWeek(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
-
             //#region Get start date and end date of week.
 
             var curr = new Date; // get current date
+
             var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-            var last = first + 6; // last day is the first day + 6
             var firstday = new Date(curr.setDate(first));
-            var lastday = new Date(curr.setDate(last));
+
+            var lastdayTemp = curr.getDate() - (curr.getDay() - 1) + 6;
+            var lastday = new Date(curr.setDate(lastdayTemp));
 
             //#endregion Get start date and end date of week.
 
-            var fromdate = firstday.getFullYear() + '-' + firstday.getMonth() + 1 + '-' + firstday.getDate();
-            var todate = lastday.getFullYear() + '-' + lastday.getMonth() + 1 + '-' + lastday.getDate();
+            var weekStartYear = firstday.getFullYear();
+            var weekStartMonth = firstday.getMonth() + 1;
+            var weekStartDate = firstday.getDate();
+            var fromdate = weekStartYear + '-' + weekStartMonth + '-' + weekStartDate + ' ' + '00:00:00';
+
+            var weekEndYear = lastday.getFullYear();
+            var weekEndMonth = lastday.getMonth() + 1;
+            var weekEndDate = lastday.getDate();
+            var todate = weekEndYear + '-' + weekEndMonth + '-' + weekEndDate + ' ' + '23:59:59';
 
             if (Tab === "Deposit") this.depositlist(fromdate, todate);
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
@@ -1158,9 +1151,8 @@ export class UsersDetailsComponent implements OnInit {
 
     setThisYear(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
-
-            var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1;
-            var todate = new Date().getFullYear() + '-' + 12 + '-' + 31;
+            var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1 + ' ' + '00:00:00';;
+            var todate = new Date().getFullYear() + '-' + 12 + '-' + 31 + ' ' + '23:59:59';
 
             if (Tab === "Deposit") this.depositlist(fromdate, todate);
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
@@ -1169,7 +1161,6 @@ export class UsersDetailsComponent implements OnInit {
             if (Tab === "Rebate") this.rebatelist(fromdate, todate);
             if (Tab === "Statement") this.statementlist(fromdate, todate);
             if (Tab === "BettingDetails") this.BettingDetails(fromdate, todate);
-
         }
         else {
             this.depositRows = [];
@@ -1319,7 +1310,6 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.depositRows = [...this.depositRows];
-
         });
         this.loadingIndicator = false;
     }
@@ -1382,7 +1372,6 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.transferRows = [...this.transferRows];
-
         });
         this.loadingIndicator = false;
     }
@@ -1418,7 +1407,6 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.promotionRows = [...this.promotionRows];
-
         });
         this.loadingIndicator = false;
     }
@@ -1450,7 +1438,6 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.rebateRows = [...this.rebateRows];
-
         });
         this.loadingIndicator = false;
     }
@@ -1482,7 +1469,6 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.statementRows = [...this.statementRows];
-
         });
         this.loadingIndicator = false;
     }
@@ -1515,7 +1501,6 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.restoreRows = [...this.restoreRows];
-
         });
         this.loadingIndicator = false;
     }
@@ -1601,9 +1586,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.userWalletBalance = balance[0].amount;
             })
         }
-        catch (e) {
-
-        }
+        catch (e) { }
     }
 
     async Kiss918Balance(id) {
@@ -1616,13 +1599,10 @@ export class UsersDetailsComponent implements OnInit {
                 this.kiss918balance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
+        catch (e) { }
     }
 
     async Mega888(id) {
-
         try {
             let data = {
                 id: id,
@@ -1632,11 +1612,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.Mega888balance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
-
-
+        catch (e) { }
     }
 
     async Maxbet(id) {
@@ -1649,10 +1625,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.Maxbetbalance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
-
+        catch (e) { }
     }
 
     async M8(id) {
@@ -1665,10 +1638,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.M8balance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
-
+        catch (e) { }
     }
 
     async AG(id) {
@@ -1681,10 +1651,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.AGbalance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
-
+        catch (e) { }
     }
 
     async DG(id) {
@@ -1697,10 +1664,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.DGbalance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
-
+        catch (e) { }
     }
 
     async Playtech(id) {
@@ -1713,10 +1677,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.Playtechbalance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
-
+        catch (e) { }
     }
 
     async Joker(id) {
@@ -1729,10 +1690,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.Jokerbalance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
-
+        catch (e) { }
     }
 
     async Sexybaccarat(id) {
@@ -1745,10 +1703,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.Sexybaccaratbalance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
-
+        catch (e) { }
     }
 
     async SA(id) {
@@ -1761,10 +1716,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.SAbalance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
-
+        catch (e) { }
     }
 
     async Pussy888(id) {
@@ -1777,10 +1729,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.Pussy888balance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
-
+        catch (e) { }
     }
 
     async AllBet(id) {
@@ -1794,10 +1743,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.allbetbalance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
-
+        catch (e) { }
     }
 
     async WM(id) {
@@ -1810,10 +1756,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.wmbalance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
-
+        catch (e) { }
     }
 
     async Pragmatic(id) {
@@ -1826,10 +1769,7 @@ export class UsersDetailsComponent implements OnInit {
                 this.pragmaticbalance = res.data.balance;
             })
         }
-        catch (e) {
-
-        }
-
+        catch (e) { }
     }
 
     //#endregion Wallet Balance
@@ -2020,7 +1960,6 @@ export class UsersDetailsComponent implements OnInit {
             }
         });
 
-
         let dataJoker = {
             id: this.userid
         }
@@ -2040,9 +1979,7 @@ export class UsersDetailsComponent implements OnInit {
                 FreeCredit: res.data.FreeCredit,
                 OutstandingFreeCredit: res.data.OutstandingFreeCredit,
             });
-
         });
-
     }
 
     //#endregion
@@ -2053,7 +1990,6 @@ export class UsersDetailsComponent implements OnInit {
 
     BettingDetails(startingDate = null, endingDate = null) {
         if (this.userid != null && this.userid != undefined) {
-
             this.loadingIndicator = true;
             this.rows = [];
 
@@ -2082,7 +2018,6 @@ export class UsersDetailsComponent implements OnInit {
             switch (this.selectedList) {
                 case 'M8': {
                     this.adminService.get<any>(customer.M8BettingDetails).subscribe(res => {
-
                         var list = res.data.response.result.ticket.filter(s => s.u == this.m8Username)
 
                         this.rows = [];
@@ -2122,7 +2057,6 @@ export class UsersDetailsComponent implements OnInit {
                                     LeagueName: el.leaguename["#cdata-section"],
                                     HomeName: el.homename["#cdata-section"],
                                     AwayName: el.awayname["#cdata-section"],
-
                                 });
                             });
                             this.rows = [...this.rows];
@@ -2217,7 +2151,6 @@ export class UsersDetailsComponent implements OnInit {
                                 });
                             });
                             this.rows = [...this.rows];
-
                         }
                         else {
                             this.setBettingDetailsColumn("");
@@ -2239,7 +2172,6 @@ export class UsersDetailsComponent implements OnInit {
                     this.adminService.add<any>(customer.JokerBettingDetails, JokerModel).subscribe(res => {
                         this.rows = [];
                         if (res.data.winloss.length > 0) {
-
                             res.data.winloss.forEach(el => {
                                 this.rows.push({
                                     Username: el.username,
@@ -2342,7 +2274,6 @@ export class UsersDetailsComponent implements OnInit {
                     this.adminService.get<any>(customer.DGBettingDetails).subscribe(res => {
                         this.rows = [];
                         if (res.data.list !== null) {
-
                             var list = res.data.list.filter(s => s.userName == this.dgUsername.toUpperCase())
                             list.forEach(el => {
                                 this.rows.push({
@@ -2659,7 +2590,6 @@ export class UsersDetailsComponent implements OnInit {
 
     GamePasswordShow() {
         if (this.userid != null && this.userid != undefined) {
-
             var Username = ((document.getElementById("txt_managerUsername") as HTMLInputElement).value)
             var Password = ((document.getElementById("txt_managerPassword") as HTMLInputElement).value)
 
@@ -2668,7 +2598,6 @@ export class UsersDetailsComponent implements OnInit {
 
             if (Password == "")
                 return this.toasterService.pop('error', 'Error', "Password Required");
-
 
             let data = {
                 id: this.userid,
@@ -2739,11 +2668,9 @@ export class UsersDetailsComponent implements OnInit {
 
     VIPLevelUpdate() {
         if (this.userid != null && this.userid != undefined) {
-
             var Username = ((document.getElementById("txt_managerUsername") as HTMLInputElement).value)
             var Password = ((document.getElementById("txt_managerPassword") as HTMLInputElement).value)
             var vipLevel = ((document.getElementById("vipLevel") as HTMLInputElement).value)
-
 
             if (Username == "")
                 return this.toasterService.pop('error', 'Error', "Username Required");
