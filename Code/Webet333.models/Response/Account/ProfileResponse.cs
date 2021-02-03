@@ -156,6 +156,9 @@ namespace Webet333.models.Response.Account
 
         [JsonProperty("IsChecked")]
         public bool IsChecked { get; set; }
+
+        [JsonProperty("IsShow")]
+        public bool IsShow { get; set; }
     }
 
     #endregion Permission Management

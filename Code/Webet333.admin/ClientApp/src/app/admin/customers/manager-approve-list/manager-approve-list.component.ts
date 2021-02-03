@@ -196,34 +196,36 @@ export class ManagerApproveListComponent implements OnInit {
         this.modalService.open(content, { windowClass: 'dark-modal', });
     }
 
-    Accept() {
-        var Username = ((document.getElementById("txt_managerUsername") as HTMLInputElement).value)
-        var Password = ((document.getElementById("txt_managerPassword") as HTMLInputElement).value)
+    async Accept() {
+        if (await this.checkUpdatePermission()) {
+            var Username = ((document.getElementById("txt_managerUsername") as HTMLInputElement).value)
+            var Password = ((document.getElementById("txt_managerPassword") as HTMLInputElement).value)
 
-        if (Username == "")
-            return this.toasterService.pop('error', 'Error', "Username Required");
+            if (Username == "")
+                return this.toasterService.pop('error', 'Error', "Username Required");
 
-        if (Password == "")
-            return this.toasterService.pop('error', 'Error', "Password Required");
+            if (Password == "")
+                return this.toasterService.pop('error', 'Error', "Password Required");
 
-        let data = {
-            id: this.rowId,
-            managerUsername: Username,
-            managerPassword: Password,
-            verifid: this.verified
+            let data = {
+                id: this.rowId,
+                managerUsername: Username,
+                managerPassword: Password,
+                verifid: this.verified
+            }
+            this.adminService.add<any>(account.managerUpdate, data).subscribe(res => {
+                this.toasterService.pop('success', 'Success', res.message);
+                this.rowId = "";
+                this.verified = "";
+                (document.getElementById("txt_managerUsername") as HTMLInputElement).value = "";
+                (document.getElementById("txt_managerPassword") as HTMLInputElement).value = "";
+                this.modalService.dismissAll();
+                this.ngOnInit();
+
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-        this.adminService.add<any>(account.managerUpdate, data).subscribe(res => {
-            this.toasterService.pop('success', 'Success', res.message);
-            this.rowId = "";
-            this.verified = "";
-            (document.getElementById("txt_managerUsername") as HTMLInputElement).value = "";
-            (document.getElementById("txt_managerPassword") as HTMLInputElement).value = "";
-            this.modalService.dismissAll();
-            this.ngOnInit();
-
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
 
     //#region Check Permission

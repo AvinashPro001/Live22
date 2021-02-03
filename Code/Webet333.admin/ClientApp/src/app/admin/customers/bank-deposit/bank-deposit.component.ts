@@ -11,8 +11,8 @@ import { ToasterService } from 'angular2-toaster';
     templateUrl: './bank-deposit.component.html',
     styleUrls: ['./bank-deposit.component.scss']
 })
-export class BankDepositComponent implements OnInit {
 
+export class BankDepositComponent implements OnInit {
     constructor(
         private datePipe: DatePipe,
         private adminService: AdminService,
@@ -89,12 +89,101 @@ export class BankDepositComponent implements OnInit {
         });
     }
 
-    GetDetails() {
+    //#region Filter Data
+
+    setToday() {
+        var preDate = new Date().getDate();
+        var preMonth = new Date().getMonth() + 1;
+        var preYear = new Date().getFullYear();
+
+        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
+        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+
+        this.GetDetails(fromdate, todate);
+    }
+
+    setYesterday() {
+        var lastday = function (y, m) { return new Date(y, m, 0).getDate(); }
+
+        var preDate = new Date().getDate() - 1;
+        var preMonth = new Date().getMonth() + 1;
+        var preYear = new Date().getFullYear();
+
+        //#region Testing
+
+        //preDate = 1 - 1;
+        //preMonth = 1;
+        //preYear = 2021;
+
+        //#endregion Testing
+
+        if (preDate === 0) {
+            preMonth = preMonth - 1
+            if (preMonth === 0) {
+                preYear = preYear - 1;
+                preMonth = 12;
+                preDate = lastday(preYear, preMonth);
+            }
+            else {
+                preDate = lastday(preYear, preMonth);
+            }
+        }
+
+        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
+        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+
+        this.GetDetails(fromdate, todate);
+    }
+
+    setThisWeek() {
+        //#region Get start date and end date of week.
+
+        var curr = new Date; // get current date
+
+        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+        var firstday = new Date(curr.setDate(first));
+
+        var lastdayTemp = curr.getDate() - (curr.getDay() - 1) + 6;
+        var lastday = new Date(curr.setDate(lastdayTemp));
+
+        //#endregion Get start date and end date of week.
+
+        var weekStartYear = firstday.getFullYear();
+        var weekStartMonth = firstday.getMonth() + 1;
+        var weekStartDate = firstday.getDate();
+        var fromdate = weekStartYear + '-' + weekStartMonth + '-' + weekStartDate + ' ' + '00:00:00';
+
+        var weekEndYear = lastday.getFullYear();
+        var weekEndMonth = lastday.getMonth() + 1;
+        var weekEndDate = lastday.getDate();
+        var todate = weekEndYear + '-' + weekEndMonth + '-' + weekEndDate + ' ' + '23:59:59';
+
+        this.GetDetails(fromdate, todate);
+    }
+
+    setThisYear() {
+        var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1 + ' ' + '00:00:00';;
+        var todate = new Date().getFullYear() + '-' + 12 + '-' + 31 + ' ' + '23:59:59';
+
+        this.GetDetails(fromdate, todate);
+    }
+
+    //#endregion
+
+    GetDetails(startingDate = null, endingDate = null) {
         let data = {
             fromDate: this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss"),
             toDate: this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss"),
             method: "DEPOSIT"
         }
+
+        if (startingDate !== null && endingDate !== null) {
+            data.fromDate = startingDate;
+            data.toDate = endingDate;
+            (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = null;
+            (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
+        }
+
         this.adminService.add<any>(customer.paymentStatics, data).subscribe(res => {
             this.rows = [];
             let i = 0;

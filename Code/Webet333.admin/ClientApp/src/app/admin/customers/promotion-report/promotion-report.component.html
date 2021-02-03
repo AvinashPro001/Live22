@@ -29,19 +29,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-2 col-md-2">
+                <div class="p-2">
                     <h4 class="text-muted text-thin">&nbsp;</h4>
                     <button class="mb-1 btn btn-success" (click)='FilterData()' type="button">Filter</button>
+                </div>
+                <div class="p-2" id="todayFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setToday()' type="button">Today</button>
+                </div>
+                <div class="p-2" id="yesterdayFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setYesterday()' type="button">Yesterday</button>
+                </div>
+                <div class="p-2" id="thisWeekFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setThisWeek()' type="button">This Week</button>
+                </div>
+                <div class="p-2" id="thisYearFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setThisYear()' type="button">This Year</button>
                 </div>
             </div>
             <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="50"
                            [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
-
             </ngx-datatable>
 
             <ngx-datatable #table class='bootstrap no-detail-row' [rows]="Totalrows" [columns]="Totalcolumns" [columnMode]="'force'" [footerHeight]="50"
                            [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
-
             </ngx-datatable>
             <br />
             <br />
@@ -66,4 +80,3 @@
         </div>
     </div>
 </div>
-

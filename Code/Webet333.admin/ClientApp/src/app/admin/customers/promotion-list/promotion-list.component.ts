@@ -228,10 +228,8 @@ export class PromotionListComponent implements OnInit {
     }
 
     async show(row, content) {
-        if (await this.checkViewPermission()) {
-            this.viewData = row;
-            this.openWindowCustomClass(content);
-        }
+        this.viewData = row;
+        this.openWindowCustomClass(content);
     }
 
     openWindowCustomClass(content) {

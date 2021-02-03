@@ -24,6 +24,14 @@
                                                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="d_2.toggle()" type="button"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <button class="btn btn-success" type="submit" (click)="filter()">Filter</button>
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <button class="btn btn-success" (click)='setToday()' type="button">Today</button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <button class="btn btn-success" (click)='setYesterday()' type="button">Yesterday</button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <button class="btn btn-success" (click)='setThisWeek()' type="button">This Week</button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <button class="btn btn-success" (click)='setThisYear()' type="button">This Year</button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <button class="btn btn-success" type="submit" (click)="refersh()"><span class="fa fa-refresh"></span></button>
                                             </div>
                                         </div>
@@ -57,7 +65,6 @@
                                         <h6><b>Total Verified Register Users: {{totalVerfiedUser}}</b></h6>
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>

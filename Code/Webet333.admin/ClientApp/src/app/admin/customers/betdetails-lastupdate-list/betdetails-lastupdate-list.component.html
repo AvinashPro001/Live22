@@ -36,15 +36,30 @@
                         <option *ngFor="let c of listType" [ngValue]="c">{{c.Type}}</option>
                     </select>
                 </div>
-                <div class="p-2 col-md-2">
+                <div class="p-2">
                     <h4 class="text-muted text-thin">&nbsp;</h4>
                     <button class="mb-1 btn btn-success" (click)='Search()' type="button">Search</button>
+                </div>
+                <div class="p-2" id="todayFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setToday()' type="button">Today</button>
+                </div>
+                <div class="p-2" id="yesterdayFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setYesterday()' type="button">Yesterday</button>
+                </div>
+                <div class="p-2" id="thisWeekFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setThisWeek()' type="button">This Week</button>
+                </div>
+                <div class="p-2" id="thisYearFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setThisYear()' type="button">This Year</button>
                 </div>
             </div>
             <div>
                 <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="50">
                 </ngx-datatable>
-
             </div>
         </div>
     </div>

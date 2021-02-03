@@ -11,9 +11,9 @@
             <div class="row col-12">
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">From Date</h4>
-                  
+
                     <div class="input-group">
-                        <input class="form-control" [owlDateTime]="dt2"  placeholder="Date Time" type="text" id="txt_fromdatetime">
+                        <input class="form-control" [owlDateTime]="dt2" placeholder="Date Time" type="text" id="txt_fromdatetime">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt2" type="button"></button>
                         </div>
@@ -23,16 +23,32 @@
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">To Date</h4>
                     <div class="input-group">
-                        <input class="form-control" type="datetime" [owlDateTime]="dt1"  placeholder="Date Time" type="text" id="txt_todatetime">
+                        <input class="form-control" type="datetime" [owlDateTime]="dt1" placeholder="Date Time" type="text" id="txt_todatetime">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt1" type="button"></button>
                         </div>
                         <owl-date-time #dt1></owl-date-time>
                     </div>
                 </div>
-                <div class="p-2 col-md-2">
+                <div class="p-2">
                     <h4 class="text-muted text-thin">&nbsp;</h4>
                     <button class="mb-1 btn btn-success" (click)='GetDetails()' type="button">Filter</button>
+                </div>
+                <div class="p-2" id="todayFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setToday()' type="button">Today</button>
+                </div>
+                <div class="p-2" id="yesterdayFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setYesterday()' type="button">Yesterday</button>
+                </div>
+                <div class="p-2" id="thisWeekFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setThisWeek()' type="button">This Week</button>
+                </div>
+                <div class="p-2" id="thisYearFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setThisYear()' type="button">This Year</button>
                 </div>
             </div>
             <div>
@@ -52,7 +68,6 @@
                     <label><b>Unique Id:   </b>{{uniqueId}} </label>&nbsp;&nbsp;&nbsp;&nbsp;
                     <label><b>Total Deposit Amount:   </b> {{totalDepositAmount}} </label>&nbsp;&nbsp;&nbsp;&nbsp;
                     <label><b>Total Deposit:     </b> {{totalDeposit}} </label>&nbsp;&nbsp;&nbsp;&nbsp;
-
                 </div>
             </div>
         </div>

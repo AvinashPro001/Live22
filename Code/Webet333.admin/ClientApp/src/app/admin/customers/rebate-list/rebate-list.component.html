@@ -40,9 +40,9 @@
                     <h4 class="text-muted text-thin">&nbsp;</h4>
                     <button class="mb-1 btn btn-success" (click)='Filter()' type="button">Filter</button>
                 </div>
-                <div class="p-2 col-md-2" style="position:absolute;right:0px;margin-top:35px">
+                <!--<div class="p-2 col-md-2" style="position:absolute;right:0px;margin-top:35px">
                     <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Add</button>
-                </div>
+                </div>-->
             </div>
             <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator">
                 <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"

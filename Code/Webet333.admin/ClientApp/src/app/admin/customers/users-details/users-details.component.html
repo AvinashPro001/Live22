@@ -77,7 +77,6 @@
             <div class="text-center"><b>Pragmatic Wallet</b></div><div class="text-center"><b class="balance">{{pragmaticbalance == null || pragmaticbalance == undefined? 'N/A' : convertDecimal(pragmaticbalance)}}</b></div>
         </div>
     </div>
-
 </div>
 <br />
 <br />
@@ -99,7 +98,6 @@
                 <div class="col-12">
                     <h3>Personal Information</h3>
                 </div>
-
             </div>
             <div class="col-11 offset-1">
 
@@ -113,12 +111,10 @@
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.mobileNo }}</h4>
                 </div>
 
-
                 <div class="row">
                     <h4 class="col-5 h4">Role :</h4>
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.role }}</h4>
                 </div>
-
 
                 <div class="row">
                     <h4 class="col-5 h4">Username :</h4>
@@ -130,7 +126,6 @@
                 <div class="col-12">
                     <h3>Bank Information</h3>
                 </div>
-
             </div>
             <div class="col-11 offset-1">
                 <div class="row">
@@ -154,7 +149,6 @@
                 <div class="col-12">
                     <h3>User Unfinished Game</h3>
                 </div>
-
             </div>
             <div class="col-11 offset-1">
                 <div class="row">
@@ -177,7 +171,6 @@
                 <div class="col-12">
                     <h3>VIP Level</h3>
                 </div>
-
             </div>
             <div class="col-11 offset-1">
                 <div class="row">
@@ -230,7 +223,6 @@
                     <td>918 Kiss Game:</td>
                     <td>{{kiss918Username== null ? 'Select username.' : kiss918Username }}</td>
 
-
                     <!--<td>{{Kiss918Password}}</td>-->
                     <td><button class="btn btn-primary" (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Kiss918')">918Kiss Pass</button>&nbsp;<button class="btn btn-primary" (click)="ResetPassword('Kiss918')">Reset</button></td>
                 </tr>
@@ -258,9 +250,7 @@
                     <td>Pussy888 Game:</td>
                     <td>{{pussyUsername== null ? 'Select username.' : pussyUsername }}</td>
 
-
                     <!--<td>{{Pussy888Password}}</td>-->
-
 
                     <td><button class="btn btn-primary" (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Pussy888')">Pussy Pass</button>&nbsp;<button class="btn btn-primary" (click)="ResetPassword('Pussy888')">Reset</button></td>
                 </tr>
@@ -279,7 +269,6 @@
                     <td>{{pragmaticUsername== null ? 'Select username.' : pragmaticUsername }}</td>
                     <td></td>
                 </tr>
-
             </table>
             <table style="text-align: center; margin-top: 10px;">
                 <tr>
@@ -359,9 +348,25 @@
                 </div>
             </div>
         </div>
-        <div class="p-2 col-md-2">
+        <div class="p-2">
             <h4 class="text-muted text-thin">&nbsp;</h4>
             <button class="mb-1 btn btn-success" (click)='searchHandlerByDate("Withdraw")' type="button">Filter</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setToday("Withdraw")' type="button">Today</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setYesterday("Withdraw")' type="button">Yesterday</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisWeek("Withdraw")' type="button">This Week</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisYear("Withdraw")' type="button">This Year</button>
         </div>
     </div>
 
@@ -391,9 +396,25 @@
                 </div>
             </div>
         </div>
-        <div class="p-2 col-md-2">
+        <div class="p-2">
             <h4 class="text-muted text-thin">&nbsp;</h4>
             <button class="mb-1 btn btn-success" (click)='searchHandlerByDate("Transfer")' type="button">Filter</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setToday("Transfer")' type="button">Today</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setYesterday("Transfer")' type="button">Yesterday</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisWeek("Transfer")' type="button">This Week</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisYear("Transfer")' type="button">This Year</button>
         </div>
     </div>
 
@@ -423,9 +444,25 @@
                 </div>
             </div>
         </div>
-        <div class="p-2 col-md-2">
+        <div class="p-2">
             <h4 class="text-muted text-thin">&nbsp;</h4>
             <button class="mb-1 btn btn-success" (click)='searchHandlerByDate("Promotion")' type="button">Filter</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setToday("Promotion")' type="button">Today</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setYesterday("Promotion")' type="button">Yesterday</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisWeek("Promotion")' type="button">This Week</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisYear("Promotion")' type="button">This Year</button>
         </div>
     </div>
 
@@ -463,9 +500,25 @@
                 </div>
             </div>
         </div>
-        <div class="p-2 col-md-2">
+        <div class="p-2">
             <h4 class="text-muted text-thin">&nbsp;</h4>
             <button class="mb-1 btn btn-success" (click)='searchHandlerByDate("Statement")' type="button">Filter</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setToday("Statement")' type="button">Today</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setYesterday("Statement")' type="button">Yesterday</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisWeek("Statement")' type="button">This Week</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisYear("Statement")' type="button">This Year</button>
         </div>
     </div>
 
@@ -495,9 +548,25 @@
                 </div>
             </div>
         </div>
-        <div class="p-2 col-md-2">
+        <div class="p-2">
             <h4 class="text-muted text-thin">&nbsp;</h4>
             <button class="mb-1 btn btn-success" (click)='searchHandlerByDate("Rebate")' type="button">Filter</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setToday("Rebate")' type="button">Today</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setYesterday("Rebate")' type="button">Yesterday</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisWeek("Rebate")' type="button">This Week</button>
+        </div>
+        <div class="p-2">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisYear("Rebate")' type="button">This Year</button>
         </div>
     </div>
 
@@ -535,8 +604,6 @@
             </div>
         </div>
 
-
-
         <div class="p-2 col-md-2" id="startDate" style="display:none">
             <h4 class="text-muted text-thin">Start Date</h4>
             <div class="input-group">
@@ -548,10 +615,6 @@
             </div>
         </div>
 
-
-
-
-
         <div class="p-2 col-md-2" id="gmtDiv" style="display:none">
             <h4 class="text-muted text-thin">GMT</h4>
             <select class="form-control" id="Gmt" [disabled]="gmtDisable" (change)="SelectGMT($event)">
@@ -559,15 +622,30 @@
                 <option *ngFor="let c of gmtList" [ngValue]="c">{{c.gmt}}</option>
             </select>
         </div>
-        <div class="p-2 col-md-2">
+        <div class="p-2">
             <h4 class="text-muted text-thin">&nbsp;</h4>
             <button class="mb-1 btn btn-success" (click)='BettingDetails()' type="button">Betting Details</button>
+        </div>
+        <div class="p-2" id="todayFilter" style="display:none">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setToday("BettingDetails")' type="button">Today</button>
+        </div>
+        <div class="p-2" id="yesterdayFilter" style="display:none">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setYesterday("BettingDetails")' type="button">Yesterday</button>
+        </div>
+        <div class="p-2" id="thisWeekFilter" style="display:none">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisWeek("BettingDetails")' type="button">This Week</button>
+        </div>
+        <div class="p-2" id="thisYearFilter" style="display:none">
+            <h4 class="text-muted text-thin">&nbsp;</h4>
+            <button class="mb-1 btn btn-success" (click)='setThisYear("BettingDetails")' type="button">This Year</button>
         </div>
     </div>
     <div>
         <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'70'" [limit]="7" [scrollbarH]="true">
         </ngx-datatable>
-
     </div>
 </div>
 
@@ -708,7 +786,6 @@
                 </select>
             </div>
         </div>
-
     </div>
     <div class="modal-footer">
 
