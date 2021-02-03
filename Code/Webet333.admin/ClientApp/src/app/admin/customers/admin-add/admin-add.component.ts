@@ -82,7 +82,8 @@ export class AdminAddComponent implements OnInit {
 
     //#region Get Updated PermissionsList
 
-    getUpdatedPermissionsList(permissionsList, menuList) {
+    getUpdatedPermissionsList(permissionsList, menuList, permissionName = null, columnNumber = null) {
+
         //var viewPermission = menuList.Permissions[0].IsChecked;
         //var updatePermission = menuList.Permissions[1].IsChecked;
         //var addPermission = menuList.Permissions[2].IsChecked;
@@ -117,19 +118,46 @@ export class AdminAddComponent implements OnInit {
 
         for (var i = 0; i < 1; i++) {
             for (var j = 0; j < menuList.Permissions.length; j++) {
-                menuList.Permissions[j].IsChecked = menuList.Permissions[j].IsChecked;
+                //menuList.Permissions[j].IsChecked = menuList.Permissions[j].IsChecked;
+                menuList.Permissions[columnNumber].IsChecked = menuList.Permissions[columnNumber].IsChecked;
             }
 
             if (menuList.submenu) {
                 for (var k = 0; k < menuList.submenu.length; k++) {
                     for (var l = 0; l < menuList.submenu[k].Permissions.length; l++) {
-                        menuList.submenu[k].Permissions[l].IsChecked = menuList.Permissions[l].IsChecked;
+                        //menuList.submenu[k].Permissions[l].IsChecked = menuList.Permissions[l].IsChecked;
+                        menuList.submenu[k].Permissions[columnNumber].IsChecked = menuList.Permissions[columnNumber].IsChecked;
                     }
 
                     if (menuList.submenu[k].submenu) {
                         for (var m = 0; m < menuList.submenu[k].submenu.length; m++) {
                             for (var n = 0; n < menuList.submenu[k].submenu[m].Permissions.length; n++) {
-                                menuList.submenu[k].submenu[m].Permissions[n].IsChecked = menuList.Permissions[n].IsChecked;
+                                //menuList.submenu[k].submenu[m].Permissions[n].IsChecked = menuList.Permissions[n].IsChecked;
+                                menuList.submenu[k].submenu[m].Permissions[columnNumber].IsChecked = menuList.Permissions[columnNumber].IsChecked;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (permissionName === 'View' && menuList.Permissions[0].IsChecked === false) {
+            for (var i = 0; i < 1; i++) {
+                for (var j = 0; j < menuList.Permissions.length; j++) {
+                    menuList.Permissions[j].IsChecked = false;
+                }
+
+                if (menuList.submenu) {
+                    for (var k = 0; k < menuList.submenu.length; k++) {
+                        for (var l = 0; l < menuList.submenu[k].Permissions.length; l++) {
+                            menuList.submenu[k].Permissions[l].IsChecked = false;
+                        }
+
+                        if (menuList.submenu[k].submenu) {
+                            for (var m = 0; m < menuList.submenu[k].submenu.length; m++) {
+                                for (var n = 0; n < menuList.submenu[k].submenu[m].Permissions.length; n++) {
+                                    menuList.submenu[k].submenu[m].Permissions[n].IsChecked = false;
+                                }
                             }
                         }
                     }

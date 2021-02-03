@@ -149,7 +149,7 @@
                                                                         <label class="container">
                                                                             <input type="checkbox"
                                                                                    id={{defaultPermissions.Id}}
-                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList,item)"
+                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList,item,defaultPermissions.text,j)"
                                                                                    name="{{defaultPermissions.text}}-{{i}}-{{j}}"
                                                                                    [(ngModel)]="defaultPermissions.IsChecked">
                                                                             <span class="checkmark"></span>
@@ -171,7 +171,7 @@
                                                                                 <label class="container">
                                                                                     <input type="checkbox"
                                                                                            id={{defaultPermissions.Id}}
-                                                                                           (change)="getUpdatedPermissionsList(defaultPermissionsList,subitem)"
+                                                                                           (change)="getUpdatedPermissionsList(defaultPermissionsList,subitem,defaultPermissions.text,l)"
                                                                                            name="{{defaultPermissions.text}}-{{i}}-{{j}}-{{k}}-{{l}}"
                                                                                            [(ngModel)]="defaultPermissions.IsChecked">
                                                                                     <span class="checkmark"></span>
@@ -193,7 +193,7 @@
                                                                                         <label class="container">
                                                                                             <input type="checkbox"
                                                                                                    id={{defaultPermissions.Id}}
-                                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList,subsubitem)"
+                                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList,subsubitem,defaultPermissions.text,n)"
                                                                                                    name="{{defaultPermissions.text}}-{{i}}-{{j}}-{{k}}-{{l}}-{{m}}-{{n}}"
                                                                                                    [(ngModel)]="defaultPermissions.IsChecked">
                                                                                             <span class="checkmark"></span>
