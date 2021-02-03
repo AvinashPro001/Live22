@@ -34,10 +34,12 @@ export class UsersBehaviourReportsComponent implements OnInit {
             { prop: 'Username' },
             { prop: 'Name' },
             { prop: 'MobileNo' },
+            { prop: 'Language' },
             { prop: 'UserICNumber' },
             { prop: 'TotalDepositAmount' },
             { prop: 'TotalWithdrawAmount' },
             { prop: 'TotalBonusAmount' },
+            { prop: 'TotalWinLoseAmount' },
         ];
 
     }
@@ -60,6 +62,8 @@ export class UsersBehaviourReportsComponent implements OnInit {
                     TotalDepositAmount: el.totalDeposit,
                     TotalWithdrawAmount: el.totalWithdraw,
                     TotalBonusAmount: el.totalBonus,
+                    Language: el.languageName,
+                    TotalWinLoseAmount: el.totalWinLose
                 });
 
             });
@@ -101,6 +105,8 @@ export class UsersBehaviourReportsComponent implements OnInit {
                     TotalDepositAmount: el.totalDeposit,
                     TotalWithdrawAmount: el.totalWithdraw,
                     TotalBonusAmount: el.totalBonus,
+                    Language: el.languageName,
+                    TotalWinLoseAmount: el.totalWinLose
                 });
 
             });

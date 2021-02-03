@@ -65,7 +65,7 @@
   "nric_placeholder": "Full Name as NRIC",
   "confirm_password_placeholder": "Confirm Password",
   "email_placeholder": "Email Address",
-  "contact_instruction": "Please fill in a Valid Phone number for reset password purpose",
+  "contact_instruction": "Please enter valid phone number to received TAC number for activation account",
   "submit_button": "Submit",
 
   "bank_information": "BANKING INFORMATION",

@@ -8,7 +8,7 @@
     else {
         setCookie("ref", null, 1000);
     }
-    
+
 });
 
 //#region DoLogin
@@ -28,6 +28,7 @@ async function DoLogin() {
 
         localStorage.setItem('currentUserData', enc($("#txt_login_password").val()));
 
+        try {
         remember_me();
 
         var resUserDataMobile = await GetMethod(apiEndPoints.getProfile);
@@ -38,7 +39,10 @@ async function DoLogin() {
             window.location = "/";
         else
             window.location = "../Account/VerfiedOtp";
-
+        }
+        catch (e) {
+            location.reload()
+        }
     }
     LoaderHide();
 }
@@ -297,13 +301,13 @@ async function DoRegister() {
     if (model.mobile !== "" && model.username !== "" && model.name !== "" && model.password !== "" && model.confirmPassword !== "" && model.username.length > 6) {
         //WEBET333 Account Create
         var res = await PostMethodRegister(apiEndPoints.register, model);
-        
+
         if (res !== null && res !== undefined) {
             try {
                 if ((res.data.messageResponse.statusCode.split(",").length - 1) == 0)
                     ShowError(res.data.messageResponse.smsMessage);
             }
-            catch (e) {}
+            catch (e) { }
             let model = {
                 userName: $('#txt_username').val(),
                 password: $("#txt_password").val(),
@@ -371,7 +375,7 @@ async function logoutMain(i) {
         }
         LoaderHide();
     }
-    catch{
+    catch {
         sessionStorage.clear();
         localStorage.clear();
         SetLocalStorage('language', language);
@@ -451,8 +455,28 @@ async function regisrationGame() {
             let userModel = {
                 id: resUserData.data.id
             };
-            let resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
-            sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
+            let resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
+            if (
+                resSelectUser === null ||
+                resSelectUser.data.MaxBet === false ||
+                resSelectUser.data.M8 === false ||
+                resSelectUser.data.Playtech === false ||
+                resSelectUser.data.AG === false ||
+                resSelectUser.data._918Kiss === false ||
+                resSelectUser.data.Joker === false ||
+                resSelectUser.data.Mega888 === false ||
+                resSelectUser.data.DG === false ||
+                resSelectUser.data.SexyBaccarat === false ||
+                resSelectUser.data.SA === false ||
+                resSelectUser.data.Pussy888 === false ||
+                resSelectUser.data.AllBet === false ||
+                resSelectUser.data.WM === false ||
+                resSelectUser.data.Pragmatic === false
+            ) {
+                resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
+                sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
+            }
+
             let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
             var username = resUserData.data.username
 
@@ -543,7 +567,7 @@ async function regisrationGame() {
                     var password = "Wb3@" + dec(GetLocalStorage("currentUserData"));
 
                     if (password.length > 14)
-                        password=password.substring(0, 14)
+                        password = password.substring(0, 14)
 
                     var result981Kiss = await _918KissPostMethod("account.ashx?" + _918KissActionConst.AddUser + "&" + _918KissConstParameter.agent + "&" + "userName=" + randamUserName + "&" + "PassWd=" + password + "&" + "Name=" + resUserData.data.name + "&" + "Tel=" + resUserData.data.mobileNo + "&" + "Memo=" + null + "&" + "UserType=" + _918KissUserType.realplayer + "&" + "UserAreaId=" + _918KissUserAreaId.Malaysia + "&" + "time=" + UTCTime + "&" + _918KissConstParameter.authcode + "&" + "sign=" + generateHasValue(randamUserName) + "&" + _918KissConstParameter.pwdtype);
                     if (result981Kiss.code == 0) {
@@ -593,7 +617,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.mega888Register, userMegaa88Model);
                 }
-                catch{
+                catch {
 
                 }
             }
@@ -605,7 +629,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.dgRegister, model);
                 }
-                catch{
+                catch {
 
                 }
             }
@@ -617,7 +641,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.sexyRegister, model);
                 }
-                catch{
+                catch {
 
                 }
             }
@@ -629,7 +653,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.saRegister, model);
                 }
-                catch{
+                catch {
 
                 }
             }
@@ -641,7 +665,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.pussyRegister, model);
                 }
-                catch{
+                catch {
 
                 }
             }
@@ -653,7 +677,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.allBetRegister, model);
                 }
-                catch{
+                catch {
 
                 }
             }
@@ -665,7 +689,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.WMRegister, model);
                 }
-                catch{
+                catch {
 
                 }
             }
@@ -677,7 +701,7 @@ async function regisrationGame() {
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.pragmaticRegister, model);
                 }
-                catch{
+                catch {
 
                 }
             }

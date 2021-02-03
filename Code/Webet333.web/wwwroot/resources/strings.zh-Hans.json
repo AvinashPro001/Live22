@@ -65,7 +65,7 @@
   "nric_placeholder": "根据身份证姓名",
   "confirm_password_placeholder": "确认密码",
   "email_placeholder": "电邮地址",
-  "contact_instruction": "请填写有效的电话号码以便重置密码使用",
+  "contact_instruction": "请输入可接受TAC的电话号码以便激活账号使用",
   "submit_button": "提交",
 
   "bank_information": "银行资料",

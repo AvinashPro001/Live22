@@ -336,19 +336,19 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task TrackingInsert(TrackingInsertRequest request)
+        public void TrackingInsert(TrackingInsertRequest request)
         {
             using (var dapperRepository = new DapperRepository<dynamic>(Connection))
             {
-                await dapperRepository.AddOrUpdateAsync(StoredProcConsts.Account.TrackingInsert, new { request.UserNames, request.Process });
+                dapperRepository.AddOrUpdate(StoredProcConsts.Account.TrackingInsert, new { request.UserNames, request.Process });
             }
         }
 
-        public async Task TrackingLoginRegisterUpdate()
+        public void TrackingLoginRegisterUpdate()
         {
             using (var dapperRepository = new DapperRepository<dynamic>(Connection))
             {
-                await dapperRepository.AddOrUpdateAsync(StoredProcConsts.Account.TranckingLoginRegister_Update, new { });
+                dapperRepository.AddOrUpdate(StoredProcConsts.Account.TranckingLoginRegister_Update, new { });
             }
         }
 
@@ -454,11 +454,11 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task UserLastLoginTime(string UserId,string LanguageCode)
+        public void UserLastLoginTime(string UserId, string LanguageCode)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Account.LastLoginTimeUpdate, new { UserId , LanguageCode });
+                repository.AddOrUpdate(StoredProcConsts.Account.LastLoginTimeUpdate, new { UserId, LanguageCode });
             }
         }
 

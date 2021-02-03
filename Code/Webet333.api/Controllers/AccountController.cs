@@ -449,20 +449,14 @@ namespace Webet333.api.Controllers
         #region Login Reigster Tracking Insert
 
         [HttpPost(ActionsConst.Account.TrackingInsert)]
-        public async Task<IActionResult> TrackingInsert([FromBody] TrackingInsertRequest request)
+        public IActionResult TrackingInsert([FromBody] TrackingInsertRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             using (var accounthelper = new AccountHelpers(Connection))
             {
-                await accounthelper.TrackingInsert(request);
-                Queue.Enqueue(async () =>
-                {
-                    using (var helper = new AccountHelpers(Connection))
-                    {
-                        await helper.TrackingLoginRegisterUpdate();
-                    }
-                });
+                accounthelper.TrackingInsert(request);
+                accounthelper.TrackingLoginRegisterUpdate();
             }
             return OkResponse();
         }
@@ -624,17 +618,13 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Account.LastLoginTimeUpdate)]
-        public async Task<IActionResult> LastLoginTimeUpdate([FromBody] GetByIdRequest request)
+        public IActionResult LastLoginTimeUpdate([FromBody] GetByIdRequest request)
         {
             var userId = GetUserId(User).ToString();
-            Queue.Enqueue(async () =>
+            using (var account_help = new AccountHelpers(Connection))
             {
-                using (var account_help = new AccountHelpers(Connection))
-                {
-                    await account_help.UserLastLoginTime(userId,Language.Code);
-                }
-            });
-
+                account_help.UserLastLoginTime(userId, Language.Code);
+            }
             return OkResponse();
         }
 

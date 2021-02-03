@@ -1374,7 +1374,7 @@ function LoaderHide() {
 //#endregion
 
 async function whatsapp() {
-    window.open('https://api.whatsapp.com/send?phone=60109203291&text=Claim%20and%20Join', '_blank');
+    window.open('https://api.whatsapp.com/send?phone=60135558826&text=Claim%20and%20Join', '_blank');
 }
 
 

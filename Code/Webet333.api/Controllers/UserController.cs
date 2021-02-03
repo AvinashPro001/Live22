@@ -38,7 +38,7 @@ namespace Webet333.api.Controllers
         #region Users Retrive
 
         [HttpPost(ActionsConst.Users.Retrieve)]
-        public async Task<IActionResult> GetUsers([FromBody]SearchRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        public async Task<IActionResult> GetUsers([FromBody] SearchRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
 
             await CheckUserRole();
@@ -46,7 +46,7 @@ namespace Webet333.api.Controllers
             {
                 var users = await user_help.GetUsers(RoleConst.Users, request?.Keyword ?? null, BaseUrlConfigsOptions.Value);
 
-                if (users != null )
+                if (users != null)
                     return OkResponse(users);
                 return NotFoundResponse();
             }
@@ -57,7 +57,7 @@ namespace Webet333.api.Controllers
         #region Bank Register
 
         [HttpPost(ActionsConst.Users.BankRegister)]
-        public async Task<IActionResult> RegisterBank([FromBody]RegisterBankRequest request)
+        public async Task<IActionResult> RegisterBank([FromBody] RegisterBankRequest request)
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
@@ -79,7 +79,7 @@ namespace Webet333.api.Controllers
         #region Bank Update
 
         [HttpPost(ActionsConst.Users.BankUpdate)]
-        public async Task<IActionResult> BankUpdate([FromBody]RegisterBankRequest request)
+        public async Task<IActionResult> BankUpdate([FromBody] RegisterBankRequest request)
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
@@ -99,7 +99,7 @@ namespace Webet333.api.Controllers
         #region User balance
 
         [HttpPost(ActionsConst.Users.UsersBalance)]
-        public async Task<IActionResult> UsersBalance([FromBody]GetByIdRequest request)
+        public async Task<IActionResult> UsersBalance([FromBody] GetByIdRequest request)
         {
             //if (request == null) return BadResponse("error_empty_request");
             //if (!ModelState.IsValid) return BadResponse(ModelState);
@@ -122,7 +122,7 @@ namespace Webet333.api.Controllers
         #region Users Bank
 
         [HttpPost(ActionsConst.Users.UsersBank)]
-        public async Task<IActionResult> UsersBank([FromBody]GetByIdRequest request)
+        public async Task<IActionResult> UsersBank([FromBody] GetByIdRequest request)
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
@@ -152,7 +152,7 @@ namespace Webet333.api.Controllers
         #region Profile Update
 
         [HttpPost(ActionsConst.Users.ProfileUpdate)]
-        public async Task<IActionResult> ProfileUpdate([FromBody]ProfileEditRequest request)
+        public async Task<IActionResult> ProfileUpdate([FromBody] ProfileEditRequest request)
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
@@ -186,7 +186,7 @@ namespace Webet333.api.Controllers
         #region Profile Change Status
 
         [HttpPost(ActionsConst.Users.ProfileChangeStatus)]
-        public async Task<IActionResult> ProfileChangeStatus([FromBody]DeleteRequest request)
+        public async Task<IActionResult> ProfileChangeStatus([FromBody] DeleteRequest request)
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
@@ -203,7 +203,7 @@ namespace Webet333.api.Controllers
         #region Profile Delete
 
         [HttpPost(ActionsConst.Users.ProfileDelete)]
-        public async Task<IActionResult> ProfileDelete([FromBody]DeleteRequest request)
+        public async Task<IActionResult> ProfileDelete([FromBody] DeleteRequest request)
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
@@ -225,7 +225,7 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
             using (var user_help = new UserHelpers(Connection))
             {
-                var users = await user_help.GetUsersWinloseReport(request.FromDate,request.ToDate);
+                var users = await user_help.GetUsersWinloseReport(request.FromDate, request.ToDate);
 
                 if (users != null)
                     return OkResponse(users);

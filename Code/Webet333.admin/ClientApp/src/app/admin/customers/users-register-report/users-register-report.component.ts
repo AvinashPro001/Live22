@@ -34,6 +34,7 @@ export class UsersRegisterReportComponent implements OnInit {
             { prop: 'Username' },
             { prop: 'Name' },
             { prop: 'MobileNo' },
+            { prop: 'Language' },
             { prop: 'UserICNumber' },
             { prop: 'MobileNoConfirmed' },
             { prop: 'TotalDepositAmount' },
@@ -62,8 +63,8 @@ export class UsersRegisterReportComponent implements OnInit {
                     TotalDepositAmount: el.TotalDeposit,
                     TotalWithdrawAmount: el.TotalWithdraw,
                     Created: el.Created,
+                    Language: el.LanguageName
                 });
-
             });
             this.rows = [...this.rows];
             this.loadingIndicator = false;
@@ -110,6 +111,7 @@ export class UsersRegisterReportComponent implements OnInit {
                     TotalDepositAmount: el.TotalDeposit,
                     TotalWithdrawAmount: el.TotalWithdraw,
                     Created: el.Created,
+                    Language: el.LanguageName
                 });
 
             });

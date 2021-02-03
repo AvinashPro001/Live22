@@ -35,18 +35,22 @@ async function DoLogin() {
 
         localStorage.setItem('currentUserData', enc($("#m_txt_password").val()));
 
-        var resUserDataMobile = await GetMethod(apiEndPoints.getProfile);
-        if (resUserDataMobile.data.mobilenoConfirmed)
-            window.location = "../Mobile/home";
-        else
-            window.location = "../Mobile/VerifiedOtp";
+        try {
+            var resUserDataMobile = await GetMethod(apiEndPoints.getProfile);
+            if (resUserDataMobile.data.mobilenoConfirmed)
+                window.location = "../Mobile/home";
+            else
+                window.location = "../Mobile/VerifiedOtp";
 
-        sessionStorage.setItem('UserDetails', enc(JSON.stringify(resUserDataMobile)));
-        localStorage.setItem('currentUserName', resUserDataMobile.data.username);
-        //window.location = "../Mobile/home";
+            sessionStorage.setItem('UserDetails', enc(JSON.stringify(resUserDataMobile)));
+            localStorage.setItem('currentUserName', resUserDataMobile.data.username);
+            //window.location = "../Mobile/home";
 
-        remember_me();
-
+            remember_me();
+        }
+        catch(e) {
+            location.reload()
+        }
        
     }
     LoaderHide();
@@ -508,8 +512,27 @@ async function regisrationGame() {
             let userModel = {
                 id: resUserData.data.id
             };
-            let resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
-            sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
+            let resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
+            if (
+                resSelectUser === null ||
+                resSelectUser.data.MaxBet === false ||
+                resSelectUser.data.M8 === false ||
+                resSelectUser.data.Playtech === false ||
+                resSelectUser.data.AG === false ||
+                resSelectUser.data._918Kiss === false ||
+                resSelectUser.data.Joker === false ||
+                resSelectUser.data.Mega888 === false ||
+                resSelectUser.data.DG === false ||
+                resSelectUser.data.SexyBaccarat === false ||
+                resSelectUser.data.SA === false ||
+                resSelectUser.data.Pussy888 === false ||
+                resSelectUser.data.AllBet === false ||
+                resSelectUser.data.WM === false ||
+                resSelectUser.data.Pragmatic === false
+            ) {
+                resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
+                sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
+            }
             let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
             var username = resUserData.data.username
 
