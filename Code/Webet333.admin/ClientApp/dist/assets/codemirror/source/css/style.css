@@ -1,0 +1,11 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~open-iconic/font/css/open-iconic-bootstrap.css';
+
+.some {
+  width: 100%;
+  height: 100%;
+}
+
+.some-css {
+  overflow: hidden;
+}
