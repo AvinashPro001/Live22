@@ -149,14 +149,16 @@
                                                                         <label class="container">
                                                                             <input type="checkbox"
                                                                                    id={{defaultPermissions.Id}}
-                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList,item,defaultPermissions.text,j)"
+                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList,item,defaultPermissions.text,j,item)"
                                                                                    name="{{defaultPermissions.text}}-{{i}}-{{j}}"
-                                                                                   [(ngModel)]="defaultPermissions.IsChecked">
+                                                                                   [(ngModel)]="defaultPermissions.IsChecked"
+                                                                                   [disabled]="defaultPermissions.IsDisabled">
                                                                             <span class="checkmark"></span>
                                                                             <!--<span> {{defaultPermissions.text}}</span>-->
                                                                         </label>
                                                                     </div>
                                                                 </div>
+                                                                <!--<div class="p-2"><h4>{{defaultPermissions.IsChecked}}+/+{{defaultPermissions.IsDisabled}}</h4></div>--> <!--For Testing-->
                                                             </td>
                                                         </tr>
 
@@ -171,14 +173,16 @@
                                                                                 <label class="container">
                                                                                     <input type="checkbox"
                                                                                            id={{defaultPermissions.Id}}
-                                                                                           (change)="getUpdatedPermissionsList(defaultPermissionsList,subitem,defaultPermissions.text,l)"
+                                                                                           (change)="getUpdatedPermissionsList(defaultPermissionsList,subitem,defaultPermissions.text,l,item,subitem)"
                                                                                            name="{{defaultPermissions.text}}-{{i}}-{{j}}-{{k}}-{{l}}"
-                                                                                           [(ngModel)]="defaultPermissions.IsChecked">
+                                                                                           [(ngModel)]="defaultPermissions.IsChecked"
+                                                                                           [disabled]="defaultPermissions.IsDisabled">
                                                                                     <span class="checkmark"></span>
                                                                                     <!--<span> {{defaultPermissions.text}}</span>-->
                                                                                 </label>
                                                                             </div>
                                                                         </div>
+                                                                        <!--<div class="p-2"><h4>{{defaultPermissions.IsChecked}}+/+{{defaultPermissions.IsDisabled}}</h4></div>--> <!--For Testing-->
                                                                     </td>
                                                                 </tr>
 
@@ -193,14 +197,16 @@
                                                                                         <label class="container">
                                                                                             <input type="checkbox"
                                                                                                    id={{defaultPermissions.Id}}
-                                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList,subsubitem,defaultPermissions.text,n)"
+                                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList,subsubitem,defaultPermissions.text,n,item,subitem,subsubitem)"
                                                                                                    name="{{defaultPermissions.text}}-{{i}}-{{j}}-{{k}}-{{l}}-{{m}}-{{n}}"
-                                                                                                   [(ngModel)]="defaultPermissions.IsChecked">
+                                                                                                   [(ngModel)]="defaultPermissions.IsChecked"
+                                                                                                   [disabled]="defaultPermissions.IsDisabled">
                                                                                             <span class="checkmark"></span>
                                                                                             <!--<span> {{defaultPermissions.text}}</span>-->
                                                                                         </label>
                                                                                     </div>
                                                                                 </div>
+                                                                                <!--<div class="p-2"><h4>{{defaultPermissions.IsChecked}}+/+{{defaultPermissions.IsDisabled}}</h4></div>--> <!--For Testing-->
                                                                             </td>
                                                                         </tr>
 

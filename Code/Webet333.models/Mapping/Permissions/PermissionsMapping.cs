@@ -52,7 +52,8 @@ namespace Webet333.models.Mapping.Permissions
                         Id = selectedMenu.Id,
                         IsChecked = selectedMenu.IsChecked,
                         Text = selectedMenu.Text,
-                        IsShow = selectedMenu.IsShow
+                        IsShow = selectedMenu.IsShow,
+                        IsDisabled = selectedMenu.IsDisabled
                     });
                 }
                 else
