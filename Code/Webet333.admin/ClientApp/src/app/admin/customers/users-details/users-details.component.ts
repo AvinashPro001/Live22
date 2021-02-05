@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
 import { account, customer, gameBalance, VIPSetting, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
+import { CommonService } from '../../../common/common.service';
 import { debug } from 'util';
 import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { now } from 'core-js/fn/date';
@@ -236,6 +237,7 @@ export class UsersDetailsComponent implements OnInit {
         private ngbCalendar: NgbCalendar,
         private dateAdapter: NgbDateAdapter<string>,
         private router: Router,
+        private getDateService: CommonService
     ) { }
     //#endregion
 
@@ -262,7 +264,7 @@ export class UsersDetailsComponent implements OnInit {
     }
 
     get today() {
-        return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
+        return this.dateAdapter.toModel(this.ngbCalendar.getToday());
     }
 
     LoadVIPCategory() {
@@ -281,6 +283,8 @@ export class UsersDetailsComponent implements OnInit {
     //#region Betting Details Game Change Method
 
     onGameChange($event) {
+        this.setDateOtherPicker(new Date(), new Date());
+
         if ($event.target.value === "M8" || $event.target.value === "DG" || $event.target.value === "Pragmatic") {
             this.disable = true;
             this.gmtDisable = true;
@@ -967,33 +971,13 @@ export class UsersDetailsComponent implements OnInit {
 
     OpenPageLoadData(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
-            if (Tab === "Deposit") {
-                this.depositlist(null, null);
-            }
-
-            if (Tab === "Withdraw") {
-                this.withdrawlist(null, null);
-            }
-
-            if (Tab === "Transfer") {
-                this.transferlist(null, null);
-            }
-
-            if (Tab === "Promotion") {
-                this.promotionlist(null, null);
-            }
-
-            if (Tab === "Rebate") {
-                this.rebatelist(null, null);
-            }
-
-            if (Tab === "Statement") {
-                this.statementlist(null, null);
-            }
-
-            if (Tab === "Restore") {
-                this.restorelist();
-            }
+            if (Tab === "Deposit") this.depositlist(null, null);
+            if (Tab === "Withdraw") this.withdrawlist(null, null);
+            if (Tab === "Transfer") this.transferlist(null, null);
+            if (Tab === "Promotion") this.promotionlist(null, null);
+            if (Tab === "Rebate") this.rebatelist(null, null);
+            if (Tab === "Statement") this.statementlist(null, null);
+            if (Tab === "Restore") { this.restorelist(); }
         }
         else {
             this.depositRows = [];
@@ -1011,14 +995,55 @@ export class UsersDetailsComponent implements OnInit {
         }
     }
 
+    setDatePickerFormate(fromdate) {
+        //let temp = { day: 3, month: 1, year: 2020 };
+
+        var preDate = fromdate.getDate();
+        var preMonth = fromdate.getMonth() + 1;
+        var preYear = fromdate.getFullYear();
+
+        let temp = { day: preDate, month: preMonth, year: preYear };
+
+        return this.dateAdapter.toModel(temp);
+    }
+
+    setDatePicker(fromdate = null, todate = null) {
+        this.datePickerfromdate = this.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.setDatePickerFormate(todate);
+    }
+
+    setDateOtherPicker(fromdate = null, todate = null) {
+        //Date formate :: Month / date / yesr, Hours: Minitus AM
+
+        var selectDate, selectMonth, selectYear, selectFromDate, selectToDate, checkExists;
+
+        selectDate = fromdate.getDate();
+        selectMonth = fromdate.getMonth() + 1;
+        selectYear = fromdate.getFullYear();
+        selectFromDate = selectMonth + '/' + selectDate + '/' + selectYear + ', 12:00 AM';
+
+        selectDate = todate.getDate();
+        selectMonth = todate.getMonth() + 1;
+        selectYear = todate.getFullYear();
+        selectToDate = selectMonth + '/' + selectDate + '/' + selectYear + ', 11:59 PM';
+
+        checkExists = document.getElementById("txt_fromdatetime");
+        if (checkExists != null) (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = selectFromDate;
+
+        checkExists = document.getElementById("txt_todatetime");
+        if (checkExists != null) (document.getElementById("txt_todatetime") as HTMLInputElement).value = selectToDate;
+
+        checkExists = document.getElementById("txt_startdatetime");
+        if (checkExists != null) (document.getElementById("txt_startdatetime") as HTMLInputElement).value = selectFromDate;
+    }
+
     setToday(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
-            var preDate = new Date().getDate();
-            var preMonth = new Date().getMonth() + 1;
-            var preYear = new Date().getFullYear();
+            var fromdate = this.getDateService.getTodatDate().fromdate;
+            var todate = this.getDateService.getTodatDate().todate;
 
-            var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-            var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+            this.setDatePicker(new Date(fromdate), new Date(todate));
+            this.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
             if (Tab === "Deposit") this.depositlist(fromdate, todate);
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
@@ -1045,37 +1070,12 @@ export class UsersDetailsComponent implements OnInit {
     }
 
     setYesterday(Tab) {
-        var lastday = function (y, m) {
-            return new Date(y, m, 0).getDate();
-        }
-
         if (this.userid !== undefined && this.userid !== "") {
-            var preDate = new Date().getDate() - 1;
-            var preMonth = new Date().getMonth() + 1;
-            var preYear = new Date().getFullYear();
+            var fromdate = this.getDateService.getYesterDate().fromdate;
+            var todate = this.getDateService.getYesterDate().todate;
 
-            //#region Testing
-
-            //preDate = 1 - 1;
-            //preMonth = 1;
-            //preYear = 2021;
-
-            //#endregion Testing
-
-            if (preDate === 0) {
-                preMonth = preMonth - 1
-                if (preMonth === 0) {
-                    preYear = preYear - 1;
-                    preMonth = 12;
-                    preDate = lastday(preYear, preMonth);
-                }
-                else {
-                    preDate = lastday(preYear, preMonth);
-                }
-            }
-
-            var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-            var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+            this.setDatePicker(new Date(fromdate), new Date(todate));
+            this.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
             if (Tab === "Deposit") this.depositlist(fromdate, todate);
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
@@ -1103,27 +1103,11 @@ export class UsersDetailsComponent implements OnInit {
 
     setThisWeek(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
-            //#region Get start date and end date of week.
+            var fromdate = this.getDateService.getThisWeekDate().fromdate;
+            var todate = this.getDateService.getThisWeekDate().todate;
 
-            var curr = new Date; // get current date
-
-            var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-            var firstday = new Date(curr.setDate(first));
-
-            var lastdayTemp = curr.getDate() - (curr.getDay() - 1) + 6;
-            var lastday = new Date(curr.setDate(lastdayTemp));
-
-            //#endregion Get start date and end date of week.
-
-            var weekStartYear = firstday.getFullYear();
-            var weekStartMonth = firstday.getMonth() + 1;
-            var weekStartDate = firstday.getDate();
-            var fromdate = weekStartYear + '-' + weekStartMonth + '-' + weekStartDate + ' ' + '00:00:00';
-
-            var weekEndYear = lastday.getFullYear();
-            var weekEndMonth = lastday.getMonth() + 1;
-            var weekEndDate = lastday.getDate();
-            var todate = weekEndYear + '-' + weekEndMonth + '-' + weekEndDate + ' ' + '23:59:59';
+            this.setDatePicker(new Date(fromdate), new Date(todate));
+            this.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
             if (Tab === "Deposit") this.depositlist(fromdate, todate);
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
@@ -1151,8 +1135,11 @@ export class UsersDetailsComponent implements OnInit {
 
     setThisYear(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
-            var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1 + ' ' + '00:00:00';;
-            var todate = new Date().getFullYear() + '-' + 12 + '-' + 31 + ' ' + '23:59:59';
+            var fromdate = this.getDateService.getThisYearDate().fromdate;
+            var todate = this.getDateService.getThisYearDate().todate;
+
+            this.setDatePicker(new Date(fromdate), new Date(todate));
+            this.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
             if (Tab === "Deposit") this.depositlist(fromdate, todate);
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
@@ -1288,6 +1275,11 @@ export class UsersDetailsComponent implements OnInit {
     //#region  User Deposit List
 
     depositlist(fromdate, todate) {
+        if (fromdate === null || todate === null) {
+            fromdate = this.getDateService.getTodatDate().fromdate;
+            todate = this.getDateService.getTodatDate().todate;
+        }
+
         this.loadingIndicator = true;
         let data = {
             userId: this.userid,
@@ -1319,6 +1311,11 @@ export class UsersDetailsComponent implements OnInit {
     //#region  User Withdraw List
 
     withdrawlist(fromdate, todate) {
+        if (fromdate === null || todate === null) {
+            fromdate = this.getDateService.getTodatDate().fromdate;
+            todate = this.getDateService.getTodatDate().todate;
+        }
+
         this.loadingIndicator = true;
         let data = {
             userId: this.userid,
@@ -1351,6 +1348,11 @@ export class UsersDetailsComponent implements OnInit {
     //#region  User Transfer List
 
     transferlist(fromdate, todate) {
+        if (fromdate === null || todate === null) {
+            fromdate = this.getDateService.getTodatDate().fromdate;
+            todate = this.getDateService.getTodatDate().todate;
+        }
+
         this.loadingIndicator = true;
         let data = {
             userId: this.userid,
@@ -1381,6 +1383,11 @@ export class UsersDetailsComponent implements OnInit {
     //#region  User Promotion List
 
     promotionlist(fromdate, todate) {
+        if (fromdate === null || todate === null) {
+            fromdate = this.getDateService.getTodatDate().fromdate;
+            todate = this.getDateService.getTodatDate().todate;
+        }
+
         this.loadingIndicator = true;
         let data = {
             userid: this.userid,
@@ -1416,6 +1423,11 @@ export class UsersDetailsComponent implements OnInit {
     //#region  User Rebate List
 
     rebatelist(fromdate, todate) {
+        if (fromdate === null || todate === null) {
+            fromdate = this.getDateService.getTodatDate().fromdate;
+            todate = this.getDateService.getTodatDate().todate;
+        }
+
         this.loadingIndicator = true;
         let data = {
             userid: this.userid,
@@ -1447,6 +1459,11 @@ export class UsersDetailsComponent implements OnInit {
     //#region  User Statement List
 
     statementlist(fromdate, todate) {
+        if (fromdate === null || todate === null) {
+            fromdate = this.getDateService.getTodatDate().fromdate;
+            todate = this.getDateService.getTodatDate().todate;
+        }
+
         this.loadingIndicator = true;
         let data = {
             userId: this.userid,
@@ -1992,7 +2009,6 @@ export class UsersDetailsComponent implements OnInit {
         if (this.userid != null && this.userid != undefined) {
             this.loadingIndicator = true;
             this.rows = [];
-
             this.fromDate = this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
             this.toDate = this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
 
