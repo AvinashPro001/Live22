@@ -32,7 +32,7 @@ namespace Webet333.models.Response.Game
     public partial class BetDetail
     {
         [JsonProperty("trans_id")]
-        public long TransId { get; set; }
+        public object TransId { get; set; }
 
         [JsonProperty("vendor_member_id")]
         public string VendorMemberId { get; set; }
@@ -41,55 +41,64 @@ namespace Webet333.models.Response.Game
         public string OperatorId { get; set; }
 
         [JsonProperty("league_id")]
-        public long LeagueId { get; set; }
+        public long? LeagueId { get; set; }
+
+        [JsonProperty("leaguename")]
+        public List<maxbetLeaguename> Leaguename { get; set; }
 
         [JsonProperty("match_id")]
-        public long MatchId { get; set; }
+        public long? MatchId { get; set; }
 
         [JsonProperty("home_id")]
-        public long HomeId { get; set; }
+        public long? HomeId { get; set; }
+
+        [JsonProperty("hometeamname")]
+        public List<Hometeamname> Hometeamname { get; set; }
 
         [JsonProperty("away_id")]
-        public long AwayId { get; set; }
+        public long? AwayId { get; set; }
 
-        [JsonProperty("match_datetime")]
-        public string MatchDatetime { get; set; }
+        [JsonProperty("awayteamname")]
+        public List<Awayteamname> Awayteamname { get; set; }
+
+        [JsonProperty("match_DateTime")]
+        public DateTime? MatchDateTime { get; set; }
 
         [JsonProperty("sport_type")]
-        public long SportType { get; set; }
+        public long? SportType { get; set; }
 
         [JsonProperty("bet_type")]
-        public long BetType { get; set; }
+        public long? BetType { get; set; }
 
         [JsonProperty("parlay_ref_no")]
-        public long ParlayRefNo { get; set; }
+        public long? ParlayRefNo { get; set; }
 
         [JsonProperty("odds")]
-        public double Odds { get; set; }
+        public double? Odds { get; set; }
 
         [JsonProperty("stake")]
-        public long Stake { get; set; }
+        public double? Stake { get; set; }
 
         [JsonProperty("transaction_time")]
-        public string TransactionTime { get; set; }
+        public DateTime? TransactionTime { get; set; }
 
         [JsonProperty("ticket_status")]
         public string TicketStatus { get; set; }
 
         [JsonProperty("winlost_amount")]
-        public long WinlostAmount { get; set; }
+        public double? WinlostAmount { get; set; }
 
         [JsonProperty("after_amount")]
-        public double AfterAmount { get; set; }
+        public double? AfterAmount { get; set; }
 
         [JsonProperty("currency")]
-        public long Currency { get; set; }
+        public long? Currency { get; set; }
 
-        [JsonProperty("winlost_datetime")]
-        public string WinlostDatetime { get; set; }
+        [JsonProperty("winlost_DateTime")]
+        public DateTime WinlostDateTime { get; set; }
 
         [JsonProperty("odds_type")]
-        public long OddsType { get; set; }
+        public long? OddsType { get; set; }
 
         [JsonProperty("bet_team")]
         public string BetTeam { get; set; }
@@ -98,13 +107,13 @@ namespace Webet333.models.Response.Game
         public string IsLucky { get; set; }
 
         [JsonProperty("home_hdp")]
-        public long HomeHdp { get; set; }
+        public double? HomeHdp { get; set; }
 
         [JsonProperty("away_hdp")]
-        public long AwayHdp { get; set; }
+        public double? AwayHdp { get; set; }
 
         [JsonProperty("hdp")]
-        public object Hdp { get; set; }
+        public double? Hdp { get; set; }
 
         [JsonProperty("betfrom")]
         public string Betfrom { get; set; }
@@ -113,13 +122,13 @@ namespace Webet333.models.Response.Game
         public string Islive { get; set; }
 
         [JsonProperty("home_score")]
-        public object HomeScore { get; set; }
+        public long? HomeScore { get; set; }
 
         [JsonProperty("away_score")]
-        public object AwayScore { get; set; }
+        public long? AwayScore { get; set; }
 
         [JsonProperty("settlement_time")]
-        public object SettlementTime { get; set; }
+        public DateTime? SettlementTime { get; set; }
 
         [JsonProperty("customInfo1")]
         public string CustomInfo1 { get; set; }
@@ -145,6 +154,9 @@ namespace Webet333.models.Response.Game
         [JsonProperty("ParlayData")]
         public object ParlayData { get; set; }
 
+        [JsonProperty("bet_tag")]
+        public string BetTag { get; set; }
+
         [JsonProperty("JsonString")]
         public object JsonString { get; set; }
     }
@@ -152,7 +164,7 @@ namespace Webet333.models.Response.Game
     public partial class BetNumberDetails
     {
         [JsonProperty("trans_id")]
-        public long TransId { get; set; }
+        public object TransId { get; set; }
 
         [JsonProperty("vendor_member_id")]
         public string VendorMemberId { get; set; }
@@ -161,46 +173,19 @@ namespace Webet333.models.Response.Game
         public string OperatorId { get; set; }
 
         [JsonProperty("match_id")]
-        public long MatchId { get; set; }
-       
-        [JsonProperty("sport_type")]
-        public long SportType { get; set; }
-
-        [JsonProperty("bet_type")]
-        public long BetType { get; set; }
-
-        [JsonProperty("odds")]
-        public double Odds { get; set; }
-
-        [JsonProperty("stake")]
-        public long Stake { get; set; }
+        public long? MatchId { get; set; }
 
         [JsonProperty("transaction_time")]
-        public string TransactionTime { get; set; }
+        public DateTime? TransactionTime { get; set; }
+
+        [JsonProperty("odds")]
+        public double? Odds { get; set; }
+
+        [JsonProperty("stake")]
+        public double? Stake { get; set; }
 
         [JsonProperty("ticket_status")]
         public string TicketStatus { get; set; }
-
-        [JsonProperty("winlost_amount")]
-        public long WinlostAmount { get; set; }
-
-        [JsonProperty("after_amount")]
-        public double AfterAmount { get; set; }
-
-        [JsonProperty("currency")]
-        public long Currency { get; set; }
-
-        [JsonProperty("winlost_datetime")]
-        public string WinlostDatetime { get; set; }
-
-        [JsonProperty("odds_type")]
-        public long OddsType { get; set; }
-
-        [JsonProperty("bet_team")]
-        public string BetTeam { get; set; }
-
-        [JsonProperty("isLucky")]
-        public string IsLucky { get; set; }
 
         [JsonProperty("betfrom")]
         public string Betfrom { get; set; }
@@ -209,7 +194,31 @@ namespace Webet333.models.Response.Game
         public string Islive { get; set; }
 
         [JsonProperty("last_ball_no")]
-        public object LastBallNo { get; set; }
+        public long? LastBallNo { get; set; }
+
+        [JsonProperty("bet_team")]
+        public string BetTeam { get; set; }
+
+        [JsonProperty("winlost_DateTime")]
+        public DateTime? WinlostDateTime { get; set; }
+
+        [JsonProperty("bet_type")]
+        public long? BetType { get; set; }
+
+        [JsonProperty("currency")]
+        public long? Currency { get; set; }
+
+        [JsonProperty("odds_type")]
+        public long? OddsType { get; set; }
+
+        [JsonProperty("sport_type")]
+        public long? SportType { get; set; }
+
+        [JsonProperty("winlost_amount")]
+        public double? WinlostAmount { get; set; }
+
+        [JsonProperty("after_amount")]
+        public double? AfterAmount { get; set; }
 
         [JsonProperty("customInfo1")]
         public string CustomInfo1 { get; set; }
@@ -226,8 +235,42 @@ namespace Webet333.models.Response.Game
         [JsonProperty("customInfo5")]
         public string CustomInfo5 { get; set; }
 
+        [JsonProperty("ba_status")]
+        public string BaStatus { get; set; }
+
+        [JsonProperty("version_key")]
+        public long VersionKey { get; set; }
+
         [JsonProperty("JsonString")]
         public object JsonString { get; set; }
 
+    }
+
+
+    public class maxbetLeaguename
+    {
+        [JsonProperty("lang")]
+        public string Lang { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+    }
+
+    public class Hometeamname
+    {
+        [JsonProperty("lang")]
+        public string Lang { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+    }
+
+    public class Awayteamname
+    {
+        [JsonProperty("lang")]
+        public string Lang { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
     }
 }

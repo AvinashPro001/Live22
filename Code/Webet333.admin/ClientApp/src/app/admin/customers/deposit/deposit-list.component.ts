@@ -10,6 +10,7 @@ import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/c
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HubConnectionBuilder } from '@aspnet/signalr';
 import { Md5 } from 'ts-md5/dist/md5';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-admin/deposit/retrieve-list',
@@ -90,8 +91,6 @@ export class DepositListComponent implements OnInit {
     apiJoker: any;
     userModel: any;
     disabled: boolean = false;
-    //stopwatch: any;
-    //currentDateTime: any;
     AutoRefersh: any;
     setAutorefersh: any;
     imageIcon: any = "../../../assets/img/pdficon.svg";
@@ -106,6 +105,7 @@ export class DepositListComponent implements OnInit {
         private confirmationDialogService: ConfirmationDialogService,
         private modalService: NgbModal,
         private datePipe: DatePipe,
+        private titleService: Title
     ) { }
     //#endregion
 
@@ -144,23 +144,65 @@ export class DepositListComponent implements OnInit {
     }
     //#endregion
 
+    depositCount: Number = 0;
+
+    async delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     CheckDeposit() {
-        let data = {
-            status: 'Pending',
-            keyword: null,
-            fromDate: null,
-            toDate: null
-        }
-        this.adminService.add<any>(customer.depositList, data).subscribe(res => {
-            if (res.data.length > 0) {
-                if (window.location.href.toLowerCase().includes("admin/customers/deposit-list")) {
+        if (window.location.href.toLowerCase().includes("admin/customers/deposit-list")) {
+            let data = {
+                status: 'Pending',
+                keyword: null,
+                fromDate: null,
+                toDate: null
+            }
+            this.adminService.add<any>(customer.depositList, data).subscribe(async res => {
+                this.depositCount = res.data.length;
+                if (res.data.length > 0) {
                     this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
                     if (this.AutoRefersh == true || this.AutoRefersh == "true") {
                         this.playAudio();
+                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
                     }
                 }
-            }
-        })
+                else {
+                    if (this.depositCount == 0)
+                        this.titleService.setTitle("Account Managment System");
+                }
+            })
+        }
+        else {
+            this.titleService.setTitle("Account Managment System");
+        }
     }
 
 
@@ -184,26 +226,25 @@ export class DepositListComponent implements OnInit {
         });
     }
 
-    hubConnection() {
-        let Connection = new HubConnectionBuilder().withUrl("http://api.webet333.com/signalrhub").build();
+    //hubConnection() {
+    //    let Connection = new HubConnectionBuilder().withUrl("http://api.webet333.com/signalrhub").build();
 
-        Connection.on("DepositApprovalList", () => {
-            this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
-            if (this.AutoRefersh == true || this.AutoRefersh == "true")
-                this.playAudio();
-        });
+    //    Connection.on("DepositApprovalList", () => {
+    //        this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
+    //        if (this.AutoRefersh == true || this.AutoRefersh == "true")
+    //            this.playAudio();
+    //    });
 
-        Connection.start().then(res =>
-            console.log("Connection started")
-        ).catch(err => this.hubConnection());
-    }
+    //    Connection.start().then(res =>
+    //        console.log("Connection started")
+    //    ).catch(err => this.hubConnection());
+    //}
 
     async playAudio() {
         let audio = new Audio();
         audio.src = "../../../assets/audio/notification.mp3";
         audio.load();
         audio.play();
-        //this.toasterService.pop('info', 'Deposit Approval Pending', "New Approval Request Arrive");
         this.depositStatus == 'Pending'
         this.selectedList = this.listType[0];
         this.setColumn(this.selectedList.verified);

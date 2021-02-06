@@ -87,6 +87,8 @@
 
             public const string GameResetPasswordSelect = "[dbo].[GameResetPassword_Select]";
 
+            public const string ContactInfromationSelect = "[dbo].[ContactDetails_Select]";
+
             public const string AdminUsersRegisterSelect = "[dbo].[Admin_Users_Register_Report]";
 
             public const string AdminUsersBehaviourSelect = "[dbo].[Admin_Users_Behaviour_Report]";
@@ -123,6 +125,18 @@
             public const string SelectDefaultPermission = "[dbo].[DefaultPermissions_Select]";
 
             public const string UsersAdminPersist = "[dbo].[Users_Admin_Persist]";
+
+            public const string ContactType_Insert = "[dbo].[ContactType_Insert]";
+
+            public const string ContactType_Select = "[dbo].[ContactType_Select]";
+
+            public const string ContactType_Update = "[dbo].[ContactType_Update]";
+
+            public const string ContactTypeDetails_Insert = "[dbo].[ContactTypeDetails_Insert]";
+
+            public const string ContactTypeDetails_Select = "[dbo].[ContactTypeDetails_Select]";
+
+            public const string ContactTypeDetails_Update = "[dbo].[ContactTypeDetails_Update]";
         }
 
         public class Payments

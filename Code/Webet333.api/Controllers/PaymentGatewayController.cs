@@ -55,6 +55,37 @@ namespace Webet333.api.Controllers
 
         #endregion
 
+
+        #region Payment Auto Verifiy API
+
+        [Authorize]
+        [HttpPost(ActionsConst.PaymentGateway.GetPaymentGatewayURL)]
+        public async Task<IActionResult> GetUrl([FromBody] GetUrlRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            var Role = GetUserRole(User);
+            var Name = GetUserName(User);
+            var uniqueId = GetUniqueId(User);
+            var userId = GetUserId(User).ToString();
+
+            if (string.IsNullOrWhiteSpace(request.PromotionId))
+                request.PromotionId = null;
+
+            var response = await PaymentGatewayHelpers.CallPaymentgetURL(Name, request.Amount);
+            using (var paymentgateway_helpers = new PaymentGatewayHelpers(Connection))
+            {
+                await paymentgateway_helpers.PaymentTokenSave(userId, uniqueId, Role, response.token, response.status, response.transaction, JsonConvert.SerializeObject(response), response.amount, request.PromotionApplyEligible, request.PromotionId);
+
+                response.redirect_to = response.redirect_to.Split("=", 2)[1];
+
+                return OkResponse(response);
+            }
+        }
+
+        #endregion
+
         #region Payment Verifiy API
 
         [Consumes("application/x-www-form-urlencoded")]

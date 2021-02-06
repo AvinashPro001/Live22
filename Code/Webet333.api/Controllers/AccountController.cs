@@ -924,6 +924,57 @@ namespace Webet333.api.Controllers
 
         #endregion
 
+        #region Contact Information
+
+        [HttpPost(ActionsConst.Account.ContactInformationSelect)]
+        public async Task<ContentResult> ContactInformationSelect([FromBody] ContactInformationRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            using (var account_help = new AccountHelpers(Connection))
+            {
+                var type = await account_help.ContactInformation();
+                type.ForEach(x =>
+                {
+                    x.TypeImage = x.TypeImage == null ? null : $"{BaseUrlConfigsOptions.Value.ImageBase}{BaseUrlConfigsOptions.Value.ContactImage}/{x.TypeId}{x.TypeImage}";
+                });
+
+                string htmlCode=string.Empty;
+                if (!request.IsMobile)
+                {
+                    htmlCode= @"<li class=""support-live""><h5><strong>Live Support</strong></h5><p><img src=""../../images/hours_24.png"" alt=""hours 24""></p><h6><strong style=""padding-right:60px;"">24 Hours</strong></h6></li>";
+                    foreach (var contact in type)
+                    {
+
+                        htmlCode += @"<li class=""text-center""><h5><img class=""contact-logos"" src=""../../images/whatsapp.png"" alt=""Whats App""><strong><u>Whatsapp</u></strong></h5>";
+                        var contactInformationDetails = JsonConvert.DeserializeObject<List<ContactInformationDetails>>(contact.Details);
+                        contactInformationDetails.ForEach(x =>
+                        {
+                            x.CSImage = x.CSImage == null ? null : $"{BaseUrlConfigsOptions.Value.ImageBase}{BaseUrlConfigsOptions.Value.ContactImage}/{x.TypeDetailsId}{x.CSImage}";
+                        });
+                        foreach(var info in contactInformationDetails)
+                        {
+                            if (info == null)
+                            {
+                                htmlCode += @"<strong><a class=""contact-us"" href=""https://api.whatsapp.com/send?phone=60135557800&text=Claim%20and%20Join"" target=""_blank"">013-555 7800</a><strong> : CS1</strong></strong><br/>";
+                            }
+                            else
+                            {
+                                htmlCode += @"<h6><strong>Customer Service 1</strong></h6><figure><img class=""image-qr"" src=""../../images/barcode-cs1.jpg"" alt=""barcode""></figure>";
+                            }
+                        }
+                        htmlCode += @"</li>";
+                    }
+                }
+                else
+                {
+
+                }
+
+                return base.Content(htmlCode, "text/html");
+            }
+        }
+
+        #endregion
+
         //#region Check password
 
         //[HttpPost("testpassword")]

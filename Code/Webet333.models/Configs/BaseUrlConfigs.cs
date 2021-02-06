@@ -38,5 +38,7 @@
         public string ExcelFilesPath { get; set; }
 
         public string VIPIcon { get; set; }
+
+        public string ContactImage { get; set; }
     }
 }

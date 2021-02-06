@@ -454,6 +454,15 @@ namespace Webet333.api.Helpers
             }
         }
 
+        public async Task<List<ContactInformationResponse>> ContactInformation()
+        {
+            using (var repository = new DapperRepository<ContactInformationResponse>(Connection))
+            {
+                var result=await repository.GetDataAsync(StoredProcConsts.Account.ContactInfromationSelect, new { });
+                return result.ToList();
+            }
+        }
+
         public void UserLastLoginTime(string UserId, string LanguageCode)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))

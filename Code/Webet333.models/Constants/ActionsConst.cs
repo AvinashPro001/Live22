@@ -60,7 +60,8 @@
 
             public const string ManagerGamePasswordShow = "account/manager/gamepassword/show";
 
-            //GameResetPasswordSelect
+            public const string ContactInformationSelect = "contact/information/select";
+
             public const string GameResetPasswordSelect = "account/gamepassword/select";
 
             public const string AdminRegisterReportSelect = "account/users_register_report";
@@ -159,6 +160,8 @@
         {
             public const string GetPaymentGatewayURL = "payment/get/url";
 
+            public const string PaymentAutoVerified = "online/payment/auto/verified";
+
             public const string PaymentVerified = "online/payment/verified";
         }
 
@@ -191,6 +194,18 @@
             public const string DefaultPermissionList = "user/default_permission/retrieve";
 
             public const string AdminUpdate = "admin/update";
+
+            public const string ContactTypeSelect = "contact/type/select";
+
+            public const string ContactTypeUpdate = "contact/type/update";
+
+            public const string ContactTypeAdd = "contact/type/add";
+
+            public const string ContactDetailsSelect = "contact/details/select";
+
+            public const string ContactDetailsUpdate = "contact/details/update";
+
+            public const string ContactDetailsAdd = "contact/details/add";
         }
 
         public class Promotions

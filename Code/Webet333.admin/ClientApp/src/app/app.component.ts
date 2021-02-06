@@ -48,161 +48,161 @@ export class AppComponent implements OnInit {
         }, 3000);
 
         setInterval(() => {
-            this.CheckDeposit();
-            this.CheckWithdraw();
+            //this.CheckDeposit();
+            //this.CheckWithdraw();
         }, 5000)
     }
 
-    hubConnection() {
-        let Connection = new HubConnectionBuilder().withUrl("http://api.webet333.com/signalrhub").build();
+    //hubConnection() {
+    //    let Connection = new HubConnectionBuilder().withUrl("http://api.webet333.com/signalrhub").build();
 
-        Connection.on("WithdrawApprovalList", () => {
-            let data = {
-                name: "WithdrawAutoRefersh",
-            }
-            this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(res => {
-                var AutoRefersh = res.data.value == "true" ? true : false;
-                if (AutoRefersh == true)
-                    this.playAudio(2);
-            });
-        });
+    //    Connection.on("WithdrawApprovalList", () => {
+    //        let data = {
+    //            name: "WithdrawAutoRefersh",
+    //        }
+    //        this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(res => {
+    //            var AutoRefersh = res.data.value == "true" ? true : false;
+    //            if (AutoRefersh == true)
+    //                this.playAudio(2);
+    //        });
+    //    });
 
-        Connection.on("DepositApprovalList", () => {
-            let data = {
-                name: "DepositAutoRefersh",
-            }
-            this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(res => {
-                var AutoRefersh = res.data.value == "true" ? true : false;
-                if (AutoRefersh == true)
-                    this.playAudio(1);
-            });
-        });
+    //    Connection.on("DepositApprovalList", () => {
+    //        let data = {
+    //            name: "DepositAutoRefersh",
+    //        }
+    //        this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(res => {
+    //            var AutoRefersh = res.data.value == "true" ? true : false;
+    //            if (AutoRefersh == true)
+    //                this.playAudio(1);
+    //        });
+    //    });
 
-        Connection.start().then(res =>
-            console.log("Connection started")
-        ).catch(err => this.hubConnection());
-    }
+    //    Connection.start().then(res =>
+    //        console.log("Connection started")
+    //    ).catch(err => this.hubConnection());
+    //}
 
-    playAudio(process) {
-        let audio = new Audio();
-        audio.src = "../../src/assets/audio/notification.mp3";
-        audio.load();
-        audio.play();
-    }
+    //playAudio(process) {
+    //    let audio = new Audio();
+    //    audio.src = "../../src/assets/audio/notification.mp3";
+    //    audio.load();
+    //    audio.play();
+    //}
 
-    depositCount: Number = 0;
-    withdrawCount: Number = 0;
+    //depositCount: Number = 0;
+    //withdrawCount: Number = 0;
 
-    CheckDeposit() {
-        let data = {
-            status: 'Pending',
-            keyword: null,
-            fromDate: null,
-            toDate: null
-        }
-        this.adminService.add<any>(customer.depositList, data).subscribe(resDeposit => {
-            this.depositCount = resDeposit.data.length;
-            if (resDeposit.data.length > 0) {
-                let data = {
-                    name: "DepositAutoRefersh",
-                }
-                this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(async res => {
-                    var AutoRefersh = res.data.value == "true" ? true : false;
-                    if (AutoRefersh == true) {
-                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                    }
-                });
-            }
-            else {
-                if (this.withdrawCount == 0)
-                    this.titleService.setTitle("Account Managment System");
-            }
-        })
-    }
+    //CheckDeposit() {
+    //    let data = {
+    //        status: 'Pending',
+    //        keyword: null,
+    //        fromDate: null,
+    //        toDate: null
+    //    }
+    //    this.adminService.add<any>(customer.depositList, data).subscribe(resDeposit => {
+    //        this.depositCount = resDeposit.data.length;
+    //        if (resDeposit.data.length > 0) {
+    //            let data = {
+    //                name: "DepositAutoRefersh",
+    //            }
+    //            this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(async res => {
+    //                var AutoRefersh = res.data.value == "true" ? true : false;
+    //                if (AutoRefersh == true) {
+    //                    this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("Deposit Request (" + resDeposit.data.length + ")");
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                }
+    //            });
+    //        }
+    //        else {
+    //            if (this.withdrawCount == 0)
+    //                this.titleService.setTitle("Account Managment System");
+    //        }
+    //    })
+    //}
 
-    CheckWithdraw() {
-        let data = {
-            status: 'Pending',
-            keyword: null,
-            fromDate: null,
-            toDate: null
-        }
-        this.adminService.add<any>(customer.withdrawList, data).subscribe(resWithdraw => {
-            this.withdrawCount = resWithdraw.data.length;
-            if (resWithdraw.data.length > 0) {
-                let data = {
-                    name: "WithdrawAutoRefersh",
-                }
-                this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(async res => {
-                    var AutoRefersh = res.data.value == "true" ? true : false;
-                    if (AutoRefersh == true) {
-                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+    //CheckWithdraw() {
+    //    let data = {
+    //        status: 'Pending',
+    //        keyword: null,
+    //        fromDate: null,
+    //        toDate: null
+    //    }
+    //    this.adminService.add<any>(customer.withdrawList, data).subscribe(resWithdraw => {
+    //        this.withdrawCount = resWithdraw.data.length;
+    //        if (resWithdraw.data.length > 0) {
+    //            let data = {
+    //                name: "WithdrawAutoRefersh",
+    //            }
+    //            this.adminService.add<any>(account.AdminNotificationParameterSelect, data).subscribe(async res => {
+    //                var AutoRefersh = res.data.value == "true" ? true : false;
+    //                if (AutoRefersh == true) {
+    //                    this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
                         
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                        this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
-                        await this.delay(1000);
-                        this.titleService.setTitle("\u200E")
-                        await this.delay(1000);
-                    }
-                });
-            } else {
-                if (this.depositCount == 0)
-                 this.titleService.setTitle("Account Managment System");
-            }
-        })
-    }
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
+    //                    await this.delay(1000);
+    //                    this.titleService.setTitle("\u200E")
+    //                    await this.delay(1000);
+    //                }
+    //            });
+    //        } else {
+    //            if (this.depositCount == 0)
+    //             this.titleService.setTitle("Account Managment System");
+    //        }
+    //    })
+    //}
 
-    async delay(ms: number) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    //async delay(ms: number) {
+    //    return new Promise(resolve => setTimeout(resolve, ms));
+    //}
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Stopwatch } from "ts-stopwatch";
 import { AdminService } from '../../admin.service';
@@ -87,6 +88,7 @@ export class WithdrawListComponent implements OnInit {
         private modalService: NgbModal,
         private confirmationDialogService: ConfirmationDialogService,
         private datePipe: DatePipe,
+        private titleService: Title
     ) { }
     //#endregion constructor
 
@@ -95,7 +97,6 @@ export class WithdrawListComponent implements OnInit {
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.getAutoRefershUpdate();
-            //this.hubConnection();
             setInterval(() => {
                 this.CheckWithdraw();
             }, 5000)
@@ -137,37 +138,71 @@ export class WithdrawListComponent implements OnInit {
         });
     }
 
-    hubConnection() {
-        let Connection = new HubConnectionBuilder().withUrl("http://api.webet333.com/signalrhub").build();
+    //hubConnection() {
+    //    let Connection = new HubConnectionBuilder().withUrl("http://api.webet333.com/signalrhub").build();
 
-        Connection.on("WithdrawApprovalList", () => {
-            this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
-            if (this.AutoRefersh == true || this.AutoRefersh == "true")
-                this.playAudio();
-        });
-        Connection.start().then(res =>
-            console.log("Connection started")
-        );
+    //    Connection.on("WithdrawApprovalList", () => {
+    //        this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
+    //        if (this.AutoRefersh == true || this.AutoRefersh == "true")
+    //            this.playAudio();
+    //    });
+    //    Connection.start().then(res =>
+    //        console.log("Connection started")
+    //    );
 
+    //}
+
+    withdrawCount: Number = 0;
+    async delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     CheckWithdraw() {
-        let data = {
-            status: 'Pending',
-            keyword: null,
-            fromDate: null,
-            toDate: null
-        }
-        this.adminService.add<any>(customer.withdrawList, data).subscribe(res => {
-            if (res.data.length > 0) {
-                if (window.location.href.toLowerCase().includes("admin/customers/withdraw-list")) {
+        if (window.location.href.toLowerCase().includes("admin/customers/withdraw-list")) {
+            let data = {
+                status: 'Pending',
+                keyword: null,
+                fromDate: null,
+                toDate: null
+            }
+            this.adminService.add<any>(customer.withdrawList, data).subscribe(async res => {
+                if (res.data.length > 0) {
                     this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
                     if (this.AutoRefersh == true || this.AutoRefersh == "true") {
                         this.playAudio();
+                        this.titleService.setTitle("Withdraw Request (" + res.data.length + ")");
+
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Withdraw Request (" + res.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Withdraw Request (" + res.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Withdraw Request (" + res.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Withdraw Request (" + res.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Withdraw Request (" + res.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
+                        this.titleService.setTitle("Withdraw Request (" + res.data.length + ")");
+                        await this.delay(1000);
+                        this.titleService.setTitle("\u200E")
+                        await this.delay(1000);
                     }
                 }
-            }
-        })
+            })
+        }
     }
 
     playAudio() {
