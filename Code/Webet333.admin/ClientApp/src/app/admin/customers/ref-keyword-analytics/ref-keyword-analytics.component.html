@@ -14,12 +14,12 @@
                                         <h3>Filter :</h3>&nbsp;&nbsp;&nbsp;
                                         <div style="display:inline-flex">
                                             <input class="form-control" placeholder="yyyy-mm-dd"
-                                                   name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                                                   name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime" [(ngModel)]="datePickerfromdate">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="d_1.toggle()" type="button"></button>
                                             </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <input class="form-control" placeholder="yyyy-mm-dd"
-                                                   name="dp" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                                                   name="dp" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime" [(ngModel)]="datePickertodate">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="d_2.toggle()" type="button"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <button class="btn btn-success" type="submit" (click)="filter()">Filter</button>

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { account, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
+import { CommonService } from '../../../common/common.service';
+import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-ref-keyword-analytics',
@@ -20,16 +22,22 @@ export class RefKeywordAnalyticsComponent implements OnInit {
     totalVerfiedUser: any;
     totalNotVerfiedUser: any;
 
+    datePickerfromdate: string;
+    datePickertodate: string;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
+        private dateAdapter: NgbDateAdapter<string>,
+        private getDateService: CommonService
     ) { }
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.setColumn();
-            this.setPageData();
+            // this.setPageData();
+            this.setToday();
         }
     }
 
@@ -96,79 +104,68 @@ export class RefKeywordAnalyticsComponent implements OnInit {
 
     //#region       Filter Data
 
-    setToday() {
-        var preDate = new Date().getDate();
-        var preMonth = new Date().getMonth() + 1;
-        var preYear = new Date().getFullYear();
+    setDatePickerFormate(fromdate) {
+        //let temp = { day: 3, month: 1, year: 2020 };
 
-        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+        var preDate = fromdate.getDate();
+        var preMonth = fromdate.getMonth() + 1;
+        var preYear = fromdate.getFullYear();
+
+        let temp = { day: preDate, month: preMonth, year: preYear };
+
+        return this.dateAdapter.toModel(temp);
+    }
+
+    setDatePicker(fromdate = null, todate = null) {
+        this.datePickerfromdate = this.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.setDatePickerFormate(todate);
+    }
+
+    setToday() {
+        var dates = this.getDateService.getTodatDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
 
         this.filter(fromdate, todate);
     }
 
     setYesterday() {
-        var lastday = function (y, m) { return new Date(y, m, 0).getDate(); }
 
-        var preDate = new Date().getDate() - 1;
-        var preMonth = new Date().getMonth() + 1;
-        var preYear = new Date().getFullYear();
+        debugger;
 
-        //#region Testing
+        var dates = this.getDateService.getYesterDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
-        //preDate = 1 - 1;
-        //preMonth = 1;
-        //preYear = 2021;
-
-        //#endregion Testing
-
-        if (preDate === 0) {
-            preMonth = preMonth - 1
-            if (preMonth === 0) {
-                preYear = preYear - 1;
-                preMonth = 12;
-                preDate = lastday(preYear, preMonth);
-            }
-            else {
-                preDate = lastday(preYear, preMonth);
-            }
-        }
-
-        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+        this.setDatePicker(new Date(fromdate), new Date(todate));
 
         this.filter(fromdate, todate);
     }
 
     setThisWeek() {
-        //#region Get start date and end date of week.
 
-        var curr = new Date; // get current date
+        debugger;
 
-        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-        var firstday = new Date(curr.setDate(first));
+        var dates = this.getDateService.getThisWeekDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
-        var lastdayTemp = curr.getDate() - (curr.getDay() - 1) + 6;
-        var lastday = new Date(curr.setDate(lastdayTemp));
-
-        //#endregion Get start date and end date of week.
-
-        var weekStartYear = firstday.getFullYear();
-        var weekStartMonth = firstday.getMonth() + 1;
-        var weekStartDate = firstday.getDate();
-        var fromdate = weekStartYear + '-' + weekStartMonth + '-' + weekStartDate + ' ' + '00:00:00';
-
-        var weekEndYear = lastday.getFullYear();
-        var weekEndMonth = lastday.getMonth() + 1;
-        var weekEndDate = lastday.getDate();
-        var todate = weekEndYear + '-' + weekEndMonth + '-' + weekEndDate + ' ' + '23:59:59';
+        this.setDatePicker(new Date(fromdate), new Date(todate));
 
         this.filter(fromdate, todate);
     }
 
     setThisYear() {
-        var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1 + ' ' + '00:00:00';;
-        var todate = new Date().getFullYear() + '-' + 12 + '-' + 31 + ' ' + '23:59:59';
+
+        debugger;
+
+        var dates = this.getDateService.getThisYearDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
 
         this.filter(fromdate, todate);
     }
@@ -176,6 +173,9 @@ export class RefKeywordAnalyticsComponent implements OnInit {
     //#endregion
 
     filter(startingDate = null, endingDate = null) {
+
+        debugger;
+
         this.loadingIndicator = true;
         this.Rows = [];
         this.refRows = [];
@@ -187,8 +187,19 @@ export class RefKeywordAnalyticsComponent implements OnInit {
         if (startingDate !== null && endingDate !== null) {
             RefFilterModel.fromdate = startingDate;
             RefFilterModel.todate = endingDate;
-            (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = null;
-            (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
+
+            (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = RefFilterModel.fromdate;
+            (document.getElementById("txt_todatetime") as HTMLInputElement).value = RefFilterModel.todate;
+
+            //this.setDatePicker(new Date(RefFilterModel.fromdate), new Date(RefFilterModel.todate));
+        } else {
+            RefFilterModel.fromdate = this.getDateService.getTodatDate().fromdate;
+            RefFilterModel.todate = this.getDateService.getTodatDate().todate;
+
+            (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = RefFilterModel.fromdate;
+            (document.getElementById("txt_todatetime") as HTMLInputElement).value = RefFilterModel.todate;
+
+            //this.setDatePicker(new Date(RefFilterModel.fromdate), new Date(RefFilterModel.todate));
         }
 
         if (RefFilterModel.fromdate !== "" && RefFilterModel.todate !== "") {
