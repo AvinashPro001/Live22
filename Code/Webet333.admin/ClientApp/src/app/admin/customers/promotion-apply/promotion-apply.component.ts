@@ -4,6 +4,7 @@ import { ToasterService, } from 'angular2-toaster';
 import { account, playtech, Game, Joker, M8Game, AGGame, customer, ErrorMessages } from '../../../../environments/environment';
 import { debug } from 'util';
 import { Router } from '@angular/router';
+import { CommonService } from '../../../common/common.service';
 
 @Component({
     selector: 'app-promotion-apply',
@@ -11,14 +12,17 @@ import { Router } from '@angular/router';
     styleUrls: ['./promotion-apply.component.scss']
 })
 export class PromotionApplyComponent implements OnInit {
-
     rows = [];
     columns = [];
     loadingIndicator: boolean = true;
+    datePickerfromdate: string;
+    datePickertodate: string;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private router: Router
+        private router: Router,
+        private getDateService: CommonService
     ) { }
 
     listType: any = [
@@ -30,7 +34,8 @@ export class PromotionApplyComponent implements OnInit {
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.setColoum();
-            this.setPageData();
+            //this.setPageData();
+            this.setToday();
         }
     }
 
@@ -51,8 +56,7 @@ export class PromotionApplyComponent implements OnInit {
 
     setPageData() {
         this.loadingIndicator = true;
-        let data = {
-        }
+        let data = {}
         this.adminService.add<any>(customer.promotionApplySelect, data).subscribe(res => {
             this.rows = [];
             let i = 0;
@@ -71,31 +75,25 @@ export class PromotionApplyComponent implements OnInit {
                 });
             });
             this.rows = [...this.rows];
-
         });
         this.loadingIndicator = false;
     }
 
-
-    filter() {
+    filter(startingDate = null, endingDate = null) {
         this.loadingIndicator = true;
         var status = (document.getElementById("status") as HTMLInputElement).value;
         var statusModel, fromdate, todate;
-        if (status === "Active")
-            statusModel = 1;
-        if (status === "Expire")
-            statusModel = 2;
-        if (status === "Completed")
-            statusModel = 3;
-
-        if (status === "")
-            statusModel = 0;
+        if (status === "Active") statusModel = 1;
+        if (status === "Expire") statusModel = 2;
+        if (status === "Completed") statusModel = 3;
+        if (status === "") statusModel = 0;
 
         let data = {
             status: statusModel,
-            fromdate: (document.getElementById("txt_fromdatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_fromdatetime") as HTMLInputElement).value,
-            todate: (document.getElementById("txt_todatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_todatetime") as HTMLInputElement).value,
+            fromdate: startingDate === null ? (document.getElementById("txt_fromdatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_fromdatetime") as HTMLInputElement).value : startingDate,
+            todate: endingDate === null ? (document.getElementById("txt_todatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_todatetime") as HTMLInputElement).value : endingDate,
         }
+
         this.adminService.add<any>(customer.promotionApplySelect, data).subscribe(res => {
             this.rows = [];
             let i = 0;
@@ -114,9 +112,12 @@ export class PromotionApplyComponent implements OnInit {
                 });
             });
             this.rows = [...this.rows];
-
+            this.loadingIndicator = false;
+        }, error => {
+            this.loadingIndicator = false;
+            this.toasterService.pop('error', 'Error', error.error.message);
         });
-        this.loadingIndicator = false;
+
     }
 
     replaceDateTime(date) {
@@ -198,4 +199,33 @@ export class PromotionApplyComponent implements OnInit {
     }
 
     //#endregion Check Permission
+
+    //#region Filter Data
+
+    setDatePicker(fromdate = null, todate = null) {
+        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+    }
+
+    setToday() {
+        var dates = this.getDateService.getTodatDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
+
+        this.filter(fromdate, todate);
+    }
+
+    setYesterday() {
+        var dates = this.getDateService.getYesterDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
+
+        this.filter(fromdate, todate);
+    }
+
+    //#endregion
 }

@@ -12,8 +12,7 @@
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">From Date</h4>
                     <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd"
-                               name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime" [(ngModel)]="datePickerfromdate">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" type="button"></button>
                         </div>
@@ -22,8 +21,7 @@
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">To Date</h4>
                     <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd"
-                               name="dp" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp1" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime" [(ngModel)]="datePickertodate">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" type="button"></button>
                         </div>
@@ -50,12 +48,10 @@
                     <button class="mb-1 btn btn-success" (click)='setThisYear()' type="button">This Year</button>
                 </div>
             </div>
-            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="50"
-                           [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
             </ngx-datatable>
 
-            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="Totalrows" [columns]="Totalcolumns" [columnMode]="'force'" [footerHeight]="50"
-                           [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="Totalrows" [columns]="Totalcolumns" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
             </ngx-datatable>
             <br />
             <br />

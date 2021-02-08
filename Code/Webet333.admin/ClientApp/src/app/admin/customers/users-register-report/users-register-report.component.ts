@@ -3,6 +3,7 @@ import { ToasterService } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
 import { customer, ErrorMessages } from '../../../../environments/environment';
 import { Router } from '@angular/router';
+import { CommonService } from '../../../common/common.service';
 
 @Component({
     selector: 'app-users-register-report',
@@ -15,16 +16,20 @@ export class UsersRegisterReportComponent implements OnInit {
     columns = [];
     loadingIndicator: boolean;
     Data: any;
+    datePickerfromdate: string;
+    datePickertodate: string;
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private router: Router
+        private router: Router,
+        private getDateService: CommonService
     ) { }
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.setColumn();
-            this.setPageData();
+            //this.setPageData();
+            this.setToday();
         }
     }
 
@@ -75,79 +80,47 @@ export class UsersRegisterReportComponent implements OnInit {
 
     //#region Filter Data
 
-    setToday() {
-        var preDate = new Date().getDate();
-        var preMonth = new Date().getMonth() + 1;
-        var preYear = new Date().getFullYear();
+    setDatePicker(fromdate = null, todate = null) {
+        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+    }
 
-        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+    setToday() {
+        var dates = this.getDateService.getTodatDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
 
         this.FilterData(fromdate, todate);
     }
 
     setYesterday() {
-        var lastday = function (y, m) { return new Date(y, m, 0).getDate(); }
+        var dates = this.getDateService.getYesterDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
-        var preDate = new Date().getDate() - 1;
-        var preMonth = new Date().getMonth() + 1;
-        var preYear = new Date().getFullYear();
-
-        //#region Testing
-
-        //preDate = 1 - 1;
-        //preMonth = 1;
-        //preYear = 2021;
-
-        //#endregion Testing
-
-        if (preDate === 0) {
-            preMonth = preMonth - 1
-            if (preMonth === 0) {
-                preYear = preYear - 1;
-                preMonth = 12;
-                preDate = lastday(preYear, preMonth);
-            }
-            else {
-                preDate = lastday(preYear, preMonth);
-            }
-        }
-
-        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+        this.setDatePicker(new Date(fromdate), new Date(todate));
 
         this.FilterData(fromdate, todate);
     }
 
     setThisWeek() {
-        //#region Get start date and end date of week.
+        var dates = this.getDateService.getThisWeekDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
-        var curr = new Date; // get current date
-
-        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-        var firstday = new Date(curr.setDate(first));
-
-        var lastdayTemp = curr.getDate() - (curr.getDay() - 1) + 6;
-        var lastday = new Date(curr.setDate(lastdayTemp));
-
-        //#endregion Get start date and end date of week.
-
-        var weekStartYear = firstday.getFullYear();
-        var weekStartMonth = firstday.getMonth() + 1;
-        var weekStartDate = firstday.getDate();
-        var fromdate = weekStartYear + '-' + weekStartMonth + '-' + weekStartDate + ' ' + '00:00:00';
-
-        var weekEndYear = lastday.getFullYear();
-        var weekEndMonth = lastday.getMonth() + 1;
-        var weekEndDate = lastday.getDate();
-        var todate = weekEndYear + '-' + weekEndMonth + '-' + weekEndDate + ' ' + '23:59:59';
+        this.setDatePicker(new Date(fromdate), new Date(todate));
 
         this.FilterData(fromdate, todate);
     }
 
     setThisYear() {
-        var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1 + ' ' + '00:00:00';;
-        var todate = new Date().getFullYear() + '-' + 12 + '-' + 31 + ' ' + '23:59:59';
+        var dates = this.getDateService.getThisYearDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
 
         this.FilterData(fromdate, todate);
     }
@@ -169,17 +142,23 @@ export class UsersRegisterReportComponent implements OnInit {
         if (unverified && unverified) otpCheck = null;
 
         let data = {
-            fromdate: (document.getElementById("txt_fromdatetime") as HTMLInputElement).value == "" ? null : (document.getElementById("txt_fromdatetime") as HTMLInputElement).value,
-            todate: (document.getElementById("txt_todatetime") as HTMLInputElement).value == "" ? null : (document.getElementById("txt_todatetime") as HTMLInputElement).value,
+            fromdate: startingDate === null ? (document.getElementById("txt_fromdatetime") as HTMLInputElement).value : startingDate,
+            todate: endingDate === null ? (document.getElementById("txt_todatetime") as HTMLInputElement).value : endingDate,
             otpVerified: otpCheck
         }
 
-        if (startingDate !== null && endingDate !== null) {
-            data.fromdate = startingDate;
-            data.todate = endingDate;
-            (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = null;
-            (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
-        }
+        //let data = {
+        //    fromdate: (document.getElementById("txt_fromdatetime") as HTMLInputElement).value == "" ? null : (document.getElementById("txt_fromdatetime") as HTMLInputElement).value,
+        //    todate: (document.getElementById("txt_todatetime") as HTMLInputElement).value == "" ? null : (document.getElementById("txt_todatetime") as HTMLInputElement).value,
+        //    otpVerified: otpCheck
+        //}
+
+        //if (startingDate !== null && endingDate !== null) {
+        //    data.fromdate = startingDate;
+        //    data.todate = endingDate;
+        //    (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = null;
+        //    (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
+        //}
 
         this.adminService.add<any>(customer.userRegisterReport, data).subscribe(res => {
             this.Data = res.data;

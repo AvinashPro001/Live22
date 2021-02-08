@@ -12,8 +12,7 @@
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">From Date</h4>
                     <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd"
-                               name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime" [(ngModel)]="datePickerfromdate">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" type="button"></button>
                         </div>
@@ -22,10 +21,9 @@
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">To Date</h4>
                     <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd"
-                               name="dp" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp1" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime" [(ngModel)]="datePickertodate">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" type="button"></button>
+                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" type="button" [(ngModel)]="datePickertodate"></button>
                         </div>
                     </div>
                 </div>

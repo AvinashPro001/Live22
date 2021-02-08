@@ -34,8 +34,7 @@
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">From Date</h4>
                     <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd"
-                               name="dp" [(ngModel)]="model2" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="datePickerfromdate" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" (change)='searchHandlerByDate()' type="button"></button>
                         </div>
@@ -45,15 +44,23 @@
                     <h4 class="text-muted text-thin">To Date</h4>
                     <div class="input-group">
                         <input class="form-control" placeholder="yyyy-mm-dd"
-                               name="dp" [(ngModel)]="model1" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                               name="dp1" [(ngModel)]="datePickertodate" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" (change)='searchHandlerByDate()' type="button"></button>
                         </div>
                     </div>
                 </div>
-                <div class="p-2 col-md-2">
+                <div class="p-2">
                     <h4 class="text-muted text-thin">&nbsp;</h4>
                     <button class="mb-1 btn btn-success" (click)='searchHandlerByDate()' type="button">Filter</button>
+                </div>
+                <div class="p-2" id="todayFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setToday()' type="button">Today</button>
+                </div>
+                <div class="p-2" id="yesterdayFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setYesterday()' type="button">Yesterday</button>
                 </div>
                 <div class="p-2 col-md-2" style="position:absolute;right:0px;margin-top:35px">
                     <button id="acceptBtn" data-id="withdrawData[rowIndex].id" class="mb-1 btn btn-success" type="button" (click)=' navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Add Withdraw</button>
@@ -61,7 +68,7 @@
             </div>
 
             <ngx-datatable #table class='bootstrap no-detail-row ' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
-                           [rowHeight]="'auto'" [limit]="7"  [sortType]="'multi'" [headerHeight]="50">
+                           [rowHeight]="'auto'" [limit]="7" [sortType]="'multi'" [headerHeight]="50">
                 <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
                              ngx-datatable-row-detail-template>
                     <label>
@@ -77,8 +84,6 @@
                     </label>
                 </ng-template>
 
-
-
                 <ng-template #action let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
                              ngx-datatable-row-detail-template>
                     <label>
@@ -89,17 +94,11 @@
                 <ng-template #tracking let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
                              ngx-datatable-row-detail-template>
                     <img [src]="withdrawData[rowIndex].TrackingLoginRegister?warningImagePath:successImagePath" class="tracking-img" (click)="DuplicateDetails(tracking,withdrawData[rowIndex].userName,withdrawData[rowIndex].TrackingLoginRegister)" />
-
                 </ng-template>
-
             </ngx-datatable>
-
-
         </div>
     </div>
 </div>
-
-
 
 <!--Remarks modal code starts-->
 <ng-template #remark let-modal>
@@ -137,7 +136,7 @@
     <div class="modal-body">
         <div class="container">
             <div class="col-12">
-                <ol >
+                <ol>
                     <li>Compare bank name similar % only, we do not compare bank account number.</li>
                     <li>ONLY compare was succeeded withdraw bank account name only</li>
                     <li>Compare user's bank account name with/without apply promotion.</li>
@@ -149,7 +148,6 @@
             <div class="col-12">
                 <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rowsSimilar" [columns]="columnsSimilar" [columnMode]="'force'" [footerHeight]="60"
                                [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator" [sortType]="'multi'" [headerHeight]="50">
-
                 </ngx-datatable>
             </div>
         </div>
@@ -171,7 +169,6 @@
             <div class="col-12">
                 <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rowsTacking" [columns]="columnsTacking" [columnMode]="'force'" [footerHeight]="60"
                                [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator" [sortType]="'multi'" [headerHeight]="50">
-
                 </ngx-datatable>
             </div>
         </div>

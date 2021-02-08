@@ -391,5 +391,6 @@ export const VIPSetting = {
 }
 
 export const ErrorMessages = {
-    unAuthorized: "You are not authorized to access this page!!"
+    unAuthorized: "You are not authorized to access this page!!",
+    PleaseProvideFromDateToDate: "Please Provide From Date and To Date !!!"
 }

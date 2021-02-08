@@ -16,8 +16,7 @@
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">From Date</h4>
                     <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd"
-                               name="dp" [(ngModel)]="model2" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="datePickerfromdate" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="d_1.toggle()" (change)='searchHandlerByDate()' type="button"></button>
                         </div>
@@ -26,23 +25,29 @@
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">To Date</h4>
                     <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd"
-                               name="dp" [(ngModel)]="model1" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp1" [(ngModel)]="datePickertodate" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="d_2.toggle()" (change)='searchHandlerByDate()' type="button"></button>
                         </div>
                     </div>
                 </div>
-                <div class="p-2 col-md-2">
+                <div class="p-2">
                     <h4 class="text-muted text-thin">&nbsp;</h4>
                     <button class="mb-1 btn btn-success" (click)='searchHandlerByDate()' type="button">Filter</button>
+                </div>
+                <div class="p-2" id="todayFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setToday()' type="button">Today</button>
+                </div>
+                <div class="p-2" id="yesterdayFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setYesterday()' type="button">Yesterday</button>
                 </div>
                 <div class="p-2 col-md-2" style="position:absolute;right:0px;margin-top:35px">
                     <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Add Adjustment</button>
                 </div>
             </div>
-            <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows"  [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator">
-             
+            <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator">
             </ngx-datatable>
         </div>
     </div>

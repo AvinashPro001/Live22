@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, Injectable } from '@angular/core';
 import { ToasterService } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
 import { customer, ErrorMessages } from '../../../../environments/environment';
 import { Router } from '@angular/router';
+import { CommonService } from '../../../common/common.service';
+import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-users-winlose-report',
@@ -21,16 +23,22 @@ export class UsersWinloseReportComponent implements OnInit {
     totalWithdraw: any;
     totalWinlose: any;
 
+    datePickerfromdate: string;
+    datePickertodate: string;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private router: Router
+        private router: Router,
+        private getDateService: CommonService,
+        private dateAdapter: NgbDateAdapter<string>,
     ) { }
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.setColumn();
-            this.setPageData();
+            //this.setPageData();
+            this.setToday();
         }
     }
 
@@ -85,79 +93,39 @@ export class UsersWinloseReportComponent implements OnInit {
 
     //#region Filter Data
 
-    setToday() {
-        var preDate = new Date().getDate();
-        var preMonth = new Date().getMonth() + 1;
-        var preYear = new Date().getFullYear();
+    setDatePicker(fromdate = null, todate = null) {
+        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+    }
 
-        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+    setToday() {
+        var dates = this.getDateService.getTodatDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
         this.filterdata(fromdate, todate);
     }
 
     setYesterday() {
-        var lastday = function (y, m) { return new Date(y, m, 0).getDate(); }
-
-        var preDate = new Date().getDate() - 1;
-        var preMonth = new Date().getMonth() + 1;
-        var preYear = new Date().getFullYear();
-
-        //#region Testing
-
-        //preDate = 1 - 1;
-        //preMonth = 1;
-        //preYear = 2021;
-
-        //#endregion Testing
-
-        if (preDate === 0) {
-            preMonth = preMonth - 1
-            if (preMonth === 0) {
-                preYear = preYear - 1;
-                preMonth = 12;
-                preDate = lastday(preYear, preMonth);
-            }
-            else {
-                preDate = lastday(preYear, preMonth);
-            }
-        }
-
-        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+        var dates = this.getDateService.getYesterDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
         this.filterdata(fromdate, todate);
     }
 
     setThisWeek() {
-        //#region Get start date and end date of week.
-
-        var curr = new Date; // get current date
-
-        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-        var firstday = new Date(curr.setDate(first));
-
-        var lastdayTemp = curr.getDate() - (curr.getDay() - 1) + 6;
-        var lastday = new Date(curr.setDate(lastdayTemp));
-
-        //#endregion Get start date and end date of week.
-
-        var weekStartYear = firstday.getFullYear();
-        var weekStartMonth = firstday.getMonth() + 1;
-        var weekStartDate = firstday.getDate();
-        var fromdate = weekStartYear + '-' + weekStartMonth + '-' + weekStartDate + ' ' + '00:00:00';
-
-        var weekEndYear = lastday.getFullYear();
-        var weekEndMonth = lastday.getMonth() + 1;
-        var weekEndDate = lastday.getDate();
-        var todate = weekEndYear + '-' + weekEndMonth + '-' + weekEndDate + ' ' + '23:59:59';
+        var dates = this.getDateService.getThisWeekDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
         this.filterdata(fromdate, todate);
     }
 
     setThisYear() {
-        var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1 + ' ' + '00:00:00';;
-        var todate = new Date().getFullYear() + '-' + 12 + '-' + 31 + ' ' + '23:59:59';
+        var dates = this.getDateService.getThisYearDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
         this.filterdata(fromdate, todate);
     }
@@ -165,49 +133,63 @@ export class UsersWinloseReportComponent implements OnInit {
     //#endregion
 
     filterdata(startingDate = null, endingDate = null) {
-        this.rows = [];
         this.loadingIndicator = true;
-        let fromdate, todate
-        fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value
-        todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value
+        this.rows = []; endingDate
 
         let data = {
-            toDate: todate,
-            fromDate: fromdate
-        }
+            fromDate: startingDate === null ? (document.getElementById("txt_fromdatetime") as HTMLInputElement).value : startingDate,
+            toDate: endingDate === null ? (document.getElementById("txt_todatetime") as HTMLInputElement).value : endingDate
+        };
 
-        if (startingDate !== null && endingDate !== null) {
-            data.fromDate = startingDate;
-            data.toDate = endingDate;
-            (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = null;
-            (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
-        }
+        this.setDatePicker(new Date(data.fromDate), new Date(data.toDate));
 
-        this.adminService.add<any>(customer.customerWinloseReport, data).subscribe(res => {
-            this.rows = [];
-            let i = 0;
-            this.totalDeposit = res.data.totalDeposit;
-            this.totalBonus = res.data.totalBonus;
-            this.totalWithdraw = res.data.totalWithdraw;
-            this.totalWinlose = res.data.totalWinlose;
-            res.data.users.forEach(el => {
-                this.rows.push({
-                    No: ++i,
-                    Username: el.username,
-                    PromotionName: el.promotionTitle == null ? "Not Available" : el.promotionTitle,
-                    Deposit: el.totalDeposit,
-                    Withdraw: el.totalWithdraw,
-                    Bonus: el.totalBonus,
-                    Winlose: el.winlose,
-                    DateTime: this.ReplaceTime(el.created)
-                });
-            })
-            this.rows = [...this.rows];
+        //let fromdate, todate
+        //fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value
+        //todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value
+
+        //let data = {
+        //    toDate: todate,
+        //    fromDate: fromdate
+        //}
+
+        //if (startingDate !== null && endingDate !== null) {
+        //    data.fromDate = startingDate;
+        //    data.toDate = endingDate;
+        //    (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = null;
+        //    (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
+        //}
+
+        if (data.fromDate === null || data.fromDate === '' || data.toDate === null || data.toDate === '') {
             this.loadingIndicator = false;
-        }, error => {
-            this.loadingIndicator = false;
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
+            this.toasterService.pop('error', 'Error', ErrorMessages.PleaseProvideFromDateToDate);
+        }
+        else {
+            this.adminService.add<any>(customer.customerWinloseReport, data).subscribe(res => {
+                this.rows = [];
+                let i = 0;
+                this.totalDeposit = res.data.totalDeposit;
+                this.totalBonus = res.data.totalBonus;
+                this.totalWithdraw = res.data.totalWithdraw;
+                this.totalWinlose = res.data.totalWinlose;
+                res.data.users.forEach(el => {
+                    this.rows.push({
+                        No: ++i,
+                        Username: el.username,
+                        PromotionName: el.promotionTitle == null ? "Not Available" : el.promotionTitle,
+                        Deposit: el.totalDeposit,
+                        Withdraw: el.totalWithdraw,
+                        Bonus: el.totalBonus,
+                        Winlose: el.winlose,
+                        DateTime: this.ReplaceTime(el.created)
+                    });
+                })
+                this.rows = [...this.rows];
+                this.loadingIndicator = false;
+            }, error => {
+                this.loadingIndicator = false;
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
+        }
     }
 
     setLimit() {

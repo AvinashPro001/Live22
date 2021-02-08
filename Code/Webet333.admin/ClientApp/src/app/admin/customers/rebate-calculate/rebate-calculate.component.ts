@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { ToasterService } from 'angular2-toaster';
 import { AdminService } from '../../admin.service';
 import { customer, ErrorMessages } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
 
 @Component({
     selector: 'app-rebate-calculate',
@@ -12,7 +13,6 @@ import { customer, ErrorMessages } from '../../../../environments/environment';
 })
 
 export class RebateCalculateComponent implements OnInit {
-
     rows = [];
     columns = [];
     listType: any;
@@ -33,12 +33,14 @@ export class RebateCalculateComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
+        private getDateService: CommonService
     ) { }
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.setGameCategoryList();
             this.setColumn();
+            this.setDateOtherPicker(new Date(), new Date());
         }
     }
 
@@ -62,10 +64,59 @@ export class RebateCalculateComponent implements OnInit {
         })
     }
 
-    Calculate() {
+    //#region Filter Data
+
+    setDateOtherPicker(fromdate = null, todate = null) {
+        //Date formate :: Month / date / yesr, Hours: Minitus AM
+
+        var selectDate, selectMonth, selectYear, selectFromDate, selectToDate, checkExists;
+
+        selectDate = fromdate.getDate();
+        selectMonth = fromdate.getMonth() + 1;
+        selectYear = fromdate.getFullYear();
+        selectFromDate = selectMonth + '/' + selectDate + '/' + selectYear + ', 12:00 AM';
+
+        selectDate = todate.getDate();
+        selectMonth = todate.getMonth() + 1;
+        selectYear = todate.getFullYear();
+        selectToDate = selectMonth + '/' + selectDate + '/' + selectYear + ', 11:59 PM';
+
+        checkExists = document.getElementById("txt_fromdatetime");
+        if (checkExists != null) (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = selectFromDate;
+
+        checkExists = document.getElementById("txt_todatetime");
+        if (checkExists != null) (document.getElementById("txt_todatetime") as HTMLInputElement).value = selectToDate;
+
+        checkExists = document.getElementById("txt_startdatetime");
+        if (checkExists != null) (document.getElementById("txt_startdatetime") as HTMLInputElement).value = selectFromDate;
+    }
+
+    setToday() {
+        var dates = this.getDateService.getTodatDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDateOtherPicker(new Date(fromdate), new Date(todate));
+
+        this.Calculate(fromdate, todate);
+    }
+
+    setYesterday() {
+        var dates = this.getDateService.getYesterDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDateOtherPicker(new Date(fromdate), new Date(todate));
+
+        this.Calculate(fromdate, todate);
+    }
+
+    //#endregion
+
+    Calculate(startingDate = null, endingDate = null) {
         this.disable = true;
-        this.fromDate = this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
-        this.toDate = this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
+        this.fromDate = startingDate === null ? this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss") : startingDate;
+        this.toDate = endingDate === null ? this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss") : endingDate;
         this.gameType = (document.getElementById("gameCategory") as HTMLInputElement).value;
         this.RebatePercentage = Number((document.getElementById("txt_rebate") as HTMLInputElement).value);
         let model = {
@@ -78,7 +129,9 @@ export class RebateCalculateComponent implements OnInit {
             return this.toasterService.pop('error', 'Error', "Please Insert Rebate value Greater Then 0 !!!");
         }
 
-        if (model.fromdate === "" || model.todate === "" || model.rebate === 0) {
+        if (model.fromdate === null || model.fromdate === "" || model.fromdate === undefined ||
+            model.todate === null || model.todate === "" || model.todate === undefined ||
+            model.rebate === 0) {
             return this.toasterService.pop('error', 'Error', "Please Fill All Mandatory Field !!!");
         }
 

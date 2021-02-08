@@ -11,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HubConnectionBuilder } from '@aspnet/signalr';
 import { Md5 } from 'ts-md5/dist/md5';
 import { Title } from '@angular/platform-browser';
+import { CommonService } from '../../../common/common.service';
 
 @Component({
     selector: 'app-admin/deposit/retrieve-list',
@@ -18,7 +19,6 @@ import { Title } from '@angular/platform-browser';
     styleUrls: ['./deposit-list.component.scss']
 })
 export class DepositListComponent implements OnInit {
-
     //#region declaration
     slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };
     @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -52,6 +52,8 @@ export class DepositListComponent implements OnInit {
     RowId: any;
     model1: any;
     model2: any;
+    datePickerfromdate: string;
+    datePickertodate: string;
     filteredData = [];
     loadingIndicator: boolean = true;
     selectedList: any;
@@ -105,12 +107,10 @@ export class DepositListComponent implements OnInit {
         private confirmationDialogService: ConfirmationDialogService,
         private modalService: NgbModal,
         private datePipe: DatePipe,
-        private titleService: Title
+        private titleService: Title,
+        private getDateService: CommonService
     ) { }
     //#endregion
-
-
-
 
     //#region Init
     async ngOnInit() {
@@ -137,7 +137,8 @@ export class DepositListComponent implements OnInit {
             }
             this.depositStatus == 'Pending' ? this.selectedList = this.listType[0] : this.depositStatus == 'Approved' ? this.selectedList = this.listType[1] : this.depositStatus == 'Rejected' ? this.selectedList = this.listType[2] : this.selectedList = this.listType[0];
             this.setColumn(this.selectedList.verified);
-            this.setPageData(this.selectedList.verified, "", null, null);
+            //this.setPageData(this.selectedList.verified, "", null, null);
+            this.setToday();
             this.curDate = new Date();
             setTimeout(() => { this.loadingIndicator = false; }, 1500);
         }
@@ -205,10 +206,7 @@ export class DepositListComponent implements OnInit {
         }
     }
 
-
-
     AutoRefershUpdate() {
-
         this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
         let data = {
             name: "DepositAutoRefersh",
@@ -250,7 +248,6 @@ export class DepositListComponent implements OnInit {
         this.setColumn(this.selectedList.verified);
         this.setPageData(this.selectedList.verified, "", null, null);
     }
-
 
     ImageOpenNewTab(ImageUrl) {
         window.open(ImageUrl, 'Image', 'width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
@@ -367,14 +364,10 @@ export class DepositListComponent implements OnInit {
             });
             this.rows = [...this.rows];
             //  this.loadingIndicator = false;
-
-
-
         }, error => {
             // this.loadingIndicator = false;
             this.toasterService.pop('error', 'Error', error.error.message);
         });
-
     }
 
     //#endregion
@@ -480,15 +473,45 @@ export class DepositListComponent implements OnInit {
     }
     //#endregion
 
+    //#region Filter Data
+
+    setDatePicker(fromdate = null, todate = null) {
+        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+    }
+
+    setToday() {
+        var dates = this.getDateService.getTodatDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
+
+        this.searchHandlerByDate(fromdate, todate);
+    }
+
+    setYesterday() {
+        var dates = this.getDateService.getYesterDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
+
+        this.searchHandlerByDate(fromdate, todate);
+    }
+
+    //#endregion
+
     //#region Search
+
     searchHandler(event) {
         let data;
         if (event.target.value) {
             data = {
                 SearchParam: event.target.value,
             }
-            this.searchString = event.target.value,
-                this.setPageData(this.selectedList.verified, data.SearchParam, null, null)
+            this.searchString = event.target.value;
+            this.setPageData(this.selectedList.verified, data.SearchParam, null, null);
         } else {
             data = {
                 SearchParam: ""
@@ -497,23 +520,19 @@ export class DepositListComponent implements OnInit {
         }
     }
 
-    searchHandlerByDate() {
-        let fromdate, todate
-        fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value
-        todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value
-        if (todate === "")
-            todate = fromdate;
-        if (fromdate === "")
-            fromdate = todate;
-        if (fromdate === "" && todate === "")
-            this.toasterService.pop('error', 'Error', "Please select Date.");
-        else if ((fromdate !== undefined && todate !== null) || (todate !== null && fromdate !== null)) {
-            this.setPageData(this.selectedList.verified, "", fromdate, todate);
-        }
-        else {
-            this.setPageData(this.selectedList.verified, "", null, null)
-        }
+    searchHandlerByDate(startingDate = null, endingDate = null) {
+        let fromdate, todate;
+
+        fromdate = startingDate === null ? (document.getElementById("txt_fromdatetime") as HTMLInputElement).value : startingDate;
+        todate = endingDate === null ? (document.getElementById("txt_todatetime") as HTMLInputElement).value : endingDate;
+
+        if (todate === "") todate = fromdate;
+        if (fromdate === "") fromdate = todate;
+        if (fromdate === "" && todate === "") this.toasterService.pop('error', 'Error', "Please select Date.");
+        else if ((fromdate !== undefined && todate !== null) || (todate !== null && fromdate !== null)) this.setPageData(this.selectedList.verified, "", fromdate, todate);
+        else this.setPageData(this.selectedList.verified, "", null, null)
     }
+
     //#endregion
 
     //#region OpenWindow
@@ -574,10 +593,7 @@ export class DepositListComponent implements OnInit {
         //});
     }
 
-
-
     async accept() {
-
         //if remark type is accept
         if (this.remarktype == 'accept') {
             this.remarkdata = {
@@ -601,7 +617,6 @@ export class DepositListComponent implements OnInit {
                             this.ApprovalTime(resUser.data.id, resUser.data.username, "Deposit", this.remarkid);
                         });
                     }; break;
-
                 }
             });
         }
@@ -684,7 +699,6 @@ export class DepositListComponent implements OnInit {
             this.urls.push({ base64images: e.target.result });
         }
         reader.readAsDataURL(file);
-
     }
 
     removefile(files) {
@@ -733,7 +747,6 @@ export class DepositListComponent implements OnInit {
                 this.rowsTacking = [];
                 this.toasterService.pop('error', 'Error', error.error.message)
                 this.loadingIndicator = false;
-
             });
             this.modalService.open(trancking, { windowClass: 'dark-modal' });
         }

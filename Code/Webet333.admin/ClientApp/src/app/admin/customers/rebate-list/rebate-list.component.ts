@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterService } from 'angular2-toaster';
 import { customer, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
+import { CommonService } from '../../../common/common.service';
 
 @Component({
     selector: 'app-rebate-list',
@@ -19,19 +20,25 @@ export class RebateListComponent implements OnInit {
     rebateData: any;
     disable: boolean = false;
     loadingIndicator: boolean;
+
+    datePickerfromdate: string;
+    datePickertodate: string;
+
     @ViewChild('status') status: TemplateRef<any>;
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
         private modalService: NgbModal,
+        private getDateService: CommonService
     ) { }
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.setColumn();
             this.setGameCategoryList();
-            this.setPagedata();
+            //this.setPagedata();
+            this.setToday();
         }
     }
 
@@ -103,12 +110,41 @@ export class RebateListComponent implements OnInit {
         return date.replace("T", " ");
     }
 
-    Filter() {
+    //#region Filter Data
+
+    setDatePicker(fromdate = null, todate = null) {
+        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+    }
+
+    setToday() {
+        var dates = this.getDateService.getTodatDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
+
+        this.Filter(fromdate, todate);
+    }
+
+    setYesterday() {
+        var dates = this.getDateService.getYesterDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
+
+        this.Filter(fromdate, todate);
+    }
+
+    //#endregion
+
+    Filter(startingDate = null, endingDate = null) {
         this.rows = [];
         this.loadingIndicator = true;
         let model = {
-            fromDate: (document.getElementById("txt_fromdatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_fromdatetime") as HTMLInputElement).value,
-            toDate: (document.getElementById("txt_todatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_todatetime") as HTMLInputElement).value,
+            fromDate: startingDate === null ? (document.getElementById("txt_fromdatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_fromdatetime") as HTMLInputElement).value : startingDate,
+            toDate: endingDate === null ? (document.getElementById("txt_todatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_todatetime") as HTMLInputElement).value : endingDate,
             gamename: (document.getElementById("gameCategory") as HTMLInputElement).value === "" ? null : (document.getElementById("gameCategory") as HTMLInputElement).value,
         }
 

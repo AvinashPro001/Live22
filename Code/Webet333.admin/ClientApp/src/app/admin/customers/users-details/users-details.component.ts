@@ -1039,8 +1039,9 @@ export class UsersDetailsComponent implements OnInit {
 
     setToday(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
-            var fromdate = this.getDateService.getTodatDate().fromdate;
-            var todate = this.getDateService.getTodatDate().todate;
+            var dates = this.getDateService.getTodatDate();
+            var fromdate = dates.fromdate;
+            var todate = dates.todate;
 
             this.setDatePicker(new Date(fromdate), new Date(todate));
             this.setDateOtherPicker(new Date(fromdate), new Date(todate));
@@ -1071,8 +1072,9 @@ export class UsersDetailsComponent implements OnInit {
 
     setYesterday(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
-            var fromdate = this.getDateService.getYesterDate().fromdate;
-            var todate = this.getDateService.getYesterDate().todate;
+            var dates = this.getDateService.getYesterDate();
+            var fromdate = dates.fromdate;
+            var todate = dates.todate;
 
             this.setDatePicker(new Date(fromdate), new Date(todate));
             this.setDateOtherPicker(new Date(fromdate), new Date(todate));
@@ -1103,8 +1105,9 @@ export class UsersDetailsComponent implements OnInit {
 
     setThisWeek(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
-            var fromdate = this.getDateService.getThisWeekDate().fromdate;
-            var todate = this.getDateService.getThisWeekDate().todate;
+            var dates = this.getDateService.getThisWeekDate();
+            var fromdate = dates.fromdate;
+            var todate = dates.todate;
 
             this.setDatePicker(new Date(fromdate), new Date(todate));
             this.setDateOtherPicker(new Date(fromdate), new Date(todate));
@@ -1135,8 +1138,9 @@ export class UsersDetailsComponent implements OnInit {
 
     setThisYear(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
-            var fromdate = this.getDateService.getThisYearDate().fromdate;
-            var todate = this.getDateService.getThisYearDate().todate;
+            var dates = this.getDateService.getThisYearDate();
+            var fromdate = dates.fromdate;
+            var todate = dates.todate;
 
             this.setDatePicker(new Date(fromdate), new Date(todate));
             this.setDateOtherPicker(new Date(fromdate), new Date(todate));

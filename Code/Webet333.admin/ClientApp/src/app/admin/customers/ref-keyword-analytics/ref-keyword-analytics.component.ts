@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterService } from 'angular2-toaster';
 import { account, ErrorMessages } from '../../../../environments/environment';
-import { AdminService } from '../../admin.service';
 import { CommonService } from '../../../common/common.service';
-import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-ref-keyword-analytics',
@@ -30,7 +30,7 @@ export class RefKeywordAnalyticsComponent implements OnInit {
         private toasterService: ToasterService,
         private router: Router,
         private dateAdapter: NgbDateAdapter<string>,
-        private getDateService: CommonService
+        private getDateService: CommonService        
     ) { }
 
     async ngOnInit() {
@@ -61,7 +61,8 @@ export class RefKeywordAnalyticsComponent implements OnInit {
     refersh() {
         this.refRows = [];
         this.Rows = [];
-        this.setPageData();
+        //this.setPageData();
+        this.filter();
     }
 
     setPageData() {
@@ -132,9 +133,6 @@ export class RefKeywordAnalyticsComponent implements OnInit {
     }
 
     setYesterday() {
-
-        debugger;
-
         var dates = this.getDateService.getYesterDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
@@ -145,9 +143,6 @@ export class RefKeywordAnalyticsComponent implements OnInit {
     }
 
     setThisWeek() {
-
-        debugger;
-
         var dates = this.getDateService.getThisWeekDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
@@ -158,9 +153,6 @@ export class RefKeywordAnalyticsComponent implements OnInit {
     }
 
     setThisYear() {
-
-        debugger;
-
         var dates = this.getDateService.getThisYearDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
@@ -173,34 +165,36 @@ export class RefKeywordAnalyticsComponent implements OnInit {
     //#endregion
 
     filter(startingDate = null, endingDate = null) {
-
-        debugger;
-
         this.loadingIndicator = true;
         this.Rows = [];
         this.refRows = [];
         let RefFilterModel = {
-            fromdate: ((document.getElementById("txt_fromdatetime") as HTMLInputElement).value),
-            todate: ((document.getElementById("txt_todatetime") as HTMLInputElement).value)
-        }
+            fromdate: startingDate === null ? ((document.getElementById("txt_fromdatetime") as HTMLInputElement).value) : startingDate,
+            todate: endingDate === null ? ((document.getElementById("txt_todatetime") as HTMLInputElement).value) : endingDate
+        };
 
-        if (startingDate !== null && endingDate !== null) {
-            RefFilterModel.fromdate = startingDate;
-            RefFilterModel.todate = endingDate;
+        //let RefFilterModel = {
+        //    fromdate: ((document.getElementById("txt_fromdatetime") as HTMLInputElement).value),
+        //    todate: ((document.getElementById("txt_todatetime") as HTMLInputElement).value)
+        //}
 
-            (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = RefFilterModel.fromdate;
-            (document.getElementById("txt_todatetime") as HTMLInputElement).value = RefFilterModel.todate;
+        //if (startingDate !== null && endingDate !== null) {
+        //    RefFilterModel.fromdate = startingDate;
+        //    RefFilterModel.todate = endingDate;
 
-            //this.setDatePicker(new Date(RefFilterModel.fromdate), new Date(RefFilterModel.todate));
-        } else {
-            RefFilterModel.fromdate = this.getDateService.getTodatDate().fromdate;
-            RefFilterModel.todate = this.getDateService.getTodatDate().todate;
+        //    (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = RefFilterModel.fromdate;
+        //    (document.getElementById("txt_todatetime") as HTMLInputElement).value = RefFilterModel.todate;
 
-            (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = RefFilterModel.fromdate;
-            (document.getElementById("txt_todatetime") as HTMLInputElement).value = RefFilterModel.todate;
+        //    //this.setDatePicker(new Date(RefFilterModel.fromdate), new Date(RefFilterModel.todate));
+        //} else {
+        //    RefFilterModel.fromdate = this.getDateService.getTodatDate().fromdate;
+        //    RefFilterModel.todate = this.getDateService.getTodatDate().todate;
 
-            //this.setDatePicker(new Date(RefFilterModel.fromdate), new Date(RefFilterModel.todate));
-        }
+        //    (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = RefFilterModel.fromdate;
+        //    (document.getElementById("txt_todatetime") as HTMLInputElement).value = RefFilterModel.todate;
+
+        //    //this.setDatePicker(new Date(RefFilterModel.fromdate), new Date(RefFilterModel.todate));
+        //}
 
         if (RefFilterModel.fromdate !== "" && RefFilterModel.todate !== "") {
             this.adminService.add<any>(account.analytics, RefFilterModel).subscribe(res => {

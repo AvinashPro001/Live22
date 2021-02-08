@@ -18,33 +18,29 @@
         <div class="card-body">
             <div class="row col-12">
 
-
                 <div class="p-2 col-md-2" id="fromDate">
                     <h4 class="text-muted text-thin">From Date</h4>
                     <div class="input-group">
-                        <input class="form-control" [owlDateTime]="dt2"  placeholder="Date Time" type="text" id="txt_fromdatetime">
+                        <input class="form-control" [owlDateTime]="dt2" placeholder="Date Time" type="text" id="txt_fromdatetime">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt2" type="button"></button>
                         </div>
-                        <owl-date-time  #dt2></owl-date-time>
+                        <owl-date-time #dt2></owl-date-time>
                     </div>
                 </div>
                 <div class="p-2 col-md-2" id="toDate">
                     <h4 class="text-muted text-thin">To Date</h4>
                     <div class="input-group">
-                        <input class="form-control" type="datetime" [owlDateTime]="dt1"  placeholder="Date Time" type="text" id="txt_todatetime">
+                        <input class="form-control" type="datetime" [owlDateTime]="dt1" placeholder="Date Time" type="text" id="txt_todatetime">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" [owlDateTimeTrigger]="dt1" type="button"></button>
                         </div>
                         <owl-date-time #dt1></owl-date-time>
                     </div>
                 </div>
-
-
-
-                <div class="p-2 col-md-2">
+                <div class="p-2">
                     <h4 class="text-muted text-thin">Rebate <span class="required"> * </span></h4>
-                    <input class="form-control" type="number" id="txt_rebate">
+                    <input class="form-control" type="number" id="txt_rebate" size="10">
                 </div>
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">Game Category <span class="required"> * </span></h4>
@@ -52,9 +48,17 @@
                         <option *ngFor="let c of listType" [ngValue]="c">{{c.Category}}</option>
                     </select>
                 </div>
-                <div class="p-2 col-md-2">
+                <div class="p-2">
                     <h4 class="text-muted text-thin">&nbsp;</h4>
-                    <button class="mb-1 btn btn-success" (click)='Calculate()' type="button" style="position:absolute;font-weight:bolder;font-size:large">Calculate</button>
+                    <button class="mb-1 btn btn-success" (click)='Calculate()' type="button" style="font-weight:bolder;font-size:large">Calculate</button>
+                </div>
+                <div class="p-2" id="todayFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setToday()' type="button" style="font-weight:bolder;font-size:large">Today</button>
+                </div>
+                <div class="p-2" id="yesterdayFilter">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='setYesterday()' type="button" style="font-weight:bolder;font-size:large">Yesterday</button>
                 </div>
                 <div class="p-2 col-md-2" style="position:absolute;right:0px;margin-top:35px">
                     <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='Rebate()' [disabled]="disable" data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Rebate</button>
@@ -62,7 +66,6 @@
             </div>
 
             <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator">
-
             </ngx-datatable>
             <div class="row col-12">
                 <div>
@@ -71,12 +74,8 @@
                     <label><b>Total Bet  Amount:     </b> {{TotolBetAmount}} </label>&nbsp;&nbsp;&nbsp;&nbsp;
                     <label><b>Total Rolling Amount:    </b>{{TotolRollingAmount}} </label>&nbsp;&nbsp;&nbsp;&nbsp;
                     <label><b>Total Win Lose Amount:     </b>{{TotolWinloseAmount}} </label>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-

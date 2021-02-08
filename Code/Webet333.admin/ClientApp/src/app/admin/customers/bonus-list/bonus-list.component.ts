@@ -6,6 +6,7 @@ import { AdminService } from '../../admin.service';
 import { customer, ErrorMessages } from '../../../../environments/environment';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
+import { CommonService } from '../../../common/common.service';
 
 @Component({
     selector: 'app-admin/bonus/retrive-list',
@@ -13,7 +14,6 @@ import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/c
     styleUrls: ['./bonus-list.component.scss']
 })
 export class BonusListComponent implements OnInit {
-
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
     @ViewChild('action') action: TemplateRef<any>;
@@ -37,6 +37,10 @@ export class BonusListComponent implements OnInit {
     res: any;
     model1: any;
     model2: any;
+
+    datePickerfromdate: string;
+    datePickertodate: string;
+
     totalBonus: any;
     data: any;
     final: any;
@@ -54,7 +58,8 @@ export class BonusListComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private confirmationDialogService: ConfirmationDialogService
+        private confirmationDialogService: ConfirmationDialogService,
+        private getDateService: CommonService
     ) { }
     //#endregion
 
@@ -62,7 +67,8 @@ export class BonusListComponent implements OnInit {
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.setColumn();
-            this.setPageData(null, null);
+            //this.setPageData(null, null);
+            this.setToday();
         }
     }
     //#endregion
@@ -91,6 +97,9 @@ export class BonusListComponent implements OnInit {
             fromDate: fromdate,
             toDate: todate
         }
+
+        
+
         this.adminService.add<any>(customer.bonusList, data).subscribe(res => {
             this.bonusData = res.data.bonus;
             this.totalBonus = res.data.total;
@@ -114,7 +123,6 @@ export class BonusListComponent implements OnInit {
         });
     }
     //#endregion
-
 
     //#region timeFormat
     ReplaceTime(Date) {
@@ -171,23 +179,51 @@ export class BonusListComponent implements OnInit {
     }
     //#endregion
 
-    searchHandlerByDate() {
-        let fromdate, todate
-        fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value
-        todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value
-        if (todate === "")
-            todate = fromdate;
-        if (fromdate === "")
-            fromdate = todate;
-        if (fromdate === "" && todate === "")
-            this.toasterService.pop('error', 'Error', "Please select Date.");
-        else if ((fromdate !== undefined && todate !== null) || (todate !== null && fromdate !== null)) {
-            this.setPageData(fromdate, todate);
-        }
-        else {
-            this.setPageData(null, null)
-        }
+    //#region Filter Data
+
+    setDatePicker(fromdate = null, todate = null) {
+        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
     }
+
+    setToday() {
+        var dates = this.getDateService.getTodatDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
+
+        this.searchHandlerByDate(fromdate, todate);
+    }
+
+    setYesterday() {
+        var dates = this.getDateService.getYesterDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
+
+        this.searchHandlerByDate(fromdate, todate);
+    }
+
+    //#endregion
+
+    //#region Search
+
+    searchHandlerByDate(startingDate = null, endingDate = null) {
+        let fromdate, todate
+
+        fromdate = startingDate === null ? (document.getElementById("txt_fromdatetime") as HTMLInputElement).value : startingDate;
+        todate = endingDate === null ? (document.getElementById("txt_todatetime") as HTMLInputElement).value : endingDate;
+
+        if (todate === "") todate = fromdate;
+        if (fromdate === "") fromdate = todate;
+        if (fromdate === "" && todate === "") this.toasterService.pop('error', 'Error', "Please select Date.");
+        else if ((fromdate !== undefined && todate !== null) || (todate !== null && fromdate !== null)) this.setPageData(fromdate, todate);
+        else this.setPageData(null, null)
+    }
+
+    //#endregion Search
 
     //#region Check Permission
 

@@ -5,7 +5,7 @@ import { customer, ErrorMessages } from '../../../../environments/environment';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { debug } from 'util';
 import { async } from 'rxjs/internal/scheduler/async';
-
+import { CommonService } from '../../../common/common.service';
 
 @Component({
     selector: 'app-adjustment-list',
@@ -16,6 +16,10 @@ export class AdjustmentListComponent implements OnInit {
     toaster: any;
     model1: any;
     model2: any;
+
+    datePickerfromdate: string;
+    datePickertodate: string;
+
     searchString: any;
     loadingIndicator: boolean;
     toasterConfig: any;
@@ -29,18 +33,19 @@ export class AdjustmentListComponent implements OnInit {
         (
             private router: Router,
             private toasterService: ToasterService,
-            private adminService: AdminService
+            private adminService: AdminService,
+            private getDateService: CommonService
         ) { }
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.setColumn();
-            this.setPageData("", null,null);
+            //this.setPageData("", null, null);
+            this.setToday();
         }
     }
 
     setColumn() {
-
         this.columns = [
             { prop: 'No', width: 55 },
             { prop: 'Created' },
@@ -49,16 +54,17 @@ export class AdjustmentListComponent implements OnInit {
             { prop: 'FromWallet' },
             { prop: 'WalletBalance' },
             { prop: 'Amount' },
-            { prop:'AdminRemarks'}
+            { prop: 'AdminRemarks' }
         ];
     }
 
-    searchHandlerByDate() {
-        let fromdate, todate
-        fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value;
-        todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value;
-        if (fromdate === "" && todate === "")
-            this.toasterService.pop('error', 'Error', "Please select Date.");
+    searchHandlerByDate(startingDate = null, endingDate = null) {
+        let fromdate, todate;
+
+        fromdate = startingDate === null ? (document.getElementById("txt_fromdatetime") as HTMLInputElement).value : startingDate;
+        todate = endingDate === null ? (document.getElementById("txt_todatetime") as HTMLInputElement).value : endingDate;
+
+        if (fromdate === "" && todate === "") this.toasterService.pop('error', 'Error', "Please select Date.");
         else if ((fromdate !== undefined && todate !== null && todate !== "") || (todate !== undefined && fromdate !== null && fromdate !== "")) {
             this.setPageData("", fromdate, todate);
         }
@@ -71,17 +77,43 @@ export class AdjustmentListComponent implements OnInit {
         if (await this.checkAddPermission()) this.router.navigate(['/admin/customers/adjustment-add']);
     }
 
+    //#region Filter Data
 
-
-    searchHandler(event) {
-        if (event.target.value) {
-            this.setPageData(event.target.value, null, null)
-        } else {
-            this.setPageData("", null, null)
-        }
+    setDatePicker(fromdate = null, todate = null) {
+        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
     }
 
-    setPageData(keyword, toDate, fromDate) {
+    setToday() {
+        var dates = this.getDateService.getTodatDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
+
+        this.searchHandlerByDate(fromdate, todate);
+    }
+
+    setYesterday() {
+        var dates = this.getDateService.getYesterDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
+
+        this.searchHandlerByDate(fromdate, todate);
+    }
+
+    //#endregion
+
+    //#region Search
+
+    searchHandler(event) {
+        if (event.target.value) this.setPageData(event.target.value, null, null);
+        else this.setPageData("", null, null);
+    }
+
+    setPageData(keyword, fromDate, toDate) {
         this.rows = [];
         this.loadingIndicator = true;
         let data = {
@@ -114,6 +146,8 @@ export class AdjustmentListComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
+
+    //#endregion Search
 
     //#region timeFormat
     replaceDate(date) {

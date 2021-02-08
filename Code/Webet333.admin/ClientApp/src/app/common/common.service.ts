@@ -3,12 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
+import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
 @Injectable()
+
 export class CommonService {
     authToken;
     options: HttpHeaders;
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(
+        private http: HttpClient,
+        private router: Router,
+        private dateAdapter: NgbDateAdapter<string>,
+    ) { }
 
     public add<T>(apiPath, data): Observable<T> {
         return this.http.post<T>(apiPath, data);
@@ -36,8 +43,6 @@ export class CommonService {
     }
 
     public getYesterDate() {
-        debugger;
-
         var lastday = function (y, m) { return new Date(y, m, 0).getDate(); }
 
         var preDate = new Date().getDate() - 1;
@@ -71,10 +76,6 @@ export class CommonService {
     }
 
     public getThisWeekDate() {
-
-        debugger;
-
-
         //#region Get start date and end date of week.
 
         var curr = new Date; // get current date
@@ -108,4 +109,45 @@ export class CommonService {
     }
 
     //#endregion    Get Dates
+
+    //#region set Date
+
+    setDatePickerFormate(fromdate) {
+        //let temp = { day: 3, month: 1, year: 2020 };
+
+        var preDate = fromdate.getDate();
+        var preMonth = fromdate.getMonth() + 1;
+        var preYear = fromdate.getFullYear();
+
+        let temp = { day: preDate, month: preMonth, year: preYear };
+
+        return this.dateAdapter.toModel(temp);
+    }
+
+    setDateOtherPicker(fromdate = null, todate = null) {
+        //Date formate :: Month / date / yesr, Hours: Minitus AM
+
+        var selectDate, selectMonth, selectYear, selectFromDate, selectToDate, checkExists;
+
+        selectDate = fromdate.getDate();
+        selectMonth = fromdate.getMonth() + 1;
+        selectYear = fromdate.getFullYear();
+        selectFromDate = selectMonth + '/' + selectDate + '/' + selectYear + ', 12:00 AM';
+
+        selectDate = todate.getDate();
+        selectMonth = todate.getMonth() + 1;
+        selectYear = todate.getFullYear();
+        selectToDate = selectMonth + '/' + selectDate + '/' + selectYear + ', 11:59 PM';
+
+        checkExists = document.getElementById("txt_fromdatetime");
+        if (checkExists != null) (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = selectFromDate;
+
+        checkExists = document.getElementById("txt_todatetime");
+        if (checkExists != null) (document.getElementById("txt_todatetime") as HTMLInputElement).value = selectToDate;
+
+        checkExists = document.getElementById("txt_startdatetime");
+        if (checkExists != null) (document.getElementById("txt_startdatetime") as HTMLInputElement).value = selectFromDate;
+    }
+
+    //#endregion set Date
 }

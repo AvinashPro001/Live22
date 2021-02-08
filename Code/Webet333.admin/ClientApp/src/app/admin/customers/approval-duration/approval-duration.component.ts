@@ -4,6 +4,8 @@ import { AdminService } from '../../admin.service';
 import { customer, ErrorMessages } from '../../../../environments/environment';
 import { error } from 'protractor';
 import { Router } from '@angular/router';
+import { CommonService } from '../../../common/common.service';
+import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-approval-duration',
@@ -21,16 +23,24 @@ export class ApprovalDurationComponent implements OnInit {
     ];
     data: any;
     loadingIndicator: boolean = false;
+
+    datePickerfromdate: string;
+    datePickertodate: string;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private router: Router
+        private router: Router,
+        private getDateService: CommonService,
+        private dateAdapter: NgbDateAdapter<string>,
+
     ) { }
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.setColoum();
-            this.setData();
+            //this.setData();
+            this.setToday();
         }
     }
 
@@ -48,79 +58,39 @@ export class ApprovalDurationComponent implements OnInit {
 
     //#region Filter Data
 
-    setToday() {
-        var preDate = new Date().getDate();
-        var preMonth = new Date().getMonth() + 1;
-        var preYear = new Date().getFullYear();
+    setDatePicker(fromdate = null, todate = null) {
+        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+    }
 
-        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+    setToday() {
+        var dates = this.getDateService.getTodatDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
         this.Search(fromdate, todate);
     }
 
     setYesterday() {
-        var lastday = function (y, m) { return new Date(y, m, 0).getDate(); }
-
-        var preDate = new Date().getDate() - 1;
-        var preMonth = new Date().getMonth() + 1;
-        var preYear = new Date().getFullYear();
-
-        //#region Testing
-
-        //preDate = 1 - 1;
-        //preMonth = 1;
-        //preYear = 2021;
-
-        //#endregion Testing
-
-        if (preDate === 0) {
-            preMonth = preMonth - 1
-            if (preMonth === 0) {
-                preYear = preYear - 1;
-                preMonth = 12;
-                preDate = lastday(preYear, preMonth);
-            }
-            else {
-                preDate = lastday(preYear, preMonth);
-            }
-        }
-
-        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+        var dates = this.getDateService.getYesterDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
         this.Search(fromdate, todate);
     }
 
     setThisWeek() {
-        //#region Get start date and end date of week.
-
-        var curr = new Date; // get current date
-
-        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-        var firstday = new Date(curr.setDate(first));
-
-        var lastdayTemp = curr.getDate() - (curr.getDay() - 1) + 6;
-        var lastday = new Date(curr.setDate(lastdayTemp));
-
-        //#endregion Get start date and end date of week.
-
-        var weekStartYear = firstday.getFullYear();
-        var weekStartMonth = firstday.getMonth() + 1;
-        var weekStartDate = firstday.getDate();
-        var fromdate = weekStartYear + '-' + weekStartMonth + '-' + weekStartDate + ' ' + '00:00:00';
-
-        var weekEndYear = lastday.getFullYear();
-        var weekEndMonth = lastday.getMonth() + 1;
-        var weekEndDate = lastday.getDate();
-        var todate = weekEndYear + '-' + weekEndMonth + '-' + weekEndDate + ' ' + '23:59:59';
+        var dates = this.getDateService.getThisWeekDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
         this.Search(fromdate, todate);
     }
 
     setThisYear() {
-        var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1 + ' ' + '00:00:00';;
-        var todate = new Date().getFullYear() + '-' + 12 + '-' + 31 + ' ' + '23:59:59';
+        var dates = this.getDateService.getThisYearDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
         this.Search(fromdate, todate);
     }
@@ -129,41 +99,57 @@ export class ApprovalDurationComponent implements OnInit {
 
     Search(startingDate = null, endingDate = null) {
         this.loadingIndicator = true;
+
         let data = {
             type: this.selectedlist === undefined ? null : this.selectedlist,
             duration: (document.getElementById("txt_second") as HTMLInputElement).value === "" ? 0 : (document.getElementById("txt_second") as HTMLInputElement).value,
-            fromdate: (document.getElementById("txt_fromdatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_fromdatetime") as HTMLInputElement).value,
-            todate: (document.getElementById("txt_todatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_todatetime") as HTMLInputElement).value
+            fromdate: startingDate === null ? (document.getElementById("txt_fromdatetime") as HTMLInputElement).value : startingDate,
+            todate: endingDate === null ? (document.getElementById("txt_todatetime") as HTMLInputElement).value : endingDate
         }
 
-        if (startingDate !== null && endingDate !== null) {
-            data.fromdate = startingDate;
-            data.todate = endingDate;
-            (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = null;
-            (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
-        }
+        this.setDatePicker(new Date(data.fromdate), new Date(data.todate));
 
-        this.adminService.add<any>(customer.approvalTimeSelect, data).subscribe(res => {
-            this.rows = [];
-            let i = 0;
-            this.data = res.data;
-            res.data.forEach(el => {
-                this.rows.push({
-                    No: ++i,
-                    UserName: el.UserName,
-                    AdminUser: el.adminName,
-                    Type: el.Type,
-                    Approval: this.replaceDate(el.ApprovalTime),
-                    Created: this.replaceDate(el.Created),
-                    Duration: el.Duration
-                });
-            });
-        }, error => {
-            this.rows = [];
-            this.toasterService.pop('error', 'Error', error.error.message)
+        //let data = {
+        //    type: this.selectedlist === undefined ? null : this.selectedlist,
+        //    duration: (document.getElementById("txt_second") as HTMLInputElement).value === "" ? 0 : (document.getElementById("txt_second") as HTMLInputElement).value,
+        //    fromdate: (document.getElementById("txt_fromdatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_fromdatetime") as HTMLInputElement).value,
+        //    todate: (document.getElementById("txt_todatetime") as HTMLInputElement).value === "" ? null : (document.getElementById("txt_todatetime") as HTMLInputElement).value
+        //}
+
+        //if (startingDate !== null && endingDate !== null) {
+        //    data.fromdate = startingDate;
+        //    data.todate = endingDate;
+        //    (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = null;
+        //    (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
+        //}
+
+        if (data.fromdate === null || data.fromdate === '' || data.todate === null || data.todate === '') {
             this.loadingIndicator = false;
-        });
-        this.loadingIndicator = false;
+            this.toasterService.pop('error', 'Error', ErrorMessages.PleaseProvideFromDateToDate);
+        }
+        else {
+            this.adminService.add<any>(customer.approvalTimeSelect, data).subscribe(res => {
+                this.rows = [];
+                let i = 0;
+                this.data = res.data;
+                res.data.forEach(el => {
+                    this.rows.push({
+                        No: ++i,
+                        UserName: el.UserName,
+                        AdminUser: el.adminName,
+                        Type: el.Type,
+                        Approval: this.replaceDate(el.ApprovalTime),
+                        Created: this.replaceDate(el.Created),
+                        Duration: el.Duration
+                    });
+                });
+            }, error => {
+                this.rows = [];
+                this.toasterService.pop('error', 'Error', error.error.message)
+                this.loadingIndicator = false;
+            });
+            this.loadingIndicator = false;
+        }
     }
 
     setData() {
@@ -194,17 +180,11 @@ export class ApprovalDurationComponent implements OnInit {
         this.loadingIndicator = false;
     }
 
-    replaceDate(date) {
-        return date.replace("T", " ");
-    }
+    replaceDate(date) { return date.replace("T", " "); }
 
-    onChange(event) {
-        this.selectedlist = event.target.value;
-    }
+    onChange(event) { this.selectedlist = event.target.value; }
 
-    edit(data) {
-        debugger;
-    }
+    edit(data) { debugger; }
 
     //#region Check Permission
 

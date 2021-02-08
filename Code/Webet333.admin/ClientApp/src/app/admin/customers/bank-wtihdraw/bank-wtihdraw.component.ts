@@ -5,6 +5,7 @@ import { DatePipe } from '@angular/common';
 import { customer, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 import { ToasterService } from 'angular2-toaster';
+import { CommonService } from '../../../common/common.service';
 
 @Component({
     selector: 'app-bank-wtihdraw',
@@ -18,7 +19,8 @@ export class BankWtihdrawComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private modalService: NgbModal,
-        private router: Router
+        private router: Router,
+        private getDateService: CommonService
     ) { }
 
     slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };
@@ -37,7 +39,8 @@ export class BankWtihdrawComponent implements OnInit {
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.setColumn();
-            this.setPage();
+            //this.setPage();
+            this.setToday();
         }
     }
 
@@ -94,78 +97,41 @@ export class BankWtihdrawComponent implements OnInit {
     //#region Filter Data
 
     setToday() {
-        var preDate = new Date().getDate();
-        var preMonth = new Date().getMonth() + 1;
-        var preYear = new Date().getFullYear();
+        var dates = this.getDateService.getTodatDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
-        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+        this.getDateService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
         this.GetDetails(fromdate, todate);
     }
 
     setYesterday() {
-        var lastday = function (y, m) { return new Date(y, m, 0).getDate(); }
+        var dates = this.getDateService.getYesterDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
-        var preDate = new Date().getDate() - 1;
-        var preMonth = new Date().getMonth() + 1;
-        var preYear = new Date().getFullYear();
-
-        //#region Testing
-
-        //preDate = 1 - 1;
-        //preMonth = 1;
-        //preYear = 2021;
-
-        //#endregion Testing
-
-        if (preDate === 0) {
-            preMonth = preMonth - 1
-            if (preMonth === 0) {
-                preYear = preYear - 1;
-                preMonth = 12;
-                preDate = lastday(preYear, preMonth);
-            }
-            else {
-                preDate = lastday(preYear, preMonth);
-            }
-        }
-
-        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+        this.getDateService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
         this.GetDetails(fromdate, todate);
     }
 
     setThisWeek() {
-        //#region Get start date and end date of week.
+        var dates = this.getDateService.getThisWeekDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
-        var curr = new Date; // get current date
-
-        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-        var firstday = new Date(curr.setDate(first));
-
-        var lastdayTemp = curr.getDate() - (curr.getDay() - 1) + 6;
-        var lastday = new Date(curr.setDate(lastdayTemp));
-
-        //#endregion Get start date and end date of week.
-
-        var weekStartYear = firstday.getFullYear();
-        var weekStartMonth = firstday.getMonth() + 1;
-        var weekStartDate = firstday.getDate();
-        var fromdate = weekStartYear + '-' + weekStartMonth + '-' + weekStartDate + ' ' + '00:00:00';
-
-        var weekEndYear = lastday.getFullYear();
-        var weekEndMonth = lastday.getMonth() + 1;
-        var weekEndDate = lastday.getDate();
-        var todate = weekEndYear + '-' + weekEndMonth + '-' + weekEndDate + ' ' + '23:59:59';
+        this.getDateService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
         this.GetDetails(fromdate, todate);
     }
 
     setThisYear() {
-        var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1 + ' ' + '00:00:00';;
-        var todate = new Date().getFullYear() + '-' + 12 + '-' + 31 + ' ' + '23:59:59';
+        var dates = this.getDateService.getThisYearDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.getDateService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
         this.GetDetails(fromdate, todate);
     }
@@ -173,18 +139,26 @@ export class BankWtihdrawComponent implements OnInit {
     //#endregion
 
     GetDetails(startingDate = null, endingDate = null) {
+        this.loadingIndicator = true;
         let data = {
-            fromDate: this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss"),
-            toDate: this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss"),
+            fromDate: startingDate === null ? this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss") : startingDate,
+            toDate: endingDate === null ? this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss") : endingDate,
             method: "WITHDRAW"
         }
 
-        if (startingDate !== null && endingDate !== null) {
-            data.fromDate = startingDate;
-            data.toDate = endingDate;
-            (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = null;
-            (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
-        }
+        //let data = {
+        //    fromDate: this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss"),
+        //    toDate: this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss"),
+        //    method: "WITHDRAW"
+        //}
+
+        //if (startingDate !== null && endingDate !== null) {
+        //    data.fromDate = startingDate;
+        //    data.toDate = endingDate;
+        //    (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = null;
+        //    (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
+        //}
+
 
         this.adminService.add<any>(customer.paymentStatics, data).subscribe(res => {
             this.rows = [];

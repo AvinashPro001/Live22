@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             <div class="row col-12">
-                <div class="p-2 col-md-2">
+                <div class="p-2">
                     <h4 class="text-muted text-thin">Game <span class="text-danger">*</span></h4>
                     <select class="form-control" id="GameName" (change)="onGameChange($event)">
                         <option [disabled]="true" [ngValue]="">select Game</option>
@@ -19,8 +19,7 @@
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">Username <span class="text-danger">*</span></h4>
                     <!--<div class="input-group">-->
-                    <ngx-select-dropdown tabindex="0" [multiple]="false" class=""
-                                         [config]="config" [options]="customerData" (change)="onChange($event)"></ngx-select-dropdown>
+                    <ngx-select-dropdown tabindex="0" [multiple]="false" class="" [config]="config" [options]="customerData" (change)="onChange($event)"></ngx-select-dropdown>
                     <!--</div>-->
                 </div>
                 <div class="p-2 col-md-2">

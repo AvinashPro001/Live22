@@ -11,6 +11,7 @@ import { account, playtech } from '../../../../environments/environment';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HubConnectionBuilder } from '@aspnet/signalr';
+import { CommonService } from '../../../common/common.service';
 
 @Component({
     selector: 'app-admin/customer/retrive-list',
@@ -18,7 +19,6 @@ import { HubConnectionBuilder } from '@aspnet/signalr';
     styleUrls: ['./withdraw-list.component.scss']
 })
 export class WithdrawListComponent implements OnInit {
-
     //#region Variables
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
@@ -46,6 +46,8 @@ export class WithdrawListComponent implements OnInit {
     loadingIndicator: boolean = true;
     model1: any;
     model2: any;
+    datePickerfromdate: string;
+    datePickertodate: string;
     soritngColumn = "";
     searchString = "";
     selectedList: any;
@@ -88,7 +90,8 @@ export class WithdrawListComponent implements OnInit {
         private modalService: NgbModal,
         private confirmationDialogService: ConfirmationDialogService,
         private datePipe: DatePipe,
-        private titleService: Title
+        private titleService: Title,
+        private getDateService: CommonService
     ) { }
     //#endregion constructor
 
@@ -115,7 +118,8 @@ export class WithdrawListComponent implements OnInit {
             this.withdrawStatus == 'Pending' ? this.selectedList = this.listType[0] : this.withdrawStatus == 'Approved' ? this.selectedList = this.listType[1] : this.withdrawStatus == 'Rejected' ? this.selectedList = this.listType[2] : this.selectedList = this.listType[0];
             this.setColumn(this.selectedList.verified);
             this.setSimilarNameColoum()
-            this.setPageData(this.selectedList.verified, "", null, null);
+            //this.setPageData(this.selectedList.verified, "", null, null);
+            this.setToday();
         }
     }
     //#endregion
@@ -218,7 +222,6 @@ export class WithdrawListComponent implements OnInit {
         this.setPageData(this.selectedList.verified, "", null, null);
     }
 
-
     setSimilarNameColoum() {
         this.columnsSimilar = [
             { prop: 'No', width: 55 },
@@ -241,7 +244,7 @@ export class WithdrawListComponent implements OnInit {
     setColumn(selectedList) {
         if (selectedList == "Approved") {
             this.columns = [
-                { prop: 'No'},
+                { prop: 'No' },
                 { prop: 'Created' },
                 { prop: 'Username' },
                 { prop: 'AccountName' },
@@ -260,7 +263,7 @@ export class WithdrawListComponent implements OnInit {
             ];
         } else if (selectedList == "Rejected") {
             this.columns = [
-                { prop: 'No'},
+                { prop: 'No' },
                 { prop: 'Created' },
                 { prop: 'Username' },
                 { prop: 'AccountName' },
@@ -280,7 +283,7 @@ export class WithdrawListComponent implements OnInit {
         }
         else {
             this.columns = [
-                { prop: 'No'},
+                { prop: 'No' },
                 { prop: 'Created' },
                 { prop: 'Username' },
                 { prop: 'AccountName' },
@@ -373,7 +376,6 @@ export class WithdrawListComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
         this.modalService.open(similarnamelist, { windowClass: 'dark-modal' });
-
     }
 
     //#region timeFormat
@@ -473,6 +475,35 @@ export class WithdrawListComponent implements OnInit {
     }
     //#endregion
 
+    //#region Filter Data
+
+    setDatePicker(fromdate = null, todate = null) {
+        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+    }
+
+    setToday() {
+        var dates = this.getDateService.getTodatDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
+
+        this.searchHandlerByDate(fromdate, todate);
+    }
+
+    setYesterday() {
+        var dates = this.getDateService.getYesterDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
+
+        this.setDatePicker(new Date(fromdate), new Date(todate));
+
+        this.searchHandlerByDate(fromdate, todate);
+    }
+
+    //#endregion
+
     //#region search
     searchHandler(event) {
         let data;
@@ -490,22 +521,17 @@ export class WithdrawListComponent implements OnInit {
         }
     }
 
-    searchHandlerByDate() {
+    searchHandlerByDate(startingDate = null, endingDate = null) {
         let fromdate, todate
-        fromdate = (document.getElementById("txt_fromdatetime") as HTMLInputElement).value
-        todate = (document.getElementById("txt_todatetime") as HTMLInputElement).value
-        if (todate === "")
-            todate = fromdate;
-        if (fromdate === "")
-            fromdate = todate;
-        if (fromdate === "" && todate === "")
-            this.toasterService.pop('error', 'Error', "Please select Date.");
-        else if ((fromdate !== undefined && todate !== null) || (todate !== null && fromdate !== null)) {
-            this.setPageData(this.selectedList.verified, "", fromdate, todate);
-        }
-        else {
-            this.setPageData(this.selectedList.verified, "", null, null)
-        }
+
+        fromdate = startingDate === null ? (document.getElementById("txt_fromdatetime") as HTMLInputElement).value : startingDate;
+        todate = endingDate === null ? (document.getElementById("txt_todatetime") as HTMLInputElement).value : endingDate;
+
+        if (todate === "") todate = fromdate;
+        if (fromdate === "") fromdate = todate;
+        if (fromdate === "" && todate === "") this.toasterService.pop('error', 'Error', "Please select Date.");
+        else if ((fromdate !== undefined && todate !== null) || (todate !== null && fromdate !== null)) this.setPageData(this.selectedList.verified, "", fromdate, todate);
+        else this.setPageData(this.selectedList.verified, "", null, null)
     }
     //#endregion search
 
@@ -591,7 +617,6 @@ export class WithdrawListComponent implements OnInit {
         });
     }
 
-
     //#region Close All
     dismiss() {
         this.modalService.dismissAll();
@@ -622,7 +647,6 @@ export class WithdrawListComponent implements OnInit {
                 this.rowsTacking = [];
                 this.toasterService.pop('error', 'Error', error.error.message)
                 this.loadingIndicator = false;
-
             });
             this.modalService.open(trancking, { windowClass: 'dark-modal' });
         }

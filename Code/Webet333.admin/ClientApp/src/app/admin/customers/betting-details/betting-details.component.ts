@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { customer, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
+import { CommonService } from '../../../common/common.service';
 
 @Component({
     selector: 'app-betting-details',
@@ -70,15 +71,19 @@ export class BettingDetailsComponent implements OnInit {
         { gmt: "-02:00" },
         { gmt: "-01:00" },
     ];
+
     constructor(
         private datePipe: DatePipe,
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private router: Router
+        private router: Router,
+        private getDateService: CommonService
     ) { }
 
     async ngOnInit() {
-        if (await this.checkViewPermission()) this.setColumn(this.selectedList);
+        if (await this.checkViewPermission()) {
+            this.setColumn(this.selectedList);
+        };
     }
 
     //#region setCoumn
@@ -421,87 +426,65 @@ export class BettingDetailsComponent implements OnInit {
         }
 
         this.selectedList = $event.target.value;
+        this.setDateOtherPicker(new Date(), new Date());
+        this.BettingDetails();
     }
 
-    SelectGMT($event) {
-        this.gmtlist = $event.target.value;
-    }
+    SelectGMT($event) { this.gmtlist = $event.target.value; }
 
     //#region       Filter Data
+    setDateOtherPicker(fromdate = null, todate = null) {
+        //Date formate :: Month / date / yesr, Hours: Minitus AM
 
+        var selectDate, selectMonth, selectYear, selectFromDate, selectToDate, checkExists;
+
+        selectDate = fromdate.getDate();
+        selectMonth = fromdate.getMonth() + 1;
+        selectYear = fromdate.getFullYear();
+        selectFromDate = selectMonth + '/' + selectDate + '/' + selectYear + ', 12:00 AM';
+
+        selectDate = todate.getDate();
+        selectMonth = todate.getMonth() + 1;
+        selectYear = todate.getFullYear();
+        selectToDate = selectMonth + '/' + selectDate + '/' + selectYear + ', 11:59 PM';
+
+        checkExists = document.getElementById("txt_fromdatetime");
+        if (checkExists != null) (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = selectFromDate;
+
+        checkExists = document.getElementById("txt_todatetime");
+        if (checkExists != null) (document.getElementById("txt_todatetime") as HTMLInputElement).value = selectToDate;
+
+        checkExists = document.getElementById("txt_startdatetime");
+        if (checkExists != null) (document.getElementById("txt_startdatetime") as HTMLInputElement).value = selectFromDate;
+    }
     setToday() {
-        var preDate = new Date().getDate();
-        var preMonth = new Date().getMonth() + 1;
-        var preYear = new Date().getFullYear();
-
-        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+        var dates = this.getDateService.getTodatDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
         this.BettingDetails(fromdate, todate);
     }
 
     setYesterday() {
-        var lastday = function (y, m) { return new Date(y, m, 0).getDate(); }
-
-        var preDate = new Date().getDate() - 1;
-        var preMonth = new Date().getMonth() + 1;
-        var preYear = new Date().getFullYear();
-
-        //#region Testing
-
-        //preDate = 1 - 1;
-        //preMonth = 1;
-        //preYear = 2021;
-
-        //#endregion Testing
-
-        if (preDate === 0) {
-            preMonth = preMonth - 1
-            if (preMonth === 0) {
-                preYear = preYear - 1;
-                preMonth = 12;
-                preDate = lastday(preYear, preMonth);
-            }
-            else {
-                preDate = lastday(preYear, preMonth);
-            }
-        }
-
-        var fromdate = preYear + '-' + preMonth + '-' + preDate + ' ' + '00:00:00';
-        var todate = preYear + '-' + preMonth + '-' + preDate + ' ' + '23:59:59';
+        var dates = this.getDateService.getYesterDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
         this.BettingDetails(fromdate, todate);
     }
 
     setThisWeek() {
-        //#region Get start date and end date of week.
-
-        var curr = new Date; // get current date
-
-        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-        var firstday = new Date(curr.setDate(first));
-
-        var lastdayTemp = curr.getDate() - (curr.getDay() - 1) + 6;
-        var lastday = new Date(curr.setDate(lastdayTemp));
-
-        //#endregion Get start date and end date of week.
-
-        var weekStartYear = firstday.getFullYear();
-        var weekStartMonth = firstday.getMonth() + 1;
-        var weekStartDate = firstday.getDate();
-        var fromdate = weekStartYear + '-' + weekStartMonth + '-' + weekStartDate + ' ' + '00:00:00';
-
-        var weekEndYear = lastday.getFullYear();
-        var weekEndMonth = lastday.getMonth() + 1;
-        var weekEndDate = lastday.getDate();
-        var todate = weekEndYear + '-' + weekEndMonth + '-' + weekEndDate + ' ' + '23:59:59';
+        var dates = this.getDateService.getThisWeekDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
         this.BettingDetails(fromdate, todate);
     }
 
     setThisYear() {
-        var fromdate = new Date().getFullYear() + '-' + 1 + '-' + 1 + ' ' + '00:00:00';;
-        var todate = new Date().getFullYear() + '-' + 12 + '-' + 31 + ' ' + '23:59:59';
+        var dates = this.getDateService.getThisYearDate();
+        var fromdate = dates.fromdate;
+        var todate = dates.todate;
 
         this.BettingDetails(fromdate, todate);
     }
@@ -512,29 +495,35 @@ export class BettingDetailsComponent implements OnInit {
         this.loadingIndicator = true;
         this.rows = [];
 
-        this.fromDate = this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
-        this.toDate = this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
-
-        this.startdate = this.datePipe.transform((document.getElementById("txt_startdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
-
-        if (startingDate !== null && endingDate !== null) {
-            this.fromDate = startingDate;
-            this.toDate = endingDate;
-            this.startdate = startingDate;
-            (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = null;
-            (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
-            (document.getElementById("txt_startdatetime") as HTMLInputElement).value = null;
-        }
-
         let Model = {
-            fromdate: this.fromDate,
-            todate: this.toDate
-        }
+            fromdate: startingDate === null ? this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss") : startingDate,
+            todate: endingDate === null ? this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss") : endingDate
+        };
+
+        this.startdate = startingDate === null ? this.datePipe.transform((document.getElementById("txt_startdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss") : startingDate;
+
+        //this.fromDate = this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
+        //this.toDate = this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
+        //this.startdate = this.datePipe.transform((document.getElementById("txt_startdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
+
+        //if (startingDate !== null && endingDate !== null) {
+        //    this.fromDate = startingDate;
+        //    this.toDate = endingDate;
+        //    this.startdate = startingDate;
+        //    (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = null;
+        //    (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
+        //    (document.getElementById("txt_startdatetime") as HTMLInputElement).value = null;
+        //}
+
+        //let Model = {
+        //    fromdate: this.fromDate,
+        //    todate: this.toDate
+        //}
 
         if (this.selectedList !== "M8" && this.selectedList !== "DG" && this.selectedList !== "Pragmatic")
-            if (Model.fromdate === null || Model.todate === null) {
-                return this.toasterService.pop('error', 'Error', "Please Select To Date and From Date");
-            }
+            if (Model.fromdate === null || Model.todate === null) return this.toasterService.pop('error', 'Error', "Please Select To Date and From Date");
+
+        this.setDateOtherPicker(new Date(Model.fromdate), new Date(Model.todate));
 
         this.setColumn(this.selectedList);
         switch (this.selectedList) {
