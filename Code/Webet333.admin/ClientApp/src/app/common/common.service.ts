@@ -94,7 +94,7 @@ export class CommonService {
         var first = curr.getDate() + 1 - curr.getDay(); // First day is the day of the month - the day of the week
         var firstday = new Date(curr.setDate(first));
 
-        var lastdayTemp = curr.getDate() - (curr.getDay() - 1) + 5;
+        var lastdayTemp = curr.getDate() - (curr.getDay() - 1) + 6;
         var lastday = new Date(curr.setDate(lastdayTemp));
 
         //#endregion Start date is Monday - Sunday

@@ -7,8 +7,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.Game = exports.account = exports.environment = void 0;
 exports.environment = {
     production: false,
-    //apiUrl: 'http://api.webet333.com/api/v1/'
-    apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    apiUrl: 'http://api.webet333.com/api/v1/'
+    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
     //apiUrl: 'https://localhost:5001/api/v1/'
 };
 exports.account = {
@@ -319,6 +319,7 @@ exports.VIPSetting = {
     UserVIPLevelUpdate: exports.environment.apiUrl + 'viplevel/user/update',
 };
 exports.ErrorMessages = {
-    unAuthorized: "You are not authorized to access this page!!"
+    unAuthorized: "You are not authorized to access this page!!",
+    PleaseProvideFromDateToDate: "Please Provide From Date and To Date !!!"
 };
 //# sourceMappingURL=environment.js.map
