@@ -163,4 +163,14 @@ export class CommonService {
     }
 
     //#endregion set Date
+
+    //#region Error List
+
+    public errorMessage = {
+        unAuthorized: "You are not authorized to access this page!!",
+        PleaseProvideFromDateToDate: "Please Provide From Date and To Date !!!",
+        SelectUserName:"Please Select Username !!"
+    };
+
+    //#endregion Error List
 }
