@@ -18,11 +18,12 @@ export class UsersBehaviourReportsComponent implements OnInit {
     datePickerfromdate: string;
     datePickertodate: string;
     Data: any;
+    usersDetailsForReportPage: any;
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private getDateService: CommonService
+        private commonService: CommonService
     ) { }
 
     async ngOnInit() {
@@ -81,12 +82,12 @@ export class UsersBehaviourReportsComponent implements OnInit {
     //#region Filter Data
 
     setDatePicker(fromdate = null, todate = null) {
-        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
-        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+        this.datePickerfromdate = this.commonService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.commonService.setDatePickerFormate(todate);
     }
 
     setToday() {
-        var dates = this.getDateService.getTodatDate();
+        var dates = this.commonService.getTodatDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -96,7 +97,7 @@ export class UsersBehaviourReportsComponent implements OnInit {
     }
 
     setYesterday() {
-        var dates = this.getDateService.getYesterDate();
+        var dates = this.commonService.getYesterDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -106,7 +107,7 @@ export class UsersBehaviourReportsComponent implements OnInit {
     }
 
     setThisWeek() {
-        var dates = this.getDateService.getThisWeekDate();
+        var dates = this.commonService.getThisWeekDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -116,7 +117,7 @@ export class UsersBehaviourReportsComponent implements OnInit {
     }
 
     setThisYear() {
-        var dates = this.getDateService.getThisYearDate();
+        var dates = this.commonService.getThisYearDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -167,6 +168,7 @@ export class UsersBehaviourReportsComponent implements OnInit {
 
         this.adminService.add<any>(customer.userBehaviorReport, data).subscribe(res => {
             this.Data = res.data.res;
+            this.usersDetailsForReportPage = res.data.res;
             res.data.res.forEach(el => {
                 this.rows.push({
                     No: ++i,
@@ -257,4 +259,18 @@ export class UsersBehaviourReportsComponent implements OnInit {
     }
 
     //#endregion Check Permission
+
+
+    //#region Redirect to user details page
+
+    show(row = null, content = null) {
+        //this.viewData = row;
+        //this.openWindowCustomClass(content);
+
+        localStorage.setItem('id', JSON.stringify(row));
+        window.open('admin/customers/users-details', '_blank');
+    }
+
+    //#endregion Redirect to user details page
+
 }

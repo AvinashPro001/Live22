@@ -27,7 +27,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="p-2">
                     <h4 class="text-muted text-thin">&nbsp;</h4>
                     <button class="mb-1 btn btn-success" (click)='FilterData()' type="button">Filter</button>
@@ -48,15 +47,12 @@
                     <h4 class="text-muted text-thin">&nbsp;</h4>
                     <button class="mb-1 btn btn-success" (click)='setThisYear()' type="button">This Year</button>
                 </div>
-
                 <div class="p-2">
                     <h4 class="text-muted text-thin">&nbsp;</h4>
                     <button class="mb-1 btn btn-outline-green" (click)='DownloadExcel()' type="button">Download Excel</button>
                 </div>
             </div>
-
             <br /><br />
-
             <div class="row col-12 ">
                 <div class="row col-md-2">
                     <label>No Apply Promotion :</label>
@@ -95,33 +91,32 @@
                     </div>
                 </div>
             </div>
-
             <br /><br />
             <div class="row col-12 ">
-
                 <div class="row col-md-3">
                     <label style="margin-top:5px">Deposit More Than Times :</label>&nbsp;&nbsp;&nbsp;
                     <input class="form-control col-md-3" type="number" id="depositTimes">
                 </div>
-
                 <div class="row col-md-3">
                     <label style="margin-top:5px">Deposit More Than :</label>&nbsp;&nbsp;&nbsp;
                     <input class="form-control col-md-3" type="number" id="depositamount">
                 </div>
-
                 <div class="row col-md-3">
                     <label style="margin-top:5px">Lose More Than :</label>&nbsp;&nbsp;&nbsp;
                     <input class="form-control col-md-3" type="number" id="loseamount">
                 </div>
-
                 <div class="row col-md-3">
                     <label style="margin-top:5px">Win More Than :</label>&nbsp;&nbsp;&nbsp;
                     <input class="form-control col-md-3" type="number" id="winamount">
                 </div>
             </div>
             <br /><br />
-            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="50"
-                           [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
+                <ngx-datatable-column *ngFor="let column of columns; let i = index;" name="{{column.name}}" prop="{{column.prop}}">
+                    <ng-template let-rowIndex="rowIndex" let-value="value" let-row="row" *ngIf="column.prop==='Username'" ngx-datatable-cell-template>
+                        <a [routerLink]='' (click)='show(usersDetailsForReportPage[rowIndex],null)'>{{value}}</a>
+                    </ng-template>
+                </ngx-datatable-column>
             </ngx-datatable>
         </div>
     </div>

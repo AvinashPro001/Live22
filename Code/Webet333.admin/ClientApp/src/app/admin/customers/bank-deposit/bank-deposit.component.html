@@ -84,6 +84,11 @@
     </div>
     <div class="modal-body">
         <ngx-datatable class="material bootstrap no-detail-row" #tableDetails [rows]="rowDetails" [loadingIndicator]="loadingIndicator" [columns]="columnDetails" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="50">
+            <ngx-datatable-column *ngFor="let column of columnDetails; let i = index;" name="{{column.name}}" prop="{{column.prop}}">
+                <ng-template let-rowIndex="rowIndex" let-value="value" let-row="row" *ngIf="column.prop==='Username'" ngx-datatable-cell-template>
+                    <a [routerLink]='' (click)='show(usersDetailsForReportPage[rowIndex],null)'>{{value}}</a>
+                </ng-template>
+            </ngx-datatable-column>
         </ngx-datatable>
     </div>
     <div class="modal-footer">

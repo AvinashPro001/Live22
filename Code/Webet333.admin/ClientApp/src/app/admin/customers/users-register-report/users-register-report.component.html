@@ -27,7 +27,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="p-2">
                     <h4 class="text-muted text-thin">&nbsp;</h4>
                     <button class="mb-1 btn btn-success" (click)='FilterData()' type="button">Filter</button>
@@ -53,7 +52,6 @@
                     <button class="mb-1 btn btn-outline-green" (click)='DownloadExcel()' type="button">Download Excel</button>
                 </div>
             </div>
-
             <div class="row col-12 ">
                 <div class="row col-md-2">
                     <label>OTP Verified User :</label>
@@ -74,9 +72,12 @@
                     </div>
                 </div>
             </div>
-
-            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="50"
-                           [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
+                <ngx-datatable-column *ngFor="let column of columns; let i = index;" name="{{column.name}}" prop="{{column.prop}}">
+                    <ng-template let-rowIndex="rowIndex" let-value="value" let-row="row" *ngIf="column.prop==='Username'" ngx-datatable-cell-template>
+                        <a [routerLink]='' (click)='show(usersDetailsForReportPage[rowIndex],null)'>{{value}}</a>
+                    </ng-template>
+                </ngx-datatable-column>
             </ngx-datatable>
         </div>
     </div>

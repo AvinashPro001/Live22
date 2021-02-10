@@ -246,7 +246,7 @@ export class UsersDetailsComponent implements OnInit {
         if (await this.checkViewPermission()) {
             let dataCustomer = JSON.parse(localStorage.getItem('id'));
             this.Userdata = dataCustomer as object[];
-
+           
             if (this.Userdata != null) {
                 this.ShowDropDown = false;
                 this.onChange(this.Userdata);
@@ -331,7 +331,8 @@ export class UsersDetailsComponent implements OnInit {
     //#region onChange
     onChange(event) {
         try {
-            this.newVal = event.id;
+            if (event.userId) this.newVal = event.userId;
+            else this.newVal = event.id;
             this.vipLevelImage = event.VIPLevelName == "Normal" ? "" : event.VIPBanner;
             this.vipLevel = event.VIPLevelName;
 
@@ -426,7 +427,8 @@ export class UsersDetailsComponent implements OnInit {
     OnType(list) {
         //let list = this.customerData.filter(x => x.id === event)[0];
         if (list != undefined) {
-            this.userid = list.id;
+            if (list.userId) this.userid = list.userId;
+            else this.userid = list.id;
             this.userdata = list;
             this.getUsername(this.userid);
             this.depositlist(null, null);
