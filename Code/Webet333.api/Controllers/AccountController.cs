@@ -956,11 +956,16 @@ namespace Webet333.api.Controllers
 
                             if (info.CSImage == null)
                             {
-                                string className=string.Empty;
+                                string className = string.Empty;
                                 if (info.ClassChecked)
                                     className = "contact-us";
 
-                                htmlCode += $@"<strong><a class=""{className}"" href=""{info.Url}"" target=""_blank"">{info.CSId}</a><strong> : {info.CSName}</strong></strong><br/>";
+                                htmlCode += $@"<strong><a class=""{className}"" href=""{info.Url}"" ";
+
+                                if (info.IsOpenInNewPage)
+                                    htmlCode += $@"target=""_blank"" ";
+
+                                htmlCode += $@">{info.CSId}</a><strong> : {info.CSName}</strong></strong><br/>";
                             }
                             else
                             {
@@ -972,7 +977,52 @@ namespace Webet333.api.Controllers
                 }
                 else
                 {
+                    htmlCode = $@"<table cellpadding=""0"" cellspacing=""0"" style=""text-align:center;width:100%;border-color:white;""><tr><td colspan=""2"" style=""padding:10px;""><h5 class=""""><span>L</span>ive Chat<img src=""../../images/hours_24.png""  alt=""hours 24""></h5></td></tr></table><br/><br/><br/>";
 
+                    foreach (var contact in type)
+                    {
+                        htmlCode += $@"<table class=""contact-details-info"" cellpadding=""0"" cellspacing=""0"" style=""text-align:center;width: 100%;border-color:white;margin:0 auto 10px;max-width:320px;"">";
+
+                        var contactInformationDetails = JsonConvert.DeserializeObject<List<ContactInformationDetails>>(contact.Details);
+                        contactInformationDetails.ForEach(x =>
+                        {
+                            x.CSImage = x.CSImage == null || x.CSImage == "" ? null : $"{BaseUrlConfigsOptions.Value.ImageBase}{BaseUrlConfigsOptions.Value.ContactImage}/{x.TypeDetailsId}{x.CSImage}";
+                        });
+
+                        
+
+                        string replaceHtml = $@"<tr><td rowspan=""{{0}}"" class=""text-right"" width=""30%""><img  class=""downloadIconMobile"" src=""{contact.TypeImage}"" alt=""{contact.Type}""><p class="""" style=""font-size:10px;margin:0px 5px 0px 0px;""><span>{contact.Type}</span></p></td>";
+
+                        for (int i = 0; i < contactInformationDetails.Count; i++)
+                        {
+                            if (contactInformationDetails[i].CSImage == null)
+                            {
+                                if (i == 0)
+                                {
+                                    int rowSpan = contactInformationDetails[i].CSImage == null ? contactInformationDetails.Count :2 ;
+
+                                    htmlCode += string.Format(replaceHtml, rowSpan);
+
+                                    htmlCode += $@"<td class=""text-left""><label class=""mobile-number""><a style=""color:#ffb701"" href=""{contactInformationDetails[i].Url}"">{contactInformationDetails[i].CSId}</a></label></td></tr>";
+                                }
+                                else
+                                {
+                                    htmlCode += $@"<tr><td class=""text-left""><label class=""mobile-number""><a style=""color:#ffb701""  href=""{contactInformationDetails[i].Url}"">{contactInformationDetails[i].CSId}</a></label></td></tr>";
+                                }
+                            }
+                            else
+                            {
+                                int rowSpan = contactInformationDetails[i].CSImage == null ? contactInformationDetails.Count : 2;
+
+                                htmlCode += string.Format(replaceHtml, rowSpan);
+
+                                htmlCode += $@"</tr><tr><td><div style=""text-align:center;""><div style=""border:2px solid  black;width:69%;padding:10px; border-radius:20px;width:150px;""><img style=""width:100px;height:100px;text-align:center;"" src=""{contactInformationDetails[i].CSImage}"" alt=""barcode""><p>{contactInformationDetails[i].CSId}</p></div></div></td></tr>";
+                            }
+                           
+
+                        }
+                        htmlCode += @"</table>";
+                    }
                 }
 
                 return base.Content(htmlCode, "text/html");
