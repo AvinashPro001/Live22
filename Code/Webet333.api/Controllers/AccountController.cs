@@ -937,28 +937,34 @@ namespace Webet333.api.Controllers
                     x.TypeImage = x.TypeImage == null ? null : $"{BaseUrlConfigsOptions.Value.ImageBase}{BaseUrlConfigsOptions.Value.ContactImage}/{x.TypeId}{x.TypeImage}";
                 });
 
-                string htmlCode=string.Empty;
+                string htmlCode = string.Empty;
                 if (!request.IsMobile)
                 {
-                    htmlCode= @"<li class=""support-live""><h5><strong>Live Support</strong></h5><p><img src=""../../images/hours_24.png"" alt=""hours 24""></p><h6><strong style=""padding-right:60px;"">24 Hours</strong></h6></li>";
+                    htmlCode = @"<li class=""support-live""><h5><strong>Live Support</strong></h5><p><img src=""../../images/hours_24.png"" alt=""hours 24""></p><h6><strong style=""padding-right:60px;"">24 Hours</strong></h6></li>";
                     foreach (var contact in type)
                     {
 
-                        htmlCode += @"<li class=""text-center""><h5><img class=""contact-logos"" src=""../../images/whatsapp.png"" alt=""Whats App""><strong><u>Whatsapp</u></strong></h5>";
+                        htmlCode += $@"<li class=""text-center""><h5><img class=""contact-logos"" src=""{contact.TypeImage}"" alt=""{contact.Type}""> <strong><u>{contact.Type}</u></strong></h5>";
                         var contactInformationDetails = JsonConvert.DeserializeObject<List<ContactInformationDetails>>(contact.Details);
                         contactInformationDetails.ForEach(x =>
                         {
-                            x.CSImage = x.CSImage == null ? null : $"{BaseUrlConfigsOptions.Value.ImageBase}{BaseUrlConfigsOptions.Value.ContactImage}/{x.TypeDetailsId}{x.CSImage}";
+                            x.CSImage = x.CSImage == null || x.CSImage == "" ? null : $"{BaseUrlConfigsOptions.Value.ImageBase}{BaseUrlConfigsOptions.Value.ContactImage}/{x.TypeDetailsId}{x.CSImage}";
                         });
-                        foreach(var info in contactInformationDetails)
+                        foreach (var info in contactInformationDetails)
                         {
-                            if (info == null)
+
+
+                            if (info.CSImage == null)
                             {
-                                htmlCode += @"<strong><a class=""contact-us"" href=""https://api.whatsapp.com/send?phone=60135557800&text=Claim%20and%20Join"" target=""_blank"">013-555 7800</a><strong> : CS1</strong></strong><br/>";
+                                string className=string.Empty;
+                                if (info.ClassChecked)
+                                    className = "contact-us";
+
+                                htmlCode += $@"<strong><a class=""{className}"" href=""{info.Url}"" target=""_blank"">{info.CSId}</a><strong> : {info.CSName}</strong></strong><br/>";
                             }
                             else
                             {
-                                htmlCode += @"<h6><strong>Customer Service 1</strong></h6><figure><img class=""image-qr"" src=""../../images/barcode-cs1.jpg"" alt=""barcode""></figure>";
+                                htmlCode += $@"<h6><strong>{info.CSName}</strong></h6><figure><img class=""image-qr"" src=""{info.CSImage}"" alt=""barcode""></figure><h6>{info.CSId}</h6>";
                             }
                         }
                         htmlCode += @"</li>";

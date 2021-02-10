@@ -40,6 +40,12 @@ namespace Webet333.models.Request.User
 
         [JsonProperty(PropertyName = "contactTypeId")]
         public Guid ContactTypeId { get; set; }
+
+        [JsonProperty(PropertyName = "classCheck")]
+        public bool ClassCheck { get; set; }
+
+        [JsonProperty(PropertyName = "Text")]
+        public string Text { get; set; }
     }
 
     public class ContactTypeDetailsUpdateRequest
@@ -64,5 +70,11 @@ namespace Webet333.models.Request.User
 
         [JsonProperty(PropertyName = "deleted")]
         public bool? Deleted { get; set; }
+
+        [JsonProperty(PropertyName = "classCheck")]
+        public bool? ClassCheck { get; set; }
+
+        [JsonProperty(PropertyName = "Text")]
+        public string Text { get; set; }
     }
 }

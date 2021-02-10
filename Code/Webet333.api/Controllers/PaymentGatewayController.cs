@@ -45,9 +45,9 @@ namespace Webet333.api.Controllers
             var response = await PaymentGatewayHelpers.CallPaymentgetURL(Name, request.Amount);
             using (var paymentgateway_helpers = new PaymentGatewayHelpers(Connection))
             {
-                await paymentgateway_helpers.PaymentTokenSave(userId, uniqueId, Role, response.token, response.status, response.transaction, JsonConvert.SerializeObject(response),response.amount,request.PromotionApplyEligible,request.PromotionId);
+                await paymentgateway_helpers.PaymentTokenSave(userId, uniqueId, Role, response.token, response.status, response.transaction, JsonConvert.SerializeObject(response), response.amount, request.PromotionApplyEligible, request.PromotionId);
 
-                response.redirect_to = response.redirect_to.Split("=", 2)[1];
+                response.redirect_to = response.redirect_to == null ? null: response.redirect_to.Split("=", 2)[1];
 
                 return OkResponse(response);
             }
@@ -55,30 +55,28 @@ namespace Webet333.api.Controllers
 
         #endregion
 
-
         #region Payment Auto Verifiy API
 
-        [Authorize]
-        [HttpPost(ActionsConst.PaymentGateway.GetPaymentGatewayURL)]
-        public async Task<IActionResult> GetUrl([FromBody] GetUrlRequest request)
+        [HttpPost(ActionsConst.PaymentGateway.PaymentAutoVerified)]
+        public async Task<IActionResult> AutoVerfiedTransaction([FromBody] CheckStatusRequest request)
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
-            var Role = GetUserRole(User);
-            var Name = GetUserName(User);
-            var uniqueId = GetUniqueId(User);
-            var userId = GetUserId(User).ToString();
-
-            if (string.IsNullOrWhiteSpace(request.PromotionId))
-                request.PromotionId = null;
-
-            var response = await PaymentGatewayHelpers.CallPaymentgetURL(Name, request.Amount);
+            var response = await PaymentGatewayHelpers.CheckStatus(request.Token);
             using (var paymentgateway_helpers = new PaymentGatewayHelpers(Connection))
             {
-                await paymentgateway_helpers.PaymentTokenSave(userId, uniqueId, Role, response.token, response.status, response.transaction, JsonConvert.SerializeObject(response), response.amount, request.PromotionApplyEligible, request.PromotionId);
-
-                response.redirect_to = response.redirect_to.Split("=", 2)[1];
+                var updateResponse = new PaymentGatewayVerifiedRequest()
+                {
+                    transaction = response.Transaction,
+                    status = response.StatusDescription == "processing" ? "0" : response.Status.ToString(),
+                    status_message = response.StatusDescription,
+                    decline_reason = response.BankReference,
+                    src_bank_account = response.SrcBankAccount,
+                    created_at = response.CreatedAt,
+                    apikey = "TransactionCheckStatusOfVaderPayCustomerService2"
+                };
+                await paymentgateway_helpers.PaymentVerified(updateResponse);
 
                 return OkResponse(response);
             }
@@ -90,7 +88,7 @@ namespace Webet333.api.Controllers
 
         [Consumes("application/x-www-form-urlencoded")]
         [HttpPost(ActionsConst.PaymentGateway.PaymentVerified)]
-        public async Task<IActionResult> VerifiedTransactions([FromForm] PaymentGatewayVerifiedRequest request )
+        public async Task<IActionResult> VerifiedTransactions([FromForm] PaymentGatewayVerifiedRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
             using (var helper = new PaymentGatewayHelpers(Connection))

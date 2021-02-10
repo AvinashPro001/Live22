@@ -940,7 +940,7 @@ namespace Webet333.api.Controllers
             }
             while (!versionKeyList.Contains(versionKey));
 
-            if (list.Count > 0)
+            if (list.Count > 0 || numberList.Count > 0)
             {
                 using (var game_helper = new GameHelpers(Connection))
                 {
@@ -2429,7 +2429,7 @@ namespace Webet333.api.Controllers
             bool WalletMaintenance;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.UserId,request.WalletName);
+                var user = await account_helper.UserGetBalanceInfo(request.UserId, request.WalletName);
 
                 gameSupport = JsonConvert.DeserializeObject<List<GameSupport>>(user.GameSupport);
 
@@ -2449,7 +2449,7 @@ namespace Webet333.api.Controllers
                 PragmaticUsername = user.PragmaticGamePrefix + user.UserId;
 
                 MainWalletAmount = (decimal)user.MainWalletAmount;
-                MainWalletId =new Guid(user.MainWalletId);
+                MainWalletId = new Guid(user.MainWalletId);
                 ToWalletId = new Guid(user.ToWalletId);
                 WalletMaintenance = (bool)user.ToWalletMaintenance;
             }
@@ -2474,35 +2474,35 @@ namespace Webet333.api.Controllers
 
                 if (request.WalletName == "918Kiss Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].Is918Kiss) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].Is918Kiss) return BadResponse("error_promotion_not_supported_game");
                     dynamic result918Kiss = JObject.Parse(await game_helper.Kiss918DepsoitWithdrawMehtod(kiss918UserName, MainWalletAmount));
                     updateMainWallet = result918Kiss.success == true;
                 }
 
                 if (request.WalletName == "MaxBet Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].IsMaxbet) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].IsMaxbet) return BadResponse("error_promotion_not_supported_game");
                     var resultMaxBet = await MaxBetGameHelper.CallMaxbetDepsoitWithdrawAPI(MaxbetVendorMemberId, MainWalletAmount, 1);
                     updateMainWallet = resultMaxBet.ErrorCode == 0 ? true : false;
                 }
 
                 if (request.WalletName == "Mega888 Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].IsMega888) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].IsMega888) return BadResponse("error_promotion_not_supported_game");
                     var resultMega888 = await Mega888GameHelpers.CallWithdrawDepositAPI(mega888LoginId, MainWalletAmount);
                     updateMainWallet = resultMega888.error == null ? true : false;
                 }
 
                 if (request.WalletName == "Joker Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].IsJoker) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].IsJoker) return BadResponse("error_promotion_not_supported_game");
                     dynamic resultJoker = JObject.Parse(await game_helper.JokerDepsoitWithdrawMethod(JokerUsername, MainWalletAmount));
                     updateMainWallet = resultJoker.Message == null ? true : false;
                 }
 
                 if (request.WalletName == "PlayTech Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].IsPlaytech) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].IsPlaytech) return BadResponse("error_promotion_not_supported_game");
                     var result = await game_helper.PlaytechDepsoitMehtod(PlaytechUsername, MainWalletAmount, _hostingEnvironment);
                     dynamic resultPlaytech = JObject.Parse(result);
                     updateMainWallet = resultPlaytech.result == "Deposit OK" ? true : false;
@@ -2510,63 +2510,63 @@ namespace Webet333.api.Controllers
 
                 if (request.WalletName == "AG Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].IsAG) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].IsAG) return BadResponse("error_promotion_not_supported_game");
                     var resultAG = await game_helper.AGDepositWithdrawMethod(AGUsername, MainWalletAmount, GameConst.AG.Deposit);
                     updateMainWallet = resultAG.error_code == 0 ? true : false;
                 }
 
                 if (request.WalletName == "M8 Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].IsM8) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].IsM8) return BadResponse("error_promotion_not_supported_game");
                     var resultM8 = XDocument.Parse(await game_helper.M8DepsoitWithdrawMethod(M8Username, MainWalletAmount, GameConst.M8.Deposit));
                     updateMainWallet = resultM8.Descendants("errcode").Single().Value == "0" ? true : false;
                 }
 
                 if (request.WalletName == "DG Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].IsDG) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].IsDG) return BadResponse("error_promotion_not_supported_game");
                     var resultDG = await DGGameHelpers.CallWithdrawDepsoitAPI(DGUsername, MainWalletAmount.ToString());
                     updateMainWallet = resultDG.codeId == 0 ? true : false;
                 }
 
                 if (request.WalletName == "Sexy Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].IsSexyBaccarat) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].IsSexyBaccarat) return BadResponse("error_promotion_not_supported_game");
                     var resultSexy = await SexyBaccaratGameHelpers.CallDepositAPI(SexyUsername, MainWalletAmount);
                     updateMainWallet = resultSexy.status == "0000" ? true : false;
                 }
 
                 if (request.WalletName == "SA Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].IsSA) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].IsSA) return BadResponse("error_promotion_not_supported_game");
                     var resultSA = await SAGameHelpers.CallAPIDeposit(SAUsername, MainWalletAmount);
                     updateMainWallet = resultSA.Descendants("ErrorMsgId").Single().Value == "0" ? true : false;
                 }
 
                 if (request.WalletName == "Pussy888 Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].IsPussy888) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].IsPussy888) return BadResponse("error_promotion_not_supported_game");
                     var resultPussy888 = await Pussy888GameHelpers.CallTransferAPI(Pussy888Username, MainWalletAmount);
                     updateMainWallet = resultPussy888.code == 0 ? true : false;
                 }
 
                 if (request.WalletName == "AllBet Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].IsAllBet) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].IsAllBet) return BadResponse("error_promotion_not_supported_game");
                     var resultAllBet = await AllBetGameHelpers.DepositWithdrawCallAPI(AllbetUsername, 1, MainWalletAmount);
                     updateMainWallet = resultAllBet.error_code == "OK" ? true : false;
                 }
 
                 if (request.WalletName == "WM Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].IsWM) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].IsWM) return BadResponse("error_promotion_not_supported_game");
                     var resultWM = await WMGameHelpers.TransferCallAPI(WMUsername, MainWalletAmount);
                     updateMainWallet = resultWM.errorCode == 0 ? true : false;
                 }
 
                 if (request.WalletName == "Pragmatic Wallet")
                 {
-                    if (gameSupport.Count>0 && !gameSupport[0].IsPragmatic) return BadResponse("error_promotion_not_supported_game");
+                    if (gameSupport.Count > 0 && !gameSupport[0].IsPragmatic) return BadResponse("error_promotion_not_supported_game");
                     var resultPragmatic = await PragmaticGameHelpers.TransferBalance(PragmaticUsername, MainWalletAmount);
                     updateMainWallet = resultPragmatic.error == "0" ? true : false;
                 }

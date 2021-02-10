@@ -277,7 +277,6 @@ namespace Webet333.api.Helpers
             var resultNumber = JsonConvert.SerializeObject(responseNumber.OrderBy(x => x.TransId).ToList());
             for (int i = 0; i <= response.Count(); i += 10000)
             {
-
                 var result = JsonConvert.SerializeObject(response.OrderBy(x => x.TransId).Skip(i).Take(10000).ToList());
                 using (var repository = new DapperRepository<dynamic>(Connection))
                 {

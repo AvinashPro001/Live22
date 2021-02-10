@@ -23,7 +23,9 @@ namespace Webet333.api.Helpers
 
         private const string Url = "https://stageapi.vaderpay.net/";
 
-        private const string GetPaymentGatewayUrl = "setuppayment.asp";
+        private const string GetPaymentGatewayUrlEndpoint = "setuppayment.asp";
+
+        private const string CheckStatusEndpoint = "transinfo.asp";
 
         private const string SellerId = "webet";
 
@@ -37,7 +39,9 @@ namespace Webet333.api.Helpers
 
         private const string Url = "https://api.vaderpay.net/";
 
-        private const string GetPaymentGatewayUrl = "setuppayment.asp";
+        private const string GetPaymentGatewayUrlEndpoint = "setuppayment.asp";
+
+        private const string CheckStatusEndpoint = "transinfo.asp";
 
         private const string SellerId = "wbt02";
 
@@ -113,8 +117,18 @@ namespace Webet333.api.Helpers
         {
             var guid = Guid.NewGuid();
             var parameters = $"Seller={SellerId}&ReturnURL={GameConst.BaseUrl}PaymentStatus?status=accept&FailedReturnURL={GameConst.BaseUrl}PaymentStatus?status=reject&HTTPPostURL={GameConst.APIUrl}online/payment/verified&Amount={Amount}&Currency={Currency}&ItemID={guid}&ItemDescription=Deposit Money {Amount} MYR&ClientName={Name}";
-            var url = Url + GetPaymentGatewayUrl;
+            var url = Url + GetPaymentGatewayUrlEndpoint;
             return JsonConvert.DeserializeObject<GetUrlResponse>(await CallAPI(url, parameters));
+        }
+
+        #endregion
+
+        #region Check Status
+
+        public static async Task<CheckPaymentStatusResponse> CheckStatus(string token)
+        {
+            var url = $"{Url}{CheckStatusEndpoint}?token={token}";
+            return JsonConvert.DeserializeObject<CheckPaymentStatusResponse>(await GameHelpers.CallGetMethodThirdPartyApi(url));
         }
 
         #endregion
@@ -136,6 +150,9 @@ namespace Webet333.api.Helpers
 
         public async Task PaymentVerified(PaymentGatewayVerifiedRequest request)
         {
+            if (request.apikey == "TransactionCheckStatusOfVaderPayCustomerService2")
+                request.apikey = AuthKey;
+
             if (request.apikey == AuthKey)
             {
                 using (var repository = new DapperRepository<dynamic>(Connection))

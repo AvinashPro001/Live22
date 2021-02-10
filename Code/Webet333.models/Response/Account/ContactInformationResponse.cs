@@ -32,5 +32,11 @@ namespace Webet333.models.Response.Account
 
         [JsonProperty("TypeDetailsId")]
         public Guid TypeDetailsId { get; set; }
+
+        [JsonProperty("ClassChecked")]
+        public bool ClassChecked { get; set; }
+
+        [JsonProperty("Url")]
+        public string Url { get; set; }
     }
 }
