@@ -405,6 +405,7 @@ export class BettingDetailsComponent implements OnInit {
             this.gmtDisable = true;
             (document.getElementById("fromDate") as HTMLInputElement).style.display = "";
             (document.getElementById("toDate") as HTMLInputElement).style.display = "";
+            (document.getElementById("startDate") as HTMLInputElement).style.display = "none";
             (document.getElementById("gmtDiv") as HTMLInputElement).style.display = "none";
             (document.getElementById("todayFilter") as HTMLInputElement).style.display = "";
             (document.getElementById("yesterdayFilter") as HTMLInputElement).style.display = "";

@@ -64,10 +64,8 @@
             </div>
         </div>
         <div class="card-body">
-            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
-                           [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60" [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
             </ngx-datatable>
-
             <div class="row col-12">
                 <div>
                     <label><b>Total Deposit:   </b>{{totalDeposit}} </label>&nbsp;&nbsp;&nbsp;&nbsp;

@@ -237,7 +237,7 @@ export class UsersDetailsComponent implements OnInit {
         private ngbCalendar: NgbCalendar,
         private dateAdapter: NgbDateAdapter<string>,
         private router: Router,
-        private getDateService: CommonService
+        private commonService: CommonService
     ) { }
     //#endregion
 
@@ -283,7 +283,7 @@ export class UsersDetailsComponent implements OnInit {
     //#region Betting Details Game Change Method
 
     onGameChange($event) {
-        this.setDateOtherPicker(new Date(), new Date());
+        this.commonService.setDateOtherPicker(new Date(), new Date());
 
         if ($event.target.value === "M8" || $event.target.value === "DG" || $event.target.value === "Pragmatic") {
             this.disable = true;
@@ -302,6 +302,7 @@ export class UsersDetailsComponent implements OnInit {
             this.gmtDisable = true;
             (document.getElementById("fromDate") as HTMLInputElement).style.display = "";
             (document.getElementById("toDate") as HTMLInputElement).style.display = "";
+            (document.getElementById("startDate") as HTMLInputElement).style.display = "none";
             (document.getElementById("gmtDiv") as HTMLInputElement).style.display = "none";
             (document.getElementById("todayFilter") as HTMLInputElement).style.display = "";
             (document.getElementById("yesterdayFilter") as HTMLInputElement).style.display = "";
@@ -995,56 +996,19 @@ export class UsersDetailsComponent implements OnInit {
         }
     }
 
-    setDatePickerFormate(fromdate) {
-        //let temp = { day: 3, month: 1, year: 2020 };
-
-        var preDate = fromdate.getDate();
-        var preMonth = fromdate.getMonth() + 1;
-        var preYear = fromdate.getFullYear();
-
-        let temp = { day: preDate, month: preMonth, year: preYear };
-
-        return this.dateAdapter.toModel(temp);
-    }
-
     setDatePicker(fromdate = null, todate = null) {
-        this.datePickerfromdate = this.setDatePickerFormate(fromdate);
-        this.datePickertodate = this.setDatePickerFormate(todate);
-    }
-
-    setDateOtherPicker(fromdate = null, todate = null) {
-        //Date formate :: Month / date / yesr, Hours: Minitus AM
-
-        var selectDate, selectMonth, selectYear, selectFromDate, selectToDate, checkExists;
-
-        selectDate = fromdate.getDate();
-        selectMonth = fromdate.getMonth() + 1;
-        selectYear = fromdate.getFullYear();
-        selectFromDate = selectMonth + '/' + selectDate + '/' + selectYear + ', 12:00 AM';
-
-        selectDate = todate.getDate();
-        selectMonth = todate.getMonth() + 1;
-        selectYear = todate.getFullYear();
-        selectToDate = selectMonth + '/' + selectDate + '/' + selectYear + ', 11:59 PM';
-
-        checkExists = document.getElementById("txt_fromdatetime");
-        if (checkExists != null) (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = selectFromDate;
-
-        checkExists = document.getElementById("txt_todatetime");
-        if (checkExists != null) (document.getElementById("txt_todatetime") as HTMLInputElement).value = selectToDate;
-
-        checkExists = document.getElementById("txt_startdatetime");
-        if (checkExists != null) (document.getElementById("txt_startdatetime") as HTMLInputElement).value = selectFromDate;
+        this.datePickerfromdate = this.commonService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.commonService.setDatePickerFormate(todate);
     }
 
     setToday(Tab) {
-        if (this.userid !== undefined && this.userid !== "") {
-            var dates = this.getDateService.getTodatDate();
+        if (this.userid !== undefined && this.userid !== "" && this.userid !== null) {
+            var dates = this.commonService.getTodatDate();
             var fromdate = dates.fromdate;
             var todate = dates.todate;
 
             this.setDatePicker(new Date(fromdate), new Date(todate));
-            this.setDateOtherPicker(new Date(fromdate), new Date(todate));
+            this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
             if (Tab === "Deposit") this.depositlist(fromdate, todate);
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
@@ -1067,17 +1031,19 @@ export class UsersDetailsComponent implements OnInit {
             var someElement = document.getElementById("lockIcon");
             someElement.className += "";
             this.Resetvalue();
+
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.SelectUserName);
         }
     }
 
     setYesterday(Tab) {
-        if (this.userid !== undefined && this.userid !== "") {
-            var dates = this.getDateService.getYesterDate();
+        if (this.userid !== undefined && this.userid !== "" && this.userid !== null) {
+            var dates = this.commonService.getYesterDate();
             var fromdate = dates.fromdate;
             var todate = dates.todate;
 
             this.setDatePicker(new Date(fromdate), new Date(todate));
-            this.setDateOtherPicker(new Date(fromdate), new Date(todate));
+            this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
             if (Tab === "Deposit") this.depositlist(fromdate, todate);
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
@@ -1100,17 +1066,19 @@ export class UsersDetailsComponent implements OnInit {
             var someElement = document.getElementById("lockIcon");
             someElement.className += "";
             this.Resetvalue();
+
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.SelectUserName);
         }
     }
 
     setThisWeek(Tab) {
-        if (this.userid !== undefined && this.userid !== "") {
-            var dates = this.getDateService.getThisWeekDate();
+        if (this.userid !== undefined && this.userid !== "" && this.userid !== null) {
+            var dates = this.commonService.getThisWeekDate();
             var fromdate = dates.fromdate;
             var todate = dates.todate;
 
             this.setDatePicker(new Date(fromdate), new Date(todate));
-            this.setDateOtherPicker(new Date(fromdate), new Date(todate));
+            this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
             if (Tab === "Deposit") this.depositlist(fromdate, todate);
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
@@ -1133,17 +1101,19 @@ export class UsersDetailsComponent implements OnInit {
             var someElement = document.getElementById("lockIcon");
             someElement.className += "";
             this.Resetvalue();
+
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.SelectUserName);
         }
     }
 
     setThisYear(Tab) {
-        if (this.userid !== undefined && this.userid !== "") {
-            var dates = this.getDateService.getThisYearDate();
+        if (this.userid !== undefined && this.userid !== "" && this.userid !== null) {
+            var dates = this.commonService.getThisYearDate();
             var fromdate = dates.fromdate;
             var todate = dates.todate;
 
             this.setDatePicker(new Date(fromdate), new Date(todate));
-            this.setDateOtherPicker(new Date(fromdate), new Date(todate));
+            this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
             if (Tab === "Deposit") this.depositlist(fromdate, todate);
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
@@ -1166,6 +1136,8 @@ export class UsersDetailsComponent implements OnInit {
             var someElement = document.getElementById("lockIcon");
             someElement.className += "";
             this.Resetvalue();
+
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.SelectUserName);
         }
     }
 
@@ -1279,11 +1251,6 @@ export class UsersDetailsComponent implements OnInit {
     //#region  User Deposit List
 
     depositlist(fromdate, todate) {
-        if (fromdate === null || todate === null) {
-            fromdate = this.getDateService.getTodatDate().fromdate;
-            todate = this.getDateService.getTodatDate().todate;
-        }
-
         this.loadingIndicator = true;
         let data = {
             userId: this.userid,
@@ -1306,8 +1273,11 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.depositRows = [...this.depositRows];
+            this.loadingIndicator = false;
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message)
+            this.loadingIndicator = false;
         });
-        this.loadingIndicator = false;
     }
 
     //#endregion User Deposit List
@@ -1315,11 +1285,6 @@ export class UsersDetailsComponent implements OnInit {
     //#region  User Withdraw List
 
     withdrawlist(fromdate, todate) {
-        if (fromdate === null || todate === null) {
-            fromdate = this.getDateService.getTodatDate().fromdate;
-            todate = this.getDateService.getTodatDate().todate;
-        }
-
         this.loadingIndicator = true;
         let data = {
             userId: this.userid,
@@ -1343,8 +1308,11 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.withdrawRows = [...this.withdrawRows];
+            this.loadingIndicator = false;
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message)
+            this.loadingIndicator = false;
         });
-        this.loadingIndicator = false;
     }
 
     //#endregion User Withdraw List
@@ -1352,11 +1320,6 @@ export class UsersDetailsComponent implements OnInit {
     //#region  User Transfer List
 
     transferlist(fromdate, todate) {
-        if (fromdate === null || todate === null) {
-            fromdate = this.getDateService.getTodatDate().fromdate;
-            todate = this.getDateService.getTodatDate().todate;
-        }
-
         this.loadingIndicator = true;
         let data = {
             userId: this.userid,
@@ -1378,8 +1341,11 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.transferRows = [...this.transferRows];
+            this.loadingIndicator = false;
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message)
+            this.loadingIndicator = false;
         });
-        this.loadingIndicator = false;
     }
 
     //#endregion User Transfer List
@@ -1387,11 +1353,6 @@ export class UsersDetailsComponent implements OnInit {
     //#region  User Promotion List
 
     promotionlist(fromdate, todate) {
-        if (fromdate === null || todate === null) {
-            fromdate = this.getDateService.getTodatDate().fromdate;
-            todate = this.getDateService.getTodatDate().todate;
-        }
-
         this.loadingIndicator = true;
         let data = {
             userid: this.userid,
@@ -1418,8 +1379,11 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.promotionRows = [...this.promotionRows];
+            this.loadingIndicator = false;
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message)
+            this.loadingIndicator = false;
         });
-        this.loadingIndicator = false;
     }
 
     //#endregion User Promotion List
@@ -1427,11 +1391,6 @@ export class UsersDetailsComponent implements OnInit {
     //#region  User Rebate List
 
     rebatelist(fromdate, todate) {
-        if (fromdate === null || todate === null) {
-            fromdate = this.getDateService.getTodatDate().fromdate;
-            todate = this.getDateService.getTodatDate().todate;
-        }
-
         this.loadingIndicator = true;
         let data = {
             userid: this.userid,
@@ -1454,8 +1413,11 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.rebateRows = [...this.rebateRows];
+            this.loadingIndicator = false;
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message)
+            this.loadingIndicator = false;
         });
-        this.loadingIndicator = false;
     }
 
     //#endregion User Rebate List
@@ -1463,11 +1425,6 @@ export class UsersDetailsComponent implements OnInit {
     //#region  User Statement List
 
     statementlist(fromdate, todate) {
-        if (fromdate === null || todate === null) {
-            fromdate = this.getDateService.getTodatDate().fromdate;
-            todate = this.getDateService.getTodatDate().todate;
-        }
-
         this.loadingIndicator = true;
         let data = {
             userId: this.userid,
@@ -1490,8 +1447,11 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.statementRows = [...this.statementRows];
+            this.loadingIndicator = false;
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message)
+            this.loadingIndicator = false;
         });
-        this.loadingIndicator = false;
     }
 
     //#endregion User Statement List
@@ -1522,8 +1482,11 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.restoreRows = [...this.restoreRows];
+            this.loadingIndicator = false;
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message)
+            this.loadingIndicator = false;
         });
-        this.loadingIndicator = false;
     }
 
     //#endregion User Rebate List
@@ -2013,16 +1976,9 @@ export class UsersDetailsComponent implements OnInit {
         if (this.userid != null && this.userid != undefined) {
             this.loadingIndicator = true;
             this.rows = [];
-            this.fromDate = this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
-            this.toDate = this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
-
-            this.startdate = this.datePipe.transform((document.getElementById("txt_startdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss");
-
-            if (startingDate !== null && endingDate !== null) {
-                this.fromDate = startingDate;
-                this.toDate = endingDate;
-                this.startdate = startingDate;
-            }
+            this.fromDate = startingDate === null ? this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss") : startingDate;
+            this.toDate = endingDate === null ? this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss") : endingDate;
+            this.startdate = startingDate === null ? this.datePipe.transform((document.getElementById("txt_startdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss") : startingDate;
 
             let Model = {
                 fromdate: this.fromDate,
