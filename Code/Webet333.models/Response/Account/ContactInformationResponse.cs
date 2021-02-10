@@ -38,5 +38,8 @@ namespace Webet333.models.Response.Account
 
         [JsonProperty("Url")]
         public string Url { get; set; }
+
+        [JsonProperty("IsOpenInNewPage")]
+        public bool IsOpenInNewPage { get; set; }
     }
 }
