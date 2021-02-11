@@ -10,8 +10,17 @@
         <div class="col-lg-2 col-xs-4">
             <button class="mb-1 btn btn-outline-primary" (click)="show(content)" type="button">Withdraw Amount &nbsp;&nbsp; <span id="lockIcon" class=""></span>&nbsp;&nbsp;{{totalWithdrawAmountWithMYR}}</button>
         </div>
-        <div class="col-2">
+        <div class="col-1">
             <div class="text-center"><b>Total Deposit</b></div><div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalDepositAmount }}</b></div>
+        </div>
+        <div class="col-1">
+            <div class="text-center"><b>Total Withdraw</b></div><div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawAmount }}</b></div>
+        </div>
+        <div class="col-1">
+            <div class="text-center"><b>Total turnover</b></div><div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalTurnover }}</b></div>
+        </div>
+        <div class="col-1">
+            <div class="text-center"><b>Total Winlose</b></div><div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawAmount-userdata.TotalDepositAmount }}</b></div>
         </div>
     </div>
 </div>

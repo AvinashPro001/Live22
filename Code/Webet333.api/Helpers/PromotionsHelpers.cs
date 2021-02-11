@@ -159,6 +159,14 @@ namespace Webet333.api.Helpers
             }
         }
 
+        public async Task<dynamic> FreeCreditPromotionSetting()
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.FindAsync(StoredProcConsts.Promotions.FreeCreditPromotionSetting, new { });
+            }
+        }
+
         public async Task<dynamic> PromotionReport(GlobalListRequest request)
         {
             using (var repository = new DapperRepository<PromotionReport>(Connection))

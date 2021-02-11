@@ -361,5 +361,21 @@ namespace Webet333.api.Controllers
 
         #endregion Promotion Report List
 
+
+        #region Free Credit Promotion Setting
+
+        //[Authorize]
+        [HttpGet(ActionsConst.Promotions.PromotionFreeCredit)]
+        public async Task<IActionResult> FreeCreditPromotionSetting()
+        {
+            //var Role = GetUserRole(User);
+
+            using (var promotion_helper = new PromotionsHelpers(Connection))
+            {
+                return OkResponse(await promotion_helper.FreeCreditPromotionSetting());
+            }
+        }
+
+        #endregion Free Credit Promotion Setting
     }
 }

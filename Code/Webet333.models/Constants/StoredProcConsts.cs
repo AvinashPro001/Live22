@@ -247,6 +247,8 @@
 
             public const string PromotionApplyList = "[dbo].[Promotion_Apply_Select]";
 
+            public const string FreeCreditPromotionSetting = "[dbo].[FreeCredit_Promotion_Setting]";
+
             public const string PromotionReport = "[dbo].[Admin_Promotion_Report]";
 
             public const string PromotionApplyInsert = "[dbo].[Promotion_Apply_Insert]";
