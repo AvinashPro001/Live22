@@ -6,6 +6,7 @@ namespace Webet333.models.Response.Account
 {
     public class AdminBehaviourReportResponse
     {
+        public Guid? userId { get; set; }
         public string Username { get; set; }
         public string Name { get; set; }
         public string MobileNo { get; set; }

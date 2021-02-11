@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
     templateUrl: './manager-approve-list.component.html',
     styleUrls: ['./manager-approve-list.component.scss']
 })
-export class ManagerApproveListComponent implements OnInit {
 
+export class ManagerApproveListComponent implements OnInit {
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
     @ViewChild('receipt') receipt: TemplateRef<any>;
@@ -32,7 +32,7 @@ export class ManagerApproveListComponent implements OnInit {
     verified: any;
     loadingIndicator: boolean = true;
     AutoRefersh: any;
-
+    usersDetailsForReportPage: any;
 
     constructor(
         private adminService: AdminService,
@@ -55,7 +55,7 @@ export class ManagerApproveListComponent implements OnInit {
         this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
         let data = {
             name: "ManagerAutoRefersh",
-            value: this.AutoRefersh+""
+            value: this.AutoRefersh + ""
         }
         this.adminService.add<any>(account.AdminNotificationParameterUpdate, data).subscribe(res => { });
     }
@@ -93,7 +93,6 @@ export class ManagerApproveListComponent implements OnInit {
         this.setColumn(this.selectedList);
         this.setPageData(this.selectedList);
     }
-
 
     onChange($event) {
         this.setColumn(this.selectedList.verified);
@@ -154,6 +153,7 @@ export class ManagerApproveListComponent implements OnInit {
             let i = 0;
             if (res.data.length > 0) {
                 this.managerData = res.data;
+                this.usersDetailsForReportPage = res.data;
                 res.data.forEach(el => {
                     this.rows.push({
                         No: ++i,
@@ -169,14 +169,10 @@ export class ManagerApproveListComponent implements OnInit {
             }
             this.rows = [...this.rows];
             this.loadingIndicator = false;
-
-
-
         }, error => {
             this.loadingIndicator = false;
             this.toasterService.pop('error', 'Error', error.error.message);
         });
-
     }
     //#endregion
 
@@ -201,11 +197,8 @@ export class ManagerApproveListComponent implements OnInit {
             var Username = ((document.getElementById("txt_managerUsername") as HTMLInputElement).value)
             var Password = ((document.getElementById("txt_managerPassword") as HTMLInputElement).value)
 
-            if (Username == "")
-                return this.toasterService.pop('error', 'Error', "Username Required");
-
-            if (Password == "")
-                return this.toasterService.pop('error', 'Error', "Password Required");
+            if (Username == "") return this.toasterService.pop('error', 'Error', "Username Required");
+            if (Password == "") return this.toasterService.pop('error', 'Error', "Password Required");
 
             let data = {
                 id: this.rowId,
@@ -221,7 +214,6 @@ export class ManagerApproveListComponent implements OnInit {
                 (document.getElementById("txt_managerPassword") as HTMLInputElement).value = "";
                 this.modalService.dismissAll();
                 this.ngOnInit();
-
             }, error => {
                 this.toasterService.pop('error', 'Error', error.error.message);
             });
@@ -282,4 +274,16 @@ export class ManagerApproveListComponent implements OnInit {
     }
 
     //#endregion Check Permission
+
+    //#region Redirect to user details page
+
+    show(row = null, content = null) {
+        //this.viewData = row;
+        //this.openWindowCustomClass(content);
+
+        localStorage.setItem('id', JSON.stringify(row));
+        window.open('admin/customers/users-details', '_blank');
+    }
+
+    //#endregion Redirect to user details page
 }

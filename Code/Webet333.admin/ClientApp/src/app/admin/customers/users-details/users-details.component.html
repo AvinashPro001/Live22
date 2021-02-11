@@ -1,8 +1,7 @@
 <div class="container-fluid">
     <div class="row col-lg-12 col-xs-12">
         <div class="col-lg-2 col-xs-4" *ngIf="ShowDropDown">
-            <ngx-select-dropdown tabindex="0" [multiple]="false"
-                                 [config]="config" [options]="customerData" (change)="onChangeDropDown($event)"></ngx-select-dropdown>
+            <ngx-select-dropdown tabindex="0" [multiple]="false" [config]="config" [options]="customerData" (change)="onChangeDropDown($event)"></ngx-select-dropdown>
         </div>
         <div class="col-lg-1 col-xs-4">
             <button class="mb-1 btn btn-success" (click)='RetoreBalance()' type="button">Restore</button>

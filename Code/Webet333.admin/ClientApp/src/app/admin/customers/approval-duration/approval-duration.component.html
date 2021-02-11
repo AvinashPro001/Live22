@@ -23,7 +23,7 @@
                     <div class="input-group">
                         <input class="form-control" placeholder="yyyy-mm-dd" name="dp1" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime" [(ngModel)]="datePickertodate">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" type="button" [(ngModel)]="datePickertodate"></button>
+                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" type="button"></button>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,6 @@
                     <h4 class="text-muted text-thin">> Second</h4>
                     <input class="form-control" type="text" id="txt_second">
                 </div>
-
                 <div class="p-2">
                     <h4 class="text-muted text-thin">&nbsp;</h4>
                     <button class="mb-1 btn btn-success" (click)='Search()' type="button">Search</button>
@@ -62,6 +61,11 @@
             </div>
             <div>
                 <ngx-datatable class="material bootstrap no-detail-row" (dblclick)="edit($event)" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7">
+                    <ngx-datatable-column *ngFor="let column of columns; let i = index;" name="{{column.name}}" prop="{{column.prop}}">
+                        <ng-template let-rowIndex="rowIndex" let-value="value" let-row="row" *ngIf="column.prop==='UserName'" ngx-datatable-cell-template>
+                            <a [routerLink]='' (click)='show(usersDetailsForReportPage[rowIndex],null)'>{{value}}</a>
+                        </ng-template>
+                    </ngx-datatable-column>
                 </ngx-datatable>
             </div>
         </div>

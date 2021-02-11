@@ -95,10 +95,10 @@ export const AGGame = {
     H: "odd_type=H", //(1000~100000)
     I: "odd_type=I",  //(2000~200000)
 
-    MYR: "currency=MYR", //Malaysia 
-    CNY: "currency=CNY", //China 
+    MYR: "currency=MYR", //Malaysia
+    CNY: "currency=CNY", //China
     IDR: "currency=IDR", //Indonesia
-    VND: "currency=VND", //Vietnam 
+    VND: "currency=VND", //Vietnam
     THB: "currency=THB",  //Thailand
 
     VendorID: "vendor_id=jdWvhb3sj83fhv33",

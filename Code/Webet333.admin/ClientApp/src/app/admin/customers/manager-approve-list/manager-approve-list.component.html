@@ -8,13 +8,11 @@
                 <div class="col-lg-5">
                 </div>
                 <div class="col-lg-3" style="display: flex;">
-                    
                     <div class="">
                         <label class="container">
                             <input type="checkbox" [checked]="AutoRefersh" id="chk_autorefersh" (change)="AutoRefershUpdate()">
                             <span class="checkmark"></span>
                         </label>
-
                     </div>
                     <div><b>Auto Refersh and Ding Ding Notification</b></div>
                 </div>
@@ -28,12 +26,10 @@
                         <option *ngFor="let c of listType" [ngValue]="c">{{c.verified}}</option>
                     </select>
                 </div>
-                
             </div>
             <div>
                 <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="7">
-                    <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
-                                 ngx-datatable-row-detail-template>
+                    <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
                         <label>
                             <button id="acceptBtn" data-id="managerData[rowIndex].id" class="mb-1 button btn-success" type="button" (click)="OpenWindows(remark,managerData[rowIndex].id,'accept')" data-toggle="modal">
                                 <i class="fa fa-check" aria-hidden="true" title="Accept"></i>
@@ -45,16 +41,19 @@
                             </button>
                         </label>
                     </ng-template>
-                    <ng-template #receipt let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
-                                 ngx-datatable-row-detail-template>
+                    <ng-template #receipt let-rowIndex="rowIndex" let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
                         <label>
                             <button data-id="managerData[rowIndex].id" class="mb-1 button btn-success" (click)="receiptview(managerData[rowIndex].identityProof,content)" style="margin-left:5px;">
                                 <i class="fa fa-newspaper-o" aria-hidden="true"></i>
                             </button>
                         </label>
                     </ng-template>
+                    <ngx-datatable-column *ngFor="let column of columns; let i = index;" name="{{column.name}}" prop="{{column.prop}}">
+                        <ng-template let-rowIndex="rowIndex" let-value="value" let-row="row" *ngIf="column.prop==='Username'" ngx-datatable-cell-template>
+                            <a [routerLink]='' (click)='show(usersDetailsForReportPage[rowIndex],null)'>{{value}}</a>
+                        </ng-template>
+                    </ngx-datatable-column>
                 </ngx-datatable>
-
             </div>
         </div>
     </div>
@@ -73,7 +72,6 @@
                 <img [src]="image" id="ImageLoad" (click)="ImageOpenNewTab(image)" alt="">
             </div>
         </ngx-slick>
-
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
@@ -104,7 +102,6 @@
         </div>
     </div>
     <div class="modal-footer">
-
         <button type="button" class="btn btn-success" (click)="Accept()">Yes</button>
         <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">No</button>
     </div>

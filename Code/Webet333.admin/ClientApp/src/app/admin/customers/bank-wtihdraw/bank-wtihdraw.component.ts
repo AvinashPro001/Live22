@@ -20,7 +20,7 @@ export class BankWtihdrawComponent implements OnInit {
         private toasterService: ToasterService,
         private modalService: NgbModal,
         private router: Router,
-        private getDateService: CommonService
+        private commonService: CommonService
     ) { }
 
     slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };
@@ -35,6 +35,7 @@ export class BankWtihdrawComponent implements OnInit {
     totalWithdraw: any;
     totalWithdrawAmount: any;
     uniqueId: any;
+    usersDetailsForReportPage: any;
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
@@ -97,41 +98,41 @@ export class BankWtihdrawComponent implements OnInit {
     //#region Filter Data
 
     setToday() {
-        var dates = this.getDateService.getTodatDate();
+        var dates = this.commonService.getTodatDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
-        this.getDateService.setDateOtherPicker(new Date(fromdate), new Date(todate));
+        this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
         this.GetDetails(fromdate, todate);
     }
 
     setYesterday() {
-        var dates = this.getDateService.getYesterDate();
+        var dates = this.commonService.getYesterDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
-        this.getDateService.setDateOtherPicker(new Date(fromdate), new Date(todate));
+        this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
         this.GetDetails(fromdate, todate);
     }
 
     setThisWeek() {
-        var dates = this.getDateService.getThisWeekDate();
+        var dates = this.commonService.getThisWeekDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
-        this.getDateService.setDateOtherPicker(new Date(fromdate), new Date(todate));
+        this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
         this.GetDetails(fromdate, todate);
     }
 
     setThisYear() {
-        var dates = this.getDateService.getThisYearDate();
+        var dates = this.commonService.getThisYearDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
-        this.getDateService.setDateOtherPicker(new Date(fromdate), new Date(todate));
+        this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
         this.GetDetails(fromdate, todate);
     }
@@ -188,12 +189,13 @@ export class BankWtihdrawComponent implements OnInit {
         this.loadingIndicator = true;
         let model = {
             bankName: BankName,
-            fromDate: (document.getElementById("txt_fromdatetime") as HTMLInputElement).value,
-            toDate: (document.getElementById("txt_todatetime") as HTMLInputElement).value,
+            fromDate: this.datePipe.transform((document.getElementById("txt_fromdatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss"),
+            toDate: this.datePipe.transform((document.getElementById("txt_todatetime") as HTMLInputElement).value, "yyyy-MM-dd HH:mm:ss"),
             method: "WITHDRAW",
         }
 
         this.adminService.add<any>(customer.paymentStaticsDetails, model).subscribe(res => {
+            this.usersDetailsForReportPage = res.data;
             let i = 0;
             res.data.forEach(el => {
                 this.rowDetails.push({
@@ -278,4 +280,16 @@ export class BankWtihdrawComponent implements OnInit {
     }
 
     //#endregion Check Permission
+
+    //#region Redirect to user details page
+
+    show(row = null, content = null) {
+        //this.viewData = row;
+        //this.openWindowCustomClass(content);
+
+        localStorage.setItem('id', JSON.stringify(row));
+        window.open('admin/customers/users-details', '_blank');
+    }
+
+    //#endregion Redirect to user details page
 }
