@@ -164,6 +164,19 @@ namespace Webet333.api.Helpers
 
         #endregion
 
+        #region Get Pending Token List
+
+        public async Task<List<GetTokenResponse>> GetPendingTokenList()
+        {
+            using (var repository = new DapperRepository<GetTokenResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.PaymentGateway.GetPendingToken, new { });
+                return result.ToList();
+            }
+        }
+
+        #endregion
+
         #region House Keeping
         public void Dispose()
         {
