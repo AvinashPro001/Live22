@@ -206,6 +206,8 @@
             public const string ContactDetailsUpdate = "contact/details/update";
 
             public const string ContactDetailsAdd = "contact/details/add";
+
+            
         }
 
         public class Promotions
@@ -233,8 +235,6 @@
             public const string PromotionApplyCheck = "promotions/promotionapply/check";
 
             public const string PromotionApplyList = "promotions/promotionapply/select";
-
-            public const string PromotionFreeCredit = "promotions/freecredit";
 
             public const string PromotionReport = "promotions/report";
 
@@ -657,6 +657,10 @@
             public const string VIPLevelSelect = "viplevel/select";
 
             public const string VIPLevelUserUpdate= "viplevel/user/update";
+
+            public const string VIPLevelGiveFreeCredit = "viplevel/give/freecredit";
+
+            public const string VIPFreeCreditPromotionSetting = "viplevel/freecredit/promotion/setting";
         }
     }
 }

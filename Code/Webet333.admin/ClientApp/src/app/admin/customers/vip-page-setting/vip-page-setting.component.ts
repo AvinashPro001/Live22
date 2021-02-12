@@ -29,7 +29,7 @@ export class VipPageComponent implements OnInit {
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.getVIPcategory();
-            this.promotionList();
+            this.FreeCreditSetting();
         }
     }
 
@@ -47,9 +47,9 @@ export class VipPageComponent implements OnInit {
     }
 
     //#region customerUser
-    promotionList() {
+    FreeCreditSetting() {
 
-        this.adminService.getAll<any>(account.FreeCeditSetting).subscribe(res => {
+        this.adminService.getAll<any>(VIPSetting.VIPFreeCreditPromotionSetting).subscribe(res => {
             this.promotionData = res.data;
             (document.getElementById("freeCreditTurnover") as HTMLInputElement).value = this.promotionData.TurnoverTime
         }, error => {
@@ -58,9 +58,24 @@ export class VipPageComponent implements OnInit {
     }
     //#endregion
 
+    //#region customerUser
+    GiveFreeCreditSetting() {
+        this.disabled = true;
+        this.adminService.getAll<any>(VIPSetting.VIPGiveFreeCredit).subscribe(res => {
+            this.disabled = false;
+            this.toasterService.pop('success', 'Success', res.message);
+        }, error => {
+            this.disabled = false;
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+    //#endregion
+
     onChange(event) {
 
     }
+
+    //#region Get Vip Category
 
     getVIPcategory() {
         this.adminService.get<any>(VIPSetting.getVIP).subscribe(res => {
@@ -128,6 +143,10 @@ export class VipPageComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
+
+    //#endregion get Vip Category
+
+    //#region Add Vip Category
 
     async addVIPcategory() {
         if (await this.checkUpdatePermission()) {
@@ -221,6 +240,8 @@ export class VipPageComponent implements OnInit {
             });
         }
     }
+
+    //#endregion Add Vip Category
 
     //#region Check Permission
 

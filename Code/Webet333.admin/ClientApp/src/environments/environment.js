@@ -43,7 +43,6 @@ exports.account = {
     AdminNotificationParameterSelect: exports.environment.apiUrl + 'account/notication/info/select',
     VaderPayParameterSelect: exports.environment.apiUrl + 'account/vaderpay/maintenance/select',
     VaderPayParameterUpdate: exports.environment.apiUrl + 'account/vaderpay/maintenance/update',
-    FreeCeditSetting: exports.environment.apiUrl + 'promotions/freecredit',
 };
 exports.Game = {
     selectUser: exports.environment.apiUrl + 'Game/SelectUser',
@@ -318,6 +317,8 @@ exports.VIPSetting = {
     getVIP: exports.environment.apiUrl + "vipcategorysetting/select",
     VIPLevelList: exports.environment.apiUrl + 'viplevel/select',
     UserVIPLevelUpdate: exports.environment.apiUrl + 'viplevel/user/update',
+    VIPFreeCreditPromotionSetting: exports.environment.apiUrl + 'viplevel/freecredit/promotion/setting',
+    VIPGiveFreeCredit: exports.environment.apiUrl + 'viplevel/give/freecredit',
 };
 exports.ErrorMessages = {
     unAuthorized: "You are not authorized to access this page!!",

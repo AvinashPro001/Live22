@@ -247,7 +247,7 @@
 
             public const string PromotionApplyList = "[dbo].[Promotion_Apply_Select]";
 
-            public const string FreeCreditPromotionSetting = "[dbo].[FreeCredit_Promotion_Setting]";
+            
 
             public const string PromotionReport = "[dbo].[Admin_Promotion_Report]";
 
@@ -522,6 +522,11 @@
             public const string VIPCategorySelect = "[dbo].[VIPCategory_Select]";
 
             public const string UserVIPLevelUpdate = "[dbo].[User_VIPLevel_Update]";
+
+            public const string VIPFreeCredit = "[dbo].[FreeCredit_On_Monday]";
+
+            public const string VIPFreeCreditPromotionSetting = "[dbo].[FreeCredit_Promotion_Setting]";
+
         }
     }
 }

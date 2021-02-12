@@ -71,6 +71,24 @@ namespace Webet333.api.Helpers
 
         #endregion VIP Level Update
 
+        public async Task GiveFreeCredit()
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.GetDataAsync(StoredProcConsts.VIPCategory.VIPFreeCredit, new { });
+                
+            }
+        }
+
+        public async Task<dynamic> GetFreeCreditPromotionSetting()
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.FindAsync(StoredProcConsts.VIPCategory.VIPFreeCreditPromotionSetting, new { });
+            }
+        }
+
+
         #region House Keeping
         public void Dispose()
         {

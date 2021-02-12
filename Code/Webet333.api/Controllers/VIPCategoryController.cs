@@ -79,5 +79,36 @@ namespace Webet333.api.Controllers
             }
         }
 
+        #region VIP Level Free Credit 
+
+        [HttpGet(ActionsConst.VIPCategory.VIPLevelGiveFreeCredit)]
+        public async Task<IActionResult> GiveFreeCredit()
+        {
+            await CheckUserRole();
+
+            using (var vip_help = new VIPCategoryHelpers(Connection))
+            {
+                await vip_help.GiveFreeCredit();
+                return OkResponse();
+            }
+        }
+
+        #endregion
+
+        #region VIP Free Credit Promotion Setting
+
+        [Authorize]
+        [HttpGet(ActionsConst.VIPCategory.VIPFreeCreditPromotionSetting)]
+        public async Task<IActionResult> FreeCreditPromotionSetting()
+        {
+            var Role = GetUserRole(User);
+
+            using (var vip_helper = new VIPCategoryHelpers(Connection))
+            {
+                return OkResponse(await vip_helper.GetFreeCreditPromotionSetting());
+            }
+        }
+
+        #endregion Free Credit Promotion Setting
     }
 }

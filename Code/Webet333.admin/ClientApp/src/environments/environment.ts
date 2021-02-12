@@ -50,8 +50,6 @@ export const account = {
     VaderPayParameterSelect: environment.apiUrl + 'account/vaderpay/maintenance/select',
     VaderPayParameterUpdate: environment.apiUrl + 'account/vaderpay/maintenance/update',
 
-
-    FreeCeditSetting: environment.apiUrl + 'promotions/freecredit',
 }
 
 export const Game = {
@@ -391,6 +389,9 @@ export const VIPSetting = {
 
     VIPLevelList: environment.apiUrl + 'viplevel/select',
     UserVIPLevelUpdate: environment.apiUrl + 'viplevel/user/update',
+
+    VIPFreeCreditPromotionSetting: environment.apiUrl + 'viplevel/freecredit/promotion/setting',
+    VIPGiveFreeCredit: environment.apiUrl + 'viplevel/give/freecredit',
 }
 
 export const ErrorMessages = {

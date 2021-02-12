@@ -50,8 +50,6 @@ export const account = {
     VaderPayParameterSelect: environment.apiUrl + 'account/vaderpay/maintenance/select',
     VaderPayParameterUpdate: environment.apiUrl + 'account/vaderpay/maintenance/update',
 
-
-    FreeCeditSetting: environment.apiUrl + 'promotions/freecredit',
 }
 
 export const Game = {
@@ -95,10 +93,10 @@ export const AGGame = {
     H: "odd_type=H", //(1000~100000)
     I: "odd_type=I",  //(2000~200000)
 
-    MYR: "currency=MYR", //Malaysia 
-    CNY: "currency=CNY", //China 
+    MYR: "currency=MYR", //Malaysia
+    CNY: "currency=CNY", //China
     IDR: "currency=IDR", //Indonesia
-    VND: "currency=VND", //Vietnam 
+    VND: "currency=VND", //Vietnam
     THB: "currency=THB",  //Thailand
 
     VendorID: "vendor_id=jdWvhb3sj83fhv33",
@@ -391,6 +389,9 @@ export const VIPSetting = {
 
     VIPLevelList: environment.apiUrl + 'viplevel/select',
     UserVIPLevelUpdate: environment.apiUrl + 'viplevel/user/update',
+
+    VIPFreeCreditPromotionSetting: environment.apiUrl + 'viplevel/freecredit/promotion/setting',
+    VIPGiveFreeCredit: environment.apiUrl + 'viplevel/give/freecredit',
 }
 
 export const ErrorMessages = {
