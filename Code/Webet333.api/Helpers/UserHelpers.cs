@@ -31,7 +31,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<GlobalJsonResponse>(Connection))
             {
-                var result = await repository.FindAsync(StoredProcConsts.User.GetUsersByRole, new { Role, Keyword , UserId });
+                var result = await repository.FindAsync(StoredProcConsts.User.GetUsersByRole, new { Role, Keyword, UserId });
 
                 if (result != null && result.DocumentListSerialized != null)
                 {
@@ -98,7 +98,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result = await repository.GetDataAsync(sp_name, new { UserId , UniqueId, Role });
+                var result = await repository.GetDataAsync(sp_name, new { UserId, UniqueId, Role });
                 return result.ToList();
             }
         }
@@ -117,7 +117,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Contact Type Insert
 
         #region Contact Type Update
 
@@ -129,7 +129,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Contact Type Update
 
         #region Contact Type Select
 
@@ -137,14 +137,14 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<ContactTypeSelectResponse>(Connection))
             {
-                var result=await repository.GetDataAsync(StoredProcConsts.User.ContactType_Select, new { });
+                var result = await repository.GetDataAsync(StoredProcConsts.User.ContactType_Select, new { });
                 return result.ToList();
             }
         }
 
-        #endregion
+        #endregion Contact Type Select
 
-        #endregion
+        #endregion Contact Type API's
 
         #region Contact Type Details API's
 
@@ -158,7 +158,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Contact Type Details Add
 
         #region Contact Type Details Update
 
@@ -170,7 +170,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Contact Type Details Update
 
         #region Contact Type Details Select
 
@@ -178,16 +178,16 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<ContactTypeDetailsSelectResponse>(Connection))
             {
-                var result= await repository.GetDataAsync(StoredProcConsts.User.ContactTypeDetails_Select, new { });
+                var result = await repository.GetDataAsync(StoredProcConsts.User.ContactTypeDetails_Select, new { });
                 return result.ToList();
             }
         }
 
-        #endregion
+        #endregion Contact Type Details Select
 
-        #endregion
+        #endregion Contact Type Details API's
 
-        #endregion
+        #endregion Contact Management
 
         #region Get User's List
 
@@ -196,12 +196,16 @@ namespace Webet333.api.Helpers
             using (var repository = new DapperRepository<GlobalJsonResponse>(Connection))
             {
                 var result = await repository.FindAsync(StoredProcConsts.User.GetUsersWinloseReport, new { FromDate, ToDate });
-                var users = JsonConvert.DeserializeObject<List<WinloseReportResponse>>(result.DocumentListSerialized);
-                decimal totalDeposit = users.Sum(x => x.TotalDeposit);
-                decimal totalWithdraw = users.Sum(x => x.TotalWithdraw);
-                decimal totalBonus = users.Sum(x => x.TotalBonus);
-                decimal totalWinlose = users.Sum(x => x.WinLose);
-                return new { totalDeposit, totalWithdraw, totalBonus, totalWinlose, users };
+                if (result != null && result.DocumentListSerialized != null)
+                {
+                    var users = JsonConvert.DeserializeObject<List<WinloseReportResponse>>(result.DocumentListSerialized);
+                    decimal totalDeposit = users.Sum(x => x.TotalDeposit);
+                    decimal totalWithdraw = users.Sum(x => x.TotalWithdraw);
+                    decimal totalBonus = users.Sum(x => x.TotalBonus);
+                    decimal totalWinlose = users.Sum(x => x.WinLose);
+                    return new { totalDeposit, totalWithdraw, totalBonus, totalWinlose, users };
+                }
+                return null;
             }
         }
 
