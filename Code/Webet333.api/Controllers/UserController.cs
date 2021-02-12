@@ -5,6 +5,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -17,6 +18,7 @@ using Webet333.models.Request.Account;
 using Webet333.models.Request.Base;
 using Webet333.models.Request.Payments;
 using Webet333.models.Request.User;
+using Webet333.models.Response;
 using Webet333.models.Response.User;
 
 namespace Webet333.api.Controllers
@@ -26,6 +28,7 @@ namespace Webet333.api.Controllers
     public class UserController : BaseController
     {
         #region Variable
+
         private IHostingEnvironment _hostingEnvironment;
 
         public UserController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
@@ -41,7 +44,6 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Users.Retrieve)]
         public async Task<IActionResult> GetUsers([FromBody] SearchRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
-
             await CheckUserRole();
             using (var user_help = new UserHelpers(Connection))
             {
@@ -228,8 +230,8 @@ namespace Webet333.api.Controllers
             {
                 var users = await user_help.GetUsersWinloseReport(request.FromDate, request.ToDate);
 
-                if (users != null)
-                    return OkResponse(users);
+                if (users != null) return OkResponse(users);
+
                 return NotFoundResponse();
             }
         }
@@ -335,7 +337,6 @@ namespace Webet333.api.Controllers
 
             if (request.PermissionsList == null) request.PermissionsList = null;
 
-
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
                 await repository.AddOrUpdateAsync(
@@ -354,7 +355,7 @@ namespace Webet333.api.Controllers
             return OkResponse();
         }
 
-        #endregion MyRegion
+        #endregion Update
 
         #endregion Permission Management
 
@@ -384,7 +385,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Contact Type Insert
 
         #region Contact Type Update
 
@@ -412,7 +413,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Contact Type Update
 
         #region Contact Type Select
 
@@ -432,13 +433,13 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Contact Type Select
 
-        #endregion
+        #endregion Contact Type API's
 
         #region Contact Type Details API's
 
-        #region Contact Type Details Insert 
+        #region Contact Type Details Insert
 
         [HttpPost(ActionsConst.Users.ContactDetailsAdd)]
         public async Task<IActionResult> ContactTypeDetailsAdd([FromBody] ContactTypeDetailsAddRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
@@ -460,7 +461,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Contact Type Details Insert
 
         #region Contact Type Details Update
 
@@ -489,7 +490,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Contact Type Details Update
 
         #region Contact Type Details Select
 
@@ -509,10 +510,62 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Contact Type Details Select
 
-        #endregion
+        #endregion Contact Type Details API's
 
-        #endregion
+        #endregion Contact Management
+
+        #region Get User Details Based on Id or Username
+
+        [HttpPost(ActionsConst.Users.RetrieveById)]
+        public async Task<IActionResult> RetrieveById([FromBody] RetrieveByIdRequest request)
+        {
+            await CheckUserRole();
+
+            request.UserId = GetUserId(User);
+            request.UniqueId = GetUniqueId(User);
+
+            using (var repository = new DapperRepository<GlobalJsonResponse>(Connection))
+            {
+                var result = await repository.FindAsync(StoredProcConsts.User.Users_Select_By_Id, request);
+
+                if (result != null && result.DocumentListSerialized != null)
+                {
+                    var users = JsonConvert.DeserializeObject<List<dynamic>>(result.DocumentListSerialized);
+
+                    foreach (var data in users)
+                    {
+                        if (data.VIPBanner != null)
+                        {
+                            data.VIPBanner = (data.VIPBanner != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.VIPIcon + "/" + data.VIPLevel + data.VIPBanner : null);
+                        }
+                    }
+                    return OkResponse(users);
+                }
+                else return NotFoundResponse();
+            }
+        }
+
+        #endregion Get User Details Based on Id or Username
+
+        #region Get Users Id & Username
+
+        [HttpGet(ActionsConst.Users.RetrieveForDropdown)]
+        public async Task<IActionResult> RetrieveForDropdown()
+        {
+            await CheckUserRole();
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.User.Users_Select_For_Dropdown, new { });
+                //dynamic users = new List<dynamic>();
+                //if (result != null && result.DocumentListSerialized != null) users = JsonConvert.DeserializeObject<List<dynamic>>(result.DocumentListSerialized);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Get Users Id & Username
     }
 }

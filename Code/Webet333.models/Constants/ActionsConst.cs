@@ -113,7 +113,7 @@
 
             public const string DepositCheckWithoutPromotion = "payments/checkdepositwithoutpromotion";
 
-            public const string WithdrawCheckAmountList= "payments/check/withdrawamount/list";
+            public const string WithdrawCheckAmountList = "payments/check/withdrawamount/list";
 
             public const string PaymentStaticsDetails = "payments/statics/details";
 
@@ -207,7 +207,13 @@
 
             public const string ContactDetailsAdd = "contact/details/add";
 
+<<<<<<< HEAD
             
+=======
+            public const string RetrieveById = "customer/list_by_id";
+
+            public const string RetrieveForDropdown = "customer/list_for_dropdown";
+>>>>>>> da06e3f502b986c2b871b51c6dca61a17dac90bd
         }
 
         public class Promotions
@@ -244,7 +250,7 @@
 
             public const string PromotionGroupSelect = "promotions/group/select";
 
-            public const string PromotionGroupUpdate= "promotions/group/update";
+            public const string PromotionGroupUpdate = "promotions/group/update";
 
             public const string PromotionGroupDelete = "promotions/group/delete";
         }
@@ -280,8 +286,6 @@
             public const string AnnouncementUpdate = "settings/announcement/update";
 
             public const string AnnouncementDelete = "settings/announcement/delete";
-
-
         }
 
         public class Game
@@ -467,17 +471,17 @@
         {
             public const string Kiss918Balance = "gamebalance/918kiss";
 
-            public const string AgBalance="gamebalance/ag";
+            public const string AgBalance = "gamebalance/ag";
 
-            public const string PlaytechBalance="gamebalance/playtech";
+            public const string PlaytechBalance = "gamebalance/playtech";
 
-            public const string Mega888Balance="gamebalance/mega888";
+            public const string Mega888Balance = "gamebalance/mega888";
 
-            public const string M8Balance="gamebalance/m8";
+            public const string M8Balance = "gamebalance/m8";
 
-            public const string JokerBalance="gamebalance/joker";
+            public const string JokerBalance = "gamebalance/joker";
 
-            public const string MaxBetBalance="gamebalance/maxbet";
+            public const string MaxBetBalance = "gamebalance/maxbet";
 
             public const string DGBalance = "gamebalance/dg";
 
@@ -492,7 +496,6 @@
             public const string WMBalance = "gamebalance/wm";
 
             public const string PragmaticBalance = "gamebalance/pragmatic";
-
         }
 
         public class TransferMoney
@@ -656,11 +659,15 @@
 
             public const string VIPLevelSelect = "viplevel/select";
 
+<<<<<<< HEAD
             public const string VIPLevelUserUpdate= "viplevel/user/update";
 
             public const string VIPLevelGiveFreeCredit = "viplevel/give/freecredit";
 
             public const string VIPFreeCreditPromotionSetting = "viplevel/freecredit/promotion/setting";
+=======
+            public const string VIPLevelUserUpdate = "viplevel/user/update";
+>>>>>>> da06e3f502b986c2b871b51c6dca61a17dac90bd
         }
     }
 }

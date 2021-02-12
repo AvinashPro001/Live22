@@ -137,6 +137,10 @@
             public const string ContactTypeDetails_Select = "[dbo].[ContactTypeDetails_Select]";
 
             public const string ContactTypeDetails_Update = "[dbo].[ContactTypeDetails_Update]";
+
+            public const string Users_Select_By_Id = "[dbo].[Users_Select_By_Id]";
+
+            public const string Users_Select_For_Dropdown = "[dbo].[Users_Select_For_Dropdown]";
         }
 
         public class Payments
@@ -188,7 +192,6 @@
             public const string UserWalletBalanceUpdate = "[dbo].[Users_WalletBalance_Update]";
 
             public const string DepositCheckWithoutPromotion = "[dbo].[Deposit_Check_Without_Promotion]";
-
         }
 
         public class PaymentGateway
@@ -219,12 +222,10 @@
             public const string AnnouncementDelete = "[dbo].[Announcements_Delete]";
 
             public const string AnnouncementUpdate = "[dbo].[Announcements_Update]";
-
         }
 
         public class Promotions
         {
-
             public const string Retrieve = "[dbo].[Promotion_Select]";
 
             public const string AdminRetrieve = "[dbo].[Promotion_Admin_Select]";
@@ -260,7 +261,6 @@
             public const string PromotionGroupSelect = "[dbo].[PromotionGroup_SELECT]";
 
             public const string PromotionGroupDelete = "[dbo].[PromotionGroup_Delete]";
-
         }
 
         public class GameBalance
@@ -413,7 +413,6 @@
             public const string BettingDetails_AllBet = "[dbo].[Allbet_BettingDetails_By_Username]";
 
             public const string PragmaticGameNotRegistredUsers = "[dbo].[GetUsersNotRegisteredInPragmaticGame]";
-
         }
 
         public class MaxBetGame
