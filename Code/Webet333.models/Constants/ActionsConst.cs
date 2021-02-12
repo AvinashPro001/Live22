@@ -206,14 +206,6 @@
             public const string ContactDetailsUpdate = "contact/details/update";
 
             public const string ContactDetailsAdd = "contact/details/add";
-
-<<<<<<< HEAD
-            
-=======
-            public const string RetrieveById = "customer/list_by_id";
-
-            public const string RetrieveForDropdown = "customer/list_for_dropdown";
->>>>>>> da06e3f502b986c2b871b51c6dca61a17dac90bd
         }
 
         public class Promotions
@@ -659,15 +651,7 @@
 
             public const string VIPLevelSelect = "viplevel/select";
 
-<<<<<<< HEAD
             public const string VIPLevelUserUpdate= "viplevel/user/update";
-
-            public const string VIPLevelGiveFreeCredit = "viplevel/give/freecredit";
-
-            public const string VIPFreeCreditPromotionSetting = "viplevel/freecredit/promotion/setting";
-=======
-            public const string VIPLevelUserUpdate = "viplevel/user/update";
->>>>>>> da06e3f502b986c2b871b51c6dca61a17dac90bd
         }
     }
 }
