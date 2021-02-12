@@ -162,7 +162,7 @@
     </script>
     <!-- Event snippet for Sign-up conversion page
     In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-    <!--<script>
+    <script>
         async function gtag_report_conversion(url) {
             var callback = function () {
                 if (typeof (url) != 'undefined') {
@@ -175,7 +175,7 @@
             });
             return false;
         }
-    </script>-->
+    </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-527506130"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -611,7 +611,7 @@
 
         $("html").click(async function (event) {
             if (GetLocalStorage('currentUser') !== null) {
-                await PostMethodWithParameter(apiEndPoints.userLastTimeUpdate, {});
+                await PostMethod(apiEndPoints.userLastTimeUpdate, {});
             }
         });
 

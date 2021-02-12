@@ -4,9 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Filters;
@@ -19,14 +20,8 @@ using Webet333.models.Request.Account;
 using Webet333.models.Request.Game;
 using Webet333.models.Request.Payments;
 using Webet333.models.Response.Account;
-using Webet333.notify.interfaces.Email;
 using Webet333.models.Response.SMS;
-using System.Data;
-using Newtonsoft.Json;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
-using DocumentFormat.OpenXml;
-using Webet333.queue;
+using Webet333.notify.interfaces.Email;
 
 namespace Webet333.api.Controllers
 {
@@ -38,11 +33,9 @@ namespace Webet333.api.Controllers
 
         private IHostingEnvironment _hostingEnvironment;
         private IHubContext<SignalRHub> _hubContext;
-        private SerialQueue Queue { get; set; }
-        public AccountController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, IHubContext<SignalRHub> hubContext, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, SerialQueue queue) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
+        public AccountController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, IHubContext<SignalRHub> hubContext, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
-            this.Queue = queue;
             _hostingEnvironment = environment;
             _hubContext = hubContext;
         }
@@ -456,7 +449,7 @@ namespace Webet333.api.Controllers
             using (var accounthelper = new AccountHelpers(Connection))
             {
                 accounthelper.TrackingInsert(request);
-                accounthelper.TrackingLoginRegisterUpdate();
+               // accounthelper.TrackingLoginRegisterUpdate();
             }
             return OkResponse();
         }
@@ -623,7 +616,7 @@ namespace Webet333.api.Controllers
             var userId = GetUserId(User).ToString();
             using (var account_help = new AccountHelpers(Connection))
             {
-                account_help.UserLastLoginTime(userId, Language.Code);
+                account_help.UserLastLoginTime(userId, Language.Code,GetUserRole(User),GetUniqueId(User));
             }
             return OkResponse();
         }

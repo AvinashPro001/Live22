@@ -1015,7 +1015,7 @@
         });
         $("html").click(async function (event) {
             if (GetLocalStorage('currentUser') !== null)
-                await PostMethodWithParameter(apiEndPoints.userLastTimeUpdate, {});
+                await PostMethod(apiEndPoints.userLastTimeUpdate, {});
         });
         $(document).on('ready', function () {
             // $(".login-top-slider").slick({

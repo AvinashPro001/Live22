@@ -458,16 +458,16 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<ContactInformationResponse>(Connection))
             {
-                var result=await repository.GetDataAsync(StoredProcConsts.Account.ContactInfromationSelect, new { });
+                var result = await repository.GetDataAsync(StoredProcConsts.Account.ContactInfromationSelect, new { });
                 return result.ToList();
             }
         }
 
-        public void UserLastLoginTime(string UserId, string LanguageCode)
+        public void UserLastLoginTime(string UserId, string LanguageCode, string Role, string UniqueId)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                repository.AddOrUpdate(StoredProcConsts.Account.LastLoginTimeUpdate, new { UserId, LanguageCode });
+                repository.AddOrUpdate(StoredProcConsts.Account.LastLoginTimeUpdate, new { UserId, LanguageCode, Role, UniqueId });
             }
         }
 

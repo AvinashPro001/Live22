@@ -21,7 +21,10 @@ async function DoLogin() {
     };
     let res = await PostMethod(apiEndPoints.login, model);
     if (res !== null && res !== undefined) {
-        await TrackingLoginRegister("Login", model.userName, "loginCookies");
+        try {
+            await TrackingLoginRegister("Login", model.userName, "loginCookies");
+        }
+        catch (e) { }
 
         localStorage.setItem('currentUser', res.data.access_token);
         localStorage.setItem('bank', res.data.totalBankAccount);
@@ -316,7 +319,10 @@ async function DoRegister() {
             let res = await PostMethod(apiEndPoints.login, model);
             if (res !== null && res !== undefined) {
                 localStorage.setItem('currentUser', res.data.access_token);
-                await TrackingLoginRegister("Register", model.userName, "registerCookies");
+                try {
+                    await TrackingLoginRegister("Register", model.userName, "registerCookies");
+                }
+                catch (e) {}
                 localStorage.setItem('currentUserName', model.userName);
                 localStorage.setItem('currentUserData', enc(model.password));
                 window.location.href = "../Account/VerfiedOtp";

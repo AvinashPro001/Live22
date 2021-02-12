@@ -112,7 +112,7 @@
     </script>
     <!-- Event snippet for youtube signup conversion page
     In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-    <!--<script>
+    <script>
         function gtag_report_conversion(url) {
             var callback = function () {
                 if (typeof (url) != 'undefined') {
@@ -125,7 +125,7 @@
             });
             return false;
         }
-    </script>-->
+    </script>
     <!-- Event snippet for Sign-up conversion page -->
     <!-- Global site tag (gtag.js) - Google Ads: 527506130 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-527506130"></script>
@@ -804,16 +804,16 @@
 
         $("html").mousemove(async function (event) {
             ++counter;
-            if (counter == 500) {
+            if (counter == 150) {
                 if (GetLocalStorage('currentUser') !== null) {
-                    await PostMethodWithParameter(apiEndPoints.userLastTimeUpdate, {});
+                    await PostMethod(apiEndPoints.userLastTimeUpdate, {});
                 }
                 counter = 0;
             }
         });
         $("html").click(async function (event) {
             if (GetLocalStorage('currentUser') !== null) {
-                await PostMethodWithParameter(apiEndPoints.userLastTimeUpdate, {});
+                await PostMethod(apiEndPoints.userLastTimeUpdate, {});
             }
         });
 

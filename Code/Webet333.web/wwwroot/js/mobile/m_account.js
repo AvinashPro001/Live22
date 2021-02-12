@@ -26,9 +26,10 @@ async function DoLogin() {
     let res = await PostMethod(apiEndPoints.login, model);
     if (res !== null && res !== undefined) {
 
-        
-
-        await TrackingLoginRegister("Login", model.userName, "loginCookies");
+        try {
+            await TrackingLoginRegister("Login", model.userName, "loginCookies");
+        }
+        catch (e) { }
 
         localStorage.setItem('currentUser', res.data.access_token);
         localStorage.setItem('bank', res.data.totalBankAccount);
