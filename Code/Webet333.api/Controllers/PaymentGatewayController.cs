@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -10,6 +11,7 @@ using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.PaymentGateway;
+using Webet333.models.Response.PaymentGateway;
 
 namespace Webet333.api.Controllers
 {
@@ -47,7 +49,7 @@ namespace Webet333.api.Controllers
             {
                 await paymentgateway_helpers.PaymentTokenSave(userId, uniqueId, Role, response.token, response.status, response.transaction, JsonConvert.SerializeObject(response), response.amount, request.PromotionApplyEligible, request.PromotionId);
 
-                response.redirect_to = response.redirect_to == null ? null: response.redirect_to.Split("=", 2)[1];
+                response.redirect_to = response.redirect_to == null ? null : response.redirect_to.Split("=", 2)[1];
 
                 return OkResponse(response);
             }
@@ -63,23 +65,34 @@ namespace Webet333.api.Controllers
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
-            var response = await PaymentGatewayHelpers.CheckStatus(request.Token);
+            var result = new List<GetTokenResponse>();
+            var responseList = new List<PaymentGatewayVerifiedRequest>();
             using (var paymentgateway_helpers = new PaymentGatewayHelpers(Connection))
             {
-                var updateResponse = new PaymentGatewayVerifiedRequest()
-                {
-                    transaction = response.Transaction,
-                    status = response.StatusDescription == "processing" ? "0" : response.Status.ToString(),
-                    status_message = response.StatusDescription,
-                    decline_reason = response.BankReference,
-                    src_bank_account = response.SrcBankAccount,
-                    created_at = response.CreatedAt,
-                    apikey = "TransactionCheckStatusOfVaderPayCustomerService2"
-                };
-                await paymentgateway_helpers.PaymentVerified(updateResponse);
+                result = await paymentgateway_helpers.GetPendingTokenList();
 
-                return OkResponse(response);
+                foreach (var token in result)
+                {
+                    var response = await PaymentGatewayHelpers.CheckStatus(token.Token);
+                    //using (var paymentgateway_helpers = new PaymentGatewayHelpers(Connection))
+                    //{
+                    var updateResponse = new PaymentGatewayVerifiedRequest()
+                    {
+                        transaction = response.Transaction,
+                        status = response.StatusDescription == "processing" ? "0" : response.Status.ToString(),
+                        status_message = response.StatusDescription,
+                        decline_reason = response.BankReference,
+                        src_bank_account = response.SrcBankAccount,
+                        created_at = response.CreatedAt,
+                        apikey = "TransactionCheckStatusOfVaderPayCustomerService2"
+                    };
+                    responseList.Add(updateResponse);
+                    if (updateResponse.status != "1")
+                        await paymentgateway_helpers.PaymentVerified(updateResponse);
+                }
             }
+            return OkResponse(responseList);
+            //}
         }
 
         #endregion

@@ -199,6 +199,8 @@
             public const string SaveToken = "[dbo].[PaymentToken_Insert]";
 
             public const string VerifiedToken = "[dbo].[PaymentToken_Verified]";
+
+            public const string GetPendingToken = "[dbo].[PaymentToken_Select]";
         }
 
         public class Settings
