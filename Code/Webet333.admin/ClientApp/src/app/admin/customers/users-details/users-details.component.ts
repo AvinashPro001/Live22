@@ -246,10 +246,13 @@ export class UsersDetailsComponent implements OnInit {
         if (await this.checkViewPermission()) {
             let dataCustomer = JSON.parse(localStorage.getItem('id'));
             this.Userdata = dataCustomer as object[];
-           
+
             if (this.Userdata != null) {
+                if (this.Userdata.userId) this.getCustomerById(this.Userdata.userId);
+                else this.getCustomerById(this.Userdata.id);
+
                 this.ShowDropDown = false;
-                this.onChange(this.Userdata);
+                // this.onChange(this.Userdata);
             }
             else {
                 this.ShowDropDown = true;
@@ -261,6 +264,17 @@ export class UsersDetailsComponent implements OnInit {
             var someElement = document.getElementById("lockIcon");
             localStorage.removeItem('id');
         }
+    }
+
+    getCustomerById(userId) {
+        var model = { id: userId };
+
+        this.adminService.add<any>(customer.customerListById, model).subscribe(res => {
+            this.Userdata = res.data[0];
+            this.onChange(this.Userdata);
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
     }
 
     get today() {
@@ -2682,7 +2696,11 @@ export class UsersDetailsComponent implements OnInit {
 
     //#region Check Permission
 
+    // This page removed from menubar so we directly return tru for this page permission.
+
     async checkViewPermission() {
+        return true;
+
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[0].Permissions[0].IsChecked === true) {
             if (usersPermissions.permissionsList[0].submenu[2].Permissions[0].IsChecked === true) {
@@ -2700,6 +2718,8 @@ export class UsersDetailsComponent implements OnInit {
     }
 
     async checkUpdatePermission() {
+        return true;
+
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[0].Permissions[1].IsChecked === true) {
             if (usersPermissions.permissionsList[0].submenu[2].Permissions[1].IsChecked === true) {
@@ -2717,6 +2737,8 @@ export class UsersDetailsComponent implements OnInit {
     }
 
     async checkAddPermission() {
+        return true;
+
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[0].Permissions[2].IsChecked === true) {
             if (usersPermissions.permissionsList[0].submenu[2].Permissions[2].IsChecked === true) {

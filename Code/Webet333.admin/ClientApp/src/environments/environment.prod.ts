@@ -5,9 +5,9 @@
 
 export const environment = {
     production: false,
-    //apiUrl: 'http://api.webet333.com/api/v1/'
-    apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:49841/api/v1/'
+    apiUrl: 'http://api.webet333.com/api/v1/'
+    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'https://localhost:5001/api/v1/'
 };
 
 export const account = {
@@ -50,6 +50,7 @@ export const account = {
     VaderPayParameterSelect: environment.apiUrl + 'account/vaderpay/maintenance/select',
     VaderPayParameterUpdate: environment.apiUrl + 'account/vaderpay/maintenance/update',
 
+    FreeCeditSetting: environment.apiUrl + 'promotions/freecredit',
 }
 
 export const Game = {
@@ -137,10 +138,8 @@ export const customer = {
     paymentStatics: environment.apiUrl + 'payments/statics',
     paymentStaticsDetails: environment.apiUrl + 'payments/statics/details',
 
-
     kiss918PasswordReset: environment.apiUrl + 'Game/Kiss918/ResetPassword/ByAdmin',
     pussy888PasswordReset: environment.apiUrl + 'pussy888/ResetPassword/ByAdmin',
-
 
     pragmaticBrokenStatus: environment.apiUrl + 'pragmatic/broken',
     playtechBrokenStatus: environment.apiUrl + 'playtech/broken',
@@ -273,7 +272,6 @@ export const customer = {
     SetSexyBetLimit: environment.apiUrl + 'sexybaccarart/set/betlimit',
     SetDGBetLimit: environment.apiUrl + 'dg/set/betlimit',
 
-
     SmsUserList: environment.apiUrl + 'account/sms/users/list',
     SendSMS: environment.apiUrl + 'account/sms/send',
     GetUsername: environment.apiUrl + 'account/game/username',
@@ -293,7 +291,6 @@ export const customer = {
     promotionReport: environment.apiUrl + 'promotions/report',
     BettingDetailsByUsername: environment.apiUrl + 'Game/GetBettingDetails',
 
-
     CustomerICNumberAdd: environment.apiUrl + 'account/icnumber/insert',
     CustomerICImageAdd: environment.apiUrl + 'account/icimage/insert',
 
@@ -301,6 +298,9 @@ export const customer = {
     adminAdd: environment.apiUrl + 'admin/add',
     adminUpdate: environment.apiUrl + 'admin/update',
     defaultPermissionList: environment.apiUrl + 'user/default_permission/retrieve',
+
+    customerListById: environment.apiUrl + 'customer/list_by_id',
+    customerListForDropdown: environment.apiUrl + 'customer/list_for_dropdown'
 }
 
 export const playtech = {

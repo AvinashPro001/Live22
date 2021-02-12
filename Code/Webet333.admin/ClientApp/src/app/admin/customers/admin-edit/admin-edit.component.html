@@ -94,66 +94,43 @@
 
                                                 <tbody style="text-align:left">
                                                     <ng-container *ngFor='let item of defaultPermissionsList; let i = index'>
+                                                        <ng-container *ngIf="item.IsActive">
 
-                                                        <!--<ng-container *ngIf="item.IsChecked">-->
-                                                        <tr>
-                                                            <td><h5 style="font-weight: 600; font-size: 16px;">{{item.text}}</h5></td>
-                                                            <td *ngFor='let defaultPermissions of item.Permissions; let j = index'>
-                                                                <div class="col-lg-3" style="display: flex;" *ngIf="defaultPermissions.IsShow">
-                                                                    <div class="">
-                                                                        <label class="container">
-                                                                            <input type="checkbox"
-                                                                                   id={{defaultPermissions.Id}}
-                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList,item,defaultPermissions.text,j,item)"
-                                                                                   name="{{defaultPermissions.text}}-{{i}}-{{j}}"
-                                                                                   [(ngModel)]="defaultPermissions.IsChecked"
-                                                                                   [disabled]="defaultPermissions.IsDisabled">
-                                                                            <span class="checkmark"></span>
-                                                                            <!--<span> {{defaultPermissions.text}}</span>-->
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                                <!--<div class="p-2"><h4>{{defaultPermissions.IsChecked}}+/+{{defaultPermissions.IsDisabled}}</h4></div>--> <!--For Testing-->
-                                                            </td>
-                                                        </tr>
-
-                                                        <ng-container *ngIf="item.submenu">
-                                                            <ng-container *ngFor='let subitem of item.submenu; let k = index'>
-                                                                <!--<ng-container *ngIf="subitem.IsChecked">-->
-                                                                <tr>
-                                                                    <td><h5 style="font-weight: 600; font-size: 16px; margin-left:50px">{{subitem.text}}</h5></td>
-                                                                    <td *ngFor='let defaultPermissions of subitem.Permissions; let l = index'>
-                                                                        <div class="col-lg-3" style="display: flex;" *ngIf="defaultPermissions.IsShow">
-                                                                            <div class="">
-                                                                                <label class="container">
-                                                                                    <input type="checkbox"
-                                                                                           id={{defaultPermissions.Id}}
-                                                                                           (change)="getUpdatedPermissionsList(defaultPermissionsList,subitem,defaultPermissions.text,l,item,subitem)"
-                                                                                           name="{{defaultPermissions.text}}-{{i}}-{{j}}-{{k}}-{{l}}"
-                                                                                           [(ngModel)]="defaultPermissions.IsChecked"
-                                                                                           [disabled]="defaultPermissions.IsDisabled">
-                                                                                    <span class="checkmark"></span>
-                                                                                    <!--<span> {{defaultPermissions.text}}</span>-->
-                                                                                </label>
-                                                                            </div>
+                                                            <tr>
+                                                                <td><h5 style="font-weight: 600; font-size: 16px;">{{item.text}}</h5></td>
+                                                                <td *ngFor='let defaultPermissions of item.Permissions; let j = index'>
+                                                                    <div class="col-lg-3" style="display: flex;" *ngIf="defaultPermissions.IsShow">
+                                                                        <div class="">
+                                                                            <label class="container">
+                                                                                <input type="checkbox"
+                                                                                       id={{defaultPermissions.Id}}
+                                                                                       (change)="getUpdatedPermissionsList(defaultPermissionsList,item,defaultPermissions.text,j,item)"
+                                                                                       name="{{defaultPermissions.text}}-{{i}}-{{j}}"
+                                                                                       [(ngModel)]="defaultPermissions.IsChecked"
+                                                                                       [disabled]="defaultPermissions.IsDisabled">
+                                                                                <span class="checkmark"></span>
+                                                                                <!--<span> {{defaultPermissions.text}}</span>-->
+                                                                            </label>
                                                                         </div>
-                                                                        <!--<div class="p-2"><h4>{{defaultPermissions.IsChecked}}+/+{{defaultPermissions.IsDisabled}}</h4></div>--> <!--For Testing-->
-                                                                    </td>
-                                                                </tr>
+                                                                    </div>
+                                                                    <!--<div class="p-2"><h4>{{defaultPermissions.IsChecked}}+/+{{defaultPermissions.IsDisabled}}</h4></div>--> <!--For Testing-->
+                                                                </td>
+                                                            </tr>
 
-                                                                <ng-container *ngIf="subitem.submenu">
-                                                                    <ng-container *ngFor='let subsubitem of subitem.submenu; let m = index'>
-                                                                        <!--<ng-container *ngIf="subsubitem.IsChecked">-->
+                                                            <ng-container *ngIf="item.submenu">
+                                                                <ng-container *ngFor='let subitem of item.submenu; let k = index'>
+                                                                    <ng-container *ngIf="subitem.IsActive">
+
                                                                         <tr>
-                                                                            <td><h5 style="font-weight: 600; font-size: 16px; margin-left: 100px;">{{subsubitem.text}}</h5></td>
-                                                                            <td *ngFor='let defaultPermissions of subsubitem.Permissions; let n = index'>
+                                                                            <td><h5 style="font-weight: 600; font-size: 16px; margin-left:50px">{{subitem.text}}</h5></td>
+                                                                            <td *ngFor='let defaultPermissions of subitem.Permissions; let l = index'>
                                                                                 <div class="col-lg-3" style="display: flex;" *ngIf="defaultPermissions.IsShow">
                                                                                     <div class="">
                                                                                         <label class="container">
                                                                                             <input type="checkbox"
                                                                                                    id={{defaultPermissions.Id}}
-                                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList,subsubitem,defaultPermissions.text,n,item,subitem,subsubitem)"
-                                                                                                   name="{{defaultPermissions.text}}-{{i}}-{{j}}-{{k}}-{{l}}-{{m}}-{{n}}"
+                                                                                                   (change)="getUpdatedPermissionsList(defaultPermissionsList,subitem,defaultPermissions.text,l,item,subitem)"
+                                                                                                   name="{{defaultPermissions.text}}-{{i}}-{{j}}-{{k}}-{{l}}"
                                                                                                    [(ngModel)]="defaultPermissions.IsChecked"
                                                                                                    [disabled]="defaultPermissions.IsDisabled">
                                                                                             <span class="checkmark"></span>
@@ -165,14 +142,37 @@
                                                                             </td>
                                                                         </tr>
 
-                                                                        <!--</ng-container>-->
+                                                                        <ng-container *ngIf="subitem.submenu">
+                                                                            <ng-container *ngFor='let subsubitem of subitem.submenu; let m = index'>
+                                                                                <ng-container *ngIf="subsubitem.IsActive">
+
+                                                                                    <tr>
+                                                                                        <td><h5 style="font-weight: 600; font-size: 16px; margin-left: 100px;">{{subsubitem.text}}</h5></td>
+                                                                                        <td *ngFor='let defaultPermissions of subsubitem.Permissions; let n = index'>
+                                                                                            <div class="col-lg-3" style="display: flex;" *ngIf="defaultPermissions.IsShow">
+                                                                                                <div class="">
+                                                                                                    <label class="container">
+                                                                                                        <input type="checkbox"
+                                                                                                               id={{defaultPermissions.Id}}
+                                                                                                               (change)="getUpdatedPermissionsList(defaultPermissionsList,subsubitem,defaultPermissions.text,n,item,subitem,subsubitem)"
+                                                                                                               name="{{defaultPermissions.text}}-{{i}}-{{j}}-{{k}}-{{l}}-{{m}}-{{n}}"
+                                                                                                               [(ngModel)]="defaultPermissions.IsChecked"
+                                                                                                               [disabled]="defaultPermissions.IsDisabled">
+                                                                                                        <span class="checkmark"></span>
+                                                                                                        <!--<span> {{defaultPermissions.text}}</span>-->
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <!--<div class="p-2"><h4>{{defaultPermissions.IsChecked}}+/+{{defaultPermissions.IsDisabled}}</h4></div>--> <!--For Testing-->
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </ng-container>
+                                                                            </ng-container>
+                                                                        </ng-container>
                                                                     </ng-container>
                                                                 </ng-container>
-                                                                <!--</ng-container>-->
                                                             </ng-container>
                                                         </ng-container>
-
-                                                        <!--</ng-container>-->
                                                     </ng-container>
                                                 </tbody>
                                             </table>

@@ -7,9 +7,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.Game = exports.account = exports.environment = void 0;
 exports.environment = {
     production: false,
-    //apiUrl: 'http://api.webet333.com/api/v1/'
-    apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:49841/api/v1/'
+    apiUrl: 'http://api.webet333.com/api/v1/'
+    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'https://localhost:5001/api/v1/'
 };
 exports.account = {
     login: exports.environment.apiUrl + 'account/login',
@@ -43,6 +43,7 @@ exports.account = {
     AdminNotificationParameterSelect: exports.environment.apiUrl + 'account/notication/info/select',
     VaderPayParameterSelect: exports.environment.apiUrl + 'account/vaderpay/maintenance/select',
     VaderPayParameterUpdate: exports.environment.apiUrl + 'account/vaderpay/maintenance/update',
+    FreeCeditSetting: exports.environment.apiUrl + 'promotions/freecredit',
 };
 exports.Game = {
     selectUser: exports.environment.apiUrl + 'Game/SelectUser',
@@ -238,6 +239,8 @@ exports.customer = {
     adminAdd: exports.environment.apiUrl + 'admin/add',
     adminUpdate: exports.environment.apiUrl + 'admin/update',
     defaultPermissionList: exports.environment.apiUrl + 'user/default_permission/retrieve',
+    customerListById: exports.environment.apiUrl + 'customer/list_by_id',
+    customerListForDropdown: exports.environment.apiUrl + 'customer/list_for_dropdown'
 };
 exports.playtech = {
     playtechUrl: "http://api.webet333.com/api/Default/playtech",
