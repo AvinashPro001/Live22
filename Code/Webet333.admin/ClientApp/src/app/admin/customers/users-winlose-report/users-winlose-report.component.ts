@@ -47,11 +47,12 @@ export class UsersWinloseReportComponent implements OnInit {
             { prop: 'No' },
             { prop: 'DateTime' },
             { prop: 'Username' },
+            { prop: 'RegisterKeyword' },
             { prop: 'PromotionName' },
             { prop: 'Deposit' },
             { prop: 'Bonus' },
             { prop: 'Withdraw' },
-            { prop: 'Winlose' },
+            { prop: 'Winlose' }
         ];
     }
 
@@ -176,6 +177,7 @@ export class UsersWinloseReportComponent implements OnInit {
                     this.rows.push({
                         No: ++i,
                         Username: el.username,
+                        RegisterKeyword: el.registerKeyword == null ? "Not Available" : el.registerKeyword,
                         PromotionName: el.promotionTitle == null ? "Not Available" : el.promotionTitle,
                         Deposit: el.totalDeposit,
                         Withdraw: el.totalWithdraw,

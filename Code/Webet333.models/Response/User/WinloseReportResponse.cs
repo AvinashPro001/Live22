@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Webet333.models.Response.User
 {
@@ -13,7 +10,7 @@ namespace Webet333.models.Response.User
         [JsonProperty(PropertyName = "promotionTitle")]
         public string PromotionTitle { get; set; }
 
-        [JsonProperty(PropertyName ="username")]
+        [JsonProperty(PropertyName = "username")]
         public string UserName { get; set; }
 
         [JsonProperty(PropertyName = "created")]
@@ -30,5 +27,8 @@ namespace Webet333.models.Response.User
 
         [JsonProperty(PropertyName = "totalBonus")]
         public decimal TotalBonus { get; set; }
+
+        [JsonProperty(PropertyName = "registerKeyword")]
+        public string RegisterKeyword { get; set; }
     }
 }
