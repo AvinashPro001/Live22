@@ -26,6 +26,15 @@ namespace Webet333.models.Response.Settings
         [JsonProperty("CSImage")]
         public string CSImage { get; set; }
 
+        [JsonProperty("Text")]
+        public string Text { get; set; }
+
+        [JsonProperty("ClassChecked")]
+        public bool ClassChecked { get; set; }
+
+        [JsonProperty("IsOpenInNewPage")]
+        public bool IsOpenInNewPage { get; set; }
+
         [JsonProperty("Active")]
         public bool Active { get; set; }
 

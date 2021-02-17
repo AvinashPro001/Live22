@@ -240,7 +240,10 @@ exports.customer = {
     adminUpdate: exports.environment.apiUrl + 'admin/update',
     defaultPermissionList: exports.environment.apiUrl + 'user/default_permission/retrieve',
     customerListById: exports.environment.apiUrl + 'customer/list_by_id',
-    customerListForDropdown: exports.environment.apiUrl + 'customer/list_for_dropdown'
+    customerListForDropdown: exports.environment.apiUrl + 'customer/list_for_dropdown',
+    contactTypeSelect: exports.environment.apiUrl + 'settings/contact/type/select',
+    contactDetailsSelect: exports.environment.apiUrl + 'settings/contact/details/select',
+    contactDetailsUpdate: exports.environment.apiUrl + 'settings/contact/details/update',
 };
 exports.playtech = {
     playtechUrl: "http://api.webet333.com/api/Default/playtech",

@@ -23,6 +23,7 @@ export class ContactDetailsListComponent implements OnInit {
     types: any;
     csImage: any;
     editTypes: any;
+    showText: boolean;
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -112,7 +113,7 @@ export class ContactDetailsListComponent implements OnInit {
 
     EditOpen(data, content) {
         this.editTypes = data;
-        (document.getElementById("typeId") as HTMLInputElement).value = data.ContactTypeId;
+        this.showText = data.Text == null ? false : true;
         this.modalService.open(content, { windowClass: 'dark-modal', });
     }
 
@@ -127,14 +128,25 @@ export class ContactDetailsListComponent implements OnInit {
             csImage: this.csImage == undefined || this.csImage == null ? null : this.csImage,
             csId: (document.getElementById("csId") as HTMLInputElement).value,
             csName: (document.getElementById("csName") as HTMLInputElement).value,
+            Text: null,
+            classCheck: (document.getElementById("ClassChecked") as HTMLInputElement).checked,
+            isOpenInNewPage: (document.getElementById("IsOpenInNewPage") as HTMLInputElement).checked,
         }
+        
+        try {
+            model.Text = (document.getElementById("text") as HTMLInputElement).value
+        }
+        catch (e) {}
+
         this.adminService.add<any>(customer.contactDetailsUpdate, model).subscribe(res => {
             this.toasterService.pop('success', 'Success', res.message);
+            this.modalService.dismissAll();
+            this.csImage = null;
             this.ngOnInit();
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
-        this.csImage = null;
+        
     }
 
     async imageConvert(event) {
@@ -154,6 +166,10 @@ export class ContactDetailsListComponent implements OnInit {
             };
             temporaryFileReader.readAsDataURL(file);
         });
+    }
+
+    RedirectContactAddPage() {
+        this.router.navigate(['/admin/customers/contact-details-add']);
     }
 
 }

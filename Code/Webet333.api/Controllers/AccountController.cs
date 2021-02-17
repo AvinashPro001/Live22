@@ -945,13 +945,13 @@ namespace Webet333.api.Controllers
                         });
                         foreach (var info in contactInformationDetails)
                         {
-
+                            string className = string.Empty;
+                            if (info.ClassChecked)
+                                className = "contact-us";
 
                             if (info.CSImage == null)
                             {
-                                string className = string.Empty;
-                                if (info.ClassChecked)
-                                    className = "contact-us";
+                               
 
                                 htmlCode += $@"<strong><a class=""{className}"" href=""{info.Url}"" ";
 
@@ -962,7 +962,7 @@ namespace Webet333.api.Controllers
                             }
                             else
                             {
-                                htmlCode += $@"<h6><strong>{info.CSName}</strong></h6><figure><img class=""image-qr"" src=""{info.CSImage}"" alt=""barcode""></figure><h6>{info.CSId}</h6>";
+                                htmlCode += $@"<h6><strong>{info.CSName}</strong></h6><figure><img class=""image-qr"" src=""{info.CSImage}"" alt=""barcode""></figure><a class=""{className}"">{info.CSId}</a>";
                             }
                         }
                         htmlCode += @"</li>";
@@ -996,11 +996,11 @@ namespace Webet333.api.Controllers
 
                                     htmlCode += string.Format(replaceHtml, rowSpan);
 
-                                    htmlCode += $@"<td class=""text-left""><label class=""mobile-number""><a style=""color:#ffb701"" href=""{contactInformationDetails[i].Url}"">{contactInformationDetails[i].CSId}</a></label></td></tr>";
+                                    htmlCode += $@"<td class=""text-left""><label class=""mobile-number""><a style=""color:#ffb701"" href=""{contactInformationDetails[i].Url}"">{contactInformationDetails[i].MobileText}</a></label></td></tr>";
                                 }
                                 else
                                 {
-                                    htmlCode += $@"<tr><td class=""text-left""><label class=""mobile-number""><a style=""color:#ffb701""  href=""{contactInformationDetails[i].Url}"">{contactInformationDetails[i].CSId}</a></label></td></tr>";
+                                    htmlCode += $@"<tr><td class=""text-left""><label class=""mobile-number""><a style=""color:#ffb701""  href=""{contactInformationDetails[i].Url}"">{contactInformationDetails[i].MobileText}</a></label></td></tr>";
                                 }
                             }
                             else

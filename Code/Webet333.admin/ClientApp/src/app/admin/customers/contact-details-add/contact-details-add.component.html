@@ -1,3 +1,168 @@
-<p>
-  contact-details-add works!
-</p>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/admin/customers/contact-details-list">Contact</a>
+    </li>
+    <li class="breadcrumb-item">
+        Add Contact
+    </li>
+</ol>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-default">
+                <div class="card-body">
+                    <fieldset class="b0" style="border-bottom:groove">
+                        <legend>Add Contact</legend>
+                    </fieldset>
+                    <div class="row">
+                        <form class="border border-light p-5 col-12">
+                            <div class="row col-md-6">
+                                <h5 class="col-md-4">Type :</h5>
+                                <div class="col-md-5 mb-4">
+                                    <select class="form-control" id="typeId" (change)="onChange()">
+                                        <option value="" disabled="disabled">--Select Type--</option>
+                                        <option value="{{type.Id}}" *ngFor="let type of types">{{type.Type}}</option>
+                                    </select>
+                                </div>
+
+                                <h5 class="col-md-4">CS Name :</h5>
+                                <div class="col-md-5 mb-4" style="display:flex">
+                                    <input class="form-control" type="text" id="csName" />
+                                </div>
+                                <div><span id="question" class="fa fa-question-circle" title="This Field Use for CS Name Like CS1,CS2 Etc."></span></div>
+
+                                <h5 class="col-md-4">CS Id :</h5>
+                                <div class="col-md-5 mb-4">
+                                    <input class="form-control" type="text" id="csId" />
+                                </div>
+                                <div><span id="question" class="fa fa-question-circle" title="This Field Use for CS ID Like If type is PHONE then XXX-XXX XXXX Etc."></span></div>
+                                <br />
+                                <br />
+                                <h5 class="col-md-4">Add Backgroud Class :</h5>
+                                <div class="col-md-5 mb-4">
+                                    <div class="input-group col-1">
+                                        <label class="container">
+                                            <input type="checkbox" id="Cssclass">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div><span id="question" class="fa fa-question-circle" title="If you check this then CS ID Is highlighted"></span></div>
+                                <br />
+                                <br />
+
+                                <h5 class="col-md-4">Open In new page in Desktop :</h5>
+                                <div class="col-md-5 mb-4">
+                                    <div class="input-group col-1">
+                                        <label class="container">
+                                            <input type="checkbox" id="isOpenNewPage">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div><span id="question" class="fa fa-question-circle" title="If you Check this then Link Open in new page"></span></div>
+                                <br />
+
+
+                                <h5 class="col-md-4" *ngIf="showImage">Text :</h5>
+                                <div class="col-md-5 mb-4" *ngIf="showImage">
+                                    <input class="form-control" type="text" id="Text" />
+                                </div>
+                                <div *ngIf="showImage"><span id="question" class="fa fa-question-circle" title="this is only use for Whatsapp. If you want to redirect with some text"></span></div>
+                                <br />
+
+
+
+
+                                <h5 class="col-md-4">CS Image :</h5>
+                                <div class="col-md-5 mb-4">
+                                    <input class="form-control" type="file" id="csImage" (change)="imageConvert($event)" />
+                                </div>
+                                <div><span id="question" class="fa fa-question-circle" title="If you want to add Barcode Then Select barcode Image But if you select then Contact Information Show Vertically"></span></div>
+
+                            </div>
+                            <br />
+                            <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)=" AddContact()" style="max-width:200px;align-content:center">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm</h4>
+                <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p>You have no selected any promotion, Are you sure to proceed ?</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">No</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="ConfirmDeposit()">Yes</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModal" [style.display]="promotionshowModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm</h4>
+                <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <img src="../../../assets/img/warning.png" width="100px" height="100px" style="margin-left:40%" />
+                <p>Please be reminded, if there is balance in your account and you can apply new promotion, the balance Would not be able to Withdraw until you completed the new promotion turnover/winturn reqirement.</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">No</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="PromotionApplyCheck()">Yes I know</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModal" [style.display]="withoutPromotionshowModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm</h4>
+                <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <img src="../../../assets/img/warning.png" width="100px" height="100px" style="margin-left:40%" />
+                <p>Please be Reminded, If You DEPOSIT Now, You have to Complete the Turnover/Winover Requirement Before You are Able to Withdraw</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">No</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="ConfirmDeposit()">Yes I know</button>
+            </div>
+        </div>
+    </div>
+</div>

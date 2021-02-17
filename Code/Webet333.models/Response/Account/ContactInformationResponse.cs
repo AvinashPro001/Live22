@@ -41,5 +41,8 @@ namespace Webet333.models.Response.Account
 
         [JsonProperty("IsOpenInNewPage")]
         public bool IsOpenInNewPage { get; set; }
+
+        [JsonProperty("MobileText")]
+        public string MobileText { get; set; }
     }
 }

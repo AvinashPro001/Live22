@@ -46,12 +46,15 @@ namespace Webet333.models.Request.Settings
 
         [JsonProperty(PropertyName = "Text")]
         public string Text { get; set; }
+
+        [JsonProperty(PropertyName = "isOpenInNewPage")]
+        public bool? IsOpenInNewPage { get; set; }
     }
 
     public class ContactTypeDetailsUpdateRequest
     {
         [JsonProperty(PropertyName = "contactTypeId")]
-        public Guid ContactTypeId { get; set; }
+        public Guid? ContactTypeId { get; set; }
 
         [JsonProperty(PropertyName = "csImage")]
         public string CSImage { get; set; }
@@ -73,6 +76,9 @@ namespace Webet333.models.Request.Settings
 
         [JsonProperty(PropertyName = "classCheck")]
         public bool? ClassCheck { get; set; }
+
+        [JsonProperty(PropertyName = "isOpenInNewPage")]
+        public bool? IsOpenInNewPage { get; set; }
 
         [JsonProperty(PropertyName = "Text")]
         public string Text { get; set; }

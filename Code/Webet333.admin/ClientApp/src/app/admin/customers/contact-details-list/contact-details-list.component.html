@@ -42,7 +42,7 @@
                             <button class="mb-1 btn btn-success" (click)='setYesterday()' type="button">Yesterday</button>
                         </div>-->
                         <div class="p-2 col-md-2" style="position:absolute;right:0px;">
-                            <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large;">Add Contact</button>
+                            <button id="acceptBtn" class="mb-1 btn btn-success" type="button" data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large;" (click)="RedirectContactAddPage()">Add Contact</button>
                         </div>
                     </div>
                 </div>
@@ -55,11 +55,6 @@
                 <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
                              ngx-datatable-row-detail-template>
                     <div class="row col-md-12" style="margin-right:0px">
-                        <!--<label class="col-md-3">
-                            <button id="viewbtn" data-id="viewData[rowIndex].id" class="mb-1 btn btn-success" type="button" data-toggle="modal" title="View" (click)='show(viewData[rowIndex],content)'>
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                            </button>
-                        </label>-->
                         <label class="col-md-3">
                             <button id="acceptBtn" data-id="viewData[rowIndex].Id" class="mb-1 btn btn-success" type="button" data-toggle="modal" title="Edit" (click)='EditOpen(viewData[rowIndex],content)'>
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -83,7 +78,7 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">View Details</h4>
+        <h4 class="modal-title">Edit</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -93,8 +88,8 @@
             <div class="col-12">
                 <label class="col-3"><b>Type</b></label>
                 <label class="col-9">
-                    <select class="form-control" id="typeId"  >
-                        <option value="{{type.Id}}" *ngFor="let type of types">{{type.Type}}</option>
+                    <select class="form-control" id="typeId">
+                        <option value="{{type.Id}}" *ngFor="let type of types" [selected]="type.Id==editTypes.ContactTypeId">{{type.Type}}</option>
                     </select>
                 </label>
                 <label class="col-3"><b>CS Name</b></label>
@@ -106,20 +101,38 @@
                     <input type="text" id="csId" class="form-control" value="{{editTypes.CSId}}" />
                 </label>
 
+                <label class="col-3"><b>Add Backgroud Class</b></label>
+                <label class="col-9">
+                    <input type="checkbox" id="ClassChecked" class="form-control" [checked]="editTypes.ClassChecked" />
+                </label>
+
+                <label class="col-3"><b>Open In new page in Desktop</b></label>
+                <label class="col-9">
+                    <input type="checkbox" id="IsOpenInNewPage" class="form-control" [checked]="editTypes.IsOpenInNewPage" />
+                </label>
+
+
+                <div *ngIf="showText">
+                    <label class="col-3"><b>Text</b></label>
+                    <label class="col-9">
+                        <input type="text" id="text" class="form-control" value="{{editTypes.Text}}" />
+                    </label>
+                </div>
+
                 <!--<div *ngIf="showImage">-->
-                    <label class="col-3"><b>CS Image</b></label>
-                    <label class="col-3">
-                        <input type="file" id="csImage" (change)="imageConvert($event)" class="form-control" />
-                    </label>
-                    <label class="col-6">
-                        <img width="100px" src="{{editTypes.CSImage!=null?editTypes.CSImage:''}}" />
-                    </label>
+                <label class="col-3"><b>CS Image</b></label>
+                <label class="col-3">
+                    <input type="file" id="csImage" (change)="imageConvert($event)" class="form-control" />
+                </label>
+                <label class="col-6">
+                    <img width="100px" src="{{editTypes.CSImage!=null?editTypes.CSImage:''}}" />
+                </label>
                 <!--</div>-->
             </div>
         </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-        <button type="button" class="btn btn-light" (click)="Edit()">Update</button>
+        <button type="button" class="btn btn-green" (click)="Edit()">Update</button>
     </div>
 </ng-template>
