@@ -82,86 +82,10 @@
 
                             </div>
                             <br />
-                            <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)=" AddContact()" style="max-width:200px;align-content:center">Submit</button>
+                            <button class="btn btn-block btn-primary mt-3" type="submit" (click)=" AddContact()" style="max-width:200px;align-content:center">Submit</button>
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- The Modal -->
-<div class="modal" id="myModal" [style.display]="showModal ? 'block' : 'none'">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Confirm</h4>
-                <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <p>You have no selected any promotion, Are you sure to proceed ?</p>
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">No</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="ConfirmDeposit()">Yes</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<div class="modal" id="myModal" [style.display]="promotionshowModal ? 'block' : 'none'">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Confirm</h4>
-                <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <img src="../../../assets/img/warning.png" width="100px" height="100px" style="margin-left:40%" />
-                <p>Please be reminded, if there is balance in your account and you can apply new promotion, the balance Would not be able to Withdraw until you completed the new promotion turnover/winturn reqirement.</p>
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">No</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="PromotionApplyCheck()">Yes I know</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal" id="myModal" [style.display]="withoutPromotionshowModal ? 'block' : 'none'">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Confirm</h4>
-                <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <img src="../../../assets/img/warning.png" width="100px" height="100px" style="margin-left:40%" />
-                <p>Please be Reminded, If You DEPOSIT Now, You have to Complete the Turnover/Winover Requirement Before You are Able to Withdraw</p>
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">No</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="ConfirmDeposit()">Yes I know</button>
             </div>
         </div>
     </div>

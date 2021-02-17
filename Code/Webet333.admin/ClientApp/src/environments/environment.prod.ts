@@ -6,8 +6,8 @@
 export const environment = {
     production: false,
     //apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    apiUrl: 'http://localhost:49841/api/v1/'
+    apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://localhost:49841/api/v1/'
 };
 
 export const account = {
@@ -306,6 +306,7 @@ export const customer = {
     contactTypeSelect: environment.apiUrl + 'settings/contact/type/select',
     contactDetailsSelect: environment.apiUrl + 'settings/contact/details/select',
     contactDetailsUpdate: environment.apiUrl + 'settings/contact/details/update',
+    contactDetailsAdd: environment.apiUrl + 'settings/contact/details/add',
 }
 
 export const playtech = {
