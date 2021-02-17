@@ -127,7 +127,7 @@ namespace Webet333.api.Controllers
                 {
                     dynamic JokerBalance = await gamehelper.CallJokerGameBalance(request.Username);
 
-                    previousBalance = await gamehelper.JokerBalanceUpdate(request.Id, JokerBalance.JokerBalance,JokerBalance.status);
+                    previousBalance = await gamehelper.JokerBalanceUpdate(request.Id, JokerBalance.JokerBalance, JokerBalance.status);
 
                     return OkResponse(new { balance = JokerBalance.JokerBalance, previousBalance.PreviousBalance });
                 }
@@ -199,7 +199,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion MaxBet game balance
+        #endregion M8 game balance
 
         #region AG game balance
 
@@ -483,7 +483,69 @@ namespace Webet333.api.Controllers
         }
 
 
-        #endregion 
+        #endregion
+
+        #region Check Sports game balance for pending bets or running games
+
+        #region Check MaxBet game balance
+
+        [HttpPost(ActionsConst.GameBalance.CheckMaxBetBalance)]
+        public async Task<IActionResult> CheckMaxBetBalance([FromBody] UserBalanceRequest request)
+        {
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            if (String.IsNullOrEmpty(request.Id))
+                return BadResponse("error_invalid_modelstate");
+
+            dynamic previousBalance = 0.00;
+
+
+            if (request.Username != null)
+            {
+                using (var gamehelper = new GameBalanceHelpers(Connection))
+                {
+                    string MaxbetBalance = await gamehelper.CallMaxbetGameBalance(request.Username);
+                    previousBalance = await gamehelper.MaxBetBalanceUpdate(request.Id, MaxbetBalance);
+                    return OkResponse(new { balance = MaxbetBalance, previousBalance.PreviousBalance });
+                }
+            }
+            string response = null;
+            return OkResponse(new { balance = response, previousBalance });
+        }
+
+        #endregion Check MaxBet game balance
+
+        #region Check M8 game balance
+
+        [HttpPost(ActionsConst.GameBalance.CheckM8Balance)]
+        public async Task<IActionResult> CheckM8Balance([FromBody] UserBalanceRequest request)
+        {
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            if (String.IsNullOrEmpty(request.Id))
+                return BadResponse("error_invalid_modelstate");
+
+            dynamic previousBalance = 0.00;
+
+            if (request.Username == null)
+            {
+                string response = null;
+                return OkResponse(new { balance = response, previousBalance });
+            }
+
+            using (var gamehelper = new GameBalanceHelpers(Connection))
+            {
+                string M8Balance = await gamehelper.CallM8GameBalance(request.Username);
+                previousBalance = await gamehelper.M8BalanceUpdate(request.Id, M8Balance);
+                return OkResponse(new { balance = M8Balance, previousBalance.PreviousBalance });
+            }
+        }
+
+        #endregion Check M8 game balance
+
+        #endregion
+
+
     }
 
 }

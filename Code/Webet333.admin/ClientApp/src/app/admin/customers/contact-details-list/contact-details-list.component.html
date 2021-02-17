@@ -1,3 +1,125 @@
-<p>
-  contact-details-list works!
-</p>
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Contact Details</legend>
+                </div>
+                <div class="col-lg-12">
+                    <div class="row col-12">
+                        <!--<div class="p-2 col-md-2">
+                            <h4 class="text-muted text-thin">Search</h4>
+                            <input class="form-control" type="text" (keyup)='searchHandler($event)' id="txt_search">
+                        </div>
+                        <div class="p-2 col-md-2">
+                            <h4 class="text-muted text-thin">From Date</h4>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="datePickerfromdate" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" (change)='searchHandlerByDate()' type="button"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 col-md-2">
+                            <h4 class="text-muted text-thin">To Date</h4>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp1" [(ngModel)]="datePickertodate" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" (change)='searchHandlerByDate()' type="button"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2">
+                            <h4 class="text-muted text-thin">&nbsp;</h4>
+                            <button class="mb-1 btn btn-success" (click)='searchHandlerByDate()' type="button">Filter</button>
+                        </div>
+                        <div class="p-2" id="todayFilter">
+                            <h4 class="text-muted text-thin">&nbsp;</h4>
+                            <button class="mb-1 btn btn-success" (click)='setToday()' type="button">Today</button>
+                        </div>
+                        <div class="p-2" id="yesterdayFilter">
+                            <h4 class="text-muted text-thin">&nbsp;</h4>
+                            <button class="mb-1 btn btn-success" (click)='setYesterday()' type="button">Yesterday</button>
+                        </div>-->
+                        <div class="p-2 col-md-2" style="position:absolute;right:0px;">
+                            <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large;">Add Contact</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br /><br />
+        <div class="card-body">
+            <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
+                           [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator">
+                <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <div class="row col-md-12" style="margin-right:0px">
+                        <!--<label class="col-md-3">
+                            <button id="viewbtn" data-id="viewData[rowIndex].id" class="mb-1 btn btn-success" type="button" data-toggle="modal" title="View" (click)='show(viewData[rowIndex],content)'>
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </label>-->
+                        <label class="col-md-3">
+                            <button id="acceptBtn" data-id="viewData[rowIndex].Id" class="mb-1 btn btn-success" type="button" data-toggle="modal" title="Edit" (click)='EditOpen(viewData[rowIndex],content)'>
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                        <label class="col-md-3">
+                            <button id="rejectBtn" data-id="viewData[rowIndex].id" class="mb-1 btn btn-danger" type="button" data-toggle="modal" style="margin-left:5px" title="Delete" (click)='Delete(viewData[rowIndex].Id)'>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                        <label class="col-md-3">
+                            <ui-switch [(ngModel)]="viewData[rowIndex].Active" (change)="Active(viewData[rowIndex].Id,$event)" data-toggle="modal" data-id="viewData[rowIndex].Id"></ui-switch>
+                        </label>
+                    </div>
+                </ng-template>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">View Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="col-12">
+                <label class="col-3"><b>Type</b></label>
+                <label class="col-9">
+                    <select class="form-control" id="typeId"  >
+                        <option value="{{type.Id}}" *ngFor="let type of types">{{type.Type}}</option>
+                    </select>
+                </label>
+                <label class="col-3"><b>CS Name</b></label>
+                <label class="col-9">
+                    <input type="text" id="csName" class="form-control" value="{{editTypes.CSName}}" />
+                </label>
+                <label class="col-3"><b>CS Id</b></label>
+                <label class="col-9">
+                    <input type="text" id="csId" class="form-control" value="{{editTypes.CSId}}" />
+                </label>
+
+                <!--<div *ngIf="showImage">-->
+                    <label class="col-3"><b>CS Image</b></label>
+                    <label class="col-3">
+                        <input type="file" id="csImage" (change)="imageConvert($event)" class="form-control" />
+                    </label>
+                    <label class="col-6">
+                        <img width="100px" src="{{editTypes.CSImage!=null?editTypes.CSImage:''}}" />
+                    </label>
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button type="button" class="btn btn-light" (click)="Edit()">Update</button>
+    </div>
+</ng-template>

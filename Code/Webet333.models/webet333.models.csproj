@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="Enums\MaxBet\" />
-    <Folder Include="Response\Settings\" />
   </ItemGroup>
 
   <ItemGroup>

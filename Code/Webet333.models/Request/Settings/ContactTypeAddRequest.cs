@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Webet333.models.Request.User
+namespace Webet333.models.Request.Settings
 {
     public class ContactTypeAddRequest
     {

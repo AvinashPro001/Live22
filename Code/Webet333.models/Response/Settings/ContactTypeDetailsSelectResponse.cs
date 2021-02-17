@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Webet333.models.Response.User
+namespace Webet333.models.Response.Settings
 {
     public class ContactTypeDetailsSelectResponse
     {
@@ -10,6 +10,9 @@ namespace Webet333.models.Response.User
 
         [JsonProperty("Type")]
         public string Type { get; set; }
+
+        [JsonProperty("TypeImage")]
+        public string TypeImage { get; set; }
 
         [JsonProperty("ContactTypeId")]
         public Guid ContactTypeId { get; set; }

@@ -18,6 +18,7 @@ export class ManagerApproveListComponent implements OnInit {
     @ViewChild('status') status: TemplateRef<any>;
     @ViewChild('receipt') receipt: TemplateRef<any>;
     @ViewChild('action') action: TemplateRef<any>;
+    @ViewChild('link') link: TemplateRef<any>;
     listType: any = [
         { verified: "Pending" },
         { verified: "Approved" },
@@ -105,7 +106,7 @@ export class ManagerApproveListComponent implements OnInit {
             this.columns = [
                 { prop: 'No' },
                 { prop: 'Created' },
-                { prop: 'Username' },
+                { prop: 'Username', cellTemplate: this.link, sortable: false },
                 { prop: 'New' },
                 { prop: 'OperationType' },
                 { prop: 'Verified' },
@@ -117,7 +118,7 @@ export class ManagerApproveListComponent implements OnInit {
             this.columns = [
                 { prop: 'No' },
                 { prop: 'Created' },
-                { prop: 'Username' },
+                { prop: 'Username', cellTemplate: this.link, sortable: false  },
                 { prop: 'New' },
                 { prop: 'OperationType' },
                 { prop: 'Verified' },
@@ -130,11 +131,11 @@ export class ManagerApproveListComponent implements OnInit {
             this.columns = [
                 { prop: 'No' },
                 { prop: 'Created' },
-                { prop: 'Username' },
+                { prop: 'Username', cellTemplate: this.link, sortable: false  },
                 { prop: 'New' },
                 { prop: 'OperationType' },
                 { prop: 'Verified' },
-                { prop: 'Verified', cellTemplate: this.status, sortable: false },
+                { prop: 'Action', cellTemplate: this.status, sortable: false },
                 { prop: 'Receipt', cellTemplate: this.receipt, sortable: false }
             ];
         }
@@ -158,7 +159,6 @@ export class ManagerApproveListComponent implements OnInit {
                     this.rows.push({
                         No: ++i,
                         Created: el.created,
-                        Username: el.username,
                         New: el.new,
                         OperationType: el.operationType,
                         Verified: el.verified,
@@ -280,7 +280,6 @@ export class ManagerApproveListComponent implements OnInit {
     show(row = null, content = null) {
         //this.viewData = row;
         //this.openWindowCustomClass(content);
-
         localStorage.setItem('id', JSON.stringify(row));
         window.open('admin/customers/users-details', '_blank');
     }

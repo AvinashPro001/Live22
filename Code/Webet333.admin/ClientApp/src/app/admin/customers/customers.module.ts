@@ -141,7 +141,10 @@ const routes: Routes = [
     { path: 'testing-pagination', component: TestingPaginationComponent },
     { path: 'admin-list', component: AdminListComponent },
     { path: 'admin-add', component: AdminAddComponent },
-    { path: 'admin-edit', component: AdminEditComponent }
+    { path: 'admin-edit', component: AdminEditComponent },
+
+    { path: 'contact-details-list', component: ContactDetailsListComponent },
+    { path: 'contact-details-add', component: ContactDetailsAddComponent }
 ];
 
 @NgModule({

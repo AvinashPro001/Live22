@@ -195,17 +195,7 @@
 
             public const string AdminUpdate = "admin/update";
 
-            public const string ContactTypeSelect = "contact/type/select";
 
-            public const string ContactTypeUpdate = "contact/type/update";
-
-            public const string ContactTypeAdd = "contact/type/add";
-
-            public const string ContactDetailsSelect = "contact/details/select";
-
-            public const string ContactDetailsUpdate = "contact/details/update";
-
-            public const string ContactDetailsAdd = "contact/details/add";
 
             public const string RetrieveById = "customer/list_by_id";
 
@@ -282,6 +272,13 @@
             public const string AnnouncementUpdate = "settings/announcement/update";
 
             public const string AnnouncementDelete = "settings/announcement/delete";
+
+            public const string ContactTypeSelect = "settings/contact/type/select";
+            public const string ContactTypeUpdate = "settings/contact/type/update";
+            public const string ContactTypeAdd = "settings/contact/type/add";
+            public const string ContactDetailsSelect = "settings/contact/details/select";
+            public const string ContactDetailsUpdate = "settings/contact/details/update";
+            public const string ContactDetailsAdd = "settings/contact/details/add";
         }
 
         public class Game
@@ -492,6 +489,10 @@
             public const string WMBalance = "gamebalance/wm";
 
             public const string PragmaticBalance = "gamebalance/pragmatic";
+
+            public const string CheckM8Balance = "check/gamebalance/m8";
+
+            public const string CheckMaxBetBalance = "check/gamebalance/maxbet";
         }
 
         public class TransferMoney

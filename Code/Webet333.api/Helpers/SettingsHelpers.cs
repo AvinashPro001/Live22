@@ -6,6 +6,7 @@ using Webet333.dapper;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request.Settings;
+using Webet333.models.Response.Settings;
 
 namespace Webet333.api.Helpers
 {
@@ -163,5 +164,90 @@ namespace Webet333.api.Helpers
         }
         #endregion
 
+        #region Contact Management
+
+        #region Contact Type API's
+
+        #region Contact Type Insert
+
+        public async Task<dynamic> AddContactType(ContactTypeAddRequest request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.FindAsync(StoredProcConsts.User.ContactType_Insert, request);
+            }
+        }
+
+        #endregion Contact Type Insert
+
+        #region Contact Type Update
+
+        public async Task<dynamic> UpdateContactType(ContactTypeUpdateRequest request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.FindAsync(StoredProcConsts.User.ContactType_Update, request);
+            }
+        }
+
+        #endregion Contact Type Update
+
+        #region Contact Type Select
+
+        public async Task<List<ContactTypeSelectResponse>> SelectContactType()
+        {
+            using (var repository = new DapperRepository<ContactTypeSelectResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.User.ContactType_Select, new { });
+                return result.ToList();
+            }
+        }
+
+        #endregion Contact Type Select
+
+        #endregion Contact Type API's
+
+        #region Contact Type Details API's
+
+        #region Contact Type Details Add
+
+        public async Task<dynamic> AddContactTypeDetails(ContactTypeDetailsAddRequest request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.FindAsync(StoredProcConsts.User.ContactTypeDetails_Insert, request);
+            }
+        }
+
+        #endregion Contact Type Details Add
+
+        #region Contact Type Details Update
+
+        public async Task<dynamic> UpdateContactTypeDetails(ContactTypeDetailsUpdateRequest request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.FindAsync(StoredProcConsts.User.ContactTypeDetails_Update, request);
+            }
+        }
+
+        #endregion Contact Type Details Update
+
+        #region Contact Type Details Select
+
+        public async Task<List<ContactTypeDetailsSelectResponse>> SelectContactTypeDetails()
+        {
+            using (var repository = new DapperRepository<ContactTypeDetailsSelectResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.User.ContactTypeDetails_Select, new { });
+                return result.ToList();
+            }
+        }
+
+        #endregion Contact Type Details Select
+
+        #endregion Contact Type Details API's
+
+        #endregion Contact Management
     }
 }

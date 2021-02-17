@@ -239,5 +239,163 @@ namespace Webet333.api.Controllers
 
         #endregion
 
+        #region Contact Management
+
+        #region Contact Type API's
+
+        #region Contact Type Insert
+
+        [HttpPost(ActionsConst.Settings.ContactTypeAdd)]
+        public async Task<IActionResult> ContactTypeAdd([FromBody] ContactTypeAddRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            await CheckUserRole();
+            var extension = request.TypeImage == null ? null : "." + request.TypeImage.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            var image = request.TypeImage == null ? null : request.TypeImage.Split("base64,")[1];
+            request.TypeImage = extension;
+
+            using (var setting_help = new SettingsHelpers(Connection))
+            {
+                var type = await setting_help.AddContactType(request);
+
+                if (request.TypeImage != null)
+                    using (var generic_help = new GenericHelpers(Connection))
+                        generic_help.GetImageWithExtension(uploadManager, image, BaseUrlConfigsOptions.Value.ContactImage, type.Id.ToString(), extension);
+
+                return OkResponse();
+            }
+        }
+
+        #endregion Contact Type Insert
+
+        #region Contact Type Update
+
+        [HttpPost(ActionsConst.Settings.ContactTypeUpdate)]
+        public async Task<IActionResult> ContactTypeUpdate([FromBody] ContactTypeUpdateRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            await CheckUserRole();
+            var extension = request.TypeImage == null ? null : "." + request.TypeImage.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            var image = request.TypeImage == null ? null : request.TypeImage.Split("base64,")[1];
+            request.TypeImage = extension;
+
+            using (var setting_help = new SettingsHelpers(Connection))
+            {
+                var type = await setting_help.UpdateContactType(request);
+
+                if (request.TypeImage != null)
+                {
+                    using (var generic_help = new GenericHelpers(Connection))
+                    {
+                        generic_help.DeleteImage(uploadManager, type.Id.ToString(), BaseUrlConfigsOptions.Value.ContactImage);
+                        generic_help.GetImageWithExtension(uploadManager, image, BaseUrlConfigsOptions.Value.ContactImage, type.Id.ToString(), extension);
+                    }
+                }
+                return OkResponse();
+            }
+        }
+
+        #endregion Contact Type Update
+
+        #region Contact Type Select
+
+        [HttpGet(ActionsConst.Settings.ContactTypeSelect)]
+        public async Task<IActionResult> ContactTypeSelect([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            await CheckUserRole();
+
+            using (var setting_help = new SettingsHelpers(Connection))
+            {
+                var type = await setting_help.SelectContactType();
+                type.ForEach(x =>
+                {
+                    x.TypeImage = x.TypeImage == null ? null : $"{BaseUrlConfigsOptions.Value.ImageBase}{BaseUrlConfigsOptions.Value.ContactImage}/{x.Id}{x.TypeImage}";
+                });
+                return OkResponse(type);
+            }
+        }
+
+        #endregion Contact Type Select
+
+        #endregion Contact Type API's
+
+        #region Contact Type Details API's
+
+        #region Contact Type Details Insert
+
+        [HttpPost(ActionsConst.Settings.ContactDetailsAdd)]
+        public async Task<IActionResult> ContactTypeDetailsAdd([FromBody] ContactTypeDetailsAddRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            await CheckUserRole();
+            var extension = request.CSImage == null ? null : "." + request.CSImage.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            var image = request.CSImage == null ? null : request.CSImage.Split("base64,")[1];
+            request.CSImage = extension;
+
+            using (var setting_help = new SettingsHelpers(Connection))
+            {
+                var type = await setting_help.AddContactTypeDetails(request);
+
+                if (request.CSImage != null)
+                    using (var generic_help = new GenericHelpers(Connection))
+                        generic_help.GetImageWithExtension(uploadManager, image, BaseUrlConfigsOptions.Value.ContactImage, type.ID.ToString(), extension);
+
+                return OkResponse();
+            }
+        }
+
+        #endregion Contact Type Details Insert
+
+        #region Contact Type Details Update
+
+        [HttpPost(ActionsConst.Settings.ContactDetailsUpdate)]
+        public async Task<IActionResult> ContactTypeDetailsUpdate([FromBody] ContactTypeDetailsUpdateRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            await CheckUserRole();
+            var extension = request.CSImage == null ? null : "." + request.CSImage.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            var image = request.CSImage == null ? null : request.CSImage.Split("base64,")[1];
+            request.CSImage = extension;
+
+            using (var setting_help = new SettingsHelpers(Connection))
+            {
+                var type = await setting_help.UpdateContactTypeDetails(request);
+
+                if (request.CSImage != null)
+                {
+                    using (var generic_help = new GenericHelpers(Connection))
+                    {
+                        generic_help.DeleteImage(uploadManager, type.ID.ToString(), BaseUrlConfigsOptions.Value.ContactImage);
+                        generic_help.GetImageWithExtension(uploadManager, image, BaseUrlConfigsOptions.Value.ContactImage, type.ID.ToString(), extension);
+                    }
+                }
+
+                return OkResponse();
+            }
+        }
+
+        #endregion Contact Type Details Update
+
+        #region Contact Type Details Select
+
+        [HttpGet(ActionsConst.Settings.ContactDetailsSelect)]
+        public async Task<IActionResult> ContactTypeDetailsSelect([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            await CheckUserRole();
+
+            using (var setting_help = new SettingsHelpers(Connection))
+            {
+                var type = await setting_help.SelectContactTypeDetails();
+                type.ForEach(x =>
+                {
+                    x.CSImage = x.CSImage == null ? null : $"{BaseUrlConfigsOptions.Value.ImageBase}{BaseUrlConfigsOptions.Value.ContactImage}/{x.Id}{x.CSImage}";
+                    x.TypeImage = x.TypeImage == null ? null : $"{BaseUrlConfigsOptions.Value.ImageBase}{BaseUrlConfigsOptions.Value.ContactImage}/{x.ContactTypeId}{x.TypeImage}";
+                });
+                return OkResponse(type);
+            }
+        }
+
+        #endregion Contact Type Details Select
+
+        #endregion Contact Type Details API's
+
+        #endregion Contact Management
+
     }
 }

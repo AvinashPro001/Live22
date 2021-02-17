@@ -48,11 +48,11 @@
                             </button>
                         </label>
                     </ng-template>
-                    <ngx-datatable-column *ngFor="let column of columns; let i = index;" name="{{column.name}}" prop="{{column.prop}}">
-                        <ng-template let-rowIndex="rowIndex" let-value="value" let-row="row" *ngIf="column.prop==='Username'" ngx-datatable-cell-template>
-                            <a [routerLink]='' (click)='show(usersDetailsForReportPage[rowIndex],null)'>{{value}}</a>
-                        </ng-template>
-                    </ngx-datatable-column>
+                    <ng-template #link let-rowIndex="rowIndex" let-row="row" ngx-datatable-row-detail-template>
+                        <label>
+                            <a [routerLink]='' (click)='show(managerData[rowIndex],null)'>{{managerData[rowIndex].username}}</a>
+                        </label>
+                    </ng-template>
                 </ngx-datatable>
             </div>
         </div>

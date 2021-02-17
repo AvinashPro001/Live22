@@ -74,8 +74,6 @@ namespace Webet333.api.Controllers
                 foreach (var token in result)
                 {
                     var response = await PaymentGatewayHelpers.CheckStatus(token.Token);
-                    //using (var paymentgateway_helpers = new PaymentGatewayHelpers(Connection))
-                    //{
                     var updateResponse = new PaymentGatewayVerifiedRequest()
                     {
                         transaction = response.Transaction,
@@ -87,12 +85,10 @@ namespace Webet333.api.Controllers
                         apikey = "TransactionCheckStatusOfVaderPayCustomerService2"
                     };
                     responseList.Add(updateResponse);
-                    if (updateResponse.status != "1")
-                        await paymentgateway_helpers.PaymentVerified(updateResponse);
+                    await paymentgateway_helpers.PaymentVerified(updateResponse);
                 }
             }
             return OkResponse(responseList);
-            //}
         }
 
         #endregion
