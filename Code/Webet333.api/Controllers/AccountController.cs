@@ -924,15 +924,18 @@ namespace Webet333.api.Controllers
         {
             using (var account_help = new AccountHelpers(Connection))
             {
-                var type = await account_help.ContactInformation();
+                List<ContactInformationResponse> type = await account_help.ContactInformation();
                 type.ForEach(x =>
                 {
                     x.TypeImage = x.TypeImage == null ? null : $"{BaseUrlConfigsOptions.Value.ImageBase}{BaseUrlConfigsOptions.Value.ContactImage}/{x.TypeId}{x.TypeImage}";
                 });
 
+                type = type.Where(x => x.Details != null).ToList();
+
                 string htmlCode = string.Empty;
                 if (!request.IsMobile)
                 {
+                    
                     htmlCode = @"<li class=""support-live""><h5><strong>Live Support</strong></h5><p><img src=""../../images/hours_24.png"" alt=""hours 24""></p><h6><strong style=""padding-right:60px;"">24 Hours</strong></h6></li>";
                     foreach (var contact in type)
                     {

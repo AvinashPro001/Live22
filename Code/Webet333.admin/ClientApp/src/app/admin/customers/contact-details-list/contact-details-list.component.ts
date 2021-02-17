@@ -138,6 +138,22 @@ export class ContactDetailsListComponent implements OnInit {
         }
         catch (e) {}
 
+
+        if (model.contactTypeId == "") {
+            this.toasterService.pop('error', 'Error', 'Please Select Type  !!!');
+            return;
+        }
+
+        if (model.csName == "") {
+            this.toasterService.pop('error', 'Error', 'Please Insert CS Name !!!');
+            return;
+        }
+
+        if (model.csId == "") {
+            this.toasterService.pop('error', 'Error', 'Please Insert CS Id !!!');
+            return;
+        }
+
         this.adminService.add<any>(customer.contactDetailsUpdate, model).subscribe(res => {
             this.toasterService.pop('success', 'Success', res.message);
             this.modalService.dismissAll();

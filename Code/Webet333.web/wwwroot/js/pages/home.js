@@ -3,6 +3,7 @@
 $(document).ready(function () {
     if (!window.location.href.includes('Information/Game')) {
         getReference();
+        ContactDetails();
         if (GetLocalStorage('currentUser') !== null) {
 
             var div = document.getElementById("beforelogin");
@@ -71,6 +72,15 @@ function WalletSignalR() {
 
 async function Walletdate() {
     walletData = await GetMethodWithReturn(apiEndPoints.walletSelect);
+}
+
+async function ContactDetails() {
+    let Model = {
+        isMobile: false
+    }
+    ContactInfo = await PostMethodWithParameter(apiEndPoints.contactInformationSelect, Model);
+    
+    document.getElementById("chatting").innerHTML = ContactInfo;
 }
 
 async function MobileDesktopReferenceInsert(url) {

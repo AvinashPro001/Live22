@@ -1,6 +1,6 @@
 ﻿//var baseUrl = "http://uatapi.webet333.com/api/v1/";
-var baseUrl = "http://api.webet333.com/api/v1/";
-//var baseUrl ="http://localhost:55861/api/v1/"
+//var baseUrl = "http://api.webet333.com/api/v1/";
+var baseUrl ="http://localhost:49841/api/v1/"
 
 var apiEndPoints = {
     login: "account/login",
@@ -19,6 +19,8 @@ var apiEndPoints = {
     ChangePussy888PassWordReset: "pussy888/ResetPassword",
 
     socialMediaReference: "account/socialmediastatics",
+
+    contactInformationSelect: "contact/information/select",
 
     addBank: "customer/bank/register",
     userBankDetail: "customer/bank",
