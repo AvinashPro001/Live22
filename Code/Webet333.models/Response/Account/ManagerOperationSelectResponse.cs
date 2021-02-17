@@ -6,7 +6,7 @@ namespace Webet333.models.Response.Account
     {
         public Guid Id { get; set; }
         public string Username { get; set; }
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
         public string New { get; set; }
         public string Old { get; set; }
         public string OperationType { get; set; }

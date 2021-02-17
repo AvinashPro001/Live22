@@ -76,9 +76,11 @@ export class CommonService {
     }
 
     public getThisWeekDate() {
+        // NOTE : Date formate is 'YYYY/mm/dd' eg. '2021/02/14'
+
         //#region Get start date and end date of week.
 
-        var curr = new Date; // get current date
+        var curr = new Date();      // get current date
 
         //#region Start date is Sunday - Saturday
 
@@ -91,7 +93,8 @@ export class CommonService {
         //#endregion Start date is Sunday - Saturday
 
         //#region Start date is Monday - Sunday
-        var first = curr.getDate() + 1 - curr.getDay(); // First day is the day of the month - the day of the week
+        // var first = curr.getDate() + 1 - curr.getDay();
+        var first = curr.getDate() - curr.getDay() + (curr.getDay() === 0 ? -6 : 1);    // First day is the day of the month - the day of the week
         var firstday = new Date(curr.setDate(first));
 
         var lastdayTemp = curr.getDate() - (curr.getDay() - 1) + 6;
@@ -169,7 +172,7 @@ export class CommonService {
     public errorMessage = {
         unAuthorized: "You are not authorized to access this page!!",
         PleaseProvideFromDateToDate: "Please Provide From Date and To Date !!!",
-        SelectUserName:"Please Select Username !!"
+        SelectUserName: "Please Select Username !!"
     };
 
     //#endregion Error List
