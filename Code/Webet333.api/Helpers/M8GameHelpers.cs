@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
+using Webet333.dapper;
 using Webet333.models.Constants;
+using Webet333.models.Request.Game;
+using Webet333.models.Request.Game.M8;
 using Webet333.models.Response.Game.M8;
 
 namespace Webet333.api.Helpers
@@ -37,7 +38,19 @@ namespace Webet333.api.Helpers
             return jsonText;
         }
 
-        #region M8 Game Register API
+        #region Global Variable Select
+
+        internal async Task<M8SetLimitRequest> M8DefaultLimitSelect()
+        {
+            using (var repository = new DapperRepository<M8SetLimitRequest>(Connection))
+            {
+                return await repository.FindAsync(StoredProcConsts.Game.M8GetLimit, new { });
+            }
+        }
+
+        #endregion Global Variable Select
+
+        #region Call M8 Game Register API
 
         internal static async Task<M8RegisterResponse> CallRegisterAPI(string Username)
         {
@@ -46,6 +59,19 @@ namespace Webet333.api.Helpers
         }
 
         #endregion
+
+        #region M8 Game Register API
+
+        internal async Task<dynamic> GameM8Register(GameM8RegisterRequest request)
+        {
+            string response = request.APIResponse.ToString(Newtonsoft.Json.Formatting.None);
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+               return await repository.FindAsync(StoredProcConsts.Game.GameM8Register, new { request.UserId, request.M8UserName, APIResponse = response });
+            }
+        }
+
+        #endregion GameM8
 
         #region House Keeping
 

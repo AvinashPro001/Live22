@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Webet333.models.Request.Game
+namespace Webet333.models.Request.Game.M8
 {
     public class M8SetLimitRequest
     {

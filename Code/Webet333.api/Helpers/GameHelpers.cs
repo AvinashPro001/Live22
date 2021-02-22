@@ -19,9 +19,11 @@ using Webet333.models.Request;
 using Webet333.models.Request.Game;
 using Webet333.models.Response;
 using Webet333.models.Response.Account;
+using Webet333.models.Request.Game.M8;
 using Webet333.models.Response.Game;
 using Webet333.models.Response.Game.AG;
 using Webet333.models.Response.Game.DG;
+using Webet333.models.Response.Game.Joker;
 using Webet333.models.Response.Game.Kiss918;
 using Webet333.models.Response.Game.Pussy888;
 using Webet333.models.Response.Game.SexyBaccarat;
@@ -382,7 +384,7 @@ namespace Webet333.api.Helpers
                 var response = JsonConvert.SerializeObject(request);
                 using (var repository = new DapperRepository<dynamic>(Connection))
                 {
-                    var res = await repository.AddOrUpdateAsync(StoredProcConsts.Game.Kiss918PlayerLogInsert, new { jsonString = response,username=Username });
+                    var res = await repository.AddOrUpdateAsync(StoredProcConsts.Game.Kiss918PlayerLogInsert, new { jsonString = response, username = Username });
                 }
             }
             return 0;
@@ -401,6 +403,21 @@ namespace Webet333.api.Helpers
                 {
                     var res = await repository.AddOrUpdateAsync(StoredProcConsts.Game.PussyPlayerLogInsert, new { jsonString = response, username = Username });
                 }
+            }
+            return 0;
+        }
+
+        #endregion
+
+        #region Joker Player Log Insert
+
+        internal async Task<int> JokerPlayerLogInsert(JokerPlayerLogResponse request)
+        {
+            string jackpotResponse = request.Data.Jackpot != null ? JsonConvert.SerializeObject(request.Data.Jackpot) : "[]";
+            string gameResponse = request.Data.Game != null ? JsonConvert.SerializeObject(request.Data.Game) : "[]";
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var res = await repository.AddOrUpdateAsync(StoredProcConsts.Game.JokerPlayerLogInsert, new { JackpotJsonString = jackpotResponse, GameJsonString = gameResponse });
             }
             return 0;
         }
@@ -1209,7 +1226,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<UsersResponseGameRegisterResponse>(Connection))
             {
-                var result = await repository.GetDataAsync(StoredProcConsts.Game.PragmaticGameNotRegistredUsers,new { });
+                var result = await repository.GetDataAsync(StoredProcConsts.Game.PragmaticGameNotRegistredUsers, new { });
                 return result.ToList();
             }
         }
@@ -1269,13 +1286,13 @@ namespace Webet333.api.Helpers
 
         #region Global Variable Select
 
-        internal async Task<M8SetLimitRequest> M8DefaultLimitSelect()
-        {
-            using (var repository = new DapperRepository<M8SetLimitRequest>(Connection))
-            {
-                return await repository.FindAsync(StoredProcConsts.Game.M8GetLimit, new { });
-            }
-        }
+        //internal async Task<M8SetLimitRequest> M8DefaultLimitSelect()
+        //{
+        //    using (var repository = new DapperRepository<M8SetLimitRequest>(Connection))
+        //    {
+        //        return await repository.FindAsync(StoredProcConsts.Game.M8GetLimit, new { });
+        //    }
+        //}
 
         #endregion Global Variable Select
 
@@ -1340,7 +1357,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<Kiss918GamePasswordResetResponse>(Connection))
             {
-                var result = await repository.GetDataAsync(StoredProcConsts.Game.Kiss918UserPasswordResetSelect, new {  });
+                var result = await repository.GetDataAsync(StoredProcConsts.Game.Kiss918UserPasswordResetSelect, new { });
                 return result.ToList(); ;
             }
         }

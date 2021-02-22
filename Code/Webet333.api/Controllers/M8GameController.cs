@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
+using Webet333.models.Request.Game;
 
 namespace Webet333.api.Controllers
 {
@@ -39,17 +41,54 @@ namespace Webet333.api.Controllers
                 if (string.IsNullOrEmpty(request.Id))
                     return BadResponse("error_invalid_modelstate");
 
-            string username="Test101010";
+            string username;
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
                 username = user.M8GamePrefix + user.Username;
             }
             var result = await M8GameHelpers.CallRegisterAPI(username);
-            using (var allbet_helper = new AllBetGameHelpers(Connection))
+            if (result.response.errcode != "0") return BadResponse(result.response.errtext);
+            using (var m8_helper = new M8GameHelpers(Connection))
             {
-                if (result.response.errcode != "0") return OkResponse(result.response);
-                await allbet_helper.AllBetRegister(request.Id, username, JsonConvert.SerializeObject(result));
+                var limit = await m8_helper.M8DefaultLimitSelect();
+
+                var Url = $"{GameConst.M8.baseURL}?" +
+                            $"secret={GameConst.M8.Secret}&" +
+                            $"action={GameConst.M8.Update}&" +
+                            $"agent={GameConst.M8.agent}&" +
+                            $"username={username}&" +
+                            $"max1={limit.Max1}&" +
+                            $"max2={limit.Max2}&" +
+                            $"max3={limit.Max3}&" +
+                            $"max4={limit.Max4}&" +
+                            $"max5={limit.Max5}&" +
+                            $"max6={limit.Max6}&" +
+                            $"max7={limit.Max7}&" +
+                            $"lim1={limit.Lim1}&" +
+                            $"lim2={limit.Lim2}&" +
+                            $"lim3={limit.Lim3}&" +
+                            $"lim4={limit.Lim4}&" +
+                            $"com1={limit.Com}&" +
+                            $"com2={limit.Com}&" +
+                            $"com3={limit.Com}&" +
+                            $"com4={limit.Com}&" +
+                            $"com5={limit.Com}&" +
+                            $"com6={limit.Com}&" +
+                            $"com7={limit.Com}&" +
+                            $"com8={limit.Com}&" +
+                            $"com9={limit.Com}&" +
+                            $"comtype={limit.Comtype}&" +
+                            $"suspend={limit.Suspend}";
+                await GameHelpers.CallThirdPartyApi(Url, null);
+
+                var m8Request = new GameM8RegisterRequest()
+                {
+                    M8UserName=username,
+                    UserId=request.Id,
+                    APIResponse= JObject.FromObject(result)
+                };
+                await m8_helper.GameM8Register(m8Request);
                 return OkResponse(result);
             }
         }

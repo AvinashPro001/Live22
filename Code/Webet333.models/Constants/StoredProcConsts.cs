@@ -344,6 +344,8 @@
 
             public const string PussyPlayerLogInsert = "[dbo].[Pussy888_PlayerLog_Insert]";
 
+            public const string JokerPlayerLogInsert = "[dbo].[Joker_PlayerLog_Insert]";
+
             public const string AGBettingDetailsInsert = "[dbo].[AG_BettingDetails_Insert]";
 
             public const string SABettingDetailsInsert = "[dbo].[SA_BettingDetails_Insert]";

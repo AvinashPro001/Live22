@@ -28,12 +28,14 @@ using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Game;
 using Webet333.models.Request.Game.DG;
+using Webet333.models.Request.Game.M8;
 using Webet333.models.Request.Game.MaxBet;
 using Webet333.models.Request.Payments;
 using Webet333.models.Request.User;
 using Webet333.models.Response.Account;
 using Webet333.models.Response.Game;
 using Webet333.models.Response.Game.DG;
+using Webet333.models.Response.Game.Joker;
 using Webet333.models.Response.Game.Kiss918;
 using Webet333.models.Response.Game.Pussy888;
 using Webet333.models.Response.Game.SexyBaccarat;
@@ -126,37 +128,37 @@ namespace Webet333.api.Controllers
             if (!ModelState.IsValid) return BadResponse(ModelState);
             if (request == null) return BadResponse("error_empty_request");
 
-            using (var game_help = new GameHelpers(Connection: Connection))
+            using (var game_help = new M8GameHelpers(Connection: Connection))
             {
                 var limit = await game_help.M8DefaultLimitSelect();
 
                 var Url = $"{GameConst.M8.baseURL}?" +
-                                       $"secret={GameConst.M8.Secret}&" +
-                                       $"action={GameConst.M8.Update}&" +
-                                       $"agent={GameConst.M8.agent}&" +
-                                       $"username={request.M8UserName}&" +
-                                       $"max1={limit.Max1}&" +
-                                       $"max2={limit.Max2}&" +
-                                       $"max3={limit.Max3}&" +
-                                       $"max4={limit.Max4}&" +
-                                       $"max5={limit.Max5}&" +
-                                       $"max6={limit.Max6}&" +
-                                       $"max7={limit.Max7}&" +
-                                       $"lim1={limit.Lim1}&" +
-                                       $"lim2={limit.Lim2}&" +
-                                       $"lim3={limit.Lim3}&" +
-                                       $"lim4={limit.Lim4}&" +
-                                       $"com1={limit.Com}&" +
-                                       $"com2={limit.Com}&" +
-                                       $"com3={limit.Com}&" +
-                                       $"com4={limit.Com}&" +
-                                       $"com5={limit.Com}&" +
-                                       $"com6={limit.Com}&" +
-                                       $"com7={limit.Com}&" +
-                                       $"com8={limit.Com}&" +
-                                       $"com9={limit.Com}&" +
-                                       $"comtype={limit.Comtype}&" +
-                                       $"suspend={limit.Suspend}";
+                            $"secret={GameConst.M8.Secret}&" +
+                            $"action={GameConst.M8.Update}&" +
+                            $"agent={GameConst.M8.agent}&" +
+                            $"username={request.M8UserName}&" +
+                            $"max1={limit.Max1}&" +
+                            $"max2={limit.Max2}&" +
+                            $"max3={limit.Max3}&" +
+                            $"max4={limit.Max4}&" +
+                            $"max5={limit.Max5}&" +
+                            $"max6={limit.Max6}&" +
+                            $"max7={limit.Max7}&" +
+                            $"lim1={limit.Lim1}&" +
+                            $"lim2={limit.Lim2}&" +
+                            $"lim3={limit.Lim3}&" +
+                            $"lim4={limit.Lim4}&" +
+                            $"com1={limit.Com}&" +
+                            $"com2={limit.Com}&" +
+                            $"com3={limit.Com}&" +
+                            $"com4={limit.Com}&" +
+                            $"com5={limit.Com}&" +
+                            $"com6={limit.Com}&" +
+                            $"com7={limit.Com}&" +
+                            $"com8={limit.Com}&" +
+                            $"com9={limit.Com}&" +
+                            $"comtype={limit.Comtype}&" +
+                            $"suspend={limit.Suspend}";
                 await GameHelpers.CallThirdPartyApi(Url, null);
                 var result = await game_help.GameM8Register(request: request);
                 return OkResponse(result);
@@ -2206,7 +2208,7 @@ namespace Webet333.api.Controllers
                     UserId = request.UserId,
                     M8UserName = username
                 };
-                using (var game_help = new GameHelpers(Connection: Connection))
+                using (var game_help = new M8GameHelpers(Connection: Connection))
                 {
                     var limit = await game_help.M8DefaultLimitSelect();
                     var Url = $"{GameConst.M8.baseURL}?" +
@@ -2307,9 +2309,9 @@ namespace Webet333.api.Controllers
         [HttpGet(ActionsConst.Game.M8GameGetLimit)]
         public async Task<IActionResult> M8SetLimitSelect()
         {
-            using (var game_helper = new GameHelpers(Connection))
+            using (var m8_helper = new M8GameHelpers(Connection))
             {
-                var result = await game_helper.M8DefaultLimitSelect();
+                var result = await m8_helper.M8DefaultLimitSelect();
                 return OkResponse(result);
             }
 
@@ -3315,5 +3317,75 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Pussy Betting Details
+
+        #region Joker Player Log
+
+        [HttpGet(ActionsConst.Game.JokerPlayerLog)]
+        public async Task<IActionResult> JokerPlayerLog()
+        {
+            DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
+            var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
+
+            var date = DateTime.Now;
+            var startDate = date.AddMinutes(-30).ToString("yyyy-MM-dd HH:mm:ss");
+            var endDate = date.ToString("yyyy-MM-dd HH:mm:ss");
+
+            bool initilizeVariable = true;
+            var totalRecords = new JokerPlayerLogResponse();
+
+            string nextId = string.Empty;
+            do
+            {
+                string bodyParameter = $"EndDate={endDate}" +
+                                    $"&Method=TSM" +
+                                    $"&NextId={nextId}" +
+                                    $"&StartDate={startDate}" +
+                                    $"&Timestamp={temp}";
+
+                var url = $"{GameConst.Joker.jokerBaseUrl}?" +
+                    $"AppID={GameConst.Joker.AppID}" +
+                    $"&Signature={GameHelpers.GenerateHas(bodyParameter)}";
+
+                var stringContent = new StringContent(bodyParameter, Encoding.UTF8, "application/x-www-form-urlencoded");
+
+                var responseString = await GameHelpers.CallThirdPartyApi(url, stringContent);
+
+                var JokerServices = JsonConvert.DeserializeObject<JokerPlayerLogResponse>(responseString);
+
+                if (initilizeVariable)
+                {
+                    totalRecords = JokerServices;
+                    initilizeVariable = false;
+                }
+                else
+                {
+                    if (JokerServices.Data != null)
+                    {
+                        if (JokerServices.Data.Game != null) totalRecords.Data.Game.AddRange(JokerServices.Data.Game);
+
+                        if (JokerServices.Data.Jackpot != null) totalRecords.Data.Jackpot.AddRange(JokerServices.Data.Jackpot);
+                    }
+                }
+
+                nextId = JokerServices.NextId;
+
+            } while (!String.IsNullOrWhiteSpace(nextId));
+
+            var notSave = false;
+
+            if (totalRecords.Data.Jackpot == null && totalRecords.Data.Game == null)
+                return OkResponse(new { totalRecords, startDate, endDate, notSave });
+
+            using (var game_help = new GameHelpers(Connection: Connection))
+            {
+                notSave = true;
+                await game_help.JokerPlayerLogInsert(totalRecords);
+
+                return OkResponse(new { totalRecords, startDate, endDate , notSave });
+            }
+        }
+
+        #endregion Joker Player Log
+
     }
 }

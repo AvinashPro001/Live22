@@ -458,6 +458,8 @@
             public const string Kiss918PlayerLog = "918kiss/playerlog";
 
             public const string Pussy888PlayerLog = "pussy888/playerlog";
+
+            public const string JokerPlayerLog = "joker/playerlog";
         }
 
         public class GameBalance
@@ -533,6 +535,13 @@
             public const string Broken = "joker/broken";
 
             public const string BrokenDetails = "joker/broken/details";
+
+            public const string Register = "joker/register";
+        }
+
+        public class Kiss918
+        {
+            public const string Register = "918kiss/register";
         }
 
         public class WM
@@ -646,6 +655,8 @@
         public class Playtech
         {
             public const string Broken = "playtech/broken";
+
+            public const string Register = "playtech/register";
         }
 
         public class VIPCategory

@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +12,8 @@ using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
+using Webet333.models.Request;
+using Webet333.models.Request.Game;
 using Webet333.models.Request.GameBalance;
 
 namespace Webet333.api.Controllers
@@ -30,6 +34,7 @@ namespace Webet333.api.Controllers
 
         #endregion Global Variable
 
+        #region Playtech Broken Status 
 
         [HttpPost(ActionsConst.Playtech.Broken)]
         public async Task<IActionResult> BrokenStatusUpdate([FromBody] UserBalanceRequest request)
@@ -55,7 +60,51 @@ namespace Webet333.api.Controllers
                 using (var game_helper = new PlaytechGameHelpers(Connection))
                     await game_helper.BrokenStatusUpdate(request.Username, status, JsonConvert.SerializeObject(result));
             }
-            return OkResponse(new { Status = unfinishedGame,Response=result});
+            return OkResponse(new { Status = unfinishedGame, Response = result });
         }
+
+        #endregion
+
+        #region Joker game Register
+
+        [Authorize]
+        [HttpPost(ActionsConst.Playtech.Register)]
+        public async Task<IActionResult> PlaytechRegister([FromBody] GetByIdRequest request)
+        {
+            var Role = GetUserRole(User);
+
+            if (Role == RoleConst.Users)
+                request.Id = GetUserId(User).ToString();
+
+            if (Role == RoleConst.Admin)
+                if (string.IsNullOrEmpty(request.Id))
+                    return BadResponse("error_invalid_modelstate");
+
+            string username, password;
+            using (var account_helper = new AccountHelpers(Connection))
+            {
+                var user = await account_helper.UserGetBalanceInfo(request.Id);
+                username = user.PlaytechGamePrefix + user.Username;
+                password = SecurityHelpers.DecryptPassword(user.Password);
+            }
+            var result = await PlaytechGameHelpers.PlaytechRegister(username, password,_hostingEnvironment);
+
+            if (result.Result== null) return BadResponse(result.Error);
+
+            using (var playtech_helper = new PlaytechGameHelpers(Connection))
+            {
+                var PlaytechRequest = new GamePlaytechRegisterRequest()
+                {
+                    PlaytechUserName= username,
+                    UserId = request.Id,
+                    APIResponse = JObject.FromObject(result)
+                };
+                await playtech_helper.GamePlaytechRegister(PlaytechRequest);
+                return OkResponse(result);
+            }
+        }
+
+        #endregion 
+
     }
 }

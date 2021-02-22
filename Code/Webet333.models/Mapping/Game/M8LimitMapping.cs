@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Webet333.models.Request.Game;
+using Webet333.models.Request.Game.M8;
 using static Webet333.models.Constants.GameConst;
 
 namespace Webet333.models.Mapping.Game

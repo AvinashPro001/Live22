@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
+using Webet333.models.Request.Game;
 using Webet333.models.Response.Game.Playtech;
 
 namespace Webet333.api.Helpers
@@ -52,6 +53,27 @@ namespace Webet333.api.Helpers
 
         #endregion
 
+        #region Call Playtech Register API
+
+        internal static async Task<PlaytechRegisterResponse> PlaytechRegister(string Username, string Password, IHostingEnvironment _hostingEnvironment)
+        {
+            var URL = $"{GameConst.Playtech.playtechBaseUrl}{GameConst.Playtech.Create}?" +
+                           $"playername={Username}34" +
+                           $"&adminname={GameConst.Playtech.adminName}" +
+                           $"&kioskname={GameConst.Playtech.kioskname}" +
+                           $"&firstname=UsernameWeBet333" +
+                           $"&countrycode={GameConst.Playtech.CountryCode}" +
+                           $"&viplevel={GameConst.Playtech.VipLevel}" +
+                           $"&languagecode=EN" +
+                           $"&password={Password}";
+
+            DefaultHelper defaultHelper = new DefaultHelper(_hostingEnvironment);
+            return JsonConvert.DeserializeObject<PlaytechRegisterResponse>(await defaultHelper.PlaytechAPICertificate(URL,returnResult:true));
+
+        }
+
+        #endregion
+
         #region Broken Status Update
 
         internal async Task BrokenStatusUpdate(string Username, string Status, string Response)
@@ -63,6 +85,19 @@ namespace Webet333.api.Helpers
         }
 
         #endregion
+
+        #region Register Game Playtech
+
+        internal async Task<dynamic> GamePlaytechRegister(GamePlaytechRegisterRequest request)
+        {
+            string response = request.APIResponse.ToString(Newtonsoft.Json.Formatting.None);
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.FindAsync(StoredProcConsts.Game.GamePlaytechRegister, new { request.UserId, request.PlaytechUserName, APIResponse = response });
+            }
+        }
+
+        #endregion 
 
         #region House Keeping
 
