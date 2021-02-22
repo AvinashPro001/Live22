@@ -4,6 +4,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
+using Webet333.api.Helpers;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
@@ -25,7 +26,7 @@ namespace Webet333.api.Controllers
 
         #region Kiss 918 game Register
 
-        [Authorize]
+        //[Authorize]
         [HttpPost(ActionsConst.Kiss918.Register)]
         public async Task<IActionResult> Kiss918Register([FromBody] GetByIdRequest request)
         {
@@ -38,11 +39,21 @@ namespace Webet333.api.Controllers
             //    if (string.IsNullOrEmpty(request.Id))
             //        return BadResponse("error_invalid_modelstate");
 
-            //string username;
+            string password,MobileNo;
+            using (var account_helper = new AccountHelpers(Connection))
+            {
+                var user = await account_helper.UserGetBalanceInfo(request.Id);
+                password = SecurityHelpers.DecryptPassword(user.Password);
+                MobileNo = user.MobileNo;
+            }
 
-            //var result = await JokerHelpers.JokerRegister(username);
+            var randomUsername = await Kiss918GameHelpers.Kiss918RandomUsername();
 
-            //if (result.Status == null) return BadResponse(result.Message);
+            if (!randomUsername.Success) return BadResponse(randomUsername.Msg);
+
+            var username = randomUsername.Account;
+
+            var result = await Kiss918GameHelpers.Kiss918Register(username,password, MobileNo);
 
             //using (var joker_helper = new JokerHelpers(Connection))
             //{
@@ -55,7 +66,7 @@ namespace Webet333.api.Controllers
             //    await joker_helper.GameJokerRegister(JokerRequest);
             //    return OkResponse(result);
             //}
-            return OkResponse();
+            return OkResponse(result);
         }
 
         #endregion 
