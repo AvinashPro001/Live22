@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
 using Webet333.models.Response.Game.SexyBaccarat;
+using System.Text.RegularExpressions;
 
 namespace Webet333.api.Helpers.SexyBaccarat
 {
@@ -30,6 +31,12 @@ namespace Webet333.api.Helpers.SexyBaccarat
 
         internal static async Task<SexyBaccaratAPIResponse> CallRegisterAPI(string username, string bettingLimit)
         {
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+            if (username.Length > 16)
+            {
+                username = username.Substring(0, 16);
+            }
+
             var url = $"{GameConst.SexyBaccaratConst.APIURL}{GameConst.SexyBaccaratConst.CreateMember}";
 
             var dict = new Dictionary<string, string>();
@@ -49,6 +56,12 @@ namespace Webet333.api.Helpers.SexyBaccarat
 
         internal static async Task<dynamic> CallBettingLimitAPI(string username, string betLimit)
         {
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+            if (username.Length > 16)
+            {
+                username = username.Substring(0, 16);
+            }
+
             var url = $"{GameConst.SexyBaccaratConst.APIURL}{GameConst.SexyBaccaratConst.BetLimit}";
 
             var dict = new Dictionary<string, string>();
@@ -66,6 +79,12 @@ namespace Webet333.api.Helpers.SexyBaccarat
 
         internal static async Task<SexyBaccaratLoginResponse> CallLoginAPI(string username, bool isMoible)
         {
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+            if (username.Length > 16)
+            {
+                username = username.Substring(0, 16);
+            }
+
             var url = $"{GameConst.SexyBaccaratConst.APIURL}{GameConst.SexyBaccaratConst.Login}";
 
             var dict = new Dictionary<string, string>();
@@ -87,6 +106,12 @@ namespace Webet333.api.Helpers.SexyBaccarat
 
         internal static async Task<SexyBaccaratDepositResponse> CallDepositAPI(string username, decimal Amount)
         {
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+            if (username.Length > 16)
+            {
+                username = username.Substring(0, 16);
+            }
+
             var url = $"{GameConst.SexyBaccaratConst.APIURL}{GameConst.SexyBaccaratConst.Deposit}";
 
             var dict = new Dictionary<string, string>();
@@ -106,6 +131,12 @@ namespace Webet333.api.Helpers.SexyBaccarat
 
         internal static async Task<SexybaccaratWithdrawResponse> CallWithdrawAPI(string username, decimal Amount)
         {
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+            if (username.Length > 16)
+            {
+                username = username.Substring(0, 16);
+            }
+
             var url = $"{GameConst.SexyBaccaratConst.APIURL}{GameConst.SexyBaccaratConst.Withdraw}";
 
             var dict = new Dictionary<string, string>();

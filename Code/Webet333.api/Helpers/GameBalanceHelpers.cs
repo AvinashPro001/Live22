@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Linq;
@@ -289,6 +290,12 @@ namespace Webet333.api.Helpers
 
         public async Task<string> CallSexyGameBalance(string username)
         {
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+            if (username.Length > 16)
+            {
+                username = username.Substring(0, 16);
+            }
+
             var url = $"{GameConst.SexyBaccaratConst.APIURL}{GameConst.SexyBaccaratConst.Balance}";
 
             var dict = new Dictionary<string, string>();
@@ -331,6 +338,11 @@ namespace Webet333.api.Helpers
 
         public async Task<string> CallSAGameBalance(string username)
         {
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+            if (username.Length > 20)
+            {
+                username = username.Substring(0, 20);
+            }
             var time = DateTime.Now.ToString("yyyyMMddhhmmss");
             var qs = $"method={GameConst.SAConst.BalanceMethod}" +
                     $"&Key={GameConst.SAConst.SecretKey}" +
@@ -387,6 +399,11 @@ namespace Webet333.api.Helpers
 
         public async Task<string> CallAllBetGameBalance(string Username, string Password)
         {
+            Username = Regex.Replace(Username, @"[^0-9a-zA-Z]+", "");
+            Password = Regex.Replace(Password, @"[^0-9a-zA-Z]+", "");
+            if (Password.Length > 12)
+                Password = Password.Substring(0, 12);
+
             string allBetBalance = null;
 
             var Parameter = $"random={AllBetGameHelpers.Random()}&client={Username}&password={Password}";

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -46,6 +47,9 @@ namespace Webet333.api.Controllers
                 username = user.AllBetGamePrefix + user.UserId;
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
+
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+
             var result = await AllBetGameHelpers.RegisterCallAPI(username,password);
             using (var allbet_helper = new AllBetGameHelpers(Connection))
             {

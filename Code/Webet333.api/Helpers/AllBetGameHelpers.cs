@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
@@ -102,6 +103,11 @@ namespace Webet333.api.Helpers
 
         public static async Task<AllBetRegisterResponse> RegisterCallAPI(string Username, string Password)
         {
+            Username = Regex.Replace(Username, @"[^0-9a-zA-Z]+", "");
+            Password = Regex.Replace(Password, @"[^0-9a-zA-Z]+", "");
+            if (Password.Length > 12)
+                Password = Password.Substring(0, 12);
+
             var Parameter = $"random={Random()}&agent={GameConst.AllBet.Agent}&client={Username}&password={Password}&orHallRebate=0";
             var Url = $"{GameConst.AllBet.Url}{GameConst.AllBet.Register}";
             return JsonConvert.DeserializeObject<AllBetRegisterResponse>(await CallAPI(Url, Parameter));
@@ -113,6 +119,11 @@ namespace Webet333.api.Helpers
 
         public static async Task<dynamic> ChangePasswordCallAPI(string Username, string Password)
         {
+            Username = Regex.Replace(Username, @"[^0-9a-zA-Z]+", "");
+            Password = Regex.Replace(Password, @"[^0-9a-zA-Z]+", "");
+            if (Password.Length > 12)
+                Password = Password.Substring(0, 12);
+
             var Parameter = $"random={Random()}&client={Username}&newPassword={Password}";
             var Url = $"{GameConst.AllBet.Url}{GameConst.AllBet.ChangePassword}";
             return JsonConvert.DeserializeObject<AllBetRegisterResponse>(await CallAPI(Url, Parameter));
@@ -124,6 +135,7 @@ namespace Webet333.api.Helpers
 
         public static async Task<AllBetRegisterResponse> DepositWithdrawCallAPI(string Username, int method, decimal Amount)
         {
+            Username = Regex.Replace(Username, @"[^0-9a-zA-Z]+", "");
             var Parameter = $"random={Random()}&agent={GameConst.AllBet.Agent}&sn={GameConst.AllBet.PropertyId + genrateNumber()}&client={Username}&operFlag={method}&credit={Amount}";
             var Url = $"{GameConst.AllBet.Url}{GameConst.AllBet.transfer}";
             return JsonConvert.DeserializeObject<AllBetRegisterResponse>(await CallAPI(Url, Parameter));
@@ -135,6 +147,13 @@ namespace Webet333.api.Helpers
 
         public static async Task<AllbetGameLoginResponse> LoginCallAPI(string Username, string Password, string LanguageCode, int AppType)
         {
+            Username = Regex.Replace(Username, @"[^0-9a-zA-Z]+", "");
+            Password = Regex.Replace(Password, @"[^0-9a-zA-Z]+", "");
+            if (Password.Length > 12)
+            {
+                Password = Password.Substring(0, 12);
+            }
+
             var Parameter = $"random={Random()}&client={Username}&password={Password}&language={LanguageCode}&appType={AppType}";
             var Url = $"{GameConst.AllBet.Url}{GameConst.AllBet.Login}";
             return JsonConvert.DeserializeObject<AllbetGameLoginResponse>(await CallAPI(Url, Parameter));
@@ -158,7 +177,6 @@ namespace Webet333.api.Helpers
         }
 
         #endregion Call Login Third Party API
-
 
         #region Call Betting Details Third Party API
 

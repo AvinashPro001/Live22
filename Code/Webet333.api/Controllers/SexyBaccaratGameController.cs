@@ -21,6 +21,7 @@ using Webet333.models.Request.Game.SexyBaccarat;
 using Webet333.models.Response;
 using Webet333.models.Response.Game;
 using Webet333.models.Response.Game.SexyBaccarat;
+using System.Text.RegularExpressions;
 
 namespace Webet333.api.Controllers
 {
@@ -67,6 +68,12 @@ namespace Webet333.api.Controllers
             }
             try
             {
+                username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+                if (username.Length > 20)
+                {
+                    username = username.Substring(0, 16);
+                }
+
                 var response = await SexyBaccaratGameHelpers.CallRegisterAPI(username, bettingLimits);
 
                 if (!response.status.Equals("0000"))

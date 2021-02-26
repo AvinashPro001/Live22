@@ -56,18 +56,18 @@ namespace Webet333.api.Controllers
             var username = randomUsername.Account;
 
             var result = await Kiss918GameHelpers.Kiss918Register(username, password, MobileNo);
-
-            if (!result.Success) return OkResponse(randomUsername);
+            
+            if (!result.Success) return OkResponse(result);
 
             using (var kiss_helper = new Kiss918GameHelpers(Connection))
             {
-                var JokerRequest = new Game918KissRegisterRequest()
+                var kiss918Request = new Game918KissRegisterRequest()
                 {
                     _918KissUserName = username,
                     UserId = request.Id,
                     APIResponse = JObject.FromObject(result)
                 };
-                await kiss_helper.Game918KissRegister(JokerRequest);
+                await kiss_helper.Game918KissRegister(kiss918Request);
                 return OkResponse(result);
             }
         }

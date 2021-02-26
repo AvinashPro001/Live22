@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -58,12 +59,17 @@ namespace Webet333.api.Controllers
             }
             try
             {
+                username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+                if (username.Length > 20)
+                {
+                    username = username.Substring(0, 20);
+                }
                 var response = await SAGameHelpers.CallAPIRegister(username);
                 if (response.Descendants("ErrorMsgId").Single().Value == "0")
                 {
                     using (var sa_helper = new SAGameHelpers(Connection))
                     {
-                        var result = await sa_helper.SARegister(username, response.ToString(), GetUserId(User).ToString());
+                        var result = await sa_helper.SARegister(username, response.ToString(), request.Id);
 
                         return OkResponse(new SARegisterResponse { status = response.Descendants("ErrorMsgId").Single().Value, Message = response.Descendants("ErrorMsg").Single().Value });
                     }

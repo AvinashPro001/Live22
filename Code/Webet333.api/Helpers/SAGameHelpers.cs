@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Linq;
@@ -28,7 +29,11 @@ namespace Webet333.api.Helpers
 
         internal static async Task<XDocument> CallAPIRegister(string username)
         {
-
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+            if (username.Length > 20)
+            {
+                username = username.Substring(0, 20);
+            }
             var time = DateTime.Now.ToString("yyyyMMddhhmmss");
             var qs = $"method={GameConst.SAConst.RegisterMethod}" +
                     $"&Key={GameConst.SAConst.SecretKey}" +
@@ -50,6 +55,11 @@ namespace Webet333.api.Helpers
 
         internal static async Task<XDocument> CallAPILogin(string username)
         {
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+            if (username.Length > 20)
+            {
+                username = username.Substring(0, 20);
+            }
             var time = DateTime.Now.ToString("yyyyMMddhhmmss");
             var qs = $"method={GameConst.SAConst.LoginMethod}" +
                     $"&Key={GameConst.SAConst.SecretKey}" +
@@ -72,6 +82,11 @@ namespace Webet333.api.Helpers
 
         internal static async Task<XDocument> CallAPIDeposit(string username,decimal Amount)
         {
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+            if (username.Length > 20)
+            {
+                username = username.Substring(0, 20);
+            }
 
             var time = DateTime.Now.ToString("yyyyMMddhhmmss");
             var qs = $"method={GameConst.SAConst.DepositMethod}" +
@@ -96,6 +111,12 @@ namespace Webet333.api.Helpers
 
         internal static async Task<XDocument> CallAPIWithdraw(string username, decimal Amount)
         {
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+            if (username.Length > 20)
+            {
+                username = username.Substring(0, 20);
+            }
+
             var time = DateTime.Now.ToString("yyyyMMddhhmmss");
             var qs = $"method={GameConst.SAConst.WithdrawMethod}" +
                     $"&Key={GameConst.SAConst.SecretKey}" +
