@@ -81,6 +81,8 @@
 
             public const string randomUsername = "RandomUserName";
 
+            public const string PlayerType = "11";
+
         }
 
         public class AG
@@ -159,6 +161,10 @@
             public const string GetBalance = "balance";
 
             public const string Create = "create";
+
+            public const string CountryCode = "MY";
+
+            public const string VipLevel = "1";
         }
 
         public class GamesNames

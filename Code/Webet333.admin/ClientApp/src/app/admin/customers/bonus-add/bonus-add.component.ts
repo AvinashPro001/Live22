@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
-import { account, customer, playtech, AGGame, Game, Joker, M8Game, gameBalance, ErrorMessages } from '../../../../environments/environment';
+import { account, customer, playtech, AGGame, Joker, M8Game, gameBalance, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 import { Md5 } from 'ts-md5/dist/md5';
 declare var $: any;
@@ -133,104 +133,7 @@ export class BonusAddComponent implements OnInit {
     //#endregion
 
     RegisterGame(userData) {
-        let userModel = {
-            id: userData.id
-        };
-        this.adminService.add<any>(Game.selectUser, userModel).subscribe(async res => {
-            if (res.data.MaxBet !== true) {
-                var userMaxBet = {
-                    userid: userData.id,
-                    firstname: userData.name,
-                    lastname: "Webet333",
-                    username: userData.username,
-                    currency: 2,
-                    maxtransfer: 99,
-                    mintransfer: 1,
-                    custominfo1: "",
-                    custominfo2: "",
-                    custominfo3: "",
-                    custominfo4: "",
-                    custominfo5: ""
-                };
-                await this.adminService.add<any>(Game.registerMaxBet, userMaxBet).subscribe(resData => { });
-            }
-            if (res.data.M8 !== true) {
-                var resultM8 = await this.callApi(M8Game.M8baseUrl + M8Game.createAction + "&" + M8Game.secret + "&" + M8Game.agent + "&" + "username=" + userData.username, false);
-                let modelM8 = {
-                    userId: userData.id,
-                    M8UserName: userData.username,
-                    apiResponse: resultM8
-                };
-                await this.adminService.add<any>(Game.registerM8, modelM8).subscribe(resData => { });
-            }
-            if (res.data.AG === false) {
-                var resultAG = await this.callAG(AGGame.AGbaseUrl + AGGame.CraeteAccount + "&" + AGGame.VendorID + "&" + AGGame.OperatorID + "&" + AGGame.MYR + "&" + AGGame.A + "&" + "user_id=" + userData.username, false);
-                let modelAG = {
-                    userId: userData.id,
-                    AGUserName: userData.username,
-                    apiResponse: resultAG
-                };
-                await this.adminService.add<any>(Game.registerAG, modelAG).subscribe(resData => { });
-            }
-            if (res.data.Playtech !== true) {
-                var resultPlaytechDeposit = await this.callApiPlaytech(playtech.PlaytechbaseUrl + playtech.CreateAccount + "playername=WEBET333" + userData.username.toUpperCase() + "&adminname=" + playtech.adminName + "&kioskname=" + playtech.kioskName + "&" + "phone=" + userData.mobileNo + "&" + "password=" + userData.password, false);
-
-                if (typeof resultPlaytechDeposit === "string") {
-                    try {
-                        JSON.parse(resultPlaytechDeposit);
-                    } catch (e) {
-                        var jObject = {
-                            data: resultPlaytechDeposit
-                        };
-                    }
-                }
-                else {
-                    let modelPlaytech = {
-                        userId: userData.id,
-                        PlaytechUserName: userData.username,
-                        apiResponse: resultPlaytechDeposit
-                    };
-                    await this.adminService.add<any>(Game.registerPlaytech, modelPlaytech).subscribe(resData => { console.log(resData) });
-                }
-            }
-            if (res.data.Joker !== true) {
-                var secret = 'qc8dr9f87x414';
-                var timeStamp = Math.floor(Date.now() / 1000);
-                var requestData_ = 'Method=' + Joker.EnsureUserAccount + '&' + 'Timestamp=' + timeStamp + '&' + 'Username=' + userData.username;
-                var CryptoJS = require("crypto-js");
-                var encrypted = CryptoJS.HmacSHA1(requestData_, secret);
-                var encryptedBase64 = CryptoJS.enc.Base64.stringify(encrypted);
-                var urlNew = encodeURIComponent(encryptedBase64);
-                var resultJoker = await this.callJoker('http://api688.net:80?AppID=TF7W&Signature=' + urlNew + '', 'Method=' + Joker.EnsureUserAccount + '&Timestamp=' + timeStamp + '&Username=' + userData.username, false);
-                timeStamp = Math.floor(Date.now() / 1000);
-                requestData_ = 'Method=' + Joker.SetPassword + '&' + 'Password=' + userData.password + '&' + 'Timestamp=' + timeStamp + '&' + 'Username=' + userData.username;
-                CryptoJS = require("crypto-js");
-                encrypted = CryptoJS.HmacSHA1(requestData_, secret);
-                encryptedBase64 = CryptoJS.enc.Base64.stringify(encrypted);
-                urlNew = encodeURIComponent(encryptedBase64);
-                var resultJokerSetpassword = await this.callJoker('http://api688.net:80?AppID=TF7W&Signature=' + urlNew + '', 'Method=' + Joker.SetPassword + '&' + 'Password=' + userData.password + '&' + 'Timestamp=' + timeStamp + '&' + 'Username=' + userData.username, false);
-
-                let modelJoker = {
-                    userId: userData.id,
-                    JokerUserName: userData.username,
-                    apiResponse: resultJoker
-                };
-                await this.adminService.add<any>(Game.registerJoker, modelJoker).subscribe(resData => { });
-            }
-            if (res.data._918Kiss !== true) {
-                //var randamUserName = await generateRandomUserName();
-                //var randomPasswordString = randomPassword();
-                //var modelUpdateProfile = {
-                //    username918: randamUserName,
-                //    password918: randomPasswordString
-                //};
-                //var updateProfile = await PostMethod(apiEndPoints.updateProfile, modelUpdateProfile);
-
-                //var result981Kiss = await this.call918Kiss("account.ashx?" + 918KissActionConst.AddUser + "&" + 918KissConstParameter.agent + "&" + "userName=" + randamUserName + "&" + "PassWd=" + randomPasswordString + "&" + "Name=" + resUserData.data.name + "&" + "Tel=" + resUserData.data.mobileNo + "&" + "Memo=" + null + "&" + "UserType=" + 918KissUserType.realplayer + "&" + "UserAreaId=" + 918KissUserAreaId.Malaysia + "&" + "time=" + UTCTime + "&" + 918KissConstParameter.authcode + "&" + "sign=" + generateHasValue(randamUserName) + "&" + _918KissConstParameter.pwdtype);
-            }
-
-            this.addBonus();
-        });
+        this.addBonus();
     }
 
     RegisterAfterBonus() {
@@ -633,7 +536,7 @@ export class BonusAddComponent implements OnInit {
     retrieveDepositpage() {
         this.adminService.getAll<any>(customer.bonusDdl).subscribe(res => {
             this.ddlData = res.data;
-            this.walletType = this.ddlData.walletTypes.filter(x => x.walletType =="Main Wallet");
+            this.walletType = this.ddlData.walletTypes.filter(x => x.walletType == "Main Wallet");
             this.depositType = this.ddlData.depositMethods;
             this.length = this.ddlData.promotions.length;
         }, error => {

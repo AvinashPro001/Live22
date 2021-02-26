@@ -65,7 +65,7 @@ namespace Webet333.api.Controllers
 
         #endregion
 
-        #region Joker game Register
+        #region Playtech game Register
 
         [Authorize]
         [HttpPost(ActionsConst.Playtech.Register)]
@@ -89,7 +89,7 @@ namespace Webet333.api.Controllers
             }
             var result = await PlaytechGameHelpers.PlaytechRegister(username, password,_hostingEnvironment);
 
-            if (result.Result== null) return BadResponse(result.Error);
+            if (result.Result== null) return OkResponse(result);
 
             using (var playtech_helper = new PlaytechGameHelpers(Connection))
             {

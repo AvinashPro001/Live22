@@ -5,8 +5,8 @@
 
 export const environment = {
     production: false,
-    //apiUrl: 'http://api.webet333.com/api/v1/'
-    apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    apiUrl: 'http://api.webet333.com/api/v1/'
+    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
     //apiUrl: 'http://localhost:49841/api/v1/'
 };
 
@@ -53,16 +53,16 @@ export const account = {
     FreeCeditSetting: environment.apiUrl + 'promotions/freecredit',
 }
 
-export const Game = {
-    selectUser: environment.apiUrl + 'Game/SelectUser',
-    registerAG: environment.apiUrl + "Game/AG/Register",
-    registerJoker: environment.apiUrl + "Game/Joker/Register",
-    registerPlaytech: environment.apiUrl + "Game/Playtech/Register",
-    register918Kiss: environment.apiUrl + "Game/918Kiss/Register",
-    registerM8: environment.apiUrl + "Game/M8/Register",
-    registerMaxBet: environment.apiUrl + "MaxBet/Register",
-    registerMega888: environment.apiUrl + "mega888/register"
-}
+//export const Game = {
+//    selectUser: environment.apiUrl + 'Game/SelectUser',
+//    registerAG: environment.apiUrl + "Game/AG/Register",
+//    registerJoker: environment.apiUrl + "Game/Joker/Register",
+//    registerPlaytech: environment.apiUrl + "Game/Playtech/Register",
+//    register918Kiss: environment.apiUrl + "Game/918Kiss/Register",
+//    registerM8: environment.apiUrl + "Game/M8/Register",
+//    registerMaxBet: environment.apiUrl + "MaxBet/Register",
+//    registerMega888: environment.apiUrl + "mega888/register"
+//}
 
 export const M8Game = {
     createAction: "action=create",
@@ -307,6 +307,8 @@ export const customer = {
     contactDetailsSelect: environment.apiUrl + 'settings/contact/details/select',
     contactDetailsUpdate: environment.apiUrl + 'settings/contact/details/update',
     contactDetailsAdd: environment.apiUrl + 'settings/contact/details/add',
+
+    GameSelectUser: environment.apiUrl + 'Game/SelectUser',
 }
 
 export const playtech = {
@@ -403,4 +405,23 @@ export const VIPSetting = {
 export const ErrorMessages = {
     unAuthorized: "You are not authorized to access this page!!",
     PleaseProvideFromDateToDate: "Please Provide From Date and To Date !!!"
+}
+
+export const GameRegister = {
+    selectUser: environment.apiUrl + 'Game/SelectUser',
+
+    registerAG: environment.apiUrl + "ag/register",
+    registerJoker: environment.apiUrl + "joker/register",
+    registerPlaytech: environment.apiUrl + "playtech/register",
+    register918Kiss: environment.apiUrl + "918kiss/register",
+    registerM8: environment.apiUrl + "m8/register",
+    registerMaxBet: environment.apiUrl + "MaxBet/Register",
+    registerMega888: environment.apiUrl + "mega888/register",
+    registerPussy888: environment.apiUrl + "pussy888/register",
+    registerDG: environment.apiUrl + "dg/register",
+    registerSA: environment.apiUrl + "sa/register",
+    registerWM: environment.apiUrl + "wm/register",
+    registerAllBet: environment.apiUrl + "allbet/register",
+    registerSexy: environment.apiUrl + "sexybaccarart/register",
+    registerPragmatic: environment.apiUrl + "pragmatic/register"
 }

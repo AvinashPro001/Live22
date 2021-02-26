@@ -130,7 +130,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.SA.SADeposit)]
-        public async Task<IActionResult> SADeposit([FromBody]SADepositWithdrawRequest request)
+        private async Task<IActionResult> SADeposit([FromBody]SADepositWithdrawRequest request)
         {
 
             if (!ModelState.IsValid) return BadResponse(ModelState);
@@ -183,7 +183,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.SA.SAWithdraw)]
-        public async Task<IActionResult> SAWithdraw([FromBody]SADepositWithdrawRequest request)
+        private async Task<IActionResult> SAWithdraw([FromBody]SADepositWithdrawRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
 

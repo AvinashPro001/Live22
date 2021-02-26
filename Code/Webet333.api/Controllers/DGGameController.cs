@@ -101,7 +101,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.DGGame.DGTransfer)]
-        public async Task<IActionResult> DGTransfer([FromBody]DgTransferRequest request)
+        private async Task<IActionResult> DGTransfer([FromBody]DgTransferRequest request)
         {
             
             if (!ModelState.IsValid) return BadResponse(ModelState);

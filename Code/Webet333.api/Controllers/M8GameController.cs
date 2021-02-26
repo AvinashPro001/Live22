@@ -48,7 +48,7 @@ namespace Webet333.api.Controllers
                 username = user.M8GamePrefix + user.Username;
             }
             var result = await M8GameHelpers.CallRegisterAPI(username);
-            if (result.response.errcode != "0") return BadResponse(result.response.errtext);
+            if (result.response.errcode != "0") return OkResponse(result);
             using (var m8_helper = new M8GameHelpers(Connection))
             {
                 var limit = await m8_helper.M8DefaultLimitSelect();

@@ -68,7 +68,7 @@ namespace Webet333.api.Controllers
         #region All game Register
 
         [HttpPost(ActionsConst.Game.GameJokerRegister)]
-        public async Task<IActionResult> GameJokerRegister([FromBody] GameJokerRegisterRequest request)
+        private async Task<IActionResult> GameJokerRegister([FromBody] GameJokerRegisterRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
             if (request == null) return BadResponse("error_empty_request");
@@ -81,7 +81,7 @@ namespace Webet333.api.Controllers
         }
 
         [HttpPost(ActionsConst.Game.GamePlaytechRegister)]
-        public async Task<IActionResult> GamePlaytechRegister([FromBody] GamePlaytechRegisterRequest request)
+        private async Task<IActionResult> GamePlaytechRegister([FromBody] GamePlaytechRegisterRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
             if (request == null) return BadResponse("error_empty_request");
@@ -95,7 +95,7 @@ namespace Webet333.api.Controllers
         }
 
         [HttpPost(ActionsConst.Game.Game918KissRegister)]
-        public async Task<IActionResult> Game918KissRegister([FromBody] Game918KissRegisterRequest request)
+        private async Task<IActionResult> Game918KissRegister([FromBody] Game918KissRegisterRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
             if (request == null) return BadResponse("error_empty_request");
@@ -109,7 +109,7 @@ namespace Webet333.api.Controllers
         }
 
         [HttpPost(ActionsConst.Game.GameAGRegister)]
-        public async Task<IActionResult> GameAGRegister([FromBody] GameAGRegisterRequest request)
+        private async Task<IActionResult> GameAGRegister([FromBody] GameAGRegisterRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
             if (request == null) return BadResponse("error_empty_request");
@@ -123,7 +123,7 @@ namespace Webet333.api.Controllers
         }
 
         [HttpPost(ActionsConst.Game.GameM8Register)]
-        public async Task<IActionResult> GameM8Register([FromBody] GameM8RegisterRequest request)
+        private async Task<IActionResult> GameM8Register([FromBody] GameM8RegisterRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
             if (request == null) return BadResponse("error_empty_request");

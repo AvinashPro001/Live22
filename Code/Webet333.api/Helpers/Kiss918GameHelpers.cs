@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Webet333.dapper;
 using Webet333.models.Constants;
+using Webet333.models.Request.Game;
 using Webet333.models.Response.Game.Kiss918;
 
 namespace Webet333.api.Helpers
@@ -48,7 +48,7 @@ namespace Webet333.api.Helpers
 
         #region Call Kiss 918 Register API
 
-        internal static async Task<dynamic> Kiss918Register(string Username,string Password, string MobileNo)
+        internal static async Task<Kiss918RegisterResponse> Kiss918Register(string Username,string Password, string MobileNo)
         {
             Password = "WB3@" + Password;
             if (Password.Length > 14)
@@ -68,17 +68,30 @@ namespace Webet333.api.Helpers
                            $"&UserType={GameConst.Kiss918.PlayerType}" +
 
                            $"&UserAreaId=1" +
-                           $"time={timestamp}" +
+                           $"&time={timestamp}" +
                            $"&authcode={GameConst.Kiss918.authcode}" +
                            $"&sign={SecurityHelpers.MD5EncrptText(GameConst.Kiss918.authcode.ToLower() + Username + timestamp + GameConst.Kiss918.SecretKey.ToLower()).ToUpper()}"+
                            $"&pwdtype=1";
 
-            dynamic apiResult = JsonConvert.DeserializeObject(await GameHelpers.CallThirdPartyApi(URL, null));
+            dynamic apiResult = JsonConvert.DeserializeObject<Kiss918RegisterResponse>(await GameHelpers.CallThirdPartyApi(URL, null));
 
             return apiResult;
         }
 
         #endregion
+
+        #region Kiss Register API
+
+        internal async Task<dynamic> Game918KissRegister(Game918KissRegisterRequest request)
+        {
+            string response = request.APIResponse.ToString(Newtonsoft.Json.Formatting.None);
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.FindAsync(StoredProcConsts.Game.Game918KissRegister, new { request.UserId, request._918KissUserName, APIResponse = response });
+            }
+        }
+
+        #endregion Game918Kiss
 
         #region House Keeping
 

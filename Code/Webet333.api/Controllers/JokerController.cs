@@ -81,7 +81,7 @@ namespace Webet333.api.Controllers
             }
             var result = await JokerHelpers.JokerRegister(username);
 
-            if (result.Status == null) return BadResponse(result.Message);
+            if (result.Status == null) return OkResponse(result);
 
             using (var joker_helper = new JokerHelpers(Connection))
             {

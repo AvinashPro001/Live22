@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { ToasterService, } from 'angular2-toaster';
-import { account, playtech, Game, Joker, M8Game, AGGame, customer, ErrorMessages } from '../../../../environments/environment';
+import { account, playtech,  Joker, M8Game, AGGame, customer, ErrorMessages } from '../../../../environments/environment';
 import { debug } from 'util';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../common/common.service';

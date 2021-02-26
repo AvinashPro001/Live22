@@ -58,7 +58,7 @@ namespace Webet333.api.Helpers
         internal static async Task<PlaytechRegisterResponse> PlaytechRegister(string Username, string Password, IHostingEnvironment _hostingEnvironment)
         {
             var URL = $"{GameConst.Playtech.playtechBaseUrl}{GameConst.Playtech.Create}?" +
-                           $"playername={Username}34" +
+                           $"playername={Username}" +
                            $"&adminname={GameConst.Playtech.adminName}" +
                            $"&kioskname={GameConst.Playtech.kioskname}" +
                            $"&firstname=UsernameWeBet333" +

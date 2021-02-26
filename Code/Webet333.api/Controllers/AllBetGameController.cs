@@ -87,7 +87,7 @@ namespace Webet333.api.Controllers
 
         #endregion 
 
-        #region AllBet game Login
+        #region AllBet game Change password
 
         [Authorize]
         [HttpPost(ActionsConst.AllBet.ChangePassword)]

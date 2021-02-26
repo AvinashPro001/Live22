@@ -89,7 +89,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Mega888Game.Mega888DepositWithdraw)]
-        public async Task<IActionResult> WithdrawDepsoit([FromBody] DepsoitWihtdrawRequest request)
+        private async Task<IActionResult> WithdrawDepsoit([FromBody] DepsoitWihtdrawRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
             if (request.Amount == 0) return BadResponse("error_invaild_amount");

@@ -129,7 +129,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.SexyBaccaratConst.SexyBaccarartDeposit)]
-        public async Task<IActionResult> SexyBaccaratDeposit([FromBody]SexybaccaratTransfer request)
+        private async Task<IActionResult> SexyBaccaratDeposit([FromBody]SexybaccaratTransfer request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
@@ -166,7 +166,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.SexyBaccaratConst.SexyBaccarartWithdraw)]
-        public async Task<IActionResult> SexyBaccaratWithdraw([FromBody]SexybaccaratTransfer request)
+        private async Task<IActionResult> SexyBaccaratWithdraw([FromBody]SexybaccaratTransfer request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
 

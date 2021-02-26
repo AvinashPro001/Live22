@@ -3,7 +3,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterService } from 'angular2-toaster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
-import { account, customer, gameBalance, VIPSetting, ErrorMessages } from '../../../../environments/environment';
+import { account, customer, gameBalance, VIPSetting, ErrorMessages, GameRegister } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 import { CommonService } from '../../../common/common.service';
 import { debug } from 'util';
@@ -271,6 +271,7 @@ export class UsersDetailsComponent implements OnInit {
 
         this.adminService.add<any>(customer.customerListById, model).subscribe(res => {
             this.Userdata = res.data[0];
+            this.RegisteInGame(this.Userdata.id)
             this.onChange(this.Userdata);
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
@@ -1240,6 +1241,253 @@ export class UsersDetailsComponent implements OnInit {
 
     //#endregion
 
+    //#region Registe User
+
+    RegisteInGame(Id) {
+
+        try {
+            let data = {
+                id: Id
+            }
+            this.adminService.add<any>(GameRegister.selectUser, data).subscribe(res => {
+
+                //#region AG Game Register
+
+                if (!res.data.AG) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerAG, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.AG(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+                //#region DG Game Register
+
+                if (!res.data.DG) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerDG, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.DG(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+                //#region AllBet Game Register
+
+                if (!res.data.AllBet) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerAllBet, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.AllBet(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+                //#region Joker Game Register
+
+                if (!res.data.Joker) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerJoker, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.Joker(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+                //#region M8 Game Register
+
+                if (!res.data.M8) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerM8, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.M8(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+                //#region Mega888 Game Register
+
+                if (!res.data.Mega888) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerMega888, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.Mega888(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+                //#region Playtech Game Register
+
+                if (!res.data.Playtech) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerPlaytech, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.Playtech(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+                //#region Pragmatic Game Register
+
+                if (!res.data.Pragmatic) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerPragmatic, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.Pragmatic(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+                //#region Pussy888 Game Register
+
+                if (!res.data.Pussy888) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerPussy888, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.Pussy888(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+                //#region SA Game Register
+
+                if (!res.data.SA) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerSA, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.SA(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+                //#region SexyBaccarat Game Register
+
+                if (!res.data.SexyBaccarat) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerSexy, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.Sexybaccarat(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+                //#region WM Game Register
+
+                if (!res.data.WM) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerWM, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.WM(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+                //#region Kiss 918 Game Register
+
+                if (!res.data._918Kiss) {
+                    try {
+                        this.adminService.add<any>(GameRegister.register918Kiss, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.Kiss918Balance(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+                //#region Maxbet Game Register
+
+                if (!res.data.MaxBet) {
+                    try {
+                        let maxbetModel = {
+                            userid: Id,
+                            firstname: this.userdata.name,
+                            lastname: "Webet333"
+                        }
+                        this.adminService.add<any>(GameRegister.registerMaxBet, maxbetModel).subscribe(res => {
+                            this.getUsername(Id);
+                            this.Maxbet(Id);
+                        });
+                    }
+                    catch (e) {
+
+                    }
+                }
+
+                //#endregion
+
+            })
+        }
+        catch (e) { }
+
+    }
+
+    //#endregion
+
     //#region Reset All values
 
     Resetvalue() {
@@ -1984,9 +2232,15 @@ export class UsersDetailsComponent implements OnInit {
 
     //#endregion
 
+    //#region Select GMT
+
     SelectGMT($event) {
         this.gmtlist = $event.target.value;
     }
+
+    //#endregion
+
+    //#region bettingDetails
 
     BettingDetails(startingDate = null, endingDate = null) {
         if (this.userid != null && this.userid != undefined) {
@@ -2580,6 +2834,10 @@ export class UsersDetailsComponent implements OnInit {
             this.toasterService.pop('error', 'Error', "Select Username");
     }
 
+    //#endregion bettingDetails
+
+    //#region Slots game Password Show
+
     GamePasswordShow() {
         if (this.userid != null && this.userid != undefined) {
             var Username = ((document.getElementById("txt_managerUsername") as HTMLInputElement).value)
@@ -2615,6 +2873,10 @@ export class UsersDetailsComponent implements OnInit {
         else
             this.toasterService.pop('error', 'Error', "Select Username");
     }
+
+    //#endregion 
+
+    //#region Reset Password
 
     async ResetPassword(GameName) {
         if (await this.checkUpdatePermission()) {
@@ -2658,6 +2920,10 @@ export class UsersDetailsComponent implements OnInit {
         }
     }
 
+    //#endregion
+
+    //#region VIP Level Update
+
     VIPLevelUpdate() {
         if (this.userid != null && this.userid != undefined) {
             var Username = ((document.getElementById("txt_managerUsername") as HTMLInputElement).value)
@@ -2693,6 +2959,8 @@ export class UsersDetailsComponent implements OnInit {
         else
             this.toasterService.pop('error', 'Error', "Select Username");
     }
+
+    //#endregion
 
     //#region Check Permission
 

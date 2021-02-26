@@ -32,16 +32,16 @@ async function DoLogin() {
         localStorage.setItem('currentUserData', enc($("#txt_login_password").val()));
 
         try {
-        remember_me();
+            remember_me();
 
-        var resUserDataMobile = await GetMethod(apiEndPoints.getProfile);
+            var resUserDataMobile = await GetMethod(apiEndPoints.getProfile);
 
-        sessionStorage.setItem('UserDetails', enc(JSON.stringify(resUserDataMobile)));
-        localStorage.setItem('currentUserName', resUserDataMobile.data.username);
-        if (resUserDataMobile.data.mobilenoConfirmed)
-            window.location = "/";
-        else
-            window.location = "../Account/VerfiedOtp";
+            sessionStorage.setItem('UserDetails', enc(JSON.stringify(resUserDataMobile)));
+            localStorage.setItem('currentUserName', resUserDataMobile.data.username);
+            if (resUserDataMobile.data.mobilenoConfirmed)
+                window.location = "/";
+            else
+                window.location = "../Account/VerfiedOtp";
         }
         catch (e) {
             location.reload()
@@ -322,7 +322,7 @@ async function DoRegister() {
                 try {
                     await TrackingLoginRegister("Register", model.userName, "registerCookies");
                 }
-                catch (e) {}
+                catch (e) { }
                 localStorage.setItem('currentUserName', model.userName);
                 localStorage.setItem('currentUserData', enc(model.password));
                 window.location.href = "../Account/VerfiedOtp";
@@ -458,6 +458,11 @@ async function regisrationGame() {
 
             var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
 
+            if (resUserData == null) {
+                var resUserData = await GetMethod(apiEndPoints.getProfile);
+                sessionStorage.setItem('UserDetails', enc(JSON.stringify(resUserData)));
+            }
+
             let userModel = {
                 id: resUserData.data.id
             };
@@ -484,11 +489,15 @@ async function regisrationGame() {
             }
 
             let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
+
+            if (globalParameters == null) {
+                globalParameters = await GetMethod(apiEndPoints.globalParameter);
+                sessionStorage.setItem('GamePreFix', enc(JSON.stringify(globalParameters)));
+            }
+
             var username = resUserData.data.username
 
-            var JokerUsername = globalParameters.data.jokerGamePrefix + username;
             var M8Username = globalParameters.data.m8GamePrefix + username;
-            var PlaytechUsername = globalParameters.data.playtechGamePrefix + username;
 
             if (resSelectUser.data.MaxBet !== true) {
                 var userMaxBet = {
@@ -504,15 +513,16 @@ async function regisrationGame() {
 
             if (resSelectUser.data.M8 !== true) {
                 try {
-                    var resultM8 = await callMe(M8ConstAction.createAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username);
-                    if (resultM8.response.errcode == "0") {
+                    //var resultM8 = await callMe(M8ConstAction.createAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username);
+                    //if (resultM8.response.errcode == "0") {
                         let modelM8 = {
-                            userId: resUserData.data.id,
-                            M8UserName: M8Username,
-                            apiResponse: resultM8.response
+                    //        userId: resUserData.data.id,
+                    //        M8UserName: M8Username,
+                    //        apiResponse: resultM8.response
                         };
 
-                        var resM8 = await PostMethod(apiEndPoints.registerM8, modelM8);
+                    var resM8 = await PostMethodWithParameter(apiEndPoints.registerM8, modelM8);
+                    if (resM8.data.response.errcode == "0") {
                         var resultM8LoginRegister = await callMe(M8ConstAction.loginAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username + "&host=sport.mywinday.com&lang=EN-US&accType=HK&ref=https://webet333.com");
 
                         if (resultM8LoginRegister.response.errcode !== '0') {
@@ -522,6 +532,7 @@ async function regisrationGame() {
                             localStorage.setItem('M8UrlMobile', resultM8LoginRegister.response.result.login.mobiurlsecure['#cdata-section']);
                         }
                     }
+                    //}
                 }
                 catch (ex) {
 
@@ -532,7 +543,7 @@ async function regisrationGame() {
                 try {
                     let modelAG = {
                     };
-                    var resAG = await PostMethod(apiEndPoints.registerAG, modelAG);
+                    var resAG = await PostMethodWithParameter(apiEndPoints.registerAG, modelAG);
                 }
                 catch (ex) {
 
@@ -541,25 +552,25 @@ async function regisrationGame() {
 
             if (resSelectUser.data.Playtech !== true) {
                 try {
-                    var resultPlaytechDeposit = await PlaytechPostMethod(PlaytechConstAction.CreateAccount + "playername=" + PlaytechUsername + "&" + PlaytechConstParameter.adminname + "&" + PlaytechConstParameter.kioskname + "&firstname=" + resUserData.data.name + "&firstname=Webet333" + "&countrycode=MY" + "&viplevel=1" + "&languagecode=EN" + "&" + "password=" + dec(GetLocalStorage("currentUserData")));
+                    //var resultPlaytechDeposit = await PlaytechPostMethod(PlaytechConstAction.CreateAccount + "playername=" + PlaytechUsername + "&" + PlaytechConstParameter.adminname + "&" + PlaytechConstParameter.kioskname + "&firstname=" + resUserData.data.name + "&firstname=Webet333" + "&countrycode=MY" + "&viplevel=1" + "&languagecode=EN" + "&" + "password=" + dec(GetLocalStorage("currentUserData")));
 
-                    if (typeof resultPlaytechDeposit === "string") {
-                        try {
-                            JSON.parse(resultPlaytechDeposit);
-                        } catch (e) {
-                            var jObject = {
-                                data: resultPlaytechDeposit
-                            };
-                        }
-                    }
-                    else {
+                    //if (typeof resultPlaytechDeposit === "string") {
+                    //    try {
+                    //        JSON.parse(resultPlaytechDeposit);
+                    //    } catch (e) {
+                    //        var jObject = {
+                    //            data: resultPlaytechDeposit
+                    //        };
+                    //    }
+                    //}
+                    //else {
                         let modelPlaytech = {
-                            userId: resUserData.data.id,
-                            PlaytechUserName: PlaytechUsername,
-                            apiResponse: resultPlaytechDeposit
+                    //        userId: resUserData.data.id,
+                    //        PlaytechUserName: PlaytechUsername,
+                    //        apiResponse: resultPlaytechDeposit
                         };
-                        var resPlaytech1 = await PostMethod(apiEndPoints.registerPlaytech, modelPlaytech);
-                    }
+                    var resPlaytech1 = await PostMethodWithParameter(apiEndPoints.registerPlaytech, modelPlaytech);
+                    //}
                 }
                 catch (ex) {
 
@@ -568,27 +579,29 @@ async function regisrationGame() {
 
             if (resSelectUser.data._918Kiss !== true) {
                 try {
-                    var randamUserName = await generateRandomUserName();
+                    //var randamUserName = await generateRandomUserName();
 
-                    var password = "Wb3@" + dec(GetLocalStorage("currentUserData"));
+                    //var password = "Wb3@" + dec(GetLocalStorage("currentUserData"));
 
-                    if (password.length > 14)
-                        password = password.substring(0, 14)
+                    //if (password.length > 14)
+                    //    password = password.substring(0, 14)
 
-                    var result981Kiss = await _918KissPostMethod("account.ashx?" + _918KissActionConst.AddUser + "&" + _918KissConstParameter.agent + "&" + "userName=" + randamUserName + "&" + "PassWd=" + password + "&" + "Name=" + resUserData.data.name + "&" + "Tel=" + resUserData.data.mobileNo + "&" + "Memo=" + null + "&" + "UserType=" + _918KissUserType.realplayer + "&" + "UserAreaId=" + _918KissUserAreaId.Malaysia + "&" + "time=" + UTCTime + "&" + _918KissConstParameter.authcode + "&" + "sign=" + generateHasValue(randamUserName) + "&" + _918KissConstParameter.pwdtype);
-                    if (result981Kiss.code == 0) {
-                        var modelUpdateProfile = {
-                            username918: randamUserName,
-                            password918: password
-                        };
-                        var updateProfile = await PostMethod(apiEndPoints.updateProfile, modelUpdateProfile);
+                    //var result981Kiss = await _918KissPostMethod("account.ashx?" + _918KissActionConst.AddUser + "&" + _918KissConstParameter.agent + "&" + "userName=" + randamUserName + "&" + "PassWd=" + password + "&" + "Name=" + resUserData.data.name + "&" + "Tel=" + resUserData.data.mobileNo + "&" + "Memo=" + null + "&" + "UserType=" + _918KissUserType.realplayer + "&" + "UserAreaId=" + _918KissUserAreaId.Malaysia + "&" + "time=" + UTCTime + "&" + _918KissConstParameter.authcode + "&" + "sign=" + generateHasValue(randamUserName) + "&" + _918KissConstParameter.pwdtype);
+                    //if (result981Kiss.code == 0) {
+                    //    var modelUpdateProfile = {
+                    //        username918: randamUserName,
+                    //        password918: password
+                    //    };
+                    //    var updateProfile = await PostMethod(apiEndPoints.updateProfile, modelUpdateProfile);
                         let model918Kiss = {
-                            userId: resUserData.data.id,
-                            _918KissUserName: randamUserName,
-                            apiResponse: result981Kiss
+                    //        userId: resUserData.data.id,
+                    //        _918KissUserName: randamUserName,
+                    //        apiResponse: result981Kiss
                         };
-                        var res918Kiss = await PostMethod(apiEndPoints.register918Kiss, model918Kiss);
-                    }
+                    //    var res918Kiss = await PostMethod(apiEndPoints.register918Kiss, model918Kiss);
+                    var res918Kiss = await PostMethodWithParameter(apiEndPoints.register918Kiss, model918Kiss);
+                    
+                    //}
                 }
                 catch (ex) {
 
@@ -597,19 +610,20 @@ async function regisrationGame() {
 
             if (resSelectUser.data.Joker !== true) {
                 try {
-                    var perameter = 'Method=' + jokerMethodConst.EnsureUserAccount + '&Timestamp=' + timestamp + '&Username=' + JokerUsername;
-                    var resultJoker = await JokerPostMethod('?' + jokerConstParameter.AppID + '&Signature=' + generateSignature(jokerMethodConst.EnsureUserAccount, JokerUsername, null, null), perameter);
+                    //var perameter = 'Method=' + jokerMethodConst.EnsureUserAccount + '&Timestamp=' + timestamp + '&Username=' + JokerUsername;
+                    //var resultJoker = await JokerPostMethod('?' + jokerConstParameter.AppID + '&Signature=' + generateSignature(jokerMethodConst.EnsureUserAccount, JokerUsername, null, null), perameter);
 
-                    var jokerSetPasswordperameter = 'Method=' + jokerMethodConst.SetPassword + '&' + 'Password=' + dec(GetLocalStorage('currentUserData')) + '&' + 'Timestamp=' + timestamp + '&' + 'Username=' + JokerUsername;
-                    var resultJokerSetPassword = await JokerPostMethod('?' + jokerConstParameter.AppID + '&' + 'Signature=' + generateSignature(jokerMethodConst.SetPassword, JokerUsername, dec(GetLocalStorage('currentUserData'))), jokerSetPasswordperameter);
-                    if (resultJoker.Status == "OK" || resultJoker.Status == "Created") {
-                        let modelJoker = {
-                            userId: resUserData.data.id,
-                            JokerUserName: JokerUsername,
-                            apiResponse: resultJoker
-                        };
-                        var resJoker = await PostMethod(apiEndPoints.registerJoker, modelJoker);
-                    }
+                    //var jokerSetPasswordperameter = 'Method=' + jokerMethodConst.SetPassword + '&' + 'Password=' + dec(GetLocalStorage('currentUserData')) + '&' + 'Timestamp=' + timestamp + '&' + 'Username=' + JokerUsername;
+                    //var resultJokerSetPassword = await JokerPostMethod('?' + jokerConstParameter.AppID + '&' + 'Signature=' + generateSignature(jokerMethodConst.SetPassword, JokerUsername, dec(GetLocalStorage('currentUserData'))), jokerSetPasswordperameter);
+                    //if (resultJoker.Status == "OK" || resultJoker.Status == "Created") {
+                    let modelJoker = {
+                        //userId: resUserData.data.id,
+                        //JokerUserName: JokerUsername,
+                        //apiResponse: resultJoker
+                    };
+                    var resJoker = await PostMethodWithParameter(apiEndPoints.registerJoker, modelJoker);
+                    
+                    //}
                 }
                 catch (ex) {
 
@@ -711,11 +725,12 @@ async function regisrationGame() {
 
                 }
             }
-
+            
             localStorage.setItem('IsExecute', false);
         }
     }
     catch {
+        localStorage.setItem('IsExecute', false);
     }
 }
 

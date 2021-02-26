@@ -4,12 +4,12 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.Game = exports.account = exports.environment = void 0;
+exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.account = exports.environment = void 0;
 exports.environment = {
     production: false,
-    //apiUrl: 'http://api.webet333.com/api/v1/'
+    apiUrl: 'http://api.webet333.com/api/v1/'
     //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    apiUrl: 'http://localhost:49841/api/v1/'
+    //apiUrl: 'http://localhost:49841/api/v1/'
 };
 exports.account = {
     login: exports.environment.apiUrl + 'account/login',
@@ -45,16 +45,16 @@ exports.account = {
     VaderPayParameterUpdate: exports.environment.apiUrl + 'account/vaderpay/maintenance/update',
     FreeCeditSetting: exports.environment.apiUrl + 'promotions/freecredit',
 };
-exports.Game = {
-    selectUser: exports.environment.apiUrl + 'Game/SelectUser',
-    registerAG: exports.environment.apiUrl + "Game/AG/Register",
-    registerJoker: exports.environment.apiUrl + "Game/Joker/Register",
-    registerPlaytech: exports.environment.apiUrl + "Game/Playtech/Register",
-    register918Kiss: exports.environment.apiUrl + "Game/918Kiss/Register",
-    registerM8: exports.environment.apiUrl + "Game/M8/Register",
-    registerMaxBet: exports.environment.apiUrl + "MaxBet/Register",
-    registerMega888: exports.environment.apiUrl + "mega888/register"
-};
+//export const Game = {
+//    selectUser: environment.apiUrl + 'Game/SelectUser',
+//    registerAG: environment.apiUrl + "Game/AG/Register",
+//    registerJoker: environment.apiUrl + "Game/Joker/Register",
+//    registerPlaytech: environment.apiUrl + "Game/Playtech/Register",
+//    register918Kiss: environment.apiUrl + "Game/918Kiss/Register",
+//    registerM8: environment.apiUrl + "Game/M8/Register",
+//    registerMaxBet: environment.apiUrl + "MaxBet/Register",
+//    registerMega888: environment.apiUrl + "mega888/register"
+//}
 exports.M8Game = {
     createAction: "action=create",
     loginAction: "action=login",
@@ -244,6 +244,8 @@ exports.customer = {
     contactTypeSelect: exports.environment.apiUrl + 'settings/contact/type/select',
     contactDetailsSelect: exports.environment.apiUrl + 'settings/contact/details/select',
     contactDetailsUpdate: exports.environment.apiUrl + 'settings/contact/details/update',
+    contactDetailsAdd: exports.environment.apiUrl + 'settings/contact/details/add',
+    GameSelectUser: exports.environment.apiUrl + 'Game/SelectUser',
 };
 exports.playtech = {
     playtechUrl: "http://api.webet333.com/api/Default/playtech",
@@ -329,5 +331,22 @@ exports.VIPSetting = {
 exports.ErrorMessages = {
     unAuthorized: "You are not authorized to access this page!!",
     PleaseProvideFromDateToDate: "Please Provide From Date and To Date !!!"
+};
+exports.GameRegister = {
+    selectUser: exports.environment.apiUrl + 'Game/SelectUser',
+    registerAG: exports.environment.apiUrl + "ag/register",
+    registerJoker: exports.environment.apiUrl + "joker/register",
+    registerPlaytech: exports.environment.apiUrl + "playtech/register",
+    register918Kiss: exports.environment.apiUrl + "918kiss/register",
+    registerM8: exports.environment.apiUrl + "m8/register",
+    registerMaxBet: exports.environment.apiUrl + "MaxBet/Register",
+    registerMega888: exports.environment.apiUrl + "mega888/register",
+    registerPussy888: exports.environment.apiUrl + "pussy888/register",
+    registerDG: exports.environment.apiUrl + "dg/register",
+    registerSA: exports.environment.apiUrl + "sa/register",
+    registerWM: exports.environment.apiUrl + "wm/register",
+    registerAllBet: exports.environment.apiUrl + "allbet/register",
+    registerSexy: exports.environment.apiUrl + "sexybaccarart/register",
+    registerPragmatic: exports.environment.apiUrl + "pragmatic/register"
 };
 //# sourceMappingURL=environment.js.map

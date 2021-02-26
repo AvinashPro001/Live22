@@ -1,5 +1,5 @@
-﻿var baseUrl = "http://uatapi.webet333.com/api/v1/";
-//var baseUrl = "http://api.webet333.com/api/v1/";
+﻿//var baseUrl = "http://uatapi.webet333.com/api/v1/";
+var baseUrl = "http://api.webet333.com/api/v1/";
 //var baseUrl ="http://localhost:49841/api/v1/"
 
 var apiEndPoints = {
@@ -78,35 +78,26 @@ var apiEndPoints = {
 
     registerAG: "ag/register",
     loginAG: "ag/login",
-    registerJoker: "Game/Joker/Register",
-    registerPlaytech: "Game/Playtech/Register",
-    register918Kiss: "Game/918Kiss/Register",
-    registerM8: "Game/M8/Register",
+
+    registerJoker: "joker/register",
+    registerPlaytech: "playtech/register",
+    register918Kiss: "918kiss/register",
+    registerM8: "m8/register",
 
     registerMaxBet: "MaxBet/Register",
     loginMaxBet: "MaxBet/Login",
-    maxBetTokenUpdate:"MaxBet/token/update",
-    maxBetDepositWithdrawl:"MaxBet/fundtransfer",
     getUserByMobile: "account/getuser",
-
-    MaxBetBalanceUpdate: "MaxBet/getbalance",
 
     LoginRegisterTracking: "account/tracking/insert",
 
-
     mega888Register: "mega888/register",
-    mega888Transfer: "mega888/deposit_withdraw",
     mega888Logout: "mega888/logout",
 
     sexyRegister: "sexybaccarart/register",
     sexyLogin: "sexybaccarart/login",
-    sexyDeposit: "sexybaccarart/deposit",
-    sexyWithdraw: "sexybaccarart/withdraw",
 
     saRegister: "sa/register",
     saLogin: "sa/login",
-    saDeposit: "sa/deposit",
-    saWithdraw: "sa/withdraw",
 
     pussyRegister: "pussy888/register",
 
@@ -122,7 +113,6 @@ var apiEndPoints = {
 
     dgRegister: "dg/register",
     dgLogin: "dg/login",
-    dgTransfer: "dg/transfer",
 
     kiss918Balance: "gamebalance/918kiss",
     mega888Balance: "gamebalance/mega888",

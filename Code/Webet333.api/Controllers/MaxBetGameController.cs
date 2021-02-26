@@ -220,7 +220,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.MaxBetGame.MaxBetGameDepositeWithdrawl)]
-        public async Task<IActionResult> MaxBetDepositAndWithdrawl([FromBody] GameMaxBetDepositAndWithdrawlRequest request)
+        private async Task<IActionResult> MaxBetDepositAndWithdrawl([FromBody] GameMaxBetDepositAndWithdrawlRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
