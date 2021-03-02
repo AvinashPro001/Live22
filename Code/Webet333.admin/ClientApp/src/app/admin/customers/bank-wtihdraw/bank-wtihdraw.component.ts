@@ -35,7 +35,6 @@ export class BankWtihdrawComponent implements OnInit {
     totalWithdraw: any;
     totalWithdrawAmount: any;
     uniqueId: any;
-    usersDetailsForReportPage: any;
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
@@ -195,11 +194,11 @@ export class BankWtihdrawComponent implements OnInit {
         }
 
         this.adminService.add<any>(customer.paymentStaticsDetails, model).subscribe(res => {
-            this.usersDetailsForReportPage = res.data;
             let i = 0;
             res.data.forEach(el => {
                 this.rowDetails.push({
                     No: ++i,
+                    id: el.id,
                     Username: el.UserName,
                     UserId: el.UserId,
                     BankName: el.BankName,
@@ -283,10 +282,7 @@ export class BankWtihdrawComponent implements OnInit {
 
     //#region Redirect to user details page
 
-    show(row = null, content = null) {
-        //this.viewData = row;
-        //this.openWindowCustomClass(content);
-
+    show(row = null) {
         localStorage.setItem('id', JSON.stringify(row));
         window.open('admin/customers/users-details', '_blank');
     }

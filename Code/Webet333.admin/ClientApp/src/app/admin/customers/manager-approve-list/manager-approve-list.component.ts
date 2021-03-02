@@ -33,7 +33,6 @@ export class ManagerApproveListComponent implements OnInit {
     verified: any;
     loadingIndicator: boolean = true;
     AutoRefersh: any;
-    usersDetailsForReportPage: any;
 
     constructor(
         private adminService: AdminService,
@@ -154,11 +153,13 @@ export class ManagerApproveListComponent implements OnInit {
             let i = 0;
             if (res.data.length > 0) {
                 this.managerData = res.data;
-                this.usersDetailsForReportPage = res.data;
+
                 res.data.forEach(el => {
                     this.rows.push({
                         No: ++i,
                         Created: el.created,
+                        userId: el.userId,
+                        Username: el.username,
                         New: el.new,
                         OperationType: el.operationType,
                         Verified: el.verified,
@@ -277,9 +278,7 @@ export class ManagerApproveListComponent implements OnInit {
 
     //#region Redirect to user details page
 
-    show(row = null, content = null) {
-        //this.viewData = row;
-        //this.openWindowCustomClass(content);
+    show(row = null) {
         localStorage.setItem('id', JSON.stringify(row));
         window.open('admin/customers/users-details', '_blank');
     }

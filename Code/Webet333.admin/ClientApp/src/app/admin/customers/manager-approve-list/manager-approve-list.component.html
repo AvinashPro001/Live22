@@ -50,7 +50,7 @@
                     </ng-template>
                     <ng-template #link let-rowIndex="rowIndex" let-row="row" ngx-datatable-row-detail-template>
                         <label>
-                            <a [routerLink]='' (click)='show(managerData[rowIndex],null)'>{{managerData[rowIndex].username}}</a>
+                            <a [routerLink]='' (click)='show(row)'>{{row.Username}}</a>
                         </label>
                     </ng-template>
                 </ngx-datatable>
