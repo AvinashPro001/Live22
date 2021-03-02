@@ -25,8 +25,6 @@ export class UsersWinloseReportComponent implements OnInit {
     datePickerfromdate: string;
     datePickertodate: string;
 
-    usersDetailsForReportPage: any;
-
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -172,10 +170,11 @@ export class UsersWinloseReportComponent implements OnInit {
                 this.totalBonus = res.data.totalBonus;
                 this.totalWithdraw = res.data.totalWithdraw;
                 this.totalWinlose = res.data.totalWinlose;
-                this.usersDetailsForReportPage = res.data.users;
+
                 res.data.users.forEach(el => {
                     this.rows.push({
                         No: ++i,
+                        id:el.id,
                         Username: el.username,
                         RegisterKeyword: el.registerKeyword == null ? "Not Available" : el.registerKeyword,
                         PromotionName: el.promotionTitle == null ? "Not Available" : el.promotionTitle,
@@ -256,10 +255,7 @@ export class UsersWinloseReportComponent implements OnInit {
 
     //#region Redirect to user details page
 
-    show(row = null, content = null) {
-        //this.viewData = row;
-        //this.openWindowCustomClass(content);
-
+    show(row = null) {
         localStorage.setItem('id', JSON.stringify(row));
         window.open('admin/customers/users-details', '_blank');
     }

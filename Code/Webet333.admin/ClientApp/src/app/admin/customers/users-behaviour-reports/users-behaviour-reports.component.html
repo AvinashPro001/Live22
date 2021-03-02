@@ -114,7 +114,7 @@
             <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="'auto'" [limit]="10" [loadingIndicator]="loadingIndicator">
                 <ngx-datatable-column *ngFor="let column of columns; let i = index;" name="{{column.name}}" prop="{{column.prop}}">
                     <ng-template let-rowIndex="rowIndex" let-value="value" let-row="row" *ngIf="column.prop==='Username'" ngx-datatable-cell-template>
-                        <a [routerLink]='' (click)='show(usersDetailsForReportPage[rowIndex],null)'>{{value}}</a>
+                        <a [routerLink]='' (click)='show(row)'>{{value}}</a>
                     </ng-template>
                 </ngx-datatable-column>
             </ngx-datatable>

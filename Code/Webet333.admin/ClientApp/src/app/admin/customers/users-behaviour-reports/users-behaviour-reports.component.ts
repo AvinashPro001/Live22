@@ -18,7 +18,7 @@ export class UsersBehaviourReportsComponent implements OnInit {
     datePickerfromdate: string;
     datePickertodate: string;
     Data: any;
-    usersDetailsForReportPage: any;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -60,6 +60,7 @@ export class UsersBehaviourReportsComponent implements OnInit {
             res.data.res.forEach(el => {
                 this.rows.push({
                     No: ++i,
+                    userId: el.userId,
                     Username: el.username,
                     Name: el.name,
                     MobileNo: el.mobileNo,
@@ -168,10 +169,11 @@ export class UsersBehaviourReportsComponent implements OnInit {
 
         this.adminService.add<any>(customer.userBehaviorReport, data).subscribe(res => {
             this.Data = res.data.res;
-            this.usersDetailsForReportPage = res.data.res;
+
             res.data.res.forEach(el => {
                 this.rows.push({
                     No: ++i,
+                    userId: el.userId,
                     Username: el.username,
                     Name: el.name,
                     MobileNo: el.mobileNo,
@@ -263,10 +265,7 @@ export class UsersBehaviourReportsComponent implements OnInit {
 
     //#region Redirect to user details page
 
-    show(row = null, content = null) {
-        //this.viewData = row;
-        //this.openWindowCustomClass(content);
-
+    show(row = null) {
         localStorage.setItem('id', JSON.stringify(row));
         window.open('admin/customers/users-details', '_blank');
     }
