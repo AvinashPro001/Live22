@@ -137,6 +137,7 @@ function GetMethod(endPoint) {
         },
         url: baseUrl + endPoint
     }).then(function (res) {
+        
         return res;
     }).fail(function (err) {
         if (err.responseJSON !== null && err.responseJSON !== undefined)
