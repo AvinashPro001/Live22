@@ -14,7 +14,7 @@
         url: baseUrl + endPoint,
         beforeSend: function () {
             // setting a timeout
-            $(window).on('load', function(){
+            $(window).load(function(){
                 $(".loadingImage").fadeOut("slow");
             });
         }
@@ -402,7 +402,7 @@ function GameBalancePostMethod(endPoint, model) {
         url: baseUrl + endPoint,
         beforeSend: function () {
             // setting a timeout
-            $(window).on('load', function(){
+            $(window).load(function(){
                 $(".loadingImage").fadeOut("slow");
             });
         }
