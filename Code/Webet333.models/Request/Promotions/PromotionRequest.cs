@@ -170,6 +170,11 @@ namespace Webet333.models.Request.Promotions
         [JsonProperty(PropertyName = "isDiamond")]
         public bool IsDiamond { get; set; }
 
+        [JsonIgnore]
+        public System.Guid AdminId { get; set; }
+
+        [JsonIgnore]
+        public string DescriptionAdminLog { get; set; }
     }
 
     public class PromotionUpdateRequest : PromotionRequest

@@ -246,6 +246,9 @@ exports.customer = {
     contactDetailsUpdate: exports.environment.apiUrl + 'settings/contact/details/update',
     contactDetailsAdd: exports.environment.apiUrl + 'settings/contact/details/add',
     GameSelectUser: exports.environment.apiUrl + 'Game/SelectUser',
+    adminLogList: exports.environment.apiUrl + 'admin/log/select',
+    adminAction: exports.environment.apiUrl + 'admin/action/select_for_dropdown',
+    adminModule: exports.environment.apiUrl + 'admin/module/select_for_dropdown'
 };
 exports.playtech = {
     playtechUrl: "http://api.webet333.com/api/Default/playtech",

@@ -194,12 +194,18 @@
             public const string DefaultPermissionList = "user/default_permission/retrieve";
 
             public const string AdminUpdate = "admin/update";
-
-
+            
+            
 
             public const string RetrieveById = "customer/list_by_id";
 
             public const string RetrieveForDropdown = "customer/list_for_dropdown";
+
+            public const string AdminLogSelect = "admin/log/select";
+
+            public const string AdminActionSelectForDropdown = "admin/action/select_for_dropdown";
+
+            public const string AdminModuleSelectForDropdown = "admin/module/select_for_dropdown";
         }
 
         public class Promotions

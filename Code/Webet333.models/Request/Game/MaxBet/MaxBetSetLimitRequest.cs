@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Webet333.models.Request.Game.MaxBet
 {
-    public class MaxBetSetLimitRequest
+    public class MaxBetSetLimitRequest : BaseAdminLogRequest
     {
         [Required]
         [JsonProperty(PropertyName = "sportmin")]

@@ -309,6 +309,9 @@ export const customer = {
     contactDetailsAdd: environment.apiUrl + 'settings/contact/details/add',
 
     GameSelectUser: environment.apiUrl + 'Game/SelectUser',
+    adminLogList: environment.apiUrl + 'admin/log/select',
+    adminAction: environment.apiUrl + 'admin/action/select_for_dropdown',
+    adminModule: environment.apiUrl + 'admin/module/select_for_dropdown'
 }
 
 export const playtech = {

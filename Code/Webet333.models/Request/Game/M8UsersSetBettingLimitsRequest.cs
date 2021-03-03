@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Webet333.models.Request.Game
 {
-    public class M8UsersSetBettingLimitsRequest
+    public class M8UsersSetBettingLimitsRequest : BaseAdminLogRequest
     {
         public bool SetLimit { get; set; }
 

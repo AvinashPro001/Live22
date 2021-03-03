@@ -9,12 +9,13 @@ using Webet333.models.Request;
 using Webet333.models.Request.Payments;
 using Webet333.models.Response.Payments;
 using Webet333.models.Response.TransferMoney;
+using Newtonsoft.Json;
 
 namespace Webet333.api.Helpers
 {
     public class PaymentHelpers : IDisposable
     {
-        #region variable 
+        #region variable
 
         private string Connection = string.Empty;
 
@@ -66,25 +67,52 @@ namespace Webet333.api.Helpers
         }
 
 
-        #endregion
+        #endregion 
 
         #region Deposit
         public async Task<Guid> Deposit(DepositInsertRequest request, string UserId, string AddedBy, string VerifiedBy = null, string Verified = StatusConsts.Pending)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result = await repository.FindAsync(StoredProcConsts.Payments.Deposit, new { UserId, request.BankId, request.DepositMethodId, request.Amount, request.ReferenceNo, request.DepositeTime,request.PromotionApplyEligible,request.AdminRemarks, AddedBy, PromotionId = request.PromotionId ?? null, VerifiedBy, Verified });
+                var result = await repository.FindAsync(
+                    StoredProcConsts.Payments.Deposit,
+                    new
+                    {
+                        UserId,
+                        request.BankId,
+                        request.DepositMethodId,
+                        request.Amount,
+                        request.ReferenceNo,
+                        request.DepositeTime,
+                        request.PromotionApplyEligible,
+                        request.AdminRemarks,
+                        AddedBy,
+                        PromotionId = request.PromotionId ?? null,
+                        VerifiedBy,
+                        Verified,
+                        Description = JsonConvert.SerializeObject(request)
+                    });
+
                 if (result != null)
                     return Guid.Parse(result.Id.ToString());
                 return Guid.Empty;
             }
         }
 
-        public async Task<int> DepositVerify(string sp_name, string Id, string VerifiedBy = null, string Verified = StatusConsts.Rejected, string AdminRemarks = null)
+        public async Task<int> DepositVerify(string sp_name, string Id, string VerifiedBy = null, string Verified = StatusConsts.Rejected, string AdminRemarks = null, string description = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(sp_name, new { Id, VerifiedBy, Verified, AdminRemarks });
+                await repository.AddOrUpdateAsync(
+                    sp_name,
+                    new
+                    {
+                        Id,
+                        VerifiedBy,
+                        Verified,
+                        AdminRemarks,
+                        description
+                    });
             }
             return 0;
         }
@@ -115,14 +143,28 @@ namespace Webet333.api.Helpers
                 return deposits;
             }
         }
-        #endregion
+        #endregion 
 
         #region Withdrawal
         public async Task<int> Withdrawal(WithdrawalRequest request, Guid AddedBy, Guid UserId, string VerifiedBy = null, string Verified = StatusConsts.Pending)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Payments.Withdrawal, new { request.BankId,request.AdminRemarks, request.AccountNumber,request.AccountName, request.Amount, UserId, AddedBy, VerifiedBy, Verified });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Payments.Withdrawal,
+                    new
+                    {
+                        request.BankId,
+                        request.AdminRemarks,
+                        request.AccountNumber,
+                        request.AccountName,
+                        request.Amount,
+                        UserId,
+                        AddedBy,
+                        VerifiedBy,
+                        Verified,
+                        Description = JsonConvert.SerializeObject(request)
+                    });
             }
             return 0;
         }
@@ -135,7 +177,7 @@ namespace Webet333.api.Helpers
                 return result.ToList();
             }
         }
-        #endregion
+        #endregion 
 
         #region Transfer
         public async Task<int> Transfer(TransferInsertRequest request, string UserId, string AddedBy, string VerifiedBy, string Verified = StatusConsts.Approved)
@@ -146,7 +188,7 @@ namespace Webet333.api.Helpers
             }
             return 0;
         }
-        #endregion
+        #endregion 
 
         #region Main Wallet Deposit & Withdraw
         public async Task<MainWalletTransferResponse> MainWalletDepositWithdraw(string UserId, decimal Amount, string Method)
@@ -157,7 +199,7 @@ namespace Webet333.api.Helpers
                 return response;
             }
         }
-        #endregion
+        #endregion 
 
         #region Adjust Users Balance
 
@@ -165,7 +207,17 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Payments.AdjustUserBalance, new { request.UserId, request.WalletId, request.Amount,request.AdminRemarks });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Payments.AdjustUserBalance,
+                    new
+                    {
+                        request.UserId,
+                        request.WalletId,
+                        request.Amount,
+                        request.AdminRemarks,
+                        request.AdminId,
+                        Description = JsonConvert.SerializeObject(request)
+                    });
             }
             return 0;
         }
@@ -179,7 +231,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion 
 
         #region User wallet Balance Update
 
@@ -228,7 +280,7 @@ namespace Webet333.api.Helpers
             using (var repository = new DapperRepository<SimilarNameListResponse>(Connection))
             {
                 var result = await repository.GetDataAsync(StoredProcConsts.Payments.WithdrawSimilarNameSelect, new { Id});
-                return result.ToList(); 
+                return result.ToList();
             }
         }
 
@@ -271,7 +323,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-             return await repository.FindAsync(StoredProcConsts.Payments.DepositCheckWithoutPromotion, new { UserId });
+                return await repository.FindAsync(StoredProcConsts.Payments.DepositCheckWithoutPromotion, new { UserId });
             }
         }
 
@@ -311,6 +363,6 @@ namespace Webet333.api.Helpers
                 Connection = string.Empty;
             }
         }
-        #endregion
+        #endregion 
     }
 }

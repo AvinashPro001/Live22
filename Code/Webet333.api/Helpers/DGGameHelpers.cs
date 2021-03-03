@@ -24,7 +24,7 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion 
 
         #region Random Genrate
         public static string RandomString()
@@ -47,7 +47,7 @@ namespace Webet333.api.Helpers
 
             return (result.ToString());
         }
-        #endregion
+        #endregion 
 
         #region Dg Game Register API
 
@@ -75,7 +75,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<DgApiResponse>(await GameHelpers.CallThirdPartyApi(url, stringContent));
         }
 
-        #endregion
+        #endregion 
 
         #region Dg Game Login API
 
@@ -102,7 +102,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<DgApiLoginResponse>(await GameHelpers.CallThirdPartyApi(url, stringContent));
         }
 
-        #endregion
+        #endregion 
 
         #region Dg Game Withdraw & Transfer API
 
@@ -127,7 +127,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<DgApiTransferResponse>(await GameHelpers.CallThirdPartyApi(url, stringContent));
         }
 
-        #endregion
+        #endregion 
 
         #region Dg Game Update API
 
@@ -153,7 +153,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<DgApiResponse>(await GameHelpers.CallThirdPartyApi(url, stringContent));
         }
 
-        #endregion
+        #endregion 
 
         #region Dg Game Update Betting limit
 
@@ -177,7 +177,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<DgApiResponse>(await GameHelpers.CallThirdPartyApi(url, stringContent));
         }
 
-        #endregion
+        #endregion 
 
         #region DG game Register
 
@@ -193,16 +193,25 @@ namespace Webet333.api.Helpers
 
         #region DG game Bet Limit
 
-        internal async Task<dynamic> DGBetLimit(string BetLimit)
+        internal async Task<dynamic> DGBetLimit(string BetLimit, string adminId = null, string descripton = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result=await repository.AddOrUpdateAsync(StoredProcConsts.Global.UpdateGlobalParamters, new { Value = BetLimit, Name = "DGLimit" });
+                var result=await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Global.UpdateGlobalParamters,
+                    new
+                    {
+                        Value = BetLimit,
+                        Name = "DGLimit",
+                        adminId,
+                        descripton
+                    });
+
                 return result;
             }
         }
 
-        #endregion
+        #endregion 
 
         #region House Keeping
 
@@ -220,7 +229,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion 
 
     }
 }

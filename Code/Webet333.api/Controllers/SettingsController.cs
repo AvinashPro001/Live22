@@ -11,6 +11,7 @@ using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Settings;
+using Newtonsoft.Json;
 
 namespace Webet333.api.Controllers
 {
@@ -33,7 +34,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion 
 
         #region Add, Update, Retrieve and Delete Bank List
 
@@ -63,6 +64,9 @@ namespace Webet333.api.Controllers
         {
             await CheckUserRole();
 
+            request.AdminId = GetUserId(User);
+            request.Description = JsonConvert.SerializeObject(request);
+
             using (var setting_help = new SettingsHelpers(Connection))
             {
                 var bankId = await setting_help.AddAdminBankDetails(request);
@@ -75,6 +79,10 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> AdminBankEdit([FromBody]UpdateUserBankRequest request)
         {
             await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
+            request.Description = JsonConvert.SerializeObject(request);
+
             using (var setting_help = new SettingsHelpers(Connection))
             {
                 await setting_help.AddOrUpdateAdminBankDetails(request);
@@ -95,8 +103,11 @@ namespace Webet333.api.Controllers
                 generic_help.GetImage(uploadManager, request.FormIconFile, BaseUrlConfigsOptions.Value.AdminBankIconImage, request.Id.ToString());
             }
 
+            string adminId = GetUserId(User).ToString();
+            string descripton = JsonConvert.SerializeObject(request);
+
             using (var setting_help = new SettingsHelpers(Connection))
-                await setting_help.AdminBankDetailsImageUpdate(Guid.Parse(request.Id), DefaultConsts.Image);
+                await setting_help.AdminBankDetailsImageUpdate(Guid.Parse(request.Id), DefaultConsts.Image, adminId: adminId, descripton: descripton);
 
             return OkResponse();
         }
@@ -124,8 +135,11 @@ namespace Webet333.api.Controllers
                 }
             }
 
+            string adminId = GetUserId(User).ToString();
+            string descripton = JsonConvert.SerializeObject(request);
+
             using (var setting_help = new SettingsHelpers(Connection))
-                await setting_help.AdminBankDetailsImageUpdate(Guid.Parse(request.Id), DefaultConsts.Image);
+                await setting_help.AdminBankDetailsImageUpdate(Guid.Parse(request.Id), DefaultConsts.Image, adminId: adminId, descripton: descripton);
 
             return OkResponse();
         }
@@ -147,14 +161,18 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> AdminBankDeactive([FromBody]DeleteRequest request)
         {
             await CheckUserRole();
+
+            string adminId = GetUserId(User).ToString();
+            string description = JsonConvert.SerializeObject(request);
+
             using (var setting_help = new SettingsHelpers(Connection))
             {
-                await setting_help.DeleteOrActiveAdminBankDetail(Guid.Parse(request.Id), Active: request.Active);
+                await setting_help.DeleteOrActiveAdminBankDetail(Guid.Parse(request.Id), Active: request.Active, adminId: adminId, description: description);
                 return OkResponse();
             }
         }
 
-        #endregion
+        #endregion 
 
         #region Add, Update, Retrieve and delete wallet list
 
@@ -169,7 +187,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion 
 
         #region Add, Retrieve and Delete the Announcement
 
@@ -201,9 +219,12 @@ namespace Webet333.api.Controllers
         {
             await CheckUserRole();
 
+            string adminId = GetUserId(User).ToString();
+            string description = JsonConvert.SerializeObject(request);
+
             using (var setting_help = new SettingsHelpers(Connection))
             {
-                await setting_help.DeleteOrActiveAnnouncementDetail(Guid.Parse(request.Id));
+                await setting_help.DeleteOrActiveAnnouncementDetail(Guid.Parse(request.Id), adminId: adminId, description: description);
                 return OkResponse();
             }
         }
@@ -215,6 +236,9 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            request.AdminId = GetUserId(User);
+            request.Description = JsonConvert.SerializeObject(request);
 
             using (var setting_help = new SettingsHelpers(Connection))
             {
@@ -229,6 +253,9 @@ namespace Webet333.api.Controllers
         {
             await CheckUserRole();
             if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            request.AdminId = GetUserId(User);
+            request.Description = JsonConvert.SerializeObject(request);
 
             using (var setting_help = new SettingsHelpers(Connection))
             {
@@ -325,6 +352,10 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> ContactTypeDetailsAdd([FromBody] ContactTypeDetailsAddRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
             await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
+            request.Description = JsonConvert.SerializeObject(request);
+
             var extension = request.CSImage == null ? null : "." + request.CSImage.Split("base64,")[0].Split("/")[1].Replace(";", "");
             var image = request.CSImage == null ? null : request.CSImage.Split("base64,")[1];
             request.CSImage = extension;
@@ -349,6 +380,10 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> ContactTypeDetailsUpdate([FromBody] ContactTypeDetailsUpdateRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
             await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
+            request.Description = JsonConvert.SerializeObject(request);
+
             var extension = request.CSImage == null ? null : "." + request.CSImage.Split("base64,")[0].Split("/")[1].Replace(";", "");
             var image = request.CSImage == null ? null : request.CSImage.Split("base64,")[1];
             request.CSImage = extension;

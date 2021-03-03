@@ -17,7 +17,6 @@ export class GameresetPasswordReportComponent implements OnInit {
     loadingIndicator: boolean = false;
     datePickerfromdate: string;
     datePickertodate: string;
-    usersDetailsForReportPage: any;
 
     constructor(
         private adminService: AdminService,
@@ -115,14 +114,14 @@ export class GameresetPasswordReportComponent implements OnInit {
         //    (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
         //}
 
-
         this.adminService.add<any>(customer.passwordResetSelect, data).subscribe(res => {
             this.rows = [];
             let i = 0;
-            this.usersDetailsForReportPage = res.data;
+
             res.data.forEach(el => {
                 this.rows.push({
                     No: ++i,
+                    id: el.id,
                     Webet_Username: el.Webet_Username,
                     ResetPassword: el.ResetPassword,
                     GameName: el.GameName,
@@ -147,6 +146,7 @@ export class GameresetPasswordReportComponent implements OnInit {
             res.data.forEach(el => {
                 this.rows.push({
                     No: ++i,
+                    id: el.id,
                     Webet_Username: el.Webet_Username,
                     ResetPassword: el.ResetPassword,
                     GameName: el.GameName,
@@ -223,10 +223,7 @@ export class GameresetPasswordReportComponent implements OnInit {
 
     //#region Redirect to user details page
 
-    show(row = null, content = null) {
-        //this.viewData = row;
-        //this.openWindowCustomClass(content);
-
+    show(row = null) {
         localStorage.setItem('id', JSON.stringify(row));
         window.open('admin/customers/users-details', '_blank');
     }

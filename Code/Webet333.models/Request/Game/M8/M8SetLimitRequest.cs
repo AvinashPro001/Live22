@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Webet333.models.Request.Game.M8
 {
@@ -21,6 +22,10 @@ namespace Webet333.models.Request.Game.M8
         public string Max6 { get; set; }
         public string Max7 { get; set; }
         public string Suspend { get; set; }
+        [JsonIgnore]
+        public Guid AdminId { get; set; }
+        [JsonIgnore]
+        public string Description { get; set; }
     }
 
     public class M8SetLimitRequestWithRequired

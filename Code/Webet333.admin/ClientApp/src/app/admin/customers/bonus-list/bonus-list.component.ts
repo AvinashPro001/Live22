@@ -77,13 +77,17 @@ export class BonusListComponent implements OnInit {
     setColumn() {
         this.columns = [
             { prop: 'No' },
-            { prop: 'DateTime' },
+            { prop: 'Created' },
+            { prop: 'CreatedBy' },
             { prop: 'Username' },
             { prop: 'PromotionTitle' },
             { prop: 'BonusType' },
             { prop: 'BonusAmount' },
             { prop: 'Remark' },
+            { prop: 'VerifiedAt' },
             { prop: 'Operator' },
+            { prop: 'Modified' },
+            { prop: 'ModifiedBy' }
         ];
     }
     //#endregion
@@ -98,7 +102,7 @@ export class BonusListComponent implements OnInit {
             toDate: todate
         }
 
-        
+
 
         this.adminService.add<any>(customer.bonusList, data).subscribe(res => {
             this.bonusData = res.data.bonus;
@@ -106,12 +110,19 @@ export class BonusListComponent implements OnInit {
             res.data.bonus.forEach(el => {
                 this.rows.push({
                     No: ++i,
-                    DateTime: this.ReplaceTime(el.created),
+                    Created: this.ReplaceTime(el.created),
+                    CreatedBy: el.createdByName === '' || el.createdByName === null || el.createdByName === undefined
+                        || el.createdByName === NaN ? 'Not Available' : el.createdByName,
+                    Verified: this.ReplaceTime(el.verifiedAt),
                     Username: el.username,
                     PromotionTitle: el.promotionTitle,
                     BonusType: el.depositMethod,
                     BonusAmount: el.amount,
-                    Remark: el.referenceNo,
+                    Remark: el.referenceNo === null || el.referenceNo === "" ? 'No Remarks' : el.referenceNo,
+                    Modified: this.ReplaceTime(el.modified),
+                    ModifiedBy: el.modifiedByName === '' || el.modifiedByName === null || el.modifiedByName === undefined
+                        || el.modifiedByName === NaN ? 'Not Available' : el.modifiedByName,
+                    VerifiedAt: this.ReplaceTime(el.verifiedAt),
                     Operator: el.operatorName,
                 });
             });
@@ -126,7 +137,8 @@ export class BonusListComponent implements OnInit {
 
     //#region timeFormat
     ReplaceTime(Date) {
-        return Date.replace("T", " ")
+        if (Date === null || Date === undefined || Date === NaN || Date === '') return 'Not Available';
+        else return Date.replace("T", " ");
     }
 
     toDate(date) {

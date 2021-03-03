@@ -15,6 +15,8 @@ using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Payments;
 using RequestSizeLimitAttribute = Webet333.api.Filters.RequestSizeLimitAttribute;
+using Newtonsoft.Json;
+
 
 namespace Webet333.api.Controllers
 {
@@ -54,7 +56,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion 
 
         #region User's transaction retrieve
 
@@ -73,7 +75,7 @@ namespace Webet333.api.Controllers
 
         #endregion
 
-        #region User's Deposit Add and Upload Image 
+        #region User's Deposit Add and Upload Image
 
         [HttpPost(ActionsConst.Payments.Deposit)]
         public async Task<IActionResult> Deposite([FromBody] DepositInsertRequest request)
@@ -185,12 +187,14 @@ namespace Webet333.api.Controllers
 
             await CheckUserRole();
 
+            string description = JsonConvert.SerializeObject(request);
+
             using (var payment_help = new PaymentHelpers(Connection))
-                await payment_help.DepositVerify(StoredProcConsts.Payments.Deposit, request.Id.ToString(), GetUserId(User).ToString(), request.Approved, request.AdminRemarks);
+                await payment_help.DepositVerify(StoredProcConsts.Payments.Deposit, request.Id.ToString(), GetUserId(User).ToString(), request.Approved, request.AdminRemarks, description: description);
             return OkResponse();
         }
 
-        #endregion
+        #endregion 
 
         #region User's Withdrawal Add request
 
@@ -246,9 +250,11 @@ namespace Webet333.api.Controllers
 
             await CheckUserRole();
 
+            string description = JsonConvert.SerializeObject(request);
+
             using (var payment_help = new PaymentHelpers(Connection))
             {
-                await payment_help.DepositVerify(StoredProcConsts.Payments.Withdrawal, request.Id.ToString(), GetUserId(User).ToString(), request.Approved, request.AdminRemarks);
+                await payment_help.DepositVerify(StoredProcConsts.Payments.Withdrawal, request.Id.ToString(), GetUserId(User).ToString(), request.Approved, request.AdminRemarks, description: description);
                 if (request.Approved == "approved")
                 {
                     var res = await payment_help.GetMobileNumberByWithdrawId(request.Id.ToString());
@@ -262,7 +268,7 @@ namespace Webet333.api.Controllers
             return OkResponse();
         }
 
-        #endregion
+        #endregion 
 
         #region User's Transfer Add request
 
@@ -317,7 +323,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion 
 
         #region User's Statement Request
 
@@ -345,6 +351,9 @@ namespace Webet333.api.Controllers
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
             await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
+
             using (var payment_help = new PaymentHelpers(Connection))
             {
                 await payment_help.AdjustUserBalance(request);
@@ -365,7 +374,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion 
 
         #region Update User Wallet Balance
 
@@ -382,7 +391,7 @@ namespace Webet333.api.Controllers
 
         #endregion Update User Wallet Balance
 
-        #region Approval Time 
+        #region Approval Time
 
         #region Approval Time Insert
 
@@ -437,7 +446,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion 
 
         #region Deposit Withdraw Statics
 

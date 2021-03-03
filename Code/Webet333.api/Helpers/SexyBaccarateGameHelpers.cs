@@ -25,7 +25,7 @@ namespace Webet333.api.Helpers.SexyBaccarat
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion 
 
         #region Call Register API of Sexy game
 
@@ -50,7 +50,7 @@ namespace Webet333.api.Helpers.SexyBaccarat
             return JsonConvert.DeserializeObject<SexyBaccaratAPIResponse>(await CallThirdPartyApi(url, dict));
         }
 
-        #endregion
+        #endregion 
 
         #region Call BetingLimit API of Sexy game
 
@@ -73,7 +73,7 @@ namespace Webet333.api.Helpers.SexyBaccarat
             return JsonConvert.DeserializeObject<SexyBaccaratLoginResponse>(await CallThirdPartyApi(url, dict));
         }
 
-        #endregion
+        #endregion 
 
         #region Call Login API of Sexy game
 
@@ -100,7 +100,7 @@ namespace Webet333.api.Helpers.SexyBaccarat
 
         }
 
-        #endregion
+        #endregion 
 
         #region Call Depsoit API of Sexy game
 
@@ -152,7 +152,7 @@ namespace Webet333.api.Helpers.SexyBaccarat
 
         }
 
-        #endregion
+        #endregion 
 
         #region Sexybaccarat Register
         internal async Task<dynamic> SexyBaccaratRegister(string username, SexyBaccaratAPIResponse request, string UserId)
@@ -165,7 +165,7 @@ namespace Webet333.api.Helpers.SexyBaccarat
             }
 
         }
-        #endregion
+        #endregion 
 
         #region Random Genrate
         public static string RandomString()
@@ -188,10 +188,10 @@ namespace Webet333.api.Helpers.SexyBaccarat
 
             return (result.ToString());
         }
-        #endregion
+        #endregion 
 
         #region Sexybaccarat Set Limit
-        internal async Task<dynamic> SexyBaccaratSetBetLimit(List<long> bettingLimit)
+        internal async Task<dynamic> SexyBaccaratSetBetLimit(List<long> bettingLimit, string adminId = null, string description = null)
         {
             var request = new SexyBaccaratBetlimitResponse
             {
@@ -206,11 +206,20 @@ namespace Webet333.api.Helpers.SexyBaccarat
             string response = JsonConvert.SerializeObject(request);
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result = await repository.GetDataAsync(StoredProcConsts.Global.UpdateGlobalParamters, new { Value = response, Name = "SexyLimit" });
+                var result = await repository.GetDataAsync(
+                    StoredProcConsts.Global.UpdateGlobalParamters,
+                    new
+                    {
+                        Value = response,
+                        Name = "SexyLimit",
+                        adminId,
+                        description
+                    });
+
                 return result;
             }
         }
-        #endregion
+        #endregion 
 
         #region Call Third Party API's
 

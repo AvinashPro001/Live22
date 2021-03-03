@@ -30,7 +30,7 @@ namespace Webet333.api.Helpers
         {
             this.Connection = Connection;
         }
-        #endregion
+        #endregion 
 
         #region Call Maxbet Game Register API
 
@@ -53,7 +53,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<ThirdPartyAPIResponse>(responseString);
         }
 
-        #endregion
+        #endregion 
 
         #region Call Maxbet Game Login API
 
@@ -68,7 +68,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<MaxbetLoginResponse>(responseString);
         }
 
-        #endregion
+        #endregion 
 
         #region Call Maxbet Game Deposit Withdraw API
 
@@ -97,7 +97,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<MaxBetTransferResponse>(responseString);
         }
 
-        #endregion
+        #endregion 
 
         #region Call Maxbet Game Update API
 
@@ -131,9 +131,9 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<ThirdPartyAPIResponse>(responseString);
         }
 
-        #endregion
+        #endregion 
 
-        #region Call Maxbet Game Set Betting Limit API 
+        #region Call Maxbet Game Set Betting Limit API
 
         internal static async Task<string> CallMaxbetBettingLimitsUpdateAPI(List<JsonStringMaxBetLimit> setlimit, string vendorMemberId)
         {
@@ -147,7 +147,7 @@ namespace Webet333.api.Helpers
             return await CallThirdPartyApi(url, parameter);
         }
 
-        #endregion
+        #endregion 
 
         #region Call Maxbet Game Set Betting Limit API for All User
 
@@ -163,7 +163,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<ThirdPartyAPIResponse>( await CallThirdPartyApi(url, parameter));
         }
 
-        #endregion
+        #endregion 
 
         #region Max Bet Game Token Update
         internal async Task<dynamic> MaxBetTokenUpdate(GameMaxBetTokenUpdateRequest request, string userId)
@@ -185,7 +185,7 @@ namespace Webet333.api.Helpers
                 return user;
             }
         }
-        #endregion
+        #endregion 
 
         #region Get Max Global Parameters
 
@@ -197,7 +197,7 @@ namespace Webet333.api.Helpers
                 return result;
             }
         }
-        #endregion
+        #endregion 
 
         #region MaxBet Find User using token
 
@@ -211,7 +211,7 @@ namespace Webet333.api.Helpers
 
         }
 
-        #endregion
+        #endregion 
 
         #region Find Users on UserId
 
@@ -266,28 +266,53 @@ namespace Webet333.api.Helpers
                 return result.ToList();
             }
         }
-        #endregion
+        #endregion 
 
         #region set setlimit true of MaxBetUser or reset limit
-        internal async Task MaxBetSetLimit(bool SetLimit, string Id = null)
+        internal async Task MaxBetSetLimit(bool SetLimit, string Id = null, string adminId = null, string description = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.GetDataAsync(StoredProcConsts.MaxBetGame.SetLimit, new { Id, SetLimit });
+                await repository.GetDataAsync(
+                    StoredProcConsts.MaxBetGame.SetLimit,
+                    new
+                    {
+                        Id,
+                        SetLimit,
+                        adminId,
+                        description
+                    });
             }
         }
-        #endregion
+        #endregion 
 
         #region set setlimit true of MaxBetUser
-        internal async Task<dynamic> MaxBetSetGlobalVariable(string maxValue, string minValue)
+        internal async Task<dynamic> MaxBetSetGlobalVariable(string maxValue, string minValue, string adminId = null, string description = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.GetDataAsync(StoredProcConsts.Global.UpdateGlobalParamters, new { Value = minValue, Name = "MaxBetMinimum" });
-                return await repository.GetDataAsync(StoredProcConsts.Global.UpdateGlobalParamters, new { Value = maxValue, Name = "MaxBetMaximum" });
+                await repository.GetDataAsync(
+                    StoredProcConsts.Global.UpdateGlobalParamters,
+                    new
+                    {
+                        Value = minValue,
+                        Name = "MaxBetMinimum",
+                        adminId,
+                        description
+                    });
+
+                return await repository.GetDataAsync(
+                    StoredProcConsts.Global.UpdateGlobalParamters,
+                    new
+                    {
+                        Value = maxValue,
+                        Name = "MaxBetMaximum",
+                        adminId,
+                        description
+                    });
             }
         }
-        #endregion
+        #endregion 
 
         #region Xml Return With Declaration
         internal static ContentResult XmlReturnWithDeclaration(string message = null, string StatusCode = null, string venderMemberId = null)
@@ -314,7 +339,7 @@ namespace Webet333.api.Helpers
                 return await repository.AddOrUpdateAsync(StoredProcConsts.Global.UpdateGlobalParamters, response);
             }
         }
-        #endregion
+        #endregion 
 
         public static string RandomString(string text = null)
         {
@@ -340,22 +365,22 @@ namespace Webet333.api.Helpers
         internal static async Task<string> CallThirdPartyApi(string Url, string Parameter)
         {
 
-                var data = Encoding.ASCII.GetBytes(Parameter);
-                var request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
-                if (request == null) throw new Exception("Non HTTP WebRequest");
-                request.Method = "POST";
-                request.Timeout = 15000;
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = data.Length;
-                var reqStream = request.GetRequestStream();
-                reqStream.Write(data, 0, data.Length);
-                reqStream.Close();
+            var data = Encoding.ASCII.GetBytes(Parameter);
+            var request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
+            if (request == null) throw new Exception("Non HTTP WebRequest");
+            request.Method = "POST";
+            request.Timeout = 15000;
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = data.Length;
+            var reqStream = request.GetRequestStream();
+            reqStream.Write(data, 0, data.Length);
+            reqStream.Close();
 
-                var response = request.GetResponse();
-                var resStream = response.GetResponseStream();
-                var resStreamReader = new StreamReader(resStream);
-                var resString = resStreamReader.ReadToEnd();
-                return resString;
+            var response = request.GetResponse();
+            var resStream = response.GetResponseStream();
+            var resStreamReader = new StreamReader(resStream);
+            var resString = resStreamReader.ReadToEnd();
+            return resString;
 
         }
 
@@ -373,6 +398,6 @@ namespace Webet333.api.Helpers
                 Connection = string.Empty;
             }
         }
-        #endregion
+        #endregion 
     }
 }

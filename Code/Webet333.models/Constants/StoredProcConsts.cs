@@ -13,6 +13,8 @@
             public const string ApiTransactionLog = "[dbo].[Transaction_log_Insert]";
 
             public const string ResetPasswordStatusUpdate = "[dbo].[Reset_Password_Status]";
+
+            public const string AdminLog = "[dbo].[AdminLog_Insert]";
         }
 
         public class Account
@@ -143,6 +145,12 @@
             public const string Users_Select_By_Id = "[dbo].[Users_Select_By_Id]";
 
             public const string Users_Select_For_Dropdown = "[dbo].[Users_Select_For_Dropdown]";
+
+            public const string AdminLogSelect = "[dbo].[AdminLog_Select]";
+
+            public const string MasterAction_Select_For_Dropdown = "[dbo].[MasterAction_Select_For_Dropdown]";
+
+            public const string MasterModule_Select_For_Dropdown = "[dbo].[MasterModule_Select_For_Dropdown]";
         }
 
         public class Payments
@@ -252,7 +260,7 @@
 
             public const string PromotionApplyList = "[dbo].[Promotion_Apply_Select]";
 
-            
+
 
             public const string PromotionReport = "[dbo].[Admin_Promotion_Report]";
 
