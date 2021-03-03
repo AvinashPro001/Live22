@@ -27,7 +27,7 @@ namespace Webet333.api.Controllers
             this.Localizer = Localizer;
         }
 
-        #endregion Global variable and Constructor   
+        #endregion Global variable and Constructor
 
         #region Create Member
 
@@ -71,7 +71,7 @@ namespace Webet333.api.Controllers
                 return OkResponse(response);
             }
         }
-        #endregion Create Member 
+        #endregion Create Member
 
         #region Login Member
 
@@ -111,7 +111,7 @@ namespace Webet333.api.Controllers
                 return OkResponse(response);
             }
         }
-        #endregion 
+        #endregion
 
         #region Set default Bet Limit
 
@@ -121,9 +121,12 @@ namespace Webet333.api.Controllers
         {
             await CheckUserRole();
 
+            string adminId = GetUserId(User).ToString();
+            string description = JsonConvert.SerializeObject(request);
+
             using (var game_helper = new AGGameHelpers(Connection))
             {
-                var result = await game_helper.AGBetLimit(request.BettingLimit);
+                var result = await game_helper.AGBetLimit(request.BettingLimit, adminId, description);
                 return OkResponse(result);
             }
         }

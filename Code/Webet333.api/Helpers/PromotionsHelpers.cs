@@ -79,19 +79,35 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task Update(Guid Id, string Extension, string ExtensionMobile)
+        public async Task Update(Guid Id, string Extension, string ExtensionMobile, string adminId = null, string description = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Promotions.Image, new { Id, Extension, ExtensionMobile });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Promotions.Image,
+                    new
+                    {
+                        Id,
+                        Extension,
+                        ExtensionMobile,
+                        adminId,
+                        description
+                    });
             }
         }
 
-        public async Task Delete(Guid Id)
+        public async Task Delete(Guid Id, string adminId = null, string descripton = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Promotions.Delete, new { Id });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Promotions.Delete,
+                    new
+                    {
+                        Id,
+                        adminId,
+                        descripton
+                    });
             }
         }
 
@@ -99,7 +115,15 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Promotions.UpdateActiveStatus, new { request.Id,request.Active });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Promotions.UpdateActiveStatus,
+                    new
+                    {
+                        request.Id,
+                        request.Active,
+                        request.AdminId,
+                        request.Description
+                    });
             }
         }
 
@@ -211,7 +235,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task PromotionGroupDelete(GetByIdRequestWithRequired request)
+        public async Task PromotionGroupDelete(GetByIdRequestWithRequiredAndAdminId request)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {

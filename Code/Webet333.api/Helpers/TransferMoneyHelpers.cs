@@ -32,7 +32,7 @@ namespace Webet333.api.Helpers
             this.Localizer = Localizer;
             this.Connection = Connection;
         }
-        #endregion
+        #endregion 
 
         #region Call Third party API
         public static async Task<string> CallThirdPartyApi(string url, StringContent stringContent = null)
@@ -48,7 +48,7 @@ namespace Webet333.api.Helpers
                 return String.Empty;
             }
         }
-        #endregion
+        #endregion 
 
         #region Game Deposit Withdraw Method
 
@@ -197,7 +197,7 @@ namespace Webet333.api.Helpers
                 return response;
             }
         }
-        #endregion
+        #endregion 
 
         #endregion Game Deposit Withdraw Method
 
@@ -210,7 +210,7 @@ namespace Webet333.api.Helpers
                 return details;
             }
         }
-        #endregion
+        #endregion 
 
         #region Withdraw From Wallet
         public async Task<TransferAPIDepositWithdrawResponse> WithdrawFromWallet(UserDetailsTransferResponse UsernameResponse, string WalletName, decimal Amount, string UserId, IHostingEnvironment environment = null)
@@ -500,7 +500,7 @@ namespace Webet333.api.Helpers
 
             return response;
         }
-        #endregion
+        #endregion 
 
         #region Deposit In Wallet
         public async Task<TransferAPIDepositWithdrawResponse> DepositInWallet(UserDetailsTransferResponse UsernameResponse, string WalletName, decimal Amount, string UserId, IHostingEnvironment environment = null)
@@ -789,19 +789,31 @@ namespace Webet333.api.Helpers
 
             return response;
         }
-        #endregion
+        #endregion 
 
         #region Transfer Insert
-        public async Task Transfer(string UserId, string FromWalletId, string ToWalletId, decimal Amount, string AddedBy, string Verified, string VerifiedBy)
+        public async Task Transfer(string UserId, string FromWalletId, string ToWalletId, decimal Amount, string AddedBy, string Verified, string VerifiedBy, dynamic request = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.TransferMoney.TransferInsert, new { UserId, FromWalletId, ToWalletId, Amount, AddedBy, VerifiedBy, Verified });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.TransferMoney.TransferInsert,
+                    new
+                    {
+                        UserId,
+                        FromWalletId,
+                        ToWalletId,
+                        Amount,
+                        AddedBy,
+                        VerifiedBy,
+                        Verified,
+                        Description = JsonConvert.SerializeObject(request)
+                    });
             }
         }
-        #endregion
-
-
+        #endregion 
+        
+        
         #region UserBalance IsBegin Update
         public async Task UserBalanceIsBeginUpdate(string UserId, bool IsBegin)
         {
@@ -810,7 +822,7 @@ namespace Webet333.api.Helpers
                 await repository.AddOrUpdateAsync(StoredProcConsts.TransferMoney.UserBalanceIsBeginUpdate, new { UserId, IsBegin});
             }
         }
-        #endregion
+        #endregion 
 
         #region House Keeping
         public void Dispose()
@@ -826,6 +838,6 @@ namespace Webet333.api.Helpers
                 Connection = string.Empty;
             }
         }
-        #endregion
+        #endregion 
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Webet333.models.Request.Promotions
 {
-    public class PromotionGroupInsertRequest
+    public class PromotionGroupInsertRequest : BaseAdminLogRequest
     {
         [JsonProperty(PropertyName ="groupName")]
         public string GroupName { get; set; }

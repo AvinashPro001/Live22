@@ -14,71 +14,93 @@ namespace Webet333.models.Mapping.Game
                 new GlobalVariableUpdateRequest
                 {
                     Name = MaxBet.MaxParleyMatch,
-                    Value = request.maxParleyMatch
+                    Value = request.maxParleyMatch,
+                    AdminId = request.AdminId,
+                    Description = request.Description
                 },
-
                 new GlobalVariableUpdateRequest
                 {
                     Name = MaxBet.MaxParleyMax,
-                    Value = request.maxParleyMax
+                    Value = request.maxParleyMax,
+                    AdminId = request.AdminId,
+                    Description = request.Description
                 },
                 new GlobalVariableUpdateRequest
                 {
                     Name = MaxBet.MaxParleyMin,
-                    Value = request.maxParleyMin
+                    Value = request.maxParleyMin,
+                    AdminId = request.AdminId,
+                    Description = request.Description
                 },
                 new GlobalVariableUpdateRequest
                 {
                     Name = MaxBet.OtherSportBall,
-                    Value = request.otherSportBall
+                    Value = request.otherSportBall,
+                    AdminId = request.AdminId,
+                    Description = request.Description
                 },
                 new GlobalVariableUpdateRequest
                 {
                     Name = MaxBet.OtherSportMatch,
-                    Value = request.otherSportMatch
+                    Value = request.otherSportMatch,
+                    AdminId = request.AdminId,
+                    Description = request.Description
                 },
                 new GlobalVariableUpdateRequest
                 {
                     Name = MaxBet.OtherSportMax,
-                    Value = request.otherSportMax
+                    Value = request.otherSportMax,
+                    AdminId = request.AdminId,
+                    Description = request.Description
                 },
                 new GlobalVariableUpdateRequest
                 {
                     Name = MaxBet.OtherSportMin,
-                    Value = request.otherSportMin
+                    Value = request.otherSportMin,
+                    AdminId = request.AdminId,
+                    Description = request.Description
                 },
                 new GlobalVariableUpdateRequest
                 {
                     Name = MaxBet.SportMatch,
-                    Value = request.sportMatch
+                    Value = request.sportMatch,
+                    AdminId = request.AdminId,
+                    Description = request.Description
                 },
                 new GlobalVariableUpdateRequest
                 {
                     Name = MaxBet.SportMax,
-                    Value = request.sportMax
+                    Value = request.sportMax,
+                    AdminId = request.AdminId,
+                    Description = request.Description
                 },
                 new GlobalVariableUpdateRequest
                 {
                     Name = MaxBet.SportMin,
-                    Value = request.sportMin
+                    Value = request.sportMin,
+                    AdminId = request.AdminId,
+                    Description = request.Description
                 },
-
                 new GlobalVariableUpdateRequest
                 {
                     Name = MaxBet.MaxbetSportsType1Match,
-                    Value = request.MaxbetSportsType1Match
+                    Value = request.MaxbetSportsType1Match,
+                    AdminId = request.AdminId,
+                    Description = request.Description
                 },
-
                 new GlobalVariableUpdateRequest
                 {
                     Name = MaxBet.MaxbetSportsType1Min,
-                    Value = request.MaxbetSportsType1Min
+                    Value = request.MaxbetSportsType1Min,
+                    AdminId = request.AdminId,
+                    Description = request.Description
                 },
-
                 new GlobalVariableUpdateRequest
                 {
                     Name = MaxBet.MaxbetSportsType1Max,
-                    Value = request.MaxbetSportsType1Max
+                    Value = request.MaxbetSportsType1Max,
+                    AdminId = request.AdminId,
+                    Description = request.Description
                 }
             };
 

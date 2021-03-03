@@ -67,14 +67,30 @@ namespace Webet333.api.Helpers
                 await Update(StoredProcConsts.User.ProfileUpdate, request);
         }
 
-        public async Task ProfileStatusUpdate(DeleteRequest request)
+        public async Task ProfileStatusUpdate(DeleteRequest request, string adminId = null, string description = null)
         {
-            await Update(StoredProcConsts.User.ProfileUpdateStatus, request);
+            await Update(
+                StoredProcConsts.User.ProfileUpdateStatus,
+                new
+                {
+                    request.Id,
+                    request.Active,
+                    adminId,
+                    description
+                });
         }
 
-        public async Task ProfileDelete(DeleteRequest request)
+        public async Task ProfileDelete(DeleteRequest request, string adminId = null, string description = null)
         {
-            await Update(StoredProcConsts.User.ProfileDelete, request);
+            await Update(
+                StoredProcConsts.User.ProfileDelete,
+                new
+                {
+                    request.Id,
+                    request.Active,
+                    adminId,
+                    description
+                });
         }
 
         private async Task Update(string sp_name, dynamic request)

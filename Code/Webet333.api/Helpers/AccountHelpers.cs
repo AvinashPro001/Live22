@@ -77,7 +77,7 @@ namespace Webet333.api.Helpers
             }
             return 0;
         }
-        #endregion
+        #endregion 
 
         #region Confirm Email
 
@@ -136,7 +136,7 @@ namespace Webet333.api.Helpers
                 return data.userId.ToString();
             }
         }
-        #endregion
+        #endregion 
 
         #region Dashboard stats
 
@@ -149,7 +149,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion 
 
         #region Analytics
 
@@ -169,7 +169,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion 
 
         #region Get User's By Mobile Number and update password
         public async Task<ProfileResponseByMobile> GetUsersByMobile(EmailRequest request)
@@ -194,18 +194,27 @@ namespace Webet333.api.Helpers
                 return users;
             }
         }
-        #endregion
+        #endregion 
 
         #region Wallet Maintenance Update
-        public async Task<dynamic> WalletMainteanceUpdate(WalletMaintenanceUpdateRequest request)
+        public async Task<dynamic> WalletMainteanceUpdate(WalletMaintenanceUpdateRequest request, string adminId, string descripton)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var WalletUpdate = await repository.GetDataAsync(StoredProcConsts.Account.walletMaintenanceUpdate, new { request.Id, request.Maintenance });
+                var WalletUpdate = await repository.GetDataAsync(
+                    StoredProcConsts.Account.walletMaintenanceUpdate,
+                    new
+                    {
+                        request.Id,
+                        request.Maintenance,
+                        adminId,
+                        descripton
+                    });
+
                 return WalletUpdate;
             }
         }
-        #endregion
+        #endregion 
 
         #region Wallet Select
         public async Task<dynamic> WalletList()
@@ -216,7 +225,7 @@ namespace Webet333.api.Helpers
                 return walletList;
             }
         }
-        #endregion
+        #endregion 
 
         #region Social Media Statics and Reference keyword insert and update
         public async Task<dynamic> SocialMediaStatics(string keyword)
@@ -237,25 +246,38 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<dynamic> ReferenceKeywordInsert(string keyword)
+        public async Task<dynamic> ReferenceKeywordInsert(string keyword, string AdminId, string Description)
         {
             using (var referenceKeyword = new DapperRepository<dynamic>(Connection))
             {
-                var result = await referenceKeyword.GetDataAsync(StoredProcConsts.Account.ReferenceKeywordInsert, new { keyword });
+                var result = await referenceKeyword.GetDataAsync(
+                    StoredProcConsts.Account.ReferenceKeywordInsert,
+                    new
+                    {
+                        keyword,
+                        AdminId,
+                        Description
+                    });
                 return result;
             }
         }
 
-        public async Task<dynamic> ReferenceKeywordDelete(string Id)
+        public async Task<dynamic> ReferenceKeywordDelete(string Id, string AdminId, string Description)
         {
             using (var referenceKeyword = new DapperRepository<dynamic>(Connection))
             {
-                var result = await referenceKeyword.AddOrUpdateAsync(StoredProcConsts.Account.ReferenceKeywordDelete, new { Id });
+                var result = await referenceKeyword.AddOrUpdateAsync(
+                    StoredProcConsts.Account.ReferenceKeywordDelete, new
+                    {
+                        Id,
+                        AdminId,
+                        Description
+                    });
                 return result;
             }
         }
 
-        #endregion
+        #endregion 
 
         #region Get Language list
 
@@ -267,7 +289,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion 
 
         #region User Info Get for GetBalance
 
@@ -320,11 +342,18 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<dynamic> RebateSettingUpdate(int Datetime)
+        public async Task<dynamic> RebateSettingUpdate(int Datetime, string adminId, string descripton)
         {
             using (var dapperRepository = new DapperRepository<dynamic>(Connection))
             {
-                return await dapperRepository.FindAsync(StoredProcConsts.Account.RebateSettingUpdate, new { Datetime });
+                return await dapperRepository.FindAsync(
+                    StoredProcConsts.Account.RebateSettingUpdate,
+                    new
+                    {
+                        Datetime,
+                        adminId,
+                        descripton
+                    });
             }
         }
 
@@ -471,11 +500,19 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<dynamic> GlobalParameterUpdate(string Value, string Name)
+        public async Task<dynamic> GlobalParameterUpdate(string Value, string Name, string adminId = null, string descripton = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                return await repository.AddOrUpdateAsync(StoredProcConsts.Global.UpdateGlobalParamters, new { Name, Value });
+                return await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Global.UpdateGlobalParamters,
+                    new
+                    {
+                        Name,
+                        Value,
+                        adminId,
+                        descripton
+                    });
             }
         }
 
@@ -490,8 +527,8 @@ namespace Webet333.api.Helpers
             if (response.ErrorCode == 0 && response.OTP != null)
             {
                 var Message = response.OTP + " is your OTP and it is vaild for next 5 mins. Please do not share this OTP with anyone. Thank you";
-
-
+                
+                
                 await SendSMSAPI(MobileNo, Message);
             }
             return response;
@@ -653,6 +690,6 @@ namespace Webet333.api.Helpers
                 Connection = string.Empty;
             }
         }
-        #endregion
+        #endregion 
     }
 }

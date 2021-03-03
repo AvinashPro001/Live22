@@ -103,7 +103,7 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.DGGame.DGTransfer)]
         private async Task<IActionResult> DGTransfer([FromBody]DgTransferRequest request)
         {
-            
+
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             var Role = GetUserRole(User);
@@ -139,9 +139,12 @@ namespace Webet333.api.Controllers
         {
             await CheckUserRole();
 
+            string adminId = GetUserId(User).ToString();
+            string descripton = JsonConvert.SerializeObject(request);
+
             using (var game_helper = new DGGameHelpers(Connection))
             {
-                var result = await game_helper.DGBetLimit(request.BettingLimit);
+                var result = await game_helper.DGBetLimit(request.BettingLimit, adminId, descripton);
                 return OkResponse(result);
             }
         }

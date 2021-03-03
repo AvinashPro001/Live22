@@ -22,6 +22,7 @@ using Webet333.models.Request.Payments;
 using Webet333.models.Response.Account;
 using Webet333.models.Response.SMS;
 using Webet333.notify.interfaces.Email;
+using Webet333.dapper;
 
 namespace Webet333.api.Controllers
 {
@@ -124,7 +125,7 @@ namespace Webet333.api.Controllers
                 #region Sending email in queue
                 var user = await account_help.FindUser(userId: userId);
                 new EmailHelpers(Localizer, messages).SendAccountEmail(user, null, EmailTypeConst.ChangePassword);
-                #endregion 
+                #endregion
             }
             return OkResponse();
         }
@@ -305,9 +306,13 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> WalletMaintenanceUpdate([FromBody] WalletMaintenanceUpdateRequest request)
         {
             await CheckUserRole();
+
+            string adminId = GetUserId(User).ToString();
+            string descripton = JsonConvert.SerializeObject(request);
+
             using (var account_help = new AccountHelpers(Connection))
             {
-                var WalletUpdate = await account_help.WalletMainteanceUpdate(request);
+                var WalletUpdate = await account_help.WalletMainteanceUpdate(request, adminId, descripton);
                 if (WalletUpdate != null)
                 {
                     await _hubContext.Clients.All.SendAsync("WalletUpdate", new { data = WalletUpdate });
@@ -380,9 +385,12 @@ namespace Webet333.api.Controllers
             if (String.IsNullOrEmpty(request.keyword))
                 return BadResponse(Localizer["error_empty_keyword"].Value);
 
+            var adminId = GetUserId(User).ToString();
+            var description = JsonConvert.SerializeObject(request);
+
             using (var account_help = new AccountHelpers(Connection))
             {
-                var refKeyword = await account_help.ReferenceKeywordInsert(request.keyword);
+                var refKeyword = await account_help.ReferenceKeywordInsert(request.keyword, adminId, description);
                 return OkResponse(refKeyword);
             }
         }
@@ -398,9 +406,12 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
+            var adminId = GetUserId(User).ToString();
+            var description = JsonConvert.SerializeObject(request);
+
             using (var account_help = new AccountHelpers(Connection))
             {
-                var refKeyword = await account_help.ReferenceKeywordDelete(request.Id.ToString());
+                var refKeyword = await account_help.ReferenceKeywordDelete(request.Id.ToString(), adminId, description);
                 return OkResponse(refKeyword);
             }
         }
@@ -449,7 +460,7 @@ namespace Webet333.api.Controllers
             using (var accounthelper = new AccountHelpers(Connection))
             {
                 accounthelper.TrackingInsert(request);
-               // accounthelper.TrackingLoginRegisterUpdate();
+                // accounthelper.TrackingLoginRegisterUpdate();
             }
             return OkResponse();
         }
@@ -578,6 +589,33 @@ namespace Webet333.api.Controllers
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            #region Admin Log
+
+            string adminId = GetUserId(User).ToString();
+            var description = new
+            {
+                beforeTransaction = "null",
+                afterTransaction = "null",
+                requestBody = request,
+                other = "SMS Announcement"
+            };
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Global.AdminLog,
+                    new
+                    {
+                        adminId,
+                        Action = "Add",
+                        Module = "SMS Announcement",
+                        Description = JsonConvert.SerializeObject(description)
+                    });
+            }
+
+            #endregion Admin Log
+
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var messageResponse = await account_helper.SendSMSAPI(request.MobileNo, request.Message);
@@ -785,9 +823,13 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> VaderPayMaintenanceUpdate([FromBody] GlobalParameterUpdateRequest request)
         {
             await ValidateUser(role: RoleConst.Admin);
+
+            string adminId = GetUserId(User).ToString();
+            string descripton = JsonConvert.SerializeObject(request);
+
             using (var account_help = new AccountHelpers(Connection))
             {
-                await account_help.GlobalParameterUpdate(request.Value, "VaderPay");
+                await account_help.GlobalParameterUpdate(request.Value, "VaderPay", adminId, descripton);
                 return OkResponse();
             }
         }
@@ -815,9 +857,13 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> GlobalParaMeterUpdate([FromBody] GlobalParameterUpdateRequest request)
         {
             await ValidateUser(role: RoleConst.Admin);
+
+            string adminId = GetUserId(User).ToString();
+            string descripton = JsonConvert.SerializeObject(request);
+
             using (var account_help = new AccountHelpers(Connection))
             {
-                await account_help.GlobalParameterUpdate(request.Value, request.Name);
+                await account_help.GlobalParameterUpdate(request.Value, request.Name, adminId, descripton);
                 return OkResponse();
             }
         }
@@ -831,9 +877,13 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> RebateSettingUpdate([FromBody] RebateSettingUpdateRequest request)
         {
             await ValidateUser(role: RoleConst.Admin);
+
+            string adminId = GetUserId(User).ToString();
+            string descripton = JsonConvert.SerializeObject(request);
+
             using (var account_help = new AccountHelpers(Connection))
             {
-                await account_help.RebateSettingUpdate(request.DateTime);
+                await account_help.RebateSettingUpdate(request.DateTime, adminId, descripton);
                 return OkResponse();
             }
         }
@@ -935,7 +985,7 @@ namespace Webet333.api.Controllers
                 string htmlCode = string.Empty;
                 if (!request.IsMobile)
                 {
-                    
+
                     htmlCode = @"<li class=""support-live""><h5><strong>Live Support</strong></h5><p><img src=""../../images/hours_24.png"" alt=""hours 24""></p><h6><strong style=""padding-right:60px;"">24 Hours</strong></h6></li>";
                     foreach (var contact in type)
                     {
@@ -954,7 +1004,7 @@ namespace Webet333.api.Controllers
 
                             if (info.CSImage == null)
                             {
-                               
+
 
                                 htmlCode += $@"<strong><a class=""{className}"" href=""{info.Url}"" ";
 
@@ -985,7 +1035,7 @@ namespace Webet333.api.Controllers
                             x.CSImage = x.CSImage == null || x.CSImage == "" ? null : $"{BaseUrlConfigsOptions.Value.ImageBase}{BaseUrlConfigsOptions.Value.ContactImage}/{x.TypeDetailsId}{x.CSImage}";
                         });
 
-                        
+
 
                         string replaceHtml = $@"<tr><td rowspan=""{{0}}"" class=""text-right"" width=""30%""><img  class=""downloadIconMobile"" src=""{contact.TypeImage}"" alt=""{contact.Type}""><p class="""" style=""font-size:10px;margin:0px 5px 0px 0px;""><span>{contact.Type}</span></p></td>";
 
@@ -1014,7 +1064,7 @@ namespace Webet333.api.Controllers
 
                                 htmlCode += $@"</tr><tr><td><div style=""text-align:center;""><div style=""border:2px solid  black;width:69%;padding:10px; border-radius:20px;width:150px;""><img style=""width:100px;height:100px;text-align:center;"" src=""{contactInformationDetails[i].CSImage}"" alt=""barcode""><p>{contactInformationDetails[i].CSId}</p></div></div></td></tr>";
                             }
-                           
+
 
                         }
                         htmlCode += @"</table>";

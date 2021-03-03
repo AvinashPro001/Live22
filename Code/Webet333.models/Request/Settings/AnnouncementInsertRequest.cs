@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Webet333.models.Request.Settings
 {
-    public class AnnouncementInsertRequest
+    public class AnnouncementInsertRequest : BaseAdminLogRequest
     {
         [Required(ErrorMessage ="Announcement Filed Required")]
         [JsonProperty(PropertyName = "announcement")]

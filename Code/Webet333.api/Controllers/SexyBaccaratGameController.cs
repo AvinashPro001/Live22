@@ -41,7 +41,7 @@ namespace Webet333.api.Controllers
             _hostingEnvironment = environment;
         }
 
-        #endregion Global variable and Constructor   
+        #endregion Global variable and Constructor
 
         #region Create Member
 
@@ -92,7 +92,7 @@ namespace Webet333.api.Controllers
                 return OkResponse(new { response, result });
             }
         }
-        #endregion Create Member 
+        #endregion Create Member
 
         #region Login Member
 
@@ -213,6 +213,10 @@ namespace Webet333.api.Controllers
         {
 
             await CheckUserRole();
+
+            string adminId = GetUserId(User).ToString();
+            string description = JsonConvert.SerializeObject(request);
+
             SexyBaccaratBetlimitResponse bettingLimits;
             using (var account_helper = new AccountHelpers(Connection))
             {
@@ -233,7 +237,7 @@ namespace Webet333.api.Controllers
 
             using (var game_helper = new SexyBaccaratGameHelpers(Connection))
             {
-                var result = await game_helper.SexyBaccaratSetBetLimit(bettingLimits.Sexybcrt.Live.LimitId);
+                var result = await game_helper.SexyBaccaratSetBetLimit(bettingLimits.Sexybcrt.Live.LimitId, adminId, description);
                 return OkResponse();
             }
         }

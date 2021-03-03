@@ -3,7 +3,7 @@ using System;
 
 namespace Webet333.models.Request.Settings
 {
-    public class InsertUserBankRequest
+    public class InsertUserBankRequest : BaseAdminLogRequest
     {
         [JsonProperty(PropertyName = "bankName")]
         public string BankName { get; set; }
@@ -16,6 +16,12 @@ namespace Webet333.models.Request.Settings
 
         [JsonProperty(PropertyName = "bankCode")]
         public string BankCode { get; set; }
+
+        [JsonIgnore]
+        public Guid AdminId { get; set; }
+
+        [JsonIgnore]
+        public string Description { get; set; }
     }
 
     public class UpdateUserBankRequest: InsertUserBankRequest

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Webet333.models.Request.Game.MaxBet
 {
-    public class MaxBetDefaultBettingVariableRequest
+    public class MaxBetDefaultBettingVariableRequest : BaseAdminLogRequest
     {
         [JsonProperty(PropertyName = "sportmin")]
         public string sportMin { get; set; }

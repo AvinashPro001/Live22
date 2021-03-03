@@ -16,6 +16,12 @@ namespace Webet333.models.Request
         [Required]
         [JsonProperty(PropertyName = "mobilefile")]
         public string FormMobileFile { get; set; }
+
+        [JsonIgnore]
+        public System.Guid AdminId { get; set; }
+
+        [JsonIgnore]
+        public string Description { get; set; }
     }
 
     public class PromotionImageUpdateRequest : GetByIdRequestWithRequired

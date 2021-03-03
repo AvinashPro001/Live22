@@ -60,6 +60,7 @@ export class TransferListComponent implements OnInit {
         this.columns = [
             { prop: 'No' },
             { prop: 'Created' },
+            { prop: 'CreatedBy' },
             { prop: 'Username' },
             { prop: 'TransferNo' },
             { prop: 'FromWallet' },
@@ -90,7 +91,9 @@ export class TransferListComponent implements OnInit {
                     FromWallet: el.fromWallet,
                     ToWallet: el.toWallet,
                     Amount: el.amount,
-                    Created: this.ReplaceTime(el.created)
+                    Created: this.ReplaceTime(el.created),
+                    CreatedBy: el.createdByName === '' || el.createdByName === null || el.createdByName === undefined
+                        || el.createdByName === NaN ? 'Not Available' : el.createdByName
                 });
             })
             this.rows = [...this.rows];
@@ -104,7 +107,8 @@ export class TransferListComponent implements OnInit {
     //#region timeFormat
 
     ReplaceTime(Date) {
-        return Date.replace("T", " ")
+        if (Date === null || Date === undefined || Date === NaN || Date === '') return 'Not Available';
+        else return Date.replace("T", " ");
     }
 
     toDate(date) {

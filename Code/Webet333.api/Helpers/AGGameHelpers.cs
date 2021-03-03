@@ -22,7 +22,7 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion 
 
         #region Call Register API of AG game
 
@@ -38,7 +38,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<AgRegisterResponse>(await GameHelpers.CallThirdPartyApi(url));
         }
 
-        #endregion
+        #endregion 
 
         #region Call Login API of AG game
 
@@ -72,16 +72,25 @@ namespace Webet333.api.Helpers
 
         #region DG game Bet Limit
 
-        internal async Task<dynamic> AGBetLimit(string BetLimit)
+        internal async Task<dynamic> AGBetLimit(string BetLimit, string adminId = null, string description = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result = await repository.AddOrUpdateAsync(StoredProcConsts.Global.UpdateGlobalParamters, new { Value = BetLimit, Name = "AGLimit" });
+                var result = await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Global.UpdateGlobalParamters,
+                    new
+                    {
+                        Value = BetLimit,
+                        Name = "AGLimit",
+                        adminId,
+                        description
+                    });
+
                 return result;
             }
         }
 
-        #endregion
+        #endregion 
 
         #region House Keeping
 

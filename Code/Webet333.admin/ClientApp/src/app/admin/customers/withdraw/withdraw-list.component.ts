@@ -246,6 +246,7 @@ export class WithdrawListComponent implements OnInit {
             this.columns = [
                 { prop: 'No' },
                 { prop: 'Created' },
+                { prop: 'CreatedBy' },
                 { prop: 'Username' },
                 { prop: 'AccountName' },
                 { prop: 'WithdrawalNo' },
@@ -257,14 +258,17 @@ export class WithdrawListComponent implements OnInit {
                 { prop: 'similar%', cellTemplate: this.action, sortable: false },
                 { prop: 'Tracking', cellTemplate: this.tracking, sortable: false },
                 { prop: 'Status' },
+                { prop: 'VerifiedAt' },
                 { prop: 'Operator' },
                 { prop: 'Modified' },
+                { prop: 'ModifiedBy' },
                 { prop: 'Remarks' }
             ];
         } else if (selectedList == "Rejected") {
             this.columns = [
                 { prop: 'No' },
                 { prop: 'Created' },
+                { prop: 'CreatedBy' },
                 { prop: 'Username' },
                 { prop: 'AccountName' },
                 { prop: 'WithdrawalNo' },
@@ -276,8 +280,10 @@ export class WithdrawListComponent implements OnInit {
                 { prop: 'similar%', cellTemplate: this.action, sortable: false },
                 { prop: 'Tracking', cellTemplate: this.tracking, sortable: false },
                 { prop: 'Status' },
+                { prop: 'VerifiedAt' },
                 { prop: 'Operator' },
                 { prop: 'Modified' },
+                { prop: 'ModifiedBy' },
                 { prop: 'Remarks' }
             ];
         }
@@ -285,6 +291,7 @@ export class WithdrawListComponent implements OnInit {
             this.columns = [
                 { prop: 'No' },
                 { prop: 'Created' },
+                { prop: 'CreatedBy' },
                 { prop: 'Username' },
                 { prop: 'AccountName' },
                 { prop: 'WithdrawalNo' },
@@ -329,11 +336,16 @@ export class WithdrawListComponent implements OnInit {
                     PromotionTitle: el.PromotionTitle == null ? 'No Promotion' : el.PromotionTitle,
                     Tracking: el.TrackingLoginRegister == true ? '<img (click)=DuplicateDetails("' + el.username + '") class="tracking-img" src="../../../../assets/img/warning.png"/>' : '<img (click)=DuplicateDetails("' + el.username + '") class="tracking-img"  src="../../../../assets/img/success.png"/>',
                     Verified: el.verified,
-                    Status: el.verified,
+                    Status: (el.verified == "approved" ? "<span class='approved'>" + el.verified + "</span>" : (el.verified == "pending" ? "<span class='pending'>" + el.verified + "</span>" : "<span class='rejected'>" + el.verified + "</span>")),
                     Operator: el.operatorName,
                     Remarks: el.adminRemarks === "" || el.adminRemarks === null ? "No Remarks" : el.adminRemarks,
                     Created: this.ReplaceTime(el.created),
-                    Modified: this.ReplaceTime(el.modified)
+                    Modified: this.ReplaceTime(el.modified),
+                    CreatedBy: el.createdByName === '' || el.createdByName === null || el.createdByName === undefined
+                        || el.createdByName === NaN ? 'Not Available' : el.createdByName,
+                    ModifiedBy: el.modifiedByName === '' || el.modifiedByName === null || el.modifiedByName === undefined
+                        || el.modifiedByName === NaN ? 'Not Available' : el.modifiedByName,
+                    VerifiedAt: this.ReplaceTime(el.verifiedAt)
                 });
             });
             this.rows = [...this.rows];
@@ -380,7 +392,8 @@ export class WithdrawListComponent implements OnInit {
 
     //#region timeFormat
     ReplaceTime(Date) {
-        return Date.replace("T", " ")
+        if (Date === null || Date === undefined || Date === NaN || Date === '') return 'Not Available';
+        else return Date.replace("T", " ");
     }
 
     toDate(date) {

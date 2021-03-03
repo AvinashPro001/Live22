@@ -11,6 +11,7 @@ using Webet333.api.Helpers;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request.VIPCategory;
+using Newtonsoft.Json;
 
 namespace Webet333.api.Controllers
 {
@@ -35,6 +36,10 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> VIPCategoryAdd([FromBody] VIPCategoryInsertRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            request.AdminId = GetUserId(User);
+            request.Description = JsonConvert.SerializeObject(request);
+
             using (var vipCategory_help = new VIPCategoryHelpers(Connection))
             {
                 await vipCategory_help.VIPCategoryInsert(request);
@@ -74,12 +79,12 @@ namespace Webet333.api.Controllers
 
             using (var vipCategory_help = new VIPCategoryHelpers(Connection))
             {
-                 await vipCategory_help.UserVIPLevelUpdate(request);
+                await vipCategory_help.UserVIPLevelUpdate(request);
                 return OkResponse();
             }
         }
 
-        #region VIP Level Free Credit 
+        #region VIP Level Free Credit
 
         [HttpGet(ActionsConst.VIPCategory.VIPLevelGiveFreeCredit)]
         public async Task<IActionResult> GiveFreeCredit()
@@ -93,7 +98,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion 
 
         #region VIP Free Credit Promotion Setting
 

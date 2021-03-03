@@ -28,7 +28,7 @@ namespace Webet333.api.Controllers
             _hostingEnvironment = environment;
         }
 
-        #endregion Global variable and Constructor   
+        #endregion Global variable and Constructor
 
         [Authorize]
         [HttpPost(ActionsConst.TransferMoney.TransferBalance)]
@@ -39,7 +39,7 @@ namespace Webet333.api.Controllers
             if (Role == RoleConst.Users)
                 request.UserId = GetUserId(User).ToString();
             else
-                if (String.IsNullOrEmpty(request.UserId))
+            if (String.IsNullOrEmpty(request.UserId))
                 return BadResponse("error_invalid_modelstate");
 
             UserDetailsTransferResponse userDetails;
@@ -70,9 +70,9 @@ namespace Webet333.api.Controllers
                     if (string.IsNullOrEmpty(DepositResponse.ErrorMessage) && string.IsNullOrEmpty(DepositResponse.GameName) && string.IsNullOrEmpty(DepositResponse.GameResponse))
                     {
                         if (Role == RoleConst.Users)
-                            await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, request.UserId.ToString(), StatusConsts.Approved, request.UserId.ToString());
+                            await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, request.UserId.ToString(), StatusConsts.Approved, request.UserId.ToString(), request: request);
                         else
-                            await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, GetUserId(User).ToString(), StatusConsts.Approved, GetUserId(User).ToString());
+                            await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, GetUserId(User).ToString(), StatusConsts.Approved, GetUserId(User).ToString(), request: request);
                     }
                     else
                     {
@@ -82,7 +82,7 @@ namespace Webet333.api.Controllers
                         }
                         else
                         {
-                            //Deposit In Main Wallet and Insert into DB Row 
+                            //Deposit In Main Wallet and Insert into DB Row
                             await transferMoney_helper.DepositInWallet(userDetails, "Main Wallet", request.Amount, request.UserId.ToString(), _hostingEnvironment);
                             transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
                             return BadResponse("Completed Transaction Is Failed So We Add Money in Main Wallet");
@@ -99,7 +99,7 @@ namespace Webet333.api.Controllers
                 transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
                 return OkResponse();
             }
-            
+
         }
 
     }

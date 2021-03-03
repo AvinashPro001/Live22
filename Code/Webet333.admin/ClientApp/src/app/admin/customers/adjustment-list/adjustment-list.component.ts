@@ -49,6 +49,7 @@ export class AdjustmentListComponent implements OnInit {
         this.columns = [
             { prop: 'No', width: 55 },
             { prop: 'Created' },
+            { prop: 'CreatedBy' },
             { prop: 'UserName' },
             { prop: 'AdjustmemtNo' },
             { prop: 'FromWallet' },
@@ -131,12 +132,15 @@ export class AdjustmentListComponent implements OnInit {
                 this.rows.push({
                     No: ++i,
                     Created: this.replaceDate(el.Created),
+                    CreatedBy: el.createdByName === '' || el.createdByName === null || el.createdByName === undefined
+                        || el.createdByName === NaN ? 'Not Available' : el.createdByName,
                     UserName: el.UserName,
                     AdjustmemtNo: el.AdjustmentNo,
                     FromWallet: el.WalletType,
                     Amount: el.AdjustmentAmount,
                     WalletBalance: el.UserCurrentBalance,
-                    AdminRemarks: el.AdminRemarks
+                    AdminRemarks: el.AdminRemarks === '' || el.AdminRemarks === null || el.AdminRemarks === undefined
+                        || el.AdminRemarks === NaN ? "No Remarks" : el.AdminRemarks
                 });
             });
             this.rows = [...this.rows];
@@ -151,7 +155,8 @@ export class AdjustmentListComponent implements OnInit {
 
     //#region timeFormat
     replaceDate(date) {
-        return date.replace("T", " ");
+        if (date === null || date === undefined || date === NaN || date === '') return 'Not Available';
+        else return date.replace("T", " ");
     }
 
     toDate(date) {

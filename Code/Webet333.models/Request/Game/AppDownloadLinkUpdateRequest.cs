@@ -12,5 +12,11 @@ namespace Webet333.models.Request.Game
         [Required]
         [JsonProperty(PropertyName = "link")]
         public string Link { get; set; }
+
+        [JsonIgnore]
+        public System.Guid AdminId { get; set; }
+
+        [JsonIgnore]
+        public string Description { get; set; }
     }
 }
