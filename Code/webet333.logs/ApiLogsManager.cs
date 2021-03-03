@@ -25,6 +25,14 @@ namespace Webet333.logs
             }
         }
 
+        public static async Task<APIlogTransactionResponse> APITransactionLogsInsert(ApiLogTransactionRequest request)
+        {
+            using (var repository = new DapperRepository<APIlogTransactionResponse>(ConnectionString))
+            {
+               return await repository.FindAsync(query: StoredProcConsts.Global.ApiTransactionLog, request);
+            }
+        }
+
     }
 
     public class ApiLogMangaerRequest
@@ -38,5 +46,24 @@ namespace Webet333.logs
         public string UniqueId { get; set; }
         public string Role { get; set; }
 
+    }
+
+    public class ApiLogTransactionRequest
+    {
+        public string Id { get; set; }
+        public string UserId { get; set; }
+        public string WalletId { get; set; }
+        public string Amount { get; set; }
+        public string Request { get; set; }
+        public string Response { get; set; }
+        public string ToWalletResponse { get; set; }
+
+        public string FromWalletResponse { get; set; }
+
+    }
+
+   public class APIlogTransactionResponse
+    {
+        public Guid ID { get; set; }
     }
 }

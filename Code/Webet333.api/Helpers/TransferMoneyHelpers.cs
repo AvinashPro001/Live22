@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers.SexyBaccarat;
 using Webet333.dapper;
+using Webet333.logs;
 using Webet333.models.Constants;
 using Webet333.models.Response.Game.AG;
 using Webet333.models.Response.TransferMoney;
@@ -231,8 +232,8 @@ namespace Webet333.api.Helpers
                         if (mainResponse.ErrorCode != 0)
                         {
                             response.ErrorMessage = mainResponse.Message;
-                            response.GameName = "Main Wallet";
-                            response.GameResponse = mainResponse.ToString();
+                            response.GameName = "Main wallet";
+                            response.GameResponse = JsonConvert.SerializeObject(mainResponse);
                         }
                     }
                     catch (Exception ex)
@@ -250,7 +251,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = playtechResponse.error;
                             response.GameName = "Playtech Game";
-                            response.GameResponse = playtechResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(playtechResponse);
                         }
                     }
                     catch (Exception ex)
@@ -268,7 +269,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = jokerResponse.Message;
                             response.GameName = "Joker Game";
-                            response.GameResponse = jokerResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(jokerResponse);
                         }
                     }
                     catch (Exception ex)
@@ -286,7 +287,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = m8Response.Descendants("errtext").Single().Value;
                             response.GameName = "M8 Game";
-                            response.GameResponse = m8Response.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(m8Response);
                         }
                     }
                     catch (Exception ex)
@@ -304,7 +305,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = agResponse.message;
                             response.GameName = "AG Game";
-                            response.GameResponse = agResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(agResponse);
                         }
                     }
                     catch (Exception ex)
@@ -322,7 +323,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = kiss918Response.msg;
                             response.GameName = "918 Kiss Game";
-                            response.GameResponse = kiss918Response.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(kiss918Response);
                         }
                     }
                     catch (Exception ex)
@@ -340,7 +341,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = maxbetResponse.Message;
                             response.GameName = "Maxbet Game";
-                            response.GameResponse = maxbetResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(maxbetResponse);
                         }
                     }
                     catch (Exception ex)
@@ -358,7 +359,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = mega888Response.error.message;
                             response.GameName = "Mega888 Game";
-                            response.GameResponse = mega888Response.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(mega888Response);
                         }
                     }
                     catch (Exception ex)
@@ -376,7 +377,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = "Tranaction Failed";
                             response.GameName = "DG Game";
-                            response.GameResponse = dgResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(dgResponse);
                         }
                     }
                     catch (Exception ex)
@@ -394,7 +395,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = sexyResponse.desc;
                             response.GameName = "Sexy Game";
-                            response.GameResponse = sexyResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(sexyResponse);
                         }
                     }
                     catch (Exception ex)
@@ -412,7 +413,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = saResponse.Descendants("ErrorMsg").Single().Value;
                             response.GameName = "SA Game";
-                            response.GameResponse = saResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(saResponse);
                         }
                     }
                     catch (Exception ex)
@@ -430,7 +431,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = pussy888Response.msg;
                             response.GameName = "Pussy888 Game";
-                            response.GameResponse = pussy888Response.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(pussy888Response);
                         }
                     }
                     catch (Exception ex)
@@ -521,8 +522,8 @@ namespace Webet333.api.Helpers
                         if (mainResponse.ErrorCode != 0)
                         {
                             response.ErrorMessage = mainResponse.Message;
-                            response.GameName = "Playtech Game";
-                            response.GameResponse = mainResponse.ToString();
+                            response.GameName = "Main wallet";
+                            response.GameResponse = JsonConvert.SerializeObject(mainResponse);
                         }
                     }
                     catch (Exception ex)
@@ -540,7 +541,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = playtechResponse.error;
                             response.GameName = "Playtech Game";
-                            response.GameResponse = playtechResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(playtechResponse);
                         }
                     }
                     catch (Exception ex)
@@ -558,7 +559,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = jokerResponse.Message;
                             response.GameName = "Joker Game";
-                            response.GameResponse = jokerResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(jokerResponse);
                         }
                     }
                     catch (Exception ex)
@@ -576,7 +577,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = m8Response.Descendants("errtext").Single().Value;
                             response.GameName = "M8 Game";
-                            response.GameResponse = m8Response.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(m8Response);
                         }
                     }
                     catch (Exception ex)
@@ -594,7 +595,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = agResponse.message;
                             response.GameName = "AG Game";
-                            response.GameResponse = agResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(agResponse);
                         }
                     }
                     catch (Exception ex)
@@ -612,7 +613,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = Kiss918Response.msg;
                             response.GameName = "918 Kiss Game";
-                            response.GameResponse = Kiss918Response.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(Kiss918Response);
                         }
                     }
                     catch (Exception ex)
@@ -630,7 +631,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = maxbetResponse.Message;
                             response.GameName = "Maxbet Game";
-                            response.GameResponse = maxbetResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(maxbetResponse);
                         }
 
                     }
@@ -649,7 +650,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = mega888Response.error.message;
                             response.GameName = "Mega888 Game";
-                            response.GameResponse = mega888Response.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(mega888Response);
                         }
                     }
                     catch (Exception ex)
@@ -667,7 +668,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = "Tranaction Failed";
                             response.GameName = "DG Game";
-                            response.GameResponse = dgResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(dgResponse);
                         }
                     }
                     catch (Exception ex)
@@ -685,7 +686,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = sexyResponse.desc;
                             response.GameName = "Sexy Game";
-                            response.GameResponse = sexyResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(sexyResponse);
                         }
                     }
                     catch (Exception ex)
@@ -703,7 +704,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = saResponse.Descendants("ErrorMsg").Single().Value;
                             response.GameName = "SA Game";
-                            response.GameResponse = saResponse.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(saResponse);
                         }
                     }
                     catch (Exception ex)
@@ -721,7 +722,7 @@ namespace Webet333.api.Helpers
                         {
                             response.ErrorMessage = pussy888Response.msg;
                             response.GameName = "Pussy888 Game";
-                            response.GameResponse = pussy888Response.ToString();
+                            response.GameResponse = JsonConvert.SerializeObject(pussy888Response);
                         }
                     }
                     catch (Exception ex)
@@ -811,9 +812,9 @@ namespace Webet333.api.Helpers
                     });
             }
         }
-        #endregion 
-        
-        
+        #endregion
+
+
         #region UserBalance IsBegin Update
         public async Task UserBalanceIsBeginUpdate(string UserId, bool IsBegin)
         {

@@ -10,6 +10,8 @@
 
             public const string ApiLog = "[dbo].[ApiLog_Insert]";
 
+            public const string ApiTransactionLog = "[dbo].[Transaction_log_Insert]";
+
             public const string ResetPasswordStatusUpdate = "[dbo].[Reset_Password_Status]";
 
             public const string AdminLog = "[dbo].[AdminLog_Insert]";
