@@ -12,7 +12,6 @@ import { Md5 } from 'ts-md5/dist/md5';
 })
 
 export class TransferAddComponent implements OnInit {
-
     //#region variable
     disabled: boolean = false;
     customerData: any;
@@ -74,7 +73,6 @@ export class TransferAddComponent implements OnInit {
     sexyResult: any;
     saResult: any;
 
-
     AgPrifix: any;
     JokerPrifix: any;
     M8Prifix: any;
@@ -115,7 +113,6 @@ export class TransferAddComponent implements OnInit {
         this.userPassword = event.value.password;
         this.retriveUserbank(this.newVal);
         this.walletData(this.newVal);
-
     }
 
     PrifixFunction() {
@@ -128,7 +125,6 @@ export class TransferAddComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
-
 
     config = {
         displayKey: "username", //if objects array passed which key to be displayed defaults to description
@@ -205,12 +201,9 @@ export class TransferAddComponent implements OnInit {
             this.ddlData = res.data;
             this.resWalletId = this.ddlData.walletTypes;
             this.MainWallet = this.ddlData.walletTypes.filter(x => x.walletType == "Main Wallet");
-
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
-
-
     }
     walletDatabal() {
         var id1 = (document.getElementById("ddl_from") as HTMLInputElement).value;
@@ -286,7 +279,6 @@ export class TransferAddComponent implements OnInit {
                             this.disabled = false;
                             this.toasterService.pop('success', 'success', res.message);
                             this.router.navigate(['admin/customers/transfer-list']);
-
                         }, error => {
                             this.disabled = false;
                             this.ngOnInit();
@@ -298,8 +290,6 @@ export class TransferAddComponent implements OnInit {
                         this.ngOnInit();
                         this.toasterService.pop('error', 'error', "please insert less amount.");
                     }
-
-
                 });
             }, error => {
                 this.disabled = false;
@@ -365,7 +355,6 @@ export class TransferAddComponent implements OnInit {
     }
 
     ManiWalletBalance(id) {
-
         let data = {
             id: id
         }

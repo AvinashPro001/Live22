@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { ToasterService, } from 'angular2-toaster';
-import { account, playtech,  Joker, M8Game, AGGame, customer, ErrorMessages } from '../../../../environments/environment';
+import { account, playtech, Joker, M8Game, AGGame, customer, ErrorMessages } from '../../../../environments/environment';
 import { debug } from 'util';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../common/common.service';
@@ -117,7 +117,6 @@ export class PromotionApplyComponent implements OnInit {
             this.loadingIndicator = false;
             this.toasterService.pop('error', 'Error', error.error.message);
         });
-
     }
 
     replaceDateTime(date) {

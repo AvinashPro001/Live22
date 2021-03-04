@@ -12,7 +12,6 @@ import { CommonService } from '../../../common/common.service';
     styleUrls: ['./contact-details-add.component.scss']
 })
 export class ContactDetailsAddComponent implements OnInit {
-
     types: any;
     showImage: boolean = false;
     csImage: any;
@@ -30,7 +29,6 @@ export class ContactDetailsAddComponent implements OnInit {
             this.LoadType();
         }
     }
-
 
     LoadType() {
         this.adminService.getAll<any>(customer.contactTypeSelect).subscribe(res => {
@@ -54,9 +52,7 @@ export class ContactDetailsAddComponent implements OnInit {
         }
         catch (e) { }
 
-
-
-        if (model.contactTypeId=="") {
+        if (model.contactTypeId == "") {
             this.toasterService.pop('error', 'Error', 'Please Select Type  !!!');
             return;
         }
@@ -78,7 +74,6 @@ export class ContactDetailsAddComponent implements OnInit {
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
-
     }
 
     async imageConvert(event) {
@@ -109,7 +104,6 @@ export class ContactDetailsAddComponent implements OnInit {
         else {
             this.showImage = false;
         }
-
     }
 
     //#region Check Permission

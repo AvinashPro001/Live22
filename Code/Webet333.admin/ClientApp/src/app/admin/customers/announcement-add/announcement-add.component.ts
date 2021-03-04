@@ -85,8 +85,6 @@ export class AnnouncementAddComponent implements OnInit {
             languageid: (document.getElementById("ddlLanguage") as HTMLInputElement).value
         }
 
-
-
         this.adminService.add<any>(customer.announcementAdd, dataSelect).subscribe(res => {
             this.toasterService.pop('success', 'Success', res.message);
             this.router.navigate(['admin/customers/announcement-list']);

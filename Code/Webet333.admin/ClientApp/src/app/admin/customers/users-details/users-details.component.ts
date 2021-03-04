@@ -1244,13 +1244,11 @@ export class UsersDetailsComponent implements OnInit {
     //#region Registe User
 
     RegisteInGame(Id) {
-
         try {
             let data = {
                 id: Id
             }
             this.adminService.add<any>(GameRegister.selectUser, data).subscribe(res => {
-
                 //#region AG Game Register
 
                 if (!res.data.AG) {
@@ -1261,7 +1259,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1277,7 +1274,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1293,7 +1289,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1309,7 +1304,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1325,7 +1319,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1341,7 +1334,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1357,7 +1349,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1373,7 +1364,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1389,7 +1379,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1405,7 +1394,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1421,7 +1409,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1437,7 +1424,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1453,7 +1439,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1474,16 +1459,13 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
                 //#endregion
-
             })
         }
         catch (e) { }
-
     }
 
     //#endregion
@@ -2874,7 +2856,7 @@ export class UsersDetailsComponent implements OnInit {
             this.toasterService.pop('error', 'Error', "Select Username");
     }
 
-    //#endregion 
+    //#endregion
 
     //#region Reset Password
 

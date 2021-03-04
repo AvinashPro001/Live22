@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
     styleUrls: ['./all-game-set-betlimit.component.scss']
 })
 export class AllGameSetBetlimitComponent implements OnInit {
-
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -36,7 +35,6 @@ export class AllGameSetBetlimitComponent implements OnInit {
             await this.adminService.add<any>(customer.agBetLimit, model).toPromise().then(res => {
                 this.toasterService.pop('success', 'Successfully', res.message);
                 this.ngOnInit();
-
             }).catch(error => {
                 this.toasterService.pop('error', 'Error', error.error.message);
             });

@@ -117,7 +117,7 @@ export class ManagerApproveListComponent implements OnInit {
             this.columns = [
                 { prop: 'No' },
                 { prop: 'Created' },
-                { prop: 'Username', cellTemplate: this.link, sortable: false  },
+                { prop: 'Username', cellTemplate: this.link, sortable: false },
                 { prop: 'New' },
                 { prop: 'OperationType' },
                 { prop: 'Verified' },
@@ -130,7 +130,7 @@ export class ManagerApproveListComponent implements OnInit {
             this.columns = [
                 { prop: 'No' },
                 { prop: 'Created' },
-                { prop: 'Username', cellTemplate: this.link, sortable: false  },
+                { prop: 'Username', cellTemplate: this.link, sortable: false },
                 { prop: 'New' },
                 { prop: 'OperationType' },
                 { prop: 'Verified' },

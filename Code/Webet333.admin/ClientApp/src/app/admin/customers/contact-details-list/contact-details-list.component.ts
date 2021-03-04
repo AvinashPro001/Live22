@@ -14,7 +14,6 @@ import { CommonService } from '../../../common/common.service';
     styleUrls: ['./contact-details-list.component.scss']
 })
 export class ContactDetailsListComponent implements OnInit {
-
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
     rows = [];
@@ -32,8 +31,6 @@ export class ContactDetailsListComponent implements OnInit {
         private modalService: NgbModal,
         private commonService: CommonService
     ) { }
-
-
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
@@ -122,7 +119,6 @@ export class ContactDetailsListComponent implements OnInit {
                 this.toasterService.pop('error', 'Error', error.error.message);
             });
         }
-
     }
 
     async EditOpen(data, content) {
@@ -156,7 +152,6 @@ export class ContactDetailsListComponent implements OnInit {
         }
         catch (e) { }
 
-
         if (model.contactTypeId == "") {
             this.toasterService.pop('error', 'Error', 'Please Select Type  !!!');
             return;
@@ -180,7 +175,6 @@ export class ContactDetailsListComponent implements OnInit {
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
-
     }
 
     async imageConvert(event) {

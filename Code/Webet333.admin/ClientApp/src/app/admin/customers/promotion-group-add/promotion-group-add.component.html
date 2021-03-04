@@ -27,12 +27,11 @@
                                 <li *ngFor="let item of InGroup"
                                     [class.item-selected]="item.selected"
                                     (click)="toggleSelection(item, 1)">
-                                    <table >
+                                    <table>
                                         <tr>
                                             <td>
                                                 {{item.Text}}
                                             </td>
-                                            
                                         </tr>
                                     </table>
                                 </li>
@@ -48,7 +47,7 @@
                                 <li *ngFor="let item of NotInGroup"
                                     [class.item-selected]="item.selected"
                                     (click)="toggleSelection(item, 2)">
-                                    <table >
+                                    <table>
                                         <tr>
                                             <td>
                                                 {{item.Text}}

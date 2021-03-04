@@ -351,52 +351,49 @@
                                 <input type="checkbox" style="height:20px;width:20px;" id="limitedtime_id" [checked]="data.isLimitedTime" /> &nbsp; &nbsp;<label> Limited Time </label>
                             </div>
                         </div>
-                    
 
-                    <br /><br />
-                    <h3>Applly For User Level Promotion</h3>
+                        <br /><br />
+                        <h3>Applly For User Level Promotion</h3>
+
+                        <div class="row col-md-12">
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="normal_id" [checked]="data.isNormal" /> &nbsp; &nbsp;
+                                <label> Normal </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="Bronze_id" [checked]="data.isBronze" /> &nbsp; &nbsp;<label> Bronze </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="silver_id" [checked]="data.isSilver" /> &nbsp; &nbsp;<label> Silver </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="gold_id" [checked]="data.isGold" /> &nbsp; &nbsp;<label> Gold </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="platinum_id" [checked]="data.isPlatinum" /> &nbsp; &nbsp;<label> Platinum </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="diamond_id" [checked]="data.isDiamond" /> &nbsp; &nbsp;<label> Diamond </label>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row col-md-12">
-                        <div class="col-md-2" style="font-size:20px;">
-                            <input type="checkbox" style="height:20px;width:20px;" id="normal_id" [checked]="data.isNormal" /> &nbsp; &nbsp;
-                            <label> Normal </label>
-                        </div>
-                        <div class="col-md-2" style="font-size:20px;">
-                            <input type="checkbox" style="height:20px;width:20px;" id="Bronze_id" [checked]="data.isBronze" /> &nbsp; &nbsp;<label> Bronze </label>
-                        </div>
-                        <div class="col-md-2" style="font-size:20px;">
-                            <input type="checkbox" style="height:20px;width:20px;" id="silver_id" [checked]="data.isSilver" /> &nbsp; &nbsp;<label> Silver </label>
-                        </div>
-                        <div class="col-md-2" style="font-size:20px;">
-                            <input type="checkbox" style="height:20px;width:20px;" id="gold_id" [checked]="data.isGold" /> &nbsp; &nbsp;<label> Gold </label>
-                        </div>
-                        <div class="col-md-2" style="font-size:20px;">
-                            <input type="checkbox" style="height:20px;width:20px;" id="platinum_id" [checked]="data.isPlatinum" /> &nbsp; &nbsp;<label> Platinum </label>
-                        </div>
-                        <div class="col-md-2" style="font-size:20px;">
-                            <input type="checkbox" style="height:20px;width:20px;" id="diamond_id" [checked]="data.isDiamond" /> &nbsp; &nbsp;<label> Diamond </label>
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Description :</label>
+                            </div>
                         </div>
                     </div>
-
-
-            </div>
-
-            <div class="row col-md-12">
-                <div class="row col-md-6">
-                    <div class="col-3">
-                        <label style="float:right;clear:both;padding-top:6px">Description :</label>
+                    <div style="margin-left: 100px;margin-right: 105px; background-color:aliceblue">
+                        <ckeditor id="txt_descriptionId" [editor]="Editor" data="{{data.description}}" (ready)="onReady($event)" (change)="onChange($event)"></ckeditor>
                     </div>
-                </div>
+                    <hr />
+                    <div align="center">
+                        <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)="UpdatePromotion()" style="max-width:200px;align-content:center">Submit</button>
+                    </div>
+                </form>
             </div>
-            <div style="margin-left: 100px;margin-right: 105px; background-color:aliceblue">
-                <ckeditor id="txt_descriptionId" [editor]="Editor" data="{{data.description}}" (ready)="onReady($event)" (change)="onChange($event)"></ckeditor>
-            </div>
-            <hr />
-            <div align="center">
-                <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)="UpdatePromotion()" style="max-width:200px;align-content:center">Submit</button>
-            </div>
-            </form>
         </div>
     </div>
-</div>
 </div>

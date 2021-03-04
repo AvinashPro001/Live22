@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
     styleUrls: ['./m8-minmax.component.scss']
 })
 export class m8MinmaxComponent implements OnInit {
-
     selectedList: any;
     suspendValue: any;
     comtypeValue: any;

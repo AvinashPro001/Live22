@@ -23,7 +23,7 @@ export class TestingPaginationComponent implements OnInit {
         for (i = 0; i < 100; i++) {
             this.rows.push({
                 Name: ++i,
-                Gender: 'name'+i,
+                Gender: 'name' + i,
                 Company: 'male',
             });
         }

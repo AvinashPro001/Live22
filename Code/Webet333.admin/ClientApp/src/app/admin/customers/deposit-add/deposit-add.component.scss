@@ -5,8 +5,11 @@ button.calendar, button.calendar:active {
     background-size: 23px;
     background-position: center;
 }
+
 .example-trigger {
     display: inline-block;
 }
 
-.section-container .modal { background: rgba(0,0,0,0.5) !important; }
+.section-container .modal {
+    background: rgba(0,0,0,0.5) !important;
+}
