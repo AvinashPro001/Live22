@@ -40,8 +40,6 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> BalanceTransfer([FromBody] TransferMoneyRequest request)
         {
 
-
-
             if (!ModelState.IsValid) return BadResponse(ModelState);
             var Role = GetUserRole(User);
             if (Role == RoleConst.Users)
@@ -60,20 +58,20 @@ namespace Webet333.api.Controllers
 
             if (userDetails.FromWalletIsMaintenance == true)
             {
-                ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_game_maintenance"].Value });
+                await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_game_maintenance"].Value });
                 return BadResponse("error_game_maintenance");
             }
 
             if (userDetails.ToWalletIsMaintenance == true)
             {
-                ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_game_maintenance"].Value });
+                await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_game_maintenance"].Value });
                 return BadResponse("error_game_maintenance");
             }
 
             if (userDetails.FromWalletName == "Main Wallet")
                 if (userDetails.MainWalletBalance < request.Amount)
                 {
-                    ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_insufficient_balance"].Value });
+                    await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_insufficient_balance"].Value });
                     return BadResponse("error_insufficient_balance");
                 }
 
@@ -93,7 +91,7 @@ namespace Webet333.api.Controllers
                         else
                             await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, GetUserId(User).ToString(), StatusConsts.Approved, GetUserId(User).ToString());
 
-                        ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["ok_response_success"].Value, FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse), ToWalletResponse = JsonConvert.SerializeObject(DepositResponse) });
+                        await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["ok_response_success"].Value, FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse), ToWalletResponse = JsonConvert.SerializeObject(DepositResponse) });
                     }
                     else
                     {
@@ -107,13 +105,13 @@ namespace Webet333.api.Controllers
                             await transferMoney_helper.DepositInWallet(userDetails, "Main Wallet", request.Amount, request.UserId.ToString(), _hostingEnvironment);
                             transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
 
-                            ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = "Completed Transaction Is Failed So We Add Money in Main Wallet", FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse), ToWalletResponse = JsonConvert.SerializeObject(DepositResponse) });
+                            await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = "Completed Transaction Is Failed So We Add Money in Main Wallet", FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse), ToWalletResponse = JsonConvert.SerializeObject(DepositResponse) });
 
                             return BadResponse("Completed Transaction Is Failed So We Add Money in Main Wallet");
                         }
                         transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
 
-                        ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = DepositResponse.GameName + " Deposit Api Failed \n" + DepositResponse.ErrorMessage, FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse), ToWalletResponse = JsonConvert.SerializeObject(DepositResponse) });
+                        await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = DepositResponse.GameName + " Deposit Api Failed \n" + DepositResponse.ErrorMessage, FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse), ToWalletResponse = JsonConvert.SerializeObject(DepositResponse) });
 
                         return BadResponse(DepositResponse.GameName + " Deposit Api Failed \n" + DepositResponse.ErrorMessage);
                     }
@@ -122,7 +120,7 @@ namespace Webet333.api.Controllers
                 {
                     transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
 
-                    ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = WithdrawResponse.GameName + " Withdraw Api Failed \n" + WithdrawResponse.ErrorMessage, FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse) });
+                   await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = WithdrawResponse.GameName + " Withdraw Api Failed \n" + WithdrawResponse.ErrorMessage, FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse) });
 
                     return BadResponse(WithdrawResponse.GameName + " Withdraw Api Failed \n " + WithdrawResponse.ErrorMessage);
                 }
