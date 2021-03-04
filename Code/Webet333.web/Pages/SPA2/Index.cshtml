@@ -1,0 +1,382 @@
+﻿@page
+@{ ViewData["Title"] = "";
+    Layout = null; }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="Webet333.com | Cash Market, Online Casino, Malaysia Online Casino, 918Kiss, AG Casino, Playtech Casino, Joker Casino, Joker Slot, M8 Sports, 24x7 Casino, Malaysia Casino, 100% Welcome Bonus Casino, 150% Welcome Bonus Casino, 10% Extra jackpot casino, 10% Extra bonus casino" />
+    <meta name="description" content="Webet333.com | Trusted Online Casino Malaysia, Malaysia Online Casino, 918Kiss, AG Casino, Playtech Casino, Joker Casino, Joker Slot, M8 Sports, 24x7 Casino, Malaysia Casino, 200% Welcome Bonus Casino, 150% Welcome Bonus Casino, 10% Extra jackpot casino, 10% Extra bonus casino" />
+    <meta name="author" content="" />
+    <meta name="title" content="Webet333 🥇" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Webet333 -🥇 Trusted Online Casino Malaysia</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="~/images/mobile/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/images/mobile/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/images/mobile/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/images/mobile/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/images/mobile/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/images/mobile/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/images/mobile/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/images/mobile/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/images/mobile/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="~/images/mobile/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/images/mobile/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/images/mobile/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/mobile/favicon/favicon-16x16.png">
+    <link rel="manifest" href="~/images/mobile/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/images/mobile/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <link href="~/css/jcf.css" rel="stylesheet" />
+    <link href="~/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/slick.css">
+    <link rel="stylesheet" href="~/css/slick-theme.css">
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/mobile/mob-style.css" rel="stylesheet" />
+    <link href="~/css/mobile/mobile-style.css" rel="stylesheet" />
+
+    <script src="~/js/constants/apiConsts.js"></script>
+    <script src="~/js/helpers/toastrHelpers.js"></script>
+    <script src="~/js/helpers/apiHelpers.js"></script>
+    <script src="~/js/helpers/storageHelpers.js"></script>
+
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/spa2/m_home.js"></script>
+    <script src="~/js/spa2/m_account.js"></script>
+    <script src="~/js/spa2/m_gamelogin.js"></script>
+    <script src="~/js/spa2/m_getbalance.js"></script>
+    <script src="~/js/spa2/m_bank.js"></script>
+    <script src="~/js/constants/M8Consts.js"></script>
+    <script src="~/js/constants/918KissConsts.js"></script>
+    <script src="~/js/constants/AGConsts.js"></script>
+    <script src="~/js/constants/apiConsts.js"></script>
+    <script src="~/js/constants/JokerConsts.js"></script>
+    <script src="~/js/constants/PlaytechConsts.js"></script>
+    <script src="~/js/constants/SMSConsts.js"></script>
+    <script src="~/js/constants/SecurityConsts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    @*<script src="https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88" type="text/javascript" charset="utf-8"></script>*@
+    <script type="text/javascript">
+       // $(window).load(function () {
+        //    $(".loadingImage").fadeOut("slow");;
+       // });
+    </script>
+    
+
+    <script>
+        function requestDesktopSite() {
+            if (document.getElementsByTagName('meta')['viewport'].content == 'width= 1440px;') {
+                document.getElementsByTagName('meta')['viewport'].content = 'width= 400px;';
+            } else {
+                window.location.replace = "/";
+                document.getElementsByTagName('meta')['viewport'].content = 'width= 1440px;';
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            announcementMobile();
+        });
+        async function announcementMobile() {
+            var marquee = document.getElementById('p_announcement_mobile');
+            var marquee_one = document.getElementById('p_announcement_mobile_one');
+
+            if (marquee !== null || marquee_one !== null) {
+                var res = await GetMethod(apiEndPoints.announcementList);
+                marquee.innerHTML = "";
+                marquee_one.innerHTML = "";
+                for (i = 0; i < res.data.length; i++) {
+                    marquee.innerHTML += '<span>' + res.data[i].announcement + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    marquee_one.innerHTML += '<span>' + res.data[i].announcement + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                }
+            }
+        }
+
+    </script>
+    <!-- Event snippet for Sign-up conversion page
+    In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+    <script>
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof (url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-480804860/17uwCMrko-4BEPz_oeUB',
+                'event_callback': callback
+            });
+            return false;
+        }
+    </script>
+
+</head>
+
+<body>
+    <!--<div class="loadingImage" style="z-index: 2147483643;"></div>-->
+    <div id="pageResponse">
+    </div>
+    <script>
+        setTimeout(() => {
+            loadPageHome();
+        }, 200);
+        function loadPageHome(obj) {
+            if (obj != undefined) {
+                console.log(obj);
+                if (obj.backFrom == "about") {
+                    $('body').css('padding-top', '40px');
+                }
+                if (obj.backFrom == "termandCondi") {
+                    $('body').css('padding-top', '40px');
+                }
+                if (obj.backFrom == "login") {
+                    $('body').css('padding-top', '40px');
+                }
+            }
+            
+            $('.content').empty();
+            $('#home').empty();
+            var cUser = GetLocalStorage('currentUser');
+            $.ajax({
+                url: '/spa2/home',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                    if (cUser == null) {
+                        $('#afterlogin_mobile').show();
+                        $('#beforelogin_mobile').hide();
+                        
+                    } else {
+                        $('#afterlogin_mobile').hide();
+                        $('#beforelogin_mobile').show();
+                        //$('#afterlogin_SPA').hide();
+                    }
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+        function loadPagePromotions() {
+            $.ajax({
+                url: '/spa2/promotions',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+        function loadPageContactus() {
+            $.ajax({
+                url: '/spa2/contactus',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+        function loadPageAbout() {
+            $.ajax({
+                url: '/spa2/about',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('body').attr('id', 'hideBody');
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");            
+                }
+            });
+        }
+        function loadPageAccount() {
+            $.ajax({
+                url: '/spa2/account',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('body').attr('id', 'hideBody');
+                    $('#pageResponse').html(response);
+                    $('.loadingImage').hide();
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+        function loadPagedeposit() {
+            $.ajax({
+                url: '/spa2/deposit',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('body').attr('id', 'hideBody');
+                    history.pushState(null, null, "/SPA2/deposit");
+                    $('#pageResponse').html(response);
+                    $('body').attr('id', 'hideBody');
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+        function loadPagedownload() {
+            $.ajax({
+                url: '/spa2/download',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+        function loadPageForgetpassword() {
+            $.ajax({
+                url: '/spa2/forgetpassword',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+        function loadPageGame() {
+            $.ajax({
+                url: '/spa2/Game',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                }
+            });
+        }
+        function loadPageHistory() {
+            $.ajax({
+                url: '/spa2/history',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+        function loadPageJokerdownload() {
+            $.ajax({
+                url: '/spa2/jokerdownload',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+        function loadPageLogin() {
+            $.ajax({
+                url: '/spa2/login',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+        function loadPagePragmaticGame() {
+            $.ajax({
+                url: '/spa2/PragmaticGame',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                }
+            });
+        }
+        function loadPageRegister() {
+            $.ajax({
+                url: '/spa2/register',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+        function loadPageTermandCondtion() {
+            $.ajax({
+                url: '/spa2/TermandCondtion',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('body').attr('id', 'hideBody');
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+        function loadPageTransfer() {
+            $.ajax({
+                url: '/spa2/transfer',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('body').attr('id', 'hideBody');
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+        function loadPageVerifiedOtp() {
+            $.ajax({
+                url: '/spa2/VerifiedOtp',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                }
+            });
+        }
+        function loadPageWithdraw() {
+            $.ajax({
+                url: '/spa2/withdraw',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                    
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
