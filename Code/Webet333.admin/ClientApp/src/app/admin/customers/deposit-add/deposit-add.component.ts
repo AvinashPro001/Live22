@@ -5,7 +5,6 @@ import { ToasterService } from 'angular2-toaster';
 import { AGGame, customer, gameBalance, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 
-
 declare var $: any;
 
 @Component({
@@ -15,7 +14,6 @@ declare var $: any;
 })
 
 export class DepositAddComponent implements OnInit {
-
     //#region variable
     disabled: boolean = false;
     customerData: any;
@@ -112,7 +110,6 @@ export class DepositAddComponent implements OnInit {
         this.walletData(this.newVal);
     }
 
-
     config = {
         displayKey: "username", //if objects array passed which key to be displayed defaults to description
         search: true, //true/false for the search functionlity defaults to false,
@@ -188,7 +185,6 @@ export class DepositAddComponent implements OnInit {
                 this.WM(newVal);
                 this.Pragmatic(newVal);
             })
-
         });
     }
     //#endregion
@@ -221,7 +217,6 @@ export class DepositAddComponent implements OnInit {
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
-
     }
     //#endregion
 
@@ -233,7 +228,6 @@ export class DepositAddComponent implements OnInit {
 
     //#region addDeposit
     addDeposit() {
-
         this.disabled = true;
         let radioValue = $("input[name='promotion']:checked").val();
         let dataSelect = {
@@ -337,7 +331,6 @@ export class DepositAddComponent implements OnInit {
                                 //};
                                 //this.adminService.add<any>(customer.promotionApplyInsert, promotionModel2).subscribe(walletData => { });
                             }
-
                         }
                     }
                     else {
@@ -372,13 +365,8 @@ export class DepositAddComponent implements OnInit {
                     this.disabled = false;
                     return 0;
                 }
-
             });
-
-
-
         }
-
     }
 
     PromotionApplyCheck() {
@@ -439,7 +427,6 @@ export class DepositAddComponent implements OnInit {
             this.urls.push({ base64images: e.target.result });
         }
         reader.readAsDataURL(file);
-
     }
 
     removefile(files) {
@@ -469,7 +456,6 @@ export class DepositAddComponent implements OnInit {
     }
 
     ManiWalletBalance(id) {
-
         let data = {
             id: id
         }
@@ -585,7 +571,7 @@ export class DepositAddComponent implements OnInit {
             username: this.pussyUsername
         }
         this.adminService.add<any>(gameBalance.Pussy888, data).subscribe(res => {
-            this.Pussy888Bal= res.data.balance;
+            this.Pussy888Bal = res.data.balance;
         })
     }
 

@@ -14,7 +14,6 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 })
 
 export class CustomerEditComponent implements OnInit {
-
     slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };
     editCustomerForm: FormGroup;
     toaster: any;
@@ -43,7 +42,6 @@ export class CustomerEditComponent implements OnInit {
     imagePath: any;
     ICNumber: any;
 
-
     agUsername: any;
     playtechUsername: any;
     dgUsername: any;
@@ -59,8 +57,6 @@ export class CustomerEditComponent implements OnInit {
     wmUsername: any;
     pragmaticUsername: any;
     password: any;
-
-
 
     toasterConfig: any;
     toasterconfig: ToasterConfig = new ToasterConfig({
@@ -91,7 +87,6 @@ export class CustomerEditComponent implements OnInit {
         await this.getUsername()
         this.mobileNumber = this.data.mobileNo.substring(0, 3) + '-XXXXXXXX-' + this.data.mobileNo.substring(this.data.mobileNo.length - 4);
 
-
         let data = {
             id: this.data.id
         }
@@ -108,7 +103,6 @@ export class CustomerEditComponent implements OnInit {
             }
         });
 
-
         this.ICNumber = this.data.userICNumber == null ? "Not Avaiable" : this.data.userICNumber;
         this.password = this.data.password;
     }
@@ -118,15 +112,12 @@ export class CustomerEditComponent implements OnInit {
         window.open(ImageUrl, 'Image', 'width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
     }
 
-
     async refeshBalance() {
         await this.loadBalance();
         this.totalBal = this.NumberConvert(this.playtechBal) + this.NumberConvert(this.m8Bal) + this.NumberConvert(this.jokerBal) + this.NumberConvert(this.agBal) + this.NumberConvert(this.dgBal) + this.NumberConvert(this.saBal) + this.NumberConvert(this.sexybaccaratBal) + this.NumberConvert(this.mainBal) + this.NumberConvert(this.kissBal) + this.NumberConvert(this.mega888Bal) + this.NumberConvert(this.maxbetBal) + this.NumberConvert(this.allbetBal) + this.NumberConvert(this.wmBal) + this.NumberConvert(this.pragmaticBal);
 
         (document.getElementById("balance") as HTMLInputElement).innerText = this.totalBal;
     }
-
-
 
     async loadBalance() {
         this.newVal = this.data.id;
@@ -191,7 +182,6 @@ export class CustomerEditComponent implements OnInit {
         if (ConfirmPhoneNumber == "")
             return this.toasterService.pop('error', 'Error', "Confirm Phone Number Required");
 
-
         if (PhoneNumber != ConfirmPhoneNumber)
             return this.toasterService.pop('error', 'Error', "Confirm Phone Number and Phone Number Don't match");
 
@@ -213,7 +203,6 @@ export class CustomerEditComponent implements OnInit {
             this.toasterService.pop('success', 'Success', res.message);
             this.modalService.dismissAll();
             this.clear();
-
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
@@ -224,8 +213,6 @@ export class CustomerEditComponent implements OnInit {
     }
 
     UpdateName() {
-
-
         var oldName = ((document.getElementById("txt_oldname") as HTMLInputElement).value)
         var newName = ((document.getElementById("txt_newname") as HTMLInputElement).value)
 
@@ -259,7 +246,6 @@ export class CustomerEditComponent implements OnInit {
 
     //#region randomPassword
     randomPassword() {
-
         var charsetOne = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetTwo = 'abcdefghiklmnopqrstuvwxyz', charsetThree = '@', charsetFour = '0123456789', randomstring = '', i = 0;
 
         for (i = 0; i < 3; i++) {
@@ -310,7 +296,6 @@ export class CustomerEditComponent implements OnInit {
             this.urls.push({ base64images: e.target.result });
         }
         reader.readAsDataURL(file);
-
     }
 
     //#region Wallet Balance
@@ -319,7 +304,6 @@ export class CustomerEditComponent implements OnInit {
     }
 
     ManiWalletBalance(id) {
-
         let data = {
             id: id
         }
@@ -439,7 +423,6 @@ export class CustomerEditComponent implements OnInit {
         });
     }
 
-
     SA(id) {
         let data = {
             id: id,
@@ -512,7 +495,6 @@ export class CustomerEditComponent implements OnInit {
     }
 
     UploadIcImage() {
-
         if (this.urls.length == 0) {
             this.toasterService.pop('error', 'Error', "Please Select Image !!");
             return;
@@ -599,7 +581,6 @@ export class CustomerEditComponent implements OnInit {
                             (document.getElementById("balance") as HTMLInputElement).innerText = this.totalBal;
                         }
                         catch {
-
                         }
                     }, 3000);
                 }

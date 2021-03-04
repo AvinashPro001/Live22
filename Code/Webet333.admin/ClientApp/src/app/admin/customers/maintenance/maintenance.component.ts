@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
     styleUrls: ['./maintenance.component.scss']
 })
 export class MaintenanceComponent implements OnInit {
-
     radioSelected: string;
 
     jokerMainteance: boolean;
@@ -47,7 +46,6 @@ export class MaintenanceComponent implements OnInit {
     Mega888Id: any;
     Pussy888Id: any;
     AllBetId: any;
-
 
     constructor(
         private adminService: AdminService,
@@ -167,9 +165,7 @@ export class MaintenanceComponent implements OnInit {
             name: "Etracker"
         }
         this.adminService.add<any>(customer.GlobalparameterSelect, etrackerModel).subscribe(res => {
-
             this.EtrackerMainteance = res.data.value == "true" ? true : false;
-
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
@@ -179,7 +175,6 @@ export class MaintenanceComponent implements OnInit {
         }
         this.adminService.add<any>(customer.GlobalparameterSelect, trioModel).subscribe(res => {
             this.TrioMainteance = res.data.value == "true" ? true : false;
-
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
@@ -192,7 +187,7 @@ export class MaintenanceComponent implements OnInit {
                     name: "Trio",
                     value: false
                 }
-                this.adminService.add<any>(customer.GlobalparameterUpdate, Model).subscribe(res => {});
+                this.adminService.add<any>(customer.GlobalparameterUpdate, Model).subscribe(res => { });
             }
 
             if (Name == "Trio" && Value) {
@@ -200,7 +195,7 @@ export class MaintenanceComponent implements OnInit {
                     name: "Etracker",
                     value: false
                 }
-                this.adminService.add<any>(customer.GlobalparameterUpdate, Model).subscribe(res => {});
+                this.adminService.add<any>(customer.GlobalparameterUpdate, Model).subscribe(res => { });
             }
 
             let Model = {

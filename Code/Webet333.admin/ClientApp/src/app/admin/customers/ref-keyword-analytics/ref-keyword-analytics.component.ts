@@ -30,7 +30,7 @@ export class RefKeywordAnalyticsComponent implements OnInit {
         private toasterService: ToasterService,
         private router: Router,
         private dateAdapter: NgbDateAdapter<string>,
-        private getDateService: CommonService        
+        private getDateService: CommonService
     ) { }
 
     async ngOnInit() {

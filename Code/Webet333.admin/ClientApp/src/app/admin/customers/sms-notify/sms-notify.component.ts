@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
     styleUrls: ['./sms-notify.component.scss']
 })
 export class SmsNotifyComponent implements OnInit {
-
     TotalUser: any = 0;
     userList: any;
     totaCharaters: any = 0;

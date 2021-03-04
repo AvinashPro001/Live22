@@ -7,15 +7,12 @@ import { AdminService } from '../../admin.service';
 import { customer, ErrorMessages } from '../../../../environments/environment';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 
-
 @Component({
     selector: 'app-admin/promotion/retrive-list',
     templateUrl: './promotion-list.component.html',
     styleUrls: ['./promotion-list.component.scss']
 })
 export class PromotionListComponent implements OnInit {
-
-
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
     @ViewChild('action') action: TemplateRef<any>;
@@ -200,7 +197,7 @@ export class PromotionListComponent implements OnInit {
             this.router.navigate(['/admin/customers/promotion-edit']);
         }
     }
-    //#endregion 
+    //#endregion
 
     //#region openRejectConfirmationDialog
 
@@ -319,5 +316,3 @@ export class PromotionListComponent implements OnInit {
 
     //#endregion Check Permission
 }
-
-

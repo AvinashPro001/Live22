@@ -89,7 +89,6 @@ export class BankListComponent implements OnInit {
                     this.toasterService.pop('success', 'Success', "Bank is active.");
                 else
                     this.toasterService.pop('success', 'Success', "Bank is deactive.");
-
             }, error => {
                 this.toasterService.pop('error', 'Error', error.error.message);
             });

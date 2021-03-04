@@ -48,7 +48,6 @@ export class VipPageComponent implements OnInit {
 
     //#region customerUser
     FreeCreditSetting() {
-
         this.adminService.getAll<any>(VIPSetting.VIPFreeCreditPromotionSetting).subscribe(res => {
             this.promotionData = res.data;
             (document.getElementById("freeCreditTurnover") as HTMLInputElement).value = this.promotionData.TurnoverTime
@@ -72,7 +71,6 @@ export class VipPageComponent implements OnInit {
     //#endregion
 
     onChange(event) {
-
     }
 
     //#region Get Vip Category
@@ -208,7 +206,6 @@ export class VipPageComponent implements OnInit {
                 weeklyFreeCreditMinDepositAmountDiamond: (document.getElementById("weeklyFreeCreditMinDepositAmountDiamond") as HTMLInputElement).value
             }
             this.adminService.add<any>(VIPSetting.addVIP, dataSelect).subscribe(res => {
-
                 let freeCreditUpdateModel = {
                     id: this.promotionData.Id,
                     turnovertime: (document.getElementById("freeCreditTurnover") as HTMLInputElement).value,
@@ -222,7 +219,6 @@ export class VipPageComponent implements OnInit {
                     isAllBet: (document.getElementById("ck_allbet") as HTMLInputElement).checked,
                     isMaxbet: (document.getElementById("ck_maxbet") as HTMLInputElement).checked,
                     isM8: (document.getElementById("ck_m8") as HTMLInputElement).checked
-
                 }
                 this.adminService.add<any>(customer.promotionUpdate, freeCreditUpdateModel).subscribe(res => {
                     this.disabled = false;
@@ -232,7 +228,6 @@ export class VipPageComponent implements OnInit {
                     this.ngOnInit();
                     this.toasterService.pop('error', 'Error', error.error.message);
                 });
-
             }, error => {
                 this.disabled = false;
                 this.ngOnInit();

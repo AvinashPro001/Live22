@@ -11,7 +11,6 @@ import { account, ErrorMessages } from '../../../../environments/environment';
     styleUrls: ['./bank-edit.component.scss']
 })
 export class BankEditComponent implements OnInit {
-
     data: any;
     base: any;
     filenames: any = [];
@@ -81,16 +80,14 @@ export class BankEditComponent implements OnInit {
         }
     }
 
-
     uploadFile(Id) {
-
         if (this.urls.length > 0)
             var baseImage = this.urls[0].base64images.split(",");
         if (this.IconUrls.length > 0)
             var baseIconImage = this.IconUrls[0].base64images.split(",");
         var dataSelect = {
             file: baseImage == null || baseImage == undefined ? null : baseImage[1],
-            fileIcon: baseIconImage == null || baseIconImage == undefined ? null :  baseIconImage[1],
+            fileIcon: baseIconImage == null || baseIconImage == undefined ? null : baseIconImage[1],
             id: Id
         }
         this.adminService.add<any>(account.adminBankImageUpdate, dataSelect).subscribe(res => {

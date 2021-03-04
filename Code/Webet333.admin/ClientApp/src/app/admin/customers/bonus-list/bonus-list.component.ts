@@ -102,8 +102,6 @@ export class BonusListComponent implements OnInit {
             toDate: todate
         }
 
-
-
         this.adminService.add<any>(customer.bonusList, data).subscribe(res => {
             this.bonusData = res.data.bonus;
             this.totalBonus = res.data.total;

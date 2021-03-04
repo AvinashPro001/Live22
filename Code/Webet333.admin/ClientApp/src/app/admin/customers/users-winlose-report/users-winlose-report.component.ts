@@ -174,7 +174,7 @@ export class UsersWinloseReportComponent implements OnInit {
                 res.data.users.forEach(el => {
                     this.rows.push({
                         No: ++i,
-                        id:el.id,
+                        id: el.id,
                         Username: el.username,
                         RegisterKeyword: el.registerKeyword == null ? "Not Available" : el.registerKeyword,
                         PromotionName: el.promotionTitle == null ? "Not Available" : el.promotionTitle,
