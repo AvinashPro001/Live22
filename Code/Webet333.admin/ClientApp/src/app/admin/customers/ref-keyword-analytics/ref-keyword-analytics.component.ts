@@ -30,7 +30,7 @@ export class RefKeywordAnalyticsComponent implements OnInit {
         private toasterService: ToasterService,
         private router: Router,
         private dateAdapter: NgbDateAdapter<string>,
-        private getDateService: CommonService
+        private commonService: CommonService
     ) { }
 
     async ngOnInit() {
@@ -123,7 +123,7 @@ export class RefKeywordAnalyticsComponent implements OnInit {
     }
 
     setToday() {
-        var dates = this.getDateService.getTodatDate();
+        var dates = this.commonService.getTodatDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -133,7 +133,7 @@ export class RefKeywordAnalyticsComponent implements OnInit {
     }
 
     setYesterday() {
-        var dates = this.getDateService.getYesterDate();
+        var dates = this.commonService.getYesterDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -143,7 +143,7 @@ export class RefKeywordAnalyticsComponent implements OnInit {
     }
 
     setThisWeek() {
-        var dates = this.getDateService.getThisWeekDate();
+        var dates = this.commonService.getThisWeekDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -153,7 +153,7 @@ export class RefKeywordAnalyticsComponent implements OnInit {
     }
 
     setThisYear() {
-        var dates = this.getDateService.getThisYearDate();
+        var dates = this.commonService.getThisYearDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -187,8 +187,8 @@ export class RefKeywordAnalyticsComponent implements OnInit {
 
         //    //this.setDatePicker(new Date(RefFilterModel.fromdate), new Date(RefFilterModel.todate));
         //} else {
-        //    RefFilterModel.fromdate = this.getDateService.getTodatDate().fromdate;
-        //    RefFilterModel.todate = this.getDateService.getTodatDate().todate;
+        //    RefFilterModel.fromdate = this.commonService.getTodatDate().fromdate;
+        //    RefFilterModel.todate = this.commonService.getTodatDate().todate;
 
         //    (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = RefFilterModel.fromdate;
         //    (document.getElementById("txt_todatetime") as HTMLInputElement).value = RefFilterModel.todate;

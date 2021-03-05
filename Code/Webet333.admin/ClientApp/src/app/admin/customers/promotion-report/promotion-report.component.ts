@@ -37,7 +37,7 @@ export class PromotionReportComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private getDateService: CommonService
+        private commonService: CommonService
     ) { }
 
     async ngOnInit() {
@@ -121,12 +121,12 @@ export class PromotionReportComponent implements OnInit {
     //#region       Filter Data
 
     setDatePicker(fromdate = null, todate = null) {
-        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
-        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+        this.datePickerfromdate = this.commonService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.commonService.setDatePickerFormate(todate);
     }
 
     setToday() {
-        var dates = this.getDateService.getTodatDate();
+        var dates = this.commonService.getTodatDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -136,7 +136,7 @@ export class PromotionReportComponent implements OnInit {
     }
 
     setYesterday() {
-        var dates = this.getDateService.getYesterDate();
+        var dates = this.commonService.getYesterDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -146,7 +146,7 @@ export class PromotionReportComponent implements OnInit {
     }
 
     setThisWeek() {
-        var dates = this.getDateService.getThisWeekDate();
+        var dates = this.commonService.getThisWeekDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -156,7 +156,7 @@ export class PromotionReportComponent implements OnInit {
     }
 
     setThisYear() {
-        var dates = this.getDateService.getThisYearDate();
+        var dates = this.commonService.getThisYearDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 

@@ -77,7 +77,7 @@ export class BettingDetailsComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private getDateService: CommonService
+        private commonService: CommonService
     ) { }
 
     async ngOnInit() {
@@ -459,7 +459,7 @@ export class BettingDetailsComponent implements OnInit {
         if (checkExists != null) (document.getElementById("txt_startdatetime") as HTMLInputElement).value = selectFromDate;
     }
     setToday() {
-        var dates = this.getDateService.getTodatDate();
+        var dates = this.commonService.getTodatDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -467,7 +467,7 @@ export class BettingDetailsComponent implements OnInit {
     }
 
     setYesterday() {
-        var dates = this.getDateService.getYesterDate();
+        var dates = this.commonService.getYesterDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -475,7 +475,7 @@ export class BettingDetailsComponent implements OnInit {
     }
 
     setThisWeek() {
-        var dates = this.getDateService.getThisWeekDate();
+        var dates = this.commonService.getThisWeekDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -483,7 +483,7 @@ export class BettingDetailsComponent implements OnInit {
     }
 
     setThisYear() {
-        var dates = this.getDateService.getThisYearDate();
+        var dates = this.commonService.getThisYearDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 

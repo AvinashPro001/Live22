@@ -59,7 +59,7 @@ export class BonusListComponent implements OnInit {
         private toasterService: ToasterService,
         private router: Router,
         private confirmationDialogService: ConfirmationDialogService,
-        private getDateService: CommonService
+        private commonService: CommonService
     ) { }
     //#endregion
 
@@ -192,12 +192,12 @@ export class BonusListComponent implements OnInit {
     //#region Filter Data
 
     setDatePicker(fromdate = null, todate = null) {
-        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
-        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+        this.datePickerfromdate = this.commonService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.commonService.setDatePickerFormate(todate);
     }
 
     setToday() {
-        var dates = this.getDateService.getTodatDate();
+        var dates = this.commonService.getTodatDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -207,7 +207,7 @@ export class BonusListComponent implements OnInit {
     }
 
     setYesterday() {
-        var dates = this.getDateService.getYesterDate();
+        var dates = this.commonService.getYesterDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 

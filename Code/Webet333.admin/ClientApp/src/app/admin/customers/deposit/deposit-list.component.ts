@@ -108,7 +108,7 @@ export class DepositListComponent implements OnInit {
         private modalService: NgbModal,
         private datePipe: DatePipe,
         private titleService: Title,
-        private getDateService: CommonService
+        private commonService: CommonService
     ) { }
     //#endregion
 
@@ -491,12 +491,12 @@ export class DepositListComponent implements OnInit {
     //#region Filter Data
 
     setDatePicker(fromdate = null, todate = null) {
-        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
-        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+        this.datePickerfromdate = this.commonService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.commonService.setDatePickerFormate(todate);
     }
 
     setToday() {
-        var dates = this.getDateService.getTodatDate();
+        var dates = this.commonService.getTodatDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -506,7 +506,7 @@ export class DepositListComponent implements OnInit {
     }
 
     setYesterday() {
-        var dates = this.getDateService.getYesterDate();
+        var dates = this.commonService.getYesterDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
