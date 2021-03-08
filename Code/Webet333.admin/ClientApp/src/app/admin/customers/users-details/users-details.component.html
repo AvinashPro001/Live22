@@ -130,8 +130,11 @@
                     <h3>Bank Information</h3>
                 </div>
             </div>
-            <div class="col-11 offset-1">
-                <div class="row">
+            <div>
+                <ngx-datatable #table class="material bootstrap no-detail-row" [rows]="bankRows" [loadingIndicator]="loadingIndicator" [columns]="bankColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="5"></ngx-datatable>
+
+                <!--
+                    <div class="row">
                     <h4 class="col-5 h4">Account Name :</h4>
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.accountName }}</h4>
                 </div>
@@ -145,6 +148,7 @@
                     <h4 class="col-5 h4">Bank Account :</h4>
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.bankAccount }}</h4>
                 </div>
+                    -->
             </div>
 
             <br /><br /><br />
@@ -470,8 +474,7 @@
     </div>
 
     <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="promotionRows" [loadingIndicator]="loadingIndicator" [columns]="promotionColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
-        <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
-                     ngx-datatable-row-detail-template>
+        <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
             <label>
                 <button id="rejectBtn" data-id="depositData[rowIndex].id" class="mb-1 button btn-danger" type="button" data-toggle="modal" (click)="ExpierPromoton(promotiondata[rowIndex].Id)" title="Expier Promotion" style="margin-left:5px">
                     <i class="fa fa-ban" aria-hidden="true"></i>

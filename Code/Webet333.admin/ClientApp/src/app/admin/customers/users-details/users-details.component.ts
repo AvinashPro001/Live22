@@ -229,6 +229,9 @@ export class UsersDetailsComponent implements OnInit {
     model: NgbDateStruct;
     date: { year: number, month: number };
 
+    bankColumns: any;
+    bankRows: any;
+
     constructor(
         private datePipe: DatePipe,
         private adminService: AdminService,
@@ -244,9 +247,10 @@ export class UsersDetailsComponent implements OnInit {
     //#region OnInit Method
     async ngOnInit() {
         if (await this.checkViewPermission()) {
+            this.coloumSet();
+
             let dataCustomer = JSON.parse(localStorage.getItem('id'));
             this.Userdata = dataCustomer as object[];
-
             if (this.Userdata != null) {
                 if (this.Userdata.userId) this.getCustomerById(this.Userdata.userId);
                 else this.getCustomerById(this.Userdata.id);
@@ -260,7 +264,7 @@ export class UsersDetailsComponent implements OnInit {
             }
             this.LoadVIPCategory();
             document.getElementById("profiletab").click();
-            this.coloumSet();
+
             var someElement = document.getElementById("lockIcon");
             // localStorage.removeItem('id');   // Not remove data from local storage. Beacuse on page re-load data will not show.
         }
@@ -273,6 +277,16 @@ export class UsersDetailsComponent implements OnInit {
             this.Userdata = res.data[0];
             this.RegisteInGame(this.Userdata.id)
             this.onChange(this.Userdata);
+            let i = 0;
+            this.bankRows = [];
+            this.Userdata.UserBankDetails.forEach(el => {
+                this.bankRows.push({
+                    No: ++i,
+                    BankName: el.bankName,
+                    BankAccountNo: el.accountNo
+                });
+            });
+            this.bankRows = [...this.bankRows];
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
@@ -675,6 +689,12 @@ export class UsersDetailsComponent implements OnInit {
             { prop: 'Rnum' },
             { prop: 'Status' },
         ];
+
+        this.bankColumns = [
+            { prop: 'No' },
+            { prop: 'BankName' },
+            { prop: 'BankAccountNo' }
+        ]
     }
 
     setBettingDetailsColumn(selectedList) {
