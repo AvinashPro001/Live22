@@ -1,6 +1,6 @@
 @page
 @{ ViewData["Title"] = "History";
-    Layout = "~/Pages/Shared/_LayoutSPA.cshtml"; }
+    Layout = ""; }
 <div id="comContent"></div>
 <div id="mComContent">
     <!-- <div class="loadingImage" style="z-index: 2147483643;"></div>-->
@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div id="afterlogin_mobile">
+    @*<div id="afterlogin_mobile">
         <div class="sidebar">
             <div class="navbar-collapse" id="myNavbar">
                 <ul class="nav text-center mob-menu">
@@ -179,7 +179,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
     <script src="~/js/mobile/m_bank.js"></script>
     <script>
         DepositHistory();
@@ -558,6 +558,8 @@
             await PostMethod(apiEndPoints.userLastTimeUpdate, {});
         }
     });
-
+    setTimeout(() => {
+        get();
+    }, 200);
 
 </script>

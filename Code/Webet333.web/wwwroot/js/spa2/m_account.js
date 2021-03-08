@@ -383,7 +383,8 @@ async function DoRegister() {
                 } catch (e) {}
                 localStorage.setItem('currentUserName', model.userName);
                 localStorage.setItem('currentUserData', enc(model.password));
-                window.location.href = "../Mobile/VerifiedOtp";
+                //window.location.href = "../Mobile/VerifiedOtp";
+                loadPageVerifiedOtp();
             }
         }
         LoaderHide();

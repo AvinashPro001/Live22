@@ -1,6 +1,9 @@
 @page
 @{ ViewData["Title"] = "Transfer";
-    Layout = "~/Pages/Shared/_LayoutSPA.cshtml"; }
+    Layout = ""; }
+
+<script src="~/js/spa2/m_bank.js"></script>
+
 <div id="comContent"></div>
 <div id="mComContent">
     <!--<div class="loadingImage" style="z-index: 2147483643;"></div>-->
@@ -180,7 +183,6 @@
             </div>
         </div>
     </div>
-    <script src="~/js/mobile/m_bank.js"></script>
     <script>
         document.getElementById("navbarhide").style.display = "none";
         document.getElementById("hideBody").style.padding = "0px";
@@ -190,7 +192,10 @@
             window.location = "../SPA2";
         }
         UserGameTurnover();
+
         CheckSupportGame();
+
+        AllInButtonDisable(0);
     </script>
 
     <style>
@@ -204,7 +209,7 @@
             <div class="info-form text-center">
                 <div class="row">
                     <div class="col-xs-2">
-                        <div class="back-btn"><a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div>
+                        <div class="back-btn"><a onclick="loadPageHome({backFrom:'transfer'})" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div>
                     </div>
                     <div class="col-xs-8">
                         <h4 class="black-text lang" key="transfer_title">TRANSFER</h4>
@@ -548,10 +553,6 @@
         </div>
     </div>
 
-    <script>
-        UserGameTurnover();
-        AllInButtonDisable(0);
-    </script>
 
     <div class="form-login modal fade" id="gameLogin" role="dialog">
         <div class="modal-dialog">
@@ -689,7 +690,7 @@
     });
 </script>
 
-
+@*<script src="~/js/spa2/m_bank.js"></script>*@
 
 <!--Begin Comm100 Live Chat Code-->
 <div></div>
@@ -791,11 +792,11 @@
     });
 
 
-    $("html").click(async function (event) {
-        if (GetLocalStorage('currentUser') !== null) {
-            await PostMethod(apiEndPoints.userLastTimeUpdate, {});
-        }
-    });
-
+    //$("html").click(async function (event) {
+    //    if (GetLocalStorage('currentUser') !== null) {
+    //        await PostMethod(apiEndPoints.userLastTimeUpdate, {});
+    //    }
+    //});
+    WalletBalance();
 
 </script>

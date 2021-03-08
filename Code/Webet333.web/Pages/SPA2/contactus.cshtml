@@ -1,6 +1,6 @@
 ﻿@page
 @{ ViewData["Title"] = "Contact Us";
-    Layout = "~/Pages/Shared/_LayoutSPA.cshtml";}
+    Layout = "";}
 <div id="comContent"></div>
 <div id="mComContent">
 
@@ -585,6 +585,8 @@
             await PostMethod(apiEndPoints.userLastTimeUpdate, {});
         }
     });
-
+    setTimeout(() => {
+        get();
+    }, 200);
 
 </script>

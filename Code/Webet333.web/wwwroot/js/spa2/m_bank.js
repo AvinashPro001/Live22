@@ -415,6 +415,7 @@ function btn(j) {
 var selDiv = "";
 document.addEventListener("DOMContentLoaded", init, false);
 function init() {
+    selDiv = "";
     if (document.querySelector('#receipt') !== null) {
         document.querySelector('#receipt').addEventListener('change', handleFileSelect, false);
         selDiv = document.querySelector("#selectedFiles");

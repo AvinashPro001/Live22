@@ -1,6 +1,8 @@
 @page
 @{ ViewData["Title"] = "Deposit";
-    Layout = "~/Pages/Shared/_LayoutSPA.cshtml"; }
+    Layout = ""; }
+
+<script src="~/js/spa2/m_bank.js"></script>
 <div id="comContent"></div>
 <div id="mComContent">
 
@@ -180,18 +182,18 @@
         </div>
     </div>
 
-
-
-    <script src="~/js/mobile/m_bank.js"></script>
     <script>
         document.getElementById("navbarhide").style.display = "none";
         document.getElementById("hideBody").style.padding = "0px";
         document.getElementById("Translation_Option").innerHTML = "";
         if (GetLocalStorage('currentUser') === null)
             window.location = "../SPA2/home";
-
+        get();
         CheckMainteance();
     </script>
+
+
+
     <style>
         #promotionInfo table {
             background: #e5e5e5 !important;
@@ -213,7 +215,7 @@
             <div class="info-form text-center">
                 <div class="row">
                     <div class="col-xs-2">
-                        <div class="back-btn"><a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div>
+                        <div class="back-btn"><a onclick="loadPageHome({backFrom:'deposit'})" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div>
                     </div>
                     <div class="col-xs-8">
                         <h4 class="black-text lang" key="deposit_title">DEPOSIT</h4>
@@ -680,6 +682,7 @@
 </script>
 <script>
     $(document).ready(function () {
+        init();
         if (localStorage.getItem('currentUser') == null) {
             document.getElementById('logout').style.display = "none";
             document.getElementById('accountPage').style.display = "none";
@@ -700,11 +703,11 @@
     });
 
 
-    $("html").click(async function (event) {
-        if (GetLocalStorage('currentUser') !== null) {
-            await PostMethod(apiEndPoints.userLastTimeUpdate, {});
-        }
-    });
+    //$("html").click(async function (event) {
+    //    if (GetLocalStorage('currentUser') !== null) {
+    //        await PostMethod(apiEndPoints.userLastTimeUpdate, {});
+    //    }
+    //});
 
 
 </script>

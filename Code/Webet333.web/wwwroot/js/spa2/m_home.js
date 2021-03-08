@@ -9,7 +9,8 @@ $(document).ready(function () {
         }
         //VIPBanner();
     }
-    if (window.location.href.toLowerCase().includes("mobile/home")) {
+    
+    if (window.location.href.toLowerCase().includes("spa2/index")) {
         SliderPromotion();
     }
 
@@ -45,7 +46,7 @@ function CheckUserVerified() {
 
 async function SliderPromotion() {
     var url = window.location.href.toLowerCase();
-    if (url.includes("mobile/home")) {
+    if (url.includes("spa2/index")) {
         var model = {
             ismobile: true,
             ismain: true

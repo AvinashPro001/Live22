@@ -327,7 +327,7 @@ async function MainWalletBalance() {
         balance = mainwallet.data.filter(x => x.walletName == "Main Wallet");
         MainWallet = numberWithCommas(parseFloat(balance[0].amount).toFixed(2));
         document.getElementById("ddlmainWallet").innerHTML = MainWallet;
-        if (location.href.toLowerCase().includes("mobile/home") || location.href.toLowerCase().includes("mobile/transfer") || location.href.toLowerCase().includes("mobile/withdraw"))
+        if (location.href.toLowerCase().includes("spa2/index") || location.href.toLowerCase().includes("spa2/transfer") || location.href.toLowerCase().includes("mobile/withdraw"))
             document.getElementById("menuMainWallet").innerHTML = MainWallet;
     }
     catch (ex) {

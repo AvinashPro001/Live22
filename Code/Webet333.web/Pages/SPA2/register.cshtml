@@ -1,6 +1,6 @@
 ﻿@page
 @{ ViewData["Title"] = "Register";
-    Layout = "~/Pages/Shared/_LayoutSPA.cshtml"; }
+    Layout = ""; }
 <div id="comContent"></div>
 <div id="mComContent">
     <!--<div class="loadingImage" style="z-index: 2147483643;"></div>-->
@@ -223,7 +223,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-2">
-                    <div class="back-btn"><a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="~/images/mobile/BackArrow_svg.svg" alt="" /></a></div>
+                    <div class="back-btn"><a onclick="loadPageHome({backFrom:'login'})" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="~/images/mobile/BackArrow_svg.svg" alt="" /></a></div>
                 </div>
                 <div class="col-xs-8">
                     <h4 class="black-text lang" key="register"></h4>
@@ -310,7 +310,7 @@
         </div>
     </div>
 
-    <div class="footer-widget" id="footerWidget">
+    @*<div class="footer-widget" id="footerWidget">
         <ul class="list-inline text-center">
             <li id="homePagebottom">
                 <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch">
@@ -340,7 +340,7 @@
                 <a class="live-chat-icon"><p class="white-text no-mar" data-translate="Live_chat">Live Chat</p></a>
             </li>
         </ul>
-    </div>
+    </div>*@
     <div>
         <a id="mobileM8" style="display:none"></a>
     </div>
@@ -497,21 +497,21 @@
 <script>
     $(document).ready(function () {
         if (localStorage.getItem('currentUser') == null) {
-            document.getElementById('logout').style.display = "none";
-            document.getElementById('accountPage').style.display = "none";
-            document.getElementById('downloadpage').style.display = "none";
+           // document.getElementById('logout').style.display = "none";
+           // document.getElementById('accountPage').style.display = "none";
+           // document.getElementById('downloadpage').style.display = "none";
 
             if (!window.location.href.toLowerCase().includes("mobile/login") && !window.location.href.toLowerCase().includes("mobile/register")) {
-                document.getElementById('balanceShow').style.textIndent = "-999px";
-                document.getElementById("MainLogo").style.marginLeft = "-30px";
+             //   document.getElementById('balanceShow').style.textIndent = "-999px";
+             //   document.getElementById("MainLogo").style.marginLeft = "-30px";
             }
         }
         else {
-            document.getElementById('login').style.display = "none";
+            //document.getElementById('login').style.display = "none";
         }
 
         if (location.href.toLowerCase().includes("mobile/login") || location.href.toLowerCase().includes("mobile/register") || location.href.toLowerCase().includes("mobile/forgetpassword")) {
-            document.getElementById("footerWidget").innerHTML = "";
+           // document.getElementById("footerWidget").innerHTML = "";
         }
     });
 

@@ -1,6 +1,5 @@
 ﻿@page
 @{ Layout = null; }
-<!--<div class="loadingImage" style="z-index: 2147483643;"></div>-->
 
 <div id="success_snackbar">
     <div>
@@ -843,10 +842,10 @@
             $("header").removeClass("sticky-header");
         }
     });
-    $("html").click(async function (event) {
-        if (GetLocalStorage('currentUser') !== null)
-            await PostMethod(apiEndPoints.userLastTimeUpdate, {});
-    });
+    //$("html").click(async function (event) {
+    //    if (GetLocalStorage('currentUser') !== null)
+    //        await PostMethod(apiEndPoints.userLastTimeUpdate, {});
+    //});
     $(document).on('ready', function () {
         // $(".login-top-slider").slick({
         //     infinite: true,
@@ -880,14 +879,15 @@
     }
     function get() {
         (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
-        /*
-        if (GetLocalStorage('currentUser') === null) {
-            document.getElementById('beforelogin_mobile').style.display = 'none';
-        }
+        
+        //if (GetLocalStorage('currentUser') === null) {
+        //    document.getElementById('beforelogin_mobile').style.display = 'none';
+        //}
         if (GetLocalStorage('currentUser') !== null) {
-            document.getElementById('afterlogin_mobile').style.display = 'none';
+            //document.getElementById('afterlogin_mobile').style.display = 'none';
+            WalletBalance();
         }
-        */
+        
 
         document.getElementById("englishbtn").style.background = "";
         document.getElementById("malaybtn").style.background = "";

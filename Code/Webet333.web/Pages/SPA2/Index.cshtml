@@ -43,6 +43,12 @@
     <link href="~/css/mobile/mob-style.css" rel="stylesheet" />
     <link href="~/css/mobile/mobile-style.css" rel="stylesheet" />
 
+    <link href="../../css/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
+    <link href="../../css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+    <script src="../../js/datepicker.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/bootstrap-datetimepicker.min.js" type="text/javascript" charset="utf-8"></script>
+
     <script src="~/js/constants/apiConsts.js"></script>
     <script src="~/js/helpers/toastrHelpers.js"></script>
     <script src="~/js/helpers/apiHelpers.js"></script>
@@ -53,7 +59,7 @@
     <script src="~/js/spa2/m_account.js"></script>
     <script src="~/js/spa2/m_gamelogin.js"></script>
     <script src="~/js/spa2/m_getbalance.js"></script>
-    <script src="~/js/spa2/m_bank.js"></script>
+
     <script src="~/js/constants/M8Consts.js"></script>
     <script src="~/js/constants/918KissConsts.js"></script>
     <script src="~/js/constants/AGConsts.js"></script>
@@ -65,11 +71,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
     @*<script src="https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88" type="text/javascript" charset="utf-8"></script>*@
     <script type="text/javascript">
-       // $(window).load(function () {
-        //    $(".loadingImage").fadeOut("slow");;
-       // });
+        $(window).load(function () {
+            $(".loadingImage").fadeOut("slow");;
+        });
     </script>
-    
+
 
     <script>
         function requestDesktopSite() {
@@ -122,7 +128,7 @@
 </head>
 
 <body>
-    <!--<div class="loadingImage" style="z-index: 2147483643;"></div>-->
+    <div class="loadingImage" style="z-index: 2147483643;"></div>
     <div id="pageResponse">
     </div>
     <script>
@@ -141,8 +147,17 @@
                 if (obj.backFrom == "login") {
                     $('body').css('padding-top', '40px');
                 }
+                if (obj.backFrom == "deposit") {
+                    $('body').css('padding-top', '40px');
+                }
+                if (obj.backFrom == "transfer") {
+                    $('body').css('padding-top', '40px');
+                }
+                if (obj.backFrom == "widthraw") {
+                    $('body').css('padding-top', '40px');
+                }
             }
-            
+
             $('.content').empty();
             $('#home').empty();
             var cUser = GetLocalStorage('currentUser');
@@ -153,10 +168,11 @@
                 cache: true,
                 success: function (response) {
                     $('#pageResponse').html(response);
+                    history.pushState(null, null, "/spa2?p=home");
                     if (cUser == null) {
                         $('#afterlogin_mobile').show();
                         $('#beforelogin_mobile').hide();
-                        
+
                     } else {
                         $('#afterlogin_mobile').hide();
                         $('#beforelogin_mobile').show();
@@ -173,6 +189,7 @@
                 dataType: "text",
                 cache: true,
                 success: function (response) {
+                    history.pushState(null, null, "/spa2?p=promotions");
                     $('#pageResponse').html(response);
                     $("html").removeClass("intro");
                 }
@@ -185,6 +202,7 @@
                 dataType: "text",
                 cache: true,
                 success: function (response) {
+                    history.pushState(null, null, "/spa2?p=contactus");
                     $('#pageResponse').html(response);
                     $("html").removeClass("intro");
                 }
@@ -198,8 +216,9 @@
                 cache: true,
                 success: function (response) {
                     $('body').attr('id', 'hideBody');
+                    history.pushState(null, null, "/spa2?p=about");
                     $('#pageResponse').html(response);
-                    $("html").removeClass("intro");            
+                    $("html").removeClass("intro");
                 }
             });
         }
@@ -212,6 +231,7 @@
                 success: function (response) {
                     $('body').attr('id', 'hideBody');
                     $('#pageResponse').html(response);
+                    history.pushState(null, null, "/spa2?p=account");
                     $('.loadingImage').hide();
                     $("html").removeClass("intro");
                 }
@@ -225,7 +245,7 @@
                 cache: true,
                 success: function (response) {
                     $('body').attr('id', 'hideBody');
-                    history.pushState(null, null, "/SPA2/deposit");
+                    history.pushState(null, null, "/spa2?p=deposit");
                     $('#pageResponse').html(response);
                     $('body').attr('id', 'hideBody');
                     $("html").removeClass("intro");
@@ -240,6 +260,7 @@
                 cache: true,
                 success: function (response) {
                     $('#pageResponse').html(response);
+                    history.pushState(null, null, "/spa2?p=download");
                     $("html").removeClass("intro");
                 }
             });
@@ -252,6 +273,7 @@
                 cache: true,
                 success: function (response) {
                     $('#pageResponse').html(response);
+                    history.pushState(null, null, "/spa2?p=forgetpassword");
                     $("html").removeClass("intro");
                 }
             });
@@ -275,6 +297,7 @@
                 cache: true,
                 success: function (response) {
                     $('#pageResponse').html(response);
+                    history.pushState(null, null, "/spa2?p=history");
                     $("html").removeClass("intro");
                 }
             });
@@ -286,6 +309,7 @@
                 dataType: "text",
                 cache: true,
                 success: function (response) {
+                    history.pushState(null, null, "/spa2?p=jokerdownload");
                     $('#pageResponse').html(response);
                     $("html").removeClass("intro");
                 }
@@ -298,6 +322,7 @@
                 dataType: "text",
                 cache: true,
                 success: function (response) {
+                    history.pushState(null, null, "/spa2?p=login");
                     $('#pageResponse').html(response);
                     $("html").removeClass("intro");
                 }
@@ -322,6 +347,7 @@
                 cache: true,
                 success: function (response) {
                     $('#pageResponse').html(response);
+                    history.pushState(null, null, "/spa2?p=register");
                     $("html").removeClass("intro");
                 }
             });
@@ -335,6 +361,7 @@
                 success: function (response) {
                     $('body').attr('id', 'hideBody');
                     $('#pageResponse').html(response);
+                    history.pushState(null, null, "/spa2?p=TermandCondtion");
                     $("html").removeClass("intro");
                 }
             });
@@ -347,6 +374,7 @@
                 cache: true,
                 success: function (response) {
                     $('body').attr('id', 'hideBody');
+                    history.pushState(null, null, "/spa2?p=transfer");
                     $('#pageResponse').html(response);
                     $("html").removeClass("intro");
                 }
@@ -359,6 +387,7 @@
                 dataType: "text",
                 cache: true,
                 success: function (response) {
+                    history.pushState(null, null, "/spa2?p=VerifiedOtp");
                     $('#pageResponse').html(response);
                 }
             });
@@ -371,11 +400,17 @@
                 cache: true,
                 success: function (response) {
                     $('#pageResponse').html(response);
-                    
+                    history.pushState(null, null, "/spa2?p=withdraw");
                     $("html").removeClass("intro");
                 }
             });
         }
+
+        $("html").click(async function (event) {
+            if (GetLocalStorage('currentUser') !== null) {
+                await PostMethod(apiEndPoints.userLastTimeUpdate, {});
+            }
+        });
     </script>
 
 </body>
