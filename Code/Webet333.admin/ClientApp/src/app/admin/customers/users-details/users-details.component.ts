@@ -59,7 +59,7 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 @Component({
     selector: 'app-users-details',
     templateUrl: './users-details.component.html',
-    styleUrls: ['./users-details.component.scss']
+    styleUrls: ['./users-details.component.scss'],
 })
 export class UsersDetailsComponent implements OnInit {
     //#region Variable and Constructor
@@ -262,7 +262,7 @@ export class UsersDetailsComponent implements OnInit {
             document.getElementById("profiletab").click();
             this.coloumSet();
             var someElement = document.getElementById("lockIcon");
-            localStorage.removeItem('id');
+            // localStorage.removeItem('id');   // Not remove data from local storage. Beacuse on page re-load data will not show.
         }
     }
 
