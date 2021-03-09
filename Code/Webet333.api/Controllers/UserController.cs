@@ -398,7 +398,16 @@ namespace Webet333.api.Controllers
                         {
                             data.VIPBanner = (data.VIPBanner != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.VIPIcon + "/" + data.VIPLevel + data.VIPBanner : null);
                         }
+
+                        if (data.UserICImage != null)
+                        {
+                            foreach (var data1 in data.UserICImage)
+                            {
+                                data1.ICImageBanner = baseUrlConfigs.ImageBase + baseUrlConfigs.UserICImage + "/" + data1.ICImageBanner;
+                            }
+                        }
                     }
+
                     return OkResponse(users);
                 }
                 else return NotFoundResponse();

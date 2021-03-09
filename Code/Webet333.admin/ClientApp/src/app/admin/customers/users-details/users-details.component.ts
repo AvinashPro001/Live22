@@ -232,6 +232,8 @@ export class UsersDetailsComponent implements OnInit {
     bankColumns: any;
     bankRows: any;
 
+    imagePath: any;
+
     constructor(
         private datePipe: DatePipe,
         private adminService: AdminService,
@@ -287,7 +289,12 @@ export class UsersDetailsComponent implements OnInit {
                 });
             });
             this.bankRows = [...this.bankRows];
+
+            this.imagePath = this.Userdata.UserICImage;
+
+            this.loadingIndicator = false;
         }, error => {
+            this.loadingIndicator = false;
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
@@ -3026,4 +3033,12 @@ export class UsersDetailsComponent implements OnInit {
     }
 
     //#endregion Check Permission
+
+    //#region Open IC imahe in new tab
+
+    ImageOpenNewTab(ImageUrl) {
+        window.open(ImageUrl, 'Image', 'width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
+    }
+
+    //#endregion Open IC imahe in new tab
 }
