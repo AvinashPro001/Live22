@@ -123,6 +123,24 @@
                     <h4 class="col-5 h4">Username :</h4>
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.username }}</h4>
                 </div>
+
+                <div class="row">
+                    <h4 class="col-5 h4">IC No :</h4>
+                    <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.UserICNumber }}</h4>
+                </div>
+
+                <div class="row">
+                    <h4 class="col-5 h4">IC Image :</h4>
+                    <span class="col-2 h4">
+                        <div id="edit-slider" class="col-lg-6 offset-5" style="align-items:center;">
+                            <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" style="width:150px;height:150px;">
+                                <div ngxSlickItem *ngFor="let image of imagePath" class="slide">
+                                    <img [src]="image.ICImageBanner" width="150px" height="150px" (click)="ImageOpenNewTab(image.ICImageBanner)" alt="">
+                                </div>
+                            </ngx-slick>
+                        </div>
+                    </span>
+                </div>
             </div>
             <br /><br /><br />
             <div class="row">
