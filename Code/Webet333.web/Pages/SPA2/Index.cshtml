@@ -135,9 +135,9 @@
         setTimeout(() => {
             loadPageHome();
         }, 200);
+        
         function loadPageHome(obj) {
             if (obj != undefined) {
-                console.log(obj);
                 if (obj.backFrom == "about") {
                     $('body').css('padding-top', '40px');
                 }
@@ -169,11 +169,15 @@
                 success: function (response) {
                     $('#pageResponse').html(response);
                     history.pushState(null, null, "/spa2?p=home");
+                    if (obj != undefined) 
+                        SliderPromotion();
                     if (cUser == null) {
                         $('#afterlogin_mobile').show();
                         $('#beforelogin_mobile').hide();
 
                     } else {
+                        WalletBalance();
+                        
                         $('#afterlogin_mobile').hide();
                         $('#beforelogin_mobile').show();
                         //$('#afterlogin_SPA').hide();
@@ -182,6 +186,7 @@
                 }
             });
         }
+        
         function loadPagePromotions() {
             $.ajax({
                 url: '/spa2/promotions',
@@ -195,6 +200,7 @@
                 }
             });
         }
+        
         function loadPageContactus() {
             $.ajax({
                 url: '/spa2/contactus',
@@ -208,6 +214,7 @@
                 }
             });
         }
+        
         function loadPageAbout() {
             $.ajax({
                 url: '/spa2/about',
@@ -222,6 +229,7 @@
                 }
             });
         }
+        
         function loadPageAccount() {
             $.ajax({
                 url: '/spa2/account',
@@ -237,6 +245,7 @@
                 }
             });
         }
+        
         function loadPagedeposit() {
             $.ajax({
                 url: '/spa2/deposit',
@@ -252,6 +261,7 @@
                 }
             });
         }
+        
         function loadPagedownload(id) {
 
             var url = '/spa2/download'
@@ -271,6 +281,7 @@
                 }
             });
         }
+        
         function loadPageForgetpassword() {
             $.ajax({
                 url: '/spa2/forgetpassword',
@@ -284,6 +295,7 @@
                 }
             });
         }
+        
         function loadPageGame() {
             $.ajax({
                 url: '/spa2/Game',
@@ -295,6 +307,7 @@
                 }
             });
         }
+        
         function loadPageHistory() {
             $.ajax({
                 url: '/spa2/history',
@@ -308,6 +321,7 @@
                 }
             });
         }
+        
         function loadPageJokerdownload() {
             $.ajax({
                 url: '/spa2/jokerdownload',
@@ -321,6 +335,7 @@
                 }
             });
         }
+        
         function loadPageLogin() {
             $.ajax({
                 url: '/spa2/login',
@@ -334,6 +349,7 @@
                 }
             });
         }
+        
         function loadPagePragmaticGame() {
             $.ajax({
                 url: '/spa2/PragmaticGame',
@@ -345,6 +361,7 @@
                 }
             });
         }
+        
         function loadPageRegister() {
             $.ajax({
                 url: '/spa2/register',
@@ -358,6 +375,7 @@
                 }
             });
         }
+        
         function loadPageTermandCondtion() {
             $.ajax({
                 url: '/spa2/TermandCondtion',
@@ -372,6 +390,7 @@
                 }
             });
         }
+        
         function loadPageTransfer() {
             $.ajax({
                 url: '/spa2/transfer',
@@ -386,6 +405,7 @@
                 }
             });
         }
+        
         function loadPageVerifiedOtp() {
             $.ajax({
                 url: '/spa2/VerifiedOtp',
@@ -398,6 +418,7 @@
                 }
             });
         }
+
         function loadPageWithdraw() {
             $.ajax({
                 url: '/spa2/withdraw',

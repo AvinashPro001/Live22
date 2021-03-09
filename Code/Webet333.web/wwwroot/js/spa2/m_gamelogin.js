@@ -5,7 +5,7 @@ $(document).ready(function () {
     var path = window.location.href.toLowerCase();
     //if (!path.includes('mobile/game'))
 
-    if (path.includes('mobile/home')) {
+    if (path.includes('?p=home')) {
         Walletdate();
         GameInMaintenance(0);
         WalletSignalR();
