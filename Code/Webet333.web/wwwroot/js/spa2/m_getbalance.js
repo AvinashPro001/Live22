@@ -327,13 +327,13 @@ async function MainWalletBalance() {
         balance = mainwallet.data.filter(x => x.walletName == "Main Wallet");
         MainWallet = numberWithCommas(parseFloat(balance[0].amount).toFixed(2));
         document.getElementById("ddlmainWallet").innerHTML = MainWallet;
-        if (location.href.toLowerCase().includes("spa2/index") || location.href.toLowerCase().includes("spa2/transfer") || location.href.toLowerCase().includes("mobile/withdraw"))
+        if (location.href.toLowerCase().includes("?p=home") || location.href.toLowerCase().includes("?p=transfer") || location.href.toLowerCase().includes("?p=withdraw"))
             document.getElementById("menuMainWallet").innerHTML = MainWallet;
     }
     catch (ex) {
         MainWallet = "0.0";
         document.getElementById("ddlmainWallet").innerHTML = "0.0";
-        if (location.href.toLowerCase().includes("mobile/home") || location.href.toLowerCase().includes("mobile/transfer") || location.href.toLowerCase().includes("mobile/withdraw"))
+        if (location.href.toLowerCase().includes("?p=home") || location.href.toLowerCase().includes("?p=transfer") || location.href.toLowerCase().includes("?p=withdraw"))
             document.getElementById("menuMainWallet").innerHTML = "0.0";
     }
 }
@@ -346,13 +346,13 @@ async function Kiss918WalletBalance(Username) {
         var kissbalance = await GameBalancePostMethod(apiEndPoints.kiss918Balance, model);
         _918KissWallet = numberWithCommas(parseFloat(kissbalance.data.balance).toFixed(2));
         document.getElementById("ddl918KissWallet").innerHTML = _918KissWallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("918KissWallet").innerHTML = _918KissWallet;
     }
     catch (ex) {
         _918KissWallet = "N/A";
         document.getElementById("ddl918KissWallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("918KissWallet").innerHTML = "N/A";
     }
 }
@@ -365,7 +365,7 @@ async function AgWalletBalance(Username) {
         var agbalance = await GameBalancePostMethod(apiEndPoints.agBalance, model);
         AGWallet = numberWithCommas(parseFloat(agbalance.data.balance).toFixed(2));
         document.getElementById("ddlAGWallet").innerHTML = AGWallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("AGWallet").innerHTML = AGWallet;
         if (AGWallet == 0 && agbalance.data.previousBalance > 0 && AGTrigger == false)
             StartTimerGameBalanceAPI("AG");
@@ -373,7 +373,7 @@ async function AgWalletBalance(Username) {
     catch (ex) {
         AGWallet = "N/A";
         document.getElementById("ddlAGWallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("AGWallet").innerHTML = "N/A";
     }
 }
@@ -386,7 +386,7 @@ async function PlaytechWalletBalance(Username) {
         var playtechbalance = await GameBalancePostMethod(apiEndPoints.playtechBalance, model);
         PlayTechWallet = numberWithCommas(parseFloat(playtechbalance.data.balance).toFixed(2));
         document.getElementById("ddlPlaytechWallet").innerHTML = PlayTechWallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("PlaytechWallet").innerHTML = PlayTechWallet;
         if (PlayTechWallet == 0 && playtechbalance.data.previousBalance > 0 && PlaytechTrigger == false)
             StartTimerGameBalanceAPI("Playtech");
@@ -394,7 +394,7 @@ async function PlaytechWalletBalance(Username) {
     catch (ex) {
         PlayTechWallet = "N/A";
         document.getElementById("ddlPlaytechWallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("PlaytechWallet").innerHTML = "N/A";
     }
 }
@@ -407,7 +407,7 @@ async function M8WalletBalance(Username) {
         var M8balance = await GameBalancePostMethod(apiEndPoints.m8Balance, model);
         M8Wallet = numberWithCommas(parseFloat(M8balance.data.balance).toFixed(2));
         document.getElementById("ddlM8Wallet").innerHTML = M8Wallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("M8Wallet").innerHTML = M8Wallet;
         if (M8Wallet == 0 && M8balance.data.previousBalance > 0 && M8Trigger == false)
             StartTimerGameBalanceAPI("M8");
@@ -415,7 +415,7 @@ async function M8WalletBalance(Username) {
     catch (ex) {
         M8Wallet = "N/A";
         document.getElementById("ddlM8Wallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("M8Wallet").innerHTML = "N/A";
     }
 }
@@ -429,7 +429,7 @@ async function MaxbetWalletBalance(Username) {
 
         MaxBetWallet = numberWithCommas(parseFloat(Maxbetbalance.data.balance).toFixed(2));
         document.getElementById("ddlMaxBetWallet").innerHTML = MaxBetWallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("MaxBetWallet").innerHTML = MaxBetWallet;
         if (MaxBetWallet == 0 && Maxbetbalance.data.previousBalance > 0 && MaxbetTrigger == false)
             StartTimerGameBalanceAPI("MaxBet");
@@ -437,7 +437,7 @@ async function MaxbetWalletBalance(Username) {
     catch (ex) {
         MaxBetWallet = "N/A";
         document.getElementById("ddlMaxBetWallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("MaxBetWallet").innerHTML = "N/A";
     }
 }
@@ -451,13 +451,13 @@ async function Mega888WalletBalance(Username) {
 
         Mega888Wallet = numberWithCommas(parseFloat(Mega888balance.data.balance).toFixed(2));
         document.getElementById("ddlMega888Wallet").innerHTML = Mega888Wallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("Mega888Wallet").innerHTML = Mega888Wallet;
     }
     catch (ex) {
         Mega888Wallet = "N/A";
         document.getElementById("ddlMega888Wallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("Mega888Wallet").innerHTML = "N/A";
     }
 }
@@ -471,13 +471,13 @@ async function JokerWalletBalance(Username) {
 
         JokerWallet = numberWithCommas(parseFloat(jokerbalance.data.balance).toFixed(2));
         document.getElementById("ddlJokerWallet").innerHTML = JokerWallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("JokerWallet").innerHTML = JokerWallet;
     }
     catch (ex) {
         JokerWallet = "N/A";
         document.getElementById("ddlJokerWallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("JokerWallet").innerHTML = "N/A";
     }
 }
@@ -490,7 +490,7 @@ async function DGWalletBalance(Username) {
         var dgbalance = await GameBalancePostMethod(apiEndPoints.dgBalance, model);
         DgWallet = numberWithCommas(parseFloat(dgbalance.data.balance).toFixed(2));
         document.getElementById("ddlDgWallet").innerHTML = DgWallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("DGWallet").innerHTML = DgWallet;
         if (DgWallet == 0 && dgbalance.data.previousBalance > 0 && DGTrigger == false)
             StartTimerGameBalanceAPI("DG");
@@ -498,7 +498,7 @@ async function DGWalletBalance(Username) {
     catch (ex) {
         DgWallet = "N/A";
         document.getElementById("ddlDgWallet").innerHTML = "N/A"
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("DGWallet").innerHTML = "N/A"
     }
 }
@@ -511,7 +511,7 @@ async function SexyWalletBalance(Username) {
         var sexybalance = await GameBalancePostMethod(apiEndPoints.sexyBalance, model);
         sexyWallet = numberWithCommas(parseFloat(sexybalance.data.balance).toFixed(2));
         document.getElementById("ddlSexyWallet").innerHTML = sexyWallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("SexyWallet").innerHTML = sexyWallet;
         if (sexyWallet == 0 && sexybalance.data.previousBalance > 0 && SexyTrigger == false)
             StartTimerGameBalanceAPI("Sexy");
@@ -519,7 +519,7 @@ async function SexyWalletBalance(Username) {
     catch (ex) {
         sexyWallet = "N/A";
         document.getElementById("ddlSexyWallet").innerHTML = "N/A"
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("SexyWallet").innerHTML = "N/A"
     }
 }
@@ -532,7 +532,7 @@ async function SAWalletBalance(Username) {
         var sabalance = await GameBalancePostMethod(apiEndPoints.saBalance, model);
         saWallet = numberWithCommas(parseFloat(sabalance.data.balance).toFixed(2));
         document.getElementById("ddlSAWallet").innerHTML = saWallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("SAWallet").innerHTML = saWallet;
         if (saWallet == 0 && sabalance.data.previousBalance > 0 && SATrigger == false)
             StartTimerGameBalanceAPI("SA");
@@ -540,7 +540,7 @@ async function SAWalletBalance(Username) {
     catch (ex) {
         saWallet = "N/A";
         document.getElementById("ddlSAWallet").innerHTML = "N/A"
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("SAWallet").innerHTML = "N/A"
     }
 }
@@ -553,14 +553,14 @@ async function Pussy888WalletBalance(Username) {
         var Pussy888balance = await GameBalancePostMethod(apiEndPoints.Pussy888Balance, model);
         Pussy888Wallet = numberWithCommas(parseFloat(Pussy888balance.data.balance).toFixed(2));
         document.getElementById("ddlPussy888Wallet").innerHTML = Pussy888Wallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("Pussy888Wallet").innerHTML = Pussy888Wallet;
 
     }
     catch (ex) {
         Pussy888Wallet = "N/A";
         document.getElementById("ddlPussy888Wallet").innerHTML = "N/A"
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("Pussy888Wallet").innerHTML = "N/A"
     }
 }
@@ -574,7 +574,7 @@ async function AllBetWalletBalance(Username) {
         var allBetBalance = await GameBalancePostMethod(apiEndPoints.AllBetBalance, model);
         AllBetWallet = numberWithCommas(parseFloat(allBetBalance.data.balance).toFixed(2));
         document.getElementById("ddlAllbetWallet").innerHTML = AllBetWallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("AllBetWallet").innerHTML = AllBetWallet;
         if (AllBetWallet == 0 && allBetBalance.data.previousBalance > 0 && AllbetTrigger == false)
             StartTimerGameBalanceAPI("AllBet");
@@ -582,7 +582,7 @@ async function AllBetWalletBalance(Username) {
     catch (ex) {
         AllBetWallet = "N/A";
         document.getElementById("ddlAllbetWallet").innerHTML = "N/A"
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("AllBetWallet").innerHTML = "N/A"
     }
 }
@@ -595,7 +595,7 @@ async function WMWalletBalance(Username) {
         var WMBalance = await GameBalancePostMethod(apiEndPoints.WMBalance, model);
         WMWallet = numberWithCommas(parseFloat(WMBalance.data.balance).toFixed(2));
         document.getElementById("ddlWMWallet").innerHTML = WMWallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("WMWallet").innerHTML = WMWallet;
         if (WMWallet == 0 && WMBalance.data.previousBalance > 0 && AllbetTrigger == false)
             StartTimerGameBalanceAPI("WM");
@@ -603,7 +603,7 @@ async function WMWalletBalance(Username) {
     catch (ex) {
         WMWallet = "N/A";
         document.getElementById("ddlWMWallet").innerHTML = "N/A"
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("WMWallet").innerHTML = "N/A"
     }
 }
@@ -617,14 +617,14 @@ async function PragmaticWalletBalance(Username) {
 
         PragmaticWallet = numberWithCommas(parseFloat(Pragmaticbalance.data.balance).toFixed(2));
         document.getElementById("ddlPragmaticWallet").innerHTML = PragmaticWallet;
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("PragmaticWallet").innerHTML = PragmaticWallet;
 
     }
     catch (ex) {
         PragmaticWallet = "N/A";
         document.getElementById("ddlPragmaticWallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("mobile/transfer"))
+        if (location.href.toLowerCase().includes("?p=transfer"))
             document.getElementById("PragmaticWallet").innerHTML = "N/A";
     }
 }

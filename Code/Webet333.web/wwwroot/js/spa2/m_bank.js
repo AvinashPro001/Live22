@@ -30,7 +30,7 @@ async function UserBankDetails() {
 
 //#region Withdraw Username
 async function WithdrawUsernameSet() {
-    if (location.href.toLowerCase().includes("mobile/withdraw"))
+    if (location.href.toLowerCase().includes("?p=withdraw"))
         if (UserAccountName != null && UserAccountName != undefined && UserAccountName != "") {
             //document.getElementById("lbl_accountHolder").disabled = true;
             //document.getElementById("lbl_accountHolder").value = UserAccountName;

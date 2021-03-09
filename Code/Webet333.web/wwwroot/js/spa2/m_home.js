@@ -10,7 +10,7 @@ $(document).ready(function () {
         //VIPBanner();
     }
     
-    if (window.location.href.toLowerCase().includes("spa2/index")) {
+    if (window.location.href.toLowerCase().includes("?p=home")) {
         SliderPromotion();
     }
 
@@ -37,8 +37,8 @@ function CheckUserVerified() {
         var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
         if (resUserData.data.mobilenoConfirmed == false) {
             var url = window.location.href.toLowerCase();
-            if (!url.includes("mobile/verifiedotp"))
-                window.location = "../mobile/VerifiedOtp";
+            if (!url.includes("?p=verifiedotp"))
+                loadPageVerifiedOtp();
         }
     }
     catch(e){ }
@@ -46,7 +46,7 @@ function CheckUserVerified() {
 
 async function SliderPromotion() {
     var url = window.location.href.toLowerCase();
-    if (url.includes("spa2/index")) {
+    if (url.includes("?p=home")) {
         var model = {
             ismobile: true,
             ismain: true
@@ -54,7 +54,6 @@ async function SliderPromotion() {
         var resPanel = await PostMethod(apiEndPoints.promotionsList, model);
         if (resPanel !== null && resPanel !== undefined) {
             var panelData = resPanel.data;
-            //var panel = document.getElementsByClassName('slick-track');
             var panel;
             if (GetLocalStorage('currentUser') !== null)
                 panel = document.getElementById('mobilePromotionSliderLogin');
@@ -64,7 +63,6 @@ async function SliderPromotion() {
             if (panel !== null) {
                 for (i = 0; i < panelData.length; i++) {
                     panel.innerHTML +=
-                        //'<a href = "/Mobile/promotions"><div class="promotion-bg" style="background-image: url(' + panelData[i].banner + ');" ></div></a>';
                         '<div class="promotion-slide-hero-banner" ><a href="#"> <img src="' + panelData[i].banner+'" class="full-img"></a></div>'
                 }
 
@@ -72,7 +70,6 @@ async function SliderPromotion() {
                     document.getElementById("mobilePromotionSliderLogin").className = "login-top-slider";
                 else
                     document.getElementById("mobilePromotionSlider").className = "login-top-slider";
-                //document.getElementById("mobilePromotionSlider").className = "login-top-slider";
                 slider();
             }
         }
@@ -334,7 +331,7 @@ async function promotionList() {
         if (x < 600)
             height = "150px";
         for (i = 0; i < panelData.length; i++) {
-            description.innerHTML += '<div class="promotion-details-full-page" id="' + panelData[i].id + '"><div class="container promo-inner"> <div class="info-form text-center"><div class="row" ><div class="col-xs-2"><div class="back-btn"><a onclick="myFunction(\'' + panelData[i].id + '\')" rel="prefetch"><img  class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div></div><div class="col-xs-8"><figure><a href="/Mobile/home"><img class="logo" src="../images/webet-main-logo.png" alt="WEBET 333.com"></a></figure></div></div></div></div><div class="promotion-details-header" style="background-color: #232323;color: white;text-align: center;"><span class="lang promotion-details-name ">' + panelData[i].title + '</span></div><div class="promotion-margin-top" style="padding-bottom:100px;">' + panelData[i].description + '<div class="padding-Promotion-bottom"></div></div></div>';
+            description.innerHTML += '<div class="promotion-details-full-page" id="' + panelData[i].id + '"><div class="container promo-inner"> <div class="info-form text-center"><div class="row" ><div class="col-xs-2"><div class="back-btn"><a onclick="myFunction(\'' + panelData[i].id + '\')" rel="prefetch"><img  class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div></div><div class="col-xs-8"><figure><a onclick="loadPageHome({backFrom:\'promotion\'})"><img class="logo" src="../images/webet-main-logo.png" alt="WEBET 333.com"></a></figure></div></div></div></div><div class="promotion-details-header" style="background-color: #232323;color: white;text-align: center;"><span class="lang promotion-details-name ">' + panelData[i].title + '</span></div><div class="promotion-margin-top" style="padding-bottom:100px;">' + panelData[i].description + '<div class="padding-Promotion-bottom"></div></div></div>';
         }
 
         for (i = 0; i < panelData.length; i++) {

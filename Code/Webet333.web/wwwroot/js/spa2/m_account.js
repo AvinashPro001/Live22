@@ -39,15 +39,12 @@ async function DoLogin() {
         try {
             var resUserDataMobile = await GetMethod(apiEndPoints.getProfile);
             if (resUserDataMobile.data.mobilenoConfirmed)
-                //window.location = "../SPA2/";
                 loadPageHome({ backFrom:'login'});
             else
                 loadPageVerifiedOtp();
-                //window.location = "../SPA2/VerifiedOtp";
 
             sessionStorage.setItem('UserDetails', enc(JSON.stringify(resUserDataMobile)));
             localStorage.setItem('currentUserName', resUserDataMobile.data.username);
-            //window.location = "../Mobile/home";
 
             remember_me();
         }
@@ -383,7 +380,6 @@ async function DoRegister() {
                 } catch (e) {}
                 localStorage.setItem('currentUserName', model.userName);
                 localStorage.setItem('currentUserData', enc(model.password));
-                //window.location.href = "../Mobile/VerifiedOtp";
                 loadPageVerifiedOtp();
             }
         }
@@ -413,7 +409,6 @@ async function logoutMain(i) {
         if (i === 1) {
             getLanguage();
             localStorage.clear();
-            //window.location = '../../Mobile/home';
             loadPageHome({ backFrom: 'login' });
         } else {
             getLanguage();
@@ -451,7 +446,6 @@ async function logoutMain(i) {
         SetLocalStorage('language', language);
         if (i === 1) {
             getLanguage();
-            //window.location = '../../Mobile/home';
             loadPageHome({ backFrom: 'login' });
         } else {
             getLanguage();

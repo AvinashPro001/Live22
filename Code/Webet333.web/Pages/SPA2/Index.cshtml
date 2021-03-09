@@ -252,9 +252,15 @@
                 }
             });
         }
-        function loadPagedownload() {
+        function loadPagedownload(id) {
+
+            var url = '/spa2/download'
+            if (id != undefined) {
+                url = '/spa2/download?id=' + id
+            }
+
             $.ajax({
-                url: '/spa2/download',
+                url: url,
                 type: "Get",
                 dataType: "text",
                 cache: true,

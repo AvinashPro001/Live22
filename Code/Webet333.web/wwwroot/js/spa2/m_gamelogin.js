@@ -689,8 +689,8 @@ async function GameLoginMobile(gamename) {
 
     if (resUserData.data.mobilenoConfirmed == false) {
         var url = window.location.href.toLowerCase();
-        if (!url.includes("mobile/verifiedotp"))
-            window.location = "../mobile/VerifiedOtp";
+        if (!url.includes("?p=verifiedotp"))
+            loadPageVerifiedOtp();
     }
 
     if (GetLocalStorage('currentUser') !== null) {
@@ -893,10 +893,10 @@ async function GameLoginMobile(gamename) {
                         apiResponse: resultJoker
                     };
                     var resJoker = await PostMethod(apiEndPoints.registerJoker, modelJoker);
-                    location.href = '/Mobile/download?id=JokerDownloadTab';
+                    loadPagedownload("JokerDownloadTab");
                 }
                 else {
-                    location.href = '/Mobile/download?id=JokerDownloadTab';
+                    loadPagedownload("JokerDownloadTab");
                 }
                 break;
             case 'Mega888':
@@ -910,12 +910,12 @@ async function GameLoginMobile(gamename) {
 
                     }
                     var res = await PostMethod(apiEndPoints.mega888Register, userMegaa88Model);
-                    if (res !== undefined || res !== null) {
-                        location.href = '/Mobile/download?id=MegaDownloadTab';
+                    if (res !== undefined || res !== null) {  
+                        loadPagedownload("MegaDownloadTab");
                     }
                 }
                 else {
-                    location.href = '/Mobile/download?id=MegaDownloadTab';
+                    loadPagedownload("MegaDownloadTab");
                 }
                 break;
             case 'DG':
@@ -1050,7 +1050,8 @@ async function GameLoginMobile(gamename) {
                     }
                 }
                 else {
-                    window.open("../Mobile/PragmaticGame", "_blank")
+                    //window.open("../Mobile/PragmaticGame", "_blank")
+                    loadPagePragmaticGame();
                 }
                 break;
         }
