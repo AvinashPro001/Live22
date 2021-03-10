@@ -24,7 +24,6 @@ namespace Webet333.models.Response.TransferMoney
         public string Pussy888Username { get; set; }
         public string AllBetUsername { get; set; }
         public string WMUsername { get; set; }
-
         public string PragmaticUsername { get; set; }
     }
 }

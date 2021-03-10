@@ -23,6 +23,7 @@ using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
 using Webet333.api.Helpers.SexyBaccarat;
 using Webet333.files.interfaces;
+using Webet333.logs;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
@@ -39,6 +40,7 @@ using Webet333.models.Response.Game.Joker;
 using Webet333.models.Response.Game.Kiss918;
 using Webet333.models.Response.Game.Pussy888;
 using Webet333.models.Response.Game.SexyBaccarat;
+using Webet333.models.Response.TransferMoney;
 using Webet333.queue;
 
 namespace Webet333.api.Controllers
@@ -50,14 +52,17 @@ namespace Webet333.api.Controllers
 
         #region Global variable and Constructor
 
+        protected ApiLogsManager LogManager { get; set; }
+
         private SerialQueue Queue { get; set; }
 
         private static readonly HttpClient client = new HttpClient();
 
         private IHostingEnvironment _hostingEnvironment;
 
-        public GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, SerialQueue queue, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
+        public GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, SerialQueue queue, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, ApiLogsManager LogManager) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
+            this.LogManager = LogManager;
             this.Queue = queue;
             this.Localizer = Localizer;
             _hostingEnvironment = environment;
@@ -2405,198 +2410,122 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.BalacneInWallet)]
         public async Task<IActionResult> BalacneInWallet([FromBody] AllInWalletRequest request)
         {
+       
             if (!ModelState.IsValid) return BadResponse(ModelState);
             var Role = GetUserRole(User);
             if (Role == RoleConst.Users)
                 request.UserId = GetUserId(User).ToString();
+            else
+                if (String.IsNullOrEmpty(request.UserId))
+                return BadResponse("error_invalid_modelstate");
 
-            string kiss918UserName,
-                mega888LoginId,
-                Pussy888Username,
-                AGUsername,
-                PlaytechUsername,
-                DGUsername,
-                SAUsername,
-                SexyUsername,
-                JokerUsername,
-                MaxbetVendorMemberId,
-                AllbetUsername,
-                WMUsername,
-                PragmaticUsername,
-                M8Username;
-
-            List<GameSupport> gameSupport;
-            decimal MainWalletAmount;
-            Guid MainWalletId, ToWalletId;
-            bool WalletMaintenance;
+            UserDetailsTransferResponse userDetails;
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.UserId, request.WalletName);
+                userDetails = new UserDetailsTransferResponse() { 
+                    AGUserName= user.AGGamePrefix + user.Username,
+                    AllBetUsername= user.AllBetGamePrefix + user.UserId,
+                    DGUsername = user.DGGamePrefix + user.Username,
+                    JokerUserName = user.JokerGamePrefix + user.Username,
+                    M8UserName = user.M8GamePrefix + user.Username,
+                    MaxBetUsername = user.VendorMemberId,
+                    MegaUsername = user.Mega888LoginId,
+                    _918KissUserName = user.Username918,
+                    PlaytechUserName = user.Mega888LoginId,
+                    PragmaticUsername = user.PragmaticGamePrefix + user.UserId,
+                    Pussy888Username = user.Pussy888Username,
+                    SAUsername = user.SAGamePrefix + user.Username,
+                    SexyUsername = user.SexyGamePrefix + user.Username,
+                    WMUsername = user.WMGamePrefix + user.UserId,
 
-                gameSupport = JsonConvert.DeserializeObject<List<GameSupport>>(user.GameSupport);
-
-                kiss918UserName = user.Username918;
-                mega888LoginId = user.Mega888LoginId;
-                AGUsername = user.AGGamePrefix + user.Username;
-                PlaytechUsername = user.PlaytechGamePrefix + user.Username;
-                DGUsername = user.DGGamePrefix + user.Username;
-                SAUsername = user.SAGamePrefix + user.Username;
-                SexyUsername = user.SexyGamePrefix + user.Username;
-                JokerUsername = user.JokerGamePrefix + user.Username;
-                M8Username = user.M8GamePrefix + user.Username;
-                AllbetUsername = user.AllBetGamePrefix + user.UserId;
-                MaxbetVendorMemberId = user.VendorMemberId;
-                Pussy888Username = user.Pussy888Username;
-                WMUsername = user.WMGamePrefix + user.UserId;
-                PragmaticUsername = user.PragmaticGamePrefix + user.UserId;
-
-                MainWalletAmount = (decimal)user.MainWalletAmount;
-                MainWalletId = new Guid(user.MainWalletId);
-                ToWalletId = new Guid(user.ToWalletId);
-                WalletMaintenance = (bool)user.ToWalletMaintenance;
+                    FromWalletIsMaintenance =false,
+                    FromWalletName = "Main Wallet",
+                    MainWalletBalance = (decimal)user.MainWalletAmount,
+                    ToWalletIsMaintenance = (bool)user.ToWalletMaintenance,
+                    ToWalletName =request.WalletName
+                };
+                request.ToWalletId = user.ToWalletId;
+                request.FromWalletId = user.MainWalletId;
+                request.Amount = (decimal)user.MainWalletAmount;
             }
 
-            using (var game_helper = new GameHelpers(Connection))
+            var responseId = await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Amount = request.Amount.ToString(), UserId = request.UserId, WalletId = request.ToWalletId, Request = JsonConvert.SerializeObject(request) });
+            var Id = responseId.ID.ToString();
+
+
+            if (userDetails.FromWalletIsMaintenance == true)
             {
-                //var walletInfo = game_helper.GetAllWalletBalance(StoredProcConsts.User.GetWalletBalance, request.UserId).Result;
-                //
-                //var MainWalletAmount = walletInfo.SingleOrDefault(x => x.WalletName == "Main Wallet").Amount;
-                //var MainWalletId = walletInfo.SingleOrDefault(x => x.WalletName == "Main Wallet").WalletId;
-                //var ToWalletId = walletInfo.SingleOrDefault(x => x.WalletName == request.WalletName).WalletId;
-                //
-                //bool WalletMaintenance = walletInfo.SingleOrDefault(x => x.WalletName == request.WalletName).isMaintenance;
+                await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_game_maintenance"].Value });
+                return BadResponse("error_game_maintenance");
+            }
 
-                if (WalletMaintenance)
-                    return BadResponse("error_game_maintenance");
+            if (userDetails.ToWalletIsMaintenance == true)
+            {
+                await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_game_maintenance"].Value });
+                return BadResponse("error_game_maintenance");
+            }
 
-                if (MainWalletAmount == 0 || MainWalletAmount < 0)
-                    return OkResponse();
-
-                bool updateMainWallet = false;
-
-                if (request.WalletName == "918Kiss Wallet")
+            if (userDetails.FromWalletName == "Main Wallet")
+                if (userDetails.MainWalletBalance < request.Amount)
                 {
-                    if (gameSupport.Count > 0 && !gameSupport[0].Is918Kiss) return BadResponse("error_promotion_not_supported_game");
-                    dynamic result918Kiss = JObject.Parse(await game_helper.Kiss918DepsoitWithdrawMehtod(kiss918UserName, MainWalletAmount));
-                    updateMainWallet = result918Kiss.success == true;
+                    await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_insufficient_balance"].Value });
+                    return BadResponse("error_insufficient_balance");
                 }
 
-                if (request.WalletName == "MaxBet Wallet")
+            using (var transferMoney_helper = new TransferMoneyHelpers(Connection, Localizer))
+            {
+                transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, true);
+                //Withdraw From Wallet
+                var WithdrawResponse = await transferMoney_helper.WithdrawFromWallet(userDetails, userDetails.FromWalletName, request.Amount, request.UserId.ToString(), _hostingEnvironment);
+                if (string.IsNullOrEmpty(WithdrawResponse.ErrorMessage) && string.IsNullOrEmpty(WithdrawResponse.GameName) && string.IsNullOrEmpty(WithdrawResponse.GameResponse))
                 {
-                    if (gameSupport.Count > 0 && !gameSupport[0].IsMaxbet) return BadResponse("error_promotion_not_supported_game");
-                    var resultMaxBet = await MaxBetGameHelper.CallMaxbetDepsoitWithdrawAPI(MaxbetVendorMemberId, MainWalletAmount, 1);
-                    updateMainWallet = resultMaxBet.ErrorCode == 0 ? true : false;
-                }
-
-                if (request.WalletName == "Mega888 Wallet")
-                {
-                    if (gameSupport.Count > 0 && !gameSupport[0].IsMega888) return BadResponse("error_promotion_not_supported_game");
-                    var resultMega888 = await Mega888GameHelpers.CallWithdrawDepositAPI(mega888LoginId, MainWalletAmount);
-                    updateMainWallet = resultMega888.error == null ? true : false;
-                }
-
-                if (request.WalletName == "Joker Wallet")
-                {
-                    if (gameSupport.Count > 0 && !gameSupport[0].IsJoker) return BadResponse("error_promotion_not_supported_game");
-                    dynamic resultJoker = JObject.Parse(await game_helper.JokerDepsoitWithdrawMethod(JokerUsername, MainWalletAmount));
-                    updateMainWallet = resultJoker.Message == null ? true : false;
-                }
-
-                if (request.WalletName == "PlayTech Wallet")
-                {
-                    if (gameSupport.Count > 0 && !gameSupport[0].IsPlaytech) return BadResponse("error_promotion_not_supported_game");
-                    var result = await game_helper.PlaytechDepsoitMehtod(PlaytechUsername, MainWalletAmount, _hostingEnvironment);
-                    dynamic resultPlaytech = JObject.Parse(result);
-                    updateMainWallet = resultPlaytech.result == "Deposit OK" ? true : false;
-                }
-
-                if (request.WalletName == "AG Wallet")
-                {
-                    if (gameSupport.Count > 0 && !gameSupport[0].IsAG) return BadResponse("error_promotion_not_supported_game");
-                    var resultAG = await game_helper.AGDepositWithdrawMethod(AGUsername, MainWalletAmount, GameConst.AG.Deposit);
-                    updateMainWallet = resultAG.error_code == 0 ? true : false;
-                }
-
-                if (request.WalletName == "M8 Wallet")
-                {
-                    if (gameSupport.Count > 0 && !gameSupport[0].IsM8) return BadResponse("error_promotion_not_supported_game");
-                    var resultM8 = XDocument.Parse(await game_helper.M8DepsoitWithdrawMethod(M8Username, MainWalletAmount, GameConst.M8.Deposit));
-                    updateMainWallet = resultM8.Descendants("errcode").Single().Value == "0" ? true : false;
-                }
-
-                if (request.WalletName == "DG Wallet")
-                {
-                    if (gameSupport.Count > 0 && !gameSupport[0].IsDG) return BadResponse("error_promotion_not_supported_game");
-                    var resultDG = await DGGameHelpers.CallWithdrawDepsoitAPI(DGUsername, MainWalletAmount.ToString());
-                    updateMainWallet = resultDG.codeId == 0 ? true : false;
-                }
-
-                if (request.WalletName == "Sexy Wallet")
-                {
-                    if (gameSupport.Count > 0 && !gameSupport[0].IsSexyBaccarat) return BadResponse("error_promotion_not_supported_game");
-                    var resultSexy = await SexyBaccaratGameHelpers.CallDepositAPI(SexyUsername, MainWalletAmount);
-                    updateMainWallet = resultSexy.status == "0000" ? true : false;
-                }
-
-                if (request.WalletName == "SA Wallet")
-                {
-                    if (gameSupport.Count > 0 && !gameSupport[0].IsSA) return BadResponse("error_promotion_not_supported_game");
-                    var resultSA = await SAGameHelpers.CallAPIDeposit(SAUsername, MainWalletAmount);
-                    updateMainWallet = resultSA.Descendants("ErrorMsgId").Single().Value == "0" ? true : false;
-                }
-
-                if (request.WalletName == "Pussy888 Wallet")
-                {
-                    if (gameSupport.Count > 0 && !gameSupport[0].IsPussy888) return BadResponse("error_promotion_not_supported_game");
-                    var resultPussy888 = await Pussy888GameHelpers.CallTransferAPI(Pussy888Username, MainWalletAmount);
-                    updateMainWallet = resultPussy888.code == 0 ? true : false;
-                }
-
-                if (request.WalletName == "AllBet Wallet")
-                {
-                    if (gameSupport.Count > 0 && !gameSupport[0].IsAllBet) return BadResponse("error_promotion_not_supported_game");
-                    var resultAllBet = await AllBetGameHelpers.DepositWithdrawCallAPI(AllbetUsername, 1, MainWalletAmount);
-                    updateMainWallet = resultAllBet.error_code == "OK" ? true : false;
-                }
-
-                if (request.WalletName == "WM Wallet")
-                {
-                    if (gameSupport.Count > 0 && !gameSupport[0].IsWM) return BadResponse("error_promotion_not_supported_game");
-                    var resultWM = await WMGameHelpers.TransferCallAPI(WMUsername, MainWalletAmount);
-                    updateMainWallet = resultWM.errorCode == 0 ? true : false;
-                }
-
-                if (request.WalletName == "Pragmatic Wallet")
-                {
-                    if (gameSupport.Count > 0 && !gameSupport[0].IsPragmatic) return BadResponse("error_promotion_not_supported_game");
-                    var resultPragmatic = await PragmaticGameHelpers.TransferBalance(PragmaticUsername, MainWalletAmount);
-                    updateMainWallet = resultPragmatic.error == "0" ? true : false;
-                }
-
-                if (!updateMainWallet)
-                    return BadResponse("error_transfer_unsucces");
-
-                var transferRequest = new TransferInsertRequest()
-                {
-                    Amount = Convert.ToDouble(MainWalletAmount),
-                    FromWalletId = MainWalletId,
-                    ToWalletId = ToWalletId,
-                    UserId = Guid.Parse(request.UserId)
-                };
-
-                using (var payment_helper = new PaymentHelpers(Connection))
-                {
-                    using (var transferMoney_helper = new TransferMoneyHelpers(Connection, Localizer))
+                    // Deposit From Wallet
+                    var DepositResponse = await transferMoney_helper.DepositInWallet(userDetails, userDetails.ToWalletName, request.Amount, request.UserId.ToString(), _hostingEnvironment);
+                    if (string.IsNullOrEmpty(DepositResponse.ErrorMessage) && string.IsNullOrEmpty(DepositResponse.GameName) && string.IsNullOrEmpty(DepositResponse.GameResponse))
                     {
-                        transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, true);
-                        await payment_helper.MainWalletDepositWithdraw(transferRequest.UserId.ToString(), Convert.ToDecimal(transferRequest.Amount), "Withdraw");
-                        await payment_helper.Transfer(transferRequest, request.UserId, request.UserId, request.UserId);
+                        if (Role == RoleConst.Users)
+                            await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, request.UserId.ToString(), StatusConsts.Approved, request.UserId.ToString());
+                        else
+                            await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, GetUserId(User).ToString(), StatusConsts.Approved, GetUserId(User).ToString());
+
+                        await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["ok_response_success"].Value, FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse), ToWalletResponse = JsonConvert.SerializeObject(DepositResponse) });
+                    }
+                    else
+                    {
+                        var DepositFailedResponse = await transferMoney_helper.DepositInWallet(userDetails, userDetails.FromWalletName, request.Amount, request.UserId.ToString(), _hostingEnvironment);
+                        if (string.IsNullOrEmpty(DepositFailedResponse.ErrorMessage) && string.IsNullOrEmpty(DepositFailedResponse.GameName) && string.IsNullOrEmpty(DepositFailedResponse.GameResponse))
+                        {
+                        }
+                        else
+                        {
+                            //Deposit In Main Wallet and Insert into DB Row 
+                            await transferMoney_helper.DepositInWallet(userDetails, "Main Wallet", request.Amount, request.UserId.ToString(), _hostingEnvironment);
+                            transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
+
+                            await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = "Completed Transaction Is Failed So We Add Money in Main Wallet", FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse), ToWalletResponse = JsonConvert.SerializeObject(DepositResponse) });
+
+                            return BadResponse("Completed Transaction Is Failed So We Add Money in Main Wallet");
+                        }
                         transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
+
+                        await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = DepositResponse.GameName + " Deposit Api Failed \n" + DepositResponse.ErrorMessage, FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse), ToWalletResponse = JsonConvert.SerializeObject(DepositResponse) });
+
+                        return BadResponse(DepositResponse.GameName + " Deposit Api Failed \n" + DepositResponse.ErrorMessage);
                     }
                 }
-                return OkResponse(updateMainWallet);
-            }
+                else
+                {
+                    transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
 
+                    await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = WithdrawResponse.GameName + " Withdraw Api Failed \n" + WithdrawResponse.ErrorMessage, FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse) });
+
+                    return BadResponse(WithdrawResponse.GameName + " Withdraw Api Failed \n " + WithdrawResponse.ErrorMessage);
+                }
+                transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
+
+                return OkResponse();
+            }
         }
 
         #endregion
@@ -3381,7 +3310,7 @@ namespace Webet333.api.Controllers
                 notSave = true;
                 await game_help.JokerPlayerLogInsert(totalRecords);
 
-                return OkResponse(new { totalRecords, startDate, endDate , notSave });
+                return OkResponse(new { totalRecords, startDate, endDate, notSave });
             }
         }
 
