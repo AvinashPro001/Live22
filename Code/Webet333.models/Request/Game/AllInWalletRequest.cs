@@ -16,6 +16,14 @@ namespace Webet333.models.Request.Game
         public string UserId { get; set; }
 
         [JsonProperty(PropertyName = "amount")]
-        public decimal? Amount { get; set; }
+        public decimal Amount { get; set; }
+
+        [JsonIgnore]
+        [JsonProperty(PropertyName = "fromWalletId")]
+        public string FromWalletId { get; set; }
+
+        [JsonIgnore]
+        [JsonProperty(PropertyName = "toWalletId")]
+        public string ToWalletId { get; set; }
     }
 }
