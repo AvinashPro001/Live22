@@ -105,7 +105,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task DeleteOrActiveAdminBankDetail(Guid Id, bool Active = true, bool Deleted = false, string adminId = null, string description = null)
+        public async Task DeleteOrActiveAdminBankDetail(Guid Id, bool Active = true, bool Deleted = false, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -116,8 +116,7 @@ namespace Webet333.api.Helpers
                         Id,
                         Active,
                         Deleted,
-                        adminId,
-                        description
+                        adminId
                     });
             }
         }
@@ -130,7 +129,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task AdminBankDetailsImageUpdate(Guid Id, string Extension, string adminId = null, string descripton = null)
+        public async Task AdminBankDetailsImageUpdate(Guid Id, string Extension, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -140,8 +139,7 @@ namespace Webet333.api.Helpers
                     {
                         Id,
                         Extension,
-                        adminId,
-                        descripton
+                        adminId
                     });
             }
         }
@@ -156,7 +154,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task DeleteOrActiveAnnouncementDetail(Guid Id, bool Active = false, bool Delete = true, string adminId = null, string description = null)
+        public async Task DeleteOrActiveAnnouncementDetail(Guid Id, bool Active = false, bool Delete = true, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -167,8 +165,7 @@ namespace Webet333.api.Helpers
                         Id,
                         Active,
                         Delete,
-                        adminId,
-                        description
+                        adminId
                     });
             }
         }
@@ -183,8 +180,7 @@ namespace Webet333.api.Helpers
                     {
                         request.Text,
                         request.LanguageId,
-                        request.AdminId,
-                        request.Description
+                        request.AdminId
                     });
             }
         }
@@ -200,8 +196,7 @@ namespace Webet333.api.Helpers
                         request.Id,
                         request.Text,
                         request.LanguageId,
-                        request.AdminId,
-                        request.Description
+                        request.AdminId
                     });
             }
         }

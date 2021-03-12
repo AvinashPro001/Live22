@@ -89,8 +89,7 @@ namespace Webet333.api.Helpers
                         AddedBy,
                         PromotionId = request.PromotionId ?? null,
                         VerifiedBy,
-                        Verified,
-                        Description = JsonConvert.SerializeObject(request)
+                        Verified
                     });
 
                 if (result != null)
@@ -99,7 +98,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<int> DepositVerify(string sp_name, string Id, string VerifiedBy = null, string Verified = StatusConsts.Rejected, string AdminRemarks = null, string description = null)
+        public async Task<int> DepositVerify(string sp_name, string Id, string VerifiedBy = null, string Verified = StatusConsts.Rejected, string AdminRemarks = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -110,8 +109,7 @@ namespace Webet333.api.Helpers
                         Id,
                         VerifiedBy,
                         Verified,
-                        AdminRemarks,
-                        description
+                        AdminRemarks
                     });
             }
             return 0;
@@ -163,7 +161,6 @@ namespace Webet333.api.Helpers
                         AddedBy,
                         VerifiedBy,
                         Verified,
-                        Description = JsonConvert.SerializeObject(request)
                     });
             }
             return 0;
@@ -215,8 +212,7 @@ namespace Webet333.api.Helpers
                         request.WalletId,
                         request.Amount,
                         request.AdminRemarks,
-                        request.AdminId,
-                        Description = JsonConvert.SerializeObject(request)
+                        request.AdminId
                     });
             }
             return 0;

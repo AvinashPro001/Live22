@@ -2,7 +2,7 @@
 
 namespace Webet333.models.Request.VIPCategory
 {
-    public class VIPCategoryInsertRequest
+    public class VIPCategoryInsertRequest : BaseAdminLogRequest
     {
         public string depositNormal { get; set; }
         public string depositBrooze { get; set; }
@@ -60,9 +60,5 @@ namespace Webet333.models.Request.VIPCategory
         public string weeklyFreeCreditMinDepositAmountDiamond { get; set; }
 
         public string addPromotionTypeBonus { get; set; }
-        [JsonIgnore]
-        public System.Guid AdminId { get; set; }
-        [JsonIgnore]
-        public string Description { get; set; }
     }
 }

@@ -187,10 +187,8 @@ namespace Webet333.api.Controllers
 
             await CheckUserRole();
 
-            string description = JsonConvert.SerializeObject(request);
-
             using (var payment_help = new PaymentHelpers(Connection))
-                await payment_help.DepositVerify(StoredProcConsts.Payments.Deposit, request.Id.ToString(), GetUserId(User).ToString(), request.Approved, request.AdminRemarks, description: description);
+                await payment_help.DepositVerify(StoredProcConsts.Payments.Deposit, request.Id.ToString(), GetUserId(User).ToString(), request.Approved, request.AdminRemarks);
             return OkResponse();
         }
 
@@ -250,11 +248,9 @@ namespace Webet333.api.Controllers
 
             await CheckUserRole();
 
-            string description = JsonConvert.SerializeObject(request);
-
             using (var payment_help = new PaymentHelpers(Connection))
             {
-                await payment_help.DepositVerify(StoredProcConsts.Payments.Withdrawal, request.Id.ToString(), GetUserId(User).ToString(), request.Approved, request.AdminRemarks, description: description);
+                await payment_help.DepositVerify(StoredProcConsts.Payments.Withdrawal, request.Id.ToString(), GetUserId(User).ToString(), request.Approved, request.AdminRemarks);
                 if (request.Approved == "approved")
                 {
                     var res = await payment_help.GetMobileNumberByWithdrawId(request.Id.ToString());

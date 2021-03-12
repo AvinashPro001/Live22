@@ -793,7 +793,7 @@ namespace Webet333.api.Helpers
         #endregion 
 
         #region Transfer Insert
-        public async Task Transfer(string UserId, string FromWalletId, string ToWalletId, decimal Amount, string AddedBy, string Verified, string VerifiedBy, dynamic request = null)
+        public async Task Transfer(string UserId, string FromWalletId, string ToWalletId, decimal Amount, string AddedBy, string Verified, string VerifiedBy)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -807,8 +807,7 @@ namespace Webet333.api.Helpers
                         Amount,
                         AddedBy,
                         VerifiedBy,
-                        Verified,
-                        Description = JsonConvert.SerializeObject(request)
+                        Verified
                     });
             }
         }

@@ -140,11 +140,10 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             string adminId = GetUserId(User).ToString();
-            string descripton = JsonConvert.SerializeObject(request);
 
             using (var game_helper = new DGGameHelpers(Connection))
             {
-                var result = await game_helper.DGBetLimit(request.BettingLimit, adminId, descripton);
+                var result = await game_helper.DGBetLimit(request.BettingLimit, adminId);
                 return OkResponse(result);
             }
         }

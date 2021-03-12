@@ -308,11 +308,10 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             string adminId = GetUserId(User).ToString();
-            string descripton = JsonConvert.SerializeObject(request);
 
             using (var account_help = new AccountHelpers(Connection))
             {
-                var WalletUpdate = await account_help.WalletMainteanceUpdate(request, adminId, descripton);
+                var WalletUpdate = await account_help.WalletMainteanceUpdate(request, adminId);
                 if (WalletUpdate != null)
                 {
                     await _hubContext.Clients.All.SendAsync("WalletUpdate", new { data = WalletUpdate });
@@ -386,11 +385,10 @@ namespace Webet333.api.Controllers
                 return BadResponse(Localizer["error_empty_keyword"].Value);
 
             var adminId = GetUserId(User).ToString();
-            var description = JsonConvert.SerializeObject(request);
 
             using (var account_help = new AccountHelpers(Connection))
             {
-                var refKeyword = await account_help.ReferenceKeywordInsert(request.keyword, adminId, description);
+                var refKeyword = await account_help.ReferenceKeywordInsert(request.keyword, adminId);
                 return OkResponse(refKeyword);
             }
         }
@@ -407,11 +405,10 @@ namespace Webet333.api.Controllers
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             var adminId = GetUserId(User).ToString();
-            var description = JsonConvert.SerializeObject(request);
 
             using (var account_help = new AccountHelpers(Connection))
             {
-                var refKeyword = await account_help.ReferenceKeywordDelete(request.Id.ToString(), adminId, description);
+                var refKeyword = await account_help.ReferenceKeywordDelete(request.Id.ToString(), adminId);
                 return OkResponse(refKeyword);
             }
         }
@@ -593,13 +590,6 @@ namespace Webet333.api.Controllers
             #region Admin Log
 
             string adminId = GetUserId(User).ToString();
-            var description = new
-            {
-                beforeTransaction = "null",
-                afterTransaction = "null",
-                requestBody = request,
-                other = "SMS Announcement"
-            };
 
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -610,7 +600,7 @@ namespace Webet333.api.Controllers
                         adminId,
                         Action = "Add",
                         Module = "SMS Announcement",
-                        Description = JsonConvert.SerializeObject(description)
+                        Description = $"Send {request.Message} as SMS to users"
                     });
             }
 
@@ -825,11 +815,10 @@ namespace Webet333.api.Controllers
             await ValidateUser(role: RoleConst.Admin);
 
             string adminId = GetUserId(User).ToString();
-            string descripton = JsonConvert.SerializeObject(request);
 
             using (var account_help = new AccountHelpers(Connection))
             {
-                await account_help.GlobalParameterUpdate(request.Value, "VaderPay", adminId, descripton);
+                await account_help.GlobalParameterUpdate(request.Value, "VaderPay", adminId);
                 return OkResponse();
             }
         }
@@ -859,11 +848,10 @@ namespace Webet333.api.Controllers
             await ValidateUser(role: RoleConst.Admin);
 
             string adminId = GetUserId(User).ToString();
-            string descripton = JsonConvert.SerializeObject(request);
 
             using (var account_help = new AccountHelpers(Connection))
             {
-                await account_help.GlobalParameterUpdate(request.Value, request.Name, adminId, descripton);
+                await account_help.GlobalParameterUpdate(request.Value, request.Name, adminId);
                 return OkResponse();
             }
         }
@@ -879,11 +867,10 @@ namespace Webet333.api.Controllers
             await ValidateUser(role: RoleConst.Admin);
 
             string adminId = GetUserId(User).ToString();
-            string descripton = JsonConvert.SerializeObject(request);
 
             using (var account_help = new AccountHelpers(Connection))
             {
-                await account_help.RebateSettingUpdate(request.DateTime, adminId, descripton);
+                await account_help.RebateSettingUpdate(request.DateTime, adminId);
                 return OkResponse();
             }
         }

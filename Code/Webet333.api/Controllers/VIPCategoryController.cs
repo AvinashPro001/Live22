@@ -38,7 +38,6 @@ namespace Webet333.api.Controllers
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             using (var vipCategory_help = new VIPCategoryHelpers(Connection))
             {

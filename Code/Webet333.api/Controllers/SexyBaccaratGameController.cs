@@ -215,7 +215,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             string adminId = GetUserId(User).ToString();
-            string description = JsonConvert.SerializeObject(request);
 
             SexyBaccaratBetlimitResponse bettingLimits;
             using (var account_helper = new AccountHelpers(Connection))
@@ -237,7 +236,7 @@ namespace Webet333.api.Controllers
 
             using (var game_helper = new SexyBaccaratGameHelpers(Connection))
             {
-                var result = await game_helper.SexyBaccaratSetBetLimit(bettingLimits.Sexybcrt.Live.LimitId, adminId, description);
+                var result = await game_helper.SexyBaccaratSetBetLimit(bettingLimits.Sexybcrt.Live.LimitId, adminId);
                 return OkResponse();
             }
         }
