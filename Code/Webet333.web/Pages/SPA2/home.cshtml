@@ -1,6 +1,8 @@
 ﻿@page
 @{ Layout = null; }
 
+<script src="~/js/spa2/m_bank.js"></script>
+
 <div id="success_snackbar">
     <div>
         <span><img class="Image" width="100px" height="100px" src="~/images/success.png" /></span>
@@ -20,7 +22,6 @@
         </span>
     </div>
 </div>
-
 
 <div id="afterlogin_mobile">
     <div class="sidebar">
@@ -281,6 +282,7 @@
     </div>
     <div class="canvas-overlay"></div>
 </div>
+
 <div>
     <span style="display:none;" id="urlSportbook"></span>
     <span style="display:none;" id="AGGame"></span>
@@ -290,6 +292,7 @@
     <span style="display:none;" id="JokerGame"></span>
     <span style="display:none;" id="MaxBetGame"></span>
 </div>
+
 <div id="beforelogin_mobile">
     <div class="sidebar">
         <div class="navbar-collapse" id="myNavbar">
@@ -731,8 +734,6 @@
     </div>
 </div>
 
-
-
 <div class="container">
     <div id="RestoreConfirmation" class="modal fade">
         <div class="modal-dialog mail-width">
@@ -750,7 +751,6 @@
     </div>
 </div>
 
-
 <script type="text/javascript">
     $(document).ready(function () {
         $(".contact-us-btn,.contact-us-btn-footer").click(function () {
@@ -765,20 +765,13 @@
 
 <!--Begin Comm100 Live Chat Code-->
 <script type="text/javascript">
-    var Comm100API = Comm100API || {}; (function (t) {
-        function e(e) {
-            var a = document.createElement("script"),
-                c = document.getElementsByTagName("script")[0];
-            a.type = "text/javascript",
-                a.async = !0, a.src = e + t.site_id,
-                c.parentNode.insertBefore(a, c)
-        } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://chatserver.comm100.com/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://hostedmax.comm100.com/chatserver/livechat.ashx?siteId=") }, 0)
-    })(Comm100API || {})
+    var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 0) })(Comm100API || {})
 
 </script>
 <!--End Comm100 Live Chat Code-->
 <!-- Slider Section End -->
 <!-- Modal For Video -->
+
 <script type="text/javascript">
     $(document).ready(function () {
         $(".open-modal").click();
@@ -795,6 +788,7 @@
 <script src="~/js/jcf/jcf.js"></script>
 <script src="~/js/jcf/jcf.select.js"></script>
 <script src="~/js/jcf/jcf.checkbox.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $(function () {
@@ -803,6 +797,7 @@
     });
 
 </script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         let timerId = setInterval(() => {
@@ -831,7 +826,9 @@
         });
     });
 </script>
+
 <!-- Slider Section End -->
+
 <script>
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
@@ -842,53 +839,24 @@
             $("header").removeClass("sticky-header");
         }
     });
-    //$("html").click(async function (event) {
-    //    if (GetLocalStorage('currentUser') !== null)
-    //        await PostMethod(apiEndPoints.userLastTimeUpdate, {});
-    //});
-    $(document).on('ready', function () {
-        // $(".login-top-slider").slick({
-        //     infinite: true,
-        //     autoplay: true,
-        //     autoplaySpeed: 1000,
-        //     speed: 1000,
-        //     slidesToShow: 1,
-        //     slidesToScroll: 1,
-        //     pauseOnHover: false,
-        //      pauseOnFocus: false,
-        //      adaptiveHeight: true,
-        //      fade: true,
-        //
-        // });
-    });
 
     setTimeout(function () {
         $('#homePagebottom').addClass("active-link");
         $('#homeLoginPagebottom').addClass("active-link");
 
     }, 2000);
-                            //$('#footerWidget').click(function () {
-                            //    $('li').addClass("active");
-                            //    $('li').removeClass("active");
-                            //});
+                     
 </script>
+
 <script>
     function language(value) {
         SetLocalStorage('language', value);
         get();
     }
+
     function get() {
         (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
-        
-        //if (GetLocalStorage('currentUser') === null) {
-        //    document.getElementById('beforelogin_mobile').style.display = 'none';
-        //}
-        if (GetLocalStorage('currentUser') !== null) {
-            //document.getElementById('afterlogin_mobile').style.display = 'none';
-            //WalletBalance();
-        }
-        
-
+   
         document.getElementById("englishbtn").style.background = "";
         document.getElementById("malaybtn").style.background = "";
         document.getElementById("chinesebtn").style.background = "";
@@ -923,8 +891,8 @@
             }
         });
         announcementMobile();
-
     }
+
     setTimeout(() => {
         get();
     }, 200);

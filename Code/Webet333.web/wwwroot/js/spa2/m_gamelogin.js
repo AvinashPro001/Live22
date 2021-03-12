@@ -43,6 +43,7 @@ async function Walletdate() {
 }
 
 async function GameInMaintenance(i) {
+    
     if (i == 0)
         walletData = await GetMethodWithReturn(apiEndPoints.walletSelect);
     for (i = 0; i < walletData.data.length; i++) {
@@ -602,7 +603,7 @@ async function logingGame(gameName) {
             }
         }
         if (gameName != "Pragmatic")
-            window.open("/mobile/Game?gamename=" + gameName);
+            window.open("/spa2/Game?gamename=" + gameName);
         else
             GameLoginMobile("Pragmatic");
     }
@@ -1046,12 +1047,11 @@ async function GameLoginMobile(gamename) {
                     }
                     var res = await PostMethod(apiEndPoints.pragmaticRegister, userRegisterModel);
                     if (res.data.error == "0") {
-                        window.open("../Information/PragmaticGame", "_blank")
+                        window.open("../spa2/PragmaticGame", "_blank")
                     }
                 }
                 else {
-                    //window.open("../Mobile/PragmaticGame", "_blank")
-                    loadPagePragmaticGame();
+                    window.open("../spa2/PragmaticGame", "_blank")
                 }
                 break;
         }

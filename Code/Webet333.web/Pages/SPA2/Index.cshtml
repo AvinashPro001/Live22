@@ -59,6 +59,7 @@
     <script src="~/js/spa2/m_account.js"></script>
     <script src="~/js/spa2/m_gamelogin.js"></script>
     <script src="~/js/spa2/m_getbalance.js"></script>
+    
 
     <script src="~/js/constants/M8Consts.js"></script>
     <script src="~/js/constants/918KissConsts.js"></script>
@@ -69,7 +70,6 @@
     <script src="~/js/constants/SMSConsts.js"></script>
     <script src="~/js/constants/SecurityConsts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
-    @*<script src="https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88" type="text/javascript" charset="utf-8"></script>*@
     <script type="text/javascript">
         $(window).load(function () {
             $(".loadingImage").fadeOut("slow");;
@@ -132,10 +132,66 @@
     <div id="pageResponse">
     </div>
     <script>
+
         setTimeout(() => {
-            loadPageHome();
+            var url_string = window.location;
+            var url = new URL(url_string);
+            url.href = url.href.toLowerCase();
+            var name = url.searchParams.get("p");
+            if (name != null) {
+                switch (name) {
+                    case "home":
+                        loadPageHome();
+                        break;
+                    case "promotions":
+                        loadPagePromotions();
+                        break;
+                    case "contactus":
+                        loadPageContactus();
+                        break;
+                    case "about":
+                        loadPageAbout();
+                        break;
+                    case "account":
+                        loadPageAccount();
+                        break;
+                    case "deposit":
+                        loadPagedeposit()
+                        break;
+                    case "download":
+                        loadPagedownload();
+                        break;
+                    case "forgetpassword":
+                        loadPageForgetpassword()
+                        break;
+                    case "history":
+                        loadPageHistory()
+                        break;
+                    case "login":
+                        loadPageLogin()
+                        break;
+                    case "register":
+                        loadPageRegister()
+                        break;
+                    case "TermandCondtion":
+                        loadPageTermandCondtion()
+                        break;
+                    case "transfer":
+                        loadPageTransfer()
+                        break;
+                    case "VerifiedOtp":
+                        loadPageVerifiedOtp()
+                        break;
+                    case "withdraw":
+                        loadPageWithdraw()
+                        break;
+                }
+            }
+            else {
+                loadPageHome();
+            }
         }, 200);
-        
+
         function loadPageHome(obj) {
             if (obj != undefined) {
                 if (obj.backFrom == "about") {
@@ -156,6 +212,9 @@
                 if (obj.backFrom == "widthraw") {
                     $('body').css('padding-top', '40px');
                 }
+                if (obj.backFrom == "forgetpassword") {
+                    $('body').css('padding-top', '40px');
+                }
             }
 
             $('.content').empty();
@@ -169,25 +228,34 @@
                 success: function (response) {
                     $('#pageResponse').html(response);
                     history.pushState(null, null, "/spa2?p=home");
-                    if (obj != undefined) 
-                        SliderPromotion();
+                    SliderPromotion();
+
+                    if (obj != undefined) {
+                        Walletdate();
+                        GameInMaintenance(0);
+                        WalletSignalR();
+                    }
+
                     if (cUser == null) {
                         $('#afterlogin_mobile').show();
                         $('#beforelogin_mobile').hide();
 
                     } else {
+                        CheckUserVerified()
                         WalletBalance();
-                        
+
                         $('#afterlogin_mobile').hide();
                         $('#beforelogin_mobile').show();
-                        //$('#afterlogin_SPA').hide();
                     }
                     $("html").removeClass("intro");
+
                 }
             });
         }
-        
+
         function loadPagePromotions() {
+            CheckUserVerified()
+            var cUser = GetLocalStorage('currentUser');
             $.ajax({
                 url: '/spa2/promotions',
                 type: "Get",
@@ -197,11 +265,18 @@
                     history.pushState(null, null, "/spa2?p=promotions");
                     $('#pageResponse').html(response);
                     $("html").removeClass("intro");
+
+
+                    if (cUser != null) {
+                        WalletBalance();
+                    }
                 }
             });
         }
-        
+
         function loadPageContactus() {
+            CheckUserVerified()
+            var cUser = GetLocalStorage('currentUser');
             $.ajax({
                 url: '/spa2/contactus',
                 type: "Get",
@@ -211,11 +286,15 @@
                     history.pushState(null, null, "/spa2?p=contactus");
                     $('#pageResponse').html(response);
                     $("html").removeClass("intro");
+                    if (cUser != null) {
+                        WalletBalance();
+                    }
                 }
             });
         }
-        
+
         function loadPageAbout() {
+            CheckUserVerified()
             $.ajax({
                 url: '/spa2/about',
                 type: "Get",
@@ -229,8 +308,10 @@
                 }
             });
         }
-        
+
         function loadPageAccount() {
+            CheckUserVerified()
+            var cUser = GetLocalStorage('currentUser');
             $.ajax({
                 url: '/spa2/account',
                 type: "Get",
@@ -242,11 +323,15 @@
                     history.pushState(null, null, "/spa2?p=account");
                     $('.loadingImage').hide();
                     $("html").removeClass("intro");
+                    if (cUser != null) {
+                        WalletBalance();
+                    }
                 }
             });
         }
-        
+
         function loadPagedeposit() {
+            CheckUserVerified()
             $.ajax({
                 url: '/spa2/deposit',
                 type: "Get",
@@ -261,9 +346,9 @@
                 }
             });
         }
-        
-        function loadPagedownload(id) {
 
+        function loadPagedownload(id) {
+            CheckUserVerified()
             var url = '/spa2/download'
             if (id != undefined) {
                 url = '/spa2/download?id=' + id
@@ -281,7 +366,7 @@
                 }
             });
         }
-        
+
         function loadPageForgetpassword() {
             $.ajax({
                 url: '/spa2/forgetpassword',
@@ -295,7 +380,7 @@
                 }
             });
         }
-        
+
         function loadPageGame() {
             $.ajax({
                 url: '/spa2/Game',
@@ -307,8 +392,9 @@
                 }
             });
         }
-        
+
         function loadPageHistory() {
+            CheckUserVerified()
             $.ajax({
                 url: '/spa2/history',
                 type: "Get",
@@ -321,8 +407,9 @@
                 }
             });
         }
-        
+
         function loadPageJokerdownload() {
+            CheckUserVerified()
             $.ajax({
                 url: '/spa2/jokerdownload',
                 type: "Get",
@@ -335,7 +422,7 @@
                 }
             });
         }
-        
+
         function loadPageLogin() {
             $.ajax({
                 url: '/spa2/login',
@@ -349,7 +436,7 @@
                 }
             });
         }
-        
+
         function loadPagePragmaticGame() {
             $.ajax({
                 url: '/spa2/PragmaticGame',
@@ -361,7 +448,7 @@
                 }
             });
         }
-        
+
         function loadPageRegister() {
             $.ajax({
                 url: '/spa2/register',
@@ -375,7 +462,7 @@
                 }
             });
         }
-        
+
         function loadPageTermandCondtion() {
             $.ajax({
                 url: '/spa2/TermandCondtion',
@@ -390,8 +477,9 @@
                 }
             });
         }
-        
+
         function loadPageTransfer() {
+            CheckUserVerified()
             $.ajax({
                 url: '/spa2/transfer',
                 type: "Get",
@@ -405,7 +493,7 @@
                 }
             });
         }
-        
+
         function loadPageVerifiedOtp() {
             $.ajax({
                 url: '/spa2/VerifiedOtp',
@@ -420,6 +508,7 @@
         }
 
         function loadPageWithdraw() {
+            CheckUserVerified()
             $.ajax({
                 url: '/spa2/withdraw',
                 type: "Get",
@@ -435,9 +524,11 @@
 
         $("html").click(async function (event) {
             if (GetLocalStorage('currentUser') !== null) {
+
                 await PostMethod(apiEndPoints.userLastTimeUpdate, {});
             }
         });
+
     </script>
 
 </body>

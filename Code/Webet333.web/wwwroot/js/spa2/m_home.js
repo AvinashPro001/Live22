@@ -10,9 +10,9 @@ $(document).ready(function () {
         //VIPBanner();
     }
     
-    if (window.location.href.toLowerCase().includes("?p=home")) {
-        SliderPromotion();
-    }
+    //if (window.location.href.toLowerCase().includes("?p=home")) {
+    //    SliderPromotion();
+    //}
 
     navaigateRegister();
     load_em();
@@ -31,6 +31,10 @@ $(document).ready(function () {
 //    catch (e) { }
 //}
 
+
+window.onhashchange = function () { 
+    console.log('location changed!');
+}
 
 function CheckUserVerified() {
     try {
@@ -61,6 +65,8 @@ async function SliderPromotion() {
                 panel = document.getElementById('mobilePromotionSlider');
 
             if (panel !== null) {
+                panel.innerHTML = "";
+
                 for (i = 0; i < panelData.length; i++) {
                     panel.innerHTML +=
                         '<div class="promotion-slide-hero-banner" ><a href="#"> <img src="' + panelData[i].banner+'" class="full-img"></a></div>'
@@ -141,12 +147,7 @@ async function getReference() {
     }
     if (Langauge != null) {
         SetLocalStorage('language', Langauge == "cn" ? "zh-Hans" : (Langauge == "my" ? "ms-MY" : "en-US"));
-        //try {
-        //    history.pushState(null, null, "http://webet333.com/");
-        //}
-        //catch{
-        //    history.pushState(null, null, "http://http://localhost:27100/");
-        //}
+        get();
     }
 }
 

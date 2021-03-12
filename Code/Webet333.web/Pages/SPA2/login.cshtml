@@ -25,170 +25,11 @@
         </div>
     </div>
 
-    <div id="afterlogin_mobile">
-        <div class="sidebar">
-            <div class="navbar-collapse" id="myNavbar">
-                <ul class="nav text-center mob-menu">
-                    <li id="logout"><a onclick="logoutMain(1)"><i class="fa fa-sign-out" aria-hidden="true"></i><p class="lang" key="sidebar_Logout"></p></a></li>
-                    <li id="login"><a onclick="loadPageLogin()" href="javascript:void(0);" rel="prefetch"><i class="fa fa-sign-in" aria-hidden="true"></i><p class="lang" key="sidebar_login"></p></a></li>
-                    <li><a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch"><img src="~/images/images-mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
-                    <li id="downloadpage"><a href="~/Mobile/download?id=918DownloadTab" rel="prefetch"><img src="~/images/images-mobile/download.png" alt="mn-download"><p class="lang" key="sidebar_Download"></p></a></li>
-                    <li><a href="~/Home/home" rel="prefetch"><img src="~/images/images-mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/images-mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
-                    <li><a onclick="loadPageAbout()" href="javascript:void(0);" rel="prefetch"><img src="~/images/images-mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
-                    <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/images-mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
-                    <li id="accountPage"><a onclick="loadPageAccount()" href="javascript:void(0);" rel="prefetch"><img src="~/images/images-mobile/profile.png" alt="Profile"><p class="lang" key="sidebar_Profile"></p></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="main-content" id="navbarhide">
-            <nav class="navbar navbar-default navbar-fixed-top">
-                <div class="navbar-header mob-layout">
-                    <ul>
-                        <li>
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </li>
-                        <li>
-                            <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch" class="navbar-brand"><img class="logo" id="MainLogo" src="~/images//webet-main-logo.png" alt="WEBET 333.com"></a>
-                        </li>
-                        <li id="balanceShow">
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle wallet" type="button" data-toggle="dropdown"><figure><img src="~/images/images-mobile/wallet.png" alt="f-wallet"></figure></i></button>
-                                <ul class="dropdown-menu wallet-dropdown">
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Main Wallet</strong></li>
-                                            <li class="fright" id="ddlmainWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>918Kiss Wallet</strong></li>
-                                            <li class="fright" id="ddl918KissWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>AG Wallet</strong></li>
-                                            <li class="fright" id="ddlAGWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>M8 Wallet</strong></li>
-                                            <li class="fright" id="ddlM8Wallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Joker Wallet</strong></li>
-                                            <li class="fright" id="ddlJokerWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Playtech Wallet</strong></li>
-                                            <li class="fright" id="ddlPlaytechWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>MaxBet Wallet</strong></li>
-                                            <li class="fright" id="ddlMaxBetWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Mega888 Wallet</strong></li>
-                                            <li class="fright" id="ddlMega888Wallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>DG Wallet</strong></li>
-                                            <li class="fright" id="ddlDgWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Sexy B. Wallet</strong></li>
-                                            <li class="fright" id="ddlSexyWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>SA Wallet</strong></li>
-                                            <li class="fright" id="ddlSAWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Pussy888 Wallet</strong></li>
-                                            <li class="fright" id="ddlPussy888Wallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>AllBet Wallet</strong></li>
-                                            <li class="fright" id="ddlAllbetWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>WM Wallet</strong></li>
-                                            <li class="fright" id="ddlWMWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Pragmatic Wallet</strong></li>
-                                            <li class="fright" id="ddlPragmaticWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-            <div class="scroll-content" style="padding-bottom:0px;" id="Translation_Option">
-                <div class="join-now-section" style="padding-bottom:0px;">
-                    <div class="text-center myr-quote">
-                        <h4>MYR <span id="menuMainWallet"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="fa fa-refresh"></span></h4>
-                    </div>
-                    <ul class="account-icon list-inline text-center">
-                        <li class="mobile-icon deposit_icon"><a onclick="loadPagedeposit()" href="javascript:void(0);" rel="prefetch"><span data-translate="mobile_menu_deposit"></span></a></li>
-                        <li class="mobile-icon transfer_icon"><a onclick="loadPageTransfer()" href="javascript:void(0);" rel="prefetch"><span data-translate="mobile_menu_Transfer"></span></a></li>
-                        <li class="mobile-icon restore_icon"><a data-toggle="modal" data-target="#RestoreConfirmation" href="#"><span data-translate="mobile_menu_Restore"></span></a></li>
-                        <li class="mobile-icon withdraw_icon"><a onclick="loadPageWithdraw()" href="javascript:void(0);" rel="prefetch"><span data-translate="mobile_menu_Withdraw"></span></a></li>
-                        <li class="mobile-icon history_icon"><a onclick="loadPageHistory()" href="javascript:void(0);" rel="prefetch"><span data-translate="mobile_menu_History"></span></a></li>
-                    </ul>
-                    <div class="container" style="background: #ffffff;">
-                        <div class="annunce-section d-flex">
-                            <p class="annunce-title"><img src="~/images/images-mobile/announcement.png" alt=""></p>
-                            <p class="annunce-text mobile-announcment"><marquee class="announcment-font" behavior="scroll" direction="left" scrollamount="10" id="p_announcement_mobile_one"></marquee></p>
-                            <div class="clear-fix"></div>
-                            <p class="white-text mar-top-ten text-center">Welcome <span id="lbl_usernameHeader"></span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <script>
-        document.getElementById("Translation_Option").innerHTML = "";
-        document.getElementById("navbarhide").innerHTML = "";
-        //document.getElementById("hideBody").style.backgroundColor = "#f0f0f0";
         document.body.classList.add("no-pad-top");
         $('body').css('padding-top', '0px');
 
         if (GetLocalStorage('currentUser') !== null) {
-            //window.location.href = "../Mobile/home";
             loadPageHome({ backFrom: 'login' });
 
         }
@@ -232,141 +73,18 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12"><button type="button" onclick="DoLogin()" tabindex="4" class="submit btn btn-primary login_btn join_btn"><span class="lang" key="login"></span></button></div>
-                        <p class="text-center forgot-psw"><a href="../Mobile/forgetpassword"><span class="lang" key="forgot_pasword"></span></a></p>
+                        <p class="text-center forgot-psw"><a onclick="loadPageForgetpassword()"><span class="lang" key="forgot_pasword"></span></a></p>
                     </div>
                 </div>
             </div>
             <div class="row mar-15-cmn">
                 <div class="col-sm-12">
-                    <p class="text-center" style="font-size: 10px;">Do not have an account yet? Click <a href="../Mobile/Register"><span class="lang" key="register">HERE</span></a> to register.</p>
+                    <p class="text-center" style="font-size: 10px;">Do not have an account yet? Click <a onclick="loadPageRegister()"><span class="lang" key="register">HERE</span></a> to register.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="form-login modal fade" id="gameLogin" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="lang" key="alert"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <p class="lang" key="noLogin"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container" id="laguage">
-        <div id="language" class="modal fade">
-            <div class="modal-dialog mail-width">
-                <div class="modal-content">
-                    <div class="modal-body text-center lang-modal">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <p>Select Language.</p>
-                        <ul class="list-inline pad-top-ten">
-                            <li><button id="englishbtn" class="submit" type="button" data-dismiss="modal" onclick="language('en-US')">English</button></li>
-                            <li><button id="malaybtn" class="submit" type="button" data-dismiss="modal" onclick="language('ms-MY')">Malay</button></li>
-                            <li><button id="chinesebtn" class="submit" type="button" data-dismiss="modal" onclick="language('zh-Hans')">Chinese</button></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer-widget" id="footerWidget">
-        <ul class="list-inline text-center">
-            <li id="homePagebottom">
-                <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch">
-                    <i class="fa fa-home"></i>
-                    <p class="white-text no-mar" data-translate="menu_home">Home</p>
-                </a>
-            </li>
-            <li id="promotionPagebottom" class="">
-                <a onclick="loadPagePromotions()" href="javascript:void(0)" rel="prefetch">
-                    <i class="fa fa-gift"></i>
-                    <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
-                </a>
-            </li>
-            <li id="contactusPagebottom">
-                <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
-                    <i class="fa fa-user"></i>
-                    <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
-                </a>
-            </li>
-            <li>
-                <a href="#" onclick="whatsapp()">
-                    <figure><img src="~/images/images-mobile/whatsapp.png" alt="Whats App" /></figure>
-                    <p class="white-text no-mar">Whatsapp</p>
-                </a>
-            </li>
-            <li class="live-chat">
-                <a class="live-chat-icon"><p class="white-text no-mar" data-translate="Live_chat">Live Chat</p></a>
-            </li>
-        </ul>
-    </div>
-    <div>
-        <a id="mobileM8" style="display:none"></a>
-    </div>
-
-    <div class="form-login modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="lang" key="login"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <div role="form">
-                        <div class="info-form">
-                            <label class="user"><input id="txt_login_username" name="txt_username" type="text" class="reg-form" data-translate="username_placeholder" placeholder="Username" value=""></label>
-                            <label class="lock"><input id="txt_login_password" name="txt_password" autocomplete="new-password" type="password" class="reg-form" data-translate="password_placeholder" placeholder="Password"></label>
-                            <div class="checkbox">
-                                <label style="margin-left:15px"><input id="remember_me" type="checkbox" value=""><span class="lang" key="remember"></span></label>
-                            </div>
-                            <a class="forgot-pass" data-toggle="modal" data-target="#forgot-password"><span class="lang" key="forgot_pasword"></span></a>
-                            <div class="log_in text-center">
-                                <button class="log_in" onclick="DoLogin(1)"><span class="lang" key="login"></span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-login modal fade" id="gameLogin" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="lang" key="alert"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <p class="lang" key="noLogin"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div id="forgot-password" class="modal fade">
-            <div class="modal-dialog mail-width">
-                <div class="modal-content">
-                    <div class="modal-body text-center">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <p data-translate="forgtopasswordststic"></p>
-                        <label class="num pad-top-ten"><input id="txt_forgot_email" name="txt_forgot_email" type="text" class="reg-form" data-translate="forgtopassword_placeholder" value=""></label>
-                        <ul class="list-inline pad-top-ten">
-                            <li><button class="submit" type="button" onclick="DoForgotPassword()" data-translate="forgtopassworbutton"></button></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script type="text/javascript">
@@ -385,17 +103,7 @@
 <!--Begin Comm100 Live Chat Code-->
 <div></div>
 <script type="text/javascript">
-    var Comm100API = Comm100API || {}; (function (t) {
-        function e(e) {
-            var a = document.createElement("script"),
-                c = document.getElementsByTagName("script")[0];
-            a.type = "text/javascript",
-                a.async = !0, a.src = e + t.site_id, a.target = "_blank"
-            c.parentNode.insertBefore(a, c)
-        } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://chatserver.comm100.com/livechat.ashx?siteId="), setTimeout(function () {
-            t.loaded || e("https://hostedmax.comm100.com/chatserver/livechat.ashx?siteId=")
-        }, 5e3)
-    })(Comm100API || {})
+    var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 0) })(Comm100API || {})
 </script>
 <!--End Comm100 Live Chat Code-->
 <!-- Slider Section End -->
@@ -452,41 +160,8 @@
         }
     });
 </script>
+
 <script>
-    if (localStorage.getItem('currentUser') == null) {
-        //document.getElementById('walletAfterLogin').style.display = "none";
-    }
-    else {
-        //document.getElementById('walletBeforeLogin').style.display = "none";
-    }
-</script>
-<script>
-    $(document).ready(function () {
-        if (localStorage.getItem('currentUser') == null) {
-            document.getElementById('logout').style.display = "none";
-            document.getElementById('accountPage').style.display = "none";
-            document.getElementById('downloadpage').style.display = "none";
-
-            if (!window.location.href.toLowerCase().includes("mobile/login") && !window.location.href.toLowerCase().includes("mobile/register")) {
-                //document.getElementById('balanceShow').style.textIndent = "-999px";
-                //document.getElementById("MainLogo").style.marginLeft = "-30px";
-            }
-        }
-        else {
-            document.getElementById('login').style.display = "none";
-        }
-
-        if (location.href.toLowerCase().includes("mobile/login") || location.href.toLowerCase().includes("mobile/register") || location.href.toLowerCase().includes("mobile/forgetpassword")) {
-            document.getElementById("footerWidget").innerHTML = "";
-        }
-    });
-
-
-    $("html").click(async function (event) {
-        if (GetLocalStorage('currentUser') !== null) {
-            await PostMethod(apiEndPoints.userLastTimeUpdate, {});
-        }
-    });
 
     function language(value) {
         SetLocalStorage('language', value);
@@ -494,27 +169,6 @@
     }
     function get() {
         (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
-        /*
-        if (GetLocalStorage('currentUser') === null) {
-            document.getElementById('beforelogin_mobile').style.display = 'none';
-        }
-        if (GetLocalStorage('currentUser') !== null) {
-            document.getElementById('afterlogin_mobile').style.display = 'none';
-        }
-        */
-
-        document.getElementById("englishbtn").style.background = "";
-        document.getElementById("malaybtn").style.background = "";
-        document.getElementById("chinesebtn").style.background = "";
-
-        if (GetLocalStorage('language') == "en-US")
-            document.getElementById("englishbtn").style.background = "orange";
-
-        if (GetLocalStorage('language') == "ms-MY")
-            document.getElementById("malaybtn").style.background = "orange";
-
-        if (GetLocalStorage('language') == "zh-Hans")
-            document.getElementById("chinesebtn").style.background = "orange";
 
         $.ajax({
             url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
@@ -541,6 +195,7 @@
     }
     setTimeout(() => {
         get();
+        load_em();
     }, 200);
 </script>
 

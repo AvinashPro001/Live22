@@ -188,12 +188,11 @@
         document.getElementById("hideBody").style.padding = "0px";
         document.getElementById("Translation_Option").innerHTML = "";
         if (GetLocalStorage('currentUser') === null) {
-
-            window.location = "../SPA2";
+            loadPageHome({ backFrom: 'transfer' });
         }
         UserGameTurnover();
 
-        CheckSupportGame();
+        CheckSupportGame();                                                     
 
         AllInButtonDisable(0);
     </script>
@@ -690,7 +689,7 @@
     });
 </script>
 
-@*<script src="~/js/spa2/m_bank.js"></script>*@
+
 
 <!--Begin Comm100 Live Chat Code-->
 <div></div>

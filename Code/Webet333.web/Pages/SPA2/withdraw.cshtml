@@ -189,7 +189,7 @@
         document.body.classList.add("no-pad-top");
         $('body').css('padding-top', '0px');
         if (GetLocalStorage('currentUser') === null)
-            window.location = "../SPA2";
+            loadPageHome({ backFrom: 'widthraw' });
     </script>
 
     <div id="Withdrawal" class="account-reg white-bg radius-border page-extra-padding">

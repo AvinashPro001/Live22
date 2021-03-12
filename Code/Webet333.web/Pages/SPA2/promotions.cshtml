@@ -183,8 +183,6 @@
         </div>
     </div>
 
-    <title>Webet333 - @ViewData["Title"] </title>
-    @*<script src="~/js/mobile/m_home.js"></script>*@
     <script>
         document.getElementById("Translation_Option").innerHTML = "";
 
@@ -381,17 +379,7 @@
 <!--Begin Comm100 Live Chat Code-->
 <div></div>
 <script type="text/javascript">
-    var Comm100API = Comm100API || {}; (function (t) {
-        function e(e) {
-            var a = document.createElement("script"),
-                c = document.getElementsByTagName("script")[0];
-            a.type = "text/javascript",
-                a.async = !0, a.src = e + t.site_id, a.target = "_blank"
-            c.parentNode.insertBefore(a, c)
-        } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://chatserver.comm100.com/livechat.ashx?siteId="), setTimeout(function () {
-            t.loaded || e("https://hostedmax.comm100.com/chatserver/livechat.ashx?siteId=")
-        }, 5e3)
-    })(Comm100API || {})
+    var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 0) })(Comm100API || {})
 </script>
 <!--End Comm100 Live Chat Code-->
 <!-- Slider Section End -->
@@ -483,10 +471,63 @@
             await PostMethod(apiEndPoints.userLastTimeUpdate, {});
         }
     });
+</script>
+
+<script>
+    function language(value) {
+        SetLocalStorage('language', value);
+        get();
+    }
+
+    function get() {
+        (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
+        /*
+        if (GetLocalStorage('currentUser') === null) {
+            document.getElementById('beforelogin_mobile').style.display = 'none';
+        }
+        if (GetLocalStorage('currentUser') !== null) {
+            document.getElementById('afterlogin_mobile').style.display = 'none';
+        }
+        */
+
+        document.getElementById("englishbtn").style.background = "";
+        document.getElementById("malaybtn").style.background = "";
+        document.getElementById("chinesebtn").style.background = "";
+
+        if (GetLocalStorage('language') == "en-US")
+            document.getElementById("englishbtn").style.background = "orange";
+
+        if (GetLocalStorage('language') == "ms-MY")
+            document.getElementById("malaybtn").style.background = "orange";
+
+        if (GetLocalStorage('language') == "zh-Hans")
+            document.getElementById("chinesebtn").style.background = "orange";
+
+        $.ajax({
+            url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
+            dataType: 'json',
+            async: false,
+            success: function (lang) {
+                $('.lang').each(function (index, element) {
+                    if (localStorage.getItem("language") === "ms-MY") {
+                        $('body').addClass('malay-font');
+                    }
+                    $(this).text(lang[$(this).attr('key')]);
+                });
+                $("[data-translate]").each(function () {
+                    if ($(this).is("input")) {
+                        $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    } else {
+                        $(this).text(lang[$(this).data("translate")]);
+                    }
+                });
+            }
+        });
+        announcementMobile();
+
+    }
 
     setTimeout(() => {
         get();
     }, 200);
-
-
 </script>
