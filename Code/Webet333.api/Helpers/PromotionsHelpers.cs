@@ -79,7 +79,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task Update(Guid Id, string Extension, string ExtensionMobile, string adminId = null, string description = null)
+        public async Task Update(Guid Id, string Extension, string ExtensionMobile, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -90,13 +90,12 @@ namespace Webet333.api.Helpers
                         Id,
                         Extension,
                         ExtensionMobile,
-                        adminId,
-                        description
+                        adminId
                     });
             }
         }
 
-        public async Task Delete(Guid Id, string adminId = null, string descripton = null)
+        public async Task Delete(Guid Id, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -105,8 +104,7 @@ namespace Webet333.api.Helpers
                     new
                     {
                         Id,
-                        adminId,
-                        descripton
+                        adminId
                     });
             }
         }
@@ -121,8 +119,7 @@ namespace Webet333.api.Helpers
                     {
                         request.Id,
                         request.Active,
-                        request.AdminId,
-                        request.Description
+                        request.AdminId
                     });
             }
         }

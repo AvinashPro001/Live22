@@ -195,11 +195,10 @@ namespace Webet333.api.Controllers
             await ValidateUser(role: RoleConst.Admin);
 
             string adminId = GetUserId(User).ToString();
-            string description = JsonConvert.SerializeObject(request);
 
             using (var user_help = new UserHelpers(Connection))
             {
-                await user_help.ProfileStatusUpdate(request, adminId, description);
+                await user_help.ProfileStatusUpdate(request, adminId);
             }
             return OkResponse();
         }
@@ -216,11 +215,10 @@ namespace Webet333.api.Controllers
             await ValidateUser(role: RoleConst.Admin);
 
             string adminId = GetUserId(User).ToString();
-            string description = JsonConvert.SerializeObject(request);
 
             using (var user_help = new UserHelpers(Connection))
             {
-                await user_help.ProfileDelete(request, adminId, description);
+                await user_help.ProfileDelete(request, adminId);
             }
             return OkResponse();
         }
@@ -290,7 +288,6 @@ namespace Webet333.api.Controllers
             request.UserId = GetUserId(User);
             request.Role = RoleConst.Admin;
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -304,8 +301,7 @@ namespace Webet333.api.Controllers
                         request.UserId,
                         request.Username,
                         request.Role,
-                        request.AdminId,
-                        request.Description
+                        request.AdminId
                     });
             }
 
@@ -346,7 +342,6 @@ namespace Webet333.api.Controllers
             request.UniqueId = GetUniqueId(User);
             request.UserId = GetUserId(User);
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             if (request.PermissionsList == null) request.PermissionsList = null;
 
@@ -362,8 +357,7 @@ namespace Webet333.api.Controllers
                         request.UniqueId,
                         request.UserId,
                         request.Username,
-                        request.AdminId,
-                        request.Description
+                        request.AdminId
                     });
             }
 

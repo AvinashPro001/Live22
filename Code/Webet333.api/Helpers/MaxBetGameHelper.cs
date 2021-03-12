@@ -269,7 +269,7 @@ namespace Webet333.api.Helpers
         #endregion 
 
         #region set setlimit true of MaxBetUser or reset limit
-        internal async Task MaxBetSetLimit(bool SetLimit, string Id = null, string adminId = null, string description = null)
+        internal async Task MaxBetSetLimit(bool SetLimit, string Id = null, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -279,15 +279,14 @@ namespace Webet333.api.Helpers
                     {
                         Id,
                         SetLimit,
-                        adminId,
-                        description
+                        adminId
                     });
             }
         }
         #endregion 
 
         #region set setlimit true of MaxBetUser
-        internal async Task<dynamic> MaxBetSetGlobalVariable(string maxValue, string minValue, string adminId = null, string description = null)
+        internal async Task<dynamic> MaxBetSetGlobalVariable(string maxValue, string minValue, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -297,8 +296,7 @@ namespace Webet333.api.Helpers
                     {
                         Value = minValue,
                         Name = "MaxBetMinimum",
-                        adminId,
-                        description
+                        adminId
                     });
 
                 return await repository.GetDataAsync(
@@ -307,8 +305,7 @@ namespace Webet333.api.Helpers
                     {
                         Value = maxValue,
                         Name = "MaxBetMaximum",
-                        adminId,
-                        description
+                        adminId
                     });
             }
         }

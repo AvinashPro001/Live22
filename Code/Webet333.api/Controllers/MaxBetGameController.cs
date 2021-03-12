@@ -262,7 +262,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             var responseList = new List<string>();
 
@@ -345,7 +344,7 @@ namespace Webet333.api.Controllers
                 {
                     using (MaxBetGameHelper gamehelper = new MaxBetGameHelper(Connection))
                     {
-                        await gamehelper.MaxBetSetLimit(true, adminId: request.AdminId.ToString(), description: request.Description);
+                        await gamehelper.MaxBetSetLimit(true, adminId: request.AdminId.ToString());
                     }
                 }
                 else
@@ -367,11 +366,10 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             string adminId = GetUserId(User).ToString();
-            string description = null;
 
             using (MaxBetGameHelper game_helper = new MaxBetGameHelper(Connection))
             {
-                await game_helper.MaxBetSetLimit(false, adminId: adminId, description: description);
+                await game_helper.MaxBetSetLimit(false, adminId: adminId);
             }
             return OkResponse();
         }
@@ -387,14 +385,13 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             if (!ModelState.IsValid) return BadResponse(ModelState);
             using (MaxBetGameHelper game_helper = new MaxBetGameHelper(Connection))
             {
                 var list = await game_helper.GetAllUserVendorIdList();
                 await game_helper.GetAllUserMinMaxLimit(list, Convert.ToDecimal(request.MinimumValue), Convert.ToDecimal(request.Maximumvalue));
-                return OkResponse(await game_helper.MaxBetSetGlobalVariable(request.Maximumvalue, request.MinimumValue, request.AdminId.ToString(), request.Description));
+                return OkResponse(await game_helper.MaxBetSetGlobalVariable(request.Maximumvalue, request.MinimumValue, request.AdminId.ToString()));
             }
 
         }
@@ -426,7 +423,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             if (Convert.ToDouble(request.otherSportMin) > Convert.ToDouble(request.otherSportMax) || Convert.ToDouble(request.otherSportMax) > Convert.ToDouble(request.otherSportMatch) || Convert.ToDouble(request.otherSportBall) > Convert.ToDouble(request.otherSportMatch))
             {
@@ -451,13 +447,6 @@ namespace Webet333.api.Controllers
             #region Admin Log
 
             request.AdminId = GetUserId(User);
-            var description = new
-            {
-                beforeTransaction = "null",
-                afterTransaction = "null",
-                requestBody = request,
-                other = "MaxBet Minimum & Maximum Set for User"
-            };
 
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -469,7 +458,7 @@ namespace Webet333.api.Controllers
                         request.UserId,
                         Action = "Edit",
                         Module = "MaxBet Parameters",
-                        Description = JsonConvert.SerializeObject(description)
+                        Description = "Change MaxBet Minimum & Maximum for User"
                     });
             }
 

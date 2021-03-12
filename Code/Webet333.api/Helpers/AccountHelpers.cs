@@ -197,7 +197,7 @@ namespace Webet333.api.Helpers
         #endregion 
 
         #region Wallet Maintenance Update
-        public async Task<dynamic> WalletMainteanceUpdate(WalletMaintenanceUpdateRequest request, string adminId, string descripton)
+        public async Task<dynamic> WalletMainteanceUpdate(WalletMaintenanceUpdateRequest request, string adminId)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -207,8 +207,7 @@ namespace Webet333.api.Helpers
                     {
                         request.Id,
                         request.Maintenance,
-                        adminId,
-                        descripton
+                        adminId
                     });
 
                 return WalletUpdate;
@@ -246,7 +245,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<dynamic> ReferenceKeywordInsert(string keyword, string AdminId, string Description)
+        public async Task<dynamic> ReferenceKeywordInsert(string keyword, string AdminId)
         {
             using (var referenceKeyword = new DapperRepository<dynamic>(Connection))
             {
@@ -255,14 +254,13 @@ namespace Webet333.api.Helpers
                     new
                     {
                         keyword,
-                        AdminId,
-                        Description
+                        AdminId
                     });
                 return result;
             }
         }
 
-        public async Task<dynamic> ReferenceKeywordDelete(string Id, string AdminId, string Description)
+        public async Task<dynamic> ReferenceKeywordDelete(string Id, string AdminId)
         {
             using (var referenceKeyword = new DapperRepository<dynamic>(Connection))
             {
@@ -270,8 +268,7 @@ namespace Webet333.api.Helpers
                     StoredProcConsts.Account.ReferenceKeywordDelete, new
                     {
                         Id,
-                        AdminId,
-                        Description
+                        AdminId
                     });
                 return result;
             }
@@ -342,7 +339,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<dynamic> RebateSettingUpdate(int Datetime, string adminId, string descripton)
+        public async Task<dynamic> RebateSettingUpdate(int Datetime, string adminId)
         {
             using (var dapperRepository = new DapperRepository<dynamic>(Connection))
             {
@@ -351,8 +348,7 @@ namespace Webet333.api.Helpers
                     new
                     {
                         Datetime,
-                        adminId,
-                        descripton
+                        adminId
                     });
             }
         }
@@ -500,7 +496,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<dynamic> GlobalParameterUpdate(string Value, string Name, string adminId = null, string descripton = null)
+        public async Task<dynamic> GlobalParameterUpdate(string Value, string Name, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -510,8 +506,7 @@ namespace Webet333.api.Helpers
                     {
                         Name,
                         Value,
-                        adminId,
-                        descripton
+                        adminId
                     });
             }
         }

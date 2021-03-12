@@ -52,7 +52,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.DescriptionAdminLog = JsonConvert.SerializeObject(request);
 
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
@@ -71,7 +70,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.DescriptionAdminLog = JsonConvert.SerializeObject(request);
 
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
@@ -98,7 +96,6 @@ namespace Webet333.api.Controllers
             await ValidateUser();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             using (var generic_help = new GenericHelpers(Connection))
             {
@@ -107,7 +104,7 @@ namespace Webet333.api.Controllers
             }
 
             using (var promotion_help = new PromotionsHelpers(Connection))
-                await promotion_help.Update(Guid.Parse(request.Id), extension, extensionMobile, adminId: request.AdminId.ToString(), description: request.Description);
+                await promotion_help.Update(Guid.Parse(request.Id), extension, extensionMobile, adminId: request.AdminId.ToString());
 
             return OkResponse();
         }
@@ -165,11 +162,10 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             string adminId = GetUserId(User).ToString();
-            string descripton = JsonConvert.SerializeObject(request);
 
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
-                await promotion_help.Delete(Guid.Parse(request.Id), adminId, descripton);
+                await promotion_help.Delete(Guid.Parse(request.Id), adminId);
                 return OkResponse();
             }
         }
@@ -184,7 +180,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
@@ -299,7 +294,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             request.CreatedBy = GetUserId(User).ToString();
             using (var promotion_helper = new PromotionsHelpers(Connection))
@@ -320,7 +314,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             using (var promotion_helper = new PromotionsHelpers(Connection))
             {
@@ -357,7 +350,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             using (var promotion_helper = new PromotionsHelpers(Connection))
             {
