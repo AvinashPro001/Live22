@@ -6,7 +6,7 @@ namespace Webet333.models.Request.Game
     public class AppDownloadLinkUpdateRequest : BaseAdminLogRequest
     {
         [Required]
-        [JsonProperty(PropertyName ="id")]
+        [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
         [Required]

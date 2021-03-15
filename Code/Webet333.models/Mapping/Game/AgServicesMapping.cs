@@ -8,18 +8,19 @@ namespace Webet333.models.Mapping.Game
     {
         public List<MappingAGServices> Map(List<Tran> tranList)
         {
-            var response = tranList.Select(x=>new MappingAGServices{ 
-                id=x.id,
+            var response = tranList.Select(x => new MappingAGServices
+            {
+                id = x.id,
                 bankerPoint = x.details.bankerPoint,
                 cardList = x.details.cardList,
                 cardNum = x.details.cardNum,
-                currency=x.currency,
-                dragonPoint=x.details.dragonPoint,
-                game_code=x.game_code,
-                game_type=x.game_type,
-                ip=x.ip,
-                jackpotcomm=x.jackpotcomm,
-                jackpotwin=x.jackpotwin,
+                currency = x.currency,
+                dragonPoint = x.details.dragonPoint,
+                game_code = x.game_code,
+                game_type = x.game_type,
+                ip = x.ip,
+                jackpotcomm = x.jackpotcomm,
+                jackpotwin = x.jackpotwin,
                 operator_id = x.operator_id,
                 pair = x.details.pair,
                 platform_type = x.platform_type,

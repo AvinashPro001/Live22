@@ -1,15 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Webet333.models.Request.Account
 {
     public class ManagerOperationInsertRequest
     {
         [Required]
-        [JsonProperty(PropertyName ="userId")]
+        [JsonProperty(PropertyName = "userId")]
         public string UserId { get; set; }
 
         [Required]

@@ -91,7 +91,6 @@ namespace Webet333.models.Request.Promotions
         [JsonProperty(PropertyName = "isSportsCategory")]
         public bool IsSportsCategory { get; set; }
 
-
         [JsonProperty(PropertyName = "isAG")]
         public bool IsAG { get; set; }
 
@@ -177,5 +176,4 @@ namespace Webet333.models.Request.Promotions
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
     }
-
 }

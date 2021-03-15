@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Webet333.models.Request.Game
 {
@@ -12,7 +10,6 @@ namespace Webet333.models.Request.Game
 
         public DateTime EndDate { get; set; }
 
-        public bool SaveInDB  { get; set; }
-
+        public bool SaveInDB { get; set; }
     }
 }

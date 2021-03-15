@@ -5,7 +5,6 @@ namespace Webet333.models.Request.Game
 {
     public class GameJokerRegisterRequest
     {
-
         [JsonProperty("userId")]
         public string UserId { get; set; }
 
@@ -13,7 +12,5 @@ namespace Webet333.models.Request.Game
         public string JokerUserName { get; set; }
 
         public JObject APIResponse { get; set; }
-
     }
-
 }

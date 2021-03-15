@@ -12,14 +12,18 @@
     public class TransferResult
     {
         public string yourOrderNum { get; set; }
+
         public string orderId { get; set; }
+
         public string cash { get; set; }
     }
 
     public class WMTransferbalanceResponse
     {
         public int errorCode { get; set; }
+
         public string errorMessage { get; set; }
+
         public TransferResult result { get; set; }
     }
 }

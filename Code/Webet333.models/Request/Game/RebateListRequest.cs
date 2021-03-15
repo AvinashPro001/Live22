@@ -2,10 +2,9 @@
 
 namespace Webet333.models.Request.Game
 {
-
     public class RebateListRequest
     {
-        [JsonProperty(PropertyName ="fromDate")]
+        [JsonProperty(PropertyName = "fromDate")]
         public string FromDate { get; set; }
 
         [JsonProperty(PropertyName = "toDate")]

@@ -5,7 +5,7 @@ namespace Webet333.models.Request.Settings
 {
     public class AnnouncementInsertRequest : BaseAdminLogRequest
     {
-        [Required(ErrorMessage ="Announcement Filed Required")]
+        [Required(ErrorMessage = "Announcement Filed Required")]
         [JsonProperty(PropertyName = "announcement")]
         public string Text { get; set; }
 
@@ -14,7 +14,7 @@ namespace Webet333.models.Request.Settings
         public string LanguageId { get; set; }
     }
 
-    public class AnnouncementUpdateRequest: AnnouncementInsertRequest
+    public class AnnouncementUpdateRequest : AnnouncementInsertRequest
     {
         [Required(ErrorMessage = "Id Filed Required")]
         [JsonProperty(PropertyName = "id")]

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Webet333.models.Response.Payments
+﻿namespace Webet333.models.Response.Payments
 {
     public class MobileNumberResponse
     {

@@ -260,8 +260,6 @@
 
             public const string PromotionApplyList = "[dbo].[Promotion_Apply_Select]";
 
-
-
             public const string PromotionReport = "[dbo].[Admin_Promotion_Report]";
 
             public const string PromotionApplyInsert = "[dbo].[Promotion_Apply_Insert]";
@@ -539,7 +537,6 @@
             public const string VIPFreeCredit = "[dbo].[FreeCredit_On_Monday]";
 
             public const string VIPFreeCreditPromotionSetting = "[dbo].[FreeCredit_Promotion_Setting]";
-
         }
     }
 }
