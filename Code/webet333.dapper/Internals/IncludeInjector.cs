@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Webet333.dapper.interfaces;
-using Webet333.models.Entities.Base;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Webet333.dapper.interfaces;
+using Webet333.models.Entities.Base;
 
 namespace Webet333.dapper.Internals
 {
