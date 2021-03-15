@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Webet333.logs.interfaces;
-using Webet333.models.Configs;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using Webet333.logs.interfaces;
+using Webet333.models.Configs;
 
 namespace Webet333.notify.Push
 {
