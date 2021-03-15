@@ -9,7 +9,7 @@ namespace Webet333.models.Request
         public string Keyword { get; set; }
     }
 
-    public class SearchGlobalRequest:GlobalListRequest
+    public class SearchGlobalRequest : GlobalListRequest
     {
         [JsonProperty(PropertyName = "keyword")]
         public string Keyword { get; set; }

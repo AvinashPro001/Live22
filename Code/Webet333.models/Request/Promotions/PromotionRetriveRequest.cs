@@ -12,13 +12,10 @@ namespace Webet333.models.Request.Promotions
         public bool IsMain { get; set; }
     }
 
-    public class UsersPromotionRetrive: GetByIdRequest
+    public class UsersPromotionRetrive : GetByIdRequest
     {
-
         [Required]
         [JsonProperty(PropertyName = "ismobile")]
         public bool IsMobile { get; set; }
     }
-
-
 }

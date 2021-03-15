@@ -4,7 +4,7 @@ namespace Webet333.models.Request
 {
     public class GlobalListRequest
     {
-        [JsonProperty(PropertyName ="userid")]
+        [JsonProperty(PropertyName = "userid")]
         public string UserId { get; set; }
 
         [JsonProperty(PropertyName = "fromdate")]

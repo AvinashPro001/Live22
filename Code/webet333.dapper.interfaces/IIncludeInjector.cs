@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Webet333.models.Entities.Base;
 using System.Linq;
+using Webet333.models.Entities.Base;
 
 namespace Webet333.dapper.interfaces
 {

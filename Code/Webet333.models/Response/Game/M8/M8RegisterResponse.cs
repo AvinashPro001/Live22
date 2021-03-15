@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Webet333.models.Response.Game.M8
 {
@@ -9,6 +6,7 @@ namespace Webet333.models.Response.Game.M8
     {
         [JsonProperty("@version")]
         public string Version { get; set; }
+
         [JsonProperty("@encoding")]
         public string Encoding { get; set; }
     }
@@ -16,7 +14,9 @@ namespace Webet333.models.Response.Game.M8
     public class Response
     {
         public string errcode { get; set; }
+
         public string errtext { get; set; }
+
         public string result { get; set; }
     }
 
@@ -24,6 +24,7 @@ namespace Webet333.models.Response.Game.M8
     {
         [JsonProperty("?xml")]
         public Xml Xml { get; set; }
+
         public Response response { get; set; }
     }
 }

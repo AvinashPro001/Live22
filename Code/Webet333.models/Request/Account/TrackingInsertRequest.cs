@@ -6,7 +6,7 @@ namespace Webet333.models.Request.Account
     public class TrackingInsertRequest
     {
         [Required]
-        [JsonProperty(PropertyName ="usernames")]
+        [JsonProperty(PropertyName = "usernames")]
         public string UserNames { get; set; }
 
         [Required]

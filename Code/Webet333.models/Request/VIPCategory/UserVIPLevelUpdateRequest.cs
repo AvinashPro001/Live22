@@ -1,15 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Webet333.models.Request.VIPCategory
 {
     public class UserVIPLevelUpdateRequest
     {
         [JsonIgnore]
-        [JsonProperty(PropertyName ="uniqueId")]
+        [JsonProperty(PropertyName = "uniqueId")]
         public string UniqueId { get; set; }
 
         [JsonIgnore]

@@ -18,7 +18,7 @@ namespace Webet333.models.Request.Settings
         public string BankCode { get; set; }
     }
 
-    public class UpdateUserBankRequest: InsertUserBankRequest
+    public class UpdateUserBankRequest : InsertUserBankRequest
     {
         [JsonProperty(PropertyName = "id")]
         public Guid Id { get; set; }

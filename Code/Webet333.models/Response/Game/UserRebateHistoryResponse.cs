@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Webet333.models.Response.Game
 {
     public class UserRebateHistoryResponse
     {
-
         public string GameName { get; set; }
 
         public decimal Turnover { get; set; }
@@ -22,6 +19,5 @@ namespace Webet333.models.Response.Game
         public string GameType { get; set; }
 
         public Decimal Rolling { get; set; }
-
     }
 }

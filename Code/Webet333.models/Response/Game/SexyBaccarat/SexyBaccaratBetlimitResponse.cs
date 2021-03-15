@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Webet333.models.Response.Game.SexyBaccarat
 {
-
-    public  class SexyBaccaratBetlimitResponse
+    public class SexyBaccaratBetlimitResponse
     {
         public Sexybcrt Sexybcrt { get; set; }
     }
 
-    public  class Sexybcrt
+    public class Sexybcrt
     {
         public Live Live { get; set; }
     }
@@ -19,5 +16,4 @@ namespace Webet333.models.Response.Game.SexyBaccarat
     {
         public List<long> LimitId { get; set; }
     }
-
 }

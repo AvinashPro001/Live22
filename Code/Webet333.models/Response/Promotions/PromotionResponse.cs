@@ -90,9 +90,6 @@ namespace Webet333.models.Response.Promotions
         [JsonProperty(PropertyName = "terms")]
         public List<Notes> Terms { get; set; }
 
-
-
-
         [JsonProperty(PropertyName = "isAG")]
         public bool IsAG { get; set; }
 
@@ -170,8 +167,6 @@ namespace Webet333.models.Response.Promotions
 
         [JsonProperty(PropertyName = "isDiamond")]
         public bool IsDiamond { get; set; }
-
-
     }
 
     public class Notes
@@ -189,12 +184,7 @@ namespace Webet333.models.Response.Promotions
 
     public class PromotionResponseWithMobileBanner : PromotionResponse
     {
-
         [JsonProperty(PropertyName = "mobilebanner")]
         public string MobileBanner { get; set; }
-
-
     }
-
-
 }

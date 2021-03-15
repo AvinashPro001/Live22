@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Webet333.models.Request.Payments
 {
-
     public class UserWalletBalanceUpdateRequest
     {
-
         [Required]
         [JsonProperty(PropertyName = "userId")]
         public string UserId { get; set; }
@@ -55,7 +53,5 @@ namespace Webet333.models.Request.Payments
         [RegularExpression(@"^-?([0-9]+(\.[0-9]{1,2})?)$", ErrorMessage = "Enter Valid Amount")]
         [JsonProperty(PropertyName = "jokeramount")]
         public string JokerAmount { get; set; }
-
     }
-
 }

@@ -13,7 +13,7 @@ namespace Webet333.models.Request.User
         [JsonProperty(PropertyName = "email")]
         public string Email { get; set; }
 
-        [JsonProperty(propertyName:"username")]
+        [JsonProperty(propertyName: "username")]
         public string UserName { get; set; }
 
         [JsonProperty(PropertyName = "name")]

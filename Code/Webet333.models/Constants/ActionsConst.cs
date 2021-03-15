@@ -194,8 +194,6 @@
             public const string DefaultPermissionList = "user/default_permission/retrieve";
 
             public const string AdminUpdate = "admin/update";
-            
-            
 
             public const string RetrieveById = "customer/list_by_id";
 
@@ -673,7 +671,7 @@
 
             public const string VIPLevelSelect = "viplevel/select";
 
-            public const string VIPLevelUserUpdate= "viplevel/user/update";
+            public const string VIPLevelUserUpdate = "viplevel/user/update";
 
             public const string VIPLevelGiveFreeCredit = "viplevel/give/freecredit";
 

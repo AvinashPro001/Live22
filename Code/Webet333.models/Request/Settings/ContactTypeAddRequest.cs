@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Webet333.models.Request.Settings
 {
@@ -25,7 +23,6 @@ namespace Webet333.models.Request.Settings
         [JsonProperty(PropertyName = "deleted")]
         public bool? Deleted { get; set; }
     }
-
 
     public class ContactTypeDetailsAddRequest : BaseAdminLogRequest
     {

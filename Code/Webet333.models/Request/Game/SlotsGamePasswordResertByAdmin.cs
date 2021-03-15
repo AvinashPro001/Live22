@@ -5,7 +5,7 @@ namespace Webet333.models.Request.Game
 {
     public class SlotsGamePasswordResertByAdmin
     {
-        [JsonProperty(PropertyName ="userId")]
+        [JsonProperty(PropertyName = "userId")]
         public Guid UserId { get; set; }
 
         [JsonProperty(PropertyName = "gameUsername")]
