@@ -7,7 +7,6 @@ import { ConfirmationDialogComponent } from './confirmation-dialog.component';
 
 @Injectable()
 export class ConfirmationDialogService {
-
     constructor(private modalService: NgbModal) { }
 
     public confirm(
@@ -35,5 +34,4 @@ export class ConfirmationDialogService {
         modalRef.componentInstance.btnOkText = btnOkText;
         return modalRef.result;
     }
-
 }

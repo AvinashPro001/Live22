@@ -7,14 +7,12 @@ import { CustomValidators } from 'ng2-validation';
 import { CommonService } from '../common/common.service';
 import { account } from '../../environments/environment'
 
-
 @Component({
     selector: 'app-set-password',
     templateUrl: './set-password.component.html',
     styleUrls: ['./set-password.component.scss']
 })
 export class setPasswordComponent implements OnInit {
-
     id: string;
     token: string;
     setPWDForm: FormGroup;

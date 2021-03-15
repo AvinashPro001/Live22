@@ -13,22 +13,22 @@
 // If modified or removed make sure to check the variable
 // shared with other components
 // -------------------------------------------------------------
-$aside-wd:                                220px;
-$aside-wd-collapsed:                      70px;
-$aside-wd-collapsed-text:                 90px;
-$aside-bg:                                #fff;
+$aside-wd: 220px;
+$aside-wd-collapsed: 70px;
+$aside-wd-collapsed-text: 90px;
+$aside-bg: #fff;
 
-$content-bg:                              $body-bg;
-$content-heading-bg:                      #fafbfc;
-$content-heading-border:                  #cfdbe2;
-$content-padding:                         20px;
+$content-bg: $body-bg;
+$content-heading-bg: #fafbfc;
+$content-heading-border: #cfdbe2;
+$content-padding: 20px;
 
-$footer-hg:                               60px;
+$footer-hg: 60px;
 
-$navbar-hg:                               $navbar-height;
+$navbar-hg: $navbar-height;
 
-$boxed-max-width:                         1140px;
-$z-index-main-section:                    111;
+$boxed-max-width: 1140px;
+$z-index-main-section: 111;
 
 html {
     /* $replace rtl */
@@ -53,6 +53,7 @@ body {
     height: auto;
     min-height: 100%;
     overflow-x: hidden;
+
     &.ng-leave {
         display: none;
     }
@@ -61,7 +62,6 @@ body {
         // visibility: hidden;
         position: absolute;
         width: $aside-wd;
-
         top: 0;
         left: 0;
         bottom: 0;
@@ -77,12 +77,10 @@ body {
         }
 
         .nav-floating {
-
             // position: handled from directive
             left: inherit;
             margin-left: $aside-wd;
             z-index: $z-index-main-section * 10;
-
             min-width: 190px;
             overflow: auto;
         }
@@ -90,7 +88,8 @@ body {
 
     .dropdown-backdrop {
         z-index: $z-index-main-section - 2;
-    } // Contains the main content
+    }
+    // Contains the main content
     .section-container {
         position: relative;
         height: 100%;
@@ -98,7 +97,8 @@ body {
         z-index: $z-index-main-section;
         background-color: $content-bg;
         margin-bottom: $footer-hg !important; // ensure a space for the footer
-    } // Page Footer
+    }
+    // Page Footer
     .footer-container {
         position: absolute;
         left: 0;
@@ -109,6 +109,7 @@ body {
         padding: $content-padding;
         z-index: $z-index-main-section - 2;
         font-size: .875rem;
+
         p {
             margin: 0;
         }
@@ -116,9 +117,9 @@ body {
 }
 
 .modal-open .wrapper .section-container {
-  z-index: inherit;
-  transform: none !important;
-  -webkit-transform: none !important;
+    z-index: inherit;
+    transform: none !important;
+    -webkit-transform: none !important;
 }
 
 // Page main content
@@ -148,6 +149,7 @@ body {
         font-weight: normal;
         background-color: $content-heading-bg;
         border-bottom: 1px solid $content-heading-border;
+
         small {
             display: block;
             font-size: 12px;
@@ -167,6 +169,7 @@ body {
             margin: -$content-padding;
             margin-bottom: $content-padding;
             padding: $content-padding;
+
             button,
             .btn {
                 margin: 0;
@@ -178,13 +181,11 @@ body {
 // Desktop layout
 // -----------------------------
 @include media-breakpoint-up(md) {
-
     body {
         min-height: 100%;
     }
 
     .wrapper {
-
         .aside-container {
             .aside-inner {
                 // padding-top: $navbar-hg;
@@ -201,7 +202,8 @@ body {
             // right sidebar always visible
             &.has-sidebar-right {
                 margin-right: $aside-wd + 20;
-                +.offsidebar {
+
+                + .offsidebar {
                     z-index: 1;
                 }
             }
@@ -218,6 +220,7 @@ body {
             margin-left: -$aside-wd;
         }
     }
+
     .aside-toggled {
         .wrapper {
             .section-container,
@@ -232,15 +235,16 @@ body {
     }
 
     .csstransforms3d {
-
         .wrapper {
             backface-visibility: hidden;
+
             .section-container,
             .footer-container {
                 margin-left: 0;
                 transform: translate3d(0, 0, 0);
                 transition: transform .3s ease;
             }
+
             .aside-container {
                 margin-left: 0;
                 transform: translate3d(-$aside-wd, 0, 0);
@@ -254,6 +258,7 @@ body {
                 .footer-container {
                     transform: translate3d($aside-wd, 0, 0);
                 }
+
                 .aside-container {
                     transform: translate3d(0, 0, 0);
                 }
@@ -264,7 +269,6 @@ body {
 
 // Toggle and collapsed behavior overrides
 @include media-breakpoint-down(sm) {
-
     .aside-collapsed .wrapper {
         .aside-container {
             margin-left: -$aside-wd-collapsed;
@@ -284,17 +288,17 @@ body {
         }
     }
 
-
     .csstransforms3d {
-
         .aside-collapsed .wrapper {
             backface-visibility: hidden;
+
             .section-container,
             .footer-container {
                 margin-left: 0;
                 transform: translate3d(0, 0, 0);
                 transition: transform .3s ease;
             }
+
             .aside-container {
                 margin-left: 0;
                 transform: translate3d(-$aside-wd-collapsed, 0, 0);
@@ -308,6 +312,7 @@ body {
                 .footer-container {
                     transform: translate3d($aside-wd-collapsed, 0, 0);
                 }
+
                 .aside-container {
                     transform: translate3d(0, 0, 0);
                 }
@@ -321,12 +326,14 @@ body {
 // Aside status toggled via JS
 .aside-collapsed {
     overflow-y: auto;
+
     .wrapper {
         .aside-container {
             &,
             .aside-inner {
                 width: $aside-wd-collapsed;
             }
+
             .nav-floating {
                 margin-left: $aside-wd-collapsed;
             }
@@ -351,7 +358,6 @@ body {
 // Collapsed variation with text
 // ------------------------------
 @include media-breakpoint-down(sm) {
-
     .aside-collapsed-text .wrapper {
         .aside-container {
             margin-left: -$aside-wd-collapsed-text;
@@ -371,17 +377,17 @@ body {
         }
     }
 
-
     .csstransforms3d {
-
         .aside-collapsed-text .wrapper {
             backface-visibility: hidden;
+
             .section-container,
             .footer-container {
                 margin-left: 0;
                 transform: translate3d(0, 0, 0);
                 transition: transform .3s ease;
             }
+
             .aside-container {
                 margin-left: 0;
                 transform: translate3d(-$aside-wd-collapsed-text, 0, 0);
@@ -395,6 +401,7 @@ body {
                 .footer-container {
                     transform: translate3d($aside-wd-collapsed-text, 0, 0);
                 }
+
                 .aside-container {
                     transform: translate3d(0, 0, 0);
                 }
@@ -408,12 +415,14 @@ body {
 // Aside status toggled via JS
 .aside-collapsed-text {
     overflow-y: auto;
+
     .wrapper {
         .aside-container {
             &,
             .aside-inner {
                 width: $aside-wd-collapsed-text;
             }
+
             .nav-floating {
                 margin-left: $aside-wd-collapsed-text;
             }
@@ -447,7 +456,6 @@ body {
 // Fixed layout
 // -----------------------------
 .layout-fixed {
-
     @media (max-width: $boxed-max-width) {
         &.aside-toggled,
         &.offsidebar-open {
@@ -462,6 +470,7 @@ body {
             width: 100%;
             z-index: $z-index-main-section + 10;
         }
+
         .aside-container,
         .offsidebar {
             position: fixed;
@@ -478,12 +487,12 @@ body {
                 bottom: 0;
             }
         }
+
         .section-container {
             margin-top: $navbar-hg;
         }
     }
 }
-
 
 /* IE10+ hack: safari fix breaks ie so we need to target ie only to restore */
 
@@ -495,9 +504,9 @@ _:-ms-lang(x),
 // Boxed layout (only for desktops)
 // -----------------------------
 .layout-boxed {
-
     @include media-breakpoint-up(lg) {
         overflow: auto !important;
+
         .wrapper {
             margin: 0 auto;
             overflow: hidden;
@@ -510,6 +519,7 @@ _:-ms-lang(x),
             .aside-container {
                 left: inherit;
             }
+
             &,
             & .topnavbar-wrapper {
                 width: 970px;
@@ -521,7 +531,8 @@ _:-ms-lang(x),
                 left: inherit;
             }
         }
-    } // max size for large devices
+    }
+    // max size for large devices
     @include media-breakpoint-up(xl) {
         .wrapper {
             &,
@@ -530,4 +541,5 @@ _:-ms-lang(x),
             }
         }
     }
-} // boxed
+}
+// boxed

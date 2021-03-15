@@ -7,7 +7,6 @@ declare var $: any;
     styleUrls: ['./navsearch.component.scss']
 })
 export class NavsearchComponent implements OnInit, OnChanges {
-
     @Input() visible: boolean;
     @Output() onclose = new EventEmitter<boolean>();
     term: string;

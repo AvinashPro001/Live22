@@ -11,7 +11,6 @@ import { TranslatorService } from '../../core/translator/translator.service';
     styleUrls: ['./offsidebar.component.scss']
 })
 export class OffsidebarComponent implements OnInit, OnDestroy {
-
     currentTheme: any;
     selectedLanguage: string;
     clickEvent = 'click.offsidebar';
