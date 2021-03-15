@@ -6,9 +6,11 @@ namespace Webet333.queue
     public class SerialQueue
     {
         #region Object Declaration
+
         readonly object _locker = new object();
         WeakReference<Task> _lastTask;
-        #endregion
+
+        #endregion Object Declaration
 
         /// <summary>
         /// This method is used to queue the task.
