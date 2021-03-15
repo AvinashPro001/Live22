@@ -8,7 +8,6 @@ import { SettingsService } from '../../core/settings/settings.service';
 import { MenuService } from '../../core/menu/menu.service';
 
 describe('Component: Header', () => {
-
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [MenuService, UserblockService, SettingsService]

@@ -3,10 +3,10 @@
  ========================================================================== */
 
 // Colored circle for indication purposes
-$point-sz-sm : 5px;
-$point-sz : 7px;
-$point-sz-lg : 11px;
-$point-sz-xl : 18px;
+$point-sz-sm: 5px;
+$point-sz: 7px;
+$point-sz-lg: 11px;
+$point-sz-xl: 18px;
 
 .circle {
     display: inline-block;
@@ -17,9 +17,11 @@ $point-sz-xl : 18px;
     background-color: #ddd;
     vertical-align: baseline;
     border: 2px solid transparent;
+
     &.text-left {
         margin-left: 0;
     }
+
     &.text-right {
         margin-right: 0;
     }

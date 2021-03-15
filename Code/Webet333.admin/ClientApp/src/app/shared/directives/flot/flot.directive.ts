@@ -6,7 +6,6 @@ declare var $: any;
     selector: '[flot]'
 })
 export class FlotDirective implements OnInit, OnChanges, OnDestroy {
-
     element: any;
     plot: any;
     width: any;
@@ -43,7 +42,6 @@ export class FlotDirective implements OnInit, OnChanges, OnDestroy {
     }
 
     init() {
-
         const heightDefault = 220;
 
         this.width = this.attrWidth || '100%';
@@ -90,7 +88,7 @@ export class FlotDirective implements OnInit, OnChanges, OnDestroy {
         this.plot.draw();
 
         function toggleFor(sName) {
-            return function(s, i) {
+            return function (s, i) {
                 if (someData[i] && someData[i][sName]) {
                     someData[i][sName].show = s;
                 }

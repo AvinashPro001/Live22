@@ -3,13 +3,11 @@ declare var $: any;
 
 @Injectable()
 export class SettingsService {
-
     public user: any;
     public app: any;
     public layout: any;
 
     constructor() {
-
         // User Settings
         // -----------------------------------
         this.user = {
@@ -45,7 +43,6 @@ export class SettingsService {
             asideToggled: false,
             viewAnimation: 'ng-fadeInUp'
         };
-
     }
 
     getAppSetting(name) {
@@ -77,5 +74,4 @@ export class SettingsService {
     toggleLayoutSetting(name) {
         return this.setLayoutSetting(name, !this.getLayoutSetting(name));
     }
-
 }

@@ -1,4 +1,4 @@
-import { BrowserModule ,Title} from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
@@ -34,7 +34,6 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { Observable } from 'rxjs';
-
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -72,7 +71,7 @@ export function createTranslateLoader(http: HttpClient) {
         NgxSpinnerModule,
         OwlDateTimeModule,
         OwlNativeDateTimeModule,
-        
+
     ],
     exports: [
         RouterModule,

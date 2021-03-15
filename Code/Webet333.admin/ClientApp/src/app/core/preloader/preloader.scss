@@ -44,6 +44,7 @@ $preloader-hg: 30px;
     min-width: 10px;
     background-size: $preloader-wd $preloader-hg;
 }
+
 .preloader-hidden {
     display: none;
 }
@@ -57,6 +58,7 @@ $preloader-hg: 30px;
         transform: scale(0);
     }
 }
+
 .preloader-hidden-add-active {
     opacity: 0;
 }

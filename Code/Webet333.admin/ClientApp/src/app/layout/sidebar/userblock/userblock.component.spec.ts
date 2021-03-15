@@ -6,7 +6,6 @@ import { UserblockComponent } from './userblock.component';
 import { UserblockService } from './userblock.service';
 
 describe('Component: Userblock', () => {
-
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [UserblockService]

@@ -29,45 +29,42 @@
     <!-- START Right Navbar-->
     <ul class="navbar-nav flex-row">
         <!-- START Alert menu-->
-         <li class="nav-item dropdown dropdown-list" dropdown>
+        <li class="nav-item dropdown dropdown-list" dropdown>
             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" dropdownToggle>
                 <em class="icon-user">&nbsp; <label>{{name}}</label>&nbsp;<span class="fa fa-chevron-circle-down"></span></em>
-            </a> 
+            </a>
             <!-- START Dropdown menu-->
-             <div *dropdownMenu class="dropdown-menu dropdown-menu-right animated flipInX">
-                <div class="dropdown-item"> 
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right animated flipInX">
+                <div class="dropdown-item">
                     <!-- START list group-->
-                     <div class="list-group"> 
-                       <!-- list item-->
+                    <div class="list-group">
+                        <!-- list item-->
                         <div class="list-group-item list-group-item-action">
-                          <div class="media" (click)="ChangePassword()">
-                             <div class="align-self-start mr-2">
-                                <em class="fa fa-key fa-2x text-info"></em>
-                             </div>
-                             <div class="media-body" >
-                                <label class="m-lg-0" >Change Password</label>
-                                
-                             </div>
-                          </div>
-                       </div> 
-                       <!-- list item-->
+                            <div class="media" (click)="ChangePassword()">
+                                <div class="align-self-start mr-2">
+                                    <em class="fa fa-key fa-2x text-info"></em>
+                                </div>
+                                <div class="media-body">
+                                    <label class="m-lg-0">Change Password</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- list item-->
                         <div class="list-group-item list-group-item-action">
-                          <div class="media" (click)="logout()">
-                             <div class="align-self-start mr-2">
-                                <em class="fa icon-logout fa-2x text-warning"></em>
-                             </div>
-                             <div class="media-body" >
-                                <label class="m-0" >Logout</label>
-                             </div>
-                          </div>
-                       </div> 
-                    </div> 
+                            <div class="media" (click)="logout()">
+                                <div class="align-self-start mr-2">
+                                    <em class="fa icon-logout fa-2x text-warning"></em>
+                                </div>
+                                <div class="media-body">
+                                    <label class="m-0">Logout</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- END list group-->
-                 </div>
-            </div> 
-      
+                </div>
+            </div>
     </ul>
     <app-navsearch [visible]="getNavSearchVisible()" (onclose)="setNavSearchVisible(false)"></app-navsearch>
-
 </nav>
 <!-- END Top Navbar-->

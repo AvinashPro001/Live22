@@ -19,7 +19,6 @@ import { MenuService } from '../../core/menu/menu.service';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
     name: any;
     navCollapsed = true; // for horizontal layout
     menuItems = []; // for horizontal layout
@@ -28,10 +27,8 @@ export class HeaderComponent implements OnInit {
     @ViewChild('fsbutton') fsbutton;  // the fullscreen button
 
     constructor(public menu: MenuService, public userblockService: UserblockService, public settings: SettingsService, private adminService: AdminService, private toasterService: ToasterService, private router: Router) {
-
         // show only a few items on demo
         this.menuItems = menu.getMenu().slice(0, 4); // for horizontal layout
-
     }
 
     ngOnInit() {
@@ -56,18 +53,17 @@ export class HeaderComponent implements OnInit {
             else if (error.error.message === "Your account is not active.") {
                 localStorage.removeItem('currentUser');
                 this.router.navigate(['/']);
-                }
+            }
             else if (error.error.message === "You are not authorised to access this content.") {
                 localStorage.removeItem('currentUser');
                 this.router.navigate(['/']);
-                }
+            }
             else if (error.error.message === "Your account is deleted by the administrator.") {
                 localStorage.removeItem('currentUser');
                 this.router.navigate(['/']);
             }
         });
     }
-
 
     toggleUserBlock(event) {
         event.preventDefault();
@@ -101,7 +97,6 @@ export class HeaderComponent implements OnInit {
     }
 
     toggleFullScreen(event) {
-
         if (screenfull.enabled) {
             screenfull.toggle();
         }

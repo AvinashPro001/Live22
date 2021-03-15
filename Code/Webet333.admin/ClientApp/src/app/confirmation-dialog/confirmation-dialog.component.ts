@@ -6,7 +6,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     templateUrl: './confirmation-dialog.component.html',
 })
 export class ConfirmationDialogComponent implements OnInit {
-
     @Input() title: string;
     @Input() message: string;
     @Input() remarks: string;
@@ -29,5 +28,4 @@ export class ConfirmationDialogComponent implements OnInit {
     public dismiss() {
         this.activeModal.dismiss();
     }
-
 }

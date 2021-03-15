@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class MenuService {
-
     menuItems: Array<any>;
 
     constructor() {
@@ -27,5 +26,4 @@ export class MenuService {
     getMenu() {
         return this.menuItems;
     }
-
 }

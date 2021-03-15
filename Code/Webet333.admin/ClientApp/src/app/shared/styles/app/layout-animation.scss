@@ -8,7 +8,7 @@
 
 .aside-inner,
 .navbar-header,
-.sidebar>.sidebar-nav>li {
+.sidebar > .sidebar-nav > li {
     transition: width .2s cubic-bezier(0.35, 0, 0.25, 1);
 }
 
@@ -16,29 +16,29 @@
     transition: margin-left .2s cubic-bezier(0.35, 0, 0.25, 1);
 }
 
-.sidebar>.sidebar-nav .badge {
+.sidebar > .sidebar-nav .badge {
     animation: fadeInRight 1s;
     animation-fill-mode: both;
 }
 
-.aside-collapsed .sidebar>.sidebar-nav .badge,
-.aside-collapsed-text .sidebar>.sidebar-nav .badge {
+.aside-collapsed .sidebar > .sidebar-nav .badge,
+.aside-collapsed-text .sidebar > .sidebar-nav .badge {
     animation: fadeIn 1s;
 }
 
-.sidebar .sidebar-nav>li>a {
+.sidebar .sidebar-nav > li > a {
     animation: fadeInLeft .5s;
 }
 
-.sidebar>.sidebar-nav>.nav-heading,
-.sidebar>.sidebar-nav>li>a>span,
+.sidebar > .sidebar-nav > .nav-heading,
+.sidebar > .sidebar-nav > li > a > span,
 .navbar-brand .brand-logo {
     animation: fadeIn 1s;
 }
 
-.sidebar li>a,
-.sidebar li>.nav-item,
-.sidebar>.sidebar-nav>.nav-heading {
+.sidebar li > a,
+.sidebar li > .nav-item,
+.sidebar > .sidebar-nav > .nav-heading {
     white-space: nowrap;
 }
 
@@ -47,6 +47,7 @@
     .user-block-picture {
         transition: width .2s cubic-bezier(0.35, 0, 0.25, 1);
     }
+
     .user-block {
         transition: padding .2s cubic-bezier(0.35, 0, 0.25, 1);
     }

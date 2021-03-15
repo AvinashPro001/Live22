@@ -7,11 +7,8 @@ import { SettingsService } from '../../core/settings/settings.service';
     styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-
     constructor(public settings: SettingsService) { }
 
     ngOnInit() {
-
     }
-
 }
