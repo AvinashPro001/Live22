@@ -2432,7 +2432,7 @@ namespace Webet333.api.Controllers
                     MaxBetUsername = user.VendorMemberId,
                     MegaUsername = user.Mega888LoginId,
                     _918KissUserName = user.Username918,
-                    PlaytechUserName = user.Mega888LoginId,
+                    PlaytechUserName = user.PlaytechGamePrefix+user.Username,
                     PragmaticUsername = user.PragmaticGamePrefix + user.UserId,
                     Pussy888Username = user.Pussy888Username,
                     SAUsername = user.SAGamePrefix + user.Username,
