@@ -3,27 +3,6 @@
     Layout = ""; }
 <div id="comContent"></div>
 <div id="mComContent">
-    <!--<div class="loadingImage" style="z-index: 2147483643;"></div>-->
-
-    <div id="success_snackbar">
-        <div>
-            <span><img class="Image" width="100px" height="100px" src="~/images/success.png" /></span>
-        </div>
-        <div class="message">
-            <span id="SuccessMessage">
-            </span>
-        </div>
-    </div>
-
-    <div id="error_snackbar">
-        <div>
-            <span><img class="Image" width="100px" height="100px" src="~/images/Error.png" /></span>
-        </div>
-        <div class="message">
-            <span id="ErrorMessage">
-            </span>
-        </div>
-    </div>
 
     <script>
         document.body.classList.add("no-pad-top");
@@ -31,7 +10,6 @@
 
         if (GetLocalStorage('currentUser') !== null) {
             loadPageHome({ backFrom: 'login' });
-
         }
     </script>
     <div class="page-title white-bg text-center logowithback no-pad-top">
@@ -98,16 +76,6 @@
     });
 </script>
 
-
-
-<!--Begin Comm100 Live Chat Code-->
-<div></div>
-<script type="text/javascript">
-    var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 0) })(Comm100API || {})
-</script>
-<!--End Comm100 Live Chat Code-->
-<!-- Slider Section End -->
-<!-- Modal For Video -->
 <script type="text/javascript">
     $(document).ready(function () {
         $(".open-modal").click();
@@ -118,19 +86,7 @@
         jQuery("#more-arrow").toggleClass("rotate");
     });
 </script>
-<script src="~/js/spa/m_spa.js"></script>
-<!-- //Modal For Video -->
-<script src="~/js/jcf/jcf.js"></script>
-<script src="~/js/jcf/jcf.select.js"></script>
-<script src="~/js/jcf/jcf.checkbox.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(function () {
-            jcf.replaceAll();
-        });
-    });
 
-</script>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".navbar-toggle,.canvas-overlay").click(function () {
@@ -162,11 +118,6 @@
 </script>
 
 <script>
-
-    function language(value) {
-        SetLocalStorage('language', value);
-        get();
-    }
     function get() {
         (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
 
@@ -190,8 +141,6 @@
                 });
             }
         });
-        announcementMobile();
-
     }
     setTimeout(() => {
         get();
