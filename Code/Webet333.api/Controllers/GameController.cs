@@ -2406,7 +2406,7 @@ namespace Webet333.api.Controllers
                             var result = XDocument.Parse(await GameHelpers.CallThirdPartyApi(Url, null));
 
                             if (result.Descendants("errcode").Single().Value == "0")
-                                m8UsersSetBettingLimitsRequest.Add(new M8UsersSetBettingLimitsRequest { Id = user.Id.ToString(), SetLimit = true, AdminId = GetUserId(User)});
+                                m8UsersSetBettingLimitsRequest.Add(new M8UsersSetBettingLimitsRequest { Id = user.Id.ToString(), SetLimit = true, AdminId = GetUserId(User) });
 
                         }
                         using (var gamehelper = new GameHelpers(Connection))
@@ -2451,7 +2451,7 @@ namespace Webet333.api.Controllers
                     MaxBetUsername = user.VendorMemberId,
                     MegaUsername = user.Mega888LoginId,
                     _918KissUserName = user.Username918,
-                    user.PlaytechGamePrefix + user.Username,
+                    PlaytechUserName = user.PlaytechGamePrefix + user.Username,
                     PragmaticUsername = user.PragmaticGamePrefix + user.UserId,
                     Pussy888Username = user.Pussy888Username,
                     SAUsername = user.SAGamePrefix + user.Username,
