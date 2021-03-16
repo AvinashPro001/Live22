@@ -5,7 +5,6 @@ namespace Webet333.models.Response.Account
 {
     public class ContactInformationResponse
     {
-
         [JsonProperty("Type")]
         public string Type { get; set; }
 

@@ -273,7 +273,7 @@ namespace Webet333.api.Helpers
 
         #region Max Bet Services
 
-        internal async Task<dynamic> MaxBetServicesInsert(List<BetDetail> response, List<BetNumberDetails> responseNumber, long versionKey = 0, string adminId = null, string description = null)
+        internal async Task<dynamic> MaxBetServicesInsert(List<BetDetail> response, List<BetNumberDetails> responseNumber, long versionKey = 0, string adminId = null)
         {
 
             var resultNumber = JsonConvert.SerializeObject(responseNumber.OrderBy(x => x.TransId).ToList());
@@ -289,8 +289,7 @@ namespace Webet333.api.Helpers
                             jsonBettingDetails = result,
                             jsonBettingNumberDetails = resultNumber,
                             versionKey = versionKey,
-                            adminId,
-                            description
+                            adminId
                         });
                 }
             }
@@ -508,7 +507,7 @@ namespace Webet333.api.Helpers
         #endregion Get Calculate Rebate
 
         #region Main Wallet Deposit & Withdraw
-        public async Task<MainWalletTransferResponse> RebateMainWalletDepositWithdraw(string Username, decimal Amount, string Method, string GameType = null, string AdminId = null, string Description = null)
+        public async Task<MainWalletTransferResponse> RebateMainWalletDepositWithdraw(string Username, decimal Amount, string Method, string GameType = null, string AdminId = null)
         {
             using (var repository = new DapperRepository<MainWalletTransferResponse>(Connection))
             {
@@ -520,8 +519,7 @@ namespace Webet333.api.Helpers
                         Amount,
                         Method,
                         GameType,
-                        AdminId,
-                        Description
+                        AdminId
                     });
                 return response;
             }
@@ -543,7 +541,7 @@ namespace Webet333.api.Helpers
 
         #region Game Rebate
 
-        internal async Task<dynamic> GameRebate(string FromDate, string ToDate, string gameType, decimal totalUser, decimal betAmount, decimal rolling, decimal commAmount, decimal commPrecentage, string jsonData, string adminId = null, string description = null)
+        internal async Task<dynamic> GameRebate(string FromDate, string ToDate, string gameType, decimal totalUser, decimal betAmount, decimal rolling, decimal commAmount, decimal commPrecentage, string jsonData, string adminId = null)
         {
             using (var GetRepository = new DapperRepository<dynamic>(Connection))
             {
@@ -560,8 +558,7 @@ namespace Webet333.api.Helpers
                         commAmount,
                         commPrecentage,
                         jsonData,
-                        adminId,
-                        description
+                        adminId
                     });
 
                 return users;
@@ -572,7 +569,7 @@ namespace Webet333.api.Helpers
 
         #region Funtionality of Rebate
 
-        public async Task<List<RebateCalculateResponse>> RebateOperation(RebateCalculateRequest request, string adminId = null, string description = null)
+        public async Task<List<RebateCalculateResponse>> RebateOperation(RebateCalculateRequest request, string adminId = null)
         {
             var data = await GetCalculateData(request);
 
@@ -589,7 +586,7 @@ namespace Webet333.api.Helpers
             {
                 foreach (var d in data)
                 {
-                    var result = await RebateMainWalletDepositWithdraw(Username: d.Username, Amount: d.CommAmount, Method: "Deposit", GameType: request.GameType, AdminId: adminId, Description: description);
+                    var result = await RebateMainWalletDepositWithdraw(Username: d.Username, Amount: d.CommAmount, Method: "Deposit", GameType: request.GameType, AdminId: adminId);
                     if (result.ErrorCode == 0)
                     {
                         responseList.Add(d);
@@ -609,7 +606,7 @@ namespace Webet333.api.Helpers
             data = data.Where(s => responseList.Any(l => (l.GameName == s.GameName && s.APIUsername == l.APIUsername))).ToList();
 
             var jsonData = JsonConvert.SerializeObject(data);
-            await GameRebate(request.FromDate, request.ToDate, request.GameType, data.Count, BetTotal, Rollingtotal, CommTotal, request.Rebate, jsonData, adminId: adminId, description: description);
+            await GameRebate(request.FromDate, request.ToDate, request.GameType, data.Count, BetTotal, Rollingtotal, CommTotal, request.Rebate, jsonData, adminId: adminId);
 
             return responseList;
         }
@@ -618,7 +615,7 @@ namespace Webet333.api.Helpers
 
         #region Rebate Delete
 
-        internal async Task<dynamic> GameRebateDelete(string userId, string adminId = null, string description = null)
+        internal async Task<dynamic> GameRebateDelete(string userId, string adminId = null)
         {
             using (var GetRepository = new DapperRepository<dynamic>(Connection))
             {
@@ -627,8 +624,7 @@ namespace Webet333.api.Helpers
                     new
                     {
                         userId,
-                        adminId,
-                        description
+                        adminId
                     });
                 return users;
             }
@@ -1278,7 +1274,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                dynamic link = await repository.AddOrUpdateAsync(StoredProcConsts.Game.DownloadLink_Update, new { request.Id, request.Link, request.AdminId, request.Description });
+                dynamic link = await repository.AddOrUpdateAsync(StoredProcConsts.Game.DownloadLink_Update, new { request.Id, request.Link, request.AdminId });
                 return link;
             }
         }
@@ -1339,7 +1335,7 @@ namespace Webet333.api.Helpers
         #endregion Global Variable Select
 
         #region  M8 User reset limit
-        internal async Task M8LimitReset(bool SetLimit, string adminId = null, string descripton = null)
+        internal async Task M8LimitReset(bool SetLimit, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -1348,8 +1344,7 @@ namespace Webet333.api.Helpers
                     new
                     {
                         SetLimit,
-                        adminId,
-                        descripton
+                        adminId
                     });
             }
         }

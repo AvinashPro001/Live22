@@ -1,5 +1,4 @@
-(function(global) {
-
+(function (global) {
     var counter = 0, timeout;
     var preloader = document.querySelector('.preloader');
     var progressBar = document.querySelector('.preloader-progress-bar');
@@ -14,7 +13,7 @@
     timeout = setTimeout(startCounter, 20);
 
     // main.ts call this function once the app is boostrapped
-    global.appBootstrap = function() {
+    global.appBootstrap = function () {
         setTimeout(endCounter, 1000);
     };
 
@@ -28,12 +27,11 @@
     }
 
     function endCounter() {
-
         clearTimeout(timeout);
 
         if (progressBar) progressBar.style.width = '100%';
 
-        setTimeout(function() {
+        setTimeout(function () {
             // animate preloader hiding
             removePreloader();
             // retore scrollbar
@@ -42,10 +40,9 @@
     }
 
     function removePreloader() {
-        preloader.addEventListener('transitionend', function() {
+        preloader.addEventListener('transitionend', function () {
             preloader.className = 'preloader-hidden';
         });
         preloader.className += ' preloader-hidden-add preloader-hidden-add-active';
     };
-
 })(window);

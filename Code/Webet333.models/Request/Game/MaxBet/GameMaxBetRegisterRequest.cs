@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace Webet333.models.Request.Game.MaxBet
 {
@@ -9,10 +7,8 @@ namespace Webet333.models.Request.Game.MaxBet
         [JsonProperty(PropertyName = "userid")]
         public string UserId { get; set; }
 
-
         [JsonProperty(PropertyName = "firstname")]
         public string Firstname { get; set; }
-
 
         [JsonProperty(PropertyName = "lastname")]
         public string Lastname { get; set; }

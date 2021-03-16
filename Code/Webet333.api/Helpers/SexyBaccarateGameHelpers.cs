@@ -191,7 +191,7 @@ namespace Webet333.api.Helpers.SexyBaccarat
         #endregion 
 
         #region Sexybaccarat Set Limit
-        internal async Task<dynamic> SexyBaccaratSetBetLimit(List<long> bettingLimit, string adminId = null, string description = null)
+        internal async Task<dynamic> SexyBaccaratSetBetLimit(List<long> bettingLimit, string adminId = null)
         {
             var request = new SexyBaccaratBetlimitResponse
             {
@@ -212,8 +212,7 @@ namespace Webet333.api.Helpers.SexyBaccarat
                     {
                         Value = response,
                         Name = "SexyLimit",
-                        adminId,
-                        description
+                        adminId
                     });
 
                 return result;

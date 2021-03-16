@@ -20,7 +20,6 @@ namespace Webet333.models.Response.Account
         [JsonProperty(PropertyName = "password")]
         public string Password { get; set; }
 
-
         [JsonProperty(PropertyName = "active")]
         public bool Active { get; set; }
 

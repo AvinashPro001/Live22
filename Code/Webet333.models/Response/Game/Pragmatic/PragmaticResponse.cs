@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Webet333.models.Response.Game.Pragmatic
 {
     public class PragmaticResponse
     {
         public string error { get; set; }
+
         public string description { get; set; }
     }
 
@@ -33,7 +32,9 @@ namespace Webet333.models.Response.Game.Pragmatic
     public class GameList
     {
         public string gameID { get; set; }
+
         public string gameName { get; set; }
+
         public string ImagePath { get; set; }
     }
 }

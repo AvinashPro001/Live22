@@ -7,7 +7,6 @@ declare var EasyPieChart: any;
     selector: '[easypiechart]'
 })
 export class EasypiechartDirective implements OnInit, OnChanges {
-
     /**
      * default easy pie chart options
      * @type {Object}
@@ -37,7 +36,7 @@ export class EasypiechartDirective implements OnInit, OnChanges {
     }
 
     ngOnInit() {
-        if(EasyPieChart) {
+        if (EasyPieChart) {
             this.pieChart = new EasyPieChart(this.element.nativeElement, this.options);
             this.pieChart.update(this.percent);
         }
@@ -48,5 +47,4 @@ export class EasypiechartDirective implements OnInit, OnChanges {
             this.pieChart.update(this.percent);
         }
     }
-
 }

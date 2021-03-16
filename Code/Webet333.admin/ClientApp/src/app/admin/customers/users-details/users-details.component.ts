@@ -233,6 +233,7 @@ export class UsersDetailsComponent implements OnInit {
     bankRows: any;
 
     imagePath: any;
+    slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };
 
     constructor(
         private datePipe: DatePipe,

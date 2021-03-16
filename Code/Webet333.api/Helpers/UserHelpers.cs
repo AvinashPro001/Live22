@@ -67,7 +67,7 @@ namespace Webet333.api.Helpers
                 await Update(StoredProcConsts.User.ProfileUpdate, request);
         }
 
-        public async Task ProfileStatusUpdate(DeleteRequest request, string adminId = null, string description = null)
+        public async Task ProfileStatusUpdate(DeleteRequest request, string adminId = null)
         {
             await Update(
                 StoredProcConsts.User.ProfileUpdateStatus,
@@ -75,12 +75,11 @@ namespace Webet333.api.Helpers
                 {
                     request.Id,
                     request.Active,
-                    adminId,
-                    description
+                    adminId
                 });
         }
 
-        public async Task ProfileDelete(DeleteRequest request, string adminId = null, string description = null)
+        public async Task ProfileDelete(DeleteRequest request, string adminId = null)
         {
             await Update(
                 StoredProcConsts.User.ProfileDelete,
@@ -88,8 +87,7 @@ namespace Webet333.api.Helpers
                 {
                     request.Id,
                     request.Active,
-                    adminId,
-                    description
+                    adminId
                 });
         }
 

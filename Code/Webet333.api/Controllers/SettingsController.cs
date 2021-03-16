@@ -65,7 +65,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             using (var setting_help = new SettingsHelpers(Connection))
             {
@@ -81,7 +80,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             using (var setting_help = new SettingsHelpers(Connection))
             {
@@ -104,10 +102,9 @@ namespace Webet333.api.Controllers
             }
 
             string adminId = GetUserId(User).ToString();
-            string descripton = JsonConvert.SerializeObject(request);
 
             using (var setting_help = new SettingsHelpers(Connection))
-                await setting_help.AdminBankDetailsImageUpdate(Guid.Parse(request.Id), DefaultConsts.Image, adminId: adminId, descripton: descripton);
+                await setting_help.AdminBankDetailsImageUpdate(Guid.Parse(request.Id), DefaultConsts.Image, adminId: adminId);
 
             return OkResponse();
         }
@@ -136,10 +133,9 @@ namespace Webet333.api.Controllers
             }
 
             string adminId = GetUserId(User).ToString();
-            string descripton = JsonConvert.SerializeObject(request);
 
             using (var setting_help = new SettingsHelpers(Connection))
-                await setting_help.AdminBankDetailsImageUpdate(Guid.Parse(request.Id), DefaultConsts.Image, adminId: adminId, descripton: descripton);
+                await setting_help.AdminBankDetailsImageUpdate(Guid.Parse(request.Id), DefaultConsts.Image, adminId: adminId);
 
             return OkResponse();
         }
@@ -163,11 +159,10 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             string adminId = GetUserId(User).ToString();
-            string description = JsonConvert.SerializeObject(request);
 
             using (var setting_help = new SettingsHelpers(Connection))
             {
-                await setting_help.DeleteOrActiveAdminBankDetail(Guid.Parse(request.Id), Active: request.Active, adminId: adminId, description: description);
+                await setting_help.DeleteOrActiveAdminBankDetail(Guid.Parse(request.Id), Active: request.Active, adminId: adminId);
                 return OkResponse();
             }
         }
@@ -220,11 +215,10 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             string adminId = GetUserId(User).ToString();
-            string description = JsonConvert.SerializeObject(request);
 
             using (var setting_help = new SettingsHelpers(Connection))
             {
-                await setting_help.DeleteOrActiveAnnouncementDetail(Guid.Parse(request.Id), adminId: adminId, description: description);
+                await setting_help.DeleteOrActiveAnnouncementDetail(Guid.Parse(request.Id), adminId: adminId);
                 return OkResponse();
             }
         }
@@ -238,7 +232,6 @@ namespace Webet333.api.Controllers
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             using (var setting_help = new SettingsHelpers(Connection))
             {
@@ -255,7 +248,6 @@ namespace Webet333.api.Controllers
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             using (var setting_help = new SettingsHelpers(Connection))
             {
@@ -354,7 +346,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             var extension = request.CSImage == null ? null : "." + request.CSImage.Split("base64,")[0].Split("/")[1].Replace(";", "");
             var image = request.CSImage == null ? null : request.CSImage.Split("base64,")[1];
@@ -382,7 +373,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             var extension = request.CSImage == null ? null : "." + request.CSImage.Split("base64,")[0].Split("/")[1].Replace(";", "");
             var image = request.CSImage == null ? null : request.CSImage.Split("base64,")[1];

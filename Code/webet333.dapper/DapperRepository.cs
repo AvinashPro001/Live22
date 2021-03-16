@@ -1,21 +1,23 @@
 ﻿using Dapper;
-using Webet333.dapper.interfaces;
-using Webet333.dapper.Internals;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Webet333.dapper.interfaces;
+using Webet333.dapper.Internals;
 
 namespace Webet333.dapper
 {
     public class DapperRepository<TEntity> : IDisposable, IDapperRepository<TEntity> where TEntity : class
     {
         #region Object declarion and constructor.
+
         private readonly IDbConnection connection;
         private int? commandTimeout = 120;
         private IDbTransaction dbTransaction = null;
+
         /// <summary>
         /// Manager query Constructor.
         /// </summary>
@@ -30,6 +32,7 @@ namespace Webet333.dapper
         /// Idetenfier parameter (@) to SqlServer (:) to Oracle
         /// </summary>
         public char ParameterIdentified { get; set; }
+
         protected string QuerySelect { get; set; }
         protected string QueryInsert { get; set; }
         private string IdentityField { get; set; }
@@ -46,9 +49,11 @@ namespace Webet333.dapper
             PartsQueryGenerator = new PartsQueryGenerator<TEntity>(ParameterIdentified);
             IdentityInspector = new IDentityInspector<TEntity>(connection);
         }
-        #endregion
+
+        #endregion Object declarion and constructor.
 
         #region Creates Queries
+
         protected virtual void CreateSelectquery()
         {
             if (string.IsNullOrWhiteSpace(QuerySelect)) QuerySelect = PartsQueryGenerator.GenerateSelect();
@@ -62,15 +67,16 @@ namespace Webet333.dapper
                 QueryInsert = PartsQueryGenerator.GeneratePartInsert(IdentityField);
             }
         }
-        #endregion
+
+        #endregion Creates Queries
 
         public void GetData()
         {
-            
             //var result = connection.QueryMultiple(query, parameters, commandType: type);
         }
 
         #region GetData/Async
+
         /// <summary>
         /// Get Entities in DB from query with object parameters
         /// </summary>
@@ -102,7 +108,7 @@ namespace Webet333.dapper
         {
             ParameterValidator.ValidateString(query, nameof(query));
             ParameterValidator.ValidateObject(parameters, nameof(parameters));
-            var result =await connection.QueryMultipleAsync(query, parameters, dbTransaction, commandTimeout, type);
+            var result = await connection.QueryMultipleAsync(query, parameters, dbTransaction, commandTimeout, type);
             return result;
         }
 
@@ -118,9 +124,11 @@ namespace Webet333.dapper
             var result = connection.QueryAsync<TEntity>(query, parameters, dbTransaction, commandTimeout, type);
             return result;
         }
-        #endregion
+
+        #endregion GetData/Async
 
         #region Find/Async
+
         /// <summary>
         /// Find entity in DB for PK
         /// </summary>
@@ -145,9 +153,11 @@ namespace Webet333.dapper
                 return Find(query, primarykeyFields, type);
             });
         }
-        #endregion
+
+        #endregion Find/Async
 
         #region Add/Async
+
         /// <summary>
         /// Add a new Entity in DB
         /// </summary>
@@ -208,9 +218,11 @@ namespace Webet333.dapper
             var result = connection.ExecuteAsync(query, entities, dbTransaction, commandTimeout, type);
             return result;
         }
-        #endregion
+
+        #endregion Add/Async
 
         #region Dispose method implementation
+
         public void Dispose()
         {
             Dispose(true);
@@ -225,6 +237,7 @@ namespace Webet333.dapper
                 connection.Dispose();
             }
         }
-        #endregion
+
+        #endregion Dispose method implementation
     }
 }

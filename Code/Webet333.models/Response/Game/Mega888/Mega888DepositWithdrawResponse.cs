@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Webet333.models.Response.Game.Mega888
+﻿namespace Webet333.models.Response.Game.Mega888
 {
     public class Mega888DepositWithdrawResponse
     {
@@ -15,7 +11,7 @@ namespace Webet333.models.Response.Game.Mega888
         public string jsonrpc { get; set; }
     }
 
-    public  class Error
+    public class Error
     {
         public long code { get; set; }
 

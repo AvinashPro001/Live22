@@ -193,7 +193,7 @@ namespace Webet333.api.Helpers
 
         #region DG game Bet Limit
 
-        internal async Task<dynamic> DGBetLimit(string BetLimit, string adminId = null, string descripton = null)
+        internal async Task<dynamic> DGBetLimit(string BetLimit, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -203,8 +203,7 @@ namespace Webet333.api.Helpers
                     {
                         Value = BetLimit,
                         Name = "DGLimit",
-                        adminId,
-                        descripton
+                        adminId
                     });
 
                 return result;

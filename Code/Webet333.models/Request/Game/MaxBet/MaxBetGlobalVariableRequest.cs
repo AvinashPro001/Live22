@@ -13,7 +13,6 @@ namespace Webet333.models.Request.Game.MaxBet
         [Required]
         [JsonProperty(PropertyName = "maxValue")]
         public string Maximumvalue { get; set; }
-
     }
 
     public class MaxBetBettingDetails

@@ -5,7 +5,6 @@ declare var $: any;
     selector: 'scrollable'
 })
 export class ScrollableDirective implements OnInit {
-
     @Input() height: number;
     defaultHeight = 250;
 
@@ -16,5 +15,4 @@ export class ScrollableDirective implements OnInit {
             height: (this.height || this.defaultHeight)
         });
     }
-
 }

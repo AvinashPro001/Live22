@@ -223,11 +223,10 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             string adminId = GetUserId(User).ToString();
-            string description = JsonConvert.SerializeObject(request);
 
             using (var game_helper = new GameHelpers(Connection: Connection120))
             {
-                var data = await game_helper.RebateOperation(request, adminId, description);
+                var data = await game_helper.RebateOperation(request, adminId);
 
                 if (data.Count == 0 || data.Count < 0)
                     return NotFoundResponse();
@@ -304,7 +303,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             string adminId = GetUserId(User).ToString();
-            string description = JsonConvert.SerializeObject(request);
 
             using (var game_helper = new GameHelpers(Connection: Connection))
             {
@@ -315,10 +313,10 @@ namespace Webet333.api.Controllers
 
                 foreach (var d in users)
                 {
-                    await game_helper.RebateMainWalletDepositWithdraw(Username: d.Username, Amount: d.CommAmount, Method: "Withdraw", AdminId: adminId, Description: description);
+                    await game_helper.RebateMainWalletDepositWithdraw(Username: d.Username, Amount: d.CommAmount, Method: "Withdraw", AdminId: adminId);
                 }
 
-                await game_helper.GameRebateDelete(request.Id, adminId, description);
+                await game_helper.GameRebateDelete(request.Id, adminId);
 
                 return OkResponse();
             }
@@ -1430,13 +1428,12 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             string adminId = GetUserId(User).ToString();
-            string description = JsonConvert.SerializeObject(request);
 
             MaxBetServicesResponse bettingDetailsList = JsonConvert.DeserializeObject<MaxBetServicesResponse>(request.JsonData.ToString());
 
             using (var game_help = new GameHelpers(Connection: Connection))
             {
-                await game_help.MaxBetServicesInsert(bettingDetailsList.Data.BetDetails, bettingDetailsList.Data.BetNumberDetails, request.VersionKey, adminId: adminId, description: description);
+                await game_help.MaxBetServicesInsert(bettingDetailsList.Data.BetDetails, bettingDetailsList.Data.BetNumberDetails, request.VersionKey, adminId: adminId);
                 return OkResponse();
             }
         }
@@ -1947,7 +1944,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             string qrText = String.Empty;
             using (var game_helper = new GameHelpers(Connection))
@@ -2316,7 +2312,6 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             request.AdminId = GetUserId(User);
-            request.Description = JsonConvert.SerializeObject(request);
 
             using (var game_helper = new GameHelpers(Connection))
             {
@@ -2351,11 +2346,10 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
 
             string adminId = GetUserId(User).ToString();
-            string descripton = "false";
 
             using (var game_helper = new GameHelpers(Connection))
             {
-                await game_helper.M8LimitReset(false, adminId: adminId, descripton: descripton);
+                await game_helper.M8LimitReset(false, adminId: adminId);
 
                 return OkResponse();
             }
@@ -2412,7 +2406,7 @@ namespace Webet333.api.Controllers
                             var result = XDocument.Parse(await GameHelpers.CallThirdPartyApi(Url, null));
 
                             if (result.Descendants("errcode").Single().Value == "0")
-                                m8UsersSetBettingLimitsRequest.Add(new M8UsersSetBettingLimitsRequest { Id = user.Id.ToString(), SetLimit = true, AdminId = GetUserId(User), Description = JsonConvert.SerializeObject(request) });
+                                m8UsersSetBettingLimitsRequest.Add(new M8UsersSetBettingLimitsRequest { Id = user.Id.ToString(), SetLimit = true, AdminId = GetUserId(User)});
 
                         }
                         using (var gamehelper = new GameHelpers(Connection))

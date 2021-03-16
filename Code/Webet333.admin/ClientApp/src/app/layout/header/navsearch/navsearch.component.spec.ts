@@ -6,7 +6,6 @@
 // import { ElementRef } from '@angular/core';
 
 // describe('Component: Navsearch', () => {
-
 //     beforeEach(() => {
 //         TestBed.configureTestingModule({
 //             providers: [ElementRef]

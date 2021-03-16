@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Webet333.models.Response.Game.Playtech
 {
@@ -19,7 +16,6 @@ namespace Webet333.models.Response.Game.Playtech
 
     public class PlaytechRegisterResult
     {
-
         [JsonProperty("result")]
         public string Result { get; set; }
 
@@ -34,7 +30,6 @@ namespace Webet333.models.Response.Game.Playtech
 
         [JsonProperty("error")]
         public bool Error { get; set; }
-
     }
 
     public class Executiontime

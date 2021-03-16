@@ -1,15 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Webet333.models.Request.Game.DG
 {
     public class DgTransferRequest : GetByIdRequest
     {
         [Required]
-        [JsonProperty(PropertyName ="method")]
+        [JsonProperty(PropertyName = "method")]
         public string Method { get; set; }
 
         [Required]

@@ -5,7 +5,6 @@ declare var $: any;
     selector: '[vectormap]'
 })
 export class VectormapDirective implements OnInit, OnDestroy {
-
     @Input() mapHeight: number;
     @Input() mapName: any;
     @Input() mapOptions: any;
@@ -17,7 +16,6 @@ export class VectormapDirective implements OnInit, OnDestroy {
     constructor(public element: ElementRef) { }
 
     ngOnInit() {
-
         this.$element = $(this.element.nativeElement);
         this.$element.css('height', this.mapHeight);
 
@@ -74,5 +72,4 @@ export class VectormapDirective implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.$element.vectorMap('get', 'mapObject').remove();
     }
-
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Webet333.models.Request.Promotions
 {
-    public class PromotionRequest
+    public class PromotionRequest : BaseAdminLogRequest
     {
         [Required]
         [JsonProperty(PropertyName = "bankAccountClaimOnce")]
@@ -91,7 +91,6 @@ namespace Webet333.models.Request.Promotions
         [JsonProperty(PropertyName = "isSportsCategory")]
         public bool IsSportsCategory { get; set; }
 
-
         [JsonProperty(PropertyName = "isAG")]
         public bool IsAG { get; set; }
 
@@ -169,12 +168,6 @@ namespace Webet333.models.Request.Promotions
 
         [JsonProperty(PropertyName = "isDiamond")]
         public bool IsDiamond { get; set; }
-
-        [JsonIgnore]
-        public System.Guid AdminId { get; set; }
-
-        [JsonIgnore]
-        public string DescriptionAdminLog { get; set; }
     }
 
     public class PromotionUpdateRequest : PromotionRequest
@@ -183,5 +176,4 @@ namespace Webet333.models.Request.Promotions
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
     }
-
 }

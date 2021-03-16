@@ -104,7 +104,7 @@ export class AllGameSetBetlimitComponent implements OnInit {
         this.adminService.get<any>(customer.getBetLimit).toPromise().then(res => {
             this.agLimit = res.data.aGbettingLimits;
             this.dgLimit = res.data.dGbettingLimits;
-            this.sexyLimit = res.data.sexybettingLimits.Sexybcrt.Live.LimitId;
+            this.sexyLimit = res.data.sexybettingLimits.SEXYBCRT.LIVE.limitId;
         }).catch(error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });

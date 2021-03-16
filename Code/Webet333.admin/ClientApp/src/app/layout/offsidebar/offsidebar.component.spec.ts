@@ -12,7 +12,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { createTranslateLoader } from '../../app.module';
 
 describe('Component: Offsidebar', () => {
-
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [

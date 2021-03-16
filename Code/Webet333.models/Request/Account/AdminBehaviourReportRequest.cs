@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Webet333.models.Request.Account
+﻿namespace Webet333.models.Request.Account
 {
     public class AdminBehaviourReportRequest
     {
@@ -25,6 +21,5 @@ namespace Webet333.models.Request.Account
         public decimal LoseAmount { get; set; }
 
         public decimal WinAmount { get; set; }
-
     }
 }
