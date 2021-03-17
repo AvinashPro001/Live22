@@ -5,8 +5,8 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
+    apiUrl: 'http://uatapi.webet333.com/api/v1/'
     //apiUrl: 'http://localhost:49841/api/v1/'
 };
 
@@ -311,7 +311,9 @@ export const customer = {
     GameSelectUser: environment.apiUrl + 'Game/SelectUser',
     adminLogList: environment.apiUrl + 'admin/log/select',
     adminAction: environment.apiUrl + 'admin/action/select_for_dropdown',
-    adminModule: environment.apiUrl + 'admin/module/select_for_dropdown'
+    adminModule: environment.apiUrl + 'admin/module/select_for_dropdown',
+
+    dailyReport: environment.apiUrl + 'daily/report/select'
 }
 
 export const playtech = {
