@@ -1,13 +1,12 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { formatDate } from "@angular/common";
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
-import { ToasterConfig, ToasterService } from 'angular2-toaster';
+import { ToasterService } from 'angular2-toaster';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 import { customer, ErrorMessages } from '../../../../environments/environment';
-import { AdminService } from '../../admin.service';
 import { CommonService } from '../../../common/common.service';
-import { formatDate } from "@angular/common";
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-daily-report',
@@ -125,8 +124,10 @@ export class DailyReportComponent implements OnInit {
                 });
 
                 if (this.DepositPromotion != null) { this.depositPromotionRows = JSON.parse(this.DepositPromotion); }
-                if (this.WithdrawalPromotion != null) { this.withdrawalPromotionRows = JSON.parse(this.WithdrawalPromotion); }
+                else { this.depositPromotionRows = null; }
 
+                if (this.WithdrawalPromotion != null) { this.withdrawalPromotionRows = JSON.parse(this.WithdrawalPromotion); }
+                else { this.withdrawalPromotionRows = null; }
             }, error => {
                 this.toasterService.pop('error', 'Error', error.error.message);
             });

@@ -61,91 +61,66 @@
                                 <table border="1">
                                     <tr>
                                         <td>Date:</td>
-                                        <td style="width: 20%;"><b>{{fromdate}}</b></td>
+                                        <td style="width: 20%; text-align:center"><b>{{fromdate}}</b></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            Total Deposit(Normal):
-                                        </td>
-                                        <td>
-                                            {{Normal}}
-                                        </td>
+                                        <td>Total Deposit(Normal):</td>
+                                        <td style="text-align:center">{{Normal}}</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            Total Deposit(Vederpay):
-                                        </td>
-                                        <td>
-                                            {{VaderPay}}
-                                        </td>
+                                        <td>Total Deposit(Vederpay):</td>
+                                        <td style="text-align:center">{{VaderPay}}</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            Total Deposit:
-                                        </td>
-                                        <td>
-                                            {{Deposit}}
-                                        </td>
+                                        <td>Total Deposit:</td>
+                                        <td style="text-align:center">{{Deposit}}</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            Total Withdrawal:
-                                        </td>
-                                        <td>
-                                            {{Withdrawal}}
-                                        </td>
+                                        <td>Total Withdrawal:</td>
+                                        <td style="text-align:center">{{Withdrawal}}</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            Total Winloss Amount:
-                                        </td>
-                                        <td>
-                                            {{Winloss}}
-                                        </td>
+                                        <td>Total Winloss Amount:</td>
+                                        <td style="text-align:center">{{Winloss}}</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            Total Bonus:
-                                        </td>
-                                        <td>
-                                            {{Bonus}}
-                                        </td>
+                                        <td>Total Bonus:</td>
+                                        <td style="text-align:center">{{Bonus}}</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            Total Unique User:
-                                        </td>
-                                        <td>
-                                            {{UniqueUser}}
-                                        </td>
+                                        <td>Total Unique User:</td>
+                                        <td style="text-align:center">{{UniqueUser}}</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            Total Deposit Count:
-                                        </td>
-                                        <td>
-                                            {{DepositCount}}
-                                        </td>
+                                        <td>Total Deposit Count:</td>
+                                        <td style="text-align:center">{{DepositCount}}</td>
                                     </tr>
                                 </table>
 
                                 <br />
 
-                                <table border="1">
+                                <table border="1" id="depositPromotion">
                                     <thead>
                                         <tr>
                                             <td>Promotion:</td>
-                                            <td style="width: 20%;"></td>
+                                            <td style="width: 20%; text-align:center">Count</td>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="depositPromotionTbody">
                                         <ng-container *ngIf="depositPromotionRows != null">
                                             <ng-container *ngFor='let val of depositPromotionRows'>
                                                 <tr>
                                                     <td>{{val.Title}}</td>
-                                                    <td>{{val.Count}}</td>
+                                                    <td style="text-align:center">{{val.Count}}</td>
                                                 </tr>
                                             </ng-container>
+                                        </ng-container>
+                                        <ng-container *ngIf="depositPromotionRows  == null || depositPromotionRows == 'null'">
+                                            <tr>
+                                                <th colspan="2" style="text-align:center">
+                                                    <p>No data to show</p>
+                                                </th>
+                                            </tr>
                                         </ng-container>
                                     </tbody>
                                 </table>
@@ -155,11 +130,11 @@
                                 <table border="1">
                                     <tr>
                                         <td>Total New User:</td>
-                                        <td style="width: 20%;">{{NewUser}}</td>
+                                        <td style="width: 20%; text-align:center">{{NewUser}}</td>
                                     </tr>
                                     <tr>
                                         <td>Total Old User:</td>
-                                        <td>{{OldUser}}</td>
+                                        <td style="text-align:center">{{OldUser}}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -170,25 +145,31 @@
                                     </div>
                                 </div>
 
-                                <table border="1">
+                                <table border="1" id="withdrawalPromotion">
                                     <thead>
                                         <tr>
                                             <td>Promotion:</td>
-                                            <td style="width: 20%;">Amount</td>
+                                            <td style="width: 20%; text-align:center">Amount</td>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="withdrawalPromotionTbody">
                                         <ng-container *ngIf="withdrawalPromotionRows != null">
                                             <ng-container *ngFor='let val of withdrawalPromotionRows'>
                                                 <tr>
                                                     <td>{{val.Title}}</td>
-                                                    <td>{{val.Count}}</td>
+                                                    <td style="text-align:center">{{val.Count}}</td>
                                                 </tr>
                                             </ng-container>
                                         </ng-container>
+                                        <ng-container *ngIf="withdrawalPromotionRows == null || withdrawalPromotionRows == 'null'">
+                                            <tr>
+                                                <th colspan="2" style="text-align:center">
+                                                    <p>No data to show</p>
+                                                </th>
+                                            </tr>
+                                        </ng-container>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
