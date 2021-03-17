@@ -48,8 +48,8 @@ export class DailyReportComponent implements OnInit {
         private modalService: NgbModal,
         private commonService: CommonService) { }
 
-    ngOnInit() {
-        this.setToday();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) { this.setToday(); }
     }
 
     //#region Filter Data
@@ -135,4 +135,59 @@ export class DailyReportComponent implements OnInit {
     }
 
     //#endregion
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[16].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[16].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[16].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }
