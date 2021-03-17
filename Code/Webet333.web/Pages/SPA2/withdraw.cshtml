@@ -168,6 +168,9 @@
         $('body').css('padding-top', '0px');
         if (GetLocalStorage('currentUser') === null)
             loadPageHome({ backFrom: 'widthraw' });
+        WithdrawBankList();
+        UserBankDetails()
+        GetProfile();
     </script>
 
     <div id="Withdrawal" class="account-reg white-bg radius-border page-extra-padding">

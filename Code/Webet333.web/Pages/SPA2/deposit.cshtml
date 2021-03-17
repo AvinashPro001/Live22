@@ -11,6 +11,8 @@
         if (GetLocalStorage('currentUser') === null)
             loadPageHome({ backFrom: 'deposit' });
         CheckMainteance();
+        DepositBankList();
+        DepositPromotionList();
     </script>
 
     <style>

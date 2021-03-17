@@ -849,10 +849,10 @@ async function GameLoginMobile(gamename) {
                         apiResponse: result981Kiss
                     };
                     var res918Kiss = await PostMethod(apiEndPoints.register918Kiss, model918Kiss);
-                    location.href = '/Mobile/download?id=918DownloadTab';
+                    location.href = '/spa2?p=download&id=918DownloadTab';
                 }
                 else {
-                    location.href = '/Mobile/download?id=918DownloadTab';
+                    location.href = '/spa2?p=download&id=918DownloadTab';
                 }
                 break;
             case 'Pussy888':
@@ -867,12 +867,12 @@ async function GameLoginMobile(gamename) {
                     catch (e){
 
                     }
-                    window.location.href = "/Mobile/download?id=Pussy888DownloadTab";
-
+                    //window.location.href = "/Mobile/download?id=Pussy888DownloadTab";
+                    location.href = '/spa2?p=download&id=Pussy888DownloadTab';
                 }
                 else {
-                    window.location.href = "/Mobile/download?id=Pussy888DownloadTab";
-
+                    //window.location.href = "/Mobile/download?id=Pussy888DownloadTab";
+                    location.href = '/spa2?p=download&id=Pussy888DownloadTab';
                 }
                 break;
             case 'Joker':
@@ -894,10 +894,10 @@ async function GameLoginMobile(gamename) {
                         apiResponse: resultJoker
                     };
                     var resJoker = await PostMethod(apiEndPoints.registerJoker, modelJoker);
-                    loadPagedownload("JokerDownloadTab");
+                    location.href = '/spa2?p=download&id=JokerDownloadTab';
                 }
                 else {
-                    loadPagedownload("JokerDownloadTab");
+                    location.href = '/spa2?p=download&id=JokerDownloadTab';
                 }
                 break;
             case 'Mega888':
@@ -912,11 +912,11 @@ async function GameLoginMobile(gamename) {
                     }
                     var res = await PostMethod(apiEndPoints.mega888Register, userMegaa88Model);
                     if (res !== undefined || res !== null) {  
-                        loadPagedownload("MegaDownloadTab");
+                        location.href = '/spa2?p=download&id=MegaDownloadTab';
                     }
                 }
                 else {
-                    loadPagedownload("MegaDownloadTab");
+                    location.href = '/spa2?p=download&id=MegaDownloadTab';
                 }
                 break;
             case 'DG':

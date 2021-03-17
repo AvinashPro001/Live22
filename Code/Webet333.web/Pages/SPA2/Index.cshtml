@@ -161,8 +161,12 @@
         setTimeout(() => {
             var url_string = window.location;
             var url = new URL(url_string);
+
+            var gameName = url.searchParams.get("id");
+
             url.href = url.href.toLowerCase();
             var name = url.searchParams.get("p");
+            
             if (name != null) {
                 switch (name) {
                     case "home":
@@ -184,7 +188,7 @@
                         loadPagedeposit()
                         break;
                     case "download":
-                        loadPagedownload();
+                        loadPagedownload(gameName);
                         break;
                     case "forgetpassword":
                         loadPageForgetpassword()
@@ -254,6 +258,9 @@
                             $('body').css('padding-top', '35px');
                         }
                         if (obj.backFrom == "forgetpassword") {
+                            $('body').css('padding-top', '35px');
+                        }
+                        if (obj.backFrom == "download") {
                             $('body').css('padding-top', '35px');
                         }
 
@@ -377,7 +384,8 @@
         function loadPagedownload(id) {
             CheckUserVerified()
             var url = '/spa2/download'
-            if (id != undefined) {
+
+            if (id != undefined && id != null) {
                 url = '/spa2/download?id=' + id
             }
 
@@ -388,7 +396,10 @@
                 cache: true,
                 success: function (response) {
                     $('#pageResponse').html(response);
-                    history.pushState(null, null, "/spa2?p=download");
+                    if (id != undefined && id != null)
+                        history.pushState(null, null, "/spa2?p=download&id=" + id);
+                    else
+                        history.pushState(null, null, "/spa2?p=download");
                     $("html").removeClass("intro");
                 }
             });
@@ -558,8 +569,8 @@
     </script>
 
     <style>
-        body{
-            padding-top:35px;
+        body {
+            padding-top: 35px;
         }
     </style>
 

@@ -170,6 +170,8 @@
         if (GetLocalStorage('currentUser') === null) {
             loadPageHome({ backFrom: 'transfer' });
         }
+        TransferWalletList();
+
         UserGameTurnover();
 
         CheckSupportGame();                                                     
