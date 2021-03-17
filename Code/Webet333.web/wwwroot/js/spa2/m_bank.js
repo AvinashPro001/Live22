@@ -1,10 +1,10 @@
 ﻿//#region Onload
 $(document).ready(function () {
-    if (GetLocalStorage('currentUser') !== null) {
-        BankList();
-        UserBankDetails();
-        GetProfile();
-    }
+    //if (GetLocalStorage('currentUser') !== null) {
+    //    BankList();
+    //    UserBankDetails();
+    //    GetProfile();
+    //}
 });
 //#endregion
 
