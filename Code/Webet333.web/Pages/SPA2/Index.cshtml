@@ -215,29 +215,7 @@
         }, 200);
 
         function loadPageHome(obj) {
-            if (obj != undefined) {
-                if (obj.backFrom == "about") {
-                    $('body').css('padding-top', '40px');
-                }
-                if (obj.backFrom == "termandCondi") {
-                    $('body').css('padding-top', '40px');
-                }
-                if (obj.backFrom == "login") {
-                    $('body').css('padding-top', '40px');
-                }
-                if (obj.backFrom == "deposit") {
-                    $('body').css('padding-top', '40px');
-                }
-                if (obj.backFrom == "transfer") {
-                    $('body').css('padding-top', '40px');
-                }
-                if (obj.backFrom == "widthraw") {
-                    $('body').css('padding-top', '40px');
-                }
-                if (obj.backFrom == "forgetpassword") {
-                    $('body').css('padding-top', '40px');
-                }
-            }
+
 
             $('.content').empty();
             $('#home').empty();
@@ -252,10 +230,34 @@
                     history.pushState(null, null, "/spa2?p=home");
                     SliderPromotion();
 
+
                     if (obj != undefined) {
+                        if (obj.backFrom == "about") {
+                            $('body').css('padding-top', '35px');
+                        }
+                        if (obj.backFrom == "termandCondi") {
+                            $('body').css('padding-top', '35px');
+                        }
+                        if (obj.backFrom == "login") {
+                            $('body').css('padding-top', '35px');
+                        }
+                        if (obj.backFrom == "deposit") {
+                            $('body').css('padding-top', '35px');
+                        }
+                        if (obj.backFrom == "transfer") {
+                            $('body').css('padding-top', '35px');
+                        }
+                        if (obj.backFrom == "widthraw") {
+                            $('body').css('padding-top', '35px');
+                        }
+                        if (obj.backFrom == "forgetpassword") {
+                            $('body').css('padding-top', '35px');
+                        }
+
                         Walletdate();
                         GameInMaintenance(0);
                         WalletSignalR();
+
                     }
 
                     if (cUser == null) {
@@ -546,12 +548,17 @@
 
         $("html").click(async function (event) {
             if (GetLocalStorage('currentUser') !== null) {
-
                 await PostMethod(apiEndPoints.userLastTimeUpdate, {});
             }
         });
 
     </script>
+
+    <style>
+        body{
+            padding-top:35px;
+        }
+    </style>
 
 </body>
 </html>

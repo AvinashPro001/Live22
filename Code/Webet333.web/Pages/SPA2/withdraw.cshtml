@@ -5,27 +5,6 @@
 <script src="~/js/spa2/m_bank.js"></script>
 <div id="comContent"></div>
 <div id="mComContent">
-    <!--<div class="loadingImage" style="z-index: 2147483643;"></div>-->
-
-    <div id="success_snackbar">
-        <div>
-            <span><img class="Image" width="100px" height="100px" src="~/images/success.png" /></span>
-        </div>
-        <div class="message">
-            <span id="SuccessMessage">
-            </span>
-        </div>
-    </div>
-
-    <div id="error_snackbar">
-        <div>
-            <span><img class="Image" width="100px" height="100px" src="~/images/Error.png" /></span>
-        </div>
-        <div class="message">
-            <span id="ErrorMessage">
-            </span>
-        </div>
-    </div>
 
     <div id="afterlogin_mobile">
         <div class="sidebar">
@@ -184,7 +163,6 @@
     </div>
     <script>
         document.getElementById("navbarhide").style.display = "none";
-        //document.getElementById("hideBody").style.padding = "0px";
         document.getElementById("Translation_Option").innerHTML = "";
         document.body.classList.add("no-pad-top");
         $('body').css('padding-top', '0px');
@@ -242,11 +220,6 @@
                             </label>
                         </li>
 
-
-                        @*<li class="mar-btm-fifteen" id="displayAccountNumber">
-                                <p class="big lang" key="withdrawal_account_number"></p>
-                                <label class="card-number mendatory"><input id="txt_withdrawalAccountNumber" name="txt_amount" type="number" class="reg-form" placeholder="Enter Account Number"><p class="star">*</p></label>
-                            </li>*@
                         <li class="mar-btm-fifteen">
                             <label class="fleft"><p class="big no-mar lang" key="withdrawal_from">From:</p></label>
                             <label class="fright bank-name mendatory">Main Wallet</label>
@@ -267,10 +240,6 @@
                             <label class="fright"><div data-toggle="modal" data-target="#WithdrawAmountList"><span class="fa fa-lock" id="lock_icon"></span><span class="fa fa-unlock" id="unlock_icon"></span>&nbsp;<span id="WithdrawAmount">MYR 700</span></div></label>
                         </li>
 
-                        @*<li class="mar-btm-fifteen">
-                                <p class="big lang" key="withdrawal_amount"></p>
-                                <label class="card-number mendatory"><input id="txt_withdrawalAmount" name="txt_amount" type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30,000.00"><p class="star">*</p></label>
-                            </li>*@
                         <li class="mar-btm-fifteen text-center">
                             <button class="submit lang" key="withdrawal_submit" data-toggle="modal" data-target="#profilemyModal" onclick="Withdrawal()" type="button">SUBMIT</button>
                         </li>
@@ -293,8 +262,8 @@
                             </div>
                         </div>
                         <ol class="info-notice-list">
-                            <li>Kindly check with our <a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow','width=385,height=580');" target="_blank"><b>24/7 LIVECHAT</b></a> if your transaction is pending for more than 10 minutes.</li>
-                            <li>For further inquiries, kindly contact our <a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow', 'width=385,height=580');" target="_blank"><b>24/7 LIVECHAT</b></a>. Thank you.</li>
+                            <li>Kindly check with our <a onclick="window.open('https://vue1.livelyhelp.chat/ChatWindow.aspx?siteId=233923&planId=a9010000-0000-0000-0000-008e000391c3', 'newwindow','width=385,height=580');" target="_blank"><b>24/7 LIVECHAT</b></a> if your transaction is pending for more than 10 minutes.</li>
+                            <li>For further inquiries, kindly contact our <a onclick="window.open('https://vue1.livelyhelp.chat/ChatWindow.aspx?siteId=233923&planId=a9010000-0000-0000-0000-008e000391c3', 'newwindow', 'width=385,height=580');" target="_blank"><b>24/7 LIVECHAT</b></a>. Thank you.</li>
                         </ol>
                     </div>
                 </div>
@@ -363,29 +332,8 @@
             });
         });
         CheckWithdrawAmountList();
-        //loadAccountName();
 
-        //async function loadAccountName() {
-        //    if (GetLocalStorage('currentUser') !== null) {
-        //        var res = await GetMethod(apiEndPoints.getProfile);
-        //        document.getElementById("lbl_accountHolder").value = res.data.name;
-        //    }
-        //}
     </script>
-
-    <div class="form-login modal fade" id="gameLogin" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="lang" key="alert"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <p class="lang" key="noLogin"></p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="container" id="laguage">
         <div id="language" class="modal fade">
@@ -440,62 +388,6 @@
         <a id="mobileM8" style="display:none"></a>
     </div>
 
-    <div class="form-login modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="lang" key="login"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <div role="form">
-                        <div class="info-form">
-                            <label class="user"><input id="txt_login_username" name="txt_username" type="text" class="reg-form" data-translate="username_placeholder" placeholder="Username" value=""></label>
-                            <label class="lock"><input id="txt_login_password" name="txt_password" autocomplete="new-password" type="password" class="reg-form" data-translate="password_placeholder" placeholder="Password"></label>
-                            <div class="checkbox">
-                                <label style="margin-left:15px"><input id="remember_me" type="checkbox" value=""><span class="lang" key="remember"></span></label>
-                            </div>
-                            <a class="forgot-pass" data-toggle="modal" data-target="#forgot-password"><span class="lang" key="forgot_pasword"></span></a>
-                            <div class="log_in text-center">
-                                <button class="log_in" onclick="DoLogin(1)"><span class="lang" key="login"></span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-login modal fade" id="gameLogin" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="lang" key="alert"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <p class="lang" key="noLogin"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div id="forgot-password" class="modal fade">
-            <div class="modal-dialog mail-width">
-                <div class="modal-content">
-                    <div class="modal-body text-center">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <p data-translate="forgtopasswordststic"></p>
-                        <label class="num pad-top-ten"><input id="txt_forgot_email" name="txt_forgot_email" type="text" class="reg-form" data-translate="forgtopassword_placeholder" value=""></label>
-                        <ul class="list-inline pad-top-ten">
-                            <li><button class="submit" type="button" onclick="DoForgotPassword()" data-translate="forgtopassworbutton"></button></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script type="text/javascript">
@@ -514,17 +406,7 @@
 <!--Begin Comm100 Live Chat Code-->
 <div></div>
 <script type="text/javascript">
-    var Comm100API = Comm100API || {}; (function (t) {
-        function e(e) {
-            var a = document.createElement("script"),
-                c = document.getElementsByTagName("script")[0];
-            a.type = "text/javascript",
-                a.async = !0, a.src = e + t.site_id, a.target = "_blank"
-            c.parentNode.insertBefore(a, c)
-        } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://chatserver.comm100.com/livechat.ashx?siteId="), setTimeout(function () {
-            t.loaded || e("https://hostedmax.comm100.com/chatserver/livechat.ashx?siteId=")
-        }, 5e3)
-    })(Comm100API || {})
+    var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 0) })(Comm100API || {})
 </script>
 <!--End Comm100 Live Chat Code-->
 <!-- Slider Section End -->
@@ -540,17 +422,7 @@
     });
 </script>
 <!-- //Modal For Video -->
-<script src="~/js/jcf/jcf.js"></script>
-<script src="~/js/jcf/jcf.select.js"></script>
-<script src="~/js/jcf/jcf.checkbox.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(function () {
-            jcf.replaceAll();
-        });
-    });
 
-</script>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".navbar-toggle,.canvas-overlay").click(function () {
@@ -580,41 +452,19 @@
         }
     });
 </script>
-<script>
-    if (localStorage.getItem('currentUser') == null) {
-        //document.getElementById('walletAfterLogin').style.display = "none";
-    }
-    else {
-        //document.getElementById('walletBeforeLogin').style.display = "none";
-    }
-</script>
+
 <script>
     $(document).ready(function () {
         if (localStorage.getItem('currentUser') == null) {
             document.getElementById('logout').style.display = "none";
             document.getElementById('accountPage').style.display = "none";
             document.getElementById('downloadpage').style.display = "none";
-
-            if (!window.location.href.toLowerCase().includes("mobile/login") && !window.location.href.toLowerCase().includes("mobile/register")) {
-                document.getElementById('balanceShow').style.textIndent = "-999px";
-                document.getElementById("MainLogo").style.marginLeft = "-30px";
-            }
         }
         else {
             document.getElementById('login').style.display = "none";
         }
-
-        if (location.href.toLowerCase().includes("mobile/login") || location.href.toLowerCase().includes("mobile/register") || location.href.toLowerCase().includes("mobile/forgetpassword")) {
-            document.getElementById("footerWidget").innerHTML = "";
-        }
     });
 
-
-    //$("html").click(async function (event) {
-    //    if (GetLocalStorage('currentUser') !== null) {
-    //        await PostMethod(apiEndPoints.userLastTimeUpdate, {});
-    //    }
-    //});
 
     WalletBalance()
 

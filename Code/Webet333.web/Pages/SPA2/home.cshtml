@@ -3,26 +3,6 @@
 
 <script src="~/js/spa2/m_bank.js"></script>
 
-<div id="success_snackbar">
-    <div>
-        <span><img class="Image" width="100px" height="100px" src="~/images/success.png" /></span>
-    </div>
-    <div class="message">
-        <span id="SuccessMessage">
-        </span>
-    </div>
-</div>
-
-<div id="error_snackbar">
-    <div>
-        <span><img class="Image" width="100px" height="100px" src="~/images/Error.png" /></span>
-    </div>
-    <div class="message">
-        <span id="ErrorMessage">
-        </span>
-    </div>
-</div>
-
 <div id="afterlogin_mobile">
     <div class="sidebar">
         <div class="navbar-collapse" id="myNavbar">
@@ -659,31 +639,6 @@
     <div class="canvas-overlay"></div>
 </div>
 
-<div class="form-login modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><span class="lang" key="login"></span></h4>
-            </div>
-            <div class="modal-body">
-                <div role="form">
-                    <div class="info-form">
-                        <label class="user"><input id="txt_login_username" name="txt_username" type="text" class="reg-form" data-translate="username_placeholder" placeholder="Username" value=""></label>
-                        <label class="lock"><input id="txt_login_password" name="txt_password" autocomplete="new-password" type="password" class="reg-form" data-translate="password_placeholder" placeholder="Password"></label>
-                        <div class="checkbox">
-                            <label style="margin-left:15px"><input id="remember_me" type="checkbox" value=""><span class="lang" key="remember"></span></label>
-                        </div>
-                        <a class="forgot-pass" data-toggle="modal" data-target="#forgot-password"><span class="lang" key="forgot_pasword"></span></a>
-                        <div class="log_in text-center">
-                            <button class="log_in" onclick="DoLogin(1)"><span class="lang" key="login"></span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="form-login modal fade" id="gameLogin" role="dialog">
     <div class="modal-dialog">
@@ -694,23 +649,6 @@
             </div>
             <div class="modal-body">
                 <p class="lang" key="noLogin"></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div id="forgot-password" class="modal fade">
-        <div class="modal-dialog mail-width">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <p data-translate="forgtopasswordststic"></p>
-                    <label class="num pad-top-ten"><input id="txt_forgot_email" name="txt_forgot_email" type="text" class="reg-form" data-translate="forgtopassword_placeholder" value=""></label>
-                    <ul class="list-inline pad-top-ten">
-                        <li><button class="submit" type="button" onclick="DoForgotPassword()" data-translate="forgtopassworbutton"></button></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
@@ -734,7 +672,7 @@
     </div>
 </div>
 
-<div class="container">
+@*<div class="container">
     <div id="RestoreConfirmation" class="modal fade">
         <div class="modal-dialog mail-width">
             <div class="modal-content">
@@ -749,7 +687,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -785,18 +723,6 @@
 
 <!-- //Modal For Video -->
 <script src="~/js/slick.js"></script>
-<script src="~/js/jcf/jcf.js"></script>
-<script src="~/js/jcf/jcf.select.js"></script>
-<script src="~/js/jcf/jcf.checkbox.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(function () {
-            jcf.replaceAll();
-        });
-    });
-
-</script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -810,7 +736,6 @@
         }, 100);
         setTimeout(() => { clearInterval(timerId); }, 30000);
 
-
         $(".navbar-toggle,.canvas-overlay").click(function () {
             if (!$("html").hasClass('intro')) {
                 $("html").addClass("intro");
@@ -819,11 +744,13 @@
                 $("html").removeClass("intro");
             }
         });
+
         $(".canvas-overlay").click(function () {
             if ($(".navbar-collapse").hasClass('in')) {
                 $(".navbar-collapse").removeClass("in");
             }
         });
+
     });
 </script>
 
@@ -844,7 +771,7 @@
         $('#homePagebottom').addClass("active-link");
         $('#homeLoginPagebottom').addClass("active-link");
 
-    }, 2000);
+    }, 200);
                      
 </script>
 

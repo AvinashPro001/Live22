@@ -31,11 +31,6 @@ $(document).ready(function () {
 //    catch (e) { }
 //}
 
-
-window.onhashchange = function () { 
-    console.log('location changed!');
-}
-
 function CheckUserVerified() {
     try {
         var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));

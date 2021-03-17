@@ -5,15 +5,12 @@
 }
 <div id="comContent"></div>
 <div id="mComContent">
-    <!--<div class="loadingImage" style="z-index: 2147483643;"></div>-->
-
 
     <script>
         document.getElementById("hideBody").style.padding = "0px";
     </script>
     
     <div class="account-reg pad-comman-fifteen mar-fifty white-bg-tab-panel white-bg" style="height:100%;">
-        @*<h4 class="about-icon symbol mar-btm-ten"><strong><span class="lang" key="about_us_page"></span></strong></h4>*@
         <div class="info-form text-center">
             <div class="row">
                 <div class="col-xs-2">
@@ -113,62 +110,6 @@
         <a id="mobileM8" style="display:none"></a>
     </div>
 
-    <div class="form-login modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="lang" key="login"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <div role="form">
-                        <div class="info-form">
-                            <label class="user"><input id="txt_login_username" name="txt_username" type="text" class="reg-form" data-translate="username_placeholder" placeholder="Username" value=""></label>
-                            <label class="lock"><input id="txt_login_password" name="txt_password" autocomplete="new-password" type="password" class="reg-form" data-translate="password_placeholder" placeholder="Password"></label>
-                            <div class="checkbox">
-                                <label style="margin-left:15px"><input id="remember_me" type="checkbox" value=""><span class="lang" key="remember"></span></label>
-                            </div>
-                            <a class="forgot-pass" data-toggle="modal" data-target="#forgot-password"><span class="lang" key="forgot_pasword"></span></a>
-                            <div class="log_in text-center">
-                                <button class="log_in" onclick="DoLogin(1)"><span class="lang" key="login"></span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-login modal fade" id="gameLogin" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="lang" key="alert"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <p class="lang" key="noLogin"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div id="forgot-password" class="modal fade">
-            <div class="modal-dialog mail-width">
-                <div class="modal-content">
-                    <div class="modal-body text-center">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <p data-translate="forgtopasswordststic"></p>
-                        <label class="num pad-top-ten"><input id="txt_forgot_email" name="txt_forgot_email" type="text" class="reg-form" data-translate="forgtopassword_placeholder" value=""></label>
-                        <ul class="list-inline pad-top-ten">
-                            <li><button class="submit" type="button" onclick="DoForgotPassword()" data-translate="forgtopassworbutton"></button></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script type="text/javascript">
@@ -202,7 +143,6 @@
         jQuery("#more-arrow").toggleClass("rotate");
     });
 </script>
-<script src="~/js/spa/m_spa.js"></script>
 <!-- //Modal For Video -->
 
 <!-- Slider Section End -->

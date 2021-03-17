@@ -5,27 +5,6 @@
 <div id="comContent"></div>
 <div id="mComContent">
 
-
-    <div id="success_snackbar">
-        <div>
-            <span><img class="Image" width="100px" height="100px" src="~/images/success.png" /></span>
-        </div>
-        <div class="message">
-            <span id="SuccessMessage">
-            </span>
-        </div>
-    </div>
-
-    <div id="error_snackbar">
-        <div>
-            <span><img class="Image" width="100px" height="100px" src="~/images/Error.png" /></span>
-        </div>
-        <div class="message">
-            <span id="ErrorMessage">
-            </span>
-        </div>
-    </div>
-
     <div id="afterlogin_mobile">
         <div class="sidebar">
             <div class="navbar-collapse" id="myNavbar">
@@ -394,19 +373,11 @@
             document.getElementById('logout').style.display = "none";
             document.getElementById('accountPage').style.display = "none";
             document.getElementById('downloadpage').style.display = "none";
-
-            if (!window.location.href.toLowerCase().includes("mobile/login") && !window.location.href.toLowerCase().includes("mobile/register")) {
-                document.getElementById('balanceShow').style.textIndent = "-999px";
-                document.getElementById("MainLogo").style.marginLeft = "-30px";
-            }
         }
         else {
             document.getElementById('login').style.display = "none";
         }
 
-        if (location.href.toLowerCase().includes("mobile/login") || location.href.toLowerCase().includes("mobile/register") || location.href.toLowerCase().includes("mobile/forgetpassword")) {
-            document.getElementById("footerWidget").innerHTML = "";
-        }
     });
 
 
@@ -417,14 +388,6 @@
 
     function get() {
         (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
-        /*
-        if (GetLocalStorage('currentUser') === null) {
-            document.getElementById('beforelogin_mobile').style.display = 'none';
-        }
-        if (GetLocalStorage('currentUser') !== null) {
-            document.getElementById('afterlogin_mobile').style.display = 'none';
-        }
-        */
 
         document.getElementById("englishbtn").style.background = "";
         document.getElementById("malaybtn").style.background = "";

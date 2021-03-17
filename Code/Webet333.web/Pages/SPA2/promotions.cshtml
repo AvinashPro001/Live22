@@ -5,27 +5,6 @@
 }
 <div id="comContent"></div>
 <div id="mComContent">
-    <!--<div class="loadingImage" style="z-index: 2147483643;"></div>-->
-
-    <div id="success_snackbar">
-        <div>
-            <span><img class="Image" width="100px" height="100px" src="~/images/success.png" /></span>
-        </div>
-        <div class="message">
-            <span id="SuccessMessage">
-            </span>
-        </div>
-    </div>
-
-    <div id="error_snackbar">
-        <div>
-            <span><img class="Image" width="100px" height="100px" src="~/images/Error.png" /></span>
-        </div>
-        <div class="message">
-            <span id="ErrorMessage">
-            </span>
-        </div>
-    </div>
 
     <div id="afterlogin_mobile">
         <div class="sidebar">
@@ -211,6 +190,10 @@
             text-align: center;
             width: 100%;
         }
+
+        .promotion-title {
+             margin-top: 0px;
+        }
     </style>
 
     <div id="promotion-description">
@@ -233,24 +216,9 @@
     <script>
         setTimeout(function () {
             $('#promotionPagebottom').addClass("active-link");
-        }, 2000);
+        }, 20);
 
     </script>
-
-
-    <div class="form-login modal fade" id="gameLogin" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="lang" key="alert"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <p class="lang" key="noLogin"></p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="container" id="laguage">
         <div id="language" class="modal fade">
@@ -304,63 +272,6 @@
     <div>
         <a id="mobileM8" style="display:none"></a>
     </div>
-
-    <div class="form-login modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="lang" key="login"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <div role="form">
-                        <div class="info-form">
-                            <label class="user"><input id="txt_login_username" name="txt_username" type="text" class="reg-form" data-translate="username_placeholder" placeholder="Username" value=""></label>
-                            <label class="lock"><input id="txt_login_password" name="txt_password" autocomplete="new-password" type="password" class="reg-form" data-translate="password_placeholder" placeholder="Password"></label>
-                            <div class="checkbox">
-                                <label style="margin-left:15px"><input id="remember_me" type="checkbox" value=""><span class="lang" key="remember"></span></label>
-                            </div>
-                            <a class="forgot-pass" data-toggle="modal" data-target="#forgot-password"><span class="lang" key="forgot_pasword"></span></a>
-                            <div class="log_in text-center">
-                                <button class="log_in" onclick="DoLogin(1)"><span class="lang" key="login"></span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-login modal fade" id="gameLogin" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="lang" key="alert"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <p class="lang" key="noLogin"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div id="forgot-password" class="modal fade">
-            <div class="modal-dialog mail-width">
-                <div class="modal-content">
-                    <div class="modal-body text-center">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <p data-translate="forgtopasswordststic"></p>
-                        <label class="num pad-top-ten"><input id="txt_forgot_email" name="txt_forgot_email" type="text" class="reg-form" data-translate="forgtopassword_placeholder" value=""></label>
-                        <ul class="list-inline pad-top-ten">
-                            <li><button class="submit" type="button" onclick="DoForgotPassword()" data-translate="forgtopassworbutton"></button></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script type="text/javascript">
@@ -394,19 +305,6 @@
         jQuery("#more-arrow").toggleClass("rotate");
     });
 </script>
-<script src="~/js/spa/m_spa.js"></script>
-<!-- //Modal For Video -->
-<script src="~/js/jcf/jcf.js"></script>
-<script src="~/js/jcf/jcf.select.js"></script>
-<script src="~/js/jcf/jcf.checkbox.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(function () {
-            jcf.replaceAll();
-        });
-    });
-
-</script>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".navbar-toggle,.canvas-overlay").click(function () {
@@ -436,39 +334,16 @@
         }
     });
 </script>
-<script>
-    if (localStorage.getItem('currentUser') == null) {
-        //document.getElementById('walletAfterLogin').style.display = "none";
-    }
-    else {
-        //document.getElementById('walletBeforeLogin').style.display = "none";
-    }
-</script>
+
 <script>
     $(document).ready(function () {
         if (localStorage.getItem('currentUser') == null) {
             document.getElementById('logout').style.display = "none";
             document.getElementById('accountPage').style.display = "none";
             document.getElementById('downloadpage').style.display = "none";
-
-            if (!window.location.href.toLowerCase().includes("mobile/login") && !window.location.href.toLowerCase().includes("mobile/register")) {
-                document.getElementById('balanceShow').style.textIndent = "-999px";
-                document.getElementById("MainLogo").style.marginLeft = "-30px";
-            }
         }
         else {
             document.getElementById('login').style.display = "none";
-        }
-
-        if (location.href.toLowerCase().includes("mobile/login") || location.href.toLowerCase().includes("mobile/register") || location.href.toLowerCase().includes("mobile/forgetpassword")) {
-            document.getElementById("footerWidget").innerHTML = "";
-        }
-    });
-
-
-    $("html").click(async function (event) {
-        if (GetLocalStorage('currentUser') !== null) {
-            await PostMethod(apiEndPoints.userLastTimeUpdate, {});
         }
     });
 </script>
@@ -481,14 +356,6 @@
 
     function get() {
         (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
-        /*
-        if (GetLocalStorage('currentUser') === null) {
-            document.getElementById('beforelogin_mobile').style.display = 'none';
-        }
-        if (GetLocalStorage('currentUser') !== null) {
-            document.getElementById('afterlogin_mobile').style.display = 'none';
-        }
-        */
 
         document.getElementById("englishbtn").style.background = "";
         document.getElementById("malaybtn").style.background = "";
@@ -523,8 +390,6 @@
                 });
             }
         });
-        announcementMobile();
-
     }
 
     setTimeout(() => {

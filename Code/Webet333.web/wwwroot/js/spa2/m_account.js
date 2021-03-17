@@ -423,7 +423,6 @@ async function logoutMain(i) {
         var M8Username = globalParameters.data.m8GamePrefix + username;
         var PlaytechUsername = globalParameters.data.playtechGamePrefix + username;
 
-        debugger
         //M8 Account Logout
         await callMe(M8ConstAction.logoutAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username);
 
