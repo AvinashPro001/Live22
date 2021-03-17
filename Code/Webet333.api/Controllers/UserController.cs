@@ -485,5 +485,25 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Admin Module Select For Dropdown
+
+        #region Daily Report
+
+        [HttpPost(ActionsConst.Users.DailyReportSelect)]
+        public async Task<IActionResult> DailyReportSelectAsync([FromBody] DateRangeFilterRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await ValidateUser(role: RoleConst.Admin);
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.User.DailyReportSelect, request);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Daily Report
     }
 }
