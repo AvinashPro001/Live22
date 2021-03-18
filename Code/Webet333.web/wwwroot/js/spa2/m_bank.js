@@ -672,6 +672,7 @@ async function Deposit(online) {
         LoaderHide();
     }
     else {
+        LoaderHide();
         ShowError(ChangeErroMessage("min_max_amount_error"));
     }
 }
