@@ -409,12 +409,9 @@ async function logoutMain(i) {
         if (i === 1) {
             getLanguage();
             localStorage.clear();
-            //loadPageHome({ backFrom: 'login' });
         } else {
             getLanguage();
             localStorage.clear();
-            //window.location = '/';
-            //loadPageHome({ backFrom: 'login' });
         }
         var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
         var globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
@@ -424,19 +421,19 @@ async function logoutMain(i) {
         var PlaytechUsername = globalParameters.data.playtechGamePrefix + username;
 
         //M8 Account Logout
-        await callMe(M8ConstAction.logoutAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username);
+         callMe(M8ConstAction.logoutAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username);
 
         //Playtech Account Logout;
         var userNameUpperCase = PlaytechUsername.toUpperCase();
-        await PlaytechPostMethod(PlaytechConstAction.Logout + "playername=" + userNameUpperCase);
+        PlaytechPostMethod(PlaytechConstAction.Logout + "playername=" + userNameUpperCase);
 
         //Joker Account Logout
         var perameter = 'Method=' + jokerMethodConst.Signout + '&Timestamp=' + timestamp + '&Username=' + JokerUsername;
-        await JokerPostMethod('?' + jokerConstParameter.AppID + '&Signature=' + generateSignature(jokerMethodConst.Signout, JokerUsername), perameter);
+        JokerPostMethod('?' + jokerConstParameter.AppID + '&Signature=' + generateSignature(jokerMethodConst.Signout, JokerUsername), perameter);
 
         sessionStorage.clear();
         SetLocalStorage('language', language);
-      
+        loadPageHome({ backFrom: 'login' });
         LoaderHide();
     }
     catch(e){

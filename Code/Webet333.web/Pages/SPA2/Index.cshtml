@@ -166,7 +166,7 @@
 
             url.href = url.href.toLowerCase();
             var name = url.searchParams.get("p");
-            
+
             if (name != null) {
                 switch (name) {
                     case "home":
@@ -299,10 +299,11 @@
                     history.pushState(null, null, "/spa2?p=promotions");
                     $('#pageResponse').html(response);
                     $("html").removeClass("intro");
-
-
                     if (cUser != null) {
                         WalletBalance();
+                    }
+                    else {
+                        document.getElementById("balanceShow").innerHTML = "";
                     }
                 }
             });
@@ -322,6 +323,9 @@
                     $("html").removeClass("intro");
                     if (cUser != null) {
                         WalletBalance();
+                    }
+                    else {
+                        document.getElementById("balanceShow").innerHTML = "";
                     }
                 }
             });
