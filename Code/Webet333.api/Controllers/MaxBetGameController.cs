@@ -447,14 +447,13 @@ namespace Webet333.api.Controllers
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
                 await repository.AddOrUpdateAsync(
-                    StoredProcConsts.Global.AdminLog,
+                    StoredProcConsts.Global.AdminLog_Insert_MaxBet_Parameters,
                     new
                     {
                         request.AdminId,
                         request.UserId,
                         Action = "Edit",
-                        Module = "MaxBet Parameters",
-                        Description = "Change MaxBet Minimum & Maximum for User"
+                        Module = "MaxBet Parameters"
                     });
             }
 

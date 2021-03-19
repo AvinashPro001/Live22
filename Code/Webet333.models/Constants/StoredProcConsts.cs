@@ -15,6 +15,8 @@
             public const string ResetPasswordStatusUpdate = "[dbo].[Reset_Password_Status]";
 
             public const string AdminLog = "[dbo].[AdminLog_Insert]";
+
+            public const string AdminLog_Insert_MaxBet_Parameters = "[dbo].[AdminLog_Insert_MaxBet_Parameters]";
         }
 
         public class Account
