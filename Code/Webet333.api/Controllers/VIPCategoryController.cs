@@ -11,17 +11,18 @@ using Webet333.api.Helpers;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request.VIPCategory;
-using Newtonsoft.Json;
 
 namespace Webet333.api.Controllers
 {
-
     [Route(ActionsConst.ApiVersion)]
     public class VIPCategoryController : BaseController
     {
         #region Global Variable
+
         private IHostingEnvironment _hostingEnvironment;
+
         private IHubContext<SignalRHub> _hubContext;
+
         public VIPCategoryController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, IHubContext<SignalRHub> hubContext, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
@@ -52,12 +53,10 @@ namespace Webet333.api.Controllers
         {
             using (var vipCategory_help = new VIPCategoryHelpers(Connection))
             {
-                var res=await vipCategory_help.VIPCategorySelect();
+                var res = await vipCategory_help.VIPCategorySelect();
                 return OkResponse(res);
             }
         }
-
-
 
         [HttpGet(ActionsConst.VIPCategory.VIPLevelSelect)]
         public async Task<IActionResult> VIPSelect([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
@@ -71,7 +70,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.VIPCategory.VIPLevelUserUpdate)]
-        public async Task<IActionResult> VIPLevelUpdate([FromBody]UserVIPLevelUpdateRequest request)
+        public async Task<IActionResult> VIPLevelUpdate([FromBody] UserVIPLevelUpdateRequest request)
         {
             request.Role = GetUserRole(User);
             request.UniqueId = GetUniqueId(User);
@@ -97,7 +96,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion VIP Level Free Credit
 
         #region VIP Free Credit Promotion Setting
 
@@ -113,6 +112,6 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Free Credit Promotion Setting
+        #endregion VIP Free Credit Promotion Setting
     }
 }

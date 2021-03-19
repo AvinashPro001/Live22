@@ -1,5 +1,4 @@
 ﻿using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Hosting;
@@ -10,13 +9,11 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
-using Webet333.models.Entities;
 using Webet333.models.Request;
 using Webet333.models.Request.Account;
 using Webet333.models.Request.Game;
@@ -29,15 +26,18 @@ namespace Webet333.api.Helpers
     public class AccountHelpers : IDisposable
     {
         #region Local Variables
+
         private string Connection = string.Empty;
 
         public AccountHelpers(string Connection = null)
         {
             this.Connection = Connection;
         }
-        #endregion 
+
+        #endregion Local Variables
 
         #region User Management
+
         public async Task<ProfileResponse> AddUser(string Connection, RegisterRequest request, string Role)
         {
             if (new SystemHelpers().IsValidMobile(request.Mobile))
@@ -77,7 +77,8 @@ namespace Webet333.api.Helpers
             }
             return 0;
         }
-        #endregion 
+
+        #endregion User Management
 
         #region Confirm Email
 
@@ -98,6 +99,7 @@ namespace Webet333.api.Helpers
         #endregion Confirm Email
 
         #region Password Helpers
+
         public async Task<string> UpdatePasswordToken(string token, string password)
         {
             return await UpdatePassword(token, password, EmailTypeConst.ResetPassword);
@@ -136,7 +138,8 @@ namespace Webet333.api.Helpers
                 return data.userId.ToString();
             }
         }
-        #endregion 
+
+        #endregion Password Helpers
 
         #region Dashboard stats
 
@@ -149,7 +152,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion 
+        #endregion Dashboard stats
 
         #region Analytics
 
@@ -169,9 +172,10 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion 
+        #endregion Analytics
 
         #region Get User's By Mobile Number and update password
+
         public async Task<ProfileResponseByMobile> GetUsersByMobile(EmailRequest request)
         {
             using (var repository = new DapperRepository<ProfileResponseByMobile>(Connection))
@@ -194,9 +198,11 @@ namespace Webet333.api.Helpers
                 return users;
             }
         }
-        #endregion 
+
+        #endregion Get User's By Mobile Number and update password
 
         #region Wallet Maintenance Update
+
         public async Task<dynamic> WalletMainteanceUpdate(WalletMaintenanceUpdateRequest request, string adminId)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -213,9 +219,11 @@ namespace Webet333.api.Helpers
                 return WalletUpdate;
             }
         }
-        #endregion 
+
+        #endregion Wallet Maintenance Update
 
         #region Wallet Select
+
         public async Task<dynamic> WalletList()
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -224,9 +232,11 @@ namespace Webet333.api.Helpers
                 return walletList;
             }
         }
-        #endregion 
+
+        #endregion Wallet Select
 
         #region Social Media Statics and Reference keyword insert and update
+
         public async Task<dynamic> SocialMediaStatics(string keyword)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -274,7 +284,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion 
+        #endregion Social Media Statics and Reference keyword insert and update
 
         #region Get Language list
 
@@ -286,7 +296,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion 
+        #endregion Get Language list
 
         #region User Info Get for GetBalance
 
@@ -522,8 +532,7 @@ namespace Webet333.api.Helpers
             if (response.ErrorCode == 0 && response.OTP != null)
             {
                 var Message = response.OTP + " is your OTP and it is vaild for next 5 mins. Please do not share this OTP with anyone. Thank you";
-                
-                
+
                 await SendSMSAPI(MobileNo, Message);
             }
             return response;
@@ -545,7 +554,6 @@ namespace Webet333.api.Helpers
             {
                 return await dapperRepository.AddOrUpdateAsync(StoredProcConsts.Account.UserICNumberInsert, new { UserId, ICNumber });
             }
-
         }
 
         public async Task<dynamic> ICImageAdd(List<IcImageRequestList> requestLists)
@@ -554,7 +562,6 @@ namespace Webet333.api.Helpers
             {
                 return await dapperRepository.AddOrUpdateAsync(StoredProcConsts.Account.UserICImageInsert, requestLists);
             }
-
         }
 
         public async Task<List<IcImageList>> ICImageSelect(string UserId, BaseUrlConfigs baseUrl)
@@ -569,7 +576,6 @@ namespace Webet333.api.Helpers
                 });
                 return icImageResponse;
             }
-
         }
 
         public static async Task SaveExcelFile(string fileName, string Path, dynamic json)
@@ -597,7 +603,6 @@ namespace Webet333.api.Helpers
                 List<String> columns = new List<string>();
                 foreach (System.Data.DataColumn column in table.Columns)
                 {
-
                     columns.Add(column.ColumnName);
                     Cell cell = new Cell();
                     cell.DataType = CellValues.String;
@@ -629,7 +634,6 @@ namespace Webet333.api.Helpers
 
         public async Task<string> SendSMSAPI(string MobileNo, string Message)
         {
-
             MobileNo = MobileNo.Trim().Replace("+", "").Replace("-", "");
             if (MobileNo.Substring(0, 1) != "6")
                 MobileNo = "6" + MobileNo;
@@ -665,13 +669,8 @@ namespace Webet333.api.Helpers
 
         #endregion Send SMS API
 
-        #region Check Active SMS Services
-
-
-
-        #endregion
-
         #region House Keeping
+
         public void Dispose()
         {
             Dispose(true);
@@ -685,6 +684,7 @@ namespace Webet333.api.Helpers
                 Connection = string.Empty;
             }
         }
-        #endregion 
+
+        #endregion House Keeping
     }
 }

@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Webet333.dapper;
@@ -14,12 +12,9 @@ namespace Webet333.api.Helpers
 {
     public class PlaytechGameHelpers : IDisposable
     {
-
         #region Local Variables
 
         private string Connection = string.Empty;
-
-
 
         private static readonly HttpClient client = new HttpClient();
 
@@ -28,9 +23,9 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion Local Variables
 
-        #region Call Broken API of Playtech game 
+        #region Call Broken API of Playtech game
 
         public static async Task<PlaytechBrokenStatusResponse> CallPlaytechBrokenAPI(string username, IHostingEnvironment _hostingEnvironment)
         {
@@ -42,16 +37,14 @@ namespace Webet333.api.Helpers
             {
                 var resultPlaytech = JsonConvert.DeserializeObject<PlaytechBrokenStatusResponse>(await defaultHelper.PlaytechAPICertificate(PlaytechURL, returnResult: true));
                 return resultPlaytech;
-
             }
             catch (Exception ex)
             {
                 return new PlaytechBrokenStatusResponse();
             }
-
         }
 
-        #endregion
+        #endregion Call Broken API of Playtech game
 
         #region Call Playtech Register API
 
@@ -68,11 +61,10 @@ namespace Webet333.api.Helpers
                            $"&password={Password}";
 
             DefaultHelper defaultHelper = new DefaultHelper(_hostingEnvironment);
-            return JsonConvert.DeserializeObject<PlaytechRegisterResponse>(await defaultHelper.PlaytechAPICertificate(URL,returnResult:true));
-
+            return JsonConvert.DeserializeObject<PlaytechRegisterResponse>(await defaultHelper.PlaytechAPICertificate(URL, returnResult: true));
         }
 
-        #endregion
+        #endregion Call Playtech Register API
 
         #region Broken Status Update
 
@@ -84,7 +76,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Broken Status Update
 
         #region Register Game Playtech
 
@@ -97,7 +89,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion 
+        #endregion Register Game Playtech
 
         #region House Keeping
 
@@ -115,6 +107,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion House Keeping
     }
 }

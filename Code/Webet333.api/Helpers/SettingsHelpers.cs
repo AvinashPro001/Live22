@@ -20,6 +20,7 @@ namespace Webet333.api.Helpers
         }
 
         #region House Keeping
+
         public void Dispose()
         {
             Disponse(true);
@@ -33,9 +34,11 @@ namespace Webet333.api.Helpers
                 Connection = string.Empty;
             }
         }
-        #endregion 
+
+        #endregion House Keeping
 
         #region Bank Details
+
         public async Task<dynamic> GetBanksList(BaseUrlConfigs baseUrl)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -47,10 +50,12 @@ namespace Webet333.api.Helpers
                 return banks;
             }
         }
-        #endregion 
+
+        #endregion Bank Details
 
         #region Admin Bank Details
-        public async Task<dynamic> GetAdminBankDetails(BaseUrlConfigs baseUrl ,string languageId)
+
+        public async Task<dynamic> GetAdminBankDetails(BaseUrlConfigs baseUrl, string languageId)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -86,7 +91,6 @@ namespace Webet333.api.Helpers
                 return new { bankDetails };
             }
         }
-
 
         public async Task AddOrUpdateAdminBankDetails(dynamic request)
         {
@@ -143,10 +147,12 @@ namespace Webet333.api.Helpers
                     });
             }
         }
-        #endregion 
+
+        #endregion Admin Bank Details
 
         #region Announcement Details
-        public async Task<dynamic> GetAnnouncementList(string languageId=null)
+
+        public async Task<dynamic> GetAnnouncementList(string languageId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -200,7 +206,8 @@ namespace Webet333.api.Helpers
                     });
             }
         }
-        #endregion 
+
+        #endregion Announcement Details
 
         #region Contact Management
 

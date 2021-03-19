@@ -23,7 +23,7 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion Local Variables
 
         #region Call Register API of SA game
 
@@ -49,7 +49,7 @@ namespace Webet333.api.Helpers
             return XDocument.Parse(await GameHelpers.CallThirdPartyApi(url, stringContent));
         }
 
-        #endregion
+        #endregion Call Register API of SA game
 
         #region Call Login API of SA game
 
@@ -73,14 +73,13 @@ namespace Webet333.api.Helpers
             var tokenUrl = $"{GameConst.SAConst.APIURL}?q={tokenQ}&s={tokenS}";
             var stringContent = new StringContent($"q={tokenQ}&s={tokenS}", Encoding.UTF8, "application/x-www-form-urlencoded");
             return XDocument.Parse(await GameHelpers.CallThirdPartyApi(tokenUrl, stringContent));
-
         }
 
-        #endregion
+        #endregion Call Login API of SA game
 
         #region Call Deposit API of SA game
 
-        internal static async Task<XDocument> CallAPIDeposit(string username,decimal Amount)
+        internal static async Task<XDocument> CallAPIDeposit(string username, decimal Amount)
         {
             username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
             if (username.Length > 20)
@@ -102,10 +101,10 @@ namespace Webet333.api.Helpers
             var url = $"{GameConst.SAConst.APIURL}?q={q}&s={s}";
 
             var stringContent = new StringContent($"q={q}&s={s}", Encoding.UTF8, "application/x-www-form-urlencoded");
-            return XDocument.Parse(await GameHelpers.CallThirdPartyApi(url,stringContent));
+            return XDocument.Parse(await GameHelpers.CallThirdPartyApi(url, stringContent));
         }
 
-        #endregion
+        #endregion Call Deposit API of SA game
 
         #region Call Withdraw API of SA game
 
@@ -135,9 +134,10 @@ namespace Webet333.api.Helpers
             return XDocument.Parse(await GameHelpers.CallThirdPartyApi(url, stringContent));
         }
 
-        #endregion
+        #endregion Call Withdraw API of SA game
 
         #region SA Register
+
         internal async Task<dynamic> SARegister(string Username, string Response, string UserId)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -145,9 +145,9 @@ namespace Webet333.api.Helpers
                 var result = await repository.GetDataAsync(StoredProcConsts.SA.Register, new { Username, Response, UserId });
                 return result;
             }
-
         }
-        #endregion
+
+        #endregion SA Register
 
         #region House Keeping
 

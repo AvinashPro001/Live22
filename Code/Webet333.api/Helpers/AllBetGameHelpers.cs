@@ -28,9 +28,10 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion Local Variables
 
         #region Randon Number Genrate
+
         public static string genrateNumber()
         {
             Random generator = new Random();
@@ -38,7 +39,7 @@ namespace Webet333.api.Helpers
             return r;
         }
 
-        #endregion
+        #endregion Randon Number Genrate
 
         #region Random Number
 
@@ -50,7 +51,7 @@ namespace Webet333.api.Helpers
             return BitConverter.ToString(byteCsp);
         }
 
-        #endregion
+        #endregion Random Number
 
         #region Call Third Party API and Encrpt Data
 
@@ -97,7 +98,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Call Third Party API and Encrpt Data
 
         #region Call Register Third Party API
 
@@ -173,10 +174,9 @@ namespace Webet333.api.Helpers
             var Parameter = $"random={Random()}&startTime={StartTime}&endTime={EndTime}&agent={GameConst.AllBet.Agent}";
             var Url = $"{GameConst.AllBet.Url}{GameConst.AllBet.BettingDetails}";
             return JsonConvert.DeserializeObject<AllBetServicesResponse>(await CallAPI(Url, Parameter));
-
         }
 
-        #endregion Call Login Third Party API
+        #endregion Call Betting Details Third Party API
 
         #region Call Betting Details Third Party API
 
@@ -192,7 +192,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject(await CallAPI(Url, Parameter));
         }
 
-        #endregion Call Login Third Party API
+        #endregion Call Betting Details Third Party API
 
         #region AllBet game Register
 
@@ -204,7 +204,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion AllBet game Register
 
         #region House Keeping
 
@@ -222,6 +222,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion House Keeping
     }
 }

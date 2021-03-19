@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
 using Webet333.models.Response.Game.SexyBaccarat;
-using System.Text.RegularExpressions;
 
 namespace Webet333.api.Helpers.SexyBaccarat
 {
@@ -25,7 +25,7 @@ namespace Webet333.api.Helpers.SexyBaccarat
             this.Connection = Connection;
         }
 
-        #endregion 
+        #endregion Local Variables
 
         #region Call Register API of Sexy game
 
@@ -50,7 +50,7 @@ namespace Webet333.api.Helpers.SexyBaccarat
             return JsonConvert.DeserializeObject<SexyBaccaratAPIResponse>(await CallThirdPartyApi(url, dict));
         }
 
-        #endregion 
+        #endregion Call Register API of Sexy game
 
         #region Call BetingLimit API of Sexy game
 
@@ -73,7 +73,7 @@ namespace Webet333.api.Helpers.SexyBaccarat
             return JsonConvert.DeserializeObject<SexyBaccaratLoginResponse>(await CallThirdPartyApi(url, dict));
         }
 
-        #endregion 
+        #endregion Call BetingLimit API of Sexy game
 
         #region Call Login API of Sexy game
 
@@ -97,10 +97,9 @@ namespace Webet333.api.Helpers.SexyBaccarat
             dict.Add("externalURL", GameConst.SexyBaccaratConst.RedirectURL);
 
             return JsonConvert.DeserializeObject<SexyBaccaratLoginResponse>(await CallThirdPartyApi(url, dict));
-
         }
 
-        #endregion 
+        #endregion Call Login API of Sexy game
 
         #region Call Depsoit API of Sexy game
 
@@ -122,10 +121,9 @@ namespace Webet333.api.Helpers.SexyBaccarat
             dict.Add("txCode", RandomString());
 
             return JsonConvert.DeserializeObject<SexyBaccaratDepositResponse>(await CallThirdPartyApi(url, dict));
-
         }
 
-        #endregion
+        #endregion Call Depsoit API of Sexy game
 
         #region Call Withdraw API of Sexy game
 
@@ -148,13 +146,12 @@ namespace Webet333.api.Helpers.SexyBaccarat
             dict.Add("txCode", RandomString());
 
             return JsonConvert.DeserializeObject<SexybaccaratWithdrawResponse>(await CallThirdPartyApi(url, dict));
-
-
         }
 
-        #endregion 
+        #endregion Call Withdraw API of Sexy game
 
         #region Sexybaccarat Register
+
         internal async Task<dynamic> SexyBaccaratRegister(string username, SexyBaccaratAPIResponse request, string UserId)
         {
             string response = JsonConvert.SerializeObject(request);
@@ -163,11 +160,12 @@ namespace Webet333.api.Helpers.SexyBaccarat
                 var result = await repository.GetDataAsync(StoredProcConsts.SexyBaccarat.Register, new { username, response, UserId });
                 return result;
             }
-
         }
-        #endregion 
+
+        #endregion Sexybaccarat Register
 
         #region Random Genrate
+
         public static string RandomString()
         {
             int size = 10;
@@ -188,9 +186,11 @@ namespace Webet333.api.Helpers.SexyBaccarat
 
             return (result.ToString());
         }
-        #endregion 
+
+        #endregion Random Genrate
 
         #region Sexybaccarat Set Limit
+
         internal async Task<dynamic> SexyBaccaratSetBetLimit(List<long> bettingLimit, string adminId = null)
         {
             var request = new SexyBaccaratBetlimitResponse
@@ -218,7 +218,8 @@ namespace Webet333.api.Helpers.SexyBaccarat
                 return result;
             }
         }
-        #endregion 
+
+        #endregion Sexybaccarat Set Limit
 
         #region Call Third Party API's
 

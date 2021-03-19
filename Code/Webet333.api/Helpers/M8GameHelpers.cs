@@ -13,7 +13,6 @@ namespace Webet333.api.Helpers
 {
     public class M8GameHelpers : IDisposable
     {
-
         #region Local Variables
 
         private string Connection = string.Empty;
@@ -25,7 +24,7 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion Local Variables
 
         public static async Task<string> CallAPI(string Url)
         {
@@ -58,7 +57,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<M8RegisterResponse>(await CallAPI(url));
         }
 
-        #endregion
+        #endregion Call M8 Game Register API
 
         #region M8 Game Register API
 
@@ -67,11 +66,11 @@ namespace Webet333.api.Helpers
             string response = request.APIResponse.ToString(Newtonsoft.Json.Formatting.None);
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-               return await repository.FindAsync(StoredProcConsts.Game.GameM8Register, new { request.UserId, request.M8UserName, APIResponse = response });
+                return await repository.FindAsync(StoredProcConsts.Game.GameM8Register, new { request.UserId, request.M8UserName, APIResponse = response });
             }
         }
 
-        #endregion GameM8
+        #endregion M8 Game Register API
 
         #region House Keeping
 
@@ -89,7 +88,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
-
+        #endregion House Keeping
     }
 }

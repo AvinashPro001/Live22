@@ -34,13 +34,13 @@ namespace Webet333.api.Controllers
             _hostingEnvironment = environment;
         }
 
-        #endregion Global variable and Constructor   
+        #endregion Global variable and Constructor
 
         #region SA game Register
 
         [Authorize]
         [HttpPost(ActionsConst.SA.SARegsiter)]
-        public async Task<IActionResult> SARegister([FromBody]GetByIdRequest request)
+        public async Task<IActionResult> SARegister([FromBody] GetByIdRequest request)
         {
             var Role = GetUserRole(User);
 
@@ -51,7 +51,7 @@ namespace Webet333.api.Controllers
                 if (string.IsNullOrEmpty(request.Id))
                     return BadResponse("error_invalid_modelstate");
 
-            string username="";
+            string username = "";
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
@@ -80,7 +80,6 @@ namespace Webet333.api.Controllers
             {
                 return OkResponse(new SARegisterResponse { status = "8", Message = "Maintenance" });
             }
-            
         }
 
         #endregion SA game Register
@@ -91,7 +90,6 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.SA.SALogin)]
         public async Task<IActionResult> SALogin([FromBody] GameLoginRequest request)
         {
-
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             var Role = GetUserRole(User);
@@ -136,9 +134,8 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.SA.SADeposit)]
-        private async Task<IActionResult> SADeposit([FromBody]SADepositWithdrawRequest request)
+        private async Task<IActionResult> SADeposit([FromBody] SADepositWithdrawRequest request)
         {
-
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             var Role = GetUserRole(User);
@@ -183,13 +180,14 @@ namespace Webet333.api.Controllers
                 return OkResponse(new SARegisterResponse { status = "8585", Message = "Maintenance" });
             }
         }
+
         #endregion Deposit Member
 
         #region Withdraw Member
 
         [Authorize]
         [HttpPost(ActionsConst.SA.SAWithdraw)]
-        private async Task<IActionResult> SAWithdraw([FromBody]SADepositWithdrawRequest request)
+        private async Task<IActionResult> SAWithdraw([FromBody] SADepositWithdrawRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
@@ -234,6 +232,7 @@ namespace Webet333.api.Controllers
                 return OkResponse(new SARegisterResponse { status = "8585", Message = "Maintenance" });
             }
         }
+
         #endregion Withdraw Member
     }
 }

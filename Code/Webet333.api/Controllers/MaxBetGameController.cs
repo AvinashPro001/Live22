@@ -10,12 +10,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
-using Webet333.models;
+using Webet333.dapper;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request.Game;
 using Webet333.models.Request.Game.MaxBet;
-using Webet333.dapper;
 
 namespace Webet333.api.Controllers
 {
@@ -126,7 +125,6 @@ namespace Webet333.api.Controllers
                                 min_bet = MaxParleyMin,
                                 max_bet = MaxParleyMax,
                                 max_bet_per_match = MaxParleyMatch,
-
                             });
                             continue;
                         }
@@ -142,7 +140,7 @@ namespace Webet333.api.Controllers
 
                     var setlimitResponse = await MaxBetGameHelper.CallMaxbetBettingLimitsUpdateAPI(setlimit, vendorMemberId.ToString());
 
-                    #endregion 
+                    #endregion Update Betting Details of User
 
                     var result = await game_help.GameMaxBetRegister(request.Username, request.UserId, JsonConvert.SerializeObject(response));
                     return OkResponse(new { response, result, setlimit, setlimitResponse });
@@ -151,6 +149,7 @@ namespace Webet333.api.Controllers
 
             return OkResponse(response);
         }
+
         #endregion Max Bet Game Register
 
         #region Game Login
@@ -189,7 +188,6 @@ namespace Webet333.api.Controllers
                     Url += Url + "&webskintype=2";
             }
             return OkResponse(new { error_code = response.error_code, Data = response.Data, message = response.message, gameUrl = Url });
-
         }
 
         #endregion Game Login
@@ -325,7 +323,6 @@ namespace Webet333.api.Controllers
                             min_bet = MaxParleyMin,
                             max_bet = MaxParleyMax,
                             max_bet_per_match = MaxParleyMatch,
-
                         });
                         continue;
                     }
@@ -374,7 +371,7 @@ namespace Webet333.api.Controllers
             return OkResponse();
         }
 
-        #endregion 
+        #endregion RESET MaxBet Setting
 
         #region SET MAXBET MIN & MAX GLOBAL VARIABLE
 
@@ -393,10 +390,9 @@ namespace Webet333.api.Controllers
                 await game_helper.GetAllUserMinMaxLimit(list, Convert.ToDecimal(request.MinimumValue), Convert.ToDecimal(request.Maximumvalue));
                 return OkResponse(await game_helper.MaxBetSetGlobalVariable(request.Maximumvalue, request.MinimumValue, request.AdminId.ToString()));
             }
-
         }
 
-        #endregion
+        #endregion SET MAXBET MIN & MAX GLOBAL VARIABLE
 
         #region GET MAXBET  GLOBAL VARIABLE
 
@@ -412,7 +408,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion GET MAXBET  GLOBAL VARIABLE
 
         #region SET DEFAULT BETTING LIMITS
 
@@ -476,7 +472,6 @@ namespace Webet333.api.Controllers
                 var response = await MaxBetGameHelper.CallMaxbetUpdateAPI(req, vendorMemberId);
                 return OkResponse(response);
             }
-
         }
 
         #endregion SET user Min Max Limit

@@ -24,9 +24,10 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion 
+        #endregion Local Variables
 
         #region Random Genrate
+
         public static string RandomString()
         {
             int size = 10;
@@ -47,11 +48,12 @@ namespace Webet333.api.Helpers
 
             return (result.ToString());
         }
-        #endregion 
+
+        #endregion Random Genrate
 
         #region Dg Game Register API
 
-        internal static async Task<DgApiResponse> CallRegisterAPI(string username, string password,string bettingLimit)
+        internal static async Task<DgApiResponse> CallRegisterAPI(string username, string password, string bettingLimit)
         {
             var random = RandomString();
 
@@ -75,16 +77,15 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<DgApiResponse>(await GameHelpers.CallThirdPartyApi(url, stringContent));
         }
 
-        #endregion 
+        #endregion Dg Game Register API
 
         #region Dg Game Login API
 
-        internal static async Task<DgApiLoginResponse> CallLoginAPI(string username, string password,string language )
+        internal static async Task<DgApiLoginResponse> CallLoginAPI(string username, string password, string language)
         {
             var random = DGGameHelpers.RandomString();
             var apiRequest = new DgApiLoginRequest
             {
-
                 token = SecurityHelpers.MD5EncrptText(GameConst.DG.agentName + GameConst.DG.apiKey + random),
                 random = random,
                 lang = language == LanguageConst.English ? "en" : "cn",
@@ -102,7 +103,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<DgApiLoginResponse>(await GameHelpers.CallThirdPartyApi(url, stringContent));
         }
 
-        #endregion 
+        #endregion Dg Game Login API
 
         #region Dg Game Withdraw & Transfer API
 
@@ -127,11 +128,11 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<DgApiTransferResponse>(await GameHelpers.CallThirdPartyApi(url, stringContent));
         }
 
-        #endregion 
+        #endregion Dg Game Withdraw & Transfer API
 
         #region Dg Game Update API
 
-        internal static async Task<DgApiResponse> CallUpdateuserAPI(string username, string password,int status=1,decimal Winlimit=1000m)
+        internal static async Task<DgApiResponse> CallUpdateuserAPI(string username, string password, int status = 1, decimal Winlimit = 1000m)
         {
             var random = DGGameHelpers.RandomString();
             var apiRequest = new DgApiUserUpdateRequest
@@ -141,9 +142,9 @@ namespace Webet333.api.Helpers
                 member = new UpdateMember
                 {
                     username = username,
-                    password=password,
-                    status=status,
-                    winLimit=Winlimit
+                    password = password,
+                    status = status,
+                    winLimit = Winlimit
                 }
             };
 
@@ -153,18 +154,18 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<DgApiResponse>(await GameHelpers.CallThirdPartyApi(url, stringContent));
         }
 
-        #endregion 
+        #endregion Dg Game Update API
 
         #region Dg Game Update Betting limit
 
-        internal static async Task<DgApiResponse> CallUpdateBetLimitAPI(string username,string betLimit)
+        internal static async Task<DgApiResponse> CallUpdateBetLimitAPI(string username, string betLimit)
         {
             var random = DGGameHelpers.RandomString();
             var apiRequest = new DGApiBetLimitUpdateRequest
             {
                 token = SecurityHelpers.MD5EncrptText(GameConst.DG.agentName + GameConst.DG.apiKey + random),
                 random = random,
-                data=betLimit,
+                data = betLimit,
                 member = new BettingLimitMember
                 {
                     username = username,
@@ -177,7 +178,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<DgApiResponse>(await GameHelpers.CallThirdPartyApi(url, stringContent));
         }
 
-        #endregion 
+        #endregion Dg Game Update Betting limit
 
         #region DG game Register
 
@@ -189,7 +190,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion DG game Register
 
         #region DG game Bet Limit
 
@@ -197,7 +198,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result=await repository.AddOrUpdateAsync(
+                var result = await repository.AddOrUpdateAsync(
                     StoredProcConsts.Global.UpdateGlobalParamters,
                     new
                     {
@@ -210,7 +211,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion 
+        #endregion DG game Bet Limit
 
         #region House Keeping
 
@@ -228,7 +229,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion 
-
+        #endregion House Keeping
     }
 }

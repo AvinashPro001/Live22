@@ -31,7 +31,6 @@ using Webet333.models.Request.Game;
 using Webet333.models.Request.Game.DG;
 using Webet333.models.Request.Game.M8;
 using Webet333.models.Request.Game.MaxBet;
-using Webet333.models.Request.Payments;
 using Webet333.models.Request.User;
 using Webet333.models.Response.Account;
 using Webet333.models.Response.Game;
@@ -45,11 +44,9 @@ using Webet333.queue;
 
 namespace Webet333.api.Controllers
 {
-
     [Route(ActionsConst.ApiVersion)]
     public class GameController : BaseController
     {
-
         #region Global variable and Constructor
 
         protected ApiLogsManager LogManager { get; set; }
@@ -96,7 +93,6 @@ namespace Webet333.api.Controllers
                 var result = await game_help.GamePlaytechRegister(request: request);
                 return OkResponse(result);
             }
-
         }
 
         [HttpPost(ActionsConst.Game.Game918KissRegister)]
@@ -110,7 +106,6 @@ namespace Webet333.api.Controllers
                 var result = await game_help.Game918KissRegister(request: request);
                 return OkResponse(result);
             }
-
         }
 
         [HttpPost(ActionsConst.Game.GameAGRegister)]
@@ -124,7 +119,6 @@ namespace Webet333.api.Controllers
                 var result = await game_help.GameAGRegister(request: request);
                 return OkResponse(result);
             }
-
         }
 
         [HttpPost(ActionsConst.Game.GameM8Register)]
@@ -168,7 +162,6 @@ namespace Webet333.api.Controllers
                 var result = await game_help.GameM8Register(request: request);
                 return OkResponse(result);
             }
-
         }
 
         #endregion All game Register
@@ -186,10 +179,9 @@ namespace Webet333.api.Controllers
                 var result = await game_help.SelectFromGame(request: request);
                 return OkResponse(result);
             }
-
         }
 
-        #endregion  Users Select From Game
+        #endregion Users Select From Game
 
         #region Rebate Calculate
 
@@ -258,10 +250,9 @@ namespace Webet333.api.Controllers
             {
                 return BadResponse("error_invalid_login");
             }
-
         }
 
-        #endregion Rebate
+        #endregion Auto Rebate
 
         #region Rebate List
 
@@ -510,7 +501,7 @@ namespace Webet333.api.Controllers
             });
         }
 
-        #endregion
+        #endregion Maxbet Game
 
         #region 918 Kiss Game
 
@@ -534,7 +525,7 @@ namespace Webet333.api.Controllers
             return OkResponse(result);
         }
 
-        #endregion 918 Kiss Betting Details
+        #endregion 918 Kiss Game
 
         #region Pussy888 Game
 
@@ -557,7 +548,7 @@ namespace Webet333.api.Controllers
             return OkResponse(result);
         }
 
-        #endregion Pussy888 Details
+        #endregion Pussy888 Game
 
         #region Mega888 Game
 
@@ -578,7 +569,6 @@ namespace Webet333.api.Controllers
                              + $"&endTime={request.ToDate.ToString("yyyy-MM-dd HH:mm:ss")}";
 
             dynamic mega888Response = JsonConvert.DeserializeObject<Mega888ServicesResponse>(await GameHelpers.CallThirdPartyApi(mega888URL, null));
-
 
             return OkResponse(mega888Response);
         }
@@ -637,7 +627,6 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.Manually_Sexy_Betting_Details)]
         public async Task<IActionResult> ManuallySexyBettingDetails([FromBody] SexyBaccaratManuallyBettingDetailsRequest request)
         {
-
             await CheckUserRole();
 
             if (DateTime.Parse(request.ToDate).Subtract(DateTime.Parse(request.FromDate)).TotalMinutes > 60)
@@ -658,7 +647,6 @@ namespace Webet333.api.Controllers
             if (request.Username != null)
                 dict.Add("userId", request.Username);
 
-
             HttpClientHandler handler = new HttpClientHandler()
             {
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
@@ -671,7 +659,8 @@ namespace Webet333.api.Controllers
 
             return OkResponse(new { response });
         }
-        #endregion Sexy Betting Details Member
+
+        #endregion Sexy baccarat game
 
         #region SA game
 
@@ -679,7 +668,6 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.Manually_SA_Betting_Details)]
         public async Task<IActionResult> ManuallySABettingDetails([FromBody] GlobalBettingDetailsRequest request)
         {
-
             await CheckUserRole();
 
             if (request.ToDate.Subtract(request.FromDate).TotalDays > 1)
@@ -707,7 +695,8 @@ namespace Webet333.api.Controllers
 
             return OkResponse(response.Descendants("BetDetail").ToList());
         }
-        #endregion SA Betting Details
+
+        #endregion SA game
 
         #region Allbet game
 
@@ -715,7 +704,6 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.Manually_AllBet_Betting_Details)]
         public async Task<IActionResult> ManuallyAllBetBettingDetails([FromBody] GlobalBettingDetailsRequest request)
         {
-
             await CheckUserRole();
 
             if (request.ToDate.Subtract(request.FromDate).Minutes > 59)
@@ -747,9 +735,10 @@ namespace Webet333.api.Controllers
 
             return OkResponse(response);
         }
+
         #endregion Allbet game betting details By user
 
-        #endregion Allbet Betting Details
+        #endregion Allbet game
 
         #region WM game
 
@@ -757,7 +746,6 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.Manually_WM_Betting_Details)]
         public async Task<IActionResult> ManuallyWMBettingDetails([FromBody] GlobalBettingDetailsRequest request)
         {
-
             await CheckUserRole();
 
             if (request.ToDate.Subtract(request.FromDate).Minutes > 1439)
@@ -770,7 +758,8 @@ namespace Webet333.api.Controllers
 
             return OkResponse(response);
         }
-        #endregion WM Betting Details
+
+        #endregion WM game
 
         #region Pragmatic game
 
@@ -778,7 +767,6 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.Manually_Pragmatic_Betting_Details)]
         public async Task<IActionResult> ManuallyPragmaticBettingDetails([FromBody] PragmaticBettingDetailsRequest request)
         {
-
             await CheckUserRole();
 
             DateTime date = request.StartTimeStamp.AddMinutes(-10);
@@ -789,6 +777,7 @@ namespace Webet333.api.Controllers
 
             return OkResponse(response);
         }
+
         #endregion Pragmatic game
 
         #endregion Manually Game Betting Details
@@ -824,7 +813,6 @@ namespace Webet333.api.Controllers
                         $"&to={endTime}" +
                         $"&page={i}";
 
-
                 responseString = await GameHelpers.CallThirdPartyApi(urlWithPage);
 
                 var agServices1 = JsonConvert.DeserializeObject<AGServicesResponse>(responseString);
@@ -832,14 +820,12 @@ namespace Webet333.api.Controllers
                     agServices.trans.AddRange(agServices1.trans);
             }
 
-
             using (var game_help = new GameHelpers(Connection: Connection))
             {
                 try
                 {
                     await game_help.AgServicesInsert(agServices);
                     return OkResponse();
-
                 }
                 catch (Exception ex)
                 {
@@ -915,8 +901,6 @@ namespace Webet333.api.Controllers
                     await game_help.PlaytechServicesInsert(result);
                 return OkResponse();
             }
-
-
         }
 
         #endregion Playtech Betting Details
@@ -1053,7 +1037,7 @@ namespace Webet333.api.Controllers
             return OkResponse(result);
         }
 
-        #endregion 918 Kiss Betting Details
+        #endregion Pussy Betting Details
 
         #region Mega888 Betting Details
 
@@ -1163,9 +1147,9 @@ namespace Webet333.api.Controllers
                 return OkResponse(new { response, startTime, endTime });
             }
             return OkResponse(new { response, startTime, endTime });
-
         }
-        #endregion Sexy Betting Details Member
+
+        #endregion Sexy Betting Details
 
         #region SA Betting Details
 
@@ -1195,9 +1179,9 @@ namespace Webet333.api.Controllers
                     }
             }
             return OkResponse(response.Descendants("BetDetail").ToList());
-
         }
-        #endregion
+
+        #endregion SA Betting Details
 
         #region AllBet Betting Details
 
@@ -1215,9 +1199,9 @@ namespace Webet333.api.Controllers
                     }
             }
             return OkResponse(JsonConvert.SerializeObject(response));
-
         }
-        #endregion SA Betting Details
+
+        #endregion AllBet Betting Details
 
         #region WM Betting Details
 
@@ -1243,9 +1227,9 @@ namespace Webet333.api.Controllers
                 startTime = time.AddMinutes(-5).ToString("yyyyMMddHHmmss"),
                 endtime = time.ToString("yyyyMMddHHmmss")
             });
-
         }
-        #endregion
+
+        #endregion WM Betting Details
 
         #region Pragmatic Betting Details
 
@@ -1266,11 +1250,10 @@ namespace Webet333.api.Controllers
                 }
             }
 
-
             return OkResponse(new { response, timestamp = temp });
-
         }
-        #endregion
+
+        #endregion Pragmatic Betting Details
 
         #endregion GAME BETTING DETAILS
 
@@ -1341,7 +1324,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Mega888 Game
+        #endregion 918 Kiss Game
 
         #region Pussy888 Game
 
@@ -1438,7 +1421,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Playtech Game
+        #endregion MaxBet Game
 
         #region DG Game
 
@@ -1458,7 +1441,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion AG Game
+        #endregion DG Game
 
         #region Sexy baccarat Game
 
@@ -1478,7 +1461,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Sexy baccarat Game
 
         #region SA Game
 
@@ -1495,7 +1478,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion SA Game
 
         #region AllBet Game
 
@@ -1512,7 +1495,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion AllBet Game
 
         #region WM Game
 
@@ -1529,7 +1512,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion WM Game
 
         #region Pragmatic Game
 
@@ -1546,7 +1529,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Pragmatic Game
 
         #endregion Game Betting Details save
 
@@ -1625,7 +1608,6 @@ namespace Webet333.api.Controllers
                         $"agent={GameConst.M8.agent}&" +
                         $"username={M8Username.Trim()}";
 
-
             var PlaytechURL = $"{GameConst.Playtech.playtechBaseUrl}" +
                                 $"balance?playername={PlaytechUsername.ToUpper()}";
 
@@ -1651,7 +1633,6 @@ namespace Webet333.api.Controllers
             var resultM8 = XDocument.Parse(await GameHelpers.CallThirdPartyApi(M8URL, null));
             dynamic resultPlaytech = JsonConvert.DeserializeObject(await defaultHelper.PlaytechAPICertificate(PlaytechURL, true));
             dynamic resultMega888 = JsonConvert.DeserializeObject(await GameHelpers.CallThirdPartyApi(mega888Url, null));
-
 
             var M8Balance = resultM8.Descendants("result").Single().Value == "" ? "0.0" : resultM8.Descendants("result").Single().Value;
             var JokerBalance = resultJoker.Credit == null ? "0.0" : resultJoker.Credit;
@@ -1733,7 +1714,6 @@ namespace Webet333.api.Controllers
                 PussyBalance = 0.0m;
             using (var game_helper = new GameHelpers(Connection))
             {
-
                 if (request.AGWallet != 0)
                 {
                     try
@@ -1931,8 +1911,8 @@ namespace Webet333.api.Controllers
 
                 return OkResponse(new { mainBalance, MaxbetBalance });
             }
-
         }
+
         #endregion Game Restore Balance
 
         #region Update Slots games app download link & Create Barcode
@@ -1966,7 +1946,6 @@ namespace Webet333.api.Controllers
             byte[] byteImage = ms.ToArray();
             var SigBase64 = Convert.ToBase64String(byteImage);
 
-
             using (var generic_help = new GenericHelpers(Connection))
             {
                 generic_help.DeleteImage(uploadManager, request.Id.ToString(), BaseUrlConfigsOptions.Value.AppDownloadImage);
@@ -1978,6 +1957,7 @@ namespace Webet333.api.Controllers
         #endregion Update Slots games app download link & Create Barcode
 
         #region DownloadLink  List
+
         [HttpGet(ActionsConst.Game.DownloadLinkList)]
         public async Task<IActionResult> DownloadLinkSelect([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOption)
         {
@@ -1986,9 +1966,11 @@ namespace Webet333.api.Controllers
                 return OkResponse(await game_helper.GetDownloadLinkList(BaseUrlConfigsOption.Value));
             }
         }
-        #endregion 
+
+        #endregion DownloadLink  List
 
         #region Global paramertes
+
         [HttpGet(ActionsConst.Game.GlobalParameter)]
         public async Task<IActionResult> GlobalParameters()
         {
@@ -1998,9 +1980,11 @@ namespace Webet333.api.Controllers
                 return OkResponse(globalparameters);
             }
         }
-        #endregion 
+
+        #endregion Global paramertes
 
         #region Check users Register in Game
+
         [HttpGet(ActionsConst.Game.CheckGameRegister)]
         public async Task<IActionResult> CheckRegister()
         {
@@ -2009,6 +1993,7 @@ namespace Webet333.api.Controllers
                 return OkResponse(await game_helper.CheckGameRegister());
             }
         }
+
         #endregion Check users Register in Game
 
         #region All game Register with Third Party API
@@ -2088,9 +2073,6 @@ namespace Webet333.api.Controllers
                 var result = await game_help.GamePlaytechRegister(request: apiResponse);
                 return OkResponse(result);
             }
-
-
-
         }
 
         #endregion Playtech Game Register
@@ -2191,9 +2173,11 @@ namespace Webet333.api.Controllers
             }
             return BadResponse();
         }
+
         #endregion Ag Game Register
 
         #region M8 Game Register
+
         [HttpPost(ActionsConst.Game.GameRegisterM8)]
         public async Task<IActionResult> GameRegisterM8([FromBody] AllGameRegisterRequest request)
         {
@@ -2256,16 +2240,17 @@ namespace Webet333.api.Controllers
                                        $"suspend={limit.Suspend}";
                     await GameHelpers.CallThirdPartyApi(Url, null);
 
-
                     var result = await game_help.GameM8Register(request: gameRequest);
                     return OkResponse(result);
                 }
             }
             return BadResponse();
         }
+
         #endregion M8 Game Register
 
         #region Pragmatic Game Register
+
         [HttpGet(ActionsConst.Game.GameRegisterPragmaticRemains)]
         public async Task<IActionResult> GameRegisterPragmatic()
         {
@@ -2299,9 +2284,10 @@ namespace Webet333.api.Controllers
                 return OkResponse(result);
             }
         }
+
         #endregion Pragmatic Game Register
 
-        #endregion All game Register
+        #endregion All game Register with Third Party API
 
         #region M8 Bet Default Limit Update
 
@@ -2318,12 +2304,12 @@ namespace Webet333.api.Controllers
                 await game_helper.M8DefaultLimitUpdate(request);
                 return OkResponse();
             }
-
         }
 
         #endregion M8 Bet Default Limit Update
 
         #region M8 Bet Default Limit Select
+
         [Authorize]
         [HttpGet(ActionsConst.Game.M8GameGetLimit)]
         public async Task<IActionResult> M8SetLimitSelect()
@@ -2333,12 +2319,12 @@ namespace Webet333.api.Controllers
                 var result = await m8_helper.M8DefaultLimitSelect();
                 return OkResponse(result);
             }
-
         }
 
         #endregion M8 Bet Default Limit Select
 
         #region M8 Bet Users Limit Reset
+
         [Authorize]
         [HttpGet(ActionsConst.Game.M8ResetSetLimit)]
         public async Task<IActionResult> M8UsersLimitReset()
@@ -2353,8 +2339,8 @@ namespace Webet333.api.Controllers
 
                 return OkResponse();
             }
-
         }
+
         #endregion M8 Bet Users Limit Reset
 
         #region M8 Users Bettting Limits Update in Third Party M8 game API
@@ -2406,8 +2392,7 @@ namespace Webet333.api.Controllers
                             var result = XDocument.Parse(await GameHelpers.CallThirdPartyApi(Url, null));
 
                             if (result.Descendants("errcode").Single().Value == "0")
-                                m8UsersSetBettingLimitsRequest.Add(new M8UsersSetBettingLimitsRequest { Id = user.Id.ToString(), SetLimit = true, AdminId = GetUserId(User)});
-
+                                m8UsersSetBettingLimitsRequest.Add(new M8UsersSetBettingLimitsRequest { Id = user.Id.ToString(), SetLimit = true, AdminId = GetUserId(User) });
                         }
                         using (var gamehelper = new GameHelpers(Connection))
                         {
@@ -2428,7 +2413,6 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.BalacneInWallet)]
         public async Task<IActionResult> BalacneInWallet([FromBody] AllInWalletRequest request)
         {
-
             if (!ModelState.IsValid) return BadResponse(ModelState);
             var Role = GetUserRole(User);
             if (Role == RoleConst.Users)
@@ -2471,7 +2455,6 @@ namespace Webet333.api.Controllers
 
             var responseId = await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Amount = request.Amount.ToString(), UserId = request.UserId, WalletId = request.ToWalletId, Request = JsonConvert.SerializeObject(request) });
             var Id = responseId.ID.ToString();
-
 
             if (userDetails.FromWalletIsMaintenance == true)
             {
@@ -2518,7 +2501,7 @@ namespace Webet333.api.Controllers
                         }
                         else
                         {
-                            //Deposit In Main Wallet and Insert into DB Row 
+                            //Deposit In Main Wallet and Insert into DB Row
                             await transferMoney_helper.DepositInWallet(userDetails, "Main Wallet", request.Amount, request.UserId.ToString(), _hostingEnvironment);
                             transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
 
@@ -2547,9 +2530,10 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Main Wallet to All Wallet
 
         #region Expiry Promotion of users
+
         [HttpPost(ActionsConst.Game.PromotionExpiry)]
         public async Task<IActionResult> ExpiryPromotion(string Username, string Password)
         {
@@ -2628,7 +2612,6 @@ namespace Webet333.api.Controllers
                     {
                         var resultPlaytech = await gamebalanceHelper.CallPlaytechGameBalance(PlaytechGamePrefix + expieryUsersList.Username, _hostingEnvironment);
                         expieryUsersList.PlaytechBalance = Convert.ToDecimal(resultPlaytech);
-
                     }
 
                     if (expieryUsersList.MaxBet)
@@ -2678,7 +2661,7 @@ namespace Webet333.api.Controllers
                         expieryUsersList.PragmaticBalance = Convert.ToDecimal(resultPragmatic);
                     }
 
-                    #endregion 
+                    #endregion userBalance Update
 
                     #region userBalance Restore
 
@@ -2724,7 +2707,6 @@ namespace Webet333.api.Controllers
                             }
                             catch
                             {
-
                             }
                         }
 
@@ -2862,7 +2844,7 @@ namespace Webet333.api.Controllers
                         }
                     }
 
-                    #endregion
+                    #endregion userBalance Restore
 
                     var bonusWinAmount = mainBalance - expieryUsersList.BonusAmount;
                     mainBalance -= bonusWinAmount;
@@ -2878,6 +2860,7 @@ namespace Webet333.api.Controllers
             }
             return OkResponse(expieryPromotionList);
         }
+
         #endregion Expiry Promotion of users
 
         #region Expiery Promotion from Admin
@@ -2901,6 +2884,7 @@ namespace Webet333.api.Controllers
         #endregion Expiery Promotion from Admin
 
         #region Game Last Update
+
         [Authorize]
         [HttpGet(ActionsConst.Game.LastUpdateBettingDetail)]
         public async Task<IActionResult> GameLastUpdateList()
@@ -2912,9 +2896,11 @@ namespace Webet333.api.Controllers
                 return OkResponse(await game_helper.LastUpdatedList());
             }
         }
+
         #endregion Game Last Update
 
         #region Daily Turnover
+
         [Authorize]
         [HttpPost(ActionsConst.Game.DailyTurnover)]
         public async Task<IActionResult> DailyTurnOver([FromBody] GetByIdRequest request)
@@ -2923,7 +2909,6 @@ namespace Webet333.api.Controllers
 
             if (Role == RoleConst.Users)
                 request.Id = GetUserId(User).ToString();
-
 
             using (var game_helper = new GameHelpers(Connection))
             {
@@ -2965,7 +2950,8 @@ namespace Webet333.api.Controllers
                 return OkResponse(new { response, Total = total });
             }
         }
-        #endregion 
+
+        #endregion Daily Turnover
 
         #region Get Game Support of user
 
@@ -2978,7 +2964,6 @@ namespace Webet333.api.Controllers
             if (Role == RoleConst.Users)
                 request.Id = GetUserId(User).ToString();
 
-
             using (var game_helper = new GameHelpers(Connection))
             {
                 var result = await game_helper.GetSupportGameOfUser(request.Id);
@@ -2987,7 +2972,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Get Game Support of user
 
         #region Get Betting Limits of Game
 
@@ -3004,7 +2989,8 @@ namespace Webet333.api.Controllers
                 return OkResponse(new { DGbettingLimits, AGbettingLimits, SexybettingLimits });
             }
         }
-        #endregion
+
+        #endregion Get Betting Limits of Game
 
         #region Get Betting DETAILS of Game
 
@@ -3020,7 +3006,8 @@ namespace Webet333.api.Controllers
                 return OkResponse(result);
             }
         }
-        #endregion 
+
+        #endregion Get Betting DETAILS of Game
 
         #region 918 Kiss game password reset
 
@@ -3053,7 +3040,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion 918 Kiss game password reset
 
         #region 918 Kiss game password reset by Admin
 
@@ -3088,7 +3075,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion 918 Kiss game password reset by Admin
 
         #region All 918 Kiss game users password reset
 
@@ -3100,7 +3087,6 @@ namespace Webet333.api.Controllers
             using (var game_helper = new GameHelpers(Connection))
             {
                 var users = await game_helper.GetAllKiss918Usersname();
-
 
                 List<Kiss918PasswordResetResponse> list = new List<Kiss918PasswordResetResponse>();
                 foreach (var user in users)
@@ -3129,7 +3115,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion All 918 Kiss game users password reset
 
         #region 918 Kiss Player Log
 
@@ -3226,7 +3212,6 @@ namespace Webet333.api.Controllers
 
             var result = JsonConvert.DeserializeObject<Kiss918PlayerGameLogResponse>(await GameHelpers.CallThirdPartyApi(PussyURL, null));
 
-
             if (result != null)
             {
                 if (result.total > pageSize)
@@ -3243,7 +3228,6 @@ namespace Webet333.api.Controllers
                              $"&sDate={startDate}" +
                              $"&eDate={endDate}" +
                              $"&pageSize={pageSize}";
-
 
                         var res = JsonConvert.DeserializeObject<Kiss918PlayerGameLogResponse>(await GameHelpers.CallThirdPartyApi(URL, null));
 
@@ -3264,7 +3248,7 @@ namespace Webet333.api.Controllers
             return OkResponse(result);
         }
 
-        #endregion Pussy Betting Details
+        #endregion Pussy888 Player Log
 
         #region Joker Player Log
 
@@ -3316,7 +3300,6 @@ namespace Webet333.api.Controllers
                 }
 
                 nextId = JokerServices.NextId;
-
             } while (!String.IsNullOrWhiteSpace(nextId));
 
             var notSave = false;
@@ -3334,6 +3317,5 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Joker Player Log
-
     }
 }

@@ -11,7 +11,6 @@ using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Settings;
-using Newtonsoft.Json;
 
 namespace Webet333.api.Controllers
 {
@@ -26,7 +25,7 @@ namespace Webet333.api.Controllers
         #region Retrieve list of Banks
 
         [HttpGet(ActionsConst.Settings.BankList)]
-        public async Task<IActionResult> BankList([FromServices]IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        public async Task<IActionResult> BankList([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
             using (var setting_help = new SettingsHelpers(Connection))
             {
@@ -34,22 +33,22 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Retrieve list of Banks
 
         #region Add, Update, Retrieve and Delete Bank List
 
         [HttpGet(ActionsConst.Settings.AdminBankList)]
-        public async Task<IActionResult> AdminBankList([FromServices]IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        public async Task<IActionResult> AdminBankList([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
             using (var setting_help = new SettingsHelpers(Connection))
             {
-                var data = await setting_help.GetAdminBankDetails(BaseUrlConfigsOptions.Value,Language.Id.ToString());
+                var data = await setting_help.GetAdminBankDetails(BaseUrlConfigsOptions.Value, Language.Id.ToString());
                 return OkResponse(data);
             }
         }
 
         [HttpGet(ActionsConst.Settings.AdminAllBankList)]
-        public async Task<IActionResult> AdminAllBankList([FromServices]IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        public async Task<IActionResult> AdminAllBankList([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
             using (var setting_help = new SettingsHelpers(Connection))
             {
@@ -60,7 +59,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.AdminBankAdd)]
-        public async Task<IActionResult> AdminBankAdd([FromBody]InsertUserBankRequest request)
+        public async Task<IActionResult> AdminBankAdd([FromBody] InsertUserBankRequest request)
         {
             await CheckUserRole();
 
@@ -75,7 +74,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.AdminBankEdit)]
-        public async Task<IActionResult> AdminBankEdit([FromBody]UpdateUserBankRequest request)
+        public async Task<IActionResult> AdminBankEdit([FromBody] UpdateUserBankRequest request)
         {
             await CheckUserRole();
 
@@ -90,7 +89,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.AdminBankImage)]
-        public async Task<IActionResult> AddAdminBankImage([FromBody]BankImagesIconInsertRequest request, [FromServices]IUploadManager uploadManager, [FromServices]IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        public async Task<IActionResult> AddAdminBankImage([FromBody] BankImagesIconInsertRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
             await CheckUserRole();
             if (!ModelState.IsValid) return BadResponse(ModelState);
@@ -111,7 +110,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.AdminBankImageUpdate)]
-        public async Task<IActionResult> UpdateAdminBankImage([FromBody]BankImagesIconInsertRequest request, [FromServices]IUploadManager uploadManager, [FromServices]IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        public async Task<IActionResult> UpdateAdminBankImage([FromBody] BankImagesIconInsertRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
             await CheckUserRole();
 
@@ -142,7 +141,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.AdminBankDelete)]
-        public async Task<IActionResult> AdminBankDelete([FromBody]GetByIdRequest request)
+        public async Task<IActionResult> AdminBankDelete([FromBody] GetByIdRequest request)
         {
             await CheckUserRole();
             using (var setting_help = new SettingsHelpers(Connection))
@@ -154,7 +153,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.AdminBankActive)]
-        public async Task<IActionResult> AdminBankDeactive([FromBody]DeleteRequest request)
+        public async Task<IActionResult> AdminBankDeactive([FromBody] DeleteRequest request)
         {
             await CheckUserRole();
 
@@ -167,12 +166,12 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Add, Update, Retrieve and Delete Bank List
 
         #region Add, Update, Retrieve and delete wallet list
 
         [HttpPost(ActionsConst.Settings.WalletTypeAdd)]
-        public async Task<IActionResult> WalletType([FromBody]AddWalletTypes request)
+        public async Task<IActionResult> WalletType([FromBody] AddWalletTypes request)
         {
             await CheckUserRole();
             using (var setting_help = new SettingsHelpers(Connection))
@@ -182,7 +181,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Add, Update, Retrieve and delete wallet list
 
         #region Add, Retrieve and Delete the Announcement
 
@@ -210,7 +209,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.AnnouncementDelete)]
-        public async Task<IActionResult> AnnouncementDelete([FromBody]GetByIdRequest request)
+        public async Task<IActionResult> AnnouncementDelete([FromBody] GetByIdRequest request)
         {
             await CheckUserRole();
 
@@ -225,7 +224,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.AnnouncementAdd)]
-        public async Task<IActionResult> AnnouncementAdd([FromBody]AnnouncementInsertRequest request)
+        public async Task<IActionResult> AnnouncementAdd([FromBody] AnnouncementInsertRequest request)
         {
             await CheckUserRole();
 
@@ -242,7 +241,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.AnnouncementUpdate)]
-        public async Task<IActionResult> AnnouncementUpdate([FromBody]AnnouncementUpdateRequest request)
+        public async Task<IActionResult> AnnouncementUpdate([FromBody] AnnouncementUpdateRequest request)
         {
             await CheckUserRole();
             if (!ModelState.IsValid) return BadResponse(ModelState);
@@ -256,7 +255,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Add, Retrieve and Delete the Announcement
 
         #region Contact Management
 
@@ -421,6 +420,5 @@ namespace Webet333.api.Controllers
         #endregion Contact Type Details API's
 
         #endregion Contact Management
-
     }
 }

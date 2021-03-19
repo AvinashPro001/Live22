@@ -27,6 +27,7 @@ namespace Webet333.api.Helpers
                 await repository.AddOrUpdateAsync(StoredProcConsts.VIPCategory.VIPCategoryInsert, request);
             }
         }
+
         #endregion VIP Category Insert
 
         #region VIP Category Select
@@ -39,6 +40,7 @@ namespace Webet333.api.Helpers
                 return res;
             }
         }
+
         #endregion VIP Category Select
 
         #region Get VIP Level List
@@ -76,7 +78,6 @@ namespace Webet333.api.Helpers
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
                 await repository.GetDataAsync(StoredProcConsts.VIPCategory.VIPFreeCredit, new { });
-                
             }
         }
 
@@ -88,8 +89,8 @@ namespace Webet333.api.Helpers
             }
         }
 
-
         #region House Keeping
+
         public void Dispose()
         {
             Dispose(true);
@@ -103,6 +104,7 @@ namespace Webet333.api.Helpers
                 Connection = string.Empty;
             }
         }
-        #endregion
+
+        #endregion House Keeping
     }
 }

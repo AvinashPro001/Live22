@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
@@ -12,7 +10,6 @@ using Webet333.files.interfaces;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
-using Webet333.models.Request.Payments;
 using Webet333.models.Request.Promotions;
 
 namespace Webet333.api.Controllers
@@ -122,7 +119,7 @@ namespace Webet333.api.Controllers
 
             await ValidateUser();
 
-            string extension=string.Empty, extensionMobile = string.Empty;
+            string extension = string.Empty, extensionMobile = string.Empty;
             using (var generic_help = new GenericHelpers(Connection))
             {
                 if (!String.IsNullOrEmpty(request.FormFile))
@@ -216,7 +213,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Promotions.AdminRetrive)]
-        public async Task<IActionResult> SelectPromotionsForAdmin([FromBody] PromotionAdminRetriveRequest request ,[FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        public async Task<IActionResult> SelectPromotionsForAdmin([FromBody] PromotionAdminRetriveRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
@@ -224,14 +221,14 @@ namespace Webet333.api.Controllers
 
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
-                var promotions = await promotion_help.RetrieveAdmin(request,BaseUrlConfigsOptions.Value);
+                var promotions = await promotion_help.RetrieveAdmin(request, BaseUrlConfigsOptions.Value);
                 return OkResponse(promotions);
             }
         }
 
         #endregion Admin Promotion Retrive
 
-        #endregion
+        #endregion Promotion Insert, Update, Delete, Retrieve
 
         #region Promotion Apply Check
 
@@ -303,7 +300,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Promotion Group Insert
 
         #region Promotion Group Update
 
@@ -322,7 +319,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Promotion Group Update
 
         #region Promotion Group Select
 
@@ -339,7 +336,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Promotion Group Select
 
         #region Promotion Group DELETE
 
@@ -358,7 +355,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Promotion Group DELETE
 
         #region Promotion Report List
 
@@ -376,6 +373,5 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Promotion Report List
-
     }
 }

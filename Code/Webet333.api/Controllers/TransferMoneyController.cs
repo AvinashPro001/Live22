@@ -11,7 +11,6 @@ using Webet333.api.Helpers;
 using Webet333.logs;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
-using Webet333.models.Request.Payments;
 using Webet333.models.Request.TransferMoney;
 using Webet333.models.Response.TransferMoney;
 
@@ -39,9 +38,6 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.TransferMoney.TransferBalance)]
         public async Task<IActionResult> BalanceTransfer([FromBody] TransferMoneyRequest request)
         {
-
-
-
             if (!ModelState.IsValid) return BadResponse(ModelState);
             var Role = GetUserRole(User);
             if (Role == RoleConst.Users)
@@ -130,8 +126,6 @@ namespace Webet333.api.Controllers
 
                 return OkResponse();
             }
-
         }
-
     }
 }

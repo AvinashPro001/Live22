@@ -141,7 +141,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<dynamic> RetrieveAdmin(PromotionAdminRetriveRequest request,BaseUrlConfigs baseUrl)
+        public async Task<dynamic> RetrieveAdmin(PromotionAdminRetriveRequest request, BaseUrlConfigs baseUrl)
         {
             var promotions = new List<PromotionResponse>();
             using (var repository = new DapperRepository<PromotionResponse>(Connection))
@@ -158,7 +158,6 @@ namespace Webet333.api.Helpers
                         promotion.Details = Details.ToList().Where(x => x.ParentId == promotion.Id).ToList();
                         promotion.Terms = Terms.ToList().Where(x => x.ParentId == promotion.Id).ToList();
                     });
-
                 }
                 return AdminPromotionMapping.Map(promotions, baseUrl);
             }
@@ -179,7 +178,6 @@ namespace Webet333.api.Helpers
                 return await repository.GetDataAsync(StoredProcConsts.Promotions.PromotionApplyList, new { request.UserId, request.FromDate, request.ToDate, request.Status });
             }
         }
-
 
         public async Task<dynamic> PromotionReport(GlobalListRequest request)
         {

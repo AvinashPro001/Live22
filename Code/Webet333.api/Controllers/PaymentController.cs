@@ -15,8 +15,6 @@ using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Payments;
 using RequestSizeLimitAttribute = Webet333.api.Filters.RequestSizeLimitAttribute;
-using Newtonsoft.Json;
-
 
 namespace Webet333.api.Controllers
 {
@@ -25,7 +23,9 @@ namespace Webet333.api.Controllers
     public class PaymentController : BaseController
     {
         #region Variable
+
         private IHubContext<SignalRHub> _hubContext;
+
         public PaymentController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHubContext<SignalRHub> hubContext, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
@@ -41,7 +41,7 @@ namespace Webet333.api.Controllers
         {
             using (var payment_help = new PaymentHelpers(Connection))
             {
-                var walletTypes = await payment_help.DropdownDeposit(BaseUrlConfigsOptions.Value,GetUniqueId(User),GetUserRole(User));
+                var walletTypes = await payment_help.DropdownDeposit(BaseUrlConfigsOptions.Value, GetUniqueId(User), GetUserRole(User));
                 return OkResponse(walletTypes);
             }
         }
@@ -56,7 +56,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Dropdowns for the Deposit Page
 
         #region User's transaction retrieve
 
@@ -73,7 +73,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion User's transaction retrieve
 
         #region User's Deposit Add and Upload Image
 
@@ -192,7 +192,7 @@ namespace Webet333.api.Controllers
             return OkResponse();
         }
 
-        #endregion 
+        #endregion User's Deposit Add and Upload Image
 
         #region User's Withdrawal Add request
 
@@ -264,7 +264,7 @@ namespace Webet333.api.Controllers
             return OkResponse();
         }
 
-        #endregion 
+        #endregion User's Withdrawal Add request
 
         #region User's Transfer Add request
 
@@ -319,7 +319,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion User's Transfer Add request
 
         #region User's Statement Request
 
@@ -337,7 +337,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion User's Statement Request
 
         #region Adjust Users Balance
 
@@ -370,7 +370,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Adjust Users Balance
 
         #region Update User Wallet Balance
 
@@ -424,7 +424,7 @@ namespace Webet333.api.Controllers
 
         #endregion Approval Time Select
 
-        #endregion
+        #endregion Approval Time
 
         #region Withdraw Similar Name
 
@@ -442,7 +442,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Withdraw Similar Name
 
         #region Deposit Withdraw Statics
 
@@ -498,7 +498,6 @@ namespace Webet333.api.Controllers
             if (Role == RoleConst.Admin)
                 if (string.IsNullOrEmpty(request.Id))
                     return BadResponse("error_invalid_modelstate");
-
 
             using (var payment_help = new PaymentHelpers(Connection))
             {

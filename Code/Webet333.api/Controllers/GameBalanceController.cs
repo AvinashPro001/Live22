@@ -10,7 +10,6 @@ using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
-using Webet333.models.Request;
 using Webet333.models.Request.GameBalance;
 using Webet333.models.Response.Account;
 
@@ -68,7 +67,6 @@ namespace Webet333.api.Controllers
             return OkResponse(new { balance = response, previousBalance });
         }
 
-
         #endregion 918 Kiss game balance
 
         #region Mega888 game balance
@@ -102,8 +100,7 @@ namespace Webet333.api.Controllers
             return OkResponse(new { balance = response, previousBalance });
         }
 
-
-        #endregion Mega 888 game balance
+        #endregion Mega888 game balance
 
         #region Joker game balance
 
@@ -135,7 +132,8 @@ namespace Webet333.api.Controllers
             string response = null;
             return OkResponse(new { balance = response, previousBalance });
         }
-        #endregion 918 Kiss game balance
+
+        #endregion Joker game balance
 
         #region MaxBet game balance
 
@@ -152,7 +150,6 @@ namespace Webet333.api.Controllers
                 return BadResponse("error_invalid_modelstate");
 
             dynamic previousBalance = 0.00;
-
 
             if (request.Username != null)
             {
@@ -229,12 +226,12 @@ namespace Webet333.api.Controllers
                 previousBalance = await gamehelper.AGBalanceUpdate(request.Id, AGBalance);
                 return OkResponse(new { balance = AGBalance, previousBalance.PreviousBalance });
             }
-
         }
 
         #endregion AG game balance
 
         #region Playtech game balance
+
         [Authorize]
         [HttpPost(ActionsConst.GameBalance.PlaytechBalance)]
         public async Task<IActionResult> PlaytechBalance([FromBody] UserBalanceRequest request)
@@ -264,9 +261,11 @@ namespace Webet333.api.Controllers
                 return OkResponse(new { balance = PlaytechBalance, previousBalance.PreviousBalance });
             }
         }
+
         #endregion Playtech game balance
 
         #region DG game balance
+
         [Authorize]
         [HttpPost(ActionsConst.GameBalance.DGBalance)]
         public async Task<IActionResult> DGBalance([FromBody] UserBalanceRequest request)
@@ -293,11 +292,11 @@ namespace Webet333.api.Controllers
                 previousBalance = await gamehelper.DGBalanceUpdate(request.Id, result);
                 return OkResponse(new { balance = result, previousBalance.PreviousBalance });
             }
-
         }
-        #endregion
 
-        #region Sexy Baccarat Balance 
+        #endregion DG game balance
+
+        #region Sexy Baccarat Balance
 
         [Authorize]
         [HttpPost(ActionsConst.GameBalance.SexyBaccaratBalance)]
@@ -313,7 +312,6 @@ namespace Webet333.api.Controllers
 
             dynamic previousBalance = 0.00;
 
-
             if (request.Username == null)
             {
                 string response = null;
@@ -327,9 +325,10 @@ namespace Webet333.api.Controllers
                 return OkResponse(new { balance, previousBalance.PreviousBalance });
             }
         }
-        #endregion Sexy Baccarat Balance  
 
-        #region SA Balance 
+        #endregion Sexy Baccarat Balance
+
+        #region SA Balance
 
         [Authorize]
         [HttpPost(ActionsConst.GameBalance.SABalance)]
@@ -357,9 +356,9 @@ namespace Webet333.api.Controllers
                 previousBalance = await gamehelper.SABalanceUpdate(request.Id, balance);
                 return OkResponse(new { balance, previousBalance.PreviousBalance });
             }
-
         }
-        #endregion Create Member 
+
+        #endregion SA Balance
 
         #region Pussy888 balance
 
@@ -389,9 +388,7 @@ namespace Webet333.api.Controllers
                 previousBalance = await gamehelper.Pussy888BalanceUpdate(request.Id, Pussy888Balance);
                 return OkResponse(new { balance = Pussy888Balance, previousBalance.PreviousBalance });
             }
-
         }
-
 
         #endregion Pussy888 balance
 
@@ -428,8 +425,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-
-        #endregion 
+        #endregion AllBet balance
 
         #region WM balance
 
@@ -455,8 +451,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-
-        #endregion 
+        #endregion WM balance
 
         #region Pragmatic balance
 
@@ -482,8 +477,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-
-        #endregion
+        #endregion Pragmatic balance
 
         #region Check Sports game balance for pending bets or running games
 
@@ -498,7 +492,6 @@ namespace Webet333.api.Controllers
                 return BadResponse("error_invalid_modelstate");
 
             dynamic previousBalance = 0.00;
-
 
             if (request.Username != null)
             {
@@ -543,9 +536,6 @@ namespace Webet333.api.Controllers
 
         #endregion Check M8 game balance
 
-        #endregion
-
-
+        #endregion Check Sports game balance for pending bets or running games
     }
-
 }

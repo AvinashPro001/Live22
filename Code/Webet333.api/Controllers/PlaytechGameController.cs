@@ -5,7 +5,6 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
@@ -21,7 +20,6 @@ namespace Webet333.api.Controllers
     [Route(ActionsConst.ApiVersion)]
     public class PlaytechGameController : BaseController
     {
-
         #region Global Variable
 
         private IHostingEnvironment _hostingEnvironment;
@@ -34,7 +32,7 @@ namespace Webet333.api.Controllers
 
         #endregion Global Variable
 
-        #region Playtech Broken Status 
+        #region Playtech Broken Status
 
         [HttpPost(ActionsConst.Playtech.Broken)]
         public async Task<IActionResult> BrokenStatusUpdate([FromBody] UserBalanceRequest request)
@@ -63,7 +61,7 @@ namespace Webet333.api.Controllers
             return OkResponse(new { Status = unfinishedGame, Response = result });
         }
 
-        #endregion
+        #endregion Playtech Broken Status
 
         #region Playtech game Register
 
@@ -87,15 +85,15 @@ namespace Webet333.api.Controllers
                 username = user.PlaytechGamePrefix + user.Username;
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
-            var result = await PlaytechGameHelpers.PlaytechRegister(username, password,_hostingEnvironment);
+            var result = await PlaytechGameHelpers.PlaytechRegister(username, password, _hostingEnvironment);
 
-            if (result.Result== null) return OkResponse(result);
+            if (result.Result == null) return OkResponse(result);
 
             using (var playtech_helper = new PlaytechGameHelpers(Connection))
             {
                 var PlaytechRequest = new GamePlaytechRegisterRequest()
                 {
-                    PlaytechUserName= username,
+                    PlaytechUserName = username,
                     UserId = request.Id,
                     APIResponse = JObject.FromObject(result)
                 };
@@ -104,7 +102,6 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
-
+        #endregion Playtech game Register
     }
 }

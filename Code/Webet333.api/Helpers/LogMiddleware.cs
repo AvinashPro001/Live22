@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
@@ -11,7 +10,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Webet333.logs;
 using Webet333.models.Configs;
-using Webet333.models.Request.Account;
 
 namespace Webet333.api.Helpers
 {
@@ -31,7 +29,6 @@ namespace Webet333.api.Helpers
         private int status = 0;
         private string Role = string.Empty;
         private string userUniquiId = string.Empty;
-
 
         public LogMiddleware(
             RequestDelegate next,
@@ -89,8 +86,6 @@ namespace Webet333.api.Helpers
                 apiRequestInsert.Status = "Error";
 
             ApiLogsManager.APILogsInsert(apiRequestInsert);
-
-           
         }
 
         private async Task<string> FormatRequest(HttpRequest request)

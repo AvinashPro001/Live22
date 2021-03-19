@@ -5,18 +5,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Webet333.api.Helpers.SexyBaccarat;
 using Webet333.dapper;
 using Webet333.models;
 using Webet333.models.Constants;
 using Webet333.models.Mapping.Game;
 using Webet333.models.Request.Game.MaxBet;
-using Webet333.models.Response;
 using Webet333.models.Response.Game.MAXBet;
 
 namespace Webet333.api.Helpers
@@ -24,13 +20,15 @@ namespace Webet333.api.Helpers
     public class MaxBetGameHelper : IDisposable
     {
         #region Local Variables
+
         private string Connection = string.Empty;
 
         public MaxBetGameHelper(string Connection = null)
         {
             this.Connection = Connection;
         }
-        #endregion 
+
+        #endregion Local Variables
 
         #region Call Maxbet Game Register API
 
@@ -53,7 +51,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<ThirdPartyAPIResponse>(responseString);
         }
 
-        #endregion 
+        #endregion Call Maxbet Game Register API
 
         #region Call Maxbet Game Login API
 
@@ -68,7 +66,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<MaxbetLoginResponse>(responseString);
         }
 
-        #endregion 
+        #endregion Call Maxbet Game Login API
 
         #region Call Maxbet Game Deposit Withdraw API
 
@@ -97,7 +95,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<MaxBetTransferResponse>(responseString);
         }
 
-        #endregion 
+        #endregion Call Maxbet Game Deposit Withdraw API
 
         #region Call Maxbet Game Update API
 
@@ -126,12 +124,11 @@ namespace Webet333.api.Helpers
 
             var url = $"{GameConst.MaxBet.baseURL}UpdateMember?{parameter}";
 
-
             var responseString = await CallThirdPartyApi(url, parameter);
             return JsonConvert.DeserializeObject<ThirdPartyAPIResponse>(responseString);
         }
 
-        #endregion 
+        #endregion Call Maxbet Game Update API
 
         #region Call Maxbet Game Set Betting Limit API
 
@@ -147,7 +144,7 @@ namespace Webet333.api.Helpers
             return await CallThirdPartyApi(url, parameter);
         }
 
-        #endregion 
+        #endregion Call Maxbet Game Set Betting Limit API
 
         #region Call Maxbet Game Set Betting Limit API for All User
 
@@ -160,12 +157,13 @@ namespace Webet333.api.Helpers
 
             var url = $@"{GameConst.MaxBet.baseURL}SetMemberBetSettingBySubsidiary";
 
-            return JsonConvert.DeserializeObject<ThirdPartyAPIResponse>( await CallThirdPartyApi(url, parameter));
+            return JsonConvert.DeserializeObject<ThirdPartyAPIResponse>(await CallThirdPartyApi(url, parameter));
         }
 
-        #endregion 
+        #endregion Call Maxbet Game Set Betting Limit API for All User
 
         #region Max Bet Game Token Update
+
         internal async Task<dynamic> MaxBetTokenUpdate(GameMaxBetTokenUpdateRequest request, string userId)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -174,9 +172,10 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Max Bet Game Token Update
 
         #region GameMaxBet Register
+
         internal async Task<dynamic> GameMaxBetRegister(string vendorMemberId, string userId, string Response)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -185,7 +184,8 @@ namespace Webet333.api.Helpers
                 return user;
             }
         }
-        #endregion 
+
+        #endregion GameMaxBet Register
 
         #region Get Max Global Parameters
 
@@ -197,7 +197,8 @@ namespace Webet333.api.Helpers
                 return result;
             }
         }
-        #endregion 
+
+        #endregion Get Max Global Parameters
 
         #region MaxBet Find User using token
 
@@ -208,10 +209,9 @@ namespace Webet333.api.Helpers
                 var user = await repository.FindAsync(StoredProcConsts.MaxBetGame.MaxBetGetUserByToken, new { token });
                 return user;
             }
-
         }
 
-        #endregion 
+        #endregion MaxBet Find User using token
 
         #region Find Users on UserId
 
@@ -239,10 +239,9 @@ namespace Webet333.api.Helpers
             {
                 await CallMaxbetUpdateAPI(req, user.VendorMemberId);
             }
-
         }
 
-        #endregion Find Users on UserId
+        #endregion Set All user Min Max Limit
 
         #region Find Users From Game
 
@@ -258,6 +257,7 @@ namespace Webet333.api.Helpers
         #endregion Find Users From Game
 
         #region Get List of Max Bet Users which have setlimit is false
+
         public async Task<List<MaxbetUserDetailsResponse>> GetUsersList()
         {
             using (var repository = new DapperRepository<MaxbetUserDetailsResponse>(Connection))
@@ -266,9 +266,11 @@ namespace Webet333.api.Helpers
                 return result.ToList();
             }
         }
-        #endregion 
+
+        #endregion Get List of Max Bet Users which have setlimit is false
 
         #region set setlimit true of MaxBetUser or reset limit
+
         internal async Task MaxBetSetLimit(bool SetLimit, string Id = null, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -283,9 +285,11 @@ namespace Webet333.api.Helpers
                     });
             }
         }
-        #endregion 
+
+        #endregion set setlimit true of MaxBetUser or reset limit
 
         #region set setlimit true of MaxBetUser
+
         internal async Task<dynamic> MaxBetSetGlobalVariable(string maxValue, string minValue, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -309,12 +313,13 @@ namespace Webet333.api.Helpers
                     });
             }
         }
-        #endregion 
+
+        #endregion set setlimit true of MaxBetUser
 
         #region Xml Return With Declaration
+
         internal static ContentResult XmlReturnWithDeclaration(string message = null, string StatusCode = null, string venderMemberId = null)
         {
-
             string xml = $@"<?xml version=""1.0"" encoding=""UTF-8""?><authenticate version=""2.0""><vendor_member_id>{venderMemberId}</vendor_member_id><status_code>{StatusCode}</status_code><message>{message}</message></authenticate>";
 
             return new ContentResult
@@ -324,9 +329,11 @@ namespace Webet333.api.Helpers
                 StatusCode = 200
             };
         }
+
         #endregion Xml Return With Declaration
 
         #region set default betting limit of MaxBetUser
+
         internal async Task<dynamic> DefaultBettingLimit(MaxBetDefaultBettingVariableRequest request)
         {
             var map = new MaxBetDefaultBettingLimitMapping();
@@ -336,7 +343,8 @@ namespace Webet333.api.Helpers
                 return await repository.AddOrUpdateAsync(StoredProcConsts.Global.UpdateGlobalParamters, response);
             }
         }
-        #endregion 
+
+        #endregion set default betting limit of MaxBetUser
 
         public static string RandomString(string text = null)
         {
@@ -361,7 +369,6 @@ namespace Webet333.api.Helpers
 
         internal static async Task<string> CallThirdPartyApi(string Url, string Parameter)
         {
-
             var data = Encoding.ASCII.GetBytes(Parameter);
             var request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
             if (request == null) throw new Exception("Non HTTP WebRequest");
@@ -378,10 +385,10 @@ namespace Webet333.api.Helpers
             var resStreamReader = new StreamReader(resStream);
             var resString = resStreamReader.ReadToEnd();
             return resString;
-
         }
 
         #region House Keeping
+
         public void Dispose()
         {
             Dispose(true);
@@ -395,6 +402,7 @@ namespace Webet333.api.Helpers
                 Connection = string.Empty;
             }
         }
-        #endregion 
+
+        #endregion House Keeping
     }
 }

@@ -1,17 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
-using Webet333.models.Entities;
-using Webet333.models.Request.Game;
 using Webet333.models.Response.Game.AG;
 
 namespace Webet333.api.Helpers
 {
-    public class AGGameHelpers: IDisposable
+    public class AGGameHelpers : IDisposable
     {
         #region Local Variables
 
@@ -22,7 +18,7 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion 
+        #endregion Local Variables
 
         #region Call Register API of AG game
 
@@ -38,11 +34,11 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<AgRegisterResponse>(await GameHelpers.CallThirdPartyApi(url));
         }
 
-        #endregion 
+        #endregion Call Register API of AG game
 
         #region Call Login API of AG game
 
-        internal static async Task<AgRegisterResponse> CallLoginAPI(string username, string bettingLimit,string gameType,string langCode)
+        internal static async Task<AgRegisterResponse> CallLoginAPI(string username, string bettingLimit, string gameType, string langCode)
         {
             var url = $"{GameConst.AG.baseURL}{GameConst.AG.ForwardGame}" +
                       $"?vendor_id={GameConst.AG.VendorId}" +
@@ -56,15 +52,15 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<AGLoginResponse>(await GameHelpers.CallThirdPartyApi(url));
         }
 
-        #endregion
+        #endregion Call Login API of AG game
 
         #region GameAG
 
-        internal async Task GameAGRegister(string UserId,string AGUserName,string APIResponse)
+        internal async Task GameAGRegister(string UserId, string AGUserName, string APIResponse)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Game.GameAGRegister, new { UserId, AGUserName, APIResponse});
+                await repository.AddOrUpdateAsync(StoredProcConsts.Game.GameAGRegister, new { UserId, AGUserName, APIResponse });
             }
         }
 
@@ -89,7 +85,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion 
+        #endregion DG game Bet Limit
 
         #region House Keeping
 
