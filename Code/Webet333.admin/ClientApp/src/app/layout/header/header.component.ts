@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { AdminService } from '../../admin/admin.service';
 import { account } from '../../../environments/environment';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
@@ -24,6 +24,8 @@ export class HeaderComponent implements OnInit {
     navCollapsed = true; // for horizontal layout
     menuItems = []; // for horizontal layout
 
+    navShow = false;
+
     isNavSearchVisible: boolean;
     @ViewChild('fsbutton') fsbutton;  // the fullscreen button
 
@@ -42,10 +44,13 @@ export class HeaderComponent implements OnInit {
         this.Profile();
     }
 
+
     Profile() {
         let data = {}
         this.adminService.add<any>(account.profile, data).subscribe(res => {
             this.name = res.data.username
+            if (window.innerWidth < 768)
+                this.name = "";
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
 
@@ -93,6 +98,14 @@ export class HeaderComponent implements OnInit {
     }
 
     toggleCollapsedSideabar() {
+
+        if (this.navShow)
+            (document.getElementById('topNavbar') as HTMLElement).classList.add('show-menu')
+        else
+            (document.getElementById('topNavbar') as HTMLElement).classList.remove('show-menu')
+
+        this.navShow = !this.navShow
+
         this.settings.layout.isCollapsed = !this.settings.layout.isCollapsed;
     }
 
