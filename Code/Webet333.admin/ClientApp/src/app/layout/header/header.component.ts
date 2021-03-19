@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { AdminService } from '../../admin/admin.service';
 import { account } from '../../../environments/environment';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
@@ -19,16 +19,21 @@ import { MenuService } from '../../core/menu/menu.service';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
     name: any;
     navCollapsed = true; // for horizontal layout
     menuItems = []; // for horizontal layout
+
+    navShow = false;
 
     isNavSearchVisible: boolean;
     @ViewChild('fsbutton') fsbutton;  // the fullscreen button
 
     constructor(public menu: MenuService, public userblockService: UserblockService, public settings: SettingsService, private adminService: AdminService, private toasterService: ToasterService, private router: Router) {
+
         // show only a few items on demo
         this.menuItems = menu.getMenu().slice(0, 4); // for horizontal layout
+
     }
 
     ngOnInit() {
@@ -39,10 +44,13 @@ export class HeaderComponent implements OnInit {
         this.Profile();
     }
 
+
     Profile() {
         let data = {}
         this.adminService.add<any>(account.profile, data).subscribe(res => {
             this.name = res.data.username
+            if (window.innerWidth < 768)
+                this.name = "";
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
 
@@ -53,17 +61,18 @@ export class HeaderComponent implements OnInit {
             else if (error.error.message === "Your account is not active.") {
                 localStorage.removeItem('currentUser');
                 this.router.navigate(['/']);
-            }
+                }
             else if (error.error.message === "You are not authorised to access this content.") {
                 localStorage.removeItem('currentUser');
                 this.router.navigate(['/']);
-            }
+                }
             else if (error.error.message === "Your account is deleted by the administrator.") {
                 localStorage.removeItem('currentUser');
                 this.router.navigate(['/']);
             }
         });
     }
+
 
     toggleUserBlock(event) {
         event.preventDefault();
@@ -89,6 +98,14 @@ export class HeaderComponent implements OnInit {
     }
 
     toggleCollapsedSideabar() {
+
+        if (this.navShow)
+            (document.getElementById('topNavbar') as HTMLElement).classList.add('show-menu')
+        else
+            (document.getElementById('topNavbar') as HTMLElement).classList.remove('show-menu')
+
+        this.navShow = !this.navShow
+
         this.settings.layout.isCollapsed = !this.settings.layout.isCollapsed;
     }
 
@@ -97,6 +114,7 @@ export class HeaderComponent implements OnInit {
     }
 
     toggleFullScreen(event) {
+
         if (screenfull.enabled) {
             screenfull.toggle();
         }

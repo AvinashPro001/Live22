@@ -19,6 +19,7 @@
 @import '~fullcalendar/dist/fullcalendar.min.css';
 @import '~codemirror/lib/codemirror.css';
 @import '~sweetalert/dist/sweetalert.css';
+
 .main-title {
     margin-left: 15px;
 }
@@ -109,26 +110,26 @@ a {
     background-color: #0B1729 !important;
 }
 
-.sidebar-nav>li.active,
-.sidebar-nav>li.active>a,
-.sidebar-nav>li.active>.nav-item,
-.sidebar-nav>li.active .sidebar-nav,
-.sidebar-nav>li.open,
-.sidebar-nav>li.open>a,
-.sidebar-nav>li.open>.nav-item,
-.sidebar-nav>li.open .sidebar-nav {
+.sidebar-nav > li.active,
+.sidebar-nav > li.active > a,
+.sidebar-nav > li.active > .nav-item,
+.sidebar-nav > li.active .sidebar-nav,
+.sidebar-nav > li.open,
+.sidebar-nav > li.open > a,
+.sidebar-nav > li.open > .nav-item,
+.sidebar-nav > li.open .sidebar-nav {
     background-color: #f47d3a !important;
     color: #ffffff !important;
 }
 
-.sidebar-nav>li.active {
+.sidebar-nav > li.active {
     border-left-color: #ffffff !important;
 }
 
-.sidebar-nav>li.active>.nav-item>em,
-.sidebar-nav>li.active>a>em,
-.sidebar-nav>li.open>.nav-item>em,
-.sidebar-nav>li.open>a>em {
+.sidebar-nav > li.active > .nav-item > em,
+.sidebar-nav > li.active > a > em,
+.sidebar-nav > li.open > .nav-item > em,
+.sidebar-nav > li.open > a > em {
     color: #ffffff !important;
 }
 
@@ -136,12 +137,12 @@ a {
     color: #ffffff !important;
 }
 
-.sidebar-nav>li>a:focus,
-.sidebar-nav>li>a:hover,
-.sidebar-nav>li>.nav-item:focus,
-.sidebar-nav>li>.nav-item:hover,
-.sidebar-nav>li>a,
-.sidebar-nav>li>.nav-item {
+.sidebar-nav > li > a:focus,
+.sidebar-nav > li > a:hover,
+.sidebar-nav > li > .nav-item:focus,
+.sidebar-nav > li > .nav-item:hover,
+.sidebar-nav > li > a,
+.sidebar-nav > li > .nav-item {
     color: #ffffff !important;
 }
 
@@ -149,8 +150,8 @@ a {
     background-color: #f47d3a !important;
 }
 
-.sidebar-subnav>li>a,
-.sidebar-subnav>li>.nav-item {
+.sidebar-subnav > li > a,
+.sidebar-subnav > li > .nav-item {
     display: block;
     position: relative;
     padding: 10px 20px;
@@ -170,7 +171,7 @@ a {
     color: #f47d3a;
 }
 
-.switch input:checked+span {
+.switch input:checked + span {
     background-color: #f47d3a;
     border-color: #f47d3a;
 }
@@ -291,7 +292,8 @@ label input[type="radio"] {
     margin-bottom: 10px;
 }
 
-.ngx-datatable.bootstrap {}
+.ngx-datatable.bootstrap {
+}
 
 .ngx-datatable .datatable-header .datatable-header-cell .datatable-header-cell-template-wrap {
     height: inherit;
@@ -398,6 +400,7 @@ label input[type="radio"] {
         opacity: 1;
         transform: translateX(35%) scale(0.3, 1);
     }
+
     100% {
         opacity: 0;
         transform: translateX(-50%) scale(0, 1);
@@ -407,6 +410,7 @@ label input[type="radio"] {
 ::ng-deep {
     .progress-linear {
         position: relative !important;
+
         .container {
             max-width: 100% !important;
         }
@@ -460,8 +464,8 @@ label input[type="radio"] {
     font-weight: 800;
 }
 
-.notAvailable{
-    color:red;
+.notAvailable {
+    color: red;
 }
 
 .Available {
@@ -472,7 +476,7 @@ label input[type="radio"] {
     height: 45px;
     width: 45px;
     color: blueviolet;
-    background-color:gray;
+    background-color: gray;
 }
 
 #edit-slider .slick-next {
@@ -488,3 +492,7 @@ label input[type="radio"] {
     width: 30px !important;
 }
 
+.topnavbar-wrapper.show-menu + .aside-container {
+    position: relative;
+    z-index: 1000;
+}
