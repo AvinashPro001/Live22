@@ -40,7 +40,7 @@ async function authorize() {
 
         if ($('#M8Download').prop('id') !== '') {
             document.getElementById('JokeruserName').innerText = jokerConstParameterValue.AppID + '.' + usernamePrifix;
-            document.getElementById('Jokerresetpassword').innerText = 'Your WEBET333.COM Password';
+            document.getElementById('Jokerresetpassword').innerText = dec(localStorage.getItem('currentUserData')); // 'Your WEBET333.COM Password';
             document.getElementById('_918userName').innerText = res.data.username918;
             document.getElementById('_918resetpasswordDownload').innerText = res.data.password918;
             document.getElementById('Pussy888userName').innerText = res.data.usernamePussy888;
@@ -121,7 +121,7 @@ async function Mega888UserName() {
     if (GetLocalStorage('currentUser') !== null) {
         var resUserData = await GetMethod(apiEndPoints.getProfile);
         document.getElementById("mega888username").innerText = resUserData.data.loginid;
-        document.getElementById("mega888password").innerText = "Your WEBET333.COM Password";
+        document.getElementById("mega888password").innerText = dec(localStorage.getItem('currentUserData')); //"Your WEBET333.COM Password";
     }
     else {
         document.getElementById("mega888username").innerText = "Please Login !";

@@ -177,12 +177,15 @@ async function RestoreBalance() {
             id: null
 
         }
-        await PostMethod(apiEndPoints.restoreBalance, restoreModel)
+        await PostMethod(apiEndPoints.restoreBalance, restoreModel);
+        WalletBalance();
+        LoaderHide();
     }
     catch (ex) {
+        WalletBalance();
+        LoaderHide();
     }
-    WalletBalance();
-    LoaderHide();
+   
 }
 
 function numberWithCommas(x) {
