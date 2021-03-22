@@ -324,5 +324,7 @@
   "no_record_found_transfer": "No Record Found",
   "no_record_found_promotion": "No Record Found",
   "no_record_found_rebate": "No Record Found",
-  "no_record_found_statement": "No Record Found"
+  "no_record_found_statement": "No Record Found",
+
+  "special_not_allowed": "Speical Charater are not allowed in Passsword !!"
 }
