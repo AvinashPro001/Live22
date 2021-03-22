@@ -193,6 +193,12 @@ async function ChangePassword(i) {
             confirmPassword: $("#txt_confirmPassword").val()
         };
 
+        var Char1 = /^[A-Za-z0-9]+$/;
+        if (!Char1.test(model.password)) {
+            LoaderHide();
+            return ShowError(ChangeErroMessage("special_not_allowed"));
+        }
+
         if (model.password.length < 6) {
             LoaderHide();
             return ShowError(ChangeErroMessage("pass_length_error"));
@@ -310,6 +316,12 @@ async function DoRegister() {
         confirmPassword: $("#m_regsiter_confirmpassword").val(),
         referenceKeyword: getCookie("ref")
     };
+
+    var Char1 = /^[A-Za-z0-9]+$/;
+    if (!Char1.test(model.password)) {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("special_not_allowed"));
+    }
 
     if (model.mobile === "") {
         LoaderHide();
