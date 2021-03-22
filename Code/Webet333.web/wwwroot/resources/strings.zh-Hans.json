@@ -318,5 +318,7 @@
   "no_record_found_transfer": "没有找到记录",
   "no_record_found_promotion": "没有找到记录",
   "no_record_found_rebate": "没有找到记录",
-  "no_record_found_statement": "没有找到记录"
+  "no_record_found_statement": "没有找到记录",
+
+  "special_not_allowed": "密码中不允许使用特殊字符！"
 }
