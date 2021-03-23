@@ -2410,7 +2410,7 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.BalacneInWallet)]
         public async Task<IActionResult> BalacneInWallet([FromBody] AllInWalletRequest request)
         {
-       
+
             if (!ModelState.IsValid) return BadResponse(ModelState);
             var Role = GetUserRole(User);
             if (Role == RoleConst.Users)
@@ -2423,27 +2423,28 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.UserId, request.WalletName);
-                userDetails = new UserDetailsTransferResponse() { 
-                    AGUserName= user.AGGamePrefix + user.Username,
-                    AllBetUsername= user.AllBetGamePrefix + user.UserId,
+                userDetails = new UserDetailsTransferResponse()
+                {
+                    AGUserName = user.AGGamePrefix + user.Username,
+                    AllBetUsername = user.AllBetGamePrefix + user.UserId,
                     DGUsername = user.DGGamePrefix + user.Username,
                     JokerUserName = user.JokerGamePrefix + user.Username,
                     M8UserName = user.M8GamePrefix + user.Username,
                     MaxBetUsername = user.VendorMemberId,
                     MegaUsername = user.Mega888LoginId,
                     _918KissUserName = user.Username918,
-                    PlaytechUserName = user.PlaytechGamePrefix+user.Username,
+                    PlaytechUserName = user.PlaytechGamePrefix + user.Username,
                     PragmaticUsername = user.PragmaticGamePrefix + user.UserId,
                     Pussy888Username = user.Pussy888Username,
                     SAUsername = user.SAGamePrefix + user.Username,
                     SexyUsername = user.SexyGamePrefix + user.Username,
                     WMUsername = user.WMGamePrefix + user.UserId,
 
-                    FromWalletIsMaintenance =false,
+                    FromWalletIsMaintenance = false,
                     FromWalletName = "Main Wallet",
                     MainWalletBalance = (decimal)user.MainWalletAmount,
                     ToWalletIsMaintenance = (bool)user.ToWalletMaintenance,
-                    ToWalletName =request.WalletName
+                    ToWalletName = request.WalletName
                 };
                 request.ToWalletId = user.ToWalletId;
                 request.FromWalletId = user.MainWalletId;
@@ -2464,6 +2465,11 @@ namespace Webet333.api.Controllers
             {
                 await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_game_maintenance"].Value });
                 return BadResponse("error_game_maintenance");
+            }
+
+            if (userDetails.MainWalletBalance == 0)
+            {
+                return OkResponse();
             }
 
             if (userDetails.FromWalletName == "Main Wallet")
