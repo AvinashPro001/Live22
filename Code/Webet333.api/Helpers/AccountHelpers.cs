@@ -285,29 +285,33 @@ namespace Webet333.api.Helpers
 
         public async Task UserGamePasswordChange(string UserId, string Password, IHostingEnvironment _hostingEnvironment)
         {
-            var info = await UserGetBalanceInfo(UserId);
+            try
+            {
+                var info = await UserGetBalanceInfo(UserId);
 
-            DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
-            var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
-            var perameter = $"Method={GameConst.Joker.SetPassword}&Password={Password}&Timestamp={temp}&Username={info.JokerGamePrefix}{info.Username}";
-            var stringContent = new StringContent(perameter, Encoding.UTF8, "application/x-www-form-urlencoded");
-            var jokerURL = $"{GameConst.Joker.jokerBaseUrl}?" +
-                            $"AppID={GameConst.Joker.AppID}&" +
-                            $"Signature={GameHelpers.GenerateHas(perameter)}";
+                DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
+                var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
+                var perameter = $"Method={GameConst.Joker.SetPassword}&Password={Password}&Timestamp={temp}&Username={info.JokerGamePrefix}{info.Username}";
+                var stringContent = new StringContent(perameter, Encoding.UTF8, "application/x-www-form-urlencoded");
+                var jokerURL = $"{GameConst.Joker.jokerBaseUrl}?" +
+                                $"AppID={GameConst.Joker.AppID}&" +
+                                $"Signature={GameHelpers.GenerateHas(perameter)}";
 
-            var jokerPasswordUpdate = JsonConvert.DeserializeObject(await GameHelpers.CallThirdPartyApi(jokerURL, stringContent));
+                var jokerPasswordUpdate = JsonConvert.DeserializeObject(await GameHelpers.CallThirdPartyApi(jokerURL, stringContent));
 
-            var PlaytechURL = $"{GameConst.Playtech.playtechBaseUrl}" +
-                                $"update?playername={info.PlaytechGamePrefix.ToUpper()}{info.Username.ToUpper()}&password={Password}";
+                var PlaytechURL = $"{GameConst.Playtech.playtechBaseUrl}" +
+                                    $"update?playername={info.PlaytechGamePrefix.ToUpper()}{info.Username.ToUpper()}&password={Password}";
 
-            DefaultHelper defaultHelper = new DefaultHelper(_hostingEnvironment);
-            dynamic resultPlaytech = JsonConvert.DeserializeObject(await defaultHelper.PlaytechAPICertificate(PlaytechURL, true, true));
+                DefaultHelper defaultHelper = new DefaultHelper(_hostingEnvironment);
+                dynamic resultPlaytech = JsonConvert.DeserializeObject(await defaultHelper.PlaytechAPICertificate(PlaytechURL, true, true));
 
-            await DGGameHelpers.CallUpdateuserAPI(info.DGGamePrefix + info.Username, Password);
+                await DGGameHelpers.CallUpdateuserAPI(info.DGGamePrefix + info.Username, Password);
 
-            await AllBetGameHelpers.ChangePasswordCallAPI(info.AllBetGamePrefix + info.UserId, Password);
+                await AllBetGameHelpers.ChangePasswordCallAPI(info.AllBetGamePrefix + info.UserId, Password);
 
-            await WMGameHelpers.ChangePasswordCallAPI(info.WMGamePrefix + info.UserId, Password);
+                await WMGameHelpers.ChangePasswordCallAPI(info.WMGamePrefix + info.UserId, Password);
+            }
+            catch(Exception ex) { }
         }
 
         #endregion User Game Password Update
