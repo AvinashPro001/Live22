@@ -10,16 +10,32 @@
             <button class="mb-1 btn btn-outline-primary" (click)="show(content)" type="button">Withdraw Amount &nbsp;&nbsp; <span id="lockIcon" class=""></span>&nbsp;&nbsp;{{totalWithdrawAmountWithMYR}}</button>
         </div>
         <div class="col-1">
-            <div class="text-center"><b>Total Deposit</b></div><div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalDepositAmount }}</b></div>
+            <div class="text-center"><b>Total Deposit</b></div>
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalDepositAmount }}</b></div>
         </div>
         <div class="col-1">
-            <div class="text-center"><b>Total Withdraw</b></div><div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawAmount }}</b></div>
+            <div class="text-center"><b>Total Withdraw</b></div>
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawAmount }}</b></div>
         </div>
         <div class="col-1">
-            <div class="text-center"><b>Total turnover</b></div><div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalTurnover }}</b></div>
+            <div class="text-center"><b>Total turnover</b></div>
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalTurnover }}</b></div>
         </div>
         <div class="col-1">
-            <div class="text-center"><b>Total Winlose</b></div><div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawAmount-userdata.TotalDepositAmount }}</b></div>
+            <div class="text-center"><b>Total Winlose</b></div>
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawAmount-userdata.TotalDepositAmount }}</b></div>
+        </div>
+        <div class="col-1">
+            <div class="text-center"><b>Total Deposit Count</b></div>
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalDepositCount}}</b></div>
+        </div>
+        <div class="col-1">
+            <div class="text-center"><b>Total Withdraw Count</b></div>
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawCount}}</b></div>
+        </div>
+        <div class="col-1">
+            <div class="text-center"><b>Total Bonus Count</b></div>
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalBonusCount}}</b></div>
         </div>
     </div>
 </div>
@@ -140,6 +156,11 @@
                             </ngx-slick>
                         </div>
                     </span>
+                </div>
+
+                <div class="row">
+                    <h4 class="col-5 h4">Registration Date :</h4>
+                    <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.Created}}</h4>
                 </div>
             </div>
             <br /><br /><br />
@@ -276,7 +297,6 @@
                     <td>{{pussyUsername== null ? 'Select username.' : pussyUsername }}</td>
 
                     <!--<td>{{Pussy888Password}}</td>-->
-
                     <td><button class="btn btn-primary" (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Pussy888')">Pussy Pass</button>&nbsp;<button class="btn btn-primary" (click)="ResetPassword('Pussy888')">Reset</button></td>
                 </tr>
                 <tr>

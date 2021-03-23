@@ -2413,6 +2413,7 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.BalacneInWallet)]
         public async Task<IActionResult> BalacneInWallet([FromBody] AllInWalletRequest request)
         {
+
             if (!ModelState.IsValid) return BadResponse(ModelState);
             var Role = GetUserRole(User);
             if (Role == RoleConst.Users)
@@ -2456,6 +2457,7 @@ namespace Webet333.api.Controllers
             var responseId = await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Amount = request.Amount.ToString(), UserId = request.UserId, WalletId = request.ToWalletId, Request = JsonConvert.SerializeObject(request) });
             var Id = responseId.ID.ToString();
 
+
             if (userDetails.FromWalletIsMaintenance == true)
             {
                 await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_game_maintenance"].Value });
@@ -2466,6 +2468,11 @@ namespace Webet333.api.Controllers
             {
                 await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_game_maintenance"].Value });
                 return BadResponse("error_game_maintenance");
+            }
+
+            if (userDetails.MainWalletBalance == 0)
+            {
+                return OkResponse();
             }
 
             if (userDetails.FromWalletName == "Main Wallet")
@@ -2501,7 +2508,7 @@ namespace Webet333.api.Controllers
                         }
                         else
                         {
-                            //Deposit In Main Wallet and Insert into DB Row
+                            //Deposit In Main Wallet and Insert into DB Row 
                             await transferMoney_helper.DepositInWallet(userDetails, "Main Wallet", request.Amount, request.UserId.ToString(), _hostingEnvironment);
                             transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
 
