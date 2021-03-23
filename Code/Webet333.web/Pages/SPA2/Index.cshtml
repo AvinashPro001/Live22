@@ -263,6 +263,9 @@
                         if (obj.backFrom == "download") {
                             $('body').css('padding-top', '35px');
                         }
+                        if (obj.backFrom == "history") {
+                            $('body').css('padding-top', '35px');
+                        }
 
                         Walletdate();
                         GameInMaintenance(0);
@@ -566,7 +569,7 @@
 
         $("html").click(async function (event) {
             if (GetLocalStorage('currentUser') !== null) {
-                await PostMethod(apiEndPoints.userLastTimeUpdate, {});
+                PostMethod(apiEndPoints.userLastTimeUpdate, {});
             }
         });
 
