@@ -2,7 +2,7 @@
 .setting-color {
     padding: 0 5px;
 
-    >label {
+    > label {
         display: block;
         position: relative;
         margin: 0 10px;
@@ -14,33 +14,39 @@
         &:first-child {
             margin-left: 0
         }
+
         &:last-child {
             margin-right: 0
         }
 
         $baseHg: 15px;
-        >.color {
+
+        > .color {
             display: block;
             height: $baseHg * 1.2;
         }
 
-        >.split {
+        > .split {
             @include clearfix();
             display: block;
-            >.color {
+
+            > .color {
                 display: block;
                 height: $baseHg * 2.5;
+
                 &:first-child {
                     float: left;
                     width: 70%;
                 }
+
                 &:last-child {
                     float: right;
                     width: 30%;
                 }
             }
-        } // icon checked
-        >.icon-check {
+        }
+        // icon checked
+        > .icon-check {
             position: absolute;
             display: block;
             left: 50%;
@@ -56,11 +62,12 @@
             opacity: 0;
         }
 
-        >input[type="radio"] {
+        > input[type="radio"] {
             position: absolute;
             opacity: 0;
             visibility: hidden;
-            &:checked+.icon-check {
+
+            &:checked + .icon-check {
                 opacity: 1 !important;
             }
         }

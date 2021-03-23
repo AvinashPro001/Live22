@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { ToasterService, } from 'angular2-toaster';
-import { account, playtech,  Joker, M8Game, AGGame, customer, ErrorMessages } from '../../../../environments/environment';
+import { account, playtech, Joker, M8Game, AGGame, customer, ErrorMessages } from '../../../../environments/environment';
 import { debug } from 'util';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../common/common.service';
@@ -22,7 +22,7 @@ export class PromotionApplyComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private getDateService: CommonService
+        private commonService: CommonService
     ) { }
 
     listType: any = [
@@ -117,7 +117,6 @@ export class PromotionApplyComponent implements OnInit {
             this.loadingIndicator = false;
             this.toasterService.pop('error', 'Error', error.error.message);
         });
-
     }
 
     replaceDateTime(date) {
@@ -203,12 +202,12 @@ export class PromotionApplyComponent implements OnInit {
     //#region Filter Data
 
     setDatePicker(fromdate = null, todate = null) {
-        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
-        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+        this.datePickerfromdate = this.commonService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.commonService.setDatePickerFormate(todate);
     }
 
     setToday() {
-        var dates = this.getDateService.getTodatDate();
+        var dates = this.commonService.getTodatDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -218,7 +217,7 @@ export class PromotionApplyComponent implements OnInit {
     }
 
     setYesterday() {
-        var dates = this.getDateService.getYesterDate();
+        var dates = this.commonService.getYesterDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 

@@ -1,6 +1,7 @@
 ﻿namespace Webet333.models.Constants
 {
 #if DEBUG
+
     public class GameConst
     {
         public const string BaseUrl = "http://uat.webet333.com/";
@@ -9,7 +10,6 @@
 
         public class MaxBet
         {
-
             public const string VendorId = "u80h60lm91";
 
             public const string baseURL = "https://api.l0030.ig128.com/api/";
@@ -28,7 +28,7 @@
 
             public const string Currency = "2";
 
-    #region Betting limit Constant
+            #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -50,15 +50,13 @@
 
             public const string MaxParleyMatch = "MaxParleyMatch";
 
-
             public const string MaxbetSportsType1Match = "MaxbetSportsType1Match";
 
             public const string MaxbetSportsType1Max = "MaxbetSportsType1Max";
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-    #endregion Betting limit Constant
-
+            #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -82,7 +80,6 @@
             public const string randomUsername = "RandomUserName";
 
             public const string PlayerType = "11";
-
         }
 
         public class AG
@@ -129,8 +126,6 @@
             public const string fetch = "fetch";
 
             public const string LanguageCode = "en-US";
-
-
         }
 
         public class Joker
@@ -223,7 +218,6 @@
             public const string TotalBettingReport = "open.mega.player.total.report";
 
             public const string PlayerLogURL = "open.mega.player.game.log.url.get";
-
         }
 
         public class M8SetLimit
@@ -255,7 +249,6 @@
             public const string Max7 = "Max7";
 
             public const string Suspend = "Suspend";
-
         }
 
         public class SAConst
@@ -359,7 +352,6 @@
             public const string Currency = "MYR";
 
             public const string WinLimit = "100000";
-
         }
 
         public class Pussy888
@@ -435,7 +427,6 @@
             public const string Signature = "189aa49d918698cef7ff20b869d72916";
 
             public const string vendorId = "wb3twapi";
-
         }
 
         public class Pragmatic
@@ -465,7 +456,6 @@
             public const string SecretKey = "testKey";
 
             public const string SecureLogin = "sc_webet33";
-
         }
 
         public class SMSConst
@@ -491,6 +481,7 @@
             public const string TrioSenderId = "CLOUDSMS";
         }
     }
+
 #elif STAG
     public class GameConst
     {
@@ -500,7 +491,6 @@
 
         public class MaxBet
         {
-
             public const string VendorId = "u80h60lm91";
 
             public const string baseURL = "https://api.l0030.ig128.com/api/";
@@ -519,7 +509,7 @@
 
             public const string Currency = "2";
 
-            #region Betting limit Constant
+    #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -547,8 +537,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-            #endregion Betting limit Constant
-
+    #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -618,8 +607,6 @@
             public const string fetch = "fetch";
 
             public const string LanguageCode = "en-US";
-
-
         }
 
         public class Joker
@@ -712,7 +699,6 @@
             public const string TotalBettingReport = "open.mega.player.total.report";
 
             public const string PlayerLogURL = "open.mega.player.game.log.url.get";
-
         }
 
         public class M8SetLimit
@@ -744,7 +730,6 @@
             public const string Max7 = "Max7";
 
             public const string Suspend = "Suspend";
-
         }
 
         public class SAConst
@@ -848,7 +833,6 @@
             public const string Currency = "MYR";
 
             public const string WinLimit = "100000";
-
         }
 
         public class Pussy888
@@ -924,7 +908,6 @@
             public const string Signature = "9fc928a66fed7f548b2291a229e66b36";
 
             public const string vendorId = "wb3myrapi";
-
         }
 
         public class Pragmatic
@@ -954,7 +937,6 @@
             public const string SecretKey = "C9Z9Tdhg3ThbqUzP";
 
             public const string SecureLogin = "1xp_webet333";
-
         }
 
         public class SMSConst
@@ -981,5 +963,4 @@
         }
     }
 #endif
-
 }

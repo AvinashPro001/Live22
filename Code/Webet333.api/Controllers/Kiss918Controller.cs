@@ -16,7 +16,6 @@ namespace Webet333.api.Controllers
     [Route(ActionsConst.ApiVersion)]
     public class Kiss918Controller : BaseController
     {
-
         #region Global Variable
 
         public Kiss918Controller(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
@@ -56,7 +55,7 @@ namespace Webet333.api.Controllers
             var username = randomUsername.Account;
 
             var result = await Kiss918GameHelpers.Kiss918Register(username, password, MobileNo);
-            
+
             if (!result.Success) return OkResponse(result);
 
             using (var kiss_helper = new Kiss918GameHelpers(Connection))
@@ -72,7 +71,6 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
-
+        #endregion Kiss 918 game Register
     }
 }

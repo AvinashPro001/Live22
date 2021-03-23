@@ -277,7 +277,6 @@ import { text } from "@angular/core/src/render3/instructions";
 //            icon: 'fa fa-info'
 //        },
 
-
 //    ]
 //}
 
@@ -293,7 +292,6 @@ if (values != undefined || values != null) {
     var Settings = values.permissionsList[1];
     var Transactions = values.permissionsList[2];
     var Report = values.permissionsList[3];
-
 }
 
 //#endregion

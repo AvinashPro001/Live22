@@ -25,6 +25,7 @@ namespace Webet333.security
         }
 
         #region Decrypt given string
+
         private string Decrypt(string cipherText, string key, string iv_key)
         {
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
@@ -45,9 +46,11 @@ namespace Webet333.security
             }
             return cipherText;
         }
-        #endregion
+
+        #endregion Decrypt given string
 
         #region Encrypt given string
+
         private string Encrypt(string clearText, string key, string iv_key)
         {
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
@@ -68,6 +71,7 @@ namespace Webet333.security
             }
             return clearText;
         }
-        #endregion
+
+        #endregion Encrypt given string
     }
 }

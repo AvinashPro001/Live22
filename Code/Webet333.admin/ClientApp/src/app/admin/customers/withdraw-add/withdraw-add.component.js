@@ -101,7 +101,7 @@ var WithdrawAddComponent = /** @class */ (function () {
         });
     };
     //#endregion
-    //#region addDeposit    
+    //#region addDeposit
     WithdrawAddComponent.prototype.addWithdrawal = function () {
         var _this = this;
         var dataSelect = {

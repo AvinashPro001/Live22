@@ -13,7 +13,6 @@ import { account } from '../../environments/environment'
     styleUrls: ['./recover.component.scss']
 })
 export class RecoverComponent implements OnInit {
-
     forgetPwdForm: FormGroup;
 
     constructor(public settings: SettingsService,
@@ -23,7 +22,6 @@ export class RecoverComponent implements OnInit {
         private toasterService: ToasterService) {
         this.forgetPwdValidation()
     }
-
 
     forgetPwdValidation() {
         this.forgetPwdForm = this.fb.group({
@@ -41,5 +39,4 @@ export class RecoverComponent implements OnInit {
 
     ngOnInit() {
     }
-
 }

@@ -108,7 +108,7 @@ export class DepositListComponent implements OnInit {
         private modalService: NgbModal,
         private datePipe: DatePipe,
         private titleService: Title,
-        private getDateService: CommonService
+        private commonService: CommonService
     ) { }
     //#endregion
 
@@ -266,6 +266,7 @@ export class DepositListComponent implements OnInit {
             this.columns = [
                 { prop: 'No' },
                 { prop: 'Created' },
+                { prop: 'CreatedBy' },
                 { prop: 'UserName' },
                 { prop: 'DepositNo' },
                 { prop: 'WalletName' },
@@ -275,16 +276,20 @@ export class DepositListComponent implements OnInit {
                 { prop: 'ReferenceNo' },
                 { prop: 'Time' },
                 { prop: 'Tracking', cellTemplate: this.tracking, sortable: false },
+                { prop: 'VerifiedAt' },
                 { prop: 'Operator' },
                 { prop: 'Promotion' },
                 { prop: 'Remarks' },
                 { prop: 'Status' },
-                { prop: 'Receipt', cellTemplate: this.receipt, sortable: true }
+                { prop: 'Receipt', cellTemplate: this.receipt, sortable: true },
+                { prop: 'Modified' },
+                { prop: 'ModifiedBy' }
             ];
         } else if (selectedList == "Rejected") {
             this.columns = [
                 { prop: 'No' },
                 { prop: 'Created' },
+                { prop: 'CreatedBy' },
                 { prop: 'UserName' },
                 { prop: 'DepositNo' },
                 { prop: 'WalletName' },
@@ -294,17 +299,21 @@ export class DepositListComponent implements OnInit {
                 { prop: 'ReferenceNo' },
                 { prop: 'Time' },
                 { prop: 'Tracking', cellTemplate: this.tracking, sortable: false },
+                { prop: 'VerifiedAt' },
                 { prop: 'Operator' },
                 { prop: 'Promotion' },
                 { prop: 'Status' },
                 { prop: 'Remarks' },
-                { prop: 'Receipt', cellTemplate: this.receipt, sortable: true }
+                { prop: 'Receipt', cellTemplate: this.receipt, sortable: true },
+                { prop: 'Modified' },
+                { prop: 'ModifiedBy' }
             ];
         }
         else {
             this.columns = [
                 { prop: 'No' },
                 { prop: 'Created' },
+                { prop: 'CreatedBy' },
                 { prop: 'UserName' },
                 { prop: 'DepositNo' },
                 { prop: 'WalletName' },
@@ -360,6 +369,11 @@ export class DepositListComponent implements OnInit {
                     Promotion: el.promotionTitle === null ? 'No Promotion' : el.promotionTitle,
                     Created: this.ReplaceTime(el.created),
                     Modified: this.ReplaceTime(el.modified),
+                    ModifiedBy: el.modifiedByName === '' || el.modifiedByName === null || el.modifiedByName === undefined
+                        || el.modifiedByName === NaN ? 'Not Available' : el.modifiedByName,
+                    CreatedBy: el.createdByName === '' || el.createdByName === null || el.createdByName === undefined
+                        || el.createdByName === NaN ? 'Not Available' : el.createdByName,
+                    VerifiedAt: this.ReplaceTime(el.verifiedAt)
                 });
             });
             this.rows = [...this.rows];
@@ -374,7 +388,8 @@ export class DepositListComponent implements OnInit {
 
     //#region timeFormat
     ReplaceTime(Date) {
-        return Date.replace("T", " ")
+        if (Date === null || Date === undefined || Date === NaN || Date === '') return 'Not Available';
+        else return Date.replace("T", " ");
     }
 
     toDate(date) {
@@ -476,12 +491,12 @@ export class DepositListComponent implements OnInit {
     //#region Filter Data
 
     setDatePicker(fromdate = null, todate = null) {
-        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
-        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+        this.datePickerfromdate = this.commonService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.commonService.setDatePickerFormate(todate);
     }
 
     setToday() {
-        var dates = this.getDateService.getTodatDate();
+        var dates = this.commonService.getTodatDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -491,7 +506,7 @@ export class DepositListComponent implements OnInit {
     }
 
     setYesterday() {
-        var dates = this.getDateService.getYesterDate();
+        var dates = this.commonService.getYesterDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 

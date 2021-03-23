@@ -1,9 +1,8 @@
-﻿using Webet333.dapper.interfaces;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Webet333.dapper.interfaces;
 
 namespace Webet333.dapper.Internals
 {

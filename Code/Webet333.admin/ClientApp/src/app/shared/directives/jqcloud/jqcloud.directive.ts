@@ -5,7 +5,6 @@ declare var $: any;
     selector: '[jqcloud]'
 })
 export class JqcloudDirective implements OnInit, OnDestroy, OnChanges {
-
     @Input() words;
     @Input() width;
     @Input() height;

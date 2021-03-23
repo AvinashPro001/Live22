@@ -12,7 +12,6 @@ import { debug } from 'util';
     styleUrls: ['./download-link.component.scss']
 })
 export class DownloadLinkComponent implements OnInit {
-
     rows = [];
     columns = [];
     loadingIndicator: boolean;
@@ -39,7 +38,7 @@ export class DownloadLinkComponent implements OnInit {
             { prop: 'Name' },
             { prop: 'Link' },
             { prop: 'Barcode' },
-            { prop: 'Actions', cellTemplate: this.status, sortable: false},
+            { prop: 'Actions', cellTemplate: this.status, sortable: false },
         ];
     }
 
@@ -83,7 +82,7 @@ export class DownloadLinkComponent implements OnInit {
 
         let model = {
             id: this.editData.id,
-            link:link
+            link: link
         }
         this.adminService.add<any>(customer.downloadLinkUpdate, model).subscribe(res => {
             this.ngOnInit();

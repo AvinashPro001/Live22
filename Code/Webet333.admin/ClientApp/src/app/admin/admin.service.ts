@@ -2,7 +2,6 @@
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-
 @Injectable()
 export class AdminService {
     authToken;

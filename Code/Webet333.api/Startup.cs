@@ -25,12 +25,12 @@ using Webet333.notify;
 using Webet333.notify.interfaces.Email;
 using Webet333.queue;
 
-
 namespace Webet333.api
 {
     public class Startup
     {
         public static string CurrentLanguage { get; set; }
+
         public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration) => Configuration = configuration;
@@ -38,6 +38,7 @@ namespace Webet333.api
         public void ConfigureServices(IServiceCollection services)
         {
             #region Language translate
+
             services.AddApplicationInsightsTelemetry(Configuration);
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.Configure<RequestLocalizationOptions>(options =>
@@ -54,7 +55,8 @@ namespace Webet333.api
                     return Task.FromResult(new ProviderCultureResult(CurrentLanguage, CurrentLanguage));
                 }));
             });
-            #endregion
+
+            #endregion Language translate
 
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
@@ -62,6 +64,7 @@ namespace Webet333.api
             }));
 
             #region JWT Authentication.
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -82,27 +85,32 @@ namespace Webet333.api
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             });
-            #endregion
+
+            #endregion JWT Authentication.
 
             services.AddMvc();
 
             #region Swagger initialization.
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Webet333 - API Documentation", Version = "v1" });
             });
-            #endregion
+
+            #endregion Swagger initialization.
 
             services.Configure<IISOptions>(options => { options.ForwardClientCertificate = false; });
 
             #region Initialization of Configs.
+
             services.Configure<EmailConfig>(Configuration.GetSection("EmailConfig"));
             services.Configure<AppConfig>(Configuration.GetSection("AppConfig"));
             services.Configure<PushConfig>(Configuration.GetSection("PushConfig"));
             services.Configure<AuthConfig>(Configuration.GetSection("Authentication"));
             services.Configure<ConnectionConfigs>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<BaseUrlConfigs>(Configuration.GetSection("BaseConfig"));
-            #endregion
+
+            #endregion Initialization of Configs.
 
             #region Registering Dependency Injections.
 
@@ -116,14 +124,16 @@ namespace Webet333.api
             services.AddSingleton<SignalRHub, SignalRHub>();
             services.AddSingleton<SerialQueue>();
 
-            #endregion
+            #endregion Registering Dependency Injections.
 
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             #region Signal R Initialization
+
             services.AddSignalR();
-            #endregion
+
+            #endregion Signal R Initialization
 
             services.AddMvc();
         }

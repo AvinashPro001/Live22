@@ -56,7 +56,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Pragmatic Game Register
 
         #region Pragmatic game Login
 
@@ -85,7 +85,7 @@ namespace Webet333.api.Controllers
             return OkResponse(result);
         }
 
-        #endregion 
+        #endregion Pragmatic game Login
 
         #region Pragmatic game List
 
@@ -111,7 +111,7 @@ namespace Webet333.api.Controllers
             return OkResponse(result);
         }
 
-        #endregion 
+        #endregion Pragmatic game List
 
         #region Pragmatic Broken Status
 
@@ -119,14 +119,14 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> PragmaticBrokenGameStatus([FromBody] UserBalanceRequest request)
         {
             var result = await PragmaticGameHelpers.BrokenStatus(request.Username);
-            bool? unfinishedGame=false;
+            bool? unfinishedGame = false;
             if (result.error == "0")
             {
                 if (result.data.Count == 0)
                 {
                     using (var pragmatic_helper = new PragmaticGameHelpers(Connection))
                         await pragmatic_helper.PragmaticBrokenStatus(request.Username, "completed", JsonConvert.SerializeObject(result));
-                    unfinishedGame=false;
+                    unfinishedGame = false;
                 }
                 else
                 {
@@ -138,6 +138,6 @@ namespace Webet333.api.Controllers
             return OkResponse(new { Status = unfinishedGame, Response = result });
         }
 
-        #endregion 
+        #endregion Pragmatic Broken Status
     }
 }

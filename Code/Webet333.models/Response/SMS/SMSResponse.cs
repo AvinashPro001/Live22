@@ -3,6 +3,7 @@
     public class SMSResponse
     {
         public string statusCode { get; set; }
+
         public string smsMessage { get; set; }
     }
 }

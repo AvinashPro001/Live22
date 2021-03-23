@@ -19,8 +19,7 @@
                             <div class="row col-md-12">
                                 <h3 class="col-md-4">Username</h3>
                                 <div class="form-control col-md-6 mb-6">
-                                    <ngx-select-dropdown  tabindex="0" [multiple]="false"
-                                                         [config]="config" [options]="customerData" (change)="onChange($event)"></ngx-select-dropdown>
+                                    <ngx-select-dropdown tabindex="0" [multiple]="false" [config]="config" [options]="customerData" (change)="onChange($event)"></ngx-select-dropdown>
                                 </div>
                             </div>
                             <div class="row col-md-12">
@@ -65,9 +64,9 @@
                                             <div class="left-part">*From</div>
                                             <div class="right-part">
                                                 <!--<select class="form-control" [(ngModel)]="selectedList1" [ngModelOptions]="{standalone: true}" id="ddl_wallettype">
-            <option [ngValue]="undefined" disabled selected> Please select Wallet type. </option>
-            <option *ngFor="let d of walletType" [value]="d.id">{{d.walletType}}</option>
-        </select>-->
+                                                    <option [ngValue]="undefined" disabled selected> Please select Wallet type. </option>
+                                                    <option *ngFor="let d of walletType" [value]="d.id">{{d.walletType}}</option>
+                                                </select>-->
                                                 <label>Main Wallet</label>
                                             </div>
                                             <br /><br /><br />
@@ -83,7 +82,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)=" addAdjustment()" style="max-width:200px;align-content:center">Submit</button>

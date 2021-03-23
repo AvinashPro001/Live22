@@ -12,7 +12,6 @@ using System.Xml.Linq;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers.SexyBaccarat;
 using Webet333.dapper;
-using Webet333.logs;
 using Webet333.models.Constants;
 using Webet333.models.Response.Game.AG;
 using Webet333.models.Response.TransferMoney;
@@ -22,20 +21,25 @@ namespace Webet333.api.Helpers
     public class TransferMoneyHelpers : IDisposable
     {
         #region Local Variables
+
         private string Connection = string.Empty;
 
         private IHostingEnvironment _hostingEnvironment;
 
         protected IStringLocalizer<BaseController> Localizer { get; set; }
+        
         private static readonly HttpClient client = new HttpClient();
+
         public TransferMoneyHelpers(string Connection = null, IStringLocalizer<BaseController> Localizer = null)
         {
             this.Localizer = Localizer;
             this.Connection = Connection;
         }
-        #endregion
+
+        #endregion Local Variables
 
         #region Call Third party API
+
         public static async Task<string> CallThirdPartyApi(string url, StringContent stringContent = null)
         {
             try
@@ -49,11 +53,13 @@ namespace Webet333.api.Helpers
                 return String.Empty;
             }
         }
-        #endregion
+
+        #endregion Call Third party API
 
         #region Game Deposit Withdraw Method
 
         #region Joker game Withdraw & Deposit
+
         internal static string GenerateHas(string plantext)
         {
             var byteData = Encoding.UTF8.GetBytes(plantext);
@@ -109,13 +115,12 @@ namespace Webet333.api.Helpers
         #endregion 918Kiss game Withdraw & Deposit
 
         #region AG game Withdraw & Deposit
+
         public static string genrate()
         {
-
             DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             string temp = ((long)DateTime.UtcNow.Subtract(UnixEpoch).TotalMilliseconds).ToString();
             return temp.Substring(1);
-
         }
 
         public static async Task<AgWithdrawDepsoitResponse> AGDepositWithdrawMethod(string userName, decimal amount, string Type)
@@ -125,7 +130,7 @@ namespace Webet333.api.Helpers
                 $"&operator_id={GameConst.AG.OperatorId}" +
                 $"&user_id={userName}" +
                 $"&currency={GameConst.AG.Currency}" +
-                $"&credit={Math.Round(amount,2)}" +
+                $"&credit={Math.Round(amount, 2)}" +
                 $"&billno={genrate()}" +
                 $"&type={Type}";
 
@@ -190,6 +195,7 @@ namespace Webet333.api.Helpers
         #endregion Playtech game Depsoit
 
         #region Main Wallet Deposit & Withdraw
+
         public async Task<MainWalletTransferResponse> MainWalletDepositWithdraw(string UserId, decimal Amount, string Method)
         {
             using (var repository = new DapperRepository<MainWalletTransferResponse>(Connection))
@@ -198,11 +204,13 @@ namespace Webet333.api.Helpers
                 return response;
             }
         }
-        #endregion
+
+        #endregion Main Wallet Deposit & Withdraw
 
         #endregion Game Deposit Withdraw Method
 
         #region Get User Details for transfer
+
         public async Task<UserDetailsTransferResponse> UserDetails(string UserId, string FromWallet, string ToWallet)
         {
             using (var repository = new DapperRepository<UserDetailsTransferResponse>(Connection))
@@ -211,9 +219,11 @@ namespace Webet333.api.Helpers
                 return details;
             }
         }
-        #endregion
+
+        #endregion Get User Details for transfer
 
         #region Withdraw From Wallet
+
         public async Task<TransferAPIDepositWithdrawResponse> WithdrawFromWallet(UserDetailsTransferResponse UsernameResponse, string WalletName, decimal Amount, string UserId, IHostingEnvironment environment = null)
         {
             var response = new TransferAPIDepositWithdrawResponse
@@ -243,6 +253,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "PlayTech Wallet":
                     try
                     {
@@ -261,6 +272,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "Joker Wallet":
                     try
                     {
@@ -279,6 +291,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "M8 Wallet":
                     try
                     {
@@ -297,6 +310,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "AG Wallet":
                     try
                     {
@@ -315,6 +329,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "918Kiss Wallet":
                     try
                     {
@@ -333,6 +348,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "MaxBet Wallet":
                     try
                     {
@@ -351,6 +367,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "Mega888 Wallet":
                     try
                     {
@@ -369,6 +386,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "DG Wallet":
                     try
                     {
@@ -387,6 +405,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "Sexy Wallet":
                     try
                     {
@@ -405,6 +424,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "SA Wallet":
                     try
                     {
@@ -423,6 +443,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "Pussy888 Wallet":
                     try
                     {
@@ -441,6 +462,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "AllBet Wallet":
                     try
                     {
@@ -501,9 +523,11 @@ namespace Webet333.api.Helpers
 
             return response;
         }
-        #endregion
+
+        #endregion Withdraw From Wallet
 
         #region Deposit In Wallet
+
         public async Task<TransferAPIDepositWithdrawResponse> DepositInWallet(UserDetailsTransferResponse UsernameResponse, string WalletName, decimal Amount, string UserId, IHostingEnvironment environment = null)
         {
             var response = new TransferAPIDepositWithdrawResponse
@@ -533,6 +557,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "PlayTech Wallet":
                     try
                     {
@@ -551,6 +576,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "Joker Wallet":
                     try
                     {
@@ -569,6 +595,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "M8 Wallet":
                     try
                     {
@@ -587,6 +614,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "AG Wallet":
                     try
                     {
@@ -605,6 +633,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "918Kiss Wallet":
                     try
                     {
@@ -623,6 +652,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "MaxBet Wallet":
                     try
                     {
@@ -633,7 +663,6 @@ namespace Webet333.api.Helpers
                             response.GameName = "Maxbet Game";
                             response.GameResponse = JsonConvert.SerializeObject(maxbetResponse);
                         }
-
                     }
                     catch (Exception ex)
                     {
@@ -642,6 +671,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "Mega888 Wallet":
                     try
                     {
@@ -660,6 +690,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "DG Wallet":
                     try
                     {
@@ -678,6 +709,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "Sexy Wallet":
                     try
                     {
@@ -696,6 +728,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "SA Wallet":
                     try
                     {
@@ -714,6 +747,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "Pussy888 Wallet":
                     try
                     {
@@ -732,6 +766,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "AllBet Wallet":
                     try
                     {
@@ -750,6 +785,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "WM Wallet":
                     try
                     {
@@ -768,6 +804,7 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
                 case "Pragmatic Wallet":
                     try
                     {
@@ -790,29 +827,46 @@ namespace Webet333.api.Helpers
 
             return response;
         }
-        #endregion
+
+        #endregion Deposit In Wallet
 
         #region Transfer Insert
+
         public async Task Transfer(string UserId, string FromWalletId, string ToWalletId, decimal Amount, string AddedBy, string Verified, string VerifiedBy)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.TransferMoney.TransferInsert, new { UserId, FromWalletId, ToWalletId, Amount, AddedBy, VerifiedBy, Verified });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.TransferMoney.TransferInsert,
+                    new
+                    {
+                        UserId,
+                        FromWalletId,
+                        ToWalletId,
+                        Amount,
+                        AddedBy,
+                        VerifiedBy,
+                        Verified
+                    });
             }
         }
-        #endregion
+
+        #endregion Transfer Insert
 
         #region UserBalance IsBegin Update
+
         public async Task UserBalanceIsBeginUpdate(string UserId, bool IsBegin)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.TransferMoney.UserBalanceIsBeginUpdate, new { UserId, IsBegin});
+                await repository.AddOrUpdateAsync(StoredProcConsts.TransferMoney.UserBalanceIsBeginUpdate, new { UserId, IsBegin });
             }
         }
-        #endregion
+
+        #endregion UserBalance IsBegin Update
 
         #region House Keeping
+
         public void Dispose()
         {
             Dispose(true);
@@ -826,6 +880,7 @@ namespace Webet333.api.Helpers
                 Connection = string.Empty;
             }
         }
-        #endregion
+
+        #endregion House Keeping
     }
 }

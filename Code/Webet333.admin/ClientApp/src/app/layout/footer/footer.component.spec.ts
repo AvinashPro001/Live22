@@ -6,7 +6,6 @@ import { FooterComponent } from './footer.component';
 import { SettingsService } from '../../core/settings/settings.service';
 
 describe('Component: Footer', () => {
-
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [SettingsService]

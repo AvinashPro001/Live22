@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Webet333.models.Response.Game.MAXBet
 {
-    public  class MaxBetTransferResponse
+    public class MaxBetTransferResponse
     {
         [JsonProperty("error_code")]
         public long ErrorCode { get; set; }

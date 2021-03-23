@@ -25,7 +25,7 @@ export class AdjustmentAddComponent implements OnInit {
     customerWallet: any;
     mainBal: any;
     kissBal: any;
-    sexybaccaratBal:any;
+    sexybaccaratBal: any;
     maxbetBal: any;
     playtechBal: any;
     singleSelect: any = [];
@@ -158,7 +158,6 @@ export class AdjustmentAddComponent implements OnInit {
                     this.ngOnInit();
                     this.toasterService.pop('error', 'Error', error.message);
                 });
-
             }
             else if (+dataSelectAdjustment.amount < 0) {
                 //withdrawal
@@ -174,7 +173,6 @@ export class AdjustmentAddComponent implements OnInit {
                     this.ngOnInit();
                     this.toasterService.pop('error', 'Error', error.message);
                 });
-
             }
             else {
                 this.disabled = false;
@@ -225,7 +223,6 @@ export class AdjustmentAddComponent implements OnInit {
     }
 
     ManiWalletBalance(id) {
-
         let data = {
             id: id
         }

@@ -2,7 +2,6 @@
 
 namespace Webet333.models.Response.Game.SexyBaccarat
 {
-
     public partial class SexyBaccaratGameBalanceResponse
     {
         public SexyBalanceResult[] results { get; set; }

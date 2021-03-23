@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Webet333.models.Request.Game.MaxBet
 {
-    public class MaxBetGlobalVariableRequest
+    public class MaxBetGlobalVariableRequest : BaseAdminLogRequest
     {
         [Required]
         [JsonProperty(PropertyName = "minValue")]
@@ -13,7 +13,6 @@ namespace Webet333.models.Request.Game.MaxBet
         [Required]
         [JsonProperty(PropertyName = "maxValue")]
         public string Maximumvalue { get; set; }
-
     }
 
     public class MaxBetBettingDetails

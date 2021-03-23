@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Webet333.models.Response.Game
+﻿namespace Webet333.models.Response.Game
 {
     public class DailyTurnoverResponse
     {

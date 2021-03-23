@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
-using Webet333.models;
+using Webet333.dapper;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request.Game;
@@ -125,7 +125,6 @@ namespace Webet333.api.Controllers
                                 min_bet = MaxParleyMin,
                                 max_bet = MaxParleyMax,
                                 max_bet_per_match = MaxParleyMatch,
-
                             });
                             continue;
                         }
@@ -141,7 +140,7 @@ namespace Webet333.api.Controllers
 
                     var setlimitResponse = await MaxBetGameHelper.CallMaxbetBettingLimitsUpdateAPI(setlimit, vendorMemberId.ToString());
 
-                    #endregion
+                    #endregion Update Betting Details of User
 
                     var result = await game_help.GameMaxBetRegister(request.Username, request.UserId, JsonConvert.SerializeObject(response));
                     return OkResponse(new { response, result, setlimit, setlimitResponse });
@@ -150,6 +149,7 @@ namespace Webet333.api.Controllers
 
             return OkResponse(response);
         }
+
         #endregion Max Bet Game Register
 
         #region Game Login
@@ -188,7 +188,6 @@ namespace Webet333.api.Controllers
                     Url += Url + "&webskintype=2";
             }
             return OkResponse(new { error_code = response.error_code, Data = response.Data, message = response.message, gameUrl = Url });
-
         }
 
         #endregion Game Login
@@ -252,13 +251,16 @@ namespace Webet333.api.Controllers
 
         #endregion Max Bet Game Deposit and Withdraw API
 
-        #region SetMemberBetSetting 
+        #region SetMemberBetSetting
 
         [Authorize]
         [HttpPost(ActionsConst.MaxBetGame.MaxBetGameSetAllMemberBetSetting)]
         public async Task<IActionResult> SetAllMemberBetSetting([FromBody] MaxBetSetLimitRequest request)
         {
             await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
+
             var responseList = new List<string>();
 
             if (!ModelState.IsValid) return BadResponse(ModelState);
@@ -321,7 +323,6 @@ namespace Webet333.api.Controllers
                             min_bet = MaxParleyMin,
                             max_bet = MaxParleyMax,
                             max_bet_per_match = MaxParleyMatch,
-
                         });
                         continue;
                     }
@@ -340,7 +341,7 @@ namespace Webet333.api.Controllers
                 {
                     using (MaxBetGameHelper gamehelper = new MaxBetGameHelper(Connection))
                     {
-                        await gamehelper.MaxBetSetLimit(true);
+                        await gamehelper.MaxBetSetLimit(true, adminId: request.AdminId.ToString());
                     }
                 }
                 else
@@ -351,7 +352,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion SetMemberBetSetting 
+        #endregion SetMemberBetSetting
 
         #region RESET MaxBet Setting
 
@@ -360,35 +361,40 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> ResetBetSetting()
         {
             await CheckUserRole();
+
+            string adminId = GetUserId(User).ToString();
+
             using (MaxBetGameHelper game_helper = new MaxBetGameHelper(Connection))
             {
-                await game_helper.MaxBetSetLimit(false);
+                await game_helper.MaxBetSetLimit(false, adminId: adminId);
             }
             return OkResponse();
         }
 
-        #endregion
+        #endregion RESET MaxBet Setting
 
-        #region SET MAXBET MIN & MAX GLOBAL VARIABLE 
+        #region SET MAXBET MIN & MAX GLOBAL VARIABLE
 
         [Authorize]
         [HttpPost(ActionsConst.MaxBetGame.maxbetSetMinMax)]
         public async Task<IActionResult> SetMaxbetGlobalVariable([FromBody] MaxBetGlobalVariableRequest request)
         {
             await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
+
             if (!ModelState.IsValid) return BadResponse(ModelState);
             using (MaxBetGameHelper game_helper = new MaxBetGameHelper(Connection))
             {
                 var list = await game_helper.GetAllUserVendorIdList();
                 await game_helper.GetAllUserMinMaxLimit(list, Convert.ToDecimal(request.MinimumValue), Convert.ToDecimal(request.Maximumvalue));
-                return OkResponse(await game_helper.MaxBetSetGlobalVariable(request.Maximumvalue, request.MinimumValue));
+                return OkResponse(await game_helper.MaxBetSetGlobalVariable(request.Maximumvalue, request.MinimumValue, request.AdminId.ToString()));
             }
-
         }
 
-        #endregion
+        #endregion SET MAXBET MIN & MAX GLOBAL VARIABLE
 
-        #region GET MAXBET  GLOBAL VARIABLE 
+        #region GET MAXBET  GLOBAL VARIABLE
 
         [Authorize]
         [HttpGet(ActionsConst.MaxBetGame.maxbetGetMinMax)]
@@ -402,7 +408,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion GET MAXBET  GLOBAL VARIABLE
 
         #region SET DEFAULT BETTING LIMITS
 
@@ -411,6 +417,9 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> SetMaxbetDefaultBettingVariable([FromBody] MaxBetDefaultBettingVariableRequest request)
         {
             await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
+
             if (Convert.ToDouble(request.otherSportMin) > Convert.ToDouble(request.otherSportMax) || Convert.ToDouble(request.otherSportMax) > Convert.ToDouble(request.otherSportMatch) || Convert.ToDouble(request.otherSportBall) > Convert.ToDouble(request.otherSportMatch))
             {
                 return BadResponse("(Only For 161 Sport Type) other sport min bet ≦ other sport max bet ≦ other sport max bet per ball ≦ other sport max bet ber match");
@@ -430,6 +439,26 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> UserSetMinMax([FromBody] MaxbetUserGlobalVariableRequest request)
         {
             await CheckUserRole();
+
+            #region Admin Log
+
+            request.AdminId = GetUserId(User);
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Global.AdminLog_Insert_MaxBet_Parameters,
+                    new
+                    {
+                        request.AdminId,
+                        request.UserId,
+                        Action = "Edit",
+                        Module = "MaxBet Parameters"
+                    });
+            }
+
+            #endregion Admin Log
+
             var req = new GameMaxBetRegisterRequest
             {
                 mintransfer = Convert.ToDecimal(request.MinimumValue),
@@ -442,7 +471,6 @@ namespace Webet333.api.Controllers
                 var response = await MaxBetGameHelper.CallMaxbetUpdateAPI(req, vendorMemberId);
                 return OkResponse(response);
             }
-
         }
 
         #endregion SET user Min Max Limit

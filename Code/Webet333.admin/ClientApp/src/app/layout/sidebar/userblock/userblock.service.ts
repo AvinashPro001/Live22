@@ -5,7 +5,7 @@ export class UserblockService {
     public userBlockVisible: boolean;
     constructor() {
         // initially visible
-        this.userBlockVisible  = true;
+        this.userBlockVisible = true;
     }
 
     getVisibility() {
@@ -19,5 +19,4 @@ export class UserblockService {
     toggleVisibility() {
         this.userBlockVisible = !this.userBlockVisible;
     }
-
 }

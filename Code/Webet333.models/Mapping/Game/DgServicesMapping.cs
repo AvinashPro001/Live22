@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Webet333.models.Response.Game.DG;
 
 namespace Webet333.models.Mapping.Game
@@ -22,7 +21,7 @@ namespace Webet333.models.Mapping.Game
                 gameId = x.gameId,
                 memberId = x.memberId,
                 parentId = x.parentId,
-                betTime =Convert.ToDateTime(x.betTime),
+                betTime = Convert.ToDateTime(x.betTime),
                 calTime = Convert.ToDateTime(x.calTime),
                 winOrLoss = x.winOrLoss,
                 balanceBefore = x.balanceBefore,
@@ -37,8 +36,8 @@ namespace Webet333.models.Mapping.Game
                 deviceType = x.deviceType,
                 roadid = x.roadid,
                 pluginid = x.pluginid,
-                result= JsonConvert.DeserializeObject<DGResult>(x.result).result,
-                pokerBanker =JsonConvert.DeserializeObject<DGResult>(x.result).poker.banker,
+                result = JsonConvert.DeserializeObject<DGResult>(x.result).result,
+                pokerBanker = JsonConvert.DeserializeObject<DGResult>(x.result).poker.banker,
                 pokerPlayer = JsonConvert.DeserializeObject<DGResult>(x.result).poker.player,
                 betDetailsBanker = JsonConvert.DeserializeObject<DGBetDetail>(x.result).banker,
                 betDetailsBankerW = JsonConvert.DeserializeObject<DGBetDetail>(x.result).bankerW

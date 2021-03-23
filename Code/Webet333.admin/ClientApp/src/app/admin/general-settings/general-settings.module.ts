@@ -7,21 +7,20 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const routes: Routes = [
-  { path: 'changepassword', component: ChangepasswordComponent },
-  { path: 'edit-profile', component: EditProfileComponent },
+    { path: 'changepassword', component: ChangepasswordComponent },
+    { path: 'edit-profile', component: EditProfileComponent },
 ];
 
-
 @NgModule({
-  imports: [
-    LoadingModule.forRoot(ANIMATION_TYPES),
-    FormsModule, ReactiveFormsModule,
-    CommonModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [ChangepasswordComponent, EditProfileComponent],
-  exports: [
-    RouterModule
-  ]
+    imports: [
+        LoadingModule.forRoot(ANIMATION_TYPES),
+        FormsModule, ReactiveFormsModule,
+        CommonModule,
+        RouterModule.forChild(routes)
+    ],
+    declarations: [ChangepasswordComponent, EditProfileComponent],
+    exports: [
+        RouterModule
+    ]
 })
 export class GeneralSettingsModule { }

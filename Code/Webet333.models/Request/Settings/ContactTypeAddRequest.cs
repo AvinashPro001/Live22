@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Webet333.models.Request.Settings
 {
@@ -26,8 +24,7 @@ namespace Webet333.models.Request.Settings
         public bool? Deleted { get; set; }
     }
 
-
-    public class ContactTypeDetailsAddRequest
+    public class ContactTypeDetailsAddRequest : BaseAdminLogRequest
     {
         [JsonProperty(PropertyName = "csImage")]
         public string CSImage { get; set; }
@@ -51,7 +48,7 @@ namespace Webet333.models.Request.Settings
         public bool? IsOpenInNewPage { get; set; }
     }
 
-    public class ContactTypeDetailsUpdateRequest
+    public class ContactTypeDetailsUpdateRequest : BaseAdminLogRequest
     {
         [JsonProperty(PropertyName = "contactTypeId")]
         public Guid? ContactTypeId { get; set; }

@@ -5,8 +5,6 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,13 +18,11 @@ using Webet333.models.Request;
 using Webet333.models.Request.Game;
 using Webet333.models.Request.Game.Mega888;
 using Webet333.models.Response.Account;
-using Webet333.models.Response.Game;
 using Webet333.models.Response.Game.Mega888;
 
 namespace Webet333.api.Controllers
 {
     [Route(ActionsConst.ApiVersion)]
-
     public class Mega888GameController : BaseController
     {
         #region Local variable and Constructor
@@ -180,7 +176,6 @@ namespace Webet333.api.Controllers
 
         #region Mega888 Game Login
 
-
         [HttpPost(ActionsConst.Mega888Game.Mega888Login)]
         public async Task<IActionResult> Login()
         {
@@ -215,7 +210,6 @@ namespace Webet333.api.Controllers
                 return Ok(Mega888GameHelpers.Mega888LoginResponse(request.id, "0", Localizer["error_invalid_modelstate"].Value));
             }
 
-
             if (!request.@params.sn.Equals(GameConst.Mega888.SN))
             {
                 logManager.AddOrUpdateLogs("error", Localizer["error_mega888_invaild_SN"].Value, JsonConvert.SerializeObject(request));
@@ -237,15 +231,12 @@ namespace Webet333.api.Controllers
                     return Ok(Mega888GameHelpers.Mega888LoginResponse(request.id, "0", Localizer["error_mega888_invaild_login"].Value));
                 }
 
-
                 logManager.AddOrUpdateLogs("Success", Localizer["登录成功"].Value, JsonConvert.SerializeObject(request));
                 return Ok(Mega888GameHelpers.Mega888LoginResponse(request.id, "1", Localizer["登录成功"].Value));
-
             }
-
         }
 
-        #endregion
+        #endregion Mega888 Game Login
 
         #region Mega888 Game Logout
 
@@ -253,8 +244,6 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Mega888Game.Mega888Logout)]
         public async Task<IActionResult> Mega888Logout([FromBody] GetByIdRequest request)
         {
-
-
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             var Role = GetUserRole(User);
@@ -266,13 +255,11 @@ namespace Webet333.api.Controllers
                 if (string.IsNullOrEmpty(request.Id))
                     return BadResponse("error_invalid_modelstate");
 
-
             GetBalanceUserResponse user;
             using (var account_helper = new AccountHelpers(Connection))
             {
                 user = await account_helper.UserGetBalanceInfo(request.Id);
             }
-
 
             dynamic response = Mega888GameHelpers.CallLogoutAPI(user.Mega888LoginId);
 
@@ -288,7 +275,6 @@ namespace Webet333.api.Controllers
                 return BadResponse("error_game_logout_failed");
 
             return OkResponse(response);
-
         }
 
         #endregion Mega888 Game Logout

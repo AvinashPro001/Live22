@@ -10,6 +10,7 @@ namespace Webet333.logs
     public class LogManager : ILogManager
     {
         #region Object and Contructor defination
+
         private const string CreateTable = @"IF object_id('[dbo].[ApplicationLogs]') IS NULL BEGIN CREATE TABLE [dbo].[ApplicationLogs]([Id] [uniqueidentifier] NOT NULL,[Category] [nvarchar](50) NULL,[Message] [nvarchar](250) NULL,[Details] [nvarchar](max) NULL,[Created] [datetime2](7) NULL,CONSTRAINT [PK_ApplicationLogs]PRIMARY KEY CLUSTERED  ( [Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]; ALTER TABLE [dbo].[ApplicationLogs] ADD  CONSTRAINT [DF_ApplicationLogs_Id]  DEFAULT (newid()) FOR [Id]; ALTER TABLE [dbo].[ApplicationLogs] ADD  CONSTRAINT [DF_ApplicationLogs_Created]  DEFAULT (getutcdate()) FOR [Created] END";
         private readonly string ConnectionString = string.Empty;
 
@@ -29,7 +30,8 @@ namespace Webet333.logs
                 repository.AddOrUpdate(new ApplicationLogs { Details = details, Message = message, Category = category });
             }
         }
-        #endregion
+
+        #endregion Object and Contructor defination
 
         public void LogInfo(string message, string details = null)
         {
@@ -63,6 +65,7 @@ namespace Webet333.logs
     }
 
     #region Model defination
+
     class ApplicationLogs
     {
         [JsonProperty(PropertyName = "id")]
@@ -80,5 +83,6 @@ namespace Webet333.logs
         [JsonProperty(PropertyName = "created")]
         public DateTime Created { get; set; } = DateTime.UtcNow;
     }
-    #endregion
+
+    #endregion Model defination
 }

@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +23,7 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion Local Variables
 
         #region Joker Broken status
 
@@ -33,11 +31,11 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-              return await repository.FindAsync(StoredProcConsts.Joker.BrokenStatus, new { UserId});
+                return await repository.FindAsync(StoredProcConsts.Joker.BrokenStatus, new { UserId });
             }
         }
 
-        #endregion
+        #endregion Joker Broken status
 
         #region Call Joker Register API
 
@@ -56,7 +54,7 @@ namespace Webet333.api.Helpers
             return apiResult;
         }
 
-        #endregion
+        #endregion Call Joker Register API
 
         #region Register Joker Game in DB
 
@@ -69,7 +67,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion GameJoker
+        #endregion Register Joker Game in DB
 
         #region House Keeping
 
@@ -87,6 +85,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion House Keeping
     }
 }

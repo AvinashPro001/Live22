@@ -39,13 +39,13 @@ export class BettingdetailsCheckComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private getDateService: CommonService
+        private commonService: CommonService
     ) { }
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.customerUser();
-            this.getDateService.setDateOtherPicker(new Date(), new Date());
+            this.commonService.setDateOtherPicker(new Date(), new Date());
         }
     }
 
@@ -418,41 +418,41 @@ export class BettingdetailsCheckComponent implements OnInit {
     //#region       Filter Data
 
     setToday() {
-        var dates = this.getDateService.getTodatDate();
+        var dates = this.commonService.getTodatDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
-        this.getDateService.setDateOtherPicker(new Date(fromdate), new Date(todate));
+        this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
         this.BettingDetails(fromdate, todate);
     }
 
     setYesterday() {
-        var dates = this.getDateService.getYesterDate();
+        var dates = this.commonService.getYesterDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
-        this.getDateService.setDateOtherPicker(new Date(fromdate), new Date(todate));
+        this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
         this.BettingDetails(fromdate, todate);
     }
 
     setThisWeek() {
-        var dates = this.getDateService.getThisWeekDate();
+        var dates = this.commonService.getThisWeekDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
-        this.getDateService.setDateOtherPicker(new Date(fromdate), new Date(todate));
+        this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
         this.BettingDetails(fromdate, todate);
     }
 
     setThisYear() {
-        var dates = this.getDateService.getThisYearDate();
+        var dates = this.commonService.getThisYearDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
-        this.getDateService.setDateOtherPicker(new Date(fromdate), new Date(todate));
+        this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
         this.BettingDetails(fromdate, todate);
     }

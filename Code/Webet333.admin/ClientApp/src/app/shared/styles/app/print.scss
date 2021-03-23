@@ -5,7 +5,6 @@
 // Put here all rules required to style the print view
 
 @media print {
-
     .sidebar,
     .topnavbar,
     .offsidebar,
@@ -23,7 +22,6 @@
         padding: 0 !important;
         width: 100% !important;
     }
-
 
     .content-wrapper {
         overflow: hidden !important;

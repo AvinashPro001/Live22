@@ -3,10 +3,8 @@ using Newtonsoft.Json.Linq;
 
 namespace Webet333.models.Request.Game
 {
-
     public class GamePlaytechRegisterRequest
     {
-
         [JsonProperty("userId")]
         public string UserId { get; set; }
 
@@ -14,7 +12,5 @@ namespace Webet333.models.Request.Game
         public string PlaytechUserName { get; set; }
 
         public JObject APIResponse { get; set; }
-
     }
-
 }

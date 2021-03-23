@@ -2,7 +2,6 @@
 using System;
 using System.Threading.Tasks;
 using Webet333.dapper;
-using Webet333.logs.interfaces;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 
@@ -21,7 +20,7 @@ namespace Webet333.logs
         {
             using (var repository = new DapperRepository<dynamic>(ConnectionString))
             {
-               await repository.AddOrUpdateAsync(query: StoredProcConsts.Global.ApiLog, request);
+                await repository.AddOrUpdateAsync(query: StoredProcConsts.Global.ApiLog, request);
             }
         }
 
@@ -29,10 +28,9 @@ namespace Webet333.logs
         {
             using (var repository = new DapperRepository<APIlogTransactionResponse>(ConnectionString))
             {
-               return await repository.FindAsync(query: StoredProcConsts.Global.ApiTransactionLog, request);
+                return await repository.FindAsync(query: StoredProcConsts.Global.ApiTransactionLog, request);
             }
         }
-
     }
 
     public class ApiLogMangaerRequest
@@ -45,7 +43,6 @@ namespace Webet333.logs
         public string createdby { get; set; }
         public string UniqueId { get; set; }
         public string Role { get; set; }
-
     }
 
     public class ApiLogTransactionRequest
@@ -59,10 +56,9 @@ namespace Webet333.logs
         public string ToWalletResponse { get; set; }
 
         public string FromWalletResponse { get; set; }
-
     }
 
-   public class APIlogTransactionResponse
+    public class APIlogTransactionResponse
     {
         public Guid ID { get; set; }
     }

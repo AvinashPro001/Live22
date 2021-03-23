@@ -16,4 +16,11 @@ namespace Webet333.models.Request
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
     }
+
+    public class GetByIdRequestWithRequiredAndAdminId : BaseAdminLogRequest
+    {
+        [Required]
+        [JsonProperty(PropertyName = "id")]
+        public string Id { get; set; }
+    }
 }

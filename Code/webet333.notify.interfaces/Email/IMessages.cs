@@ -1,5 +1,4 @@
 ﻿using Webet333.models.Enums;
-using System.Threading.Tasks;
 
 namespace Webet333.notify.interfaces.Email
 {

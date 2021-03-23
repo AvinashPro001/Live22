@@ -6,7 +6,7 @@ namespace Webet333.models.Request.Game
     public class PromotionExpieryManuallyRequest
     {
         [Required]
-        [JsonProperty(PropertyName ="userId")]
+        [JsonProperty(PropertyName = "userId")]
         public string UserId { get; set; }
 
         [Required]

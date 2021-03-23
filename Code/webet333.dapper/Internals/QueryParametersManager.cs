@@ -1,5 +1,5 @@
-﻿using Webet333.dapper.interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Webet333.dapper.interfaces;
 
 namespace Webet333.dapper.Internals
 {

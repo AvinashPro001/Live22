@@ -18,5 +18,4 @@ namespace Webet333.models.Request.Account
         [JsonProperty(PropertyName = "role")]
         public string Role { get; set; }
     }
-
 }
