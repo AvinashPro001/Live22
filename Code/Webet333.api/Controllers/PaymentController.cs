@@ -142,35 +142,57 @@ namespace Webet333.api.Controllers
                 if (Role == RoleConst.Admin)
                 {
                     var list = await payment_help.GetDeposit(BaseUrlConfigsOptions.Value, request?.UserId, request?.Id, request?.Status, Keyword: request?.Keyword, FromDate: request.FromDate, ToDate: request.ToDate, PageSize: request.PageSize, PageNo: request.PageNo);
+                    if (list.Count != 0)
+                    {
+                        var total = list.FirstOrDefault().Total;
+                        var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
 
-                    var total = list.FirstOrDefault().Total;
-                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize);
-
-                    return OkResponse(new { 
-                        result= list,
-                        total = total,
-                        totalPages = totalPages,
-                        pageSize = request.PageSize ?? 10,
-                        offset = list.FirstOrDefault().OffSet,
+                        return OkResponse(new
+                        {
+                            result = list,
+                            total = total,
+                            totalPages = totalPages,
+                            pageSize = request.PageSize ?? 10,
+                            offset = list.FirstOrDefault().OffSet,
+                        });
+                    }
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = 0,
+                        totalPages = 0,
+                        pageSize = 0,
+                        offset = 0,
                     });
                 }
                 else
                 {
                     if (request?.UserId != null && GetUserId(User).ToString() != request?.UserId)
                         throw new ApiException("error_invalid_userid", 400);
-                    
-                    var list = await payment_help.GetDeposit(BaseUrlConfigsOptions.Value, GetUserId(User).ToString(), request?.Id, request?.Status, Keyword: request?.Keyword, PageSize: request.PageSize,PageNo: request.PageNo);
 
-                    var total = list.FirstOrDefault().Total;
-                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize);
+                    var list = await payment_help.GetDeposit(BaseUrlConfigsOptions.Value, GetUserId(User).ToString(), request?.Id, request?.Status, Keyword: request?.Keyword, PageSize: request.PageSize, PageNo: request.PageNo);
+                    if (list.Count != 0)
+                    {
+                        var total = list.FirstOrDefault().Total;
+                        var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                        return OkResponse(new
+                        {
+                            result = list,
+                            total = total,
+                            totalPages = totalPages,
+                            pageSize = request.PageSize ?? 10,
+                            offset = list.FirstOrDefault().OffSet,
+                        });
+                    }
 
                     return OkResponse(new
                     {
                         result = list,
-                        total = total,
-                        totalPages = totalPages,
-                        pageSize = request.PageSize ?? 10,
-                        offset = list.FirstOrDefault().OffSet,
+                        total = 0,
+                        totalPages = 0,
+                        pageSize = 0,
+                        offset = 0,
                     });
                 }
             }
