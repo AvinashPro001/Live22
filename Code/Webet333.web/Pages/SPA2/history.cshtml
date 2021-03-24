@@ -280,10 +280,10 @@
     var pageNumber = 1;
     var NumberOfLine = 1
     function testScroll() {
-        if ((NumberOfLine % 15) == 0) {
+        if ((NumberOfLine % 5) == 0) {
             pageNumber = pageNumber + 1;
-            console.log("PN " + pageNumber + " PS " + pageSize);
             NumberOfLine = NumberOfLine + 1;
+            DepositHistory(pageNumber)
         }
         else {
             NumberOfLine = NumberOfLine + 1;

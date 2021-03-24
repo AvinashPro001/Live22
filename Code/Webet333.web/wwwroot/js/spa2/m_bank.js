@@ -866,11 +866,14 @@ function generateGuid() {
 //#endregion
 
 //#region DepositHistory
-async function DepositHistory() {
+async function DepositHistory(pageNo=1) {
 
-    var model = {};
+    var model = {
+        pageNo: pageNo,
+        pageSize: 20
+    };
     var res = await PostMethod(apiEndPoints.depositHistory, model);
-    var result = res.data;
+    var result = res.data.result;
     var depositHistory = document.getElementById("depositHistory");
     depositHistory.innerHTML = "";
     if (result.length > 0) {
