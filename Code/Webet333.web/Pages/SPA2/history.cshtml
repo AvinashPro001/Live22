@@ -4,7 +4,6 @@
 <div id="comContent"></div>
 <div id="mComContent">
 
-
     <script>
         document.body.classList.add("no-pad-top");
         $('body').css('padding-top', '0px');
@@ -14,19 +13,29 @@
     </script>
 
     <div id="History" class="white-bg history-page">
+
         <div class="container">
+
             <div class="info-form text-center">
+
                 <div class="row">
+
                     <div class="col-xs-2">
                         <div class="back-btn"><a onclick="loadPageHome({backFrom:'history'})" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div>
                     </div>
+
                     <div class="col-xs-8">
                         <h4 class="black-text lang" key="history">HISTORY</h4>
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
         <div class="info-form history-tabs">
+
             <ul class="nav nav-tabs">
                 <li onclick="DepositHistory()" class="active"><a data-toggle="tab" href="#profileDeposit"><span key="deposit" class="lang"></span></a></li>
                 <li onclick="WithdrawHistory()"><a data-toggle="tab" href="#profilewithdrawal"><span key="withdrawal_title" class="lang"></span></a></li>
@@ -36,9 +45,13 @@
                 <li onclick="StatementHistory()"><a data-toggle="tab" href="#statement"><span key="statement" class="lang"></span></a></li>
 
             </ul>
+
         </div>
+
         <div class="history-tabs">
+
             <div class="tab-content">
+
                 <div id="profileTransfer" class="tab-pane fade in">
                     <div style="text-align:center;">
                         <img src="~/images/loading.gif" id="transfeRefreshImage" style="display:none" />
@@ -57,7 +70,7 @@
                     <div style="text-align:center;">
                         <img src="~/images/loading.gif" id="depositRefreshImage" style="display:none" />
                     </div>
-                    <div class="container full-height listing extra-bottom-padding" id="depositHistory">
+                    <div class="container full-height listing extra-bottom-padding" id="depositHistory" onscroll="testScroll()">
 
                     </div>
                 </div>
@@ -98,6 +111,7 @@
                 </div>
 
             </div>
+        
         </div>
 
     </div>
@@ -165,6 +179,7 @@
             </li>
         </ul>
     </div>
+    
     <div>
         <a id="mobileM8" style="display:none"></a>
     </div>
@@ -181,8 +196,6 @@
         });
     });
 </script>
-
-
 
 <!--Begin Comm100 Live Chat Code-->
 <div></div>
@@ -257,10 +270,25 @@
                 });
             }
         });
-
     }
 
     setTimeout(() => {
         get();
     }, 200);
+
+    var pageSize = 10;
+    var pageNumber = 1;
+    var NumberOfLine = 1
+    function testScroll() {
+        if ((NumberOfLine % 15) == 0) {
+            pageNumber = pageNumber + 1;
+            console.log("PN " + pageNumber + " PS " + pageSize);
+            NumberOfLine = NumberOfLine + 1;
+        }
+        else {
+            NumberOfLine = NumberOfLine + 1;
+            console.log(NumberOfLine);
+        }
+    }
+
 </script>
