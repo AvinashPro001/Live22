@@ -133,7 +133,6 @@ var apiEndPoints = {
 
     TotalTurnover: "Game/DailyTurnover",
 
-
     SendOTP: "account/send/otp",
     VerifiedOTP: "account/verified/otp",
 

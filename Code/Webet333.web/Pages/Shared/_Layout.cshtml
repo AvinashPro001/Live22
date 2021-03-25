@@ -144,7 +144,6 @@
         gtag('event', 'conversion', { 'send_to': 'AW-527506130/BFpFCPDPiuQBENK1xPsB' });
     </script>
     @RenderSection("Header", false)
-
 </head>
 <body onload="getLanguage()" class="home-page ">
     <div class="loadingImage"></div>
@@ -234,7 +233,6 @@
                                     <li class="login-item input-field login">
                                         <ul class="d-flex">
                                             <li class="login-item u-name form-icon" style="display:flex;margin-left:-25px;"><span style="font-size:larger" class="lang" key="username"></span>:<span id="lbl_usernameHeader" style="white-space: nowrap; overflow: unset; text-overflow: ellipsis;font-size:larger;"></span></li>
-
                                         </ul>
                                     </li>
                                     <li class="login-item signin form-icon log-out"><button class="btn-login" value="LOGOUT" type="button" onclick="logoutMain()"><span class="lang" key="logout"></span></button></li>
@@ -462,7 +460,6 @@
                     <li><a href="~/Mobile/about"><img src="~/images/mobile/about-us.svg" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
                     <li><a href="~/Mobile/TermandCondtion"><img src="~/images/mobile/t&c.svg" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
                     <li><a href="~/Account/Profile" id="AccountAfterLogin"><img src="~/images/mobile/profile.svg" alt="Profile"><p class="lang" key="sidebar_Profile"></p></a></li>
-
                 </ul>
             </div>
         </div>
@@ -593,8 +590,6 @@
             <li class="mobile-icon restore_icon" onclick="RestoreBalance()"><a href="#"><span data-translate="mobile_menu_Restore">RESTORE</span></a></li>
             <li class="mobile-icon withdraw_icon"><a asp-page="/Account/Profile" asp-fragment="withdrawal" onclick="openCity(event, 'Withdrawal',2);window.location = '#Withdrawal';"><span data-translate="mobile_menu_Withdraw">WITHDRAWAL</span></a></li>
             <li class="mobile-icon history_icon"><a asp-page="/Account/Profile" asp-fragment="history" onclick="openCity(event, 'History',4);window.location = '#History';"><span data-translate="mobile_menu_History">HISTORY</span></a></li>
-
-
         </ul>
         <div class="container">
             <div class="annunce-section">
@@ -777,45 +772,42 @@
                             <label>Version 1.0.4</label>
                         </li>
                     </ul>
-
-
                 </div>
             </div>
         </div>
     </footer>
 
-
     <div class="contact-us-btn">
         <div class="contact-user" href="#" id="ContactUsPopUp"><span class="lang" style="font-size:23px;" key="contact_us"></span>&nbsp;<span class="contact-img"></span></div>
         <ul class="chatting" id="chatting">
             <li class="support-live">
-                    <h5><strong>Live Support</strong></h5>
-                    <p><img src="../../images/hours_24.png" alt="hours 24"></p>
-                    <h6><strong style="padding-right: 60px;">24 Hours</strong></h6>
-                </li>
-                <li class="call-contact text-center">
-                    <h5><img class="contact-logos" src="../../images/call.png" alt="Call"> <strong><u>Phone</u></strong></h5>
-                    <a href="tel:0135558826 "> 013-555 8826 : <strong>CS1</strong></a>
-                </li>
-                <li class="text-center">
-                    <h5><img class="contact-logos" src="../../images/whatsapp.png" alt="Whats App"> <strong><u>Whatsapp</u></strong></h5>
-                    <strong><a class="contact-us" href="https://api.whatsapp.com/send?phone=60135558826&text=Claim%20and%20Join" target="_blank">013-5558826</a><strong> : CS1</strong></strong>
-                    <br />
-                    <br />
-                    <strong><a class="contact-us" href="https://api.whatsapp.com/send?phone=60135557800&text=Claim%20and%20Join" target="_blank">013-555 7800</a><strong> : CS2</strong></strong>
-                </li>
-                <li class="text-center">
-                    <h5><img class="contact-logos" src="../../images/wechat.png" alt="We Chat"> <strong><u>Wechat</u></strong></h5>
-                    <h6><strong>Customer Service 1</strong></h6>
-                    <figure>
-                        <img class="image-qr" src="../../images/barcode-cs1.jpg" alt="barcode">
-                    </figure>
-                </li>
-                <li class="text-center">
-                    <h5><img class="contact-logos" src="../../images/telegram.png" alt="Whats App"> <strong><u>Telegram</u></strong></h5>
-                    <br />
-                    <strong><a href="#"> @@mywbcs1 : </a><strong> : CS1</strong></strong>
-                </li>
+                <h5><strong>Live Support</strong></h5>
+                <p><img src="../../images/hours_24.png" alt="hours 24"></p>
+                <h6><strong style="padding-right: 60px;">24 Hours</strong></h6>
+            </li>
+            <li class="call-contact text-center">
+                <h5><img class="contact-logos" src="../../images/call.png" alt="Call"> <strong><u>Phone</u></strong></h5>
+                <a href="tel:0135558826 "> 013-555 8826 : <strong>CS1</strong></a>
+            </li>
+            <li class="text-center">
+                <h5><img class="contact-logos" src="../../images/whatsapp.png" alt="Whats App"> <strong><u>Whatsapp</u></strong></h5>
+                <strong><a class="contact-us" href="https://api.whatsapp.com/send?phone=60135558826&text=Claim%20and%20Join" target="_blank">013-5558826</a><strong> : CS1</strong></strong>
+                <br />
+                <br />
+                <strong><a class="contact-us" href="https://api.whatsapp.com/send?phone=60135557800&text=Claim%20and%20Join" target="_blank">013-555 7800</a><strong> : CS2</strong></strong>
+            </li>
+            <li class="text-center">
+                <h5><img class="contact-logos" src="../../images/wechat.png" alt="We Chat"> <strong><u>Wechat</u></strong></h5>
+                <h6><strong>Customer Service 1</strong></h6>
+                <figure>
+                    <img class="image-qr" src="../../images/barcode-cs1.jpg" alt="barcode">
+                </figure>
+            </li>
+            <li class="text-center">
+                <h5><img class="contact-logos" src="../../images/telegram.png" alt="Whats App"> <strong><u>Telegram</u></strong></h5>
+                <br />
+                <strong><a href="#"> @@mywbcs1 : </a><strong> : CS1</strong></strong>
+            </li>
         </ul>
     </div>
 
@@ -980,7 +972,6 @@
                     });
                 });
 
-
                 $(document).ready(function () {
                     announcementMobile();
                 });
@@ -995,8 +986,6 @@
                         }
                     }
                 }
-
-
     </script>
     <script>
                 function openCity(evt, cityName, linknum) {
@@ -1047,7 +1036,6 @@
                         if (hash == 'transfer') {
                             document.getElementById("transferOpen").click();
                         }
-
 
                         if (hash == 'history') {
                             document.getElementById("historyOpen").click();
@@ -1204,8 +1192,6 @@
                     });
                 })
 
-
-
                 var counter = 0;
 
                 $("html").mousemove(async function (event) {
@@ -1222,7 +1208,6 @@
                         PostMethod(apiEndPoints.userLastTimeUpdate, {});
                     }
                 });
-
     </script>
     <script>
                 function CloseIframe() {
