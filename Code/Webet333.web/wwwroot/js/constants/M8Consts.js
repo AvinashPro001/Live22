@@ -11,5 +11,5 @@ var M8ConstAction = {
     balanceAction: "action=balance",
     depositAction: "action=deposit",
     logoutAction: "action=logout",
-    withdrawalAction:"action=withdraw"
+    withdrawalAction: "action=withdraw"
 };

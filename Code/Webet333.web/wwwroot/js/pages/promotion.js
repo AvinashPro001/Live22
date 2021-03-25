@@ -11,7 +11,7 @@ async function promotionList() {
         ismobile: x < 600 ? true : false,
         ismain: false
     };
-    
+
     var resPanel = await PostMethod(apiEndPoints.promotionsList, model);
     if (resPanel !== null && resPanel !== undefined) {
         var panelData = resPanel.data;
@@ -28,17 +28,17 @@ async function promotionList() {
                 "<figure><img class='full-img' style='height: " + height + ";'  src='" + panelData[i].banner + "' alt='pramotion-banner'></figure>" +
                 "</div></a></div>" +
                 "</div > ";
-            
+
             descriptionPanel.innerHTML +=
-                '<div class="form-login modal fade" id="'+i+'" role="dialog">'+
+                '<div class="form-login modal fade" id="' + i + '" role="dialog">' +
                 '<div class="modal-dialog">' +
                 '<div class="modal-content">' +
                 '<div class="modal-header">' +
                 '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
-                '<h4 class="modal-title"><span >' + panelData[i].title+'</span></h4>' +
+                '<h4 class="modal-title"><span >' + panelData[i].title + '</span></h4>' +
                 '</div>' +
                 '<div class="modal-body">' +
-                '<p>' + panelData[i].description+'</p>' +
+                '<p>' + panelData[i].description + '</p>' +
                 '</div>' +
                 '</div>' +
                 '</div>' +
