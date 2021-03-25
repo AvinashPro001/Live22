@@ -23,7 +23,8 @@
         </div>
         <div class="col-1">
             <div class="text-center"><b>Total Winlose</b></div>
-            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawAmount-userdata.TotalDepositAmount }}</b></div>
+            <!--<div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawAmount-userdata.TotalDepositAmount }}</b></div>-->
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWinlose}}</b></div>
         </div>
         <div class="col-1">
             <div class="text-center"><b>Total Deposit Count</b></div>
@@ -160,7 +161,7 @@
 
                 <div class="row">
                     <h4 class="col-5 h4">Registration Date :</h4>
-                    <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.Created}}</h4>
+                    <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.registeredOn}}</h4>
                 </div>
             </div>
             <br /><br /><br />

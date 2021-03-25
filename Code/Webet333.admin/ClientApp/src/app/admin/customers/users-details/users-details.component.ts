@@ -278,7 +278,7 @@ export class UsersDetailsComponent implements OnInit {
 
         this.adminService.add<any>(customer.customerListById, model).subscribe(res => {
             this.Userdata = res.data[0];
-            this.Userdata.Created = this.replaceDateTime(this.Userdata.Created);
+            this.Userdata.registeredOn = this.replaceDateTime(this.Userdata.registeredOn);
             this.RegisteInGame(this.Userdata.id)
             this.onChange(this.Userdata);
             let i = 0;
