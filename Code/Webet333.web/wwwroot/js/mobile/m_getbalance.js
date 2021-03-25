@@ -3,7 +3,6 @@ $(document).ready(function () {
     if (GetLocalStorage('currentUser') !== null) {
         WalletBalance();
     }
-
 });
 //#endregion Onload
 
@@ -29,7 +28,7 @@ async function UserGameTurnover() {
         document.getElementById("PragmaticTurnover").innerHTML = parseFloat(turnover.data.response.pragmaticTurover).toFixed(2);
         document.getElementById("spinrefesh").classList.remove("fa-spin");
     }
-    catch(e) {
+    catch (e) {
         document.getElementById("spinrefesh").classList.remove("fa-spin");
         document.getElementById("TotalTurnover").innerHTML = "0.0";
         document.getElementById("jokerTurnover").innerHTML = "0.0";
@@ -244,7 +243,6 @@ async function RestoreBalance() {
         await PostMethod(apiEndPoints.restoreBalance, restoreModel)
     }
     catch (ex) {
-
     }
     WalletBalance();
     LoaderHide();
@@ -264,7 +262,6 @@ function numberWithCommas(x) {
     }
 }
 
-
 var AGTrigger = false,
     DGTrigger = false,
     SATrigger = false,
@@ -280,7 +277,6 @@ function StartTimerGameBalanceAPI(GameName) {
     var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
 
     switch (GameName) {
-
         case 'AG':
             let AGtimerId = setInterval(() => { AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username); AGTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(AGtimerId); AGTrigger = false; }, 301000);
@@ -555,7 +551,6 @@ async function Pussy888WalletBalance(Username) {
         document.getElementById("ddlPussy888Wallet").innerHTML = Pussy888Wallet;
         if (location.href.toLowerCase().includes("mobile/transfer"))
             document.getElementById("Pussy888Wallet").innerHTML = Pussy888Wallet;
-
     }
     catch (ex) {
         Pussy888Wallet = "N/A";
@@ -619,7 +614,6 @@ async function PragmaticWalletBalance(Username) {
         document.getElementById("ddlPragmaticWallet").innerHTML = PragmaticWallet;
         if (location.href.toLowerCase().includes("mobile/transfer"))
             document.getElementById("PragmaticWallet").innerHTML = PragmaticWallet;
-
     }
     catch (ex) {
         PragmaticWallet = "N/A";
@@ -630,7 +624,6 @@ async function PragmaticWalletBalance(Username) {
 }
 
 async function WalletBalanceMaxTransfer(walletData) {
-
     var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
     var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
 

@@ -12,14 +12,13 @@
         root.CryptoJS = factory();
     }
 }(this, function () {
-
-	/**
-	 * CryptoJS core components.
-	 */
+    /**
+     * CryptoJS core components.
+     */
     var CryptoJS = CryptoJS || (function (Math, undefined) {
-	    /*
-	     * Local polyfil of Object.create
-	     */
+        /*
+         * Local polyfil of Object.create
+         */
         var create = Object.create || (function () {
             function F() { };
 
@@ -36,41 +35,39 @@
             };
         }())
 
-	    /**
-	     * CryptoJS namespace.
-	     */
+        /**
+         * CryptoJS namespace.
+         */
         var C = {};
 
-	    /**
-	     * Library namespace.
-	     */
+        /**
+         * Library namespace.
+         */
         var C_lib = C.lib = {};
 
-	    /**
-	     * Base object for prototypal inheritance.
-	     */
+        /**
+         * Base object for prototypal inheritance.
+         */
         var Base = C_lib.Base = (function () {
-
-
             return {
-	            /**
-	             * Creates a new object that inherits from this object.
-	             *
-	             * @param {Object} overrides Properties to copy into the new object.
-	             *
-	             * @return {Object} The new object.
-	             *
-	             * @static
-	             *
-	             * @example
-	             *
-	             *     var MyType = CryptoJS.lib.Base.extend({
-	             *         field: 'value',
-	             *
-	             *         method: function () {
-	             *         }
-	             *     });
-	             */
+                /**
+                 * Creates a new object that inherits from this object.
+                 *
+                 * @param {Object} overrides Properties to copy into the new object.
+                 *
+                 * @return {Object} The new object.
+                 *
+                 * @static
+                 *
+                 * @example
+                 *
+                 *     var MyType = CryptoJS.lib.Base.extend({
+                 *         field: 'value',
+                 *
+                 *         method: function () {
+                 *         }
+                 *     });
+                 */
                 extend: function (overrides) {
                     // Spawn
                     var subtype = create(this);
@@ -96,18 +93,18 @@
                     return subtype;
                 },
 
-	            /**
-	             * Extends this object and runs the init method.
-	             * Arguments to create() will be passed to init().
-	             *
-	             * @return {Object} The new object.
-	             *
-	             * @static
-	             *
-	             * @example
-	             *
-	             *     var instance = MyType.create();
-	             */
+                /**
+                 * Extends this object and runs the init method.
+                 * Arguments to create() will be passed to init().
+                 *
+                 * @return {Object} The new object.
+                 *
+                 * @static
+                 *
+                 * @example
+                 *
+                 *     var instance = MyType.create();
+                 */
                 create: function () {
                     var instance = this.extend();
                     instance.init.apply(instance, arguments);
@@ -115,32 +112,32 @@
                     return instance;
                 },
 
-	            /**
-	             * Initializes a newly created object.
-	             * Override this method to add some logic when your objects are created.
-	             *
-	             * @example
-	             *
-	             *     var MyType = CryptoJS.lib.Base.extend({
-	             *         init: function () {
-	             *             // ...
-	             *         }
-	             *     });
-	             */
+                /**
+                 * Initializes a newly created object.
+                 * Override this method to add some logic when your objects are created.
+                 *
+                 * @example
+                 *
+                 *     var MyType = CryptoJS.lib.Base.extend({
+                 *         init: function () {
+                 *             // ...
+                 *         }
+                 *     });
+                 */
                 init: function () {
                 },
 
-	            /**
-	             * Copies properties into this object.
-	             *
-	             * @param {Object} properties The properties to mix in.
-	             *
-	             * @example
-	             *
-	             *     MyType.mixIn({
-	             *         field: 'value'
-	             *     });
-	             */
+                /**
+                 * Copies properties into this object.
+                 *
+                 * @param {Object} properties The properties to mix in.
+                 *
+                 * @example
+                 *
+                 *     MyType.mixIn({
+                 *         field: 'value'
+                 *     });
+                 */
                 mixIn: function (properties) {
                     for (var propertyName in properties) {
                         if (properties.hasOwnProperty(propertyName)) {
@@ -154,40 +151,40 @@
                     }
                 },
 
-	            /**
-	             * Creates a copy of this object.
-	             *
-	             * @return {Object} The clone.
-	             *
-	             * @example
-	             *
-	             *     var clone = instance.clone();
-	             */
+                /**
+                 * Creates a copy of this object.
+                 *
+                 * @return {Object} The clone.
+                 *
+                 * @example
+                 *
+                 *     var clone = instance.clone();
+                 */
                 clone: function () {
                     return this.init.prototype.extend(this);
                 }
             };
         }());
 
-	    /**
-	     * An array of 32-bit words.
-	     *
-	     * @property {Array} words The array of 32-bit words.
-	     * @property {number} sigBytes The number of significant bytes in this word array.
-	     */
+        /**
+         * An array of 32-bit words.
+         *
+         * @property {Array} words The array of 32-bit words.
+         * @property {number} sigBytes The number of significant bytes in this word array.
+         */
         var WordArray = C_lib.WordArray = Base.extend({
-	        /**
-	         * Initializes a newly created word array.
-	         *
-	         * @param {Array} words (Optional) An array of 32-bit words.
-	         * @param {number} sigBytes (Optional) The number of significant bytes in the words.
-	         *
-	         * @example
-	         *
-	         *     var wordArray = CryptoJS.lib.WordArray.create();
-	         *     var wordArray = CryptoJS.lib.WordArray.create([0x00010203, 0x04050607]);
-	         *     var wordArray = CryptoJS.lib.WordArray.create([0x00010203, 0x04050607], 6);
-	         */
+            /**
+             * Initializes a newly created word array.
+             *
+             * @param {Array} words (Optional) An array of 32-bit words.
+             * @param {number} sigBytes (Optional) The number of significant bytes in the words.
+             *
+             * @example
+             *
+             *     var wordArray = CryptoJS.lib.WordArray.create();
+             *     var wordArray = CryptoJS.lib.WordArray.create([0x00010203, 0x04050607]);
+             *     var wordArray = CryptoJS.lib.WordArray.create([0x00010203, 0x04050607], 6);
+             */
             init: function (words, sigBytes) {
                 words = this.words = words || [];
 
@@ -198,34 +195,34 @@
                 }
             },
 
-	        /**
-	         * Converts this word array to a string.
-	         *
-	         * @param {Encoder} encoder (Optional) The encoding strategy to use. Default: CryptoJS.enc.Hex
-	         *
-	         * @return {string} The stringified word array.
-	         *
-	         * @example
-	         *
-	         *     var string = wordArray + '';
-	         *     var string = wordArray.toString();
-	         *     var string = wordArray.toString(CryptoJS.enc.Utf8);
-	         */
+            /**
+             * Converts this word array to a string.
+             *
+             * @param {Encoder} encoder (Optional) The encoding strategy to use. Default: CryptoJS.enc.Hex
+             *
+             * @return {string} The stringified word array.
+             *
+             * @example
+             *
+             *     var string = wordArray + '';
+             *     var string = wordArray.toString();
+             *     var string = wordArray.toString(CryptoJS.enc.Utf8);
+             */
             toString: function (encoder) {
                 return (encoder || Hex).stringify(this);
             },
 
-	        /**
-	         * Concatenates a word array to this word array.
-	         *
-	         * @param {WordArray} wordArray The word array to append.
-	         *
-	         * @return {WordArray} This word array.
-	         *
-	         * @example
-	         *
-	         *     wordArray1.concat(wordArray2);
-	         */
+            /**
+             * Concatenates a word array to this word array.
+             *
+             * @param {WordArray} wordArray The word array to append.
+             *
+             * @return {WordArray} This word array.
+             *
+             * @example
+             *
+             *     wordArray1.concat(wordArray2);
+             */
             concat: function (wordArray) {
                 // Shortcuts
                 var thisWords = this.words;
@@ -255,13 +252,13 @@
                 return this;
             },
 
-	        /**
-	         * Removes insignificant bits.
-	         *
-	         * @example
-	         *
-	         *     wordArray.clamp();
-	         */
+            /**
+             * Removes insignificant bits.
+             *
+             * @example
+             *
+             *     wordArray.clamp();
+             */
             clamp: function () {
                 // Shortcuts
                 var words = this.words;
@@ -272,15 +269,15 @@
                 words.length = Math.ceil(sigBytes / 4);
             },
 
-	        /**
-	         * Creates a copy of this word array.
-	         *
-	         * @return {WordArray} The clone.
-	         *
-	         * @example
-	         *
-	         *     var clone = wordArray.clone();
-	         */
+            /**
+             * Creates a copy of this word array.
+             *
+             * @return {WordArray} The clone.
+             *
+             * @example
+             *
+             *     var clone = wordArray.clone();
+             */
             clone: function () {
                 var clone = Base.clone.call(this);
                 clone.words = this.words.slice(0);
@@ -288,19 +285,19 @@
                 return clone;
             },
 
-	        /**
-	         * Creates a word array filled with random bytes.
-	         *
-	         * @param {number} nBytes The number of random bytes to generate.
-	         *
-	         * @return {WordArray} The random word array.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var wordArray = CryptoJS.lib.WordArray.random(16);
-	         */
+            /**
+             * Creates a word array filled with random bytes.
+             *
+             * @param {number} nBytes The number of random bytes to generate.
+             *
+             * @return {WordArray} The random word array.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var wordArray = CryptoJS.lib.WordArray.random(16);
+             */
             random: function (nBytes) {
                 var words = [];
 
@@ -330,28 +327,28 @@
             }
         });
 
-	    /**
-	     * Encoder namespace.
-	     */
+        /**
+         * Encoder namespace.
+         */
         var C_enc = C.enc = {};
 
-	    /**
-	     * Hex encoding strategy.
-	     */
+        /**
+         * Hex encoding strategy.
+         */
         var Hex = C_enc.Hex = {
-	        /**
-	         * Converts a word array to a hex string.
-	         *
-	         * @param {WordArray} wordArray The word array.
-	         *
-	         * @return {string} The hex string.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var hexString = CryptoJS.enc.Hex.stringify(wordArray);
-	         */
+            /**
+             * Converts a word array to a hex string.
+             *
+             * @param {WordArray} wordArray The word array.
+             *
+             * @return {string} The hex string.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var hexString = CryptoJS.enc.Hex.stringify(wordArray);
+             */
             stringify: function (wordArray) {
                 // Shortcuts
                 var words = wordArray.words;
@@ -368,19 +365,19 @@
                 return hexChars.join('');
             },
 
-	        /**
-	         * Converts a hex string to a word array.
-	         *
-	         * @param {string} hexStr The hex string.
-	         *
-	         * @return {WordArray} The word array.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var wordArray = CryptoJS.enc.Hex.parse(hexString);
-	         */
+            /**
+             * Converts a hex string to a word array.
+             *
+             * @param {string} hexStr The hex string.
+             *
+             * @return {WordArray} The word array.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var wordArray = CryptoJS.enc.Hex.parse(hexString);
+             */
             parse: function (hexStr) {
                 // Shortcut
                 var hexStrLength = hexStr.length;
@@ -395,23 +392,23 @@
             }
         };
 
-	    /**
-	     * Latin1 encoding strategy.
-	     */
+        /**
+         * Latin1 encoding strategy.
+         */
         var Latin1 = C_enc.Latin1 = {
-	        /**
-	         * Converts a word array to a Latin1 string.
-	         *
-	         * @param {WordArray} wordArray The word array.
-	         *
-	         * @return {string} The Latin1 string.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var latin1String = CryptoJS.enc.Latin1.stringify(wordArray);
-	         */
+            /**
+             * Converts a word array to a Latin1 string.
+             *
+             * @param {WordArray} wordArray The word array.
+             *
+             * @return {string} The Latin1 string.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var latin1String = CryptoJS.enc.Latin1.stringify(wordArray);
+             */
             stringify: function (wordArray) {
                 // Shortcuts
                 var words = wordArray.words;
@@ -427,19 +424,19 @@
                 return latin1Chars.join('');
             },
 
-	        /**
-	         * Converts a Latin1 string to a word array.
-	         *
-	         * @param {string} latin1Str The Latin1 string.
-	         *
-	         * @return {WordArray} The word array.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var wordArray = CryptoJS.enc.Latin1.parse(latin1String);
-	         */
+            /**
+             * Converts a Latin1 string to a word array.
+             *
+             * @param {string} latin1Str The Latin1 string.
+             *
+             * @return {WordArray} The word array.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var wordArray = CryptoJS.enc.Latin1.parse(latin1String);
+             */
             parse: function (latin1Str) {
                 // Shortcut
                 var latin1StrLength = latin1Str.length;
@@ -454,23 +451,23 @@
             }
         };
 
-	    /**
-	     * UTF-8 encoding strategy.
-	     */
+        /**
+         * UTF-8 encoding strategy.
+         */
         var Utf8 = C_enc.Utf8 = {
-	        /**
-	         * Converts a word array to a UTF-8 string.
-	         *
-	         * @param {WordArray} wordArray The word array.
-	         *
-	         * @return {string} The UTF-8 string.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var utf8String = CryptoJS.enc.Utf8.stringify(wordArray);
-	         */
+            /**
+             * Converts a word array to a UTF-8 string.
+             *
+             * @param {WordArray} wordArray The word array.
+             *
+             * @return {string} The UTF-8 string.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var utf8String = CryptoJS.enc.Utf8.stringify(wordArray);
+             */
             stringify: function (wordArray) {
                 try {
                     return decodeURIComponent(escape(Latin1.stringify(wordArray)));
@@ -479,55 +476,55 @@
                 }
             },
 
-	        /**
-	         * Converts a UTF-8 string to a word array.
-	         *
-	         * @param {string} utf8Str The UTF-8 string.
-	         *
-	         * @return {WordArray} The word array.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var wordArray = CryptoJS.enc.Utf8.parse(utf8String);
-	         */
+            /**
+             * Converts a UTF-8 string to a word array.
+             *
+             * @param {string} utf8Str The UTF-8 string.
+             *
+             * @return {WordArray} The word array.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var wordArray = CryptoJS.enc.Utf8.parse(utf8String);
+             */
             parse: function (utf8Str) {
                 return Latin1.parse(unescape(encodeURIComponent(utf8Str)));
             }
         };
 
-	    /**
-	     * Abstract buffered block algorithm template.
-	     *
-	     * The property blockSize must be implemented in a concrete subtype.
-	     *
-	     * @property {number} _minBufferSize The number of blocks that should be kept unprocessed in the buffer. Default: 0
-	     */
+        /**
+         * Abstract buffered block algorithm template.
+         *
+         * The property blockSize must be implemented in a concrete subtype.
+         *
+         * @property {number} _minBufferSize The number of blocks that should be kept unprocessed in the buffer. Default: 0
+         */
         var BufferedBlockAlgorithm = C_lib.BufferedBlockAlgorithm = Base.extend({
-	        /**
-	         * Resets this block algorithm's data buffer to its initial state.
-	         *
-	         * @example
-	         *
-	         *     bufferedBlockAlgorithm.reset();
-	         */
+            /**
+             * Resets this block algorithm's data buffer to its initial state.
+             *
+             * @example
+             *
+             *     bufferedBlockAlgorithm.reset();
+             */
             reset: function () {
                 // Initial values
                 this._data = new WordArray.init();
                 this._nDataBytes = 0;
             },
 
-	        /**
-	         * Adds new data to this block algorithm's buffer.
-	         *
-	         * @param {WordArray|string} data The data to append. Strings are converted to a WordArray using UTF-8.
-	         *
-	         * @example
-	         *
-	         *     bufferedBlockAlgorithm._append('data');
-	         *     bufferedBlockAlgorithm._append(wordArray);
-	         */
+            /**
+             * Adds new data to this block algorithm's buffer.
+             *
+             * @param {WordArray|string} data The data to append. Strings are converted to a WordArray using UTF-8.
+             *
+             * @example
+             *
+             *     bufferedBlockAlgorithm._append('data');
+             *     bufferedBlockAlgorithm._append(wordArray);
+             */
             _append: function (data) {
                 // Convert string to WordArray, else assume WordArray already
                 if (typeof data == 'string') {
@@ -539,20 +536,20 @@
                 this._nDataBytes += data.sigBytes;
             },
 
-	        /**
-	         * Processes available data blocks.
-	         *
-	         * This method invokes _doProcessBlock(offset), which must be implemented by a concrete subtype.
-	         *
-	         * @param {boolean} doFlush Whether all blocks and partial blocks should be processed.
-	         *
-	         * @return {WordArray} The processed data.
-	         *
-	         * @example
-	         *
-	         *     var processedData = bufferedBlockAlgorithm._process();
-	         *     var processedData = bufferedBlockAlgorithm._process(!!'flush');
-	         */
+            /**
+             * Processes available data blocks.
+             *
+             * This method invokes _doProcessBlock(offset), which must be implemented by a concrete subtype.
+             *
+             * @param {boolean} doFlush Whether all blocks and partial blocks should be processed.
+             *
+             * @return {WordArray} The processed data.
+             *
+             * @example
+             *
+             *     var processedData = bufferedBlockAlgorithm._process();
+             *     var processedData = bufferedBlockAlgorithm._process(!!'flush');
+             */
             _process: function (doFlush) {
                 // Shortcuts
                 var data = this._data;
@@ -594,15 +591,15 @@
                 return new WordArray.init(processedWords, nBytesReady);
             },
 
-	        /**
-	         * Creates a copy of this object.
-	         *
-	         * @return {Object} The clone.
-	         *
-	         * @example
-	         *
-	         *     var clone = bufferedBlockAlgorithm.clone();
-	         */
+            /**
+             * Creates a copy of this object.
+             *
+             * @return {Object} The clone.
+             *
+             * @example
+             *
+             *     var clone = bufferedBlockAlgorithm.clone();
+             */
             clone: function () {
                 var clone = Base.clone.call(this);
                 clone._data = this._data.clone();
@@ -613,26 +610,26 @@
             _minBufferSize: 0
         });
 
-	    /**
-	     * Abstract hasher template.
-	     *
-	     * @property {number} blockSize The number of 32-bit words this hasher operates on. Default: 16 (512 bits)
-	     */
+        /**
+         * Abstract hasher template.
+         *
+         * @property {number} blockSize The number of 32-bit words this hasher operates on. Default: 16 (512 bits)
+         */
         var Hasher = C_lib.Hasher = BufferedBlockAlgorithm.extend({
-	        /**
-	         * Configuration options.
-	         */
+            /**
+             * Configuration options.
+             */
             cfg: Base.extend(),
 
-	        /**
-	         * Initializes a newly created hasher.
-	         *
-	         * @param {Object} cfg (Optional) The configuration options to use for this hash computation.
-	         *
-	         * @example
-	         *
-	         *     var hasher = CryptoJS.algo.SHA256.create();
-	         */
+            /**
+             * Initializes a newly created hasher.
+             *
+             * @param {Object} cfg (Optional) The configuration options to use for this hash computation.
+             *
+             * @example
+             *
+             *     var hasher = CryptoJS.algo.SHA256.create();
+             */
             init: function (cfg) {
                 // Apply config defaults
                 this.cfg = this.cfg.extend(cfg);
@@ -641,13 +638,13 @@
                 this.reset();
             },
 
-	        /**
-	         * Resets this hasher to its initial state.
-	         *
-	         * @example
-	         *
-	         *     hasher.reset();
-	         */
+            /**
+             * Resets this hasher to its initial state.
+             *
+             * @example
+             *
+             *     hasher.reset();
+             */
             reset: function () {
                 // Reset data buffer
                 BufferedBlockAlgorithm.reset.call(this);
@@ -656,18 +653,18 @@
                 this._doReset();
             },
 
-	        /**
-	         * Updates this hasher with a message.
-	         *
-	         * @param {WordArray|string} messageUpdate The message to append.
-	         *
-	         * @return {Hasher} This hasher.
-	         *
-	         * @example
-	         *
-	         *     hasher.update('message');
-	         *     hasher.update(wordArray);
-	         */
+            /**
+             * Updates this hasher with a message.
+             *
+             * @param {WordArray|string} messageUpdate The message to append.
+             *
+             * @return {Hasher} This hasher.
+             *
+             * @example
+             *
+             *     hasher.update('message');
+             *     hasher.update(wordArray);
+             */
             update: function (messageUpdate) {
                 // Append
                 this._append(messageUpdate);
@@ -679,20 +676,20 @@
                 return this;
             },
 
-	        /**
-	         * Finalizes the hash computation.
-	         * Note that the finalize operation is effectively a destructive, read-once operation.
-	         *
-	         * @param {WordArray|string} messageUpdate (Optional) A final message update.
-	         *
-	         * @return {WordArray} The hash.
-	         *
-	         * @example
-	         *
-	         *     var hash = hasher.finalize();
-	         *     var hash = hasher.finalize('message');
-	         *     var hash = hasher.finalize(wordArray);
-	         */
+            /**
+             * Finalizes the hash computation.
+             * Note that the finalize operation is effectively a destructive, read-once operation.
+             *
+             * @param {WordArray|string} messageUpdate (Optional) A final message update.
+             *
+             * @return {WordArray} The hash.
+             *
+             * @example
+             *
+             *     var hash = hasher.finalize();
+             *     var hash = hasher.finalize('message');
+             *     var hash = hasher.finalize(wordArray);
+             */
             finalize: function (messageUpdate) {
                 // Final message update
                 if (messageUpdate) {
@@ -707,38 +704,38 @@
 
             blockSize: 512 / 32,
 
-	        /**
-	         * Creates a shortcut function to a hasher's object interface.
-	         *
-	         * @param {Hasher} hasher The hasher to create a helper for.
-	         *
-	         * @return {Function} The shortcut function.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var SHA256 = CryptoJS.lib.Hasher._createHelper(CryptoJS.algo.SHA256);
-	         */
+            /**
+             * Creates a shortcut function to a hasher's object interface.
+             *
+             * @param {Hasher} hasher The hasher to create a helper for.
+             *
+             * @return {Function} The shortcut function.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var SHA256 = CryptoJS.lib.Hasher._createHelper(CryptoJS.algo.SHA256);
+             */
             _createHelper: function (hasher) {
                 return function (message, cfg) {
                     return new hasher.init(cfg).finalize(message);
                 };
             },
 
-	        /**
-	         * Creates a shortcut function to the HMAC's object interface.
-	         *
-	         * @param {Hasher} hasher The hasher to use in this HMAC helper.
-	         *
-	         * @return {Function} The shortcut function.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var HmacSHA256 = CryptoJS.lib.Hasher._createHmacHelper(CryptoJS.algo.SHA256);
-	         */
+            /**
+             * Creates a shortcut function to the HMAC's object interface.
+             *
+             * @param {Hasher} hasher The hasher to use in this HMAC helper.
+             *
+             * @return {Function} The shortcut function.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var HmacSHA256 = CryptoJS.lib.Hasher._createHmacHelper(CryptoJS.algo.SHA256);
+             */
             _createHmacHelper: function (hasher) {
                 return function (message, key) {
                     return new C_algo.HMAC.init(hasher, key).finalize(message);
@@ -746,14 +743,13 @@
             }
         });
 
-	    /**
-	     * Algorithm namespace.
-	     */
+        /**
+         * Algorithm namespace.
+         */
         var C_algo = C.algo = {};
 
         return C;
     }(Math));
-
 
     (function () {
         // Shortcuts
@@ -762,23 +758,23 @@
         var WordArray = C_lib.WordArray;
         var C_enc = C.enc;
 
-	    /**
-	     * Base64 encoding strategy.
-	     */
+        /**
+         * Base64 encoding strategy.
+         */
         var Base64 = C_enc.Base64 = {
-	        /**
-	         * Converts a word array to a Base64 string.
-	         *
-	         * @param {WordArray} wordArray The word array.
-	         *
-	         * @return {string} The Base64 string.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var base64String = CryptoJS.enc.Base64.stringify(wordArray);
-	         */
+            /**
+             * Converts a word array to a Base64 string.
+             *
+             * @param {WordArray} wordArray The word array.
+             *
+             * @return {string} The Base64 string.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var base64String = CryptoJS.enc.Base64.stringify(wordArray);
+             */
             stringify: function (wordArray) {
                 // Shortcuts
                 var words = wordArray.words;
@@ -813,19 +809,19 @@
                 return base64Chars.join('');
             },
 
-	        /**
-	         * Converts a Base64 string to a word array.
-	         *
-	         * @param {string} base64Str The Base64 string.
-	         *
-	         * @return {WordArray} The word array.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var wordArray = CryptoJS.enc.Base64.parse(base64String);
-	         */
+            /**
+             * Converts a Base64 string to a word array.
+             *
+             * @param {string} base64Str The Base64 string.
+             *
+             * @return {WordArray} The word array.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var wordArray = CryptoJS.enc.Base64.parse(base64String);
+             */
             parse: function (base64Str) {
                 // Shortcuts
                 var base64StrLength = base64Str.length;
@@ -850,7 +846,6 @@
 
                 // Convert
                 return parseLoop(base64Str, base64StrLength, reverseMap);
-
             },
 
             _map: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
@@ -871,7 +866,6 @@
         }
     }());
 
-
     (function (Math) {
         // Shortcuts
         var C = CryptoJS;
@@ -890,9 +884,9 @@
             }
         }());
 
-	    /**
-	     * MD5 hash algorithm.
-	     */
+        /**
+         * MD5 hash algorithm.
+         */
         var MD5 = C_algo.MD5 = Hasher.extend({
             _doReset: function () {
                 this._hash = new WordArray.init([
@@ -1088,39 +1082,38 @@
             return ((n << s) | (n >>> (32 - s))) + b;
         }
 
-	    /**
-	     * Shortcut function to the hasher's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     *
-	     * @return {WordArray} The hash.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hash = CryptoJS.MD5('message');
-	     *     var hash = CryptoJS.MD5(wordArray);
-	     */
+        /**
+         * Shortcut function to the hasher's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         *
+         * @return {WordArray} The hash.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hash = CryptoJS.MD5('message');
+         *     var hash = CryptoJS.MD5(wordArray);
+         */
         C.MD5 = Hasher._createHelper(MD5);
 
-	    /**
-	     * Shortcut function to the HMAC's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     * @param {WordArray|string} key The secret key.
-	     *
-	     * @return {WordArray} The HMAC.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hmac = CryptoJS.HmacMD5(message, key);
-	     */
+        /**
+         * Shortcut function to the HMAC's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         * @param {WordArray|string} key The secret key.
+         *
+         * @return {WordArray} The HMAC.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hmac = CryptoJS.HmacMD5(message, key);
+         */
         C.HmacMD5 = Hasher._createHmacHelper(MD5);
     }(Math));
-
 
     (function () {
         // Shortcuts
@@ -1133,9 +1126,9 @@
         // Reusable object
         var W = [];
 
-	    /**
-	     * SHA-1 hash algorithm.
-	     */
+        /**
+         * SHA-1 hash algorithm.
+         */
         var SHA1 = C_algo.SHA1 = Hasher.extend({
             _doReset: function () {
                 this._hash = new WordArray.init([
@@ -1220,39 +1213,38 @@
             }
         });
 
-	    /**
-	     * Shortcut function to the hasher's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     *
-	     * @return {WordArray} The hash.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hash = CryptoJS.SHA1('message');
-	     *     var hash = CryptoJS.SHA1(wordArray);
-	     */
+        /**
+         * Shortcut function to the hasher's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         *
+         * @return {WordArray} The hash.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hash = CryptoJS.SHA1('message');
+         *     var hash = CryptoJS.SHA1(wordArray);
+         */
         C.SHA1 = Hasher._createHelper(SHA1);
 
-	    /**
-	     * Shortcut function to the HMAC's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     * @param {WordArray|string} key The secret key.
-	     *
-	     * @return {WordArray} The HMAC.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hmac = CryptoJS.HmacSHA1(message, key);
-	     */
+        /**
+         * Shortcut function to the HMAC's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         * @param {WordArray|string} key The secret key.
+         *
+         * @return {WordArray} The HMAC.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hmac = CryptoJS.HmacSHA1(message, key);
+         */
         C.HmacSHA1 = Hasher._createHmacHelper(SHA1);
     }());
-
 
     (function (Math) {
         // Shortcuts
@@ -1302,9 +1294,9 @@
         // Reusable object
         var W = [];
 
-	    /**
-	     * SHA-256 hash algorithm.
-	     */
+        /**
+         * SHA-256 hash algorithm.
+         */
         var SHA256 = C_algo.SHA256 = Hasher.extend({
             _doReset: function () {
                 this._hash = new WordArray.init(H.slice(0));
@@ -1401,39 +1393,38 @@
             }
         });
 
-	    /**
-	     * Shortcut function to the hasher's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     *
-	     * @return {WordArray} The hash.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hash = CryptoJS.SHA256('message');
-	     *     var hash = CryptoJS.SHA256(wordArray);
-	     */
+        /**
+         * Shortcut function to the hasher's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         *
+         * @return {WordArray} The hash.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hash = CryptoJS.SHA256('message');
+         *     var hash = CryptoJS.SHA256(wordArray);
+         */
         C.SHA256 = Hasher._createHelper(SHA256);
 
-	    /**
-	     * Shortcut function to the HMAC's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     * @param {WordArray|string} key The secret key.
-	     *
-	     * @return {WordArray} The HMAC.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hmac = CryptoJS.HmacSHA256(message, key);
-	     */
+        /**
+         * Shortcut function to the HMAC's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         * @param {WordArray|string} key The secret key.
+         *
+         * @return {WordArray} The HMAC.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hmac = CryptoJS.HmacSHA256(message, key);
+         */
         C.HmacSHA256 = Hasher._createHmacHelper(SHA256);
     }(Math));
-
 
     (function () {
         // Shortcuts
@@ -1442,23 +1433,23 @@
         var WordArray = C_lib.WordArray;
         var C_enc = C.enc;
 
-	    /**
-	     * UTF-16 BE encoding strategy.
-	     */
+        /**
+         * UTF-16 BE encoding strategy.
+         */
         var Utf16BE = C_enc.Utf16 = C_enc.Utf16BE = {
-	        /**
-	         * Converts a word array to a UTF-16 BE string.
-	         *
-	         * @param {WordArray} wordArray The word array.
-	         *
-	         * @return {string} The UTF-16 BE string.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var utf16String = CryptoJS.enc.Utf16.stringify(wordArray);
-	         */
+            /**
+             * Converts a word array to a UTF-16 BE string.
+             *
+             * @param {WordArray} wordArray The word array.
+             *
+             * @return {string} The UTF-16 BE string.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var utf16String = CryptoJS.enc.Utf16.stringify(wordArray);
+             */
             stringify: function (wordArray) {
                 // Shortcuts
                 var words = wordArray.words;
@@ -1474,19 +1465,19 @@
                 return utf16Chars.join('');
             },
 
-	        /**
-	         * Converts a UTF-16 BE string to a word array.
-	         *
-	         * @param {string} utf16Str The UTF-16 BE string.
-	         *
-	         * @return {WordArray} The word array.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var wordArray = CryptoJS.enc.Utf16.parse(utf16String);
-	         */
+            /**
+             * Converts a UTF-16 BE string to a word array.
+             *
+             * @param {string} utf16Str The UTF-16 BE string.
+             *
+             * @return {WordArray} The word array.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var wordArray = CryptoJS.enc.Utf16.parse(utf16String);
+             */
             parse: function (utf16Str) {
                 // Shortcut
                 var utf16StrLength = utf16Str.length;
@@ -1501,23 +1492,23 @@
             }
         };
 
-	    /**
-	     * UTF-16 LE encoding strategy.
-	     */
+        /**
+         * UTF-16 LE encoding strategy.
+         */
         C_enc.Utf16LE = {
-	        /**
-	         * Converts a word array to a UTF-16 LE string.
-	         *
-	         * @param {WordArray} wordArray The word array.
-	         *
-	         * @return {string} The UTF-16 LE string.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var utf16Str = CryptoJS.enc.Utf16LE.stringify(wordArray);
-	         */
+            /**
+             * Converts a word array to a UTF-16 LE string.
+             *
+             * @param {WordArray} wordArray The word array.
+             *
+             * @return {string} The UTF-16 LE string.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var utf16Str = CryptoJS.enc.Utf16LE.stringify(wordArray);
+             */
             stringify: function (wordArray) {
                 // Shortcuts
                 var words = wordArray.words;
@@ -1533,19 +1524,19 @@
                 return utf16Chars.join('');
             },
 
-	        /**
-	         * Converts a UTF-16 LE string to a word array.
-	         *
-	         * @param {string} utf16Str The UTF-16 LE string.
-	         *
-	         * @return {WordArray} The word array.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var wordArray = CryptoJS.enc.Utf16LE.parse(utf16Str);
-	         */
+            /**
+             * Converts a UTF-16 LE string to a word array.
+             *
+             * @param {string} utf16Str The UTF-16 LE string.
+             *
+             * @return {WordArray} The word array.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var wordArray = CryptoJS.enc.Utf16LE.parse(utf16Str);
+             */
             parse: function (utf16Str) {
                 // Shortcut
                 var utf16StrLength = utf16Str.length;
@@ -1564,7 +1555,6 @@
             return ((word << 8) & 0xff00ff00) | ((word >>> 8) & 0x00ff00ff);
         }
     }());
-
 
     (function () {
         // Check if typed arrays are supported
@@ -1623,17 +1613,16 @@
         subInit.prototype = WordArray;
     }());
 
+    /** @preserve
+    (c) 2012 by Cédric Mesnil. All rights reserved.
 
-	/** @preserve
-	(c) 2012 by Cédric Mesnil. All rights reserved.
+    Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
-	Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 
-	    - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-	    - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-
-	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-	*/
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    */
 
     (function (Math) {
         // Shortcuts
@@ -1672,16 +1661,15 @@
         var _hl = WordArray.create([0x00000000, 0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC, 0xA953FD4E]);
         var _hr = WordArray.create([0x50A28BE6, 0x5C4DD124, 0x6D703EF3, 0x7A6D76E9, 0x00000000]);
 
-	    /**
-	     * RIPEMD160 hash algorithm.
-	     */
+        /**
+         * RIPEMD160 hash algorithm.
+         */
         var RIPEMD160 = C_algo.RIPEMD160 = Hasher.extend({
             _doReset: function () {
                 this._hash = WordArray.create([0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0]);
             },
 
             _doProcessBlock: function (M, offset) {
-
                 // Swap endian
                 for (var i = 0; i < 16; i++) {
                     // Shortcuts
@@ -1811,10 +1799,8 @@
             }
         });
 
-
         function f1(x, y, z) {
             return ((x) ^ (y) ^ (z));
-
         }
 
         function f2(x, y, z) {
@@ -1831,47 +1817,44 @@
 
         function f5(x, y, z) {
             return ((x) ^ ((y) | (~(z))));
-
         }
 
         function rotl(x, n) {
             return (x << n) | (x >>> (32 - n));
         }
 
-
-	    /**
-	     * Shortcut function to the hasher's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     *
-	     * @return {WordArray} The hash.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hash = CryptoJS.RIPEMD160('message');
-	     *     var hash = CryptoJS.RIPEMD160(wordArray);
-	     */
+        /**
+         * Shortcut function to the hasher's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         *
+         * @return {WordArray} The hash.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hash = CryptoJS.RIPEMD160('message');
+         *     var hash = CryptoJS.RIPEMD160(wordArray);
+         */
         C.RIPEMD160 = Hasher._createHelper(RIPEMD160);
 
-	    /**
-	     * Shortcut function to the HMAC's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     * @param {WordArray|string} key The secret key.
-	     *
-	     * @return {WordArray} The HMAC.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hmac = CryptoJS.HmacRIPEMD160(message, key);
-	     */
+        /**
+         * Shortcut function to the HMAC's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         * @param {WordArray|string} key The secret key.
+         *
+         * @return {WordArray} The HMAC.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hmac = CryptoJS.HmacRIPEMD160(message, key);
+         */
         C.HmacRIPEMD160 = Hasher._createHmacHelper(RIPEMD160);
     }(Math));
-
 
     (function () {
         // Shortcuts
@@ -1882,20 +1865,20 @@
         var Utf8 = C_enc.Utf8;
         var C_algo = C.algo;
 
-	    /**
-	     * HMAC algorithm.
-	     */
+        /**
+         * HMAC algorithm.
+         */
         var HMAC = C_algo.HMAC = Base.extend({
-	        /**
-	         * Initializes a newly created HMAC.
-	         *
-	         * @param {Hasher} hasher The hash algorithm to use.
-	         * @param {WordArray|string} key The secret key.
-	         *
-	         * @example
-	         *
-	         *     var hmacHasher = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA256, key);
-	         */
+            /**
+             * Initializes a newly created HMAC.
+             *
+             * @param {Hasher} hasher The hash algorithm to use.
+             * @param {WordArray|string} key The secret key.
+             *
+             * @example
+             *
+             *     var hmacHasher = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA256, key);
+             */
             init: function (hasher, key) {
                 // Init hasher
                 hasher = this._hasher = new hasher.init();
@@ -1936,13 +1919,13 @@
                 this.reset();
             },
 
-	        /**
-	         * Resets this HMAC to its initial state.
-	         *
-	         * @example
-	         *
-	         *     hmacHasher.reset();
-	         */
+            /**
+             * Resets this HMAC to its initial state.
+             *
+             * @example
+             *
+             *     hmacHasher.reset();
+             */
             reset: function () {
                 // Shortcut
                 var hasher = this._hasher;
@@ -1952,18 +1935,18 @@
                 hasher.update(this._iKey);
             },
 
-	        /**
-	         * Updates this HMAC with a message.
-	         *
-	         * @param {WordArray|string} messageUpdate The message to append.
-	         *
-	         * @return {HMAC} This HMAC instance.
-	         *
-	         * @example
-	         *
-	         *     hmacHasher.update('message');
-	         *     hmacHasher.update(wordArray);
-	         */
+            /**
+             * Updates this HMAC with a message.
+             *
+             * @param {WordArray|string} messageUpdate The message to append.
+             *
+             * @return {HMAC} This HMAC instance.
+             *
+             * @example
+             *
+             *     hmacHasher.update('message');
+             *     hmacHasher.update(wordArray);
+             */
             update: function (messageUpdate) {
                 this._hasher.update(messageUpdate);
 
@@ -1971,20 +1954,20 @@
                 return this;
             },
 
-	        /**
-	         * Finalizes the HMAC computation.
-	         * Note that the finalize operation is effectively a destructive, read-once operation.
-	         *
-	         * @param {WordArray|string} messageUpdate (Optional) A final message update.
-	         *
-	         * @return {WordArray} The HMAC.
-	         *
-	         * @example
-	         *
-	         *     var hmac = hmacHasher.finalize();
-	         *     var hmac = hmacHasher.finalize('message');
-	         *     var hmac = hmacHasher.finalize(wordArray);
-	         */
+            /**
+             * Finalizes the HMAC computation.
+             * Note that the finalize operation is effectively a destructive, read-once operation.
+             *
+             * @param {WordArray|string} messageUpdate (Optional) A final message update.
+             *
+             * @return {WordArray} The HMAC.
+             *
+             * @example
+             *
+             *     var hmac = hmacHasher.finalize();
+             *     var hmac = hmacHasher.finalize('message');
+             *     var hmac = hmacHasher.finalize(wordArray);
+             */
             finalize: function (messageUpdate) {
                 // Shortcut
                 var hasher = this._hasher;
@@ -1999,7 +1982,6 @@
         });
     }());
 
-
     (function () {
         // Shortcuts
         var C = CryptoJS;
@@ -2010,50 +1992,50 @@
         var SHA1 = C_algo.SHA1;
         var HMAC = C_algo.HMAC;
 
-	    /**
-	     * Password-Based Key Derivation Function 2 algorithm.
-	     */
+        /**
+         * Password-Based Key Derivation Function 2 algorithm.
+         */
         var PBKDF2 = C_algo.PBKDF2 = Base.extend({
-	        /**
-	         * Configuration options.
-	         *
-	         * @property {number} keySize The key size in words to generate. Default: 4 (128 bits)
-	         * @property {Hasher} hasher The hasher to use. Default: SHA1
-	         * @property {number} iterations The number of iterations to perform. Default: 1
-	         */
+            /**
+             * Configuration options.
+             *
+             * @property {number} keySize The key size in words to generate. Default: 4 (128 bits)
+             * @property {Hasher} hasher The hasher to use. Default: SHA1
+             * @property {number} iterations The number of iterations to perform. Default: 1
+             */
             cfg: Base.extend({
                 keySize: 128 / 32,
                 hasher: SHA1,
                 iterations: 1
             }),
 
-	        /**
-	         * Initializes a newly created key derivation function.
-	         *
-	         * @param {Object} cfg (Optional) The configuration options to use for the derivation.
-	         *
-	         * @example
-	         *
-	         *     var kdf = CryptoJS.algo.PBKDF2.create();
-	         *     var kdf = CryptoJS.algo.PBKDF2.create({ keySize: 8 });
-	         *     var kdf = CryptoJS.algo.PBKDF2.create({ keySize: 8, iterations: 1000 });
-	         */
+            /**
+             * Initializes a newly created key derivation function.
+             *
+             * @param {Object} cfg (Optional) The configuration options to use for the derivation.
+             *
+             * @example
+             *
+             *     var kdf = CryptoJS.algo.PBKDF2.create();
+             *     var kdf = CryptoJS.algo.PBKDF2.create({ keySize: 8 });
+             *     var kdf = CryptoJS.algo.PBKDF2.create({ keySize: 8, iterations: 1000 });
+             */
             init: function (cfg) {
                 this.cfg = this.cfg.extend(cfg);
             },
 
-	        /**
-	         * Computes the Password-Based Key Derivation Function 2.
-	         *
-	         * @param {WordArray|string} password The password.
-	         * @param {WordArray|string} salt A salt.
-	         *
-	         * @return {WordArray} The derived key.
-	         *
-	         * @example
-	         *
-	         *     var key = kdf.compute(password, salt);
-	         */
+            /**
+             * Computes the Password-Based Key Derivation Function 2.
+             *
+             * @param {WordArray|string} password The password.
+             * @param {WordArray|string} salt A salt.
+             *
+             * @return {WordArray} The derived key.
+             *
+             * @example
+             *
+             *     var key = kdf.compute(password, salt);
+             */
             compute: function (password, salt) {
                 // Shortcut
                 var cfg = this.cfg;
@@ -2104,28 +2086,27 @@
             }
         });
 
-	    /**
-	     * Computes the Password-Based Key Derivation Function 2.
-	     *
-	     * @param {WordArray|string} password The password.
-	     * @param {WordArray|string} salt A salt.
-	     * @param {Object} cfg (Optional) The configuration options to use for this computation.
-	     *
-	     * @return {WordArray} The derived key.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var key = CryptoJS.PBKDF2(password, salt);
-	     *     var key = CryptoJS.PBKDF2(password, salt, { keySize: 8 });
-	     *     var key = CryptoJS.PBKDF2(password, salt, { keySize: 8, iterations: 1000 });
-	     */
+        /**
+         * Computes the Password-Based Key Derivation Function 2.
+         *
+         * @param {WordArray|string} password The password.
+         * @param {WordArray|string} salt A salt.
+         * @param {Object} cfg (Optional) The configuration options to use for this computation.
+         *
+         * @return {WordArray} The derived key.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var key = CryptoJS.PBKDF2(password, salt);
+         *     var key = CryptoJS.PBKDF2(password, salt, { keySize: 8 });
+         *     var key = CryptoJS.PBKDF2(password, salt, { keySize: 8, iterations: 1000 });
+         */
         C.PBKDF2 = function (password, salt, cfg) {
             return PBKDF2.create(cfg).compute(password, salt);
         };
     }());
-
 
     (function () {
         // Shortcuts
@@ -2136,51 +2117,51 @@
         var C_algo = C.algo;
         var MD5 = C_algo.MD5;
 
-	    /**
-	     * This key derivation function is meant to conform with EVP_BytesToKey.
-	     * www.openssl.org/docs/crypto/EVP_BytesToKey.html
-	     */
+        /**
+         * This key derivation function is meant to conform with EVP_BytesToKey.
+         * www.openssl.org/docs/crypto/EVP_BytesToKey.html
+         */
         var EvpKDF = C_algo.EvpKDF = Base.extend({
-	        /**
-	         * Configuration options.
-	         *
-	         * @property {number} keySize The key size in words to generate. Default: 4 (128 bits)
-	         * @property {Hasher} hasher The hash algorithm to use. Default: MD5
-	         * @property {number} iterations The number of iterations to perform. Default: 1
-	         */
+            /**
+             * Configuration options.
+             *
+             * @property {number} keySize The key size in words to generate. Default: 4 (128 bits)
+             * @property {Hasher} hasher The hash algorithm to use. Default: MD5
+             * @property {number} iterations The number of iterations to perform. Default: 1
+             */
             cfg: Base.extend({
                 keySize: 128 / 32,
                 hasher: MD5,
                 iterations: 1
             }),
 
-	        /**
-	         * Initializes a newly created key derivation function.
-	         *
-	         * @param {Object} cfg (Optional) The configuration options to use for the derivation.
-	         *
-	         * @example
-	         *
-	         *     var kdf = CryptoJS.algo.EvpKDF.create();
-	         *     var kdf = CryptoJS.algo.EvpKDF.create({ keySize: 8 });
-	         *     var kdf = CryptoJS.algo.EvpKDF.create({ keySize: 8, iterations: 1000 });
-	         */
+            /**
+             * Initializes a newly created key derivation function.
+             *
+             * @param {Object} cfg (Optional) The configuration options to use for the derivation.
+             *
+             * @example
+             *
+             *     var kdf = CryptoJS.algo.EvpKDF.create();
+             *     var kdf = CryptoJS.algo.EvpKDF.create({ keySize: 8 });
+             *     var kdf = CryptoJS.algo.EvpKDF.create({ keySize: 8, iterations: 1000 });
+             */
             init: function (cfg) {
                 this.cfg = this.cfg.extend(cfg);
             },
 
-	        /**
-	         * Derives a key from a password.
-	         *
-	         * @param {WordArray|string} password The password.
-	         * @param {WordArray|string} salt A salt.
-	         *
-	         * @return {WordArray} The derived key.
-	         *
-	         * @example
-	         *
-	         *     var key = kdf.compute(password, salt);
-	         */
+            /**
+             * Derives a key from a password.
+             *
+             * @param {WordArray|string} password The password.
+             * @param {WordArray|string} salt A salt.
+             *
+             * @return {WordArray} The derived key.
+             *
+             * @example
+             *
+             *     var key = kdf.compute(password, salt);
+             */
             compute: function (password, salt) {
                 // Shortcut
                 var cfg = this.cfg;
@@ -2218,28 +2199,27 @@
             }
         });
 
-	    /**
-	     * Derives a key from a password.
-	     *
-	     * @param {WordArray|string} password The password.
-	     * @param {WordArray|string} salt A salt.
-	     * @param {Object} cfg (Optional) The configuration options to use for this computation.
-	     *
-	     * @return {WordArray} The derived key.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var key = CryptoJS.EvpKDF(password, salt);
-	     *     var key = CryptoJS.EvpKDF(password, salt, { keySize: 8 });
-	     *     var key = CryptoJS.EvpKDF(password, salt, { keySize: 8, iterations: 1000 });
-	     */
+        /**
+         * Derives a key from a password.
+         *
+         * @param {WordArray|string} password The password.
+         * @param {WordArray|string} salt A salt.
+         * @param {Object} cfg (Optional) The configuration options to use for this computation.
+         *
+         * @return {WordArray} The derived key.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var key = CryptoJS.EvpKDF(password, salt);
+         *     var key = CryptoJS.EvpKDF(password, salt, { keySize: 8 });
+         *     var key = CryptoJS.EvpKDF(password, salt, { keySize: 8, iterations: 1000 });
+         */
         C.EvpKDF = function (password, salt, cfg) {
             return EvpKDF.create(cfg).compute(password, salt);
         };
     }());
-
 
     (function () {
         // Shortcuts
@@ -2249,9 +2229,9 @@
         var C_algo = C.algo;
         var SHA256 = C_algo.SHA256;
 
-	    /**
-	     * SHA-224 hash algorithm.
-	     */
+        /**
+         * SHA-224 hash algorithm.
+         */
         var SHA224 = C_algo.SHA224 = SHA256.extend({
             _doReset: function () {
                 this._hash = new WordArray.init([
@@ -2269,39 +2249,38 @@
             }
         });
 
-	    /**
-	     * Shortcut function to the hasher's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     *
-	     * @return {WordArray} The hash.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hash = CryptoJS.SHA224('message');
-	     *     var hash = CryptoJS.SHA224(wordArray);
-	     */
+        /**
+         * Shortcut function to the hasher's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         *
+         * @return {WordArray} The hash.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hash = CryptoJS.SHA224('message');
+         *     var hash = CryptoJS.SHA224(wordArray);
+         */
         C.SHA224 = SHA256._createHelper(SHA224);
 
-	    /**
-	     * Shortcut function to the HMAC's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     * @param {WordArray|string} key The secret key.
-	     *
-	     * @return {WordArray} The HMAC.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hmac = CryptoJS.HmacSHA224(message, key);
-	     */
+        /**
+         * Shortcut function to the HMAC's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         * @param {WordArray|string} key The secret key.
+         *
+         * @return {WordArray} The HMAC.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hmac = CryptoJS.HmacSHA224(message, key);
+         */
         C.HmacSHA224 = SHA256._createHmacHelper(SHA224);
     }());
-
 
     (function (undefined) {
         // Shortcuts
@@ -2310,39 +2289,39 @@
         var Base = C_lib.Base;
         var X32WordArray = C_lib.WordArray;
 
-	    /**
-	     * x64 namespace.
-	     */
+        /**
+         * x64 namespace.
+         */
         var C_x64 = C.x64 = {};
 
-	    /**
-	     * A 64-bit word.
-	     */
+        /**
+         * A 64-bit word.
+         */
         var X64Word = C_x64.Word = Base.extend({
-	        /**
-	         * Initializes a newly created 64-bit word.
-	         *
-	         * @param {number} high The high 32 bits.
-	         * @param {number} low The low 32 bits.
-	         *
-	         * @example
-	         *
-	         *     var x64Word = CryptoJS.x64.Word.create(0x00010203, 0x04050607);
-	         */
+            /**
+             * Initializes a newly created 64-bit word.
+             *
+             * @param {number} high The high 32 bits.
+             * @param {number} low The low 32 bits.
+             *
+             * @example
+             *
+             *     var x64Word = CryptoJS.x64.Word.create(0x00010203, 0x04050607);
+             */
             init: function (high, low) {
                 this.high = high;
                 this.low = low;
             }
 
-	        /**
-	         * Bitwise NOTs this word.
-	         *
-	         * @return {X64Word} A new x64-Word object after negating.
-	         *
-	         * @example
-	         *
-	         *     var negated = x64Word.not();
-	         */
+            /**
+             * Bitwise NOTs this word.
+             *
+             * @return {X64Word} A new x64-Word object after negating.
+             *
+             * @example
+             *
+             *     var negated = x64Word.not();
+             */
             // not: function () {
             // var high = ~this.high;
             // var low = ~this.low;
@@ -2350,17 +2329,17 @@
             // return X64Word.create(high, low);
             // },
 
-	        /**
-	         * Bitwise ANDs this word with the passed word.
-	         *
-	         * @param {X64Word} word The x64-Word to AND with this word.
-	         *
-	         * @return {X64Word} A new x64-Word object after ANDing.
-	         *
-	         * @example
-	         *
-	         *     var anded = x64Word.and(anotherX64Word);
-	         */
+            /**
+             * Bitwise ANDs this word with the passed word.
+             *
+             * @param {X64Word} word The x64-Word to AND with this word.
+             *
+             * @return {X64Word} A new x64-Word object after ANDing.
+             *
+             * @example
+             *
+             *     var anded = x64Word.and(anotherX64Word);
+             */
             // and: function (word) {
             // var high = this.high & word.high;
             // var low = this.low & word.low;
@@ -2368,17 +2347,17 @@
             // return X64Word.create(high, low);
             // },
 
-	        /**
-	         * Bitwise ORs this word with the passed word.
-	         *
-	         * @param {X64Word} word The x64-Word to OR with this word.
-	         *
-	         * @return {X64Word} A new x64-Word object after ORing.
-	         *
-	         * @example
-	         *
-	         *     var ored = x64Word.or(anotherX64Word);
-	         */
+            /**
+             * Bitwise ORs this word with the passed word.
+             *
+             * @param {X64Word} word The x64-Word to OR with this word.
+             *
+             * @return {X64Word} A new x64-Word object after ORing.
+             *
+             * @example
+             *
+             *     var ored = x64Word.or(anotherX64Word);
+             */
             // or: function (word) {
             // var high = this.high | word.high;
             // var low = this.low | word.low;
@@ -2386,17 +2365,17 @@
             // return X64Word.create(high, low);
             // },
 
-	        /**
-	         * Bitwise XORs this word with the passed word.
-	         *
-	         * @param {X64Word} word The x64-Word to XOR with this word.
-	         *
-	         * @return {X64Word} A new x64-Word object after XORing.
-	         *
-	         * @example
-	         *
-	         *     var xored = x64Word.xor(anotherX64Word);
-	         */
+            /**
+             * Bitwise XORs this word with the passed word.
+             *
+             * @param {X64Word} word The x64-Word to XOR with this word.
+             *
+             * @return {X64Word} A new x64-Word object after XORing.
+             *
+             * @example
+             *
+             *     var xored = x64Word.xor(anotherX64Word);
+             */
             // xor: function (word) {
             // var high = this.high ^ word.high;
             // var low = this.low ^ word.low;
@@ -2404,17 +2383,17 @@
             // return X64Word.create(high, low);
             // },
 
-	        /**
-	         * Shifts this word n bits to the left.
-	         *
-	         * @param {number} n The number of bits to shift.
-	         *
-	         * @return {X64Word} A new x64-Word object after shifting.
-	         *
-	         * @example
-	         *
-	         *     var shifted = x64Word.shiftL(25);
-	         */
+            /**
+             * Shifts this word n bits to the left.
+             *
+             * @param {number} n The number of bits to shift.
+             *
+             * @return {X64Word} A new x64-Word object after shifting.
+             *
+             * @example
+             *
+             *     var shifted = x64Word.shiftL(25);
+             */
             // shiftL: function (n) {
             // if (n < 32) {
             // var high = (this.high << n) | (this.low >>> (32 - n));
@@ -2427,17 +2406,17 @@
             // return X64Word.create(high, low);
             // },
 
-	        /**
-	         * Shifts this word n bits to the right.
-	         *
-	         * @param {number} n The number of bits to shift.
-	         *
-	         * @return {X64Word} A new x64-Word object after shifting.
-	         *
-	         * @example
-	         *
-	         *     var shifted = x64Word.shiftR(7);
-	         */
+            /**
+             * Shifts this word n bits to the right.
+             *
+             * @param {number} n The number of bits to shift.
+             *
+             * @return {X64Word} A new x64-Word object after shifting.
+             *
+             * @example
+             *
+             *     var shifted = x64Word.shiftR(7);
+             */
             // shiftR: function (n) {
             // if (n < 32) {
             // var low = (this.low >>> n) | (this.high << (32 - n));
@@ -2450,47 +2429,47 @@
             // return X64Word.create(high, low);
             // },
 
-	        /**
-	         * Rotates this word n bits to the left.
-	         *
-	         * @param {number} n The number of bits to rotate.
-	         *
-	         * @return {X64Word} A new x64-Word object after rotating.
-	         *
-	         * @example
-	         *
-	         *     var rotated = x64Word.rotL(25);
-	         */
+            /**
+             * Rotates this word n bits to the left.
+             *
+             * @param {number} n The number of bits to rotate.
+             *
+             * @return {X64Word} A new x64-Word object after rotating.
+             *
+             * @example
+             *
+             *     var rotated = x64Word.rotL(25);
+             */
             // rotL: function (n) {
             // return this.shiftL(n).or(this.shiftR(64 - n));
             // },
 
-	        /**
-	         * Rotates this word n bits to the right.
-	         *
-	         * @param {number} n The number of bits to rotate.
-	         *
-	         * @return {X64Word} A new x64-Word object after rotating.
-	         *
-	         * @example
-	         *
-	         *     var rotated = x64Word.rotR(7);
-	         */
+            /**
+             * Rotates this word n bits to the right.
+             *
+             * @param {number} n The number of bits to rotate.
+             *
+             * @return {X64Word} A new x64-Word object after rotating.
+             *
+             * @example
+             *
+             *     var rotated = x64Word.rotR(7);
+             */
             // rotR: function (n) {
             // return this.shiftR(n).or(this.shiftL(64 - n));
             // },
 
-	        /**
-	         * Adds this word with the passed word.
-	         *
-	         * @param {X64Word} word The x64-Word to add with this word.
-	         *
-	         * @return {X64Word} A new x64-Word object after adding.
-	         *
-	         * @example
-	         *
-	         *     var added = x64Word.add(anotherX64Word);
-	         */
+            /**
+             * Adds this word with the passed word.
+             *
+             * @param {X64Word} word The x64-Word to add with this word.
+             *
+             * @return {X64Word} A new x64-Word object after adding.
+             *
+             * @example
+             *
+             *     var added = x64Word.add(anotherX64Word);
+             */
             // add: function (word) {
             // var low = (this.low + word.low) | 0;
             // var carry = (low >>> 0) < (this.low >>> 0) ? 1 : 0;
@@ -2500,33 +2479,33 @@
             // }
         });
 
-	    /**
-	     * An array of 64-bit words.
-	     *
-	     * @property {Array} words The array of CryptoJS.x64.Word objects.
-	     * @property {number} sigBytes The number of significant bytes in this word array.
-	     */
+        /**
+         * An array of 64-bit words.
+         *
+         * @property {Array} words The array of CryptoJS.x64.Word objects.
+         * @property {number} sigBytes The number of significant bytes in this word array.
+         */
         var X64WordArray = C_x64.WordArray = Base.extend({
-	        /**
-	         * Initializes a newly created word array.
-	         *
-	         * @param {Array} words (Optional) An array of CryptoJS.x64.Word objects.
-	         * @param {number} sigBytes (Optional) The number of significant bytes in the words.
-	         *
-	         * @example
-	         *
-	         *     var wordArray = CryptoJS.x64.WordArray.create();
-	         *
-	         *     var wordArray = CryptoJS.x64.WordArray.create([
-	         *         CryptoJS.x64.Word.create(0x00010203, 0x04050607),
-	         *         CryptoJS.x64.Word.create(0x18191a1b, 0x1c1d1e1f)
-	         *     ]);
-	         *
-	         *     var wordArray = CryptoJS.x64.WordArray.create([
-	         *         CryptoJS.x64.Word.create(0x00010203, 0x04050607),
-	         *         CryptoJS.x64.Word.create(0x18191a1b, 0x1c1d1e1f)
-	         *     ], 10);
-	         */
+            /**
+             * Initializes a newly created word array.
+             *
+             * @param {Array} words (Optional) An array of CryptoJS.x64.Word objects.
+             * @param {number} sigBytes (Optional) The number of significant bytes in the words.
+             *
+             * @example
+             *
+             *     var wordArray = CryptoJS.x64.WordArray.create();
+             *
+             *     var wordArray = CryptoJS.x64.WordArray.create([
+             *         CryptoJS.x64.Word.create(0x00010203, 0x04050607),
+             *         CryptoJS.x64.Word.create(0x18191a1b, 0x1c1d1e1f)
+             *     ]);
+             *
+             *     var wordArray = CryptoJS.x64.WordArray.create([
+             *         CryptoJS.x64.Word.create(0x00010203, 0x04050607),
+             *         CryptoJS.x64.Word.create(0x18191a1b, 0x1c1d1e1f)
+             *     ], 10);
+             */
             init: function (words, sigBytes) {
                 words = this.words = words || [];
 
@@ -2537,15 +2516,15 @@
                 }
             },
 
-	        /**
-	         * Converts this 64-bit word array to a 32-bit word array.
-	         *
-	         * @return {CryptoJS.lib.WordArray} This word array's data as a 32-bit word array.
-	         *
-	         * @example
-	         *
-	         *     var x32WordArray = x64WordArray.toX32();
-	         */
+            /**
+             * Converts this 64-bit word array to a 32-bit word array.
+             *
+             * @return {CryptoJS.lib.WordArray} This word array's data as a 32-bit word array.
+             *
+             * @example
+             *
+             *     var x32WordArray = x64WordArray.toX32();
+             */
             toX32: function () {
                 // Shortcuts
                 var x64Words = this.words;
@@ -2562,15 +2541,15 @@
                 return X32WordArray.create(x32Words, this.sigBytes);
             },
 
-	        /**
-	         * Creates a copy of this word array.
-	         *
-	         * @return {X64WordArray} The clone.
-	         *
-	         * @example
-	         *
-	         *     var clone = x64WordArray.clone();
-	         */
+            /**
+             * Creates a copy of this word array.
+             *
+             * @return {X64WordArray} The clone.
+             *
+             * @example
+             *
+             *     var clone = x64WordArray.clone();
+             */
             clone: function () {
                 var clone = Base.clone.call(this);
 
@@ -2587,7 +2566,6 @@
             }
         });
     }());
-
 
     (function (Math) {
         // Shortcuts
@@ -2661,18 +2639,18 @@
             }
         }());
 
-	    /**
-	     * SHA-3 hash algorithm.
-	     */
+        /**
+         * SHA-3 hash algorithm.
+         */
         var SHA3 = C_algo.SHA3 = Hasher.extend({
-	        /**
-	         * Configuration options.
-	         *
-	         * @property {number} outputLength
-	         *   The desired number of bits in the output hash.
-	         *   Only values permitted are: 224, 256, 384, 512.
-	         *   Default: 512
-	         */
+            /**
+             * Configuration options.
+             *
+             * @property {number} outputLength
+             *   The desired number of bits in the output hash.
+             *   Only values permitted are: 224, 256, 384, 512.
+             *   Default: 512
+             */
             cfg: Hasher.cfg.extend({
                 outputLength: 512
             }),
@@ -2860,39 +2838,38 @@
             }
         });
 
-	    /**
-	     * Shortcut function to the hasher's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     *
-	     * @return {WordArray} The hash.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hash = CryptoJS.SHA3('message');
-	     *     var hash = CryptoJS.SHA3(wordArray);
-	     */
+        /**
+         * Shortcut function to the hasher's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         *
+         * @return {WordArray} The hash.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hash = CryptoJS.SHA3('message');
+         *     var hash = CryptoJS.SHA3(wordArray);
+         */
         C.SHA3 = Hasher._createHelper(SHA3);
 
-	    /**
-	     * Shortcut function to the HMAC's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     * @param {WordArray|string} key The secret key.
-	     *
-	     * @return {WordArray} The HMAC.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hmac = CryptoJS.HmacSHA3(message, key);
-	     */
+        /**
+         * Shortcut function to the HMAC's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         * @param {WordArray|string} key The secret key.
+         *
+         * @return {WordArray} The HMAC.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hmac = CryptoJS.HmacSHA3(message, key);
+         */
         C.HmacSHA3 = Hasher._createHmacHelper(SHA3);
     }(Math));
-
 
     (function () {
         // Shortcuts
@@ -2960,9 +2937,9 @@
             }
         }());
 
-	    /**
-	     * SHA-512 hash algorithm.
-	     */
+        /**
+         * SHA-512 hash algorithm.
+         */
         var SHA512 = C_algo.SHA512 = Hasher.extend({
             _doReset: function () {
                 this._hash = new X64WordArray.init([
@@ -3165,39 +3142,38 @@
             blockSize: 1024 / 32
         });
 
-	    /**
-	     * Shortcut function to the hasher's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     *
-	     * @return {WordArray} The hash.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hash = CryptoJS.SHA512('message');
-	     *     var hash = CryptoJS.SHA512(wordArray);
-	     */
+        /**
+         * Shortcut function to the hasher's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         *
+         * @return {WordArray} The hash.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hash = CryptoJS.SHA512('message');
+         *     var hash = CryptoJS.SHA512(wordArray);
+         */
         C.SHA512 = Hasher._createHelper(SHA512);
 
-	    /**
-	     * Shortcut function to the HMAC's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     * @param {WordArray|string} key The secret key.
-	     *
-	     * @return {WordArray} The HMAC.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hmac = CryptoJS.HmacSHA512(message, key);
-	     */
+        /**
+         * Shortcut function to the HMAC's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         * @param {WordArray|string} key The secret key.
+         *
+         * @return {WordArray} The HMAC.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hmac = CryptoJS.HmacSHA512(message, key);
+         */
         C.HmacSHA512 = Hasher._createHmacHelper(SHA512);
     }());
-
 
     (function () {
         // Shortcuts
@@ -3208,9 +3184,9 @@
         var C_algo = C.algo;
         var SHA512 = C_algo.SHA512;
 
-	    /**
-	     * SHA-384 hash algorithm.
-	     */
+        /**
+         * SHA-384 hash algorithm.
+         */
         var SHA384 = C_algo.SHA384 = SHA512.extend({
             _doReset: function () {
                 this._hash = new X64WordArray.init([
@@ -3230,43 +3206,42 @@
             }
         });
 
-	    /**
-	     * Shortcut function to the hasher's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     *
-	     * @return {WordArray} The hash.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hash = CryptoJS.SHA384('message');
-	     *     var hash = CryptoJS.SHA384(wordArray);
-	     */
+        /**
+         * Shortcut function to the hasher's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         *
+         * @return {WordArray} The hash.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hash = CryptoJS.SHA384('message');
+         *     var hash = CryptoJS.SHA384(wordArray);
+         */
         C.SHA384 = SHA512._createHelper(SHA384);
 
-	    /**
-	     * Shortcut function to the HMAC's object interface.
-	     *
-	     * @param {WordArray|string} message The message to hash.
-	     * @param {WordArray|string} key The secret key.
-	     *
-	     * @return {WordArray} The HMAC.
-	     *
-	     * @static
-	     *
-	     * @example
-	     *
-	     *     var hmac = CryptoJS.HmacSHA384(message, key);
-	     */
+        /**
+         * Shortcut function to the HMAC's object interface.
+         *
+         * @param {WordArray|string} message The message to hash.
+         * @param {WordArray|string} key The secret key.
+         *
+         * @return {WordArray} The HMAC.
+         *
+         * @static
+         *
+         * @example
+         *
+         *     var hmac = CryptoJS.HmacSHA384(message, key);
+         */
         C.HmacSHA384 = SHA512._createHmacHelper(SHA384);
     }());
 
-
-	/**
-	 * Cipher core components.
-	 */
+    /**
+     * Cipher core components.
+     */
     CryptoJS.lib.Cipher || (function (undefined) {
         // Shortcuts
         var C = CryptoJS;
@@ -3280,69 +3255,69 @@
         var C_algo = C.algo;
         var EvpKDF = C_algo.EvpKDF;
 
-	    /**
-	     * Abstract base cipher template.
-	     *
-	     * @property {number} keySize This cipher's key size. Default: 4 (128 bits)
-	     * @property {number} ivSize This cipher's IV size. Default: 4 (128 bits)
-	     * @property {number} _ENC_XFORM_MODE A constant representing encryption mode.
-	     * @property {number} _DEC_XFORM_MODE A constant representing decryption mode.
-	     */
+        /**
+         * Abstract base cipher template.
+         *
+         * @property {number} keySize This cipher's key size. Default: 4 (128 bits)
+         * @property {number} ivSize This cipher's IV size. Default: 4 (128 bits)
+         * @property {number} _ENC_XFORM_MODE A constant representing encryption mode.
+         * @property {number} _DEC_XFORM_MODE A constant representing decryption mode.
+         */
         var Cipher = C_lib.Cipher = BufferedBlockAlgorithm.extend({
-	        /**
-	         * Configuration options.
-	         *
-	         * @property {WordArray} iv The IV to use for this operation.
-	         */
+            /**
+             * Configuration options.
+             *
+             * @property {WordArray} iv The IV to use for this operation.
+             */
             cfg: Base.extend(),
 
-	        /**
-	         * Creates this cipher in encryption mode.
-	         *
-	         * @param {WordArray} key The key.
-	         * @param {Object} cfg (Optional) The configuration options to use for this operation.
-	         *
-	         * @return {Cipher} A cipher instance.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var cipher = CryptoJS.algo.AES.createEncryptor(keyWordArray, { iv: ivWordArray });
-	         */
+            /**
+             * Creates this cipher in encryption mode.
+             *
+             * @param {WordArray} key The key.
+             * @param {Object} cfg (Optional) The configuration options to use for this operation.
+             *
+             * @return {Cipher} A cipher instance.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var cipher = CryptoJS.algo.AES.createEncryptor(keyWordArray, { iv: ivWordArray });
+             */
             createEncryptor: function (key, cfg) {
                 return this.create(this._ENC_XFORM_MODE, key, cfg);
             },
 
-	        /**
-	         * Creates this cipher in decryption mode.
-	         *
-	         * @param {WordArray} key The key.
-	         * @param {Object} cfg (Optional) The configuration options to use for this operation.
-	         *
-	         * @return {Cipher} A cipher instance.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var cipher = CryptoJS.algo.AES.createDecryptor(keyWordArray, { iv: ivWordArray });
-	         */
+            /**
+             * Creates this cipher in decryption mode.
+             *
+             * @param {WordArray} key The key.
+             * @param {Object} cfg (Optional) The configuration options to use for this operation.
+             *
+             * @return {Cipher} A cipher instance.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var cipher = CryptoJS.algo.AES.createDecryptor(keyWordArray, { iv: ivWordArray });
+             */
             createDecryptor: function (key, cfg) {
                 return this.create(this._DEC_XFORM_MODE, key, cfg);
             },
 
-	        /**
-	         * Initializes a newly created cipher.
-	         *
-	         * @param {number} xformMode Either the encryption or decryption transormation mode constant.
-	         * @param {WordArray} key The key.
-	         * @param {Object} cfg (Optional) The configuration options to use for this operation.
-	         *
-	         * @example
-	         *
-	         *     var cipher = CryptoJS.algo.AES.create(CryptoJS.algo.AES._ENC_XFORM_MODE, keyWordArray, { iv: ivWordArray });
-	         */
+            /**
+             * Initializes a newly created cipher.
+             *
+             * @param {number} xformMode Either the encryption or decryption transormation mode constant.
+             * @param {WordArray} key The key.
+             * @param {Object} cfg (Optional) The configuration options to use for this operation.
+             *
+             * @example
+             *
+             *     var cipher = CryptoJS.algo.AES.create(CryptoJS.algo.AES._ENC_XFORM_MODE, keyWordArray, { iv: ivWordArray });
+             */
             init: function (xformMode, key, cfg) {
                 // Apply config defaults
                 this.cfg = this.cfg.extend(cfg);
@@ -3355,13 +3330,13 @@
                 this.reset();
             },
 
-	        /**
-	         * Resets this cipher to its initial state.
-	         *
-	         * @example
-	         *
-	         *     cipher.reset();
-	         */
+            /**
+             * Resets this cipher to its initial state.
+             *
+             * @example
+             *
+             *     cipher.reset();
+             */
             reset: function () {
                 // Reset data buffer
                 BufferedBlockAlgorithm.reset.call(this);
@@ -3370,18 +3345,18 @@
                 this._doReset();
             },
 
-	        /**
-	         * Adds data to be encrypted or decrypted.
-	         *
-	         * @param {WordArray|string} dataUpdate The data to encrypt or decrypt.
-	         *
-	         * @return {WordArray} The data after processing.
-	         *
-	         * @example
-	         *
-	         *     var encrypted = cipher.process('data');
-	         *     var encrypted = cipher.process(wordArray);
-	         */
+            /**
+             * Adds data to be encrypted or decrypted.
+             *
+             * @param {WordArray|string} dataUpdate The data to encrypt or decrypt.
+             *
+             * @return {WordArray} The data after processing.
+             *
+             * @example
+             *
+             *     var encrypted = cipher.process('data');
+             *     var encrypted = cipher.process(wordArray);
+             */
             process: function (dataUpdate) {
                 // Append
                 this._append(dataUpdate);
@@ -3390,20 +3365,20 @@
                 return this._process();
             },
 
-	        /**
-	         * Finalizes the encryption or decryption process.
-	         * Note that the finalize operation is effectively a destructive, read-once operation.
-	         *
-	         * @param {WordArray|string} dataUpdate The final data to encrypt or decrypt.
-	         *
-	         * @return {WordArray} The data after final processing.
-	         *
-	         * @example
-	         *
-	         *     var encrypted = cipher.finalize();
-	         *     var encrypted = cipher.finalize('data');
-	         *     var encrypted = cipher.finalize(wordArray);
-	         */
+            /**
+             * Finalizes the encryption or decryption process.
+             * Note that the finalize operation is effectively a destructive, read-once operation.
+             *
+             * @param {WordArray|string} dataUpdate The final data to encrypt or decrypt.
+             *
+             * @return {WordArray} The data after final processing.
+             *
+             * @example
+             *
+             *     var encrypted = cipher.finalize();
+             *     var encrypted = cipher.finalize('data');
+             *     var encrypted = cipher.finalize(wordArray);
+             */
             finalize: function (dataUpdate) {
                 // Final data update
                 if (dataUpdate) {
@@ -3424,19 +3399,19 @@
 
             _DEC_XFORM_MODE: 2,
 
-	        /**
-	         * Creates shortcut functions to a cipher's object interface.
-	         *
-	         * @param {Cipher} cipher The cipher to create a helper for.
-	         *
-	         * @return {Object} An object with encrypt and decrypt shortcut functions.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var AES = CryptoJS.lib.Cipher._createHelper(CryptoJS.algo.AES);
-	         */
+            /**
+             * Creates shortcut functions to a cipher's object interface.
+             *
+             * @param {Cipher} cipher The cipher to create a helper for.
+             *
+             * @return {Object} An object with encrypt and decrypt shortcut functions.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var AES = CryptoJS.lib.Cipher._createHelper(CryptoJS.algo.AES);
+             */
             _createHelper: (function () {
                 function selectCipherStrategy(key) {
                     if (typeof key == 'string') {
@@ -3460,11 +3435,11 @@
             }())
         });
 
-	    /**
-	     * Abstract base stream cipher template.
-	     *
-	     * @property {number} blockSize The number of 32-bit words this cipher operates on. Default: 1 (32 bits)
-	     */
+        /**
+         * Abstract base stream cipher template.
+         *
+         * @property {number} blockSize The number of 32-bit words this cipher operates on. Default: 1 (32 bits)
+         */
         var StreamCipher = C_lib.StreamCipher = Cipher.extend({
             _doFinalize: function () {
                 // Process partial blocks
@@ -3476,86 +3451,86 @@
             blockSize: 1
         });
 
-	    /**
-	     * Mode namespace.
-	     */
+        /**
+         * Mode namespace.
+         */
         var C_mode = C.mode = {};
 
-	    /**
-	     * Abstract base block cipher mode template.
-	     */
+        /**
+         * Abstract base block cipher mode template.
+         */
         var BlockCipherMode = C_lib.BlockCipherMode = Base.extend({
-	        /**
-	         * Creates this mode for encryption.
-	         *
-	         * @param {Cipher} cipher A block cipher instance.
-	         * @param {Array} iv The IV words.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var mode = CryptoJS.mode.CBC.createEncryptor(cipher, iv.words);
-	         */
+            /**
+             * Creates this mode for encryption.
+             *
+             * @param {Cipher} cipher A block cipher instance.
+             * @param {Array} iv The IV words.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var mode = CryptoJS.mode.CBC.createEncryptor(cipher, iv.words);
+             */
             createEncryptor: function (cipher, iv) {
                 return this.Encryptor.create(cipher, iv);
             },
 
-	        /**
-	         * Creates this mode for decryption.
-	         *
-	         * @param {Cipher} cipher A block cipher instance.
-	         * @param {Array} iv The IV words.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var mode = CryptoJS.mode.CBC.createDecryptor(cipher, iv.words);
-	         */
+            /**
+             * Creates this mode for decryption.
+             *
+             * @param {Cipher} cipher A block cipher instance.
+             * @param {Array} iv The IV words.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var mode = CryptoJS.mode.CBC.createDecryptor(cipher, iv.words);
+             */
             createDecryptor: function (cipher, iv) {
                 return this.Decryptor.create(cipher, iv);
             },
 
-	        /**
-	         * Initializes a newly created mode.
-	         *
-	         * @param {Cipher} cipher A block cipher instance.
-	         * @param {Array} iv The IV words.
-	         *
-	         * @example
-	         *
-	         *     var mode = CryptoJS.mode.CBC.Encryptor.create(cipher, iv.words);
-	         */
+            /**
+             * Initializes a newly created mode.
+             *
+             * @param {Cipher} cipher A block cipher instance.
+             * @param {Array} iv The IV words.
+             *
+             * @example
+             *
+             *     var mode = CryptoJS.mode.CBC.Encryptor.create(cipher, iv.words);
+             */
             init: function (cipher, iv) {
                 this._cipher = cipher;
                 this._iv = iv;
             }
         });
 
-	    /**
-	     * Cipher Block Chaining mode.
-	     */
+        /**
+         * Cipher Block Chaining mode.
+         */
         var CBC = C_mode.CBC = (function () {
-	        /**
-	         * Abstract base CBC mode.
-	         */
+            /**
+             * Abstract base CBC mode.
+             */
             var CBC = BlockCipherMode.extend();
 
-	        /**
-	         * CBC encryptor.
-	         */
+            /**
+             * CBC encryptor.
+             */
             CBC.Encryptor = CBC.extend({
-	            /**
-	             * Processes the data block at offset.
-	             *
-	             * @param {Array} words The data words to operate on.
-	             * @param {number} offset The offset where the block starts.
-	             *
-	             * @example
-	             *
-	             *     mode.processBlock(data.words, offset);
-	             */
+                /**
+                 * Processes the data block at offset.
+                 *
+                 * @param {Array} words The data words to operate on.
+                 * @param {number} offset The offset where the block starts.
+                 *
+                 * @example
+                 *
+                 *     mode.processBlock(data.words, offset);
+                 */
                 processBlock: function (words, offset) {
                     // Shortcuts
                     var cipher = this._cipher;
@@ -3570,20 +3545,20 @@
                 }
             });
 
-	        /**
-	         * CBC decryptor.
-	         */
+            /**
+             * CBC decryptor.
+             */
             CBC.Decryptor = CBC.extend({
-	            /**
-	             * Processes the data block at offset.
-	             *
-	             * @param {Array} words The data words to operate on.
-	             * @param {number} offset The offset where the block starts.
-	             *
-	             * @example
-	             *
-	             *     mode.processBlock(data.words, offset);
-	             */
+                /**
+                 * Processes the data block at offset.
+                 *
+                 * @param {Array} words The data words to operate on.
+                 * @param {number} offset The offset where the block starts.
+                 *
+                 * @example
+                 *
+                 *     mode.processBlock(data.words, offset);
+                 */
                 processBlock: function (words, offset) {
                     // Shortcuts
                     var cipher = this._cipher;
@@ -3624,27 +3599,27 @@
             return CBC;
         }());
 
-	    /**
-	     * Padding namespace.
-	     */
+        /**
+         * Padding namespace.
+         */
         var C_pad = C.pad = {};
 
-	    /**
-	     * PKCS #5/7 padding strategy.
-	     */
+        /**
+         * PKCS #5/7 padding strategy.
+         */
         var Pkcs7 = C_pad.Pkcs7 = {
-	        /**
-	         * Pads data using the algorithm defined in PKCS #5/7.
-	         *
-	         * @param {WordArray} data The data to pad.
-	         * @param {number} blockSize The multiple that the data should be padded to.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     CryptoJS.pad.Pkcs7.pad(wordArray, 4);
-	         */
+            /**
+             * Pads data using the algorithm defined in PKCS #5/7.
+             *
+             * @param {WordArray} data The data to pad.
+             * @param {number} blockSize The multiple that the data should be padded to.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     CryptoJS.pad.Pkcs7.pad(wordArray, 4);
+             */
             pad: function (data, blockSize) {
                 // Shortcut
                 var blockSizeBytes = blockSize * 4;
@@ -3666,17 +3641,17 @@
                 data.concat(padding);
             },
 
-	        /**
-	         * Unpads data that had been padded using the algorithm defined in PKCS #5/7.
-	         *
-	         * @param {WordArray} data The data to unpad.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     CryptoJS.pad.Pkcs7.unpad(wordArray);
-	         */
+            /**
+             * Unpads data that had been padded using the algorithm defined in PKCS #5/7.
+             *
+             * @param {WordArray} data The data to unpad.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     CryptoJS.pad.Pkcs7.unpad(wordArray);
+             */
             unpad: function (data) {
                 // Get number of padding bytes from last byte
                 var nPaddingBytes = data.words[(data.sigBytes - 1) >>> 2] & 0xff;
@@ -3686,18 +3661,18 @@
             }
         };
 
-	    /**
-	     * Abstract base block cipher template.
-	     *
-	     * @property {number} blockSize The number of 32-bit words this cipher operates on. Default: 4 (128 bits)
-	     */
+        /**
+         * Abstract base block cipher template.
+         *
+         * @property {number} blockSize The number of 32-bit words this cipher operates on. Default: 4 (128 bits)
+         */
         var BlockCipher = C_lib.BlockCipher = Cipher.extend({
-	        /**
-	         * Configuration options.
-	         *
-	         * @property {Mode} mode The block mode to use. Default: CBC
-	         * @property {Padding} padding The padding strategy to use. Default: Pkcs7
-	         */
+            /**
+             * Configuration options.
+             *
+             * @property {Mode} mode The block mode to use. Default: CBC
+             * @property {Padding} padding The padding strategy to use. Default: Pkcs7
+             */
             cfg: Cipher.cfg.extend({
                 mode: CBC,
                 padding: Pkcs7
@@ -3758,85 +3733,85 @@
             blockSize: 128 / 32
         });
 
-	    /**
-	     * A collection of cipher parameters.
-	     *
-	     * @property {WordArray} ciphertext The raw ciphertext.
-	     * @property {WordArray} key The key to this ciphertext.
-	     * @property {WordArray} iv The IV used in the ciphering operation.
-	     * @property {WordArray} salt The salt used with a key derivation function.
-	     * @property {Cipher} algorithm The cipher algorithm.
-	     * @property {Mode} mode The block mode used in the ciphering operation.
-	     * @property {Padding} padding The padding scheme used in the ciphering operation.
-	     * @property {number} blockSize The block size of the cipher.
-	     * @property {Format} formatter The default formatting strategy to convert this cipher params object to a string.
-	     */
+        /**
+         * A collection of cipher parameters.
+         *
+         * @property {WordArray} ciphertext The raw ciphertext.
+         * @property {WordArray} key The key to this ciphertext.
+         * @property {WordArray} iv The IV used in the ciphering operation.
+         * @property {WordArray} salt The salt used with a key derivation function.
+         * @property {Cipher} algorithm The cipher algorithm.
+         * @property {Mode} mode The block mode used in the ciphering operation.
+         * @property {Padding} padding The padding scheme used in the ciphering operation.
+         * @property {number} blockSize The block size of the cipher.
+         * @property {Format} formatter The default formatting strategy to convert this cipher params object to a string.
+         */
         var CipherParams = C_lib.CipherParams = Base.extend({
-	        /**
-	         * Initializes a newly created cipher params object.
-	         *
-	         * @param {Object} cipherParams An object with any of the possible cipher parameters.
-	         *
-	         * @example
-	         *
-	         *     var cipherParams = CryptoJS.lib.CipherParams.create({
-	         *         ciphertext: ciphertextWordArray,
-	         *         key: keyWordArray,
-	         *         iv: ivWordArray,
-	         *         salt: saltWordArray,
-	         *         algorithm: CryptoJS.algo.AES,
-	         *         mode: CryptoJS.mode.CBC,
-	         *         padding: CryptoJS.pad.PKCS7,
-	         *         blockSize: 4,
-	         *         formatter: CryptoJS.format.OpenSSL
-	         *     });
-	         */
+            /**
+             * Initializes a newly created cipher params object.
+             *
+             * @param {Object} cipherParams An object with any of the possible cipher parameters.
+             *
+             * @example
+             *
+             *     var cipherParams = CryptoJS.lib.CipherParams.create({
+             *         ciphertext: ciphertextWordArray,
+             *         key: keyWordArray,
+             *         iv: ivWordArray,
+             *         salt: saltWordArray,
+             *         algorithm: CryptoJS.algo.AES,
+             *         mode: CryptoJS.mode.CBC,
+             *         padding: CryptoJS.pad.PKCS7,
+             *         blockSize: 4,
+             *         formatter: CryptoJS.format.OpenSSL
+             *     });
+             */
             init: function (cipherParams) {
                 this.mixIn(cipherParams);
             },
 
-	        /**
-	         * Converts this cipher params object to a string.
-	         *
-	         * @param {Format} formatter (Optional) The formatting strategy to use.
-	         *
-	         * @return {string} The stringified cipher params.
-	         *
-	         * @throws Error If neither the formatter nor the default formatter is set.
-	         *
-	         * @example
-	         *
-	         *     var string = cipherParams + '';
-	         *     var string = cipherParams.toString();
-	         *     var string = cipherParams.toString(CryptoJS.format.OpenSSL);
-	         */
+            /**
+             * Converts this cipher params object to a string.
+             *
+             * @param {Format} formatter (Optional) The formatting strategy to use.
+             *
+             * @return {string} The stringified cipher params.
+             *
+             * @throws Error If neither the formatter nor the default formatter is set.
+             *
+             * @example
+             *
+             *     var string = cipherParams + '';
+             *     var string = cipherParams.toString();
+             *     var string = cipherParams.toString(CryptoJS.format.OpenSSL);
+             */
             toString: function (formatter) {
                 return (formatter || this.formatter).stringify(this);
             }
         });
 
-	    /**
-	     * Format namespace.
-	     */
+        /**
+         * Format namespace.
+         */
         var C_format = C.format = {};
 
-	    /**
-	     * OpenSSL formatting strategy.
-	     */
+        /**
+         * OpenSSL formatting strategy.
+         */
         var OpenSSLFormatter = C_format.OpenSSL = {
-	        /**
-	         * Converts a cipher params object to an OpenSSL-compatible string.
-	         *
-	         * @param {CipherParams} cipherParams The cipher params object.
-	         *
-	         * @return {string} The OpenSSL-compatible string.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var openSSLString = CryptoJS.format.OpenSSL.stringify(cipherParams);
-	         */
+            /**
+             * Converts a cipher params object to an OpenSSL-compatible string.
+             *
+             * @param {CipherParams} cipherParams The cipher params object.
+             *
+             * @return {string} The OpenSSL-compatible string.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var openSSLString = CryptoJS.format.OpenSSL.stringify(cipherParams);
+             */
             stringify: function (cipherParams) {
                 // Shortcuts
                 var ciphertext = cipherParams.ciphertext;
@@ -3852,19 +3827,19 @@
                 return wordArray.toString(Base64);
             },
 
-	        /**
-	         * Converts an OpenSSL-compatible string to a cipher params object.
-	         *
-	         * @param {string} openSSLStr The OpenSSL-compatible string.
-	         *
-	         * @return {CipherParams} The cipher params object.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var cipherParams = CryptoJS.format.OpenSSL.parse(openSSLString);
-	         */
+            /**
+             * Converts an OpenSSL-compatible string to a cipher params object.
+             *
+             * @param {string} openSSLStr The OpenSSL-compatible string.
+             *
+             * @return {CipherParams} The cipher params object.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var cipherParams = CryptoJS.format.OpenSSL.parse(openSSLString);
+             */
             parse: function (openSSLStr) {
                 // Parse base64
                 var ciphertext = Base64.parse(openSSLStr);
@@ -3886,37 +3861,37 @@
             }
         };
 
-	    /**
-	     * A cipher wrapper that returns ciphertext as a serializable cipher params object.
-	     */
+        /**
+         * A cipher wrapper that returns ciphertext as a serializable cipher params object.
+         */
         var SerializableCipher = C_lib.SerializableCipher = Base.extend({
-	        /**
-	         * Configuration options.
-	         *
-	         * @property {Formatter} format The formatting strategy to convert cipher param objects to and from a string. Default: OpenSSL
-	         */
+            /**
+             * Configuration options.
+             *
+             * @property {Formatter} format The formatting strategy to convert cipher param objects to and from a string. Default: OpenSSL
+             */
             cfg: Base.extend({
                 format: OpenSSLFormatter
             }),
 
-	        /**
-	         * Encrypts a message.
-	         *
-	         * @param {Cipher} cipher The cipher algorithm to use.
-	         * @param {WordArray|string} message The message to encrypt.
-	         * @param {WordArray} key The key.
-	         * @param {Object} cfg (Optional) The configuration options to use for this operation.
-	         *
-	         * @return {CipherParams} A cipher params object.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var ciphertextParams = CryptoJS.lib.SerializableCipher.encrypt(CryptoJS.algo.AES, message, key);
-	         *     var ciphertextParams = CryptoJS.lib.SerializableCipher.encrypt(CryptoJS.algo.AES, message, key, { iv: iv });
-	         *     var ciphertextParams = CryptoJS.lib.SerializableCipher.encrypt(CryptoJS.algo.AES, message, key, { iv: iv, format: CryptoJS.format.OpenSSL });
-	         */
+            /**
+             * Encrypts a message.
+             *
+             * @param {Cipher} cipher The cipher algorithm to use.
+             * @param {WordArray|string} message The message to encrypt.
+             * @param {WordArray} key The key.
+             * @param {Object} cfg (Optional) The configuration options to use for this operation.
+             *
+             * @return {CipherParams} A cipher params object.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var ciphertextParams = CryptoJS.lib.SerializableCipher.encrypt(CryptoJS.algo.AES, message, key);
+             *     var ciphertextParams = CryptoJS.lib.SerializableCipher.encrypt(CryptoJS.algo.AES, message, key, { iv: iv });
+             *     var ciphertextParams = CryptoJS.lib.SerializableCipher.encrypt(CryptoJS.algo.AES, message, key, { iv: iv, format: CryptoJS.format.OpenSSL });
+             */
             encrypt: function (cipher, message, key, cfg) {
                 // Apply config defaults
                 cfg = this.cfg.extend(cfg);
@@ -3941,23 +3916,23 @@
                 });
             },
 
-	        /**
-	         * Decrypts serialized ciphertext.
-	         *
-	         * @param {Cipher} cipher The cipher algorithm to use.
-	         * @param {CipherParams|string} ciphertext The ciphertext to decrypt.
-	         * @param {WordArray} key The key.
-	         * @param {Object} cfg (Optional) The configuration options to use for this operation.
-	         *
-	         * @return {WordArray} The plaintext.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var plaintext = CryptoJS.lib.SerializableCipher.decrypt(CryptoJS.algo.AES, formattedCiphertext, key, { iv: iv, format: CryptoJS.format.OpenSSL });
-	         *     var plaintext = CryptoJS.lib.SerializableCipher.decrypt(CryptoJS.algo.AES, ciphertextParams, key, { iv: iv, format: CryptoJS.format.OpenSSL });
-	         */
+            /**
+             * Decrypts serialized ciphertext.
+             *
+             * @param {Cipher} cipher The cipher algorithm to use.
+             * @param {CipherParams|string} ciphertext The ciphertext to decrypt.
+             * @param {WordArray} key The key.
+             * @param {Object} cfg (Optional) The configuration options to use for this operation.
+             *
+             * @return {WordArray} The plaintext.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var plaintext = CryptoJS.lib.SerializableCipher.decrypt(CryptoJS.algo.AES, formattedCiphertext, key, { iv: iv, format: CryptoJS.format.OpenSSL });
+             *     var plaintext = CryptoJS.lib.SerializableCipher.decrypt(CryptoJS.algo.AES, ciphertextParams, key, { iv: iv, format: CryptoJS.format.OpenSSL });
+             */
             decrypt: function (cipher, ciphertext, key, cfg) {
                 // Apply config defaults
                 cfg = this.cfg.extend(cfg);
@@ -3971,21 +3946,21 @@
                 return plaintext;
             },
 
-	        /**
-	         * Converts serialized ciphertext to CipherParams,
-	         * else assumed CipherParams already and returns ciphertext unchanged.
-	         *
-	         * @param {CipherParams|string} ciphertext The ciphertext.
-	         * @param {Formatter} format The formatting strategy to use to parse serialized ciphertext.
-	         *
-	         * @return {CipherParams} The unserialized ciphertext.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var ciphertextParams = CryptoJS.lib.SerializableCipher._parse(ciphertextStringOrParams, format);
-	         */
+            /**
+             * Converts serialized ciphertext to CipherParams,
+             * else assumed CipherParams already and returns ciphertext unchanged.
+             *
+             * @param {CipherParams|string} ciphertext The ciphertext.
+             * @param {Formatter} format The formatting strategy to use to parse serialized ciphertext.
+             *
+             * @return {CipherParams} The unserialized ciphertext.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var ciphertextParams = CryptoJS.lib.SerializableCipher._parse(ciphertextStringOrParams, format);
+             */
             _parse: function (ciphertext, format) {
                 if (typeof ciphertext == 'string') {
                     return format.parse(ciphertext, this);
@@ -3995,32 +3970,32 @@
             }
         });
 
-	    /**
-	     * Key derivation function namespace.
-	     */
+        /**
+         * Key derivation function namespace.
+         */
         var C_kdf = C.kdf = {};
 
-	    /**
-	     * OpenSSL key derivation function.
-	     */
+        /**
+         * OpenSSL key derivation function.
+         */
         var OpenSSLKdf = C_kdf.OpenSSL = {
-	        /**
-	         * Derives a key and IV from a password.
-	         *
-	         * @param {string} password The password to derive from.
-	         * @param {number} keySize The size in words of the key to generate.
-	         * @param {number} ivSize The size in words of the IV to generate.
-	         * @param {WordArray|string} salt (Optional) A 64-bit salt to use. If omitted, a salt will be generated randomly.
-	         *
-	         * @return {CipherParams} A cipher params object with the key, IV, and salt.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var derivedParams = CryptoJS.kdf.OpenSSL.execute('Password', 256/32, 128/32);
-	         *     var derivedParams = CryptoJS.kdf.OpenSSL.execute('Password', 256/32, 128/32, 'saltsalt');
-	         */
+            /**
+             * Derives a key and IV from a password.
+             *
+             * @param {string} password The password to derive from.
+             * @param {number} keySize The size in words of the key to generate.
+             * @param {number} ivSize The size in words of the IV to generate.
+             * @param {WordArray|string} salt (Optional) A 64-bit salt to use. If omitted, a salt will be generated randomly.
+             *
+             * @return {CipherParams} A cipher params object with the key, IV, and salt.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var derivedParams = CryptoJS.kdf.OpenSSL.execute('Password', 256/32, 128/32);
+             *     var derivedParams = CryptoJS.kdf.OpenSSL.execute('Password', 256/32, 128/32, 'saltsalt');
+             */
             execute: function (password, keySize, ivSize, salt) {
                 // Generate random salt
                 if (!salt) {
@@ -4039,37 +4014,37 @@
             }
         };
 
-	    /**
-	     * A serializable cipher wrapper that derives the key from a password,
-	     * and returns ciphertext as a serializable cipher params object.
-	     */
+        /**
+         * A serializable cipher wrapper that derives the key from a password,
+         * and returns ciphertext as a serializable cipher params object.
+         */
         var PasswordBasedCipher = C_lib.PasswordBasedCipher = SerializableCipher.extend({
-	        /**
-	         * Configuration options.
-	         *
-	         * @property {KDF} kdf The key derivation function to use to generate a key and IV from a password. Default: OpenSSL
-	         */
+            /**
+             * Configuration options.
+             *
+             * @property {KDF} kdf The key derivation function to use to generate a key and IV from a password. Default: OpenSSL
+             */
             cfg: SerializableCipher.cfg.extend({
                 kdf: OpenSSLKdf
             }),
 
-	        /**
-	         * Encrypts a message using a password.
-	         *
-	         * @param {Cipher} cipher The cipher algorithm to use.
-	         * @param {WordArray|string} message The message to encrypt.
-	         * @param {string} password The password.
-	         * @param {Object} cfg (Optional) The configuration options to use for this operation.
-	         *
-	         * @return {CipherParams} A cipher params object.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var ciphertextParams = CryptoJS.lib.PasswordBasedCipher.encrypt(CryptoJS.algo.AES, message, 'password');
-	         *     var ciphertextParams = CryptoJS.lib.PasswordBasedCipher.encrypt(CryptoJS.algo.AES, message, 'password', { format: CryptoJS.format.OpenSSL });
-	         */
+            /**
+             * Encrypts a message using a password.
+             *
+             * @param {Cipher} cipher The cipher algorithm to use.
+             * @param {WordArray|string} message The message to encrypt.
+             * @param {string} password The password.
+             * @param {Object} cfg (Optional) The configuration options to use for this operation.
+             *
+             * @return {CipherParams} A cipher params object.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var ciphertextParams = CryptoJS.lib.PasswordBasedCipher.encrypt(CryptoJS.algo.AES, message, 'password');
+             *     var ciphertextParams = CryptoJS.lib.PasswordBasedCipher.encrypt(CryptoJS.algo.AES, message, 'password', { format: CryptoJS.format.OpenSSL });
+             */
             encrypt: function (cipher, message, password, cfg) {
                 // Apply config defaults
                 cfg = this.cfg.extend(cfg);
@@ -4089,23 +4064,23 @@
                 return ciphertext;
             },
 
-	        /**
-	         * Decrypts serialized ciphertext using a password.
-	         *
-	         * @param {Cipher} cipher The cipher algorithm to use.
-	         * @param {CipherParams|string} ciphertext The ciphertext to decrypt.
-	         * @param {string} password The password.
-	         * @param {Object} cfg (Optional) The configuration options to use for this operation.
-	         *
-	         * @return {WordArray} The plaintext.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var plaintext = CryptoJS.lib.PasswordBasedCipher.decrypt(CryptoJS.algo.AES, formattedCiphertext, 'password', { format: CryptoJS.format.OpenSSL });
-	         *     var plaintext = CryptoJS.lib.PasswordBasedCipher.decrypt(CryptoJS.algo.AES, ciphertextParams, 'password', { format: CryptoJS.format.OpenSSL });
-	         */
+            /**
+             * Decrypts serialized ciphertext using a password.
+             *
+             * @param {Cipher} cipher The cipher algorithm to use.
+             * @param {CipherParams|string} ciphertext The ciphertext to decrypt.
+             * @param {string} password The password.
+             * @param {Object} cfg (Optional) The configuration options to use for this operation.
+             *
+             * @return {WordArray} The plaintext.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var plaintext = CryptoJS.lib.PasswordBasedCipher.decrypt(CryptoJS.algo.AES, formattedCiphertext, 'password', { format: CryptoJS.format.OpenSSL });
+             *     var plaintext = CryptoJS.lib.PasswordBasedCipher.decrypt(CryptoJS.algo.AES, ciphertextParams, 'password', { format: CryptoJS.format.OpenSSL });
+             */
             decrypt: function (cipher, ciphertext, password, cfg) {
                 // Apply config defaults
                 cfg = this.cfg.extend(cfg);
@@ -4127,10 +4102,9 @@
         });
     }());
 
-
-	/**
-	 * Cipher Feedback block mode.
-	 */
+    /**
+     * Cipher Feedback block mode.
+     */
     CryptoJS.mode.CFB = (function () {
         var CFB = CryptoJS.lib.BlockCipherMode.extend();
 
@@ -4187,10 +4161,9 @@
         return CFB;
     }());
 
-
-	/**
-	 * Electronic Codebook block mode.
-	 */
+    /**
+     * Electronic Codebook block mode.
+     */
     CryptoJS.mode.ECB = (function () {
         var ECB = CryptoJS.lib.BlockCipherMode.extend();
 
@@ -4209,10 +4182,9 @@
         return ECB;
     }());
 
-
-	/**
-	 * ANSI X.923 padding strategy.
-	 */
+    /**
+     * ANSI X.923 padding strategy.
+     */
     CryptoJS.pad.AnsiX923 = {
         pad: function (data, blockSize) {
             // Shortcuts
@@ -4240,10 +4212,9 @@
         }
     };
 
-
-	/**
-	 * ISO 10126 padding strategy.
-	 */
+    /**
+     * ISO 10126 padding strategy.
+     */
     CryptoJS.pad.Iso10126 = {
         pad: function (data, blockSize) {
             // Shortcut
@@ -4266,10 +4237,9 @@
         }
     };
 
-
-	/**
-	 * ISO/IEC 9797-1 Padding Method 2.
-	 */
+    /**
+     * ISO/IEC 9797-1 Padding Method 2.
+     */
     CryptoJS.pad.Iso97971 = {
         pad: function (data, blockSize) {
             // Add 0x80 byte
@@ -4288,10 +4258,9 @@
         }
     };
 
-
-	/**
-	 * Output Feedback block mode.
-	 */
+    /**
+     * Output Feedback block mode.
+     */
     CryptoJS.mode.OFB = (function () {
         var OFB = CryptoJS.lib.BlockCipherMode.extend();
 
@@ -4324,10 +4293,9 @@
         return OFB;
     }());
 
-
-	/**
-	 * A noop padding strategy.
-	 */
+    /**
+     * A noop padding strategy.
+     */
     CryptoJS.pad.NoPadding = {
         pad: function () {
         },
@@ -4335,7 +4303,6 @@
         unpad: function () {
         }
     };
-
 
     (function (undefined) {
         // Shortcuts
@@ -4347,43 +4314,42 @@
         var C_format = C.format;
 
         var HexFormatter = C_format.Hex = {
-	        /**
-	         * Converts the ciphertext of a cipher params object to a hexadecimally encoded string.
-	         *
-	         * @param {CipherParams} cipherParams The cipher params object.
-	         *
-	         * @return {string} The hexadecimally encoded string.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var hexString = CryptoJS.format.Hex.stringify(cipherParams);
-	         */
+            /**
+             * Converts the ciphertext of a cipher params object to a hexadecimally encoded string.
+             *
+             * @param {CipherParams} cipherParams The cipher params object.
+             *
+             * @return {string} The hexadecimally encoded string.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var hexString = CryptoJS.format.Hex.stringify(cipherParams);
+             */
             stringify: function (cipherParams) {
                 return cipherParams.ciphertext.toString(Hex);
             },
 
-	        /**
-	         * Converts a hexadecimally encoded ciphertext string to a cipher params object.
-	         *
-	         * @param {string} input The hexadecimally encoded string.
-	         *
-	         * @return {CipherParams} The cipher params object.
-	         *
-	         * @static
-	         *
-	         * @example
-	         *
-	         *     var cipherParams = CryptoJS.format.Hex.parse(hexString);
-	         */
+            /**
+             * Converts a hexadecimally encoded ciphertext string to a cipher params object.
+             *
+             * @param {string} input The hexadecimally encoded string.
+             *
+             * @return {CipherParams} The cipher params object.
+             *
+             * @static
+             *
+             * @example
+             *
+             *     var cipherParams = CryptoJS.format.Hex.parse(hexString);
+             */
             parse: function (input) {
                 var ciphertext = Hex.parse(input);
                 return CipherParams.create({ ciphertext: ciphertext });
             }
         };
     }());
-
 
     (function () {
         // Shortcuts
@@ -4458,9 +4424,9 @@
         // Precomputed Rcon lookup
         var RCON = [0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36];
 
-	    /**
-	     * AES block cipher algorithm.
-	     */
+        /**
+         * AES block cipher algorithm.
+         */
         var AES = C_algo.AES = BlockCipher.extend({
             _doReset: function () {
                 // Skip reset of nRounds has been set before and key did not change
@@ -4587,17 +4553,16 @@
             keySize: 256 / 32
         });
 
-	    /**
-	     * Shortcut functions to the cipher's object interface.
-	     *
-	     * @example
-	     *
-	     *     var ciphertext = CryptoJS.AES.encrypt(message, key, cfg);
-	     *     var plaintext  = CryptoJS.AES.decrypt(ciphertext, key, cfg);
-	     */
+        /**
+         * Shortcut functions to the cipher's object interface.
+         *
+         * @example
+         *
+         *     var ciphertext = CryptoJS.AES.encrypt(message, key, cfg);
+         *     var plaintext  = CryptoJS.AES.decrypt(ciphertext, key, cfg);
+         */
         C.AES = BlockCipher._createHelper(AES);
     }());
-
 
     (function () {
         // Shortcuts
@@ -5171,9 +5136,9 @@
             0x0001f800, 0x00001f80, 0x000001f8, 0x8000001f
         ];
 
-	    /**
-	     * DES block cipher algorithm.
-	     */
+        /**
+         * DES block cipher algorithm.
+         */
         var DES = C_algo.DES = BlockCipher.extend({
             _doReset: function () {
                 // Shortcuts
@@ -5295,19 +5260,19 @@
             this._rBlock ^= t << offset;
         }
 
-	    /**
-	     * Shortcut functions to the cipher's object interface.
-	     *
-	     * @example
-	     *
-	     *     var ciphertext = CryptoJS.DES.encrypt(message, key, cfg);
-	     *     var plaintext  = CryptoJS.DES.decrypt(ciphertext, key, cfg);
-	     */
+        /**
+         * Shortcut functions to the cipher's object interface.
+         *
+         * @example
+         *
+         *     var ciphertext = CryptoJS.DES.encrypt(message, key, cfg);
+         *     var plaintext  = CryptoJS.DES.decrypt(ciphertext, key, cfg);
+         */
         C.DES = BlockCipher._createHelper(DES);
 
-	    /**
-	     * Triple-DES block cipher algorithm.
-	     */
+        /**
+         * Triple-DES block cipher algorithm.
+         */
         var TripleDES = C_algo.TripleDES = BlockCipher.extend({
             _doReset: function () {
                 // Shortcuts
@@ -5339,17 +5304,16 @@
             blockSize: 64 / 32
         });
 
-	    /**
-	     * Shortcut functions to the cipher's object interface.
-	     *
-	     * @example
-	     *
-	     *     var ciphertext = CryptoJS.TripleDES.encrypt(message, key, cfg);
-	     *     var plaintext  = CryptoJS.TripleDES.decrypt(ciphertext, key, cfg);
-	     */
+        /**
+         * Shortcut functions to the cipher's object interface.
+         *
+         * @example
+         *
+         *     var ciphertext = CryptoJS.TripleDES.encrypt(message, key, cfg);
+         *     var plaintext  = CryptoJS.TripleDES.decrypt(ciphertext, key, cfg);
+         */
         C.TripleDES = BlockCipher._createHelper(TripleDES);
     }());
-
 
     (function () {
         // Shortcuts
@@ -5358,9 +5322,9 @@
         var StreamCipher = C_lib.StreamCipher;
         var C_algo = C.algo;
 
-	    /**
-	     * RC4 stream cipher algorithm.
-	     */
+        /**
+         * RC4 stream cipher algorithm.
+         */
         var RC4 = C_algo.RC4 = StreamCipher.extend({
             _doReset: function () {
                 // Shortcuts
@@ -5427,25 +5391,25 @@
             return keystreamWord;
         }
 
-	    /**
-	     * Shortcut functions to the cipher's object interface.
-	     *
-	     * @example
-	     *
-	     *     var ciphertext = CryptoJS.RC4.encrypt(message, key, cfg);
-	     *     var plaintext  = CryptoJS.RC4.decrypt(ciphertext, key, cfg);
-	     */
+        /**
+         * Shortcut functions to the cipher's object interface.
+         *
+         * @example
+         *
+         *     var ciphertext = CryptoJS.RC4.encrypt(message, key, cfg);
+         *     var plaintext  = CryptoJS.RC4.decrypt(ciphertext, key, cfg);
+         */
         C.RC4 = StreamCipher._createHelper(RC4);
 
-	    /**
-	     * Modified RC4 stream cipher algorithm.
-	     */
+        /**
+         * Modified RC4 stream cipher algorithm.
+         */
         var RC4Drop = C_algo.RC4Drop = RC4.extend({
-	        /**
-	         * Configuration options.
-	         *
-	         * @property {number} drop The number of keystream words to drop. Default 192
-	         */
+            /**
+             * Configuration options.
+             *
+             * @property {number} drop The number of keystream words to drop. Default 192
+             */
             cfg: RC4.cfg.extend({
                 drop: 192
             }),
@@ -5460,23 +5424,22 @@
             }
         });
 
-	    /**
-	     * Shortcut functions to the cipher's object interface.
-	     *
-	     * @example
-	     *
-	     *     var ciphertext = CryptoJS.RC4Drop.encrypt(message, key, cfg);
-	     *     var plaintext  = CryptoJS.RC4Drop.decrypt(ciphertext, key, cfg);
-	     */
+        /**
+         * Shortcut functions to the cipher's object interface.
+         *
+         * @example
+         *
+         *     var ciphertext = CryptoJS.RC4Drop.encrypt(message, key, cfg);
+         *     var plaintext  = CryptoJS.RC4Drop.decrypt(ciphertext, key, cfg);
+         */
         C.RC4Drop = StreamCipher._createHelper(RC4Drop);
     }());
 
-
-	/** @preserve
-	 * Counter block mode compatible with  Dr Brian Gladman fileenc.c
-	 * derived from CryptoJS.mode.CTR
-	 * Jan Hruby jhruby.web@gmail.com
-	 */
+    /** @preserve
+     * Counter block mode compatible with  Dr Brian Gladman fileenc.c
+     * derived from CryptoJS.mode.CTR
+     * Jan Hruby jhruby.web@gmail.com
+     */
     CryptoJS.mode.CTRGladman = (function () {
         var CTRGladman = CryptoJS.lib.BlockCipherMode.extend();
 
@@ -5558,9 +5521,6 @@
         return CTRGladman;
     }());
 
-
-
-
     (function () {
         // Shortcuts
         var C = CryptoJS;
@@ -5573,9 +5533,9 @@
         var C_ = [];
         var G = [];
 
-	    /**
-	     * Rabbit stream cipher algorithm
-	     */
+        /**
+         * Rabbit stream cipher algorithm
+         */
         var Rabbit = C_algo.Rabbit = StreamCipher.extend({
             _doReset: function () {
                 // Shortcuts
@@ -5723,21 +5683,20 @@
             X[7] = (G[7] + ((G[6] << 8) | (G[6] >>> 24)) + G[5]) | 0;
         }
 
-	    /**
-	     * Shortcut functions to the cipher's object interface.
-	     *
-	     * @example
-	     *
-	     *     var ciphertext = CryptoJS.Rabbit.encrypt(message, key, cfg);
-	     *     var plaintext  = CryptoJS.Rabbit.decrypt(ciphertext, key, cfg);
-	     */
+        /**
+         * Shortcut functions to the cipher's object interface.
+         *
+         * @example
+         *
+         *     var ciphertext = CryptoJS.Rabbit.encrypt(message, key, cfg);
+         *     var plaintext  = CryptoJS.Rabbit.decrypt(ciphertext, key, cfg);
+         */
         C.Rabbit = StreamCipher._createHelper(Rabbit);
     }());
 
-
-	/**
-	 * Counter block mode.
-	 */
+    /**
+     * Counter block mode.
+     */
     CryptoJS.mode.CTR = (function () {
         var CTR = CryptoJS.lib.BlockCipherMode.extend();
 
@@ -5774,7 +5733,6 @@
         return CTR;
     }());
 
-
     (function () {
         // Shortcuts
         var C = CryptoJS;
@@ -5787,13 +5745,13 @@
         var C_ = [];
         var G = [];
 
-	    /**
-	     * Rabbit stream cipher algorithm.
-	     *
-	     * This is a legacy version that neglected to convert the key to little-endian.
-	     * This error doesn't affect the cipher's security,
-	     * but it does affect its compatibility with other implementations.
-	     */
+        /**
+         * Rabbit stream cipher algorithm.
+         *
+         * This is a legacy version that neglected to convert the key to little-endian.
+         * This error doesn't affect the cipher's security,
+         * but it does affect its compatibility with other implementations.
+         */
         var RabbitLegacy = C_algo.RabbitLegacy = StreamCipher.extend({
             _doReset: function () {
                 // Shortcuts
@@ -5935,21 +5893,20 @@
             X[7] = (G[7] + ((G[6] << 8) | (G[6] >>> 24)) + G[5]) | 0;
         }
 
-	    /**
-	     * Shortcut functions to the cipher's object interface.
-	     *
-	     * @example
-	     *
-	     *     var ciphertext = CryptoJS.RabbitLegacy.encrypt(message, key, cfg);
-	     *     var plaintext  = CryptoJS.RabbitLegacy.decrypt(ciphertext, key, cfg);
-	     */
+        /**
+         * Shortcut functions to the cipher's object interface.
+         *
+         * @example
+         *
+         *     var ciphertext = CryptoJS.RabbitLegacy.encrypt(message, key, cfg);
+         *     var plaintext  = CryptoJS.RabbitLegacy.decrypt(ciphertext, key, cfg);
+         */
         C.RabbitLegacy = StreamCipher._createHelper(RabbitLegacy);
     }());
 
-
-	/**
-	 * Zero padding strategy.
-	 */
+    /**
+     * Zero padding strategy.
+     */
     CryptoJS.pad.ZeroPadding = {
         pad: function (data, blockSize) {
             // Shortcut
@@ -5973,7 +5930,5 @@
         }
     };
 
-
     return CryptoJS;
-
 }));

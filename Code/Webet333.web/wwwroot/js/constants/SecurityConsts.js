@@ -12,4 +12,3 @@ function enc(plaintext) {
         return null
     return CryptoJS.AES.encrypt(plaintext, key);
 }
-

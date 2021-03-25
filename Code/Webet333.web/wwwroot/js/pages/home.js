@@ -5,7 +5,6 @@ $(document).ready(function () {
         getReference();
         ContactDetails();
         if (GetLocalStorage('currentUser') !== null) {
-
             var div = document.getElementById("beforelogin");
             div.parentNode.removeChild(div);
             GetUser();
@@ -179,7 +178,6 @@ function SetDefaultLanguage(ddlLanguages) {
 }
 
 function getLanguage() {
-
     //document.getElementById("flag").attributes.src=
     (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
     (GetLocalStorage('currentUser') === null) ? $('#afterlogin').css('display', 'none') : $('#beforelogin').css('display', 'none');
@@ -299,7 +297,6 @@ async function GetUser() {
 //#endregion
 
 async function CheckGameInMaintenance(gameName) {
-
     var walletName;
     if (gameName == "M8")
         walletName = "M8 Wallet";
@@ -352,7 +349,6 @@ async function GameInMaintenance(i) {
     if (i == 0)
         walletData = await GetMethodWithReturn(apiEndPoints.walletSelect);
     for (i = 0; i < walletData.data.length; i++) {
-
         if (walletData.data[i].walletType == "AG Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('aglive').style.filter = "grayscale(1)";
             document.getElementById('agslot').style.filter = "grayscale(1)";
@@ -632,7 +628,6 @@ async function logingGame(gameName) {
         }
 
         if (gameName == "MaxBet" || gameName == "M8") {
-
             GameLogin(gameName);
         }
         else {
@@ -645,7 +640,6 @@ async function logingGame(gameName) {
     else {
         alert("Please Login");
     }
-
 }
 
 //#region For Playtech game login
@@ -654,7 +648,6 @@ function loadingPlaytechJS() {
     imported.src = 'https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88'
     document.head.appendChild(imported);
 }
-
 
 async function loginPlaytech() {
     var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
@@ -727,7 +720,6 @@ async function PlaytechIdentifiy(Slotvalue) {
 
 //#region GameLogin
 function randomString() {
-
     var charsetOne = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetTwo = 'abcdefghiklmnopqrstuvwxyz', charsetThree = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetFour = '0123456789', randomstring = '', i = 0;
 
     for (i = 0; i < 3; i++) {
@@ -792,16 +784,12 @@ async function onclickSet(i) {
     }
 }
 
-
 async function GameLogin(gamename) {
     LoaderShow();
     if (GetLocalStorage('currentUser') !== null) {
-
         var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
         var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
         let resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
-
-
 
         if (userDetails == null) {
             var res = await GetMethod(apiEndPoints.getProfile);
@@ -1005,31 +993,25 @@ async function GameLogin(gamename) {
                     var res918Kiss = await PostMethod(apiEndPoints.register918Kiss, model918Kiss);
                     if (res918Kiss.data.code == 0)
                         window.location.href = "/Information/Download";
-
                 }
                 else {
                     window.location.href = "/Information/Download";
-
                 }
                 break;
             case 'Pussy888':
                 LoaderShow();
                 if (resSelectUser.data.Pussy888 !== true) {
                     var model = {
-
                     }
                     try {
                         var res = await PostMethodWithParameter(apiEndPoints.pussyRegister, model);
                     }
                     catch {
-
                     }
                     window.location.href = "/Information/Download#Pussy888Download";
-
                 }
                 else {
                     window.location.href = "/Information/Download#Pussy888Download";
-
                 }
                 break;
             case 'Joker':
@@ -1060,7 +1042,6 @@ async function GameLogin(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.Mega888 !== true) {
                     var userMegaa88Model = {
-
                     }
 
                     var res = await PostMethod(apiEndPoints.mega888Register, userMegaa88Model);
@@ -1078,7 +1059,6 @@ async function GameLogin(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.DG !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.dgRegister, userRegisterModel);
                     if (res.data.codeId == 0) {
@@ -1090,7 +1070,6 @@ async function GameLogin(gamename) {
                 }
                 else {
                     var Model = {
-
                     }
                     var login = await PostMethod(apiEndPoints.dgLogin, Model);
                     if (login.data.codeId == 0)
@@ -1102,7 +1081,6 @@ async function GameLogin(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.SexyBaccarat !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.sexyRegister, userRegisterModel);
                     if (res.data.status == "0000") {
@@ -1127,7 +1105,6 @@ async function GameLogin(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.SA !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.saRegister, userRegisterModel);
                     if (res.data.status == "0") {
@@ -1154,7 +1131,6 @@ async function GameLogin(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.AllBet !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.allBetRegister, userRegisterModel);
                     if (res.data.error_code == "OK") {
@@ -1179,7 +1155,6 @@ async function GameLogin(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.WM !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.WMRegister, userRegisterModel);
                     if (res.data.errorCode == 0) {
@@ -1204,7 +1179,6 @@ async function GameLogin(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.Pragmatic !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.pragmaticRegister, userRegisterModel);
                     if (res.data.error == "0") {
@@ -1337,7 +1311,6 @@ function getGameImage() {
                 }
             }
         }
-
     });
 
     $.ajax({
@@ -1393,7 +1366,6 @@ function LoaderHide() {
 async function whatsapp() {
     window.open('https://api.whatsapp.com/send?phone=60135558826&text=Claim%20and%20Join', '_blank');
 }
-
 
 //#region setCookie
 function setCookie(cname, cvalue, exdays) {

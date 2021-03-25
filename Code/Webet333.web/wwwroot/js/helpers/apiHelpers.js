@@ -14,7 +14,7 @@
         url: baseUrl + endPoint,
         beforeSend: function () {
             // setting a timeout
-            $(window).load(function(){
+            $(window).load(function () {
                 $(".loadingImage").fadeOut("slow");
             });
         }
@@ -56,7 +56,7 @@ function PostMethodRegister(endPoint, model) {
         return res;
     }).fail(function (err) {
         if (err.responseJSON !== null && err.responseJSON !== undefined)
-        ShowError(err.responseJSON.message);
+            ShowError(err.responseJSON.message);
         LoaderHide();
     });
 }
@@ -92,7 +92,7 @@ async function PostMethodWithParameter(endPoint, model) {
             'Accept-Language': GetLocalStorage('language')
         },
         url: baseUrl + endPoint
-    }).then(await  function (res) {
+    }).then(await function (res) {
         return res;
     }).fail(await function (err) {
         return err.responseText;
@@ -137,7 +137,6 @@ function GetMethod(endPoint) {
         },
         url: baseUrl + endPoint
     }).then(function (res) {
-        
         return res;
     }).fail(function (err) {
         if (err.responseJSON !== null && err.responseJSON !== undefined)
@@ -214,7 +213,6 @@ function PlaytechPostMethod(endPoint) {
             },
             url: 'http://api.webet333.com/api/Default/playtech'
         }).then(function (res) {
-
             try {
                 var tosend = JSON.parse(res);
                 tosend["error"] = false;
@@ -223,7 +221,6 @@ function PlaytechPostMethod(endPoint) {
             catch (e) {
                 resolve(res);
             }
-
         }).fail(function (err) {
             reject({
                 "error": true,
@@ -305,7 +302,7 @@ function _918KissPostMethod(endPoint) {
 
 //#region MaxBet
 
-function MaxBetPostMethod(endPoint,model) {
+function MaxBetPostMethod(endPoint, model) {
     var apiURL = baseUrl + endPoint;
     return new Promise(function (resolve, reject) {
         $.ajax({
@@ -402,7 +399,7 @@ function GameBalancePostMethod(endPoint, model) {
         url: baseUrl + endPoint,
         beforeSend: function () {
             // setting a timeout
-            $(window).load(function(){
+            $(window).load(function () {
                 $(".loadingImage").fadeOut("slow");
             });
         }
@@ -410,6 +407,5 @@ function GameBalancePostMethod(endPoint, model) {
         return res;
     });
 }
-
 
 //#endregion game Balance

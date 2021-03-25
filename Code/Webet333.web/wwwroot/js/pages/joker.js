@@ -22,7 +22,7 @@ function getImage() {
                             '<a href="/Information/SlotGame" target="_blank">' +
                             '<div class="info-card slotgames">' +
                             '<div class="front">' +
-                        '<div style="background-image: url(http://images.webet333.com/all_joker_games/' + json[i].front_image + ');" class="rolex-game hover"><a class="fancybox" href="http://images.webet333.com/all_joker_games/' + json[i].front_image + '"><p class="white-text text-center big-text">' + json[i].name + '</p></a></div>' +
+                            '<div style="background-image: url(http://images.webet333.com/all_joker_games/' + json[i].front_image + ');" class="rolex-game hover"><a class="fancybox" href="http://images.webet333.com/all_joker_games/' + json[i].front_image + '"><p class="white-text text-center big-text">' + json[i].name + '</p></a></div>' +
                             '</div>' +
                             '<div class="back">' +
                             '<img class="img-responsive" src="http://images.webet333.com/all_joker_games/' + json[i].back_image + '">' +
@@ -37,7 +37,7 @@ function getImage() {
                             '<div class="col-xs-6 col-md-3">' +
                             '<div class="info-card slotgames">' +
                             '<div class="front">' +
-                        '<div style="background-image: url(http://images.webet333.com/all_joker_games/' + json[i].front_image + ');" class="rolex-game hover"><a class="fancybox" href="http://images.webet333.com/all_joker_games/' + json[i].front_image + '"><p class="white-text text-center big-text">' + json[i].name + '</p></a></div>' +
+                            '<div style="background-image: url(http://images.webet333.com/all_joker_games/' + json[i].front_image + ');" class="rolex-game hover"><a class="fancybox" href="http://images.webet333.com/all_joker_games/' + json[i].front_image + '"><p class="white-text text-center big-text">' + json[i].name + '</p></a></div>' +
                             '</div>' +
                             '<div class="back">' +
                             '<img class="img-responsive" src="http://images.webet333.com/all_joker_games/' + json[i].back_image + '">' +
@@ -45,7 +45,6 @@ function getImage() {
                             '</div>' +
                             '</div>';
                 }
-
             }
         }
     });
