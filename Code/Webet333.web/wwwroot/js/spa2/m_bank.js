@@ -3,7 +3,7 @@ $(document).ready(function () {
     //if (GetLocalStorage('currentUser') !== null) {
     //    BankList();
     //    UserBankDetails();
-        GetProfile();
+    GetProfile();
     //}
 });
 //#endregion
@@ -124,61 +124,61 @@ async function BankList() {
 
     //if (res !== null && res !== undefined) {
 
-        //var DepsoitBankList = document.getElementById("Deposit_bank_list");
-        //var name = res.data.bankDetails;
-        //depositMethodId = res.data.depositMethods.filter(x => x.method == 'Bank Transfer')[0].id;
-        //var firstSelect = true;
-        //if (DepsoitBankList != null)
-        //    $.each(name, function () {
-        //        if (firstSelect) {
-        //            DepsoitBankList.innerHTML += '<li onclick="LiSelectDepositFunction(\'' + this.id + '\',\'' + this.accountName + '\',\'' + this.accountNo + '\')" id="' + this.id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + this.id + '"/><label for="' + this.id + '" title="state" class="bank-list-deposit blk-text"><figure><img class="icon-bank-info" src="' + this.bankIconLogo + '" alt="Maybank" /></figure><p>' + this.bankName + '</p></label></li>';
-        //            firstSelect = false;
-        //            LiSelectDepositFunction(this.id, this.accountName, this.accountNo);
-        //        }
-        //        else {
-        //            DepsoitBankList.innerHTML += '<li onclick="LiSelectDepositFunction(\'' + this.id + '\',\'' + this.accountName + '\',\'' + this.accountNo + '\')" id="' + this.id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + this.id + '"/><label for="' + this.id + '" title="state" class="bank-list-deposit blk-text"><figure><img class="icon-bank-info" src="' + this.bankIconLogo + '" alt="Maybank" /></figure><p>' + this.bankName + '</p></label></li>';
+    //var DepsoitBankList = document.getElementById("Deposit_bank_list");
+    //var name = res.data.bankDetails;
+    //depositMethodId = res.data.depositMethods.filter(x => x.method == 'Bank Transfer')[0].id;
+    //var firstSelect = true;
+    //if (DepsoitBankList != null)
+    //    $.each(name, function () {
+    //        if (firstSelect) {
+    //            DepsoitBankList.innerHTML += '<li onclick="LiSelectDepositFunction(\'' + this.id + '\',\'' + this.accountName + '\',\'' + this.accountNo + '\')" id="' + this.id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + this.id + '"/><label for="' + this.id + '" title="state" class="bank-list-deposit blk-text"><figure><img class="icon-bank-info" src="' + this.bankIconLogo + '" alt="Maybank" /></figure><p>' + this.bankName + '</p></label></li>';
+    //            firstSelect = false;
+    //            LiSelectDepositFunction(this.id, this.accountName, this.accountNo);
+    //        }
+    //        else {
+    //            DepsoitBankList.innerHTML += '<li onclick="LiSelectDepositFunction(\'' + this.id + '\',\'' + this.accountName + '\',\'' + this.accountNo + '\')" id="' + this.id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + this.id + '"/><label for="' + this.id + '" title="state" class="bank-list-deposit blk-text"><figure><img class="icon-bank-info" src="' + this.bankIconLogo + '" alt="Maybank" /></figure><p>' + this.bankName + '</p></label></li>';
 
-        //        }
-        //    });
+    //        }
+    //    });
 
-        //var wallet = res.data.walletTypes;
-        //allWalletList = res.data.walletTypes;
-        //$.each(wallet, function () {
-        //    $("#ddl_transferFromWallet").append($("<option />").val(this.id).text(this.walletType));
-        //});
+    //var wallet = res.data.walletTypes;
+    //allWalletList = res.data.walletTypes;
+    //$.each(wallet, function () {
+    //    $("#ddl_transferFromWallet").append($("<option />").val(this.id).text(this.walletType));
+    //});
 
-        //var x = screen.width;
-        //var model = {
-        //    id: null,
-        //    ismobile: true
-        //};
-        //var resPanel = await PostMethodWithParameter(apiEndPoints.promotionsDailyList, model);
-        //var promotion = resPanel.data;
-        //var promotionList = document.getElementById('promotion');
-        //var promotionInfo = document.getElementById('promotionInfo');
-        //var onlinePromotionList = document.getElementById('onlinePromotion');
-        //if (promotionList !== null) {
-        //    for (l = 0; l < promotion.length; l++) {
+    //var x = screen.width;
+    //var model = {
+    //    id: null,
+    //    ismobile: true
+    //};
+    //var resPanel = await PostMethodWithParameter(apiEndPoints.promotionsDailyList, model);
+    //var promotion = resPanel.data;
+    //var promotionList = document.getElementById('promotion');
+    //var promotionInfo = document.getElementById('promotionInfo');
+    //var onlinePromotionList = document.getElementById('onlinePromotion');
+    //if (promotionList !== null) {
+    //    for (l = 0; l < promotion.length; l++) {
 
-        //        promotionList.innerHTML += '<li class="mar-btm-ten border" id=\'' + promotion[l].id + '\' onclick="LiSelectPromotion(\'' + promotion[l].id + '\')"><input type="radio" name="promotion" id="promotionId" value=\'' + promotion[l].id + '\'/><label><div class="promotion-content" for="rad1"><img class="full-img" src=\'' + promotion[l].bannerImage + '\' /><div class="deposit-promotion-details"><span class="fa fa-question-circle question-mark" data-toggle="modal" data-target="#promotionDetails" onclick="PromotionDetails(\'' + promotion[l].id + 'D' + '\')" style="margin-right:10px;"></span><p class="no-mar">' + promotion[l].promotionTitle + '</p></div></div></label></li>';
-        //        promotionInfo.innerHTML += '<div id=\'' + promotion[l].id + 'D' + '\' style="display:none;">' + promotion[l].description + '</div>';
-        //        onlinePromotionList.innerHTML += '<li class="mar-btm-ten border" id=\'online-' + promotion[l].id + '\' onclick="LiSelectPromotion(\'' + promotion[l].id + '\',true)"><input type="radio" name="promotion" id="promotionId" value=\'' + promotion[l].id + '\'/><label><div class="promotion-content" for="rad1"><img class="full-img" src=\'' + promotion[l].bannerImage + '\' /><div class="deposit-promotion-details"><span class="fa fa-question-circle question-mark" data-toggle="modal" data-target="#promotionDetails" onclick="PromotionDetails(\'' + promotion[l].id + 'D' + '\')" style="margin-right:10px;"></span><p class="no-mar">' + promotion[l].promotionTitle + '</p></div></div></label></li>';
-        //    }
-        //}
+    //        promotionList.innerHTML += '<li class="mar-btm-ten border" id=\'' + promotion[l].id + '\' onclick="LiSelectPromotion(\'' + promotion[l].id + '\')"><input type="radio" name="promotion" id="promotionId" value=\'' + promotion[l].id + '\'/><label><div class="promotion-content" for="rad1"><img class="full-img" src=\'' + promotion[l].bannerImage + '\' /><div class="deposit-promotion-details"><span class="fa fa-question-circle question-mark" data-toggle="modal" data-target="#promotionDetails" onclick="PromotionDetails(\'' + promotion[l].id + 'D' + '\')" style="margin-right:10px;"></span><p class="no-mar">' + promotion[l].promotionTitle + '</p></div></div></label></li>';
+    //        promotionInfo.innerHTML += '<div id=\'' + promotion[l].id + 'D' + '\' style="display:none;">' + promotion[l].description + '</div>';
+    //        onlinePromotionList.innerHTML += '<li class="mar-btm-ten border" id=\'online-' + promotion[l].id + '\' onclick="LiSelectPromotion(\'' + promotion[l].id + '\',true)"><input type="radio" name="promotion" id="promotionId" value=\'' + promotion[l].id + '\'/><label><div class="promotion-content" for="rad1"><img class="full-img" src=\'' + promotion[l].bannerImage + '\' /><div class="deposit-promotion-details"><span class="fa fa-question-circle question-mark" data-toggle="modal" data-target="#promotionDetails" onclick="PromotionDetails(\'' + promotion[l].id + 'D' + '\')" style="margin-right:10px;"></span><p class="no-mar">' + promotion[l].promotionTitle + '</p></div></div></label></li>';
+    //    }
+    //}
 
-        //var withdrawBankList = document.getElementById('withdraw_bank_list');
-        //var BankList = await GetMethod(apiEndPoints.bank);
-        //bankList = BankList.data;
-        //if (withdrawBankList != null) {
-        //    for (i = 0; i < BankList.data.length; i++) {
-        //        if (UserBankName != BankList.data[i].bankName)
-        //            withdrawBankList.innerHTML += '<li onclick="LISlectFunction(\'' + BankList.data[i].id + '\',\'' + BankList.data[i].bankName + '\')" id="' + BankList.data[i].id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + BankList.data[i].id + '"/><label for="' + BankList.data[i].id + '" title="state"><figure><img class="icon-bank-info" src="' + BankList.data[i].Logo + '" alt="Maybank" /></figure><p>' + BankList.data[i].bankName + '</p></label></li>';
-        //        else {
-        //            withdrawBankList.innerHTML += '<li class="active" onclick="LISlectFunction(\'' + BankList.data[i].id + '\',\'' + BankList.data[i].bankName + '\')" id="' + BankList.data[i].id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + BankList.data[i].id + '"/><label for="' + BankList.data[i].id + '" title="state"><figure><img class="icon-bank-info" src="' + BankList.data[i].Logo + '" alt="Maybank" /></figure><p>' + BankList.data[i].bankName + '</p></label></li>';
-        //            LISlectFunction(BankList.data[i].id, BankList.data[i].bankName);
-        //        }
-        //    }
-        //}
+    //var withdrawBankList = document.getElementById('withdraw_bank_list');
+    //var BankList = await GetMethod(apiEndPoints.bank);
+    //bankList = BankList.data;
+    //if (withdrawBankList != null) {
+    //    for (i = 0; i < BankList.data.length; i++) {
+    //        if (UserBankName != BankList.data[i].bankName)
+    //            withdrawBankList.innerHTML += '<li onclick="LISlectFunction(\'' + BankList.data[i].id + '\',\'' + BankList.data[i].bankName + '\')" id="' + BankList.data[i].id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + BankList.data[i].id + '"/><label for="' + BankList.data[i].id + '" title="state"><figure><img class="icon-bank-info" src="' + BankList.data[i].Logo + '" alt="Maybank" /></figure><p>' + BankList.data[i].bankName + '</p></label></li>';
+    //        else {
+    //            withdrawBankList.innerHTML += '<li class="active" onclick="LISlectFunction(\'' + BankList.data[i].id + '\',\'' + BankList.data[i].bankName + '\')" id="' + BankList.data[i].id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + BankList.data[i].id + '"/><label for="' + BankList.data[i].id + '" title="state"><figure><img class="icon-bank-info" src="' + BankList.data[i].Logo + '" alt="Maybank" /></figure><p>' + BankList.data[i].bankName + '</p></label></li>';
+    //            LISlectFunction(BankList.data[i].id, BankList.data[i].bankName);
+    //        }
+    //    }
+    //}
     //}
 }
 //#endregion
@@ -865,34 +865,46 @@ function generateGuid() {
 }
 //#endregion
 
-//#region DepositHistory
-async function DepositHistory(pageNo=1) {
+var pageSize = 10;
+var pageNumber = 1;
+var NumberOfLine = 1
 
+//#region DepositHistory
+async function DepositHistory(pageNo = 1) {
+    console.log("start call " + pageNo);
     var model = {
         pageNo: pageNo,
-        pageSize: 20
+        pageSize: pageNo == 1 ? 20 : 5
     };
     var res = await PostMethod(apiEndPoints.depositHistory, model);
     var result = res.data.result;
     var depositHistory = document.getElementById("depositHistory");
-    depositHistory.innerHTML = "";
-    if (result.length > 0) {
-        for (i = 0; i < result.length; i++) {
-            if (result[i].verified === "approved")
-                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
+    if (pageNo == 1) {
+        pageNumber = 1;
+        depositHistory.innerHTML = "";
+    }
+    setTimeout(function () {
+        if (result.length > 0) {
 
-            if (result[i].verified === "rejected")
-                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn reject-btn">' + result[i].verified + '</div></div></div>'
+            for (i = 0; i < result.length; i++) {
+                if (result[i].verified === "approved")
+                    depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
 
-            if (result[i].verified === "pending")
-                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn pending-btn">' + result[i].verified + '</div></div></div>'
+                if (result[i].verified === "rejected")
+                    depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn reject-btn">' + result[i].verified + '</div></div></div>'
+
+                if (result[i].verified === "pending")
+                    depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn pending-btn">' + result[i].verified + '</div></div></div>'
+            }
         }
-    }
-    else {
-        depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
-    }
-    getLanguage();
-
+        else {
+            if (res.data.total == 0)
+                if ($("#depositHistory").length == 0)
+                    depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
+        }
+        getLanguage();
+        console.log("end call " + pageNo);
+    }, 200)
 }
 //#endregion
 
@@ -904,6 +916,8 @@ async function WithdrawHistory() {
     var result = res.data;
     var withdrawHistory = document.getElementById("withdrawHistory");
     withdrawHistory.innerHTML = "";
+
+
     if (result.length > 0) {
         for (i = 0; i < result.length; i++) {
             if (result[i].verified === "approved")
@@ -920,6 +934,7 @@ async function WithdrawHistory() {
         withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_withdraw"></span></p></div></div>'
     }
     getLanguage();
+
 
 }
 //#endregion

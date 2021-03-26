@@ -70,8 +70,8 @@
                     <div style="text-align:center;">
                         <img src="~/images/loading.gif" id="depositRefreshImage" style="display:none" />
                     </div>
-                    <div class="container full-height listing extra-bottom-padding" id="depositHistory" onscroll="testScroll()">
-
+                    <div class="container full-height listing extra-bottom-padding" id="depositHistory" onscroll="testScroll(event)">
+                       
                     </div>
                 </div>
 
@@ -111,7 +111,7 @@
                 </div>
 
             </div>
-        
+
         </div>
 
     </div>
@@ -179,7 +179,7 @@
             </li>
         </ul>
     </div>
-    
+
     <div>
         <a id="mobileM8" style="display:none"></a>
     </div>
@@ -276,18 +276,15 @@
         get();
     }, 200);
 
-    var pageSize = 10;
-    var pageNumber = 1;
-    var NumberOfLine = 1
-    function testScroll() {
+
+    async function testScroll() {
         if ((NumberOfLine % 5) == 0) {
             pageNumber = pageNumber + 1;
             NumberOfLine = NumberOfLine + 1;
-            DepositHistory(pageNumber)
+            await DepositHistory(pageNumber)
         }
         else {
             NumberOfLine = NumberOfLine + 1;
-            console.log(NumberOfLine);
         }
     }
 
