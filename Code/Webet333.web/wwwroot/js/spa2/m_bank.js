@@ -869,9 +869,10 @@ var pageSize = 10;
 var pageNumber = 1;
 var NumberOfLine = 1
 
+var apiRunning = false;
 //#region DepositHistory
 async function DepositHistory(pageNo = 1) {
-    console.log("start call " + pageNo);
+    apiRunning = true;
     var model = {
         pageNo: pageNo,
         pageSize: pageNo == 1 ? 20 : 5
@@ -883,28 +884,26 @@ async function DepositHistory(pageNo = 1) {
         pageNumber = 1;
         depositHistory.innerHTML = "";
     }
-    setTimeout(function () {
-        if (result.length > 0) {
+    if (result.length > 0) {
 
-            for (i = 0; i < result.length; i++) {
-                if (result[i].verified === "approved")
-                    depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
+        for (i = 0; i < result.length; i++) {
+            if (result[i].verified === "approved")
+                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
 
-                if (result[i].verified === "rejected")
-                    depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn reject-btn">' + result[i].verified + '</div></div></div>'
+            if (result[i].verified === "rejected")
+                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn reject-btn">' + result[i].verified + '</div></div></div>'
 
-                if (result[i].verified === "pending")
-                    depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn pending-btn">' + result[i].verified + '</div></div></div>'
-            }
+            if (result[i].verified === "pending")
+                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn pending-btn">' + result[i].verified + '</div></div></div>'
         }
-        else {
-            if (res.data.total == 0)
-                if ($("#depositHistory").length == 0)
-                    depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
-        }
-        getLanguage();
-        console.log("end call " + pageNo);
-    }, 200)
+    }
+    else {
+        if (res.data.total == 0)
+            if ($("#depositHistory").length == 0)
+                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
+    }
+    getLanguage();
+    apiRunning = false;
 }
 //#endregion
 

@@ -27,6 +27,7 @@ export class TestingPaginationComponent implements OnInit {
                 Company: 'male',
             });
         }
+        debugger
         this.rows = [...this.rows];
     }
 

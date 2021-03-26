@@ -71,7 +71,7 @@
                         <img src="~/images/loading.gif" id="depositRefreshImage" style="display:none" />
                     </div>
                     <div class="container full-height listing extra-bottom-padding" id="depositHistory" onscroll="testScroll(event)">
-                       
+
                     </div>
                 </div>
 
@@ -278,10 +278,12 @@
 
 
     async function testScroll() {
+
         if ((NumberOfLine % 5) == 0) {
             pageNumber = pageNumber + 1;
             NumberOfLine = NumberOfLine + 1;
-            await DepositHistory(pageNumber)
+            if (!apiRunning)
+                await DepositHistory(pageNumber)
         }
         else {
             NumberOfLine = NumberOfLine + 1;
