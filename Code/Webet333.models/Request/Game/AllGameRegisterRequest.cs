@@ -1,13 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Webet333.models.Request.Game
 {
     public class AllGameRegisterRequest
     {
-        [JsonProperty(PropertyName ="username")]
+        [JsonProperty(PropertyName = "username")]
         public string Username { get; set; }
 
         [JsonProperty(PropertyName = "password")]

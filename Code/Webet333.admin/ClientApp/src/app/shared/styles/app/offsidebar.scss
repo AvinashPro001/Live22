@@ -7,10 +7,10 @@
 // Open status toggled via JS
 // -----------------------------------------
 
-$offsidebar-bg:           #fff;
+$offsidebar-bg: #fff;
 $offsidebar-border-color: grayscale(darken($offsidebar-bg, 20%));
-$offsidebar-color:        $body-color;
-$offsidebar-wd:           $aside-wd + 15px;      // match the width with the main aside component
+$offsidebar-color: $body-color;
+$offsidebar-wd: $aside-wd + 15px; // match the width with the main aside component
 
 .offsidebar {
     position: absolute;
@@ -26,7 +26,7 @@ $offsidebar-wd:           $aside-wd + 15px;      // match the width with the mai
     // -webkit-overflow-scrolling: touch;
     z-index: -1;
 
-    >.list-group {
+    > .list-group {
         min-height: 100%;
         overflow: hidden;
         -webkit-transform: translateZ(0px);
@@ -39,21 +39,23 @@ $offsidebar-wd:           $aside-wd + 15px;      // match the width with the mai
     .tab-content {
         padding: 0;
         border: 0;
-    } // change style of tab component inside offsidebar
+    }
+    // change style of tab component inside offsidebar
     .nav-tabs {
         border-bottom: 1px solid rgba(0, 0, 0, .05);
-        >.nav-item>.nav-link {
+
+        > .nav-item > .nav-link {
             background-color: transparent;
             border: 0;
             border-right: 1px solid rgba(0, 0, 0, .05);
             border-radius: 0;
             color: $text-muted;
+
             &.active {
                 color: $primary;
             }
         }
     }
-
 
     @include media-breakpoint-up(md) {
         margin-top: $navbar-height;
@@ -66,6 +68,7 @@ $offsidebar-wd:           $aside-wd + 15px;      // match the width with the mai
         overflow-y: auto;
         z-index: $z-index-main-section + 5;
     }
+
     @include media-breakpoint-up(md) {
         overflow-y: auto;
     }
@@ -84,7 +87,6 @@ $offsidebar-wd:           $aside-wd + 15px;      // match the width with the mai
     }
 }
 
-
 /* Transformation ready devices*/
 
 .csstransforms3d {
@@ -93,6 +95,7 @@ $offsidebar-wd:           $aside-wd + 15px;      // match the width with the mai
         transform: translate3d( ($offsidebar-wd), 0, 0);
         transition: transform .3s ease, z-index 0s linear .3s;
     }
+
     .offsidebar-open {
         .offsidebar {
             transform: translate3d(0, 0, 0);

@@ -22,17 +22,22 @@ namespace Webet333.api.Controllers.Base
     public class BaseController : Controller, IDisposable
     {
         #region Object declaration and constructor
+
         protected string Connection { get; set; }
 
         protected string Connection120 { get; set; }
 
         protected Language Language { get; set; }
+
         protected ProfileResponse UserEntity { get; set; }
+
         protected IStringLocalizer<BaseController> Localizer { get; set; }
+
         protected string UserRole = string.Empty;
+
         protected BaseUrlConfigs baseUrlConfigs { get; set; }
 
-        public BaseController(ConnectionConfigs ConnectionStrings = null, IStringLocalizer<BaseController> Localizer = null,BaseUrlConfigs baseUrlConfigs=null)
+        public BaseController(ConnectionConfigs ConnectionStrings = null, IStringLocalizer<BaseController> Localizer = null, BaseUrlConfigs baseUrlConfigs = null)
         {
             this.Connection = ConnectionStrings.DefaultConnection;
             this.Connection120 = ConnectionStrings.DefaultConnection120;
@@ -40,9 +45,11 @@ namespace Webet333.api.Controllers.Base
             this.baseUrlConfigs = baseUrlConfigs;
             this.Language = GetLanguage();
         }
-        #endregion
+
+        #endregion Object declaration and constructor
 
         #region Generic tasks
+
         protected dynamic GetData(string stored_proc, object data)
         {
             using (var GenericHelper = new GenericHelpers(Connection))
@@ -50,9 +57,11 @@ namespace Webet333.api.Controllers.Base
                 return GenericHelper.GetList(stored_proc, data);
             }
         }
-        #endregion
+
+        #endregion Generic tasks
 
         #region Get Language from user's selection
+
         private Language GetLanguage()
         {
             using (var Repository = new DapperRepository<Language>(Connection))
@@ -63,9 +72,11 @@ namespace Webet333.api.Controllers.Base
                 return Language;
             }
         }
-        #endregion
+
+        #endregion Get Language from user's selection
 
         #region Get current user's data using Token
+
         protected bool IsLoggedIn(ClaimsPrincipal User)
         {
             return User.Identity.IsAuthenticated;
@@ -94,17 +105,21 @@ namespace Webet333.api.Controllers.Base
             var role = User.Claims.Where(x => x.Type == ClaimTypes.Role)?.FirstOrDefault().Value;
             return new security.AesAlgoridhm().Decrypt(role);
         }
-        #endregion
+
+        #endregion Get current user's data using Token
 
         #region Check user Role
+
         protected async Task CheckUserRole()
         {
             var role = GetUserRole(User);
             if (role != RoleConst.Admin) BadResponse("forbid_error_access");
         }
-        #endregion 
+
+        #endregion Check user Role
 
         #region Validate User
+
         protected async Task ValidateUser(ProfileResponse user = null, string role = null)
         {
             if (HttpContext.User.Identity.IsAuthenticated)
@@ -123,10 +138,13 @@ namespace Webet333.api.Controllers.Base
             if (role != null) if (user.Role != role.ToLower()) BadResponse("forbid_error_access");
             this.UserEntity = user;
         }
-        #endregion
+
+        #endregion Validate User
 
         #region Setting up responses
+
         #region OkResponse
+
         protected IActionResult OkResponse() => OkResponse(Localizer["ok_response_success"].Value);
 
         protected IActionResult OkResponse(string message) => Ok(new { message = Localizer[message].Value });
@@ -134,15 +152,19 @@ namespace Webet333.api.Controllers.Base
         protected IActionResult OkResponse(object data) => OkResponse(Localizer["ok_response_success"].Value, data);
 
         protected IActionResult OkResponse(string message, object data) => Ok(new { message, data });
-        #endregion 
+
+        #endregion OkResponse
 
         #region NotFoundResponse
+
         protected IActionResult NotFoundResponse() => StatusCodeResult("not_found_response", 404);
 
         protected IActionResult NotFoundResponse(string Message) => StatusCodeResult(Message, 404);
-        #endregion
+
+        #endregion NotFoundResponse
 
         #region BadRequest Response
+
         protected IActionResult BadResponse() => StatusCodeResult("bad_response_something_wrong", 400);
 
         protected IActionResult BadResponse(string Message) => StatusCodeResult(Message, 400);
@@ -152,11 +174,15 @@ namespace Webet333.api.Controllers.Base
             string message = string.Join("; ", ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage));
             throw new Filters.ApiException(message, 400);
         }
-        #endregion
+
+        #endregion BadRequest Response
 
         #region Custom Status Code
+
         protected IActionResult StatusCodeResult(string Message, int Code) => throw new Filters.ApiException(Message, Code);
-        #endregion 
-        #endregion
+
+        #endregion Custom Status Code
+
+        #endregion Setting up responses
     }
 }

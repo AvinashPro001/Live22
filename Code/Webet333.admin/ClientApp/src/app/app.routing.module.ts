@@ -1,12 +1,12 @@
- "use strict";
+"use strict";
 
- import { Routes, RouterModule } from '@angular/router';
- import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 
- import { LoginComponent } from './login/login.component';
- import { Error404Component } from './error404/error404.component';
- import { RecoverComponent } from './recover/recover.component';
- import { LayoutComponent } from './layout/layout.component';
+import { LoginComponent } from './login/login.component';
+import { Error404Component } from './error404/error404.component';
+import { RecoverComponent } from './recover/recover.component';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
     imports: [

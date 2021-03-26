@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Webet333.models.Request.PaymentGateway
 {
@@ -60,6 +57,5 @@ namespace Webet333.models.Request.PaymentGateway
 
         [Required]
         public string updated_at { get; set; }
-
     }
 }

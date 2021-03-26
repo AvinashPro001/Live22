@@ -13,7 +13,6 @@ import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/c
     styleUrls: ['./announcement-list.component.scss']
 })
 export class AnnouncementListComponent implements OnInit {
-
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
     @ViewChild('action') action: TemplateRef<any>;
@@ -94,7 +93,6 @@ export class AnnouncementListComponent implements OnInit {
     }
     //#endregion
 
-
     //#region rejectRequest
     async rejectRequest(id) {
         if (await this.checkUpdatePermission()) {
@@ -113,7 +111,6 @@ export class AnnouncementListComponent implements OnInit {
         }
     }
     //#endregion
-
 
     //#region openRejectConfirmationDialog
     openRejectConfirmationDialog(id) {
@@ -194,5 +191,3 @@ export class AnnouncementListComponent implements OnInit {
 
     //#endregion Check Permission
 }
-
-

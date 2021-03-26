@@ -5,7 +5,6 @@ import * as moment from 'moment';
     selector: '[now]'
 })
 export class NowDirective implements OnInit, OnDestroy {
-
     @Input() format;
     intervalId;
 
@@ -24,5 +23,4 @@ export class NowDirective implements OnInit, OnDestroy {
     ngOnDestroy() {
         clearInterval(this.intervalId);
     }
-
 }

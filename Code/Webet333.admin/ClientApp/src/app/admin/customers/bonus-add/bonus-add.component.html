@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row card-body">
             <div class="col-md-12">
                 <form class="border border-light p-5" name="myForm">
@@ -23,8 +23,7 @@
                         <h3 class="col-md-4">Username</h3>
                         <h2 class="col-md-1">:</h2>
                         <div class="form-control col-md-4 mb-4">
-                            <ngx-select-dropdown  tabindex="0" [multiple]="false"
-                                                 [config]="config" [options]="customerData" (change)="onChange($event)"></ngx-select-dropdown>
+                            <ngx-select-dropdown tabindex="0" [multiple]="false" [config]="config" [options]="customerData" (change)="onChange($event)"></ngx-select-dropdown>
                         </div>
                     </div>
                     <div class="row">
@@ -80,7 +79,6 @@
                                     <div class="col-sm-3 col-lg-3">
                                         <h5>{{pragmaticBal == null ? 'Select username.' : pragmaticBal}}</h5>
                                     </div>
-                                   
                                 </div>
                                 <br />
                                 <div class="deposit-details">
@@ -116,8 +114,8 @@
                             </div>
                             <section class="select-checkboxes" style="overflow-y:auto;height:500px">
                                 <ul class="promotion-choose" *ngFor="let item of promotionList; let i=index">
-                                    <li  class='mar-btm-ten'>
-                                        <input type='radio' name='promotion' id={{this.promotionList[i].id}} value={{this.promotionList[i].id}}/>
+                                    <li class='mar-btm-ten'>
+                                        <input type='radio' name='promotion' id={{this.promotionList[i].id}} value={{this.promotionList[i].id}} />
                                         <div class='border promotion-content' for='rad1'>
                                             <img style="height:100px" class='full-img' src='{{this.promotionList[i].bannerImage}}' />
                                             <p class='no-mar'>"{{this.promotionList[i].promotionTitle}}"</p>

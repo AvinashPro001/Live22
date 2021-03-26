@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
@@ -17,8 +16,8 @@ namespace Webet333.api.Controllers
     [Route(ActionsConst.ApiVersion)]
     public class M8GameController : BaseController
     {
-
         #region Global Variable
+
         public M8GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
@@ -84,15 +83,15 @@ namespace Webet333.api.Controllers
 
                 var m8Request = new GameM8RegisterRequest()
                 {
-                    M8UserName=username,
-                    UserId=request.Id,
-                    APIResponse= JObject.FromObject(result)
+                    M8UserName = username,
+                    UserId = request.Id,
+                    APIResponse = JObject.FromObject(result)
                 };
                 await m8_helper.GameM8Register(m8Request);
                 return OkResponse(result);
             }
         }
 
-        #endregion 
+        #endregion M8 game Register
     }
 }

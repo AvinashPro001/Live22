@@ -17,9 +17,9 @@ using Webet333.models.Constants;
 using Webet333.models.Mapping.Game;
 using Webet333.models.Request;
 using Webet333.models.Request.Game;
+using Webet333.models.Request.Game.M8;
 using Webet333.models.Response;
 using Webet333.models.Response.Account;
-using Webet333.models.Request.Game.M8;
 using Webet333.models.Response.Game;
 using Webet333.models.Response.Game.AG;
 using Webet333.models.Response.Game.DG;
@@ -44,7 +44,7 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion Local Variables
 
         #region GameJoker
 
@@ -144,7 +144,7 @@ namespace Webet333.api.Helpers
 
         #region Betting Details Insert
 
-        #region AG Services 
+        #region AG Services
 
         internal async Task<int> AgServicesInsert(AGServicesResponse request)
         {
@@ -162,9 +162,9 @@ namespace Webet333.api.Helpers
             return 0;
         }
 
-        #endregion
+        #endregion AG Services
 
-        #region Mega888 Services 
+        #region Mega888 Services
 
         internal async Task Mega888ServicesInsert(Mega888ServicesResponse request)
         {
@@ -180,9 +180,9 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Mega888 Services
 
-        #region Kiss918 Services 
+        #region Kiss918 Services
 
         internal async Task Kiss918ServicesInsert(Kiss918ServicesResponse request)
         {
@@ -197,9 +197,9 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Kiss918 Services
 
-        #region Pussy888 Services 
+        #region Pussy888 Services
 
         internal async Task Pussy888ServicesInsert(List<Pussy888Result> request)
         {
@@ -214,9 +214,9 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Pussy888 Services
 
-        #region M8 Services 
+        #region M8 Services
 
         internal async Task<int> M8ServicesInsert(List<M8ServicesResponse> request)
         {
@@ -231,9 +231,9 @@ namespace Webet333.api.Helpers
             return 0;
         }
 
-        #endregion
+        #endregion M8 Services
 
-        #region Joker Services 
+        #region Joker Services
 
         internal async Task<int> JokerServicesInsert(JokerServicesResponse request)
         {
@@ -250,9 +250,9 @@ namespace Webet333.api.Helpers
             return 0;
         }
 
-        #endregion
+        #endregion Joker Services
 
-        #region Playtech Services 
+        #region Playtech Services
 
         internal async Task<int> PlaytechServicesInsert(List<Result> request)
         {
@@ -269,28 +269,35 @@ namespace Webet333.api.Helpers
             return 0;
         }
 
-        #endregion
+        #endregion Playtech Services
 
-        #region Max Bet Services 
+        #region Max Bet Services
 
-        internal async Task<dynamic> MaxBetServicesInsert(List<BetDetail> response, List<BetNumberDetails> responseNumber, long versionKey = 0)
+        internal async Task<dynamic> MaxBetServicesInsert(List<BetDetail> response, List<BetNumberDetails> responseNumber, long versionKey = 0, string adminId = null)
         {
-
             var resultNumber = JsonConvert.SerializeObject(responseNumber.OrderBy(x => x.TransId).ToList());
             for (int i = 0; i <= response.Count(); i += 10000)
             {
                 var result = JsonConvert.SerializeObject(response.OrderBy(x => x.TransId).Skip(i).Take(10000).ToList());
                 using (var repository = new DapperRepository<dynamic>(Connection))
                 {
-                    return await repository.FindAsync(StoredProcConsts.Game.MaxBetBettingDetailsInsertUpdate, new { jsonBettingDetails = result, jsonBettingNumberDetails = resultNumber, versionKey = versionKey });
+                    return await repository.FindAsync(
+                        StoredProcConsts.Game.MaxBetBettingDetailsInsertUpdate,
+                        new
+                        {
+                            jsonBettingDetails = result,
+                            jsonBettingNumberDetails = resultNumber,
+                            versionKey = versionKey,
+                            adminId
+                        });
                 }
             }
             return null;
         }
 
-        #endregion
+        #endregion Max Bet Services
 
-        #region DG Services 
+        #region DG Services
 
         internal async Task<dynamic> DGServicesInsert(List<Lists> request)
         {
@@ -306,9 +313,9 @@ namespace Webet333.api.Helpers
             return result;
         }
 
-        #endregion
+        #endregion DG Services
 
-        #region Sexy Baccarat Services 
+        #region Sexy Baccarat Services
 
         internal async Task<dynamic> SexyServicesInsert(List<Transaction> request)
         {
@@ -325,9 +332,9 @@ namespace Webet333.api.Helpers
             return result;
         }
 
-        #endregion
+        #endregion Sexy Baccarat Services
 
-        #region SA Services 
+        #region SA Services
 
         internal async Task SAServicesInsert(string request)
         {
@@ -337,9 +344,9 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion SA Services
 
-        #region AllBet Services 
+        #region AllBet Services
 
         internal async Task AllBetServicesInsert(string request)
         {
@@ -349,9 +356,9 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion AllBet Services
 
-        #region WM Services 
+        #region WM Services
 
         internal async Task WMServicesInsert(string request)
         {
@@ -361,9 +368,9 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion WM Services
 
-        #region WM Services 
+        #region WM Services
 
         internal async Task PragmaticServicesInsert(string request)
         {
@@ -373,7 +380,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion WM Services
 
         #region Kiss 918 Player Log Insert
 
@@ -390,7 +397,7 @@ namespace Webet333.api.Helpers
             return 0;
         }
 
-        #endregion
+        #endregion Kiss 918 Player Log Insert
 
         #region Pussy Player Log Insert
 
@@ -407,7 +414,7 @@ namespace Webet333.api.Helpers
             return 0;
         }
 
-        #endregion
+        #endregion Pussy Player Log Insert
 
         #region Joker Player Log Insert
 
@@ -422,7 +429,7 @@ namespace Webet333.api.Helpers
             return 0;
         }
 
-        #endregion
+        #endregion Joker Player Log Insert
 
         #endregion Betting Details Insert
 
@@ -455,9 +462,10 @@ namespace Webet333.api.Helpers
             return resencode;
         }
 
-        #endregion
+        #endregion Joker Hash Genrate
 
         #region 918 kiss game genrate random password
+
         public static string RandomPassword(int size = 0)
         {
             Random random = new Random();
@@ -483,9 +491,10 @@ namespace Webet333.api.Helpers
                 return builder.ToString().ToLower();
             return builder.ToString();
         }
-        #endregion  918 kiss game genrate random password
 
-        #region Get Calculate Rebate 
+        #endregion 918 kiss game genrate random password
+
+        #region Get Calculate Rebate
 
         public async Task<List<RebateCalculateResponse>> GetCalculateData(RebateCalculateRequest request)
         {
@@ -496,18 +505,29 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion Get Calculate Rebate 
+        #endregion Get Calculate Rebate
 
         #region Main Wallet Deposit & Withdraw
-        public async Task<MainWalletTransferResponse> RebateMainWalletDepositWithdraw(string Username, decimal Amount, string Method)
+
+        public async Task<MainWalletTransferResponse> RebateMainWalletDepositWithdraw(string Username, decimal Amount, string Method, string GameType = null, string AdminId = null)
         {
             using (var repository = new DapperRepository<MainWalletTransferResponse>(Connection))
             {
-                var response = await repository.FindAsync(StoredProcConsts.Game.RebateMainWalletDepositWithdraw, new { Username, Amount, Method });
+                var response = await repository.FindAsync(
+                    StoredProcConsts.Game.RebateMainWalletDepositWithdraw,
+                    new
+                    {
+                        Username,
+                        Amount,
+                        Method,
+                        GameType,
+                        AdminId
+                    });
                 return response;
             }
         }
-        #endregion
+
+        #endregion Main Wallet Deposit & Withdraw
 
         #region Get Game Category
 
@@ -520,24 +540,39 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion Get Calculate Rebate 
+        #endregion Get Game Category
 
         #region Game Rebate
 
-        internal async Task<dynamic> GameRebate(string FromDate, string ToDate, string gameType, decimal totalUser, decimal betAmount, decimal rolling, decimal commAmount, decimal commPrecentage, string jsonData)
+        internal async Task<dynamic> GameRebate(string FromDate, string ToDate, string gameType, decimal totalUser, decimal betAmount, decimal rolling, decimal commAmount, decimal commPrecentage, string jsonData, string adminId = null)
         {
             using (var GetRepository = new DapperRepository<dynamic>(Connection))
             {
-                dynamic users = await GetRepository.FindAsync(StoredProcConsts.Game.GameRebate, new { FromDate, ToDate, gameType, totalUser, betAmount, rolling, commAmount, commPrecentage, jsonData });
+                dynamic users = await GetRepository.FindAsync(
+                    StoredProcConsts.Game.GameRebate,
+                    new
+                    {
+                        FromDate,
+                        ToDate,
+                        gameType,
+                        totalUser,
+                        betAmount,
+                        rolling,
+                        commAmount,
+                        commPrecentage,
+                        jsonData,
+                        adminId
+                    });
+
                 return users;
             }
         }
 
-        #endregion  Game Rebate
+        #endregion Game Rebate
 
         #region Funtionality of Rebate
 
-        public async Task<List<RebateCalculateResponse>> RebateOperation(RebateCalculateRequest request)
+        public async Task<List<RebateCalculateResponse>> RebateOperation(RebateCalculateRequest request, string adminId = null)
         {
             var data = await GetCalculateData(request);
 
@@ -554,7 +589,7 @@ namespace Webet333.api.Helpers
             {
                 foreach (var d in data)
                 {
-                    var result = await RebateMainWalletDepositWithdraw(d.Username, d.CommAmount, "Deposit");
+                    var result = await RebateMainWalletDepositWithdraw(Username: d.Username, Amount: d.CommAmount, Method: "Deposit", GameType: request.GameType, AdminId: adminId);
                     if (result.ErrorCode == 0)
                     {
                         responseList.Add(d);
@@ -565,7 +600,6 @@ namespace Webet333.api.Helpers
                         }
                         catch (Exception ex)
                         {
-
                         }
                     }
                 }
@@ -574,25 +608,31 @@ namespace Webet333.api.Helpers
             data = data.Where(s => responseList.Any(l => (l.GameName == s.GameName && s.APIUsername == l.APIUsername))).ToList();
 
             var jsonData = JsonConvert.SerializeObject(data);
-            await GameRebate(request.FromDate, request.ToDate, request.GameType, data.Count, BetTotal, Rollingtotal, CommTotal, request.Rebate, jsonData);
+            await GameRebate(request.FromDate, request.ToDate, request.GameType, data.Count, BetTotal, Rollingtotal, CommTotal, request.Rebate, jsonData, adminId: adminId);
 
             return responseList;
         }
 
-        #endregion
+        #endregion Funtionality of Rebate
 
         #region Rebate Delete
 
-        internal async Task<dynamic> GameRebateDelete(string userId)
+        internal async Task<dynamic> GameRebateDelete(string userId, string adminId = null)
         {
             using (var GetRepository = new DapperRepository<dynamic>(Connection))
             {
-                dynamic users = await GetRepository.FindAsync(StoredProcConsts.Game.GameRebateDelete, new { userId });
+                dynamic users = await GetRepository.FindAsync(
+                    StoredProcConsts.Game.GameRebateDelete,
+                    new
+                    {
+                        userId,
+                        adminId
+                    });
                 return users;
             }
         }
 
-        #endregion
+        #endregion Rebate Delete
 
         #region rebate List
 
@@ -605,7 +645,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion  rebate List
+        #endregion rebate List
 
         #region rebate Details List
 
@@ -618,7 +658,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion  rebate List
+        #endregion rebate Details List
 
         #region User Rebate History
 
@@ -631,16 +671,15 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion  User Rebate History
+        #endregion User Rebate History
 
         #region All Game rebate Deposit Method
+
         public static string genrate()
         {
-
             DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             string temp = ((long)DateTime.UtcNow.Subtract(UnixEpoch).TotalMilliseconds).ToString();
             return temp.Substring(1);
-
         }
 
         #region Joker Game Deposit
@@ -657,7 +696,7 @@ namespace Webet333.api.Helpers
             return responseList;
         }
 
-        #endregion  Joker Game Deposit
+        #endregion Joker Game Deposit
 
         #region Playtech Game Deposit
 
@@ -673,7 +712,7 @@ namespace Webet333.api.Helpers
             return responseList;
         }
 
-        #endregion  Playtech Game Deposit
+        #endregion Playtech Game Deposit
 
         #region AG Game Deposit
 
@@ -689,7 +728,7 @@ namespace Webet333.api.Helpers
             return responseList;
         }
 
-        #endregion  AG Game Deposit
+        #endregion AG Game Deposit
 
         #region Kiss918 Game Deposit
 
@@ -705,7 +744,7 @@ namespace Webet333.api.Helpers
             return responseList;
         }
 
-        #endregion  Kiss918 Game Deposit
+        #endregion Kiss918 Game Deposit
 
         #region Kiss918 Game Deposit
 
@@ -721,7 +760,7 @@ namespace Webet333.api.Helpers
             return responseList;
         }
 
-        #endregion  Kiss918 Game Deposit
+        #endregion Kiss918 Game Deposit
 
         #region M8 Game Deposit
 
@@ -739,7 +778,7 @@ namespace Webet333.api.Helpers
             return responseList;
         }
 
-        #endregion  M8 Game Deposit
+        #endregion M8 Game Deposit
 
         #region MaxBet Game Deposit
 
@@ -755,7 +794,7 @@ namespace Webet333.api.Helpers
             return responseList;
         }
 
-        #endregion  MaxBet Game Deposit
+        #endregion MaxBet Game Deposit
 
         #region Mega888 Game Deposit and Withdraw
 
@@ -779,12 +818,11 @@ namespace Webet333.api.Helpers
                     if (apiResponse.error == null)
                         responseList.Add(res);
                 }
-
             }
             return responseList;
         }
 
-        #endregion  Mega888 Game Deposit and Withdraw
+        #endregion Mega888 Game Deposit and Withdraw
 
         #region DG Game Deposit and Withdraw
 
@@ -793,7 +831,6 @@ namespace Webet333.api.Helpers
             var responseList = new List<RebateCalculateResponse>();
             foreach (var res in response)
             {
-
                 if (method == 1)
                 {
                     var apiResponse = await DGGameHelpers.CallWithdrawDepsoitAPI(res.APIUsername, "-" + res.CommAmount);
@@ -807,12 +844,11 @@ namespace Webet333.api.Helpers
                     if (apiResponse.codeId == 0)
                         responseList.Add(res);
                 }
-
             }
             return responseList;
         }
 
-        #endregion  DG Game Deposit and Withdraw
+        #endregion DG Game Deposit and Withdraw
 
         #region SA Game Deposit and Withdraw
 
@@ -821,7 +857,6 @@ namespace Webet333.api.Helpers
             var responseList = new List<RebateCalculateResponse>();
             foreach (var res in response)
             {
-
                 if (method == 1)
                 {
                     var apiResponse = await SAGameHelpers.CallAPIWithdraw(res.APIUsername, res.CommAmount);
@@ -835,12 +870,11 @@ namespace Webet333.api.Helpers
                     if (apiResponse.Descendants("ErrorMsgId").Single().Value == "0")
                         responseList.Add(res);
                 }
-
             }
             return responseList;
         }
 
-        #endregion  SA Game Deposit and Withdraw
+        #endregion SA Game Deposit and Withdraw
 
         #region Sexy Game Deposit and Withdraw
 
@@ -849,7 +883,6 @@ namespace Webet333.api.Helpers
             var responseList = new List<RebateCalculateResponse>();
             foreach (var res in response)
             {
-
                 if (method == 1)
                 {
                     var apiResponse = await SexyBaccaratGameHelpers.CallWithdrawAPI(res.APIUsername, res.CommAmount);
@@ -863,12 +896,11 @@ namespace Webet333.api.Helpers
                     if (apiResponse.status == "0000")
                         responseList.Add(res);
                 }
-
             }
             return responseList;
         }
 
-        #endregion  Sexy Game Deposit and Withdraw
+        #endregion Sexy Game Deposit and Withdraw
 
         #endregion All Game rebate Deposit Method
 
@@ -951,7 +983,6 @@ namespace Webet333.api.Helpers
 
         public async Task<int> MaxBetWithdraw(List<RebateCalculateResponse> response)
         {
-
             foreach (var res in response)
             {
                 MaxBetGameHelper.CallMaxbetDepsoitWithdrawAPI(res.AnotherId, res.CommAmount, 0);
@@ -1045,7 +1076,6 @@ namespace Webet333.api.Helpers
                 $"&authcode={GameConst.Kiss918.authcode}" +
                 $"&sign={SecurityHelpers.MD5EncrptText(GameConst.Kiss918.authcode.ToLower() + kiss918UserName + timestamp + GameConst.Kiss918.SecretKey.ToLower()).ToUpper()}";
             await CallThirdPartyApi(DisableUrl, null);
-
 
             var url = $"{GameConst.Kiss918.baseURL}setScore.ashx?" +
                             $"action={GameConst.Kiss918.WidthdrawDeposit}" +
@@ -1168,6 +1198,7 @@ namespace Webet333.api.Helpers
         #endregion User Balance Restore
 
         #region Global Parameter Select
+
         public async Task<GlobalValuesResponse> UserGetBalanceInfo()
         {
             using (var Repository = new DapperRepository<GlobalValuesResponse>(Connection))
@@ -1175,7 +1206,8 @@ namespace Webet333.api.Helpers
                 return await Repository.FindAsync(StoredProcConsts.Account.GameBalanceInfo, new { });
             }
         }
-        #endregion
+
+        #endregion Global Parameter Select
 
         internal async Task ManuallyExpieryPromotion(PromotionExpieryManuallyRequest request)
         {
@@ -1212,7 +1244,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-
         internal async Task<dynamic> GetSupportGameOfUser(string userId)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -1232,14 +1263,16 @@ namespace Webet333.api.Helpers
         }
 
         #region update download link
+
         internal async Task<dynamic> UpdateLink(AppDownloadLinkUpdateRequest request)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                dynamic link = await repository.AddOrUpdateAsync(StoredProcConsts.Game.DownloadLink_Update, new { request.Id, request.Link });
+                dynamic link = await repository.AddOrUpdateAsync(StoredProcConsts.Game.DownloadLink_Update, new { request.Id, request.Link, request.AdminId });
                 return link;
             }
         }
+
         #endregion update download link
 
         #region Download Link List
@@ -1260,6 +1293,7 @@ namespace Webet333.api.Helpers
         #endregion Download Link List
 
         #region Check game Register or not in game
+
         public async Task<dynamic> CheckGameRegister(string gameName = null, string userId = null)
         {
             using (var GetProfileRepository = new DapperRepository<dynamic>(Connection))
@@ -1268,6 +1302,7 @@ namespace Webet333.api.Helpers
                 return result;
             }
         }
+
         #endregion Check game Register or not in game
 
         #region Global Variable Update
@@ -1296,17 +1331,26 @@ namespace Webet333.api.Helpers
 
         #endregion Global Variable Select
 
-        #region  M8 User reset limit
-        internal async Task M8LimitReset(bool SetLimit)
+        #region M8 User reset limit
+
+        internal async Task M8LimitReset(bool SetLimit, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.GetDataAsync(StoredProcConsts.M8.M8SetLimit, new { SetLimit });
+                await repository.GetDataAsync(
+                    StoredProcConsts.M8.M8SetLimit,
+                    new
+                    {
+                        SetLimit,
+                        adminId
+                    });
             }
         }
-        #endregion set setlimit true of M8User or reset limit
+
+        #endregion M8 User reset limit
 
         #region set setlimit true of M8 User
+
         internal async Task M8LimitSet(List<M8UsersSetBettingLimitsRequest> request)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -1314,9 +1358,11 @@ namespace Webet333.api.Helpers
                 await repository.AddOrUpdateAsync(StoredProcConsts.M8.M8SetLimit, request);
             }
         }
-        #endregion set setlimit true of M8 User 
+
+        #endregion set setlimit true of M8 User
 
         #region Get All Users for M8 Limits
+
         internal async Task<List<M8UsersLimitResponse>> GetAllM8UsersSetLimit()
         {
             using (var repository = new DapperRepository<M8UsersLimitResponse>(Connection))
@@ -1325,9 +1371,11 @@ namespace Webet333.api.Helpers
                 return result.ToList();
             }
         }
-        #endregion Get All Users for M8 Limits        
+
+        #endregion Get All Users for M8 Limits
 
         #region Get Main Wallet Balance
+
         public async Task<List<UserWalletResponse>> GetAllWalletBalance(string sp_name, string UserId, string WalletName = null)
         {
             using (var repository = new DapperRepository<UserWalletResponse>(Connection))
@@ -1336,6 +1384,7 @@ namespace Webet333.api.Helpers
                 return result.ToList(); ;
             }
         }
+
         #endregion Get Main Wallet Balance
 
         #region GET ALL GAME USERS
@@ -1349,7 +1398,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion GET ALL GAME USERS
 
         #region GET ALL 918 Kiss GAME USERS
 
@@ -1362,9 +1411,10 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion GET ALL 918 Kiss GAME USERS
 
         #region Get users List of Promotion Expiery
+
         internal async Task<List<ExpieryPromotionResponse>> GetListPromotionExpiery()
         {
             using (var repository = new DapperRepository<ExpieryPromotionResponse>(Connection))
@@ -1373,9 +1423,11 @@ namespace Webet333.api.Helpers
                 return result.ToList();
             }
         }
+
         #endregion Get users List of Promotion Expiery
 
         #region Get Betting List by Username
+
         internal async Task<dynamic> GetListBettingDetails(GameBettingDetailsRequest request)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -1386,42 +1438,55 @@ namespace Webet333.api.Helpers
                     case "AG":
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_AG, new { request.UserId, request.FromDate, request.ToDate });
                         break;
+
                     case "DG":
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_DG, new { request.UserId, request.FromDate, request.ToDate });
                         break;
+
                     case "JOKER":
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Joker, new { request.UserId, request.FromDate, request.ToDate });
                         break;
+
                     case "M8":
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_M8, new { request.UserId, request.FromDate, request.ToDate });
                         break;
+
                     case "MAXBET":
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Maxbet, new { request.UserId, request.FromDate, request.ToDate });
                         break;
+
                     case "MEGA888":
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Mega888, new { request.UserId, request.FromDate, request.ToDate });
                         break;
+
                     case "918KISS":
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Kiss918, new { request.UserId, request.FromDate, request.ToDate });
                         break;
+
                     case "SA":
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_SA, new { request.UserId, request.FromDate, request.ToDate });
                         break;
+
                     case "SEXYBACCARAT":
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Sexy, new { request.UserId, request.FromDate, request.ToDate });
                         break;
+
                     case "PUSSY":
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Pussy, new { request.UserId, request.FromDate, request.ToDate });
                         break;
+
                     case "PLAYTECH":
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Playtech, new { request.UserId, request.FromDate, request.ToDate });
                         break;
+
                     case "ALLBET":
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_AllBet, new { request.UserId, request.FromDate, request.ToDate });
                         break;
+
                     case "WM":
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_WM, new { request.UserId, request.FromDate, request.ToDate });
                         break;
+
                     default:
                         result = null;
                         break;
@@ -1430,12 +1495,13 @@ namespace Webet333.api.Helpers
                 return result;
             }
         }
+
         #endregion Get Betting List by Username
 
         #region 918 Kiss game password reset
+
         internal async Task<Kiss918PasswordResetResponse> Kiss918GamePasswordReset(ProfileResponse request, string NewPassword)
         {
-
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             var url = $"{GameConst.Kiss918.baseURL}account.ashx?action=editUser" +
                    $"&userName={request.UserName918}" +
@@ -1449,9 +1515,10 @@ namespace Webet333.api.Helpers
             var response = JsonConvert.DeserializeObject<Kiss918PasswordResetResponse>(await GameHelpers.CallThirdPartyApi(url));
             return response;
         }
+
         #endregion 918 Kiss game password reset
 
-        #region  KISS918 game Password Status Update
+        #region KISS918 game Password Status Update
 
         internal async Task ResetPasswordStatusUpdate(bool ResetPassword, string RowId)
         {
@@ -1461,7 +1528,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion KISS918 game Password Status Update
 
         #region House Keeping
 
@@ -1479,8 +1546,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
-
+        #endregion House Keeping
     }
-
 }

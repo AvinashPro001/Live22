@@ -11,7 +11,6 @@ namespace Webet333.api.Helpers
 {
     public class Kiss918GameHelpers : IDisposable
     {
-
         #region Local Variables
 
         private string Connection = string.Empty;
@@ -23,7 +22,7 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion Local Variables
 
         #region Call Kiss 918 Random Username API
 
@@ -44,11 +43,11 @@ namespace Webet333.api.Helpers
             return apiResult;
         }
 
-        #endregion
+        #endregion Call Kiss 918 Random Username API
 
         #region Call Kiss 918 Register API
 
-        internal static async Task<Kiss918RegisterResponse> Kiss918Register(string Username,string Password, string MobileNo)
+        internal static async Task<Kiss918RegisterResponse> Kiss918Register(string Username, string Password, string MobileNo)
         {
             Password = "WB3@" + Password;
             if (Password.Length > 14)
@@ -70,7 +69,7 @@ namespace Webet333.api.Helpers
                            $"&UserAreaId=1" +
                            $"&time={timestamp}" +
                            $"&authcode={GameConst.Kiss918.authcode}" +
-                           $"&sign={SecurityHelpers.MD5EncrptText(GameConst.Kiss918.authcode.ToLower() + Username + timestamp + GameConst.Kiss918.SecretKey.ToLower()).ToUpper()}"+
+                           $"&sign={SecurityHelpers.MD5EncrptText(GameConst.Kiss918.authcode.ToLower() + Username + timestamp + GameConst.Kiss918.SecretKey.ToLower()).ToUpper()}" +
                            $"&pwdtype=1";
 
             dynamic apiResult = JsonConvert.DeserializeObject<Kiss918RegisterResponse>(await GameHelpers.CallThirdPartyApi(URL, null));
@@ -78,7 +77,7 @@ namespace Webet333.api.Helpers
             return apiResult;
         }
 
-        #endregion
+        #endregion Call Kiss 918 Register API
 
         #region Kiss Register API
 
@@ -91,7 +90,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion Game918Kiss
+        #endregion Kiss Register API
 
         #region House Keeping
 
@@ -109,6 +108,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion House Keeping
     }
 }

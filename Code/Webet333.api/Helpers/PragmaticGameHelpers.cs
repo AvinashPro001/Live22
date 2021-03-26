@@ -15,7 +15,6 @@ namespace Webet333.api.Helpers
 {
     public class PragmaticGameHelpers : IDisposable
     {
-
         #region Local Variables
 
         private string Connection = string.Empty;
@@ -27,7 +26,7 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion Local Variables
 
         #region Call Third Party API and Encrpt Data
 
@@ -35,11 +34,8 @@ namespace Webet333.api.Helpers
         {
             try
             {
-
-
                 var hash = $"&hash={SecurityHelpers.MD5EncrptText(Parameter + GameConst.Pragmatic.SecretKey)}";
                 var QueryString = Parameter + hash;
-
 
                 HttpWebRequest request = WebRequest.Create(Url) as HttpWebRequest;
 
@@ -77,7 +73,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Call Third Party API and Encrpt Data
 
         #region Call Register Third Party API
 
@@ -140,7 +136,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<PragmaticGameList>(await CallAPI(Url, Parameter));
         }
 
-        #endregion Call Login Third Party API
+        #endregion Call Game List Third Party API
 
         #region Call Broken status Third Party API
 
@@ -151,13 +147,12 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<PragmaticBrokenStatusResponse>(await GameHelpers.CallGetMethodThirdPartyApi(Url));
         }
 
-        #endregion Call Broken status Party API
+        #endregion Call Broken status Third Party API
 
         #region Call Game Betting Details Third Party API
 
         public static async Task<List<PragmaticBettingDetailsResponse>> BettingDetails(long timestamp)
         {
-
             var Url = $"{GameConst.Pragmatic.BettingDetailsUrl}{GameConst.Pragmatic.BettingDetails}?login={GameConst.Pragmatic.SecureLogin}&password={GameConst.Pragmatic.SecretKey}&timepoint={timestamp}";
             var result = await GameHelpers.CallGetMethodThirdPartyApi(Url);
             var data = result.Split("\n");
@@ -180,7 +175,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<List<PragmaticBettingDetailsResponse>>(tableDataAsString);
         }
 
-        #endregion 
+        #endregion Call Game Betting Details Third Party API
 
         #region Pragmatic game Register
 
@@ -192,7 +187,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Pragmatic game Register
 
         #region Pragmatic Broken status
 
@@ -204,7 +199,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Pragmatic Broken status
 
         #region House Keeping
 
@@ -222,6 +217,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion House Keeping
     }
 }

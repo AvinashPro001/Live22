@@ -321,5 +321,7 @@
   "no_record_found_transfer": "tiada rekod ditemui",
   "no_record_found_promotion": "tiada rekod ditemui",
   "no_record_found_rebate": "tiada rekod ditemui",
-  "no_record_found_statement": "tiada rekod ditemui"
+  "no_record_found_statement": "tiada rekod ditemui",
+
+  "special_not_allowed": "Speical Charater tidak dibenarkan di Passsword !!"
 }

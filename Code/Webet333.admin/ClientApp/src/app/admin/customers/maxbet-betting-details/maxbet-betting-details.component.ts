@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
     styleUrls: ['./maxbet-betting-details.component.scss']
 })
 export class MaxbetBettingDetailsComponent implements OnInit {
-
     rows = [];
     columns = [];
     rowsDetails = [];
@@ -99,7 +98,6 @@ export class MaxbetBettingDetailsComponent implements OnInit {
             { prop: 'version_key' },
         ];
     }
-
 
     BettingDetails() {
         this.loadingIndicator = true;

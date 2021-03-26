@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Webet333.models.Request.Game
 {
-    public class SexyBaccaratManuallyBettingDetailsRequest 
+    public class SexyBaccaratManuallyBettingDetailsRequest
     {
         [Required]
         [JsonProperty(PropertyName = "fromdate")]

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ColorsService {
-
     APP_COLORS = {
         'primary': '#5d9cec',
         'success': '#27c24c',
@@ -27,5 +26,4 @@ export class ColorsService {
     byName(name) {
         return (this.APP_COLORS[name] || '#fff');
     }
-
 }

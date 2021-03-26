@@ -27,12 +27,12 @@
             return new security.MD5Crypto().GetMD5Signature(textToEncrypt);
         }
 
-        public static string DESEncrptText(string textToEncrypt,string key=null)
+        public static string DESEncrptText(string textToEncrypt, string key = null)
         {
             return new security.DESCryptoServices().DESEncrypt(textToEncrypt, key);
         }
 
-        public static string TripleDESEncrptText(string rawData,string key)
+        public static string TripleDESEncrptText(string rawData, string key)
         {
             return new security.TriplesDES().Encrypt(rawData, key, null);
         }

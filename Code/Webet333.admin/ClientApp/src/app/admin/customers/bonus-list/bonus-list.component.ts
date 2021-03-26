@@ -59,7 +59,7 @@ export class BonusListComponent implements OnInit {
         private toasterService: ToasterService,
         private router: Router,
         private confirmationDialogService: ConfirmationDialogService,
-        private getDateService: CommonService
+        private commonService: CommonService
     ) { }
     //#endregion
 
@@ -77,13 +77,17 @@ export class BonusListComponent implements OnInit {
     setColumn() {
         this.columns = [
             { prop: 'No' },
-            { prop: 'DateTime' },
+            { prop: 'Created' },
+            { prop: 'CreatedBy' },
             { prop: 'Username' },
             { prop: 'PromotionTitle' },
             { prop: 'BonusType' },
             { prop: 'BonusAmount' },
             { prop: 'Remark' },
+            { prop: 'VerifiedAt' },
             { prop: 'Operator' },
+            { prop: 'Modified' },
+            { prop: 'ModifiedBy' }
         ];
     }
     //#endregion
@@ -98,20 +102,25 @@ export class BonusListComponent implements OnInit {
             toDate: todate
         }
 
-        
-
         this.adminService.add<any>(customer.bonusList, data).subscribe(res => {
             this.bonusData = res.data.bonus;
             this.totalBonus = res.data.total;
             res.data.bonus.forEach(el => {
                 this.rows.push({
                     No: ++i,
-                    DateTime: this.ReplaceTime(el.created),
+                    Created: this.ReplaceTime(el.created),
+                    CreatedBy: el.createdByName === '' || el.createdByName === null || el.createdByName === undefined
+                        || el.createdByName === NaN ? 'Not Available' : el.createdByName,
+                    Verified: this.ReplaceTime(el.verifiedAt),
                     Username: el.username,
                     PromotionTitle: el.promotionTitle,
                     BonusType: el.depositMethod,
                     BonusAmount: el.amount,
-                    Remark: el.referenceNo,
+                    Remark: el.referenceNo === null || el.referenceNo === "" ? 'No Remarks' : el.referenceNo,
+                    Modified: this.ReplaceTime(el.modified),
+                    ModifiedBy: el.modifiedByName === '' || el.modifiedByName === null || el.modifiedByName === undefined
+                        || el.modifiedByName === NaN ? 'Not Available' : el.modifiedByName,
+                    VerifiedAt: this.ReplaceTime(el.verifiedAt),
                     Operator: el.operatorName,
                 });
             });
@@ -126,7 +135,8 @@ export class BonusListComponent implements OnInit {
 
     //#region timeFormat
     ReplaceTime(Date) {
-        return Date.replace("T", " ")
+        if (Date === null || Date === undefined || Date === NaN || Date === '') return 'Not Available';
+        else return Date.replace("T", " ");
     }
 
     toDate(date) {
@@ -182,12 +192,12 @@ export class BonusListComponent implements OnInit {
     //#region Filter Data
 
     setDatePicker(fromdate = null, todate = null) {
-        this.datePickerfromdate = this.getDateService.setDatePickerFormate(fromdate);
-        this.datePickertodate = this.getDateService.setDatePickerFormate(todate);
+        this.datePickerfromdate = this.commonService.setDatePickerFormate(fromdate);
+        this.datePickertodate = this.commonService.setDatePickerFormate(todate);
     }
 
     setToday() {
-        var dates = this.getDateService.getTodatDate();
+        var dates = this.commonService.getTodatDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 
@@ -197,7 +207,7 @@ export class BonusListComponent implements OnInit {
     }
 
     setYesterday() {
-        var dates = this.getDateService.getYesterDate();
+        var dates = this.commonService.getYesterDate();
         var fromdate = dates.fromdate;
         var todate = dates.todate;
 

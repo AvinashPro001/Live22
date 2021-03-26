@@ -4,7 +4,7 @@ namespace Webet333.models.Response.Account
 {
     public class WebAnalyticsResponse
     {
-        [JsonProperty(PropertyName ="refkeyword")]
+        [JsonProperty(PropertyName = "refkeyword")]
         public string RefKeyword { get; set; }
 
         [JsonProperty(PropertyName = "total")]
@@ -13,10 +13,8 @@ namespace Webet333.models.Response.Account
         [JsonProperty(PropertyName = "totaluser")]
         public string TotalUsers { get; set; }
 
-
         [JsonProperty(PropertyName = "totalDepoist")]
         public decimal TotalDepoist { get; set; }
-
 
         [JsonProperty(PropertyName = "totalWithdraw")]
         public decimal TotalWithdraw { get; set; }

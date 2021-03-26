@@ -6,7 +6,7 @@ namespace Webet333.models.Request.Payments
 {
     public class TransferInsertRequest
     {
-        [JsonProperty(PropertyName ="userId")]
+        [JsonProperty(PropertyName = "userId")]
         public Guid UserId { get; set; }
 
         [Required]
@@ -22,7 +22,7 @@ namespace Webet333.models.Request.Payments
         public double Amount { get; set; }
     }
 
-    public class TransferUpdateRequest: TransferInsertRequest
+    public class TransferUpdateRequest : TransferInsertRequest
     {
         [JsonProperty(PropertyName = "id")]
         public Guid Id { get; set; }

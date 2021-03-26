@@ -157,7 +157,6 @@ export class BankDepositComponent implements OnInit {
         //    (document.getElementById("txt_todatetime") as HTMLInputElement).value = null;
         //}
 
-
         this.adminService.add<any>(customer.paymentStatics, data).subscribe(res => {
             this.rows = [];
             let i = 0;

@@ -108,8 +108,6 @@ export class BonusAddComponent implements OnInit {
         this.walletData(this.newVal);
     }
 
-
-
     config = {
         displayKey: "username", //if objects array passed which key to be displayed defaults to description
         search: true, //true/false for the search functionlity defaults to false,
@@ -196,13 +194,10 @@ export class BonusAddComponent implements OnInit {
                 return this.toasterService.pop('error', 'Error', "Game in Maintenance");
             }
 
-
-
             this.adminService.add<any>(customer.addDeposit, dataSelect).subscribe(res => {
                 this.toasterService.pop('success', 'Successfully', res.message);
                 this.router.navigate(['admin/customers/bonus-list']);
             });
-
         });
     }
     //#endregion
@@ -238,7 +233,6 @@ export class BonusAddComponent implements OnInit {
             this.urls.push({ base64images: e.target.result });
         }
         reader.readAsDataURL(file);
-
     }
 
     removefile(files) {
@@ -277,7 +271,6 @@ export class BonusAddComponent implements OnInit {
             });
         } else {
             return new Promise((resolve, reject) => {
-
                 this.adminService.add<any>(apiurl, postData).subscribe(res => {
                     resolve({
                         'error': false,
@@ -459,7 +452,7 @@ export class BonusAddComponent implements OnInit {
 
     //#region Generate Number
     generate(n) {
-        var add = 1, max = 12 - add;   // 12 is the min safe number Math.random() can generate without it starting to pad the end with zeros.   
+        var add = 1, max = 12 - add;   // 12 is the min safe number Math.random() can generate without it starting to pad the end with zeros.
 
         if (n > max) {
             return this.generate(max) + this.generate(n - max);
@@ -577,7 +570,6 @@ export class BonusAddComponent implements OnInit {
     }
 
     ManiWalletBalance(id) {
-
         let data = {
             id: id
         }
@@ -707,7 +699,6 @@ export class BonusAddComponent implements OnInit {
             this.allbetBal = res.data.balance;
         })
     }
-
 
     WM(id) {
         let data = {

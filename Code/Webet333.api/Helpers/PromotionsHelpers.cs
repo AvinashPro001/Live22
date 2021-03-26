@@ -79,19 +79,33 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task Update(Guid Id, string Extension, string ExtensionMobile)
+        public async Task Update(Guid Id, string Extension, string ExtensionMobile, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Promotions.Image, new { Id, Extension, ExtensionMobile });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Promotions.Image,
+                    new
+                    {
+                        Id,
+                        Extension,
+                        ExtensionMobile,
+                        adminId
+                    });
             }
         }
 
-        public async Task Delete(Guid Id)
+        public async Task Delete(Guid Id, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Promotions.Delete, new { Id });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Promotions.Delete,
+                    new
+                    {
+                        Id,
+                        adminId
+                    });
             }
         }
 
@@ -99,7 +113,14 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Promotions.UpdateActiveStatus, new { request.Id,request.Active });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Promotions.UpdateActiveStatus,
+                    new
+                    {
+                        request.Id,
+                        request.Active,
+                        request.AdminId
+                    });
             }
         }
 
@@ -120,7 +141,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<dynamic> RetrieveAdmin(PromotionAdminRetriveRequest request,BaseUrlConfigs baseUrl)
+        public async Task<dynamic> RetrieveAdmin(PromotionAdminRetriveRequest request, BaseUrlConfigs baseUrl)
         {
             var promotions = new List<PromotionResponse>();
             using (var repository = new DapperRepository<PromotionResponse>(Connection))
@@ -137,7 +158,6 @@ namespace Webet333.api.Helpers
                         promotion.Details = Details.ToList().Where(x => x.ParentId == promotion.Id).ToList();
                         promotion.Terms = Terms.ToList().Where(x => x.ParentId == promotion.Id).ToList();
                     });
-
                 }
                 return AdminPromotionMapping.Map(promotions, baseUrl);
             }
@@ -158,7 +178,6 @@ namespace Webet333.api.Helpers
                 return await repository.GetDataAsync(StoredProcConsts.Promotions.PromotionApplyList, new { request.UserId, request.FromDate, request.ToDate, request.Status });
             }
         }
-
 
         public async Task<dynamic> PromotionReport(GlobalListRequest request)
         {
@@ -211,7 +230,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task PromotionGroupDelete(GetByIdRequestWithRequired request)
+        public async Task PromotionGroupDelete(GetByIdRequestWithRequiredAndAdminId request)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {

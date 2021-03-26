@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +22,7 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion Local Variables
 
         #region Call Register API of Mega888
 
@@ -42,7 +41,7 @@ namespace Webet333.api.Helpers
             return await GameHelpers.CallThirdPartyApi(url);
         }
 
-        #endregion
+        #endregion Call Register API of Mega888
 
         #region Call Withdraw Deposit API of Mega888
 
@@ -66,11 +65,11 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<Mega888DepositWithdrawResponse>(await GameHelpers.CallThirdPartyApi(url, null));
         }
 
-        #endregion
+        #endregion Call Withdraw Deposit API of Mega888
 
         #region Call Get Player Log URL of Mega888
 
-        internal static async Task<Mega888PlayerLogURLResponse> CallPlayerLogURLAPI(string Mega888LoginId, string StartTime,string EndTime)
+        internal static async Task<Mega888PlayerLogURLResponse> CallPlayerLogURLAPI(string Mega888LoginId, string StartTime, string EndTime)
         {
             var random = Guid.NewGuid().ToString();
             var mega888URL = $"{GameConst.Mega888.BaseUrl}open.mega.player.game.lo.url.get" +
@@ -86,7 +85,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<Mega888PlayerLogURLResponse>(await GameHelpers.CallThirdPartyApi(mega888URL, null));
         }
 
-        #endregion
+        #endregion Call Get Player Log URL of Mega888
 
         #region Call Get Player Log  of Mega888
 
@@ -114,7 +113,7 @@ namespace Webet333.api.Helpers
             return result;
         }
 
-        #endregion
+        #endregion Call Get Player Log  of Mega888
 
         #region Call Logout API of Mega888
 
@@ -132,7 +131,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject(await GameHelpers.CallThirdPartyApi(url, null));
         }
 
-        #endregion
+        #endregion Call Logout API of Mega888
 
         #region Mega888 game Register
 
@@ -183,7 +182,7 @@ namespace Webet333.api.Helpers
             return response;
         }
 
-        #endregion
+        #endregion Mega888 Login Response Method
 
         #region Mega888 Player Log Insert
 
@@ -200,9 +199,10 @@ namespace Webet333.api.Helpers
             return 0;
         }
 
-        #endregion
+        #endregion Mega888 Player Log Insert
 
         #region House Keeping
+
         public void Dispose()
         {
             Dispose(true);
@@ -216,6 +216,7 @@ namespace Webet333.api.Helpers
                 Connection = string.Empty;
             }
         }
-        #endregion
+
+        #endregion House Keeping
     }
 }

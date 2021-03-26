@@ -18,6 +18,7 @@ namespace Webet333.api.Controllers
     public class AllBetGameController : BaseController
     {
         #region Global Variable
+
         public AllBetGameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
@@ -50,7 +51,7 @@ namespace Webet333.api.Controllers
 
             username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
 
-            var result = await AllBetGameHelpers.RegisterCallAPI(username,password);
+            var result = await AllBetGameHelpers.RegisterCallAPI(username, password);
             using (var allbet_helper = new AllBetGameHelpers(Connection))
             {
                 if (result.error_code != "OK") return OkResponse(result);
@@ -59,7 +60,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion AllBet game Register
 
         #region AllBet game Login
 
@@ -85,11 +86,11 @@ namespace Webet333.api.Controllers
             }
             var languageCode = Language.Name == "English" ? "en" : "zh_CN";
             var Apptype = request.IsMobile ? 3 : 6;
-            var result = await AllBetGameHelpers.LoginCallAPI(username, password,languageCode,Apptype);
+            var result = await AllBetGameHelpers.LoginCallAPI(username, password, languageCode, Apptype);
             return OkResponse(result);
         }
 
-        #endregion 
+        #endregion AllBet game Login
 
         #region AllBet game Change password
 
@@ -113,11 +114,11 @@ namespace Webet333.api.Controllers
                 username = user.AllBetGamePrefix + user.UserId;
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
-            
+
             var result = await AllBetGameHelpers.ChangePasswordCallAPI(username, password);
             return OkResponse(result);
         }
 
-        #endregion 
+        #endregion AllBet game Change password
     }
 }

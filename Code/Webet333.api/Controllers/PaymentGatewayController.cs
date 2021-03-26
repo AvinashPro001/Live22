@@ -9,7 +9,6 @@ using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
-using Webet333.models.Request;
 using Webet333.models.Request.PaymentGateway;
 using Webet333.models.Response.PaymentGateway;
 
@@ -55,7 +54,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Payment Gateway URL Register
 
         #region Payment Auto Verifiy API
 
@@ -91,7 +90,7 @@ namespace Webet333.api.Controllers
             return OkResponse(responseList);
         }
 
-        #endregion
+        #endregion Payment Auto Verifiy API
 
         #region Payment Verifiy API
 
@@ -107,6 +106,6 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Payment Verifiy API
     }
 }

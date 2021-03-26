@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
     styleUrls: ['./maxbet-limit.component.scss']
 })
 export class MaxbetLimitComponent implements OnInit {
-
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -21,7 +20,6 @@ export class MaxbetLimitComponent implements OnInit {
     async ngOnInit() {
         await this.checkViewPermission();
     }
-
 
     async SetLimit() {
         if (await this.checkUpdatePermission()) {

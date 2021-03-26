@@ -11,7 +11,6 @@ using Webet333.api.Helpers;
 using Webet333.logs;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
-using Webet333.models.Request.Payments;
 using Webet333.models.Request.TransferMoney;
 using Webet333.models.Response.TransferMoney;
 
@@ -33,7 +32,7 @@ namespace Webet333.api.Controllers
             _hostingEnvironment = environment;
         }
 
-        #endregion Global variable and Constructor   
+        #endregion Global variable and Constructor
 
         [Authorize]
         [HttpPost(ActionsConst.TransferMoney.TransferBalance)]
@@ -45,7 +44,7 @@ namespace Webet333.api.Controllers
             if (Role == RoleConst.Users)
                 request.UserId = GetUserId(User).ToString();
             else
-                if (String.IsNullOrEmpty(request.UserId))
+            if (String.IsNullOrEmpty(request.UserId))
                 return BadResponse("error_invalid_modelstate");
 
             var responseId = await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Amount = request.Amount.ToString(), UserId = request.UserId, WalletId = request.ToWalletId, Request = JsonConvert.SerializeObject(request) });
@@ -101,7 +100,7 @@ namespace Webet333.api.Controllers
                         }
                         else
                         {
-                            //Deposit In Main Wallet and Insert into DB Row 
+                            //Deposit In Main Wallet and Insert into DB Row
                             await transferMoney_helper.DepositInWallet(userDetails, "Main Wallet", request.Amount, request.UserId.ToString(), _hostingEnvironment);
                             transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
 
@@ -128,8 +127,6 @@ namespace Webet333.api.Controllers
 
                 return OkResponse();
             }
-
         }
-
     }
 }

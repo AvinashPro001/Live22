@@ -8,8 +8,8 @@ exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsC
 exports.environment = {
     production: false,
     //apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    apiUrl: 'http://localhost/api/v1/'
+    apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://localhost:49841/api/v1/'
 };
 exports.account = {
     login: exports.environment.apiUrl + 'account/login',
@@ -246,6 +246,10 @@ exports.customer = {
     contactDetailsUpdate: exports.environment.apiUrl + 'settings/contact/details/update',
     contactDetailsAdd: exports.environment.apiUrl + 'settings/contact/details/add',
     GameSelectUser: exports.environment.apiUrl + 'Game/SelectUser',
+    adminLogList: exports.environment.apiUrl + 'admin/log/select',
+    adminAction: exports.environment.apiUrl + 'admin/action/select_for_dropdown',
+    adminModule: exports.environment.apiUrl + 'admin/module/select_for_dropdown',
+    dailyReport: exports.environment.apiUrl + 'daily/report/select'
 };
 exports.playtech = {
     playtechUrl: "http://api.webet333.com/api/Default/playtech",

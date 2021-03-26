@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Filters;
 using Webet333.api.Helpers;
+using Webet333.dapper;
 using Webet333.files.interfaces;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
@@ -28,11 +29,12 @@ namespace Webet333.api.Controllers
     [Route(ActionsConst.ApiVersion)]
     public class AccountController : BaseController
     {
-
         #region Global Variable
 
         private IHostingEnvironment _hostingEnvironment;
+
         private IHubContext<SignalRHub> _hubContext;
+
         public AccountController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, IHubContext<SignalRHub> hubContext, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
@@ -121,10 +123,13 @@ namespace Webet333.api.Controllers
             using (var account_help = new AccountHelpers(Connection))
             {
                 var userId = await account_help.UpdatePasswordToken(request.Token, request.Password);
+
                 #region Sending email in queue
+
                 var user = await account_help.FindUser(userId: userId);
                 new EmailHelpers(Localizer, messages).SendAccountEmail(user, null, EmailTypeConst.ChangePassword);
-                #endregion 
+
+                #endregion Sending email in queue
             }
             return OkResponse();
         }
@@ -141,10 +146,13 @@ namespace Webet333.api.Controllers
             using (var account_help = new AccountHelpers(Connection))
             {
                 var userId = await account_help.AdminInviteUpdate(request.Token, request.Password);
+
                 #region Sending email in queue
+
                 var user = account_help.FindUser(userId: userId);
                 new EmailHelpers(Localizer, messages).SendAccountEmail(user.Result, null, EmailTypeConst.ChangePassword);
-                #endregion
+
+                #endregion Sending email in queue
             }
             return OkResponse();
         }
@@ -157,7 +165,6 @@ namespace Webet333.api.Controllers
         [HttpGet(ActionsConst.Account.Logout)]
         public async Task<IActionResult> Logout()
         {
-
             using (var account_help = new AccountHelpers(Connection))
             {
                 await account_help.Logout(GetUniqueId(User));
@@ -221,13 +228,13 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Account.Register)]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request, [FromServices] IOptions<AuthConfig> AuthConfigOptions)
         {
-
             if (!ModelState.IsValid) return BadResponse(ModelState);
             using (var account_help = new AccountHelpers(Connection))
             {
                 var user = await account_help.AddUser(Connection, request, RoleConst.Users);
 
                 #region Sending SMS in queue
+
                 if (user == null) return OkResponse();
 
                 await account_help.SendOtp(user.Id.ToString(), user.MobileNo);
@@ -249,7 +256,8 @@ namespace Webet333.api.Controllers
                         statusCode = messageResponse
                     }
                 });
-                #endregion
+
+                #endregion Sending SMS in queue
             }
         }
 
@@ -305,9 +313,12 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> WalletMaintenanceUpdate([FromBody] WalletMaintenanceUpdateRequest request)
         {
             await CheckUserRole();
+
+            string adminId = GetUserId(User).ToString();
+
             using (var account_help = new AccountHelpers(Connection))
             {
-                var WalletUpdate = await account_help.WalletMainteanceUpdate(request);
+                var WalletUpdate = await account_help.WalletMainteanceUpdate(request, adminId);
                 if (WalletUpdate != null)
                 {
                     await _hubContext.Clients.All.SendAsync("WalletUpdate", new { data = WalletUpdate });
@@ -380,9 +391,11 @@ namespace Webet333.api.Controllers
             if (String.IsNullOrEmpty(request.keyword))
                 return BadResponse(Localizer["error_empty_keyword"].Value);
 
+            var adminId = GetUserId(User).ToString();
+
             using (var account_help = new AccountHelpers(Connection))
             {
-                var refKeyword = await account_help.ReferenceKeywordInsert(request.keyword);
+                var refKeyword = await account_help.ReferenceKeywordInsert(request.keyword, adminId);
                 return OkResponse(refKeyword);
             }
         }
@@ -398,9 +411,11 @@ namespace Webet333.api.Controllers
             await CheckUserRole();
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
+            var adminId = GetUserId(User).ToString();
+
             using (var account_help = new AccountHelpers(Connection))
             {
-                var refKeyword = await account_help.ReferenceKeywordDelete(request.Id.ToString());
+                var refKeyword = await account_help.ReferenceKeywordDelete(request.Id.ToString(), adminId);
                 return OkResponse(refKeyword);
             }
         }
@@ -423,7 +438,7 @@ namespace Webet333.api.Controllers
 
         #endregion Analytics
 
-        #region  Get List of Language
+        #region Get List of Language
 
         [Authorize]
         [HttpGet(ActionsConst.Account.GetLanguage)]
@@ -437,7 +452,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Get List of Language
 
         #region Login Reigster Tracking Insert
 
@@ -449,7 +464,7 @@ namespace Webet333.api.Controllers
             using (var accounthelper = new AccountHelpers(Connection))
             {
                 accounthelper.TrackingInsert(request);
-               // accounthelper.TrackingLoginRegisterUpdate();
+                // accounthelper.TrackingLoginRegisterUpdate();
             }
             return OkResponse();
         }
@@ -518,7 +533,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Manager Operation Insert
 
         #region Manager Operation Select
 
@@ -535,7 +550,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Manager Operation Select
 
         #region Manager Operation update
 
@@ -552,7 +567,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Manager Operation update
 
         #region SMS Users Select
 
@@ -569,7 +584,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion SMS Users Select
 
         #region SMS SEND
 
@@ -578,6 +593,26 @@ namespace Webet333.api.Controllers
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            #region Admin Log
+
+            string adminId = GetUserId(User).ToString();
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Global.AdminLog,
+                    new
+                    {
+                        adminId,
+                        Action = "Add",
+                        Module = "SMS Announcement",
+                        Description = $"Send {request.Message} as SMS to users"
+                    });
+            }
+
+            #endregion Admin Log
+
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var messageResponse = await account_helper.SendSMSAPI(request.MobileNo, request.Message);
@@ -602,10 +637,9 @@ namespace Webet333.api.Controllers
                     }
                 });
             }
-
         }
 
-        #endregion
+        #endregion SMS SEND
 
         #region Last Login Update
 
@@ -616,12 +650,12 @@ namespace Webet333.api.Controllers
             var userId = GetUserId(User).ToString();
             using (var account_help = new AccountHelpers(Connection))
             {
-                account_help.UserLastLoginTime(userId, Language.Code,GetUserRole(User),GetUniqueId(User));
+                account_help.UserLastLoginTime(userId, Language.Code, GetUserRole(User), GetUniqueId(User));
             }
             return OkResponse();
         }
 
-        #endregion
+        #endregion Last Login Update
 
         #region Notification Select
 
@@ -638,7 +672,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Notification Select
 
         #region Notification Update
 
@@ -655,7 +689,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Notification Update
 
         #region Game Username
 
@@ -672,9 +706,10 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Game Username
 
         #region Send OTP
+
         [Authorize]
         [HttpGet(ActionsConst.Account.SendOtp)]
         public async Task<IActionResult> SendOtp()
@@ -687,9 +722,11 @@ namespace Webet333.api.Controllers
                 return OkResponse();
             }
         }
+
         #endregion Send OTP
 
         #region Verified OTP
+
         [Authorize]
         [HttpPost(ActionsConst.Account.VerifiedOtp)]
         public async Task<IActionResult> VerifiedOTP([FromBody] OtpVerifiedRequest request)
@@ -701,9 +738,11 @@ namespace Webet333.api.Controllers
                 return OkResponse(response);
             }
         }
+
         #endregion Verified OTP
 
         #region Add IC Number
+
         [Authorize]
         [HttpPost(ActionsConst.Account.ICNumberAdd)]
         public async Task<IActionResult> ICNumberAdd([FromBody] IcNumberAddRequest request)
@@ -715,9 +754,11 @@ namespace Webet333.api.Controllers
                 return OkResponse();
             }
         }
+
         #endregion Add IC Number
 
         #region Add IC Image
+
         [Authorize]
         [HttpPost(ActionsConst.Account.ICImageAdd)]
         public async Task<IActionResult> ICImageAdd([FromBody] IcImageAddRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
@@ -746,9 +787,10 @@ namespace Webet333.api.Controllers
 
             return OkResponse(IcImages);
         }
+
         #endregion Add IC Image
 
-        #region  IC Image List
+        #region IC Image List
 
         [Authorize]
         [HttpPost(ActionsConst.Account.ICImagesList)]
@@ -762,9 +804,9 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion IC Image List
 
-        #region  Vader Pay Maintenance Select
+        #region Vader Pay Maintenance Select
 
         [HttpGet(ActionsConst.Account.VaderPayMaintenanceSelect)]
         public async Task<IActionResult> VaderPayMaintenanceSelect()
@@ -776,25 +818,28 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Vader Pay Maintenance Select
 
-        #region  Vader Pay Maintenance Update
+        #region Vader Pay Maintenance Update
 
         [Authorize]
         [HttpPost(ActionsConst.Account.VaderPayMaintenanceUpdate)]
         public async Task<IActionResult> VaderPayMaintenanceUpdate([FromBody] GlobalParameterUpdateRequest request)
         {
             await ValidateUser(role: RoleConst.Admin);
+
+            string adminId = GetUserId(User).ToString();
+
             using (var account_help = new AccountHelpers(Connection))
             {
-                await account_help.GlobalParameterUpdate(request.Value, "VaderPay");
+                await account_help.GlobalParameterUpdate(request.Value, "VaderPay", adminId);
                 return OkResponse();
             }
         }
 
-        #endregion
+        #endregion Vader Pay Maintenance Update
 
-        #region  Global ParaMeter Select
+        #region Global ParaMeter Select
 
         [HttpPost(ActionsConst.Account.GlobalparameterSelect)]
         public async Task<IActionResult> GlobalParaMeterSelect([FromBody] GlobalParameterUpdateRequest request)
@@ -806,39 +851,45 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Global ParaMeter Select
 
-        #region  Global ParaMeter Update
+        #region Global ParaMeter Update
 
         [Authorize]
         [HttpPost(ActionsConst.Account.GlobalparameterUpdate)]
         public async Task<IActionResult> GlobalParaMeterUpdate([FromBody] GlobalParameterUpdateRequest request)
         {
             await ValidateUser(role: RoleConst.Admin);
+
+            string adminId = GetUserId(User).ToString();
+
             using (var account_help = new AccountHelpers(Connection))
             {
-                await account_help.GlobalParameterUpdate(request.Value, request.Name);
+                await account_help.GlobalParameterUpdate(request.Value, request.Name, adminId);
                 return OkResponse();
             }
         }
 
-        #endregion
+        #endregion Global ParaMeter Update
 
-        #region  REBATE SETTING Update
+        #region REBATE SETTING Update
 
         [Authorize]
         [HttpPost(ActionsConst.Account.RebateSettingUpdate)]
         public async Task<IActionResult> RebateSettingUpdate([FromBody] RebateSettingUpdateRequest request)
         {
             await ValidateUser(role: RoleConst.Admin);
+
+            string adminId = GetUserId(User).ToString();
+
             using (var account_help = new AccountHelpers(Connection))
             {
-                await account_help.RebateSettingUpdate(request.DateTime);
+                await account_help.RebateSettingUpdate(request.DateTime, adminId);
                 return OkResponse();
             }
         }
 
-        #endregion
+        #endregion REBATE SETTING Update
 
         #region Admin User Register Select
 
@@ -855,7 +906,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Admin User Register Select
 
         #region Admin User Behaviour Select
 
@@ -871,7 +922,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Admin User Behaviour Select
 
         #region Download Excel File
 
@@ -883,7 +934,7 @@ namespace Webet333.api.Controllers
             return OkResponse(new { path = BaseUrlConfigsOption.Value.ImageBase + BaseUrlConfigsOption.Value.ExcelFilesPath + "/" + fileName });
         }
 
-        #endregion
+        #endregion Download Excel File
 
         #region Manager GamePassword Show
 
@@ -899,7 +950,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Manager GamePassword Show
 
         #region Manager resert List
 
@@ -915,7 +966,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Manager resert List
 
         #region Contact Information
 
@@ -935,11 +986,9 @@ namespace Webet333.api.Controllers
                 string htmlCode = string.Empty;
                 if (!request.IsMobile)
                 {
-                    
                     htmlCode = @"<li class=""support-live""><h5><strong>Live Support</strong></h5><p><img src=""../../images/hours_24.png"" alt=""hours 24""></p><h6><strong style=""padding-right:60px;"">24 Hours</strong></h6></li>";
                     foreach (var contact in type)
                     {
-
                         htmlCode += $@"<li class=""text-center""><h5><img class=""contact-logos"" src=""{contact.TypeImage}"" alt=""{contact.Type}""> <strong><u>{contact.Type}</u></strong></h5>";
                         var contactInformationDetails = JsonConvert.DeserializeObject<List<ContactInformationDetails>>(contact.Details);
                         contactInformationDetails.ForEach(x =>
@@ -954,8 +1003,6 @@ namespace Webet333.api.Controllers
 
                             if (info.CSImage == null)
                             {
-                               
-
                                 htmlCode += $@"<strong><a class=""{className}"" href=""{info.Url}"" ";
 
                                 if (info.IsOpenInNewPage)
@@ -985,8 +1032,6 @@ namespace Webet333.api.Controllers
                             x.CSImage = x.CSImage == null || x.CSImage == "" ? null : $"{BaseUrlConfigsOptions.Value.ImageBase}{BaseUrlConfigsOptions.Value.ContactImage}/{x.TypeDetailsId}{x.CSImage}";
                         });
 
-                        
-
                         string replaceHtml = $@"<tr><td rowspan=""{{0}}"" class=""text-right"" width=""30%""><img  class=""downloadIconMobile"" src=""{contact.TypeImage}"" alt=""{contact.Type}""><p class="""" style=""font-size:10px;margin:0px 5px 0px 0px;""><span>{contact.Type}</span></p></td>";
 
                         for (int i = 0; i < contactInformationDetails.Count; i++)
@@ -995,7 +1040,7 @@ namespace Webet333.api.Controllers
                             {
                                 if (i == 0)
                                 {
-                                    int rowSpan = contactInformationDetails[i].CSImage == null ? contactInformationDetails.Count :2 ;
+                                    int rowSpan = contactInformationDetails[i].CSImage == null ? contactInformationDetails.Count : 2;
 
                                     htmlCode += string.Format(replaceHtml, rowSpan);
 
@@ -1014,8 +1059,6 @@ namespace Webet333.api.Controllers
 
                                 htmlCode += $@"</tr><tr><td><div style=""text-align:center;""><div style=""border:2px solid  black;width:69%;padding:10px; border-radius:20px;width:150px;""><img style=""width:100px;height:100px;text-align:center;"" src=""{contactInformationDetails[i].CSImage}"" alt=""barcode""><p>{contactInformationDetails[i].CSId}</p></div></div></td></tr>";
                             }
-                           
-
                         }
                         htmlCode += @"</table>";
                     }
@@ -1025,7 +1068,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Contact Information
 
         #region Check password
 
@@ -1035,6 +1078,6 @@ namespace Webet333.api.Controllers
             return OkResponse(SecurityHelpers.DecryptPassword(password));
         }
 
-        #endregion
+        #endregion Check password
     }
 }

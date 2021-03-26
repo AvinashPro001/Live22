@@ -49,6 +49,9 @@ namespace Webet333.models.Request.Account
 
         [JsonIgnore]
         public string Role { get; set; }
+
+        [JsonIgnore]
+        public System.Guid AdminId { get; set; }
     }
 
     public class UpdateAdminRequest : BaseValidateRequest
@@ -64,5 +67,8 @@ namespace Webet333.models.Request.Account
         public string Password { get; set; }
 
         public ICollection<MenusResponse> PermissionsList { get; set; }
+
+        [JsonIgnore]
+        public System.Guid AdminId { get; set; }
     }
 }

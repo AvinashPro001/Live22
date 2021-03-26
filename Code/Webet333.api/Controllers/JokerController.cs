@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -13,14 +11,12 @@ using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Game;
 using Webet333.models.Request.GameBalance;
-using Webet333.models.Response.Game.Joker;
 
 namespace Webet333.api.Controllers
 {
     [Route(ActionsConst.ApiVersion)]
     public class JokerController : BaseController
     {
-
         #region Global Variable
 
         public JokerController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
@@ -42,7 +38,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Joker Broken Status
 
         #region Joker Broken Status details
 
@@ -56,7 +52,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Joker Broken Status details
 
         #region Joker game Register
 
@@ -96,6 +92,6 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Joker game Register
     }
 }

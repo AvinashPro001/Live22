@@ -12,7 +12,6 @@ using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Game;
-using Webet333.models.Request.User;
 using Webet333.models.Response.Account;
 using Webet333.models.Response.Game;
 
@@ -47,7 +46,7 @@ namespace Webet333.api.Controllers
                 if (string.IsNullOrEmpty(request.Id))
                     return BadResponse("error_invalid_modelstate");
 
-            string username, MobileNo,password;
+            string username, MobileNo, password;
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
@@ -73,7 +72,7 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> PussyGamePasswordReset()
         {
             await ValidateUser();
-            string  password;
+            string password;
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(UserEntity.Id.ToString());
@@ -93,7 +92,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Pussy888 game password reset
 
         #region Pussy888 game password reset by Admin
 
@@ -116,7 +115,6 @@ namespace Webet333.api.Controllers
                     PasswordPussy888 = request.GamePassword,
                 };
 
-
                 var result = await pussygame_helper.Pussy888GamePasswordReset(PasswordUpdateRequest, newPassword);
                 if (result.code != 0) return BadResponse(result.msg);
 
@@ -126,7 +124,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Pussy888 game password reset by Admin
 
         #region All Pussy888 game users password reset
 
@@ -151,7 +149,6 @@ namespace Webet333.api.Controllers
                     request.UserNamePussy888 = user.KissUsername;
                     request.UserName = user.Username;
 
-                    
                     var result = await pussygame_helper.Pussy888GamePasswordReset(request, newPassword);
                     if (result.code == 0)
                     {
@@ -163,7 +160,6 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
-
+        #endregion All Pussy888 game users password reset
     }
 }

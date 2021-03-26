@@ -1,15 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Webet333.models.Request.PaymentGateway
 {
     public class GetUrlRequest
     {
         [Required]
-        [JsonProperty(PropertyName ="amount")]
+        [JsonProperty(PropertyName = "amount")]
         public decimal Amount { get; set; }
 
         [JsonProperty(PropertyName = "promotionId")]

@@ -262,7 +262,6 @@ export class UsersBehaviourReportsComponent implements OnInit {
 
     //#endregion Check Permission
 
-
     //#region Redirect to user details page
 
     show(row = null) {
@@ -271,5 +270,4 @@ export class UsersBehaviourReportsComponent implements OnInit {
     }
 
     //#endregion Redirect to user details page
-
 }

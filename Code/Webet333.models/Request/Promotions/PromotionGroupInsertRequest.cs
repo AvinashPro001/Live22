@@ -1,13 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Webet333.models.Request.Promotions
 {
-    public class PromotionGroupInsertRequest
+    public class PromotionGroupInsertRequest : BaseAdminLogRequest
     {
-        [JsonProperty(PropertyName ="groupName")]
+        [JsonProperty(PropertyName = "groupName")]
         public string GroupName { get; set; }
 
         [JsonProperty(PropertyName = "jsonString")]

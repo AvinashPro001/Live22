@@ -59,7 +59,7 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 @Component({
     selector: 'app-users-details',
     templateUrl: './users-details.component.html',
-    styleUrls: ['./users-details.component.scss']
+    styleUrls: ['./users-details.component.scss'],
 })
 export class UsersDetailsComponent implements OnInit {
     //#region Variable and Constructor
@@ -229,6 +229,12 @@ export class UsersDetailsComponent implements OnInit {
     model: NgbDateStruct;
     date: { year: number, month: number };
 
+    bankColumns: any;
+    bankRows: any;
+
+    imagePath: any;
+    slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };
+
     constructor(
         private datePipe: DatePipe,
         private adminService: AdminService,
@@ -244,9 +250,10 @@ export class UsersDetailsComponent implements OnInit {
     //#region OnInit Method
     async ngOnInit() {
         if (await this.checkViewPermission()) {
+            this.coloumSet();
+
             let dataCustomer = JSON.parse(localStorage.getItem('id'));
             this.Userdata = dataCustomer as object[];
-
             if (this.Userdata != null) {
                 if (this.Userdata.userId) this.getCustomerById(this.Userdata.userId);
                 else this.getCustomerById(this.Userdata.id);
@@ -260,9 +267,9 @@ export class UsersDetailsComponent implements OnInit {
             }
             this.LoadVIPCategory();
             document.getElementById("profiletab").click();
-            this.coloumSet();
+
             var someElement = document.getElementById("lockIcon");
-            localStorage.removeItem('id');
+            // localStorage.removeItem('id');   // Not remove data from local storage. Beacuse on page re-load data will not show.
         }
     }
 
@@ -271,9 +278,25 @@ export class UsersDetailsComponent implements OnInit {
 
         this.adminService.add<any>(customer.customerListById, model).subscribe(res => {
             this.Userdata = res.data[0];
+            this.Userdata.Created = this.replaceDateTime(this.Userdata.Created);
             this.RegisteInGame(this.Userdata.id)
             this.onChange(this.Userdata);
+            let i = 0;
+            this.bankRows = [];
+            this.Userdata.UserBankDetails.forEach(el => {
+                this.bankRows.push({
+                    No: ++i,
+                    BankName: el.bankName,
+                    BankAccountNo: el.accountNo
+                });
+            });
+            this.bankRows = [...this.bankRows];
+
+            this.imagePath = this.Userdata.UserICImage;
+
+            this.loadingIndicator = false;
         }, error => {
+            this.loadingIndicator = false;
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
@@ -675,6 +698,12 @@ export class UsersDetailsComponent implements OnInit {
             { prop: 'Rnum' },
             { prop: 'Status' },
         ];
+
+        this.bankColumns = [
+            { prop: 'No' },
+            { prop: 'BankName' },
+            { prop: 'BankAccountNo' }
+        ]
     }
 
     setBettingDetailsColumn(selectedList) {
@@ -1244,13 +1273,11 @@ export class UsersDetailsComponent implements OnInit {
     //#region Registe User
 
     RegisteInGame(Id) {
-
         try {
             let data = {
                 id: Id
             }
             this.adminService.add<any>(GameRegister.selectUser, data).subscribe(res => {
-
                 //#region AG Game Register
 
                 if (!res.data.AG) {
@@ -1261,7 +1288,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1277,7 +1303,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1293,7 +1318,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1309,7 +1333,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1325,7 +1348,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1341,7 +1363,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1357,7 +1378,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1373,7 +1393,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1389,7 +1408,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1405,7 +1423,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1421,7 +1438,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1437,7 +1453,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1453,7 +1468,6 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
@@ -1474,16 +1488,13 @@ export class UsersDetailsComponent implements OnInit {
                         });
                     }
                     catch (e) {
-
                     }
                 }
 
                 //#endregion
-
             })
         }
         catch (e) { }
-
     }
 
     //#endregion
@@ -2874,7 +2885,7 @@ export class UsersDetailsComponent implements OnInit {
             this.toasterService.pop('error', 'Error', "Select Username");
     }
 
-    //#endregion 
+    //#endregion
 
     //#region Reset Password
 
@@ -3024,4 +3035,12 @@ export class UsersDetailsComponent implements OnInit {
     }
 
     //#endregion Check Permission
+
+    //#region Open IC imahe in new tab
+
+    ImageOpenNewTab(ImageUrl) {
+        window.open(ImageUrl, 'Image', 'width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
+    }
+
+    //#endregion Open IC imahe in new tab
 }

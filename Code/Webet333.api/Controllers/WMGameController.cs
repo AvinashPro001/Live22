@@ -16,7 +16,6 @@ namespace Webet333.api.Controllers
     [Route(ActionsConst.ApiVersion)]
     public class WMGameController : BaseController
     {
-
         #region Global Variable
 
         public WMGameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
@@ -57,7 +56,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion WM game Register
 
         #region WM game Login
 
@@ -83,10 +82,10 @@ namespace Webet333.api.Controllers
             }
             int lang = Language.Code == LanguageConst.English ? 1 : (Language.Code == LanguageConst.Chinese ? 0 : 7);
             int UI = request.IsMobile ? 2 : 0;
-            var result = await WMGameHelpers.LoginCallAPI(username, password, lang,UI);
+            var result = await WMGameHelpers.LoginCallAPI(username, password, lang, UI);
             return OkResponse(result);
         }
 
-        #endregion
+        #endregion WM game Login
     }
 }

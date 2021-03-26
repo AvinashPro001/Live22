@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
@@ -12,7 +10,6 @@ using Webet333.files.interfaces;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
-using Webet333.models.Request.Payments;
 using Webet333.models.Request.Promotions;
 
 namespace Webet333.api.Controllers
@@ -20,18 +17,18 @@ namespace Webet333.api.Controllers
     [Route(ActionsConst.ApiVersion)]
     public class PromotionsController : BaseController
     {
-        #region variable 
+        #region variable
 
         public PromotionsController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
         }
 
-        #endregion variable 
+        #endregion variable
 
         #region Promotion Insert, Update, Delete, Retrieve
 
-        #region all Promotion Retrive 
+        #region all Promotion Retrive
 
         [HttpPost(ActionsConst.Promotions.Retrive)]
         public async Task<IActionResult> Retrieve([FromBody] PromotionRetriveRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOption)
@@ -42,7 +39,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion all Promotion Retrive 
+        #endregion all Promotion Retrive
 
         #region Promotion Insert
 
@@ -50,6 +47,8 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> Insert([FromBody] PromotionRequest request)
         {
             await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
 
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
@@ -66,6 +65,8 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> Update([FromBody] PromotionUpdateRequest request)
         {
             await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
 
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
@@ -91,6 +92,8 @@ namespace Webet333.api.Controllers
 
             await ValidateUser();
 
+            request.AdminId = GetUserId(User);
+
             using (var generic_help = new GenericHelpers(Connection))
             {
                 generic_help.GetImageWithExtension(uploadManager, request.FormFile, BaseUrlConfigsOptions.Value.PromotionImage, request.Id.ToString(), extension);
@@ -98,7 +101,7 @@ namespace Webet333.api.Controllers
             }
 
             using (var promotion_help = new PromotionsHelpers(Connection))
-                await promotion_help.Update(Guid.Parse(request.Id), extension, extensionMobile);
+                await promotion_help.Update(Guid.Parse(request.Id), extension, extensionMobile, adminId: request.AdminId.ToString());
 
             return OkResponse();
         }
@@ -116,7 +119,7 @@ namespace Webet333.api.Controllers
 
             await ValidateUser();
 
-            string extension=string.Empty, extensionMobile = string.Empty;
+            string extension = string.Empty, extensionMobile = string.Empty;
             using (var generic_help = new GenericHelpers(Connection))
             {
                 if (!String.IsNullOrEmpty(request.FormFile))
@@ -148,16 +151,18 @@ namespace Webet333.api.Controllers
 
         #endregion Promotion Image Update
 
-        #region Promotion Delete 
+        #region Promotion Delete
 
         [HttpPost(ActionsConst.Promotions.Delete)]
         public async Task<IActionResult> Delete([FromBody] GetByIdRequest request)
         {
             await CheckUserRole();
 
+            string adminId = GetUserId(User).ToString();
+
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
-                await promotion_help.Delete(Guid.Parse(request.Id));
+                await promotion_help.Delete(Guid.Parse(request.Id), adminId);
                 return OkResponse();
             }
         }
@@ -170,6 +175,8 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> UpdateStatus([FromBody] PromotionUpdateStatusRequest request)
         {
             await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
 
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
@@ -206,7 +213,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Promotions.AdminRetrive)]
-        public async Task<IActionResult> SelectPromotionsForAdmin([FromBody] PromotionAdminRetriveRequest request ,[FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        public async Task<IActionResult> SelectPromotionsForAdmin([FromBody] PromotionAdminRetriveRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
@@ -214,14 +221,14 @@ namespace Webet333.api.Controllers
 
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
-                var promotions = await promotion_help.RetrieveAdmin(request,BaseUrlConfigsOptions.Value);
+                var promotions = await promotion_help.RetrieveAdmin(request, BaseUrlConfigsOptions.Value);
                 return OkResponse(promotions);
             }
         }
 
         #endregion Admin Promotion Retrive
 
-        #endregion
+        #endregion Promotion Insert, Update, Delete, Retrieve
 
         #region Promotion Apply Check
 
@@ -283,6 +290,8 @@ namespace Webet333.api.Controllers
         {
             await CheckUserRole();
 
+            request.AdminId = GetUserId(User);
+
             request.CreatedBy = GetUserId(User).ToString();
             using (var promotion_helper = new PromotionsHelpers(Connection))
             {
@@ -291,7 +300,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Promotion Group Insert
 
         #region Promotion Group Update
 
@@ -301,6 +310,8 @@ namespace Webet333.api.Controllers
         {
             await CheckUserRole();
 
+            request.AdminId = GetUserId(User);
+
             using (var promotion_helper = new PromotionsHelpers(Connection))
             {
                 await promotion_helper.PromotionGroupUpdate(request);
@@ -308,7 +319,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Promotion Group Update
 
         #region Promotion Group Select
 
@@ -325,15 +336,17 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion 
+        #endregion Promotion Group Select
 
         #region Promotion Group DELETE
 
         [Authorize]
         [HttpPost(ActionsConst.Promotions.PromotionGroupDelete)]
-        public async Task<IActionResult> PromotionGroupDelete([FromBody] GetByIdRequestWithRequired request)
+        public async Task<IActionResult> PromotionGroupDelete([FromBody] GetByIdRequestWithRequiredAndAdminId request)
         {
             await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
 
             using (var promotion_helper = new PromotionsHelpers(Connection))
             {
@@ -342,7 +355,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Promotion Group DELETE
 
         #region Promotion Report List
 
@@ -360,6 +373,5 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Promotion Report List
-
     }
 }

@@ -6,6 +6,7 @@ import { ToasterConfig, ToasterService } from 'angular2-toaster';
 import { debug } from 'console';
 import { customer, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
+import { CommonService } from '../../../common/common.service';
 
 @Component({
     selector: 'app-contact-details-list',
@@ -13,7 +14,6 @@ import { AdminService } from '../../admin.service';
     styleUrls: ['./contact-details-list.component.scss']
 })
 export class ContactDetailsListComponent implements OnInit {
-
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
     rows = [];
@@ -29,15 +29,17 @@ export class ContactDetailsListComponent implements OnInit {
         private toasterService: ToasterService,
         private router: Router,
         private modalService: NgbModal,
+        private commonService: CommonService
     ) { }
 
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.commonService.CheckUserToken();    //  Check User token is not expire.
 
-
-    ngOnInit() {
-        this.setColumn();
-        this.LoadType();
-        this.LoadTypeDetails();
-        
+            this.setColumn();
+            this.LoadType();
+            this.LoadTypeDetails();
+        }
     }
 
     setColumn() {
@@ -61,7 +63,7 @@ export class ContactDetailsListComponent implements OnInit {
 
     LoadTypeDetails() {
         this.loadingIndicator = true;
-        
+
         this.adminService.getAll<any>(customer.contactDetailsSelect).subscribe(res => {
             this.rows = [];
             let i = 0;
@@ -70,7 +72,7 @@ export class ContactDetailsListComponent implements OnInit {
                 this.rows.push({
                     No: ++i,
                     Type: el.Type,
-                    TypeImage: el.TypeImage != null ? '<img width="35px" src="' + el.TypeImage+ '"/>' : "<b class='notAvailable'>Not Available</b>",
+                    TypeImage: el.TypeImage != null ? '<img width="35px" src="' + el.TypeImage + '"/>' : "<b class='notAvailable'>Not Available</b>",
                     CSId: el.CSId,
                     CSName: el.CSName,
                     CSImage: el.CSImage != null ? '<img width="50px" src="' + el.CSImage + '"/>' : "<b class='notAvailable'>Not Available</b>",
@@ -85,36 +87,48 @@ export class ContactDetailsListComponent implements OnInit {
         });
     }
 
-    Delete(id) {
-        let model = {
-            id: id,
-            deleted: true
+    async Delete(id) {
+        if (await this.checkUpdatePermission()) {
+            this.commonService.CheckUserToken();    //  Check User token is not expire.
+
+            let model = {
+                id: id,
+                deleted: true
+            }
+            this.adminService.add<any>(customer.contactDetailsUpdate, model).subscribe(res => {
+                this.toasterService.pop('success', 'Success', res.message);
+                this.ngOnInit();
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-        this.adminService.add<any>(customer.contactDetailsUpdate, model).subscribe(res => {
-            this.toasterService.pop('success', 'Success', res.message);
-            this.ngOnInit();
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
 
-    Active(id, event) {
-        let model = {
-            id: id,
-            active: event
+    async Active(id, event) {
+        if (await this.checkUpdatePermission()) {
+            this.commonService.CheckUserToken();    //  Check User token is not expire.
+
+            let model = {
+                id: id,
+                active: event
+            }
+            this.adminService.add<any>(customer.contactDetailsUpdate, model).subscribe(res => {
+                this.toasterService.pop('success', 'Success', res.message);
+                this.ngOnInit();
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-        this.adminService.add<any>(customer.contactDetailsUpdate, model).subscribe(res => {
-            this.toasterService.pop('success', 'Success', res.message);
-            this.ngOnInit();
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
 
-    EditOpen(data, content) {
-        this.editTypes = data;
-        this.showText = data.Text == null ? false : true;
-        this.modalService.open(content, { windowClass: 'dark-modal', });
+    async EditOpen(data, content) {
+        if (await this.checkUpdatePermission()) {
+            this.commonService.CheckUserToken(); //  Check User token is not expire.
+
+            this.editTypes = data;
+            this.showText = data.Text == null ? false : true;
+            this.modalService.open(content, { windowClass: 'dark-modal', });
+        }
     }
 
     ReplaceTime(Date) {
@@ -132,12 +146,11 @@ export class ContactDetailsListComponent implements OnInit {
             classCheck: (document.getElementById("ClassChecked") as HTMLInputElement).checked,
             isOpenInNewPage: (document.getElementById("IsOpenInNewPage") as HTMLInputElement).checked,
         }
-        
+
         try {
             model.Text = (document.getElementById("text") as HTMLInputElement).value
         }
-        catch (e) {}
-
+        catch (e) { }
 
         if (model.contactTypeId == "") {
             this.toasterService.pop('error', 'Error', 'Please Select Type  !!!');
@@ -162,7 +175,6 @@ export class ContactDetailsListComponent implements OnInit {
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
-        
     }
 
     async imageConvert(event) {
@@ -184,8 +196,67 @@ export class ContactDetailsListComponent implements OnInit {
         });
     }
 
-    RedirectContactAddPage() {
-        this.router.navigate(['/admin/customers/contact-details-add']);
+    async RedirectContactAddPage() {
+        if (await this.checkAddPermission()) {
+            this.commonService.CheckUserToken();    //  Check User token is not expire.
+
+            this.router.navigate(['/admin/customers/contact-details-add']);
+        }
     }
 
+    //#region Check Permission
+
+    async checkViewPermission() {
+        const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[13].Permissions[0].IsChecked === true) {
+                return true;
+            }
+            else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[13].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[13].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

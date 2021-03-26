@@ -5,7 +5,7 @@ namespace Webet333.models.Request.Game.Mega888
 {
     public class DepsoitWihtdrawRequest
     {
-        [JsonProperty(PropertyName ="userid")]
+        [JsonProperty(PropertyName = "userid")]
         public string UserId { get; set; }
 
         [Required]

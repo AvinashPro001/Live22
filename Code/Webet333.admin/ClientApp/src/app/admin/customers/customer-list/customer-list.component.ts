@@ -8,14 +8,12 @@ import { customer, ErrorMessages, account } from '../../../../environments/envir
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 import { debounce } from 'rxjs/operators';
 
-
 @Component({
     selector: 'app-admin/customer/retrive-list',
     templateUrl: './customer-list.component.html',
     styleUrls: ['./customer-list.component.scss']
 })
 export class CustomerListComponent implements OnInit {
-
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
     @ViewChild('action') action: TemplateRef<any>;
@@ -59,7 +57,7 @@ export class CustomerListComponent implements OnInit {
         let data = {}
         this.adminService.add<any>(account.profile, data).subscribe(res => {
         }, error => {
-                this.toasterService.pop('error', 'Error', error.error.message);
+            this.toasterService.pop('error', 'Error', error.error.message);
 
             if (error.error.message === "Your access token is expired, please login again.") {
                 localStorage.removeItem('currentUser');
@@ -177,7 +175,6 @@ export class CustomerListComponent implements OnInit {
                 this.toasterService.pop('success', 'Success', "Customer is active.");
             else
                 this.toasterService.pop('success', 'Success', "Customer is deactive.");
-
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });

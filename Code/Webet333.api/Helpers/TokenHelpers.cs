@@ -24,6 +24,7 @@ namespace Webet333.api.Helpers
         }
 
         #region Do background process for the Saving, Validating and Updating
+
         public string GenerateToken(string userId, string purpose)
         {
             using (var Repository = new DapperRepository<dynamic>(Connection))
@@ -44,7 +45,7 @@ namespace Webet333.api.Helpers
             var token_data = JsonConvert.DeserializeObject<TokenRequest>(SecurityHelpers.DecryptText(token));
             using (var Repository = new DapperRepository<dynamic>(Connection))
             {
-                var token_obj =await Repository.FindAsync(StoredProcConsts.Account.SetToken, new { token_data.uniqueId });
+                var token_obj = await Repository.FindAsync(StoredProcConsts.Account.SetToken, new { token_data.uniqueId });
                 if (token_obj != null && token_obj.Result.purpose == purpose)
                     return token_obj;
             }
@@ -59,9 +60,11 @@ namespace Webet333.api.Helpers
             }
             return 0;
         }
-        #endregion
+
+        #endregion Do background process for the Saving, Validating and Updating
 
         #region Generate Access Token
+
         public string GetAccessToken(AuthConfig AuthConfig, ProfileResponse profile, string UniqueId)
         {
             Claim[] claims = new[] {
@@ -77,9 +80,11 @@ namespace Webet333.api.Helpers
             var token = new JwtSecurityToken(AuthConfig.Issuer, AuthConfig.Audiance, expires: DateTime.Now.AddMinutes(AuthConfig.AccessExpireMinutes), signingCredentials: creds, claims: claims);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-        #endregion
+
+        #endregion Generate Access Token
 
         #region Generate token for each task
+
         public string GenerateResetPasswordToken(string userId)
         {
             return GenerateToken(userId, EmailTypeConst.ResetPassword);
@@ -99,7 +104,8 @@ namespace Webet333.api.Helpers
         {
             return GenerateToken(userId, EmailTypeConst.AdminInvite);
         }
-        #endregion
+
+        #endregion Generate token for each task
 
         public void Dispose()
         {

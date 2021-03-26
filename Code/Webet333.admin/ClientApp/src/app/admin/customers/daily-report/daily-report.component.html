@@ -1,0 +1,180 @@
+<div class="my-container">
+    <div class="card card-default">
+
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Daily Report</legend>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row ">
+                <div class="container col-12">
+                    <div class="col-lg-12">
+                        <form class="border border-light p-lg-5">
+                            <div class="row">
+                                <div class="p-2 col-md-2">
+                                    <h4 class="text-muted text-thin">From Date</h4>
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime" [(ngModel)]="datePickerfromdate">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" type="button"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-2 col-md-2">
+                                    <h4 class="text-muted text-thin">To Date</h4>
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp1" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime" [(ngModel)]="datePickertodate">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" type="button"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-2">
+                                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                                    <button class="mb-1 btn btn-success" (click)='search()' type="button">Search</button>
+                                </div>
+                                <div class="p-2" id="todayFilter">
+                                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                                    <button class="mb-1 btn btn-success" (click)='setToday()' type="button">Today</button>
+                                </div>
+                                <div class="p-2" id="yesterdayFilter">
+                                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                                    <button class="mb-1 btn btn-success" (click)='setYesterday()' type="button">Yesterday</button>
+                                </div>
+                                <div class="p-2" id="thisWeekFilter">
+                                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                                    <button class="mb-1 btn btn-success" (click)='setThisWeek()' type="button">This Week</button>
+                                </div>
+                                <div class="p-2" id="thisYearFilter">
+                                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                                    <button class="mb-1 btn btn-success" (click)='setThisYear()' type="button">This Year</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div style="display:flex">
+                            <div class="col-6">
+                                <table border="1">
+                                    <tr>
+                                        <td>Date:</td>
+                                        <td style="width: 20%; text-align:center"><b>{{fromdate}}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Deposit(Normal):</td>
+                                        <td style="text-align:center">{{Normal}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Deposit(Vederpay):</td>
+                                        <td style="text-align:center">{{VaderPay}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Deposit:</td>
+                                        <td style="text-align:center">{{Deposit}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Withdrawal:</td>
+                                        <td style="text-align:center">{{Withdrawal}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Winloss Amount:</td>
+                                        <td style="text-align:center">{{Winloss}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Bonus:</td>
+                                        <td style="text-align:center">{{Bonus}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Unique User:</td>
+                                        <td style="text-align:center">{{UniqueUser}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Deposit Count:</td>
+                                        <td style="text-align:center">{{DepositCount}}</td>
+                                    </tr>
+                                </table>
+
+                                <br />
+
+                                <table border="1" id="depositPromotion">
+                                    <thead>
+                                        <tr>
+                                            <td>Promotion:</td>
+                                            <td style="width: 20%; text-align:center">Count</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="depositPromotionTbody">
+                                        <ng-container *ngIf="depositPromotionRows != null">
+                                            <ng-container *ngFor='let val of depositPromotionRows'>
+                                                <tr>
+                                                    <td>{{val.Title}}</td>
+                                                    <td style="text-align:center">{{val.Count}}</td>
+                                                </tr>
+                                            </ng-container>
+                                        </ng-container>
+                                        <ng-container *ngIf="depositPromotionRows  == null || depositPromotionRows == 'null'">
+                                            <tr>
+                                                <th colspan="2" style="text-align:center">
+                                                    <p>No data to show</p>
+                                                </th>
+                                            </tr>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+
+                                <br />
+
+                                <table border="1">
+                                    <tr>
+                                        <td>Total New User:</td>
+                                        <td style="width: 20%; text-align:center">{{NewUser}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Old User:</td>
+                                        <td style="text-align:center">{{OldUser}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4>Withdrawal Analysis:</h4>
+                                    </div>
+                                </div>
+
+                                <table border="1" id="withdrawalPromotion">
+                                    <thead>
+                                        <tr>
+                                            <td>Promotion:</td>
+                                            <td style="width: 20%; text-align:center">Amount</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="withdrawalPromotionTbody">
+                                        <ng-container *ngIf="withdrawalPromotionRows != null">
+                                            <ng-container *ngFor='let val of withdrawalPromotionRows'>
+                                                <tr>
+                                                    <td>{{val.Title}}</td>
+                                                    <td style="text-align:center">{{val.Count}}</td>
+                                                </tr>
+                                            </ng-container>
+                                        </ng-container>
+                                        <ng-container *ngIf="withdrawalPromotionRows == null || withdrawalPromotionRows == 'null'">
+                                            <tr>
+                                                <th colspan="2" style="text-align:center">
+                                                    <p>No data to show</p>
+                                                </th>
+                                            </tr>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

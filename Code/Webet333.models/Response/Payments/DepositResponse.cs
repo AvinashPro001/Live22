@@ -66,6 +66,9 @@ namespace Webet333.models.Response.Payments
         [JsonProperty(PropertyName = "adminRemarks")]
         public string AdminRemarks { get; set; }
 
+        [JsonProperty(PropertyName = "verifiedAt")]
+        public DateTime VerifiedAt { get; set; }
+
         [JsonProperty(PropertyName = "operatorName")]
         public string OperatorName { get; set; }
 
@@ -75,11 +78,23 @@ namespace Webet333.models.Response.Payments
         [JsonProperty(PropertyName = "created")]
         public DateTime Created { get; set; }
 
+        [JsonProperty(PropertyName = "createdByName")]
+        public string CreatedByName { get; set; }
+
         [JsonProperty(PropertyName = "modified")]
         public DateTime Modified { get; set; }
 
+        [JsonProperty(PropertyName = "modifiedByName")]
+        public string ModifiedByName { get; set; }
+
         [JsonProperty(PropertyName = "trackingLoginRegister")]
         public bool TrackingLoginRegister { get; set; }
+
+        [JsonProperty(PropertyName = "total")]
+        public int Total { get; set; }
+
+        [JsonProperty(PropertyName = "offSet")]
+        public int OffSet { get; set; }
     }
 
     public class DepositReceipts

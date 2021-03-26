@@ -10,7 +10,6 @@ using Webet333.api.Helpers;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
-using Webet333.models.Request.Game;
 using Webet333.models.Request.Game.AG;
 using Webet333.models.Request.Game.DG;
 using Webet333.models.Response.Game.AG;
@@ -22,18 +21,18 @@ namespace Webet333.api.Controllers
     {
         #region Global variable and Constructor
 
-        public AGGameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer,BaseUrlConfigsOption.Value)
+        public AGGameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
         }
 
-        #endregion Global variable and Constructor   
+        #endregion Global variable and Constructor
 
         #region Create Member
 
         [Authorize]
         [HttpPost(ActionsConst.AGGame.AGRegister)]
-        public async Task<IActionResult> SexyBaccaratRegister([FromBody]GetByIdRequest request)
+        public async Task<IActionResult> SexyBaccaratRegister([FromBody] GetByIdRequest request)
         {
             var Role = GetUserRole(User);
 
@@ -56,28 +55,29 @@ namespace Webet333.api.Controllers
             try
             {
                 var response = await AGGameHelpers.CallRegisterAPI(username, bettingLimits);
-                if (response.error_code!=0)
+                if (response.error_code != 0)
                     return OkResponse(response);
 
                 using (var ag_helper = new AGGameHelpers(Connection))
                 {
-                    await ag_helper.GameAGRegister(request.Id,username,JsonConvert.SerializeObject(response));
+                    await ag_helper.GameAGRegister(request.Id, username, JsonConvert.SerializeObject(response));
                     return OkResponse(response);
                 }
             }
             catch
             {
-                var response = new AgRegisterResponse { error_code= 8585, Message= "maintenance" };
+                var response = new AgRegisterResponse { error_code = 8585, Message = "maintenance" };
                 return OkResponse(response);
             }
         }
-        #endregion Create Member 
+
+        #endregion Create Member
 
         #region Login Member
 
         [Authorize]
         [HttpPost(ActionsConst.AGGame.AGLogin)]
-        public async Task<IActionResult> SexyBaccaratLogin([FromBody]AGLoginRequest request)
+        public async Task<IActionResult> SexyBaccaratLogin([FromBody] AGLoginRequest request)
         {
             var Role = GetUserRole(User);
 
@@ -99,7 +99,7 @@ namespace Webet333.api.Controllers
             }
             try
             {
-                var response = await AGGameHelpers.CallLoginAPI(username, bettingLimits,request.GameType,request.Lang);
+                var response = await AGGameHelpers.CallLoginAPI(username, bettingLimits, request.GameType, request.Lang);
                 if (response.error_code == 0)
                     return OkResponse(response);
 
@@ -111,23 +111,26 @@ namespace Webet333.api.Controllers
                 return OkResponse(response);
             }
         }
-        #endregion 
+
+        #endregion Login Member
 
         #region Set default Bet Limit
 
         [Authorize]
         [HttpPost(ActionsConst.AGGame.AgDefaultBetlimit)]
-        public async Task<IActionResult> AGSetDefaultBetlimit([FromBody]DGBettingLimitRequest request)
+        public async Task<IActionResult> AGSetDefaultBetlimit([FromBody] DGBettingLimitRequest request)
         {
             await CheckUserRole();
 
+            string adminId = GetUserId(User).ToString();
+
             using (var game_helper = new AGGameHelpers(Connection))
             {
-                var result = await game_helper.AGBetLimit(request.BettingLimit);
+                var result = await game_helper.AGBetLimit(request.BettingLimit, adminId);
                 return OkResponse(result);
             }
         }
 
-        #endregion Set Bet Limit
+        #endregion Set default Bet Limit
     }
 }

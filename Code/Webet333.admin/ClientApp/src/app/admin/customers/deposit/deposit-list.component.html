@@ -96,12 +96,9 @@
 
                     <ng-template #tracking let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
                                  ngx-datatable-row-detail-template>
-                        <img [src]="depositData[rowIndex].trackingLoginRegister?warningImagePath:successImagePath" class="tracking-img" (click)="DuplicateDetails(tracking,depositData[rowIndex].username,depositData[rowIndex].trackingLoginRegister)"/>
-
+                        <img [src]="depositData[rowIndex].trackingLoginRegister?warningImagePath:successImagePath" class="tracking-img" (click)="DuplicateDetails(tracking,depositData[rowIndex].username,depositData[rowIndex].trackingLoginRegister)" />
                     </ng-template>
-
                 </ngx-datatable>
-
             </div>
         </div>
     </div>
@@ -120,7 +117,6 @@
                 <img [src]="image.includes('.pdf')?imageIcon:image" (click)="ImageOpenNewTab(image)" alt="">
             </div>
         </ngx-slick>
-
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
@@ -195,9 +191,7 @@
     <div class="modal-body">
         <div class="container">
             <div class="col-12">
-                <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rowsTacking" [columns]="columnsTacking" [columnMode]="'force'" [footerHeight]="60"
-                               [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator" [sortType]="'multi'" [headerHeight]="50">
-
+                <ngx-datatable #table class='bootstrap no-detail-row' [rows]="rowsTacking" [columns]="columnsTacking" [columnMode]="'force'" [footerHeight]="60" [rowHeight]="'auto'" [limit]="7" [loadingIndicator]="loadingIndicator" [sortType]="'multi'" [headerHeight]="50">
                 </ngx-datatable>
             </div>
         </div>
