@@ -875,7 +875,7 @@ async function DepositHistory(pageNo = 1) {
     apiRunning = true;
     var model = {
         pageNo: pageNo,
-        pageSize: pageNo == 1 ? 20 : 5
+        pageSize: 10
     };
     var res = await PostMethod(apiEndPoints.depositHistory, model);
     var result = res.data.result;
