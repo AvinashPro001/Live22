@@ -9,12 +9,9 @@ $(document).ready(function () {
         }
         GetProfile();
         RegisterBank();
-
     }
 });
 //#endregion
-
-
 
 function CheckUserVerified() {
     try {
@@ -84,7 +81,6 @@ async function CheckWithdrawAmountList() {
     });
     if (pageNum > 10)
         $("#navWithdrawAmount").addClass("expand");
-
 }
 
 //#region reloadBalance
@@ -93,7 +89,7 @@ async function reloadbalance() {
     $('.img_load').css('display', 'block');
     await WalletBalance();
 }
-//#endregion 
+//#endregion
 
 //#region AddBank
 async function AddBank() {
@@ -131,7 +127,6 @@ var depositModel;
 
 //#region BankList
 async function BankList() {
-
     var res = await GetMethod(apiEndPoints.depositDdl);
 
     if (res !== null && res !== undefined) {
@@ -151,7 +146,6 @@ async function BankList() {
                 }
                 else {
                     DepsoitBankList.innerHTML += '<li onclick="LiSelectDepositFunction(\'' + this.id + '\',\'' + this.accountName + '\',\'' + this.accountNo + '\')" id="' + this.id + '" ><input type="radio" name="rtest" checked="" values="' + this.id + '"/><label for="' + this.id + '" title="state" class="bank-list-deposit blk-text"><figure><img class="icon-bank-info" src="' + this.bankIconLogo + '" alt="Maybank" /></figure><p>' + this.bankName + '</p></label></li>';
-
                 }
             });
 
@@ -228,13 +222,11 @@ function LiSelectPromotion(id, online) {
         }
         else {
             if (id !== null) {
-
                 var p = document.getElementById('online-' + id);
                 p.classList.add("active");
                 SelectPromotion = id;
             }
             else {
-
                 SelectPromotion = "";
             }
         }
@@ -246,13 +238,11 @@ function LiSelectPromotion(id, online) {
         }
         else {
             if (id !== null) {
-
                 var p = document.getElementById(id);
                 p.classList.add("active");
                 SelectPromotion = id;
             }
             else {
-
                 SelectPromotion = "";
             }
         }
@@ -753,7 +743,6 @@ async function Checkbalance() {
     if ($('#ddl_transferFromWallet').val() != "") {
         if ($('#ddl_transferToWallet').val() != "") {
             if ($('#txt_transferAmount').val() >= 1) {
-
                 LoaderShow();
                 //WalletBalance();
                 await TransferAmount();
@@ -771,7 +760,6 @@ async function Checkbalance() {
         ShowError(ChangeErroMessage("select_from_wallet_error"));
     }
 }
-
 
 async function TransferAmount() {
     LoaderShow();
@@ -792,10 +780,8 @@ async function TransferAmount() {
         var valueFromWalletName = resBalance.data.filter(function (walletName) { return walletName.walletId === model.fromWalletId; });
         var valueToWalletName = resBalance.data.filter(function (wallet) { return wallet.walletId === model.toWalletId; });
 
-
         if (Number($('#txt_transferAmount').val()) <= Number(valueFromWalletName[0].amount)) {
             if (valueFromWalletName.length !== 0 && valueToWalletName.length !== 0) {
-
                 var res = await PostMethod(apiEndPoints.paymentTransferInOneAPi, model);
                 if (res !== null && res !== undefined) {
                     ShowSuccess(res.message);
@@ -906,7 +892,6 @@ async function TransferValidation() {
 
 //#region TransferHistory
 async function TransferHistory() {
-
     var contentToRemove = document.querySelectorAll("#navTransfer");
     $(contentToRemove).remove();
 
@@ -917,7 +902,6 @@ async function TransferHistory() {
     var table = document.getElementById("tbl_transferHistory");
     var result = res.data;
     for (i = 0; i < result.length; i++) {
-
         var row = table.insertRow(RowCount + 1);
         row.id = "xxx";
         $("#tbl_transferHistory").addClass('white-bg');
@@ -1118,7 +1102,6 @@ async function GetProfile() {
         document.getElementById("lbl_userName").innerText = res.data.username;
         document.getElementById("txt_mobileUpdate").value = res.data.mobileNo;
         SetLocalStorage('918Username', res.data.username918);
-
     }
 
     if (window.location.href.includes("http://localhost:27100/Account/Profile") || window.location.href.includes("http://www.webet333.com/Account/Profile")) {
@@ -1134,7 +1117,6 @@ async function GetProfile() {
 
 //#region UpdateProfile
 async function UpdateProfile(userName918, password918, newpassword918) {
-
     LoaderShow();
     var model;
     if (userName918 !== null && userName918 !== undefined) {
@@ -1189,11 +1171,9 @@ async function UpdateProfile(userName918, password918, newpassword918) {
 
 //#region Statement
 async function Statement() {
-
     var contentToRemove = document.querySelectorAll("#navStatement");
     $(contentToRemove).remove();
     let model = {
-
     };
     var res = await PostMethodWithParameter(apiEndPoints.transactionHistory, model);
     $("#tbl_transactionHistory").find("tr:gt(0)").remove();
@@ -1246,7 +1226,6 @@ async function RebateHistory() {
     $(contentToRemove).remove();
 
     let model = {
-
     };
     var res = await PostMethodWithParameter(apiEndPoints.rebateHistory, model);
     $("#tbl_loseRebate").find("tr:gt(0)").remove();
@@ -1314,7 +1293,6 @@ async function RebateHistory() {
 
 //#region Promotion Apply History
 async function PromotionHistory() {
-
     var contentToRemove = document.querySelectorAll("#navPromotion");
     $(contentToRemove).remove();
 
@@ -1421,7 +1399,6 @@ function reset(i) {
         SelectBankWithdrawl = "";
         document.getElementById("txt_withdrawalAmount").value = "";
         document.getElementById("txt_withdrawalAccountNumber").value = "";
-
     }
     if (i === 3) {
         document.getElementById("formTransfer").reset();
@@ -1438,7 +1415,6 @@ function reset(i) {
 
 //#region set Value
 function setValue(i, online) {
-
     var Id;
     if (online)
         Id = "online_txt_amount";
@@ -1518,7 +1494,6 @@ async function SendOTP(number) {
     }
 }
 
-
 async function VerifiedOTP() {
     LoaderShow();
     let model = {
@@ -1550,7 +1525,7 @@ async function VerifiedOTP() {
     LoaderHide();
 }
 
-//#endregion 
+//#endregion
 
 async function CheckMainteance() {
     var res = await GetMethodWithReturn(apiEndPoints.VaderPayMainteanceSelect);
@@ -1558,7 +1533,6 @@ async function CheckMainteance() {
         document.getElementById("vaderpayMainteanceSection").style.display = "";
         document.getElementById("vaderpaySection").style.display = "none";
         document.getElementById("vaderpayPromotionSection").style.display = "none";
-
     }
 }
 
@@ -1581,7 +1555,6 @@ async function CheckSupportGame() {
         document.getElementById("saallin").disabled = !res.data[0].IsSA ? true : false;
         document.getElementById("sexyallin").disabled = !res.data[0].IsSexyBaccarat ? true : false;
         document.getElementById("wmallin").disabled = !res.data[0].IsWM ? true : false;
-
     }
     else {
         document.getElementById("kiss918allin").disabled = false;

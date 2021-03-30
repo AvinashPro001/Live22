@@ -20,7 +20,6 @@ async function authorize() {
             document.getElementById('reset918password').style.display = 'none';
     }
     else {
-
         var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
         var globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
 
@@ -61,7 +60,6 @@ function downloadgame(i) {
         }
     }
 }
-
 
 var mega888_apkURL, mega888_iosURL, mega888_ios32URL, kiss918_apkURL, kiss918_iosURL, kiss_ios32URL, joker_apkURL, joker_iosURL
 
@@ -115,7 +113,6 @@ function isWeiXin() {
         return false;
     }
 }
-
 
 async function Mega888UserName() {
     if (GetLocalStorage('currentUser') !== null) {
@@ -188,8 +185,7 @@ let resUserData;
 try {
     resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
 }
-catch{
-
+catch {
 }
 
 function LaunchGameAndroid(gameid) {
@@ -197,14 +193,13 @@ function LaunchGameAndroid(gameid) {
     try {
         resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
     }
-    catch{
-
+    catch {
     }
     if (gameid == 1) {
         try {
             window.location = "lobbykissandroid://lobbykissandroid?account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918
         }
-        catch{
+        catch {
             self.location = kiss918_apkURL;
         }
     }
@@ -212,7 +207,7 @@ function LaunchGameAndroid(gameid) {
         try {
             window.location = "pussy888://pussy888.com?user=" + resUserData.data.usernamePussy888 + "&password=" + resUserData.data.passwordPussy888
         }
-        catch{
+        catch {
             self.location = pussy888_apkURL;
         }
     }
@@ -223,14 +218,13 @@ function LaunchGameIOS64(gameid) {
     try {
         resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
     }
-    catch{
-
+    catch {
     }
     if (gameid == 1) {
         try {
             window.location = "LobbyKiss64://account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918
         }
-        catch{
+        catch {
             self.location = kiss918_iosURL;
         }
     }
@@ -239,7 +233,7 @@ function LaunchGameIOS64(gameid) {
         try {
             window.location = "pussy888://pussy888.com?user" + resUserData.data.usernamePussy888 + "&password=" + resUserData.data.passwordPussy888
         }
-        catch{
+        catch {
             self.location = pussy888_iosURL;
         }
     }
@@ -250,14 +244,13 @@ function LaunchGameIOS32(gameid) {
     try {
         resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
     }
-    catch{
-
+    catch {
     }
     if (gameid == 1) {
         try {
             window.location = "LobbyKiss32://account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918
         }
-        catch{
+        catch {
             self.location = kiss_ios32URL;
         }
     }

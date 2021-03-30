@@ -20,11 +20,9 @@ async function authorize() {
         if (window.location.href.includes("/Information/Download") || window.location.href.includes("/Information/Download")) {
             document.getElementById('reset918password').style.display = 'none';
             document.getElementById('pussyresetpassword').style.display = 'none';
-
         }
     }
     else {
-
         var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
         var globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
 
@@ -41,7 +39,7 @@ async function authorize() {
         }
 
         var usernamePrifix = globalParameters.data.jokerGamePrefix + res.data.username;
-        
+
         if ($('#M8Download').prop('id') !== '') {
             document.getElementById('JokeruserName').innerText = jokerConstParameterValue.AppID + '.' + usernamePrifix;
             document.getElementById('Jokerresetpassword').innerText = dec(localStorage.getItem('currentUserData')); //'Your WEBET333.COM Password';
@@ -85,8 +83,6 @@ $(function () {
         self.location = mega888_ios32URL;
     });
 
-
-
     $("#bt_down_apk_918").click(function () {
         self.location = kiss918_apkURL;
     });
@@ -114,7 +110,6 @@ $(function () {
     $("#bt_down_ios_pussy888").click(function () {
         self.location = pussy888_iosURL;
     });
-
 });
 
 function isWeiXin() {
@@ -125,7 +120,6 @@ function isWeiXin() {
         return false;
     }
 }
-
 
 async function Mega888UserName() {
     if (GetLocalStorage('currentUser') !== null) {

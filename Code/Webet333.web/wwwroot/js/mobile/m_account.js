@@ -1,5 +1,4 @@
-﻿
-$(document).ready(async function () {
+﻿$(document).ready(async function () {
     var url_string = window.location;
     var url = new URL(url_string);
     var name = url.searchParams.get("ref");
@@ -13,7 +12,6 @@ $(document).ready(async function () {
     //    await regisrationGame();
 });
 
-
 //#region DoLogin
 async function DoLogin() {
     LoaderShow();
@@ -25,7 +23,6 @@ async function DoLogin() {
     };
     let res = await PostMethod(apiEndPoints.login, model);
     if (res !== null && res !== undefined) {
-
         try {
             await TrackingLoginRegister("Login", model.userName, "loginCookies");
         }
@@ -52,7 +49,6 @@ async function DoLogin() {
         catch (e) {
             location.reload()
         }
-
     }
     LoaderHide();
 }
@@ -165,11 +161,8 @@ async function UpdateProfile(userName918, password918, newpassword918) {
 
 //#region ChangePassword
 async function ChangePassword(i) {
-
     LoaderShow();
     if (i === 1) {
-
-
         //var randomPasswordString = randomPassword();
         //var res918 = await _918KissPostMethod('account.ashx?' + _918KissActionConst.UpdatePassword + '&' + 'userName=' + res.data.username918 + '&' + 'OldPassWd=' + res.data.password918 + '&' + 'PassWd=' + randomPasswordString + '&' + 'Name=' + res.data.username + '&' + 'time=' + UTCTime + '&' + _918KissConstParameter.authcode + '&' + 'sign=' + generateHasValue(res.data.username918) + '&' + _918KissConstParameter.pwdtype);
 
@@ -232,7 +225,6 @@ async function ChangePassword(i) {
 
 //#region randomPassword
 function randomPassword() {
-
     var charsetOne = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetTwo = 'abcdefghiklmnopqrstuvwxyz', charsetThree = '@', charsetFour = '0123456789', randomstring = '', i = 0;
 
     for (i = 0; i < 3; i++) {
@@ -366,7 +358,6 @@ async function DoRegister() {
                     ShowError(res.data.messageResponse.smsMessage);
             }
             catch (e) {
-
             }
             let model = {
                 userName: $('#m_regsiter_username').val(),
@@ -423,7 +414,6 @@ async function logoutMain(i) {
         var M8Username = globalParameters.data.m8GamePrefix + username;
         var PlaytechUsername = globalParameters.data.playtechGamePrefix + username;
 
-
         //M8 Account Logout
         await callMe(M8ConstAction.logoutAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username);
 
@@ -452,7 +442,6 @@ async function logoutMain(i) {
             window.location = '/';
         }
         LoaderHide();
-
     }
 }
 //#endregion
@@ -588,7 +577,6 @@ async function regisrationGame() {
                     //}
                 }
                 catch (ex) {
-
                 }
             }
 
@@ -599,14 +587,12 @@ async function regisrationGame() {
                     var resAG = await PostMethod(apiEndPoints.registerAG, modelAG);
                 }
                 catch (ex) {
-
                 }
             }
 
             if (resSelectUser.data.Playtech !== true) {
                 try {
                     //var resultPlaytechDeposit = await PlaytechPostMethod(PlaytechConstAction.CreateAccount + "playername=" + PlaytechUsername + "&" + PlaytechConstParameter.adminname + "&" + PlaytechConstParameter.kioskname + "&firstname=" + resUserData.data.name + "&firstname=Webet333" + "&countrycode=MY" + "&viplevel=1" + "&languagecode=EN" + "&" + "password=" + dec(GetLocalStorage("currentUserData")));
-
 
                     //if (typeof resultPlaytechDeposit === "string") {
                     //    try {
@@ -627,7 +613,6 @@ async function regisrationGame() {
                     //}
                 }
                 catch (ex) {
-
                 }
             }
 
@@ -658,7 +643,6 @@ async function regisrationGame() {
                     //}
                 }
                 catch (ex) {
-
                 }
             }
 
@@ -679,103 +663,86 @@ async function regisrationGame() {
                     //}
                 }
                 catch (ex) {
-
                 }
             }
 
             if (resSelectUser.data.Mega888 !== true) {
                 var userMegaa88Model = {
-
                 }
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.mega888Register, userMegaa88Model);
                 }
                 catch (e) {
-
                 }
             }
 
             if (resSelectUser.data.DG !== true) {
                 var model = {
-
                 }
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.dgRegister, model);
                 }
                 catch (e) {
-
                 }
             }
 
             if (resSelectUser.data.SexyBaccarat !== true) {
                 var model = {
-
                 }
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.sexyRegister, model);
                 }
                 catch (e) {
-
                 }
             }
 
             if (resSelectUser.data.SA !== true) {
                 var model = {
-
                 }
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.saRegister, model);
                 }
                 catch (e) {
-
                 }
             }
 
             if (resSelectUser.data.Pussy888 !== true) {
                 var model = {
-
                 }
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.pussyRegister, model);
                 }
                 catch (e) {
-
                 }
             }
 
             if (resSelectUser.data.AllBet !== true) {
                 var model = {
-
                 }
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.allBetRegister, model);
                 }
                 catch (e) {
-
                 }
             }
 
             if (resSelectUser.data.WM !== true) {
                 var model = {
-
                 }
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.WMRegister, model);
                 }
                 catch (e) {
-
                 }
             }
 
             if (resSelectUser.data.Pragmatic !== true) {
                 var model = {
-
                 }
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.pragmaticRegister, model);
                 }
                 catch (e) {
-
                 }
             }
 
