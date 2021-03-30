@@ -397,12 +397,12 @@ function GameBalancePostMethod(endPoint, model) {
             'Accept-Language': GetLocalStorage('language')
         },
         url: baseUrl + endPoint,
-        beforeSend: function () {
-            // setting a timeout
-            $(window).load(function () {
-                $(".loadingImage").fadeOut("slow");
-            });
-        }
+        //beforeSend: function () {
+        //    // setting a timeout
+        //    $(window).load(function () {
+        //        $(".loadingImage").fadeOut("slow");
+        //    });
+        //}
     }).then(function (res) {
         return res;
     });
