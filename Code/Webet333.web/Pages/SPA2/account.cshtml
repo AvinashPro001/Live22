@@ -135,29 +135,6 @@
                     </ul>
                 </div>
             </nav>
-
-            <div class="scroll-content" style="padding-bottom:0px;" id="Translation_Option">
-                <div class="join-now-section" style="padding-bottom:0px;">
-                    <div class="text-center myr-quote">
-                        <h4>MYR <span id="menuMainWallet"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="fa fa-refresh"></span></h4>
-                    </div>
-                    <ul class="account-icon list-inline text-center">
-                        <li class="mobile-icon deposit_icon"><a onclick="loadPagedeposit()" href="javascript:void(0);" rel="prefetch"><span data-translate="mobile_menu_deposit"></span></a></li>
-                        <li class="mobile-icon transfer_icon"><a onclick="loadPageTransfer()" href="javascript:void(0);" rel="prefetch"><span data-translate="mobile_menu_Transfer"></span></a></li>
-                        <li class="mobile-icon restore_icon"><a data-toggle="modal" data-target="#RestoreConfirmation" href="#"><span data-translate="mobile_menu_Restore"></span></a></li>
-                        <li class="mobile-icon withdraw_icon"><a onclick="loadPageWithdraw()" href="javascript:void(0);" rel="prefetch"><span data-translate="mobile_menu_Withdraw"></span></a></li>
-                        <li class="mobile-icon history_icon"><a onclick="loadPageHistory()" href="javascript:void(0);" rel="prefetch"><span data-translate="mobile_menu_History"></span></a></li>
-                    </ul>
-                    <div class="container" style="background: #ffffff;">
-                        <div class="annunce-section d-flex">
-                            <p class="annunce-title"><img src="~/images/images-mobile/announcement.png" alt=""></p>
-                            <p class="annunce-text mobile-announcment"><marquee class="announcment-font" behavior="scroll" direction="left" scrollamount="10" id="p_announcement_mobile_one"></marquee></p>
-                            <div class="clear-fix"></div>
-                            <p class="white-text mar-top-ten text-center">Welcome <span id="lbl_usernameHeader"></span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -165,7 +142,6 @@
     <link href="~/css/mobile/mobile-style.css" rel="stylesheet" />
 
     <script>
-        document.getElementById("Translation_Option").innerHTML = "";
         GetUser();
         if (GetLocalStorage('currentUser') === null)
             loadPageHome();
@@ -377,7 +353,6 @@
         else {
             document.getElementById('login').style.display = "none";
         }
-
     });
 
 
@@ -422,7 +397,7 @@
                 });
             }
         });
-        announcementMobile();
+        //announcementMobile();
 
     }
 

@@ -11,31 +11,22 @@
             loadPageHome();
         DepositHistory();
     </script>
-
     <div id="History" class="white-bg history-page">
 
         <div class="container">
-
             <div class="info-form text-center">
-
                 <div class="row">
-
                     <div class="col-xs-2">
                         <div class="back-btn"><a onclick="loadPageHome({backFrom:'history'})" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div>
                     </div>
-
                     <div class="col-xs-8">
                         <h4 class="black-text lang" key="history">HISTORY</h4>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
         <div class="info-form history-tabs">
-
             <ul class="nav nav-tabs">
                 <li onclick="DepositHistory()" class="active"><a data-toggle="tab" href="#profileDeposit"><span key="deposit" class="lang"></span></a></li>
                 <li onclick="WithdrawHistory()"><a data-toggle="tab" href="#profilewithdrawal"><span key="withdrawal_title" class="lang"></span></a></li>
@@ -43,13 +34,10 @@
                 <li onclick="PromotionHistory()"><a data-toggle="tab" href="#promotion-apply"><span key="menu_promotion" class="lang"></span></a></li>
                 <li onclick="RebateHistory()"><a data-toggle="tab" href="#rebate"><span key="rebate" class="lang"></span></a></li>
                 <li onclick="StatementHistory()"><a data-toggle="tab" href="#statement"><span key="statement" class="lang"></span></a></li>
-
             </ul>
-
         </div>
 
         <div class="history-tabs">
-
             <div class="tab-content">
 
                 <div id="profileTransfer" class="tab-pane fade in">
@@ -114,38 +102,6 @@
 
         </div>
 
-    </div>
-
-    <div class="form-login modal fade" id="gameLogin" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="lang" key="alert"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <p class="lang" key="noLogin"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container" id="laguage">
-        <div id="language" class="modal fade">
-            <div class="modal-dialog mail-width">
-                <div class="modal-content">
-                    <div class="modal-body text-center lang-modal">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <p>Select Language.</p>
-                        <ul class="list-inline pad-top-ten">
-                            <li><button id="englishbtn" class="submit" type="button" data-dismiss="modal" onclick="language('en-US')">English</button></li>
-                            <li><button id="malaybtn" class="submit" type="button" data-dismiss="modal" onclick="language('ms-MY')">Malay</button></li>
-                            <li><button id="chinesebtn" class="submit" type="button" data-dismiss="modal" onclick="language('zh-Hans')">Chinese</button></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="footer-widget" id="footerWidget">
@@ -280,10 +236,12 @@
     async function testScroll() {
 
         if ((NumberOfLine % 5) == 0) {
-            pageNumber = pageNumber + 1;
+            
             NumberOfLine = NumberOfLine + 1;
-            if (!apiRunning)
+            if (!apiRunning) {
+                pageNumber = pageNumber + 1;
                 await DepositHistory(pageNumber)
+            }
         }
         else {
             NumberOfLine = NumberOfLine + 1;

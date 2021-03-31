@@ -8,165 +8,110 @@
 <div id="mComContent">
 
     <div id="afterlogin_mobile">
-        <div class="sidebar">
-            <div class="navbar-collapse" id="myNavbar">
-                <ul class="nav text-center mob-menu">
-                    <li id="logout"><a onclick="logoutMain(1)"><i class="fa fa-sign-out" aria-hidden="true"></i><p class="lang" key="sidebar_Logout"></p></a></li>
-                    <li id="login"><a onclick="loadPageLogin()" href="javascript:void(0);" rel="prefetch"><i class="fa fa-sign-in" aria-hidden="true"></i><p class="lang" key="sidebar_login"></p></a></li>
-                    <li><a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch"><img src="~/images/images-mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
-                    <li id="downloadpage"><a href="~/Mobile/download?id=918DownloadTab" rel="prefetch"><img src="~/images/images-mobile/download.png" alt="mn-download"><p class="lang" key="sidebar_Download"></p></a></li>
-                    <li><a href="~/Home/home" rel="prefetch"><img src="~/images/images-mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/images-mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
-                    <li><a onclick="loadPageAbout()" href="javascript:void(0);" rel="prefetch"><img src="~/images/images-mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
-                    <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/images-mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
-                    <li id="accountPage"><a onclick="loadPageAccount()" href="javascript:void(0);" rel="prefetch"><img src="~/images/images-mobile/profile.png" alt="Profile"><p class="lang" key="sidebar_Profile"></p></a></li>
-                </ul>
-            </div>
-        </div>
         <div class="main-content" id="navbarhide">
-            <nav class="navbar navbar-default navbar-fixed-top">
-                <div class="navbar-header mob-layout">
-                    <ul>
+            <li id="balanceShow">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle wallet" type="button" data-toggle="dropdown"><figure><img src="~/images/images-mobile/wallet.png" alt="f-wallet"></figure></button>
+                    <ul class="dropdown-menu wallet-dropdown">
                         <li>
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
+                            <ul class="list-inline">
+                                <li><strong>Main Wallet</strong></li>
+                                <li class="fright" id="ddlmainWallet">feching...</li>
+                            </ul>
                         </li>
                         <li>
-                            <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch" class="navbar-brand"><img class="logo" id="MainLogo" src="~/images//webet-main-logo.png" alt="WEBET 333.com"></a>
+                            <ul class="list-inline">
+                                <li><strong>918Kiss Wallet</strong></li>
+                                <li class="fright" id="ddl918KissWallet">feching...</li>
+                            </ul>
                         </li>
-                        <li id="balanceShow">
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle wallet" type="button" data-toggle="dropdown"><figure><img src="~/images/images-mobile/wallet.png" alt="f-wallet"></figure></button>
-                                <ul class="dropdown-menu wallet-dropdown">
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Main Wallet</strong></li>
-                                            <li class="fright" id="ddlmainWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>918Kiss Wallet</strong></li>
-                                            <li class="fright" id="ddl918KissWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>AG Wallet</strong></li>
-                                            <li class="fright" id="ddlAGWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>M8 Wallet</strong></li>
-                                            <li class="fright" id="ddlM8Wallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Joker Wallet</strong></li>
-                                            <li class="fright" id="ddlJokerWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Playtech Wallet</strong></li>
-                                            <li class="fright" id="ddlPlaytechWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>MaxBet Wallet</strong></li>
-                                            <li class="fright" id="ddlMaxBetWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Mega888 Wallet</strong></li>
-                                            <li class="fright" id="ddlMega888Wallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>DG Wallet</strong></li>
-                                            <li class="fright" id="ddlDgWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Sexy B. Wallet</strong></li>
-                                            <li class="fright" id="ddlSexyWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>SA Wallet</strong></li>
-                                            <li class="fright" id="ddlSAWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Pussy888 Wallet</strong></li>
-                                            <li class="fright" id="ddlPussy888Wallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>AllBet Wallet</strong></li>
-                                            <li class="fright" id="ddlAllbetWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>WM Wallet</strong></li>
-                                            <li class="fright" id="ddlWMWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><strong>Pragmatic Wallet</strong></li>
-                                            <li class="fright" id="ddlPragmaticWallet">feching...</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>AG Wallet</strong></li>
+                                <li class="fright" id="ddlAGWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>M8 Wallet</strong></li>
+                                <li class="fright" id="ddlM8Wallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>Joker Wallet</strong></li>
+                                <li class="fright" id="ddlJokerWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>Playtech Wallet</strong></li>
+                                <li class="fright" id="ddlPlaytechWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>MaxBet Wallet</strong></li>
+                                <li class="fright" id="ddlMaxBetWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>Mega888 Wallet</strong></li>
+                                <li class="fright" id="ddlMega888Wallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>DG Wallet</strong></li>
+                                <li class="fright" id="ddlDgWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>Sexy B. Wallet</strong></li>
+                                <li class="fright" id="ddlSexyWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>SA Wallet</strong></li>
+                                <li class="fright" id="ddlSAWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>Pussy888 Wallet</strong></li>
+                                <li class="fright" id="ddlPussy888Wallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>AllBet Wallet</strong></li>
+                                <li class="fright" id="ddlAllbetWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>WM Wallet</strong></li>
+                                <li class="fright" id="ddlWMWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>Pragmatic Wallet</strong></li>
+                                <li class="fright" id="ddlPragmaticWallet">feching...</li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
-            </nav>
-
-            <div class="scroll-content" style="padding-bottom:0px;" id="Translation_Option">
-                <div class="join-now-section" style="padding-bottom:0px;">
-                    <div class="text-center myr-quote">
-                        <h4>MYR <span id="menuMainWallet"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="fa fa-refresh"></span></h4>
-                    </div>
-                    <ul class="account-icon list-inline text-center">
-                        <li class="mobile-icon deposit_icon"><a onclick="loadPagedeposit()" href="javascript:void(0);" rel="prefetch"><span data-translate="mobile_menu_deposit"></span></a></li>
-                        <li class="mobile-icon transfer_icon"><a onclick="loadPageTransfer()" href="javascript:void(0);" rel="prefetch"><span data-translate="mobile_menu_Transfer"></span></a></li>
-                        <li class="mobile-icon restore_icon"><a data-toggle="modal" data-target="#RestoreConfirmation" href="#"><span data-translate="mobile_menu_Restore"></span></a></li>
-                        <li class="mobile-icon withdraw_icon"><a onclick="loadPageWithdraw()" href="javascript:void(0);" rel="prefetch"><span data-translate="mobile_menu_Withdraw"></span></a></li>
-                        <li class="mobile-icon history_icon"><a onclick="loadPageHistory()" href="javascript:void(0);" rel="prefetch"><span data-translate="mobile_menu_History"></span></a></li>
-                    </ul>
-                    <div class="container" style="background: #ffffff;">
-                        <div class="annunce-section d-flex">
-                            <p class="annunce-title"><img src="~/images/images-mobile/announcement.png" alt=""></p>
-                            <p class="annunce-text mobile-announcment"><marquee class="announcment-font" behavior="scroll" direction="left" scrollamount="10" id="p_announcement_mobile_one"></marquee></p>
-                            <div class="clear-fix"></div>
-                            <p class="white-text mar-top-ten text-center">Welcome <span id="lbl_usernameHeader"></span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </li>
         </div>
     </div>
-  
+
     <script>
         document.getElementById("navbarhide").style.display = "none";
         document.getElementById("hideBody").style.padding = "0px";
-        document.getElementById("Translation_Option").innerHTML = "";
         if (GetLocalStorage('currentUser') === null) {
             loadPageHome({ backFrom: 'transfer' });
         }
@@ -174,7 +119,7 @@
 
         UserGameTurnover();
 
-        CheckSupportGame();                                                     
+        CheckSupportGame();
 
         AllInButtonDisable(0);
     </script>
@@ -637,17 +582,35 @@
 </script>
 
 <script>
-    $(document).ready(function () {
-        if (localStorage.getItem('currentUser') == null) {
-            document.getElementById('logout').style.display = "none";
-            document.getElementById('accountPage').style.display = "none";
-            document.getElementById('downloadpage').style.display = "none";
-        }
-        else {
-            document.getElementById('login').style.display = "none";
-        }
-    });
-
     WalletBalance();
+
+    function get() {
+        (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
+
+        $.ajax({
+            url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
+            dataType: 'json',
+            async: false,
+            success: function (lang) {
+                $('.lang').each(function (index, element) {
+                    if (localStorage.getItem("language") === "ms-MY") {
+                        $('body').addClass('malay-font');
+                    }
+                    $(this).text(lang[$(this).attr('key')]);
+                });
+                $("[data-translate]").each(function () {
+                    if ($(this).is("input")) {
+                        $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    } else {
+                        $(this).text(lang[$(this).data("translate")]);
+                    }
+                });
+            }
+        });
+    }
+
+    setTimeout(() => {
+        get();
+    }, 200);
 
 </script>

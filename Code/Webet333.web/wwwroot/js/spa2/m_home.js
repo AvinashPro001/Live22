@@ -162,7 +162,7 @@ function SetDefaultLanguage(ddlLanguages) {
     window.location.reload();
 }
 
-function getLanguage() {
+function getLanguage(IsLanguageExecute = true) {
 
     //document.getElementById("flag").attributes.src=
     (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
@@ -171,17 +171,19 @@ function getLanguage() {
     (GetLocalStorage('currentUser') === null) ? $('#afterloginbankfooter').css('display', 'none') : $('#beforeloginbankfooter').css('display', 'none');
     navaigateRegister();
 
-    document.getElementById("englishbtn").style.background = "";
-    document.getElementById("malaybtn").style.background = "";
-    document.getElementById("chinesebtn").style.background = "";
-    if (GetLocalStorage('language') == "en-US")
-        document.getElementById("englishbtn").style.background = "orange";
+    if (IsLanguageExecute) {
+        document.getElementById("englishbtn").style.background = "";
+        document.getElementById("malaybtn").style.background = "";
+        document.getElementById("chinesebtn").style.background = "";
+        if (GetLocalStorage('language') == "en-US")
+            document.getElementById("englishbtn").style.background = "orange";
 
-    if (GetLocalStorage('language') == "ms-MY")
-        document.getElementById("malaybtn").style.background = "orange";
+        if (GetLocalStorage('language') == "ms-MY")
+            document.getElementById("malaybtn").style.background = "orange";
 
-    if (GetLocalStorage('language') == "zh-Hans")
-        document.getElementById("chinesebtn").style.background = "orange";
+        if (GetLocalStorage('language') == "zh-Hans")
+            document.getElementById("chinesebtn").style.background = "orange";
+    }
 
     if ((GetLocalStorage('currentUser') === null)) {
         $('#subMenuSports').css('top', 'calc(100% - 20px)');

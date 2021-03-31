@@ -902,7 +902,7 @@ async function DepositHistory(pageNo = 1) {
             if ($("#depositHistory").length == 0)
                 depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
     }
-    getLanguage();
+    getLanguage(false);
     apiRunning = false;
 }
 //#endregion
@@ -932,7 +932,7 @@ async function WithdrawHistory() {
     else {
         withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_withdraw"></span></p></div></div>'
     }
-    getLanguage();
+    getLanguage(false);
 
 
 }
@@ -961,7 +961,7 @@ async function TransferHistory() {
     else {
         transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_transfer"></span></p></div></div>'
     }
-    getLanguage();
+    getLanguage(false);
 
 }
 //#endregion
@@ -995,7 +995,7 @@ async function PromotionHistory() {
         promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_promotion"></span></p></div></div>'
 
     }
-    get();
+    getLanguage(false);
 
 }
 //#endregion
@@ -1018,7 +1018,7 @@ async function StatementHistory() {
         statementHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_statement"></span></p></div></div>'
 
     }
-    get();
+    getLanguage(false);
 
 }
 //#endregion
@@ -1053,7 +1053,7 @@ async function RebateHistory() {
         rebateTurnOverCommissionRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_rebate"></span></p></div></div>'
     }
 
-    get();
+    getLanguage(false);
 
 }
 //#endregion

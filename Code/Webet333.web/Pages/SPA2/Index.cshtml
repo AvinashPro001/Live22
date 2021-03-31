@@ -159,66 +159,65 @@
     <script>
 
         setTimeout(() => {
-        var url_string = window.location;
-        var url = new URL(url_string);
+            var url_string = window.location;
+            var url = new URL(url_string);
 
-        var gameName = url.searchParams.get("id");
+            var gameName = url.searchParams.get("id");
 
-        url.href = url.href.toLowerCase();
-        var name = url.searchParams.get("p");
-
-        if (name != null) {
-            switch (name) {
-                case "home":
-                    loadPageHome();
-                    break;
-                case "promotions":
-                    loadPagePromotions();
-                    break;
-                case "contactus":
-                    loadPageContactus();
-                    break;
-                case "about":
-                    loadPageAbout();
-                    break;
-                case "account":
-                    loadPageAccount();
-                    break;
-                case "deposit":
-                    loadPagedeposit()
-                    break;
-                case "download":
-                    loadPagedownload(gameName);
-                    break;
-                case "forgetpassword":
-                    loadPageForgetpassword()
-                    break;
-                case "history":
-                    loadPageHistory()
-                    break;
-                case "login":
-                    loadPageLogin()
-                    break;
-                case "register":
-                    loadPageRegister()
-                    break;
-                case "TermandCondtion":
-                    loadPageTermandCondtion()
-                    break;
-                case "transfer":
-                    loadPageTransfer()
-                    break;
-                case "VerifiedOtp":
-                    loadPageVerifiedOtp()
-                    break;
-                case "withdraw":
-                    loadPageWithdraw()
-                    break;
+            url.href = url.href.toLowerCase();
+            var name = url.searchParams.get("p");
+            if (name != null) {
+                switch (name) {
+                    case "home":
+                        loadPageHome();
+                        break;
+                    case "promotions":
+                        loadPagePromotions();
+                        break;
+                    case "contactus":
+                        loadPageContactus();
+                        break;
+                    case "about":
+                        loadPageAbout();
+                        break;
+                    case "account":
+                        loadPageAccount();
+                        break;
+                    case "deposit":
+                        loadPagedeposit()
+                        break;
+                    case "download":
+                        loadPagedownload(gameName);
+                        break;
+                    case "forgetpassword":
+                        loadPageForgetpassword()
+                        break;
+                    case "history":
+                        loadPageHistory()
+                        break;
+                    case "login":
+                        loadPageLogin()
+                        break;
+                    case "register":
+                        loadPageRegister()
+                        break;
+                    case "termandcondtion":
+                        loadPageTermandCondtion()
+                        break;
+                    case "transfer":
+                        loadPageTransfer()
+                        break;
+                    case "verifiedotp":
+                        loadPageVerifiedOtp()
+                        break;
+                    case "withdraw":
+                        loadPageWithdraw()
+                        break;
+                }
             }
-        }
-        else {
-            loadPageHome();
-        }
+            else {
+                loadPageHome();
+            }
         }, 200);
 
         function loadPageHome(obj) {
@@ -275,7 +274,7 @@
                         WalletSignalR();
 
                     }
-                     $('body').css('padding-top', '35px');
+                    $('body').css('padding-top', '35px');
                     if (cUser == null) {
                         $('#afterlogin_mobile').show();
                         $('#beforelogin_mobile').hide();
