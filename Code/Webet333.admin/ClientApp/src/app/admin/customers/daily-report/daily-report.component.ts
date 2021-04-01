@@ -25,7 +25,9 @@ export class DailyReportComponent implements OnInit {
     Winloss: any;
     Bonus: any;
     UniqueUser: any;
+    UniqueUserWithdrawal: any;
     DepositCount: any;
+    WithdrawalCount: any;
     DepositPromotion: any;
     NewUser: any;
     OldUser: any;
@@ -116,7 +118,9 @@ export class DailyReportComponent implements OnInit {
                         this.Winloss = el.Winloss,
                         this.Bonus = el.Bonus,
                         this.UniqueUser = el.UniqueUser,
+                        this.UniqueUserWithdrawal = el.UniqueUserWithdrawal,
                         this.DepositCount = el.DepositCount,
+                        this.WithdrawalCount = el.WithdrawalCount,
                         this.DepositPromotion = el.DepositPromotion,
                         this.NewUser = el.NewUser,
                         this.OldUser = el.OldUser,
@@ -134,7 +138,7 @@ export class DailyReportComponent implements OnInit {
         }
     }
 
-    //#endregion
+    //#endregion Filter Data
 
     //#region Check Permission
 
