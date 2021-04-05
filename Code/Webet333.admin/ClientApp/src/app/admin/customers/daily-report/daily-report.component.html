@@ -61,7 +61,14 @@
                                 <table border="1">
                                     <tr>
                                         <td>Date:</td>
-                                        <td style="width: 20%; text-align:center"><b>{{fromdate}}</b></td>
+                                        <td style="width: 20%; text-align:center">
+                                            <ng-container *ngIf="todate == null">
+                                                <b>{{fromdate}}</b>
+                                            </ng-container>
+                                            <ng-container *ngIf="todate != null">
+                                                <b>{{fromdate}}~{{todate}}</b>
+                                            </ng-container>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Total Deposit(Normal):</td>
