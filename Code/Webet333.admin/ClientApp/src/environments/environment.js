@@ -249,7 +249,8 @@ exports.customer = {
     adminLogList: exports.environment.apiUrl + 'admin/log/select',
     adminAction: exports.environment.apiUrl + 'admin/action/select_for_dropdown',
     adminModule: exports.environment.apiUrl + 'admin/module/select_for_dropdown',
-    dailyReport: exports.environment.apiUrl + 'daily/report/select'
+    dailyReport: exports.environment.apiUrl + 'daily/report/select',
+    userGroupList: exports.environment.apiUrl + 'usergroup/select',
 };
 exports.playtech = {
     playtechUrl: "http://api.webet333.com/api/Default/playtech",

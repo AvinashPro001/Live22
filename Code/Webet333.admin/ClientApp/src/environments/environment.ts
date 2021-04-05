@@ -313,7 +313,9 @@ export const customer = {
     adminAction: environment.apiUrl + 'admin/action/select_for_dropdown',
     adminModule: environment.apiUrl + 'admin/module/select_for_dropdown',
 
-    dailyReport: environment.apiUrl + 'daily/report/select'
+    dailyReport: environment.apiUrl + 'daily/report/select',
+
+    userGroupList: environment.apiUrl + 'usergroup/select',
 }
 
 export const playtech = {
