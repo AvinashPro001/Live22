@@ -679,5 +679,18 @@
 
             public const string VIPFreeCreditPromotionSetting = "viplevel/freecredit/promotion/setting";
         }
+
+        public class UserGroup
+        {
+            public const string UserGroupInsert = "usergroup/insert";
+
+            public const string UserGroupUpdate = "usergroup/update";
+
+            public const string UserGroupSelect = "usergroup/select";
+
+            public const string UserGroupUpdateStatus = "usergroup/update/status";
+
+            public const string UserGroupDelete = "usergroup/delete";
+        }
     }
 }

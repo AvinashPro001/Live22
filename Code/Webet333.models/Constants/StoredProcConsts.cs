@@ -542,5 +542,16 @@
 
             public const string VIPFreeCreditPromotionSetting = "[dbo].[FreeCredit_Promotion_Setting]";
         }
+
+        public class UserGroup
+        {
+            public const string UserGroupPersist = "[dbo].[User_Group_Persist]";
+
+            public const string UserGroupSelect = "[dbo].[User_Group_Select]";
+
+            public const string UserGroupUpdateStatus = "[dbo].[User_Group_Update_Status]";
+
+            public const string UserGroupUpdatDelete = "[dbo].[User_Group_Update_Delete]";
+        }
     }
 }
