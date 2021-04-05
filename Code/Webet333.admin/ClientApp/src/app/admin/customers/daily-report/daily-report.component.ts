@@ -99,8 +99,16 @@ export class DailyReportComponent implements OnInit {
             toDate: todate === null ? (document.getElementById("txt_todatetime") as HTMLInputElement).value : todate
         };
 
-        this.fromdate = formatDate(new Date(data.fromDate), 'dd/MM/yyyy', 'en-US');
-        this.todate = data.toDate;
+        let _fromdate = formatDate(new Date(data.fromDate), 'dd/MM/yyyy', 'en-US');
+        let _todate = formatDate(new Date(data.toDate), 'dd/MM/yyyy', 'en-US');
+        if (_fromdate != _todate) {
+            this.fromdate = formatDate(new Date(data.fromDate), 'dd', 'en-US');
+            this.todate = formatDate(new Date(data.toDate), 'dd/MM/yyyy', 'en-US');
+        }
+        else {
+            this.fromdate = formatDate(new Date(data.fromDate), 'dd/MM/yyyy', 'en-US');
+            this.todate = null;
+        }
 
         this.setDatePicker(new Date(data.fromDate), new Date(data.toDate));
 
