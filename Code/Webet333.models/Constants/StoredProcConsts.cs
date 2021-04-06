@@ -552,6 +552,12 @@
             public const string UserGroupUpdateStatus = "[dbo].[User_Group_Update_Status]";
 
             public const string UserGroupUpdatDelete = "[dbo].[User_Group_Update_Delete]";
+
+            public const string UserGroupUsersInsert = "[dbo].[User_Group_Users_Insert]";
+
+            public const string UserGroupUsersSelect = "[dbo].[User_Group_Users_Select]";
+
+            public const string UserGroupUsersDelete = "[dbo].[User_Group_Users_Delete]";
         }
     }
 }

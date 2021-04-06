@@ -316,6 +316,10 @@ export const customer = {
     dailyReport: environment.apiUrl + 'daily/report/select',
 
     userGroupList: environment.apiUrl + 'usergroup/select',
+    userGroupInsert: environment.apiUrl + 'usergroup/insert',
+    userGroupUpdate: environment.apiUrl + 'usergroup/update',
+    userGroupUpdateStatus: environment.apiUrl + 'usergroup/update/status',
+    userGroupDelete: environment.apiUrl + 'usergroup/delete'    
 }
 
 export const playtech = {

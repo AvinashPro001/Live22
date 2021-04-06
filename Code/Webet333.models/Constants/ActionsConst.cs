@@ -691,6 +691,14 @@
             public const string UserGroupUpdateStatus = "usergroup/update/status";
 
             public const string UserGroupDelete = "usergroup/delete";
+
+            public const string UserGroupInsertUser = "usergroup/insert/user";
+
+            public const string UserGroupUpdateUser = "usergroup/insert/update";
+
+            public const string UserGroupDeleteUser = "usergroup/insert/delete";
+
+            public const string UserGroupSelectUser = "usergroup/insert/select";
         }
     }
 }

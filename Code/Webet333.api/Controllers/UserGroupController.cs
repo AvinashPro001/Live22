@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Webet333.api.Controllers.Base;
 using Webet333.dapper;
 using Webet333.models.Configs;
@@ -142,5 +143,89 @@ namespace Webet333.api.Controllers
         }
 
         #endregion UserGroup Delete
+
+        #region Add User Into user Group
+
+        [HttpPost(ActionsConst.UserGroup.UserGroupInsertUser)]
+        public async System.Threading.Tasks.Task<IActionResult> UserGroupInsertUserAsync([FromBody] UserGroupInsertUserRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await ValidateUser(role: RoleConst.Admin);
+
+            request.UserId = GetUserId(User);
+            request.UniqueId = GetUniqueId(User);
+            request.UsersIdList = JsonConvert.SerializeObject(request.UsersId);
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.UserGroup.UserGroupUsersInsert,
+                    new
+                    {
+                        UserId = request.UserId,
+                        UniqueId = request.UniqueId,
+                        UserGroupId = request.UserGroupId,
+                        UsersIdList = request.UsersIdList
+                    });
+            }
+
+            return OkResponse();
+        }
+
+        #endregion Add User Into user Group
+
+        #region Delete User From User Group
+
+        [HttpPost(ActionsConst.UserGroup.UserGroupDeleteUser)]
+        public async System.Threading.Tasks.Task<IActionResult> UserGroupDeleteUserAsync([FromBody] UserGroupDeleteUserRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await ValidateUser(role: RoleConst.Admin);
+
+            request.UserId = GetUserId(User);
+            request.UniqueId = GetUniqueId(User);
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.UserGroup.UserGroupUsersInsert,
+                    new
+                    {
+                        UserId = request.UserId,
+                        UniqueId = request.UniqueId
+                    });
+            }
+
+            return OkResponse();
+        }
+
+        #endregion Delete User From User Group
+
+        #region Select User From user Group
+
+        [HttpPost(ActionsConst.UserGroup.UserGroupSelectUser)]
+        public async System.Threading.Tasks.Task<IActionResult> UserGroupSelectUserAsync([FromBody] UserGroupSelectUserRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await ValidateUser(role: RoleConst.Admin);
+
+            request.UserId = GetUserId(User);
+            request.UniqueId = GetUniqueId(User);
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.UserGroup.UserGroupUsersInsert, request);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Select User From user Group
     }
 }
