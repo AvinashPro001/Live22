@@ -1399,7 +1399,8 @@ function OpenModelTransferWallet(GameName) {
 }
 
 async function TransferInAllWallet(GameWalletName) {
-    await LoadingImageShowAllInSection(GameWalletName);
+    if (location.href.toLowerCase().includes("account/profile"))
+        await LoadingImageShowAllInSection(GameWalletName);
     var GameName;
     if (GameWalletName == undefined)
         GameName = walletNameTransferInWallet;
@@ -1412,7 +1413,7 @@ async function TransferInAllWallet(GameWalletName) {
     try {
         await PostMethod(apiEndPoints.AllInWallet, model);
     }
-    catch (e) {}
+    catch (e) { }
     WalletBalance();
 }
 //#endregion Transfer Main Wallet to Any Wallet
