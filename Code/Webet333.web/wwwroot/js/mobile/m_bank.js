@@ -996,7 +996,6 @@ async function TransferInAllWallet(GameWalletName) {
     else
         GameName = GameWalletName
 
-    await WalletBalance();
     let model = {
         walletName: GameName
     }
