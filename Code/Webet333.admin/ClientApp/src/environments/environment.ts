@@ -319,7 +319,11 @@ export const customer = {
     userGroupInsert: environment.apiUrl + 'usergroup/insert',
     userGroupUpdate: environment.apiUrl + 'usergroup/update',
     userGroupUpdateStatus: environment.apiUrl + 'usergroup/update/status',
-    userGroupDelete: environment.apiUrl + 'usergroup/delete'    
+    userGroupDelete: environment.apiUrl + 'usergroup/delete',
+
+    userGroupUserInsert: environment.apiUrl + 'usergroup/user/insert',
+    userGroupUserList: environment.apiUrl + 'usergroup/user/select',
+    userGroupUserDelete: environment.apiUrl + 'usergroup/user/delete'
 }
 
 export const playtech = {

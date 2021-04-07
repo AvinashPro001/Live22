@@ -8,12 +8,12 @@ import { customer, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
 
 @Component({
-    selector: 'app-usergroup-list',
-    templateUrl: './usergroup-list.component.html',
-    styleUrls: ['./usergroup-list.component.scss']
+    selector: 'app-usergroup-edit',
+    templateUrl: './usergroup-edit.component.html',
+    styleUrls: ['./usergroup-edit.component.scss']
 })
 
-export class UsergroupListComponent implements OnInit {
+export class UsergroupEditComponent implements OnInit {
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
     @ViewChild('action') action: TemplateRef<any>;
@@ -36,6 +36,9 @@ export class UsergroupListComponent implements OnInit {
     loadingIndicator: boolean = true;
     final: any;
     viewData: any;
+    userGroupId: any;
+    userGroupName: any;
+    id: any;
 
     constructor(
         private adminService: AdminService,
@@ -46,6 +49,9 @@ export class UsergroupListComponent implements OnInit {
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
+            // this.id = JSON.parse(localStorage.getItem('userGroupid'));
+            this.id = 'F69B38A3-E157-4D56-ACFB-76D6CDD3E13D';
+
             this.setColumn();
             this.setPageData();
         }
@@ -53,11 +59,25 @@ export class UsergroupListComponent implements OnInit {
 
     setColumn() {
         this.columns = [
-            { prop: 'GroupId', sortable: false },
-            { prop: 'UserGroupName', sortable: false },
-            { prop: 'CreatedDateTime', sortable: false },
-            { prop: 'LastModifyDateTime', sortable: false },
-            { prop: 'Action', cellTemplate: this.status, sortable: true, width: 250 }
+            {
+                prop: 'selected',
+                name: '',
+                sortable: false,
+                canAutoResize: false,
+                draggable: false,
+                resizable: false,
+                headerCheckboxable: true,
+                checkboxable: true,
+                width: 30
+            },
+            { prop: 'UserId' },
+            { prop: 'Username' },
+            { prop: 'VIPLavel' },
+            { prop: 'CountDeposit' },
+            { prop: 'TotalDepositAmount' },
+            { prop: 'CreatedDateTime' },
+            { prop: 'LastModifyDateTime' },
+            { prop: 'Action', cellTemplate: this.status, sortable: false }
         ];
     }
 
@@ -66,7 +86,7 @@ export class UsergroupListComponent implements OnInit {
 
         let data = {
             searchParam: search,
-            id: null,
+            id: this.id,
             fromDate: null,
             toDate: null,
             pageSize: null,
@@ -77,30 +97,47 @@ export class UsergroupListComponent implements OnInit {
         this.adminService.add<any>(customer.userGroupList, data).subscribe(res => {
             let i = 0;
             this.rows = [];
+
+            this.userGroupId = res.data[0].groupId;
+            this.userGroupName = res.data[0].groupName;
+
+            this.getUsersUserGroup(data.searchParam);
+        }, error => {
+            this.loadingIndicator = false;
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
+    getUsersUserGroup(search = null) {
+        let data = {
+            searchParam: search,
+            id: this.id,
+            fromDate: null,
+            toDate: null,
+            pageSize: null,
+            pageNo: null,
+            orderBy: null
+        }
+
+        this.adminService.add<any>(customer.userGroupUserList, data).subscribe(res => {
+            let i = 0;
+            this.rows = [];
             this.customerData = res.data;
+
             res.data.forEach(el => {
                 this.rows.push({
-                    id: el.id,
-                    GroupId: el.groupId,
-                    UserGroupName: el.groupName,
+                    UserId: el.userId,
+                    Username: el.userName,
+                    VIPLavel: el.VIPLevelName,
+                    CountDeposit: el.depositCount,
+                    TotalDepositAmount: el.depositAmount,
                     CreatedDateTime: this.replaceDateTime(el.created),
-                    LastModifyDateTime: this.replaceDateTime(el.modified),
+                    LastModifyDateTime: this.replaceDateTime(el.modified)
                 });
                 this.rows = [...this.rows]
                 this.loadingIndicator = false;
             })
             this.loadingIndicator = false;
-
-            //debugger;
-
-            //var result = this.customerData.map(function (a) { return a.id; });
-            //console.log(result)
-
-            //let data = {
-            //    userIdList: JSON.stringify(result)
-            //};
-
-            //console.log(data);
         }, error => {
             this.loadingIndicator = false;
             this.toasterService.pop('error', 'Error', error.error.message);
@@ -117,8 +154,10 @@ export class UsergroupListComponent implements OnInit {
 
     async openRejectConfirmationDialog(id) {
         if (await this.checkUpdatePermission()) {
-            let groupName = this.customerData.find(item => item.id === id).groupName;
-            this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to delete ' + groupName + ' user group?')
+            let userName = this.customerData.find(item => item.id === id).userName;
+            let userGroup = this.customerData.find(item => item.id === id).groupName;
+
+            this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to delete user ' + userName + ' from ' + userGroup + ' user group?')
                 .then((confirmed) => {
                     this.final = confirmed
                     this.deleteCustomer(id)
@@ -128,11 +167,12 @@ export class UsergroupListComponent implements OnInit {
 
     deleteCustomer(id) {
         if (this.final == true) {
-            let data = {
-                id: id,
-                active: "true"
-            }
-            this.adminService.add<any>(customer.userGroupDelete, data).subscribe(res => {
+            let data =
+            {
+                id: id
+            };
+
+            this.adminService.add<any>(customer.userGroupUserDelete, data).subscribe(res => {
                 this.toasterService.pop('success', 'Success', res.message);
                 this.ngOnInit();
             }, error => {
@@ -143,55 +183,38 @@ export class UsergroupListComponent implements OnInit {
 
     //#endregion Delete
 
-    //#region Active/InActive
+    //#region Update User Group Name
 
-    async manualUpdateEvent(id, value: boolean) { if (await this.checkUpdatePermission()) this.rejectCustomer(id, value); }
+    updateUserGroupName() {
+        let userGroupName = (document.getElementById("txt_usergroupname") as HTMLInputElement).value;
 
-    rejectCustomer(id, value) {
-        let groupName = this.customerData.find(item => item.id === id).groupName;
+        if (userGroupName == undefined || userGroupName == null || userGroupName == '') this.toasterService.pop('error', 'Error', 'Invalid UserGroup Name!!');
 
         let data = {
-            id: id,
-            active: value
+            id: this.id,
+            name: userGroupName
         }
-        this.adminService.add<any>(customer.userGroupUpdateStatus, data).subscribe(res => {
-            if (value == true) this.toasterService.pop('success', 'Success', groupName + " UserGroup is active.");
-            else this.toasterService.pop('success', 'Success', groupName + " UserGroup is deactive.");
+
+        this.adminService.add<any>(customer.userGroupUpdate, data).subscribe(res => {
+            this.toasterService.pop('success', 'Success', res.message);
+            this.ngOnInit();
         }, error => {
+            this.loadingIndicator = false;
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
 
-    //#endregion Active/InActive    
+    //#endregion Update User Group Name
 
-    searchHandler(event) {
-        if (event.target.value.length >= 3)
-            if (event.target.value) this.setPageData(event.target.value);
-            else this.setPageData("");
+    //#region Search
+
+    Search() {
+        let searchParm = (document.getElementById("txt_search") as HTMLInputElement).value;
+
+        this.getUsersUserGroup(searchParm);
     }
 
-    openWindowCustomClass(content) {
-        this.modalService.open(content, { windowClass: 'dark-modal', });
-    }
-
-    //#region Navigate to add admin page
-
-    async navigateAdd() {
-        if (await this.checkAddPermission()) this.router.navigate(['/admin/customers/admin-add']);
-    }
-
-    //#endregion Navigate to add admin page
-
-    //#region Navigate to edit admin page
-
-    async navigateEdit(customerData) {
-        if (await this.checkUpdatePermission()) {
-            localStorage.setItem('adminData', JSON.stringify(customerData));
-            this.router.navigate(['/admin/customers/admin-edit']);
-        }
-    }
-
-    //#endregion Navigate to edit admin page
+    //#endregion Search
 
     //#region Check Permission
 
