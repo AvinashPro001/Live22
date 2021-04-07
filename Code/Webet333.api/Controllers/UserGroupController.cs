@@ -224,7 +224,7 @@ namespace Webet333.api.Controllers
 
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result = await repository.GetDataAsync(StoredProcConsts.UserGroup.UserGroupUsersInsert, request);
+                var result = await repository.GetDataAsync(StoredProcConsts.UserGroup.UserGroupUsersSelect, request);
 
                 return OkResponse(result);
             }
