@@ -188,15 +188,19 @@ namespace Webet333.api.Controllers
 
             request.UserId = GetUserId(User);
             request.UniqueId = GetUniqueId(User);
+            request.UsersIdList = JsonConvert.SerializeObject(request.UsersId);
 
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
                 await repository.AddOrUpdateAsync(
-                    StoredProcConsts.UserGroup.UserGroupUsersInsert,
+                    StoredProcConsts.UserGroup.UserGroupUsersDelete,
                     new
                     {
                         UserId = request.UserId,
-                        UniqueId = request.UniqueId
+                        UniqueId = request.UniqueId,
+                        UserGroupId = request.UserGroupId,
+                        UsersIdList = request.UsersIdList,
+                        DeleteAll = request.DeleteAll
                     });
             }
 

@@ -692,13 +692,13 @@
 
             public const string UserGroupDelete = "usergroup/delete";
 
-            public const string UserGroupInsertUser = "usergroup/insert/user";
+            public const string UserGroupInsertUser = "usergroup/user/insert";
 
-            public const string UserGroupUpdateUser = "usergroup/insert/update";
+            public const string UserGroupUpdateUser = "usergroup/user/update";
 
-            public const string UserGroupDeleteUser = "usergroup/insert/delete";
+            public const string UserGroupDeleteUser = "usergroup/user/delete";
 
-            public const string UserGroupSelectUser = "usergroup/insert/select";
+            public const string UserGroupSelectUser = "usergroup/user/select";
         }
     }
 }
