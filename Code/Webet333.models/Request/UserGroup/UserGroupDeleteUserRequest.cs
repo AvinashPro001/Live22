@@ -8,7 +8,7 @@ namespace Webet333.models.Request
     public class UserGroupDeleteUserRequest : BaseValidateRequest
     {
         [JsonProperty("userGroupId")]
-        public Guid UserGroupId { get; set; }
+        public Guid? UserGroupId { get; set; }
 
         [JsonProperty("usersIdList")]
         public List<Guid?> UsersId { get; set; }
@@ -20,6 +20,6 @@ namespace Webet333.models.Request
         public bool? DeleteAll { get; set; }
 
         [JsonProperty("id")]
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
     }
 }
