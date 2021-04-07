@@ -200,7 +200,8 @@ namespace Webet333.api.Controllers
                         UniqueId = request.UniqueId,
                         UserGroupId = request.UserGroupId,
                         UsersIdList = request.UsersIdList,
-                        DeleteAll = request.DeleteAll
+                        DeleteAll = request.DeleteAll,
+                        Id = request.Id
                     });
             }
 

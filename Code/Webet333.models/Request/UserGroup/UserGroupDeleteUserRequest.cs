@@ -1,14 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Webet333.models.Request.Base;
 
 namespace Webet333.models.Request
 {
     public class UserGroupDeleteUserRequest : BaseValidateRequest
     {
-        [Required(ErrorMessage = "error_userGroupId_required")]
         [JsonProperty("userGroupId")]
         public Guid UserGroupId { get; set; }
 
@@ -20,5 +18,8 @@ namespace Webet333.models.Request
 
         [JsonProperty("deleteAll")]
         public bool? DeleteAll { get; set; }
+
+        [JsonProperty("id")]
+        public Guid Id { get; set; }
     }
 }
