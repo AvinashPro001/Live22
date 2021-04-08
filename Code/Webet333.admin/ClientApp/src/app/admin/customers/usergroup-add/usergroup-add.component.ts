@@ -14,6 +14,7 @@ import { AdminService } from '../../admin.service';
 })
 
 export class UsergroupAddComponent implements OnInit {
+    disabled: boolean = false;
     toaster: any;
     toasterConfig: any;
     toasterconfig: ToasterConfig = new ToasterConfig({
@@ -34,6 +35,7 @@ export class UsergroupAddComponent implements OnInit {
     }
 
     addUserGroup() {
+        this.disabled = true;
         let userGroupName = (document.getElementById("txt_usergroupname") as HTMLInputElement).value;
 
         if (userGroupName == null || userGroupName == '' || userGroupName == undefined) this.toasterService.pop('error', 'Error', 'Invalidate user group name');
@@ -45,7 +47,9 @@ export class UsergroupAddComponent implements OnInit {
         this.adminService.add<any>(customer.userGroupInsert, model).subscribe(res => {
             this.toasterService.pop('success', 'Success', res.message);
             (document.getElementById("txt_usergroupname") as HTMLInputElement).value = '';
+            this.router.navigate(['admin/customers/usergroup-list']);
         }, error => {
+            this.disabled = false;
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
