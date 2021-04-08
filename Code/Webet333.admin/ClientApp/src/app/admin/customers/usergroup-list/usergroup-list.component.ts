@@ -168,6 +168,7 @@ export class UsergroupListComponent implements OnInit {
         if (event.target.value.length >= 3)
             if (event.target.value) this.setPageData(event.target.value);
             else this.setPageData("");
+        else if (event.target.value.length == 0) this.setPageData("");
     }
 
     openWindowCustomClass(content) {
@@ -177,17 +178,17 @@ export class UsergroupListComponent implements OnInit {
     //#region Navigate to add admin page
 
     async navigateAdd() {
-        if (await this.checkAddPermission()) this.router.navigate(['/admin/customers/admin-add']);
+        if (await this.checkAddPermission()) this.router.navigate(['/admin/customers/usergroup-add']);
     }
 
     //#endregion Navigate to add admin page
 
     //#region Navigate to edit admin page
 
-    async navigateEdit(customerData) {
+    async navigateEdit(userGroupid) {
         if (await this.checkUpdatePermission()) {
-            localStorage.setItem('adminData', JSON.stringify(customerData));
-            this.router.navigate(['/admin/customers/admin-edit']);
+            localStorage.setItem('userGroupid', JSON.stringify(userGroupid));
+            this.router.navigate(['/admin/customers/usergroup-edit']);
         }
     }
 

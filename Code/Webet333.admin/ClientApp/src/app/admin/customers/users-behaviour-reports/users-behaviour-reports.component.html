@@ -54,6 +54,14 @@
             </div>
             <br /><br />
             <div class="row col-12 ">
+                <div class="input-group col-5">
+                    <label class="container">
+                        <button id="tbl_adduserinusergroup" type="button" (click)="ViewData(userGroup)">Add those User to UserGroup</button>
+                    </label>
+                </div>
+            </div>
+            <br /><br />
+            <div class="row col-12 ">
                 <div class="row col-md-2">
                     <label>No Apply Promotion :</label>
                     <div class="input-group col-1">
@@ -121,3 +129,26 @@
         </div>
     </div>
 </div>
+
+<!--Remarks modal code starts-->
+<ng-template #userGroup let-modal>
+    <div class="modal-body">
+
+        <div class="p-2 col-md-2">
+            <h4 class="text-muted text-thin">User Group</h4>
+            <ngx-select-dropdown tabindex="0"
+                                 [multiple]="false"
+                                 [config]="config"
+                                 [options]="userGroupList"
+                                 (change)="userGroupOnChange($event)">
+            </ngx-select-dropdown>
+        </div>
+
+        <br /><br />
+
+        <button class="mb-1 btn btn-success" type="button" (click)="saveUsersIntoUserGroup()">Add</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" class="mb-1 btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+<!--Remarks modal code ends-->

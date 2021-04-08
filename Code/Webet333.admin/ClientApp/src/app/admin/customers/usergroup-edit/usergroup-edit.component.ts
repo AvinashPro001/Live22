@@ -39,6 +39,7 @@ export class UsergroupEditComponent implements OnInit {
     userGroupId: any;
     userGroupName: any;
     id: any;
+    selectedUserList = [];
 
     constructor(
         private adminService: AdminService,
@@ -49,9 +50,7 @@ export class UsergroupEditComponent implements OnInit {
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
-            // this.id = JSON.parse(localStorage.getItem('userGroupid'));
-            this.id = 'F69B38A3-E157-4D56-ACFB-76D6CDD3E13D';
-
+            this.id = JSON.parse(localStorage.getItem('userGroupid'));
             this.setColumn();
             this.setPageData();
         }
@@ -63,12 +62,12 @@ export class UsergroupEditComponent implements OnInit {
                 prop: 'selected',
                 name: '',
                 sortable: false,
-                canAutoResize: false,
+                canAutoResize: true,
                 draggable: false,
                 resizable: false,
                 headerCheckboxable: true,
                 checkboxable: true,
-                width: 30
+                width: 100
             },
             { prop: 'UserId' },
             { prop: 'Username' },
@@ -127,6 +126,7 @@ export class UsergroupEditComponent implements OnInit {
             res.data.forEach(el => {
                 this.rows.push({
                     UserId: el.userId,
+                    UsersId: el.usersId,
                     Username: el.userName,
                     VIPLavel: el.VIPLevelName,
                     CountDeposit: el.depositCount,
@@ -174,6 +174,39 @@ export class UsergroupEditComponent implements OnInit {
 
             this.adminService.add<any>(customer.userGroupUserDelete, data).subscribe(res => {
                 this.toasterService.pop('success', 'Success', res.message);
+                this.ngOnInit();
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
+        }
+    }
+
+    async openRejectConfirmationDialogForSelectedCustomer() {
+
+        debugger;
+
+        if (await this.checkUpdatePermission()) {
+            if (this.isUserSelected()) {
+                this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to delete selected user from ' + this.userGroupName + ' user group?')
+                    .then((confirmed) => {
+                        this.final = confirmed;
+                        this.deleteSelectedCustomer(this.selectedUserList);
+                    });
+            }
+        }
+    }
+
+    deleteSelectedCustomer(idList) {
+        if (this.final == true) {
+            let data =
+            {
+                userGroupId: this.id,
+                usersIdList: idList.map(function (a) { return a.UsersId; })
+            };
+
+            this.adminService.add<any>(customer.userGroupUserDelete, data).subscribe(res => {
+                this.toasterService.pop('success', 'Success', res.message);
+                this.selectedUserList = [];
                 this.ngOnInit();
             }, error => {
                 this.toasterService.pop('error', 'Error', error.error.message);
@@ -271,4 +304,24 @@ export class UsergroupEditComponent implements OnInit {
     }
 
     //#endregion Check Permission
+
+    //#region Onselect on checkbox
+
+    onSelect({ selected }) {
+        // console.log('Select Event', selected, this.selectedUserList);
+
+        this.selectedUserList.splice(0, this.selectedUserList.length);
+        this.selectedUserList.push(...selected);
+    }
+
+    //#endregion Onselect on checkbox
+
+    isUserSelected() {
+        if (this.selectedUserList == null || this.selectedUserList.length == 0) {
+            this.toasterService.pop('error', 'Error', 'Please select at least a user.');
+
+            return false;
+        }
+        else return true;
+    }
 }

@@ -3,7 +3,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-lg-4">
-                    <legend class="main-title">UserGroup List</legend>
+                    <legend class="main-title">User Group List</legend>
                 </div>
                 <div class="col-lg-4"></div>
             </div>
@@ -13,7 +13,7 @@
                 <input type='text' class="form-control" (keyup)="searchHandler($event)" placeholder="Search" />
             </div>
             <div class="p-2 col-md-10">
-                <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Add UserGroup</button>
+                <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Add User Group</button>
             </div>
         </div>
         <br />
@@ -22,7 +22,7 @@
                 <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
                     <div class="row col-md-12" style="margin-right:0px">
                         <label class="col-md-3">
-                            <button id="acceptBtn" data-id="customerData[rowIndex].id" class="mb-1 btn btn-success" type="button" data-toggle="modal" title="Edit" (click)='navigateEdit(customerData[rowIndex])'>
+                            <button id="acceptBtn" data-id="customerData[rowIndex].id" class="mb-1 btn btn-success" type="button" data-toggle="modal" title="Edit" (click)='navigateEdit(customerData[rowIndex].id)'>
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
                         </label>
