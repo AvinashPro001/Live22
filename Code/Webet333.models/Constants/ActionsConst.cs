@@ -688,6 +688,8 @@
 
             public const string UserGroupSelect = "usergroup/select";
 
+            public const string UserGroupSelectForDropdown = "usergroup/select/dropdown";
+
             public const string UserGroupUpdateStatus = "usergroup/update/status";
 
             public const string UserGroupDelete = "usergroup/delete";

@@ -98,6 +98,23 @@ namespace Webet333.api.Controllers
 
         #endregion UserGroup Select
 
+        #region UserGroup Select From Dropdown
+
+        [HttpGet(ActionsConst.UserGroup.UserGroupSelectForDropdown)]
+        public async System.Threading.Tasks.Task<IActionResult> UserGroupSelectForDropdownAsync()
+        {
+            await ValidateUser(role: RoleConst.Admin);
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.UserGroup.UserGroupSelectForDropdown, new { });
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion UserGroup Select
+
         #region UserGroup Update Status
 
         [HttpPost(ActionsConst.UserGroup.UserGroupUpdateStatus)]

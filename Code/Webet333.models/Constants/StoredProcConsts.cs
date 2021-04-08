@@ -549,6 +549,8 @@
 
             public const string UserGroupSelect = "[dbo].[User_Group_Select]";
 
+            public const string UserGroupSelectForDropdown = "[dbo].[User_Group_Select_For_Dropdown]";
+
             public const string UserGroupUpdateStatus = "[dbo].[User_Group_Update_Status]";
 
             public const string UserGroupUpdatDelete = "[dbo].[User_Group_Update_Delete]";
