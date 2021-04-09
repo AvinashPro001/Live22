@@ -295,35 +295,35 @@ async function DoRegister() {
         return ShowError(ChangeErroMessage("pass_alpha_error"));
     }
 
-    //if (model.mobile !== "" && model.username !== "" && model.name !== "" && model.password !== "" && model.confirmPassword !== "" && model.username.length > 6) {
-    //    //WEBET333 Account Create
-    //    var res = await PostMethodRegister(apiEndPoints.register, model);
+    if (model.mobile !== "" && model.username !== "" && model.name !== "" && model.password !== "" && model.confirmPassword !== "" && model.username.length > 6) {
+        //WEBET333 Account Create
+        var res = await PostMethodRegister(apiEndPoints.register, model);
 
-    //    if (res !== null && res !== undefined) {
-    //        try {
-    //            if ((res.data.messageResponse.statusCode.split(",").length - 1) == 0)
-    //                ShowError(res.data.messageResponse.smsMessage);
-    //        }
-    //        catch (e) { }
-    //        let model = {
-    //            userName: $('#txt_username').val(),
-    //            password: $("#txt_password").val(),
-    //            grantType: 'User'
-    //        };
-    //        let res = await PostMethod(apiEndPoints.login, model);
-    //        if (res !== null && res !== undefined) {
-    //            localStorage.setItem('currentUser', res.data.access_token);
-    //            try {
-    //                await TrackingLoginRegister("Register", model.userName, "registerCookies");
-    //            }
-    //            catch (e) { }
-    //            localStorage.setItem('currentUserName', model.userName);
-    //            localStorage.setItem('currentUserData', enc(model.password));
-    //            window.location.href = "../Account/VerfiedOtp";
-    //        }
-    //    }
-    //    LoaderHide();
-    //}
+        if (res !== null && res !== undefined) {
+            try {
+                if ((res.data.messageResponse.statusCode.split(",").length - 1) == 0)
+                    ShowError(res.data.messageResponse.smsMessage);
+            }
+            catch (e) { }
+            let model = {
+                userName: $('#txt_username').val(),
+                password: $("#txt_password").val(),
+                grantType: 'User'
+            };
+            let res = await PostMethod(apiEndPoints.login, model);
+            if (res !== null && res !== undefined) {
+                localStorage.setItem('currentUser', res.data.access_token);
+                try {
+                    await TrackingLoginRegister("Register", model.userName, "registerCookies");
+                }
+                catch (e) { }
+                localStorage.setItem('currentUserName', model.userName);
+                localStorage.setItem('currentUserData', enc(model.password));
+                window.location.href = "../Account/VerfiedOtp";
+            }
+        }
+        LoaderHide();
+    }
 }
 //#endregion
 
