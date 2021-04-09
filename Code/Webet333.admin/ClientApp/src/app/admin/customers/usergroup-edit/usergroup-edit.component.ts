@@ -1,6 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterConfig, ToasterService } from 'angular2-toaster';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
@@ -14,9 +13,9 @@ import { AdminService } from '../../admin.service';
 })
 
 export class UsergroupEditComponent implements OnInit {
+    usersPermissions: any;
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
-    @ViewChild('action') action: TemplateRef<any>;
     toaster: any;
     toasterConfig: any;
     toasterconfig: ToasterConfig = new ToasterConfig({
@@ -25,17 +24,11 @@ export class UsergroupEditComponent implements OnInit {
     });
     rows = [];
     columns = [];
-    totalRecords = 0;
-    filteredData = [];
     customerData: any;
-    soritngColumn = "";
-    searchString = "";
     res: any;
     forEach: any;
-    manualUpdate: any;
     loadingIndicator: boolean = true;
     final: any;
-    viewData: any;
     userGroupId: any;
     userGroupName: any;
     id: any;
@@ -45,10 +38,10 @@ export class UsergroupEditComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private confirmationDialogService: ConfirmationDialogService,
-        private modalService: NgbModal) { }
+        private confirmationDialogService: ConfirmationDialogService) { }
 
     async ngOnInit() {
+        this.usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (await this.checkViewPermission()) {
             this.id = JSON.parse(localStorage.getItem('userGroupid'));
             this.setColumn();
@@ -83,7 +76,7 @@ export class UsergroupEditComponent implements OnInit {
     setPageData(search = null) {
         this.loadingIndicator = true;
 
-        let data = {
+        let model = {
             searchParam: search,
             id: this.id,
             fromDate: null,
@@ -93,14 +86,14 @@ export class UsergroupEditComponent implements OnInit {
             orderBy: null
         }
 
-        this.adminService.add<any>(customer.userGroupList, data).subscribe(res => {
+        this.adminService.add<any>(customer.userGroupList, model).subscribe(res => {
             let i = 0;
             this.rows = [];
 
             this.userGroupId = res.data[0].groupId;
             this.userGroupName = res.data[0].groupName;
 
-            this.getUsersUserGroup(data.searchParam);
+            this.getUsersUserGroup(model.searchParam);
         }, error => {
             this.loadingIndicator = false;
             this.toasterService.pop('error', 'Error', error.error.message);
@@ -108,7 +101,7 @@ export class UsergroupEditComponent implements OnInit {
     }
 
     getUsersUserGroup(search = null) {
-        let data = {
+        let model = {
             searchParam: search,
             id: this.id,
             fromDate: null,
@@ -118,13 +111,14 @@ export class UsergroupEditComponent implements OnInit {
             orderBy: null
         }
 
-        this.adminService.add<any>(customer.userGroupUserList, data).subscribe(res => {
+        this.adminService.add<any>(customer.userGroupUserList, model).subscribe(res => {
             let i = 0;
             this.rows = [];
             this.customerData = res.data;
 
             res.data.forEach(el => {
                 this.rows.push({
+                    id: el.id,
                     UserId: el.userId,
                     UsersId: el.usersId,
                     Username: el.userName,
@@ -167,12 +161,12 @@ export class UsergroupEditComponent implements OnInit {
 
     deleteCustomer(id) {
         if (this.final == true) {
-            let data =
+            let model =
             {
                 id: id
             };
 
-            this.adminService.add<any>(customer.userGroupUserDelete, data).subscribe(res => {
+            this.adminService.add<any>(customer.userGroupUserDelete, model).subscribe(res => {
                 this.toasterService.pop('success', 'Success', res.message);
                 this.ngOnInit();
             }, error => {
@@ -182,9 +176,6 @@ export class UsergroupEditComponent implements OnInit {
     }
 
     async openRejectConfirmationDialogForSelectedCustomer() {
-
-        debugger;
-
         if (await this.checkUpdatePermission()) {
             if (this.isUserSelected()) {
                 this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to delete selected user from ' + this.userGroupName + ' user group?')
@@ -198,13 +189,13 @@ export class UsergroupEditComponent implements OnInit {
 
     deleteSelectedCustomer(idList) {
         if (this.final == true) {
-            let data =
+            let model =
             {
                 userGroupId: this.id,
                 usersIdList: idList.map(function (a) { return a.UsersId; })
             };
 
-            this.adminService.add<any>(customer.userGroupUserDelete, data).subscribe(res => {
+            this.adminService.add<any>(customer.userGroupUserDelete, model).subscribe(res => {
                 this.toasterService.pop('success', 'Success', res.message);
                 this.selectedUserList = [];
                 this.ngOnInit();
@@ -218,23 +209,25 @@ export class UsergroupEditComponent implements OnInit {
 
     //#region Update User Group Name
 
-    updateUserGroupName() {
-        let userGroupName = (document.getElementById("txt_usergroupname") as HTMLInputElement).value;
+    async updateUserGroupName() {
+        if (await this.checkUpdatePermission()) {
+            let userGroupName = (document.getElementById("txt_usergroupname") as HTMLInputElement).value;
 
-        if (userGroupName == undefined || userGroupName == null || userGroupName == '') this.toasterService.pop('error', 'Error', 'Invalid UserGroup Name!!');
+            if (userGroupName == undefined || userGroupName == null || userGroupName == '') this.toasterService.pop('error', 'Error', 'Invalid UserGroup Name!!');
 
-        let data = {
-            id: this.id,
-            name: userGroupName
+            let model = {
+                id: this.id,
+                name: userGroupName
+            }
+
+            this.adminService.add<any>(customer.userGroupUpdate, model).subscribe(res => {
+                this.toasterService.pop('success', 'Success', res.message);
+                this.ngOnInit();
+            }, error => {
+                this.loadingIndicator = false;
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-
-        this.adminService.add<any>(customer.userGroupUpdate, data).subscribe(res => {
-            this.toasterService.pop('success', 'Success', res.message);
-            this.ngOnInit();
-        }, error => {
-            this.loadingIndicator = false;
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
 
     //#endregion Update User Group Name
@@ -248,62 +241,6 @@ export class UsergroupEditComponent implements OnInit {
     }
 
     //#endregion Search
-
-    //#region Check Permission
-
-    async checkViewPermission() {
-        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
-        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[12].Permissions[0].IsChecked === true) {
-                return true;
-            }
-            else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
-                this.router.navigate(['admin/dashboard']);
-                return false;
-            }
-        } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
-            this.router.navigate(['admin/dashboard']);
-            return false;
-        }
-    }
-
-    async checkUpdatePermission() {
-        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
-        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[12].Permissions[1].IsChecked === true) {
-                return true;
-            } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
-                this.router.navigate(['admin/dashboard']);
-                return false;
-            }
-        } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
-            this.router.navigate(['admin/dashboard']);
-            return false;
-        }
-    }
-
-    async checkAddPermission() {
-        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
-        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[12].Permissions[2].IsChecked === true) {
-                return true;
-            } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
-                this.router.navigate(['admin/dashboard']);
-                return false;
-            }
-        } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
-            this.router.navigate(['admin/dashboard']);
-            return false;
-        }
-    }
-
-    //#endregion Check Permission
 
     //#region Onselect on checkbox
 
@@ -324,4 +261,57 @@ export class UsergroupEditComponent implements OnInit {
         }
         else return true;
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        if (this.usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (this.usersPermissions.permissionsList[1].submenu[14].Permissions[0].IsChecked === true) {
+                return true;
+            }
+            else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        if (this.usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (this.usersPermissions.permissionsList[1].submenu[14].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        if (this.usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (this.usersPermissions.permissionsList[1].submenu[14].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

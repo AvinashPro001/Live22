@@ -14,7 +14,6 @@ import { AdminService } from '../../admin.service';
 
 export class UsersBehaviourReportsComponent implements OnInit {
     @ViewChild('userGroup') receipt: TemplateRef<any>;
-
     rows = [];
     columns = [];
     loadingIndicator: boolean;

@@ -14,9 +14,9 @@ import { AdminService } from '../../admin.service';
 })
 
 export class UsergroupListComponent implements OnInit {
+    usersPermissions: any;
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
-    @ViewChild('action') action: TemplateRef<any>;
     toaster: any;
     toasterConfig: any;
     toasterconfig: ToasterConfig = new ToasterConfig({
@@ -25,17 +25,11 @@ export class UsergroupListComponent implements OnInit {
     });
     rows = [];
     columns = [];
-    totalRecords = 0;
-    filteredData = [];
     customerData: any;
-    soritngColumn = "";
-    searchString = "";
     res: any;
     forEach: any;
-    manualUpdate: any;
     loadingIndicator: boolean = true;
     final: any;
-    viewData: any;
 
     constructor(
         private adminService: AdminService,
@@ -45,6 +39,7 @@ export class UsergroupListComponent implements OnInit {
         private modalService: NgbModal) { }
 
     async ngOnInit() {
+        this.usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (await this.checkViewPermission()) {
             this.setColumn();
             this.setPageData();
@@ -53,10 +48,10 @@ export class UsergroupListComponent implements OnInit {
 
     setColumn() {
         this.columns = [
-            { prop: 'GroupId', sortable: false },
-            { prop: 'UserGroupName', sortable: false },
-            { prop: 'CreatedDateTime', sortable: false },
-            { prop: 'LastModifyDateTime', sortable: false },
+            { prop: 'GroupId' },
+            { prop: 'UserGroupName' },
+            { prop: 'CreatedDateTime' },
+            { prop: 'LastModifyDateTime' },
             { prop: 'Action', cellTemplate: this.status, sortable: true, width: 250 }
         ];
     }
@@ -64,7 +59,7 @@ export class UsergroupListComponent implements OnInit {
     setPageData(search = null) {
         this.loadingIndicator = true;
 
-        let data = {
+        let model = {
             searchParam: search,
             id: null,
             fromDate: null,
@@ -74,13 +69,14 @@ export class UsergroupListComponent implements OnInit {
             orderBy: null
         }
 
-        this.adminService.add<any>(customer.userGroupList, data).subscribe(res => {
+        this.adminService.add<any>(customer.userGroupList, model).subscribe(res => {
             let i = 0;
             this.rows = [];
             this.customerData = res.data;
             res.data.forEach(el => {
                 this.rows.push({
                     id: el.id,
+                    active: el.active,
                     GroupId: el.groupId,
                     UserGroupName: el.groupName,
                     CreatedDateTime: this.replaceDateTime(el.created),
@@ -128,11 +124,11 @@ export class UsergroupListComponent implements OnInit {
 
     deleteCustomer(id) {
         if (this.final == true) {
-            let data = {
+            let model = {
                 id: id,
                 active: "true"
             }
-            this.adminService.add<any>(customer.userGroupDelete, data).subscribe(res => {
+            this.adminService.add<any>(customer.userGroupDelete, model).subscribe(res => {
                 this.toasterService.pop('success', 'Success', res.message);
                 this.ngOnInit();
             }, error => {
@@ -145,16 +141,20 @@ export class UsergroupListComponent implements OnInit {
 
     //#region Active/InActive
 
-    async manualUpdateEvent(id, value: boolean) { if (await this.checkUpdatePermission()) this.rejectCustomer(id, value); }
+    async manualUpdateEvent(id, value: boolean) {
+        if (await this.checkUpdatePermission())
+            this.rejectCustomer(id, value);
+    }
 
     rejectCustomer(id, value) {
         let groupName = this.customerData.find(item => item.id === id).groupName;
 
-        let data = {
+        let model = {
             id: id,
             active: value
         }
-        this.adminService.add<any>(customer.userGroupUpdateStatus, data).subscribe(res => {
+
+        this.adminService.add<any>(customer.userGroupUpdateStatus, model).subscribe(res => {
             if (value == true) this.toasterService.pop('success', 'Success', groupName + " UserGroup is active.");
             else this.toasterService.pop('success', 'Success', groupName + " UserGroup is deactive.");
         }, error => {
@@ -162,7 +162,7 @@ export class UsergroupListComponent implements OnInit {
         });
     }
 
-    //#endregion Active/InActive    
+    //#endregion Active/InActive
 
     searchHandler(event) {
         if (event.target.value.length >= 3)
@@ -197,9 +197,8 @@ export class UsergroupListComponent implements OnInit {
     //#region Check Permission
 
     async checkViewPermission() {
-        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
-        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[12].Permissions[0].IsChecked === true) {
+        if (this.usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (this.usersPermissions.permissionsList[1].submenu[12].Permissions[0].IsChecked === true) {
                 return true;
             }
             else {
@@ -215,9 +214,8 @@ export class UsergroupListComponent implements OnInit {
     }
 
     async checkUpdatePermission() {
-        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
-        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[12].Permissions[1].IsChecked === true) {
+        if (this.usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (this.usersPermissions.permissionsList[1].submenu[12].Permissions[1].IsChecked === true) {
                 return true;
             } else {
                 this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
@@ -232,9 +230,8 @@ export class UsergroupListComponent implements OnInit {
     }
 
     async checkAddPermission() {
-        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
-        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[12].Permissions[2].IsChecked === true) {
+        if (this.usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (this.usersPermissions.permissionsList[1].submenu[12].Permissions[2].IsChecked === true) {
                 return true;
             } else {
                 this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);

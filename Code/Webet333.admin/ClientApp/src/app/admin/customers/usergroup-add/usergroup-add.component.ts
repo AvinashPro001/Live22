@@ -1,7 +1,6 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterConfig, ToasterService } from 'angular2-toaster';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 import { customer, ErrorMessages } from '../../../../environments/environment';
@@ -14,6 +13,7 @@ import { AdminService } from '../../admin.service';
 })
 
 export class UsergroupAddComponent implements OnInit {
+    usersPermissions: any;
     disabled: boolean = false;
     toaster: any;
     toasterConfig: any;
@@ -32,6 +32,8 @@ export class UsergroupAddComponent implements OnInit {
         private modalService: NgbModal) { }
 
     ngOnInit() {
+        this.usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        this.checkAddPermission();
     }
 
     addUserGroup() {
@@ -57,9 +59,8 @@ export class UsergroupAddComponent implements OnInit {
     //#region Check Permission
 
     async checkViewPermission() {
-        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
-        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[12].Permissions[0].IsChecked === true) {
+        if (this.usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (this.usersPermissions.permissionsList[1].submenu[14].Permissions[0].IsChecked === true) {
                 return true;
             }
             else {
@@ -75,9 +76,8 @@ export class UsergroupAddComponent implements OnInit {
     }
 
     async checkUpdatePermission() {
-        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
-        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[12].Permissions[1].IsChecked === true) {
+        if (this.usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (this.usersPermissions.permissionsList[1].submenu[14].Permissions[1].IsChecked === true) {
                 return true;
             } else {
                 this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
@@ -92,9 +92,8 @@ export class UsergroupAddComponent implements OnInit {
     }
 
     async checkAddPermission() {
-        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
-        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[12].Permissions[2].IsChecked === true) {
+        if (this.usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (this.usersPermissions.permissionsList[1].submenu[14].Permissions[2].IsChecked === true) {
                 return true;
             } else {
                 this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
