@@ -286,7 +286,7 @@ export class UsersBehaviourReportsComponent implements OnInit {
         }
     }
 
-    openWindowCustomClass(content) { this.modalService.open(content, { windowClass: 'dark-modal', }); }
+    openWindowCustomClass(content) { this.modalService.open(content, { windowClass: 'dark-modal', size:'sm' }); }
 
     isUserAvailable() {
         if (this.Data == null || this.Data.length == 0) {

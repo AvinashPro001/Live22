@@ -52,13 +52,13 @@
                     <button class="mb-1 btn btn-outline-green" (click)='DownloadExcel()' type="button">Download Excel</button>
                 </div>
             </div>
+            <br />
             <div class="row col-12 ">
-                <div class="row col-md-4">
-                    <label class="container">
-                        <button id="tbl_adduserinusergroup" type="button" (click)="ViewData(userGroup)">Add those User to UserGroup</button>
-                    </label>
-                </div>
+                <label class="container" style="padding-left: 0px;margin: 0px;max-width: 191PX;">
+                    <button id="tbl_adduserinusergroup" type="button" (click)="ViewData(userGroup)" class="mb-1 btn btn-success">Add those User to UserGroup</button>
+                </label>
             </div>
+            <br />
             <div class="row col-12 ">
                 <div class="row col-md-2">
                     <label>OTP Verified User :</label>
@@ -93,8 +93,7 @@
 <!--Remarks modal code starts-->
 <ng-template #userGroup let-modal>
     <div class="modal-body">
-
-        <div class="p-2 col-md-2">
+        <div class="p-2 col-md-4">
             <h4 class="text-muted text-thin">User Group</h4>
             <ngx-select-dropdown tabindex="0"
                                  [multiple]="false"
@@ -103,9 +102,7 @@
                                  (change)="userGroupOnChange($event)">
             </ngx-select-dropdown>
         </div>
-
         <br /><br />
-
         <button class="mb-1 btn btn-success" type="button" (click)="saveUsersIntoUserGroup()">Add</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button type="button" class="mb-1 btn btn-light" (click)="modal.close('Close click')">Close</button>
