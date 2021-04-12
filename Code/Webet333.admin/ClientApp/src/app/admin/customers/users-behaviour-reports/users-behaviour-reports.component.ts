@@ -286,7 +286,7 @@ export class UsersBehaviourReportsComponent implements OnInit {
         }
     }
 
-    openWindowCustomClass(content) { this.modalService.open(content, { windowClass: 'dark-modal', size:'sm' }); }
+    openWindowCustomClass(content) { this.modalService.open(content, { windowClass: 'dark-modal', size: 'sm' }); }
 
     isUserAvailable() {
         if (this.Data == null || this.Data.length == 0) {
@@ -345,19 +345,22 @@ export class UsersBehaviourReportsComponent implements OnInit {
     //#region Save Users Into UserGroup
 
     saveUsersIntoUserGroup() {
-        var userIdList = this.Data.map(function (a) { return a.userId; });
+        if (this.userGroupId == null || this.userGroupId == NaN || this.userGroupId == undefined || this.userGroupId == '0') this.toasterService.pop('error', 'Error', this.commonService.errorMessage.SelectUserGroupFromDropdown);
+        else {
+            var userIdList = this.Data.map(function (a) { return a.userId; });
 
-        let model = {
-            userGroupId: this.userGroupId,
-            userId: userIdList
-        };
+            let model = {
+                userGroupId: this.userGroupId,
+                userId: userIdList
+            };
 
-        this.adminService.add<any>(customer.userGroupUserInsert, model).subscribe(res => {
-            this.toasterService.pop('success', 'Success', res.message);
-            this.modalService.dismissAll(); //  Close Model
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
+            this.adminService.add<any>(customer.userGroupUserInsert, model).subscribe(res => {
+                this.toasterService.pop('success', 'Success', res.message);
+                this.modalService.dismissAll(); //  Close Model
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
+        }
     }
 
     //#endregion Save Users Into UserGroup

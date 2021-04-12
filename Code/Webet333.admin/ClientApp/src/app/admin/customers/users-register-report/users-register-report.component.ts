@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterService } from 'angular2-toaster';
-import { customer, ErrorMessages } from '../../../../environments/environment';
+import { customer } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
 
@@ -215,12 +215,12 @@ export class UsersRegisterReportComponent implements OnInit {
             if (usersPermissions.permissionsList[3].submenu[5].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -232,12 +232,12 @@ export class UsersRegisterReportComponent implements OnInit {
             if (usersPermissions.permissionsList[3].submenu[5].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -249,12 +249,12 @@ export class UsersRegisterReportComponent implements OnInit {
             if (usersPermissions.permissionsList[3].submenu[5].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -284,7 +284,7 @@ export class UsersRegisterReportComponent implements OnInit {
 
     isUserAvailable() {
         if (this.Data == null || this.Data.length == 0) {
-            this.toasterService.pop('error', 'Error', 'Here not user available to add to the user group.');
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.NotUserInTable);
 
             return false;
         }
@@ -339,19 +339,22 @@ export class UsersRegisterReportComponent implements OnInit {
     //#region Save Users Into UserGroup
 
     saveUsersIntoUserGroup() {
-        var userIdList = this.Data.map(function (a) { return a.userId; });
+        if (this.userGroupId == null || this.userGroupId == NaN || this.userGroupId == undefined || this.userGroupId == '0') this.toasterService.pop('error', 'Error', this.commonService.errorMessage.SelectUserGroupFromDropdown);
+        else {
+            var userIdList = this.Data.map(function (a) { return a.userId; });
 
-        let model = {
-            userGroupId: this.userGroupId,
-            userId: userIdList
-        };
+            let model = {
+                userGroupId: this.userGroupId,
+                userId: userIdList
+            };
 
-        this.adminService.add<any>(customer.userGroupUserInsert, model).subscribe(res => {
-            this.toasterService.pop('success', 'Success', res.message);
-            this.modalService.dismissAll(); //  Close Model
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
+            this.adminService.add<any>(customer.userGroupUserInsert, model).subscribe(res => {
+                this.toasterService.pop('success', 'Success', res.message);
+                this.modalService.dismissAll(); //  Close Model
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
+        }
     }
 
     //#endregion Save Users Into UserGroup

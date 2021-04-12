@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterConfig, ToasterService } from 'angular2-toaster';
-import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
-import { customer, ErrorMessages } from '../../../../environments/environment';
+import { customer } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
 
 @Component({
@@ -28,8 +27,7 @@ export class UsergroupAddComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private confirmationDialogService: ConfirmationDialogService,
-        private modalService: NgbModal) { }
+        private commonService: CommonService) { }
 
     ngOnInit() {
         this.usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
@@ -40,7 +38,7 @@ export class UsergroupAddComponent implements OnInit {
         this.disabled = true;
         let userGroupName = (document.getElementById("txt_usergroupname") as HTMLInputElement).value;
 
-        if (userGroupName == null || userGroupName == '' || userGroupName == undefined) this.toasterService.pop('error', 'Error', 'Invalidate user group name');
+        if (userGroupName == null || userGroupName == '' || userGroupName == undefined) this.toasterService.pop('error', 'Error', this.commonService.errorMessage.InvalidateUserGroupName);
 
         let model = {
             name: userGroupName
@@ -64,12 +62,12 @@ export class UsergroupAddComponent implements OnInit {
                 return true;
             }
             else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -80,12 +78,12 @@ export class UsergroupAddComponent implements OnInit {
             if (this.usersPermissions.permissionsList[1].submenu[14].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -96,12 +94,12 @@ export class UsergroupAddComponent implements OnInit {
             if (this.usersPermissions.permissionsList[1].submenu[14].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

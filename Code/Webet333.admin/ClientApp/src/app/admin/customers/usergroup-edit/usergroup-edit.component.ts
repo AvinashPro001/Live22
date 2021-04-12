@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterConfig, ToasterService } from 'angular2-toaster';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
-import { customer, ErrorMessages } from '../../../../environments/environment';
+import { customer } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
 
 @Component({
@@ -38,7 +39,8 @@ export class UsergroupEditComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private confirmationDialogService: ConfirmationDialogService) { }
+        private confirmationDialogService: ConfirmationDialogService,
+        private commonService: CommonService) { }
 
     async ngOnInit() {
         this.usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
@@ -213,7 +215,7 @@ export class UsergroupEditComponent implements OnInit {
         if (await this.checkUpdatePermission()) {
             let userGroupName = (document.getElementById("txt_usergroupname") as HTMLInputElement).value;
 
-            if (userGroupName == undefined || userGroupName == null || userGroupName == '') this.toasterService.pop('error', 'Error', 'Invalid UserGroup Name!!');
+            if (userGroupName == undefined || userGroupName == null || userGroupName == '') this.toasterService.pop('error', 'Error', this.commonService.errorMessage.InvalidateUserGroupName);
 
             let model = {
                 id: this.id,
@@ -255,7 +257,7 @@ export class UsergroupEditComponent implements OnInit {
 
     isUserSelected() {
         if (this.selectedUserList == null || this.selectedUserList.length == 0) {
-            this.toasterService.pop('error', 'Error', 'Please select at least a user.');
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectAtLeastOneUser);
 
             return false;
         }
@@ -270,12 +272,12 @@ export class UsergroupEditComponent implements OnInit {
                 return true;
             }
             else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -286,12 +288,12 @@ export class UsergroupEditComponent implements OnInit {
             if (this.usersPermissions.permissionsList[1].submenu[14].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -302,12 +304,12 @@ export class UsergroupEditComponent implements OnInit {
             if (this.usersPermissions.permissionsList[1].submenu[14].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
