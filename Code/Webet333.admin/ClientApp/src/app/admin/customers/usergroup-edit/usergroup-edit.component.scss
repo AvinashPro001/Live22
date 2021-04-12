@@ -1,37 +1,10 @@
-/*:host /deep/ .datatable-body-row.active  .datatable-row-group {
-    background-color: red !important;
-}*/
-
-/*.ngx-datatable.material.single-selection .datatable-body-row.active,
-.ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group,
-.ngx-datatable.material.multi-selection .datatable-body-row.active,
-.ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group,
-.ngx-datatable.material.multi-click-selection .datatable-body-row.active,
-.ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group {
-    background-color: red !important;
+:host /deep/ .datatable-body-row.active .datatable-row-group {
+    background-color: #db8888 !important;
 }
 
-.ngx-datatable.material.single-selection .datatable-body-row.active:hover,
-.ngx-datatable.material.single-selection .datatable-body-row.active:hover .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active:hover,
-.ngx-datatable.material.multi-selection .datatable-body-row.active:hover .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover,
-.ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover .datatable-row-group {
-    background-color: red !important;
-}*/
-
-/*.ngx-datatable.bootstrap.single-selection .datatable-body-row.active,
-.ngx-datatable.bootstrap.single-selection .datatable-body-row.active .datatable-row-group,
-.ngx-datatable.bootstrap.multi-selection .datatable-body-row.active,
-.ngx-datatable.bootstrap.multi-selection .datatable-body-row.active .datatable-row-group,
-.ngx-datatable.bootstrap.multi-click-selection .datatable-body-row.active,
-.ngx-datatable.bootstrap.multi-click-selection .datatable-body-row.active .datatable-row-group,
-.ngx-datatable.bootstrap.single-selection .datatable-body-row.active:hover,
-.ngx-datatable.bootstrap.single-selection .datatable-body-row.active:hover .datatable-row-group,
-.ngx-datatable.bootstrap.multi-selection .datatable-body-row.active:hover,
-.ngx-datatable.bootstrap.multi-selection .datatable-body-row.active:hover .datatable-row-group,
-.ngx-datatable.bootstrap.multi-click-selection .datatable-body-row.active:hover,
-.ngx-datatable.bootstrap.multi-click-selection .datatable-body-row.active:hover .datatable-row-group {
-    background-color: red !important;
-} */
+:host /deep/ .ngx-datatable.bootstrap .datatable-body .datatable-body-row.active {
+    background-color: #db8888 !important;
+}
 
 .button {
     border: none;
@@ -93,7 +66,6 @@ button.calendar:active {
         }
     }
 }
-
 /**
  * Progress bar animations
  */
@@ -122,7 +94,6 @@ button.calendar:active {
     -ms-user-select: none;
     user-select: none;
 }
-
 /* Hide the browser's default checkbox */
 
 .container input {
@@ -132,7 +103,6 @@ button.calendar:active {
     height: 0;
     width: 0;
 }
-
 /* Create a custom checkbox */
 
 .checkmark {
@@ -143,19 +113,16 @@ button.calendar:active {
     width: 25px;
     background-color: #eee;
 }
-
 /* On mouse-over, add a grey background color */
 
 .container:hover input ~ .checkmark {
     background-color: #aaa;
 }
-
 /* When the checkbox is checked, add a blue background */
 
 .container input:checked ~ .checkmark {
     background-color: #FF5E03;
 }
-
 /* Create the checkmark/indicator (hidden when not checked) */
 
 .checkmark:after {
@@ -163,13 +130,11 @@ button.calendar:active {
     position: absolute;
     display: none;
 }
-
 /* Show the checkmark when checked */
 
 .container input:checked ~ .checkmark:after {
     display: block;
 }
-
 /* Style the checkmark/indicator */
 
 .container .checkmark:after {

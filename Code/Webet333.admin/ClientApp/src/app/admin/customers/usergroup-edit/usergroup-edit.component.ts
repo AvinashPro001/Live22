@@ -56,13 +56,8 @@ export class UsergroupEditComponent implements OnInit {
             {
                 prop: 'selected',
                 name: '',
-                sortable: false,
-                canAutoResize: true,
-                draggable: false,
-                resizable: false,
                 headerCheckboxable: true,
-                checkboxable: true,
-                width: 100
+                checkboxable: true
             },
             { prop: 'UserId' },
             { prop: 'Username' },
