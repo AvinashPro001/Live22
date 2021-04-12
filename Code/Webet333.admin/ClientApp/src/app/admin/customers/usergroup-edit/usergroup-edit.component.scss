@@ -161,3 +161,12 @@ button.calendar:active {
 .tracking-img {
     width: 30px !important;
 }
+
+/*  This css changes apply entire header  */
+/*:host /deep/ .ngx-datatable.bootstrap {
+    .datatable-header {
+        .datatable-header-cell {
+            margin-left: 25px !important;
+        }
+    }
+}*/
