@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ToasterService } from 'angular2-toaster';
-import { AdminService } from '../../admin.service';
-import { customer, ErrorMessages } from '../../../../environments/environment';
-import { error } from 'protractor';
 import { Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-approval-duration',
@@ -196,12 +195,12 @@ export class ApprovalDurationComponent implements OnInit {
             if (usersPermissions.permissionsList[3].submenu[9].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -213,12 +212,12 @@ export class ApprovalDurationComponent implements OnInit {
             if (usersPermissions.permissionsList[3].submenu[9].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -230,12 +229,12 @@ export class ApprovalDurationComponent implements OnInit {
             if (usersPermissions.permissionsList[3].submenu[9].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

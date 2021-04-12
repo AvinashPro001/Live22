@@ -1,16 +1,17 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterService } from 'angular2-toaster';
+import { customer } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
-import { customer, ErrorMessages } from '../../../../environments/environment';
-import { debug } from 'util';
 
 @Component({
     selector: 'app-download-link',
     templateUrl: './download-link.component.html',
     styleUrls: ['./download-link.component.scss']
 })
+
 export class DownloadLinkComponent implements OnInit {
     rows = [];
     columns = [];
@@ -23,7 +24,7 @@ export class DownloadLinkComponent implements OnInit {
         private toasterService: ToasterService,
         private router: Router,
         private modalService: NgbModal,
-    ) { }
+        private commonService: CommonService) { }
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
@@ -102,12 +103,12 @@ export class DownloadLinkComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[4].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -119,12 +120,12 @@ export class DownloadLinkComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[4].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -136,12 +137,12 @@ export class DownloadLinkComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[4].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

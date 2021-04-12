@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../admin.service';
-import { ToasterService, ToasterConfig } from 'angular2-toaster';
-import { customer, smsConst, ErrorMessages, account } from '../../../../environments/environment';
 import { Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
+import { account, customer } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-sms-notify',
     templateUrl: './sms-notify.component.html',
     styleUrls: ['./sms-notify.component.scss']
 })
+
 export class SmsNotifyComponent implements OnInit {
     TotalUser: any = 0;
     userList: any;
@@ -16,8 +18,8 @@ export class SmsNotifyComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private router: Router
-    ) { }
+        private router: Router,
+        private commonService: CommonService) { }
 
     ngOnInit() {
         if (this.checkViewPermission()) {
@@ -91,12 +93,12 @@ export class SmsNotifyComponent implements OnInit {
                 return true;
             }
             else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -108,12 +110,12 @@ export class SmsNotifyComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[10].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -125,12 +127,12 @@ export class SmsNotifyComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[10].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

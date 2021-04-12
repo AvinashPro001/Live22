@@ -3,15 +3,16 @@ import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterConfig, ToasterService } from 'angular2-toaster';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
-import { customer, ErrorMessages } from '../../../../environments/environment';
-import { AdminService } from '../../admin.service';
+import { customer } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-admin/customer/retrive-list',
     templateUrl: './transfer-list.component.html',
     styleUrls: ['./transfer-list.component.scss']
 })
+
 export class TransferListComponent implements OnInit {
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
@@ -226,12 +227,12 @@ export class TransferListComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[2].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -243,12 +244,12 @@ export class TransferListComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[2].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -260,12 +261,12 @@ export class TransferListComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[2].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

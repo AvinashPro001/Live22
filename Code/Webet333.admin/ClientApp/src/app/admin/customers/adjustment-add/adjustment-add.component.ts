@@ -1,20 +1,16 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
+import { customer, gameBalance } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
-import { customer, ErrorMessages } from '../../../../environments/environment';
-import { account, gameBalance } from '../../../../environments/environment';
-import { Route } from '@angular/compiler/src/core';
-import { Md5 } from 'ts-md5/dist/md5';
-import { error } from '@angular/compiler/src/util';
-import { flatMap } from 'rxjs/operators';
-import { async } from '@angular/core/testing';
 
 @Component({
     selector: 'app-adjustment-add',
     templateUrl: './adjustment-add.component.html',
     styleUrls: ['./adjustment-add.component.scss']
 })
+
 export class AdjustmentAddComponent implements OnInit {
     disabled: boolean = false;
     customerData: any;
@@ -67,8 +63,8 @@ export class AdjustmentAddComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private router: Router
-    ) { }
+        private router: Router,
+        private commonService: CommonService) { }
 
     async ngOnInit() {
         if (await this.checkAddPermission()) {
@@ -382,12 +378,12 @@ export class AdjustmentAddComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[4].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -399,12 +395,12 @@ export class AdjustmentAddComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[4].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -416,12 +412,12 @@ export class AdjustmentAddComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[4].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

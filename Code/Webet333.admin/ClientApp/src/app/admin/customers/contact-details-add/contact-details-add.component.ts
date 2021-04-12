@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ToasterConfig, ToasterService } from 'angular2-toaster';
 import { Router } from '@angular/router';
-import { debug } from 'console';
-import { customer, ErrorMessages } from '../../../../environments/environment';
-import { AdminService } from '../../admin.service';
+import { ToasterService } from 'angular2-toaster';
+import { customer } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-contact-details-add',
     templateUrl: './contact-details-add.component.html',
     styleUrls: ['./contact-details-add.component.scss']
 })
+
 export class ContactDetailsAddComponent implements OnInit {
     types: any;
     showImage: boolean = false;
@@ -19,8 +19,7 @@ export class ContactDetailsAddComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private commonService: CommonService
-    ) { }
+        private commonService: CommonService) { }
 
     async ngOnInit() {
         if (await this.checkAddPermission()) {
@@ -115,12 +114,12 @@ export class ContactDetailsAddComponent implements OnInit {
                 return true;
             }
             else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -132,12 +131,12 @@ export class ContactDetailsAddComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[13].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -149,12 +148,12 @@ export class ContactDetailsAddComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[13].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
