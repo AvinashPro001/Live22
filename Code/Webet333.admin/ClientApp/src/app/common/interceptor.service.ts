@@ -8,12 +8,10 @@ import { AuthService } from './auth.service';
 import { log } from 'util';
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
-
     constructor(private router: Router, public auth: AuthService) {
     }
     request;
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
         if (this.router.url == '/admin/dashboard') {
             history.pushState(null, null, '/admin/dashboard');
             window.onpopstate = function () {
@@ -39,7 +37,6 @@ export class InterceptorService implements HttpInterceptor {
 
         return next.handle(this.request).do(event => {
             if (event instanceof HttpResponse) {
-
             }
         })
             .catch(err => {
@@ -68,6 +65,4 @@ export class InterceptorService implements HttpInterceptor {
         //    }
         //  );
     }
-
 }
-

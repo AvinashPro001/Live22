@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
     styleUrls: ['./game-last-betting-update.component.scss']
 })
 export class GameLastBettingUpdateComponent implements OnInit {
-
     rows = [];
     columns = [];
     loadingIndicator: boolean;

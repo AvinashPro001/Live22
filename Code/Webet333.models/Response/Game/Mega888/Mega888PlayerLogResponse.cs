@@ -68,5 +68,4 @@ namespace Webet333.models.Response.Game.Mega888
         [JsonProperty("id")]
         public long Id { get; set; }
     }
-
 }

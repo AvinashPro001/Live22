@@ -6,14 +6,12 @@ import { AdminService } from '../../admin.service';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 
-
 @Component({
     selector: 'app-promotion-edit',
     templateUrl: './promotion-edit.component.html',
     styleUrls: ['./promotion-edit.component.scss']
 })
 export class PromotionEditComponent implements OnInit {
-
     selectOverCategory: any;
     overValue: any;
 
@@ -43,7 +41,6 @@ export class PromotionEditComponent implements OnInit {
     public quantities: Array<string> = [];
     public WinTurnquantities: Array<string> = [];
 
-
     turnoverCheck: boolean;
     winoverCheck: boolean;
 
@@ -55,7 +52,6 @@ export class PromotionEditComponent implements OnInit {
         );
         editor.setData(this.data.description);
     }
-
 
     constructor(
         private adminService: AdminService,
@@ -95,8 +91,6 @@ export class PromotionEditComponent implements OnInit {
             this.WinTurn = 0;
             this.turnoverValue = this.overValue;
         }
-
-
     }
 
     UpdateOverSetting(Name, Value) {
@@ -156,7 +150,6 @@ export class PromotionEditComponent implements OnInit {
     }
 
     public onChange({ editor }: ChangeEvent) {
-
         this.editorData = editor.getData();
     }
 
@@ -176,10 +169,8 @@ export class PromotionEditComponent implements OnInit {
         this.turnoverValue = this.data.turnovertime;
         this.WinTurn = this.data.winturn;
 
-
         //turnoverCheck: boolean;
         //winoverCheck: boolean;
-
 
         if (this.turnoverValue == 0) {
             this.turnoverCheck = false;
@@ -224,7 +215,6 @@ export class PromotionEditComponent implements OnInit {
             isperuseronly: (document.getElementById("chk_isPerUser") as HTMLInputElement).checked,
             bankAccountClaimOnce: (document.getElementById("chk_isBankAccountClaimOnce") as HTMLInputElement).checked,
             winturn: this.WinTurn,
-
 
             isAG: (document.getElementById("ag_id") as HTMLInputElement).checked,
             isDG: (document.getElementById("dg_id") as HTMLInputElement).checked,
@@ -276,7 +266,6 @@ export class PromotionEditComponent implements OnInit {
             dataSelect.isJoker = false;
         }
 
-
         if (dataSelect.turnovertime == 0 && dataSelect.winturn == 0) {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', "Please Select Turnover Times Or Winturn");
@@ -286,7 +275,6 @@ export class PromotionEditComponent implements OnInit {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', "Please Select only one value either Turnover Times Or Winturn");
         }
-
 
         if (dataSelect.startDate === "NaN") {
             this.disabled = false;
@@ -327,7 +315,6 @@ export class PromotionEditComponent implements OnInit {
                 this.uploadFile(res.data);
             else
                 this.router.navigate(['admin/customers/promotion-list']);
-
         }, error => {
             this.disabled = false;
             this.ngOnInit();

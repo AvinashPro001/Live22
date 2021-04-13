@@ -1,5 +1,4 @@
-﻿
-function ShowError(message) {
+﻿function ShowError(message) {
     //SetToastr(message, 'error');
     document.getElementById("ErrorMessage").innerHTML = message;
     var x = document.getElementById("error_snackbar");

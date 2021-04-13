@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Webet333.models.Response.Game.SexyBaccarat;
 
 namespace Webet333.models.Mapping.Game
@@ -11,7 +9,6 @@ namespace Webet333.models.Mapping.Game
     {
         public List<BettingDetailsInsertResponse> Map(List<Transaction> List)
         {
-
             var response = List.Select(x => new BettingDetailsInsertResponse
             {
                 BetAmount = x.BetAmount,
@@ -45,6 +42,5 @@ namespace Webet333.models.Mapping.Game
             }).ToList();
             return response;
         }
-
     }
 }

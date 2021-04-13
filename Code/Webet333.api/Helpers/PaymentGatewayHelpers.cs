@@ -15,7 +15,7 @@ namespace Webet333.api.Helpers
 {
     public class PaymentGatewayHelpers : IDisposable
     {
-        #region variable 
+        #region variable
 
 #if  DEBUG
 
@@ -49,7 +49,6 @@ namespace Webet333.api.Helpers
 
         private const string AuthKey = "xMb8QEgpvIA8wSkeJyQ7YgrBZo/k2Qngut3RCsrFNrc=";
 
-
 #endif
 
         public PaymentGatewayHelpers(string Connection)
@@ -65,7 +64,6 @@ namespace Webet333.api.Helpers
         {
             try
             {
-
                 HttpWebRequest request = WebRequest.Create(Url) as HttpWebRequest;
 
                 if (Method)
@@ -109,7 +107,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Call Third Party API and Encrpt Data
 
         #region Get Payment URL
 
@@ -121,7 +119,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<GetUrlResponse>(await CallAPI(url, parameters));
         }
 
-        #endregion
+        #endregion Get Payment URL
 
         #region Check Status
 
@@ -131,7 +129,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<CheckPaymentStatusResponse>(await GameHelpers.CallGetMethodThirdPartyApi(url));
         }
 
-        #endregion
+        #endregion Check Status
 
         #region Payment Token Save in DB
 
@@ -144,7 +142,7 @@ namespace Webet333.api.Helpers
             return 0;
         }
 
-        #endregion
+        #endregion Payment Token Save in DB
 
         #region Payment Token Verified in DB
 
@@ -162,7 +160,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Payment Token Verified in DB
 
         #region Get Pending Token List
 
@@ -175,9 +173,10 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Get Pending Token List
 
         #region House Keeping
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);
@@ -190,6 +189,7 @@ namespace Webet333.api.Helpers
                 Connection = string.Empty;
             }
         }
-        #endregion
+
+        #endregion House Keeping
     }
 }

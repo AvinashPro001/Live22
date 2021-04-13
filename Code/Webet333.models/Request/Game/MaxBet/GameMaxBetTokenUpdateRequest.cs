@@ -6,7 +6,7 @@ namespace Webet333.models.Request.Game.MaxBet
     public class GameMaxBetTokenUpdateRequest
     {
         [Required]
-        [JsonProperty(PropertyName ="token")]
+        [JsonProperty(PropertyName = "token")]
         public string Token { get; set; }
     }
 }

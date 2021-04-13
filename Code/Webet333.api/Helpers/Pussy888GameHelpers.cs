@@ -26,9 +26,10 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion Local Variables
 
         #region Randon Password Genrate
+
         public static string genratePassword()
         {
             string charsetOne = "ABCDEFGHIJKLMNOPQRSTUVWXTZ", charsetTwo = "abcdefghiklmnopqrstuvwxyz", charsetThree = "@", charsetFour = "0123456789", randomstring = "";
@@ -58,9 +59,10 @@ namespace Webet333.api.Helpers
             return randomstring;
         }
 
-        #endregion
+        #endregion Randon Password Genrate
 
         #region Randon Password Genrate
+
         public static string genrate6DigitPassword()
         {
             string charsetOne = "0123456789", charsetTwo = "0123456789", randomstring = "";
@@ -81,7 +83,7 @@ namespace Webet333.api.Helpers
             return randomstring;
         }
 
-        #endregion
+        #endregion Randon Password Genrate
 
         #region Pussy888 Game Register API
 
@@ -152,7 +154,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Pussy888 Game Register API
 
         #region Pussy888 Game Transfer API
 
@@ -168,16 +170,16 @@ namespace Webet333.api.Helpers
             //var DisableUser = JsonConvert.DeserializeObject<UserResponseAPI>(await GameHelpers.CallThirdPartyApi(DisableUserUrl));
             //if (DisableUser.code == 0)
             //{
-                var url = $"{GameConst.Pussy888.BaseUrl}{GameConst.Pussy888.TransferMoney}" +
-                             $"&scoreNum={Amount}" +
-                             $"&userName={Username}" +
-                             $"&ActionUser={GameConst.Pussy888.agent}" +
-                             $"&ActionIp=192.0.1" +
-                             $"&time={timestamp}" +
-                             $"&authcode={GameConst.Pussy888.AuthCode}" +
-                             $"&sign={SecurityHelpers.MD5EncrptText(GameConst.Pussy888.AuthCode.ToLower() + Username + timestamp + GameConst.Pussy888.SecertKey.ToLower()).ToUpper()}";
-                var response = JsonConvert.DeserializeObject<TransferMoneyResponse>(await GameHelpers.CallThirdPartyApi(url));
-                return response;
+            var url = $"{GameConst.Pussy888.BaseUrl}{GameConst.Pussy888.TransferMoney}" +
+                         $"&scoreNum={Amount}" +
+                         $"&userName={Username}" +
+                         $"&ActionUser={GameConst.Pussy888.agent}" +
+                         $"&ActionIp=192.0.1" +
+                         $"&time={timestamp}" +
+                         $"&authcode={GameConst.Pussy888.AuthCode}" +
+                         $"&sign={SecurityHelpers.MD5EncrptText(GameConst.Pussy888.AuthCode.ToLower() + Username + timestamp + GameConst.Pussy888.SecertKey.ToLower()).ToUpper()}";
+            var response = JsonConvert.DeserializeObject<TransferMoneyResponse>(await GameHelpers.CallThirdPartyApi(url));
+            return response;
             //}
             //else
             //{
@@ -190,12 +192,12 @@ namespace Webet333.api.Helpers
             //}
         }
 
-        #endregion
+        #endregion Pussy888 Game Transfer API
 
         #region Pussy888 game password reset API
+
         internal async Task<Kiss918PasswordResetResponse> Pussy888GamePasswordReset(ProfileResponse request, string NewPassword)
         {
-
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             var url = $"{GameConst.Pussy888.BaseUrl}ashx/account/account.ashx?action=editUser" +
                    $"&userName={request.UserNamePussy888}" +
@@ -209,7 +211,8 @@ namespace Webet333.api.Helpers
             var response = JsonConvert.DeserializeObject<Kiss918PasswordResetResponse>(await GameHelpers.CallThirdPartyApi(url));
             return response;
         }
-        #endregion Pussy888 game password reset
+
+        #endregion Pussy888 game password reset API
 
         #region Pussy888 game Register
 
@@ -221,7 +224,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Pussy888 game Register
 
         #region Pussy888 game Password Update
 
@@ -233,11 +236,11 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Pussy888 game Password Update
 
-        #region  Pussy888 game Password Status Update
+        #region Pussy888 game Password Status Update
 
-        internal async Task ResetPasswordStatusUpdate(bool ResetPassword,string RowId)
+        internal async Task ResetPasswordStatusUpdate(bool ResetPassword, string RowId)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -245,7 +248,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion Pussy888 game Password Status Update
 
         #region GET ALL Pussy GAME USERS
 
@@ -258,7 +261,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion GET ALL Pussy GAME USERS
 
         #region House Keeping
 
@@ -276,6 +279,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion House Keeping
     }
 }

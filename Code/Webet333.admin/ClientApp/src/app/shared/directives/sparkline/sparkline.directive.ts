@@ -5,7 +5,6 @@ declare var $: any;
     selector: '[sparkline]'
 })
 export class SparklineDirective implements OnInit, OnDestroy {
-
     @Input() sparkline;
     @Input() values;
 
@@ -47,8 +46,8 @@ export class SparklineDirective implements OnInit, OnDestroy {
     }
 
     runSparkline(options) {
-        if(this.values) {
-            if( typeof this.values === 'string')
+        if (this.values) {
+            if (typeof this.values === 'string')
                 this.values = this.values.split(','); // assume comma separated string
             this.$element.sparkline(this.values, options);
         }

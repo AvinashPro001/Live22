@@ -30,7 +30,6 @@ $(document).ready(function () {
 //    catch (e) { }
 //}
 
-
 function CheckUserVerified() {
     try {
         var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
@@ -40,7 +39,7 @@ function CheckUserVerified() {
                 window.location = "../mobile/VerifiedOtp";
         }
     }
-    catch(e){ }
+    catch (e) { }
 }
 
 async function SliderPromotion() {
@@ -64,7 +63,7 @@ async function SliderPromotion() {
                 for (i = 0; i < panelData.length; i++) {
                     panel.innerHTML +=
                         //'<a href = "/Mobile/promotions"><div class="promotion-bg" style="background-image: url(' + panelData[i].banner + ');" ></div></a>';
-                        '<div class="promotion-slide-hero-banner" ><a href="#"> <img src="' + panelData[i].banner+'" class="full-img"></a></div>'
+                        '<div class="promotion-slide-hero-banner" ><a href="#"> <img src="' + panelData[i].banner + '" class="full-img"></a></div>'
                 }
 
                 if (GetLocalStorage('currentUser') !== null)
@@ -152,7 +151,6 @@ async function getReference() {
     }
 }
 
-
 //#region DetectMobileBrowser
 function DetectMobileBrowser() {
     if (window.innerWidth <= 1000 && window.innerHeight <= 1691 && (window.location.href === 'http://www.webet333.com/' || window.location.href === 'http://webet333.com/' || window.location.href === 'webet333.com/' || window.location.href === 'http://webet333.com')) {
@@ -169,7 +167,6 @@ function SetDefaultLanguage(ddlLanguages) {
 }
 
 function getLanguage() {
-
     //document.getElementById("flag").attributes.src=
     (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
     (GetLocalStorage('currentUser') === null) ? $('#afterlogin').css('display', 'none') : $('#beforelogin').css('display', 'none');
@@ -242,14 +239,12 @@ async function GetUser() {
             document.getElementById("lbl_fullName").innerText = data.data.name;
             document.getElementById("lbl_userName").innerText = data.data.username;
             document.getElementById("txt_mobileUpdate").value = data.data.mobileNo;
-
         }
-        catch(e){ }
+        catch (e) { }
         PlaytechBrokenStatus();
         PragmaticBrokenStatus();
     }
     else {
-
         var res = await GetMethod(apiEndPoints.getProfile);
         var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
         sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
@@ -261,12 +256,9 @@ async function GetUser() {
             document.getElementById("lbl_fullName").innerText = res.data.name;
             document.getElementById("lbl_userName").innerText = res.data.username;
             document.getElementById("txt_mobileUpdate").value = res.data.mobileNo;
-
         }
-        catch(e){ }
-
+        catch (e) { }
     }
-
 }
 //#endregion
 
@@ -338,10 +330,9 @@ async function promotionList() {
 
         for (i = 0; i < panelData.length; i++) {
             //panel.innerHTML += '<div class="promotion-bg" style="background-image: url(' + panelData[i].banner + ');" onclick="OpenFunction(\'' + panelData[i].id + '\')" ><a href="#"></a></div>'
-            panel.innerHTML += '<div class="promotion-hero-banner" onclick="OpenFunction(\'' + panelData[i].id + '\')" ><a href="#"> <img src="' + panelData[i].banner+'" class="full-img"></a></div>'
+            panel.innerHTML += '<div class="promotion-hero-banner" onclick="OpenFunction(\'' + panelData[i].id + '\')" ><a href="#"> <img src="' + panelData[i].banner + '" class="full-img"></a></div>'
         }
     }
 }
-
 
 //#endregion

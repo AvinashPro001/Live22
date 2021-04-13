@@ -110,7 +110,6 @@
             if (GetLocalStorage('language') == "zh-Hans")
                 document.getElementById("chinesebtn").style.background = "orange";
 
-
             $.ajax({
                 url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
                 dataType: 'json',
@@ -158,7 +157,6 @@
                 }
             }
         }
-
     </script>
     <!-- Event snippet for Sign-up conversion page
     In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
@@ -507,8 +505,6 @@
         });
     </script>
 
-
-
     <!--Begin Comm100 Live Chat Code-->
     <div></div>
     <script type="text/javascript">
@@ -538,7 +534,6 @@
                 jcf.replaceAll();
             });
         });
-
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -598,14 +593,11 @@
             }
         });
 
-
         $("html").click(async function (event) {
             if (GetLocalStorage('currentUser') !== null) {
                 await PostMethod(apiEndPoints.userLastTimeUpdate, {});
             }
         });
-
-
     </script>
 </body>
 </html>

@@ -18,7 +18,6 @@ declare var require: any
 })
 
 export class WithdrawAddComponent implements OnInit {
-
     //#region variable
     disabled: boolean = false;
     customerData: any;
@@ -106,7 +105,6 @@ export class WithdrawAddComponent implements OnInit {
         this.retriveUserbank(this.newVal);
         this.walletData(this.newVal);
     }
-
 
     config = {
         displayKey: "username", //if objects array passed which key to be displayed defaults to description
@@ -220,7 +218,6 @@ export class WithdrawAddComponent implements OnInit {
                 this.toasterService.pop('error', 'Error', error.error.message);
             });
         });
-
     }
 
     walletDatabal() {
@@ -275,14 +272,12 @@ export class WithdrawAddComponent implements OnInit {
             amount: Number(dataSelect.amount)
         };
 
-
         this.adminService.add<any>(customer.promotionApplyCheck, promotionModel).subscribe(async CheckPromotionApply => {
             if (CheckPromotionApply.data.Staus != null && CheckPromotionApply.data.TotalPromotionRow > 0) {
                 this.disabled = false;
                 this.ngOnInit();
                 return this.toasterService.pop('error', 'Error', "Your Promotion is on going, cannot withdraw till the promotion is completed");
             }
-
 
             this.adminService.add<any>(account.profile, dataProfile).subscribe(async resUser => {
                 this.adminService.add<any>(customer.addWithdrawal, dataSelect).subscribe(res => {
@@ -300,7 +295,6 @@ export class WithdrawAddComponent implements OnInit {
                 this.toasterService.pop('error', 'Error', error.error.message);
             });
         });
-
     }
     //#endregion
 
@@ -325,7 +319,6 @@ export class WithdrawAddComponent implements OnInit {
             });
         } else {
             return new Promise((resolve, reject) => {
-
                 this.adminService.add<any>(apiurl, postData).subscribe(res => {
                     resolve({
                         'error': false,
@@ -363,7 +356,6 @@ export class WithdrawAddComponent implements OnInit {
             });
         } else {
             return new Promise((resolve, reject) => {
-
                 this.adminService.add<any>(apiurl, postData).subscribe(res => {
                     resolve({
                         'error': false,
@@ -541,7 +533,6 @@ export class WithdrawAddComponent implements OnInit {
     }
 
     ManiWalletBalance(id) {
-
         let data = {
             id: id
         }

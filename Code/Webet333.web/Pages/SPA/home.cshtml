@@ -1,4 +1,4 @@
-﻿                                                           @page
+﻿@page
 @{
     Layout = null;
 }
@@ -61,7 +61,7 @@
 
     <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_gamelogin.js"></script>
     <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_getbalance.js"></script>
-                                                   
+
     <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_home.js"></script>
     <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_account.js"></script>
     <script type="text/javascript" charset="utf-8" defer async src="~/js/mobile/m_bank.js"></script>
@@ -154,7 +154,6 @@
                 }
             }
         }
-
     </script>
     <!-- Event snippet for Sign-up conversion page
     In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
@@ -181,25 +180,24 @@
         @*<div class="loadingImage" style="z-index: 2147483643;"></div>*@
 
         @*<div id="success_snackbar">
-            <div>
-                <span><img class="Image" width="100px" height="100px" src="~/images/success.png" /></span>
+                <div>
+                    <span><img class="Image" width="100px" height="100px" src="~/images/success.png" /></span>
+                </div>
+                <div class="message">
+                    <span id="SuccessMessage">
+                    </span>
+                </div>
             </div>
-            <div class="message">
-                <span id="SuccessMessage">
-                </span>
-            </div>
-        </div>
 
-        <div id="error_snackbar">
-            <div>
-                <span><img class="Image" width="100px" height="100px" src="~/images/Error.png" /></span>
-            </div>
-            <div class="message">
-                <span id="ErrorMessage">
-                </span>
-            </div>
-        </div>*@
-
+            <div id="error_snackbar">
+                <div>
+                    <span><img class="Image" width="100px" height="100px" src="~/images/Error.png" /></span>
+                </div>
+                <div class="message">
+                    <span id="ErrorMessage">
+                    </span>
+                </div>
+            </div>*@
 
         <div id="afterlogin_mobile">
             <div class="sidebar">
@@ -227,7 +225,7 @@
                             </li>
                             <li>
                                 <a href="/Mobile/home" class="navbar-brand"><img class="logo" style="margin-left:-30px;" src="~/images/webet-main-logo.png" alt="WEBET 333.com"></a>
-                            </                                                                                                                                                                                                                                                                                                                                                li>
+                                </                                                                                                                                                                                                                                                                                                                                                li>
                             <li><div class="dropdown"></div></li>
                         </ul>
                     </div>
@@ -368,7 +366,6 @@
                                                     <img src="~/images/images-mobile/pussy888.png" alt="Pussy888">
                                                 </figure>
                                                 <button class="game-title"><span class="lang" key="pussy888slot_game"></span></button>
-
                                             </a>
                                         </li>
                                         <li data-toggle="modal" data-target="#gameLogin" id="playtechslot">
@@ -403,7 +400,6 @@
                                                 <button class="game-title"><span class="lang" key="pragmaticslot_game"></span></button>
                                             </a>
                                         </li>
-
                                     </ul>
                                 </div>
                                 <div id="fishing-tile" role="tabpanel" class="tab-pane fade in">
@@ -421,7 +417,6 @@
                         <div class="footer-quote">
                             <p class="text-center copyright-text">Copyright WEBET333 @@ 2020. All rights reserved</p>
                         </div>
-
                     </div>
                 </div>
                 <div class="footer-widget">
@@ -742,7 +737,6 @@
                                                 <img src="~/images/images-mobile/pussy888.png" alt="Pussy888">
                                             </figure>
                                             <button class="game-title"><span class="lang" key="pussy888slot_game"></span></button>
-
                                         </a>
                                     </li>
                                     <li onclick="PlaytechIdentifiy(true)" id="playtechslotlogin">
@@ -906,8 +900,6 @@
             </div>
         </div>
 
-
-
         <div class="container">
             <div id="RestoreConfirmation" class="modal fade">
                 <div class="modal-dialog mail-width">
@@ -949,7 +941,6 @@
                     c.parentNode.insertBefore(a, c)
             } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://chatserver.comm100.com/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://hostedmax.comm100.com/chatserver/livechat.ashx?siteId=") }, 0)
         })(Comm100API || {})
-
     </script>
     <!--End Comm100 Live Chat Code-->
     <!-- Slider Section End -->
@@ -976,7 +967,6 @@
                 jcf.replaceAll();
             });
         });
-
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -989,7 +979,6 @@
                 $(".history_icon").trigger("hover");
             }, 100);
             setTimeout(() => { clearInterval(timerId); }, 30000);
-
 
             $(".navbar-toggle,.canvas-overlay").click(function () {
                 if (!$("html").hasClass('intro')) {
@@ -1021,7 +1010,7 @@
             if (GetLocalStorage('currentUser') !== null)
                 await PostMethodWithParameter(apiEndPoints.userLastTimeUpdate, {});
         });
-        
+
         setTimeout(function () {
             $('#homePagebottom').addClass("active-link");
             $('#homeLoginPagebottom').addClass("active-link");

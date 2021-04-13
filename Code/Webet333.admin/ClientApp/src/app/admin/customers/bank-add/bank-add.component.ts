@@ -11,7 +11,6 @@ import { account, ErrorMessages } from '../../../../environments/environment';
     styleUrls: ['./bank-add.component.scss']
 })
 export class BankAddComponent implements OnInit {
-
     data: any;
     base: any;
     filenames: any = [];
@@ -27,7 +26,6 @@ export class BankAddComponent implements OnInit {
     async ngOnInit() {
         await this.checkAddPermission();
     }
-
 
     navigateCancle() {
         this.router.navigate(['admin/customers/bank-list']);
@@ -63,7 +61,6 @@ export class BankAddComponent implements OnInit {
             }
         }
     }
-
 
     async fileSelectIcon(event) {
         if (event.target.files.length >= 0) {

@@ -26,7 +26,6 @@ export class PromotionGroupAddComponent implements OnInit {
     }
 
     getPromotionList() {
-
         let data = {
         }
         this.adminService.get<any>(customer.promotionAdminList).subscribe(res => {
@@ -41,7 +40,6 @@ export class PromotionGroupAddComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
-
 
     public toggleSelection(item, list) {
         item.selected = !item.selected;

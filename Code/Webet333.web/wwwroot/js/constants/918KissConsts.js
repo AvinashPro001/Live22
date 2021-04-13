@@ -6,7 +6,6 @@ var UTCTime;
 
 var _918KissbaseUrl = 'http://api.918kiss.com:9991/ashx/account/';
 
-
 var _918KissConstParameterValue = {
     authcode: 'swQjTbHQdnAHUyfvgMdN',
     Secretkey: 'N4nnU6aQ939p733t5Etw',

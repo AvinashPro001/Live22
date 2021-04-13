@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 namespace Webet333.models.Response.Game
 {
-
-  public partial class MaxBetServicesResponse
+    public partial class MaxBetServicesResponse
     {
         [JsonProperty("error_code")]
         public long ErrorCode { get; set; }
@@ -243,9 +242,7 @@ namespace Webet333.models.Response.Game
 
         [JsonProperty("JsonString")]
         public object JsonString { get; set; }
-
     }
-
 
     public class maxbetLeaguename
     {

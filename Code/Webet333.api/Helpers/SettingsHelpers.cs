@@ -20,6 +20,7 @@ namespace Webet333.api.Helpers
         }
 
         #region House Keeping
+
         public void Dispose()
         {
             Disponse(true);
@@ -33,9 +34,11 @@ namespace Webet333.api.Helpers
                 Connection = string.Empty;
             }
         }
-        #endregion
+
+        #endregion House Keeping
 
         #region Bank Details
+
         public async Task<dynamic> GetBanksList(BaseUrlConfigs baseUrl)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -47,10 +50,12 @@ namespace Webet333.api.Helpers
                 return banks;
             }
         }
-        #endregion
+
+        #endregion Bank Details
 
         #region Admin Bank Details
-        public async Task<dynamic> GetAdminBankDetails(BaseUrlConfigs baseUrl ,string languageId)
+
+        public async Task<dynamic> GetAdminBankDetails(BaseUrlConfigs baseUrl, string languageId)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -87,7 +92,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-
         public async Task AddOrUpdateAdminBankDetails(dynamic request)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -105,11 +109,19 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task DeleteOrActiveAdminBankDetail(Guid Id, bool Active = true, bool Deleted = false)
+        public async Task DeleteOrActiveAdminBankDetail(Guid Id, bool Active = true, bool Deleted = false, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Settings.AdminBankDetailsDeleteOrActive, new { Id, Active, Deleted });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Settings.AdminBankDetailsDeleteOrActive,
+                    new
+                    {
+                        Id,
+                        Active,
+                        Deleted,
+                        adminId
+                    });
             }
         }
 
@@ -121,17 +133,26 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task AdminBankDetailsImageUpdate(Guid Id, string Extension)
+        public async Task AdminBankDetailsImageUpdate(Guid Id, string Extension, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Settings.AdminBankDetailsImageUpdate, new { Id, Extension });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Settings.AdminBankDetailsImageUpdate,
+                    new
+                    {
+                        Id,
+                        Extension,
+                        adminId
+                    });
             }
         }
-        #endregion
+
+        #endregion Admin Bank Details
 
         #region Announcement Details
-        public async Task<dynamic> GetAnnouncementList(string languageId=null)
+
+        public async Task<dynamic> GetAnnouncementList(string languageId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -139,11 +160,19 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task DeleteOrActiveAnnouncementDetail(Guid Id, bool Active = false, bool Delete = true)
+        public async Task DeleteOrActiveAnnouncementDetail(Guid Id, bool Active = false, bool Delete = true, string adminId = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Settings.AnnouncementDelete, new { Id, Active, Delete });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Settings.AnnouncementDelete,
+                    new
+                    {
+                        Id,
+                        Active,
+                        Delete,
+                        adminId
+                    });
             }
         }
 
@@ -151,7 +180,14 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                return await repository.GetDataAsync(StoredProcConsts.Settings.AnnouncementAdd, new { request.Text,request.LanguageId });
+                return await repository.GetDataAsync(
+                    StoredProcConsts.Settings.AnnouncementAdd,
+                    new
+                    {
+                        request.Text,
+                        request.LanguageId,
+                        request.AdminId
+                    });
             }
         }
 
@@ -159,10 +195,19 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                return await repository.AddOrUpdateAsync(StoredProcConsts.Settings.AnnouncementUpdate, new {request.Id, request.Text, request.LanguageId });
+                return await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Settings.AnnouncementUpdate,
+                    new
+                    {
+                        request.Id,
+                        request.Text,
+                        request.LanguageId,
+                        request.AdminId
+                    });
             }
         }
-        #endregion
+
+        #endregion Announcement Details
 
         #region Contact Management
 

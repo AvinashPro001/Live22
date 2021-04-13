@@ -265,5 +265,4 @@ export class UsersRegisterReportComponent implements OnInit {
     }
 
     //#endregion Redirect to user details page
-
 }

@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace Webet333.security
 {
-   public class DESCryptoServices
+    public class DESCryptoServices
     {
         public string DESEncrypt(string textToDecrypt, string key)
         {
@@ -30,6 +29,5 @@ namespace Webet333.security
 
             return Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length); ;
         }
-
     }
 }

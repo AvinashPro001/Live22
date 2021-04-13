@@ -10,12 +10,14 @@ namespace Webet333.models.Request
         public string FormFile { get; set; }
     }
 
-
     public class PromotionImageRequest : ImageRequest
     {
         [Required]
         [JsonProperty(PropertyName = "mobilefile")]
         public string FormMobileFile { get; set; }
+
+        [JsonIgnore]
+        public System.Guid AdminId { get; set; }
     }
 
     public class PromotionImageUpdateRequest : GetByIdRequestWithRequired
@@ -27,7 +29,7 @@ namespace Webet333.models.Request
         public string FormMobileFile { get; set; }
     }
 
-    public class BankImagesIconInsertRequest: GetByIdRequest
+    public class BankImagesIconInsertRequest : GetByIdRequest
     {
         [JsonProperty(PropertyName = "file")]
         public string FormFile { get; set; }

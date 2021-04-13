@@ -147,7 +147,7 @@ export class AdminEditComponent implements OnInit {
     //#region Check Unchecked All
 
     //#region OldCode
-    
+
     //checkUncheckAll(value) {
     //    for (var i = 0; i < this.defaultPermissionsListUpdate.length; i++) {
     //        //this.defaultPermissionsListUpdate[i].IsChecked = value;
@@ -190,7 +190,6 @@ export class AdminEditComponent implements OnInit {
                 this.defaultPermissionsListUpdate[i].Permissions[j].IsChecked = value;
                 if (value === true) this.defaultPermissionsListUpdate[i].Permissions[j].IsDisabled = false;
                 if (value === false && j > 0) this.defaultPermissionsListUpdate[i].Permissions[j].IsDisabled = true;
-
             }
 
             if (this.defaultPermissionsListUpdate[i].submenu) {
@@ -201,7 +200,6 @@ export class AdminEditComponent implements OnInit {
                         this.defaultPermissionsListUpdate[i].submenu[k].Permissions[l].IsChecked = value;
                         if (value === true) this.defaultPermissionsListUpdate[i].submenu[k].Permissions[l].IsDisabled = false;
                         if (value === false && l > 0) this.defaultPermissionsListUpdate[i].submenu[k].Permissions[l].IsDisabled = true;
-
                     }
 
                     if (this.defaultPermissionsListUpdate[i].submenu[k].submenu) {
@@ -318,7 +316,6 @@ export class AdminEditComponent implements OnInit {
     //#endregion Old Code
 
     getUpdatedPermissionsList(permissionsList, menuList, permissionName = null, columnNumber = null, wholeMenuList = null, subMenuList = null, subSubMenuList = null) {
-
         //#region OldCode
 
         //var viewPermission = menuList.Permissions[0].IsChecked;
@@ -357,13 +354,10 @@ export class AdminEditComponent implements OnInit {
 
         for (var i = 0; i < 1; i++) {
             for (var j = 0; j < menuList.Permissions.length; j++) {
-
                 //menuList.Permissions[j].IsChecked = menuList.Permissions[j].IsChecked;
 
                 if (!menuList.Permissions[j].IsDisabled && j === columnNumber) {
-
                     //menuList.Permissions[columnNumber].IsChecked = menuList.Permissions[columnNumber].IsChecked;
-
 
                     if (permissionName !== 'View' && menuList.Permissions[0].IsChecked) {
                         menuList.Permissions[columnNumber].IsChecked = menuList.Permissions[columnNumber].IsChecked;
@@ -372,7 +366,6 @@ export class AdminEditComponent implements OnInit {
                     }
                 }
                 else {
-
                     //menuList.Permissions[j].IsDisabled = false;
 
                     if (!menuList.Permissions[0].IsDisabled && menuList.Permissions[0].IsChecked) {
@@ -384,8 +377,6 @@ export class AdminEditComponent implements OnInit {
             if (menuList.submenu) {
                 for (var k = 0; k < menuList.submenu.length; k++) {
                     for (var l = 0; l < menuList.submenu[k].Permissions.length; l++) {
-
-
                         //menuList.submenu[k].Permissions[l].IsChecked = menuList.Permissions[l].IsChecked;
                         /*
                          */
@@ -393,11 +384,8 @@ export class AdminEditComponent implements OnInit {
                         //    menuList.submenu[k].Permissions[columnNumber].IsChecked = menuList.Permissions[columnNumber].IsChecked;
                         //}
 
-
                         if (!menuList.submenu[k].Permissions[l].IsDisabled && l === columnNumber) {
-
                             //menuList.submenu[k].Permissions[l].IsChecked = menuList.Permissions[columnNumber].IsChecked;
-
 
                             if (permissionName !== 'View' && menuList.submenu[k].Permissions[0].IsChecked) {
                                 menuList.submenu[k].Permissions[l].IsChecked = menuList.Permissions[columnNumber].IsChecked;
@@ -417,7 +405,6 @@ export class AdminEditComponent implements OnInit {
                     if (menuList.submenu[k].submenu) {
                         for (var m = 0; m < menuList.submenu[k].submenu.length; m++) {
                             for (var n = 0; n < menuList.submenu[k].submenu[m].Permissions.length; n++) {
-
                                 //menuList.submenu[k].submenu[m].Permissions[n].IsChecked = menuList.Permissions[n].IsChecked;
 
                                 /*
@@ -427,9 +414,7 @@ export class AdminEditComponent implements OnInit {
                                 //}
 
                                 if (!menuList.submenu[k].submenu[m].Permissions[n].IsDisabled && n === columnNumber) {
-
                                     //menuList.submenu[k].submenu[m].Permissions[n].IsChecked = menuList.Permissions[columnNumber].IsChecked;
-
 
                                     if (permissionName !== 'View' && menuList.submenu[k].submenu[m].Permissions[0].IsChecked) {
                                         menuList.submenu[k].submenu[m].Permissions[n].IsChecked = menuList.Permissions[columnNumber].IsChecked;
@@ -438,7 +423,6 @@ export class AdminEditComponent implements OnInit {
                                     }
                                 }
                                 else {
-
                                     //menuList.submenu[k].submenu[m].Permissions[n].IsDisabled = false;
 
                                     if (!menuList.submenu[k].submenu[m].Permissions[0].IsDisabled && menuList.submenu[k].submenu[m].Permissions[0].IsChecked) {
@@ -453,13 +437,10 @@ export class AdminEditComponent implements OnInit {
         }
 
         if (menuList.Permissions[columnNumber].IsChecked === true) {
-
             for (var i = 0; i < 1; i++) {
-
                 wholeMenuList.Permissions[columnNumber].IsChecked = true;
 
                 for (var j = 0; j < menuList.Permissions.length; j++) {
-
                     //wholeMenuList.Permissions[j].IsDisabled = false;
 
                     if (wholeMenuList.Permissions[0].IsChecked && j > 0) wholeMenuList.Permissions[j].IsDisabled = false;
@@ -467,22 +448,18 @@ export class AdminEditComponent implements OnInit {
                 }
 
                 if (subMenuList !== null) {
-
                     subMenuList.Permissions[columnNumber].IsChecked = true;
 
                     for (var j = 0; j < subMenuList.Permissions.length; j++) {
-
                         //subMenuList.Permissions[j].IsDisabled = false;
                         if (subMenuList.Permissions[0].IsChecked && j > 0) subMenuList.Permissions[j].IsDisabled = false;
                         else if (j > 0) subMenuList.Permissions[j].IsDisabled = true;
                     }
 
                     if (subSubMenuList !== null) {
-
                         subSubMenuList.Permissions[columnNumber].IsChecked = true;
 
                         for (var j = 0; j < subSubMenuList.Permissions.length; j++) {
-
                             //subSubMenuList.Permissions[j].IsDisabled = false;
                             if (subSubMenuList.Permissions[0].IsChecked && j > 0) subSubMenuList.Permissions[j].IsDisabled = false;
                             else if (j > 0) subSubMenuList.Permissions[j].IsDisabled = true;

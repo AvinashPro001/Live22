@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
                 history.go(1);
             };
             this.DashboardLoad();
-        }        
+        }
     }
 
     DashboardLoad() {
@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
         });
         let model = {
             todate: null,
-            formdate:null
+            formdate: null
         }
         //this.adminService.add<any>(account.analytics, model).subscribe(res => {
         //    this.FB = res.data[0].FB;
@@ -194,5 +194,3 @@ export class DashboardComponent implements OnInit {
 
     //#endregion Check Permission
 }
-
-

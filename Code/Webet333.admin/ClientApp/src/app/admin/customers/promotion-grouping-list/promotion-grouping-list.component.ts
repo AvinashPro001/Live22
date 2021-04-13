@@ -15,7 +15,6 @@ import { debug } from 'util';
     styleUrls: ['./promotion-grouping-list.component.scss']
 })
 export class PromotionGroupingListComponent implements OnInit {
-
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('edit') edit: TemplateRef<any>;
     @ViewChild('delete') delete: TemplateRef<any>;
@@ -56,7 +55,7 @@ export class PromotionGroupingListComponent implements OnInit {
         if (await this.checkViewPermission()) {
             this.setColumn();
             this.setPageData();
-        }        
+        }
     }
     //#endregion
 
@@ -177,7 +176,7 @@ export class PromotionGroupingListComponent implements OnInit {
             this.router.navigate(['/admin/customers/promotion-grouping-edit']);
         }
     }
-    //#endregion 
+    //#endregion
 
     //#region openRejectConfirmationDialog
     async openRejectConfirmationDialog(id) {
@@ -265,5 +264,3 @@ export class PromotionGroupingListComponent implements OnInit {
 
     //#endregion Check Permission
 }
-
-

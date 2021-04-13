@@ -63,7 +63,6 @@
                                 <div><span id="question" class="fa fa-question-circle" title="If you Check this then Link Open in new page"></span></div>
                                 <br />
 
-
                                 <h5 class="col-md-4" *ngIf="showImage">Text :</h5>
                                 <div class="col-md-5 mb-4" *ngIf="showImage">
                                     <input class="form-control" type="text" id="Text" />
@@ -71,15 +70,11 @@
                                 <div *ngIf="showImage"><span id="question" class="fa fa-question-circle" title="this is only use for Whatsapp. If you want to redirect with some text"></span></div>
                                 <br />
 
-
-
-
                                 <h5 class="col-md-4">CS Image :</h5>
                                 <div class="col-md-5 mb-4">
                                     <input class="form-control" type="file" id="csImage" (change)="imageConvert($event)" />
                                 </div>
                                 <div><span id="question" class="fa fa-question-circle" title="If you want to add Barcode Then Select barcode Image But if you select then Contact Information Show Vertically"></span></div>
-
                             </div>
                             <br />
                             <button class="btn btn-block btn-primary mt-3" type="submit" (click)=" AddContact()" style="max-width:200px;align-content:center">Submit</button>

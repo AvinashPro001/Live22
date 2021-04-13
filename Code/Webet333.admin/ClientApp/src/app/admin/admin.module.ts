@@ -11,7 +11,6 @@ import { menu } from './menu';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
-
 @NgModule({
     imports: [
         FormsModule,
@@ -39,5 +38,3 @@ export class AdminModule {
         menuService.addMenu(menu);
     }
 }
-
-

@@ -6,10 +6,10 @@ var AGConstParameter = {
 };
 
 var AGcurrencyListConst = {
-    MYR: "currency=MYR", //Malaysia 
-    CNY: "currency=CNY", //China 
+    MYR: "currency=MYR", //Malaysia
+    CNY: "currency=CNY", //China
     IDR: "currency=IDR", //Indonesia
-    VND: "currency=VND", //Vietnam 
+    VND: "currency=VND", //Vietnam
     THB: "currency=THB"  //Thailand
 };
 
@@ -34,5 +34,5 @@ var AGActionConst = {
     CraeteAccount: "CheckOrCreateGameAccout?",
     TransferCredit: "TransferCredit?",
     GetBalance: "GetBalance?",
-    ForwadGame:"forwardGame"
+    ForwadGame: "forwardGame"
 };

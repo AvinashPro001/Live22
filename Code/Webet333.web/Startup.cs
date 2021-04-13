@@ -30,11 +30,11 @@ namespace Webet333.web
             });
 
             services.AddSignalR();
-            services.AddCors(o => o.AddPolicy("AllowAny", x => {
+            services.AddCors(o => o.AddPolicy("AllowAny", x =>
+            {
                 x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
             }));
             services.AddDirectoryBrowser();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

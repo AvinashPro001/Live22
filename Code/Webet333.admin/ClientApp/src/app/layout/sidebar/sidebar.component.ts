@@ -14,7 +14,6 @@ import { account } from '../../../environments/environment';
     styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-
     menuItems: Array<any>;
     router: Router;
     sbclickEvent = 'click.sidebar-toggle';
@@ -24,7 +23,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         private toasterService: ToasterService,
         private commonService: CommonService,
         public menu: MenuService, public settings: SettingsService, public injector: Injector) {
-
         this.menuItems = this.menu.getMenu();
 
         //#region       Reload page again to get slider menu
@@ -36,11 +34,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
         }
 
         //#endregion
-
     }
 
     ngOnInit() {
-
         this.router = this.injector.get(Router);
 
         this.router.events.subscribe((val) => {
@@ -54,7 +50,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
         // enable sidebar autoclose from extenal clicks
         this.anyClickClose();
-
     }
 
     anyClickClose() {
@@ -106,7 +101,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
             // toggle UL height
             if (parseInt(ul.height(), 0)) {
                 this.closeMenu(ul);
-
             }
             else {
                 // expand menu
@@ -116,9 +110,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
                 // add class to manage animation
                 ul.addClass('opening');
             }
-
         }
-
     }
 
     // Close menu collapsing height
@@ -177,9 +169,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
                 });
 
             this.listenForExternalClicks();
-
         }
-
     }
 
     listenForExternalClicks() {
@@ -215,5 +205,4 @@ export class SidebarComponent implements OnInit, OnDestroy {
             this.router.navigate(['/']);
         })
     }
-
 }

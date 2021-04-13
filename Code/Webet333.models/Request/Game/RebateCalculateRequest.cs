@@ -6,7 +6,7 @@ namespace Webet333.models.Request.Game
     public class RebateCalculateRequest
     {
         [Required]
-        [JsonProperty(PropertyName ="fromdate")]
+        [JsonProperty(PropertyName = "fromdate")]
         public string FromDate { get; set; }
 
         [Required]
@@ -20,10 +20,9 @@ namespace Webet333.models.Request.Game
         [Required]
         [JsonProperty(PropertyName = "gametype")]
         public string GameType { get; set; }
-
     }
 
-    public class AutoRebateCalculateRequest: RebateCalculateRequest
+    public class AutoRebateCalculateRequest : RebateCalculateRequest
     {
         [Required]
         [JsonProperty(PropertyName = "username")]

@@ -11,7 +11,6 @@ import { AdminService } from '../../admin.service';
     styleUrls: ['./promotion-grouping-edit.component.scss']
 })
 export class PromotionGroupingEditComponent implements OnInit {
-
     InGroup = [];
     NotInGroup = [];
 
@@ -36,7 +35,7 @@ export class PromotionGroupingEditComponent implements OnInit {
 
         let data = {
         }
-        this.adminService.add<any>(customer.promotionAdminList,data).subscribe(res => {
+        this.adminService.add<any>(customer.promotionAdminList, data).subscribe(res => {
             var NotInGroupList = res.data;
             var InGroupList = [];
             this.PromotionGroupingData.details.forEach(EL => {
@@ -98,7 +97,6 @@ export class PromotionGroupingEditComponent implements OnInit {
     navigateCancle() {
         this.router.navigate(['/admin/customers/promotion-grouping-list']);
     }
-
 
     UpdatePromotionGroup() {
         let data = {

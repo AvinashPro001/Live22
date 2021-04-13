@@ -1,11 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace Webet333.models.Request.Payments
 {
     public class ApprovalDurationRequest
     {
-        [JsonProperty(PropertyName ="userid")]
+        [JsonProperty(PropertyName = "userid")]
         public string UserId { get; set; }
 
         [JsonProperty(PropertyName = "username")]

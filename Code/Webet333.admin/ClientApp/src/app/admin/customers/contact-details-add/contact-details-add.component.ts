@@ -4,14 +4,14 @@ import { Router } from '@angular/router';
 import { debug } from 'console';
 import { customer, ErrorMessages } from '../../../../environments/environment';
 import { AdminService } from '../../admin.service';
+import { CommonService } from '../../../common/common.service';
 
 @Component({
-  selector: 'app-contact-details-add',
-  templateUrl: './contact-details-add.component.html',
-  styleUrls: ['./contact-details-add.component.scss']
+    selector: 'app-contact-details-add',
+    templateUrl: './contact-details-add.component.html',
+    styleUrls: ['./contact-details-add.component.scss']
 })
 export class ContactDetailsAddComponent implements OnInit {
-
     types: any;
     showImage: boolean = false;
     csImage: any;
@@ -19,12 +19,16 @@ export class ContactDetailsAddComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
+        private commonService: CommonService
     ) { }
 
-    ngOnInit() {
-        this.LoadType();
-  }
+    async ngOnInit() {
+        if (await this.checkAddPermission()) {
+            this.commonService.CheckUserToken();    //  Check User token is not expire.
 
+            this.LoadType();
+        }
+    }
 
     LoadType() {
         this.adminService.getAll<any>(customer.contactTypeSelect).subscribe(res => {
@@ -48,9 +52,7 @@ export class ContactDetailsAddComponent implements OnInit {
         }
         catch (e) { }
 
-        
-
-        if (model.contactTypeId=="") {
+        if (model.contactTypeId == "") {
             this.toasterService.pop('error', 'Error', 'Please Select Type  !!!');
             return;
         }
@@ -68,11 +70,10 @@ export class ContactDetailsAddComponent implements OnInit {
         this.adminService.add<any>(customer.contactDetailsAdd, model).subscribe(res => {
             this.toasterService.pop('success', 'Success', res.message);
             this.router.navigate(['/admin/customers/contact-details-list']);
-        this.csImage = null;
+            this.csImage = null;
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
-        
     }
 
     async imageConvert(event) {
@@ -103,6 +104,61 @@ export class ContactDetailsAddComponent implements OnInit {
         else {
             this.showImage = false;
         }
-
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[13].Permissions[0].IsChecked === true) {
+                return true;
+            }
+            else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[13].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[13].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }

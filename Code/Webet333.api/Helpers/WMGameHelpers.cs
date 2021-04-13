@@ -10,7 +10,6 @@ namespace Webet333.api.Helpers
 {
     public class WMGameHelpers : IDisposable
     {
-
         #region Local Variables
 
         private string Connection = string.Empty;
@@ -22,7 +21,7 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion Local Variables
 
         #region Call Register Third Party API
 
@@ -43,7 +42,7 @@ namespace Webet333.api.Helpers
 
         #region Call Login Third Party API
 
-        public static async Task<WMResponse> LoginCallAPI(string Username, string Password, int lang,int ui)
+        public static async Task<WMResponse> LoginCallAPI(string Username, string Password, int lang, int ui)
         {
             var Parameter =
                 $"cmd={GameConst.WM.Login}" +
@@ -81,7 +80,7 @@ namespace Webet333.api.Helpers
 
         #region Call Betting Details Third Party API
 
-        public static async Task<WMBettingDetailsResponse> BettingDetailsCallAPI(string startTime = null, string endTime = null,string user=null)
+        public static async Task<WMBettingDetailsResponse> BettingDetailsCallAPI(string startTime = null, string endTime = null, string user = null)
         {
             var time = DateTime.Now;
 
@@ -97,7 +96,7 @@ namespace Webet333.api.Helpers
             if (user != null)
                 Parameter += $"&user={user}";
 
-            Parameter +=$"&startTime={startTime}" +
+            Parameter += $"&startTime={startTime}" +
                 $"&endTime={endTime}" +
                 $"&timetype=1" +
                 $"&datatype=0" +
@@ -106,7 +105,7 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<WMBettingDetailsResponse>(await GameHelpers.CallThirdPartyApi(Url));
         }
 
-        #endregion Call TransferBalance Third Party API
+        #endregion Call Betting Details Third Party API
 
         #region Call Change Password Third Party API
 
@@ -135,7 +134,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion AllBet game Register
 
         #region House Keeping
 
@@ -153,7 +152,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
-
+        #endregion House Keeping
     }
 }

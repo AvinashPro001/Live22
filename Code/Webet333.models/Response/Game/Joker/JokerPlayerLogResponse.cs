@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace Webet333.models.Response.Game.Joker
 {
-
     public class Jackpot
     {
         [JsonProperty("OCode")]
@@ -127,5 +126,4 @@ namespace Webet333.models.Response.Game.Joker
         [JsonProperty("games")]
         public List<Game2> Games { get; set; }
     }
-
 }

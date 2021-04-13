@@ -4,12 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Reflection.Metadata.Ecma335;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -19,16 +16,13 @@ using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Game.SexyBaccarat;
 using Webet333.models.Response;
-using Webet333.models.Response.Game;
 using Webet333.models.Response.Game.SexyBaccarat;
-using System.Text.RegularExpressions;
 
 namespace Webet333.api.Controllers
 {
     [Route(ActionsConst.ApiVersion)]
     public class SexyBaccaratGameController : BaseController
     {
-
         #region Global variable and Constructor
 
         private static readonly HttpClient client = new HttpClient();
@@ -41,13 +35,13 @@ namespace Webet333.api.Controllers
             _hostingEnvironment = environment;
         }
 
-        #endregion Global variable and Constructor   
+        #endregion Global variable and Constructor
 
         #region Create Member
 
         [Authorize]
         [HttpPost(ActionsConst.SexyBaccaratConst.SexyBaccarartRegsiter)]
-        public async Task<IActionResult> SexyBaccaratRegister([FromBody]GetByIdRequest request)
+        public async Task<IActionResult> SexyBaccaratRegister([FromBody] GetByIdRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
             var Role = GetUserRole(User);
@@ -92,13 +86,14 @@ namespace Webet333.api.Controllers
                 return OkResponse(new { response, result });
             }
         }
-        #endregion Create Member 
+
+        #endregion Create Member
 
         #region Login Member
 
         [Authorize]
         [HttpPost(ActionsConst.SexyBaccaratConst.SexyBaccarartLogin)]
-        public async Task<IActionResult> SexyBaccaratLogin([FromBody]SexybaccaratLoginRequest request)
+        public async Task<IActionResult> SexyBaccaratLogin([FromBody] SexybaccaratLoginRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
@@ -130,13 +125,16 @@ namespace Webet333.api.Controllers
                 return OkResponse(response);
             }
         }
-        #endregion Create Member 
+
+        #endregion Login Member
+
+
 
         #region Deposit Member
 
         [Authorize]
         [HttpPost(ActionsConst.SexyBaccaratConst.SexyBaccarartDeposit)]
-        private async Task<IActionResult> SexyBaccaratDeposit([FromBody]SexybaccaratTransfer request)
+        private async Task<IActionResult> SexyBaccaratDeposit([FromBody] SexybaccaratTransfer request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
@@ -167,13 +165,14 @@ namespace Webet333.api.Controllers
                 return OkResponse(response);
             }
         }
+
         #endregion Deposit Member
 
         #region Withdraw Member
 
         [Authorize]
         [HttpPost(ActionsConst.SexyBaccaratConst.SexyBaccarartWithdraw)]
-        private async Task<IActionResult> SexyBaccaratWithdraw([FromBody]SexybaccaratTransfer request)
+        private async Task<IActionResult> SexyBaccaratWithdraw([FromBody] SexybaccaratTransfer request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
@@ -203,16 +202,19 @@ namespace Webet333.api.Controllers
                 return OkResponse(response);
             }
         }
-        #endregion Deposit Member
+
+        #endregion Withdraw Member
 
         #region Set default Bet Limit
 
         [Authorize]
         [HttpPost(ActionsConst.SexyBaccaratConst.SexyBaccarartSetDefaultBetLimit)]
-        public async Task<IActionResult> SexyBaccaratSetDefaultBetlimit([FromBody]SexyBaccaratBetLimitRequest request)
+        public async Task<IActionResult> SexyBaccaratSetDefaultBetlimit([FromBody] SexyBaccaratBetLimitRequest request)
         {
-
             await CheckUserRole();
+
+            string adminId = GetUserId(User).ToString();
+
             SexyBaccaratBetlimitResponse bettingLimits;
             using (var account_helper = new AccountHelpers(Connection))
             {
@@ -233,12 +235,12 @@ namespace Webet333.api.Controllers
 
             using (var game_helper = new SexyBaccaratGameHelpers(Connection))
             {
-                var result = await game_helper.SexyBaccaratSetBetLimit(bettingLimits.Sexybcrt.Live.LimitId);
+                var result = await game_helper.SexyBaccaratSetBetLimit(bettingLimits.Sexybcrt.Live.LimitId, adminId);
                 return OkResponse();
             }
         }
 
-        #endregion Set Bet Limit
+        #endregion Set default Bet Limit
 
         #region Set Bet Limit
 

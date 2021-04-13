@@ -9,6 +9,7 @@ namespace Webet333.api.Helpers
     public class EmailHelpers
     {
         private IStringLocalizer<BaseController> Localizer { get; set; }
+
         private IMessages Messages { get; set; }
 
         public EmailHelpers(IStringLocalizer<BaseController> Localizer, IMessages Messages)
@@ -18,6 +19,7 @@ namespace Webet333.api.Helpers
         }
 
         #region Send Account related mail
+
         public void SendAccountEmail(ProfileResponse user, string url, string typeEnums)
         {
             switch (typeEnums)
@@ -43,7 +45,8 @@ namespace Webet333.api.Helpers
                     break;
             }
         }
-        #endregion
+
+        #endregion Send Account related mail
 
         private void SendEmail(string email, string subject, string body) => Messages.SendEmail(email, subject, body);
     }

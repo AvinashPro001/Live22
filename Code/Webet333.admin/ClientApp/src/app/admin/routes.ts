@@ -11,7 +11,7 @@ export const routes = [
         path: '', component: LoginComponent,
         canActivate: [AuthGuard]
     },
-    
+
     {
         path: 'admin',
         component: LayoutComponent,
@@ -35,4 +35,3 @@ export const routes = [
         path: '**', component: Error404Component
     },
 ];
-

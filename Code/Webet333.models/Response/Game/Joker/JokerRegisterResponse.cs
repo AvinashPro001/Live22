@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Webet333.models.Response.Game.Joker
 {
-   public class JokerRegisterResponse
+    public class JokerRegisterResponse
     {
         [JsonProperty("Status")]
         public string Status { get; set; }

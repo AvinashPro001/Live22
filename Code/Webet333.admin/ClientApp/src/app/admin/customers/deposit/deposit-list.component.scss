@@ -59,7 +59,6 @@ button.calendar:active {
     }
 }
 
-
 /**
  * Progress bar animations
  */
@@ -89,7 +88,6 @@ button.calendar:active {
     user-select: none;
 }
 
-
 /* Hide the browser's default checkbox */
 
 .container input {
@@ -99,7 +97,6 @@ button.calendar:active {
     height: 0;
     width: 0;
 }
-
 
 /* Create a custom checkbox */
 
@@ -112,20 +109,17 @@ button.calendar:active {
     background-color: #eee;
 }
 
-
 /* On mouse-over, add a grey background color */
 
 .container:hover input ~ .checkmark {
     background-color: #aaa;
 }
 
-
 /* When the checkbox is checked, add a blue background */
 
 .container input:checked ~ .checkmark {
     background-color: #FF5E03;
 }
-
 
 /* Create the checkmark/indicator (hidden when not checked) */
 
@@ -135,13 +129,11 @@ button.calendar:active {
     display: none;
 }
 
-
 /* Show the checkmark when checked */
 
 .container input:checked ~ .checkmark:after {
     display: block;
 }
-
 
 /* Style the checkmark/indicator */
 
@@ -165,8 +157,6 @@ button.calendar:active {
     color: green;
     position: relative;
 }
-
-
 
 .tracking-img {
     width: 30px !important;

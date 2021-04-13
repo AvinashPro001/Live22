@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Webet333.models.Entities
 {
     public class UserEntity : Microsoft.AspNetCore.Identity.IdentityUser<Guid>

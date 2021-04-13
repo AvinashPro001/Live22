@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
     styleUrls: ['./m8-limit.component.scss']
 })
 export class m8LimitComponent implements OnInit {
-
     comType: any = [
         { comtype: "A" },
         { comtype: "B" },

@@ -35,7 +35,7 @@ namespace Webet333.api.Helpers
             this.Connection = Connection;
         }
 
-        #endregion
+        #endregion Local Variables
 
         #region Call Third Party Game Balance API's
 
@@ -53,8 +53,6 @@ namespace Webet333.api.Helpers
                 return String.Empty;
             }
         }
-
-
 
         #endregion Call Third Party API's
 
@@ -83,7 +81,7 @@ namespace Webet333.api.Helpers
             return Kiss918Balance;
         }
 
-        #endregion
+        #endregion Call API of 918 Kiss game
 
         #region Call API of Mega888 game
 
@@ -112,11 +110,11 @@ namespace Webet333.api.Helpers
             return Mega888Balance;
         }
 
-        #endregion
+        #endregion Call API of Mega888 game
 
         #region Call API of Joker game
 
-        public async Task<dynamic> CallJokerGameBalance(string username,bool returnData=false)
+        public async Task<dynamic> CallJokerGameBalance(string username, bool returnData = false)
         {
             DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
@@ -127,7 +125,7 @@ namespace Webet333.api.Helpers
                             $"AppID={GameConst.Joker.AppID}&" +
                             $"Signature={GameHelpers.GenerateHas(perameter)}";
 
-            string JokerBalance = null,status=null;
+            string JokerBalance = null, status = null;
             try
             {
                 dynamic resultJoker = JsonConvert.DeserializeObject(await GameBalanceHelpers.CallThirdPartyApi(jokerURL, stringContent));
@@ -136,7 +134,7 @@ namespace Webet333.api.Helpers
                     return resultJoker;
 
                 JokerBalance = resultJoker.Credit == null ? null : resultJoker.Credit;
-                status=Convert.ToDecimal(resultJoker.OutstandingCredit) > 0 ? "waiting" : "completed";
+                status = Convert.ToDecimal(resultJoker.OutstandingCredit) > 0 ? "waiting" : "completed";
             }
             catch (Exception ex)
             {
@@ -147,11 +145,10 @@ namespace Webet333.api.Helpers
             if (returnData)
                 return null;
 
-
-            return new { JokerBalance,status };
+            return new { JokerBalance, status };
         }
 
-        #endregion
+        #endregion Call API of Joker game
 
         #region Call API of Maxbet game
 
@@ -179,7 +176,7 @@ namespace Webet333.api.Helpers
             return MaxbetBalance;
         }
 
-        #endregion
+        #endregion Call API of Maxbet game
 
         #region Call API of M8 game
 
@@ -205,7 +202,7 @@ namespace Webet333.api.Helpers
             return M8Balance;
         }
 
-        #endregion
+        #endregion Call API of M8 game
 
         #region Call API of AG game
 
@@ -232,7 +229,7 @@ namespace Webet333.api.Helpers
             return AGBalance;
         }
 
-        #endregion
+        #endregion Call API of AG game
 
         #region Call API of Playtech game
 
@@ -256,7 +253,7 @@ namespace Webet333.api.Helpers
             return PlaytechBalance;
         }
 
-        #endregion
+        #endregion Call API of Playtech game
 
         #region Call API of DG game
 
@@ -265,7 +262,6 @@ namespace Webet333.api.Helpers
             var random = DGGameHelpers.RandomString();
             var apiRequest = new DGAPIGetBalanceRequest
             {
-
                 token = SecurityHelpers.MD5EncrptText(GameConst.DG.agentName + GameConst.DG.apiKey + random),
                 random = random,
                 member = new Username
@@ -281,10 +277,9 @@ namespace Webet333.api.Helpers
             var result = JsonConvert.DeserializeObject<DgApiBalanceResponse>(await GameBalanceHelpers.CallThirdPartyApi(url, stringContent));
 
             return result.codeId == 0 ? result.member.balance.ToString() : null;
-
         }
 
-        #endregion
+        #endregion Call API of DG game
 
         #region Call API of Sexy game
 
@@ -305,7 +300,6 @@ namespace Webet333.api.Helpers
             dict.Add("isOffline", "0");
             dict.Add("isFilterBalance", "0");
             dict.Add("alluser", "0");
-
 
             string balance = null;
             try
@@ -332,7 +326,7 @@ namespace Webet333.api.Helpers
             return balance;
         }
 
-        #endregion
+        #endregion Call API of Sexy game
 
         #region Call API of SA game
 
@@ -367,7 +361,7 @@ namespace Webet333.api.Helpers
             return balance;
         }
 
-        #endregion
+        #endregion Call API of SA game
 
         #region Call API of Pussy888 game
 
@@ -393,7 +387,7 @@ namespace Webet333.api.Helpers
             return Pussy888Balance;
         }
 
-        #endregion
+        #endregion Call API of Pussy888 game
 
         #region Call API of AllBet game
 
@@ -422,7 +416,7 @@ namespace Webet333.api.Helpers
             return allBetBalance;
         }
 
-        #endregion
+        #endregion Call API of AllBet game
 
         #region Call API of WM Game
 
@@ -454,8 +448,8 @@ namespace Webet333.api.Helpers
             var Url = $"{GameConst.Pragmatic.Url}{GameConst.Pragmatic.Balance}";
             try
             {
-                var resultPragmatic= JsonConvert.DeserializeObject<PragmaticBalanceResponse>(await PragmaticGameHelpers.CallAPI(Url, Parameter));
-                pragmaticBalance = resultPragmatic != null ? (resultPragmatic.error == "0" ? resultPragmatic.balance.ToString(): null) : null;
+                var resultPragmatic = JsonConvert.DeserializeObject<PragmaticBalanceResponse>(await PragmaticGameHelpers.CallAPI(Url, Parameter));
+                pragmaticBalance = resultPragmatic != null ? (resultPragmatic.error == "0" ? resultPragmatic.balance.ToString() : null) : null;
             }
             catch (Exception ex)
             {
@@ -466,7 +460,7 @@ namespace Webet333.api.Helpers
 
         #endregion Call API of Pragmatic Game
 
-        #endregion
+        #endregion Call Third Party Game Balance API's
 
         #region Update ALL games balance in db
 
@@ -496,7 +490,7 @@ namespace Webet333.api.Helpers
 
         #region Joker balance update
 
-        internal async Task<dynamic> JokerBalanceUpdate(string UserId, string Amount,string Status)
+        internal async Task<dynamic> JokerBalanceUpdate(string UserId, string Amount, string Status)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -555,6 +549,7 @@ namespace Webet333.api.Helpers
         #endregion Playtech balance update
 
         #region DG balance update
+
         internal async Task<dynamic> DGBalanceUpdate(string UserId, string Amount)
         {
             using (var respository = new DapperRepository<dynamic>(Connection))
@@ -562,9 +557,11 @@ namespace Webet333.api.Helpers
                 return await respository.FindAsync(StoredProcConsts.GameBalance.DGGameBalanceUpdate, new { UserId, Amount });
             }
         }
-        #endregion
+
+        #endregion DG balance update
 
         #region Sexy balance update
+
         internal async Task<dynamic> SexyBalanceUpdate(string UserId, string Amount)
         {
             using (var respository = new DapperRepository<dynamic>(Connection))
@@ -572,9 +569,11 @@ namespace Webet333.api.Helpers
                 return await respository.FindAsync(StoredProcConsts.GameBalance.SexyGameBalanceUpdate, new { UserId, Amount });
             }
         }
-        #endregion
+
+        #endregion Sexy balance update
 
         #region SA balance update
+
         internal async Task<dynamic> SABalanceUpdate(string UserId, string Amount)
         {
             using (var respository = new DapperRepository<dynamic>(Connection))
@@ -582,7 +581,8 @@ namespace Webet333.api.Helpers
                 return await respository.FindAsync(StoredProcConsts.GameBalance.SABalanceUpdate, new { UserId, Amount });
             }
         }
-        #endregion
+
+        #endregion SA balance update
 
         #region Pussy888 balance update
 
@@ -606,7 +606,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion Pussy888 balance update
+        #endregion AllBet balance update
 
         #region WM balance update
 
@@ -618,7 +618,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion Pussy888 balance update
+        #endregion WM balance update
 
         #region Pragmatic balance update
 
@@ -630,9 +630,9 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion Pussy888 balance update
+        #endregion Pragmatic balance update
 
-        #endregion
+        #endregion Update ALL games balance in db
 
         #region House Keeping
 
@@ -650,6 +650,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion
+        #endregion House Keeping
     }
 }

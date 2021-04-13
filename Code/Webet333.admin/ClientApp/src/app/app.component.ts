@@ -11,14 +11,12 @@ import { SettingsService } from './core/settings/settings.service';
 import { ToasterConfig } from 'angular2-toaster';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
     changeTitile: any;
 
     @HostBinding('class.layout-fixed') get isFixed() { return this.settings.layout.isFixed; };
@@ -164,7 +162,7 @@ export class AppComponent implements OnInit {
     //                var AutoRefersh = res.data.value == "true" ? true : false;
     //                if (AutoRefersh == true) {
     //                    this.titleService.setTitle("Withdraw Request (" + resWithdraw.data.length + ")");
-                        
+
     //                    await this.delay(1000);
     //                    this.titleService.setTitle("\u200E")
     //                    await this.delay(1000);
@@ -204,5 +202,4 @@ export class AppComponent implements OnInit {
     //async delay(ms: number) {
     //    return new Promise(resolve => setTimeout(resolve, ms));
     //}
-
 }

@@ -57,6 +57,7 @@ namespace Webet333.api.Filters
     }
 
     #region API Exception class declaration.
+
     public class ApiException : Exception
     {
         public int StatusCode { get; set; }
@@ -91,5 +92,6 @@ namespace Webet333.api.Filters
     //        }
     //    }
     //}
-    #endregion
+
+    #endregion API Exception class declaration.
 }

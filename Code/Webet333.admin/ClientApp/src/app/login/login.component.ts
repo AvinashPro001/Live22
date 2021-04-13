@@ -67,5 +67,4 @@ export class LoginComponent implements OnInit {
         localStorage.clear();
         this.returnUrl = this.route.snapshot.queryParams['/admin/dashboard'];
     }
-
 }

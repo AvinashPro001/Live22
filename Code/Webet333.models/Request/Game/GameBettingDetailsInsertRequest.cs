@@ -4,7 +4,7 @@ namespace Webet333.models.Request.Game
 {
     public class GameBettingDetailsInsertRequest
     {
-        [JsonProperty(PropertyName ="jsondata")]
+        [JsonProperty(PropertyName = "jsondata")]
         public dynamic JsonData { get; set; }
     }
 

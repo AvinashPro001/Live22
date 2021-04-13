@@ -12,7 +12,6 @@ export class UserblockComponent implements OnInit {
     username: any;
     usertype: any;
     constructor(public userblockService: UserblockService) {
-
         this.user = {
             picture: 'assets/img/user/01.jpg'
         };
@@ -27,5 +26,4 @@ export class UserblockComponent implements OnInit {
     userBlockIsVisible() {
         return this.userblockService.getVisibility();
     }
-
 }

@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
     styleUrls: ['./maxbet-minmax.component.scss']
 })
 export class MaxbetMinmaxComponent implements OnInit {
-
     minimum: any;
     maximum: any;
     newVal: any;

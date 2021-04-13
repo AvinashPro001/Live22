@@ -84,7 +84,6 @@ export class MaxbetBettingLimitComponent implements OnInit {
                 maxparleymax: maxparleymax == "" ? null : maxparleymax,
                 maxparleymatch: maxparleymatch == "" ? null : maxparleymatch,
 
-
                 maxbetSportsType1Min: sporttype1min == "" ? null : sporttype1min,
                 maxbetSportsType1Match: sporttype1match == "" ? null : sporttype1match,
                 maxbetSportsType1Max: sporttype1max == "" ? null : sporttype1max

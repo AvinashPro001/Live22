@@ -35,7 +35,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.DGGame.DGRegister)]
-        public async Task<IActionResult> DGRegister([FromBody]GetByIdRequest request)
+        public async Task<IActionResult> DGRegister([FromBody] GetByIdRequest request)
         {
             var Role = GetUserRole(User);
 
@@ -69,7 +69,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.DGGame.DGLogin)]
-        public async Task<IActionResult> DGLogin([FromBody]GetByIdRequest request)
+        public async Task<IActionResult> DGLogin([FromBody] GetByIdRequest request)
         {
             var Role = GetUserRole(User);
 
@@ -101,9 +101,8 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.DGGame.DGTransfer)]
-        private async Task<IActionResult> DGTransfer([FromBody]DgTransferRequest request)
+        private async Task<IActionResult> DGTransfer([FromBody] DgTransferRequest request)
         {
-            
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             var Role = GetUserRole(User);
@@ -135,18 +134,20 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.DGGame.DGdefaultBetlimit)]
-        public async Task<IActionResult> DGSetDefaultBetlimit([FromBody]DGBettingLimitRequest request)
+        public async Task<IActionResult> DGSetDefaultBetlimit([FromBody] DGBettingLimitRequest request)
         {
             await CheckUserRole();
 
+            string adminId = GetUserId(User).ToString();
+
             using (var game_helper = new DGGameHelpers(Connection))
             {
-                var result = await game_helper.DGBetLimit(request.BettingLimit);
+                var result = await game_helper.DGBetLimit(request.BettingLimit, adminId);
                 return OkResponse(result);
             }
         }
 
-        #endregion Set Bet Limit
+        #endregion Set default Bet Limit
 
         #region Set Bet Limit
 

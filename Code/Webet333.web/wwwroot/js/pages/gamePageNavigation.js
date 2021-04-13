@@ -32,7 +32,6 @@ async function M8Login(usernamePrifix) {
     } else {
         localStorage.setItem('M8Url', resultM8Login.response.result.login.weburlsecure['#cdata-section']);
         localStorage.setItem('M8UrlMobile', resultM8Login.response.result.login.mobiurlsecure['#cdata-section']);
-
     }
     if (screen.width > 786) {
         document.getElementById("mainpagebody").style.display = "none";

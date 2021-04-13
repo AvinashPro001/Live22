@@ -9,7 +9,7 @@
 <div class="my-container col-md-12">
     <div class="card card-default">
         <div class="card-body">
-                <legend style="align-content:center" >Edit Customer</legend>
+            <legend style="align-content:center">Edit Customer</legend>
             <div class="row">
                 <div class="col-lg-12">
                     <div id="edit-slider" class="col-lg-6 offset-5" style="align-items:center;">
@@ -32,7 +32,7 @@
                             <label class="col-md-4" style="text-align:right;font-size:20px">Username</label>
                             <input type="text" id="txt_username" disabled class="form-control col-md-4 mb-4" placeholder="" value="{{data.username}}">
                             <label class="col-md-1 mb-1" style="text-align:left;font-size:20px"></label>
-                            <button class="btn btn-success offset-1 col-md-2" type="submit"  (click)="openWindowCustomClass(updateicno)">Change IC No</button>
+                            <button class="btn btn-success offset-1 col-md-2" type="submit" (click)="openWindowCustomClass(updateicno)">Change IC No</button>
                         </div>
                         <br />
                         <div class="row col-md-12">
@@ -78,7 +78,7 @@
                     <input type="file" id="txt_ic_image" (change)="selectfile($event)" class="form-control col-md-6 mb-6" placeholder="" autocomplete="off" />
                 </div>
                 <br />
-                <div class="col-md-12 col-sm-12" >
+                <div class="col-md-12 col-sm-12">
                     <li *ngFor="let filename of filenames" style="margin-left:50px">
                         <div id="files" style="display:flex;">
                             <p>{{filename}}</p>&nbsp;&nbsp;&nbsp;
@@ -87,7 +87,7 @@
                     </li>
                 </div>
             </div>
-            <br/>
+            <br />
             <div class="row">
                 <div class="col-md-12 col-sm-12" style="display:flex">
                     <label class="col-4"></label>
@@ -100,7 +100,6 @@
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
     </div>
 </ng-template>
-
 
 <ng-template #updateicno let-modal>
     <div class="modal-header">
@@ -171,7 +170,7 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12" style="display:flex">
                     <label class="col-md-3">Identity Card Image</label>
-                    <input type="file"  (change)="selectfile($event)" class="form-control col-md-6 mb-6" />
+                    <input type="file" (change)="selectfile($event)" class="form-control col-md-6 mb-6" />
                 </div>
             </div>
             <br />
@@ -218,7 +217,6 @@
                     <label class="col-md-3">Identity Card Image</label>
                     <input type="file" (change)="selectfile($event)" class="form-control col-md-6 mb-6" />
                 </div>
-               
             </div>
             <br />
             <div class="row">

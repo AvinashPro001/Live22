@@ -1,9 +1,11 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { ToasterService } from 'angular2-toaster';
 import { Observable } from 'rxjs/Rx';
-import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { AdminService } from '../../app/admin/admin.service';
+import { account } from '../../environments/environment';
 
 @Injectable()
 
@@ -15,6 +17,8 @@ export class CommonService {
         private http: HttpClient,
         private router: Router,
         private dateAdapter: NgbDateAdapter<string>,
+        private adminService: AdminService,
+        private toasterService: ToasterService,
     ) { }
 
     public add<T>(apiPath, data): Observable<T> {
@@ -176,4 +180,21 @@ export class CommonService {
     };
 
     //#endregion Error List
+
+    //#region Check user token expire or not. After save permission user token will expire.
+
+    CheckUserToken() {
+        const data = {}
+        this.adminService.add<any>(account.profile, data).subscribe(res => {
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+
+            if (error.error.message === "Your access token is expired, please login again.") {
+                localStorage.removeItem('currentUser');
+                this.router.navigate(['/']);
+            }
+        });
+    }
+
+    //#endregion Check user token expire or not. After save permission user token will expire.
 }

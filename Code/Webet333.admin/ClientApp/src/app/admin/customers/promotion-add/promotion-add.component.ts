@@ -61,14 +61,10 @@ export class PromotionAddComponent implements OnInit {
 
     listType: any = [];
 
-
-
     Type: any = [
         { id: "Percentage", type: "Percentage" },
         { id: "Amount", type: "Amount" },
     ];
-
-
 
     //#endregion
 
@@ -135,8 +131,6 @@ export class PromotionAddComponent implements OnInit {
             this.WinTurn = 0;
             this.turnoverValue = this.overValue;
         }
-
-
     }
 
     UpdateOverSetting(Name, Value) {
@@ -162,7 +156,6 @@ export class PromotionAddComponent implements OnInit {
             this.turnoverValue = this.overValue;
         }
     }
-
 
     config = {
         displayKey: this.quantities, //if objects array passed which key to be displayed defaults to description
@@ -270,7 +263,6 @@ export class PromotionAddComponent implements OnInit {
             dataSelect.isJoker = false;
         }
 
-
         if (dataSelect.turnovertime == undefined && dataSelect.winturn == undefined) {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', "Please Select Turnover Times Or Winturn");
@@ -286,7 +278,6 @@ export class PromotionAddComponent implements OnInit {
             return this.toasterService.pop('error', 'Error', "Please Select only one value either Turnover Times Or Winturn");
         }
 
-
         if (dataSelect.startDate === "NaN") {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', "Please Select Start date");
@@ -301,7 +292,6 @@ export class PromotionAddComponent implements OnInit {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', "Please Give Proper Decription");
         }
-
 
         if (dataSelect.discount === "") {
             this.disabled = false;

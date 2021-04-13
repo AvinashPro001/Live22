@@ -7,7 +7,7 @@ namespace Webet333.models.Request.Account
     public class WalletMaintenanceUpdateRequest
     {
         [Required]
-        [JsonProperty(PropertyName ="id")]
+        [JsonProperty(PropertyName = "id")]
         public Guid Id { get; set; }
 
         [Required]

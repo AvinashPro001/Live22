@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
     styleUrls: ['./announcement-edit.component.scss']
 })
 export class AnnouncementEditComponent implements OnInit {
-
     Language: any;
     data: any;
     disabled: boolean = false;
@@ -28,7 +27,6 @@ export class AnnouncementEditComponent implements OnInit {
         }
     }
 
-
     getLanguage() {
         this.adminService.get<any>(account.getLanguageList).subscribe(res => {
             this.Language = res.data;
@@ -43,13 +41,12 @@ export class AnnouncementEditComponent implements OnInit {
         let model = {
             id: this.data.id,
             announcement: (document.getElementById("txt_Text") as HTMLInputElement).value,
-            languageid:(document.getElementById("ddlLanguage") as HTMLInputElement).value
+            languageid: (document.getElementById("ddlLanguage") as HTMLInputElement).value
         }
 
         this.adminService.add<any>(account.announcementupdate, model).subscribe(res => {
             this.toasterService.pop('success', 'Success', res.message);
             this.router.navigate(['admin/customers/announcement-list']);
-
         }, error => {
             this.disabled = false;
             this.ngOnInit();

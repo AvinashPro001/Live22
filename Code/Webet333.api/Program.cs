@@ -17,6 +17,7 @@ namespace Webet333.api
 #elif RELEASE
         public static string environmentName = "Production";
 #endif
+
         public static IWebHost BuildWebHost(string[] args) =>
              WebHost.CreateDefaultBuilder(args)
                 .UseEnvironment(environmentName)

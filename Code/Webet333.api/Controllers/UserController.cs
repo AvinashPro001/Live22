@@ -193,9 +193,12 @@ namespace Webet333.api.Controllers
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
             await ValidateUser(role: RoleConst.Admin);
+
+            string adminId = GetUserId(User).ToString();
+
             using (var user_help = new UserHelpers(Connection))
             {
-                await user_help.ProfileStatusUpdate(request);
+                await user_help.ProfileStatusUpdate(request, adminId);
             }
             return OkResponse();
         }
@@ -210,9 +213,12 @@ namespace Webet333.api.Controllers
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
             await ValidateUser(role: RoleConst.Admin);
+
+            string adminId = GetUserId(User).ToString();
+
             using (var user_help = new UserHelpers(Connection))
             {
-                await user_help.ProfileDelete(request);
+                await user_help.ProfileDelete(request, adminId);
             }
             return OkResponse();
         }
@@ -281,6 +287,7 @@ namespace Webet333.api.Controllers
             request.UniqueId = GetUniqueId(User);
             request.UserId = GetUserId(User);
             request.Role = RoleConst.Admin;
+            request.AdminId = GetUserId(User);
 
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -293,7 +300,8 @@ namespace Webet333.api.Controllers
                         request.UniqueId,
                         request.UserId,
                         request.Username,
-                        request.Role
+                        request.Role,
+                        request.AdminId
                     });
             }
 
@@ -333,6 +341,7 @@ namespace Webet333.api.Controllers
 
             request.UniqueId = GetUniqueId(User);
             request.UserId = GetUserId(User);
+            request.AdminId = GetUserId(User);
 
             if (request.PermissionsList == null) request.PermissionsList = null;
 
@@ -347,7 +356,8 @@ namespace Webet333.api.Controllers
                         Permissions = request.PermissionsList == null ? null : JsonConvert.SerializeObject(request.PermissionsList),
                         request.UniqueId,
                         request.UserId,
-                        request.Username
+                        request.Username,
+                        request.AdminId
                     });
             }
 
@@ -382,7 +392,16 @@ namespace Webet333.api.Controllers
                         {
                             data.VIPBanner = (data.VIPBanner != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.VIPIcon + "/" + data.VIPLevel + data.VIPBanner : null);
                         }
+
+                        if (data.UserICImage != null)
+                        {
+                            foreach (var data1 in data.UserICImage)
+                            {
+                                data1.ICImageBanner = baseUrlConfigs.ImageBase + baseUrlConfigs.UserICImage + "/" + data1.ICImageBanner;
+                            }
+                        }
                     }
+
                     return OkResponse(users);
                 }
                 else return NotFoundResponse();
@@ -393,14 +412,17 @@ namespace Webet333.api.Controllers
 
         #region Get Users Id & Username
 
-        [HttpGet(ActionsConst.Users.RetrieveForDropdown)]
-        public async Task<IActionResult> RetrieveForDropdown()
+        [HttpPost(ActionsConst.Users.RetrieveForDropdown)]
+        public async Task<IActionResult> RetrieveForDropdown([FromBody] BaseRoleRequest request)
         {
             await CheckUserRole();
 
+            request.UniqueId = GetUniqueId(User);
+            request.UserId = GetUserId(User);
+
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result = await repository.GetDataAsync(StoredProcConsts.User.Users_Select_For_Dropdown, new { });
+                var result = await repository.GetDataAsync(StoredProcConsts.User.Users_Select_For_Dropdown, request);
                 //dynamic users = new List<dynamic>();
                 //if (result != null && result.DocumentListSerialized != null) users = JsonConvert.DeserializeObject<List<dynamic>>(result.DocumentListSerialized);
 
@@ -409,5 +431,79 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Get Users Id & Username
+
+        #region Admin Log Select
+
+        [HttpPost(ActionsConst.Users.AdminLogSelect)]
+        public async Task<IActionResult> AdminLogSelect([FromBody] AdminLogSelectRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await ValidateUser(role: RoleConst.Admin);
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.User.AdminLogSelect, request);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Admin Log Select
+
+        #region Admin Action Select For Dropdown
+
+        [HttpGet(ActionsConst.Users.AdminActionSelectForDropdown)]
+        public async Task<IActionResult> AdminActionSelectForDropdown()
+        {
+            await ValidateUser(role: RoleConst.Admin);
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.User.MasterAction_Select_For_Dropdown, new { });
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Admin Action Select For Dropdown
+
+        #region Admin Module Select For Dropdown
+
+        [HttpGet(ActionsConst.Users.AdminModuleSelectForDropdown)]
+        public async Task<IActionResult> AdminModuleSelectForDropdown()
+        {
+            await ValidateUser(role: RoleConst.Admin);
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.User.MasterModule_Select_For_Dropdown, new { });
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Admin Module Select For Dropdown
+
+        #region Daily Report
+
+        [HttpPost(ActionsConst.Users.DailyReportSelect)]
+        public async Task<IActionResult> DailyReportSelectAsync([FromBody] DateRangeFilterRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await ValidateUser(role: RoleConst.Admin);
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.User.DailyReportSelect, request);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Daily Report
     }
 }

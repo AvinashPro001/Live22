@@ -10,16 +10,33 @@
             <button class="mb-1 btn btn-outline-primary" (click)="show(content)" type="button">Withdraw Amount &nbsp;&nbsp; <span id="lockIcon" class=""></span>&nbsp;&nbsp;{{totalWithdrawAmountWithMYR}}</button>
         </div>
         <div class="col-1">
-            <div class="text-center"><b>Total Deposit</b></div><div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalDepositAmount }}</b></div>
+            <div class="text-center"><b>Total Deposit</b></div>
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalDepositAmount }}</b></div>
         </div>
         <div class="col-1">
-            <div class="text-center"><b>Total Withdraw</b></div><div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawAmount }}</b></div>
+            <div class="text-center"><b>Total Withdraw</b></div>
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawAmount }}</b></div>
         </div>
         <div class="col-1">
-            <div class="text-center"><b>Total turnover</b></div><div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalTurnover }}</b></div>
+            <div class="text-center"><b>Total turnover</b></div>
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalTurnover }}</b></div>
         </div>
         <div class="col-1">
-            <div class="text-center"><b>Total Winlose</b></div><div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawAmount-userdata.TotalDepositAmount }}</b></div>
+            <div class="text-center"><b>Total Winlose</b></div>
+            <!--<div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawAmount-userdata.TotalDepositAmount }}</b></div>-->
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWinlose}}</b></div>
+        </div>
+        <div class="col-1">
+            <div class="text-center"><b>Total Deposit Count</b></div>
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalDepositCount}}</b></div>
+        </div>
+        <div class="col-1">
+            <div class="text-center"><b>Total Withdraw Count</b></div>
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalWithdrawCount}}</b></div>
+        </div>
+        <div class="col-1">
+            <div class="text-center"><b>Total Bonus Count</b></div>
+            <div class="text-center"><b class="balance">{{userdata== null ? 'Select username.' : userdata.TotalBonusCount}}</b></div>
         </div>
     </div>
 </div>
@@ -123,6 +140,29 @@
                     <h4 class="col-5 h4">Username :</h4>
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.username }}</h4>
                 </div>
+
+                <div class="row">
+                    <h4 class="col-5 h4">IC No :</h4>
+                    <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.UserICNumber }}</h4>
+                </div>
+
+                <div class="row">
+                    <h4 class="col-5 h4">IC Image :</h4>
+                    <span class="col-2 h4">
+                        <div id="edit-slider" class="col-lg-6 offset-5" style="align-items:center;">
+                            <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" style="width:150px;height:150px;">
+                                <div ngxSlickItem *ngFor="let image of imagePath" class="slide">
+                                    <img [src]="image.ICImageBanner" width="150px" height="150px" (click)="ImageOpenNewTab(image.ICImageBanner)" alt="">
+                                </div>
+                            </ngx-slick>
+                        </div>
+                    </span>
+                </div>
+
+                <div class="row">
+                    <h4 class="col-5 h4">Registration Date :</h4>
+                    <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.registeredOn}}</h4>
+                </div>
             </div>
             <br /><br /><br />
             <div class="row">
@@ -130,8 +170,11 @@
                     <h3>Bank Information</h3>
                 </div>
             </div>
-            <div class="col-11 offset-1">
-                <div class="row">
+            <div>
+                <ngx-datatable #table class="material bootstrap no-detail-row" [rows]="bankRows" [loadingIndicator]="loadingIndicator" [columns]="bankColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="5"></ngx-datatable>
+
+                <!--
+                    <div class="row">
                     <h4 class="col-5 h4">Account Name :</h4>
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.accountName }}</h4>
                 </div>
@@ -145,6 +188,7 @@
                     <h4 class="col-5 h4">Bank Account :</h4>
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.bankAccount }}</h4>
                 </div>
+                    -->
             </div>
 
             <br /><br /><br />
@@ -254,7 +298,6 @@
                     <td>{{pussyUsername== null ? 'Select username.' : pussyUsername }}</td>
 
                     <!--<td>{{Pussy888Password}}</td>-->
-
                     <td><button class="btn btn-primary" (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Pussy888')">Pussy Pass</button>&nbsp;<button class="btn btn-primary" (click)="ResetPassword('Pussy888')">Reset</button></td>
                 </tr>
                 <tr>
@@ -470,8 +513,7 @@
     </div>
 
     <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="promotionRows" [loadingIndicator]="loadingIndicator" [columns]="promotionColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
-        <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
-                     ngx-datatable-row-detail-template>
+        <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
             <label>
                 <button id="rejectBtn" data-id="depositData[rowIndex].id" class="mb-1 button btn-danger" type="button" data-toggle="modal" (click)="ExpierPromoton(promotiondata[rowIndex].Id)" title="Expier Promotion" style="margin-left:5px">
                     <i class="fa fa-ban" aria-hidden="true"></i>

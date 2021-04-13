@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -10,7 +9,7 @@ namespace Webet333.security
     {
         private static byte[] NULL_IV = Convert.FromBase64String("AAAAAAAAAAA=");
 
-        public  string Decrypt(string data, string base64edKey, string base64edIv)
+        public string Decrypt(string data, string base64edKey, string base64edIv)
         {
             TripleDESCryptoServiceProvider des = new TripleDESCryptoServiceProvider();
             des.Mode = CipherMode.CBC;
@@ -32,7 +31,7 @@ namespace Webet333.security
             return result;
         }
 
-        public  string Encrypt(string data, string base64Key, string base64edIv)
+        public string Encrypt(string data, string base64Key, string base64edIv)
         {
             TripleDESCryptoServiceProvider des = new TripleDESCryptoServiceProvider();
             des.Mode = CipherMode.CBC;

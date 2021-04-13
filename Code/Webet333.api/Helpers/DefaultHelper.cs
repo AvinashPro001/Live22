@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -19,8 +18,7 @@ namespace Webet333.api.Helpers
             _hostingEnvironment = environment;
         }
 
-
-        public async Task<string> PlaytechAPICertificate(string Url,bool result=false,bool returnResult=false)
+        public async Task<string> PlaytechAPICertificate(string Url, bool result = false, bool returnResult = false)
         {
             HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(Url);
             HttpWebResponse Response = null;
@@ -44,7 +42,6 @@ namespace Webet333.api.Helpers
             Response = (HttpWebResponse)await Request.GetResponseAsync();
             StreamReader reader = new StreamReader(Response.GetResponseStream());
             String retData = reader.ReadToEnd();
-         
 
             JObject jObject = JObject.Parse(retData);
 
@@ -56,7 +53,7 @@ namespace Webet333.api.Helpers
             if (dictionary.ContainsKey("result"))
             {
                 jresult = jObject["result"];
-                if(result)
+                if (result)
                     jresult = jObject.ToString();
             }
             if (dictionary.ContainsKey("error"))

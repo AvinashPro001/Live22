@@ -4,7 +4,6 @@ $(document).ready(function () {
         WalletBalance();
         if (window.location.href.includes("Account/Profile"))
             UserGameTurnover();
-
     }
 });
 //#endregion Onload
@@ -31,7 +30,7 @@ async function UserGameTurnover() {
         document.getElementById("PragmaticTurnover").innerHTML = parseFloat(turnover.data.response.pragmaticTurover).toFixed(2);
         document.getElementById("spin-refesh").classList.remove("fa-spin");
     }
-    catch{
+    catch {
         document.getElementById("spin-refesh").classList.remove("fa-spin");
         document.getElementById("TotalTurnover").innerHTML = "0.0";
         document.getElementById("jokerTurnover").innerHTML = "0.0";
@@ -58,7 +57,6 @@ if (GetLocalStorage('currentUser') !== null)
 //#region WalletBalance
 var PlayTechWallet, _918KissWallet, JokerWallet, MainWallet, AGWallet, M8Wallet, MaxBetWallet, Mega888Wallet, DgWallet, sexyWallet, saWallet, Pussy888Wallet, AllBetWallet, WMWallet, PragmaticWallet;
 async function WalletBalance() {
-
     var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
     var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
 
@@ -127,11 +125,13 @@ function ddlShowBalance() {
 //#endregion Show Balance in Mobile Drop-down
 
 async function RestoreBalance() {
-    LoaderShow();
+    //LoaderShow();
     try {
+        $('.values').html('');
+        $('.img_load').css('display', 'block');
         var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
         var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
-        
+
         if (userDetails == null) {
             var res = await GetMethod(apiEndPoints.getProfile);
             sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
@@ -145,20 +145,21 @@ async function RestoreBalance() {
         }
         //#region Get user walletId
         await MainWalletBalance();
-        await Kiss918WalletBalance(userDetails.data.username918);
-        await AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username);
-        await PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username);
-        await Mega888WalletBalance(userDetails.data.loginid);
-        await M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username);
-        await MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username);
-        await JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username);
-        await DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username);
-        await SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username);
-        await SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username);
-        await Pussy888WalletBalance(userDetails.data.usernamePussy888);
-        await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
-        await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
-        await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
+        await Kiss918WalletBalance(userDetails.data.username918, false);
+        await AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username, false);
+        await PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username, false);
+        await Mega888WalletBalance(userDetails.data.loginid, false);
+        await M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username, false);
+        await MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username, false);
+        await JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username, false);
+        await DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username, false);
+        await SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username, false);
+        await SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username, false);
+        await Pussy888WalletBalance(userDetails.data.usernamePussy888, false);
+        await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId, false);
+        await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId, false);
+        await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId, false);
+
         let restoreModel = {
             kiss918wallet: _918KissWallet == "N/A" ? "0.0" : _918KissWallet,
             maxbetwallet: MaxBetWallet == "N/A" ? "0.0" : MaxBetWallet,
@@ -175,17 +176,13 @@ async function RestoreBalance() {
             WMwallet: WMWallet == "N/A" ? "0.0" : WMWallet,
             pragmaticwallet: PragmaticWallet == "N/A" ? "0.0" : PragmaticWallet,
             id: null
-
         }
         await PostMethod(apiEndPoints.restoreBalance, restoreModel);
         WalletBalance();
-        LoaderHide();
     }
     catch (ex) {
         WalletBalance();
-        LoaderHide();
     }
-   
 }
 
 function numberWithCommas(x) {
@@ -193,7 +190,7 @@ function numberWithCommas(x) {
         try {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-        catch{
+        catch {
             return "N/A"
         }
     }
@@ -211,7 +208,6 @@ var AGTrigger = false,
     AllbetTrigger = false,
     WMTrigger = false,
     M8Trigger = false;
-
 
 function StartTimerGameBalanceAPI(GameName) {
     var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
@@ -234,7 +230,7 @@ function StartTimerGameBalanceAPI(GameName) {
             let MaxbettimerId = setInterval(() => { MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username); MaxbetTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(MaxbettimerId); MaxbetTrigger = false; }, 301000);
             break;
-       
+
         case 'DG':
             let dgtimerId = setInterval(() => { DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username); DGTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(dgtimerId); DGTrigger = false; }, 301000);
@@ -283,441 +279,507 @@ async function MainWalletBalance() {
     }
 }
 
-async function Kiss918WalletBalance(Username) {
+async function Kiss918WalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var kissbalance = await GameBalancePostMethod(apiEndPoints.kiss918Balance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("KissRefershImg").style.display = "none";
+
         _918KissWallet = numberWithCommas(parseFloat(kissbalance.data.balance).toFixed(2));
-        document.getElementById("918KissBalance").innerHTML = _918KissWallet;
-        if ($('#lbl_918kissWalletbalanceDeposite').length) {
-            document.getElementById("lbl_918kissWalletbalanceDeposite").innerHTML = _918KissWallet;
-            document.getElementById("918KissInWallet").innerHTML = _918KissWallet;
-            document.getElementById("ddl918KissWallet").innerHTML = _918KissWallet;
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("KissRefershImg").style.display = "none";
+            document.getElementById("918KissBalance").innerHTML = _918KissWallet;
+            if ($('#lbl_918kissWalletbalanceDeposite').length) {
+                document.getElementById("lbl_918kissWalletbalanceDeposite").innerHTML = _918KissWallet;
+                document.getElementById("918KissInWallet").innerHTML = _918KissWallet;
+                document.getElementById("ddl918KissWallet").innerHTML = _918KissWallet;
+            }
         }
     }
     catch (ex) {
         _918KissWallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("KissRefershImg").style.display = "none";
-        document.getElementById("918KissBalance").innerHTML = "N/A";
-        if ($('#lbl_918kissWalletbalanceDeposite').length) {
-            document.getElementById("lbl_918kissWalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("918KissInWallet").innerHTML = "N/A";
-            document.getElementById("ddl918KissWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("KissRefershImg").style.display = "none";
+            document.getElementById("918KissBalance").innerHTML = "N/A";
+            if ($('#lbl_918kissWalletbalanceDeposite').length) {
+                document.getElementById("lbl_918kissWalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("918KissInWallet").innerHTML = "N/A";
+                document.getElementById("ddl918KissWallet").innerHTML = "N/A";
+            }
         }
     }
 }
 
-async function AgWalletBalance(Username) {
+async function AgWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var agbalance = await GameBalancePostMethod(apiEndPoints.agBalance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("AgRefershImg").style.display = "none";
-        AGWallet = numberWithCommas(parseFloat(agbalance.data.balance).toFixed(2));
-        document.getElementById("AGBalance").innerHTML = AGWallet;
-        if ($('#lbl_AGWalletbalanceDeposite').length) {
-            document.getElementById("lbl_AGWalletbalanceDeposite").innerHTML = AGWallet;
-            document.getElementById("AGInWallet").innerHTML = AGWallet;
-            document.getElementById("ddlAGWallet").innerHTML = AGWallet;
 
+        AGWallet = numberWithCommas(parseFloat(agbalance.data.balance).toFixed(2));
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("AgRefershImg").style.display = "none";
+            document.getElementById("AGBalance").innerHTML = AGWallet;
+            if ($('#lbl_AGWalletbalanceDeposite').length) {
+                document.getElementById("lbl_AGWalletbalanceDeposite").innerHTML = AGWallet;
+                document.getElementById("AGInWallet").innerHTML = AGWallet;
+                document.getElementById("ddlAGWallet").innerHTML = AGWallet;
+            }
         }
         if (AGWallet == 0 && agbalance.data.previousBalance > 0 && AGTrigger == false)
             StartTimerGameBalanceAPI("AG");
     }
     catch (ex) {
         AGWallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("AgRefershImg").style.display = "none";
-        document.getElementById("AGBalance").innerHTML = "N/A";
-        if ($('#lbl_AGWalletbalanceDeposite').length) {
-            document.getElementById("lbl_AGWalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("AGInWallet").innerHTML = "N/A";
-            document.getElementById("ddlAGWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("AgRefershImg").style.display = "none";
+            document.getElementById("AGBalance").innerHTML = "N/A";
+            if ($('#lbl_AGWalletbalanceDeposite').length) {
+                document.getElementById("lbl_AGWalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("AGInWallet").innerHTML = "N/A";
+                document.getElementById("ddlAGWallet").innerHTML = "N/A";
+            }
         }
     }
 }
 
-async function PlaytechWalletBalance(Username) {
+async function PlaytechWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var playtechbalance = await GameBalancePostMethod(apiEndPoints.playtechBalance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("PlaytechRefershImg").style.display = "none";
+
         PlayTechWallet = numberWithCommas(parseFloat(playtechbalance.data.balance).toFixed(2));
-        document.getElementById("PlayTechBalance").innerHTML = PlayTechWallet;
-        if ($('#lbl_PlaytechWalletbalanceDeposite').length) {
-            document.getElementById("lbl_PlaytechWalletbalanceDeposite").innerHTML = PlayTechWallet;
-            document.getElementById("PlaytechInWallet").innerHTML = PlayTechWallet;
-            document.getElementById("ddlPlaytechWallet").innerHTML = PlayTechWallet;
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("PlaytechRefershImg").style.display = "none";
+            document.getElementById("PlayTechBalance").innerHTML = PlayTechWallet;
+            if ($('#lbl_PlaytechWalletbalanceDeposite').length) {
+                document.getElementById("lbl_PlaytechWalletbalanceDeposite").innerHTML = PlayTechWallet;
+                document.getElementById("PlaytechInWallet").innerHTML = PlayTechWallet;
+                document.getElementById("ddlPlaytechWallet").innerHTML = PlayTechWallet;
+            }
         }
         if (PlayTechWallet == 0 && playtechbalance.data.previousBalance > 0 && PlaytechTrigger == false)
             StartTimerGameBalanceAPI("Playtech");
     }
     catch (ex) {
         PlayTechWallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("PlaytechRefershImg").style.display = "none";
-        document.getElementById("PlayTechBalance").innerHTML = "N/A";
-        if ($('#lbl_PlaytechWalletbalanceDeposite').length) {
-            document.getElementById("lbl_PlaytechWalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("PlaytechInWallet").innerHTML = "N/A";
-            document.getElementById("ddlPlaytechWallet").innerHTML = "N/A";
-
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("PlaytechRefershImg").style.display = "none";
+            document.getElementById("PlayTechBalance").innerHTML = "N/A";
+            if ($('#lbl_PlaytechWalletbalanceDeposite').length) {
+                document.getElementById("lbl_PlaytechWalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("PlaytechInWallet").innerHTML = "N/A";
+                document.getElementById("ddlPlaytechWallet").innerHTML = "N/A";
+            }
         }
     }
 }
 
-async function M8WalletBalance(Username) {
+async function M8WalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var M8balance = await GameBalancePostMethod(apiEndPoints.m8Balance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("M8RefershImg").style.display = "none";
+
         M8Wallet = numberWithCommas(parseFloat(M8balance.data.balance).toFixed(2));
-        document.getElementById("M8Balance").innerHTML = M8Wallet;
-        if ($('#lbl_M8WalletbalanceDeposite').length) {
-            document.getElementById("lbl_M8WalletbalanceDeposite").innerHTML = M8Wallet;
-            document.getElementById("M8InWallet").innerHTML = M8Wallet;
-            document.getElementById("ddlM8Wallet").innerHTML = M8Wallet;
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("M8RefershImg").style.display = "none";
+
+            document.getElementById("M8Balance").innerHTML = M8Wallet;
+            if ($('#lbl_M8WalletbalanceDeposite').length) {
+                document.getElementById("lbl_M8WalletbalanceDeposite").innerHTML = M8Wallet;
+                document.getElementById("M8InWallet").innerHTML = M8Wallet;
+                document.getElementById("ddlM8Wallet").innerHTML = M8Wallet;
+            }
         }
         if (M8Wallet == 0 && M8balance.data.previousBalance > 0 && M8Trigger == false)
             StartTimerGameBalanceAPI("M8");
     }
     catch (ex) {
         M8Wallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("M8RefershImg").style.display = "none";
-        document.getElementById("M8Balance").innerHTML = "N/A";
-        if ($('#lbl_M8WalletbalanceDeposite').length) {
-            document.getElementById("lbl_M8WalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("M8InWallet").innerHTML = "N/A";
-            document.getElementById("ddlM8Wallet").innerHTML = "N/A";
-
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("M8RefershImg").style.display = "none";
+            document.getElementById("M8Balance").innerHTML = "N/A";
+            if ($('#lbl_M8WalletbalanceDeposite').length) {
+                document.getElementById("lbl_M8WalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("M8InWallet").innerHTML = "N/A";
+                document.getElementById("ddlM8Wallet").innerHTML = "N/A";
+            }
         }
     }
 }
 
-async function MaxbetWalletBalance(Username) {
+async function MaxbetWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var Maxbetbalance = await GameBalancePostMethod(apiEndPoints.maxbetBalance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("MaxbetRefershImg").style.display = "none";
+
         MaxBetWallet = numberWithCommas(parseFloat(Maxbetbalance.data.balance).toFixed(2));
-        document.getElementById("MaxBetBalance").innerHTML = MaxBetWallet;
-        if ($('#lbl_MaxbetWalletbalanceDeposite').length) {
-            document.getElementById("lbl_MaxbetWalletbalanceDeposite").innerHTML = MaxBetWallet;
-            document.getElementById("MaxbetInWallet").innerHTML = MaxBetWallet;
-            document.getElementById("ddlMaxBetWallet").innerHTML = MaxBetWallet;
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("MaxbetRefershImg").style.display = "none";
+            document.getElementById("MaxBetBalance").innerHTML = MaxBetWallet;
+            if ($('#lbl_MaxbetWalletbalanceDeposite').length) {
+                document.getElementById("lbl_MaxbetWalletbalanceDeposite").innerHTML = MaxBetWallet;
+                document.getElementById("MaxbetInWallet").innerHTML = MaxBetWallet;
+                document.getElementById("ddlMaxBetWallet").innerHTML = MaxBetWallet;
+            }
         }
         if (MaxBetWallet == 0 && Maxbetbalance.data.previousBalance > 0 && MaxbetTrigger == false)
             StartTimerGameBalanceAPI("MaxBet");
     }
     catch (ex) {
         MaxBetWallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("MaxbetRefershImg").style.display = "none";
-        document.getElementById("MaxBetBalance").innerHTML = "N/A";
-        if ($('#lbl_MaxbetWalletbalanceDeposite').length) {
-            document.getElementById("lbl_MaxbetWalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("MaxbetInWallet").innerHTML = "N/A";
-            document.getElementById("ddlMaxBetWallet").innerHTML = "N/A";
-
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("MaxbetRefershImg").style.display = "none";
+            document.getElementById("MaxBetBalance").innerHTML = "N/A";
+            if ($('#lbl_MaxbetWalletbalanceDeposite').length) {
+                document.getElementById("lbl_MaxbetWalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("MaxbetInWallet").innerHTML = "N/A";
+                document.getElementById("ddlMaxBetWallet").innerHTML = "N/A";
+            }
         }
     }
 }
 
-async function Mega888WalletBalance(Username) {
+async function Mega888WalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var Mega888balance = await GameBalancePostMethod(apiEndPoints.mega888Balance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("MegaRefershImg").style.display = "none";
-        Mega888Wallet = numberWithCommas(parseFloat(Mega888balance.data.balance).toFixed(2))
-        document.getElementById("Mega888Balance").innerHTML = Mega888Wallet;
-        if ($('#lbl_Mega888WalletbalanceDeposite').length) {
-            document.getElementById("lbl_Mega888WalletbalanceDeposite").innerHTML = Mega888Wallet;
-            document.getElementById("Mega888InWallet").innerHTML = Mega888Wallet;
-            document.getElementById("ddlMega888Wallet").innerHTML = Mega888Wallet;
+
+        Mega888Wallet = numberWithCommas(parseFloat(Mega888balance.data.balance).toFixed(2));
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("MegaRefershImg").style.display = "none";
+
+            document.getElementById("Mega888Balance").innerHTML = Mega888Wallet;
+            if ($('#lbl_Mega888WalletbalanceDeposite').length) {
+                document.getElementById("lbl_Mega888WalletbalanceDeposite").innerHTML = Mega888Wallet;
+                document.getElementById("Mega888InWallet").innerHTML = Mega888Wallet;
+                document.getElementById("ddlMega888Wallet").innerHTML = Mega888Wallet;
+            }
         }
     }
     catch (ex) {
         Mega888Wallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("MegaRefershImg").style.display = "none";
-        document.getElementById("Mega888Balance").innerHTML = "N/A";
-        if ($('#lbl_Mega888WalletbalanceDeposite').length) {
-            document.getElementById("lbl_Mega888WalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("Mega888InWallet").innerHTML = "N/A";
-            document.getElementById("ddlMega888Wallet").innerHTML = "N/A";
-
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("MegaRefershImg").style.display = "none";
+            document.getElementById("Mega888Balance").innerHTML = "N/A";
+            if ($('#lbl_Mega888WalletbalanceDeposite').length) {
+                document.getElementById("lbl_Mega888WalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("Mega888InWallet").innerHTML = "N/A";
+                document.getElementById("ddlMega888Wallet").innerHTML = "N/A";
+            }
         }
     }
 }
 
-async function JokerWalletBalance(Username) {
+async function JokerWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var jokerbalance = await GameBalancePostMethod(apiEndPoints.jokerBalance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("JokerRefershImg").style.display = "none";
+
         JokerWallet = numberWithCommas(parseFloat(jokerbalance.data.balance).toFixed(2));
-        document.getElementById("JokerBalance").innerHTML = JokerWallet;
-        if ($('#lbl_JokerWalletbalanceDeposite').length) {
-            document.getElementById("lbl_JokerWalletbalanceDeposite").innerHTML = JokerWallet;
-            document.getElementById("JokerInWallet").innerHTML = JokerWallet;
-            document.getElementById("ddlJokerWallet").innerHTML = JokerWallet;
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("JokerRefershImg").style.display = "none";
+
+            document.getElementById("JokerBalance").innerHTML = JokerWallet;
+            if ($('#lbl_JokerWalletbalanceDeposite').length) {
+                document.getElementById("lbl_JokerWalletbalanceDeposite").innerHTML = JokerWallet;
+                document.getElementById("JokerInWallet").innerHTML = JokerWallet;
+                document.getElementById("ddlJokerWallet").innerHTML = JokerWallet;
+            }
         }
     }
     catch (ex) {
         JokerWallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("JokerRefershImg").style.display = "none";
-        document.getElementById("JokerBalance").innerHTML = "N/A";
-        if ($('#lbl_JokerWalletbalanceDeposite').length) {
-            document.getElementById("lbl_JokerWalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("JokerInWallet").innerHTML = "N/A";
-            document.getElementById("ddlJokerWallet").innerHTML = "N/A";
-
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("JokerRefershImg").style.display = "none";
+            document.getElementById("JokerBalance").innerHTML = "N/A";
+            if ($('#lbl_JokerWalletbalanceDeposite').length) {
+                document.getElementById("lbl_JokerWalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("JokerInWallet").innerHTML = "N/A";
+                document.getElementById("ddlJokerWallet").innerHTML = "N/A";
+            }
         }
     }
 }
 
-async function DGWalletBalance(Username) {
+async function DGWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var dgbalance = await GameBalancePostMethod(apiEndPoints.dgBalance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("DgRefershImg").style.display = "none";
+
         DgWallet = numberWithCommas(parseFloat(dgbalance.data.balance).toFixed(2));
-        document.getElementById("DGBalance").innerHTML = DgWallet;
-        if ($('#lbl_DGWalletbalanceDeposite').length) {
-            document.getElementById("lbl_DGWalletbalanceDeposite").innerHTML = DgWallet;
-            document.getElementById("DGInWallet").innerHTML = DgWallet;
-            document.getElementById("ddlDGWallet").innerHTML = DgWallet;
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("DgRefershImg").style.display = "none";
+
+            document.getElementById("DGBalance").innerHTML = DgWallet;
+            if ($('#lbl_DGWalletbalanceDeposite').length) {
+                document.getElementById("lbl_DGWalletbalanceDeposite").innerHTML = DgWallet;
+                document.getElementById("DGInWallet").innerHTML = DgWallet;
+                document.getElementById("ddlDGWallet").innerHTML = DgWallet;
+            }
         }
         if (DgWallet == 0 && dgbalance.data.previousBalance > 0 && DGTrigger == false)
             StartTimerGameBalanceAPI("DG");
     }
     catch (ex) {
         DgWallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("DgRefershImg").style.display = "none";
-        document.getElementById("DGBalance").innerHTML = "N/A";
-        if ($('#lbl_DGWalletbalanceDeposite').length) {
-            document.getElementById("lbl_DGWalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("DGInWallet").innerHTML = "N/A";
-            document.getElementById("ddlDGWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("DgRefershImg").style.display = "none";
+            document.getElementById("DGBalance").innerHTML = "N/A";
+            if ($('#lbl_DGWalletbalanceDeposite').length) {
+                document.getElementById("lbl_DGWalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("DGInWallet").innerHTML = "N/A";
+                document.getElementById("ddlDGWallet").innerHTML = "N/A";
+            }
         }
     }
 }
 
-async function SexyWalletBalance(Username) {
+async function SexyWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var sexybalance = await GameBalancePostMethod(apiEndPoints.sexyBalance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("SexyRefershImg").style.display = "none";
+
         sexyWallet = numberWithCommas(parseFloat(sexybalance.data.balance).toFixed(2));
-        document.getElementById("SexyBalance").innerHTML = sexyWallet;
-        if ($('#lbl_SexyWalletbalanceDeposite').length) {
-            document.getElementById("lbl_SexyWalletbalanceDeposite").innerHTML = sexyWallet;
-            document.getElementById("SexyInWallet").innerHTML = sexyWallet;
-            document.getElementById("ddlSexyWallet").innerHTML = sexyWallet;
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("SexyRefershImg").style.display = "none";
+
+            document.getElementById("SexyBalance").innerHTML = sexyWallet;
+            if ($('#lbl_SexyWalletbalanceDeposite').length) {
+                document.getElementById("lbl_SexyWalletbalanceDeposite").innerHTML = sexyWallet;
+                document.getElementById("SexyInWallet").innerHTML = sexyWallet;
+                document.getElementById("ddlSexyWallet").innerHTML = sexyWallet;
+            }
         }
         if (sexyWallet == 0 && sexybalance.data.previousBalance > 0 && SexyTrigger == false)
             StartTimerGameBalanceAPI("Sexy");
     }
     catch (ex) {
         sexyWallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("SexyRefershImg").style.display = "none";
-        document.getElementById("SexyBalance").innerHTML = "N/A";
-        if ($('#lbl_SexyWalletbalanceDeposite').length) {
-            document.getElementById("lbl_SexyWalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("SexyInWallet").innerHTML = "N/A";
-            document.getElementById("ddlSexyWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("SexyRefershImg").style.display = "none";
+            document.getElementById("SexyBalance").innerHTML = "N/A";
+            if ($('#lbl_SexyWalletbalanceDeposite').length) {
+                document.getElementById("lbl_SexyWalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("SexyInWallet").innerHTML = "N/A";
+                document.getElementById("ddlSexyWallet").innerHTML = "N/A";
+            }
         }
     }
 }
 
-async function SAWalletBalance(Username) {
+async function SAWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var sabalance = await GameBalancePostMethod(apiEndPoints.saBalance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("SaRefershImg").style.display = "none";
         saWallet = numberWithCommas(parseFloat(sabalance.data.balance).toFixed(2));
-        document.getElementById("SABalance").innerHTML = saWallet;
 
-        if ($('#lbl_SAWalletbalanceDeposite').length) {
-            document.getElementById("lbl_SAWalletbalanceDeposite").innerHTML = saWallet;
-            document.getElementById("SAInWallet").innerHTML = saWallet;
-            document.getElementById("ddlSaWallet").innerHTML = saWallet;
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("SaRefershImg").style.display = "none";
+
+            document.getElementById("SABalance").innerHTML = saWallet;
+
+            if ($('#lbl_SAWalletbalanceDeposite').length) {
+                document.getElementById("lbl_SAWalletbalanceDeposite").innerHTML = saWallet;
+                document.getElementById("SAInWallet").innerHTML = saWallet;
+                document.getElementById("ddlSaWallet").innerHTML = saWallet;
+            }
         }
         if (saWallet == 0 && sabalance.data.previousBalance > 0 && SATrigger == false)
             StartTimerGameBalanceAPI("SA");
     }
     catch (ex) {
         saWallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("SaRefershImg").style.display = "none";
-        document.getElementById("SABalance").innerHTML = "N/A";
-        if ($('#lbl_SAWalletbalanceDeposite').length) {
-            document.getElementById("lbl_SAWalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("SAInWallet").innerHTML = "N/A";
-            document.getElementById("ddlSaWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("SaRefershImg").style.display = "none";
+            document.getElementById("SABalance").innerHTML = "N/A";
+            if ($('#lbl_SAWalletbalanceDeposite').length) {
+                document.getElementById("lbl_SAWalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("SAInWallet").innerHTML = "N/A";
+                document.getElementById("ddlSaWallet").innerHTML = "N/A";
+            }
         }
     }
 }
 
-async function Pussy888WalletBalance(Username) {
+async function Pussy888WalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var Pussy888balance = await GameBalancePostMethod(apiEndPoints.Pussy888Balance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("Pussy888RefershImg").style.display = "none";
         Pussy888Wallet = numberWithCommas(parseFloat(Pussy888balance.data.balance).toFixed(2));
-        document.getElementById("Pussy888Balance").innerHTML = Pussy888Wallet;
-
-        if ($('#lbl_Pussy888WalletbalanceDeposite').length) {
-            document.getElementById("lbl_Pussy888WalletbalanceDeposite").innerHTML = Pussy888Wallet;
-            document.getElementById("Pussy888InWallet").innerHTML = Pussy888Wallet;
-            document.getElementById("ddlPussy888Wallet").innerHTML = Pussy888Wallet;
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("Pussy888RefershImg").style.display = "none";
+            document.getElementById("Pussy888Balance").innerHTML = Pussy888Wallet;
+            if ($('#lbl_Pussy888WalletbalanceDeposite').length) {
+                document.getElementById("lbl_Pussy888WalletbalanceDeposite").innerHTML = Pussy888Wallet;
+                document.getElementById("Pussy888InWallet").innerHTML = Pussy888Wallet;
+                document.getElementById("ddlPussy888Wallet").innerHTML = Pussy888Wallet;
+            }
         }
-
     }
     catch (ex) {
         Pussy888Wallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("Pussy888RefershImg").style.display = "none";
-        document.getElementById("Pussy888Balance").innerHTML = "N/A";
-        if ($('#lbl_Pussy888WalletbalanceDeposite').length) {
-            document.getElementById("lbl_Pussy888WalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("Pussy888InWallet").innerHTML = "N/A";
-            document.getElementById("ddlPussy888Wallet").innerHTML = "N/A";
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("Pussy888RefershImg").style.display = "none";
+            document.getElementById("Pussy888Balance").innerHTML = "N/A";
+            if ($('#lbl_Pussy888WalletbalanceDeposite').length) {
+                document.getElementById("lbl_Pussy888WalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("Pussy888InWallet").innerHTML = "N/A";
+                document.getElementById("ddlPussy888Wallet").innerHTML = "N/A";
+            }
         }
     }
 }
 
-async function AllBetWalletBalance(Username) {
+async function AllBetWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username,
             password: dec(GetLocalStorage('currentUserData')),
         };
         var allBetBalance = await GameBalancePostMethod(apiEndPoints.AllBetBalance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("AllBetRefershImg").style.display = "none";
         AllBetWallet = numberWithCommas(parseFloat(allBetBalance.data.balance).toFixed(2));
-        document.getElementById("AllBetBalance").innerHTML = AllBetWallet;
 
-        if ($('#lbl_AllBetWalletbalanceDeposite').length) {
-            document.getElementById("lbl_AllBetWalletbalanceDeposite").innerHTML = AllBetWallet;
-            document.getElementById("AllBetInWallet").innerHTML = AllBetWallet;
-            document.getElementById("ddlAllBetWallet").innerHTML = AllBetWallet;
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("AllBetRefershImg").style.display = "none";
+            document.getElementById("AllBetBalance").innerHTML = AllBetWallet;
+            if ($('#lbl_AllBetWalletbalanceDeposite').length) {
+                document.getElementById("lbl_AllBetWalletbalanceDeposite").innerHTML = AllBetWallet;
+                document.getElementById("AllBetInWallet").innerHTML = AllBetWallet;
+                document.getElementById("ddlAllBetWallet").innerHTML = AllBetWallet;
+            }
         }
-
         if (AllBetWallet == 0 && allBetBalance.data.previousBalance > 0 && AllbetTrigger == false)
             StartTimerGameBalanceAPI("AllBet");
     }
     catch (ex) {
         AllBetWallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("AllBetRefershImg").style.display = "none";
-        document.getElementById("AllBetBalance").innerHTML = "N/A";
-        if ($('#lbl_AllBetWalletbalanceDeposite').length) {
-            document.getElementById("lbl_AllBetWalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("AllBetInWallet").innerHTML = "N/A";
-            document.getElementById("ddlAllBetWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("AllBetRefershImg").style.display = "none";
+            document.getElementById("AllBetBalance").innerHTML = "N/A";
+            if ($('#lbl_AllBetWalletbalanceDeposite').length) {
+                document.getElementById("lbl_AllBetWalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("AllBetInWallet").innerHTML = "N/A";
+                document.getElementById("ddlAllBetWallet").innerHTML = "N/A";
+            }
         }
     }
 }
 
-async function WMWalletBalance(Username) {
+async function WMWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var WMBalance = await GameBalancePostMethod(apiEndPoints.WMBalance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("WMRefershImg").style.display = "none";
+
         WMWallet = numberWithCommas(parseFloat(WMBalance.data.balance).toFixed(2));
-        document.getElementById("WMBalance").innerHTML = WMWallet;
 
-        if ($('#lbl_WMWalletbalanceDeposite').length) {
-            document.getElementById("lbl_WMWalletbalanceDeposite").innerHTML = WMWallet;
-            document.getElementById("WMInWallet").innerHTML = WMWallet;
-            document.getElementById("ddlWMWallet").innerHTML = WMWallet;
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("WMRefershImg").style.display = "none";
+            document.getElementById("WMBalance").innerHTML = WMWallet;
+
+            if ($('#lbl_WMWalletbalanceDeposite').length) {
+                document.getElementById("lbl_WMWalletbalanceDeposite").innerHTML = WMWallet;
+                document.getElementById("WMInWallet").innerHTML = WMWallet;
+                document.getElementById("ddlWMWallet").innerHTML = WMWallet;
+            }
         }
-
         if (WMWallet == 0 && WMBalance.data.previousBalance > 0 && WMTrigger == false)
             StartTimerGameBalanceAPI("WM");
     }
     catch (ex) {
         WMWallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("WMRefershImg").style.display = "none";
-        document.getElementById("WMBalance").innerHTML = "N/A";
-        if ($('#lbl_WMWalletbalanceDeposite').length) {
-            document.getElementById("lbl_WMWalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("WMInWallet").innerHTML = "N/A";
-            document.getElementById("ddlWMWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("WMRefershImg").style.display = "none";
+            document.getElementById("WMBalance").innerHTML = "N/A";
+            if ($('#lbl_WMWalletbalanceDeposite').length) {
+                document.getElementById("lbl_WMWalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("WMInWallet").innerHTML = "N/A";
+                document.getElementById("ddlWMWallet").innerHTML = "N/A";
+            }
         }
     }
 }
 
-async function PragmaticWalletBalance(Username) {
+async function PragmaticWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var PragmaticBalance = await GameBalancePostMethod(apiEndPoints.PragmaticBalance, model);
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("PragmaticRefershImg").style.display = "none";
-        PragmaticWallet = numberWithCommas(parseFloat(PragmaticBalance.data.balance).toFixed(2));
-        document.getElementById("PragmaticBalance").innerHTML = PragmaticWallet;
 
-        if ($('#lbl_PragmaticWalletbalanceDeposite').length) {
-            document.getElementById("lbl_PragmaticWalletbalanceDeposite").innerHTML = PragmaticWallet;
-            document.getElementById("PragmaticInWallet").innerHTML = PragmaticWallet;
-            document.getElementById("ddlPragmaticWallet").innerHTML = PragmaticWallet;
+        PragmaticWallet = numberWithCommas(parseFloat(PragmaticBalance.data.balance).toFixed(2));
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("PragmaticRefershImg").style.display = "none";
+
+            document.getElementById("PragmaticBalance").innerHTML = PragmaticWallet;
+
+            if ($('#lbl_PragmaticWalletbalanceDeposite').length) {
+                document.getElementById("lbl_PragmaticWalletbalanceDeposite").innerHTML = PragmaticWallet;
+                document.getElementById("PragmaticInWallet").innerHTML = PragmaticWallet;
+                document.getElementById("ddlPragmaticWallet").innerHTML = PragmaticWallet;
+            }
         }
     }
     catch (ex) {
         PragmaticWallet = "N/A";
-        if (window.location.href.includes("Account/Profile"))
-            document.getElementById("PragmaticRefershImg").style.display = "none";
-        document.getElementById("PragmaticBalance").innerHTML = "N/A";
-        if ($('#lbl_PragmaticWalletbalanceDeposite').length) {
-            document.getElementById("lbl_PragmaticWalletbalanceDeposite").innerHTML = "N/A";
-            document.getElementById("PragmaticInWallet").innerHTML = "N/A";
-            document.getElementById("ddlPragmaticWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("PragmaticRefershImg").style.display = "none";
+            document.getElementById("PragmaticBalance").innerHTML = "N/A";
+            if ($('#lbl_PragmaticWalletbalanceDeposite').length) {
+                document.getElementById("lbl_PragmaticWalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("PragmaticInWallet").innerHTML = "N/A";
+                document.getElementById("ddlPragmaticWallet").innerHTML = "N/A";
+            }
         }
     }
 }
@@ -745,8 +807,6 @@ function RefershBalance() {
 }
 
 async function WalletBalanceMaxTransfer() {
-
-
     var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
     var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
 

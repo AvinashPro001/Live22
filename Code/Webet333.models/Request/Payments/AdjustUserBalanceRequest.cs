@@ -20,5 +20,8 @@ namespace Webet333.models.Request.Payments
 
         [JsonProperty(PropertyName = "adminRemark")]
         public string AdminRemarks { get; set; }
+
+        [JsonIgnore]
+        public Guid AdminId { get; set; }
     }
 }

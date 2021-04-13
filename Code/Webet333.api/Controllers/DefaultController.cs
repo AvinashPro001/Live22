@@ -13,7 +13,6 @@ namespace Webet333.api.Controllers
     [ApiController]
     public class DefaultController : ControllerBase
     {
-
         private IHostingEnvironment _hostingEnvironment;
 
         private static readonly HttpClient client = new HttpClient();
@@ -24,9 +23,8 @@ namespace Webet333.api.Controllers
         }
 
         [HttpPost]
-        public async Task<string> Get([FromBody]defaultRequest request)
+        public async Task<string> Get([FromBody] defaultRequest request)
         {
-
             HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
             httpResponseMessage = await client.GetAsync(request.url);
             var responseString = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -34,11 +32,10 @@ namespace Webet333.api.Controllers
             doc.LoadXml(responseString);
             string jsonText = JsonConvert.SerializeXmlNode(doc);
             return jsonText;
-
         }
 
         [HttpPost("playtech")]
-        public async Task<string> GetPlaytech([FromBody]defaultRequest request)
+        public async Task<string> GetPlaytech([FromBody] defaultRequest request)
         {
             string rURL = request.url;
             DefaultHelper defaultHelper = new DefaultHelper(_hostingEnvironment);
@@ -46,7 +43,7 @@ namespace Webet333.api.Controllers
         }
 
         [HttpPost("ag")]
-        public async Task<string> GetAg([FromBody]defaultRequest request)
+        public async Task<string> GetAg([FromBody] defaultRequest request)
         {
             HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
             httpResponseMessage = await client.PostAsync(request.url, null);
@@ -55,7 +52,7 @@ namespace Webet333.api.Controllers
         }
 
         [HttpPost("joker")]
-        public async Task<string> GetJoker([FromBody]defaultRequestJoker request)
+        public async Task<string> GetJoker([FromBody] defaultRequestJoker request)
         {
             HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
             var stringContent = new StringContent(request.model, UnicodeEncoding.UTF8, "application/x-www-form-urlencoded");
@@ -67,7 +64,6 @@ namespace Webet333.api.Controllers
         public class defaultRequest
         {
             public string url { get; set; }
-
         }
 
         public class defaultRequestJoker : defaultRequest
