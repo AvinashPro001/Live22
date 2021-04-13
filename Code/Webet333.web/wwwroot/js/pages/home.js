@@ -32,13 +32,13 @@ $(document).ready(function () {
 });
 //#endregion
 
-//function VIPBanner() {
-//    var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-//    try {
-//        document.getElementById("viplevel_icon").src = resUserData.data.vipBanner;
-//    }
-//    catch (e) {}
-//}
+function VIPBanner() {
+    var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
+    try {
+        document.getElementById("viplevel_icon").src = resUserData.data.vipBanner;
+    }
+    catch (e) {}
+}
 
 function pageloadEvery(t) {
     setTimeout('location.reload(true)', t);
