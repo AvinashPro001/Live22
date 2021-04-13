@@ -313,7 +313,17 @@ export const customer = {
     adminAction: environment.apiUrl + 'admin/action/select_for_dropdown',
     adminModule: environment.apiUrl + 'admin/module/select_for_dropdown',
 
-    dailyReport: environment.apiUrl + 'daily/report/select'
+    dailyReport: environment.apiUrl + 'daily/report/select',
+
+    userGroupList: environment.apiUrl + 'usergroup/select',
+    userGroupListForDropdown: environment.apiUrl + 'usergroup/select/dropdown',
+    userGroupInsert: environment.apiUrl + 'usergroup/insert',
+    userGroupUpdate: environment.apiUrl + 'usergroup/update',
+    userGroupUpdateStatus: environment.apiUrl + 'usergroup/update/status',
+    userGroupDelete: environment.apiUrl + 'usergroup/delete',
+    userGroupUserInsert: environment.apiUrl + 'usergroup/user/insert',
+    userGroupUserList: environment.apiUrl + 'usergroup/user/select',
+    userGroupUserDelete: environment.apiUrl + 'usergroup/user/delete'
 }
 
 export const playtech = {

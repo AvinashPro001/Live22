@@ -249,7 +249,15 @@ exports.customer = {
     adminLogList: exports.environment.apiUrl + 'admin/log/select',
     adminAction: exports.environment.apiUrl + 'admin/action/select_for_dropdown',
     adminModule: exports.environment.apiUrl + 'admin/module/select_for_dropdown',
-    dailyReport: exports.environment.apiUrl + 'daily/report/select'
+    dailyReport: exports.environment.apiUrl + 'daily/report/select',
+    userGroupList: exports.environment.apiUrl + 'usergroup/select',
+    userGroupInsert: exports.environment.apiUrl + 'usergroup/insert',
+    userGroupUpdate: exports.environment.apiUrl + 'usergroup/update',
+    userGroupUpdateStatus: exports.environment.apiUrl + 'usergroup/update/status',
+    userGroupDelete: exports.environment.apiUrl + 'usergroup/delete',
+    userGroupUserInsert: exports.environment.apiUrl + 'usergroup/user/insert',
+    userGroupUserList: exports.environment.apiUrl + 'usergroup/user/select',
+    userGroupUserDelete: exports.environment.apiUrl + 'usergroup/user/delete'
 };
 exports.playtech = {
     playtechUrl: "http://api.webet333.com/api/Default/playtech",

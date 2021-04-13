@@ -679,5 +679,28 @@
 
             public const string VIPFreeCreditPromotionSetting = "viplevel/freecredit/promotion/setting";
         }
+
+        public class UserGroup
+        {
+            public const string UserGroupInsert = "usergroup/insert";
+
+            public const string UserGroupUpdate = "usergroup/update";
+
+            public const string UserGroupSelect = "usergroup/select";
+
+            public const string UserGroupSelectForDropdown = "usergroup/select/dropdown";
+
+            public const string UserGroupUpdateStatus = "usergroup/update/status";
+
+            public const string UserGroupDelete = "usergroup/delete";
+
+            public const string UserGroupInsertUser = "usergroup/user/insert";
+
+            public const string UserGroupUpdateUser = "usergroup/user/update";
+
+            public const string UserGroupDeleteUser = "usergroup/user/delete";
+
+            public const string UserGroupSelectUser = "usergroup/user/select";
+        }
     }
 }

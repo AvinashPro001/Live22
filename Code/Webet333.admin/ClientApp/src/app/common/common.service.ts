@@ -176,7 +176,11 @@ export class CommonService {
     public errorMessage = {
         unAuthorized: "You are not authorized to access this page!!",
         PleaseProvideFromDateToDate: "Please Provide From Date and To Date !!!",
-        SelectUserName: "Please Select Username !!"
+        SelectUserName: "Please Select Username !!",
+        SelectUserGroupFromDropdown: "Please select the first user group from the dropdown.",
+        NotUserInTable: "Here not user available to add to the user group.",
+        InvalidateUserGroupName: "Invalidate user group name.",
+        PleaseSelectAtLeastOneUser:"Please select at least one user."
     };
 
     //#endregion Error List
