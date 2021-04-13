@@ -2475,12 +2475,6 @@ namespace Webet333.api.Controllers
                 return OkResponse();
             }
 
-            if (userDetails.FromWalletName == "Main Wallet")
-                if (userDetails.MainWalletBalance < request.Amount)
-                {
-                    await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_insufficient_balance"].Value });
-                    return BadResponse("error_insufficient_balance");
-                }
 
             using (var transferMoney_helper = new TransferMoneyHelpers(Connection, Localizer))
             {

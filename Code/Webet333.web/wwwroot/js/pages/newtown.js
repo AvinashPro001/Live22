@@ -45,7 +45,6 @@ function getImage() {
                             '</div>' +
                             '</div>';
                 }
-
             }
         }
     });

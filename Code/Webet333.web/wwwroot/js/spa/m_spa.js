@@ -142,7 +142,6 @@ function mHistory() {
             history.pushState(null, null, "/SPA/history");
             $('.content').html(response);
             $("html").removeClass("intro");
-
         },
         error: function (error) {
             console.log('the page was not loaded', error);
@@ -195,10 +194,8 @@ function mProHome() {
                 setTimeout(() => {
                     $('#beforelogin_SPA').hide();
                 }, 5000);
-
             } else {
                 $('#afterlogin_SPA').hide();
-
             }
             $("html").removeClass("intro");
         },
@@ -211,7 +208,6 @@ function mProHome() {
     });
 }
 function mProPromotions() {
-
     $('#comContent').empty();
     $("#mComContent").empty();
     $.ajax({
@@ -233,7 +229,6 @@ function mProPromotions() {
     });
 }
 function mProContactus() {
-
     $('#comContent').empty();
     $("#mComContent").empty();
     $.ajax({
@@ -246,7 +241,7 @@ function mProContactus() {
             history.pushState(null, null, "/SPA/contactus");
             $('.loadingImage').hide();
             $("html").removeClass("intro");
-        },     
+        },
         error: function (error) {
             console.log('the page was not loaded', error);
         },
@@ -345,7 +340,6 @@ function mLogin() {
             $('.content').html(response);
             $('.loadingImage').hide();
             $("html").removeClass("intro");
-
         },
         error: function (error) {
             console.log('the page was not loaded', error);
@@ -419,7 +413,6 @@ function smLogin() {
             history.pushState(null, null, "/SPA/login");
             $('.loadingImage').hide();
             $("html").removeClass("intro");
-
         },
         error: function (error) {
             console.log('the page was not loaded', error);

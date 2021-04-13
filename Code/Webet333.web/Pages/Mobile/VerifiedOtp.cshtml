@@ -10,7 +10,7 @@
 
     function Counter() {
         document.getElementById("button_resend").disabled = true;
-        
+
         var count = 60;
         var timer = setInterval(function () {
             $("#counter_txt").html((count--) - 1);
@@ -35,7 +35,6 @@
         }
     }
 
-
     async function VerifiedOTP() {
         LoaderShow();
         let model = {
@@ -46,7 +45,7 @@
             LoaderHide();
             return ShowError(ChangeErroMessage("error_otp_required"));
         }
-        
+
         if (model.otp.length > 6) {
             LoaderHide();
             return ShowError(ChangeErroMessage("error_otp"));
@@ -62,17 +61,16 @@
             sessionStorage.setItem('UserDetails', enc(JSON.stringify(Details)));
             //await gtag_report_conversion("../Mobile/home");
             window.location = "../Mobile/home";
-            
+
         }
         LoaderHide();
     }
-
 
     if (GetLocalStorage('currentUser') === null) {
         window.location.href = "../Mobile/home";
     }
     else {
-        
+
     }
 </script>
 <div class="white-bg forget-pswd">
