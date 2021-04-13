@@ -1,11 +1,12 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToasterConfig, ToasterService } from 'angular2-toaster';
+import { account, customer, gameBalance, smsConst } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
-import { customer, gameBalance, smsConst, account, ErrorMessages } from '../../../../environments/environment';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-admin/customer/edit-list',
@@ -70,8 +71,8 @@ export class CustomerEditComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private modalService: NgbModal
-    ) { }
+        private modalService: NgbModal,
+        private commonService: CommonService) { }
     //#endregion
 
     //#region Init
@@ -596,12 +597,12 @@ export class CustomerEditComponent implements OnInit {
             if (usersPermissions.permissionsList[0].submenu[1].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -613,12 +614,12 @@ export class CustomerEditComponent implements OnInit {
             if (usersPermissions.permissionsList[0].submenu[1].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -630,12 +631,12 @@ export class CustomerEditComponent implements OnInit {
             if (usersPermissions.permissionsList[0].submenu[1].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

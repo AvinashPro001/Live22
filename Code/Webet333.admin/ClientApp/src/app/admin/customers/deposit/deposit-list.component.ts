@@ -1,23 +1,21 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ToasterService, ToasterConfig } from 'angular2-toaster';
-import { Stopwatch } from "ts-stopwatch";
-import { AdminService } from '../../admin.service';
 import { DatePipe } from '@angular/common';
-import { account, customer, ErrorMessages } from '../../../../environments/environment';
-import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HubConnectionBuilder } from '@aspnet/signalr';
-import { Md5 } from 'ts-md5/dist/md5';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { ToasterConfig, ToasterService } from 'angular2-toaster';
+import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
+import { account, customer } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-admin/deposit/retrieve-list',
     templateUrl: './deposit-list.component.html',
     styleUrls: ['./deposit-list.component.scss']
 })
+
 export class DepositListComponent implements OnInit {
     //#region declaration
     slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };
@@ -108,8 +106,7 @@ export class DepositListComponent implements OnInit {
         private modalService: NgbModal,
         private datePipe: DatePipe,
         private titleService: Title,
-        private commonService: CommonService
-    ) { }
+        private commonService: CommonService) { }
     //#endregion
 
     //#region Init
@@ -778,12 +775,12 @@ export class DepositListComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[0].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -795,12 +792,12 @@ export class DepositListComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[0].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -812,12 +809,12 @@ export class DepositListComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[0].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
