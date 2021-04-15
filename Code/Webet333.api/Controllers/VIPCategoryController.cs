@@ -113,5 +113,22 @@ namespace Webet333.api.Controllers
         }
 
         #endregion VIP Free Credit Promotion Setting
+
+        [Authorize]
+        [HttpGet(ActionsConst.VIPCategory.VIPLevelUserDetails)]
+        public async Task<IActionResult> UserVIPLevelDetails()
+        {
+            var Role = GetUserRole(User);
+            var UniqueId = GetUniqueId(User);
+            var UserId = GetUserId(User);
+
+            using (var vipCategory_help = new VIPCategoryHelpers(Connection))
+            {
+                var result=await vipCategory_help.UserVIPLevelDetails(UserId,UniqueId,Role);
+                result.VIPBanner = (result.VIPBanner != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.VIPIcon + "/" + result.VIPLevel + result.VIPBanner : null);
+                return OkResponse(result);
+            }
+        }
+
     }
 }
