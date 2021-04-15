@@ -223,5 +223,28 @@ namespace Webet333.api.Controllers
         }
 
         #endregion FreeCreditEvent Delete
+
+        #region FreeCreditEvent Users Select
+
+        [HttpPost(ActionsConst.FreeCreditEvent.FreeCreditEventUsersSelect)]
+        public async System.Threading.Tasks.Task<IActionResult> FreeCreditEventUsersSelectAsync([FromBody] FreeCreditEventUsersSelectRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await ValidateUser(role: RoleConst.Admin);
+
+            request.UserId = GetUserId(User);
+            request.UniqueId = GetUniqueId(User);
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.FreeCreditEvent.FreeCreditEventUsersSelect, request);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion FreeCreditEvent Users Select
     }
 }

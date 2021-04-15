@@ -573,6 +573,8 @@
             public const string FreeCreditEventUpdateStatus = "[dbo].[FreeCreditEvent_Update_Status]";
 
             public const string FreeCreditEventUpdatDelete = "[dbo].[FreeCreditEvent_Update_Delete]";
+
+            public const string FreeCreditEventUsersSelect = "[dbo].[FreeCreditEvent_UsersSelect]";
         }
     }
 }

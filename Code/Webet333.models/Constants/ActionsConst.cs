@@ -716,6 +716,8 @@
             public const string FreeCreditEventUpdateStatus = "freecreditevent/update/status";
 
             public const string FreeCreditEventDelete = "freecreditevent/delete";
+
+            public const string FreeCreditEventUsersSelect = "freecreditevent/users/select";
         }
     }
 }
