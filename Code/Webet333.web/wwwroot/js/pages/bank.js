@@ -25,8 +25,18 @@ function CheckUserVerified() {
     catch { }
 }
 
+var WithdrawLimit;
 async function CheckWithdrawAmountList() {
     var model = {}
+
+
+    var resUserVIPlevel = await GetMethodWithReturn(apiEndPoints.UserVipDetails);
+    sessionStorage.setItem("UserVipDetails", enc(JSON.stringify(resUserVIPlevel)))
+
+    WithdrawLimit = parseFloat(resUserVIPlevel.data.WithdrawLimit).toFixed(2);
+    document.getElementById("txt_withdrawalAmount").placeholder = "Min/Max Limit: 10.00/ " + WithdrawLimit
+
+
     var WithdrawAmountList = await PostMethodWithParameter(apiEndPoints.withdrawListAmount, model);
     document.getElementById("WithdrawAmount").innerHTML = "MYR " + WithdrawAmountList.data.totalAmount;
     if (WithdrawAmountList.data.totalAmount > 0) {
@@ -681,7 +691,8 @@ async function DepositAfterPromotion() {
 
 //#region Withdrawal
 async function Withdrawal() {
-    if ($('#txt_withdrawalAmount').val() <= 30000 && $('#txt_withdrawalAmount').val() >= 10) {
+    debugger
+    if ($('#txt_withdrawalAmount').val() <= Number(WithdrawLimit) && $('#txt_withdrawalAmount').val() >= 10) {
         LoaderShow();
         // await regisrationGame();
         if ($('#txt_withdrawalAmount').val() > 0) {
@@ -733,7 +744,7 @@ async function Withdrawal() {
         LoaderHide();
     }
     else {
-        ShowError(ChangeErroMessage("min_max_amount_error"));
+        ShowError(ChangeErroMessage("min_max_amount_error_parameter", WithdrawLimit+"."));
     }
 }
 //#endregion

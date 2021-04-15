@@ -32,10 +32,12 @@ $(document).ready(function () {
 });
 //#endregion
 
-function VIPBanner() {
-    var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
+async function VIPBanner() {
+    var resUserVIPlevel = await GetMethodWithReturn(apiEndPoints.UserVipDetails);
+    sessionStorage.setItem("UserVipDetails", enc(JSON.stringify(resUserVIPlevel)))
+
     try {
-        document.getElementById("viplevel_icon").src = resUserData.data.vipBanner;
+        document.getElementById("viplevel_icon").src = resUserVIPlevel.data.VIPBanner;
     }
     catch (e) {}
 }
@@ -157,14 +159,14 @@ function slider() {
 }
 //#endregion
 
-function ChangeErroMessage(key) {
+function ChangeErroMessage(key,parameter="") {
     var ErrorMessage = "";
     $.ajax({
         url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
         dataType: 'json',
         async: false,
         success: function (lang) {
-            ErrorMessage = lang[key];
+            ErrorMessage = lang[key] + parameter;
         }
     });
     return ErrorMessage;
