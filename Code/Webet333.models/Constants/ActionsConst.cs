@@ -702,5 +702,20 @@
 
             public const string UserGroupSelectUser = "usergroup/user/select";
         }
+
+        public class FreeCreditEvent
+        {
+            public const string FreeCreditEventInsert = "freecreditevent/insert";
+
+            public const string FreeCreditEventUpdate = "freecreditevent/update";
+
+            public const string FreeCreditEventSetFreeCreditTerm = "freecreditevent/setfreecreditterm";
+
+            public const string FreeCreditEventSelect = "freecreditevent/select";
+
+            public const string FreeCreditEventUpdateStatus = "freecreditevent/update/status";
+
+            public const string FreeCreditEventDelete = "freecreditevent/delete";
+        }
     }
 }

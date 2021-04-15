@@ -561,5 +561,18 @@
 
             public const string UserGroupUsersDelete = "[dbo].[User_Group_Users_Delete]";
         }
+
+        public class FreeCreditEvent
+        {
+            public const string FreeCreditEventPersist = "[dbo].[FreeCreditEvent_Persist]";
+
+            public const string FreeCreditEventSetFreeCreditTerm = "[dbo].[FreeCreditEvent_SetFreeCreditTerm]";
+
+            public const string FreeCreditEventSelect = "[dbo].[FreeCreditEvent_Select]";
+
+            public const string FreeCreditEventUpdateStatus = "[dbo].[FreeCreditEvent_Update_Status]";
+
+            public const string FreeCreditEventUpdatDelete = "[dbo].[FreeCreditEvent_Update_Delete]";
+        }
     }
 }
