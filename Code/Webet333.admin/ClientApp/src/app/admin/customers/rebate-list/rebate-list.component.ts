@@ -52,7 +52,6 @@ export class RebateListComponent implements OnInit {
             { prop: 'BetAmount' },
             { prop: 'Rolling' },
             { prop: 'CommAmount' },
-            { prop: 'CommPrecentage' },
             { prop: 'Created' },
             { prop: 'Actions', cellTemplate: this.status, sortable: false, width: 250 },
         ];
@@ -64,6 +63,7 @@ export class RebateListComponent implements OnInit {
             { prop: 'Turnover' },
             { prop: 'BetAmount' },
             { prop: 'Rolling' },
+            { prop: 'CommPrecentage' },
             { prop: 'CommAmount' },
             { prop: 'WinLose' },
         ];
@@ -85,7 +85,7 @@ export class RebateListComponent implements OnInit {
                     TotalUser: el.TotalUsers,
                     BetAmount: el.BetAmount,
                     Rolling: el.Rolling,
-                    CommPrecentage: el.CommPrecentage,
+                    
                     CommAmount: el.CommAmount,
                     Created: this.ReplaceDateTime(el.Created)
                 });
@@ -165,7 +165,7 @@ export class RebateListComponent implements OnInit {
                     TotalUser: el.TotalUsers,
                     BetAmount: el.BetAmount,
                     Rolling: el.Rolling,
-                    CommPrecentage: el.CommPrecentage,
+                    
                     CommAmount: el.CommAmount,
                     Created: this.ReplaceDate(el.Created)
                 });
@@ -193,6 +193,7 @@ export class RebateListComponent implements OnInit {
                     Turnover: el.turnover,
                     BetAmount: el.bet,
                     Rolling: el.rolling,
+                    CommPrecentage: el.commPercentage,
                     CommAmount: el.commAmount,
                     WinLose: el.winLose
                 });

@@ -114,6 +114,8 @@ namespace Webet333.api.Controllers
 
         #endregion VIP Free Credit Promotion Setting
 
+        #region VIP Details Select
+
         [Authorize]
         [HttpGet(ActionsConst.VIPCategory.VIPLevelUserDetails)]
         public async Task<IActionResult> UserVIPLevelDetails()
@@ -129,6 +131,8 @@ namespace Webet333.api.Controllers
                 return OkResponse(result);
             }
         }
+
+        #endregion
 
     }
 }
