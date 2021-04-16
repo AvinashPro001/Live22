@@ -5,50 +5,58 @@ namespace Webet333.models.Response
 {
     public class FreeCreditEventSelectResponse
     {
+        [JsonProperty("freeCreditEventId")]
         public Guid FreeCreditEventId { get; set; }
 
+        [JsonProperty("freeCreditEventName")]
         public string FreeCreditEventName { get; set; }
 
+        [JsonProperty("userGroupId")]
         public Guid UserGroupId { get; set; }
 
+        [JsonProperty("userGroupName")]
         public string UserGroupName { get; set; }
 
-        public int UnCompleted { get; set; }
+        [JsonProperty("totalUsers")]
+        public int TotalUsers { get; set; }
 
+        [JsonProperty("completed")]
         public int Completed { get; set; }
 
+        [JsonProperty("userList")]
         public dynamic UserList { get; set; }
 
+        [JsonProperty("terms")]
         public dynamic Terms { get; set; }
     }
 
     public class FreeCreditEventSelectUserListResponse
     {
-        [JsonProperty("UserId")]
+        [JsonProperty("userId")]
         public long UserId { get; set; }
 
-        [JsonProperty("Username")]
+        [JsonProperty("username")]
         public string Username { get; set; }
 
-        [JsonProperty("WinLossAmount")]
+        [JsonProperty("winLossAmount")]
         public double WinLossAmount { get; set; }
 
-        [JsonProperty("FreeCredit")]
+        [JsonProperty("freeCredit")]
         public double FreeCredit { get; set; }
     }
 
     public class FreeCreditEventSelectTermsResponse
     {
-        [JsonProperty("TermId")]
+        [JsonProperty("termId")]
         public Guid TermId { get; set; }
 
-        [JsonProperty("TermFromAmount")]
+        [JsonProperty("termFromAmount")]
         public decimal TermFromAmount { get; set; }
 
-        [JsonProperty("TermToAmount")]
+        [JsonProperty("termToAmount")]
         public decimal TermToAmount { get; set; }
 
-        [JsonProperty("TermFreeCreditAmount")]
+        [JsonProperty("termFreeCreditAmount")]
         public decimal TermFreeCreditAmount { get; set; }
     }
 }
