@@ -118,19 +118,19 @@ namespace Webet333.api.Controllers
 
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(
-                    StoredProcConsts.FreeCreditEvent.FreeCreditEventSetFreeCreditTerm,
-                    new
-                    {
-                        request.UserId,
-                        request.UniqueId,
-                        request.Id,
-                        request.UserGroupId,
-                        request.TermJSON
-                    });
-            }
+                var result = await repository.GetDataAsync(
+                     StoredProcConsts.FreeCreditEvent.FreeCreditEventSetFreeCreditTerm,
+                     new
+                     {
+                         request.UserId,
+                         request.UniqueId,
+                         request.Id,
+                         request.UserGroupId,
+                         request.TermJSON
+                     });
 
-            return OkResponse();
+                return OkResponse(result);
+            }
         }
 
         #endregion Set Free Credit Term
