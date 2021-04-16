@@ -18,6 +18,8 @@ namespace Webet333.models.Response
         public int Completed { get; set; }
 
         public dynamic UserList { get; set; }
+
+        public dynamic Terms { get; set; }
     }
 
     public class FreeCreditEventSelectUserListResponse
@@ -33,5 +35,20 @@ namespace Webet333.models.Response
 
         [JsonProperty("FreeCredit")]
         public double FreeCredit { get; set; }
+    }
+
+    public class FreeCreditEventSelectTermsResponse
+    {
+        [JsonProperty("TermId")]
+        public Guid TermId { get; set; }
+
+        [JsonProperty("TermFromAmount")]
+        public decimal TermFromAmount { get; set; }
+
+        [JsonProperty("TermToAmount")]
+        public decimal TermToAmount { get; set; }
+
+        [JsonProperty("TermFreeCreditAmount")]
+        public decimal TermFreeCreditAmount { get; set; }
     }
 }
