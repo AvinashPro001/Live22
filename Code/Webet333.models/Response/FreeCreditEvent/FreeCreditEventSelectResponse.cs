@@ -50,13 +50,13 @@ namespace Webet333.models.Response
         [JsonProperty("termId")]
         public Guid TermId { get; set; }
 
-        [JsonProperty("termFromAmount")]
+        [JsonProperty("FromAmount")]
         public decimal TermFromAmount { get; set; }
 
-        [JsonProperty("termToAmount")]
+        [JsonProperty("ToAmount")]
         public decimal TermToAmount { get; set; }
 
-        [JsonProperty("termFreeCreditAmount")]
+        [JsonProperty("FreeCreditAmount")]
         public decimal TermFreeCreditAmount { get; set; }
     }
 }

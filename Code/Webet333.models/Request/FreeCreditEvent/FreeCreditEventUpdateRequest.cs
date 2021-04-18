@@ -16,10 +16,10 @@ namespace Webet333.models.Request
         [JsonProperty("usergroupId")]
         public System.Guid UserGroupId { get; set; }
 
-        [JsonProperty("freeCreditEventTerm")]
-        public System.Collections.Generic.List<FreeCreditEventTerm> FreeCreditEventTerm { get; set; }
+        //[JsonProperty("freeCreditEventTerm")]
+        //public System.Collections.Generic.List<FreeCreditEventTerm> FreeCreditEventTerm { get; set; }
 
-        [JsonIgnore]
-        public string TermJSON { get; set; }
+        [JsonProperty("freeCreditEventTerm")]
+        public dynamic TermJSON { get; set; }
     }
 }

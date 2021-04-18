@@ -80,7 +80,7 @@ namespace Webet333.api.Controllers
 
             request.UserId = GetUserId(User);
             request.UniqueId = GetUniqueId(User);
-            request.TermJSON = JsonConvert.SerializeObject(request.FreeCreditEventTerm);
+            //request.TermJSON = JsonConvert.SerializeObject(request.FreeCreditEventTerm);
 
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -93,7 +93,7 @@ namespace Webet333.api.Controllers
                         request.Name,
                         request.Id,
                         request.UserGroupId,
-                        request.TermJSON
+                        TermJSON = request.TermJSON == null ? string.Empty : request.TermJSON
                     });
             }
 
