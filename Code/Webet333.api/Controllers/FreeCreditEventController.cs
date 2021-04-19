@@ -167,8 +167,8 @@ namespace Webet333.api.Controllers
                     {
                         foreach (var data in result)
                         {
-                            data.UserList = JsonConvert.DeserializeObject<List<FreeCreditEventSelectUserListResponse>>(data.UserList);
-                            data.Terms = JsonConvert.DeserializeObject<List<FreeCreditEventSelectTermsResponse>>(data.Terms);
+                            data.UserList = data.UserList == null ? null : JsonConvert.DeserializeObject<List<FreeCreditEventSelectUserListResponse>>(data.UserList);
+                            data.Terms = data.Terms == null ? null : JsonConvert.DeserializeObject<List<FreeCreditEventSelectTermsResponse>>(data.Terms);
                         }
                     }
 
