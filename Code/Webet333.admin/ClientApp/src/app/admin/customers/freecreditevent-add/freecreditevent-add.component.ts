@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
@@ -16,9 +16,6 @@ import { AdminService } from '../../admin.service';
 export class FreecrediteventAddComponent implements OnInit {
     usersPermissions: any;
     @ViewChild(DatatableComponent) table: DatatableComponent;
-    @ViewChild('status') status: TemplateRef<any>;
-    toaster: any;
-    toasterConfig: any;
     toasterconfig: ToasterConfig = new ToasterConfig({
         positionClass: 'toast-bottom-right',
         showCloseButton: true
@@ -29,17 +26,13 @@ export class FreecrediteventAddComponent implements OnInit {
     res: any;
     forEach: any;
     loadingIndicator: boolean = false;
-    final: any;
     userGroupId: any;
-    userGroupName: any;
-    id: any;
-    selectedUserList = [];
     userGroupList: any;
     completedUsers: any = 0;
     totalUsers: any = 0;
     freecreditterm: any;
     totalRowForTerm: number = 6;
-    totalRowForTermArray: any;
+    disabled: boolean = false;
 
     constructor(
         private adminService: AdminService,
@@ -51,7 +44,6 @@ export class FreecrediteventAddComponent implements OnInit {
     async ngOnInit() {
         this.usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (await this.checkViewPermission()) {
-            this.id = JSON.parse(localStorage.getItem('userGroupid'));
             this.setColumn();
             this.loadUserGroup();
         }
@@ -181,8 +173,6 @@ export class FreecrediteventAddComponent implements OnInit {
             this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectUserGroup);
         }
         else {
-            //this.totalRowForTermArray = this.counter(this.totalRowForTerm);
-
             if (this.freecreditterm == null) this.freecreditterm = this.counter(this.totalRowForTerm);
 
             this.openWindowCustomClass(content);
@@ -288,27 +278,41 @@ export class FreecrediteventAddComponent implements OnInit {
     //#region Save Free Credit Event
 
     SaveFreeCreditEvent() {
+        this.disabled = true;
+
         let model = {
             name: (document.getElementById("txt_freecrediteventname") as HTMLInputElement).value,
             usergroupId: this.userGroupId,
             freeCreditEventTerm: this.freecreditterm
         }
 
-        if (this.commonService.CheckVariable(model.name)) return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseEnterValidFreeCreditEventName);
+        if (this.commonService.CheckVariable(model.name)) {
+            this.disabled = false;
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseEnterValidFreeCreditEventName);
+        }
 
-        if (this.commonService.CheckVariable(model.usergroupId)) return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectUserGroup);
+        if (this.commonService.CheckVariable(model.usergroupId)) {
+            this.disabled = false;
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectUserGroup);
+        }
 
-        if (this.commonService.CheckVariable(model.freeCreditEventTerm)) return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSetFreeCreditEventTerm);
+        if (this.commonService.CheckVariable(model.freeCreditEventTerm)) {
+            this.disabled = false;
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSetFreeCreditEventTerm);
+        }
 
         try {
             this.adminService.add<any>(customer.freeCreditEventInsert, model).subscribe(res => {
+                this.disabled = false;
                 this.toasterService.pop('success', 'Success', res.message);
                 this.router.navigate(['/admin/customers/freecreditevent-list']);
             }, error => {
+                this.disabled = true;
                 this.toasterService.pop('error', 'Error', error.error.message);
             });
         }
         catch (ex) {
+            this.disabled = true;
             this.toasterService.pop('error', 'Error', ex.message);
         }
     }

@@ -330,7 +330,7 @@ export const customer = {
     freeCreditEventInsert: environment.apiUrl + 'freecreditevent/insert',
     freeCreditEventUpdate: environment.apiUrl + 'freecreditevent/update',
     freeCreditEventSetFreeCreditTerm: environment.apiUrl + 'freecreditevent/setfreecreditterm',
-    freeCreditEventUsersSelect: environment.apiUrl +  'freecreditevent/users/select'
+    freeCreditEventUsersSelect: environment.apiUrl + 'freecreditevent/users/select'
 }
 
 export const playtech = {

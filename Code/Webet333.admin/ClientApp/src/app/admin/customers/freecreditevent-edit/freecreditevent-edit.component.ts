@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
@@ -16,9 +16,6 @@ import { AdminService } from '../../admin.service';
 export class FreecrediteventEditComponent implements OnInit {
     usersPermissions: any;
     @ViewChild(DatatableComponent) table: DatatableComponent;
-    @ViewChild('status') status: TemplateRef<any>;
-    toaster: any;
-    toasterConfig: any;
     toasterconfig: ToasterConfig = new ToasterConfig({
         positionClass: 'toast-bottom-right',
         showCloseButton: true
@@ -29,19 +26,16 @@ export class FreecrediteventEditComponent implements OnInit {
     res: any;
     forEach: any;
     loadingIndicator: boolean = false;
-    final: any;
     userGroupId: any;
     userGroupName: any;
     id: any;
-    selectedUserList = [];
-    userGroupList: any;
     completedUsers: any = 0;
     totalUsers: any = 0;
     freeCreditEventTerms: any;
     freeCreditEventTermsTemp: any;
     freeCreditEventId: any;
     freeCreditEventName: any;
-    freeCreditEventUsersList: any;
+    disabled: boolean = false;
 
     constructor(
         private adminService: AdminService,
@@ -142,10 +136,7 @@ export class FreecrediteventEditComponent implements OnInit {
 
     //#region Open Free Credit Event Term window
 
-    ViewData(content) {
-        if (this.commonService.CheckVariable(this.userGroupId)) this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectUserGroup);
-        else this.openWindowCustomClass(content);
-    }
+    ViewData(content) { this.openWindowCustomClass(content); }
 
     openWindowCustomClass(content) { this.modalService.open(content, { windowClass: 'dark-modal', size: 'sm' }); }
 
@@ -153,7 +144,7 @@ export class FreecrediteventEditComponent implements OnInit {
 
     //#region Set & Get Free Credit Event Term
 
-    SetFreeCreditEventTerm(id = null) {
+    SetFreeCreditEventTerm() {
         this.loadingIndicator = true;
 
         try {
@@ -225,6 +216,7 @@ export class FreecrediteventEditComponent implements OnInit {
 
     SaveFreeCreditEvent() {
         try {
+            this.disabled = true;
             let model = {
                 id: this.id,
                 name: (document.getElementById("txt_freecrediteventname") as HTMLInputElement).value,
@@ -232,11 +224,20 @@ export class FreecrediteventEditComponent implements OnInit {
                 freeCreditEventTerm: JSON.stringify(this.freeCreditEventTerms)
             }
 
-            if (this.commonService.CheckVariable(model.name)) return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseEnterValidFreeCreditEventName);
+            if (this.commonService.CheckVariable(model.name)) {
+                this.disabled = false;
+                return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseEnterValidFreeCreditEventName);
+            }
 
-            if (this.commonService.CheckVariable(model.usergroupId)) return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectUserGroup);
+            if (this.commonService.CheckVariable(model.usergroupId)) {
+                this.disabled = false;
+                return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectUserGroup);
+            }
 
-            if (this.commonService.CheckVariable(model.freeCreditEventTerm)) return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSetFreeCreditEventTerm);
+            if (this.commonService.CheckVariable(model.freeCreditEventTerm)) {
+                this.disabled = false;
+                return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSetFreeCreditEventTerm);
+            }
 
             let model1 = {
                 searchParam: null,
@@ -256,16 +257,20 @@ export class FreecrediteventEditComponent implements OnInit {
                 if (JSON.stringify(this.freeCreditEventTerms) == JSON.stringify(this.freeCreditEventTermsTemp)) model.freeCreditEventTerm = null;
 
                 this.adminService.add<any>(customer.freeCreditEventUpdate, model).subscribe(res => {
+                    this.disabled = false;
                     this.toasterService.pop('success', 'Success', res.message);
                     this.router.navigate(['/admin/customers/freecreditevent-list']);
                 }, error => {
+                    this.disabled = true;
                     this.toasterService.pop('error', 'Error', error.error.message);
                 });
             }, error => {
+                this.disabled = false;
                 this.toasterService.pop('error', 'Error', error.error.message);
             });
         }
         catch (ex) {
+            this.disabled = true;
             this.toasterService.pop('error', 'Error', ex.message);
         }
     }

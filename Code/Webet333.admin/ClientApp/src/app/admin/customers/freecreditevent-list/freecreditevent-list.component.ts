@@ -1,6 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterConfig, ToasterService } from 'angular2-toaster';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
@@ -18,8 +17,6 @@ export class FreecrediteventListComponent implements OnInit {
     usersPermissions: any;
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
-    toaster: any;
-    toasterConfig: any;
     toasterconfig: ToasterConfig = new ToasterConfig({
         positionClass: 'toast-bottom-right',
         showCloseButton: true
@@ -37,7 +34,6 @@ export class FreecrediteventListComponent implements OnInit {
         private toasterService: ToasterService,
         private router: Router,
         private confirmationDialogService: ConfirmationDialogService,
-        private modalService: NgbModal,
         private commonService: CommonService) { }
 
     async ngOnInit() {
