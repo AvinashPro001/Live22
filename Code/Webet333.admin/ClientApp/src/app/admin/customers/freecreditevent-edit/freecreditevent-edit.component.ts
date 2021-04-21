@@ -36,6 +36,8 @@ export class FreecrediteventEditComponent implements OnInit {
     freeCreditEventId: any;
     freeCreditEventName: any;
     disabled: boolean = false;
+    totalWinLossAmount: any = 0;
+    totalFreeCredit: any = 0;
 
     constructor(
         private adminService: AdminService,
@@ -102,9 +104,12 @@ export class FreecrediteventEditComponent implements OnInit {
                         this.rows = [...this.rows]
                     })
                 }
+                this.totalFreeCredit = el.totalFreeCredit;
+                this.totalWinLossAmount = el.totalWinLossAmount;
 
                 this.loadingIndicator = false;
             })
+
             this.loadingIndicator = false;
         }, error => {
             this.loadingIndicator = false;
@@ -170,6 +175,9 @@ export class FreecrediteventEditComponent implements OnInit {
                     i++;
                     this.rows = [...this.rows]
                     this.setCount(this.customerData[0].completedUsers, this.customerData[0].totalUsers);
+                    this.totalFreeCredit = this.customerData[0].totalFreeCredit;
+                    this.totalWinLossAmount = this.customerData[0].totalWinLossAmount;
+
                     this.loadingIndicator = false;
                 })
 
