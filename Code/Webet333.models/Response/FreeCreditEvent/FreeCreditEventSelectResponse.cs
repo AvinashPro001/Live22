@@ -28,6 +28,12 @@ namespace Webet333.models.Response
 
         [JsonProperty("terms")]
         public dynamic Terms { get; set; }
+
+        [JsonProperty("totalFreeCredit")]
+        public decimal TotalFreeCredit { get; set; }
+
+        [JsonProperty("totalWinLossAmount")]
+        public decimal TotalWinLossAmount { get; set; }
     }
 
     public class FreeCreditEventSelectUserListResponse
