@@ -1,0 +1,58 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">User Group List</legend>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+        <div class="row col-12">
+            <div class="p-2 col-md-2">
+                <input type='text' class="form-control" (keyup)="searchHandler($event)" placeholder="Search" />
+            </div>
+            <div class="p-2 col-md-10">
+                <button id="acceptBtn" class="mb-1 btn btn-success" type="button" (click)='navigateAdd()' data-toggle="modal" style="position:absolute;right:0px;font-weight:bolder;font-size:large">Add User Group</button>
+            </div>
+        </div>
+        <br />
+        <div class="card-body">
+            <ngx-datatable #table
+                           class='bootstrap no-detail-row'
+                           [rows]="rows"
+                           [columns]="columns"
+                           [columnMode]="'force'"
+                           [footerHeight]="60"
+                           [rowHeight]="'auto'"
+                           [limit]="10"
+                           [loadingIndicator]="loadingIndicator">
+                <ng-template #status
+                             let-rowIndex="rowIndex"
+                             let-row="row"
+                             let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <div class="row col-md-12" style="margin-right:0px">
+                        <label class="col-md-3">
+                            <button id="acceptBtn" data-id="row.id" class="mb-1 btn btn-success" type="button" data-toggle="modal" title="Edit" (click)='navigateEdit(row.id)'>
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                        <label class="col-md-3">
+                            <button id="rejectBtn" data-id="row.id" class="mb-1 btn btn-danger" type="button" data-toggle="modal" style="margin-left:5px" title="Delete" (click)='openRejectConfirmationDialog(row.id)'>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                        <label class="col-md-3">
+                            <ui-switch [(ngModel)]="row.active"
+                                       (change)="manualUpdateEvent(row.id,$event)"
+                                       data-toggle="modal"
+                                       data-id="row.id">
+                            </ui-switch>
+                        </label>
+                    </div>
+                </ng-template>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
