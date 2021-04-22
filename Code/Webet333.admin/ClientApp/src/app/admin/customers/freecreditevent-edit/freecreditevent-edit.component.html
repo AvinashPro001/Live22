@@ -1,0 +1,120 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/admin/customers/freecreditevent-list">Free Credit Event List</a>
+    </li>
+    <li class="breadcrumb-item">Add Free Credit Event</li>
+</ol>
+
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Free Credit Event Add</legend>
+                </div>
+            </div>
+        </div>
+
+        <div class="row card-body">
+            <div class="col-lg-12">
+                <form class="text-center border border-light p-5" name="myForm">
+                    <div class="row ">
+                        <div class="row col-md-12">
+                            <label class="col-md-3" style="text-align: right; font-size: 20px">Free Credit Event Name</label>
+                            <input type="text" id="txt_freecrediteventname" class="form-control col-md-3 mb-4" value="{{freeCreditEventName}}" autocomplete="off" name="name">
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="col-md-3" style="text-align: right; font-size: 20px">User Group</label>
+                            <input type="text" id="txt_usergroupname" class="form-control col-md-3 mb-4" value="{{userGroupName}}" autocomplete="off" name="name" disabled>
+                        </div>
+                        <div class="row col-md-12">
+                            <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)="SaveFreeCreditEvent()" style="max-width: 100px; align-content: center; margin-left: 25%;">Save</button>
+                            <label class="col-md-3" style="text-align: right;font-size: 20px;margin-top: 1.1%;">User completed: {{completedUsers}}/{{totalUsers}}</label>
+                            <button class="btn btn-block btn-primary mt-3" type="submit" (click)="ViewData(setfreeCreditEventTerms)" style="max-width:200px;align-content:center;margin-left: 13%;">Set Free Credit Term</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="card-body">
+                    <ngx-datatable #table
+                                   class='bootstrap no-detail-row'
+                                   [columns]="columns"
+                                   [rows]="rows"
+                                   [columnMode]="'force'"
+                                   [footerHeight]="60"
+                                   [rowHeight]="'auto'"
+                                   [limit]="10"
+                                   [loadingIndicator]="loadingIndicator">
+                    </ngx-datatable>
+                    <div>
+                        Total Winlose Amount: {{totalWinLossAmount}}
+                        <br />
+                        Total Free Credit: {{totalFreeCredit}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Remarks modal code starts-->
+<ng-template #setfreeCreditEventTerms let-modal>
+    <div class="modal-body">
+        <div>
+            <p>
+                Note: If you set free credit term from -100 to -1000 for RM5 means this is applicable for winloas amount
+                <b> > -100 to < -1000</b>
+            </p>
+        </div>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>
+                            <div style="display: flex;">
+                                <label class="container">
+                                    <h5 style="font-weight: 600; font-size: 16px; text-align: center;">From</h5>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: flex;">
+                                <label class="container">
+                                    <h5 style="font-weight: 600;font-size: 16px;text-align: center;">To</h5>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: flex;">
+                                <label class="container">
+                                    <h5 style="font-weight: 600; font-size: 16px; text-align:center;">Free Credit</h5>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+
+                <tbody style="text-align:right">
+                    <ng-container *ngFor='let freeCreditEventTermsValue of freeCreditEventTerms; let i = index'>
+                        <tr>
+                            <td>
+                                <input type="number" id="{{freeCreditEventTermsValue.termId}}" class="form-control col-md-3" value="{{freeCreditEventTermsValue.FromAmount}}" autocomplete="off" style="text-align: right;" [(ngModel)]="freeCreditEventTermsValue.FromAmount">
+                            </td>
+                            <td>
+                                <input type="number" id="{{freeCreditEventTermsValue.termId}}" class="form-control col-md-3" value="{{freeCreditEventTermsValue.ToAmount}}" autocomplete="off" style="text-align: right;" [(ngModel)]="freeCreditEventTermsValue.ToAmount">
+                            </td>
+                            <td>
+                                <input type="number" id="{{freeCreditEventTermsValue.termId}}" class="form-control col-md-3" value="{{freeCreditEventTermsValue.FreeCreditAmount}}" autocomplete="off" style="text-align: right;" [(ngModel)]="freeCreditEventTermsValue.FreeCreditAmount">
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <button type="button" class="mb-1 btn btn-success" (click)="SetFreeCreditEventTerm()" style="margin-left: 23%;">Set</button>
+            <button type="button" class="mb-1 btn btn-primary" (click)="ClearFreeCreditEventTerm()" style="margin-left: 10%;">Clear</button>
+            <button type="button" class="mb-1 btn btn-light" (click)="modal.close('Close click')" style="margin-left: 10%;">Cancel</button>
+        </div>
+    </div>
+</ng-template>
+<!--Remarks modal code ends-->
