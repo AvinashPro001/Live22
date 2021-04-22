@@ -1,0 +1,77 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/admin/customers/usergroup-list">User Group List</a>
+    </li>
+    <li class="breadcrumb-item">Edit User Group</li>
+</ol>
+
+<div class="my-container col-md-12">
+    <div class="card card-default">
+        <div class="card-body">
+            <legend style="align-content:center">Edit User Group</legend>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form class="text-center border border-light p-5">
+                        <div class="row col-md-12">
+                            <label class="col-md-4" style="text-align:right;font-size:20px">User Group Id:</label>
+                            <input type="text" id="txt_usergroupid" class="form-control col-md-4 mb-4" placeholder="" value="{{userGroupId}}" disabled>
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="col-md-4" style="text-align:right;font-size:20px">User Group Name:</label>
+                            <input type="text" id="txt_usergroupname" class="form-control col-md-4 mb-4" placeholder="" value="{{userGroupName}}">
+                        </div>
+                        <div class="row col-lg-12">
+                            <span class="col-md-5"></span>
+                            <button class="btn btn-info col-md-2 mb-2" style="text-align:center;font-size:20px" type="submit" (click)="updateUserGroupName()">Save</button>
+                        </div>
+                    </form>
+
+                    <br />
+
+                    <div class="card-body">
+                        <div class="row col-12">
+                            <div class="p-2"><h3>Search</h3></div>
+                            <div class="p-2 col-md-2">
+                                <input class="form-control" type="text" id="txt_search">
+                            </div>
+                            <div class="p-2">
+                                <button class="mb-1 btn btn-success" (click)='Search()' type="button">Search</button>
+                            </div>
+                            <div class="p-2 col-md-2">
+                                <button class="mb-1 btn btn-success" (click)='openRejectConfirmationDialogForSelectedCustomer()' type="button">Delete</button>
+                            </div>
+                        </div>
+                        <div>
+                            <ngx-datatable #table
+                                           class='bootstrap no-detail-row'
+                                           [columns]="columns"
+                                           [rows]="rows"
+                                           [columnMode]="'force'"
+                                           [footerHeight]="60"
+                                           [rowHeight]="'auto'"
+                                           [limit]="10"
+                                           [loadingIndicator]="loadingIndicator"
+                                           [selected]="selectedUserList"
+                                           [selectionType]="'checkbox'"
+                                           (select)="onSelect($event)">
+                                <ng-template #status
+                                             let-rowIndex="rowIndex"
+                                             let-row="row"
+                                             let-expanded="expanded"
+                                             ngx-datatable-row-detail-template>
+                                    <div class="row col-md-12">
+                                        <label class="col-md-3">
+                                            <button id="rejectBtn" data-id="customerData[rowIndex].id" class="mb-1 btn btn-danger" type="button" data-toggle="modal" title="Delete" (click)='openRejectConfirmationDialog(row.id)'>
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                        </label>
+                                    </div>
+                                </ng-template>
+                            </ngx-datatable>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

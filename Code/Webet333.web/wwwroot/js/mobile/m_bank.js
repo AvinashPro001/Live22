@@ -988,22 +988,41 @@ function OpenModelTransferWallet(GameName) {
 }
 
 async function TransferInAllWallet(GameWalletName) {
-    LoaderShow();
+    if (location.href.toLowerCase().includes("mobile/transfer"))
+        await LoadingImageShowAllInSection(GameWalletName);
     var GameName;
     if (GameWalletName == undefined)
         GameName = walletNameTransferInWallet;
     else
         GameName = GameWalletName
 
-    await WalletBalance();
     let model = {
         walletName: GameName
     }
     var res = await PostMethod(apiEndPoints.AllInWallet, model);
     await WalletBalance();
-    LoaderHide();
+    
 }
 //#endregion Transfer Main Wallet to Any Wallet
+function LoadingImageShowAllInSection(GameName) {
+    switch (GameName) {
+        case "918Kiss Wallet": document.getElementById("918KissWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "AG Wallet": document.getElementById("AGWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "PlayTech Wallet": document.getElementById("PlaytechWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "M8 Wallet": document.getElementById("M8Wallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "MaxBet Wallet": document.getElementById("MaxbetWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "Mega888 Wallet": document.getElementById("Mega888Wallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "Joker Wallet": document.getElementById("JokerWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "DG Wallet": document.getElementById("DGWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "Sexy Wallet": document.getElementById("SexyWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "SA Wallet": document.getElementById("SAWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "Pussy888 Wallet": document.getElementById("Pussy888Wallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "AllBet Wallet": document.getElementById("AllBetWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "WM Wallet": document.getElementById("WMWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "Pragmatic Wallet": document.getElementById("PragmaticWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+    }
+}
+
 
 async function CheckMainteance() {
     var res = await GetMethodWithReturn(apiEndPoints.VaderPayMainteanceSelect);

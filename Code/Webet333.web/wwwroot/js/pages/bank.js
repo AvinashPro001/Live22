@@ -1449,22 +1449,43 @@ function OpenModelTransferWallet(GameName) {
 }
 
 async function TransferInAllWallet(GameWalletName) {
+    if (location.href.toLowerCase().includes("account/profile"))
+        await LoadingImageShowAllInSection(GameWalletName);
     var GameName;
     if (GameWalletName == undefined)
         GameName = walletNameTransferInWallet;
     else
         GameName = GameWalletName
 
-    LoaderShow();
-    await WalletBalance();
     let model = {
         walletName: GameName
     }
-    var res = await PostMethod(apiEndPoints.AllInWallet, model);
-    await WalletBalance();
-    LoaderHide();
+    try {
+        await PostMethod(apiEndPoints.AllInWallet, model);
+    }
+    catch (e) { }
+    WalletBalance();
 }
 //#endregion Transfer Main Wallet to Any Wallet
+
+function LoadingImageShowAllInSection(GameName) {
+    switch (GameName) {
+        case "918Kiss Wallet": document.getElementById("918KissInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "AG Wallet": document.getElementById("AGInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "PlayTech Wallet": document.getElementById("PlaytechInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "M8 Wallet": document.getElementById("M8InWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "MaxBet Wallet": document.getElementById("MaxbetInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "Mega888 Wallet": document.getElementById("Mega888InWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "Joker Wallet": document.getElementById("JokerInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "DG Wallet": document.getElementById("DGInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "Sexy Wallet": document.getElementById("SexyInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "SA Wallet": document.getElementById("SAInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "Pussy888 Wallet": document.getElementById("Pussy888InWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "AllBet Wallet": document.getElementById("AllBetInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "WM Wallet": document.getElementById("WMInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "Pragmatic Wallet": document.getElementById("PragmaticInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+    }
+}
 
 //#region SendOTP
 function Counter() {

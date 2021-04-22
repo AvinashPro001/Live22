@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ToasterService } from 'angular2-toaster';
-import { AdminService } from '../../admin.service';
-import { customer, ErrorMessages } from '../../../../environments/environment';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToasterService } from 'angular2-toaster';
+import { customer, ErrorMessages } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-users-behaviour-reports',
@@ -12,18 +13,23 @@ import { CommonService } from '../../../common/common.service';
 })
 
 export class UsersBehaviourReportsComponent implements OnInit {
+    @ViewChild('userGroup') receipt: TemplateRef<any>;
     rows = [];
     columns = [];
     loadingIndicator: boolean;
     datePickerfromdate: string;
     datePickertodate: string;
     Data: any;
+    userGroupList: any;
+    userGroupId: any;
+    userGroupUsersList: any;
 
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private commonService: CommonService
+        private commonService: CommonService,
+        private modalService: NgbModal
     ) { }
 
     async ngOnInit() {
@@ -270,4 +276,92 @@ export class UsersBehaviourReportsComponent implements OnInit {
     }
 
     //#endregion Redirect to user details page
+
+    //#region Open UserGroup window
+
+    ViewData(content) {
+        if (this.isUserAvailable()) {
+            this.openWindowCustomClass(content);
+            this.loadUserGroup();
+        }
+    }
+
+    openWindowCustomClass(content) { this.modalService.open(content, { windowClass: 'dark-modal', size: 'sm' }); }
+
+    isUserAvailable() {
+        if (this.Data == null || this.Data.length == 0) {
+            this.toasterService.pop('error', 'Error', 'Here not user available to add to the user group.');
+
+            return false;
+        }
+        else return true;
+    }
+
+    //#endregion Open UserGroup window
+
+    //#region Config for UserGroup
+
+    config = {
+        displayKey: "groupName",                 //if objects array passed which key to be displayed defaults to description
+        search: true,                           //true/false for the search functionlity defaults to false,
+        height: '500px',                        //height of the list so that if there are more no of items it can show a scroll defaults to auto. With auto height scroll will never appear
+        placeholder: 'Select UserGroup',        // text to be displayed when no item is selected defaults to Select,
+        customComparator: () => { },            // a custom function using which user wants to sort the items. default is undefined and Array.sort() will be used in that case,
+        limitTo: Option.length,                 // a number thats limits the no of options displayed in the UI similar to angular's limitTo pipe
+        moreText: 'more',                       // text to be displayed whenmore than one items are selected like Option 1 + 5 more
+        noResultsFound: 'No results found!',    // text to be displayed when no items are found while searching
+        searchPlaceholder: 'Search',            // label thats displayed in search input,
+        searchOnKey: 'groupName'                 // key on which search should be performed this will be selective search. if undefined this will be extensive search on all keys
+    }
+
+    //#endregion Config for UserGroup
+
+    //#region Load UserGroup
+
+    loadUserGroup() {
+        this.adminService.get<any>(customer.userGroupListForDropdown).subscribe(res => {
+            this.userGroupList = res.data;
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
+    //#endregion Load UserGroup
+
+    //#region On UserGroup Select
+
+    userGroupOnChange(event) {
+        try {
+            this.userGroupId = event.value.id;
+            if (this.userGroupId === '0') this.userGroupId = null;
+        }
+        catch (ex) {
+            this.userGroupId = null;
+        }
+    }
+
+    //#endregion On UserGroup Select
+
+    //#region Save Users Into UserGroup
+
+    saveUsersIntoUserGroup() {
+        if (this.userGroupId == null || this.userGroupId == NaN || this.userGroupId == undefined || this.userGroupId == '0') this.toasterService.pop('error', 'Error', this.commonService.errorMessage.SelectUserGroupFromDropdown);
+        else {
+            var userIdList = this.Data.map(function (a) { return a.userId; });
+
+            let model = {
+                userGroupId: this.userGroupId,
+                userId: userIdList
+            };
+
+            this.adminService.add<any>(customer.userGroupUserInsert, model).subscribe(res => {
+                this.toasterService.pop('success', 'Success', res.message);
+                this.modalService.dismissAll(); //  Close Model
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
+        }
+    }
+
+    //#endregion Save Users Into UserGroup
 }

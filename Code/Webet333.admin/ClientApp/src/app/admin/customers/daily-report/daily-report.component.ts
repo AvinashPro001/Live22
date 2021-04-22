@@ -1,9 +1,7 @@
 import { formatDate } from "@angular/common";
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterService } from 'angular2-toaster';
-import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
 import { customer, ErrorMessages } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
@@ -25,7 +23,9 @@ export class DailyReportComponent implements OnInit {
     Winloss: any;
     Bonus: any;
     UniqueUser: any;
+    UniqueUserWithdrawal: any;
     DepositCount: any;
+    WithdrawalCount: any;
     DepositPromotion: any;
     NewUser: any;
     OldUser: any;
@@ -44,8 +44,6 @@ export class DailyReportComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private confirmationDialogService: ConfirmationDialogService,
-        private modalService: NgbModal,
         private commonService: CommonService) { }
 
     async ngOnInit() {
@@ -97,8 +95,16 @@ export class DailyReportComponent implements OnInit {
             toDate: todate === null ? (document.getElementById("txt_todatetime") as HTMLInputElement).value : todate
         };
 
-        this.fromdate = formatDate(new Date(data.fromDate), 'dd/MM/yyyy', 'en-US');
-        this.todate = data.toDate;
+        let _fromdate = formatDate(new Date(data.fromDate), 'dd/MM/yyyy', 'en-US');
+        let _todate = formatDate(new Date(data.toDate), 'dd/MM/yyyy', 'en-US');
+        if (_fromdate != _todate) {
+            this.fromdate = formatDate(new Date(data.fromDate), 'dd', 'en-US');
+            this.todate = formatDate(new Date(data.toDate), 'dd/MM/yyyy', 'en-US');
+        }
+        else {
+            this.fromdate = formatDate(new Date(data.fromDate), 'dd/MM/yyyy', 'en-US');
+            this.todate = null;
+        }
 
         this.setDatePicker(new Date(data.fromDate), new Date(data.toDate));
 
@@ -116,7 +122,9 @@ export class DailyReportComponent implements OnInit {
                         this.Winloss = el.Winloss,
                         this.Bonus = el.Bonus,
                         this.UniqueUser = el.UniqueUser,
+                        this.UniqueUserWithdrawal = el.UniqueUserWithdrawal,
                         this.DepositCount = el.DepositCount,
+                        this.WithdrawalCount = el.WithdrawalCount,
                         this.DepositPromotion = el.DepositPromotion,
                         this.NewUser = el.NewUser,
                         this.OldUser = el.OldUser,
@@ -134,7 +142,7 @@ export class DailyReportComponent implements OnInit {
         }
     }
 
-    //#endregion
+    //#endregion Filter Data
 
     //#region Check Permission
 
@@ -144,12 +152,12 @@ export class DailyReportComponent implements OnInit {
             if (usersPermissions.permissionsList[3].submenu[16].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -161,12 +169,12 @@ export class DailyReportComponent implements OnInit {
             if (usersPermissions.permissionsList[3].submenu[16].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -178,12 +186,12 @@ export class DailyReportComponent implements OnInit {
             if (usersPermissions.permissionsList[3].submenu[16].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

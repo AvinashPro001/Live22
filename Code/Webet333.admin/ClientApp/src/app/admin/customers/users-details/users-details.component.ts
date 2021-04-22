@@ -1,15 +1,12 @@
-import { Component, OnInit, TemplateRef, ViewChild, Injectable } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, Injectable, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterService } from 'angular2-toaster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DatePipe } from '@angular/common';
-import { account, customer, gameBalance, VIPSetting, ErrorMessages, GameRegister } from '../../../../environments/environment';
-import { AdminService } from '../../admin.service';
+import { account, customer, gameBalance, GameRegister, VIPSetting } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
-import { debug } from 'util';
-import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { now } from 'core-js/fn/date';
-import { Router } from '@angular/router';
+import { AdminService } from '../../admin.service';
 
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
@@ -243,8 +240,7 @@ export class UsersDetailsComponent implements OnInit {
         private ngbCalendar: NgbCalendar,
         private dateAdapter: NgbDateAdapter<string>,
         private router: Router,
-        private commonService: CommonService
-    ) { }
+        private commonService: CommonService) { }
     //#endregion
 
     //#region OnInit Method
@@ -2985,12 +2981,12 @@ export class UsersDetailsComponent implements OnInit {
             if (usersPermissions.permissionsList[0].submenu[2].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -3004,12 +3000,12 @@ export class UsersDetailsComponent implements OnInit {
             if (usersPermissions.permissionsList[0].submenu[2].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -3023,12 +3019,12 @@ export class UsersDetailsComponent implements OnInit {
             if (usersPermissions.permissionsList[0].submenu[2].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

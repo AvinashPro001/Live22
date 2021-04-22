@@ -6096,3 +6096,7 @@ iframe{
     width:50px;
     margin:-15px;
 }
+
+.chip-margin li {
+    text-align:center;
+}
