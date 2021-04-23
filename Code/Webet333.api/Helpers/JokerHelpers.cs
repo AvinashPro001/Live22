@@ -2,6 +2,7 @@
 using System;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
@@ -41,6 +42,7 @@ namespace Webet333.api.Helpers
 
         internal static async Task<JokerRegisterResponse> JokerRegister(string Username)
         {
+            Username = Regex.Replace(Username, @"[^0-9a-zA-Z]+", "");
             DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
             var perameter = $"Method={GameConst.Joker.EnsureUserAccount}&Timestamp={temp}&Username={Username}";

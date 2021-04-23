@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using Webet333.api.Controllers.Base;
@@ -48,7 +49,10 @@ namespace Webet333.api.Controllers
             var Role = GetUserRole(User);
 
             if (Role == RoleConst.Users)
+            {
+                Console.WriteLine(GetUserId(User).ToString());
                 request.Id = GetUserId(User).ToString();
+            }
 
             if (Role == RoleConst.Admin)
                 if (string.IsNullOrEmpty(request.Id))
@@ -60,7 +64,7 @@ namespace Webet333.api.Controllers
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
                 username = user.Mega888GamePrefix + user.Username;
             }
-
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
             var apiResponse = await Mega888GameHelpers.CallRegisterAPI(username);
             var result = JsonConvert.DeserializeObject(apiResponse);
             string error = Convert.ToString(result.error);
