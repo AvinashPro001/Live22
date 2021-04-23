@@ -64,7 +64,7 @@ namespace Webet333.api.Controllers
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
                 username = user.Mega888GamePrefix + user.Username;
             }
-            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+            
             var apiResponse = await Mega888GameHelpers.CallRegisterAPI(username);
             var result = JsonConvert.DeserializeObject(apiResponse);
             string error = Convert.ToString(result.error);

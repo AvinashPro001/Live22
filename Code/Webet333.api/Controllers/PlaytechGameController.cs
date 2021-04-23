@@ -87,7 +87,7 @@ namespace Webet333.api.Controllers
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
 
-            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
+            username = Regex.Replace(username, "#", "");
 
             var result = await PlaytechGameHelpers.PlaytechRegister(username, password, _hostingEnvironment);
 

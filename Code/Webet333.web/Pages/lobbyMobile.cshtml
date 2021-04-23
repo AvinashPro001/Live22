@@ -83,7 +83,7 @@
             var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
             let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
             var usernamePrifix = globalParameters.data.playtechGamePrefix
-            var username = (usernamePrifix + res.data.username).toUpperCase();
+            var username = (usernamePrifix + res.data.username.replace("#", "")).toUpperCase();
             var password = dec(localStorage.getItem('currentUserData'));
             var mobiledomain = "ld176988.com";
             var systemidvar = "424";
