@@ -5,6 +5,10 @@ $(document).ready(function () {
     Mega888UserName();
     if (window.location.href.includes("Information/Download") || window.location.href.includes("Information/Download"))
         GameAppBarcode();
+
+
+    var str = "Hello^# `~!@#$%^&*()-_=+\|]}[{';:,./<>?World/";
+    str.replace(/[^0-9a-zA-Z]+/g, ""))
 });
 
 //#endregion Onload
@@ -38,7 +42,7 @@ async function authorize() {
             globalParameters = gamePrefix;
         }
 
-        var usernamePrifix = globalParameters.data.jokerGamePrefix + res.data.username;
+        var usernamePrifix = globalParameters.data.jokerGamePrefix + res.data.username.replace(/[^0-9a-zA-Z]+/g, ""));
 
         if ($('#M8Download').prop('id') !== '') {
             document.getElementById('JokeruserName').innerText = jokerConstParameterValue.AppID + '.' + usernamePrifix;

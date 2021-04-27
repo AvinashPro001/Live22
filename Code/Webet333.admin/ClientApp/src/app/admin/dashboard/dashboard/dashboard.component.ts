@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../admin.service';
-import { account, ErrorMessages } from '../../../../environments/environment';
 import { Router } from '@angular/router';
-import { ToasterService, ToasterConfig } from 'angular2-toaster';
-import { checkAndUpdateBinding } from '@angular/core/src/view/util';
-import { error } from '@angular/compiler/src/util';
+import { ToasterService } from 'angular2-toaster';
+import { account } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
+
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss']
 })
+
 export class DashboardComponent implements OnInit {
     totalCustomer: any;
     activeCustomer: any;
@@ -35,7 +36,7 @@ export class DashboardComponent implements OnInit {
     //INT: any;
     //FBA: any;
     currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    constructor(private adminService: AdminService, private toasterService: ToasterService, private router: Router) {
+    constructor(private adminService: AdminService, private toasterService: ToasterService, private router: Router, private commonService: CommonService) {
     }
 
     async ngOnInit() {
@@ -147,12 +148,12 @@ export class DashboardComponent implements OnInit {
             if (usersPermissions.permissionsList[0].submenu[0].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 //this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             //this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -164,12 +165,12 @@ export class DashboardComponent implements OnInit {
             if (usersPermissions.permissionsList[0].submenu[0].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 //this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             //this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -181,12 +182,12 @@ export class DashboardComponent implements OnInit {
             if (usersPermissions.permissionsList[0].submenu[0].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 //this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             //this.router.navigate(['admin/dashboard']);
             return false;
         }

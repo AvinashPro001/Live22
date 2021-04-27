@@ -124,13 +124,13 @@ var AnnouncementAddComponent = /** @class */ (function () {
                         return [2 /*return*/, true];
                     }
                     else {
-                        this.toasterService.pop('error', 'Error', environment_1.ErrorMessages.unAuthorized);
+                        this.toasterService.pop('error', 'Error', environment_1.this.commonService.errorMessage.unAuthorized);
                         this.router.navigate(['admin/dashboard']);
                         return [2 /*return*/, false];
                     }
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', environment_1.ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', environment_1.this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return [2 /*return*/, false];
                 }
@@ -148,13 +148,13 @@ var AnnouncementAddComponent = /** @class */ (function () {
                         return [2 /*return*/, true];
                     }
                     else {
-                        this.toasterService.pop('error', 'Error', environment_1.ErrorMessages.unAuthorized);
+                        this.toasterService.pop('error', 'Error', environment_1.this.commonService.errorMessage.unAuthorized);
                         this.router.navigate(['admin/dashboard']);
                         return [2 /*return*/, false];
                     }
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', environment_1.ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', environment_1.this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return [2 /*return*/, false];
                 }
@@ -172,13 +172,13 @@ var AnnouncementAddComponent = /** @class */ (function () {
                         return [2 /*return*/, true];
                     }
                     else {
-                        this.toasterService.pop('error', 'Error', environment_1.ErrorMessages.unAuthorized);
+                        this.toasterService.pop('error', 'Error', environment_1.this.commonService.errorMessage.unAuthorized);
                         this.router.navigate(['admin/dashboard']);
                         return [2 /*return*/, false];
                     }
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', environment_1.ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', environment_1.this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return [2 /*return*/, false];
                 }
