@@ -175,11 +175,13 @@ export class PromotionEditComponent implements OnInit {
         //winoverCheck: boolean;
 
         if (this.turnoverValue == 0) {
-            this.turnoverCheck = false;
+            //this.turnoverCheck = false;
+            this.turnoverCheck = true;
             this.winoverCheck = true;
             this.selectedWinTurnValue = this.data.winturn + "X";
             this.selectOverCategory = 'Winover';
-            this.displayTurnoverCategory = false;
+            //this.displayTurnoverCategory = false;
+            this.displayTurnoverCategory = true;
             this.displayWinoverCategory = true;
         }
 

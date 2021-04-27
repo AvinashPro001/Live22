@@ -1033,21 +1033,81 @@ async function WithdrawHistory() {
 //#endregion
 
 //#region DepositHistory
-async function DepositHistory() {
+//async function DepositHistory(pageNo=1) {
+
+//    var contentToRemove = document.querySelectorAll("#navDeposit");
+//    $(contentToRemove).remove();
+
+//    var model = {};
+//    var res = await PostMethod(apiEndPoints.depositHistory, model);
+//    $("#tbl_depositHistory").find("tr:gt(0)").remove();
+//    var RowCount = 0;
+//    var table = document.getElementById("tbl_depositHistory");
+//    var result = res.data.result;
+//    debugger
+//    for (i = 0; i < result.length; i++) {
+//        var row = table.insertRow(RowCount + 1);
+//        $("#tbl_depositHistory").addClass('white-bg');
+//        $("#tbl_depositHistory td").addClass('half-width text-center white-bg');
+//        row.insertCell(0).innerHTML = i + 1;
+//        row.insertCell(1).innerHTML = result[i].orderId;
+//        row.insertCell(2).innerHTML = result[i].walletName;
+//        row.insertCell(3).innerHTML = result[i].bankName;
+//        row.insertCell(4).innerHTML = result[i].depositMethod;
+//        row.insertCell(5).innerHTML = "+" + parseFloat(result[i].amount).toFixed(2);
+//        row.insertCell(6).innerHTML = result[i].verified;
+//        RowCount++;
+//    }
+//    var pageNum;
+//    $('#tbl_depositHistory').after('<div id="navDeposit"  class="pagination"></div>');
+//    var rowsShown = 11;
+//    var rowsTotal = $('#tbl_depositHistory thead tr').length;
+//    var numPages = rowsTotal / rowsShown;
+//    for (i = 0; i < numPages; i++) {
+//        pageNum = i + 1;
+//        $('#navDeposit').append('<a class="button" onclick="DepositHistory(\'' + pageNum + '\')" href="#History" rel="' + i + '">' + pageNum + '</a> ');
+//    }
+//    $('#tbl_depositHistory thead tr').hide();
+//    $('#tbl_depositHistory thead tr').slice(0, rowsShown).show();
+//    $('#navDeposit a:first').addClass('active');
+//    $('#navDeposit a').bind('click', function () {
+//        $('#navDeposit a').removeClass('active');
+//        $(this).addClass('active');
+//        var currPage = $(this).attr('rel');
+//        var startItem = currPage * rowsShown;
+//        var endItem = startItem + rowsShown;
+//        $('#tbl_depositHistory thead tr:gt(0)').css('opacity', '0.0').hide().slice(startItem, endItem).
+//            css('display', 'table-row').animate({ opacity: 1 }, 300);
+//    });
+//    if (pageNum > 10)
+//        $("#navDeposit").addClass("expand");
+//}
+
+
+
+
+
+async function DepositHistory(pageNo = 1) {
+
     var contentToRemove = document.querySelectorAll("#navDeposit");
     $(contentToRemove).remove();
 
-    var model = {};
+    var model = {
+        pageNo: pageNo,
+        pageSize: 10
+    };
     var res = await PostMethod(apiEndPoints.depositHistory, model);
     $("#tbl_depositHistory").find("tr:gt(0)").remove();
     var RowCount = 0;
     var table = document.getElementById("tbl_depositHistory");
-    var result = res.data;
+    var result = res.data.result;
+
     for (i = 0; i < result.length; i++) {
         var row = table.insertRow(RowCount + 1);
         $("#tbl_depositHistory").addClass('white-bg');
         $("#tbl_depositHistory td").addClass('half-width text-center white-bg');
-        row.insertCell(0).innerHTML = i + 1;
+
+        row.insertCell(0).innerHTML = ((pageNo - 1) * 10) + (i + 1);
         row.insertCell(1).innerHTML = result[i].orderId;
         row.insertCell(2).innerHTML = result[i].walletName;
         row.insertCell(3).innerHTML = result[i].bankName;
@@ -1056,30 +1116,20 @@ async function DepositHistory() {
         row.insertCell(6).innerHTML = result[i].verified;
         RowCount++;
     }
-    var pageNum;
     $('#tbl_depositHistory').after('<div id="navDeposit"  class="pagination"></div>');
-    var rowsShown = 11;
-    var rowsTotal = $('#tbl_depositHistory thead tr').length;
-    var numPages = rowsTotal / rowsShown;
-    for (i = 0; i < numPages; i++) {
-        pageNum = i + 1;
-        $('#navDeposit').append('<a class="button" href="#History" rel="' + i + '">' + pageNum + '</a> ');
+    for (i = 0; i < res.data.totalPages - 1; i++) {
+        if (i + 1 == pageNo)
+            $('#navDeposit').append('<a class="button active" onclick="DepositHistory(\'' + (i + 1) + '\')" rel="' + (i + 1) + '">' + (i + 1) + '</a> ');
+        else
+            $('#navDeposit').append('<a class="button" onclick="DepositHistory(\'' + (i + 1) + '\')" rel="' + (i + 1) + '">' + (i + 1) + '</a> ');
     }
-    $('#tbl_depositHistory thead tr').hide();
-    $('#tbl_depositHistory thead tr').slice(0, rowsShown).show();
-    $('#navDeposit a:first').addClass('active');
-    $('#navDeposit a').bind('click', function () {
-        $('#navDeposit a').removeClass('active');
-        $(this).addClass('active');
-        var currPage = $(this).attr('rel');
-        var startItem = currPage * rowsShown;
-        var endItem = startItem + rowsShown;
-        $('#tbl_depositHistory thead tr:gt(0)').css('opacity', '0.0').hide().slice(startItem, endItem).
-            css('display', 'table-row').animate({ opacity: 1 }, 300);
-    });
-    if (pageNum > 10)
+    if (res.data.totalPages > 10)
         $("#navDeposit").addClass("expand");
+
 }
+
+
+
 //#endregion
 
 var User_BankName;
