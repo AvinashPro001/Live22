@@ -834,10 +834,51 @@ async function SelectWallet() {
 }
 //#endregion SelectWallet
 
+function hideBalanceShowLoading(LoadingId, BalanceId) {
+    $('#' + BalanceId).html('');
+    $('#' + LoadingId).css('display', 'block');
+}
+
+async function RefreshFromWalletBalance(GameName) {
+
+    var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
+    var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
+
+    if (userDetails == null) {
+        var res = await GetMethod(apiEndPoints.getProfile);
+        sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
+        userDetails = res;
+    }
+
+    if (globalParameter == null) {
+        var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
+        sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
+        globalParameter = gamePrefix;
+    }
+
+    switch (GameName) {
+        case "918Kiss Wallet": hideBalanceShowLoading('KissRefershImg', 'lbl_918kissWalletbalanceDeposite'); await Kiss918WalletBalance(userDetails.data.username918); break;
+        case "AG Wallet": hideBalanceShowLoading('AGRefershImg', 'lbl_AGWalletbalanceDeposite'); await AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username); break;
+        case "PlayTech Wallet": hideBalanceShowLoading('PlaytechRefershImg', 'lbl_PlaytechWalletbalanceDeposite'); await PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username); break;
+        case "M8 Wallet": hideBalanceShowLoading('M8RefershImg', 'lbl_M8WalletbalanceDeposite'); await M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username); break;
+        case "MaxBet Wallet": hideBalanceShowLoading('MaxbetRefershImg', 'lbl_MaxbetWalletbalanceDeposite'); await MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username); break;
+        case "Mega888 Wallet": hideBalanceShowLoading('MegaRefershImg', 'lbl_Mega888WalletbalanceDeposite'); await Mega888WalletBalance(userDetails.data.loginid); break;
+        case "Joker Wallet": hideBalanceShowLoading('JokerRefershImg', 'lbl_JokerWalletbalanceDeposite'); await JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username); break;
+        case "DG Wallet": hideBalanceShowLoading('DgRefershImg', 'lbl_DGWalletbalanceDeposite'); await DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username); break;
+        case "Sexy Wallet": hideBalanceShowLoading('SexyRefershImg', 'lbl_SexyWalletbalanceDeposite'); await SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username); break;
+        case "SA Wallet": hideBalanceShowLoading('SARefershImg', 'lbl_SAWalletbalanceDeposite'); await SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username); break;
+        case "Pussy888 Wallet": hideBalanceShowLoading('Pussy888RefershImg', 'lbl_Pussy888WalletbalanceDeposite'); await Pussy888WalletBalance(userDetails.data.usernamePussy888); break;
+        case "AllBet Wallet": hideBalanceShowLoading('AllBetRefershImg', 'lbl_AllBetWalletbalanceDeposite'); await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId); break;
+        case "WM Wallet": hideBalanceShowLoading('WMRefershImg', 'lbl_WMWalletbalanceDeposite'); await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId); break;
+        case "Pragmatic Wallet": hideBalanceShowLoading('PragmaticRefershImg', 'lbl_PragmaticWalletbalanceDeposite'); await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId); break;
+    }
+}
+
 //#region TransferValidation
 async function select() {
-    SelectWallet();
     var fromSel = document.getElementById("ddl_transferFromWallet");
+    var fromSelText = $('#ddl_transferFromWallet option:selected').text();
+    RefreshFromWalletBalance(fromSelText);
     $('#ddl_transferToWallet').html('');
     if (fromSel.value !== null) {
         var res = await GetMethod(apiEndPoints.depositDdl);
@@ -869,8 +910,9 @@ async function select() {
 
 async function TransferValidation() {
     LoaderShow();
-    await WalletBalanceMaxTransfer();
     var fromWallet = $('#ddl_transferFromWallet').val();
+    var fromSelText = $('#ddl_transferFromWallet option:selected').text();
+    await RefreshFromWalletBalance(fromSelText);
     if (fromWallet !== null && fromWallet !== "") {
         var modelBalance = {};
         var resBalance = await PostMethod(apiEndPoints.walletBalance, modelBalance);

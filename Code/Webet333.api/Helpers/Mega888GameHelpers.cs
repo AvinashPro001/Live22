@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
@@ -28,6 +29,8 @@ namespace Webet333.api.Helpers
 
         internal static async Task<dynamic> CallRegisterAPI(string username)
         {
+            username = Regex.Replace(username, "#", "");
+
             var random = Guid.NewGuid().ToString();
 
             var url = $"{GameConst.Mega888.BaseUrl}{GameConst.Mega888.Register}"
