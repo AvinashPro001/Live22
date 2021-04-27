@@ -42,6 +42,7 @@ namespace Webet333.models.Mapping.Promotions
                 IsDG = x.IsDG,
                 IsSA = x.IsSA,
                 IsPlaytech = x.IsPlaytech,
+                IsPlaytechSlot = x.IsPlaytechSlot,
                 IsPragmatic = x.IsPragmatic,
                 IsSexyBaccarat = x.IsSexyBaccarat,
                 IsWM = x.IsWM,

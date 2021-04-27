@@ -222,6 +222,7 @@ export class PromotionEditComponent implements OnInit {
             isDG: (document.getElementById("dg_id") as HTMLInputElement).checked,
             isSA: (document.getElementById("sa_id") as HTMLInputElement).checked,
             isPlaytech: (document.getElementById("playtech_id") as HTMLInputElement).checked,
+            isPlaytechSlot: (document.getElementById("playtechSlots_id") as HTMLInputElement).checked,
             isPragmatic: (document.getElementById("pragmatic_id") as HTMLInputElement).checked,
             isSexyBaccarat: (document.getElementById("sexybaccarat_id") as HTMLInputElement).checked,
             isWM: (document.getElementById("wm_id") as HTMLInputElement).checked,
