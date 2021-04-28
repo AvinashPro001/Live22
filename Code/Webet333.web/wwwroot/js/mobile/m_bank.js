@@ -1045,7 +1045,7 @@ async function CheckSupportGame() {
         document.getElementById("m8allin").disabled = !res.data[0].IsM8 ? true : false;
         document.getElementById("maxbetallin").disabled = !res.data[0].IsMaxbet ? true : false;
         document.getElementById("mega888allin").disabled = !res.data[0].IsMega888 ? true : false;
-        document.getElementById("playtechallin").disabled = !res.data[0].IsPlaytech ? true : false;
+        document.getElementById("playtechallin").disabled = !res.data[0].IsPlaytech && !res.data[0].IsPlaytechSlot ? true : false;
         document.getElementById("pragmaticallin").disabled = !res.data[0].IsPragmatic ? true : false;
         document.getElementById("pussy888allin").disabled = !res.data[0].IsPussy888 ? true : false;
         document.getElementById("saallin").disabled = !res.data[0].IsSA ? true : false;
