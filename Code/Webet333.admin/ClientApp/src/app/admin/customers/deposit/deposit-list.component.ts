@@ -160,36 +160,36 @@ export class DepositListComponent implements OnInit {
                 toDate: null
             }
             this.adminService.add<any>(customer.depositList, data).subscribe(async res => {
-                this.depositCount = res.data.length;
+                this.depositCount = res.data.result.length;
                 if (res.data.result.length > 0) {
                     this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
                     if (this.AutoRefersh == true || this.AutoRefersh == "true") {
                         this.playAudio();
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
