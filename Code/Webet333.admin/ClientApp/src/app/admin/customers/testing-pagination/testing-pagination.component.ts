@@ -27,6 +27,7 @@ export class TestingPaginationComponent implements OnInit {
                 Company: 'Company_' + i,
             });
         }
+        debugger
         this.rows = [...this.rows];
 
         this.totalRecord = 100;

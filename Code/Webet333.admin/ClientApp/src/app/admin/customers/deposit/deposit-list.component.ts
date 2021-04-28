@@ -36,6 +36,9 @@ export class DepositListComponent implements OnInit {
     rowsTacking = [];
     columnsTacking = [];
 
+    totalRowCount = 0;
+    offset = 0;
+
     warningImagePath = "../../../../assets/img/warning.png";
     successImagePath = "../../../../assets/img/success.png";
 
@@ -158,7 +161,7 @@ export class DepositListComponent implements OnInit {
             }
             this.adminService.add<any>(customer.depositList, data).subscribe(async res => {
                 this.depositCount = res.data.length;
-                if (res.data.length > 0) {
+                if (res.data.result.length > 0) {
                     this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
                     if (this.AutoRefersh == true || this.AutoRefersh == "true") {
                         this.playAudio();
@@ -331,7 +334,7 @@ export class DepositListComponent implements OnInit {
     //#endregion
 
     //#region setPageData
-
+    pageNumber = 0;
     setPageData(selectedList, search, fromdate, todate) {
         //this.loadingIndicator = true;
         //this.rows = [];
@@ -339,13 +342,19 @@ export class DepositListComponent implements OnInit {
             status: selectedList,
             keyword: search,
             fromDate: fromdate,
-            toDate: todate
+            toDate: todate,
+            pageNo: this.pageNumber,
+            pageSize: 7
         }
         this.adminService.add<any>(customer.depositList, data).subscribe(res => {
+
+            this.offset = res.data.offset;
+            this.totalRowCount = res.data.total;
+
             this.rows = [];
-            let i = 0;
-            this.depositData = res.data;
-            res.data.forEach(el => {
+            let i = ((this.pageNumber + 1) * 7) - 7;
+            this.depositData = res.data.result;
+            res.data.result.forEach(el => {
                 this.rows.push({
                     No: ++i,
                     UserName: el.username,
@@ -516,6 +525,10 @@ export class DepositListComponent implements OnInit {
 
     //#region Search
 
+
+    searchHandlerEvent = false;
+    searchHandlerByDateEvent = false;
+
     searchHandler(event) {
         let data;
         if (event.target.value) {
@@ -523,13 +536,16 @@ export class DepositListComponent implements OnInit {
                 SearchParam: event.target.value,
             }
             this.searchString = event.target.value;
+            this.searchHandlerEvent = true;
             this.setPageData(this.selectedList.verified, data.SearchParam, null, null);
         } else {
             data = {
                 SearchParam: ""
             }
+
             this.setPageData(this.selectedList.verified, data.SearchParam, null, null)
         }
+
     }
 
     searchHandlerByDate(startingDate = null, endingDate = null) {
@@ -542,7 +558,10 @@ export class DepositListComponent implements OnInit {
         if (fromdate === "") fromdate = todate;
         if (fromdate === "" && todate === "") this.toasterService.pop('error', 'Error', "Please select Date.");
         else if ((fromdate !== undefined && todate !== null) || (todate !== null && fromdate !== null)) this.setPageData(this.selectedList.verified, "", fromdate, todate);
-        else this.setPageData(this.selectedList.verified, "", null, null)
+        else {
+            this.setPageData(this.selectedList.verified, "", null, null)
+            this.searchHandlerEvent = true;
+        }
     }
 
     //#endregion
@@ -821,4 +840,19 @@ export class DepositListComponent implements OnInit {
     }
 
     //#endregion Check Permission
+
+
+    setPage(pageInfo) {
+        this.pageNumber = pageInfo.offset;
+
+        if (this.searchHandlerByDateEvent && !this.searchHandlerEvent)
+            this.searchHandlerByDate();
+        else if (!this.searchHandlerByDateEvent && this.searchHandlerEvent) {
+            this.setPageData(this.selectedList.verified, (document.getElementById("searchId") as HTMLInputElement).value, null, null);
+        }
+        else
+            this.setPageData(this.selectedList.verified, null, null, null);
+
+
+    }
 }

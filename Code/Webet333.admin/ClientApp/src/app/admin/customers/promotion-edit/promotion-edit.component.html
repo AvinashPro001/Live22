@@ -257,16 +257,16 @@
                     <br /><br />
                     <div class="col-11 offset-1">
                         <form name="demo" style="display:flex;">
-                            <label class="container col-1 remover-margin ">
+                            <label class="container col-2 remover-margin ">
                                 Turnover
                                 <input type="radio" name="radio" [checked]="turnoverCheck" (change)="UpdateOverSetting('Turnover',$event.target.checked)">
                                 <span class="checkmarkRadio"></span>
                             </label>
-                            <label class="container col-1 remover-margin ">
+                            <!--<label class="container col-2 remover-margin ">
                                 Winover
                                 <input type="radio" name="radio" [checked]="winoverCheck" (change)="UpdateOverSetting('Winover',$event.target.checked)">
                                 <span class="checkmarkRadio"></span>
-                            </label>
+                            </label>-->
                         </form>
                         <br /><br />
                         <div class="input-group col-2">
@@ -313,9 +313,7 @@
                             <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="m8" [checked]="data.isM8" /> &nbsp; &nbsp;<label> M8 </label>
                             </div>
-                        </div>
 
-                        <div class="row col-md-12" id="winover_CheckBoxs" [style.display]="displayWinoverCategory ? 'flex' : 'none'">
                             <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="918Kiss_id" [checked]="data.is918Kiss" /> &nbsp; &nbsp;<label> 918Kiss </label>
                             </div>
@@ -328,7 +326,23 @@
                             <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="pussy888_id" [checked]="data.isPussy888" /> &nbsp; &nbsp;<label> Pussy888 </label>
                             </div>
+
                         </div>
+
+                        <!--<div class="row col-md-12" id="winover_CheckBoxs" [style.display]="displayWinoverCategory ? 'flex' : 'none'">
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="918Kiss_id" [checked]="data.is918Kiss" /> &nbsp; &nbsp;<label> 918Kiss </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="joker_id" [checked]="data.isJoker" /> &nbsp; &nbsp;<label> Joker </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="mega888_id" [checked]="data.isMega888" /> &nbsp; &nbsp;<label> Mega888 </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="pussy888_id" [checked]="data.isPussy888" /> &nbsp; &nbsp;<label> Pussy888 </label>
+                            </div>
+                        </div>-->
 
                         <br /><br />
                         <h3>Promotion Category</h3>
