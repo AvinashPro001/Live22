@@ -126,7 +126,7 @@ function TransferPageWallets() {
 }
 
 async function RestoreBalance() {
-    LoaderShow();
+    //LoaderShow();
     try {
         $('.values').html('');
         $('.img_load').css('display', 'block');
@@ -183,11 +183,11 @@ async function RestoreBalance() {
     catch (ex) {
     }
     RefershBalance();
-    LoaderHide();
+    //LoaderHide();
 }
 
 async function RestoreBalance() {
-    LoaderShow();
+    //LoaderShow();
     try {
         $('.values').html('');
         $('.img_load').css('display', 'block');
@@ -247,7 +247,7 @@ async function RestoreBalance() {
 
     }
     WalletBalance();
-    LoaderHide();
+    //LoaderHide();
 }
 
 function numberWithCommas(x) {

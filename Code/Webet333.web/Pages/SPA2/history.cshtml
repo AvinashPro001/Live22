@@ -58,7 +58,7 @@
                     <div style="text-align:center;">
                         <img src="~/images/loading.gif" id="depositRefreshImage" style="display:none" />
                     </div>
-                    <div class="container full-height listing extra-bottom-padding" id="depositHistory" onscroll="testScroll(event)">
+                    <div class="container full-height listing extra-bottom-padding" id="depositHistory" onscroll="DepositScroll(event)">
 
                     </div>
                 </div>
@@ -233,7 +233,7 @@
     }, 200);
 
 
-    async function testScroll() {
+    async function DepositScroll() {
 
         if ((NumberOfLine % 5) == 0) {
             
