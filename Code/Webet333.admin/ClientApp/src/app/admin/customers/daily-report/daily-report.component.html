@@ -134,6 +134,10 @@
                                                     <td style="text-align:center">{{val.Count}}</td>
                                                 </tr>
                                             </ng-container>
+                                            <tr>
+                                                <td>Total Count</td>
+                                                <td style="text-align:center">{{totalDepositCount}}</td>
+                                            </tr>
                                         </ng-container>
                                         <ng-container *ngIf="depositPromotionRows  == null || depositPromotionRows == 'null'">
                                             <tr>
@@ -155,6 +159,10 @@
                                     <tr>
                                         <td>Total Old User:</td>
                                         <td style="text-align:center">{{OldUser}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Count:</td>
+                                        <td style="text-align:center">{{totalUserCount}}</td>
                                     </tr>
                                 </table>
                             </div>
