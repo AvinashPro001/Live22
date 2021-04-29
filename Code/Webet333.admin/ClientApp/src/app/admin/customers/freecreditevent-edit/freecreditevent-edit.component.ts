@@ -293,12 +293,12 @@ export class FreecrediteventEditComponent implements OnInit {
     DownloadExcel() {
         let freeCreditEventName = this.freeCreditEventName;
 
-        let data = {
+        let model = {
             json: this.data,
             fileName: freeCreditEventName + "-Free-Credit-Event"
         }
 
-        this.adminService.add<any>(customer.DownlaodExcel, data).subscribe(res => {
+        this.adminService.add<any>(customer.DownlaodExcel, model).subscribe(res => {
             window.self.location = res.data.path;
         }, error => {
             this.loadingIndicator = false;

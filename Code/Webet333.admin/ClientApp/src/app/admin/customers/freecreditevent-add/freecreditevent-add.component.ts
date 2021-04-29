@@ -334,12 +334,12 @@ export class FreecrediteventAddComponent implements OnInit {
             let freeCreditEventName = (document.getElementById("txt_freecrediteventname") as HTMLInputElement).value;
             this.data = this.customerData.map(({ userId, name, userName, phoneNumber, winLossAmount, freeCreditAmount }) => ({ userId, name, userName, phoneNumber, winLossAmount, freeCreditAmount }));
 
-            let data = {
+            let model = {
                 json: this.data,
                 fileName: freeCreditEventName + "-Free-Credit-Event"
             }
 
-            this.adminService.add<any>(customer.DownlaodExcel, data).subscribe(res => {
+            this.adminService.add<any>(customer.DownlaodExcel, model).subscribe(res => {
                 window.self.location = res.data.path;
             }, error => {
                 this.loadingIndicator = false;
