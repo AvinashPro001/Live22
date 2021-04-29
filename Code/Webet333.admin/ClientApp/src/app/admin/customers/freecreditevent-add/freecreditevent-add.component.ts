@@ -31,7 +31,7 @@ export class FreecrediteventAddComponent implements OnInit {
     completedUsers: any = 0;
     totalUsers: any = 0;
     freecreditterm: any;
-    totalRowForTerm: number = 6;
+    totalRowForTerm: number = 20;
     disabled: boolean = false;
     totalWinLossAmount: any = 0;
     totalFreeCredit: any = 0;

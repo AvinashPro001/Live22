@@ -66,49 +66,51 @@
             </p>
         </div>
         <div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <td>
-                            <div style="display: flex;">
-                                <label class="container">
-                                    <h5 style="font-weight: 600; font-size: 16px; text-align: center;">From</h5>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <div style="display: flex;">
-                                <label class="container">
-                                    <h5 style="font-weight: 600;font-size: 16px;text-align: center;">To</h5>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <div style="display: flex;">
-                                <label class="container">
-                                    <h5 style="font-weight: 600; font-size: 16px; text-align:center;">Free Credit</h5>
-                                </label>
-                            </div>
-                        </td>
-                    </tr>
-                </thead>
-
-                <tbody style="text-align:right">
-                    <ng-container *ngFor='let freeCreditEventTermsValue of freeCreditEventTerms; let i = index'>
+            <div class="scrollit">
+                <table class="table">
+                    <thead>
                         <tr>
                             <td>
-                                <input type="number" id="{{freeCreditEventTermsValue.termId}}" class="form-control col-md-3" value="{{freeCreditEventTermsValue.FromAmount}}" autocomplete="off" style="text-align: right;" [(ngModel)]="freeCreditEventTermsValue.FromAmount">
+                                <div style="display: flex;">
+                                    <label class="container">
+                                        <h5 style="font-weight: 600; font-size: 16px; text-align: center;">From</h5>
+                                    </label>
+                                </div>
                             </td>
                             <td>
-                                <input type="number" id="{{freeCreditEventTermsValue.termId}}" class="form-control col-md-3" value="{{freeCreditEventTermsValue.ToAmount}}" autocomplete="off" style="text-align: right;" [(ngModel)]="freeCreditEventTermsValue.ToAmount">
+                                <div style="display: flex;">
+                                    <label class="container">
+                                        <h5 style="font-weight: 600;font-size: 16px;text-align: center;">To</h5>
+                                    </label>
+                                </div>
                             </td>
                             <td>
-                                <input type="number" id="{{freeCreditEventTermsValue.termId}}" class="form-control col-md-3" value="{{freeCreditEventTermsValue.FreeCreditAmount}}" autocomplete="off" style="text-align: right;" [(ngModel)]="freeCreditEventTermsValue.FreeCreditAmount">
+                                <div style="display: flex;">
+                                    <label class="container">
+                                        <h5 style="font-weight: 600; font-size: 16px; text-align:center;">Free Credit</h5>
+                                    </label>
+                                </div>
                             </td>
                         </tr>
-                    </ng-container>
-                </tbody>
-            </table>
+                    </thead>
+
+                    <tbody style="text-align:right">
+                        <ng-container *ngFor='let freeCreditEventTermsValue of freeCreditEventTerms; let i = index'>
+                            <tr>
+                                <td>
+                                    <input type="number" id="{{freeCreditEventTermsValue.termId}}" class="form-control col-md-3" value="{{freeCreditEventTermsValue.FromAmount}}" autocomplete="off" style="text-align: right;" [(ngModel)]="freeCreditEventTermsValue.FromAmount">
+                                </td>
+                                <td>
+                                    <input type="number" id="{{freeCreditEventTermsValue.termId}}" class="form-control col-md-3" value="{{freeCreditEventTermsValue.ToAmount}}" autocomplete="off" style="text-align: right;" [(ngModel)]="freeCreditEventTermsValue.ToAmount">
+                                </td>
+                                <td>
+                                    <input type="number" id="{{freeCreditEventTermsValue.termId}}" class="form-control col-md-3" value="{{freeCreditEventTermsValue.FreeCreditAmount}}" autocomplete="off" style="text-align: right;" [(ngModel)]="freeCreditEventTermsValue.FreeCreditAmount">
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div>
             <button type="button" class="mb-1 btn btn-success" (click)="SetFreeCreditEventTerm()" style="margin-left: 23%;">Set</button>

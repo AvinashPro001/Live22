@@ -72,49 +72,51 @@
             </p>
         </div>
         <div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <td>
-                            <div style="display: flex;">
-                                <label class="container">
-                                    <h5 style="font-weight: 600; font-size: 16px; text-align: center;">From</h5>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <div style="display: flex;">
-                                <label class="container">
-                                    <h5 style="font-weight: 600;font-size: 16px;text-align: center;">To</h5>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <div style="display: flex;">
-                                <label class="container">
-                                    <h5 style="font-weight: 600; font-size: 16px; text-align:center;">Free Credit</h5>
-                                </label>
-                            </div>
-                        </td>
-                    </tr>
-                </thead>
-
-                <tbody style="text-align:right">
-                    <ng-container *ngFor='let freeCreditTermValue of freecreditterm ;let i = index'>
+            <div class="scrollit">
+                <table class="table">
+                    <thead>
                         <tr>
                             <td>
-                                <input type="number" id="txt_from_{{i}}" class="form-control col-md-3" placeholder="" value="{{freeCreditTermValue == null || freeCreditTermValue == undefined || freeCreditTermValue == NaN ? 0 : freeCreditTermValue.fromAmount}}" autocomplete="off" name="txt_from_{{i}}" style="text-align: right;" [(ngModel)]="freeCreditTermValue.fromAmount">
+                                <div style="display: flex;">
+                                    <label class="container">
+                                        <h5 style="font-weight: 600; font-size: 16px; text-align: center;">From</h5>
+                                    </label>
+                                </div>
                             </td>
                             <td>
-                                <input type="number" id="txt_to_{{i}}" class="form-control col-md-3" placeholder="" value="{{freeCreditTermValue == null || freeCreditTermValue == undefined || freeCreditTermValue == NaN ? 0 : freeCreditTermValue.toAmount}}" autocomplete="off" name="txt_to_{{i}}" style="text-align: right;" [(ngModel)]="freeCreditTermValue.toAmount">
+                                <div style="display: flex;">
+                                    <label class="container">
+                                        <h5 style="font-weight: 600;font-size: 16px;text-align: center;">To</h5>
+                                    </label>
+                                </div>
                             </td>
                             <td>
-                                <input type="number" id="txt_freecredit_{{i}}" class="form-control col-md-3" placeholder="" value="{{freeCreditTermValue == null || freeCreditTermValue == undefined || freeCreditTermValue == NaN ? 0 : freeCreditTermValue.freeCreditAmount}}" autocomplete="off" name="txt_freecredit_1" style="text-align: right;" [(ngModel)]="freeCreditTermValue.freeCreditAmount">
+                                <div style="display: flex;">
+                                    <label class="container">
+                                        <h5 style="font-weight: 600; font-size: 16px; text-align:center;">Free Credit</h5>
+                                    </label>
+                                </div>
                             </td>
                         </tr>
-                    </ng-container>
-                </tbody>
-            </table>
+                    </thead>
+
+                    <tbody style="text-align:right">
+                        <ng-container *ngFor='let freeCreditTermValue of freecreditterm ;let i = index'>
+                            <tr>
+                                <td>
+                                    <input type="number" id="txt_from_{{i}}" class="form-control col-md-3" placeholder="" value="{{freeCreditTermValue == null || freeCreditTermValue == undefined || freeCreditTermValue == NaN ? 0 : freeCreditTermValue.fromAmount}}" autocomplete="off" name="txt_from_{{i}}" style="text-align: right;" [(ngModel)]="freeCreditTermValue.fromAmount">
+                                </td>
+                                <td>
+                                    <input type="number" id="txt_to_{{i}}" class="form-control col-md-3" placeholder="" value="{{freeCreditTermValue == null || freeCreditTermValue == undefined || freeCreditTermValue == NaN ? 0 : freeCreditTermValue.toAmount}}" autocomplete="off" name="txt_to_{{i}}" style="text-align: right;" [(ngModel)]="freeCreditTermValue.toAmount">
+                                </td>
+                                <td>
+                                    <input type="number" id="txt_freecredit_{{i}}" class="form-control col-md-3" placeholder="" value="{{freeCreditTermValue == null || freeCreditTermValue == undefined || freeCreditTermValue == NaN ? 0 : freeCreditTermValue.freeCreditAmount}}" autocomplete="off" name="txt_freecredit_1" style="text-align: right;" [(ngModel)]="freeCreditTermValue.freeCreditAmount">
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div>
             <button type="button" class="mb-1 btn btn-success" (click)="SetFreeCreditEventTerm()" style="margin-left: 23%;">Set</button>

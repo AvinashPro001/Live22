@@ -9,3 +9,8 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+.scrollit {
+    overflow: scroll;
+    height: 500px;
+}
