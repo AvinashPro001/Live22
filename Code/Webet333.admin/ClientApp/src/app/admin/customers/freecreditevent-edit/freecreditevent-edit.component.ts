@@ -293,12 +293,6 @@ export class FreecrediteventEditComponent implements OnInit {
     DownloadExcel() {
         let freeCreditEventName = this.freeCreditEventName;
 
-        this.data.forEach(function (e) {
-            if (typeof e === "object") {
-                e["name"] = freeCreditEventName
-            }
-        });
-
         let data = {
             json: this.data,
             fileName: freeCreditEventName + "-Free-Credit-Event"
