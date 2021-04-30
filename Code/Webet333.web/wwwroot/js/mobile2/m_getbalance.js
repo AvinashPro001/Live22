@@ -3,7 +3,6 @@ $(document).ready(function () {
     if (GetLocalStorage('currentUser') !== null) {
         WalletBalance();
     }
-
 });
 //#endregion Onload
 
@@ -29,7 +28,7 @@ async function UserGameTurnover() {
         document.getElementById("PragmaticTurnover").innerHTML = parseFloat(turnover.data.response.pragmaticTurover).toFixed(2);
         document.getElementById("spinrefesh").classList.remove("fa-spin");
     }
-    catch(e) {
+    catch (e) {
         document.getElementById("spinrefesh").classList.remove("fa-spin");
         document.getElementById("TotalTurnover").innerHTML = "0.0";
         document.getElementById("jokerTurnover").innerHTML = "0.0";
@@ -125,74 +124,93 @@ function TransferPageWallets() {
     document.getElementById("PragmaticWallet").innerHTML = PragmaticWallet;
 }
 
-async function RestoreBalance() {
-    //LoaderShow();
-    try {
-        $('.values').html('');
-        $('.img_load').css('display', 'block');
+//async function RestoreBalance() {
+//    //LoaderShow();
+//    try {
+//        //$('.values').html('');
+//        //$('.img_load').css('display', 'block');
 
-        var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-        var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
+//        var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
+//        var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
 
-        if (userDetails == null) {
-            var res = await GetMethod(apiEndPoints.getProfile);
-            sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
-            userDetails = res;
-        }
+//        if (userDetails == null) {
+//            var res = await GetMethod(apiEndPoints.getProfile);
+//            sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
+//            userDetails = res;
+//        }
 
-        if (globalParameter == null) {
-            var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
-            sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
-            globalParameter = gamePrefix;
-        }
-        //#region Get user walletId
-        await MainWalletBalance();
-        await Kiss918WalletBalance(userDetails.data.username918);
-        await AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username);
-        await PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username);
-        await Mega888WalletBalance(userDetails.data.loginid);
-        await M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username);
-        await MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username);
-        await JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username);
-        await DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username);
-        await SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username);
-        await SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username);
-        await Pussy888WalletBalance(userDetails.data.usernamePussy888);
-        await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
-        await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
-        await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
-        let restoreModel = {
-            kiss918wallet: _918KissWallet == "N/A" ? "0.0" : _918KissWallet,
-            maxbetwallet: MaxBetWallet == "N/A" ? "0.0" : MaxBetWallet,
-            jokerwallet: JokerWallet == "N/A" ? "0.0" : JokerWallet,
-            agwallet: AGWallet == "N/A" ? "0.0" : AGWallet,
-            m8wallet: M8Wallet == "N/A" ? "0.0" : M8Wallet,
-            playtechwallet: PlayTechWallet == "N/A" ? "0.0" : PlayTechWallet,
-            mega888wallet: Mega888Wallet == "N/A" ? "0.0" : Mega888Wallet,
-            dgwallet: DgWallet == "N/A" ? "0.0" : DgWallet,
-            sexywallet: sexyWallet == "N/A" ? "0.0" : sexyWallet,
-            sawallet: saWallet == "N/A" ? "0.0" : saWallet,
-            pussy888wallet: Pussy888Wallet == "N/A" ? "0.0" : Pussy888Wallet,
-            allbetwallet: AllBetWallet == "N/A" ? "0.0" : AllBetWallet,
-            WMwallet: WMWallet == "N/A" ? "0.0" : WMWallet,
-            pragmaticwallet: PragmaticWallet == "N/A" ? "0.0" : PragmaticWallet,
-            id: null
-        }
-        await PostMethod(apiEndPoints.restoreBalance, restoreModel)
+//        if (globalParameter == null) {
+//            var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
+//            sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
+//            globalParameter = gamePrefix;
+//        }
+//        //#region Get user walletId
+//        await MainWalletBalance();
+//        await Kiss918WalletBalance(userDetails.data.username918);
+//        await AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username);
+//        await PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username);
+//        await Mega888WalletBalance(userDetails.data.loginid);
+//        await M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username);
+//        await MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username);
+//        await JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username);
+//        await DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username);
+//        await SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username);
+//        await SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username);
+//        await Pussy888WalletBalance(userDetails.data.usernamePussy888);
+//        await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
+//        await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
+//        await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
+//        let restoreModel = {
+//            kiss918wallet: _918KissWallet == "N/A" ? "0.0" : _918KissWallet,
+//            maxbetwallet: MaxBetWallet == "N/A" ? "0.0" : MaxBetWallet,
+//            jokerwallet: JokerWallet == "N/A" ? "0.0" : JokerWallet,
+//            agwallet: AGWallet == "N/A" ? "0.0" : AGWallet,
+//            m8wallet: M8Wallet == "N/A" ? "0.0" : M8Wallet,
+//            playtechwallet: PlayTechWallet == "N/A" ? "0.0" : PlayTechWallet,
+//            mega888wallet: Mega888Wallet == "N/A" ? "0.0" : Mega888Wallet,
+//            dgwallet: DgWallet == "N/A" ? "0.0" : DgWallet,
+//            sexywallet: sexyWallet == "N/A" ? "0.0" : sexyWallet,
+//            sawallet: saWallet == "N/A" ? "0.0" : saWallet,
+//            pussy888wallet: Pussy888Wallet == "N/A" ? "0.0" : Pussy888Wallet,
+//            allbetwallet: AllBetWallet == "N/A" ? "0.0" : AllBetWallet,
+//            WMwallet: WMWallet == "N/A" ? "0.0" : WMWallet,
+//            pragmaticwallet: PragmaticWallet == "N/A" ? "0.0" : PragmaticWallet,
+//            id: null
+//        }
+//        await PostMethod(apiEndPoints.restoreBalance, restoreModel)
+//    }
+//    catch (ex) {
+//    }
+//    RefershBalance();
+//    LoaderHide();
+//}
+
+function BeforeRestoreBalance(OnlyMainWallet = true) {
+
+    if (OnlyMainWallet) {
+        document.getElementById("ddlmainWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddl918KissWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddlAGWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddlM8Wallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddlJokerWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddlPlaytechWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddlMaxBetWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddlMega888Wallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddlDgWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddlSexyWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddlSAWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddlPussy888Wallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddlAllbetWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddlWMWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
+        document.getElementById("ddlPragmaticWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
     }
-    catch (ex) {
-    }
-    RefershBalance();
-    //LoaderHide();
+    document.getElementById("menuMainWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
 }
 
-async function RestoreBalance() {
+async function RestoreBalance(OnlyMainWallet = true) {
     //LoaderShow();
     try {
-        $('.values').html('');
-        $('.img_load').css('display', 'block');
-        var balanceModel = {
-        };
+        BeforeRestoreBalance(OnlyMainWallet);
         var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
         var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
 
@@ -208,21 +226,21 @@ async function RestoreBalance() {
             globalParameter = gamePrefix;
         }
         //#region Get user walletId
-        await MainWalletBalance();
-        await Kiss918WalletBalance(userDetails.data.username918);
-        await AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username);
-        await PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username);
-        await Mega888WalletBalance(userDetails.data.loginid);
-        await M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username);
-        await MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username);
-        await JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username);
-        await DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username);
-        await SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username);
-        await SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username);
-        await Pussy888WalletBalance(userDetails.data.usernamePussy888);
-        await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
-        await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
-        await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
+        await MainWalletBalance(false);
+        await Kiss918WalletBalance(userDetails.data.username918, false);
+        await AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username, false);
+        await PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username, false);
+        await Mega888WalletBalance(userDetails.data.loginid, false);
+        await M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username, false);
+        await MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username, false);
+        await JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username, false);
+        await DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username, false);
+        await SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username, false);
+        await SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username, false);
+        await Pussy888WalletBalance(userDetails.data.usernamePussy888, false);
+        await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId, false);
+        await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId, false);
+        await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId, false);
 
         let restoreModel = {
             kiss918wallet: _918KissWallet == "N/A" ? "0.0" : _918KissWallet,
@@ -244,7 +262,6 @@ async function RestoreBalance() {
         await PostMethod(apiEndPoints.restoreBalance, restoreModel)
     }
     catch (ex) {
-
     }
     WalletBalance();
     //LoaderHide();
@@ -264,7 +281,6 @@ function numberWithCommas(x) {
     }
 }
 
-
 var AGTrigger = false,
     DGTrigger = false,
     SATrigger = false,
@@ -280,7 +296,6 @@ function StartTimerGameBalanceAPI(GameName) {
     var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
 
     switch (GameName) {
-
         case 'AG':
             let AGtimerId = setInterval(() => { AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username); AGTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(AGtimerId); AGTrigger = false; }, 301000);
@@ -320,107 +335,127 @@ function StartTimerGameBalanceAPI(GameName) {
     }
 }
 
-async function MainWalletBalance() {
+async function MainWalletBalance( HideLoading = true) {
     try {
         let model = {};
         var mainwallet = await GameBalancePostMethod(apiEndPoints.walletBalance, model);
         balance = mainwallet.data.filter(x => x.walletName == "Main Wallet");
         MainWallet = numberWithCommas(parseFloat(balance[0].amount).toFixed(2));
-        document.getElementById("ddlmainWallet").innerHTML = MainWallet;
-        if (location.href.toLowerCase().includes("?p=home") || location.href.toLowerCase().includes("?p=transfer") || location.href.toLowerCase().includes("?p=withdraw"))
-            document.getElementById("menuMainWallet").innerHTML = MainWallet;
+        if (HideLoading) {
+            document.getElementById("ddlmainWallet").innerHTML = MainWallet;
+            if (location.href.toLowerCase().includes("mobile/home") || location.href.toLowerCase().includes("mobile/transfer") || location.href.toLowerCase().includes("mobile/withdraw"))
+                document.getElementById("menuMainWallet").innerHTML = MainWallet;
+        }
     }
     catch (ex) {
         MainWallet = "0.0";
-        document.getElementById("ddlmainWallet").innerHTML = "0.0";
-        if (location.href.toLowerCase().includes("?p=home") || location.href.toLowerCase().includes("?p=transfer") || location.href.toLowerCase().includes("?p=withdraw"))
-            document.getElementById("menuMainWallet").innerHTML = "0.0";
+        if (HideLoading) {
+            document.getElementById("ddlmainWallet").innerHTML = "0.0";
+            if (location.href.toLowerCase().includes("mobile/home") || location.href.toLowerCase().includes("mobile/transfer") || location.href.toLowerCase().includes("mobile/withdraw"))
+                document.getElementById("menuMainWallet").innerHTML = "0.0";
+        }
     }
 }
 
-async function Kiss918WalletBalance(Username) {
+async function Kiss918WalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var kissbalance = await GameBalancePostMethod(apiEndPoints.kiss918Balance, model);
         _918KissWallet = numberWithCommas(parseFloat(kissbalance.data.balance).toFixed(2));
-        document.getElementById("ddl918KissWallet").innerHTML = _918KissWallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("918KissWallet").innerHTML = _918KissWallet;
+        if (HideLoading) {
+            document.getElementById("ddl918KissWallet").innerHTML = _918KissWallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("918KissWallet").innerHTML = _918KissWallet;
+        }
     }
     catch (ex) {
         _918KissWallet = "N/A";
-        document.getElementById("ddl918KissWallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("918KissWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            document.getElementById("ddl918KissWallet").innerHTML = "N/A";
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("918KissWallet").innerHTML = "N/A";
+        }
     }
 }
 
-async function AgWalletBalance(Username) {
+async function AgWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var agbalance = await GameBalancePostMethod(apiEndPoints.agBalance, model);
         AGWallet = numberWithCommas(parseFloat(agbalance.data.balance).toFixed(2));
-        document.getElementById("ddlAGWallet").innerHTML = AGWallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("AGWallet").innerHTML = AGWallet;
-        if (AGWallet == 0 && agbalance.data.previousBalance > 0 && AGTrigger == false)
-            StartTimerGameBalanceAPI("AG");
+        if (HideLoading) {
+            document.getElementById("ddlAGWallet").innerHTML = AGWallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("AGWallet").innerHTML = AGWallet;
+            if (AGWallet == 0 && agbalance.data.previousBalance > 0 && AGTrigger == false)
+                StartTimerGameBalanceAPI("AG");
+        }
     }
     catch (ex) {
         AGWallet = "N/A";
-        document.getElementById("ddlAGWallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("AGWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            document.getElementById("ddlAGWallet").innerHTML = "N/A";
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("AGWallet").innerHTML = "N/A";
+        }
     }
 }
 
-async function PlaytechWalletBalance(Username) {
+async function PlaytechWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var playtechbalance = await GameBalancePostMethod(apiEndPoints.playtechBalance, model);
         PlayTechWallet = numberWithCommas(parseFloat(playtechbalance.data.balance).toFixed(2));
-        document.getElementById("ddlPlaytechWallet").innerHTML = PlayTechWallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("PlaytechWallet").innerHTML = PlayTechWallet;
-        if (PlayTechWallet == 0 && playtechbalance.data.previousBalance > 0 && PlaytechTrigger == false)
-            StartTimerGameBalanceAPI("Playtech");
+        if (HideLoading) {
+            document.getElementById("ddlPlaytechWallet").innerHTML = PlayTechWallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("PlaytechWallet").innerHTML = PlayTechWallet;
+            if (PlayTechWallet == 0 && playtechbalance.data.previousBalance > 0 && PlaytechTrigger == false)
+                StartTimerGameBalanceAPI("Playtech");
+        }
     }
     catch (ex) {
         PlayTechWallet = "N/A";
-        document.getElementById("ddlPlaytechWallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("PlaytechWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            document.getElementById("ddlPlaytechWallet").innerHTML = "N/A";
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("PlaytechWallet").innerHTML = "N/A";
+        }
     }
 }
 
-async function M8WalletBalance(Username) {
+async function M8WalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var M8balance = await GameBalancePostMethod(apiEndPoints.m8Balance, model);
         M8Wallet = numberWithCommas(parseFloat(M8balance.data.balance).toFixed(2));
-        document.getElementById("ddlM8Wallet").innerHTML = M8Wallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("M8Wallet").innerHTML = M8Wallet;
-        if (M8Wallet == 0 && M8balance.data.previousBalance > 0 && M8Trigger == false)
-            StartTimerGameBalanceAPI("M8");
+        if (HideLoading) {
+            document.getElementById("ddlM8Wallet").innerHTML = M8Wallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("M8Wallet").innerHTML = M8Wallet;
+            if (M8Wallet == 0 && M8balance.data.previousBalance > 0 && M8Trigger == false)
+                StartTimerGameBalanceAPI("M8");
+        }
     }
     catch (ex) {
         M8Wallet = "N/A";
-        document.getElementById("ddlM8Wallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("M8Wallet").innerHTML = "N/A";
+        if (HideLoading) {
+            document.getElementById("ddlM8Wallet").innerHTML = "N/A";
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("M8Wallet").innerHTML = "N/A";
+        }
     }
 }
 
-async function MaxbetWalletBalance(Username) {
+async function MaxbetWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
@@ -428,21 +463,25 @@ async function MaxbetWalletBalance(Username) {
         var Maxbetbalance = await GameBalancePostMethod(apiEndPoints.maxbetBalance, model);
 
         MaxBetWallet = numberWithCommas(parseFloat(Maxbetbalance.data.balance).toFixed(2));
-        document.getElementById("ddlMaxBetWallet").innerHTML = MaxBetWallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("MaxBetWallet").innerHTML = MaxBetWallet;
-        if (MaxBetWallet == 0 && Maxbetbalance.data.previousBalance > 0 && MaxbetTrigger == false)
-            StartTimerGameBalanceAPI("MaxBet");
+        if (HideLoading) {
+            document.getElementById("ddlMaxBetWallet").innerHTML = MaxBetWallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("MaxBetWallet").innerHTML = MaxBetWallet;
+            if (MaxBetWallet == 0 && Maxbetbalance.data.previousBalance > 0 && MaxbetTrigger == false)
+                StartTimerGameBalanceAPI("MaxBet");
+        }
     }
     catch (ex) {
         MaxBetWallet = "N/A";
-        document.getElementById("ddlMaxBetWallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("MaxBetWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            document.getElementById("ddlMaxBetWallet").innerHTML = "N/A";
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("MaxBetWallet").innerHTML = "N/A";
+        }
     }
 }
 
-async function Mega888WalletBalance(Username) {
+async function Mega888WalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
@@ -450,19 +489,23 @@ async function Mega888WalletBalance(Username) {
         var Mega888balance = await GameBalancePostMethod(apiEndPoints.mega888Balance, model);
 
         Mega888Wallet = numberWithCommas(parseFloat(Mega888balance.data.balance).toFixed(2));
-        document.getElementById("ddlMega888Wallet").innerHTML = Mega888Wallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("Mega888Wallet").innerHTML = Mega888Wallet;
+        if (HideLoading) {
+            document.getElementById("ddlMega888Wallet").innerHTML = Mega888Wallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("Mega888Wallet").innerHTML = Mega888Wallet;
+        }
     }
     catch (ex) {
         Mega888Wallet = "N/A";
-        document.getElementById("ddlMega888Wallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("Mega888Wallet").innerHTML = "N/A";
+        if (HideLoading) {
+            document.getElementById("ddlMega888Wallet").innerHTML = "N/A";
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("Mega888Wallet").innerHTML = "N/A";
+        }
     }
 }
 
-async function JokerWalletBalance(Username) {
+async function JokerWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
@@ -470,102 +513,121 @@ async function JokerWalletBalance(Username) {
         var jokerbalance = await GameBalancePostMethod(apiEndPoints.jokerBalance, model);
 
         JokerWallet = numberWithCommas(parseFloat(jokerbalance.data.balance).toFixed(2));
-        document.getElementById("ddlJokerWallet").innerHTML = JokerWallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("JokerWallet").innerHTML = JokerWallet;
+        if (HideLoading) {
+            document.getElementById("ddlJokerWallet").innerHTML = JokerWallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("JokerWallet").innerHTML = JokerWallet;
+        }
     }
     catch (ex) {
         JokerWallet = "N/A";
-        document.getElementById("ddlJokerWallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("JokerWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            document.getElementById("ddlJokerWallet").innerHTML = "N/A";
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("JokerWallet").innerHTML = "N/A";
+        }
     }
 }
 
-async function DGWalletBalance(Username) {
+async function DGWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var dgbalance = await GameBalancePostMethod(apiEndPoints.dgBalance, model);
         DgWallet = numberWithCommas(parseFloat(dgbalance.data.balance).toFixed(2));
-        document.getElementById("ddlDgWallet").innerHTML = DgWallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("DGWallet").innerHTML = DgWallet;
-        if (DgWallet == 0 && dgbalance.data.previousBalance > 0 && DGTrigger == false)
-            StartTimerGameBalanceAPI("DG");
+        if (HideLoading) {
+            document.getElementById("ddlDgWallet").innerHTML = DgWallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("DGWallet").innerHTML = DgWallet;
+            if (DgWallet == 0 && dgbalance.data.previousBalance > 0 && DGTrigger == false)
+                StartTimerGameBalanceAPI("DG");
+        }
     }
     catch (ex) {
         DgWallet = "N/A";
-        document.getElementById("ddlDgWallet").innerHTML = "N/A"
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("DGWallet").innerHTML = "N/A"
+        if (HideLoading) {
+            document.getElementById("ddlDgWallet").innerHTML = "N/A"
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("DGWallet").innerHTML = "N/A"
+        }
     }
 }
 
-async function SexyWalletBalance(Username) {
+async function SexyWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var sexybalance = await GameBalancePostMethod(apiEndPoints.sexyBalance, model);
         sexyWallet = numberWithCommas(parseFloat(sexybalance.data.balance).toFixed(2));
-        document.getElementById("ddlSexyWallet").innerHTML = sexyWallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("SexyWallet").innerHTML = sexyWallet;
-        if (sexyWallet == 0 && sexybalance.data.previousBalance > 0 && SexyTrigger == false)
-            StartTimerGameBalanceAPI("Sexy");
+        if (HideLoading) {
+            document.getElementById("ddlSexyWallet").innerHTML = sexyWallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("SexyWallet").innerHTML = sexyWallet;
+            if (sexyWallet == 0 && sexybalance.data.previousBalance > 0 && SexyTrigger == false)
+                StartTimerGameBalanceAPI("Sexy");
+        }
     }
     catch (ex) {
         sexyWallet = "N/A";
-        document.getElementById("ddlSexyWallet").innerHTML = "N/A"
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("SexyWallet").innerHTML = "N/A"
+        if (HideLoading) {
+            document.getElementById("ddlSexyWallet").innerHTML = "N/A"
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("SexyWallet").innerHTML = "N/A"
+        }
     }
 }
 
-async function SAWalletBalance(Username) {
+async function SAWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var sabalance = await GameBalancePostMethod(apiEndPoints.saBalance, model);
         saWallet = numberWithCommas(parseFloat(sabalance.data.balance).toFixed(2));
-        document.getElementById("ddlSAWallet").innerHTML = saWallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("SAWallet").innerHTML = saWallet;
-        if (saWallet == 0 && sabalance.data.previousBalance > 0 && SATrigger == false)
-            StartTimerGameBalanceAPI("SA");
+        if (HideLoading) {
+            document.getElementById("ddlSAWallet").innerHTML = saWallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("SAWallet").innerHTML = saWallet;
+            if (saWallet == 0 && sabalance.data.previousBalance > 0 && SATrigger == false)
+                StartTimerGameBalanceAPI("SA");
+        }
     }
     catch (ex) {
         saWallet = "N/A";
-        document.getElementById("ddlSAWallet").innerHTML = "N/A"
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("SAWallet").innerHTML = "N/A"
+        if (HideLoading) {
+            document.getElementById("ddlSAWallet").innerHTML = "N/A"
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("SAWallet").innerHTML = "N/A"
+        }
     }
 }
 
-async function Pussy888WalletBalance(Username) {
+async function Pussy888WalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var Pussy888balance = await GameBalancePostMethod(apiEndPoints.Pussy888Balance, model);
         Pussy888Wallet = numberWithCommas(parseFloat(Pussy888balance.data.balance).toFixed(2));
-        document.getElementById("ddlPussy888Wallet").innerHTML = Pussy888Wallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("Pussy888Wallet").innerHTML = Pussy888Wallet;
-
+        if (HideLoading) {
+            document.getElementById("ddlPussy888Wallet").innerHTML = Pussy888Wallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("Pussy888Wallet").innerHTML = Pussy888Wallet;
+        }
     }
     catch (ex) {
         Pussy888Wallet = "N/A";
-        document.getElementById("ddlPussy888Wallet").innerHTML = "N/A"
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("Pussy888Wallet").innerHTML = "N/A"
+        if (HideLoading) {
+            document.getElementById("ddlPussy888Wallet").innerHTML = "N/A"
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("Pussy888Wallet").innerHTML = "N/A"
+        }
     }
 }
 
-async function AllBetWalletBalance(Username) {
+async function AllBetWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username,
@@ -573,42 +635,50 @@ async function AllBetWalletBalance(Username) {
         };
         var allBetBalance = await GameBalancePostMethod(apiEndPoints.AllBetBalance, model);
         AllBetWallet = numberWithCommas(parseFloat(allBetBalance.data.balance).toFixed(2));
-        document.getElementById("ddlAllbetWallet").innerHTML = AllBetWallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("AllBetWallet").innerHTML = AllBetWallet;
-        if (AllBetWallet == 0 && allBetBalance.data.previousBalance > 0 && AllbetTrigger == false)
-            StartTimerGameBalanceAPI("AllBet");
+        if (HideLoading) {
+            document.getElementById("ddlAllbetWallet").innerHTML = AllBetWallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("AllBetWallet").innerHTML = AllBetWallet;
+            if (AllBetWallet == 0 && allBetBalance.data.previousBalance > 0 && AllbetTrigger == false)
+                StartTimerGameBalanceAPI("AllBet");
+        }
     }
     catch (ex) {
         AllBetWallet = "N/A";
-        document.getElementById("ddlAllbetWallet").innerHTML = "N/A"
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("AllBetWallet").innerHTML = "N/A"
+        if (HideLoading) {
+            document.getElementById("ddlAllbetWallet").innerHTML = "N/A"
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("AllBetWallet").innerHTML = "N/A"
+        }
     }
 }
 
-async function WMWalletBalance(Username) {
+async function WMWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
         };
         var WMBalance = await GameBalancePostMethod(apiEndPoints.WMBalance, model);
         WMWallet = numberWithCommas(parseFloat(WMBalance.data.balance).toFixed(2));
-        document.getElementById("ddlWMWallet").innerHTML = WMWallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("WMWallet").innerHTML = WMWallet;
-        if (WMWallet == 0 && WMBalance.data.previousBalance > 0 && AllbetTrigger == false)
-            StartTimerGameBalanceAPI("WM");
+        if (HideLoading) {
+            document.getElementById("ddlWMWallet").innerHTML = WMWallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("WMWallet").innerHTML = WMWallet;
+            if (WMWallet == 0 && WMBalance.data.previousBalance > 0 && AllbetTrigger == false)
+                StartTimerGameBalanceAPI("WM");
+        }
     }
     catch (ex) {
         WMWallet = "N/A";
-        document.getElementById("ddlWMWallet").innerHTML = "N/A"
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("WMWallet").innerHTML = "N/A"
+        if (HideLoading) {
+            document.getElementById("ddlWMWallet").innerHTML = "N/A"
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("WMWallet").innerHTML = "N/A"
+        }
     }
 }
 
-async function PragmaticWalletBalance(Username) {
+async function PragmaticWalletBalance(Username, HideLoading = true) {
     try {
         let model = {
             username: Username
@@ -616,21 +686,23 @@ async function PragmaticWalletBalance(Username) {
         var Pragmaticbalance = await GameBalancePostMethod(apiEndPoints.PragmaticBalance, model);
 
         PragmaticWallet = numberWithCommas(parseFloat(Pragmaticbalance.data.balance).toFixed(2));
-        document.getElementById("ddlPragmaticWallet").innerHTML = PragmaticWallet;
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("PragmaticWallet").innerHTML = PragmaticWallet;
-
+        if (HideLoading) {
+            document.getElementById("ddlPragmaticWallet").innerHTML = PragmaticWallet;
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("PragmaticWallet").innerHTML = PragmaticWallet;
+        }
     }
     catch (ex) {
         PragmaticWallet = "N/A";
-        document.getElementById("ddlPragmaticWallet").innerHTML = "N/A";
-        if (location.href.toLowerCase().includes("?p=transfer"))
-            document.getElementById("PragmaticWallet").innerHTML = "N/A";
+        if (HideLoading) {
+            document.getElementById("ddlPragmaticWallet").innerHTML = "N/A";
+            if (location.href.toLowerCase().includes("mobile/transfer"))
+                document.getElementById("PragmaticWallet").innerHTML = "N/A";
+        }
     }
 }
 
 async function WalletBalanceMaxTransfer(walletData) {
-
     var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
     var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
 
