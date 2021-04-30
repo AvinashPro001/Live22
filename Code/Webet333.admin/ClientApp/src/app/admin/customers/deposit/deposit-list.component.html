@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div>
-                <ngx-datatable class="table table-responsive material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="7"  [count]="totalRowCount" [offset]="offset" (page)="setPage($event)">>
+                <ngx-datatable class="table table-responsive material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="7"  [count]="totalRowCount" [offset]="offset" (page)="setPage($event)">
                     <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
                         <label>
                             <button id="acceptBtn" data-id="depositData[rowIndex].id" class="mb-1 button btn-success" type="button" (click)="openremark(remark,depositData[rowIndex].id,'accept',depositData[rowIndex].username,depositData[rowIndex].walletName,depositData[rowIndex].amount)" data-toggle="modal">
