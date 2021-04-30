@@ -86,6 +86,8 @@ export class UsersDetailsComponent implements OnInit {
 
     depositColumns: any;
     depositRows: any;
+    totalRowCount = 0;
+    offset = 0;
 
     withdrawColumns: any;
     withdrawRows: any;
@@ -1014,7 +1016,7 @@ export class UsersDetailsComponent implements OnInit {
 
     OpenPageLoadData(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
-            if (Tab === "Deposit") this.depositlist(null, null);
+            if (Tab === "Deposit") { this.isFilter = false; this.depositlist(null, null); }
             if (Tab === "Withdraw") this.withdrawlist(null, null);
             if (Tab === "Transfer") this.transferlist(null, null);
             if (Tab === "Promotion") this.promotionlist(null, null);
@@ -1043,8 +1045,11 @@ export class UsersDetailsComponent implements OnInit {
         this.datePickertodate = this.commonService.setDatePickerFormate(todate);
     }
 
+    isFilter = false;
+
     setToday(Tab) {
         if (this.userid !== undefined && this.userid !== "" && this.userid !== null) {
+
             var dates = this.commonService.getTodatDate();
             var fromdate = dates.fromdate;
             var todate = dates.todate;
@@ -1052,7 +1057,7 @@ export class UsersDetailsComponent implements OnInit {
             this.setDatePicker(new Date(fromdate), new Date(todate));
             this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
-            if (Tab === "Deposit") this.depositlist(fromdate, todate);
+            if (Tab === "Deposit") { this.isFilter = true; this.depositlist(fromdate, todate); }
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
             if (Tab === "Transfer") this.transferlist(fromdate, todate);
             if (Tab === "Promotion") this.promotionlist(fromdate, todate);
@@ -1087,7 +1092,7 @@ export class UsersDetailsComponent implements OnInit {
             this.setDatePicker(new Date(fromdate), new Date(todate));
             this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
-            if (Tab === "Deposit") this.depositlist(fromdate, todate);
+            if (Tab === "Deposit") { this.isFilter = true; this.depositlist(fromdate, todate); }
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
             if (Tab === "Transfer") this.transferlist(fromdate, todate);
             if (Tab === "Promotion") this.promotionlist(fromdate, todate);
@@ -1122,7 +1127,7 @@ export class UsersDetailsComponent implements OnInit {
             this.setDatePicker(new Date(fromdate), new Date(todate));
             this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
-            if (Tab === "Deposit") this.depositlist(fromdate, todate);
+            if (Tab === "Deposit") { this.isFilter = true; this.depositlist(fromdate, todate); }
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
             if (Tab === "Transfer") this.transferlist(fromdate, todate);
             if (Tab === "Promotion") this.promotionlist(fromdate, todate);
@@ -1157,7 +1162,7 @@ export class UsersDetailsComponent implements OnInit {
             this.setDatePicker(new Date(fromdate), new Date(todate));
             this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
-            if (Tab === "Deposit") this.depositlist(fromdate, todate);
+            if (Tab === "Deposit") { this.isFilter = true; this.depositlist(fromdate, todate); }
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
             if (Tab === "Transfer") this.transferlist(fromdate, todate);
             if (Tab === "Promotion") this.promotionlist(fromdate, todate);
@@ -1187,6 +1192,7 @@ export class UsersDetailsComponent implements OnInit {
         if (this.userid !== undefined && this.userid !== "") {
             var fromdate, todate;
             if (Tab === "Deposit") {
+                this.isFilter = true
                 fromdate = (document.getElementById("d_fromdatetime") as HTMLInputElement).value;
                 todate = (document.getElementById("d_todatetime") as HTMLInputElement).value;
                 this.depositlist(fromdate == "" ? null : fromdate, todate == "" ? null : todate);
@@ -1520,18 +1526,24 @@ export class UsersDetailsComponent implements OnInit {
     //#endregion
 
     //#region  User Deposit List
-
+    pageNumber = 0;
     depositlist(fromdate, todate) {
         this.loadingIndicator = true;
         let data = {
             userId: this.userid,
             fromDate: fromdate,
             toDate: todate,
+            pageNo: this.pageNumber,
+            pageSize: 20
         }
         this.adminService.add<any>(customer.depositList, data).subscribe(res => {
             this.depositRows = [];
-            let i = 0;
-            res.data.forEach(el => {
+            //let i = 0;
+            let i = ((this.pageNumber + 1) * 20) - 20;
+            this.offset = res.data.offset;
+            this.totalRowCount = res.data.total;
+
+            res.data.result.forEach(el => {
                 this.depositRows.push({
                     No: ++i,
                     WalletName: el.walletName,
@@ -3039,4 +3051,16 @@ export class UsersDetailsComponent implements OnInit {
     }
 
     //#endregion Open IC imahe in new tab
+
+    setPage(pageInfo) {
+        this.pageNumber = pageInfo.offset;
+        if (this.isFilter) {
+            var fromdate, todate;
+            fromdate = (document.getElementById("d_fromdatetime") as HTMLInputElement).value;
+            todate = (document.getElementById("d_todatetime") as HTMLInputElement).value;
+            this.depositlist(fromdate == "" ? null : fromdate, todate == "" ? null : todate);
+        }
+        else
+            this.depositlist(null, null);
+    }
 }

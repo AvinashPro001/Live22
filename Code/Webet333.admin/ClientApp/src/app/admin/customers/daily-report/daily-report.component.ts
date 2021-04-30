@@ -40,6 +40,9 @@ export class DailyReportComponent implements OnInit {
     withdrawalPromotionColumns: any;
     withdrawalPromotionRows: any;
 
+    totalDepositCount: any = 0;
+    totalUserCount: any = 0;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -131,11 +134,17 @@ export class DailyReportComponent implements OnInit {
                         this.WithdrawalPromotion = el.WithdrawalPromotion
                 });
 
-                if (this.DepositPromotion != null) { this.depositPromotionRows = JSON.parse(this.DepositPromotion); }
+                this.totalDepositCount = 0;
+                if (this.DepositPromotion != null) {
+                    this.depositPromotionRows = JSON.parse(this.DepositPromotion);
+                    this.depositPromotionRows.forEach(a => this.totalDepositCount += a.Count);
+                }
                 else { this.depositPromotionRows = null; }
 
                 if (this.WithdrawalPromotion != null) { this.withdrawalPromotionRows = JSON.parse(this.WithdrawalPromotion); }
                 else { this.withdrawalPromotionRows = null; }
+
+                this.totalUserCount = this.NewUser + this.OldUser;
             }, error => {
                 this.toasterService.pop('error', 'Error', error.error.message);
             });
