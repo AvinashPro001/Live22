@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
+using System.Web;
 using Webet333.dapper;
 using Webet333.models.Constants;
 using Webet333.models.Response.Game.AG;
@@ -48,6 +49,7 @@ namespace Webet333.api.Helpers
                       $"&lang={langCode}" +
                       $"&odd_type={bettingLimit}" +
                       $"&user_id={username}&dm=http://www.webet333.com/";
+
 
             return JsonConvert.DeserializeObject<AGLoginResponse>(await GameHelpers.CallThirdPartyApi(url));
         }

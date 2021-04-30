@@ -1,15 +1,12 @@
-import { Component, OnInit, TemplateRef, ViewChild, Injectable } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, Injectable, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterService } from 'angular2-toaster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DatePipe } from '@angular/common';
-import { account, customer, gameBalance, VIPSetting, ErrorMessages, GameRegister } from '../../../../environments/environment';
-import { AdminService } from '../../admin.service';
+import { account, customer, gameBalance, GameRegister, VIPSetting } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
-import { debug } from 'util';
-import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { now } from 'core-js/fn/date';
-import { Router } from '@angular/router';
+import { AdminService } from '../../admin.service';
 
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
@@ -89,6 +86,8 @@ export class UsersDetailsComponent implements OnInit {
 
     depositColumns: any;
     depositRows: any;
+    totalRowCount = 0;
+    offset = 0;
 
     withdrawColumns: any;
     withdrawRows: any;
@@ -243,8 +242,7 @@ export class UsersDetailsComponent implements OnInit {
         private ngbCalendar: NgbCalendar,
         private dateAdapter: NgbDateAdapter<string>,
         private router: Router,
-        private commonService: CommonService
-    ) { }
+        private commonService: CommonService) { }
     //#endregion
 
     //#region OnInit Method
@@ -624,9 +622,9 @@ export class UsersDetailsComponent implements OnInit {
             { prop: 'Turnover' },
             { prop: 'Title' },
             { prop: 'TurnoverTime' },
-            { prop: 'WinTurn' },
+            //{ prop: 'WinTurn' },
             { prop: 'TurnoverTarget' },
-            { prop: 'WinTarget' },
+            //{ prop: 'WinTarget' },
             { prop: 'Status' },
             { prop: 'ExpieryDate' },
             { prop: 'RemaininggDay' },
@@ -1018,7 +1016,7 @@ export class UsersDetailsComponent implements OnInit {
 
     OpenPageLoadData(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
-            if (Tab === "Deposit") this.depositlist(null, null);
+            if (Tab === "Deposit") { this.isFilter = false; this.depositlist(null, null); }
             if (Tab === "Withdraw") this.withdrawlist(null, null);
             if (Tab === "Transfer") this.transferlist(null, null);
             if (Tab === "Promotion") this.promotionlist(null, null);
@@ -1047,8 +1045,11 @@ export class UsersDetailsComponent implements OnInit {
         this.datePickertodate = this.commonService.setDatePickerFormate(todate);
     }
 
+    isFilter = false;
+
     setToday(Tab) {
         if (this.userid !== undefined && this.userid !== "" && this.userid !== null) {
+
             var dates = this.commonService.getTodatDate();
             var fromdate = dates.fromdate;
             var todate = dates.todate;
@@ -1056,7 +1057,7 @@ export class UsersDetailsComponent implements OnInit {
             this.setDatePicker(new Date(fromdate), new Date(todate));
             this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
-            if (Tab === "Deposit") this.depositlist(fromdate, todate);
+            if (Tab === "Deposit") { this.isFilter = true; this.depositlist(fromdate, todate); }
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
             if (Tab === "Transfer") this.transferlist(fromdate, todate);
             if (Tab === "Promotion") this.promotionlist(fromdate, todate);
@@ -1091,7 +1092,7 @@ export class UsersDetailsComponent implements OnInit {
             this.setDatePicker(new Date(fromdate), new Date(todate));
             this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
-            if (Tab === "Deposit") this.depositlist(fromdate, todate);
+            if (Tab === "Deposit") { this.isFilter = true; this.depositlist(fromdate, todate); }
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
             if (Tab === "Transfer") this.transferlist(fromdate, todate);
             if (Tab === "Promotion") this.promotionlist(fromdate, todate);
@@ -1126,7 +1127,7 @@ export class UsersDetailsComponent implements OnInit {
             this.setDatePicker(new Date(fromdate), new Date(todate));
             this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
-            if (Tab === "Deposit") this.depositlist(fromdate, todate);
+            if (Tab === "Deposit") { this.isFilter = true; this.depositlist(fromdate, todate); }
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
             if (Tab === "Transfer") this.transferlist(fromdate, todate);
             if (Tab === "Promotion") this.promotionlist(fromdate, todate);
@@ -1161,7 +1162,7 @@ export class UsersDetailsComponent implements OnInit {
             this.setDatePicker(new Date(fromdate), new Date(todate));
             this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
-            if (Tab === "Deposit") this.depositlist(fromdate, todate);
+            if (Tab === "Deposit") { this.isFilter = true; this.depositlist(fromdate, todate); }
             if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
             if (Tab === "Transfer") this.transferlist(fromdate, todate);
             if (Tab === "Promotion") this.promotionlist(fromdate, todate);
@@ -1191,6 +1192,7 @@ export class UsersDetailsComponent implements OnInit {
         if (this.userid !== undefined && this.userid !== "") {
             var fromdate, todate;
             if (Tab === "Deposit") {
+                this.isFilter = true
                 fromdate = (document.getElementById("d_fromdatetime") as HTMLInputElement).value;
                 todate = (document.getElementById("d_todatetime") as HTMLInputElement).value;
                 this.depositlist(fromdate == "" ? null : fromdate, todate == "" ? null : todate);
@@ -1524,18 +1526,24 @@ export class UsersDetailsComponent implements OnInit {
     //#endregion
 
     //#region  User Deposit List
-
+    pageNumber = 0;
     depositlist(fromdate, todate) {
         this.loadingIndicator = true;
         let data = {
             userId: this.userid,
             fromDate: fromdate,
             toDate: todate,
+            pageNo: this.pageNumber,
+            pageSize: 20
         }
         this.adminService.add<any>(customer.depositList, data).subscribe(res => {
             this.depositRows = [];
-            let i = 0;
-            res.data.forEach(el => {
+            //let i = 0;
+            let i = ((this.pageNumber + 1) * 20) - 20;
+            this.offset = res.data.offset;
+            this.totalRowCount = res.data.total;
+
+            res.data.result.forEach(el => {
                 this.depositRows.push({
                     No: ++i,
                     WalletName: el.walletName,
@@ -1644,9 +1652,9 @@ export class UsersDetailsComponent implements OnInit {
                     Turnover: el.UserTurnover,
                     Title: el.Title,
                     TurnoverTime: el.TurnoverTime,
-                    WinTurn: el.WinTurn,
+                    //WinTurn: el.WinTurn,
                     TurnoverTarget: el.TurnoverTarget,
-                    WinTarget: el.TurnTarget,
+                    //WinTarget: el.TurnTarget,
                     RemaininggDay: el.RemainingDay,
                     ExpieryDate: this.replaceDateTime(el.ExpiryDate),
                     Created: this.replaceDateTime(el.Created),
@@ -2985,12 +2993,12 @@ export class UsersDetailsComponent implements OnInit {
             if (usersPermissions.permissionsList[0].submenu[2].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -3004,12 +3012,12 @@ export class UsersDetailsComponent implements OnInit {
             if (usersPermissions.permissionsList[0].submenu[2].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -3023,12 +3031,12 @@ export class UsersDetailsComponent implements OnInit {
             if (usersPermissions.permissionsList[0].submenu[2].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -3043,4 +3051,16 @@ export class UsersDetailsComponent implements OnInit {
     }
 
     //#endregion Open IC imahe in new tab
+
+    setPage(pageInfo) {
+        this.pageNumber = pageInfo.offset;
+        if (this.isFilter) {
+            var fromdate, todate;
+            fromdate = (document.getElementById("d_fromdatetime") as HTMLInputElement).value;
+            todate = (document.getElementById("d_todatetime") as HTMLInputElement).value;
+            this.depositlist(fromdate == "" ? null : fromdate, todate == "" ? null : todate);
+        }
+        else
+            this.depositlist(null, null);
+    }
 }

@@ -1,23 +1,21 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ToasterService, ToasterConfig } from 'angular2-toaster';
-import { Stopwatch } from "ts-stopwatch";
-import { AdminService } from '../../admin.service';
 import { DatePipe } from '@angular/common';
-import { account, customer, ErrorMessages } from '../../../../environments/environment';
-import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HubConnectionBuilder } from '@aspnet/signalr';
-import { Md5 } from 'ts-md5/dist/md5';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { ToasterConfig, ToasterService } from 'angular2-toaster';
+import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
+import { account, customer } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-admin/deposit/retrieve-list',
     templateUrl: './deposit-list.component.html',
     styleUrls: ['./deposit-list.component.scss']
 })
+
 export class DepositListComponent implements OnInit {
     //#region declaration
     slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };
@@ -37,6 +35,9 @@ export class DepositListComponent implements OnInit {
 
     rowsTacking = [];
     columnsTacking = [];
+
+    totalRowCount = 0;
+    offset = 0;
 
     warningImagePath = "../../../../assets/img/warning.png";
     successImagePath = "../../../../assets/img/success.png";
@@ -108,8 +109,7 @@ export class DepositListComponent implements OnInit {
         private modalService: NgbModal,
         private datePipe: DatePipe,
         private titleService: Title,
-        private commonService: CommonService
-    ) { }
+        private commonService: CommonService) { }
     //#endregion
 
     //#region Init
@@ -160,36 +160,36 @@ export class DepositListComponent implements OnInit {
                 toDate: null
             }
             this.adminService.add<any>(customer.depositList, data).subscribe(async res => {
-                this.depositCount = res.data.length;
-                if (res.data.length > 0) {
+                this.depositCount = res.data.result.length;
+                if (res.data.result.length > 0) {
                     this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;
                     if (this.AutoRefersh == true || this.AutoRefersh == "true") {
                         this.playAudio();
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
-                        this.titleService.setTitle("Deposit Request (" + res.data.length + ")");
+                        this.titleService.setTitle("Deposit Request (" + res.data.result.length + ")");
                         await this.delay(1000);
                         this.titleService.setTitle("\u200E")
                         await this.delay(1000);
@@ -334,7 +334,7 @@ export class DepositListComponent implements OnInit {
     //#endregion
 
     //#region setPageData
-
+    pageNumber = 0;
     setPageData(selectedList, search, fromdate, todate) {
         //this.loadingIndicator = true;
         //this.rows = [];
@@ -342,13 +342,19 @@ export class DepositListComponent implements OnInit {
             status: selectedList,
             keyword: search,
             fromDate: fromdate,
-            toDate: todate
+            toDate: todate,
+            pageNo: this.pageNumber,
+            pageSize: 7
         }
         this.adminService.add<any>(customer.depositList, data).subscribe(res => {
+
+            this.offset = res.data.offset;
+            this.totalRowCount = res.data.total;
+
             this.rows = [];
-            let i = 0;
-            this.depositData = res.data;
-            res.data.forEach(el => {
+            let i = ((this.pageNumber + 1) * 7) - 7;
+            this.depositData = res.data.result;
+            res.data.result.forEach(el => {
                 this.rows.push({
                     No: ++i,
                     UserName: el.username,
@@ -519,6 +525,10 @@ export class DepositListComponent implements OnInit {
 
     //#region Search
 
+
+    searchHandlerEvent = false;
+    searchHandlerByDateEvent = false;
+
     searchHandler(event) {
         let data;
         if (event.target.value) {
@@ -526,13 +536,16 @@ export class DepositListComponent implements OnInit {
                 SearchParam: event.target.value,
             }
             this.searchString = event.target.value;
+            this.searchHandlerEvent = true;
             this.setPageData(this.selectedList.verified, data.SearchParam, null, null);
         } else {
             data = {
                 SearchParam: ""
             }
+
             this.setPageData(this.selectedList.verified, data.SearchParam, null, null)
         }
+
     }
 
     searchHandlerByDate(startingDate = null, endingDate = null) {
@@ -545,7 +558,10 @@ export class DepositListComponent implements OnInit {
         if (fromdate === "") fromdate = todate;
         if (fromdate === "" && todate === "") this.toasterService.pop('error', 'Error', "Please select Date.");
         else if ((fromdate !== undefined && todate !== null) || (todate !== null && fromdate !== null)) this.setPageData(this.selectedList.verified, "", fromdate, todate);
-        else this.setPageData(this.selectedList.verified, "", null, null)
+        else {
+            this.setPageData(this.selectedList.verified, "", null, null)
+            this.searchHandlerEvent = true;
+        }
     }
 
     //#endregion
@@ -778,12 +794,12 @@ export class DepositListComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[0].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -795,12 +811,12 @@ export class DepositListComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[0].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -812,16 +828,31 @@ export class DepositListComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[0].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
     }
 
     //#endregion Check Permission
+
+
+    setPage(pageInfo) {
+        this.pageNumber = pageInfo.offset;
+
+        if (this.searchHandlerByDateEvent && !this.searchHandlerEvent)
+            this.searchHandlerByDate();
+        else if (!this.searchHandlerByDateEvent && this.searchHandlerEvent) {
+            this.setPageData(this.selectedList.verified, (document.getElementById("searchId") as HTMLInputElement).value, null, null);
+        }
+        else
+            this.setPageData(this.selectedList.verified, null, null, null);
+
+
+    }
 }

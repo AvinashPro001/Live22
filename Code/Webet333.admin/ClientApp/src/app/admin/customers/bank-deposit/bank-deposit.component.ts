@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { customer, ErrorMessages } from '../../../../environments/environment';
-import { AdminService } from '../../admin.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterService } from 'angular2-toaster';
+import { customer } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-bank-deposit',
@@ -20,8 +20,7 @@ export class BankDepositComponent implements OnInit {
         private toasterService: ToasterService,
         private modalService: NgbModal,
         private router: Router,
-        private commonService: CommonService
-    ) { }
+        private commonService: CommonService) { }
 
     slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };
     @ViewChild('receipt') receipt: TemplateRef<any>;
@@ -228,12 +227,12 @@ export class BankDepositComponent implements OnInit {
             if (usersPermissions.permissionsList[3].submenu[14].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -245,12 +244,12 @@ export class BankDepositComponent implements OnInit {
             if (usersPermissions.permissionsList[3].submenu[14].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -262,12 +261,12 @@ export class BankDepositComponent implements OnInit {
             if (usersPermissions.permissionsList[3].submenu[14].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToasterService } from 'angular2-toaster';
-import { customer, account, ErrorMessages } from '../../../../environments/environment';
-import { AdminService } from '../../admin.service';
-import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
+import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+import { ToasterService } from 'angular2-toaster';
+import { account, customer } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-promotion-edit',
     templateUrl: './promotion-edit.component.html',
     styleUrls: ['./promotion-edit.component.scss']
 })
+
 export class PromotionEditComponent implements OnInit {
     selectOverCategory: any;
     overValue: any;
@@ -56,8 +58,8 @@ export class PromotionEditComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private router: Router
-    ) { }
+        private router: Router,
+        private commonService: CommonService) { }
 
     listType: any = [];
 
@@ -173,11 +175,13 @@ export class PromotionEditComponent implements OnInit {
         //winoverCheck: boolean;
 
         if (this.turnoverValue == 0) {
-            this.turnoverCheck = false;
+            //this.turnoverCheck = false;
+            this.turnoverCheck = true;
             this.winoverCheck = true;
             this.selectedWinTurnValue = this.data.winturn + "X";
             this.selectOverCategory = 'Winover';
-            this.displayTurnoverCategory = false;
+            //this.displayTurnoverCategory = false;
+            this.displayTurnoverCategory = true;
             this.displayWinoverCategory = true;
         }
 
@@ -220,6 +224,7 @@ export class PromotionEditComponent implements OnInit {
             isDG: (document.getElementById("dg_id") as HTMLInputElement).checked,
             isSA: (document.getElementById("sa_id") as HTMLInputElement).checked,
             isPlaytech: (document.getElementById("playtech_id") as HTMLInputElement).checked,
+            isPlaytechSlot: (document.getElementById("playtechSlots_id") as HTMLInputElement).checked,
             isPragmatic: (document.getElementById("pragmatic_id") as HTMLInputElement).checked,
             isSexyBaccarat: (document.getElementById("sexybaccarat_id") as HTMLInputElement).checked,
             isWM: (document.getElementById("wm_id") as HTMLInputElement).checked,
@@ -372,17 +377,17 @@ export class PromotionEditComponent implements OnInit {
                     return true;
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return false;
                 }
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -396,17 +401,17 @@ export class PromotionEditComponent implements OnInit {
                     return true;
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return false;
                 }
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -420,17 +425,17 @@ export class PromotionEditComponent implements OnInit {
                     return true;
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return false;
                 }
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

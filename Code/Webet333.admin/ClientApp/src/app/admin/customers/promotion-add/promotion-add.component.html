@@ -258,16 +258,16 @@
 
                     <div class="col-11 offset-1">
                         <form name="demo" style="display:flex;">
-                            <label class="container col-1 remover-margin ">
+                            <label class="container col-2 remover-margin ">
                                 Turnover
                                 <input type="radio" name="radio" (change)="UpdateOverSetting('Turnover',$event.target.checked)">
                                 <span class="checkmarkRadio"></span>
                             </label>
-                            <label class="container col-1 remover-margin ">
+                            <!--<label class="container col-2 remover-margin ">
                                 Winover
                                 <input type="radio" name="radio" (change)="UpdateOverSetting('Winover',$event.target.checked)">
                                 <span class="checkmarkRadio"></span>
-                            </label>
+                            </label>-->
                         </form>
                         <br /><br />
                         <div class="input-group col-2">
@@ -294,6 +294,9 @@
                                 <input type="checkbox" style="height:20px;width:20px;" id="playtech_id" /> &nbsp; &nbsp;<label> Playtech </label>
                             </div>
                             <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="playtechSlots_id" /> &nbsp; &nbsp;<label> Playtech Slots</label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="sexybaccarat_id" /> &nbsp; &nbsp;<label> Sexy B. </label>
                             </div>
                             <div class="col-md-2" style="font-size:20px;">
@@ -311,9 +314,8 @@
                             <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="m8" /> &nbsp; &nbsp;<label> M8 </label>
                             </div>
-                        </div>
 
-                        <div class="row col-md-12" id="winover_CheckBoxs" [style.display]="displayWinoverCategory ? 'flex' : 'none'">
+
                             <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="918Kiss_id" /> &nbsp; &nbsp;<label> 918Kiss </label>
                             </div>
@@ -326,7 +328,23 @@
                             <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="pussy888_id" /> &nbsp; &nbsp;<label> Pussy888 </label>
                             </div>
+
                         </div>
+
+                        <!--<div class="row col-md-12" id="winover_CheckBoxs" [style.display]="displayWinoverCategory ? 'flex' : 'none'">
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="918Kiss_id" /> &nbsp; &nbsp;<label> 918Kiss </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="joker_id" /> &nbsp; &nbsp;<label> Joker </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="mega888_id" /> &nbsp; &nbsp;<label> Mega888 </label>
+                            </div>
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="pussy888_id" /> &nbsp; &nbsp;<label> Pussy888 </label>
+                            </div>
+                        </div>-->
 
                         <br /><br />
                         <h3>Promotion Category</h3>

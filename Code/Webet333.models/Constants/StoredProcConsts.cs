@@ -542,5 +542,39 @@
 
             public const string VIPFreeCreditPromotionSetting = "[dbo].[FreeCredit_Promotion_Setting]";
         }
+
+        public class UserGroup
+        {
+            public const string UserGroupPersist = "[dbo].[User_Group_Persist]";
+
+            public const string UserGroupSelect = "[dbo].[User_Group_Select]";
+
+            public const string UserGroupSelectForDropdown = "[dbo].[User_Group_Select_For_Dropdown]";
+
+            public const string UserGroupUpdateStatus = "[dbo].[User_Group_Update_Status]";
+
+            public const string UserGroupUpdatDelete = "[dbo].[User_Group_Update_Delete]";
+
+            public const string UserGroupUsersInsert = "[dbo].[User_Group_Users_Insert]";
+
+            public const string UserGroupUsersSelect = "[dbo].[User_Group_Users_Select]";
+
+            public const string UserGroupUsersDelete = "[dbo].[User_Group_Users_Delete]";
+        }
+
+        public class FreeCreditEvent
+        {
+            public const string FreeCreditEventPersist = "[dbo].[FreeCreditEvent_Persist]";
+
+            public const string FreeCreditEventSetFreeCreditTerm = "[dbo].[FreeCreditEvent_SetFreeCreditTerm]";
+
+            public const string FreeCreditEventSelect = "[dbo].[FreeCreditEvent_Select]";
+
+            public const string FreeCreditEventUpdateStatus = "[dbo].[FreeCreditEvent_Update_Status]";
+
+            public const string FreeCreditEventUpdatDelete = "[dbo].[FreeCreditEvent_Delete]";
+
+            public const string FreeCreditEventUsersSelect = "[dbo].[FreeCreditEvent_UsersSelect]";
+        }
     }
 }

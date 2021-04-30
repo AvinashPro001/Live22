@@ -116,6 +116,7 @@ namespace Webet333.api.Helpers
 
         public async Task<dynamic> CallJokerGameBalance(string username, bool returnData = false)
         {
+            username = Regex.Replace(username, @"[^0-9a-zA-Z]+", "");
             DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
             var perameter = $"Method={GameConst.Joker.GetCredit}&Timestamp={temp}&Username={username}";
@@ -235,6 +236,7 @@ namespace Webet333.api.Helpers
 
         public async Task<string> CallPlaytechGameBalance(string username, IHostingEnvironment _hostingEnvironment)
         {
+            username = Regex.Replace(username, "#", "");
             var PlaytechURL = $"{GameConst.Playtech.playtechBaseUrl}" +
                                $"balance?playername={username.ToUpper()}";
 

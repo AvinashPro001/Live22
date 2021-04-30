@@ -368,7 +368,7 @@
             <button class="mb-1 btn btn-success" (click)='setThisYear("Deposit")' type="button">This Year</button>
         </div>
     </div>
-    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="depositRows" [loadingIndicator]="loadingIndicator" [columns]="depositColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
+    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="depositRows" [loadingIndicator]="loadingIndicator" [columns]="depositColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="20"  [count]="totalRowCount" [offset]="offset" (page)="setPage($event)">
     </ngx-datatable>
 </div>
 
