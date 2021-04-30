@@ -87,11 +87,6 @@ async function SliderPromotion() {
     }
 }
 
-setInterval(function () {
-    //console.log(document.getElementsByClassName('login-top-slider').matches('.slick-initialized'))
-    console.log($(".slick-initialized").length);
-}, 5000);
-
 function slider() {
     
     $('.login-top-slider').slick({
