@@ -1366,12 +1366,12 @@ async function PromotionHistory() {
         row.insertCell(2).innerHTML = result[i].Title;
         row.insertCell(3).innerHTML = result[i].TurnoverTime;
         row.insertCell(4).innerHTML = parseFloat(result[i].TurnoverTarget).toFixed(2);
-        row.insertCell(5).innerHTML = result[i].WinTurn;
-        row.insertCell(6).innerHTML = parseFloat(result[i].TurnTarget).toFixed(2);
-        row.insertCell(7).innerHTML = result[i].Staus;
-        row.insertCell(8).innerHTML = result[i].RemainingDay;
-        row.insertCell(9).innerHTML = (result[i].Created).replace("T", " ");
-        row.insertCell(10).innerHTML = (result[i].ExpiryDate).replace("T", " ");
+        //row.insertCell(5).innerHTML = result[i].WinTurn;
+        //row.insertCell(6).innerHTML = parseFloat(result[i].TurnTarget).toFixed(2);
+        row.insertCell(5).innerHTML = result[i].Staus;
+        row.insertCell(6).innerHTML = result[i].RemainingDay;
+        row.insertCell(7).innerHTML = (result[i].Created).replace("T", " ");
+        row.insertCell(8).innerHTML = (result[i].ExpiryDate).replace("T", " ");
         RowCount++;
     }
 
