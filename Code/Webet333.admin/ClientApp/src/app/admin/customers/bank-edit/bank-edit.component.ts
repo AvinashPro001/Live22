@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToasterService, ToasterConfig } from 'angular2-toaster';
+import { ToasterService } from 'angular2-toaster';
+import { account } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
-import { account, ErrorMessages } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-bank-edit',
     templateUrl: './bank-edit.component.html',
     styleUrls: ['./bank-edit.component.scss']
 })
+
 export class BankEditComponent implements OnInit {
     data: any;
     base: any;
@@ -20,8 +21,8 @@ export class BankEditComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private router: Router
-    ) { }
+        private router: Router,
+        private commonService: CommonService) { }
 
     async ngOnInit() {
         if (await this.checkUpdatePermission()) this.getBank();
@@ -124,12 +125,12 @@ export class BankEditComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[3].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -141,12 +142,12 @@ export class BankEditComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[3].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -158,12 +159,12 @@ export class BankEditComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[3].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

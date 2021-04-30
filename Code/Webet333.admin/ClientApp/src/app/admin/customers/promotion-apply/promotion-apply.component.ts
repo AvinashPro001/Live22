@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../admin.service';
-import { ToasterService, } from 'angular2-toaster';
-import { account, playtech, Joker, M8Game, AGGame, customer, ErrorMessages } from '../../../../environments/environment';
-import { debug } from 'util';
 import { Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
+import { customer } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-promotion-apply',
     templateUrl: './promotion-apply.component.html',
     styleUrls: ['./promotion-apply.component.scss']
 })
+
 export class PromotionApplyComponent implements OnInit {
     rows = [];
     columns = [];
@@ -22,8 +22,7 @@ export class PromotionApplyComponent implements OnInit {
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
-        private commonService: CommonService
-    ) { }
+        private commonService: CommonService) { }
 
     listType: any = [
         { status: "Active" },
@@ -46,9 +45,9 @@ export class PromotionApplyComponent implements OnInit {
             { prop: 'UserTurnover' },
             { prop: 'Title' },
             { prop: 'TurnoverTime' },
-            { prop: 'WinTurn' },
+            //{ prop: 'WinTurn' },
             { prop: 'TurnoverTarget' },
-            { prop: 'WinTarget' },
+            //{ prop: 'WinTarget' },
             { prop: 'Status' },
             { prop: 'Created' }
         ];
@@ -67,9 +66,9 @@ export class PromotionApplyComponent implements OnInit {
                     UserTurnover: el.UserTurnover,
                     Title: el.Title,
                     TurnoverTime: el.TurnoverTime,
-                    WinTurn: el.WinTurn,
+                    //WinTurn: el.WinTurn,
                     TurnoverTarget: el.TurnoverTarget,
-                    WinTarget: el.TurnTarget,
+                    //WinTarget: el.TurnTarget,
                     Created: this.replaceDateTime(el.Created),
                     Status: el.Staus,
                 });
@@ -104,9 +103,9 @@ export class PromotionApplyComponent implements OnInit {
                     UserTurnover: el.UserTurnover,
                     Title: el.Title,
                     TurnoverTime: el.TurnoverTime,
-                    WinTurn: el.WinTurn,
+                    //WinTurn: el.WinTurn,
                     TurnoverTarget: el.TurnoverTarget,
-                    WinTarget: el.TurnTarget,
+                    //WinTarget: el.TurnTarget,
                     Created: this.replaceDateTime(el.Created),
                     Status: el.Staus,
                 });
@@ -133,17 +132,17 @@ export class PromotionApplyComponent implements OnInit {
                     return true;
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return false;
                 }
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -157,17 +156,17 @@ export class PromotionApplyComponent implements OnInit {
                     return true;
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return false;
                 }
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -181,17 +180,17 @@ export class PromotionApplyComponent implements OnInit {
                     return true;
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return false;
                 }
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

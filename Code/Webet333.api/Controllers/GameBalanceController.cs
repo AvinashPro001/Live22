@@ -120,6 +120,7 @@ namespace Webet333.api.Controllers
 
             if (request.Username != null)
             {
+
                 using (var gamehelper = new GameBalanceHelpers(Connection))
                 {
                     dynamic JokerBalance = await gamehelper.CallJokerGameBalance(request.Username);

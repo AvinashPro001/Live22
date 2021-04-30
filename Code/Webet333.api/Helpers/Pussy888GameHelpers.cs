@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
@@ -90,6 +91,8 @@ namespace Webet333.api.Helpers
         internal static async Task<UserRegisterResponse> CallRegisterAPI(string MobileNo, string Name, string Pass)
         {
             //var Password = genratePassword();
+            Name = Regex.Replace(Name, "#", "");
+
             var Password = "Wb3@" + Pass;
 
             if (Password.Length > 14)

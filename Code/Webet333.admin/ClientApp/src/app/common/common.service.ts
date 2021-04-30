@@ -159,14 +159,14 @@ export class CommonService {
         selectYear = todate.getFullYear();
         selectToDate = selectMonth + '/' + selectDate + '/' + selectYear + ', 11:59 PM';
 
-        checkExists = document.getElementById("txt_fromdatetime");
-        if (checkExists != null) (document.getElementById("txt_fromdatetime") as HTMLInputElement).value = selectFromDate;
+        checkExists = document.getElementById('txt_fromdatetime');
+        if (checkExists != null) (document.getElementById('txt_fromdatetime') as HTMLInputElement).value = selectFromDate;
 
-        checkExists = document.getElementById("txt_todatetime");
-        if (checkExists != null) (document.getElementById("txt_todatetime") as HTMLInputElement).value = selectToDate;
+        checkExists = document.getElementById('txt_todatetime');
+        if (checkExists != null) (document.getElementById('txt_todatetime') as HTMLInputElement).value = selectToDate;
 
-        checkExists = document.getElementById("txt_startdatetime");
-        if (checkExists != null) (document.getElementById("txt_startdatetime") as HTMLInputElement).value = selectFromDate;
+        checkExists = document.getElementById('txt_startdatetime');
+        if (checkExists != null) (document.getElementById('txt_startdatetime') as HTMLInputElement).value = selectFromDate;
     }
 
     //#endregion set Date
@@ -174,9 +174,17 @@ export class CommonService {
     //#region Error List
 
     public errorMessage = {
-        unAuthorized: "You are not authorized to access this page!!",
-        PleaseProvideFromDateToDate: "Please Provide From Date and To Date !!!",
-        SelectUserName: "Please Select Username !!"
+        unAuthorized: 'You are not authorized to access this page!!',
+        PleaseProvideFromDateToDate: 'Please Provide From Date and To Date !!!',
+        SelectUserName: 'Please Select Username !!',
+        SelectUserGroupFromDropdown: 'Please select the first user group from the dropdown.',
+        NotUserInTable: 'Here not user available to add to the user group.',
+        InvalidateUserGroupName: 'Invalidate user group name.',
+        PleaseSelectAtLeastOneUser: 'Please select at least one user.',
+        PleaseSelectUserGroup: 'Please select usergroup.',
+        PleaseEnterValidFreeCreditEventName: 'Please enter valid free credit event name',
+        PleaseSetFreeCreditEventTerm: 'Please set free credit event term',
+        EmptyTable:'Table is Empty!'
     };
 
     //#endregion Error List
@@ -189,7 +197,7 @@ export class CommonService {
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
 
-            if (error.error.message === "Your access token is expired, please login again.") {
+            if (error.error.message === 'Your access token is expired, please login again.') {
                 localStorage.removeItem('currentUser');
                 this.router.navigate(['/']);
             }
@@ -197,4 +205,12 @@ export class CommonService {
     }
 
     //#endregion Check user token expire or not. After save permission user token will expire.
+
+    //#region Check variable null, undefined, NaN   
+
+    CheckVariable(variable) {
+        return variable == null || variable == undefined || variable == NaN || variable == '';
+    }
+    //#endregion Check variable null, undefined, NaN
+
 }

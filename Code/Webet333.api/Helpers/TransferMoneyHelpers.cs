@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Linq;
@@ -72,6 +73,7 @@ namespace Webet333.api.Helpers
 
         public static async Task<JokerWithdrawDepositResponse> JokerDepsoitWithdrawMethod(string userName, decimal amount)
         {
+            userName = Regex.Replace(userName, @"[^0-9a-zA-Z]+", "");
             DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
 
@@ -143,6 +145,8 @@ namespace Webet333.api.Helpers
 
         public static async Task<PlaytechWithdrawDepositResponse> PlaytechWithdrawMehtod(string userName, decimal amount, IHostingEnvironment environment)
         {
+            userName = Regex.Replace(userName,"#","");
+
             var logoutUrl = $"{GameConst.Playtech.playtechBaseUrl}logout" +
                 $"?playername={userName.ToUpper()}";
 
@@ -179,6 +183,7 @@ namespace Webet333.api.Helpers
 
         public static async Task<PlaytechWithdrawDepositResponse> PlaytechDepsoitMehtod(string userName, decimal amount, IHostingEnvironment environment)
         {
+            userName = Regex.Replace(userName, "#", "");
             var logoutUrl = $"{GameConst.Playtech.playtechBaseUrl}logout" +
                 $"?playername={userName.ToUpper()}";
 

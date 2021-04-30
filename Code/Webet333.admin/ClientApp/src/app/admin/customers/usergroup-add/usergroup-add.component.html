@@ -1,0 +1,38 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/admin/customers/usergroup-list">User Group List</a>
+    </li>
+    <li class="breadcrumb-item">Add User Group</li>
+</ol>
+
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">User Group Add</legend>
+                </div>
+            </div>
+        </div>
+
+        <div class="row card-body">
+            <div class="col-md-12">
+                <form class="border border-light p-5" name="myForm">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="col-md-12">
+                                <div class="deposit-details">
+                                    <div class="left-part"><h4>User Guoup Name </h4></div>
+                                    <div class="right-part" style="display:flex">
+                                        <input type="text" name="name" id="txt_usergroupname" autocomplete="off" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)="addUserGroup()" style="max-width:200px;align-content:center">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

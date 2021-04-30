@@ -5,9 +5,9 @@
 
 export const environment = {
     production: false,
-    //apiUrl: 'http://api.webet333.com/api/v1/'
-    apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:49841/api/v1/'
+    apiUrl: 'http://api.webet333.com/api/v1/'
+    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://localhost/api/v1/'
 };
 
 export const account = {
@@ -23,8 +23,8 @@ export const account = {
 
     dashboard: environment.apiUrl + 'account/dashboard',
     analytics: environment.apiUrl + 'account/analytics',
-    walletUpdateBalance: environment.apiUrl + "payments/UserWalletBalanceUpdate",
-    AllWalletBalance: environment.apiUrl + "Game/AllWalletBalance",
+    walletUpdateBalance: environment.apiUrl + 'payments/UserWalletBalanceUpdate',
+    AllWalletBalance: environment.apiUrl + 'Game/AllWalletBalance',
     walletSelect: environment.apiUrl + 'account/wallet/select',
     walletMainteanceUpdat: environment.apiUrl + 'account/wallet/maintenance/update',
     adminbankadd: environment.apiUrl + 'settings/admin_bank/add',
@@ -55,58 +55,58 @@ export const account = {
 
 //export const Game = {
 //    selectUser: environment.apiUrl + 'Game/SelectUser',
-//    registerAG: environment.apiUrl + "Game/AG/Register",
-//    registerJoker: environment.apiUrl + "Game/Joker/Register",
-//    registerPlaytech: environment.apiUrl + "Game/Playtech/Register",
-//    register918Kiss: environment.apiUrl + "Game/918Kiss/Register",
-//    registerM8: environment.apiUrl + "Game/M8/Register",
-//    registerMaxBet: environment.apiUrl + "MaxBet/Register",
-//    registerMega888: environment.apiUrl + "mega888/register"
+//    registerAG: environment.apiUrl + 'Game/AG/Register',
+//    registerJoker: environment.apiUrl + 'Game/Joker/Register',
+//    registerPlaytech: environment.apiUrl + 'Game/Playtech/Register',
+//    register918Kiss: environment.apiUrl + 'Game/918Kiss/Register',
+//    registerM8: environment.apiUrl + 'Game/M8/Register',
+//    registerMaxBet: environment.apiUrl + 'MaxBet/Register',
+//    registerMega888: environment.apiUrl + 'mega888/register'
 //}
 
 export const M8Game = {
-    createAction: "action=create",
-    loginAction: "action=login",
-    balanceAction: "action=balance",
-    depositAction: "action=deposit",
-    logoutAction: "action=logout",
-    withdrawalAction: "action=withdraw",
-    secret: "secret=a782988d",
-    agent: "agent=0a1a",
-    M8baseUrl: "http://apid.mywinday.com/api.aspx?"
+    createAction: 'action=create',
+    loginAction: 'action=login',
+    balanceAction: 'action=balance',
+    depositAction: 'action=deposit',
+    logoutAction: 'action=logout',
+    withdrawalAction: 'action=withdraw',
+    secret: 'secret=a782988d',
+    agent: 'agent=0a1a',
+    M8baseUrl: 'http://apid.mywinday.com/api.aspx?'
 }
 
 export const AGGame = {
-    AGbaseUrl: "http://agent.avx99.com/API/",
-    CraeteAccount: "CheckOrCreateGameAccout?",
-    TransferCredit: "TransferCredit?",
-    GetBalance: "GetBalance?",
-    ForwadGame: "forwardGame",
-    deposit: "type=IN",
-    withdraw: "type=OUT",
-    A: "odd_type=A", //(20~50000)
-    B: "odd_type=B", //(50~5000)
-    C: "odd_type=C", //(20~10000)
-    D: "odd_type=D", //(200~20000)
-    E: "odd_type=E", //(300~30000)
-    F: "odd_type=F", //(400~40000)
-    G: "odd_type=G", //(500~50000)
-    H: "odd_type=H", //(1000~100000)
-    I: "odd_type=I",  //(2000~200000)
+    AGbaseUrl: 'http://agent.avx99.com/API/',
+    CraeteAccount: 'CheckOrCreateGameAccout?',
+    TransferCredit: 'TransferCredit?',
+    GetBalance: 'GetBalance?',
+    ForwadGame: 'forwardGame',
+    deposit: 'type=IN',
+    withdraw: 'type=OUT',
+    A: 'odd_type=A', //(20~50000)
+    B: 'odd_type=B', //(50~5000)
+    C: 'odd_type=C', //(20~10000)
+    D: 'odd_type=D', //(200~20000)
+    E: 'odd_type=E', //(300~30000)
+    F: 'odd_type=F', //(400~40000)
+    G: 'odd_type=G', //(500~50000)
+    H: 'odd_type=H', //(1000~100000)
+    I: 'odd_type=I',  //(2000~200000)
 
-    MYR: "currency=MYR", //Malaysia
-    CNY: "currency=CNY", //China
-    IDR: "currency=IDR", //Indonesia
-    VND: "currency=VND", //Vietnam
-    THB: "currency=THB",  //Thailand
+    MYR: 'currency=MYR', //Malaysia
+    CNY: 'currency=CNY', //China
+    IDR: 'currency=IDR', //Indonesia
+    VND: 'currency=VND', //Vietnam
+    THB: 'currency=THB',  //Thailand
 
-    VendorID: "vendor_id=jdWvhb3sj83fhv33",
-    OperatorID: "operator_id=WB",
+    VendorID: 'vendor_id=jdWvhb3sj83fhv33',
+    OperatorID: 'operator_id=WB',
 }
 
 export const customer = {
-    transferBalanceMega888: environment.apiUrl + "mega888/deposit_withdraw",
-    transferBalanceDG: environment.apiUrl + "dg/transfer",
+    transferBalanceMega888: environment.apiUrl + 'mega888/deposit_withdraw',
+    transferBalanceDG: environment.apiUrl + 'dg/transfer',
     customerList: environment.apiUrl + 'customer/list',
     customerWinloseReport: environment.apiUrl + 'customer/winlose/report',
     customerDelete: environment.apiUrl + 'customer/profile/delete',
@@ -302,7 +302,6 @@ export const customer = {
     customerListById: environment.apiUrl + 'customer/list_by_id',
     customerListForDropdown: environment.apiUrl + 'customer/list_for_dropdown',
 
-
     contactTypeSelect: environment.apiUrl + 'settings/contact/type/select',
     contactDetailsSelect: environment.apiUrl + 'settings/contact/details/select',
     contactDetailsUpdate: environment.apiUrl + 'settings/contact/details/update',
@@ -313,35 +312,53 @@ export const customer = {
     adminAction: environment.apiUrl + 'admin/action/select_for_dropdown',
     adminModule: environment.apiUrl + 'admin/module/select_for_dropdown',
 
-    dailyReport: environment.apiUrl + 'daily/report/select'
+    dailyReport: environment.apiUrl + 'daily/report/select',
+
+    userGroupList: environment.apiUrl + 'usergroup/select',
+    userGroupListForDropdown: environment.apiUrl + 'usergroup/select/dropdown',
+    userGroupInsert: environment.apiUrl + 'usergroup/insert',
+    userGroupUpdate: environment.apiUrl + 'usergroup/update',
+    userGroupUpdateStatus: environment.apiUrl + 'usergroup/update/status',
+    userGroupDelete: environment.apiUrl + 'usergroup/delete',
+    userGroupUserInsert: environment.apiUrl + 'usergroup/user/insert',
+    userGroupUserList: environment.apiUrl + 'usergroup/user/select',
+    userGroupUserDelete: environment.apiUrl + 'usergroup/user/delete',
+
+    freeCreditEventList: environment.apiUrl + 'freecreditevent/select',
+    freeCreditEventUpdateStatus: environment.apiUrl + 'freecreditevent/update/status',
+    freeCreditEventDelete: environment.apiUrl + 'freecreditevent/delete',
+    freeCreditEventInsert: environment.apiUrl + 'freecreditevent/insert',
+    freeCreditEventUpdate: environment.apiUrl + 'freecreditevent/update',
+    freeCreditEventSetFreeCreditTerm: environment.apiUrl + 'freecreditevent/setfreecreditterm',
+    freeCreditEventUsersSelect: environment.apiUrl + 'freecreditevent/users/select'
 }
 
 export const playtech = {
-    playtechUrl: "http://api.webet333.com/api/Default/playtech",
-    PlaytechbaseUrl: "https://kioskpublicapi-am.hotspin88.com/player/",
-    Entity_Key: "2f024a8c55f1de8f588f9b540081d2de0b46d9deae4149dc24fbb58ee4adb069ca767bf4eb001dda2a85ffacc722cf869d210fec9e8d2805dd3e5dd2da15ee40",
-    PlayerName: "WEBET333",
-    InstantCashTypeOne: "local",
-    InstantCashTypeTwo: "api",
-    adminName: "WEBET",
-    kioskName: "WBET333SUBMYR",
+    playtechUrl: 'http://api.webet333.com/api/Default/playtech',
+    PlaytechbaseUrl: 'https://kioskpublicapi-am.hotspin88.com/player/',
+    Entity_Key: '2f024a8c55f1de8f588f9b540081d2de0b46d9deae4149dc24fbb58ee4adb069ca767bf4eb001dda2a85ffacc722cf869d210fec9e8d2805dd3e5dd2da15ee40',
+    PlayerName: 'WEBET333',
+    InstantCashTypeOne: 'local',
+    InstantCashTypeTwo: 'api',
+    adminName: 'WEBET',
+    kioskName: 'WBET333SUBMYR',
 
-    CreateAccount: "create?",
-    GetBalance: "balance?",
-    DepositeAmount: "deposit?",
-    WithdrawAmount: "withdraw?",
-    Logout: "logout?",
+    CreateAccount: 'create?',
+    GetBalance: 'balance?',
+    DepositeAmount: 'deposit?',
+    WithdrawAmount: 'withdraw?',
+    Logout: 'logout?',
     UpdatePassword: 'update?',
 }
 
 export const Joker = {
-    EnsureUserAccount: "CU",
-    GetCredit: "GC",
-    TransferCredit: "TC",
-    Signout: "SO",
-    SetPassword: "SP",
-    AppID: "AppID=F2NZ",
-    Secret: "Secret=hgcqgcmgyxs6n"
+    EnsureUserAccount: 'CU',
+    GetCredit: 'GC',
+    TransferCredit: 'TC',
+    Signout: 'SO',
+    SetPassword: 'SP',
+    AppID: 'AppID=F2NZ',
+    Secret: 'Secret=hgcqgcmgyxs6n'
 }
 
 export const _918Kiss = {
@@ -366,24 +383,24 @@ export const _918Kiss = {
 }
 
 export const gameBalance = {
-    restoreBalance: environment.apiUrl + "Game/Balance/Restore",
-    withdrawAmountList: environment.apiUrl + "payments/check/withdrawamount/list",
+    restoreBalance: environment.apiUrl + 'Game/Balance/Restore',
+    withdrawAmountList: environment.apiUrl + 'payments/check/withdrawamount/list',
 
-    Kiss918: environment.apiUrl + "gamebalance/918kiss",
-    Mega888: environment.apiUrl + "gamebalance/mega888",
-    Maxbet: environment.apiUrl + "gamebalance/maxbet",
-    m8: environment.apiUrl + "gamebalance/m8",
-    AG: environment.apiUrl + "gamebalance/ag",
-    DG: environment.apiUrl + "gamebalance/dg",
-    Playtech: environment.apiUrl + "gamebalance/playtech",
-    Joker: environment.apiUrl + "gamebalance/joker",
-    SexyBaccarat: environment.apiUrl + "gamebalance/sexybaccarat",
-    SA: environment.apiUrl + "gamebalance/sa",
-    Pussy888: environment.apiUrl + "gamebalance/pussy888",
-    AllBet: environment.apiUrl + "gamebalance/allbet",
-    WM: environment.apiUrl + "gamebalance/wm",
-    Pragmatic: environment.apiUrl + "gamebalance/pragmatic",
-    walletBalance: environment.apiUrl + "customer/wallet/balance",
+    Kiss918: environment.apiUrl + 'gamebalance/918kiss',
+    Mega888: environment.apiUrl + 'gamebalance/mega888',
+    Maxbet: environment.apiUrl + 'gamebalance/maxbet',
+    m8: environment.apiUrl + 'gamebalance/m8',
+    AG: environment.apiUrl + 'gamebalance/ag',
+    DG: environment.apiUrl + 'gamebalance/dg',
+    Playtech: environment.apiUrl + 'gamebalance/playtech',
+    Joker: environment.apiUrl + 'gamebalance/joker',
+    SexyBaccarat: environment.apiUrl + 'gamebalance/sexybaccarat',
+    SA: environment.apiUrl + 'gamebalance/sa',
+    Pussy888: environment.apiUrl + 'gamebalance/pussy888',
+    AllBet: environment.apiUrl + 'gamebalance/allbet',
+    WM: environment.apiUrl + 'gamebalance/wm',
+    Pragmatic: environment.apiUrl + 'gamebalance/pragmatic',
+    walletBalance: environment.apiUrl + 'customer/wallet/balance',
 }
 
 export const smsConst = {
@@ -397,8 +414,8 @@ export const smsConst = {
 }
 
 export const VIPSetting = {
-    addVIP: environment.apiUrl + "vipcategorysetting/insert",
-    getVIP: environment.apiUrl + "vipcategorysetting/select",
+    addVIP: environment.apiUrl + 'vipcategorysetting/insert',
+    getVIP: environment.apiUrl + 'vipcategorysetting/select',
 
     VIPLevelList: environment.apiUrl + 'viplevel/select',
     UserVIPLevelUpdate: environment.apiUrl + 'viplevel/user/update',
@@ -408,25 +425,25 @@ export const VIPSetting = {
 }
 
 export const ErrorMessages = {
-    unAuthorized: "You are not authorized to access this page!!",
-    PleaseProvideFromDateToDate: "Please Provide From Date and To Date !!!"
+    unAuthorized: 'You are not authorized to access this page!!',
+    PleaseProvideFromDateToDate: 'Please Provide From Date and To Date !!!'
 }
 
 export const GameRegister = {
     selectUser: environment.apiUrl + 'Game/SelectUser',
 
-    registerAG: environment.apiUrl + "ag/register",
-    registerJoker: environment.apiUrl + "joker/register",
-    registerPlaytech: environment.apiUrl + "playtech/register",
-    register918Kiss: environment.apiUrl + "918kiss/register",
-    registerM8: environment.apiUrl + "m8/register",
-    registerMaxBet: environment.apiUrl + "MaxBet/Register",
-    registerMega888: environment.apiUrl + "mega888/register",
-    registerPussy888: environment.apiUrl + "pussy888/register",
-    registerDG: environment.apiUrl + "dg/register",
-    registerSA: environment.apiUrl + "sa/register",
-    registerWM: environment.apiUrl + "wm/register",
-    registerAllBet: environment.apiUrl + "allbet/register",
-    registerSexy: environment.apiUrl + "sexybaccarart/register",
-    registerPragmatic: environment.apiUrl + "pragmatic/register"
+    registerAG: environment.apiUrl + 'ag/register',
+    registerJoker: environment.apiUrl + 'joker/register',
+    registerPlaytech: environment.apiUrl + 'playtech/register',
+    register918Kiss: environment.apiUrl + '918kiss/register',
+    registerM8: environment.apiUrl + 'm8/register',
+    registerMaxBet: environment.apiUrl + 'MaxBet/Register',
+    registerMega888: environment.apiUrl + 'mega888/register',
+    registerPussy888: environment.apiUrl + 'pussy888/register',
+    registerDG: environment.apiUrl + 'dg/register',
+    registerSA: environment.apiUrl + 'sa/register',
+    registerWM: environment.apiUrl + 'wm/register',
+    registerAllBet: environment.apiUrl + 'allbet/register',
+    registerSexy: environment.apiUrl + 'sexybaccarart/register',
+    registerPragmatic: environment.apiUrl + 'pragmatic/register'
 }

@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../admin.service';
-import { ToasterService } from 'angular2-toaster';
-import { customer, ErrorMessages } from '../../../../environments/environment';
-import { async } from '@angular/core/testing';
 import { Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
+import { customer } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-maxbet-limit',
     templateUrl: './maxbet-limit.component.html',
     styleUrls: ['./maxbet-limit.component.scss']
 })
+
 export class MaxbetLimitComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private router: Router
-    ) { }
+        private router: Router,
+        private commonService: CommonService) { }
 
     async ngOnInit() {
         await this.checkViewPermission();
@@ -67,17 +68,17 @@ export class MaxbetLimitComponent implements OnInit {
                     return true;
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return false;
                 }
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -91,17 +92,17 @@ export class MaxbetLimitComponent implements OnInit {
                     return true;
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return false;
                 }
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -115,17 +116,17 @@ export class MaxbetLimitComponent implements OnInit {
                     return true;
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return false;
                 }
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

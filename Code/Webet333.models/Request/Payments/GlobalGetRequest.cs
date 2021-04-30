@@ -19,4 +19,11 @@ namespace Webet333.models.Request.Payments
         [JsonProperty(PropertyName = "toDate")]
         public string ToDate { get; set; }
     }
+
+    public class GlobalGetWithPaginationRequest : GlobalGetRequest
+    {
+        public int? PageNo { get; set; }
+
+        public int? PageSize { get; set; }
+    }
 }

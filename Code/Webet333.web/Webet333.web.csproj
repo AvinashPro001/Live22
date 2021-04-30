@@ -27,7 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\SPA2\" />
     <Folder Include="wwwroot\fonts\NewFolder\" />
+    <Folder Include="wwwroot\js\spa2\" />
   </ItemGroup>
 
   <ItemGroup>

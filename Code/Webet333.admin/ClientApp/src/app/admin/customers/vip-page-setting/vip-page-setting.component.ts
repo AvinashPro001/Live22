@@ -1,16 +1,16 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToasterService } from 'angular2-toaster';
-import { customer, VIPSetting, ErrorMessages, account } from '../../../../environments/environment';
-import { AdminService } from '../../admin.service';
 import { Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
+import { customer, VIPSetting } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-vip-page-setting',
     templateUrl: './vip-page-setting.component.html',
     styleUrls: ['./vip-page-setting.component.scss']
 })
+
 export class VipPageComponent implements OnInit {
     disabled: boolean = false;
     TotalUser: any = 0;
@@ -19,12 +19,10 @@ export class VipPageComponent implements OnInit {
     promotionData: any;
     vipData: any;
     constructor(
-        private datePipe: DatePipe,
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private modalService: NgbModal,
-        private router: Router
-    ) { }
+        private router: Router,
+        private commonService: CommonService) { }
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
@@ -247,12 +245,12 @@ export class VipPageComponent implements OnInit {
                 return true;
             }
             else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -264,12 +262,12 @@ export class VipPageComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[11].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -281,12 +279,12 @@ export class VipPageComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[11].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

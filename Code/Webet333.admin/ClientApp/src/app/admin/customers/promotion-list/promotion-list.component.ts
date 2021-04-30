@@ -1,17 +1,19 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToasterService, ToasterConfig } from 'angular2-toaster';
-import { AdminService } from '../../admin.service';
-import { customer, ErrorMessages } from '../../../../environments/environment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { ToasterConfig, ToasterService } from 'angular2-toaster';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
+import { customer } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
     selector: 'app-admin/promotion/retrive-list',
     templateUrl: './promotion-list.component.html',
     styleUrls: ['./promotion-list.component.scss']
 })
+
 export class PromotionListComponent implements OnInit {
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
@@ -53,7 +55,7 @@ export class PromotionListComponent implements OnInit {
         private router: Router,
         private confirmationDialogService: ConfirmationDialogService,
         private modalService: NgbModal,
-    ) { }
+        private commonService: CommonService) { }
     //#endregion
 
     //#region Init
@@ -250,17 +252,17 @@ export class PromotionListComponent implements OnInit {
                     return true;
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return false;
                 }
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -274,17 +276,17 @@ export class PromotionListComponent implements OnInit {
                     return true;
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return false;
                 }
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -298,17 +300,17 @@ export class PromotionListComponent implements OnInit {
                     return true;
                 }
                 else {
-                    this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                     this.router.navigate(['admin/dashboard']);
                     return false;
                 }
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

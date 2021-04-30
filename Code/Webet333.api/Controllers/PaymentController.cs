@@ -82,7 +82,6 @@ namespace Webet333.api.Controllers
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
-            //await ValidateUser();
 
             var Role = GetUserRole(User);
 
@@ -134,20 +133,67 @@ namespace Webet333.api.Controllers
         }
 
         [HttpPost(ActionsConst.Payments.DepositList)]
-        public async Task<IActionResult> DepositList([FromBody] GlobalGetRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        public async Task<IActionResult> DepositList([FromBody] GlobalGetWithPaginationRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
-            //await ValidateUser();
             var Role = GetUserRole(User);
             using (var payment_help = new PaymentHelpers(Connection))
             {
-                if (request == null) request = new GlobalGetRequest();
+                if (request == null) request = new GlobalGetWithPaginationRequest();
                 if (Role == RoleConst.Admin)
-                    return OkResponse(await payment_help.GetDeposit(BaseUrlConfigsOptions.Value, request?.UserId, request?.Id, request?.Status, Keyword: request?.Keyword, FromDate: request.FromDate, ToDate: request.ToDate));
+                {
+                    var list = await payment_help.GetDeposit(BaseUrlConfigsOptions.Value, request?.UserId, request?.Id, request?.Status, Keyword: request?.Keyword, FromDate: request.FromDate, ToDate: request.ToDate, PageSize: request.PageSize, PageNo: request.PageNo);
+                    if (list.Count != 0)
+                    {
+                        var total = list.FirstOrDefault().Total;
+                        var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                        return OkResponse(new
+                        {
+                            result = list,
+                            total = total,
+                            totalPages = totalPages,
+                            pageSize = request.PageSize ?? 10,
+                            offset = list.FirstOrDefault().OffSet,
+                        });
+                    }
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = 0,
+                        totalPages = 0,
+                        pageSize = 0,
+                        offset = 0,
+                    });
+                }
                 else
                 {
                     if (request?.UserId != null && GetUserId(User).ToString() != request?.UserId)
                         throw new ApiException("error_invalid_userid", 400);
-                    return OkResponse(await payment_help.GetDeposit(BaseUrlConfigsOptions.Value, GetUserId(User).ToString(), request?.Id, request?.Status, Keyword: request?.Keyword));
+
+                    var list = await payment_help.GetDeposit(BaseUrlConfigsOptions.Value, GetUserId(User).ToString(), request?.Id, request?.Status, Keyword: request?.Keyword, PageSize: request.PageSize, PageNo: request.PageNo);
+                    if (list.Count != 0)
+                    {
+                        var total = list.FirstOrDefault().Total;
+                        var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                        return OkResponse(new
+                        {
+                            result = list,
+                            total = total,
+                            totalPages = totalPages,
+                            pageSize = request.PageSize ?? 10,
+                            offset = list.FirstOrDefault().OffSet,
+                        });
+                    }
+
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = 0,
+                        totalPages = 0,
+                        pageSize = 0,
+                        offset = 0,
+                    });
                 }
             }
         }

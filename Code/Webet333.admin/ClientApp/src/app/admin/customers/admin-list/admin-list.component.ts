@@ -4,7 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterConfig, ToasterService } from 'angular2-toaster';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
-import { customer, ErrorMessages } from '../../../../environments/environment';
+import { customer } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
 
 @Component({
@@ -42,7 +43,8 @@ export class AdminListComponent implements OnInit {
         private toasterService: ToasterService,
         private router: Router,
         private confirmationDialogService: ConfirmationDialogService,
-        private modalService: NgbModal) { }
+        private modalService: NgbModal,
+        private commonService: CommonService) { }
 
     async ngOnInit() {
         if (await this.checkViewPermission()) {
@@ -216,12 +218,12 @@ export class AdminListComponent implements OnInit {
                 return true;
             }
             else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -233,12 +235,12 @@ export class AdminListComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[12].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -250,12 +252,12 @@ export class AdminListComponent implements OnInit {
             if (usersPermissions.permissionsList[1].submenu[12].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }

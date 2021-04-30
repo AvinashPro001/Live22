@@ -123,7 +123,7 @@
 
             public const string CreateUser = "create";
 
-            public const string fetch = "fetch";
+            public const string fetch = "fetch2";
 
             public const string LanguageCode = "en-US";
         }

@@ -1,14 +1,9 @@
-﻿import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToasterService, ToasterConfig } from 'angular2-toaster';
+import { ToasterService } from 'angular2-toaster';
+import { account, customer, gameBalance } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
-import { customer, ErrorMessages } from '../../../../environments/environment';
-import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-import { account, playtech, AGGame, M8Game, Joker, _918Kiss, gameBalance } from '../../../../environments/environment';
-import { debounce } from 'rxjs/operators';
-import { Md5 } from 'ts-md5/dist/md5';
-import { async } from 'q';
-import { debug } from 'util';
 declare var require: any
 
 @Component({
@@ -161,8 +156,8 @@ export class WithdrawAddComponent implements OnInit {
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
-        private router: Router
-    ) { }
+        private router: Router,
+        private commonService: CommonService) { }
     //#endregion
 
     //#region customerUser
@@ -693,12 +688,12 @@ export class WithdrawAddComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[1].Permissions[0].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -710,12 +705,12 @@ export class WithdrawAddComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[1].Permissions[1].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
@@ -727,12 +722,12 @@ export class WithdrawAddComponent implements OnInit {
             if (usersPermissions.permissionsList[2].submenu[1].Permissions[2].IsChecked === true) {
                 return true;
             } else {
-                this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
             }
         } else {
-            this.toasterService.pop('error', 'Error', ErrorMessages.unAuthorized);
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
             this.router.navigate(['admin/dashboard']);
             return false;
         }
