@@ -45,9 +45,9 @@ export class PromotionApplyComponent implements OnInit {
             { prop: 'UserTurnover' },
             { prop: 'Title' },
             { prop: 'TurnoverTime' },
-            { prop: 'WinTurn' },
+            //{ prop: 'WinTurn' },
             { prop: 'TurnoverTarget' },
-            { prop: 'WinTarget' },
+            //{ prop: 'WinTarget' },
             { prop: 'Status' },
             { prop: 'Created' }
         ];
@@ -66,9 +66,9 @@ export class PromotionApplyComponent implements OnInit {
                     UserTurnover: el.UserTurnover,
                     Title: el.Title,
                     TurnoverTime: el.TurnoverTime,
-                    WinTurn: el.WinTurn,
+                    //WinTurn: el.WinTurn,
                     TurnoverTarget: el.TurnoverTarget,
-                    WinTarget: el.TurnTarget,
+                    //WinTarget: el.TurnTarget,
                     Created: this.replaceDateTime(el.Created),
                     Status: el.Staus,
                 });
@@ -103,9 +103,9 @@ export class PromotionApplyComponent implements OnInit {
                     UserTurnover: el.UserTurnover,
                     Title: el.Title,
                     TurnoverTime: el.TurnoverTime,
-                    WinTurn: el.WinTurn,
+                    //WinTurn: el.WinTurn,
                     TurnoverTarget: el.TurnoverTarget,
-                    WinTarget: el.TurnTarget,
+                    //WinTarget: el.TurnTarget,
                     Created: this.replaceDateTime(el.Created),
                     Status: el.Staus,
                 });
