@@ -38,6 +38,7 @@ export class FreecrediteventEditComponent implements OnInit {
     disabled: boolean = false;
     totalWinLossAmount: any = 0;
     totalFreeCredit: any = 0;
+    data: any;
 
     constructor(
         private adminService: AdminService,
@@ -91,6 +92,7 @@ export class FreecrediteventEditComponent implements OnInit {
                 this.completedUsers = el.completed;
                 this.totalUsers = el.totalUsers;
                 this.freeCreditEventTerms = el.terms;
+                this.data = el.userList;
                 if (el.userList != null) {
                     el.userList.forEach(el => {
                         this.rows.push({
@@ -163,6 +165,7 @@ export class FreecrediteventEditComponent implements OnInit {
                 let i = 1;
                 this.rows = [];
                 this.customerData = res.data;
+                this.data = res.data;
 
                 res.data.forEach(el => {
                     this.rows.push({
@@ -284,6 +287,26 @@ export class FreecrediteventEditComponent implements OnInit {
     }
 
     //#endregion Save Free Credit Event
+
+    //#region Export Excel
+
+    DownloadExcel() {
+        let freeCreditEventName = this.freeCreditEventName;
+
+        let model = {
+            json: this.data,
+            fileName: freeCreditEventName + "-Free-Credit-Event"
+        }
+
+        this.adminService.add<any>(customer.DownlaodExcel, model).subscribe(res => {
+            window.self.location = res.data.path;
+        }, error => {
+            this.loadingIndicator = false;
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
+    //#endregion Export Excel
 
     //#region Check Permission
 

@@ -183,7 +183,8 @@ export class CommonService {
         PleaseSelectAtLeastOneUser: 'Please select at least one user.',
         PleaseSelectUserGroup: 'Please select usergroup.',
         PleaseEnterValidFreeCreditEventName: 'Please enter valid free credit event name',
-        PleaseSetFreeCreditEventTerm: 'Please set free credit event term'
+        PleaseSetFreeCreditEventTerm: 'Please set free credit event term',
+        EmptyTable:'Table is Empty!'
     };
 
     //#endregion Error List
