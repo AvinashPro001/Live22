@@ -9,16 +9,15 @@ $(document).ready(function () {
         }
         //VIPBanner();
     }
-    
-    //if (window.location.href.toLowerCase().includes("?p=home")) {
-    //    SliderPromotion();
-    //}
+    if (window.location.href.toLowerCase().includes("mobile/home")) {
+        SliderPromotion();
+    }
 
     navaigateRegister();
     load_em();
 
     if (GetLocalStorage('language') === null) SetLocalStorage('language', 'en-US');
-    //getLanguage();
+    getLanguage();
     announcement();
 });
 //#endregion
@@ -36,16 +35,16 @@ function CheckUserVerified() {
         var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
         if (resUserData.data.mobilenoConfirmed == false) {
             var url = window.location.href.toLowerCase();
-            if (!url.includes("?p=verifiedotp"))
-                loadPageVerifiedOtp();
+            if (!url.includes("mobile/verifiedotp"))
+                window.location = "../mobile/VerifiedOtp";
         }
     }
-    catch(e){ }
+    catch (e) { }
 }
 
 async function SliderPromotion() {
     var url = window.location.href.toLowerCase();
-    if (url.includes("?p=home")) {
+    if (url.includes("mobile/home")) {
         var model = {
             ismobile: true,
             ismain: true
@@ -53,6 +52,7 @@ async function SliderPromotion() {
         var resPanel = await PostMethod(apiEndPoints.promotionsList, model);
         if (resPanel !== null && resPanel !== undefined) {
             var panelData = resPanel.data;
+            //var panel = document.getElementsByClassName('slick-track');
             var panel;
             if (GetLocalStorage('currentUser') !== null)
                 panel = document.getElementById('mobilePromotionSliderLogin');
@@ -60,17 +60,17 @@ async function SliderPromotion() {
                 panel = document.getElementById('mobilePromotionSlider');
 
             if (panel !== null) {
-                panel.innerHTML = "";
-
                 for (i = 0; i < panelData.length; i++) {
                     panel.innerHTML +=
-                        '<div class="promotion-slide-hero-banner" ><a href="#"> <img src="' + panelData[i].banner+'" class="full-img"></a></div>'
+                        //'<a href = "/Mobile/promotions"><div class="promotion-bg" style="background-image: url(' + panelData[i].banner + ');" ></div></a>';
+                        '<div class="promotion-slide-hero-banner" ><a href="#"> <img src="' + panelData[i].banner + '" class="full-img"></a></div>'
                 }
 
                 if (GetLocalStorage('currentUser') !== null)
                     document.getElementById("mobilePromotionSliderLogin").className = "login-top-slider";
                 else
                     document.getElementById("mobilePromotionSlider").className = "login-top-slider";
+                //document.getElementById("mobilePromotionSlider").className = "login-top-slider";
                 slider();
             }
         }
@@ -80,13 +80,7 @@ async function SliderPromotion() {
     }
 }
 
-setInterval(function () {
-    //console.log(document.getElementsByClassName('login-top-slider').matches('.slick-initialized'))
-    console.log($(".slick-initialized").length);
-}, 5000);
-
 function slider() {
-    
     $('.login-top-slider').slick({
         autoplay: true,
         autoplaySpeed: 5000,
@@ -114,14 +108,14 @@ function ChangeErroMessage(key) {
 }
 
 async function MobileDesktopReferenceInsert(url) {
-    if (url.href.toLowerCase() === "http://www.webet333.com/") {
+    if (url.href === "http://www.webet333.com/") {
         var referenceKeywordModelDesktopElse = {
             keyword: 'DESKTOP'
         };
         await PostMethodWithParameter(apiEndPoints.socialMediaReference, referenceKeywordModelDesktopElse);
     }
 
-    if (url.href.toLowerCase() === "http://www.webet333.com/mobile") {
+    if (url.href === "http://www.webet333.com/Mobile/home") {
         var referenceKeywordModelPhoneElse = {
             keyword: 'PHONE'
         };
@@ -148,10 +142,14 @@ async function getReference() {
     }
     if (Langauge != null) {
         SetLocalStorage('language', Langauge == "cn" ? "zh-Hans" : (Langauge == "my" ? "ms-MY" : "en-US"));
-        get();
+        //try {
+        //    history.pushState(null, null, "http://webet333.com/");
+        //}
+        //catch{
+        //    history.pushState(null, null, "http://http://localhost:27100/");
+        //}
     }
 }
-
 
 //#region DetectMobileBrowser
 function DetectMobileBrowser() {
@@ -168,8 +166,7 @@ function SetDefaultLanguage(ddlLanguages) {
     window.location.reload();
 }
 
-function getLanguage(IsLanguageExecute = true) {
-
+function getLanguage() {
     //document.getElementById("flag").attributes.src=
     (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
     (GetLocalStorage('currentUser') === null) ? $('#afterlogin').css('display', 'none') : $('#beforelogin').css('display', 'none');
@@ -177,19 +174,17 @@ function getLanguage(IsLanguageExecute = true) {
     (GetLocalStorage('currentUser') === null) ? $('#afterloginbankfooter').css('display', 'none') : $('#beforeloginbankfooter').css('display', 'none');
     navaigateRegister();
 
-    if (IsLanguageExecute) {
-        document.getElementById("englishbtn").style.background = "";
-        document.getElementById("malaybtn").style.background = "";
-        document.getElementById("chinesebtn").style.background = "";
-        if (GetLocalStorage('language') == "en-US")
-            document.getElementById("englishbtn").style.background = "orange";
+    document.getElementById("englishbtn").style.background = "";
+    document.getElementById("malaybtn").style.background = "";
+    document.getElementById("chinesebtn").style.background = "";
+    if (GetLocalStorage('language') == "en-US")
+        document.getElementById("englishbtn").style.background = "orange";
 
-        if (GetLocalStorage('language') == "ms-MY")
-            document.getElementById("malaybtn").style.background = "orange";
+    if (GetLocalStorage('language') == "ms-MY")
+        document.getElementById("malaybtn").style.background = "orange";
 
-        if (GetLocalStorage('language') == "zh-Hans")
-            document.getElementById("chinesebtn").style.background = "orange";
-    }
+    if (GetLocalStorage('language') == "zh-Hans")
+        document.getElementById("chinesebtn").style.background = "orange";
 
     if ((GetLocalStorage('currentUser') === null)) {
         $('#subMenuSports').css('top', 'calc(100% - 20px)');
@@ -244,14 +239,12 @@ async function GetUser() {
             document.getElementById("lbl_fullName").innerText = data.data.name;
             document.getElementById("lbl_userName").innerText = data.data.username;
             document.getElementById("txt_mobileUpdate").value = data.data.mobileNo;
-
         }
-        catch(e){ }
+        catch (e) { }
         PlaytechBrokenStatus();
         PragmaticBrokenStatus();
     }
     else {
-
         var res = await GetMethod(apiEndPoints.getProfile);
         var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
         sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
@@ -263,12 +256,9 @@ async function GetUser() {
             document.getElementById("lbl_fullName").innerText = res.data.name;
             document.getElementById("lbl_userName").innerText = res.data.username;
             document.getElementById("txt_mobileUpdate").value = res.data.mobileNo;
-
         }
-        catch(e){ }
-
+        catch (e) { }
     }
-
 }
 //#endregion
 
@@ -335,15 +325,14 @@ async function promotionList() {
         if (x < 600)
             height = "150px";
         for (i = 0; i < panelData.length; i++) {
-            description.innerHTML += '<div class="promotion-details-full-page" id="' + panelData[i].id + '"><div class="container promo-inner"> <div class="info-form text-center"><div class="row" ><div class="col-xs-2"><div class="back-btn"><a onclick="myFunction(\'' + panelData[i].id + '\')" rel="prefetch"><img  class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div></div><div class="col-xs-8"><figure><a onclick="loadPageHome({backFrom:\'promotion\'})"><img class="logo" src="../images/webet-main-logo.png" alt="WEBET 333.com"></a></figure></div></div></div></div><div class="promotion-details-header" style="background-color: #232323;color: white;text-align: center;"><span class="lang promotion-details-name ">' + panelData[i].title + '</span></div><div class="promotion-margin-top" style="padding-bottom:100px;">' + panelData[i].description + '<div class="padding-Promotion-bottom"></div></div></div>';
+            description.innerHTML += '<div class="promotion-details-full-page" id="' + panelData[i].id + '"><div class="container promo-inner"> <div class="info-form text-center"><div class="row" ><div class="col-xs-2"><div class="back-btn"><a onclick="myFunction(\'' + panelData[i].id + '\')" rel="prefetch"><img  class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div></div><div class="col-xs-8"><figure><a href="/Mobile/home"><img class="logo" src="../images/webet-main-logo.png" alt="WEBET 333.com"></a></figure></div></div></div></div><div class="promotion-details-header" style="background-color: #232323;color: white;text-align: center;"><span class="lang promotion-details-name ">' + panelData[i].title + '</span></div><div class="promotion-margin-top" style="padding-bottom:100px;">' + panelData[i].description + '<div class="padding-Promotion-bottom"></div></div></div>';
         }
 
         for (i = 0; i < panelData.length; i++) {
             //panel.innerHTML += '<div class="promotion-bg" style="background-image: url(' + panelData[i].banner + ');" onclick="OpenFunction(\'' + panelData[i].id + '\')" ><a href="#"></a></div>'
-            panel.innerHTML += '<div class="promotion-hero-banner" onclick="OpenFunction(\'' + panelData[i].id + '\')" ><a href="#"> <img src="' + panelData[i].banner+'" class="full-img"></a></div>'
+            panel.innerHTML += '<div class="promotion-hero-banner" onclick="OpenFunction(\'' + panelData[i].id + '\')" ><a href="#"> <img src="' + panelData[i].banner + '" class="full-img"></a></div>'
         }
     }
 }
-
 
 //#endregion

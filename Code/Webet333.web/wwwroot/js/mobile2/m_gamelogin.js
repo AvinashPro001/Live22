@@ -1,11 +1,10 @@
-﻿
-//#region Onload
+﻿//#region Onload
 $(document).ready(function () {
     getDetails();
     var path = window.location.href.toLowerCase();
     //if (!path.includes('mobile/game'))
 
-    if (path.includes('?p=home')) {
+    if (path.includes('mobile/home')) {
         Walletdate();
         GameInMaintenance(0);
         WalletSignalR();
@@ -16,7 +15,6 @@ var walletData;
 
 function WalletSignalR() {
     try {
-
         "use strict";
 
         var connection = new signalR.HubConnectionBuilder().withUrl("http://api.webet333.com/signalrhub").build();
@@ -33,7 +31,7 @@ function WalletSignalR() {
             return console.error(err.toString());
         });
     }
-    catch(e){
+    catch (e) {
         WalletSignalR();
     }
 }
@@ -43,11 +41,9 @@ async function Walletdate() {
 }
 
 async function GameInMaintenance(i) {
-    
     if (i == 0)
         walletData = await GetMethodWithReturn(apiEndPoints.walletSelect);
     for (i = 0; i < walletData.data.length; i++) {
-
         if (walletData.data[i].walletType == "AG Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('aglive').style.filter = "grayscale(1)";
             document.getElementById('agslot').style.filter = "grayscale(1)";
@@ -77,29 +73,24 @@ async function GameInMaintenance(i) {
         if (walletData.data[i].walletType == "M8 Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('m8sports').style.filter = "grayscale(1)";
             document.getElementById('m8sportslogin').style.filter = "grayscale(1)";
-            
         }
         else if (walletData.data[i].walletType == "M8 Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('m8sports').style.filter = "";
             document.getElementById('m8sportslogin').style.filter = "";
-            
         }
 
         if (walletData.data[i].walletType == "MaxBet Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('maxbetsports').style.filter = "grayscale(1)";
             document.getElementById('maxbetsportslogin').style.filter = "grayscale(1)";
-            
         }
         else if (walletData.data[i].walletType == "MaxBet Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('maxbetsports').style.filter = "";
             document.getElementById('maxbetsportslogin').style.filter = "";
-            
         }
 
         if (walletData.data[i].walletType == "Sexy Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('sexylive').style.filter = "grayscale(1)";
             document.getElementById('sexylivelogin').style.filter = "grayscale(1)";
-            
         }
         else if (walletData.data[i].walletType == "Sexy Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('sexylive').style.filter = "";
@@ -115,16 +106,13 @@ async function GameInMaintenance(i) {
             document.getElementById('salivelogin').style.filter = "";
         }
 
-
         if (walletData.data[i].walletType == "DG Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('dglive').style.filter = "grayscale(1)";
             document.getElementById('dglivelogin').style.filter = "grayscale(1)";
-            
         }
         else if (walletData.data[i].walletType == "DG Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('dglive').style.filter = "";
             document.getElementById('dglivelogin').style.filter = "";
-            
         }
 
         if (walletData.data[i].walletType == "918Kiss Wallet" && walletData.data[i].isMaintenance == true) {
@@ -189,7 +177,6 @@ async function GameInMaintenance(i) {
             document.getElementById('pragmaticslot').style.filter = "";
             document.getElementById('pragmaticslotlogin').style.filter = "";
         }
-
     }
 }
 
@@ -197,167 +184,163 @@ async function AllInButtonDisable(i) {
     if (i == 0)
         walletData = await GetMethodWithReturn(apiEndPoints.walletSelect);
     for (i = 0; i < walletData.data.length; i++) {
-
         if (walletData.data[i].walletType == "AG Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("agallin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "AG Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("agallin").disabled = false;
             }
         }
 
         if (walletData.data[i].walletType == "PlayTech Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("playtechallin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "PlayTech Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("playtechallin").disabled = false;
             }
         }
 
         if (walletData.data[i].walletType == "M8 Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("m8allin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "M8 Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("m8allin").disabled = false;
             }
         }
 
         if (walletData.data[i].walletType == "MaxBet Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("maxbetallin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "MaxBet Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("maxbetallin").disabled = false;
             }
         }
 
         if (walletData.data[i].walletType == "Sexy Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("sexyallin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "Sexy Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("sexyallin").disabled = false;
             }
         }
 
         if (walletData.data[i].walletType == "SA Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("saallin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "SA Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("saallin").disabled = false;
             }
         }
 
-
         if (walletData.data[i].walletType == "DG Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("dgallin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "DG Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("dgallin").disabled = false;
             }
         }
 
         if (walletData.data[i].walletType == "918Kiss Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("kiss918allin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "918Kiss Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("kiss918allin").disabled = false;
             }
         }
 
         if (walletData.data[i].walletType == "Mega888 Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("mega888allin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "Mega888 Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("mega888allin").disabled = false;
             }
         }
 
         if (walletData.data[i].walletType == "Joker Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("jokerallin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "Joker Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("jokerallin").disabled = false;
             }
         }
 
         if (walletData.data[i].walletType == "Pussy888 Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("pussy888allin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "Pussy888 Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("pussy888allin").disabled = false;
             }
         }
 
         if (walletData.data[i].walletType == "AllBet Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("allbetallin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "AllBet Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("allbetallin").disabled = false;
             }
         }
 
         if (walletData.data[i].walletType == "WM Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("wmallin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "WM Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("wmallin").disabled = false;
             }
         }
 
         if (walletData.data[i].walletType == "Pragmatic Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("pragmaticallin").disabled = true;
             }
         }
         else if (walletData.data[i].walletType == "Pragmatic Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("pragmaticallin").disabled = false;
             }
         }
-
     }
 }
 
 async function CheckGameInMaintenance(gameName) {
-
     if (walletData === undefined)
         await Walletdate();
 
@@ -420,7 +403,7 @@ async function getDetails() {
             resUserData = res;
         }
         checkedValue = resUserData.data.autoTransfer;
-        if (window.location.href.includes("?p=transfer"))
+        if (window.location.href.includes("Mobile/Transfer"))
             await onclickSet(1);
     }
 }
@@ -475,7 +458,6 @@ async function AG(GameType) {
 }
 
 function randomPassword() {
-
     var charsetOne = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetTwo = 'abcdefghiklmnopqrstuvwxyz', charsetThree = '@', charsetFour = '0123456789', randomstring = '', i = 0;
 
     for (i = 0; i < 3; i++) {
@@ -500,7 +482,6 @@ function randomPassword() {
 }
 
 function randomString() {
-
     var charsetOne = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetTwo = 'abcdefghiklmnopqrstuvwxyz', charsetThree = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetFour = '0123456789', randomstring = '', i = 0;
 
     for (i = 0; i < 3; i++) {
@@ -533,7 +514,6 @@ async function M8Login(usernamePrifix) {
     } else {
         localStorage.setItem('M8Url', resultM8Login.response.result.login.weburlsecure['#cdata-section']);
         localStorage.setItem('M8UrlMobile', resultM8Login.response.result.login.mobiurlsecure['#cdata-section']);
-
     }
     if (screen.width > 786) {
         window.location.href = GetLocalStorage('M8Url');
@@ -549,7 +529,6 @@ function loadingPlaytechJS() {
     imported.src = 'https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88'
     document.head.appendChild(imported);
 }
-
 
 async function loginPlaytech() {
     var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
@@ -596,8 +575,7 @@ async function logingGame(gameName) {
                 TransferInAllWallet("AllBet Wallet");
             if (gameName == "WM")
                 TransferInAllWallet("WM Wallet");
-            if (gameName == "Pragmatic")
-            {
+            if (gameName == "Pragmatic") {
                 PragmaticBrokenStatusInterval();
                 TransferInAllWallet("Pragmatic Wallet");
             }
@@ -690,12 +668,11 @@ async function GameLoginMobile(gamename) {
 
     if (resUserData.data.mobilenoConfirmed == false) {
         var url = window.location.href.toLowerCase();
-        if (!url.includes("?p=verifiedotp"))
-            loadPageVerifiedOtp();
+        if (!url.includes("mobile/verifiedotp"))
+            window.location = "../mobile/VerifiedOtp";
     }
 
     if (GetLocalStorage('currentUser') !== null) {
-
         if (resSelectUser == null) {
             let userModel = {
                 id: resUserData.data.id
@@ -703,7 +680,6 @@ async function GameLoginMobile(gamename) {
             let resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
             sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
         }
-
 
         resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
         let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
@@ -746,14 +722,15 @@ async function GameLoginMobile(gamename) {
             case 'M8':
                 if (resSelectUser.data.M8 !== true) {
                     var languageCode = (GetLocalStorage('language') === "zh-Hans" ? "ZH-CN" : "EN-US")
-                    var resultM8 = await callMe(M8ConstAction.createAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username);
-                    if (resultM8.response.errcode == "0") {
-                        let modelM8 = {
-                            userId: resUserData.data.id,
-                            M8UserName: M8Username,
-                            apiResponse: resultM8.response
-                        };
-                        var resM8 = await PostMethod(apiEndPoints.registerM8, modelM8);
+                    //var resultM8 = await callMe(M8ConstAction.createAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username);
+                    //if (resultM8.response.errcode == "0") {
+                    let modelM8 = {
+                        //        userId: resUserData.data.id,
+                        //        M8UserName: M8Username,
+                        //        apiResponse: resultM8.response
+                    };
+                    var resM8 = await PostMethod(apiEndPoints.registerM8, modelM8);
+                    if (resM8.data.response.errcode == "0") {
                         var resultM8LoginRegister = await callMe(M8ConstAction.loginAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username + "&host=sport.mywinday.com&lang=" + languageCode + "&accType=HK&ref=https://webet333.com");
 
                         if (resultM8LoginRegister.response.errcode === '-1') {
@@ -762,11 +739,12 @@ async function GameLoginMobile(gamename) {
                             localStorage.setItem('M8Url', resultM8LoginRegister.response.result.login.weburlsecure['#cdata-section']);
                             localStorage.setItem('M8UrlMobile', resultM8LoginRegister.response.result.login.mobiurlsecure['#cdata-section']);
                         }
+                        //}
+                        //else {
+                        //    return ShowError(resultM8LoginRegister.response.errtext);
+                        //}
+                        M8Login(M8Username);
                     }
-                    else {
-                        return ShowError(resultM8LoginRegister.response.errtext);
-                    }
-                    M8Login(M8Username);
                 }
                 else {
                     M8Login(M8Username);
@@ -798,26 +776,28 @@ async function GameLoginMobile(gamename) {
                 break;
             case 'Playtech':
                 if (resSelectUser.data.Playtech !== true) {
-                    var resultPlaytech = await PlaytechPostMethod(PlaytechConstAction.CreateAccount + "playername=" + PlaytechUsername + "&" + PlaytechConstParameter.adminname + "&" + PlaytechConstParameter.kioskname + "&firstname=" + resUserData.data.name + "&firstname=Webet333" + "&countrycode=MY" + "&viplevel=1" + "&languagecode=EN" + "&" + "password=" + dec(GetLocalStorage("currentUserData")));
+                    //var resultPlaytech = await PlaytechPostMethod(PlaytechConstAction.CreateAccount + "playername=" + PlaytechUsername + "&" + PlaytechConstParameter.adminname + "&" + PlaytechConstParameter.kioskname + "&firstname=" + resUserData.data.name + "&firstname=Webet333" + "&countrycode=MY" + "&viplevel=1" + "&languagecode=EN" + "&" + "password=" + dec(GetLocalStorage("currentUserData")));
 
-                    if (typeof resultPlaytech === "string") {
-                        try {
-                            JSON.parse(resultPlaytech);
-                        } catch (e) {
-                            var jObject = {
-                                data: resultPlaytech
-                            };
-                        }
+                    //if (typeof resultPlaytech === "string") {
+                    //    try {
+                    //        JSON.parse(resultPlaytech);
+                    //    } catch (e) {
+                    //        var jObject = {
+                    //            data: resultPlaytech
+                    //        };
+                    //    }
+                    //}
+                    //else {
+                    let modelPlaytech = {
+                        //        userId: resUserData.data.id,
+                        //        PlaytechUserName: PlaytechUsername,
+                        //        apiResponse: resultPlaytech
+                    };
+                    var resPlaytech1 = await PostMethod(apiEndPoints.registerPlaytech, modelPlaytech);
+                    //}
+                    if (resPlaytech1.data.errorcode == 0) {
+                        loginPlaytech();
                     }
-                    else {
-                        let modelPlaytech = {
-                            userId: resUserData.data.id,
-                            PlaytechUserName: PlaytechUsername,
-                            apiResponse: resultPlaytech
-                        };
-                        var resPlaytech1 = await PostMethod(apiEndPoints.registerPlaytech, modelPlaytech);
-                    }
-                    loginPlaytech();
                 }
                 else {
                     loginPlaytech();
@@ -830,49 +810,45 @@ async function GameLoginMobile(gamename) {
                     return ShowError(ChangeErroMessage("maintainenance_error"));
                 }
                 if (resSelectUser.data._918Kiss !== true) {
-                    var randamUserName = await generateRandomUserName();
+                    //var randamUserName = await generateRandomUserName();
 
-                    var randomPasswordString = randomPassword();
+                    //var randomPasswordString = randomPassword();
 
-                    var modelUpdateProfile = {
-                        username918: randamUserName,
-                        password918: randomPasswordString
-                    };
-                    var updateProfile = await PostMethod(apiEndPoints.updateProfile, modelUpdateProfile);
+                    //var modelUpdateProfile = {
+                    //    username918: randamUserName,
+                    //    password918: randomPasswordString
+                    //};
+                    //var updateProfile = await PostMethod(apiEndPoints.updateProfile, modelUpdateProfile);
 
-
-                    var result981Kiss = await _918KissPostMethod("account.ashx?" + _918KissActionConst.AddUser + "&" + _918KissConstParameter.agent + "&" + "userName=" + randamUserName + "&" + "PassWd=" + randomPasswordString + "&" + "Name=" + resUserData.data.name + "&" + "Tel=" + resUserData.data.mobileNo + "&" + "Memo=" + null + "&" + "UserType=" + _918KissUserType.realplayer + "&" + "UserAreaId=" + _918KissUserAreaId.Malaysia + "&" + "time=" + UTCTime + "&" + _918KissConstParameter.authcode + "&" + "sign=" + generateHasValue(randamUserName) + "&" + _918KissConstParameter.pwdtype);
+                    //var result981Kiss = await _918KissPostMethod("account.ashx?" + _918KissActionConst.AddUser + "&" + _918KissConstParameter.agent + "&" + "userName=" + randamUserName + "&" + "PassWd=" + randomPasswordString + "&" + "Name=" + resUserData.data.name + "&" + "Tel=" + resUserData.data.mobileNo + "&" + "Memo=" + null + "&" + "UserType=" + _918KissUserType.realplayer + "&" + "UserAreaId=" + _918KissUserAreaId.Malaysia + "&" + "time=" + UTCTime + "&" + _918KissConstParameter.authcode + "&" + "sign=" + generateHasValue(randamUserName) + "&" + _918KissConstParameter.pwdtype);
 
                     let model918Kiss = {
-                        userId: resUserData.data.id,
-                        _918KissUserName: randamUserName,
-                        apiResponse: result981Kiss
+                        //    userId: resUserData.data.id,
+                        //    _918KissUserName: randamUserName,
+                        //    apiResponse: result981Kiss
                     };
                     var res918Kiss = await PostMethod(apiEndPoints.register918Kiss, model918Kiss);
-                    location.href = '/mobile?p=download&id=918DownloadTab';
+                    if (res918Kiss.data.code == 0)
+                        location.href = '/Mobile/download?id=918DownloadTab';
                 }
                 else {
-                    location.href = '/mobile?p=download&id=918DownloadTab';
+                    location.href = '/Mobile/download?id=918DownloadTab';
                 }
                 break;
             case 'Pussy888':
                 LoaderShow();
                 if (resSelectUser.data.Pussy888 !== true) {
                     var model = {
-
                     }
                     try {
                         var res = await PostMethodWithParameter(apiEndPoints.pussyRegister, model);
                     }
-                    catch (e){
-
+                    catch (e) {
                     }
-                    //window.location.href = "/Mobile/download?id=Pussy888DownloadTab";
-                    location.href = '/mobile?p=download&id=Pussy888DownloadTab';
+                    window.location.href = "/Mobile/download?id=Pussy888DownloadTab";
                 }
                 else {
-                    //window.location.href = "/Mobile/download?id=Pussy888DownloadTab";
-                    location.href = '/mobile?p=download&id=Pussy888DownloadTab';
+                    window.location.href = "/Mobile/download?id=Pussy888DownloadTab";
                 }
                 break;
             case 'Joker':
@@ -882,22 +858,23 @@ async function GameLoginMobile(gamename) {
                     return ShowError(ChangeErroMessage("maintainenance_error"));
                 }
                 if (resSelectUser.data.Joker !== true) {
-                    var perameter = 'Method=' + jokerMethodConst.EnsureUserAccount + '&Timestamp=' + timestamp + '&Username=' + JokerUsername;
-                    var resultJoker = await JokerPostMethod('?' + jokerConstParameter.AppID + '&Signature=' + generateSignature(jokerMethodConst.EnsureUserAccount, JokerUsername, null, null), perameter);
+                    //var perameter = 'Method=' + jokerMethodConst.EnsureUserAccount + '&Timestamp=' + timestamp + '&Username=' + JokerUsername;
+                    //var resultJoker = await JokerPostMethod('?' + jokerConstParameter.AppID + '&Signature=' + generateSignature(jokerMethodConst.EnsureUserAccount, JokerUsername, null, null), perameter);
 
-                    var jokerSetPasswordperameter = 'Method=' + jokerMethodConst.SetPassword + '&' + 'Password=' + dec(GetLocalStorage('currentUserData')) + '&' + 'Timestamp=' + timestamp + '&' + 'Username=' + JokerUsername;
-                    var resultJokerSetPassword = await JokerPostMethod('?' + jokerConstParameter.AppID + '&' + 'Signature=' + generateSignature(jokerMethodConst.SetPassword, JokerUsername, dec(GetLocalStorage('currentUserData'))), jokerSetPasswordperameter);
+                    //var jokerSetPasswordperameter = 'Method=' + jokerMethodConst.SetPassword + '&' + 'Password=' + dec(GetLocalStorage('currentUserData')) + '&' + 'Timestamp=' + timestamp + '&' + 'Username=' + JokerUsername;
+                    //var resultJokerSetPassword = await JokerPostMethod('?' + jokerConstParameter.AppID + '&' + 'Signature=' + generateSignature(jokerMethodConst.SetPassword, JokerUsername, dec(GetLocalStorage('currentUserData'))), jokerSetPasswordperameter);
 
                     let modelJoker = {
-                        userId: resUserData.data.id,
-                        JokerUserName: JokerUsername,
-                        apiResponse: resultJoker
+                        //userId: resUserData.data.id,
+                        //JokerUserName: JokerUsername,
+                        //apiResponse: resultJoker
                     };
                     var resJoker = await PostMethod(apiEndPoints.registerJoker, modelJoker);
-                    location.href = '/mobile?p=download&id=JokerDownloadTab';
+                    if (resJoker.data.Status != null)
+                        location.href = '/Mobile/download?id=JokerDownloadTab';
                 }
                 else {
-                    location.href = '/mobile?p=download&id=JokerDownloadTab';
+                    location.href = '/Mobile/download?id=JokerDownloadTab';
                 }
                 break;
             case 'Mega888':
@@ -908,21 +885,19 @@ async function GameLoginMobile(gamename) {
                 }
                 if (resSelectUser.data.Mega888 !== true) {
                     var userMegaa88Model = {
-
                     }
                     var res = await PostMethod(apiEndPoints.mega888Register, userMegaa88Model);
-                    if (res !== undefined || res !== null) {  
-                        location.href = '/mobile?p=download&id=MegaDownloadTab';
+                    if (res !== undefined || res !== null) {
+                        location.href = '/Mobile/download?id=MegaDownloadTab';
                     }
                 }
                 else {
-                    location.href = '/mobile?p=download&id=MegaDownloadTab';
+                    location.href = '/Mobile/download?id=MegaDownloadTab';
                 }
                 break;
             case 'DG':
                 if (resSelectUser.data.DG !== true) {
                     var userDGModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.dgRegister, userDGModel);
                     if (res.data.codeId == 0) {
@@ -933,7 +908,6 @@ async function GameLoginMobile(gamename) {
                 }
                 else {
                     var Model = {
-
                     }
                     var login = await PostMethod(apiEndPoints.dgLogin, Model);
                     if (login.data.codeId == 0)
@@ -943,7 +917,6 @@ async function GameLoginMobile(gamename) {
             case 'SexyBaccarat':
                 if (resSelectUser.data.SexyBaccarat !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.sexyRegister, userRegisterModel);
                     if (res.data.status == "0000") {
@@ -968,7 +941,6 @@ async function GameLoginMobile(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.SA !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.saRegister, userRegisterModel);
                     if (res.data.status == "0") {
@@ -1018,7 +990,6 @@ async function GameLoginMobile(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.WM !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.WMRegister, userRegisterModel);
                     if (res.data.errorCode == 0) {
@@ -1043,15 +1014,14 @@ async function GameLoginMobile(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.Pragmatic !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.pragmaticRegister, userRegisterModel);
                     if (res.data.error == "0") {
-                        window.open("../mobile/PragmaticGame", "_blank")
+                        window.open("../Information/PragmaticGame", "_blank")
                     }
                 }
                 else {
-                    window.open("../mobile/PragmaticGame", "_blank")
+                    window.open("../Mobile/PragmaticGame", "_blank")
                 }
                 break;
         }

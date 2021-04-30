@@ -1,16 +1,15 @@
 ﻿//#region Onload
 $(document).ready(function () {
-    //if (GetLocalStorage('currentUser') !== null) {
-    //    BankList();
-    //    UserBankDetails();
-    GetProfile();
-    //}
+    if (GetLocalStorage('currentUser') !== null) {
+        BankList();
+        UserBankDetails();
+        GetProfile();
+    }
 });
 //#endregion
 
 //#region Users Bank Details
 async function UserBankDetails() {
-
     var model = {
     };
     var res = await PostMethod(apiEndPoints.userBankDetail, model);
@@ -24,13 +23,12 @@ async function UserBankDetails() {
         }
     }
     WithdrawUsernameSet();
-
 }
 //#endregion Users Bank Details
 
 //#region Withdraw Username
 async function WithdrawUsernameSet() {
-    if (location.href.toLowerCase().includes("?p=withdraw"))
+    if (location.href.toLowerCase().includes("mobile/withdraw"))
         if (UserAccountName != null && UserAccountName != undefined && UserAccountName != "") {
             //document.getElementById("lbl_accountHolder").disabled = true;
             //document.getElementById("lbl_accountHolder").value = UserAccountName;
@@ -45,11 +43,10 @@ TableData = new Array();
 
 var allWalletList;
 
-async function DepositBankList() {
+async function BankList() {
     var res = await GetMethod(apiEndPoints.depositDdl);
 
     if (res !== null && res !== undefined) {
-
         var DepsoitBankList = document.getElementById("Deposit_bank_list");
         var name = res.data.bankDetails;
         depositMethodId = res.data.depositMethods.filter(x => x.method == 'Bank Transfer')[0].id;
@@ -63,123 +60,47 @@ async function DepositBankList() {
                 }
                 else {
                     DepsoitBankList.innerHTML += '<li onclick="LiSelectDepositFunction(\'' + this.id + '\',\'' + this.accountName + '\',\'' + this.accountNo + '\')" id="' + this.id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + this.id + '"/><label for="' + this.id + '" title="state" class="bank-list-deposit blk-text"><figure><img class="icon-bank-info" src="' + this.bankIconLogo + '" alt="Maybank" /></figure><p>' + this.bankName + '</p></label></li>';
-
                 }
             });
-    }
-}
 
-async function WithdrawBankList() {
-    var withdrawBankList = document.getElementById('withdraw_bank_list');
-    var BankList = await GetMethod(apiEndPoints.bank);
-    bankList = BankList.data;
-    if (withdrawBankList != null) {
-        for (i = 0; i < BankList.data.length; i++) {
-            if (UserBankName != BankList.data[i].bankName)
-                withdrawBankList.innerHTML += '<li onclick="LISlectFunction(\'' + BankList.data[i].id + '\',\'' + BankList.data[i].bankName + '\')" id="' + BankList.data[i].id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + BankList.data[i].id + '"/><label for="' + BankList.data[i].id + '" title="state"><figure><img class="icon-bank-info" src="' + BankList.data[i].Logo + '" alt="Maybank" /></figure><p>' + BankList.data[i].bankName + '</p></label></li>';
-            else {
-                withdrawBankList.innerHTML += '<li class="active" onclick="LISlectFunction(\'' + BankList.data[i].id + '\',\'' + BankList.data[i].bankName + '\')" id="' + BankList.data[i].id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + BankList.data[i].id + '"/><label for="' + BankList.data[i].id + '" title="state"><figure><img class="icon-bank-info" src="' + BankList.data[i].Logo + '" alt="Maybank" /></figure><p>' + BankList.data[i].bankName + '</p></label></li>';
-                LISlectFunction(BankList.data[i].id, BankList.data[i].bankName);
-            }
-        }
-    }
-}
-
-async function TransferWalletList() {
-    var res = await GetMethod(apiEndPoints.depositDdl);
-
-    if (res !== null && res !== undefined) {
         var wallet = res.data.walletTypes;
         allWalletList = res.data.walletTypes;
         $.each(wallet, function () {
             $("#ddl_transferFromWallet").append($("<option />").val(this.id).text(this.walletType));
         });
-    }
-}
 
-async function DepositPromotionList() {
-    var x = screen.width;
-    var model = {
-        id: null,
-        ismobile: true
-    };
-    var resPanel = await PostMethodWithParameter(apiEndPoints.promotionsDailyList, model);
-    var promotion = resPanel.data;
-    var promotionList = document.getElementById('promotion');
-    var promotionInfo = document.getElementById('promotionInfo');
-    var onlinePromotionList = document.getElementById('onlinePromotion');
-    if (promotionList !== null) {
-        for (l = 0; l < promotion.length; l++) {
+        var x = screen.width;
+        var model = {
+            id: null,
+            ismobile: true
+        };
+        var resPanel = await PostMethodWithParameter(apiEndPoints.promotionsDailyList, model);
+        var promotion = resPanel.data;
+        var promotionList = document.getElementById('promotion');
+        var promotionInfo = document.getElementById('promotionInfo');
+        var onlinePromotionList = document.getElementById('onlinePromotion');
+        if (promotionList !== null) {
+            for (l = 0; l < promotion.length; l++) {
+                promotionList.innerHTML += '<li class="mar-btm-ten border" id=\'' + promotion[l].id + '\' onclick="LiSelectPromotion(\'' + promotion[l].id + '\')"><input type="radio" name="promotion" id="promotionId" value=\'' + promotion[l].id + '\'/><label><div class="promotion-content" for="rad1"><img class="full-img" src=\'' + promotion[l].bannerImage + '\' /><div class="deposit-promotion-details"><span class="fa fa-question-circle question-mark" data-toggle="modal" data-target="#promotionDetails" onclick="PromotionDetails(\'' + promotion[l].id + 'D' + '\')" style="margin-right:10px;"></span><p class="no-mar">' + promotion[l].promotionTitle + '</p></div></div></label></li>';
+                promotionInfo.innerHTML += '<div id=\'' + promotion[l].id + 'D' + '\' style="display:none;">' + promotion[l].description + '</div>';
+                onlinePromotionList.innerHTML += '<li class="mar-btm-ten border" id=\'online-' + promotion[l].id + '\' onclick="LiSelectPromotion(\'' + promotion[l].id + '\',true)"><input type="radio" name="promotion" id="promotionId" value=\'' + promotion[l].id + '\'/><label><div class="promotion-content" for="rad1"><img class="full-img" src=\'' + promotion[l].bannerImage + '\' /><div class="deposit-promotion-details"><span class="fa fa-question-circle question-mark" data-toggle="modal" data-target="#promotionDetails" onclick="PromotionDetails(\'' + promotion[l].id + 'D' + '\')" style="margin-right:10px;"></span><p class="no-mar">' + promotion[l].promotionTitle + '</p></div></div></label></li>';
+            }
+        }
 
-            promotionList.innerHTML += '<li class="mar-btm-ten border" id=\'' + promotion[l].id + '\' onclick="LiSelectPromotion(\'' + promotion[l].id + '\')"><input type="radio" name="promotion" id="promotionId" value=\'' + promotion[l].id + '\'/><label><div class="promotion-content" for="rad1"><img class="full-img" src=\'' + promotion[l].bannerImage + '\' /><div class="deposit-promotion-details"><span class="fa fa-question-circle question-mark" data-toggle="modal" data-target="#promotionDetails" onclick="PromotionDetails(\'' + promotion[l].id + 'D' + '\')" style="margin-right:10px;"></span><p class="no-mar">' + promotion[l].promotionTitle + '</p></div></div></label></li>';
-            promotionInfo.innerHTML += '<div id=\'' + promotion[l].id + 'D' + '\' style="display:none;">' + promotion[l].description + '</div>';
-            onlinePromotionList.innerHTML += '<li class="mar-btm-ten border" id=\'online-' + promotion[l].id + '\' onclick="LiSelectPromotion(\'' + promotion[l].id + '\',true)"><input type="radio" name="promotion" id="promotionId" value=\'' + promotion[l].id + '\'/><label><div class="promotion-content" for="rad1"><img class="full-img" src=\'' + promotion[l].bannerImage + '\' /><div class="deposit-promotion-details"><span class="fa fa-question-circle question-mark" data-toggle="modal" data-target="#promotionDetails" onclick="PromotionDetails(\'' + promotion[l].id + 'D' + '\')" style="margin-right:10px;"></span><p class="no-mar">' + promotion[l].promotionTitle + '</p></div></div></label></li>';
+        var withdrawBankList = document.getElementById('withdraw_bank_list');
+        var BankList = await GetMethod(apiEndPoints.bank);
+        bankList = BankList.data;
+        if (withdrawBankList != null) {
+            for (i = 0; i < BankList.data.length; i++) {
+                if (UserBankName != BankList.data[i].bankName)
+                    withdrawBankList.innerHTML += '<li onclick="LISlectFunction(\'' + BankList.data[i].id + '\',\'' + BankList.data[i].bankName + '\')" id="' + BankList.data[i].id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + BankList.data[i].id + '"/><label for="' + BankList.data[i].id + '" title="state"><figure><img class="icon-bank-info" src="' + BankList.data[i].Logo + '" alt="Maybank" /></figure><p>' + BankList.data[i].bankName + '</p></label></li>';
+                else {
+                    withdrawBankList.innerHTML += '<li class="active" onclick="LISlectFunction(\'' + BankList.data[i].id + '\',\'' + BankList.data[i].bankName + '\')" id="' + BankList.data[i].id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + BankList.data[i].id + '"/><label for="' + BankList.data[i].id + '" title="state"><figure><img class="icon-bank-info" src="' + BankList.data[i].Logo + '" alt="Maybank" /></figure><p>' + BankList.data[i].bankName + '</p></label></li>';
+                    LISlectFunction(BankList.data[i].id, BankList.data[i].bankName);
+                }
+            }
         }
     }
-}
-
-async function BankList() {
-
-    //var res = await GetMethod(apiEndPoints.depositDdl);
-
-    //if (res !== null && res !== undefined) {
-
-    //var DepsoitBankList = document.getElementById("Deposit_bank_list");
-    //var name = res.data.bankDetails;
-    //depositMethodId = res.data.depositMethods.filter(x => x.method == 'Bank Transfer')[0].id;
-    //var firstSelect = true;
-    //if (DepsoitBankList != null)
-    //    $.each(name, function () {
-    //        if (firstSelect) {
-    //            DepsoitBankList.innerHTML += '<li onclick="LiSelectDepositFunction(\'' + this.id + '\',\'' + this.accountName + '\',\'' + this.accountNo + '\')" id="' + this.id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + this.id + '"/><label for="' + this.id + '" title="state" class="bank-list-deposit blk-text"><figure><img class="icon-bank-info" src="' + this.bankIconLogo + '" alt="Maybank" /></figure><p>' + this.bankName + '</p></label></li>';
-    //            firstSelect = false;
-    //            LiSelectDepositFunction(this.id, this.accountName, this.accountNo);
-    //        }
-    //        else {
-    //            DepsoitBankList.innerHTML += '<li onclick="LiSelectDepositFunction(\'' + this.id + '\',\'' + this.accountName + '\',\'' + this.accountNo + '\')" id="' + this.id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + this.id + '"/><label for="' + this.id + '" title="state" class="bank-list-deposit blk-text"><figure><img class="icon-bank-info" src="' + this.bankIconLogo + '" alt="Maybank" /></figure><p>' + this.bankName + '</p></label></li>';
-
-    //        }
-    //    });
-
-    //var wallet = res.data.walletTypes;
-    //allWalletList = res.data.walletTypes;
-    //$.each(wallet, function () {
-    //    $("#ddl_transferFromWallet").append($("<option />").val(this.id).text(this.walletType));
-    //});
-
-    //var x = screen.width;
-    //var model = {
-    //    id: null,
-    //    ismobile: true
-    //};
-    //var resPanel = await PostMethodWithParameter(apiEndPoints.promotionsDailyList, model);
-    //var promotion = resPanel.data;
-    //var promotionList = document.getElementById('promotion');
-    //var promotionInfo = document.getElementById('promotionInfo');
-    //var onlinePromotionList = document.getElementById('onlinePromotion');
-    //if (promotionList !== null) {
-    //    for (l = 0; l < promotion.length; l++) {
-
-    //        promotionList.innerHTML += '<li class="mar-btm-ten border" id=\'' + promotion[l].id + '\' onclick="LiSelectPromotion(\'' + promotion[l].id + '\')"><input type="radio" name="promotion" id="promotionId" value=\'' + promotion[l].id + '\'/><label><div class="promotion-content" for="rad1"><img class="full-img" src=\'' + promotion[l].bannerImage + '\' /><div class="deposit-promotion-details"><span class="fa fa-question-circle question-mark" data-toggle="modal" data-target="#promotionDetails" onclick="PromotionDetails(\'' + promotion[l].id + 'D' + '\')" style="margin-right:10px;"></span><p class="no-mar">' + promotion[l].promotionTitle + '</p></div></div></label></li>';
-    //        promotionInfo.innerHTML += '<div id=\'' + promotion[l].id + 'D' + '\' style="display:none;">' + promotion[l].description + '</div>';
-    //        onlinePromotionList.innerHTML += '<li class="mar-btm-ten border" id=\'online-' + promotion[l].id + '\' onclick="LiSelectPromotion(\'' + promotion[l].id + '\',true)"><input type="radio" name="promotion" id="promotionId" value=\'' + promotion[l].id + '\'/><label><div class="promotion-content" for="rad1"><img class="full-img" src=\'' + promotion[l].bannerImage + '\' /><div class="deposit-promotion-details"><span class="fa fa-question-circle question-mark" data-toggle="modal" data-target="#promotionDetails" onclick="PromotionDetails(\'' + promotion[l].id + 'D' + '\')" style="margin-right:10px;"></span><p class="no-mar">' + promotion[l].promotionTitle + '</p></div></div></label></li>';
-    //    }
-    //}
-
-    //var withdrawBankList = document.getElementById('withdraw_bank_list');
-    //var BankList = await GetMethod(apiEndPoints.bank);
-    //bankList = BankList.data;
-    //if (withdrawBankList != null) {
-    //    for (i = 0; i < BankList.data.length; i++) {
-    //        if (UserBankName != BankList.data[i].bankName)
-    //            withdrawBankList.innerHTML += '<li onclick="LISlectFunction(\'' + BankList.data[i].id + '\',\'' + BankList.data[i].bankName + '\')" id="' + BankList.data[i].id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + BankList.data[i].id + '"/><label for="' + BankList.data[i].id + '" title="state"><figure><img class="icon-bank-info" src="' + BankList.data[i].Logo + '" alt="Maybank" /></figure><p>' + BankList.data[i].bankName + '</p></label></li>';
-    //        else {
-    //            withdrawBankList.innerHTML += '<li class="active" onclick="LISlectFunction(\'' + BankList.data[i].id + '\',\'' + BankList.data[i].bankName + '\')" id="' + BankList.data[i].id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + BankList.data[i].id + '"/><label for="' + BankList.data[i].id + '" title="state"><figure><img class="icon-bank-info" src="' + BankList.data[i].Logo + '" alt="Maybank" /></figure><p>' + BankList.data[i].bankName + '</p></label></li>';
-    //            LISlectFunction(BankList.data[i].id, BankList.data[i].bankName);
-    //        }
-    //    }
-    //}
-    //}
 }
 //#endregion
 
@@ -250,18 +171,14 @@ async function CheckWithdrawAmountList() {
     });
     if (pageNum > 10)
         $("#navWithdrawAmount").addClass("expand");
-
 }
-
 
 //#region GetProfile
 var User_BankName;
 async function GetProfile() {
-
     var res = await GetMethod(apiEndPoints.getProfile);
     User_BankName = res.data.name;;
     SetLocalStorage('918Username', res.data.username918);
-
 }
 //#endregion
 
@@ -358,13 +275,11 @@ function LiSelectPromotion(id, online) {
         }
         else {
             if (id !== null) {
-
                 var p = document.getElementById("online-" + id);
                 p.classList.add("active");
                 SelectPromotion = id;
             }
             else {
-
                 SelectPromotion = "";
             }
         }
@@ -376,13 +291,11 @@ function LiSelectPromotion(id, online) {
         }
         else {
             if (id !== null) {
-
                 var p = document.getElementById(id);
                 p.classList.add("active");
                 SelectPromotion = id;
             }
             else {
-
                 SelectPromotion = "";
             }
         }
@@ -423,7 +336,6 @@ function reset(i) {
     if (i === 4) {
         $('#txt_currentPassword').val('');
         $('#txt_newPassword').val('');
-
     }
 }
 //#endregion
@@ -443,7 +355,8 @@ async function handleFileSelect1(id) {
         }
     }
 }
-readUploadedFileAsDataURL = (inputFile) => {
+
+const readUploadedFileAsDataURL = (inputFile) => {
     const temporaryFileReader = new FileReader();
     return new Promise((resolve, reject) => {
         temporaryFileReader.onerror = () => {
@@ -468,7 +381,6 @@ async function loadImage() {
     }
 }
 
-
 function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
     for (var i = 0; i < arraytosearch.length; i++) {
         if (arraytosearch[i][key] === valuetosearch) {
@@ -488,7 +400,6 @@ function btn(j) {
 var selDiv = "";
 document.addEventListener("DOMContentLoaded", init, false);
 function init() {
-    selDiv = "";
     if (document.querySelector('#receipt') !== null) {
         document.querySelector('#receipt').addEventListener('change', handleFileSelect, false);
         selDiv = document.querySelector("#selectedFiles");
@@ -545,7 +456,6 @@ async function Deposit(online) {
         amountId = "#txt_amount";
     onlinePayment = online;
     if ($(amountId).val() <= 30000 && $(amountId).val() >= 10) {
-
         if ($(amountId).val() > 0) {
             var radioValue = $("input[name='promotion']:checked").val();
             var model;
@@ -616,14 +526,11 @@ async function Deposit(online) {
                             if (walletData.data.CheckPromotionRemind == true) {
                                 model.promotionApplyEligible = true;
                                 depositModel = model;
-
                             }
 
                             if (walletData.data.Staus == null) {
                                 model.promotionApplyEligible = true;
                             }
-
-
                         }
                     }
                     else {
@@ -643,7 +550,6 @@ async function Deposit(online) {
                 if (walletData.data.CheckPopupWithoutPromotion == true) {
                     LoaderHide();
                     depositModel = model;
-
                 }
                 else {
                     LoaderHide();
@@ -652,7 +558,6 @@ async function Deposit(online) {
                     return 0;
                 }
             }
-
 
             if (!online) {
                 if (filter_array(TableData).length === 0) {
@@ -672,7 +577,6 @@ async function Deposit(online) {
         LoaderHide();
     }
     else {
-        LoaderHide();
         ShowError(ChangeErroMessage("min_max_amount_error"));
     }
 }
@@ -705,13 +609,12 @@ async function DepositAfterPromotion() {
     }
     LoaderHide();
 }
-//#endregion Deposit 
+//#endregion Deposit
 
 //#region Withdrawal
 async function Withdrawal() {
     //LoaderShow();
     if ($('#txt_withdrawalAmount').val() <= 30000 && $('#txt_withdrawalAmount').val() >= 10) {
-
         //await regisrationGame();
         if ($('#txt_withdrawalAmount').val() > 0) {
             var model = {
@@ -748,7 +651,7 @@ async function Withdrawal() {
 
             //var CheckPromotionApply = await PostMethodWithParameter(apiEndPoints.promotionApplyCheck, promotionModel);
             //if (CheckPromotionApply.data.Staus != null && CheckPromotionApply.data.TotalPromotionRow > 0) {
-            //    
+            //
             //    return ShowError(ChangeErroMessage("promo_ongoing_withdraw_error"));
             //}
 
@@ -765,7 +668,6 @@ async function Withdrawal() {
         else {
             ShowError(ChangeErroMessage("amount_greater_zero_error"));
         }
-
     }
     else {
         ShowError(ChangeErroMessage("min_max_amount_error"));
@@ -780,10 +682,8 @@ async function Checkbalance() {
     if ($('#ddl_transferFromWallet').val() != "") {
         if ($('#ddl_transferToWallet').val() != "") {
             if ($('#txt_transferAmount').val() >= 1) {
-
                 //WalletBalance();
                 await TransferAmount();
-
             }
             else {
                 ShowError(ChangeErroMessage("min1_max1000_amount_error"));
@@ -817,7 +717,6 @@ async function TransferAmount() {
         var valueFromWalletName = resBalance.data.filter(function (walletName) { return walletName.walletId === model.fromWalletId; });
         var valueToWalletName = resBalance.data.filter(function (wallet) { return wallet.walletId === model.toWalletId; });
 
-
         if (Number($('#txt_transferAmount').val()) <= Number(valueFromWalletName[0].amount)) {
             if (valueFromWalletName.length !== 0 && valueToWalletName.length !== 0) {
                 var nameFromWallet = valueFromWalletName[0].walletName;
@@ -839,7 +738,6 @@ async function TransferAmount() {
     else {
         ShowError(ChangeErroMessage("amount_greater_zero_error"));
     }
-
 }
 
 function generate(n) {
@@ -865,27 +763,14 @@ function generateGuid() {
 }
 //#endregion
 
-var pageSize = 10;
-var pageNumber = 0;
-var NumberOfLine = 1
-
-var apiRunning = false;
 //#region DepositHistory
-async function DepositHistory(pageNo = 0) {
-    apiRunning = true;
-    var model = {
-        pageNo: pageNo,
-        pageSize: 10
-    };
+async function DepositHistory() {
+    var model = {};
     var res = await PostMethod(apiEndPoints.depositHistory, model);
-    var result = res.data.result;
+    var result = res.data;
     var depositHistory = document.getElementById("depositHistory");
-    if (pageNo == 1) {
-        pageNumber = 1;
-        depositHistory.innerHTML = "";
-    }
+    depositHistory.innerHTML = "";
     if (result.length > 0) {
-
         for (i = 0; i < result.length; i++) {
             if (result[i].verified === "approved")
                 depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
@@ -898,25 +783,19 @@ async function DepositHistory(pageNo = 0) {
         }
     }
     else {
-        if (res.data.total == 0)
-            if ($("#depositHistory").length == 0)
-                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
+        depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
     }
-    getLanguage(false);
-    apiRunning = false;
+    getLanguage();
 }
 //#endregion
 
 //#region WithdrawHistory
 async function WithdrawHistory() {
-
     var model = {};
     var res = await PostMethod(apiEndPoints.withdrawHistory, model);
     var result = res.data;
     var withdrawHistory = document.getElementById("withdrawHistory");
     withdrawHistory.innerHTML = "";
-
-
     if (result.length > 0) {
         for (i = 0; i < result.length; i++) {
             if (result[i].verified === "approved")
@@ -932,15 +811,12 @@ async function WithdrawHistory() {
     else {
         withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_withdraw"></span></p></div></div>'
     }
-    getLanguage(false);
-
-
+    getLanguage();
 }
 //#endregion
 
 //#region TransferHistory
 async function TransferHistory() {
-
     var model = {};
     var res = await PostMethod(apiEndPoints.transferHistory, model);
     var result = res.data;
@@ -961,14 +837,12 @@ async function TransferHistory() {
     else {
         transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_transfer"></span></p></div></div>'
     }
-    getLanguage(false);
-
+    getLanguage();
 }
 //#endregion
 
 //#region PromotionHistory
 async function PromotionHistory() {
-
     var model = {};
     var res = await PostMethodWithParameter(apiEndPoints.promotionHistory, model);
     var result = res.data;
@@ -993,16 +867,13 @@ async function PromotionHistory() {
     }
     else {
         promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_promotion"></span></p></div></div>'
-
     }
-    getLanguage(false);
-
+    get();
 }
 //#endregion
 
 //#region StatementHistory
 async function StatementHistory() {
-
     var model = {};
     var res = await PostMethodWithParameter(apiEndPoints.transactionHistory, model);
     var result = res.data;
@@ -1011,21 +882,17 @@ async function StatementHistory() {
     if (result.length > 0) {
         for (i = 0; i < result.length; i++) {
             statementHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].debitFrom + '</p><div class="game-time">' + result[i].transactionNo + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].creditTo + '</p><div class="bank-name-amount">' + result[i].amount + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].transactionType + '</div><div class="text-primary">' + parseFloat(result[i].currentBalance).toFixed(2) + '</div></div></div>'
-
         }
     }
     else {
         statementHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_statement"></span></p></div></div>'
-
     }
-    getLanguage(false);
-
+    get();
 }
 //#endregion
 
 //#region RebateHistory
 async function RebateHistory() {
-
     var model = {};
     var res = await PostMethodWithParameter(apiEndPoints.rebateHistory, model);
     var resultRebateLoseRebate = res.data.winloseRebate;
@@ -1053,8 +920,7 @@ async function RebateHistory() {
         rebateTurnOverCommissionRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_rebate"></span></p></div></div>'
     }
 
-    getLanguage(false);
-
+    get();
 }
 //#endregion
 
@@ -1107,11 +973,9 @@ async function TransferValidation(walletName) {
         var nameFromWalletAmount = valueFromWalletName[0].amount;
         document.getElementById('txt_transferAmount').value = nameFromWalletAmount;
         document.getElementById('walletBalance').innerHTML = nameFromWalletAmount;
-
     }
     else {
         ShowError(ChangeErroMessage("select_from_wallet_error"));
-
     }
 }
 //#endregion
@@ -1124,7 +988,7 @@ function OpenModelTransferWallet(GameName) {
 }
 
 async function TransferInAllWallet(GameWalletName) {
-    if (location.href.toLowerCase().includes("?p=transfer"))
+    if (location.href.toLowerCase().includes("mobile/transfer"))
         await LoadingImageShowAllInSection(GameWalletName);
     var GameName;
     if (GameWalletName == undefined)
@@ -1137,8 +1001,9 @@ async function TransferInAllWallet(GameWalletName) {
     }
     var res = await PostMethod(apiEndPoints.AllInWallet, model);
     await WalletBalance();
+    
 }
-
+//#endregion Transfer Main Wallet to Any Wallet
 function LoadingImageShowAllInSection(GameName) {
     switch (GameName) {
         case "918Kiss Wallet": document.getElementById("918KissWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
@@ -1158,7 +1023,6 @@ function LoadingImageShowAllInSection(GameName) {
     }
 }
 
-//#endregion Transfer Main Wallet to Any Wallet
 
 async function CheckMainteance() {
     var res = await GetMethodWithReturn(apiEndPoints.VaderPayMainteanceSelect);
@@ -1166,7 +1030,6 @@ async function CheckMainteance() {
         document.getElementById("vaderpayMainteanceSection").style.display = "";
         document.getElementById("vaderpaySection").style.display = "none";
         document.getElementById("vaderpayPromotionSection").style.display = "none";
-
     }
 }
 
@@ -1189,5 +1052,4 @@ async function CheckSupportGame() {
         document.getElementById("sexyallin").disabled = !res.data[0].IsSexyBaccarat ? true : false;
         document.getElementById("wmallin").disabled = !res.data[0].IsWM ? true : false;
     }
-
 }
