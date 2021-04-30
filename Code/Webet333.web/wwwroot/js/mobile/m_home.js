@@ -43,39 +43,46 @@ function CheckUserVerified() {
     catch(e){ }
 }
 
+var isPromotionExecute = false;
+
 async function SliderPromotion() {
     var url = window.location.href.toLowerCase();
     if (url.includes("?p=home")) {
-        var model = {
-            ismobile: true,
-            ismain: true
-        };
-        var resPanel = await PostMethod(apiEndPoints.promotionsList, model);
-        if (resPanel !== null && resPanel !== undefined) {
-            var panelData = resPanel.data;
-            var panel;
-            if (GetLocalStorage('currentUser') !== null)
-                panel = document.getElementById('mobilePromotionSliderLogin');
-            else
-                panel = document.getElementById('mobilePromotionSlider');
-
-            if (panel !== null) {
-                panel.innerHTML = "";
-
-                for (i = 0; i < panelData.length; i++) {
-                    panel.innerHTML +=
-                        '<div class="promotion-slide-hero-banner" ><a href="#"> <img src="' + panelData[i].banner+'" class="full-img"></a></div>'
-                }
-
+        if (!isPromotionExecute) {
+            isPromotionExecute = true;
+            var model = {
+                ismobile: true,
+                ismain: true
+            };
+            var resPanel = await PostMethod(apiEndPoints.promotionsList, model);
+            if (resPanel !== null && resPanel !== undefined) {
+                var panelData = resPanel.data;
+                var panel;
                 if (GetLocalStorage('currentUser') !== null)
-                    document.getElementById("mobilePromotionSliderLogin").className = "login-top-slider";
+                    panel = document.getElementById('mobilePromotionSliderLogin');
                 else
-                    document.getElementById("mobilePromotionSlider").className = "login-top-slider";
-                slider();
+                    panel = document.getElementById('mobilePromotionSlider');
+
+                if (panel !== null) {
+                    panel.innerHTML = "";
+
+                    for (i = 0; i < panelData.length; i++) {
+                        panel.innerHTML +=
+                            '<div class="promotion-slide-hero-banner" ><a href="#"> <img src="' + panelData[i].banner + '" class="full-img"></a></div>'
+                    }
+
+                    if (GetLocalStorage('currentUser') !== null)
+                        document.getElementById("mobilePromotionSliderLogin").className = "login-top-slider";
+                    else
+                        document.getElementById("mobilePromotionSlider").className = "login-top-slider";
+                    slider();
+                }
             }
-        }
-        else {
-            SliderPromotion();
+            else {
+                isPromotionExecute = false;
+                SliderPromotion();
+            }
+            isPromotionExecute = false;
         }
     }
 }
