@@ -7,7 +7,7 @@ $(document).ready(function () {
     }
 });
 //#endregion
-//a
+
 //#region Users Bank Details
 async function UserBankDetails() {
     var model = {
