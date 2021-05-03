@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
+using Webet333.dapper;
 using Webet333.files.interfaces;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
@@ -373,5 +374,44 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Promotion Report List
+
+        #region Promotion User Select Report
+
+        [Authorize]
+        [HttpPost(ActionsConst.Promotions.PromotionUsersSelect)]
+        public async Task<IActionResult> PromotionUsersSelectAsync([FromBody] SearchParamWithValidationRequest request)
+        {
+            await CheckUserRole();
+
+            request.UserId = GetUserId(User);
+            request.UniqueId = GetUniqueId(User);
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Promotions.PromotionUsersReport, request);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Promotion User Select Report
+
+        #region Promotion Select For dropdown
+
+        [Authorize]
+        [HttpGet(ActionsConst.Promotions.PromotionSelectForDropdown)]
+        public async Task<IActionResult> PromotionSelectForDropdownAsync()
+        {
+            await CheckUserRole();
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Promotions.PromotionSelectForDropdown, new { });
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Promotion Select For dropdown
     }
 }
