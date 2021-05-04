@@ -212,7 +212,7 @@ export class PromotionsUsersReportComponent implements OnInit {
     async checkViewPermission() {
         const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[3].Permissions[0].IsChecked === true) {
-            if (usersPermissions.permissionsList[3].submenu[15].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[17].Permissions[0].IsChecked === true) {
                 return true;
             } else {
                 this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
@@ -229,7 +229,7 @@ export class PromotionsUsersReportComponent implements OnInit {
     async checkUpdatePermission() {
         const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[3].Permissions[1].IsChecked === true) {
-            if (usersPermissions.permissionsList[3].submenu[15].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[17].Permissions[1].IsChecked === true) {
                 return true;
             } else {
                 this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
@@ -246,7 +246,7 @@ export class PromotionsUsersReportComponent implements OnInit {
     async checkAddPermission() {
         const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[3].Permissions[2].IsChecked === true) {
-            if (usersPermissions.permissionsList[3].submenu[15].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[17].Permissions[2].IsChecked === true) {
                 return true;
             } else {
                 this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
