@@ -11,7 +11,7 @@ $(document).ready(function () {
             if (localStorage.getItem('IsExecute') == "true" || localStorage.getItem('IsExecute') == true || localStorage.getItem('IsExecute') == null) {
                 localStorage.setItem('IsExecute', false);
             }
-            //VIPBanner();
+            VIPBanner();
         }
         WalletSignalR();
         Walletdate();
