@@ -50,6 +50,9 @@ namespace Webet333.models.Response
         [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }
 
+        [JsonProperty("languageName")]
+        public string LanguageName { get; set; }
+
         [JsonProperty("winLossAmount")]
         public double WinLossAmount { get; set; }
 
