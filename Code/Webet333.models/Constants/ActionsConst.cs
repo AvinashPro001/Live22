@@ -245,6 +245,10 @@
             public const string PromotionGroupUpdate = "promotions/group/update";
 
             public const string PromotionGroupDelete = "promotions/group/delete";
+
+            public const string PromotionUsersSelect = "promotions/users/select";
+
+            public const string PromotionSelectForDropdown = "promotions/select/dropdown";
         }
 
         public class Settings

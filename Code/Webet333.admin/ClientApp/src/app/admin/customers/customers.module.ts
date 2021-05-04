@@ -87,6 +87,7 @@ import { UsergroupAddComponent } from './usergroup-add/usergroup-add.component';
 import { FreecrediteventListComponent } from './freecreditevent-list/freecreditevent-list.component';
 import { FreecrediteventAddComponent } from './freecreditevent-add/freecreditevent-add.component';
 import { FreecrediteventEditComponent } from './freecreditevent-edit/freecreditevent-edit.component';
+import { PromotionsUsersReportComponent } from './promotions-users-report/promotions-users-report.component';
 
 const routes: Routes = [
     { path: 'list', component: CustomerListComponent },
@@ -159,7 +160,8 @@ const routes: Routes = [
     { path: 'usergroup-add', component: UsergroupAddComponent },
     { path: 'freecreditevent-list', component: FreecrediteventListComponent },
     { path: 'freecreditevent-add', component: FreecrediteventAddComponent },
-    { path: 'freecreditevent-edit', component: FreecrediteventEditComponent }
+    { path: 'freecreditevent-edit', component: FreecrediteventEditComponent },
+    { path: 'promotions-users-report', component: PromotionsUsersReportComponent }
 ];
 
 @NgModule({
@@ -181,7 +183,7 @@ const routes: Routes = [
         SelectDropDownModule,
         ButtonsModule,
     ],
-    declarations: [CustomerListComponent, DepositListComponent, WithdrawListComponent, TransferListComponent, CustomerEditComponent, DepositAddComponent, WithdrawAddComponent, ConfirmationDialogComponent, PromotionListComponent, PromotionAddComponent, BonusAddComponent, BonusListComponent, AnnouncementListComponent, TransferAddComponent, AnnouncementAddComponent, AdjustmentListComponent, AdjustmentAddComponent, MaintenanceComponent, BankListComponent, BankAddComponent, BankEditComponent, RefKeywordAddComponent, MaxbetLimitComponent, RefKeywordAnalyticsComponent, PromotionEditComponent, MaxbetMinmaxComponent, RebateCalculateComponent, RebateListComponent, BettingDetailsComponent, MaxbetBettingDetailsComponent, ApprovalDurationComponent, TrackingListComponent, BetdetailsLastupdateListComponent, UsersDetailsComponent, AnnouncementEditComponent, PromotionApplyComponent, DownloadLinkComponent, LoseRebateCalcComponent, m8LimitComponent, m8MinmaxComponent, MaxbetBettingLimitComponent, GameLastBettingUpdateComponent, BankWtihdrawComponent, BankDepositComponent, ManagerApproveListComponent, AllGameSetBetlimitComponent, SmsNotifyComponent, PromotionGroupingListComponent, PromotionGroupAddComponent, PromotionGroupingEditComponent, PromotionReportComponent, BettingdetailsCheckComponent, UsersWinloseReportComponent, RebateSettingComponent, UsersRegisterReportComponent, UsersBehaviourReportsComponent, GameresetPasswordReportComponent, VipPageComponent, TestingPaginationComponent, AdminListComponent, AdminAddComponent, AdminEditComponent, ContactDetailsListComponent, ContactDetailsAddComponent, AdminLogReportComponent, DailyReportComponent, UsergroupListComponent, UsergroupEditComponent, UsergroupAddComponent, FreecrediteventListComponent, FreecrediteventAddComponent, FreecrediteventEditComponent
+    declarations: [CustomerListComponent, DepositListComponent, WithdrawListComponent, TransferListComponent, CustomerEditComponent, DepositAddComponent, WithdrawAddComponent, ConfirmationDialogComponent, PromotionListComponent, PromotionAddComponent, BonusAddComponent, BonusListComponent, AnnouncementListComponent, TransferAddComponent, AnnouncementAddComponent, AdjustmentListComponent, AdjustmentAddComponent, MaintenanceComponent, BankListComponent, BankAddComponent, BankEditComponent, RefKeywordAddComponent, MaxbetLimitComponent, RefKeywordAnalyticsComponent, PromotionEditComponent, MaxbetMinmaxComponent, RebateCalculateComponent, RebateListComponent, BettingDetailsComponent, MaxbetBettingDetailsComponent, ApprovalDurationComponent, TrackingListComponent, BetdetailsLastupdateListComponent, UsersDetailsComponent, AnnouncementEditComponent, PromotionApplyComponent, DownloadLinkComponent, LoseRebateCalcComponent, m8LimitComponent, m8MinmaxComponent, MaxbetBettingLimitComponent, GameLastBettingUpdateComponent, BankWtihdrawComponent, BankDepositComponent, ManagerApproveListComponent, AllGameSetBetlimitComponent, SmsNotifyComponent, PromotionGroupingListComponent, PromotionGroupAddComponent, PromotionGroupingEditComponent, PromotionReportComponent, BettingdetailsCheckComponent, UsersWinloseReportComponent, RebateSettingComponent, UsersRegisterReportComponent, UsersBehaviourReportsComponent, GameresetPasswordReportComponent, VipPageComponent, TestingPaginationComponent, AdminListComponent, AdminAddComponent, AdminEditComponent, ContactDetailsListComponent, ContactDetailsAddComponent, AdminLogReportComponent, DailyReportComponent, UsergroupListComponent, UsergroupEditComponent, UsergroupAddComponent, FreecrediteventListComponent, FreecrediteventAddComponent, FreecrediteventEditComponent, PromotionsUsersReportComponent
     ],
     providers: [ConfirmationDialogService],
     entryComponents: [ConfirmationDialogComponent],

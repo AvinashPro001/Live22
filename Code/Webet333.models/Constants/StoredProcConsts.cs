@@ -275,6 +275,10 @@
             public const string PromotionGroupSelect = "[dbo].[PromotionGroup_SELECT]";
 
             public const string PromotionGroupDelete = "[dbo].[PromotionGroup_Delete]";
+
+            public const string PromotionUsersReport = "[dbo].[Users_Promotion_Select]";
+
+            public const string PromotionSelectForDropdown = "[dbo].[Promotion_Select_For_Dropdown]";
         }
 
         public class GameBalance

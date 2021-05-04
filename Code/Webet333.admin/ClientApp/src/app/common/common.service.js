@@ -28,7 +28,9 @@ var CommonService = /** @class */ (function () {
             PleaseSelectAtLeastOneUser: 'Please select at least one user.',
             PleaseSelectUserGroup: 'Please select usergroup.',
             PleaseEnterValidFreeCreditEventName: 'Please enter valid free credit event name',
-            PleaseSetFreeCreditEventTerm: 'Please set free credit event term'
+            PleaseSetFreeCreditEventTerm: 'Please set free credit event term',
+            EmptyTable: 'Table is Empty!',
+            SelectPromotionId: 'Please Select Promotion'
         };
     }
     CommonService.prototype.add = function (apiPath, data) {
@@ -155,7 +157,7 @@ var CommonService = /** @class */ (function () {
         });
     };
     //#endregion Check user token expire or not. After save permission user token will expire.
-    //#region Check variable null, undefined, NaN   
+    //#region Check variable null, undefined, NaN
     CommonService.prototype.CheckVariable = function (variable) {
         return variable == null || variable == undefined || variable == NaN || variable == '';
     };
