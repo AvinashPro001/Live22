@@ -332,7 +332,7 @@ export class FreecrediteventAddComponent implements OnInit {
         if (this.customerData == null) { this.toasterService.pop('error', 'Error', this.commonService.errorMessage.EmptyTable); }
         else {
             let freeCreditEventName = (document.getElementById("txt_freecrediteventname") as HTMLInputElement).value;
-            this.data = this.customerData.map(({ userId, name, userName, phoneNumber, winLossAmount, freeCreditAmount }) => ({ userId, name, userName, phoneNumber, winLossAmount, freeCreditAmount }));
+            this.data = this.customerData.map(({ userId, name, userName, phoneNumber, languageName, winLossAmount, freeCreditAmount }) => ({ userId, name, userName, phoneNumber, languageName, winLossAmount, freeCreditAmount }));
 
             let model = {
                 json: this.data,
