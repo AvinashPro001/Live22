@@ -3,9 +3,10 @@
         <div class="col-lg-2 col-xs-4" *ngIf="ShowDropDown">
             <ngx-select-dropdown tabindex="0" [multiple]="false" [config]="config" [options]="customerData" (change)="onChangeDropDown($event)"></ngx-select-dropdown>
         </div>
-        <div class="col-lg-1 col-xs-4">
+        <div class="col-1 col-xs-4">
             <button class="mb-1 btn btn-success" (click)='RetoreBalance()' type="button">Restore</button>
         </div>
+
         <div class="col-lg-2 col-xs-4">
             <button class="mb-1 btn btn-outline-primary" (click)="show(content)" type="button">Withdraw Amount &nbsp;&nbsp; <span id="lockIcon" class=""></span>&nbsp;&nbsp;{{totalWithdrawAmountWithMYR}}</button>
         </div>
@@ -224,7 +225,7 @@
                     <h4 class="col-2 h4">User's VIP Level :</h4>
                     <h4 class="col-10 h4">
                         <img style="width:100px;margin-top:-50px;margin-bottom:-50px;" src="{{vipLevelImage}}" />&nbsp;&nbsp;&nbsp;
-                        {{vipLevel == null ? 'Select username.' : vipLevel }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button (click)="unfinishedShow(jokerUnfinishedList)" class="btn btn-primary">Change VIP Level</button>
+                        {{vipLevel == null ? 'Select username.' : vipLevel }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button (click)="openWindowCustomClass(VIPLevel)" class="btn btn-primary">Change VIP Level</button>
                     </h4>
                 </div>
             </div>
@@ -801,6 +802,7 @@
     </div>
 </ng-template>
 <!--Remarks modal code ends-->
+
 <!--Remarks modal code starts-->
 <ng-template #VIPLevel let-modal>
     <div class="modal-header">

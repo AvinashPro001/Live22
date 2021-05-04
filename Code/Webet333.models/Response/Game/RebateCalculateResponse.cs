@@ -18,6 +18,8 @@
 
         public decimal CommAmount { get; set; }
 
+        public decimal CommPercentage { get; set; }
+
         public string GameName { get; set; }
 
         public string MobileNo { get; set; }

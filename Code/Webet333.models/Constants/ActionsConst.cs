@@ -679,6 +679,8 @@
 
             public const string VIPLevelUserUpdate = "viplevel/user/update";
 
+            public const string VIPLevelUserDetails = "viplevel/user/details";
+
             public const string VIPLevelGiveFreeCredit = "viplevel/give/freecredit";
 
             public const string VIPFreeCreditPromotionSetting = "viplevel/freecredit/promotion/setting";
