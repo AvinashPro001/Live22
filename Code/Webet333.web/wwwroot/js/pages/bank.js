@@ -1098,7 +1098,7 @@ async function WithdrawHistory() {
 
 
 
-async function DepositHistory(pageNo = 1) {
+async function DepositHistory(pageNo = 0) {
 
     var contentToRemove = document.querySelectorAll("#navDeposit");
     $(contentToRemove).remove();

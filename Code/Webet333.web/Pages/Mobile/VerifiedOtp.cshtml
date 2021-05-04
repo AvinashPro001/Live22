@@ -1,121 +1,288 @@
 @page
-@{
-    ViewData["Title"] = "Verified Mobile Number";
-    Layout = "~/Pages/Shared/LayoutMobile.cshtml";
-}
-<script>
-    document.getElementById("Translation_Option").innerHTML = "";
-    document.getElementById("navbarhide").innerHTML = "";
-    document.body.classList.add("no-pad-top");
+@{ ViewData["Title"] = "Verified Mobile Number";
+    Layout = ""; }
+<div id="comContent"></div>
+<div id="mComContent">
 
-    function Counter() {
-        document.getElementById("button_resend").disabled = true;
+    <script>
+        document.body.classList.add("no-pad-top");
+        $('body').css('padding-top', '0px');
+        function Counter() {
+            document.getElementById("button_resend").disabled = true;
 
-        var count = 60;
-        var timer = setInterval(function () {
-            $("#counter_txt").html((count--) - 1);
-            if (count == 0) {
-                clearInterval(timer);
-                document.getElementById("counter_txt").innerText = "";
-                document.getElementById("button_resend").disabled = false;
+            var count = 60;
+            var timer = setInterval(function () {
+                $("#counter_txt").html((count--) - 1);
+                if (count == 0) {
+                    clearInterval(timer);
+                    document.getElementById("counter_txt").innerText = "";
+                    document.getElementById("button_resend").disabled = false;
+                }
+            }, 1000);
+        }
+
+        async function SendOTP(number) {
+            if (number == 1)
+                Counter();
+            var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
+            if (resUserData.data.mobilenoConfirmed == false) {
+                LoaderShow();
+                var res = await GetMethodWithReturn(apiEndPoints.SendOTP);
+                document.getElementById("txt_otp").value = "";
+                ShowSuccess(ChangeErroMessage("otp_send_success"));
+                LoaderHide();
             }
-        }, 1000);
-    }
+        }
 
-    async function SendOTP(number) {
-        if (number == 1)
-            Counter();
-        var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-        if (resUserData.data.mobilenoConfirmed == false) {
+
+        async function VerifiedOTP() {
             LoaderShow();
-            var res = await GetMethodWithReturn(apiEndPoints.SendOTP);
-            document.getElementById("txt_otp").value = "";
-            ShowSuccess(ChangeErroMessage("otp_send_success"));
+            let model = {
+                otp: document.getElementById("txt_otp").value
+            }
+
+            if (model.otp == null || model.otp == undefined || model.otp == "") {
+                LoaderHide();
+                return ShowError(ChangeErroMessage("error_otp_required"));
+            }
+
+            if (model.otp.length > 6) {
+                LoaderHide();
+                return ShowError(ChangeErroMessage("error_otp"));
+            }
+            try {
+                var res = await PostMethod(apiEndPoints.VerifiedOTP, model);
+            }
+            catch {
+                document.getElementById("txt_otp").value = "";
+            }
+            if (res.data.errorCode == 0) {
+                var Details = await GetMethod(apiEndPoints.getProfile);
+                sessionStorage.setItem('UserDetails', enc(JSON.stringify(Details)));
+                window.location = "../mobile";
+
+            }
             LoaderHide();
         }
-    }
 
-    async function VerifiedOTP() {
-        LoaderShow();
-        let model = {
-            otp: document.getElementById("txt_otp").value
-        }
 
-        if (model.otp == null || model.otp == undefined || model.otp == "") {
-            LoaderHide();
-            return ShowError(ChangeErroMessage("error_otp_required"));
+        if (GetLocalStorage('currentUser') === null) {
+            window.location.href = "../mobile";
         }
-
-        if (model.otp.length > 6) {
-            LoaderHide();
-            return ShowError(ChangeErroMessage("error_otp"));
-        }
-        try {
-            var res = await PostMethod(apiEndPoints.VerifiedOTP, model);
-        }
-        catch{
-            document.getElementById("txt_otp").value = "";
-        }
-        if (res.data.errorCode == 0) {
-            var Details = await GetMethod(apiEndPoints.getProfile);
-            sessionStorage.setItem('UserDetails', enc(JSON.stringify(Details)));
-            //await gtag_report_conversion("../Mobile/home");
-            window.location = "../Mobile/home";
+        else {
 
         }
-        LoaderHide();
-    }
+    </script>
+    <div class="white-bg forget-pswd">
+        <div class="container">
+            <div class="info-form text-center">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <div class="back-btn"><a onclick="loadPageHome({backFrom:'about'})"><img class="tab-bankicon" src="~/images/mobile/BackArrow_svg.svg" alt="" /></a></div>
+                    </div>
+                    <div class="col-xs-8">
+                        <h4 class="black-text lang" key="otp_verification"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    if (GetLocalStorage('currentUser') === null) {
-        window.location.href = "../Mobile/home";
-    }
-    else {
+    <div class="flexible-height login-height white-bg account-page-extra-padding">
+        <div class="container" style="margin-bottom:100px;">
+            <div class="reg_nav mar-top-15">
+                <div class="loin-window">
+                    <div class="row">
 
-    }
+                        <div class="col-xs-12">
+                            <form>
+                                <div class="mar-btm-ten">
+                                    <p class="big-text no-mar"><strong><span class="lang" key="otp_text"></span></strong></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" id="txt_otp" tabindex="1" pattern="\d*" class="form-control" autocomplete="off" placeholder="OTP">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" id="button_resend" class="btn btn-primary login_btn join_btn no-mar-btm" onclick="SendOTP(1)">
+                                <span class="lang" key="send_otp"></span>
+                                <span id="counter_txt"></span>
+                            </button>
+                            <button type="button" class="btn btn-success login_btn join_btn no-mar-btm" onclick="VerifiedOTP()"><span class="lang" key="verified_otp"></span></button>
+                            <button type="button" class="btn btn-success login_btn join_btn no-mar-btm" onclick="logoutMain(1)"><span class="lang" key="sidebar_Logout"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="laguage">
+        <div id="language" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body text-center lang-modal">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <p>Select Language.</p>
+                        <ul class="list-inline pad-top-ten">
+                            <li><button id="englishbtn" class="submit" type="button" data-dismiss="modal" onclick="language('en-US')">English</button></li>
+                            <li><button id="malaybtn" class="submit" type="button" data-dismiss="modal" onclick="language('ms-MY')">Malay</button></li>
+                            <li><button id="chinesebtn" class="submit" type="button" data-dismiss="modal" onclick="language('zh-Hans')">Chinese</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-widget" id="footerWidget">
+        <ul class="list-inline text-center">
+            <li id="homePagebottom">
+                <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch">
+                    <i class="fa fa-home"></i>
+                    <p class="white-text no-mar" data-translate="menu_home">Home</p>
+                </a>
+            </li>
+            <li id="promotionPagebottom" class="">
+                <a onclick="loadPagePromotions()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-gift"></i>
+                    <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
+                </a>
+            </li>
+            <li id="contactusPagebottom">
+                <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-user"></i>
+                    <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="whatsapp()">
+                    <figure><img src="~/images/images-mobile/whatsapp.png" alt="Whats App" /></figure>
+                    <p class="white-text no-mar">Whatsapp</p>
+                </a>
+            </li>
+            <li class="live-chat">
+                <a class="live-chat-icon"><p class="white-text no-mar" data-translate="Live_chat">Live Chat</p></a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <a id="mobileM8" style="display:none"></a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
+            $("#chatting").toggle();
+        });
+        $(".contact-user").mouseover(function () {
+            $("#chatting").toggle();
+        });
+    });
 </script>
-<div class="white-bg forget-pswd">
-    <div class="container">
-        <div class="info-form text-center">
-            <div class="row">
-                <div class="col-xs-2">
-                    <div class="back-btn"><a href="../Mobile/home"><img class="tab-bankicon" src="~/images/mobile/BackArrow_svg.svg" alt="" /></a></div>
-                </div>
-                <div class="col-xs-8">
-                    <h4 class="black-text lang" key="otp_verification"></h4>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="flexible-height login-height white-bg account-page-extra-padding">
-    <div class="container" style="margin-bottom:100px;">
-        <div class="reg_nav mar-top-15">
-            <div class="loin-window">
-                <div class="row">
 
-                    <div class="col-xs-12">
-                        <form>
-                            <div class="mar-btm-ten">
-                                <p class="big-text no-mar"><strong><span class="lang" key="otp_text"></span></strong></p>
-                            </div>
-                            <div class="form-group">
-                                <input type="number" id="txt_otp" tabindex="1" pattern="\d*" class="form-control" autocomplete="off" placeholder="OTP">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <button type="button" id="button_resend" class="btn btn-primary login_btn join_btn no-mar-btm" onclick="SendOTP(1)">
-                            <span class="lang" key="send_otp"></span>
-                            <span id="counter_txt"></span>
-                        </button>
-                        <button type="button" class="btn btn-success login_btn join_btn no-mar-btm" onclick="VerifiedOTP()"><span class="lang" key="verified_otp"></span></button>
-                        <button type="button" class="btn btn-success login_btn join_btn no-mar-btm" onclick="logoutMain(1)"><span class="lang" key="sidebar_Logout"></span></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+<!--Begin Comm100 Live Chat Code-->
+<div></div>
+<script type="text/javascript">
+    var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 0) })(Comm100API || {})
+
+</script>
+<!--End Comm100 Live Chat Code-->
+<!-- Slider Section End -->
+<!-- Modal For Video -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".open-modal").click();
+    });
+    jQuery(".scroll-down-visible").hide();
+    jQuery("#more-arrow").click(function () {
+        jQuery(".scroll-down-visible").toggleClass("show");
+        jQuery("#more-arrow").toggleClass("rotate");
+    });
+</script>
+
+<!-- //Modal For Video -->
+<script src="~/js/jcf/jcf.js"></script>
+<script src="~/js/jcf/jcf.select.js"></script>
+<script src="~/js/jcf/jcf.checkbox.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            jcf.replaceAll();
+        });
+    });
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".navbar-toggle,.canvas-overlay").click(function () {
+            if (!$("html").hasClass('intro')) {
+                $("html").addClass("intro");
+            }
+            else {
+                $("html").removeClass("intro");
+            }
+        });
+        $(".canvas-overlay").click(function () {
+            if ($(".navbar-collapse").hasClass('in')) {
+                $(".navbar-collapse").removeClass("in");
+            }
+        });
+    });
+</script>
+<!-- Slider Section End -->
+<script>
+    $(window).scroll(function () {
+        var scroll = $(window).scrollTop();
+        if (scroll >= 1) {
+            $("header").addClass("sticky-header");
+        }
+        else {
+            $("header").removeClass("sticky-header");
+        }
+    });
+</script>
+<script>
+
+    $("html").click(async function (event) {
+        if (GetLocalStorage('currentUser') !== null) {
+            await PostMethod(apiEndPoints.userLastTimeUpdate, {});
+        }
+    });
+
+
+    function get() {
+        (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
+
+        $.ajax({
+            url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
+            dataType: 'json',
+            async: false,
+            success: function (lang) {
+                $('.lang').each(function (index, element) {
+                    if (localStorage.getItem("language") === "ms-MY") {
+                        $('body').addClass('malay-font');
+                    }
+                    $(this).text(lang[$(this).attr('key')]);
+                });
+                $("[data-translate]").each(function () {
+                    if ($(this).is("input")) {
+                        $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    } else {
+                        $(this).text(lang[$(this).data("translate")]);
+                    }
+                });
+            }
+        });
+        announcementMobile();
+    }
+
+
+    get();
+</script>
