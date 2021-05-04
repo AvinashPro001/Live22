@@ -542,6 +542,8 @@
 
             public const string UserVIPLevelUpdate = "[dbo].[User_VIPLevel_Update]";
 
+            public const string UserVIPLevelDetails = "[dbo].[User_VIP_Details]";
+
             public const string VIPFreeCredit = "[dbo].[FreeCredit_On_Monday]";
 
             public const string VIPFreeCreditPromotionSetting = "[dbo].[FreeCredit_Promotion_Setting]";
