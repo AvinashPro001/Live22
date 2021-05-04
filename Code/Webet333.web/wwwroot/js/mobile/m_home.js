@@ -7,7 +7,7 @@ $(document).ready(function () {
         if (localStorage.getItem('IsExecute') == "true" || localStorage.getItem('IsExecute') == true || localStorage.getItem('IsExecute') == null) {
             localStorage.setItem('IsExecute', false);
         }
-        //VIPBanner();
+        VIPBanner();
     }
     
     //if (window.location.href.toLowerCase().includes("?p=home")) {
@@ -23,13 +23,14 @@ $(document).ready(function () {
 });
 //#endregion
 
-//function VIPBanner() {
-//    var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-//    try {
-//        document.getElementById("viplevel_icon").src = resUserData.data.vipBanner;
-//    }
-//    catch (e) { }
-//}
+function VIPBanner() {
+    var resUserVIPlevel = await GetMethodWithReturn(apiEndPoints.UserVipDetails);
+    sessionStorage.setItem("UserVipDetails", enc(JSON.stringify(resUserVIPlevel)))
+    try {
+        document.getElementById("viplevel_icon").src = resUserVIPlevel.data.VIPBanner;
+    }
+    catch (e) { }
+}
 
 function CheckUserVerified() {
     try {
@@ -102,14 +103,14 @@ function slider() {
     });
 }
 
-function ChangeErroMessage(key) {
+function ChangeErroMessage(key, parameter = "") {
     var ErrorMessage = "";
     $.ajax({
         url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
         dataType: 'json',
         async: false,
         success: function (lang) {
-            ErrorMessage = lang[key];
+            ErrorMessage = lang[key] + parameter;
         }
     });
     return ErrorMessage;

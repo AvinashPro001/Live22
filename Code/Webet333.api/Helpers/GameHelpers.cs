@@ -544,7 +544,7 @@ namespace Webet333.api.Helpers
 
         #region Game Rebate
 
-        internal async Task<dynamic> GameRebate(string FromDate, string ToDate, string gameType, decimal totalUser, decimal betAmount, decimal rolling, decimal commAmount, decimal commPrecentage, string jsonData, string adminId = null)
+        internal async Task<dynamic> GameRebate(string FromDate, string ToDate, string gameType, decimal totalUser, decimal betAmount, decimal rolling, decimal commAmount, string jsonData, string adminId = null)
         {
             using (var GetRepository = new DapperRepository<dynamic>(Connection))
             {
@@ -559,7 +559,6 @@ namespace Webet333.api.Helpers
                         betAmount,
                         rolling,
                         commAmount,
-                        commPrecentage,
                         jsonData,
                         adminId
                     });
@@ -596,7 +595,7 @@ namespace Webet333.api.Helpers
                         try
                         {
                             var Message = "Hi MR/MS {0}, %0aWe are from WB333 Customer Service, Kindly inform :%0aWe had credited DAILY REBATE RM{1} in your Main wallet.";
-                            await account_help.SendSMSAPI(d.MobileNo, string.Format(Message, d.Username, Math.Round(d.CommAmount, 2)));
+                            //await account_help.SendSMSAPI(d.MobileNo, string.Format(Message, d.Username, Math.Round(d.CommAmount, 2)));
                         }
                         catch (Exception ex)
                         {
@@ -608,7 +607,7 @@ namespace Webet333.api.Helpers
             data = data.Where(s => responseList.Any(l => (l.GameName == s.GameName && s.APIUsername == l.APIUsername))).ToList();
 
             var jsonData = JsonConvert.SerializeObject(data);
-            await GameRebate(request.FromDate, request.ToDate, request.GameType, data.Count, BetTotal, Rollingtotal, CommTotal, request.Rebate, jsonData, adminId: adminId);
+            await GameRebate(request.FromDate, request.ToDate, request.GameType, data.Count, BetTotal, Rollingtotal, CommTotal, jsonData, adminId: adminId);
 
             return responseList;
         }
@@ -617,7 +616,7 @@ namespace Webet333.api.Helpers
 
         #region Rebate Delete
 
-        internal async Task<dynamic> GameRebateDelete(string userId, string adminId = null)
+        internal async Task<dynamic> GameRebateDelete(string RebateId, string adminId = null)
         {
             using (var GetRepository = new DapperRepository<dynamic>(Connection))
             {
@@ -625,7 +624,7 @@ namespace Webet333.api.Helpers
                     StoredProcConsts.Game.GameRebateDelete,
                     new
                     {
-                        userId,
+                        RebateId,
                         adminId
                     });
                 return users;

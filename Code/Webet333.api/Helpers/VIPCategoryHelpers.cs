@@ -73,6 +73,18 @@ namespace Webet333.api.Helpers
 
         #endregion VIP Level Update
 
+        #region User VIP Level Details
+
+        public async Task<dynamic> UserVIPLevelDetails(Guid UserId, string UniqueId, string Role)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+               return await repository.FindAsync(StoredProcConsts.VIPCategory.UserVIPLevelDetails, new { UserId, UniqueId, Role });
+            }
+        }
+
+        #endregion User VIP Level Details
+
         public async Task GiveFreeCredit()
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
