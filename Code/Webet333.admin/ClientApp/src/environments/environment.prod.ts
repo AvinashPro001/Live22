@@ -5,9 +5,9 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:8081/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
+    apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://localhost/api/v1/'
 };
 
 export const account = {
@@ -330,7 +330,10 @@ export const customer = {
     freeCreditEventInsert: environment.apiUrl + 'freecreditevent/insert',
     freeCreditEventUpdate: environment.apiUrl + 'freecreditevent/update',
     freeCreditEventSetFreeCreditTerm: environment.apiUrl + 'freecreditevent/setfreecreditterm',
-    freeCreditEventUsersSelect: environment.apiUrl + 'freecreditevent/users/select'
+    freeCreditEventUsersSelect: environment.apiUrl + 'freecreditevent/users/select',
+
+    promotionUsersSelect: environment.apiUrl + 'promotions/users/select',
+    promotionSelectForDropdown: environment.apiUrl + 'promotions/select/dropdown'
 }
 
 export const playtech = {

@@ -7,8 +7,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.account = exports.environment = void 0;
 exports.environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
+    apiUrl: 'http://uatapi.webet333.com/api/v1/'
     //apiUrl: 'http://localhost/api/v1/'
 };
 exports.account = {
@@ -265,7 +265,9 @@ exports.customer = {
     freeCreditEventInsert: exports.environment.apiUrl + 'freecreditevent/insert',
     freeCreditEventUpdate: exports.environment.apiUrl + 'freecreditevent/update',
     freeCreditEventSetFreeCreditTerm: exports.environment.apiUrl + 'freecreditevent/setfreecreditterm',
-    freeCreditEventUsersSelect: exports.environment.apiUrl + 'freecreditevent/users/select'
+    freeCreditEventUsersSelect: exports.environment.apiUrl + 'freecreditevent/users/select',
+    promotionUsersSelect: exports.environment.apiUrl + 'promotions/users/select',
+    promotionSelectForDropdown: exports.environment.apiUrl + 'promotions/select/dropdown'
 };
 exports.playtech = {
     playtechUrl: 'http://api.webet333.com/api/Default/playtech',
