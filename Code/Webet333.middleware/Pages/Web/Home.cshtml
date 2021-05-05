@@ -1,0 +1,169 @@
+﻿@page
+@{
+    ViewData["Title"] = "Webet333 -🥇 Trusted Online Casino Malaysia ";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<!-- Main Banner Section and Promotion Slider -->
+<div class="main-banner">
+    <div class="container">
+        <div class="banner-inner">
+            <div class="home-slider text-center">
+                <div class="" id="slider_promotion" style="height:290px;">
+                    <div class="slick-carousel">
+                        <div><img src="images/en1.jpg"></div>
+                        <div><img src="images/en1.jpg"></div>
+                        <div><img src="images/en1.jpg"></div>
+                        <div><img src="images/en1.jpg"></div>
+                        <div><img src="images/en1.jpg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Banner Section and Promotion Slider -->
+
+<!-- Join Now Section -->
+<div class="how_win_main_wrap">
+    <div class="container">
+        <div class="how-win">
+            <ul>
+
+                <li class="step1bg">
+                    <div class="process-game step-1">
+                        <a href="#">
+                            <h4 class="lang" key="register_home">JOIN</h4>
+                            <p class="white-text lang" key="for_an_account">Create a Free <br> Account Now !</p>
+                        </a>
+                    </div>
+                </li>
+                <li class="step2bg">
+                    <div class="process-game step-2">
+                        <a href="#">
+                            <h4>DEPOSIT</h4>
+                            <p class="white-text lang" key="your_fund">Fully Automated <br> &amp; Secured</p>
+                        </a>
+                    </div>
+                </li>
+                <li class=" step3bg">
+                    <div class="process-game step-3">
+                        <a href="#">
+                            <h4 class="lang" key="play_home">PLAY</h4>
+                            <p class="white-text">Enjoy Your <br> Games !</p>
+                        </a>
+                    </div>
+                </li>
+                <li class="step4bg">
+                    <div class="process-game step-4">
+                        <a href="#">
+                            <h4 class="lang" key="withdraw_home">WITHDRAW</h4>
+                            <p class="white-text lang" key="your_winnings">Your Winning <br> Money</p>
+                        </a>
+                    </div>
+                </li>
+                <li class="step5bg">
+                    <a href="#"><img src="images/joinnow.png"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Join Now Section -->
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/owl.carousel.min.js'></script>
+<script src='https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js'></script>
+<script>
+    $().ready(function () {
+        $('.slick-carousel').slick({
+            arrows: true,
+            centerPadding: "0px",
+            dots: true,
+            slidesToShow: 1,
+            infinite: false,
+            autoplay: true,
+        });
+    });
+</script>
+<script type="text/javascript">
+    $('.game_logo_sections .owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        autoplay: true,
+        navText: [
+            '<i class="fa fa-angle-left"></i>',
+            '<i class="fa fa-angle-right"></i>'
+        ],
+        autoplay: true,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 4
+            },
+            1000: {
+                items: 6
+            }
+        }
+    });
+    $('.game_boxes_wrap.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        navText: [
+            '<i class="fa fa-angle-left"></i>',
+            '<i class="fa fa-angle-right"></i>'
+        ],
+        autoplay: true,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 4
+            },
+            1000: {
+                items: 4
+            }
+        }
+    });
+</script>
+<script type="text/javascript">
+    $('.slider-for').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.slider-nav'
+    });
+    $('.slider-nav').slick({
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        asNavFor: '.slider-for',
+        dots: false,
+        autoplay: true,
+        focusOnSelect: true,
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    infinite: true
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    });
+</script>
