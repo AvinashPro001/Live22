@@ -595,7 +595,7 @@ namespace Webet333.api.Helpers
                         try
                         {
                             var Message = "Hi MR/MS {0}, %0aWe are from WB333 Customer Service, Kindly inform :%0aWe had credited DAILY REBATE RM{1} in your Main wallet.";
-                            //await account_help.SendSMSAPI(d.MobileNo, string.Format(Message, d.Username, Math.Round(d.CommAmount, 2)));
+                            await account_help.SendSMSAPI(d.MobileNo, string.Format(Message, d.Username, Math.Round(d.CommAmount, 2)));
                         }
                         catch (Exception ex)
                         {
