@@ -43,13 +43,12 @@
     <link href="~/css/bootstrap.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="~/css/fontawesome.all.min.css" />
     <link href="~/css/fontawesome.css" type="text/css" rel="stylesheet" />
-    @*<link href="~/css/bootstrap-datepicker.css" type="text/css" rel="stylesheet" />*@
     <link href="~/css/bootstrap-datepicker.min.css" type="text/css" rel="stylesheet" />
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.css'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css'>
     <link href="~/css/style.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/css/responsive-style.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
     <title>@ViewBag.Title</title>
 </head>
 <body class="home-page">
@@ -65,8 +64,8 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.html">
-                            <img class="logo" src="images/logo.png" />
+                        <a class="navbar-brand" href="../">
+                            <img class="logo" src="~/images/logo.png" />
                         </a>
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
@@ -97,8 +96,8 @@
                                         </li>
                                         <li class="login-item country">
                                             <div class="language_selection">
-                                                <div class="flag_nsd"><img src="images/lan_en.png" alt="lan_en"></div>
-                                                <a href="" data-toggle="modal" data-target="#lang_choose" class="dot_line"><img src="images/menu-dot.svg" width="6" alt=""></a>
+                                                <div class="flag_nsd"><img src="~/images/lan_en.png" alt="lan_en"></div>
+                                                <a href="" data-toggle="modal" data-target="#lang_choose" class="dot_line"><img src="~/images/menu-dot.svg" width="6" alt=""></a>
                                             </div>
                                         </li>
                                     </ul>
@@ -118,8 +117,8 @@
                                         <li class="login-item"><label id="lbl_TimeafterLogin">7/1/2021 9:29:16pm (GMT=8)</label></li>
                                         <li class="login-item country custom-country-width">
                                             <div class="language_selection">
-                                                <div class="flag_nsd"><img src="images/lan_en.png" alt="lan_en"></div>
-                                                <a href="" data-toggle="modal" data-target="#lang_choose" class="dot_line"><img src="images/menu-dot.svg" width="6" alt=""></a>
+                                                <div class="flag_nsd"><img src="~/images/lan_en.png" alt="lan_en"></div>
+                                                <a href="" data-toggle="modal" data-target="#lang_choose" class="dot_line"><img src="~/images/menu-dot.svg" width="6" alt=""></a>
                                             </div>
                                         </li>
                                         <li class="login-item input-field login">
@@ -127,9 +126,9 @@
 
                                                 <li class="login-item u-name form-icon" style="display:flex;margin-left:-25px;">
                                                     <span id="sound" class="sound">
-                                                        <a id="soundLink" href="javascript:void(0);"><img src="images/vip_user.png" alt="vip_user"></a>
+                                                        <a id="soundLink" href="javascript:void(0);"><img src="~/images/vip_user.png" alt="vip_user"></a>
                                                         <ul class="soud_arrow">
-                                                            <li><a href="#"><img src="images/vip_tokens.png" /> <br> More Aout VIP</a></li>
+                                                            <li><a href="#"><img src="~/images/vip_tokens.png" /> <br> More Aout VIP</a></li>
                                                         </ul>
                                                     </span>
                                                     <span style="font-size:larger">
@@ -156,7 +155,7 @@
                                     <div class="after-logion">
                                         <ul class="money-type list-inline">
                                             <button class=" restore-btn layout-btn">
-                                                <img class="icon-home" src="images/restore.png">
+                                                <img class="icon-home" src="~/images/restore.png">
                                                 <span>RESTORE</span>
                                             </button>
                                             <li class="currency" data-toggle="collapse" data-target="#myDropdown">
@@ -185,21 +184,21 @@
                                             <a href="#">
                                                 <li class="restore-btn layout-btn">
                                                     <label>
-                                                        <img class="icon-home" src="images/deposit.png">&nbsp;&nbsp;<span class="lang black-textt2" key="deposit">DEPOSIT</span>
+                                                        <img class="icon-home" src="~/images/deposit.png">&nbsp;&nbsp;<span class="lang black-textt2" key="deposit">DEPOSIT</span>
                                                     </label>
                                                 </li>
                                             </a>
                                             <a href="#">
                                                 <li class="restore-btn layout-btn">
                                                     <label>
-                                                        <img class="icon-home" src="images/withdraw.png">&nbsp;&nbsp;<span class="lang black-textt2" key="withdrawal">WITHDRAW</span>
+                                                        <img class="icon-home" src="~/images/withdraw.png">&nbsp;&nbsp;<span class="lang black-textt2" key="withdrawal">WITHDRAW</span>
                                                     </label>
                                                 </li>
                                             </a>
                                             <a href="#">
                                                 <li class="restore-btn layout-btn">
                                                     <label>
-                                                        <img class="icon-home" src="images/transfer.png">&nbsp;&nbsp;<span class="lang black-textt2" key="transfer">TRANSFER</span>
+                                                        <img class="icon-home" src="~/images/transfer.png">&nbsp;&nbsp;<span class="lang black-textt2" key="transfer">TRANSFER</span>
                                                     </label>
                                                 </li>
                                             </a>
@@ -218,62 +217,62 @@
         <div class="container">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">
+                    <a href="../">
                         <span>
-                            <img class="normal_icons" src="images/phone1.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="images/phone1_hover.png" width="26" height="23" alt="">
+                            <img class="normal_icons" src="~/images/phone1.png" width="26" height="23" alt="">
+                            <img class="hover_icons" src="~/images/phone1_hover.png" width="26" height="23" alt="">
                         </span>
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <span>
-                            <img class="normal_icons" src="images/home1.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="images/home1_hover.png" width="26" height="23" alt="">
+                            <img class="normal_icons" src="~/images/home1.png" width="26" height="23" alt="">
+                            <img class="hover_icons" src="~/images/home1_hover.png" width="26" height="23" alt="">
                         </span>
                     </a>
                 </li>
                 <li class="live-casino dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span>
-                            <img class="normal_icons" src="images/livecasino.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="images/livecasino_hover.png" width="26" height="23" alt=""> Live Casino
+                            <img class="normal_icons" src="~/images/livecasino.png" width="26" height="23" alt="">
+                            <img class="hover_icons" src="~/images/livecasino_hover.png" width="26" height="23" alt=""> Live Casino
                         </span><span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropmenu-main" id="subMenuSports" role="menu">
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="dg">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive" src="images/dropdown_logos/dg.png" alt="dg" />Dream Gaming
+                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive" src="~/images/dropdown_logos/dg.png" alt="dg" />Dream Gaming
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="sexy">
-                                <img id="sexy" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="images/dropdown_logos/sexy.png" alt="sexy" />Sexy Gaming
+                                <img id="sexy" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/sexy.png" alt="sexy" />Sexy Gaming
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="sa">
-                                <img id="sa" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="images/dropdown_logos/sa.png" alt="sa" />SA Gaming
+                                <img id="sa" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/sa.png" alt="sa" />SA Gaming
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="ag">
-                                <img id="ag" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="images/dropdown_logos/ag.png" alt="ag" />Asia Gaming
+                                <img id="ag" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/ag.png" alt="ag" />Asia Gaming
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="playtech">
-                                <img id="playtech" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="images/dropdown_logos/pt.png" alt="playtech" />Play Tech
+                                <img id="playtech" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/pt.png" alt="playtech" />Play Tech
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="albet">
-                                <img id="albet" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="images/dropdown_logos/allbet.png" alt="albet" />All Bet
+                                <img id="albet" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/allbet.png" alt="albet" />All Bet
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="wm">
-                                <img id="wm" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="images/dropdown_logos/wm.png" alt="wm" />WM Casino
+                                <img id="wm" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/wm.png" alt="wm" />WM Casino
                             </a>
                         </li>
                     </ul>
@@ -281,44 +280,44 @@
                 <li class="slot-game dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span>
-                            <img class="normal_icons" src="images/slot.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="images/slot_hover.png" width="26" height="23" alt=""> Slots
+                            <img class="normal_icons" src="~/images/slot.png" width="26" height="23" alt="">
+                            <img class="hover_icons" src="~/images/slot_hover.png" width="26" height="23" alt=""> Slots
                         </span> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropmenu-main" id="subMenuSlots" role="menu">
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="918kisses">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="images/dropdown_logos/1.png" alt="918kisses" />918 Kisses
+                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/1.png" alt="918kisses" />918 Kisses
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="mega888">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="images/dropdown_logos/7.png" alt="mega888" />Mega 888
+                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/7.png" alt="mega888" />Mega 888
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="ag">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="images/dropdown_logos/3.png" alt="ag" />Asia Gaming
+                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/3.png" alt="ag" />Asia Gaming
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="pt">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="images/dropdown_logos/5.png" alt="pt" />Play Tech
+                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/5.png" alt="pt" />Play Tech
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="joker">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="images/dropdown_logos/2.png" alt="joker" />Joker
+                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/2.png" alt="joker" />Joker
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="Pussy888">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="images/dropdown_logos/4.png" alt="Pussy888" />Pussy 888
+                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/4.png" alt="Pussy888" />Pussy 888
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="Pragmatic">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="images/dropdown_logos/8.png" alt="Pragmatic" />Pragmatic Play
+                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/8.png" alt="Pragmatic" />Pragmatic Play
                             </a>
                         </li>
 
@@ -327,19 +326,19 @@
                 <li class="sportbook dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span>
-                            <img class="normal_icons" src="images/sport.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="images/sport_hover.png" width="26" height="23" alt=""> Sports
+                            <img class="normal_icons" src="~/images/sport.png" width="26" height="23" alt="">
+                            <img class="hover_icons" src="~/images/sport_hover.png" width="26" height="23" alt=""> Sports
                         </span> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropmenu-main" id="subMenuLive" role="menu">
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="m8bet">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="images/dropdown_logos/m8.png" alt="m8bet" />M8BET
+                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/m8.png" alt="m8bet" />M8BET
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="maxbet">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="images/dropdown_logos/maxbet.png" alt="maxbet" />Maxbet
+                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/maxbet.png" alt="maxbet" />Maxbet
                             </a>
                         </li>
 
@@ -348,40 +347,40 @@
                 <li class="promotion">
                     <a href="#">
                         <span class="lang" key="menu_promotion">
-                            <img class="normal_icons" src="images/fish.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="images/fish_hover.png" width="26" height="23" alt=""> Fish
+                            <img class="normal_icons" src="~/images/fish.png" width="26" height="23" alt="">
+                            <img class="hover_icons" src="~/images/fish_hover.png" width="26" height="23" alt=""> Fish
                         </span>
                     </a>
                 </li>
                 <li class="promotion">
-                    <a href="#">
+                    <a href="~/Web/promotion">
                         <span>
-                            <img class="normal_icons" src="images/promo.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="images/promo_hover.png" width="26" height="23" alt=""> Promotion
+                            <img class="normal_icons" src="~/images/promo.png" width="26" height="23" alt="">
+                            <img class="hover_icons" src="~/images/promo_hover.png" width="26" height="23" alt=""> Promotion
                         </span>
                     </a>
                 </li>
                 <li class="banking-info">
-                    <a href="#">
+                    <a href="~/Web/vip">
                         <span>
-                            <img class="normal_icons" src="images/vip.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="images/vip_hover.png" width="26" height="23" alt=""> VIP
+                            <img class="normal_icons" src="~/images/vip.png" width="26" height="23" alt="">
+                            <img class="hover_icons" src="~/images/vip_hover.png" width="26" height="23" alt=""> VIP
                         </span>
                     </a>
                 </li>
                 <li class="banking-info">
-                    <a href="#">
+                    <a href="~/Web/bank">
                         <span>
-                            <img class="normal_icons" src="images/bank.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="images/bank_hover.png" width="26" height="23" alt=""> Bank
+                            <img class="normal_icons" src="~/images/bank.png" width="26" height="23" alt="">
+                            <img class="hover_icons" src="~/images/bank_hover.png" width="26" height="23" alt=""> Bank
                         </span>
                     </a>
                 </li>
                 <li class="download">
-                    <a href="#">
+                    <a href="~/Web/download">
                         <span>
-                            <img class="normal_icons" src="images/download.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="images/download_hove.png" width="26" height="23" alt=""> Download
+                            <img class="normal_icons" src="~/images/download.png" width="26" height="23" alt="">
+                            <img class="hover_icons" src="~/images/download_hove.png" width="26" height="23" alt=""> Download
                         </span>
                     </a>
                 </li>
@@ -402,7 +401,7 @@
         <div class="container">
             <div class="col-sm-3">
                 <div class="vip_boxess">
-                    <img src="images/footericon1.png" alt="footericon1" />
+                    <img src="~/images/footericon1.png" alt="footericon1" />
                     <h1>VIP Program</h1>
                     <p>Upgrade to VIP o enjoy exclusive benefit and earn rewards</p>
                     <a href="#">Apply Now</a>
@@ -410,7 +409,7 @@
             </div>
             <div class="col-sm-3">
                 <div class="vip_boxess">
-                    <img src="images/footericon2.png" alt="footericon1" />
+                    <img src="~/images/footericon2.png" alt="footericon1" />
                     <h1>Customer Service 24/7</h1>
                     <p>Have a question? Call a specialist or chat online</p>
                     <a href="#">Chat Now</a>
@@ -418,7 +417,7 @@
             </div>
             <div class="col-sm-3">
                 <div class="vip_boxess">
-                    <img src="images/footericon3.png" alt="footericon1" />
+                    <img src="~/images/footericon3.png" alt="footericon1" />
                     <h1>Feedback & Complaint</h1>
                     <p>If you have any complaint for our service, complaint with our general manager</p>
                     <a href="#">Complaint Now</a>
@@ -426,7 +425,7 @@
             </div>
             <div class="col-sm-3">
                 <div class="promtion_boxess">
-                    <img src="images/footericon4.png" alt="footericon1" />
+                    <img src="~/images/footericon4.png" alt="footericon1" />
                     <h1>Promotion</h1>
                     <p>A lot of FREE CREDIT PROMOTION in here</p>
                     <a href="#">get free credit card now</a>
@@ -510,86 +509,86 @@
                     <ul class="list-inline supported-game">
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo1.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo1_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo1.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo1_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo2.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo2_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo2.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo2_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo3.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo3_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo3.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo3_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo4.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo4_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo4.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo4_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo5.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo5_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo5.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo5_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo6.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo6_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo6.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo6_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo7.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo7_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo7.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo7_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo8.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo8_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo8.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo8_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo9.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo9_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo9.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo9_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo10.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo10_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo10.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo10_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo11.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo11_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo11.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo11_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo12.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo12_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo12.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo12_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo13.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo13_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo13.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo13_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" src="images/footerlogo/footerlogo14.png" alt="">
-                                <img class="pink-logo hover_icons" src="images/footerlogo/footerlogo14_color.png" alt="">
+                                <img class="pink-logo normal_icons" src="~/images/footerlogo/footerlogo14.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/footerlogo/footerlogo14_color.png" alt="">
                             </figure>
                         </li>
                     </ul>
@@ -599,32 +598,32 @@
                     <ul class="list-inline bank-us">
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo1 normal_icons" src="images/footerlogo/footerlogo15.png" alt="">
-                                <img class="pink-logo1 hover_icons" src="images/footerlogo/footerlogo15_color.png" alt="">
+                                <img class="pink-logo1 normal_icons" src="~/images/footerlogo/footerlogo15.png" alt="">
+                                <img class="pink-logo1 hover_icons" src="~/images/footerlogo/footerlogo15_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo1 normal_icons" src="images/footerlogo/footerlogo16.png" alt="">
-                                <img class="pink-logo1 hover_icons" src="images/footerlogo/footerlogo16_color.png" alt="">
+                                <img class="pink-logo1 normal_icons" src="~/images/footerlogo/footerlogo16.png" alt="">
+                                <img class="pink-logo1 hover_icons" src="~/images/footerlogo/footerlogo16_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo1 normal_icons" src="images/footerlogo/footerlogo17.png" alt="">
-                                <img class="pink-logo1 hover_icons" src="images/footerlogo/footerlogo17_color.png" alt="">
+                                <img class="pink-logo1 normal_icons" src="~/images/footerlogo/footerlogo17.png" alt="">
+                                <img class="pink-logo1 hover_icons" src="~/images/footerlogo/footerlogo17_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo1 normal_icons" src="images/footerlogo/footerlogo18.png" alt="">
-                                <img class="pink-logo1 hover_icons" src="images/footerlogo/footerlogo18_color.png" alt="">
+                                <img class="pink-logo1 normal_icons" src="~/images/footerlogo/footerlogo18.png" alt="">
+                                <img class="pink-logo1 hover_icons" src="~/images/footerlogo/footerlogo18_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo1 normal_icons" src="images/footerlogo/footerlogo19.png" alt="">
-                                <img class="pink-logo1 hover_icons" src="images/footerlogo/footerlogo19_color.png" alt="">
+                                <img class="pink-logo1 normal_icons" src="~/images/footerlogo/footerlogo19.png" alt="">
+                                <img class="pink-logo1 hover_icons" src="~/images/footerlogo/footerlogo19_color.png" alt="">
                             </figure>
                         </li>
                     </ul>
@@ -634,26 +633,26 @@
                     <ul class="list-inline bank-us">
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo1 normal_icons" src="images/footerlogo/footerlogo20.png" alt="">
-                                <img class="pink-logo1 hover_icons" src="images/footerlogo/footerlogo20_color.png" alt="">
+                                <img class="pink-logo1 normal_icons" src="~/images/footerlogo/footerlogo20.png" alt="">
+                                <img class="pink-logo1 hover_icons" src="~/images/footerlogo/footerlogo20_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo1 normal_icons" src="images/footerlogo/footerlogo21.png" alt="">
-                                <img class="pink-logo1 hover_icons" src="images/footerlogo/footerlogo21_color.png" alt="">
+                                <img class="pink-logo1 normal_icons" src="~/images/footerlogo/footerlogo21.png" alt="">
+                                <img class="pink-logo1 hover_icons" src="~/images/footerlogo/footerlogo21_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo1 normal_icons" src="images/footerlogo/footerlogo22.png" alt="">
-                                <img class="pink-logo1 hover_icons" src="images/footerlogo/footerlogo22_color.png" alt="">
+                                <img class="pink-logo1 normal_icons" src="~/images/footerlogo/footerlogo22.png" alt="">
+                                <img class="pink-logo1 hover_icons" src="~/images/footerlogo/footerlogo22_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo1 normal_icons" src="images/footerlogo/footerlogo23.png" alt="">
-                                <img class="pink-logo1 hover_icons" src="images/footerlogo/footerlogo23_color.png" alt="">
+                                <img class="pink-logo1 normal_icons" src="~/images/footerlogo/footerlogo23.png" alt="">
+                                <img class="pink-logo1 hover_icons" src="~/images/footerlogo/footerlogo23_color.png" alt="">
                             </figure>
                         </li>
                     </ul>
@@ -663,14 +662,14 @@
                     <ul class="list-inline bank-us">
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo2 normal_icons" src="images/footerlogo/footerlogo24.png" alt="">
-                                <img class="pink-logo2 hover_icons" src="images/footerlogo/footerlogo24_color.png" alt="">
+                                <img class="pink-logo2 normal_icons" src="~/images/footerlogo/footerlogo24.png" alt="">
+                                <img class="pink-logo2 hover_icons" src="~/images/footerlogo/footerlogo24_color.png" alt="">
                             </figure>
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo2 normal_icons" src="images/footerlogo/footerlogo25.png" alt="">
-                                <img class="pink-logo2 hover_icons" src="images/footerlogo/footerlogo25_color.png" alt="">
+                                <img class="pink-logo2 normal_icons" src="~/images/footerlogo/footerlogo25.png" alt="">
+                                <img class="pink-logo2 hover_icons" src="~/images/footerlogo/footerlogo25_color.png" alt="">
                             </figure>
                         </li>
                     </ul>
@@ -679,20 +678,20 @@
                     <ul class="list-inline bank-us">
                         <li>
                             <a href="#" target="_blank">
-                                <img class="menu-social-icon normal_icons" src="images/footerlogo/footerlogo26.png" />
-                                <img class="menu-social-icon hover_icons" src="images/footerlogo/footerlogo26_color.png" alt="">
+                                <img class="menu-social-icon normal_icons" src="~/images/footerlogo/footerlogo26.png" />
+                                <img class="menu-social-icon hover_icons" src="~/images/footerlogo/footerlogo26_color.png" alt="">
                             </a>
                         </li>
                         <li>
                             <a href="#" target="_blank">
-                                <img class="menu-social-icon normal_icons" src="images/footerlogo/footerlogo27.png" />
-                                <img class="menu-social-icon hover_icons" src="images/footerlogo/footerlogo27_color.png" alt="">
+                                <img class="menu-social-icon normal_icons" src="~/images/footerlogo/footerlogo27.png" />
+                                <img class="menu-social-icon hover_icons" src="~/images/footerlogo/footerlogo27_color.png" alt="">
                             </a>
                         </li>
                         <li>
                             <a href="#" target="_blank">
-                                <img class="menu-social-icon normal_icons" src="images/footerlogo/footerlogo28.png" />
-                                <img class="menu-social-icon hover_icons" src="images/footerlogo/footerlogo28_color.png" alt="">
+                                <img class="menu-social-icon normal_icons" src="~/images/footerlogo/footerlogo28.png" />
+                                <img class="menu-social-icon hover_icons" src="~/images/footerlogo/footerlogo28_color.png" alt="">
                             </a>
                         </li>
 
@@ -706,10 +705,10 @@
         <div class="container">
             <div class="col-md-8 footer_sec_two_left">
                 <ul>
-                    <li><a href="#">ABOUT US </a> | </li>
-                    <li><a href="#">TERMS AND CONDITION</a>| </li>
-                    <li><a href="#">FAQS</a> | </li>
-                    <li><a href="#">HOW TO JOIN</a> | </li>
+                    <li><a href="~/Web/about">ABOUT US </a> | </li>
+                    <li><a href="~/Web/termsconditions">TERMS AND CONDITION</a>| </li>
+                    <li><a href="~/Web/faq">FAQS</a> | </li>
+                    <li><a href="~/Web/join">HOW TO JOIN</a> | </li>
                     <li><a href="#">CONTACT US</a></li>
                 </ul>
             </div>
@@ -724,38 +723,38 @@
         </div>
         <ul class="chatting" id="chatting">
             <li class="support-live">
-                <h5><img src="images/24h.png" alt="hours 24">24X7</h5>
+                <h5><img src="~/images/24h.png" alt="hours 24">24X7</h5>
                 <p></p>
                 <h6>Customer Services</h6>
             </li>
             <li class="call-contact text-center">
-                <h5><img class="contact-logos" src="images/sideicon4.png" alt="Call">LIVE CHAT</h5>
+                <h5><img class="contact-logos" src="~/images/sideicon4.png" alt="Call">LIVE CHAT</h5>
                 <a href="# ">Click here</a>
             </li>
             <li class="call-contact text-center">
-                <h5><img class="contact-logos" src="images/sideicon5.png" alt="Call"> PHONE</h5>
+                <h5><img class="contact-logos" src="~/images/sideicon5.png" alt="Call"> PHONE</h5>
                 <a href="# ">+6013 555 8826</a>
             </li>
             <li class="text-center whatsapp-sec">
-                <h5><img class="contact-logos" src="images/sideicon2.png" alt="Whats App">Whatsapp</h5>
+                <h5><img class="contact-logos" src="~/images/sideicon2.png" alt="Whats App">Whatsapp</h5>
                 <p> CS1 : <a href="#" target="_blank">+6013 555 7800</a></p>
                 <p>CS2 : <a href="#" target="_blank">+6013 555 8826</a></p>
             </li>
             <li class="text-center wechat_sec">
-                <h5><img class="contact-logos" src="images/sideicon1.png" alt="We Chat"> Wechat</h5>
+                <h5><img class="contact-logos" src="~/images/sideicon1.png" alt="We Chat"> Wechat</h5>
                 <figure>
-                    <img class="image-qr" src="images/barcode.png" alt="barcode">
+                    <img class="image-qr" src="~/images/barcode.png" alt="barcode">
                 </figure>
             </li>
             <li class="text-center telegram_sec">
-                <h5><img class="contact-logos" src="images/sideicon3.png" alt="Whats App"> Telegram</h5>
+                <h5><img class="contact-logos" src="~/images/sideicon3.png" alt="Whats App"> Telegram</h5>
                 <p><a href="#"> @@mywbcs1 : </a>: CS1</p>
             </li>
             <li class="text-center follow_us_sec">
                 <h5> Follow Us On</h5>
-                <img src="images/fb.png" alt="fb">
-                <img src="images/ig.png" alt="ig">
-                <img src="images/youtube.png" alt="youtube">
+                <img src="~/images/fb.png" alt="fb">
+                <img src="~/images/ig.png" alt="ig">
+                <img src="~/images/youtube.png" alt="youtube">
             </li>
         </ul>
     </div>
@@ -765,13 +764,13 @@
         </div>
         <ul class="chatting" id="chatting1">
             <li class="android-contact">
-                <h5><img class="android-logos" src="images/sideicon8.png" alt="sideicon8"> <span> Android Download </span> </h5>
+                <h5><img class="android-logos" src="~/images/sideicon8.png" alt="sideicon8"> <span> Android Download </span> </h5>
             </li>
             <li class="android-contact">
-                <h5><img class="android-logos" src="images/sideicon6.png" alt="sideicon6"> <span> IOS Download </span> </h5>
+                <h5><img class="android-logos" src="~/images/sideicon6.png" alt="sideicon6"> <span> IOS Download </span> </h5>
             </li>
             <li class="android-contact">
-                <h5><img class="android-logos" src="images/sideicon7.png" alt="sideicon7"> <span> PC Download </span></h5>
+                <h5><img class="android-logos" src="~/images/sideicon7.png" alt="sideicon7"> <span> PC Download </span></h5>
             </li>
         </ul>
     </div>
@@ -789,7 +788,7 @@
                         <p>Malaysia</p>
                         <div class="col-md-4 lang_boxes_one_wrap">
                             <div class="lang_boxes_one">
-                                <a href="#"><img src="images/lang1.png"> English</a>
+                                <a href="#"><img src="~/images/lang1.png"> English</a>
                             </div>
                         </div>
                         <div class="col-md-4 lang_boxes_two_wrap">
@@ -807,7 +806,7 @@
                         <p>Thailand</p>
                         <div class="col-md-4 lang_boxes_one_wrap">
                             <div class="thai_boxes_one">
-                                <a href="#"><img src="images/lang2.png"> English</a>
+                                <a href="#"><img src="~/images/lang2.png"> English</a>
                             </div>
                         </div>
                         <div class="col-md-4 lang_boxes_two_wrap">
@@ -823,7 +822,7 @@
                         <p>Indonesia</p>
                         <div class="col-md-4 lang_boxes_one_wrap">
                             <div class="thai_boxes_one">
-                                <a href="#"><img src="images/lang3.png"> English</a>
+                                <a href="#"><img src="~/images/lang3.png"> English</a>
                             </div>
                         </div>
                         <div class="col-md-5 lang_boxes_two_wrap">
@@ -839,7 +838,7 @@
                         <p>Vietnam</p>
                         <div class="col-md-4 lang_boxes_one_wrap">
                             <div class="thai_boxes_one">
-                                <a href="#"><img src="images/lang4.png"> English</a>
+                                <a href="#"><img src="~/images/lang4.png"> English</a>
                             </div>
                         </div>
                         <div class="col-md-4 lang_boxes_two_wrap">
@@ -857,10 +856,10 @@
     </div>
 
 
-    
-    <script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/datepicker.js" type="text/javascript" charset="utf-8"></script>
-    
+
+    <script src="~/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>
+
     <script type="text/javascript" charset="utf-8">
 
         $(document).ready(function () {
@@ -885,6 +884,7 @@
         );
 
     </script>
+
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function () {
             $(".contact-us-btn1,.contact-us-btn-footer1").click(function () {
