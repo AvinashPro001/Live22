@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Webet333.middleware.Pages.Web
 {
-    public class downloadModel : PageModel
+    public class slotsModel : PageModel
     {
         public void OnGet()
         {

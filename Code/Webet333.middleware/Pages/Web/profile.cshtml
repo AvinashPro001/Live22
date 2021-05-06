@@ -1,0 +1,1807 @@
+﻿@page
+@{
+    ViewData["Title"] = "Profile - Webet333 -🥇";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div class="row main_wallet_page_wrap ml0 mr0">
+    <div class="container">
+        <div class="silver_main_wallet_sec">
+            <div class="silver_wallet_main">
+                <div class="silver_wallet">
+                    <h1>SILVER</h1>
+                    <p>Main Wallet</p>
+                </div>
+            </div>
+            <div class="restore_amount_sec_wrap">
+                <div class="restore_amount_left">
+                    <button>Restore</button>
+                </div>
+                <div class="restore_amount_center">
+                    <div class="myr_cur">
+                        <h1>MYR</h1>
+                        <h2>100,044.10</h2>
+                    </div>
+                </div>
+                <div class="restore_amount_right">
+                    <button>&nbsp;</button>
+                </div>
+            </div>
+            <div class="table_section_black_wrap">
+                <div class="table_blacke">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td data-column="First Name">0.00</td>
+                                <td data-column="Last Name">0.00</td>
+                                <td data-column="Job Title">0.00</td>
+                                <td data-column="Twitter">0.00</td>
+                                <td data-column="Last Name">0.00</td>
+                                <td data-column="Job Title">0.00</td>
+                                <td data-column="Twitter">0.00</td>
+                            </tr>
+                            <tr>
+                                <td data-column="First Name">Joker</td>
+                                <td data-column="Last Name">PlayTech</td>
+                                <td data-column="Job Title">918Kiss</td>
+                                <td data-column="Twitter">AG</td>
+                                <td data-column="Last Name">M8</td>
+                                <td data-column="Job Title">Maxbet</td>
+                                <td data-column="Twitter">Mega888</td>
+                            </tr>
+                            <tr>
+                                <td data-column="First Name">0.00</td>
+                                <td data-column="Last Name">0.00</td>
+                                <td data-column="Job Title">0.00</td>
+                                <td data-column="Twitter">0.00</td>
+                                <td data-column="Last Name">0.00</td>
+                                <td data-column="Job Title">0.00</td>
+                                <td data-column="Twitter">0.00</td>
+                            </tr>
+                            <tr>
+                                <td data-column="First Name">DG</td>
+                                <td data-column="Last Name">Sexy Baccarat</td>
+                                <td data-column="Job Title">SA</td>
+                                <td data-column="Twitter">PUSSY 888</td>
+                                <td data-column="Last Name">Allbet</td>
+                                <td data-column="Job Title">WM</td>
+                                <td data-column="Twitter">Pragmatic</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="article_sec_wrap profile-page">
+    <div class="download_page_wrapper">
+        <div class="container">
+            <div class="test">
+                <div class="profile-subdetail">
+                    <div class="tab white-bg-tab-panel">
+                        <h4 class="mar-btm-fifteen">BANKING</h4>
+
+                        <button class="tablinks account-reg deposit " onclick="openCity(event, 'deposit_amount')"><span class="lang" key="deposit">DEPOSIT</span></button>
+                        <button class="tablinks account-reg withdrawal" onclick="openCity(event, 'withdraw_amount')"><span class="lang" key="withdrawal_title">WITHDRAW</span></button>
+                        <button class="tablinks account-reg transfer " onclick="openCity(event, 'transfer_amount')"><span class="lang" key="transfer_title">TRANSFER</span></button>
+                        <button class="tablinks mar-btm-fifteen account-reg history" onclick="openCity(event, 'history_amount')"><span class="lang" key="history">HISTORY</span></button>
+
+                        <h4 class="mar-btm-fifteen">USER PROFILE</h4>
+
+                        <button class="tablinks account-reg profile active" onclick="openCity(event, 'profile_amount')"><span class="lang" key="profile_title">PROFILE</span></button>
+                        <button class="tablinks account-reg change_password" onclick="openCity(event, 'change_passwrd_amount')">
+                            <span class="lang" key="change_title">CHANGE PASSWORD</span>
+                        </button>
+
+                    </div>
+                    <!-- <div class="tab white-bg-tab-panel profile-category">
+                       <h4 class="banking_title">BANKING</h4>
+                       <button class="tablinks account-reg  active" onclick="openCity(event, 'deposit_amount')"><span class="lang">DEPOSIT</span></button>
+                       <button class="tablinks account-reg" onclick="openCity(event, 'withdraw_amount')"><span class="lang">WITHDRAW</span></button>
+                       <button class="tablinks account-reg" onclick="openCity(event, 'transfer_amount')"><span class="lang">TRANSFER</span></button>
+
+                       <h4 class="banking_title">USER PROFILE</h4>
+                       <button class="tablinks account-reg" onclick="openCity(event, 'profile_amount')"><span class="lang">PROFILE</span></button>
+                       <button class="tablinks account-reg" onclick="openCity(event, 'history_amount')"><span class="lang">HISTORY</span></button>
+
+                    </div> -->
+                    <div id="deposit_amount" class="tabcontent account-reg radius-none" style="display: none;">
+                        <!-- <div class="info-form marginb-none">
+                           <h4 class="deposit-title bg-no-repeat symbol lang  mar-btm-ten">DEPOSIT</h4>
+                        </div> -->
+                        <div class="info-form marginb-none">
+                            <h4 class="deposit-sub symbol bg-no-repeat blk-text lang" key="deposit_title">DEPOSIT</h4>
+                        </div>
+                        <div class="deposit_form_section_wrap">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8">
+                                    <ul class="deposit-bank-listing deposite-bank-sec password-upadte blk-text pad-top-ten">
+                                        <li>
+                                            <label class="fleft mob-padr-5">
+                                                <p class="big no-mar lang" key="deposit_company_bank_name" style="margin-left: -5px;">Deposit Options:</p>
+                                            </label>
+                                            <label class="company-deposit-list">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="tablinks">
+                                                        <a class="thm-txt" href="#" data-toggle="tab">
+                                                            <figure>
+                                                                <img style="object-position:center !important" class="tab-bankicon" src="~/images/deposit_option1.png" alt="" />
+                                                            </figure>
+                                                            <p>Vaderpay</p>
+                                                        </a>
+                                                    </li>
+                                                    <li class="active tablinks">
+                                                        <a class="thm-txt" href="#" data-toggle="tab">
+                                                            <figure>
+                                                                <img style="object-position:center !important" class="tab-bankicon" src="~/images/deposit_option2.png" alt="" />
+                                                            </figure>
+                                                            <p>Bank-Transfer</p>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <ul class="deposit-bank-listing password-upadte white-text">
+                                        <li class="mar-btm-fifteen">
+                                            <label class="fleft">
+                                                <p class="big no-mar lang blk-text" key="withdrawal_bankname">Bank Name:</p>
+                                            </label>
+                                            <label class="fright">
+                                                <div class="bank-selection">
+                                                    <ul class="bank-listing step-2-desc highlight-bank" id="Depsoit_bank_list">
+                                                        <li class="active tablinks">
+                                                            <a class="thm-txt" href="#" data-toggle="tab">
+                                                                <figure>
+                                                                    <img style="object-position:center !important" class="tab-bankicon" src="~/images/bankdetails1.png" alt="">
+                                                                </figure>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="mar-btm-fifteen">
+                                            <label class="fleft">
+                                                <p class="big no-mar blk-text lang">Bank Account:</p>
+                                            </label>
+                                            <label class="fright mendatory black-text">
+                                                <p>
+                                                    <span></span>
+                                                    Chong Jing Hung
+                                                </p>
+                                                <br>
+                                                <p>
+                                                    <span></span>
+                                                    331234567890
+                                                </p>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="fleft">
+                                                <p class="big no-mar lang blk-text">Amount:</p>
+                                            </label>
+                                            <label class="fright card-number mendatory">
+                                                <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00">
+
+                                                <div class="min-max-limit">
+                                                    <ul class="d-flex">
+                                                        <li class="data-blog">50</li>
+                                                        <li class="data-blog">100</li>
+                                                        <li class="data-blog">300</li>
+                                                        <li class="data-blog">500</li>
+                                                        <li class="data-blog">1000</li>
+                                                    </ul>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <br>
+                                        <li class="pad-btm-ten">
+                                            <label class="fleft">
+                                                <p class="big no-mar lang blk-text">Date Time:</p>
+                                            </label>
+                                            <label class="fright card-number mendatory">
+                                                <input name="txt_reference_number" type="text" class="reg-form " placeholder="Select Date" id="datepicker0">
+                                            </label>
+                                        </li>
+                                        <li class="pad-btm-ten">
+                                            <label class="fleft">
+                                                <p class="big no-mar lang blk-text" key="deposit_reference_number">Reference Number:</p>
+                                            </label>
+                                            <label class="fright card-number mendatory">
+                                                <input name="txt_reference_number" type="text" class="reg-form " placeholder="Enter Reference Number" autocomplete="new-password">
+                                            </label>
+                                        </li>
+                                        <li class="pad-btm-ten scanned-file">
+                                            <label class="fleft">
+                                                <p class="big no-mar lang blk-text" key="deposit_scanned_receipt">Scanned Receipt:</p>
+                                            </label>
+                                            <div class="fright upload">
+                                                <div class="d-flex">
+                                                    <div class="fake-upload-btn upload-btn">
+                                                        <span class="lang" key="deposit_upload_receipt">Upload Receipt</span>
+                                                        <input type="file" id="receipt" multiple="">
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div>
+                                                    <ul id="selectedFiles"></ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4 col-md-4 pl0">
+                                    <div class="info-form notice-bank-transfer deposit-section pad-top-twentyfive" style="background-color: #ffffff; border-radius: 6px;border:1px solid #c7c7c7;">
+                                        <div class="pad-lr-comman">
+                                            <h6 class="info-notice"><span class="lang" key="important_notice">IMPORTANT NOTICE</span></h6>
+                                            <ol>
+                                                <li><span class="lang" key="instruction_1"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </li>
+                                                <li><span class="lang" key="instruction_2"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type  </li>
+                                                <li><span class="lang" key="instruction_3"></span>when an unknown printer took a galley of type and scrambled it to make a type specimen book. </li>
+                                                <li><span class="lang" key="instruction_4"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </li>
+                                                <li><span class="lang" key="instruction_5"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </li>
+                                                <li><span class="lang" key="instruction_5"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. </li>
+                                                <li><span class="lang" key="instruction_5"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. </li>
+
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <section class="select-checkboxes">
+                                        <h3 class="mar-top-15">Please select Promotion below:</h3>
+                                        <ul class="mar-top-15 promotion-choose" id="promotion">
+                                            <li class="tablinks">
+                                                <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
+                                                <p>5% Unlimited Reload Bonus</p>
+                                            </li>
+                                            <li class="active tablinks">
+                                                <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
+                                                <p>RM10 Telegram Free Credit</p>
+                                            </li>
+                                            <li class="tablinks">
+                                                <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
+                                                <p>20% CNY Angpao</p>
+                                            </li>
+                                        </ul>
+                                    </section>
+                                    <div class="text-left mar-comman">
+                                        <button name="" value="submit" class="submit">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="withdraw_amount" class="tabcontent white-bg-tab-panel account-reg radius-none"
+                         style="display: none;">
+                        <div class="info-form marginb-none">
+                            <h4 class="withdrawal-sub bg-no-repeat symbol lang" key="withdrawal_title">WITHDRAW</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-lg-8">
+                                <div class="bank-multi-list">
+                                    <div class="pad-lr-comman">
+                                        <form id="formWithdrawal">
+                                            <ul class="password-upadte pad-top-ten">
+                                                <li>
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang" key="withdrawal_bankname">Bank Naame :</p>
+                                                    </label>
+                                                    <label class="fright">
+                                                        <div class="bank-selection">
+
+                                                            <ul class="bank-listing highlight-bank" id="withdraw_bank_list">
+                                                                <li class="active tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank1.png" alt="">
+                                                                        </figure>
+
+                                                                    </a>
+                                                                    <p>Citi Bank</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank2.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>CIMB Bank</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank3.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>RHB Bank</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank4.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>UOB</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank5.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>Affi Bank</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank6.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>HSBC</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank7.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>SBC</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank8.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>OCBC</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank9.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>May Bank</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank10.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>Hong Leong</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank11.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>Public Bank</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank12.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>Bank Islam</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank13.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>AmBank</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank14.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>Bank Rakyat</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank15.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>Alliance Bank</p>
+                                                                </li>
+                                                                <li class="tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank16.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                    <p>Simpanan Bank</p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="info-form bank-remain-list">
+                                    <div class="pad-lr-comman">
+                                        <form id="formWithdrawal">
+                                            <ul class="password-upadte pad-btm-ten pad-top-ten">
+                                                <li class="mar-btm-fifteen" id="displayAccountNumber">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang">Account Number:</p>
+                                                    </label>
+                                                    <label class="fright card-number mendatory">
+                                                        <input type="number" class="reg-form" placeholder="Enter Account Number">
+                                                    </label>
+                                                </li>
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang">From:</p>
+                                                    </label>
+                                                    <label class="fright bank-name mendatory">
+                                                        Main Wallet
+                                                    </label>
+                                                </li>
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang">Amount:</p>
+                                                    </label>
+                                                    <label class="fright card-number mendatory">
+                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30,000.00">
+                                                    </label>
+                                                </li>
+                                                <!-- <li class="mar-btm-fifteen">
+                                                   <label class="fleft"></label>
+                                                   <label class="fright"><span class="fa fa-lock" id="lock_icon"></span><span class="fa fa-unlock" id="unlock_icon"></span>&nbsp;<span data-toggle="modal" data-target="#WithdrawAmountList" id="WithdrawAmount">MYR 700</span></label>
+                                                </li> -->
+                                                <li class="mar-btm-fifteen">
+                                                    <div class="fleft">
+                                                        <button class="submit lang" type="button">SUBMIT</button>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="info-form deposit-section pad-top-twentyfive" style="background-color: #ffffff; border-radius: 6px;">
+                                    <div class="pad-lr-comman">
+                                        <h6 class="info-notice"><span class="lang" key="important_notice">IMPORTANT NOTICE</span></h6>
+                                        <ol>
+                                            <li>
+                                                <span class="lang" key="instruction_6A"></span>
+                                                <a target="_blank"><b><span class="lang" key="livechat"></span></b></a> <span class="lang" key="instruction_6B">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</span>
+                                            </li>
+                                            <li>
+                                                <span class="lang" key="instruction_7A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+                                               'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a><span class="lang" key="instruction_7B">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</span>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="transfer_amount" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display:none;">
+                        <div class="info-form marginb-none switch-middle">
+                            <h4 class="transfer-sub bg-no-repeat symbol lang" key="transfer_title">TRANSFER</h4>
+                            <div class="switch-middle">
+                                <p>Main Wallet Auto Transfer</p>
+                                <div class="toggle_switcer">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider_swither"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row ml0 mr0">
+                            <div class="col-sm-9">
+                                <div class="info-form">
+                                    <div class="pad-lr-comman">
+                                        <div class="step-portion">
+                                            <h5 class="mar-btm-ten lang" key="transfer_transfer_details"></h5>
+                                        </div>
+                                        <p class="big-text lang" key="transfer_please_fill_in_the_following_form"></p>
+                                        <form id="formTransfer">
+                                            <ul class="password-upadte transfer-page">
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang" key="transfer_from">From:</p>
+                                                    </label>
+                                                    <label class="fright bank-icon bank-name mendatory">
+                                                        <select class="main-wallet">
+                                                            <option value="">-- Select --</option>
+                                                        </select>
+                                                        <!-- <p class="star">*</p> -->
+                                                    </label>
+                                                </li>
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang" key="transfer_to">To:</p>
+                                                    </label>
+                                                    <label class="fright bank-icon bank-name mendatory">
+                                                        <select class="main-wallet">
+                                                            <option value="">-- Select --</option>
+                                                        </select>
+                                                        <!-- <p class="star">*</p> -->
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ml0 mr0 amount_sec_erap">
+                            <div class="col-sm-12">
+                                <div class="info-form no-mar">
+                                    <div class="pad-lr-comman">
+                                        <form id="transferAmount">
+                                            <ul class="password-upadte transfer-ammount">
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang">Amount:</p>
+                                                    </label>
+                                                    <label class="fleft minimum-ammount card-number mendatory">
+                                                        <input name="txt_transferAmount" type="number" class="reg-form" placeholder="Max Limit: From Wallet">
+                                                        <span>Add Minimum 1 MYR</span>
+                                                    </label>
+                                                    <label class="fright mar-btm-fifteen transfer-max hidden-xs">
+                                                        <a>
+                                                            <span>Transfer Max</span>
+                                                        </a>
+                                                    </label>
+                                                </li>
+                                                <li class="mar-btm-fifteen transfer-btns">
+                                                    <div class="fright_one">
+                                                        <button class="submit lang" type="button">TRANSFER</button>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ml0 mr0 mar-top-15 mar-btm-ten">
+                            <div class="col-lg-4 col-lg-offset-8 ">
+                                <div class="total-turnover">
+                                    <div class="total-turnover-chips">
+                                        <ul class="list-style d-flex">
+                                            <li>Total Daily Turnover</li>
+                                            <li><label class="marginb-none">0.00</label></li>
+                                            <li><span class="fa fa-refresh"></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ml0 mr0">
+                            <div class="col-lg-12 pl0 pr0">
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Joker</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Winover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Playtech</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">
+                                                        ALL In
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Winover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>918 Kiss</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Winover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>AG</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Winover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>M8</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Winover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Maxbet</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Winover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Mega</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Winover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>DG</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Winover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Sexy</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Winover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>SA</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Winover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Pussy888</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>
+                                                    Daily Winover
+                                                </li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>AllBet</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>
+                                                    Daily Winover
+                                                </li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>WM</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>
+                                                    Daily Winover
+                                                </li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Pragmatic</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>
+                                                    Daily Winover
+                                                </li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li>0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="history_amount" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
+                        <div class="info-form marginb-none">
+                            <h4 class="history-sub bg-no-repeat symbol lang" key="history">HISTORY</h4>
+                        </div>
+                        <div class="form-group">
+                            <div class="row ml0 mr0">
+                                <div class="col-sm-3">
+                                    <label class="history_sec">Transaction Type *</label>
+                                </div>
+                                <div class="col-sm-9 pl0">
+                                    <div class="history-tabs">
+                                        <ul class="nav nav-tabs" id="history_tabs">
+                                            <li>
+                                                <a data-toggle="tab" href="#Betting_Summary"><span>Betting Summary</span></a>
+                                            </li>
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#Transfer_Summary"><span key="transfer_title" class="lang">Transfer</span></a>
+                                            </li>
+                                            <li>
+                                                <a data-toggle="tab" href="#Withdraw_Deposit_Summary"><span class="lang" key="deposit">Withdraw / Deposit</span></a>
+                                            </li>
+                                            <li>
+                                                <a data-toggle="tab" href="#Promotion_Summary"><span key="withdrawal_title" class="lang">Promotion Apply</span></a>
+                                            </li>
+                                            <li>
+                                                <a data-toggle="tab" href="#Rebate_cash_Summary"><span key="rebate" class="lang">Rebate / Cashback </span></a>
+                                            </li>
+                                            <li>
+                                                <a data-toggle="tab" href="#Rewards_Summary"><span key="menu_promotion" class="lang">Rewards</span></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row ml0 mr0">
+                                <div class="col-sm-3">
+                                    <label class="history_sec">Transaction Date *</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="row ml0 mr0">
+                                        <p class="col-sm-2 pl0">Today</p>
+                                        <p class="col-sm-3 pl0">In 3 days</p>
+                                        <p class="col-sm-3 pl0">In a Week</p>
+                                        <p class="col-sm-3 pl0">In a Month</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row ml0 mr0">
+                                <div class="col-sm-3">
+                                    <label class="history_sec">Start Date *</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="row ml0 mr0">
+                                        <div class="col-sm-4 pl0">
+                                            <div class="controls">
+                                                <div class="input-append">
+                                                    <input id="datepicker1" class="input-small form-control" type="text" placeholder="03/24/2021" />
+                                                    <button id="datepicker1btn" class="btn icondate" type="button"><i class="fa fa-calendar"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 pl0">To</div>
+                                        <div class="col-sm-4 pl0">
+                                            <div class="controls">
+                                                <div class="input-append">
+                                                    <input id="datepicker2" class="input-small form-control" type="text" placeholder="03/31/2021" />
+                                                    <button id="datepicker1btn2" class="btn icondate" type="button"><i class="fa fa-calendar"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 pl0">
+                                            <button class="submit_height" type="button">SUBMIT</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ml0 mr0">
+                            <div class="col-sm-12">
+                                <div class="tab-content">
+                                    <div id="Betting_Summary" class="tab-pane fade in ">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_transferHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">Amount</th>
+                                                        <th class="white-text text-center">From</th>
+                                                        <th class="white-text text-center">To</th>
+                                                        <th class="white-text text-center">Product Name</th>
+                                                        <th class="white-text text-center">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables">
+                                                <a href="#">&laquo;</a>
+                                                <a href="#">1</a>
+                                                <a class="active" href="#">2</a>
+                                                <a href="#">3</a>
+                                                <a href="#">4</a>
+                                                <a href="#">&raquo;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Transfer_Summary" class="tab-pane fade in active">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_transferHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">Amount</th>
+                                                        <th class="white-text text-center">From</th>
+                                                        <th class="white-text text-center">To</th>
+                                                        <th class="white-text text-center">Product Name</th>
+                                                        <th class="white-text text-center">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables">
+                                                <a href="#">&laquo;</a>
+                                                <a href="#">1</a>
+                                                <a class="active" href="#">2</a>
+                                                <a href="#">3</a>
+                                                <a href="#">4</a>
+                                                <a href="#">&raquo;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Withdraw_Deposit_Summary" class="tab-pane fade in">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_transferHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">Amount</th>
+                                                        <th class="white-text text-center">From</th>
+                                                        <th class="white-text text-center">To</th>
+                                                        <th class="white-text text-center">Product Name</th>
+                                                        <th class="white-text text-center">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables">
+                                                <a href="#">&laquo;</a>
+                                                <a href="#">1</a>
+                                                <a class="active" href="#">2</a>
+                                                <a href="#">3</a>
+                                                <a href="#">4</a>
+                                                <a href="#">&raquo;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Promotion_Summary" class="tab-pane fade">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_transferHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">Amount</th>
+                                                        <th class="white-text text-center">From</th>
+                                                        <th class="white-text text-center">To</th>
+                                                        <th class="white-text text-center">Product Name</th>
+                                                        <th class="white-text text-center">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables">
+                                                <a href="#">&laquo;</a>
+                                                <a href="#">1</a>
+                                                <a class="active" href="#">2</a>
+                                                <a href="#">3</a>
+                                                <a href="#">4</a>
+                                                <a href="#">&raquo;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Rebate_cash_Summary" class="tab-pane fade in ">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_transferHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">Amount</th>
+                                                        <th class="white-text text-center">From</th>
+                                                        <th class="white-text text-center">To</th>
+                                                        <th class="white-text text-center">Product Name</th>
+                                                        <th class="white-text text-center">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables">
+                                                <a href="#">&laquo;</a>
+                                                <a href="#">1</a>
+                                                <a class="active" href="#">2</a>
+                                                <a href="#">3</a>
+                                                <a href="#">4</a>
+                                                <a href="#">&raquo;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Rewards_Summary" class="tab-pane fade in ">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_transferHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">Amount</th>
+                                                        <th class="white-text text-center">From</th>
+                                                        <th class="white-text text-center">To</th>
+                                                        <th class="white-text text-center">Product Name</th>
+                                                        <th class="white-text text-center">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 2021-02-19 <span>08:05</span> </td>
+                                                        <td><span class="blue_color_text">4599.00</span></td>
+                                                        <td>Main Wallet</td>
+                                                        <td>Sport</td>
+                                                        <td>&nbsp;</td>
+                                                        <td><span class="green_color_text">Success</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables">
+                                                <a href="#">&laquo;</a>
+                                                <a href="#">1</a>
+                                                <a class="active" href="#">2</a>
+                                                <a href="#">3</a>
+                                                <a href="#">4</a>
+                                                <a href="#">&raquo;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="profile_amount" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display:block;">
+                        <div class="info-form marginb-none">
+                            <h4 class="profile-sub bg-no-repeat symbol blk-text lang" key="profile_title">Profile</h4>
+                        </div>
+                        <div class="row ml0 mr0">
+                            <div class="col-md-10 col-lg-9">
+                                <div class="info-form change-pass">
+                                    <div class="pad-lr-comman">
+                                        <h5 class="blk-text no-mar lang" key="profile_change_password">My Profile</h5>
+                                        <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_current_password">Email :</p>
+                                                </label>
+                                                <label class="fright mar-btm-no lock">
+                                                    <input type="text" class="reg-form" placeholder="******@@yahoo.com" value="">
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_new_password">User Name:</p>
+                                                </label>
+                                                <label class="fright lock">
+                                                    <input type="text" class="reg-form" placeholder="Author">
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_confirm_password">Date of Birth :</p>
+                                                </label>
+                                                <label class="fright lock">
+                                                    <input type="text" class="reg-form" placeholder="1988-12-18" id="datepicker4">
+                                                </label>
+                                            </li>
+
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_confirm_password">Contact Number :</p>
+                                                </label>
+                                                <label class="fright lock">
+                                                    <input type="text" class="reg-form" placeholder="*****9178">
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_confirm_password">Full Name :</p>
+                                                </label>
+                                                <label class="fright lock">
+                                                    <input type="text" class="reg-form" placeholder="Ng Chin Ye">
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang">Currency:</p>
+                                                </label>
+                                                <label class="fright bank-name mendatory">
+                                                    MYR
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang">Banking Details:</p>
+                                                </label>
+                                                <label class="fright bank-name mendatory">
+                                                    <div class="bank_details1">
+                                                        <h1>154812233444 <span class="tickgray"><img src="~/images/tickgray.png"></span></h1>
+                                                        <p><a href="#">Ng Chin Ye</a></p>
+                                                    </div>
+                                                    <div class="bank_details2">
+                                                        <h1>154812233444 <span class="tickgray"><img src="~/images/tickgray.png"></span></h1>
+                                                        <p><a href="#">Ng Chin Ye</a></p>
+                                                    </div>
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <div class="fright">
+                                                    <button name="" class="submit">
+                                                        <span>Submit</span>
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <h5 class="blk-text no-mar lang" key="profile_update_personal_details">UPDATE PERSONAL DETAILS</h5>
+                                        <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
+                                            <li class="mar-btm-fifteen pad-top-ten pad-btm-ten">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang">Username :</p>
+                                                </label>
+                                                <label class="fright">
+                                                    <p class="big no-mar"><strong><span>Testingabc</span></strong></p>
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen pad-top-ten pad-btm-ten">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang">Full Name :</p>
+                                                </label>
+                                                <label class="fright">
+                                                    <p class="big no-mar"><strong><span>JASJADJANDJA</span></strong></p>
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang">Mobile :</p>
+                                                </label>
+                                                <label class="fright tel-icon">
+                                                    <input type="number" class="reg-form" placeholder="60167896532">
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <div class="fright">
+                                                    <button class="submit">
+                                                        <span>UPDATE PERSONAL DETAILS</span>
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="change_passwrd_amount" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
+                        <div class="info-form marginb-none">
+                            <h4 class="password-sub symbol bg-no-repeat blk-text lang" key="deposit_title">CHANGE PASSWORD</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 col-lg-9">
+                                <div class="info-form change-pass">
+                                    <div class="pad-lr-comman">
+                                        <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_current_password">Current Password :</p>
+                                                </label>
+                                                <label class="fright mar-btm-no lock">
+                                                    <input type="password" class="reg-form" placeholder="Current Password" value="">
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_new_password">New Password :</p>
+                                                </label>
+                                                <label class="fright lock">
+                                                    <input type="password" class="reg-form" placeholder="New Password">
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_confirm_password">Confirm Password :</p>
+                                                </label>
+                                                <label class="fright lock">
+                                                    <input type="password" class="reg-form" placeholder="Confirm Password">
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <div class="fright">
+                                                    <button name="" class="submit">
+                                                        <span>CONFIRM CHANGE PASSWORD</span>
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function openCity(evt, cityName, linknum) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        if (linknum != null && linknum != undefined) {
+            tablinks[linknum].className += " active";
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    //document.getElementById("defaultOpen").click();
+</script>
+<script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#datepicker0").datepicker();
+
+        $("#datepicker1").datepicker();
+        $("#datepicker1btn").click(function (event) {
+            event.preventDefault();
+            $("#datepicker1").focus();
+        });
+
+        $("#datepicker1btn2").click(function (event) {
+            event.preventDefault();
+            $("#datepicker2").focus();
+        })
+
+        $("#datepicker2").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+
+        $("#datepicker3").datepicker({
+            numberOfMonths: 3,
+            showButtonPanel: true
+        });
+
+        $("#datepicker4").datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+
+
+
+    });
+</script>
