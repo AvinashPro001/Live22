@@ -82,34 +82,21 @@
                     <div class="tab white-bg-tab-panel">
                         <h4 class="mar-btm-fifteen">BANKING</h4>
 
-                        <button class="tablinks account-reg deposit " onclick="openCity(event, 'deposit_amount')"><span class="lang" key="deposit">DEPOSIT</span></button>
-                        <button class="tablinks account-reg withdrawal" onclick="openCity(event, 'withdraw_amount')"><span class="lang" key="withdrawal_title">WITHDRAW</span></button>
-                        <button class="tablinks account-reg transfer " onclick="openCity(event, 'transfer_amount')"><span class="lang" key="transfer_title">TRANSFER</span></button>
-                        <button class="tablinks mar-btm-fifteen account-reg history" onclick="openCity(event, 'history_amount')"><span class="lang" key="history">HISTORY</span></button>
+                        <button id="deposit_tab" class="tablinks account-reg deposit" onclick="openCity(event, 'deposit_amount')"><span class="lang" key="deposit">DEPOSIT</span></button>
+                        <button id="withdraw_tab" class="tablinks account-reg withdrawal" onclick="openCity(event, 'withdraw_amount')"><span class="lang" key="withdrawal_title">WITHDRAW</span></button>
+                        <button id="transfer_tab" class="tablinks account-reg transfer " onclick="openCity(event, 'transfer_amount')"><span class="lang" key="transfer_title">TRANSFER</span></button>
+                        <button id="history_tab" class="tablinks mar-btm-fifteen account-reg history" onclick="openCity(event, 'history_amount')"><span class="lang" key="history">HISTORY</span></button>
 
                         <h4 class="mar-btm-fifteen">USER PROFILE</h4>
 
-                        <button class="tablinks account-reg profile active" onclick="openCity(event, 'profile_amount')"><span class="lang" key="profile_title">PROFILE</span></button>
-                        <button class="tablinks account-reg change_password" onclick="openCity(event, 'change_passwrd_amount')">
+                        <button id="profile_tab" class="tablinks account-reg profile active" onclick="openCity(event, 'profile_amount')"><span class="lang" key="profile_title">PROFILE</span></button>
+                        <button id="change_password_tab" class="tablinks account-reg change_password" onclick="openCity(event, 'change_passwrd_amount')">
                             <span class="lang" key="change_title">CHANGE PASSWORD</span>
                         </button>
 
                     </div>
-                    <!-- <div class="tab white-bg-tab-panel profile-category">
-                       <h4 class="banking_title">BANKING</h4>
-                       <button class="tablinks account-reg  active" onclick="openCity(event, 'deposit_amount')"><span class="lang">DEPOSIT</span></button>
-                       <button class="tablinks account-reg" onclick="openCity(event, 'withdraw_amount')"><span class="lang">WITHDRAW</span></button>
-                       <button class="tablinks account-reg" onclick="openCity(event, 'transfer_amount')"><span class="lang">TRANSFER</span></button>
 
-                       <h4 class="banking_title">USER PROFILE</h4>
-                       <button class="tablinks account-reg" onclick="openCity(event, 'profile_amount')"><span class="lang">PROFILE</span></button>
-                       <button class="tablinks account-reg" onclick="openCity(event, 'history_amount')"><span class="lang">HISTORY</span></button>
-
-                    </div> -->
                     <div id="deposit_amount" class="tabcontent account-reg radius-none" style="display: none;">
-                        <!-- <div class="info-form marginb-none">
-                           <h4 class="deposit-title bg-no-repeat symbol lang  mar-btm-ten">DEPOSIT</h4>
-                        </div> -->
                         <div class="info-form marginb-none">
                             <h4 class="deposit-sub symbol bg-no-repeat blk-text lang" key="deposit_title">DEPOSIT</h4>
                         </div>
@@ -945,7 +932,6 @@
                         </div>
                     </div>
 
-
                     <div id="history_amount" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
                         <div class="info-form marginb-none">
                             <h4 class="history-sub bg-no-repeat symbol lang" key="history">HISTORY</h4>
@@ -1575,7 +1561,6 @@
                         </div>
                     </div>
 
-
                     <div id="profile_amount" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display:block;">
                         <div class="info-form marginb-none">
                             <h4 class="profile-sub bg-no-repeat symbol blk-text lang" key="profile_title">Profile</h4>
@@ -1752,6 +1737,29 @@
     </div>
 </section>
 <script>
+    window.onhashchange = function () {
+        OpenTabOnHashChange() 
+    }
+
+    $(document).ready(function () {
+        OpenTabOnHashChange();
+    });
+
+    function OpenTabOnHashChange() {
+        if (window.location.hash) {
+            var hash = window.location.hash.substring(1);
+            if (hash == 'deposit') {
+                document.getElementById("deposit_tab").click();
+            } if (hash == 'withdraw') {
+                document.getElementById("withdraw_tab").click();
+            } if (hash == 'transfer') {
+                document.getElementById("transfer_tab").click();
+            }
+        }
+        else
+            document.getElementById("profile_tab").click();
+    }
+
     function openCity(evt, cityName, linknum) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -1768,7 +1776,6 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
-    //document.getElementById("defaultOpen").click();
 </script>
 <script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">

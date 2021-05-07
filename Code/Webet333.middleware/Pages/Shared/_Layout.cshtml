@@ -70,7 +70,7 @@
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
 
-                        <div class="login-register" id="beforelogin"  style="display:none">
+                        <div class="login-register" id="beforelogin" style="display:none">
                             <div class="login-form">
                                 <div class="div-toggle">
                                     <ul>
@@ -185,21 +185,21 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <a href="#">
+                                            <a href="~/Web/profile#deposit">
                                                 <li class="restore-btn layout-btn">
                                                     <label>
                                                         <img class="icon-home" src="~/images/deposit.png">&nbsp;&nbsp;<span class="lang black-textt2" key="deposit">DEPOSIT</span>
                                                     </label>
                                                 </li>
                                             </a>
-                                            <a href="#">
+                                            <a href="~/Web/profile#withdraw">
                                                 <li class="restore-btn layout-btn">
                                                     <label>
                                                         <img class="icon-home" src="~/images/withdraw.png">&nbsp;&nbsp;<span class="lang black-textt2" key="withdrawal">WITHDRAW</span>
                                                     </label>
                                                 </li>
                                             </a>
-                                            <a href="#">
+                                            <a href="~/Web/profile#transfer">
                                                 <li class="restore-btn layout-btn">
                                                     <label>
                                                         <img class="icon-home" src="~/images/transfer.png">&nbsp;&nbsp;<span class="lang black-textt2" key="transfer">TRANSFER</span>
@@ -392,14 +392,9 @@
         </div>
     </div>
 
-
-
-
     <div>
         @RenderBody()
     </div>
-
-
 
     <div class="row vip_wrapper_section ml0 mr0">
         <div class="container">
@@ -503,7 +498,6 @@
             </div>
         </div>
     </div>
-
 
     <footer>
         <div class="container">
@@ -713,7 +707,7 @@
                     <li><a href="~/Web/termsconditions">TERMS AND CONDITION</a>| </li>
                     <li><a href="~/Web/faq">FAQS</a> | </li>
                     <li><a href="~/Web/join">HOW TO JOIN</a> | </li>
-                    <li><a href="#">CONTACT US</a></li>
+                    <li><a href="#" onclick="OpenChatting()">CONTACT US</a></li>
                 </ul>
             </div>
             <div class="col-md-4 footer_sec_two_right">
@@ -722,7 +716,7 @@
         </div>
     </div>
     <div class="contact-us-btn">
-        <div class="contact-user" id="ContactUsPopUp" href="#">
+        <div class="contact-user" id="ContactUsPopUp" href="#" >
             <span class="lang" style="font-size:15px;color:#000;font-weight: 600;" key="contact_us">Contact Us</span>&nbsp;<span class="contact-img"></span>
         </div>
         <ul class="chatting" id="chatting">
@@ -807,53 +801,53 @@
                         </div>
                     </div>
                     @*<div class="row ml0 mr0 lang_wrapper">
-                        <p>Thailand</p>
-                        <div class="col-md-4 lang_boxes_one_wrap">
-                            <div class="thai_boxes_one">
-                                <a href="#"><img src="~/images/lang2.png"> English</a>
+                            <p>Thailand</p>
+                            <div class="col-md-4 lang_boxes_one_wrap">
+                                <div class="thai_boxes_one">
+                                    <a href="#"><img src="~/images/lang2.png"> English</a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 lang_boxes_two_wrap">
+                                <div class="thai_boxes_two">
+                                    <a href="#">Thai</a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                &nbsp;
                             </div>
                         </div>
-                        <div class="col-md-4 lang_boxes_two_wrap">
-                            <div class="thai_boxes_two">
-                                <a href="#">Thai</a>
+                        <div class="row ml0 mr0 lang_wrapper">
+                            <p>Indonesia</p>
+                            <div class="col-md-4 lang_boxes_one_wrap">
+                                <div class="thai_boxes_one">
+                                    <a href="#"><img src="~/images/lang3.png"> English</a>
+                                </div>
+                            </div>
+                            <div class="col-md-5 lang_boxes_two_wrap">
+                                <div class="thai_boxes_two">
+                                    <a href="#">Bhs indonesia</a>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                &nbsp;
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            &nbsp;
-                        </div>
-                    </div>
-                    <div class="row ml0 mr0 lang_wrapper">
-                        <p>Indonesia</p>
-                        <div class="col-md-4 lang_boxes_one_wrap">
-                            <div class="thai_boxes_one">
-                                <a href="#"><img src="~/images/lang3.png"> English</a>
+                        <div class="row ml0 mr0 lang_wrapper">
+                            <p>Vietnam</p>
+                            <div class="col-md-4 lang_boxes_one_wrap">
+                                <div class="thai_boxes_one">
+                                    <a href="#"><img src="~/images/lang4.png"> English</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-5 lang_boxes_two_wrap">
-                            <div class="thai_boxes_two">
-                                <a href="#">Bhs indonesia</a>
+                            <div class="col-md-4 lang_boxes_two_wrap">
+                                <div class="thai_boxes_two">
+                                    <a href="#">Tieng viet</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-1">
-                            &nbsp;
-                        </div>
-                    </div>
-                    <div class="row ml0 mr0 lang_wrapper">
-                        <p>Vietnam</p>
-                        <div class="col-md-4 lang_boxes_one_wrap">
-                            <div class="thai_boxes_one">
-                                <a href="#"><img src="~/images/lang4.png"> English</a>
+                            <div class="col-md-4">
+                                &nbsp;
                             </div>
-                        </div>
-                        <div class="col-md-4 lang_boxes_two_wrap">
-                            <div class="thai_boxes_two">
-                                <a href="#">Tieng viet</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            &nbsp;
-                        </div>
-                    </div>*@
+                        </div>*@
                 </div>
             </div>
         </div>
@@ -878,6 +872,10 @@
             });
         });
 
+
+        function OpenChatting() {
+            $("#chatting").toggle();
+        }
 
         $(".dropdown").hover(function () {
             $(this).toggleClass("open");
