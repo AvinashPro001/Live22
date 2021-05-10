@@ -11,13 +11,7 @@
             <div class="row col-12">
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">Promotions</h4>
-                    <!--<select class="form-control" id="promotionddl" (change)="promotionIdOnChange($event)">
-                        <option value="0">-Select Promotions-</option>
-                        <option *ngFor="let c of promotionList" [ngValue]="c" id="{{c.id}}" value="{{c.id}}">{{c.title}}</option>
-                    </select>-->
-
                     <ngx-select-dropdown tabindex="0" [multiple]="false" [config]="config" [options]="promotionList" (change)="promotionIdOnChange($event)"></ngx-select-dropdown>
-
                 </div>
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">From Date</h4>
@@ -87,6 +81,9 @@
                         </ng-template>
                     </ngx-datatable-column>
                 </ngx-datatable>
+            </div>
+            <div>
+                Total after user apply promotion : {{totalComeBackUser}}/{{totalUser}}  {{getPercentage}}%
             </div>
         </div>
     </div>
