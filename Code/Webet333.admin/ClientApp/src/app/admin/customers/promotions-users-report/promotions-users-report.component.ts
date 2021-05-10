@@ -22,6 +22,10 @@ export class PromotionsUsersReportComponent implements OnInit {
     promotionId: string = null;
     columns = [];
 
+    totalUser: any = 0;
+    totalComeBackUser: any = 0;
+    getPercentage: any = 0;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -175,6 +179,17 @@ export class PromotionsUsersReportComponent implements OnInit {
                 })
 
                 this.rows = [...this.rows];
+
+                if (this.rows.length != 0) {
+                    this.totalUser = this.rows.length;
+                    this.totalComeBackUser = this.rows.filter(o => o.DepositCountAfterLastDatetimeApplyThisPromotion > 0).length;
+                    this.getPercentage = Math.round((((this.totalComeBackUser * 100) / this.totalUser) + Number.EPSILON) * 100) / 100;
+                } else {
+                    this.totalUser = 0;
+                    this.totalComeBackUser = 0;
+                    this.getPercentage = 0;
+                }
+
                 this.loadingIndicator = false;
             }, error => {
                 this.loadingIndicator = false;
@@ -184,7 +199,7 @@ export class PromotionsUsersReportComponent implements OnInit {
     }
 
     ReplaceTime(Date) { return Date.replace("T", " ") }
-  
+
     promotionIdOnChange(event) {
         try {
             this.promotionId = event.value.id;
@@ -194,7 +209,6 @@ export class PromotionsUsersReportComponent implements OnInit {
             this.promotionId = null;
         }
     }
-
 
     //#endregion Filter Data
 
