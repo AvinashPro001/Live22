@@ -18,5 +18,13 @@ namespace Webet333.models.Request
 
         [JsonIgnore]
         public string UsersIdList { get; set; }
+
+        [Required(ErrorMessage = "error_fromDate_required")]
+        [JsonProperty("fromDate")]
+        public DateTime FromDate { get; set; }
+
+        [Required(ErrorMessage = "error_toDate_required")]
+        [JsonProperty("toDate")]
+        public DateTime ToDate { get; set; }
     }
 }

@@ -184,7 +184,9 @@ namespace Webet333.api.Controllers
                         UserId = request.UserId,
                         UniqueId = request.UniqueId,
                         UserGroupId = request.UserGroupId,
-                        UsersIdList = request.UsersIdList
+                        UsersIdList = request.UsersIdList,
+                        FromDate = request.FromDate,
+                        ToDate = request.ToDate
                     });
             }
 
