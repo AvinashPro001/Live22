@@ -36,7 +36,8 @@ export class UsersBehaviourReportsComponent implements OnInit {
         if (await this.checkViewPermission()) {
             this.setColumn();
             //this.setPageData();
-            this.setToday();
+            //this.setToday();
+            this.setDatePicker(new Date(), new Date());
         }
     }
 
