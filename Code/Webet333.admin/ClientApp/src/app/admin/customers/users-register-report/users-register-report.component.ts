@@ -345,7 +345,9 @@ export class UsersRegisterReportComponent implements OnInit {
 
             let model = {
                 userGroupId: this.userGroupId,
-                userId: userIdList
+                userId: userIdList,
+                fromdate: (document.getElementById("txt_fromdatetime") as HTMLInputElement).value,
+                todate: (document.getElementById("txt_todatetime") as HTMLInputElement).value,
             };
 
             this.adminService.add<any>(customer.userGroupUserInsert, model).subscribe(res => {
