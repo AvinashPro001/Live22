@@ -64,6 +64,7 @@ export class UsergroupEditComponent implements OnInit {
             { prop: 'VIPLavel' },
             { prop: 'CountDeposit' },
             { prop: 'TotalDepositAmount' },
+            { prop: 'WinLossAmount' },
             { prop: 'CreatedDateTime' },
             { prop: 'LastModifyDateTime' },
             { prop: 'Action', cellTemplate: this.status, sortable: false }
@@ -122,6 +123,7 @@ export class UsergroupEditComponent implements OnInit {
                     VIPLavel: el.VIPLevelName,
                     CountDeposit: el.depositCount,
                     TotalDepositAmount: el.depositAmount,
+                    WinLossAmount: el.winLossAmount,
                     CreatedDateTime: this.replaceDateTime(el.created),
                     LastModifyDateTime: this.replaceDateTime(el.modified)
                 });
