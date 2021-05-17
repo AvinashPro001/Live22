@@ -480,6 +480,27 @@
 
             public const string TrioSenderId = "CLOUDSMS";
         }
+
+        public class YEEBET
+        {
+            public const string Url = "http://api.yeebet.vip/api/";
+
+            public const string Register = "register";
+
+            public const string Login = "login";
+
+            public const string GetBalance = "user/balance";
+
+            public const string APPId = "xtd4M3E5YIN1";
+
+            public const string SecretKey = "7caf026d508e35cb48136cf11d98b64c";
+
+            public const string ReturnURL = "http://uat.webet333.com/";
+
+            public const string Currency = "MYR";
+
+            public const string IsCreate = "1";
+        }
     }
 
 #elif STAG
@@ -960,6 +981,27 @@
             public const string TrioApiKey = "NUC13010100006272b6dac990a5a38519c724051e6d82d30e";
 
             public const string TrioSenderId = "CLOUDSMS";
+        }
+
+        public class YEEBET
+        {
+            public const string Url = "http://api.yeebet.vip/api/";
+
+            public const string Register = "register";
+
+            public const string Login = "login";
+
+            public const string GetBalance = "user/balance";
+
+            public const string APPId = "xtd019R76QU5";
+
+            public const string SecretKey = "1d6f1e05678290dba54ac00947404bbd";
+
+            public const string ReturnURL = "http://webet333.com/";
+
+            public const string Currency = "MYR";
+
+            public const string IsCreate = "1";
         }
     }
 #endif
