@@ -1547,7 +1547,6 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> WMBettingDetails_Insert([FromBody] GameBettingDetailsInsertRequest request)
         {
             await CheckUserRole();
-
             var result = JsonConvert.SerializeObject(request.JsonData);
             using (var game_help = new GameHelpers(Connection: Connection))
             {
