@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Webet333.dapper;
@@ -35,7 +37,7 @@ namespace Webet333.api.Helpers
 
             var Parameter = $"{temp}&sign={tempMD5}";
 
-            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.Register}?{Parameter}";
+            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.Register}?{Parameter}";
 
             return JsonConvert.DeserializeObject<YEEBETResponse>(await GameHelpers.CallThirdPartyApi(Url));
         }
@@ -70,12 +72,75 @@ namespace Webet333.api.Helpers
 
             var Parameter = $"{temp}&sign={tempMD5}";
 
-            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.Login}?{Parameter}";
+            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.Login}?{Parameter}";
 
             return JsonConvert.DeserializeObject<YEEBETResponse>(await GameHelpers.CallThirdPartyApi(Url));
         }
 
         #endregion Call Login 3rd Party API
+
+        #region Deposit & Withdrawal
+
+        internal static async Task<YEEBETDepositWithdrawalResponse> TransferBalanceAsync(string Username, decimal Amount)
+        {
+            var temp = $"amount={Amount}&" +
+                $"appid={GameConst.YEEBET.APPId}&" +
+                $"username={Username}";
+
+            var tempMD5 = SecurityHelpers.MD5EncrptText($"{temp}&key={GameConst.YEEBET.SecretKey}");
+
+            var Parameter = $"{temp}&sign={tempMD5}";
+
+            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.DepositWithdrawal}?{Parameter}";
+
+            return JsonConvert.DeserializeObject<YEEBETDepositWithdrawalResponse>(await GameHelpers.CallThirdPartyApi(Url));
+        }
+
+        #endregion Deposit & Withdrawal
+
+        #region Call Betting Details 3rd Party API
+
+        public static async Task<YEEBETBettingDetailsResponse> BettingDetailsCallAPI()
+        {
+            var temp = $"appid={GameConst.YEEBET.APPId}&" +
+               $"size={GameConst.YEEBET.BettingDetailsSize}";
+
+            var tempMD5 = SecurityHelpers.MD5EncrptText($"{temp}&key={GameConst.YEEBET.SecretKey}");
+
+            var Parameter = $"{temp}&sign={tempMD5}";
+
+            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.GetBettingDetails}?{Parameter}";
+
+            return JsonConvert.DeserializeObject<YEEBETBettingDetailsResponse>(await GameHelpers.CallThirdPartyApi(Url));
+        }
+
+        #endregion Call Betting Details 3rd Party API
+
+        #region Call Remove Betting Details 3rd Party API
+
+        public static async Task<YEEBETBettingDetailsResponse> RemoveBettingDetailsCallAPI(List<int> Ids)
+        {
+            if (Ids.Any())
+            {
+                var tempIds = JsonConvert.SerializeObject(Ids);
+                tempIds = tempIds.Substring(1, tempIds.Length - 2);     //  Remove [].
+
+                var temp = $"appid={GameConst.YEEBET.APPId}&" +
+                    $"ids={tempIds}";
+
+                var tempMD5 = SecurityHelpers.MD5EncrptText($"{temp}&key={GameConst.YEEBET.SecretKey}");
+
+                var Parameter = $"{temp}&sign={tempMD5}";
+
+                var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.RemoveGetBettingDetails}?{Parameter}";
+
+                return JsonConvert.DeserializeObject<YEEBETBettingDetailsResponse>(await GameHelpers.CallThirdPartyApi(Url));
+            }
+
+            return new YEEBETBettingDetailsResponse();
+        }
+
+        #endregion Call Remove Betting Details 3rd Party API
 
         #region House Keeping
 

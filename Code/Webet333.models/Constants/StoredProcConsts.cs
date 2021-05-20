@@ -435,6 +435,8 @@
             public const string BettingDetails_AllBet = "[dbo].[Allbet_BettingDetails_By_Username]";
 
             public const string PragmaticGameNotRegistredUsers = "[dbo].[GetUsersNotRegisteredInPragmaticGame]";
+
+            public const string YEEBETBettingDetailsInsert = "[dbo].[YEEBET_BettingDetails_Insert]";
         }
 
         public class MaxBetGame

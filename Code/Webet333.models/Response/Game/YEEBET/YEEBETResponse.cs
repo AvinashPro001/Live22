@@ -11,4 +11,13 @@
 
         public string desc { get; set; }
     }
+
+    public class YEEBETDepositWithdrawalResponse : YEEBETBasicResponse
+    {
+        public string orderno { get; set; }
+
+        public double balance { get; set; }
+
+        public string tradeno { get; set; }
+    }
 }

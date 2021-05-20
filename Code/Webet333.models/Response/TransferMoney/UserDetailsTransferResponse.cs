@@ -22,6 +22,8 @@
 
         public string SexyUsername { get; set; }
 
+        public string YEEBETUsername { get; set; }
+
         public decimal MainWalletBalance { get; set; }
 
         public string FromWalletName { get; set; }

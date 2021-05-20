@@ -370,7 +370,7 @@ namespace Webet333.api.Helpers
 
         #endregion WM Services
 
-        #region WM Services
+        #region Pragmatic Services
 
         internal async Task PragmaticServicesInsert(string request)
         {
@@ -380,7 +380,24 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion WM Services
+        #endregion Pragmatic Services
+
+        #region YEEBET Services
+
+        internal async Task YEEBETServicesInsert(string request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var res = await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Game.YEEBETBettingDetailsInsert,
+                    new
+                    {
+                        jsonString = request
+                    });
+            }
+        }
+
+        #endregion YEEBET Services
 
         #region Kiss 918 Player Log Insert
 

@@ -28,7 +28,7 @@ namespace Webet333.api.Helpers
         private IHostingEnvironment _hostingEnvironment;
 
         protected IStringLocalizer<BaseController> Localizer { get; set; }
-        
+
         private static readonly HttpClient client = new HttpClient();
 
         public TransferMoneyHelpers(string Connection = null, IStringLocalizer<BaseController> Localizer = null)
@@ -524,6 +524,25 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
+                case WalletConst.WalletName.YEEBET:
+                    try
+                    {
+                        var YEEBETResponse = await YEEBETGameHelpers.TransferBalanceAsync(UsernameResponse.YEEBETUsername, -Math.Abs(Amount));
+                        if (YEEBETResponse.result != 0)
+                        {
+                            response.ErrorMessage = YEEBETResponse.desc;
+                            response.GameName = "YEEBET Game";
+                            response.GameResponse = JsonConvert.SerializeObject(YEEBETResponse);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response.ErrorMessage = Localizer["error_transaction_failed"].Value;
+                        response.GameName = "YEEBET Game";
+                        response.GameResponse = ex.Message;
+                    }
+                    break;
             }
 
             return response;
@@ -825,6 +844,25 @@ namespace Webet333.api.Helpers
                     {
                         response.ErrorMessage = Localizer["error_transaction_failed"].Value;
                         response.GameName = "Pragmatic Game";
+                        response.GameResponse = ex.Message;
+                    }
+                    break;
+
+                case WalletConst.WalletName.YEEBET:
+                    try
+                    {
+                        var YEEBETResponse = await YEEBETGameHelpers.TransferBalanceAsync(UsernameResponse.YEEBETUsername, Amount);
+                        if (YEEBETResponse.result != 0)
+                        {
+                            response.ErrorMessage = YEEBETResponse.desc;
+                            response.GameName = "YEEBET Game";
+                            response.GameResponse = JsonConvert.SerializeObject(YEEBETResponse);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response.ErrorMessage = Localizer["error_transaction_failed"].Value;
+                        response.GameName = "YEEBET Game";
                         response.GameResponse = ex.Message;
                     }
                     break;

@@ -39,6 +39,7 @@ using Webet333.models.Response.Game.Joker;
 using Webet333.models.Response.Game.Kiss918;
 using Webet333.models.Response.Game.Pussy888;
 using Webet333.models.Response.Game.SexyBaccarat;
+using Webet333.models.Response.Game.YEEBET;
 using Webet333.models.Response.TransferMoney;
 using Webet333.queue;
 
@@ -780,6 +781,21 @@ namespace Webet333.api.Controllers
 
         #endregion Pragmatic game
 
+        #region YEEBET Game
+
+        [Authorize]
+        [HttpGet(ActionsConst.Game.Manually_YEEBET_Betting_Details)]
+        public async Task<IActionResult> ManuallyYEEBETBettingDetails()
+        {
+            await CheckUserRole();
+
+            var response = await YEEBETGameHelpers.BettingDetailsCallAPI();
+
+            return OkResponse(response);
+        }
+
+        #endregion YEEBET Game
+
         #endregion Manually Game Betting Details
 
         #region GAME BETTING DETAILS
@@ -1255,6 +1271,33 @@ namespace Webet333.api.Controllers
 
         #endregion Pragmatic Betting Details
 
+        #region YEEBET Betting Details
+
+        [HttpGet(ActionsConst.Game.YEEBET_Betting_Details)]
+        public async Task<IActionResult> YEEBETBettingDetails()
+        {
+            var response = await YEEBETGameHelpers.BettingDetailsCallAPI();
+
+            if (response.result == 0)
+                if (response.arraysize > 0)
+                    using (var game_helper = new GameHelpers(Connection))
+                    {
+                        var jsonString = JsonConvert.SerializeObject(response.array);
+                        await game_helper.YEEBETServicesInsert(jsonString);
+
+                        // Remove bets from get betting details API to avoid duplicate.
+                        var ids = response.array.Select(X => X.id).ToList();
+                        await YEEBETGameHelpers.RemoveBettingDetailsCallAPI(ids);
+                    }
+
+            return OkResponse(new
+            {
+                jsonString = JsonConvert.SerializeObject(response)
+            });
+        }
+
+        #endregion YEEBET Betting Details
+
         #endregion GAME BETTING DETAILS
 
         #region Game Category
@@ -1504,6 +1547,7 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> WMBettingDetails_Insert([FromBody] GameBettingDetailsInsertRequest request)
         {
             await CheckUserRole();
+
             var result = JsonConvert.SerializeObject(request.JsonData);
             using (var game_help = new GameHelpers(Connection: Connection))
             {
@@ -1530,6 +1574,32 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Pragmatic Game
+
+        #region YEEBET Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.YEEBETBettingDetailsSave)]
+        public async Task<IActionResult> YEEBETBettingDetails_Insert([FromBody] GameBettingDetailsInsertRequest request)
+        {
+            await CheckUserRole();
+
+            if (request.JsonData != null)
+            {
+                List<YEEBETBettingDetailsResult> result = JsonConvert.DeserializeObject<List<YEEBETBettingDetailsResult>>(request.JsonData.ToString());
+
+                using (var game_help = new GameHelpers(Connection: Connection))
+                {
+                    await game_help.YEEBETServicesInsert(JsonConvert.SerializeObject(request.JsonData));
+
+                    var ids = result.Select(X => X.id).ToList();
+                    await YEEBETGameHelpers.RemoveBettingDetailsCallAPI(ids);
+                }
+            }
+
+            return OkResponse();
+        }
+
+        #endregion YEEBET Game
 
         #endregion Game Betting Details save
 
@@ -2413,7 +2483,6 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.BalacneInWallet)]
         public async Task<IActionResult> BalacneInWallet([FromBody] AllInWalletRequest request)
         {
-
             if (!ModelState.IsValid) return BadResponse(ModelState);
             var Role = GetUserRole(User);
             if (Role == RoleConst.Users)
@@ -2457,7 +2526,6 @@ namespace Webet333.api.Controllers
             var responseId = await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Amount = request.Amount.ToString(), UserId = request.UserId, WalletId = request.ToWalletId, Request = JsonConvert.SerializeObject(request) });
             var Id = responseId.ID.ToString();
 
-
             if (userDetails.FromWalletIsMaintenance == true)
             {
                 await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["error_game_maintenance"].Value });
@@ -2474,7 +2542,6 @@ namespace Webet333.api.Controllers
             {
                 return OkResponse();
             }
-
 
             using (var transferMoney_helper = new TransferMoneyHelpers(Connection, Localizer))
             {
@@ -2502,7 +2569,7 @@ namespace Webet333.api.Controllers
                         }
                         else
                         {
-                            //Deposit In Main Wallet and Insert into DB Row 
+                            //Deposit In Main Wallet and Insert into DB Row
                             await transferMoney_helper.DepositInWallet(userDetails, "Main Wallet", request.Amount, request.UserId.ToString(), _hostingEnvironment);
                             transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
 

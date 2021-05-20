@@ -476,7 +476,7 @@ namespace Webet333.api.Helpers
 
             var Parameter = $"{temp}&sign={tempMD5}";
 
-            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.GetBalance}?{Parameter}";
+            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.GetBalance}?{Parameter}";
 
             try
             {
