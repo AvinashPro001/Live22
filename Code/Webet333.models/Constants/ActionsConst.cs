@@ -383,6 +383,8 @@
 
             public const string Pragmatic_Betting_Details = "Game/Pragmatic_Betting_Details";
 
+            public const string YEEBET_Betting_Details = "Game/YEEBET_Betting_Details";
+
             public const string Manually_Joker_Betting_Details = "Game/Manually/Joker_Betting_Details";
 
             public const string Manually_AG_Betting_Details = "Game/Manually/AG_Betting_Details";
@@ -412,6 +414,8 @@
             public const string Manually_WM_Betting_Details = "Game/Manually/WM_Betting_Details";
 
             public const string Manually_Pragmatic_Betting_Details = "Game/Manually/Pragmatic_Betting_Details";
+
+            public const string Manually_YEEBET_Betting_Details = "Game/Manually/YEEBET_Betting_Details";
 
             public const string Playtech_Betting_Details = "Game/Playtech_Betting_Details";
 
@@ -461,6 +465,8 @@
 
             public const string M8BettingDetailsSave = "Game/M8BettingDetailsSave";
 
+            public const string YEEBETBettingDetailsSave = "Game/YEEBETBettingDetailsSave";
+
             public const string GameWalletBalance = "Game/AllWalletBalance";
 
             public const string GameWalletBalanceRestore = "Game/Balance/Restore";
@@ -505,6 +511,8 @@
             public const string CheckM8Balance = "check/gamebalance/m8";
 
             public const string CheckMaxBetBalance = "check/gamebalance/maxbet";
+
+            public const string YEEBETBalance = "gamebalance/yeebet";
         }
 
         public class TransferMoney
@@ -724,6 +732,13 @@
             public const string FreeCreditEventDelete = "freecreditevent/delete";
 
             public const string FreeCreditEventUsersSelect = "freecreditevent/users/select";
+        }
+
+        public class YEEBET
+        {
+            public const string Register = "yeebet/register";
+
+            public const string Login = "yeebet/login";
         }
     }
 }

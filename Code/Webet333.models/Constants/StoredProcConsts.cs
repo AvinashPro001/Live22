@@ -310,6 +310,8 @@
             public const string SABalanceUpdate = "[dbo].[Balance_SA_Update]";
 
             public const string PragmaticBalanceUpdate = "[dbo].[Balance_Pragmatic_Update]";
+
+            public const string YEEBETGameBalanceUpdate = "[dbo].[Balance_YEEBET_Update]";
         }
 
         public class Game
@@ -433,6 +435,8 @@
             public const string BettingDetails_AllBet = "[dbo].[Allbet_BettingDetails_By_Username]";
 
             public const string PragmaticGameNotRegistredUsers = "[dbo].[GetUsersNotRegisteredInPragmaticGame]";
+
+            public const string YEEBETBettingDetailsInsert = "[dbo].[YEEBET_BettingDetails_Insert]";
         }
 
         public class MaxBetGame
@@ -581,6 +585,11 @@
             public const string FreeCreditEventUpdatDelete = "[dbo].[FreeCreditEvent_Delete]";
 
             public const string FreeCreditEventUsersSelect = "[dbo].[FreeCreditEvent_UsersSelect]";
+        }
+
+        public class YEEBET
+        {
+            public const string Register = "[dbo].[Users_Insert_YEEBET]";
         }
     }
 }

@@ -120,7 +120,6 @@ namespace Webet333.api.Controllers
 
             if (request.Username != null)
             {
-
                 using (var gamehelper = new GameBalanceHelpers(Connection))
                 {
                     dynamic JokerBalance = await gamehelper.CallJokerGameBalance(request.Username);
@@ -538,5 +537,34 @@ namespace Webet333.api.Controllers
         #endregion Check M8 game balance
 
         #endregion Check Sports game balance for pending bets or running games
+
+        #region YEEBET Balance
+
+        [Authorize]
+        [HttpPost(ActionsConst.GameBalance.YEEBETBalance)]
+        public async Task<IActionResult> YEEBETBalance([FromBody] UserBalanceRequest request)
+        {
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            if (GetUserRole(User) == RoleConst.Users) request.Id = GetUserId(User).ToString();
+
+            if (String.IsNullOrEmpty(request.Id)) return BadResponse(ErrorConsts.InvalidModelstate);
+
+            dynamic previousBalance = 0.00;
+
+            using (var gamehelper = new GameBalanceHelpers(Connection))
+            {
+                string YEEBETBalance = await gamehelper.CallYEEBETGameBalance(request.Username);
+                previousBalance = await gamehelper.YEEBETBalanceUpdate(request.Id, YEEBETBalance);
+
+                return OkResponse(new
+                {
+                    balance = YEEBETBalance,
+                    previousBalance.PreviousBalance
+                });
+            }
+        }
+
+        #endregion YEEBET Balance
     }
 }

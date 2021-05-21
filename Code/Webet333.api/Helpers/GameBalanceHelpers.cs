@@ -19,6 +19,7 @@ using Webet333.models.Response.Game.MAXBet;
 using Webet333.models.Response.Game.Pragmatic;
 using Webet333.models.Response.Game.SexyBaccarat;
 using Webet333.models.Response.Game.WM;
+using Webet333.models.Response.Game.YEEBET;
 
 namespace Webet333.api.Helpers
 {
@@ -462,6 +463,37 @@ namespace Webet333.api.Helpers
 
         #endregion Call API of Pragmatic Game
 
+        #region Call API of YEEBET Game
+
+        public async Task<string> CallYEEBETGameBalance(string Username, int lang = 1)
+        {
+            string YEEBETBalance = null;
+
+            var temp = $"appid={GameConst.YEEBET.APPId}&" +
+               $"username={Username}";
+
+            var tempMD5 = SecurityHelpers.MD5EncrptText($"{temp}&key={GameConst.YEEBET.SecretKey}");
+
+            var Parameter = $"{temp}&sign={tempMD5}";
+
+            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.GetBalance}?{Parameter}";
+
+            try
+            {
+                var resultYEEBET = JsonConvert.DeserializeObject<YEEBETBalanceResponse>(await GameHelpers.CallThirdPartyApi(Url));
+
+                YEEBETBalance = resultYEEBET != null ? (resultYEEBET.result == 0 ? resultYEEBET.balance.ToString() : null) : null;
+            }
+            catch (Exception ex)
+            {
+                YEEBETBalance = null;
+            }
+
+            return YEEBETBalance;
+        }
+
+        #endregion Call API of YEEBET Game
+
         #endregion Call Third Party Game Balance API's
 
         #region Update ALL games balance in db
@@ -633,6 +665,24 @@ namespace Webet333.api.Helpers
         }
 
         #endregion Pragmatic balance update
+
+        #region YEEBET Balance Update
+
+        internal async Task<dynamic> YEEBETBalanceUpdate(string UserId, string Amount)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.FindAsync(
+                    StoredProcConsts.GameBalance.YEEBETGameBalanceUpdate,
+                    new
+                    {
+                        UserId,
+                        Amount
+                    });
+            }
+        }
+
+        #endregion YEEBET Balance Update
 
         #endregion Update ALL games balance in db
 
