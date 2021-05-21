@@ -49,6 +49,7 @@
     <link href="~/css/style.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/css/responsive-style.css" />
     <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
     <script src="~/js/constants/apiConsts.js"></script>
     <script src="~/js/helpers/apiHelper.js"></script>
     <script src="~/js/web/home.js"></script>
@@ -74,7 +75,7 @@
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
 
-                        <div class="login-register" id="beforelogin"  style="display:none">
+                        <div class="login-register" id="beforelogin">
                             <div class="login-form">
                                 <div class="div-toggle">
                                     <ul>
@@ -109,7 +110,7 @@
                                     </ul>
                                     <div class="bellow_signt">
                                         <a href="">Forgot Username or Password?</a>
-                                        <a href="">7/1/2021 9:29:16pm (GMT=8)</a>
+                                        <a href="" id="current_time">7/1/2021 9:29:16pm (GMT=8)</a>
                                     </div>
                                 </div>
 
@@ -120,7 +121,7 @@
                             <div class="login-form">
                                 <div id="afterlogin" class="div-toggle">
                                     <ul>
-                                        <li class="login-item"><label id="lbl_TimeafterLogin">7/1/2021 9:29:16pm (GMT=8)</label></li>
+                                        <li class="login-item"><label id="current_time">7/1/2021 9:29:16pm (GMT=8)</label></li>
                                         <li class="login-item country custom-country-width">
                                             <div class="language_selection">
                                                 <div class="flag_nsd"><img src="~/images/lan_en.png" alt="lan_en"></div>
@@ -132,22 +133,24 @@
 
                                                 <li class="login-item u-name form-icon" style="display:flex;margin-left:-25px;">
                                                     <span id="sound" class="sound">
-                                                        <a id="soundLink" href="javascript:void(0);"><img src="~/images/vip_user.png" alt="vip_user"></a>
+                                                        <a id="soundLink" href="javascript:void(0);"><img class="vip_header_icon" id="login_user_vip_level" alt="vip_user"></a>
                                                         <ul class="soud_arrow">
                                                             <li><a href="#"><img src="~/images/vip_tokens.png" /> <br> More Aout VIP</a></li>
                                                         </ul>
                                                     </span>
                                                     <span style="font-size:larger">
                                                         Username
-                                                    </span> : <span style="white-space: nowrap; overflow: unset; text-overflow: ellipsis;font-size:larger;">
-                                                        Testing123
-                                                    </span>
+                                                    </span> : <span style="white-space: nowrap; overflow: unset; text-overflow: ellipsis;font-size:larger;" id="login_username"></span>
+
                                                 </li>
+
+
+
 
                                             </ul>
                                         </li>
                                         <li class="logout-item signin form-icon log-out">
-                                            <button class="btn-login" value="LOGOUT" type="button">
+                                            <button class="btn-login" value="LOGOUT" type="button" onclick="DoLogout()">
                                                 <span> <i class="fas fa-sign-out-alt"></i> LOGOUT</span>
                                             </button>
                                         </li>
@@ -376,7 +379,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="banking-info">
+                <li class="banking-info" id="bankMainMenu">
                     <a href="~/Web/bank">
                         <span>
                             <img class="normal_icons" src="~/images/bank.png" width="26" height="23" alt="">
@@ -862,7 +865,7 @@
             <!-- Modal content-->
             <div class="modal-content lang_choose_content">
                 <div class="modal-header lang_choose_header" style="background-color:red;">
-                    <h3 class="modal-title"  style="background-color:red;">Region and Language</h3>
+                    <h3 class="modal-title" style="background-color:red;">Region and Language</h3>
                     <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <div class="modal-body lang_choose_body">
@@ -874,7 +877,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="lang_boxes_two">
-                               <p>Error</p>
+                                <p>Error</p>
                             </div>
                         </div>
                     </div>
@@ -882,7 +885,6 @@
             </div>
         </div>
     </div>
-
 
     <script src="~/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
     <script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>

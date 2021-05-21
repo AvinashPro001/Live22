@@ -226,6 +226,8 @@
 
             public const string SelectDaily = "promotions/daily/list";
 
+            public const string WebRetrive = "promotions/web/retrieve";
+
             public const string AdminRetrive = "promotions/admin/retrive";
 
             public const string UpdateImage = "promotions/image/update";

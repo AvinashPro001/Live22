@@ -141,6 +141,20 @@ namespace Webet333.api.Helpers
             }
         }
 
+        public async Task<dynamic> SelectPromotionForWeb(BaseUrlConfigs baseUrl, string LanguageCode, PromotionRetriveRequest request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Promotions.SelectWebPromotion, new { LanguageCode,request.IsMain});
+                List<dynamic> promotions = result.ToList();
+
+                promotions.ForEach(promotion =>
+                        promotion.banner = (promotion.banner != null && !string.IsNullOrEmpty(promotion.banner)) ? $"{baseUrl.ImageBase}{baseUrl.PromotionImage}/{promotion.id}{promotion.banner}" : "");
+
+                return promotions;
+            }
+        }
+
         public async Task<dynamic> RetrieveAdmin(PromotionAdminRetriveRequest request, BaseUrlConfigs baseUrl)
         {
             var promotions = new List<PromotionResponse>();

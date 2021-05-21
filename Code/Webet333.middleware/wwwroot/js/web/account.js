@@ -1,5 +1,10 @@
-﻿async function DoLogin() {
- let model = {
+﻿$(document).ready(function () {
+    LoginSectionHideUnhide();
+    ProfileData()
+});
+
+async function DoLogin() {
+    let model = {
         userName: $('#txt_login_username').val(),
         password: $("#txt_login_password").val(),
         grantType: 'User'
@@ -20,11 +25,70 @@
             ShowError(err.responseJSON.message);
             LoaderHide();
         }
+        return 0;
+    }
+
+    SetSessionStorage("currentUser", res.response.data.access_token);
+    SetSessionStorage("userDetails", Encryption(JSON.stringify(res.response.data.user)))
+    window.location.reload();
+}
+
+function LoginSectionHideUnhide() {
+    if (GetSessionStorage("currentUser") == null) {
+        document.getElementById("afterlogin").innerHTML = "";
+        document.getElementById("bankMainMenu").innerHTML = "";
+    } else {
+        document.getElementById("beforelogin").innerHTML = ""
+    }
+}
+
+function CheckLoginOrNot() {
+    if (GetSessionStorage("currentUser") == null) window.location.href = "/";
+}
+
+function ProfileData() {
+    if (GetSessionStorage("currentUser") !== null) {
+        var ProfileData = JSON.parse(Decryption(GetSessionStorage("userDetails")))
+        console.log(ProfileData);
+        if (!window.location.href.toLocaleLowerCase().includes("web/otpverified")) {
+            if (!ProfileData.mobilenoConfirmed) window.location.href = "/web/otpverified"
+        }
+        SetAllImagePath('login_user_vip_level', ProfileData.vipBanner)
+        SetAllValueInElement("login_username", ProfileData.username)
+        SetBackgroudImagePath("silver_wallet", ProfileData.vipBanner)
+    }
+}
+
+function CheckMobileNumberIsVerified() {
+    if (GetSessionStorage("currentUser") !== null) {
+        var ProfileData = JSON.parse(Decryption(GetSessionStorage("userDetails")))
+        if (window.location.href.toLocaleLowerCase().includes("web/otpverified")) {
+            if (ProfileData.mobilenoConfirmed) window.location.href = "/"
+        }
     }
 }
 
 function DoLogout() {
     localStorage.clear();
     sessionStorage.clear();
-    window.location.reload();
+    CheckLoginOrNot()
 }
+
+function DisplayCurrentTime() {
+    var date = new Date();
+    var day = date.getDate();
+    var Month = date.getMonth()+1;
+    var Year = date.getFullYear();
+    var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+    var am_pm = date.getHours() >= 12 ? "PM" : "AM";
+    hours = hours < 10 ? "0" + hours : hours;
+    var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+    time = day + "/" + Month + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + " " + am_pm + " (GMT=8)";
+    return time;
+};
+
+
+setInterval(function () {
+    SetAllValueInElement("current_time", DisplayCurrentTime())
+}, 1000);

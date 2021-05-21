@@ -74,7 +74,9 @@ namespace Webet333.api.Controllers
                 if (request.GrantType == models.Enums.GrantTypeEnums.admin)
                     return OkResponse(new { access_token = user_token, user.PermissionsList });
 
-                return OkResponse(new { access_token = user_token, totalBankAccount = user.BankAccount });
+                user.VIPBanner = (user.VIPBanner != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.VIPIcon + "/" + user.VIPLevel + user.VIPBanner : null);
+
+                return OkResponse(new { access_token = user_token, totalBankAccount = user.BankAccount, user });
             }
         }
 

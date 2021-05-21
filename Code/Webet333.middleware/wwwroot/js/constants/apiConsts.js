@@ -1,4 +1,4 @@
-﻿var baseUrl = "http://api.webet333.com/api/v1/";
+﻿var baseUrl = "http://uatapi.webet333.com/api/v1/";
 
 var apiEndPoints = {
     login: "account/login",

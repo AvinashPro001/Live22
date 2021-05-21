@@ -260,6 +260,8 @@
 
             public const string SelectDailyPromotion = "[dbo].[UsersPromotion_Select_daily]";
 
+            public const string SelectWebPromotion = "[dbo].[Promotion_Select_for_Web]";
+
             public const string PromotionApplyCheck = "[dbo].[Promotion_Apply_Check]";
 
             public const string PromotionApplyList = "[dbo].[Promotion_Apply_Select]";
