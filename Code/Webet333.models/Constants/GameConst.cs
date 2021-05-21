@@ -998,12 +998,6 @@
         {
             public const string Url = "http://api.yeebet.vip/api/";
 
-            public const string Register = "register";
-
-            public const string Login = "login";
-
-            public const string GetBalance = "user/balance";
-
             public const string APPId = "xtd019R76QU5";
 
             public const string SecretKey = "1d6f1e05678290dba54ac00947404bbd";
@@ -1013,6 +1007,23 @@
             public const string Currency = "MYR";
 
             public const string IsCreate = "1";
+
+            public const string BettingDetailsSize = "1000";
+
+            public static class InterfaceName
+            {
+                public const string Register = "register";
+
+                public const string Login = "login";
+
+                public const string GetBalance = "user/balance";
+
+                public const string DepositWithdrawal = "user/dw";
+
+                public const string GetBettingDetails = "data/getbets";
+
+                public const string RemoveGetBettingDetails = "data/removebets";
+            }
         }
     }
 #endif
