@@ -1586,12 +1586,15 @@ namespace Webet333.api.Controllers
             {
                 List<YEEBETBettingDetailsResult> result = JsonConvert.DeserializeObject<List<YEEBETBettingDetailsResult>>(request.JsonData.ToString());
 
-                using (var game_help = new GameHelpers(Connection: Connection))
+                if (result.Any())
                 {
-                    await game_help.YEEBETServicesInsert(JsonConvert.SerializeObject(request.JsonData));
+                    using (var game_help = new GameHelpers(Connection: Connection))
+                    {
+                        await game_help.YEEBETServicesInsert(request.JsonData);
 
-                    var ids = result.Select(X => X.id).ToList();
-                    await YEEBETGameHelpers.RemoveBettingDetailsCallAPI(ids);
+                        var ids = result.Select(X => X.id).ToList();
+                        await YEEBETGameHelpers.RemoveBettingDetailsCallAPI(ids);
+                    }
                 }
             }
 
