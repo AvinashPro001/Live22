@@ -229,22 +229,19 @@ namespace Webet333.api.Controllers
 
         #endregion Admin Promotion Retrive
 
+        #region Promotion Select For Web
 
-        #region Promotion Select For User
-
-        [HttpPost(ActionsConst.Promotions.WebRetrive)]
-        public async Task<IActionResult> SelectPromotionsForWeb([FromBody] PromotionRetriveRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        [HttpGet(ActionsConst.Promotions.WebRetrive)]
+        public async Task<IActionResult> SelectPromotionsForWeb([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
-                var promotions = await promotion_help.SelectPromotionForWeb(BaseUrlConfigsOptions.Value, Language.Code, request);
+                var promotions = await promotion_help.SelectPromotionForWeb(BaseUrlConfigsOptions.Value, Language.Code);
                 return OkResponse(promotions);
             }
         }
 
         #endregion Promotion Select For User
-
-
 
         #endregion Promotion Insert, Update, Delete, Retrieve
 

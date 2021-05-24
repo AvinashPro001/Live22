@@ -10,12 +10,7 @@
         <div class="banner-inner">
             <div class="home-slider text-center">
                 <div class="" id="slider_promotion" style="height:290px;">
-                    <div class="slick-carousel">
-                        <div><img src="images/en1.jpg"></div>
-                        <div><img src="images/en1.jpg"></div>
-                        <div><img src="images/en1.jpg"></div>
-                        <div><img src="images/en1.jpg"></div>
-                        <div><img src="images/en1.jpg"></div>
+                    <div class="slick-carousel" id="slider_promotion_div">
                     </div>
                 </div>
             </div>
@@ -77,7 +72,7 @@
                 <i class="fas fa-bullhorn"></i>
             </p>
             <p class="annunce-text">
-                <marquee class="announcment-font">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</marquee>
+                <marquee class="announcment-font" id="announcements"></marquee>
             </p>
             <div class="clear-fix"></div>
         </div>
@@ -215,23 +210,23 @@
                             </div>
                         </div>
                         @*<div>
-                            <img src="http://placehold.it/350x100?text=2">
-                        </div>
-                        <div>
-                            <img src="http://placehold.it/350x100?text=3">
-                        </div>
-                        <div>
-                            <img src="http://placehold.it/350x100?text=4">
-                        </div>
-                        <div>
-                            <img src="http://placehold.it/350x100?text=5">
-                        </div>
-                        <div>
-                            <img src="http://placehold.it/350x100?text=6">
-                        </div>
-                        <div>
-                            <img src="http://placehold.it/350x100?text=7">
-                        </div>*@
+                                <img src="http://placehold.it/350x100?text=2">
+                            </div>
+                            <div>
+                                <img src="http://placehold.it/350x100?text=3">
+                            </div>
+                            <div>
+                                <img src="http://placehold.it/350x100?text=4">
+                            </div>
+                            <div>
+                                <img src="http://placehold.it/350x100?text=5">
+                            </div>
+                            <div>
+                                <img src="http://placehold.it/350x100?text=6">
+                            </div>
+                            <div>
+                                <img src="http://placehold.it/350x100?text=7">
+                            </div>*@
                     </section>
                 </div>
                 <div id="slots" class="tabcontent_account">
@@ -282,23 +277,23 @@
                             </div>
                         </div>
                         @*<div>
-                            <img src="http://placehold.it/350x100?text=2">
-                        </div>
-                        <div>
-                            <img src="http://placehold.it/350x100?text=3">
-                        </div>
-                        <div>
-                            <img src="http://placehold.it/350x100?text=4">
-                        </div>
-                        <div>
-                            <img src="http://placehold.it/350x100?text=5">
-                        </div>
-                        <div>
-                            <img src="http://placehold.it/350x100?text=6">
-                        </div>
-                        <div>
-                            <img src="http://placehold.it/350x100?text=7">
-                        </div>*@
+                                <img src="http://placehold.it/350x100?text=2">
+                            </div>
+                            <div>
+                                <img src="http://placehold.it/350x100?text=3">
+                            </div>
+                            <div>
+                                <img src="http://placehold.it/350x100?text=4">
+                            </div>
+                            <div>
+                                <img src="http://placehold.it/350x100?text=5">
+                            </div>
+                            <div>
+                                <img src="http://placehold.it/350x100?text=6">
+                            </div>
+                            <div>
+                                <img src="http://placehold.it/350x100?text=7">
+                            </div>*@
                     </section>
                 </div>
                 <div id="sports" class="tabcontent_account">
@@ -380,18 +375,7 @@
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/owl.carousel.min.js'></script>
 <script src='https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js'></script>
-<script>
-    $().ready(function () {
-        $('.slick-carousel').slick({
-            arrows: true,
-            centerPadding: "0px",
-            dots: true,
-            slidesToShow: 1,
-            infinite: false,
-            autoplay: true,
-        });
-    });
-</script>
+
 <script type="text/javascript">
     $('.game_logo_sections .owl-carousel').owlCarousel({
         loop: true,
@@ -474,3 +458,10 @@
     });
 </script>
 
+<script>
+    AllAnnouncementsCallAPI();
+    setInterval(function () {
+        if ($('#slider_promotion_div').children().length == 0)
+            SetPromotionInMainPage()
+    }, 200);
+</script>

@@ -1,4 +1,4 @@
-﻿var baseUrl = "http://uatapi.webet333.com/api/v1/";
+﻿var baseUrl = "http://localhost:8080/api/v1/";
 
 var apiEndPoints = {
     login: "account/login",
@@ -143,4 +143,12 @@ var apiEndPoints = {
 
 var accountEndPoints = {
     login: "account/login",
+};
+
+var promotionEndPoints = {
+    webRetrieve: "promotions/web/retrieve",
+};
+
+var settingEndPoints = {
+    announcementList: "settings/announcement/user/list",
 };

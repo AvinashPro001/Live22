@@ -141,11 +141,11 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<dynamic> SelectPromotionForWeb(BaseUrlConfigs baseUrl, string LanguageCode, PromotionRetriveRequest request)
+        public async Task<dynamic> SelectPromotionForWeb(BaseUrlConfigs baseUrl, string LanguageCode)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result = await repository.GetDataAsync(StoredProcConsts.Promotions.SelectWebPromotion, new { LanguageCode,request.IsMain});
+                var result = await repository.GetDataAsync(StoredProcConsts.Promotions.SelectWebPromotion, new { LanguageCode});
                 List<dynamic> promotions = result.ToList();
 
                 promotions.ForEach(promotion =>

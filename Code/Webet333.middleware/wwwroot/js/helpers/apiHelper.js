@@ -48,7 +48,7 @@ function PostMethod(endPoint, model) {
         type: "POST",
         data: JSON.stringify(model),
         headers: {
-            'Authorization': 'Bearer ' + SetSessionStorage('currentUser'),
+            'Authorization': 'Bearer ' + GetSessionStorage('currentUser'),
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'Access-Control-Max-Age': 300,
@@ -76,7 +76,7 @@ function GetMethod(endPoint) {
     return $.ajax({
         type: "GET",
         headers: {
-            'Authorization': 'Bearer ' + SetSessionStorage('currentUser'),
+            'Authorization': 'Bearer ' + GetSessionStorage('currentUser'),
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'Access-Control-Max-Age': 300,

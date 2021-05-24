@@ -1871,11 +1871,12 @@ body:not(.nohover) .hightligt_table tbody tr:hover {background-color: #ffa; }
 img.public_bank{width: 110px;}
 .table-responsive .table-bordered > thead > tr > td{font-size: 14px;font-weight: 600;}
 p.bonus_content a{color: #333;}
-#Reload_bonus_myModal .table tbody tr:first-child td {background: #858585;}
-#Reload_bonus_myModal table {background: #e5e5e5 !important; text-align: center; width: 100%; }
-#Reload_bonus_myModal .modal-dialog {width: 70vw;}
-#Reload_bonus_myModal .modal-body {max-height: 500px;overflow-y: scroll;}
-#Reload_bonus_myModal table {width: 70% !important; margin-left: auto; margin-right: auto; }
+.Reload_bonus_myModal .table tbody tr:first-child td {background: #858585;}
+.Reload_bonus_myModal table {background: #e5e5e5 !important; text-align: center; width: 100%; }
+.Reload_bonus_myModal .modal-dialog {width: 70vw;}
+.Reload_bonus_myModal .modal-body {max-height: 500px;overflow-y: scroll;}
+.Reload_bonus_myModal table {width: 70% !important; margin-left: auto; margin-right: auto; }
 /* css end */
 .vip_header_icon{width:25px;margin-right:2px;}
 .silver_wallet{background-size:22% !important}
+.no_promotion{text-align: center;font-size: large;}

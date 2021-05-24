@@ -27,7 +27,7 @@ async function DoLogin() {
         }
         return 0;
     }
-
+    
     SetSessionStorage("currentUser", res.response.data.access_token);
     SetSessionStorage("userDetails", Encryption(JSON.stringify(res.response.data.user)))
     window.location.reload();
@@ -49,7 +49,6 @@ function CheckLoginOrNot() {
 function ProfileData() {
     if (GetSessionStorage("currentUser") !== null) {
         var ProfileData = JSON.parse(Decryption(GetSessionStorage("userDetails")))
-        console.log(ProfileData);
         if (!window.location.href.toLocaleLowerCase().includes("web/otpverified")) {
             if (!ProfileData.mobilenoConfirmed) window.location.href = "/web/otpverified"
         }
@@ -69,8 +68,8 @@ function CheckMobileNumberIsVerified() {
 }
 
 function DoLogout() {
-    localStorage.clear();
-    sessionStorage.clear();
+    sessionStorage.removeItem("currentUser");
+    sessionStorage.removeItem("userDetails");
     CheckLoginOrNot()
 }
 
@@ -87,7 +86,6 @@ function DisplayCurrentTime() {
     time = day + "/" + Month + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + " " + am_pm + " (GMT=8)";
     return time;
 };
-
 
 setInterval(function () {
     SetAllValueInElement("current_time", DisplayCurrentTime())

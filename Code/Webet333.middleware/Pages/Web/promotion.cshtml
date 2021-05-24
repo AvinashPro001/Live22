@@ -10,7 +10,7 @@
                 <i class="fas fa-bullhorn"></i>
             </p>
             <p class="annunce-text">
-                <marquee class="announcment-font">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</marquee>
+                <marquee class="announcment-font" id="announcements"></marquee>
             </p>
             <div class="clear-fix"></div>
         </div>
@@ -30,8 +30,12 @@
                     <div class="col-sm-12">
                         <div class="leftProfileButon1">
                             <ul>
-                                <li><a class="tablinks_health active" onclick="openCity1(event, 'All')">All</a></li>
-                                <li><a class="tablinks_health" onclick="openCity1(event, 'New_Member')">New Member</a></li>
+                                <li>
+                                    <a class="tablinks_health active" onclick="openCity1(event, 'All')">All</a>
+                                </li>
+                                <li>
+                                    <a class="tablinks_health" onclick="openCity1(event, 'New_Member')">New Member</a>
+                                </li>
                                 <li>
                                     <a class="tablinks_health" onclick="openCity1(event, 'Sport_Member')">Sport</a>
                                 </li>
@@ -51,68 +55,39 @@
                         </div>
                         <div class="genaral_wrapp1">
                             <div id="All" class="tabcontent_health" style="display: block;">
-                                <div class="row all_promotion ml0 mr0">
-                                    <div class="col-sm-6 pl0">
-                                        <div class="all_promotion_left">
-                                            <a href="#">
-                                                <img src="~/images/promotio1.png" alt="promotio1">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 pl0">
-                                        <div class="all_promotion_right">
-                                            <a href="#">
-                                                <img src="~/images/promotio2.png" alt="promotio1">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 pl0">
-                                        <div class="all_promotion_left">
-                                            <a href="#">
-                                                <img src="~/images/promotio3.png" alt="promotio1">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 pl0">
-                                        <div class="all_promotion_right">
-                                            <a href="#">
-                                                <img src="~/images/promotio4.png" alt="promotio1">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 pl0">
-                                        <div class="all_promotion_left">
-                                            <a href="#">
-                                                <img src="~/images/promotio5.png" alt="promotio1">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 pl0">
-                                        <div class="all_promotion_right">
-                                            <a href="#">
-                                                <img src="~/images/promotio4.png" alt="promotio1">
-                                            </a>
-                                        </div>
-                                    </div>
+                                <div class="row all_promotion ml0 mr0" id="all_promotion">
+
                                 </div>
                             </div>
                             <div id="New_Member" class="tabcontent_health">
-                                New_Member
+                                <div class="row all_promotion ml0 mr0" id="newmember_promotion">
+
+                                </div>
                             </div>
                             <div id="Sport_Member" class="tabcontent_health">
-                                Sport_Member
+                                <div class="row all_promotion ml0 mr0" id="sports_promotion">
+
+                                </div>
                             </div>
                             <div id="Live_Casino_Member" class="tabcontent_health">
-                                Live_Casino_Member
+                                <div class="row all_promotion ml0 mr0" id="live_promotion">
+
+                                </div>
                             </div>
                             <div id="Slots_Member" class="tabcontent_health">
-                                Slots_Member
+                                <div class="row all_promotion ml0 mr0" id="slots_promotion">
+
+                                </div>
                             </div>
                             <div id="Rebate_Member" class="tabcontent_health">
-                                Rebate_Member
+                                <div class="row all_promotion ml0 mr0" id="rebate_promotion">
+
+                                </div>
                             </div>
                             <div id="Limited_Time_Member" class="tabcontent_health">
-                                Limited_Time_Member
+                                <div class="row all_promotion ml0 mr0" id="limited_promotion">
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -122,7 +97,17 @@
     </div>
 </section>
 
+<div id="description_section">
+    
+</div>
+
 <script>
+    AllAnnouncementsCallAPI();
+    setInterval(function () {
+        if ($('#all_promotion').children().length == 0)
+            SetPromotionInPromotionPage()
+    }, 200);
+
     function openCity1(evt1, cityName1) {
         var i, tabcontent_health, tablinks_health;
         tabcontent_health = document.getElementsByClassName("tabcontent_health");

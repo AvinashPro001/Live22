@@ -11,7 +11,7 @@
                 <i class="fas fa-bullhorn"></i>
             </p>
             <p class="annunce-text">
-                <marquee class="announcment-font">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</marquee>
+                <marquee class="announcment-font" id="announcements"></marquee>
             </p>
             <div class="clear-fix"></div>
         </div>
@@ -202,15 +202,16 @@
 </section>
 
 <script type="text/javascript">
-        (function() {
+    AllAnnouncementsCallAPI();
+    (function () {
 
-  $(".panel").on("show.bs.collapse hide.bs.collapse", function(e) {
-    if (e.type=='show'){
-      $(this).addClass('active');
-    }else{
-      $(this).removeClass('active');
-    }
-  });
+        $(".panel").on("show.bs.collapse hide.bs.collapse", function (e) {
+            if (e.type == 'show') {
+                $(this).addClass('active');
+            } else {
+                $(this).removeClass('active');
+            }
+        });
 
-}).call(this);
+    }).call(this);
 </script>
