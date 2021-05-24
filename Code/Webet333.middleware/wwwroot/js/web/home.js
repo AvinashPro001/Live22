@@ -1,9 +1,11 @@
-﻿let SiteData = {
+﻿//#region Declare SiteData Variable
+let SiteData = {
     PromotionPageData: null,
     AnnouncementsData: null
 }
+//#endregion
 
-//#region Onload
+//#region OnLoad Function
 $(document).ready(function () {
     if (GetSessionStorage("siteData") == null) SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
     SetLastUpdateTime();
@@ -12,10 +14,13 @@ $(document).ready(function () {
 });
 //#endregion
 
+//#region Set Sitedata
 function SetSiteData() {
     SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
 }
+//#endregion
 
+//#region Set LastUpdateTime of Sitedate Variable
 async function SetLastUpdateTime() {
     if (GetSessionStorage("siteData") == null) SetSiteData()
 
@@ -38,25 +43,33 @@ async function SetLastUpdateTime() {
         }
     }
 }
+//#endregion
 
+//#region  Set All Element Value 
 function SetAllValueInElement(id, value) {
     $("[id='" + id + "']").each(function () {
         $(this).html(value)
     });
 }
+//#endregion
 
+//#region Set Path of Images based on ID
 function SetAllImagePath(id, value) {
     $("[id='" + id + "']").each(function () {
         $(this).attr('src', value)
     });
 }
+//#endregion
 
+//#region Set Image in Backgroud in CSS 
 function SetBackgroudImagePath(ClassName, value) {
     $("." + ClassName).each(function () {
         $(this).css("background", "url(" + value + ") 24% 10% no-repeat");
     });
 }
+//#endregion
 
+//#region Promotion Slider Slick JS
 function PromotionSliderJsFunction() {
     $('.slick-carousel').slick({
         arrows: true,
@@ -67,7 +80,9 @@ function PromotionSliderJsFunction() {
         autoplay: true,
     });
 }
+//#endregion
 
+//#region Call Promotion API for Get data
 async function AllPromotionCallAPI() {
 
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
@@ -82,7 +97,9 @@ async function AllPromotionCallAPI() {
         }
     }
 }
+//#endregion
 
+//#region Set Main Page Slider Html
 function SetPromotionInMainPage() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
@@ -96,7 +113,9 @@ function SetPromotionInMainPage() {
     }
 
 }
+//#endregion
 
+//#region Set Promotion Page Html
 function SetPromotionInPromotionPage() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
@@ -126,7 +145,9 @@ function SetPromotionInPromotionPage() {
         SetAllValueInElement("description_section", description);
     }
 }
+//#endregion
 
+//#region Create Html of Promotion Page
 function SetHtmlInPromotionPage(Id, Data) {
     HTMLData = "";
     if (Data.length > 0) {
@@ -137,7 +158,9 @@ function SetHtmlInPromotionPage(Id, Data) {
     }
     SetAllValueInElement(Id, HTMLData);
 }
+//#endregion
 
+//#region Call Announcements API for get data
 async function AllAnnouncementsCallAPI() {
 
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
@@ -156,7 +179,9 @@ async function AllAnnouncementsCallAPI() {
         SetAnnouncementsOnAllPages();
     }
 }
+//#endregion
 
+//#region Set Announcements of pages
 function SetAnnouncementsOnAllPages() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
@@ -168,3 +193,4 @@ function SetAnnouncementsOnAllPages() {
         SetAllValueInElement("announcements", announcementsData)
     }
 }
+//#endregion

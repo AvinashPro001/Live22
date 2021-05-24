@@ -1,8 +1,11 @@
-﻿$(document).ready(function () {
+﻿//#region OnLoad 
+$(document).ready(function () {
     LoginSectionHideUnhide();
     ProfileData()
 });
+//#endregion 
 
+//#region Login Function
 async function DoLogin() {
     let model = {
         userName: $('#txt_login_username').val(),
@@ -32,7 +35,9 @@ async function DoLogin() {
     SetSessionStorage("userDetails", Encryption(JSON.stringify(res.response.data.user)))
     window.location.reload();
 }
+//#endregion 
 
+//#region Hide or UnHide After Login and Before Login
 function LoginSectionHideUnhide() {
     if (GetSessionStorage("currentUser") == null) {
         document.getElementById("afterlogin").innerHTML = "";
@@ -41,11 +46,15 @@ function LoginSectionHideUnhide() {
         document.getElementById("beforelogin").innerHTML = ""
     }
 }
+//#endregion 
 
+//#region Check users Login or Not
 function CheckLoginOrNot() {
     if (GetSessionStorage("currentUser") == null) window.location.href = "/";
 }
+//#endregion 
 
+//#region Set Users Profile if User Login
 function ProfileData() {
     if (GetSessionStorage("currentUser") !== null) {
         var ProfileData = JSON.parse(Decryption(GetSessionStorage("userDetails")))
@@ -58,7 +67,9 @@ function ProfileData() {
         SetAllValueInElement("vip_level_name",ProfileData.vipLevelName)
     }
 }
+//#endregion 
 
+//#region Check Login users is Verified Or not
 function CheckMobileNumberIsVerified() {
     if (GetSessionStorage("currentUser") !== null) {
         var ProfileData = JSON.parse(Decryption(GetSessionStorage("userDetails")))
@@ -67,13 +78,17 @@ function CheckMobileNumberIsVerified() {
         }
     }
 }
+//#endregion 
 
+//#region Logout Function
 function DoLogout() {
     sessionStorage.removeItem("currentUser");
     sessionStorage.removeItem("userDetails");
     CheckLoginOrNot()
 }
+//#endregion 
 
+//#region Get Current Time 
 function DisplayCurrentTime() {
     var date = new Date();
     var day = date.getDate();
@@ -87,7 +102,10 @@ function DisplayCurrentTime() {
     time = day + "/" + Month + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + " " + am_pm + " (GMT=8)";
     return time;
 };
+//#endregion 
 
+//#region Update Time and Interval 
 setInterval(function () {
     SetAllValueInElement("current_time", DisplayCurrentTime())
 }, 1000);
+//#endregion 
