@@ -1,7 +1,8 @@
 ﻿//#region Declare SiteData Variable
 let SiteData = {
     PromotionPageData: null,
-    AnnouncementsData: null
+    AnnouncementsData: null,
+    AdminBankPageData:null
 }
 //#endregion
 

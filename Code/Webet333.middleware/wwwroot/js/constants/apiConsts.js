@@ -151,4 +151,5 @@ var promotionEndPoints = {
 
 var settingEndPoints = {
     announcementList: "settings/announcement/user/list",
+    admin_page_bank: "settings/admin_bank/list",
 };
