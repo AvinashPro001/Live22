@@ -55,6 +55,7 @@ function ProfileData() {
         SetAllImagePath('login_user_vip_level', ProfileData.vipBanner)
         SetAllValueInElement("login_username", ProfileData.username)
         SetBackgroudImagePath("silver_wallet", ProfileData.vipBanner)
+        SetAllValueInElement("vip_level_name",ProfileData.vipLevelName)
     }
 }
 
