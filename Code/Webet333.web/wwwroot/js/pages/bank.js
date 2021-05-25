@@ -29,13 +29,11 @@ var WithdrawLimit;
 async function CheckWithdrawAmountList() {
     var model = {}
 
-
     var resUserVIPlevel = await GetMethodWithReturn(apiEndPoints.UserVipDetails);
     sessionStorage.setItem("UserVipDetails", enc(JSON.stringify(resUserVIPlevel)))
 
     WithdrawLimit = parseFloat(resUserVIPlevel.data.WithdrawLimit).toFixed(2);
     document.getElementById("txt_withdrawalAmount").placeholder = "Min/Max Limit: 10.00/ " + WithdrawLimit
-
 
     var WithdrawAmountList = await PostMethodWithParameter(apiEndPoints.withdrawListAmount, model);
     document.getElementById("WithdrawAmount").innerHTML = "MYR " + WithdrawAmountList.data.totalAmount;
@@ -744,7 +742,7 @@ async function Withdrawal() {
         LoaderHide();
     }
     else {
-        ShowError(ChangeErroMessage("min_max_amount_error_parameter", WithdrawLimit+"."));
+        ShowError(ChangeErroMessage("min_max_amount_error_parameter", WithdrawLimit + "."));
     }
 }
 //#endregion
@@ -851,7 +849,6 @@ function hideBalanceShowLoading(LoadingId, BalanceId) {
 }
 
 async function RefreshFromWalletBalance(GameName) {
-
     var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
     var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
 
@@ -882,6 +879,7 @@ async function RefreshFromWalletBalance(GameName) {
         case "AllBet Wallet": hideBalanceShowLoading('AllBetRefershImg', 'lbl_AllBetWalletbalanceDeposite'); await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId); break;
         case "WM Wallet": hideBalanceShowLoading('WMRefershImg', 'lbl_WMWalletbalanceDeposite'); await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId); break;
         case "Pragmatic Wallet": hideBalanceShowLoading('PragmaticRefershImg', 'lbl_PragmaticWalletbalanceDeposite'); await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId); break;
+        case "YeeBet Wallet": hideBalanceShowLoading('YeeBetRefershImg', 'lbl_YeeBetWalletbalanceDeposite'); await YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId); break;
     }
 }
 
@@ -1045,7 +1043,6 @@ async function WithdrawHistory() {
 
 //#region DepositHistory
 //async function DepositHistory(pageNo=1) {
-
 //    var contentToRemove = document.querySelectorAll("#navDeposit");
 //    $(contentToRemove).remove();
 
@@ -1094,12 +1091,7 @@ async function WithdrawHistory() {
 //        $("#navDeposit").addClass("expand");
 //}
 
-
-
-
-
 async function DepositHistory(pageNo = 0) {
-
     var contentToRemove = document.querySelectorAll("#navDeposit");
     $(contentToRemove).remove();
 
@@ -1136,10 +1128,7 @@ async function DepositHistory(pageNo = 0) {
     }
     if (res.data.totalPages > 10)
         $("#navDeposit").addClass("expand");
-
 }
-
-
 
 //#endregion
 
@@ -1537,6 +1526,7 @@ function LoadingImageShowAllInSection(GameName) {
         case "AllBet Wallet": document.getElementById("AllBetInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
         case "WM Wallet": document.getElementById("WMInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
         case "Pragmatic Wallet": document.getElementById("PragmaticInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "YeeBet Wallet": document.getElementById("YeeBetInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
     }
 }
 
@@ -1629,6 +1619,7 @@ async function CheckSupportGame() {
         document.getElementById("saallin").disabled = !res.data[0].IsSA ? true : false;
         document.getElementById("sexyallin").disabled = !res.data[0].IsSexyBaccarat ? true : false;
         document.getElementById("wmallin").disabled = !res.data[0].IsWM ? true : false;
+        document.getElementById("YeeBetAllIn").disabled = !res.data[0].IsYeeBet ? true : false;
     }
     else {
         document.getElementById("kiss918allin").disabled = false;
@@ -1645,6 +1636,7 @@ async function CheckSupportGame() {
         document.getElementById("saallin").disabled = false;
         document.getElementById("sexyallin").disabled = false;
         document.getElementById("wmallin").disabled = false;
+        document.getElementById("YeeBetAllIn").disabled = false;
         GameInMaintenance(0);
     }
 }

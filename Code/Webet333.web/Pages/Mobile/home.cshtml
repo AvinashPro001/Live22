@@ -1,7 +1,6 @@
 ﻿@page
 @{ Layout = null; }
 
-
 <div id="afterlogin_mobile">
     <div class="sidebar">
         <div class="navbar-collapse" id="myNavbar">
@@ -10,7 +9,7 @@
                 <li><a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch"><img src="~/images/images-mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
                 <li><a href="~/Home/home" rel="prefetch"><img src="~/images/images-mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
                 <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/images-mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
-                <li><a onclick="loadPageAbout()" href="javascript:void(0);"  rel="prefetch"><img src="~/images/images-mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
+                <li><a onclick="loadPageAbout()" href="javascript:void(0);" rel="prefetch"><img src="~/images/images-mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
                 <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/images-mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
             </ul>
         </div>
@@ -123,6 +122,14 @@
                                         <button class="game-title"><span class="lang" key="wm_game"></span></button>
                                     </a>
                                 </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="YeeBetLive">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/yeebet.png" alt="YeeBet">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="yeebet_game"></span></button>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <div id="sport-tile" role="tabpanel" class="tab-pane fade in">
@@ -169,7 +176,6 @@
                                             <img src="~/images/images-mobile/pussy888.png" alt="Pussy888">
                                         </figure>
                                         <button class="game-title"><span class="lang" key="pussy888slot_game"></span></button>
-
                                     </a>
                                 </li>
                                 <li data-toggle="modal" data-target="#gameLogin" id="playtechslot">
@@ -204,7 +210,6 @@
                                         <button class="game-title"><span class="lang" key="pragmaticslot_game"></span></button>
                                     </a>
                                 </li>
-
                             </ul>
                         </div>
                         <div id="fishing-tile" role="tabpanel" class="tab-pane fade in">
@@ -222,7 +227,6 @@
                 <div class="footer-quote">
                     <p class="text-center copyright-text">Copyright WEBET333 @@ 2020. All rights reserved</p>
                 </div>
-
             </div>
         </div>
         <div class="footer-widget">
@@ -395,6 +399,12 @@
                                         <li class="fright" id="ddlPragmaticWallet">feching...</li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>YeeBet Wallet</strong></li>
+                                        <li class="fright" id="ddlYeeBetWallet">feching...</li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -417,7 +427,6 @@
                     <li class="mobile-icon withdraw_icon"><a onclick="loadPageWithdraw()" href="javascript:void(0);" rel="prefetch"><img src="~/images/images-mobile/menu-images/withdraw.png" /><span data-translate="mobile_menu_Withdraw"></span></a></li>
                     <li class="mobile-icon history_icon"><a onclick="loadPageHistory()" href="javascript:void(0);" rel="prefetch"><img src="~/images/images-mobile/menu-images/history.png" /><span data-translate="mobile_menu_History"></span></a></li>
                 </ul>
-
 
                 <div class="hero-banner">
                     <div class="login-top-slider slider" id="mobilePromotionSliderLogin">
@@ -503,6 +512,14 @@
                                     <button class="game-title"><span class="lang" key="wm_game"></span></button>
                                 </a>
                             </li>
+                            <li onclick="logingGame('YeeBet')" id="YeeBetLiveLogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/images-mobile/yeebet.png" alt="YeeBet">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="yeebet_game"></span></button>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div id="menu1" class="tab-pane fade">
@@ -549,7 +566,6 @@
                                         <img src="~/images/images-mobile/pussy888.png" alt="Pussy888">
                                     </figure>
                                     <button class="game-title"><span class="lang" key="pussy888slot_game"></span></button>
-
                                 </a>
                             </li>
                             <li onclick="PlaytechIdentifiy(true)" id="playtechslotlogin">
@@ -618,7 +634,7 @@
                     </a>
                 </li>
                 <li id="contactusPagebottom">
-                    <a onclick="loadPageContactus()" href="javascript:void(0)"  rel="prefetch">
+                    <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
                         <i class="fa fa-user"></i>
                         <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
                     </a>
@@ -637,7 +653,6 @@
     </div>
     <div class="canvas-overlay"></div>
 </div>
-
 
 <div class="form-login modal fade" id="gameLogin" role="dialog">
     <div class="modal-dialog">
@@ -686,7 +701,6 @@
 <!--Begin Comm100 Live Chat Code-->
 <script type="text/javascript">
     var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 0) })(Comm100API || {})
-
 </script>
 <!--End Comm100 Live Chat Code-->
 <!-- Slider Section End -->
@@ -753,7 +767,6 @@
         $('#homeLoginPagebottom').addClass("active-link");
 
     }, 200);
-                     
 </script>
 
 <script>
@@ -764,7 +777,7 @@
 
     function get() {
         (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
-   
+
         document.getElementById("englishbtn").style.background = "";
         document.getElementById("malaybtn").style.background = "";
         document.getElementById("chinesebtn").style.background = "";

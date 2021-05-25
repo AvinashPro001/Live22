@@ -29,6 +29,7 @@ async function UserGameTurnover() {
         document.getElementById("WMTurnover").innerHTML = parseFloat(turnover.data.response.wmTurover).toFixed(2);
         document.getElementById("PragmaticTurnover").innerHTML = parseFloat(turnover.data.response.pragmaticTurover).toFixed(2);
         document.getElementById("spin-refesh").classList.remove("fa-spin");
+        document.getElementById("YeeBetTurnover").innerHTML = parseFloat(turnover.data.response.yeeBetTurover).toFixed(2);
     }
     catch {
         document.getElementById("spin-refesh").classList.remove("fa-spin");
@@ -48,6 +49,7 @@ async function UserGameTurnover() {
         document.getElementById("WMTurnover").innerHTML = "0.0";
         document.getElementById("PragmaticTurnover").innerHTML = "0.0";
         document.getElementById("spin-refesh").classList.remove("fa-spin");
+        document.getElementById("YeeBetTurnover").innerHTML = "0.0";
     }
 }
 
@@ -55,7 +57,7 @@ if (GetLocalStorage('currentUser') !== null)
     setInterval(async function () { await regisrationGame() }, 5000);
 
 //#region WalletBalance
-var PlayTechWallet, _918KissWallet, JokerWallet, MainWallet, AGWallet, M8Wallet, MaxBetWallet, Mega888Wallet, DgWallet, sexyWallet, saWallet, Pussy888Wallet, AllBetWallet, WMWallet, PragmaticWallet;
+var PlayTechWallet, _918KissWallet, JokerWallet, MainWallet, AGWallet, M8Wallet, MaxBetWallet, Mega888Wallet, DgWallet, sexyWallet, saWallet, Pussy888Wallet, AllBetWallet, WMWallet, PragmaticWallet, YeeBetWallet;
 async function WalletBalance() {
     var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
     var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
@@ -87,6 +89,7 @@ async function WalletBalance() {
     AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
     WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
     PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
+    YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId);
 }
 //#endregion WalletBalance
 
@@ -121,6 +124,7 @@ function ddlShowBalance() {
     document.getElementById("ddlAllBetWallet").innerHTML = AllBetWallet == undefined ? "feching.." : AllBetWallet;
     document.getElementById("ddlWMWallet").innerHTML = WMWallet == undefined ? "feching.." : WMWallet;
     document.getElementById("ddlPragmaticWallet").innerHTML = PragmaticWallet == undefined ? "feching.." : PragmaticWallet;
+    document.getElementById("ddlYeeBetWallet").innerHTML = YeeBetWallet == undefined ? "feching.." : YeeBetWallet;
 }
 //#endregion Show Balance in Mobile Drop-down
 
@@ -159,6 +163,7 @@ async function RestoreBalance() {
         await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId, false);
         await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId, false);
         await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId, false);
+        await YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId, false);
 
         let restoreModel = {
             kiss918wallet: _918KissWallet == "N/A" ? "0.0" : _918KissWallet,
@@ -175,6 +180,7 @@ async function RestoreBalance() {
             allbetwallet: AllBetWallet == "N/A" ? "0.0" : AllBetWallet,
             WMwallet: WMWallet == "N/A" ? "0.0" : WMWallet,
             pragmaticwallet: PragmaticWallet == "N/A" ? "0.0" : PragmaticWallet,
+            YeeBetWallet: YeeBetWallet == "N/A" ? "0.0" : YeeBetWallet,
             id: null
         }
         await PostMethod(apiEndPoints.restoreBalance, restoreModel);
@@ -207,7 +213,8 @@ var AGTrigger = false,
     MaxbetTrigger = false,
     AllbetTrigger = false,
     WMTrigger = false,
-    M8Trigger = false;
+    M8Trigger = false,
+    YeeBetTrigger = false;
 
 function StartTimerGameBalanceAPI(GameName) {
     var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
@@ -250,6 +257,10 @@ function StartTimerGameBalanceAPI(GameName) {
         case 'WM':
             let WmtimerId = setInterval(() => { WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId); WMTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(WmtimerId); WMTrigger = false; }, 301000);
+            break;
+        case 'YeeBet':
+            let YeeBetTimerId = setInterval(() => { YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId); YeeBetTrigger = true; }, 30000);
+            setTimeout(() => { clearInterval(YeeBetTimerId); YeeBetTrigger = false; }, 301000);
             break;
     }
 }
@@ -784,6 +795,43 @@ async function PragmaticWalletBalance(Username, HideLoading = true) {
     }
 }
 
+async function YeeBetWalletBalance(Username, HideLoading = true) {
+    try {
+        let model = {
+            username: Username
+        };
+
+        let YeeBetBalance = await GameBalancePostMethod(apiEndPoints.YeeBetBalance, model);
+
+        YeeBetWallet = numberWithCommas(parseFloat(YeeBetBalance.data.balance).toFixed(2));
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("YeeBetRefershImg").style.display = "none";
+
+            document.getElementById("YeeBetBalance").innerHTML = YeeBetWallet;
+
+            if ($('#lbl_YeeBetWalletbalanceDeposite').length) {
+                document.getElementById("lbl_YeeBetWalletbalanceDeposite").innerHTML = YeeBetWallet;
+                document.getElementById("YeeBetInWallet").innerHTML = YeeBetWallet;
+                document.getElementById("ddlYeeBetWallet").innerHTML = YeeBetWallet;
+            }
+        }
+    }
+    catch (ex) {
+        YeeBetWallet = "N/A";
+        if (HideLoading) {
+            if (window.location.href.includes("Account/Profile"))
+                document.getElementById("YeeBetRefershImg").style.display = "none";
+            document.getElementById("YeeBetBalance").innerHTML = "N/A";
+            if ($('#lbl_YeeBetWalletbalanceDeposite').length) {
+                document.getElementById("lbl_YeeBetWalletbalanceDeposite").innerHTML = "N/A";
+                document.getElementById("YeeBetInWallet").innerHTML = "N/A";
+                document.getElementById("ddlYeeBetWallet").innerHTML = "N/A";
+            }
+        }
+    }
+}
+
 //#endregion all WalletBalance
 
 function RefershBalance() {
@@ -802,6 +850,7 @@ function RefershBalance() {
     document.getElementById("ddlAllBetWallet").innerHTML = "feching..";
     document.getElementById("ddlWMWallet").innerHTML = "feching..";
     document.getElementById("ddlPragmaticWallet").innerHTML = "feching..";
+    document.getElementById("ddlYeeBetWallet").innerHTML = "feching..";
     document.getElementById("menuMainWallet").innerHTML = "<img class='loading-gif' src='../images/loading.gif'/>";
     WalletBalance();
 }
@@ -836,4 +885,5 @@ async function WalletBalanceMaxTransfer() {
     await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
     await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
     await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
+    await YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId);
 }

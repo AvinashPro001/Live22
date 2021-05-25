@@ -1202,12 +1202,35 @@ namespace Webet333.api.Helpers
                     decimal PussyBalance,
                     decimal AllbetBalance,
                     decimal WMBalance,
-                    decimal PragmaticBalance
+                    decimal PragmaticBalance,
+                    decimal YeeBetBalance
             )
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Game.UsersBalanceRestore, new { userId, Addedby, mainBalance, Mega888Balance, JokerBalance, M8Balance, MaxbetBalance, Kiss918Balance, DGBalance, AGBalance, PlaytechBalance, SexyBaccaratBalance, SABalance, PussyBalance, AllbetBalance, WMBalance, PragmaticBalance });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Game.UsersBalanceRestore,
+                    new
+                    {
+                        userId,
+                        Addedby,
+                        mainBalance,
+                        Mega888Balance,
+                        JokerBalance,
+                        M8Balance,
+                        MaxbetBalance,
+                        Kiss918Balance,
+                        DGBalance,
+                        AGBalance,
+                        PlaytechBalance,
+                        SexyBaccaratBalance,
+                        SABalance,
+                        PussyBalance,
+                        AllbetBalance,
+                        WMBalance,
+                        PragmaticBalance,
+                        YeeBetBalance
+                    });
             }
         }
 

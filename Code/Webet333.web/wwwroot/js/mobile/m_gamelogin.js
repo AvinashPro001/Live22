@@ -1,5 +1,4 @@
-﻿
-//#region Onload
+﻿//#region Onload
 $(document).ready(function () {
     getDetails();
     var path = window.location.href.toLowerCase();
@@ -16,7 +15,6 @@ var walletData;
 
 function WalletSignalR() {
     try {
-
         "use strict";
 
         var connection = new signalR.HubConnectionBuilder().withUrl("http://api.webet333.com/signalrhub").build();
@@ -33,7 +31,7 @@ function WalletSignalR() {
             return console.error(err.toString());
         });
     }
-    catch(e){
+    catch (e) {
         WalletSignalR();
     }
 }
@@ -43,11 +41,9 @@ async function Walletdate() {
 }
 
 async function GameInMaintenance(i) {
-    
     if (i == 0)
         walletData = await GetMethodWithReturn(apiEndPoints.walletSelect);
     for (i = 0; i < walletData.data.length; i++) {
-
         if (walletData.data[i].walletType == "AG Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('aglive').style.filter = "grayscale(1)";
             document.getElementById('agslot').style.filter = "grayscale(1)";
@@ -77,29 +73,24 @@ async function GameInMaintenance(i) {
         if (walletData.data[i].walletType == "M8 Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('m8sports').style.filter = "grayscale(1)";
             document.getElementById('m8sportslogin').style.filter = "grayscale(1)";
-            
         }
         else if (walletData.data[i].walletType == "M8 Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('m8sports').style.filter = "";
             document.getElementById('m8sportslogin').style.filter = "";
-            
         }
 
         if (walletData.data[i].walletType == "MaxBet Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('maxbetsports').style.filter = "grayscale(1)";
             document.getElementById('maxbetsportslogin').style.filter = "grayscale(1)";
-            
         }
         else if (walletData.data[i].walletType == "MaxBet Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('maxbetsports').style.filter = "";
             document.getElementById('maxbetsportslogin').style.filter = "";
-            
         }
 
         if (walletData.data[i].walletType == "Sexy Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('sexylive').style.filter = "grayscale(1)";
             document.getElementById('sexylivelogin').style.filter = "grayscale(1)";
-            
         }
         else if (walletData.data[i].walletType == "Sexy Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('sexylive').style.filter = "";
@@ -115,16 +106,13 @@ async function GameInMaintenance(i) {
             document.getElementById('salivelogin').style.filter = "";
         }
 
-
         if (walletData.data[i].walletType == "DG Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('dglive').style.filter = "grayscale(1)";
             document.getElementById('dglivelogin').style.filter = "grayscale(1)";
-            
         }
         else if (walletData.data[i].walletType == "DG Wallet" && walletData.data[i].isMaintenance == false) {
             document.getElementById('dglive').style.filter = "";
             document.getElementById('dglivelogin').style.filter = "";
-            
         }
 
         if (walletData.data[i].walletType == "918Kiss Wallet" && walletData.data[i].isMaintenance == true) {
@@ -190,6 +178,14 @@ async function GameInMaintenance(i) {
             document.getElementById('pragmaticslotlogin').style.filter = "";
         }
 
+        if (walletData.data[i].walletType == "YeeBet Wallet" && walletData.data[i].isMaintenance == true) {
+            document.getElementById('YeeBetLive').style.filter = "grayscale(1)";
+            document.getElementById('YeeBetLiveLogin').style.filter = "grayscale(1)";
+        }
+        else if (walletData.data[i].walletType == "YeeBet Wallet" && walletData.data[i].isMaintenance == false) {
+            document.getElementById('YeeBetLive').style.filter = "";
+            document.getElementById('YeeBetLiveLogin').style.filter = "";
+        }
     }
 }
 
@@ -197,7 +193,6 @@ async function AllInButtonDisable(i) {
     if (i == 0)
         walletData = await GetMethodWithReturn(apiEndPoints.walletSelect);
     for (i = 0; i < walletData.data.length; i++) {
-
         if (walletData.data[i].walletType == "AG Wallet" && walletData.data[i].isMaintenance == true) {
             if (window.location.href.toLowerCase().includes('?p=transfer')) {
                 document.getElementById("agallin").disabled = true;
@@ -263,7 +258,6 @@ async function AllInButtonDisable(i) {
                 document.getElementById("saallin").disabled = false;
             }
         }
-
 
         if (walletData.data[i].walletType == "DG Wallet" && walletData.data[i].isMaintenance == true) {
             if (window.location.href.toLowerCase().includes('?p=transfer')) {
@@ -353,11 +347,17 @@ async function AllInButtonDisable(i) {
             }
         }
 
+        if (walletData.data[i].walletType == "YeeBet Wallet" &&
+            walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('?p=transfer')) document.getElementById("YeeBetAllIn").disabled = true;
+        }
+        else if (walletData.data[i].walletType == "YeeBet Wallet" &&
+            walletData.data[i].isMaintenance == false)
+            if (window.location.href.toLowerCase().includes('?p=transfer')) document.getElementById("YeeBetAllIn").disabled = false;
     }
 }
 
 async function CheckGameInMaintenance(gameName) {
-
     if (walletData === undefined)
         await Walletdate();
 
@@ -403,6 +403,8 @@ async function CheckGameInMaintenance(gameName) {
 
     if (gameName == "Pragmatic")
         walletName = "Pragmatic Wallet";
+
+    if (gameName == "YeeBet") walletName = "YeeBet Wallet";
 
     for (i = 0; i < walletData.data.length; i++)
         if (walletData.data[i].walletType == walletName && walletData.data[i].isMaintenance == true)
@@ -475,7 +477,6 @@ async function AG(GameType) {
 }
 
 function randomPassword() {
-
     var charsetOne = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetTwo = 'abcdefghiklmnopqrstuvwxyz', charsetThree = '@', charsetFour = '0123456789', randomstring = '', i = 0;
 
     for (i = 0; i < 3; i++) {
@@ -500,7 +501,6 @@ function randomPassword() {
 }
 
 function randomString() {
-
     var charsetOne = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetTwo = 'abcdefghiklmnopqrstuvwxyz', charsetThree = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetFour = '0123456789', randomstring = '', i = 0;
 
     for (i = 0; i < 3; i++) {
@@ -533,7 +533,6 @@ async function M8Login(usernamePrifix) {
     } else {
         localStorage.setItem('M8Url', resultM8Login.response.result.login.weburlsecure['#cdata-section']);
         localStorage.setItem('M8UrlMobile', resultM8Login.response.result.login.mobiurlsecure['#cdata-section']);
-
     }
     if (screen.width > 786) {
         window.location.href = GetLocalStorage('M8Url');
@@ -549,7 +548,6 @@ function loadingPlaytechJS() {
     imported.src = 'https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88'
     document.head.appendChild(imported);
 }
-
 
 async function loginPlaytech() {
     var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
@@ -596,11 +594,11 @@ async function logingGame(gameName) {
                 TransferInAllWallet("AllBet Wallet");
             if (gameName == "WM")
                 TransferInAllWallet("WM Wallet");
-            if (gameName == "Pragmatic")
-            {
+            if (gameName == "Pragmatic") {
                 PragmaticBrokenStatusInterval();
                 TransferInAllWallet("Pragmatic Wallet");
             }
+            if (gameName == "YeeBet") TransferInAllWallet("YeeBet Wallet");
         }
         if (gameName != "Pragmatic")
             window.open("/mobile/Game?gamename=" + gameName);
@@ -695,7 +693,6 @@ async function GameLoginMobile(gamename) {
     }
 
     if (GetLocalStorage('currentUser') !== null) {
-
         if (resSelectUser == null) {
             let userModel = {
                 id: resUserData.data.id
@@ -703,7 +700,6 @@ async function GameLoginMobile(gamename) {
             let resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
             sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
         }
-
 
         resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
         let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
@@ -840,7 +836,6 @@ async function GameLoginMobile(gamename) {
                     };
                     var updateProfile = await PostMethod(apiEndPoints.updateProfile, modelUpdateProfile);
 
-
                     var result981Kiss = await _918KissPostMethod("account.ashx?" + _918KissActionConst.AddUser + "&" + _918KissConstParameter.agent + "&" + "userName=" + randamUserName + "&" + "PassWd=" + randomPasswordString + "&" + "Name=" + resUserData.data.name + "&" + "Tel=" + resUserData.data.mobileNo + "&" + "Memo=" + null + "&" + "UserType=" + _918KissUserType.realplayer + "&" + "UserAreaId=" + _918KissUserAreaId.Malaysia + "&" + "time=" + UTCTime + "&" + _918KissConstParameter.authcode + "&" + "sign=" + generateHasValue(randamUserName) + "&" + _918KissConstParameter.pwdtype);
 
                     let model918Kiss = {
@@ -859,13 +854,11 @@ async function GameLoginMobile(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.Pussy888 !== true) {
                     var model = {
-
                     }
                     try {
                         var res = await PostMethodWithParameter(apiEndPoints.pussyRegister, model);
                     }
-                    catch (e){
-
+                    catch (e) {
                     }
                     //window.location.href = "/Mobile/download?id=Pussy888DownloadTab";
                     location.href = '/mobile?p=download&id=Pussy888DownloadTab';
@@ -908,10 +901,9 @@ async function GameLoginMobile(gamename) {
                 }
                 if (resSelectUser.data.Mega888 !== true) {
                     var userMegaa88Model = {
-
                     }
                     var res = await PostMethod(apiEndPoints.mega888Register, userMegaa88Model);
-                    if (res !== undefined || res !== null) {  
+                    if (res !== undefined || res !== null) {
                         location.href = '/mobile?p=download&id=MegaDownloadTab';
                     }
                 }
@@ -922,7 +914,6 @@ async function GameLoginMobile(gamename) {
             case 'DG':
                 if (resSelectUser.data.DG !== true) {
                     var userDGModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.dgRegister, userDGModel);
                     if (res.data.codeId == 0) {
@@ -933,7 +924,6 @@ async function GameLoginMobile(gamename) {
                 }
                 else {
                     var Model = {
-
                     }
                     var login = await PostMethod(apiEndPoints.dgLogin, Model);
                     if (login.data.codeId == 0)
@@ -943,7 +933,6 @@ async function GameLoginMobile(gamename) {
             case 'SexyBaccarat':
                 if (resSelectUser.data.SexyBaccarat !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.sexyRegister, userRegisterModel);
                     if (res.data.status == "0000") {
@@ -968,7 +957,6 @@ async function GameLoginMobile(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.SA !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.saRegister, userRegisterModel);
                     if (res.data.status == "0") {
@@ -1018,7 +1006,6 @@ async function GameLoginMobile(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.WM !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.WMRegister, userRegisterModel);
                     if (res.data.errorCode == 0) {
@@ -1043,7 +1030,6 @@ async function GameLoginMobile(gamename) {
                 LoaderShow();
                 if (resSelectUser.data.Pragmatic !== true) {
                     var userRegisterModel = {
-
                     }
                     var res = await PostMethod(apiEndPoints.pragmaticRegister, userRegisterModel);
                     if (res.data.error == "0") {
@@ -1052,6 +1038,28 @@ async function GameLoginMobile(gamename) {
                 }
                 else {
                     window.open("../mobile/PragmaticGame", "_blank")
+                }
+                break;
+            case 'YeeBet':
+                LoaderShow();
+                if (resSelectUser.data.YeeBet !== true) {
+                    var userRegisterModel = {
+                    }
+                    var res = await PostMethod(apiEndPoints.YeeBetRegister, userRegisterModel);
+                    if (res.data.errorCode == 0) {
+                        var userLoginModel = {
+                            isMobile: true
+                        }
+                        var login = await PostMethod(apiEndPoints.YeeBetLogin, userLoginModel);
+                        if (login.data.errorCode == 0) window.location.href = login.data.openurl
+                    }
+                }
+                else {
+                    var Model = {
+                        isMobile: true
+                    }
+                    var login = await PostMethod(apiEndPoints.YeeBetLogin, Model);
+                    if (login.data.errorCode == 0) window.location.href = login.data.openurl
                 }
                 break;
         }
