@@ -82,7 +82,7 @@
             <div class="account-reg ">
                 <h4 class="bank-icon symbol"><span>BANKING INFORMATION</span></h4>
                 <div class="bank-account-info">
-                    <p class="date-note"><span>Latest Update On : </span><span>4/7/2021, 11:14:13 AM</span></p>
+                    <p class="date-note"><span>Latest Update On : </span><span id="UpdateTime">4/7/2021, 11:14:13 AM</span></p>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="bank-entry">
@@ -116,7 +116,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <table width="100%" border="0" class="table table-bordered text-center transactions-limits">
+                                <table width="100%" border="0" class="table table-bordered text-center transactions-limits" id="limits_table">
                                     <thead>
                                         <tr class="blue-bg">
                                             <th rowspan="2" class="black-text left-width text-center pad-ten"><span class="lang" key="bank_bankingoptions">Banking Options</span></th>
@@ -127,46 +127,14 @@
                                             <th class="black-text table-bordered custom-width text-center"><span class="lang" key="bank_Minimum">Minimum</span></th>
                                             <th class="black-text table-bordered custom-width text-center"><span class="lang" key="bank_Maximum">Minimum</span></th>
                                         </tr>
-                                        <tr>
-                                            <td class="no-border pad-ten grey-bg" colspan="4" classname="no-border pad-ten grey-bg">Deposit</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pad-ten white-bg" classname="pad-ten white-bg">Cash Deposit</td>
-                                            <td class="text-center pad-ten white-bg" classname="text-center pad-ten white-bg">10</td>
-                                            <td class="text-center pad-ten white-bg" classname="text-center pad-ten white-bg">30,000</td>
-                                            <td class="text-center pad-ten white-bg" classname="text-center pad-ten white-bg">5-10 minutes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pad-ten white-bg" classname="pad-ten white-bg">Internet Banking</td>
-                                            <td class="text-center pad-ten white-bg" classname="text-center pad-ten white-bg">10</td>
-                                            <td class="text-center pad-ten white-bg" classname="text-center pad-ten white-bg">30,000</td>
-                                            <td class="text-center pad-ten white-bg" classname="text-center pad-ten white-bg">5-10 minutes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="no-border pad-ten grey-bg" colspan="4" classname="no-border pad-ten grey-bg">Withdraw</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pad-ten white-bg" classname="pad-ten white-bg">Local Bank Transfer</td>
-                                            <td class="text-center pad-ten white-bg" classname="text-center pad-ten white-bg">10</td>
-                                            <td class="text-center pad-ten white-bg" classname="text-center pad-ten white-bg">30,000</td>
-                                            <td class="text-center pad-ten white-bg" classname="text-center pad-ten white-bg">1 Day</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pad-ten white-bg" classname="pad-ten white-bg">Quick Withdraw</td>
-                                            <td class="text-center pad-ten white-bg" classname="text-center pad-ten white-bg">10</td>
-                                            <td class="text-center pad-ten white-bg" classname="text-center pad-ten white-bg">30,000</td>
-                                            <td class="text-center pad-ten white-bg" classname="text-center pad-ten white-bg">10-30 minutes</td>
-                                        </tr>
                                     </thead>
                                 </table>
                             </div>
                         </div>
                     </div>
                     <h5><strong><span class="lang" key="important_notes">IMPORTANT NOTICES</span></strong></h5>
-                    <ol style="width: 100%; padding-left: 20px; list-style-type: decimal;">
-                        <li class="mar-btm-ten">All Maximum amounts are based on per transaction per day.</li>
-                        <li class="mar-btm-ten">Please Contact our live for latest bank information.</li>
-                        <li class="mar-btm-ten">All deposit have to be fully wager before an withdrawal can be made.</li>
+                    <ol style="width: 100%; padding-left: 20px; list-style-type: decimal;" id="imp_notes">
+                        
                     </ol>
                 </div>
             </div>

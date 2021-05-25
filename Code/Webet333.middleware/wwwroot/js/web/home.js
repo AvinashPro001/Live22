@@ -37,7 +37,7 @@ async function SetLastUpdateTime() {
         var diff = (Currentdate.getTime() - OldDate.getTime()) / 1000;
         diff /= 60;
         diff = Math.abs(Math.round(diff));
-        if (diff > 30) {
+        if (diff > 0) {
             SetSiteData();
             var date = new Date();
             SetLocalStorage("time", date);
