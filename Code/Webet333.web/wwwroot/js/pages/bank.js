@@ -879,7 +879,7 @@ async function RefreshFromWalletBalance(GameName) {
         case "AllBet Wallet": hideBalanceShowLoading('AllBetRefershImg', 'lbl_AllBetWalletbalanceDeposite'); await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId); break;
         case "WM Wallet": hideBalanceShowLoading('WMRefershImg', 'lbl_WMWalletbalanceDeposite'); await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId); break;
         case "Pragmatic Wallet": hideBalanceShowLoading('PragmaticRefershImg', 'lbl_PragmaticWalletbalanceDeposite'); await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId); break;
-        case "YeeBet Wallet": hideBalanceShowLoading('YeeBetRefershImg', 'lbl_YeeBetWalletbalanceDeposite'); await YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId); break;
+        case "YeeBet Wallet": hideBalanceShowLoading('YeeBetRefershImg', 'lbl_YeeBetWalletbalanceDeposite'); await YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId); break;
     }
 }
 

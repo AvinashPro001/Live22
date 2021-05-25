@@ -87,7 +87,7 @@ async function WalletBalance() {
     AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
     WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
     PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
-    YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId);
+    YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
 }
 //#endregion WalletBalance
 
@@ -167,7 +167,7 @@ async function RestoreBalance() {
         await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
         await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
         await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
-        await YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId);
+        await YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
 
         let restoreModel = {
             kiss918wallet: _918KissWallet == "N/A" ? "0.0" : _918KissWallet,
@@ -232,7 +232,7 @@ async function RestoreBalance() {
         await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
         await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
         await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
-        await YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId);
+        await YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
 
         let restoreModel = {
             kiss918wallet: _918KissWallet == "N/A" ? "0.0" : _918KissWallet,
@@ -715,7 +715,7 @@ async function WalletBalanceMaxTransfer(walletData) {
         if (walletData == "WM Wallet")
             WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
 
-        if (walletData == "YeeBet Wallet") YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId);
+        if (walletData == "YeeBet Wallet") YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
     }
     else {
         MainWalletBalance();
@@ -731,6 +731,6 @@ async function WalletBalanceMaxTransfer(walletData) {
         SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username);
         AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
         WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
-        YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId);
+        YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
     }
 }

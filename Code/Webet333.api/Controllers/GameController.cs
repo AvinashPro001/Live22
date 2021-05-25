@@ -1969,7 +1969,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var resultYeeBet = await YEEBETGameHelpers.TransferBalanceAsync(WMUsername, -Math.Abs(request.WMWallet));
+                        var resultYeeBet = await YEEBETGameHelpers.TransferBalanceAsync(YeeBetUsername, -Math.Abs(request.YeeBetWallet));
                         mainBalance += resultYeeBet.result == 0 ? request.YeeBetWallet : 0;
                         YeeBetBalance = resultYeeBet.result == 0 ? request.YeeBetWallet : 0;
                     }
@@ -2529,6 +2529,7 @@ namespace Webet333.api.Controllers
                     SAUsername = user.SAGamePrefix + user.Username,
                     SexyUsername = user.SexyGamePrefix + user.Username,
                     WMUsername = user.WMGamePrefix + user.UserId,
+                    YEEBETUsername = user.YEEBETGamePrefix + user.UserId,
 
                     FromWalletIsMaintenance = false,
                     FromWalletName = "Main Wallet",

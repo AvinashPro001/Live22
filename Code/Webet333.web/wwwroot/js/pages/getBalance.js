@@ -89,7 +89,7 @@ async function WalletBalance() {
     AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
     WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
     PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
-    YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId);
+    YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
 }
 //#endregion WalletBalance
 
@@ -163,7 +163,7 @@ async function RestoreBalance() {
         await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId, false);
         await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId, false);
         await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId, false);
-        await YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId, false);
+        await YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId, false);
 
         let restoreModel = {
             kiss918wallet: _918KissWallet == "N/A" ? "0.0" : _918KissWallet,
@@ -259,7 +259,7 @@ function StartTimerGameBalanceAPI(GameName) {
             setTimeout(() => { clearInterval(WmtimerId); WMTrigger = false; }, 301000);
             break;
         case 'YeeBet':
-            let YeeBetTimerId = setInterval(() => { YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId); YeeBetTrigger = true; }, 30000);
+            let YeeBetTimerId = setInterval(() => { YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId); YeeBetTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(YeeBetTimerId); YeeBetTrigger = false; }, 301000);
             break;
     }
@@ -885,5 +885,5 @@ async function WalletBalanceMaxTransfer() {
     await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
     await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
     await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
-    await YeeBetWalletBalance(globalParameter.data.YEEBETGamePrefix + userDetails.data.userId);
+    await YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
 }
