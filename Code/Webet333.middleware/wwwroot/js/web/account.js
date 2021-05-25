@@ -6,6 +6,7 @@ $(document).ready(function () {
 //#endregion 
 
 //#region Login Function
+
 async function DoLogin() {
     let model = {
         userName: $('#txt_login_username').val(),
@@ -30,11 +31,13 @@ async function DoLogin() {
         }
         return 0;
     }
-    
+
+    SetLocalStorage('currentUserData', Encryption($("#txt_login_password").val()));
     SetSessionStorage("currentUser", res.response.data.access_token);
     SetSessionStorage("userDetails", Encryption(JSON.stringify(res.response.data.user)))
     window.location.reload();
 }
+
 //#endregion 
 
 //#region Hide or UnHide After Login and Before Login
@@ -55,27 +58,38 @@ function CheckLoginOrNot() {
 //#endregion 
 
 //#region Set Users Profile if User Login
-function ProfileData() {
-    if (GetSessionStorage("currentUser") !== null) {
-        var ProfileData = JSON.parse(Decryption(GetSessionStorage("userDetails")))
+async function ProfileData() {
+    var ProfileData = JSON.parse(Decryption(GetSessionStorage("userDetails")))
+    if (ProfileData !== null) {
         if (!window.location.href.toLocaleLowerCase().includes("web/otpverified")) {
             if (!ProfileData.mobilenoConfirmed) window.location.href = "/web/otpverified"
         }
         SetAllImagePath('login_user_vip_level', ProfileData.vipBanner)
         SetAllValueInElement("login_username", ProfileData.username)
         SetBackgroudImagePath("silver_wallet", ProfileData.vipBanner)
-        SetAllValueInElement("vip_level_name",ProfileData.vipLevelName)
+        SetAllValueInElement("vip_level_name", ProfileData.vipLevelName)
+    }
+    else {
+        await GetProfileAndSetInSessionStorage();
+        ProfileData();
+        GetGlobalParameterAndSetInSessionStorage();
+
     }
 }
 //#endregion 
 
 //#region Check Login users is Verified Or not
-function CheckMobileNumberIsVerified() {
-    if (GetSessionStorage("currentUser") !== null) {
-        var ProfileData = JSON.parse(Decryption(GetSessionStorage("userDetails")))
+async function CheckMobileNumberIsVerified() {
+    var ProfileData = JSON.parse(Decryption(GetSessionStorage("userDetails")))
+    if (ProfileData !== null) {
         if (window.location.href.toLocaleLowerCase().includes("web/otpverified")) {
             if (ProfileData.mobilenoConfirmed) window.location.href = "/"
         }
+    }
+    else {
+        await GetProfileAndSetInSessionStorage();
+        CheckMobileNumberIsVerified();
+        GetGlobalParameterAndSetInSessionStorage();
     }
 }
 //#endregion 
@@ -92,7 +106,7 @@ function DoLogout() {
 function DisplayCurrentTime() {
     var date = new Date();
     var day = date.getDate();
-    var Month = date.getMonth()+1;
+    var Month = date.getMonth() + 1;
     var Year = date.getFullYear();
     var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
     var am_pm = date.getHours() >= 12 ? "PM" : "AM";
@@ -109,3 +123,32 @@ setInterval(function () {
     SetAllValueInElement("current_time", DisplayCurrentTime())
 }, 1000);
 //#endregion 
+
+//#region Get Profile And Set In Session Storage
+
+async function GetProfileAndSetInSessionStorage() {
+    if (GetSessionStorage('currentUser') !== null) {
+        var userDetails = JSON.parse(Decryption(GetSessionStorage("userDetails")));
+        if (userDetails == null) {
+            var res = await GetMethod(accountEndPoints.getProfile);
+            SetSessionStorage('userDetails', Encryption(JSON.stringify(res.response.data)));
+        }
+    }
+}
+
+//#endregion
+
+//#region Get Global Parameter And Set In Session Storage
+
+async function GetGlobalParameterAndSetInSessionStorage() {
+    if (GetSessionStorage('currentUser') !== null) {
+        var globalParameter = JSON.parse(Decryption(GetSessionStorage("GamePreFix")));
+        if (globalParameter == null) {
+            var gamePrefix = await GetMethod(globalEndPoints.globalParameter);
+            SetSessionStorage('GamePreFix', Encryption(JSON.stringify(gamePrefix.response.data)));
+            globalParameter = gamePrefix.response.data;
+        }
+    }
+}
+
+//#endregion

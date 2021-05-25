@@ -15,16 +15,16 @@
             </div>
             <div class="restore_amount_sec_wrap">
                 <div class="restore_amount_left">
-                    <button>Restore</button>
+                    <button onclick="RestoreBalance();">Restore</button>
                 </div>
                 <div class="restore_amount_center">
                     <div class="myr_cur">
                         <h1>MYR</h1>
-                        <h2>100,044.10</h2>
+                        <h2 id="main_balance"></h2>
                     </div>
                 </div>
                 <div class="restore_amount_right">
-                    <button>&nbsp;</button>
+                    <button onclick="RefreshBalance();">&nbsp;</button>
                 </div>
             </div>
             <div class="table_section_black_wrap">
@@ -32,40 +32,40 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td data-column="First Name">0.00</td>
-                                <td data-column="Last Name">0.00</td>
-                                <td data-column="Job Title">0.00</td>
-                                <td data-column="Twitter">0.00</td>
-                                <td data-column="Last Name">0.00</td>
-                                <td data-column="Job Title">0.00</td>
-                                <td data-column="Twitter">0.00</td>
+                                <td id="joker_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="playtech_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="kiss918_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="ag_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="m8_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="maxbet_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="mega888_balance"><img src="~/images/loading.gif" /></td>
                             </tr>
                             <tr>
-                                <td data-column="First Name">Joker</td>
-                                <td data-column="Last Name">PlayTech</td>
-                                <td data-column="Job Title">918Kiss</td>
-                                <td data-column="Twitter">AG</td>
-                                <td data-column="Last Name">M8</td>
-                                <td data-column="Job Title">Maxbet</td>
-                                <td data-column="Twitter">Mega888</td>
+                                <td>Joker</td>
+                                <td>PlayTech</td>
+                                <td>918Kiss</td>
+                                <td>AG</td>
+                                <td>M8</td>
+                                <td>Maxbet</td>
+                                <td>Mega888</td>
                             </tr>
                             <tr>
-                                <td data-column="First Name">0.00</td>
-                                <td data-column="Last Name">0.00</td>
-                                <td data-column="Job Title">0.00</td>
-                                <td data-column="Twitter">0.00</td>
-                                <td data-column="Last Name">0.00</td>
-                                <td data-column="Job Title">0.00</td>
-                                <td data-column="Twitter">0.00</td>
+                                <td id="dg_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="sexy_baccarat_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="sa_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="pussy888_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="allbet_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="wm_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="pragmatic_balance"><img src="~/images/loading.gif" /></td>
                             </tr>
                             <tr>
-                                <td data-column="First Name">DG</td>
-                                <td data-column="Last Name">Sexy Baccarat</td>
-                                <td data-column="Job Title">SA</td>
-                                <td data-column="Twitter">PUSSY 888</td>
-                                <td data-column="Last Name">Allbet</td>
-                                <td data-column="Job Title">WM</td>
-                                <td data-column="Twitter">Pragmatic</td>
+                                <td>DG</td>
+                                <td>Sexy Baccarat</td>
+                                <td>SA</td>
+                                <td>PUSSY 888</td>
+                                <td>Allbet</td>
+                                <td>WM</td>
+                                <td>Pragmatic</td>
                             </tr>
 
                         </tbody>
@@ -594,7 +594,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="joker_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">
@@ -620,7 +620,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="playtech_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">
@@ -644,7 +644,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="kiss918_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">
@@ -668,7 +668,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="ag_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">
@@ -692,7 +692,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="m8_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">
@@ -716,7 +716,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="maxbet_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">
@@ -733,14 +733,14 @@
                                     <div class="in-wallet-chips">
                                         <div class="chip-margin">
                                             <ul>
-                                                <li class="mb5"><b>Mega</b></li>
+                                                <li class="mb5"><b>Mega888</b></li>
                                                 <li class="text-primary">
                                                     <button class="btn btn-default btn-default-border">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="mega888_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">
@@ -764,7 +764,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="dg_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">
@@ -788,7 +788,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="sexy_baccarat_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">
@@ -812,7 +812,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="sa_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">
@@ -836,7 +836,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="pussy888_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">
@@ -862,7 +862,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="allbet_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">
@@ -888,7 +888,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="wm_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">
@@ -914,7 +914,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary">0.00</li>
+                                                <li class="text-primary" id="pragmatic_balance">0.00</li>
                                             </ul>
                                         </div>
                                         <div class="box-title">

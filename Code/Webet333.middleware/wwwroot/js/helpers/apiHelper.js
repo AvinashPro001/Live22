@@ -41,9 +41,10 @@ function Encryption(plaintext) {
 
 //#region POST Method With Token
 
-function PostMethod(endPoint, model) {
+async function PostMethod(endPoint, model) {
     if (GetLocalStorage('language') === null)
         return null;
+
     return $.ajax({
         type: "POST",
         data: JSON.stringify(model),
@@ -62,7 +63,11 @@ function PostMethod(endPoint, model) {
         }
         return response;
     }).fail(function (err) {
-        return err;
+        var response = {
+            "status": err.status,
+            "response": err.responseJSON
+        }
+        return response;
     });
 }
 

@@ -1,10 +1,4 @@
-﻿//#region OnLoad Function
-$(document).ready(function () {
-    CallAPIForBankPages();
-});
-//#endregion
-
-async function CallAPIForBankPages() {
+﻿async function CallAPIForBankPages() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
     
     if (data.AdminBankPageData == null || data.AdminBankPageData == undefined) {

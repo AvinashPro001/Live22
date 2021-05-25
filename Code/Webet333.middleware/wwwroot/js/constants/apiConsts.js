@@ -141,8 +141,13 @@ var apiEndPoints = {
     //UserVipDetails:"viplevel/user/details"
 };
 
+var globalEndPoints = {
+    globalParameter: "Game/GlobalParameters"
+}
+
 var accountEndPoints = {
     login: "account/login",
+    getProfile: "customer/profile",
 };
 
 var promotionEndPoints = {
@@ -153,3 +158,27 @@ var settingEndPoints = {
     announcementList: "settings/announcement/user/list",
     admin_page_bank: "settings/admin_bank/list",
 };
+
+var gameBalanceEndPoints = {
+    mainBalance: "gamebalance/main",
+    kiss918Balance: "gamebalance/918kiss",
+    mega888Balance: "gamebalance/mega888",
+    jokerBalance: "gamebalance/joker",
+    maxbetBalance: "gamebalance/maxbet",
+    m8Balance: "gamebalance/m8",
+    agBalance: "gamebalance/ag",
+    playtechBalance: "gamebalance/playtech",
+    dgBalance: "gamebalance/dg",
+    sexyBalance: "gamebalance/sexybaccarat",
+    saBalance: "gamebalance/sa",
+    pussy888Balance: "gamebalance/pussy888",
+    allBetBalance: "gamebalance/allbet",
+    wmBalance: "gamebalance/wm",
+    pragmaticBalance: "gamebalance/pragmatic",
+
+
+};
+
+var transactionEndPoints = {
+    restore: "Game/Balance/Restore"
+}

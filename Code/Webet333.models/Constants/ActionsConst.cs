@@ -476,6 +476,8 @@
 
         public class GameBalance
         {
+            public const string MainBalance = "gamebalance/main";
+
             public const string Kiss918Balance = "gamebalance/918kiss";
 
             public const string AgBalance = "gamebalance/ag";

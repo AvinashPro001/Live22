@@ -466,6 +466,19 @@ namespace Webet333.api.Helpers
 
         #region Update ALL games balance in db
 
+        #region Main balance 
+
+        internal async Task<dynamic> MainBalance(string UserId)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result=await repository.FindAsync(StoredProcConsts.User.GetWalletBalance, new { UserId, WalletName= "Main Wallet" });
+                return result;
+            }
+        }
+
+        #endregion Main balance 
+
         #region Kiss 918 balance update
 
         internal async Task<dynamic> Kiss918BalanceUpdate(string UserId, string Amount)

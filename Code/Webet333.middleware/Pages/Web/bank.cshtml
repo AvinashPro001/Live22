@@ -4,7 +4,10 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<script>CheckLoginOrNot()</script>
+<script>
+    CheckLoginOrNot();
+    CallAPIForBankPages();
+</script>
 
 <div class="row main_wallet_page_wrap ml0 mr0">
     <div class="container">
@@ -95,15 +98,15 @@
                                                 <th class="black-text text-center"><span class="lang" key="bank_accountnumber"><span>Account Number</span></span></th>
                                             </tr>
                                             @*<tr>
-                                                <td><img class="public_bank" src="~/images/public_bank.png"></td>
-                                                <td>Lee Chun Sang</td>
-                                                <td>243254657658 </td>
-                                            </tr>
-                                            <tr>
-                                                <td><img class="public_bank" src="~/images/public_bank.png"></td>
-                                                <td>Lee Chun Sang</td>
-                                                <td>243254657658</td>
-                                            </tr>*@
+                                                    <td><img class="public_bank" src="~/images/public_bank.png"></td>
+                                                    <td>Lee Chun Sang</td>
+                                                    <td>243254657658 </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><img class="public_bank" src="~/images/public_bank.png"></td>
+                                                    <td>Lee Chun Sang</td>
+                                                    <td>243254657658</td>
+                                                </tr>*@
                                         </thead>
                                     </table>
                                 </div>
@@ -134,7 +137,6 @@
                     </div>
                     <h5><strong><span class="lang" key="important_notes">IMPORTANT NOTICES</span></strong></h5>
                     <ol style="width: 100%; padding-left: 20px; list-style-type: decimal;" id="imp_notes">
-                        
                     </ol>
                 </div>
             </div>
