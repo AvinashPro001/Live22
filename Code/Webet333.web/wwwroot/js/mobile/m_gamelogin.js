@@ -1052,7 +1052,7 @@ async function GameLoginMobile(gamename) {
                             isMobile: true
                         }
                         var login = await PostMethod(apiEndPoints.YeeBetLogin, userLoginModel);
-                        if (login.data.errorCode == 0) window.location.href = login.data.openurl
+                        if (login.data.result == 0) window.location.href = login.data.openurl;
                     }
                 }
                 else {
@@ -1060,7 +1060,7 @@ async function GameLoginMobile(gamename) {
                         isMobile: true
                     }
                     var login = await PostMethod(apiEndPoints.YeeBetLogin, Model);
-                    if (login.data.errorCode == 0) window.location.href = login.data.openurl
+                    if (login.data.result == 0) window.location.href = login.data.openurl;
                 }
                 break;
         }
