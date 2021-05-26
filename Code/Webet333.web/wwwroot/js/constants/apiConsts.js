@@ -1,5 +1,5 @@
-﻿//var baseUrl = "http://uatapi.webet333.com/api/v1/";
-var baseUrl = "http://api.webet333.com/api/v1/";
+﻿var baseUrl = "http://uatapi.webet333.com/api/v1/";
+//var baseUrl = "http://api.webet333.com/api/v1/";
 //var baseUrl ="http://localhost:5001/api/v1/"
 
 var apiEndPoints = {

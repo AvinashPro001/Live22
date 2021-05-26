@@ -178,11 +178,13 @@ async function GameInMaintenance(i) {
             document.getElementById('pragmaticslotlogin').style.filter = "";
         }
 
-        if (walletData.data[i].walletType == "YeeBet Wallet" && walletData.data[i].isMaintenance == true) {
+        if (walletData.data[i].walletType == "YeeBet Wallet" &&
+            walletData.data[i].isMaintenance == true) {
             document.getElementById('YeeBetLive').style.filter = "grayscale(1)";
             document.getElementById('YeeBetLiveLogin').style.filter = "grayscale(1)";
         }
-        else if (walletData.data[i].walletType == "YeeBet Wallet" && walletData.data[i].isMaintenance == false) {
+        else if (walletData.data[i].walletType == "YeeBet Wallet" &&
+            walletData.data[i].isMaintenance == false) {
             document.getElementById('YeeBetLive').style.filter = "";
             document.getElementById('YeeBetLiveLogin').style.filter = "";
         }
@@ -1043,8 +1045,7 @@ async function GameLoginMobile(gamename) {
             case 'YeeBet':
                 LoaderShow();
                 if (resSelectUser.data.YeeBet !== true) {
-                    var userRegisterModel = {
-                    }
+                    var userRegisterModel = {}
                     var res = await PostMethod(apiEndPoints.YeeBetRegister, userRegisterModel);
                     if (res.data.errorCode == 0) {
                         var userLoginModel = {

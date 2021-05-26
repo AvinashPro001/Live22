@@ -651,6 +651,10 @@ async function YeeBetWalletBalance(Username) {
         YeeBetWallet = numberWithCommas(parseFloat(YeeBetBalance.data.balance).toFixed(2));
         document.getElementById("ddlYeeBetWallet").innerHTML = YeeBetWallet;
         if (location.href.toLowerCase().includes("?p=transfer")) document.getElementById("YeeBetWallet").innerHTML = YeeBetWallet;
+        if (YeeBetWallet == 0 &&
+            YeeBetBalance.data.previousBalance > 0 &&
+            AllbetTrigger == false)
+            StartTimerGameBalanceAPI("YeeBet");
     }
     catch (ex) {
         YeeBetWallet = "N/A";

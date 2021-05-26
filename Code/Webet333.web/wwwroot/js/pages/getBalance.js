@@ -816,6 +816,11 @@ async function YeeBetWalletBalance(Username, HideLoading = true) {
                 document.getElementById("ddlYeeBetWallet").innerHTML = YeeBetWallet;
             }
         }
+
+        if (YeeBetWallet == 0 &&
+            YeeBetBalance.data.previousBalance > 0 &&
+            YeeBetTrigger == false)
+            StartTimerGameBalanceAPI("YeeBet");
     }
     catch (ex) {
         YeeBetWallet = "N/A";

@@ -442,7 +442,9 @@ function getCookie(cname) {
 
 async function regisrationGame() {
     try {
-        if (localStorage.getItem('IsExecute') == "false" || localStorage.getItem('IsExecute') == false || localStorage.getItem('IsExecute') == null) {
+        if (localStorage.getItem('IsExecute') == "false" ||
+            localStorage.getItem('IsExecute') == false ||
+            localStorage.getItem('IsExecute') == null) {
             localStorage.setItem('IsExecute', true);
 
             var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
@@ -471,7 +473,8 @@ async function regisrationGame() {
                 resSelectUser.data.Pussy888 === false ||
                 resSelectUser.data.AllBet === false ||
                 resSelectUser.data.WM === false ||
-                resSelectUser.data.Pragmatic === false
+                resSelectUser.data.Pragmatic === false ||
+                resSelectUser.data.YeeBet === false
             ) {
                 resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
                 sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
@@ -496,8 +499,7 @@ async function regisrationGame() {
                 try {
                     await PostMethodWithParameter(apiEndPoints.registerMaxBet, userMaxBet);
                 }
-                catch (e) {
-                }
+                catch (e) { }
             }
 
             if (resSelectUser.data.M8 !== true) {
@@ -523,18 +525,15 @@ async function regisrationGame() {
                     }
                     //}
                 }
-                catch (ex) {
-                }
+                catch (ex) { }
             }
 
             if (resSelectUser.data.AG === false) {
                 try {
-                    let modelAG = {
-                    };
+                    let modelAG = {};
                     var resAG = await PostMethodWithParameter(apiEndPoints.registerAG, modelAG);
                 }
-                catch (ex) {
-                }
+                catch (ex) { }
             }
 
             if (resSelectUser.data.Playtech !== true) {
@@ -559,8 +558,7 @@ async function regisrationGame() {
                     var resPlaytech1 = await PostMethodWithParameter(apiEndPoints.registerPlaytech, modelPlaytech);
                     //}
                 }
-                catch (ex) {
-                }
+                catch (ex) { }
             }
 
             if (resSelectUser.data._918Kiss !== true) {
@@ -589,8 +587,7 @@ async function regisrationGame() {
 
                     //}
                 }
-                catch (ex) {
-                }
+                catch (ex) { }
             }
 
             if (resSelectUser.data.Joker !== true) {
@@ -610,88 +607,79 @@ async function regisrationGame() {
 
                     //}
                 }
-                catch (ex) {
-                }
+                catch (ex) { }
             }
 
             if (resSelectUser.data.Mega888 !== true) {
-                var userMegaa88Model = {
-                }
+                var userMegaa88Model = {}
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.mega888Register, userMegaa88Model);
                 }
-                catch {
-                }
+                catch { }
             }
 
             if (resSelectUser.data.DG !== true) {
-                var model = {
-                }
+                var model = {}
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.dgRegister, model);
                 }
-                catch {
-                }
+                catch { }
             }
 
             if (resSelectUser.data.SexyBaccarat !== true) {
-                var model = {
-                }
+                var model = {}
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.sexyRegister, model);
                 }
-                catch {
-                }
+                catch { }
             }
 
             if (resSelectUser.data.SA !== true) {
-                var model = {
-                }
+                var model = {}
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.saRegister, model);
                 }
-                catch {
-                }
+                catch { }
             }
 
             if (resSelectUser.data.Pussy888 !== true) {
-                var model = {
-                }
+                var model = {}
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.pussyRegister, model);
                 }
-                catch {
-                }
+                catch { }
             }
 
             if (resSelectUser.data.AllBet !== true) {
-                var model = {
-                }
+                var model = {}
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.allBetRegister, model);
                 }
-                catch {
-                }
+                catch { }
             }
 
             if (resSelectUser.data.WM !== true) {
-                var model = {
-                }
+                var model = {}
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.WMRegister, model);
                 }
-                catch {
-                }
+                catch { }
             }
 
             if (resSelectUser.data.Pragmatic !== true) {
-                var model = {
-                }
+                var model = {}
                 try {
                     var res = await PostMethodWithParameter(apiEndPoints.pragmaticRegister, model);
                 }
-                catch {
+                catch { }
+            }
+
+            if (resSelectUser.data.YeeBet !== true) {
+                var model = {}
+                try {
+                    var res = await PostMethodWithParameter(apiEndPoints.YeeBetRegister, model);
                 }
+                catch { }
             }
 
             localStorage.setItem('IsExecute', false);
