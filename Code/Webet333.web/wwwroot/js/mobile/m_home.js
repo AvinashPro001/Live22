@@ -23,7 +23,7 @@ $(document).ready(function () {
 });
 //#endregion
 
-function VIPBanner() {
+async function VIPBanner() {
     var resUserVIPlevel = await GetMethodWithReturn(apiEndPoints.UserVipDetails);
     sessionStorage.setItem("UserVipDetails", enc(JSON.stringify(resUserVIPlevel)))
     try {
