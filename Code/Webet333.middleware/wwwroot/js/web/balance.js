@@ -196,6 +196,8 @@ function ConvertBalanceIntoCommasValue(amount) {
 	}
 }
 
+//#region All Wallet Balance
+
 async function MainWallet() {
 	let model = {}
 	try {
@@ -536,3 +538,5 @@ async function M8Wallet(Username, IsDivValueSet = true) {
 			SetBalanceOnAllPlace("m8_balance", UsersBalance.M8Balance);
 	}
 }
+
+//#endregion All Wallet Balance

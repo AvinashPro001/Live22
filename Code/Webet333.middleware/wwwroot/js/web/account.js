@@ -59,21 +59,23 @@ function CheckLoginOrNot() {
 
 //#region Set Users Profile if User Login
 async function ProfileData() {
-    var ProfileData = JSON.parse(Decryption(GetSessionStorage("userDetails")))
-    if (ProfileData !== null) {
-        if (!window.location.href.toLocaleLowerCase().includes("web/otpverified")) {
-            if (!ProfileData.mobilenoConfirmed) window.location.href = "/web/otpverified"
+    if (GetSessionStorage('currentUser') !== null) {
+        var ProfileData = JSON.parse(Decryption(GetSessionStorage("userDetails")))
+        if (ProfileData !== null) {
+            if (!window.location.href.toLocaleLowerCase().includes("web/otpverified")) {
+                if (!ProfileData.mobilenoConfirmed) window.location.href = "/web/otpverified"
+            }
+            SetAllImagePath('login_user_vip_level', ProfileData.vipBanner)
+            SetAllValueInElement("login_username", ProfileData.username)
+            SetBackgroudImagePath("silver_wallet", ProfileData.vipBanner)
+            SetAllValueInElement("vip_level_name", ProfileData.vipLevelName)
         }
-        SetAllImagePath('login_user_vip_level', ProfileData.vipBanner)
-        SetAllValueInElement("login_username", ProfileData.username)
-        SetBackgroudImagePath("silver_wallet", ProfileData.vipBanner)
-        SetAllValueInElement("vip_level_name", ProfileData.vipLevelName)
-    }
-    else {
-        await GetProfileAndSetInSessionStorage();
-        ProfileData();
-        GetGlobalParameterAndSetInSessionStorage();
+        else {
+            await GetProfileAndSetInSessionStorage();
+            ProfileData();
+            GetGlobalParameterAndSetInSessionStorage();
 
+        }
     }
 }
 //#endregion 

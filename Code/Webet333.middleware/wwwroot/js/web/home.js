@@ -166,19 +166,26 @@ async function AllAnnouncementsCallAPI() {
 
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
-    if (data.AnnouncementsData == null || data.AnnouncementsData == undefined) {
+    if (data == null) {
+        SetSiteData();
+        AllAnnouncementsCallAPI();
+    }
+    else {
+        if (data.AnnouncementsData === null) {
 
-        let res = await GetMethodWithoutToken(settingEndPoints.announcementList);
+            let res = await GetMethodWithoutToken(settingEndPoints.announcementList);
 
-        if (res.status == 200) {
-            data.AnnouncementsData = res.response.data;
-            SetSessionStorage("siteData", Encryption(JSON.stringify(data)));
+            if (res.status == 200) {
+                data.AnnouncementsData = res.response.data;
+                SetSessionStorage("siteData", Encryption(JSON.stringify(data)));
+                SetAnnouncementsOnAllPages();
+            }
+        }
+        else {
             SetAnnouncementsOnAllPages();
         }
     }
-    else {
-        SetAnnouncementsOnAllPages();
-    }
+    
 }
 //#endregion
 
