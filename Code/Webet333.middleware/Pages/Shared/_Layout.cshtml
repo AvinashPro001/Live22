@@ -56,6 +56,7 @@
     <script src="~/js/web/account.js"></script>
     <script src="~/js/web/bank.js"></script>
     <script src="~/js/web/balance.js"></script>
+    <script src="~/js/web/download.js"></script>
     <title>@ViewBag.Title</title>
 </head>
 <body class="home-page">
@@ -460,7 +461,7 @@
                     <img src="~/images/footericon1.png" alt="footericon1" />
                     <h1>VIP Program</h1>
                     <p>Upgrade to VIP o enjoy exclusive benefit and earn rewards</p>
-                    <a href="#">Apply Now</a>
+                    <a href="~/Web/vip">Apply Now</a>
                 </div>
             </div>
             <div class="col-sm-3">
@@ -484,7 +485,7 @@
                     <img src="~/images/footericon4.png" alt="footericon1" />
                     <h1>Promotion</h1>
                     <p>A lot of FREE CREDIT PROMOTION in here</p>
-                    <a href="#">get free credit card now</a>
+                    <a href="~/Web/promotion">get free credit card now</a>
                 </div>
             </div>
         </div>
@@ -857,54 +858,6 @@
                             </div>
                         </div>
                     </div>
-                    @*<div class="row ml0 mr0 lang_wrapper">
-                            <p>Thailand</p>
-                            <div class="col-md-4 lang_boxes_one_wrap">
-                                <div class="thai_boxes_one">
-                                    <a href="#"><img src="~/images/lang2.png"> English</a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 lang_boxes_two_wrap">
-                                <div class="thai_boxes_two">
-                                    <a href="#">Thai</a>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                &nbsp;
-                            </div>
-                        </div>
-                        <div class="row ml0 mr0 lang_wrapper">
-                            <p>Indonesia</p>
-                            <div class="col-md-4 lang_boxes_one_wrap">
-                                <div class="thai_boxes_one">
-                                    <a href="#"><img src="~/images/lang3.png"> English</a>
-                                </div>
-                            </div>
-                            <div class="col-md-5 lang_boxes_two_wrap">
-                                <div class="thai_boxes_two">
-                                    <a href="#">Bhs indonesia</a>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                &nbsp;
-                            </div>
-                        </div>
-                        <div class="row ml0 mr0 lang_wrapper">
-                            <p>Vietnam</p>
-                            <div class="col-md-4 lang_boxes_one_wrap">
-                                <div class="thai_boxes_one">
-                                    <a href="#"><img src="~/images/lang4.png"> English</a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 lang_boxes_two_wrap">
-                                <div class="thai_boxes_two">
-                                    <a href="#">Tieng viet</a>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                &nbsp;
-                            </div>
-                        </div>*@
                 </div>
             </div>
         </div>
@@ -984,6 +937,10 @@
 
         });
 
+    </script>
+
+    <script type="text/javascript">
+        var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 5e3) })(Comm100API || {})
     </script>
 
 </body>

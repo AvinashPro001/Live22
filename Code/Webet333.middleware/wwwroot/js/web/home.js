@@ -2,7 +2,8 @@
 let SiteData = {
     PromotionPageData: null,
     AnnouncementsData: null,
-    AdminBankPageData: null
+    AdminBankPageData: null,
+    DownloadPageData: null
 }
 //#endregion
 
