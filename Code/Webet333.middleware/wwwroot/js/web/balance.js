@@ -144,6 +144,8 @@ function SetLoadingImageForAllId() {
 		SetLoadingImagesInBalance(walletIds[i])
 		SetFetchingWordInBalance(walletIds[i])
 	}
+	
+	SetFetchingWordInBalance('main_balance')
 }
 
 function RefreshBalance() {

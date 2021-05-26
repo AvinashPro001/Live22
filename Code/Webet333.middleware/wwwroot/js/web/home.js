@@ -2,7 +2,7 @@
 let SiteData = {
     PromotionPageData: null,
     AnnouncementsData: null,
-    AdminBankPageData:null
+    AdminBankPageData: null
 }
 //#endregion
 
@@ -137,12 +137,12 @@ function SetPromotionInPromotionPage() {
         SetHtmlInPromotionPage("newmember_promotion", IsNewMemberPromotion);
         SetHtmlInPromotionPage("rebate_promotion", IsRebatePromotion);
         SetHtmlInPromotionPage("limited_promotion", IsLimitedTimePromotion);
-        
+
         var description = "";
         for (i = 0; i < promotion.length; i++)
             description +=
                 '<div class="modal fade Reload_bonus_myModal" id="' + promotion[i].id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button><h4 class="modal-title"><span>' + promotion[i].title + '</span></h4></div><div class="modal-body">' + promotion[i].Description + '</div></div></div ></div >';
-        
+
         SetAllValueInElement("description_section", description);
     }
 }
@@ -185,7 +185,7 @@ async function AllAnnouncementsCallAPI() {
             SetAnnouncementsOnAllPages();
         }
     }
-    
+
 }
 //#endregion
 
