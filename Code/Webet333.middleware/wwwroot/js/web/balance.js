@@ -110,9 +110,9 @@ async function SetUsername() {
 	GameUsernames.SAUsername = globalParameter.saGamePrefix + userDetails.username;
 	GameUsernames.WMUsername = globalParameter.wmGamePrefix + userDetails.userId;
 	GameUsernames.SexyBaccaratUsername = globalParameter.sexyGamePrefix + userDetails.username;
-	GameUsernames.PlaytechUsername = globalParameter.playtechGamePrefix + userDetails.username;
+	GameUsernames.PlaytechUsername = (globalParameter.playtechGamePrefix + userDetails.username.replace("#", "")).toUpperCase();;
 	GameUsernames.PragmaticUsername = globalParameter.pragmaticGamePrefix + userDetails.userId;
-	GameUsernames.JokerUsername = globalParameter.jokerGamePrefix + userDetails.username;
+	GameUsernames.JokerUsername = globalParameter.jokerGamePrefix + userDetails.username.replace(/[^0-9a-zA-Z]+/g, "");
 	GameUsernames.Mega888Username = userDetails.loginid;
 	GameUsernames.Pussy888Username = userDetails.usernamePussy888;
 	GameUsernames.Kiss918Username = userDetails.username918;

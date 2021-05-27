@@ -1,5 +1,7 @@
 ﻿//#region Variable Declare
 
+var SlotsUsernamePasswordId = ["pussy888_password", "pussy888_username", "mega888_password", "mega888_username", "joker_password", "joker_username", "kiss918_password", "kiss918_username"]
+
 let DownloadLinks = {
     mega888_apkURL: null,
     mega888_iosURL: null,
@@ -15,47 +17,65 @@ let DownloadLinks = {
 
 //#endregion
 
-
-CallDownloadLinkAPI();
-
 function SetBarcode(Data) {
-    console.log(Data);
-    for (i = 0; i < Data.length; i++)
-        SetAllImagePath(Data[i].name, Data[i].barcodeImage);
+    if (Data !== null)
+        for (i = 0; i < Data.length; i++)
+            SetAllImagePath(Data[i].name, Data[i].barcodeImage);
 }
 
 function AppDownload(Id) {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
     if (data !== null && data.DownloadPageData !== null && data.DownloadPageData !== undefined) {
-        for (i = 0; i < data.length; i++) {
-            if (data[i].name == Id) self.location = data[i].value;
+        for (i = 0; i < data.DownloadPageData.length; i++) {
+            if (data.DownloadPageData[i].name == Id) self.location = data.DownloadPageData[i].value;
         }
     }
-    else {}
+    else { }
 }
 
 async function CallDownloadLinkAPI() {
 
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
-    
-    if (data == null) {
-        SetSiteData();
-        CallDownloadLinkAPI()
+
+    if (data.DownloadPageData == null || data.DownloadPageData == undefined) {
+
+        var res = await GetMethod(settingEndPoints.downloadLinkList);
+
+        if (res.status == 200) {
+            SiteData.DownloadPageData = res.response.data;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
+            SetBarcode(data.DownloadPageData)
+        }
     }
     else {
-        if (data.DownloadPageData == null || data.DownloadPageData == undefined) {
+        SetBarcode(data.DownloadPageData)
+    }
+}
 
-            var res = await GetMethod(settingEndPoints.downloadLinkList);
 
-            if (res.status == 200) {
-                data.DownloadPageData = res.response.data;
-                SetSessionStorage("siteData", Encryption(JSON.stringify(data)))
-                SetBarcode(data.DownloadPageData)
+function SetPleaseLoginText() {
+    for (i = 0; i < SlotsUsernamePasswordId.length; i++)
+        SetAllValueInElement(SlotsUsernamePasswordId[i], "Please Login !!")
+}
+
+function SetUsernamePassword() {
+    if (GetSessionStorage("currentUser") == null) {
+        SetPleaseLoginText()
+    }
+    else {
+        var data = JSON.parse(Decryption(GetSessionStorage("userDetails")));
+        for (i = 0; i < SlotsUsernamePasswordId.length; i++) {
+            switch (SlotsUsernamePasswordId[i]) {
+                case "kiss918_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.Kiss918Username); break;
+                case "joker_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.JokerUsername); break;
+                case "mega888_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.Mega888Username); break;
+                case "pussy888_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.Pussy888Username); break;
+                case "pussy888_password": SetAllValueInElement(SlotsUsernamePasswordId[i], data.passwordPussy888); break;
+                case "mega888_password": SetAllValueInElement(SlotsUsernamePasswordId[i], Decryption(GetLocalStorage('currentUserData'))); break;
+                case "joker_password": SetAllValueInElement(SlotsUsernamePasswordId[i], Decryption(GetLocalStorage('currentUserData'))); break;
+                case "kiss918_password": SetAllValueInElement(SlotsUsernamePasswordId[i], data.password918); break;
             }
-        }
-        else {
-            SetBarcode(data.DownloadPageData)
         }
     }
 }

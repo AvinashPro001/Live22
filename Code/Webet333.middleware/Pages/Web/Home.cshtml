@@ -740,11 +740,13 @@
     });
 </script>
 <script>
-    
-    AllAnnouncementsCallAPI();
+
+    $(document).ready(function () {
+        AllAnnouncementsCallAPI();
+    });
 
     setInterval(function () {
         if ($('#slider_promotion_div').children().length == 0)
-            SetPromotionInMainPage()
+            SetPromotionInMainPage();
     }, 200);
 </script>

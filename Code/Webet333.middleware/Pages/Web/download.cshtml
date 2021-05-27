@@ -54,7 +54,7 @@
                                         <img class="Qrcode" id="918KissIOS64" alt="barcode">
                                     </figure>
                                     <div class="mar-top-15">
-                                        <button type="button" class="btn btn-block btn-danger btn-lg btn-barcode">IOS 64 Bit</button>
+                                        <button onclick="AppDownload('918KissIOS64')" type="button" class="btn btn-block btn-danger btn-lg btn-barcode">IOS 64 Bit</button>
                                     </div>
                                 </li>
                                 <li class="playstore">
@@ -65,13 +65,38 @@
                                         <img class="Qrcode" id="918KissIOS" alt="barcode">
                                     </figure>
                                     <div class="mar-top-15">
-                                        <button type="button" class="btn btn-block btn-yellow btn-lg btn-barcode">IOS 32 Bit</button>
+                                        <button onclick="AppDownload('918KissIOS')" type="button" class="btn btn-block btn-yellow btn-lg btn-barcode">IOS 32 Bit</button>
                                     </div>
                                 </li>
                                 <div class="clear-fix"></div>
                             </ul>
 
                         </div>
+
+                        <div class="access-info download-info">
+                            <p class="white-text blue-bg text-center no-mar"><spam class="lang" key="your_access_information">Your Access Information</spam></p>
+                            <div class="row border-bottom no-mar">
+                                <div class="col-sm-5">
+                                    <p class="grey-text"><span>918Kiss <span class="lang" key="username">Username</span></span></p>
+                                </div>
+                                <div class="col-sm-7" style="border-left:1px solid #d7d7d7">
+                                    <p class="grey-text text-center" id="kiss918_username"></p>
+                                </div>
+                            </div>
+                            <div class="row no-mar">
+                                <div class="col-sm-5">
+                                    <p class="grey-text"><span>918Kiss <span class="lang" key="password">Password</span></span></p>
+                                </div>
+                                <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7">
+                                    <p class="grey-text text-center" id="kiss918_password">
+                                        @*<label class="grey-text text-center" id="reset918password">
+                                            <a onclick="ChangePassword(1)" class="grey-text">&nbsp;&nbsp;&nbsp;&nbsp;Reset</a>
+                                        </label>*@
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div id="JokerDownload" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
                         <div class="info-form marginb-none">
@@ -87,7 +112,7 @@
                                         <img class="Qrcode" id="JokerAndroid" alt="barcode">
                                     </figure>
                                     <div class="text-center mar-top-15">
-                                        <button type="button" class="btn btn-block btn-success btn-lg btn-barcode">Android</button>
+                                        <button onclick="AppDownload('JokerAndroid')" type="button" class="btn btn-block btn-success btn-lg btn-barcode">Android</button>
                                     </div>
                                 </li>
                                 <li class="appstore">
@@ -98,13 +123,36 @@
                                         <img class="Qrcode" id="JokerIOS" alt="barcode">
                                     </figure>
                                     <div class="text-center mar-top-15">
-                                        <button type="button" class="btn btn-block btn-danger btn-lg btn-barcode">IOS 64 Bit</button>
+                                        <button onclick="AppDownload('JokerIOS')" type="button" class="btn btn-block btn-danger btn-lg btn-barcode">IOS 64 Bit</button>
                                     </div>
                                 </li>
                                 <div class="clear-fix"></div>
                             </ul>
 
                         </div>
+
+                        <div class="access-info download-info">
+                            <p class="white-text blue-bg text-center no-mar"><spam class="lang" key="your_access_information">Your Access Information</spam></p>
+                            <div class="row border-bottom no-mar">
+                                <div class="col-sm-5">
+                                    <p class="grey-text"><span>Joker <span class="lang" key="username">Username</span></span></p>
+                                </div>
+                                <div class="col-sm-7" style="border-left:1px solid #d7d7d7">
+                                    <p class="grey-text text-center" id="joker_username"></p>
+                                </div>
+                            </div>
+                            <div class="row no-mar">
+                                <div class="col-sm-5">
+                                    <p class="grey-text"><span>Joker  <span class="lang" key="password">Password</span></span></p>
+                                </div>
+                                <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7">
+                                    <p class="grey-text text-center" id="joker_password">
+                                       
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div id="MegaDownload" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
                         <div class="info-form marginb-none">
@@ -120,7 +168,7 @@
                                         <img class="Qrcode" id="Mega888Android" alt="barcode">
                                     </figure>
                                     <div class="mar-top-15">
-                                        <button type="button" class="btn btn-block btn-success btn-lg btn-barcode">Android</button>
+                                        <button onclick="AppDownload('Mega888Android')" type="button" class="btn btn-block btn-success btn-lg btn-barcode">Android</button>
                                     </div>
                                 </li>
                                 <li class="playstore">
@@ -131,7 +179,7 @@
                                         <img class="Qrcode" id="Mega888IOS64" alt="barcode">
                                     </figure>
                                     <div class="mar-top-15">
-                                        <button type="button" class="btn btn-block btn-danger btn-lg btn-barcode">IOS 64 Bit</button>
+                                        <button onclick="AppDownload('Mega888IOS64')" type="button" class="btn btn-block btn-danger btn-lg btn-barcode">IOS 64 Bit</button>
                                     </div>
                                 </li>
                                 <li class="playstore">
@@ -142,12 +190,32 @@
                                         <img class="Qrcode" id="Mega888IOS" alt="barcode">
                                     </figure>
                                     <div class="mar-top-15">
-                                        <button type="button" class="btn btn-block btn-yellow btn-lg btn-barcode">IOS 32 Bit</button>
+                                        <button onclick="AppDownload('Mega888IOS')" type="button" class="btn btn-block btn-yellow btn-lg btn-barcode">IOS 32 Bit</button>
                                     </div>
                                 </li>
                                 <div class="clear-fix"></div>
                             </ul>
-
+                            <div class="access-info download-info">
+                                <p class="white-text blue-bg text-center no-mar"><spam class="lang" key="your_access_information">Your Access Information</spam></p>
+                                <div class="row border-bottom no-mar">
+                                    <div class="col-sm-5">
+                                        <p class="grey-text"><span>Mega888 <span class="lang" key="username">Username</span></span></p>
+                                    </div>
+                                    <div class="col-sm-7" style="border-left:1px solid #d7d7d7">
+                                        <p class="grey-text text-center" id="mega888_username"></p>
+                                    </div>
+                                </div>
+                                <div class="row no-mar">
+                                    <div class="col-sm-5">
+                                        <p class="grey-text"><span>Mega888  <span class="lang" key="password">Password</span></span></p>
+                                    </div>
+                                    <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7">
+                                        <p class="grey-text text-center" id="mega888_password">
+                                            
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div id="Pussy888Download" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
@@ -164,7 +232,7 @@
                                         <img class="Qrcode" id="Pussy888Android" alt="barcode">
                                     </figure>
                                     <div class="text-center mar-top-15">
-                                        <button type="button" class="btn btn-block btn-success btn-lg btn-barcode">Android</button>
+                                        <button onclick="AppDownload('Pussy888Android')" type="button" class="btn btn-block btn-success btn-lg btn-barcode">Android</button>
                                     </div>
                                 </li>
                                 <li class="appstore">
@@ -175,12 +243,30 @@
                                         <img class="Qrcode" id="Pussy888IOS" alt="barcode">
                                     </figure>
                                     <div class="text-center mar-top-15">
-                                        <button type="button" class="btn btn-block btn-danger btn-lg btn-barcode">IOS 64 Bit</button>
+                                        <button onclick="AppDownload('Pussy888IOS')" type="button" class="btn btn-block btn-danger btn-lg btn-barcode">IOS 64 Bit</button>
                                     </div>
                                 </li>
                                 <div class="clear-fix"></div>
                             </ul>
-
+                            <div class="access-info download-info">
+                                <p class="white-text blue-bg text-center no-mar"><spam class="lang" key="your_access_information">Your Access Information</spam></p>
+                                <div class="row border-bottom no-mar">
+                                    <div class="col-sm-5">
+                                        <p class="grey-text"><span>Pussy888 <span class="lang" key="username">Username</span></span></p>
+                                    </div>
+                                    <div class="col-sm-7" style="border-left:1px solid #d7d7d7">
+                                        <p class="grey-text text-center" id="pussy888_username"></p>
+                                    </div>
+                                </div>
+                                <div class="row no-mar">
+                                    <div class="col-sm-5">
+                                        <p class="grey-text"><span>Pussy888  <span class="lang" key="password">Password</span></span></p>
+                                    </div>
+                                    <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7">
+                                        <p class="grey-text text-center" id="pussy888_password"></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -189,7 +275,16 @@
     </div>
 </section>
 <script>
-    AllAnnouncementsCallAPI();
+    $(document).ready(function () {
+        AllAnnouncementsCallAPI();
+        CallDownloadLinkAPI();
+        SetUsernamePassword();
+    });
+
+    setInterval(function () {
+        if (document.getElementById("Pussy888IOS").src == "") CallDownloadLinkAPI();
+    }, 1000)
+
     function openCity(evt, cityName, linknum) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");

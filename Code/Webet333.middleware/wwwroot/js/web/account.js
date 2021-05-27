@@ -99,7 +99,9 @@ async function CheckMobileNumberIsVerified() {
 //#region Logout Function
 function DoLogout() {
     sessionStorage.removeItem("currentUser");
+    localStorage.removeItem("currentUserData");
     sessionStorage.removeItem("userDetails");
+    sessionStorage.removeItem("GamePreFix");
     CheckLoginOrNot()
 }
 //#endregion 
@@ -121,8 +123,26 @@ function DisplayCurrentTime() {
 //#endregion 
 
 //#region Update Time and Interval 
-setInterval(function () {
-    SetAllValueInElement("current_time", DisplayCurrentTime())
+setInterval(async function () {
+    SetAllValueInElement("current_time", DisplayCurrentTime());
+
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+    if (data == null) {
+        SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
+        await AllPromotionCallAPI();
+        await AllAnnouncementsCallAPI();
+        await CallDownloadLinkAPI();
+        await CallAPIForBankPages();
+        SetPromotionInPromotionPage();
+        SetAnnouncementsOnAllPages();
+        AdminBankPageData();
+    }
+    else {
+        if (data.PromotionPageData == null) { await AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
+        if (data.AnnouncementsData == null) { await AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
+        if (data.AdminBankPageData == null) { await CallAPIForBankPages(); SetAdminBankPage() }
+        if (data.DownloadPageData == null) { await CallDownloadLinkAPI(); }
+    }
 }, 1000);
 //#endregion 
 

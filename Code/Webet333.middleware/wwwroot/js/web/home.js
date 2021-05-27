@@ -7,12 +7,23 @@ let SiteData = {
 }
 //#endregion
 
+function SetSiteDataVariable() {
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+
+    SiteData.AdminBankPageData = data.AdminBankPageData;
+    SiteData.AnnouncementsData = data.AnnouncementsData;
+    SiteData.DownloadPageData = data.DownloadPageData;
+    SiteData.PromotionPageData = data.PromotionPageData;
+}
+
 //#region OnLoad Function
 $(document).ready(function () {
     if (GetSessionStorage("siteData") == null) SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
+    if (GetLocalStorage('language') === null) SetLocalStorage('language', 'en-US');
+
+    SetSiteDataVariable()
     SetLastUpdateTime();
     AllPromotionCallAPI();
-    if (GetLocalStorage('language') === null) SetLocalStorage('language', 'en-US');
 });
 //#endregion
 
@@ -94,8 +105,8 @@ async function AllPromotionCallAPI() {
         let res = await GetMethodWithoutToken(promotionEndPoints.webRetrieve);
 
         if (res.status == 200) {
-            data.PromotionPageData = res.response.data;
-            SetSessionStorage("siteData", Encryption(JSON.stringify(data)))
+            SiteData.PromotionPageData = res.response.data;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
         }
     }
 }
@@ -167,24 +178,18 @@ async function AllAnnouncementsCallAPI() {
 
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
-    if (data == null) {
-        SetSiteData();
-        AllAnnouncementsCallAPI();
-    }
-    else {
-        if (data.AnnouncementsData === null) {
+    if (data.AnnouncementsData === null || data.AnnouncementsData == undefined) {
 
-            let res = await GetMethodWithoutToken(settingEndPoints.announcementList);
+        let res = await GetMethodWithoutToken(settingEndPoints.announcementList);
 
-            if (res.status == 200) {
-                data.AnnouncementsData = res.response.data;
-                SetSessionStorage("siteData", Encryption(JSON.stringify(data)));
-                SetAnnouncementsOnAllPages();
-            }
-        }
-        else {
+        if (res.status == 200) {
+            SiteData.AnnouncementsData = res.response.data;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
             SetAnnouncementsOnAllPages();
         }
+    }
+    else {
+        SetAnnouncementsOnAllPages();
     }
 
 }
@@ -198,7 +203,7 @@ function SetAnnouncementsOnAllPages() {
         var announcements = data.AnnouncementsData;
         var announcementsData = "";
         for (i = 0; i < announcements.length; i++)announcementsData += announcements[i].announcement + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-        document.getElementById("announcements").innerHTML = "";
+        SetAllValueInElement("announcements", "");
         SetAllValueInElement("announcements", announcementsData)
     }
 }
