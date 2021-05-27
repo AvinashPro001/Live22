@@ -263,6 +263,10 @@
                                                             <td><span id="MainBalance">fetching.....</span></td>
                                                         </tr>
                                                         <tr>
+                                                            <td class="menu-padding">YeeBet wallet</td>
+                                                            <td><span id="YeeBetBalance">fetching.....</span></td>
+                                                        </tr>
+                                                        <tr>
                                                             <td class="menu-padding">Joker wallet</td>
                                                             <td><span id="JokerBalance">fetching.....</span></td>
                                                         </tr>
@@ -318,10 +322,6 @@
                                                             <td class="menu-padding">Pragmatic wallet</td>
                                                             <td><span id="PragmaticBalance">fetching.....</span></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td class="menu-padding">YeeBet wallet</td>
-                                                            <td><span id="YeeBetBalance">fetching.....</span></td>
-                                                        </tr>
                                                     </table>
                                                 </div>
                                             </div>
@@ -364,7 +364,11 @@
                         <li class="dropdown live-casino" id="livecasino">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang" key="menu_live_casino"></span> <span class="caret"></span></a>
                             <ul class="dropdown-menu dropmenu-main" id="subMenuLive" role="menu">
-
+                                <li>
+                                    <a onclick="logingGame('YeeBet')" data-toggle="tooltip" data-placement="bottom" id="YeeBetGame">
+                                        <img data-toggle="tooltip" data-placement="bottom" style="width:120px" class="img-responsive img-filter" src="~/images/logo_yeebet.png" alt="YeeBet" />
+                                    </a>
+                                </li>
                                 <li>
                                     <a onclick="logingGame('DG')" data-toggle="tooltip" data-placement="bottom" id="DGGame">
                                         <img id="dglive" data-toggle="tooltip" data-placement="bottom" class="img-responsive menu-game-logo img-filter" src="~/images/Dg.png" alt="DG" />
@@ -398,11 +402,6 @@
                                 <li>
                                     <a onclick="logingGame('WM')" data-toggle="tooltip" data-placement="bottom" id="WMGame">
                                         <img data-toggle="tooltip" data-placement="bottom" style="width:120px" class="img-responsive img-filter" src="~/images/logo_wm.png" alt="WM" />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a onclick="logingGame('YeeBet')" data-toggle="tooltip" data-placement="bottom" id="YeeBetGame">
-                                        <img data-toggle="tooltip" data-placement="bottom" style="width:120px" class="img-responsive img-filter" src="~/images/logo_yeebet.png" alt="YeeBet" />
                                     </a>
                                 </li>
                             </ul>
@@ -499,6 +498,12 @@
                                 </li>
                                 <li>
                                     <ul class="list-inline">
+                                        <li><strong>YeeBet Wallet</strong></li>
+                                        <li class="fright" id="ddlYeeBetWallet"></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
                                         <li><strong>918Kiss Wallet</strong></li>
                                         <li class="fright" id="ddl918KissWallet"></li>
                                     </ul>
@@ -579,12 +584,6 @@
                                     <ul class="list-inline">
                                         <li><strong>Pragmatic Wallet</strong></li>
                                         <li class="fright" id="ddlPragmaticWallet"></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul class="list-inline">
-                                        <li><strong>YeeBet Wallet</strong></li>
-                                        <li class="fright" id="ddlYeeBetWallet"></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -692,6 +691,11 @@
                     <ul class="list-inline supported-game">
                         <li>
                             <figure class="pad-top-ten">
+                                <img class="pink-logo" src="../../images/footer/logo_yeebet.png" alt="YeeBet logo">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure class="pad-top-ten">
                                 <img class="pink-logo" src="../../images/kiss-logo-pink.png" alt="918 kiss logo">
                             </figure>
                         </li>
@@ -758,11 +762,6 @@
                         <li>
                             <figure class="pad-top-ten">
                                 <img class="pink-logo" src="../../images/footer/pragmatic.png" alt="WM logo">
-                            </figure>
-                        </li>
-                        <li>
-                            <figure class="pad-top-ten">
-                                <img class="pink-logo" src="../../images/footer/logo_yeebet.png" alt="YeeBet logo">
                             </figure>
                         </li>
                     </ul>

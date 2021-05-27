@@ -556,7 +556,6 @@ async function GameInMaintenance(i) {
             document.getElementById('YeeBetGame').style.filter = "";
             document.getElementById('YeeBetGame').title = "";
             if (window.location.href.toLowerCase().includes('account/profile')) document.getElementById("YeeBetAllIn").disabled = false;
-
         }
     }
 }
