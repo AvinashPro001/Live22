@@ -1,7 +1,6 @@
-﻿
-async function CallAPIForBankPages() {
+﻿async function CallAPIForBankPages() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
-    
+
     if (data.AdminBankPageData == null || data.AdminBankPageData == undefined) {
 
         let res = await GetMethodWithoutToken(settingEndPoints.admin_page_bank);
@@ -13,16 +12,15 @@ async function CallAPIForBankPages() {
     }
 }
 
-
 function SetAdminBankPage() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
 
     if (data != null) {
-        if (data.AdminBankPageData !== null || data.AdminBankPageData !== undefined) {
+        if (data.AdminBankPageData !== null && data.AdminBankPageData !== undefined) {
             var result = data.AdminBankPageData.bankDetails;
 
             $("#bankdetail").find("tr:gt(0)").remove();
-            var bankDetailsData=""
+            var bankDetailsData = ""
             for (i = 0; i < result.length; i++) {
                 bankDetailsData += '<tr><td><img src="' + result[i].bankLogo + '" width="150px" /></td><td>' + result[i].accountName + '</td><td>' + result[i].accountNo + '</td></tr>';
             }
@@ -47,7 +45,44 @@ function SetAdminBankPage() {
             for (i = 0; i < impNotesData.length; i++) impNotesHTML += '<li class="mar-btm-ten">' + impNotesData[i].note + '</li>'
             SetAllValueInElement("imp_notes", impNotesHTML);
 
-            SetAllValueInElement("UpdateTime",DisplayCurrentTime());
+            SetAllValueInElement("UpdateTime", DisplayCurrentTime());
         }
     }
+}
+
+async function CallAllBankAPI() {
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
+
+    if (data.AllBankPageData == null || data.AllBankPageData == undefined) {
+
+        let res = await GetMethodWithoutToken(settingEndPoints.allbank);
+
+        if (res.status == 200) {
+            SiteData.AllBankPageData = res.response.data;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
+            SetWithdrawPageBank();
+        }
+    }
+    else {
+        SetWithdrawPageBank();
+    }
+}
+
+
+async function SetWithdrawPageBank() {
+    console.log("Inside");
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
+    allbankHTML = ""
+    if (data.AllBankPageData !== null && data.AllBankPageData !== undefined) {
+        for (i = 0; i < data.AllBankPageData.length; i++)
+            allbankHTML += '<li class="tablinks"><a class="thm-txt" href="#" data-toggle="tab" ><figure onclick="SetWithdrawBankIdInVariable(\'' + data.AllBankPageData[i].id + '\')"><img style="object-position:center !important" class="tab-bankicon" src="' + data.AllBankPageData[i].Logo + '" alt=""></figure></a><p>' + data.AllBankPageData[i].bankName + '</p></li>';
+
+        SetAllValueInElement("withdraw_bank_list", allbankHTML);
+    }
+}
+
+
+var WithdrawBankId;
+function SetWithdrawBankIdInVariable(Id) {
+    WithdrawBankId = Id;
 }

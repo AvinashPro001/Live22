@@ -585,7 +585,8 @@ label.mar-btm-no {margin-bottom: 0; }
 .company-deposit-list .nav-tabs>li:first-child img {object-position: 50% -20%} 
 .company-deposit-list .nav-tabs>li:first-child.active img {object-position: 50% 130%} 
 #Deposit .tabcontent.active {display: block!important; }
-#Bank-Transfer.tabcontent.active {width: 100%} 
+#Bank-Transfer.tabcontent.active {width: 100%;display: block!important; }
+#Vader-Pay.tabcontent.active {width: 100%;display: block!important; }
 .company-deposit-list .nav-tabs>li.active img {border-color: #0c7ba1; object-position: 50% 110%} 
 .company-deposit-list .nav-tabs>li.active>a {background: 0 0; border: 0; }
 .select-checkboxes .promotion-content .full-img {height: auto; }

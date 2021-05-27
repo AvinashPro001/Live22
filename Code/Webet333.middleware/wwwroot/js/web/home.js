@@ -3,7 +3,8 @@ let SiteData = {
     PromotionPageData: null,
     AnnouncementsData: null,
     AdminBankPageData: null,
-    DownloadPageData: null
+    DownloadPageData: null,
+    AllBankPageData: null,
 }
 //#endregion
 
@@ -20,7 +21,7 @@ function SetSiteDataVariable() {
 $(document).ready(function () {
     if (GetSessionStorage("siteData") == null) SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
     if (GetLocalStorage('language') === null) SetLocalStorage('language', 'en-US');
-
+    SetLocalStorage("IsSedularExecute", false);
     SetSiteDataVariable()
     SetLastUpdateTime();
     AllPromotionCallAPI();

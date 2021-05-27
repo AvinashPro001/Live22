@@ -112,7 +112,7 @@
                                             <label class="company-deposit-list">
                                                 <ul class="nav nav-tabs">
                                                     <li class="tablinks">
-                                                        <a class="thm-txt" href="#" data-toggle="tab">
+                                                        <a class="thm-txt" href="#Vader-Pay" data-toggle="tab">
                                                             <figure>
                                                                 <img style="object-position:center !important" class="tab-bankicon" src="~/images/deposit_option1.png" alt="" />
                                                             </figure>
@@ -120,7 +120,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="active tablinks">
-                                                        <a class="thm-txt" href="#" data-toggle="tab">
+                                                        <a class="thm-txt" href="#Bank-Transfer" data-toggle="tab">
                                                             <figure>
                                                                 <img style="object-position:center !important" class="tab-bankicon" src="~/images/deposit_option2.png" alt="" />
                                                             </figure>
@@ -131,138 +131,204 @@
                                             </label>
                                         </li>
                                     </ul>
-                                    <ul class="deposit-bank-listing password-upadte white-text">
-                                        <li class="mar-btm-fifteen">
-                                            <label class="fleft">
-                                                <p class="big no-mar lang blk-text" key="withdrawal_bankname">Bank Name:</p>
-                                            </label>
-                                            <label class="fright">
-                                                <div class="bank-selection">
-                                                    <ul class="bank-listing step-2-desc highlight-bank" id="Depsoit_bank_list">
-                                                        <li class="active tablinks">
-                                                            <a class="thm-txt" href="#" data-toggle="tab">
-                                                                <figure>
-                                                                    <img style="object-position:center !important" class="tab-bankicon" src="~/images/bankdetails1.png" alt="">
-                                                                </figure>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </label>
-                                        </li>
-                                        <li class="mar-btm-fifteen">
-                                            <label class="fleft">
-                                                <p class="big no-mar blk-text lang">Bank Account:</p>
-                                            </label>
-                                            <label class="fright mendatory black-text">
-                                                <p>
-                                                    <span></span>
-                                                    Chong Jing Hung
-                                                </p>
-                                                <br>
-                                                <p>
-                                                    <span></span>
-                                                    331234567890
-                                                </p>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="fleft">
-                                                <p class="big no-mar lang blk-text">Amount:</p>
-                                            </label>
-                                            <label class="fright card-number mendatory">
-                                                <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00">
+                                </div>
 
-                                                <div class="min-max-limit">
-                                                    <ul class="d-flex">
-                                                        <li class="data-blog">50</li>
-                                                        <li class="data-blog">100</li>
-                                                        <li class="data-blog">300</li>
-                                                        <li class="data-blog">500</li>
-                                                        <li class="data-blog">1000</li>
-                                                    </ul>
-                                                </div>
-                                            </label>
-                                        </li>
-                                        <br>
-                                        <li class="pad-btm-ten">
-                                            <label class="fleft">
-                                                <p class="big no-mar lang blk-text">Date Time:</p>
-                                            </label>
-                                            <label class="fright card-number mendatory">
-                                                <input name="txt_reference_number" type="text" class="reg-form " placeholder="Select Date" id="datepicker0">
-                                            </label>
-                                        </li>
-                                        <li class="pad-btm-ten">
-                                            <label class="fleft">
-                                                <p class="big no-mar lang blk-text" key="deposit_reference_number">Reference Number:</p>
-                                            </label>
-                                            <label class="fright card-number mendatory">
-                                                <input name="txt_reference_number" type="text" class="reg-form " placeholder="Enter Reference Number" autocomplete="new-password">
-                                            </label>
-                                        </li>
-                                        <li class="pad-btm-ten scanned-file">
-                                            <label class="fleft">
-                                                <p class="big no-mar lang blk-text" key="deposit_scanned_receipt">Scanned Receipt:</p>
-                                            </label>
-                                            <div class="fright upload">
-                                                <div class="d-flex">
-                                                    <div class="fake-upload-btn upload-btn">
-                                                        <span class="lang" key="deposit_upload_receipt">Upload Receipt</span>
-                                                        <input type="file" id="receipt" multiple="">
+                                <div id="Bank-Transfer" class="tabcontent active">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8">
+                                            <ul class="deposit-bank-listing password-upadte white-text">
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang blk-text" key="withdrawal_bankname">Bank Name:</p>
+                                                    </label>
+                                                    <label class="fright">
+                                                        <div class="bank-selection">
+                                                            <ul class="bank-listing step-2-desc highlight-bank" id="Depsoit_bank_list">
+                                                                <li class="active tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank_name.png" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="active tablinks">
+                                                                    <a class="thm-txt" href="#" data-toggle="tab">
+                                                                        <figure>
+                                                                            <img style="object-position:center !important" class="tab-bankicon" src="http://images.webet333.com/bank_images/admin_bank_icon/bcca9f02-867c-42d8-84b4-b04285953099.jpg" alt="">
+                                                                        </figure>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar blk-text lang">Bank Account:</p>
+                                                    </label>
+                                                    <label class="fright mendatory black-text">
+                                                        <p>
+                                                            <span></span>
+                                                            Chong Jing Hung
+                                                        </p>
+                                                        <br>
+                                                        <p>
+                                                            <span></span>
+                                                            331234567890
+                                                        </p>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang blk-text">Amount:</p>
+                                                    </label>
+                                                    <label class="fright card-number mendatory">
+                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00">
+
+                                                        <div class="min-max-limit">
+                                                            <ul class="d-flex">
+                                                                <li class="data-blog">50</li>
+                                                                <li class="data-blog">100</li>
+                                                                <li class="data-blog">300</li>
+                                                                <li class="data-blog">500</li>
+                                                                <li class="data-blog">1000</li>
+                                                            </ul>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <br>
+                                                <li class="pad-btm-ten">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang blk-text">Date Time:</p>
+                                                    </label>
+                                                    <label class="fright card-number mendatory">
+                                                        <input name="txt_reference_number" type="text" class="reg-form " placeholder="Select Date" id="datepicker0">
+                                                    </label>
+                                                </li>
+                                                <li class="pad-btm-ten">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang blk-text" key="deposit_reference_number">Reference Number:</p>
+                                                    </label>
+                                                    <label class="fright card-number mendatory">
+                                                        <input name="txt_reference_number" type="text" class="reg-form " placeholder="Enter Reference Number" autocomplete="new-password">
+                                                    </label>
+                                                </li>
+                                                <li class="pad-btm-ten scanned-file">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang blk-text" key="deposit_scanned_receipt">Scanned Receipt:</p>
+                                                    </label>
+                                                    <div class="fright upload">
+                                                        <div class="d-flex">
+                                                            <div class="fake-upload-btn upload-btn">
+                                                                <span class="lang" key="deposit_upload_receipt">Upload Receipt</span>
+                                                                <input type="file" id="receipt" multiple="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div>
+                                                            <ul id="selectedFiles"></ul>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                                <div>
-                                                    <ul id="selectedFiles"></ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 pl0">
+                                            <div class="info-form notice-bank-transfer deposit-section pad-top-twentyfive" style="background-color: #ffffff; border-radius: 6px;border:1px solid #c7c7c7;">
+                                                <div class="pad-lr-comman">
+                                                    <h6 class="info-notice"><span class="lang" key="important_notice">IMPORTANT NOTICE</span></h6>
+                                                    <ol>
+                                                        <li><span class="lang" key="instruction_1"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </li>
+                                                        <li><span class="lang" key="instruction_2"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type  </li>
+                                                        <li><span class="lang" key="instruction_3"></span>when an unknown printer took a galley of type and scrambled it to make a type specimen book. </li>
+                                                        <li><span class="lang" key="instruction_4"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </li>
+                                                        <li><span class="lang" key="instruction_5"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </li>
+                                                        <li><span class="lang" key="instruction_5"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. </li>
+                                                        <li><span class="lang" key="instruction_5"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. </li>
+
+                                                    </ol>
                                                 </div>
                                             </div>
-                                        </li>
-                                    </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <section class="select-checkboxes">
+                                                <h3 class="mar-top-15">Please select Promotion below:</h3>
+                                                <ul class="mar-top-15 promotion-choose" id="promotion">
+                                                    <li class="tablinks">
+                                                        <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
+                                                        <p>5% Unlimited Reload Bonus</p>
+                                                    </li>
+                                                    <li class="active tablinks">
+                                                        <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
+                                                        <p>RM10 Telegram Free Credit</p>
+                                                    </li>
+                                                    <li class="tablinks">
+                                                        <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
+                                                        <p>20% CNY Angpao</p>
+                                                    </li>
+                                                </ul>
+                                            </section>
+                                            <div class="text-left mar-comman">
+                                                <button name="" value="submit" class="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 pl0">
-                                    <div class="info-form notice-bank-transfer deposit-section pad-top-twentyfive" style="background-color: #ffffff; border-radius: 6px;border:1px solid #c7c7c7;">
-                                        <div class="pad-lr-comman">
-                                            <h6 class="info-notice"><span class="lang" key="important_notice">IMPORTANT NOTICE</span></h6>
-                                            <ol>
-                                                <li><span class="lang" key="instruction_1"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </li>
-                                                <li><span class="lang" key="instruction_2"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type  </li>
-                                                <li><span class="lang" key="instruction_3"></span>when an unknown printer took a galley of type and scrambled it to make a type specimen book. </li>
-                                                <li><span class="lang" key="instruction_4"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </li>
-                                                <li><span class="lang" key="instruction_5"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </li>
-                                                <li><span class="lang" key="instruction_5"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. </li>
-                                                <li><span class="lang" key="instruction_5"></span> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. </li>
 
-                                            </ol>
+                                <div id="Vader-Pay" class="tabcontent">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8">
+                                            <ul class="deposit-bank-listing password-upadte white-text">
+                                                <li>
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang blk-text">Amount:</p>
+                                                    </label>
+                                                    <label class="fright card-number mendatory">
+                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00">
+
+                                                        <div class="min-max-limit">
+                                                            <ul class="d-flex">
+                                                                <li class="data-blog">50</li>
+                                                                <li class="data-blog">100</li>
+                                                                <li class="data-blog">300</li>
+                                                                <li class="data-blog">500</li>
+                                                                <li class="data-blog">1000</li>
+                                                            </ul>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <section class="select-checkboxes">
+                                                <h3 class="mar-top-15">Please select Promotion below:</h3>
+                                                <ul class="mar-top-15 promotion-choose" id="promotion">
+                                                    <li class="tablinks">
+                                                        <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
+                                                        <p>5% Unlimited Reload Bonus</p>
+                                                    </li>
+                                                    <li class="active tablinks">
+                                                        <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
+                                                        <p>RM10 Telegram Free Credit</p>
+                                                    </li>
+                                                    <li class="tablinks">
+                                                        <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
+                                                        <p>20% CNY Angpao</p>
+                                                    </li>
+                                                </ul>
+                                            </section>
+                                            <div class="text-left mar-comman">
+                                                <button name="" value="submit" class="submit">Submit</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <section class="select-checkboxes">
-                                        <h3 class="mar-top-15">Please select Promotion below:</h3>
-                                        <ul class="mar-top-15 promotion-choose" id="promotion">
-                                            <li class="tablinks">
-                                                <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
-                                                <p>5% Unlimited Reload Bonus</p>
-                                            </li>
-                                            <li class="active tablinks">
-                                                <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
-                                                <p>RM10 Telegram Free Credit</p>
-                                            </li>
-                                            <li class="tablinks">
-                                                <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
-                                                <p>20% CNY Angpao</p>
-                                            </li>
-                                        </ul>
-                                    </section>
-                                    <div class="text-left mar-comman">
-                                        <button name="" value="submit" class="submit">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
 
                     </div>
@@ -286,7 +352,7 @@
                                                         <div class="bank-selection">
 
                                                             <ul class="bank-listing highlight-bank" id="withdraw_bank_list">
-                                                                <li class="active tablinks">
+                                                                @*<li class="active tablinks">
                                                                     <a class="thm-txt" href="#" data-toggle="tab">
                                                                         <figure>
                                                                             <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank1.png" alt="">
@@ -414,7 +480,7 @@
                                                                         </figure>
                                                                     </a>
                                                                     <p>Simpanan Bank</p>
-                                                                </li>
+                                                                </li>*@
                                                             </ul>
                                                         </div>
                                                     </label>
@@ -1808,8 +1874,9 @@
             changeMonth: true,
             changeYear: true
         });
+    });
 
-
-
+    $(document).ready(function () {
+        CallAllBankAPI();
     });
 </script>

@@ -123,27 +123,46 @@ function DisplayCurrentTime() {
 //#endregion 
 
 //#region Update Time and Interval 
-setInterval(async function () {
-    SetAllValueInElement("current_time", DisplayCurrentTime());
+$(document).ready(function () {
+    setInterval(async function () {
+        SetAllValueInElement("current_time", DisplayCurrentTime());
 
-    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
-    if (data == null) {
-        SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
-        await AllPromotionCallAPI();
-        await AllAnnouncementsCallAPI();
-        await CallDownloadLinkAPI();
-        await CallAPIForBankPages();
-        SetPromotionInPromotionPage();
-        SetAnnouncementsOnAllPages();
-        AdminBankPageData();
-    }
-    else {
-        if (data.PromotionPageData == null) { await AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
-        if (data.AnnouncementsData == null) { await AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
-        if (data.AdminBankPageData == null) { await CallAPIForBankPages(); SetAdminBankPage() }
-        if (data.DownloadPageData == null) { await CallDownloadLinkAPI(); }
-    }
-}, 1000);
+        try {
+            if (GetLocalStorage("IsSedularExecute") == null) SetLocalStorage("IsSedularExecute", false);
+
+            if (GetLocalStorage("IsSedularExecute") == "false") {
+                SetLocalStorage("IsSedularExecute", true);
+
+                var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+                if (data == null) {
+                    SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
+                    await AllPromotionCallAPI();
+                    await AllAnnouncementsCallAPI();
+                    await CallDownloadLinkAPI();
+                    await CallAPIForBankPages();
+                    if (GetSessionStorage("currentUser") != null) await CallAllBankAPI();
+                    AdminBankPageData();
+                    SetPromotionInPromotionPage();
+                    SetAnnouncementsOnAllPages();
+                }
+                else {
+                    if (data.PromotionPageData == null) { await AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
+                    if (data.AnnouncementsData == null) { await AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
+                    if (data.DownloadPageData == null) { await CallDownloadLinkAPI(); }
+                    if (data.AdminBankPageData == null) { await CallAPIForBankPages(); SetAdminBankPage() }
+                    if (GetSessionStorage("currentUser") != null) if (data.AllBankPageData == null) await CallAllBankAPI();
+
+                }
+
+                SetLocalStorage("IsSedularExecute", false);
+            }
+        }
+        catch (e) {
+            SetLocalStorage("IsSedularExecute", false);
+        }
+
+    }, 1000);
+});
 //#endregion 
 
 //#region Get Profile And Set In Session Storage
