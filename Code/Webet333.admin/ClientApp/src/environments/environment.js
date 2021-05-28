@@ -186,6 +186,7 @@ exports.customer = {
     PlaytechBettingDetails: exports.environment.apiUrl + 'Game/Manually/Playtech_Betting_Details',
     M8BettingDetails: exports.environment.apiUrl + 'Game/Manually/M8_Betting_Details',
     MaxbetBettingDetails: exports.environment.apiUrl + 'Game/Manually/Maxbet_Betting_Details',
+    YeeBetBettingDetails: exports.environment.apiUrl + 'Game/Manually/YeeBet_Betting_Details',
     Kiss918PlayerLog: exports.environment.apiUrl + '918kiss/playerlog',
     Pussy888PlayerLog: exports.environment.apiUrl + 'pussy888/playerlog',
     MaxbetDefaultBettingLimit: exports.environment.apiUrl + 'MaxBet/DefaultBettingLimitSet',

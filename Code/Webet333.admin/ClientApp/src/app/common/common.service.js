@@ -30,7 +30,30 @@ var CommonService = /** @class */ (function () {
             PleaseEnterValidFreeCreditEventName: 'Please enter valid free credit event name',
             PleaseSetFreeCreditEventTerm: 'Please set free credit event term',
             EmptyTable: 'Table is Empty!',
-            SelectPromotionId: 'Please Select Promotion'
+            SelectPromotion: 'Please Select Promotion',
+            PleaseSelectGame: 'Please Select Game !!!!',
+            PleaseGetTheBettingDetailsOfGames: 'Please Get The Betting Details of games.',
+            PleaseSelectFromDate: 'Please Select From Date.',
+            PleaseSelectToDate: 'Please Select To Date.'
+        };
+        //#endregion Check variable null, undefined, NaN
+        //#region Game List
+        this.GameName = {
+            M8: 'M8',
+            AG: 'AG',
+            Playtech: 'Playtech',
+            Joker: 'Joker',
+            Mega888: 'Mega888',
+            _918Kiss: '918 Kiss',
+            DG: 'DG',
+            SexyBaccarat: 'Sexy Baccarat',
+            SA: 'SA',
+            Pussy888: 'Pussy888',
+            AllBet: 'AllBet',
+            WM: 'WM',
+            PragmaticPlay: 'Pragmatic Play',
+            MaxBet: 'MaxBet',
+            YeeBet: 'YeeBet'
         };
     }
     CommonService.prototype.add = function (apiPath, data) {

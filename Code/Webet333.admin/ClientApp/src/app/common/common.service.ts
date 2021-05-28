@@ -185,7 +185,11 @@ export class CommonService {
         PleaseEnterValidFreeCreditEventName: 'Please enter valid free credit event name',
         PleaseSetFreeCreditEventTerm: 'Please set free credit event term',
         EmptyTable: 'Table is Empty!',
-        SelectPromotion: 'Please Select Promotion'
+        SelectPromotion: 'Please Select Promotion',
+        PleaseSelectGame: 'Please Select Game !!!!',
+        PleaseGetTheBettingDetailsOfGames: 'Please Get The Betting Details of games.',
+        PleaseSelectFromDate: 'Please Select From Date.',
+        PleaseSelectToDate: 'Please Select To Date.'
     };
 
     //#endregion Error List
@@ -212,5 +216,28 @@ export class CommonService {
     CheckVariable(variable) {
         return variable == null || variable == undefined || variable == NaN || variable == '';
     }
+
     //#endregion Check variable null, undefined, NaN
+
+    //#region Game List
+
+    public GameName = {
+        M8: 'M8',
+        AG: 'AG',
+        Playtech: 'Playtech',
+        Joker: 'Joker',
+        Mega888: 'Mega888',
+        _918Kiss: '918 Kiss',
+        DG: 'DG',
+        SexyBaccarat: 'Sexy Baccarat',
+        SA: 'SA',
+        Pussy888: 'Pussy888',
+        AllBet: 'AllBet',
+        WM: 'WM',
+        PragmaticPlay: 'Pragmatic Play',
+        MaxBet: 'MaxBet',
+        YeeBet: 'YeeBet'
+    }
+
+    //#endregion Game List
 }
