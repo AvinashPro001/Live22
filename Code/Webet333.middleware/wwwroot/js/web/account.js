@@ -1,7 +1,8 @@
 ﻿//#region OnLoad 
 $(document).ready(function () {
     LoginSectionHideUnhide();
-    ProfileData()
+    GetProfileAndSetInSessionStorage();
+    ProfileData();
 });
 //#endregion 
 
@@ -26,7 +27,7 @@ $(document).ready(function () {
                     await AllAnnouncementsCallAPI();
                     await CallDownloadLinkAPI();
                     await CallAPIForBankPages();
-                    if (GetSessionStorage("currentUser") != null) await CallAllBankAPI();
+                    if (GetLocalStorage("currentUser") != null) await CallAllBankAPI();
                     AdminBankPageData();
                     SetPromotionInPromotionPage();
                     SetAnnouncementsOnAllPages();
@@ -36,7 +37,7 @@ $(document).ready(function () {
                     if (data.AnnouncementsData == null) { await AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
                     if (data.DownloadPageData == null) { await CallDownloadLinkAPI(); }
                     if (data.AdminBankPageData == null) { await CallAPIForBankPages(); SetAdminBankPage() }
-                    if (GetSessionStorage("currentUser") != null) if (data.AllBankPageData == null) await CallAllBankAPI();
+                    if (GetLocalStorage("currentUser") != null) if (data.AllBankPageData == null) await CallAllBankAPI();
 
                 }
 
@@ -55,7 +56,7 @@ $(document).ready(function () {
 //#region Logout Function
 
 function DoLogout() {
-    sessionStorage.removeItem("currentUser");
+    localStorage.removeItem("currentUser");
     localStorage.removeItem("currentUserData");
     sessionStorage.removeItem("userDetails");
     sessionStorage.removeItem("GamePreFix");
@@ -85,7 +86,7 @@ function DisplayCurrentTime() {
 //#region Hide or UnHide After Login and Before Login
 
 function LoginSectionHideUnhide() {
-    if (GetSessionStorage("currentUser") == null) {
+    if (GetLocalStorage("currentUser") == null) {
         document.getElementById("afterlogin").innerHTML = "";
         document.getElementById("bankMainMenu").innerHTML = "";
     } else {
@@ -98,7 +99,7 @@ function LoginSectionHideUnhide() {
 //#region Check users Login or Not
 
 function CheckLoginOrNot() {
-    if (GetSessionStorage("currentUser") == null) window.location.href = "/";
+    if (GetLocalStorage("currentUser") == null) window.location.href = "/";
 }
 
 //#endregion
@@ -110,16 +111,16 @@ function CheckLoginOrNot() {
 //#region "ASYNC" Set Users Profile if User Login
 
 async function ProfileData() {
-    if (GetSessionStorage('currentUser') !== null) {
-        var ProfileData = JSON.parse(Decryption(GetSessionStorage("userDetails")))
-        if (ProfileData !== null) {
+    if (GetLocalStorage('currentUser') !== null) {
+        var res = JSON.parse(Decryption(GetSessionStorage("userDetails")))
+        if (res !== null) {
             if (!window.location.href.toLocaleLowerCase().includes("web/otpverified")) {
-                if (!ProfileData.mobilenoConfirmed) window.location.href = "/web/otpverified"
+                if (!res.mobilenoConfirmed) window.location.href = "/web/otpverified"
             }
-            SetAllImagePath('login_user_vip_level', ProfileData.vipBanner)
-            SetAllValueInElement("login_username", ProfileData.username)
-            SetBackgroudImagePath("silver_wallet", ProfileData.vipBanner)
-            SetAllValueInElement("vip_level_name", ProfileData.vipLevelName)
+            SetAllImagePath('login_user_vip_level', res.vipBanner)
+            SetAllValueInElement("login_username", res.username)
+            SetBackgroudImagePath("silver_wallet", res.vipBanner)
+            SetAllValueInElement("vip_level_name", res.vipLevelName)
         }
         else {
             await GetProfileAndSetInSessionStorage();
@@ -153,7 +154,7 @@ async function CheckMobileNumberIsVerified() {
 //#region "ASYNC" Get Profile And Set In Session Storage
 
 async function GetProfileAndSetInSessionStorage() {
-    if (GetSessionStorage('currentUser') !== null) {
+    if (GetLocalStorage('currentUser') !== null) {
         var res = await GetMethod(accountEndPoints.getProfile);
         SetSessionStorage('userDetails', Encryption(JSON.stringify(res.response.data)));
     }
@@ -164,7 +165,7 @@ async function GetProfileAndSetInSessionStorage() {
 //#region "ASYNC" Get Global Parameter And Set In Session Storage
 
 async function GetGlobalParameterAndSetInSessionStorage() {
-    if (GetSessionStorage('currentUser') !== null) {
+    if (GetLocalStorage('currentUser') !== null) {
         var globalParameter = JSON.parse(Decryption(GetSessionStorage("GamePreFix")));
         if (globalParameter == null) {
             var gamePrefix = await GetMethod(globalEndPoints.globalParameter);
@@ -204,7 +205,7 @@ async function DoLogin() {
     }
 
     SetLocalStorage('currentUserData', Encryption($("#txt_login_password").val()));
-    SetSessionStorage("currentUser", res.response.data.access_token);
+    SetLocalStorage("currentUser", res.response.data.access_token);
     SetSessionStorage("userDetails", Encryption(JSON.stringify(res.response.data.user)))
     window.location.reload();
 }

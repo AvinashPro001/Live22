@@ -44,12 +44,12 @@ function Encryption(plaintext) {
 async function PostMethod(endPoint, model) {
     if (GetLocalStorage('language') === null)
         return null;
-
+    
     return $.ajax({
         type: "POST",
         data: JSON.stringify(model),
         headers: {
-            'Authorization': 'Bearer ' + GetSessionStorage('currentUser'),
+            'Authorization': 'Bearer ' + GetLocalStorage('currentUser'),
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'Access-Control-Max-Age': 300,
@@ -81,7 +81,7 @@ function GetMethod(endPoint) {
     return $.ajax({
         type: "GET",
         headers: {
-            'Authorization': 'Bearer ' + GetSessionStorage('currentUser'),
+            'Authorization': 'Bearer ' + GetLocalStorage('currentUser'),
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'Access-Control-Max-Age': 300,

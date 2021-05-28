@@ -118,7 +118,7 @@ function SetUserDefaultBank() {
 
 var UserBank;
 async function UsersBankDetails() {
-    if (GetSessionStorage('currentUser') !== null) {
+    if (GetLocalStorage('currentUser') !== null) {
         var model = {
         };
         var res = await PostMethod(accountEndPoints.userBankDetail, model);

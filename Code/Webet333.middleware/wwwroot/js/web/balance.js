@@ -44,7 +44,7 @@ let GameUsernames = {
 
 //#region Onload
 $(document).ready(function () {
-    if (GetSessionStorage('currentUser') !== null) {
+    if (GetLocalStorage('currentUser') !== null) {
         SetUsername();
         LoadAllBalance();
         setTimeout(function () {

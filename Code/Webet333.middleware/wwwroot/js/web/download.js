@@ -56,7 +56,7 @@ function SetPleaseLoginText() {
 //#region Set Username Password in Download Page 
 
 function SetUsernamePassword() {
-    if (GetSessionStorage("currentUser") == null) {
+    if (GetLocalStorage("currentUser") == null) {
         SetPleaseLoginText()
     }
     else {
