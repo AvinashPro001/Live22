@@ -47,26 +47,28 @@ $(document).ready(function () {
     if (GetSessionStorage('currentUser') !== null) {
         SetUsername();
         LoadAllBalance();
-        setInterval(function () {
-            if (
-                UsersBalance.MainBalance == null ||
-                UsersBalance.AGBalance == null ||
-                UsersBalance.DGBalance == null ||
-                UsersBalance.SABalance == null ||
-                UsersBalance.WMBalance == null ||
-                UsersBalance.PlaytechBalance == null ||
-                UsersBalance.SexyBaccaratBalance == null ||
-                UsersBalance.AllBetBalance == null ||
-                UsersBalance.PragmaticBalance == null ||
-                UsersBalance.Kiss918Balance == null ||
-                UsersBalance.JokerBalance == null ||
-                UsersBalance.Mega888Balance == null ||
-                UsersBalance.Pussy888Balance == null ||
-                UsersBalance.M8Balance == null ||
-                UsersBalance.MaxBetBalance == null
-            )
-                LoadAllBalance();
-        }, 1000);
+        setTimeout(function () {
+            setInterval(function () {
+                if (
+                    UsersBalance.MainBalance == null ||
+                    UsersBalance.AGBalance == null ||
+                    UsersBalance.DGBalance == null ||
+                    UsersBalance.SABalance == null ||
+                    UsersBalance.WMBalance == null ||
+                    UsersBalance.PlaytechBalance == null ||
+                    UsersBalance.SexyBaccaratBalance == null ||
+                    UsersBalance.AllBetBalance == null ||
+                    UsersBalance.PragmaticBalance == null ||
+                    UsersBalance.Kiss918Balance == null ||
+                    UsersBalance.JokerBalance == null ||
+                    UsersBalance.Mega888Balance == null ||
+                    UsersBalance.Pussy888Balance == null ||
+                    UsersBalance.M8Balance == null ||
+                    UsersBalance.MaxBetBalance == null
+                )
+                    LoadAllBalance();
+            }, 1000);
+        }, 15000);
     }
 });
 //#endregion Onload

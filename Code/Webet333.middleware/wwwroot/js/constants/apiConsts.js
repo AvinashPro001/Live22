@@ -1,7 +1,7 @@
 ﻿var baseUrl = "http://localhost:8080/api/v1/";
 
 var apiEndPoints = {
-    login: "account/login",
+    //login: "account/login",
     //register: "account/register",
     //forgotPassword: "account/forgot_password",
     //resetPassword: "account/reset_password",
@@ -148,6 +148,8 @@ var globalEndPoints = {
 var accountEndPoints = {
     login: "account/login",
     getProfile: "customer/profile",
+    userBankDetail: "customer/bank",
+    withdrawPromotionList: 'payments/check/withdrawamount/list',
 };
 
 var promotionEndPoints = {

@@ -1,4 +1,8 @@
-﻿async function CallAPIForBankPages() {
+﻿$(document).ready(function () {
+    UsersBankDetails();
+});
+
+async function CallAPIForBankPages() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
 
     if (data.AdminBankPageData == null || data.AdminBankPageData == undefined) {
@@ -68,21 +72,97 @@ async function CallAllBankAPI() {
     }
 }
 
-
-async function SetWithdrawPageBank() {
-    console.log("Inside");
+function SetWithdrawPageBank() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
     allbankHTML = ""
     if (data.AllBankPageData !== null && data.AllBankPageData !== undefined) {
-        for (i = 0; i < data.AllBankPageData.length; i++)
-            allbankHTML += '<li class="tablinks"><a class="thm-txt" href="#" data-toggle="tab" ><figure onclick="SetWithdrawBankIdInVariable(\'' + data.AllBankPageData[i].id + '\')"><img style="object-position:center !important" class="tab-bankicon" src="' + data.AllBankPageData[i].Logo + '" alt=""></figure></a><p>' + data.AllBankPageData[i].bankName + '</p></li>';
-
+        for (i = 0; i < data.AllBankPageData.length; i++) {
+            allbankHTML += '<li class="tablinks"><a class="thm-txt" href="#" data-toggle="tab" ><figure  data-bankname="' + data.AllBankPageData[i].bankName + '" onclick="SetWithdrawBankIdInVariable(\'' + data.AllBankPageData[i].id + '\',\'' + data.AllBankPageData[i].bankName + '\')"><img style="object-position:center !important" class="tab-bankicon" src="' + data.AllBankPageData[i].Logo + '" alt=""></figure></a><p>' + data.AllBankPageData[i].bankName + '</p></li>';
+        }
         SetAllValueInElement("withdraw_bank_list", allbankHTML);
+        SetUserDefaultBank();
+    }
+    else {
+        setTimeout(function () { SetWithdrawPageBank() }, 2000)
     }
 }
 
-
 var WithdrawBankId;
-function SetWithdrawBankIdInVariable(Id) {
+function SetWithdrawBankIdInVariable(Id, BankName) {
     WithdrawBankId = Id;
+    $.each(UserBank, function () {
+        if (BankName == this.bankName) {
+            $('#withdraw_account_number').val(this.accountNo);
+            $("#withdraw_account_number").attr("disabled", "disabled");
+        }
+        else {
+            $('#withdraw_account_number').val("");
+            $("#withdraw_account_number").removeAttr("disabled");
+        }
+    });
 }
+
+function SetUserDefaultBank() {
+    try {
+        var banklist = $('[data-bankname]')
+        $.each(banklist, function () {
+            if (this.dataset.bankname == UserBank[0].bankName) {
+                $(this).click();
+            }
+        });
+    }
+    catch (e) {
+        setTimeout(function () { SetUserDefaultBank(); }, 2000)
+    }
+}
+
+var UserBank;
+async function UsersBankDetails() {
+    if (GetSessionStorage('currentUser') !== null) {
+        var model = {
+        };
+        var res = await PostMethod(accountEndPoints.userBankDetail, model);
+        if (res.status == 200) {
+            UserBank = res.response.data;
+        }
+    }
+}
+
+async function SetWithdrawLimit() {
+    var res = await GetMethod(accountEndPoints.getProfile);
+    if (res.status == 200) {
+        SetSessionStorage('userDetails', Encryption(JSON.stringify(res.response.data)));
+        $("#txt_withdraw_amount").attr("placeholder", "Min/Max Limit: 10.00/ " + parseFloat(res.response.data.withdrawLimit).toFixed(2));
+    }
+    var model = {}
+    var WithdrawPromotionListRes = await PostMethod(accountEndPoints.withdrawPromotionList, model);
+    if (WithdrawPromotionListRes.status == 200) {
+        WithdrawPromotionListRes = WithdrawPromotionListRes.response.data;
+        SetAllValueInElement("WithdrawAmount", "MYR " + WithdrawPromotionListRes.totalAmount);
+        SetAllValueInElement("total_withdraw_amount", "Total Available Withdraw Amount : " + WithdrawPromotionListRes.totalAmount + " MYR");
+
+        if (WithdrawPromotionListRes.totalAmount > 0) {
+            $("#unlock_icon").addClass("fa fa-unlock");
+            $("#unlock_icon").attr("data-toggle", "modal");
+            $("#WithdrawAmount").attr("data-toggle", "modal");
+            $("#WithdrawAmount").attr("data-target", "#withdraw_availabe_amount_list");
+            $("#unlock_icon").attr("data-target", "#withdraw_availabe_amount_list");
+        } else {
+            $("#unlock_icon").addClass("fa fa-lock");
+            $("#unlock_icon").removeAttr("data-toggle");
+            $("#WithdrawAmount").removeAttr("data-toggle");
+            $("#unlock_icon").removeAttr("data-target");
+            $("#WithdrawAmount").removeAttr("data-target");
+        }
+
+        if (WithdrawPromotionListRes.list.length > 0) {
+            var withdrawAvailabeAmountListHTML = "";
+            var rowCount = 0;
+            $.each(WithdrawPromotionListRes.list, function () {
+                withdrawAvailabeAmountListHTML += '<tr><td>' + ++rowCount + '</td ><td>' + this.title + '</td><td>' + this.withdrawAmount + '</td><td>' + this.created + '</td><td class="' + this.status.replace(" ", "").toLowerCase() + "_color" + '">' + this.status + '</td></tr>';
+            });
+            SetAllValueInElement("tbl_withdraw_availabe_amount_list", withdrawAvailabeAmountListHTML);
+        }
+    }
+}
+

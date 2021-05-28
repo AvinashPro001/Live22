@@ -1,4 +1,5 @@
 ﻿//#region Declare SiteData Variable
+
 let SiteData = {
     PromotionPageData: null,
     AnnouncementsData: null,
@@ -6,18 +7,11 @@ let SiteData = {
     DownloadPageData: null,
     AllBankPageData: null,
 }
+
 //#endregion
 
-function SetSiteDataVariable() {
-    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
-
-    SiteData.AdminBankPageData = data.AdminBankPageData;
-    SiteData.AnnouncementsData = data.AnnouncementsData;
-    SiteData.DownloadPageData = data.DownloadPageData;
-    SiteData.PromotionPageData = data.PromotionPageData;
-}
-
 //#region OnLoad Function
+
 $(document).ready(function () {
     if (GetSessionStorage("siteData") == null) SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
     if (GetLocalStorage('language') === null) SetLocalStorage('language', 'en-US');
@@ -26,48 +20,43 @@ $(document).ready(function () {
     SetLastUpdateTime();
     AllPromotionCallAPI();
 });
+
 //#endregion
 
-//#region Set Sitedata
+//#region Non "ASYNC" Function Section
+
+//#region Set Sitedata Variable
+
+function SetSiteDataVariable() {
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+    SiteData.AdminBankPageData = data.AdminBankPageData;
+    SiteData.AnnouncementsData = data.AnnouncementsData;
+    SiteData.DownloadPageData = data.DownloadPageData;
+    SiteData.PromotionPageData = data.PromotionPageData;
+}
+
+//#endregion
+
+//#region Reset Sitedata
+
 function SetSiteData() {
     SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
 }
-//#endregion
 
-//#region Set LastUpdateTime of Sitedate Variable
-async function SetLastUpdateTime() {
-    if (GetSessionStorage("siteData") == null) SetSiteData()
-
-    if (GetLocalStorage("time") == null) {
-        SetSiteData();
-        var date = new Date();
-        SetLocalStorage("time", date);
-    }
-    else {
-        var Currentdate = new Date();
-        var OldDate = new Date(GetLocalStorage("time"));
-
-        var diff = (Currentdate.getTime() - OldDate.getTime()) / 1000;
-        diff /= 60;
-        diff = Math.abs(Math.round(diff));
-        if (diff > 0) {
-            SetSiteData();
-            var date = new Date();
-            SetLocalStorage("time", date);
-        }
-    }
-}
 //#endregion
 
 //#region  Set All Element Value 
+
 function SetAllValueInElement(id, value) {
     $("[id='" + id + "']").each(function () {
         $(this).html(value)
     });
 }
+
 //#endregion
 
 //#region Set Path of Images based on ID
+
 function SetAllImagePath(id, value) {
     $("[id='" + id + "']").each(function () {
         $(this).attr('src', value)
@@ -76,14 +65,17 @@ function SetAllImagePath(id, value) {
 //#endregion
 
 //#region Set Image in Backgroud in CSS 
+
 function SetBackgroudImagePath(ClassName, value) {
     $("." + ClassName).each(function () {
         $(this).css("background", "url(" + value + ") 24% 10% no-repeat");
     });
 }
+
 //#endregion
 
 //#region Promotion Slider Slick JS
+
 function PromotionSliderJsFunction() {
     $('.slick-carousel').slick({
         arrows: true,
@@ -94,26 +86,11 @@ function PromotionSliderJsFunction() {
         autoplay: true,
     });
 }
-//#endregion
 
-//#region Call Promotion API for Get data
-async function AllPromotionCallAPI() {
-
-    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
-
-    if (data.PromotionPageData == null || data.PromotionPageData == undefined) {
-
-        let res = await GetMethodWithoutToken(promotionEndPoints.webRetrieve);
-
-        if (res.status == 200) {
-            SiteData.PromotionPageData = res.response.data;
-            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
-        }
-    }
-}
 //#endregion
 
 //#region Set Main Page Slider Html
+
 function SetPromotionInMainPage() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
@@ -127,9 +104,11 @@ function SetPromotionInMainPage() {
     }
 
 }
+
 //#endregion
 
 //#region Set Promotion Page Html
+
 function SetPromotionInPromotionPage() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
@@ -159,9 +138,11 @@ function SetPromotionInPromotionPage() {
         SetAllValueInElement("description_section", description);
     }
 }
+
 //#endregion
 
 //#region Create Html of Promotion Page
+
 function SetHtmlInPromotionPage(Id, Data) {
     HTMLData = "";
     if (Data.length > 0) {
@@ -172,9 +153,31 @@ function SetHtmlInPromotionPage(Id, Data) {
     }
     SetAllValueInElement(Id, HTMLData);
 }
+
 //#endregion
 
-//#region Call Announcements API for get data
+//#region Set Announcements of pages
+
+function SetAnnouncementsOnAllPages() {
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+
+    if (data != null && data.AnnouncementsData != null) {
+        var announcements = data.AnnouncementsData;
+        var announcementsData = "";
+        for (i = 0; i < announcements.length; i++)announcementsData += announcements[i].announcement + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+        SetAllValueInElement("announcements", "");
+        SetAllValueInElement("announcements", announcementsData)
+    }
+}
+
+//#endregion
+
+//#endregion 
+
+//#region "ASYNC" Function Section
+
+//#region "ASYNC" Call Announcements API for Get Data
+
 async function AllAnnouncementsCallAPI() {
 
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
@@ -194,18 +197,53 @@ async function AllAnnouncementsCallAPI() {
     }
 
 }
+
 //#endregion
 
-//#region Set Announcements of pages
-function SetAnnouncementsOnAllPages() {
+//#region "ASYNC" Call Promotion API for Get data
+
+async function AllPromotionCallAPI() {
+
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
-    if (data != null && data.AnnouncementsData != null) {
-        var announcements = data.AnnouncementsData;
-        var announcementsData = "";
-        for (i = 0; i < announcements.length; i++)announcementsData += announcements[i].announcement + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-        SetAllValueInElement("announcements", "");
-        SetAllValueInElement("announcements", announcementsData)
+    if (data.PromotionPageData == null || data.PromotionPageData == undefined) {
+
+        let res = await GetMethodWithoutToken(promotionEndPoints.webRetrieve);
+
+        if (res.status == 200) {
+            SiteData.PromotionPageData = res.response.data;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
+        }
     }
 }
+
+//#endregion
+
+//#region "ASYNC" Set LastUpdateTime of Sitedate Variable
+
+async function SetLastUpdateTime() {
+    if (GetSessionStorage("siteData") == null) SetSiteData()
+
+    if (GetLocalStorage("time") == null) {
+        SetSiteData();
+        var date = new Date();
+        SetLocalStorage("time", date);
+    }
+    else {
+        var Currentdate = new Date();
+        var OldDate = new Date(GetLocalStorage("time"));
+
+        var diff = (Currentdate.getTime() - OldDate.getTime()) / 1000;
+        diff /= 60;
+        diff = Math.abs(Math.round(diff));
+        if (diff > 0) {
+            SetSiteData();
+            var date = new Date();
+            SetLocalStorage("time", date);
+        }
+    }
+}
+
+//#endregion
+
 //#endregion

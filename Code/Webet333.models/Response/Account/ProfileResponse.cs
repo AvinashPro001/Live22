@@ -72,6 +72,10 @@ namespace Webet333.models.Response.Account
         [JsonProperty(PropertyName = "vipLevelName")]
         public string VIPLevelName { get; set; }
 
+
+        [JsonProperty(PropertyName = "withdrawLimit")]
+        public string WithdrawLimit { get; set; }
+
         public ICollection<MenusResponse> PermissionsList { get; set; }
 
         [JsonIgnore]

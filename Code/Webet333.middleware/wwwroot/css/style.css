@@ -1884,3 +1884,13 @@ p.bonus_content a{color: #333;}
 #myDropdown table{text-align:start}
 .chip-margin img{width:20px;}
 .table_blacke img{width:30px;}
+@media (min-width: 768px) {
+    #withdraw_availabe_amount_list .modal-dialog {width: 60%;margin: 30px auto;}
+}
+.active_color{color:#cccc00 !important;font-weight: 600 !important;}
+.expired_color{color:#ff3300 !important;font-weight: 600 !important;}
+.manually_expired_color{color:#ff33cc !important;font-weight: 600 !important;}
+.completed_color {color: #33cc33 !important;font-weight: 600 !important;}
+.pending_color{color:#ff9900 !important;font-weight: 600 !important;}
+.approved_color{color: #33cc33 !important;font-weight: 600 !important;}
+.rejected_color{color: #ff3300 !important;font-weight: 600 !important;}

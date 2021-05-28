@@ -17,11 +17,19 @@ let DownloadLinks = {
 
 //#endregion
 
+//#region Non "ASYNC" Function Section
+
+//#region Set Barcode Function
+
 function SetBarcode(Data) {
     if (Data !== null)
         for (i = 0; i < Data.length; i++)
             SetAllImagePath(Data[i].name, Data[i].barcodeImage);
 }
+
+//#endregion
+
+//#region Set Download Link
 
 function AppDownload(Id) {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
@@ -34,30 +42,18 @@ function AppDownload(Id) {
     else { }
 }
 
-async function CallDownloadLinkAPI() {
+//#endregion
 
-    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
-
-    if (data.DownloadPageData == null || data.DownloadPageData == undefined) {
-
-        var res = await GetMethod(settingEndPoints.downloadLinkList);
-
-        if (res.status == 200) {
-            SiteData.DownloadPageData = res.response.data;
-            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
-            SetBarcode(data.DownloadPageData)
-        }
-    }
-    else {
-        SetBarcode(data.DownloadPageData)
-    }
-}
-
+//#region Set 'Please Login !!' Text
 
 function SetPleaseLoginText() {
     for (i = 0; i < SlotsUsernamePasswordId.length; i++)
         SetAllValueInElement(SlotsUsernamePasswordId[i], "Please Login !!")
 }
+
+//#endregion
+
+//#region Set Username Password in Download Page 
 
 function SetUsernamePassword() {
     if (GetSessionStorage("currentUser") == null) {
@@ -79,3 +75,34 @@ function SetUsernamePassword() {
         }
     }
 }
+
+//#endregion
+
+//#endregion
+
+//#region "ASYNC" Function Section
+
+//#region "ASYNC"  Call Download Link API and Set Barcode
+
+async function CallDownloadLinkAPI() {
+
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+
+    if (data.DownloadPageData == null || data.DownloadPageData == undefined) {
+
+        var res = await GetMethod(settingEndPoints.downloadLinkList);
+
+        if (res.status == 200) {
+            SiteData.DownloadPageData = res.response.data;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
+            SetBarcode(data.DownloadPageData)
+        }
+    }
+    else {
+        SetBarcode(data.DownloadPageData)
+    }
+}
+
+//#endregion
+
+//#endregion
