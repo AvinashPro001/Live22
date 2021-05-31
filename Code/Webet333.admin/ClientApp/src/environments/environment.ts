@@ -405,6 +405,7 @@ export const gameBalance = {
     WM: environment.apiUrl + 'gamebalance/wm',
     Pragmatic: environment.apiUrl + 'gamebalance/pragmatic',
     walletBalance: environment.apiUrl + 'customer/wallet/balance',
+    YeeBet: environment.apiUrl + 'gamebalance/YeeBet'
 }
 
 export const smsConst = {
