@@ -6,6 +6,7 @@ let SiteData = {
     AdminBankPageData: null,
     DownloadPageData: null,
     AllBankPageData: null,
+    WalletData: null
 }
 
 //#endregion
@@ -19,11 +20,51 @@ $(document).ready(function () {
     SetSiteDataVariable()
     SetLastUpdateTime();
     AllPromotionCallAPI();
+    GetWalletList();
 });
 
 //#endregion
 
 //#region Non "ASYNC" Function Section
+
+//#region Show Error
+
+function ShowError(Message) {
+    SetAllValueInElement("error_message", Message);
+    $('#error_choose').modal('show');
+    setTimeout(function () {
+        $('#error_choose').modal('hide');
+    }, 1500);
+}
+//#endregion
+
+//#region Show Success
+
+function ShowSuccess(Message) {
+    SetAllValueInElement("success_message", Message);
+    $('#success_choose').modal('show');
+    setTimeout(function () {
+        $('#success_choose').modal('hide');
+    }, 3000);
+}
+
+//#endregion
+
+//#region Loader Show
+
+function LoaderShow() {
+    $(".loadingImage").show();
+}
+
+//#endregion
+
+//#region Loader Hide
+
+function LoaderHide() {
+    $(".loadingImage").hide();
+}
+
+//#endregion
 
 //#region Set Sitedata Variable
 
@@ -33,6 +74,8 @@ function SetSiteDataVariable() {
     SiteData.AnnouncementsData = data.AnnouncementsData;
     SiteData.DownloadPageData = data.DownloadPageData;
     SiteData.PromotionPageData = data.PromotionPageData;
+    SiteData.AllBankPageData = data.AllBankPageData;
+    SiteData.WalletData = data.WalletData;
 }
 
 //#endregion
@@ -242,6 +285,26 @@ async function SetLastUpdateTime() {
             SetLocalStorage("time", date);
         }
     }
+}
+
+//#endregion
+
+//#region "ASYNC" Get Wallet List
+
+async function GetWalletList() {
+
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+
+    if (data.WalletData == null || data.WalletData == undefined) {
+
+        let res = await GetMethod(settingEndPoints.walletList);
+        
+        if (res.status == 200) {
+            SiteData.WalletData = res.response.data;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
+        }
+    }
+
 }
 
 //#endregion

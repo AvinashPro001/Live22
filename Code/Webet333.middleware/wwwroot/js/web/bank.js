@@ -1,6 +1,23 @@
-﻿$(document).ready(function () {
+﻿var WithdrawBankId, UserBank;
+$(document).ready(function () {
     UsersBankDetails();
 });
+
+//#region Set Html In From Wallet in Transfer page
+
+function SetHtmlInFromWallet() {
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
+
+    if (data != null) {
+        if (data.WalletData !== null && data.WalletData !== undefined) {
+            $.each(data.WalletData, function () {
+                $("#from_wallet").append($("<option />").val(this.id).text(this.walletType));
+            });
+        }
+    }
+}
+
+//#endregion
 
 async function CallAPIForBankPages() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
@@ -87,19 +104,19 @@ function SetWithdrawPageBank() {
     }
 }
 
-var WithdrawBankId;
 function SetWithdrawBankIdInVariable(Id, BankName) {
     WithdrawBankId = Id;
-    $.each(UserBank, function () {
-        if (BankName == this.bankName) {
-            $('#withdraw_account_number').val(this.accountNo);
-            $("#withdraw_account_number").attr("disabled", "disabled");
-        }
-        else {
-            $('#withdraw_account_number').val("");
-            $("#withdraw_account_number").removeAttr("disabled");
-        }
-    });
+   
+    var banks = UserBank.filter(x => x.bankName == BankName);
+    
+    if (banks.length > 0) {
+        $('#withdraw_account_number').val(banks[0].accountNo);
+        $("#withdraw_account_number").attr("disabled", "disabled");
+    }
+    else {
+        $('#withdraw_account_number').val("");
+        $("#withdraw_account_number").removeAttr("disabled");
+    }
 }
 
 function SetUserDefaultBank() {
@@ -116,7 +133,6 @@ function SetUserDefaultBank() {
     }
 }
 
-var UserBank;
 async function UsersBankDetails() {
     if (GetLocalStorage('currentUser') !== null) {
         var model = {
@@ -166,3 +182,54 @@ async function SetWithdrawLimit() {
     }
 }
 
+function ResetTransactionField(i) {
+    if (i == 2) {
+        $('#txt_withdraw_amount').val("");
+    }
+}
+
+async function Withdraw() {
+    var amount = Number($("#txt_withdraw_amount").val());
+
+    if (amount <= 0)
+        return ShowError("amount_greater_zero_error");
+
+    var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
+
+    if (amount < 10 || amount > Number(profile.withdrawLimit))
+        return ShowError("min_max_amount_error_parameter");
+
+    if (WithdrawBankId === "" || WithdrawBankId === null || WithdrawBankId === undefined)
+        return ShowError("bnk_name_required_error");
+
+    if (WithdrawBankId == undefined)
+        return ShowError("Select bank");
+
+    var model = {
+        bankId: WithdrawBankId,
+        amount: amount,
+        accountNumber: $('#withdraw_account_number').val(),
+        accountName: profile.name
+    };
+
+    if (model.accountNumber === "" || model.accountNumber === null || model.accountNumber === undefined)
+        return ShowError("acc_no_req_error");
+    LoaderShow();
+    try {
+        var res = await PostMethod(transactionEndPoints.addwithdraw, model);
+        if (res.status == 200) {
+            ShowSuccess(res.response.message);
+            ResetTransactionField(2);
+            SetWithdrawLimit();
+            LoadAllBalance();
+        }
+        LoaderHide();
+    }
+    catch (e) {
+        LoaderHide();
+    }
+}
+
+async function Transfer() {
+
+}

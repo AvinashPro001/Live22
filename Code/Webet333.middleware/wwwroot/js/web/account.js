@@ -23,21 +23,23 @@ $(document).ready(function () {
                 var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
                 if (data == null) {
                     SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
-                    await AllPromotionCallAPI();
-                    await AllAnnouncementsCallAPI();
-                    await CallDownloadLinkAPI();
-                    await CallAPIForBankPages();
-                    if (GetLocalStorage("currentUser") != null) await CallAllBankAPI();
+                    AllPromotionCallAPI();
+                    AllAnnouncementsCallAPI();
+                    CallDownloadLinkAPI();
+                    CallAPIForBankPages();
+                    GetWalletList();
+                    if (GetLocalStorage("currentUser") != null) CallAllBankAPI();
                     AdminBankPageData();
                     SetPromotionInPromotionPage();
                     SetAnnouncementsOnAllPages();
                 }
                 else {
-                    if (data.PromotionPageData == null) { await AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
-                    if (data.AnnouncementsData == null) { await AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
-                    if (data.DownloadPageData == null) { await CallDownloadLinkAPI(); }
-                    if (data.AdminBankPageData == null) { await CallAPIForBankPages(); SetAdminBankPage() }
-                    if (GetLocalStorage("currentUser") != null) if (data.AllBankPageData == null) await CallAllBankAPI();
+                    if (data.PromotionPageData == null) {  AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
+                    if (data.AnnouncementsData == null) { AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
+                    if (data.WalletData == null) { GetWalletList(); }
+                    if (data.AdminBankPageData == null) { CallAPIForBankPages(); SetAdminBankPage() }
+                    if (data.DownloadPageData == null) { CallDownloadLinkAPI(); }
+                    if (GetLocalStorage("currentUser") != null) if (data.AllBankPageData == null)  CallAllBankAPI();
 
                 }
 

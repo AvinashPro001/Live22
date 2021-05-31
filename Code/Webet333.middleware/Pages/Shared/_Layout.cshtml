@@ -58,9 +58,16 @@
     <script src="~/js/web/balance.js"></script>
     <script src="~/js/web/download.js"></script>
     <title>@ViewBag.Title</title>
+
+    <script>
+        $(window).on('load', function () {
+            $(".loadingImage").fadeOut("slow");
+        });
+    </script>
+
 </head>
 <body class="home-page">
-
+    <div class="loadingImage"></div>
 
     <header>
         <div class="container">
@@ -868,7 +875,7 @@
             <!-- Modal content-->
             <div class="modal-content lang_choose_content">
                 <div class="modal-header lang_choose_header" style="background-color:red;">
-                    <h3 class="modal-title" style="background-color:red;">Region and Language</h3>
+                    <h3 class="modal-title" style="background-color:red;">Error</h3>
                     <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <div class="modal-body lang_choose_body">
@@ -880,7 +887,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="lang_boxes_two">
-                                <p>Error</p>
+                                <p id="error_message">Error</p>
                             </div>
                         </div>
                     </div>
@@ -888,6 +895,33 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="success_choose" role="dialog">
+        <div class="modal-dialog lang_choose_dialog">
+            <!-- Modal content-->
+            <div class="modal-content lang_choose_content">
+                <div class="modal-header lang_choose_header" style="background-color:forestgreen;">
+                    <h3 class="modal-title" style="background-color:forestgreen;">Success</h3>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body lang_choose_body">
+                    <div class="row ml0 mr0 lang_wrapper" style="text-align:center">
+                        <div class="col-md-12 lang_boxes_one_wrap">
+                            <div class="lang_boxes_one">
+                                <img style="max-width:100px" src="~/images/success-payment.gif">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="lang_boxes_two">
+                                <p id="success_message"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="~/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
     <script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>

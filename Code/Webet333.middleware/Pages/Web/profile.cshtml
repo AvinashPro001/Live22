@@ -392,7 +392,7 @@
                                                 </li>
                                                 <li class="mar-btm-fifteen">
                                                     <div class="fleft">
-                                                        <button class="submit lang" type="button">SUBMIT</button>
+                                                        <button class="submit lang" type="button" onclick="Withdraw();">SUBMIT</button>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -449,7 +449,7 @@
                                                         <p class="big no-mar lang" key="transfer_from">From:</p>
                                                     </label>
                                                     <label class="fright bank-icon bank-name mendatory">
-                                                        <select class="main-wallet">
+                                                        <select class="main-wallet" id="from_wallet">
                                                             <option value="">-- Select --</option>
                                                         </select>
                                                         <!-- <p class="star">*</p> -->
@@ -1782,9 +1782,8 @@
     });
 
     $(document).ready(function () {
-
         CallAllBankAPI();
         SetWithdrawLimit();
-
+        SetHtmlInFromWallet();
     });
 </script>

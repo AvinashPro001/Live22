@@ -161,6 +161,7 @@ var settingEndPoints = {
     admin_page_bank: "settings/admin_bank/list",
     downloadLinkList: "Game/DownloadLink/list",
     allbank: "settings/banks/list",
+    walletList: "account/wallet/select",
 };
 
 var gameBalanceEndPoints = {
@@ -184,5 +185,6 @@ var gameBalanceEndPoints = {
 };
 
 var transactionEndPoints = {
-    restore: "Game/Balance/Restore"
+    restore: "Game/Balance/Restore",
+    addwithdraw: "payments/withdraw"
 }
