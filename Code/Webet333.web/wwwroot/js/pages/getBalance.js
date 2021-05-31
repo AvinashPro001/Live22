@@ -237,7 +237,6 @@ function StartTimerGameBalanceAPI(GameName) {
             let MaxbettimerId = setInterval(() => { MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username); MaxbetTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(MaxbettimerId); MaxbetTrigger = false; }, 301000);
             break;
-
         case 'DG':
             let dgtimerId = setInterval(() => { DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username); DGTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(dgtimerId); DGTrigger = false; }, 301000);
@@ -817,7 +816,7 @@ async function YeeBetWalletBalance(Username, HideLoading = true) {
             }
         }
 
-        if (YeeBetWallet == 0 &&
+        if (Number(YeeBetWallet) == 0 &&
             YeeBetBalance.data.previousBalance > 0 &&
             YeeBetTrigger == false)
             StartTimerGameBalanceAPI("YeeBet");
