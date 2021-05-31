@@ -189,7 +189,16 @@ export class CommonService {
         PleaseSelectGame: 'Please Select Game !!!!',
         PleaseGetTheBettingDetailsOfGames: 'Please Get The Betting Details of games.',
         PleaseSelectFromDate: 'Please Select From Date.',
-        PleaseSelectToDate: 'Please Select To Date.'
+        PleaseSelectToDate: 'Please Select To Date.',
+        PleaseSelectTurnoverTimesOrWinturn: 'Please Select Turnover Times Or Winturn',
+        PleaseSelectOnlyOneValueEitherTurnoverTimesOrWinturn: 'Please select only one value either Turnover Times Or Winturn',
+        PleaseSelectStartDate: 'Please Select Start Date',
+        PleaseSelectEndDate: 'Please Select End Date',
+        PleaseGiveProperDescription: 'Please Give Proper Description',
+        PleaseInsertDiscount: 'Please Insert Discount',
+        PleaseSelectDiscountType: 'Please Select Discount Type',
+        PleaseSelectSequence: 'Please Select Sequence',
+        PleaseInsertTitle: 'Please Insert Title'
     };
 
     //#endregion Error List

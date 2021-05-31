@@ -204,6 +204,7 @@ exports.customer = {
     SaveAllbetBettingDetails: exports.environment.apiUrl + 'Game/AllBetBettingDetailsSave',
     SaveWMBettingDetails: exports.environment.apiUrl + 'Game/WMBettingDetailsSave',
     SavePragmaticBettingDetails: exports.environment.apiUrl + 'Game/PragmaticBettingDetailsSave',
+    SaveYeeBetBettingDetails: exports.environment.apiUrl + 'Game/YeeBetBettingDetailsSave',
     approvalTimeInsert: exports.environment.apiUrl + 'payments/approvaltime/insert',
     approvalTimeSelect: exports.environment.apiUrl + 'payments/approvaltime/select',
     passwordResetSelect: exports.environment.apiUrl + 'account/gamepassword/select',
