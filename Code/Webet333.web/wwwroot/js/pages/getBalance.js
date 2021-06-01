@@ -1,4 +1,7 @@
-﻿//#region Onload
+﻿//#region
+//#endregion
+
+//#region Onload
 $(document).ready(function () {
     if (GetLocalStorage('currentUser') !== null) {
         WalletBalance();
@@ -7,6 +10,8 @@ $(document).ready(function () {
     }
 });
 //#endregion Onload
+
+//#region Get User Game Turnover
 
 async function UserGameTurnover() {
     try {
@@ -53,11 +58,33 @@ async function UserGameTurnover() {
     }
 }
 
-if (GetLocalStorage('currentUser') !== null)
-    setInterval(async function () { await regisrationGame() }, 5000);
+//#endregion Get User Game Turnover
+
+//#region Check used login or not. Anf if login the call RegisrationGame function.
+
+if (GetLocalStorage('currentUser') !== null) setInterval(async function () { await regisrationGame() }, 5000);
+
+//#endregion Check used login or not. Anf if login the call RegisrationGame function.
 
 //#region WalletBalance
-var PlayTechWallet, _918KissWallet, JokerWallet, MainWallet, AGWallet, M8Wallet, MaxBetWallet, Mega888Wallet, DgWallet, sexyWallet, saWallet, Pussy888Wallet, AllBetWallet, WMWallet, PragmaticWallet, YeeBetWallet;
+
+var PlayTechWallet,
+    _918KissWallet,
+    JokerWallet,
+    MainWallet,
+    AGWallet,
+    M8Wallet,
+    MaxBetWallet,
+    Mega888Wallet,
+    DgWallet,
+    sexyWallet,
+    saWallet,
+    Pussy888Wallet,
+    AllBetWallet,
+    WMWallet,
+    PragmaticWallet,
+    YeeBetWallet;
+
 async function WalletBalance() {
     var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
     var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
@@ -73,7 +100,9 @@ async function WalletBalance() {
         sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
         globalParameter = gamePrefix;
     }
-    //#region Get user walletId
+
+    //#region Call user game balance function.
+
     MainWalletBalance();
     Kiss918WalletBalance(userDetails.data.username918);
     AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username);
@@ -90,7 +119,10 @@ async function WalletBalance() {
     WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
     PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
     YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
+
+    //#endregion Call user game balance function.
 }
+
 //#endregion WalletBalance
 
 window.onclick = function (event) {
@@ -99,14 +131,13 @@ window.onclick = function (event) {
         var i;
         for (i = 0; i < dropdowns.length; i++) {
             var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
+            if (openDropdown.classList.contains('show')) openDropdown.classList.remove('show');
         }
     }
 }
 
 //#region Show Balance in Mobile Drop-down
+
 function ddlShowBalance() {
     document.getElementById("menuMainWallet").innerHTML = MainWallet == undefined ? "<img class='loading-gif' src='../images/loading.gif'/>" : MainWallet;
     document.getElementById("ddlmainWallet").innerHTML = MainWallet == undefined ? "feching.." : MainWallet;
@@ -126,7 +157,10 @@ function ddlShowBalance() {
     document.getElementById("ddlPragmaticWallet").innerHTML = PragmaticWallet == undefined ? "feching.." : PragmaticWallet;
     document.getElementById("ddlYeeBetWallet").innerHTML = YeeBetWallet == undefined ? "feching.." : YeeBetWallet;
 }
+
 //#endregion Show Balance in Mobile Drop-down
+
+//#region RestoreBalance
 
 async function RestoreBalance() {
     //LoaderShow();
@@ -147,7 +181,9 @@ async function RestoreBalance() {
             sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
             globalParameter = gamePrefix;
         }
-        //#region Get user walletId
+
+        //#region Call user game balance function.
+
         await MainWalletBalance();
         await Kiss918WalletBalance(userDetails.data.username918, false);
         await AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username, false);
@@ -164,6 +200,8 @@ async function RestoreBalance() {
         await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId, false);
         await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId, false);
         await YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId, false);
+
+        //#endregion Call user game balance function.
 
         let restoreModel = {
             kiss918wallet: _918KissWallet == "N/A" ? "0.0" : _918KissWallet,
@@ -191,6 +229,10 @@ async function RestoreBalance() {
     }
 }
 
+//#endregion RestoreBalance
+
+//#region Set number with comma separated.
+
 function numberWithCommas(x) {
     if (x != "NaN") {
         try {
@@ -204,6 +246,10 @@ function numberWithCommas(x) {
         return "N/A"
     }
 }
+
+//#endregion Set number with comma separated.
+
+//#region StartTimer To Call GameBalanceAPI
 
 var AGTrigger = false,
     DGTrigger = false,
@@ -263,6 +309,8 @@ function StartTimerGameBalanceAPI(GameName) {
             break;
     }
 }
+
+//#endregion StartTimer To Call GameBalanceAPI
 
 //#region all WalletBalance
 async function MainWalletBalance() {
@@ -838,6 +886,8 @@ async function YeeBetWalletBalance(Username, HideLoading = true) {
 
 //#endregion all WalletBalance
 
+//#region Refersh Balance
+
 function RefershBalance() {
     document.getElementById("ddlmainWallet").innerHTML = "feching..";
     document.getElementById("ddl918KissWallet").innerHTML = "feching..";
@@ -859,6 +909,10 @@ function RefershBalance() {
     WalletBalance();
 }
 
+//#endregion Refersh Balance
+
+//#region Wallet Balance Max. Transfer
+
 async function WalletBalanceMaxTransfer() {
     var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
     var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
@@ -874,7 +928,9 @@ async function WalletBalanceMaxTransfer() {
         sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
         globalParameter = gamePrefix;
     }
-    //#region Get user walletId
+
+    //#region Call user game balance function.
+
     await MainWalletBalance();
     await Kiss918WalletBalance(userDetails.data.username918);
     await AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username);
@@ -890,4 +946,8 @@ async function WalletBalanceMaxTransfer() {
     await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
     await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
     await YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
+
+    //#endregion Call user game balance function.
 }
+
+//#endregion Wallet Balance Max. Transfer
