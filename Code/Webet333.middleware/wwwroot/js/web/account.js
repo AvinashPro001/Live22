@@ -34,12 +34,12 @@ $(document).ready(function () {
                     SetAnnouncementsOnAllPages();
                 }
                 else {
-                    if (data.PromotionPageData == null) {  AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
+                    if (data.PromotionPageData == null) { AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
                     if (data.AnnouncementsData == null) { AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
                     if (data.WalletData == null) { GetWalletList(); }
                     if (data.AdminBankPageData == null) { CallAPIForBankPages(); SetAdminBankPage() }
                     if (data.DownloadPageData == null) { CallDownloadLinkAPI(); }
-                    if (GetLocalStorage("currentUser") != null) if (data.AllBankPageData == null)  CallAllBankAPI();
+                    if (GetLocalStorage("currentUser") != null) if (data.AllBankPageData == null) CallAllBankAPI();
 
                 }
 
@@ -188,7 +188,7 @@ async function DoLogin() {
         grantType: 'User'
     };
     let res = await PostMethod(accountEndPoints.login, model);
-
+    debugger
     if (res.status !== 200) {
         if (err.status === 400) {
             if (err.responseJSON.message == "Your account is not active." || err.responseJSON.message == "Akaun anda belum aktif." || err.responseJSON.message == "您的帐户无效。") {
@@ -213,5 +213,122 @@ async function DoLogin() {
 }
 
 //#endregion 
+
+//#region "ASYNC" Change Password
+
+async function ChangePassword() {
+    var currentPassword = $('#txt_currentPassword').val();
+    var newPassword = $("#txt_newPassword").val();
+    var confirmPassword = $("#txt_confirmPassword").val();
+
+    if (newPassword.length < 6)
+        return ShowError("pass_length_error");
+
+    if (newPassword === "")
+        return ShowError("password_required_error");
+
+    if (confirmPassword === "")
+        return ShowError("confirm_password_required_error");
+
+    if (Decryption(GetLocalStorage("currentUserData")) !== currentPassword)
+        return ShowError("username_pass_diff_error");
+
+    var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
+    if (!reqExp.test(currentPassword))
+        return ShowError("pass_alpha_error");
+
+    var model = {
+        currentPassword: currentPassword,
+        password: newPassword,
+        confirmPassword: confirmPassword
+    };
+
+    try {
+        LoaderShow();
+        let res = await postwokr(accountEndPoints.changePassword, model)
+        if (res.status == 200) {
+            ShowSuccess(res.response.message);
+            DoLogout();
+        }
+        else {
+        }
+        LoaderHide();
+    }
+    catch (e) {
+        LoaderHide();
+    }
+}
+
+//#endregion
+
+//#region "ASYNC" Register Function
+
+async function DoRegister() {
+
+    var name = $('#txt_name').val();
+    var mobile = $('#txt_mobile_no').val();
+    var username = $('#txt_username').val();
+    var password = $("#txt_password").val();
+    var confirmPassword = $("#txt_confirm_password").val();
+    //var referenceKeyword= getCookie("ref")
+
+    if (mobile === "") return ShowError("mobile_no_required_error");
+
+    if (mobile.length < 10) return ShowError("mobile_length_error");
+
+    if (username === "") return ShowError("username_required_error");
+
+    if (username.length < 7) return ShowError("username_length_error");
+
+    if (password.length < 6) return ShowError("pass_length_error");
+
+    if (password === "") return ShowError("password_required_error");
+
+    if (confirmPassword === "") return ShowError("confirm_password_required_error");
+
+    if (name === "") return ShowError("name_required_error");
+
+    if (username === password) return ShowError("username_pass_diff_error");
+
+    var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
+    if (!regex.test(password)) return ShowError("pass_alpha_error");
+
+    if (/^[a-zA-Z0-9- ]*$/.test(username) == false) 
+        return ShowError('Special Charater not allowed');
+
+    if (/^[a-z0-9_]+$/i.test(username) == false)
+        return ShowError('Space not allowed');
+
+    var model = {
+        name: name,
+        mobile: mobile,
+        username: username,
+        password: password,
+        confirmPassword: confirmPassword
+        //referenceKeyword: getCookie("ref")
+    };
+
+    LoaderShow();
+    var res = await PostMethod(accountEndPoints.register, model);
+    if (res.status == 200) {
+        try {
+            if ((res.data.messageResponse.statusCode.split(",").length - 1) == 0)
+                ShowError(res.data.messageResponse.smsMessage);
+        }
+        catch (e) { }
+        SetLocalStorage('currentUserData', Encryption(password));
+        SetLocalStorage("currentUser", res.response.data.access_token);
+        SetSessionStorage("userDetails", Encryption(JSON.stringify(res.response.data.user)));
+        LoaderHide();
+        window.location.href = "../Web/otpverified";
+    }
+    else {
+        LoaderHide();
+        ShowError(res.response.message);
+    }
+
+}
+
+//#endregion
 
 //#endregion

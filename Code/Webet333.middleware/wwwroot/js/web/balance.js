@@ -93,20 +93,66 @@ function LoadAllBalance() {
 
 async function LoadAllBalanceAsync() {
     await MainWallet();
-    if (GameUsername.kiss918Balance != null) await Kiss918Wallet(GameUsernames.Kiss918Username, false);
-    if (GameUsername.JokerUsername != null) await JokerWallet(GameUsernames.JokerUsername, false);
-    if (GameUsername.Mega888Username != null) await Mega888Wallet(GameUsernames.Mega888Username, false);
-    if (GameUsername.Pussy888Username != null) await Pussy888Wallet(GameUsernames.Pussy888Username, false);
-    if (GameUsername.AGUsername != null) await AGWallet(GameUsernames.AGUsername, false);
-    if (GameUsername.DGUsername != null) await DGWallet(GameUsernames.DGUsername, false);
-    if (GameUsername.SAUsername != null) await SAWallet(GameUsernames.SAUsername, false);
-    if (GameUsername.WMUsername != null) await WMWallet(GameUsernames.WMUsername, false);
-    if (GameUsername.PlaytechUsername != null) await PlaytechWallet(GameUsernames.PlaytechUsername, false);
-    if (GameUsername.SexyBaccaratUsername != null) await SexyBaccaratWallet(GameUsernames.SexyBaccaratUsername, false);
-    if (GameUsername.PragmaticUsername != null) await PragmaticWallet(GameUsernames.PragmaticUsername, false);
-    if (GameUsername.AllBetUsername != null) await AllBetWallet(GameUsernames.AllBetUsername, false);
-    if (GameUsername.M8Username != null) await M8Wallet(GameUsernames.M8Username, false);
-    if (GameUsername.MaxBetUsername != null) await MaxBetWallet(GameUsernames.MaxBetUsername, false);
+    if (GameUsernames.kiss918Balance != null) await Kiss918Wallet(GameUsernames.Kiss918Username, false);
+    if (GameUsernames.JokerUsername != null) await JokerWallet(GameUsernames.JokerUsername, false);
+    if (GameUsernames.Mega888Username != null) await Mega888Wallet(GameUsernames.Mega888Username, false);
+    if (GameUsernames.Pussy888Username != null) await Pussy888Wallet(GameUsernames.Pussy888Username, false);
+    if (GameUsernames.AGUsername != null) await AGWallet(GameUsernames.AGUsername, false);
+    if (GameUsernames.DGUsername != null) await DGWallet(GameUsernames.DGUsername, false);
+    if (GameUsernames.SAUsername != null) await SAWallet(GameUsernames.SAUsername, false);
+    if (GameUsernames.WMUsername != null) await WMWallet(GameUsernames.WMUsername, false);
+    if (GameUsernames.PlaytechUsername != null) await PlaytechWallet(GameUsernames.PlaytechUsername, false);
+    if (GameUsernames.SexyBaccaratUsername != null) await SexyBaccaratWallet(GameUsernames.SexyBaccaratUsername, false);
+    if (GameUsernames.PragmaticUsername != null) await PragmaticWallet(GameUsernames.PragmaticUsername, false);
+    if (GameUsernames.AllBetUsername != null) await AllBetWallet(GameUsernames.AllBetUsername, false);
+    if (GameUsernames.M8Username != null) await M8Wallet(GameUsernames.M8Username, false);
+    if (GameUsernames.MaxBetUsername != null) await MaxBetWallet(GameUsernames.MaxBetUsername, false);
+}
+
+async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
+
+    switch (WalletName) {
+        case "Main Wallet": MainWallet(); break;
+        case "918Kiss Wallet": if (GameUsernames.Kiss918Username != null) await Kiss918Wallet(GameUsernames.Kiss918Username); break;
+        case "Joker Wallet": if (GameUsernames.JokerUsername != null) await JokerWallet(GameUsernames.JokerUsername); break;
+        case "Mega888 Wallet": if (GameUsernames.Mega888Username != null) await Mega888Wallet(GameUsernames.Mega888Username); break;
+        case "Pussy888 Wallet": if (GameUsernames.Pussy888Username != null) await Pussy888Wallet(GameUsernames.Pussy888Username); break;
+        case "AG Wallet": if (GameUsernames.AGUsername != null) await AGWallet(GameUsernames.AGUsername); break;
+        case "DG Wallet": if (GameUsernames.DGUsername != null) await DGWallet(GameUsernames.DGUsername); break;
+        case "SA Wallet": if (GameUsernames.SAUsername != null) await SAWallet(GameUsernames.SAUsername); break;
+        case "WM Wallet": if (GameUsernames.WMUsername != null) await WMWallet(GameUsernames.WMUsername); break;
+        case "PlayTech Wallet": if (GameUsernames.PlaytechUsername != null) await PlaytechWallet(GameUsernames.PlaytechUsername); break;
+        case "Sexy Wallet": if (GameUsernames.SexyBaccaratUsername != null) await SexyBaccaratWallet(GameUsernames.SexyBaccaratUsername); break;
+        case "Pragmatic Wallet": if (GameUsernames.PragmaticUsername != null) await PragmaticWallet(GameUsernames.PragmaticUsername); break;
+        case "AllBet Wallet": if (GameUsernames.AllBetUsername != null) await AllBetWallet(GameUsernames.AllBetUsername); break;
+        case "M8 Wallet": if (GameUsernames.M8Username != null) await M8Wallet(GameUsernames.M8Username); break;
+        case "MaxBet Wallet": if (GameUsernames.MaxBetUsername != null) await MaxBetWallet(GameUsernames.MaxBetUsername); break;
+    }
+}
+
+async function ReturnBalanceBasedOnWalletName(WalletName) {
+    var balance;
+    switch (WalletName) {
+        case "Main Wallet": balance = UsersBalance.MainBalance; break;
+        case "918Kiss Wallet": balance = UsersBalance.Kiss918Balance; break;
+        case "Joker Wallet": balance = UsersBalance.JokerBalance; break;
+        case "Mega888 Wallet": balance = UsersBalance.Mega888Balance; break;
+        case "Pussy888 Wallet": balance = UsersBalance.Pussy888Balance; break;
+        case "AG Wallet": balance = UsersBalance.AGBalance; break;
+        case "DG Wallet": balance = UsersBalance.DGBalance; break;
+        case "SA Wallet": balance = UsersBalance.SABalance; break;
+        case "WM Wallet": balance = UsersBalance.WMBalance; break;
+        case "PlayTech Wallet": balance = UsersBalance.PlaytechBalance; break;
+        case "Sexy Wallet": balance = UsersBalance.SexyBaccaratBalance; break;
+        case "Pragmatic Wallet": balance = UsersBalance.PragmaticBalance; break;
+        case "AllBet Wallet": balance = UsersBalance.Kiss918Balance; break;
+        case "M8 Wallet": balance = UsersBalance.Kiss918Balance; break;
+        case "MaxBet Wallet": balance = UsersBalance.Kiss918Balance; break;
+    }
+
+    if (balance == "N/A")
+        balance = "0.00";
+    return balance.replace(",", "");
 }
 
 //#region  Set GameUsername
@@ -163,11 +209,31 @@ function FormatBalance(amount) {
 
 function SetLoadingImageForAllId() {
     for (i = 0; i < walletIds.length; i++) {
-        SetLoadingImagesInBalance(walletIds[i])
-        SetFetchingWordInBalance(walletIds[i])
+        SetLoadingImagesInBalance(walletIds[i]);
+        SetFetchingWordInBalance(walletIds[i]);
     }
 
     SetFetchingWordInBalance('main_balance')
+}
+
+function SetLoadingImageBaseOnWalletName(WalletName) {
+
+    switch (WalletName) {
+        case "918Kiss Wallet": SetLoadingImagesInBalance("kiss918_balance"); SetFetchingWordInBalance("kiss918_balance");break;
+        case "Joker Wallet": SetLoadingImagesInBalance("joker_balance"); SetFetchingWordInBalance("joker_balance"); break;
+        case "Mega888 Wallet": SetLoadingImagesInBalance("mega888_balance"); SetFetchingWordInBalance("mega888_balance"); break;
+        case "Pussy888 Wallet": SetLoadingImagesInBalance("pussy888_balance"); SetFetchingWordInBalance("pussy888_balance"); break;
+        case "AG Wallet": SetLoadingImagesInBalance("ag_balance"); SetFetchingWordInBalance("ag_balance"); break;
+        case "DG Wallet": SetLoadingImagesInBalance("dg_balance"); SetFetchingWordInBalance("dg_balance"); break;
+        case "SA Wallet": SetLoadingImagesInBalance("sa_balance"); SetFetchingWordInBalance("sa_balance"); break;
+        case "WM Wallet": SetLoadingImagesInBalance("wm_balance"); SetFetchingWordInBalance("wm_balance"); break;
+        case "PlayTech Wallet": SetLoadingImagesInBalance("playtech_balance"); SetFetchingWordInBalance("playtech_balance");  break;
+        case "Sexy Wallet": SetLoadingImagesInBalance("sexy_baccarat_balance"); SetFetchingWordInBalance("sexy_baccarat_balance"); break;
+        case "Pragmatic Wallet": SetLoadingImagesInBalance("pragmatic_balance"); SetFetchingWordInBalance("pragmatic_balance"); break;
+        case "AllBet Wallet": SetLoadingImagesInBalance("allbet_balance"); SetFetchingWordInBalance("allbet_balance"); break;
+        case "M8 Wallet": SetLoadingImagesInBalance("m8_balance"); SetFetchingWordInBalance("m8_balance"); break;
+        case "MaxBet Wallet": SetLoadingImagesInBalance("maxbet_balance"); SetFetchingWordInBalance("maxbet_balance"); break;
+    }
 }
 
 function RefreshBalance() {

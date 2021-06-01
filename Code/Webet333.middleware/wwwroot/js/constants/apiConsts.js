@@ -147,9 +147,11 @@ var globalEndPoints = {
 
 var accountEndPoints = {
     login: "account/login",
+    register: "account/register",
     getProfile: "customer/profile",
     userBankDetail: "customer/bank",
     withdrawPromotionList: 'payments/check/withdrawamount/list',
+    changePassword: "account/change_password",
 };
 
 var promotionEndPoints = {
@@ -186,5 +188,6 @@ var gameBalanceEndPoints = {
 
 var transactionEndPoints = {
     restore: "Game/Balance/Restore",
-    addwithdraw: "payments/withdraw"
+    addwithdraw: "payments/withdraw",
+    addtransfer: "transfer/balance",
 }

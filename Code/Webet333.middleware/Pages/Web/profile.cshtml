@@ -449,7 +449,7 @@
                                                         <p class="big no-mar lang" key="transfer_from">From:</p>
                                                     </label>
                                                     <label class="fright bank-icon bank-name mendatory">
-                                                        <select class="main-wallet" id="from_wallet">
+                                                        <select class="main-wallet" id="from_wallet" onchange="SetHtmlInToWallet();">
                                                             <option value="">-- Select --</option>
                                                         </select>
                                                         <!-- <p class="star">*</p> -->
@@ -460,7 +460,7 @@
                                                         <p class="big no-mar lang" key="transfer_to">To:</p>
                                                     </label>
                                                     <label class="fright bank-icon bank-name mendatory">
-                                                        <select class="main-wallet">
+                                                        <select class="main-wallet" id="to_wallet">
                                                             <option value="">-- Select --</option>
                                                         </select>
                                                         <!-- <p class="star">*</p> -->
@@ -483,18 +483,18 @@
                                                         <p class="big no-mar lang">Amount:</p>
                                                     </label>
                                                     <label class="fleft minimum-ammount card-number mendatory">
-                                                        <input name="txt_transferAmount" type="number" class="reg-form" placeholder="Max Limit: From Wallet">
+                                                        <input id="txt_transfer_amount" type="number" class="reg-form" placeholder="Max Limit: From Wallet">
                                                         <span>Add Minimum 1 MYR</span>
                                                     </label>
                                                     <label class="fright mar-btm-fifteen transfer-max hidden-xs">
-                                                        <a>
+                                                        <a onclick="MaxTransfer();">
                                                             <span>Transfer Max</span>
                                                         </a>
                                                     </label>
                                                 </li>
                                                 <li class="mar-btm-fifteen transfer-btns">
                                                     <div class="fright_one">
-                                                        <button class="submit lang" type="button">TRANSFER</button>
+                                                        <button class="submit lang" type="button" onclick="Transfer()">TRANSFER</button>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -1633,7 +1633,7 @@
                                                     <p class="big no-mar lang" key="profile_current_password">Current Password :</p>
                                                 </label>
                                                 <label class="fright mar-btm-no lock">
-                                                    <input type="password" class="reg-form" placeholder="Current Password" value="">
+                                                    <input type="password" class="reg-form" placeholder="Current Password" value="" id="txt_currentPassword">
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">
@@ -1641,7 +1641,7 @@
                                                     <p class="big no-mar lang" key="profile_new_password">New Password :</p>
                                                 </label>
                                                 <label class="fright lock">
-                                                    <input type="password" class="reg-form" placeholder="New Password">
+                                                    <input type="password" class="reg-form" placeholder="New Password" id="txt_newPassword">
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">
@@ -1649,12 +1649,12 @@
                                                     <p class="big no-mar lang" key="profile_confirm_password">Confirm Password :</p>
                                                 </label>
                                                 <label class="fright lock">
-                                                    <input type="password" class="reg-form" placeholder="Confirm Password">
+                                                    <input type="password" class="reg-form" placeholder="Confirm Password" id="txt_confirmPassword">
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">
                                                 <div class="fright">
-                                                    <button name="" class="submit">
+                                                    <button name="" class="submit" onclick="ChangePassword()">
                                                         <span>CONFIRM CHANGE PASSWORD</span>
                                                     </button>
                                                 </div>

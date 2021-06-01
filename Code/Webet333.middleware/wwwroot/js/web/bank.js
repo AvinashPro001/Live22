@@ -10,10 +10,64 @@ function SetHtmlInFromWallet() {
 
     if (data != null) {
         if (data.WalletData !== null && data.WalletData !== undefined) {
-            $.each(data.WalletData, function () {
+            var fromWalletData = data.WalletData.filter(x => x.isMaintenance == false);
+            $.each(fromWalletData, function () {
                 $("#from_wallet").append($("<option />").val(this.id).text(this.walletType));
             });
         }
+    }
+}
+
+//#endregion
+
+//#region "ASYNC" Set Html in To Wallet On Changes of From Wallet
+
+async function SetHtmlInToWallet() {
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
+
+    if (data != null) {
+        if (data.WalletData !== null && data.WalletData !== undefined) {
+            var fromWallet = $("#from_wallet").val();
+            var toWalletData = data.WalletData.filter(x => x.id != fromWallet && x.isMaintenance == false);
+            var fromWalletData = data.WalletData.filter(x => x.id == fromWallet && x.isMaintenance == false);
+
+            SetAllValueInElement("to_wallet", "");
+            SetAllValueInElement("to_wallet", '<option value="">-- Select --</option>');
+            $.each(toWalletData, function () {
+                $("#to_wallet").append($("<option />").val(this.id).text(this.walletType));
+            });
+            SetLoadingImageBaseOnWalletName(fromWalletData[0].walletType);
+            await LoadBalanceBasedOnWalletNameAsync(fromWalletData[0].walletType);
+            var balance = await ReturnBalanceBasedOnWalletName(fromWalletData[0].walletType);
+            if (fromWalletData[0].walletType == "Main Wallet")
+                $('#txt_transfer_amount').val(balance);
+            else {
+                $('#txt_transfer_amount').val("");
+                $('#txt_transfer_amount').attr("placeholder", "Max Limit: " + balance);
+            }
+        }
+    }
+}
+
+//#endregion
+
+//#region "ASYNC" Max Balance transfer Set in Text Box 
+
+async function MaxTransfer() {
+    var fromWallet = $("#from_wallet").val();
+    if (fromWallet != undefined && fromWallet != "" && fromWallet != null) {
+        var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
+        if (data != null) {
+            if (data.WalletData !== null && data.WalletData !== undefined) {
+                var fromWalletData = data.WalletData.filter(x => x.id == fromWallet && x.isMaintenance == false);
+                await LoadBalanceBasedOnWalletNameAsync(fromWalletData[0].walletType);
+                var balance = await ReturnBalanceBasedOnWalletName(fromWalletData[0].walletType);
+                $('#txt_transfer_amount').val(balance);
+            }
+        }
+    }
+    else {
+        ShowError("select_from_wallet_error");
     }
 }
 
@@ -106,9 +160,9 @@ function SetWithdrawPageBank() {
 
 function SetWithdrawBankIdInVariable(Id, BankName) {
     WithdrawBankId = Id;
-   
+
     var banks = UserBank.filter(x => x.bankName == BankName);
-    
+
     if (banks.length > 0) {
         $('#withdraw_account_number').val(banks[0].accountNo);
         $("#withdraw_account_number").attr("disabled", "disabled");
@@ -186,6 +240,10 @@ function ResetTransactionField(i) {
     if (i == 2) {
         $('#txt_withdraw_amount').val("");
     }
+    if (i == 3) {
+        $('#txt_transfer_amount').val("");
+        $('#txt_transfer_amount').attr("placeholder", "Max Limit: From Wallet");
+    }
 }
 
 async function Withdraw() {
@@ -221,7 +279,7 @@ async function Withdraw() {
             ShowSuccess(res.response.message);
             ResetTransactionField(2);
             SetWithdrawLimit();
-            LoadAllBalance();
+            RefreshBalance();
         }
         LoaderHide();
     }
@@ -231,5 +289,45 @@ async function Withdraw() {
 }
 
 async function Transfer() {
+    var amount = Number($("#txt_transfer_amount").val());
+    var fromWallet = $("#from_wallet").val();
+    var toWallet = $("#to_wallet").val();
+
+    if (amount <= 0)
+        return ShowError("amount_greater_zero_error");
+
+    if (fromWallet == "")
+        return ShowError("Please Select From Wallet");
+
+    if (toWallet == "")
+        return ShowError("Please Select To Wallet");
+
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
+    var fromWalletData = data.WalletData.filter(x => x.id == fromWallet && x.isMaintenance == false);
+    await LoadBalanceBasedOnWalletNameAsync(fromWalletData[0].walletType);
+    var balance = await ReturnBalanceBasedOnWalletName(fromWalletData[0].walletType);
+
+    if (amount > Number(balance))
+        return ShowError("Insufficient_balance_wallet");
+
+    let model = {
+        fromWalletId: fromWallet,
+        toWalletId: toWallet,
+        amount: amount
+    }
+
+    try {
+        LoaderShow()
+        var res = await PostMethod(transactionEndPoints.addtransfer, model);
+        if (res.status == 200) {
+            ShowSuccess(res.response.message)
+            ResetTransactionField(3);
+            RefreshBalance();
+        }
+        LoaderHide()
+    }
+    catch (e) {
+        LoaderHide()
+    }
 
 }

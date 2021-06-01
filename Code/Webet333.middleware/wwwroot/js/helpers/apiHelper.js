@@ -44,30 +44,33 @@ function Encryption(plaintext) {
 async function PostMethod(endPoint, model) {
     if (GetLocalStorage('language') === null)
         return null;
-    
-    return $.ajax({
-        type: "POST",
-        data: JSON.stringify(model),
-        headers: {
-            'Authorization': 'Bearer ' + GetLocalStorage('currentUser'),
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Access-Control-Max-Age': 300,
-            'Accept-Language': GetLocalStorage('language')
-        },
-        url: baseUrl + endPoint
-    }).then(function (res) {
-        var response = {
-            "status": 200,
-            "response": res
-        }
-        return response;
-    }).fail(function (err) {
-        var response = {
-            "status": err.status,
-            "response": err.responseJSON
-        }
-        return response;
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify(model),
+            headers: {
+                'Authorization': 'Bearer ' + GetLocalStorage('currentUser'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Access-Control-Max-Age': 300,
+                'Accept-Language': GetLocalStorage('language')
+            },
+            url: baseUrl + endPoint,
+            success: (result, status, xhr) => {
+                var response = {
+                    "status": 200,
+                    "response": result
+                }
+                resolve(response);
+            },
+            error: (xhr, status, error) => {
+                var response = {
+                    "status": xhr.status,
+                    "response": xhr.responseJSON
+                }
+                resolve(response);
+            }
+        });
     });
 }
 
@@ -78,24 +81,33 @@ async function PostMethod(endPoint, model) {
 function GetMethod(endPoint) {
     if (GetLocalStorage('language') === null)
         return null;
-    return $.ajax({
-        type: "GET",
-        headers: {
-            'Authorization': 'Bearer ' + GetLocalStorage('currentUser'),
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Access-Control-Max-Age': 300,
-            'Accept-Language': GetLocalStorage('language')
-        },
-        url: baseUrl + endPoint
-    }).then(function (res) {
-        var response = {
-            "status": 200,
-            "response": res
-        }
-        return response;
-    }).fail(function (err) {
-        return err;
+
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            type: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + GetLocalStorage('currentUser'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Access-Control-Max-Age': 300,
+                'Accept-Language': GetLocalStorage('language')
+            },
+            url: baseUrl + endPoint,
+            success: (result, status, xhr) => {
+                var response = {
+                    "status": 200,
+                    "response": result
+                }
+                resolve(response);
+            },
+            error: (xhr, status, error) => {
+                var response = {
+                    "status": xhr.status,
+                    "response": xhr.responseJSON
+                }
+                resolve(response);
+            }
+        });
     });
 }
 
@@ -106,24 +118,33 @@ function GetMethod(endPoint) {
 function PostMethodWithoutToken(endPoint, model) {
     if (GetLocalStorage('language') === null)
         return null;
-    return $.ajax({
-        type: "POST",
-        data: JSON.stringify(model),
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Access-Control-Max-Age': 300,
-            'Accept-Language': GetLocalStorage('language')
-        },
-        url: baseUrl + endPoint
-    }).then(function (res) {
-        var response = {
-            "status": 200,
-            "response": res
-        }
-        return response;
-    }).fail(function (err) {
-        return err;
+
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify(model),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Access-Control-Max-Age': 300,
+                'Accept-Language': GetLocalStorage('language')
+            },
+            url: baseUrl + endPoint,
+            success: (result, status, xhr) => {
+                var response = {
+                    "status": 200,
+                    "response": result
+                }
+                resolve(response);
+            },
+            error: (xhr, status, error) => {
+                var response = {
+                    "status": xhr.status,
+                    "response": xhr.responseJSON
+                }
+                resolve(response);
+            }
+        });
     });
 }
 
@@ -134,23 +155,32 @@ function PostMethodWithoutToken(endPoint, model) {
 function GetMethodWithoutToken(endPoint) {
     if (GetLocalStorage('language') === null)
         return null;
-    return $.ajax({
-        type: "GET",
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Access-Control-Max-Age': 300,
-            'Accept-Language': GetLocalStorage('language')
-        },
-        url: baseUrl + endPoint
-    }).then(function (res) {
-        var response = {
-            "status": 200,
-            "response": res
-        }
-        return response;
-    }).fail(function (err) {
-        return err;
+
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            type: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Access-Control-Max-Age': 300,
+                'Accept-Language': GetLocalStorage('language')
+            },
+            url: baseUrl + endPoint,
+            success: (result, status, xhr) => {
+                var response = {
+                    "status": 200,
+                    "response": result
+                }
+                resolve(response);
+            },
+            error: (xhr, status, error) => {
+                var response = {
+                    "status": xhr.status,
+                    "response": xhr.responseJSON
+                }
+                resolve(response);
+            }
+        });
     });
 }
 

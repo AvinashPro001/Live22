@@ -301,10 +301,10 @@ async function GetWalletList() {
         
         if (res.status == 200) {
             SiteData.WalletData = res.response.data;
+            
             SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
         }
     }
-
 }
 
 //#endregion
