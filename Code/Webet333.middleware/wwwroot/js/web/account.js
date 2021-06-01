@@ -23,23 +23,23 @@ $(document).ready(function () {
                 var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
                 if (data == null) {
                     SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
-                    AllPromotionCallAPI();
-                    AllAnnouncementsCallAPI();
-                    CallDownloadLinkAPI();
-                    CallAPIForBankPages();
-                    GetWalletList();
-                    if (GetLocalStorage("currentUser") != null) CallAllBankAPI();
+                    await AllPromotionCallAPI();
+                    await AllAnnouncementsCallAPI();
+                    await CallDownloadLinkAPI();
+                    await CallAPIForBankPages();
+                    await GetWalletList();
+                    if (GetLocalStorage("currentUser") != null) await  CallAllBankAPI();
                     AdminBankPageData();
                     SetPromotionInPromotionPage();
                     SetAnnouncementsOnAllPages();
                 }
                 else {
-                    if (data.PromotionPageData == null) { AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
-                    if (data.AnnouncementsData == null) { AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
-                    if (data.WalletData == null) { GetWalletList(); }
-                    if (data.AdminBankPageData == null) { CallAPIForBankPages(); SetAdminBankPage() }
-                    if (data.DownloadPageData == null) { CallDownloadLinkAPI(); }
-                    if (GetLocalStorage("currentUser") != null) if (data.AllBankPageData == null) CallAllBankAPI();
+                    if (data.PromotionPageData == null) { await  AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
+                    if (data.AnnouncementsData == null) { await  AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
+                    if (data.WalletData == null) { await  GetWalletList(); }
+                    if (data.AdminBankPageData == null) { await CallAPIForBankPages(); SetAdminBankPage() }
+                    if (data.DownloadPageData == null) { await CallDownloadLinkAPI(); }
+                    if (GetLocalStorage("currentUser") != null) if (data.AllBankPageData == null) await CallAllBankAPI();
 
                 }
 
@@ -102,6 +102,19 @@ function LoginSectionHideUnhide() {
 
 function CheckLoginOrNot() {
     if (GetLocalStorage("currentUser") == null) window.location.href = "/";
+}
+
+//#endregion
+
+//#region Check Password Match
+
+function CheckPasswordMatch() {
+    var password = $("#txt_password").val();
+    var confirmPassword = $("#txt_confirm_password").val();
+    if (password !== confirmPassword)
+        $("#divCheckPasswordMatch").html("pass_not_match_error");
+    else
+        $("#divCheckPasswordMatch").html("");
 }
 
 //#endregion
@@ -188,7 +201,7 @@ async function DoLogin() {
         grantType: 'User'
     };
     let res = await PostMethod(accountEndPoints.login, model);
-    debugger
+    
     if (res.status !== 200) {
         if (err.status === 400) {
             if (err.responseJSON.message == "Your account is not active." || err.responseJSON.message == "Akaun anda belum aktif." || err.responseJSON.message == "您的帐户无效。") {
@@ -330,5 +343,7 @@ async function DoRegister() {
 }
 
 //#endregion
+
+
 
 //#endregion

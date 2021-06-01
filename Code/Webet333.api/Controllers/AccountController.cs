@@ -233,7 +233,10 @@ namespace Webet333.api.Controllers
             if (!ModelState.IsValid) return BadResponse(ModelState);
             using (var account_help = new AccountHelpers(Connection))
             {
-                var user = await account_help.AddUser(Connection, request, RoleConst.Users);
+
+                var uniqueId = Guid.NewGuid().ToString();
+
+                var user = await account_help.AddUser(Connection, request, RoleConst.Users, uniqueId);
 
                 #region Sending SMS in queue
 
@@ -246,11 +249,14 @@ namespace Webet333.api.Controllers
                 var messageResponse = await account_help.SendSMSAPI(request.Mobile, String.Format(registerMessage, request.Username));
                 var count = messageResponse.Count(f => f == ',');
 
-                var user_token = new TokenHelpers(Connection).GetAccessToken(AuthConfigOptions.Value, user, Guid.NewGuid().ToString());
+                var user_token = new TokenHelpers(Connection).GetAccessToken(AuthConfigOptions.Value, user, uniqueId);
+
+                user.VIPBanner = (user.VIPBanner != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.VIPIcon + "/" + user.VIPLevel + user.VIPBanner : null);
 
                 return OkResponse(new
                 {
                     access_token = user_token,
+                    user,
                     totalBankAccount = user.BankAccount,
                     messageResponse = new SMSResponse
                     {

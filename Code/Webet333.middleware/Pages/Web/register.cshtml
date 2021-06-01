@@ -3,6 +3,7 @@
     ViewData["Title"] = "Register - Webet333 -🥇";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+
 <div class="annunce-section-wrap">
     <div class="container">
         <div class="annunce-section">
@@ -16,8 +17,6 @@
         </div>
     </div>
 </div>
-
-
 
 <section class="article_sec_wrap">
     <div class="about_us_wrap">
@@ -38,7 +37,7 @@
                                 <div class="row form-group ml0 mr0">
                                     <label class="user-title col-md-3 pl0">Username :</label>
                                     <label class="user mendatory col-md-9 pl0">
-                                        <input type="text" class="reg-form" placeholder="" id="txt_username"/>
+                                        <input type="text" class="reg-form" placeholder="" id="txt_username" />
                                         <p class="star">*</p>
                                         <p class="note no-mar mar-btm-ten">
                                             <span class="lang" key="username_instruction">
@@ -51,7 +50,7 @@
                                 <div class="row form-group ml0 mr0">
                                     <label class="user-title col-md-3 pl0">Password :</label>
                                     <label class="lock mendatory col-md-9 pl0">
-                                        <input type="password" class="reg-form" placeholder="" id="txt_password"/>
+                                        <input type="password" class="reg-form" placeholder="" id="txt_password" />
                                         <p class="star">*</p>
                                         <p class="note no-mar mar-btm-ten">
                                             <span class="lang"> - Password must contain a length of 6 charaters</span>
@@ -68,8 +67,9 @@
                                 <div class="row form-group ml0 mr0">
                                     <label class="user-title col-md-3 pl0">Confirm Password :</label>
                                     <label class="lock mendatory col-md-9 pl0">
-                                        <input type="password" class="reg-form" placeholder="" id="txt_confirm_password">
+                                        <input type="password" class="reg-form" placeholder="" id="txt_confirm_password" onkeydown="CheckPasswordMatch()">
                                         <p class="star">*</p>
+                                        <label style="color:#ff0000;font-weight:bold" class="registrationFormAlert" id="divCheckPasswordMatch"> </label>
                                     </label>
                                 </div>
 
@@ -88,7 +88,7 @@
                                 <div class="row form-group ml0 mr0">
                                     <label class="user-title col-md-3 pl0">Phone Number :</label>
                                     <label class="num mendatory col-md-9 pl0">
-                                        <input type="number" p class="reg-form" placeholder="" id="txt_mobile_no"/>
+                                        <input type="number" p class="reg-form" placeholder="" id="txt_mobile_no" />
                                         <p class="star">*</p>
                                     </label>
                                 </div>
@@ -103,7 +103,7 @@
                                 <div class="row form-group ml0 mr0">
                                     <label class="user-title col-md-3 pl0">Full Name as NRIC</label>
                                     <label class="mar-btm-no user mendatory col-md-9 pl0">
-                                        <input type="text" class="reg-form" placeholder="" value="" id="txt_name"/>
+                                        <input type="text" class="reg-form" placeholder="" value="" id="txt_name" />
                                         <p class="star">*</p>
                                     </label>
                                 </div>
@@ -131,7 +131,7 @@
                     </div>
                     <hr>
                     <div class="row ml0 mr0">
-                        <div class="col-md-4 recaptcha" id="g-recaptcha1" data-callback="recaptchaCallback" ></div>
+                        <div class="col-md-4 recaptcha" id="g-recaptcha1" data-callback="recaptchaCallback"></div>
                     </div>
                     <div class="checkbox">
                         <label class="tick-note accept_terms_wrap">
@@ -153,17 +153,16 @@
 <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback'></script>
 <script type="text/javascript">
     AllAnnouncementsCallAPI();
-        // setTimout is not necessary
-          setTimeout(function() {
+    setTimeout(function () {
 
-            $('.recaptcha').each(function() {
-              grecaptcha.render(this.id, {
+        $('.recaptcha').each(function () {
+            grecaptcha.render(this.id, {
                 'sitekey': '6LdVkwkUAAAAACeeETRX--v9Js0vWyjQOTIZxxeB',
-                "theme":"light"
-              });
+                "theme": "light"
             });
+        });
 
-          }, 1000);
+    }, 1000);
 
     function recaptchaCallback() {
 
@@ -173,6 +172,7 @@
         else {
             $("#submit_button").attr("disabled", "disabled")
         }
-        
+
     }
+
 </script>

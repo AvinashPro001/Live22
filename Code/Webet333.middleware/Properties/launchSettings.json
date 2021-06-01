@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/Webet333.middleware",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:41192",
       "sslPort": 0
@@ -16,12 +20,15 @@
       }
     },
     "Webet333.middleware": {
-      "commandName": "Project",
+      "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+      "sqlDebugging": false,
+      "nativeDebugging": false,
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "jsWebView2Debugging": false
     }
   }
 }

@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
+using Webet333.models.Enums;
 using Webet333.models.Request;
 using Webet333.models.Request.Account;
 using Webet333.models.Request.Game;
@@ -38,7 +39,7 @@ namespace Webet333.api.Helpers
 
         #region User Management
 
-        public async Task<ProfileResponse> AddUser(string Connection, RegisterRequest request, string Role)
+        public async Task<ProfileResponse> AddUser(string Connection, RegisterRequest request, string Role,string UniqueId)
         {
             if (new SystemHelpers().IsValidMobile(request.Mobile))
             {
@@ -47,7 +48,7 @@ namespace Webet333.api.Helpers
                     await repository.AddOrUpdateAsync(StoredProcConsts.Account.SetUsers, new { request.Name, UserName = request.Username, MobileNo = request.Mobile, Password = SecurityHelpers.EncryptPassword(request.Password), Role, request.ReferenceKeyword });
                 }
             }
-            return await FindUser(mobileNo: request.Mobile);
+            return await FindUser(request.Username, request.Password, uniqueId: UniqueId, grantType: GrantTypeEnums.user.ToString());
         }
 
         public async Task<ProfileResponse> FindUser(string email = null, string password = null, string password918 = null, string userId = null, string userName = null, string uniqueId = null, string grantType = null, string mobileNo = null, string userName918 = null)
