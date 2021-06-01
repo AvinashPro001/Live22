@@ -63,7 +63,11 @@ var CommonService = /** @class */ (function () {
             GameInMaintenance: 'Game In Maintenance.',
             PleaseInsertLessAmount: 'Please insert less amount.',
             PleaseEnterAmountGreaterThan0: 'Please enter amount greater than 0.',
-            YourPromotionIsOnGoingCannotWithdrawTillThePromotionIsCompleted: 'Your Promotion is on going, cannot withdraw till the promotion is completed'
+            YourPromotionIsOnGoingCannotWithdrawTillThePromotionIsCompleted: 'Your Promotion is on going, cannot withdraw till the promotion is completed',
+            PleaseSelectToDateAndFromDate: 'Please Select To Date and From Date.',
+            UsernameRequired: 'Username Required.',
+            PasswordRequired: 'Password Required.',
+            VIPLevelRequired: 'VIP Level Required.'
         };
         //#endregion Check variable null, undefined, NaN
         //#region Game List

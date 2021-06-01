@@ -334,6 +334,7 @@ exports.gameBalance = {
     WM: exports.environment.apiUrl + 'gamebalance/wm',
     Pragmatic: exports.environment.apiUrl + 'gamebalance/pragmatic',
     walletBalance: exports.environment.apiUrl + 'customer/wallet/balance',
+    YeeBet: exports.environment.apiUrl + 'gamebalance/YeeBet'
 };
 exports.smsConst = {
     SMSbaseUrl: 'http://cloudsms.trio-mobile.com/index.php/api/bulk_mt?',
@@ -371,6 +372,7 @@ exports.GameRegister = {
     registerWM: exports.environment.apiUrl + 'wm/register',
     registerAllBet: exports.environment.apiUrl + 'allbet/register',
     registerSexy: exports.environment.apiUrl + 'sexybaccarart/register',
-    registerPragmatic: exports.environment.apiUrl + 'pragmatic/register'
+    registerPragmatic: exports.environment.apiUrl + 'pragmatic/register',
+    registerYeeBet: exports.environment.apiUrl + 'yeebet/register'
 };
 //# sourceMappingURL=environment.js.map

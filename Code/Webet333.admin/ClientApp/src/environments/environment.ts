@@ -450,5 +450,6 @@ export const GameRegister = {
     registerWM: environment.apiUrl + 'wm/register',
     registerAllBet: environment.apiUrl + 'allbet/register',
     registerSexy: environment.apiUrl + 'sexybaccarart/register',
-    registerPragmatic: environment.apiUrl + 'pragmatic/register'
+    registerPragmatic: environment.apiUrl + 'pragmatic/register',
+    registerYeeBet: environment.apiUrl + 'yeebet/register'
 }
