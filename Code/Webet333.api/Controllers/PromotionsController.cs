@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -11,6 +12,7 @@ using Webet333.files.interfaces;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
+using Webet333.models.Request.Payments;
 using Webet333.models.Request.Promotions;
 
 namespace Webet333.api.Controllers
@@ -294,6 +296,47 @@ namespace Webet333.api.Controllers
                 return OkResponse(await promotion_helper.PromotionApplyList(request));
             }
         }
+
+        #endregion Promotion Apply List
+
+        #region Promotion Apply List
+
+        //[Authorize]
+        [HttpPost(ActionsConst.Promotions.PromotionApplySelect)]
+        public async Task<IActionResult> PromotionApplySelect([FromBody] GlobalGetWithPaginationRequest request)
+        {
+            //var Role = GetUserRole(User);
+            //
+            //request.UserId = Role == RoleConst.Users ? GetUserId(User).ToString() : request.UserId;
+            using (var promotion_helper = new PromotionsHelpers(Connection))
+            {
+                var list=await promotion_helper.PromotionApplySelect(request);
+
+                if (list.Count != 0)
+                {
+                    var total = list.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 10,
+                        offset = list.FirstOrDefault().OffSet,
+                    });
+                }
+                return OkResponse(new
+                {
+                    result = list,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
+            }
+        }
+
 
         #endregion Promotion Apply List
 

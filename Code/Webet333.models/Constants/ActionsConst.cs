@@ -236,6 +236,8 @@
 
             public const string PromotionApplyList = "promotions/promotionapply/select";
 
+            public const string PromotionApplySelect= "promotions/promotionapply/list";
+
             public const string PromotionReport = "promotions/report";
 
             public const string PromotionApplyInsert = "promotions/promotionapply/insert";

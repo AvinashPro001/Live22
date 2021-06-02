@@ -7,6 +7,7 @@ using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Mapping.Promotions;
 using Webet333.models.Request;
+using Webet333.models.Request.Payments;
 using Webet333.models.Request.Promotions;
 using Webet333.models.Response.Promotions;
 
@@ -190,6 +191,16 @@ namespace Webet333.api.Helpers
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
                 return await repository.GetDataAsync(StoredProcConsts.Promotions.PromotionApplyList, new { request.UserId, request.FromDate, request.ToDate, request.Status });
+            }
+        }
+
+
+        public async Task<List<PromotionApplySelectResponse>> PromotionApplySelect(GlobalGetWithPaginationRequest request)
+        {
+            using (var repository = new DapperRepository<PromotionApplySelectResponse>(Connection))
+            {
+                var result= await repository.GetDataAsync(StoredProcConsts.Promotions.PromotionApplyList, new { request.UserId, request.FromDate, request.ToDate, request.PageNo,request.PageSize });
+                return result.ToList();
             }
         }
 
