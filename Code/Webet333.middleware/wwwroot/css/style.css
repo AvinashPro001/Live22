@@ -1688,11 +1688,10 @@ input.input-small {border: 1px solid #cac9c7; /*  box-shadow: 0 0 10px #ddd inse
 .follow_up_lasteat_video h1 span {font-size: 16px; font-weight: 600; padding-left: 5px; }
 .our_partner{font-size: 15px; line-height: 30px; font-weight: 500; }
 img.hours_img{width: 35px; padding-right: 4px;}
-.bank_details1{width: 100%; float: left; background: url(../images/bankdetails1.png) 0% 8% no-repeat; padding: 0px 5px 10px 35px; background-size: 28px;}
+.bank_details1,.bank_details2{ margin-bottom: 10px; width: 100%; display: flex; align-items: center;  }
 .bank_details1 h1{font-size: 14px; color: #404040; font-weight: 600; line-height: normal;padding-bottom: 3px;}
 .bank_details1 p a{font-size: 12px;color:#404040;font-weight: 500;}
 span.tickgray img{width:15px;}
-.bank_details2{width: 100%; float: left; background: url(../images/bankdetails2.png) 0% 8% no-repeat; padding: 0px 5px 10px 35px; background-size: 28px;}
 .bank_details2 h1{font-size: 14px; color: #404040; font-weight: 600; line-height: normal;padding-bottom: 3px;}
 .bank_details2 p a{font-size: 12px;color:#404040;font-weight: 500;}
 .hover_icons{display: none;}
@@ -1894,3 +1893,9 @@ p.bonus_content a{color: #333;}
 .pending_color{color:#ff9900 !important;font-weight: 600 !important;}
 .approved_color{color: #33cc33 !important;font-weight: 600 !important;}
 .rejected_color{color: #ff3300 !important;font-weight: 600 !important;}
+
+/* 2 June css start */
+.login-register .icon-home                      { width: auto; background: none; height: 14px; }
+.banner-inner .home-slider .slick-dots          { text-align: left; left: 20px; bottom: 20px; }
+/* myprofile page  */
+.bank-name .bank_details_icon                   { margin-right: 7px; padding-bottom: 10px; width: 28px; max-width: 100%; }
