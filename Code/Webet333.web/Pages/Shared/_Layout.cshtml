@@ -39,7 +39,7 @@
     <meta name="theme-color" content="#ffffff">
     <script src="~/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" charset="utf-8">
-        $(window).on('load', function(){
+        $(window).on('load', function () {
             $(".se-pre-con").fadeOut("slow");;
         });</script>
 
@@ -81,7 +81,7 @@
     <script src="../../js/xmlToJson.js"></script>
 
     <script type="text/javascript">
-        $(window).on('load', function(){
+        $(window).on('load', function () {
             $(".loadingImage").fadeOut("slow");;
         });
         function language(value) {
@@ -318,6 +318,10 @@
                                                             <td class="menu-padding">Pragmatic wallet</td>
                                                             <td><span id="PragmaticBalance">fetching.....</span></td>
                                                         </tr>
+                                                        <tr>
+                                                            <td class="menu-padding">YeeBet wallet</td>
+                                                            <td><span id="YeeBetBalance">fetching.....</span></td>
+                                                        </tr>
                                                     </table>
                                                 </div>
                                             </div>
@@ -360,7 +364,11 @@
                         <li class="dropdown live-casino" id="livecasino">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang" key="menu_live_casino"></span> <span class="caret"></span></a>
                             <ul class="dropdown-menu dropmenu-main" id="subMenuLive" role="menu">
-
+                                <li>
+                                    <a onclick="logingGame('YeeBet')" data-toggle="tooltip" data-placement="bottom" id="YeeBetGame">
+                                        <img data-toggle="tooltip" data-placement="bottom" style="width:120px" class="img-responsive img-filter" src="~/images/logo_yeebet.png" alt="YeeBet" />
+                                    </a>
+                                </li>
                                 <li>
                                     <a onclick="logingGame('DG')" data-toggle="tooltip" data-placement="bottom" id="DGGame">
                                         <img id="dglive" data-toggle="tooltip" data-placement="bottom" class="img-responsive menu-game-logo img-filter" src="~/images/Dg.png" alt="DG" />
@@ -572,6 +580,12 @@
                                         <li class="fright" id="ddlPragmaticWallet"></li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>YeeBet Wallet</strong></li>
+                                        <li class="fright" id="ddlYeeBetWallet"></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -745,6 +759,11 @@
                                 <img class="pink-logo" src="../../images/footer/pragmatic.png" alt="WM logo">
                             </figure>
                         </li>
+                        <li>
+                            <figure class="pad-top-ten">
+                                <img class="pink-logo" src="../../images/footer/logo_yeebet.png" alt="YeeBet logo">
+                            </figure>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-sm-6">
@@ -912,38 +931,38 @@
     <script src="../../js/pages/account.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../js/constants/918KissConsts.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
-                $(document).ready(function () {
-                    $('[data-toggle="tooltip"]').tooltip();
-                });
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
     </script>
     <script src="../../js/slick.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
 
-                $(document).ready(function () {
-                    $(".contact-us-btn,.contact-us-btn-footer").click(function () {
-                        $("#chatting").toggle();
-                    });
-                    $(".contact-user").mouseover(function () {
-                        $("#chatting").toggle();
-                    });
-                });
-                $(".dropdown").hover(function () {
-                    $(this).toggleClass("open");
-                },
-                    function () {
-                        $(this).removeClass("open");
-                    }
-                );
+        $(document).ready(function () {
+            $(".contact-us-btn,.contact-us-btn-footer").click(function () {
+                $("#chatting").toggle();
+            });
+            $(".contact-user").mouseover(function () {
+                $("#chatting").toggle();
+            });
+        });
+        $(".dropdown").hover(function () {
+            $(this).toggleClass("open");
+        },
+            function () {
+                $(this).removeClass("open");
+            }
+        );
     </script>
     <script type="text/javascript" charset="utf-8">
-                $(document).ready(function () {
-                    $(".open-modal").click();
-                });
-                jQuery(".scroll-down-visible").hide();
-                jQuery("#more-arrow").click(function () {
-                    jQuery(".scroll-down-visible").toggleClass("show");
-                    jQuery("#more-arrow").toggleClass("rotate");
-                });
+        $(document).ready(function () {
+            $(".open-modal").click();
+        });
+        jQuery(".scroll-down-visible").hide();
+        jQuery("#more-arrow").click(function () {
+            jQuery(".scroll-down-visible").toggleClass("show");
+            jQuery("#more-arrow").toggleClass("rotate");
+        });
     </script>
     <script src="../../js/jcf/jcf.js"></script>
     <script src="../../js/jcf/jcf.select.js"></script>
@@ -951,270 +970,270 @@
     <script src="../../js/jcf/jcf.checkbox.js"></script>
     <script src="../../js/jcf/jcf.file.js"></script>
     <script type="text/javascript" charset="utf-8">
-                $(document).ready(function () {
-                    $(function () {
-                        jcf.replaceAll();
-                    });
-                    $(function () {
-                        //$.fn.filepond.registerPlugin(FilePondPluginImagePreview);
-                        //$('.filepond').filepond({
-                        //    labelIdle: 'Choose File',
-                        //    allowDrop: false
-                        //});
-                    });
-                });
+        $(document).ready(function () {
+            $(function () {
+                jcf.replaceAll();
+            });
+            $(function () {
+                //$.fn.filepond.registerPlugin(FilePondPluginImagePreview);
+                //$('.filepond').filepond({
+                //    labelIdle: 'Choose File',
+                //    allowDrop: false
+                //});
+            });
+        });
     </script>
     <script type="text/javascript" charset="utf-8">
-                $(document).ready(function () {
-                    $(function () {
-                        jcf.replaceAll();
-                        document.getElementById("flag").style.cursor = "pointer";
-                    });
-                });
+        $(document).ready(function () {
+            $(function () {
+                jcf.replaceAll();
+                document.getElementById("flag").style.cursor = "pointer";
+            });
+        });
 
-                $(document).ready(function () {
-                    announcementMobile();
-                });
-                async function announcementMobile() {
-                    var marquee = document.getElementById('p_announcement_mobile');
-                    var marquee_one = document.getElementById('p_announcement_mobile_one');
-                    if (marquee !== null || marquee_one !== null) {
-                        var res = await GetMethod(apiEndPoints.announcementList);
-                        for (i = 0; i < res.data.length; i++) {
-                            marquee_one.innerHTML += '<span>' + res.data[i].announcement + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-                            marquee.innerHTML += '<span>' + res.data[i].announcement + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-                        }
-                    }
+        $(document).ready(function () {
+            announcementMobile();
+        });
+        async function announcementMobile() {
+            var marquee = document.getElementById('p_announcement_mobile');
+            var marquee_one = document.getElementById('p_announcement_mobile_one');
+            if (marquee !== null || marquee_one !== null) {
+                var res = await GetMethod(apiEndPoints.announcementList);
+                for (i = 0; i < res.data.length; i++) {
+                    marquee_one.innerHTML += '<span>' + res.data[i].announcement + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    marquee.innerHTML += '<span>' + res.data[i].announcement + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                 }
+            }
+        }
     </script>
     <script>
-                function openCity(evt, cityName, linknum) {
-                    var i, tabcontent, tablinks;
-                    tabcontent = document.getElementsByClassName("tabcontent");
-                    for (i = 0; i < tabcontent.length; i++) {
-                        tabcontent[i].style.display = "none";
-                    }
-                    tablinks = document.getElementsByClassName("tablinks");
-                    for (i = 0; i < tablinks.length; i++) {
-                        tablinks[i].className = tablinks[i].className.replace(" active", "");
-                    }
-                    if (linknum != null && linknum != undefined) {
-                        tablinks[linknum].className += " active";
-                    }
-                    document.getElementById(cityName).style.display = "block";
-                    evt.currentTarget.className += " active";
-                }
-                document.getElementById("defaultOpen").click();
+        function openCity(evt, cityName, linknum) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            if (linknum != null && linknum != undefined) {
+                tablinks[linknum].className += " active";
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        document.getElementById("defaultOpen").click();
     </script>
     <script type="text/javascript">
-                $(document).ready(function () {
-                    $(".navbar-toggle,.canvas-overlay").click(function () {
-                        if (!$("html").hasClass('intro')) {
-                            $("html").addClass("intro");
-                        }
-                        else {
-                            $("html").removeClass("intro");
-                        }
-                    });
-                    $(".canvas-overlay").click(function () {
-                        if ($(".navbar-collapse").hasClass('in')) {
-                            $(".navbar-collapse").removeClass("in");
-                        }
-                    });
-                });
+        $(document).ready(function () {
+            $(".navbar-toggle,.canvas-overlay").click(function () {
+                if (!$("html").hasClass('intro')) {
+                    $("html").addClass("intro");
+                }
+                else {
+                    $("html").removeClass("intro");
+                }
+            });
+            $(".canvas-overlay").click(function () {
+                if ($(".navbar-collapse").hasClass('in')) {
+                    $(".navbar-collapse").removeClass("in");
+                }
+            });
+        });
     </script>
     <script type="text/javascript" charset="utf-8">
-                $(document).ready(function () {
-                    if (window.location.hash) {
-                        var hash = window.location.hash.substring(1);
-                        if (hash == 'deposit') {
-                            document.getElementById("depositOpen").click();
-                        }
-                        if (hash == 'withdrawal') {
-                            document.getElementById("withdrawalOpen").click();
-                        }
-                        if (hash == 'transfer') {
-                            document.getElementById("transferOpen").click();
-                        }
-
-                        if (hash == 'history') {
-                            document.getElementById("historyOpen").click();
-                        }
-                        if (hash == 'restore') {
-                            document.getElementById("restoreOpen").click();
-                        }
-                        if (hash == 'statement') {
-                            document.getElementById("statementOpen").click();
-                        }
-                        if (hash == 'rebate') {
-                            document.getElementById("restoreOpen").click();
-                        }
-                        if (hash == 'promotion') {
-                            document.getElementById("promotionOpen").click();
-                        }
-                    }
-
-                });
-                $(window).on('hashchange', function (e) {
-                    if (!location.href.toLowerCase().includes("account/profile"))
-                        if (window.location.hash) {
-                            var hash = window.location.hash.substring(1);
-                            if (hash == 'deposit') {
-                                document.getElementById("depositOpen").click();
-                            } if (hash == 'withdrawal') {
-                                document.getElementById("withdrawalOpen").click();
-                            } if (hash == 'transfer') {
-                                document.getElementById("transferOpen").click();
-                            }
-                            if (hash == 'history') {
-                                document.getElementById("historyOpen").click();
-                            }
-                            if (hash == 'restore') {
-                                document.getElementById("restoreOpen").click();
-                            }
-                            if (hash == 'statement') {
-                                document.getElementById("statementOpen").click();
-                            }
-                            if (hash == 'rebate') {
-                                document.getElementById("restoreOpen").click();
-                            }
-                            if (hash == 'promotion') {
-                                document.getElementById("promotionOpen").click();
-                            }
-                        }
-                });
-    </script>
-    <script>
-                $(document).ready(function () {
-                    if (localStorage.getItem('currentUser') == null) {
-                        document.getElementById('logout').style.display = "none";
-                        document.getElementById('AccountAfterLogin').style.display = "none";
-                        document.getElementById('balanceAfterShow').style.display = "none";
-                        document.getElementById('afterLoginAnnouncementMobile').style.display = "none";
-                        document.getElementById('walletFooterAfterLogin').style.display = "none";
-                    }
-                    else {
-                        document.getElementById('login').style.display = "none";
-                        document.getElementById('beforeLoginAnnouncementMobile').style.display = "none";
-                        document.getElementById('walletFooterBeforeLogin').style.display = "none";
-                    }
-                });
-    </script>
-    <script type="text/javascript" charset="utf-8">
-                $(".form_datetime").datetimepicker({ autoclose: true });
-    </script>
-    <script>
-                $(document).ready(function () {
-                    $('[data-toggle="tooltip"]').tooltip();
-                });
-
-                $("#gameLoadFrame").click(function () {
-                    $("#gameLoadFrame").removeClass("in");
-                    document.getElementById("gameLoadFrame").style.display = 'none';
-                    document.getElementById("gameFrame").src = '';
-                });
-    </script>
-    <script>
-                $(function () {
-                    $(".preload").fadeOut(2000, function () {
-                        // $(".content").fadeIn(1000);
-                    });
-                });
-    </script>
-    <script type="text/javascript" charset="utf-8">
-                $(document).on('ready', function () {
-                    if (window.location.href === "http://localhost:27100" || window.location.href == "http://www.webet333.com") {
-                        fillByMemory()
-                        if ($('#remember_me').val()) {
-                            rememberMe();
-                        }
-                    }
-                });
-
-                function rememberMe() {
-                    $.cookie('id', $('#txt_login_username').val());
-                    $.cookie('pass', $('#txt_login_password').val());
-
+        $(document).ready(function () {
+            if (window.location.hash) {
+                var hash = window.location.hash.substring(1);
+                if (hash == 'deposit') {
+                    document.getElementById("depositOpen").click();
+                }
+                if (hash == 'withdrawal') {
+                    document.getElementById("withdrawalOpen").click();
+                }
+                if (hash == 'transfer') {
+                    document.getElementById("transferOpen").click();
                 }
 
-                function fillByMemory() {
-                    if (!!$.cookie('id'))
-                        $('#txt_login_username').val($.cookie('id'));
-
-                    if (!!$.cookie('pass'))
-                        $('#txt_login_password').val($.cookie('pass'));
+                if (hash == 'history') {
+                    document.getElementById("historyOpen").click();
                 }
-                $(document).click(function () {
-                    $("#myDropdown").removeClass("in");
-                });
+                if (hash == 'restore') {
+                    document.getElementById("restoreOpen").click();
+                }
+                if (hash == 'statement') {
+                    document.getElementById("statementOpen").click();
+                }
+                if (hash == 'rebate') {
+                    document.getElementById("restoreOpen").click();
+                }
+                if (hash == 'promotion') {
+                    document.getElementById("promotionOpen").click();
+                }
+            }
+
+        });
+        $(window).on('hashchange', function (e) {
+            if (!location.href.toLowerCase().includes("account/profile"))
+                if (window.location.hash) {
+                    var hash = window.location.hash.substring(1);
+                    if (hash == 'deposit') {
+                        document.getElementById("depositOpen").click();
+                    } if (hash == 'withdrawal') {
+                        document.getElementById("withdrawalOpen").click();
+                    } if (hash == 'transfer') {
+                        document.getElementById("transferOpen").click();
+                    }
+                    if (hash == 'history') {
+                        document.getElementById("historyOpen").click();
+                    }
+                    if (hash == 'restore') {
+                        document.getElementById("restoreOpen").click();
+                    }
+                    if (hash == 'statement') {
+                        document.getElementById("statementOpen").click();
+                    }
+                    if (hash == 'rebate') {
+                        document.getElementById("restoreOpen").click();
+                    }
+                    if (hash == 'promotion') {
+                        document.getElementById("promotionOpen").click();
+                    }
+                }
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            if (localStorage.getItem('currentUser') == null) {
+                document.getElementById('logout').style.display = "none";
+                document.getElementById('AccountAfterLogin').style.display = "none";
+                document.getElementById('balanceAfterShow').style.display = "none";
+                document.getElementById('afterLoginAnnouncementMobile').style.display = "none";
+                document.getElementById('walletFooterAfterLogin').style.display = "none";
+            }
+            else {
+                document.getElementById('login').style.display = "none";
+                document.getElementById('beforeLoginAnnouncementMobile').style.display = "none";
+                document.getElementById('walletFooterBeforeLogin').style.display = "none";
+            }
+        });
     </script>
     <script type="text/javascript" charset="utf-8">
-                $(document).on('ready', function () {
-                    $('.one-time').slick({
-                        dots: true,
-                        infinite: true,
-                        speed: 5000,
-                        autoplay: true,
-                        slidesToShow: 1,
-                        adaptiveHeight: true
-                    });
-                });
+        $(".form_datetime").datetimepicker({ autoclose: true });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        $("#gameLoadFrame").click(function () {
+            $("#gameLoadFrame").removeClass("in");
+            document.getElementById("gameLoadFrame").style.display = 'none';
+            document.getElementById("gameFrame").src = '';
+        });
+    </script>
+    <script>
+        $(function () {
+            $(".preload").fadeOut(2000, function () {
+                // $(".content").fadeIn(1000);
+            });
+        });
+    </script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).on('ready', function () {
+            if (window.location.href === "http://localhost:27100" || window.location.href == "http://www.webet333.com") {
+                fillByMemory()
+                if ($('#remember_me').val()) {
+                    rememberMe();
+                }
+            }
+        });
+
+        function rememberMe() {
+            $.cookie('id', $('#txt_login_username').val());
+            $.cookie('pass', $('#txt_login_password').val());
+
+        }
+
+        function fillByMemory() {
+            if (!!$.cookie('id'))
+                $('#txt_login_username').val($.cookie('id'));
+
+            if (!!$.cookie('pass'))
+                $('#txt_login_password').val($.cookie('pass'));
+        }
+        $(document).click(function () {
+            $("#myDropdown").removeClass("in");
+        });
+    </script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).on('ready', function () {
+            $('.one-time').slick({
+                dots: true,
+                infinite: true,
+                speed: 5000,
+                autoplay: true,
+                slidesToShow: 1,
+                adaptiveHeight: true
+            });
+        });
     </script>
 
     <!-- Slider Section End -->
     <script>
-                $(window).scroll(function () {
-                    var scroll = $(window).scrollTop();
-                    if (scroll >= 1) {
-                        $("header").addClass("sticky-header");
-                    }
-                    else {
-                        $("header").removeClass("sticky-header");
-                    }
-                });
+        $(window).scroll(function () {
+            var scroll = $(window).scrollTop();
+            if (scroll >= 1) {
+                $("header").addClass("sticky-header");
+            }
+            else {
+                $("header").removeClass("sticky-header");
+            }
+        });
     </script>
     <script type="text/javascript">
-                function calcTime(offset) {
-                    d = new Date();
-                    utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-                    nd = new Date(utc + (3600000 * offset));
-                    return nd.toLocaleString(nd, 'HH:mm');
+        function calcTime(offset) {
+            d = new Date();
+            utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+            nd = new Date(utc + (3600000 * offset));
+            return nd.toLocaleString(nd, 'HH:mm');
+        }
+        if (GetLocalStorage('currentUser') !== null)
+            if (document.getElementById("lbl_TimeafterLogin") !== null)
+                document.getElementById("lbl_TimeafterLogin").innerText = (calcTime('+8'));
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.tablinks').click(function () {
+                //var offset = $('body').offset();
+                //window.scrollTo(offset);
+            });
+        })
+
+        var counter = 0;
+
+        $("html").mousemove(async function (event) {
+            ++counter;
+            if (counter == 150) {
+                if (GetLocalStorage('currentUser') !== null) {
+                    PostMethod(apiEndPoints.userLastTimeUpdate, {});
                 }
-                if (GetLocalStorage('currentUser') !== null)
-                    if (document.getElementById("lbl_TimeafterLogin") !== null)
-                        document.getElementById("lbl_TimeafterLogin").innerText = (calcTime('+8'));
-    </script>
-    <script type="text/javascript">
-                $(document).ready(function () {
-                    $('.tablinks').click(function () {
-                        //var offset = $('body').offset();
-                        //window.scrollTo(offset);
-                    });
-                })
-
-                var counter = 0;
-
-                $("html").mousemove(async function (event) {
-                    ++counter;
-                    if (counter == 150) {
-                        if (GetLocalStorage('currentUser') !== null) {
-                            PostMethod(apiEndPoints.userLastTimeUpdate, {});
-                        }
-                        counter = 0;
-                    }
-                });
-                $("html").click(async function (event) {
-                    if (GetLocalStorage('currentUser') !== null) {
-                        PostMethod(apiEndPoints.userLastTimeUpdate, {});
-                    }
-                });
+                counter = 0;
+            }
+        });
+        $("html").click(async function (event) {
+            if (GetLocalStorage('currentUser') !== null) {
+                PostMethod(apiEndPoints.userLastTimeUpdate, {});
+            }
+        });
     </script>
     <script>
-                function CloseIframe() {
-                    document.getElementById("mainpagebody").style.display = "";
-                    document.getElementById("iframeModel").style.display = "none";
-                    document.getElementById("gameFrame").src = "";
-                }
+        function CloseIframe() {
+            document.getElementById("mainpagebody").style.display = "";
+            document.getElementById("iframeModel").style.display = "none";
+            document.getElementById("gameFrame").src = "";
+        }
     </script>
 </body>
 </html>

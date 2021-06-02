@@ -4,7 +4,7 @@
     {
         public class WalletName
         {
-            public const string YEEBET = "YEEBET Wallet";
+            public const string YeeBet = "YeeBet Wallet";
         }
     }
 }

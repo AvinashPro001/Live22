@@ -1001,7 +1001,6 @@ async function TransferInAllWallet(GameWalletName) {
     }
     var res = await PostMethod(apiEndPoints.AllInWallet, model);
     await WalletBalance();
-    
 }
 //#endregion Transfer Main Wallet to Any Wallet
 function LoadingImageShowAllInSection(GameName) {
@@ -1020,9 +1019,9 @@ function LoadingImageShowAllInSection(GameName) {
         case "AllBet Wallet": document.getElementById("AllBetWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "WM Wallet": document.getElementById("WMWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "Pragmatic Wallet": document.getElementById("PragmaticWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "YeeBet Wallet": document.getElementById("YeeBetWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
     }
 }
-
 
 async function CheckMainteance() {
     var res = await GetMethodWithReturn(apiEndPoints.VaderPayMainteanceSelect);
@@ -1051,5 +1050,6 @@ async function CheckSupportGame() {
         document.getElementById("saallin").disabled = !res.data[0].IsSA ? true : false;
         document.getElementById("sexyallin").disabled = !res.data[0].IsSexyBaccarat ? true : false;
         document.getElementById("wmallin").disabled = !res.data[0].IsWM ? true : false;
+        document.getElementById("YeeBetAllIn").disabled = !res.data[0].IsYeeBet ? true : false;
     }
 }

@@ -63,7 +63,6 @@
     <script src="~/js/mobile/m_bank.js"></script>
     <script src="~/js/slick.js"></script>
 
-
     <script src="~/js/constants/M8Consts.js"></script>
     <script src="~/js/constants/918KissConsts.js"></script>
     <script src="~/js/constants/AGConsts.js"></script>
@@ -78,7 +77,6 @@
             $(".loadingImage").fadeOut("slow");;
         });
     </script>
-
 
     <script>
         function requestDesktopSite() {
@@ -109,7 +107,6 @@
                 }
             }
         }
-
     </script>
     <!-- Event snippet for Sign-up conversion page
     In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
@@ -127,7 +124,6 @@
             return false;
         }
     </script>
-
 </head>
 
 <body>
@@ -153,11 +149,9 @@
         </div>
     </div>
 
-
     <div id="pageResponse">
     </div>
     <script>
-
         setTimeout(() => {
             var url_string = window.location;
             var url = new URL(url_string);
@@ -222,7 +216,6 @@
 
         function loadPageHome(obj) {
 
-
             $('.content').empty();
             $('#home').empty();
             var cUser = GetLocalStorage('currentUser');
@@ -239,46 +232,25 @@
                     history.pushState(null, null, "/mobile?p=home");
                     SliderPromotion();
 
-
                     if (obj != undefined) {
-                        if (obj.backFrom == "about") {
-                            $('body').css('padding-top', '35px');
-                        }
-                        if (obj.backFrom == "termandCondi") {
-                            $('body').css('padding-top', '35px');
-                        }
-                        if (obj.backFrom == "login") {
-                            $('body').css('padding-top', '35px');
-                        }
-                        if (obj.backFrom == "deposit") {
-                            $('body').css('padding-top', '35px');
-                        }
-                        if (obj.backFrom == "transfer") {
-                            $('body').css('padding-top', '35px');
-                        }
-                        if (obj.backFrom == "widthraw") {
-                            $('body').css('padding-top', '35px');
-                        }
-                        if (obj.backFrom == "forgetpassword") {
-                            $('body').css('padding-top', '35px');
-                        }
-                        if (obj.backFrom == "download") {
-                            $('body').css('padding-top', '35px');
-                        }
-                        if (obj.backFrom == "history") {
-                            $('body').css('padding-top', '35px');
-                        }
+                        if (obj.backFrom == "about") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "termandCondi") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "login") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "deposit") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "transfer") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "widthraw") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "forgetpassword") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "download") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "history") $('body').css('padding-top', '35px');
 
                         Walletdate();
                         GameInMaintenance(0);
                         WalletSignalR();
-
                     }
                     $('body').css('padding-top', '35px');
                     if (cUser == null) {
                         $('#afterlogin_mobile').show();
                         $('#beforelogin_mobile').hide();
-
                     } else {
                         CheckUserVerified()
                         WalletBalance();
@@ -287,7 +259,6 @@
                         $('#beforelogin_mobile').show();
                     }
                     $("html").removeClass("intro");
-
                 }
             });
         }
@@ -610,7 +581,6 @@
 
                 pageName1 = name;
 
-
                 if (pageName1 != pageName2) {
 
                     if (name != null) {
@@ -679,6 +649,5 @@
             padding-top: 35px;
         }
     </style>
-
 </body>
 </html>

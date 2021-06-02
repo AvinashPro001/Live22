@@ -2,7 +2,6 @@
 @{ ViewData["Title"] = "Withdraw";
     Layout = ""; }
 
-
 <div id="comContent"></div>
 <div id="mComContent">
 
@@ -99,6 +98,12 @@
                         <li class="fright" id="ddlPragmaticWallet">feching...</li>
                     </ul>
                 </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>YeeBet Wallet</strong></li>
+                        <li class="fright" id="ddlYeeBetWallet">feching...</li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -151,9 +156,6 @@
             <div class="pad-lr-comman">
                 <form id="formWithdrawal">
                     <ul class="password-upadte no-mar">
-
-
-
                         <li class="mar-btm-fifteen" id="displayAccountNumber">
                             <label class="fleft"><p class="big no-mar lang" key="withdrawal_account_number">Account Number</p></label>
                             <label class="fright bank-icon bank-name mendatory">
@@ -161,14 +163,10 @@
                                 <p class="star">*</p>
                             </label>
                         </li>
-
                         <li class="mar-btm-fifteen">
                             <label class="fleft"><p class="big no-mar lang" key="withdrawal_from">From:</p></label>
                             <label class="fright bank-name mendatory">Main Wallet</label>
                         </li>
-
-
-
                         <li class="mar-btm-fifteen">
                             <label class="fleft"><p class="big lang" key="withdrawal_amount">Amount:</p></label>
                             <label class="fright card-number bank-name mendatory">
@@ -176,12 +174,10 @@
                                 <p class="star">*</p>
                             </label>
                         </li>
-
                         <li class="mar-btm-fifteen">
                             <label class="fleft"></label>
                             <label class="fright"><div data-toggle="modal" data-target="#WithdrawAmountList"><span class="fa fa-lock" id="lock_icon"></span><span class="fa fa-unlock" id="unlock_icon"></span>&nbsp;<span id="WithdrawAmount">MYR 700</span></div></label>
                         </li>
-
                         <li class="mar-btm-fifteen text-center">
                             <button class="submit lang" key="withdrawal_submit" data-toggle="modal" data-target="#profilemyModal" onclick="Withdrawal()" type="button">SUBMIT</button>
                         </li>
@@ -212,7 +208,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="container">
         <div id="RestoreConfirmation" class="modal fade">
@@ -274,7 +269,6 @@
             });
         });
         CheckWithdrawAmountList();
-
     </script>
 
     <div class="footer-widget" id="footerWidget">
@@ -311,7 +305,6 @@
     <div>
         <a id="mobileM8" style="display:none"></a>
     </div>
-
 </div>
 
 <script type="text/javascript">
@@ -324,8 +317,6 @@
         });
     });
 </script>
-
-
 
 <!--Begin Comm100 Live Chat Code-->
 <div></div>

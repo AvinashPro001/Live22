@@ -13,6 +13,7 @@ namespace Webet333.web
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>().UseUrls("http://localhost:8081/").UseContentRoot(Directory.GetCurrentDirectory());
+            .UseStartup<Startup>()
+            .UseContentRoot(Directory.GetCurrentDirectory());
     }
 }

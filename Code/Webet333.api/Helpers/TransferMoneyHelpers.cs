@@ -525,7 +525,7 @@ namespace Webet333.api.Helpers
                     }
                     break;
 
-                case WalletConst.WalletName.YEEBET:
+                case WalletConst.WalletName.YeeBet:
                     try
                     {
                         var YEEBETResponse = await YEEBETGameHelpers.TransferBalanceAsync(UsernameResponse.YEEBETUsername, -Math.Abs(Amount));
@@ -848,7 +848,7 @@ namespace Webet333.api.Helpers
                     }
                     break;
 
-                case WalletConst.WalletName.YEEBET:
+                case WalletConst.WalletName.YeeBet:
                     try
                     {
                         var YEEBETResponse = await YEEBETGameHelpers.TransferBalanceAsync(UsernameResponse.YEEBETUsername, Amount);
