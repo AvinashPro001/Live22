@@ -31,6 +31,7 @@ using Webet333.models.Request.Game;
 using Webet333.models.Request.Game.DG;
 using Webet333.models.Request.Game.M8;
 using Webet333.models.Request.Game.MaxBet;
+using Webet333.models.Request.Payments;
 using Webet333.models.Request.User;
 using Webet333.models.Response.Account;
 using Webet333.models.Response.Game;
@@ -320,24 +321,36 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Game.UserRebateHistory)]
-        public async Task<IActionResult> UserRebateHistory([FromBody] GlobalListRequest request)
+        public async Task<IActionResult> UserRebateHistory([FromBody] GlobalGetWithPaginationRequest request)
         {
             var Role = GetUserRole(User);
             request.UserId = Role == RoleConst.Users ? GetUserId(User).ToString() : request.UserId;
 
             using (var game_helper = new GameHelpers(Connection: Connection))
             {
-                var response = await game_helper.getUserRebateHistory(request);
-                if (Role == RoleConst.Users)
+                var list = await game_helper.getUserRebateHistory(request);
+                if (list.Count != 0)
                 {
-                    var trunoverRebate = response.Where(x => x.GameType == "LIVE CASINO" || x.GameType == "SPORTS");
-                    var winloseRebate = response.Where(x => x.GameType == "Slot");
-                    return OkResponse(new { trunoverRebate, winloseRebate });
+                    var total = list.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 10,
+                        offset = list.FirstOrDefault().OffSet,
+                    });
                 }
-                else
+                return OkResponse(new
                 {
-                    return OkResponse(response);
-                }
+                    result = list,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
             }
         }
 
@@ -3387,5 +3400,45 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Joker Player Log
+
+        #region Get Users Betting Summery
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.BettingSummery)]
+        public async Task<IActionResult> BettingSummery([FromBody] GlobalGetWithPaginationRequest request)
+        {
+            var Username = GetUserName(User);
+            
+            using (var game_helper = new GameHelpers(Connection))
+            {
+                var list = await game_helper.BettingSummerySelect(request, Username);
+                if (list.Count != 0)
+                {
+                    var total = list.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 10,
+                        offset = list.FirstOrDefault().OffSet,
+                    });
+                }
+                return OkResponse(new
+                {
+                    result = list,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
+            }
+        }
+
+
+        #endregion Get Users Betting Summery
+
     }
 }

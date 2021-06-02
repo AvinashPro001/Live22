@@ -159,6 +159,8 @@
 
         public class Payments
         {
+            public const string UsersDepositWithdrawSelect = "[dbo].[Users_Deposit_Withdraw_Select]";
+
             public const string Transaction = "[dbo].[UsersTransaction_Select]";
 
             public const string WalletTypes = "[dbo].[UsersDeposit_Select_Bank_Deposit_Wallet]";
@@ -318,6 +320,8 @@
 
         public class Game
         {
+            public const string BettingSummerySelect = "[dbo].[BettingSummery_Select]";
+
             public const string RebateMainWalletDepositWithdraw = "[dbo].[Rebate_Main_Wallet_Deposit_Withdraw]";
 
             public const string GetAllGameUsers = "[dbo].[gameUser_Select]";

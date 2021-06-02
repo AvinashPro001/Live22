@@ -105,6 +105,8 @@
 
         public class Payments
         {
+            public const string WithdrawDepositRetrive = "payments/withdraw_deposit_select";
+
             public const string Transaction = "payments/transactions";
 
             public const string SimilarnameList = "payments/withdraw/similarname/list";
@@ -297,6 +299,8 @@
 
         public class Game
         {
+            public const string BettingSummery = "Game/bettingsummery";
+
             public const string M8GameGetLimit = "Game/M8/GetDefaultLimit";
 
             public const string M8SetUsersBettingLimit = "Game/M8/SetUsersBettingLimit";

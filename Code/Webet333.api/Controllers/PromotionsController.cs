@@ -299,15 +299,15 @@ namespace Webet333.api.Controllers
 
         #endregion Promotion Apply List
 
-        #region Promotion Apply List
+        #region Promotion Apply List 
 
-        //[Authorize]
+        [Authorize]
         [HttpPost(ActionsConst.Promotions.PromotionApplySelect)]
         public async Task<IActionResult> PromotionApplySelect([FromBody] GlobalGetWithPaginationRequest request)
         {
-            //var Role = GetUserRole(User);
-            //
-            //request.UserId = Role == RoleConst.Users ? GetUserId(User).ToString() : request.UserId;
+            var Role = GetUserRole(User);
+            
+            request.UserId = Role == RoleConst.Users ? GetUserId(User).ToString() : request.UserId;
             using (var promotion_helper = new PromotionsHelpers(Connection))
             {
                 var list=await promotion_helper.PromotionApplySelect(request);

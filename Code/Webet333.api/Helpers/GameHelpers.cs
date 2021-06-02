@@ -18,6 +18,7 @@ using Webet333.models.Mapping.Game;
 using Webet333.models.Request;
 using Webet333.models.Request.Game;
 using Webet333.models.Request.Game.M8;
+using Webet333.models.Request.Payments;
 using Webet333.models.Response;
 using Webet333.models.Response.Account;
 using Webet333.models.Response.Game;
@@ -678,11 +679,11 @@ namespace Webet333.api.Helpers
 
         #region User Rebate History
 
-        internal async Task<List<UserRebateHistoryResponse>> getUserRebateHistory(GlobalListRequest request)
+        internal async Task<List<UserRebateHistoryResponse>> getUserRebateHistory(GlobalGetWithPaginationRequest request)
         {
             using (var GetRepository = new DapperRepository<UserRebateHistoryResponse>(Connection))
             {
-                var users = await GetRepository.GetDataAsync(StoredProcConsts.Game.UsersRebateHistory, new { request.UserId, request.FromDate, request.ToDate });
+                var users = await GetRepository.GetDataAsync(StoredProcConsts.Game.UsersRebateHistory, new { request.UserId, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
                 return users.ToList();
             }
         }
@@ -1545,6 +1546,15 @@ namespace Webet333.api.Helpers
         }
 
         #endregion KISS918 game Password Status Update
+
+        public async Task<List<BettingSummerySelectResponse>> BettingSummerySelect(GlobalGetWithPaginationRequest request,string Username)
+        {
+            using (var repository = new DapperRepository<BettingSummerySelectResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Game.BettingSummerySelect, new { Username, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                return result.ToList();
+            }
+        }
 
         #region House Keeping
 
