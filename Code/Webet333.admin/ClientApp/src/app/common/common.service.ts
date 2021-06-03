@@ -222,7 +222,9 @@ export class CommonService {
         PleaseSelectToDateAndFromDate: 'Please Select To Date and From Date.',
         UsernameRequired: 'Username Required.',
         PasswordRequired: 'Password Required.',
-        VIPLevelRequired:'VIP Level Required.'
+        VIPLevelRequired: 'VIP Level Required.',
+        PleaseSelectMobileBannerImage: 'Please Select Mobile Banner Image',
+        PleaseSelectDesktopBannerImage: 'Please Select Desktop Banner Image'
     };
 
     //#endregion Error List
