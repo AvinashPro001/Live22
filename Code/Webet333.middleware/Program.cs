@@ -19,6 +19,6 @@ namespace Webet333.middleware
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>().UseUrls("http://localhost:5000/").UseContentRoot(Directory.GetCurrentDirectory());
+                .UseStartup<Startup>().UseUrls("http://localhost:5002/").UseContentRoot(Directory.GetCurrentDirectory());
     }
 }

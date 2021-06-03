@@ -5,6 +5,7 @@
 .promtion_boxess a,
 .vip_boxess a { text-transform: capitalize; font-size: 11px; line-height: 13px; }
 ul.highlight-bank li figure, .bank-selection ul li img { filter: grayscale(1); transition: 0.5s; }
+.deposit-bank-listing .deposit-bank-selection ul.highlight-bank li figure,.deposit-bank-listing .deposit-bank-selection.bank-selection ul li img    { filter: grayscale(0); }
 ul.highlight-bank li.active figure, .bank-selection ul li.active img { filter: grayscale(0); }
 .youtube_latest_video iframe { max-width: 500px; height: 300px; border: 5px solid #ffb700;}
 .asia_girl_right img { max-height: 165px; width: auto; }

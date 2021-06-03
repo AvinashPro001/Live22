@@ -643,13 +643,19 @@
     function openCity(evt, cityName) {
 
         var i, tabcontent_account, tablinks_account;
+        // var resize1,resize2;
         tabcontent_account = document.getElementsByClassName("tabcontent_account");
         for (i = 0; i < tabcontent_account.length; i++) {
             tabcontent_account[i].style.display = "none";
         }
         tablinks_account = document.getElementsByClassName("tablinks_account");
+        // resize1 = document.getElementsByClassName("slider-for");
+        // resize2 = document.getElementsByClassName("slider-nav");
         for (i = 0; i < tablinks_account.length; i++) {
             tablinks_account[i].className = tablinks_account[i].className.replace("active_tabaccount", "");
+            // $('.resize2').resize();
+            // document.getElementsByClassName("slider-for").style.resize = "both";
+
         }
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active_tabaccount";
