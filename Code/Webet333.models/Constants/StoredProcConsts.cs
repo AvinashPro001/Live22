@@ -112,6 +112,8 @@
 
         public class User
         {
+            public const string GetUsersRewardList = "[dbo].[Users_Reward_Select]";
+
             public const string GetUsersByRole = "[dbo].[Users_Select_By_Role]";
 
             public const string GetUsersWinloseReport = "[dbo].[Users_Winlose_Report]";

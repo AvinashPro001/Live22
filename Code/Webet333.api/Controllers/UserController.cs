@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -505,5 +506,45 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Daily Report
+
+        #region Users Reward History
+
+        [HttpPost(ActionsConst.Users.RewardList)]
+        public async Task<IActionResult> RewardList([FromBody] GlobalGetWithPaginationRequest request)
+        {
+            var Role = GetUserRole(User);
+
+            request.UserId = Role == RoleConst.Users ? GetUserId(User).ToString() : request.UserId;
+            using (var user_helper = new UserHelpers(Connection))
+            {
+                var list = await user_helper.RewardList(request);
+
+                if (list.Count != 0)
+                {
+                    var total = list.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 10,
+                        offset = list.FirstOrDefault().OffSet,
+                    });
+                }
+                return OkResponse(new
+                {
+                    result = list,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
+            }
+        }
+
+
+        #endregion Promotion Apply List
     }
 }

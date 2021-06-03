@@ -169,6 +169,8 @@
 
         public class Users
         {
+            public const string RewardList = "customer/reward/list";
+
             public const string Retrieve = "customer/list";
 
             public const string BankRegister = "customer/bank/register";
