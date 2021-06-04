@@ -83,15 +83,15 @@
                     <div class="tab white-bg-tab-panel">
                         <h4 class="mar-btm-fifteen">BANKING</h4>
 
-                        <button id="deposit_tab" class="tablinks account-reg deposit" onclick="openCity(event, 'deposit_amount')"><span class="lang" key="deposit">DEPOSIT</span></button>
-                        <button id="withdraw_tab" class="tablinks account-reg withdrawal" onclick="openCity(event, 'withdraw_amount')"><span class="lang" key="withdrawal_title">WITHDRAW</span></button>
-                        <button id="transfer_tab" class="tablinks account-reg transfer " onclick="openCity(event, 'transfer_amount')"><span class="lang" key="transfer_title">TRANSFER</span></button>
-                        <button id="history_tab" class="tablinks mar-btm-fifteen account-reg history" onclick="openCity(event, 'history_amount')"><span class="lang" key="history">HISTORY</span></button>
+                        <button id="deposit_tab" class="tablinks account-reg deposit opercity" onclick="openCity(event, 'deposit_amount')"><span class="lang" key="deposit">DEPOSIT</span></button>
+                        <button id="withdraw_tab" class="tablinks account-reg withdrawal opercity" onclick="openCity(event, 'withdraw_amount')"><span class="lang" key="withdrawal_title">WITHDRAW</span></button>
+                        <button id="transfer_tab" class="tablinks account-reg transfer opercity" onclick="openCity(event, 'transfer_amount')"><span class="lang" key="transfer_title">TRANSFER</span></button>
+                        <button id="history_tab" class="tablinks mar-btm-fifteen account-reg history opercity" onclick="openCity(event, 'history_amount')"><span class="lang" key="history">HISTORY</span></button>
 
                         <h4 class="mar-btm-fifteen">USER PROFILE</h4>
 
-                        <button id="profile_tab" class="tablinks account-reg profile active" onclick="openCity(event, 'profile_amount')"><span class="lang" key="profile_title">PROFILE</span></button>
-                        <button id="change_password_tab" class="tablinks account-reg change_password" onclick="openCity(event, 'change_passwrd_amount')">
+                        <button id="profile_tab" class="tablinks account-reg profile active opercity" onclick="openCity(event, 'profile_amount')"><span class="lang" key="profile_title">PROFILE</span></button>
+                        <button id="change_password_tab" class="tablinks account-reg change_password opercity" onclick="openCity(event, 'change_passwrd_amount')">
                             <span class="lang" key="change_title">CHANGE PASSWORD</span>
                         </button>
 
@@ -114,7 +114,7 @@
                                                     <li class="tablinks">
                                                         <a class="thm-txt" href="#Vader-Pay" data-toggle="tab">
                                                             <figure>
-                                                                <img style="object-position:center !important" class="tab-bankicon" src="~/images/deposit_option1.png" alt="" />
+                                                                <img style="object-position:center !important" class="tab-bankicon" src="~/images/deposit_option1.png" alt="" onclick="ResetPromotionId()" />
                                                             </figure>
                                                             <p>Vaderpay</p>
                                                         </a>
@@ -122,7 +122,7 @@
                                                     <li class="active tablinks">
                                                         <a class="thm-txt" href="#Bank-Transfer" data-toggle="tab">
                                                             <figure>
-                                                                <img style="object-position:center !important" class="tab-bankicon" src="~/images/deposit_option2.png" alt="" />
+                                                                <img style="object-position:center !important" class="tab-bankicon" src="~/images/deposit_option2.png" alt="" onclick="ResetPromotionId()" />
                                                             </figure>
                                                             <p>Bank-Transfer</p>
                                                         </a>
@@ -144,22 +144,6 @@
                                                     <label class="fright">
                                                         <div class="bank-selection deposit-bank-selection">
                                                             <ul class="bank-listing step-2-desc highlight-bank" id="Depsoit_bank_list">
-                                                                <li class="active tablinks">
-                                                                    <a class="thm-txt" href="#" data-toggle="tab">
-                                                                        <figure>
-                                                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank_name.png" alt="">
-                                                                        </figure>
-                                                                        <p>MAYBANK</p>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="tablinks">
-                                                                    <a class="thm-txt" href="#" data-toggle="tab">
-                                                                        <figure>
-                                                                            <img style="object-position:center !important" class="tab-bankicon" src="http://images.webet333.com/bank_images/admin_bank_icon/bcca9f02-867c-42d8-84b4-b04285953099.jpg" alt="">
-                                                                        </figure>
-                                                                        <p>public bank berhad</p>
-                                                                    </a>
-                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </label>
@@ -169,14 +153,10 @@
                                                         <p class="big no-mar blk-text lang">Bank Account:</p>
                                                     </label>
                                                     <label class="fright mendatory black-text">
-                                                        <p>
-                                                            <span></span>
-                                                            Chong Jing Hung
+                                                        <p id="lbl_account_name">
                                                         </p>
                                                         <br>
-                                                        <p>
-                                                            <span></span>
-                                                            331234567890
+                                                        <p id="lbl_account_number">
                                                         </p>
                                                     </label>
                                                 </li>
@@ -185,15 +165,15 @@
                                                         <p class="big no-mar lang blk-text">Amount:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00">
+                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount">
 
                                                         <div class="min-max-limit">
                                                             <ul class="d-flex">
-                                                                <li class="data-blog">50</li>
-                                                                <li class="data-blog">100</li>
-                                                                <li class="data-blog">300</li>
-                                                                <li class="data-blog">500</li>
-                                                                <li class="data-blog">1000</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(50,false)">50</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(100,false)">100</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(300,false)">300</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(500,false)">500</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(100,false)">1000</li>
                                                             </ul>
                                                         </div>
                                                     </label>
@@ -212,7 +192,7 @@
                                                         <p class="big no-mar lang blk-text" key="deposit_reference_number">Reference Number:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input name="txt_reference_number" type="text" class="reg-form " placeholder="Enter Reference Number" autocomplete="new-password">
+                                                        <input id="txt_reference_number" type="text" class="reg-form " placeholder="Enter Reference Number" autocomplete="new-password">
                                                     </label>
                                                 </li>
                                                 <li class="pad-btm-ten scanned-file">
@@ -256,23 +236,11 @@
                                         <div class="col-lg-12">
                                             <section class="select-checkboxes">
                                                 <h3 class="mar-top-15">Please select Promotion below:</h3>
-                                                <ul class="mar-top-15 promotion-choose" id="promotion">
-                                                    <li class="tablinks">
-                                                        <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
-                                                        <p>5% Unlimited Reload Bonus</p>
-                                                    </li>
-                                                    <li class="active tablinks">
-                                                        <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
-                                                        <p>RM10 Telegram Free Credit</p>
-                                                    </li>
-                                                    <li class="tablinks">
-                                                        <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
-                                                        <p>20% CNY Angpao</p>
-                                                    </li>
+                                                <ul class="mar-top-15 promotion-choose" id="deposit_promotion">
                                                 </ul>
                                             </section>
                                             <div class="text-left mar-comman">
-                                                <button name="" value="submit" class="submit">Submit</button>
+                                                <button name="" value="submit" class="submit" onclick="Deposit(false)">Submit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -287,15 +255,15 @@
                                                         <p class="big no-mar lang blk-text">Amount:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00">
+                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount_online">
 
                                                         <div class="min-max-limit">
                                                             <ul class="d-flex">
-                                                                <li class="data-blog">50</li>
-                                                                <li class="data-blog">100</li>
-                                                                <li class="data-blog">300</li>
-                                                                <li class="data-blog">500</li>
-                                                                <li class="data-blog">1000</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(50,true)">50</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(100,true)">100</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(300,true)">300</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(500,true)">500</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(100,true)">1000</li>
                                                             </ul>
                                                         </div>
                                                     </label>
@@ -307,23 +275,11 @@
                                         <div class="col-lg-12">
                                             <section class="select-checkboxes">
                                                 <h3 class="mar-top-15">Please select Promotion below:</h3>
-                                                <ul class="mar-top-15 promotion-choose" id="promotion">
-                                                    <li class="tablinks">
-                                                        <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
-                                                        <p>5% Unlimited Reload Bonus</p>
-                                                    </li>
-                                                    <li class="active tablinks">
-                                                        <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
-                                                        <p>RM10 Telegram Free Credit</p>
-                                                    </li>
-                                                    <li class="tablinks">
-                                                        <a class="thm-txt" href="#" data-toggle="tab"><img src="~/images/bonus1.png"></a>
-                                                        <p>20% CNY Angpao</p>
-                                                    </li>
+                                                <ul class="mar-top-15 promotion-choose" id="deposit_promotion">
                                                 </ul>
                                             </section>
                                             <div class="text-left mar-comman">
-                                                <button name="" value="submit" class="submit">Submit</button>
+                                                <button name="" value="submit" class="submit" onclick="Deposit(true)">Submit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -526,7 +482,7 @@
                                             <ul>
                                                 <li class="mb5"><b>Joker</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Joker Wallet')">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
@@ -550,7 +506,7 @@
                                             <ul>
                                                 <li class="mb5"><b>Playtech</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('PlayTech Wallet')">
                                                         ALL In
                                                     </button>
                                                 </li>
@@ -576,7 +532,7 @@
                                             <ul>
                                                 <li class="mb5"><b>918 Kiss</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('918Kiss Wallet')">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
@@ -600,7 +556,7 @@
                                             <ul>
                                                 <li class="mb5"><b>AG</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('AG Wallet')">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
@@ -624,7 +580,7 @@
                                             <ul>
                                                 <li class="mb5"><b>M8</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('M8 Wallet')">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
@@ -648,7 +604,7 @@
                                             <ul>
                                                 <li class="mb5"><b>Maxbet</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('MaxBet Wallet')">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
@@ -672,7 +628,7 @@
                                             <ul>
                                                 <li class="mb5"><b>Mega888</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Mega888 Wallet')">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
@@ -696,7 +652,7 @@
                                             <ul>
                                                 <li class="mb5"><b>DG</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('DG Wallet')">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
@@ -720,7 +676,7 @@
                                             <ul>
                                                 <li class="mb5"><b>Sexy</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Sexy Wallet')">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
@@ -744,7 +700,7 @@
                                             <ul>
                                                 <li class="mb5"><b>SA</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('SA Wallet')">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
@@ -768,7 +724,7 @@
                                             <ul>
                                                 <li class="mb5"><b>Pussy888</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Pussy888 Wallet')">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
@@ -794,7 +750,7 @@
                                             <ul>
                                                 <li class="mb5"><b>AllBet</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('AllBet Wallet')">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
@@ -820,7 +776,7 @@
                                             <ul>
                                                 <li class="mb5"><b>WM</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('WM Wallet')">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
@@ -846,7 +802,7 @@
                                             <ul>
                                                 <li class="mb5"><b>Pragmatic</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border">ALL In</button>
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Pragmatic Wallet')">ALL In</button>
                                                 </li>
                                             </ul>
                                             <ul>
@@ -911,13 +867,13 @@
                                     <label class="history_sec">Transaction Date *</label>
                                 </div>
                                 @*<div class="col-sm-9">
-            <div class="row ml0 mr0">
-                <p class="col-sm-2 pl0">Today</p>
-                <p class="col-sm-3 pl0">In 3 days</p>
-                <p class="col-sm-3 pl0">In a Week</p>
-                <p class="col-sm-3 pl0">In a Month</p>
-            </div>
-        </div>*@
+                                        <div class="row ml0 mr0">
+                                            <p class="col-sm-2 pl0">Today</p>
+                                            <p class="col-sm-3 pl0">In 3 days</p>
+                                            <p class="col-sm-3 pl0">In a Week</p>
+                                            <p class="col-sm-3 pl0">In a Month</p>
+                                        </div>
+                                    </div>*@
 
                                 <div class="col-sm-9 pl0">
                                     <div class="history-tabs">
@@ -931,7 +887,7 @@
                                             <li class="col-sm-3" onclick="GetInWeekDate();">
                                                 <a data-toggle="tab"><span class="lang" key="deposit">In a Week</span></a>
                                             </li>
-                                            <li class="col-sm-3">
+                                            <li class="col-sm-3" onclick="GetInMonthDate();">
                                                 <a data-toggle="tab"><span key="withdrawal_title" class="lang">In a Month</span></a>
                                             </li>
                                         </ul>
@@ -965,7 +921,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-3 pl0">
-                                            <button class="submit_height" type="button">SUBMIT</button>
+                                            <button class="submit_height" type="button" onclick="GetDateRange();">SUBMIT</button>
                                         </div>
                                     </div>
                                 </div>
@@ -979,88 +935,17 @@
                                             <table class="table table-bordered-one text-center" id="tbl_bettingsummeryHistory">
                                                 <thead>
                                                     <tr class="white-gray-bg">
-                                                        <th class="white-text text-center">Transaction Date</th>
-                                                        <th class="white-text text-center">Amount</th>
-                                                        <th class="white-text text-center">From</th>
-                                                        <th class="white-text text-center">To</th>
-                                                        <th class="white-text text-center">Product Name</th>
-                                                        <th class="white-text text-center">Status</th>
+                                                        <th class="white-text text-center">Game Provide</th>
+                                                        <th class="white-text text-center">BetCount</th>
+                                                        <th class="white-text text-center">BetAmount</th>
+                                                        <th class="white-text text-center">VaildBet Amount</th>
+                                                        <th class="white-text text-center">TotalRebate</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
-                                            <div class="pagination_tables">
-                                                <a href="#">&laquo;</a>
-                                                <a href="#">1</a>
-                                                <a class="active" href="#">2</a>
-                                                <a href="#">3</a>
-                                                <a href="#">4</a>
-                                                <a href="#">&raquo;</a>
+                                            <div class="pagination_tables" id="tbl_bettingsummeryHistory_pagination">
                                             </div>
                                         </div>
                                     </div>
@@ -1077,7 +962,6 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                            
                                                 </tbody>
                                             </table>
                                             <div class="pagination_tables" id="tbl_transferHistory_pagination">
@@ -1086,361 +970,85 @@
                                     </div>
                                     <div id="Withdraw_Deposit_Summary" class="tab-pane fade in">
                                         <div class="table-responsive overflow-hidden">
-                                            <table class="table table-bordered-one text-center" id="tbl_transferHistory">
+                                            <table class="table table-bordered-one text-center" id="tbl_withdrawdepositHistory">
                                                 <thead>
                                                     <tr class="white-gray-bg">
                                                         <th class="white-text text-center">Transaction Date</th>
                                                         <th class="white-text text-center">Amount</th>
-                                                        <th class="white-text text-center">From</th>
-                                                        <th class="white-text text-center">To</th>
-                                                        <th class="white-text text-center">Product Name</th>
+                                                        <th class="white-text text-center">Method</th>
                                                         <th class="white-text text-center">Status</th>
+                                                        <th class="white-text text-center">Type</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
-                                            <div class="pagination_tables">
-                                                <a href="#">&laquo;</a>
-                                                <a href="#">1</a>
-                                                <a class="active" href="#">2</a>
-                                                <a href="#">3</a>
-                                                <a href="#">4</a>
-                                                <a href="#">&raquo;</a>
+                                            <div class="pagination_tables" id="tbl_withdrawdepositHistory_pagination">
+
                                             </div>
                                         </div>
                                     </div>
                                     <div id="Promotion_Summary" class="tab-pane fade">
                                         <div class="table-responsive overflow-hidden">
-                                            <table class="table table-bordered-one text-center" id="tbl_transferHistory">
+                                            <table class="table table-bordered-one text-center" id="tbl_promotionHistory">
                                                 <thead>
                                                     <tr class="white-gray-bg">
                                                         <th class="white-text text-center">Transaction Date</th>
-                                                        <th class="white-text text-center">Amount</th>
-                                                        <th class="white-text text-center">From</th>
-                                                        <th class="white-text text-center">To</th>
-                                                        <th class="white-text text-center">Product Name</th>
+                                                        <th class="white-text text-center">End Date</th>
+                                                        <th class="white-text text-center">Promotion Name</th>
+                                                        <th class="white-text text-center">Trasnfer Amount</th>
+                                                        <th class="white-text text-center">Bonus Amount</th>
+                                                        <th class="white-text text-center">Target Amount</th>
+                                                        <th class="white-text text-center">Target Achieved</th>
                                                         <th class="white-text text-center">Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
-                                            <div class="pagination_tables">
-                                                <a href="#">&laquo;</a>
-                                                <a href="#">1</a>
-                                                <a class="active" href="#">2</a>
-                                                <a href="#">3</a>
-                                                <a href="#">4</a>
-                                                <a href="#">&raquo;</a>
+                                            <div class="pagination_tables" id="tbl_promotionHistory_pagination">
+
                                             </div>
                                         </div>
                                     </div>
                                     <div id="Rebate_cash_Summary" class="tab-pane fade in ">
                                         <div class="table-responsive overflow-hidden">
-                                            <table class="table table-bordered-one text-center" id="tbl_transferHistory">
+                                            <table class="table table-bordered-one text-center" id="tbl_RebateHistory">
                                                 <thead>
                                                     <tr class="white-gray-bg">
                                                         <th class="white-text text-center">Transaction Date</th>
-                                                        <th class="white-text text-center">Amount</th>
-                                                        <th class="white-text text-center">From</th>
-                                                        <th class="white-text text-center">To</th>
-                                                        <th class="white-text text-center">Product Name</th>
-                                                        <th class="white-text text-center">Status</th>
+                                                        <th class="white-text text-center">Game Provider</th>
+                                                        <th class="white-text text-center">Turnover</th>
+                                                        <th class="white-text text-center">Rolling</th>
+                                                        <th class="white-text text-center">Bet</th>
+                                                        <th class="white-text text-center">WinLose</th>
+                                                        <th class="white-text text-center">CommAmount</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
-                                            <div class="pagination_tables">
-                                                <a href="#">&laquo;</a>
-                                                <a href="#">1</a>
-                                                <a class="active" href="#">2</a>
-                                                <a href="#">3</a>
-                                                <a href="#">4</a>
-                                                <a href="#">&raquo;</a>
+                                            <div class="pagination_tables" id="tbl_RebateHistory_pagination">
+
                                             </div>
                                         </div>
                                     </div>
                                     <div id="Rewards_Summary" class="tab-pane fade in ">
                                         <div class="table-responsive overflow-hidden">
-                                            <table class="table table-bordered-one text-center" id="tbl_transferHistory">
+                                            <table class="table table-bordered-one text-center" id="tbl_rewardHistory">
                                                 <thead>
                                                     <tr class="white-gray-bg">
                                                         <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">Transaction Type</th>
                                                         <th class="white-text text-center">Amount</th>
-                                                        <th class="white-text text-center">From</th>
-                                                        <th class="white-text text-center">To</th>
-                                                        <th class="white-text text-center">Product Name</th>
-                                                        <th class="white-text text-center">Status</th>
+                                                        <th class="white-text text-center">Balance</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> 2021-02-19 <span>08:05</span> </td>
-                                                        <td><span class="blue_color_text">4599.00</span></td>
-                                                        <td>Main Wallet</td>
-                                                        <td>Sport</td>
-                                                        <td>&nbsp;</td>
-                                                        <td><span class="green_color_text">Success</span></td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
-                                            <div class="pagination_tables">
-                                                <a href="#">&laquo;</a>
-                                                <a href="#">1</a>
-                                                <a class="active" href="#">2</a>
-                                                <a href="#">3</a>
-                                                <a href="#">4</a>
-                                                <a href="#">&raquo;</a>
+                                            <div class="pagination_tables" id="tbl_rewardHistory_pagination">
+
                                             </div>
                                         </div>
                                     </div>
@@ -1459,37 +1067,37 @@
                                     <div class="pad-lr-comman">
                                         <h5 class="blk-text no-mar lang" key="profile_change_password">My Profile</h5>
                                         <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
-                                            <li class="mar-btm-fifteen">
-                                                <label class="fleft">
-                                                    <p class="big no-mar lang" key="profile_current_password">Email :</p>
-                                                </label>
-                                                <label class="fright mar-btm-no lock">
-                                                    <input type="text" class="reg-form" placeholder="******@@yahoo.com" value="">
-                                                </label>
-                                            </li>
+                                            @*<li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang" key="profile_current_password">Email :</p>
+                                                    </label>
+                                                    <label class="fright mar-btm-no lock">
+                                                        <input type="text" class="reg-form" placeholder="" value="">
+                                                    </label>
+                                                </li>*@
                                             <li class="mar-btm-fifteen">
                                                 <label class="fleft">
                                                     <p class="big no-mar lang" key="profile_new_password">User Name:</p>
                                                 </label>
                                                 <label class="fright lock">
-                                                    <input type="text" class="reg-form" placeholder="Author">
+                                                    <input type="text" class="reg-form" placeholder="Author" id="profile_username">
                                                 </label>
                                             </li>
-                                            <li class="mar-btm-fifteen">
-                                                <label class="fleft">
-                                                    <p class="big no-mar lang" key="profile_confirm_password">Date of Birth :</p>
-                                                </label>
-                                                <label class="fright lock">
-                                                    <input type="text" class="reg-form" placeholder="1988-12-18" id="datepicker4">
-                                                </label>
-                                            </li>
+                                            @*<li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang" key="profile_confirm_password">Date of Birth :</p>
+                                                    </label>
+                                                    <label class="fright lock">
+                                                        <input type="text" class="reg-form" placeholder="1988-12-18" id="datepicker4">
+                                                    </label>
+                                                </li>*@
 
                                             <li class="mar-btm-fifteen">
                                                 <label class="fleft">
                                                     <p class="big no-mar lang" key="profile_confirm_password">Contact Number :</p>
                                                 </label>
                                                 <label class="fright lock">
-                                                    <input type="text" class="reg-form" placeholder="*****9178">
+                                                    <input type="text" class="reg-form" placeholder="*****9178" id="profile_mobileNumber">
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">
@@ -1497,7 +1105,7 @@
                                                     <p class="big no-mar lang" key="profile_confirm_password">Full Name :</p>
                                                 </label>
                                                 <label class="fright lock">
-                                                    <input type="text" class="reg-form" placeholder="Ng Chin Ye">
+                                                    <input type="text" class="reg-form" placeholder="Ng Chin Ye" id="profile_fullname">
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">
@@ -1512,30 +1120,30 @@
                                                 <label class="fleft">
                                                     <p class="big no-mar lang">Banking Details:</p>
                                                 </label>
-                                                <label class="fright bank-name mendatory">
-                                                    <div class="bank_details1">
-                                                        <div class="bank_details1_icon_box">
-                                                            <img src="~/images/bankdetails1.png" class="bank_details_icon">
+                                                <label class="fright bank-name mendatory" id="users_bank_details">
+                                                    @*<div class="bank_details1">
+                                                            <div class="bank_details1_icon_box">
+                                                                <img src="~/images/bankdetails1.png" class="bank_details_icon">
+                                                            </div>
+                                                            <div class="bank_details1-text">
+                                                                <h1>154812233444 <span class="tickgray"><img src="~/images/tickgray.png"></span></h1>
+                                                                <p><a href="#">Ng Chin Ye</a></p>
+                                                            </div>
                                                         </div>
-                                                        <div class="bank_details1-text">
-                                                            <h1>154812233444 <span class="tickgray"><img src="~/images/tickgray.png"></span></h1>
-                                                            <p><a href="#">Ng Chin Ye</a></p>
-                                                        </div>                                                        
-                                                    </div>
-                                                    <div class="bank_details2">
-                                                        <div class="bank_details2_icon_box">
-                                                            <img src="~/images/bankdetails2.png" class="bank_details_icon">
-                                                        </div>
-                                                        <div class="bank_details2-text">
-                                                            <h1>154812233444 <span class="tickgray"><img src="~/images/tickgray.png"></span></h1>
-                                                            <p><a href="#">Ng Chin Ye</a></p>
-                                                        </div>
-                                                    </div>
+                                                        <div class="bank_details2">
+                                                            <div class="bank_details2_icon_box">
+                                                                <img src="~/images/bankdetails2.png" class="bank_details_icon">
+                                                            </div>
+                                                            <div class="bank_details2-text">
+                                                                <h1>154812233444 <span class="tickgray"><img src="~/images/tickgray.png"></span></h1>
+                                                                <p><a href="#">Ng Chin Ye</a></p>
+                                                            </div>
+                                                        </div>*@
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">
                                                 <div class="fright">
-                                                    <button name="" class="submit">
+                                                    <button name="" class="submit" onclick="UpdateName();">
                                                         <span>Submit</span>
                                                     </button>
                                                 </div>
@@ -1548,7 +1156,7 @@
                                                     <p class="big no-mar lang">Username :</p>
                                                 </label>
                                                 <label class="fright">
-                                                    <p class="big no-mar"><strong><span>Testingabc</span></strong></p>
+                                                    <p class="big no-mar"><strong><span id="login_username"></span></strong></p>
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen pad-top-ten pad-btm-ten">
@@ -1556,7 +1164,7 @@
                                                     <p class="big no-mar lang">Full Name :</p>
                                                 </label>
                                                 <label class="fright">
-                                                    <p class="big no-mar"><strong><span>JASJADJANDJA</span></strong></p>
+                                                    <p class="big no-mar"><strong><span id="fullname"></span></strong></p>
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">
@@ -1564,12 +1172,12 @@
                                                     <p class="big no-mar lang">Mobile :</p>
                                                 </label>
                                                 <label class="fright tel-icon">
-                                                    <input type="number" class="reg-form" placeholder="60167896532">
+                                                    <input type="number" class="reg-form" placeholder="60167896532" id="mobile_number">
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">
                                                 <div class="fright">
-                                                    <button class="submit">
+                                                    <button class="submit" data-toggle="modal" data-target="#mobilenumber_update">
                                                         <span>UPDATE PERSONAL DETAILS</span>
                                                     </button>
                                                 </div>
@@ -1670,6 +1278,60 @@
 </div>
 
 
+<div class="modal fade" id="mobilenumber_update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title"><span>Enter your Password</span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
+                        <li class="mar-btm-fifteen pad-top-ten pad-btm-ten">
+                            <label class="fleft">
+                                <p class="big no-mar lang">Password :</p>
+                            </label>
+                            <label class="fright tel-icon">
+                                <input type="password" class="reg-form" placeholder="password" id="password-update-mobile">
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" onclick="UpdateMobileNumber()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="promotion_not_apply_confimation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title"><span>Enter your Password</span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <p>You have no selected any promotion, Are you sure to proceed ?</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="DepositAfterPromotionCheck()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="deposit_promotion_description_section"></div>
+
+
 <script>
     window.onhashchange = function () {
         OpenTabOnHashChange()
@@ -1700,7 +1362,7 @@
         for (i = 0; i < tabcontent.length; i++) {
             tabcontent[i].style.display = "none";
         }
-        tablinks = document.getElementsByClassName("tablinks");
+        tablinks = document.getElementsByClassName("opercity");
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
@@ -1711,6 +1373,7 @@
         evt.currentTarget.className += " active";
     }
 </script>
+<script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -1747,5 +1410,8 @@
         CallAllBankAPI();
         SetWithdrawLimit();
         SetHtmlInFromWallet();
+        SetDepositPageBank();
+        SetProfilePageBanks();
+        SetProfilePageData();
     });
 </script>

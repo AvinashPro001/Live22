@@ -43,6 +43,12 @@ namespace Webet333.models.Response.Promotions
         [JsonProperty("RemainingDay")]
         public int RemainingDay { get; set; }
 
+        [JsonProperty("DepositAmount")]
+        public decimal DepositAmount { get; set; }
+
+        [JsonProperty("BonusAmount")]
+        public decimal BonusAmount { get; set; }
+
         [JsonProperty("total")]
         public int Total { get; set; }
 
