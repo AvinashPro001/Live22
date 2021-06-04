@@ -1473,7 +1473,7 @@ li.step5bg a img{width: 100%; /* min-height: 94px; */ height: 80px; object-fit: 
 .casino_profile_wrapper h1{font-size: 16px; color: #000; font-weight: 600; margin: 0px 0px 0px 0px; padding: 0px 0px 15px 15px; }
 /* Style the tab content */
 .tabcontent_account {display: none; padding:0px 0px; border-top: none; }
-.tablinks_account.active_tabaccount {color: #242424!important; background-color: #febd17!important; }
+.leftProfileButon ul li.active a {color: #242424!important; background-color: #febd17!important; }
 .row_two_navigation .navbar-nav li a:hover{/*background-color: #feb801;*//*color: #212121;*/}
 .game_logo_sections{width: 100%;float: left;}
 .game_logo_sections ul{width:100%;float: left; padding-top: 12px; padding-bottom: 12px; margin-bottom: 0px;} .game_logo_sections ul li{float: left; list-style: none; width: 107px; padding: 0px 12px 0px 12px;}
