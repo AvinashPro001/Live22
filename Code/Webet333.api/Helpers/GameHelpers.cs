@@ -1547,11 +1547,11 @@ namespace Webet333.api.Helpers
 
         #endregion KISS918 game Password Status Update
 
-        public async Task<List<BettingSummerySelectResponse>> BettingSummerySelect(GlobalGetWithPaginationRequest request,string Username)
+        public async Task<List<BettingSummerySelectResponse>> BettingSummerySelect(GlobalGetWithPaginationRequest request)
         {
             using (var repository = new DapperRepository<BettingSummerySelectResponse>(Connection))
             {
-                var result = await repository.GetDataAsync(StoredProcConsts.Game.BettingSummerySelect, new { Username, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                var result = await repository.GetDataAsync(StoredProcConsts.Game.BettingSummerySelect, new { request.UserId, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
                 return result.ToList();
             }
         }

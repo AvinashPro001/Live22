@@ -149,9 +149,14 @@ var accountEndPoints = {
     login: "account/login",
     register: "account/register",
     getProfile: "customer/profile",
+    updateProfile: "customer/profile/update",
     userBankDetail: "customer/bank",
     withdrawPromotionList: 'payments/check/withdrawamount/list',
     changePassword: "account/change_password",
+    userDepositPromotion: "promotions/daily/list",
+    gameRegisterCheck: "Game/SelectUser",
+    promotionApplyCheck: 'promotions/promotionapply/check',
+    depositCheckWithoutPromotion: 'payments/checkdepositwithoutpromotion',
 };
 
 var promotionEndPoints = {
@@ -182,13 +187,34 @@ var gameBalanceEndPoints = {
     allBetBalance: "gamebalance/allbet",
     wmBalance: "gamebalance/wm",
     pragmaticBalance: "gamebalance/pragmatic",
-
-
 };
 
 var transactionEndPoints = {
     restore: "Game/Balance/Restore",
     addwithdraw: "payments/withdraw",
     addtransfer: "transfer/balance",
-    transferHistroy:"payments/transfer/retrieve"
+    allInWallet: "Game/Balance/InWallet",
+    transferHistroy: "payments/transfer/retrieve",
+    withdrawDepositHistroy: "payments/withdraw_deposit_select",
+    promotionHistroy: "promotions/promotionapply/list",
+    rebateHistroy: "Game/Rebate/User/History",
+    rewadHistroy: "customer/reward/list",
+    bettingSummeryHistroy: "Game/bettingsummery",
+}
+
+var GameRegisterEndPoints = {
+    registerAG: "ag/register",
+    registerJoker: "joker/register",
+    registerPlaytech: "playtech/register",
+    register918Kiss: "918kiss/register",
+    registerM8: "m8/register",
+    registerMaxBet: "MaxBet/Register",
+    mega888Register: "mega888/register",
+    sexyRegister: "sexybaccarart/register",
+    saRegister: "sa/register",
+    pussyRegister: "pussy888/register",
+    allBetRegister: "allbet/register",
+    WMRegister: "wm/register",
+    pragmaticRegister: "pragmatic/register",
+    dgRegister: "dg/register",
 }

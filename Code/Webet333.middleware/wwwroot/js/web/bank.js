@@ -1,4 +1,7 @@
-﻿var WithdrawBankId, UserBank;
+﻿var WithdrawBankId, DepositBankId, DepositPromotionId, UserBank;
+var fromDate = null, toDate = null, pageSize = 8; pageNumber = 0;
+var HistorySectionName = "Transfer";
+
 $(document).ready(function () {
     UsersBankDetails();
 });
@@ -125,6 +128,56 @@ function SetAdminBankPage() {
     }
 }
 
+function SetDepositPageBank() {
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
+
+    if (data != null) {
+        if (data.AdminBankPageData !== null && data.AdminBankPageData !== undefined) {
+            bankdata = data.AdminBankPageData.bankDetails;
+            var html = "";
+            for (i = 0; i < bankdata.length; i++) {
+                if (i == 0) {
+                    html += '<li class="active tablinks"><a class="thm-txt" href="#" data-toggle="tab"><figure onclick="SetBankDetails(\'' + bankdata[i].accountName + '\',\'' + bankdata[i].accountNo + '\',\'' + bankdata[i].id + '\')"><img style="object-position:center !important" class="tab-bankicon" src="' + bankdata[i].bankIconLogo + '" alt=""></figure><p>' + bankdata[i].bankName + '</p></a></li >';
+                    SetBankDetails(bankdata[i].accountName, bankdata[i].accountNo, bankdata[i].id);
+                }
+                else
+                    html += '<li class=" tablinks"><a class="thm-txt" href="#" data-toggle="tab"><figure onclick="SetBankDetails(\'' + bankdata[i].accountName + '\',\'' + bankdata[i].accountNo + '\')"><img style="object-position:center !important" class="tab-bankicon" src="' + bankdata[i].bankIconLogo + '" alt=""></figure><p>' + bankdata[i].bankName + '</p></a></li >';
+            }
+            SetAllValueInElement("Depsoit_bank_list", html);
+        }
+    }
+}
+
+function CopyToClipboard(id) {
+    if (document.selection) { // IE
+        var range = document.body.createTextRange();
+        range.moveToElementText(document.getElementById(id));
+        range.select();
+    } else if (window.getSelection) {
+        var range1 = document.createRange();
+        range1.selectNode(document.getElementById(id));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range1);
+    }
+    var copyText = document.getElementById(id);
+    document.execCommand("Copy");
+}
+
+function SetBankDetails(AccountName, AccountNumber, Id) {
+    var accountNumberHtml = '<span class="fa fa-copy" onclick=CopyToClipboard("lbl_account_number")></span> &nbsp;&nbsp;' + AccountNumber;
+    var accountNameHtml = '<span class="fa fa-copy" onclick=CopyToClipboard("lbl_account_name")></span> &nbsp;&nbsp;' + AccountName;
+    SetAllValueInElement("lbl_account_number", accountNumberHtml);
+    SetAllValueInElement("lbl_account_name", accountNameHtml);
+    DepositBankId = Id;
+}
+
+function SetAmountInTextBox(Amount, Online) {
+    if (Online)
+        $("#txt_deposit_amount_online").val(Amount);
+    else
+        $("#txt_deposit_amount").val(Amount);
+}
+
 async function CallAllBankAPI() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
 
@@ -198,6 +251,35 @@ async function UsersBankDetails() {
     }
 }
 
+function SetProfilePageBanks() {
+    if (UserBank != undefined) {
+        html = "";
+        for (i = 0; i < UserBank.length; i++) {
+            html += '<div class="bank_details1"><div class="bank_details1_icon_box"><img src="' + UserBank[i].bankLogo + '" class="bank_details_icon"></div><div class="bank_details1-text"><h1>' + UserBank[i].accountNo + ' <span class="tickgray"><img src="/images/tickgray.png"></span></h1><p><a href="#">' + UserBank[i].accountName + '</a></p></div></div>';
+        }
+        SetAllValueInElement("users_bank_details", html);
+    }
+    else {
+        setTimeout(function () {
+            SetProfilePageBanks();
+        }, 1000)
+    }
+}
+
+function SetProfilePageData() {
+    if (GetLocalStorage('currentUser') !== null) {
+        var res = JSON.parse(Decryption(GetSessionStorage("userDetails")))
+        if (res !== null) {
+            $('#profile_username').val(res.username);
+            $('#profile_mobileNumber').val(res.mobileNo);
+            $('#profile_fullname').val(res.name);
+            $('#profile_username').attr("disabled", "disabled");
+            $('#profile_mobileNumber').attr("disabled", "disabled");
+            $('#mobile_number').val(res.mobileNo);
+        }
+    }
+}
+
 async function SetWithdrawLimit() {
     var res = await GetMethod(accountEndPoints.getProfile);
     if (res.status == 200) {
@@ -244,6 +326,115 @@ function ResetTransactionField(i) {
         $('#txt_transfer_amount').val("");
         $('#txt_transfer_amount').attr("placeholder", "Max Limit: From Wallet");
     }
+}
+
+var DepositModel;
+async function Deposit(IsOnlinePayment) {
+    var amount = 0;
+    if (IsOnlinePayment)
+        amount = $("#txt_deposit_amount_online").val();
+    else
+        amount = $("#txt_deposit_amount").val();
+
+
+    if (amount > 30000 || amount < 10) {
+        return ShowError("min_max_amount_error");
+    }
+
+
+    model = {
+        bankId: DepositBankId,
+        amount: amount,
+        depositMethodId: null,
+        referenceNo: $('#txt_reference_number').val(),
+        depositeTime: Date.parse(document.getElementById("datepicker0").value.replace(" ", "T")).toString(),
+        promotionId: DepositPromotionId,
+        promotionApplyEligible: false
+    };
+
+
+    if (!IsOnlinePayment) {
+        if (model.bankId === null || model.bankId === "" || model.bankId === undefined) {
+            return ShowError("plz_selet_bnk_error");
+        }
+
+        if (model.depositeTime === "NaN") {
+            return ShowError("select_date_time_error");
+        }
+
+        if (model.referenceNo === "") {
+            return ShowError("refer_no_error");
+        }
+
+        if (filter_array(TableData).length === 0) {
+            return ShowError("receipt_required_error");
+        }
+    }
+
+    LoaderShow();
+    if (model.promotionId != undefined) {
+        await LoadAllBalance();
+        var promotionModel = {
+            userid: null,
+            amount: Number(model.amount)
+        };
+        var walletData = await PostMethod(accountEndPoints.promotionApplyCheck, promotionModel);
+        walletData = walletData.response;
+        if (walletData.data.IsPending == true) {
+            LoaderHide();
+            return ShowError("pending_sports_deposit_error");
+        }
+
+        if (walletData.data.InMaintenance == true) {
+            LoaderHide();
+            return ShowError("game_in_maintenance_new_promotion");
+        }
+
+        if (walletData.data.CheckPromotionApply === true && walletData.data.TotalPromotionRow > 0) {
+            if (confirm("promo_apply_balance_error")) {
+                model.promotionApplyEligible = true;
+            }
+            else {
+                model.promotionId = "";
+            }
+        }
+        else {
+            if (walletData.data.Staus != null && walletData.data.CheckPromotionRemind == true) {
+                LoaderHide();
+                return ShowError("promot_active_error");
+            }
+
+            if (walletData.data.CheckPromotionRemind == true) {
+                model.promotionApplyEligible = true;
+                DepositModel = model;
+            }
+
+            if (walletData.data.Staus == null) {
+                model.promotionApplyEligible = true;
+            }
+        }
+
+
+        debugger
+    }
+    else {
+        let data = {
+        }
+        var walletData = await PostMethod(accountEndPoints.depositCheckWithoutPromotion, data);
+        walletData = walletData.response;
+        if (walletData.data.CheckPopupWithoutPromotion == true) {
+            LoaderHide();
+            DepositModel = model;
+        }
+        else {
+            LoaderHide();
+            DepositModel = model;
+            $("#promotionNavigate").modal();
+            return 0;
+        }
+    }
+
+
 }
 
 async function Withdraw() {
@@ -332,16 +523,14 @@ async function Transfer() {
 
 }
 
-var HistorySectionName = "Transfer"
 function SetHistorySectionName(name) {
     HistorySectionName = name;
     fromDate = null;
     toDate = null;
     pageNumber = 0;
     GetTodayDate();
+    CallFunctionAccordingToTab();
 }
-
-var fromDate = null, toDate = null, pageSize = 8; pageNumber = 0;
 
 function APIDateFormate(date) {
     return date.replace(/T/, " ").substring(0, 16);
@@ -411,9 +600,8 @@ function CreatePagination(Id, TotalPages, CurrentPage) {
 
 function ClickOnPageNumber(PageNumber) {
     pageNumber = PageNumber - 1;
-    TransferHistory();
+    CallFunctionAccordingToTab();
 }
-
 
 Date.prototype.addDays = function (days) {
     var date = new Date(this.valueOf());
@@ -421,7 +609,7 @@ Date.prototype.addDays = function (days) {
     return date;
 }
 
-function GetDateFormate(Date1,Date2) {
+function GetDateFormate(Date1, Date2) {
     var day1 = Date1.getDate();
     var Month1 = Date1.getMonth() + 1;
     var Year1 = Date1.getFullYear();
@@ -440,45 +628,57 @@ function GetDateFormate(Date1,Date2) {
     toDate = Year2 + "-" + Month2 + "-" + day2 + " 23:59:59";
 }
 
-//GetTodayDate();
 function GetTodayDate() {
     var date = new Date();
     GetDateFormate(date, date);
     CallFunctionAccordingToTab();
 };
 
-
 function Get3DayDate() {
     var fdate = new Date().addDays(-3);
     var tdate = new Date();
-    GetDateFormate(fdate,tdate)
+    GetDateFormate(fdate, tdate)
     CallFunctionAccordingToTab();
 };
 
 function GetInWeekDate() {
     var curr = new Date(); // get current date
     var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-    var last = first + 6;
-    var firstday = new Date(curr.setDate(first))
-    var lastday = new Date(curr.setDate(last))
-    console.log(curr);
-    console.log(firstday);
-    console.log(lastday);;
+    var firstday = new Date(curr.setDate(first + 1))
+    var lastday = firstday.addDays(6)
+    GetDateFormate(firstday, lastday);
+    CallFunctionAccordingToTab();
 }
 
+function GetInMonthDate() {
+    var date = new Date();
+    var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    GetDateFormate(firstDay, lastDay);
+    CallFunctionAccordingToTab();
+}
+
+function GetDateRange() {
+    var fdate = $("#datepicker1").val().split("/");
+    var tdate = $("#datepicker2").val().split("/");
+    fromDate = fdate[2] + "-" + fdate[0] + "-" + fdate[1] + " 00:00:00";
+    toDate = tdate[2] + "-" + tdate[0] + "-" + tdate[1] + " 00:00:00";
+    CallFunctionAccordingToTab();
+}
 
 function CallFunctionAccordingToTab() {
     switch (HistorySectionName) {
         case "Transfer": TransferHistory(); break;
-        case "BettingSummery": break;
-        case "WithdrawDeposit": break;
-        case "Promotion": break;
-        case "Rebate": break;
-        case "Reward": break;
+        case "BettingSummery": BettingHistory(); break;
+        case "WithdrawDeposit": WithdrawDepositHistory(); break;
+        case "Promotion": PromotionHistory(); break;
+        case "Rebate": RebateHistory(); break;
+        case "Reward": RewardHistory(); break;
     }
 }
 
-TransferHistory();
+CallFunctionAccordingToTab();
+
 async function TransferHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
     let model = {
         pageNo: PageNumber == null ? pageNumber : PageNumber,
@@ -507,4 +707,293 @@ async function TransferHistory(FromDate = null, ToDate = null, PageSize = null, 
 
         }
     }
+}
+
+async function WithdrawDepositHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    let model = {
+        pageNo: PageNumber == null ? pageNumber : PageNumber,
+        pageSize: PageSize == null ? pageSize : PageSize,
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
+    }
+    var res = await PostMethod(transactionEndPoints.withdrawDepositHistroy, model);
+    if (res.status == 200) {
+        if (res.response.data.result.length > 0) {
+            var data = res.response.data.result;
+            $("#tbl_withdrawdepositHistory").find("tr:gt(0)").remove();
+            var html = ""
+            for (i = 0; i < data.length; i++) {
+                html += '<tr><td>' + APIDateFormate(data[i].Created) + '</td ><td><span class="blue_color_text">' + parseFloat(data[i].Amount).toFixed(2) + '</span></td><td>' + data[i].Method + '</td><td><span class="' + data[i].Status + '_color">' + data[i].Status + '</span></td><td>' + data[i].Type + '</td></tr>';
+            }
+            $("#tbl_withdrawdepositHistory").find('tbody').html(html);
+
+            if (res.response.data.total > 8) {
+                CreatePagination('tbl_withdrawdepositHistory_pagination', res.response.data.totalPages, res.response.data.offset + 1);
+            }
+            else {
+                $("#tbl_withdrawdepositHistory_pagination").html("");
+            }
+
+        }
+    }
+}
+
+async function PromotionHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    let model = {
+        pageNo: PageNumber == null ? pageNumber : PageNumber,
+        pageSize: PageSize == null ? pageSize : PageSize,
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
+    }
+    var res = await PostMethod(transactionEndPoints.promotionHistroy, model);
+
+    if (res.status == 200) {
+        if (res.response.data.result.length > 0) {
+            var data = res.response.data.result;
+            $("#tbl_promotionHistory").find("tr:gt(0)").remove();
+            var html = ""
+            for (i = 0; i < data.length; i++) {
+                html += '<tr><td>' + APIDateFormate(data[i].Created) + '</td><td>' + APIDateFormate(data[i].ExpiryDate) + '</td><td>' + data[i].Title + '</td><td><span class="blue_color_text">' + parseFloat(data[i].DepositAmount).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].BonusAmount).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].TurnoverTarget).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].UserTurnover).toFixed(2) + '</span></td><td><span class="' + data[i].Staus.replace(" ", "_").toLowerCase() + '_color">' + data[i].Staus + '</span></td></tr>';
+            }
+            $("#tbl_promotionHistory").find('tbody').html(html);
+
+            if (res.response.data.total > 8) {
+                CreatePagination('tbl_promotionHistory_pagination', res.response.data.totalPages, res.response.data.offset + 1);
+            }
+            else {
+                $("#tbl_promotionHistory_pagination").html("");
+            }
+
+        }
+    }
+}
+
+async function RebateHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    let model = {
+        pageNo: PageNumber == null ? pageNumber : PageNumber,
+        pageSize: PageSize == null ? pageSize : PageSize,
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
+    }
+    var res = await PostMethod(transactionEndPoints.rebateHistroy, model);
+
+    if (res.status == 200) {
+        if (res.response.data.result.length > 0) {
+            var data = res.response.data.result;
+            $("#tbl_RebateHistory").find("tr:gt(0)").remove();
+            var html = ""
+            for (i = 0; i < data.length; i++) {
+                html += '<tr><td>' + APIDateFormate(data[i].created) + '</td> <td>' + data[i].gameName + '</td><td><span class="blue_color_text">' + parseFloat(data[i].turnover).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].rolling).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].bet).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].winLose).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].commAmount).toFixed(2) + '</span></td></tr>';
+            }
+            $("#tbl_RebateHistory").find('tbody').html(html);
+
+            if (res.response.data.total > 8) {
+                CreatePagination('tbl_RebateHistory_pagination', res.response.data.totalPages, res.response.data.offset + 1);
+            }
+            else {
+                $("#tbl_RebateHistory_pagination").html("");
+            }
+
+        }
+    }
+}
+
+async function RewardHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    let model = {
+        pageNo: PageNumber == null ? pageNumber : PageNumber,
+        pageSize: PageSize == null ? pageSize : PageSize,
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
+    }
+    var res = await PostMethod(transactionEndPoints.rewadHistroy, model);
+    if (res.status == 200) {
+        if (res.response.data.result.length > 0) {
+            var data = res.response.data.result;
+            $("#tbl_rewardHistory").find("tr:gt(0)").remove();
+            var html = ""
+            for (i = 0; i < data.length; i++) {
+                html += '<tr><td>' + APIDateFormate(data[i].Created) + '</td> <td>' + data[i].TransactionType + '</td><td><span class="blue_color_text">' + data[i].Amount + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].CurrentBalance).toFixed(2) + '</span></td></tr>';
+            }
+            $("#tbl_rewardHistory").find('tbody').html(html);
+
+            if (res.response.data.total > 8) {
+                CreatePagination('tbl_rewardHistory_pagination', res.response.data.totalPages, res.response.data.offset + 1);
+            }
+            else {
+                $("#tbl_rewardHistory_pagination").html("");
+            }
+
+        }
+    }
+}
+
+async function BettingHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    let model = {
+        pageNo: PageNumber == null ? pageNumber : PageNumber,
+        pageSize: PageSize == null ? pageSize : PageSize,
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
+    }
+    var res = await PostMethod(transactionEndPoints.bettingSummeryHistroy, model);
+
+    if (res.status == 200) {
+        if (res.response.data.result.length > 0) {
+            var data = res.response.data.result;
+            $("#tbl_bettingsummeryHistory").find("tr:gt(0)").remove();
+            var html = ""
+            for (i = 0; i < data.length; i++) {
+                html += '<tr><td>' + data[i].GameName + '</td><td><span class="blue_color_text">' + data[i].BetCount + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].BetAmount).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].VaildBetAmount).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].TotalRebate).toFixed(2) + '</span></td></tr>';
+            }
+            $("#tbl_bettingsummeryHistory").find('tbody').html(html);
+
+            if (res.response.data.total > 8) {
+                CreatePagination('tbl_bettingsummeryHistory_pagination', res.response.data.totalPages, res.response.data.offset + 1);
+            }
+            else {
+                $("#tbl_bettingsummeryHistory_pagination").html("");
+            }
+
+        }
+    }
+}
+
+//#region UploadReceipt
+var selDiv = "";
+TableData = new Array();
+document.addEventListener("DOMContentLoaded", init, false);
+function init() {
+    if (document.querySelector('#receipt') !== null) {
+        document.querySelector('#receipt').addEventListener('change', handleFileSelect, false);
+        selDiv = document.querySelector("#selectedFiles");
+    }
+}
+
+async function handleFileSelect1(id) {
+    if (filter_array(TableData).length === 0) {
+        ShowError(ChangeErroMessage("receipt_required_error"));
+    } else {
+        var model = {
+            id: id,
+            images: filter_array(TableData)
+        };
+        var res = await PostMethod(apiEndPoints.uploadReceipt, model);
+        if (res !== null && res !== undefined) {
+            ShowSuccess(res.message);
+        }
+    }
+}
+
+var files = [];
+async function handleFileSelect(e) {
+    if (!e.target.files) return;
+    if (!e.target.files[0].type.includes("image") && !e.target.files[0].type.includes("pdf")) return ShowError(ChangeErroMessage("file_format_error"));
+    selDiv.innerHTML = "";
+    var allFiles = e.target.files;
+
+    for (var i = 0; i < allFiles.length; i++) {
+        files.push(allFiles[i]);
+    }
+    loadImage();
+
+    var list = document.getElementById('selectedFiles');
+    list.addEventListener('click', function (e) {
+        if (e.target && e.target.nodeName === "BUTTON") {
+            e.target.parentNode.remove();
+        }
+    });
+}
+
+function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
+    for (var i = 0; i < arraytosearch.length; i++) {
+        if (arraytosearch[i][key] === valuetosearch) {
+            return i;
+        }
+    }
+    return null;
+}
+
+function btn(j) {
+    var index = functiontofindIndexByKeyValue(files, name, files[j].name);
+    files.splice(j, 1);
+    loadImage();
+    TableData.splice(j, 1);
+}
+
+const readUploadedFileAsDataURL = (inputFile) => {
+    const temporaryFileReader = new FileReader();
+    return new Promise((resolve, reject) => {
+        temporaryFileReader.onerror = () => {
+            temporaryFileReader.abort();
+            reject(new DOMException("Problem parsing input file."));
+        };
+        temporaryFileReader.onload = () => {
+            resolve(temporaryFileReader.result);
+        };
+        temporaryFileReader.readAsDataURL(inputFile);
+    });
+};
+
+async function loadImage() {
+    selDiv.innerHTML = "";
+    for (var j = 0; j < files.length; j++) {
+        var base = await readUploadedFileAsDataURL(files[j]);
+        TableData[j] = {
+            base64images: base
+        };
+        selDiv.innerHTML += '<li id="li' + j + '" value=' + j + ' class="element">' + files[j].name + '<button onclick="btn(' + j + ')">X</button>' + '</li>';
+    }
+}
+
+function filter_array(test_array) {
+    var index = -1,
+        arr_length = test_array ? test_array.length : 0,
+        resIndex = -1,
+        result = [];
+    while (++index < arr_length) {
+        var value = test_array[index];
+        if (value) {
+            result[++resIndex] = value;
+        }
+    }
+    return result;
+}
+
+//#endregion
+
+function SetDepositPromotionId(Id) {
+    DepositPromotionId = Id;
+}
+
+function ResetPromotionId() {
+    DepositPromotionId = undefined;
+}
+
+SetUserDepositPromotion();
+async function SetUserDepositPromotion() {
+    let model = {}
+    var res = await PostMethod(accountEndPoints.userDepositPromotion, model);
+    if (res.status == 200) {
+        if (res.response.data.length > 0) {
+            var data = res.response.data;
+            var html = "";
+            var description = "";
+            for (i = 0; i < data.length; i++) {
+                html += '<li class="tablinks"><a class="thm-txt" data-toggle="tab"><img onclick="SetDepositPromotionId(\'' + data[i].id + '\')" src="' + data[i].bannerImage + '"></a><p href="#' + data[i].id + '" data-toggle="modal">' + data[i].promotionTitle + '</p></li>'
+                description +=
+                    '<div class="modal fade Reload_bonus_myModal" id="' + data[i].id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button><h4 class="modal-title"><span>' + data[i].promotionTitle + '</span></h4></div><div class="modal-body">' + data[i].description + '</div></div></div ></div >';
+            }
+
+            SetAllValueInElement("deposit_promotion_description_section", description);
+            SetAllValueInElement("deposit_promotion", html);
+        }
+    }
+}
+
+async function AllInWallet(WalletName) {
+    SetLoadingImageBaseOnWalletName(WalletName);
+    let model = {
+        walletName: WalletName
+    }
+    await PostMethod(transactionEndPoints.allInWallet, model);
+    LoadBalanceBasedOnWalletNameAsync(WalletName);
 }

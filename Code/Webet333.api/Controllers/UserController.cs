@@ -125,17 +125,31 @@ namespace Webet333.api.Controllers
         #region Users Bank
 
         [HttpPost(ActionsConst.Users.UsersBank)]
-        public async Task<IActionResult> UsersBank([FromBody] GetByIdRequest request)
+        public async Task<IActionResult> UsersBank([FromBody] GetByIdRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            var baseUrl = BaseUrlConfigsOptions.Value;
 
             string userRole = GetUserRole(User);
             using (var user_help = new UserHelpers(Connection))
             {
                 if (userRole != RoleConst.Admin)
-                    return OkResponse(await user_help.GetData(StoredProcConsts.User.GetUsersBank, GetUserId(User), GetUniqueId(User), GetUserRole(User)));
-                return OkResponse(await user_help.GetData(StoredProcConsts.User.GetUsersBank, Guid.Parse(request.Id), GetUniqueId(User), GetUserRole(User)));
+                {
+                    var Adminlist = await user_help.GetData(StoredProcConsts.User.GetUsersBank, GetUserId(User), GetUniqueId(User), GetUserRole(User));
+                    Adminlist.ForEach(bank => {
+                        bank.bankLogo = (bank.bankLogo != null && !string.IsNullOrEmpty(bank.bankLogo)) ? $"{baseUrl.ImageBase}{baseUrl.BankIconImage}/{bank.bankId}{bank.bankLogo}" : "";
+                    });
+                    return OkResponse(Adminlist);
+                }
+                var list = await user_help.GetData(StoredProcConsts.User.GetUsersBank, Guid.Parse(request.Id), GetUniqueId(User), GetUserRole(User));
+
+                list.ForEach(bank => {
+                    bank.bankLogo = (bank.bankLogo != null && !string.IsNullOrEmpty(bank.bankLogo)) ? $"{baseUrl.ImageBase}{baseUrl.BankIconImage}/{bank.bankId}{bank.bankLogo}" : "";
+                });
+
+                return OkResponse(list);
             }
         }
 

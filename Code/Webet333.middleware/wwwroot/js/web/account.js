@@ -28,15 +28,15 @@ $(document).ready(function () {
                     await CallDownloadLinkAPI();
                     await CallAPIForBankPages();
                     await GetWalletList();
-                    if (GetLocalStorage("currentUser") != null) await  CallAllBankAPI();
+                    if (GetLocalStorage("currentUser") != null) await CallAllBankAPI();
                     AdminBankPageData();
                     SetPromotionInPromotionPage();
                     SetAnnouncementsOnAllPages();
                 }
                 else {
-                    if (data.PromotionPageData == null) { await  AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
-                    if (data.AnnouncementsData == null) { await  AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
-                    if (data.WalletData == null) { await  GetWalletList(); }
+                    if (data.PromotionPageData == null) { await AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
+                    if (data.AnnouncementsData == null) { await AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
+                    if (data.WalletData == null) { await GetWalletList(); }
                     if (data.AdminBankPageData == null) { await CallAPIForBankPages(); SetAdminBankPage() }
                     if (data.DownloadPageData == null) { await CallDownloadLinkAPI(); }
                     if (GetLocalStorage("currentUser") != null) if (data.AllBankPageData == null) await CallAllBankAPI();
@@ -134,6 +134,7 @@ async function ProfileData() {
             }
             SetAllImagePath('login_user_vip_level', res.vipBanner)
             SetAllValueInElement("login_username", res.username)
+            SetAllValueInElement("fullname", res.name)
             SetBackgroudImagePath("silver_wallet", res.vipBanner)
             SetAllValueInElement("vip_level_name", res.vipLevelName)
         }
@@ -201,7 +202,7 @@ async function DoLogin() {
         grantType: 'User'
     };
     let res = await PostMethod(accountEndPoints.login, model);
-    
+
     if (res.status !== 200) {
         if (err.status === 400) {
             if (err.responseJSON.message == "Your account is not active." || err.responseJSON.message == "Akaun anda belum aktif." || err.responseJSON.message == "您的帐户无效。") {
@@ -306,7 +307,7 @@ async function DoRegister() {
     var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
     if (!regex.test(password)) return ShowError("pass_alpha_error");
 
-    if (/^[a-zA-Z0-9- ]*$/.test(username) == false) 
+    if (/^[a-zA-Z0-9- ]*$/.test(username) == false)
         return ShowError('Special Charater not allowed');
 
     if (/^[a-z0-9_]+$/i.test(username) == false)
@@ -344,6 +345,275 @@ async function DoRegister() {
 
 //#endregion
 
+//#region "ASYNC" Update Mobile Number
 
+async function UpdateMobileNumber() {
+    if ($("#password-update-mobile").val() != Decryption(GetLocalStorage("currentUserData"))) {
+        $('#mobilenumber_update').modal('hide');
+        return ShowError("Current Password not matched");
+    }
+
+    if ($("#mobile_number").val() == "") {
+        $('#mobilenumber_update').modal('hide');
+        return ShowError("Emter Mobile Number");
+    }
+
+    model = {
+        mobile: $('#mobile_number').val()
+    };
+
+    if (model.mobile.length < 10) {
+        $('#mobilenumber_update').modal('hide');
+        return ShowError("mobile_length_error");
+    }
+
+    LoaderShow();
+    var res = await PostMethod(accountEndPoints.updateProfile, model);
+    if (res.status == 200) {
+        LoaderHide();
+        $('#mobilenumber_update').modal('hide');
+        ShowSuccess(res.response.message);
+        GetProfileAndSetInSessionStorage();
+    }
+    else {
+        LoaderHide();
+        $('#mobilenumber_update').modal('hide');
+        ShowError(res.response.message);
+    }
+}
 
 //#endregion
+
+//#region "ASYNC" Update Mobile Number
+
+async function UpdateName() {
+
+    if ($("#profile_fullname").val() == "") {
+        return ShowError("Emter Full Name");
+    }
+
+    model = {
+        name: $('#profile_fullname').val()
+    };
+
+    LoaderShow();
+    var res = await PostMethod(accountEndPoints.updateProfile, model);
+    if (res.status == 200) {
+        LoaderHide();
+        ShowSuccess(res.response.message);
+        GetProfileAndSetInSessionStorage();
+    }
+    else {
+        LoaderHide();
+        ShowError(res.response.message);
+    }
+}
+
+//#endregion
+
+//#endregion
+
+setInterval(function () {
+    regisrationGame();
+}, 2000)
+
+
+async function regisrationGame() {
+    try {
+        if (localStorage.getItem('IsExecute') == "false" || localStorage.getItem('IsExecute') == false || localStorage.getItem('IsExecute') == null) {
+            localStorage.setItem('IsExecute', true);
+
+            var resUserData = JSON.parse(Decryption(GetSessionStorage('userDetails')));
+
+            if (resUserData == null) {
+                var res = await GetMethod(accountEndPoints.getProfile);
+                resUserData = res.response.data;
+                SetSessionStorage('userDetails', Encryption(JSON.stringify(res.response.data)));
+            }
+
+            let userModel = {
+                id: resUserData.id
+            };
+            let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+            if (
+                resSelectUser === null ||
+                resSelectUser.MaxBet === false ||
+                resSelectUser.M8 === false ||
+                resSelectUser.Playtech === false ||
+                resSelectUser.AG === false ||
+                resSelectUser._918Kiss === false ||
+                resSelectUser.Joker === false ||
+                resSelectUser.Mega888 === false ||
+                resSelectUser.DG === false ||
+                resSelectUser.SexyBaccarat === false ||
+                resSelectUser.SA === false ||
+                resSelectUser.Pussy888 === false ||
+                resSelectUser.AllBet === false ||
+                resSelectUser.WM === false ||
+                resSelectUser.Pragmatic === false
+            ) {
+                var res = await PostMethod(accountEndPoints.gameRegisterCheck, userModel);
+                resSelectUser = res.response.data;
+                SetSessionStorage('userRegisterDetails', Encryption(JSON.stringify(res.response.data)));
+            }
+
+            var globalParameters = JSON.parse(Decryption(GetSessionStorage("GamePreFix")));
+            if (globalParameters == null) {
+                var gamePrefix = await GetMethod(globalEndPoints.globalParameter);
+                SetSessionStorage('GamePreFix', Encryption(JSON.stringify(gamePrefix.response.data)));
+                globalParameters = gamePrefix.response.data;
+            }
+
+            var username = resUserData.username
+            var M8Username = globalParameters.m8GamePrefix + username;
+            
+            if (resSelectUser.MaxBet !== true) {
+                var userMaxBet = {
+                    firstname: resUserData.data.name,
+                    lastname: "Webet333"
+                };
+                try {
+                    await PostMethod(GameRegisterEndPoints.registerMaxBet, userMaxBet);
+                }
+                catch (e) {
+                }
+            }
+
+            if (resSelectUser.M8 !== true) {
+                try {
+                    let modelM8 = {
+                    };
+                    await PostMethod(GameRegisterEndPoints.registerM8, modelM8);
+                }
+                catch (ex) {
+                }
+            }
+
+            if (resSelectUser.AG !== true) {
+                try {
+                    let modelAG = {
+                    };
+                    await PostMethod(GameRegisterEndPoints.registerAG, modelAG);
+                }
+                catch (ex) {
+                }
+            }
+
+            if (resSelectUser.Playtech !== true) {
+                try {
+                    let modelPlaytech = {
+                    };
+                    await PostMethod(GameRegisterEndPoints.registerPlaytech, modelPlaytech);
+                }
+                catch (ex) {
+                }
+            }
+
+            if (resSelectUser._918Kiss !== true) {
+                try {
+                    let model918Kiss = {
+                    };
+                    await PostMethod(GameRegisterEndPoints.register918Kiss, model918Kiss);
+                }
+                catch (ex) {
+                }
+            }
+
+            if (resSelectUser.Joker !== true) {
+                try {
+                    let modelJoker = {
+                    };
+                    await PostMethod(GameRegisterEndPoints.registerJoker, modelJoker);
+
+                }
+                catch (ex) {
+                }
+            }
+
+            if (resSelectUser.Mega888 !== true) {
+                var userMegaa88Model = {
+                }
+                try {
+                    await PostMethod(GameRegisterEndPoints.mega888Register, userMegaa88Model);
+                }
+                catch {
+                }
+            }
+
+            if (resSelectUser.DG !== true) {
+                var model = {
+                }
+                try {
+                    await PostMethod(GameRegisterEndPoints.dgRegister, model);
+                }
+                catch {
+                }
+            }
+
+            if (resSelectUser.SexyBaccarat !== true) {
+                var model = {
+                }
+                try {
+                    await PostMethod(GameRegisterEndPoints.sexyRegister, model);
+                }
+                catch {
+                }
+            }
+
+            if (resSelectUser.SA !== true) {
+                var model = {
+                }
+                try {
+                    await PostMethod(GameRegisterEndPoints.saRegister, model);
+                }
+                catch {
+                }
+            }
+
+            if (resSelectUser.Pussy888 !== true) {
+                var model = {
+                }
+                try {
+                    await PostMethod(GameRegisterEndPoints.pussyRegister, model);
+                }
+                catch {
+                }
+            }
+
+            if (resSelectUser.AllBet !== true) {
+                var model = {
+                }
+                try {
+                    await PostMethod(GameRegisterEndPoints.allBetRegister, model);
+                }
+                catch {
+                }
+            }
+
+            if (resSelectUser.WM !== true) {
+                var model = {
+                }
+                try {
+                    await PostMethod(GameRegisterEndPoints.WMRegister, model);
+                }
+                catch {
+                }
+            }
+
+            if (resSelectUser.Pragmatic !== true) {
+                var model = {
+                }
+                try {
+                    await PostMethod(GameRegisterEndPoints.pragmaticRegister, model);
+                }
+                catch {
+                }
+            }
+
+            localStorage.setItem('IsExecute', false);
+        }
+    }
+    catch {
+        localStorage.setItem('IsExecute', false);
+    }
+}

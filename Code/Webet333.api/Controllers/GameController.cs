@@ -3407,11 +3407,10 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.BettingSummery)]
         public async Task<IActionResult> BettingSummery([FromBody] GlobalGetWithPaginationRequest request)
         {
-            var Username = GetUserName(User);
-            
+            request.UserId=GetUserId(User).ToString();
             using (var game_helper = new GameHelpers(Connection))
             {
-                var list = await game_helper.BettingSummerySelect(request, Username);
+                var list = await game_helper.BettingSummerySelect(request);
                 if (list.Count != 0)
                 {
                     var total = list.FirstOrDefault().Total;

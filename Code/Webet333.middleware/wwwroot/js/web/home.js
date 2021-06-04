@@ -14,8 +14,9 @@ let SiteData = {
 //#region OnLoad Function
 
 $(document).ready(function () {
-    if (GetSessionStorage("siteData") == null) SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
+    if (GetSessionStorage("siteData") == null) SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
     if (GetLocalStorage('language') === null) SetLocalStorage('language', 'en-US');
+    if (localStorage.getItem('IsExecute') == "true" || localStorage.getItem('IsExecute') == true || localStorage.getItem('IsExecute') == null) localStorage.setItem('IsExecute', false);
     SetLocalStorage("IsSedularExecute", false);
     SetSiteDataVariable()
     SetLastUpdateTime();
@@ -298,10 +299,10 @@ async function GetWalletList() {
     if (data.WalletData == null || data.WalletData == undefined) {
 
         let res = await GetMethod(settingEndPoints.walletList);
-        
+
         if (res.status == 200) {
             SiteData.WalletData = res.response.data;
-            
+
             SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
         }
     }
