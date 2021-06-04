@@ -279,7 +279,7 @@
                                                 </ul>
                                             </section>
                                             <div class="text-left mar-comman">
-                                                <button name="" value="submit" class="submit">Submit</button>
+                                                <button name="" value="submit" class="submit" onclick="Deposit(true)">Submit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1300,12 +1300,34 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="UpdateMobileNumber()">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" onclick="UpdateMobileNumber()">Save</button>
             </div>
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="promotion_not_apply_confimation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title"><span>Enter your Password</span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <p>You have no selected any promotion, Are you sure to proceed ?</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="DepositAfterPromotionCheck()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div id="deposit_promotion_description_section"></div>
 

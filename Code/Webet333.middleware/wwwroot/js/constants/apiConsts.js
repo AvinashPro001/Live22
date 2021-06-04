@@ -193,6 +193,8 @@ var transactionEndPoints = {
     restore: "Game/Balance/Restore",
     addwithdraw: "payments/withdraw",
     addtransfer: "transfer/balance",
+    addDeposite: "payments/deposit",
+    onlinePayment: "payment/get/url",
     allInWallet: "Game/Balance/InWallet",
     transferHistroy: "payments/transfer/retrieve",
     withdrawDepositHistroy: "payments/withdraw_deposit_select",

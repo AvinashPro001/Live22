@@ -319,6 +319,16 @@ async function SetWithdrawLimit() {
 }
 
 function ResetTransactionField(i) {
+    if (i == 1) {
+        document.getElementById("datepicker0").value = "";
+        document.getElementById("txt_deposit_amount").value = "";
+        document.getElementById("txt_deposit_amount_online").value = "";
+        document.getElementById("txt_reference_number").value = "";
+        var node = document.getElementById("selectedFiles");
+        node.innerHTML = "";
+        TableData = [];
+        files.length = 0; 
+    }
     if (i == 2) {
         $('#txt_withdraw_amount').val("");
     }
@@ -328,8 +338,9 @@ function ResetTransactionField(i) {
     }
 }
 
-var DepositModel;
+var DepositModel, OnlinePayment;
 async function Deposit(IsOnlinePayment) {
+    OnlinePayment = IsOnlinePayment;
     var amount = 0;
     if (IsOnlinePayment)
         amount = $("#txt_deposit_amount_online").val();
@@ -413,9 +424,6 @@ async function Deposit(IsOnlinePayment) {
                 model.promotionApplyEligible = true;
             }
         }
-
-
-        debugger
     }
     else {
         let data = {
@@ -429,12 +437,45 @@ async function Deposit(IsOnlinePayment) {
         else {
             LoaderHide();
             DepositModel = model;
-            $("#promotionNavigate").modal();
+            $('#promotion_not_apply_confimation').modal('show');
             return 0;
         }
     }
 
+    if (!IsOnlinePayment) {
+        if (filter_array(TableData).length === 0) {
+            LoaderHide();
+            return ShowError("receipt_required_error");
+        } else {
+            DepositModel = model;
+            await DepositAfterPromotionCheck();
+        }
+    } else {
+        DepositModel = model;
+        await DepositAfterPromotionCheck();
+    }
+}
 
+async function DepositAfterPromotionCheck() {
+    LoaderShow();
+    if (OnlinePayment) {
+        var res = await PostMethod(transactionEndPoints.onlinePayment, DepositModel);
+        if (res.status == 200) {
+            LoaderHide();
+            window.open("../Web/payment?url=" + res.response.data.redirect_to)
+            //window.open("../Web/payment");
+        }
+    }
+    else {
+        var res = await PostMethod(transactionEndPoints.addDeposite, DepositModel);
+        if (res.status == 200) {
+            await handleFileSelect1(res.response.data.id);
+            LoadAllBalance()
+            ResetTransactionField(1);
+            SetUserDepositPromotion();
+        }
+    }
+    LoaderHide();
 }
 
 async function Withdraw() {
