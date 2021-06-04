@@ -1907,4 +1907,9 @@ p.bonus_content a{color: #333;}
 .deposit-bank-selection ul li a                         { display: flex; align-items: center; color: #000; }
 .deposit-bank-selection ul li a p                       { margin-bottom: 0px; line-height: 15px; text-transform: uppercase; }
 
+/* 4 june css start */
+.datepicker th.datepicker-switch                { text-align: center; }
+.datepicker span.month                          { margin: 0px 1px; }
+.datepicker th.next                             { text-align: right; }
+
 #tbl_promotionHistory thead tr th{font-size:x-small;}
