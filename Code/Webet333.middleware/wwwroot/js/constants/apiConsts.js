@@ -1,4 +1,4 @@
-﻿var baseUrl = "http://localhost:8080/api/v1/";
+﻿var baseUrl = "http://47.242.143.182/api/v1/";
 
 var apiEndPoints = {
     //login: "account/login",
@@ -219,4 +219,15 @@ var GameRegisterEndPoints = {
     WMRegister: "wm/register",
     pragmaticRegister: "pragmatic/register",
     dgRegister: "dg/register",
+}
+
+var GameLoginEndPoints = {
+    aglogin: "ag/login",
+    maxbetlogin: "MaxBet/Login",
+    sexylogin: "sexybaccarart/login",
+    saLogin: "sa/login",
+    allBetLogin: "allbet/login",
+    wmLogin: "wm/login",
+    pragmaticLogin: "pragmatic/login",
+    dgLogin: "dg/login",
 }

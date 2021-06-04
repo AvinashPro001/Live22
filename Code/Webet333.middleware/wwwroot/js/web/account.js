@@ -414,7 +414,8 @@ async function UpdateName() {
 //#endregion
 
 setInterval(function () {
-    regisrationGame();
+    if (GetLocalStorage("currentUser") != null)
+        regisrationGame();
 }, 2000)
 
 
@@ -466,7 +467,7 @@ async function regisrationGame() {
 
             var username = resUserData.username
             var M8Username = globalParameters.m8GamePrefix + username;
-            
+
             if (resSelectUser.MaxBet !== true) {
                 var userMaxBet = {
                     firstname: resUserData.data.name,

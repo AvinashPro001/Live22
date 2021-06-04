@@ -57,6 +57,7 @@
     <script src="~/js/web/bank.js"></script>
     <script src="~/js/web/balance.js"></script>
     <script src="~/js/web/download.js"></script>
+    <script src="~/js/web/gamelogin.js"></script>
     <title>@ViewBag.Title</title>
 
     <script>
@@ -311,37 +312,37 @@
                     <ul class="dropdown-menu dropmenu-main" id="subMenuSports" role="menu">
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="dg">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive" src="~/images/dropdown_logos/dg.png" alt="dg" />Dream Gaming
+                                <img id="dg" onclick="OpenGame('DG Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive" src="~/images/dropdown_logos/dg.png" alt="dg" />Dream Gaming
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="sexy">
-                                <img id="sexy" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/sexy.png" alt="sexy" />Sexy Gaming
+                                <img id="sexy" onclick="OpenGame('Sexy Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/sexy.png" alt="sexy" />Sexy Gaming
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="sa">
-                                <img id="sa" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/sa.png" alt="sa" />SA Gaming
+                                <img id="sa" onclick="OpenGame('SA Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/sa.png" alt="sa" />SA Gaming
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="ag">
-                                <img id="ag" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/ag.png" alt="ag" />Asia Gaming
+                                <img id="ag" onclick="OpenGame('AG Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/ag.png" alt="ag" />Asia Gaming
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="playtech">
-                                <img id="playtech" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/pt.png" alt="playtech" />Play Tech
+                                <img id="playtech" onclick="OpenGame('PlayTech Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/pt.png" alt="playtech" />Play Tech
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="albet">
-                                <img id="albet" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/allbet.png" alt="albet" />All Bet
+                                <img id="albet" onclick="OpenGame('AllBet Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/allbet.png" alt="albet" />All Bet
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="wm">
-                                <img id="wm" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/wm.png" alt="wm" />WM Casino
+                                <img id="wm" onclick="OpenGame('WM Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/wm.png" alt="wm" />WM Casino
                             </a>
                         </li>
                     </ul>
@@ -356,37 +357,37 @@
                     <ul class="dropdown-menu dropmenu-main" id="subMenuSlots" role="menu">
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="918kisses">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/1.png" alt="918kisses" />918 Kisses
+                                <img onclick="OpenGame('918Kiss Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/1.png" alt="918kisses" />918 Kisses
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="mega888">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/7.png" alt="mega888" />Mega 888
+                                <img onclick="OpenGame('Mega888 Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/7.png" alt="mega888" />Mega 888
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="ag">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/3.png" alt="ag" />Asia Gaming
+                                <img onclick="OpenGame('AG Wallet', true)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/3.png" alt="ag" />Asia Gaming
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="pt">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/5.png" alt="pt" />Play Tech
+                                <img onclick="OpenGame('PlayTech Wallet',true)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/5.png" alt="pt" />Play Tech
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="joker">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/2.png" alt="joker" />Joker
+                                <img onclick="OpenGame('Joker Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/2.png" alt="joker" />Joker
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="Pussy888">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/4.png" alt="Pussy888" />Pussy 888
+                                <img onclick="OpenGame('Pussy888 Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/4.png" alt="Pussy888" />Pussy 888
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="Pragmatic">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/8.png" alt="Pragmatic" />Pragmatic Play
+                                <img onclick="OpenGame('Pragmatic Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/8.png" alt="Pragmatic" />Pragmatic Play
                             </a>
                         </li>
 
@@ -402,12 +403,12 @@
                     <ul class="dropdown-menu dropmenu-main" id="subMenuLive" role="menu">
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="m8bet">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/m8.png" alt="m8bet" />M8BET
+                                <img onclick="OpenGame('M8 Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/m8.png" alt="m8bet" />M8BET
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="maxbet">
-                                <img data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/maxbet.png" alt="maxbet" />Maxbet
+                                <img onclick="OpenGame('MaxBet Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/maxbet.png" alt="maxbet" />Maxbet
                             </a>
                         </li>
 
