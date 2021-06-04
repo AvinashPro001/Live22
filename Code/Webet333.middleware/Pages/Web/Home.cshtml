@@ -147,22 +147,25 @@
     </div>
 </div>
 <!-- Contact Section -->
-<!-- Game Section -->
-<div class="row casino_tabb_section ml0 mr0">
+
+
+<!-- Bootstrap tabbing section start -->
+<div class="row bt-tabb-section casino_tabb_section ml0 mr0">
     <div class="container">
-        <div class="casino_profile_wrapper">
+        <div>
             <div class="leftProfileButon">
-                <ul>
-                    <li><a class="tablinks_account active_tabaccount" onclick="openCity(event, 'livcasino')"><img src="images/livecasino_hover.png"> LIVE CASINO </a></li>
-                    <li><a class="tablinks_account" onclick="openCity(event, 'slots')"><img src="images/slot_hover.png"> SLOT </a></li>
-                    <li>
-                        <a class="tablinks_account" onclick="openCity(event, 'sports')"><img src="images/sport_hover.png"> SPORTS </a>
-                    </li>
-                    <li><a class="tablinks_account" onclick="openCity(event, 'fishing')"><img src="images/fish_hover.png"> FISHING </a></li>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs nav-stacked" role="tablist">
+                    <li role="presentation" class="active"><a class="tablinks_account" href="#livcasino" aria-controls="livcasino" role="tab" data-toggle="tab"><img src="images/livecasino_hover.png"> LIVE CASINO</a></li>
+                    <li role="presentation"><a class="tablinks_account" href="#slots" aria-controls="slots" role="tab" data-toggle="tab"><img src="images/slot_hover.png"> SLOT</a></li>
+                    <li role="presentation"><a class="tablinks_account" href="#sports" aria-controls="sports" role="tab" data-toggle="tab"><img src="images/sport_hover.png"> SPORTS</a></li>
+                    <li role="presentation"><a class="tablinks_account" href="#fishing" aria-controls="fishing" role="tab" data-toggle="tab"><img src="images/fish_hover.png"> FISHING</a></li>
                 </ul>
             </div>
-            <div class="genaral_wrapp">
-                <div id="livcasino" class="tabcontent_account" style="display: block;">
+
+            <!-- Tab panes -->
+            <div class="tab-content genaral_wrapp">
+                <div role="tabpanel" class="tab-pane active tabcontent_account" id="livcasino">
                     <div class="slider-nav slider">
                         <div>
                             <img class="hover_icons" src="images/carousel_logos/asia_color.png">
@@ -341,9 +344,10 @@
                                     </div>
                                 </div>
                             </div>*@
-                    </section>
+                    </section>                
                 </div>
-                <div id="slots" class="tabcontent_account">
+                <!-- live casino ends -->
+                <div role="tabpanel" class="tab-pane tabcontent_account" id="slots">
                     <div class="slider-nav slider">
                         @*<div>
                                 <img class="hover_icons" src="images/carousel_logos/918kiss_color.png">
@@ -525,7 +529,8 @@
                             </div>*@
                     </section>
                 </div>
-                <div id="sports" class="tabcontent_account">
+                <!-- slots ends -->
+                <div role="tabpanel" class="tab-pane tabcontent_account" id="sports">
                     <div class="slider-nav slider">
                         <div>
                             <img class="hover_icons" src="images/carousel_logos/m8bet_color.png">
@@ -581,14 +586,18 @@
                         </div>
                     </section>
                 </div>
-                <div id="fishing" class="tabcontent_account">
-                    Fishings
+                <!-- sports ends -->
+                <div role="tabpanel" class="tab-pane tabcontent_account" id="fishing">
+                    ...
                 </div>
+                <!-- fishing ends -->
             </div>
+
         </div>
     </div>
 </div>
-<!-- Game Section -->
+
+<!-- Bootstrap tabbing section ends -->
 <!-- Hot Game Section -->
 <div class="row hot_game_section_wrap ml0 mr0">
     <div class="container">
@@ -639,28 +648,7 @@
 </div>
 <!-- Hot Game Section -->
 
-<script>
-    function openCity(evt, cityName) {
 
-        var i, tabcontent_account, tablinks_account;
-        // var resize1,resize2;
-        tabcontent_account = document.getElementsByClassName("tabcontent_account");
-        for (i = 0; i < tabcontent_account.length; i++) {
-            tabcontent_account[i].style.display = "none";
-        }
-        tablinks_account = document.getElementsByClassName("tablinks_account");
-        // resize1 = document.getElementsByClassName("slider-for");
-        // resize2 = document.getElementsByClassName("slider-nav");
-        for (i = 0; i < tablinks_account.length; i++) {
-            tablinks_account[i].className = tablinks_account[i].className.replace("active_tabaccount", "");
-            // $('.resize2').resize();
-            // document.getElementsByClassName("slider-for").style.resize = "both";
-
-        }
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active_tabaccount";
-    }
-</script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/owl.carousel.min.js'></script>
 <script src='https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js'></script>
 <script type="text/javascript">
@@ -710,40 +698,97 @@
         }
     });
 </script>
+
 <script>
-    $('.slider-for').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        fade: true,
-        asNavFor: '.slider-nav'
-    });
-    $('.slider-nav').slick({
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        asNavFor: '.slider-for',
-        dots: false,
-        autoplay: true,
-        focusOnSelect: true,
-        responsive: [
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                    infinite: true
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    });
+// updated
+    $(document).ready(function(){    
+            $('.slider-for').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                infinite: false,
+                fade: true,
+                asNavFor: '.slider-nav'
+            })
+            $('.slider-nav').slick({
+                slidesToShow: 6,
+                slidesToScroll: 1,
+                asNavFor: '.slider-for',
+                arrows: false,
+                autoplay: true,
+                focusOnSelect: true,
+                infinite: false,
+                responsive: [
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 4,
+                            slidesToScroll: 1,
+                            infinite: true
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            })
+           
+            $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+                var hash_value = e.target.hash;
+                var split = hash_value.split('#');
+                console.log(hash_value);
+                $('.tab-pane').each(function(){
+                    if($(this).attr('id') == split[1]){
+                       setTimeout(() => {
+                        if($('.tab-pane div').hasClass('slick-slider')){
+                            $('#'+split[1]+ ' .slick-slider').slick('destroy');
+                        }
+                        $('#'+split[1]+ ' .slider-for').slick({
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            arrows: true,
+                            fade: true,
+                            infinite: false,
+                            asNavFor: '#'+split[1]+ ' .slider-nav'
+                        })
+                        $('#'+split[1]+ ' .slider-nav').slick({
+                            slidesToShow: 6,
+                            slidesToScroll: 1,          
+                            autoplay: true,
+                            asNavFor: '#'+split[1]+ ' .slider-for',
+                            arrows: false,
+                            focusOnSelect: true,
+                            infinite: false,
+                            responsive: [
+                                {
+                                    breakpoint: 992,
+                                    settings: {
+                                        slidesToShow: 4,
+                                        slidesToScroll: 1,
+                                        infinite: true
+                                    }
+                                },
+                                {
+                                    breakpoint: 768,
+                                    settings: {
+                                        slidesToShow: 3,
+                                        slidesToScroll: 1
+                                    }
+                                }
+                            ]
+                        })
+                       }, 500);
+                    }
+                })
+            })
+        })
 </script>
+
+
 <script>
 
     $(document).ready(function () {
