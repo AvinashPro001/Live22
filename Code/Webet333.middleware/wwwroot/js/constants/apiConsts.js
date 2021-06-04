@@ -1,4 +1,4 @@
-﻿var baseUrl = "http://47.242.143.182/api/v1/";
+﻿var baseUrl = "http://localhost:8080/api/v1/";
 
 var apiEndPoints = {
     //login: "account/login",
@@ -190,4 +190,5 @@ var transactionEndPoints = {
     restore: "Game/Balance/Restore",
     addwithdraw: "payments/withdraw",
     addtransfer: "transfer/balance",
+    transferHistroy:"payments/transfer/retrieve"
 }

@@ -20,7 +20,7 @@ using RequestSizeLimitAttribute = Webet333.api.Filters.RequestSizeLimitAttribute
 
 namespace Webet333.api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route(ActionsConst.ApiVersion)]
     public class PaymentController : BaseController
     {
