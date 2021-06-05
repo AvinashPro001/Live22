@@ -230,4 +230,5 @@ var GameLoginEndPoints = {
     wmLogin: "wm/login",
     pragmaticLogin: "pragmatic/login",
     dgLogin: "dg/login",
+    m8Login: "m8/login",
 }

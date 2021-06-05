@@ -59,6 +59,16 @@ namespace Webet333.api.Helpers
 
         #endregion Call M8 Game Register API
 
+        #region Call M8 Game Login API
+
+        internal static async Task<M8LoginResponse> CallLoginAPI(string Username,string Language)
+        {
+            var url = $"{GameConst.M8.baseURL}?action={GameConst.M8.login}&secret={GameConst.M8.Secret}&agent={GameConst.M8.agent}&username={Username}&host=sport.mywinday.com&lang={Language}&accType=DEC,IN,CN,US,ML,HK&ref=https://webet333.com";
+            return JsonConvert.DeserializeObject<M8LoginResponse>(await CallAPI(url));
+        }
+
+        #endregion Call M8 Game Register API
+
         #region M8 Game Register API
 
         internal async Task<dynamic> GameM8Register(GameM8RegisterRequest request)

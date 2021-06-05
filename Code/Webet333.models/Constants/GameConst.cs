@@ -636,6 +636,8 @@
 
             public const string CreateUser = "create";
 
+            public const string login = "login";
+
             public const string fetch = "fetch";
 
             public const string LanguageCode = "en-US";

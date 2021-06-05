@@ -93,5 +93,44 @@ namespace Webet333.api.Controllers
         }
 
         #endregion M8 game Register
+
+
+        #region M8 game Login
+
+        [Authorize]
+        [HttpPost(ActionsConst.M8.Login)]
+        public async Task<IActionResult> M8Login([FromBody] GameLoginRequest request)
+        {
+            var Role = GetUserRole(User);
+
+            if (Role == RoleConst.Users)
+                request.Id = GetUserId(User).ToString();
+
+            if (Role == RoleConst.Admin)
+                if (string.IsNullOrEmpty(request.Id))
+                    return BadResponse("error_invalid_modelstate");
+
+            string username;
+            using (var account_helper = new AccountHelpers(Connection))
+            {
+                var user = await account_helper.UserGetBalanceInfo(request.Id);
+                username = user.M8GamePrefix + user.Username;
+            }
+
+            var lang = Language.Code == "zh-Hans" ? "ZH-CN" : "EN-US";
+            var result = await M8GameHelpers.CallLoginAPI(username, lang);
+
+            if (result.Response.Errcode != "0") 
+                return OkResponse(new { errorcode = result.Response.Errcode, errortext = result.Response.Errtext, result = "" });
+
+            if (request.IsMobile)
+                return OkResponse(new { errorcode = result.Response.Errcode,errortext= result.Response.Errtext,result= result.Response.Result.Login.Mobiurlsecure.CdataSection });
+            else
+                return OkResponse(new { errorcode = result.Response.Errcode, errortext = result.Response.Errtext, result = result.Response.Result.Login.Weburlsecure.CdataSection });
+
+        }
+
+        #endregion M8 game Login
+
     }
 }
