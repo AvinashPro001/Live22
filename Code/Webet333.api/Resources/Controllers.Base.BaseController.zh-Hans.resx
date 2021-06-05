@@ -427,4 +427,7 @@
   <data name="ok_response_success" xml:space="preserve">
     <value>您的请求已成功提交。</value>
   </data>
+  <data name="sql_error_promotionfixedbonusamount" xml:space="preserve">
+    <value>只允许那些存款金额：</value>
+  </data>
 </root>
