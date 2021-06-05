@@ -72,10 +72,10 @@ export class PromotionAddComponent implements OnInit {
 
     showMinDeposit: boolean = true;
     minDepositValue: any = 0;
-    PromotionFixedBonusAmount: any;
-    totalRowForPromotionFixedBonusAmount: number = 10;
-    showPromotionFixedBonusAmounttrue: boolean = false;
     discountTypeId: any;
+    totalRowForPromotionFixedBonus: number = 10;
+    showPromotionFixedBonus: boolean = false;
+    promotionFixedBonusAmount: any;
     showMaxBonus: boolean = true;
     maxBonusValue: any = 0;
     showDiscount: boolean = true;
@@ -212,18 +212,18 @@ export class PromotionAddComponent implements OnInit {
 
     addPromotion() {
         if (this.discountTypeId == this.Type[2].id) {
-            this.PromotionFixedBonusAmount = new Array(this.totalRowForPromotionFixedBonusAmount);
+            this.promotionFixedBonusAmount = new Array(this.totalRowForPromotionFixedBonus);
 
-            for (let i = 0; i < this.totalRowForPromotionFixedBonusAmount; i++) {
+            for (let i = 0; i < this.totalRowForPromotionFixedBonus; i++) {
                 let temp = {
                     depositAmount: (document.getElementById("txt_depositAmount_" + i) as HTMLInputElement).value,
                     bonusAmount: (document.getElementById("txt_bonusAmount_" + i) as HTMLInputElement).value
                 };
-                this.PromotionFixedBonusAmount[i] = temp;
+                this.promotionFixedBonusAmount[i] = temp;
             }
         }
         else {
-            this.PromotionFixedBonusAmount = null;
+            this.promotionFixedBonusAmount = null;
         }
 
         this.disabled = true;
@@ -253,7 +253,7 @@ export class PromotionAddComponent implements OnInit {
             winturn: this.WinTurn,
             //minDeposit: (document.getElementById("txt_minDepositAmount") as HTMLInputElement).value,
             minDeposit: this.minDepositValue,
-            fixedBonus: this.PromotionFixedBonusAmount,
+            fixedBonus: this.promotionFixedBonusAmount,
 
             isAG: (document.getElementById("ag_id") as HTMLInputElement).checked,
             isDG: (document.getElementById("dg_id") as HTMLInputElement).checked,
@@ -430,17 +430,17 @@ export class PromotionAddComponent implements OnInit {
     //#region For dynamic row
 
     counter(i: number) {
-        this.PromotionFixedBonusAmount = new Array(i);
+        this.promotionFixedBonusAmount = new Array(i);
 
         for (let j = 0; j < i; j++) {
             let temp = {
                 depositAmount: 0,
                 bonusAmount: 0
             };
-            this.PromotionFixedBonusAmount[j] = temp;
+            this.promotionFixedBonusAmount[j] = temp;
         }
 
-        return this.PromotionFixedBonusAmount;
+        return this.promotionFixedBonusAmount;
     }
 
     //#endregion For dynamic row
@@ -450,20 +450,20 @@ export class PromotionAddComponent implements OnInit {
     onDiscountTypeSelected(value: string) {
         this.discountTypeId = value;
         if (this.discountTypeId == this.Type[2].id) {
-            this.showPromotionFixedBonusAmounttrue = true;
+            this.showPromotionFixedBonus = true;
             this.showDiscount = false;
             this.showMinDeposit = false;
             this.showMaxBonus = false;
-            if (this.PromotionFixedBonusAmount == null) {
-                this.PromotionFixedBonusAmount = this.counter(this.totalRowForPromotionFixedBonusAmount);
+            if (this.promotionFixedBonusAmount == null) {
+                this.promotionFixedBonusAmount = this.counter(this.totalRowForPromotionFixedBonus);
             }
         }
         else {
-            this.showPromotionFixedBonusAmounttrue = false;
+            this.showPromotionFixedBonus = false;
             this.showDiscount = true;
             this.showMinDeposit = true;
             this.showMaxBonus = true;
-            this.PromotionFixedBonusAmount == null;
+            this.promotionFixedBonusAmount == null;
         }
     }
 

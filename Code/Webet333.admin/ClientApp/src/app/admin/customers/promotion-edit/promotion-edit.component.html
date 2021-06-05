@@ -171,7 +171,7 @@
                                     <input id="txt_discountId" type="number" value="{{data.discount}}" class="form-control" [(ngModel)]="discountValue" [ngModelOptions]="{standalone: true}" />
                                 </div>
                             </ng-container>
-                            <ng-container *ngIf="showPromotionFixedBonusAmounttrue">
+                            <ng-container *ngIf="showPromotionFixedBonus">
                                 <div class="scrollit">
                                     <table class="table">
                                         <thead>
@@ -193,23 +193,23 @@
                                             </tr>
                                         </thead>
                                         <tbody style="text-align:right">
-                                            <ng-container *ngFor='let PromotionFixedBonusAmountValue of PromotionFixedBonusAmount; let i = index'>
+                                            <ng-container *ngFor='let promotionFixedBonusAmountValue of promotionFixedBonusAmount; let i = index'>
                                                 <tr>
                                                     <td>
                                                         <input id="txt_depositAmount_{{i}}"
                                                                type="number"
                                                                class="form-control"
-                                                               [(ngModel)]="PromotionFixedBonusAmountValue.DepositAmount"
+                                                               [(ngModel)]="promotionFixedBonusAmountValue.DepositAmount"
                                                                [ngModelOptions]="{standalone: true}"
-                                                               value="PromotionFixedBonusAmountValue.DepositAmount">
+                                                               value="promotionFixedBonusAmountValue.DepositAmount">
                                                     </td>
                                                     <td>
                                                         <input id="txt_bonusAmount_{{i}}"
                                                                type="number"
                                                                class="form-control"
-                                                               [(ngModel)]="PromotionFixedBonusAmountValue.BonusAmount"
+                                                               [(ngModel)]="promotionFixedBonusAmountValue.BonusAmount"
                                                                [ngModelOptions]="{standalone: true}"
-                                                               value="PromotionFixedBonusAmountValue.BonusAmount">
+                                                               value="promotionFixedBonusAmountValue.BonusAmount">
                                                     </td>
                                                 </tr>
                                             </ng-container>
