@@ -91,7 +91,7 @@ namespace Webet333.api.Controllers
 
             var result = await PlaytechGameHelpers.PlaytechRegister(username, password, _hostingEnvironment);
 
-            if (result.Result == null) return OkResponse(result);
+            if (result.Errorcode != 0) return OkResponse(result);
 
             using (var playtech_helper = new PlaytechGameHelpers(Connection))
             {
