@@ -96,6 +96,10 @@ export class TransferAddComponent implements OnInit {
     wmBal: any;
     wmUsername: any;
     userPassword: any;
+
+    YeeBetBalance: any;
+    YeeBetUsername: any;
+
     //#endregion
 
     //#region ngOnInit
@@ -180,6 +184,7 @@ export class TransferAddComponent implements OnInit {
             this.pragmaticUsername = res.data.pragmaticUsername;
             this.wmUsername = res.data.wmUsername;
             this.pragmaticUsername = res.data.pragmaticUsername;
+            this.YeeBetUsername = res.data.yeeBetUsername;
             this.Kiss918Balance(newVal);
             this.Mega888(newVal);
             this.Maxbet(newVal);
@@ -195,6 +200,7 @@ export class TransferAddComponent implements OnInit {
             this.AllBet(newVal);
             this.WM(newVal);
             this.Pragmatic(newVal);
+            this.YeeBet(newVal);
         })
 
         this.adminService.getAll<any>(customer.depositDdl).subscribe(res => {
@@ -259,7 +265,7 @@ export class TransferAddComponent implements OnInit {
                     if (this.IsFromWalletMaintenance === true || this.IsToWalletMaintenance === true) {
                         this.disabled = false;
                         this.ngOnInit();
-                        return this.toasterService.pop('error', 'Error', "Game in Maintenance");
+                        return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.GameInMaintenance);
                     }
 
                     for (var i = 0; i < res.data.length; i++) {
@@ -288,7 +294,7 @@ export class TransferAddComponent implements OnInit {
                     else {
                         this.disabled = false;
                         this.ngOnInit();
-                        this.toasterService.pop('error', 'error', "please insert less amount.");
+                        this.toasterService.pop('error', 'error', this.commonService.errorMessage.PleaseInsertLessAmount);
                     }
                 });
             }, error => {
@@ -300,7 +306,7 @@ export class TransferAddComponent implements OnInit {
         else {
             this.disabled = false;
             this.ngOnInit();
-            this.toasterService.pop('error', 'error', "please enter amount greater than 0.");
+            this.toasterService.pop('error', 'error', this.commonService.errorMessage.PleaseEnterAmountGreaterThan0);
         }
     }
     //#endregion
@@ -502,6 +508,16 @@ export class TransferAddComponent implements OnInit {
         }
         this.adminService.add<any>(gameBalance.Pragmatic, data).subscribe(res => {
             this.pragmaticBal = res.data.balance;
+        })
+    }
+
+    YeeBet(id) {
+        let data = {
+            id: id,
+            username: this.YeeBetUsername
+        }
+        this.adminService.add<any>(gameBalance.YeeBet, data).subscribe(res => {
+            this.YeeBetBalance = res.data.balance;
         })
     }
 

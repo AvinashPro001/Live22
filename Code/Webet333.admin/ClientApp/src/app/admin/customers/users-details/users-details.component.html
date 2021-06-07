@@ -97,6 +97,9 @@
         <div class="col-2">
             <div class="text-center"><b>Pragmatic Wallet</b></div><div class="text-center"><b class="balance">{{pragmaticbalance == null || pragmaticbalance == undefined? 'N/A' : convertDecimal(pragmaticbalance)}}</b></div>
         </div>
+        <div class="col-2">
+            <div class="text-center"><b>YeeBet Wallet</b></div><div class="text-center"><b class="balance">{{YeeBetBalance == null || YeeBetBalance == undefined? 'N/A' : convertDecimal(YeeBetBalance)}}</b></div>
+        </div>
     </div>
 </div>
 <br />
@@ -316,6 +319,11 @@
                     <td>{{pragmaticUsername== null ? 'Select username.' : pragmaticUsername }}</td>
                     <td></td>
                 </tr>
+                <tr>
+                    <td>YeeBet Game:</td>
+                    <td>{{YeeBetUsername == null ? 'Select username.' : YeeBetUsername }}</td>
+                    <td></td>
+                </tr>
             </table>
             <table style="text-align: center; margin-top: 10px;">
                 <tr>
@@ -369,7 +377,7 @@
             <button class="mb-1 btn btn-success" (click)='setThisYear("Deposit")' type="button">This Year</button>
         </div>
     </div>
-    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="depositRows" [loadingIndicator]="loadingIndicator" [columns]="depositColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="20"  [count]="totalRowCount" [offset]="offset" (page)="setPage($event)">
+    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="depositRows" [loadingIndicator]="loadingIndicator" [columns]="depositColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="20" [count]="totalRowCount" [offset]="offset" (page)="setPage($event)">
     </ngx-datatable>
 </div>
 
@@ -802,7 +810,6 @@
     </div>
 </ng-template>
 <!--Remarks modal code ends-->
-
 <!--Remarks modal code starts-->
 <ng-template #VIPLevel let-modal>
     <div class="modal-header">

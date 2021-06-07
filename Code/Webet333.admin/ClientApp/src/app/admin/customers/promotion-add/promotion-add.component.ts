@@ -70,6 +70,7 @@ export class PromotionAddComponent implements OnInit {
     //#endregion
 
     //#region ngOnInit
+
     async ngOnInit() {
         if (await this.checkAddPermission()) {
             this.getLanguage();
@@ -84,7 +85,9 @@ export class PromotionAddComponent implements OnInit {
         }
     }
 
-    //#endregion
+    //#endregion ngOnInit
+
+    //#region GetLanguage
 
     getLanguage() {
         this.adminService.get<any>(account.getLanguageList).subscribe(res => {
@@ -92,13 +95,17 @@ export class PromotionAddComponent implements OnInit {
         });
     }
 
-    //#region constructor
+    //#endregion GetLanguage
+
+    //#region Constructor
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
         private commonService: CommonService) { }
-    //#endregion
+
+    //#endregion Constructor
 
     OnSelect(event) {
         this.turnoverValue = event.value != undefined ? Number(event.value.replace("X", "")) : event.value;
@@ -221,6 +228,7 @@ export class PromotionAddComponent implements OnInit {
             isPragmatic: (document.getElementById("pragmatic_id") as HTMLInputElement).checked,
             isSexyBaccarat: (document.getElementById("sexybaccarat_id") as HTMLInputElement).checked,
             isWM: (document.getElementById("wm_id") as HTMLInputElement).checked,
+            isYeeBet: (document.getElementById("YeeBet_id") as HTMLInputElement).checked,
             isAllBet: (document.getElementById("allbet_id") as HTMLInputElement).checked,
             isMaxbet: (document.getElementById("maxbet_id") as HTMLInputElement).checked,
             isM8: (document.getElementById("m8") as HTMLInputElement).checked,
@@ -252,6 +260,7 @@ export class PromotionAddComponent implements OnInit {
             dataSelect.isPragmatic = false;
             dataSelect.isSexyBaccarat = false;
             dataSelect.isWM = false;
+            dataSelect.isYeeBet = false;
             dataSelect.isAllBet = false;
             dataSelect.isMaxbet = false;
             dataSelect.isM8 = false;

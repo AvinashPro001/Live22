@@ -228,6 +228,7 @@ export class PromotionEditComponent implements OnInit {
             isPragmatic: (document.getElementById("pragmatic_id") as HTMLInputElement).checked,
             isSexyBaccarat: (document.getElementById("sexybaccarat_id") as HTMLInputElement).checked,
             isWM: (document.getElementById("wm_id") as HTMLInputElement).checked,
+            isYeeBet: (document.getElementById("YeeBet_id") as HTMLInputElement).checked,
             isAllBet: (document.getElementById("allbet_id") as HTMLInputElement).checked,
             isMaxbet: (document.getElementById("maxbet_id") as HTMLInputElement).checked,
             isM8: (document.getElementById("m8") as HTMLInputElement).checked,
@@ -259,6 +260,7 @@ export class PromotionEditComponent implements OnInit {
             dataSelect.isPragmatic = false;
             dataSelect.isSexyBaccarat = false;
             dataSelect.isWM = false;
+            dataSelect.isYeeBet = false;
             dataSelect.isAllBet = false;
             dataSelect.isMaxbet = false;
             dataSelect.isM8 = false;
@@ -273,45 +275,45 @@ export class PromotionEditComponent implements OnInit {
 
         if (dataSelect.turnovertime == 0 && dataSelect.winturn == 0) {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select Turnover Times Or Winturn");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectTurnoverTimesOrWinturn);
         }
 
         if (dataSelect.turnovertime != 0 && dataSelect.winturn != 0) {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select only one value either Turnover Times Or Winturn");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectOnlyOneValueEitherTurnoverTimesOrWinturn);
         }
 
         if (dataSelect.startDate === "NaN") {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select Start date");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectStartDate);
         }
         if (dataSelect.endDate === "NaN") {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select End date");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectEndDate);
         }
         if (dataSelect.description === undefined) {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Give Proper Decription");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseGiveProperDescription);
         }
 
         if (dataSelect.discount === "") {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Insert Discount");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertDiscount);
         }
 
         if (dataSelect.discountType === "") {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select Discount Type");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectDiscountType);
         }
 
         if (dataSelect.sequence === "") {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select Sequence");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectSequence);
         }
 
         if (dataSelect.title === "") {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Insert Title");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertTitle);
         }
 
         this.adminService.add<any>(customer.promotionUpdate, dataSelect).subscribe(res => {

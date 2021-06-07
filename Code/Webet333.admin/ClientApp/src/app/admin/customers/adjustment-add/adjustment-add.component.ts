@@ -60,6 +60,9 @@ export class AdjustmentAddComponent implements OnInit {
     pragmaticBal: any;
     pragmaticUsername: any;
 
+    YeeBetBalance: any;
+    YeeBetUsername: any;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -101,6 +104,7 @@ export class AdjustmentAddComponent implements OnInit {
             this.allbetUsername = res.data.allbetUsername;
             this.wmUsername = res.data.wmUsername;
             this.pragmaticUsername = res.data.pragmaticUsername;
+            this.YeeBetUsername = res.data.yeeBetUsername;
             this.Kiss918Balance(newVal);
             this.Mega888(newVal);
             this.Maxbet(newVal);
@@ -116,6 +120,7 @@ export class AdjustmentAddComponent implements OnInit {
             this.AllBet(newVal);
             this.WM(newVal);
             this.Pragmatic(newVal);
+            this.YeeBet(newVal);
         })
     }
 
@@ -173,11 +178,11 @@ export class AdjustmentAddComponent implements OnInit {
             else {
                 this.disabled = false;
                 this.ngOnInit();
-                this.toasterService.pop('error', 'Error', "Please provide proper value !!");
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseProvideProperValue);
             }
         }
         else {
-            this.toasterService.pop('error', 'Error', "Please Select User !!");
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectUser);
         }
     }
 
@@ -214,6 +219,7 @@ export class AdjustmentAddComponent implements OnInit {
     }
 
     //#region Wallet Balance
+
     convertDecimal(Balance) {
         return Number(Balance).toFixed(2);
     }
@@ -368,6 +374,17 @@ export class AdjustmentAddComponent implements OnInit {
             this.pragmaticBal = res.data.balance;
         })
     }
+
+    YeeBet(id) {
+        let data = {
+            id: id,
+            username: this.YeeBetUsername
+        }
+        this.adminService.add<any>(gameBalance.YeeBet, data).subscribe(res => {
+            this.YeeBetBalance = res.data.balance;
+        })
+    }
+
     //#endregion Wallet Balance
 
     //#region Check Permission

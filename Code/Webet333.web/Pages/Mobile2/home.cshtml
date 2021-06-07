@@ -66,7 +66,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
     @*<script src="https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88" type="text/javascript" charset="utf-8"></script>*@
     <script type="text/javascript">
-        $(window).on('load', function(){
+        $(window).on('load', function () {
             $(".loadingImage").fadeOut("slow");;
         });
     </script>
@@ -257,6 +257,14 @@
                         <div class="tab-content">
                             <div id="casino-tile" role="tabpanel" class="tab-pane active fade in">
                                 <ul class="game-series">
+                                    <li data-toggle="modal" data-target="#gameLogin" id="YeeBetLive">
+                                        <a>
+                                            <figure>
+                                                <img src="~/images/images-mobile/yeebet.png" alt="YeeBet">
+                                            </figure>
+                                            <button class="game-title"><span class="lang" key="yeebet_game"></span></button>
+                                        </a>
+                                    </li>
                                     <li data-toggle="modal" data-target="#gameLogin" id="playtechlive">
                                         <a>
                                             <figure>
@@ -402,7 +410,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="footer-quote">
                         <p class="text-center"><img class="footer-copyright-section-img" src="~/images/images-mobile/reco-pagcor.png" /></p>
                         <p class="text-center footer-copyright-section-p">WEBET333 offer wide range of highest quality gaming products to our players. Our Customer Support Team is available to assist you 24 hours a day. All personal information will be treated and stored at the strictest and most confidential way.</p>
@@ -580,6 +587,12 @@
                                             <li class="fright" id="ddlPragmaticWallet">feching...</li>
                                         </ul>
                                     </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>YeeBet Wallet</strong></li>
+                                            <li class="fright" id="ddlYeeBetWallet">feching...</li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -631,6 +644,14 @@
                     <div class="tab-content">
                         <div id="home" class="tab-pane fade in active">
                             <ul class="game-series">
+                                <li onclick="logingGame('YeeBet')" id="YeeBetLiveLogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/yeebet.png" alt="YeeBet">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="yeebet_game"></span></button>
+                                    </a>
+                                </li>
                                 <li onclick="PlaytechIdentifiy(false)" id="playtechlivelogin">
                                     <a>
                                         <figure>
@@ -759,7 +780,6 @@
                                         <button class="game-title"><span class="lang" key="jokerslot_game"></span></button>
                                     </a>
                                 </li>
-
                                 <li onclick="logingGame('Pragmatic')" id="pragmaticslotlogin">
                                     <a>
                                         <figure>
@@ -1027,10 +1047,10 @@
             $('#homeLoginPagebottom').addClass("active-link");
 
         }, 2000);
-                            //$('#footerWidget').click(function () {
-                            //    $('li').addClass("active");
-                            //    $('li').removeClass("active");
-                            //});
+                                                                    //$('#footerWidget').click(function () {
+                                                                    //    $('li').addClass("active");
+                                                                    //    $('li').removeClass("active");
+                                                                    //});
     </script>
 </body>
 </html>

@@ -149,6 +149,12 @@
                                             <li class="fright" id="ddlPragmaticWallet">feching...</li>
                                         </ul>
                                     </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>YeeBet Wallet</strong></li>
+                                            <li class="fright" id="ddlYeeBetWallet">feching...</li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -231,7 +237,6 @@
                     <div class="col-sm-7" style="border-left:1px solid #d7d7d7">
                         <p class="grey-text text-center" id="_918userName" style="display:none;"></p>
                         <p class="grey-text text-center" id="_918resetpasswordDownload" style="display:none;"></p>
-
                     </div>
                 </div>
                 <div class="row no-mar">
@@ -244,7 +249,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="form-login modal fade" id="gameLogin" role="dialog">
         <div class="modal-dialog">
@@ -382,8 +386,6 @@
     });
 </script>
 
-
-
 <!--Begin Comm100 Live Chat Code-->
 <div></div>
 <script type="text/javascript">
@@ -423,7 +425,6 @@
             jcf.replaceAll();
         });
     });
-
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -483,7 +484,6 @@
         }
     });
 
-
     $("html").click(async function (event) {
         if (GetLocalStorage('currentUser') !== null) {
             await PostMethod(apiEndPoints.userLastTimeUpdate, {});
@@ -492,5 +492,4 @@
     setTimeout(() => {
         get();
     }, 200);
-
 </script>

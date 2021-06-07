@@ -39,7 +39,7 @@
     <meta name="theme-color" content="#ffffff">
     <script src="~/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" charset="utf-8">
-        $(window).on('load', function(){
+        $(window).on('load', function () {
             $(".se-pre-con").fadeOut("slow");
         });</script>
     <script type="text/javascript" charset="utf-8" src="../../js/jquery.cookie.js" as="script"></script>
@@ -76,7 +76,7 @@
     <script src="../../js/xmlToJson.js"></script>
     <script src="~/js/constants/SMSConsts.js"></script>
     <script type="text/javascript">
-        $(window).on('load', function(){
+        $(window).on('load', function () {
             $(".loadingImage").fadeOut("slow");
         });
 
@@ -323,6 +323,10 @@
                                                             <td class="menu-padding">Pragmatic wallet</td>
                                                             <td><span id="PragmaticBalance">fetching.....</span></td>
                                                         </tr>
+                                                        <tr>
+                                                            <td class="menu-padding">YeeBet wallet</td>
+                                                            <td><span id="YeeBetBalance">fetching.....</span></td>
+                                                        </tr>
                                                     </table>
                                                 </div>
                                             </div>
@@ -364,7 +368,11 @@
                         <li class="dropdown live-casino">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang" key="menu_live_casino"></span> <span class="caret"></span></a>
                             <ul class="dropdown-menu dropmenu-main" id="subMenuLive" role="menu">
-
+                                <li>
+                                    <a onclick="logingGame('YeeBet')" data-toggle="tooltip" data-placement="bottom" id="YeeBetGame">
+                                        <img data-toggle="tooltip" data-placement="bottom" style="width:120px" class="img-responsive img-filter" src="~/images/logo_yeebet.png" alt="YeeBet" />
+                                    </a>
+                                </li>
                                 <li>
                                     <a onclick="logingGame('DG')" data-toggle="tooltip" data-placement="bottom" id="DGGame">
                                         <img id="dglive" data-toggle="tooltip" data-placement="bottom" class="img-responsive menu-game-logo img-filter" src="~/images/Dg.png" alt="DG" />
@@ -576,6 +584,11 @@
                         <li>
                             <figure class="pad-top-ten">
                                 <img class="pink-logo" src="../../images/footer/pragmatic.png" alt="WM logo">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure class="pad-top-ten">
+                                <img class="pink-logo" src="../../images/footer/logo_yeebet.png" alt="YeeBet logo">
                             </figure>
                         </li>
                     </ul>

@@ -27,19 +27,20 @@ export class BettingDetailsComponent implements OnInit {
     TableData: string;
     @ViewChild('status') status: TemplateRef<any>;
     listType: any = [
-        { gameName: "M8" },
-        { gameName: "AG" },
-        { gameName: "Playtech" },
-        { gameName: "Joker" },
-        { gameName: "Mega888" },
-        { gameName: "918 Kiss" },
-        { gameName: "DG" },
-        { gameName: "Sexy Baccarat" },
-        { gameName: "SA" },
-        { gameName: "Pussy888" },
-        { gameName: "AllBet" },
-        { gameName: "WM" },
-        { gameName: "Pragmatic" },
+        { gameName: this.commonService.GameName.M8 },
+        { gameName: this.commonService.GameName.AG },
+        { gameName: this.commonService.GameName.Playtech },
+        { gameName: this.commonService.GameName.Joker },
+        { gameName: this.commonService.GameName.Mega888 },
+        { gameName: this.commonService.GameName._918Kiss },
+        { gameName: this.commonService.GameName.DG },
+        { gameName: this.commonService.GameName.SexyBaccarat },
+        { gameName: this.commonService.GameName.SA },
+        { gameName: this.commonService.GameName.Pussy888 },
+        { gameName: this.commonService.GameName.AllBet },
+        { gameName: this.commonService.GameName.WM },
+        { gameName: this.commonService.GameName.PragmaticPlay },
+        { gameName: this.commonService.GameName.YeeBet }
     ];
 
     gmtList: any = [
@@ -86,8 +87,9 @@ export class BettingDetailsComponent implements OnInit {
     }
 
     //#region setCoumn
+
     setColumn(selectedList) {
-        if (selectedList == "M8") {
+        if (selectedList == this.commonService.GameName.M8) {
             this.columns = [
                 { prop: 'Action', cellTemplate: this.status, width: 60 },
                 { prop: 'FetchId' },
@@ -125,7 +127,7 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: 'AwayName' },
             ];
         }
-        else if (selectedList == "Playtech") {
+        else if (selectedList == this.commonService.GameName.Playtech) {
             this.columns = [
                 { prop: 'PlayerName' },
                 { prop: 'WindowCode' },
@@ -145,7 +147,7 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: 'LiveNetwork' },
             ];
         }
-        else if (selectedList == "AG") {
+        else if (selectedList == this.commonService.GameName.AG) {
             this.columns = [
                 { prop: 'user_id' },
                 { prop: 'operator_id' },
@@ -178,7 +180,7 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: 'vid' },
             ];
         }
-        else if (selectedList == "Joker") {
+        else if (selectedList == this.commonService.GameName.Joker) {
             this.columns = [
                 { prop: 'Username', width: 60 },
                 { prop: 'OCode' },
@@ -186,7 +188,7 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: 'Result' },
             ];
         }
-        else if (selectedList == "Mega888") {
+        else if (selectedList == this.commonService.GameName.Mega888) {
             this.columns = [
                 { prop: 'Name' },
                 { prop: 'LoginId' },
@@ -201,7 +203,7 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: 'Memo' },
             ];
         }
-        else if (selectedList == "918 Kiss") {
+        else if (selectedList == this.commonService.GameName._918Kiss) {
             this.columns = [
                 { prop: 'Account' },
                 { prop: 'Agentwin' },
@@ -219,7 +221,7 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: 'Tel' },
             ];
         }
-        else if (selectedList == "DG") {
+        else if (selectedList == this.commonService.GameName.DG) {
             this.columns = [
                 { prop: "id" },
                 { prop: "tableId" },
@@ -249,7 +251,7 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: "pluginid" }
             ];
         }
-        else if (selectedList == "Sexy Baccarat") {
+        else if (selectedList == this.commonService.GameName.SexyBaccarat) {
             this.columns = [
                 { prop: "ID" },
                 { prop: "gameType" },
@@ -273,7 +275,7 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: "roundId" },
             ];
         }
-        else if (selectedList == "SA") {
+        else if (selectedList == this.commonService.GameName.SA) {
             this.columns = [
                 { prop: "BetID" },
                 { prop: "Balance" },
@@ -295,7 +297,7 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: "Detail" },
             ];
         }
-        else if (selectedList == "Pussy888") {
+        else if (selectedList == this.commonService.GameName.Pussy888) {
             this.columns = [
                 { prop: "Account" },
                 { prop: "Agentwin" },
@@ -313,7 +315,7 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: "Yield" },
             ];
         }
-        else if (selectedList == "AllBet") {
+        else if (selectedList == this.commonService.GameName.AllBet) {
             this.columns = [
                 { prop: "AppType" },
                 { prop: "BetAmount" },
@@ -335,7 +337,7 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: "WinOrLoss" },
             ];
         }
-        else if (selectedList == "WM") {
+        else if (selectedList == this.commonService.GameName.WM) {
             this.columns = [
                 { prop: "Gid" },
                 { prop: "User" },
@@ -363,7 +365,7 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: "WinLoss" },
             ];
         }
-        else if (selectedList == "Pragmatic") {
+        else if (selectedList == this.commonService.GameName.PragmaticPlay) {
             this.columns = [
                 { prop: "Bet" },
                 { prop: "BonusCode" },
@@ -380,14 +382,46 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: "Win" },
             ];
         }
+        else if (selectedList == this.commonService.GameName.YeeBet) {
+            this.columns = [
+                { prop: "GameId" },
+                { prop: "CreateTime" },
+                { prop: "UserStatus" },
+                { prop: "BetPoint" },
+                { prop: "BetOdds" },
+                { prop: "UserId" },
+                { prop: "CommAmount" },
+                { prop: "GameRoundId" },
+                { prop: "UId" },
+                { prop: "SettleTime" },
+                { prop: "GameResult" },
+                { prop: "WinLost" },
+                { prop: "GameType" },
+                { prop: "Currency" },
+                { prop: "Id" },
+                { prop: "State" },
+                { prop: "Describe" },
+                { prop: "GameNo" },
+                { prop: "BetType" },
+                { prop: "CId" },
+                { prop: "Username" },
+                { prop: "BetAmount" }
+            ];
+        }
         else {
             this.columns = [];
         }
     }
+
     //#endregion
 
     onChange($event) {
-        if ($event.target.value === "M8" || $event.target.value === "DG" || $event.target.value === "Pragmatic") {
+        let gameName = $event.target.value;
+
+        if (gameName === this.commonService.GameName.M8 ||
+            gameName === this.commonService.GameName.DG ||
+            gameName === this.commonService.GameName.PragmaticPlay ||
+            gameName === this.commonService.GameName.YeeBet) {
             this.disable = true;
             this.gmtDisable = true;
             (document.getElementById("fromDate") as HTMLInputElement).style.display = "none";
@@ -412,7 +446,7 @@ export class BettingDetailsComponent implements OnInit {
             (document.getElementById("thisYearFilter") as HTMLInputElement).style.display = "";
         }
 
-        if ($event.target.value === "Pragmatic") {
+        if (gameName === this.commonService.GameName.PragmaticPlay) {
             (document.getElementById("startDate") as HTMLInputElement).style.display = "";
             (document.getElementById("todayFilter") as HTMLInputElement).style.display = "";
             (document.getElementById("yesterdayFilter") as HTMLInputElement).style.display = "";
@@ -420,12 +454,12 @@ export class BettingDetailsComponent implements OnInit {
             (document.getElementById("thisYearFilter") as HTMLInputElement).style.display = "";
         }
 
-        if ($event.target.value === "Sexy Baccarat") {
+        if (gameName === this.commonService.GameName.SexyBaccarat) {
             this.gmtDisable = false;
             (document.getElementById("gmtDiv") as HTMLInputElement).style.display = "";
         }
 
-        this.selectedList = $event.target.value;
+        this.selectedList = gameName;
         this.setDateOtherPicker(new Date(), new Date());
         this.BettingDetails();
     }
@@ -492,6 +526,8 @@ export class BettingDetailsComponent implements OnInit {
     //#endregion
 
     BettingDetails(startingDate = null, endingDate = null) {
+        if (this.commonService.CheckVariable(this.selectedList)) return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectGame);
+
         this.loadingIndicator = true;
         this.rows = [];
 
@@ -520,14 +556,16 @@ export class BettingDetailsComponent implements OnInit {
         //    todate: this.toDate
         //}
 
-        if (this.selectedList !== "M8" && this.selectedList !== "DG" && this.selectedList !== "Pragmatic")
-            if (Model.fromdate === null || Model.todate === null) return this.toasterService.pop('error', 'Error', "Please Select To Date and From Date");
+        if (this.selectedList !== this.commonService.GameName.M8 &&
+            this.selectedList !== this.commonService.GameName.DG &&
+            this.selectedList !== this.commonService.GameName.PragmaticPlay)
+            if (Model.fromdate === null || Model.todate === null) return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseProvideFromDateToDate);
 
         this.setDateOtherPicker(new Date(Model.fromdate), new Date(Model.todate));
 
         this.setColumn(this.selectedList);
         switch (this.selectedList) {
-            case 'M8': {
+            case this.commonService.GameName.M8: {
                 this.adminService.get<any>(customer.M8BettingDetails).subscribe(res => {
                     this.rows = [];
                     if (res.data.response.result !== "") {
@@ -581,7 +619,7 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
-            case 'AG': {
+            case this.commonService.GameName.AG: {
                 this.adminService.add<any>(customer.AGBettingDetails, Model).subscribe(res => {
                     this.rows = [];
                     if (res.data.trans !== null) {
@@ -631,7 +669,7 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
-            case 'Playtech': {
+            case this.commonService.GameName.Playtech: {
                 this.adminService.add<any>(customer.PlaytechBettingDetails, Model).subscribe(res => {
                     this.rows = [];
                     if (res.data.length > 0) {
@@ -669,7 +707,7 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
-            case 'Joker': {
+            case this.commonService.GameName.Joker: {
                 this.adminService.add<any>(customer.JokerBettingDetails, Model).subscribe(res => {
                     this.rows = [];
                     if (res.data.winloss.length > 0) {
@@ -694,7 +732,7 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
-            case 'Mega888': {
+            case this.commonService.GameName.Mega888: {
                 this.adminService.add<any>(customer.Mega888BettingDetails, Model).subscribe(res => {
                     this.loadingIndicator = true;
                     this.rows = [];
@@ -727,7 +765,7 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
-            case '918 Kiss': {
+            case this.commonService.GameName._918Kiss: {
                 this.adminService.add<any>(customer.Kiss918BettingDetails, Model).subscribe(res => {
                     this.loadingIndicator = true;
                     this.rows = [];
@@ -763,7 +801,7 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
-            case 'DG': {
+            case this.commonService.GameName.DG: {
                 this.adminService.get<any>(customer.DGBettingDetails).subscribe(res => {
                     this.rows = [];
                     if (res.data.list !== null) {
@@ -810,7 +848,7 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
-            case 'Sexy Baccarat': {
+            case this.commonService.GameName.SexyBaccarat: {
                 let sexyModel = {
                     fromdate: this.fromDate.replace(" ", "T") + this.gmtlist,
                     todate: this.toDate.replace(" ", "T") + this.gmtlist
@@ -855,7 +893,7 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
-            case 'SA': {
+            case this.commonService.GameName.SA: {
                 let saModel = {
                     fromdate: this.fromDate,
                     todate: this.toDate
@@ -898,7 +936,7 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
-            case 'Pussy888': {
+            case this.commonService.GameName.Pussy888: {
                 let pussy888Model = {
                     fromdate: this.fromDate,
                     todate: this.toDate
@@ -937,7 +975,7 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
-            case 'AllBet': {
+            case this.commonService.GameName.AllBet: {
                 let allbetModel = {
                     fromdate: this.fromDate,
                     todate: this.toDate
@@ -980,7 +1018,7 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
-            case 'WM': {
+            case this.commonService.GameName.WM: {
                 let wmModel = {
                     fromdate: this.fromDate,
                     todate: this.toDate
@@ -1030,7 +1068,7 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
-            case 'Pragmatic': {
+            case this.commonService.GameName.PragmaticPlay: {
                 let pragmaticModel = {
                     startTime: this.startdate,
                 }
@@ -1067,8 +1105,51 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
+            case this.commonService.GameName.YeeBet: {
+                this.adminService.get<any>(customer.YeeBetBettingDetails).subscribe(res => {
+                    this.rows = [];
+                    if (res.data.arraysize > 0) {
+                        this.TableData = res.data.array;
+                        res.data.array.forEach(el => {
+                            this.rows.push({
+                                GameId: el.gameid,
+                                CreateTime: el.createtime,
+                                UserStatus: el.userstatus,
+                                BetPoint: el.betpoint,
+                                BetOdds: el.betodds,
+                                UserId: el.userid,
+                                CommAmount: el.commamount,
+                                GameRoundId: el.gameroundid,
+                                UId: el.uid,
+                                SettleTime: el.settletime,
+                                GameResult: el.gameresult,
+                                WinLost: el.winlost,
+                                GameType: el.gametype,
+                                Currency: el.currency,
+                                Id: el.id,
+                                State: el.state,
+                                Describe: el.describe,
+                                GameNo: el.gameno,
+                                BetType: el.bettype,
+                                CId: el.cid,
+                                Username: el.username,
+                                BetAmount: el.betamount
+                            });
+                        });
+                        this.rows = [...this.rows];
+                    }
+                    else {
+                        this.setColumn("");
+                    }
+                    this.loadingIndicator = false;
+                }, error => {
+                    this.loadingIndicator = false;
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
+                break;
+            }
             default: {
-                this.toasterService.pop('error', 'Error', "Please Select Game !!!!");
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectGame);
             }
         }
     }
@@ -1082,14 +1163,13 @@ export class BettingDetailsComponent implements OnInit {
 
     async Save() {
         if (await this.checkAddPermission()) {
-            if (this.TableData === undefined || this.TableData === null)
-                return this.toasterService.pop('error', 'Error', "Please Get The Betting Details of games");
+            if (this.commonService.CheckVariable(this.TableData)) return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseGetTheBettingDetailsOfGames);
 
             let model = {
                 jsondata: JSON.stringify(this.TableData)
             }
             switch (this.selectedList) {
-                case 'M8': {
+                case this.commonService.GameName.M8: {
                     let m8Model = {
                         jsondata: model.jsondata,
                         fetchId: this.FetchIdList
@@ -1108,7 +1188,7 @@ export class BettingDetailsComponent implements OnInit {
                     });
                     break;
                 }
-                case 'AG': {
+                case this.commonService.GameName.AG: {
                     console.log(model);
                     this.adminService.add<any>(customer.SaveAGBettingDetails, model).subscribe(res => {
                         this.toasterService.pop('success', 'Successfully', res.message);
@@ -1124,7 +1204,7 @@ export class BettingDetailsComponent implements OnInit {
                     });
                     break;
                 }
-                case 'Playtech': {
+                case this.commonService.GameName.Playtech: {
                     this.adminService.add<any>(customer.SavePlaytechBettingDetails, model).subscribe(res => {
                         this.toasterService.pop('success', 'Successfully', res.message);
                         this.loadingIndicator = false;
@@ -1139,7 +1219,7 @@ export class BettingDetailsComponent implements OnInit {
                     });
                     break;
                 }
-                case 'Joker': {
+                case this.commonService.GameName.Joker: {
                     this.adminService.add<any>(customer.SaveJokerBettingDetails, model).subscribe(res => {
                         this.toasterService.pop('success', 'Successfully', res.message);
                         this.loadingIndicator = false;
@@ -1154,7 +1234,7 @@ export class BettingDetailsComponent implements OnInit {
                     });
                     break;
                 }
-                case 'Mega888': {
+                case this.commonService.GameName.Mega888: {
                     this.adminService.add<any>(customer.SaveMega888BettingDetails, model).subscribe(res => {
                         this.toasterService.pop('success', 'Successfully', res.message);
                         this.loadingIndicator = false;
@@ -1169,7 +1249,7 @@ export class BettingDetailsComponent implements OnInit {
                     });
                     break;
                 }
-                case '918 Kiss': {
+                case this.commonService.GameName._918Kiss: {
                     this.adminService.add<any>(customer.SaveKiss918BettingDetails, model).subscribe(res => {
                         this.toasterService.pop('success', 'Successfully', res.message);
                         this.loadingIndicator = false;
@@ -1184,7 +1264,7 @@ export class BettingDetailsComponent implements OnInit {
                     });
                     break;
                 }
-                case 'DG': {
+                case this.commonService.GameName.DG: {
                     this.adminService.add<any>(customer.SaveDGBettingDetails, model).subscribe(res => {
                         this.toasterService.pop('success', 'Successfully', res.message);
                         this.loadingIndicator = false;
@@ -1199,7 +1279,7 @@ export class BettingDetailsComponent implements OnInit {
                     });
                     break;
                 }
-                case 'Sexy Baccarat': {
+                case this.commonService.GameName.SexyBaccarat: {
                     this.adminService.add<any>(customer.SaveSABettingDetails, model).subscribe(res => {
                         this.toasterService.pop('success', 'Successfully', res.message);
                         this.loadingIndicator = false;
@@ -1214,7 +1294,7 @@ export class BettingDetailsComponent implements OnInit {
                     });
                     break;
                 }
-                case 'SA': {
+                case this.commonService.GameName.SA: {
                     let saModel = {
                         jsondata: this.TableData
                     }
@@ -1232,7 +1312,7 @@ export class BettingDetailsComponent implements OnInit {
                     });
                     break;
                 }
-                case 'Pussy888': {
+                case this.commonService.GameName.Pussy888: {
                     this.adminService.add<any>(customer.SavePussy888BettingDetails, model).subscribe(res => {
                         this.toasterService.pop('success', 'Successfully', res.message);
                         this.loadingIndicator = false;
@@ -1247,7 +1327,7 @@ export class BettingDetailsComponent implements OnInit {
                     });
                     break;
                 }
-                case 'AllBet': {
+                case this.commonService.GameName.AllBet: {
                     let allbetModel = {
                         jsondata: this.TableData
                     }
@@ -1265,7 +1345,7 @@ export class BettingDetailsComponent implements OnInit {
                     });
                     break;
                 }
-                case 'WM': {
+                case this.commonService.GameName.WM: {
                     let wmModel = {
                         jsondata: this.TableData
                     }
@@ -1283,7 +1363,7 @@ export class BettingDetailsComponent implements OnInit {
                     });
                     break;
                 }
-                case 'Pragmatic': {
+                case this.commonService.GameName.PragmaticPlay: {
                     let wmModel = {
                         jsondata: this.TableData
                     }
@@ -1301,8 +1381,23 @@ export class BettingDetailsComponent implements OnInit {
                     });
                     break;
                 }
+                case this.commonService.GameName.YeeBet: {
+                    this.adminService.add<any>(customer.SaveYeeBetBettingDetails, model).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
+                }
                 default: {
-                    this.toasterService.pop('error', 'Error', "Please Select Game !!!!");
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectGame);
                 }
             }
         }

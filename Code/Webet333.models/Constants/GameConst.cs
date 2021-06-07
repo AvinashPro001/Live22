@@ -1,9 +1,42 @@
 ﻿namespace Webet333.models.Constants
 {
-#if DEBUG
-
     public class GameConst
     {
+        public class GameName
+        {
+            public const string M8 = "M8";
+
+            public const string AG = "AG";
+
+            public const string Playtech = "Playtech";
+
+            public const string Joker = "Joker";
+
+            public const string Mega888 = "Mega888";
+
+            public const string _918Kiss = "918 Kiss";
+
+            public const string DG = "DG";
+
+            public const string SexyBaccarat = "Sexy Baccarat";
+
+            public const string SA = "SA";
+
+            public const string Pussy888 = "Pussy888";
+
+            public const string AllBet = "AllBet";
+
+            public const string WM = "WM";
+
+            public const string PragmaticPlay = "Pragmatic Play";
+
+            public const string MaxBet = "MaxBet";
+
+            public const string YeeBet = "YeeBet";
+        }
+
+#if DEBUG
+
         public const string BaseUrl = "http://uat.webet333.com/";
 
         public const string APIUrl = "http://uatapi.webet333.com/api/v1/";
@@ -191,6 +224,8 @@
             public const string WM = "WM";
 
             public const string Pragmatic = "PRAGMATIC";
+
+            public const string YeeBet = "YeeBet";
         }
 
         public class Mega888
@@ -512,11 +547,9 @@
                 public const string RemoveGetBettingDetails = "data/removebets";
             }
         }
-    }
 
 #elif STAG
-    public class GameConst
-    {
+
         public const string BaseUrl = "http://webet333.com/";
 
         public const string APIUrl = "http://api.webet333.com/api/v1/";
@@ -541,7 +574,7 @@
 
             public const string Currency = "2";
 
-    #region Betting limit Constant
+        #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -569,7 +602,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-    #endregion Betting limit Constant
+        #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -1025,6 +1058,7 @@
                 public const string RemoveGetBettingDetails = "data/removebets";
             }
         }
-    }
+
 #endif
+    }
 }
