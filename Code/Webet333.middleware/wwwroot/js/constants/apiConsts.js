@@ -204,7 +204,7 @@ var transactionEndPoints = {
     bettingSummeryHistroy: "Game/bettingsummery",
 }
 
-var GameRegisterEndPoints = {
+var gameRegisterEndPoints = {
     registerAG: "ag/register",
     registerJoker: "joker/register",
     registerPlaytech: "playtech/register",
@@ -221,7 +221,7 @@ var GameRegisterEndPoints = {
     dgRegister: "dg/register",
 }
 
-var GameLoginEndPoints = {
+var gameLoginEndPoints = {
     aglogin: "ag/login",
     maxbetlogin: "MaxBet/Login",
     sexylogin: "sexybaccarart/login",
@@ -231,4 +231,8 @@ var GameLoginEndPoints = {
     pragmaticLogin: "pragmatic/login",
     dgLogin: "dg/login",
     m8Login: "m8/login",
+}
+
+var gameSettingEndPoints = {
+    playtechGameList:"Game/slotsgame/list"
 }

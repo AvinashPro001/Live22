@@ -474,7 +474,7 @@ async function regisrationGame() {
                     lastname: "Webet333"
                 };
                 try {
-                    await PostMethod(GameRegisterEndPoints.registerMaxBet, userMaxBet);
+                    await PostMethod(gameRegisterEndPoints.registerMaxBet, userMaxBet);
                 }
                 catch (e) {
                 }
@@ -484,7 +484,7 @@ async function regisrationGame() {
                 try {
                     let modelM8 = {
                     };
-                    await PostMethod(GameRegisterEndPoints.registerM8, modelM8);
+                    await PostMethod(gameRegisterEndPoints.registerM8, modelM8);
                 }
                 catch (ex) {
                 }
@@ -494,7 +494,7 @@ async function regisrationGame() {
                 try {
                     let modelAG = {
                     };
-                    await PostMethod(GameRegisterEndPoints.registerAG, modelAG);
+                    await PostMethod(gameRegisterEndPoints.registerAG, modelAG);
                 }
                 catch (ex) {
                 }
@@ -504,7 +504,7 @@ async function regisrationGame() {
                 try {
                     let modelPlaytech = {
                     };
-                    await PostMethod(GameRegisterEndPoints.registerPlaytech, modelPlaytech);
+                    await PostMethod(gameRegisterEndPoints.registerPlaytech, modelPlaytech);
                 }
                 catch (ex) {
                 }
@@ -514,7 +514,7 @@ async function regisrationGame() {
                 try {
                     let model918Kiss = {
                     };
-                    await PostMethod(GameRegisterEndPoints.register918Kiss, model918Kiss);
+                    await PostMethod(gameRegisterEndPoints.register918Kiss, model918Kiss);
                 }
                 catch (ex) {
                 }
@@ -524,7 +524,7 @@ async function regisrationGame() {
                 try {
                     let modelJoker = {
                     };
-                    await PostMethod(GameRegisterEndPoints.registerJoker, modelJoker);
+                    await PostMethod(gameRegisterEndPoints.registerJoker, modelJoker);
 
                 }
                 catch (ex) {
@@ -535,7 +535,7 @@ async function regisrationGame() {
                 var userMegaa88Model = {
                 }
                 try {
-                    await PostMethod(GameRegisterEndPoints.mega888Register, userMegaa88Model);
+                    await PostMethod(gameRegisterEndPoints.mega888Register, userMegaa88Model);
                 }
                 catch {
                 }
@@ -545,7 +545,7 @@ async function regisrationGame() {
                 var model = {
                 }
                 try {
-                    await PostMethod(GameRegisterEndPoints.dgRegister, model);
+                    await PostMethod(gameRegisterEndPoints.dgRegister, model);
                 }
                 catch {
                 }
@@ -555,7 +555,7 @@ async function regisrationGame() {
                 var model = {
                 }
                 try {
-                    await PostMethod(GameRegisterEndPoints.sexyRegister, model);
+                    await PostMethod(gameRegisterEndPoints.sexyRegister, model);
                 }
                 catch {
                 }
@@ -565,7 +565,7 @@ async function regisrationGame() {
                 var model = {
                 }
                 try {
-                    await PostMethod(GameRegisterEndPoints.saRegister, model);
+                    await PostMethod(gameRegisterEndPoints.saRegister, model);
                 }
                 catch {
                 }
@@ -575,7 +575,7 @@ async function regisrationGame() {
                 var model = {
                 }
                 try {
-                    await PostMethod(GameRegisterEndPoints.pussyRegister, model);
+                    await PostMethod(gameRegisterEndPoints.pussyRegister, model);
                 }
                 catch {
                 }
@@ -585,7 +585,7 @@ async function regisrationGame() {
                 var model = {
                 }
                 try {
-                    await PostMethod(GameRegisterEndPoints.allBetRegister, model);
+                    await PostMethod(gameRegisterEndPoints.allBetRegister, model);
                 }
                 catch {
                 }
@@ -595,7 +595,7 @@ async function regisrationGame() {
                 var model = {
                 }
                 try {
-                    await PostMethod(GameRegisterEndPoints.WMRegister, model);
+                    await PostMethod(gameRegisterEndPoints.WMRegister, model);
                 }
                 catch {
                 }
@@ -605,7 +605,7 @@ async function regisrationGame() {
                 var model = {
                 }
                 try {
-                    await PostMethod(GameRegisterEndPoints.pragmaticRegister, model);
+                    await PostMethod(gameRegisterEndPoints.pragmaticRegister, model);
                 }
                 catch {
                 }

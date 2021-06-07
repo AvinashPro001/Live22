@@ -3439,9 +3439,9 @@ namespace Webet333.api.Controllers
 
         #endregion Get Users Betting Summery
 
-        #region Get Users Betting Summery
+        #region Game List Excel file Upload
 
-        //[Authorize]
+        [Authorize]
         [HttpPost(ActionsConst.Game.GameListUpload)]
         public async Task<IActionResult> GameListUpload([FromBody] GameListUploadRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
@@ -3460,7 +3460,44 @@ namespace Webet333.api.Controllers
         }
 
 
-        #endregion Get Users Betting Summery
+        #endregion Game List Excel file Upload
+
+
+        #region Game List Select
+
+        [HttpPost(ActionsConst.Game.SlotsGameSelect)]
+        public async Task<IActionResult> SlotsGameSelect([FromBody] GameListSelectRequest request)
+        {
+            using (var game_helper = new GameHelpers(Connection: Connection))
+            {
+                var list = await game_helper.GameListSelect(request);
+                if (list.Count != 0)
+                {
+                    var total = list.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 10,
+                        offset = list.FirstOrDefault().OffSet,
+                    });
+                }
+                return OkResponse(new
+                {
+                    result = list,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
+            }
+        }
+
+        #endregion Game List Select
+
 
     }
 }
