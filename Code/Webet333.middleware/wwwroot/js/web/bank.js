@@ -927,7 +927,7 @@ async function handleFileSelect1(id) {
 var files = [];
 async function handleFileSelect(e) {
     if (!e.target.files) return;
-    if (!e.target.files[0].type.includes("image") && !e.target.files[0].type.includes("pdf")) return ShowError(ChangeErroMessage("file_format_error"));
+    //if (!e.target.files[0].type.includes("image") && !e.target.files[0].type.includes("pdf")) return ShowError(ChangeErroMessage("file_format_error"));
     selDiv.innerHTML = "";
     var allFiles = e.target.files;
 
@@ -978,6 +978,7 @@ async function loadImage() {
     selDiv.innerHTML = "";
     for (var j = 0; j < files.length; j++) {
         var base = await readUploadedFileAsDataURL(files[j]);
+        debugger
         TableData[j] = {
             base64images: base
         };

@@ -322,6 +322,8 @@
 
         public class Game
         {
+            public const string SlotsGameInsert = "[dbo].[Slots_Game_Insert]";
+
             public const string BettingSummerySelect = "[dbo].[BettingSummery_Select]";
 
             public const string RebateMainWalletDepositWithdraw = "[dbo].[Rebate_Main_Wallet_Deposit_Withdraw]";

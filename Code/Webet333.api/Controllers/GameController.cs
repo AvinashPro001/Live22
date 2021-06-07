@@ -3407,7 +3407,7 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.BettingSummery)]
         public async Task<IActionResult> BettingSummery([FromBody] GlobalGetWithPaginationRequest request)
         {
-            request.UserId=GetUserId(User).ToString();
+            request.UserId = GetUserId(User).ToString();
             using (var game_helper = new GameHelpers(Connection))
             {
                 var list = await game_helper.BettingSummerySelect(request);
@@ -3434,6 +3434,29 @@ namespace Webet333.api.Controllers
                     offset = 0,
                 });
             }
+        }
+
+
+        #endregion Get Users Betting Summery
+
+        #region Get Users Betting Summery
+
+        //[Authorize]
+        [HttpPost(ActionsConst.Game.GameListUpload)]
+        public async Task<IActionResult> GameListUpload([FromBody] GameListUploadRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            var extension = ".xlsx";
+            var filename = "gamelist" + DateTime.Now.ToString("yyyyMMddHHmmssffff");
+            request.File = request.File.Split("base64,")[1] ?? request.File;
+            using (var generic_help = new GenericHelpers(Connection))
+                generic_help.GetImageWithExtension(uploadManager, request.File, BaseUrlConfigsOptions.Value.ExcelFilesPath, filename, extension);
+
+            var gameList = JsonConvert.DeserializeObject<List<GameListUploadResponse>>(GameHelpers.ReadExcelasJSON(BaseUrlConfigsOptions.Value.ExcelLocalPath + "\\" + filename + extension));
+
+            using (var game_help = new GameHelpers(Connection))
+                await game_help.GameListInsert(gameList, request.Id, baseUrlConfigs.ImageBase);
+
+            return OkResponse(gameList);
         }
 
 

@@ -301,6 +301,8 @@
 
         public class Game
         {
+            public const string GameListUpload = "Game/list/upload";
+
             public const string BettingSummery = "Game/bettingsummery";
 
             public const string M8GameGetLimit = "Game/M8/GetDefaultLimit";
