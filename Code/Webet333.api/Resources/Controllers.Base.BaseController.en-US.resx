@@ -434,7 +434,7 @@ Please Contact our Customer Service if you have any enquiries. You can reach us 
     <value>User Groupname Already Used</value>
   </data>
   <data name="sql_error_promotionfixedbonusamount" xml:space="preserve">
-    <value>Only All Thos Deposit Amount:</value>
+    <value>For your applying promotion, only allow those deposit Amount :</value>
   </data>
   <data name="sql_error_record_not_found" xml:space="preserve">
     <value>Record Not Found</value>
