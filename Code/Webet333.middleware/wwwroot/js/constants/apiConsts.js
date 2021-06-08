@@ -234,5 +234,6 @@ var gameLoginEndPoints = {
 }
 
 var gameSettingEndPoints = {
-    playtechGameList:"Game/slotsgame/list"
+    slotsGameList: "Game/slotsgame/list",
+    pragmaticGameList: "pragmatic/game/list",
 }

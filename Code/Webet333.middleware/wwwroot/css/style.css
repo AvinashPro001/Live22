@@ -1913,3 +1913,6 @@ p.bonus_content a{color: #333;}
 .datepicker th.next                             { text-align: right; }
 
 #tbl_promotionHistory thead tr th{font-size:x-small;}
+
+.genaral_wrapp1 img{border-radius:0px;}
+.leftProfileButon1 img{width:20px;height:auto;}

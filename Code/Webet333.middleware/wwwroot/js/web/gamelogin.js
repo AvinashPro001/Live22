@@ -29,7 +29,6 @@ function CallGameLoginAPI(WalletName, IsSlots) {
     }
 }
 
-
 async function OpenDgGame() {
     window.open("../Web/game");
     let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
@@ -344,12 +343,40 @@ async function OpenPlaytechGame(IsSlots) {
 
     if (resSelectUser.Playtech === false) {
         SetLocalStorage("gameURL", IsSlots);
-        window.open("../Web/playtech");
+        window.open("../Web/slots");
         await PostMethod(gameRegisterEndPoints.registerPlaytech, modelAG);
     }
     else {
         SetLocalStorage("gameURL", IsSlots);
-        window.open("../Web/playtech");
+        window.open("../Web/slots");
+    }
+
+}
+
+async function PlaytechSlotsGameList() {
+    var model = {};
+    var list = await PostMethod(gameSettingEndPoints.slotsGameList, model)
+    if (list.status == 200) {
+        gameList = list.response.data.result;
+        var html = "";
+        for (i = 0; i < gameList.length; i++) {
+            html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes"><img src="' + gameList[i].ImagePath2 + '" alt="slot_game5"><p>' + gameList[i].GameName+'</p></div></div>';
+        }
+        SetAllValueInElement("playtechSlotsGameList", html);
+    }
+    
+}
+
+async function PragmaticSlotsGameList() {
+    var model = {};
+    var list = await PostMethod(gameSettingEndPoints.pragmaticGameList, model)
+    if (list.status == 200) {
+        gameList = list.response.data.gameList;
+        var html = "";
+        for (i = 0; i < gameList.length; i++) {
+            html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes"><img src="' + gameList[i].imagePath.replace("square/200","rec/325") + '" alt="slot_game5"><p>' + gameList[i].gameName + '</p></div></div>';
+        }
+        SetAllValueInElement("pragmaticSlotsGameList", html);
     }
 
 }
