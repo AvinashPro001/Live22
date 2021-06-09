@@ -224,7 +224,8 @@ export class CommonService {
         PasswordRequired: 'Password Required.',
         VIPLevelRequired: 'VIP Level Required.',
         PleaseSelectMobileBannerImage: 'Please Select Mobile Banner Image',
-        PleaseSelectDesktopBannerImage: 'Please Select Desktop Banner Image'
+        PleaseSelectDesktopBannerImage: 'Please Select Desktop Banner Image',
+        PleaseAddPromotionFixedBonusAmount: 'Please Add Promotion Fixed Bonus Amount.'
     };
 
     //#endregion Error List
