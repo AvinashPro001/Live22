@@ -173,6 +173,12 @@ namespace Webet333.models.Response.Promotions
 
         [JsonProperty(PropertyName = "isDiamond")]
         public bool IsDiamond { get; set; }
+
+        [JsonProperty(PropertyName = "minDeposit")]
+        public decimal MinDeposit { get; set; }
+
+        [JsonProperty(PropertyName = "promotionFixedBonus")]
+        public dynamic PromotionFixedBonus { get; set; }
     }
 
     public class Notes

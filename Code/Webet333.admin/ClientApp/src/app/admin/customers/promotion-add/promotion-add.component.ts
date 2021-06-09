@@ -1,4 +1,6 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿//#region
+//#endregion
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
@@ -65,7 +67,19 @@ export class PromotionAddComponent implements OnInit {
     Type: any = [
         { id: "Percentage", type: "Percentage" },
         { id: "Amount", type: "Amount" },
+        { id: "PromotionFixedBonusAmount", type: "Promotion Fixed Bonus Amount" }
     ];
+
+    showMinDeposit: boolean = true;
+    minDepositValue: any = 0;
+    discountTypeId: any;
+    totalRowForPromotionFixedBonus: number = 10;
+    showPromotionFixedBonus: boolean = false;
+    promotionFixedBonusAmount: any;
+    showMaxBonus: boolean = true;
+    maxBonusValue: any = 0;
+    showDiscount: boolean = true;
+    discountValue: any = 0;
 
     //#endregion
 
@@ -195,7 +209,23 @@ export class PromotionAddComponent implements OnInit {
     }
 
     //#region AddPromotion
+
     addPromotion() {
+        if (this.discountTypeId == this.Type[2].id) {
+            this.promotionFixedBonusAmount = new Array(this.totalRowForPromotionFixedBonus);
+
+            for (let i = 0; i < this.totalRowForPromotionFixedBonus; i++) {
+                let temp = {
+                    depositAmount: (document.getElementById("txt_depositAmount_" + i) as HTMLInputElement).value,
+                    bonusAmount: (document.getElementById("txt_bonusAmount_" + i) as HTMLInputElement).value
+                };
+                this.promotionFixedBonusAmount[i] = temp;
+            }
+        }
+        else {
+            this.promotionFixedBonusAmount = null;
+        }
+
         this.disabled = true;
         var objtimeStart = this.timeStart;
         var objtimeEnd = this.timeEnd;
@@ -206,19 +236,24 @@ export class PromotionAddComponent implements OnInit {
             endTime: (objtimeEnd.hour + ":" + objtimeEnd.minute).toString(),
             title: (document.getElementById("txt_titleId") as HTMLInputElement).value,
             discountType: (document.getElementById("txt_discountTypeId") as HTMLInputElement).value,
-            discount: (document.getElementById("txt_discountId") as HTMLInputElement).value,
+            //discount: (document.getElementById("txt_discountId") as HTMLInputElement).value,
+            discount: this.discountValue,
             sequence: (document.getElementById("ddlSequence") as HTMLInputElement).value,
             languageid: (document.getElementById("ddlLanguage") as HTMLInputElement).value,
             description: this.editorData,
             isdailyavail: (document.getElementById("chk_isdaily") as HTMLInputElement).checked,
             isdepositpage: (document.getElementById("chk_isDepositePage") as HTMLInputElement).checked,
             turnovertime: this.turnoverValue,
-            maxbonus: (document.getElementById("txt_maxbonus") as HTMLInputElement).value,
+            // maxbonus: (document.getElementById("txt_maxbonus") as HTMLInputElement).value,
+            maxbonus: this.maxBonusValue,
             isadmin: (document.getElementById("chk_isAdmin") as HTMLInputElement).checked,
             ismain: (document.getElementById("chk_isMainPage") as HTMLInputElement).checked,
             isperuseronly: (document.getElementById("chk_isPerUser") as HTMLInputElement).checked,
             bankAccountClaimOnce: (document.getElementById("chk_isBankAccountClaimOnce") as HTMLInputElement).checked,
             winturn: this.WinTurn,
+            //minDeposit: (document.getElementById("txt_minDepositAmount") as HTMLInputElement).value,
+            minDeposit: this.minDepositValue,
+            fixedBonus: this.promotionFixedBonusAmount,
 
             isAG: (document.getElementById("ag_id") as HTMLInputElement).checked,
             isDG: (document.getElementById("dg_id") as HTMLInputElement).checked,
@@ -273,63 +308,69 @@ export class PromotionAddComponent implements OnInit {
             dataSelect.isJoker = false;
         }
 
-        if (dataSelect.turnovertime == undefined && dataSelect.winturn == undefined) {
+        if (dataSelect.turnovertime == undefined &&
+            dataSelect.winturn == undefined) {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select Turnover Times Or Winturn");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectTurnoverTimesOrWinturn);
         }
 
-        if ((dataSelect.turnovertime != undefined && dataSelect.winturn != undefined && dataSelect.winturn != 0 && dataSelect.turnovertime != 0)) {
+        if ((dataSelect.turnovertime != undefined &&
+            dataSelect.winturn != undefined &&
+            dataSelect.winturn != 0 &&
+            dataSelect.turnovertime != 0)) {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select only one value either Turnover Times Or Winturn");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectOnlyOneValueEitherTurnoverTimesOrWinturn);
         }
 
-        if ((dataSelect.winturn == 0 && dataSelect.turnovertime == 0)) {
+        if ((dataSelect.winturn == 0 &&
+            dataSelect.turnovertime == 0)) {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select only one value either Turnover Times Or Winturn");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectOnlyOneValueEitherTurnoverTimesOrWinturn);
         }
 
         if (dataSelect.startDate === "NaN") {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select Start date");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectStartDate);
         }
 
         if (dataSelect.endDate === "NaN") {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select End date");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectEndDate);
         }
 
         if (dataSelect.description === undefined) {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Give Proper Decription");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseGiveProperDescription);
         }
 
-        if (dataSelect.discount === "") {
+        if (this.discountTypeId != this.Type[2].id &&
+            dataSelect.discount === "") {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Insert Discount");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertDiscount);
         }
 
         if (dataSelect.discountType === "") {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select Discount Type");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectDiscountType);
         }
 
         if (dataSelect.sequence === "") {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select Sequence");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectSequence);
         }
 
         if (dataSelect.title === "") {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Insert Title");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertTitle);
         }
         if (this.baseMobile === undefined) {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select Mobile Banner Image");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectMobileBannerImage);
         }
 
         if (this.baseDesktop === undefined) {
             this.disabled = false;
-            return this.toasterService.pop('error', 'Error', "Please Select Desktop Banner Image");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectDesktopBannerImage);
         }
         this.adminService.add<any>(customer.promotionAdd, dataSelect).subscribe(res => {
             this.uploadFile(res.data);
@@ -339,9 +380,11 @@ export class PromotionAddComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
+
     //#endregion
 
     //#region uploadImage
+
     uploadFile(Id) {
         var dataSelect = {
             file: this.baseDesktop,
@@ -357,6 +400,7 @@ export class PromotionAddComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
+
     //#endregion
 
     async fileSelectDestop(event) {
@@ -382,6 +426,48 @@ export class PromotionAddComponent implements OnInit {
             temporaryFileReader.readAsDataURL(file);
         });
     }
+
+    //#region For dynamic row
+
+    counter(i: number) {
+        this.promotionFixedBonusAmount = new Array(i);
+
+        for (let j = 0; j < i; j++) {
+            let temp = {
+                depositAmount: 0,
+                bonusAmount: 0
+            };
+            this.promotionFixedBonusAmount[j] = temp;
+        }
+
+        return this.promotionFixedBonusAmount;
+    }
+
+    //#endregion For dynamic row
+
+    //#region Set discount type on dropdown change
+
+    onDiscountTypeSelected(value: string) {
+        this.discountTypeId = value;
+        if (this.discountTypeId == this.Type[2].id) {
+            this.showPromotionFixedBonus = true;
+            this.showDiscount = false;
+            this.showMinDeposit = false;
+            this.showMaxBonus = false;
+            if (this.promotionFixedBonusAmount == null) {
+                this.promotionFixedBonusAmount = this.counter(this.totalRowForPromotionFixedBonus);
+            }
+        }
+        else {
+            this.showPromotionFixedBonus = false;
+            this.showDiscount = true;
+            this.showMinDeposit = true;
+            this.showMaxBonus = true;
+            this.promotionFixedBonusAmount == null;
+        }
+    }
+
+    //#endregion Set discount type on dropdown change
 
     //#region Check Permission
 
