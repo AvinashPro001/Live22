@@ -204,6 +204,7 @@ async function DoLogin() {
     let res = await PostMethod(accountEndPoints.login, model);
 
     if (res.status !== 200) {
+        debugger
         if (err.status === 400) {
             if (err.responseJSON.message == "Your account is not active." || err.responseJSON.message == "Akaun anda belum aktif." || err.responseJSON.message == "您的帐户无效。") {
                 DoLogout();

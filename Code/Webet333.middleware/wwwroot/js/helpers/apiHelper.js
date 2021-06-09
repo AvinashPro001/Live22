@@ -43,7 +43,7 @@ function Encryption(plaintext) {
 
 async function PostMethod(endPoint, model) {
     if (GetLocalStorage('language') === null)
-        return null;
+        SetLocalStorage('language', 'en-US');
     return new Promise(function (resolve, reject) {
         $.ajax({
             type: "POST",
@@ -80,7 +80,7 @@ async function PostMethod(endPoint, model) {
 
 function GetMethod(endPoint) {
     if (GetLocalStorage('language') === null)
-        return null;
+        SetLocalStorage('language', 'en-US');
 
     return new Promise(function (resolve, reject) {
         $.ajax({
@@ -117,7 +117,7 @@ function GetMethod(endPoint) {
 
 function PostMethodWithoutToken(endPoint, model) {
     if (GetLocalStorage('language') === null)
-        return null;
+        SetLocalStorage('language', 'en-US');
 
     return new Promise(function (resolve, reject) {
         $.ajax({
@@ -154,7 +154,7 @@ function PostMethodWithoutToken(endPoint, model) {
 
 function GetMethodWithoutToken(endPoint) {
     if (GetLocalStorage('language') === null)
-        return null;
+        SetLocalStorage('language', 'en-US');
 
     return new Promise(function (resolve, reject) {
         $.ajax({

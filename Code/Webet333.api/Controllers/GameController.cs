@@ -3483,7 +3483,6 @@ namespace Webet333.api.Controllers
 
         #endregion Game List Excel file Upload
 
-
         #region Game List Select
 
         [HttpPost(ActionsConst.Game.SlotsGameSelect)]

@@ -686,6 +686,8 @@
 
             public const string EnsureUserAccount = "CU";
 
+            public const string ListGames = "ListGames";
+
             public const string GetCredit = "GC";
 
             public const string SetPassword = "SP";

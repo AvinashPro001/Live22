@@ -571,6 +571,8 @@
             public const string BrokenDetails = "joker/broken/details";
 
             public const string Register = "joker/register";
+
+            public const string GameList = "joker/game/list";
         }
 
         public class Kiss918

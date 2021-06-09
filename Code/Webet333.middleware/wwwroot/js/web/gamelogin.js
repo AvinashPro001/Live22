@@ -22,7 +22,7 @@ function CallGameLoginAPI(WalletName, IsSlots) {
         case "WM Wallet": OpenWMGame(); break;
         case "PlayTech Wallet": OpenPlaytechGame(IsSlots); break;
         case "Sexy Wallet": OpenSexyBaccaratGame(); break;
-        case "Pragmatic Wallet": break;
+        case "Pragmatic Wallet": OpenPragmaticGame(); break;
         case "AllBet Wallet": OpenAllBetGame(); break;
         case "M8 Wallet": OpenM8Game(); break;
         case "MaxBet Wallet": OpenMaxbetGame(); break;
@@ -338,6 +338,20 @@ async function OpenM8Game() {
 
 }
 
+async function OpenPragmaticGame() {
+    window.open("../Web/slots");
+    let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+
+    if (resSelectUser.Pragmatic !== true) {
+        var userRegisterModel = {
+        }
+        var res = await PostMethod(gameRegisterEndPoints.pragmaticRegister, userRegisterModel);
+        if (res.status == 200)
+            if (res.response.data.error == "0") {
+            }
+    }
+}
+
 async function OpenPlaytechGame(IsSlots) {
 
     if (IsSlots) {
@@ -363,7 +377,7 @@ async function LoginPragmaticGame(GameCode) {
     }
     var res = await PostMethod(gameLoginEndPoints.pragmaticLogin, model)
     SetLocalStorage("gameURL", res.response.data.gameURL);
-    
+
 }
 
 async function LoginPlaytechGame(GameCode) {
@@ -417,18 +431,48 @@ async function PlaytechSlotsGameList() {
 
 }
 
-async function PragmaticSlotsGameList() {
+async function AgSlotsGameList() {
     var model = {
-        ismobile: true
+        WalletName: "AG Wallet"
     };
-    var list = await PostMethod(gameSettingEndPoints.pragmaticGameList, model)
+    var list = await PostMethod(gameSettingEndPoints.slotsGameList, model)
     if (list.status == 200) {
-        gameList = list.response.data.gameList;
+        gameList = list.response.data.result;
         var html = "";
         for (i = 0; i < gameList.length; i++) {
-            html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes"><img onclick="LoginPragmaticGame(\'' + gameList[i].gameID + '\')" src="' + gameList[i].imagePath + '" alt="slot_game5"><p>' + gameList[i].gameName + '</p></div></div>';
+            html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes"><img onclick="LoginPlaytechGame(\'' + gameList[i].GameCode + '\')" src="' + gameList[i].ImagePath2 + '" alt="slot_game5"><p>' + gameList[i].GameName + '</p></div></div>';
+        }
+        SetAllValueInElement("agSlotsGameList", html);
+    }
+
+}
+
+async function PragmaticSlotsGameList() {
+    var model = {
+        WalletName: "Pragmatic Wallet"
+    };
+    var list = await PostMethod(gameSettingEndPoints.slotsGameList, model)
+    if (list.status == 200) {
+        gameList = list.response.data.result;
+        var html = "";
+        for (i = 0; i < gameList.length; i++) {
+            html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes"><img onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\')" src="' + gameList[i].ImagePath2 + '" alt="slot_game5"><p>' + gameList[i].GameName + '</p></div></div>';
         }
         SetAllValueInElement("pragmaticSlotsGameList", html);
     }
-    //.replace("square/200","rec/325") 
+}
+
+async function JokerSlotsGameList() {
+    var model = {
+        WalletName: "Joker Wallet"
+    };
+    var list = await PostMethod(gameSettingEndPoints.slotsGameList, model)
+    if (list.status == 200) {
+        gameList = list.response.data.result;
+        var html = "";
+        for (i = 0; i < gameList.length; i++) {
+            html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes"><img src="' + gameList[i].ImagePath2 + '" alt="slot_game5"><p>' + gameList[i].GameName + '</p></div></div>';
+        }
+        SetAllValueInElement("jokerSlotsGameList", html);
+    }
 }
