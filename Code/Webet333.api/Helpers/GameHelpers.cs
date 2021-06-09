@@ -1669,7 +1669,7 @@ namespace Webet333.api.Helpers
         {
             using (var GetRepository = new DapperRepository<GameListSelectResponse>(Connection))
             {
-                var list = await GetRepository.GetDataAsync(StoredProcConsts.Game.SlotsGameSelect, new { request.WalletId, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                var list = await GetRepository.GetDataAsync(StoredProcConsts.Game.SlotsGameSelect, new { request.WalletName, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
                 return list.ToList();
             }
         }

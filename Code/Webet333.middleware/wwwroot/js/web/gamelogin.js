@@ -353,30 +353,80 @@ async function OpenPlaytechGame(IsSlots) {
 
 }
 
+async function LoginPragmaticGame(GameCode) {
+    window.open("../Web/game");
+    let model = {
+        gameId: GameCode,
+        isMobile: false,
+    }
+    var res = await PostMethod(gameLoginEndPoints.pragmaticLogin, model)
+    SetLocalStorage("gameURL", res.response.data.gameURL);
+    
+}
+
+async function LoginPlaytechGame(GameCode) {
+    window.open("../Web/game");
+
+    var languageCode = (GetLocalStorage('language') === "zh-Hans" ? "ZH-CN" : "EN")
+    var res = JSON.parse(Decryption(GetSessionStorage('userDetails')));
+    let globalParameters = JSON.parse(Decryption(GetSessionStorage('GamePreFix')));
+    var usernamePrifix = globalParameters.playtechGamePrefix
+    var username = (usernamePrifix + res.username.replace("#", "")).toUpperCase();
+    var password = Decryption(GetLocalStorage('currentUserData'));
+    var mobiledomain = "ld176988.com";
+    var systemidvar = "424";
+
+    async function login() {
+        iapiSetCallout('Login', calloutLogin);
+        iapiSetClientPlatform("mobile&deliveryPlatform=HTML5");
+        var realMode = 1;
+        iapiLogin(username, password, realMode, languageCode);
+    }
+
+    function launchMobileClient(temptoken) {
+        var clientUrl = 'http://hub.' + mobiledomain + '/igaming/' + '?gameId=' + game + '&real=1' + '&username=' + username + '&lang=' + languageCode + '&tempToken=' + temptoken + '&lobby=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'lobby.html' + '&support=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'support.html' + '&logout=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'logout.html' + '&deposit=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'deposit.html';
+        SetLocalStorage("gameURL", clientUrl);
+    }
+
+    await login(1);
+
+    function calloutLogin(response) {
+        if (response.errorCode) {
+            alert("Error message: " + response.errorText + " Error code: " + response.errorCode);
+        } else {
+            launchMobileClient(response.rootSessionToken.sessionToken);
+        }
+    }
+}
+
 async function PlaytechSlotsGameList() {
-    var model = {};
+    var model = {
+        WalletName: "PlayTech Wallet"
+    };
     var list = await PostMethod(gameSettingEndPoints.slotsGameList, model)
     if (list.status == 200) {
         gameList = list.response.data.result;
         var html = "";
         for (i = 0; i < gameList.length; i++) {
-            html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes"><img src="' + gameList[i].ImagePath2 + '" alt="slot_game5"><p>' + gameList[i].GameName+'</p></div></div>';
+            html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes"><img onclick="LoginPlaytechGame(\'' + gameList[i].GameCode + '\')" src="' + gameList[i].ImagePath2 + '" alt="slot_game5"><p>' + gameList[i].GameName + '</p></div></div>';
         }
         SetAllValueInElement("playtechSlotsGameList", html);
     }
-    
+
 }
 
 async function PragmaticSlotsGameList() {
-    var model = {};
+    var model = {
+        ismobile: true
+    };
     var list = await PostMethod(gameSettingEndPoints.pragmaticGameList, model)
     if (list.status == 200) {
         gameList = list.response.data.gameList;
         var html = "";
         for (i = 0; i < gameList.length; i++) {
-            html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes"><img src="' + gameList[i].imagePath.replace("square/200","rec/325") + '" alt="slot_game5"><p>' + gameList[i].gameName + '</p></div></div>';
+            html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes"><img onclick="LoginPragmaticGame(\'' + gameList[i].gameID + '\')" src="' + gameList[i].imagePath + '" alt="slot_game5"><p>' + gameList[i].gameName + '</p></div></div>';
         }
         SetAllValueInElement("pragmaticSlotsGameList", html);
     }
-
+    //.replace("square/200","rec/325") 
 }

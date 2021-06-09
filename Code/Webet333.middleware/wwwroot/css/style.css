@@ -1632,7 +1632,7 @@ p.slot_game_content{font-size: 13px;color: #212121;padding: 0px 10px;}
 .all_slot_game_left .slick-slider{background-color: #fff;border:1px solid #c6c6c6;}
 .all_slot_game_boxes {width: 100%; float: left; background-color: #fff; border: 1px solid #c7c5c6; /* box-shadow: 0px 3px 6px #e2e2e2;*/ min-height: 161px; }
 .all_slot_game_boxes img {width: 100%; max-height: 120px; }
-.all_slot_game_boxes p {font-size: 14px; font-weight: 600; color: #595959; padding: 8px 8px 10px 8px; margin-bottom: 0px; }
+.all_slot_game_boxes p {font-size: 14px; font-weight: 600; color: #595959; padding: 8px 8px 10px 8px; margin-bottom: 0px;text-align:center;min-height:60px; }
 .pb15{padding-bottom: 15px;}
 .second_row_slot_game_wrap{width: 100%;float: left;}
 .slot_game_logo_wrap{width: 100%;float: left;}

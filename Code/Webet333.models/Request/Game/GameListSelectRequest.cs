@@ -5,7 +5,7 @@ namespace Webet333.models.Request.Game
 {
     public class GameListSelectRequest: GlobalGetWithPaginationRequest
     {
-        [JsonProperty(PropertyName = "walletId")]
-        public string WalletId { get; set; }
+        [JsonProperty(PropertyName = "WalletName")]
+        public string WalletName { get; set; }
     }
 }

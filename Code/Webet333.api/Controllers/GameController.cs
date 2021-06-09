@@ -3441,7 +3441,7 @@ namespace Webet333.api.Controllers
 
         #region Game List Excel file Upload
 
-        [Authorize]
+        //[Authorize]
         [HttpPost(ActionsConst.Game.GameListUpload)]
         public async Task<IActionResult> GameListUpload([FromBody] GameListUploadRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
