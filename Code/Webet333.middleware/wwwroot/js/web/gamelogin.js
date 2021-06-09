@@ -339,16 +339,18 @@ async function OpenM8Game() {
 }
 
 async function OpenPlaytechGame(IsSlots) {
+
+    if (IsSlots) {
+        window.open("../Web/slots");
+    }
+
     let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
 
     if (resSelectUser.Playtech === false) {
-        SetLocalStorage("gameURL", IsSlots);
-        window.open("../Web/slots");
         await PostMethod(gameRegisterEndPoints.registerPlaytech, modelAG);
     }
     else {
-        SetLocalStorage("gameURL", IsSlots);
-        window.open("../Web/slots");
+        LoginPlaytechGame("7bal")
     }
 
 }
@@ -384,7 +386,7 @@ async function LoginPlaytechGame(GameCode) {
     }
 
     function launchMobileClient(temptoken) {
-        var clientUrl = 'http://hub.' + mobiledomain + '/igaming/' + '?gameId=' + game + '&real=1' + '&username=' + username + '&lang=' + languageCode + '&tempToken=' + temptoken + '&lobby=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'lobby.html' + '&support=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'support.html' + '&logout=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'logout.html' + '&deposit=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'deposit.html';
+        var clientUrl = 'http://hub.' + mobiledomain + '/igaming/' + '?gameId=' + GameCode + '&real=1' + '&username=' + username + '&lang=' + languageCode + '&tempToken=' + temptoken + '&lobby=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'lobby.html' + '&support=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'support.html' + '&logout=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'logout.html' + '&deposit=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'deposit.html';
         SetLocalStorage("gameURL", clientUrl);
     }
 
