@@ -223,6 +223,9 @@ export class PromotionEditComponent implements OnInit {
 
         let temp = this.data.promotionFixedBonus;
         this.promotionFixedBonusAmount = JSON.parse(temp);
+
+        this.maxBonusValue = this.data.maxbonus;
+        this.discountValue = this.data.discount;
     }
 
     UpdatePromotion() {
