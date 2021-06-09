@@ -28,6 +28,7 @@ export class MaintenanceComponent implements OnInit {
     Pussy888Mainteance: boolean;
     AllBetMainteance: boolean;
     PragmaticMainteance: boolean;
+    YeeBetMainteance: boolean;
 
     VaderPayMainteance: boolean;
 
@@ -48,6 +49,7 @@ export class MaintenanceComponent implements OnInit {
     Mega888Id: any;
     Pussy888Id: any;
     AllBetId: any;
+    YeeBetId: any;
 
     constructor(
         private adminService: AdminService,
@@ -122,6 +124,10 @@ export class MaintenanceComponent implements OnInit {
                 if (res.data[i].walletType === "Pragmatic Wallet") {
                     this.PragmaticMainteance = res.data[i].isMaintenance
                     this.PragmaticId = res.data[i].id
+                }
+                if (res.data[i].walletType === "YeeBet Wallet") {
+                    this.YeeBetMainteance = res.data[i].isMaintenance
+                    this.YeeBetId = res.data[i].id
                 }
             }
         })

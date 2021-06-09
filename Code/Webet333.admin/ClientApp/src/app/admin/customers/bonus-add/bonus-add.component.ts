@@ -91,7 +91,12 @@ export class BonusAddComponent implements OnInit {
     wmBal: any;
     wmUsername: any;
     userPassword: any;
+
+    YeeBetBalance: any;
+    YeeBetUsername: any;
+
     //#endregion
+
     //#region ngOnInit
     async ngOnInit() {
         if (await this.checkAddPermission()) {
@@ -158,28 +163,28 @@ export class BonusAddComponent implements OnInit {
         if (dataSelect.userId === "0: undefined") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Selec User !!");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectUser);
         }
         if (dataSelect.walletTypeId === "0: undefined") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please select walllet !!");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectWalllet);
         }
         if (dataSelect.amount === "") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Insert Amount !!");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertAmount);
         }
         if (dataSelect.promotionId === undefined) {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Selec promotion !!");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectPromotion);
         }
 
         if (dataSelect.referenceNo === "") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Add Remark !!");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseAddRemark);
         }
 
         this.adminService.get<any>(account.walletSelect).subscribe(resData => {
@@ -191,7 +196,7 @@ export class BonusAddComponent implements OnInit {
             if (this.IsMaintenance) {
                 this.disabled = false;
                 this.ngOnInit();
-                return this.toasterService.pop('error', 'Error', "Game in Maintenance");
+                return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.GameInMaintenance);
             }
 
             this.adminService.add<any>(customer.addDeposit, dataSelect).subscribe(res => {
@@ -505,6 +510,7 @@ export class BonusAddComponent implements OnInit {
                 this.allbetUsername = res.data.allbetUsername;
                 this.wmUsername = res.data.wmUsername;
                 this.pragmaticUsername = res.data.pragmaticUsername;
+                this.YeeBetUsername = res.data.yeeBetUsername;
                 this.Kiss918Balance(newVal);
                 this.Mega888(newVal);
                 this.Maxbet(newVal);
@@ -520,6 +526,7 @@ export class BonusAddComponent implements OnInit {
                 this.AllBet(newVal);
                 this.WM(newVal);
                 this.Pragmatic(newVal);
+                this.YeeBet(newVal);
             })
         });
     }
@@ -717,6 +724,16 @@ export class BonusAddComponent implements OnInit {
         }
         this.adminService.add<any>(gameBalance.Pragmatic, data).subscribe(res => {
             this.pragmaticBal = res.data.balance;
+        })
+    }
+
+    YeeBet(id) {
+        let data = {
+            id: id,
+            username: this.YeeBetUsername
+        }
+        this.adminService.add<any>(gameBalance.YeeBet, data).subscribe(res => {
+            this.YeeBetBalance = res.data.balance;
         })
     }
 

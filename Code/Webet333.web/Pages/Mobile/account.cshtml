@@ -129,6 +129,12 @@
                                             <li class="fright" id="ddlPragmaticWallet">feching...</li>
                                         </ul>
                                     </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>YeeBet Wallet</strong></li>
+                                            <li class="fright" id="ddlYeeBetWallet">feching...</li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -146,7 +152,6 @@
         if (GetLocalStorage('currentUser') === null)
             loadPageHome();
     </script>
-
 
     <div id="Profile" class="account-reg white-bg radius-border flexible-height account-page-extra-padding profile-page">
         <div class="info-form profile-area">
@@ -258,7 +263,7 @@
                 </a>
             </li>
             <li id="contactusPagebottom">
-                <a onclick="loadPageContactus()" href="javascript:void(0)"  rel="prefetch">
+                <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
                     <i class="fa fa-user"></i>
                     <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
                 </a>
@@ -274,11 +279,10 @@
             </li>
         </ul>
     </div>
-  
+
     <div>
         <a id="mobileM8" style="display:none"></a>
     </div>
-
 </div>
 
 <script type="text/javascript">
@@ -291,8 +295,6 @@
         });
     });
 </script>
-
-
 
 <!--Begin Comm100 Live Chat Code-->
 <div></div>
@@ -355,7 +357,6 @@
         }
     });
 
-
     function language(value) {
         SetLocalStorage('language', value);
         get();
@@ -404,5 +405,4 @@
     setTimeout(() => {
         get();
     }, 200);
-
 </script>

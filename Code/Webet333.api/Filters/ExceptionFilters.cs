@@ -36,10 +36,16 @@ namespace Webet333.api.Filters
             {
                 var exception = context.Exception as SqlException;
                 context.HttpContext.Response.StatusCode = 400;
+
+                var exceptionMessage = exception.Message;
+                if (exceptionMessage.Contains("sql_error_promotionfixedbonusamount"))
+                {
+                    exceptionMessage = exceptionMessage.Replace("sql_error_promotionfixedbonusamount", Localizer["sql_error_promotionfixedbonusamount"].Value);
+                }
 #if RELEASE
-                context.Result = new JsonResult(new { message = Localizer[exception.Message].Value, details = exception.StackTrace });
+                context.Result = new JsonResult(new { message = Localizer[exceptionMessage].Value, details = exception.StackTrace });
 #else
-                context.Result = new JsonResult(new { message = Localizer[exception.Message].Value, details = exception.StackTrace });
+                context.Result = new JsonResult(new { message = Localizer[exceptionMessage].Value, details = exception.StackTrace });
 #endif
             }
             else

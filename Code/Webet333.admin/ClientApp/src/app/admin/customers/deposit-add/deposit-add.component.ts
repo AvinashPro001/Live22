@@ -90,6 +90,10 @@ export class DepositAddComponent implements OnInit {
     pragmaticUsername: any;
 
     userPassword: any;
+
+    YeeBetBalance: any;
+    YeeBetUsername: any;
+
     //#endregion
 
     //#region ngOnInit
@@ -168,6 +172,7 @@ export class DepositAddComponent implements OnInit {
                 this.allbetUsername = res.data.allbetUsername;
                 this.wmUsername = res.data.wmUsername;
                 this.pragmaticUsername = res.data.pragmaticUsername;
+                this.YeeBetUsername = res.data.yeeBetUsername;
                 this.Kiss918Balance(newVal);
                 this.Mega888(newVal);
                 this.Maxbet(newVal);
@@ -183,6 +188,7 @@ export class DepositAddComponent implements OnInit {
                 this.AllBet(newVal);
                 this.WM(newVal);
                 this.Pragmatic(newVal);
+                this.YeeBet(newVal);
             })
         });
     }
@@ -244,44 +250,44 @@ export class DepositAddComponent implements OnInit {
         if (dataSelect.userId === "0: undefined") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Select User");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectUser);
         }
         if (dataSelect.bankId === "0: undefined") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Select Bank");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectBank);
         }
 
         if (dataSelect.amount === "") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Enter Amount");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseEnterAmount);
         }
         if (Number(dataSelect.amount) <= 0) {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Insert greater Amount");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertGreaterAmount);
         }
         if (dataSelect.depositMethodId === "0: undefined") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Select Deposit Method");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectDepositMethod);
         }
         if (dataSelect.referenceNo === "") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Enter Reference Number");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseEnterReferenceNumber);
         }
         if (dataSelect.depositeTime == "NaN") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Select Date");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectDate);
         }
 
         if (this.urls.length === 0) {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Uploade Recipt");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseUploadReceipt);
         }
 
         if (dataSelect.promotionId !== "") {
@@ -310,7 +316,7 @@ export class DepositAddComponent implements OnInit {
                             if (walletData.data.Staus != null && walletData.data.CheckPromotionRemind == true) {
                                 this.disabled = false;
                                 this.ngOnInit();
-                                return this.toasterService.pop('error', 'Error', "You cannot apply promotion,Because  have active promotion");
+                                return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.YouCannotApplyPromotionBecauseHaveActivePromotion);
                             }
 
                             if (walletData.data.CheckPromotionRemind == true) {
@@ -335,13 +341,13 @@ export class DepositAddComponent implements OnInit {
                     else {
                         this.disabled = false;
                         this.ngOnInit();
-                        return this.toasterService.pop('error', 'Error', "You cannot apply promotion,Because Game in maintenance");
+                        return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.YouCannotApplyPromotionBecauseGameInMaintenance);
                     }
                 }
                 else {
                     this.disabled = false;
                     this.ngOnInit();
-                    return this.toasterService.pop('error', 'Error', "Sports Book still have pending bets yet to be unsettled, please wait until all bets has been settled");
+                    return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.SportsBookStillHavePendingBetsYetToBeUnsettledPleaseWaitUntilAllBetsHasBeenSettled);
                 }
                 this.DepositModel = dataSelect;
                 this.ConfirmDeposit()
@@ -602,6 +608,16 @@ export class DepositAddComponent implements OnInit {
         }
         this.adminService.add<any>(gameBalance.Pragmatic, data).subscribe(res => {
             this.pragmaticBal = res.data.balance;
+        })
+    }
+
+    YeeBet(id) {
+        let data = {
+            id: id,
+            username: this.YeeBetUsername
+        }
+        this.adminService.add<any>(gameBalance.YeeBet, data).subscribe(res => {
+            this.YeeBetBalance = res.data.balance;
         })
     }
 

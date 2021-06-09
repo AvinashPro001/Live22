@@ -1764,7 +1764,8 @@ namespace Webet333.api.Controllers
                 MaxBetUsername,
                 WMUsername,
                 AllbetUsername,
-                PragmaticUsername;
+                PragmaticUsername,
+                YeeBetUsername;
 
             using (var account_helper = new AccountHelpers(Connection))
             {
@@ -1780,6 +1781,7 @@ namespace Webet333.api.Controllers
                 MaxBetUsername = user.MaxbetGamePrefix + user.Username;
                 WMUsername = user.WMGamePrefix + user.UserId;
                 PragmaticUsername = user.PragmaticGamePrefix + user.UserId;
+                YeeBetUsername = user.YEEBETGamePrefix + user.UserId;
             }
 
             decimal mainBalance = 0.0m,
@@ -1796,7 +1798,8 @@ namespace Webet333.api.Controllers
                 AllbetBalance = 0.0m,
                 WMBalance = 0.0m,
                 PragmaticBalance = 0.0m,
-                PussyBalance = 0.0m;
+                PussyBalance = 0.0m,
+                YeeBetBalance = 0.0m;
             using (var game_helper = new GameHelpers(Connection))
             {
                 if (request.AGWallet != 0)
@@ -1975,6 +1978,18 @@ namespace Webet333.api.Controllers
                     }
                 }
 
+                if (request.YeeBetWallet != 0)
+                {
+                    try
+                    {
+                        var resultYeeBet = await YEEBETGameHelpers.TransferBalanceAsync(YeeBetUsername, -Math.Abs(request.YeeBetWallet));
+                        mainBalance += resultYeeBet.result == 0 ? request.YeeBetWallet : 0;
+                        YeeBetBalance = resultYeeBet.result == 0 ? request.YeeBetWallet : 0;
+                    }
+                    catch
+                    { }
+                }
+
                 await game_helper.BalanceRestore(
                     request.Id, UserId,
                     mainBalance,
@@ -1991,7 +2006,8 @@ namespace Webet333.api.Controllers
                     PussyBalance,
                     AllbetBalance,
                     WMBalance,
-                    PragmaticBalance
+                    PragmaticBalance,
+                    YeeBetBalance
                 );
 
                 return OkResponse(new { mainBalance, MaxbetBalance });
@@ -2526,6 +2542,7 @@ namespace Webet333.api.Controllers
                     SAUsername = user.SAGamePrefix + user.Username,
                     SexyUsername = user.SexyGamePrefix + user.Username,
                     WMUsername = user.WMGamePrefix + user.UserId,
+                    YEEBETUsername = user.YEEBETGamePrefix + user.UserId,
 
                     FromWalletIsMaintenance = false,
                     FromWalletName = "Main Wallet",
@@ -2990,8 +3007,7 @@ namespace Webet333.api.Controllers
         {
             var Role = GetUserRole(User);
 
-            if (Role == RoleConst.Users)
-                request.Id = GetUserId(User).ToString();
+            if (Role == RoleConst.Users) request.Id = GetUserId(User).ToString();
 
             using (var game_helper = new GameHelpers(Connection))
             {
@@ -3011,6 +3027,7 @@ namespace Webet333.api.Controllers
                 var AllBetGame = result.Where(x => x.GameName == GameConst.GamesNames.AllBet).ToList();
                 var WMGame = result.Where(x => x.GameName == GameConst.GamesNames.WM).ToList();
                 var PragmaticGame = result.Where(x => x.GameName == GameConst.GamesNames.Pragmatic).ToList();
+                var YeeBetGame = result.Where(x => x.GameName == GameConst.GamesNames.YeeBet).ToList();
 
                 var response = new
                 {
@@ -3028,8 +3045,10 @@ namespace Webet333.api.Controllers
                     AllBetTurover = AllBetGame.Count > 0 ? AllBetGame.FirstOrDefault().Turnover : 0,
                     WMTurover = WMGame.Count > 0 ? WMGame.FirstOrDefault().Turnover : 0,
                     PragmaticTurover = PragmaticGame.Count > 0 ? PragmaticGame.FirstOrDefault().Turnover : 0,
+                    YeeBetTurover = YeeBetGame.Count > 0 ? YeeBetGame.FirstOrDefault().Turnover : 0
                 };
-                decimal total = response.agTurover + response.m8Turover + response.maxbetTurover + response.playtechTurover + response.dgTurover + response.saTurover + response.sexyTurover + response.AllBetTurover + response.WMTurover + response.PragmaticTurover;
+                decimal total = response.agTurover + response.m8Turover + response.maxbetTurover + response.playtechTurover + response.dgTurover + response.saTurover + response.sexyTurover + response.AllBetTurover + response.WMTurover + response.PragmaticTurover + response.YeeBetTurover;
+
                 return OkResponse(new { response, Total = total });
             }
         }
@@ -3085,7 +3104,9 @@ namespace Webet333.api.Controllers
             using (var game_helper = new GameHelpers(Connection))
             {
                 var result = await game_helper.GetListBettingDetails(request);
+
                 if (result == null) return NotFoundResponse();
+
                 return OkResponse(result);
             }
         }

@@ -24,8 +24,7 @@
                                 <label style="float:right;clear:both;padding-top:6px">Start Date :</label>
                             </div>
                             <div class="input-group col-9">
-                                <input class="form-control" placeholder="yyyy-mm-dd"
-                                       name="dp" ngbDatepicker #d="ngbDatepicker" value="{{startDate}}" id="dp_startDate">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker" value="{{startDate}}" id="dp_startDate">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                                 </div>
@@ -36,8 +35,7 @@
                                 <label style="float:right;clear:both;padding-top:6px">End Date :</label>
                             </div>
                             <div class="input-group col-9">
-                                <input class="form-control" placeholder="yyyy-mm-dd"
-                                       name="dp" ngbDatepicker #d_1="ngbDatepicker" value="{{endDate}}" id="dp_endDate">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d_1="ngbDatepicker" value="{{endDate}}" id="dp_endDate">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" type="button"></button>
                                 </div>
@@ -63,7 +61,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row col-md-12">
                         <div class="row col-md-6">
                             <div class="col-3">
@@ -90,9 +87,7 @@
                             <span id="question" class="fa fa-question-circle" title="this promotion will not displayed on user and admin deposit page"></span>
                         </div>
                     </div>
-
                     <br />
-
                     <div class="row col-md-12">
                         <div class="row col-md-6">
                             <div class="col-3">
@@ -146,25 +141,82 @@
                             <span id="question" class="fa fa-question-circle" title="if this checkbox is checked, this promotion banner image will show on home page's promotion slide show."></span>
                         </div>
                     </div>
-
                     <div class="row col-md-12">
                         <div class="row col-md-6">
                             <div class="col-3">
                                 <label style="float:right;clear:both;padding-top:6px">Discount Type :</label>
                             </div>
                             <div class="input-group col-9">
-                                <select class="form-control" id="txt_discountTypeId" [(ngModel)]="data.discountType" [ngModelOptions]="{standalone: true}">
-                                    <option [value]="c.id" *ngFor="let c of Type" [selected]="c.id==data.discountType" [ngValue]="c">{{c.type}}</option>
+                                <select #discountTypeSelect
+                                        class="form-control"
+                                        id="txt_discountTypeId"
+                                        [(ngModel)]="data.discountType"
+                                        [ngModelOptions]="{standalone: true}"
+                                        (change)='onDiscountTypeSelected(discountTypeSelect.value)'>
+                                    <option [value]="c.id"
+                                            *ngFor="let c of Type"
+                                            [selected]="c.id==data.discountType"
+                                            [ngValue]="c">
+                                        {{c.type}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
                         <div class="row col-md-6">
-                            <div class="col-3">
-                                <label style="float:right;clear:both;padding-top:6px">Discount :</label>
-                            </div>
-                            <div class="input-group col-9">
-                                <input id="txt_discountId" type="number" value="{{data.discount}}" class="form-control" />
-                            </div>
+                            <ng-container *ngIf="showDiscount">
+                                <div class="col-3">
+                                    <label style="float:right;clear:both;padding-top:6px">Discount :</label>
+                                </div>
+                                <div class="input-group col-9">
+                                    <input id="txt_discountId" type="number" value="{{data.discount}}" class="form-control" [(ngModel)]="discountValue" [ngModelOptions]="{standalone: true}" />
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="showPromotionFixedBonus">
+                                <div class="scrollit">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <td>
+                                                    <div style="display: flex;">
+                                                        <label class="container">
+                                                            <h5 style="text-align: left;">Deposit Amount</h5>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div style="display: flex;">
+                                                        <label class="container">
+                                                            <h5 style="text-align: left;">Bonus Amount</h5>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="text-align:right">
+                                            <ng-container *ngFor='let promotionFixedBonusAmountValue of promotionFixedBonusAmount; let i = index'>
+                                                <tr>
+                                                    <td>
+                                                        <input id="txt_depositAmount_{{i}}"
+                                                               type="number"
+                                                               class="form-control"
+                                                               [(ngModel)]="promotionFixedBonusAmountValue.DepositAmount"
+                                                               [ngModelOptions]="{standalone: true}"
+                                                               value="promotionFixedBonusAmountValue.DepositAmount">
+                                                    </td>
+                                                    <td>
+                                                        <input id="txt_bonusAmount_{{i}}"
+                                                               type="number"
+                                                               class="form-control"
+                                                               [(ngModel)]="promotionFixedBonusAmountValue.BonusAmount"
+                                                               [ngModelOptions]="{standalone: true}"
+                                                               value="promotionFixedBonusAmountValue.BonusAmount">
+                                                    </td>
+                                                </tr>
+                                            </ng-container>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </ng-container>
                         </div>
                     </div>
                     <br />
@@ -219,14 +271,16 @@
                                 <input type="file" (change)="fileSelectMobile($event)" />
                             </div>
                         </div>
-                        <div class="row col-md-6">
-                            <div class="col-3">
-                                <label style="float:right;clear:both;padding-top:6px">Max Bonus :</label>
+                        <ng-container *ngIf="showMaxBonus">
+                            <div class="row col-md-6">
+                                <div class="col-3">
+                                    <label style="float:right;clear:both;padding-top:6px">Max Bonus :</label>
+                                </div>
+                                <div class="input-group col-9">
+                                    <input id="txt_maxbonus" value="{{data.maxbonus}}" type="number" class="form-control" [(ngModel)]="maxBonusValue" [ngModelOptions]="{standalone: true}" />
+                                </div>
                             </div>
-                            <div class="input-group col-9">
-                                <input id="txt_maxbonus" value="{{data.maxbonus}}" type="number" class="form-control" />
-                            </div>
-                        </div>
+                        </ng-container>
                         <!--<div class="row col-md-6">
                             <div class="col-3">
                                 <label style="float:right;clear:both;padding-top:6px">Turnover Time :</label>
@@ -241,7 +295,20 @@
                     </div>
                     <br />
                     <div class="row col-md-12">
-
+                        <div class="row col-md-6">
+                            <ng-container *ngIf="showMinDeposit">
+                                <div class="col-3">
+                                    <label style="float:right;clear:both;padding-top:6px">Min. Deposit :</label>
+                                </div>
+                                <div class="input-group col-9">
+                                    <input id="txt_minDepositAmount" type="number" class="form-control" [(ngModel)]="minDepositValue" [ngModelOptions]="{standalone: true}" value="{{minDepositValue}}" />
+                                </div>
+                            </ng-container>
+                            <br /><br />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-md-12">
                         <!--<div class="row col-md-6">
                             <div class="col-3">
                                 <label style="float:right;clear:both;padding-top:6px">WinTurn :</label>
@@ -277,7 +344,6 @@
                         </div>
                         <br /><br />
                         <h3>Game</h3>
-
                         <div class="row col-md-12" id="turnover_CheckBoxs" [style.display]="displayTurnoverCategory ? 'flex' : 'none'">
                             <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="ag_id" [checked]="data.isAG" /> &nbsp; &nbsp;
@@ -313,7 +379,6 @@
                             <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="m8" [checked]="data.isM8" /> &nbsp; &nbsp;<label> M8 </label>
                             </div>
-
                             <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="918Kiss_id" [checked]="data.is918Kiss" /> &nbsp; &nbsp;<label> 918Kiss </label>
                             </div>
@@ -326,9 +391,10 @@
                             <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="pussy888_id" [checked]="data.isPussy888" /> &nbsp; &nbsp;<label> Pussy888 </label>
                             </div>
-
+                            <div class="col-md-2" style="font-size:20px;">
+                                <input type="checkbox" style="height:20px;width:20px;" id="YeeBet_id" [checked]="data.isYeeBet" /> &nbsp; &nbsp;<label> YeeBet </label>
+                            </div>
                         </div>
-
                         <!--<div class="row col-md-12" id="winover_CheckBoxs" [style.display]="displayWinoverCategory ? 'flex' : 'none'">
                             <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="918Kiss_id" [checked]="data.is918Kiss" /> &nbsp; &nbsp;<label> 918Kiss </label>
@@ -343,10 +409,8 @@
                                 <input type="checkbox" style="height:20px;width:20px;" id="pussy888_id" [checked]="data.isPussy888" /> &nbsp; &nbsp;<label> Pussy888 </label>
                             </div>
                         </div>-->
-
                         <br /><br />
                         <h3>Promotion Category</h3>
-
                         <div class="row col-md-12">
                             <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="newmember_id" [checked]="data.isNewMember" /> &nbsp; &nbsp;
@@ -368,10 +432,8 @@
                                 <input type="checkbox" style="height:20px;width:20px;" id="limitedtime_id" [checked]="data.isLimitedTime" /> &nbsp; &nbsp;<label> Limited Time </label>
                             </div>
                         </div>
-
                         <br /><br />
-                        <h3>Applly For User Level Promotion</h3>
-
+                        <h3>Apply For User Level Promotion</h3>
                         <div class="row col-md-12">
                             <div class="col-md-2" style="font-size:20px;">
                                 <input type="checkbox" style="height:20px;width:20px;" id="normal_id" [checked]="data.isNormal" /> &nbsp; &nbsp;
@@ -394,7 +456,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row col-md-12">
                         <div class="row col-md-6">
                             <div class="col-3">

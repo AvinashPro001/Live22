@@ -177,6 +177,17 @@ async function GameInMaintenance(i) {
             document.getElementById('pragmaticslot').style.filter = "";
             document.getElementById('pragmaticslotlogin').style.filter = "";
         }
+
+        if (walletData.data[i].walletType == "YeeBet Wallet" &&
+            walletData.data[i].isMaintenance == true) {
+            document.getElementById('YeeBetLive').style.filter = "grayscale(1)";
+            document.getElementById('YeeBetLiveLogin').style.filter = "grayscale(1)";
+        }
+        else if (walletData.data[i].walletType == "YeeBet Wallet" &&
+            walletData.data[i].isMaintenance == false) {
+            document.getElementById('YeeBetLive').style.filter = "";
+            document.getElementById('YeeBetLiveLogin').style.filter = "";
+        }
     }
 }
 
@@ -316,17 +327,7 @@ async function AllInButtonDisable(i) {
             }
         }
 
-        if (walletData.data[i].walletType == "WM Wallet" && walletData.data[i].isMaintenance == true) {
-            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
-                document.getElementById("wmallin").disabled = true;
-            }
-        }
-        else if (walletData.data[i].walletType == "WM Wallet" && walletData.data[i].isMaintenance == false) {
-            if (window.location.href.toLowerCase().includes('mobile/transfer')) {
-                document.getElementById("wmallin").disabled = false;
-            }
-        }
-
+        c
         if (walletData.data[i].walletType == "Pragmatic Wallet" && walletData.data[i].isMaintenance == true) {
             if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("pragmaticallin").disabled = true;
@@ -336,6 +337,15 @@ async function AllInButtonDisable(i) {
             if (window.location.href.toLowerCase().includes('mobile/transfer')) {
                 document.getElementById("pragmaticallin").disabled = false;
             }
+        }
+
+        if (walletData.data[i].walletType == "YeeBet Wallet" &&
+            walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) document.getElementById("YeeBetAllIn").disabled = true;
+        }
+        else if (walletData.data[i].walletType == "YeeBet Wallet" &&
+            walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('mobile/transfer')) document.getElementById("YeeBetAllIn").disabled = false;
         }
     }
 }
@@ -386,6 +396,8 @@ async function CheckGameInMaintenance(gameName) {
 
     if (gameName == "Pragmatic")
         walletName = "Pragmatic Wallet";
+
+    if (gameName == "YeeBet") walletName = "YeeBet Wallet";
 
     for (i = 0; i < walletData.data.length; i++)
         if (walletData.data[i].walletType == walletName && walletData.data[i].isMaintenance == true)
@@ -579,6 +591,7 @@ async function logingGame(gameName) {
                 PragmaticBrokenStatusInterval();
                 TransferInAllWallet("Pragmatic Wallet");
             }
+            if (gameName == "YeeBet") TransferInAllWallet("YeeBet Wallet");
         }
         if (gameName != "Pragmatic")
             window.open("/mobile/Game?gamename=" + gameName);
@@ -1022,6 +1035,27 @@ async function GameLoginMobile(gamename) {
                 }
                 else {
                     window.open("../Mobile/PragmaticGame", "_blank")
+                }
+                break;
+            case 'YeeBet':
+                LoaderShow();
+                if (resSelectUser.data.YeeBet !== true) {
+                    var userRegisterModel = {}
+                    var res = await PostMethod(apiEndPoints.YeeBetRegister, userRegisterModel);
+                    if (res.data.errorCode == 0) {
+                        var userLoginModel = {
+                            isMobile: true
+                        }
+                        var login = await PostMethod(apiEndPoints.YeeBetLogin, userLoginModel);
+                        if (login.data.result == 0) window.location.href = login.data.openurl;
+                    }
+                }
+                else {
+                    var Model = {
+                        isMobile: true
+                    }
+                    var login = await PostMethod(apiEndPoints.YeeBetLogin, Model);
+                    if (login.data.result == 0) window.location.href = login.data.openurl;
                 }
                 break;
         }

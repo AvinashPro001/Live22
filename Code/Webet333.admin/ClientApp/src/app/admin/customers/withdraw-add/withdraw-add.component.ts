@@ -84,6 +84,9 @@ export class WithdrawAddComponent implements OnInit {
     allbetUsername: any;
     userPassword: any;
 
+    YeeBetBalance: any;
+    YeeBetUsername: any;
+
     //#endregion
 
     //#region ngOnInit
@@ -134,6 +137,7 @@ export class WithdrawAddComponent implements OnInit {
             this.pragmaticUsername = res.data.pragmaticUsername;
             this.allbetUsername = res.data.allbetUsername;
             this.wmUsername = res.data.wmUsername;
+            this.YeeBetUsername = res.data.yeeBetUsername;
             this.Kiss918Balance(newVal);
             this.Mega888(newVal);
             this.Maxbet(newVal);
@@ -149,6 +153,7 @@ export class WithdrawAddComponent implements OnInit {
             this.Pragmatic(newVal);
             this.AllBet(newVal);
             this.WM(newVal);
+            this.YeeBet(newVal);
         });
     }
 
@@ -191,6 +196,7 @@ export class WithdrawAddComponent implements OnInit {
             this.allbetUsername = res.data.allbetUsername;
             this.wmUsername = res.data.wmUsername;
             this.pragmaticUsername = res.data.pragmaticUsername;
+            this.YeeBetUsername = res.data.yeeBetUsername;
             this.Kiss918Balance(newVal);
             this.Mega888(newVal);
             this.Maxbet(newVal);
@@ -205,6 +211,7 @@ export class WithdrawAddComponent implements OnInit {
             this.AllBet(newVal);
             this.WM(newVal);
             this.Pragmatic(newVal);
+            this.YeeBet(newVal);
 
             this.adminService.getAll<any>(customer.depositDdl).subscribe(res => {
                 this.ddlData = res.data;
@@ -271,7 +278,7 @@ export class WithdrawAddComponent implements OnInit {
             if (CheckPromotionApply.data.Staus != null && CheckPromotionApply.data.TotalPromotionRow > 0) {
                 this.disabled = false;
                 this.ngOnInit();
-                return this.toasterService.pop('error', 'Error', "Your Promotion is on going, cannot withdraw till the promotion is completed");
+                return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.YourPromotionIsOnGoingCannotWithdrawTillThePromotionIsCompleted);
             }
 
             this.adminService.add<any>(account.profile, dataProfile).subscribe(async resUser => {
@@ -675,6 +682,16 @@ export class WithdrawAddComponent implements OnInit {
         }
         this.adminService.add<any>(gameBalance.Pragmatic, data).subscribe(res => {
             this.pragmaticBal = res.data.balance;
+        })
+    }
+
+    YeeBet(id) {
+        let data = {
+            id: id,
+            username: this.YeeBetUsername
+        }
+        this.adminService.add<any>(gameBalance.YeeBet, data).subscribe(res => {
+            this.YeeBetBalance = res.data.balance;
         })
     }
 

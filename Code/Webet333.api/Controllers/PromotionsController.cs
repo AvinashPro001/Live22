@@ -74,6 +74,7 @@ namespace Webet333.api.Controllers
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
                 var promotions = await promotion_help.PromotionUpdate(request);
+
                 return OkResponse(promotions.Id);
             }
         }
@@ -225,6 +226,7 @@ namespace Webet333.api.Controllers
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
                 var promotions = await promotion_help.RetrieveAdmin(request, BaseUrlConfigsOptions.Value);
+
                 return OkResponse(promotions);
             }
         }

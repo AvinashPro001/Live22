@@ -39,6 +39,7 @@
         public string AllBetUsername { get; set; }
 
         public string WMUsername { get; set; }
+
         public string PragmaticUsername { get; set; }
     }
 }
