@@ -67,7 +67,10 @@ var CommonService = /** @class */ (function () {
             PleaseSelectToDateAndFromDate: 'Please Select To Date and From Date.',
             UsernameRequired: 'Username Required.',
             PasswordRequired: 'Password Required.',
-            VIPLevelRequired: 'VIP Level Required.'
+            VIPLevelRequired: 'VIP Level Required.',
+            PleaseSelectMobileBannerImage: 'Please Select Mobile Banner Image',
+            PleaseSelectDesktopBannerImage: 'Please Select Desktop Banner Image',
+            PleaseAddPromotionFixedBonusAmount: 'Please Add Promotion Fixed Bonus Amount.'
         };
         //#endregion Check variable null, undefined, NaN
         //#region Game List

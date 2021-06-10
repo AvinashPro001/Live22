@@ -8,8 +8,9 @@ exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsC
 exports.environment = {
     production: false,
     //apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    apiUrl: 'https://localhost:5001/api/v1/'
+    apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://localhost:5000/api/v1/'
+    //apiUrl: 'http://localhost:8091/api/v1/'
 };
 exports.account = {
     login: exports.environment.apiUrl + 'account/login',
