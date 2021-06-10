@@ -3091,7 +3091,7 @@ namespace Webet333.api.Controllers
             using (var game_helper = new GameHelpers(Connection))
             {
                 var result = await game_helper.GetListBettingDetails(request);
-                
+
                 if (result == null) return NotFoundResponse();
 
                 return OkResponse(result);

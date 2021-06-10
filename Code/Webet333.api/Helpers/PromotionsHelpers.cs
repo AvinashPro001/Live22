@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -67,7 +68,69 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                return await repository.FindAsync(StoredProcConsts.Promotions.Insert, request);
+                return await repository.FindAsync(
+                    StoredProcConsts.Promotions.Insert,
+                    //request
+                    new
+                    {
+                        StartDate = request.StartDate,
+                        EndDate = request.EndDate,
+                        StartTime = request.StartTime,
+                        EndTime = request.EndTime,
+                        Title = request.Title,
+                        Description = request.Description,
+                        Banner = request.Banner,
+                        DiscountType = request.DiscountType,
+                        Discount = request.Discount,
+                        Sequence = request.Sequence,
+                        LanguageId = request.LanguageId,
+                        IsDailyAvail = request.IsDailyAvail,
+                        IsDepositPage = request.IsDepositPage,
+                        TurnoverTime = request.TurnoverTime,
+                        WinTurn = request.WinTurn,
+                        MaxBonus = request.MaxBonus,
+                        MinDeposit = request.MinDeposit,
+                        FixedBonusJSON = JsonConvert.SerializeObject(request.FixedBonus),
+                        IsAdmin = request.IsAdmin,
+                        IsMain = request.IsMain,
+                        IsPerUserOnly = request.IsPerUserOnly,
+                        BankAccountClaimOnce = request.BankAccountClaimOnce,
+                        IsLiveCategory = request.IsLiveCategory,
+                        IsSportsCategory = request.IsSportsCategory,
+
+                        IsAG = request.IsAG,
+                        IsDG = request.IsDG,
+                        IsSA = request.IsSA,
+                        IsPlaytech = request.IsPlaytech,
+                        IsPlaytechSlot = request.IsPlaytechSlot,
+                        IsPragmatic = request.IsPragmatic,
+                        IsSexyBaccarat = request.IsSexyBaccarat,
+                        IsWM = request.IsWM,
+                        IsYeeBet = request.IsYeeBet,
+                        IsAllBet = request.IsAllBet,
+                        IsMaxbet = request.IsMaxbet,
+                        IsM8 = request.IsM8,
+                        Is918Kiss = request.Is918Kiss,
+                        IsPussy888 = request.IsPussy888,
+                        IsMega888 = request.IsMega888,
+                        IsJoker = request.IsJoker,
+
+                        IsNewMember = request.IsNewMember,
+                        IsSports = request.IsSports,
+                        IsCasino = request.IsCasino,
+                        IsSlots = request.IsSlots,
+                        IsRebate = request.IsRebate,
+                        IsLimitedTime = request.IsLimitedTime,
+
+                        IsNormal = request.IsNormal,
+                        IsBronze = request.IsBronze,
+                        IsSilver = request.IsSilver,
+                        IsGold = request.IsGold,
+                        IsPlatinum = request.IsPlatinum,
+                        IsDiamond = request.IsDiamond,
+
+                        AdminId = request.AdminId
+                    });
             }
         }
 
@@ -75,7 +138,71 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                return await repository.FindAsync(StoredProcConsts.Promotions.Update, request);
+                return await repository.FindAsync(
+                    StoredProcConsts.Promotions.Update,
+                    //request
+                    new
+                    {
+                        Id = request.Id,
+
+                        StartDate = request.StartDate,
+                        EndDate = request.EndDate,
+                        StartTime = request.StartTime,
+                        EndTime = request.EndTime,
+                        Title = request.Title,
+                        Description = request.Description,
+                        Banner = request.Banner,
+                        DiscountType = request.DiscountType,
+                        Discount = request.Discount,
+                        Sequence = request.Sequence,
+                        LanguageId = request.LanguageId,
+                        IsDailyAvail = request.IsDailyAvail,
+                        IsDepositPage = request.IsDepositPage,
+                        TurnoverTime = request.TurnoverTime,
+                        WinTurn = request.WinTurn,
+                        MaxBonus = request.MaxBonus,
+                        MinDeposit = request.MinDeposit,
+                        FixedBonusJSON = JsonConvert.SerializeObject(request.FixedBonus),
+                        IsAdmin = request.IsAdmin,
+                        IsMain = request.IsMain,
+                        IsPerUserOnly = request.IsPerUserOnly,
+                        BankAccountClaimOnce = request.BankAccountClaimOnce,
+                        IsLiveCategory = request.IsLiveCategory,
+                        IsSportsCategory = request.IsSportsCategory,
+
+                        IsAG = request.IsAG,
+                        IsDG = request.IsDG,
+                        IsSA = request.IsSA,
+                        IsPlaytech = request.IsPlaytech,
+                        IsPlaytechSlot = request.IsPlaytechSlot,
+                        IsPragmatic = request.IsPragmatic,
+                        IsSexyBaccarat = request.IsSexyBaccarat,
+                        IsWM = request.IsWM,
+                        IsYeeBet = request.IsYeeBet,
+                        IsAllBet = request.IsAllBet,
+                        IsMaxbet = request.IsMaxbet,
+                        IsM8 = request.IsM8,
+                        Is918Kiss = request.Is918Kiss,
+                        IsPussy888 = request.IsPussy888,
+                        IsMega888 = request.IsMega888,
+                        IsJoker = request.IsJoker,
+
+                        IsNewMember = request.IsNewMember,
+                        IsSports = request.IsSports,
+                        IsCasino = request.IsCasino,
+                        IsSlots = request.IsSlots,
+                        IsRebate = request.IsRebate,
+                        IsLimitedTime = request.IsLimitedTime,
+
+                        IsNormal = request.IsNormal,
+                        IsBronze = request.IsBronze,
+                        IsSilver = request.IsSilver,
+                        IsGold = request.IsGold,
+                        IsPlatinum = request.IsPlatinum,
+                        IsDiamond = request.IsDiamond,
+
+                        AdminId = request.AdminId
+                    });
             }
         }
 
@@ -159,6 +286,7 @@ namespace Webet333.api.Helpers
                         promotion.Terms = Terms.ToList().Where(x => x.ParentId == promotion.Id).ToList();
                     });
                 }
+
                 return AdminPromotionMapping.Map(promotions, baseUrl);
             }
         }

@@ -66,7 +66,19 @@ export class PromotionEditComponent implements OnInit {
     Type: any = [
         { id: "Percentage", type: "Percentage" },
         { id: "Amount", type: "Amount" },
+        { id: "PromotionFixedBonusAmount", type: "Promotion Fixed Bonus Amount" }
     ];
+
+    showMinDeposit: boolean = true;
+    minDepositValue: any = 0;
+    promotionFixedBonusAmount: any;
+    totalRowForPromotionFixedBonus: number = 10;
+    showPromotionFixedBonus: boolean = false;
+    discountTypeId: any;
+    showMaxBonus: boolean = true;
+    maxBonusValue: any = 0;
+    showDiscount: boolean = true;
+    discountValue: any = 0;
 
     async ngOnInit() {
         if (await this.checkUpdatePermission()) {
@@ -193,6 +205,28 @@ export class PromotionEditComponent implements OnInit {
             this.displayWinoverCategory = false;
             this.selectOverCategory = 'Turnover';
         }
+
+        this.discountTypeId = this.data.discountType;
+        if (this.discountTypeId == this.Type[2].id) {
+            this.showPromotionFixedBonus = true;
+            this.showDiscount = false;
+            this.showMinDeposit = false;
+            this.showMaxBonus = false;
+        }
+        else {
+            this.showPromotionFixedBonus = false;
+            this.showDiscount = true;
+            this.showMinDeposit = true;
+            this.showMaxBonus = true;
+        }
+
+        this.minDepositValue = this.data.minDeposit;
+
+        let temp = this.data.promotionFixedBonus;
+        this.promotionFixedBonusAmount = JSON.parse(temp);
+
+        this.maxBonusValue = this.data.maxbonus;
+        this.discountValue = this.data.discount;
     }
 
     UpdatePromotion() {
@@ -206,20 +240,24 @@ export class PromotionEditComponent implements OnInit {
             endTime: (objtimeEnd.hour + ":" + objtimeEnd.minute).toString(),
             title: (document.getElementById("txt_titleId") as HTMLInputElement).value,
             discountType: (document.getElementById("txt_discountTypeId") as HTMLInputElement).value,
-            discount: (document.getElementById("txt_discountId") as HTMLInputElement).value,
+            //discount: (document.getElementById("txt_discountId") as HTMLInputElement).value,
+            discount: this.discountValue,
             sequence: (document.getElementById("ddlSequence") as HTMLInputElement).value,
             languageid: (document.getElementById("ddlLanguage") as HTMLInputElement).value,
             description: this.editorData === undefined ? null : this.editorData,
             isdailyavail: (document.getElementById("chk_isdaily") as HTMLInputElement).checked,
             isdepositpage: (document.getElementById("chk_isdepositpage") as HTMLInputElement).checked,
             turnovertime: this.turnoverValue,
-            maxbonus: (document.getElementById("txt_maxbonus") as HTMLInputElement).value,
+            //maxbonus: (document.getElementById("txt_maxbonus") as HTMLInputElement).value,
+            maxbonus: this.maxBonusValue,
             isadmin: (document.getElementById("chk_isAdmin") as HTMLInputElement).checked,
             ismain: (document.getElementById("chk_isMainPage") as HTMLInputElement).checked,
             isperuseronly: (document.getElementById("chk_isPerUser") as HTMLInputElement).checked,
             bankAccountClaimOnce: (document.getElementById("chk_isBankAccountClaimOnce") as HTMLInputElement).checked,
             winturn: this.WinTurn,
-
+            //minDeposit: (document.getElementById("txt_minDepositAmount") as HTMLInputElement).value,
+            minDeposit: this.minDepositValue,
+            fixedBonus: this.promotionFixedBonusAmount,
             isAG: (document.getElementById("ag_id") as HTMLInputElement).checked,
             isDG: (document.getElementById("dg_id") as HTMLInputElement).checked,
             isSA: (document.getElementById("sa_id") as HTMLInputElement).checked,
@@ -273,12 +311,14 @@ export class PromotionEditComponent implements OnInit {
             dataSelect.isJoker = false;
         }
 
-        if (dataSelect.turnovertime == 0 && dataSelect.winturn == 0) {
+        if (dataSelect.turnovertime == 0 &&
+            dataSelect.winturn == 0) {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectTurnoverTimesOrWinturn);
         }
 
-        if (dataSelect.turnovertime != 0 && dataSelect.winturn != 0) {
+        if (dataSelect.turnovertime != 0 &&
+            dataSelect.winturn != 0) {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectOnlyOneValueEitherTurnoverTimesOrWinturn);
         }
@@ -291,12 +331,14 @@ export class PromotionEditComponent implements OnInit {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectEndDate);
         }
+
         if (dataSelect.description === undefined) {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseGiveProperDescription);
         }
 
-        if (dataSelect.discount === "") {
+        if (this.discountTypeId != this.Type[2].id &&
+            dataSelect.discount === "") {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertDiscount);
         }
@@ -316,6 +358,14 @@ export class PromotionEditComponent implements OnInit {
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertTitle);
         }
 
+        if (this.discountTypeId != this.Type[2].id) {
+            dataSelect.fixedBonus = null;
+        }
+        else {
+            dataSelect.maxbonus = 0;
+            dataSelect.discount = 0;
+        }
+
         this.adminService.add<any>(customer.promotionUpdate, dataSelect).subscribe(res => {
             this.toasterService.pop('success', 'Success', res.message);
             if (this.baseDesktop !== undefined || this.baseMobile !== undefined)
@@ -330,6 +380,7 @@ export class PromotionEditComponent implements OnInit {
     }
 
     //#region uploadImage
+
     uploadFile(Id) {
         var dataSelect = {
             file: this.baseDesktop === undefined ? null : this.baseDesktop,
@@ -344,6 +395,7 @@ export class PromotionEditComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
+
     //#endregion
 
     async fileSelectMobile(event) {
@@ -368,6 +420,46 @@ export class PromotionEditComponent implements OnInit {
             temporaryFileReader.readAsDataURL(file);
         });
     }
+
+    //#region For dynamic row
+
+    counter(i: number) {
+        this.promotionFixedBonusAmount = new Array(i);
+
+        for (let j = 0; j < i; j++) {
+            let temp = {
+                depositAmount: 0,
+                bonusAmount: 0
+            };
+            this.promotionFixedBonusAmount[j] = temp;
+        }
+
+        return this.promotionFixedBonusAmount;
+    }
+
+    //#endregion For dynamic row
+
+    //#region Set discount type on dropdown change
+
+    onDiscountTypeSelected(value: string) {
+        this.discountTypeId = value;
+        if (this.discountTypeId == this.Type[2].id) {
+            this.showPromotionFixedBonus = true;
+            this.showDiscount = false;
+            this.showMinDeposit = false;
+            this.showMaxBonus = false;
+            if (this.promotionFixedBonusAmount == null) this.promotionFixedBonusAmount = this.counter(this.totalRowForPromotionFixedBonus);
+        }
+        else {
+            this.showPromotionFixedBonus = false;
+            this.showDiscount = true;
+            this.showMinDeposit = true;
+            this.showMaxBonus = true;
+            //  this.promotionFixedBonusAmount == null;
+        }
+    }
+
+    //#endregion Set discount type on dropdown change
 
     //#region Check Permission
 

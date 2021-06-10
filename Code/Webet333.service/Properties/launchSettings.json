@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "Webet333.service": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
