@@ -102,13 +102,13 @@
                                         </li>
                                         <li class="login-item signin form-icon">
                                             <button class="bttn btn-login" onclick="DoLogin()">
-                                                <span><i class="fas fa-sign-in-alt"></i></span> LOGIN
+                                                <span><i class="fas fa-sign-in-alt"></i></span> <span class="lang" key="login"></span>
                                             </button>
                                         </li>
                                         <li Class="login-item register my-account">
                                             <a href="~/Web/register">
                                                 <button class="bttn btn-register">
-                                                    <span><i class="fas fa-user-plus"></i> </span> SIGNUP
+                                                    <span><i class="fas fa-user-plus"></i> </span> <span class="lang" key="signup"></span>
                                                 </button>
                                             </a>
                                         </li>
@@ -120,7 +120,7 @@
                                         </li>
                                     </ul>
                                     <div class="bellow_signt">
-                                        <a href="">Forgot Username or Password?</a>
+                                        <a href=""><span class="lang" key="forgot_username_password"></span></a>
                                         <a href="" id="current_time">7/1/2021 9:29:16pm (GMT=8)</a>
                                     </div>
                                 </div>
@@ -150,7 +150,7 @@
                                                         </ul>
                                                     </span>
                                                     <span style="font-size:larger">
-                                                        Username
+                                                        <span class="lang" key="username"></span>
                                                     </span> : <span style="white-space: nowrap; overflow: unset; text-overflow: ellipsis;font-size:larger;" id="login_username"></span>
 
                                                 </li>
@@ -162,13 +162,13 @@
                                         </li>
                                         <li class="logout-item signin form-icon log-out">
                                             <button class="btn-login" value="LOGOUT" type="button" onclick="DoLogout()">
-                                                <span> <i class="fas fa-sign-out-alt"></i> LOGOUT</span>
+                                                <span> <i class="fas fa-sign-out-alt"></i> <span class="lang" key="logout"></span></span>
                                             </button>
                                         </li>
                                         <li class="log-item register inner_register my-account">
                                             <a href="~/Web/profile">
                                                 <button class="btn-register" value="MY ACCOUNT">
-                                                    <span> <i class="fas fa-user"></i> MY ACCOUNT</span>
+                                                    <span> <i class="fas fa-user"></i> <span class="lang" key="my_account"></span></span>
                                                 </button>
                                             </a>
                                         </li>
@@ -178,12 +178,12 @@
                                         <ul class="money-type list-inline">
                                             <button class=" restore-btn layout-btn" onclick="RestoreBalance();">
                                                 <img class="icon-home" src="~/images/restore.png">
-                                                <span>RESTORE</span>
+                                                <span><span class="lang" key="restore"></span></span>
                                             </button>
                                             <li class="currency" data-toggle="collapse" data-target="#myDropdown" onclick="LoadAllBalance();">
                                                 <div class="select-balance">
                                                     <button class=" restore-btn layout-btn">
-                                                        <span class="lang" key="currentbalance">CURRENT BALANCE</span> &nbsp;&nbsp;<span class="fa fa-chevron-down"></span>
+                                                        <span class="lang" key="current_balance"></span> &nbsp;&nbsp;<span class="fa fa-chevron-down"></span>
                                                     </button>
                                                     <div id="myDropdown" class="dropdown-content collapse">
                                                         <table cellpadding="10" style="width:170px;" cellspacing="10">
@@ -254,21 +254,21 @@
                                             <a href="~/Web/profile#deposit">
                                                 <li class="restore-btn layout-btn">
                                                     <label>
-                                                        <img class="icon-home" src="~/images/deposit.png">&nbsp;&nbsp;<span class="lang black-textt2" key="deposit">DEPOSIT</span>
+                                                        <img class="icon-home" src="~/images/deposit.png">&nbsp;&nbsp;<span class="lang black-textt2" key="deposit"></span>
                                                     </label>
                                                 </li>
                                             </a>
                                             <a href="~/Web/profile#withdraw">
                                                 <li class="restore-btn layout-btn">
                                                     <label>
-                                                        <img class="icon-home" src="~/images/withdraw.png">&nbsp;&nbsp;<span class="lang black-textt2" key="withdrawal">WITHDRAW</span>
+                                                        <img class="icon-home" src="~/images/withdraw.png">&nbsp;&nbsp;<span class="lang black-textt2" key="withdraw"></span>
                                                     </label>
                                                 </li>
                                             </a>
                                             <a href="~/Web/profile#transfer">
                                                 <li class="restore-btn layout-btn">
                                                     <label>
-                                                        <img class="icon-home" src="~/images/transfer.png">&nbsp;&nbsp;<span class="lang black-textt2" key="transfer">TRANSFER</span>
+                                                        <img class="icon-home" src="~/images/transfer.png">&nbsp;&nbsp;<span class="lang black-textt2" key="transfer"></span>
                                                     </label>
                                                 </li>
                                             </a>
@@ -306,7 +306,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span>
                             <img class="normal_icons" src="~/images/livecasino.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="~/images/livecasino_hover.png" width="26" height="23" alt=""> Live Casino
+                            <img class="hover_icons" src="~/images/livecasino_hover.png" width="26" height="23" alt=""> <span class="lang" key="menu_live_casino"></span>
                         </span><span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropmenu-main" id="subMenuSports" role="menu">
@@ -351,7 +351,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span>
                             <img class="normal_icons" src="~/images/slot.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="~/images/slot_hover.png" width="26" height="23" alt=""> Slots
+                            <img class="hover_icons" src="~/images/slot_hover.png" width="26" height="23" alt=""> <span class="lang" key="slots"></span>
                         </span> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropmenu-main" id="subMenuSlots" role="menu">
@@ -397,7 +397,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span>
                             <img class="normal_icons" src="~/images/sport.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="~/images/sport_hover.png" width="26" height="23" alt=""> Sports
+                            <img class="hover_icons" src="~/images/sport_hover.png" width="26" height="23" alt=""> <span class="lang" key="sports"></span>
                         </span> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropmenu-main" id="subMenuLive" role="menu">
@@ -426,7 +426,7 @@
                     <a href="~/Web/promotion">
                         <span>
                             <img class="normal_icons" src="~/images/promo.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="~/images/promo_hover.png" width="26" height="23" alt=""> Promotion
+                            <img class="hover_icons" src="~/images/promo_hover.png" width="26" height="23" alt=""> <span class="lang" key="promotion"></span>
                         </span>
                     </a>
                 </li>
@@ -442,7 +442,7 @@
                     <a href="~/Web/bank">
                         <span>
                             <img class="normal_icons" src="~/images/bank.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="~/images/bank_hover.png" width="26" height="23" alt=""> Bank
+                            <img class="hover_icons" src="~/images/bank_hover.png" width="26" height="23" alt=""> <span class="lang" key="bank"></span>
                         </span>
                     </a>
                 </li>
@@ -450,7 +450,7 @@
                     <a href="~/Web/download">
                         <span>
                             <img class="normal_icons" src="~/images/download.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="~/images/download_hove.png" width="26" height="23" alt=""> Download
+                            <img class="hover_icons" src="~/images/download_hove.png" width="26" height="23" alt=""> <span class="lang" key="download"></span>
                         </span>
                     </a>
                 </li>
@@ -467,33 +467,33 @@
             <div class="col-sm-3">
                 <div class="vip_boxess">
                     <img src="~/images/footericon1.png" alt="footericon1" />
-                    <h1>VIP Program</h1>
-                    <p>Upgrade to VIP o enjoy exclusive benefit and earn rewards</p>
-                    <a href="~/Web/vip">Apply Now</a>
+                    <h1><span class="lang" key="vip_program"></span></h1>
+                    <p><span class="lang" key="vip_program_text"></span></p>
+                    <a href="~/Web/vip"><span class="lang" key="apply_now"></span></a>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="vip_boxess">
                     <img src="~/images/footericon2.png" alt="footericon1" />
-                    <h1>Customer Service 24/7</h1>
-                    <p>Have a question? Call a specialist or chat online</p>
-                    <a href="#">Chat Now</a>
+                    <h1><span class="lang" key="customer_service_27_7"></span></h1>
+                    <p><span class="lang" key="customer_service_27_7_text"></span></p>
+                    <a href="#"><span class="lang" key="chat_now"></span></a>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="vip_boxess">
                     <img src="~/images/footericon3.png" alt="footericon1" />
-                    <h1>Feedback & Complaint</h1>
-                    <p>If you have any complaint for our service, complaint with our general manager</p>
-                    <a href="#">Complaint Now</a>
+                    <h1><span class="lang" key="feedback_complaint"></span></h1>
+                    <p><span class="lang" key="feedback_complaint_text"></span></p>
+                    <a href="#"><span class="lang" key="complaint_now"></span></a>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="promtion_boxess">
                     <img src="~/images/footericon4.png" alt="footericon1" />
-                    <h1>Promotion</h1>
-                    <p>A lot of FREE CREDIT PROMOTION in here</p>
-                    <a href="~/Web/promotion">get free credit card now</a>
+                    <h1><span class="lang" key="promotion"></span></h1>
+                    <p><span class="lang" key="promotion_text"></span></p>
+                    <a href="~/Web/promotion"><span class="lang" key="get_free_credit_card_now"></span></a>
                 </div>
             </div>
         </div>
@@ -504,61 +504,56 @@
             <div class="col-md-3">
                 <div class="welcome_wb3_boxes_wrapper">
                     <div class="wb3_welcome_boxes">
-                        <h1>Welcome to WB3 Online Caino</h1>
-                        <p> WB3 which is also known as webet333, is a Malaysia online casino operated by an experienced and well known Genting junkyard. We are also experience in serving the casino VVIP, fulfilling gaming needs all the time.WB3 online casino will deliver you a whole new level of comfort and fun experience throughout your time with us.</p>
+                        <h1><span class="lang" key="welcome_webet333_casino"></span></h1>
+                        <p> <span class="lang" key="welcome_webet333_casino_text"></span></p>
                     </div>
                     <div class="wb3_welcome_boxes">
-                        <h1>Bonus & Promotion</h1>
-                        <p>
-                            We guaranteed our bonus are the latest and the most attractive.
-                            NO high requirements NO hussle on bonus and promotion
-                            It is time to join us now and put your doubt away!
-                            There are lots of surprises awaiting you.
-                        </p>
+                        <h1><span class="lang" key="bonus_promotion"></span></h1>
+                        <p> <span class="lang" key="bonus_promotion_text"></span></p>
                     </div>
                     <div class="wb3_welcome_boxes">
-                        <h1>Saftey & Security</h1>
-                        <p> our system are encrypts the data being sent and makes it impossible for it to be intercepted by any unauthorized third parties. It’s vital to your security when betting online. it is 100% safe.Payment Gateway</p>
+                        <h1><span class="lang" key="saftey_security"></span></h1>
+                        <p> <span class="lang" key="saftey_security_text"></span></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="welcome_wb3_boxes_wrapper">
                     <div class="wb3_welcome_boxes">
-                        <h1>Live Casino</h1>
-                        <p> Live Casino offers you an exciting online experience with Live Dealers. A live casino game is shown via a live streaming video link, in real time from a casino table. and we have live casino game such as Asia Gaming(AG), Dreaming Gaming(DG), Sexy Gaming(AE), Playtech, SA Gaming, WM Casino & AllBET.</p>
+                        <h1><span class="lang" key="live_casino"></span></h1>
+                        <p> <span class="lang" key="live_casino_text"></span></p>
                     </div>
                     <div class="wb3_welcome_boxes">
-                        <h1>Slot</h1>
-                        <p>Slot machine game's claim higher payback percentages,We've Got Some Of The Newest Slots Available On The Web Such as Playtech, Pragmatic, 918kiss, Mega888, XE88, Pussy888, Joker123, Asia Gaming(AG)</p>
+                        <h1><span class="lang" key="slots"></span></h1>
+                        <p> <span class="lang" key="slots_text"></span></p>
                     </div>
                     <div class="wb3_welcome_boxes">
-                        <h1>24x7 Customer Services</h1>
-                        <p>We are having livechat, wechat, whatsapp, telegram platform to contact us. Our friendly Customer Support agents are available day and night, all year round. The team are just one click or call away, so whatever your query, get in touch!</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="welcome_wb3_boxes_wrapper">
-                    <div class="wb3_welcome_boxes">
-                        <h1>Fishing</h1>
-                        <p> The point of fish hunting games is to shoot and kill as many fish, creatures and bonus items as you can. You will need to aim your cannon using the joystick and press a button to fire your ammo in order to try and kill as many things as possible Sport</p>
-                    </div>
-                    <div class="wb3_welcome_boxes">
-                        <h1>Sports</h1>
-                        <p>Sports betting is the activity of predicting sports results and placing a wager on the outcome. The frequency of sports bet upon varies by culture, with the vast majority of bets being placed on association football, American football, basketball, baseball, hockey, track cycling, auto racing, mixed martial arts, and boxing at both the amateur and professional levels.</p>
+                        <h1><span class="lang" key="24_7_customer_service"></span></h1>
+                        <p> <span class="lang" key="24_7_customer_service_text"></span></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="welcome_wb3_boxes_wrapper">
                     <div class="wb3_welcome_boxes">
-                        <h1>Vip Level</h1>
-                        <p>WB333 now offer VIP program to all of our loyalty members, from Bronze to Diamond 6 levels, higher ranking will gain higher rebate & bonus.</p>
+                        <h1><span class="lang" key="fishing"></span></h1>
+                        <p> <span class="lang" key="fishing_text"></span></p>
                     </div>
                     <div class="wb3_welcome_boxes">
-                        <h1>Company License</h1>
-                        <p> we are licensed online casino pagcor philipine,the majority of the country in which gambling is tightly controlled by the state-owned Philippine Amusement and Gaming Corporation (PAGCOR). PAGCOR operates all land-based casinos, and betting outlets across the country.The Philippines is an excellent jurisdiction for online gaming entrepreneurs.</p>
+                        <h1><span class="lang" key="sports"></span></h1>
+                        <p> <span class="lang" key="sports_text"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="welcome_wb3_boxes_wrapper">
+                    <div class="wb3_welcome_boxes">
+                        <h1><span class="lang" key="vip_level"></span></h1>
+                        <p> <span class="lang" key="vip_level_text"></span></p>
+                    </div>
+                    <div class="wb3_welcome_boxes">
+                        <h1><span class="lang" key="company_license"></span></h1>
+                        <p> <span class="lang" key="company_license_text"></span></p>
                     </div>
                 </div>
             </div>
@@ -824,7 +819,7 @@
     </div>
     <div class="contact-us-btn1">
         <div class="contact-user1" id="ContactUsPopUp1" href="#">
-            <span class="lang" style="font-size:15px;color:#000;font-weight: 600;" key="contact_us">DOWNLOAD</span>&nbsp;<span class="contact-img1"></span>
+            <span class="lang" style="font-size:15px;color:#000;font-weight: 600;" key="download">DOWNLOAD</span>&nbsp;<span class="contact-img1"></span>
         </div>
         <ul class="chatting" id="chatting1">
             <li class="android-contact">
@@ -926,7 +921,7 @@
 
     <script src="~/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
     <script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>
-    
+
 
     <script type="text/javascript" charset="utf-8">
 

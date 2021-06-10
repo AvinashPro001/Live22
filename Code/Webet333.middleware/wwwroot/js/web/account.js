@@ -201,7 +201,6 @@ async function DoLogin() {
         password: $("#txt_login_password").val(),
         grantType: 'User'
     };
-    LoaderShow();
     let res = await PostMethod(accountEndPoints.login, model);
 
     if (res.status !== 200) {
@@ -214,12 +213,10 @@ async function DoLogin() {
                 DoLogout();
             }
         }
-        LoaderHide();
         ShowError(res.response.message);
         return 0;
     }
 
-    LoaderHide();
     SetLocalStorage('currentUserData', Encryption($("#txt_login_password").val()));
     SetLocalStorage("currentUser", res.response.data.access_token);
     SetSessionStorage("userDetails", Encryption(JSON.stringify(res.response.data.user)))

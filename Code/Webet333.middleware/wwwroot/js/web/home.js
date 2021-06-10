@@ -16,6 +16,7 @@ let SiteData = {
 $(document).ready(function () {
     if (GetSessionStorage("siteData") == null) SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
     if (GetLocalStorage('language') === null) SetLocalStorage('language', 'en-US');
+    ChangeLanguageText();
     if (localStorage.getItem('IsExecute') == "true" || localStorage.getItem('IsExecute') == true || localStorage.getItem('IsExecute') == null) localStorage.setItem('IsExecute', false);
     SetLocalStorage("IsSedularExecute", false);
     SetSiteDataVariable()
@@ -312,10 +313,21 @@ async function GetWalletList() {
 
 //#endregion
 
+function ChangeLanguageText() {
+    $.ajax({
+        url: '../../resources/lang.' + GetLocalStorage('language') + '.json',
+        dataType: 'json',
+        async: false,
+        success: function (lang) {
+            $('.lang').each(function () {
+                $(this).text(lang[$(this).attr('key')]);
+            });
+        }
+    });
+}
 
 function ChangeLanguage(LangCode) {
     sessionStorage.removeItem("siteData");
     SetLocalStorage("language", LangCode);
     window.location.reload();
-    
 }
