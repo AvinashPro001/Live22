@@ -201,26 +201,25 @@ async function DoLogin() {
         password: $("#txt_login_password").val(),
         grantType: 'User'
     };
+    LoaderShow();
     let res = await PostMethod(accountEndPoints.login, model);
 
     if (res.status !== 200) {
-        debugger
-        if (err.status === 400) {
-            if (err.responseJSON.message == "Your account is not active." || err.responseJSON.message == "Akaun anda belum aktif." || err.responseJSON.message == "您的帐户无效。") {
+        if (res.status === 400) {
+            if (res.response.message == "Your account is not active." || res.response.message == "Akaun anda belum aktif." || res.response.message == "您的帐户无效。") {
                 DoLogout();
             }
 
-            if (err.responseJSON.message == "Your access token is expired, please login again." || err.responseJSON.message == "Token akses anda tamat tempoh, sila log masuk sekali lagi." || err.responseJSON.message == "您的访问令牌已过期，请重新登录。") {
+            if (res.response.message == "Your access token is expired, please login again." || res.response.message == "Token akses anda tamat tempoh, sila log masuk sekali lagi." || res.response.message == "您的访问令牌已过期，请重新登录。") {
                 DoLogout();
             }
         }
-        if (err.responseJSON !== null && err.responseJSON !== undefined) {
-            ShowError(err.responseJSON.message);
-            LoaderHide();
-        }
+        LoaderHide();
+        ShowError(res.response.message);
         return 0;
     }
 
+    LoaderHide();
     SetLocalStorage('currentUserData', Encryption($("#txt_login_password").val()));
     SetLocalStorage("currentUser", res.response.data.access_token);
     SetSessionStorage("userDetails", Encryption(JSON.stringify(res.response.data.user)))

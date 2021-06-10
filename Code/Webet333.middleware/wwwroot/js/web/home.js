@@ -311,3 +311,11 @@ async function GetWalletList() {
 //#endregion
 
 //#endregion
+
+
+function ChangeLanguage(LangCode) {
+    sessionStorage.removeItem("siteData");
+    SetLocalStorage("language", LangCode);
+    window.location.reload();
+    
+}
