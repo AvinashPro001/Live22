@@ -1916,3 +1916,20 @@ p.bonus_content a{color: #333;}
 
 .genaral_wrapp1 img{border-radius:0px;}
 .leftProfileButon1 img{width:20px;height:auto;}
+
+/* 10 June  */
+.all_slot_game_boxes                        { min-height: 100%; }
+.all_slot_game_boxes                        { transition-duration: 0.5s; }
+.slot-game-img-box                          { position: relative; }
+.all_slot_game_boxes .overlay               { position: absolute; bottom: 0; left: 0; right: 0; transform: scale(0.9); background-color: rgba(0,0,0,0.5); overflow: hidden; width: 100%; height: 0; transition: .5s ease; }
+.all_slot_game_boxes .slot-game-play-box    { color: #242424; background-color: #febd17; font-size: 16px; padding: 10px 40px; position: absolute; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); text-align: center; }
+.all_slot_game_boxes .slot-game-play-box:hover { text-decoration: none; transition: 0.5s; color: #febd17 ; background-color: #fff; }
+/* .all_slot_game_boxes:hover                  { transform: scale(1.09); transition: 0.5s; } */
+.all_slot_game_boxes .hidden-slot-game-title   { transform: translateY(-100%); min-height: 0px; height: 0; opacity: 0; padding: 0px; }
+.all_slot_game_boxes:hover .hidden-slot-game-title { transform: translateY(0); height: auto; min-height: auto; opacity: 1; padding: 8px 8px 10px 8px; }
+.all_slot_game_boxes:hover p:last-child     { transform: translateY(100%); min-height: 0px; opacity: 0; height: 0; padding: 0px; }
+.slot-game-img-box:hover .overlay           { height: 100%; }
+.slot-game-img-box:hover img                { transform: scale(0.9); transition: 0.5s; }
+/* div#jokerSlotsGameList .col-sm-3.pl0.pb15   { position: relative; height: 200px; } */
+div#playtechSlotsGameList .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
+.all_slot_game_boxes:hover { transform: scale(1.2); transform-origin: center; transition: 0.5s; position: relative; z-index: 9; }
