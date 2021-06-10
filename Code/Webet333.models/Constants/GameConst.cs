@@ -545,6 +545,8 @@
                 public const string GetBettingDetails = "data/getbets";
 
                 public const string RemoveGetBettingDetails = "data/removebets";
+
+                public const string GetBetLimit = "user/quota/list";
             }
         }
 

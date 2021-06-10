@@ -739,6 +739,10 @@
             public const string Register = "yeebet/register";
 
             public const string Login = "yeebet/login";
+
+            public const string GetBetLimit = "yeebet/get/betlimit";
+
+            public const string SetBetLimit = "yeebet/set/betlimit";
         }
     }
 }

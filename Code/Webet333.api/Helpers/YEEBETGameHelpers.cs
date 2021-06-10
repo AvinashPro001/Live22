@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
+using Webet333.models.Request.Game.YeeBet;
 using Webet333.models.Response.Game.YEEBET;
 
 namespace Webet333.api.Helpers
@@ -141,6 +142,42 @@ namespace Webet333.api.Helpers
         }
 
         #endregion Call Remove Betting Details 3rd Party API
+
+        #region Call Get Bet Limit 3rd Party API
+
+        public static async Task<YEEBETResponse> GetBetLimitAsync()
+        {
+            var temp = $"appid={GameConst.YEEBET.APPId}";
+
+            var tempMD5 = SecurityHelpers.MD5EncrptText($"{temp}&key={GameConst.YEEBET.SecretKey}");
+
+            var Parameter = $"{temp}&sign={tempMD5}";
+
+            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.GetBetLimit}?{Parameter}";
+
+            return JsonConvert.DeserializeObject<YEEBETResponse>(await GameHelpers.CallThirdPartyApi(Url));
+        }
+
+        #endregion Call Login 3rd Party API
+
+        #region Call Set Bet Limit 3rd Party API
+
+        public static async Task<YEEBETResponse> SetBetLimitAsync(YeeBetSetBetLimitRequest request)
+        {
+            var temp = $"appid={GameConst.YEEBET.APPId}&" +
+                $"qids=1&" +
+                $"username={request.Username}";
+
+            var tempMD5 = SecurityHelpers.MD5EncrptText($"{temp}&key={GameConst.YEEBET.SecretKey}");
+
+            var Parameter = $"{temp}&sign={tempMD5}";
+
+            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.GetBetLimit}?{Parameter}";
+
+            return JsonConvert.DeserializeObject<YEEBETResponse>(await GameHelpers.CallThirdPartyApi(Url));
+        }
+
+        #endregion Call Login 3rd Party API
 
         #region House Keeping
 

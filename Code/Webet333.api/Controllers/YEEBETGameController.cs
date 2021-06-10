@@ -10,6 +10,7 @@ using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Game;
+using Webet333.models.Request.Game.YeeBet;
 
 namespace Webet333.api.Controllers
 {
@@ -95,5 +96,33 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Login
+
+        #region Get Bet Limit
+
+        [HttpGet(ActionsConst.YEEBET.GetBetLimit)]
+        public async Task<IActionResult> GetBetLimitAsync()
+        {
+            await CheckUserRole();
+
+            var result = await YEEBETGameHelpers.GetBetLimitAsync();
+
+            return OkResponse(result);
+        }
+
+        #endregion Get Bet Limit
+
+        #region Set Bet Limit
+
+        [HttpPost(ActionsConst.YEEBET.SetBetLimit)]
+        public async Task<IActionResult> SetBetLimitAsync([FromBody] YeeBetSetBetLimitRequest request)
+        {
+            await CheckUserRole();
+
+            var result = await YEEBETGameHelpers.SetBetLimitAsync(request);
+
+            return OkResponse(result);
+        }
+
+        #endregion Set Bet Limit
     }
 }
