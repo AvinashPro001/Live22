@@ -7,9 +7,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.account = exports.environment = void 0;
 exports.environment = {
     production: false,
-    //apiUrl: 'http://api.webet333.com/api/v1/'
-    apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:5000/api/v1/'
+    apiUrl: 'http://api.webet333.com/api/v1/'
+    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
     //apiUrl: 'http://localhost:8091/api/v1/'
 };
 exports.account = {
