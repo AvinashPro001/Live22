@@ -947,6 +947,8 @@
 
             public const string Login = "forward_game";
 
+            public const string Modified = "modify_client";
+
             public const string BettingDetails = "betlog_pieceof_histories_in30days";
 
             public const string BettingDetailsByUser = "client_betlog_query";

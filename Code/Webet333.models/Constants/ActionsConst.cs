@@ -550,6 +550,8 @@
 
             public const string Login = "allbet/login";
 
+            public const string Modified = "allbet/modified";
+
             public const string ChangePassword = "allbet/changepassword";
         }
 

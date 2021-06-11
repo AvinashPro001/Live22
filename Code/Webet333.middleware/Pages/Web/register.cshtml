@@ -22,7 +22,7 @@
     <div class="about_us_wrap">
         <div class="container">
             <div class="account-reg pad-comman-fifteen white-bg-tab-panel">
-                <h4 class="register symbol mar-btm-ten"><span class="lang" key="register_account">REGISTER</span></h4>
+                <h4 class="register symbol mar-btm-ten"><span class="lang" key="register">REGISTER</span></h4>
                 <div role="form" method="post">
                     <div class="row">
                         <div class="col-sm-6">
@@ -35,7 +35,11 @@
                                     </strong>
                                 </p>
                                 <div class="row form-group ml0 mr0">
-                                    <label class="user-title col-md-3 pl0">Username :</label>
+                                    <label class="user-title col-md-3 pl0">
+                                        <span class="lang" key="username">
+                                            Username
+                                        </span> :
+                                    </label>
                                     <label class="user mendatory col-md-9 pl0">
                                         <input type="text" class="reg-form" placeholder="" id="txt_username" />
                                         <p class="star">*</p>
@@ -53,19 +57,19 @@
                                         <input type="password" class="reg-form" placeholder="" id="txt_password" />
                                         <p class="star">*</p>
                                         <p class="note no-mar mar-btm-ten">
-                                            <span class="lang"> - Password must contain a length of 6 charaters</span>
+                                            <span class="lang" key="password_instruction"> - Password must contain a length of 6 charaters</span>
                                         </p>
                                         <p class="note no-mar mar-btm-ten">
-                                            <span class="lang"> - Password must be alphanumeric.</span>
+                                            <span class="lang" key="password_alpha_instruction"> - Password must be alphanumeric.</span>
                                         </p>
                                         <p class="note no-mar mar-btm-ten">
-                                            <span class="lang"> - Password and username must be different.</span>
+                                            <span class="lang" key="password_username_same"> - Password and username must be different.</span>
                                         </p>
                                     </label>
                                 </div>
 
                                 <div class="row form-group ml0 mr0">
-                                    <label class="user-title col-md-3 pl0">Confirm Password :</label>
+                                    <label class="user-title col-md-3 pl0 lang" key="confirm_password">Confirm Password :</label>
                                     <label class="lock mendatory col-md-9 pl0">
                                         <input type="password" class="reg-form" placeholder="" id="txt_confirm_password" onkeydown="CheckPasswordMatch()">
                                         <p class="star">*</p>
@@ -86,7 +90,7 @@
                                     </span>
                                 </p>
                                 <div class="row form-group ml0 mr0">
-                                    <label class="user-title col-md-3 pl0">Phone Number :</label>
+                                    <label class="user-title col-md-3 pl0 lang" key="phone_number">Phone Number :</label>
                                     <label class="num mendatory col-md-9 pl0">
                                         <input type="number" p class="reg-form" placeholder="" id="txt_mobile_no" />
                                         <p class="star">*</p>
@@ -101,14 +105,14 @@
                                     <strong><span class="lang">BASIC INFORMATION</span></strong>
                                 </p>
                                 <div class="row form-group ml0 mr0">
-                                    <label class="user-title col-md-3 pl0">Full Name as NRIC</label>
+                                    <label class="user-title col-md-3 pl0 lang" key="nric_placeholder"> Full Name as NRIC</label>
                                     <label class="mar-btm-no user mendatory col-md-9 pl0">
                                         <input type="text" class="reg-form" placeholder="" value="" id="txt_name" />
                                         <p class="star">*</p>
                                     </label>
                                 </div>
 
-                                <p class="note no-mar lang">Registered name must match your bank account name for banking purpose.You wont able to change your name after registered</p>
+                                <p class="note no-mar lang" key="name_instruction">Registered name must match your bank account name for banking purpose.You wont able to change your name after registered</p>
 
                                 <div class="row important_notice_register mr0 ml0">
                                     <!-- <div class="col-lg-2">&nbsp;</div> -->
@@ -136,12 +140,12 @@
                     <div class="checkbox">
                         <label class="tick-note accept_terms_wrap">
                             <input type="checkbox" value="0" class="accept_terms" id="term_condition_checkbox" onchange="recaptchaCallback()">
-                            <span class="accept_terms">I accept the Terms & Conditions , Privacy Policy and Age Verification Policy as published on this site.</span>
+                            <span class="accept_terms lang" key="terms_condition_accept">I accept the Terms & Conditions , Privacy Policy and Age Verification Policy as published on this site.</span>
                         </label>
                     </div>
                     <div class="text-left mar-comman">
                         <button type="button" value="Submit" class="submit" disabled="disabled" onclick="DoRegister();" id="submit_button">
-                            <span>SUBMIT</span>
+                            <span class="lang" key="submit_button">SUBMIT</span>
                         </button>
                     </div>
                 </div>

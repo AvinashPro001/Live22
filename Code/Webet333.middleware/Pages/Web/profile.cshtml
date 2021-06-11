@@ -15,7 +15,7 @@
             </div>
             <div class="restore_amount_sec_wrap">
                 <div class="restore_amount_left">
-                    <button onclick="RestoreBalance();">Restore</button>
+                    <button onclick="RestoreBalance();" class="lang" key="restore"></button>
                 </div>
                 <div class="restore_amount_center">
                     <div class="myr_cur">
@@ -84,15 +84,15 @@
                         <h4 class="mar-btm-fifteen">BANKING</h4>
 
                         <button id="deposit_tab" class="tablinks account-reg deposit opercity" onclick="openCity(event, 'deposit_amount')"><span class="lang" key="deposit">DEPOSIT</span></button>
-                        <button id="withdraw_tab" class="tablinks account-reg withdrawal opercity" onclick="openCity(event, 'withdraw_amount')"><span class="lang" key="withdrawal_title">WITHDRAW</span></button>
-                        <button id="transfer_tab" class="tablinks account-reg transfer opercity" onclick="openCity(event, 'transfer_amount')"><span class="lang" key="transfer_title">TRANSFER</span></button>
+                        <button id="withdraw_tab" class="tablinks account-reg withdrawal opercity" onclick="openCity(event, 'withdraw_amount')"><span class="lang" key="withdraw">WITHDRAW</span></button>
+                        <button id="transfer_tab" class="tablinks account-reg transfer opercity" onclick="openCity(event, 'transfer_amount')"><span class="lang" key="transfer">TRANSFER</span></button>
                         <button id="history_tab" class="tablinks mar-btm-fifteen account-reg history opercity" onclick="openCity(event, 'history_amount')"><span class="lang" key="history">HISTORY</span></button>
 
                         <h4 class="mar-btm-fifteen">USER PROFILE</h4>
 
-                        <button id="profile_tab" class="tablinks account-reg profile active opercity" onclick="openCity(event, 'profile_amount')"><span class="lang" key="profile_title">PROFILE</span></button>
+                        <button id="profile_tab" class="tablinks account-reg profile active opercity" onclick="openCity(event, 'profile_amount')"><span class="lang" key="profile">PROFILE</span></button>
                         <button id="change_password_tab" class="tablinks account-reg change_password opercity" onclick="openCity(event, 'change_passwrd_amount')">
-                            <span class="lang" key="change_title">CHANGE PASSWORD</span>
+                            <span class="lang" key="change_password">CHANGE PASSWORD</span>
                         </button>
 
                     </div>
@@ -1059,7 +1059,7 @@
 
                     <div id="profile_amount" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display:block;">
                         <div class="info-form marginb-none">
-                            <h4 class="profile-sub bg-no-repeat symbol blk-text lang" key="profile_title">Profile</h4>
+                            <h4 class="profile-sub bg-no-repeat symbol blk-text lang" key="profile">Profile</h4>
                         </div>
                         <div class="row ml0 mr0">
                             <div class="col-md-10 col-lg-9">
@@ -1067,34 +1067,18 @@
                                     <div class="pad-lr-comman">
                                         <h5 class="blk-text no-mar lang" key="profile_change_password">My Profile</h5>
                                         <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
-                                            @*<li class="mar-btm-fifteen">
-                                                    <label class="fleft">
-                                                        <p class="big no-mar lang" key="profile_current_password">Email :</p>
-                                                    </label>
-                                                    <label class="fright mar-btm-no lock">
-                                                        <input type="text" class="reg-form" placeholder="" value="">
-                                                    </label>
-                                                </li>*@
                                             <li class="mar-btm-fifteen">
                                                 <label class="fleft">
-                                                    <p class="big no-mar lang" key="profile_new_password">User Name:</p>
+                                                    <p class="big no-mar lang" key="username">User Name:</p> 
                                                 </label>
                                                 <label class="fright lock">
                                                     <input type="text" class="reg-form" placeholder="Author" id="profile_username">
                                                 </label>
                                             </li>
-                                            @*<li class="mar-btm-fifteen">
-                                                    <label class="fleft">
-                                                        <p class="big no-mar lang" key="profile_confirm_password">Date of Birth :</p>
-                                                    </label>
-                                                    <label class="fright lock">
-                                                        <input type="text" class="reg-form" placeholder="1988-12-18" id="datepicker4">
-                                                    </label>
-                                                </li>*@
 
                                             <li class="mar-btm-fifteen">
                                                 <label class="fleft">
-                                                    <p class="big no-mar lang" key="profile_confirm_password">Contact Number :</p>
+                                                    <p class="big no-mar lang" key="">Contact Number :</p>
                                                 </label>
                                                 <label class="fright lock">
                                                     <input type="text" class="reg-form" placeholder="*****9178" id="profile_mobileNumber">
@@ -1102,7 +1086,7 @@
                                             </li>
                                             <li class="mar-btm-fifteen">
                                                 <label class="fleft">
-                                                    <p class="big no-mar lang" key="profile_confirm_password">Full Name :</p>
+                                                    <p class="big no-mar lang" key="profile_full_name">Full Name :</p>
                                                 </label>
                                                 <label class="fright lock">
                                                     <input type="text" class="reg-form" placeholder="Ng Chin Ye" id="profile_fullname">
@@ -1121,24 +1105,7 @@
                                                     <p class="big no-mar lang">Banking Details:</p>
                                                 </label>
                                                 <label class="fright bank-name mendatory" id="users_bank_details">
-                                                    @*<div class="bank_details1">
-                                                            <div class="bank_details1_icon_box">
-                                                                <img src="~/images/bankdetails1.png" class="bank_details_icon">
-                                                            </div>
-                                                            <div class="bank_details1-text">
-                                                                <h1>154812233444 <span class="tickgray"><img src="~/images/tickgray.png"></span></h1>
-                                                                <p><a href="#">Ng Chin Ye</a></p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="bank_details2">
-                                                            <div class="bank_details2_icon_box">
-                                                                <img src="~/images/bankdetails2.png" class="bank_details_icon">
-                                                            </div>
-                                                            <div class="bank_details2-text">
-                                                                <h1>154812233444 <span class="tickgray"><img src="~/images/tickgray.png"></span></h1>
-                                                                <p><a href="#">Ng Chin Ye</a></p>
-                                                            </div>
-                                                        </div>*@
+                                                 
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">
@@ -1153,7 +1120,7 @@
                                         <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
                                             <li class="mar-btm-fifteen pad-top-ten pad-btm-ten">
                                                 <label class="fleft">
-                                                    <p class="big no-mar lang">Username :</p>
+                                                    <p class="big no-mar lang" key="username">Username :</p>
                                                 </label>
                                                 <label class="fright">
                                                     <p class="big no-mar"><strong><span id="login_username"></span></strong></p>
@@ -1161,7 +1128,7 @@
                                             </li>
                                             <li class="mar-btm-fifteen pad-top-ten pad-btm-ten">
                                                 <label class="fleft">
-                                                    <p class="big no-mar lang">Full Name :</p>
+                                                    <p class="big no-mar lang"  key="profile_full_name">Full Name :</p>
                                                 </label>
                                                 <label class="fright">
                                                     <p class="big no-mar"><strong><span id="fullname"></span></strong></p>
@@ -1169,7 +1136,7 @@
                                             </li>
                                             <li class="mar-btm-fifteen">
                                                 <label class="fleft">
-                                                    <p class="big no-mar lang">Mobile :</p>
+                                                    <p class="big no-mar lang"  key="profile_mobile">Mobile :</p>
                                                 </label>
                                                 <label class="fright tel-icon">
                                                     <input type="number" class="reg-form" placeholder="60167896532" id="mobile_number">
@@ -1178,7 +1145,7 @@
                                             <li class="mar-btm-fifteen">
                                                 <div class="fright">
                                                     <button class="submit" data-toggle="modal" data-target="#mobilenumber_update">
-                                                        <span>UPDATE PERSONAL DETAILS</span>
+                                                        <span class="lang" key="profile_update_personal_details">UPDATE PERSONAL DETAILS</span>
                                                     </button>
                                                 </div>
                                             </li>
