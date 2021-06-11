@@ -372,6 +372,12 @@ export class PromotionAddComponent implements OnInit {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectDesktopBannerImage);
         }
+
+        if (this.discountTypeId == this.Type[2].id &&
+            this.promotionFixedBonusAmount == null) {
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseAddPromotionFixedBonusAmount);
+        }
+
         this.adminService.add<any>(customer.promotionAdd, dataSelect).subscribe(res => {
             this.uploadFile(res.data);
         }, error => {

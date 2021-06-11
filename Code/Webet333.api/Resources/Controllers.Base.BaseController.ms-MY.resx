@@ -428,6 +428,9 @@ Sila Hubungi Perkhidmatan Pelanggan kami jika anda mempunyai pertanyaan. Anda bo
     <value>Permintaan anda telah berjaya dihantar.</value>
   </data>
   <data name="sql_error_promotionfixedbonusamount" xml:space="preserve">
-    <value>Untuk Promosi Anda Yang Memohon, Hanya Izinkan Jumlah Deposit:</value>
+    <value>Untuk anda yang mempromosikan promosi ini, hanya izinkan deposit tersebut Jumlah:</value>
+  </data>
+  <data name="sql_error_promotionmindepositamount" xml:space="preserve">
+    <value>Untuk anda yang memohon promosi ini, jumlah deposit minimum: RM</value>
   </data>
 </root>

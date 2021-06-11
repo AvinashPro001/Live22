@@ -428,6 +428,9 @@
     <value>您的请求已成功提交。</value>
   </data>
   <data name="sql_error_promotionfixedbonusamount" xml:space="preserve">
-    <value>对于您的申请促销，只允许这些存款金额：</value>
+    <value>对于您申请此促销活动，只允许这些存款金额：</value>
+  </data>
+  <data name="sql_error_promotionmindepositamount" xml:space="preserve">
+    <value>对于您申请此促销活动，最低存款金额： RM</value>
   </data>
 </root>
