@@ -108,7 +108,6 @@ export class DepositAddComponent implements OnInit {
 
     //#region onChange
     onChange(event) {
-        debugger
         this.newVal = event.value.id;
         this.userPassword = event.value.password;
         this.retriveUserbank(this.newVal);
