@@ -113,6 +113,7 @@ export class TransferAddComponent implements OnInit {
 
     //#region onChange
     onChange(event) {
+        debugger
         this.newVal = event.value.id;
         this.userPassword = event.value.password;
         this.retriveUserbank(this.newVal);
@@ -154,8 +155,10 @@ export class TransferAddComponent implements OnInit {
 
     //#region customerUser
     customerUser() {
-        var model = {};
-        this.adminService.add<any>(customer.customerList, model).subscribe(res => {
+        let model = {
+            role: "user"
+        };
+        this.adminService.add<any>(customer.customerListForDropdown, model).subscribe(res => {
             this.customerData = res.data;
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
