@@ -6084,9 +6084,9 @@ iframe {
     }
 }
 
-.viplevelImage {
-    width: 50px;
-    margin: -15px;
+.viplevelImage{
+    width:25px;
+    margin:0px;
 }
 
 .chip-margin li {

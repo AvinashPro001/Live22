@@ -7,7 +7,6 @@ export const environment = {
     production: false,
     apiUrl: 'http://api.webet333.com/api/v1/'
     //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:5000/api/v1/'
     //apiUrl: 'http://localhost:8091/api/v1/'
 };
 
