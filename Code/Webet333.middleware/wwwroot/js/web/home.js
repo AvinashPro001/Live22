@@ -12,10 +12,9 @@ let SiteData = {
 //#endregion
 
 //#region OnLoad Function
-
+SetLanguage();
 $(document).ready(function () {
     if (GetSessionStorage("siteData") == null) SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
-    if (GetLocalStorage('language') === null) SetLocalStorage('language', 'en-US');
     ChangeLanguageText();
     if (localStorage.getItem('IsExecute') == "true" || localStorage.getItem('IsExecute') == true || localStorage.getItem('IsExecute') == null) localStorage.setItem('IsExecute', false);
     SetLocalStorage("IsSedularExecute", false);
@@ -312,6 +311,29 @@ async function GetWalletList() {
 //#endregion
 
 //#endregion
+
+function SetRefKeyword() {
+    var url_string = window.location.href.toLowerCase();
+    var url = new URL(url_string);
+    var name = url.searchParams.get("ref");
+    if (name !== null) {
+        SetCookie("ref", name, 1000);
+    }
+    else {
+        SetCookie("ref", null, 1000);
+    }
+}
+
+function SetLanguage() {
+    var url_string = window.location;
+    var url = new URL(url_string);
+    url.href = url.href.toLowerCase();
+    var Langauge = url.searchParams.get("lang");
+    if (Langauge != null)
+        SetLocalStorage('language', Langauge == "cn" ? "zh-Hans" : (Langauge == "my" ? "ms-MY" : "en-US"));
+    else
+        if (GetLocalStorage('language') === null) SetLocalStorage('language', 'en-US');
+}
 
 function ChangeLanguageText() {
     $.ajax({

@@ -1,4 +1,4 @@
-﻿var baseUrl = "http://47.242.143.182/api/v1/";
+﻿var baseUrl = "http://47.242.143.182:8081/api/v1/";
 
 var apiEndPoints = {
     //login: "account/login",
@@ -157,6 +157,10 @@ var accountEndPoints = {
     gameRegisterCheck: "Game/SelectUser",
     promotionApplyCheck: 'promotions/promotionapply/check',
     depositCheckWithoutPromotion: 'payments/checkdepositwithoutpromotion',
+    LoginRegisterTracking: "account/tracking/insert",
+    getUserByMobile: "account/getuser",
+    SendOTP: "account/send/otp",
+    VerifiedOTP: "account/verified/otp",
 };
 
 var promotionEndPoints = {

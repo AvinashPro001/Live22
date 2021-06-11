@@ -1039,3 +1039,11 @@ async function AllInWallet(WalletName) {
     await PostMethod(transactionEndPoints.allInWallet, model);
     LoadBalanceBasedOnWalletNameAsync(WalletName);
 }
+
+async function UpdateAutoTransfer() {
+    let model = {
+        autoTransfer: $("#auto_transfer_checkbox").prop("checked")
+    };
+    await PostMethod(accountEndPoints.updateProfile, model);
+    await GetProfileAndSetInSessionStorage()
+}

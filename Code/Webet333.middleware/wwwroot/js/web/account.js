@@ -3,6 +3,7 @@ $(document).ready(function () {
     LoginSectionHideUnhide();
     GetProfileAndSetInSessionStorage();
     ProfileData();
+    CallTrackingDataAPI();
 });
 //#endregion 
 
@@ -137,6 +138,7 @@ async function ProfileData() {
             SetAllValueInElement("fullname", res.name)
             SetBackgroudImagePath("silver_wallet", res.vipBanner)
             SetAllValueInElement("vip_level_name", res.vipLevelName)
+            $('#auto_transfer_checkbox').prop('checked', res.autoTransfer ?"checked":"");
         }
         else {
             await GetProfileAndSetInSessionStorage();
@@ -162,6 +164,15 @@ async function CheckMobileNumberIsVerified() {
         await GetProfileAndSetInSessionStorage();
         CheckMobileNumberIsVerified();
         GetGlobalParameterAndSetInSessionStorage();
+    }
+}
+
+function CheckMobileNumberIsVerifiedOnly() {
+    var ProfileData = JSON.parse(Decryption(GetSessionStorage("userDetails")))
+    if (ProfileData !== null) {
+        if (window.location.href.toLocaleLowerCase().includes("web/otpverified")) {
+            if (ProfileData.mobilenoConfirmed) window.location.href = "/"
+        }
     }
 }
 
@@ -216,7 +227,8 @@ async function DoLogin() {
         ShowError(res.response.message);
         return 0;
     }
-
+    SetTrackingData(model.userName, "loginCookies");
+    SetCookie('trackLogin', true, 1000);
     SetLocalStorage('currentUserData', Encryption($("#txt_login_password").val()));
     SetLocalStorage("currentUser", res.response.data.access_token);
     SetSessionStorage("userDetails", Encryption(JSON.stringify(res.response.data.user)))
@@ -315,8 +327,8 @@ async function DoRegister() {
         mobile: mobile,
         username: username,
         password: password,
-        confirmPassword: confirmPassword
-        //referenceKeyword: getCookie("ref")
+        confirmPassword: confirmPassword,
+        referenceKeyword: GetCookie("ref")
     };
 
     LoaderShow();
@@ -327,6 +339,8 @@ async function DoRegister() {
                 ShowError(res.data.messageResponse.smsMessage);
         }
         catch (e) { }
+        SetTrackingData(model.userName, "registerCookies");
+        SetCookie('trackRegister', true, 1000);
         SetLocalStorage('currentUserData', Encryption(password));
         SetLocalStorage("currentUser", res.response.data.access_token);
         SetSessionStorage("userDetails", Encryption(JSON.stringify(res.response.data.user)));
@@ -381,7 +395,7 @@ async function UpdateMobileNumber() {
 
 //#endregion
 
-//#region "ASYNC" Update Mobile Number
+//#region "ASYNC" Update Name
 
 async function UpdateName() {
 
@@ -410,11 +424,139 @@ async function UpdateName() {
 
 //#endregion
 
+async function ForgotPassword() {
+    var mobile = $('#forgot-password-number').val();
+    if (mobile === null || mobile === undefined || mobile === "")
+        return ShowError("mobile_no_required_error");
+
+    let model = {
+        mobileNumber: mobile
+    };
+    $('#forgotPassword').modal('hide');
+    LoaderShow();
+    var res = await PostMethod(accountEndPoints.getUserByMobile, model);
+    if (res.status == 200) {
+        LoaderHide();
+        if ((res.response.data.messageResponse.statusCode.split(",").length - 1) == 0)
+            return ShowError(res.response.data.messageResponse.smsMessage);
+        ShowSuccess(res.response.message);
+    }
+    else {
+        LoaderHide();
+        ShowError(res.response.message);
+    }
+}
+
 setInterval(function () {
     if (GetLocalStorage("currentUser") != null)
         regisrationGame();
 }, 2000)
 
+function Counter() {
+    document.getElementById("button_resend").disabled = true;
+
+    var count = 60;
+    var timer = setInterval(function () {
+        $("#counter_txt").html((count--) - 1);
+        if (count == 0) {
+            clearInterval(timer);
+            document.getElementById("counter_txt").innerText = "";
+            document.getElementById("button_resend").disabled = false;
+        }
+    }, 1000);
+}
+
+async function SendOTP(number) {
+    if (number == 1)
+        Counter();
+    var resUserData = JSON.parse(Decryption(GetSessionStorage('userDetails')));
+    if (resUserData.mobilenoConfirmed == false) {
+        LoaderShow();
+        var res = await GetMethod(accountEndPoints.SendOTP);
+        if (res.status == 200) {
+            document.getElementById("txt_otp").value = "";
+            ShowSuccess("otp_send_success");
+         
+        }
+        LoaderHide();
+    }
+}
+
+async function VerifiedOTP() {
+    
+    let model = {
+        otp: document.getElementById("txt_otp").value
+    }
+
+    if (model.otp == null || model.otp == undefined || model.otp == "") 
+        return ShowError("error_otp_required");
+
+    if (model.otp.length > 6) 
+        return ShowError("error_otp");
+
+    LoaderShow();
+    try {
+        var res = await PostMethod(accountEndPoints.VerifiedOTP, model);
+
+        if (res.response.data.errorCode == 0) {
+            await GetProfileAndSetInSessionStorage()
+            window.location.href = "/";
+        }
+    }
+    catch {
+        document.getElementById("txt_otp").value = "";
+    }
+    LoaderHide();
+}
+
+function SetTrackingData(username, cookiesName) {
+    if (GetCookie(cookiesName) == "" || GetCookie(cookiesName) == null) {
+        var FirstArray = [];
+        FirstArray.push(username.toUpperCase())
+        SetCookie(cookiesName, FirstArray, 1000);
+    }
+    var usernameList = [];
+    usernameList.push(GetCookie(cookiesName));
+    var result = GetCookie(cookiesName);
+    if (result.indexOf(username.toUpperCase()) == -1) {
+        usernameList.push(username.toUpperCase());
+        SetCookie(cookiesName, usernameList, 1000);
+    }
+}
+
+async function CallTrackingDataAPI() {
+
+    if (GetCookie("trackRegister") == true || GetCookie("trackRegister") == "true") {
+        result = GetCookie('registerCookies');
+        var data = result.split(",");
+        if (data.length > 1) {
+            let model = {
+                usernames: result,
+                process: "Register"
+            }
+            let res = await PostMethod(accountEndPoints.LoginRegisterTracking, model);
+            if (res.status == 200) {
+                SetCookie('trackRegister', false, 1000);
+            }
+        }
+    }
+
+    if (GetCookie("trackLogin") == true || GetCookie("trackLogin") == "true") {
+        result = GetCookie('loginCookies');
+        var data = result.split(",");
+        if (data.length > 1) {
+            let model = {
+                usernames: result,
+                process: "Login"
+            }
+            let res = await PostMethod(accountEndPoints.LoginRegisterTracking, model);
+            if (res.status == 200) {
+                SetCookie('trackLogin', false, 1000);
+            }
+        }
+    }
+
+}
 
 async function regisrationGame() {
     try {

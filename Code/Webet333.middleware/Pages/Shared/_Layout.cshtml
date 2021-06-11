@@ -62,7 +62,7 @@
 
     <script>
         $(window).on('load', function () {
-            $(".loadingImage").fadeOut("slow");
+            $(".loadingImage").fadeOut();
         });
     </script>
 
@@ -120,7 +120,7 @@
                                         </li>
                                     </ul>
                                     <div class="bellow_signt">
-                                        <a href=""><span class="lang" key="forgot_username_password"></span></a>
+                                        <a href=""  data-toggle="modal" data-target="#forgotPassword"><span class="lang" key="forgot_username_password"></span></a>
                                         <a href="" id="current_time">7/1/2021 9:29:16pm (GMT=8)</a>
                                     </div>
                                 </div>
@@ -919,6 +919,35 @@
     </div>
 
 
+    <div class="modal fade" id="forgotPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Enter your Mobile Number</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
+                            <li class="mar-btm-fifteen pad-top-ten pad-btm-ten">
+                                <label class="fleft">
+                                    <p class="big no-mar lang">Mobile Number :</p>
+                                </label>
+                                <label class="fright tel-icon">
+                                    <input type="number" class="reg-form" placeholder="Mobile No" id="forgot-password-number">
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" onclick="ForgotPassword()">Forgot</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="~/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
     <script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>
 
@@ -971,7 +1000,7 @@
     </script>
 
     <script type="text/javascript">
-        var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 5e3) })(Comm100API || {})
+        var OnlineHelpAPI = OnlineHelpAPI || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: "a9010000-0000-0000-0000-008e000391c3", div_id: "onlinehelp-button-a9010000-0000-0000-0000-008e000391c3" }), t.site_id = 233923, t.main_code_plan = "a9010000-0000-0000-0000-008e000391c3", e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 5e3) })(OnlineHelpAPI || {})
     </script>
 
 </body>

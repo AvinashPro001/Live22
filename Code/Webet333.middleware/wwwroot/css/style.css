@@ -1930,7 +1930,7 @@ p.bonus_content a{color: #333;}
 .all_slot_game_boxes:hover p:last-child     { transform: translateY(100%); min-height: 0px; opacity: 0; height: 0; padding: 0px; }
 .slot-game-img-box:hover .overlay           { height: 100%; }
 .slot-game-img-box:hover img                { transform: scale(0.9); transition: 0.5s; }
-div#playtechSlotsGameList .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
+div#All_slot .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 .all_slot_game_boxes:hover                  { transform: scale(1.2); transform-origin: center; transition: 0.5s; position: relative; z-index: 9; }
 
 /* Slot page banner start */
