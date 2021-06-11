@@ -111,7 +111,6 @@ body {
     }
 }
 
-
 * {
     outline: 0
 }
@@ -525,8 +524,6 @@ header {
     bottom: -35px
 }
 
-
-
 .navbar > .container .navbar-brand {
     margin-left: 0;
     padding: 0px 0px 15px;
@@ -541,8 +538,6 @@ header {
     width: 100%;
     max-width: 465px
 }
-
-
 
 .restore-btn button {
     padding: 0px 10px;
@@ -1986,7 +1981,6 @@ label.mar-btm-no {
     border-color: grey;
 }
 
-
 .about-icon:before {
     content: '\f05a'
 }
@@ -2565,7 +2559,6 @@ label.mar-btm-no {
     text-align: center
 }
 
-
     .fake-upload-btn input[type=file] {
         position: absolute;
         top: 0;
@@ -2863,7 +2856,6 @@ label.mar-btm-no {
     margin-top: -110px;
 }
 
-
 .profile-page .profile:before {
     background-image: url(../images/profile-blue.png)
 }
@@ -2960,7 +2952,7 @@ label.bank-list-deposit {
 #Withdrawal .bank-selection ul li figure {
     border: 1px solid #858585;
     border-radius: 4px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 #Withdrawal .bank-selection ul li.active figure {
@@ -3662,8 +3654,6 @@ ul.highlight-bank li.active figure {
     position: relative;
 }
 
-
-
 .promotion-choose label:last-child > p {
     display: inline-block;
     vertical-align: middle
@@ -3802,7 +3792,6 @@ header .tooltip-inner {
 .bank-selection ul.bank-listing.step-2-desc li label {
     width: 100%;
 }
-
 
 /* Media Start */
 
@@ -5088,10 +5077,24 @@ header .tooltip-inner {
         float: none;
         margin-top: 10px
     }
-    .transfer-ammount .no-mar-top.transfer-max { margin-top: 0px;}
-    .transfer-max a                             { font-size: 12px; text-transform: uppercase; }
-    .password-upadte .transfer-btns .fleft      { width: 55%;}
-    .password-upadte .transfer-btns .fright     { width: auto; }
+
+    .transfer-ammount .no-mar-top.transfer-max {
+        margin-top: 0px;
+    }
+
+    .transfer-max a {
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    .password-upadte .transfer-btns .fleft {
+        width: 55%;
+    }
+
+    .password-upadte .transfer-btns .fright {
+        width: auto;
+    }
+
     .deposit-section .bank-entry > li {
         width: 100%
     }
@@ -5201,7 +5204,6 @@ header .tooltip-inner {
             margin-top: 10px;
         }
 
-
     .promotion-choose {
         grid-template-columns: repeat(2,1fr);
     }
@@ -5295,11 +5297,6 @@ header .tooltip-inner {
     }
 }
 
-
-
-
-
-
 .home-banner-lable {
     position: absolute;
     top: -10px;
@@ -5356,7 +5353,6 @@ header .tooltip-inner {
     border-radius: 10px
 }
 
-
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
@@ -5378,7 +5374,6 @@ header .tooltip-inner {
     ::-webkit-scrollbar-thumb:hover {
         background: rgba(36,122,174,.7);
     }
-
 
 .dropbtn {
     background-color: #d75d1c;
@@ -5418,7 +5413,6 @@ header .tooltip-inner {
         display: block;
     }
 
-
 .show {
     display: block;
 }
@@ -5457,8 +5451,10 @@ header .tooltip-inner {
 
         #error_snackbar.show {
             visibility: visible;
-            -webkit-animation: fadein 0.3s, fadeout 0.3s 2.5s;
-            animation: fadein 0.3s, fadeout 0.3s 2.5s;
+            /*-webkit-animation: fadein 0.3s, fadeout 0.3s 2.5s;
+            animation: fadein 0.3s, fadeout 0.3s 2.5s;*/
+            -webkit-animation: fadein 0.7s, fadeout 0.7s 6.5s;
+            animation: fadein 0.7s, fadeout 0.7s 6.5s;
         }
 
     @-webkit-keyframes fadein {
@@ -5550,8 +5546,10 @@ header .tooltip-inner {
 
         #error_snackbar.show {
             visibility: visible;
-            -webkit-animation: fadein 0.3s, fadeout 0.3s 2.5s;
-            animation: fadein 0.3s, fadeout 0.3s 2.5s;
+            /*-webkit-animation: fadein 0.3s, fadeout 0.3s 2.5s;
+            animation: fadein 0.3s, fadeout 0.3s 2.5s;*/
+            -webkit-animation: fadein 0.7s, fadeout 0.7s 6.5s;
+            animation: fadein 0.7s, fadeout 0.7s 6.5s;
         }
 
     @-webkit-keyframes fadein {
@@ -5620,8 +5618,6 @@ header .tooltip-inner {
         padding-bottom: 16px;
     }
 }
-
-
 
 @media (min-width:720px) {
     #success_snackbar {
@@ -5849,7 +5845,6 @@ input[type=number] {
     -moz-appearance: textfield
 }
 
-
 .menu-btn {
     background-color: #0166d2;
     width: 135px;
@@ -5880,7 +5875,6 @@ body {
 .menu-game-logo {
     max-width: 100px;
 }
-
 
 .layout-btn:hover {
     opacity: 0.8;
@@ -6010,7 +6004,6 @@ body {
     line-height: 35px;
 }
 
-
 #promotionExpieryModel img {
     width: 100px;
     height: 100px;
@@ -6025,15 +6018,16 @@ body {
     margin-top: 20px;
 }
 
-.overflow-x-history-tab{
-    overflow-x:scroll;
+.overflow-x-history-tab {
+    overflow-x: scroll;
 }
 
-.withdrawamount-model-width{
-    width:60%;
+.withdrawamount-model-width {
+    width: 60%;
 }
-.total-available-withdraw-amount{
-    font-weight:800;
+
+.total-available-withdraw-amount {
+    font-weight: 800;
 }
 
 .list-style.d-flex {
@@ -6059,10 +6053,9 @@ body {
     display: flex;
 }
 
-iframe{
-    width:100%;
-    height:100%;
-
+iframe {
+    width: 100%;
+    height: 100%;
 }
 
 .box-model {
@@ -6076,15 +6069,14 @@ iframe{
     background-color: transparent;
     font-size: 20px;
     color: white;
-    top:0px;
+    top: 0px;
     border-color: white;
 }
 
-.box-model-div{
-    position:relative;
-    display:none;
+.box-model-div {
+    position: relative;
+    display: none;
 }
-
 
 @media only screen and (max-width: 600px) {
     .reg-form {
@@ -6098,5 +6090,5 @@ iframe{
 }
 
 .chip-margin li {
-    text-align:center;
+    text-align: center;
 }
