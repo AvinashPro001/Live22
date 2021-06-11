@@ -145,7 +145,7 @@ namespace Webet333.api.Helpers
 
         #region Call Get Bet Limit 3rd Party API
 
-        public static async Task<YEEBETResponse> GetBetLimitAsync()
+        internal async Task<YeeBetGetBetLimitResponse> GetBetLimitAsync()
         {
             var temp = $"appid={GameConst.YEEBET.APPId}";
 
@@ -155,29 +155,49 @@ namespace Webet333.api.Helpers
 
             var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.GetBetLimit}?{Parameter}";
 
-            return JsonConvert.DeserializeObject<YEEBETResponse>(await GameHelpers.CallThirdPartyApi(Url));
+            var result = JsonConvert.DeserializeObject<YeeBetGetBetLimitResponse>(await GameHelpers.CallThirdPartyApi(Url));
+
+            return result;
         }
 
-        #endregion Call Login 3rd Party API
+        internal List<YeeBetGetBetLimitResponseArray> AddNameInGetBetLimitResponse(YeeBetGetBetLimitResponseArray[] response)
+        {
+            for (int i = 0; i < response.Count(); i++)
+            {
+                response[i].Name += i + 1;
+            }
+
+            return response.ToList();
+        }
+
+        internal async Task SaveGetBetLimitAsync(List<YeeBetGetBetLimitResponseArray> response)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.YEEBET.SaveGetBetLimit, response);
+            }
+        }
+
+        #endregion Call Get Bet Limit 3rd Party API
 
         #region Call Set Bet Limit 3rd Party API
 
         public static async Task<YEEBETResponse> SetBetLimitAsync(YeeBetSetBetLimitRequest request)
         {
             var temp = $"appid={GameConst.YEEBET.APPId}&" +
-                $"qids=1&" +
+                $"qids={request.QIds}&" +
                 $"username={request.Username}";
 
             var tempMD5 = SecurityHelpers.MD5EncrptText($"{temp}&key={GameConst.YEEBET.SecretKey}");
 
             var Parameter = $"{temp}&sign={tempMD5}";
 
-            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.GetBetLimit}?{Parameter}";
+            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.SetBetLimit}?{Parameter}";
 
             return JsonConvert.DeserializeObject<YEEBETResponse>(await GameHelpers.CallThirdPartyApi(Url));
         }
 
-        #endregion Call Login 3rd Party API
+        #endregion Call Set Bet Limit 3rd Party API
 
         #region House Keeping
 

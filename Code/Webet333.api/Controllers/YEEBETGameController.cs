@@ -104,9 +104,22 @@ namespace Webet333.api.Controllers
         {
             await CheckUserRole();
 
-            var result = await YEEBETGameHelpers.GetBetLimitAsync();
+            using (var YEEBETGame_Helpers = new YEEBETGameHelpers(Connection))
+            {
+                var result = await YEEBETGame_Helpers.GetBetLimitAsync();
 
-            return OkResponse(result);
+                if (result.Result == 0 &&
+                    result.Arraysize > 0)
+                {
+                    var temp = YEEBETGame_Helpers.AddNameInGetBetLimitResponse(result.Array.ToArray());
+
+                    await YEEBETGame_Helpers.SaveGetBetLimitAsync(temp);
+
+                    return OkResponse(temp);
+                }
+
+                return OkResponse(result);
+            }
         }
 
         #endregion Get Bet Limit
@@ -116,7 +129,7 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.YEEBET.SetBetLimit)]
         public async Task<IActionResult> SetBetLimitAsync([FromBody] YeeBetSetBetLimitRequest request)
         {
-            await CheckUserRole();
+            //await CheckUserRole();
 
             var result = await YEEBETGameHelpers.SetBetLimitAsync(request);
 

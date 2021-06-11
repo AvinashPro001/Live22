@@ -592,6 +592,8 @@
         public class YEEBET
         {
             public const string Register = "[dbo].[Users_Insert_YEEBET]";
+
+            public const string SaveGetBetLimit = "[dbo].[SetBet_Limit_YeeBet]";
         }
     }
 }
