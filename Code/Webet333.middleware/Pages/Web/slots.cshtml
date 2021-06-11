@@ -135,32 +135,38 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="leftProfileButon1">
-                                    <ul>
-                                        <li><a class="tablinks_health active" onclick="openCity1(event, 'All_slot')">All</a></li>
-                                        <li><a class="tablinks_health" onclick="openCity1(event, 'hot_slot')">Hot</a></li>
-                                        <li>
-                                            <a class="tablinks_health" onclick="openCity1(event, 'new_slot')">New</a>
-                                        </li>
-                                        <li>
-                                            <a class="tablinks_health" onclick="openCity1(event, 'slot_slots')">Slots</a>
-                                        </li>
-                                        <li>
-                                            <a class="tablinks_health" onclick="openCity1(event, 'arcade_slots')">Arcade</a>
-                                        </li>
-                                        <li>
-                                            <div class="searchbar_bar_info">
-                                                <input type="text" placeholder="Search.." name="search">
-                                                <button type="submit">
-                                                    <img src="~/images/search.png" style="width:20px;">
-                                                </button>
-                                            </div>
-                                        </li>
-
-                                    </ul>
+                                   
                                 </div>
                                 <div class="genaral_wrapp1">
                                     <div id="All_slot" class="tabcontent_health" style="display: block;">
                                         <div class="row second_row_slot_game_wrap mr0 ml0" id="agSlotsGameList">
+                                            <div class="inner_game_banner_wrap"> 
+                                                <div class="inner_game_banner_box"> 
+                                                </div>
+                                                <div class="slot_bottom_boxs">
+                                                    <div class="slot_inner_common_box"> <img src="~/images/carousel_logos/mega_color.png" alt="MEGA-LOGO"></div>
+                                                    <div class="slot_inner_common_box"> 
+                                                        <div class="form-group ml0 mr0 slot_inner_formfield">
+                                                            <label class="user-title">Username</label>
+                                                            <label class="user mendatory ">
+                                                                <input type="text" class="reg-form" placeholder="" id="slot_txt_username" />
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-group ml0 mr0 slot_inner_formfield">
+                                                            <label class="user-title ">Password</label>
+                                                            <label class="lock mendatory ">
+                                                                <input type="password" class="reg-form" placeholder="" id="slot_txt_password" />
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="slot_inner_common_box">
+                                                        <p>Instructions</p>
+                                                        <p>Login ID and password on the left  side(<) and tutorial on the right side(>);</p>
+                                                    </div>                                                        
+                                                </div>
+                                            </div><!-- inner_game_banner_wrap ends -->
                                         </div>
 
                                     </div>
