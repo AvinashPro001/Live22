@@ -290,7 +290,6 @@ function ConvertBalanceIntoCommasValue(amount) {
 async function GetDailyTurnover() {
     let model = {}
     var res = await PostMethod(accountEndPoints.userTotalTurnover, model)
-    console.log(res);
     if (res.status == 200) {
         SetAllValueInElement("total_turnover", FormatBalance(res.response.data.total))
         SetAllValueInElement("joker_turnover", FormatBalance(res.response.data.response.jokerWinover))
