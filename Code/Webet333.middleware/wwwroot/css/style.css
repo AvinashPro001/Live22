@@ -1338,7 +1338,7 @@ body {font-family: arial, sans-serif!important; }
 .layout-btn:hover {opacity: .8; }
 .in-wallet-chips {border-radius: 6px; padding: 5px 5px 0; border: 1px solid #bfbfbf; background-color: #fff; box-shadow: 0 1px 20px #aaa; margin-bottom: 15px; }
 .chip-margin {overflow: hidden; display: flex; justify-content: space-between; align-items: center; padding: 0 14px; }
-.box-title {display: flex; background-color: #dddddd; margin: 0 -5px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; justify-content: space-between; align-items: center; padding: 5px 14px; }
+.box-title {display: flex; background-color: #dddddd; margin: 0 -5px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; justify-content: space-between; align-items: center; padding: 5px 10px; }
 .btn-default-border {font-size: 12px; line-height: 15px; padding: 5px 10px; border-color: #0067d0; color: #0067d0; }
 .list-style {margin: 0; }
 .total-turnover {border-radius: 6px; box-shadow: 0 1px 20px #aaa; margin-bottom: 10px; padding: 0 10px; }
@@ -1464,7 +1464,7 @@ li.step5bg a img{width: 100%; /* min-height: 94px; */ height: 80px; object-fit: 
 .telegram_support p a{font-size: 13px;color:#404040;font-weight: 500;}
 .casino_tabb_section{width: 100%;float: left;padding: 10px 10px;}
 .casino_profile_wrapper{width: 100%;float: left;padding:0px 0px 20px 0px;}
-.leftProfileButon{width: 20%;float: left;border-radius: 5px; -webkit-box-shadow: 0 0 5px 1px rgb(0 0 0 / 10%); box-shadow: 0 0 5px 1px rgb(0 0 0 / 10%);background-color: #f4f4f4;min-height:378px;border:1px solid #c7c7c7;}
+.leftProfileButon{width: 20%;float: left;border-radius: 5px; -webkit-box-shadow: 0 0 5px 1px rgb(0 0 0 / 10%); box-shadow: 0 0 5px 1px rgb(0 0 0 / 10%);background-color: #f4f4f4;min-height:395px;border:1px solid #c7c7c7;}
 .genaral_wrapp {width: 78%; float: left; border-radius: 0px; -webkit-box-shadow: 0 0 5px 1px #ededec; box-shadow: 0 0 5px 1px #ededec; padding:0px 0px 0px 0px; margin-left: 2%; background-color: #f4f4f4; border:1px solid #c7c7c7; }
 .leftProfileButon ul{padding-left: 0px;margin-bottom: 0px;}
 .leftProfileButon ul li a {padding: 15px 17px; display: block; font-size: 13px; font-weight: 500; color: #242424; width: 100%; cursor: pointer; border-bottom: 1px solid #c7c7c7; }
@@ -1512,7 +1512,7 @@ li.step5bg a img{width: 100%; /* min-height: 94px; */ height: 80px; object-fit: 
 .wb3_welcome_boxes{width: 100%;float: left;}
 .wb3_welcome_boxes h1{color: #8b8b8b;font-size: 13px;font-weight: 600;line-height: normal;}
 .wb3_welcome_boxes p{color: #a4a4a4;font-size: 13px;margin-bottom: 0px;padding: 10px 0px 15px 0px;}
-.flag_nsd img{width: 100%;}
+.flag_nsd img{width: 25px;}
 .contact-us-btn1 {position: fixed; left: 0px; top: 120px; /*top: 79px;*/ z-index: 999; }
 .contact-user1 {cursor: pointer; }
 .contact-us-btn1 .contact-user1 {transform: rotate(-90deg); font-size: 24px; color: #fff; display: block; position: absolute; top: 0; overflow: hidden; left: calc(100% + -170px); width: 170px; transform-origin: 100% 0; /* line-height: 60px; */ line-height: 45px; text-transform: uppercase; text-align: right; padding-right: 20px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
@@ -1719,7 +1719,7 @@ border-bottom: 1px solid #e4bb52; }
 box-shadow: 0 0 5px 1px rgb(0 0 0 / 10%);*/}
 .benefits_referal_genaral_wrapp {width: 100%; float: left; background-color: #151515; /*-webkit-box-shadow: 0 0 5px 1px #ededec; box-shadow: 0 0 5px 1px #ededec;*/ padding:0px 0px 20px 0px; margin-left:0px; }
 .benefits_referal_left ul{padding-left: 0px;width: 100%;float: left;margin-bottom: 0px;}
-.benefits_referal_left ul li{width: 33.333%;float: left;}
+.benefits_referal_left ul li{width: 50%;float: left;}
 .benefits_referal_left ul li a {padding: 16px 20px; display: block; font-size: 16px; font-weight: 600; color: #fefefe; width: 100%; cursor: pointer; float: left; text-align: center; background: #373737; border-right: 2px solid #222222; }
 .benefits_referal_left ul li .active {color: #000; }
 .benefits_referal_left .tablinks {float: none !important; }
@@ -1945,4 +1945,5 @@ div#All_slot .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 .slot_inner_common_box .slot_inner_formfield .reg-form         { border-radius: 0px; }
 .slot_inner_common_box .slot_inner_formfield:last-child,.slot_inner_common_box .slot_inner_formfield label.lock.mendatory { margin-bottom: 0px; }
 .slot_inner_common_box:last-child p:first-child { font-style: italic; }
-
+.hand-curson{cursor:pointer;}
+#onlinehelp-float-button-2 div{z-index:0 !important;}

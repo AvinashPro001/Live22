@@ -336,6 +336,11 @@ function SetLanguage() {
 }
 
 function ChangeLanguageText() {
+
+    $("#" + GetLocalStorage('language') + "-youtube").css("display", "");
+    if (GetLocalStorage('language') == "zh-Hans")
+        $("#en-US-youtube").css("display", "");
+
     $.ajax({
         url: '../../resources/lang.' + GetLocalStorage('language') + '.json',
         dataType: 'json',
@@ -352,4 +357,25 @@ function ChangeLanguage(LangCode) {
     sessionStorage.removeItem("siteData");
     SetLocalStorage("language", LangCode);
     window.location.reload();
+}
+
+
+function FollowOnFacebook() {
+    window.open("https://www.facebook.com/WEBET333MY/");
+}
+
+function FollowOnInstagram() {
+    window.open("https://www.instagram.com/webet333/");
+}
+
+function FollowOnYoutube() {
+    window.open("https://www.youtube.com/channel/UCE_HSoTYqGLkDa6rX8scNKw");
+}
+
+function OpenChatWindow() {
+    $("#onlinehelp-float-button-2 img").click();
+}
+
+async function OpenWhatsapp() {
+    window.open('https://api.whatsapp.com/send?phone=60174780045&text=Claim%20and%20Join', '_blank');
 }

@@ -477,7 +477,7 @@
                     <img src="~/images/footericon2.png" alt="footericon1" />
                     <h1><span class="lang" key="customer_service_27_7"></span></h1>
                     <p><span class="lang" key="customer_service_27_7_text"></span></p>
-                    <a href="#"><span class="lang" key="chat_now"></span></a>
+                    <a onclick="OpenChatWindow()"><span class="lang" key="chat_now"></span></a>
                 </div>
             </div>
             <div class="col-sm-3">
@@ -485,7 +485,7 @@
                     <img src="~/images/footericon3.png" alt="footericon1" />
                     <h1><span class="lang" key="feedback_complaint"></span></h1>
                     <p><span class="lang" key="feedback_complaint_text"></span></p>
-                    <a href="#"><span class="lang" key="complaint_now"></span></a>
+                    <a onclick="OpenWhatsapp();"><span class="lang" key="complaint_now"></span></a>
                 </div>
             </div>
             <div class="col-sm-3">
@@ -735,20 +735,20 @@
 
                     <h5 class="black-text our_partner lang" key="follow_us">Follow us</h5>
                     <ul class="list-inline bank-us">
-                        <li>
-                            <a href="#" target="_blank">
+                        <li class="hand-curson" onclick="FollowOnFacebook()">
+                            <a>
                                 <img class="menu-social-icon normal_icons" src="~/images/footerlogo/footerlogo26.png" />
                                 <img class="menu-social-icon hover_icons" src="~/images/footerlogo/footerlogo26_color.png" alt="">
                             </a>
                         </li>
-                        <li>
-                            <a href="#" target="_blank">
+                        <li class="hand-curson" onclick="FollowOnYoutube()">
+                            <a>
                                 <img class="menu-social-icon normal_icons" src="~/images/footerlogo/footerlogo27.png" />
                                 <img class="menu-social-icon hover_icons" src="~/images/footerlogo/footerlogo27_color.png" alt="">
                             </a>
                         </li>
-                        <li>
-                            <a href="#" target="_blank">
+                        <li class="hand-curson" onclick="FollowOnInstagram()">
+                            <a>
                                 <img class="menu-social-icon normal_icons" src="~/images/footerlogo/footerlogo28.png" />
                                 <img class="menu-social-icon hover_icons" src="~/images/footerlogo/footerlogo28_color.png" alt="">
                             </a>
@@ -776,6 +776,7 @@
             </div>
         </div>
     </div>
+ 
     <div class="contact-us-btn">
         <div class="contact-user" id="ContactUsPopUp" href="#">
             <span class="lang" style="font-size:15px;color:#000;font-weight: 600;" key="contact_us">Contact Us</span>&nbsp;<span class="contact-img"></span>
@@ -786,7 +787,7 @@
                 <p></p>
                 <h6>Customer Services</h6>
             </li>
-            <li class="call-contact text-center">
+            <li class="call-contact text-center hand-curson">
                 <h5><img class="contact-logos" src="~/images/sideicon4.png" alt="Call">LIVE CHAT</h5>
                 <a href="# ">Click here</a>
             </li>

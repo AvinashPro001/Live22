@@ -84,7 +84,7 @@
 <div class="row follow_up_wrraper_sec ml0 mr0">
     <div class="container">
         <div class="col-sm-4">
-            <div class="follow_up_facebook">
+            <div class="follow_up_facebook" onclick="FollowOnFacebook()">
                 <h1><img src="images/titleicon2.png"> <span class="lang" key="follor_on_facbook"> FOLLOW US ON FACEBOOK </span> </h1>
                 <div class="facebook_logo_sec">
                     <img src="images/fb2.png" alt="fb2" />
@@ -92,7 +92,7 @@
             </div>
         </div>
         <div class="col-sm-4">
-            <div class="follow_up_facebook">
+            <div class="follow_up_facebook" onclick="FollowOnInstagram()">
                 <h1><img src="images/titleicon6.png"> <span class="lang" key="follor_on_instagram"> FOLLOW US ON INSTAGRAM </span> </h1>
                 <div class="facebook_logo_sec">
                     <img src="images/ig2.png" alt="ig2" />
@@ -100,7 +100,7 @@
             </div>
         </div>
         <div class="col-sm-4 follow_up_youtube_wrap">
-            <div class="follow_up_youtube">
+            <div class="follow_up_youtube" onclick="FollowOnYoutube()">
                 <h1><img src="images/titleicon1.png"> <span class="lang" key="follor_on_youtube"> FOLLOW US ON YOUTUBE </span> </h1>
                 <div class="youtube_logo_sec">
                     <img src="images/youtube2.png" alt="ig2" />
@@ -110,8 +110,11 @@
         <div class="col-sm-8 latest_video_wrap">
             <div class="follow_up_lasteat_video">
                 <h1><img src="images/titleicon4.png"> <span class="lang" key="latest_high_video"> LATEST HIGHLIGHT VIDEO </span> </h1>
-                <div class="youtube_latest_video">
+                <div class="youtube_latest_video" id="en-US-youtube"  style="display:none">
                     <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Y0mB5txA0_I?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="youtube_latest_video" id="zh-Hans-youtube" style="display:none">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Y0mB5txA0_I?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -119,7 +122,7 @@
             <div class="our_support_sec">
                 <h1><img src="images/titleicon3.png"> <span class="lang" key="our_support"> OUR SUPPORT </span> </h1>
             </div>
-            <div class="our_suport_contact_sec">
+            <div class="our_suport_contact_sec hand-curson" onclick="OpenChatWindow()">
                 <div class="livechat_support">
                     <h1 class="lang" key="live_chat">LIVE CHART</h1>
                     <p><a href="#"  class="lang" key="click_hear">CLICK HERE</a></p>
@@ -201,7 +204,7 @@
                                             <img src="images/dropdown_logos/ag.png" alt="asia_girl_right" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">AG Casino</a>
+                                            <a>AG Casino</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -223,7 +226,7 @@
                                             <img src="images/dropdown_logos/dg.png" alt="dg" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">DG Casino</a>
+                                            <a>DG Casino</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -245,7 +248,7 @@
                                             <img src="images/dropdown_logos/allbet.png" alt="ALlbet" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">AllBet Casino</a>
+                                            <a>AllBet Casino</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -267,7 +270,7 @@
                                             <img src="images/dropdown_logos/sexy.png" alt="" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">Sexy Baccarat Casino</a>
+                                            <a>Sexy Baccarat Casino</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -289,7 +292,7 @@
                                             <img src="images/dropdown_logos/sa.png" alt="SA" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">SA Casino</a>
+                                            <a>SA Casino</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -311,7 +314,7 @@
                                             <img src="images/dropdown_logos/pt.png" alt="Playtech" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">Playtech Casino</a>
+                                            <a>Playtech Casino</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -333,7 +336,7 @@
                                             <img src="images/dropdown_logos/wm.png" alt="" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">WM Casino</a>
+                                            <a>WM Casino</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -387,7 +390,7 @@
                                             <a href="#">918 Kiss</a>
                                         </div>
                                         <div class="play_now_btn">
-                                            <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                            <a><img src="images/playnow.png" alt="playnow" /> Play Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -406,7 +409,7 @@
                                             <img src="images/dropdown_logos/2.png" alt="Joker" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">Joker</a>
+                                            <a>Joker</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -428,7 +431,7 @@
                                             <img src="images/dropdown_logos/7.png" alt="Mega888" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">Mega888</a>
+                                            <a>Mega888</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -450,7 +453,7 @@
                                             <img src="images/dropdown_logos/4.png" alt="Pussy888" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">Pussy888</a>
+                                            <a>Pussy888</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -472,7 +475,7 @@
                                             <img src="images/dropdown_logos/8.png" alt="Pragmatic Play" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">Pragmatic Play</a>
+                                            <a>Pragmatic Play</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -494,7 +497,7 @@
                                             <img src="images/dropdown_logos/3.png" alt="" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">AG Slots</a>
+                                            <a>AG Slots</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -516,7 +519,7 @@
                                             <img src="images/dropdown_logos/5.png" alt="" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">Playtech Slots</a>
+                                            <a >Playtech Slots</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -551,7 +554,7 @@
                                             <img src="images/dropdown_logos/m8.png" alt="M8" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">M8</a>
+                                            <a>M8</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -573,7 +576,7 @@
                                             <img src="images/dropdown_logos/maxbet.png" alt="MAXBET" />
                                         </div>
                                         <div class="ag_casino_btn">
-                                            <a href="#">MaxBet</a>
+                                            <a>MaxBet</a>
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
@@ -655,12 +658,15 @@
         loop: true,
         margin: 10,
         nav: true,
+        slideTransition:"linear",
         navText: [
             '<i class="fa fa-angle-left"></i>',
             '<i class="fa fa-angle-right"></i>'
         ],
         autoplay: true,
-        autoplayHoverPause: true,
+        autoplayHoverPause: false,
+        autoplayTimeout: 1000,
+        lazyLoad: true,
         responsive: {
             0: {
                 items: 1

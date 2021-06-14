@@ -1020,7 +1020,7 @@ async function SetUserDepositPromotion() {
             var html = "";
             var description = "";
             for (i = 0; i < data.length; i++) {
-                html += '<li class="tablinks"><a class="thm-txt" data-toggle="tab"><img onclick="SetDepositPromotionId(\'' + data[i].id + '\')" src="' + data[i].bannerImage + '"></a><p href="#' + data[i].id + '" data-toggle="modal">' + data[i].promotionTitle + '</p></li>'
+                html += '<li class="tablinks"><a class="thm-txt" data-toggle="tab"><img onclick="SetDepositPromotionId(\'' + data[i].id + '\')" src="' + data[i].bannerImage + '"></a><p>' + data[i].promotionTitle + '&nbsp;&nbsp;<i href="#' + data[i].id + '" data-toggle="modal" class="fa fa-question-circle hand-curson" aria-hidden="true"></i></p></li>'
                 description +=
                     '<div class="modal fade Reload_bonus_myModal" id="' + data[i].id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button><h4 class="modal-title"><span>' + data[i].promotionTitle + '</span></h4></div><div class="modal-body">' + data[i].description + '</div></div></div ></div >';
             }
