@@ -477,8 +477,8 @@
                                     <div class="total-turnover-chips">
                                         <ul class="list-style d-flex">
                                             <li>Total Daily Turnover</li>
-                                            <li><label class="marginb-none">0.00</label></li>
-                                            <li><span class="fa fa-refresh"></span></li>
+                                            <li><label class="marginb-none" id="total_turnover">0.00</label></li>
+                                            <li><span class="fa fa-refresh" onclick="GetDailyTurnover();"></span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -1382,6 +1382,7 @@
         SetHtmlInFromWallet();
         SetDepositPageBank();
         SetProfilePageBanks();
+        GetDailyTurnover();
         SetProfilePageData();
     });
 </script>

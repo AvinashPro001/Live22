@@ -161,6 +161,7 @@ var accountEndPoints = {
     getUserByMobile: "account/getuser",
     SendOTP: "account/send/otp",
     VerifiedOTP: "account/verified/otp",
+    userTotalTurnover: "Game/DailyTurnover",
 };
 
 var promotionEndPoints = {

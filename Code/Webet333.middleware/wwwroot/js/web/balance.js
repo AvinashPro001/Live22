@@ -286,6 +286,30 @@ function ConvertBalanceIntoCommasValue(amount) {
     }
 }
 
+
+async function GetDailyTurnover() {
+    let model = {}
+    var res = await PostMethod(accountEndPoints.userTotalTurnover, model)
+    console.log(res);
+    if (res.status == 200) {
+        SetAllValueInElement("total_turnover", FormatBalance(res.response.data.total))
+        SetAllValueInElement("joker_turnover", FormatBalance(res.response.data.response.jokerWinover))
+        SetAllValueInElement("playtech_turnover", FormatBalance(res.response.data.response.playtechTurover))
+        SetAllValueInElement("kiss_turnover", FormatBalance(res.response.data.response.kiss918Winover))
+        SetAllValueInElement("ag_turnover", FormatBalance(res.response.data.response.agTurover))
+        SetAllValueInElement("m8_turnover", FormatBalance(res.response.data.response.m8Turover))
+        SetAllValueInElement("maxbet_turnover", FormatBalance(res.response.data.response.maxbetTurover))
+        SetAllValueInElement("mega888_turnover", FormatBalance(res.response.data.response.mega888Winover))
+        SetAllValueInElement("dg_turnover", FormatBalance(res.response.data.response.dgTurover))
+        SetAllValueInElement("sexy_turnover", FormatBalance(res.response.data.response.sexyTurover))
+        SetAllValueInElement("sa_turnover", FormatBalance(res.response.data.response.saTurover))
+        SetAllValueInElement("pussy_turnover", FormatBalance(res.response.data.response.pussy888Turover))
+        SetAllValueInElement("allbet_turnover", FormatBalance(res.response.data.response.allBetTurover))
+        SetAllValueInElement("wm_turnover", FormatBalance(res.response.data.response.wmTurover))
+        SetAllValueInElement("pragmatic_turnover", FormatBalance(res.response.data.response.pragmaticTurover))
+    }
+}
+
 //#region All Wallet Balance
 
 async function MainWallet() {
