@@ -182,7 +182,7 @@ namespace Webet333.api.Helpers
 
         #region Call Set Bet Limit 3rd Party API
 
-        public static async Task<YEEBETResponse> SetBetLimitAsync(YeeBetSetBetLimitRequest request)
+        public static async Task<YEEBETBasicResponse> SetBetLimitAsync(YeeBetSetBetLimitRequest request)
         {
             var temp = $"appid={GameConst.YEEBET.APPId}&" +
                 $"qids={request.QIds}&" +
@@ -194,7 +194,7 @@ namespace Webet333.api.Helpers
 
             var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.SetBetLimit}?{Parameter}";
 
-            return JsonConvert.DeserializeObject<YEEBETResponse>(await GameHelpers.CallThirdPartyApi(Url));
+            return JsonConvert.DeserializeObject<YEEBETBasicResponse>(await GameHelpers.CallThirdPartyApi(Url));
         }
 
         #endregion Call Set Bet Limit 3rd Party API

@@ -127,6 +127,7 @@ namespace Webet333.api.Controllers
 
         #region Set Bet Limit
 
+        [AllowAnonymous]
         [HttpPost(ActionsConst.YEEBET.SetBetLimit)]
         public async Task<IActionResult> SetBetLimitAsync([FromBody] YeeBetSetBetLimitRequest request)
         {
