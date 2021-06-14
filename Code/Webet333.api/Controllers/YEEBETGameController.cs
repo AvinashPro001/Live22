@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -137,5 +138,45 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Set Bet Limit
+
+        #region Set bet limit and deposit Amount
+
+        [HttpPost(ActionsConst.YEEBET.SetBetLimitAndDepositAmount)]
+        public async Task<IActionResult> SetBetLimitAndDepositAmountAsync([FromBody] List<SetBetLimitAndDepositAmountRequest> request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await CheckUserRole();
+
+            using (var YEEBETGame_Helpers = new YEEBETGameHelpers(Connection))
+            {
+                await YEEBETGame_Helpers.SetBetLimitAndDepositAmountAsync(request);
+
+                return OkResponse();
+            }
+        }
+
+        #endregion Set bet limit and deposit Amount
+
+        #region Update bet limit and deposit Amount
+
+        [HttpPost(ActionsConst.YEEBET.UpdateBetLimitAndDepositAmount)]
+        public async Task<IActionResult> UpdateBetLimitAndDepositAmountAsync([FromBody] List<SetBetLimitAndDepositAmountUpdateRequest> request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await CheckUserRole();
+
+            using (var YEEBETGame_Helpers = new YEEBETGameHelpers(Connection))
+            {
+                await YEEBETGame_Helpers.UpdateBetLimitAndDepositAmountAsync(request);
+
+                return OkResponse();
+            }
+        }
+
+        #endregion Update bet limit and deposit Amount
     }
 }

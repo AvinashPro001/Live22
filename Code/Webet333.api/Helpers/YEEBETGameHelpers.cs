@@ -199,6 +199,30 @@ namespace Webet333.api.Helpers
 
         #endregion Call Set Bet Limit 3rd Party API
 
+        #region Set BetLimit And Deposit Amount For User
+
+        internal async Task SetBetLimitAndDepositAmountAsync(List<SetBetLimitAndDepositAmountRequest> request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.YEEBET.SetBetlimitDepositAmount, request);
+            }
+        }
+
+        #endregion Set BetLimit And Deposit Amount For User
+
+        #region Update BetLimit And Deposit Amount For User
+
+        internal async Task UpdateBetLimitAndDepositAmountAsync(List<SetBetLimitAndDepositAmountUpdateRequest> request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.YEEBET.SetBetlimitDepositAmount, request);
+            }
+        }
+
+        #endregion Update BetLimit And Deposit Amount For User
+
         #region House Keeping
 
         public void Dispose()

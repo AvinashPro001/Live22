@@ -258,6 +258,9 @@ export class PromotionEditComponent implements OnInit {
             //minDeposit: (document.getElementById("txt_minDepositAmount") as HTMLInputElement).value,
             minDeposit: this.minDepositValue,
             fixedBonus: this.promotionFixedBonusAmount,
+
+            isYeeBetBetLimit: (document.getElementById("chk_isYeeBetBetLimit") as HTMLInputElement).checked,
+
             isAG: (document.getElementById("ag_id") as HTMLInputElement).checked,
             isDG: (document.getElementById("dg_id") as HTMLInputElement).checked,
             isSA: (document.getElementById("sa_id") as HTMLInputElement).checked,

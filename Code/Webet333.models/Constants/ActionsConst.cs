@@ -743,6 +743,10 @@
             public const string GetBetLimit = "yeebet/get/betlimit";
 
             public const string SetBetLimit = "yeebet/set/betlimit";
+
+            public const string SetBetLimitAndDepositAmount = "yeebet/set/betlimit/deposit";
+
+            public const string UpdateBetLimitAndDepositAmount = "yeebet/update/betlimit/deposit";
         }
     }
 }

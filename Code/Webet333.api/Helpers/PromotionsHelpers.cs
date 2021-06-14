@@ -129,7 +129,9 @@ namespace Webet333.api.Helpers
                         IsPlatinum = request.IsPlatinum,
                         IsDiamond = request.IsDiamond,
 
-                        AdminId = request.AdminId
+                        AdminId = request.AdminId,
+
+                        IsYeeBetBetLimit = request.IsYeeBetBetLimit
                     });
             }
         }
@@ -201,7 +203,9 @@ namespace Webet333.api.Helpers
                         IsPlatinum = request.IsPlatinum,
                         IsDiamond = request.IsDiamond,
 
-                        AdminId = request.AdminId
+                        AdminId = request.AdminId,
+
+                        IsYeeBetBetLimit = request.IsYeeBetBetLimit
                     });
             }
         }
