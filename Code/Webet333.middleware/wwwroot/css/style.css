@@ -136,7 +136,9 @@ header .custom-container {width: 1400px; }
 .navbar-brand {display: block; height: auto; }
 .navbar-nav {margin-top: 15px; }
 .row_two_navigation .navbar-nav {margin-top: 0px; float: left; width: 100%; }
-.row_two_navigation .navbar-nav>li a {text-align: center; position: relative; padding: 11px 9px 11px 9px; font-size: 12.1875px; line-height: 12px; text-transform: uppercase; display: inline-block; font-weight: 600; color: #fff; }
+.row_two_navigation .navbar-nav>li a {text-align: center; position: relative; padding: 11px 9px 11px 9px; font-size: 12.1875px; line-height: 12px; text-transform: uppercase; display: flex; font-weight: 600; color: #fff; align-items: center; }
+.row_two_navigation .navbar-nav > li a > span:first-child { display: flex; align-items: center;}
+.row_two_navigation .navbar-nav > li a span img { margin-right: 5px;}
 .row_two_navigation .nav > li >a:hover{background-color: #feb801;color: #212121;} 
 .row_two_navigation .nav > li > a:focus{background-color: transparent;}
 .nav>li.dropdown.open {position: static; }
@@ -231,7 +233,7 @@ li.common-btn.restore-btn:hover, li.common-btn.restore-btn:focus {border: 0; bac
 /*.login-form .log-out:before {transform: rotate(180deg); top: 5px; }
 .lock:before {content: '\f023'} 
 .user:before {content: '\f007'}*/ 
-.login-form ul {display: flex; justify-content: flex-end; margin-bottom: 0px; align-items: flex-start; }
+.login-form ul {display: flex; justify-content: flex-end; margin-bottom: 0px; align-items: center; }
 .promotion-login li {width: calc( 50% - 20px); margin-right: 10px; }
 ul.user-login {display: flex; }
 .login-form a {color: #fff; }
@@ -253,7 +255,7 @@ ul.user-login {display: flex; }
 .login-item.social {margin: 0 10px 0 20px; } 
 .social a {color: #545c69; margin-right: 5px; font-size: 15px; }
 .social a:hover {color: #fff; }
-.login-form label:first-child {font-size: 11px; color: #5d6571; cursor: pointer; font-weight: 700; line-height: 24px; }
+.login-form label:first-child {font-size: 11px; color: #5d6571; cursor: pointer; font-weight: 700; line-height: 24px; margin-bottom: 0px; }
 .login-form label {font-weight: 400; font-size: 10px; }
 .login-form .btn-language {background: 0 0; border: 0; color: #fff; }
 .dropdown .dropdown-menu {left: auto; right: 0; } 
@@ -591,7 +593,8 @@ label.mar-btm-no {margin-bottom: 0; }
 .company-deposit-list .nav-tabs>li.active>a {background: 0 0; border: 0; }
 .select-checkboxes .promotion-content .full-img {height: auto; }
 #Deposit .tabcontent {margin: 20px 0 50px; width: 100%} 
-.info-form.notice-bank-transfer {/*margin-top: -110px;*/margin-top:0px; } 
+.info-form.notice-bank-transfer {margin-top: -110px;} 
+.download_page_wrapper .container { width: 100%; max-width: 1150px;} 
 .profile-page .change_password:before {background-image: url(../images/password_yellow.png); }
 .profile-page .profile:before {background-image: url(../images/profile_yellow.png); }
 .profile-page .deposit:before {background-image: url(../images/deposit_yellow.png); }
@@ -1547,7 +1550,7 @@ h4.about-icon span.lang{font-size: 20px;}
 .chat_image_inner{position: fixed;right:0%;bottom: 0%;}
 .chat_image_inner a img{width:200px;}
 h4.faqs-icon{font-size: 20px;}
-.download_page_wrapper{width: 100%; float: left; padding: 40px 0px; background: url(../images/content_bg.jpg) 0 0 no-repeat; background-size: 100% 100%; }
+.download_page_wrapper{width: 100%; float: left; padding: 40px 0px; background: url(../images/content_bg.jpg) no-repeat top / 100%; }
 h4.download-title {font-size: 20px;}
 h4.banking_title{font-size: 20px; padding-bottom: 10px; padding-top: 0px;}
 /* css end */
