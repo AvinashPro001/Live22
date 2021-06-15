@@ -415,19 +415,21 @@ async function LoginPlaytechGame(GameCode) {
     }
 }
 
-async function PlaytechSlotsGameList() {
+var slotPageNumber = 0
+async function PlaytechSlotsGameList(PageNumber= null) {
     var model = {
-        WalletName: "PlayTech Wallet"
+        WalletName: "PlayTech Wallet",
+        pageNo: PageNumber == null ? slotPageNumber : PageNumber,
+        pageSize:20
     };
     var list = await PostMethod(gameSettingEndPoints.slotsGameList, model)
     if (list.status == 200) {
         gameList = list.response.data.result;
         var html = "";
         for (i = 0; i < gameList.length; i++) {
-            //html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes"><img onclick="LoginPlaytechGame(\'' + gameList[i].GameCode + '\')" src="' + gameList[i].ImagePath2 + '" alt="slot_game5"><p>' + gameList[i].GameName + '</p></div></div>';
             html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes" ><p class="hidden-slot-game-title">' + gameList[i].GameName + '</p><div class="slot-game-img-box"><img src="' + gameList[i].ImagePath2 + '" alt="slot_game5"><div class="overlay"><a  onclick="LoginPlaytechGame(\'' + gameList[i].GameCode + '\')" href="#" class="slot-game-play-box">Play</a></div></div><p>' + gameList[i].GameName + '</p></div></div>';
         }
-        SetAllValueInElement("playtechSlotsGameList", html);
+        $("#playtechSlotsGameList").append(html);
     }
 
 }
@@ -448,19 +450,20 @@ async function AgSlotsGameList() {
 
 }
 
-async function PragmaticSlotsGameList() {
+async function PragmaticSlotsGameList(PageNumber = null) {
     var model = {
-        WalletName: "Pragmatic Wallet"
+        WalletName: "Pragmatic Wallet",
+        pageNo: PageNumber == null ? slotPageNumber : PageNumber,
+        pageSize: 20
     };
     var list = await PostMethod(gameSettingEndPoints.slotsGameList, model)
     if (list.status == 200) {
         gameList = list.response.data.result;
         var html = "";
         for (i = 0; i < gameList.length; i++) {
-            //html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes"><img onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\')" src="' + gameList[i].ImagePath2 + '" alt="slot_game5"><p>' + gameList[i].GameName + '</p></div></div>';
             html += '<div class="col-sm-3 pl0 pb15"><div class="all_slot_game_boxes" ><p class="hidden-slot-game-title">' + gameList[i].GameName + '</p><div class="slot-game-img-box"><img src="' + gameList[i].ImagePath2 + '" alt="slot_game5"><div class="overlay"><a  onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\')" href="#" class="slot-game-play-box">Play</a></div></div><p>' + gameList[i].GameName + '</p></div></div>';
         }
-        SetAllValueInElement("pragmaticSlotsGameList", html);
+        $("#pragmaticSlotsGameList").append(html);
     }
 }
 
@@ -479,3 +482,4 @@ async function JokerSlotsGameList() {
         SetAllValueInElement("jokerSlotsGameList", html);
     }
 }
+

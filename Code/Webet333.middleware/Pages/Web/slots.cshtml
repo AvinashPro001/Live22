@@ -135,7 +135,7 @@
                                 <div class="genaral_wrapp1">
                                     <div id="All_slot" class="tabcontent_health" style="display: block;">
                                         <div class="row second_row_slot_game_wrap mr0 ml0" id="agSlotsGameList">
-                                            
+
                                         </div>
 
                                     </div>
@@ -383,20 +383,20 @@
 </script>
 <script>
     $().ready(function () {
-         PragmaticSlotsGameList();
-         PlaytechSlotsGameList();
-         AgSlotsGameList();
-         JokerSlotsGameList();
+        PragmaticSlotsGameList();
+        PlaytechSlotsGameList();
+        //AgSlotsGameList();
+        //JokerSlotsGameList();
     });
     $().ready(function () {
-        // $('.slick-carousel').slick({
-        //     arrows: true,
-        //     centerPadding: "0px",
-        //     dots: true,
-        //     slidesToShow: 1,
-        //     infinite: false,
-        //     autoplay: true,
-        // });
+        $('.slick-carousel').slick({
+            arrows: true,
+            centerPadding: "0px",
+            dots: true,
+            slidesToShow: 1,
+            infinite: false,
+            autoplay: true,
+        });
 
         $('.slider').slick({
             arrows: true,
@@ -405,5 +405,15 @@
             slidesToShow: 1,
             infinite: false,
         });
+    });
+
+    var callCounter = 1
+    $(document).on('scroll', function () {
+        if ((callCounter % 20) == 0) {
+            ++slotPageNumber
+            PlaytechSlotsGameList();
+            PragmaticSlotsGameList();
+        }
+        ++callCounter;
     });
 </script>
