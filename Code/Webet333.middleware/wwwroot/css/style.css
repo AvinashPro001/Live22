@@ -788,6 +788,24 @@ header .tooltip-inner {width: 100px!important; }
 .promotion-choose {display: grid; grid-gap: 10px; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; padding-right: 10px; }
 .bank-selection ul.bank-listing.step-2-desc li label {width: 100%} 
 
+..img-block-content { cursor: pointer; }
+.img-text-block { position: relative; }
+.img-hover-block { display: flex; position: relative; margin: 0 -10px; flex-wrap: wrap; }
+.img-hover-block li { width: calc(100% / 4 - 10px); margin: 5px; }
+.slick-slide .img-text-block img { height: 200px; max-width: 200px; margin: 0 auto; width: auto; object-fit: contain; transition: 0.5s; }
+.hover-block { opacity: 0; position: absolute; top: 0; left: 0; border: 20px solid #ffffff; transform: scale(0); transition: 0.5s;}
+.hover-block figure { position: relative;}
+.cmn-block { position: relative; z-index: 0; cursor: pointer; transition: 0.5s; box-shadow: 0px 0px 10px #cccccc; background: #fff; border-radius: 10px; padding-top: 10px;}
+.img-text-block:hover .cmn-block { opacity: 0; transition: 0.5s; }
+.img-text-block:hover .hover-block { opacity: 1; transform: scale(1); z-index: 1; transition: 0.5s; background-color: #ffffff; margin-left: -17px; margin-top: -27px; box-shadow: 0px 0px 20px #9b9b9b;}
+.overlay { position: absolute; bottom: 0; height: 0; left: 0; background-color: rgba(0,0,0,0.5); width: 100%; transition: 0.5s; display: flex; align-items: center; justify-content: center; opacity: 0; }
+.overlay button { padding: 10px 45px; background-color: #003b79; color: #ffffff; border: 0px; text-transform: uppercase; font-size: 15px; line-height: 20px; font-weight: bold; transition: 0.5s; border-radius: 8px;}
+.overlay button:focus,
+.overlay button:hover { background-color: #feb801; color: #003b79;}
+.text-content h4 { height: 65px; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+.hover-block > figure:hover .overlay { height: 100%; opacity: 1; }
+.slick-slide .img-text-block:hover .hover-block > figure img { height: 225px; max-width: 225px;}
+
 
 @media(min-width:1200px) and (max-width:1270px) {
     header .container {/* width: 1170px;*/ width: 1100px; }
@@ -844,6 +862,11 @@ header .tooltip-inner {width: 100px!important; }
     .row_two_navigation .navbar-nav > li .dropdown-menu li { min-width: 100px; }
     .contact-us-btn,
     .contact-us-btn1 { top: 150px !important; }
+    .slick-slide .img-text-block img { height: 175px; max-width: 175px;}
+    .hover-block { border-width: 10px;}
+    .img-hover-block { margin: 0px; }
+    .img-hover-block li { width: calc(100% / 4 - 20px);}
+    .img-text-block:hover .hover-block { transform: scale(0.9); }
 
 }
 @media(min-width:768px) and (max-width:991px) {
@@ -956,9 +979,16 @@ header .tooltip-inner {width: 100px!important; }
     .bank-listing.highlight-bank label {width: 100%} 
     .info-form.notice-bank-transfer {margin-top: 10px; }
     /* 15-6-2021 */
+    .slick-slide .searchbar_bar_info img { height: auto;}
     .menu-list { max-width: 600px; }
     .row_two_navigation .navbar-nav > li .dropdown-menu li { min-width: 100px; }
-
+    .slick-slide .img-text-block img { height: 150px; max-width: 150px;}
+    .hover-block { border-width: 10px;}
+    .img-hover-block { margin: 0px; }
+    .img-hover-block li { width: calc(100% / 4 - 10px);}
+    .img-text-block:hover .hover-block { transform: scale(0.9); margin-left: -27px; }
+    .leftProfileButon1 + .genaral_wrapp1 { margin-left: 0px;}
+    .slick-slide .img-text-block:hover .hover-block > figure img { height: 200px; max-width: 200px; }
 
 }
 @media(max-width:767px) {
