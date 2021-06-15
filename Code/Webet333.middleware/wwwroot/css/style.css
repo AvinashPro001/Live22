@@ -141,6 +141,8 @@ header .custom-container {width: 1400px; }
 .row_two_navigation .navbar-nav > li a span img { margin-right: 5px;}
 .row_two_navigation .nav > li >a:hover{background-color: #feb801;color: #212121;} 
 .row_two_navigation .nav > li > a:focus{background-color: transparent;}
+.row_two_navigation .navbar-nav>li .dropdown-menu a { display: block; }
+.row_two_navigation .navbar-nav>li .dropdown-menu li { height: auto; min-width: 160px; width: calc(100% / 5); justify-content: center; display: flex; }
 .nav>li.dropdown.open {position: static; }
 .navbar-default .navbar-nav>.open>a.dropdown-toggle {background: 0 0; } 
 .navbar-nav ul.dropdown-menu li a {height: auto; /* padding: 5px;*/ padding:5px 5px 15px 6px; }
@@ -148,6 +150,7 @@ header .custom-container {width: 1400px; }
 .navbar-right .dropdown-menu {background: #13294d; border-top: 2px solid #3e5e85; }
 .dropmenu-main {background: #1d1d1d; border-top: 2px solid #1d1d1d; }
 .nav>li.dropdown {position: static; }
+.menu-list { display: flex; justify-content: center; flex-wrap: wrap; max-width: 800px; margin: 0 auto;}
 .nav>li.dropdown.open .dropdown-menu, 
 .nav>li.dropdown:hover .dropdown-menu {display: table; border-radius: 0; width: 100%; text-align: center; left: 0; right: 0; top: calc(100% - 2px); /* top: calc(100% - 10px);*/ padding: 0; }
 .navbar-nav li .dropdown-menu>li {display: inline-block; height: auto; vertical-align: middle; }
@@ -715,7 +718,7 @@ ul.highlight-bank li.active figure:after {content: ''; background: url(../images
 .deposit-section .pad-left-ten {padding-left: 10px; }
 .deposit-section .password-upadte p.no-mar {margin-top: 3px; font-size: 16px; }
 .min-max-limit ul {margin-top: 10px; margin-left: -5px; }
-.min-max-limit .data-blog {background-image: -webkit-linear-gradient(top, #f4f3f3, #e6e6e6); padding: 7px; color: #212121; margin: 0 5px; border-radius: 4px; width: -webkit-fill-available; text-align: center; border: 1px solid #c6c6c6; }
+.min-max-limit .data-blog {background-image: -webkit-linear-gradient(top, #f4f3f3, #e6e6e6); padding: 7px; color: #212121; margin: 0 5px; border-radius: 4px; width: calc(100% / 5 - 13px); text-align: center; border: 1px solid #c6c6c6; }
 .min-max-limit .data-blog:hover {cursor: pointer; }
 .deposit-section .form-control, .deposit-section .input-group-addon {background: #fff; border: 0; font-size: 16px; color: #9b9b9b; }
 .deposit-section .input-group-addon {padding: 6px 10px; color: #9b9b9b; }
@@ -836,6 +839,12 @@ header .tooltip-inner {width: 100px!important; }
     .rolex-game p {font-size: 11px; }
     .icon-bank-info {width: 100%; height: auto; }
     .min-max-limit .data-blog {padding: 5px; font-size: 14px; }
+    /* 15-6-2021 */
+    .menu-list { max-width: 600px; }
+    .row_two_navigation .navbar-nav > li .dropdown-menu li { min-width: 100px; }
+    .contact-us-btn,
+    .contact-us-btn1 { top: 150px !important; }
+
 }
 @media(min-width:768px) and (max-width:991px) {
     header {padding: 10px 0; }
@@ -946,6 +955,11 @@ header .tooltip-inner {width: 100px!important; }
     #withdraw_amount .password-upadte li:last-child>label, 
     .bank-listing.highlight-bank label {width: 100%} 
     .info-form.notice-bank-transfer {margin-top: 10px; }
+    /* 15-6-2021 */
+    .menu-list { max-width: 600px; }
+    .row_two_navigation .navbar-nav > li .dropdown-menu li { min-width: 100px; }
+
+
 }
 @media(max-width:767px) {
     body {padding-top: 50px; }
@@ -1516,7 +1530,7 @@ li.step5bg a img{width: 100%; /* min-height: 94px; */ height: 80px; object-fit: 
 .wb3_welcome_boxes h1{color: #8b8b8b;font-size: 13px;font-weight: 600;line-height: normal;}
 .wb3_welcome_boxes p{color: #a4a4a4;font-size: 13px;margin-bottom: 0px;padding: 10px 0px 15px 0px;}
 .flag_nsd img{width: 25px;}
-.contact-us-btn1 {position: fixed; left: 0px; top: 120px; /*top: 79px;*/ z-index: 999; }
+.contact-us-btn1 {position: fixed; left: 0px; top: 120px; z-index: 999; }
 .contact-user1 {cursor: pointer; }
 .contact-us-btn1 .contact-user1 {transform: rotate(-90deg); font-size: 24px; color: #fff; display: block; position: absolute; top: 0; overflow: hidden; left: calc(100% + -170px); width: 170px; transform-origin: 100% 0; /* line-height: 60px; */ line-height: 45px; text-transform: uppercase; text-align: right; padding-right: 20px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
 .contact-us-btn1 .contact-user1::before {content: ""; display: block; /* transform: skewX(-30deg); -webkit-transform: skewX(-30deg);*/ position: absolute; width: 100%; height: 100%; top: 0; left: 0px; background: #feb801; z-index: -1; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
@@ -1887,6 +1901,7 @@ p.bonus_content a{color: #333;}
 #myDropdown table{text-align:start}
 .chip-margin img{width:20px;}
 .table_blacke img{width:30px;}
+
 @media (min-width: 768px) {
     #withdraw_availabe_amount_list .modal-dialog {width: 60%;margin: 30px auto;}
 }
