@@ -156,6 +156,8 @@
 
             public const string CreateUser = "create";
 
+            public const string login = "login";
+
             public const string fetch = "fetch2";
 
             public const string LanguageCode = "en-US";
@@ -170,6 +172,8 @@
             public const string Secret = "hgcqgcmgyxs6n";
 
             public const string EnsureUserAccount = "CU";
+
+            public const string ListGames = "ListGames";
 
             public const string GetCredit = "GC";
 
@@ -429,6 +433,8 @@
             public const string transfer = "agent_client_transfer";
 
             public const string Login = "forward_game";
+
+            public const string Modified = "modify_client";
 
             public const string BettingDetails = "betlog_pieceof_histories_in30days";
 

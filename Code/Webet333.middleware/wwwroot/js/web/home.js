@@ -22,6 +22,8 @@ $(document).ready(function () {
     SetLastUpdateTime();
     AllPromotionCallAPI();
     GetWalletList();
+    CheckGameMaintenance();
+
 });
 
 //#endregion
@@ -378,4 +380,29 @@ function OpenChatWindow() {
 
 async function OpenWhatsapp() {
     window.open('https://api.whatsapp.com/send?phone=60174780045&text=Claim%20and%20Join', '_blank');
+}
+
+
+function CheckGameMaintenance() {
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
+    var isMaintenance = data.WalletData.filter(x => x.isMaintenance == true);
+    var isNotMaintenance = data.WalletData.filter(x => x.isMaintenance == false);
+
+    if (isMaintenance.length > 0) {
+        for (i = 0; i < isMaintenance.length; i++) {
+            var id = "#" + isMaintenance[i].walletType.replace(" ", "-").toLowerCase();
+            $(id).css("filter", "grayscale(1)");
+            $(id).attr("title", "Game In Maintenance.");
+            $(id + "-allin").attr("disabled", "disabled");
+        }
+    }
+
+    if (isNotMaintenance.length > 0) {
+        for (i = 0; i < isNotMaintenance.length; i++) {
+            var id = "#" + isNotMaintenance[i].walletType.replace(" ", "-").toLowerCase();
+            $(id).css("filter", "");
+            $(id).attr("title", "");
+            $(id + "-allin").removeAttr("disabled");
+        }
+    }
 }
