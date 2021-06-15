@@ -23,7 +23,7 @@ $(document).ready(function () {
     AllPromotionCallAPI();
     GetWalletList();
     CheckGameMaintenance();
-
+    WalletSignalR();
 });
 
 //#endregion
@@ -406,3 +406,28 @@ function CheckGameMaintenance() {
         }
     }
 }
+
+
+function WalletSignalR() {
+    try {
+        "use strict";
+
+        var connection = new signalR.HubConnectionBuilder().withUrl("http://uatapi.webet333.com/signalrhub").build();
+
+        connection.on("WalletUpdate", function (data) {
+            walletData = data;
+            GameInMaintenance(1);
+        });
+
+        connection.start().then(function () {
+            console.log("Connected with SignalR Hub");
+        }).catch(function (err) {
+            console.log("Not Connected with SignalR Hub");
+            return console.error(err.toString());
+        });
+    }
+    catch {
+        //WalletSignalR();
+    }
+}
+
