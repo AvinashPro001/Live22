@@ -48,6 +48,8 @@ namespace Webet333.models.Response.Account
 
         public string YEEBETGamePrefix { get; set; }
 
+        public string SBOGamePrefix { get; set; }
+
         public string MobileNo { get; set; }
 
         public string GameSupport { get; set; }

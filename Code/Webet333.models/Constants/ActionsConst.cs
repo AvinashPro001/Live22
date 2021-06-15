@@ -740,5 +740,16 @@
 
             public const string Login = "yeebet/login";
         }
+
+        public class SBO
+        {
+            public const string RegisterAgent= "sbo/register/agent";
+
+            public const string RegisterPlayer = "sbo/register/player";
+
+            public const string Login = "sbo/login";
+
+            public const string GetLeague = "sbo/getLeague";
+        }
     }
 }

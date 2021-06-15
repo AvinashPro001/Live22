@@ -548,6 +548,123 @@
             }
         }
 
+        public static class SBO
+        {
+            public const string URL = "http://ex-api-demo-yy.568win.com/";
+
+            public const string CompanyKey = "2C5ACC95A9E8466FB39A444AB13CC7D2";
+
+            public const string User = "sbotestw";
+
+            public const string Password = "123qwe123";
+
+            public const string Currency = "MYR";
+
+            public const string GameLoginURL = "https:{0}&lang={1}&oddstyle={2}&theme={3}&oddsmode={4}&device={5}";
+
+            public static class EndPoint
+            {
+                public const string RegisterAgent = "web-root/restricted/agent/register-agent.aspx";
+
+                public const string RegisterPlayer = "web-root/restricted/player/register-player.aspx";
+
+                public const string Login = "web-root/restricted/player/login.aspx";
+
+                public const string GetLeague = "web-root/restricted/league/get-league.aspx";
+
+                public const string SetLeague = "web-root/restricted/league/set-league-bet-setting.aspx";
+
+                public const string SetPlayerBetLimit = "web-root/restricted/player/update-player-bet-setting-by-sportid-and-markettype.aspx";
+            }
+
+            public static class Agent
+            {
+                public const string Username = "AgentWeBet333UAT";
+
+                public const string Password = "AgentWeBet333UAT";
+
+                public const long Min = 5;
+
+                public const long Max = 3000;
+
+                public const long MaxPerMatch = 5000;
+
+                /*
+                 *   1: Low
+                 *   2: Medium
+                 *   3: High
+                 *   4: VIP(ALL)
+                 */
+
+                public const int CasinoTableLimit = 1;
+            }
+
+            public static class Portfolio
+            {
+                public const string SportsBook = "SportsBook";
+
+                public const string Casino = "Casino";
+
+                public const string Games = "Games";
+
+                public const string VirtualSports = "VirtualSports";
+
+                public const string SeamlessGame = "SeamlessGame";
+
+                public const string ThirdPartySportsBook = "ThirdPartySportsBook";
+            }
+
+            public static class Oddstyle
+            {
+                public const string MalayOdds = "MY";   //  Default
+
+                public const string HongKongOdds = "HK";
+
+                public const string EuroOdds = "EU";
+
+                public const string IndonesiaOdds = "ID";
+            }
+
+            public static class Theme
+            {
+                public const string Black = "Black";
+
+                public const string Blue = "Blue";
+
+                public const string Emerald = "Emerald";
+
+                public const string Green = "Green";
+
+                public const string Ocean = "Ocean";
+
+                public const string SBO = "SBO";    //  Default
+
+                public const string Lawn = "Lawn";
+
+                public const string SBOBETM = "SBOBET-m";
+
+                public const string EuroLayoutM = "Euro-layout-m";
+
+                public const string ChinaLayoutM = "China-layout-m";
+
+                public const string SboMain = "SboMain";
+            }
+
+            public static class OddsMode
+            {
+                public const string Single = "single";
+
+                public const string Double = "double";    //  default
+            }
+
+            public static class Device
+            {
+                public const string Desktop = "d";  //  default
+
+                public const string Mobile = "m";
+            }
+        }
+
 #elif STAG
 
         public const string BaseUrl = "http://webet333.com/";

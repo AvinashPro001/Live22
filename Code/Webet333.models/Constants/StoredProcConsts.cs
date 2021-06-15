@@ -593,5 +593,10 @@
         {
             public const string Register = "[dbo].[Users_Insert_YEEBET]";
         }
+
+        public class SBO
+        {
+            public const string Register = "[dbo].[Users_Insert_SBO]";
+        }
     }
 }

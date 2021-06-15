@@ -10,16 +10,17 @@ using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Game;
+using Webet333.models.Request.Game.SBO;
 
 namespace Webet333.api.Controllers
 {
     [Authorize]
     [Route(ActionsConst.ApiVersion)]
-    public class YEEBETGameController : BaseController
+    public class SBOGameController : BaseController
     {
         #region Global Variable
 
-        public YEEBETGameController(
+        public SBOGameController(
             IStringLocalizer<BaseController> Localizer,
             IOptions<ConnectionConfigs> ConnectionStringsOptions,
             IOptions<BaseUrlConfigs> BaseUrlConfigsOption) :
@@ -33,44 +34,33 @@ namespace Webet333.api.Controllers
 
         #endregion Global Variable
 
-        #region Register
+        #region Registration Agent
 
-        [HttpPost(ActionsConst.YEEBET.Register)]
-        public async Task<IActionResult> RegisterAsync([FromBody] GetByIdRequest request)
+        [AllowAnonymous]
+        [HttpPost(ActionsConst.SBO.RegisterAgent)]
+        public async Task<IActionResult> RegisterAgentAsync([FromBody] SBORegistrationAgentRequest request)
         {
-            var Role = GetUserRole(User);
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
 
-            if (Role == RoleConst.Users) request.Id = GetUserId(User).ToString();
-
-            if (Role == RoleConst.Admin) if (string.IsNullOrEmpty(request.Id)) return BadResponse(ErrorConsts.InvalidModelstate);
-
-            string username;
-
-            using (var account_helper = new AccountHelpers(Connection))
+            using (var SBO_helper = new SBOGameHelpers())
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.YEEBETGamePrefix + user.UserId;
-            }
-
-            var result = await YEEBETGameHelpers.RegisterCallAPI(username);
-
-            using (var yeebet_helper = new YEEBETGameHelpers(Connection))
-            {
-                if (result.result != 0) return OkResponse(result);
-
-                await yeebet_helper.YeeBetRegister(request.Id, username, JsonConvert.SerializeObject(result));
+                var result = await SBO_helper.CallRegisterAgentAPI(request);
 
                 return OkResponse(result);
             }
         }
 
-        #endregion Register
+        #endregion Registration Agent
 
-        #region Login
+        #region Registration Player
 
-        [HttpPost(ActionsConst.YEEBET.Login)]
-        public async Task<IActionResult> LoginAsync([FromBody] GameLoginRequest request)
+        [HttpPost(ActionsConst.SBO.RegisterPlayer)]
+        public async Task<IActionResult> RegisterAsync([FromBody] GetByIdRequest request)
         {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
             var Role = GetUserRole(User);
 
             if (Role == RoleConst.Users) request.Id = GetUserId(User).ToString();
@@ -82,16 +72,56 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.YEEBETGamePrefix + user.UserId;
+                username = user.SBOGamePrefix + user.UserId;
             }
 
-            int language = Language.Code == LanguageConst.Chinese ? 1 : 2;
+            using (var SBO_helper = new SBOGameHelpers(Connection))
+            {
+                var result = await SBO_helper.CallRegisterPlayerAPI(username);
 
-            int clienttype = request.IsMobile ? 2 : 1;
+                if (result.Error.Id != 0) return OkResponse(result);
 
-            var result = await YEEBETGameHelpers.LoginCallAPI(username, language, clienttype);
+                await SBO_helper.SBORegister(request.Id, username, JsonConvert.SerializeObject(result));
 
-            return OkResponse(result);
+                await SBO_helper.SetPlayerBetLimitAsync(username);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Registration Player
+
+        #region Login
+
+        [HttpPost(ActionsConst.SBO.Login)]
+        public async Task<IActionResult> LoginAsync([FromBody] GameLoginRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            var Role = GetUserRole(User);
+
+            if (Role == RoleConst.Users) request.Id = GetUserId(User).ToString();
+
+            if (Role == RoleConst.Admin) if (string.IsNullOrEmpty(request.Id)) return BadResponse(ErrorConsts.InvalidModelstate);
+
+            string username;
+
+            using (var account_helper = new AccountHelpers(Connection))
+            {
+                var user = await account_helper.UserGetBalanceInfo(request.Id);
+                username = user.SBOGamePrefix + user.UserId;
+            }
+
+            var loginToken = await SBOGameHelpers.CallLoginAPI(username);
+
+            string language = SBOGameHelpers.GetLanguageCode(Language.Code.ToString());
+
+            string device = request.IsMobile ? GameConst.SBO.Device.Mobile : GameConst.SBO.Device.Desktop;
+
+            var getLoginURL = SBOGameHelpers.CallLoginToSportsBookAPI(loginToken, language, device);
+
+            return OkResponse(getLoginURL);
         }
 
         #endregion Login

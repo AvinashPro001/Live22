@@ -46,7 +46,7 @@ namespace Webet333.api.Helpers
 
         #region YEEBET Game Register
 
-        internal async Task WMRegister(string UserId, string Username, string Response)
+        internal async Task YeeBetRegister(string UserId, string Username, string Response)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
