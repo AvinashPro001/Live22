@@ -23,7 +23,7 @@ $(document).ready(function () {
     AllPromotionCallAPI();
     GetWalletList();
     CheckGameMaintenance();
-
+    SignalRConnect();
 });
 
 //#endregion
@@ -340,7 +340,7 @@ function SetLanguage() {
 function ChangeLanguageText() {
 
     $("#" + GetLocalStorage('language') + "-youtube").css("display", "");
-    if (GetLocalStorage('language') == "zh-Hans")
+    if (GetLocalStorage('language') == "ms-MY")
         $("#en-US-youtube").css("display", "");
 
     $.ajax({
@@ -382,27 +382,83 @@ async function OpenWhatsapp() {
     window.open('https://api.whatsapp.com/send?phone=60174780045&text=Claim%20and%20Join', '_blank');
 }
 
-
 function CheckGameMaintenance() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
-    var isMaintenance = data.WalletData.filter(x => x.isMaintenance == true);
-    var isNotMaintenance = data.WalletData.filter(x => x.isMaintenance == false);
+    if (data !== null) {
+        if (data.WalletData !== null) {
+            var isMaintenance = data.WalletData.filter(x => x.isMaintenance == true);
+            var isNotMaintenance = data.WalletData.filter(x => x.isMaintenance == false);
+            if (isMaintenance.length > 0) {
+                for (i = 0; i < isMaintenance.length; i++) {
+                    var id = isMaintenance[i].walletType.replace(" ", "-").toLowerCase();
 
-    if (isMaintenance.length > 0) {
-        for (i = 0; i < isMaintenance.length; i++) {
-            var id = "#" + isMaintenance[i].walletType.replace(" ", "-").toLowerCase();
-            $(id).css("filter", "grayscale(1)");
-            $(id).attr("title", "Game In Maintenance.");
-            $(id + "-allin").attr("disabled", "disabled");
+                    $("[id='" + id + "']").each(function () {
+                        $(this).css("filter", "grayscale(1)");
+                        $(this).attr("title", "Game In Maintenance.");
+                        $("#" + id + "-allin").attr("disabled", "disabled");
+                    });
+                }
+            }
+            if (isNotMaintenance.length > 0) {
+                for (i = 0; i < isNotMaintenance.length; i++) {
+                    var id = isNotMaintenance[i].walletType.replace(" ", "-").toLowerCase();
+
+                    $("[id='" + id + "']").each(function () {
+                        $(this).css("filter", "");
+                        $(this).attr("title", "");
+                        $("#" + id + "-allin").removeAttr("disabled");
+                    });
+                }
+            }
         }
     }
+}
 
-    if (isNotMaintenance.length > 0) {
-        for (i = 0; i < isNotMaintenance.length; i++) {
-            var id = "#" + isNotMaintenance[i].walletType.replace(" ", "-").toLowerCase();
-            $(id).css("filter", "");
-            $(id).attr("title", "");
-            $(id + "-allin").removeAttr("disabled");
-        }
+function SignalRConnect() {
+    try {
+        "use strict";
+
+        var connection = new signalR.HubConnectionBuilder().withUrl(baseUrlWithoutVersion + "/signalrhub").build();
+
+        connection.on("WalletUpdate", function (data) {
+            SiteData.WalletData = data.data;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
+            CheckGameMaintenance();
+        });
+
+        connection.on("PromotionInsertUpdate", function () {
+            SiteData.PromotionPageData = null;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
+            AllPromotionCallAPI();
+        });
+
+        connection.on("AnnouncementInsertUpdate", function () {
+            SiteData.AnnouncementsData = null;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
+            AllAnnouncementsCallAPI();
+        });
+
+        connection.on("AdminBankInsertUpdate", async function () {
+            SiteData.AdminBankPageData = null;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
+            await CallAPIForBankPages();
+            SetDepositPageBank();
+        });
+
+        connection.on("DownloadLinkUpdate", function () {
+            SiteData.DownloadPageData = null;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
+            CallDownloadLinkAPI();
+        });
+
+        connection.start().then(function () {
+            console.log("Connected with SignalR Hub");
+        }).catch(function (err) {
+            console.log("Not Connected with SignalR Hub");
+            return console.error(err.toString());
+        });
+    }
+    catch {
+        SignalRConnect();
     }
 }

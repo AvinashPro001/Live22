@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
+using Webet333.api.Filters;
 using Webet333.api.Helpers;
 using Webet333.dapper;
 using Webet333.files.interfaces;
@@ -22,9 +24,11 @@ namespace Webet333.api.Controllers
     {
         #region variable
 
-        public PromotionsController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
+        private IHubContext<SignalRHub> _hubContext;
+        public PromotionsController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, IHubContext<SignalRHub> hubContext) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
+            _hubContext = hubContext;
         }
 
         #endregion variable
@@ -56,6 +60,7 @@ namespace Webet333.api.Controllers
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
                 var promotions = await promotion_help.Insert(request);
+                await _hubContext.Clients.All.SendAsync("PromotionInsertUpdate");
                 return OkResponse(promotions.Id);
             }
         }
@@ -74,7 +79,7 @@ namespace Webet333.api.Controllers
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
                 var promotions = await promotion_help.PromotionUpdate(request);
-
+                await _hubContext.Clients.All.SendAsync("PromotionInsertUpdate");
                 return OkResponse(promotions.Id);
             }
         }
@@ -167,6 +172,7 @@ namespace Webet333.api.Controllers
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
                 await promotion_help.Delete(Guid.Parse(request.Id), adminId);
+                await _hubContext.Clients.All.SendAsync("PromotionInsertUpdate");
                 return OkResponse();
             }
         }
@@ -185,6 +191,7 @@ namespace Webet333.api.Controllers
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
                 await promotion_help.UpdateStatus(request);
+                await _hubContext.Clients.All.SendAsync("PromotionInsertUpdate");
                 return OkResponse();
             }
         }

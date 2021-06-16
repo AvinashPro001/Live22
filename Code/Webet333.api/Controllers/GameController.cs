@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -20,6 +21,7 @@ using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 using Webet333.api.Controllers.Base;
+using Webet333.api.Filters;
 using Webet333.api.Helpers;
 using Webet333.api.Helpers.SexyBaccarat;
 using Webet333.files.interfaces;
@@ -59,12 +61,14 @@ namespace Webet333.api.Controllers
 
         private IHostingEnvironment _hostingEnvironment;
 
-        public GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, SerialQueue queue, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, ApiLogsManager LogManager) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
+        private IHubContext<SignalRHub> _hubContext;
+        public GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, SerialQueue queue, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, ApiLogsManager LogManager, IHubContext<SignalRHub> hubContext) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.LogManager = LogManager;
             this.Queue = queue;
             this.Localizer = Localizer;
             _hostingEnvironment = environment;
+            _hubContext = hubContext;
         }
 
         #endregion Global variable and Constructor
@@ -2052,6 +2056,7 @@ namespace Webet333.api.Controllers
                 generic_help.DeleteImage(uploadManager, request.Id.ToString(), BaseUrlConfigsOptions.Value.AppDownloadImage);
                 generic_help.GetImage(uploadManager, SigBase64, BaseUrlConfigsOptions.Value.AppDownloadImage, request.Id.ToString());
             }
+            await _hubContext.Clients.All.SendAsync("DownloadLinkUpdate");
             return OkResponse();
         }
 
