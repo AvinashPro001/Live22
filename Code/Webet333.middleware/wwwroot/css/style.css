@@ -802,7 +802,7 @@ header .tooltip-inner {width: 100px!important; }
 .overlay button { padding: 10px 45px; background-color: #003b79; color: #ffffff; border: 0px; text-transform: uppercase; font-size: 15px; line-height: 20px; font-weight: bold; transition: 0.5s; border-radius: 8px;}
 .overlay button:focus,
 .overlay button:hover { background-color: #feb801; color: #003b79;}
-.text-content h4 { height: 65px; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+.text-content h4 { height: 65px; overflow: hidden; display: flex; justify-content: center; align-items: center; padding: 0 15px; }
 .hover-block > figure:hover .overlay { height: 100%; opacity: 1; }
 .slick-slide .img-text-block:hover .hover-block > figure img { height: 225px; max-width: 225px;}
 
