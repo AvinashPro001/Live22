@@ -13,9 +13,18 @@ ul.highlight-bank li.active figure, .bank-selection ul li.active img { filter: g
 
 .slider-for { background-color: #e6e6e6; }
 .tabcontent_account .slick-slide img { height: unset; border-radius: 0px;}
-.tabcontent_account .slider-nav img { padding: 10px; filter: grayscale(1); transition: 0.5s; cursor: pointer; }
-.tabcontent_account .slider-nav img:focus,
-.tabcontent_account .slider-nav img:hover { filter: grayscale(0); }
+.slider-nav img { padding: 10px; filter: grayscale(1); transition: 0.5s; cursor: pointer; }
+.casino_tabb_section .slider-nav .slick-slide.slick-active img,
+.slider-nav img:focus,
+.slider-nav img:hover { filter: grayscale(0); background-color: #febd17;}
+
+.casino_tabb_section .slider-nav .slick-slide.slick-active + .slick-active img,
+.casino_tabb_section .slider-nav .slick-slide.slick-active + .slick-active + .slick-active img ,
+.casino_tabb_section .slider-nav .slick-slide.slick-active + .slick-active + .slick-active + .slick-active img,
+.casino_tabb_section .slider-nav .slick-slide.slick-active + .slick-active + .slick-active + .slick-active + .slick-active img,
+.casino_tabb_section .slider-nav .slick-slide.slick-active + .slick-active + .slick-active + .slick-active + .slick-active + .slick-active img { filter: grayscale(1); background-color: transparent; }
+
+
 .asia_girl_right { float: none; }
 .asia_girl_right img { margin: 0 auto; }
 .play_now_btn img { max-width: 22px; display: inline-block; vertical-align: middle; }
