@@ -6,8 +6,9 @@
 export const environment = {
     production: false,
     //apiUrl: 'http://api.webet333.com/api/v1/'
-    apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
     //apiUrl: 'http://localhost:8091/api/v1/'
+    apiUrl: 'http://localhost:5000/api/v1/'
 };
 
 export const account = {
@@ -334,7 +335,11 @@ export const customer = {
     freeCreditEventUsersSelect: environment.apiUrl + 'freecreditevent/users/select',
 
     promotionUsersSelect: environment.apiUrl + 'promotions/users/select',
-    promotionSelectForDropdown: environment.apiUrl + 'promotions/select/dropdown'
+    promotionSelectForDropdown: environment.apiUrl + 'promotions/select/dropdown',
+
+    setSBOPlayerDefaultBetLimit: environment.apiUrl + 'sbo/set/playerdefaultbetlimit',
+    updateSBOPlayerDefaultBetLimit: environment.apiUrl + 'sbo/update/playerdefaultbetlimit',
+    getSBOPlayerDefaultBetLimit: environment.apiUrl + 'sbo/get/playerdefaultbetlimit'
 }
 
 export const playtech = {

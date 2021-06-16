@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -125,5 +126,62 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Login
+
+        #region Set Player Default Bet Limit
+
+        [HttpPost(ActionsConst.SBO.SetPlayerDefaultBetLimit)]
+        public async Task<IActionResult> SetPlayerDefaultBetLimitAsync([FromBody] List<SBOSetPlayerDefaultBetLimitRequest> request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await CheckUserRole();
+
+            using (var SBO_helper = new SBOGameHelpers(Connection))
+            {
+                await SBO_helper.SetPlayerDefaultBetLimitAsync(request);
+
+                return OkResponse();
+            }
+        }
+
+        #endregion Set Player Default Bet Limit
+
+        #region Set Player Default Bet Limit
+
+        [HttpPost(ActionsConst.SBO.UpdatePlayerDefaultBetLimit)]
+        public async Task<IActionResult> UpdatePlayerDefaultBetLimitAsync([FromBody] List<SBOSetPlayerDefaultBetLimitUpdateRequest> request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await CheckUserRole();
+
+            using (var SBO_helper = new SBOGameHelpers(Connection))
+            {
+                await SBO_helper.UpdatePlayerDefaultBetLimitAsync(request);
+
+                return OkResponse();
+            }
+        }
+
+        #endregion Set Player Default Bet Limit
+
+        #region Get Player Default Bet Limit
+
+        [HttpGet(ActionsConst.SBO.GetPlayerDefaultBetLimit)]
+        public async Task<IActionResult> GetPlayerDefaultBetLimitAsync()
+        {
+            await CheckUserRole();
+
+            using (var SBO_helper = new SBOGameHelpers(Connection))
+            {
+               var result =  await SBO_helper.GetPlayerDefaultBetLimitAsync();
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Get Player Default Bet Limit
     }
 }

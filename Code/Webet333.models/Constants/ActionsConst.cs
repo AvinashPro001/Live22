@@ -758,6 +758,12 @@
             public const string Login = "sbo/login";
 
             public const string GetLeague = "sbo/getLeague";
+
+            public const string SetPlayerDefaultBetLimit = "sbo/set/playerdefaultbetlimit";
+
+            public const string UpdatePlayerDefaultBetLimit = "sbo/update/playerdefaultbetlimit";
+
+            public const string GetPlayerDefaultBetLimit = "sbo/get/playerdefaultbetlimit";
         }
     }
 }

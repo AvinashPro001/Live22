@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -110,32 +111,33 @@ namespace Webet333.api.Helpers
                 CompanyKey = GameConst.SBO.CompanyKey,
                 ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
                 Username = Username,
-                BetSettings = new System.Collections.Generic.List<BetSetting>
+                BetSettings = new List<BetSetting>
                 {
                     new BetSetting
                     {
                         MarketType = 0,
                         MaxBet = 3000,
                         MaxBetPerMatch = 3000,
+                        MinBet = 5,
+                        SportType = 3
+                    },
+                    new  BetSetting
+                    {
+                        MarketType = 3,
+                        MaxBet = 3000,
+                        MaxBetPerMatch = 3000,
                         MinBet =5,
                         SportType = 3
                     },
-                   new  BetSetting{
-                       MarketType = 3,
-                       MaxBet = 3000,
-                       MaxBetPerMatch = 3000,
-                       MinBet =5,
-                       SportType = 3
+                    new  BetSetting
+                    {
+                        MarketType = 4,
+                        MaxBet = 3000,
+                        MaxBetPerMatch = 3000,
+                        MinBet =5,
+                        SportType = 3
                     },
-                   new  BetSetting{
-                       MarketType = 4,
-                       MaxBet = 3000,
-                       MaxBetPerMatch = 3000,
-                       MinBet =5,
-                       SportType = 3
-                    },
-
-                   new BetSetting
+                    new BetSetting
                     {
                         MarketType = 0,
                         MaxBet = 3000,
@@ -143,20 +145,22 @@ namespace Webet333.api.Helpers
                         MinBet =5,
                         SportType = 11
                     },
-                   new  BetSetting{
-                       MarketType = 3,
-                       MaxBet = 3000,
-                       MaxBetPerMatch = 3000,
-                       MinBet =5,
-                       SportType = 11
+                    new  BetSetting
+                    {
+                        MarketType = 3,
+                        MaxBet = 3000,
+                        MaxBetPerMatch = 3000,
+                        MinBet =5,
+                        SportType = 11
                     },
-                   new  BetSetting{
+                   new  BetSetting
+                   {
                        MarketType = 4,
                        MaxBet = 3000,
                        MaxBetPerMatch = 3000,
                        MinBet =5,
                        SportType = 11
-                    }
+                   }
                 }
             };
 
@@ -240,6 +244,44 @@ namespace Webet333.api.Helpers
         }
 
         #endregion Call Login to SportsBook 3rd Party API
+
+        #region Player Default Bet Limit
+
+        internal async Task SetPlayerDefaultBetLimitAsync(List<SBOSetPlayerDefaultBetLimitRequest> request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.SBO.SetPlayerDefaultBetLimit, request);
+            }
+        }
+        
+        #endregion Player Default Bet Limit in DB
+
+        #region Player Default Bet Limit
+
+        internal async Task UpdatePlayerDefaultBetLimitAsync(List<SBOSetPlayerDefaultBetLimitUpdateRequest> request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.SBO.SetPlayerDefaultBetLimit, request);
+            }
+        }
+        
+        #endregion Player Default Bet Limit in DB
+
+        #region Get Player Default Bet Limit
+
+        internal async Task<SBOSelectPlayerDefaultBetLimitResponse> GetPlayerDefaultBetLimitAsync()
+        {
+            using (var repository = new DapperRepository<SBOSelectPlayerDefaultBetLimitResponse>(Connection))
+            {
+                var result = await repository.FindAsync(StoredProcConsts.SBO.SelectPlayerDefaultBetLimit, new { });
+
+                return result;
+            }
+        }
+
+        #endregion Player Default Bet Limit in DB
 
         #region House Keeping
 

@@ -601,6 +601,10 @@
         public class SBO
         {
             public const string Register = "[dbo].[Users_Insert_SBO]";
+
+            public const string SetPlayerDefaultBetLimit = "[dbo].[Set_Default_Player_Betlimit_SBO]";
+
+            public const string SelectPlayerDefaultBetLimit = "[dbo].[Select_Default_Player_Betlimit_SBO]";
         }
     }
 }

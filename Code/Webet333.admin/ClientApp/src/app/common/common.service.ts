@@ -225,7 +225,11 @@ export class CommonService {
         VIPLevelRequired: 'VIP Level Required.',
         PleaseSelectMobileBannerImage: 'Please Select Mobile Banner Image',
         PleaseSelectDesktopBannerImage: 'Please Select Desktop Banner Image',
-        PleaseAddPromotionFixedBonusAmount: 'Please Add Promotion Fixed Bonus Amount.'
+        PleaseAddPromotionFixedBonusAmount: 'Please Add Promotion Fixed Bonus Amount.',
+        PleaseCheckRequestModel: 'Please check request model.',
+        PleaseEnterMaxBet: 'Please enter max bet value.',
+        PleaseEnterMaxBetMatch: 'Please enter max bet value match.',
+        PleaseEnterMinBet: 'Please enter min bet value.'
     };
 
     //#endregion Error List
