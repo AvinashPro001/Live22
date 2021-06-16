@@ -1047,3 +1047,34 @@ async function UpdateAutoTransfer() {
     await PostMethod(accountEndPoints.updateProfile, model);
     await GetProfileAndSetInSessionStorage()
 }
+
+async function CheckVaderPayMainteance() {
+    var res = await GetMethod(settingEndPoints.VaderPayMainteanceSelect);
+    if (res.status == 200) {
+        if (res.response.data.vaderPay.value == "true") {
+            $("#vader-pay-maintenance").css("display", "");
+            $("#vader-pay-non-maintenance").css("display", "none");
+        }
+    }
+}
+
+async function CheckSupportGame() {
+    let model = {}
+    var res = await PostMethod(accountEndPoints.GetGameSupport, model);
+    if (res.response.data.length > 0) {
+        $("#918kiss-wallet-allin").attr("disabled", !res.data[0].Is918Kiss ? "disabled" : "")
+        $("#ag-wallet-allin").attr("disabled", !res.data[0].IsAG ? "disabled" : "")
+        $("#allbet-wallet-allin").attr("disabled", !res.data[0].IsAllBet ? "disabled" : "")
+        $("#dg-wallet-allin").attr("disabled", !res.data[0].IsDG ? "disabled" : "")
+        $("#joker-wallet-allin").attr("disabled", !res.data[0].IsJoker ? "disabled" : "")
+        $("#m8-wallet-allin").attr("disabled", !res.data[0].IsM8 ? "disabled" : "")
+        $("#maxbet-wallet-allin").attr("disabled", !res.data[0].IsMaxbet ? "disabled" : "")
+        $("#mega888-wallet-allin").attr("disabled", !res.data[0].IsMega888 ? "disabled" : "")
+        $("#playtech-wallet-allin").attr("disabled", !res.data[0].IsPlaytech && !res.data[0].IsPlaytechSlot ? "disabled" : "")
+        $("#pragmatic-wallet-allin").attr("disabled", !res.data[0].IsPragmatic ? "disabled" : "")
+        $("#pussy888-wallet-allin").attr("disabled", !res.data[0].IsPussy888 ? "disabled" : "")
+        $("#sa-wallet-allin").attr("disabled", !res.data[0].IsSA ? "disabled" : "")
+        $("#sexy-wallet-allin").attr("disabled", !res.data[0].IsSexyBaccarat ? "disabled" : "")
+        $("#wm-wallet-allin").attr("disabled", !res.data[0].IsWM ? "disabled" : "")
+    }
+}

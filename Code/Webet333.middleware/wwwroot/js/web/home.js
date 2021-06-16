@@ -24,6 +24,7 @@ $(document).ready(function () {
     GetWalletList();
     CheckGameMaintenance();
     SignalRConnect();
+    SetRefKeyword();
 });
 
 //#endregion
@@ -320,10 +321,19 @@ function SetRefKeyword() {
     var name = url.searchParams.get("ref");
     if (name !== null) {
         SetCookie("ref", name, 1000);
+        var referenceKeywordModel = {
+            keyword: name
+        };
+        PostMethod(settingEndPoints.socialMediaReference, referenceKeywordModel);
     }
     else {
         SetCookie("ref", null, 1000);
     }
+
+    var referenceKeywordModelDesktopElse = {
+        keyword: 'DESKTOP'
+    };
+    PostMethod(settingEndPoints.socialMediaReference, referenceKeywordModelDesktopElse);
 }
 
 function SetLanguage() {
@@ -360,7 +370,6 @@ function ChangeLanguage(LangCode) {
     SetLocalStorage("language", LangCode);
     window.location.reload();
 }
-
 
 function FollowOnFacebook() {
     window.open("https://www.facebook.com/WEBET333MY/");

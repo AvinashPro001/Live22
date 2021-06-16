@@ -163,6 +163,7 @@ var accountEndPoints = {
     SendOTP: "account/send/otp",
     VerifiedOTP: "account/verified/otp",
     userTotalTurnover: "Game/DailyTurnover",
+    GetGameSupport: "Game/User/GameSupport",
 };
 
 var promotionEndPoints = {
@@ -175,6 +176,8 @@ var settingEndPoints = {
     downloadLinkList: "Game/DownloadLink/list",
     allbank: "settings/banks/list",
     walletList: "account/wallet/select",
+    socialMediaReference: "account/socialmediastatics",
+    VaderPayMainteanceSelect: "account/vaderpay/maintenance/select",
 };
 
 var gameBalanceEndPoints = {

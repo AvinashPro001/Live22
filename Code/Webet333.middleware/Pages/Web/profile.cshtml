@@ -257,39 +257,46 @@
                                 </div>
 
                                 <div id="Vader-Pay" class="tabcontent">
-                                    <div class="row">
-                                        <div class="col-lg-8 col-md-8">
-                                            <ul class="deposit-bank-listing password-upadte white-text">
-                                                <li>
-                                                    <label class="fleft">
-                                                        <p class="big no-mar lang blk-text">Amount:</p>
-                                                    </label>
-                                                    <label class="fright card-number mendatory">
-                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount_online">
-
-                                                        <div class="min-max-limit">
-                                                            <ul class="d-flex">
-                                                                <li class="data-blog" onclick="SetAmountInTextBox(50,true)">50</li>
-                                                                <li class="data-blog" onclick="SetAmountInTextBox(100,true)">100</li>
-                                                                <li class="data-blog" onclick="SetAmountInTextBox(300,true)">300</li>
-                                                                <li class="data-blog" onclick="SetAmountInTextBox(500,true)">500</li>
-                                                                <li class="data-blog" onclick="SetAmountInTextBox(100,true)">1000</li>
-                                                            </ul>
-                                                        </div>
-                                                    </label>
-                                                </li>
-                                            </ul>
+                                    <div class="row" id="vader-pay-maintenance" style="display:none;">
+                                        <div class="col-lg-8 col-md-8 text-center">
+                                            <h4>Under Maintenance</h4>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <section class="select-checkboxes">
-                                                <h3 class="mar-top-15">Please select Promotion below:</h3>
-                                                <ul class="mar-top-15 promotion-choose" id="deposit_promotion">
+                                    <div id="vader-pay-non-maintenance">
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-8">
+                                                <ul class="deposit-bank-listing password-upadte white-text">
+                                                    <li>
+                                                        <label class="fleft">
+                                                            <p class="big no-mar lang blk-text">Amount:</p>
+                                                        </label>
+                                                        <label class="fright card-number mendatory">
+                                                            <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount_online">
+
+                                                            <div class="min-max-limit">
+                                                                <ul class="d-flex">
+                                                                    <li class="data-blog" onclick="SetAmountInTextBox(50,true)">50</li>
+                                                                    <li class="data-blog" onclick="SetAmountInTextBox(100,true)">100</li>
+                                                                    <li class="data-blog" onclick="SetAmountInTextBox(300,true)">300</li>
+                                                                    <li class="data-blog" onclick="SetAmountInTextBox(500,true)">500</li>
+                                                                    <li class="data-blog" onclick="SetAmountInTextBox(100,true)">1000</li>
+                                                                </ul>
+                                                            </div>
+                                                        </label>
+                                                    </li>
                                                 </ul>
-                                            </section>
-                                            <div class="text-left mar-comman">
-                                                <button name="" value="submit" class="submit" onclick="Deposit(true)">Submit</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <section class="select-checkboxes">
+                                                    <h3 class="mar-top-15">Please select Promotion below:</h3>
+                                                    <ul class="mar-top-15 promotion-choose" id="deposit_promotion">
+                                                    </ul>
+                                                </section>
+                                                <div class="text-left mar-comman">
+                                                    <button name="" value="submit" class="submit" onclick="Deposit(true)">Submit</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -516,7 +523,7 @@
                                             <ul>
                                                 <li class="mb5"><b>Playtech</b></li>
                                                 <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('PlayTech Wallet')"  id="playtech-wallet-allin">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('PlayTech Wallet')" id="playtech-wallet-allin">
                                                         ALL In
                                                     </button>
                                                 </li>
@@ -876,7 +883,7 @@
                                 <div class="col-sm-3">
                                     <label class="history_sec">Transaction Date *</label>
                                 </div>
-                              
+
 
                                 <div class="col-sm-9 pl0">
                                     <div class="history-tabs">
@@ -888,7 +895,7 @@
                                                 <a data-toggle="tab"><span key="transfer_title" class="lang">In 3 days</span></a>
                                             </li>
                                             <li class="col-sm-3" onclick="GetInWeekDate();">
-                                                <a data-toggle="tab"><span class="lang" >In a Week</span></a>
+                                                <a data-toggle="tab"><span class="lang">In a Week</span></a>
                                             </li>
                                             <li class="col-sm-3" onclick="GetInMonthDate();">
                                                 <a data-toggle="tab"><span key="withdrawal_title" class="lang">In a Month</span></a>
@@ -1384,5 +1391,7 @@
         SetProfilePageBanks();
         GetDailyTurnover();
         SetProfilePageData();
+        CheckVaderPayMainteance();
+        CheckSupportGame();
     });
 </script>
