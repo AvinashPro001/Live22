@@ -50,7 +50,7 @@ ul.highlight-bank li.active figure, .bank-selection ul li.active img { filter: g
 /* */
 .img-block { height: 143px; display: flex; align-items: center; flex-wrap: wrap; justify-content: center; }
 .promotion_wrap_sec .slider-nav { background-color: rgba(244,244,244,0.5); border: 1px solid #c7c7c7; box-shadow: 0px 4px 13px #ccc; margin-bottom: 30px; }
-.promotion_wrap_sec .slider-nav .slick-slide img { height: 43px; width: 100px; margin: 0 auto; }
+.promotion_wrap_sec .slider-nav .slick-slide img { height: 60px; width: 100%; margin: 0 auto; }
 
 
 
