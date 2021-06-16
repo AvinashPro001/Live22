@@ -68,7 +68,8 @@ namespace Webet333.models.Mapping.Promotions
                 IsDiamond = x.IsDiamond,
                 Active = x.Active,
                 MinDeposit = x.MinDeposit,
-                PromotionFixedBonus = x.PromotionFixedBonus
+                PromotionFixedBonus = x.PromotionFixedBonus,
+                IsYeeBetBetLimit = x.IsYeeBetBetLimit
             }).ToList();
 
             return response;

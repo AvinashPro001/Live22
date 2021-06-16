@@ -54,6 +54,7 @@ namespace Webet333.api.Controllers
             using (var promotion_help = new PromotionsHelpers(Connection))
             {
                 var promotions = await promotion_help.Insert(request);
+
                 return OkResponse(promotions.Id);
             }
         }

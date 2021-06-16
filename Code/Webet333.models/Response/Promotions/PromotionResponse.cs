@@ -179,6 +179,9 @@ namespace Webet333.models.Response.Promotions
 
         [JsonProperty(PropertyName = "promotionFixedBonus")]
         public dynamic PromotionFixedBonus { get; set; }
+
+        [JsonProperty(PropertyName = "isYeeBetBetLimit")]
+        public bool IsYeeBetBetLimit { get; set; }
     }
 
     public class Notes

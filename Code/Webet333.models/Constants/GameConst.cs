@@ -545,6 +545,10 @@
                 public const string GetBettingDetails = "data/getbets";
 
                 public const string RemoveGetBettingDetails = "data/removebets";
+
+                public const string GetBetLimit = "quota/list";
+
+                public const string SetBetLimit = "quota/set";
             }
         }
 
@@ -1058,6 +1062,10 @@
                 public const string GetBettingDetails = "data/getbets";
 
                 public const string RemoveGetBettingDetails = "data/removebets";
+                
+                public const string GetBetLimit = "quota/list";
+
+                public const string SetBetLimit = "quota/set";
             }
         }
 
