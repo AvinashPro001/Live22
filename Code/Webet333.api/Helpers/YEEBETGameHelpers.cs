@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
+using Webet333.models.Request.Game.YeeBet;
 using Webet333.models.Response.Game.YEEBET;
 
 namespace Webet333.api.Helpers
@@ -141,6 +142,86 @@ namespace Webet333.api.Helpers
         }
 
         #endregion Call Remove Betting Details 3rd Party API
+
+        #region Call Get Bet Limit 3rd Party API
+
+        internal async Task<YeeBetGetBetLimitResponse> GetBetLimitAsync()
+        {
+            var temp = $"appid={GameConst.YEEBET.APPId}";
+
+            var tempMD5 = SecurityHelpers.MD5EncrptText($"{temp}&key={GameConst.YEEBET.SecretKey}");
+
+            var Parameter = $"{temp}&sign={tempMD5}";
+
+            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.GetBetLimit}?{Parameter}";
+
+            var result = JsonConvert.DeserializeObject<YeeBetGetBetLimitResponse>(await GameHelpers.CallThirdPartyApi(Url));
+
+            return result;
+        }
+
+        internal List<YeeBetGetBetLimitResponseArray> AddNameInGetBetLimitResponse(YeeBetGetBetLimitResponseArray[] response)
+        {
+            for (int i = 0; i < response.Count(); i++)
+            {
+                response[i].Name += i + 1;
+            }
+
+            return response.ToList();
+        }
+
+        internal async Task SaveGetBetLimitAsync(List<YeeBetGetBetLimitResponseArray> response)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.YEEBET.SaveGetBetLimit, response);
+            }
+        }
+
+        #endregion Call Get Bet Limit 3rd Party API
+
+        #region Call Set Bet Limit 3rd Party API
+
+        public static async Task<YEEBETBasicResponse> SetBetLimitAsync(YeeBetSetBetLimitRequest request)
+        {
+            var temp = $"appid={GameConst.YEEBET.APPId}&" +
+                $"qids={request.QIds}&" +
+                $"username={request.Username}";
+
+            var tempMD5 = SecurityHelpers.MD5EncrptText($"{temp}&key={GameConst.YEEBET.SecretKey}");
+
+            var Parameter = $"{temp}&sign={tempMD5}";
+
+            var Url = $"{GameConst.YEEBET.Url}{GameConst.YEEBET.InterfaceName.SetBetLimit}?{Parameter}";
+
+            return JsonConvert.DeserializeObject<YEEBETBasicResponse>(await GameHelpers.CallThirdPartyApi(Url));
+        }
+
+        #endregion Call Set Bet Limit 3rd Party API
+
+        #region Set BetLimit And Deposit Amount For User
+
+        internal async Task SetBetLimitAndDepositAmountAsync(List<SetBetLimitAndDepositAmountRequest> request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.YEEBET.SetBetlimitDepositAmount, request);
+            }
+        }
+
+        #endregion Set BetLimit And Deposit Amount For User
+
+        #region Update BetLimit And Deposit Amount For User
+
+        internal async Task UpdateBetLimitAndDepositAmountAsync(List<SetBetLimitAndDepositAmountUpdateRequest> request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.YEEBET.SetBetlimitDepositAmount, request);
+            }
+        }
+
+        #endregion Update BetLimit And Deposit Amount For User
 
         #region House Keeping
 

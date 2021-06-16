@@ -739,6 +739,14 @@
             public const string Register = "yeebet/register";
 
             public const string Login = "yeebet/login";
+
+            public const string GetBetLimit = "yeebet/get/betlimit";
+
+            public const string SetBetLimit = "yeebet/set/betlimit";
+
+            public const string SetBetLimitAndDepositAmount = "yeebet/set/betlimit/deposit";
+
+            public const string UpdateBetLimitAndDepositAmount = "yeebet/update/betlimit/deposit";
         }
 
         public class SBO
