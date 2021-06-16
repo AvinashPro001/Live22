@@ -138,7 +138,8 @@ async function ProfileData() {
             SetAllValueInElement("fullname", res.name)
             SetBackgroudImagePath("silver_wallet", res.vipBanner)
             SetAllValueInElement("vip_level_name", res.vipLevelName)
-            $('#auto_transfer_checkbox').prop('checked', res.autoTransfer ?"checked":"");
+            $('#auto_transfer_checkbox').prop('checked', res.autoTransfer ? "checked" : "");
+            SetVIPageProgressBar(res.vipLevelName, res.totalDepositAmount);
         }
         else {
             await GetProfileAndSetInSessionStorage();
@@ -507,6 +508,32 @@ async function VerifiedOTP() {
         document.getElementById("txt_otp").value = "";
     }
     LoaderHide();
+}
+
+function SetVIPageProgressBar(vipLevel,TotalDepositAmount) {
+    var percent = 0;
+    switch (vipLevel) {
+        case "Normal": percent = 0; break;
+        case "Bronze": percent = 19; break;
+        case "Silver": percent = 37; break;
+        case "Gold": percent = 55; break;
+        case "Platinum": percent = 73; break;
+        case "Diamond": percent = 100; break;
+    }
+    $(".progress-bar").css("width", percent + "%").attr("aria-valuenow", percent);
+    $(".progress-completed").text(percent + "%");
+    $("span").each(function () {
+        if ($(this).hasClass("activestep")) {
+            $(this).removeClass("activestep");
+        }
+    });
+    $("#" + vipLevel.toLocaleLowerCase() + '-span').addClass("activestep");
+    $("#currentStatus").val(vipLevel);
+    $("#currentDeposit").val(TotalDepositAmount);
+
+    $("#currentStatus").attr("disabled", "disabled");
+    $("#currentDeposit").attr("disabled", "disabled");
+    $("#nextLevelUpgradAmount").attr("disabled", "disabled");
 }
 
 function SetTrackingData(username, cookiesName) {

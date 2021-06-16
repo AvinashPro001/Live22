@@ -76,6 +76,9 @@ namespace Webet333.models.Response.Account
         [JsonProperty(PropertyName = "withdrawLimit")]
         public string WithdrawLimit { get; set; }
 
+        [JsonProperty(PropertyName = "totalDepositAmount")]
+        public decimal TotalDepositAmount { get; set; }
+
         public ICollection<MenusResponse> PermissionsList { get; set; }
 
         [JsonIgnore]

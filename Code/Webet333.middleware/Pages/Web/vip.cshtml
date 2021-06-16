@@ -18,9 +18,6 @@
                 <ul>
                     <li><a class="tablinks_benefits_referal active" onclick="openCity1(event, 'benefits')">Benefits</a></li>
                     <li><a class="tablinks_benefits_referal" onclick="openCity1(event, 'faqs')">FAQ</a></li>
-                    @*<li>
-                        <a class="tablinks_benefits_referal" onclick="openCity1(event, 'refferal')">Referral</a>
-                    </li>*@
                 </ul>
             </div>
         </div>
@@ -36,32 +33,32 @@
                                         <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 15%;"></div>
                                     </div>
                                     <div class="step">
-                                        <span class="point activestep" onclick="javascript: resetActive(event, 0, 'step-1');">
+                                        <span class="point" id="normal-span">
                                             <span class="step-title"> Minimum Step</span>
                                             <span class="step-title1"> < 30,000 </span>
                                             <span class="price">Normal</span>
                                         </span>
-                                        <span class="point" onclick="javascript: resetActive(event,16, 'step-1');">
+                                        <span class="point" id="bronze-span">
                                             <span class="step-title"> Minimum Step</span>
                                             <span class="step-title1"> > 30,000 </span>
-                                            <span class="price">Brooze</span>
+                                            <span class="price">Bronze</span>
                                         </span>
-                                        <span class="point" onclick="javascript: resetActive(event, 32, 'step-1');">
+                                        <span class="point" id="silver-span">
                                             <span class="step-title"> Minimum Step</span>
                                             <span class="step-title1"> > 100,000 </span>
                                             <span class="price">Silver</span>
                                         </span>
-                                        <span class="point" onclick="javascript: resetActive(event, 64, 'step-1');">
+                                        <span class="point" id="gold-span">
                                             <span class="step-title"> Minimum Step</span>
                                             <span class="step-title1"> > 500,000 </span>
                                             <span class="price">Gold</span>
                                         </span>
-                                        <span class="point" onclick="javascript: resetActive(event, 80, 'step-1');">
+                                        <span class="point" id="platinum-span">
                                             <span class="step-title"> Minimum Step</span>
                                             <span class="step-title1"> > 1,000,000 </span>
                                             <span class="price">Platinum</span>
                                         </span>
-                                        <span class="point" onclick="javascript: resetActive(event, 100, 'step-1');">
+                                        <span class="point" id="diamond-span">
                                             <span class="step-title"> Minimum Step</span>
                                             <span class="step-title1"> > 4,000,000 </span>
                                             <span class="price">Diamond</span>
@@ -72,7 +69,7 @@
                             <div class="row ml0 mr0">
                                 <div class="col-sm-5">
                                     <div class="vip_sec_logo_left">
-                                        <img src="~/images/vip6.png" alt="vip1" />
+                                        <img id="login_user_vip_level" src="" alt="vip1" />
                                     </div>
                                 </div>
                                 <div class="col-sm-7 ">
@@ -84,7 +81,7 @@
                                                         <label>Current Status :</label>
                                                     </div>
                                                     <div class="col-md-7 pr0 current_status_row_right">
-                                                        <input type="text" palceholder="" name="" />
+                                                        <input type="text" palceholder="" name="" id="currentStatus"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -94,7 +91,7 @@
                                                         <label>Current Deposit :</label>
                                                     </div>
                                                     <div class="col-md-7 pr0 current_status_row_right">
-                                                        <input type="text" palceholder="" name="" />
+                                                        <input type="text" palceholder="" name="" id="currentDeposit"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -104,7 +101,7 @@
                                                         <label>Amount Required for next tier upgrade :</label>
                                                     </div>
                                                     <div class="col-md-7 pr0 current_status_row_right">
-                                                        <input type="text" palceholder="" name="" />
+                                                        <input type="text" palceholder="" name="" id="nextLevelUpgradAmount"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,9 +118,6 @@
                     </div>
                     <div id="faqs" class="tabcontent_benefits_referal">
                         bbbb
-                    </div>
-                    <div id="refferal" class="tabcontent_benefits_referal">
-                        cccc
                     </div>
                 </div>
             </div>
@@ -297,21 +291,21 @@
     }
 </script>
 <script type="text/javascript">
-    function resetActive(event, percent, step) {
-        $(".progress-bar").css("width", percent + "%").attr("aria-valuenow", percent);
-        $(".progress-completed").text(percent + "%");
+    //function resetActive(event, percent, step) {
+    //    $(".progress-bar").css("width", percent + "%").attr("aria-valuenow", percent);
+    //    $(".progress-completed").text(percent + "%");
 
-        $("span").each(function () {
-            if ($(this).hasClass("activestep")) {
-                $(this).removeClass("activestep");
-            }
-        });
-
-        if (event.target.className == "point") {
-            $(event.target).addClass("activestep");
-        }
-        else {
-            $(event.target.parentNode).addClass("activestep");
-        }
-    }
+    //    $("span").each(function () {
+    //        if ($(this).hasClass("activestep")) {
+    //            $(this).removeClass("activestep");
+    //        }
+    //    });
+    //    debugger
+    //    if (event.target.className == "point") {
+    //        $(event.target).addClass("activestep");
+    //    }
+    //    else {
+    //        $(event.target.parentNode).addClass("activestep");
+    //    }
+    //}
 </script>
