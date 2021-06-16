@@ -788,7 +788,7 @@ header .tooltip-inner {width: 100px!important; }
 .promotion-choose {display: grid; grid-gap: 10px; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; padding-right: 10px; }
 .bank-selection ul.bank-listing.step-2-desc li label {width: 100%} 
 
-..img-block-content { cursor: pointer; }
+.img-block-content { cursor: pointer; }
 .img-text-block { position: relative; }
 .img-hover-block { display: flex; position: relative; margin: 0 -10px; flex-wrap: wrap; }
 .img-hover-block li { width: calc(100% / 4 - 10px); margin: 5px; }
