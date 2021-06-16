@@ -7,5 +7,8 @@ namespace Webet333.models.Request.Game
     {
         [JsonProperty(PropertyName = "WalletName")]
         public string WalletName { get; set; }
+
+        [JsonProperty(PropertyName = "Name")]
+        public string Name { get; set; }
     }
 }

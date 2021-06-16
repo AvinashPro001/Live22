@@ -1,4 +1,4 @@
-﻿var baseUrl = "http://47.242.143.182:8081/api/v1/";
+﻿var baseUrl = "http://localhost:8080/api/v1/";
 var baseUrlWithoutVersion = "http://47.242.143.182:8081";
 
 var apiEndPoints = {
