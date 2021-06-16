@@ -112,7 +112,7 @@ async function getReference() {
             keyword: name
         };
         await PostMethodWithParameter(apiEndPoints.socialMediaReference, referenceKeywordModel);
-        await MobileDesktopReferenceInsert(url);
+        await MobileDesktopReferenceInsert(url);    
     }
     else {
         await MobileDesktopReferenceInsert(url);

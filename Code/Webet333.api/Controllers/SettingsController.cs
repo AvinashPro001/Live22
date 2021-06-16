@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
+using Webet333.api.Filters;
 using Webet333.api.Helpers;
 using Webet333.files.interfaces;
 using Webet333.models.Configs;
@@ -17,9 +19,11 @@ namespace Webet333.api.Controllers
     [Route(ActionsConst.ApiVersion)]
     public class SettingsController : BaseController
     {
-        public SettingsController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
+        private IHubContext<SignalRHub> _hubContext;
+        public SettingsController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, IHubContext<SignalRHub> hubContext) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
+            _hubContext = hubContext;
         }
 
         #region Retrieve list of Banks
@@ -68,6 +72,7 @@ namespace Webet333.api.Controllers
             using (var setting_help = new SettingsHelpers(Connection))
             {
                 var bankId = await setting_help.AddAdminBankDetails(request);
+                await _hubContext.Clients.All.SendAsync("AdminBankInsertUpdate");
                 return OkResponse(bankId);
             }
         }
@@ -83,6 +88,7 @@ namespace Webet333.api.Controllers
             using (var setting_help = new SettingsHelpers(Connection))
             {
                 await setting_help.AddOrUpdateAdminBankDetails(request);
+                await _hubContext.Clients.All.SendAsync("AdminBankInsertUpdate");
                 return OkResponse();
             }
         }
@@ -147,6 +153,7 @@ namespace Webet333.api.Controllers
             using (var setting_help = new SettingsHelpers(Connection))
             {
                 await setting_help.DeleteOrActiveAdminBankDetail(Guid.Parse(request.Id), Deleted: true);
+                await _hubContext.Clients.All.SendAsync("AdminBankInsertUpdate");
                 return OkResponse();
             }
         }
@@ -162,6 +169,7 @@ namespace Webet333.api.Controllers
             using (var setting_help = new SettingsHelpers(Connection))
             {
                 await setting_help.DeleteOrActiveAdminBankDetail(Guid.Parse(request.Id), Active: request.Active, adminId: adminId);
+                await _hubContext.Clients.All.SendAsync("AdminBankInsertUpdate");
                 return OkResponse();
             }
         }
@@ -218,6 +226,7 @@ namespace Webet333.api.Controllers
             using (var setting_help = new SettingsHelpers(Connection))
             {
                 await setting_help.DeleteOrActiveAnnouncementDetail(Guid.Parse(request.Id), adminId: adminId);
+                await _hubContext.Clients.All.SendAsync("AnnouncementInsertUpdate");
                 return OkResponse();
             }
         }
@@ -235,6 +244,7 @@ namespace Webet333.api.Controllers
             using (var setting_help = new SettingsHelpers(Connection))
             {
                 await setting_help.GetAnnouncementAdd(request);
+                await _hubContext.Clients.All.SendAsync("AnnouncementInsertUpdate");
                 return OkResponse();
             }
         }
@@ -251,6 +261,7 @@ namespace Webet333.api.Controllers
             using (var setting_help = new SettingsHelpers(Connection))
             {
                 await setting_help.GetAnnouncementUpdate(request);
+                await _hubContext.Clients.All.SendAsync("AnnouncementInsertUpdate");
                 return OkResponse();
             }
         }

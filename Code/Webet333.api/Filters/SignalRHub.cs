@@ -11,6 +11,10 @@ namespace Webet333.api.Filters
             await Clients.All.SendAsync("ManagerApprovalList");
             await Clients.All.SendAsync("WithdrawApprovalList");
             await Clients.All.SendAsync("DepositApprovalList");
+            await Clients.All.SendAsync("PromotionInsertUpdate");
+            await Clients.All.SendAsync("AnnouncementInsertUpdate");
+            await Clients.All.SendAsync("AdminBankInsertUpdate");
+            await Clients.All.SendAsync("DownloadLinkUpdate");
         }
     }
 }

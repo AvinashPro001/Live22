@@ -1920,7 +1920,7 @@ p.bonus_content a{color: #333;}
 .bank-name .bank_details_icon                   { margin-right: 7px; padding-bottom: 10px;  max-width: 100%; }
 
 /* 3 June css start */
-.deposit-bank-selection ul li img                       { padding: 2px; height: 46px; width: auto; }
+.deposit-bank-selection ul li img                       { padding: 2px; height: 46px; width: 46px; }
 .deposit-bank-selection ul.highlight-bank li figure                     { height: 50px; width: 50px; padding: 0px; text-align: center;}
 .deposit-bank-selection ul li a                         { display: flex; align-items: center; color: #000; }
 .deposit-bank-selection ul li a p                       { margin-bottom: 0px; line-height: 15px; text-transform: uppercase; }
