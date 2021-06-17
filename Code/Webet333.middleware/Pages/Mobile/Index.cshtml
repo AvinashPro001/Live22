@@ -559,6 +559,23 @@
             });
         }
 
+        function loadPageVIP() {
+            CheckUserVerified()
+            $('body').css('padding-top', '0px');
+            $.ajax({
+                url: '/mobile/vip',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "vip";
+                    $('#pageResponse').html(response);
+                    history.pushState(null, null, "/mobile?p=vip");
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
         $("html").click(async function (event) {
             if (GetLocalStorage('currentUser') !== null) {
                 PostMethod(apiEndPoints.userLastTimeUpdate, {});
@@ -629,6 +646,9 @@
                                 break;
                             case "withdraw":
                                 loadPageWithdraw()
+                                break;
+                            case "vip":
+                                loadPageVIP()
                                 break;
                         }
                     }
