@@ -1898,10 +1898,12 @@ body:not(.nohover) .hightligt_table tbody tr:hover {background-color: #ffa; }
 
 .table-vip-datas thead tr th:nth-child(1){text-align:left;padding:10px 12px 0px 12px;width: 254px;}
 .table-vip-datas thead tr th{width:128px;  padding:10px 12px 0px 12px;}
-.table-vip-datas thead tr th span img{width: 75px;}
+.table-vip-datas-img span img{width: 75px;}
 .hightligt_table tbody{border:1px solid #c7c7c7;}
 .hightligt_table tbody tr th{text-align:left; background-color: #f4f4f4; width: 223px; border-right: 1px solid #c7c7c7; }
 .hightligt_table tbody tr td{text-align:center; padding:10px 10px; color:#133a5a; border-right:1px solid #c7c7c7; background-color: #feefc4; width: 115px; font-size: 14px; font-weight: 600; }
+.hightligt_table .table-vip-datas-img td { border: 0px; }
+
 .table-vip-datas{width: 100%;float: left;padding: 10px 0px 5px 0px;}
 .highlight {font-weight:bold; background-color: #ddeedd; }
 .pagination_tables{float: right;padding-bottom: 15px;}

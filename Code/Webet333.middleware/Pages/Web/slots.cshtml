@@ -32,7 +32,7 @@
                 <div>
                     <div class="img-block text-center">
                         <div class="img-block-content">
-                            <figure><img class="hover_icons" src="~/images/playtech_white.png" alt="logo"></figure>
+                            <figure><img class="hover_icons" src="~/images/footerlogo/footerlogo6_color.png" alt="logo"></figure>
                             <p>PlayTech</p>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                 <div>
                     <div class="img-block text-center">
                         <div class="img-block-content">
-                            <figure><img class="hover_icons" src="~/images/footerlogo/footerlogo1.png" alt="logo"></figure>
+                            <figure><img class="hover_icons" src="~/images/footerlogo/footerlogo1_color.png" alt="logo"></figure>
                             <p>Asia Gaming</p>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                 <div>
                     <div class="img-block text-center">
                         <div class="img-block-content">
-                            <figure><img class="hover_icons" src="~/images/footerlogo/footerlogo14.png" alt="logo"></figure>
+                            <figure><img class="hover_icons" src="~/images/footerlogo/footerlogo14_color.png" alt="logo"></figure>
                             <p>Pragmatic Play</p>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                 <div>
                     <div class="img-block text-center">
                         <div class="img-block-content">
-                            <figure><img class="hover_icons" src="~/images/footerlogo/footerlogo7.png" alt="logo"></figure>
+                            <figure><img class="hover_icons" src="~/images/footerlogo/footerlogo7_color.png" alt="logo"></figure>
                             <p>Joker</p>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                 <div>
                     <div class="img-block text-center">
                         <div class="img-block-content">
-                            <figure><img class="hover_icons" src="~/images/footerlogo/footerlogo12.png" alt="logo"></figure>
+                            <figure><img class="hover_icons" src="~/images/footerlogo/footerlogo12_color.png" alt="logo"></figure>
                             <p>Mega888</p>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                 <div>
                     <div class="img-block text-center">
                         <div class="img-block-content">
-                            <figure><img class="hover_icons" src="~/images/footerlogo/footerlogo9.png" alt="logo"></figure>
+                            <figure><img class="hover_icons" src="~/images/footerlogo/footerlogo9_color.png" alt="logo"></figure>
                             <p>918 Kiss</p>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                 <div>
                     <div class="img-block text-center">
                         <div class="img-block-content">
-                            <figure><img class="hover_icons" src="~/images/footerlogo/footerlogo13.png" alt="logo"></figure>
+                            <figure><img class="hover_icons" src="~/images/footerlogo/footerlogo13_color.png" alt="logo"></figure>
                             <p>Pussy888</p>
                         </div>
                     </div>
@@ -449,16 +449,21 @@
     $('.slider-for-content').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
-        arrows: false,
+        arrows: true,
         fade: true,
+        infinite: true,
+        autoplay: false,
+        autoplaySpeed: 3000,
         asNavFor: '.slider-nav',
     });
     $('.slider-nav').slick({
         slidesToShow: 6,
         slidesToScroll: 1,
         asNavFor: '.slider-for-content',
-        dots: false,
         focusOnSelect: true,
+        infinite: true,
+        autoplay: false,
+        autoplaySpeed: 3000,
         responsive: [
             {
                 breakpoint: 992,
