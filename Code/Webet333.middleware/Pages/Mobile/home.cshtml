@@ -287,6 +287,7 @@
                 <li><a onclick="loadPageAbout()" href="javascript:void(0);"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US" rel="prefetch"></p></a></li>
                 <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
                 <li><a onclick="loadPageAccount()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/profile.png" alt="Profile"><p class="lang" key="sidebar_Profile"></p></a></li>
+                <li><a onclick="loadPageVIP()" href="javascript:void(0);" rel="prefetch"><img src="~/images/footericon1.png" alt="Profile"><p>VIP</p></a></li>
             </ul>
         </div>
     </div>
@@ -415,7 +416,7 @@
                 <div class="text-center myr-quote">
 
                     <h4>
-                        @*<img class="viplevelImage" id="viplevel_icon" />*@
+                        <img class="viplevelImage" id="viplevel_icon" />
                         &nbsp;&nbsp; MYR <span id="menuMainWallet"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="fa fa-refresh"></span>
                     </h4>
                 </div>
@@ -698,7 +699,7 @@
 
 <!--Begin Comm100 Live Chat Code-->
 <script type="text/javascript">
-    var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 0) })(Comm100API || {})
+    var OnlineHelpAPI = OnlineHelpAPI || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: "a9010000-0000-0000-0000-008e000391c3", div_id: "onlinehelp-button-a9010000-0000-0000-0000-008e000391c3" }), t.site_id = 233923, t.main_code_plan = "a9010000-0000-0000-0000-008e000391c3", e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 5e3) })(OnlineHelpAPI || {})
 </script>
 <!--End Comm100 Live Chat Code-->
 <!-- Slider Section End -->

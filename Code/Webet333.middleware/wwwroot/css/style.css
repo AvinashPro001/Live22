@@ -1637,7 +1637,7 @@ ul.soud_arrow li a{color: #212121;font-size: 11px;}
 .promotion-choose li a img{width: 100%;}
 /* css end */
 /*19th march css start */
-.promotion_wrap_sec{width: 100%;float: left;padding:40px 0px; background:url(../images/content_bg.jpg) 0 0 no-repeat;background-size: 100% 100%;}
+.promotion_wrap_sec{width: 100%;float: left;padding:40px 0px; background:url(../images/content_bg.jpg)  no-repeat top / 100%;}
 .promotion-icon:before{display: block; position: absolute; left: 5px; top: 16px; font-size: 25px; /*font-family: fontAwesome;*/ color: #ea8a00; }
 .promotion-icon:before {background:url(../images/promotionicon.png) 0 0 no-repeat; }
 /* Style the tab content */

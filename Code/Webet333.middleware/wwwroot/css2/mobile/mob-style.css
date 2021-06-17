@@ -113,13 +113,13 @@ br {
     max-width: 465px;
 }
 
-#comm100-float-button-2 > div {
+#onlinehelp-float-button-2 > div {
     transform: translateY(-50%) !important;
     bottom: 22px !important;
     right: 20px !important;
 }
 
-    #comm100-float-button-2 > div img {
+    #onlinehelp-float-button-2 > div img {
         max-width: 25px;
     }
 
@@ -1415,7 +1415,7 @@ body {
         max-width: 150px;
     }
 
-    .intro #comm100-float-button-2 > div {
+    .intro #onlinehelp-float-button-2 > div {
         right: -35px !important;
         transition: 0.5s;
     }
@@ -1707,4 +1707,176 @@ input, select {
 
 .step-screen.register-pad .form-group input {
     padding: 0 15px 0px 30px;
+}
+
+
+
+@media (max-width: 767px) {
+
+    .benefits_content_tab_sec h1 {
+        font-size: 20px;
+        line-height: 25px;
+        padding: 25px 0px 0px;
+    }
+
+    .benefits_referal_left ul li a {
+        padding: 10px;
+    }
+
+    .steps-2 .progress {
+        height: 22px;
+    }
+
+    .steps-2 .progress-bar {
+        height: 20px;
+    }
+
+    .steps-2 {
+        z-index: 5;
+        padding-bottom: 50px;
+    }
+
+        .steps-2 .step {
+            flex-wrap: wrap;
+            flex-direction: column;
+            top: 0px;
+            padding: 0px;
+        }
+
+        .steps-2 .point {
+            width: 100%;
+            height: auto;
+            background: transparent;
+            border-left: 2px solid #ffffff;
+            border-radius: 0px;
+            text-align: left;
+            padding-left: 15px;
+            top: 22px;
+            left: 0px;
+            margin-left: 5px;
+        }
+
+            .steps-2 .point:before {
+                content: '';
+                display: block;
+                left: 0;
+                top: 12px;
+                width: 10px;
+                height: 2px;
+                background: #ffffff;
+                position: absolute;
+            }
+
+            .steps-2 .step-title,
+            .steps-2 .step-title1,
+            .steps-2 .point .price {
+                position: unset;
+                margin: 0px 1px 15px;
+                font-size: 12px;
+                line-height: 15px;
+                cursor: pointer;
+            }
+
+    .benefits_referal_tab_sec {
+        width: 100%;
+    }
+
+    .benefits_referal_left ul {
+        display: flex;
+        align-items: center;
+        float: none;
+    }
+
+        .benefits_referal_left ul li {
+            width: calc(100% / 3);
+            float: none;
+        }
+
+    .table-vip-datas thead tr th:nth-child(1) {
+        max-width: 130px;
+        display: flex;
+        align-items: end;
+        height: 86px;
+    }
+
+    .vip-main-banner {
+        min-height: 150px;
+    }
+
+    .vip_sec_logo_left img {
+        padding: 15px;
+        max-width: 275px;
+    }
+
+    .vip_privileges_inner_sec_credits h1,
+    .table-vip-datas thead tr th:nth-child(1), .table-vip-datas,
+    .table-vip-datas thead tr th,
+    .vip_sec_form_right {
+        padding-top: 0px;
+    }
+
+    .vip_privileges_inner_sec_credits h1 {
+        padding-bottom: 10px;
+    }
+
+    .vip_privilage_sec_credits {
+        padding: 20px 0px;
+    }
+
+    .vip_pri_btn,
+    .become_a_vip {
+        font-size: 10px;
+        line-height: 15px;
+        width: auto;
+        border: 1px solid #e5b950;
+        padding: 5px;
+    }
+
+    .pr0.current_status_row_left,
+    .pr0.current_status_row_right {
+        padding-left: 0px;
+    }
+
+    .table-vip-datas thead tr th span img {
+        width: 60px;
+    }
+
+    .vip_privileges_inner_sec_credits p {
+        padding-left: 0px;
+    }
+
+    .tab-subtitle li:first-child {
+        width: 200px;
+    }
+
+    .tab-subtitle li {
+        width: calc(100% - 200px);
+    }
+
+    .img-icon {
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .img-icon li a {
+            padding: 5px;
+        }
+
+        .img-icon li img {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .img-icon.nav-tabs > li > a {
+            font-size: 0px;
+            line-height: 0px
+        }
+}
+
+#faqs h3 {
+    color: white
+}
+
+#faqs p {
+    color: #F58723
 }

@@ -164,6 +164,8 @@ var accountEndPoints = {
     VerifiedOTP: "account/verified/otp",
     userTotalTurnover: "Game/DailyTurnover",
     GetGameSupport: "Game/User/GameSupport",
+    PlaytechBrokenStatus: "playtech/broken",
+    PragmaticBrokenStatus: "pragmatic/broken",
 };
 
 var promotionEndPoints = {

@@ -40,6 +40,17 @@ let GameUsernames = {
     MaxBetUsername: null
 }
 
+var AGTrigger = false,
+    DGTrigger = false,
+    SATrigger = false,
+    SexyTrigger = false,
+    PlaytechTrigger = false,
+    MaxbetTrigger = false,
+    AllbetTrigger = false,
+    WMTrigger = false,
+    M8Trigger = false,
+    YeeBetTrigger = false;
+
 //#endregion Declare Vairable
 
 //#region Onload
@@ -47,6 +58,8 @@ $(document).ready(function () {
     if (GetLocalStorage('currentUser') !== null) {
         SetUsername();
         LoadAllBalance();
+        PlaytechBrokenStatus(false);
+        PragmaticBrokenStatus(false)
         setTimeout(function () {
             setInterval(function () {
                 if (
@@ -219,7 +232,7 @@ function SetLoadingImageForAllId() {
 function SetLoadingImageBaseOnWalletName(WalletName) {
 
     switch (WalletName) {
-        case "918Kiss Wallet": SetLoadingImagesInBalance("kiss918_balance"); SetFetchingWordInBalance("kiss918_balance");break;
+        case "918Kiss Wallet": SetLoadingImagesInBalance("kiss918_balance"); SetFetchingWordInBalance("kiss918_balance"); break;
         case "Joker Wallet": SetLoadingImagesInBalance("joker_balance"); SetFetchingWordInBalance("joker_balance"); break;
         case "Mega888 Wallet": SetLoadingImagesInBalance("mega888_balance"); SetFetchingWordInBalance("mega888_balance"); break;
         case "Pussy888 Wallet": SetLoadingImagesInBalance("pussy888_balance"); SetFetchingWordInBalance("pussy888_balance"); break;
@@ -227,7 +240,7 @@ function SetLoadingImageBaseOnWalletName(WalletName) {
         case "DG Wallet": SetLoadingImagesInBalance("dg_balance"); SetFetchingWordInBalance("dg_balance"); break;
         case "SA Wallet": SetLoadingImagesInBalance("sa_balance"); SetFetchingWordInBalance("sa_balance"); break;
         case "WM Wallet": SetLoadingImagesInBalance("wm_balance"); SetFetchingWordInBalance("wm_balance"); break;
-        case "PlayTech Wallet": SetLoadingImagesInBalance("playtech_balance"); SetFetchingWordInBalance("playtech_balance");  break;
+        case "PlayTech Wallet": SetLoadingImagesInBalance("playtech_balance"); SetFetchingWordInBalance("playtech_balance"); break;
         case "Sexy Wallet": SetLoadingImagesInBalance("sexy_baccarat_balance"); SetFetchingWordInBalance("sexy_baccarat_balance"); break;
         case "Pragmatic Wallet": SetLoadingImagesInBalance("pragmatic_balance"); SetFetchingWordInBalance("pragmatic_balance"); break;
         case "AllBet Wallet": SetLoadingImagesInBalance("allbet_balance"); SetFetchingWordInBalance("allbet_balance"); break;
@@ -436,6 +449,10 @@ async function AGWallet(Username, IsDivValueSet = true) {
         }
         if (IsDivValueSet)
             SetBalanceOnAllPlace("ag_balance", UsersBalance.AGBalance);
+
+        if (UsersBalance.AGBalance == 0 && res.response.data.previousBalance > 0 && AGTrigger == false)
+            StartTimerGameBalanceAPI("AG");
+
     }
     catch (e) {
         UsersBalance.AGBalance = "N/A";
@@ -459,6 +476,9 @@ async function DGWallet(Username, IsDivValueSet = true) {
         }
         if (IsDivValueSet)
             SetBalanceOnAllPlace("dg_balance", UsersBalance.DGBalance);
+
+        if (UsersBalance.DGBalance == 0 && res.response.data.previousBalance > 0 && DGTrigger == false)
+            StartTimerGameBalanceAPI("DG");
     }
     catch (e) {
         UsersBalance.DGBalance = "N/A";
@@ -482,6 +502,9 @@ async function SAWallet(Username, IsDivValueSet = true) {
         }
         if (IsDivValueSet)
             SetBalanceOnAllPlace("sa_balance", UsersBalance.SABalance);
+
+        if (UsersBalance.SABalance == 0 && res.response.data.previousBalance > 0 && SATrigger == false)
+            StartTimerGameBalanceAPI("SA");
     }
     catch (e) {
         UsersBalance.SABalance = "N/A";
@@ -505,6 +528,9 @@ async function WMWallet(Username, IsDivValueSet = true) {
         }
         if (IsDivValueSet)
             SetBalanceOnAllPlace("wm_balance", UsersBalance.WMBalance);
+
+        if (UsersBalance.WMBalance == 0 && res.response.data.previousBalance > 0 && WMTrigger == false)
+            StartTimerGameBalanceAPI("WM");
     }
     catch (e) {
         UsersBalance.WMBalance = "N/A";
@@ -528,6 +554,10 @@ async function PlaytechWallet(Username, IsDivValueSet = true) {
         }
         if (IsDivValueSet)
             SetBalanceOnAllPlace("playtech_balance", UsersBalance.PlaytechBalance);
+
+        if (UsersBalance.PlaytechBalance == 0 && res.response.data.previousBalance > 0 && PlaytechTrigger == false)
+            StartTimerGameBalanceAPI("Playtech");
+
     }
     catch (e) {
         UsersBalance.PlaytechBalance = "N/A";
@@ -551,6 +581,9 @@ async function SexyBaccaratWallet(Username, IsDivValueSet = true) {
         }
         if (IsDivValueSet)
             SetBalanceOnAllPlace("sexy_baccarat_balance", UsersBalance.SexyBaccaratBalance);
+
+        if (UsersBalance.SexyBaccaratBalance == 0 && res.response.data.previousBalance > 0 && SexyTrigger == false)
+            StartTimerGameBalanceAPI("Sexy");
     }
     catch (e) {
         UsersBalance.SexyBaccaratBalance = "N/A";
@@ -598,6 +631,9 @@ async function AllBetWallet(Username, IsDivValueSet = true) {
         }
         if (IsDivValueSet)
             SetBalanceOnAllPlace("allbet_balance", UsersBalance.AllBetBalance);
+
+        if (UsersBalance.AllBetBalance == 0 && res.response.data.previousBalance > 0 && AllbetTrigger == false)
+            StartTimerGameBalanceAPI("AllBet");
     }
     catch (e) {
         UsersBalance.AllBetBalance = "N/A";
@@ -621,6 +657,9 @@ async function MaxBetWallet(Username, IsDivValueSet = true) {
         }
         if (IsDivValueSet)
             SetBalanceOnAllPlace("maxbet_balance", UsersBalance.MaxBetBalance);
+
+        if (UsersBalance.MaxBetBalance == 0 && res.response.data.previousBalance > 0 && MaxbetTrigger == false)
+            StartTimerGameBalanceAPI("MaxBet");
     }
     catch (e) {
         UsersBalance.MaxBetBalance = "N/A";
@@ -644,6 +683,8 @@ async function M8Wallet(Username, IsDivValueSet = true) {
         }
         if (IsDivValueSet)
             SetBalanceOnAllPlace("m8_balance", UsersBalance.M8Balance);
+        if (UsersBalance.M8Balance == 0 && res.response.data.previousBalance > 0 && M8Trigger == false)
+            StartTimerGameBalanceAPI("M8");
     }
     catch (e) {
         UsersBalance.M8Balance = "N/A";
@@ -653,3 +694,69 @@ async function M8Wallet(Username, IsDivValueSet = true) {
 }
 
 //#endregion All Wallet Balance
+
+function StartTimerGameBalanceAPI(GameName) {
+    var userDetails = JSON.parse(Decryption(GetSessionStorage('userDetails')));
+    var globalParameter = JSON.parse(Decryption(GetSessionStorage('GamePreFix')));
+
+    switch (GameName) {
+        case 'AG':
+            let AGtimerId = setInterval(() => { AGWallet(GameUsernames.AGUsername); AGTrigger = true; }, 30000);
+            setTimeout(() => { clearInterval(AGtimerId); AGTrigger = false; }, 301000);
+            break;
+        case 'Playtech':
+            let PlaytechtimerId = setInterval(() => { PlaytechWallet(GameUsernames.PlaytechUsername); PlaytechTrigger = true; }, 30000);
+            setTimeout(() => { clearInterval(PlaytechtimerId); PlaytechTrigger = false; }, 301000);
+            break;
+        case 'M8':
+            let M8timerId = setInterval(() => { M8Wallet(GameUsernames.M8Username); M8Trigger = true; }, 30000);
+            setTimeout(() => { clearInterval(M8timerId); M8Trigger = false; }, 301000);
+            break;
+        case 'MaxBet':
+            let MaxbettimerId = setInterval(() => { MaxBetWallet(GameUsernames.MaxBetUsername); MaxbetTrigger = true; }, 30000);
+            setTimeout(() => { clearInterval(MaxbettimerId); MaxbetTrigger = false; }, 301000);
+            break;
+        case 'DG':
+            let dgtimerId = setInterval(() => { DGWallet(GameUsernames.DGUsername); DGTrigger = true; }, 30000);
+            setTimeout(() => { clearInterval(dgtimerId); DGTrigger = false; }, 301000);
+            break;
+        case 'Sexy':
+            let SexytimerId = setInterval(() => { SexyBaccaratWallet(GameUsernames.SexyBaccaratUsername); SexyTrigger = true; }, 30000);
+            setTimeout(() => { clearInterval(SexytimerId); SexyTrigger = false; }, 301000);
+            break;
+        case 'SA':
+            let SAtimerId = setInterval(() => { SAWallet(GameUsernames.SAUsername); SATrigger = true; }, 30000);
+            setTimeout(() => { clearInterval(SAtimerId); SATrigger = false; }, 301000);
+            break;
+        case 'AllBet':
+            let AllbettimerId = setInterval(() => { AllBetWallet(GameUsernames.AllBetUsername); AllbetTrigger = true; }, 30000);
+            setTimeout(() => { clearInterval(AllbettimerId); AllbetTrigger = false; }, 301000);
+            break;
+        case 'WM':
+            let WmtimerId = setInterval(() => { WMWallet(GameUsernames.WMUsername); WMTrigger = true; }, 30000);
+            setTimeout(() => { clearInterval(WmtimerId); WMTrigger = false; }, 301000);
+            break;
+        case 'YeeBet':
+            let YeeBetTimerId = setInterval(() => { YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId); YeeBetTrigger = true; }, 30000);
+            setTimeout(() => { clearInterval(YeeBetTimerId); YeeBetTrigger = false; }, 301000);
+            break;
+    }
+}
+
+async function PlaytechBrokenStatus(IsBalanceLoad) {
+    let userModel = {
+        username: GameUsernames.PlaytechUsername
+    };
+    if (IsBalanceLoad)
+        PlaytechWallet(GameUsernames.PlaytechUsername);
+    await PostMethod(accountEndPoints.PlaytechBrokenStatus, userModel);
+}
+
+async function PragmaticBrokenStatus(IsBalanceLoad) {
+    let userModel = {
+        username: GameUsernames.PragmaticUsername
+    };
+    if (IsBalanceLoad)
+        PragmaticWallet(GameUsernames.PragmaticUsername);
+    await PostMethod(accountEndPoints.PragmaticBrokenStatus, userModel);
+}
