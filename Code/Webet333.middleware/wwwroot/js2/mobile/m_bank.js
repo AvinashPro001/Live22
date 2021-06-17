@@ -915,7 +915,7 @@ async function WithdrawHistory() {
 async function TransferHistory() {
     var model = {};
     var res = await PostMethod(apiEndPoints.transferHistory, model);
-    var result = res.data;
+    var result = res.data.result;
     var transferHistory = document.getElementById("transferHistory");
     transferHistory.innerHTML = "";
     if (result.length > 0) {

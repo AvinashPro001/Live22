@@ -1,4 +1,4 @@
-﻿var key = '2193D83E3FB2BDC186C91CDC1133D';
+﻿var key = '997D7F2ADFE547AE8D7A40D519FE434018B780DD3C2147DB8CC652E152325F8B';
 
 function dec(ciphertext) {
     if (ciphertext == null)
