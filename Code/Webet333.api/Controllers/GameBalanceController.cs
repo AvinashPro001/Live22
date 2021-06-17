@@ -566,5 +566,35 @@ namespace Webet333.api.Controllers
         }
 
         #endregion YEEBET Balance
+
+        #region SBO Balance
+
+        [Authorize]
+        [HttpPost(ActionsConst.GameBalance.SBOBalance)]
+        public async Task<IActionResult> SBOBalance([FromBody] UserBalanceRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            if (GetUserRole(User) == RoleConst.Users) request.Id = GetUserId(User).ToString();
+
+            if (string.IsNullOrWhiteSpace(request.Id)) return BadResponse(ErrorConsts.InvalidModelstate);
+
+            dynamic previousBalance = 0.00;
+
+            using (var gamehelper = new GameBalanceHelpers(Connection))
+            {
+                string balance = await gamehelper.CallSBOGameBalance(request.Username);
+                previousBalance = await gamehelper.SBOBalanceUpdate(request.Id, balance);
+
+                return OkResponse(new
+                {
+                    balance = balance,
+                    previousBalance.PreviousBalance
+                });
+            }
+        }
+
+        #endregion SBO Balance
     }
 }

@@ -583,6 +583,8 @@
                 public const string Deposit = "web-root/restricted/player/deposit.aspx";
 
                 public const string Withdraw = "web-root/restricted/player/withdraw.aspx";
+
+                public const string GetPlayerBalance = "web-root/restricted/player/get-player-balance.aspx";
             }
 
             public static class Agent

@@ -513,6 +513,8 @@
             public const string CheckMaxBetBalance = "check/gamebalance/maxbet";
 
             public const string YEEBETBalance = "gamebalance/yeebet";
+
+            public const string SBOBalance = "gamebalance/sbo";
         }
 
         public class TransferMoney
