@@ -340,6 +340,7 @@ async function OpenM8Game() {
 
 async function OpenPragmaticGame() {
     window.open("../Web/slots");
+    PragmaticBrokenStatusInterval();
     let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
 
     if (resSelectUser.Pragmatic !== true) {
@@ -357,7 +358,7 @@ async function OpenPlaytechGame(IsSlots) {
     if (IsSlots) {
         window.open("../Web/slots");
     }
-
+    PlaytechBrokenStatusInterval();
     let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
 
     if (resSelectUser.Playtech === false) {
@@ -472,4 +473,16 @@ function SearchInPlaytechGameList() {
 function SearchInPragmaticGameList() {
     slotPageNumber = 0;
     PragmaticSlotsGameList(null, false);
+}
+
+function PlaytechBrokenStatusInterval() {
+    setInterval(function () {
+        PlaytechBrokenStatus(true);
+    }, 10000);
+}
+
+function PragmaticBrokenStatusInterval() {
+    setInterval(function () {
+        PragmaticBrokenStatus(true);
+    }, 10000);
 }
