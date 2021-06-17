@@ -667,6 +667,24 @@
 
                 public const string Mobile = "m";
             }
+
+            public static class MarketType
+            {
+                public const long All = 0;
+
+                public const long Over_Under = 3;
+
+                public const long Correct_Score = 4;
+            }
+
+            public static class SportType
+            {
+                public const long All = 0;
+
+                public const long Football = 3;
+
+                public const long Others = 11;
+            }
         }
 
 #elif STAG
@@ -1179,7 +1197,7 @@
                 public const string GetBettingDetails = "data/getbets";
 
                 public const string RemoveGetBettingDetails = "data/removebets";
-                
+
                 public const string GetBetLimit = "quota/list";
 
                 public const string SetBetLimit = "quota/set";

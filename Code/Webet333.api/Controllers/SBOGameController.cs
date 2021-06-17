@@ -176,7 +176,7 @@ namespace Webet333.api.Controllers
 
             using (var SBO_helper = new SBOGameHelpers(Connection))
             {
-               var result =  await SBO_helper.GetPlayerDefaultBetLimitAsync();
+                var result = await SBO_helper.GetPlayerDefaultBetLimitAsync();
 
                 return OkResponse(result);
             }

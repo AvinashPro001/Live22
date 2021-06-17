@@ -106,6 +106,8 @@ namespace Webet333.api.Helpers
 
         internal async Task<SBODefaultResponse> SetPlayerBetLimitAsync(string Username)
         {
+            SBOSelectPlayerDefaultBetLimitResponse playerDefaultBetLimit = await GetPlayerDefaultBetLimitAsync();
+
             SBOSetPlayerBetLimitRequest model = new SBOSetPlayerBetLimitRequest
             {
                 CompanyKey = GameConst.SBO.CompanyKey,
@@ -115,51 +117,51 @@ namespace Webet333.api.Helpers
                 {
                     new BetSetting
                     {
-                        MarketType = 0,
-                        MaxBet = 3000,
-                        MaxBetPerMatch = 3000,
-                        MinBet = 5,
-                        SportType = 3
-                    },
-                    new  BetSetting
-                    {
-                        MarketType = 3,
-                        MaxBet = 3000,
-                        MaxBetPerMatch = 3000,
-                        MinBet =5,
-                        SportType = 3
-                    },
-                    new  BetSetting
-                    {
-                        MarketType = 4,
-                        MaxBet = 3000,
-                        MaxBetPerMatch = 3000,
-                        MinBet =5,
-                        SportType = 3
+                        MarketType = GameConst.SBO.MarketType.All,
+                        MaxBet = playerDefaultBetLimit.Football_OthersMatchType_MaxBet,
+                        MaxBetPerMatch =  playerDefaultBetLimit.Football_OthersMatchType_MaxBetMatch,
+                        MinBet = playerDefaultBetLimit.Football_OthersMatchType_MinBet,
+                        SportType = GameConst.SBO.SportType.Football
                     },
                     new BetSetting
                     {
-                        MarketType = 0,
-                        MaxBet = 3000,
-                        MaxBetPerMatch = 3000,
-                        MinBet =5,
-                        SportType = 11
+                        MarketType = GameConst.SBO.MarketType.Over_Under,
+                        MaxBet = playerDefaultBetLimit.Football_OverUnder_MaxBet,
+                        MaxBetPerMatch = playerDefaultBetLimit.Football_OverUnder_MaxBetMatch,
+                        MinBet = playerDefaultBetLimit.Football_OverUnder_MinBet,
+                        SportType = GameConst.SBO.SportType.Football
                     },
-                    new  BetSetting
+                    new BetSetting
                     {
-                        MarketType = 3,
-                        MaxBet = 3000,
-                        MaxBetPerMatch = 3000,
-                        MinBet =5,
-                        SportType = 11
+                        MarketType = GameConst.SBO.MarketType.Correct_Score,
+                        MaxBet = playerDefaultBetLimit.Football_CorrectScore_MaxBet,
+                        MaxBetPerMatch = playerDefaultBetLimit.Football_CorrectScore_MaxBetMatch ,
+                        MinBet = playerDefaultBetLimit.Football_CorrectScore_MinBet,
+                        SportType = GameConst.SBO.SportType.Football
                     },
-                   new  BetSetting
-                   {
-                       MarketType = 4,
-                       MaxBet = 3000,
-                       MaxBetPerMatch = 3000,
-                       MinBet =5,
-                       SportType = 11
+                    new BetSetting
+                    {
+                        MarketType = GameConst.SBO.MarketType.All,
+                        MaxBet = playerDefaultBetLimit.OthersSport_OthersMatchType_MaxBet,
+                        MaxBetPerMatch = playerDefaultBetLimit.OthersSport_OthersMatchType_MaxBetMatch,
+                        MinBet = playerDefaultBetLimit.OthersSport_OthersMatchType_MinBet,
+                        SportType = GameConst.SBO.SportType.Others
+                    },
+                    new BetSetting
+                    {
+                        MarketType = GameConst.SBO.MarketType.Over_Under,
+                        MaxBet = playerDefaultBetLimit.OthersSport_OverUnder_MaxBet,
+                        MaxBetPerMatch = playerDefaultBetLimit.OthersSport_OverUnder_MaxBetMatch,
+                        MinBet = playerDefaultBetLimit.OthersSport_OverUnder_MinBet,
+                        SportType =  GameConst.SBO.SportType.Others
+                    },
+                    new BetSetting
+                    {
+                        MarketType = GameConst.SBO.MarketType.Correct_Score,
+                        MaxBet = playerDefaultBetLimit.OthersSport_CorrectScore_MaxBet,
+                        MaxBetPerMatch = playerDefaultBetLimit.OthersSport_CorrectScore_MaxBetMatch,
+                        MinBet = playerDefaultBetLimit.OthersSport_CorrectScore_MinBet,
+                        SportType = GameConst.SBO.SportType.Others
                    }
                 }
             };
