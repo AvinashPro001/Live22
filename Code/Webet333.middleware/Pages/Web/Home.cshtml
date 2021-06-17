@@ -638,41 +638,47 @@
             <h1><img src="~/images/titleicon5.png" alt="titleicon5"><span class="lang" key="hot_game"> HOT GAMES </span></h1>
             <a href="~/Web/slots" class="lang" key="more_games">More Games</a>
         </div>
-        <div class="carousel-wrap">
-            <div class="game_boxes_wrap owl-carousel">
-                <div class="item">
-                    <div class="game_boxes">
-                        <img src="images/games_boxes1.png" alt="games_boxes1" />
-                        <h1>5 Fortune Dragons</h1>
-                        <p>Pragmatic Play</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="item-slider">
+                <div class="game-slider">
+                    <div class="item">
+                        <div class="game_boxes">
+                            <img src="images/games_boxes1.png" alt="games_boxes1" />
+                            <h1>5 Fortune Dragons</h1>
+                            <p>Pragmatic Play</p>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="game_boxes">
-                        <img src="images/games_boxes2.png" alt="games_boxes1" />
-                        <h1>Brothers Kingdom</h1>
-                        <p>Pragmatic Play</p>
+                    <div class="item">
+                        <div class="game_boxes">
+                            <img src="images/games_boxes2.png" alt="games_boxes1" />
+                            <h1>Brothers Kingdom</h1>
+                            <p>Pragmatic Play</p>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="game_boxes">
-                        <img src="images/games_boxes3.png" alt="games_boxes1" />
-                        <h1>Zeus</h1>
-                        <p>Pragmatic Play</p>
+                    <div class="item">
+                        <div class="game_boxes">
+                            <img src="images/games_boxes3.png" alt="games_boxes1" />
+                            <h1>Zeus</h1>
+                            <p>Pragmatic Play</p>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="game_boxes">
-                        <img src="images/games_boxes4.png" alt="games_boxes1" />
-                        <h1>Crazy Bomber</h1>
-                        <p>Pragmatic Play</p>
+                    <div class="item">
+                        <div class="game_boxes">
+                            <img src="images/games_boxes4.png" alt="games_boxes1" />
+                            <h1>Crazy Bomber</h1>
+                            <p>Pragmatic Play</p>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="game_boxes">
-                        <img src="images/games_boxes4.png" alt="games_boxes1" />
-                        <h1>Crazy Bomber</h1>
-                        <p>Pragmatic Play</p>
+                    <div class="item">
+                        <div class="game_boxes">
+                            <img src="images/games_boxes4.png" alt="games_boxes1" />
+                            <h1>Crazy Bomber</h1>
+                            <p>Pragmatic Play</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -684,35 +690,34 @@
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/owl.carousel.min.js'></script>
 <script src='https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js'></script>
-<script type="text/javascript">
 
-    $('.game_boxes_wrap.owl-carousel').owlCarousel({
-        loop: true,
-        margin: 10,
-        nav: true,
-        slideTransition:"linear",
-        navText: [
-            '<i class="fa fa-angle-left"></i>',
-            '<i class="fa fa-angle-right"></i>'
-        ],
-        autoplay: true,
-        autoplayHoverPause: false,
-        autoplayTimeout: 1000,
-        slideSpeed: 300,
-        responsive: {
-            0: {
-                items: 1
+<script>
+    $('.game-slider').slick({
+        speed: 2500,
+		autoplay: true,
+		autoplaySpeed: 0,
+		cssEase: 'linear',
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        infinite: true,
+        swipeToSlide: true,
+        pauseOnHover: true,
+        responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 3,
+              }
             },
-            600: {
-                items: 4
-            },
-            1000: {
-                items: 4
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+              }
             }
-        }
+            ]
     });
 </script>
-
 <script>
 // updated
     $(document).ready(function(){    
@@ -808,7 +813,6 @@
             })
         })
 </script>
-
 
 <script>
     CheckMobileNumberIsVerifiedOnly();
