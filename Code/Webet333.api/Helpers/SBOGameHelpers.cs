@@ -285,6 +285,63 @@ namespace Webet333.api.Helpers
 
         #endregion Get Player Default Bet Limit
 
+        #region Deposit
+
+        public static async Task<SBODepositResponse> CallDepositAPI(string Username, decimal Amount)
+        {
+            string temp = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
+
+            SBODepositRequest model = new SBODepositRequest
+            {
+                Amount = Amount,
+                CompanyKey = GameConst.SBO.CompanyKey,
+                ServerId = temp,
+                TxnId = $"{Username}_{temp}",
+                Username = Username
+            };
+
+            var URL = $"{GameConst.SBO.URL}{GameConst.SBO.EndPoint.Deposit}";
+
+            var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
+            var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
+
+            var DeserializeAPIResult = JsonConvert.DeserializeObject<SBODepositResponse>(APIResult);
+
+            return DeserializeAPIResult;
+        }
+
+        #endregion Deposit
+
+        #region Withdraw
+
+        public static async Task<SBOWithdrawResponse> CallWithdrawAPI(string Username, decimal Amount)
+        {
+            string temp = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
+
+            SBOWithdrawRequest model = new SBOWithdrawRequest
+            {
+                Amount = Amount,
+                CompanyKey = GameConst.SBO.CompanyKey,
+                IsFullAmount = false,
+                ServerId = temp,
+                TxnId = $"{Username}_{temp}",
+                Username = Username
+            };
+
+            var URL = $"{GameConst.SBO.URL}{GameConst.SBO.EndPoint.Withdraw}";
+
+            var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
+            var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
+
+            var DeserializeAPIResult = JsonConvert.DeserializeObject<SBOWithdrawResponse>(APIResult);
+
+            return DeserializeAPIResult;
+        }
+
+        #endregion Deposit
+
         #region House Keeping
 
         public void Dispose()

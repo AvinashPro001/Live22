@@ -579,6 +579,10 @@
                 public const string SetLeague = "web-root/restricted/league/set-league-bet-setting.aspx";
 
                 public const string SetPlayerBetLimit = "web-root/restricted/player/update-player-bet-setting-by-sportid-and-markettype.aspx";
+
+                public const string Deposit = "web-root/restricted/player/deposit.aspx";
+
+                public const string Withdraw = "web-root/restricted/player/withdraw.aspx";
             }
 
             public static class Agent
