@@ -585,6 +585,8 @@
                 public const string Withdraw = "web-root/restricted/player/withdraw.aspx";
 
                 public const string GetPlayerBalance = "web-root/restricted/player/get-player-balance.aspx";
+
+                public const string BettingDetails = "web-root/restricted/report/get-bet-list-by-modify-date.aspx";
             }
 
             public static class Agent

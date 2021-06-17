@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
+using Webet333.models.Request.Game;
 using Webet333.models.Request.Game.SBO;
 using Webet333.models.Response.Game.SBO;
 using static Webet333.models.Request.Game.SBO.SBOLoginRequest;
@@ -340,7 +341,41 @@ namespace Webet333.api.Helpers
             return DeserializeAPIResult;
         }
 
-        #endregion Deposit
+        #endregion Withdraw
+
+        #region Call Betting Details 3rd Party API
+
+        public static async Task<SBOBettingDetailsResponse> BettingDetailsCallAPI(GlobalBettingDetailsRequest request)
+        {
+            //var time = DateTime.Now.ToUniversalTime();
+            //var startTime = time.AddHours(-4).ToString("yyyy-MM-ddTHH:mm:sss");
+            //var endTime = time.ToString("yyyy-MM-ddTHH:mm:sss");
+
+            var startTime = request.FromDate.ToString("yyyy-MM-ddTHH:mm:ss.fff");
+            var endTime = request.ToDate.ToString("yyyy-MM-ddTHH:mm:ss.fff");
+
+            SBOBettingDetailsRequest model = new SBOBettingDetailsRequest
+            {
+                CompanyKey = GameConst.SBO.CompanyKey,
+                EndDate = endTime,
+                Portfolio = GameConst.SBO.Portfolio.SportsBook,
+                ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
+                StartDate = startTime,
+                Username = GameConst.SBO.Agent.Username
+            };
+
+            var URL = $"{GameConst.SBO.URL}{GameConst.SBO.EndPoint.BettingDetails}";
+
+            var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
+            var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
+
+            var DeserializeAPIResult = JsonConvert.DeserializeObject<SBOBettingDetailsResponse>(APIResult);
+
+            return DeserializeAPIResult;
+        }
+
+        #endregion Call Betting Details 3rd Party API
 
         #region House Keeping
 

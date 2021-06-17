@@ -38,6 +38,7 @@ using Webet333.models.Response.Game.DG;
 using Webet333.models.Response.Game.Joker;
 using Webet333.models.Response.Game.Kiss918;
 using Webet333.models.Response.Game.Pussy888;
+using Webet333.models.Response.Game.SBO;
 using Webet333.models.Response.Game.SexyBaccarat;
 using Webet333.models.Response.Game.YEEBET;
 using Webet333.models.Response.TransferMoney;
@@ -796,6 +797,21 @@ namespace Webet333.api.Controllers
 
         #endregion YEEBET Game
 
+        #region SBO Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.Manually_SBO_Betting_Details)]
+        public async Task<IActionResult> Manually_SBO_Betting_Details([FromBody] GlobalBettingDetailsRequest request)
+        {
+            await CheckUserRole();
+
+            var response = await SBOGameHelpers.BettingDetailsCallAPI(request);
+
+            return OkResponse(response);
+        }
+
+        #endregion SBO Game
+
         #endregion Manually Game Betting Details
 
         #region GAME BETTING DETAILS
@@ -1298,6 +1314,28 @@ namespace Webet333.api.Controllers
 
         #endregion YEEBET Betting Details
 
+        #region SBO Betting Details
+
+        [HttpPost(ActionsConst.Game.SBO_Betting_Details)]
+        public async Task<IActionResult> SBO_Betting_Details([FromBody] GlobalBettingDetailsRequest request)
+        {
+            var response = await SBOGameHelpers.BettingDetailsCallAPI(request);
+
+            if (response.Error.Id == 0)
+                using (var game_helper = new GameHelpers(Connection))
+                {
+                    var jsonString = JsonConvert.SerializeObject(response.Result);
+                    await game_helper.SBOServicesInsert(jsonString);
+                }
+
+            return OkResponse(new
+            {
+                jsonString = JsonConvert.SerializeObject(response)
+            });
+        }
+
+        #endregion SBO Betting Details
+
         #endregion GAME BETTING DETAILS
 
         #region Game Category
@@ -1602,6 +1640,32 @@ namespace Webet333.api.Controllers
         }
 
         #endregion YEEBET Game
+
+        #region SBO Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.SBOBettingDetailsSave)]
+        public async Task<IActionResult> SBOBettingDetails_Insert([FromBody] GameBettingDetailsInsertRequest request)
+        {
+            await CheckUserRole();
+
+            if (request.JsonData != null)
+            {
+                List<SBOBettingDetailsResponseResult> result = JsonConvert.DeserializeObject<List<SBOBettingDetailsResponseResult>>(request.JsonData.ToString());
+
+                if (result.Any())
+                {
+                    using (var game_help = new GameHelpers(Connection: Connection))
+                    {
+                        await game_help.SBOServicesInsert(request.JsonData);
+                    }
+                }
+            }
+
+            return OkResponse();
+        }
+
+        #endregion SBO Game
 
         #endregion Game Betting Details save
 

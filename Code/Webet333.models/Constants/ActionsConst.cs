@@ -385,6 +385,8 @@
 
             public const string YEEBET_Betting_Details = "Game/YEEBET_Betting_Details";
 
+            public const string SBO_Betting_Details = "Game/SBO_Betting_Details";
+
             public const string Manually_Joker_Betting_Details = "Game/Manually/Joker_Betting_Details";
 
             public const string Manually_AG_Betting_Details = "Game/Manually/AG_Betting_Details";
@@ -416,6 +418,8 @@
             public const string Manually_Pragmatic_Betting_Details = "Game/Manually/Pragmatic_Betting_Details";
 
             public const string Manually_YEEBET_Betting_Details = "Game/Manually/YEEBET_Betting_Details";
+
+            public const string Manually_SBO_Betting_Details = "Game/Manually/SBO_Betting_Details";
 
             public const string Playtech_Betting_Details = "Game/Playtech_Betting_Details";
 
@@ -466,6 +470,8 @@
             public const string M8BettingDetailsSave = "Game/M8BettingDetailsSave";
 
             public const string YEEBETBettingDetailsSave = "Game/YEEBETBettingDetailsSave";
+
+            public const string SBOBettingDetailsSave = "Game/SBOBettingDetailsSave";
 
             public const string GameWalletBalance = "Game/AllWalletBalance";
 
