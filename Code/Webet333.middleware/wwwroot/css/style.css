@@ -1996,3 +1996,6 @@ div#All_slot .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 .hand-curson{cursor:pointer;}
 #onlinehelp-float-button-2 div{z-index:0 !important;}
 .download-game-logos{width:100px;}
+.slot_inner_common_box p{margin-bottom:0px;font-size:12px;}
+#faqs h3{color:white}
+#faqs p{color:#F58723}

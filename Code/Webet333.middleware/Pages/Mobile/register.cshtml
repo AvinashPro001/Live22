@@ -1,0 +1,163 @@
+﻿@page
+@{ ViewData["Title"] = "Register";
+    Layout = ""; }
+<div id="comContent"></div>
+<div id="mComContent">
+
+ 
+    <style>
+        .tooltip-text.main + .visible-content {
+            display: block;
+            position: relative;
+            top: 5px;
+            z-index: 1;
+        }
+
+        .visible-content {
+            display: none;
+            background: #000000;
+            padding: 5px;
+            border-radius: 5px;
+            position: relative;
+            right: 0px;
+            top: -5px;
+            width: 100%;
+        }
+    </style>
+    <script>
+        document.body.classList.add("no-pad-top");
+        $('body').css('padding-top', '0px');
+        $(document).ready(function () {
+            if (GetLocalStorage('currentUser') !== null) {
+                window.location.href = "../mobile";
+            }
+        });
+
+        function space() {
+            var regex = new RegExp("^[a-zA-Z0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        }
+    </script>
+    <div class="page-title white-bg text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-2">
+                    <div class="back-btn"><a onclick="loadPageHome({backFrom:'login'})" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="~/images/mobile/BackArrow_svg.svg" alt="" /></a></div>
+                </div>
+                <div class="col-xs-8">
+                    <h4 class="black-text lang" key="register"></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reg_nav register-page-extra-height">
+        <div class="container">
+            <div class="step-screen register-pad">
+                <ul class="step-listing">
+                    <li class=""><a href=""></</li>
+                    <li class=""><a href=""></a></li>
+                    <li class=" final-phase"><a href="#"></a></li>
+                </ul>
+                <p class="note-text">- login info -</p>
+                <form>
+                    <div class="form-group register-username-icon"><input type="text" class="form-control" tabindex="1" aria-describedby="emailHelp" id="m_regsiter_username" data-translate="username_placeholder" placeholder="Username" value="" required="" onkeypress="space()" autocomplete="new-password"></div>
+                    <p class="note no-mar mar-btm-ten"><span class="lang" key="username_instruction"></span></p>
+                    <div class="form-group register-password-icon">
+                        <input type="password" class="form-control" tabindex="2" aria-describedby="emailHelp" id="m_regsiter_password" placeholder="Password" data-translate="password_placeholder" oninput="checkPasswordMatch();" required autocomplete="new-password">
+                        <a data-toggle="tooltip" class="tooltip-text"><span class="fa fa-question-circle"></span></a>
+                        <div class="visible-content">
+                            <p class="note no-mar mar-btm-ten"><span class="lang" key="password_instruction"></span></p>
+                            <p class="note no-mar mar-btm-ten"><span class="lang" key="password_alpha_instruction"></span></p>
+                            <p class="note no-mar mar-btm-ten"><span class="lang" key="password_username_same"></span></p>
+                        </div>
+                    </div>
+                    <div class="form-group register-password-icon"><input type="password" class="form-control" tabindex="3" aria-describedby="emailHelp" id="m_regsiter_confirmpassword" placeholder="Confirm Password" data-translate="confirm_password_placeholder" oninput="checkPasswordMatch();" required autocomplete="new-password"></div>
+                    <div class="form-group"><label style="color:#ff0000;font-weight:bold" class="registrationFormAlert" id="divCheckPasswordMatch"> </label></div>
+                    <div class="form-group register-mobile-icon">
+                        <input type="number" pattern="\d*" class="form-control" id="m_regsiter_mobile" placeholder="012-123456789" aria-describedby="emailHelp">
+                    </div>
+                    <p class="note no-mar mar-btm-ten"><span class="lang" key="contact_instruction"></span></p>
+                    <div class="form-group register-name-icon">
+                        <input type="text" class="form-control" data-translate="nric_placeholder" id="m_regsiter_name" placeholder="Full Name as NRIC" value="" required="">
+                    </div>
+                    <p class="register-note">By clicking the SUBMIT button, I hereby acknowledge that I am above 18 years old and have read and accepted your terms & conditions.</p>
+                    <button type="button" class="btn btn-danger join_btn" onclick="DoRegister()"><span class="lang" key="submit_button"></span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        $(".register-password-icon a").click(function () {
+            $(".tooltip-text").toggleClass("main");
+        });
+    </script>
+    <div>
+        <a id="mobileM8" style="display:none"></a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
+            $("#chatting").toggle();
+        });
+        $(".contact-user").mouseover(function () {
+            $("#chatting").toggle();
+        });
+    });
+</script>
+
+<!-- Slider Section End -->
+<!-- Modal For Video -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".open-modal").click();
+    });
+    jQuery(".scroll-down-visible").hide();
+    jQuery("#more-arrow").click(function () {
+        jQuery(".scroll-down-visible").toggleClass("show");
+        jQuery("#more-arrow").toggleClass("rotate");
+    });
+</script>
+
+<script>
+
+    function get() {
+        (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
+
+        $.ajax({
+            url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
+            dataType: 'json',
+            async: false,
+            success: function (lang) {
+                $('.lang').each(function (index, element) {
+                    if (localStorage.getItem("language") === "ms-MY") {
+                        $('body').addClass('malay-font');
+                    }
+                    $(this).text(lang[$(this).attr('key')]);
+                });
+                $("[data-translate]").each(function () {
+                    if ($(this).is("input")) {
+                        $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    } else {
+                        $(this).text(lang[$(this).data("translate")]);
+                    }
+                });
+            }
+        });
+
+    }
+    setTimeout(() => {
+        get();
+    }, 200);
+
+</script>

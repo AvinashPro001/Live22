@@ -1,0 +1,821 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/* Font Styling */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i');
+/* Font Styling */
+/******* Common Element CSS Start ******/
+body {
+    background-color: #0b1729;
+    font-family: 'Noto Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    height: 100%;
+}
+
+* {
+    outline: none;
+}
+
+    *, *:before, *:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+img {
+    border: 0px;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a, a:hover,
+a:focus, a:active, a:visited {
+    outline: none;
+    border: 0px;
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
+}
+
+h1 {
+    font-size: 35px;
+    line-height: 45px;
+}
+
+p.big {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.full-img {
+    width: 100%;
+}
+
+.fleft {
+    float: left;
+}
+
+.fright {
+    float: right;
+}
+/******* Common Element CSS End *********/
+/* ----------- Color Element CSS Start -----------*/
+.white-text {
+    color: #ffffff;
+}
+
+.btn-download {
+    padding: 10px 0px;
+}
+
+.sidebar .navbar-collapse {
+    border: 0px;
+}
+/* ----------- Color Element CSS End -----------*/
+/* ----------- 		Header Section CSS Start 	-----------*/
+@media (max-width: 767px) {
+
+    header {
+        padding-top: 0px;
+    }
+
+    br {
+        display: none;
+    }
+
+    .wallet-dropdown {
+        overflow: hidden;
+    }
+
+        .wallet-dropdown ul {
+            padding: 5px;
+            overflow: hidden;
+        }
+
+        .wallet-dropdown > li {
+            color: #0b1729;
+            font-size: 11px;
+            line-height: 15px;
+        }
+
+            .wallet-dropdown > li:hover {
+                color: #fff;
+            }
+
+    .logo {
+        width: 100%;
+        max-width: 465px;
+    }
+
+    #comm100-float-button-2 > div {
+        transform: translateY(-50%) !important;
+        bottom: 15px !important;
+        right: 25px !important;
+    }
+
+    .footer-widget ul li:last-child {
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .deposit_icon,
+    .transfer_icon,
+    .withdraw_icon,
+    .restore_icon,
+    .history_icon {
+        position: relative;
+        text-align: center;
+    }
+
+
+        .deposit_icon:before,
+        .transfer_icon:before,
+        .withdraw_icon:before,
+        .restore_icon:before,
+        .history_icon:before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            background-repeat: no-repeat;
+            z-index: 1;
+            display: block;
+            width: 100%;
+            height: 30px;
+            background-position: center;
+            background-size: contain;
+        }
+
+        .deposit_icon:before {
+            background-image: url(../../images/mobile/deposit_icon_mob.png);
+        }
+
+        .withdraw_icon:before {
+            background-image: url(../../images/mobile/withdraw_icon_mob.png);
+        }
+
+        .transfer_icon:before {
+            background-image: url(../../images/mobile/transfer_icon_mob.png);
+        }
+
+        .restore_icon:before {
+            background-image: url(../../images/mobile/restore_icon_mob.png);
+        }
+
+        .history_icon:before {
+            background-image: url(../../images/mobile/history_icon_mob.png);
+        }
+
+    
+
+    .dropdown.open .dropdown-menu li:hover .wallet-dropdown li {
+        color: #ffffff;
+    }
+
+    .account-icon {
+        overflow: hidden;
+    }
+
+        .account-icon li a {
+            color: #000;
+            padding-top: 28px;
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+        }
+
+    .live-chat {
+        position: fixed;
+        right: 48px;
+        bottom: 48px;
+        z-index: 999;
+    }
+
+    .myaccount-icon {
+        position: relative;
+    }
+
+    .myr-quote {
+        background: #003b79;
+        padding: 5px;
+        color: #ad9235;
+        width: 98%;
+        border-radius: 5px 5px 0px 0px;
+        margin-left: 1%;
+    }
+        .myaccount-icon img {
+            position: absolute;
+            bottom: -30px;
+            right: 15px;
+            display: block;
+            content: '';
+            width: 75px;
+            height: 75px;
+        }
+
+    .image-title {
+        background-image: url('../../images/mobile/918_kiss-background.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+        border: 2px solid #0e92bf;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+        .image-title img {
+            width: 100%;
+            max-width: 140px;
+        }
+
+        .image-title a {
+            color: #ffffff;
+            display: block;
+        }
+
+        .image-title p {
+            color: #ffffff;
+            font-weight: bold;
+            margin: 0px;
+            padding: 5px;
+            background: #0e92bf;
+            position: absolute;
+            width: 100%;
+            bottom: 0px;
+            left: 0px;
+        }
+
+    .sidebar {
+        border: 0;
+        box-shadow: none;
+        position: fixed;
+        z-index: 9999;
+        overflow-y: auto;
+        background-color: #0b1729;
+        left: -100px;
+        height: 100vh;
+        transition-duration: 0.2s;
+        -webkit-transition-duration: 0.2s;
+        width: 80px;
+    }
+
+    .navbar-toggle {
+        display: block;
+        background-color: transparent;
+        border-radius: 0px;
+        border: 0px;
+        float: left;
+        margin: 0px;
+        transition-duration: 0.2s;
+        -webkit-transition-duration: 0.2s;
+    }
+
+    .navbar-default {
+        background-color: #0b1729;
+        border: 0px;
+        min-height: auto;
+        margin-bottom: 0px;
+        transition-duration: 0.2s;
+        -webkit-transition-duration: 0.2s;
+    }
+
+    .intro .navbar.navbar-default.navbar-fixed-top,
+    .intro .footer-widget {
+        left: 80px;
+    }
+
+    header .sticky-header {
+        background-color: #fff;
+        padding: 5px 30px;
+        transition: all 0.5s ease-in-out 0s;
+    }
+
+    .navbar-default .navbar-toggle:hover,
+    .navbar-default .navbar-toggle:focus {
+        background-color: transparent;
+    }
+
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #ffffff;
+    }
+
+    .annunce-section {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .join-sign,
+    .mob-layout > ul {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .mob-layout > ul {
+        margin-bottom: 0px;
+    }
+
+    .mob-layout .logo {
+        width: 300px;
+    }
+
+    .join-sign .login-item input {
+        padding: 5px 15px 5px 40px;
+        font-size: 14px;
+        border-radius: 4px;
+        background-color: #0e92bf;
+    }
+
+    .join-sign .login-form .signin::before {
+        font-size: 20px;
+        left: 15px;
+    }
+
+    .join-sign {
+        margin-bottom: 15px;
+    }
+
+    .mob-layout .dropdown i {
+        font-size: 30px;
+        line-height: 35px;
+    }
+
+    .mob-layout .dropdown .btn {
+        background-color: transparent;
+        color: #ffffff;
+    }
+
+    .mob-layout .navbar-brand {
+        float: none;
+        text-align: center;
+        display: inline-block;
+        height: auto;
+        width: 100%;
+        padding: 0px;
+    }
+
+    .navbar-header {
+        float: none;
+    }
+
+    .live-chat {
+        position: fixed;
+        right: 48px;
+        bottom: 48px;
+        z-index: 999;
+    }
+
+    .join-now-section {
+        padding: 0px 0px 15px;
+    }
+
+    .myaccount-icon {
+        position: relative;
+    }
+
+        .myaccount-icon img {
+            position: absolute;
+            bottom: -30px;
+            right: 15px;
+            display: block;
+            content: '';
+            width: 75px;
+            height: 75px;
+        }
+
+    .nav > li > a:hover,
+    .nav > li > a:focus {
+        background-color: transparent;
+    }
+
+    .mob-menu .fa {
+        font-size: 40px;
+        display: block;
+    }
+
+    .nav.mob-menu > li > a > img {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .sidebar .navbar-collapse {
+        padding-left: 0px;
+        padding-right: 0px;
+        transition-duration: 0.7s;
+        -webkit-transition-duration: 0.7s;
+        box-shadow: none;
+    }
+
+    .intro .sidebar {
+        left: 0;
+        top: 0;
+    }
+
+    .intro body {
+        overflow-x: hidden;
+    }
+
+    .main-content {
+        //position: relative;
+        z-index: 1;
+    }
+
+    .scroll-content {
+        padding: 100px 0 80px;
+        overflow: auto;
+    }
+
+    .intro .main-content {
+        /*transform: translateX(80px);
+        -webkit-transform: translateX(80px);*/
+        left: 80px;
+        transition-duration: 0.2s;
+        -webkit-transition-duration: 0.2s;
+    }
+
+    .intro .canvas-overlay {
+        z-index: 1000;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .chat-section {
+        padding: 0px 0px 25px;
+        text-align: center;
+    }
+
+        .chat-section a {
+            content: '';
+            color: #323232;
+            z-index: 100;
+            background-color: #8cdb5d;
+            border-radius: 15px;
+            padding: 15px;
+            font-weight: 600;
+            transform: translateY(10%);
+            display: inline-block;
+        }
+
+    .canvas-overlay {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transition: all 300ms ease;
+        transition: all 300ms ease;
+    }
+
+    .footer-quote {
+        padding: 10px;
+    }
+
+    .footer-widget {
+        position: fixed;
+        bottom: 0px;
+        background: #0b1729;
+        width: 100%;
+        left: 0px;
+        z-index: 100;
+        transition: 0.2s all ease-in-out;
+        -webkit-transition: 0.2s all ease-in-out;
+        box-shadow: 0px 0px 15px #ccc;
+    }
+
+        .footer-widget ul {
+            padding: 10px 0px;
+            margin: 0px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+            .footer-widget ul img {
+                margin-bottom: 5px;
+                max-height: 25px;
+            }
+
+            .footer-widget ul li p {
+                font-size: 12px;
+            }
+
+    .modal-body .reg-form {
+        background-color: #f3f3f3;
+        border: 0px;
+    }
+
+    .modal-body .info-form label {
+        padding: 0px;
+        margin: 10px 0px;
+    }
+
+    .modal-body .jcf-checkbox.jcf-checked span {
+        height: 6px;
+        width: 10px;
+        border-width: 0 0 2px 2px;
+    }
+
+    .modal-body .jcf-checkbox.jcf-checked span {
+        border-color: #0e92bf;
+    }
+
+    .modal-body .checkbox label {
+        margin-top: 7px;
+    }
+
+    .modal-body .checkbox,
+    .modal-body .log_in {
+        margin: 20px 0px;
+    }
+
+    .modal-body button.log_in {
+        width: 240px;
+        border-radius: 5px;
+        background-color: #0e92bf;
+        text-transform: capitalize;
+        color: #ffffff;
+        display: inline-block;
+        line-height: 48px;
+        border: 1px solid #0e92bf;
+        border-bottom: 8px solid #0d87b1;
+        transition: 0.2s;
+        font-weight: bold;
+    }
+
+        .modal-body button.log_in:hover {
+            background-color: #0d87b1;
+            border-bottom: 8px solid #0e92bf;
+        }
+
+    .intro .modal {
+        z-index: 9999;
+    }
+
+    .intro body {
+        overflow: hidden;
+    }
+
+    .navbar-brand .logo {
+        max-width: 175px;
+    }
+
+    .mob-menu.nav > li > a {
+        padding: 10px 0px;
+    }
+
+    .navbar-header.mob-layout {
+        margin: 0px;
+    }
+
+    .login-item.social {
+        margin: 10px;
+        clear: both;
+    }
+
+    .navbar > .container .navbar-brand {
+        padding: 5px 0px;
+    }
+
+    .navbar-default .navbar-nav > .active > a:focus,
+    .navbar-default .navbar-nav > .active > a {
+        background-color: transparent;
+        color: #ffffff;
+    }
+
+    header {
+        padding-top: 0px;
+    }
+
+    .scroll-content {
+        padding: 50px 0 80px;
+    }
+
+    .mob-layout.navbar-header .navbar-toggle {
+        float: none;
+        margin: 0px;
+    }
+
+    .mob-layout > ul {
+        margin-bottom: 0px;
+    }
+
+    .myr-quote h4 span {
+        padding-left: 10px;
+        color: #ffffff;
+    }
+
+    .account-icon {
+        padding-top: 10px;
+        background: #ffffff;
+        width: 98%;
+        border-radius: 0px 0px 5px 5px;
+        margin-left: 1%;
+    }
+
+        .account-icon > li {
+            min-width: 50px;
+        }
+
+        .account-icon li a span {
+            font-size: 12px;
+        }
+
+    .join-now-section .login-item input {
+        padding: 4px 15px 4px 25px;
+        font-size: 10px;
+    }
+
+    .join-now-section .login-item img {
+        max-width: 85px;
+    }
+
+    .join-sign .login-form .signin::before {
+        font-size: 16px;
+        left: 5px;
+    }
+
+    .navbar-header.mob-layout > ul > li:nth-child(2n) {
+        text-align: center;
+    }
+
+    .navbar-header.mob-layout > ul > li:last-child {
+        margin-right: 0px;
+    }
+    /*.login-item:last-child { margin: 10px 0px; }*/
+
+    .navbar-header > .dropdown {
+        float: right;
+    }
+
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #ffffff;
+    }
+
+    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+        background-color: transparent;
+    }
+
+        .navbar-default .navbar-toggle:hover .icon-bar {
+            background-color: #ffffff;
+        }
+
+    .navbar-nav li {
+        margin: 10px 0px 30px;
+    }
+
+    .navbar-nav > li a {
+        padding-top: 0px;
+        color: #ffffff;
+        display: inline-block;
+    }
+
+    .mobile-header #balanceShow .dropdown {
+        display: flex;
+        display: -webkit-flex;
+        align-items: center;
+    }
+
+        .mobile-header #balanceShow .dropdown .btn {
+            padding: 0px 4px;
+        }
+
+            .mobile-header #balanceShow .dropdown .btn img {
+                max-width: 25px;
+            }
+
+    .image-title {
+        margin-bottom: 10px;
+        height: 120px;
+    }
+
+        .image-title img {
+            width: 70px;
+            height: 70px;
+        }
+
+        .image-title p {
+            padding: 5px 0px;
+            font-size: 10px;
+            line-height: 10px;
+        }
+
+    .body-content {
+        padding-top: 0px;
+        /*min-height: auto;*/
+    }
+
+    /*#beforelogin_mobile .body-content {
+        min-height: calc(100vh - 135px);
+    }*/
+
+    .live-chat {
+        bottom: -25px;
+        transform: translateX(40%);
+    }
+
+        .live-chat img {
+            width: 100px;
+        }
+
+    .main-content .navbar-brand {
+        height: auto;
+        padding: 0px;
+    }
+
+    .account-blog div[class*=col-] {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .annunce-section {
+        margin-bottom: 15px;
+    }
+
+    .join-now-section .row-flex {
+        display: flex;
+    }
+
+    .join-now-section .login-form .login-item {
+        margin-left: 5px;
+        float: none;
+        display: inline-block;
+    }
+
+    .join-now-section .login-form ul {
+        text-align: center;
+    }
+
+    .dropdown .dropdown-menu {
+        top: 45px;
+    }
+
+    .live-chat {
+        bottom: -25px;
+        transform: translateX(40%);
+    }
+
+        .live-chat img {
+            width: 100px;
+        }
+
+
+
+    .join-sign .noted {
+        font-size: 12px;
+        line-height: 16px;
+        width: 40%;
+        margin-bottom: 0px;
+    }
+
+    .join-sign .login-form {
+        float: none;
+    }
+
+    .join-sign {
+        margin-bottom: 0px;
+    }
+
+    .downloadbanner {
+        padding-top: 0px;
+        width: 99%;
+        margin-bottom: 70px;
+    }
+
+    .intro #comm100-float-button-2 > div {
+        right: -35px !important;
+        transition: 0.5s;
+    }
+
+    .mobile-announcment {
+        width: calc(100% - 20px);
+    }
+
+    .loading-gif {
+        width: 20px;
+        height: 20px;
+    }
+
+    .account-icon > li {
+        width: 19%;
+    }
+}

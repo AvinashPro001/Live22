@@ -29,7 +29,6 @@
   <ItemGroup>
     <Folder Include="Pages\Mobile\" />
     <Folder Include="wwwroot\fonts\NewFolder\" />
-    <Folder Include="wwwroot\js\mobile\" />
   </ItemGroup>
 
   <ItemGroup>

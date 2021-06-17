@@ -1,0 +1,624 @@
+@page
+@{ ViewData["Title"] = "Transfer";
+    Layout = ""; }
+
+<div id="comContent"></div>
+<div id="mComContent">
+
+    <div id="afterlogin_mobile">
+        <div class="main-content" id="navbarhide">
+            <li id="balanceShow">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle wallet" type="button" data-toggle="dropdown"><figure><img src="~/images/images-mobile/wallet.png" alt="f-wallet"></figure></button>
+                    <ul class="dropdown-menu wallet-dropdown">
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>Main Wallet</strong></li>
+                                <li class="fright" id="ddlmainWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>918Kiss Wallet</strong></li>
+                                <li class="fright" id="ddl918KissWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>AG Wallet</strong></li>
+                                <li class="fright" id="ddlAGWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>M8 Wallet</strong></li>
+                                <li class="fright" id="ddlM8Wallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>Joker Wallet</strong></li>
+                                <li class="fright" id="ddlJokerWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>Playtech Wallet</strong></li>
+                                <li class="fright" id="ddlPlaytechWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>MaxBet Wallet</strong></li>
+                                <li class="fright" id="ddlMaxBetWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>Mega888 Wallet</strong></li>
+                                <li class="fright" id="ddlMega888Wallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>DG Wallet</strong></li>
+                                <li class="fright" id="ddlDgWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>Sexy B. Wallet</strong></li>
+                                <li class="fright" id="ddlSexyWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>SA Wallet</strong></li>
+                                <li class="fright" id="ddlSAWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>Pussy888 Wallet</strong></li>
+                                <li class="fright" id="ddlPussy888Wallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>AllBet Wallet</strong></li>
+                                <li class="fright" id="ddlAllbetWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>WM Wallet</strong></li>
+                                <li class="fright" id="ddlWMWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>Pragmatic Wallet</strong></li>
+                                <li class="fright" id="ddlPragmaticWallet">feching...</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>YeeBet Wallet</strong></li>
+                                <li class="fright" id="ddlYeeBetWallet">feching...</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("navbarhide").style.display = "none";
+        document.getElementById("hideBody").style.padding = "0px";
+        if (GetLocalStorage('currentUser') === null) {
+            loadPageHome({ backFrom: 'transfer' });
+        }
+        TransferWalletList();
+
+        UserGameTurnover();
+
+        CheckSupportGame();
+
+        AllInButtonDisable(0);
+    </script>
+
+    <style>
+        select.main-wallet.jcf-hidden {
+            display: none;
+        }
+    </style>
+
+    <div id="Transfer" class="account-reg white-bg radius-border page-extra-padding">
+        <div class="container">
+            <div class="info-form text-center">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <div class="back-btn"><a onclick="loadPageHome({backFrom:'transfer'})" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div>
+                    </div>
+                    <div class="col-xs-8">
+                        <h4 class="black-text lang" key="transfer_title">TRANSFER</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row transfer-header ">
+            <div class="col-sm-12 col-xs-12">
+                <div class="col-sm-offset-1 col-xs-offset-1 col-sm-10 col-xs-10">
+                    <ul class="margin-top">
+                        <li class="text-center black-text">Main Wallet</li>
+                        <li class="text-center menuwallet">MYR <span id="menuMainWallet" class="menu-main-wallet"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="fa fa-refresh refersh-btn"></span></li>
+                        <li class="text-center"><button class="btn btn-default" onclick="RestoreBalance()"><span class="lang" key="mobile_menu_Restore">Restore</span></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="info-form">
+                        <div class="pad-lr-comman">
+                            <div class="step-portion">
+                                <h5 class="mar-btm-ten lang" key="transfer_transfer_details">TRANSFER DETAIL</h5>
+                                <div class="switch-middle">
+                                    <img src="~/images/icon-smart.png" />
+                                    <p><span class="lang" key="auto_transfer">Main Wallet Auto Transfer</span></p>
+                                    <p>&nbsp;&nbsp;&nbsp;</p>
+                                    <div class="col-lg-1 switch" onclick="onclickSet(0)" id="checkSwitch">
+                                        <div class="switch-circle" id="circle-move">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="big-text lang" key="transfer_please_fill_in_the_following_form">Please fill in the following form to request for transfer</p>
+                            <form id="formTransfer">
+                                <ul class="password-upadte transfer-page">
+                                    <li class="mar-btm-fifteen">
+                                        <label class="fleft"><p class="big no-mar lang" key="transfer_from">From:</p></label>
+                                        <label class="fright bank-icon bank-name mendatory">
+                                            <select class="main-wallet" data-jcf='{"wrapNative": false, "wrapNativeOnMobile": false}' id="ddl_transferFromWallet" onchange="select()">
+                                                <option value="">-- Select --</option>
+                                            </select>
+                                            <p class="star">*</p>
+                                        </label>
+                                    </li>
+                                    <li class="mar-btm-fifteen">
+                                        <label class="fleft"><p class="big no-mar lang" key="balance">Balance</p></label>
+                                        <label class="fright" id="walletBalance">
+                                            select Wallet
+                                        </label>
+                                    </li>
+                                    <li class="mar-btm-fifteen">
+                                        <label class="fleft"><p class="big no-mar lang" key="transfer_to">To:</p></label>
+                                        <label class="fright bank-icon bank-name mendatory">
+                                            <select class="main-wallet" data-jcf='{"wrapNative": false, "wrapNativeOnMobile": false}' id="ddl_transferToWallet">
+                                                <option value="">-- Select --</option>
+                                            </select>
+                                            <p class="star">*</p>
+                                        </label>
+                                    </li>
+                                    <li class="mar-btm-fifteen">
+                                        <label class="fleft"><p class="big no-mar lang" key="transfer_amount">Amount:</p></label>
+                                        <label class="fright bank-icon bank-name mendatory">
+                                            <input id="txt_transferAmount" pattern="\d*" name="txt_transferAmount" type="number" class="reg-form" style="font-size:8px;" placeholder="Min/Max Limit: 1.00 / 1000.00">
+                                            <p class="star">*</p>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </form>
+                            <div id="transferAmount">
+                                <ul class="password-upadte transfer-ammount">
+                                    <li class="mar-btm-fifteen">
+                                    </li>
+                                    <li class="mar-btm-fifteen">
+                                        <div class="fright"><button class="submit lang" data-toggle="modal" key="transfer_button" onclick="Checkbalance()" type="button">Transfer</button></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row row-extra">
+
+                <div class="col-sm-12 col-lg-12 total-turnover-chip-mobile">
+                    <ul>
+                        <li><span class="lang" key="total_daily_turnover">Total Daily Turnover</span></li>
+                        <li id="TotalTurnover">-</li>
+                        <li><span id="spinrefesh" class="fa fa-refresh" onclick="UserGameTurnover()"></span></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-4 col-sm-4 transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">918 Kiss</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="918KissWallet">0.00</li>
+                            <li><button id="kiss918allin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('918Kiss Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="kiss918Turnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">Joker</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="JokerWallet">0.00</li>
+                            <li><button id="jokerallin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('Joker Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="jokerTurnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">Mega888</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="Mega888Wallet">0.00</li>
+                            <li><button id="mega888allin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('Mega888 Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="mega888Turnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">AG</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="AGWallet">0.00</li>
+                            <li><button id="agallin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('AG Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="agTurnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">Playtech</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="PlaytechWallet">0.00</li>
+                            <li><button id="playtechallin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('PlayTech Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="playtechTurnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">M8</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="M8Wallet">0.00</li>
+                            <li><button id="m8allin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('M8 Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="m8Turnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-xs-4  transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">Maxbet</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="MaxBetWallet">0.00</li>
+                            <li><button id="maxbetallin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('MaxBet Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="maxbetTurnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-xs-4  transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">DG</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="DGWallet">0.00</li>
+                            <li><button id="dgallin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('DG Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="dgTurnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-xs-4  transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">Sexy B.</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="SexyWallet">0.00</li>
+                            <li><button id="sexyallin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('Sexy Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="sexyTurnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4  transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">SA</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="SAWallet">0.00</li>
+                            <li><button id="saallin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('SA Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="saTurnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4  transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">Pussy888</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="Pussy888Wallet">0.00</li>
+                            <li><button id="pussy888allin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('Pussy888 Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="Pussy888Turnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4  transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">AllBet</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="AllBetWallet">0.00</li>
+                            <li><button id="allbetallin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('AllBet Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="AllBetTurnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4  transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">WM</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="WMWallet">0.00</li>
+                            <li><button id="wmallin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('WM Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="WMTurnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4  transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">Pragmatic</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="PragmaticWallet">0.00</li>
+                            <li><button id="pragmaticallin" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('Pragmatic Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Winover</label>
+                            <label id="PragmaticTurnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4  transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">YeeBet</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="YeeBetWallet">0.00</li>
+                            <li><button id="YeeBetAllIn" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('YeeBet Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="YeeBetTurnover">-</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="RestoreConfirmation" class="modal fade">
+            <div class="modal-dialog mail-width">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <p><span class="lang" key="msg_restore"></span></p>
+                        <ul class="list-inline pad-top-ten">
+                            <li><button onclick="RestoreBalance()" data-dismiss="modal" class="submit"><a asp-page="/Account/Profile" asp-fragment="deposit">Yes</a></button></li>
+                            <li><button class="submit" data-dismiss="modal"><a asp-page="/Home/home">No</a></button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="AllInConfirmation" class="modal fade">
+            <div class="modal-dialog mail-width">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <p> Are you sure to proceed ?</p>
+                        <ul class="list-inline pad-top-ten">
+                            <li><button onclick="TransferInAllWallet()" data-dismiss="modal" class="submit"><a asp-page="/Account/Profile" asp-fragment="deposit">Yes</a></button></li>
+                            <li><button class="submit" data-dismiss="modal"><a asp-page="/Home/home">No</a></button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-widget" id="footerWidget">
+        <ul class="list-inline text-center">
+            <li id="homePagebottom">
+                <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch">
+                    <i class="fa fa-home"></i>
+                    <p class="white-text no-mar" data-translate="menu_home">Home</p>
+                </a>
+            </li>
+            <li id="promotionPagebottom" class="">
+                <a onclick="loadPagePromotions()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-gift"></i>
+                    <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
+                </a>
+            </li>
+            <li id="contactusPagebottom">
+                <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-user"></i>
+                    <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="whatsapp()">
+                    <figure><img src="~/images/images-mobile/whatsapp.png" alt="Whats App" /></figure>
+                    <p class="white-text no-mar">Whatsapp</p>
+                </a>
+            </li>
+            <li class="live-chat">
+                <a class="live-chat-icon"><p class="white-text no-mar" data-translate="Live_chat">Live Chat</p></a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <a id="mobileM8" style="display:none"></a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
+            $("#chatting").toggle();
+        });
+        $(".contact-user").mouseover(function () {
+            $("#chatting").toggle();
+        });
+    });
+</script>
+
+<!--Begin Comm100 Live Chat Code-->
+<div></div>
+<script type="text/javascript">
+    var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 0) })(Comm100API || {})
+</script>
+<!--End Comm100 Live Chat Code-->
+<!-- Slider Section End -->
+<!-- Modal For Video -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".open-modal").click();
+    });
+    jQuery(".scroll-down-visible").hide();
+    jQuery("#more-arrow").click(function () {
+        jQuery(".scroll-down-visible").toggleClass("show");
+        jQuery("#more-arrow").toggleClass("rotate");
+    });
+</script>
+
+<!-- //Modal For Video -->
+<script src="~/js/jcf/jcf.js"></script>
+<script src="~/js/jcf/jcf.select.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            jcf.replaceAll();
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".navbar-toggle,.canvas-overlay").click(function () {
+            if (!$("html").hasClass('intro')) {
+                $("html").addClass("intro");
+            }
+            else {
+                $("html").removeClass("intro");
+            }
+        });
+        $(".canvas-overlay").click(function () {
+            if ($(".navbar-collapse").hasClass('in')) {
+                $(".navbar-collapse").removeClass("in");
+            }
+        });
+    });
+</script>
+<!-- Slider Section End -->
+<script>
+    $(window).scroll(function () {
+        var scroll = $(window).scrollTop();
+        if (scroll >= 1) {
+            $("header").addClass("sticky-header");
+        }
+        else {
+            $("header").removeClass("sticky-header");
+        }
+    });
+</script>
+
+<script>
+    WalletBalance();
+
+    function get() {
+        (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
+
+        $.ajax({
+            url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
+            dataType: 'json',
+            async: false,
+            success: function (lang) {
+                $('.lang').each(function (index, element) {
+                    if (localStorage.getItem("language") === "ms-MY") {
+                        $('body').addClass('malay-font');
+                    }
+                    $(this).text(lang[$(this).attr('key')]);
+                });
+                $("[data-translate]").each(function () {
+                    if ($(this).is("input")) {
+                        $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    } else {
+                        $(this).text(lang[$(this).data("translate")]);
+                    }
+                });
+            }
+        });
+    }
+
+    setTimeout(() => {
+        get();
+    }, 200);
+</script>
