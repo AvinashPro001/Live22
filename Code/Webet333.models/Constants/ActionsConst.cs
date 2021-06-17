@@ -751,7 +751,7 @@
 
         public class SBO
         {
-            public const string RegisterAgent= "sbo/register/agent";
+            public const string RegisterAgent = "sbo/register/agent";
 
             public const string RegisterPlayer = "sbo/register/player";
 

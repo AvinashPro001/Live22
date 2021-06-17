@@ -254,8 +254,8 @@ namespace Webet333.api.Helpers
                 await repository.AddOrUpdateAsync(StoredProcConsts.SBO.SetPlayerDefaultBetLimit, request);
             }
         }
-        
-        #endregion Player Default Bet Limit in DB
+
+        #endregion Player Default Bet Limit
 
         #region Player Default Bet Limit
 
@@ -266,8 +266,8 @@ namespace Webet333.api.Helpers
                 await repository.AddOrUpdateAsync(StoredProcConsts.SBO.SetPlayerDefaultBetLimit, request);
             }
         }
-        
-        #endregion Player Default Bet Limit in DB
+
+        #endregion Player Default Bet Limit
 
         #region Get Player Default Bet Limit
 
@@ -281,7 +281,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion Player Default Bet Limit in DB
+        #endregion Get Player Default Bet Limit
 
         #region House Keeping
 

@@ -22,8 +22,9 @@ export class SboPlayerDefaultBetLimitComponent implements OnInit {
         private commonService: CommonService,
         private toasterService: ToasterService,) { }
 
-    ngOnInit() { this.GetData();}
-
+    async ngOnInit() {
+        await this.GetData();
+    }
 
     async GetData() {
         this.adminService.getAll<any>(customer.getSBOPlayerDefaultBetLimit).subscribe(res => {
@@ -32,7 +33,6 @@ export class SboPlayerDefaultBetLimitComponent implements OnInit {
     }
 
     async Update() {
-
         let model = [
             {
                 id: this.playerDefaultBetLimit.Football_OthersMatchType_MinBetId,
@@ -228,16 +228,12 @@ export class SboPlayerDefaultBetLimitComponent implements OnInit {
 
         //#endregion Temp
 
-
-        this.adminService.add<any>(customer.updateSBOPlayerDefaultBetLimit, model).subscribe(res => {
+        this.adminService.add<any>(customer.updateSBOPlayerDefaultBetLimit, model).subscribe(async res => {
             this.toasterService.pop('success', 'Success', res.message);
-            //this.GetData();
+            await this.GetData();
         }, error => {
             this.ngOnInit();
             this.toasterService.pop('error', 'Error', error.error.message);
         });
-
-        console.log(model);
-        console.log(JSON.stringify(model));
     }
 }
