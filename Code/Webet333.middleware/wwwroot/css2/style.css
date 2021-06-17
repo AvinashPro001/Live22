@@ -43,7 +43,7 @@ no-js #loader {
     z-index: 9999;
     background: center no-repeat #0f203a;
     opacity: .9;
-    background-image: url(../images/loading2.gif);
+    background-image: url(../images/loading.gif);
     background-size: 90px 100px;
 }
 
@@ -3141,7 +3141,7 @@ ul.highlight-bank li.active figure {
         left: 20px;
         top: 0;
         position: absolute;
-        background: url(../images/icon_caution.png) no-repeat center center / cover;
+        background: url(../images/mobile/icon_caution.png) no-repeat center center / cover;
         width: 30px;
         height: 30px;
     }

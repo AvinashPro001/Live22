@@ -52,14 +52,14 @@ body                                        { background-color: #ffffff; padding
 .login-join-btn-row .btn-success:hover      { background: #ffffff; color: #8f0000;}
 .login-join-btn-row .btn.login-btn:hover    { background: #ffffff; color: #956b00;}
 .login-join-btn-row .btn.login-btn          { border-bottom: 1px solid #a17400; background: #feb801; color: #956b00; outline: none; }
-.login-join-btn-row .btn.login-btn:before   { background-image: url(../../images/images-mobile/login.png); }
-.login-join-btn-row .btn.join-btn:before    { background-image: url(../../images/images-mobile/signup.png); }
+.login-join-btn-row .btn.login-btn:before   { background-image: url(../../images/mobile/login.png); }
+.login-join-btn-row .btn.join-btn:before    { background-image: url(../../images/mobile/signup.png); }
 .join-btn                                   { background: #dd1616; }
 .login-join-btn-row .btn:after              { content: ''; display: block; right: 5px; top: -10px; width: 40px; height: 50px; 
                                             position: absolute; background: no-repeat center center / cover; filter: drop-shadow(2px 0px 2px #000);}
-.login-join-btn-row .btn.login-btn:after    { background-image: url(../../images/images-mobile/login_image.png); width: 50px; 
+.login-join-btn-row .btn.login-btn:after    { background-image: url(../../images/mobile/login_image.png); width: 50px; 
                                             background-size: contain; right: 0px; }
-.login-join-btn-row .btn.join-btn:after     { background-image: url(../../images/images-mobile/signup_image.png); }
+.login-join-btn-row .btn.join-btn:after     { background-image: url(../../images/mobile/signup_image.png); }
 
 /*  */
 .myr-quote                                  { background: #feb801; color: #000000; width: 100%; margin: 0; border-radius: 0px;}
@@ -90,18 +90,18 @@ body                                        { background-color: #ffffff; padding
 .casino a:before,.sport a:before,.slot a:before,
 .fishing a:before                           { content: ""; display: block; top: 5px; left: 50%; transform: translateX(-50%); 
                                             background: no-repeat center center / 100%; width: 30px; height: 30px; position: absolute; }
-.casino a:before                            { background-image: url(../../images/images-mobile/casino.png);}
+.casino a:before                            { background-image: url(../../images/mobile/casino.png);}
 .casino.active a:before, .casino.active:hover a:before,
-.casino:hover a:before                      { background-image: url(../../images/images-mobile/casino_hover.png); filter: drop-shadow(10px 10px 6px black); }
-.sport a:before                             { background-image: url(../../images/images-mobile/sport.png);}
+.casino:hover a:before                      { background-image: url(../../images/mobile/casino_hover.png); filter: drop-shadow(10px 10px 6px black); }
+.sport a:before                             { background-image: url(../../images/mobile/sport.png);}
 .sport.active a:before, .sport.active:hover a:before,
-.sport:hover a:before                       { background-image: url(../../images/images-mobile/sport_hover.png); filter: drop-shadow(10px 10px 6px black); }
-.slot a:before                              { background-image: url(../../images/images-mobile/slot.png);}
+.sport:hover a:before                       { background-image: url(../../images/mobile/sport_hover.png); filter: drop-shadow(10px 10px 6px black); }
+.slot a:before                              { background-image: url(../../images/mobile/slot.png);}
 .slot.active a:before, .slot.active:hover a:before,
-.slot:hover a:before                        { background-image: url(../../images/images-mobile/slot_hover.png); filter: drop-shadow(10px 10px 6px black); }
-.fishing a:before                           { background-image: url(../../images/images-mobile/fish.png);}
+.slot:hover a:before                        { background-image: url(../../images/mobile/slot_hover.png); filter: drop-shadow(10px 10px 6px black); }
+.fishing a:before                           { background-image: url(../../images/mobile/fish.png);}
 .fishing.active a:before, .fishing.active:hover a:before,
-.fishing:hover a:before                     { background-image: url(../../images/images-mobile/fish_hover.png); filter: drop-shadow(10px 10px 6px black); }
+.fishing:hover a:before                     { background-image: url(../../images/mobile/fish_hover.png); filter: drop-shadow(10px 10px 6px black); }
 /* Middle Area */
 .annunce-title img                          { max-width: 20px; margin-right: 5px;}
 .annunce-section                            { padding-top: 10px; padding-bottom: 0px; margin-bottom: 0px;}
