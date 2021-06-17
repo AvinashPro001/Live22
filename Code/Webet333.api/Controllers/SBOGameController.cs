@@ -137,6 +137,9 @@ namespace Webet333.api.Controllers
 
             await CheckUserRole();
 
+            var adminId = GetUserId(User);
+            request.ForEach(x => x.AdminId = adminId);
+
             using (var SBO_helper = new SBOGameHelpers(Connection))
             {
                 await SBO_helper.SetPlayerDefaultBetLimitAsync(request);
@@ -147,7 +150,7 @@ namespace Webet333.api.Controllers
 
         #endregion Set Player Default Bet Limit
 
-        #region Set Player Default Bet Limit
+        #region Update Player Default Bet Limit
 
         [HttpPost(ActionsConst.SBO.UpdatePlayerDefaultBetLimit)]
         public async Task<IActionResult> UpdatePlayerDefaultBetLimitAsync([FromBody] List<SBOSetPlayerDefaultBetLimitUpdateRequest> request)
@@ -157,6 +160,9 @@ namespace Webet333.api.Controllers
 
             await CheckUserRole();
 
+            var adminId = GetUserId(User);
+            request.ForEach(x => x.AdminId = adminId);
+
             using (var SBO_helper = new SBOGameHelpers(Connection))
             {
                 await SBO_helper.UpdatePlayerDefaultBetLimitAsync(request);
@@ -165,7 +171,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Set Player Default Bet Limit
+        #endregion Update Player Default Bet Limit
 
         #region Get Player Default Bet Limit
 

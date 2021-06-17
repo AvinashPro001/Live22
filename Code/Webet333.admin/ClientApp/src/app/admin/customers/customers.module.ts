@@ -163,7 +163,8 @@ const routes: Routes = [
     { path: 'freecreditevent-add', component: FreecrediteventAddComponent },
     { path: 'freecreditevent-edit', component: FreecrediteventEditComponent },
     { path: 'promotions-users-report', component: PromotionsUsersReportComponent },
-    { path: 'sbo-Player-default-betLimit', component: SboPlayerDefaultBetLimitComponent }
+    { path: 'sbo-Player-default-betLimit', component: SboPlayerDefaultBetLimitComponent },
+    //{ path: 'sbo-set-league-betLimit', component: SboPlayerDefaultBetLimitComponent }
 ];
 
 @NgModule({

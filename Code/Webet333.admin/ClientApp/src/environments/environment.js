@@ -9,8 +9,8 @@ exports.environment = {
     production: false,
     //apiUrl: 'http://api.webet333.com/api/v1/'
     //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:8091/api/v1/'
-    apiUrl: 'http://localhost:5000/api/v1/'
+    apiUrl: 'http://localhost:8091/api/v1/'
+    //apiUrl: 'http://localhost:5000/api/v1/'
 };
 exports.account = {
     login: exports.environment.apiUrl + 'account/login',
@@ -272,6 +272,7 @@ exports.customer = {
     promotionUsersSelect: exports.environment.apiUrl + 'promotions/users/select',
     promotionSelectForDropdown: exports.environment.apiUrl + 'promotions/select/dropdown',
     setSBOPlayerDefaultBetLimit: exports.environment.apiUrl + 'sbo/set/playerdefaultbetlimit',
+    updateSBOPlayerDefaultBetLimit: exports.environment.apiUrl + 'sbo/update/playerdefaultbetlimit',
     getSBOPlayerDefaultBetLimit: exports.environment.apiUrl + 'sbo/get/playerdefaultbetlimit'
 };
 exports.playtech = {
