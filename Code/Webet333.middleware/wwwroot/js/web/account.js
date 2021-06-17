@@ -92,6 +92,7 @@ function LoginSectionHideUnhide() {
     if (GetLocalStorage("currentUser") == null) {
         document.getElementById("afterlogin").innerHTML = "";
         document.getElementById("bankMainMenu").innerHTML = "";
+        document.getElementById("vipMainMenu").innerHTML = "";
     } else {
         document.getElementById("beforelogin").innerHTML = ""
     }
