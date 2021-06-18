@@ -113,13 +113,13 @@ br {
     max-width: 465px;
 }
 
-#comm100-float-button-2 > div {
+#onlinehelp-float-button-2 > div {
     transform: translateY(-50%) !important;
     bottom: 22px !important;
     right: 20px !important;
 }
 
-    #comm100-float-button-2 > div img {
+    #onlinehelp-float-button-2 > div img {
         max-width: 25px;
     }
 
@@ -1415,7 +1415,7 @@ body {
         max-width: 150px;
     }
 
-    .intro #comm100-float-button-2 > div {
+    .intro #onlinehelp-float-button-2 > div {
         right: -35px !important;
         transition: 0.5s;
     }

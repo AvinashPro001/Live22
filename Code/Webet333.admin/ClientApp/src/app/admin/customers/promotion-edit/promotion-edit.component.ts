@@ -206,7 +206,8 @@ export class PromotionEditComponent implements OnInit {
             this.selectOverCategory = 'Turnover';
         }
 
-        if (this.data.discountType == this.Type[2].id) {
+        this.discountTypeId = this.data.discountType;
+        if (this.discountTypeId == this.Type[2].id) {
             this.showPromotionFixedBonus = true;
             this.showDiscount = false;
             this.showMinDeposit = false;
@@ -223,6 +224,9 @@ export class PromotionEditComponent implements OnInit {
 
         let temp = this.data.promotionFixedBonus;
         this.promotionFixedBonusAmount = JSON.parse(temp);
+
+        this.maxBonusValue = this.data.maxbonus;
+        this.discountValue = this.data.discount;
     }
 
     UpdatePromotion() {
@@ -254,6 +258,9 @@ export class PromotionEditComponent implements OnInit {
             //minDeposit: (document.getElementById("txt_minDepositAmount") as HTMLInputElement).value,
             minDeposit: this.minDepositValue,
             fixedBonus: this.promotionFixedBonusAmount,
+
+            isYeeBetBetLimit: (document.getElementById("chk_isYeeBetBetLimit") as HTMLInputElement).checked,
+
             isAG: (document.getElementById("ag_id") as HTMLInputElement).checked,
             isDG: (document.getElementById("dg_id") as HTMLInputElement).checked,
             isSA: (document.getElementById("sa_id") as HTMLInputElement).checked,
@@ -354,7 +361,13 @@ export class PromotionEditComponent implements OnInit {
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertTitle);
         }
 
-        if (this.discountTypeId != this.Type[2].id) this.promotionFixedBonusAmount = null;
+        if (this.discountTypeId != this.Type[2].id) {
+            dataSelect.fixedBonus = null;
+        }
+        else {
+            dataSelect.maxbonus = 0;
+            dataSelect.discount = 0;
+        }
 
         this.adminService.add<any>(customer.promotionUpdate, dataSelect).subscribe(res => {
             this.toasterService.pop('success', 'Success', res.message);

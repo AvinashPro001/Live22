@@ -1,208 +1,858 @@
-body                                        { background-color: #ffffff; padding-top: 40px; }
-.scroll-content .join-now-section .myr-quote { margin-top: 10px; }
-.transfer-header                            { background-color: #feb801; }
+body {
+    background-color: #ffffff;
+    padding-top: 40px;
+}
+
+.scroll-content .join-now-section .myr-quote {
+    margin-top: 10px;
+}
+
+.transfer-header {
+    background-color: #feb801;
+}
+
 .menu-main-wallet,
-.menuwallet                                 { color: #000000; }
-.menuwallet > .btn-default                  { margin-left: 10px;}
-.black-bg                                   { background-color: #232323; }
-.promotion-title                            { padding: 10px; margin-top: 9px;}
-.promotion-title h4                         { text-transform: uppercase; }
-.margin-promotion                           { margin-top: 0px; }
-#afterlogin_mobile .navbar-header.mob-layout > li { width: 50%;}
-.navbar-toggle .icon-bar                    { width: 15px; }
-.navbar-toggle                              { padding: 7px; }
-.navbar-brand .logo                         { margin-top: 5px; max-width: 150px;}
-.mob-layout > ul                            { padding: 2px 0px; }
-.navbar-header .dropdown-menu               { min-width: 200px; }
-.announcment-font                           { font-size: 12px; }
-#comm100-float-button-2 > div               { right: calc(10% - 10px) !important;}
+.menuwallet {
+    color: #000000;
+}
+
+    .menuwallet > .btn-default {
+        margin-left: 10px;
+    }
+
+.black-bg {
+    background-color: #232323;
+}
+
+.promotion-title {
+    padding: 10px;
+    margin-top: 9px;
+}
+
+    .promotion-title h4 {
+        text-transform: uppercase;
+    }
+
+.margin-promotion {
+    margin-top: 0px;
+}
+
+#afterlogin_mobile .navbar-header.mob-layout > li {
+    width: 50%;
+}
+
+.navbar-toggle .icon-bar {
+    width: 15px;
+}
+
+.navbar-toggle {
+    padding: 7px;
+}
+
+.navbar-brand .logo {
+    margin-top: 5px;
+    max-width: 150px;
+}
+
+.mob-layout > ul {
+    padding: 2px 0px;
+}
+
+.navbar-header .dropdown-menu {
+    min-width: 200px;
+}
+
+.announcment-font {
+    font-size: 12px;
+}
+
+#onlinehelp-float-button-2 > div {
+    right: calc(10% - 10px) !important;
+}
 /* Sidebar */
-.sidebar                                    { height: 100%; }
-.nav.mob-menu > li > a                      { color: #feb801; cursor: pointer;}
-.nav.mob-menu > li > a > img                { max-width: 40px; }
+.sidebar {
+    height: 100%;
+}
+
+.nav.mob-menu > li > a {
+    color: #feb801;
+    cursor: pointer;
+}
+
+    .nav.mob-menu > li > a > img {
+        max-width: 40px;
+    }
 /* Header */
-.navbar-header.mob-layout                   { box-shadow: 0px 0px 5px #333; }
-.navbar-default                             { background: #ffffff;}
-.mob-layout.navbar-header .navbar-toggle    { margin-left: 10px; }
-.navbar-default .navbar-toggle              { background: #feb801; border-radius: 5px;}
-.navbar-default .navbar-toggle .icon-bar    { background: #2b2b2b; }
-.navbar-default .navbar-toggle:hover        { background: #ffc52d;}
-.dropdown-toggle.wallet img                 { max-width: 30px;}
-.wallet-dropdown > li:nth-child(odd)        { background: #232323; padding: 10px 5px; }
-.wallet-dropdown > li:nth-child(odd) ul     { margin: 0; }
-.wallet-dropdown > li:nth-child(even) ul    { background: #2a2a2a; padding: 10px 0px; margin: 0 10px; }
-.wallet-dropdown > li                       { margin: 0px; background: #232323; }
-.dropdown .dropdown-menu                    { padding: 0px;max-height: calc(100vh - 250px);overflow-y: scroll;background-color:#232323}
-.mob-layout .dropdown .btn                  { box-shadow: none;padding: 0;margin-right: 6px;}
-.wallet-dropdown > li                       { color: #ffffff; }
-.scroll-content                             {padding-bottom: 0px;overflow: hidden;}
-.body-content                               { padding-bottom: 70px;}
-.join-now-section .account-icon             { display: flex; justify-content: space-around; padding-bottom: 10px;}
-.join-now-section .account-icon > li        { width: calc(100% / 5 - 5px);}
-.join-now-section                           { padding-bottom: 0px;}
-.login-join-btn-row                         { margin-bottom: 0px; background: #1d1d1d; padding: 10px 0px 10px; display: flex; 
-                                            justify-content: center; }
-.login-join-btn-row .btn                    { padding: 10px 40px 10px 30px; border-radius: 30px; color: #ffffff; transition: 0.5s; width: 43%;
-                                            border-bottom: 1px solid #8f0000; position: relative; text-transform: uppercase; margin: 0 5px;
-                                            max-width: 175px;outline:0px; }
-.login-join-btn-row .btn:hover,
-.login-join-btn-row .btn:focus              {border:0px;outline:none;}
-.login-join-btn-row .btn:before             { content: ''; display: block; left: 15px; top: 50%; transform: translateY(-50%); width: 15px; 
-                                            height: 12px; position: absolute; background: no-repeat center center / cover; }
-.login-join-btn-row .btn-success:hover      { background: #ffffff; color: #8f0000;}
-.login-join-btn-row .btn.login-btn:hover    { background: #ffffff; color: #956b00;}
-.login-join-btn-row .btn.login-btn          { border-bottom: 1px solid #a17400; background: #feb801; color: #956b00; outline: none; }
-.login-join-btn-row .btn.login-btn:before   { background-image: url(../../images/images-mobile/login.png); }
-.login-join-btn-row .btn.join-btn:before    { background-image: url(../../images/images-mobile/signup.png); }
-.join-btn                                   { background: #dd1616; }
-.login-join-btn-row .btn:after              { content: ''; display: block; right: 5px; top: -10px; width: 40px; height: 50px; 
-                                            position: absolute; background: no-repeat center center / cover; filter: drop-shadow(2px 0px 2px #000);}
-.login-join-btn-row .btn.login-btn:after    { background-image: url(../../images/images-mobile/login_image.png); width: 50px; 
-                                            background-size: contain; right: 0px; }
-.login-join-btn-row .btn.join-btn:after     { background-image: url(../../images/images-mobile/signup_image.png); }
+.navbar-header.mob-layout {
+    box-shadow: 0px 0px 5px #333;
+}
+
+.navbar-default {
+    background: #ffffff;
+}
+
+.mob-layout.navbar-header .navbar-toggle {
+    margin-left: 10px;
+}
+
+.navbar-default .navbar-toggle {
+    background: #feb801;
+    border-radius: 5px;
+}
+
+    .navbar-default .navbar-toggle .icon-bar {
+        background: #2b2b2b;
+    }
+
+    .navbar-default .navbar-toggle:hover {
+        background: #ffc52d;
+    }
+
+.dropdown-toggle.wallet img {
+    max-width: 30px;
+}
+
+.wallet-dropdown > li:nth-child(odd) {
+    background: #232323;
+    padding: 10px 5px;
+}
+
+    .wallet-dropdown > li:nth-child(odd) ul {
+        margin: 0;
+    }
+
+.wallet-dropdown > li:nth-child(even) ul {
+    background: #2a2a2a;
+    padding: 10px 0px;
+    margin: 0 10px;
+}
+
+.wallet-dropdown > li {
+    margin: 0px;
+    background: #232323;
+}
+
+.dropdown .dropdown-menu {
+    padding: 0px;
+    max-height: calc(100vh - 250px);
+    overflow-y: scroll;
+    background-color: #232323
+}
+
+.mob-layout .dropdown .btn {
+    box-shadow: none;
+    padding: 0;
+    margin-right: 6px;
+}
+
+.wallet-dropdown > li {
+    color: #ffffff;
+}
+
+.scroll-content {
+    padding-bottom: 0px;
+    overflow: hidden;
+}
+
+.body-content {
+    padding-bottom: 70px;
+}
+
+.join-now-section .account-icon {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 10px;
+}
+
+    .join-now-section .account-icon > li {
+        width: calc(100% / 5 - 5px);
+    }
+
+.join-now-section {
+    padding-bottom: 0px;
+}
+
+.login-join-btn-row {
+    margin-bottom: 0px;
+    background: #1d1d1d;
+    padding: 10px 0px 10px;
+    display: flex;
+    justify-content: center;
+}
+
+    .login-join-btn-row .btn {
+        padding: 10px 40px 10px 30px;
+        border-radius: 30px;
+        color: #ffffff;
+        transition: 0.5s;
+        width: 43%;
+        border-bottom: 1px solid #8f0000;
+        position: relative;
+        text-transform: uppercase;
+        margin: 0 5px;
+        max-width: 175px;
+        outline: 0px;
+    }
+
+        .login-join-btn-row .btn:hover,
+        .login-join-btn-row .btn:focus {
+            border: 0px;
+            outline: none;
+        }
+
+        .login-join-btn-row .btn:before {
+            content: '';
+            display: block;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 12px;
+            position: absolute;
+            background: no-repeat center center / cover;
+        }
+
+    .login-join-btn-row .btn-success:hover {
+        background: #ffffff;
+        color: #8f0000;
+    }
+
+    .login-join-btn-row .btn.login-btn:hover {
+        background: #ffffff;
+        color: #956b00;
+    }
+
+    .login-join-btn-row .btn.login-btn {
+        border-bottom: 1px solid #a17400;
+        background: #feb801;
+        color: #956b00;
+        outline: none;
+    }
+
+        .login-join-btn-row .btn.login-btn:before {
+            background-image: url(../../images/images-mobile/login.png);
+        }
+
+    .login-join-btn-row .btn.join-btn:before {
+        background-image: url(../../images/images-mobile/signup.png);
+    }
+
+.join-btn {
+    background: #dd1616;
+}
+
+.login-join-btn-row .btn:after {
+    content: '';
+    display: block;
+    right: 5px;
+    top: -10px;
+    width: 40px;
+    height: 50px;
+    position: absolute;
+    background: no-repeat center center / cover;
+    filter: drop-shadow(2px 0px 2px #000);
+}
+
+.login-join-btn-row .btn.login-btn:after {
+    background-image: url(../../images/images-mobile/login_image.png);
+    width: 50px;
+    background-size: contain;
+    right: 0px;
+}
+
+.login-join-btn-row .btn.join-btn:after {
+    background-image: url(../../images/images-mobile/signup_image.png);
+}
 
 /*  */
-.myr-quote                                  { background: #feb801; color: #000000; width: 100%; margin: 0; border-radius: 0px;}
-.account-icon                               { width: 100%; margin: 0px; border-radius: 0px; background: #000000;}
-.account-icon > li                          { padding: 5px; border: 1px solid #feb801; border-radius: 5px; }
-.account-icon > li:hover                    { background: #feb801; }
-.myr-quote h4 span,
-.account-icon > li:hover a span             { color: #000000;}
-.account-icon li a span                     { color: #feb801;}
+.myr-quote {
+    background: #feb801;
+    color: #000000;
+    width: 100%;
+    margin: 0;
+    border-radius: 0px;
+}
 
-.game-tab-panel.nav-pills > li.active > a, 
-.game-tab-panel.nav-pills > li.active > a:focus, 
-.game-tab-panel.nav-pills > li.active > a:hover { background-color: transparent; }
-.game-tab-panel                             { display: flex; justify-content: space-between; background: #000; }
-.game-tab-panel li                          { background: #2a2a2a; width: calc(100% / 4); text-align: center;position: relative; }
-.game-tab-panel li:before                   { content: '\f0de'; display: block; left: 50%; transform: translateX(-50%); width: 0; height: 0px; 
-                                            position: absolute; bottom: 10px; font-family: fontAwesome; font-weight: 400; }
-.game-tab-panel li.active:before,
-.game-tab-panel li:hover:before             { color: #ffffff;}
-.game-tab-panel li a                        { color: #525252; padding: 35px 0px 5px 0px; display: block; }
-.game-tab-panel li:hover a                  { color: #ffffff; border: 0px;}
-.game-tab-panel li:not(:last-child)         { border-right: 1px solid #151515; }
-.casino a,.sport a,.slot a,.fishing a		{ position: relative;}
+.account-icon {
+    width: 100%;
+    margin: 0px;
+    border-radius: 0px;
+    background: #000000;
+}
+
+    .account-icon > li {
+        padding: 5px;
+        border: 1px solid #feb801;
+        border-radius: 5px;
+    }
+
+        .account-icon > li:hover {
+            background: #feb801;
+        }
+
+            .myr-quote h4 span,
+            .account-icon > li:hover a span {
+                color: #000000;
+            }
+
+    .account-icon li a span {
+        color: #feb801;
+    }
+
+.game-tab-panel.nav-pills > li.active > a,
+.game-tab-panel.nav-pills > li.active > a:focus,
+.game-tab-panel.nav-pills > li.active > a:hover {
+    background-color: transparent;
+}
+
+.game-tab-panel {
+    display: flex;
+    justify-content: space-between;
+    background: #000;
+}
+
+    .game-tab-panel li {
+        background: #2a2a2a;
+        width: calc(100% / 4);
+        text-align: center;
+        position: relative;
+    }
+
+        .game-tab-panel li:before {
+            content: '\f0de';
+            display: block;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0px;
+            position: absolute;
+            bottom: 10px;
+            font-family: fontAwesome;
+            font-weight: 400;
+        }
+
+        .game-tab-panel li.active:before,
+        .game-tab-panel li:hover:before {
+            color: #ffffff;
+        }
+
+        .game-tab-panel li a {
+            color: #525252;
+            padding: 35px 0px 5px 0px;
+            display: block;
+        }
+
+        .game-tab-panel li:hover a {
+            color: #ffffff;
+            border: 0px;
+        }
+
+        .game-tab-panel li:not(:last-child) {
+            border-right: 1px solid #151515;
+        }
+
+.casino a, .sport a, .slot a, .fishing a {
+    position: relative;
+}
+
 .nav-tabs > li.casino.active a,
 .nav-tabs > li.sport.active a,
 .nav-tabs > li.slot.active a,
-.nav-tabs > li.fishing.active a            { background: transparent; border: 0px; color: #ffffff; }
-.casino a:before,.sport a:before,.slot a:before,
-.fishing a:before                           { content: ""; display: block; top: 5px; left: 50%; transform: translateX(-50%); 
-                                            background: no-repeat center center / 100%; width: 30px; height: 30px; position: absolute; }
-.casino a:before                            { background-image: url(../../images/images-mobile/casino.png);}
+.nav-tabs > li.fishing.active a {
+    background: transparent;
+    border: 0px;
+    color: #ffffff;
+}
+
+.casino a:before, .sport a:before, .slot a:before,
+.fishing a:before {
+    content: "";
+    display: block;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: no-repeat center center / 100%;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+}
+
+.casino a:before {
+    background-image: url(../../images/images-mobile/casino.png);
+}
+
 .casino.active a:before, .casino.active:hover a:before,
-.casino:hover a:before                      { background-image: url(../../images/images-mobile/casino_hover.png); filter: drop-shadow(10px 10px 6px black); }
-.sport a:before                             { background-image: url(../../images/images-mobile/sport.png);}
+.casino:hover a:before {
+    background-image: url(../../images/images-mobile/casino_hover.png);
+    filter: drop-shadow(10px 10px 6px black);
+}
+
+.sport a:before {
+    background-image: url(../../images/images-mobile/sport.png);
+}
+
 .sport.active a:before, .sport.active:hover a:before,
-.sport:hover a:before                       { background-image: url(../../images/images-mobile/sport_hover.png); filter: drop-shadow(10px 10px 6px black); }
-.slot a:before                              { background-image: url(../../images/images-mobile/slot.png);}
+.sport:hover a:before {
+    background-image: url(../../images/images-mobile/sport_hover.png);
+    filter: drop-shadow(10px 10px 6px black);
+}
+
+.slot a:before {
+    background-image: url(../../images/images-mobile/slot.png);
+}
+
 .slot.active a:before, .slot.active:hover a:before,
-.slot:hover a:before                        { background-image: url(../../images/images-mobile/slot_hover.png); filter: drop-shadow(10px 10px 6px black); }
-.fishing a:before                           { background-image: url(../../images/images-mobile/fish.png);}
+.slot:hover a:before {
+    background-image: url(../../images/images-mobile/slot_hover.png);
+    filter: drop-shadow(10px 10px 6px black);
+}
+
+.fishing a:before {
+    background-image: url(../../images/images-mobile/fish.png);
+}
+
 .fishing.active a:before, .fishing.active:hover a:before,
-.fishing:hover a:before                     { background-image: url(../../images/images-mobile/fish_hover.png); filter: drop-shadow(10px 10px 6px black); }
+.fishing:hover a:before {
+    background-image: url(../../images/images-mobile/fish_hover.png);
+    filter: drop-shadow(10px 10px 6px black);
+}
 /* Middle Area */
-.annunce-title img                          { max-width: 20px; margin-right: 5px;}
-.annunce-section                            { padding-top: 10px; padding-bottom: 0px; margin-bottom: 0px;}
-.game-series                                { display: flex; flex-wrap: wrap; justify-content: flex-start; margin-top: 5px; }
-.game-series li                             { width: calc(100% / 3); padding: 0 5px; margin: 0px 0px 10px; text-align: center; }
-.game-series li img                         { width: 100%; transform: scale(1); max-width: 100px; }
-.tab-area                                   { background: #ffffff; padding-bottom: 25px; }
-.game-title                                 { padding: 10px 5px 5px; font-size: 11px; line-height: 10px; background: #fff; border-radius: 30px;
-                                            box-shadow: 0px 5px 5px #ccc; display: block; color: #000; margin-top: -10px; border: 0px; 
-                                            width: 100%; }
+.annunce-title img {
+    max-width: 20px;
+    margin-right: 5px;
+}
+
+.annunce-section {
+    padding-top: 10px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.game-series {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 5px;
+}
+
+    .game-series li {
+        width: calc(100% / 3);
+        padding: 0 5px;
+        margin: 0px 0px 10px;
+        text-align: center;
+    }
+
+        .game-series li img {
+            width: 100%;
+            transform: scale(1);
+            max-width: 100px;
+        }
+
+.tab-area {
+    background: #ffffff;
+    padding-bottom: 25px;
+}
+
+.game-title {
+    padding: 10px 5px 5px;
+    font-size: 11px;
+    line-height: 10px;
+    background: #fff;
+    border-radius: 30px;
+    box-shadow: 0px 5px 5px #ccc;
+    display: block;
+    color: #000;
+    margin-top: -10px;
+    border: 0px;
+    width: 100%;
+}
 /*.hero-banner .slick-initialized .slick-slide { height: 100px;}*/
 /* Footer */
-.footer-widget                              { background-image: linear-gradient(to bottom right,#ffb701 ,#ff9600);}
-.footer-widget ul                           { padding: 0px;}
-.footer-widget ul li                        { transition: 0.5s; position: relative; padding: 10px 0px; width: 20%;}
-.footer-widget ul li.active-link            { background-color: #ffc52c;}
-.footer-widget ul li:before                 { content: ''; display: block; top: 0; width: 0px; height: 5px; background: #8e5502; position: absolute;
-                                            transition-timing-function: linear; transition-duration: 0.4s;}
-.footer-widget ul li.active-link:before  { width: 100%; }
+.footer-widget {
+    background-image: linear-gradient(to bottom right,#ffb701,#ff9600);
+}
 
-.footer-widget ul li a                      { color: #fff3d2; transition: 0.5s; display: block;text-transform:capitalize; }
-.footer-widget ul li i                      { font-size: 25px; line-height: 30px;}
-.footer-widget ul li.active-link a,
-.footer-widget ul li.active-link a .white-text { color: #8e5502;}
-.footer-widget ul li:last-child             { display: block; }
-.footer-widget ul li:last-child,
-.live-chat                                  { position: relative; transform: unset; padding-top: 40px; bottom: unset; top: unset; right: unset; }
-.live-chat:after                            { content:''; transition: 0.5s; width: 22px; height: 28px; position: absolute; top: 12px; left: 50%; 
-                                            transform: translateX(-50%); }
+    .footer-widget ul {
+        padding: 0px;
+    }
+
+        .footer-widget ul li {
+            transition: 0.5s;
+            position: relative;
+            padding: 10px 0px;
+            width: 20%;
+        }
+
+            .footer-widget ul li.active-link {
+                background-color: #ffc52c;
+            }
+
+            .footer-widget ul li:before {
+                content: '';
+                display: block;
+                top: 0;
+                width: 0px;
+                height: 5px;
+                background: #8e5502;
+                position: absolute;
+                transition-timing-function: linear;
+                transition-duration: 0.4s;
+            }
+
+            .footer-widget ul li.active-link:before {
+                width: 100%;
+            }
+
+            .footer-widget ul li a {
+                color: #fff3d2;
+                transition: 0.5s;
+                display: block;
+                text-transform: capitalize;
+            }
+
+            .footer-widget ul li i {
+                font-size: 25px;
+                line-height: 30px;
+            }
+
+            .footer-widget ul li.active-link a,
+            .footer-widget ul li.active-link a .white-text {
+                color: #8e5502;
+            }
+
+            .footer-widget ul li:last-child {
+                display: block;
+            }
+
+            .footer-widget ul li:last-child,
+            .live-chat {
+                position: relative;
+                transform: unset;
+                padding-top: 40px;
+                bottom: unset;
+                top: unset;
+                right: unset;
+            }
+
+                .live-chat:after {
+                    content: '';
+                    transition: 0.5s;
+                    width: 22px;
+                    height: 28px;
+                    position: absolute;
+                    top: 12px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
 /* Deposite */
-.transfer-wallet-div                        { font-size: 12px; line-height: 16px; }
-.fright.mendatory.black-text p              { background: #feb801; }
-.fake-upload-btn.upload-btn                 { background: linear-gradient(to bottom, #ffb701 0%, #f90 102%); }
-.history-tabs .nav-tabs                     { background: transparent; padding-bottom: 10px;; }
-.info-form.history-tabs .nav > li.active > a,
-.history-tabs .nav-tabs > li.active > a, 
-.history-tabs .nav-tabs > li.active > a:focus, 
-.history-tabs .nav-tabs > li.active > a:hover { background-color: #feb801; }
-.game-name > p                              { color: #feb801; }
-.info-form.history-tabs .nav > li > a       { background: #dcdcdc; }
-.turnover-show > label                      { font-size: 11px; line-height: 16px; }
-.turnover-show > label:first-child          { margin-top: 5px; margin-bottom: 0px; }
-.account-reg .turnover-show label:last-child { font-size: 13px; line-height: 18px; }
-.transfer-wallet                            { padding: 5px 10px; }
-.transfer-wallet-div .btn-default-border    { font-size: 12px; padding: 3px 9px; }
-.account-reg                                { margin-bottom: 20px; }
-#Deposit .deposit-section.info-form         { padding-bottom: 50px; }
-.profile-area                               { background-color: #000000; margin: 0px; }
-.profile-area h4                            { padding: 15px;}
-.account-page-extra-padding                 { padding-bottom: 40px !important;}
-.profile-page.account-page-extra-padding    { padding: 0px;}
-.hero-banner img                            { width: 100%; height:150px;}
-.login-top-slider .slick-prev               { left: 25px; width: 20px; height: 20px; }
-.login-top-slider .slick-next               { right: 25px; width: 20px; height: 20px; }
+.transfer-wallet-div {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.fright.mendatory.black-text p {
+    background: #feb801;
+}
+
+.fake-upload-btn.upload-btn {
+    background: linear-gradient(to bottom, #ffb701 0%, #f90 102%);
+}
+
+.history-tabs .nav-tabs {
+    background: transparent;
+    padding-bottom: 10px;
+    ;
+}
+
+    .info-form.history-tabs .nav > li.active > a,
+    .history-tabs .nav-tabs > li.active > a,
+    .history-tabs .nav-tabs > li.active > a:focus,
+    .history-tabs .nav-tabs > li.active > a:hover {
+        background-color: #feb801;
+    }
+
+.game-name > p {
+    color: #feb801;
+}
+
+.info-form.history-tabs .nav > li > a {
+    background: #dcdcdc;
+}
+
+.turnover-show > label {
+    font-size: 11px;
+    line-height: 16px;
+}
+
+    .turnover-show > label:first-child {
+        margin-top: 5px;
+        margin-bottom: 0px;
+    }
+
+.account-reg .turnover-show label:last-child {
+    font-size: 13px;
+    line-height: 18px;
+}
+
+.transfer-wallet {
+    padding: 5px 10px;
+}
+
+.transfer-wallet-div .btn-default-border {
+    font-size: 12px;
+    padding: 3px 9px;
+}
+
+.account-reg {
+    margin-bottom: 20px;
+}
+
+#Deposit .deposit-section.info-form {
+    padding-bottom: 50px;
+}
+
+.profile-area {
+    background-color: #000000;
+    margin: 0px;
+}
+
+    .profile-area h4 {
+        padding: 15px;
+    }
+
+.account-page-extra-padding {
+    padding-bottom: 40px !important;
+}
+
+.profile-page.account-page-extra-padding {
+    padding: 0px;
+}
+
+.hero-banner img {
+    width: 100%;
+    height: 150px;
+}
+
+.login-top-slider .slick-prev {
+    left: 25px;
+    width: 20px;
+    height: 20px;
+}
+
+.login-top-slider .slick-next {
+    right: 25px;
+    width: 20px;
+    height: 20px;
+}
+
 .login-top-slider .slick-prev,
-.login-top-slider .slick-next               { width: 25px; height: 25px; }
-.login-top-slider .slick-prev:hover:before,
-.login-top-slider .slick-next:hover:before  { color: #000000; background-color: #ffffff; }
-.login-top-slider .slick-prev:before,
-.login-top-slider .slick-next:before        { width: 25px; height: 25px; background-color: #000000; color: #ffffff; font-size: 14px; 
-                                            line-height: 25px; display: block; border-radius: 50%; transition: 0.5s; font-family: fontAwesome; }
-.login-top-slider .slick-prev:before        { content: '\f053'; }
-.login-top-slider .slick-next:before        { content: '\f054'; }
-.login-top-slider .slick-prev               { left: 25px; }
-.login-top-slider .slick-next               { right: 25px; }
+.login-top-slider .slick-next {
+    width: 25px;
+    height: 25px;
+}
+
+    .login-top-slider .slick-prev:hover:before,
+    .login-top-slider .slick-next:hover:before {
+        color: #000000;
+        background-color: #ffffff;
+    }
+
+    .login-top-slider .slick-prev:before,
+    .login-top-slider .slick-next:before {
+        width: 25px;
+        height: 25px;
+        background-color: #000000;
+        color: #ffffff;
+        font-size: 14px;
+        line-height: 25px;
+        display: block;
+        border-radius: 50%;
+        transition: 0.5s;
+        font-family: fontAwesome;
+    }
+
+    .login-top-slider .slick-prev:before {
+        content: '\f053';
+    }
+
+    .login-top-slider .slick-next:before {
+        content: '\f054';
+    }
+
+.login-top-slider .slick-prev {
+    left: 25px;
+}
+
+.login-top-slider .slick-next {
+    right: 25px;
+}
 /* Promotion Page */
-.promotion-bg                               { background: no-repeat center center / 100% 100%;height: 100px;filter: drop-shadow(2px 4px 6px black);border-radius:10px;}
-.promotion-bg a                             { display: block; height: 100%; }
-.promotion-bg:not(:last-child)              { margin-bottom: 10px; }
-.logowithback .row                          { display: flex; align-items: center; }
-.login_btn.join_btn                         { background: #feb801; border: 0px; color: #8d4f00; }
-.forgot-psw a                               { color: #8d4f00; }
-.panel-group                                { margin-bottom: 0px; }
-#language .modal-content                    { background-color: #fff; width: 100%; margin: 0; }
-.promo-inner .row                           { display: flex; align-items: center;}
-.promo-inner img                            { max-width:175px;}
-.promo-inner img.tab-bankicon               { width:25px;}
-.mar-none                                   { margin: 0px;}
-.footer-widget ul li p                      { font-size: 11px; }
-label.mobile-number a                       { line-height: 25px; display: block; }
-.sidebar                                    { height: 100%;}
-.panel-group                                { margin-bottom: 75px; }
-.intro .main-content                        { left: unset; }
-.extra-bottom-padding                       { padding-bottom:100px; }
-.malay-font .account-icon li a span         { word-break: break-all; }
-.hero-banner .promotion-bg                  { filter:unset; border-radius:0px; padding-top:5px; }
-.remember-fill input[type="checkbox"], 
-.remember-fill label                        { margin: 0 3px 0; } 
-.remember-fill                              { margin:0px; }
-.lang-modal ul                              { display: flex; justify-content: center; align-items: center; width: 100%; margin-right: 0px; margin-left: 0px; }
+.promotion-bg {
+    background: no-repeat center center / 100% 100%;
+    height: 100px;
+    filter: drop-shadow(2px 4px 6px black);
+    border-radius: 10px;
+}
+
+    .promotion-bg a {
+        display: block;
+        height: 100%;
+    }
+
+    .promotion-bg:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+.logowithback .row {
+    display: flex;
+    align-items: center;
+}
+
+.login_btn.join_btn {
+    background: #feb801;
+    border: 0px;
+    color: #8d4f00;
+}
+
+.forgot-psw a {
+    color: #8d4f00;
+}
+
+.panel-group {
+    margin-bottom: 0px;
+}
+
+#language .modal-content {
+    background-color: #fff;
+    width: 100%;
+    margin: 0;
+}
+
+.promo-inner .row {
+    display: flex;
+    align-items: center;
+}
+
+.promo-inner img {
+    max-width: 175px;
+}
+
+    .promo-inner img.tab-bankicon {
+        width: 25px;
+    }
+
+.mar-none {
+    margin: 0px;
+}
+
+.footer-widget ul li p {
+    font-size: 11px;
+}
+
+label.mobile-number a {
+    line-height: 25px;
+    display: block;
+}
+
+.sidebar {
+    height: 100%;
+}
+
+.panel-group {
+    margin-bottom: 75px;
+}
+
+.intro .main-content {
+    left: unset;
+}
+
+.extra-bottom-padding {
+    padding-bottom: 100px;
+}
+
+.malay-font .account-icon li a span {
+    word-break: break-all;
+}
+
+.hero-banner .promotion-bg {
+    filter: unset;
+    border-radius: 0px;
+    padding-top: 5px;
+}
+
+.remember-fill input[type="checkbox"],
+.remember-fill label {
+    margin: 0 3px 0;
+}
+
+.remember-fill {
+    margin: 0px;
+}
+
+.lang-modal ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
 select.main-wallet.jcf-hidden,
-.history-tabs ul.nav-tabs:after             { display:none; }
-#beforelogin_mobile .mob-layout > ul        { padding: 5px 0px; }
-.register-password-icon a                   { position:absolute; right:-20px; top:10px; z-index:3; font-size:15px; }
-.step-screen form                           { overflow:visible; }
-.visible-content                            { display: none; background: #000000; padding: 5px; border-radius: 5px; position: relative; right: -20px; top: -5px; }
-.tooltip-text.main + .visible-content       { display: block;position: absolute;top: 40px;z-index: 1;}
-.visible-content *                          { color: #fff;}
-.visible-content p                          { margin: 0px;}
-.footer-copyright-section-img               { width:50vw;text-align:center; }
-.footer-copyright-section-p                 { text-align:center;font-size:10px; }
+.history-tabs ul.nav-tabs:after {
+    display: none;
+}
+
+#beforelogin_mobile .mob-layout > ul {
+    padding: 5px 0px;
+}
+
+.register-password-icon a {
+    position: absolute;
+    right: -20px;
+    top: 10px;
+    z-index: 3;
+    font-size: 15px;
+}
+
+.step-screen form {
+    overflow: visible;
+}
+
+.visible-content {
+    display: none;
+    background: #000000;
+    padding: 5px;
+    border-radius: 5px;
+    position: relative;
+    right: -20px;
+    top: -5px;
+}
+
+.tooltip-text.main + .visible-content {
+    display: block;
+    position: absolute;
+    top: 40px;
+    z-index: 1;
+}
+
+.visible-content * {
+    color: #fff;
+}
+
+.visible-content p {
+    margin: 0px;
+}
+
+.footer-copyright-section-img {
+    width: 50vw;
+    text-align: center;
+}
+
+.footer-copyright-section-p {
+    text-align: center;
+    font-size: 10px;
+}
 
 .deposit_icon:hover img,
 .transfer_icon:hover img,
@@ -220,9 +870,8 @@ select.main-wallet.jcf-hidden,
     object-fit: cover;
     object-position: bottom;
     display: block;
-    margin:0 auto;
+    margin: 0 auto;
 }
-
 
 #beforelogin_mobile .hero-banner .slick-dots, #afterlogin_mobile .hero-banner .slick-dots {
     bottom: 0px;
@@ -238,8 +887,6 @@ select.main-wallet.jcf-hidden,
     height: 7px;
 }
 
-
-
 .promotion-hero-banner .full-img {
     width: 100%;
     height: auto;
@@ -248,11 +895,11 @@ select.main-wallet.jcf-hidden,
     border-radius: 10px;
 }
 
-.promotion-slide-hero-banner{
-    margin-bottom:-5px;
+.promotion-slide-hero-banner {
+    margin-bottom: -5px;
 }
 
-.promotion-slide-hero-banner .full-img {
-    width: 100%;
-    height: auto;
-}
+    .promotion-slide-hero-banner .full-img {
+        width: 100%;
+        height: auto;
+    }

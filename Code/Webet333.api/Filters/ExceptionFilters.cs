@@ -42,6 +42,10 @@ namespace Webet333.api.Filters
                 {
                     exceptionMessage = exceptionMessage.Replace("sql_error_promotionfixedbonusamount", Localizer["sql_error_promotionfixedbonusamount"].Value);
                 }
+                if (exceptionMessage.Contains("sql_error_promotionmindepositamount"))
+                {
+                    exceptionMessage = exceptionMessage.Replace("sql_error_promotionmindepositamount", Localizer["sql_error_promotionmindepositamount"].Value);
+                }
 #if RELEASE
                 context.Result = new JsonResult(new { message = Localizer[exceptionMessage].Value, details = exception.StackTrace });
 #else

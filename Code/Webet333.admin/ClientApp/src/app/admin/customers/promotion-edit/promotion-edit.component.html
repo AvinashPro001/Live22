@@ -111,7 +111,7 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <span id="question" class="fa fa-question-circle" title="one user only can apply this promotion one time, if user applied this promotion before, user permanant cannot apply this promotion any more"></span>
+                            <span id="question" class="fa fa-question-circle" title="one user only can apply this promotion one time, if user applied this promotion before, user permanent cannot apply this promotion any more"></span>
                         </div>
                     </div>
                     <br />
@@ -126,7 +126,7 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <span id="question" class="fa fa-question-circle" title="if user A apply for this promotion A, and completed the promotion A and withdraw the monney with bank account numbers with 1234567890, and he create a new user B, apply for the same promotion A again, when user B complete promotion A, he cannot withdraw the money, will prompt error message,' your bank account number was applied for this promotion before, u cannot withdraw your money with this bank account...'"></span>
+                            <span id="question" class="fa fa-question-circle" title="if user A apply for this promotion A, and completed the promotion A and withdraw the money with bank account numbers with 1234567890, and he create a new user B, apply for the same promotion A again, when user B complete promotion A, he cannot withdraw the money, will prompt error message,' your bank account number was applied for this promotion before, u cannot withdraw your money with this bank account...'"></span>
                         </div>
                         <div class="row col-md-6">
                             <div class="col-3">
@@ -309,6 +309,27 @@
                     </div>
                     <br />
                     <div class="row col-md-12">
+                        <div class="row col-md-6">
+                            <div class="col-3">
+                                <label style="float:right;clear:both;padding-top:6px">Bet Limit :</label>
+                            </div>
+                            <div class="input-group col-1">
+                                <label class="container">
+                                    <input type="checkbox" id="chk_isYeeBetBetLimit" [checked]="data.isYeeBetBetLimit" />
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div>
+                                <label>Enable YeeBet Promotion Bet Limit</label>
+                            </div>
+                            <span id="question"
+                                  class="fa fa-question-circle"
+                                  title="1) deposit &gt;=10 bet limit 1-100 2) deposit &gt;=2000 bet limit 5-300 3) deposit &gt;=10000 bet limit 10-500 4) deposit &gt;=20000 bet limit 10- 1000">
+                            </span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-md-12">
                         <!--<div class="row col-md-6">
                             <div class="col-3">
                                 <label style="float:right;clear:both;padding-top:6px">WinTurn :</label>
@@ -338,8 +359,8 @@
                         <br /><br />
                         <div class="input-group col-2">
                             <div class="form-control">
-                                <ngx-select-dropdown tabindex="0" [multiple]="false" [(ngModel)]="selectedWinTurnValue" [ngModelOptions]="{standalone: true}"
-                                                     [config]="configWinTurn" (change)="OnSelectWinTurn($event)" [options]="WinTurnquantities"></ngx-select-dropdown>
+                                <ngx-select-dropdown tabindex="0" [multiple]="false" [(ngModel)]="selectedWinTurnValue" [ngModelOptions]="{standalone: true}" [config]="configWinTurn" (change)="OnSelectWinTurn($event)" [options]="WinTurnquantities">
+                                </ngx-select-dropdown>
                             </div>
                         </div>
                         <br /><br />

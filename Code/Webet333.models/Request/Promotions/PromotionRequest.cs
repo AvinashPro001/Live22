@@ -181,6 +181,9 @@ namespace Webet333.models.Request.Promotions
 
         [JsonProperty(PropertyName = "isDiamond")]
         public bool IsDiamond { get; set; }
+
+        [JsonProperty(PropertyName = "isYeeBetBetLimit")]
+        public bool IsYeeBetBetLimit { get; set; }
     }
 
     public class PromotionUpdateRequest : PromotionRequest

@@ -1,5 +1,6 @@
 ﻿//#region
 //#endregion
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
@@ -255,6 +256,8 @@ export class PromotionAddComponent implements OnInit {
             minDeposit: this.minDepositValue,
             fixedBonus: this.promotionFixedBonusAmount,
 
+            isYeeBetBetLimit: (document.getElementById("chk_isYeeBetBetLimit") as HTMLInputElement).checked,
+
             isAG: (document.getElementById("ag_id") as HTMLInputElement).checked,
             isDG: (document.getElementById("dg_id") as HTMLInputElement).checked,
             isSA: (document.getElementById("sa_id") as HTMLInputElement).checked,
@@ -372,6 +375,12 @@ export class PromotionAddComponent implements OnInit {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectDesktopBannerImage);
         }
+
+        if (this.discountTypeId == this.Type[2].id &&
+            this.promotionFixedBonusAmount == null) {
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseAddPromotionFixedBonusAmount);
+        }
+
         this.adminService.add<any>(customer.promotionAdd, dataSelect).subscribe(res => {
             this.uploadFile(res.data);
         }, error => {
