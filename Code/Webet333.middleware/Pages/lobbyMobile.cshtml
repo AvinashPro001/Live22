@@ -117,17 +117,28 @@
             var username = url.searchParams.get("username");
             if (username != null) {
                 var imageDiv = document.getElementById('playtechGames');
+                var model = {
+                    WalletName: "PlayTech Wallet",
+                    pageSize: 1000,
+                }
                 $.ajax({
-                    url: '../../resources/playtech.json',
-                    dataType: 'json',
-                    async: false,
+                    url: baseUrl + apiEndPoints.slotsGameList,
+                    type: "POST",
+                    data: JSON.stringify(model),
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('currentUser'),
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Access-Control-Max-Age': 300,
+                        'Accept-Language': localStorage.getItem('language')
+                    },
                     success: function (data) {
-                        json = data.games;
+                        json = data.data.result;
                         var SlotGame = localStorage.getItem('slotGame');
                         if (SlotGame === "true") {
-                            for (i = 5; i < json.length; i++) {
+                            for (i = 0; i < json.length; i++) {
                                 if (imageDiv !== null)
-                                    imageDiv.innerHTML += '<div class="column"><a onclick="openGame(\'' + json[i].name + '\')"> ><img class="img-withd" src="http://images.webet333.com/all_918_games/playtech/' + json[i].name + '.png" alt="' + json[i].fullName + '" /></a></div>'
+                                    imageDiv.innerHTML += '<div class="column"><a onclick="openGame(\'' + json[i].GameCode + '\')" ><img class="img-withd" src="' + json[i].ImagePath2 + '" alt="' + json[i].GameName + '" /></a></div>'
                             }
                         }
                         else {

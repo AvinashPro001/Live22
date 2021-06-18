@@ -144,5 +144,7 @@ var apiEndPoints = {
 
     GetGameSupport: "Game/User/GameSupport",
 
-    UserVipDetails: "viplevel/user/details"
+    UserVipDetails: "viplevel/user/details",
+
+     slotsGameList: "Game/slotsgame/list"
 };
