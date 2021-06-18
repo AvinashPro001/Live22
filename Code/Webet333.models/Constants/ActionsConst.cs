@@ -767,6 +767,8 @@
 
             public const string GetLeague = "sbo/getLeague";
 
+            public const string SetLeagueBetSetting = "sbo/set/league";
+
             public const string SetPlayerDefaultBetLimit = "sbo/set/playerdefaultbetlimit";
 
             public const string UpdatePlayerDefaultBetLimit = "sbo/update/playerdefaultbetlimit";

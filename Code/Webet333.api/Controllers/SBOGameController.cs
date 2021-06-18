@@ -189,5 +189,33 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Get Player Default Bet Limit
+
+        #region Get League
+
+        [HttpGet(ActionsConst.SBO.GetLeague)]
+        public async Task<IActionResult> GetLeagueAsync()
+        {
+            await CheckUserRole();
+
+            var result = await SBOGameHelpers.CallGetLeagueAPI();
+
+            return OkResponse(result);
+        }
+
+        #endregion Get League
+
+        #region Set League Bet Setting
+
+        [HttpGet(ActionsConst.SBO.SetLeagueBetSetting)]
+        public async Task<IActionResult> SetLeagueBetSettingAsync([FromBody] List<SBOSetLeagueBetSettingRequest> requests)
+        {
+            await CheckUserRole();
+
+            await SBOGameHelpers.CallSetLeagueBetSettingAPI(requests);
+
+            return OkResponse();
+        }
+
+        #endregion Set League Bet Setting
     }
 }

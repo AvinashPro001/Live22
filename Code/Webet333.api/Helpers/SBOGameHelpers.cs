@@ -351,6 +351,17 @@ namespace Webet333.api.Helpers
             //var startTime = time.AddHours(-4).ToString("yyyy-MM-ddTHH:mm:sss");
             //var endTime = time.ToString("yyyy-MM-ddTHH:mm:sss");
 
+            int res = DateTime.Compare(request.FromDate, request.ToDate);
+            if (res > 0)
+            {
+                throw new Exception("FromDate is smaller than ToDate.");
+            }
+
+            if ((request.FromDate - DateTime.Now).TotalDays > 60)
+            {
+                throw new Exception("You can only get bet list data within 60 days.");
+            }
+
             var startTime = request.FromDate.ToString("yyyy-MM-ddTHH:mm:ss.fff");
             var endTime = request.ToDate.ToString("yyyy-MM-ddTHH:mm:ss.fff");
 
@@ -376,6 +387,116 @@ namespace Webet333.api.Helpers
         }
 
         #endregion Call Betting Details 3rd Party API
+
+        #region Get League
+
+        internal static async Task<SBOGetLeagueResponse> CallGetLeagueAPI()
+        {
+            SBOGetLeagueResponse callGetLeagueAPIFootball = await CallGetLeagueAPIFootball();
+            SBOGetLeagueResponse callGetLeagueAPIOthers = await CallGetLeagueAPIOthers();
+
+            if (callGetLeagueAPIFootball.Error.Id == 0 &&
+                callGetLeagueAPIOthers.Error.Id == 0)
+            {
+                callGetLeagueAPIFootball.Result.AddRange(callGetLeagueAPIOthers.Result);
+            }
+
+            if (callGetLeagueAPIFootball.Error.Id == 0 &&
+               callGetLeagueAPIOthers.Error.Id != 0)
+            {
+                return callGetLeagueAPIFootball;
+            }
+
+            if (callGetLeagueAPIFootball.Error.Id != 0 &&
+               callGetLeagueAPIOthers.Error.Id == 0)
+            {
+                return callGetLeagueAPIOthers;
+            }
+
+            return callGetLeagueAPIFootball;
+        }
+
+        private static async Task<SBOGetLeagueResponse> CallGetLeagueAPIFootball()
+        {
+            SBOGetLeagueRequest model = new SBOGetLeagueRequest
+            {
+                CompanyKey = GameConst.SBO.CompanyKey,
+                //FromDate = DateTime.Now.AddHours(12),
+                FromDate = DateTime.Now.AddDays(-100).ToString("yyyy-MM-dd HH:mm:ss.fff"),
+                LeagueNameKeyWord = "a",
+                ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
+                SportType = GameConst.SBO.SportType.Football,
+                //ToDate = DateTime.Now.AddHours(12)
+                ToDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")
+            };
+
+            var result = await CallAPI(model);
+
+            return result;
+        }
+
+        private static async Task<SBOGetLeagueResponse> CallGetLeagueAPIOthers()
+        {
+            SBOGetLeagueRequest model = new SBOGetLeagueRequest
+            {
+                CompanyKey = GameConst.SBO.CompanyKey,
+                //FromDate = DateTime.Now.AddHours(12),
+                FromDate = DateTime.Now.AddDays(-100).ToString("yyyy-MM-dd HH:mm:ss.fff"),
+                LeagueNameKeyWord = "a",
+                ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
+                SportType = GameConst.SBO.SportType.Others,
+                //ToDate = DateTime.Now.AddHours(12)
+                ToDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")
+            };
+
+            var result = await CallAPI(model);
+
+            return result;
+        }
+
+        private static async Task<SBOGetLeagueResponse> CallAPI(SBOGetLeagueRequest model)
+        {
+            var URL = $"{GameConst.SBO.URL}{GameConst.SBO.EndPoint.GetLeague}";
+
+            var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
+            var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
+
+            var DeserializeAPIResult = JsonConvert.DeserializeObject<SBOGetLeagueResponse>(APIResult);
+
+            return DeserializeAPIResult;
+        }
+
+        #endregion Get League
+
+        #region Set League Bet Setting
+
+        internal static async Task CallSetLeagueBetSettingAPI(List<SBOSetLeagueBetSettingRequest> request)
+        {
+            foreach (var data in request)
+            {
+                SBOSetLeagueBetSettingRequest model = new SBOSetLeagueBetSettingRequest
+                {
+                    CompanyKey = GameConst.SBO.CompanyKey,
+                    Currency = GameConst.SBO.Currency,
+                    GroupType = data.GroupType,
+                    IsLive = data.IsLive,
+                    LeagueId = data.LeagueId,
+                    MaxBet = data.MaxBet,
+                    MaxBetRatio = data.MaxBetRatio,
+                    MinBet = data.MinBet,
+                    ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString()
+                };
+
+                var URL = $"{GameConst.SBO.URL}{GameConst.SBO.EndPoint.SetLeague}";
+
+                var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
+                await GameHelpers.CallThirdPartyApi(URL, stringContent);
+            }
+        }
+
+        #endregion Set League Bet Setting
 
         #region House Keeping
 
