@@ -1,0 +1,115 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">SBO Set League Bet Limit</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="p-2 col-md-2">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime" [(ngModel)]="datePickerfromdate">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp1" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime" [(ngModel)]="datePickertodate">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <div class="input-group">
+                        <button class="mb-1 btn btn-success" (click)='getLeagueList()' type="button">Get League List</button>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <form class="text-center border border-light">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="col-md-12 table-responsive">
+                                        <fieldset style="border-width:2px; border-style:groove; border-color:threedface; border-image:initial;">
+                                            <legend style="display:flex; width:auto; margin-left:30px; text-align:left;">Group Name</legend>
+                                            <div class="row col-12">
+                                                <div class="p-2">
+                                                    <h4 class="text-muted text-bold">MinBet</h4>
+                                                    <input id="main_minBet" type='number' class="form-control" />
+                                                </div>
+                                                <div class="p-2">
+                                                    <h4 class="text-muted text-bold">MaxBet</h4>
+                                                    <input id="main_maxBet" type='number' class="form-control" />
+                                                </div>
+                                                <div class="p-2">
+                                                    <h4 class="text-muted text-bold">MaxBetRatio</h4>
+                                                    <input id="main_maxBetRatio" type='number' class="form-control" />
+                                                </div>
+                                                <div class="p-2">
+                                                    <h4 class="text-muted text-bold">Group Type</h4>
+                                                    <select #groupTypeSelect
+                                                            class="form-control"
+                                                            id="ddl_groupType"
+                                                            [(ngModel)]="T"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            (change)='onGroupTypeSelected(groupTypeSelect.value)'>
+                                                        <option [value]="c.id"
+                                                                *ngFor="let c of groupType"
+                                                                [ngValue]="c">
+                                                            {{c.type}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="p-2">
+                                                    <h4 class="text-muted text-bold">&nbsp;</h4>
+                                                    <button class="mb-1 btn btn-success" (click)='setForChecked()' type="button">Set For Checked</button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <div>
+                                            <ngx-datatable #table
+                                                           class='bootstrap no-detail-row'
+                                                           [columns]="columns"
+                                                           [rows]="rows"
+                                                           [columnMode]="'force'"
+                                                           [footerHeight]="60"
+                                                           [rowHeight]="'auto'"
+                                                           [limit]="10"
+                                                           [loadingIndicator]="loadingIndicator"
+                                                           [selected]="selectedUserList"
+                                                           [selectionType]="'checkbox'"
+                                                           (select)="onSelect($event)">
+                                                <ng-template #status
+                                                             let-rowIndex="rowIndex"
+                                                             let-row="row"
+                                                             let-expanded="expanded"
+                                                             ngx-datatable-row-detail-template>
+                                                    <div class="row col-md-12">
+                                                        <label class="col-md-3">
+                                                            <button id="rejectBtn" data-id="customerData[rowIndex].id" class="mb-1 btn btn-danger" type="button" data-toggle="modal" title="Delete" (click)='openRejectConfirmationDialog(row.id)'>
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </button>
+                                                        </label>
+                                                    </div>
+                                                </ng-template>
+                                            </ngx-datatable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
