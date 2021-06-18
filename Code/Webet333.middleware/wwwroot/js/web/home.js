@@ -70,6 +70,23 @@ function LoaderHide() {
 
 //#endregion
 
+//#region Change Error Message
+
+function ChangeErroMessage(key, parameter = "") {
+    var ErrorMessage = "";
+    $.ajax({
+        url: '../../resources/error-and-message.' + GetLocalStorage('language') + '.json',
+        dataType: 'json',
+        async: false,
+        success: function (lang) {
+            ErrorMessage = lang[key] + parameter;
+        }
+    });
+    return ErrorMessage;
+}
+
+//#endregion
+
 //#region Set Sitedata Variable
 
 function SetSiteDataVariable() {

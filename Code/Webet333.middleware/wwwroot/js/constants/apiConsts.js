@@ -213,6 +213,7 @@ var transactionEndPoints = {
     rebateHistroy: "Game/Rebate/User/History",
     rewadHistroy: "customer/reward/list",
     bettingSummeryHistroy: "Game/bettingsummery",
+    uploadReceipt: "payments/deposit/image",
 }
 
 var gameRegisterEndPoints = {

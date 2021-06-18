@@ -70,7 +70,7 @@ async function MaxTransfer() {
         }
     }
     else {
-        ShowError("select_from_wallet_error");
+        ShowError(ChangeErroMessage("select_from_wallet_error"));
     }
 }
 
@@ -178,7 +178,7 @@ function SetAmountInTextBox(Amount, Online) {
         $("#txt_deposit_amount").val(Amount);
 }
 
-async function CallAllBankAPI() {
+async function CallAllBankAPI(){
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
 
     if (data.AllBankPageData == null || data.AllBankPageData == undefined) {
@@ -349,14 +349,14 @@ async function Deposit(IsOnlinePayment) {
 
 
     if (amount > 30000 || amount < 10) {
-        return ShowError("min_max_amount_error");
+        return ShowError(ChangeErroMessage("min_max_amount_error"));
     }
 
 
     model = {
         bankId: DepositBankId,
         amount: amount,
-        depositMethodId: null,
+        depositMethodId: 'E14F22CF-686D-43CB-8DC0-669D7EBC23F5',
         referenceNo: $('#txt_reference_number').val(),
         depositeTime: Date.parse(document.getElementById("datepicker0").value.replace(" ", "T")).toString(),
         promotionId: DepositPromotionId,
@@ -366,19 +366,19 @@ async function Deposit(IsOnlinePayment) {
 
     if (!IsOnlinePayment) {
         if (model.bankId === null || model.bankId === "" || model.bankId === undefined) {
-            return ShowError("plz_selet_bnk_error");
+            return ShowError(ChangeErroMessage("plz_selet_bnk_error"));
         }
 
         if (model.depositeTime === "NaN") {
-            return ShowError("select_date_time_error");
+            return ShowError(ChangeErroMessage("select_date_time_error"));
         }
 
         if (model.referenceNo === "") {
-            return ShowError("refer_no_error");
+            return ShowError(ChangeErroMessage("refer_no_error"));
         }
 
         if (filter_array(TableData).length === 0) {
-            return ShowError("receipt_required_error");
+            return ShowError(("receipt_required_error"));
         }
     }
 
@@ -393,12 +393,12 @@ async function Deposit(IsOnlinePayment) {
         walletData = walletData.response;
         if (walletData.data.IsPending == true) {
             LoaderHide();
-            return ShowError("pending_sports_deposit_error");
+            return ShowError(ChangeErroMessage("pending_sports_deposit_error"));
         }
 
         if (walletData.data.InMaintenance == true) {
             LoaderHide();
-            return ShowError("game_in_maintenance_new_promotion");
+            return ShowError(ChangeErroMessage("game_in_maintenance_new_promotion"));
         }
 
         if (walletData.data.CheckPromotionApply === true && walletData.data.TotalPromotionRow > 0) {
@@ -412,7 +412,7 @@ async function Deposit(IsOnlinePayment) {
         else {
             if (walletData.data.Staus != null && walletData.data.CheckPromotionRemind == true) {
                 LoaderHide();
-                return ShowError("promot_active_error");
+                return ShowError(ChangeErroMessage("promot_active_error"));
             }
 
             if (walletData.data.CheckPromotionRemind == true) {
@@ -445,7 +445,7 @@ async function Deposit(IsOnlinePayment) {
     if (!IsOnlinePayment) {
         if (filter_array(TableData).length === 0) {
             LoaderHide();
-            return ShowError("receipt_required_error");
+            return ShowError(ChangeErroMessage("receipt_required_error"));
         } else {
             DepositModel = model;
             await DepositAfterPromotionCheck();
@@ -482,18 +482,18 @@ async function Withdraw() {
     var amount = Number($("#txt_withdraw_amount").val());
 
     if (amount <= 0)
-        return ShowError("amount_greater_zero_error");
+        return ShowError(ChangeErroMessage("amount_greater_zero_error"));
 
     var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
 
     if (amount < 10 || amount > Number(profile.withdrawLimit))
-        return ShowError("min_max_amount_error_parameter");
+        return ShowError(ChangeErroMessage("min_max_amount_error_parameter"));
 
     if (WithdrawBankId === "" || WithdrawBankId === null || WithdrawBankId === undefined)
-        return ShowError("bnk_name_required_error");
+        return ShowError(ChangeErroMessage("bnk_name_required_error"));
 
     if (WithdrawBankId == undefined)
-        return ShowError("Select bank");
+        return ShowError(ChangeErroMessage("select_bank_name_error"));
 
     var model = {
         bankId: WithdrawBankId,
@@ -503,7 +503,7 @@ async function Withdraw() {
     };
 
     if (model.accountNumber === "" || model.accountNumber === null || model.accountNumber === undefined)
-        return ShowError("acc_no_req_error");
+        return ShowError(ChangeErroMessage("acc_no_req_error"));
     LoaderShow();
     try {
         var res = await PostMethod(transactionEndPoints.addwithdraw, model);
@@ -526,13 +526,13 @@ async function Transfer() {
     var toWallet = $("#to_wallet").val();
 
     if (amount <= 0)
-        return ShowError("amount_greater_zero_error");
+        return ShowError(ChangeErroMessage("amount_greater_zero_error"));
 
     if (fromWallet == "")
-        return ShowError("Please Select From Wallet");
+        return ShowError(ChangeErroMessage("select_from_wallet_error"));
 
     if (toWallet == "")
-        return ShowError("Please Select To Wallet");
+        return ShowError(ChangeErroMessage("select_to_wallet_error"));
 
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
     var fromWalletData = data.WalletData.filter(x => x.id == fromWallet && x.isMaintenance == false);
@@ -540,7 +540,7 @@ async function Transfer() {
     var balance = await ReturnBalanceBasedOnWalletName(fromWalletData[0].walletType);
 
     if (amount > Number(balance))
-        return ShowError("Insufficient_balance_wallet");
+        return ShowError(ChangeErroMessage("Insufficient_balance_wallet"));
 
     let model = {
         fromWalletId: fromWallet,
@@ -917,7 +917,7 @@ async function handleFileSelect1(id) {
             id: id,
             images: filter_array(TableData)
         };
-        var res = await PostMethod(apiEndPoints.uploadReceipt, model);
+        var res = await PostMethod(transactionEndPoints.uploadReceipt, model);
         if (res !== null && res !== undefined) {
             ShowSuccess(res.message);
         }
@@ -927,7 +927,7 @@ async function handleFileSelect1(id) {
 var files = [];
 async function handleFileSelect(e) {
     if (!e.target.files) return;
-    //if (!e.target.files[0].type.includes("image") && !e.target.files[0].type.includes("pdf")) return ShowError(ChangeErroMessage("file_format_error"));
+    if (!e.target.files[0].type.includes("image") && !e.target.files[0].type.includes("pdf")) return ShowError(ChangeErroMessage("file_format_error"));
     selDiv.innerHTML = "";
     var allFiles = e.target.files;
 

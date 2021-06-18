@@ -1,8 +1,8 @@
 ﻿async function OpenGame(WalletName, IsSlots) {
-    if (GetLocalStorage("currentUser") == null) return ShowError("PLease Login !!");
+    if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
     var isMaintenance = data.WalletData.filter(x => x.walletType == WalletName);
-    if (isMaintenance[0].isMaintenance) return ShowError("Game In Maintenance");
+    if (isMaintenance[0].isMaintenance) return ShowError(ChangeErroMessage("maintainenance_error"));
     CallGameLoginAPI(WalletName, IsSlots);
     var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
     if (!profile.autoTransfer)

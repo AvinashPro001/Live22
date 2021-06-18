@@ -146,7 +146,6 @@ async function ProfileData() {
             await GetProfileAndSetInSessionStorage();
             ProfileData();
             GetGlobalParameterAndSetInSessionStorage();
-
         }
     }
 }
@@ -247,20 +246,20 @@ async function ChangePassword() {
     var confirmPassword = $("#txt_confirmPassword").val();
 
     if (newPassword.length < 6)
-        return ShowError("pass_length_error");
+        return ShowError(ChangeErroMessage("pass_length_error"));
 
     if (newPassword === "")
-        return ShowError("password_required_error");
+        return ShowError(ChangeErroMessage("password_required_error"));
 
     if (confirmPassword === "")
-        return ShowError("confirm_password_required_error");
+        return ShowError(ChangeErroMessage("confirm_password_required_error"));
 
     if (Decryption(GetLocalStorage("currentUserData")) !== currentPassword)
-        return ShowError("username_pass_diff_error");
+        return ShowError(ChangeErroMessage("username_pass_diff_error"));
 
     var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
     if (!reqExp.test(currentPassword))
-        return ShowError("pass_alpha_error");
+        return ShowError(ChangeErroMessage(("pass_alpha_error"));
 
     var model = {
         currentPassword: currentPassword,
@@ -297,32 +296,32 @@ async function DoRegister() {
     var confirmPassword = $("#txt_confirm_password").val();
     //var referenceKeyword= getCookie("ref")
 
-    if (mobile === "") return ShowError("mobile_no_required_error");
+    if (mobile === "") return ShowError(ChangeErroMessage("mobile_no_required_error"));
 
-    if (mobile.length < 10) return ShowError("mobile_length_error");
+    if (mobile.length < 10) return ShowError(ChangeErroMessage("mobile_length_error"));
 
-    if (username === "") return ShowError("username_required_error");
+    if (username === "") return ShowError(ChangeErroMessage("username_required_error"));
 
-    if (username.length < 7) return ShowError("username_length_error");
+    if (username.length < 7) return ShowError(ChangeErroMessage("username_length_error"));
 
-    if (password.length < 6) return ShowError("pass_length_error");
+    if (password.length < 6) return ShowError(ChangeErroMessage("pass_length_error"));
 
-    if (password === "") return ShowError("password_required_error");
+    if (password === "") return ShowError(ChangeErroMessage("password_required_error");
 
-    if (confirmPassword === "") return ShowError("confirm_password_required_error");
+    if (confirmPassword === "") return ShowError(ChangeErroMessage("confirm_password_required_error"));
 
-    if (name === "") return ShowError("name_required_error");
+    if (name === "") return ShowError(ChangeErroMessage("name_required_error"));
 
-    if (username === password) return ShowError("username_pass_diff_error");
+    if (username === password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
 
     var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
-    if (!regex.test(password)) return ShowError("pass_alpha_error");
+    if (!regex.test(password)) return ShowError(ChangeErroMessage("pass_alpha_error"));
 
     if (/^[a-zA-Z0-9- ]*$/.test(username) == false)
-        return ShowError('Special Charater not allowed');
+        return ShowError(ChangeErroMessage('special_char_not_allowed'));
 
     if (/^[a-z0-9_]+$/i.test(username) == false)
-        return ShowError('Space not allowed');
+        return ShowError(ChangeErroMessage('space_not_allowed'));
 
     var model = {
         name: name,
@@ -363,12 +362,12 @@ async function DoRegister() {
 async function UpdateMobileNumber() {
     if ($("#password-update-mobile").val() != Decryption(GetLocalStorage("currentUserData"))) {
         $('#mobilenumber_update').modal('hide');
-        return ShowError("Current Password not matched");
+        return ShowError(ChangeErroMessage("current_pass_not_match"));
     }
 
     if ($("#mobile_number").val() == "") {
         $('#mobilenumber_update').modal('hide');
-        return ShowError("Emter Mobile Number");
+        return ShowError(ChangeErroMessage("mobile_no_required_error"));
     }
 
     model = {
@@ -377,7 +376,7 @@ async function UpdateMobileNumber() {
 
     if (model.mobile.length < 10) {
         $('#mobilenumber_update').modal('hide');
-        return ShowError("mobile_length_error");
+        return ShowError(ChangeErroMessage("mobile_length_error"));
     }
 
     LoaderShow();
@@ -402,7 +401,7 @@ async function UpdateMobileNumber() {
 async function UpdateName() {
 
     if ($("#profile_fullname").val() == "") {
-        return ShowError("Emter Full Name");
+        return ShowError(ChangeErroMessage("enter_full_name"));
     }
 
     model = {
@@ -429,7 +428,7 @@ async function UpdateName() {
 async function ForgotPassword() {
     var mobile = $('#forgot-password-number').val();
     if (mobile === null || mobile === undefined || mobile === "")
-        return ShowError("mobile_no_required_error");
+        return ShowError(ChangeErroMessage("mobile_no_required_error"));
 
     let model = {
         mobileNumber: mobile
@@ -477,7 +476,7 @@ async function SendOTP(number) {
         var res = await GetMethod(accountEndPoints.SendOTP);
         if (res.status == 200) {
             document.getElementById("txt_otp").value = "";
-            ShowSuccess("otp_send_success");
+            ShowSuccess(ChangeErroMessage("otp_send_success"));
          
         }
         LoaderHide();
@@ -491,10 +490,10 @@ async function VerifiedOTP() {
     }
 
     if (model.otp == null || model.otp == undefined || model.otp == "") 
-        return ShowError("error_otp_required");
+        return ShowError(ChangeErroMessage("error_otp_required"));
 
     if (model.otp.length > 6) 
-        return ShowError("error_otp");
+        return ShowError(ChangeErroMessage("error_otp"));
 
     LoaderShow();
     try {

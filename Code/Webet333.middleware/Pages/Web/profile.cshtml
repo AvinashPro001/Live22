@@ -3,7 +3,9 @@
     ViewData["Title"] = "Profile - Webet333 -🥇";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-
+<link href="~/css/bootstrap-datepicker.min.css" type="text/css" rel="stylesheet" />
+@*<script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>*@
 <script>
     CheckLoginOrNot();
     CheckMobileNumberIsVerifiedOnly();
@@ -188,7 +190,7 @@
                                                         <p class="big no-mar lang blk-text" key="deposit_date_time">Date Time:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input name="txt_reference_number" type="text" class="reg-form " placeholder="Select Date" id="datepicker0">
+                                                        <input name="txt_reference_number" type="text" class="reg-form " placeholder="Select Date" autocomplete="off" id="datepicker0">
                                                     </label>
                                                 </li>
                                                 <li class="pad-btm-ten">
