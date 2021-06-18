@@ -114,7 +114,7 @@ function CheckPasswordMatch() {
     var password = $("#txt_password").val();
     var confirmPassword = $("#txt_confirm_password").val();
     if (password !== confirmPassword)
-        $("#divCheckPasswordMatch").html("pass_not_match_error");
+        $("#divCheckPasswordMatch").html(ChangeErroMessage("pass_not_match_error"));
     else
         $("#divCheckPasswordMatch").html("");
 }
@@ -259,7 +259,7 @@ async function ChangePassword() {
 
     var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
     if (!reqExp.test(currentPassword))
-        return ShowError(ChangeErroMessage(("pass_alpha_error"));
+        return ShowError(ChangeErroMessage("pass_alpha_error"));
 
     var model = {
         currentPassword: currentPassword,
@@ -306,7 +306,7 @@ async function DoRegister() {
 
     if (password.length < 6) return ShowError(ChangeErroMessage("pass_length_error"));
 
-    if (password === "") return ShowError(ChangeErroMessage("password_required_error");
+    if (password === "") return ShowError(ChangeErroMessage("password_required_error"));
 
     if (confirmPassword === "") return ShowError(ChangeErroMessage("confirm_password_required_error"));
 

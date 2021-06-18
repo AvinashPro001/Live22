@@ -22,8 +22,6 @@
     </div>
 </div>
 
-
-
 <section class="article_sec_wrap">
     <div class="promotion_wrap_sec">
         <div class="container">
@@ -96,15 +94,9 @@
                                     <ul>
                                         <li><a class="tablinks_health active" onclick="openCity1(event, 'All_slot')">All</a></li>
                                         <li><a class="tablinks_health" onclick="openCity1(event, 'hot_slot')">Hot</a></li>
-                                        <li>
-                                            <a class="tablinks_health" onclick="openCity1(event, 'new_slot')">New</a>
-                                        </li>
-                                        <li>
-                                            <a class="tablinks_health" onclick="openCity1(event, 'slot_slots')">Slots</a>
-                                        </li>
-                                        <li>
-                                            <a class="tablinks_health" onclick="openCity1(event, 'arcade_slots')">Arcade</a>
-                                        </li>
+                                        <li><a class="tablinks_health" onclick="openCity1(event, 'new_slot')">New</a></li>
+                                        <li><a class="tablinks_health" onclick="openCity1(event, 'slot_slots')">Slots</a></li>
+                                        <li><a class="tablinks_health" onclick="openCity1(event, 'arcade_slots')">Arcade</a></li>
                                         <li>
                                             <div class="searchbar_bar_info">
                                                 <input type="text" placeholder="Search.." name="search" id="playtechSearch" onkeyup="SearchInPlaytechGameList()">
@@ -153,7 +145,7 @@
                                     <div id="All_slot" class="tabcontent_health" style="display: block;">
                                         <div class="row second_row_slot_game_wrap mr0 ml0" id="megaSlotsGameList">
                                             <div class="inner_game_banner_wrap">
-                                                <div class="inner_game_banner_box">
+                                                <div class="inner_game_banner_box_ag">
                                                 </div>
                                                 <div class="slot_bottom_boxs">
                                                     <div class="slot_inner_common_box"> <img src="~/images/carousel_logos/asia_color.png" alt="Pussy888"></div>
@@ -242,7 +234,7 @@
                                     <div id="All_slot" class="tabcontent_health" style="display: block;">
                                         <div class="row second_row_slot_game_wrap mr0 ml0" id="megaSlotsGameList">
                                             <div class="inner_game_banner_wrap">
-                                                <div class="inner_game_banner_box">
+                                                <div class="inner_game_banner_box_joker">
                                                 </div>
                                                 <div class="slot_bottom_boxs">
                                                     <div class="slot_inner_common_box"> <img src="~/images/carousel_logos/joker_color.png" alt="918 Kiss"></div>
@@ -289,7 +281,7 @@
                                     <div id="All_slot" class="tabcontent_health" style="display: block;">
                                         <div class="row second_row_slot_game_wrap mr0 ml0" id="megaSlotsGameList">
                                             <div class="inner_game_banner_wrap">
-                                                <div class="inner_game_banner_box">
+                                                <div class="inner_game_banner_box_mega">
                                                 </div>
                                                 <div class="slot_bottom_boxs">
                                                     <div class="slot_inner_common_box"> <img src="~/images/carousel_logos/mega_color.png" alt="MEGA-LOGO"></div>
@@ -339,7 +331,7 @@
                                     <div id="All_slot" class="tabcontent_health" style="display: block;">
                                         <div class="row second_row_slot_game_wrap mr0 ml0" id="megaSlotsGameList">
                                             <div class="inner_game_banner_wrap">
-                                                <div class="inner_game_banner_box">
+                                                <div class="inner_game_banner_box_kiss">
                                                 </div>
                                                 <div class="slot_bottom_boxs">
                                                     <div class="slot_inner_common_box"> <img src="~/images/carousel_logos/918kiss_color.png" alt="918 Kiss"></div>
@@ -384,9 +376,9 @@
                                 </div>
                                 <div class="genaral_wrapp1">
                                     <div id="All_slot" class="tabcontent_health" style="display: block;">
-                                        <div class="row second_row_slot_game_wrap mr0 ml0" id="megaSlotsGameList">
+                                        <div class="row second_row_slot_game_wrap mr0 ml0" >
                                             <div class="inner_game_banner_wrap">
-                                                <div class="inner_game_banner_box">
+                                                <div class="inner_game_banner_box_pussy">
                                                 </div>
                                                 <div class="slot_bottom_boxs">
                                                     <div class="slot_inner_common_box"> <img src="~/images/carousel_logos/pussy888_color.png" alt="Pussy888"></div>
@@ -427,6 +419,7 @@
         </div>
     </div>
 </section>
+
 <script>
     AllAnnouncementsCallAPI();
     function openCity1(evt1, cityName1) {
@@ -443,7 +436,6 @@
         evt1.currentTarget.className += " active";
     }
 </script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/owl.carousel.min.js'></script>
 <script src='https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js'></script>
 <script type="text/javascript">
     $('.slider-for-content').slick({
@@ -484,11 +476,11 @@
     });
 </script>
 <script>
-    $().ready(function () {
+    $(document).ready(function () {
         PragmaticSlotsGameList();
         PlaytechSlotsGameList();
     });
-    $().ready(function () {
+    $(document).ready(function () {
         $('.slick-carousel').slick({
             arrows: true,
             centerPadding: "0px",

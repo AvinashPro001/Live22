@@ -1980,11 +1980,15 @@ p.bonus_content a{color: #333;}
 .all_slot_game_boxes:hover p:last-child     { transform: translateY(100%); min-height: 0px; opacity: 0; height: 0; padding: 0px; }
 .slot-game-img-box:hover .overlay           { height: 100%; }
 .slot-game-img-box:hover img                { transform: scale(0.9); transition: 0.5s; }
-div#All_slot .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
+div.tabcontent_health .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 .all_slot_game_boxes:hover                  { transform: scale(1.2); transform-origin: center; transition: 0.5s; position: relative; z-index: 9; }
 
 /* Slot page banner start */
-.inner_game_banner_box                      { padding-top: 240px; background: url('../images/MEGA888-banner.jpg') no-repeat center center; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain; }
+.inner_game_banner_box_mega                     { padding-top: 240px; background: url('../images/MEGA888-banner.jpg') no-repeat center center; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain; }
+.inner_game_banner_box_pussy                     { padding-top: 240px; background: url('../images/pussy888.jpg') no-repeat center center; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain; }
+.inner_game_banner_box_ag                     { padding-top: 240px; background: url('../images/MEGA888-banner.jpg') no-repeat center center; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain; }
+.inner_game_banner_box_kiss                     { padding-top: 240px; background: url('../images/MEGA888-banner.jpg') no-repeat center center; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain; }
+.inner_game_banner_box_joker                     { padding-top: 240px; background: url('../images/MEGA888-banner.jpg') no-repeat center center; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain; }
 .slot_bottom_boxs                           { display: flex; }
 .slot_inner_common_box img                  { height: auto; }
 .slot_inner_common_box:first-child          { flex-basis: 25%; }

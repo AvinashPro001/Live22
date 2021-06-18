@@ -1037,6 +1037,7 @@ async function AllInWallet(WalletName) {
         walletName: WalletName
     }
     await PostMethod(transactionEndPoints.allInWallet, model);
+    LoadBalanceBasedOnWalletNameAsync("Main Wallet");
     LoadBalanceBasedOnWalletNameAsync(WalletName);
 }
 

@@ -4,6 +4,10 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 <script>
+    if (GetLocalStorage("currentUser") != null) {
+        location.href = "/";
+    }
+
     CheckMobileNumberIsVerifiedOnly();
 </script>
 <div class="annunce-section-wrap">
