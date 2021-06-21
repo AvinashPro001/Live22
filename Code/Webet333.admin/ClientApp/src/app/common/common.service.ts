@@ -229,7 +229,10 @@ export class CommonService {
         PleaseCheckRequestModel: 'Please check request model.',
         PleaseEnterMaxBet: 'Please enter max bet value.',
         PleaseEnterMaxBetMatch: 'Please enter max bet value match.',
-        PleaseEnterMinBet: 'Please enter min bet value.'
+        PleaseEnterMinBet: 'Please enter min bet value.',
+        PleaseEnterMaxBetRatio: 'Please Enter Valid MaxBetRatio.',
+        PleaseEnterSelectGroupType: 'Please Enter Group Type.',
+        PleaseSelectMinimumOneLeague: 'Please Select Minimum One League.'
     };
 
     //#endregion Error List

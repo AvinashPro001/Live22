@@ -16,5 +16,20 @@ namespace Webet333.models.Response.Game.SBO
 
         [JsonProperty("league_name")]
         public string LeagueName { get; set; }
+
+        [JsonProperty("sportType")]
+        public string SportType { get; set; }
+
+        [JsonProperty("MinBet")]
+        public decimal MinBet { get; set; } = 0;
+
+        [JsonProperty("MaxBet")]
+        public decimal MaxBet { get; set; } = 0;
+
+        [JsonProperty("MaxBetRatio")]
+        public decimal MaxBetRatio { get; set; } = 0;
+
+        [JsonProperty("GroupType")]
+        public string GroupType { get; set; }
     }
 }

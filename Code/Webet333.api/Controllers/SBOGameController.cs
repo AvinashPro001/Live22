@@ -192,26 +192,32 @@ namespace Webet333.api.Controllers
 
         #region Get League
 
-        [HttpGet(ActionsConst.SBO.GetLeague)]
-        public async Task<IActionResult> GetLeagueAsync()
+        [HttpPost(ActionsConst.SBO.GetLeague)]
+        public async Task<IActionResult> GetLeagueAsync([FromBody] OnlyDateRangeFilterRequest request)
         {
             await CheckUserRole();
 
-            var result = await SBOGameHelpers.CallGetLeagueAPI();
+            using (SBOGameHelpers SBOGame_Helpers = new SBOGameHelpers(Connection))
+            {
+                var result = await SBOGame_Helpers.GetLeague(request);
 
-            return OkResponse(result);
+                return OkResponse(result);
+            }
         }
 
         #endregion Get League
 
         #region Set League Bet Setting
 
-        [HttpGet(ActionsConst.SBO.SetLeagueBetSetting)]
+        [HttpPost(ActionsConst.SBO.SetLeagueBetSetting)]
         public async Task<IActionResult> SetLeagueBetSettingAsync([FromBody] List<SBOSetLeagueBetSettingRequest> requests)
         {
             await CheckUserRole();
 
-            await SBOGameHelpers.CallSetLeagueBetSettingAPI(requests);
+            using (SBOGameHelpers SBOGame_Helpers = new SBOGameHelpers(Connection))
+            {
+                await SBOGame_Helpers.CallSetLeagueBetSettingAPI(requests);
+            }
 
             return OkResponse();
         }

@@ -67,4 +67,13 @@ namespace Webet333.models.Request
         [JsonProperty("orderBy")]
         public string OrderBy { get; set; }
     }
+
+    public class OnlyDateRangeFilterRequest
+    {
+        [JsonProperty("fromDate")]
+        public DateTime? FromDate { get; set; }
+
+        [JsonProperty("toDate")]
+        public DateTime? ToDate { get; set; }
+    }
 }

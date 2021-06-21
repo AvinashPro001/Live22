@@ -15,7 +15,8 @@ namespace Webet333.WindowsService
         private static readonly HttpClient client = new HttpClient();
 
         public static string Token = string.Empty;
-        static async Task<string> APICallPost(string Url, object request = null)
+
+        private static async Task<string> APICallPost(string Url, object request = null)
         {
             try
             {
@@ -34,7 +35,7 @@ namespace Webet333.WindowsService
             }
         }
 
-        static async Task<string> APICallGet(string Url)
+        private static async Task<string> APICallGet(string Url)
         {
             try
             {
@@ -89,7 +90,6 @@ namespace Webet333.WindowsService
                                 MobileNo = agList[i].Mobile,
                                 UserId = agList[i].UserId,
                                 Username = agList[i].Username
-
                             };
                             var agresult = await APICallPost(ApiConst.baseUrl + ApiConst.registerAG, request: RegisterRequest);
                             Console.WriteLine(agresult);
@@ -100,7 +100,6 @@ namespace Webet333.WindowsService
                 {
                     Console.WriteLine(ex.Message.ToString());
                 }
-
 
                 try
                 {
@@ -116,7 +115,6 @@ namespace Webet333.WindowsService
                                 MobileNo = m8List[i].Mobile,
                                 UserId = m8List[i].UserId,
                                 Username = m8List[i].Username
-
                             };
                             var m8result = await APICallPost(ApiConst.baseUrl + ApiConst.registerM8, request: RegisterRequest);
                             Console.WriteLine(m8result);
@@ -142,7 +140,6 @@ namespace Webet333.WindowsService
                                 MobileNo = jokerList[i].Mobile,
                                 UserId = jokerList[i].UserId,
                                 Username = jokerList[i].Username
-
                             };
                             var jokerresult = await APICallPost(ApiConst.baseUrl + ApiConst.registerJoker, request: RegisterRequest);
                             Console.WriteLine(jokerresult);
@@ -174,7 +171,6 @@ namespace Webet333.WindowsService
                                 mintransfer = 1,
                                 UserId = new Guid(maxbetList[i].UserId),
                                 Username = maxbetList[i].Username
-
                             };
                             var maxresult = await APICallPost(ApiConst.baseUrl + ApiConst.registerMaxBet, request: RegisterRequest);
                             Console.WriteLine(maxresult);
@@ -196,7 +192,6 @@ namespace Webet333.WindowsService
                             {
                                 UserId = mega888List[i].UserId,
                                 UserName = mega888List[i].Username
-
                             };
                             var mega888result = await APICallPost(ApiConst.baseUrl + ApiConst.registerMega888, request: RegisterRequest);
                             Console.WriteLine(mega888result);
@@ -222,7 +217,6 @@ namespace Webet333.WindowsService
                                 MobileNo = playtechList[i].Mobile,
                                 UserId = playtechList[i].UserId,
                                 Username = playtechList[i].Username
-
                             };
                             var playtechresult = await APICallPost(ApiConst.baseUrl + ApiConst.registerPlaytech, request: RegisterRequest);
                             Console.WriteLine(playtechresult);
@@ -248,7 +242,6 @@ namespace Webet333.WindowsService
                                 MobileNo = kiss918List[i].Mobile,
                                 UserId = kiss918List[i].UserId,
                                 Username = kiss918List[i].Username
-
                             };
                             var kiss918result = await APICallPost(ApiConst.baseUrl + ApiConst.register918kiss, request: RegisterRequest);
                             Console.WriteLine(kiss918result);
@@ -260,7 +253,6 @@ namespace Webet333.WindowsService
                     Console.WriteLine(ex.Message.ToString());
                 }
             }
-
         }
     }
 }

@@ -78,6 +78,7 @@
                                         <div>
                                             <ngx-datatable #table
                                                            class='bootstrap no-detail-row'
+                                                           style="width: auto;"
                                                            [columns]="columns"
                                                            [rows]="rows"
                                                            [columnMode]="'force'"
@@ -85,24 +86,67 @@
                                                            [rowHeight]="'auto'"
                                                            [limit]="10"
                                                            [loadingIndicator]="loadingIndicator"
-                                                           [selected]="selectedUserList"
+                                                           [selected]="selectedLeagueList"
                                                            [selectionType]="'checkbox'"
                                                            (select)="onSelect($event)">
-                                                <ng-template #status
+                                                <ng-template #minBetTextBox
+                                                             ngx-datatable-row-detail-template
                                                              let-rowIndex="rowIndex"
                                                              let-row="row"
-                                                             let-expanded="expanded"
-                                                             ngx-datatable-row-detail-template>
-                                                    <div class="row col-md-12">
-                                                        <label class="col-md-3">
-                                                            <button id="rejectBtn" data-id="customerData[rowIndex].id" class="mb-1 btn btn-danger" type="button" data-toggle="modal" title="Delete" (click)='openRejectConfirmationDialog(row.id)'>
-                                                                <i class="fa fa-trash" aria-hidden="true"></i>
-                                                            </button>
-                                                        </label>
-                                                    </div>
+                                                             let-expanded="expanded">
+                                                    <input id="{{rowIndex}}_minBet"
+                                                           type='number'
+                                                           class="form-control"
+                                                           [(ngModel)]="row.MinBet"
+                                                           [ngModelOptions]="{standalone: true}"
+                                                           style="width: 100px;" />
+                                                </ng-template>
+                                                <ng-template #maxBetTextBox
+                                                             ngx-datatable-row-detail-template
+                                                             let-rowIndex="rowIndex"
+                                                             let-row="row"
+                                                             let-expanded="expanded">
+                                                    <input id="{{rowIndex}}_maxBet"
+                                                           type='number'
+                                                           class="form-control"
+                                                           [(ngModel)]="row.MaxBet"
+                                                           [ngModelOptions]="{standalone: true}"
+                                                           style="width: 100px;" />
+                                                </ng-template>
+                                                <ng-template #maxBetRatioTextBox
+                                                             ngx-datatable-row-detail-template
+                                                             let-rowIndex="rowIndex"
+                                                             let-row="row"
+                                                             let-expanded="expanded">
+                                                    <input id="{{rowIndex}}_maxBetRatio"
+                                                           type='number'
+                                                           class="form-control"
+                                                           [(ngModel)]="row.MaxBetRatio"
+                                                           [ngModelOptions]="{standalone: true}"
+                                                           style="width: 100px;" />
+                                                </ng-template>
+                                                <ng-template #groupTypeDropdown
+                                                             ngx-datatable-row-detail-template
+                                                             let-rowIndex="rowIndex"
+                                                             let-row="row"
+                                                             let-expanded="expanded">
+                                                    <select class="form-control"
+                                                            id="ddl_groupType_{{rowIndex}}"
+                                                            [(ngModel)]="row.GroupType"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            style="width:100px;">
+                                                        <option *ngFor="let c of groupType"
+                                                                [ngValue]="c.id"
+                                                                [selected]="c.id == row.GroupType">
+                                                            {{c.type}}
+                                                        </option>
+                                                    </select>
                                                 </ng-template>
                                             </ngx-datatable>
                                         </div>
+                                        <span class="col-md-4 mb-4">
+                                            <button class="btn btn-info" style="text-align: center;font-size: 20px" type="submit" (click)="Update()">Save</button>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

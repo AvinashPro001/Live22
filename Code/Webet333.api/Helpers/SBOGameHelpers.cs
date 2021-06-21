@@ -1,11 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
+using Webet333.models.Request;
 using Webet333.models.Request.Game;
 using Webet333.models.Request.Game.SBO;
 using Webet333.models.Response.Game.SBO;
@@ -21,6 +23,8 @@ namespace Webet333.api.Helpers
         private string Connection = string.Empty;
 
         private static readonly HttpClient client = new HttpClient();
+
+        private static string[] abcd = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
 
         public SBOGameHelpers(string Connection = null)
         {
@@ -390,71 +394,124 @@ namespace Webet333.api.Helpers
 
         #region Get League
 
-        internal static async Task<SBOGetLeagueResponse> CallGetLeagueAPI()
+        internal async Task<SBOGetLeagueResponse> GetLeague(OnlyDateRangeFilterRequest request)
         {
-            SBOGetLeagueResponse callGetLeagueAPIFootball = await CallGetLeagueAPIFootball();
-            SBOGetLeagueResponse callGetLeagueAPIOthers = await CallGetLeagueAPIOthers();
+            SBOGetLeagueResponse callGetLeagueAPIFootball = await CallGetLeagueAPIFootball(request);
+            SBOGetLeagueResponse callGetLeagueAPIOthers = await CallGetLeagueAPIOthers(request);
 
             if (callGetLeagueAPIFootball.Error.Id == 0 &&
                 callGetLeagueAPIOthers.Error.Id == 0)
             {
                 callGetLeagueAPIFootball.Result.AddRange(callGetLeagueAPIOthers.Result);
             }
-
-            if (callGetLeagueAPIFootball.Error.Id == 0 &&
-               callGetLeagueAPIOthers.Error.Id != 0)
+            else if (callGetLeagueAPIFootball.Error.Id != 0 &&
+            callGetLeagueAPIOthers.Error.Id == 0)
             {
-                return callGetLeagueAPIFootball;
-            }
+                await MapWithDBValueAsync(callGetLeagueAPIOthers);
 
-            if (callGetLeagueAPIFootball.Error.Id != 0 &&
-               callGetLeagueAPIOthers.Error.Id == 0)
-            {
                 return callGetLeagueAPIOthers;
             }
+
+            await MapWithDBValueAsync(callGetLeagueAPIFootball);
 
             return callGetLeagueAPIFootball;
         }
 
-        private static async Task<SBOGetLeagueResponse> CallGetLeagueAPIFootball()
+        public class MyClassComp : IEqualityComparer<SBOGetLeagueResponseResult>
         {
-            SBOGetLeagueRequest model = new SBOGetLeagueRequest
+            public bool Equals(SBOGetLeagueResponseResult x, SBOGetLeagueResponseResult y)
             {
-                CompanyKey = GameConst.SBO.CompanyKey,
-                //FromDate = DateTime.Now.AddHours(12),
-                FromDate = DateTime.Now.AddDays(-100).ToString("yyyy-MM-dd HH:mm:ss.fff"),
-                LeagueNameKeyWord = "a",
-                ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
-                SportType = GameConst.SBO.SportType.Football,
-                //ToDate = DateTime.Now.AddHours(12)
-                ToDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")
-            };
+                return x.LeagueId == y.LeagueId;
+            }
 
-            var result = await CallAPI(model);
+            public int GetHashCode(SBOGetLeagueResponseResult obj)
+            {
+                if (Object.ReferenceEquals(obj, null)) return 0;
+                int hashName = obj.LeagueId == null ? 0 : obj.LeagueId.GetHashCode();
 
-            return result;
+                return hashName;
+            }
         }
 
-        private static async Task<SBOGetLeagueResponse> CallGetLeagueAPIOthers()
+        private static async Task<SBOGetLeagueResponse> CallGetLeagueAPIFootball(OnlyDateRangeFilterRequest request)
         {
-            SBOGetLeagueRequest model = new SBOGetLeagueRequest
+            SBOGetLeagueResponse temp = new SBOGetLeagueResponse();
+
+            foreach (var abc in abcd)
             {
-                CompanyKey = GameConst.SBO.CompanyKey,
-                //FromDate = DateTime.Now.AddHours(12),
-                FromDate = DateTime.Now.AddDays(-100).ToString("yyyy-MM-dd HH:mm:ss.fff"),
-                LeagueNameKeyWord = "a",
-                ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
-                SportType = GameConst.SBO.SportType.Others,
-                //ToDate = DateTime.Now.AddHours(12)
-                ToDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")
-            };
+                SBOGetLeagueRequest model = new SBOGetLeagueRequest
+                {
+                    CompanyKey = GameConst.SBO.CompanyKey,
+                    //FromDate = DateTime.Now.AddHours(12),
+                    //FromDate = DateTime.Now.AddDays(-200).ToString("yyyy-MM-dd HH:mm:ss.fff"),
+                    FromDate = request.FromDate.ToString(),
+                    LeagueNameKeyWord = abc,
+                    ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
+                    SportType = GameConst.SBO.SportType.Football,
+                    //ToDate = DateTime.Now.AddHours(12)
+                    //ToDate = DateTime.Now.AddDays(200).ToString("yyyy-MM-dd HH:mm:ss.fff")
+                    ToDate = request.ToDate.ToString()
+                };
 
-            var result = await CallAPI(model);
+                var result = await CallGetLeagueAPI(model);
 
-            return result;
+                if (temp.Result != null) temp.Result.AddRange(result.Result);
+                else temp = result;
+            }
+
+            List<SBOGetLeagueResponseResult> newList = temp.Result.Distinct(new MyClassComp()).ToList();
+            temp.Result = newList;
+
+            if (temp != null &&
+                temp.Error.Id == 0 &&
+                temp.Result.Any())
+            {
+                temp.Result.ForEach(x => x.SportType = "Football");
+            }
+
+            return temp;
         }
 
-        private static async Task<SBOGetLeagueResponse> CallAPI(SBOGetLeagueRequest model)
+        private static async Task<SBOGetLeagueResponse> CallGetLeagueAPIOthers(OnlyDateRangeFilterRequest request)
+        {
+            SBOGetLeagueResponse temp = new SBOGetLeagueResponse();
+
+            foreach (var abc in abcd)
+            {
+                SBOGetLeagueRequest model = new SBOGetLeagueRequest
+                {
+                    CompanyKey = GameConst.SBO.CompanyKey,
+                    //FromDate = DateTime.Now.AddHours(12),
+                    //FromDate = DateTime.Now.AddDays(-200).ToString("yyyy-MM-dd HH:mm:ss.fff"),
+                    FromDate = request.FromDate.ToString(),
+                    LeagueNameKeyWord = abc,
+                    ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
+                    SportType = GameConst.SBO.SportType.Others,
+                    //ToDate = DateTime.Now.AddHours(12)
+                    //ToDate = DateTime.Now.AddDays(200).ToString("yyyy-MM-dd HH:mm:ss.fff")
+                    ToDate = request.ToDate.ToString()
+                };
+
+                var result = await CallGetLeagueAPI(model);
+
+                if (temp.Result != null) temp.Result.AddRange(result.Result);
+                else temp = result;
+            }
+
+            List<SBOGetLeagueResponseResult> newList = temp.Result.Distinct(new MyClassComp()).ToList();
+            temp.Result = newList;
+
+            if (temp != null &&
+               temp.Error.Id == 0 &&
+               temp.Result.Any())
+            {
+                temp.Result.ForEach(x => x.SportType = "Others");
+            }
+
+            return temp;
+        }
+
+        private static async Task<SBOGetLeagueResponse> CallGetLeagueAPI(SBOGetLeagueRequest model)
         {
             var URL = $"{GameConst.SBO.URL}{GameConst.SBO.EndPoint.GetLeague}";
 
@@ -467,20 +524,51 @@ namespace Webet333.api.Helpers
             return DeserializeAPIResult;
         }
 
+        private async Task<List<SBOGetLeagueResponseResult>> GetLeagueDBAsync()
+        {
+            using (var repository = new DapperRepository<SBOGetLeagueResponseResult>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.SBO.SelectLeagueBetSetting, new { });
+
+                return result.ToList();
+            }
+        }
+
+        private async Task<SBOGetLeagueResponse> MapWithDBValueAsync(SBOGetLeagueResponse League)
+        {
+            var getLeagueDB = await GetLeagueDBAsync();
+
+            if (getLeagueDB != null)
+            {
+                foreach (var league in League.Result)
+                {
+                    foreach (var leagueDB in (getLeagueDB.Where(t => t.LeagueId == league.LeagueId)))
+                    {
+                        league.GroupType = leagueDB.GroupType;
+                        league.MaxBet = leagueDB.MaxBet;
+                        league.MinBet = leagueDB.MinBet;
+                        league.MaxBetRatio = leagueDB.MaxBetRatio;
+                    }
+                }
+            }
+
+            return League;
+        }
+
         #endregion Get League
 
         #region Set League Bet Setting
 
-        internal static async Task CallSetLeagueBetSettingAPI(List<SBOSetLeagueBetSettingRequest> request)
+        internal async Task CallSetLeagueBetSettingAPI(List<SBOSetLeagueBetSettingRequest> request)
         {
             foreach (var data in request)
             {
-                SBOSetLeagueBetSettingRequest model = new SBOSetLeagueBetSettingRequest
+                SBOSetLeagueBetSettingAPIRequest model = new SBOSetLeagueBetSettingAPIRequest
                 {
                     CompanyKey = GameConst.SBO.CompanyKey,
                     Currency = GameConst.SBO.Currency,
                     GroupType = data.GroupType,
-                    IsLive = data.IsLive,
+                    IsLive = true,
                     LeagueId = data.LeagueId,
                     MaxBet = data.MaxBet,
                     MaxBetRatio = data.MaxBetRatio,
@@ -492,7 +580,38 @@ namespace Webet333.api.Helpers
 
                 var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
 
-                await GameHelpers.CallThirdPartyApi(URL, stringContent);
+                Console.WriteLine(JsonConvert.SerializeObject(model));
+
+                var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
+
+                var DeserializeAPIResult = JsonConvert.DeserializeObject<SBODefaultResponse>(APIResult);
+
+                // await SetLeagueBetSetting(data);
+
+                if (DeserializeAPIResult != null &&
+                    DeserializeAPIResult.Error.Id == 0)
+                {
+                    await SetLeagueBetSetting(data);
+                }
+            }
+        }
+
+        private async Task SetLeagueBetSetting(SBOSetLeagueBetSettingRequest request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.SBO.UpdateLeagueBetSetting,
+                    new
+                    {
+                        LeagueId = request.LeagueId,
+                        LeagueName = request.LeagueName,
+                        SportType = request.SportType,
+                        MinBet = request.MinBet,
+                        MaxBet = request.MaxBet,
+                        MaxBetRatio = request.MaxBetRatio,
+                        GroupType = request.GroupType
+                    });
             }
         }
 
