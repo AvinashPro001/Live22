@@ -1,7 +1,8 @@
 ﻿//#region Declare Vairable
 var walletIds = [
     "joker_balance", "playtech_balance", "kiss918_balance", "ag_balance", "m8_balance", "mega888_balance", "maxbet_balance",
-    "dg_balance", "sexy_baccarat_balance", "sa_balance", "pussy888_balance", "allbet_balance", "wm_balance", "pragmatic_balance"
+    "dg_balance", "sexy_baccarat_balance", "sa_balance", "pussy888_balance", "allbet_balance", "wm_balance", "pragmatic_balance",
+    "yeebet_balance"
 ];
 
 let UsersBalance = {
@@ -19,7 +20,8 @@ let UsersBalance = {
     SexyBaccaratBalance: null,
     AllBetBalance: null,
     M8Balance: null,
-    MaxBetBalance: null
+    MaxBetBalance: null,
+    YeeBetBalance: null
 }
 
 let GameUsernames = {
@@ -37,7 +39,8 @@ let GameUsernames = {
     SexyBaccaratUsername: null,
     AllBetUsername: null,
     M8Username: null,
-    MaxBetUsername: null
+    MaxBetUsername: null,
+    YeeBetUsername: null
 }
 
 var AGTrigger = false,
@@ -102,6 +105,7 @@ function LoadAllBalance() {
     if (GameUsernames.AllBetUsername != null) AllBetWallet(GameUsernames.AllBetUsername);
     if (GameUsernames.M8Username != null) M8Wallet(GameUsernames.M8Username);
     if (GameUsernames.MaxBetUsername != null) MaxBetWallet(GameUsernames.MaxBetUsername);
+    if (GameUsernames.YeeBetUsername != null) YeeBetWallet(GameUsernames.YeeBetUsername);
 }
 
 async function LoadAllBalanceAsync() {
@@ -120,6 +124,7 @@ async function LoadAllBalanceAsync() {
     if (GameUsernames.AllBetUsername != null) await AllBetWallet(GameUsernames.AllBetUsername, false);
     if (GameUsernames.M8Username != null) await M8Wallet(GameUsernames.M8Username, false);
     if (GameUsernames.MaxBetUsername != null) await MaxBetWallet(GameUsernames.MaxBetUsername, false);
+    if (GameUsernames.YeeBetUsername != null) await YeeBetWallet(GameUsernames.YeeBetUsername, false);
 }
 
 async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
@@ -140,6 +145,7 @@ async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
         case "AllBet Wallet": if (GameUsernames.AllBetUsername != null) await AllBetWallet(GameUsernames.AllBetUsername); break;
         case "M8 Wallet": if (GameUsernames.M8Username != null) await M8Wallet(GameUsernames.M8Username); break;
         case "MaxBet Wallet": if (GameUsernames.MaxBetUsername != null) await MaxBetWallet(GameUsernames.MaxBetUsername); break;
+        case "YeeBet Wallet": if (GameUsernames.YeeBetUsername != null) await YeeBetWallet(GameUsernames.YeeBetUsername); break;
     }
 }
 
@@ -161,6 +167,7 @@ async function ReturnBalanceBasedOnWalletName(WalletName) {
         case "AllBet Wallet": balance = UsersBalance.Kiss918Balance; break;
         case "M8 Wallet": balance = UsersBalance.Kiss918Balance; break;
         case "MaxBet Wallet": balance = UsersBalance.Kiss918Balance; break;
+        case "YeeBet Wallet": balance = UsersBalance.YeeBetBalance; break;
     }
 
     if (balance == "N/A")
@@ -184,7 +191,7 @@ async function SetUsername() {
         SetSessionStorage('GamePreFix', Encryption(JSON.stringify(gamePrefix.response.data)));
         globalParameter = gamePrefix.response.data;
     }
-
+    
     GameUsernames.AGUsername = globalParameter.agGamePrefix + userDetails.username;
     GameUsernames.AllBetUsername = globalParameter.allBetGamePrefix + userDetails.userId;
     GameUsernames.DGUsername = globalParameter.dgGamePrefix + userDetails.username;
@@ -199,6 +206,7 @@ async function SetUsername() {
     GameUsernames.Kiss918Username = userDetails.username918;
     GameUsernames.M8Username = globalParameter.m8GamePrefix + userDetails.username;
     GameUsernames.MaxBetUsername = userDetails.vendorememberid;
+    GameUsernames.YeeBetUsername = globalParameter.yeeBetGamePrefix + userDetails.userId;
 
 }
 //#endregion 
@@ -246,6 +254,7 @@ function SetLoadingImageBaseOnWalletName(WalletName) {
         case "AllBet Wallet": SetLoadingImagesInBalance("allbet_balance"); SetFetchingWordInBalance("allbet_balance"); break;
         case "M8 Wallet": SetLoadingImagesInBalance("m8_balance"); SetFetchingWordInBalance("m8_balance"); break;
         case "MaxBet Wallet": SetLoadingImagesInBalance("maxbet_balance"); SetFetchingWordInBalance("maxbet_balance"); break;
+        case "YeeBet Wallet": SetLoadingImagesInBalance("yeebet_balance"); SetFetchingWordInBalance("yeebet_balance"); break;
     }
 }
 
@@ -278,6 +287,7 @@ async function RestoreBalance() {
         allbetwallet: CheckNAorNot(UsersBalance.AllBetBalance),
         WMwallet: CheckNAorNot(UsersBalance.WMBalance),
         pragmaticwallet: CheckNAorNot(UsersBalance.PragmaticBalance),
+        YeeBetWallet: CheckNAorNot(UsersBalance.YeeBetBalance),
         id: null
     }
     await PostMethod(transactionEndPoints.restore, restoreModel);
@@ -319,6 +329,8 @@ async function GetDailyTurnover() {
         SetAllValueInElement("allbet_turnover", FormatBalance(res.response.data.response.allBetTurover))
         SetAllValueInElement("wm_turnover", FormatBalance(res.response.data.response.wmTurover))
         SetAllValueInElement("pragmatic_turnover", FormatBalance(res.response.data.response.pragmaticTurover))
+        SetAllValueInElement("yeebet_turnover", FormatBalance(res.response.data.response.yeeBetTurover))
+
     }
 }
 
@@ -693,6 +705,32 @@ async function M8Wallet(Username, IsDivValueSet = true) {
     }
 }
 
+async function YeeBetWallet(Username, IsDivValueSet = true) {
+    let model = {
+        username: Username
+    };
+    try {
+        var res = await PostMethod(gameBalanceEndPoints.yeebetBalance, model);
+        
+        if (res.status == 200) {
+            UsersBalance.YeeBetBalance = ConvertBalanceIntoCommasValue(res.response.data.balance);
+        }
+        else {
+            UsersBalance.YeeBetBalance = "N/A";
+        }
+        if (IsDivValueSet)
+            SetBalanceOnAllPlace("yeebet_balance", UsersBalance.YeeBetBalance);
+
+        if (UsersBalance.YeeBetBalance == 0 && res.response.data.previousBalance > 0 && YeeBetTrigger == false)
+            StartTimerGameBalanceAPI("YeeBet");
+    }
+    catch (e) {
+        UsersBalance.YeeBetBalance = "N/A";
+        if (IsDivValueSet)
+            SetBalanceOnAllPlace("yeebet_balance", UsersBalance.YeeBetBalance);
+    }
+}
+
 //#endregion All Wallet Balance
 
 function StartTimerGameBalanceAPI(GameName) {
@@ -737,7 +775,7 @@ function StartTimerGameBalanceAPI(GameName) {
             setTimeout(() => { clearInterval(WmtimerId); WMTrigger = false; }, 301000);
             break;
         case 'YeeBet':
-            let YeeBetTimerId = setInterval(() => { YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId); YeeBetTrigger = true; }, 30000);
+            let YeeBetTimerId = setInterval(() => { YeeBetWallet(GameUsernames.YeeBetUsername); YeeBetTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(YeeBetTimerId); YeeBetTrigger = false; }, 301000);
             break;
     }

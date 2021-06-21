@@ -104,6 +104,12 @@ function SetSiteDataVariable() {
 //#region Reset Sitedata
 
 function SetSiteData() {
+    SiteData.PromotionPageData = null;
+    SiteData.AnnouncementsData = null;
+    SiteData.AdminBankPageData = null;
+    SiteData.DownloadPageData = null;
+    SiteData.AllBankPageData = null;
+    SiteData.WalletData = null;
     SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
 }
 
@@ -300,7 +306,7 @@ async function SetLastUpdateTime() {
         var diff = (Currentdate.getTime() - OldDate.getTime()) / 1000;
         diff /= 60;
         diff = Math.abs(Math.round(diff));
-        if (diff > 0) {
+        if (diff > 9) {
             SetSiteData();
             var date = new Date();
             SetLocalStorage("time", date);
@@ -414,6 +420,7 @@ function CheckGameMaintenance() {
         if (data.WalletData !== null) {
             var isMaintenance = data.WalletData.filter(x => x.isMaintenance == true);
             var isNotMaintenance = data.WalletData.filter(x => x.isMaintenance == false);
+
             if (isMaintenance.length > 0) {
                 for (i = 0; i < isMaintenance.length; i++) {
                     var id = isMaintenance[i].walletType.replace(" ", "-").toLowerCase();

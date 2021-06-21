@@ -26,6 +26,20 @@ function CallGameLoginAPI(WalletName, IsSlots) {
         case "AllBet Wallet": OpenAllBetGame(); break;
         case "M8 Wallet": OpenM8Game(); break;
         case "MaxBet Wallet": OpenMaxbetGame(); break;
+        case "YeeBet Wallet": OpenYeeBetGame(); break;
+    }
+}
+
+async function OpenYeeBetGame() {
+    window.open("../Web/game");
+    let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+    if (resSelectUser.YeeBet == true) {
+        var Model = {
+        }
+        var login = await PostMethod(gameLoginEndPoints.yeebetLogin, Model);
+        if (login.status == 200)
+            if (login.response.data.desc == "succeed")
+                SetLocalStorage("gameURL", login.response.data.openurl);
     }
 }
 

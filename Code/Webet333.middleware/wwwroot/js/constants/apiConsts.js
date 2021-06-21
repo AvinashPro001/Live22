@@ -198,6 +198,7 @@ var gameBalanceEndPoints = {
     allBetBalance: "gamebalance/allbet",
     wmBalance: "gamebalance/wm",
     pragmaticBalance: "gamebalance/pragmatic",
+    yeebetBalance: "gamebalance/yeebet",
 };
 
 var transactionEndPoints = {
@@ -243,6 +244,7 @@ var gameLoginEndPoints = {
     pragmaticLogin: "pragmatic/login",
     dgLogin: "dg/login",
     m8Login: "m8/login",
+    yeebetLogin: "yeebet/login"
 }
 
 var gameSettingEndPoints = {
