@@ -56,7 +56,7 @@ namespace Webet333.api.Helpers
 
         #region Call Third Party API and Encrpt Data
 
-        public static async Task<string> CallAPI(string Url, string Parameter, bool Method = true)
+        public static async Task<string> CallAPI(string Url, string Parameter=null, bool Method = true)
         {
             try
             {
@@ -122,7 +122,7 @@ namespace Webet333.api.Helpers
         public static async Task<CheckPaymentStatusResponse> CheckStatus(string token)
         {
             var url = $"{CheckStatusEndpoint}?token={token}";
-            return JsonConvert.DeserializeObject<CheckPaymentStatusResponse>(await GameHelpers.CallGetMethodThirdPartyApi(url));
+            return JsonConvert.DeserializeObject<CheckPaymentStatusResponse>(await CallAPI(url,Method:false));
         }
 
         #endregion Check Status
