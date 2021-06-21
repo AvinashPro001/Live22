@@ -1386,14 +1386,17 @@
     });
 
     $(document).ready(function () {
-        CallAllBankAPI();
-        SetWithdrawLimit();
-        SetHtmlInFromWallet();
-        SetDepositPageBank();
-        SetProfilePageBanks();
-        GetDailyTurnover();
-        SetProfilePageData();
-        CheckVaderPayMainteance();
-        CheckSupportGame();
+        if (GetLocalStorage('currentUser') !== null) {
+            CallAllBankAPI();
+            SetWithdrawLimit();
+            SetHtmlInFromWallet();
+            SetDepositPageBank();
+            SetProfilePageBanks();
+            GetDailyTurnover();
+            SetProfilePageData();
+            CheckVaderPayMainteance();
+            CheckSupportGame();
+            SetUserDepositPromotion();
+        }
     });
 </script>

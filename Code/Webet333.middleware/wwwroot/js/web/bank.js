@@ -3,7 +3,9 @@ var fromDate = null, toDate = null, pageSize = 8; pageNumber = 0;
 var HistorySectionName = "Transfer";
 
 $(document).ready(function () {
-    UsersBankDetails();
+    if (GetLocalStorage('currentUser') !== null) {
+        UsersBankDetails();
+    }
 });
 
 //#region Set Html In From Wallet in Transfer page
@@ -178,7 +180,7 @@ function SetAmountInTextBox(Amount, Online) {
         $("#txt_deposit_amount").val(Amount);
 }
 
-async function CallAllBankAPI(){
+async function CallAllBankAPI() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
 
     if (data.AllBankPageData == null || data.AllBankPageData == undefined) {
@@ -327,7 +329,7 @@ function ResetTransactionField(i) {
         var node = document.getElementById("selectedFiles");
         node.innerHTML = "";
         TableData = [];
-        files.length = 0; 
+        files.length = 0;
     }
     if (i == 2) {
         $('#txt_withdraw_amount').val("");
@@ -708,14 +710,15 @@ function GetDateRange() {
 }
 
 function CallFunctionAccordingToTab() {
-    switch (HistorySectionName) {
-        case "Transfer": TransferHistory(); break;
-        case "BettingSummery": BettingHistory(); break;
-        case "WithdrawDeposit": WithdrawDepositHistory(); break;
-        case "Promotion": PromotionHistory(); break;
-        case "Rebate": RebateHistory(); break;
-        case "Reward": RewardHistory(); break;
-    }
+    if (GetLocalStorage('currentUser') !== null)
+        switch (HistorySectionName) {
+            case "Transfer": TransferHistory(); break;
+            case "BettingSummery": BettingHistory(); break;
+            case "WithdrawDeposit": WithdrawDepositHistory(); break;
+            case "Promotion": PromotionHistory(); break;
+            case "Rebate": RebateHistory(); break;
+            case "Reward": RewardHistory(); break;
+        }
 }
 
 CallFunctionAccordingToTab();
@@ -1010,7 +1013,6 @@ function ResetPromotionId() {
     DepositPromotionId = undefined;
 }
 
-SetUserDepositPromotion();
 async function SetUserDepositPromotion() {
     let model = {}
     var res = await PostMethod(accountEndPoints.userDepositPromotion, model);
