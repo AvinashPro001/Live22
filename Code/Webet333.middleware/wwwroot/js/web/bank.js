@@ -3,9 +3,7 @@ var fromDate = null, toDate = null, pageSize = 8; pageNumber = 0;
 var HistorySectionName = "Transfer";
 
 $(document).ready(function () {
-    if (GetLocalStorage('currentUser') !== null) {
-        UsersBankDetails();
-    }
+   
 });
 
 //#region Set Html In From Wallet in Transfer page
@@ -721,7 +719,7 @@ function CallFunctionAccordingToTab() {
         }
 }
 
-CallFunctionAccordingToTab();
+
 
 async function TransferHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
     let model = {

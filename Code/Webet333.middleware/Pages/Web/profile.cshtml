@@ -1436,6 +1436,7 @@
 
     $(document).ready(function () {
         if (GetLocalStorage('currentUser') !== null) {
+            UsersBankDetails();
             CallAllBankAPI();
             SetWithdrawLimit();
             SetHtmlInFromWallet();
@@ -1446,6 +1447,7 @@
             CheckVaderPayMainteance();
             CheckSupportGame();
             SetUserDepositPromotion();
+            CallFunctionAccordingToTab();
         }
     });
 </script>
