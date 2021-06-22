@@ -38,7 +38,7 @@ function ShowError(Message) {
     $('#error_choose').modal('show');
     setTimeout(function () {
         $('#error_choose').modal('hide');
-    }, 1500);
+    }, 2000);
 }
 //#endregion
 

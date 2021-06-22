@@ -268,9 +268,9 @@ function CheckNAorNot(Value) {
 }
 
 async function RestoreBalance() {
+    SetLoadingImageForAllId();
     await GetProfileAndSetInSessionStorage();
     await GetGlobalParameterAndSetInSessionStorage
-    await SetLoadingImageForAllId();
     await LoadAllBalanceAsync();
     let restoreModel = {
         kiss918wallet: CheckNAorNot(UsersBalance.Kiss918Balance),

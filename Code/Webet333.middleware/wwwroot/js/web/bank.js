@@ -513,6 +513,9 @@ async function Withdraw() {
             SetWithdrawLimit();
             RefreshBalance();
         }
+        else {
+            ShowError(res.response.message);
+        }
         LoaderHide();
     }
     catch (e) {
@@ -555,6 +558,10 @@ async function Transfer() {
             ShowSuccess(res.response.message)
             ResetTransactionField(3);
             RefreshBalance();
+        }
+        else {
+            ShowError(res.response.message);
+            ResetTransactionField(3);
         }
         LoaderHide()
     }
@@ -718,8 +725,6 @@ function CallFunctionAccordingToTab() {
             case "Reward": RewardHistory(); break;
         }
 }
-
-
 
 async function TransferHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
     let model = {
