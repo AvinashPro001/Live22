@@ -17,6 +17,8 @@ $(document).ready(function () {
         document.getElementById("pussy888").title = ChangeErroMessage("user_not_login_error");
         document.getElementById("AllbetGame").title = ChangeErroMessage("user_not_login_error");
         document.getElementById("WMGame").title = ChangeErroMessage("user_not_login_error");
+        document.getElementById("YeeBetGame").title = ChangeErroMessage("user_not_login_error");
+        document.getElementById("SBOGame").title = ChangeErroMessage("user_not_login_error");
     }
 });
 //#endregion

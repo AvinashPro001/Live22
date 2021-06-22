@@ -341,6 +341,14 @@
                                             <button class="game-title"><span class="lang" key="maxbet_game"></span></button>
                                         </a>
                                     </li>
+                                    <li data-toggle="modal" data-target="#gameLogin" id="SBOSports">
+                                        <a>
+                                            <figure>
+                                                <img src="~/images/images-mobile/sbo.png" alt="SBO">
+                                            </figure>
+                                            <button class="game-title"><span class="lang" key="SBO_Game "></span></button>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div id="slot-tile" role="tabpanel" class="tab-pane fade in">
@@ -463,6 +471,7 @@
         <span style="display:none;" id="918Game"></span>
         <span style="display:none;" id="JokerGame"></span>
         <span style="display:none;" id="MaxBetGame"></span>
+        <span style="display:none;" id="SBOGame"></span>
     </div>
     <div id="beforelogin_mobile">
         <div class="sidebar">
@@ -591,6 +600,12 @@
                                         <ul class="list-inline">
                                             <li><strong>YeeBet Wallet</strong></li>
                                             <li class="fright" id="ddlYeeBetWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>SBO Wallet</strong></li>
+                                            <li class="fright" id="ddlSBOWallet">feching...</li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -726,6 +741,14 @@
                                             <img src="~/images/images-mobile/maxbet.png" alt="maxbet">
                                         </figure>
                                         <button class="game-title"><span class="lang" key="maxbet_game"></span></button>
+                                    </a>
+                                </li>
+                                <li onclick="logingGame('SBO')" id="SBOSportsLogin">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/sbo.png" alt="SBO">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="SBO_Game"></span></button>
                                     </a>
                                 </li>
                             </ul>
@@ -1047,10 +1070,10 @@
             $('#homeLoginPagebottom').addClass("active-link");
 
         }, 2000);
-                                                                            //$('#footerWidget').click(function () {
-                                                                            //    $('li').addClass("active");
-                                                                            //    $('li').removeClass("active");
-                                                                            //});
+                                                                                //$('#footerWidget').click(function () {
+                                                                                //    $('li').addClass("active");
+                                                                                //    $('li').removeClass("active");
+                                                                                //});
     </script>
 </body>
 </html>

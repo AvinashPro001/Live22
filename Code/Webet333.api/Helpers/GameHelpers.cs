@@ -1220,7 +1220,8 @@ namespace Webet333.api.Helpers
                     decimal AllbetBalance,
                     decimal WMBalance,
                     decimal PragmaticBalance,
-                    decimal YeeBetBalance
+                    decimal YeeBetBalance,
+                    decimal SBOBalance
             )
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -1246,7 +1247,8 @@ namespace Webet333.api.Helpers
                         AllbetBalance,
                         WMBalance,
                         PragmaticBalance,
-                        YeeBetBalance
+                        YeeBetBalance,
+                        SBOBalance
                     });
             }
         }

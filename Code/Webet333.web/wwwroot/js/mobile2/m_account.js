@@ -525,7 +525,8 @@ async function regisrationGame() {
                 resSelectUser.data.Pussy888 === false ||
                 resSelectUser.data.AllBet === false ||
                 resSelectUser.data.WM === false ||
-                resSelectUser.data.Pragmatic === false
+                resSelectUser.data.Pragmatic === false ||
+                resSelectUser.data.SBO === false ||
             ) {
                 resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
                 sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
@@ -744,6 +745,14 @@ async function regisrationGame() {
                 }
                 catch (e) {
                 }
+            }
+
+            if (resSelectUser.data.SBO !== true) {
+                var model = {};
+                try {
+                    await PostMethodWithParameter(apiEndPoints.SBORegister, model);
+                }
+                catch (e) { }
             }
 
             localStorage.setItem('IsExecute', false);

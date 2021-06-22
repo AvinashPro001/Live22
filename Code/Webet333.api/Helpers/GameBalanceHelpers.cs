@@ -519,7 +519,7 @@ namespace Webet333.api.Helpers
 
                 var DeserializeAPIResult = JsonConvert.DeserializeObject<SBOGetPlayerBalanceResponse>(APIResult);
 
-                balance = DeserializeAPIResult != null ? (DeserializeAPIResult.Balance == 0 ? DeserializeAPIResult.Balance.ToString() : null) : null;
+                balance = DeserializeAPIResult != null ? (DeserializeAPIResult.Error.Id == 0 ? DeserializeAPIResult.Balance.ToString() : null) : null;
             }
             catch (Exception ex)
             {

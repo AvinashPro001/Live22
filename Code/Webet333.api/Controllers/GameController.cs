@@ -1797,12 +1797,9 @@ namespace Webet333.api.Controllers
         {
             var Role = GetUserRole(User);
             var UserId = GetUserId(User).ToString();
-            if (Role == RoleConst.Users)
-                request.Id = UserId;
+            if (Role == RoleConst.Users) request.Id = UserId;
 
-            if (Role == RoleConst.Admin)
-                if (string.IsNullOrEmpty(request.Id))
-                    return BadResponse("error_invalid_modelstate");
+            if (Role == RoleConst.Admin) if (string.IsNullOrEmpty(request.Id)) return BadResponse("error_invalid_modelstate");
 
             GetBalanceUserResponse user;
             string AGUsername,
@@ -1816,7 +1813,8 @@ namespace Webet333.api.Controllers
                 WMUsername,
                 AllbetUsername,
                 PragmaticUsername,
-                YeeBetUsername;
+                YeeBetUsername,
+                SBOUsername;
 
             using (var account_helper = new AccountHelpers(Connection))
             {
@@ -1833,6 +1831,7 @@ namespace Webet333.api.Controllers
                 WMUsername = user.WMGamePrefix + user.UserId;
                 PragmaticUsername = user.PragmaticGamePrefix + user.UserId;
                 YeeBetUsername = user.YEEBETGamePrefix + user.UserId;
+                SBOUsername = user.SBOGamePrefix + user.UserId;
             }
 
             decimal mainBalance = 0.0m,
@@ -1850,7 +1849,9 @@ namespace Webet333.api.Controllers
                 WMBalance = 0.0m,
                 PragmaticBalance = 0.0m,
                 PussyBalance = 0.0m,
-                YeeBetBalance = 0.0m;
+                YeeBetBalance = 0.0m,
+                SBOBalance = 0.0m;
+
             using (var game_helper = new GameHelpers(Connection))
             {
                 if (request.AGWallet != 0)
@@ -2041,6 +2042,20 @@ namespace Webet333.api.Controllers
                     { }
                 }
 
+                if (request.SBOWallet != 0)
+                {
+                    try
+                    {
+                        var result = await SBOGameHelpers.CallWithdrawAPI(SBOUsername, Math.Abs(request.SBOWallet));
+
+                        mainBalance += result.Error.Id == 0 ? request.SBOWallet : 0;
+
+                        SBOBalance = result.Error.Id == 0 ? request.SBOWallet : 0;
+                    }
+                    catch
+                    { }
+                }
+
                 await game_helper.BalanceRestore(
                     request.Id, UserId,
                     mainBalance,
@@ -2058,7 +2073,8 @@ namespace Webet333.api.Controllers
                     AllbetBalance,
                     WMBalance,
                     PragmaticBalance,
-                    YeeBetBalance
+                    YeeBetBalance,
+                    SBOBalance
                 );
 
                 return OkResponse(new { mainBalance, MaxbetBalance });
@@ -2566,12 +2582,9 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> BalacneInWallet([FromBody] AllInWalletRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
-            var Role = GetUserRole(User);
-            if (Role == RoleConst.Users)
-                request.UserId = GetUserId(User).ToString();
-            else
-                if (String.IsNullOrEmpty(request.UserId))
-                return BadResponse("error_invalid_modelstate");
+            var role = GetUserRole(User);
+            if (role == RoleConst.Users) request.UserId = GetUserId(User).ToString();
+            else if (String.IsNullOrEmpty(request.UserId)) return BadResponse("error_invalid_modelstate");
 
             UserDetailsTransferResponse userDetails;
             using (var account_helper = new AccountHelpers(Connection))
@@ -2594,6 +2607,7 @@ namespace Webet333.api.Controllers
                     SexyUsername = user.SexyGamePrefix + user.Username,
                     WMUsername = user.WMGamePrefix + user.UserId,
                     YEEBETUsername = user.YEEBETGamePrefix + user.UserId,
+                    SBOUsername = user.SBOGamePrefix + user.UserId,
 
                     FromWalletIsMaintenance = false,
                     FromWalletName = "Main Wallet",
@@ -2637,10 +2651,8 @@ namespace Webet333.api.Controllers
                     var DepositResponse = await transferMoney_helper.DepositInWallet(userDetails, userDetails.ToWalletName, request.Amount, request.UserId.ToString(), _hostingEnvironment);
                     if (string.IsNullOrEmpty(DepositResponse.ErrorMessage) && string.IsNullOrEmpty(DepositResponse.GameName) && string.IsNullOrEmpty(DepositResponse.GameResponse))
                     {
-                        if (Role == RoleConst.Users)
-                            await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, request.UserId.ToString(), StatusConsts.Approved, request.UserId.ToString());
-                        else
-                            await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, GetUserId(User).ToString(), StatusConsts.Approved, GetUserId(User).ToString());
+                        if (role == RoleConst.Users) await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, request.UserId.ToString(), StatusConsts.Approved, request.UserId.ToString());
+                        else await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, GetUserId(User).ToString(), StatusConsts.Approved, GetUserId(User).ToString());
 
                         await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["ok_response_success"].Value, FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse), ToWalletResponse = JsonConvert.SerializeObject(DepositResponse) });
                     }
