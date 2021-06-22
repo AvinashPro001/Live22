@@ -2,6 +2,7 @@
 //#endregion
 
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterService } from 'angular2-toaster';
 import { customer } from '../../../../environments/environment';
@@ -15,6 +16,8 @@ import { AdminService } from '../../admin.service';
 })
 
 export class SboSetLeagueBetLimitComponent implements OnInit {
+    //#region Variable & constructor
+
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('minBetTextBox') minBetTextBox: TemplateRef<any>;
     @ViewChild('maxBetTextBox') maxBetTextBox: TemplateRef<any>;
@@ -37,17 +40,30 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
     constructor(
         private commonService: CommonService,
         private adminService: AdminService,
-        private toasterService: ToasterService) { }
+        private toasterService: ToasterService,
+        private router: Router) { }
+
+    //#endregion Variable & constructor
+
+    //#region ngOnInit
 
     ngOnInit() {
         this.setDatePicker(new Date(), new Date());
         this.setColumn();
     }
 
+    //#endregion ngOnInit
+
+    //#region Set today date in date-picker
+
     setDatePicker(fromdate = null, todate = null) {
         this.datePickerfromdate = this.commonService.setDatePickerFormate(fromdate);
         this.datePickertodate = this.commonService.setDatePickerFormate(todate);
     }
+
+    //#endregion Set today date in date-picker
+
+    //#region Set column
 
     setColumn() {
         this.columns = [
@@ -66,6 +82,10 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
             { prop: 'GroupType', cellTemplate: this.groupTypeDropdown, sortable: true }
         ];
     }
+
+    //#endregion Set column
+
+    //#region Get league list
 
     getLeagueList() {
         this.loadingIndicator = true;
@@ -116,6 +136,10 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
+
+    //#endregion Get league list
+
+    //#region Set league for selected league
 
     setForChecked() {
         let temp = {
@@ -171,6 +195,8 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
         }
     }
 
+    //#endregion Set league for selected league
+
     //#region Set Group type on dropdown change
 
     onGroupTypeSelected(value: string) {
@@ -220,7 +246,87 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
 
     //#endregion Update League Bet Setting
 
+    //#region Refresh page
+
     refreshPage(): void {
         window.location.reload();
     }
+
+    //#endregion Refresh page
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[17].Permissions[0].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[17].submenu[0].Permissions[0].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[17].Permissions[1].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[17].submenu[0].Permissions[1].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[17].Permissions[2].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[17].submenu[0].Permissions[2].IsChecked === true) {
+                    return true;
+                }
+                else {
+                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+                    this.router.navigate(['admin/dashboard']);
+                    return false;
+                }
+            } else {
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }
