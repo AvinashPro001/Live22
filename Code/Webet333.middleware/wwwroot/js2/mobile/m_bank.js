@@ -1163,3 +1163,100 @@ async function CheckSupportGame() {
         document.getElementById("wmallin").disabled = !res.data[0].IsWM ? true : false;
     }
 }
+
+
+
+
+
+var HistorySectionName = "WithdrawDeposit";
+function SetHistorySectionName(name) {
+    HistorySectionName = name;
+    fromDate = null;
+    toDate = null;
+    pageNumber = 0;
+    GetTodayDate();
+}
+
+function APIDateFormate(date) {
+    return date.replace(/T/, " ").substring(0, 16);
+}
+
+Date.prototype.addDays = function (days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+}
+
+function GetDateFormate(Date1, Date2) {
+    var day1 = Date1.getDate();
+    var Month1 = Date1.getMonth() + 1;
+    var Year1 = Date1.getFullYear();
+    Month1 = Month1 < 10 ? "0" + Month1 : Month1;
+    day1 = day1 < 10 ? "0" + day1 : day1;
+
+
+    var day2 = Date2.getDate();
+    var Month2 = Date2.getMonth() + 1;
+    var Year2 = Date2.getFullYear();
+    Month2 = Month2 < 10 ? "0" + Month2 : Month2;
+    day2 = day2 < 10 ? "0" + day2 : day2;
+
+
+    fromDate = Year1 + "-" + Month1 + "-" + day1 + " 00:00:00";
+    toDate = Year2 + "-" + Month2 + "-" + day2 + " 23:59:59";
+}
+
+function GetTodayDate() {
+    pageNumber = 0;
+    var date = new Date();
+    GetDateFormate(date, date);
+    CallFunctionAccordingToTab();
+};
+
+function Get3DayDate() {
+    pageNumber = 0;
+    var fdate = new Date().addDays(-3);
+    var tdate = new Date();
+    GetDateFormate(fdate, tdate)
+    CallFunctionAccordingToTab();
+};
+
+function GetInWeekDate() {
+    pageNumber = 0;
+    var curr = new Date(); // get current date
+    var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+    var firstday = new Date(curr.setDate(first + 1))
+    var lastday = firstday.addDays(6)
+    GetDateFormate(firstday, lastday);
+    CallFunctionAccordingToTab();
+}
+
+function GetInMonthDate() {
+    pageNumber = 0;
+    var date = new Date();
+    var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    GetDateFormate(firstDay, lastDay);
+    CallFunctionAccordingToTab();
+}
+
+function GetDateRange() {
+    pageNumber = 0;
+    var fdate = $("#datepicker1").val().split("/");
+    var tdate = $("#datepicker2").val().split("/");
+    fromDate = fdate[2] + "-" + fdate[0] + "-" + fdate[1] + " 00:00:00";
+    toDate = tdate[2] + "-" + tdate[0] + "-" + tdate[1] + " 00:00:00";
+    CallFunctionAccordingToTab();
+}
+
+function CallFunctionAccordingToTab() {
+    if (GetLocalStorage('currentUser') !== null)
+        switch (HistorySectionName) {
+            case "Transfer": TransferHistory(); break;
+            case "BettingSummery": BettingHistory(); break;
+            case "WithdrawDeposit": WithdrawDepositHistory(); break;
+            case "Promotion": PromotionHistory(); break;
+            case "Rebate": RebateHistory(); break;
+            case "Reward": RewardHistory(); break;
+        }
+}

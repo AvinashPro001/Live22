@@ -3,7 +3,7 @@
     Layout = ""; }
 <div id="comContent"></div>
 <div id="mComContent">
-
+    <link href="~/css/bootstrap-datepicker.min.css" type="text/css" rel="stylesheet" />
     <script>
         document.body.classList.add("no-pad-top");
         $('body').css('padding-top', '0px');
@@ -22,18 +22,28 @@
                     <div class="col-xs-8">
                         <h4 class="black-text lang" key="history">HISTORY</h4>
                     </div>
+                    <div class="col-xs-2">
+                        <div class="back-btn" data-toggle="modal" data-target="#filter-model"><a><i class="fa fa-filter" aria-hidden="true"></i></a></div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="info-form history-tabs">
             <ul class="nav nav-tabs">
-                <li onclick="DepositHistory()" class="active"><a data-toggle="tab" href="#profileDeposit"><span key="deposit" class="lang"></span></a></li>
-                <li onclick="WithdrawHistory()"><a data-toggle="tab" href="#profilewithdrawal"><span key="withdrawal_title" class="lang"></span></a></li>
-                <li onclick="TransferHistory()"><a data-toggle="tab" href="#profileTransfer"><span key="transfer_title" class="lang"></span></a></li>
-                <li onclick="PromotionHistory()"><a data-toggle="tab" href="#promotion-apply"><span key="menu_promotion" class="lang"></span></a></li>
-                <li onclick="RebateHistory()"><a data-toggle="tab" href="#rebate"><span key="rebate" class="lang"></span></a></li>
-                <li onclick="StatementHistory()"><a data-toggle="tab" href="#statement"><span key="statement" class="lang"></span></a></li>
+                @*<li onclick="DepositHistory()" class="active"><a data-toggle="tab" href="#profileDeposit"><span key="deposit" class="lang"></span></a></li>
+        <li onclick="WithdrawHistory()"><a data-toggle="tab" href="#profilewithdrawal"><span key="withdrawal_title" class="lang"></span></a></li>
+        <li onclick="TransferHistory()"><a data-toggle="tab" href="#profileTransfer"><span key="transfer_title" class="lang"></span></a></li>
+        <li onclick="PromotionHistory()"><a data-toggle="tab" href="#promotion-apply"><span key="menu_promotion" class="lang"></span></a></li>
+        <li onclick="RebateHistory()"><a data-toggle="tab" href="#rebate"><span key="rebate" class="lang"></span></a></li>
+        <li onclick="StatementHistory()"><a data-toggle="tab" href="#statement"><span key="statement" class="lang"></span></a></li>*@
+
+                <li onclick="SetHistorySectionName('WithdrawDeposit')" class="active"><a data-toggle="tab" href="#profileDeposit"><span key="" class="lang"></span>Deposit</a></li>
+                <li onclick="SetHistorySectionName('BettingSummery')"><a data-toggle="tab" href="#profilewithdrawal"><span key="" class="lang">Betting Summery</span></a></li>
+                <li onclick="SetHistorySectionName('Transfer')"><a data-toggle="tab" href="#profileTransfer"><span key="transfer_title" class="lang"></span></a></li>
+                <li onclick="SetHistorySectionName('Promotion')"><a data-toggle="tab" href="#promotion-apply"><span key="menu_promotion" class="lang"></span></a></li>
+                <li onclick="SetHistorySectionName('Rebate')"><a data-toggle="tab" href="#rebate"><span key="rebate" class="lang"></span></a></li>
+                <li onclick="SetHistorySectionName('Reward')"><a data-toggle="tab" href="#statement"><span key="" class="lang">Reward</span></a></li>
             </ul>
         </div>
 
@@ -140,6 +150,42 @@
         <a id="mobileM8" style="display:none"></a>
     </div>
 
+    <div class="modal fade" id="filter-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Filter</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div>
+                            <select class="form-control">
+                                <option>Today</option>
+                                <option>In 3 Days</option>
+                                <option>In a Week</option>
+                                <option>In a Month</option>
+                            </select>
+                        </div>
+                        <p>Start Date</p>
+                        <div class="input-append">
+                            <input id="datepicker1" class="input-small form-control" type="text" placeholder="03/24/2021" />
+                            <button id="datepicker1btn" class="btn icondate" type="button"><i class="fa fa-calendar"></i></button>
+                        </div>
+                        <p>To Date</p>
+                        <div class="input-append">
+                            <input id="datepicker2" class="input-small form-control" type="text" placeholder="03/31/2021" />
+                            <button id="datepicker1btn2" class="btn icondate" type="button"><i class="fa fa-calendar"></i></button>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script type="text/javascript">
@@ -156,7 +202,7 @@
 <!--Begin Comm100 Live Chat Code-->
 <div></div>
 <script type="text/javascript">
-    var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 0) })(Comm100API || {})
+    var OnlineHelpAPI = OnlineHelpAPI || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: "a9010000-0000-0000-0000-008e000391c3", div_id: "onlinehelp-button-a9010000-0000-0000-0000-008e000391c3" }), t.site_id = 233923, t.main_code_plan = "a9010000-0000-0000-0000-008e000391c3", e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 5e3) })(OnlineHelpAPI || {})
 </script>
 <!--End Comm100 Live Chat Code-->
 <!-- Slider Section End -->
@@ -236,7 +282,7 @@
     async function DepositScroll() {
 
         if ((NumberOfLine % 5) == 0) {
-            
+
             NumberOfLine = NumberOfLine + 1;
             if (!apiRunning) {
                 pageNumber = pageNumber + 1;
@@ -248,4 +294,39 @@
         }
     }
 
+</script>
+
+
+<script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#datepicker0").datepicker();
+
+        $("#datepicker1").datepicker();
+        $("#datepicker1btn").click(function (event) {
+            event.preventDefault();
+            $("#datepicker1").focus();
+        });
+
+        $("#datepicker1btn2").click(function (event) {
+            event.preventDefault();
+            $("#datepicker2").focus();
+        })
+
+        $("#datepicker2").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+
+        $("#datepicker3").datepicker({
+            numberOfMonths: 3,
+            showButtonPanel: true
+        });
+
+        $("#datepicker4").datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+    });
 </script>

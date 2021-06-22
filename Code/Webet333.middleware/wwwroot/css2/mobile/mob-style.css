@@ -1880,3 +1880,24 @@ input, select {
 #faqs p {
     color: #F58723
 }
+
+#filter-model .input-append{
+    display:flex;
+}
+
+#filter-model p {
+    font-weight: 700;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#filter-model .text-center button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#filter-model .input-append button {
+    color: black;
+    background-color: #feb801;
+}
+
+

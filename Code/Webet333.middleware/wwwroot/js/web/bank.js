@@ -130,7 +130,6 @@ function SetAdminBankPage() {
 
 function SetDepositPageBank() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
-
     if (data != null) {
         if (data.AdminBankPageData !== null && data.AdminBankPageData !== undefined) {
             bankdata = data.AdminBankPageData.bankDetails;
@@ -145,6 +144,16 @@ function SetDepositPageBank() {
             }
             SetAllValueInElement("Depsoit_bank_list", html);
         }
+        else {
+            setTimeout(function () {
+                SetDepositPageBank();
+            },5000)
+        }
+    }
+    else {
+        setTimeout(function () {
+            SetDepositPageBank();
+        }, 5000)
     }
 }
 
@@ -577,7 +586,6 @@ function SetHistorySectionName(name) {
     toDate = null;
     pageNumber = 0;
     GetTodayDate();
-    CallFunctionAccordingToTab();
 }
 
 function APIDateFormate(date) {
@@ -677,12 +685,14 @@ function GetDateFormate(Date1, Date2) {
 }
 
 function GetTodayDate() {
+    pageNumber = 0;
     var date = new Date();
     GetDateFormate(date, date);
     CallFunctionAccordingToTab();
 };
 
 function Get3DayDate() {
+    pageNumber = 0;
     var fdate = new Date().addDays(-3);
     var tdate = new Date();
     GetDateFormate(fdate, tdate)
@@ -690,6 +700,7 @@ function Get3DayDate() {
 };
 
 function GetInWeekDate() {
+    pageNumber = 0;
     var curr = new Date(); // get current date
     var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
     var firstday = new Date(curr.setDate(first + 1))
@@ -699,6 +710,7 @@ function GetInWeekDate() {
 }
 
 function GetInMonthDate() {
+    pageNumber = 0;
     var date = new Date();
     var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
     var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
@@ -707,6 +719,7 @@ function GetInMonthDate() {
 }
 
 function GetDateRange() {
+    pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");
     fromDate = fdate[2] + "-" + fdate[0] + "-" + fdate[1] + " 00:00:00";
@@ -753,6 +766,10 @@ async function TransferHistory(FromDate = null, ToDate = null, PageSize = null, 
             }
 
         }
+        else {
+            var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
+            $("#tbl_transferHistory").find('tbody').html(html);
+        }
     }
 }
 
@@ -781,6 +798,10 @@ async function WithdrawDepositHistory(FromDate = null, ToDate = null, PageSize =
                 $("#tbl_withdrawdepositHistory_pagination").html("");
             }
 
+        }
+        else {
+            var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
+            $("#tbl_withdrawdepositHistory").find('tbody').html(html);
         }
     }
 }
@@ -812,6 +833,10 @@ async function PromotionHistory(FromDate = null, ToDate = null, PageSize = null,
             }
 
         }
+        else {
+            var html = '<tr><td colspan="8">No Transaction yet</td></tr>'
+            $("#tbl_promotionHistory").find('tbody').html(html);
+        }
     }
 }
 
@@ -842,6 +867,10 @@ async function RebateHistory(FromDate = null, ToDate = null, PageSize = null, Pa
             }
 
         }
+        else {
+            var html = '<tr><td colspan="7">No Transaction yet</td></tr>'
+            $("#tbl_RebateHistory").find('tbody').html(html);
+        }
     }
 }
 
@@ -870,6 +899,10 @@ async function RewardHistory(FromDate = null, ToDate = null, PageSize = null, Pa
                 $("#tbl_rewardHistory_pagination").html("");
             }
 
+        }
+        else {
+            var html = '<tr><td colspan="4">No Transaction yet</td></tr>'
+            $("#tbl_rewardHistory").find('tbody').html(html);
         }
     }
 }
@@ -900,6 +933,10 @@ async function BettingHistory(FromDate = null, ToDate = null, PageSize = null, P
                 $("#tbl_bettingsummeryHistory_pagination").html("");
             }
 
+        }
+        else {
+            var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
+            $("#tbl_bettingsummeryHistory").find('tbody').html(html);
         }
     }
 }
@@ -984,7 +1021,6 @@ async function loadImage() {
     selDiv.innerHTML = "";
     for (var j = 0; j < files.length; j++) {
         var base = await readUploadedFileAsDataURL(files[j]);
-        debugger
         TableData[j] = {
             base64images: base
         };
