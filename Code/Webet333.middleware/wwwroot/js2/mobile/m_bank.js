@@ -1169,7 +1169,7 @@ async function CheckSupportGame() {
 
 
 var HistorySectionName = "WithdrawDeposit";
-var fromDate = null, toDate = null, pageSize = 8; pageNumber = 0;
+var fromDate = null, toDate = null, pageSize = 10; pageNumber = 0;
 function SetHistorySectionName(name) {
     HistorySectionName = name;
     fromDate = null;
@@ -1306,8 +1306,8 @@ async function WithdrawDepositHistory(FromDate = null, ToDate = null, PageSize =
     let model = {
         pageNo: PageNumber == null ? pageNumber : PageNumber,
         pageSize: PageSize == null ? pageSize : PageSize,
-        fromDate: FromDate == null ? fromDate : FromDate,
-        toDate: ToDate == null ? toDate : ToDate
+        //fromDate: FromDate == null ? fromDate : FromDate,
+        //toDate: ToDate == null ? toDate : ToDate
     }
     var res = await PostMethod(apiEndPoints.withdrawDepositHistroy, model);
     if (res.data.result.length > 0) {
