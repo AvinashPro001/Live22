@@ -226,6 +226,8 @@
             public const string Pragmatic = "PRAGMATIC";
 
             public const string YeeBet = "YeeBet";
+
+            public const string SBO = "SBO";
         }
 
         public class Mega888
