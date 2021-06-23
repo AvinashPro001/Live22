@@ -9,7 +9,7 @@
         $('body').css('padding-top', '0px');
         if (GetLocalStorage('currentUser') === null)
             loadPageHome();
-        DepositHistory();
+        //DepositHistory();
     </script>
     <div id="History" class="white-bg history-page">
 
@@ -38,11 +38,11 @@
         <li onclick="RebateHistory()"><a data-toggle="tab" href="#rebate"><span key="rebate" class="lang"></span></a></li>
         <li onclick="StatementHistory()"><a data-toggle="tab" href="#statement"><span key="statement" class="lang"></span></a></li>*@
 
-                <li onclick="SetHistorySectionName('WithdrawDeposit')" class="active"><a data-toggle="tab" href="#profileDeposit"><span key="" class="lang"></span>Deposit</a></li>
+                <li onclick="SetHistorySectionName('WithdrawDeposit')" class="active"><a data-toggle="tab" href="#depositwithdraw"><span key="" class="lang"></span>Deposit / Withdraw</a></li>
                 <li onclick="SetHistorySectionName('BettingSummery')"><a data-toggle="tab" href="#profilewithdrawal"><span key="" class="lang">Betting Summery</span></a></li>
-                <li onclick="SetHistorySectionName('Transfer')"><a data-toggle="tab" href="#profileTransfer"><span key="transfer_title" class="lang"></span></a></li>
-                <li onclick="SetHistorySectionName('Promotion')"><a data-toggle="tab" href="#promotion-apply"><span key="menu_promotion" class="lang"></span></a></li>
-                <li onclick="SetHistorySectionName('Rebate')"><a data-toggle="tab" href="#rebate"><span key="rebate" class="lang"></span></a></li>
+                <li onclick="SetHistorySectionName('Transfer')"><a data-toggle="tab" href="#profileTransfer"><span key="transfer_title" class="lang">Transfer</span></a></li>
+                <li onclick="SetHistorySectionName('Promotion')"><a data-toggle="tab" href="#promotion-apply"><span key="menu_promotion" class="lang">Promotion</span></a></li>
+                <li onclick="SetHistorySectionName('Rebate')"><a data-toggle="tab" href="#rebate"><span key="rebate" class="lang">Rebate</span></a></li>
                 <li onclick="SetHistorySectionName('Reward')"><a data-toggle="tab" href="#statement"><span key="" class="lang">Reward</span></a></li>
             </ul>
         </div>
@@ -64,11 +64,11 @@
                     </div>
                 </div>
 
-                <div id="profileDeposit" class="tab-pane fade in active">
+                <div id="depositwithdraw" class="tab-pane fade in active">
                     <div style="text-align:center;">
                         <img src="~/images/loading.gif" id="depositRefreshImage" style="display:none" />
                     </div>
-                    <div class="container full-height listing extra-bottom-padding" id="depositHistory" onscroll="DepositScroll(event)">
+                    <div class="container full-height listing extra-bottom-padding" id="depositHistory" >
 
                     </div>
                 </div>
@@ -160,25 +160,25 @@
                 <div class="modal-body">
                     <div>
                         <div>
-                            <select class="form-control">
-                                <option>Today</option>
-                                <option>In 3 Days</option>
-                                <option>In a Week</option>
-                                <option>In a Month</option>
+                            <select class="form-control" onchange="OnDateFilterChange()" id="dateFilter">
+                                <option value="Today">Today</option>
+                                <option value="In3Days">In 3 Days</option>
+                                <option value="InAWeek">In a Week</option>
+                                <option value="InAMonth">In a Month</option>
                             </select>
                         </div>
                         <p>Start Date</p>
                         <div class="input-append">
-                            <input id="datepicker1" class="input-small form-control" type="text" placeholder="03/24/2021" />
+                            <input id="datepicker1" class="input-small form-control" type="text" placeholder="01/01/1997" />
                             <button id="datepicker1btn" class="btn icondate" type="button"><i class="fa fa-calendar"></i></button>
                         </div>
                         <p>To Date</p>
                         <div class="input-append">
-                            <input id="datepicker2" class="input-small form-control" type="text" placeholder="03/31/2021" />
+                            <input id="datepicker2" class="input-small form-control" type="text" placeholder="01/01/1997" />
                             <button id="datepicker1btn2" class="btn icondate" type="button"><i class="fa fa-calendar"></i></button>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-primary">Search</button>
+                            <button class="btn btn-primary" onclick="GetDateRange()">Search</button>
                         </div>
                     </div>
                 </div>
@@ -286,7 +286,7 @@
             NumberOfLine = NumberOfLine + 1;
             if (!apiRunning) {
                 pageNumber = pageNumber + 1;
-                await DepositHistory(pageNumber)
+                //await DepositHistory(pageNumber)
             }
         }
         else {
@@ -301,9 +301,8 @@
 <script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#datepicker0").datepicker();
-
-        $("#datepicker1").datepicker();
+        Get30DayDate();
+        $("#datepicker1").datepicker({ dateFormat: "dd/mm/yy"});
         $("#datepicker1btn").click(function (event) {
             event.preventDefault();
             $("#datepicker1").focus();
@@ -316,17 +315,8 @@
 
         $("#datepicker2").datepicker({
             showOtherMonths: true,
-            selectOtherMonths: true
-        });
-
-        $("#datepicker3").datepicker({
-            numberOfMonths: 3,
-            showButtonPanel: true
-        });
-
-        $("#datepicker4").datepicker({
-            changeMonth: true,
-            changeYear: true
+            selectOtherMonths: true,
+            dateFormat: "dd/mm/yy",
         });
     });
 </script>

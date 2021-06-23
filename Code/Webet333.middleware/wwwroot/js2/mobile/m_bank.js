@@ -843,195 +843,195 @@ function generateGuid() {
 }
 //#endregion
 
-var pageSize = 10;
-var pageNumber = 0;
-var NumberOfLine = 1
+//var pageSize = 10;
+//var pageNumber = 0;
+//var NumberOfLine = 1
 
-var apiRunning = false;
-//#region DepositHistory
-async function DepositHistory(pageNo = 0) {
-    apiRunning = true;
-    var model = {
-        pageNo: pageNo,
-        pageSize: 10
-    };
-    var res = await PostMethod(apiEndPoints.depositHistory, model);
-    var result = res.data.result;
-    var depositHistory = document.getElementById("depositHistory");
-    if (pageNo == 1) {
-        pageNumber = 1;
-        depositHistory.innerHTML = "";
-    }
-    if (result.length > 0) {
-        for (i = 0; i < result.length; i++) {
-            if (result[i].verified === "approved")
-                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
+//var apiRunning = false;
+////#region DepositHistory
+//async function DepositHistory(pageNo = 0) {
+//    apiRunning = true;
+//    var model = {
+//        pageNo: pageNo,
+//        pageSize: 10
+//    };
+//    var res = await PostMethod(apiEndPoints.depositHistory, model);
+//    var result = res.data.result;
+//    var depositHistory = document.getElementById("depositHistory");
+//    if (pageNo == 1) {
+//        pageNumber = 1;
+//        depositHistory.innerHTML = "";
+//    }
+//    if (result.length > 0) {
+//        for (i = 0; i < result.length; i++) {
+//            if (result[i].verified === "approved")
+//                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
 
-            if (result[i].verified === "rejected")
-                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn reject-btn">' + result[i].verified + '</div></div></div>'
+//            if (result[i].verified === "rejected")
+//                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn reject-btn">' + result[i].verified + '</div></div></div>'
 
-            if (result[i].verified === "pending")
-                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn pending-btn">' + result[i].verified + '</div></div></div>'
-        }
-    }
-    else {
-        if (res.data.total == 0)
-            if ($("#depositHistory").length == 0)
-                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
-    }
-    getLanguage(false);
-    apiRunning = false;
-}
-//#endregion
+//            if (result[i].verified === "pending")
+//                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn pending-btn">' + result[i].verified + '</div></div></div>'
+//        }
+//    }
+//    else {
+//        if (res.data.total == 0)
+//            if ($("#depositHistory").length == 0)
+//                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
+//    }
+//    getLanguage(false);
+//    apiRunning = false;
+//}
+////#endregion
 
-//#region WithdrawHistory
-async function WithdrawHistory() {
-    var model = {};
-    var res = await PostMethod(apiEndPoints.withdrawHistory, model);
-    var result = res.data;
-    var withdrawHistory = document.getElementById("withdrawHistory");
-    withdrawHistory.innerHTML = "";
+////#region WithdrawHistory
+//async function WithdrawHistory() {
+//    var model = {};
+//    var res = await PostMethod(apiEndPoints.withdrawHistory, model);
+//    var result = res.data;
+//    var withdrawHistory = document.getElementById("withdrawHistory");
+//    withdrawHistory.innerHTML = "";
 
-    if (result.length > 0) {
-        for (i = 0; i < result.length; i++) {
-            if (result[i].verified === "approved")
-                withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '-' + parseFloat(result[i].withdrawalAmount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
+//    if (result.length > 0) {
+//        for (i = 0; i < result.length; i++) {
+//            if (result[i].verified === "approved")
+//                withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '-' + parseFloat(result[i].withdrawalAmount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
 
-            if (result[i].verified === "rejected")
-                withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].withdrawalAmount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn reject-btn">' + result[i].verified + '</div></div></div>'
+//            if (result[i].verified === "rejected")
+//                withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].withdrawalAmount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn reject-btn">' + result[i].verified + '</div></div></div>'
 
-            if (result[i].verified === "pending")
-                withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '-' + parseFloat(result[i].withdrawalAmount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn pending-btn">' + result[i].verified + '</div></div></div>'
-        }
-    }
-    else {
-        withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_withdraw"></span></p></div></div>'
-    }
-    getLanguage(false);
-}
-//#endregion
+//            if (result[i].verified === "pending")
+//                withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '-' + parseFloat(result[i].withdrawalAmount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn pending-btn">' + result[i].verified + '</div></div></div>'
+//        }
+//    }
+//    else {
+//        withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_withdraw"></span></p></div></div>'
+//    }
+//    getLanguage(false);
+//}
+////#endregion
 
-//#region TransferHistory
-async function TransferHistory() {
-    var model = {};
-    var res = await PostMethod(apiEndPoints.transferHistory, model);
-    var result = res.data.result;
-    var transferHistory = document.getElementById("transferHistory");
-    transferHistory.innerHTML = "";
-    if (result.length > 0) {
-        for (i = 0; i < result.length; i++) {
-            if (result[i].verified === "approved")
-                transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].fromWallet + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].toWallet + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
+////#region TransferHistory
+//async function TransferHistory() {
+//    var model = {};
+//    var res = await PostMethod(apiEndPoints.transferHistory, model);
+//    var result = res.data.result;
+//    var transferHistory = document.getElementById("transferHistory");
+//    transferHistory.innerHTML = "";
+//    if (result.length > 0) {
+//        for (i = 0; i < result.length; i++) {
+//            if (result[i].verified === "approved")
+//                transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].fromWallet + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].toWallet + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
 
-            if (result[i].verified === "rejected")
-                transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].fromWallet + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].toWallet + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn reject-btn">' + result[i].verified + '</div></div></div>'
+//            if (result[i].verified === "rejected")
+//                transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].fromWallet + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].toWallet + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn reject-btn">' + result[i].verified + '</div></div></div>'
 
-            if (result[i].verified === "pending")
-                transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].fromWallet + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].toWallet + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn pending-btn">' + result[i].verified + '</div></div></div>'
-        }
-    }
-    else {
-        transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_transfer"></span></p></div></div>'
-    }
-    getLanguage(false);
-}
-//#endregion
+//            if (result[i].verified === "pending")
+//                transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].fromWallet + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].toWallet + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn pending-btn">' + result[i].verified + '</div></div></div>'
+//        }
+//    }
+//    else {
+//        transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_transfer"></span></p></div></div>'
+//    }
+//    getLanguage(false);
+//}
+////#endregion
 
-//#region PromotionHistory
-async function PromotionHistory() {
-    var model = {};
-    var res = await PostMethodWithParameter(apiEndPoints.promotionHistory, model);
-    var result = res.data;
-    var promotionHistory = document.getElementById("promotionHistory");
-    promotionHistory.innerHTML = "";
-    if (result.length > 0) {
-        for (i = 0; i < result.length; i++) {
-            //if (result[i].Staus === "Completed")
-            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div > <div class="success-btn text-success">' + result[i].Staus + '</div></div ></div > '
+////#region PromotionHistory
+//async function PromotionHistory() {
+//    var model = {};
+//    var res = await PostMethodWithParameter(apiEndPoints.promotionHistory, model);
+//    var result = res.data;
+//    var promotionHistory = document.getElementById("promotionHistory");
+//    promotionHistory.innerHTML = "";
+//    if (result.length > 0) {
+//        for (i = 0; i < result.length; i++) {
+//            //if (result[i].Staus === "Completed")
+//            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div > <div class="success-btn text-success">' + result[i].Staus + '</div></div ></div > '
 
-            //if (result[i].Staus === "Expired")
-            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div><div class="success-btn reject-btn">' + result[i].Staus + '</div></div ></div > '
+//            //if (result[i].Staus === "Expired")
+//            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div><div class="success-btn reject-btn">' + result[i].Staus + '</div></div ></div > '
 
-            //if (result[i].Staus === "Manually Expired")
-            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div><div class="success-btn reject-btn">' + result[i].Staus + '</div></div ></div > '
+//            //if (result[i].Staus === "Manually Expired")
+//            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div><div class="success-btn reject-btn">' + result[i].Staus + '</div></div ></div > '
 
-            //if (result[i].Staus === "Active")
-            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div><div class="success-btn pending-btn">' + result[i].Staus + '</div></div ></div > '
-            //if (result[i].Staus === "Pending")
-            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div><div class="success-btn pending-btn" style="color:Blue;">' + result[i].Staus + '</div></div ></div > '
+//            //if (result[i].Staus === "Active")
+//            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div><div class="success-btn pending-btn">' + result[i].Staus + '</div></div ></div > '
+//            //if (result[i].Staus === "Pending")
+//            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div><div class="success-btn pending-btn" style="color:Blue;">' + result[i].Staus + '</div></div ></div > '
 
-            if (result[i].Staus === "Completed")
-                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div> <div class="success-btn text-success">' + result[i].Staus + '</div></div ></div > '
+//            if (result[i].Staus === "Completed")
+//                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div> <div class="success-btn text-success">' + result[i].Staus + '</div></div ></div > '
 
-            if (result[i].Staus === "Expired")
-                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="success-btn reject-btn">' + result[i].Staus + '</div></div ></div > '
+//            if (result[i].Staus === "Expired")
+//                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="success-btn reject-btn">' + result[i].Staus + '</div></div ></div > '
 
-            if (result[i].Staus === "Manually Expired")
-                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="success-btn reject-btn">' + result[i].Staus + '</div></div ></div > '
+//            if (result[i].Staus === "Manually Expired")
+//                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="success-btn reject-btn">' + result[i].Staus + '</div></div ></div > '
 
-            if (result[i].Staus === "Active")
-                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="success-btn pending-btn">' + result[i].Staus + '</div></div ></div > '
-            if (result[i].Staus === "Pending")
-                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="success-btn pending-btn" style="color:Blue;">' + result[i].Staus + '</div></div ></div > '
-        }
-    }
-    else {
-        promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_promotion"></span></p></div></div>'
-    }
-    getLanguage(false);
-}
-//#endregion
+//            if (result[i].Staus === "Active")
+//                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="success-btn pending-btn">' + result[i].Staus + '</div></div ></div > '
+//            if (result[i].Staus === "Pending")
+//                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="success-btn pending-btn" style="color:Blue;">' + result[i].Staus + '</div></div ></div > '
+//        }
+//    }
+//    else {
+//        promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_promotion"></span></p></div></div>'
+//    }
+//    getLanguage(false);
+//}
+////#endregion
 
-//#region StatementHistory
-async function StatementHistory() {
-    var model = {};
-    var res = await PostMethodWithParameter(apiEndPoints.transactionHistory, model);
-    var result = res.data;
-    var statementHistory = document.getElementById("statementHistory");
-    statementHistory.innerHTML = "";
-    if (result.length > 0) {
-        for (i = 0; i < result.length; i++) {
-            statementHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].debitFrom + '</p><div class="game-time">' + result[i].transactionNo + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].creditTo + '</p><div class="bank-name-amount">' + result[i].amount + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].transactionType + '</div><div class="text-primary">' + parseFloat(result[i].currentBalance).toFixed(2) + '</div></div></div>'
-        }
-    }
-    else {
-        statementHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_statement"></span></p></div></div>'
-    }
-    getLanguage(false);
-}
-//#endregion
+////#region StatementHistory
+//async function StatementHistory() {
+//    var model = {};
+//    var res = await PostMethodWithParameter(apiEndPoints.transactionHistory, model);
+//    var result = res.data;
+//    var statementHistory = document.getElementById("statementHistory");
+//    statementHistory.innerHTML = "";
+//    if (result.length > 0) {
+//        for (i = 0; i < result.length; i++) {
+//            statementHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].debitFrom + '</p><div class="game-time">' + result[i].transactionNo + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].creditTo + '</p><div class="bank-name-amount">' + result[i].amount + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].transactionType + '</div><div class="text-primary">' + parseFloat(result[i].currentBalance).toFixed(2) + '</div></div></div>'
+//        }
+//    }
+//    else {
+//        statementHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_statement"></span></p></div></div>'
+//    }
+//    getLanguage(false);
+//}
+////#endregion
 
-//#region RebateHistory
-async function RebateHistory() {
-    var model = {};
-    var res = await PostMethodWithParameter(apiEndPoints.rebateHistory, model);
-    var resultRebateLoseRebate = res.data.winloseRebate;
-    var resultRebateTurnOverCommissionRebate = res.data.trunoverRebate;
-    var rebateLoseRebate = document.getElementById("loseRebate");
-    var rebateTurnOverCommissionRebate = document.getElementById("turnOverCommissionRebate");
-    rebateLoseRebate.innerHTML = "";
-    rebateTurnOverCommissionRebate.innerHTML = "";
+////#region RebateHistory
+//async function RebateHistory() {
+//    var model = {};
+//    var res = await PostMethodWithParameter(apiEndPoints.rebateHistory, model);
+//    var resultRebateLoseRebate = res.data.winloseRebate;
+//    var resultRebateTurnOverCommissionRebate = res.data.trunoverRebate;
+//    var rebateLoseRebate = document.getElementById("loseRebate");
+//    var rebateTurnOverCommissionRebate = document.getElementById("turnOverCommissionRebate");
+//    rebateLoseRebate.innerHTML = "";
+//    rebateTurnOverCommissionRebate.innerHTML = "";
 
-    if (resultRebateLoseRebate.length > 0) {
-        for (i = 0; i < resultRebateLoseRebate.length; i++) {
-            rebateLoseRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + resultRebateLoseRebate[i].gameName + '</p><div class="game-time">' + parseFloat(resultRebateLoseRebate[i].turnover).toFixed(2) + '</div><div class="game-date">' + (resultRebateLoseRebate[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + parseFloat(resultRebateLoseRebate[i].rolling).toFixed(2) + '</p><div class="bank-name-amount">' + parseFloat(resultRebateLoseRebate[i].bet).toFixed(2); + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + parseFloat(resultRebateLoseRebate[i].winLose).toFixed(2) + '</div><div class="text-primary">' + parseFloat(resultRebateLoseRebate[i].commAmount).toFixed(2); + '</div></div></div>'
-        }
-    }
-    else {
-        rebateLoseRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_rebate"></span></p></div></div>'
-    }
+//    if (resultRebateLoseRebate.length > 0) {
+//        for (i = 0; i < resultRebateLoseRebate.length; i++) {
+//            rebateLoseRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + resultRebateLoseRebate[i].gameName + '</p><div class="game-time">' + parseFloat(resultRebateLoseRebate[i].turnover).toFixed(2) + '</div><div class="game-date">' + (resultRebateLoseRebate[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + parseFloat(resultRebateLoseRebate[i].rolling).toFixed(2) + '</p><div class="bank-name-amount">' + parseFloat(resultRebateLoseRebate[i].bet).toFixed(2); + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + parseFloat(resultRebateLoseRebate[i].winLose).toFixed(2) + '</div><div class="text-primary">' + parseFloat(resultRebateLoseRebate[i].commAmount).toFixed(2); + '</div></div></div>'
+//        }
+//    }
+//    else {
+//        rebateLoseRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_rebate"></span></p></div></div>'
+//    }
 
-    if (resultRebateTurnOverCommissionRebate.length > 0) {
-        for (i = 0; i < resultRebateTurnOverCommissionRebate.length; i++) {
-            rebateTurnOverCommissionRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + resultRebateTurnOverCommissionRebate[i].gameName + '</p><div class="game-time">' + parseFloat(resultRebateTurnOverCommissionRebate[i].turnover).toFixed(2) + '</div><div class="game-date">' + (resultRebateTurnOverCommissionRebate[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + parseFloat(resultRebateTurnOverCommissionRebate[i].rolling).toFixed(2) + '</p><div class="bank-name-amount">' + parseFloat(resultRebateTurnOverCommissionRebate[i].bet).toFixed(2); + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + parseFloat(resultRebateTurnOverCommissionRebate[i].winLose).toFixed(2) + '</div><div class="text-primary">' + parseFloat(resultRebateTurnOverCommissionRebate[i].commAmount).toFixed(2); + '</div></div></div>'
-        }
-    }
-    else {
-        rebateTurnOverCommissionRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_rebate"></span></p></div></div>'
-    }
+//    if (resultRebateTurnOverCommissionRebate.length > 0) {
+//        for (i = 0; i < resultRebateTurnOverCommissionRebate.length; i++) {
+//            rebateTurnOverCommissionRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + resultRebateTurnOverCommissionRebate[i].gameName + '</p><div class="game-time">' + parseFloat(resultRebateTurnOverCommissionRebate[i].turnover).toFixed(2) + '</div><div class="game-date">' + (resultRebateTurnOverCommissionRebate[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + parseFloat(resultRebateTurnOverCommissionRebate[i].rolling).toFixed(2) + '</p><div class="bank-name-amount">' + parseFloat(resultRebateTurnOverCommissionRebate[i].bet).toFixed(2); + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + parseFloat(resultRebateTurnOverCommissionRebate[i].winLose).toFixed(2) + '</div><div class="text-primary">' + parseFloat(resultRebateTurnOverCommissionRebate[i].commAmount).toFixed(2); + '</div></div></div>'
+//        }
+//    }
+//    else {
+//        rebateTurnOverCommissionRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_rebate"></span></p></div></div>'
+//    }
 
-    getLanguage(false);
-}
+//    getLanguage(false);
+//}
 //#endregion
 
 var userbalance;
@@ -1169,6 +1169,7 @@ async function CheckSupportGame() {
 
 
 var HistorySectionName = "WithdrawDeposit";
+var fromDate = null, toDate = null, pageSize = 8; pageNumber = 0;
 function SetHistorySectionName(name) {
     HistorySectionName = name;
     fromDate = null;
@@ -1201,6 +1202,8 @@ function GetDateFormate(Date1, Date2) {
     Month2 = Month2 < 10 ? "0" + Month2 : Month2;
     day2 = day2 < 10 ? "0" + day2 : day2;
 
+    $("#datepicker1").val(day1 + "/" + Month1 + "/" + Year1)
+    $("#datepicker2").val(day2 + "/" + Month2 + "/" + Year2)
 
     fromDate = Year1 + "-" + Month1 + "-" + day1 + " 00:00:00";
     toDate = Year2 + "-" + Month2 + "-" + day2 + " 23:59:59";
@@ -1210,15 +1213,13 @@ function GetTodayDate() {
     pageNumber = 0;
     var date = new Date();
     GetDateFormate(date, date);
-    CallFunctionAccordingToTab();
 };
 
 function Get3DayDate() {
     pageNumber = 0;
-    var fdate = new Date().addDays(-3);
+    var fdate = new Date().addDays(-2);
     var tdate = new Date();
     GetDateFormate(fdate, tdate)
-    CallFunctionAccordingToTab();
 };
 
 function GetInWeekDate() {
@@ -1226,28 +1227,34 @@ function GetInWeekDate() {
     var curr = new Date(); // get current date
     var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
     var firstday = new Date(curr.setDate(first + 1))
-    var lastday = firstday.addDays(6)
+    var lastday = new Date();
     GetDateFormate(firstday, lastday);
-    CallFunctionAccordingToTab();
 }
 
 function GetInMonthDate() {
     pageNumber = 0;
     var date = new Date();
     var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    var lastDay = new Date();
     GetDateFormate(firstDay, lastDay);
-    CallFunctionAccordingToTab();
 }
 
 function GetDateRange() {
     pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");
-    fromDate = fdate[2] + "-" + fdate[0] + "-" + fdate[1] + " 00:00:00";
-    toDate = tdate[2] + "-" + tdate[0] + "-" + tdate[1] + " 00:00:00";
-    CallFunctionAccordingToTab();
+    fromDate = fdate[2] + "-" + fdate[1] + "-" + fdate[0] + " 00:00:00";
+    toDate = tdate[2] + "-" + tdate[1] + "-" + tdate[0] + " 00:00:00";
+    CallFunctionAccordingToTab()
 }
+
+function Get30DayDate() {
+    pageNumber = 0;
+    var fdate = new Date().addDays(-31);
+    var tdate = new Date();
+    GetDateFormate(fdate, tdate)
+    CallFunctionAccordingToTab()
+};
 
 function CallFunctionAccordingToTab() {
     if (GetLocalStorage('currentUser') !== null)
@@ -1259,4 +1266,201 @@ function CallFunctionAccordingToTab() {
             case "Rebate": RebateHistory(); break;
             case "Reward": RewardHistory(); break;
         }
+}
+
+function OnDateFilterChange() {
+    var option = document.getElementById("dateFilter").value;
+    switch (option) {
+        case "Today": GetTodayDate(); break;
+        case "In3Days": Get3DayDate(); break;
+        case "InAWeek": GetInWeekDate(); break;
+        case "InAMonth": GetInMonthDate(); break;
+    }
+}
+
+async function TransferHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    let model = {
+        pageNo: PageNumber == null ? pageNumber : PageNumber,
+        pageSize: PageSize == null ? pageSize : PageSize,
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
+    }
+    var res = await PostMethod(apiEndPoints.transferHistory, model);
+    debugger
+    if (res.data.result.length > 0) {
+        var data = res.data.result;
+        $("#tbl_transferHistory").find("tr:gt(0)").remove();
+        var html = ""
+        for (i = 0; i < data.length; i++) {
+            html += '<tr><td>' + APIDateFormate(data[i].created) + '</td ><td><span class="blue_color_text">' + parseFloat(data[i].amount).toFixed(2) + '</span></td><td>' + data[i].fromWallet + '</td><td>' + data[i].toWallet + '</td><td><span class="' + data[i].verified + '_color">' + data[i].verified + '</span></td></tr>';
+        }
+        $("#tbl_transferHistory").find('tbody').html(html);
+    }
+    else {
+        var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
+        $("#tbl_transferHistory").find('tbody').html(html);
+    }
+}
+
+async function WithdrawDepositHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    let model = {
+        pageNo: PageNumber == null ? pageNumber : PageNumber,
+        pageSize: PageSize == null ? pageSize : PageSize,
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
+    }
+    var res = await PostMethod(apiEndPoints.withdrawDepositHistroy, model);
+    if (res.data.result.length > 0) {
+        var data = res.data.result;
+        console.log(data);
+        var html = ""
+        for (i = 0; i < data.length; i++) {
+            //html += '<tr><td>' + APIDateFormate(data[i].Created) + '</td ><td><span class="blue_color_text">' + parseFloat(data[i].Amount).toFixed(2) + '</span></td><td>' + data[i].Method + '</td><td><span class="' + data[i].Status + '_color">' + data[i].Status + '</span></td><td>' + data[i].Type + '</td></tr>';
+
+            html += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + data[i].Type + '</p><div class="game-date">' + APIDateFormate(data[i].Created) + '</div></div></div><div class="col-xs-4 display-flex"><div class="bank-name-amount">' + '+' + parseFloat(data[i].Amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + data[i].Status + '</div></div></div>'
+
+
+        }
+
+        $("#depositHistory").html(html);
+    }
+    else {
+        var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
+        $("#tbl_withdrawdepositHistory").find('tbody').html(html);
+    }
+}
+
+async function PromotionHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    let model = {
+        pageNo: PageNumber == null ? pageNumber : PageNumber,
+        pageSize: PageSize == null ? pageSize : PageSize,
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
+    }
+    var res = await PostMethod(transactionEndPoints.promotionHistroy, model);
+
+    if (res.status == 200) {
+        if (res.response.data.result.length > 0) {
+            var data = res.response.data.result;
+            $("#tbl_promotionHistory").find("tr:gt(0)").remove();
+            var html = ""
+            for (i = 0; i < data.length; i++) {
+                html += '<tr><td>' + APIDateFormate(data[i].Created) + '</td><td>' + APIDateFormate(data[i].ExpiryDate) + '</td><td>' + data[i].Title + '</td><td><span class="blue_color_text">' + parseFloat(data[i].DepositAmount).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].BonusAmount).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].TurnoverTarget).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].UserTurnover).toFixed(2) + '</span></td><td><span class="' + data[i].Staus.replace(" ", "_").toLowerCase() + '_color">' + data[i].Staus + '</span></td></tr>';
+            }
+            $("#tbl_promotionHistory").find('tbody').html(html);
+
+            if (res.response.data.total > 8) {
+                CreatePagination('tbl_promotionHistory_pagination', res.response.data.totalPages, res.response.data.offset + 1);
+            }
+            else {
+                $("#tbl_promotionHistory_pagination").html("");
+            }
+
+        }
+        else {
+            var html = '<tr><td colspan="8">No Transaction yet</td></tr>'
+            $("#tbl_promotionHistory").find('tbody').html(html);
+        }
+    }
+}
+
+async function RebateHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    let model = {
+        pageNo: PageNumber == null ? pageNumber : PageNumber,
+        pageSize: PageSize == null ? pageSize : PageSize,
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
+    }
+    var res = await PostMethod(transactionEndPoints.rebateHistroy, model);
+
+    if (res.status == 200) {
+        if (res.response.data.result.length > 0) {
+            var data = res.response.data.result;
+            $("#tbl_RebateHistory").find("tr:gt(0)").remove();
+            var html = ""
+            for (i = 0; i < data.length; i++) {
+                html += '<tr><td>' + APIDateFormate(data[i].created) + '</td> <td>' + data[i].gameName + '</td><td><span class="blue_color_text">' + parseFloat(data[i].turnover).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].rolling).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].bet).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].winLose).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].commAmount).toFixed(2) + '</span></td></tr>';
+            }
+            $("#tbl_RebateHistory").find('tbody').html(html);
+
+            if (res.response.data.total > 8) {
+                CreatePagination('tbl_RebateHistory_pagination', res.response.data.totalPages, res.response.data.offset + 1);
+            }
+            else {
+                $("#tbl_RebateHistory_pagination").html("");
+            }
+
+        }
+        else {
+            var html = '<tr><td colspan="7">No Transaction yet</td></tr>'
+            $("#tbl_RebateHistory").find('tbody').html(html);
+        }
+    }
+}
+
+async function RewardHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    let model = {
+        pageNo: PageNumber == null ? pageNumber : PageNumber,
+        pageSize: PageSize == null ? pageSize : PageSize,
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
+    }
+    var res = await PostMethod(transactionEndPoints.rewadHistroy, model);
+    if (res.status == 200) {
+        if (res.response.data.result.length > 0) {
+            var data = res.response.data.result;
+            $("#tbl_rewardHistory").find("tr:gt(0)").remove();
+            var html = ""
+            for (i = 0; i < data.length; i++) {
+                html += '<tr><td>' + APIDateFormate(data[i].Created) + '</td> <td>' + data[i].TransactionType + '</td><td><span class="blue_color_text">' + data[i].Amount + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].CurrentBalance).toFixed(2) + '</span></td></tr>';
+            }
+            $("#tbl_rewardHistory").find('tbody').html(html);
+
+            if (res.response.data.total > 8) {
+                CreatePagination('tbl_rewardHistory_pagination', res.response.data.totalPages, res.response.data.offset + 1);
+            }
+            else {
+                $("#tbl_rewardHistory_pagination").html("");
+            }
+
+        }
+        else {
+            var html = '<tr><td colspan="4">No Transaction yet</td></tr>'
+            $("#tbl_rewardHistory").find('tbody').html(html);
+        }
+    }
+}
+
+async function BettingHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    let model = {
+        pageNo: PageNumber == null ? pageNumber : PageNumber,
+        pageSize: PageSize == null ? pageSize : PageSize,
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
+    }
+    var res = await PostMethod(transactionEndPoints.bettingSummeryHistroy, model);
+
+    if (res.status == 200) {
+        if (res.response.data.result.length > 0) {
+            var data = res.response.data.result;
+            $("#tbl_bettingsummeryHistory").find("tr:gt(0)").remove();
+            var html = ""
+            for (i = 0; i < data.length; i++) {
+                html += '<tr><td>' + data[i].GameName + '</td><td><span class="blue_color_text">' + data[i].BetCount + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].BetAmount).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].VaildBetAmount).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].TotalRebate).toFixed(2) + '</span></td></tr>';
+            }
+            $("#tbl_bettingsummeryHistory").find('tbody').html(html);
+
+            if (res.response.data.total > 8) {
+                CreatePagination('tbl_bettingsummeryHistory_pagination', res.response.data.totalPages, res.response.data.offset + 1);
+            }
+            else {
+                $("#tbl_bettingsummeryHistory_pagination").html("");
+            }
+
+        }
+        else {
+            var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
+            $("#tbl_bettingsummeryHistory").find('tbody').html(html);
+        }
+    }
 }

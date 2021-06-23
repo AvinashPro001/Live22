@@ -51,12 +51,12 @@ var apiEndPoints = {
     paymentTransferInOneAPi: "transfer/balance",
 
     transferHistory: "payments/transfer/retrieve",
-    withdrawHistory: "payments/withdraw/retrieve",
-    depositHistory: "payments/deposit/retrieve",
-    transactionHistory: "payments/transactions",
-    rebateHistory: "Game/Rebate/User/History",
-    promotionHistory: "promotions/promotionapply/select",
-    RestoreHistory: "Game/restore/list",
+    withdrawDepositHistroy: "payments/withdraw_deposit_select",
+    promotionHistroy: "promotions/promotionapply/list",
+    rebateHistroy: "Game/Rebate/User/History",
+    rewadHistroy: "customer/reward/list",
+    bettingSummeryHistroy: "Game/bettingsummery",
+
 
     AllInWallet: "Game/Balance/InWallet",
 
