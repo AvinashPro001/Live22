@@ -355,16 +355,16 @@ namespace Webet333.api.Helpers
             //var startTime = time.AddHours(-4).ToString("yyyy-MM-ddTHH:mm:sss");
             //var endTime = time.ToString("yyyy-MM-ddTHH:mm:sss");
 
-            int res = DateTime.Compare(request.FromDate, request.ToDate);
-            if (res > 0)
-            {
-                throw new Exception("FromDate is smaller than ToDate.");
-            }
+            //int res = DateTime.Compare(request.FromDate, request.ToDate);
+            //if (res > 0)
+            //{
+            //    throw new Exception("FromDate is smaller than ToDate.");
+            //}
 
-            if ((request.FromDate - DateTime.Now).TotalDays > 60)
-            {
-                throw new Exception("You can only get bet list data within 60 days.");
-            }
+            //if ((request.FromDate - DateTime.Now).TotalDays > 60)
+            //{
+            //    throw new Exception("You can only get bet list data within 60 days.");
+            //}
 
             var startTime = request.FromDate.ToString("yyyy-MM-ddTHH:mm:ss.fff");
             var endTime = request.ToDate.ToString("yyyy-MM-ddTHH:mm:ss.fff");

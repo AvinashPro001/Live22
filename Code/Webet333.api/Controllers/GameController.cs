@@ -805,6 +805,9 @@ namespace Webet333.api.Controllers
         {
             await CheckUserRole();
 
+            request.FromDate.AddHours(-12);
+            request.ToDate.AddHours(-12);
+
             var response = await SBOGameHelpers.BettingDetailsCallAPI(request);
 
             return OkResponse(response);
@@ -1316,9 +1319,17 @@ namespace Webet333.api.Controllers
 
         #region SBO Betting Details
 
-        [HttpPost(ActionsConst.Game.SBO_Betting_Details)]
-        public async Task<IActionResult> SBO_Betting_Details([FromBody] GlobalBettingDetailsRequest request)
+        [HttpGet(ActionsConst.Game.SBO_Betting_Details)]
+        public async Task<IActionResult> SBO_Betting_Details()
         {
+            DateTime date = DateTime.Now.AddHours(-12);
+
+            GlobalBettingDetailsRequest request = new GlobalBettingDetailsRequest
+            {
+                FromDate = date.AddMinutes(-10),
+                ToDate = date
+            };
+
             var response = await SBOGameHelpers.BettingDetailsCallAPI(request);
 
             if (response.Error.Id == 0)
