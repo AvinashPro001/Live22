@@ -257,11 +257,24 @@ select.main-wallet.jcf-hidden,
     height: auto;
 }
 
-
-
-
-
-
+.container.extra-bottom-padding { padding-left: 0px; padding-right: 0px; }
+.history-tabs ul::after { height: 0px; }
+.listing-for-deposite li:last-child { border: 0px; }
+.listing-for-deposite li { padding: 5px 10px;}
+.listing-for-deposite li:nth-child(odd) { background: #f2f2f2; }
+.list-content { display: flex; }
+.list-content .back-btn.rotate { display: flex; align-items: center; }
+.list-content .back-btn.rotate a { display: block; min-width: 25px; padding: 0px; }
+.list-content .back-btn.rotate a img { max-width: 15px;}
+.history-tabs .list-content .back-btn.rotate a:hover { background: transparent; }
+.product-name-time h6 { font-size: 14px; line-height: 18px; color: #ff9b00; font-weight: bold; }
+.product-name-time p { font-size: 11px; line-height: 16px; color: rgba(0,0,0,0.7); margin-bottom: 0px; }
+.product-subdesc { display: flex; align-items: center; margin-left: auto;}
+.product-amount { margin-right: 10px; min-width: 60px;}
+.product-amount,
+.product-available { font-size: 12px; line-height: 18px; text-transform: uppercase; font-weight: bold; margin-bottom: 0px; }
+.product-available { color: #ff0000; }
+.product-approve { color: green;}
 
 
 
@@ -1901,4 +1914,6 @@ p.bonus_content a {
             font-size: 0px;
             line-height: 0px
         }
+
+
 }
