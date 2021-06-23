@@ -28,6 +28,6 @@
 
         public const string registerYeeBet = "yeebet/register";
 
-        public const string RegisterSBO = "sbo/register";
+        public const string RegisterSBO = "sbo/register/player";
     }
 }

@@ -36,6 +36,7 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
     loadingIndicator: boolean = false;
     selectedLeagueList = [];
     customerData: any;
+    T: any;
 
     constructor(
         private commonService: CommonService,
