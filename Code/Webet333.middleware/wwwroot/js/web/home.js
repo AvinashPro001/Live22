@@ -38,7 +38,7 @@ function ShowError(Message) {
     $('#error_choose').modal('show');
     setTimeout(function () {
         $('#error_choose').modal('hide');
-    }, 2000);
+    }, 5000);
 }
 //#endregion
 
@@ -49,7 +49,7 @@ function ShowSuccess(Message) {
     $('#success_choose').modal('show');
     setTimeout(function () {
         $('#success_choose').modal('hide');
-    }, 3000);
+    }, 5000);
 }
 
 //#endregion

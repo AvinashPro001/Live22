@@ -45,7 +45,7 @@
         <div class="info-form history-tabs">
             <ul class="nav nav-tabs">
                 <li onclick="SetHistorySectionName('WithdrawDeposit')" class="active"><a data-toggle="tab" href="#depositwithdraw"><span key="" class="lang"></span>Deposit / Withdraw</a></li>
-                <li onclick="SetHistorySectionName('BettingSummery')"><a data-toggle="tab" href="#profilewithdrawal"><span key="" class="lang">Betting Summery</span></a></li>
+                <li onclick="SetHistorySectionName('BettingSummery')"><a data-toggle="tab" href="#profileBettingsummery"><span key="" class="lang">Betting Summery</span></a></li>
                 <li onclick="SetHistorySectionName('Transfer')"><a data-toggle="tab" href="#profileTransfer"><span key="transfer_title" class="lang">Transfer</span></a></li>
                 <li onclick="SetHistorySectionName('Promotion')"><a data-toggle="tab" href="#promotion-apply"><span key="menu_promotion" class="lang">Promotion</span></a></li>
                 <li onclick="SetHistorySectionName('Rebate')"><a data-toggle="tab" href="#rebate"><span key="rebate" class="lang">Rebate</span></a></li>
@@ -57,14 +57,16 @@
             <div class="tab-content">
 
                 <div id="profileTransfer" class="tab-pane fade in">
-                    <div class="container full-height listing extra-bottom-padding">
+                    <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
                         <ul class="listing-for-deposite" id="transferHistory">
                         </ul>
                     </div>
                 </div>
 
-                <div id="profilewithdrawal" class="tab-pane fade in">
-                    <div class="container full-height listing extra-bottom-padding" id="withdrawHistory">
+                <div id="profileBettingsummery" class="tab-pane fade in">
+                    <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
+                        <ul class="listing-for-deposite" id="bettingsummery">
+                        </ul>
                     </div>
                 </div>
 
@@ -76,8 +78,9 @@
                 </div>
 
                 <div id="promotion-apply" class="tab-pane fade in">
-                    <div class="container full-height listing extra-bottom-padding" id="promotionHistory">
-
+                    <div class="container full-height listing extra-bottom-padding">
+                        <ul class="listing-for-deposite" id="promotionHistory">
+                        </ul>
                     </div>
                 </div>
 
@@ -213,6 +216,57 @@
         </div>
     </div>
 
+    <div class="modal fade history-model" id="transfer-history-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Details</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <h5>From Wallet</h5>
+                        <p id="transferHistoryFrom"></p>
+                        <h5>To Wallet</h5>
+                        <p id="transferHistoryTo"></p>
+                        <h5>Transaction Id</h5>
+                        <p id="transferHistoryId"></p>
+                        <h5>Amount</h5>
+                        <p id="transferHistoryAmount"></p>
+                        <h5>Transaction Date</h5>
+                        <p id="transferHistoryDate"></p>
+                        <h5>Transaction Status</h5>
+                        <p id="transferHistoryStatus"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade history-model" id="betting-history-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Details</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <h5>Game Name</h5>
+                        <p id="bettingHistoryGameName"></p>
+                        <h5>Bet Count</h5>
+                        <p id="bettingHistoryBetCount"></p>
+                        <h5>Vaild Bet Amount</h5>
+                        <p id="bettingHistoryVaildBet"></p>
+                        <h5>Bet Amount</h5>
+                        <p id="bettingHistoryBetAmount"></p>
+                        <h5>Total Rebate</h5>
+                        <p id="bettingHistoryRebate"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
