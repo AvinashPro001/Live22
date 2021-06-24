@@ -118,9 +118,9 @@ namespace Webet333.api.Helpers
                 CompanyKey = GameConst.SBO.CompanyKey,
                 ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
                 Username = Username,
-                BetSettings = new List<BetSetting>
+                BetSettings = new List<SBOSetPlayerBetLimitRequestBetSetting>
                 {
-                    new BetSetting
+                    new SBOSetPlayerBetLimitRequestBetSetting
                     {
                         MarketType = GameConst.SBO.MarketType.All,
                         MaxBet = playerDefaultBetLimit.Football_OthersMatchType_MaxBet,
@@ -128,7 +128,7 @@ namespace Webet333.api.Helpers
                         MinBet = playerDefaultBetLimit.Football_OthersMatchType_MinBet,
                         SportType = GameConst.SBO.SportType.Football
                     },
-                    new BetSetting
+                    new SBOSetPlayerBetLimitRequestBetSetting
                     {
                         MarketType = GameConst.SBO.MarketType.Over_Under,
                         MaxBet = playerDefaultBetLimit.Football_OverUnder_MaxBet,
@@ -136,7 +136,7 @@ namespace Webet333.api.Helpers
                         MinBet = playerDefaultBetLimit.Football_OverUnder_MinBet,
                         SportType = GameConst.SBO.SportType.Football
                     },
-                    new BetSetting
+                    new SBOSetPlayerBetLimitRequestBetSetting
                     {
                         MarketType = GameConst.SBO.MarketType.Correct_Score,
                         MaxBet = playerDefaultBetLimit.Football_CorrectScore_MaxBet,
@@ -144,7 +144,7 @@ namespace Webet333.api.Helpers
                         MinBet = playerDefaultBetLimit.Football_CorrectScore_MinBet,
                         SportType = GameConst.SBO.SportType.Football
                     },
-                    new BetSetting
+                    new SBOSetPlayerBetLimitRequestBetSetting
                     {
                         MarketType = GameConst.SBO.MarketType.All,
                         MaxBet = playerDefaultBetLimit.OthersSport_OthersMatchType_MaxBet,
@@ -152,7 +152,7 @@ namespace Webet333.api.Helpers
                         MinBet = playerDefaultBetLimit.OthersSport_OthersMatchType_MinBet,
                         SportType = GameConst.SBO.SportType.Others
                     },
-                    new BetSetting
+                    new SBOSetPlayerBetLimitRequestBetSetting
                     {
                         MarketType = GameConst.SBO.MarketType.Over_Under,
                         MaxBet = playerDefaultBetLimit.OthersSport_OverUnder_MaxBet,
@@ -160,7 +160,7 @@ namespace Webet333.api.Helpers
                         MinBet = playerDefaultBetLimit.OthersSport_OverUnder_MinBet,
                         SportType =  GameConst.SBO.SportType.Others
                     },
-                    new BetSetting
+                    new SBOSetPlayerBetLimitRequestBetSetting
                     {
                         MarketType = GameConst.SBO.MarketType.Correct_Score,
                         MaxBet = playerDefaultBetLimit.OthersSport_CorrectScore_MaxBet,
@@ -397,22 +397,22 @@ namespace Webet333.api.Helpers
         internal async Task<SBOGetLeagueResponse> GetLeague(OnlyDateRangeFilterRequest request)
         {
             SBOGetLeagueResponse callGetLeagueAPIFootball = await CallGetLeagueAPIFootball(request);
-            SBOGetLeagueResponse callGetLeagueAPIOthers = await CallGetLeagueAPIOthers(request);
+            //SBOGetLeagueResponse callGetLeagueAPIOthers = await CallGetLeagueAPIOthers(request);
 
-            if (callGetLeagueAPIFootball.Error.Id == 0 &&
-                callGetLeagueAPIOthers.Error.Id == 0)
-            {
-                callGetLeagueAPIFootball.Result.AddRange(callGetLeagueAPIOthers.Result);
-            }
-            else if (callGetLeagueAPIFootball.Error.Id != 0 &&
-            callGetLeagueAPIOthers.Error.Id == 0)
-            {
-                await MapWithDBValueAsync(callGetLeagueAPIOthers);
+            //if (callGetLeagueAPIFootball.Error.Id == 0 &&
+            //    callGetLeagueAPIOthers.Error.Id == 0)
+            //{
+            //    callGetLeagueAPIFootball.Result.AddRange(callGetLeagueAPIOthers.Result);
+            //}
+            //else if (callGetLeagueAPIFootball.Error.Id != 0 &&
+            //callGetLeagueAPIOthers.Error.Id == 0)
+            //{
+            //    await MapWithDBValueAsync(callGetLeagueAPIOthers);
 
-                return callGetLeagueAPIOthers;
-            }
+            //    return callGetLeagueAPIOthers;
+            //}
 
-            await MapWithDBValueAsync(callGetLeagueAPIFootball);
+            if (callGetLeagueAPIFootball.Error.Id == 0) await MapWithDBValueAsync(callGetLeagueAPIFootball);
 
             return callGetLeagueAPIFootball;
         }

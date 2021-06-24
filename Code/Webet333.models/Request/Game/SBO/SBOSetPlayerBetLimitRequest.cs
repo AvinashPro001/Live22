@@ -9,7 +9,7 @@ namespace Webet333.models.Request.Game.SBO
         public string Username { get; set; }
 
         [JsonProperty("BetSettings")]
-        public List<BetSetting> BetSettings { get; set; }
+        public List<SBOSetPlayerBetLimitRequestBetSetting> BetSettings { get; set; }
 
         [JsonProperty("CompanyKey")]
         public string CompanyKey { get; set; }
@@ -18,7 +18,7 @@ namespace Webet333.models.Request.Game.SBO
         public string ServerId { get; set; }
     }
 
-    public class BetSetting
+    public class SBOSetPlayerBetLimitRequestBetSetting
     {
         [JsonProperty("sport_type")]
         public long SportType { get; set; }
