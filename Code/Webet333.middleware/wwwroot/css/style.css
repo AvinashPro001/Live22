@@ -812,7 +812,7 @@ header .tooltip-inner {width: 100px!important; }
 .game-bg { background-color: #ffffff;}
 .align-items-center { align-items: center;}
 .img-box { position: relative;}
-.img-box:before { content: ''; display: block; left: -30px; top: -20px; width: calc(100% + 40px); height: calc(100% + 20px); background-color: #feb801; position: absolute; z-index: 0; transform: skewX(-20deg); }
+.img-box:before { content: ''; display: block; left: -40px; top: -20px; width: calc(100% + 40px); height: calc(100% + 20px); background-color: #feb801; position: absolute; z-index: 0; transform: skewX(-20deg); }
 .ag-games { background-color: #ffffff;}
 .ag-games .slot_inner_common_box:last-child { flex-basis: auto; padding: 0px; }
 .ag-games .btn { padding: 15px 45px; background-color: #feb801; color: #000000; transition: 0.5s; border: 1px solid #000000; font-size: 20px; line-height: 25px; font-weight: bold; text-transform: uppercase; box-shadow: 0px 10px 10px #cccccc; }
@@ -823,14 +823,14 @@ header .tooltip-inner {width: 100px!important; }
 .ag-game-play { margin-right: 15px; }
 .inner_game_banner_wrap { position: relative; overflow: hidden; }
 .slot_inner_common_box img { z-index: 1; position: relative; }
-.joker-game.img-box::before { background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); }
-.joker-game { background: rgb(0, 212, 255); }
+.joker-game.img-box::before { background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(255, 232, 1) 35%, rgb(249, 226, 58) 100%); }
+.joker-game { background: rgba(249, 226, 58, 1); }
 .mega-game.img-box::before { background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(11, 14, 223) 35%, rgb(208, 22, 22) 100%)}
-.mega-game { background: rgb(208, 22, 22); }
+.mega-game { background: rgba(208, 22, 22, 1); }
 .kiss-game.img-box::before { background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(0, 0, 0) 35%, rgb(138, 38, 194) 100%)}
-.kiss-game { background: rgb(138, 38, 194);}
+.kiss-game { background: rgba(138, 38, 194, 1);}
 .pussy-game.img-box::before { background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(0, 0, 0) 35%, rgb(194, 38, 38) 100%)}
-.pussy-game { background: rgb(194, 38, 38);}
+.pussy-game { background: rgba(194, 38, 38, 1);}
 
 @media(min-width:1200px) and (max-width:1270px) {
     header .container {/* width: 1170px;*/ width: 1100px; }
@@ -2023,7 +2023,7 @@ div.tabcontent_health .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 .slot_inner_common_box img                  { height: auto; }
 .slot_inner_common_box:first-child          { flex-basis: 25%; }
 .slot_inner_common_box:nth-child(2)         { flex-basis: 35%; background-color: #d9d9d9; padding: 15px 20px; display: flex; flex-direction: column; align-items: center; }
-.slot_inner_common_box:last-child           { flex-basis: 40%; background-color: #e5e5e5; padding: 15px 40px; color: #676464; }
+.slot_inner_common_box:last-child           { flex-basis: 40%; background-color: transparent; padding: 15px 40px; color: #676464; }
 .slot_inner_common_box .slot_inner_formfield{ display: flex; align-items: center; }
 .slot_inner_common_box .slot_inner_formfield label.user-title  { font-weight: 500; margin-right: 10px;  }
 .slot_inner_common_box .slot_inner_formfield .reg-form         { border-radius: 10px; }
