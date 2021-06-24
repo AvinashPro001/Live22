@@ -824,19 +824,25 @@ header .tooltip-inner {width: 100px!important; }
 .inner_game_banner_wrap { position: relative; overflow: hidden; }
 .slot_inner_common_box img { z-index: 1; position: relative; }
 .joker-game.img-box::before { background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(255, 232, 1) 35%, rgb(249, 226, 58) 100%); }
-.joker-game { background: rgba(249, 226, 58, 1); }
+.joker-game { background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%); }
 .mega-game.img-box::before { background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(11, 14, 223) 35%, rgb(208, 22, 22) 100%)}
 .mega-game { background: rgba(208, 22, 22, 1); }
 .kiss-game.img-box::before { background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(0, 0, 0) 35%, rgb(138, 38, 194) 100%)}
 .kiss-game { background: rgba(138, 38, 194, 1);}
 .pussy-game.img-box::before { background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(0, 0, 0) 35%, rgb(194, 38, 38) 100%)}
 .pussy-game { background: rgba(194, 38, 38, 1);}
+.main-banner > .container { position: relative; }
+.flag-icon { position: absolute; left: -50px; top: 30px; }
+.flag-icon img { max-width: 75px; }
+
+
 
 @media(min-width:1200px) and (max-width:1270px) {
     header .container {/* width: 1170px;*/ width: 1100px; }
     .logo {width: 325px; }
     .annunce-section {margin-left: 0; margin-right: 0; }
     .home-slider {padding: 0; }
+    .flag-icon { left: 0px; }
 }
 @media(min-width:992px) and (max-width:1199px) {
     header {padding: 10px 0; }
@@ -892,6 +898,8 @@ header .tooltip-inner {width: 100px!important; }
     .img-hover-block { margin: 0px; }
     .img-hover-block li { width: calc(100% / 4 - 20px);}
     .img-text-block:hover .hover-block { transform: scale(0.9); }
+    /* 24-6-2021 */
+    .flag-icon { left: 50px; }
 
 }
 @media(min-width:768px) and (max-width:991px) {
@@ -1014,7 +1022,8 @@ header .tooltip-inner {width: 100px!important; }
     .img-text-block:hover .hover-block { transform: scale(0.9); margin-left: -27px; }
     .leftProfileButon1 + .genaral_wrapp1 { margin-left: 0px;}
     .slick-slide .img-text-block:hover .hover-block > figure img { height: 200px; max-width: 200px; }
-
+    /* 24-6-2021 */
+    .flag-icon { left: 50px; }
 }
 @media(max-width:767px) {
     body {padding-top: 50px; }
