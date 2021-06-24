@@ -114,6 +114,7 @@ namespace Webet333.api.Helpers
                         IsPussy888 = request.IsPussy888,
                         IsMega888 = request.IsMega888,
                         IsJoker = request.IsJoker,
+                        IsSBO = request.IsSBO,
 
                         IsNewMember = request.IsNewMember,
                         IsSports = request.IsSports,
@@ -188,6 +189,7 @@ namespace Webet333.api.Helpers
                         IsPussy888 = request.IsPussy888,
                         IsMega888 = request.IsMega888,
                         IsJoker = request.IsJoker,
+                        IsSBO = request.IsSBO,
 
                         IsNewMember = request.IsNewMember,
                         IsSports = request.IsSports,
