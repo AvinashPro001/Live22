@@ -44,13 +44,6 @@
 
         <div class="info-form history-tabs">
             <ul class="nav nav-tabs">
-                @*<li onclick="DepositHistory()" class="active"><a data-toggle="tab" href="#profileDeposit"><span key="deposit" class="lang"></span></a></li>
-        <li onclick="WithdrawHistory()"><a data-toggle="tab" href="#profilewithdrawal"><span key="withdrawal_title" class="lang"></span></a></li>
-        <li onclick="TransferHistory()"><a data-toggle="tab" href="#profileTransfer"><span key="transfer_title" class="lang"></span></a></li>
-        <li onclick="PromotionHistory()"><a data-toggle="tab" href="#promotion-apply"><span key="menu_promotion" class="lang"></span></a></li>
-        <li onclick="RebateHistory()"><a data-toggle="tab" href="#rebate"><span key="rebate" class="lang"></span></a></li>
-        <li onclick="StatementHistory()"><a data-toggle="tab" href="#statement"><span key="statement" class="lang"></span></a></li>*@
-
                 <li onclick="SetHistorySectionName('WithdrawDeposit')" class="active"><a data-toggle="tab" href="#depositwithdraw"><span key="" class="lang"></span>Deposit / Withdraw</a></li>
                 <li onclick="SetHistorySectionName('BettingSummery')"><a data-toggle="tab" href="#profilewithdrawal"><span key="" class="lang">Betting Summery</span></a></li>
                 <li onclick="SetHistorySectionName('Transfer')"><a data-toggle="tab" href="#profileTransfer"><span key="transfer_title" class="lang">Transfer</span></a></li>
@@ -64,11 +57,9 @@
             <div class="tab-content">
 
                 <div id="profileTransfer" class="tab-pane fade in">
-                    <div style="text-align:center;">
-                        <img src="~/images/loading.gif" id="transfeRefreshImage" style="display:none" />
-                    </div>
-                    <div class="container full-height listing extra-bottom-padding" id="transferHistory">
-
+                    <div class="container full-height listing extra-bottom-padding">
+                        <ul class="listing-for-deposite" id="transferHistory">
+                        </ul>
                     </div>
                 </div>
 
@@ -78,50 +69,8 @@
                 </div>
 
                 <div id="depositwithdraw" class="tab-pane fade in active">
-                    <div style="text-align:center;">
-                        <img src="~/images/loading.gif" id="depositRefreshImage" style="display:none" />
-                    </div>
-                    <div class="container full-height listing extra-bottom-padding" id="depositHistory" >
-                        <ul class="listing-for-deposite">
-                            <li class="list-content">
-                                <div class="back-btn rotate">
-                                    <a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a>
-                                </div>
-                                <div class="product-name-time">
-                                    <h6>Deposit</h6>
-                                    <p>2021-06-01 21:30</p>
-                                </div>
-                                <div class="product-subdesc">
-                                    <p class="product-amount">myr 50.00</p>
-                                    <p class="product-available">rejected</p>
-                                </div>
-                            </li>
-                            <li class="list-content">
-                                <div class="back-btn rotate">
-                                    <a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a>
-                                </div>
-                                <div class="product-name-time">
-                                    <h6>Deposit</h6>
-                                    <p>2021-06-01 21:30</p>
-                                </div>
-                                <div class="product-subdesc">
-                                    <p class="product-amount">myr 50.00</p>
-                                    <p class="product-available product-approve">approve</p>
-                                </div>
-                            </li>
-                            <li class="list-content">
-                                <div class="back-btn rotate">
-                                    <a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a>
-                                </div>
-                                <div class="product-name-time">
-                                    <h6>Deposit</h6>
-                                    <p>2021-06-01 21:30</p>
-                                </div>
-                                <div class="product-subdesc">
-                                    <p class="product-amount">myr 50.00</p>
-                                    <p class="product-available">rejected</p>
-                                </div>
-                            </li>
+                    <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
+                        <ul class="listing-for-deposite" id="depositHistory">
                         </ul>
                     </div>
                 </div>
@@ -239,6 +188,32 @@
         </div>
     </div>
 
+    <div class="modal fade history-model" id="depsoit-history-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Details</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <h5>Transaction Type</h5>
+                        <p id="depositHistoryType"></p>
+                        <h5>Payment Method</h5>
+                        <p id="depositHistoryMethod"></p>
+                        <h5>Amount</h5>
+                        <p id="depositHistoryAmount"></p>
+                        <h5>Transaction Date</h5>
+                        <p id="depositHistoryDate"></p>
+                        <h5>Transaction Status</h5>
+                        <p id="depositHistoryStatus"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 <script type="text/javascript">
@@ -331,15 +306,14 @@
         get();
     }, 200);
 
-
-    async function DepositScroll() {
+    async function OnScroll() {
 
         if ((NumberOfLine % 5) == 0) {
 
             NumberOfLine = NumberOfLine + 1;
             if (!apiRunning) {
                 pageNumber = pageNumber + 1;
-                //await DepositHistory(pageNumber)
+                await CallFunctionAccordingToTab()
             }
         }
         else {
@@ -354,8 +328,8 @@
 <script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        //Get30DayDate();
-        $("#datepicker1").datepicker({ dateFormat: "dd/mm/yy"});
+        Get30DayDate();
+        $("#datepicker1").datepicker({ dateFormat: "dd/mm/yy" });
         $("#datepicker1btn").click(function (event) {
             event.preventDefault();
             $("#datepicker1").focus();

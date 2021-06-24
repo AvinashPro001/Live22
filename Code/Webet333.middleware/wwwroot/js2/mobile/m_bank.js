@@ -843,196 +843,6 @@ function generateGuid() {
 }
 //#endregion
 
-//var pageSize = 10;
-//var pageNumber = 0;
-//var NumberOfLine = 1
-
-//var apiRunning = false;
-////#region DepositHistory
-//async function DepositHistory(pageNo = 0) {
-//    apiRunning = true;
-//    var model = {
-//        pageNo: pageNo,
-//        pageSize: 10
-//    };
-//    var res = await PostMethod(apiEndPoints.depositHistory, model);
-//    var result = res.data.result;
-//    var depositHistory = document.getElementById("depositHistory");
-//    if (pageNo == 1) {
-//        pageNumber = 1;
-//        depositHistory.innerHTML = "";
-//    }
-//    if (result.length > 0) {
-//        for (i = 0; i < result.length; i++) {
-//            if (result[i].verified === "approved")
-//                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
-
-//            if (result[i].verified === "rejected")
-//                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn reject-btn">' + result[i].verified + '</div></div></div>'
-
-//            if (result[i].verified === "pending")
-//                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn pending-btn">' + result[i].verified + '</div></div></div>'
-//        }
-//    }
-//    else {
-//        if (res.data.total == 0)
-//            if ($("#depositHistory").length == 0)
-//                depositHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
-//    }
-//    getLanguage(false);
-//    apiRunning = false;
-//}
-////#endregion
-
-////#region WithdrawHistory
-//async function WithdrawHistory() {
-//    var model = {};
-//    var res = await PostMethod(apiEndPoints.withdrawHistory, model);
-//    var result = res.data;
-//    var withdrawHistory = document.getElementById("withdrawHistory");
-//    withdrawHistory.innerHTML = "";
-
-//    if (result.length > 0) {
-//        for (i = 0; i < result.length; i++) {
-//            if (result[i].verified === "approved")
-//                withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '-' + parseFloat(result[i].withdrawalAmount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
-
-//            if (result[i].verified === "rejected")
-//                withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].withdrawalAmount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn reject-btn">' + result[i].verified + '</div></div></div>'
-
-//            if (result[i].verified === "pending")
-//                withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].walletName + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].bankName + '</p><div class="bank-name-amount">' + '-' + parseFloat(result[i].withdrawalAmount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn pending-btn">' + result[i].verified + '</div></div></div>'
-//        }
-//    }
-//    else {
-//        withdrawHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_withdraw"></span></p></div></div>'
-//    }
-//    getLanguage(false);
-//}
-////#endregion
-
-////#region TransferHistory
-//async function TransferHistory() {
-//    var model = {};
-//    var res = await PostMethod(apiEndPoints.transferHistory, model);
-//    var result = res.data.result;
-//    var transferHistory = document.getElementById("transferHistory");
-//    transferHistory.innerHTML = "";
-//    if (result.length > 0) {
-//        for (i = 0; i < result.length; i++) {
-//            if (result[i].verified === "approved")
-//                transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].fromWallet + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].toWallet + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].verified + '</div></div></div>'
-
-//            if (result[i].verified === "rejected")
-//                transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].fromWallet + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].toWallet + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn reject-btn">' + result[i].verified + '</div></div></div>'
-
-//            if (result[i].verified === "pending")
-//                transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].fromWallet + '</p><div class="game-time">' + result[i].orderId + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].toWallet + '</p><div class="bank-name-amount">' + '+' + parseFloat(result[i].amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn pending-btn">' + result[i].verified + '</div></div></div>'
-//        }
-//    }
-//    else {
-//        transferHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_transfer"></span></p></div></div>'
-//    }
-//    getLanguage(false);
-//}
-////#endregion
-
-////#region PromotionHistory
-//async function PromotionHistory() {
-//    var model = {};
-//    var res = await PostMethodWithParameter(apiEndPoints.promotionHistory, model);
-//    var result = res.data;
-//    var promotionHistory = document.getElementById("promotionHistory");
-//    promotionHistory.innerHTML = "";
-//    if (result.length > 0) {
-//        for (i = 0; i < result.length; i++) {
-//            //if (result[i].Staus === "Completed")
-//            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div > <div class="success-btn text-success">' + result[i].Staus + '</div></div ></div > '
-
-//            //if (result[i].Staus === "Expired")
-//            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div><div class="success-btn reject-btn">' + result[i].Staus + '</div></div ></div > '
-
-//            //if (result[i].Staus === "Manually Expired")
-//            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div><div class="success-btn reject-btn">' + result[i].Staus + '</div></div ></div > '
-
-//            //if (result[i].Staus === "Active")
-//            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div><div class="success-btn pending-btn">' + result[i].Staus + '</div></div ></div > '
-//            //if (result[i].Staus === "Pending")
-//            //    promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="col-xs-2"><p class="bank-name-detail">' + result[i].WinTurn + ' Winover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnTarget).toFixed(2) + '</div><div class="success-btn pending-btn" style="color:Blue;">' + result[i].Staus + '</div></div ></div > '
-
-//            if (result[i].Staus === "Completed")
-//                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div> <div class="success-btn text-success">' + result[i].Staus + '</div></div ></div > '
-
-//            if (result[i].Staus === "Expired")
-//                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="success-btn reject-btn">' + result[i].Staus + '</div></div ></div > '
-
-//            if (result[i].Staus === "Manually Expired")
-//                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="success-btn reject-btn">' + result[i].Staus + '</div></div ></div > '
-
-//            if (result[i].Staus === "Active")
-//                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="success-btn pending-btn">' + result[i].Staus + '</div></div ></div > '
-//            if (result[i].Staus === "Pending")
-//                promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].Title + '</p><div class="game-time">' + parseFloat(result[i].UserTurnover).toFixed(2) + '</div><div class="game-date">' + (result[i].Created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].TurnoverTime + ' Turnover</p><div class="bank-name-amount">' + parseFloat(result[i].TurnoverTarget).toFixed(2) + '</div></div><div class="success-btn pending-btn" style="color:Blue;">' + result[i].Staus + '</div></div ></div > '
-//        }
-//    }
-//    else {
-//        promotionHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_promotion"></span></p></div></div>'
-//    }
-//    getLanguage(false);
-//}
-////#endregion
-
-////#region StatementHistory
-//async function StatementHistory() {
-//    var model = {};
-//    var res = await PostMethodWithParameter(apiEndPoints.transactionHistory, model);
-//    var result = res.data;
-//    var statementHistory = document.getElementById("statementHistory");
-//    statementHistory.innerHTML = "";
-//    if (result.length > 0) {
-//        for (i = 0; i < result.length; i++) {
-//            statementHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + result[i].debitFrom + '</p><div class="game-time">' + result[i].transactionNo + '</div><div class="game-date">' + (result[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + result[i].creditTo + '</p><div class="bank-name-amount">' + result[i].amount + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + result[i].transactionType + '</div><div class="text-primary">' + parseFloat(result[i].currentBalance).toFixed(2) + '</div></div></div>'
-//        }
-//    }
-//    else {
-//        statementHistory.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_statement"></span></p></div></div>'
-//    }
-//    getLanguage(false);
-//}
-////#endregion
-
-////#region RebateHistory
-//async function RebateHistory() {
-//    var model = {};
-//    var res = await PostMethodWithParameter(apiEndPoints.rebateHistory, model);
-//    var resultRebateLoseRebate = res.data.winloseRebate;
-//    var resultRebateTurnOverCommissionRebate = res.data.trunoverRebate;
-//    var rebateLoseRebate = document.getElementById("loseRebate");
-//    var rebateTurnOverCommissionRebate = document.getElementById("turnOverCommissionRebate");
-//    rebateLoseRebate.innerHTML = "";
-//    rebateTurnOverCommissionRebate.innerHTML = "";
-
-//    if (resultRebateLoseRebate.length > 0) {
-//        for (i = 0; i < resultRebateLoseRebate.length; i++) {
-//            rebateLoseRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + resultRebateLoseRebate[i].gameName + '</p><div class="game-time">' + parseFloat(resultRebateLoseRebate[i].turnover).toFixed(2) + '</div><div class="game-date">' + (resultRebateLoseRebate[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + parseFloat(resultRebateLoseRebate[i].rolling).toFixed(2) + '</p><div class="bank-name-amount">' + parseFloat(resultRebateLoseRebate[i].bet).toFixed(2); + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + parseFloat(resultRebateLoseRebate[i].winLose).toFixed(2) + '</div><div class="text-primary">' + parseFloat(resultRebateLoseRebate[i].commAmount).toFixed(2); + '</div></div></div>'
-//        }
-//    }
-//    else {
-//        rebateLoseRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_rebate"></span></p></div></div>'
-//    }
-
-//    if (resultRebateTurnOverCommissionRebate.length > 0) {
-//        for (i = 0; i < resultRebateTurnOverCommissionRebate.length; i++) {
-//            rebateTurnOverCommissionRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + resultRebateTurnOverCommissionRebate[i].gameName + '</p><div class="game-time">' + parseFloat(resultRebateTurnOverCommissionRebate[i].turnover).toFixed(2) + '</div><div class="game-date">' + (resultRebateTurnOverCommissionRebate[i].created).replace("T", " ") + '</div></div></div><div class="col-xs-4 display-flex"><p class="bank-name-detail">' + parseFloat(resultRebateTurnOverCommissionRebate[i].rolling).toFixed(2) + '</p><div class="bank-name-amount">' + parseFloat(resultRebateTurnOverCommissionRebate[i].bet).toFixed(2); + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + parseFloat(resultRebateTurnOverCommissionRebate[i].winLose).toFixed(2) + '</div><div class="text-primary">' + parseFloat(resultRebateTurnOverCommissionRebate[i].commAmount).toFixed(2); + '</div></div></div>'
-//        }
-//    }
-//    else {
-//        rebateTurnOverCommissionRebate.innerHTML += '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_rebate"></span></p></div></div>'
-//    }
-
-//    getLanguage(false);
-//}
-//#endregion
 
 var userbalance;
 //#region TransferValidation
@@ -1169,13 +979,17 @@ async function CheckSupportGame() {
 
 
 var HistorySectionName = "WithdrawDeposit";
-var fromDate = null, toDate = null, pageSize = 10; pageNumber = 0;
+var fromDate = null, toDate = null, pageSize = 20; pageNumber = 0;
+var NumberOfLine = 1;
+var apiRunning = false;
+
 function SetHistorySectionName(name) {
+    $("#depositHistory").html("");
     HistorySectionName = name;
     fromDate = null;
     toDate = null;
     pageNumber = 0;
-    GetTodayDate();
+    Get30DayDate()
 }
 
 function APIDateFormate(date) {
@@ -1240,6 +1054,8 @@ function GetInMonthDate() {
 }
 
 function GetDateRange() {
+    $('#filter-model').modal('hide');
+    $("#depositHistory").html("");
     pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");
@@ -1279,6 +1095,7 @@ function OnDateFilterChange() {
 }
 
 async function TransferHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    apiRunning = true;
     let model = {
         pageNo: PageNumber == null ? pageNumber : PageNumber,
         pageSize: PageSize == null ? pageSize : PageSize,
@@ -1286,48 +1103,51 @@ async function TransferHistory(FromDate = null, ToDate = null, PageSize = null, 
         toDate: ToDate == null ? toDate : ToDate
     }
     var res = await PostMethod(apiEndPoints.transferHistory, model);
-    debugger
     if (res.data.result.length > 0) {
         var data = res.data.result;
-        $("#tbl_transferHistory").find("tr:gt(0)").remove();
         var html = ""
         for (i = 0; i < data.length; i++) {
-            html += '<tr><td>' + APIDateFormate(data[i].created) + '</td ><td><span class="blue_color_text">' + parseFloat(data[i].amount).toFixed(2) + '</span></td><td>' + data[i].fromWallet + '</td><td>' + data[i].toWallet + '</td><td><span class="' + data[i].verified + '_color">' + data[i].verified + '</span></td></tr>';
+            html += '<li data-toggle="modal" data-target="#depsoit-history-model" onclick="WithdrawDepositHistoryDetailsSet()" class="list-content"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].toWallet + '</h6><p>' + APIDateFormate(data[i].created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].amount).toFixed(2) + '</p><p class="product-available ' + data[i].verified.replace(" ", "_").toLowerCase() + '_color">' + data[i].verified + '</p></div></li>';
         }
-        $("#tbl_transferHistory").find('tbody').html(html);
+        $("#transferHistory").append(html);
     }
     else {
-        var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
-        $("#tbl_transferHistory").find('tbody').html(html);
+        if (res.data.total == 0)
+            if ($("#transferHistory li").length == 0) {
+                var html = '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
+                $("#transferHistory").html(html);
+            }
     }
+    getLanguage(false);
+    apiRunning = false;
 }
 
 async function WithdrawDepositHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    apiRunning = true;
     let model = {
         pageNo: PageNumber == null ? pageNumber : PageNumber,
         pageSize: PageSize == null ? pageSize : PageSize,
-        //fromDate: FromDate == null ? fromDate : FromDate,
-        //toDate: ToDate == null ? toDate : ToDate
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
     }
     var res = await PostMethod(apiEndPoints.withdrawDepositHistroy, model);
     if (res.data.result.length > 0) {
         var data = res.data.result;
-        console.log(data);
         var html = ""
         for (i = 0; i < data.length; i++) {
-            //html += '<tr><td>' + APIDateFormate(data[i].Created) + '</td ><td><span class="blue_color_text">' + parseFloat(data[i].Amount).toFixed(2) + '</span></td><td>' + data[i].Method + '</td><td><span class="' + data[i].Status + '_color">' + data[i].Status + '</span></td><td>' + data[i].Type + '</td></tr>';
-
-            html += '<div class="row transfer-content"><div class="col-xs-1 display-flex"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div></div><div class="col-xs-4 display-flex"><div class="game-name"><p>' + data[i].Type + '</p><div class="game-date">' + APIDateFormate(data[i].Created) + '</div></div></div><div class="col-xs-4 display-flex"><div class="bank-name-amount">' + '+' + parseFloat(data[i].Amount).toFixed(2) + '</div></div><div class="col-xs-2"><div class="success-btn text-success">' + data[i].Status + '</div></div></div>'
-
-
+            html += '<li data-toggle="modal" data-target="#depsoit-history-model" onclick="WithdrawDepositHistoryDetailsSet(\'' + data[i].Type + '\',\'' + data[i].Created + '\',\'' + parseFloat(data[i].Amount).toFixed(2) + '\',\'' + data[i].Status + '\',\'' + data[i].Method + '\')" class="list-content"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].Type + '</h6><p>' + APIDateFormate(data[i].Created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].Amount).toFixed(2) + '</p><p class="product-available ' + data[i].Status.replace(" ", "_").toLowerCase() + '_color">' + data[i].Status + '</p></div></li>';
         }
-
-        $("#depositHistory").html(html);
+        $("#depositHistory").append(html);
     }
     else {
-        var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
-        $("#tbl_withdrawdepositHistory").find('tbody').html(html);
+        if (res.data.total == 0)
+            if ($("#depositHistory li").length == 0) {
+                var html = '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
+                $("#depositHistory").html(html);
+            }
     }
+    getLanguage(false);
+    apiRunning = false;
 }
 
 async function PromotionHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
@@ -1463,4 +1283,20 @@ async function BettingHistory(FromDate = null, ToDate = null, PageSize = null, P
             $("#tbl_bettingsummeryHistory").find('tbody').html(html);
         }
     }
+}
+
+function WithdrawDepositHistoryDetailsSet(Type, Created, Amount, Status, Method) {
+    $("#depositHistoryType").html(Type)
+    $("#depositHistoryMethod").html(Method)
+    $("#depositHistoryAmount").html(Amount)
+    $("#depositHistoryDate").html(Created.replace("T", " "))
+    $("#depositHistoryStatus").html(Status.toUpperCase())
+}
+
+function TransferHistoryDetailsSet() {
+    //$("#depositHistoryType").html(Type)
+    //$("#depositHistoryMethod").html(Method)
+    //$("#depositHistoryAmount").html(Amount)
+    //$("#depositHistoryDate").html(Created.replace("T", " "))
+    //$("#depositHistoryStatus").html(Status.toUpperCase())
 }

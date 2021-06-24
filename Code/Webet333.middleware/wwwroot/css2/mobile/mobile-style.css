@@ -270,10 +270,10 @@ select.main-wallet.jcf-hidden,
 .product-name-time h6 { font-size: 14px; line-height: 18px; color: #ff9b00; font-weight: bold; }
 .product-name-time p { font-size: 11px; line-height: 16px; color: rgba(0,0,0,0.7); margin-bottom: 0px; }
 .product-subdesc { display: flex; align-items: center; margin-left: auto;}
-.product-amount { margin-right: 10px; min-width: 60px;}
+.product-amount { margin-right: 10px; width: 100px;}
 .product-amount,
-.product-available { font-size: 12px; line-height: 18px; text-transform: uppercase; font-weight: bold; margin-bottom: 0px; }
-.product-available { color: #ff0000; }
+.product-available { font-size: 12px; line-height: 18px; text-transform: uppercase; font-weight: bold; margin-bottom: 0px;text-align: right; }
+.product-available { color: #ff0000;width:75px; }
 .product-approve { color: green;}
 
 

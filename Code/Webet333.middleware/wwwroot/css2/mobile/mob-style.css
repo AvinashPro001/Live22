@@ -1903,3 +1903,15 @@ input, select {
 .full-height.listing {
     overflow-y: overlay;
 }
+
+.active_color{color:#cccc00 !important;}
+.expired_color{color:#ff3300 !important;}
+.manually_expired_color{color:#ff33cc !important;}
+.completed_color {color: #33cc33 !important;}
+.pending_color{color:#ff9900 !important;}
+.approved_color{color: #33cc33 !important;}
+.rejected_color{color: #ff3300 !important;}
+
+.history-model h5 {
+    color: #bd9b66;
+}
