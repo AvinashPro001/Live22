@@ -49,7 +49,7 @@
                 <li onclick="SetHistorySectionName('Transfer')"><a data-toggle="tab" href="#profileTransfer"><span key="transfer_title" class="lang">Transfer</span></a></li>
                 <li onclick="SetHistorySectionName('Promotion')"><a data-toggle="tab" href="#promotion-apply"><span key="menu_promotion" class="lang">Promotion</span></a></li>
                 <li onclick="SetHistorySectionName('Rebate')"><a data-toggle="tab" href="#rebate"><span key="rebate" class="lang">Rebate</span></a></li>
-                <li onclick="SetHistorySectionName('Reward')"><a data-toggle="tab" href="#statement"><span key="" class="lang">Reward</span></a></li>
+                <li onclick="SetHistorySectionName('Reward')"><a data-toggle="tab" href="#reward"><span key="" class="lang">Reward</span></a></li>
             </ul>
         </div>
 
@@ -78,37 +78,23 @@
                 </div>
 
                 <div id="promotion-apply" class="tab-pane fade in">
-                    <div class="container full-height listing extra-bottom-padding">
+                    <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
                         <ul class="listing-for-deposite" id="promotionHistory">
                         </ul>
                     </div>
                 </div>
 
                 <div id="rebate" class="tab-pane fade in">
-                    <div class="container full-height listing extra-bottom-padding">
-                        <div class="info-form history-tabs">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#loseRebate"><span key="loseRebate" class="lang"></span></a></li>
-                                <li><a data-toggle="tab" href="#turnOverCommissionRebate"><span key="turnoverCommissionRebate" class="lang"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="history-tabs">
-                            <div class="tab-content">
-                                <div class="tab-pane fade in" id="loseRebate">
-                                    <div class="container full-height listing extra-bottom-padding">
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade in" id="turnOverCommissionRebate">
-                                    <div class="container full-height listing extra-bottom-padding">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
+                        <ul class="listing-for-deposite" id="rebateHistory">
+                        </ul>
                     </div>
                 </div>
 
-                <div id="statement" class="tab-pane fade in">
-                    <div class="container full-height listing extra-bottom-padding" id="statementHistory">
+                <div id="reward" class="tab-pane fade in">
+                    <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
+                        <ul class="listing-for-deposite" id="rewardHistory">
+                        </ul>
 
                     </div>
                 </div>
@@ -262,6 +248,72 @@
                         <p id="bettingHistoryBetAmount"></p>
                         <h5>Total Rebate</h5>
                         <p id="bettingHistoryRebate"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade history-model" id="promotion-history-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Details</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <h5>Promotion Title</h5>
+                        <p id="promotionHistoryTitle"></p>
+                        <h5>Deposit Amount</h5>
+                        <p id="promotionHistoryDAmount"></p>
+                        <h5>Bonus Amount</h5>
+                        <p id="promotionHistoryBAmount"></p>
+                        <h5>User Turnover</h5>
+                        <p id="promotionHistoryUTurnover"></p>
+                        <h5>Turnover Target</h5>
+                        <p id="promotionHistoryTurnoverTarget"></p>
+                        <h5>Turnover Time</h5>
+                        <p id="promotionHistoryTurnTime"></p>
+                        <h5>Remaining Day</h5>
+                        <p id="promotionHistoryRDay"></p>
+                        <h5>Status</h5>
+                        <p id="promotionHistoryStatus"></p>
+                        <h5>Expiry Date</h5>
+                        <p id="promotionHistoryExpiry"></p>
+                        <h5>Created</h5>
+                        <p id="promotionHistoryCreated"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade history-model" id="rebate-history-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Details</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <h5>Game Name</h5>
+                        <p id="rebateHistoryGameName"></p>
+                        <h5>Game Type</h5>
+                        <p id="rebateHistoryGameType"></p>
+                        <h5>Bet Amount</h5>
+                        <p id="rebateHistoryBAmount"></p>
+                        <h5>Rolling</h5>
+                        <p id="rebateHistoryRolling"></p>
+                        <h5>Winlose</h5>
+                        <p id="rebateHistoryWinlose"></p>
+                        <h5>Turnover</h5>
+                        <p id="rebateHistoryTurnover"></p>
+                        <h5>Comm Amount</h5>
+                        <p id="rebateHistoryCommAmount"></p>
+                        <h5>Created</h5>
+                        <p id="rebateHistoryCreated"></p>
                     </div>
                 </div>
             </div>

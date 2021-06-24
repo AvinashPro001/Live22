@@ -988,6 +988,7 @@ function SetHistorySectionName(name) {
     $("#transferHistory").html("");
     $("#bettingsummery").html("");
     $("#promotionHistory").html("");
+    $("#rebateHistory").html("");
     HistorySectionName = name;
     fromDate = null;
     toDate = null;
@@ -1062,6 +1063,7 @@ function GetDateRange() {
     $("#transferHistory").html("");
     $("#bettingsummery").html("");
     $("#promotionHistory").html("");
+    $("#rebateHistory").html("");
     pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");
@@ -1156,6 +1158,7 @@ async function WithdrawDepositHistory(FromDate = null, ToDate = null, PageSize =
     apiRunning = false;
 }
 
+var promotionHistoryData;
 async function PromotionHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
     apiRunning = true;
     let model = {
@@ -1167,9 +1170,10 @@ async function PromotionHistory(FromDate = null, ToDate = null, PageSize = null,
     var res = await PostMethod(apiEndPoints.promotionHistroy, model);
     if (res.data.result.length > 0) {
         var data = res.data.result;
+        promotionHistoryData = data;
         var html = ""
         for (i = 0; i < data.length; i++) {
-            html += '<li data-toggle="modal" data-target="#transfer-history-model"  class="list-content"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].Title + '</h6><p>' + APIDateFormate(data[i].Created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].UserTurnover).toFixed(2) + '</p><p class="product-available ' + data[i].Staus.replace(" ", "_").toLowerCase() + '_color">' + (data[i].Staus == "Manually Expired" ? "M. Expired" : data[i].Staus)  + '</p></div></li>';
+            html += '<li data-toggle="modal" data-target="#promotion-history-model" onclick="PromotionHistoryDetailsSet(\'' + data[i].Id + '\')" class="list-content"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].Title + '</h6><p>' + APIDateFormate(data[i].Created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].UserTurnover).toFixed(2) + '</p><p class="product-available ' + data[i].Staus.replace(" ", "_").toLowerCase() + '_color">' + (data[i].Staus == "Manually Expired" ? "M. Expired" : data[i].Staus) + '</p></div></li>';
         }
         $("#promotionHistory").append(html);
 
@@ -1186,70 +1190,60 @@ async function PromotionHistory(FromDate = null, ToDate = null, PageSize = null,
 }
 
 async function RebateHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    apiRunning = true;
     let model = {
         pageNo: PageNumber == null ? pageNumber : PageNumber,
         pageSize: PageSize == null ? pageSize : PageSize,
         fromDate: FromDate == null ? fromDate : FromDate,
         toDate: ToDate == null ? toDate : ToDate
     }
-    var res = await PostMethod(transactionEndPoints.rebateHistroy, model);
-
-    if (res.status == 200) {
-        if (res.response.data.result.length > 0) {
-            var data = res.response.data.result;
-            $("#tbl_RebateHistory").find("tr:gt(0)").remove();
-            var html = ""
-            for (i = 0; i < data.length; i++) {
-                html += '<tr><td>' + APIDateFormate(data[i].created) + '</td> <td>' + data[i].gameName + '</td><td><span class="blue_color_text">' + parseFloat(data[i].turnover).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].rolling).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].bet).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].winLose).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].commAmount).toFixed(2) + '</span></td></tr>';
-            }
-            $("#tbl_RebateHistory").find('tbody').html(html);
-
-            if (res.response.data.total > 8) {
-                CreatePagination('tbl_RebateHistory_pagination', res.response.data.totalPages, res.response.data.offset + 1);
-            }
-            else {
-                $("#tbl_RebateHistory_pagination").html("");
-            }
-
+    var res = await PostMethod(apiEndPoints.rebateHistroy, model);
+    if (res.data.result.length > 0) {
+        var data = res.data.result;
+        var html = ""
+        for (i = 0; i < data.length; i++) {
+            html += '<li data-toggle="modal" data-target="#rebate-history-model"  onclick="RebateHistoryDetailsSet(\'' + data[i].gameName + '\',\'' + data[i].gameType + '\',\'' + parseFloat(data[i].bet).toFixed(2) + '\',\'' + parseFloat(data[i].rolling).toFixed(2) + '\',\'' + parseFloat(data[i].winLose).toFixed(2) + '\',\'' + parseFloat(data[i].turnover).toFixed(2) + '\',\'' + parseFloat(data[i].commAmount).toFixed(2) + '\',\'' + data[i].created + '\')"  class="list-content"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].gameName + '</h6><p>' + APIDateFormate(data[i].created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].commAmount).toFixed(2) + '</p><p class="product-available approved_color">' + data[i].gameType + '</p></div></li>';
         }
-        else {
-            var html = '<tr><td colspan="7">No Transaction yet</td></tr>'
-            $("#tbl_RebateHistory").find('tbody').html(html);
-        }
+        $("#rebateHistory").append(html);
     }
+    else {
+        if (res.data.total == 0)
+            if ($("#rebateHistory li").length == 0) {
+                var html = '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
+                $("#rebateHistory").html(html);
+            }
+    }
+    getLanguage(false);
+    apiRunning = false;
 }
 
 async function RewardHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    apiRunning = true;
     let model = {
         pageNo: PageNumber == null ? pageNumber : PageNumber,
         pageSize: PageSize == null ? pageSize : PageSize,
         fromDate: FromDate == null ? fromDate : FromDate,
         toDate: ToDate == null ? toDate : ToDate
     }
-    var res = await PostMethod(transactionEndPoints.rewadHistroy, model);
-    if (res.status == 200) {
-        if (res.response.data.result.length > 0) {
-            var data = res.response.data.result;
-            $("#tbl_rewardHistory").find("tr:gt(0)").remove();
-            var html = ""
-            for (i = 0; i < data.length; i++) {
-                html += '<tr><td>' + APIDateFormate(data[i].Created) + '</td> <td>' + data[i].TransactionType + '</td><td><span class="blue_color_text">' + data[i].Amount + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].CurrentBalance).toFixed(2) + '</span></td></tr>';
-            }
-            $("#tbl_rewardHistory").find('tbody').html(html);
-
-            if (res.response.data.total > 8) {
-                CreatePagination('tbl_rewardHistory_pagination', res.response.data.totalPages, res.response.data.offset + 1);
-            }
-            else {
-                $("#tbl_rewardHistory_pagination").html("");
-            }
-
+    var res = await PostMethod(apiEndPoints.rewadHistroy, model);
+    if (res.data.result.length > 0) {
+        var data = res.data.result;
+        var html = ""
+        for (i = 0; i < data.length; i++) {
+            html += '<li data-toggle="modal" data-target="#rebate-history-model"  class="list-content"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].TransactionType + '</h6><p>' + APIDateFormate(data[i].Created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].Amount).toFixed(2) + '</p><p class="product-available approved_color">' + parseFloat(data[i].CurrentBalance).toFixed(2) + '</p></div></li>';
         }
-        else {
-            var html = '<tr><td colspan="4">No Transaction yet</td></tr>'
-            $("#tbl_rewardHistory").find('tbody').html(html);
-        }
+        $("#rewardHistory").append(html);
+
     }
+    else {
+        if (res.data.total == 0)
+            if ($("#rewardHistory li").length == 0) {
+                var html = '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
+                $("#rewardHistory").html(html);
+            }
+    }
+    getLanguage(false);
+    apiRunning = false;
 }
 
 async function BettingHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
@@ -1304,4 +1298,31 @@ function BettingHistoryDetailsSet(GameName, BetCount, VaildBetAmount, TotalRebat
     $("#bettingHistoryVaildBet").html(VaildBetAmount)
     $("#bettingHistoryBetAmount").html(BetAmount)
     $("#bettingHistoryRebate").html(TotalRebate)
+}
+
+function PromotionHistoryDetailsSet(id) {
+    var data = promotionHistoryData.filter(x => x.Id == id);
+
+    $("#promotionHistoryTitle").html(data[0].Title)
+    $("#promotionHistoryDAmount").html(parseFloat(data[0].DepositAmount).toFixed(2))
+    $("#promotionHistoryBAmount").html(parseFloat(data[0].BonusAmount).toFixed(2))
+    $("#promotionHistoryUTurnover").html(parseFloat(data[0].UserTurnover).toFixed(2))
+    $("#promotionHistoryTurnTime").html(data[0].TurnoverTime == "0X" ? data[0].WinTurn : data[0].TurnoverTime)
+    $("#promotionHistoryRDay").html(data[0].RemainingDay)
+    $("#promotionHistoryStatus").html(data[0].Staus)
+    $("#promotionHistoryExpiry").html(data[0].ExpiryDate.replace("T", " "))
+    $("#promotionHistoryCreated").html(data[0].Created.replace("T", " "))
+    $("#promotionHistoryTurnoverTarget").html(parseFloat(data[0].TurnoverTarget).toFixed(2))
+
+}
+
+function RebateHistoryDetailsSet(GameName, GameType, BetAmount, Rolling, winlose, Turnover, CommAmount, created) {
+    $("#rebateHistoryGameName").html(GameName)
+    $("#rebateHistoryGameType").html(GameType)
+    $("#rebateHistoryBAmount").html(BetAmount)
+    $("#rebateHistoryRolling").html(Rolling)
+    $("#rebateHistoryWinlose").html(winlose)
+    $("#rebateHistoryTurnover").html(Turnover)
+    $("#rebateHistoryCommAmount").html(CommAmount)
+    $("#rebateHistoryCreated").html(created.replace("T", " "))
 }
