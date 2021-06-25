@@ -443,6 +443,8 @@
             public const string BettingDetails_YeeBet = "[dbo].[YeeBet_BettingDetails_By_Username]";
 
             public const string SBOBettingDetailsInsert = "[dbo].[SBO_BettingDetails_Insert]";
+
+            public const string BettingDetails_SBO = "[dbo].[SBO_BettingDetails_By_Username]";
         }
 
         public class MaxBetGame

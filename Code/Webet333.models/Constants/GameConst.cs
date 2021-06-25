@@ -33,6 +33,8 @@
             public const string MaxBet = "MaxBet";
 
             public const string YeeBet = "YeeBet";
+
+            public const string SBO = "SBO";
         }
 
 #if DEBUG
@@ -690,6 +692,8 @@
             public static class SportType
             {
                 public const long All = 0;
+
+                public const long Soccer = 1;
 
                 public const long Football = 3;
 
@@ -1352,6 +1356,8 @@
             public static class SportType
             {
                 public const long All = 0;
+
+                public const long Soccer = 1;
 
                 public const long Football = 3;
 

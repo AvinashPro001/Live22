@@ -197,6 +197,9 @@ namespace Webet333.api.Controllers
         {
             await CheckUserRole();
 
+            request.FromDate.AddHours(-12);
+            request.ToDate.AddHours(-12);
+
             using (SBOGameHelpers SBOGame_Helpers = new SBOGameHelpers(Connection))
             {
                 var result = await SBOGame_Helpers.GetLeague(request);

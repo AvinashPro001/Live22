@@ -15,11 +15,21 @@ export class BetdetailsLastupdateListComponent implements OnInit {
     rows = [];
     columns = [];
     listType: any = [
-        { Type: "M8" },
-        { Type: "Playtech" },
-        { Type: "AG" },
-        { Type: "MaxBet" },
-        { Type: "Jsoker" },
+        { Type: this.commonService.GameName.M8 },
+        { Type: this.commonService.GameName.AG },
+        { Type: this.commonService.GameName.Playtech },
+        { Type: this.commonService.GameName.Joker },
+        { Type: this.commonService.GameName.Mega888 },
+        { Type: this.commonService.GameName._918Kiss },
+        { Type: this.commonService.GameName.DG },
+        { Type: this.commonService.GameName.SexyBaccarat },
+        { Type: this.commonService.GameName.SA },
+        { Type: this.commonService.GameName.Pussy888 },
+        { Type: this.commonService.GameName.AllBet },
+        { Type: this.commonService.GameName.WM },
+        { Type: this.commonService.GameName.PragmaticPlay },
+        { Type: this.commonService.GameName.YeeBet },
+        { Type: this.commonService.GameName.SBO }
     ];
     selectedlist: any;
     loadingIndicator: boolean = false;

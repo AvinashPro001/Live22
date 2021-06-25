@@ -126,7 +126,7 @@ namespace Webet333.api.Helpers
                         MaxBet = playerDefaultBetLimit.Football_OthersMatchType_MaxBet,
                         MaxBetPerMatch =  playerDefaultBetLimit.Football_OthersMatchType_MaxBetMatch,
                         MinBet = playerDefaultBetLimit.Football_OthersMatchType_MinBet,
-                        SportType = GameConst.SBO.SportType.Football
+                        SportType = GameConst.SBO.SportType.Soccer
                     },
                     new SBOSetPlayerBetLimitRequestBetSetting
                     {
@@ -134,7 +134,7 @@ namespace Webet333.api.Helpers
                         MaxBet = playerDefaultBetLimit.Football_OverUnder_MaxBet,
                         MaxBetPerMatch = playerDefaultBetLimit.Football_OverUnder_MaxBetMatch,
                         MinBet = playerDefaultBetLimit.Football_OverUnder_MinBet,
-                        SportType = GameConst.SBO.SportType.Football
+                        SportType = GameConst.SBO.SportType.Soccer
                     },
                     new SBOSetPlayerBetLimitRequestBetSetting
                     {
@@ -142,7 +142,7 @@ namespace Webet333.api.Helpers
                         MaxBet = playerDefaultBetLimit.Football_CorrectScore_MaxBet,
                         MaxBetPerMatch = playerDefaultBetLimit.Football_CorrectScore_MaxBetMatch ,
                         MinBet = playerDefaultBetLimit.Football_CorrectScore_MinBet,
-                        SportType = GameConst.SBO.SportType.Football
+                        SportType = GameConst.SBO.SportType.Soccer
                     },
                     new SBOSetPlayerBetLimitRequestBetSetting
                     {
@@ -376,7 +376,7 @@ namespace Webet333.api.Helpers
                 Portfolio = GameConst.SBO.Portfolio.SportsBook,
                 ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
                 StartDate = startTime,
-                Username = GameConst.SBO.Agent.Username
+                Username = string.IsNullOrWhiteSpace(request.Username) ? GameConst.SBO.Agent.Username : request.Username
             };
 
             var URL = $"{GameConst.SBO.URL}{GameConst.SBO.EndPoint.BettingDetails}";
@@ -447,7 +447,7 @@ namespace Webet333.api.Helpers
                     FromDate = request.FromDate.ToString(),
                     LeagueNameKeyWord = abc,
                     ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
-                    SportType = GameConst.SBO.SportType.Football,
+                    SportType = GameConst.SBO.SportType.Soccer,
                     //ToDate = DateTime.Now.AddHours(12)
                     //ToDate = DateTime.Now.AddDays(200).ToString("yyyy-MM-dd HH:mm:ss.fff")
                     ToDate = request.ToDate.ToString()
@@ -466,7 +466,8 @@ namespace Webet333.api.Helpers
                 temp.Error.Id == 0 &&
                 temp.Result.Any())
             {
-                temp.Result.ForEach(x => x.SportType = "Football");
+                //temp.Result.ForEach(x => x.SportType = "Football");
+                temp.Result.ForEach(x => x.SportType = "Soccer");
             }
 
             return temp;

@@ -71,9 +71,9 @@ namespace Webet333.models.Request
     public class OnlyDateRangeFilterRequest
     {
         [JsonProperty("fromDate")]
-        public DateTime? FromDate { get; set; }
+        public DateTime FromDate { get; set; }
 
         [JsonProperty("toDate")]
-        public DateTime? ToDate { get; set; }
+        public DateTime ToDate { get; set; }
     }
 }

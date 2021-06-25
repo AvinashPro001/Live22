@@ -51,6 +51,9 @@ export class MaintenanceComponent implements OnInit {
     AllBetId: any;
     YeeBetId: any;
 
+    SBOMainteance: boolean;
+    SBOId: any;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -69,65 +72,69 @@ export class MaintenanceComponent implements OnInit {
     setData() {
         this.adminService.get<any>(account.walletSelect).subscribe(res => {
             for (var i = 0; i < res.data.length; i++) {
-                if (res.data[i].walletType === "Joker Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.Joker) {
                     this.jokerMainteance = res.data[i].isMaintenance;
                     this.jokerId = res.data[i].id
                 }
-                if (res.data[i].walletType === "M8 Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.M8) {
                     this.M8Mainteance = res.data[i].isMaintenance;
                     this.M8Id = res.data[i].id
                 }
-                if (res.data[i].walletType === "AG Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.AG) {
                     this.AGMainteance = res.data[i].isMaintenance;
                     this.AGId = res.data[i].id
                 }
-                if (res.data[i].walletType === "918Kiss Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName._918Kiss) {
                     this.Kiss918Mainteance = res.data[i].isMaintenance
                     this.Kiss918Id = res.data[i].id
                 }
-                if (res.data[i].walletType === "PlayTech Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.Playtech) {
                     this.PlaytechMainteance = res.data[i].isMaintenance
                     this.PlaytechId = res.data[i].id
                 }
-                if (res.data[i].walletType === "MaxBet Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.MaxBet) {
                     this.MaxBetMainteance = res.data[i].isMaintenance
                     this.MaxBetId = res.data[i].id
                 }
-                if (res.data[i].walletType === "Mega888 Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.Mega888) {
                     this.Mega888Mainteance = res.data[i].isMaintenance
                     this.Mega888Id = res.data[i].id
                 }
-                if (res.data[i].walletType === "DG Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.DG) {
                     this.DGMainteance = res.data[i].isMaintenance
                     this.DGId = res.data[i].id
                 }
-                if (res.data[i].walletType === "Sexy Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.SexyBaccarat) {
                     this.SexyMainteance = res.data[i].isMaintenance
                     this.SexyId = res.data[i].id
                 }
-                if (res.data[i].walletType === "SA Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.SA) {
                     this.SAMainteance = res.data[i].isMaintenance
                     this.SAId = res.data[i].id
                 }
-                if (res.data[i].walletType === "Pussy888 Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.Pussy888) {
                     this.Pussy888Mainteance = res.data[i].isMaintenance
                     this.Pussy888Id = res.data[i].id
                 }
-                if (res.data[i].walletType === "AllBet Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.AllBet) {
                     this.AllBetMainteance = res.data[i].isMaintenance
                     this.AllBetId = res.data[i].id
                 }
-                if (res.data[i].walletType === "WM Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.WM) {
                     this.WMMainteance = res.data[i].isMaintenance
                     this.WMId = res.data[i].id
                 }
-                if (res.data[i].walletType === "Pragmatic Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.PragmaticPlay) {
                     this.PragmaticMainteance = res.data[i].isMaintenance
                     this.PragmaticId = res.data[i].id
                 }
-                if (res.data[i].walletType === "YeeBet Wallet") {
+                if (res.data[i].walletType === this.commonService.WalletName.YeeBet) {
                     this.YeeBetMainteance = res.data[i].isMaintenance
                     this.YeeBetId = res.data[i].id
+                }
+                if (res.data[i].walletType === this.commonService.WalletName.SBO) {
+                    this.SBOMainteance = res.data[i].isMaintenance
+                    this.SBOId = res.data[i].id
                 }
             }
         })
