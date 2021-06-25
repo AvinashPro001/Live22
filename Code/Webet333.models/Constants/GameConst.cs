@@ -1218,13 +1218,13 @@
 
         public class SBO
         {
-            public const string URL = "http://ex-api-demo-yy.568win.com/";
+            public const string URL = "http://ex-api-yy.xxttgg.com/";
 
-            public const string CompanyKey = "2C5ACC95A9E8466FB39A444AB13CC7D2";
+            public const string CompanyKey = "694F2CFB29414D059B6864702EB18460";
 
-            public const string User = "sbotestw";
+            public const string User = "sbowebet";
 
-            public const string Password = "123qwe123";
+            public const string Password = "778899Abc";
 
             public const string Currency = "MYR";
 
@@ -1255,9 +1255,9 @@
 
             public static class Agent
             {
-                public const string Username = "AgentWeBet333UAT";
+                public const string Username = "AgentWeBet333LIVE";
 
-                public const string Password = "AgentWeBet333UAT";
+                public const string Password = "AgentWeBet333LIVE";
 
                 public const long Min = 5;
 
@@ -1358,6 +1358,7 @@
                 public const long Others = 11;
             }
         }
+
 #endif
     }
 }
