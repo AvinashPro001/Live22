@@ -15,6 +15,9 @@ namespace Webet333.models.Request.Game.SBO
 
         [JsonProperty("ServerId")]
         public string ServerId { get; set; }
+
+        [JsonProperty("UserGroup")]
+        public string UserGroup { get; set; }
     }
 
     public class SBORegistrationAgentRequest

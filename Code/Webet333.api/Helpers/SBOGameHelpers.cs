@@ -72,7 +72,8 @@ namespace Webet333.api.Helpers
                 Agent = GameConst.SBO.Agent.Username,
                 CompanyKey = GameConst.SBO.CompanyKey,
                 ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
-                Username = Username
+                Username = Username,
+                UserGroup = GameConst.SBO.UserGroup.D
             };
 
             var URL = $"{GameConst.SBO.URL}{GameConst.SBO.EndPoint.RegisterPlayer}";
