@@ -37,6 +37,7 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
     selectedLeagueList = [];
     customerData: any;
     T: any;
+    dataTable: any;
 
     constructor(
         private commonService: CommonService,
@@ -168,26 +169,35 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
         }
 
         if (this.selectedLeagueList.length > 0) {
-            let model = [];
+            //let model = [];
+            //this.selectedLeagueList.forEach(el => {
+            //    model.push({
+            //        LeagueName: el.LeagueKeyword,
+            //        LeagueId: el.LeagueId,
+            //        SportType: el.SportType,
+            //        MinBet: temp.minBet,
+            //        MaxBet: temp.maxBet,
+            //        MaxBetRatio: temp.maxBetRatio,
+            //        GroupType: temp.groupType
+            //    });
+            //    model = [...model]
+            //});
+            //this.adminService.add<any>(customer.sboSetLeague, model).subscribe(res => {
+            //    this.toasterService.pop('success', 'Success', res.message);
+            //    this.refreshPage();
+            //}, error => {
+            //    this.toasterService.pop('error', 'Error', error.error.message);
+            //});
 
             this.selectedLeagueList.forEach(el => {
-                model.push({
-                    LeagueName: el.LeagueKeyword,
-                    LeagueId: el.LeagueId,
-                    SportType: el.SportType,
-                    MinBet: temp.minBet,
-                    MaxBet: temp.maxBet,
-                    MaxBetRatio: temp.maxBetRatio,
-                    GroupType: temp.groupType
-                });
-                model = [...model]
-            });
+                //Find index of specific object using findIndex method.
+                let objIndex = this.rows.findIndex((obj => obj.LeagueId == el.LeagueId));
 
-            this.adminService.add<any>(customer.sboSetLeague, model).subscribe(res => {
-                this.toasterService.pop('success', 'Success', res.message);
-                this.refreshPage();
-            }, error => {
-                this.toasterService.pop('error', 'Error', error.error.message);
+                //Update object's name property.
+                this.rows[objIndex].MinBet = Number(temp.minBet);
+                this.rows[objIndex].MaxBet = Number(temp.maxBet);
+                this.rows[objIndex].MaxBetRatio = Number(temp.maxBetRatio);
+                this.rows[objIndex].GroupType = temp.groupType;
             });
         }
         else {
@@ -221,6 +231,8 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
 
     Update() {
         if (this.rows.length > 0) {
+            this.SearchInDataTable(1);
+
             let model = [];
 
             this.rows.forEach(el => {
@@ -254,6 +266,37 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
     }
 
     //#endregion Refresh page
+
+    //#region Search in data table
+
+    SearchInDataTable(IsCallFromUpdate = 0) {
+        this.onSomeActionToDeselectAllRows();
+
+        let searchKeyword = IsCallFromUpdate == 0 ? (document.getElementById("txt_search") as HTMLInputElement).value : '';
+
+        if (searchKeyword.length > 0) {
+            if (this.dataTable == null) this.dataTable = this.rows  // Copy value for future use.
+            else this.rows = this.dataTable
+
+            let temp = this.rows.filter(x => x.LeagueKeyword.toLowerCase().includes(searchKeyword.toLowerCase()));
+            this.rows = temp;
+        }
+        else {
+            if (this.dataTable == null) this.dataTable = this.rows  // Copy value for future use.
+            else this.rows = this.dataTable
+        }
+    }
+
+    //#endregion Search in data table
+
+    //#region Deselect data table
+
+    onSomeActionToDeselectAllRows() {
+        this.onSelect({ selected: [] });
+        this.table.selected = [];
+    }
+
+    //#endregion Deselect data table
 
     //#region Check Permission
 
