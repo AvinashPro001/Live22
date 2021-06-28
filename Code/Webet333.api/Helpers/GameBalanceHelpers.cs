@@ -13,10 +13,12 @@ using Webet333.api.Helpers.SexyBaccarat;
 using Webet333.dapper;
 using Webet333.models.Constants;
 using Webet333.models.Request.Game.DG;
+using Webet333.models.Request.Game.SBO;
 using Webet333.models.Response.Game.AllBet;
 using Webet333.models.Response.Game.DG;
 using Webet333.models.Response.Game.MAXBet;
 using Webet333.models.Response.Game.Pragmatic;
+using Webet333.models.Response.Game.SBO;
 using Webet333.models.Response.Game.SexyBaccarat;
 using Webet333.models.Response.Game.WM;
 using Webet333.models.Response.Game.YEEBET;
@@ -494,6 +496,41 @@ namespace Webet333.api.Helpers
 
         #endregion Call API of YEEBET Game
 
+        #region Call API of SBO Game
+
+        internal async Task<string> CallSBOGameBalance(string Username, int lang = 1)
+        {
+            string balance = null;
+
+            SBOGetPlayerBalanceRequest model = new SBOGetPlayerBalanceRequest
+            {
+                CompanyKey = GameConst.SBO.CompanyKey,
+                ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
+                Username = Username
+            };
+
+            var URL = $"{GameConst.SBO.URL}{GameConst.SBO.EndPoint.GetPlayerBalance}";
+
+            try
+            {
+                var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
+                var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
+
+                var DeserializeAPIResult = JsonConvert.DeserializeObject<SBOGetPlayerBalanceResponse>(APIResult);
+
+                balance = DeserializeAPIResult != null ? (DeserializeAPIResult.Error.Id == 0 ? DeserializeAPIResult.Balance.ToString() : null) : null;
+            }
+            catch (Exception ex)
+            {
+                balance = null;
+            }
+
+            return balance;
+        }
+
+        #endregion Call API of SBO Game
+
         #endregion Call Third Party Game Balance API's
 
         #region Update ALL games balance in db
@@ -683,6 +720,24 @@ namespace Webet333.api.Helpers
         }
 
         #endregion YEEBET Balance Update
+
+        #region SBO Balance Update
+
+        internal async Task<dynamic> SBOBalanceUpdate(string UserId, string Amount)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.FindAsync(
+                    StoredProcConsts.GameBalance.SBOGameBalanceUpdate,
+                    new
+                    {
+                        UserId,
+                        Amount
+                    });
+            }
+        }
+
+        #endregion SBO Balance Update
 
         #endregion Update ALL games balance in db
 

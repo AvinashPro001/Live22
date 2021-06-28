@@ -312,6 +312,8 @@
             public const string PragmaticBalanceUpdate = "[dbo].[Balance_Pragmatic_Update]";
 
             public const string YEEBETGameBalanceUpdate = "[dbo].[Balance_YEEBET_Update]";
+
+            public const string SBOGameBalanceUpdate = "[dbo].[Balance_SBO_Update]";
         }
 
         public class Game
@@ -439,6 +441,10 @@
             public const string YEEBETBettingDetailsInsert = "[dbo].[YEEBET_BettingDetails_Insert]";
 
             public const string BettingDetails_YeeBet = "[dbo].[YeeBet_BettingDetails_By_Username]";
+
+            public const string SBOBettingDetailsInsert = "[dbo].[SBO_BettingDetails_Insert]";
+
+            public const string BettingDetails_SBO = "[dbo].[SBO_BettingDetails_By_Username]";
         }
 
         public class MaxBetGame
@@ -596,6 +602,19 @@
             public const string SaveGetBetLimit = "[dbo].[SetBet_Limit_YeeBet]";
 
             public const string SetBetlimitDepositAmount = "[dbo].[Set_BetLimit_DepositAmount_YeeBet]";
+        }
+
+        public class SBO
+        {
+            public const string Register = "[dbo].[Users_Insert_SBO]";
+
+            public const string SetPlayerDefaultBetLimit = "[dbo].[Set_Default_Player_Betlimit_SBO]";
+
+            public const string SelectPlayerDefaultBetLimit = "[dbo].[Select_Default_Player_Betlimit_SBO]";
+
+            public const string UpdateLeagueBetSetting = "[dbo].[Update_League_Bet_Setting_SBO]";
+
+            public const string SelectLeagueBetSetting = "[dbo].[Select_League_Bet_Setting_SBO]";
         }
     }
 }

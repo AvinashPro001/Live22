@@ -327,6 +327,10 @@
                                                             <td class="menu-padding">YeeBet wallet</td>
                                                             <td><span id="YeeBetBalance">fetching.....</span></td>
                                                         </tr>
+                                                        <tr>
+                                                            <td class="menu-padding">SBO wallet</td>
+                                                            <td><span id="SBOBalance">fetching.....</span></td>
+                                                        </tr>
                                                     </table>
                                                 </div>
                                             </div>
@@ -356,6 +360,11 @@
                         <li class="dropdown sportbook">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang" key="menu_sport_book"></span><span class="caret"></span></a>
                             <ul class="dropdown-menu dropmenu-main" id="subMenuSports" role="menu">
+                                <li>
+                                    <a data-toggle="tooltip" data-placement="bottom" onclick="logingGame('SBO')" id="SBOGame">
+                                        <img id="SBOSports" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/footer/sbo.png" alt="SBO" />
+                                    </a>
+                                </li>
                                 <li>
                                     <a data-toggle="tooltip" data-placement="bottom" onclick="logingGame('M8')" id="urlSportbookHome">
                                         <img id="m8sports" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/footer/m8bet.png" style="height:62px;width:auto" alt="M8" />
@@ -592,6 +601,11 @@
                         <li>
                             <figure class="pad-top-ten">
                                 <img class="pink-logo" src="../../images/footer/logo_yeebet.png" alt="YeeBet logo">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure class="pad-top-ten">
+                                <img class="pink-logo" src="../../images/footer/sbo.png" alt="SBO logo">
                             </figure>
                         </li>
                     </ul>

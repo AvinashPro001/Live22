@@ -24,7 +24,7 @@ namespace Webet333.api.Controllers
 
         private IHostingEnvironment _hostingEnvironment;
 
-        static GetBalanceUserResponse UserDetails { get; set; }
+        private static GetBalanceUserResponse UserDetails { get; set; }
 
         public GameBalanceController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
@@ -536,6 +536,34 @@ namespace Webet333.api.Controllers
 
         #endregion Check M8 game balance
 
+        #region Check SBO game balance
+
+        [HttpPost(ActionsConst.GameBalance.CheckSBOBalance)]
+        public async Task<IActionResult> CheckSBOBalance([FromBody] UserBalanceRequest request)
+        {
+            if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+            if (string.IsNullOrWhiteSpace(request.Id)) return BadResponse(ErrorConsts.InvalidModelstate);
+
+            dynamic previousBalance = 0.00;
+
+            if (request.Username != null)
+            {
+                using (var gamehelper = new GameBalanceHelpers(Connection))
+                {
+                    string balance = await gamehelper.CallSBOGameBalance(request.Username);
+                    previousBalance = await gamehelper.SBOBalanceUpdate(request.Id, balance);
+
+                    return OkResponse(new { balance = balance, previousBalance.PreviousBalance });
+                }
+            }
+            string response = null;
+
+            return OkResponse(new { balance = response, previousBalance });
+        }
+
+        #endregion Check SBO game balance
+
         #endregion Check Sports game balance for pending bets or running games
 
         #region YEEBET Balance
@@ -566,5 +594,35 @@ namespace Webet333.api.Controllers
         }
 
         #endregion YEEBET Balance
+
+        #region SBO Balance
+
+        [Authorize]
+        [HttpPost(ActionsConst.GameBalance.SBOBalance)]
+        public async Task<IActionResult> SBOBalance([FromBody] UserBalanceRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            if (GetUserRole(User) == RoleConst.Users) request.Id = GetUserId(User).ToString();
+
+            if (string.IsNullOrWhiteSpace(request.Id)) return BadResponse(ErrorConsts.InvalidModelstate);
+
+            dynamic previousBalance = 0.00;
+
+            using (var gamehelper = new GameBalanceHelpers(Connection))
+            {
+                string balance = await gamehelper.CallSBOGameBalance(request.Username);
+                previousBalance = await gamehelper.SBOBalanceUpdate(request.Id, balance);
+
+                return OkResponse(new
+                {
+                    balance = balance,
+                    previousBalance.PreviousBalance
+                });
+            }
+        }
+
+        #endregion SBO Balance
     }
 }

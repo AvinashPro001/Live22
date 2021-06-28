@@ -95,6 +95,9 @@ export class BonusAddComponent implements OnInit {
     YeeBetBalance: any;
     YeeBetUsername: any;
 
+    SBOBalance: any;
+    SBOUsername: any;
+
     //#endregion
 
     //#region ngOnInit
@@ -513,6 +516,7 @@ export class BonusAddComponent implements OnInit {
                 this.wmUsername = res.data.wmUsername;
                 this.pragmaticUsername = res.data.pragmaticUsername;
                 this.YeeBetUsername = res.data.yeeBetUsername;
+                this.SBOUsername = res.data.sboUsername;
                 this.Kiss918Balance(newVal);
                 this.Mega888(newVal);
                 this.Maxbet(newVal);
@@ -529,6 +533,7 @@ export class BonusAddComponent implements OnInit {
                 this.WM(newVal);
                 this.Pragmatic(newVal);
                 this.YeeBet(newVal);
+                this.SBO(newVal);
             })
         });
     }
@@ -736,6 +741,16 @@ export class BonusAddComponent implements OnInit {
         }
         this.adminService.add<any>(gameBalance.YeeBet, data).subscribe(res => {
             this.YeeBetBalance = res.data.balance;
+        })
+    }
+
+    SBO(id) {
+        let data = {
+            id: id,
+            username: this.SBOUsername
+        }
+        this.adminService.add<any>(gameBalance.SBO, data).subscribe(res => {
+            this.SBOBalance = res.data.balance;
         })
     }
 

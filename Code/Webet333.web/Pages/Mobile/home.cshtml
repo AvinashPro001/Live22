@@ -134,6 +134,14 @@
                         </div>
                         <div id="sport-tile" role="tabpanel" class="tab-pane fade in">
                             <ul class="game-series">
+                                <li data-toggle="modal" data-target="#gameLogin" id="SBOSports">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/images-mobile/sbo.png" alt="SBO">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="SBO_Game"></span></button>
+                                    </a>
+                                </li>
                                 <li data-toggle="modal" data-target="#gameLogin" id="m8sports">
                                     <a>
                                         <figure>
@@ -273,6 +281,7 @@
     <span style="display:none;" id="918Game"></span>
     <span style="display:none;" id="JokerGame"></span>
     <span style="display:none;" id="MaxBetGame"></span>
+    <span style="display:none;" id="SBOGame"></span>
 </div>
 
 <div id="beforelogin_mobile">
@@ -404,6 +413,12 @@
                                         <li class="fright" id="ddlYeeBetWallet">feching...</li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>SBO Wallet</strong></li>
+                                        <li class="fright" id="ddlSBOWallet">feching...</li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -523,6 +538,14 @@
                     </div>
                     <div id="menu1" class="tab-pane fade">
                         <ul class="game-series">
+                            <li onclick="logingGame('SBO')" id="SBOSportsLogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/images-mobile/sbo.png" alt="SBO">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="SBO_Game"></span></button>
+                                </a>
+                            </li>
                             <li onclick="logingGame('M8')" id="m8sportslogin">
                                 <a>
                                     <figure>

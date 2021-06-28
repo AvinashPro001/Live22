@@ -38,6 +38,7 @@ using Webet333.models.Response.Game.DG;
 using Webet333.models.Response.Game.Joker;
 using Webet333.models.Response.Game.Kiss918;
 using Webet333.models.Response.Game.Pussy888;
+using Webet333.models.Response.Game.SBO;
 using Webet333.models.Response.Game.SexyBaccarat;
 using Webet333.models.Response.Game.YEEBET;
 using Webet333.models.Response.TransferMoney;
@@ -796,6 +797,24 @@ namespace Webet333.api.Controllers
 
         #endregion YEEBET Game
 
+        #region SBO Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.Manually_SBO_Betting_Details)]
+        public async Task<IActionResult> Manually_SBO_Betting_Details([FromBody] GlobalBettingDetailsRequest request)
+        {
+            await CheckUserRole();
+
+            request.FromDate.AddHours(-12);
+            request.ToDate.AddHours(-12);
+
+            var response = await SBOGameHelpers.BettingDetailsCallAPI(request);
+
+            return OkResponse(response);
+        }
+
+        #endregion SBO Game
+
         #endregion Manually Game Betting Details
 
         #region GAME BETTING DETAILS
@@ -1298,6 +1317,36 @@ namespace Webet333.api.Controllers
 
         #endregion YEEBET Betting Details
 
+        #region SBO Betting Details
+
+        [HttpGet(ActionsConst.Game.SBO_Betting_Details)]
+        public async Task<IActionResult> SBO_Betting_Details()
+        {
+            DateTime date = DateTime.Now.AddHours(-12);
+
+            GlobalBettingDetailsRequest request = new GlobalBettingDetailsRequest
+            {
+                FromDate = date.AddMinutes(-10),
+                ToDate = date
+            };
+
+            var response = await SBOGameHelpers.BettingDetailsCallAPI(request);
+
+            if (response.Error.Id == 0)
+                using (var game_helper = new GameHelpers(Connection))
+                {
+                    var jsonString = JsonConvert.SerializeObject(response.Result);
+                    await game_helper.SBOServicesInsert(jsonString);
+                }
+
+            return OkResponse(new
+            {
+                jsonString = JsonConvert.SerializeObject(response)
+            });
+        }
+
+        #endregion SBO Betting Details
+
         #endregion GAME BETTING DETAILS
 
         #region Game Category
@@ -1603,6 +1652,32 @@ namespace Webet333.api.Controllers
 
         #endregion YEEBET Game
 
+        #region SBO Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.SBOBettingDetailsSave)]
+        public async Task<IActionResult> SBOBettingDetails_Insert([FromBody] GameBettingDetailsInsertRequest request)
+        {
+            await CheckUserRole();
+
+            if (request.JsonData != null)
+            {
+                List<SBOBettingDetailsResponseResult> result = JsonConvert.DeserializeObject<List<SBOBettingDetailsResponseResult>>(request.JsonData.ToString());
+
+                if (result.Any())
+                {
+                    using (var game_help = new GameHelpers(Connection: Connection))
+                    {
+                        await game_help.SBOServicesInsert(request.JsonData);
+                    }
+                }
+            }
+
+            return OkResponse();
+        }
+
+        #endregion SBO Game
+
         #endregion Game Betting Details save
 
         #region User Balance
@@ -1733,12 +1808,9 @@ namespace Webet333.api.Controllers
         {
             var Role = GetUserRole(User);
             var UserId = GetUserId(User).ToString();
-            if (Role == RoleConst.Users)
-                request.Id = UserId;
+            if (Role == RoleConst.Users) request.Id = UserId;
 
-            if (Role == RoleConst.Admin)
-                if (string.IsNullOrEmpty(request.Id))
-                    return BadResponse("error_invalid_modelstate");
+            if (Role == RoleConst.Admin) if (string.IsNullOrEmpty(request.Id)) return BadResponse("error_invalid_modelstate");
 
             GetBalanceUserResponse user;
             string AGUsername,
@@ -1752,7 +1824,8 @@ namespace Webet333.api.Controllers
                 WMUsername,
                 AllbetUsername,
                 PragmaticUsername,
-                YeeBetUsername;
+                YeeBetUsername,
+                SBOUsername;
 
             using (var account_helper = new AccountHelpers(Connection))
             {
@@ -1769,6 +1842,7 @@ namespace Webet333.api.Controllers
                 WMUsername = user.WMGamePrefix + user.UserId;
                 PragmaticUsername = user.PragmaticGamePrefix + user.UserId;
                 YeeBetUsername = user.YEEBETGamePrefix + user.UserId;
+                SBOUsername = user.SBOGamePrefix + user.UserId;
             }
 
             decimal mainBalance = 0.0m,
@@ -1786,7 +1860,9 @@ namespace Webet333.api.Controllers
                 WMBalance = 0.0m,
                 PragmaticBalance = 0.0m,
                 PussyBalance = 0.0m,
-                YeeBetBalance = 0.0m;
+                YeeBetBalance = 0.0m,
+                SBOBalance = 0.0m;
+
             using (var game_helper = new GameHelpers(Connection))
             {
                 if (request.AGWallet != 0)
@@ -1977,6 +2053,20 @@ namespace Webet333.api.Controllers
                     { }
                 }
 
+                if (request.SBOWallet != 0)
+                {
+                    try
+                    {
+                        var result = await SBOGameHelpers.CallWithdrawAPI(SBOUsername, Math.Abs(request.SBOWallet));
+
+                        mainBalance += result.Error.Id == 0 ? request.SBOWallet : 0;
+
+                        SBOBalance = result.Error.Id == 0 ? request.SBOWallet : 0;
+                    }
+                    catch
+                    { }
+                }
+
                 await game_helper.BalanceRestore(
                     request.Id, UserId,
                     mainBalance,
@@ -1994,7 +2084,8 @@ namespace Webet333.api.Controllers
                     AllbetBalance,
                     WMBalance,
                     PragmaticBalance,
-                    YeeBetBalance
+                    YeeBetBalance,
+                    SBOBalance
                 );
 
                 return OkResponse(new { mainBalance, MaxbetBalance });
@@ -2502,12 +2593,9 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> BalacneInWallet([FromBody] AllInWalletRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
-            var Role = GetUserRole(User);
-            if (Role == RoleConst.Users)
-                request.UserId = GetUserId(User).ToString();
-            else
-                if (String.IsNullOrEmpty(request.UserId))
-                return BadResponse("error_invalid_modelstate");
+            var role = GetUserRole(User);
+            if (role == RoleConst.Users) request.UserId = GetUserId(User).ToString();
+            else if (String.IsNullOrEmpty(request.UserId)) return BadResponse("error_invalid_modelstate");
 
             UserDetailsTransferResponse userDetails;
             using (var account_helper = new AccountHelpers(Connection))
@@ -2530,6 +2618,7 @@ namespace Webet333.api.Controllers
                     SexyUsername = user.SexyGamePrefix + user.Username,
                     WMUsername = user.WMGamePrefix + user.UserId,
                     YEEBETUsername = user.YEEBETGamePrefix + user.UserId,
+                    SBOUsername = user.SBOGamePrefix + user.UserId,
 
                     FromWalletIsMaintenance = false,
                     FromWalletName = "Main Wallet",
@@ -2573,10 +2662,8 @@ namespace Webet333.api.Controllers
                     var DepositResponse = await transferMoney_helper.DepositInWallet(userDetails, userDetails.ToWalletName, request.Amount, request.UserId.ToString(), _hostingEnvironment);
                     if (string.IsNullOrEmpty(DepositResponse.ErrorMessage) && string.IsNullOrEmpty(DepositResponse.GameName) && string.IsNullOrEmpty(DepositResponse.GameResponse))
                     {
-                        if (Role == RoleConst.Users)
-                            await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, request.UserId.ToString(), StatusConsts.Approved, request.UserId.ToString());
-                        else
-                            await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, GetUserId(User).ToString(), StatusConsts.Approved, GetUserId(User).ToString());
+                        if (role == RoleConst.Users) await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, request.UserId.ToString(), StatusConsts.Approved, request.UserId.ToString());
+                        else await transferMoney_helper.Transfer(request.UserId.ToString(), request.FromWalletId.ToString(), request.ToWalletId.ToString(), request.Amount, GetUserId(User).ToString(), StatusConsts.Approved, GetUserId(User).ToString());
 
                         await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Id = Id, Response = Localizer["ok_response_success"].Value, FromWalletResponse = JsonConvert.SerializeObject(WithdrawResponse), ToWalletResponse = JsonConvert.SerializeObject(DepositResponse) });
                     }
@@ -3015,6 +3102,7 @@ namespace Webet333.api.Controllers
                 var WMGame = result.Where(x => x.GameName == GameConst.GamesNames.WM).ToList();
                 var PragmaticGame = result.Where(x => x.GameName == GameConst.GamesNames.Pragmatic).ToList();
                 var YeeBetGame = result.Where(x => x.GameName == GameConst.GamesNames.YeeBet).ToList();
+                var SBOGame = result.Where(x => x.GameName == GameConst.GamesNames.SBO).ToList();
 
                 var response = new
                 {
@@ -3032,9 +3120,10 @@ namespace Webet333.api.Controllers
                     AllBetTurover = AllBetGame.Count > 0 ? AllBetGame.FirstOrDefault().Turnover : 0,
                     WMTurover = WMGame.Count > 0 ? WMGame.FirstOrDefault().Turnover : 0,
                     PragmaticTurover = PragmaticGame.Count > 0 ? PragmaticGame.FirstOrDefault().Turnover : 0,
-                    YeeBetTurover = YeeBetGame.Count > 0 ? YeeBetGame.FirstOrDefault().Turnover : 0
+                    YeeBetTurover = YeeBetGame.Count > 0 ? YeeBetGame.FirstOrDefault().Turnover : 0,
+                    SBOTurover = SBOGame.Count > 0 ? SBOGame.FirstOrDefault().Turnover : 0
                 };
-                decimal total = response.agTurover + response.m8Turover + response.maxbetTurover + response.playtechTurover + response.dgTurover + response.saTurover + response.sexyTurover + response.AllBetTurover + response.WMTurover + response.PragmaticTurover + response.YeeBetTurover;
+                decimal total = response.agTurover + response.m8Turover + response.maxbetTurover + response.playtechTurover + response.dgTurover + response.saTurover + response.sexyTurover + response.AllBetTurover + response.WMTurover + response.PragmaticTurover + response.YeeBetTurover + response.SBOTurover;
 
                 return OkResponse(new { response, Total = total });
             }

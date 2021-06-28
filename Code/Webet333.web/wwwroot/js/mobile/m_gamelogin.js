@@ -188,6 +188,17 @@ async function GameInMaintenance(i) {
             document.getElementById('YeeBetLive').style.filter = "";
             document.getElementById('YeeBetLiveLogin').style.filter = "";
         }
+
+        if (walletData.data[i].walletType == "SBO Wallet" &&
+            walletData.data[i].isMaintenance == true) {
+            document.getElementById('SBOSports').style.filter = "grayscale(1)";
+            document.getElementById('SBOSportsLogin').style.filter = "grayscale(1)";
+        }
+        else if (walletData.data[i].walletType == "SBO Wallet" &&
+            walletData.data[i].isMaintenance == false) {
+            document.getElementById('SBOSports').style.filter = "";
+            document.getElementById('SBOSportsLogin').style.filter = "";
+        }
     }
 }
 
@@ -356,57 +367,39 @@ async function AllInButtonDisable(i) {
         else if (walletData.data[i].walletType == "YeeBet Wallet" &&
             walletData.data[i].isMaintenance == false)
             if (window.location.href.toLowerCase().includes('?p=transfer')) document.getElementById("YeeBetAllIn").disabled = false;
+
+        if (walletData.data[i].walletType == "SBO Wallet" &&
+            walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('?p=transfer')) document.getElementById("SBOAllIn").disabled = true;
+        }
+        else if (walletData.data[i].walletType == "SBO Wallet" &&
+            walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('?p=transfer')) document.getElementById("SBOAllIn").disabled = false;
+        }
     }
 }
 
 async function CheckGameInMaintenance(gameName) {
-    if (walletData === undefined)
-        await Walletdate();
+    if (walletData === undefined) await Walletdate();
 
     var walletName;
-    if (gameName == "M8")
-        walletName = "M8 Wallet";
 
-    if (gameName == "Maxbet")
-        walletName = "MaxBet Wallet";
-
-    if (gameName == "SexyBaccarat")
-        walletName = "Sexy Wallet";
-
-    if (gameName == "SA")
-        walletName = "SA Wallet";
-
-    if (gameName == "DG")
-        walletName = "DG Wallet";
-
-    if (gameName == "918Kiss")
-        walletName = "918Kiss Wallet";
-
-    if (gameName == "Mega888")
-        walletName = "Mega888 Wallet";
-
-    if (gameName == "Joker")
-        walletName = "Joker Wallet";
-
-    if (gameName == "playtech")
-        walletName = "PlayTech Wallet";
-
-    if (gameName == "AG")
-        walletName = "AG Wallet";
-
-    if (gameName == "Pussy888")
-        walletName = "Pussy888 Wallet";
-
-    if (gameName == "AllBet")
-        walletName = "AllBet Wallet";
-
-    if (gameName == "WM")
-        walletName = "WM Wallet";
-
-    if (gameName == "Pragmatic")
-        walletName = "Pragmatic Wallet";
-
+    if (gameName == "M8") walletName = "M8 Wallet";
+    if (gameName == "Maxbet") walletName = "MaxBet Wallet";
+    if (gameName == "SexyBaccarat") walletName = "Sexy Wallet";
+    if (gameName == "SA") walletName = "SA Wallet";
+    if (gameName == "DG") walletName = "DG Wallet";
+    if (gameName == "918Kiss") walletName = "918Kiss Wallet";
+    if (gameName == "Mega888") walletName = "Mega888 Wallet";
+    if (gameName == "Joker") walletName = "Joker Wallet";
+    if (gameName == "playtech") walletName = "PlayTech Wallet";
+    if (gameName == "AG") walletName = "AG Wallet";
+    if (gameName == "Pussy888") walletName = "Pussy888 Wallet";
+    if (gameName == "AllBet") walletName = "AllBet Wallet";
+    if (gameName == "WM") walletName = "WM Wallet";
+    if (gameName == "Pragmatic") walletName = "Pragmatic Wallet";
     if (gameName == "YeeBet") walletName = "YeeBet Wallet";
+    if (gameName == "SBO") walletName = "SBO Wallet";
 
     for (i = 0; i < walletData.data.length; i++)
         if (walletData.data[i].walletType == walletName && walletData.data[i].isMaintenance == true)
@@ -574,42 +567,28 @@ async function logingGame(gameName) {
     }
     if (GetLocalStorage('currentUser') !== null) {
         if (checkedValue) {
-            if (gameName == "M8")
-                TransferInAllWallet("M8 Wallet");
-            if (gameName == "MaxBet")
-                TransferInAllWallet("MaxBet Wallet");
-            if (gameName == "SexyBaccarat")
-                TransferInAllWallet("Sexy Wallet");
-            if (gameName == "SA")
-                TransferInAllWallet("SA Wallet");
-            if (gameName == "DG")
-                TransferInAllWallet("DG Wallet");
-            if (gameName == "918Kiss")
-                TransferInAllWallet("918Kiss Wallet");
-            if (gameName == "Mega888")
-                TransferInAllWallet("Mega888 Wallet");
-            if (gameName == "Joker")
-                TransferInAllWallet("Joker Wallet");
-            if (gameName == "Pussy888")
-                TransferInAllWallet("Pussy888 Wallet");
-            if (gameName == "AllBet")
-                TransferInAllWallet("AllBet Wallet");
-            if (gameName == "WM")
-                TransferInAllWallet("WM Wallet");
+            if (gameName == "M8") TransferInAllWallet("M8 Wallet");
+            if (gameName == "MaxBet") TransferInAllWallet("MaxBet Wallet");
+            if (gameName == "SexyBaccarat") TransferInAllWallet("Sexy Wallet");
+            if (gameName == "SA") TransferInAllWallet("SA Wallet");
+            if (gameName == "DG") TransferInAllWallet("DG Wallet");
+            if (gameName == "918Kiss") TransferInAllWallet("918Kiss Wallet");
+            if (gameName == "Mega888") TransferInAllWallet("Mega888 Wallet");
+            if (gameName == "Joker") TransferInAllWallet("Joker Wallet");
+            if (gameName == "Pussy888") TransferInAllWallet("Pussy888 Wallet");
+            if (gameName == "AllBet") TransferInAllWallet("AllBet Wallet");
+            if (gameName == "WM") TransferInAllWallet("WM Wallet");
             if (gameName == "Pragmatic") {
                 PragmaticBrokenStatusInterval();
                 TransferInAllWallet("Pragmatic Wallet");
             }
             if (gameName == "YeeBet") TransferInAllWallet("YeeBet Wallet");
+            if (gameName == "SBO") TransferInAllWallet("SBO Wallet");
         }
-        if (gameName != "Pragmatic")
-            window.open("/mobile/Game?gamename=" + gameName);
-        else
-            GameLoginMobile("Pragmatic");
+        if (gameName != "Pragmatic") window.open("/mobile/Game?gamename=" + gameName);
+        else GameLoginMobile("Pragmatic");
     }
-    else {
-        alert("Please Login");
-    }
+    else alert("Please Login");
 }
 
 async function PlaytechBrokenStatus() {
@@ -1063,10 +1042,30 @@ async function GameLoginMobile(gamename) {
                     if (login.data.result == 0) window.location.href = login.data.openurl;
                 }
                 break;
+            case 'SBO':
+                if (resSelectUser.data.SBO !== true) {
+                    var model = {};
+                    var res = await PostMethod(apiEndPoints.SBORegister, model);
+                    if (res.data.error.id == 0) {
+                        var model = {
+                            isMobile: true
+                        };
+
+                        var res = await PostMethod(apiEndPoints.SBOLogin, model);
+                        if (res.message != null) location.href = res.message;
+                    }
+                }
+                else {
+                    var model = {
+                        isMobile: true
+                    };
+                    var res = await PostMethod(apiEndPoints.SBOLogin, model);
+                    if (res.message != null) location.href = res.message;
+                }
+                break;
         }
     }
-    else {
-        alert(ChangeErroMessage("please_loign_error"));
-    }
+    else alert(ChangeErroMessage("please_loign_error"));
+
     LoaderHide();
 }

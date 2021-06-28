@@ -192,7 +192,8 @@ export class UsersDetailsComponent implements OnInit {
         { gameName: this.commonService.GameName.AllBet },
         { gameName: this.commonService.GameName.WM },
         { gameName: this.commonService.GameName.PragmaticPlay },
-        { gameName: this.commonService.GameName.YeeBet }
+        { gameName: this.commonService.GameName.YeeBet },
+        { gameName: this.commonService.GameName.SBO }
     ];
 
     gmtList: any = [
@@ -238,6 +239,9 @@ export class UsersDetailsComponent implements OnInit {
 
     YeeBetBalance: any;
     YeeBetUsername: any;
+
+    SBOBalance: any;
+    SBOUsername: any;
 
     constructor(
         private datePipe: DatePipe,
@@ -538,9 +542,10 @@ export class UsersDetailsComponent implements OnInit {
             this.wmUsername = res.data.wmUsername;
             this.pragmaticUsername = res.data.pragmaticUsername;
             this.YeeBetUsername = res.data.yeeBetUsername;
+            this.SBOUsername = res.data.sboUsername;
             this.WalletBalance(id);
             this.UserBrokenStaus();
-        })
+        });
     }
 
     //#endregion
@@ -1043,6 +1048,33 @@ export class UsersDetailsComponent implements OnInit {
                 { prop: "BetAmount" }
             ];
         }
+        else if (selectedList == this.commonService.GameName.SBO) {
+            this.columns = [
+                { prop: 'SportsType' },
+                { prop: 'Odds' },
+                { prop: 'OddsStyle' },
+                { prop: 'ActualStake' },
+                { prop: 'Turnover' },
+                { prop: 'IsHalfWonLose' },
+                { prop: 'IsLive' },
+                { prop: 'MaxWinWithoutActualStake' },
+                { prop: 'IP' },
+                { prop: 'IsSystemTagRisky' },
+                { prop: 'IsCustomerTagRisky' },
+                { prop: 'OrderTime' },
+                { prop: 'ModifyDate' },
+                { prop: 'SettleTime' },
+                { prop: 'WinLostDate' },
+                { prop: 'RefNo' },
+                { prop: 'Username' },
+                { prop: 'Currency' },
+                { prop: 'Stake' },
+                { prop: 'WinLost' },
+                { prop: 'Status' },
+                { prop: 'TopDownline' },
+                { prop: 'SubBet' }
+            ];
+        }
         else {
             this.columns = [];
         }
@@ -1087,7 +1119,6 @@ export class UsersDetailsComponent implements OnInit {
 
     setToday(Tab) {
         if (this.userid !== undefined && this.userid !== "" && this.userid !== null) {
-
             var dates = this.commonService.getTodatDate();
             var fromdate = dates.fromdate;
             var todate = dates.todate;
@@ -1305,6 +1336,7 @@ export class UsersDetailsComponent implements OnInit {
         this.WM(id);
         this.Pragmatic(id);
         this.YeeBet(id);
+        this.SBO(id);
     }
 
     //#endregion
@@ -1316,8 +1348,8 @@ export class UsersDetailsComponent implements OnInit {
             let data = {
                 id: Id
             }
-            this.adminService.add<any>(GameRegister.selectUser, data).subscribe(res => {
 
+            this.adminService.add<any>(GameRegister.selectUser, data).subscribe(res => {
                 //#region AG Game Register
 
                 if (!res.data.AG) {
@@ -1526,6 +1558,20 @@ export class UsersDetailsComponent implements OnInit {
                         this.adminService.add<any>(GameRegister.registerYeeBet, data).subscribe(res => {
                             this.getUsername(Id);
                             this.YeeBet(Id);
+                        });
+                    }
+                    catch (e) { }
+                }
+
+                //#endregion
+
+                //#region SBO Game Register
+
+                if (!res.data.SBO) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerSBO, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.SBO(Id);
                         });
                     }
                     catch (e) { }
@@ -1843,6 +1889,7 @@ export class UsersDetailsComponent implements OnInit {
             await this.WM(id);
             await this.Pragmatic(id);
             await this.YeeBet(id);
+            await this.SBO(id);
 
             let balanceRestore = {
                 kiss918wallet: this.kiss918balance == null ? 0.0 : this.kiss918balance,
@@ -1860,6 +1907,7 @@ export class UsersDetailsComponent implements OnInit {
                 WMwallet: this.wmbalance == null ? 0.0 : this.wmbalance,
                 pragmaticwallet: this.pragmaticbalance == null ? 0.0 : this.pragmaticbalance,
                 YeeBetWallet: this.YeeBetBalance == null ? 0.0 : this.YeeBetBalance,
+                SBOWallet: this.SBOBalance == null ? 0.0 : this.SBOBalance,
                 id: id
             }
 
@@ -2092,6 +2140,19 @@ export class UsersDetailsComponent implements OnInit {
         catch (e) { }
     }
 
+    async SBO(id) {
+        try {
+            let data = {
+                id: id,
+                username: this.SBOUsername,
+            }
+            this.adminService.add<any>(gameBalance.SBO, data).subscribe(res => {
+                this.SBOBalance = res.data.balance;
+            })
+        }
+        catch (e) { }
+    }
+
     //#endregion Wallet Balance
 
     //#region Restore Balance of user
@@ -2115,6 +2176,7 @@ export class UsersDetailsComponent implements OnInit {
                 await this.WM(id);
                 await this.Pragmatic(id);
                 await this.YeeBet(id);
+                await this.SBO(id);
 
                 let data = {
                     kiss918wallet: this.kiss918balance == null ? 0.0 : this.kiss918balance,
@@ -2132,6 +2194,7 @@ export class UsersDetailsComponent implements OnInit {
                     WMwallet: this.wmbalance == null ? 0.0 : this.wmbalance,
                     pragmaticwallet: this.pragmaticbalance == null ? 0.0 : this.pragmaticbalance,
                     YeeBetwallet: this.YeeBetBalance == null ? 0.0 : this.YeeBetBalance,
+                    SBOwallet: this.SBOBalance == null ? 0.0 : this.SBOBalance,
                     id: id
                 }
                 this.adminService.add<any>(gameBalance.restoreBalance, data).subscribe(res => {
@@ -2941,6 +3004,56 @@ export class UsersDetailsComponent implements OnInit {
                     });
                     break;
                 }
+                case this.commonService.GameName.SBO: {
+                    let model = {
+                        fromdate: this.fromDate,
+                        todate: this.toDate,
+                        username: this.SBOUsername
+                    };
+                    this.adminService.add<any>(customer.SBOBettingDetails, model).subscribe(res => {
+                        if (res.data.error.id == 0 &&
+                            res.data.result.length > 0) {
+                            //let list = res.data.result.filter(s => s.username == this.SBOUsername)
+                            this.rows = [];
+
+                            res.data.result.forEach(el => {
+                                this.rows.push({
+                                    SportsType: el.sportsType,
+                                    Odds: el.odds,
+                                    OddsStyle: el.oddsStyle,
+                                    ActualStake: el.actualStake,
+                                    Turnover: el.turnover,
+                                    IsHalfWonLose: el.isHalfWonLose,
+                                    IsLive: el.isLive,
+                                    MaxWinWithoutActualStake: el.maxWinWithoutActualStake,
+                                    IP: el.ip,
+                                    IsSystemTagRisky: el.isSystemTagRisky,
+                                    IsCustomerTagRisky: el.isCustomerTagRisky,
+                                    OrderTime: el.orderTime,
+                                    ModifyDate: el.modifyDate,
+                                    SettleTime: el.settleTime,
+                                    WinLostDate: el.winLostDate,
+                                    RefNo: el.refNo,
+                                    Username: el.username,
+                                    Currency: el.currency,
+                                    Stake: el.stake,
+                                    WinLost: el.winLost,
+                                    Status: el.status,
+                                    TopDownline: el.topDownline,
+                                    SubBet: JSON.stringify(el.subBet)
+                                });
+                            });
+                            this.rows = [...this.rows];
+                        }
+                        else this.setBettingDetailsColumn(this.selectedList);
+
+                        this.loadingIndicator = false;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                    });
+                    break;
+                }
                 default: {
                     this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectGame);
                 }
@@ -2948,6 +3061,30 @@ export class UsersDetailsComponent implements OnInit {
         }
         else this.toasterService.pop('error', 'Error', this.commonService.errorMessage.SelectUserName);
     }
+
+    //ManageDateTime(dateTime, hr) {
+    //    try {
+    //        var temp = new Date(dateTime);
+    //        let temp1 = temp.setHours(temp.getHours() + hr);
+
+    //        let temp2 = Date.parse(dateTime);
+    //        //let temp3 = temp2.setHours(temp2.getHours() + hr);
+
+    //        console.log({
+    //            datetime: dateTime,
+    //            temp: temp,
+    //            hr: hr,
+    //            temp1: temp1,
+    //            temp2: temp2
+    //        });
+
+    //        return temp1
+    //    }
+    //    catch (e) {
+    //        console.log(e.message);
+    //        return dateTime;
+    //    }
+    //}
 
     //#endregion bettingDetails
 
