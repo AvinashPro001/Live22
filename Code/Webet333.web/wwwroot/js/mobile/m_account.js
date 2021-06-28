@@ -342,7 +342,7 @@ async function DoRegister() {
         return ShowError("Password and username must be different.");
     }
 
-    var Char = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
+    var Char = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     if (!Char.test(model.password)) {
         LoaderHide();
         return ShowError("Password must be alphanumeric.");
