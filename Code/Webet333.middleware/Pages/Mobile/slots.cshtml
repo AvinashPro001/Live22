@@ -1,0 +1,58 @@
+﻿@page
+@{ ViewData["Title"] = "Slots";
+    Layout = ""; }
+<div id="comContent"></div>
+<div id="mComContent">
+    <div class="account-reg pad-comman-fifteen white-bg-tab-panel white-bg radius-border" style="height:auto !important;padding-bottom:70px">
+        <div class="info-form text-center">
+            <div class="row">
+                <div class="col-xs-2">
+                    <div class="back-btn"><a onclick="loadPageHome({backFrom:'slots'})" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="~/images/mobile/BackArrow_svg.svg" alt="" /></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            
+        </div>
+    </div>
+
+    <div class="footer-widget" id="footerWidget">
+        <ul class="list-inline text-center">
+            <li id="homePagebottom">
+                <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch">
+                    <i class="fa fa-home"></i>
+                    <p class="white-text no-mar" data-translate="menu_home">Home</p>
+                </a>
+            </li>
+            <li id="promotionPagebottom" class="">
+                <a onclick="loadPagePromotions()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-gift"></i>
+                    <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
+                </a>
+            </li>
+            <li id="contactusPagebottom">
+                <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-user"></i>
+                    <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="whatsapp()">
+                    <figure><img src="~/images/mobile/whatsapp.png" alt="Whats App" /></figure>
+                    <p class="white-text no-mar">Whatsapp</p>
+                </a>
+            </li>
+            <li class="live-chat">
+                <a class="live-chat-icon"><p class="white-text no-mar" data-translate="Live_chat">Live Chat</p></a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <a id="mobileM8" style="display:none"></a>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    var OnlineHelpAPI = OnlineHelpAPI || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: "a9010000-0000-0000-0000-008e000391c3", div_id: "onlinehelp-button-a9010000-0000-0000-0000-008e000391c3" }), t.site_id = 233923, t.main_code_plan = "a9010000-0000-0000-0000-008e000391c3", e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 5e3) })(OnlineHelpAPI || {})
+</script>

@@ -207,6 +207,9 @@
                     case "withdraw":
                         loadPageWithdraw()
                         break;
+                    case "slot":
+                        loadPageSlots()
+                        break;
                 }
             }
             else {
@@ -242,6 +245,7 @@
                         if (obj.backFrom == "forgetpassword") $('body').css('padding-top', '35px');
                         if (obj.backFrom == "download") $('body').css('padding-top', '35px');
                         if (obj.backFrom == "history") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "slots") $('body').css('padding-top', '35px');
 
                         Walletdate();
                         GameInMaintenance(0);
@@ -571,6 +575,23 @@
                     pageName1 = pageName2 = "vip";
                     $('#pageResponse').html(response);
                     history.pushState(null, null, "/mobile?p=vip");
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+        function loadPageSlots() {
+            CheckUserVerified()
+            $('body').css('padding-top', '0px');
+            $.ajax({
+                url: '/mobile/slots',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "slot";
+                    $('#pageResponse').html(response);
+                    history.pushState(null, null, "/mobile?p=slot");
                     $("html").removeClass("intro");
                 }
             });

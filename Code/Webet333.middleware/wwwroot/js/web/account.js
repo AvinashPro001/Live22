@@ -346,7 +346,7 @@ async function DoRegister() {
                 ShowError(res.data.messageResponse.smsMessage);
         }
         catch (e) { }
-        SetTrackingData(model.userName, "registerCookies");
+        SetTrackingData(model.username, "registerCookies");
         SetCookie('trackRegister', true, 1000);
         SetLocalStorage('currentUserData', Encryption(password));
         SetLocalStorage("currentUser", res.response.data.access_token);
