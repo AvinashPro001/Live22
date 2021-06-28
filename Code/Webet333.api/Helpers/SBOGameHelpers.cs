@@ -244,7 +244,7 @@ namespace Webet333.api.Helpers
                 tokeResponse.Url,
                 language,
                 GameConst.SBO.Oddstyle.MalayOdds,
-                GameConst.SBO.Theme.SBO,
+                device == GameConst.SBO.Device.Desktop ? GameConst.SBO.Theme.SBO : GameConst.SBO.Theme.SboMain,
                 GameConst.SBO.OddsMode.Double,
                 device);
 
