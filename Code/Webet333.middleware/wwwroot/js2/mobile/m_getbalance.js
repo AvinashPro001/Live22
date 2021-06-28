@@ -136,6 +136,8 @@ async function RestoreBalance() {
         $('.values').html('');
         $('.img_load').css('display', 'block');
 
+        $("#retore_li").css("pointer-events", "none");
+
         var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
         var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
 
@@ -188,9 +190,11 @@ async function RestoreBalance() {
             id: null
         }
         await PostMethod(apiEndPoints.restoreBalance, restoreModel)
+        $("#retore_li").css("pointer-events", "");
     }
     catch (ex) {
     }
+    $("#retore_li").css("pointer-events", "");
     RefershBalance();
     //LoaderHide();
 }
@@ -200,6 +204,8 @@ async function RestoreBalance() {
     try {
         $('.values').html('');
         $('.img_load').css('display', 'block');
+
+        $("#retore_li").css("pointer-events", "none");
         var balanceModel = {
         };
         var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
@@ -253,9 +259,11 @@ async function RestoreBalance() {
             id: null
         }
         await PostMethod(apiEndPoints.restoreBalance, restoreModel)
+        $("#retore_li").css("pointer-events", "");
     }
     catch (ex) {
     }
+    $("#retore_li").css("pointer-events", "");
     WalletBalance();
     //LoaderHide();
 }

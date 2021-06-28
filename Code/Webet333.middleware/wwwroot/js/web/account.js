@@ -59,11 +59,17 @@ $(document).ready(function () {
 //#region Logout Function
 
 function DoLogout() {
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("currentUserData");
-    sessionStorage.removeItem("userDetails");
-    sessionStorage.removeItem("GamePreFix");
+    //localStorage.removeItem("currentUser");
+    //localStorage.removeItem("currentUserData");
+    //sessionStorage.removeItem("userDetails");
+    //sessionStorage.removeItem("GamePreFix");
+    //sessionStorage.removeItem("userRegisterDetails");
+    var Data = GetSessionStorage("siteData");
+    localStorage.clear();
+    sessionStorage.clear();
+    SetSessionStorage('siteData', Data)
     CheckLoginOrNot()
+
 }
 
 //#endregion
@@ -314,7 +320,7 @@ async function DoRegister() {
 
     if (username === password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
 
-    var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
+    var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     if (!regex.test(password)) return ShowError(ChangeErroMessage("pass_alpha_error"));
 
     if (/^[a-zA-Z0-9- ]*$/.test(username) == false)
@@ -477,22 +483,22 @@ async function SendOTP(number) {
         if (res.status == 200) {
             document.getElementById("txt_otp").value = "";
             ShowSuccess(ChangeErroMessage("otp_send_success"));
-         
+
         }
         LoaderHide();
     }
 }
 
 async function VerifiedOTP() {
-    
+
     let model = {
         otp: document.getElementById("txt_otp").value
     }
 
-    if (model.otp == null || model.otp == undefined || model.otp == "") 
+    if (model.otp == null || model.otp == undefined || model.otp == "")
         return ShowError(ChangeErroMessage("error_otp_required"));
 
-    if (model.otp.length > 6) 
+    if (model.otp.length > 6)
         return ShowError(ChangeErroMessage("error_otp"));
 
     LoaderShow();
@@ -510,7 +516,7 @@ async function VerifiedOTP() {
     LoaderHide();
 }
 
-function SetVIPageProgressBar(vipLevel,TotalDepositAmount) {
+function SetVIPageProgressBar(vipLevel, TotalDepositAmount) {
     var percent = 0;
     switch (vipLevel) {
         case "Normal": percent = 0; break;
@@ -636,7 +642,7 @@ async function regisrationGame() {
 
             if (resSelectUser.MaxBet !== true) {
                 var userMaxBet = {
-                    firstname: resUserData.data.name,
+                    firstname: resUserData.name,
                     lastname: "Webet333"
                 };
                 try {

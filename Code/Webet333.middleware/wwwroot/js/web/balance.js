@@ -65,24 +65,43 @@ $(document).ready(function () {
         PragmaticBrokenStatus(false)
         setTimeout(function () {
             setInterval(function () {
-                if (
-                    UsersBalance.MainBalance == null ||
-                    UsersBalance.AGBalance == null ||
-                    UsersBalance.DGBalance == null ||
-                    UsersBalance.SABalance == null ||
-                    UsersBalance.WMBalance == null ||
-                    UsersBalance.PlaytechBalance == null ||
-                    UsersBalance.SexyBaccaratBalance == null ||
-                    UsersBalance.AllBetBalance == null ||
-                    UsersBalance.PragmaticBalance == null ||
-                    UsersBalance.Kiss918Balance == null ||
-                    UsersBalance.JokerBalance == null ||
-                    UsersBalance.Mega888Balance == null ||
-                    UsersBalance.Pussy888Balance == null ||
-                    UsersBalance.M8Balance == null ||
-                    UsersBalance.MaxBetBalance == null
-                )
-                    LoadAllBalance();
+                //if (
+                //    UsersBalance.MainBalance == null ||
+                //    UsersBalance.AGBalance == null ||
+                //    UsersBalance.DGBalance == null ||
+                //    UsersBalance.SABalance == null ||
+                //    UsersBalance.WMBalance == null ||
+                //    UsersBalance.PlaytechBalance == null ||
+                //    UsersBalance.SexyBaccaratBalance == null ||
+                //    UsersBalance.AllBetBalance == null ||
+                //    UsersBalance.PragmaticBalance == null ||
+                //    UsersBalance.Kiss918Balance == null ||
+                //    UsersBalance.JokerBalance == null ||
+                //    UsersBalance.Mega888Balance == null ||
+                //    UsersBalance.Pussy888Balance == null ||
+                //    UsersBalance.M8Balance == null ||
+                //    UsersBalance.M8Balance == null
+                //)
+                //    LoadAllBalance();
+
+                if (UsersBalance.MainBalance == null) MainWallet();
+                if (UsersBalance.Kiss918Balance == null) Kiss918Wallet(GameUsernames.Kiss918Username);
+                if (UsersBalance.JokerBalance == null) JokerWallet(GameUsernames.JokerUsername);
+                if (UsersBalance.Mega888Balance == null) Mega888Wallet(GameUsernames.Mega888Username);
+                if (UsersBalance.Pussy888Balance == null) Pussy888Wallet(GameUsernames.Pussy888Username);
+                if (UsersBalance.AGBalance == null) AGWallet(GameUsernames.AGUsername);
+                if (UsersBalance.DGBalance == null) DGWallet(GameUsernames.DGUsername);
+                if (UsersBalance.SABalance == null) SAWallet(GameUsernames.SAUsername);
+                if (UsersBalance.WMBalance == null) WMWallet(GameUsernames.WMUsername);
+                if (UsersBalance.PlaytechBalance == null) PlaytechWallet(GameUsernames.PlaytechUsername);
+                if (UsersBalance.SexyBaccaratBalance == null) SexyBaccaratWallet(GameUsernames.SexyBaccaratUsername);
+                if (UsersBalance.PragmaticBalance == null) PragmaticWallet(GameUsernames.PragmaticUsername);
+                if (UsersBalance.AllBetBalance == null) AllBetWallet(GameUsernames.AllBetUsername);
+                if (UsersBalance.M8Balance == null) M8Wallet(GameUsernames.M8Username);
+                if (UsersBalance.M8Balance == null) MaxBetWallet(GameUsernames.MaxBetUsername);
+                if (UsersBalance.YeeBetBalance == null) YeeBetWallet(GameUsernames.YeeBetUsername);
+
+
             }, 1000);
         }, 15000);
     }
@@ -191,7 +210,7 @@ async function SetUsername() {
         SetSessionStorage('GamePreFix', Encryption(JSON.stringify(gamePrefix.response.data)));
         globalParameter = gamePrefix.response.data;
     }
-    
+
     GameUsernames.AGUsername = globalParameter.agGamePrefix + userDetails.username;
     GameUsernames.AllBetUsername = globalParameter.allBetGamePrefix + userDetails.userId;
     GameUsernames.DGUsername = globalParameter.dgGamePrefix + userDetails.username;
@@ -711,7 +730,7 @@ async function YeeBetWallet(Username, IsDivValueSet = true) {
     };
     try {
         var res = await PostMethod(gameBalanceEndPoints.yeebetBalance, model);
-        
+
         if (res.status == 200) {
             UsersBalance.YeeBetBalance = ConvertBalanceIntoCommasValue(res.response.data.balance);
         }
