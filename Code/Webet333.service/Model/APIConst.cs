@@ -27,5 +27,7 @@
         public const string registerMega888 = "http://uatapi.webet333.com/api/v1/";
 
         public const string registerYeeBet = "yeebet/register";
+
+        public const string RegisterSBO = "sbo/register/player";
     }
 }

@@ -1020,6 +1020,7 @@ function LoadingImageShowAllInSection(GameName) {
         case "WM Wallet": document.getElementById("WMWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "Pragmatic Wallet": document.getElementById("PragmaticWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "YeeBet Wallet": document.getElementById("YeeBetWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "SBO Wallet": document.getElementById("SBOWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
     }
 }
 
@@ -1051,5 +1052,6 @@ async function CheckSupportGame() {
         document.getElementById("sexyallin").disabled = !res.data[0].IsSexyBaccarat ? true : false;
         document.getElementById("wmallin").disabled = !res.data[0].IsWM ? true : false;
         document.getElementById("YeeBetAllIn").disabled = !res.data[0].IsYeeBet ? true : false;
+        document.getElementById("SBOAllIn").disabled = !res.data[0].IsSBO ? true : false;
     }
 }

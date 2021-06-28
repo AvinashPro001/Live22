@@ -1,0 +1,180 @@
+button.calendar, button.calendar:active {
+    width: 2.75rem;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=') !important;
+    background-repeat: no-repeat;
+    background-size: 23px;
+    background-position: center;
+}
+
+:host /deep/ .datatable-body-row.active .datatable-row-group {
+    background-color: #db8888 !important;
+}
+
+:host /deep/ .ngx-datatable.bootstrap .datatable-body .datatable-body-row.active {
+    background-color: #db8888 !important;
+}
+
+.button {
+    border: none;
+    padding: 1px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+button.calendar,
+button.calendar:active {
+    width: 2.75rem;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=') !important;
+    background-repeat: no-repeat;
+    background-size: 23px;
+    background-position: center;
+}
+
+.ngx-datatable {
+    .datatable-body {
+        .progress-linear {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 8px;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+
+            .container {
+                display: block;
+                position: relative;
+                overflow: hidden;
+                width: 100%;
+                height: 8px;
+                -webkit-transform: translate(0, 0) scale(1, 1);
+                transform: translate(0, 0) scale(1, 1);
+                background-color: #00ABE8;
+
+                .bar {
+                    transition: all .15s linear;
+                    -webkit-animation: query 0.5s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
+                    animation: query 0.5s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
+                    transition: -webkit-transform .15s linear;
+                    transition: transform .15s linear;
+                    background-color: #0068A4;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    bottom: 0;
+                    width: 100%;
+                    height: 8px;
+                }
+            }
+        }
+    }
+}
+/**
+ * Progress bar animations
+ */
+
+@keyframes query {
+    0% {
+        opacity: 1;
+        transform: translateX(35%) scale(0.3, 1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0, 1);
+    }
+}
+
+.container {
+    display: block;
+    position: relative;
+    //padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* Hide the browser's default checkbox */
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+/* Create a custom checkbox */
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+/* On mouse-over, add a grey background color */
+
+.container:hover input ~ .checkmark {
+    background-color: #aaa;
+}
+/* When the checkbox is checked, add a blue background */
+
+.container input:checked ~ .checkmark {
+    background-color: #FF5E03;
+}
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+/* Show the checkmark when checked */
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+/* Style the checkmark/indicator */
+
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.approved {
+    border-radius: 50px;
+    border-style: solid;
+    border-width: 1px;
+    top: 50px;
+    color: green;
+    position: relative;
+}
+
+.tracking-img {
+    width: 30px !important;
+}
+
+/*  This css changes apply entire header  */
+/*:host /deep/ .ngx-datatable.bootstrap {
+    .datatable-header {
+        .datatable-header-cell {
+            margin-left: 25px !important;
+        }
+    }
+}*/

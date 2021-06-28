@@ -17,7 +17,8 @@ var GameNames = {
     Mega888: 'Mega888',
     _918Kiss: '918 Kiss',
     Pussy888: 'Pussy888',
-    PragmaticPlay: 'Pragmatic Play'
+    PragmaticPlay: 'Pragmatic Play',
+    SBO: 'SBO'
 }
 
 var WalletNames = {
@@ -36,5 +37,6 @@ var WalletNames = {
     Mega888Wallet: 'Mega888 Wallet',
     _918KissWallet: '918Kiss Wallet',
     Pussy888Wallet: 'Pussy888 Wallet',
-    PragmaticPlayWallet: 'Pragmatic Wallet'
+    PragmaticPlayWallet: 'Pragmatic Wallet',
+    SBOWallet: 'SBO Wallet',
 }

@@ -316,6 +316,7 @@ async function CheckGameInMaintenance(gameName) {
     if (gameName == "WM") walletName = "WM Wallet";
     if (gameName == "Pragmatic") walletName = "Pragmatic Wallet";
     if (gameName == "YeeBet") walletName = "YeeBet Wallet";
+    if (gameName == "SBO") walletName = "SBO Wallet";
 
     for (i = 0; i < walletData.data.length; i++)
         if (walletData.data[i].walletType == walletName &&
@@ -557,6 +558,19 @@ async function GameInMaintenance(i) {
             document.getElementById('YeeBetGame').title = "";
             if (window.location.href.toLowerCase().includes('account/profile')) document.getElementById("YeeBetAllIn").disabled = false;
         }
+
+        if (walletData.data[i].walletType == "SBO Wallet" &&
+            walletData.data[i].isMaintenance == true) {
+            document.getElementById('SBOSports').style.filter = "grayscale(1)";
+            document.getElementById('SBOSports').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) document.getElementById("SBOAllIn").disabled = true;
+        }
+        else if (walletData.data[i].walletType == "SBO Wallet" &&
+            walletData.data[i].isMaintenance == false) {
+            document.getElementById('SBOSports').style.filter = "";
+            document.getElementById('SBOSports').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) document.getElementById("SBOAllIn").disabled = false;
+        }
     }
 }
 
@@ -590,43 +604,33 @@ async function logingGame(gameName) {
     }
     if (GetLocalStorage('currentUser') !== null) {
         if (checkedValue) {
-            if (gameName == "M8")
-                TransferInAllWallet("M8 Wallet");
-            if (gameName == "MaxBet")
-                TransferInAllWallet("MaxBet Wallet");
-            if (gameName == "SexyBaccarat")
-                TransferInAllWallet("Sexy Wallet");
-            if (gameName == "SA")
-                TransferInAllWallet("SA Wallet");
-            if (gameName == "DG")
-                TransferInAllWallet("DG Wallet");
-            if (gameName == "918Kiss")
-                TransferInAllWallet("918Kiss Wallet");
-            if (gameName == "Mega888")
-                TransferInAllWallet("Mega888 Wallet");
-            if (gameName == "Joker")
-                TransferInAllWallet("Joker Wallet");
-            if (gameName == "Pussy888")
-                TransferInAllWallet("Pussy888 Wallet");
-            if (gameName == "AllBet")
-                TransferInAllWallet("AllBet Wallet");
-            if (gameName == "WM")
-                TransferInAllWallet("WM Wallet");
+            if (gameName == "M8") TransferInAllWallet("M8 Wallet");
+            if (gameName == "MaxBet") TransferInAllWallet("MaxBet Wallet");
+            if (gameName == "SexyBaccarat") TransferInAllWallet("Sexy Wallet");
+            if (gameName == "SA") TransferInAllWallet("SA Wallet");
+            if (gameName == "DG") TransferInAllWallet("DG Wallet");
+            if (gameName == "918Kiss") TransferInAllWallet("918Kiss Wallet");
+            if (gameName == "Mega888") TransferInAllWallet("Mega888 Wallet");
+            if (gameName == "Joker") TransferInAllWallet("Joker Wallet");
+            if (gameName == "Pussy888") TransferInAllWallet("Pussy888 Wallet");
+            if (gameName == "AllBet") TransferInAllWallet("AllBet Wallet");
+            if (gameName == "WM") TransferInAllWallet("WM Wallet");
             if (gameName == "Pragmatic") {
                 PragmaticBrokenStatusInterval();
                 TransferInAllWallet("Pragmatic Wallet");
             }
             if (gameName == "YeeBet") TransferInAllWallet("YeeBet Wallet");
+            if (gameName == "SBO") TransferInAllWallet("SBO Wallet");
         }
 
-        if (gameName == "MaxBet" || gameName == "M8") {
+        if (gameName == "MaxBet" ||
+            gameName == "M8" ||
+            gameName == "SBO") {
             GameLogin(gameName);
         }
         else {
-            if (gameName != "Pragmatic")
-                window.open("/Information/Game?gamename=" + gameName);
-            else
-                GameLogin("Pragmatic");
+            if (gameName != "Pragmatic") window.open("/Information/Game?gamename=" + gameName);
+            else GameLogin("Pragmatic");
         }
     }
     else {
@@ -711,6 +715,7 @@ async function PlaytechIdentifiy(Slotvalue) {
 }
 
 //#region GameLogin
+
 function randomString() {
     var charsetOne = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetTwo = 'abcdefghiklmnopqrstuvwxyz', charsetThree = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetFour = '0123456789', randomstring = '', i = 0;
 
@@ -1181,7 +1186,6 @@ async function GameLogin(gamename) {
                     window.open("../Information/PragmaticGame", "_blank")
                 }
                 break;
-
             case 'YeeBet':
                 LoaderShow();
                 if (resSelectUser.data.YeeBet !== true) {
@@ -1204,6 +1208,47 @@ async function GameLogin(gamename) {
                     if (login.data.result == 0) window.location.href = login.data.openurl;
                 }
                 break;
+            case 'SBO':
+                LoaderShow();
+                if (resSelectUser.data.SBO !== true) {
+                    let model = {};
+                    var res = await PostMethod(apiEndPoints.SBORegister, model);
+                    if (res.data.error.id == 0) {
+                        model = {
+                            isMobile: false
+                        };
+                        var res = await PostMethod(apiEndPoints.SBOLogin, model);
+                        if (res.message != null) {
+                            document.getElementById("mainpagebody").style.display = "none";
+                            document.getElementById("iframeModel").style.display = "block";
+                            document.getElementById("gameFrame").src = res.message;
+                        }
+                        else {
+                            document.getElementById("mainpagebody").style.display = "";
+                            document.getElementById("iframeModel").style.display = "none";
+                        }
+                    }
+                    else {
+                        document.getElementById("mainpagebody").style.display = "";
+                        document.getElementById("iframeModel").style.display = "none";
+                    }
+                }
+                else {
+                    var model = {
+                        isMobile: false
+                    };
+                    var res = await PostMethod(apiEndPoints.SBOLogin, model);
+                    if (res.message != null) {
+                        document.getElementById("mainpagebody").style.display = "none";
+                        document.getElementById("iframeModel").style.display = "block";
+                        document.getElementById("gameFrame").src = res.message;
+                    }
+                    else {
+                        document.getElementById("mainpagebody").style.display = "";
+                        document.getElementById("iframeModel").style.display = "none";
+                    }
+                }
+                break;
         }
         LoaderHide();
     }
@@ -1212,6 +1257,7 @@ async function GameLogin(gamename) {
         LoaderHide();
     }
 }
+
 //#endregion GameLogin
 
 //#region sliderPromotion

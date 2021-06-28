@@ -107,6 +107,12 @@
                                 <li class="fright" id="ddlYeeBetWallet">feching...</li>
                             </ul>
                         </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>SBO Wallet</strong></li>
+                                <li class="fright" id="ddlSBOWallet">feching...</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -443,6 +449,20 @@
                         <div class="turnover-show">
                             <label>Daily Turnover</label>
                             <label id="YeeBetTurnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-xs-4  transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">SBO</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="SBOWallet">0.00</li>
+                            <li><button id="SBOAllIn" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('SBO Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="SBOTurnover">-</label>
                         </div>
                     </div>
                 </div>
