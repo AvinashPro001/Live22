@@ -1276,9 +1276,9 @@
 
                 public const long Min = 5;
 
-                public const long Max = 3000;
+                public const long Max = 5000;
 
-                public const long MaxPerMatch = 5000;
+                public const long MaxPerMatch =  10000;
 
                 /*
                  *   1: Low
