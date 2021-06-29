@@ -74,7 +74,7 @@ export const M8Game = {
     withdrawalAction: 'action=withdraw',
     secret: 'secret=a782988d',
     agent: 'agent=0a1a',
-    M8baseUrl: 'http://apid.mywinday.com/api.aspx?'
+    M8baseUrl: 'http://apir.mywinday.com/api.aspx?'
 }
 
 export const AGGame = {
