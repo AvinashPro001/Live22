@@ -123,6 +123,12 @@ function SetAllValueInElement(id, value) {
     });
 }
 
+function SetAllInputTextvalue(id, value) {
+    $("[id='" + id + "']").each(function () {
+        $(this).val(value)
+    });
+}
+
 //#endregion
 
 //#region Set Path of Images based on ID

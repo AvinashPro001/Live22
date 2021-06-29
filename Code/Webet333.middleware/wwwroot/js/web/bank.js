@@ -2,10 +2,6 @@
 var fromDate = null, toDate = null, pageSize = 8; pageNumber = 0;
 var HistorySectionName = "Transfer";
 
-$(document).ready(function () {
-   
-});
-
 //#region Set Html In From Wallet in Transfer page
 
 function SetHtmlInFromWallet() {

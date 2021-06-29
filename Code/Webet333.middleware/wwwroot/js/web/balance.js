@@ -65,24 +65,6 @@ $(window).on('load', function () {
         PragmaticBrokenStatus(false)
         setTimeout(function () {
             setInterval(function () {
-                //if (
-                //    UsersBalance.MainBalance == null ||
-                //    UsersBalance.AGBalance == null ||
-                //    UsersBalance.DGBalance == null ||
-                //    UsersBalance.SABalance == null ||
-                //    UsersBalance.WMBalance == null ||
-                //    UsersBalance.PlaytechBalance == null ||
-                //    UsersBalance.SexyBaccaratBalance == null ||
-                //    UsersBalance.AllBetBalance == null ||
-                //    UsersBalance.PragmaticBalance == null ||
-                //    UsersBalance.Kiss918Balance == null ||
-                //    UsersBalance.JokerBalance == null ||
-                //    UsersBalance.Mega888Balance == null ||
-                //    UsersBalance.Pussy888Balance == null ||
-                //    UsersBalance.M8Balance == null ||
-                //    UsersBalance.M8Balance == null
-                //)
-                //    LoadAllBalance();
 
                 if (UsersBalance.MainBalance == null) MainWallet();
                 if (UsersBalance.Kiss918Balance == null) Kiss918Wallet(GameUsernames.Kiss918Username);

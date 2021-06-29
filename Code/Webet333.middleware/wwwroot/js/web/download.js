@@ -46,31 +46,51 @@ function AppDownload(Id) {
 
 //#region Set 'Please Login !!' Text
 
-function SetPleaseLoginText() {
-    for (i = 0; i < SlotsUsernamePasswordId.length; i++)
-        SetAllValueInElement(SlotsUsernamePasswordId[i], "Please Login !!")
+function SetPleaseLoginText(InputType = false) {
+    if (InputType)
+        for (i = 0; i < SlotsUsernamePasswordId.length; i++)
+            SetAllInputTextvalue(SlotsUsernamePasswordId[i], ChangeErroMessage("please_loign_error"))
+    else
+        for (i = 0; i < SlotsUsernamePasswordId.length; i++)
+            SetAllValueInElement(SlotsUsernamePasswordId[i], ChangeErroMessage("please_loign_error"))
 }
 
 //#endregion
 
 //#region Set Username Password in Download Page 
 
-function SetUsernamePassword() {
+function SetUsernamePassword(InputType = false) {
     if (GetLocalStorage("currentUser") == null) {
-        SetPleaseLoginText()
+        SetPleaseLoginText(InputType)
     }
     else {
         var data = JSON.parse(Decryption(GetSessionStorage("userDetails")));
-        for (i = 0; i < SlotsUsernamePasswordId.length; i++) {
-            switch (SlotsUsernamePasswordId[i]) {
-                case "kiss918_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.Kiss918Username); break;
-                case "joker_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.JokerUsername); break;
-                case "mega888_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.Mega888Username); break;
-                case "pussy888_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.Pussy888Username); break;
-                case "pussy888_password": SetAllValueInElement(SlotsUsernamePasswordId[i], data.passwordPussy888); break;
-                case "mega888_password": SetAllValueInElement(SlotsUsernamePasswordId[i], Decryption(GetLocalStorage('currentUserData'))); break;
-                case "joker_password": SetAllValueInElement(SlotsUsernamePasswordId[i], Decryption(GetLocalStorage('currentUserData'))); break;
-                case "kiss918_password": SetAllValueInElement(SlotsUsernamePasswordId[i], data.password918); break;
+        if (InputType) {
+            for (i = 0; i < SlotsUsernamePasswordId.length; i++) {
+                switch (SlotsUsernamePasswordId[i]) {
+                    case "kiss918_username": SetAllInputTextvalue(SlotsUsernamePasswordId[i], GameUsernames.Kiss918Username); break;
+                    case "joker_username": SetAllInputTextvalue(SlotsUsernamePasswordId[i], GameUsernames.JokerUsername); break;
+                    case "mega888_username": SetAllInputTextvalue(SlotsUsernamePasswordId[i], GameUsernames.Mega888Username); break;
+                    case "pussy888_username": SetAllInputTextvalue(SlotsUsernamePasswordId[i], GameUsernames.Pussy888Username); break;
+                    case "pussy888_password": SetAllInputTextvalue(SlotsUsernamePasswordId[i], data.passwordPussy888); break;
+                    case "mega888_password": SetAllInputTextvalue(SlotsUsernamePasswordId[i], Decryption(GetLocalStorage('currentUserData'))); break;
+                    case "joker_password": SetAllInputTextvalue(SlotsUsernamePasswordId[i], Decryption(GetLocalStorage('currentUserData'))); break;
+                    case "kiss918_password": SetAllInputTextvalue(SlotsUsernamePasswordId[i], data.password918); break;
+                }
+            }
+        }
+        else {
+            for (i = 0; i < SlotsUsernamePasswordId.length; i++) {
+                switch (SlotsUsernamePasswordId[i]) {
+                    case "kiss918_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.Kiss918Username); break;
+                    case "joker_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.JokerUsername); break;
+                    case "mega888_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.Mega888Username); break;
+                    case "pussy888_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.Pussy888Username); break;
+                    case "pussy888_password": SetAllValueInElement(SlotsUsernamePasswordId[i], data.passwordPussy888); break;
+                    case "mega888_password": SetAllValueInElement(SlotsUsernamePasswordId[i], Decryption(GetLocalStorage('currentUserData'))); break;
+                    case "joker_password": SetAllValueInElement(SlotsUsernamePasswordId[i], Decryption(GetLocalStorage('currentUserData'))); break;
+                    case "kiss918_password": SetAllValueInElement(SlotsUsernamePasswordId[i], data.password918); break;
+                }
             }
         }
     }
