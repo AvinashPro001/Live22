@@ -33,6 +33,8 @@
             public const string MaxBet = "MaxBet";
 
             public const string YeeBet = "YeeBet";
+
+            public const string SBO = "SBO";
         }
 
 #if DEBUG
@@ -140,7 +142,7 @@
 
         public class M8
         {
-            public const string baseURL = "http://apid.mywinday.com/api.aspx";
+            public const string baseURL = "http://apir.mywinday.com/api.aspx";
 
             public const string Secret = "a782988d";
 
@@ -230,6 +232,8 @@
             public const string Pragmatic = "PRAGMATIC";
 
             public const string YeeBet = "YeeBet";
+
+            public const string SBO = "SBO";
         }
 
         public class Mega888
@@ -558,6 +562,162 @@
             }
         }
 
+        public class SBO
+        {
+            public const string URL = "http://ex-api-demo-yy.568win.com/";
+
+            public const string CompanyKey = "2C5ACC95A9E8466FB39A444AB13CC7D2";
+
+            public const string User = "sbotestw";
+
+            public const string Password = "123qwe123";
+
+            public const string Currency = "MYR";
+
+            public const string GameLoginURL = "https:{0}&lang={1}&oddstyle={2}&theme={3}&oddsmode={4}&device={5}";
+
+            public static class EndPoint
+            {
+                public const string RegisterAgent = "web-root/restricted/agent/register-agent.aspx";
+
+                public const string RegisterPlayer = "web-root/restricted/player/register-player.aspx";
+
+                public const string Login = "web-root/restricted/player/login.aspx";
+
+                public const string GetLeague = "web-root/restricted/league/get-league.aspx";
+
+                public const string SetLeague = "web-root/restricted/league/set-league-bet-setting.aspx";
+
+                public const string SetPlayerBetLimit = "web-root/restricted/player/update-player-bet-setting-by-sportid-and-markettype.aspx";
+
+                public const string Deposit = "web-root/restricted/player/deposit.aspx";
+
+                public const string Withdraw = "web-root/restricted/player/withdraw.aspx";
+
+                public const string GetPlayerBalance = "web-root/restricted/player/get-player-balance.aspx";
+
+                public const string BettingDetails = "web-root/restricted/report/get-bet-list-by-modify-date.aspx";
+            }
+
+            public static class Agent
+            {
+                public const string Username = "AgentWeBet333UAT";
+
+                public const string Password = "AgentWeBet333UAT";
+
+                public const long Min = 5;
+
+                public const long Max = 3000;
+
+                public const long MaxPerMatch = 5000;
+
+                /*
+                 *   1: Low
+                 *   2: Medium
+                 *   3: High
+                 *   4: VIP(ALL)
+                 */
+
+                public const int CasinoTableLimit = 1;
+            }
+
+            public static class Portfolio
+            {
+                public const string SportsBook = "SportsBook";
+
+                public const string Casino = "Casino";
+
+                public const string Games = "Games";
+
+                public const string VirtualSports = "VirtualSports";
+
+                public const string SeamlessGame = "SeamlessGame";
+
+                public const string ThirdPartySportsBook = "ThirdPartySportsBook";
+            }
+
+            public static class Oddstyle
+            {
+                public const string MalayOdds = "MY";   //  Default
+
+                public const string HongKongOdds = "HK";
+
+                public const string EuroOdds = "EU";
+
+                public const string IndonesiaOdds = "ID";
+            }
+
+            public static class Theme
+            {
+                public const string Black = "Black";
+
+                public const string Blue = "Blue";
+
+                public const string Emerald = "Emerald";
+
+                public const string Green = "Green";
+
+                public const string Ocean = "Ocean";
+
+                public const string SBO = "SBO";    //  Default
+
+                public const string Lawn = "Lawn";
+
+                public const string SBOBETM = "SBOBET-m";
+
+                public const string EuroLayoutM = "Euro-layout-m";
+
+                public const string ChinaLayoutM = "China-layout-m";
+
+                public const string SboMain = "SboMain";
+            }
+
+            public static class OddsMode
+            {
+                public const string Single = "single";
+
+                public const string Double = "double";    //  default
+            }
+
+            public static class Device
+            {
+                public const string Desktop = "d";  //  default
+
+                public const string Mobile = "m";
+            }
+
+            public static class MarketType
+            {
+                public const long All = 0;
+
+                public const long Over_Under = 3;
+
+                public const long Correct_Score = 4;
+            }
+
+            public static class SportType
+            {
+                public const long All = 0;
+
+                public const long Soccer = 1;
+
+                public const long Football = 3;
+
+                public const long Others = 11;
+            }
+
+            public static class UserGroup
+            {
+                public const string A = "a";
+
+                public const string B = "b";
+
+                public const string C = "c";
+
+                public const string D = "d";
+            }
+        }
+
 #elif STAG
 
         public const string BaseUrl = "http://webet333.com/";
@@ -663,7 +823,7 @@
 
         public class M8
         {
-            public const string baseURL = "http://apid.mywinday.com/api.aspx";
+            public const string baseURL = "http://apir.mywinday.com/api.aspx";
 
             public const string Secret = "a782988d";
 
@@ -753,6 +913,8 @@
             public const string Pragmatic = "PRAGMATIC";
 
             public const string YeeBet = "YeeBet";
+
+            public const string SBO = "SBO";
         }
 
         public class Mega888
@@ -1074,10 +1236,166 @@
                 public const string GetBettingDetails = "data/getbets";
 
                 public const string RemoveGetBettingDetails = "data/removebets";
-                
+
                 public const string GetBetLimit = "quota/list";
 
                 public const string SetBetLimit = "quota/set";
+            }
+        }
+
+        public class SBO
+        {
+            public const string URL = "http://ex-api-yy.xxttgg.com/";
+
+            public const string CompanyKey = "694F2CFB29414D059B6864702EB18460";
+
+            public const string User = "sbowebet";
+
+            public const string Password = "778899Abc";
+
+            public const string Currency = "MYR";
+
+            public const string GameLoginURL = "https:{0}&lang={1}&oddstyle={2}&theme={3}&oddsmode={4}&device={5}";
+
+            public static class EndPoint
+            {
+                public const string RegisterAgent = "web-root/restricted/agent/register-agent.aspx";
+
+                public const string RegisterPlayer = "web-root/restricted/player/register-player.aspx";
+
+                public const string Login = "web-root/restricted/player/login.aspx";
+
+                public const string GetLeague = "web-root/restricted/league/get-league.aspx";
+
+                public const string SetLeague = "web-root/restricted/league/set-league-bet-setting.aspx";
+
+                public const string SetPlayerBetLimit = "web-root/restricted/player/update-player-bet-setting-by-sportid-and-markettype.aspx";
+
+                public const string Deposit = "web-root/restricted/player/deposit.aspx";
+
+                public const string Withdraw = "web-root/restricted/player/withdraw.aspx";
+
+                public const string GetPlayerBalance = "web-root/restricted/player/get-player-balance.aspx";
+
+                public const string BettingDetails = "web-root/restricted/report/get-bet-list-by-modify-date.aspx";
+            }
+
+            public static class Agent
+            {
+                public const string Username = "AgentWeBet333LIVE";
+
+                public const string Password = "AgentWeBet333LIVE";
+
+                public const long Min = 5;
+
+                public const long Max = 5000;
+
+                public const long MaxPerMatch = 10000;
+
+                /*
+                 *   1: Low
+                 *   2: Medium
+                 *   3: High
+                 *   4: VIP(ALL)
+                 */
+
+                public const int CasinoTableLimit = 1;
+            }
+
+            public static class Portfolio
+            {
+                public const string SportsBook = "SportsBook";
+
+                public const string Casino = "Casino";
+
+                public const string Games = "Games";
+
+                public const string VirtualSports = "VirtualSports";
+
+                public const string SeamlessGame = "SeamlessGame";
+
+                public const string ThirdPartySportsBook = "ThirdPartySportsBook";
+            }
+
+            public static class Oddstyle
+            {
+                public const string MalayOdds = "MY";   //  Default
+
+                public const string HongKongOdds = "HK";
+
+                public const string EuroOdds = "EU";
+
+                public const string IndonesiaOdds = "ID";
+            }
+
+            public static class Theme
+            {
+                public const string Black = "Black";
+
+                public const string Blue = "Blue";
+
+                public const string Emerald = "Emerald";
+
+                public const string Green = "Green";
+
+                public const string Ocean = "Ocean";
+
+                public const string SBO = "SBO";    //  Default
+
+                public const string Lawn = "Lawn";
+
+                public const string SBOBETM = "SBOBET-m";
+
+                public const string EuroLayoutM = "Euro-layout-m";
+
+                public const string ChinaLayoutM = "China-layout-m";
+
+                public const string SboMain = "SboMain";
+            }
+
+            public static class OddsMode
+            {
+                public const string Single = "single";
+
+                public const string Double = "double";    //  default
+            }
+
+            public static class Device
+            {
+                public const string Desktop = "d";  //  default
+
+                public const string Mobile = "m";
+            }
+
+            public static class MarketType
+            {
+                public const long All = 0;
+
+                public const long Over_Under = 3;
+
+                public const long Correct_Score = 4;
+            }
+
+            public static class SportType
+            {
+                public const long All = 0;
+
+                public const long Soccer = 1;
+
+                public const long Football = 3;
+
+                public const long Others = 11;
+            }
+
+            public static class UserGroup
+            {
+                public const string A = "a";
+
+                public const string B = "b";
+
+                public const string C = "c";
+
+                public const string D = "d";
             }
         }
 

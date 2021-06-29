@@ -160,6 +160,7 @@ namespace Webet333.service
                 //var playtechList = userlist.Where(x => x.GameName == "PLAYTECH").ToList();
                 //var kiss918List = userlist.Where(x => x.GameName == "KISS918").ToList();
                 var yeeBetList = userlist.Where(x => x.GameName == "YeeBet").ToList();
+                var SBOList = userlist.Where(x => x.GameName == "SBO").ToList();
 
                 //try
                 //{
@@ -350,6 +351,32 @@ namespace Webet333.service
                             };
 
                             var result = await APICallPost(APIConst.baseUrl + APIConst.registerYeeBet, request: model);
+#if DEBUG
+                            Console.WriteLine(result);
+#endif
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WriteErrorTextToFile("Error :" + ex.Message);
+#if DEBUG
+                    Console.WriteLine(ex.Message.ToString());
+#endif
+                }
+
+                try
+                {
+                    if (SBOList.Count > 0)
+                    {
+                        for (int i = 0; i < SBOList.Count; i++)
+                        {
+                            var model = new
+                            {
+                                Id = SBOList[i].UserId
+                            };
+
+                            var result = await APICallPost(APIConst.baseUrl + APIConst.RegisterSBO, request: model);
 #if DEBUG
                             Console.WriteLine(result);
 #endif

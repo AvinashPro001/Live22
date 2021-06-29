@@ -40,7 +40,8 @@ export class BettingDetailsComponent implements OnInit {
         { gameName: this.commonService.GameName.AllBet },
         { gameName: this.commonService.GameName.WM },
         { gameName: this.commonService.GameName.PragmaticPlay },
-        { gameName: this.commonService.GameName.YeeBet }
+        { gameName: this.commonService.GameName.YeeBet },
+        { gameName: this.commonService.GameName.SBO }
     ];
 
     gmtList: any = [
@@ -81,9 +82,7 @@ export class BettingDetailsComponent implements OnInit {
         private commonService: CommonService) { }
 
     async ngOnInit() {
-        if (await this.checkViewPermission()) {
-            this.setColumn(this.selectedList);
-        };
+        if (await this.checkViewPermission()) this.setColumn(this.selectedList);
     }
 
     //#region setCoumn
@@ -408,6 +407,33 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: "BetAmount" }
             ];
         }
+        else if (selectedList == this.commonService.GameName.SBO) {
+            this.columns = [
+                { prop: 'SportsType' },
+                { prop: 'Odds' },
+                { prop: 'OddsStyle' },
+                { prop: 'ActualStake' },
+                { prop: 'Turnover' },
+                { prop: 'IsHalfWonLose' },
+                { prop: 'IsLive' },
+                { prop: 'MaxWinWithoutActualStake' },
+                { prop: 'IP' },
+                { prop: 'IsSystemTagRisky' },
+                { prop: 'IsCustomerTagRisky' },
+                { prop: 'OrderTime' },
+                { prop: 'ModifyDate' },
+                { prop: 'SettleTime' },
+                { prop: 'WinLostDate' },
+                { prop: 'RefNo' },
+                { prop: 'Username' },
+                { prop: 'Currency' },
+                { prop: 'Stake' },
+                { prop: 'WinLost' },
+                { prop: 'Status' },
+                { prop: 'TopDownline' },
+                { prop: 'SubBet' }
+            ];
+        }
         else {
             this.columns = [];
         }
@@ -467,6 +493,7 @@ export class BettingDetailsComponent implements OnInit {
     SelectGMT($event) { this.gmtlist = $event.target.value; }
 
     //#region       Filter Data
+
     setDateOtherPicker(fromdate = null, todate = null) {
         //Date formate :: Month / date / yesr, Hours: Minitus AM
 
@@ -491,6 +518,7 @@ export class BettingDetailsComponent implements OnInit {
         checkExists = document.getElementById("txt_startdatetime");
         if (checkExists != null) (document.getElementById("txt_startdatetime") as HTMLInputElement).value = selectFromDate;
     }
+
     setToday() {
         var dates = this.commonService.getTodatDate();
         var fromdate = dates.fromdate;
@@ -559,7 +587,8 @@ export class BettingDetailsComponent implements OnInit {
         if (this.selectedList !== this.commonService.GameName.M8 &&
             this.selectedList !== this.commonService.GameName.DG &&
             this.selectedList !== this.commonService.GameName.PragmaticPlay)
-            if (Model.fromdate === null || Model.todate === null) return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseProvideFromDateToDate);
+            if (Model.fromdate === null ||
+                Model.todate === null) return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseProvideFromDateToDate);
 
         this.setDateOtherPicker(new Date(Model.fromdate), new Date(Model.todate));
 
@@ -609,9 +638,7 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
-                    }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -659,9 +686,7 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
-                    }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -696,9 +721,7 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
-                    }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -722,9 +745,7 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
-                    }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -755,9 +776,7 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
-                    }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -791,9 +810,7 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
-                    }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -838,9 +855,7 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
-                    }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -883,9 +898,7 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
-                    }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -926,9 +939,7 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
-                    }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -965,9 +976,7 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
-                    }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -1008,9 +1017,7 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
-                    }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -1058,9 +1065,7 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
-                    }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -1095,9 +1100,7 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
-                    }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -1138,9 +1141,53 @@ export class BettingDetailsComponent implements OnInit {
                         });
                         this.rows = [...this.rows];
                     }
-                    else {
-                        this.setColumn("");
+                    else this.setColumn("");
+                    this.loadingIndicator = false;
+                }, error => {
+                    this.loadingIndicator = false;
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
+                break;
+            }
+            case this.commonService.GameName.SBO: {
+                this.adminService.add<any>(customer.SBOBettingDetails, Model).subscribe(res => {
+                    if (res.data.error.id == 0 &&
+                        res.data.result.length > 0) {
+                        //let list = res.data.result.filter(s => s.username == this.SBOUsername)
+                        this.rows = [];
+
+                        this.TableData = res.data.result;
+
+                        res.data.result.forEach(el => {
+                            this.rows.push({
+                                SportsType: el.sportsType,
+                                Odds: el.odds,
+                                OddsStyle: el.oddsStyle,
+                                ActualStake: el.actualStake,
+                                Turnover: el.turnover,
+                                IsHalfWonLose: el.isHalfWonLose,
+                                IsLive: el.isLive,
+                                MaxWinWithoutActualStake: el.maxWinWithoutActualStake,
+                                IP: el.ip,
+                                IsSystemTagRisky: el.isSystemTagRisky,
+                                IsCustomerTagRisky: el.isCustomerTagRisky,
+                                OrderTime: el.orderTime,
+                                ModifyDate: el.modifyDate,
+                                SettleTime: el.settleTime,
+                                WinLostDate: el.winLostDate,
+                                RefNo: el.refNo,
+                                Username: el.username,
+                                Currency: el.currency,
+                                Stake: el.stake,
+                                WinLost: el.winLost,
+                                Status: el.status,
+                                TopDownline: el.topDownline,
+                                SubBet: JSON.stringify(el.subBet)
+                            });
+                        });
+                        this.rows = [...this.rows];
                     }
+                    else this.setColumn("");
                     this.loadingIndicator = false;
                 }, error => {
                     this.loadingIndicator = false;
@@ -1383,6 +1430,21 @@ export class BettingDetailsComponent implements OnInit {
                 }
                 case this.commonService.GameName.YeeBet: {
                     this.adminService.add<any>(customer.SaveYeeBetBettingDetails, model).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
+                }
+                case this.commonService.GameName.SBO: {
+                    this.adminService.add<any>(customer.SaveSBOBettingDetails, model).subscribe(res => {
                         this.toasterService.pop('success', 'Successfully', res.message);
                         this.loadingIndicator = false;
                         this.rows = [];

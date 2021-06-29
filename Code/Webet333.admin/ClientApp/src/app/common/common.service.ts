@@ -225,7 +225,14 @@ export class CommonService {
         VIPLevelRequired: 'VIP Level Required.',
         PleaseSelectMobileBannerImage: 'Please Select Mobile Banner Image',
         PleaseSelectDesktopBannerImage: 'Please Select Desktop Banner Image',
-        PleaseAddPromotionFixedBonusAmount: 'Please Add Promotion Fixed Bonus Amount.'
+        PleaseAddPromotionFixedBonusAmount: 'Please Add Promotion Fixed Bonus Amount.',
+        PleaseCheckRequestModel: 'Please check request model.',
+        PleaseEnterMaxBet: 'Please enter max bet value.',
+        PleaseEnterMaxBetMatch: 'Please enter max bet value match.',
+        PleaseEnterMinBet: 'Please enter min bet value.',
+        PleaseEnterMaxBetRatio: 'Please Enter Valid MaxBetRatio.',
+        PleaseEnterSelectGroupType: 'Please Enter Group Type.',
+        PleaseSelectMinimumOneLeague: 'Please Select Minimum One League.'
     };
 
     //#endregion Error List
@@ -272,7 +279,31 @@ export class CommonService {
         WM: 'WM',
         PragmaticPlay: 'Pragmatic Play',
         MaxBet: 'MaxBet',
-        YeeBet: 'YeeBet'
+        YeeBet: 'YeeBet',
+        SBO: 'SBO'
+    }
+
+    //#endregion Game List
+
+    //#region Wallet List
+
+    public WalletName = {
+        M8: 'M8 Wallet',
+        AG: 'AG Wallet',
+        Playtech: 'PlayTech Wallet',
+        Joker: 'Joker Wallet',
+        Mega888: 'Mega888 Wallet',
+        _918Kiss: '918Kiss Wallet',
+        DG: 'DG Wallet',
+        SexyBaccarat: 'Sexy Wallet',
+        SA: 'SA Wallet',
+        Pussy888: 'Pussy888 Wallet',
+        AllBet: 'AllBet Wallet',
+        WM: 'WM Wallet',
+        PragmaticPlay: 'Pragmatic Wallet',
+        MaxBet: 'MaxBet Wallet',
+        YeeBet: 'YeeBet Wallet',
+        SBO: 'SBO Wallet'
     }
 
     //#endregion Game List

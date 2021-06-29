@@ -403,6 +403,23 @@ namespace Webet333.api.Helpers
 
         #endregion YEEBET Services
 
+        #region SBO Services
+
+        internal async Task SBOServicesInsert(string request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var res = await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Game.SBOBettingDetailsInsert,
+                    new
+                    {
+                        jsonString = request
+                    });
+            }
+        }
+
+        #endregion SBO Services
+
         #region Kiss 918 Player Log Insert
 
         internal async Task<int> Kiss918PlayerLogInsert(List<PlayerGameLogResult> request, string Username)
@@ -1207,7 +1224,8 @@ namespace Webet333.api.Helpers
                     decimal AllbetBalance,
                     decimal WMBalance,
                     decimal PragmaticBalance,
-                    decimal YeeBetBalance
+                    decimal YeeBetBalance,
+                    decimal SBOBalance
             )
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -1233,7 +1251,8 @@ namespace Webet333.api.Helpers
                         AllbetBalance,
                         WMBalance,
                         PragmaticBalance,
-                        YeeBetBalance
+                        YeeBetBalance,
+                        SBOBalance
                     });
             }
         }
@@ -1532,6 +1551,10 @@ namespace Webet333.api.Helpers
 
                     case GameConst.GameName.YeeBet:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_YeeBet, new { request.UserId, request.FromDate, request.ToDate });
+                        break;
+
+                    case GameConst.GameName.SBO:
+                        result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_SBO, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
                     default:

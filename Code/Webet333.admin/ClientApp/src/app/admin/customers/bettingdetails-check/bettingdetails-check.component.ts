@@ -33,7 +33,8 @@ export class BettingdetailsCheckComponent implements OnInit {
         { gameName: this.commonService.GameName.SA },
         { gameName: this.commonService.GameName.SexyBaccarat },
         { gameName: this.commonService.GameName.WM },
-        { gameName: this.commonService.GameName.YeeBet }
+        { gameName: this.commonService.GameName.YeeBet },
+        { gameName: this.commonService.GameName.SBO }
     ];
 
     constructor(
@@ -388,6 +389,33 @@ export class BettingdetailsCheckComponent implements OnInit {
                 { prop: "CId" },
                 { prop: "Username" },
                 { prop: "BetAmount" }
+            ];
+        }
+        else if (selectedList == this.commonService.GameName.SBO) {
+            this.columns = [
+                { prop: 'SportsType' },
+                { prop: 'Odds' },
+                { prop: 'OddsStyle' },
+                { prop: 'ActualStake' },
+                { prop: 'Turnover' },
+                { prop: 'IsHalfWonLose' },
+                { prop: 'IsLive' },
+                { prop: 'MaxWinWithoutActualStake' },
+                { prop: 'IP' },
+                { prop: 'IsSystemTagRisky' },
+                { prop: 'IsCustomerTagRisky' },
+                { prop: 'OrderTime' },
+                { prop: 'ModifyDate' },
+                { prop: 'SettleTime' },
+                { prop: 'WinLostDate' },
+                { prop: 'RefNo' },
+                { prop: 'Username' },
+                { prop: 'Currency' },
+                { prop: 'Stake' },
+                { prop: 'WinLost' },
+                { prop: 'Status' },
+                { prop: 'TopDownline' },
+                { prop: 'SubBet' }
             ];
         }
         else {
@@ -961,6 +989,41 @@ export class BettingdetailsCheckComponent implements OnInit {
                                 CId: el.Cid,
                                 Username: el.Username,
                                 BetAmount: el.BetAmount
+                            });
+                        });
+                        this.rows = [...this.rows];
+                        this.loadingIndicator = false;
+                        break;
+                    }
+                    case this.commonService.GameName.SBO: {
+                        this.setColumn(this.commonService.GameName.SBO);
+                        this.loadingIndicator = true;
+                        this.rows = [];
+                        res.data.forEach(el => {
+                            this.rows.push({
+                                SportsType: el.SportsType,
+                                Odds: el.Odds,
+                                OddsStyle: el.OddsStyle,
+                                ActualStake: el.ActualStake,
+                                Turnover: el.Turnover,
+                                IsHalfWonLose: el.IsHalfWonLose,
+                                IsLive: el.IsLive,
+                                MaxWinWithoutActualStake: el.MaxWinWithoutActualStake,
+                                IP: el.IP,
+                                IsSystemTagRisky: el.IsSystemTagRisky,
+                                IsCustomerTagRisky: el.IsCustomerTagRisky,
+                                OrderTime: el.OrderTime,
+                                ModifyDate: el.ModifyDate,
+                                SettleTime: el.SettleTime,
+                                WinLostDate: el.WinLostDate,
+                                RefNo: el.RefNo,
+                                Username: el.Username,
+                                Currency: el.Currency,
+                                Stake: el.Stake,
+                                WinLost: el.WinLost,
+                                Status: el.Status,
+                                TopDownline: el.TopDownline,
+                                SubBet: JSON.stringify(el.SubBet)
                             });
                         });
                         this.rows = [...this.rows];

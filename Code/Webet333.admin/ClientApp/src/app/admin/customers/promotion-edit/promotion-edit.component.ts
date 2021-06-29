@@ -277,6 +277,7 @@ export class PromotionEditComponent implements OnInit {
             isPussy888: (document.getElementById("pussy888_id") as HTMLInputElement).checked,
             isMega888: (document.getElementById("mega888_id") as HTMLInputElement).checked,
             isJoker: (document.getElementById("joker_id") as HTMLInputElement).checked,
+            isSBO: (document.getElementById("SBO_id") as HTMLInputElement).checked,
 
             isNewMember: (document.getElementById("newmember_id") as HTMLInputElement).checked,
             isSports: (document.getElementById("sports_id") as HTMLInputElement).checked,
@@ -305,6 +306,7 @@ export class PromotionEditComponent implements OnInit {
             dataSelect.isAllBet = false;
             dataSelect.isMaxbet = false;
             dataSelect.isM8 = false;
+            dataSelect.isSBO = false;
         }
 
         if (this.selectOverCategory == 'Turnover') {
@@ -371,10 +373,8 @@ export class PromotionEditComponent implements OnInit {
 
         this.adminService.add<any>(customer.promotionUpdate, dataSelect).subscribe(res => {
             this.toasterService.pop('success', 'Success', res.message);
-            if (this.baseDesktop !== undefined || this.baseMobile !== undefined)
-                this.uploadFile(res.data);
-            else
-                this.router.navigate(['admin/customers/promotion-list']);
+            if (this.baseDesktop !== undefined || this.baseMobile !== undefined) this.uploadFile(res.data);
+            else this.router.navigate(['admin/customers/promotion-list']);
         }, error => {
             this.disabled = false;
             this.ngOnInit();

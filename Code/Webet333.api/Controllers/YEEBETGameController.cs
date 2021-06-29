@@ -60,7 +60,7 @@ namespace Webet333.api.Controllers
             {
                 if (result.result != 0) return OkResponse(result);
 
-                await yeebet_helper.WMRegister(request.Id, username, JsonConvert.SerializeObject(result));
+                await yeebet_helper.YeeBetRegister(request.Id, username, JsonConvert.SerializeObject(result));
 
                 return OkResponse(result);
             }

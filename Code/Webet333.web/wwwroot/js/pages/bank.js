@@ -879,6 +879,7 @@ async function RefreshFromWalletBalance(GameName) {
         case "WM Wallet": hideBalanceShowLoading('WMRefershImg', 'lbl_WMWalletbalanceDeposite'); await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId); break;
         case "Pragmatic Wallet": hideBalanceShowLoading('PragmaticRefershImg', 'lbl_PragmaticWalletbalanceDeposite'); await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId); break;
         case "YeeBet Wallet": hideBalanceShowLoading('YeeBetRefershImg', 'lbl_YeeBetWalletbalanceDeposite'); await YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId); break;
+        case "SBO Wallet": hideBalanceShowLoading('SBORefershImg', 'lbl_SBOWalletBalanceDeposite'); await SBOWalletBalance(globalParameter.data.sboGamePrefix + userDetails.data.userId); break;
     }
 }
 
@@ -1526,6 +1527,7 @@ function LoadingImageShowAllInSection(GameName) {
         case "WM Wallet": document.getElementById("WMInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
         case "Pragmatic Wallet": document.getElementById("PragmaticInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
         case "YeeBet Wallet": document.getElementById("YeeBetInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
+        case "SBO Wallet": document.getElementById("SBOInWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="20" >'; break;
     }
 }
 
@@ -1619,6 +1621,7 @@ async function CheckSupportGame() {
         document.getElementById("sexyallin").disabled = !res.data[0].IsSexyBaccarat ? true : false;
         document.getElementById("wmallin").disabled = !res.data[0].IsWM ? true : false;
         document.getElementById("YeeBetAllIn").disabled = !res.data[0].IsYeeBet ? true : false;
+        document.getElementById("SBOAllIn").disabled = !res.data[0].IsSBO ? true : false;
     }
     else {
         document.getElementById("kiss918allin").disabled = false;
@@ -1636,6 +1639,7 @@ async function CheckSupportGame() {
         document.getElementById("sexyallin").disabled = false;
         document.getElementById("wmallin").disabled = false;
         document.getElementById("YeeBetAllIn").disabled = false;
+        document.getElementById("SBOAllIn").disabled = false;
         GameInMaintenance(0);
     }
 }
