@@ -63,7 +63,7 @@
 
             public const string Currency = "2";
 
-        #region Betting limit Constant
+            #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -91,7 +91,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-        #endregion Betting limit Constant
+            #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -142,7 +142,7 @@
 
         public class M8
         {
-            public const string baseURL = "http://apid.mywinday.com/api.aspx";
+            public const string baseURL = "http://apir.mywinday.com/api.aspx";
 
             public const string Secret = "a782988d";
 
@@ -738,7 +738,7 @@
 
             public const string Currency = "2";
 
-            #region Betting limit Constant
+        #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -766,7 +766,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-            #endregion Betting limit Constant
+        #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -817,7 +817,7 @@
 
         public class M8
         {
-            public const string baseURL = "http://apid.mywinday.com/api.aspx";
+            public const string baseURL = "http://apir.mywinday.com/api.aspx";
 
             public const string Secret = "a782988d";
 
