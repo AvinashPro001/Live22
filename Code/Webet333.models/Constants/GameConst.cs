@@ -63,7 +63,7 @@
 
             public const string Currency = "2";
 
-            #region Betting limit Constant
+        #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -91,7 +91,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-            #endregion Betting limit Constant
+        #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -738,7 +738,7 @@
 
             public const string Currency = "2";
 
-        #region Betting limit Constant
+            #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -766,7 +766,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-        #endregion Betting limit Constant
+            #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -1278,7 +1278,7 @@
 
                 public const long Max = 5000;
 
-                public const long MaxPerMatch =  10000;
+                public const long MaxPerMatch = 10000;
 
                 /*
                  *   1: Low
