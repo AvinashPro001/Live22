@@ -1,5 +1,5 @@
 ﻿//#region OnLoad 
-$(document).ready(function () {
+$(window).on('load', function () {
     LoginSectionHideUnhide();
     GetProfileAndSetInSessionStorage();
     ProfileData();
@@ -396,33 +396,6 @@ async function UpdateMobileNumber() {
     else {
         LoaderHide();
         $('#mobilenumber_update').modal('hide');
-        ShowError(res.response.message);
-    }
-}
-
-//#endregion
-
-//#region "ASYNC" Update Name
-
-async function UpdateName() {
-
-    if ($("#profile_fullname").val() == "") {
-        return ShowError(ChangeErroMessage("enter_full_name"));
-    }
-
-    model = {
-        name: $('#profile_fullname').val()
-    };
-
-    LoaderShow();
-    var res = await PostMethod(accountEndPoints.updateProfile, model);
-    if (res.status == 200) {
-        LoaderHide();
-        ShowSuccess(res.response.message);
-        GetProfileAndSetInSessionStorage();
-    }
-    else {
-        LoaderHide();
         ShowError(res.response.message);
     }
 }

@@ -84,7 +84,7 @@
 <div class="row follow_up_wrraper_sec ml0 mr0">
     <div class="container">
         <div class="col-sm-4">
-            <div class="follow_up_facebook" onclick="FollowOnFacebook()">
+            <div class="follow_up_facebook hand-curson" onclick="FollowOnFacebook()">
                 <h1><img src="images/titleicon2.png"> <span class="lang" key="follor_on_facbook"> FOLLOW US ON FACEBOOK </span> </h1>
                 <div class="facebook_logo_sec">
                     <img src="images/fb2.png" alt="fb2" />
@@ -92,7 +92,7 @@
             </div>
         </div>
         <div class="col-sm-4">
-            <div class="follow_up_facebook" onclick="FollowOnInstagram()">
+            <div class="follow_up_facebook hand-curson" onclick="FollowOnInstagram()">
                 <h1><img src="images/titleicon6.png"> <span class="lang" key="follor_on_instagram"> FOLLOW US ON INSTAGRAM </span> </h1>
                 <div class="facebook_logo_sec">
                     <img src="images/ig2.png" alt="ig2" />
@@ -100,7 +100,7 @@
             </div>
         </div>
         <div class="col-sm-4 follow_up_youtube_wrap">
-            <div class="follow_up_youtube" onclick="FollowOnYoutube()">
+            <div class="follow_up_youtube hand-curson" onclick="FollowOnYoutube()">
                 <h1><img src="images/titleicon1.png"> <span class="lang" key="follor_on_youtube"> FOLLOW US ON YOUTUBE </span> </h1>
                 <div class="youtube_logo_sec">
                     <img src="images/youtube2.png" alt="ig2" />
@@ -110,11 +110,8 @@
         <div class="col-sm-8 latest_video_wrap">
             <div class="follow_up_lasteat_video">
                 <h1><img src="images/titleicon4.png"> <span class="lang" key="latest_high_video"> LATEST HIGHLIGHT VIDEO </span> </h1>
-                <div class="youtube_latest_video" id="en-US-youtube"  style="display:none">
-                    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Y0mB5txA0_I?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div class="youtube_latest_video" id="zh-Hans-youtube" style="display:none">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Y0mB5txA0_I?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="youtube_latest_video" >
+                    <iframe width="560" height="315" id="youtube_video_link" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -842,8 +839,15 @@
 
 <script>
     CheckMobileNumberIsVerifiedOnly();
+    
     $(document).ready(function () {
+        
         AllAnnouncementsCallAPI();
+    });
+
+
+    $(window).on('load', function () {
+            SetYoutubeVideo();
     });
 
     setInterval(function () {

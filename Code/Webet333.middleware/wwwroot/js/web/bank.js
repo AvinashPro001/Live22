@@ -279,11 +279,9 @@ function SetProfilePageData() {
     if (GetLocalStorage('currentUser') !== null) {
         var res = JSON.parse(Decryption(GetSessionStorage("userDetails")))
         if (res !== null) {
-            $('#profile_username').val(res.username);
-            $('#profile_mobileNumber').val(res.mobileNo);
-            $('#profile_fullname').val(res.name);
-            $('#profile_username').attr("disabled", "disabled");
-            $('#profile_mobileNumber').attr("disabled", "disabled");
+            SetAllValueInElement("profile_username", res.username)
+            SetAllValueInElement("profile_mobileNumber", res.mobileNo)
+            SetAllValueInElement("profile_fullname", res.name)
             $('#mobile_number').val(res.mobileNo);
         }
     }

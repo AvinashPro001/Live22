@@ -57,7 +57,7 @@ var AGTrigger = false,
 //#endregion Declare Vairable
 
 //#region Onload
-$(document).ready(function () {
+$(window).on('load', function () {
     if (GetLocalStorage('currentUser') !== null) {
         SetUsername();
         LoadAllBalance();

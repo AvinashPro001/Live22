@@ -13,7 +13,7 @@ let SiteData = {
 
 //#region OnLoad Function
 SetLanguage();
-$(document).ready(function () {
+$(window).on('load', function () {
     if (GetSessionStorage("siteData") == null) SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
     ChangeLanguageText();
     if (localStorage.getItem('IsExecute') == "true" || localStorage.getItem('IsExecute') == true || localStorage.getItem('IsExecute') == null) localStorage.setItem('IsExecute', false);
@@ -370,11 +370,18 @@ function SetLanguage() {
         if (GetLocalStorage('language') === null) SetLocalStorage('language', 'en-US');
 }
 
-function ChangeLanguageText() {
+function SetYoutubeVideo() {
+    var youtubLink = ""
 
-    $("#" + GetLocalStorage('language') + "-youtube").css("display", "");
-    if (GetLocalStorage('language') == "ms-MY")
-        $("#en-US-youtube").css("display", "");
+    if (GetLocalStorage('language') == "en-US" || GetLocalStorage('language') == "ms-MY")
+        youtubLink = "https://www.youtube-nocookie.com/embed/Y0mB5txA0_I?autoplay=1&mute=1";
+    else
+        youtubLink = "https://www.youtube.com/embed/Y0mB5txA0_I?autoplay=1&mute=1";
+
+    $("#youtube_video_link").attr("src", youtubLink)
+}
+
+function ChangeLanguageText() {
 
     $.ajax({
         url: '../../resources/lang.' + GetLocalStorage('language') + '.json',
