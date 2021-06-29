@@ -526,7 +526,7 @@ async function regisrationGame() {
                 resSelectUser.data.AllBet === false ||
                 resSelectUser.data.WM === false ||
                 resSelectUser.data.Pragmatic === false ||
-                resSelectUser.data.SBO === false ||
+                resSelectUser.data.SBO === false
             ) {
                 resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
                 sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
