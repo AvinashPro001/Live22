@@ -776,6 +776,8 @@
             public const string UpdatePlayerDefaultBetLimit = "sbo/update/playerdefaultbetlimit";
 
             public const string GetPlayerDefaultBetLimit = "sbo/get/playerdefaultbetlimit";
+
+            public const string GetLeagueBetSetting = "sbo/get/league-bet-setting";
         }
     }
 }

@@ -620,6 +620,44 @@ namespace Webet333.api.Helpers
 
         #endregion Set League Bet Setting
 
+        #region Get League Bet Limit
+
+        internal async Task<SBOGetLeagueBetSettingResponse> CallGetLeagueBetSettingAPI()
+        {
+            var getLeagueDB = await GetLeagueDBAsync();
+
+            SBOGetLeagueBetSettingResponse temp = new SBOGetLeagueBetSettingResponse();
+
+            foreach (var data in getLeagueDB)
+            {
+                SBOGetLeagueBetSettingRequest model = new SBOGetLeagueBetSettingRequest
+                {
+                    CompanyKey = GameConst.SBO.CompanyKey,
+                    Currency = GameConst.SBO.Currency,
+                    IsLive = false,
+                    LeagueId = data.LeagueId,
+                    ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString()
+                };
+
+                var URL = $"{GameConst.SBO.URL}{GameConst.SBO.EndPoint.GetLeagueBetSetting}";
+
+                var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
+                var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
+
+                var DeserializeAPIResult = JsonConvert.DeserializeObject<SBOGetLeagueBetSettingResponse>(APIResult);
+
+                if (DeserializeAPIResult.Error.Id == 0) DeserializeAPIResult.Result.ForEach(x => x.LeagueName = data.LeagueName);
+
+                if (temp.Result != null) temp.Result.AddRange(DeserializeAPIResult.Result);
+                else temp = DeserializeAPIResult;
+            }
+
+            return temp;
+        }
+
+        #endregion Get League Bet Limit
+
         #region House Keeping
 
         public void Dispose()
