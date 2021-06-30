@@ -570,7 +570,7 @@ namespace Webet333.api.Helpers
                     CompanyKey = GameConst.SBO.CompanyKey,
                     Currency = GameConst.SBO.Currency,
                     GroupType = data.GroupType,
-                    IsLive = true,
+                    IsLive = false,
                     LeagueId = data.LeagueId,
                     MaxBet = data.MaxBet,
                     MaxBetRatio = data.MaxBetRatio,
@@ -582,7 +582,8 @@ namespace Webet333.api.Helpers
 
                 var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
 
-                Console.WriteLine(JsonConvert.SerializeObject(model));
+                // For testing only.
+                //Console.WriteLine(JsonConvert.SerializeObject(model));
 
                 var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
 
