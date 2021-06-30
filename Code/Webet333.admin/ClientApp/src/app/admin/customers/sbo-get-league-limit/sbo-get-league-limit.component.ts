@@ -1,3 +1,6 @@
+//#region
+//#endregion
+
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
@@ -42,8 +45,10 @@ export class SboGetLeagueLimitComponent implements OnInit {
     //#region ngOnInit
 
     ngOnInit() {
-        this.setColumn();
-        this.getLeagueList();
+        if (this.checkViewPermission) {
+            this.setColumn();
+            this.getLeagueList();
+        }
     }
 
     //#endregion ngOnInit
@@ -121,8 +126,8 @@ export class SboGetLeagueLimitComponent implements OnInit {
     async checkViewPermission() {
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[18].Permissions[0].IsChecked === true) {
-                if (usersPermissions.permissionsList[1].submenu[18].submenu[0].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[16].Permissions[0].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[16].submenu[2].Permissions[0].IsChecked === true) {
                     return true;
                 }
                 else {
@@ -145,8 +150,8 @@ export class SboGetLeagueLimitComponent implements OnInit {
     async checkUpdatePermission() {
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[18].Permissions[1].IsChecked === true) {
-                if (usersPermissions.permissionsList[1].submenu[18].submenu[0].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[16].Permissions[1].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[16].submenu[2].Permissions[1].IsChecked === true) {
                     return true;
                 }
                 else {
@@ -169,8 +174,8 @@ export class SboGetLeagueLimitComponent implements OnInit {
     async checkAddPermission() {
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[18].Permissions[2].IsChecked === true) {
-                if (usersPermissions.permissionsList[1].submenu[18].submenu[0].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[16].Permissions[2].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[16].submenu[2].Permissions[2].IsChecked === true) {
                     return true;
                 }
                 else {

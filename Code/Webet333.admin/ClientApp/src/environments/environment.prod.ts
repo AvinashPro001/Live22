@@ -5,8 +5,8 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
+    apiUrl: 'http://uatapi.webet333.com/api/v1/'
     //apiUrl: 'http://localhost:8091/api/v1/'
     //apiUrl: 'http://localhost:5000/api/v1/'
 };
@@ -343,7 +343,8 @@ export const customer = {
     updateSBOPlayerDefaultBetLimit: environment.apiUrl + 'sbo/update/playerdefaultbetlimit',
     getSBOPlayerDefaultBetLimit: environment.apiUrl + 'sbo/get/playerdefaultbetlimit',
     sboGetLeague: environment.apiUrl + 'sbo/getLeague',
-    sboSetLeague: environment.apiUrl + 'sbo/set/league'
+    sboSetLeague: environment.apiUrl + 'sbo/set/league',
+    getLeagueBetSetting: environment.apiUrl + 'sbo/get/league-bet-setting'
 }
 
 export const playtech = {
