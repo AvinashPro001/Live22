@@ -653,6 +653,25 @@ namespace Webet333.api.Helpers
                 else temp = DeserializeAPIResult;
             }
 
+            if (temp != null &&
+                temp.Result.Any())
+            {
+                //var big = temp.Result.Where(x => x.GroupType == "BIG").ToList();
+                //var medium = temp.Result.Where(x => x.GroupType == "MEDIUM").ToList();
+                //var small = temp.Result.Where(x => x.GroupType == "SMALL").ToList();
+                //var others = temp.Result.Where(x => x.GroupType != "BIG" && x.GroupType != "MEDIUM" && x.GroupType != "SMALL").ToList();
+
+                //List<SBOGetLeagueBetSettingResponseResult> tempResult = new List<SBOGetLeagueBetSettingResponseResult>();
+                //tempResult.AddRange(big);
+                //tempResult.AddRange(medium);
+                //tempResult.AddRange(small);
+                //tempResult.AddRange(others);
+
+                //temp.Result = tempResult;
+
+                temp.Result = temp.Result.OrderBy(x => x.GroupType).ToList();   //  BIG > MEDIUM > SMALL
+            }
+
             return temp;
         }
 
