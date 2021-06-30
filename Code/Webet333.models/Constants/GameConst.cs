@@ -591,6 +591,8 @@
                 public const string GetPlayerBalance = "web-root/restricted/player/get-player-balance.aspx";
 
                 public const string BettingDetails = "web-root/restricted/report/get-bet-list-by-modify-date.aspx";
+
+                public const string GetLeagueBetSetting = "web-root/restricted/league/get-league-bet-setting.aspx";
             }
 
             public static class Agent
@@ -1266,6 +1268,8 @@
                 public const string GetPlayerBalance = "web-root/restricted/player/get-player-balance.aspx";
 
                 public const string BettingDetails = "web-root/restricted/report/get-bet-list-by-modify-date.aspx";
+
+                public const string GetLeagueBetSetting = "web-root/restricted/league/get-league-bet-setting.aspx";
             }
 
             public static class Agent

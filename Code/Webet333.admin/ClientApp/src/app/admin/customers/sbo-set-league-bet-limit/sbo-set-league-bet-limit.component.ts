@@ -303,8 +303,8 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
     async checkViewPermission() {
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[17].Permissions[0].IsChecked === true) {
-                if (usersPermissions.permissionsList[1].submenu[17].submenu[0].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[16].Permissions[0].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[16].submenu[1].Permissions[0].IsChecked === true) {
                     return true;
                 }
                 else {
@@ -327,8 +327,8 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
     async checkUpdatePermission() {
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[17].Permissions[1].IsChecked === true) {
-                if (usersPermissions.permissionsList[1].submenu[17].submenu[0].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[16].Permissions[1].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[16].submenu[1].Permissions[1].IsChecked === true) {
                     return true;
                 }
                 else {
@@ -351,8 +351,8 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
     async checkAddPermission() {
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[17].Permissions[2].IsChecked === true) {
-                if (usersPermissions.permissionsList[1].submenu[17].submenu[0].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[16].Permissions[2].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[16].submenu[1].Permissions[2].IsChecked === true) {
                     return true;
                 }
                 else {

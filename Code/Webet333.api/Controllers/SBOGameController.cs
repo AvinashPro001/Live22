@@ -226,5 +226,22 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Set League Bet Setting
+
+        #region Get League Bet Setting
+
+        [HttpGet(ActionsConst.SBO.GetLeagueBetSetting)]
+        public async Task<IActionResult> GetLeagueBetSetting()
+        {
+            await CheckUserRole();
+
+            using (SBOGameHelpers SBOGame_Helpers = new SBOGameHelpers(Connection))
+            {
+                var result = await SBOGame_Helpers.CallGetLeagueBetSettingAPI();
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Get League Bet Setting
     }
 }
