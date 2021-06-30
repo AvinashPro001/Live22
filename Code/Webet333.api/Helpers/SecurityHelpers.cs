@@ -46,5 +46,15 @@
         {
             return new security.AllBetMD5Crypto().base64edMd5(rawData);
         }
+
+        public static string GamePlayDESEncrptText(string rawData, string key)
+        {
+            return new security.GamePlayDESCryptoServices(key).Encrypt(rawData);
+        }
+
+        public static string GamePlaySHA256HashText(string rawData)
+        {
+            return security.GamePlaySHA256HASHServices.SHA256(rawData);
+        }
     }
 }

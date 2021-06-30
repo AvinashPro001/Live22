@@ -777,5 +777,10 @@
 
             public const string GetPlayerDefaultBetLimit = "sbo/get/playerdefaultbetlimit";
         }
+
+        public class GamePlay
+        {
+            public const string Register = "gameplay/register";
+        }
     }
 }

@@ -712,6 +712,24 @@
             }
         }
 
+        public class GamePlay
+        {
+            public const string URL = "http://www.connect6play.com/doBusiness.do";
+
+            public const string MerchantCode = "xpwebetmyr";
+
+            public const string DESKey = "1iwsvpQ6";
+
+            public const string SHA256Key = "3v35vr2aggPcJGUx";
+
+            public const string Currency = "MYR";
+
+            public class Method
+            {
+                public const string Register = "cm";
+            }
+        }
+
 #elif STAG
 
         public const string BaseUrl = "http://webet333.com/";

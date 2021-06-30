@@ -616,5 +616,10 @@
 
             public const string SelectLeagueBetSetting = "[dbo].[Select_League_Bet_Setting_SBO]";
         }
+
+        public class GamePlay
+        {
+            public const string Register = "[dbo].[Users_Insert_GamePlay]";
+        }
     }
 }
