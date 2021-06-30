@@ -570,7 +570,7 @@ namespace Webet333.api.Helpers
                     CompanyKey = GameConst.SBO.CompanyKey,
                     Currency = GameConst.SBO.Currency,
                     GroupType = data.GroupType,
-                    IsLive = true,
+                    IsLive = false,
                     LeagueId = data.LeagueId,
                     MaxBet = data.MaxBet,
                     MaxBetRatio = data.MaxBetRatio,
