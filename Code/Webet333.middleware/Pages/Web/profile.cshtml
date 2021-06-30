@@ -3,9 +3,8 @@
     ViewData["Title"] = "Profile - Webet333 -🥇";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-<link href="~/css/bootstrap-datepicker.min.css" type="text/css" rel="stylesheet" />
-@*<script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>*@
+
+<link href="~/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
 <script>
     CheckLoginOrNot();
     CheckMobileNumberIsVerifiedOnly();
@@ -1150,7 +1149,7 @@
                                                     <p class="big no-mar lang" key="profile_full_name">Full Name :</p>
                                                 </label>
                                                 <label class="fright lock">
-                                                    <label class="form-control"  id="profile_fullname"></label>
+                                                    <label class="form-control" id="profile_fullname"></label>
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">
@@ -1169,7 +1168,7 @@
 
                                                 </label>
                                             </li>
-                                           
+
                                         </ul>
                                         <h5 class="blk-text no-mar lang" key="profile_update_personal_details">UPDATE PERSONAL DETAILS</h5>
                                         <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
@@ -1299,7 +1298,6 @@
     </div>
 </div>
 
-
 <div class="modal fade" id="mobilenumber_update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -1328,7 +1326,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="modal fade" id="promotion_not_apply_confimation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -1396,12 +1393,18 @@
     }
 </script>
 <script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="~/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#datepicker0").datepicker();
 
-        $("#datepicker1").datepicker();
+        var default_date = new Date();
+        $("#datepicker0").datetimepicker({
+            format: 'yyyy-mm-dd hh:mm',
+            useCurrent: false, // default this is set to true
+            defaultDate: default_date
+        });
+
+        $("#datepicker1").datetimepicker();
         $("#datepicker1btn").click(function (event) {
             event.preventDefault();
             $("#datepicker1").focus();
@@ -1412,17 +1415,17 @@
             $("#datepicker2").focus();
         })
 
-        $("#datepicker2").datepicker({
+        $("#datepicker2").datetimepicker({
             showOtherMonths: true,
             selectOtherMonths: true
         });
 
-        $("#datepicker3").datepicker({
+        $("#datepicker3").datetimepicker({
             numberOfMonths: 3,
             showButtonPanel: true
         });
 
-        $("#datepicker4").datepicker({
+        $("#datepicker4").datetimepicker({
             changeMonth: true,
             changeYear: true
         });
