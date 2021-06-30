@@ -415,6 +415,27 @@ namespace Webet333.api.Helpers
 
             if (callGetLeagueAPIFootball.Error.Id == 0) await MapWithDBValueAsync(callGetLeagueAPIFootball);
 
+            if (callGetLeagueAPIFootball != null &&
+                callGetLeagueAPIFootball.Result.Any())
+            {
+                var big = callGetLeagueAPIFootball.Result.Where(x => x.GroupType == "BIG").ToList();
+                var medium = callGetLeagueAPIFootball.Result.Where(x => x.GroupType == "MEDIUM").ToList();
+                var small = callGetLeagueAPIFootball.Result.Where(x => x.GroupType == "SMALL").ToList();
+                var others = callGetLeagueAPIFootball.Result.Where(x => x.GroupType != "BIG" && x.GroupType != "MEDIUM" && x.GroupType != "SMALL").ToList();
+                //var nullGroupType = callGetLeagueAPIFootball.Result.Where(x => x.GroupType == null).ToList();
+
+                List<SBOGetLeagueResponseResult> tempResult = new List<SBOGetLeagueResponseResult>();
+                tempResult.AddRange(big);
+                tempResult.AddRange(medium);
+                tempResult.AddRange(small);
+                tempResult.AddRange(others);
+                //tempResult.AddRange(nullGroupType);
+
+                callGetLeagueAPIFootball.Result = tempResult;
+
+                // callGetLeagueAPIFootball.Result = callGetLeagueAPIFootball.Result.OrderBy(x => x.GroupType).ToList();   //  BIG > MEDIUM > SMALL
+            }
+
             return callGetLeagueAPIFootball;
         }
 
