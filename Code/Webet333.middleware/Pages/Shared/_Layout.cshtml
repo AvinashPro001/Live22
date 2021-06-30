@@ -93,10 +93,10 @@
                                         <li class="login-item input-field">
                                             <ul class="user-login">
                                                 <li class="user form-icon">
-                                                    <input id="txt_login_username" class="topTxtBox" placeholder="Username" type="text" />
+                                                    <input id="txt_login_username" class="topTxtBox" tabindex="1" placeholder="Username" type="text" />
                                                 </li>
                                                 <li class="lock form-icon">
-                                                    <input id="txt_login_password" class="topTxtBox" placeholder="Password" type="password" />
+                                                    <input id="txt_login_password" class="topTxtBox"  tabindex="2" placeholder="Password" type="password" onkeypress="OnPressEnter()"/>
                                                 </li>
                                             </ul>
                                         </li>
@@ -177,13 +177,13 @@
                                     <div class="after-logion">
                                         <ul class="money-type list-inline">
                                             <button class=" restore-btn layout-btn" onclick="RestoreBalance();">
-                                                <img class="icon-home" src="~/images/restore.png">
-                                                <span><span class="lang" key="restore"></span></span>
+                                                <img id="layout_restore_image" class="icon-home" src="~/images/restore.png">
+                                                <span class="text-capital lang" key="restore"></span>
                                             </button>
                                             <li class="currency" data-toggle="collapse" data-target="#myDropdown" onclick="LoadAllBalance();">
                                                 <div class="select-balance">
                                                     <button class=" restore-btn layout-btn">
-                                                        <span class="lang" key="current_balance"></span> &nbsp;&nbsp;<span class="fa fa-chevron-down"></span>
+                                                        <span class="text-capital lang" key="current_balance"></span> &nbsp;&nbsp;<span class="fa fa-chevron-down"></span>
                                                     </button>
                                                     <div id="myDropdown" class="dropdown-content collapse">
                                                         <table cellpadding="10" style="width:170px;" cellspacing="10">
@@ -258,21 +258,21 @@
                                             <a href="~/Web/profile#deposit">
                                                 <li class="restore-btn layout-btn">
                                                     <label>
-                                                        <img class="icon-home" src="~/images/deposit.png">&nbsp;&nbsp;<span class="lang black-textt2" key="deposit"></span>
+                                                        <img class="icon-home" src="~/images/deposit.png">&nbsp;&nbsp;<span class="text-capital lang black-textt2" key="deposit"></span>
                                                     </label>
                                                 </li>
                                             </a>
                                             <a href="~/Web/profile#withdraw">
                                                 <li class="restore-btn layout-btn">
                                                     <label>
-                                                        <img class="icon-home" src="~/images/withdraw.png">&nbsp;&nbsp;<span class="lang black-textt2" key="withdraw"></span>
+                                                        <img class="icon-home" src="~/images/withdraw.png">&nbsp;&nbsp;<span class="text-capital lang black-textt2" key="withdraw"></span>
                                                     </label>
                                                 </li>
                                             </a>
                                             <a href="~/Web/profile#transfer">
                                                 <li class="restore-btn layout-btn">
                                                     <label>
-                                                        <img class="icon-home" src="~/images/transfer.png">&nbsp;&nbsp;<span class="lang black-textt2" key="transfer"></span>
+                                                        <img class="icon-home" src="~/images/transfer.png">&nbsp;&nbsp;<span class="text-capital lang black-textt2" key="transfer"></span>
                                                     </label>
                                                 </li>
                                             </a>
@@ -504,7 +504,7 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="promtion_boxess">
+                <div class="vip_boxess">
                     <img src="~/images/footericon4.png" alt="footericon1" />
                     <h1><span class="lang" key="promotion"></span></h1>
                     <p><span class="lang" key="promotion_text"></span></p>
@@ -589,8 +589,8 @@
                         </li>
                         <li>
                             <figure class="pad-top-ten">
-                                <img class="pink-logo normal_icons" style="filter:brightness(0.5)" src="~/images/carousel_logos/dream_bw.png" alt="">
-                                <img class="pink-logo hover_icons" style="filter:contrast(1.5)" src="~/images/carousel_logos/dream_color.png" alt="">
+                                <img class="pink-logo normal_icons footer-dg-icon-img" src="~/images/carousel_logos/dream_bw.png" alt="">
+                                <img class="pink-logo hover_icons footer-dg-color-icon-img" src="~/images/carousel_logos/dream_color.png" alt="">
                             </figure>
                         </li>
                         <li>
@@ -740,13 +740,13 @@
                 <div class="col-sm-2">
                     <h5 class="black-text our_partner lang" key="payment_gateway">Payment Gateway</h5>
                     <ul class="list-inline bank-us">
-                        <li>
+                        <li class="footer-payment-icon">
                             <figure class="pad-top-ten">
                                 <img class="pink-logo2 normal_icons" src="~/images/footerlogo/footerlogo24.png" alt="">
                                 <img class="pink-logo2 hover_icons" src="~/images/footerlogo/footerlogo24_color.png" alt="">
                             </figure>
                         </li>
-                        <li>
+                        <li class="footer-payment-icon">
                             <figure class="pad-top-ten">
                                 <img class="pink-logo2 normal_icons" src="~/images/footerlogo/footerlogo25.png" alt="">
                                 <img class="pink-logo2 hover_icons" src="~/images/footerlogo/footerlogo25_color.png" alt="">
@@ -785,11 +785,11 @@
         <div class="container">
             <div class="col-md-8 footer_sec_two_left">
                 <ul>
-                    <li><a href="~/Web/about"><span class="lang" key="about_us"></span> </a> | </li>
-                    <li><a href="~/Web/termsconditions"><span class="lang" key="term_condition"></span></a>| </li>
-                    <li><a href="~/Web/faq"><span class="lang" key="faq"></span></a> | </li>
-                    <li><a href="~/Web/join"><span class="lang" key="how_to_join"></span></a> | </li>
-                    <li><a href="#" onclick="OpenChatting()"><span class="lang" key="contact_us"></span></a></li>
+                    <li><a href="~/Web/about"><span class="text-capital lang" key="about_us"></span> </a> | </li>
+                    <li><a href="~/Web/termsconditions"><span class="text-capital lang" key="term_condition"></span></a>| </li>
+                    <li><a href="~/Web/faq"><span class="text-capital lang" key="faq"></span></a> | </li>
+                    <li><a href="~/Web/join"><span class="text-capital lang" key="how_to_join"></span></a> | </li>
+                    <li><a href="#" onclick="OpenChatting()"><span class="text-capital lang" key="contact_us"></span></a></li>
                 </ul>
             </div>
             <div class="col-md-4 footer_sec_two_right">

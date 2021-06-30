@@ -99,6 +99,8 @@ function LoginSectionHideUnhide() {
         document.getElementById("afterlogin").innerHTML = "";
         document.getElementById("bankMainMenu").innerHTML = "";
         document.getElementById("vipMainMenu").innerHTML = "";
+        $("#bankMainMenu").css("display", "none");
+        $("#vipMainMenu").css("display", "none");
     } else {
         document.getElementById("beforelogin").innerHTML = ""
     }
@@ -210,6 +212,11 @@ async function GetGlobalParameterAndSetInSessionStorage() {
 }
 
 //#endregion
+
+function OnPressEnter() {
+    if (event.keyCode === 13) DoLogin();
+}
+
 
 //#region "ASYNC" Login Function
 

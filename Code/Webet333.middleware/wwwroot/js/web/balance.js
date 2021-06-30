@@ -269,6 +269,7 @@ function CheckNAorNot(Value) {
 }
 
 async function RestoreBalance() {
+    $("#layout_restore_image").attr("src", "/images/loading.gif");
     SetLoadingImageForAllId();
     await GetProfileAndSetInSessionStorage();
     await GetGlobalParameterAndSetInSessionStorage
@@ -293,6 +294,7 @@ async function RestoreBalance() {
     }
     await PostMethod(transactionEndPoints.restore, restoreModel);
     LoadAllBalance();
+    $("#layout_restore_image").attr("src", "/images/restore.png");
 }
 
 function ConvertBalanceIntoCommasValue(amount) {

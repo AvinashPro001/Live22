@@ -1465,7 +1465,8 @@ li.user.form-icon {margin-right:6px; }
 .bellow_signt a {font-size: 12.1875px; padding: 0px 0px; font-weight: 300; color: #4f4f4f }
 .bellow_signt1 {display: flex; justify-content: space-between; }
 .bellow_signt1 a {font-size: 12.1875px; padding: 0px 0px; font-weight: 300; color: #4f4f4f }
-.flag_nsd {width: 31px; height: 31px; border: 1px solid #eaeaea; border-radius: 100px; float: left; }
+.flag_nsd {width: 31px; height: 31px; float: left; }
+.flag_nsd img {border: 0.5px solid #eaeaea; border-radius: 100px;}
 a.dot_line {padding-top: 3px; display: inline-block; padding-left: 6px; }
 .row_two_navigation{width: 100%;float: left;background-color: #eb8900;padding: 0px 0px;position: relative;}
 .requestlinkbtn {color: #fff; font-size: 18px; width: 298px; height:95px; text-align: center; text-decoration:none; background:url(../images/requestaquote_btn.png) 0px 0px no-repeat; -moz-transition: all .3s ease-in-out;-webkit-transition: all .3s ease-in-out;-o-transition:  all .3s ease-in-out;transition:  all .3s ease-in-out; display:block; text-decoration:none; }
@@ -1985,7 +1986,7 @@ p.bonus_content a{color: #333;}
 .rejected_color{color: #ff3300 !important;font-weight: 600 !important;}
 
 /* 2 June css start */
-.login-register .icon-home                      { width: auto; background: none; height: 14px; }
+.login-register .icon-home                      { width: auto; background: none; height: 16px; }
 .banner-inner .home-slider .slick-dots          { text-align: left; left: 20px; bottom: 20px; }
 /* myprofile page  */
 .bank-name .bank_details_icon                   { margin-right: 7px; padding-bottom: 10px;  max-width: 100%; }
@@ -2063,3 +2064,9 @@ div.tabcontent_health .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 
 .ui-datepicker-calendar .ui-datepicker-today .ui-state-default{background-color:#feb801;}
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{border:0 !important;}
+
+.footer-payment-icon{padding-left:0px !important;padding-right:0px !important;}
+.footer-dg-icon-img{filter:brightness(0.5)}
+.footer-dg-color-icon-img{filter:contrast(1.5)}
+.account-details-fullwith{width:95%!important}
+.text-capital{text-transform:uppercase}

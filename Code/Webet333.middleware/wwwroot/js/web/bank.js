@@ -1098,19 +1098,19 @@ async function CheckSupportGame() {
     let model = {}
     var res = await PostMethod(accountEndPoints.GetGameSupport, model);
     if (res.response.data.length > 0) {
-        $("#918kiss-wallet-allin").attr("disabled", !res.data[0].Is918Kiss ? "disabled" : "")
-        $("#ag-wallet-allin").attr("disabled", !res.data[0].IsAG ? "disabled" : "")
-        $("#allbet-wallet-allin").attr("disabled", !res.data[0].IsAllBet ? "disabled" : "")
-        $("#dg-wallet-allin").attr("disabled", !res.data[0].IsDG ? "disabled" : "")
-        $("#joker-wallet-allin").attr("disabled", !res.data[0].IsJoker ? "disabled" : "")
-        $("#m8-wallet-allin").attr("disabled", !res.data[0].IsM8 ? "disabled" : "")
-        $("#maxbet-wallet-allin").attr("disabled", !res.data[0].IsMaxbet ? "disabled" : "")
-        $("#mega888-wallet-allin").attr("disabled", !res.data[0].IsMega888 ? "disabled" : "")
-        $("#playtech-wallet-allin").attr("disabled", !res.data[0].IsPlaytech && !res.data[0].IsPlaytechSlot ? "disabled" : "")
-        $("#pragmatic-wallet-allin").attr("disabled", !res.data[0].IsPragmatic ? "disabled" : "")
-        $("#pussy888-wallet-allin").attr("disabled", !res.data[0].IsPussy888 ? "disabled" : "")
-        $("#sa-wallet-allin").attr("disabled", !res.data[0].IsSA ? "disabled" : "")
-        $("#sexy-wallet-allin").attr("disabled", !res.data[0].IsSexyBaccarat ? "disabled" : "")
-        $("#wm-wallet-allin").attr("disabled", !res.data[0].IsWM ? "disabled" : "")
+        $("#918kiss-wallet-allin").attr("disabled", !res.response.data[0].Is918Kiss ? "disabled" : "")
+        $("#ag-wallet-allin").attr("disabled", !res.response.data[0].IsAG ? "disabled" : "")
+        $("#allbet-wallet-allin").attr("disabled", !res.response.data[0].IsAllBet ? "disabled" : "")
+        $("#dg-wallet-allin").attr("disabled", !res.response.data[0].IsDG ? "disabled" : "")
+        $("#joker-wallet-allin").attr("disabled", !res.response.data[0].IsJoker ? "disabled" : "")
+        $("#m8-wallet-allin").attr("disabled", !res.response.data[0].IsM8 ? "disabled" : "")
+        $("#maxbet-wallet-allin").attr("disabled", !res.response.data[0].IsMaxbet ? "disabled" : "")
+        $("#mega888-wallet-allin").attr("disabled", !res.response.data[0].IsMega888 ? "disabled" : "")
+        $("#playtech-wallet-allin").attr("disabled", !res.response.data[0].IsPlaytech && !res.data[0].IsPlaytechSlot ? "disabled" : "")
+        $("#pragmatic-wallet-allin").attr("disabled", !res.response.data[0].IsPragmatic ? "disabled" : "")
+        $("#pussy888-wallet-allin").attr("disabled", !res.response.data[0].IsPussy888 ? "disabled" : "")
+        $("#sa-wallet-allin").attr("disabled", !res.response.data[0].IsSA ? "disabled" : "")
+        $("#sexy-wallet-allin").attr("disabled", !res.response.data[0].IsSexyBaccarat ? "disabled" : "")
+        $("#wm-wallet-allin").attr("disabled", !res.response.data[0].IsWM ? "disabled" : "")
     }
 }
