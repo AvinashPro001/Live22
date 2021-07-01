@@ -2,7 +2,7 @@
 
 namespace Webet333.models.Response.Game.GamePlay
 {
-    public class GamePlayRegisterResponse
+    public class GamePlayDefaultResponse
     {
         [JsonProperty("status")]
         public long Status { get; set; }

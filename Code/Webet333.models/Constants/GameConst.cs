@@ -729,6 +729,8 @@
             public class Method
             {
                 public const string Register = "cm";
+
+                public const string UpdatePassword = "up";
             }
         }
 

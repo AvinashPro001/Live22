@@ -785,6 +785,10 @@
         public class GamePlay
         {
             public const string Register = "gameplay/register";
+
+            public const string UpdatePassword = "gameplay/update/password ";
+
+            public const string Login = "gameplay/login";
         }
     }
 }

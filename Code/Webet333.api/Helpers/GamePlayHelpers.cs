@@ -26,18 +26,10 @@ namespace Webet333.api.Helpers
 
         #endregion Local Variables
 
-        #region Call Register 3rd Party API
+        #region Manage Game Play API Request
 
-        internal async Task<GamePlayRegisterResponse> CallRegisterPlayerAPI(string Username, string Password)
+        private async Task<string> ManageRequestAsync(dynamic model)
         {
-            GamePlayRegisterRequest model = new GamePlayRegisterRequest
-            {
-                Currency = GameConst.GamePlay.Currency,
-                Method = GameConst.GamePlay.Method.Register,
-                Password = Password,
-                Username = Username
-            };
-
             string JSON = JsonConvert.SerializeObject(model);
 
             var DESEncrpt = SecurityHelpers.GamePlayDESEncrptText(JSON, GameConst.GamePlay.DESKey);
@@ -54,7 +46,26 @@ namespace Webet333.api.Helpers
 
             var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
 
-            var DeserializeAPIResult = JsonConvert.DeserializeObject<GamePlayRegisterResponse>(APIResult);
+            return APIResult;
+        }
+
+        #endregion Manage Game Play API Request
+
+        #region Call Register 3rd Party API
+
+        internal async Task<GamePlayDefaultResponse> CallRegisterPlayerAPI(string Username, string Password)
+        {
+            GamePlayRegisterRequest model = new GamePlayRegisterRequest
+            {
+                Currency = GameConst.GamePlay.Currency,
+                Method = GameConst.GamePlay.Method.Register,
+                Password = Password,
+                Username = Username
+            };
+
+            string temp = await ManageRequestAsync(model);
+
+            var DeserializeAPIResult = JsonConvert.DeserializeObject<GamePlayDefaultResponse>(temp);
 
             return DeserializeAPIResult;
         }
@@ -75,6 +86,44 @@ namespace Webet333.api.Helpers
                         Username,
                         Password,
                         Response
+                    });
+            }
+        }
+
+        #endregion GamePlay Game Register
+
+        #region Call Update Password 3rd Party API
+
+        internal async Task<GamePlayDefaultResponse> CallUpdatePasswordAPI(string Username, string Password)
+        {
+            GamePlayUpdatePasswordRequest model = new GamePlayUpdatePasswordRequest
+            {
+                Method = GameConst.GamePlay.Method.UpdatePassword,
+                Password = Password,
+                Username = Username
+            };
+
+            string temp = await ManageRequestAsync(model);
+
+            var DeserializeAPIResult = JsonConvert.DeserializeObject<GamePlayDefaultResponse>(temp);
+
+            return DeserializeAPIResult;
+        }
+
+        #endregion Call Update Password 3rd Party API
+
+        #region GamePlay Game Register
+
+        internal async Task GamePlayUpdatePassword(string UserId, string Password)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.GamePlay.PasswordUpdate,
+                    new
+                    {
+                        UserId,
+                        Password
                     });
             }
         }

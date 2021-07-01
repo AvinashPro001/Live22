@@ -620,6 +620,8 @@
         public class GamePlay
         {
             public const string Register = "[dbo].[Users_Insert_GamePlay]";
+
+            public const string PasswordUpdate = "[dbo].[GameGamePLay_Password_Update]";
         }
     }
 }
