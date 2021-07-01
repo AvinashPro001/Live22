@@ -395,7 +395,7 @@ namespace Webet333.api.Helpers
 
         #region Get League
 
-        internal async Task<SBOGetLeagueResponse> GetLeague(OnlyDateRangeFilterRequest request)
+        internal async Task<SBOGetLeagueResponse> GetLeague(SBOGetLeagueAdminRequest request)
         {
             SBOGetLeagueResponse callGetLeagueAPIFootball = await CallGetLeagueAPIFootball(request);
             //SBOGetLeagueResponse callGetLeagueAPIOthers = await CallGetLeagueAPIOthers(request);
@@ -455,11 +455,38 @@ namespace Webet333.api.Helpers
             }
         }
 
-        private static async Task<SBOGetLeagueResponse> CallGetLeagueAPIFootball(OnlyDateRangeFilterRequest request)
+        private static async Task<SBOGetLeagueResponse> CallGetLeagueAPIFootball(SBOGetLeagueAdminRequest request)
         {
             SBOGetLeagueResponse temp = new SBOGetLeagueResponse();
 
-            foreach (var abc in abcd)
+            if (string.IsNullOrWhiteSpace(request.LeagueKeyWord))
+            {
+                foreach (var abc in abcd)
+                {
+                    SBOGetLeagueRequest model = new SBOGetLeagueRequest
+                    {
+                        CompanyKey = GameConst.SBO.CompanyKey,
+                        //FromDate = DateTime.Now.AddHours(12),
+                        //FromDate = DateTime.Now.AddDays(-200).ToString("yyyy-MM-dd HH:mm:ss.fff"),
+                        FromDate = request.FromDate.ToString(),
+                        LeagueNameKeyWord = abc,
+                        ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
+                        SportType = GameConst.SBO.SportType.Soccer,
+                        //ToDate = DateTime.Now.AddHours(12)
+                        //ToDate = DateTime.Now.AddDays(200).ToString("yyyy-MM-dd HH:mm:ss.fff")
+                        ToDate = request.ToDate.ToString()
+                    };
+
+                    var result = await CallGetLeagueAPI(model);
+
+                    if (temp.Result != null) temp.Result.AddRange(result.Result);
+                    else temp = result;
+                }
+
+                List<SBOGetLeagueResponseResult> newList = temp.Result.Distinct(new MyClassComp()).ToList();
+                temp.Result = newList;
+            }
+            else
             {
                 SBOGetLeagueRequest model = new SBOGetLeagueRequest
                 {
@@ -467,7 +494,7 @@ namespace Webet333.api.Helpers
                     //FromDate = DateTime.Now.AddHours(12),
                     //FromDate = DateTime.Now.AddDays(-200).ToString("yyyy-MM-dd HH:mm:ss.fff"),
                     FromDate = request.FromDate.ToString(),
-                    LeagueNameKeyWord = abc,
+                    LeagueNameKeyWord = request.LeagueKeyWord,
                     ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
                     SportType = GameConst.SBO.SportType.Soccer,
                     //ToDate = DateTime.Now.AddHours(12)
@@ -477,12 +504,8 @@ namespace Webet333.api.Helpers
 
                 var result = await CallGetLeagueAPI(model);
 
-                if (temp.Result != null) temp.Result.AddRange(result.Result);
-                else temp = result;
+                temp = result;
             }
-
-            List<SBOGetLeagueResponseResult> newList = temp.Result.Distinct(new MyClassComp()).ToList();
-            temp.Result = newList;
 
             if (temp != null &&
                 temp.Error.Id == 0 &&
@@ -579,6 +602,35 @@ namespace Webet333.api.Helpers
         }
 
         #endregion Get League
+
+        #region Get Blank League
+
+        internal async Task<SBOGetLeagueResponse> GetBlankLeagueAsync(SBOGetLeagueAdminRequest request)
+        {
+            SBOGetLeagueResponse callGetLeagueAPIFootball = await CallGetLeagueAPIFootball(request);
+
+            if (callGetLeagueAPIFootball.Result.Any()) await MapWithDBValueAndRemoveExistsLeagueAsync(callGetLeagueAPIFootball);
+
+            return callGetLeagueAPIFootball;
+        }
+
+        private async Task<SBOGetLeagueResponse> MapWithDBValueAndRemoveExistsLeagueAsync(SBOGetLeagueResponse League)
+        {
+            var getLeagueDB = await GetLeagueDBAsync();
+
+            if (getLeagueDB != null)
+            {
+                foreach (var league in getLeagueDB)
+                {
+                    var index = League.Result.FindIndex(x => x.LeagueId == league.LeagueId);
+                    if (index != -1) League.Result.RemoveAt(index);
+                }
+            }
+
+            return League;
+        }
+
+        #endregion Get Blank League
 
         #region Set League Bet Setting
 

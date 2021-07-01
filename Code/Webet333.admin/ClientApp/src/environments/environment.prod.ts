@@ -344,7 +344,8 @@ export const customer = {
     getSBOPlayerDefaultBetLimit: environment.apiUrl + 'sbo/get/playerdefaultbetlimit',
     sboGetLeague: environment.apiUrl + 'sbo/getLeague',
     sboSetLeague: environment.apiUrl + 'sbo/set/league',
-    getLeagueBetSetting: environment.apiUrl + 'sbo/get/league-bet-setting'
+    getLeagueBetSetting: environment.apiUrl + 'sbo/get/league-bet-setting',
+    sboGetBlankLeague: environment.apiUrl + 'sbo/blank-getLeague'
 }
 
 export const playtech = {
