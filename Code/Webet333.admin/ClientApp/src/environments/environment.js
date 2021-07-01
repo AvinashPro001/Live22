@@ -278,7 +278,8 @@ exports.customer = {
     getSBOPlayerDefaultBetLimit: exports.environment.apiUrl + 'sbo/get/playerdefaultbetlimit',
     sboGetLeague: exports.environment.apiUrl + 'sbo/getLeague',
     sboSetLeague: exports.environment.apiUrl + 'sbo/set/league',
-    getLeagueBetSetting: exports.environment.apiUrl + 'sbo/get/league-bet-setting'
+    getLeagueBetSetting: exports.environment.apiUrl + 'sbo/get/league-bet-setting',
+    sboGetBlankLeague: exports.environment.apiUrl + 'sbo/blank-getLeague'
 };
 exports.playtech = {
     playtechUrl: 'http://api.webet333.com/api/Default/playtech',
