@@ -35,15 +35,19 @@ async function M8Login(usernamePrifix) {
         localStorage.setItem('M8Url', resultM8Login.response.result.login.weburlsecure['#cdata-section']);
         localStorage.setItem('M8UrlMobile', resultM8Login.response.result.login.mobiurlsecure['#cdata-section']);
     }
-    if (screen.width > 786) {
-        document.getElementById("mainpagebody").style.display = "none";
-        document.getElementById("iframeModel").style.display = "block";
-        document.getElementById("gameFrame").src = GetLocalStorage('M8Url');
-    }
-    else {
-        cument.getElementById("mainpagebody").style.display = "none";
-        document.getElementById("iframeModel").style.display = "block";
-        document.getElementById("gameFrame").src = GetLocalStorage('M8Url');
-    }
+
+    window.location.href = GetLocalStorage('M8Url');
+
+    //if (screen.width > 786) {
+    //    document.getElementById("mainpagebody").style.display = "none";
+    //    document.getElementById("iframeModel").style.display = "block";
+    //    document.getElementById("gameFrame").src = GetLocalStorage('M8Url');
+    //}
+    //else {
+    //    cument.getElementById("mainpagebody").style.display = "none";
+    //    document.getElementById("iframeModel").style.display = "block";
+    //    document.getElementById("gameFrame").src = GetLocalStorage('M8Url');
+    //}
+
     LoaderHide();
 }
