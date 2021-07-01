@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace Webet333.models.Request.Game.SBO
 {
@@ -22,5 +21,11 @@ namespace Webet333.models.Request.Game.SBO
 
         [JsonProperty("ServerId")]
         public string ServerId { get; set; }
+    }
+
+    public class SBOGetLeagueAdminRequest : OnlyDateRangeFilterRequest
+    {
+        [JsonProperty("leagueKeyWord")]
+        public string LeagueKeyWord { get; set; }
     }
 }

@@ -244,7 +244,7 @@ namespace Webet333.api.Helpers
                 tokeResponse.Url,
                 language,
                 GameConst.SBO.Oddstyle.MalayOdds,
-                device == GameConst.SBO.Device.Desktop ? GameConst.SBO.Theme.SBO : GameConst.SBO.Theme.SboMain,
+                device == GameConst.SBO.Device.Desktop ? GameConst.SBO.Theme.SBO : GameConst.SBO.Theme.Lawn,
                 GameConst.SBO.OddsMode.Double,
                 device);
 
@@ -395,7 +395,7 @@ namespace Webet333.api.Helpers
 
         #region Get League
 
-        internal async Task<SBOGetLeagueResponse> GetLeague(OnlyDateRangeFilterRequest request)
+        internal async Task<SBOGetLeagueResponse> GetLeague(SBOGetLeagueAdminRequest request)
         {
             SBOGetLeagueResponse callGetLeagueAPIFootball = await CallGetLeagueAPIFootball(request);
             //SBOGetLeagueResponse callGetLeagueAPIOthers = await CallGetLeagueAPIOthers(request);
@@ -414,6 +414,27 @@ namespace Webet333.api.Helpers
             //}
 
             if (callGetLeagueAPIFootball.Error.Id == 0) await MapWithDBValueAsync(callGetLeagueAPIFootball);
+
+            if (callGetLeagueAPIFootball != null &&
+                callGetLeagueAPIFootball.Result.Any())
+            {
+                var big = callGetLeagueAPIFootball.Result.Where(x => x.GroupType == "BIG").ToList();
+                var medium = callGetLeagueAPIFootball.Result.Where(x => x.GroupType == "MEDIUM").ToList();
+                var small = callGetLeagueAPIFootball.Result.Where(x => x.GroupType == "SMALL").ToList();
+                var others = callGetLeagueAPIFootball.Result.Where(x => x.GroupType != "BIG" && x.GroupType != "MEDIUM" && x.GroupType != "SMALL").ToList();
+                //var nullGroupType = callGetLeagueAPIFootball.Result.Where(x => x.GroupType == null).ToList();
+
+                List<SBOGetLeagueResponseResult> tempResult = new List<SBOGetLeagueResponseResult>();
+                tempResult.AddRange(big);
+                tempResult.AddRange(medium);
+                tempResult.AddRange(small);
+                tempResult.AddRange(others);
+                //tempResult.AddRange(nullGroupType);
+
+                callGetLeagueAPIFootball.Result = tempResult;
+
+                // callGetLeagueAPIFootball.Result = callGetLeagueAPIFootball.Result.OrderBy(x => x.GroupType).ToList();   //  BIG > MEDIUM > SMALL
+            }
 
             return callGetLeagueAPIFootball;
         }
@@ -434,11 +455,38 @@ namespace Webet333.api.Helpers
             }
         }
 
-        private static async Task<SBOGetLeagueResponse> CallGetLeagueAPIFootball(OnlyDateRangeFilterRequest request)
+        private static async Task<SBOGetLeagueResponse> CallGetLeagueAPIFootball(SBOGetLeagueAdminRequest request)
         {
             SBOGetLeagueResponse temp = new SBOGetLeagueResponse();
 
-            foreach (var abc in abcd)
+            if (string.IsNullOrWhiteSpace(request.LeagueKeyWord))
+            {
+                foreach (var abc in abcd)
+                {
+                    SBOGetLeagueRequest model = new SBOGetLeagueRequest
+                    {
+                        CompanyKey = GameConst.SBO.CompanyKey,
+                        //FromDate = DateTime.Now.AddHours(12),
+                        //FromDate = DateTime.Now.AddDays(-200).ToString("yyyy-MM-dd HH:mm:ss.fff"),
+                        FromDate = request.FromDate.ToString(),
+                        LeagueNameKeyWord = abc,
+                        ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
+                        SportType = GameConst.SBO.SportType.Soccer,
+                        //ToDate = DateTime.Now.AddHours(12)
+                        //ToDate = DateTime.Now.AddDays(200).ToString("yyyy-MM-dd HH:mm:ss.fff")
+                        ToDate = request.ToDate.ToString()
+                    };
+
+                    var result = await CallGetLeagueAPI(model);
+
+                    if (temp.Result != null) temp.Result.AddRange(result.Result);
+                    else temp = result;
+                }
+
+                List<SBOGetLeagueResponseResult> newList = temp.Result.Distinct(new MyClassComp()).ToList();
+                temp.Result = newList;
+            }
+            else
             {
                 SBOGetLeagueRequest model = new SBOGetLeagueRequest
                 {
@@ -446,7 +494,7 @@ namespace Webet333.api.Helpers
                     //FromDate = DateTime.Now.AddHours(12),
                     //FromDate = DateTime.Now.AddDays(-200).ToString("yyyy-MM-dd HH:mm:ss.fff"),
                     FromDate = request.FromDate.ToString(),
-                    LeagueNameKeyWord = abc,
+                    LeagueNameKeyWord = request.LeagueKeyWord,
                     ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
                     SportType = GameConst.SBO.SportType.Soccer,
                     //ToDate = DateTime.Now.AddHours(12)
@@ -456,12 +504,8 @@ namespace Webet333.api.Helpers
 
                 var result = await CallGetLeagueAPI(model);
 
-                if (temp.Result != null) temp.Result.AddRange(result.Result);
-                else temp = result;
+                temp = result;
             }
-
-            List<SBOGetLeagueResponseResult> newList = temp.Result.Distinct(new MyClassComp()).ToList();
-            temp.Result = newList;
 
             if (temp != null &&
                 temp.Error.Id == 0 &&
@@ -559,6 +603,35 @@ namespace Webet333.api.Helpers
 
         #endregion Get League
 
+        #region Get Blank League
+
+        internal async Task<SBOGetLeagueResponse> GetBlankLeagueAsync(SBOGetLeagueAdminRequest request)
+        {
+            SBOGetLeagueResponse callGetLeagueAPIFootball = await CallGetLeagueAPIFootball(request);
+
+            if (callGetLeagueAPIFootball.Result.Any()) await MapWithDBValueAndRemoveExistsLeagueAsync(callGetLeagueAPIFootball);
+
+            return callGetLeagueAPIFootball;
+        }
+
+        private async Task<SBOGetLeagueResponse> MapWithDBValueAndRemoveExistsLeagueAsync(SBOGetLeagueResponse League)
+        {
+            var getLeagueDB = await GetLeagueDBAsync();
+
+            if (getLeagueDB != null)
+            {
+                foreach (var league in getLeagueDB)
+                {
+                    var index = League.Result.FindIndex(x => x.LeagueId == league.LeagueId);
+                    if (index != -1) League.Result.RemoveAt(index);
+                }
+            }
+
+            return League;
+        }
+
+        #endregion Get Blank League
+
         #region Set League Bet Setting
 
         internal async Task CallSetLeagueBetSettingAPI(List<SBOSetLeagueBetSettingRequest> request)
@@ -570,7 +643,7 @@ namespace Webet333.api.Helpers
                     CompanyKey = GameConst.SBO.CompanyKey,
                     Currency = GameConst.SBO.Currency,
                     GroupType = data.GroupType,
-                    IsLive = true,
+                    IsLive = false,
                     LeagueId = data.LeagueId,
                     MaxBet = data.MaxBet,
                     MaxBetRatio = data.MaxBetRatio,
@@ -582,7 +655,8 @@ namespace Webet333.api.Helpers
 
                 var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
 
-                Console.WriteLine(JsonConvert.SerializeObject(model));
+                // For testing only.
+                //Console.WriteLine(JsonConvert.SerializeObject(model));
 
                 var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
 
@@ -618,6 +692,63 @@ namespace Webet333.api.Helpers
         }
 
         #endregion Set League Bet Setting
+
+        #region Get League Bet Limit
+
+        internal async Task<SBOGetLeagueBetSettingResponse> CallGetLeagueBetSettingAPI()
+        {
+            var getLeagueDB = await GetLeagueDBAsync();
+
+            SBOGetLeagueBetSettingResponse temp = new SBOGetLeagueBetSettingResponse();
+
+            foreach (var data in getLeagueDB)
+            {
+                SBOGetLeagueBetSettingRequest model = new SBOGetLeagueBetSettingRequest
+                {
+                    CompanyKey = GameConst.SBO.CompanyKey,
+                    Currency = GameConst.SBO.Currency,
+                    IsLive = false,
+                    LeagueId = data.LeagueId,
+                    ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString()
+                };
+
+                var URL = $"{GameConst.SBO.URL}{GameConst.SBO.EndPoint.GetLeagueBetSetting}";
+
+                var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
+                var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
+
+                var DeserializeAPIResult = JsonConvert.DeserializeObject<SBOGetLeagueBetSettingResponse>(APIResult);
+
+                if (DeserializeAPIResult.Error.Id == 0) DeserializeAPIResult.Result.ForEach(x => x.LeagueName = data.LeagueName);
+
+                if (temp.Result != null) temp.Result.AddRange(DeserializeAPIResult.Result);
+                else temp = DeserializeAPIResult;
+            }
+
+            if (temp != null &&
+                temp.Result.Any())
+            {
+                //var big = temp.Result.Where(x => x.GroupType == "BIG").ToList();
+                //var medium = temp.Result.Where(x => x.GroupType == "MEDIUM").ToList();
+                //var small = temp.Result.Where(x => x.GroupType == "SMALL").ToList();
+                //var others = temp.Result.Where(x => x.GroupType != "BIG" && x.GroupType != "MEDIUM" && x.GroupType != "SMALL").ToList();
+
+                //List<SBOGetLeagueBetSettingResponseResult> tempResult = new List<SBOGetLeagueBetSettingResponseResult>();
+                //tempResult.AddRange(big);
+                //tempResult.AddRange(medium);
+                //tempResult.AddRange(small);
+                //tempResult.AddRange(others);
+
+                //temp.Result = tempResult;
+
+                temp.Result = temp.Result.OrderBy(x => x.GroupType).ToList();   //  BIG > MEDIUM > SMALL
+            }
+
+            return temp;
+        }
+
+        #endregion Get League Bet Limit
 
         #region House Keeping
 

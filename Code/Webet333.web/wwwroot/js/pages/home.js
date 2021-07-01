@@ -623,15 +623,18 @@ async function logingGame(gameName) {
             if (gameName == "SBO") TransferInAllWallet("SBO Wallet");
         }
 
-        if (gameName == "MaxBet" ||
-            gameName == "M8" ||
-            gameName == "SBO") {
-            GameLogin(gameName);
-        }
-        else {
-            if (gameName != "Pragmatic") window.open("/Information/Game?gamename=" + gameName);
-            else GameLogin("Pragmatic");
-        }
+        if (gameName != "Pragmatic") window.open("/Information/Game?gamename=" + gameName);
+        else GameLogin("Pragmatic");
+
+        //if (gameName == "MaxBet" ||
+        //    gameName == "M8" ||
+        //    gameName == "SBO") {
+        //    GameLogin(gameName);
+        //}
+        //else {
+        //    if (gameName != "Pragmatic") window.open("/Information/Game?gamename=" + gameName);
+        //    else GameLogin("Pragmatic");
+        //}
     }
     else {
         alert("Please Login");
@@ -844,35 +847,38 @@ async function GameLogin(gamename) {
                             isMobile: false
                         };
                         var res = await PostMethod(apiEndPoints.loginMaxBet, userMaxBetlogin);
-                        if (res.data.error_code == 0) {
-                            document.getElementById("mainpagebody").style.display = "none";
-                            document.getElementById("iframeModel").style.display = "block";
-                            document.getElementById("gameFrame").src = res.data.gameUrl;
-                        }
-                        else {
-                            document.getElementById("mainpagebody").style.display = "";
-                            document.getElementById("iframeModel").style.display = "none";
-                        }
+                        if (res.data.error_code == 0) window.location.href = res.data.gameUrl;
+
+                        //if (res.data.error_code == 0) {
+                        //    document.getElementById("mainpagebody").style.display = "none";
+                        //    document.getElementById("iframeModel").style.display = "block";
+                        //    document.getElementById("gameFrame").src = res.data.gameUrl;
+                        //}
+                        //else {
+                        //    document.getElementById("mainpagebody").style.display = "";
+                        //    document.getElementById("iframeModel").style.display = "none";
+                        //}
                     }
-                    else {
-                        document.getElementById("mainpagebody").style.display = "";
-                        document.getElementById("iframeModel").style.display = "none";
-                    }
+                    //else {
+                    //    document.getElementById("mainpagebody").style.display = "";
+                    //    document.getElementById("iframeModel").style.display = "none";
+                    //}
                 }
                 else {
                     var userMaxBetlogin = {
                         isMobile: false
                     };
                     var res = await PostMethod(apiEndPoints.loginMaxBet, userMaxBetlogin);
-                    if (res.data.error_code == 0) {
-                        document.getElementById("mainpagebody").style.display = "none";
-                        document.getElementById("iframeModel").style.display = "block";
-                        document.getElementById("gameFrame").src = res.data.gameUrl;
-                    }
-                    else {
-                        document.getElementById("mainpagebody").style.display = "";
-                        document.getElementById("iframeModel").style.display = "none";
-                    }
+                    if (res.data.error_code == 0) window.location.href = res.data.gameUrl;
+                    //if (res.data.error_code == 0) {
+                    //    document.getElementById("mainpagebody").style.display = "none";
+                    //    document.getElementById("iframeModel").style.display = "block";
+                    //    document.getElementById("gameFrame").src = res.data.gameUrl;
+                    //}
+                    //else {
+                    //    document.getElementById("mainpagebody").style.display = "";
+                    //    document.getElementById("iframeModel").style.display = "none";
+                    //}
                 }
                 break;
             case 'M8':
@@ -1218,35 +1224,38 @@ async function GameLogin(gamename) {
                             isMobile: false
                         };
                         var res = await PostMethod(apiEndPoints.SBOLogin, model);
-                        if (res.message != null) {
-                            document.getElementById("mainpagebody").style.display = "none";
-                            document.getElementById("iframeModel").style.display = "block";
-                            document.getElementById("gameFrame").src = res.message;
-                        }
-                        else {
-                            document.getElementById("mainpagebody").style.display = "";
-                            document.getElementById("iframeModel").style.display = "none";
-                        }
+                        if (res != null && res.message != null) window.location.href = res.message;
+
+                        //if (res.message != null) {
+                        //    document.getElementById("mainpagebody").style.display = "none";
+                        //    document.getElementById("iframeModel").style.display = "block";
+                        //    document.getElementById("gameFrame").src = res.message;
+                        //}
+                        //else {
+                        //    document.getElementById("mainpagebody").style.display = "";
+                        //    document.getElementById("iframeModel").style.display = "none";
+                        //}
                     }
-                    else {
-                        document.getElementById("mainpagebody").style.display = "";
-                        document.getElementById("iframeModel").style.display = "none";
-                    }
+                    //else {
+                    //    document.getElementById("mainpagebody").style.display = "";
+                    //    document.getElementById("iframeModel").style.display = "none";
+                    //}
                 }
                 else {
                     var model = {
                         isMobile: false
                     };
                     var res = await PostMethod(apiEndPoints.SBOLogin, model);
-                    if (res.message != null) {
-                        document.getElementById("mainpagebody").style.display = "none";
-                        document.getElementById("iframeModel").style.display = "block";
-                        document.getElementById("gameFrame").src = res.message;
-                    }
-                    else {
-                        document.getElementById("mainpagebody").style.display = "";
-                        document.getElementById("iframeModel").style.display = "none";
-                    }
+                    if (res != null && res.message != null) window.location.href = res.message;
+                    //if (res.message != null) {
+                    //    document.getElementById("mainpagebody").style.display = "none";
+                    //    document.getElementById("iframeModel").style.display = "block";
+                    //    document.getElementById("gameFrame").src = res.message;
+                    //}
+                    //else {
+                    //    document.getElementById("mainpagebody").style.display = "";
+                    //    document.getElementById("iframeModel").style.display = "none";
+                    //}
                 }
                 break;
         }

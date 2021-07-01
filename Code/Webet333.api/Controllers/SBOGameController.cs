@@ -193,7 +193,7 @@ namespace Webet333.api.Controllers
         #region Get League
 
         [HttpPost(ActionsConst.SBO.GetLeague)]
-        public async Task<IActionResult> GetLeagueAsync([FromBody] OnlyDateRangeFilterRequest request)
+        public async Task<IActionResult> GetLeagueAsync([FromBody] SBOGetLeagueAdminRequest request)
         {
             await CheckUserRole();
 
@@ -203,6 +203,26 @@ namespace Webet333.api.Controllers
             using (SBOGameHelpers SBOGame_Helpers = new SBOGameHelpers(Connection))
             {
                 var result = await SBOGame_Helpers.GetLeague(request);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Get League
+
+        #region Get Blank League List
+
+        [HttpPost(ActionsConst.SBO.GetBlankLeague)]
+        public async Task<IActionResult> GetBlankLeague([FromBody] SBOGetLeagueAdminRequest request)
+        {
+            await CheckUserRole();
+
+            request.FromDate.AddHours(-12);
+            request.ToDate.AddHours(-12);
+
+            using (SBOGameHelpers SBOGame_Helpers = new SBOGameHelpers(Connection))
+            {
+                var result = await SBOGame_Helpers.GetBlankLeagueAsync(request);
 
                 return OkResponse(result);
             }
@@ -226,5 +246,22 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Set League Bet Setting
+
+        #region Get League Bet Setting
+
+        [HttpGet(ActionsConst.SBO.GetLeagueBetSetting)]
+        public async Task<IActionResult> GetLeagueBetSetting()
+        {
+            await CheckUserRole();
+
+            using (SBOGameHelpers SBOGame_Helpers = new SBOGameHelpers(Connection))
+            {
+                var result = await SBOGame_Helpers.CallGetLeagueBetSettingAPI();
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion Get League Bet Setting
     }
 }
