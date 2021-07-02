@@ -3,11 +3,11 @@ using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using Webet333.dapper;
 using Webet333.models.Constants;
 using Webet333.models.Request.Game.GamePlay;
 using Webet333.models.Response.Game.GamePlay;
+using GamePlayConst = Webet333.models.Constants.GameConst.GamePlay;
 
 namespace Webet333.api.Helpers
 {
@@ -28,19 +28,19 @@ namespace Webet333.api.Helpers
 
         #region Manage Game Play API Request
 
-        private async Task<string> ManageRequestAsync(dynamic model)
+        private static async Task<string> ManageRequestAsync(dynamic model)
         {
             string JSON = JsonConvert.SerializeObject(model);
 
-            var DESEncrpt = SecurityHelpers.GamePlayDESEncrptText(JSON, GameConst.GamePlay.DESKey);
+            var DESEncrpt = SecurityHelpers.GamePlayDESEncrptText(JSON, GamePlayConst.DESKey);
 
-            string sign = SecurityHelpers.GamePlaySHA256HashText($"{DESEncrpt}{GameConst.GamePlay.SHA256Key}");
+            string sign = SecurityHelpers.GamePlaySHA256HashText($"{DESEncrpt}{GamePlayConst.SHA256Key}");
 
-            string data = $"merchant_code={HttpUtility.UrlEncode(GameConst.GamePlay.MerchantCode)}&" +
-                $"params={HttpUtility.UrlEncode(DESEncrpt)}&" +
-                $"sign={HttpUtility.UrlEncode(sign)}";
+            string data = $"merchant_code={GamePlayConst.MerchantCode}&" +
+                $"params={DESEncrpt}&" +
+                $"sign={sign}";
 
-            var URL = $"{GameConst.GamePlay.URL}";
+            var URL = $"{GamePlayConst.URL}";
 
             var stringContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/x-www-form-urlencoded");
 
@@ -57,8 +57,8 @@ namespace Webet333.api.Helpers
         {
             GamePlayRegisterRequest model = new GamePlayRegisterRequest
             {
-                Currency = GameConst.GamePlay.Currency,
-                Method = GameConst.GamePlay.Method.Register,
+                Currency = GamePlayConst.Currency,
+                Method = GamePlayConst.Method.Register,
                 Password = Password,
                 Username = Username
             };
@@ -98,7 +98,7 @@ namespace Webet333.api.Helpers
         {
             GamePlayUpdatePasswordRequest model = new GamePlayUpdatePasswordRequest
             {
-                Method = GameConst.GamePlay.Method.UpdatePassword,
+                Method = GamePlayConst.Method.UpdatePassword,
                 Password = Password,
                 Username = Username
             };
@@ -129,6 +129,60 @@ namespace Webet333.api.Helpers
         }
 
         #endregion GamePlay Game Register
+
+        #region Call Launch Game API 3rd Party API
+
+        internal static async Task<GamePlayLoginResponse> CallLaunchGameAPI(
+            string Username,
+            string Language,
+            string Platform,
+            string GameCode)
+        {
+            GamePlayLoginAPIRequest model = new GamePlayLoginAPIRequest
+            {
+                BackURL = GamePlayConst.BackURL.Live,
+                GameCode = GameCode,
+                GameMode = GamePlayConst.GameMode.Real,
+                Language = Language,
+                Method = GamePlayConst.Method.Login,
+                Platform = Platform,
+                ProductType = GamePlayConst.ProductType,
+                Username = Username
+            };
+
+            string temp = await ManageRequestAsync(model);
+
+            var DeserializeAPIResult = JsonConvert.DeserializeObject<GamePlayLoginResponse>(temp);
+
+            return DeserializeAPIResult;
+        }
+
+        #endregion Call Launch Game API 3rd Party API
+
+        #region Call Game List API 3rd Party API
+
+        internal static async Task<GamePlayLoginResponse> CallGetGameListAPI(string Language)
+        {
+            GamePlayGetGameListAPIRequest model = new GamePlayGetGameListAPIRequest
+            {
+                ClientType = GamePlayConst.ClientType.ComputerWeb,
+                GameType = GamePlayConst.GameType,
+                Language = Language,
+                Method = GamePlayConst.Method.GetGameList,
+                Page = 1,
+                PageSize = int.MaxValue,
+                Platform = GamePlayConst.Platform.All,
+                ProductType = GamePlayConst.ProductType
+            };
+
+            string temp = await ManageRequestAsync(model);
+
+            var DeserializeAPIResult = JsonConvert.DeserializeObject<GamePlayLoginResponse>(temp);
+
+            return DeserializeAPIResult;
+        }
+
+        #endregion Call Game List API 3rd Party API
 
         #region House Keeping
 

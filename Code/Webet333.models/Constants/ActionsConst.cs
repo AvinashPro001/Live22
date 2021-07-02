@@ -789,6 +789,8 @@
             public const string UpdatePassword = "gameplay/update/password ";
 
             public const string Login = "gameplay/login";
+
+            public const string GetGameList = "gameplay/get/gamelist";
         }
     }
 }

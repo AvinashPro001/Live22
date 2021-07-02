@@ -726,11 +726,70 @@
 
             public const string Currency = "MYR";
 
+            public const int ProductType = 76;
+
+            public const string ProductName = "GPI";
+
+            public const string Prefix = "02g";
+
+            public const string GameCode = "GPI001";
+
+            public const string GameType = "RNG";
+
+            public class GameMode
+            {
+                public const string Real = "1";
+
+                public const string Trial = "0";
+            }
+
+            public class BackURL
+            {
+                public const string UAT = "http://uat.webet333.com/";
+
+                public const string Live = "http://webet333.com/";
+            }
+
+            public class LanguageCode
+            {
+                public const string TraditionalChinese = "TW";
+
+                public const string English = "EN";
+
+                public const string Malay = "MS";
+            }
+
             public class Method
             {
                 public const string Register = "cm";
 
                 public const string UpdatePassword = "up";
+
+                public const string Login = "lg";
+
+                public const string GetGameList = "tgl";
+            }
+
+            public class Platform
+            {
+                public const string All = "all";
+
+                public const string Web = "html5-desktop";
+
+                public const string Mobile = "html5";
+            }
+
+            public class ClientType
+            {
+                public const string All = "all";
+
+                public const string Cmputer = "pc";
+
+                public const string Mobile = "phone";
+
+                public const string ComputerWeb = "web";
+
+                public const string MobileWeb = "html5";
             }
         }
 

@@ -9,6 +9,8 @@ using Webet333.api.Helpers;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
+using Webet333.models.Request.Game;
+using GamePlayConst = Webet333.models.Constants.GameConst.GamePlay;
 
 namespace Webet333.api.Controllers
 {
@@ -108,5 +110,55 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Update Password
+
+        #region Login
+
+        [HttpPost(ActionsConst.GamePlay.Login)]
+        public async Task<IActionResult> LoginAsync([FromBody] GamePlayGameLoginRequest request)
+        {
+            var Role = GetUserRole(User);
+
+            if (Role == RoleConst.Users) request.Id = GetUserId(User).ToString();
+
+            if (Role == RoleConst.Admin) if (string.IsNullOrEmpty(request.Id)) return BadResponse(ErrorConsts.InvalidModelstate);
+
+            string username;
+
+            using (var account_helper = new AccountHelpers(Connection))
+            {
+                var user = await account_helper.UserGetBalanceInfo(request.Id);
+                username = user.GamePlayGamePrefix + user.UserId;
+            }
+
+            string language = Language.Code == LanguageConst.Chinese ? GamePlayConst.LanguageCode.TraditionalChinese : Language.Code == LanguageConst.Malay ? GamePlayConst.LanguageCode.Malay : GamePlayConst.LanguageCode.English;
+
+            string platform = request.IsMobile == true ? "html5" : "html5-desktop";
+
+            if (string.IsNullOrWhiteSpace(request.GameCode)) request.GameCode = GamePlayConst.GameCode;
+
+            var result = await GamePlayHelpers.CallLaunchGameAPI(username, language, platform, request.GameCode);
+
+            if (result.Status != 0) return BadResponse(result.ErrorDesc);
+
+            return OkResponse(result);
+        }
+
+        #endregion Login
+
+        #region Game List API
+
+        [HttpGet(ActionsConst.GamePlay.GetGameList)]
+        public async Task<IActionResult> GetGameList()
+        {
+            string language = Language.Code == LanguageConst.Chinese ? GamePlayConst.LanguageCode.TraditionalChinese : Language.Code == LanguageConst.Malay ? GamePlayConst.LanguageCode.Malay : GamePlayConst.LanguageCode.English;
+
+            var result = await GamePlayHelpers.CallGetGameListAPI(language);
+
+            if (result.Status != 0) return BadResponse(result.ErrorDesc);
+
+            return OkResponse(result);
+        }
+
+        #endregion Game List API
     }
 }
