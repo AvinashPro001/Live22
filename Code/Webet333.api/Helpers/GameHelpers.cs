@@ -1699,7 +1699,7 @@ namespace Webet333.api.Helpers
         }
 
 
-        internal async Task GameListInsert(List<GameListUploadResponse> request,string WalletId, string ImageBase)
+        internal async Task GameListInsert(List<GameListUploadResponse> request, string WalletId, string ImageBase)
         {
             if (request != null)
             {
@@ -1708,7 +1708,7 @@ namespace Webet333.api.Helpers
                     var response = JsonConvert.SerializeObject(request.OrderBy(x => x.GameCode).Skip(i).Take(999).ToList());
                     using (var repository = new DapperRepository<dynamic>(Connection))
                     {
-                        var res = await repository.AddOrUpdateAsync(StoredProcConsts.Game.SlotsGameInsert, new { jsonString = response,WalletId,ImageBase });
+                        var res = await repository.AddOrUpdateAsync(StoredProcConsts.Game.SlotsGameInsert, new { jsonString = response, WalletId, ImageBase });
                     }
                 }
             }
@@ -1719,11 +1719,19 @@ namespace Webet333.api.Helpers
         {
             using (var GetRepository = new DapperRepository<GameListSelectResponse>(Connection))
             {
-                var list = await GetRepository.GetDataAsync(StoredProcConsts.Game.SlotsGameSelect, new { request.WalletName,request.Name, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                var list = await GetRepository.GetDataAsync(StoredProcConsts.Game.SlotsGameSelect, new { request.WalletName, request.Name, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
                 return list.ToList();
             }
         }
 
+        internal async Task<List<HotGameListSelectResponse>> HotGameListSelect(GameListSelectRequest request)
+        {
+            using (var GetRepository = new DapperRepository<HotGameListSelectResponse>(Connection))
+            {
+                var list = await GetRepository.GetDataAsync(StoredProcConsts.Game.HotSlotsGameSelect, new { request.PageNo, request.PageSize });
+                return list.ToList();
+            }
+        }
 
         #region House Keeping
 
