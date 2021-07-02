@@ -398,6 +398,10 @@ async function LoginPragmaticGame(GameCode) {
 
 async function LoginPlaytechGame(GameCode) {
     if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
+
+    var imported = document.createElement('script');
+    imported.src = 'https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88'
+    document.head.appendChild(imported);
     window.open("../Web/game");
 
     var languageCode = (GetLocalStorage('language') === "zh-Hans" ? "ZH-CN" : "EN")
@@ -477,6 +481,58 @@ async function PragmaticSlotsGameList(PageNumber = null, IsAppend = true) {
         else
             SetAllValueInElement("pragmaticSlotsGameList", html)
     }
+}
+
+async function HotSlotsgame() {
+    var model = {
+    };
+    var list = await PostMethod(gameSettingEndPoints.HotGameList, model)
+    if (list.status == 200) {
+        gameList = list.response.data.result;
+        var html = "";
+        for (i = 0; i < gameList.length; i++) {
+
+            if (gameList[i].WalletName == "Playtech Slot") {
+                html += '<div class="item"><div class="game_boxes" onclick="LoginPlaytechGame(\'' + gameList[i].GameCode + '\')"><img src="' +  gameList[i].ImagePath2  + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
+            }
+            else {
+                html += '<div class="item"><div class="game_boxes" onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\')"><img src="' + gameList[i].ImagePath1 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
+            }
+        }
+        SetAllValueInElement("hot-game-section", html)
+        HotGameSLiderJs()
+    }
+}
+
+function HotGameOpen(GameName, GameCode) {
+}
+
+function HotGameSLiderJs() {
+    $('.game-slider').slick({
+        speed: 2500,
+        autoplay: true,
+        autoplaySpeed: 0,
+        cssEase: 'linear',
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        infinite: true,
+        swipeToSlide: true,
+        pauseOnHover: true,
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                }
+            }
+        ]
+    });
 }
 
 function SearchInPlaytechGameList() {

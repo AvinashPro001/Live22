@@ -47,6 +47,9 @@ namespace Webet333.models.Response.Game
         [JsonProperty("GameName")]
         public string GameName { get; set; }
 
+        [JsonProperty("WalletName")]
+        public string WalletName { get; set; }
+
         [JsonProperty("GameCode")]
         public string GameCode { get; set; }
 

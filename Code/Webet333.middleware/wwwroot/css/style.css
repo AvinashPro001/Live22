@@ -2047,7 +2047,7 @@ div.tabcontent_health .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 #faqs h3{color:white}
 #faqs p{color:#F58723}
 
-.game-slider .game_boxes img { height: auto;}
+.game-slider .game_boxes img { height: 163px;}
 .game-slider.slick-slider { margin:0 -5px 20px; }
 .game-slider img { border-radius: 0px; }
 .item.slick-slide { padding:0px 5px; }

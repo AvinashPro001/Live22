@@ -250,5 +250,5 @@ var gameLoginEndPoints = {
 var gameSettingEndPoints = {
     slotsGameList: "Game/slotsgame/list",
     pragmaticGameList: "pragmatic/game/list",
-    jokerGameList: "joker/game/list",
+    HotGameList: "Game/hotslotsgame/list",
 }
