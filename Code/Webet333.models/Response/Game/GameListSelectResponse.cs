@@ -41,4 +41,25 @@ namespace Webet333.models.Response.Game
         [JsonProperty("OffSet")]
         public int OffSet { get; set; }
     }
+
+    public class HotGameListSelectResponse
+    {
+        [JsonProperty("GameName")]
+        public string GameName { get; set; }
+
+        [JsonProperty("GameCode")]
+        public string GameCode { get; set; }
+
+        [JsonProperty("ImagePath1")]
+        public string ImagePath1 { get; set; }
+
+        [JsonProperty("ImagePath2")]
+        public string ImagePath2 { get; set; }
+
+        [JsonProperty("Total")]
+        public int Total { get; set; }
+
+        [JsonProperty("OffSet")]
+        public int OffSet { get; set; }
+    }
 }

@@ -3612,6 +3612,40 @@ namespace Webet333.api.Controllers
 
         #endregion Game List Select
 
+        #region Hot Slots Game List Select
+
+        [HttpPost(ActionsConst.Game.HotSlotsGameSelect)]
+        public async Task<IActionResult> HotSlotsGameSelect([FromBody] GameListSelectRequest request)
+        {
+            using (var game_helper = new GameHelpers(Connection: Connection))
+            {
+                var list = await game_helper.HotGameListSelect(request);
+                if (list.Count != 0)
+                {
+                    var total = list.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 20,
+                        offset = list.FirstOrDefault().OffSet,
+                    });
+                }
+                return OkResponse(new
+                {
+                    result = list,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
+            }
+        }
+
+        #endregion Hot Slots Game List Select
 
     }
 }

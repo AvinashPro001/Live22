@@ -303,6 +303,8 @@
         {
             public const string SlotsGameSelect = "Game/slotsgame/list";
 
+            public const string HotSlotsGameSelect = "Game/hotslotsgame/list";
+
             public const string GameListUpload = "Game/list/upload";
 
             public const string BettingSummery = "Game/bettingsummery";
