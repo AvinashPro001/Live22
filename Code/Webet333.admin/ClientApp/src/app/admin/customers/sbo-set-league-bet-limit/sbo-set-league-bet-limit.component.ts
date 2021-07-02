@@ -93,6 +93,7 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
         this.loadingIndicator = true;
 
         let temp = {
+            leagueKeyWord: (document.getElementById("txt_league_keyword") as HTMLInputElement).value,
             fromDate: (document.getElementById("txt_fromdatetime") as HTMLInputElement).value,
             toDate: (document.getElementById("txt_todatetime") as HTMLInputElement).value
         }
@@ -108,11 +109,64 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
         }
 
         let model = {
+            leagueKeyWord: temp.leagueKeyWord,
             fromDate: temp.fromDate + ' 00:00:00.000',
             toDate: temp.toDate + ' 23:59:59.999'
         }
 
         this.adminService.add<any>(customer.sboGetLeague, model).subscribe(res => {
+            let i = 1;
+            this.rows = [];
+
+            let leagueData = res.data.result;
+            this.customerData = leagueData;
+            leagueData.forEach(el => {
+                this.rows.push({
+                    No: i,
+                    LeagueKeyword: el.league_name,
+                    SportType: el.sportType,
+                    MinBet: el.MinBet,
+                    MaxBet: el.MaxBet,
+                    MaxBetRatio: el.MaxBetRatio,
+                    GroupType: el.GroupType,
+                    LeagueId: el.league_id,
+                });
+                i++;
+                this.rows = [...this.rows]
+            })
+            this.loadingIndicator = false;
+        }, error => {
+            this.loadingIndicator = false;
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
+    getBlanckLeagueList() {
+        this.loadingIndicator = true;
+
+        let temp = {
+            leagueKeyWord: (document.getElementById("txt_league_keyword") as HTMLInputElement).value,
+            fromDate: (document.getElementById("txt_fromdatetime") as HTMLInputElement).value,
+            toDate: (document.getElementById("txt_todatetime") as HTMLInputElement).value
+        }
+
+        if (this.commonService.CheckVariable(temp.fromDate)) {
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectFromDate);
+            return;
+        }
+
+        if (this.commonService.CheckVariable(temp.toDate)) {
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectToDate);
+            return;
+        }
+
+        let model = {
+            leagueKeyWord: temp.leagueKeyWord,
+            fromDate: temp.fromDate + ' 00:00:00.000',
+            toDate: temp.toDate + ' 23:59:59.999'
+        }
+
+        this.adminService.add<any>(customer.sboGetBlankLeague, model).subscribe(res => {
             let i = 1;
             this.rows = [];
 
@@ -298,13 +352,21 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
 
     //#endregion Deselect data table
 
+    //#region Reset text box value
+
+    ResetLeagueKeyword() {
+        (document.getElementById("txt_league_keyword") as HTMLInputElement).value = '';
+    }
+
+    //#endregion Reset text box value
+
     //#region Check Permission
 
     async checkViewPermission() {
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[17].Permissions[0].IsChecked === true) {
-                if (usersPermissions.permissionsList[1].submenu[17].submenu[0].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[16].Permissions[0].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[16].submenu[1].Permissions[0].IsChecked === true) {
                     return true;
                 }
                 else {
@@ -327,8 +389,8 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
     async checkUpdatePermission() {
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[17].Permissions[1].IsChecked === true) {
-                if (usersPermissions.permissionsList[1].submenu[17].submenu[0].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[16].Permissions[1].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[16].submenu[1].Permissions[1].IsChecked === true) {
                     return true;
                 }
                 else {
@@ -351,8 +413,8 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
     async checkAddPermission() {
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[17].Permissions[2].IsChecked === true) {
-                if (usersPermissions.permissionsList[1].submenu[17].submenu[0].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[16].Permissions[2].IsChecked === true) {
+                if (usersPermissions.permissionsList[1].submenu[16].submenu[1].Permissions[2].IsChecked === true) {
                     return true;
                 }
                 else {
