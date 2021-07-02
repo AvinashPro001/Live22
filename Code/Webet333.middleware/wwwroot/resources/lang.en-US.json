@@ -110,7 +110,7 @@
   "bank_transactionlimit": "Transaction Limit",
   "bank_Minimum": "Minimum",
   "bank_Maximum": "Maximum",
-  "bank_processingtime": "Pprocessing Time",
+  "bank_processingtime": "Processing Time",
 
   "profile_current_password": "Current Password:",
   "profile_new_password": "New Password:",

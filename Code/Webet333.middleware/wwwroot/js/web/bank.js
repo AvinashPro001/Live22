@@ -136,7 +136,7 @@ function SetDepositPageBank() {
                     SetBankDetails(bankdata[i].accountName, bankdata[i].accountNo, bankdata[i].id);
                 }
                 else
-                    html += '<li class=" tablinks"><a class="thm-txt" href="#" data-toggle="tab"><figure onclick="SetBankDetails(\'' + bankdata[i].accountName + '\',\'' + bankdata[i].accountNo + '\')"><img style="object-position:center !important" class="tab-bankicon" src="' + bankdata[i].bankIconLogo + '" alt=""></figure><p>' + bankdata[i].bankName + '</p></a></li >';
+                    html += '<li class=" tablinks"><a class="thm-txt" href="#" data-toggle="tab"><figure onclick="SetBankDetails(\'' + bankdata[i].accountName + '\',\'' + bankdata[i].accountNo + '\',\'' + bankdata[i].id + '\')"><img style="object-position:center !important" class="tab-bankicon" src="' + bankdata[i].bankIconLogo + '" alt=""></figure><p>' + bankdata[i].bankName + '</p></a></li >';
             }
             SetAllValueInElement("Depsoit_bank_list", html);
         }

@@ -258,21 +258,18 @@ async function ChangePassword() {
     var newPassword = $("#txt_newPassword").val();
     var confirmPassword = $("#txt_confirmPassword").val();
 
-    if (newPassword.length < 6)
-        return ShowError(ChangeErroMessage("pass_length_error"));
+    if (newPassword.length < 6) return ShowError(ChangeErroMessage("pass_length_error"));
 
-    if (newPassword === "")
-        return ShowError(ChangeErroMessage("password_required_error"));
+    if (newPassword === "") return ShowError(ChangeErroMessage("password_required_error"));
 
-    if (confirmPassword === "")
-        return ShowError(ChangeErroMessage("confirm_password_required_error"));
+    if (confirmPassword === "") return ShowError(ChangeErroMessage("confirm_password_required_error"));
 
-    if (Decryption(GetLocalStorage("currentUserData")) !== currentPassword)
-        return ShowError(ChangeErroMessage("username_pass_diff_error"));
+    if (newPassword !== confirmPassword) return ShowError(ChangeErroMessage("pass_not_match_error"));
 
-    var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
-    if (!reqExp.test(currentPassword))
-        return ShowError(ChangeErroMessage("pass_alpha_error"));
+    if (Decryption(GetLocalStorage("currentUserData")) !== currentPassword) return ShowError(ChangeErroMessage("pass_not_match_error"));
+
+    var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
+    if (!reqExp.test(currentPassword)) return ShowError(ChangeErroMessage("pass_alpha_error"));
 
     var model = {
         currentPassword: currentPassword,
@@ -282,7 +279,7 @@ async function ChangePassword() {
 
     try {
         LoaderShow();
-        let res = await postwokr(accountEndPoints.changePassword, model)
+        let res = await PostMethod(accountEndPoints.changePassword, model)
         if (res.status == 200) {
             ShowSuccess(res.response.message);
             DoLogout();
@@ -307,7 +304,6 @@ async function DoRegister() {
     var username = $('#txt_username').val();
     var password = $("#txt_password").val();
     var confirmPassword = $("#txt_confirm_password").val();
-    //var referenceKeyword= getCookie("ref")
 
     if (mobile === "") return ShowError(ChangeErroMessage("mobile_no_required_error"));
 
@@ -326,6 +322,8 @@ async function DoRegister() {
     if (name === "") return ShowError(ChangeErroMessage("name_required_error"));
 
     if (username === password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
+
+    if (password !== confirmPassword) return ShowError(ChangeErroMessage("pass_not_match_error"));
 
     var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     if (!regex.test(password)) return ShowError(ChangeErroMessage("pass_alpha_error"));
