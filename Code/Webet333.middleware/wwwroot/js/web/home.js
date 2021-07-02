@@ -423,8 +423,40 @@ function OpenChatWindow() {
     $("#onlinehelp-float-button-2 img").click();
 }
 
-async function OpenWhatsapp() {
-    window.open('https://api.whatsapp.com/send?phone=60174780045&text=Claim%20and%20Join', '_blank');
+function OpenWhatsapp(mobileNo = '60174780045') {
+    window.open('https://api.whatsapp.com/send?phone=' + mobileNo + '&text=Claim%20and%20Join', '_blank');
+}
+
+function OpenTelegram() {
+    window.open('https://t.me/mywbcs1', '_blank');
+}
+
+function ClickOnJoin() {
+    if (GetLocalStorage("currentUser") == null)
+        window.location.href = './Web/register'
+    else
+        window.location.href = './Web/profile#deposit'
+}
+
+function ClickOnDeposit() {
+    if (GetLocalStorage("currentUser") == null)
+        window.location.href = './Web/register'
+    else
+        window.location.href = './Web/profile#deposit'
+}
+
+function ClickOnPlay() {
+    if (GetLocalStorage("currentUser") == null)
+        window.location.href = './Web/register'
+    else
+        window.location.href = './Web/profile#deposit'
+}
+
+function ClickOnWithdraw() {
+    if (GetLocalStorage("currentUser") == null)
+        window.location.href = './Web/register'
+    else
+        window.location.href = './Web/profile#withdraw'
 }
 
 function CheckGameMaintenance() {

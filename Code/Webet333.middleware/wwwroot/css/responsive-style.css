@@ -29,7 +29,7 @@ ul.highlight-bank li.active figure, .bank-selection ul li.active img { filter: g
 
 .promotion_wrap_sec .slider-nav .slick-slide.slick-active .img-block,
 .casino_tabb_section .slider-nav .slick-slide.slick-active img { filter: grayscale(0); background-color: #febd17;}
-.promotion_wrap_sec .slider-nav .slick-slide.slick-active .img-block img { filter: grayscale(0); }
+.promotion_wrap_sec .slider-nav .slick-slide.slick-active .img-block img { filter: grayscale(0);margin-top: -10px;}
 
 
 .promotion_wrap_sec .slider-nav .slick-slide.slick-active + .slick-active img,
@@ -288,3 +288,5 @@ footer { padding: 10px 0px 0px; }
 .footer_sec_two_left ul { margin-bottom: 15px; }
 
 }
+
+.slot-menu-height{height:100px !important;}

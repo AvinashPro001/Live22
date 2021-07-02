@@ -210,7 +210,7 @@
                                                         <p class="big no-mar lang blk-text" key="deposit_date_time">Date Time:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input name="txt_reference_number" type="text" class="reg-form " placeholder="Select Date" autocomplete="off" id="datepicker0">
+                                                        <input name="txt_reference_number" type="text" class="reg-form " placeholder="Select Date" autocomplete="off" id="datepicker0" data-date-format="yyyy-mm-dd hh:ii" value="">
                                                     </label>
                                                 </li>
                                                 <li class="pad-btm-ten">
@@ -1392,43 +1392,29 @@
         evt.currentTarget.className += " active";
     }
 </script>
-<script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="~/js/bootstrap-datetimepicker.min.js"></script>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>*@
+
 <script type="text/javascript">
     $(document).ready(function () {
 
-        var default_date = new Date();
+        var date = new Date();
+        var day = date.getDate();
+        var Month = date.getMonth() + 4;
+        var Year = date.getFullYear();
+        Month = Month < 10 ? "0" + Month : Month;
+        day = day < 10 ? "0" + day : day;
+        var Hours = date.getHours();
+        var Minute = date.getMinutes();
+
         $("#datepicker0").datetimepicker({
-            format: 'yyyy-mm-dd hh:mm',
-            useCurrent: false, // default this is set to true
-            defaultDate: default_date
+            format: 'yyyy-mm-dd hh:ii',
+            autoclose: true,
+            minuteStep: 5
         });
+        $("#datepicker0").val(Year + '-' + Month + '-' + day + ' ' + Hours + ':' + Minute)
 
-        $("#datepicker1").datetimepicker();
-        $("#datepicker1btn").click(function (event) {
-            event.preventDefault();
-            $("#datepicker1").focus();
-        });
 
-        $("#datepicker1btn2").click(function (event) {
-            event.preventDefault();
-            $("#datepicker2").focus();
-        })
-
-        $("#datepicker2").datetimepicker({
-            showOtherMonths: true,
-            selectOtherMonths: true
-        });
-
-        $("#datepicker3").datetimepicker({
-            numberOfMonths: 3,
-            showButtonPanel: true
-        });
-
-        $("#datepicker4").datetimepicker({
-            changeMonth: true,
-            changeYear: true
-        });
     });
 
     $(document).ready(function () {

@@ -1106,7 +1106,7 @@ async function CheckSupportGame() {
         $("#m8-wallet-allin").attr("disabled", !res.response.data[0].IsM8 ? "disabled" : "")
         $("#maxbet-wallet-allin").attr("disabled", !res.response.data[0].IsMaxbet ? "disabled" : "")
         $("#mega888-wallet-allin").attr("disabled", !res.response.data[0].IsMega888 ? "disabled" : "")
-        $("#playtech-wallet-allin").attr("disabled", !res.response.data[0].IsPlaytech && !res.data[0].IsPlaytechSlot ? "disabled" : "")
+        $("#playtech-wallet-allin").attr("disabled", !res.response.data[0].IsPlaytech && !res.response.data[0].IsPlaytechSlot ? "disabled" : "")
         $("#pragmatic-wallet-allin").attr("disabled", !res.response.data[0].IsPragmatic ? "disabled" : "")
         $("#pussy888-wallet-allin").attr("disabled", !res.response.data[0].IsPussy888 ? "disabled" : "")
         $("#sa-wallet-allin").attr("disabled", !res.response.data[0].IsSA ? "disabled" : "")

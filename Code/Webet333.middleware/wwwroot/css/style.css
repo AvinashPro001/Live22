@@ -1447,8 +1447,9 @@ iframe {width: 100%; height: 100%}
     .reg-form {font-size: 10px; }
 }
 .viplevelImage {width: 50px; margin: -15px; }
-//#comm100-float-button-2>div>a {
-    //display: block!important//}
+#onlinehelp-float-button-2 > div > a {
+    display: block !important
+}
 
 /*16th march 2021 css start */
 .login-item.signin.form-icon .bttn.btn-login:after {background-image: url(../images/login_image.png); background-size: 37px; }

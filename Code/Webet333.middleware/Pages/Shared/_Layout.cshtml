@@ -808,18 +808,18 @@
                 <p></p>
                 <h6>Customer Services</h6>
             </li>
-            <li class="call-contact text-center hand-curson">
+            <li class="call-contact text-center hand-curson"  onclick="OpenChatWindow()">
                 <h5><img class="contact-logos" src="~/images/sideicon4.png" alt="Call">LIVE CHAT</h5>
                 <a href="# ">Click here</a>
             </li>
             <li class="call-contact text-center">
                 <h5><img class="contact-logos" src="~/images/sideicon5.png" alt="Call"> PHONE</h5>
-                <a href="# ">+6013 555 8826</a>
+                <a href="tel:60135558826">+6013 555 8826</a>
             </li>
             <li class="text-center whatsapp-sec">
                 <h5><img class="contact-logos" src="~/images/sideicon2.png" alt="Whats App">Whatsapp</h5>
-                <p> CS1 : <a href="#" target="_blank">+6013 555 7800</a></p>
-                <p>CS2 : <a href="#" target="_blank">+6013 555 8826</a></p>
+                <p class="hand-curson" onclick="OpenWhatsapp('60135557800')"> CS1 : <a>+6013 555 7800</a></p>
+                <p class="hand-curson" onclick="OpenWhatsapp('60135558826')">CS2 : <a >+6013 555 8826</a></p>
             </li>
             <li class="text-center wechat_sec">
                 <h5><img class="contact-logos" src="~/images/sideicon1.png" alt="We Chat"> Wechat</h5>
@@ -829,13 +829,13 @@
             </li>
             <li class="text-center telegram_sec">
                 <h5><img class="contact-logos" src="~/images/sideicon3.png" alt="Whats App"> Telegram</h5>
-                <p><a href="#"> @@mywbcs1 : </a>: CS1</p>
+                <p onclick="OpenTelegram()"><a href="#"> @@mywbcs1 : </a>: CS1</p>
             </li>
             <li class="text-center follow_us_sec">
                 <h5> Follow Us On</h5>
-                <img src="~/images/fb.png" alt="fb">
-                <img src="~/images/ig.png" alt="ig">
-                <img src="~/images/youtube.png" alt="youtube">
+                <img class="hand-curson" onclick="FollowOnFacebook()" src="~/images/fb.png" alt="fb">
+                <img class="hand-curson" onclick="FollowOnInstagram()" src="~/images/ig.png" alt="ig">
+                <img class="hand-curson" onclick="FollowOnYoutube()" src="~/images/youtube.png" alt="youtube">
             </li>
         </ul>
     </div>
@@ -861,7 +861,7 @@
             </li>
             <li class="android-contact">
                 <a href="~/Web/download">
-                    <h5><img class="download-game-logos" src="~/images/carousel_logos/mega_color.png" alt="sideicon8"></h5>
+                    <h5><img class="download-game-logos" src="~/images/mega888 Logo.png" alt="sideicon8"></h5>
                 </a>
             </li>
         </ul>
