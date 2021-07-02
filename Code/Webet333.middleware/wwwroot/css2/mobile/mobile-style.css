@@ -277,11 +277,34 @@ select.main-wallet.jcf-hidden,
 .product-approve { color: green;}
 
 
+.head-img-icon > .nav.nav-tabs { position: fixed; width: 100%; top: 0; left: 0; background-color: #ffffff; z-index: 5; padding: 10px; box-shadow: 0px 10px 10px #cccccc; }
+/* SLot Page  */
+.main-logo-img img { max-width: 100px;}
+.main-logo-img a { display: block;}
+.head-img-icon .d-flex { justify-content: space-between; }
+.menu-list-area > ul { background-color: #ffb701; display: flex; justify-content: space-between; }
+.menu-list-area .nav-pills > ul { display: flex; align-items: center; }
+.nav-tabs > li,
+.nav-pills li { float: none; }
+.nav-tabs > li { margin-bottom: 0px;}
+.head-img-icon .nav-tabs { display: flex; margin-bottom: 15px; border: 0px;}
+.head-img-icon .nav-tabs li a img { max-width: 100%; }
+.head-img-icon .nav-tabs > li > a { border: 0px; margin: 0px 5px; padding: 0px;}
 
-
-
-
-
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border: 0px;  background-color: #ffb701;}
+.head-img-icon > .tab-content { margin: 0 -15px;}
+.head-img-icon > .tab-content { padding-top: 88px;}
+.menu-list-area .nav-pills > li.active > a,
+.menu-list-area .nav-pills > li.active > a:focus,
+.menu-list-area .nav-pills > li.active > a:hover { background: transparent; color: #000000;}
+.menu-list-area .nav-pills > li > a { color: rgba(0,0,0,0.7); padding: 0px; margin: 10px; text-transform: uppercase; }
+.menu-list-area .tab-pane ul { margin: 10px 0px 0px; display: flex; align-items: center; flex-wrap: wrap; }
+.menu-list-area .tab-pane ul li { margin: 0 5px 10px; box-shadow: 0px 10px 10px #cccccc; width: calc(100% / 3 - 10px); }
+.menu-list-area .tab-pane ul li a { display: block; text-align: center; }
+.menu-list-area .tab-pane ul li p { font-size: 1rem; line-height: 16px; padding: 0 5px; text-transform: capitalize; margin-bottom: 5px; display: flex; align-items: center; justify-content: center; height: 32px; }
+.menu-list-area .tab-pane ul li p a { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: #000000;}
+.menu-list-area .tab-pane ul li:hover  p { color: rgba(0,0,0,0.7); }
+.menu-list-area .tab-pane ul li img { width: 100%; max-width: 100%; object-fit: cover; }
 
 
 
