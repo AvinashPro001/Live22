@@ -1929,7 +1929,9 @@ body:not(.nohover) .hightligt_table tbody tr:hover {background-color: #ffa; }
 .hightligt_table thead th:not(:empty):focus::after {content: ''; height: 10000px; left: 0; position: absolute; top: -5000px; width: 100%; z-index: 1; }
 
 /*.hightligt_table th:hover::after {background-color: rgba(177,225,245,0.7); }*/
-.hightligt_table td:hover::after{background-color: rgba(0,120,201,0.4); font-size: 19px; font-weight: 700; }
+.hightligt_table th:not(:first-child):hover::after,
+.hightligt_table td:hover::after{ background-color: rgba(0,120,201,0.4); }
+.hightligt_table td:hover::after{ font-size: 19px; font-weight: 700; }
 /*.hightligt_table td:focus::after,
 .hightligt_table th:focus::after { background-color: lightblue;}*/
 
