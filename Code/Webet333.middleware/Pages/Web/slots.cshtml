@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="img-block text-center slot-menu-height">
+                    <div class="img-block text-center slot-menu-height" id="pragmatic-game">
                         <div class="img-block-content">
                             <figure><img class="hover_icons" src="~/images/carousel_logos/pragmatic_color.png" alt="logo"></figure>
                             <p>Pragmatic Play</p>
@@ -487,6 +487,11 @@
     $(document).ready(function () {
         PragmaticSlotsGameList();
         PlaytechSlotsGameList();
+        if (window.location.hash) {
+            var hash = window.location.hash.substring(1);
+            if (hash == 'pragmatic-game')
+                $("#pragmatic-game").click();
+        }
     });
 
     $(window).on('load', function () {

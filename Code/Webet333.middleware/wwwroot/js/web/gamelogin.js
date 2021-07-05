@@ -353,7 +353,7 @@ async function OpenM8Game() {
 }
 
 async function OpenPragmaticGame() {
-    window.open("../Web/slots");
+    window.open("../Web/slots#pragmatic-game");
     PragmaticBrokenStatusInterval();
     let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
 
