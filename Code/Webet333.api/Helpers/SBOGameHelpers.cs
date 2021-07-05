@@ -653,17 +653,14 @@ namespace Webet333.api.Helpers
 
                 var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
 
-                // For testing only.
-                //Console.WriteLine(JsonConvert.SerializeObject(model));
-
                 var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
 
                 var DeserializeAPIResult = JsonConvert.DeserializeObject<SBODefaultResponse>(APIResult);
 
-                // await SetLeagueBetSetting(data);
-
                 if (DeserializeAPIResult != null &&
-                    DeserializeAPIResult.Error.Id == 0)
+                    DeserializeAPIResult.Error != null &&
+                    //DeserializeAPIResult.Error.Id == 0 &&
+                    DeserializeAPIResult.Error.Msg == "No Error")
                 {
                     await SetLeagueBetSetting(data);
                 }
