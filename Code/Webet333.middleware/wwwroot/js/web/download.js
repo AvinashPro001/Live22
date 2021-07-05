@@ -60,6 +60,7 @@ function SetPleaseLoginText(InputType = false) {
 //#region Set Username Password in Download Page 
 
 function SetUsernamePassword(InputType = false) {
+    debugger
     if (GetLocalStorage("currentUser") == null) {
         SetPleaseLoginText(InputType)
     }

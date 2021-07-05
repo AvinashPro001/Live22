@@ -48,5 +48,7 @@
   "special_char_not_allowed": "Special Characters not allowed.",
   "space_not_allowed": "Space not allowed.",
   "current_pass_not_match": "Current Password not matched.",
-  "enter_full_name": "Please enter your full name."
+  "enter_full_name": "Please enter your full name.",
+
+  "error_select_both_date": "Please Select Both date !"
 }

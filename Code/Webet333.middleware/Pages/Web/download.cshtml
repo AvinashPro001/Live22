@@ -285,6 +285,10 @@
         SetUsernamePassword();
     });
 
+    setTimeout(function () {
+        SetUsernamePassword();
+    },3000)
+
     setInterval(function () {
         if (document.getElementById("Pussy888IOS").src == "") CallDownloadLinkAPI();
     }, 1000)

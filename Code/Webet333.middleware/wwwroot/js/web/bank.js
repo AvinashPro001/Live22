@@ -716,6 +716,8 @@ function GetDateRange() {
     pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");
+    if (fdate.length == 1 || tdate.length == 1)
+        return ShowError(ChangeErroMessage("error_select_both_date"))
     fromDate = fdate[2] + "-" + fdate[0] + "-" + fdate[1] + " 00:00:00";
     toDate = tdate[2] + "-" + tdate[0] + "-" + tdate[1] + " 00:00:00";
     CallFunctionAccordingToTab();

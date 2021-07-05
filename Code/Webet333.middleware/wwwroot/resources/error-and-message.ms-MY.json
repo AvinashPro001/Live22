@@ -48,5 +48,7 @@
   "special_char_not_allowed": "Watak Khas tidak dibenarkan.",
   "space_not_allowed": "Ruang tidak dibenarkan.",
   "current_pass_not_match": "Kata Laluan Semasa tidak sepadan.",
-  "enter_full_name": "Sila masukkan nama penuh anda."
+  "enter_full_name": "Sila masukkan nama penuh anda.",
+
+  "error_select_both_date": "Sila Pilih Kedua-dua tarikh!"
 }
