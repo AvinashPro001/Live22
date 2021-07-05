@@ -29,7 +29,7 @@ namespace Webet333.api.Helpers
 
         private const string Currency = "MYR";
 
-        private const string AuthKey = "cggJRTZHaJ58mwJ2tAT6vaEx9J9a7vJzVoCunC42log=";
+        private const string AuthKey = "SDwlKhkSVloGykuOLF30QSf1Oifs7Hpy4IOsOz7AtC8=";
 
 #elif STAG
 
