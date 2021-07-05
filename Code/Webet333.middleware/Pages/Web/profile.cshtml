@@ -5,6 +5,7 @@
 }
 
 <link href="~/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+<link href="~/css/bootstrap-datepicker.min.css" type="text/css" rel="stylesheet" />
 <script>
     CheckLoginOrNot();
     CheckMobileNumberIsVerifiedOnly();
@@ -199,7 +200,7 @@
                                                                 <li class="data-blog" onclick="SetAmountInTextBox(100,false)">100</li>
                                                                 <li class="data-blog" onclick="SetAmountInTextBox(300,false)">300</li>
                                                                 <li class="data-blog" onclick="SetAmountInTextBox(500,false)">500</li>
-                                                                <li class="data-blog" onclick="SetAmountInTextBox(100,false)">1000</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(1000,false)">1000</li>
                                                             </ul>
                                                         </div>
                                                     </label>
@@ -210,7 +211,7 @@
                                                         <p class="big no-mar lang blk-text" key="deposit_date_time">Date Time:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input name="txt_reference_number" type="text" class="reg-form " placeholder="Select Date" autocomplete="off" id="datepicker0" data-date-format="yyyy-mm-dd hh:ii" value="">
+                                                        <input name="txt_reference_number" type="text" class="reg-form " placeholder="Select Date" autocomplete="off" id="datepicker0" data-date-format="yyyy-mm-dd hh:ii" value="" onkeydown="return false;">
                                                     </label>
                                                 </li>
                                                 <li class="pad-btm-ten">
@@ -301,7 +302,7 @@
                                                                     <li class="data-blog" onclick="SetAmountInTextBox(100,true)">100</li>
                                                                     <li class="data-blog" onclick="SetAmountInTextBox(300,true)">300</li>
                                                                     <li class="data-blog" onclick="SetAmountInTextBox(500,true)">500</li>
-                                                                    <li class="data-blog" onclick="SetAmountInTextBox(100,true)">1000</li>
+                                                                    <li class="data-blog" onclick="SetAmountInTextBox(1000,true)">1000</li>
                                                                 </ul>
                                                             </div>
                                                         </label>
@@ -507,7 +508,7 @@
                                         <ul class="list-style d-flex">
                                             <li>Total Daily Turnover</li>
                                             <li><label class="marginb-none" id="total_turnover">0.00</label></li>
-                                            <li><span class="fa fa-refresh" onclick="GetDailyTurnover();"></span></li>
+                                            <li><span class="fa fa-refresh hand-curson" onclick="GetDailyTurnover();"></span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -939,16 +940,16 @@
                                     <div class="history-tabs">
                                         <ul class="nav nav-tabs" id="history_tabs">
                                             <li class="active col-sm-3" onclick="GetTodayDate();">
-                                                <a data-toggle="tab"><span>Today</span></a>
+                                                <a data-toggle="tab" class="hand-curson"><span>Today</span></a>
                                             </li>
                                             <li class="col-sm-3" onclick="Get3DayDate();">
-                                                <a data-toggle="tab"><span key="transfer_title" class="lang">In 3 days</span></a>
+                                                <a data-toggle="tab" class="hand-curson"><span key="transfer_title" class="lang">In 3 days</span></a>
                                             </li>
                                             <li class="col-sm-3" onclick="GetInWeekDate();">
-                                                <a data-toggle="tab"><span class="lang">In a Week</span></a>
+                                                <a data-toggle="tab" class="hand-curson"><span class="lang">In a Week</span></a>
                                             </li>
                                             <li class="col-sm-3" onclick="GetInMonthDate();">
-                                                <a data-toggle="tab"><span key="withdrawal_title" class="lang">In a Month</span></a>
+                                                <a data-toggle="tab" class="hand-curson"><span key="withdrawal_title" class="lang">In a Month</span></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -1332,7 +1333,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                <h4 class="modal-title"><span>Enter your Password</span></h4>
+                <h4 class="modal-title"><span>Confirmation</span></h4>
             </div>
             <div class="modal-body">
                 <div class="text-center">
@@ -1393,7 +1394,7 @@
     }
 </script>
 <script type="text/javascript" src="~/js/bootstrap-datetimepicker.min.js"></script>
-@*<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>*@
+<script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -1414,6 +1415,31 @@
         });
         $("#datepicker0").val(Year + '-' + Month + '-' + day + ' ' + Hours + ':' + Minute)
 
+        $("#datepicker1").datepicker();
+        $("#datepicker1btn").click(function (event) {
+            event.preventDefault();
+            $("#datepicker1").focus();
+        });
+
+        $("#datepicker1btn2").click(function (event) {
+            event.preventDefault();
+            $("#datepicker2").focus();
+        })
+
+        $("#datepicker2").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+
+        $("#datepicker3").datepicker({
+            numberOfMonths: 3,
+            showButtonPanel: true
+        });
+
+        $("#datepicker4").datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
 
     });
 

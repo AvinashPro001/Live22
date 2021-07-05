@@ -2042,7 +2042,7 @@ div.tabcontent_health .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 .slot_inner_common_box .slot_inner_formfield .reg-form         { border-radius: 10px; }
 .slot_inner_common_box .slot_inner_formfield:last-child,.slot_inner_common_box .slot_inner_formfield label.lock.mendatory { margin-bottom: 0px; }
 .slot_inner_common_box:last-child p:first-child { font-style: italic; }
-.hand-curson{cursor:pointer;}
+.hand-curson{cursor:pointer !important;}
 #onlinehelp-float-button-2 div{z-index:0 !important;}
 .download-game-logos{width:100px;}
 .slot_inner_common_box p{margin-bottom:0px;font-size:12px;}
