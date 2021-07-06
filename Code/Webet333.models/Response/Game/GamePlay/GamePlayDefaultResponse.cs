@@ -7,7 +7,7 @@ namespace Webet333.models.Response.Game.GamePlay
         [JsonProperty("status")]
         public long Status { get; set; }
 
-        [JsonProperty("error_ desc")]
+        [JsonProperty("error_desc")]
         public string ErrorDesc { get; set; }
     }
 }

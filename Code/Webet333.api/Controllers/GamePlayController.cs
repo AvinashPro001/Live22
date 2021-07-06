@@ -39,7 +39,7 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.GamePlay.Register)]
         public async Task<IActionResult> Register([FromBody] GetByIdRequest request)
         {
-            if (request == null) return BadResponse("error_empty_request");
+            if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             var Role = GetUserRole(User);
@@ -76,7 +76,7 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.GamePlay.UpdatePassword)]
         public async Task<IActionResult> UpdatePassword([FromBody] GetByIdRequest request)
         {
-            if (request == null) return BadResponse("error_empty_request");
+            if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             var Role = GetUserRole(User);
@@ -116,6 +116,9 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.GamePlay.Login)]
         public async Task<IActionResult> LoginAsync([FromBody] GamePlayGameLoginRequest request)
         {
+            if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
             var Role = GetUserRole(User);
 
             if (Role == RoleConst.Users) request.Id = GetUserId(User).ToString();
