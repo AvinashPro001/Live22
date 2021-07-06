@@ -795,6 +795,14 @@ header .tooltip-inner {width: 100px!important; }
 .img-hover-block { display: flex; position: relative; margin: 0 -10px; flex-wrap: wrap; }
 .img-hover-block li { width: calc(100% / 4 - 10px); margin: 5px; }
 .slick-slide .img-text-block img { height: 200px; max-width: 200px; margin: 0 auto; width: auto; object-fit: contain; transition: 0.5s; }
+#All_slot_playtech .img-text-block img,
+#hot_slot_playtech .img-text-block img,
+#new_slot_playtech .img-text-block img,
+#slot_slots_playtech .img-text-block img,
+#arcade_slots_playtech .img-text-block img { height: 120px; max-width: 100%; }
+
+
+.slick-slide .img-text-block img { height: 200px; max-width: 200px; margin: 0 auto; width: auto; object-fit: contain; transition: 0.5s; }
 .hover-block { opacity: 0; position: absolute; top: 0; left: 0; border: 20px solid #ffffff; transform: scale(0); transition: 0.5s;}
 .hover-block figure { position: relative;}
 .cmn-block { position: relative; z-index: 0; cursor: pointer; transition: 0.5s; box-shadow: 0px 0px 10px #cccccc; background: #fff; border-radius: 10px; padding-top: 10px;}
@@ -820,6 +828,7 @@ header .tooltip-inner {width: 100px!important; }
 
 .ag-game-img.img-box::before { background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(9, 9, 121) 35%, rgb(255, 255, 255) 100%); }
 .ml-auto { margin-left: auto;}
+.mr-auto { margin-right: auto;}
 .ag-game-play { margin-right: 15px; }
 .inner_game_banner_wrap { position: relative; overflow: hidden; }
 .slot_inner_common_box img { z-index: 1; position: relative; }
@@ -1932,6 +1941,17 @@ body:not(.nohover) .hightligt_table tbody tr:hover {background-color: #ffa; }
 .hightligt_table th:not(:first-child):hover::after,
 .hightligt_table td:hover::after{ background-color: rgba(0,120,201,0.4); }
 .hightligt_table td:hover::after{ font-size: 19px; font-weight: 700; }
+.thumb-arrow { width: 150px; overflow: hidden;}
+.thumb-arrow a { display: block;}
+.thumb-arrow img { max-width: 75px; height: auto; }
+.thumb-arrow figure { -webkit-animation: slide 4s linear infinite; animation: slide 4s linear infinite; }
+
+@-webkit-keyframes slide {
+    0% { opacity:0; transform: translateX(0vh); }	
+   50% { opacity:1; transform: translateX(9vh); }	
+  100% { opacity:0; transform: translateX(0vh); }	
+}
+
 /*.hightligt_table td:focus::after,
 .hightligt_table th:focus::after { background-color: lightblue;}*/
 

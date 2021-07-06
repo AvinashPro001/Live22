@@ -474,7 +474,7 @@ async function PragmaticSlotsGameList(PageNumber = null, IsAppend = true) {
         gameList = list.response.data.result;
         var html = "";
         for (i = 0; i < gameList.length; i++) {
-            html += '<li><div class="img-text-block"><div class="cmn-block"><figure><img src="' + gameList[i].ImagePath2 + '" alt="img"></figure><div class="text-content text-center"><h4>' + gameList[i].GameName + '</h4></div></div><div class="hover-block"><div class="text-content text-center"><h4>' + gameList[i].GameName + '</h4></div><figure><img src="' + gameList[i].ImagePath2 + '" alt="img"><div class="overlay"><button  onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\')" >play</button></div></figure></div></div></li>';
+            html += '<li><div class="img-text-block"><div class="cmn-block"><figure><img src="' + gameList[i].ImagePath1 + '" alt="img"></figure><div class="text-content text-center"><h4>' + gameList[i].GameName + '</h4></div></div><div class="hover-block"><div class="text-content text-center"><h4>' + gameList[i].GameName + '</h4></div><figure><img src="' + gameList[i].ImagePath1 + '" alt="img"><div class="overlay"><button  onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\')" >play</button></div></figure></div></div></li>';
         }
         if (IsAppend)
             $("#pragmaticSlotsGameList").append(html);
