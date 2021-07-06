@@ -38,6 +38,7 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
     customerData: any;
     T: any;
     dataTable: any;
+    isDisable: boolean = false;
 
     constructor(
         private commonService: CommonService,
@@ -284,30 +285,40 @@ export class SboSetLeagueBetLimitComponent implements OnInit {
     //#region Update League Bet Setting
 
     Update() {
-        if (this.rows.length > 0) {
-            this.SearchInDataTable(1);
+        try {
+            this.isDisable = true;
 
-            let model = [];
+            if (this.rows.length > 0) {
+                this.SearchInDataTable(1);
 
-            this.rows.forEach(el => {
-                model.push({
-                    LeagueName: el.LeagueKeyword,
-                    LeagueId: el.LeagueId,
-                    SportType: el.SportType,
-                    MinBet: el.MinBet,
-                    MaxBet: el.MaxBet,
-                    MaxBetRatio: el.MaxBetRatio,
-                    GroupType: el.GroupType
+                let model = [];
+
+                this.rows.forEach(el => {
+                    model.push({
+                        LeagueName: el.LeagueKeyword,
+                        LeagueId: el.LeagueId,
+                        SportType: el.SportType,
+                        MinBet: el.MinBet,
+                        MaxBet: el.MaxBet,
+                        MaxBetRatio: el.MaxBetRatio,
+                        GroupType: el.GroupType
+                    });
+                    model = [...model]
                 });
-                model = [...model]
-            });
 
-            this.adminService.add<any>(customer.sboSetLeague, model).subscribe(res => {
-                this.toasterService.pop('success', 'Success', res.message);
-                this.refreshPage();
-            }, error => {
-                this.toasterService.pop('error', 'Error', error.error.message);
-            });
+                this.adminService.add<any>(customer.sboSetLeague, model).subscribe(res => {
+                    this.isDisable = false;
+                    this.toasterService.pop('success', 'Success', res.message);
+                    this.refreshPage();
+                }, error => {
+                    this.isDisable = false;
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
+            }
+        }
+        catch (ex) {
+            this.isDisable = false;
+            this.toasterService.pop('error', 'Error', ex.message);
         }
     }
 

@@ -35,59 +35,6 @@
                                                            [rowHeight]="'auto'"
                                                            [limit]="10"
                                                            [loadingIndicator]="loadingIndicator">
-                                                <ng-template #minBetTextBox
-                                                             ngx-datatable-row-detail-template
-                                                             let-rowIndex="rowIndex"
-                                                             let-row="row"
-                                                             let-expanded="expanded">
-                                                    <input id="{{rowIndex}}_minBet"
-                                                           type='number'
-                                                           class="form-control"
-                                                           [(ngModel)]="row.MinBet"
-                                                           [ngModelOptions]="{standalone: true}"
-                                                           style="width: 100px;" />
-                                                </ng-template>
-                                                <ng-template #maxBetTextBox
-                                                             ngx-datatable-row-detail-template
-                                                             let-rowIndex="rowIndex"
-                                                             let-row="row"
-                                                             let-expanded="expanded">
-                                                    <input id="{{rowIndex}}_maxBet"
-                                                           type='number'
-                                                           class="form-control"
-                                                           [(ngModel)]="row.MaxBet"
-                                                           [ngModelOptions]="{standalone: true}"
-                                                           style="width: 100px;" />
-                                                </ng-template>
-                                                <ng-template #maxBetRatioTextBox
-                                                             ngx-datatable-row-detail-template
-                                                             let-rowIndex="rowIndex"
-                                                             let-row="row"
-                                                             let-expanded="expanded">
-                                                    <input id="{{rowIndex}}_maxBetRatio"
-                                                           type='number'
-                                                           class="form-control"
-                                                           [(ngModel)]="row.MaxBetRatio"
-                                                           [ngModelOptions]="{standalone: true}"
-                                                           style="width: 100px;" />
-                                                </ng-template>
-                                                <ng-template #groupTypeDropdown
-                                                             ngx-datatable-row-detail-template
-                                                             let-rowIndex="rowIndex"
-                                                             let-row="row"
-                                                             let-expanded="expanded">
-                                                    <select class="form-control"
-                                                            id="ddl_groupType_{{rowIndex}}"
-                                                            [(ngModel)]="row.GroupType"
-                                                            [ngModelOptions]="{standalone: true}"
-                                                            style="width:100px;">
-                                                        <option *ngFor="let c of groupType"
-                                                                [ngValue]="c.id"
-                                                                [selected]="c.id == row.GroupType">
-                                                            {{c.type}}
-                                                        </option>
-                                                    </select>
-                                                </ng-template>
                                             </ngx-datatable>
                                         </div>
                                     </div>
