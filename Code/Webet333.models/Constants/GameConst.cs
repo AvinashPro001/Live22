@@ -773,6 +773,8 @@
                 public const string Login = "lg";
 
                 public const string GetGameList = "tgl";
+
+                public const string Transfer = "ft";
             }
 
             public class Platform
@@ -795,6 +797,13 @@
                 public const string ComputerWeb = "web";
 
                 public const string MobileWeb = "html5";
+            }
+
+            public class FundType
+            {
+                public const string Deposit = "1";
+
+                public const string Withdraw = "2";
             }
         }
 

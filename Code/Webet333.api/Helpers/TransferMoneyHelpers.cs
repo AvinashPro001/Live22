@@ -562,6 +562,25 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
+                case WalletConst.WalletName.GamePlay:
+                    try
+                    {
+                        var result = await GamePlayHelpers.CallTransferAPI(UsernameResponse.GamePlayUsername, Math.Abs(Amount), GameConst.GamePlay.FundType.Withdraw);
+                        if (result.Status != 0)
+                        {
+                            response.ErrorMessage = result.ErrorDesc;
+                            response.GameName = "GamePlay Game";
+                            response.GameResponse = JsonConvert.SerializeObject(result);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response.ErrorMessage = Localizer["error_transaction_failed"].Value;
+                        response.GameName = "GamePlay Game";
+                        response.GameResponse = ex.Message;
+                    }
+                    break;
             }
 
             return response;
@@ -901,6 +920,25 @@ namespace Webet333.api.Helpers
                     {
                         response.ErrorMessage = Localizer["error_transaction_failed"].Value;
                         response.GameName = "SBO Game";
+                        response.GameResponse = ex.Message;
+                    }
+                    break;
+
+                case WalletConst.WalletName.GamePlay:
+                    try
+                    {
+                        var result = await GamePlayHelpers.CallTransferAPI(UsernameResponse.GamePlayUsername, Amount, GameConst.GamePlay.FundType.Deposit);
+                        if (result.Status != 0)
+                        {
+                            response.ErrorMessage = result.ErrorDesc;
+                            response.GameName = "GamePlay Game";
+                            response.GameResponse = JsonConvert.SerializeObject(result);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response.ErrorMessage = Localizer["error_transaction_failed"].Value;
+                        response.GameName = "GamePlay Game";
                         response.GameResponse = ex.Message;
                     }
                     break;

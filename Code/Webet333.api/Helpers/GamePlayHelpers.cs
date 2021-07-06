@@ -229,6 +229,29 @@ namespace Webet333.api.Helpers
 
         #endregion Call Game List API 3rd Party API
 
+        #region Call Transfer 3rd Party API
+
+        internal static async Task<GamePlayTransferAPIResponse> CallTransferAPI(string Username, decimal Amount, string FundType)
+        {
+            GamePlayTransferAPIRequest model = new GamePlayTransferAPIRequest
+            {
+                Amount = Amount,
+                FundType = FundType,
+                Method = GamePlayConst.Method.Transfer,
+                ProductType = GamePlayConst.ProductType,
+                ReferenceNo = Guid.NewGuid().ToString(),
+                Username = Username
+            };
+
+            string temp = await ManageRequestAsync(model);
+
+            var DeserializeAPIResult = JsonConvert.DeserializeObject<GamePlayTransferAPIResponse>(temp);
+
+            return DeserializeAPIResult;
+        }
+
+        #endregion
+
         #region House Keeping
 
         public void Dispose()
