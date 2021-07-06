@@ -734,7 +734,12 @@
 
             public const string GameCode = "GPI001";
 
-            public const string GameType = "RNG";
+            public class GameType
+            {
+                public const string Slot = "RNG";
+
+                public const string Fish = "FISH";
+            }
 
             public class GameMode
             {

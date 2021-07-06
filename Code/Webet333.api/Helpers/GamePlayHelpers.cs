@@ -161,12 +161,12 @@ namespace Webet333.api.Helpers
 
         #region Call Game List API 3rd Party API
 
-        internal static async Task<GamePlayLoginResponse> CallGetGameListAPI(string Language)
+        internal static async Task<GamePlayLoginResponse> CallGetGameListAPI(string Language, string GameType)
         {
             GamePlayGetGameListAPIRequest model = new GamePlayGetGameListAPIRequest
             {
                 ClientType = GamePlayConst.ClientType.ComputerWeb,
-                GameType = GamePlayConst.GameType,
+                GameType = GameType,
                 Language = Language,
                 Method = GamePlayConst.Method.GetGameList,
                 Page = 1,

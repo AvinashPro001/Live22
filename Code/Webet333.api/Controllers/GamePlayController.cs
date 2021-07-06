@@ -145,20 +145,36 @@ namespace Webet333.api.Controllers
 
         #endregion Login
 
-        #region Game List API
+        #region Get Slot Game List API
 
-        [HttpGet(ActionsConst.GamePlay.GetGameList)]
-        public async Task<IActionResult> GetGameList()
+        [HttpGet(ActionsConst.GamePlay.GetSlotGameList)]
+        public async Task<IActionResult> GetSlotGameList()
         {
             string language = Language.Code == LanguageConst.Chinese ? GamePlayConst.LanguageCode.TraditionalChinese : Language.Code == LanguageConst.Malay ? GamePlayConst.LanguageCode.Malay : GamePlayConst.LanguageCode.English;
 
-            var result = await GamePlayHelpers.CallGetGameListAPI(language);
+            var result = await GamePlayHelpers.CallGetGameListAPI(language, GamePlayConst.GameType.Slot);
 
             if (result.Status != 0) return BadResponse(result.ErrorDesc);
 
             return OkResponse(result);
         }
 
-        #endregion Game List API
+        #endregion Get Slot Game List API
+
+        #region Get Fish Game List API
+
+        [HttpGet(ActionsConst.GamePlay.GetFishGameList)]
+        public async Task<IActionResult> GetFishGameList()
+        {
+            string language = Language.Code == LanguageConst.Chinese ? GamePlayConst.LanguageCode.TraditionalChinese : Language.Code == LanguageConst.Malay ? GamePlayConst.LanguageCode.Malay : GamePlayConst.LanguageCode.English;
+
+            var result = await GamePlayHelpers.CallGetGameListAPI(language, GamePlayConst.GameType.Fish);
+
+            if (result.Status != 0) return BadResponse(result.ErrorDesc);
+
+            return OkResponse(result);
+        }
+
+        #endregion Get Fish Game List API
     }
 }

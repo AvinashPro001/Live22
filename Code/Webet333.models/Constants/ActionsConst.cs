@@ -790,7 +790,9 @@
 
             public const string Login = "gameplay/login";
 
-            public const string GetGameList = "gameplay/get/gamelist";
+            public const string GetSlotGameList = "gameplay/get/slot-gamelist";
+
+            public const string GetFishGameList = "gameplay/get/fish-gamelist";
         }
     }
 }
