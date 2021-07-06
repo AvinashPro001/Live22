@@ -314,6 +314,8 @@
             public const string YEEBETGameBalanceUpdate = "[dbo].[Balance_YEEBET_Update]";
 
             public const string SBOGameBalanceUpdate = "[dbo].[Balance_SBO_Update]";
+
+            public const string GamePlayGameBalanceUpdate = "[dbo].[Balance_GamePlay_Update]";
         }
 
         public class Game

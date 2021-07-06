@@ -75,7 +75,7 @@ namespace Webet333.api.Helpers
 
         #region Manage Game Play API Request
 
-        private static async Task<string> ManageRequestAsync(dynamic model)
+        internal static async Task<string> ManageRequestAsync(dynamic model)
         {
             string JSON = JsonConvert.SerializeObject(model);
 

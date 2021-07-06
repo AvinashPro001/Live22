@@ -775,6 +775,8 @@
                 public const string GetGameList = "tgl";
 
                 public const string Transfer = "ft";
+
+                public const string GetBalance = "gb";
             }
 
             public class Platform

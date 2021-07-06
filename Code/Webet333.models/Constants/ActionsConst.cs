@@ -523,6 +523,8 @@
             public const string SBOBalance = "gamebalance/sbo";
 
             public const string CheckSBOBalance = "check/gamebalance/sbo";
+
+            public const string GamePlayBalance = "gamebalance/gamePlay";
         }
 
         public class TransferMoney
