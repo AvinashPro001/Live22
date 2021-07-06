@@ -447,6 +447,8 @@
             public const string SBOBettingDetailsInsert = "[dbo].[SBO_BettingDetails_Insert]";
 
             public const string BettingDetails_SBO = "[dbo].[SBO_BettingDetails_By_Username]";
+
+            public const string GamePlayBettingDetailsInsert = "[dbo].[GamePlay_BettingDetails_Insert]";
         }
 
         public class MaxBetGame

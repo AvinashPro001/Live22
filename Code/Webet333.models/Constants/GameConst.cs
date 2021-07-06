@@ -777,6 +777,8 @@
                 public const string Transfer = "ft";
 
                 public const string GetBalance = "gb";
+
+                public const string GetBettingDetails = "bd";
             }
 
             public class Platform

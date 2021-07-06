@@ -57,7 +57,7 @@ namespace Webet333.api.Controllers
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
 
-            using (var GamePlay_Helpers = new GamePlayHelpers(Connection))
+            using (var GamePlay_Helpers = new GamePlayGameHelpers(Connection))
             {
                 var result = await GamePlay_Helpers.CallRegisterPlayerAPI(username, password);
 
@@ -94,7 +94,7 @@ namespace Webet333.api.Controllers
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
 
-            using (var GamePlay_Helpers = new GamePlayHelpers(Connection))
+            using (var GamePlay_Helpers = new GamePlayGameHelpers(Connection))
             {
                 password = $"WB4@{password}";
                 if (password.Length > 12) password = password.Substring(0, 12);
@@ -139,7 +139,7 @@ namespace Webet333.api.Controllers
 
             if (string.IsNullOrWhiteSpace(request.GameCode)) request.GameCode = GamePlayConst.GameCode;
 
-            var result = await GamePlayHelpers.CallLaunchGameAPI(username, language, platform, request.GameCode);
+            var result = await GamePlayGameHelpers.CallLaunchGameAPI(username, language, platform, request.GameCode);
 
             if (result.Status != 0) return BadResponse(result.ErrorDesc);
 
@@ -155,7 +155,7 @@ namespace Webet333.api.Controllers
         {
             string language = Language.Code == LanguageConst.Chinese ? GamePlayConst.LanguageCode.TraditionalChinese : Language.Code == LanguageConst.Malay ? GamePlayConst.LanguageCode.Malay : GamePlayConst.LanguageCode.English;
 
-            var result = await GamePlayHelpers.CallGetGameListAPI(language, GamePlayConst.GameType.Slot);
+            var result = await GamePlayGameHelpers.CallGetGameListAPI(language, GamePlayConst.GameType.Slot);
 
             if (result.Status != 0) return BadResponse(result.ErrorDesc);
 
@@ -171,7 +171,7 @@ namespace Webet333.api.Controllers
         {
             string language = Language.Code == LanguageConst.Chinese ? GamePlayConst.LanguageCode.TraditionalChinese : Language.Code == LanguageConst.Malay ? GamePlayConst.LanguageCode.Malay : GamePlayConst.LanguageCode.English;
 
-            var result = await GamePlayHelpers.CallGetGameListAPI(language, GamePlayConst.GameType.Fish);
+            var result = await GamePlayGameHelpers.CallGetGameListAPI(language, GamePlayConst.GameType.Fish);
 
             if (result.Status != 0) return BadResponse(result.ErrorDesc);
 

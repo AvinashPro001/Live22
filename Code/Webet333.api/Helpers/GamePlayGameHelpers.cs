@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 using System.Web;
 using Webet333.dapper;
 using Webet333.models.Constants;
+using Webet333.models.Request.Game;
 using Webet333.models.Request.Game.GamePlay;
 using Webet333.models.Response.Game.GamePlay;
 using GamePlayConst = Webet333.models.Constants.GameConst.GamePlay;
 
 namespace Webet333.api.Helpers
 {
-    public class GamePlayHelpers : IDisposable
+    public class GamePlayGameHelpers : IDisposable
     {
         #region Local Variables
 
@@ -22,7 +23,7 @@ namespace Webet333.api.Helpers
 
         private static readonly HttpClient client = new HttpClient();
 
-        public GamePlayHelpers(string Connection = null)
+        public GamePlayGameHelpers(string Connection = null)
         {
             this.Connection = Connection;
         }
@@ -250,7 +251,58 @@ namespace Webet333.api.Helpers
             return DeserializeAPIResult;
         }
 
-        #endregion
+        #endregion Call Transfer 3rd Party API
+
+        #region Call Betting Details 3rd Party API
+
+        private static string ManageBatchName(string s, string s2)
+        {
+            int length = s.Length;
+            int length2 = s2.Length;
+
+            var temp = s.Substring(0, length - length2) + s2;
+
+            return temp;
+        }
+
+        internal static async Task<GamePlayGetBettingDetailsAPIResponse> CallBettingDetailsAPI(PragmaticBettingDetailsRequest request)
+        {
+            var dates = request.StartTimeStamp.ToString("yyyyMMdd0000");
+            var minitus = (request.StartTimeStamp.Hour * 60) + request.StartTimeStamp.Minute;
+            var batchName = ManageBatchName(dates, minitus.ToString());
+            GamePlayGetBettingDetailsAPIResponse result = new GamePlayGetBettingDetailsAPIResponse();
+
+            long count = 1;
+
+            for (int i = 0; i < count; i++)
+            {
+                GamePlayGetBettingDetailsAPIRequest model = new GamePlayGetBettingDetailsAPIRequest
+                {
+                    BatchName = batchName,
+                    Method = GamePlayConst.Method.GetBettingDetails,
+                    Page = i + 1
+                };
+
+                string temp = await ManageRequestAsync(model);
+
+                var tempResult = JsonConvert.DeserializeObject<GamePlayGetBettingDetailsAPIResponse>(temp);
+
+                if (result.Details == null) result = tempResult;
+                result.Details.AddRange(tempResult.Details);
+
+                if (i == 0 &&
+                    result != null &&
+                    result.PageInfo != null &&
+                    result.PageInfo.TotalCount > 1)
+                {
+                    count = result.PageInfo.TotalCount;
+                }
+            }
+
+            return result;
+        }
+
+        #endregion Call Betting Details 3rd Party API
 
         #region House Keeping
 

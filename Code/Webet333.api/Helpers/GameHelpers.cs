@@ -416,6 +416,23 @@ namespace Webet333.api.Helpers
 
         #endregion SBO Services
 
+        #region GamePlay Services
+
+        internal async Task GamePlayServicesInsert(string request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var res = await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Game.GamePlayBettingDetailsInsert,
+                    new
+                    {
+                        jsonString = request
+                    });
+            }
+        }
+
+        #endregion GamePlay Services
+
         #region Kiss 918 Player Log Insert
 
         internal async Task<int> Kiss918PlayerLogInsert(List<PlayerGameLogResult> request, string Username)

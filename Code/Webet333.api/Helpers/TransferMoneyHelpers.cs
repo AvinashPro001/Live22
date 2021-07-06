@@ -566,7 +566,7 @@ namespace Webet333.api.Helpers
                 case WalletConst.WalletName.GamePlay:
                     try
                     {
-                        var result = await GamePlayHelpers.CallTransferAPI(UsernameResponse.GamePlayUsername, Math.Abs(Amount), GameConst.GamePlay.FundType.Withdraw);
+                        var result = await GamePlayGameHelpers.CallTransferAPI(UsernameResponse.GamePlayUsername, Math.Abs(Amount), GameConst.GamePlay.FundType.Withdraw);
                         if (result.Status != 0)
                         {
                             response.ErrorMessage = result.ErrorDesc;
@@ -927,7 +927,7 @@ namespace Webet333.api.Helpers
                 case WalletConst.WalletName.GamePlay:
                     try
                     {
-                        var result = await GamePlayHelpers.CallTransferAPI(UsernameResponse.GamePlayUsername, Amount, GameConst.GamePlay.FundType.Deposit);
+                        var result = await GamePlayGameHelpers.CallTransferAPI(UsernameResponse.GamePlayUsername, Amount, GameConst.GamePlay.FundType.Deposit);
                         if (result.Status != 0)
                         {
                             response.ErrorMessage = result.ErrorDesc;

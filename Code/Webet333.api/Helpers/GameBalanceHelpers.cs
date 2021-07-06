@@ -548,7 +548,7 @@ namespace Webet333.api.Helpers
 
             try
             {
-                string temp = await GamePlayHelpers.ManageRequestAsync(model);
+                string temp = await GamePlayGameHelpers.ManageRequestAsync(model);
 
                 var DeserializeAPIResult = JsonConvert.DeserializeObject<GamePlayGetBalanceResponse>(temp);
 
