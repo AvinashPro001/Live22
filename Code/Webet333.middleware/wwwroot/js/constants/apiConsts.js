@@ -1,5 +1,5 @@
-﻿var baseUrl = "http://47.242.143.182:8081/api/v1/";
-var baseUrlWithoutVersion = "http://47.242.143.182:8081";
+﻿var baseUrl = "http://47.242.143.182:8083/api/v1/";
+var baseUrlWithoutVersion = "http://47.242.143.182:8083";
 
 var apiEndPoints = {
     //login: "account/login",

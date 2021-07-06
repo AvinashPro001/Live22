@@ -169,8 +169,8 @@ function CopyToClipboard(id) {
 }
 
 function SetBankDetails(AccountName, AccountNumber, Id) {
-    var accountNumberHtml = '<span class="fa fa-copy" onclick=CopyToClipboard("lbl_account_number")></span> &nbsp;&nbsp;' + AccountNumber;
-    var accountNameHtml = '<span class="fa fa-copy" onclick=CopyToClipboard("lbl_account_name")></span> &nbsp;&nbsp;' + AccountName;
+    var accountNumberHtml = '<span class="fa fa-copy hand-curson" onclick=CopyToClipboard("lbl_account_number")></span> &nbsp;&nbsp;' + AccountNumber;
+    var accountNameHtml = '<span class="fa fa-copy hand-curson" onclick=CopyToClipboard("lbl_account_name")></span> &nbsp;&nbsp;' + AccountName;
     SetAllValueInElement("lbl_account_number", accountNumberHtml);
     SetAllValueInElement("lbl_account_name", accountNameHtml);
     DepositBankId = Id;
