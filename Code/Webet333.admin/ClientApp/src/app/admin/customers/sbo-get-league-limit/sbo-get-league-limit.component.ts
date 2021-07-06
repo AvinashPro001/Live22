@@ -19,10 +19,6 @@ export class SboGetLeagueLimitComponent implements OnInit {
     //#region Variable & constructor
 
     @ViewChild(DatatableComponent) table: DatatableComponent;
-    @ViewChild('minBetTextBox') minBetTextBox: TemplateRef<any>;
-    @ViewChild('maxBetTextBox') maxBetTextBox: TemplateRef<any>;
-    @ViewChild('maxBetRatioTextBox') maxBetRatioTextBox: TemplateRef<any>;
-    @ViewChild('groupTypeDropdown') groupTypeDropdown: TemplateRef<any>;
     groupType: any = [
         { id: "SMALL", type: "SMALL" },
         { id: "MEDIUM", type: "MEDIUM" },
@@ -60,10 +56,10 @@ export class SboGetLeagueLimitComponent implements OnInit {
             { prop: 'No' },
             { prop: 'LeagueId' },
             { prop: 'LeagueKeyword' },
-            { prop: 'MinBet', cellTemplate: this.minBetTextBox, sortable: true },
-            { prop: 'MaxBet', cellTemplate: this.maxBetTextBox, sortable: true },
-            { prop: 'MaxBetRatio', cellTemplate: this.maxBetRatioTextBox, sortable: true },
-            { prop: 'GroupType', cellTemplate: this.groupTypeDropdown, sortable: true }
+            { prop: 'MinBet' },
+            { prop: 'MaxBet' },
+            { prop: 'MaxBetRatio' },
+            { prop: 'GroupType' }
         ];
     }
 

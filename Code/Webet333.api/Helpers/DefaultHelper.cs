@@ -37,7 +37,7 @@ namespace Webet333.api.Helpers
 
             var path = Path.Combine(_hostingEnvironment.WebRootPath, "MYRWFF88.p12");
 
-            Request.ClientCertificates.Add(new X509Certificate2(path, "2V06Mgb9kKifhfzi", X509KeyStorageFlags.MachineKeySet));
+            Request.ClientCertificates.Add(new X509Certificate2(path, "vrinkiv4HfXj7flP", X509KeyStorageFlags.MachineKeySet));
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidationCallBack;
             Response = (HttpWebResponse)await Request.GetResponseAsync();
             StreamReader reader = new StreamReader(Response.GetResponseStream());

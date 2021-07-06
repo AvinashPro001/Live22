@@ -453,6 +453,10 @@ async function whatsapp() {
     window.open('https://api.whatsapp.com/send?phone=60135558826&text=Claim%20and%20Join', '_blank');
 }
 
+async function LiveChat() {
+    window.open('https://vue.livelyhelp.chat/610e8f831901ec83fjkfle-keli1a09e081f08020e050608050e0b01010a0a0c0400020e87eb01040a369f19c83', '_blank');
+}
+
 var AgGameType = localStorage.getItem('AGslotGame');
 async function AG(GameType) {
     var value = await CheckGameInMaintenance("AG");
