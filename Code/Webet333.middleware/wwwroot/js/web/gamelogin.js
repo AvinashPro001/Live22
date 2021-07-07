@@ -436,6 +436,42 @@ async function LoginPlaytechGame(GameCode) {
     }
 }
 
+function GenratePlaytechSlotsGameHTML(GameList, SectionId, IsAppend) {
+    var html = "";
+    if (GameList.length > 0) {
+        for (i = 0; i < GameList.length; i++) {
+
+            html += '<li><div class="img-text-block"><div class="cmn-block"><figure><img src="' + GameList[i].ImagePath2 + '" alt="img"></figure><div class="text-content text-center"><h4>' + GameList[i].GameName + '</h4></div></div><div class="hover-block"><div class="text-content text-center"><h4>' + GameList[i].GameName + '</h4></div><figure><img src="' + GameList[i].ImagePath2 + '" alt="img"><div class="overlay"><button  onclick="LoginPlaytechGame(\'' + GameList[i].GameCode + '\')" >play</button></div></figure></div></div></li>';
+        }
+        if (IsAppend)
+            $("#" + SectionId).append(html);
+        else
+            SetAllValueInElement(SectionId, html)
+    }
+    else {
+        html = '<div class="col-sm-12 pl0" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
+        SetAllValueInElement(SectionId, html)
+    }
+}
+
+function GenratePragmaticSlotsGameHTML(GameList, SectionId, IsAppend) {
+    var html = "";
+    if (GameList.length > 0) {
+        for (i = 0; i < GameList.length; i++) {
+
+            html += '<li><div class="img-text-block"><div class="cmn-block"><figure><img src="' + GameList[i].ImagePath1 + '" alt="img"></figure><div class="text-content text-center"><h4>' + GameList[i].GameName + '</h4></div></div><div class="hover-block"><div class="text-content text-center"><h4>' + GameList[i].GameName + '</h4></div><figure><img src="' + GameList[i].ImagePath1 + '" alt="img"><div class="overlay"><button  onclick="LoginPragmaticGame(\'' + GameList[i].GameCode + '\')" >play</button></div></figure></div></div></li>';
+        }
+        if (IsAppend)
+            $("#" + SectionId).append(html);
+        else
+            SetAllValueInElement(SectionId, html)
+    }
+    else {
+        html = '<div class="col-sm-12 pl0" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
+        SetAllValueInElement(SectionId, html)
+    }
+}
+
 var slotPageNumber = 0
 async function PlaytechSlotsGameList(PageNumber = null, IsAppend = true) {
     var model = {
@@ -449,15 +485,16 @@ async function PlaytechSlotsGameList(PageNumber = null, IsAppend = true) {
     var list = await PostMethod(gameSettingEndPoints.slotsGameList, model)
     if (list.status == 200) {
         gameList = list.response.data.result;
-        var html = "";
-        for (i = 0; i < gameList.length; i++) {
+        var HotList = gameList.filter(x => x.IsHot == true)
+        var NewList = gameList.filter(x => x.IsNew == true)
+        var ArcadeList = gameList.filter(x => x.IsArcade == true)
+        var SlotsList = gameList.filter(x => x.IsSlot == true)
 
-            html += '<li><div class="img-text-block"><div class="cmn-block"><figure><img src="' + gameList[i].ImagePath2 + '" alt="img"></figure><div class="text-content text-center"><h4>' + gameList[i].GameName + '</h4></div></div><div class="hover-block"><div class="text-content text-center"><h4>' + gameList[i].GameName + '</h4></div><figure><img src="' + gameList[i].ImagePath2 + '" alt="img"><div class="overlay"><button  onclick="LoginPlaytechGame(\'' + gameList[i].GameCode + '\')" >play</button></div></figure></div></div></li>';
-        }
-        if (IsAppend)
-            $("#playtechSlotsGameList").append(html);
-        else
-            SetAllValueInElement("playtechSlotsGameList", html)
+        GenratePlaytechSlotsGameHTML(gameList, 'playtech-all-section', IsAppend)
+        GenratePlaytechSlotsGameHTML(HotList, 'playtech-hot-section', IsAppend)
+        GenratePlaytechSlotsGameHTML(NewList, 'playtech-new-section', IsAppend)
+        GenratePlaytechSlotsGameHTML(SlotsList, 'playtech-slot-section', IsAppend)
+        GenratePlaytechSlotsGameHTML(ArcadeList, 'playtech-arcade-section', IsAppend)
     }
 
 }
@@ -472,14 +509,16 @@ async function PragmaticSlotsGameList(PageNumber = null, IsAppend = true) {
     var list = await PostMethod(gameSettingEndPoints.slotsGameList, model)
     if (list.status == 200) {
         gameList = list.response.data.result;
-        var html = "";
-        for (i = 0; i < gameList.length; i++) {
-            html += '<li><div class="img-text-block"><div class="cmn-block"><figure><img src="' + gameList[i].ImagePath1 + '" alt="img"></figure><div class="text-content text-center"><h4>' + gameList[i].GameName + '</h4></div></div><div class="hover-block"><div class="text-content text-center"><h4>' + gameList[i].GameName + '</h4></div><figure><img src="' + gameList[i].ImagePath1 + '" alt="img"><div class="overlay"><button  onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\')" >play</button></div></figure></div></div></li>';
-        }
-        if (IsAppend)
-            $("#pragmaticSlotsGameList").append(html);
-        else
-            SetAllValueInElement("pragmaticSlotsGameList", html)
+        var HotList = gameList.filter(x => x.IsHot == true)
+        var NewList = gameList.filter(x => x.IsNew == true)
+        var ArcadeList = gameList.filter(x => x.IsArcade == true)
+        var SlotsList = gameList.filter(x => x.IsSlot == true)
+
+        GenratePragmaticSlotsGameHTML(gameList, 'pragmatic-all-section', IsAppend)
+        GenratePragmaticSlotsGameHTML(HotList, 'pragmatic-hot-section', IsAppend)
+        GenratePragmaticSlotsGameHTML(NewList, 'pragmatic-new-section', IsAppend)
+        GenratePragmaticSlotsGameHTML(SlotsList, 'pragmatic-slot-section', IsAppend)
+        GenratePragmaticSlotsGameHTML(ArcadeList, 'pragmatic-arcade-section', IsAppend)
     }
 }
 
@@ -493,7 +532,7 @@ async function HotSlotsgame() {
         for (i = 0; i < gameList.length; i++) {
 
             if (gameList[i].WalletName == "Playtech Slot") {
-                html += '<div class="item"><div class="game_boxes" onclick="LoginPlaytechGame(\'' + gameList[i].GameCode + '\')"><img src="' +  gameList[i].ImagePath2  + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
+                html += '<div class="item"><div class="game_boxes" onclick="LoginPlaytechGame(\'' + gameList[i].GameCode + '\')"><img src="' + gameList[i].ImagePath2 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
             }
             else {
                 html += '<div class="item"><div class="game_boxes" onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\')"><img src="' + gameList[i].ImagePath1 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'

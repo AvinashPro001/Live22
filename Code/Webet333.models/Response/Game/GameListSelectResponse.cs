@@ -15,13 +15,19 @@ namespace Webet333.models.Response.Game
         public string GameType { get; set; }
 
         [JsonProperty("IsNew")]
-        public bool IsNew { get; set; }
+        public bool? IsNew { get; set; }
 
         [JsonProperty("IsHot")]
-        public bool IsHot { get; set; }
+        public bool? IsHot { get; set; }
+
+        [JsonProperty("IsSlot")]
+        public bool? IsSlot { get; set; }
+
+        [JsonProperty("IsArcade")]
+        public bool? IsArcade { get; set; }
 
         [JsonProperty("Sequence")]
-        public int Sequence { get; set; }
+        public int? Sequence { get; set; }
 
         [JsonProperty("ImagePath1")]
         public string ImagePath1 { get; set; }
@@ -30,10 +36,10 @@ namespace Webet333.models.Response.Game
         public string ImagePath2 { get; set; }
 
         [JsonProperty("Active")]
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
 
         [JsonProperty("Created")]
-        public DateTime Created { get; set; }
+        public DateTime? Created { get; set; }
 
         [JsonProperty("Total")]
         public int Total { get; set; }

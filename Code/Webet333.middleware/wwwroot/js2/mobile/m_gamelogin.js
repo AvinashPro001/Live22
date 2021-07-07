@@ -1067,6 +1067,48 @@ async function GameLoginMobile(gamename) {
     LoaderHide();
 }
 
+function OpenPragmaticGamePage(code) {
+    window.open("../mobile/Game?gamename=Pragmatic&gamecode=" + code, "_blank")
+}
+
+function OpenPlaytechGamePage(code) {
+    window.open("../mobile/Game?gamename=Playtech&gamecode=" + code, "_blank")
+}
+
+function GenratePlaytechSlotsGameHTML(GameList, SectionId, IsAppend) {
+    var html = "";
+    if (GameList.length > 0) {
+        for (i = 0; i < GameList.length; i++) {
+            html += '<li  onclick="OpenPlaytechGamePage(\'' + GameList[i].GameCode + '\')"><figure><a ><img src="' + GameList[i].ImagePath2 + '" alt=""></a></figure><p><a>' + GameList[i].GameName + '</a></p></li >';
+        }
+        if (IsAppend)
+            $("#" + SectionId).append(html);
+        else
+            $("#" + SectionId).html(html);
+    }
+    else {
+        html = '<div class="col-sm-12 pl0" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
+        $("#" + SectionId).html(html);
+    }
+}
+
+function GenratePragmaticSlotsGameHTML(GameList, SectionId, IsAppend) {
+    var html = "";
+    if (GameList.length > 0) {
+        for (i = 0; i < GameList.length; i++) {
+            html += '<li onclick="OpenPragmaticGamePage(\'' + GameList[i].GameCode + '\')"><figure><a><img src="' + GameList[i].ImagePath1 + '" alt=""></a></figure><p><a >' + GameList[i].GameName + '</a></p></li >';
+        }
+        if (IsAppend)
+            $("#" + SectionId).append(html);
+        else
+            $("#" + SectionId).html(html);
+    }
+    else {
+        html = '<div class="col-sm-12 pl0" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
+        $("#" + SectionId).html(html);
+    }
+}
+
 var slotPageNumber = 0
 async function PlaytechSlotsGameList(PageNumber = null, IsAppend = true) {
     var model = {
@@ -1078,23 +1120,17 @@ async function PlaytechSlotsGameList(PageNumber = null, IsAppend = true) {
 
     var list = await PostMethod(apiEndPoints.slotsGameList, model)
     gameList = list.data.result;
-    var html = "";
-    for (i = 0; i < gameList.length; i++) {
-        html += '<li  onclick="OpenPlaytechGamePage(\'' + gameList[i].GameCode + '\')"><figure><a ><img src="' + gameList[i].ImagePath2 + '" alt=""></a></figure><p><a>' + gameList[i].GameName + '</a></p></li >';
-    }
-    if (IsAppend)
-        $("#playtech-all-slot").append(html);
-    else
-        SetAllValueInElement("playtech-all-slot", html)
+    var HotList = gameList.filter(x => x.IsHot == true)
+    var NewList = gameList.filter(x => x.IsNew == true)
+    var ArcadeList = gameList.filter(x => x.IsArcade == true)
+    var SlotsList = gameList.filter(x => x.IsSlot == true)
 
-}
+    GenratePlaytechSlotsGameHTML(gameList, 'playtech-all-section', IsAppend)
+    GenratePlaytechSlotsGameHTML(HotList, 'playtech-hot-section', IsAppend)
+    GenratePlaytechSlotsGameHTML(NewList, 'playtech-new-section', IsAppend)
+    GenratePlaytechSlotsGameHTML(SlotsList, 'playtech-slot-section', IsAppend)
+    GenratePlaytechSlotsGameHTML(ArcadeList, 'playtech-arcade-section', IsAppend)
 
-function OpenPragmaticGamePage(code) {
-    window.open("../mobile/Game?gamename=Pragmatic&gamecode=" + code, "_blank")
-}
-
-function OpenPlaytechGamePage(code) {
-    window.open("../mobile/Game?gamename=Playtech&gamecode=" + code, "_blank")
 }
 
 async function PragmaticSlotsGameList(PageNumber = null, IsAppend = true) {
@@ -1106,14 +1142,16 @@ async function PragmaticSlotsGameList(PageNumber = null, IsAppend = true) {
     };
     var list = await PostMethod(apiEndPoints.slotsGameList, model)
     gameList = list.data.result;
-    var html = "";
-    for (i = 0; i < gameList.length; i++) {
-        html += '<li onclick="OpenPragmaticGamePage(\'' + gameList[i].GameCode + '\')"><figure><a><img src="' + gameList[i].ImagePath1 + '" alt=""></a></figure><p><a >' + gameList[i].GameName + '</a></p></li >';
-    }
-    if (IsAppend)
-        $("#pragmatic-all-slot").append(html);
-    else
-        SetAllValueInElement("pragmatic-all-slot", html)
+    var HotList = gameList.filter(x => x.IsHot == true)
+    var NewList = gameList.filter(x => x.IsNew == true)
+    var ArcadeList = gameList.filter(x => x.IsArcade == true)
+    var SlotsList = gameList.filter(x => x.IsSlot == true)
+
+    GenratePragmaticSlotsGameHTML(gameList, 'pragmatic-all-section', IsAppend)
+    GenratePragmaticSlotsGameHTML(HotList, 'pragmatic-hot-section', IsAppend)
+    GenratePragmaticSlotsGameHTML(NewList, 'pragmatic-new-section', IsAppend)
+    GenratePragmaticSlotsGameHTML(SlotsList, 'pragmatic-slot-section', IsAppend)
+    GenratePragmaticSlotsGameHTML(ArcadeList, 'pragmatic-arcade-section', IsAppend)
 }
 
 function openPragmaticGame(GameID) {
