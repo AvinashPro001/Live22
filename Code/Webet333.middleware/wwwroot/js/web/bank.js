@@ -143,7 +143,7 @@ function SetDepositPageBank() {
         else {
             setTimeout(function () {
                 SetDepositPageBank();
-            },5000)
+            }, 5000)
         }
     }
     else {
@@ -1096,23 +1096,31 @@ async function CheckVaderPayMainteance() {
     }
 }
 
+function ButtonDisabled(btnId, Condtion) {
+    if (Condtion)
+        $("#" + btnId).attr("disabled", "disabled")
+    else
+        $("#" + btnId).removeAttr("disabled");
+}
+
 async function CheckSupportGame() {
     let model = {}
     var res = await PostMethod(accountEndPoints.GetGameSupport, model);
     if (res.response.data.length > 0) {
-        $("#918kiss-wallet-allin").attr("disabled", !res.response.data[0].Is918Kiss ? "disabled" : "")
-        $("#ag-wallet-allin").attr("disabled", !res.response.data[0].IsAG ? "disabled" : "")
-        $("#allbet-wallet-allin").attr("disabled", !res.response.data[0].IsAllBet ? "disabled" : "")
-        $("#dg-wallet-allin").attr("disabled", !res.response.data[0].IsDG ? "disabled" : "")
-        $("#joker-wallet-allin").attr("disabled", !res.response.data[0].IsJoker ? "disabled" : "")
-        $("#m8-wallet-allin").attr("disabled", !res.response.data[0].IsM8 ? "disabled" : "")
-        $("#maxbet-wallet-allin").attr("disabled", !res.response.data[0].IsMaxbet ? "disabled" : "")
-        $("#mega888-wallet-allin").attr("disabled", !res.response.data[0].IsMega888 ? "disabled" : "")
-        $("#playtech-wallet-allin").attr("disabled", !res.response.data[0].IsPlaytech && !res.response.data[0].IsPlaytechSlot ? "disabled" : "")
-        $("#pragmatic-wallet-allin").attr("disabled", !res.response.data[0].IsPragmatic ? "disabled" : "")
-        $("#pussy888-wallet-allin").attr("disabled", !res.response.data[0].IsPussy888 ? "disabled" : "")
-        $("#sa-wallet-allin").attr("disabled", !res.response.data[0].IsSA ? "disabled" : "")
-        $("#sexy-wallet-allin").attr("disabled", !res.response.data[0].IsSexyBaccarat ? "disabled" : "")
-        $("#wm-wallet-allin").attr("disabled", !res.response.data[0].IsWM ? "disabled" : "")
+        ButtonDisabled("918kiss-wallet-allin", !res.response.data[0].Is918Kiss);
+        ButtonDisabled("ag-wallet-allin", !res.response.data[0].IsAG);
+        ButtonDisabled("allbet-wallet-allin", !res.response.data[0].IsAllBet);
+        ButtonDisabled("dg-wallet-allin", !res.response.data[0].IsDG);
+        ButtonDisabled("joker-wallet-allin", !res.response.data[0].IsJoker);
+        ButtonDisabled("m8-wallet-allin", !res.response.data[0].IsM8);
+        ButtonDisabled("maxbet-wallet-allin", !res.response.data[0].IsMaxbet);
+        ButtonDisabled("mega888-wallet-allin", !res.response.data[0].IsMega888);
+        ButtonDisabled("playtech-wallet-allin", !res.response.data[0].IsPlaytech);
+        ButtonDisabled("pragmatic-wallet-allin", !res.response.data[0].IsPragmatic);
+        ButtonDisabled("pussy888-wallet-allin", !res.response.data[0].IsPussy888);
+        ButtonDisabled("sa-wallet-allin", !res.response.data[0].IsSA);
+        ButtonDisabled("sexy-wallet-allin", !res.response.data[0].IsSexyBaccarat);
+        ButtonDisabled("wm-wallet-allin", !res.response.data[0].IsWM);
+        ButtonDisabled("yeebet-wallet-allin", !res.response.data[0].IsYEEBET);
     }
 }

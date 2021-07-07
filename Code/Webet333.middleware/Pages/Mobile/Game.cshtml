@@ -44,11 +44,11 @@
         var url_string = window.location;
         var url = new URL(url_string);
         var name = url.searchParams.get("gamename");
-        //if (name == "Playtech") {
-        //    var imported = document.createElement('script');
-        //    imported.setAttribute('src', 'https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88')
-        //    document.head.appendChild(imported);
-        //}
+        var code = url.searchParams.get("gamecode");
+        if (code != null && name=='Pragmatic')
+            return openPragmaticGame(code)
+        if (code != null && name == 'Playtech')
+            return openPlaytechGame(code)
         GameLoginMobile(name);
     });
 </script>

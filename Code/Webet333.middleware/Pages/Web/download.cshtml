@@ -283,6 +283,7 @@
         AllAnnouncementsCallAPI();
         CallDownloadLinkAPI();
         SetUsernamePassword();
+        OpenTabOnHashChange();
     });
 
     setTimeout(function () {
@@ -292,6 +293,25 @@
     setInterval(function () {
         if (document.getElementById("Pussy888IOS").src == "") CallDownloadLinkAPI();
     }, 1000)
+
+    window.onhashchange = OpenTabOnHashChange;
+
+    function OpenTabOnHashChange() {
+        if (window.location.hash) {
+            var hash = window.location.hash.substring(1);
+            debugger
+            if (hash == '918Download') 
+                document.getElementById("defaultOpen").click();
+            if (hash == 'JokerDownload') 
+                document.getElementById("JokerDownloadOpen").click();
+            if (hash == 'MegaDownload') 
+                document.getElementById("MegaDownloadOpen").click();
+            if (hash == 'Pussy888Download')
+                document.getElementById("PussyDownloadOpen").click();
+        }
+        else
+            document.getElementById("defaultOpen").click();
+    }
 
     function openCity(evt, cityName, linknum) {
         var i, tabcontent, tablinks;

@@ -552,17 +552,13 @@ function loadingPlaytechJS() {
 }
 
 async function loginPlaytech() {
-    var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
-    var usernamePrifix = globalParameters.data.playtechGamePrefix
-    var username = (usernamePrifix + res.data.username).toUpperCase();
-
-    function launchMobileClient() {
-        //window.location.href = '../../lobbyMobile?username=' + username;
-        window.open('../../lobbyMobile?username=' + username, '_blank');
+    var SlotGame = localStorage.getItem('slotGame');
+    if (SlotGame === "true") {
+        window.open("../mobile?p=slot", "_blank")
     }
-
-    launchMobileClient();
+    else {
+        OpenPlaytechGamePage('7bal')
+    }
 }
 //#endregion For Playtech game login
 
@@ -1035,11 +1031,11 @@ async function GameLoginMobile(gamename) {
                     }
                     var res = await PostMethod(apiEndPoints.pragmaticRegister, userRegisterModel);
                     if (res.data.error == "0") {
-                        window.open("../mobile/PragmaticGame", "_blank")
+                        window.open("../mobile?p=slot", "_blank")
                     }
                 }
                 else {
-                    window.open("../mobile/PragmaticGame", "_blank")
+                    window.open("../mobile?p=slot", "_blank")
                 }
                 break;
             case 'YeeBet':
@@ -1069,4 +1065,112 @@ async function GameLoginMobile(gamename) {
         alert(ChangeErroMessage("please_loign_error"));
     }
     LoaderHide();
+}
+
+var slotPageNumber = 0
+async function PlaytechSlotsGameList(PageNumber = null, IsAppend = true) {
+    var model = {
+        WalletName: "PlayTech Wallet",
+        pageNo: PageNumber == null ? slotPageNumber : PageNumber,
+        pageSize: 20,
+        Name: $("#playtechSearch").val() == "" ? null : $("#playtechSearch").val()
+    };
+
+    var list = await PostMethod(apiEndPoints.slotsGameList, model)
+    gameList = list.data.result;
+    var html = "";
+    for (i = 0; i < gameList.length; i++) {
+        html += '<li  onclick="OpenPlaytechGamePage(\'' + gameList[i].GameCode + '\')"><figure><a ><img src="' + gameList[i].ImagePath2 + '" alt=""></a></figure><p><a>' + gameList[i].GameName + '</a></p></li >';
+    }
+    if (IsAppend)
+        $("#playtech-all-slot").append(html);
+    else
+        SetAllValueInElement("playtech-all-slot", html)
+
+}
+
+function OpenPragmaticGamePage(code) {
+    window.open("../mobile/Game?gamename=Pragmatic&gamecode=" + code, "_blank")
+}
+
+function OpenPlaytechGamePage(code) {
+    window.open("../mobile/Game?gamename=Playtech&gamecode=" + code, "_blank")
+}
+
+async function PragmaticSlotsGameList(PageNumber = null, IsAppend = true) {
+    var model = {
+        WalletName: "Pragmatic Wallet",
+        pageNo: PageNumber == null ? slotPageNumber : PageNumber,
+        pageSize: 20,
+        Name: $("#pragmaticSearch").val() == "" ? null : $("#pragmaticSearch").val()
+    };
+    var list = await PostMethod(apiEndPoints.slotsGameList, model)
+    gameList = list.data.result;
+    var html = "";
+    for (i = 0; i < gameList.length; i++) {
+        html += '<li onclick="OpenPragmaticGamePage(\'' + gameList[i].GameCode + '\')"><figure><a><img src="' + gameList[i].ImagePath1 + '" alt=""></a></figure><p><a >' + gameList[i].GameName + '</a></p></li >';
+    }
+    if (IsAppend)
+        $("#pragmatic-all-slot").append(html);
+    else
+        SetAllValueInElement("pragmatic-all-slot", html)
+}
+
+function openPragmaticGame(GameID) {
+    $(".loadingImage").fadeIn("slow");
+    let model = {
+        gameId: GameID,
+        isMobile: true,
+    }
+    $.ajax({
+        url: baseUrl + apiEndPoints.pragmaticLogin,
+        type: "POST",
+        data: JSON.stringify(model),
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('currentUser'),
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Access-Control-Max-Age': 300,
+            'Accept-Language': localStorage.getItem('language')
+        },
+        async: false,
+        success: function (data) {
+            $(".loadingImage").fadeOut("slow");
+            window.location.href = data.data.gameURL;
+        }
+    });
+}
+
+async function openPlaytechGame(game) {
+
+    var languageCode = (localStorage.getItem('language') === "zh-Hans" ? "ZH-CN" : "EN")
+    var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
+    let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
+    var usernamePrifix = globalParameters.data.playtechGamePrefix
+    var username = (usernamePrifix + res.data.username.replace("#", "")).toUpperCase();
+    var password = dec(localStorage.getItem('currentUserData'));
+    var mobiledomain = "ld176988.com";
+    var systemidvar = "424";
+
+    async function login() {
+        iapiSetCallout('Login', calloutLogin);
+        iapiSetClientPlatform("mobile&deliveryPlatform=HTML5");
+        var realMode = 1;
+        iapiLogin(username, password, realMode, languageCode);
+    }
+
+    function launchMobileClient(temptoken) {
+        var clientUrl = 'http://hub.' + mobiledomain + '/igaming/' + '?gameId=' + game + '&real=1' + '&username=' + username + '&lang=' + languageCode + '&tempToken=' + temptoken + '&lobby=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'lobby.html' + '&support=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'support.html' + '&logout=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'logout.html' + '&deposit=' + location.href.substring(0, location.href.lastIndexOf('/') + 1) + 'deposit.html';
+        document.location = clientUrl;
+    }
+
+    await login(1);
+
+    function calloutLogin(response) {
+        if (response.errorCode) {
+            alert("Error message: " + response.errorText + " Error code: " + response.errorCode);
+        } else {
+            launchMobileClient(response.rootSessionToken.sessionToken);
+        }
+    }
 }

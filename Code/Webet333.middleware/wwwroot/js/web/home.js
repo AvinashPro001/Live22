@@ -388,7 +388,8 @@ function SetYoutubeVideo() {
 }
 
 function ChangeLanguageText() {
-
+    
+    $("#" + GetLocalStorage("language")).addClass("text-theam-color");
     $.ajax({
         url: '../../resources/lang.' + GetLocalStorage('language') + '.json',
         dataType: 'json',
