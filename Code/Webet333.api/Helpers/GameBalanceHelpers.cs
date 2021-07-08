@@ -531,6 +531,35 @@ namespace Webet333.api.Helpers
             return balance;
         }
 
+        internal async Task<SBOGetPlayerBalanceResponse> CallSBOGameBalanceAPIForRestore(string Username)
+        {
+            SBOGetPlayerBalanceRequest model = new SBOGetPlayerBalanceRequest
+            {
+                CompanyKey = GameConst.SBO.CompanyKey,
+                ServerId = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
+                Username = Username
+            };
+
+            var URL = $"{GameConst.SBO.URL}{GameConst.SBO.EndPoint.GetPlayerBalance}";
+
+            SBOGetPlayerBalanceResponse DeserializeAPIResult = null;
+
+            try
+            {
+                var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
+                var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
+
+                DeserializeAPIResult = JsonConvert.DeserializeObject<SBOGetPlayerBalanceResponse>(APIResult);
+            }
+            catch (Exception ex)
+            {
+                DeserializeAPIResult = null;
+            }
+
+            return DeserializeAPIResult;
+        }
+
         #endregion Call API of SBO Game
 
         #region Call API of GamePlay Game
