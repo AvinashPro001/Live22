@@ -232,7 +232,8 @@ export class CommonService {
         PleaseEnterMinBet: 'Please enter min bet value.',
         PleaseEnterMaxBetRatio: 'Please Enter Valid MaxBetRatio.',
         PleaseEnterSelectGroupType: 'Please Enter Group Type.',
-        PleaseSelectMinimumOneLeague: 'Please Select Minimum One League.'
+        PleaseSelectMinimumOneLeague: 'Please Select Minimum One League.',
+        PleaseSelectUserForResendingOTP: 'Please select user for resending OTP.'
     };
 
     //#endregion Error List

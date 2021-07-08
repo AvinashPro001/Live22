@@ -345,7 +345,9 @@ export const customer = {
     sboGetLeague: environment.apiUrl + 'sbo/getLeague',
     sboSetLeague: environment.apiUrl + 'sbo/set/league',
     getLeagueBetSetting: environment.apiUrl + 'sbo/get/league-bet-setting',
-    sboGetBlankLeague: environment.apiUrl + 'sbo/blank-getLeague'
+    sboGetBlankLeague: environment.apiUrl + 'sbo/blank-getLeague',
+
+    resendOTP: environment.apiUrl + 'account/send/otp'
 }
 
 export const playtech = {
