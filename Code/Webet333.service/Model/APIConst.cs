@@ -29,5 +29,7 @@
         public const string registerYeeBet = "yeebet/register";
 
         public const string RegisterSBO = "sbo/register/player";
+
+        public const string RegisterGamePlay = "gameplay/register";
     }
 }
