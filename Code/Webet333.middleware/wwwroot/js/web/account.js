@@ -309,6 +309,8 @@ async function DoRegister() {
 
     if (mobile.length < 10) return ShowError(ChangeErroMessage("mobile_length_error"));
 
+    if (mobile.length > 11) return ShowError(ChangeErroMessage("mobile_length_error"));
+
     if (username === "") return ShowError(ChangeErroMessage("username_required_error"));
 
     if (username.length < 7) return ShowError(ChangeErroMessage("username_length_error"));
@@ -386,6 +388,11 @@ async function UpdateMobileNumber() {
     };
 
     if (model.mobile.length < 10) {
+        $('#mobilenumber_update').modal('hide');
+        return ShowError(ChangeErroMessage("mobile_length_error"));
+    }
+
+    if (model.mobile.length > 11) {
         $('#mobilenumber_update').modal('hide');
         return ShowError(ChangeErroMessage("mobile_length_error"));
     }

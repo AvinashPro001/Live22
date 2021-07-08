@@ -1,7 +1,7 @@
 {
   "mobile_no_required_error": "Mobile Number is required.",
   "sms_error": "SMS not send !! Please Contact to Administration.",
-  "mobile_length_error": "Please enter Mobile number Minimum 10 digits.",
+  "mobile_length_error": "Please enter Mobile number Minimum 10 digits and Maximum 11 digits",
   "pass_length_error": "Password length Minimum 6 digits.",
   "username_required_error": "Username Filed is required.",
   "username_length_error": "Username Length too short.",

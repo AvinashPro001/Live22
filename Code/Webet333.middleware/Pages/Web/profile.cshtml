@@ -192,7 +192,7 @@
                                                         <p class="big no-mar lang blk-text" key="deposit_amount">Amount:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount">
+                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount" min="0" oninput="validity.valid||(value='');">
 
                                                         <div class="min-max-limit">
                                                             <ul class="d-flex">
@@ -294,7 +294,7 @@
                                                             <p class="big no-mar lang blk-text">Amount:</p>
                                                         </label>
                                                         <label class="fright card-number mendatory">
-                                                            <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount_online">
+                                                            <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount_online" min="0" oninput="validity.valid||(value='');">
 
                                                             <div class="min-max-limit">
                                                                 <ul class="d-flex">
@@ -381,7 +381,7 @@
                                                         <p class="big no-mar lang" key="deposit_amount">Amount:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30,000.00" id="txt_withdraw_amount">
+                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30,000.00" id="txt_withdraw_amount"  min="0" oninput="validity.valid||(value='');">
                                                     </label>
                                                 </li>
                                                 <li class="mar-btm-fifteen">
@@ -481,7 +481,7 @@
                                                         <p class="big no-mar lang" key="deposit_amount">Amount:</p>
                                                     </label>
                                                     <label class="fleft minimum-ammount card-number mendatory">
-                                                        <input id="txt_transfer_amount" type="number" class="reg-form" placeholder="Max Limit: From Wallet">
+                                                        <input id="txt_transfer_amount" type="number" class="reg-form" placeholder="Max Limit: From Wallet"  min="0" oninput="validity.valid||(value='');">
                                                         <span>Add Minimum 1 MYR</span>
                                                     </label>
                                                     <label class="fright mar-btm-fifteen transfer-max hidden-xs">
@@ -907,22 +907,22 @@
                                     <div class="history-tabs">
                                         <ul class="nav nav-tabs" id="history_tabs">
                                             <li onclick="SetHistorySectionName('BettingSummery')">
-                                                <a data-toggle="tab" href="#Betting_Summary"><span>Betting Summary</span></a>
+                                                <a class="hand-curson" data-toggle="tab" href="#Betting_Summary"><span>Betting Summary</span></a>
                                             </li>
                                             <li class="active" onclick="SetHistorySectionName('Transfer')">
-                                                <a data-toggle="tab" href="#Transfer_Summary"><span key="transfer_title" class="lang">Transfer</span></a>
+                                                <a class="hand-curson" data-toggle="tab" href="#Transfer_Summary"><span key="transfer_title" class="lang">Transfer</span></a>
                                             </li>
                                             <li onclick="SetHistorySectionName('WithdrawDeposit')">
-                                                <a data-toggle="tab" href="#Withdraw_Deposit_Summary"><span class="lang" key="">Withdraw / Deposit</span></a>
+                                                <a class="hand-curson" data-toggle="tab" href="#Withdraw_Deposit_Summary"><span class="lang" key="">Withdraw / Deposit</span></a>
                                             </li>
                                             <li onclick="SetHistorySectionName('Promotion')">
-                                                <a data-toggle="tab" href="#Promotion_Summary"><span key="withdrawal_title" class="lang">Promotion Apply</span></a>
+                                                <a class="hand-curson" data-toggle="tab" href="#Promotion_Summary"><span key="withdrawal_title" class="lang">Promotion Apply</span></a>
                                             </li>
                                             <li onclick="SetHistorySectionName('Rebate')">
-                                                <a data-toggle="tab" href="#Rebate_cash_Summary"><span key="rebate" class="lang">Rebate / Cashback </span></a>
+                                                <a class="hand-curson" data-toggle="tab" href="#Rebate_cash_Summary"><span key="rebate" class="lang">Rebate / Cashback </span></a>
                                             </li>
                                             <li onclick="SetHistorySectionName('Reward')">
-                                                <a data-toggle="tab" href="#Rewards_Summary"><span key="menu_promotion" class="lang">Rewards</span></a>
+                                                <a class="hand-curson" data-toggle="tab" href="#Rewards_Summary"><span key="menu_promotion" class="lang">Rewards</span></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -938,8 +938,8 @@
 
                                 <div class="col-sm-9 pl0">
                                     <div class="history-tabs">
-                                        <ul class="nav nav-tabs" id="history_tabs">
-                                            <li class="active col-sm-3" onclick="GetTodayDate();">
+                                        <ul class="nav nav-tabs remove-active-class" id="history_tabs">
+                                            <li class="active col-sm-3" onclick="GetTodayDate();" id="today-filter">
                                                 <a data-toggle="tab" class="hand-curson"><span>Today</span></a>
                                             </li>
                                             <li class="col-sm-3" onclick="Get3DayDate();">
@@ -1082,8 +1082,8 @@
                                                         <th class="white-text text-center">Turnover</th>
                                                         <th class="white-text text-center">Rolling</th>
                                                         <th class="white-text text-center">Bet</th>
-                                                        <th class="white-text text-center">WinLose</th>
-                                                        <th class="white-text text-center">CommAmount</th>
+                                                        <th class="white-text text-center">Win Lose</th>
+                                                        <th class="white-text text-center">Comm Amount</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

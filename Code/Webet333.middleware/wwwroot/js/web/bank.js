@@ -124,7 +124,7 @@ function SetAdminBankPage() {
     }
 }
 
-function SetDepositPageBank() {
+function SetDepositPageBank()    {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
     if (data != null) {
         if (data.AdminBankPageData !== null && data.AdminBankPageData !== undefined) {
@@ -132,11 +132,11 @@ function SetDepositPageBank() {
             var html = "";
             for (i = 0; i < bankdata.length; i++) {
                 if (i == 0) {
-                    html += '<li class="active tablinks"><a class="thm-txt" href="#" data-toggle="tab"><figure onclick="SetBankDetails(\'' + bankdata[i].accountName + '\',\'' + bankdata[i].accountNo + '\',\'' + bankdata[i].id + '\')"><img style="object-position:center !important" class="tab-bankicon" src="' + bankdata[i].bankIconLogo + '" alt=""></figure><p>' + bankdata[i].bankName + '</p></a></li >';
+                    html += '<li class="active tablinks"><a onclick="SetBankDetails(\'' + bankdata[i].accountName + '\',\'' + bankdata[i].accountNo + '\',\'' + bankdata[i].id + '\')" class="thm-txt" href="#" data-toggle="tab"><figure ><img style="object-position:center !important" class="tab-bankicon" src="' + bankdata[i].bankIconLogo + '" alt=""></figure><p>' + bankdata[i].bankName + '</p></a></li >';
                     SetBankDetails(bankdata[i].accountName, bankdata[i].accountNo, bankdata[i].id);
                 }
                 else
-                    html += '<li class=" tablinks"><a class="thm-txt" href="#" data-toggle="tab"><figure onclick="SetBankDetails(\'' + bankdata[i].accountName + '\',\'' + bankdata[i].accountNo + '\',\'' + bankdata[i].id + '\')"><img style="object-position:center !important" class="tab-bankicon" src="' + bankdata[i].bankIconLogo + '" alt=""></figure><p>' + bankdata[i].bankName + '</p></a></li >';
+                    html += '<li class=" tablinks"><a onclick="SetBankDetails(\'' + bankdata[i].accountName + '\',\'' + bankdata[i].accountNo + '\',\'' + bankdata[i].id + '\')" class="thm-txt" href="#" data-toggle="tab"><figure ><img style="object-position:center !important" class="tab-bankicon" src="' + bankdata[i].bankIconLogo + '" alt=""></figure><p>' + bankdata[i].bankName + '</p></a></li >';
             }
             SetAllValueInElement("Depsoit_bank_list", html);
         }
@@ -490,7 +490,7 @@ async function Withdraw() {
     var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
 
     if (amount < 10 || amount > Number(profile.withdrawLimit))
-        return ShowError(ChangeErroMessage("min_max_amount_error_parameter"));
+        return ShowError(ChangeErroMessage("min_max_amount_error_parameter", profile.withdrawLimit));
 
     if (WithdrawBankId === "" || WithdrawBankId === null || WithdrawBankId === undefined)
         return ShowError(ChangeErroMessage("bnk_name_required_error"));
@@ -579,6 +579,8 @@ function SetHistorySectionName(name) {
     fromDate = null;
     toDate = null;
     pageNumber = 0;
+    $(".remove-active-class>li.active").removeClass("active");
+    $("#today-filter").addClass("active");
     GetTodayDate();
 }
 
@@ -713,13 +715,15 @@ function GetInMonthDate() {
 }
 
 function GetDateRange() {
+    
     pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");
     if (fdate.length == 1 || tdate.length == 1)
         return ShowError(ChangeErroMessage("error_select_both_date"))
+    $(".remove-active-class>li.active").removeClass("active");
     fromDate = fdate[2] + "-" + fdate[0] + "-" + fdate[1] + " 00:00:00";
-    toDate = tdate[2] + "-" + tdate[0] + "-" + tdate[1] + " 00:00:00";
+    toDate = tdate[2] + "-" + tdate[0] + "-" + tdate[1] + " 23:59:59";
     CallFunctionAccordingToTab();
 }
 

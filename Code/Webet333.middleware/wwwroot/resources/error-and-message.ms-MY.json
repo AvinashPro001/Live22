@@ -1,7 +1,7 @@
 {
   "mobile_no_required_error": "Nombor Telefon diperlukan",
   "sms_error": "SMS tidak hantar !! Sila hubungi Live Chat",
-  "mobile_length_error": "Sila masukkan nombor telefon dengan 10 digit minimum",
+  "mobile_length_error": "Sila masukkan nombor mudah alih minimum 10 digit dan maksimum 11 digit.",
   "pass_length_error": "Panjang kata laluan Minimum 6 digit.",
   "username_required_error": "Nama pengguna diperlukan",
   "username_length_error": "Name pengguna terlalu pendek",
