@@ -2057,6 +2057,17 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
+                        #region Call SBO get balance API for adjust amount.
+
+                        var temp = await new GameBalanceHelpers().CallSBOGameBalanceAPIForRestore(SBOUsername);
+                        if (temp != null &&
+                            temp.Error.Msg == "No Error")
+                        {
+                            request.SBOWallet = temp.Balance - temp.Outstanding;
+                        }
+
+                        #endregion Call SBO get balance API for adjust amount.
+
                         var result = await SBOGameHelpers.CallWithdrawAPI(SBOUsername, Math.Abs(request.SBOWallet));
 
                         mainBalance += result.Error.Id == 0 ? request.SBOWallet : 0;
