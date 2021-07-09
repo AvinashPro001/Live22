@@ -1,6 +1,6 @@
 ﻿//var baseUrl = "http://api.webet333.com/api/v1/";
-var baseUrl = "http://uatapi.webet333.com/api/v1/";
-//var baseUrl = "http://localhost:8091/api/v1/";
+//var baseUrl = "http://uatapi.webet333.com/api/v1/";
+var baseUrl = "http://localhost:8091/api/v1/";
 
 var apiEndPoints = {
     login: "account/login",
@@ -148,5 +148,9 @@ var apiEndPoints = {
 
     GetGameSupport: "Game/User/GameSupport",
 
-    UserVipDetails: "viplevel/user/details"
+    UserVipDetails: "viplevel/user/details",
+
+    gamePlayRegister: "gamePlay/register",
+    gamePlayLogin: "gamePlay/login",
+    gamePlayList: 'gameplay/get/slot-gamelist'
 };
