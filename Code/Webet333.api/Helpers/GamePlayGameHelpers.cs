@@ -241,10 +241,7 @@ namespace Webet333.api.Helpers
 
             if (GameList.Games.Any())
             {
-                foreach (var data in GameList.Games)
-                {
-                    data.ImageURL = string.Format(GamePlayConst.ImageURLWithLanguage, GamePlayConst.ProductName, temp, data.TcgGameCode);
-                }
+                GameList.Games.ForEach(x => x.ImageURL = string.Format(GamePlayConst.ImageURLWithLanguage, GamePlayConst.ProductName, temp, x.TcgGameCode));
             }
 
             return GameList;
