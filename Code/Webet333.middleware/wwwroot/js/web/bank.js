@@ -258,11 +258,18 @@ async function UsersBankDetails() {
 
 function SetProfilePageBanks() {
     if (UserBank != undefined) {
-        html = "";
-        for (i = 0; i < UserBank.length; i++) {
-            html += '<div class="bank_details1"><div class="bank_details1_icon_box"><img src="' + UserBank[i].bankLogo + '" class="bank_details_icon"></div><div class="bank_details1-text"><h1>' + UserBank[i].accountNo + ' <span class="tickgray"><img src="/images/tickgray.png"></span></h1><p><a href="#">' + UserBank[i].accountName + '</a></p></div></div>';
+        if (UserBank.length > 0) {
+            html = "";
+            for (i = 0; i < UserBank.length; i++) {
+                html += '<div class="bank_details1"><div class="bank_details1_icon_box"><img src="' + UserBank[i].bankLogo + '" class="bank_details_icon"></div><div class="bank_details1-text"><h1>' + UserBank[i].accountNo + ' <span class="tickgray"><img src="/images/tickgray.png"></span></h1><p><a href="#">' + UserBank[i].accountName + '</a></p></div></div>';
+            }
+            SetAllValueInElement("users_bank_details", html);
         }
-        SetAllValueInElement("users_bank_details", html);
+        else {
+            var html = '<div class="bank_details1"><div class="bank_details1_icon_box"><p class="big bank_details_icon">No Details</p></div></div>'
+            SetAllValueInElement("users_bank_details", html);
+        }
+
     }
     else {
         setTimeout(function () {
@@ -466,7 +473,9 @@ async function DepositAfterPromotionCheck() {
         if (res.status == 200) {
             LoaderHide();
             window.open("../Web/payment?url=" + res.response.data.redirect_to)
-            //window.open("../Web/payment");
+        }
+        else {
+            ShowError(res.response.message)
         }
     }
     else {
@@ -476,6 +485,9 @@ async function DepositAfterPromotionCheck() {
             LoadAllBalance()
             ResetTransactionField(1);
             SetUserDepositPromotion();
+        }
+        else {
+            ShowError(res.response.message)
         }
     }
     LoaderHide();

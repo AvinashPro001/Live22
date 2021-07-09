@@ -314,6 +314,7 @@ function ConvertBalanceIntoCommasValue(amount) {
 
 
 async function GetDailyTurnover() {
+    $("#refresh-turnover").addClass("rotate");
     let model = {}
     var res = await PostMethod(accountEndPoints.userTotalTurnover, model)
     if (res.status == 200) {
@@ -335,6 +336,7 @@ async function GetDailyTurnover() {
         SetAllValueInElement("yeebet_turnover", FormatBalance(res.response.data.response.yeeBetTurover))
 
     }
+    $("#refresh-turnover").removeClass("rotate");
 }
 
 //#region All Wallet Balance

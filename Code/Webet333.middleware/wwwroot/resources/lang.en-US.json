@@ -147,5 +147,8 @@
   "instruction_7B": ". Thank you.",
   "livechat": ". 24/7 LIVECHAT",
   "from": "From :",
-  "to": "To :"
+  "to": "To :",
+  "verified_otp": "Verify OTP",
+  "otp_verification_text": "OTP Verification",
+  "send_otp": "Resend OTP"
 }

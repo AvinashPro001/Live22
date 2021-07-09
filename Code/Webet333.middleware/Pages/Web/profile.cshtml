@@ -192,7 +192,7 @@
                                                         <p class="big no-mar lang blk-text" key="deposit_amount">Amount:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount" min="0" oninput="validity.valid||(value='');">
+                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount" min="0" oninput="validity.valid||(value='');" step=".01">
 
                                                         <div class="min-max-limit">
                                                             <ul class="d-flex">
@@ -294,7 +294,7 @@
                                                             <p class="big no-mar lang blk-text">Amount:</p>
                                                         </label>
                                                         <label class="fright card-number mendatory">
-                                                            <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount_online" min="0" oninput="validity.valid||(value='');">
+                                                            <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount_online" min="0" oninput="validity.valid||(value='');" step=".01">
 
                                                             <div class="min-max-limit">
                                                                 <ul class="d-flex">
@@ -381,7 +381,7 @@
                                                         <p class="big no-mar lang" key="deposit_amount">Amount:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30,000.00" id="txt_withdraw_amount"  min="0" oninput="validity.valid||(value='');">
+                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30,000.00" id="txt_withdraw_amount"  min="0" oninput="validity.valid||(value='');"  step=".01">
                                                     </label>
                                                 </li>
                                                 <li class="mar-btm-fifteen">
@@ -481,7 +481,7 @@
                                                         <p class="big no-mar lang" key="deposit_amount">Amount:</p>
                                                     </label>
                                                     <label class="fleft minimum-ammount card-number mendatory">
-                                                        <input id="txt_transfer_amount" type="number" class="reg-form" placeholder="Max Limit: From Wallet"  min="0" oninput="validity.valid||(value='');">
+                                                        <input id="txt_transfer_amount" type="number" class="reg-form" placeholder="Max Limit: From Wallet"  min="0" oninput="validity.valid||(value='');" step=".01">
                                                         <span>Add Minimum 1 MYR</span>
                                                     </label>
                                                     <label class="fright mar-btm-fifteen transfer-max hidden-xs">
@@ -508,7 +508,7 @@
                                         <ul class="list-style d-flex">
                                             <li>Total Daily Turnover</li>
                                             <li><label class="marginb-none" id="total_turnover">0.00</label></li>
-                                            <li><span class="fa fa-refresh hand-curson" onclick="GetDailyTurnover();"></span></li>
+                                            <li><span class="fa fa-refresh hand-curson" onclick="GetDailyTurnover();" id="refresh-turnover"></span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -967,7 +967,7 @@
                                         <div class="col-sm-4 pl0">
                                             <div class="controls">
                                                 <div class="input-append">
-                                                    <input id="datepicker1" class="input-small form-control" type="text" placeholder="03/24/2021" />
+                                                    <input id="datepicker1" class="input-small form-control" type="text" placeholder="03/24/2021" onkeydown="return false;" />
                                                     <button id="datepicker1btn" class="btn icondate" type="button"><i class="fa fa-calendar"></i></button>
                                                 </div>
                                             </div>
@@ -976,7 +976,7 @@
                                         <div class="col-sm-4 pl0">
                                             <div class="controls">
                                                 <div class="input-append">
-                                                    <input id="datepicker2" class="input-small form-control" type="text" placeholder="03/31/2021" />
+                                                    <input id="datepicker2" class="input-small form-control" type="text" placeholder="03/31/2021" onkeydown="return false;"/>
                                                     <button id="datepicker1btn2" class="btn icondate" type="button"><i class="fa fa-calendar"></i></button>
                                                 </div>
                                             </div>
@@ -1000,7 +1000,7 @@
                                                         <th class="white-text text-center">BetCount</th>
                                                         <th class="white-text text-center">BetAmount</th>
                                                         <th class="white-text text-center">VaildBet Amount</th>
-                                                        <th class="white-text text-center">TotalRebate</th>
+                                                        <th class="white-text text-center">Total Rebate</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -1194,7 +1194,8 @@
                                                     <p class="big no-mar lang" key="profile_mobile">Mobile :</p>
                                                 </label>
                                                 <label class="fright tel-icon">
-                                                    <input type="number" class="reg-form" placeholder="60167896532" id="mobile_number">
+                                                    <input type="number" class="reg-form" placeholder="60167896532" id="mobile_number" onkeyup="MobileValidation('mobile_number','forgotPassword-error')">
+                                                    <label style="color:#ff0000;font-weight:bold" id="forgotPassword-error"></label>
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">
@@ -1241,7 +1242,9 @@
                                                     <p class="big no-mar lang" key="profile_confirm_password">Confirm Password :</p>
                                                 </label>
                                                 <label class="fright lock">
-                                                    <input type="password" class="reg-form" placeholder="Confirm Password" id="txt_confirmPassword">
+                                                    <input type="password" class="reg-form" placeholder="Confirm Password" id="txt_confirmPassword" onkeyup="CheckPasswordMatch(true)">
+                                                    <label style="color:#ff0000;font-weight:bold" class="registrationFormAlert" id="divCheckPasswordMatch"> </label>
+
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">

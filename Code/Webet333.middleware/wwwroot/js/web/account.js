@@ -118,9 +118,17 @@ function CheckLoginOrNot() {
 
 //#region Check Password Match
 
-function CheckPasswordMatch() {
-    var password = $("#txt_password").val();
-    var confirmPassword = $("#txt_confirm_password").val();
+function CheckPasswordMatch(IsProfileTextBox = false) {
+    var password, confirmPassword;
+    if (IsProfileTextBox) {
+        password = $("#txt_newPassword").val();
+        confirmPassword = $("#txt_confirmPassword").val();
+    }
+    else {
+        password = $("#txt_password").val();
+        confirmPassword = $("#txt_confirm_password").val();
+    }
+
     if (password !== confirmPassword)
         $("#divCheckPasswordMatch").html(ChangeErroMessage("pass_not_match_error"));
     else
@@ -297,6 +305,8 @@ async function ChangePassword() {
 
 //#region "ASYNC" Register Function
 
+var CapchaChecked = false;
+
 async function DoRegister() {
 
     var name = $('#txt_name').val();
@@ -326,6 +336,10 @@ async function DoRegister() {
     if (username === password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
 
     if (password !== confirmPassword) return ShowError(ChangeErroMessage("pass_not_match_error"));
+
+    if (!$('#term_condition_checkbox').is(":checked")) return ShowError(ChangeErroMessage("accept_TC"));
+
+    if (!CapchaChecked) return ShowError(ChangeErroMessage("check_capcha"));
 
     var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     if (!regex.test(password)) return ShowError(ChangeErroMessage("pass_alpha_error"));
@@ -416,15 +430,28 @@ async function UpdateMobileNumber() {
 
 //#endregion
 
+function MobileValidation(TextFieldId,ErrorShowId) {
+    var mobile = $('#' + TextFieldId).val();
+    if (mobile.length < 10 || mobile.length > 11) {
+        $("#" + ErrorShowId).text(ChangeErroMessage("mobile_length_error"));
+    }
+    else {
+        $("#" + ErrorShowId).text("");
+    }
+}
+
 async function ForgotPassword() {
     var mobile = $('#forgot-password-number').val();
     if (mobile === null || mobile === undefined || mobile === "")
         return ShowError(ChangeErroMessage("mobile_no_required_error"));
 
+    if (mobile.length < 10 || mobile.length > 11) {
+        return ShowError(ChangeErroMessage("mobile_length_error"));
+
     let model = {
         mobileNumber: mobile
     };
-    $('#forgotPassword').modal('hide');
+    
     LoaderShow();
     var res = await PostMethod(accountEndPoints.getUserByMobile, model);
     if (res.status == 200) {
@@ -489,10 +516,14 @@ async function VerifiedOTP() {
     LoaderShow();
     try {
         var res = await PostMethod(accountEndPoints.VerifiedOTP, model);
-
-        if (res.response.data.errorCode == 0) {
-            await GetProfileAndSetInSessionStorage()
-            window.location.href = "/";
+        if (res.status == 200) {
+            if (res.response.data.errorCode == 0) {
+                await GetProfileAndSetInSessionStorage()
+                window.location.href = "/";
+            }
+        }
+        else {
+            ShowError(res.response.message);
         }
     }
     catch {

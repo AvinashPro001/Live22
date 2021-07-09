@@ -50,5 +50,7 @@
   "current_pass_not_match": "當前密碼不匹配。",
   "enter_full_name": "請輸入您的全名。",
 
-  "error_select_both_date": "请选择两个日期！"
+  "error_select_both_date": "请选择两个日期！",
+  "accept_TC": "请接受条款和条件！",
+  "check_capcha": "请检查验证码！"
 }

@@ -50,5 +50,7 @@
   "current_pass_not_match": "Kata Laluan Semasa tidak sepadan.",
   "enter_full_name": "Sila masukkan nama penuh anda.",
 
-  "error_select_both_date": "Sila Pilih Kedua-dua tarikh!"
+  "error_select_both_date": "Sila Pilih Kedua-dua tarikh!",
+  "accept_TC": "Sila Terima Terma & Syarat!",
+  "check_capcha": "Sila Periksa Captcha!"
 }

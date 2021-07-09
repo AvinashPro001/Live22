@@ -50,5 +50,7 @@
   "current_pass_not_match": "Current Password not matched.",
   "enter_full_name": "Please enter your full name.",
 
-  "error_select_both_date": "Please Select Both date !"
+  "error_select_both_date": "Please Select Both date !",
+  "accept_TC": "Please Accept Terms & Conditions !",
+  "check_capcha": "Please Check Captcha !"
 }

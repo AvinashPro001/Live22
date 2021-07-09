@@ -147,6 +147,8 @@
   "instruction_7B": "谢谢",
   "livechat": "24/7在线客服",
   "from": "从：",
-  "to": "向 ："
-
+  "to": "向 ：",
+  "verified_otp": "验证一次性密码",
+  "otp_verification_text": "一次性密码验证",
+  "send_otp": "重新发送动态密码"
 }

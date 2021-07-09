@@ -147,5 +147,8 @@
   "instruction_7B": "kami. Terima kasih.",
   "livechat": ". 24/7 LIVECHAT",
   "from": "Dari :",
-  "to": "Ke :"
+  "to": "Ke :",
+  "verified_otp": "Sahkan OTP",
+  "otp_verification_text": "Pengesahan OTP",
+  "send_otp": "Hantar semula OTP"
 }

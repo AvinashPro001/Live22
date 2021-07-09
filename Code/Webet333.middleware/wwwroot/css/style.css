@@ -260,7 +260,7 @@ ul.user-login {display: flex; }
 .login-item.social {margin: 0 10px 0 20px; } 
 .social a {color: #545c69; margin-right: 5px; font-size: 15px; }
 .social a:hover {color: #fff; }
-.login-form label:first-child {font-size: 11px; color: #5d6571; cursor: pointer; font-weight: 700; line-height: 24px; margin-bottom: 0px; }
+.login-form label:first-child {font-size: 11px; color: #5d6571;  font-weight: 700; line-height: 24px; margin-bottom: 0px; }
 .login-form label {font-weight: 400; font-size: 10px; }
 .login-form .btn-language {background: 0 0; border: 0; color: #fff; }
 .dropdown .dropdown-menu {left: auto; right: 0; } 
@@ -2095,3 +2095,14 @@ div.tabcontent_health .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 .text-capital{text-transform:uppercase}
 .text-theam-color{color:#eb8900 !important;}
 .text-language-link-color {color: #8f8f8f}
+.rotate {animation: rotation 1s infinite linear;}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}
