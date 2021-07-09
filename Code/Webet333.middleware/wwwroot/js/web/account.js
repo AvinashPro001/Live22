@@ -445,7 +445,7 @@ async function ForgotPassword() {
     if (mobile === null || mobile === undefined || mobile === "")
         return ShowError(ChangeErroMessage("mobile_no_required_error"));
 
-    if (mobile.length < 10 || mobile.length > 11) {
+    if (mobile.length < 10 || mobile.length > 11) 
         return ShowError(ChangeErroMessage("mobile_length_error"));
 
     let model = {
