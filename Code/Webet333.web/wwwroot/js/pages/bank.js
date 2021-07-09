@@ -1552,7 +1552,10 @@ async function SendOTP(number) {
     var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
     if (resUserData.data.mobilenoConfirmed == false) {
         LoaderShow();
-        var res = await GetMethodWithReturn(apiEndPoints.SendOTP);
+        let model = {
+            id: ''
+        };
+        var res = await PostMethodWithParameter(apiEndPoints.SendOTP, model);
         document.getElementById("txt_otp").value = "";
         ShowSuccess(ChangeErroMessage("otp_send_success"));
         LoaderHide();

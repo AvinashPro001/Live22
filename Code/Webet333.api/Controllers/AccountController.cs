@@ -719,14 +719,25 @@ namespace Webet333.api.Controllers
         #region Send OTP
 
         [Authorize]
-        [HttpGet(ActionsConst.Account.SendOtp)]
-        public async Task<IActionResult> SendOtp()
+        [HttpPost(ActionsConst.Account.SendOtp)]
+        public async Task<IActionResult> SendOtp([FromBody] GetByIdRequest request)
         {
             await ValidateUser();
+
             using (var account_help = new AccountHelpers(Connection))
             {
-                var response = await account_help.SendOtp(UserEntity.Id.ToString(), UserEntity.MobileNo);
-                if (response.ErrorCode != 0) return BadResponse();
+                if (string.IsNullOrWhiteSpace(request.Id))  // Called by user
+                {
+                    var response = await account_help.SendOtp(UserEntity.Id.ToString(), UserEntity.MobileNo);
+                    if (response.ErrorCode != 0) return BadResponse();
+                }
+                else // Called by Admin
+                {
+                    var result = await account_help.FindUser(userId: request.Id);
+                    var response = await account_help.SendOtp(result.Id.ToString(), result.MobileNo);
+                    if (response.ErrorCode != 0) return BadResponse();
+                }
+
                 return OkResponse();
             }
         }

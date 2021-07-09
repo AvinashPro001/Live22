@@ -422,14 +422,12 @@ namespace Webet333.api.Helpers
                 var medium = callGetLeagueAPIFootball.Result.Where(x => x.GroupType == "MEDIUM").ToList();
                 var small = callGetLeagueAPIFootball.Result.Where(x => x.GroupType == "SMALL").ToList();
                 var others = callGetLeagueAPIFootball.Result.Where(x => x.GroupType != "BIG" && x.GroupType != "MEDIUM" && x.GroupType != "SMALL").ToList();
-                //var nullGroupType = callGetLeagueAPIFootball.Result.Where(x => x.GroupType == null).ToList();
 
                 List<SBOGetLeagueResponseResult> tempResult = new List<SBOGetLeagueResponseResult>();
                 tempResult.AddRange(big);
                 tempResult.AddRange(medium);
                 tempResult.AddRange(small);
                 tempResult.AddRange(others);
-                //tempResult.AddRange(nullGroupType);
 
                 callGetLeagueAPIFootball.Result = tempResult;
 
@@ -655,17 +653,14 @@ namespace Webet333.api.Helpers
 
                 var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
 
-                // For testing only.
-                //Console.WriteLine(JsonConvert.SerializeObject(model));
-
                 var APIResult = await GameHelpers.CallThirdPartyApi(URL, stringContent);
 
                 var DeserializeAPIResult = JsonConvert.DeserializeObject<SBODefaultResponse>(APIResult);
 
-                // await SetLeagueBetSetting(data);
-
                 if (DeserializeAPIResult != null &&
-                    DeserializeAPIResult.Error.Id == 0)
+                    DeserializeAPIResult.Error != null &&
+                    //DeserializeAPIResult.Error.Id == 0 &&
+                    DeserializeAPIResult.Error.Msg == "No Error")
                 {
                     await SetLeagueBetSetting(data);
                 }
@@ -729,20 +724,20 @@ namespace Webet333.api.Helpers
             if (temp != null &&
                 temp.Result.Any())
             {
-                //var big = temp.Result.Where(x => x.GroupType == "BIG").ToList();
-                //var medium = temp.Result.Where(x => x.GroupType == "MEDIUM").ToList();
-                //var small = temp.Result.Where(x => x.GroupType == "SMALL").ToList();
-                //var others = temp.Result.Where(x => x.GroupType != "BIG" && x.GroupType != "MEDIUM" && x.GroupType != "SMALL").ToList();
+                var big = temp.Result.Where(x => x.GroupType == "BIG").ToList();
+                var medium = temp.Result.Where(x => x.GroupType == "MEDIUM").ToList();
+                var small = temp.Result.Where(x => x.GroupType == "SMALL").ToList();
+                var others = temp.Result.Where(x => x.GroupType != "BIG" && x.GroupType != "MEDIUM" && x.GroupType != "SMALL").ToList();
 
-                //List<SBOGetLeagueBetSettingResponseResult> tempResult = new List<SBOGetLeagueBetSettingResponseResult>();
-                //tempResult.AddRange(big);
-                //tempResult.AddRange(medium);
-                //tempResult.AddRange(small);
-                //tempResult.AddRange(others);
+                List<SBOGetLeagueBetSettingResponseResult> tempResult = new List<SBOGetLeagueBetSettingResponseResult>();
+                tempResult.AddRange(big);
+                tempResult.AddRange(medium);
+                tempResult.AddRange(small);
+                tempResult.AddRange(others);
 
-                //temp.Result = tempResult;
+                temp.Result = tempResult;
 
-                temp.Result = temp.Result.OrderBy(x => x.GroupType).ToList();   //  BIG > MEDIUM > SMALL
+                //temp.Result = temp.Result.OrderBy(x => x.GroupType).ToList();   //  BIG > MEDIUM > SMALL
             }
 
             return temp;

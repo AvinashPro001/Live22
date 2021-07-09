@@ -520,10 +520,11 @@ body {
                 color: #8e5502;
             }
 
+/* 
             .footer-widget ul li:last-child {
                 display: block;
             }
-
+    
             .footer-widget ul li:last-child,
             .live-chat {
                 position: relative;
@@ -533,17 +534,18 @@ body {
                 top: unset;
                 right: unset;
             }
-
-                .live-chat:after {
-                    content: '';
-                    transition: 0.5s;
-                    width: 22px;
-                    height: 28px;
-                    position: absolute;
-                    top: 12px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                }
+    
+            .live-chat:after {
+                content: '';
+                transition: 0.5s;
+                width: 22px;
+                height: 28px;
+                position: absolute;
+                top: 12px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+*/
 /* Deposite */
 .transfer-wallet-div {
     font-size: 12px;
