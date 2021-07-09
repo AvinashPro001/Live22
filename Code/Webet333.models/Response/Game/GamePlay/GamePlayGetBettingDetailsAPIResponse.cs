@@ -9,7 +9,7 @@ namespace Webet333.models.Response.Game.GamePlay
         public List<GamePlayGetBettingDetailsAPIResponseDetail> Details { get; set; }
 
         [JsonProperty("page_info")]
-        public PageInfo PageInfo { get; set; }
+        public GamePlayGameListResponsePageInfo PageInfo { get; set; }
     }
 
     public class GamePlayGetBettingDetailsAPIResponseDetail

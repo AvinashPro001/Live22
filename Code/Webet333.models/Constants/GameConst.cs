@@ -716,7 +716,7 @@
 
         public class GamePlay
         {
-            public const string URL = "http://www.connect6play.com/doBusiness.do";
+            public const string APIURL = "http://www.connect6play.com/doBusiness.do";
 
             public const string MerchantCode = "xpwebetmyr";
 
@@ -733,6 +733,18 @@
             public const string Prefix = "02g";
 
             public const string GameCode = "GPI001";
+
+            /*
+             * URL  =>  https://images.b332411.com:42666/TCG_GAME_ICONS/productname/gameid.png
+             * Example  =>  https://images.b332411.com:42666/TCG_GAME_ICONS/GPI/GPI200.png
+             */
+            public const string ImageURL = "https://images.b332411.com:42666/TCG_GAME_ICONS/{0}/{1}.png";
+
+            /*
+             * URL  =>  https://images.b332411.com:42666/TCG_GAME_ICONS/productname/languagecode/gameid.png
+             * Example  =>  https://images.b332411.com:42666/TCG_GAME_ICONS/GPI/EN/GPI200.png
+             */
+            public const string ImageURLWithLanguage = "https://images.b332411.com:42666/TCG_GAME_ICONS/{0}/{1}/{2}.png";
 
             public class GameType
             {
@@ -758,6 +770,8 @@
             public class LanguageCode
             {
                 public const string TraditionalChinese = "TW";
+
+                public const string SimplifiedChinese = "CN";
 
                 public const string English = "EN";
 

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -88,7 +89,7 @@ namespace Webet333.api.Helpers
                 $"params={HttpUtility.UrlEncode(DESEncrpt)}&" +
                 $"sign={HttpUtility.UrlEncode(sign)}";
 
-            var URL = $"{GamePlayConst.URL}";
+            var URL = $"{GamePlayConst.APIURL}";
 
             var APIResult = await HttpPostAsync(URL, data);
 
@@ -225,10 +226,31 @@ namespace Webet333.api.Helpers
 
             var DeserializeAPIResult = JsonConvert.DeserializeObject<GamePlayGameListResponse>(temp);
 
-            return DeserializeAPIResult;
+            var callGetGameInageAPI = CallGetGameInageAPI(DeserializeAPIResult, Language);
+
+            return callGetGameInageAPI;
         }
 
         #endregion Call Game List API 3rd Party API
+
+        #region Manage Game Image
+
+        private static GamePlayGameListResponse CallGetGameInageAPI(GamePlayGameListResponse GameList, string Language)
+        {
+            string temp = Language == GamePlayConst.LanguageCode.TraditionalChinese ? GamePlayConst.LanguageCode.SimplifiedChinese : GamePlayConst.LanguageCode.English;
+
+            if (GameList.Games.Any())
+            {
+                foreach (var data in GameList.Games)
+                {
+                    data.ImageURL = string.Format(GamePlayConst.ImageURLWithLanguage, GamePlayConst.ProductName, temp, data.TcgGameCode);
+                }
+            }
+
+            return GameList;
+        }
+
+        #endregion Manage Game Image
 
         #region Call Transfer 3rd Party API
 

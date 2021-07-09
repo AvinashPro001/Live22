@@ -6,13 +6,13 @@ namespace Webet333.models.Response.Game.GamePlay
     public class GamePlayGameListResponse : GamePlayDefaultResponse
     {
         [JsonProperty("games")]
-        public List<Game> Games { get; set; }
+        public List<GamePlayGameListResponseGame> Games { get; set; }
 
         [JsonProperty("page_info")]
-        public PageInfo PageInfo { get; set; }
+        public GamePlayGameListResponsePageInfo PageInfo { get; set; }
     }
 
-    public class Game
+    public class GamePlayGameListResponseGame
     {
         [JsonProperty("displayStatus")]
         public long DisplayStatus { get; set; }
@@ -40,9 +40,12 @@ namespace Webet333.models.Response.Game.GamePlay
 
         [JsonProperty("trialSupport")]
         public bool TrialSupport { get; set; }
+
+        [JsonProperty("imageURL")]
+        public string ImageURL { get; set; }
     }
 
-    public class PageInfo
+    public class GamePlayGameListResponsePageInfo
     {
         [JsonProperty("totalPage")]
         public long TotalPage { get; set; }
