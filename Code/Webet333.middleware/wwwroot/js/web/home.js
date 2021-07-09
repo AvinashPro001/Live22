@@ -331,7 +331,6 @@ async function GetWalletList() {
     if (data.WalletData == null || data.WalletData == undefined) {
 
         let res = await GetMethod(settingEndPoints.walletList);
-
         if (res.status == 200) {
             SiteData.WalletData = res.response.data;
 
@@ -466,7 +465,7 @@ function CheckGameMaintenance() {
         if (data.WalletData !== null) {
             var isMaintenance = data.WalletData.filter(x => x.isMaintenance == true);
             var isNotMaintenance = data.WalletData.filter(x => x.isMaintenance == false);
-
+            debugger
             if (isMaintenance.length > 0) {
                 for (i = 0; i < isMaintenance.length; i++) {
                     var id = isMaintenance[i].walletType.replace(" ", "-").toLowerCase();

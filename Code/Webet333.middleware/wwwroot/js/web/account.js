@@ -639,7 +639,8 @@ async function regisrationGame() {
                 resSelectUser.Pussy888 === false ||
                 resSelectUser.AllBet === false ||
                 resSelectUser.WM === false ||
-                resSelectUser.Pragmatic === false
+                resSelectUser.Pragmatic === false ||
+                resSelectUser.SBO === false
             ) {
                 var res = await PostMethod(accountEndPoints.gameRegisterCheck, userModel);
                 resSelectUser = res.response.data;
@@ -794,6 +795,16 @@ async function regisrationGame() {
                 }
                 try {
                     await PostMethod(gameRegisterEndPoints.pragmaticRegister, model);
+                }
+                catch {
+                }
+            }
+
+            if (resSelectUser.SBO !== true) {
+                var model = {
+                }
+                try {
+                    await PostMethod(gameRegisterEndPoints.sboRegister, model);
                 }
                 catch {
                 }

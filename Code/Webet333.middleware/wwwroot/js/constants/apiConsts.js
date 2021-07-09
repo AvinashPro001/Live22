@@ -199,6 +199,7 @@ var gameBalanceEndPoints = {
     wmBalance: "gamebalance/wm",
     pragmaticBalance: "gamebalance/pragmatic",
     yeebetBalance: "gamebalance/yeebet",
+    sboBalance: "gamebalance/sbo",
 };
 
 var transactionEndPoints = {
@@ -232,6 +233,7 @@ var gameRegisterEndPoints = {
     WMRegister: "wm/register",
     pragmaticRegister: "pragmatic/register",
     dgRegister: "dg/register",
+    sboRegister: "sbo/register/player",
 }
 
 var gameLoginEndPoints = {
@@ -244,7 +246,8 @@ var gameLoginEndPoints = {
     pragmaticLogin: "pragmatic/login",
     dgLogin: "dg/login",
     m8Login: "m8/login",
-    yeebetLogin: "yeebet/login"
+    yeebetLogin: "yeebet/login",
+    sboLogin: "sbo/login"
 }
 
 var gameSettingEndPoints = {

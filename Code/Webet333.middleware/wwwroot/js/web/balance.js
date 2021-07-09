@@ -2,7 +2,7 @@
 var walletIds = [
     "joker_balance", "playtech_balance", "kiss918_balance", "ag_balance", "m8_balance", "mega888_balance", "maxbet_balance",
     "dg_balance", "sexy_baccarat_balance", "sa_balance", "pussy888_balance", "allbet_balance", "wm_balance", "pragmatic_balance",
-    "yeebet_balance"
+    "yeebet_balance", "sbo_balance"
 ];
 
 let UsersBalance = {
@@ -21,7 +21,8 @@ let UsersBalance = {
     AllBetBalance: null,
     M8Balance: null,
     MaxBetBalance: null,
-    YeeBetBalance: null
+    YeeBetBalance: null,
+    SboBalance: null
 }
 
 let GameUsernames = {
@@ -40,7 +41,8 @@ let GameUsernames = {
     AllBetUsername: null,
     M8Username: null,
     MaxBetUsername: null,
-    YeeBetUsername: null
+    YeeBetUsername: null,
+    SboUsername: null
 }
 
 var AGTrigger = false,
@@ -82,6 +84,7 @@ $(window).on('load', function () {
                 if (UsersBalance.M8Balance == null) M8Wallet(GameUsernames.M8Username);
                 if (UsersBalance.M8Balance == null) MaxBetWallet(GameUsernames.MaxBetUsername);
                 if (UsersBalance.YeeBetBalance == null) YeeBetWallet(GameUsernames.YeeBetUsername);
+                if (UsersBalance.SboBalance == null) SboWallet(GameUsernames.SboUsername);
 
 
             }, 1000);
@@ -107,6 +110,7 @@ function LoadAllBalance() {
     if (GameUsernames.M8Username != null) M8Wallet(GameUsernames.M8Username);
     if (GameUsernames.MaxBetUsername != null) MaxBetWallet(GameUsernames.MaxBetUsername);
     if (GameUsernames.YeeBetUsername != null) YeeBetWallet(GameUsernames.YeeBetUsername);
+    if (GameUsernames.SboUsername != null) SboWallet(GameUsernames.SboUsername);
 }
 
 async function LoadAllBalanceAsync() {
@@ -126,6 +130,7 @@ async function LoadAllBalanceAsync() {
     if (GameUsernames.M8Username != null) await M8Wallet(GameUsernames.M8Username, false);
     if (GameUsernames.MaxBetUsername != null) await MaxBetWallet(GameUsernames.MaxBetUsername, false);
     if (GameUsernames.YeeBetUsername != null) await YeeBetWallet(GameUsernames.YeeBetUsername, false);
+    if (GameUsernames.SboUsername != null) await SboWallet(GameUsernames.SboUsername);
 }
 
 async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
@@ -147,6 +152,7 @@ async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
         case "M8 Wallet": if (GameUsernames.M8Username != null) await M8Wallet(GameUsernames.M8Username); break;
         case "MaxBet Wallet": if (GameUsernames.MaxBetUsername != null) await MaxBetWallet(GameUsernames.MaxBetUsername); break;
         case "YeeBet Wallet": if (GameUsernames.YeeBetUsername != null) await YeeBetWallet(GameUsernames.YeeBetUsername); break;
+        case "SBO Wallet": if (GameUsernames.SboUsername != null) await SboWallet(GameUsernames.SboUsername); break;
     }
 }
 
@@ -169,6 +175,7 @@ async function ReturnBalanceBasedOnWalletName(WalletName) {
         case "M8 Wallet": balance = UsersBalance.Kiss918Balance; break;
         case "MaxBet Wallet": balance = UsersBalance.Kiss918Balance; break;
         case "YeeBet Wallet": balance = UsersBalance.YeeBetBalance; break;
+        case "SBO Wallet": balance = UsersBalance.SboBalance; break;
     }
 
     if (balance == "N/A")
@@ -208,6 +215,7 @@ async function SetUsername() {
     GameUsernames.M8Username = globalParameter.m8GamePrefix + userDetails.username;
     GameUsernames.MaxBetUsername = userDetails.vendorememberid;
     GameUsernames.YeeBetUsername = globalParameter.yeeBetGamePrefix + userDetails.userId;
+    GameUsernames.SboUsername = globalParameter.sboGamePrefix + userDetails.userId;
 
 }
 //#endregion 
@@ -256,6 +264,7 @@ function SetLoadingImageBaseOnWalletName(WalletName) {
         case "M8 Wallet": SetLoadingImagesInBalance("m8_balance"); SetFetchingWordInBalance("m8_balance"); break;
         case "MaxBet Wallet": SetLoadingImagesInBalance("maxbet_balance"); SetFetchingWordInBalance("maxbet_balance"); break;
         case "YeeBet Wallet": SetLoadingImagesInBalance("yeebet_balance"); SetFetchingWordInBalance("yeebet_balance"); break;
+        case "SBO Wallet": SetLoadingImagesInBalance("sbo_balance"); SetFetchingWordInBalance("sbo_balance"); break;
     }
 }
 
@@ -290,6 +299,7 @@ async function RestoreBalance() {
         WMwallet: CheckNAorNot(UsersBalance.WMBalance),
         pragmaticwallet: CheckNAorNot(UsersBalance.PragmaticBalance),
         YeeBetWallet: CheckNAorNot(UsersBalance.YeeBetBalance),
+        sbowallet: CheckNAorNot(UsersBalance.SboBalance),
         id: null
     }
     await PostMethod(transactionEndPoints.restore, restoreModel);
@@ -312,7 +322,6 @@ function ConvertBalanceIntoCommasValue(amount) {
     }
 }
 
-
 async function GetDailyTurnover() {
     $("#refresh-turnover").addClass("rotate");
     let model = {}
@@ -334,6 +343,7 @@ async function GetDailyTurnover() {
         SetAllValueInElement("wm_turnover", FormatBalance(res.response.data.response.wmTurover))
         SetAllValueInElement("pragmatic_turnover", FormatBalance(res.response.data.response.pragmaticTurover))
         SetAllValueInElement("yeebet_turnover", FormatBalance(res.response.data.response.yeeBetTurover))
+        SetAllValueInElement("sbo_turnover", FormatBalance(res.response.data.response.sboTurover))
 
     }
     $("#refresh-turnover").removeClass("rotate");
@@ -733,6 +743,30 @@ async function YeeBetWallet(Username, IsDivValueSet = true) {
         UsersBalance.YeeBetBalance = "N/A";
         if (IsDivValueSet)
             SetBalanceOnAllPlace("yeebet_balance", UsersBalance.YeeBetBalance);
+    }
+}
+
+async function SboWallet(Username, IsDivValueSet = true) {
+    let model = {
+        username: Username
+    };
+    try {
+        var res = await PostMethod(gameBalanceEndPoints.sboBalance, model);
+
+        if (res.status == 200) {
+            UsersBalance.SboBalance = ConvertBalanceIntoCommasValue(res.response.data.balance);
+        }
+        else {
+            UsersBalance.SboBalance = "N/A";
+        }
+        if (IsDivValueSet)
+            SetBalanceOnAllPlace("sbo_balance", UsersBalance.SboBalance);
+
+    }
+    catch (e) {
+        UsersBalance.SboBalance = "N/A";
+        if (IsDivValueSet)
+            SetBalanceOnAllPlace("sbo_balance", UsersBalance.SboBalance);
     }
 }
 

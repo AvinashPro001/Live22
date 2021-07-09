@@ -27,6 +27,7 @@ function CallGameLoginAPI(WalletName, IsSlots) {
         case "M8 Wallet": OpenM8Game(); break;
         case "MaxBet Wallet": OpenMaxbetGame(); break;
         case "YeeBet Wallet": OpenYeeBetGame(); break;
+        case "SBO Wallet": OpenSBOGame(); break;
     }
 }
 
@@ -348,6 +349,33 @@ async function OpenM8Game() {
         if (login.status == 200)
             if (login.response.data.errorcode == "0")
                 SetLocalStorage("gameURL", login.response.data.result);
+    }
+
+}
+
+async function OpenSBOGame() {
+    window.open("../Web/game");
+    let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+
+    if (resSelectUser.SBO !== true) {
+        let model = {
+        };
+        var resM8 = await PostMethod(gameRegisterEndPoints.sboRegister, model);
+        if (res.response.data.response.errcode == "0") {
+            let modellogin = { isMobile: false };
+            var login = await PostMethod(gameLoginEndPoints.m8Login, modellogin);
+            if (login.status == 200)
+                /*if (login.response.data.errorcode == "0")*/
+                SetLocalStorage("gameURL", login.response.message);
+
+        }
+    }
+    else {
+        let model= {  };
+        var login = await PostMethod(gameLoginEndPoints.sboLogin, model);
+        if (login.status == 200)
+            //if (login.response.data.errorcode == "0")
+            SetLocalStorage("gameURL", login.response.message);
     }
 
 }
