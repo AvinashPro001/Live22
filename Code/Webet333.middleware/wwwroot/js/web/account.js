@@ -59,11 +59,6 @@ $(document).ready(function () {
 //#region Logout Function
 
 function DoLogout() {
-    //localStorage.removeItem("currentUser");
-    //localStorage.removeItem("currentUserData");
-    //sessionStorage.removeItem("userDetails");
-    //sessionStorage.removeItem("GamePreFix");
-    //sessionStorage.removeItem("userRegisterDetails");
     var Data = GetSessionStorage("siteData");
     localStorage.clear();
     sessionStorage.clear();
@@ -200,7 +195,10 @@ function CheckMobileNumberIsVerifiedOnly() {
 async function GetProfileAndSetInSessionStorage() {
     if (GetLocalStorage('currentUser') !== null) {
         var res = await GetMethod(accountEndPoints.getProfile);
-        SetSessionStorage('userDetails', Encryption(JSON.stringify(res.response.data)));
+        if (res.status == 200)
+            SetSessionStorage('userDetails', Encryption(JSON.stringify(res.response.data)));
+        else
+            CheckTokenIsValid(res.status, res.response.message)
     }
 }
 
@@ -816,4 +814,11 @@ async function regisrationGame() {
     catch {
         localStorage.setItem('IsExecute', false);
     }
+}
+
+function CheckTokenIsValid(StausCode, StatusMessage) {
+    if (StausCode == 400)
+        if (StatusMessage == "Your access token is expired, please login again." || StatusMessage == "Token akses anda tamat tempoh, sila log masuk sekali lagi." || StatusMessage == "您的访问令牌已过期，请重新登录。") {
+            DoLogout();
+        }
 }

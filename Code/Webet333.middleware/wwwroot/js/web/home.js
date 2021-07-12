@@ -465,7 +465,6 @@ function CheckGameMaintenance() {
         if (data.WalletData !== null) {
             var isMaintenance = data.WalletData.filter(x => x.isMaintenance == true);
             var isNotMaintenance = data.WalletData.filter(x => x.isMaintenance == false);
-            debugger
             if (isMaintenance.length > 0) {
                 for (i = 0; i < isMaintenance.length; i++) {
                     var id = isMaintenance[i].walletType.replace(" ", "-").toLowerCase();
@@ -538,5 +537,14 @@ function SignalRConnect() {
     }
     catch {
         SignalRConnect();
+    }
+}
+
+function CheckTokenIsValid(StausCode, StatusMessage) {
+    if (StausCode==400)
+        if (StatusMessage == "Your access token is expired, please login again." || StatusMessage == "Token akses anda tamat tempoh, sila log masuk sekali lagi." || StatusMessage == "您的访问令牌已过期，请重新登录。") {
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.reload();
     }
 }

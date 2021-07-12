@@ -497,7 +497,7 @@ async function Withdraw() {
     var amount = Number($("#txt_withdraw_amount").val());
 
     if (amount <= 0)
-        return ShowError(ChangeErroMessage("amount_greater_zero_error"));
+        return ShowError(ChangeErroMessage("min_max_amount_error_parameter", profile.withdrawLimit));
 
     var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
 
@@ -696,6 +696,8 @@ function GetDateFormate(Date1, Date2) {
 }
 
 function GetTodayDate() {
+    $("#datepicker1").val("")
+    $("#datepicker2").val("")
     pageNumber = 0;
     var date = new Date();
     GetDateFormate(date, date);
@@ -703,6 +705,8 @@ function GetTodayDate() {
 };
 
 function Get3DayDate() {
+    $("#datepicker1").val("")
+    $("#datepicker2").val("")
     pageNumber = 0;
     var fdate = new Date().addDays(-3);
     var tdate = new Date();
@@ -711,6 +715,8 @@ function Get3DayDate() {
 };
 
 function GetInWeekDate() {
+    $("#datepicker1").val("")
+    $("#datepicker2").val("")
     pageNumber = 0;
     var curr = new Date(); // get current date
     var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
@@ -721,6 +727,8 @@ function GetInWeekDate() {
 }
 
 function GetInMonthDate() {
+    $("#datepicker1").val("")
+    $("#datepicker2").val("")
     pageNumber = 0;
     var date = new Date();
     var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -730,7 +738,6 @@ function GetInMonthDate() {
 }
 
 function GetDateRange() {
-    
     pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");

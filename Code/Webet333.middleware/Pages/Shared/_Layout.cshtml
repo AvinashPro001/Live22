@@ -96,7 +96,7 @@
                                                     <input id="txt_login_username" class="topTxtBox" tabindex="1" placeholder="Username" type="text" />
                                                 </li>
                                                 <li class="lock form-icon">
-                                                    <input id="txt_login_password" class="topTxtBox"  tabindex="2" placeholder="Password" type="password" onkeypress="OnPressEnter()"/>
+                                                    <input id="txt_login_password" class="topTxtBox" tabindex="2" placeholder="Password" type="password" onkeypress="OnPressEnter()" />
                                                 </li>
                                             </ul>
                                         </li>
@@ -120,7 +120,7 @@
                                         </li>
                                     </ul>
                                     <div class="bellow_signt">
-                                        <a href=""  data-toggle="modal" data-target="#forgotPassword"><span class="lang" key="forgot_username_password"></span></a>
+                                        <a href="" data-toggle="modal" data-target="#forgotPassword"><span class="lang" key="forgot_username_password"></span></a>
                                         <a id="current_time">7/1/2021 9:29:16pm (GMT=8)</a>
                                     </div>
                                 </div>
@@ -812,7 +812,7 @@
             </div>
         </div>
     </div>
- 
+
     <div class="contact-us-btn">
         <div class="contact-user" id="ContactUsPopUp" href="#">
             <span class="lang" style="font-size:15px;color:#000;font-weight: 600;" key="contact_us">Contact Us</span>&nbsp;<span class="contact-img"></span>
@@ -823,7 +823,7 @@
                 <p></p>
                 <h6>Customer Services</h6>
             </li>
-            <li class="call-contact text-center hand-curson"  onclick="OpenChatWindow()">
+            <li class="call-contact text-center hand-curson" onclick="OpenChatWindow()">
                 <h5><img class="contact-logos" src="~/images/sideicon4.png" alt="Call">LIVE CHAT</h5>
                 <a href="# ">Click here</a>
             </li>
@@ -834,7 +834,7 @@
             <li class="text-center whatsapp-sec">
                 <h5><img class="contact-logos" src="~/images/sideicon2.png" alt="Whats App">Whatsapp</h5>
                 <p class="hand-curson" onclick="OpenWhatsapp('60135557800')"> CS1 : <a>+6013 555 7800</a></p>
-                <p class="hand-curson" onclick="OpenWhatsapp('60135558826')">CS2 : <a >+6013 555 8826</a></p>
+                <p class="hand-curson" onclick="OpenWhatsapp('60135558826')">CS2 : <a>+6013 555 8826</a></p>
             </li>
             <li class="text-center wechat_sec">
                 <h5><img class="contact-logos" src="~/images/sideicon1.png" alt="We Chat"> Wechat</h5>
@@ -900,12 +900,12 @@
                         </div>
                         <div class="col-md-4 lang_boxes_two_wrap">
                             <div class="lang_boxes_two">
-                                <a id="ms-MY"  class="text-language-link-color " href="#" data-dismiss="modal" onclick="ChangeLanguage('ms-MY')"> Malay</a>
+                                <a id="ms-MY" class="text-language-link-color " href="#" data-dismiss="modal" onclick="ChangeLanguage('ms-MY')"> Malay</a>
                             </div>
                         </div>
                         <div class="col-md-4 lang_boxes_three_wrap">
                             <div class="lang_boxes_three">
-                                <a id="zh-Hans"  class="text-language-link-color " href="#" data-dismiss="modal" onclick="ChangeLanguage('zh-Hans')">Chinese</a>
+                                <a id="zh-Hans" class="text-language-link-color " href="#" data-dismiss="modal" onclick="ChangeLanguage('zh-Hans')">Chinese</a>
                             </div>
                         </div>
                     </div>
@@ -1049,6 +1049,25 @@
             $("#myDropdown").removeClass("in");
         });
 
+        var MouseMoveCounter = 0;
+
+        $("html").mousemove(async function (event) {
+            ++MouseMoveCounter;
+            if (MouseMoveCounter == 150) {
+                if (GetLocalStorage('currentUser') !== null) {
+                    var res = await PostMethod(accountEndPoints.userLastTimeUpdate, {});
+                    CheckTokenIsValid(res.status, res.response.message);
+                }
+                MouseMoveCounter = 0;
+            }
+        });
+
+        $("html").click(async function (event) {
+            if (GetLocalStorage('currentUser') !== null) {
+                var res = await PostMethod(accountEndPoints.userLastTimeUpdate, {});
+                CheckTokenIsValid(res.status, res.response.message);
+            }
+        });
 
     </script>
 

@@ -166,6 +166,7 @@ var accountEndPoints = {
     GetGameSupport: "Game/User/GameSupport",
     PlaytechBrokenStatus: "playtech/broken",
     PragmaticBrokenStatus: "pragmatic/broken",
+    userLastTimeUpdate: "account/users/logintime/update",
 };
 
 var promotionEndPoints = {

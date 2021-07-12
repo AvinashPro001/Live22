@@ -412,6 +412,8 @@ namespace Webet333.api.Helpers
             {
                 var resultAllBet = JsonConvert.DeserializeObject<AllBetGameBalanceResponse>(await AllBetGameHelpers.CallAPI(Url, Parameter));
                 allBetBalance = resultAllBet != null ? (resultAllBet.error_code == "OK" ? resultAllBet.balance : null) : null;
+                if (resultAllBet != null && resultAllBet.error_code == "CLIENT_PASSWORD_INCORRECT")
+                    AllBetGameHelpers.ChangePasswordCallAPI(Username, Password);
             }
             catch (Exception ex)
             {
@@ -543,7 +545,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result=await repository.FindAsync(StoredProcConsts.User.GetWalletBalance, new { UserId, WalletName= "Main Wallet" });
+                var result = await repository.FindAsync(StoredProcConsts.User.GetWalletBalance, new { UserId, WalletName = "Main Wallet" });
                 return result;
             }
         }
