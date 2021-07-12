@@ -412,7 +412,7 @@ async function Deposit(IsOnlinePayment) {
         }
 
         if (walletData.data.CheckPromotionApply === true && walletData.data.TotalPromotionRow > 0) {
-            if (confirm("promo_apply_balance_error")) {
+            if (confirm(ChangeErroMessage("promo_apply_balance_error"))) {
                 model.promotionApplyEligible = true;
             }
             else {

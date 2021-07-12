@@ -9,7 +9,7 @@ namespace Webet333.models.Response.Payments
         public DateTime Created { get; set; }
 
         [JsonProperty("Amount")]
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
 
         [JsonProperty("Method")]
         public string Method { get; set; }
