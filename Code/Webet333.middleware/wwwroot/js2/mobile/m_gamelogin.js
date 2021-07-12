@@ -188,6 +188,17 @@ async function GameInMaintenance(i) {
             document.getElementById('YeeBetLive').style.filter = "";
             document.getElementById('YeeBetLiveLogin').style.filter = "";
         }
+
+        if (walletData.data[i].walletType == "SBO Wallet" &&
+            walletData.data[i].isMaintenance == true) {
+            document.getElementById('SBOSports').style.filter = "grayscale(1)";
+            document.getElementById('SBOSportsLogin').style.filter = "grayscale(1)";
+        }
+        else if (walletData.data[i].walletType == "SBO Wallet" &&
+            walletData.data[i].isMaintenance == false) {
+            document.getElementById('SBOSports').style.filter = "";
+            document.getElementById('SBOSportsLogin').style.filter = "";
+        }
     }
 }
 
@@ -356,6 +367,15 @@ async function AllInButtonDisable(i) {
         else if (walletData.data[i].walletType == "YeeBet Wallet" &&
             walletData.data[i].isMaintenance == false)
             if (window.location.href.toLowerCase().includes('?p=transfer')) document.getElementById("YeeBetAllIn").disabled = false;
+
+        if (walletData.data[i].walletType == "SBO Wallet" &&
+            walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('?p=transfer')) document.getElementById("SBOAllIn").disabled = true;
+        }
+        else if (walletData.data[i].walletType == "SBO Wallet" &&
+            walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('?p=transfer')) document.getElementById("SBOAllIn").disabled = false;
+        }
     }
 }
 
@@ -408,6 +428,8 @@ async function CheckGameInMaintenance(gameName) {
 
     if (gameName == "YeeBet") walletName = "YeeBet Wallet";
 
+    if (gameName == "SBO") walletName = "SBO Wallet";
+
     for (i = 0; i < walletData.data.length; i++)
         if (walletData.data[i].walletType == walletName && walletData.data[i].isMaintenance == true)
             return true;
@@ -424,8 +446,8 @@ async function getDetails() {
             resUserData = res;
         }
         checkedValue = resUserData.data.autoTransfer;
-        if (window.location.href.includes("?p=transfer"))
-            await onclickSet(1);
+        //if (window.location.href.includes("?p=transfer"))
+            //await onclickSet(1);
     }
 }
 
@@ -597,6 +619,7 @@ async function logingGame(gameName) {
                 TransferInAllWallet("Pragmatic Wallet");
             }
             if (gameName == "YeeBet") TransferInAllWallet("YeeBet Wallet");
+            if (gameName == "SBO") TransferInAllWallet("SBO Wallet");
         }
         if (gameName != "Pragmatic")
             window.open("/mobile/Game?gamename=" + gameName);
@@ -1057,6 +1080,27 @@ async function GameLoginMobile(gamename) {
                     }
                     var login = await PostMethod(apiEndPoints.YeeBetLogin, Model);
                     if (login.data.result == 0) window.location.href = login.data.openurl;
+                }
+                break;
+            case 'SBO':
+                if (resSelectUser.data.SBO !== true) {
+                    var model = {};
+                    var res = await PostMethod(apiEndPoints.SBORegister, model);
+                    if (res.data.error.id == 0) {
+                        var model = {
+                            isMobile: true
+                        };
+
+                        var res = await PostMethod(apiEndPoints.SBOLogin, model);
+                        if (res.message != null) location.href = res.message;
+                    }
+                }
+                else {
+                    var model = {
+                        isMobile: true
+                    };
+                    var res = await PostMethod(apiEndPoints.SBOLogin, model);
+                    if (res.message != null) location.href = res.message;
                 }
                 break;
         }

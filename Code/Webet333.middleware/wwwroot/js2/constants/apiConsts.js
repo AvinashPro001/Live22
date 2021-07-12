@@ -117,6 +117,9 @@ var apiEndPoints = {
     YeeBetRegister: "yeebet/register",
     YeeBetLogin: "yeebet/login",
 
+    SBORegister: "sbo/register/player",
+    SBOLogin: "sbo/login",
+
     kiss918Balance: "gamebalance/918kiss",
     mega888Balance: "gamebalance/mega888",
     jokerBalance: "gamebalance/joker",
@@ -132,6 +135,7 @@ var apiEndPoints = {
     WMBalance: "gamebalance/wm",
     PragmaticBalance: "gamebalance/pragmatic",
     YeeBetBalance: "gamebalance/yeebet",
+    SBOBalance: "gamebalance/sbo",
 
     userDetaisSetGameBalance: "userdetails/set",
 
