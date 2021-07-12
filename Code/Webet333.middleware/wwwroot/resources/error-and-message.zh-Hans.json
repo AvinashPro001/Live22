@@ -21,6 +21,7 @@
   "refer_no_error": "请输入参考编号",
   "promo_apply_balance_error": "您的余额低于存款余额的5 MYR，您可以申请新的促销活动，并且现有的促销活动将过期",
   "amount_greater_zero_error": "进输入金额多过0",
+  "amount_greater_one_error": "进输入金额多过1",
   "promot_active_error": "你无法申请此优惠因为已有有效优惠",
   "min_max_amount_error": "最低金额为10和最高金额为30000",
   "min_max_amount_error_parameter": "最低金额为10和最高金额为",

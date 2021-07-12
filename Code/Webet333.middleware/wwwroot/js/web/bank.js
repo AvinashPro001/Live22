@@ -546,6 +546,9 @@ async function Transfer() {
     if (amount <= 0)
         return ShowError(ChangeErroMessage("amount_greater_zero_error"));
 
+    if (amount < 1)
+        return ShowError(ChangeErroMessage("amount_greater_one_error"));
+
     if (fromWallet == "")
         return ShowError(ChangeErroMessage("select_from_wallet_error"));
 

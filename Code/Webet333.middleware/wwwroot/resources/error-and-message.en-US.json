@@ -21,6 +21,7 @@
   "refer_no_error": "Please Insert Reference no",
   "promo_apply_balance_error": "Your balance is lower than 5 MYR of your deposit balance, you are available to apply new promotion, and your existing promotion wil be expired.",
   "amount_greater_zero_error": "Please Enter Amount Greater than 0.",
+  "amount_greater_one_error": "Please Enter Amount Greater than 1.",
   "promot_active_error": "You cannot apply promotion,Because have active promotion",
   "min_max_amount_error": "Minimun Amount 10 and Maximum Amount is 30000.",
   "min_max_amount_error_parameter": "Minimun Amount 10 and Maximum Amount is ",

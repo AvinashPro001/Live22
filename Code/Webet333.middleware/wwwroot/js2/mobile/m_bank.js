@@ -785,34 +785,39 @@ async function TransferAmount() {
     var modelBalance = {};
     // check insert amount is gereate then 0
     if ($('#txt_transferAmount').val() > 0) {
-        // get all wallete balance
-        var resBalance = await PostMethod(apiEndPoints.walletBalance, modelBalance);
-        var model = {
-            fromWalletId: $('#ddl_transferFromWallet').val(),
-            toWalletId: $('#ddl_transferToWallet').val(),
-            amount: Number($('#txt_transferAmount').val())
-        };
+        if ($('#txt_transferAmount').val() > 1) {
+            // get all wallete balance
+            var resBalance = await PostMethod(apiEndPoints.walletBalance, modelBalance);
+            var model = {
+                fromWalletId: $('#ddl_transferFromWallet').val(),
+                toWalletId: $('#ddl_transferToWallet').val(),
+                amount: Number($('#txt_transferAmount').val())
+            };
 
-        //Get the Wallet Name
-        var valueFromWalletName = resBalance.data.filter(function (walletName) { return walletName.walletId === model.fromWalletId; });
-        var valueToWalletName = resBalance.data.filter(function (wallet) { return wallet.walletId === model.toWalletId; });
+            //Get the Wallet Name
+            var valueFromWalletName = resBalance.data.filter(function (walletName) { return walletName.walletId === model.fromWalletId; });
+            var valueToWalletName = resBalance.data.filter(function (wallet) { return wallet.walletId === model.toWalletId; });
 
-        if (Number($('#txt_transferAmount').val()) <= Number(valueFromWalletName[0].amount)) {
-            if (valueFromWalletName.length !== 0 && valueToWalletName.length !== 0) {
-                var nameFromWallet = valueFromWalletName[0].walletName;
+            if (Number($('#txt_transferAmount').val()) <= Number(valueFromWalletName[0].amount)) {
+                if (valueFromWalletName.length !== 0 && valueToWalletName.length !== 0) {
+                    var nameFromWallet = valueFromWalletName[0].walletName;
 
-                var res = await PostMethod(apiEndPoints.paymentTransferInOneAPi, model);
-                if (res !== null && res !== undefined) {
-                    ShowSuccess(res.message);
-                    reset(3);
-                    setTimeout(function () {
-                        WalletBalance();
-                    }, 2000);
+                    var res = await PostMethod(apiEndPoints.paymentTransferInOneAPi, model);
+                    if (res !== null && res !== undefined) {
+                        ShowSuccess(res.message);
+                        reset(3);
+                        setTimeout(function () {
+                            WalletBalance();
+                        }, 2000);
+                    }
                 }
+            }
+            else {
+                ShowError(ChangeErroMessage("Insufficient_balance_wallet"));
             }
         }
         else {
-            ShowError(ChangeErroMessage("Insufficient_balance_wallet"));
+            ShowError(ChangeErroMessage("amount_greater_one_error"));
         }
     }
     else {
