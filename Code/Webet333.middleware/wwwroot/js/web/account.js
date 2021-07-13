@@ -489,7 +489,7 @@ async function SendOTP(number) {
     var resUserData = JSON.parse(Decryption(GetSessionStorage('userDetails')));
     if (resUserData.mobilenoConfirmed == false) {
         LoaderShow();
-        var res = await GetMethod(accountEndPoints.SendOTP);
+        var res = await PostMethod(accountEndPoints.SendOTP, {});
         if (res.status == 200) {
             document.getElementById("txt_otp").value = "";
             ShowSuccess(ChangeErroMessage("otp_send_success"));
