@@ -193,6 +193,8 @@
 
   "balance": "平衡",
   "username_instruction": "用户名必须包含7个字符",
+  "username_specialCharacter_instruction": "不允許特殊字元",
+
   "password_instruction": "密码长度必须为6个字符",
   "password_alpha_instruction": "密码必须是字母数字",
   "password_username_same": "密码和用户名必须不同。",
