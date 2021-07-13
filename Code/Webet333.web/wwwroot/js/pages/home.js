@@ -644,7 +644,7 @@ async function logingGame(gameName) {
 //#region For Playtech game login
 function loadingPlaytechJS() {
     var imported = document.createElement('script');
-    imported.src = 'https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88'
+    imported.src = 'https://login.tothinkit.com/jswrapper/integration.js.php?casino=winforfun88'
     document.head.appendChild(imported);
 }
 
