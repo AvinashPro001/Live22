@@ -1231,7 +1231,7 @@ async function openPlaytechGame(game) {
     var usernamePrifix = globalParameters.data.playtechGamePrefix
     var username = (usernamePrifix + res.data.username.replace("#", "")).toUpperCase();
     var password = dec(localStorage.getItem('currentUserData'));
-    var mobiledomain = "ld176988.com";
+    var mobiledomain = "tothinkit.com";
     var systemidvar = "424";
 
     async function login() {

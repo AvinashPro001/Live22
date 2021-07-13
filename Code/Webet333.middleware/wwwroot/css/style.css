@@ -2106,3 +2106,6 @@ div.tabcontent_health .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
         transform: rotate(359deg);
     }
 }
+
+.grey-color{color:gray !important;}
+.green-color{color:green !important;}

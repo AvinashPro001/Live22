@@ -428,7 +428,7 @@ async function UpdateMobileNumber() {
 
 //#endregion
 
-function MobileValidation(TextFieldId,ErrorShowId) {
+function MobileValidation(TextFieldId, ErrorShowId) {
     var mobile = $('#' + TextFieldId).val();
     if (mobile.length < 10 || mobile.length > 11) {
         $("#" + ErrorShowId).text(ChangeErroMessage("mobile_length_error"));
@@ -443,13 +443,13 @@ async function ForgotPassword() {
     if (mobile === null || mobile === undefined || mobile === "")
         return ShowError(ChangeErroMessage("mobile_no_required_error"));
 
-    if (mobile.length < 10 || mobile.length > 11) 
+    if (mobile.length < 10 || mobile.length > 11)
         return ShowError(ChangeErroMessage("mobile_length_error"));
 
     let model = {
         mobileNumber: mobile
     };
-    
+
     LoaderShow();
     var res = await PostMethod(accountEndPoints.getUserByMobile, model);
     if (res.status == 200) {
@@ -489,7 +489,7 @@ async function SendOTP(number) {
     var resUserData = JSON.parse(Decryption(GetSessionStorage('userDetails')));
     if (resUserData.mobilenoConfirmed == false) {
         LoaderShow();
-        var res = await GetMethod(accountEndPoints.SendOTP);
+        var res = await PostMethod(accountEndPoints.SendOTP, {});
         if (res.status == 200) {
             document.getElementById("txt_otp").value = "";
             ShowSuccess(ChangeErroMessage("otp_send_success"));
@@ -821,4 +821,17 @@ function CheckTokenIsValid(StausCode, StatusMessage) {
         if (StatusMessage == "Your access token is expired, please login again." || StatusMessage == "Token akses anda tamat tempoh, sila log masuk sekali lagi." || StatusMessage == "您的访问令牌已过期，请重新登录。") {
             DoLogout();
         }
+}
+
+function OnPasswordType() {
+    var password = $("#txt_password").val();
+    var username = $('#txt_username').val();
+
+    password.length >= 6 ? ($("#pass-len").addClass("green-color")) : ($("#pass-len").removeClass("green-color"));
+
+    if (password!="")
+    username !== password ? ($("#pass-username-same").addClass("green-color")) : ($("#pass-username-same").removeClass("green-color"))
+
+    var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
+    regex.test(password) ? ($("#pass-alpha").addClass("green-color")) : ($("#pass-alpha").removeClass("green-color"))
 }

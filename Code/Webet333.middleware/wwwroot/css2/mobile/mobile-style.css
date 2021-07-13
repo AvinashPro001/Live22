@@ -303,7 +303,8 @@ select.main-wallet.jcf-hidden,
 .menu-list-area .tab-pane ul li p a { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: #000000;}
 .menu-list-area .tab-pane ul li:hover  p { color: rgba(0,0,0,0.7); }
 .menu-list-area .tab-pane ul li img { width: 100%; max-width: 100%; object-fit: cover; }
-
+.grey-color{color:gray !important;}
+.green-color{color:green !important;}
 
 
 
