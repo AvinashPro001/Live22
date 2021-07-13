@@ -22,7 +22,7 @@
   "promo_apply_balance_error": "Baki anda adalah lebih rendah daripada 5 MYR baki deposit anda, anda boleh menggunakan promosi baru, dan promosi promosi anda sudah tamat tempoh.",
   "amount_greater_zero_error": "Sila Masukkan Jumlah lebih daripada 0",
   "amount_greater_one_error": "Sila Masukkan Jumlah lebih daripada 1",
-  "promot_active_error": "Anda tidak boleh memakai promosi, kerana mempunyai promosi aktif",
+  "promot_active_error": "Anda tidak boleh menggunakan promosi, Kerana anda mempunyai promosi yang aktif",
   "min_max_amount_error": "Jumlah Minimum 10 dan Jumlah Maksimum ialah 30000.",
   "min_max_amount_error_parameter": "Jumlah Minimum 10 dan Jumlah Maksimum adalah ",
   "min1_max1000_amount_error": "Jumlah Minimum 1",

@@ -387,10 +387,10 @@ function SetYoutubeVideo() {
 }
 
 function ChangeLanguageText() {
-    
+    var lang = GetLocalStorage('language');
     $("#" + GetLocalStorage("language")).addClass("text-theam-color");
     $.ajax({
-        url: '../../resources/lang.' + GetLocalStorage('language') + '.json',
+        url: '../../resources/lang.' + lang + '.json',
         dataType: 'json',
         async: false,
         success: function (lang) {
@@ -399,6 +399,11 @@ function ChangeLanguageText() {
             });
         }
     });
+    if (lang == "ms-MY") {
+        $("#restore-btn-malay").css("padding-left", "45px");
+        $("#restore-btn-malay").css("width", "160px");
+        $(".restore_amount_sec_wrap").css("width", "75%");
+    }
 }
 
 function ChangeLanguage(LangCode) {

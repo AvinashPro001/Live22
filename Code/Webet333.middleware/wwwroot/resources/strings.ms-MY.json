@@ -246,7 +246,7 @@
   "refer_no_error": "Sila Masukkan nombor rujukan",
   "promo_apply_balance_error": "Baki anda adalah lebih rendah daripada 5 MYR baki deposit anda, anda boleh menggunakan promosi baru, dan promosi promosi anda sudah tamat tempoh.",
   "amount_greater_zero_error": "Sila Masukkan Jumlah lebih daripada 0",
-  "promot_active_error": "Anda tidak boleh memakai promosi, kerana mempunyai promosi aktif",
+  "promot_active_error": "Anda tidak boleh menggunakan promosi, Kerana anda mempunyai promosi yang aktif",
   "min_max_amount_error": "Jumlah Amaun Minimum adalah 10 dan Maximum 30000.",
   "min_max_amount_error_parameter": "Jumlah Amaun Minimum adalah 10 dan Maximum ",
   "min1_max1000_amount_error": "Jumlah Amaun Minimum adalah 1",
