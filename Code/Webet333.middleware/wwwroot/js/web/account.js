@@ -264,6 +264,7 @@ async function ChangePassword() {
     var newPassword = $("#txt_newPassword").val();
     var confirmPassword = $("#txt_confirmPassword").val();
 
+
     if (newPassword.length < 6) return ShowError(ChangeErroMessage("pass_length_error"));
 
     if (newPassword === "") return ShowError(ChangeErroMessage("password_required_error"));
@@ -272,7 +273,7 @@ async function ChangePassword() {
 
     if (newPassword !== confirmPassword) return ShowError(ChangeErroMessage("pass_not_match_error"));
 
-    if (Decryption(GetLocalStorage("currentUserData")) !== currentPassword) return ShowError(ChangeErroMessage("pass_not_match_error"));
+    if (Decryption(GetLocalStorage("currentUserData")) !== currentPassword) return ShowError(ChangeErroMessage("current_pass_not_match"));
 
     var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     if (!reqExp.test(currentPassword)) return ShowError(ChangeErroMessage("pass_alpha_error"));
