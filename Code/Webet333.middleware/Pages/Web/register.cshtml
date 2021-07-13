@@ -101,10 +101,11 @@
                                     </span>
                                 </p>
                                 <div class="row form-group ml0 mr0">
-                                    <label class="user-title col-md-3 pl0 lang" key="phone_number">Phone Number :</label>
+                                    <label class="user-title col-md-3 pl0 lang" key="phone_number" >Phone Number :</label>
                                     <label class="num mendatory col-md-9 pl0">
-                                        <input type="number" p class="reg-form" placeholder="" id="txt_mobile_no" />
+                                        <input type="number" p class="reg-form" placeholder="" id="txt_mobile_no" onkeyup="MobileValidation('txt_mobile_no','register-error')" />
                                         <p class="star">*</p>
+                                        <label style="color:#ff0000;font-weight:bold" id="register-error"></label>
                                     </label>
                                 </div>
                             </div>
