@@ -1224,7 +1224,7 @@ async function GameLogin(gamename) {
                             isMobile: false
                         };
                         var res = await PostMethod(apiEndPoints.SBOLogin, model);
-                        if (res != null && res.message != null) window.location.href = res.message;
+                        if (res != null && res.data.error.id == 0) window.location.href = res.data.url;
 
                         //if (res.message != null) {
                         //    document.getElementById("mainpagebody").style.display = "none";
@@ -1246,7 +1246,7 @@ async function GameLogin(gamename) {
                         isMobile: false
                     };
                     var res = await PostMethod(apiEndPoints.SBOLogin, model);
-                    if (res != null && res.message != null) window.location.href = res.message;
+                    if (res != null && res.data.error.id == 0) window.location.href = res.data.url;
                     //if (res.message != null) {
                     //    document.getElementById("mainpagebody").style.display = "none";
                     //    document.getElementById("iframeModel").style.display = "block";

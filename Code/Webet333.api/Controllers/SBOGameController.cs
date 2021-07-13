@@ -12,6 +12,7 @@ using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Game;
 using Webet333.models.Request.Game.SBO;
+using SBOConst = Webet333.models.Constants.GameConst.SBO;
 
 namespace Webet333.api.Controllers
 {
@@ -80,11 +81,13 @@ namespace Webet333.api.Controllers
             {
                 var result = await SBO_helper.CallRegisterPlayerAPI(username);
 
-                if (result.Error.Id != 0) return OkResponse(result);
+                if (result.Error.Msg != SBOConst.ErrorMessage.Success) return OkResponse(result);
+
+                var setPlayerBetLimitResult = await SBO_helper.SetPlayerBetLimitAsync(username);
+
+                if (setPlayerBetLimitResult.Error.Msg != SBOConst.ErrorMessage.Success) return OkResponse(setPlayerBetLimitResult);
 
                 await SBO_helper.SBORegister(request.Id, username, JsonConvert.SerializeObject(result));
-
-                await SBO_helper.SetPlayerBetLimitAsync(username);
 
                 return OkResponse(result);
             }
@@ -116,13 +119,17 @@ namespace Webet333.api.Controllers
 
             var loginToken = await SBOGameHelpers.CallLoginAPI(username);
 
+            if (loginToken.Error.Msg != SBOConst.ErrorMessage.Success) return OkResponse(loginToken);
+
             string language = SBOGameHelpers.GetLanguageCode(Language.Code.ToString());
 
             string device = request.IsMobile ? GameConst.SBO.Device.Mobile : GameConst.SBO.Device.Desktop;
 
             var getLoginURL = SBOGameHelpers.CallLoginToSportsBookAPI(loginToken, language, device);
 
-            return OkResponse(getLoginURL);
+            loginToken.Url = getLoginURL;
+
+            return OkResponse(loginToken);
         }
 
         #endregion Login
@@ -228,7 +235,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Get League
+        #endregion Get Blank League List
 
         #region Set League Bet Setting
 
