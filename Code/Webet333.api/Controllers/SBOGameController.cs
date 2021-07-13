@@ -116,13 +116,17 @@ namespace Webet333.api.Controllers
 
             var loginToken = await SBOGameHelpers.CallLoginAPI(username);
 
+            if (loginToken.Error.Msg != GameConst.SBO.ErrorMessage.Success) return BadResponse(loginToken.Error.Msg);
+
             string language = SBOGameHelpers.GetLanguageCode(Language.Code.ToString());
 
             string device = request.IsMobile ? GameConst.SBO.Device.Mobile : GameConst.SBO.Device.Desktop;
 
             var getLoginURL = SBOGameHelpers.CallLoginToSportsBookAPI(loginToken, language, device);
 
-            return OkResponse(getLoginURL);
+            loginToken.Url = getLoginURL;
+
+            return OkResponse(loginToken);
         }
 
         #endregion Login
@@ -228,7 +232,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Get League
+        #endregion Get Blank League List
 
         #region Set League Bet Setting
 

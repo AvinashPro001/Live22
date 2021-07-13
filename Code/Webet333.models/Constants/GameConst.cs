@@ -712,6 +712,11 @@
 
                 public const string D = "d";
             }
+
+            public static class ErrorMessage
+            {
+                public const string Success = "No Error";
+            }
         }
 
 #elif STAG
