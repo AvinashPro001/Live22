@@ -1131,8 +1131,10 @@ function GenratePlaytechSlotsGameHTML(GameList, SectionId, IsAppend) {
             $("#" + SectionId).html(html);
     }
     else {
-        html = '<div class="col-sm-12 pl0" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
-        $("#" + SectionId).html(html);
+        if ($("#" + SectionId).children().length < 1) {
+            html = '<div class="col-sm-12 pl0 no-game" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
+            $("#" + SectionId).html(html);
+        }
     }
 }
 
@@ -1148,8 +1150,10 @@ function GenratePragmaticSlotsGameHTML(GameList, SectionId, IsAppend) {
             $("#" + SectionId).html(html);
     }
     else {
-        html = '<div class="col-sm-12 pl0" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
-        $("#" + SectionId).html(html);
+        if ($("#" + SectionId).children().length < 1) {
+            html = '<div class="col-sm-12 pl0 no-game" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
+            $("#" + SectionId).html(html);
+        }
     }
 }
 

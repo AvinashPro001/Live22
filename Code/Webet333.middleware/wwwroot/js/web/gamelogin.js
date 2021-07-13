@@ -477,8 +477,10 @@ function GenratePlaytechSlotsGameHTML(GameList, SectionId, IsAppend) {
             SetAllValueInElement(SectionId, html)
     }
     else {
-        html = '<div class="col-sm-12 pl0" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
-        SetAllValueInElement(SectionId, html)
+        if ($("#" + SectionId).children().length < 1) {
+            html = '<div class="col-sm-12 pl0" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
+            SetAllValueInElement(SectionId, html)
+        }
     }
 }
 
@@ -495,8 +497,10 @@ function GenratePragmaticSlotsGameHTML(GameList, SectionId, IsAppend) {
             SetAllValueInElement(SectionId, html)
     }
     else {
-        html = '<div class="col-sm-12 pl0" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
-        SetAllValueInElement(SectionId, html)
+        if ($("#" + SectionId).children().length <1) {
+            html = '<div class="col-sm-12 pl0" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
+            SetAllValueInElement(SectionId, html)
+        }
     }
 }
 
