@@ -796,33 +796,57 @@ header .tooltip-inner {width: 100px!important; }
 .img-hover-block li { width: calc(100% / 4 - 10px); margin: 5px; }
 
 /* ================================================================================================================================================================ */
-#pragmatic-new-section.img-hover-block li,
-#pragmatic-hot-section.img-hover-block li,
+
+
 #playtech-all-section.img-hover-block li,
 #playtech-new-section.img-hover-block li,
-#All_slot_pragmatic .img-hover-block li { width: calc(100% / 3 - 10px); margin: 5px; }
+#playtech-hot-section.img-hover-block li,
+#playtech-slot-section.img-hover-block li,
+#playtech-arcade-section.img-hover-block li,
+#pragmatic-new-section.img-hover-block li,
+#pragmatic-hot-section.img-hover-block li,
+#pragmatic-slot-section.img-hover-block li,
+#pragmatic-arcade-section.img-hover-block li,
+#pragmatic-all-section.img-hover-block li {width: calc(100% / 3 - 10px);margin: 5px;}
 
 
-#pragmatic-hot-section .cmn-block,
-#pragmatic-new-section .cmn-block,
+
 #playtech-all-section .cmn-block,
 #playtech-new-section .cmn-block,
-#All_slot_pragmatic .cmn-block { padding-top: 0px; }
+#playtech-hot-section .cmn-block,
+#playtech-slot-section .cmn-block,
+#playtech-arcade-section .cmn-block,
+#pragmatic-arcade-section .cmn-block,
+#pragmatic-slot-section .cmn-block,
+#pragmatic-hot-section .cmn-block,
+#pragmatic-new-section .cmn-block,
+#pragmatic-all-section .cmn-block {padding-top: 0px;}
 
 
-.slick-slide #pragmatic-hot-section .img-text-block img,
-.slick-slide #pragmatic-new-section .img-text-block img,
+
 .slick-slide #playtech-new-section .img-text-block img,
 .slick-slide #playtech-all-section .img-text-block img,
-.slick-slide #All_slot_pragmatic .img-text-block img { height: 100%; max-width: 100%; width: 100%;}
+.slick-slide #playtech-hot-section .img-text-block img,
+.slick-slide #playtech-slot-section .img-text-block img,
+.slick-slide #playtech-arcade-section .img-text-block img,
+.slick-slide #pragmatic-arcade-section .img-text-block img,
+.slick-slide #pragmatic-slot-section .img-text-block img,
+.slick-slide #pragmatic-hot-section .img-text-block img,
+.slick-slide #pragmatic-new-section .img-text-block img,
+.slick-slide #pragmatic-all-section .img-text-block img {height: 100%;max-width: 100%;width: 100%;}
 
 
-#pragmatic-hot-section .img-text-block:hover .hover-block,
+#pragmatic-all-section .img-text-block:hover .hover-block,
 #pragmatic-new-section .img-text-block:hover .hover-block,
-#playtech-new-section .img-text-block:hover .hover-block,
+#pragmatic-hot-section .img-text-block:hover .hover-block,
+#pragmatic-slot-section .img-text-block:hover .hover-block,
+#pragmatic-arcade-section .img-text-block:hover .hover-block {transform: scale(1.15);margin-left: 0;margin-top: 0;}
+
 #playtech-all-section .img-text-block:hover .hover-block,
-#All_slot_pragmatic .img-text-block:hover .hover-block { transform: scale(1.15); margin-left: 0; margin-top: 0; }
-#playtech-all-section .img-text-block:hover .hover-block { margin-left: 15px; transform: scale(1.20); }
+#playtech-hot-section .img-text-block:hover .hover-block,
+#playtech-new-section .img-text-block:hover .hover-block,
+#playtech-slot-section .img-text-block:hover .hover-block,
+#playtech-arcade-section .img-text-block:hover .hover-block {margin-left: 15px;transform: scale(1.20);;margin-top: 0;}
 
 
 
