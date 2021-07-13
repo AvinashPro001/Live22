@@ -93,7 +93,9 @@
   "confirm_password_placeholder": "Sahkan Kata Laluan",
   "contact_instruction": "Sila masukan telepon nombor yang sah terima TAC untuk aktif akaun anda",
   "submit_button": "Sertai",
-  "username_instruction": "Nama pengguna mesti melebihi 6 perkataan",
+  "username_instruction": "Nama pengguna mesti melebihi 6 perkataan.",
+  "username_specialCharacter_instruction": "Aksara khas tidak dibenarkan.",
+
   "password_instruction": "Kata Laluan mesti melebihi 6 perkataan",
   "password_alpha_instruction": "Kata laluan mestilah abjad angka",
   "password_username_same": "Kata laluan dan nama pengguna mestilah berbeza.",

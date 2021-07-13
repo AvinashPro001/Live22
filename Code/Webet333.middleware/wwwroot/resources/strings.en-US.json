@@ -192,7 +192,9 @@
   "mobile_login": "Login",
 
   "balance": "Balance",
-  "username_instruction": "Username must contain a length of 7 charaters",
+  "username_instruction": "Username must contain a length of 7 charaters.",
+  "username_specialCharacter_instruction": "Special characters not allowed",
+
   "password_instruction": "Password must contain a length of 6 charaters",
   "password_alpha_instruction": "Password must be alphanumeric.",
   "password_username_same": "Password and username must be different.",
