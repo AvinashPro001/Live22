@@ -794,15 +794,49 @@ header .tooltip-inner {width: 100px!important; }
 .img-text-block { position: relative; }
 .img-hover-block { display: flex; position: relative; margin: 0 -10px; flex-wrap: wrap; }
 .img-hover-block li { width: calc(100% / 4 - 10px); margin: 5px; }
+
+/* ================================================================================================================================================================ */
+#pragmatic-new-section.img-hover-block li,
+#pragmatic-hot-section.img-hover-block li,
+#playtech-all-section.img-hover-block li,
+#playtech-new-section.img-hover-block li,
+#All_slot_pragmatic .img-hover-block li { width: calc(100% / 3 - 10px); margin: 5px; }
+
+
+#pragmatic-hot-section .cmn-block,
+#pragmatic-new-section .cmn-block,
+#playtech-all-section .cmn-block,
+#playtech-new-section .cmn-block,
+#All_slot_pragmatic .cmn-block { padding-top: 0px; }
+
+
+.slick-slide #pragmatic-hot-section .img-text-block img,
+.slick-slide #pragmatic-new-section .img-text-block img,
+.slick-slide #playtech-new-section .img-text-block img,
+.slick-slide #playtech-all-section .img-text-block img,
+.slick-slide #All_slot_pragmatic .img-text-block img { height: 100%; max-width: 100%; width: 100%;}
+
+
+#pragmatic-hot-section .img-text-block:hover .hover-block,
+#pragmatic-new-section .img-text-block:hover .hover-block,
+#playtech-new-section .img-text-block:hover .hover-block,
+#playtech-all-section .img-text-block:hover .hover-block,
+#All_slot_pragmatic .img-text-block:hover .hover-block { transform: scale(1.15); margin-left: 0; margin-top: 0; }
+#playtech-all-section .img-text-block:hover .hover-block { margin-left: 15px; transform: scale(1.20); }
+
+
+
+/* ================================================================================================================================================================ */
+/*  */
 .slick-slide .img-text-block img { height: 200px; max-width: 200px; margin: 0 auto; width: auto; object-fit: contain; transition: 0.5s; }
 #All_slot_playtech .img-text-block img,
 #hot_slot_playtech .img-text-block img,
 #new_slot_playtech .img-text-block img,
 #slot_slots_playtech .img-text-block img,
 #arcade_slots_playtech .img-text-block img { height: 120px; max-width: 100%; }
+/*  */
 
-
-.slick-slide .img-text-block img { height: 200px; max-width: 200px; margin: 0 auto; width: auto; object-fit: contain; transition: 0.5s; }
+.slick-slide .img-text-block img { height: 200px; max-width: 200px; margin: 0 auto; width: auto; object-fit: contain; transition: 0.5s; border-radius: 0px; }
 .hover-block { opacity: 0; position: absolute; top: 0; left: 0; border: 20px solid #ffffff; transform: scale(0); transition: 0.5s;}
 .hover-block figure { position: relative;}
 .cmn-block { position: relative; z-index: 0; cursor: pointer; transition: 0.5s; box-shadow: 0px 0px 10px #cccccc; background: #fff; border-radius: 10px; padding-top: 10px;}
@@ -812,7 +846,7 @@ header .tooltip-inner {width: 100px!important; }
 .overlay button { padding: 10px 45px; background-color: #003b79; color: #ffffff; border: 0px; text-transform: uppercase; font-size: 15px; line-height: 20px; font-weight: bold; transition: 0.5s; border-radius: 8px;}
 .overlay button:focus,
 .overlay button:hover { background-color: #feb801; color: #003b79;}
-.text-content h4 { height: 65px; overflow: hidden; display: flex; justify-content: center; align-items: center; padding: 0 15px; }
+.text-content h4 { height: 45px; overflow: hidden; display: flex; justify-content: center; align-items: center; padding: 0 15px; font-size: 16px; line-height: 22px; }
 .hover-block > figure:hover .overlay { height: 100%; opacity: 1; }
 .slick-slide .img-text-block:hover .hover-block > figure img { height: 225px; max-width: 225px;}
 
