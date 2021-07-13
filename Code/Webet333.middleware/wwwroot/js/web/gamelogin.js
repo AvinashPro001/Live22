@@ -428,7 +428,7 @@ async function LoginPlaytechGame(GameCode) {
     if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
 
     var imported = document.createElement('script');
-    imported.src = 'https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88'
+    imported.src = 'https://login.tothinkit.com/jswrapper/integration.js.php?casino=winforfun88'
     document.head.appendChild(imported);
     window.open("../Web/game");
 
@@ -438,7 +438,7 @@ async function LoginPlaytechGame(GameCode) {
     var usernamePrifix = globalParameters.playtechGamePrefix
     var username = (usernamePrifix + res.username.replace("#", "")).toUpperCase();
     var password = Decryption(GetLocalStorage('currentUserData'));
-    var mobiledomain = "ld176988.com";
+    var mobiledomain = "tothinkit.com";
     var systemidvar = "424";
 
     async function login() {
