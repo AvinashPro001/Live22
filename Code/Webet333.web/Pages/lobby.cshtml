@@ -32,7 +32,8 @@
     <script src="~/js/constants/SecurityConsts.js"></script>
 
     <script src="~/js/jquery.min.js"></script>
-    <script type="text/javascript" src="https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88"></script>
+    @*<script type="text/javascript" src="https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88"></script>*@
+    <script type="text/javascript" src="https://login.tothinkit.com/jswrapper/integration.js.php?casino=winforfun88"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             if (localStorage.getItem('currentUser') != null)
@@ -48,9 +49,10 @@
             var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
             let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
             var usernamePrifix = globalParameters.data.playtechGamePrefix
-            var username = (usernamePrifix + res.data.username.replace("#","")).toUpperCase();
+            var username = (usernamePrifix + res.data.username.replace("#", "")).toUpperCase();
             var password = dec(GetLocalStorage('currentUserData'));
-            var mobiledomain = "ld176988.com";
+        /*  var mobiledomain = "ld176988.com";*/
+            var mobiledomain = "tothinkit.com";
             var systemidvar = "424";
             async function login() {
                 iapiSetCallout('Login', calloutLogin);

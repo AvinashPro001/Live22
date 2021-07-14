@@ -245,6 +245,10 @@
             public const string PromotionGroupUpdate = "promotions/group/update";
 
             public const string PromotionGroupDelete = "promotions/group/delete";
+
+            public const string PromotionUsersSelect = "promotions/users/select";
+
+            public const string PromotionSelectForDropdown = "promotions/select/dropdown";
         }
 
         public class Settings
@@ -379,6 +383,10 @@
 
             public const string Pragmatic_Betting_Details = "Game/Pragmatic_Betting_Details";
 
+            public const string YEEBET_Betting_Details = "Game/YEEBET_Betting_Details";
+
+            public const string SBO_Betting_Details = "Game/SBO_Betting_Details";
+
             public const string Manually_Joker_Betting_Details = "Game/Manually/Joker_Betting_Details";
 
             public const string Manually_AG_Betting_Details = "Game/Manually/AG_Betting_Details";
@@ -408,6 +416,10 @@
             public const string Manually_WM_Betting_Details = "Game/Manually/WM_Betting_Details";
 
             public const string Manually_Pragmatic_Betting_Details = "Game/Manually/Pragmatic_Betting_Details";
+
+            public const string Manually_YEEBET_Betting_Details = "Game/Manually/YEEBET_Betting_Details";
+
+            public const string Manually_SBO_Betting_Details = "Game/Manually/SBO_Betting_Details";
 
             public const string Playtech_Betting_Details = "Game/Playtech_Betting_Details";
 
@@ -457,6 +469,10 @@
 
             public const string M8BettingDetailsSave = "Game/M8BettingDetailsSave";
 
+            public const string YEEBETBettingDetailsSave = "Game/YEEBETBettingDetailsSave";
+
+            public const string SBOBettingDetailsSave = "Game/SBOBettingDetailsSave";
+
             public const string GameWalletBalance = "Game/AllWalletBalance";
 
             public const string GameWalletBalanceRestore = "Game/Balance/Restore";
@@ -501,6 +517,12 @@
             public const string CheckM8Balance = "check/gamebalance/m8";
 
             public const string CheckMaxBetBalance = "check/gamebalance/maxbet";
+
+            public const string YEEBETBalance = "gamebalance/yeebet";
+
+            public const string SBOBalance = "gamebalance/sbo";
+
+            public const string CheckSBOBalance = "check/gamebalance/sbo";
         }
 
         public class TransferMoney
@@ -675,6 +697,8 @@
 
             public const string VIPLevelUserUpdate = "viplevel/user/update";
 
+            public const string VIPLevelUserDetails = "viplevel/user/details";
+
             public const string VIPLevelGiveFreeCredit = "viplevel/give/freecredit";
 
             public const string VIPFreeCreditPromotionSetting = "viplevel/freecredit/promotion/setting";
@@ -718,6 +742,44 @@
             public const string FreeCreditEventDelete = "freecreditevent/delete";
 
             public const string FreeCreditEventUsersSelect = "freecreditevent/users/select";
+        }
+
+        public class YEEBET
+        {
+            public const string Register = "yeebet/register";
+
+            public const string Login = "yeebet/login";
+
+            public const string GetBetLimit = "yeebet/get/betlimit";
+
+            public const string SetBetLimit = "yeebet/set/betlimit";
+
+            public const string SetBetLimitAndDepositAmount = "yeebet/set/betlimit/deposit";
+
+            public const string UpdateBetLimitAndDepositAmount = "yeebet/update/betlimit/deposit";
+        }
+
+        public class SBO
+        {
+            public const string RegisterAgent = "sbo/register/agent";
+
+            public const string RegisterPlayer = "sbo/register/player";
+
+            public const string Login = "sbo/login";
+
+            public const string GetLeague = "sbo/getLeague";
+
+            public const string GetBlankLeague = "sbo/blank-getLeague";
+
+            public const string SetLeagueBetSetting = "sbo/set/league";
+
+            public const string SetPlayerDefaultBetLimit = "sbo/set/playerdefaultbetlimit";
+
+            public const string UpdatePlayerDefaultBetLimit = "sbo/update/playerdefaultbetlimit";
+
+            public const string GetPlayerDefaultBetLimit = "sbo/get/playerdefaultbetlimit";
+
+            public const string GetLeagueBetSetting = "sbo/get/league-bet-setting";
         }
     }
 }

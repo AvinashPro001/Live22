@@ -123,11 +123,11 @@ namespace Webet333.api.Helpers
             return 0;
         }
 
-        public async Task<List<DepositResponse>> GetDeposit(BaseUrlConfigs baseUrl, string UserId = null, string Id = null, string Verified = null, bool Restricted = false, string Keyword = null, string FromDate = null, string ToDate = null,int? PageSize=null,int? PageNo= null)
+        public async Task<List<DepositResponse>> GetDeposit(BaseUrlConfigs baseUrl, string UserId = null, string Id = null, string Verified = null, bool Restricted = false, string Keyword = null, string FromDate = null, string ToDate = null, int? PageSize = null, int? PageNo = null)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result = await repository.GetMultiDataAsync(StoredProcConsts.Payments.DepositList, new { Id, UserId, Verified, Restricted, Keyword, FromDate, ToDate, PageSize , PageNo });
+                var result = await repository.GetMultiDataAsync(StoredProcConsts.Payments.DepositList, new { Id, UserId, Verified, Restricted, Keyword, FromDate, ToDate, PageSize, PageNo });
                 List<DepositResponse> deposits = result.Read<DepositResponse>();
                 if (!Restricted)
                 {

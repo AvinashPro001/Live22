@@ -56,6 +56,13 @@
                             <button class="btn btn-success offset-1 col-md-2" type="submit" (click)="openWindowCustomClass(changephonenumber)">Reset Phone Number</button>
                         </div>
                         <br />
+                        <div class="row col-md-12" style="height:60px;">
+                            <label class="col-md-4" style="text-align:right;font-size:20px"></label>
+                            <label class="col-md-2" style="text-align:right;font-size:20px"></label>
+                            <label class="col-md-1 mb-1" style="text-align:left;font-size:20px"></label>
+                            <button class="btn btn-success offset-3 col-md-2" type="submit" (click)="ResendOTP()">Resend OTP</button>
+                        </div>
+                        <br />
                     </form>
                 </div>
             </div>
@@ -79,22 +86,22 @@
                 </div>
                 <br />
                 <div class="col-md-12 col-sm-12">
-                    <li *ngFor="let filename of filenames" style="margin-left:50px">
-                        <div id="files" style="display:flex;">
-                            <p>{{filename}}</p>&nbsp;&nbsp;&nbsp;
-                            <button (click)="removefile(filename)">remove</button>
-                        </div>
-                    </li>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-12 col-sm-12" style="display:flex">
-                    <label class="col-4"></label>
-                    <button class="btn btn-success col-lg-3" (click)="UploadIcImage()">Update</button>
-                </div>
-            </div>
+    <li *ngFor="let filename of filenames" style="margin-left:50px">
+        <div id="files" style="display:flex;">
+            <p>{{filename}}</p>&nbsp;&nbsp;&nbsp;
+            <button (click)="removefile(filename)">remove</button>
         </div>
+    </li>
+    </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12 col-sm-12" style="display:flex">
+            <label class="col-4"></label>
+            <button class="btn btn-success col-lg-3" (click)="UploadIcImage()">Update</button>
+        </div>
+    </div>
+    </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>

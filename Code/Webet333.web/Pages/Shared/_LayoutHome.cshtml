@@ -39,7 +39,7 @@
     <meta name="theme-color" content="#ffffff">
     <script src="~/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" charset="utf-8">
-        $(window).on('load', function(){
+        $(window).on('load', function () {
             $(".se-pre-con").fadeOut("slow");
         });</script>
     <script type="text/javascript" charset="utf-8" src="../../js/jquery.cookie.js" as="script"></script>
@@ -76,7 +76,7 @@
     <script src="../../js/xmlToJson.js"></script>
     <script src="~/js/constants/SMSConsts.js"></script>
     <script type="text/javascript">
-        $(window).on('load', function(){
+        $(window).on('load', function () {
             $(".loadingImage").fadeOut("slow");
         });
 
@@ -233,7 +233,7 @@
                             <div id="afterlogin" class="div-toggle">
                                 <ul>
                                     <li class="login-item"><label id="lbl_TimeafterLogin"></label></li>
-                                    @*<li class="login-item"><img class="viplevelImage" id="viplevel_icon" /></li>*@
+                                    <li class="login-item"><img class="viplevelImage" id="viplevel_icon" /></li>
                                     <li class="login-item input-field login">
                                         <ul class="d-flex">
                                             <li class="login-item u-name form-icon" style="display:flex;margin-left:-25px;"><span style="font-size:larger" class="lang" key="username"></span>:<span id="lbl_usernameHeader" style="word-wrap: break-word;width: 80px;white-space: nowrap; overflow: unset; text-overflow: ellipsis;font-size:larger; "></span></li>
@@ -323,16 +323,27 @@
                                                             <td class="menu-padding">Pragmatic wallet</td>
                                                             <td><span id="PragmaticBalance">fetching.....</span></td>
                                                         </tr>
+                                                        <tr>
+                                                            <td class="menu-padding">YeeBet wallet</td>
+                                                            <td><span id="YeeBetBalance">fetching.....</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="menu-padding">SBO wallet</td>
+                                                            <td><span id="SBOBalance">fetching.....</span></td>
+                                                        </tr>
                                                     </table>
                                                 </div>
                                             </div>
                                         </li>
 
-                                        <a asp-page="/Account/Profile" asp-fragment="deposit" onclick="openCity(event, 'Deposit',0)"><li class="common-btn layout-btn" style="background-color: #0166d2;border-color: #0166d2;width: 125px;border-radius: 5px;cursor:pointer;"><label><img class="icon-home" src="~/images/deposit_icon_mob-white.png" />&nbsp;&nbsp;<span class="lang white-text" key="deposit"></span></label></li></a>
+                                        <a asp-page="/Account/Profile" asp-fragment="deposit" onclick="openCity(event, 'Deposit',0)">
+                                        <li class="common-btn layout-btn" style="background-color: #0166d2;border-color: #0166d2;width: 125px;border-radius: 5px;cursor:pointer;"><label><img class="icon-home" src="~/images/deposit_icon_mob-white.png" />&nbsp;&nbsp;<span class="lang white-text" key="deposit"></span></label></li></a>
 
-                                        <a asp-page="/Account/Profile" asp-fragment="withdrawal" onclick="openCity(event, 'Withdrawal',1)"><li class="common-btn layout-btn" style="background-color: #0166d2;border-color: #0166d2;width: 135px;border-radius: 5px;cursor:pointer;"><label><img class="icon-home" src="~/images/withdraw_icon_mob-white.png" />&nbsp;&nbsp;<span class="lang white-text" key="withdrawal"></span></label></li></a>
+                                        <a asp-page="/Account/Profile" asp-fragment="withdrawal" onclick="openCity(event, 'Withdrawal',1)">
+                                        <li class="common-btn layout-btn" style="background-color: #0166d2;border-color: #0166d2;width: 135px;border-radius: 5px;cursor:pointer;"><label><img class="icon-home" src="~/images/withdraw_icon_mob-white.png" />&nbsp;&nbsp;<span class="lang white-text" key="withdrawal"></span></label></li></a>
 
-                                        <a asp-page="/Account/Profile" asp-fragment="transfer" onclick="openCity(event, 'Transfer',2)"><li class="common-btn layout-btn" style="background-color: #0166d2;border-color: #0166d2;width: 125px;border-radius: 5px;cursor:pointer;"><label><img class="icon-home" src="~/images/transfer_icon_mob-white.png" />&nbsp;&nbsp;<span class="lang white-text" key="transfer"></span></label></li></a>
+                                        <a asp-page="/Account/Profile" asp-fragment="transfer" onclick="openCity(event, 'Transfer',2)">
+                                        <li class="common-btn layout-btn" style="background-color: #0166d2;border-color: #0166d2;width: 125px;border-radius: 5px;cursor:pointer;"><label><img class="icon-home" src="~/images/transfer_icon_mob-white.png" />&nbsp;&nbsp;<span class="lang white-text" key="transfer"></span></label></li></a>
                                     </ul>
                                 </div>
                             </div>
@@ -350,6 +361,11 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang" key="menu_sport_book"></span><span class="caret"></span></a>
                             <ul class="dropdown-menu dropmenu-main" id="subMenuSports" role="menu">
                                 <li>
+                                    <a data-toggle="tooltip" data-placement="bottom" onclick="logingGame('SBO')" id="SBOGame">
+                                        <img id="SBOSports" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/footer/sbo.png" alt="SBO" />
+                                    </a>
+                                </li>
+                                <li>
                                     <a data-toggle="tooltip" data-placement="bottom" onclick="logingGame('M8')" id="urlSportbookHome">
                                         <img id="m8sports" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/footer/m8bet.png" style="height:62px;width:auto" alt="M8" />
                                     </a>
@@ -364,7 +380,11 @@
                         <li class="dropdown live-casino">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang" key="menu_live_casino"></span> <span class="caret"></span></a>
                             <ul class="dropdown-menu dropmenu-main" id="subMenuLive" role="menu">
-
+                                <li>
+                                    <a onclick="logingGame('YeeBet')" data-toggle="tooltip" data-placement="bottom" id="YeeBetGame">
+                                        <img data-toggle="tooltip" data-placement="bottom" style="width:120px" class="img-responsive img-filter" src="~/images/logo_yeebet.png" alt="YeeBet" />
+                                    </a>
+                                </li>
                                 <li>
                                     <a onclick="logingGame('DG')" data-toggle="tooltip" data-placement="bottom" id="DGGame">
                                         <img id="dglive" data-toggle="tooltip" data-placement="bottom" class="img-responsive menu-game-logo img-filter" src="~/images/Dg.png" alt="DG" />
@@ -578,6 +598,16 @@
                                 <img class="pink-logo" src="../../images/footer/pragmatic.png" alt="WM logo">
                             </figure>
                         </li>
+                        <li>
+                            <figure class="pad-top-ten">
+                                <img class="pink-logo" src="../../images/footer/logo_yeebet.png" alt="YeeBet logo">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure class="pad-top-ten">
+                                <img class="pink-logo" src="../../images/footer/sbo.png" alt="SBO logo">
+                            </figure>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-sm-6">
@@ -684,9 +714,9 @@
     <div class="clear"></div>
 
     <!--Begin Comm100 Live Chat Code-->
-    <div id="comm100-button-425"></div>
+    <div id="onlinehelp-button-a9010000-0000-0000-0000-008e000391c3">    </div>
     <script type="text/javascript">
-        var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 5e3) })(Comm100API || {})
+        var OnlineHelpAPI = OnlineHelpAPI || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: "a9010000-0000-0000-0000-008e000391c3", div_id: "onlinehelp-button-a9010000-0000-0000-0000-008e000391c3" }), t.site_id = 233923, t.main_code_plan = "a9010000-0000-0000-0000-008e000391c3", e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 5e3) })(OnlineHelpAPI || {})
     </script>
     <!--End Comm100 Live Chat Code-->
 

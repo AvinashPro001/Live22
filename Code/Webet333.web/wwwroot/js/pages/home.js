@@ -11,7 +11,7 @@ $(document).ready(function () {
             if (localStorage.getItem('IsExecute') == "true" || localStorage.getItem('IsExecute') == true || localStorage.getItem('IsExecute') == null) {
                 localStorage.setItem('IsExecute', false);
             }
-            //VIPBanner();
+            VIPBanner();
         }
         WalletSignalR();
         Walletdate();
@@ -32,13 +32,15 @@ $(document).ready(function () {
 });
 //#endregion
 
-//function VIPBanner() {
-//    var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-//    try {
-//        document.getElementById("viplevel_icon").src = resUserData.data.vipBanner;
-//    }
-//    catch (e) {}
-//}
+async function VIPBanner() {
+    var resUserVIPlevel = await GetMethodWithReturn(apiEndPoints.UserVipDetails);
+    sessionStorage.setItem("UserVipDetails", enc(JSON.stringify(resUserVIPlevel)))
+
+    try {
+        document.getElementById("viplevel_icon").src = resUserVIPlevel.data.VIPBanner;
+    }
+    catch (e) { }
+}
 
 function pageloadEvery(t) {
     setTimeout('location.reload(true)', t);
@@ -157,14 +159,14 @@ function slider() {
 }
 //#endregion
 
-function ChangeErroMessage(key) {
+function ChangeErroMessage(key, parameter = "") {
     var ErrorMessage = "";
     $.ajax({
         url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
         dataType: 'json',
         async: false,
         success: function (lang) {
-            ErrorMessage = lang[key];
+            ErrorMessage = lang[key] + parameter;
         }
     });
     return ErrorMessage;
@@ -298,56 +300,33 @@ async function GetUser() {
 
 async function CheckGameInMaintenance(gameName) {
     var walletName;
-    if (gameName == "M8")
-        walletName = "M8 Wallet";
 
-    if (gameName == "Maxbet")
-        walletName = "MaxBet Wallet";
-
-    if (gameName == "SexyBaccarat")
-        walletName = "Sexy Wallet";
-
-    if (gameName == "SA")
-        walletName = "SA Wallet";
-
-    if (gameName == "DG")
-        walletName = "DG Wallet";
-
-    if (gameName == "918Kiss")
-        walletName = "918Kiss Wallet";
-
-    if (gameName == "Mega888")
-        walletName = "Mega888 Wallet";
-
-    if (gameName == "Joker")
-        walletName = "Joker Wallet";
-
-    if (gameName == "playtech")
-        walletName = "PlayTech Wallet";
-
-    if (gameName == "AG")
-        walletName = "AG Wallet";
-
-    if (gameName == "Pussy888")
-        walletName = "Pussy888 Wallet";
-
-    if (gameName == "AllBet")
-        walletName = "AllBet Wallet";
-
-    if (gameName == "WM")
-        walletName = "WM Wallet";
-
-    if (gameName == "Pragmatic")
-        walletName = "Pragmatic Wallet";
+    if (gameName == "M8") walletName = "M8 Wallet";
+    if (gameName == "Maxbet") walletName = "MaxBet Wallet";
+    if (gameName == "SexyBaccarat") walletName = "Sexy Wallet";
+    if (gameName == "SA") walletName = "SA Wallet";
+    if (gameName == "DG") walletName = "DG Wallet";
+    if (gameName == "918Kiss") walletName = "918Kiss Wallet";
+    if (gameName == "Mega888") walletName = "Mega888 Wallet";
+    if (gameName == "Joker") walletName = "Joker Wallet";
+    if (gameName == "playtech") walletName = "PlayTech Wallet";
+    if (gameName == "AG") walletName = "AG Wallet";
+    if (gameName == "Pussy888") walletName = "Pussy888 Wallet";
+    if (gameName == "AllBet") walletName = "AllBet Wallet";
+    if (gameName == "WM") walletName = "WM Wallet";
+    if (gameName == "Pragmatic") walletName = "Pragmatic Wallet";
+    if (gameName == "YeeBet") walletName = "YeeBet Wallet";
+    if (gameName == "SBO") walletName = "SBO Wallet";
 
     for (i = 0; i < walletData.data.length; i++)
-        if (walletData.data[i].walletType == walletName && walletData.data[i].isMaintenance == true)
+        if (walletData.data[i].walletType == walletName &&
+            walletData.data[i].isMaintenance == true)
             return true;
 }
 
 async function GameInMaintenance(i) {
-    if (i == 0)
-        walletData = await GetMethodWithReturn(apiEndPoints.walletSelect);
+    if (i == 0) walletData = await GetMethodWithReturn(apiEndPoints.walletSelect);
+
     for (i = 0; i < walletData.data.length; i++) {
         if (walletData.data[i].walletType == "AG Wallet" && walletData.data[i].isMaintenance == true) {
             document.getElementById('aglive').style.filter = "grayscale(1)";
@@ -566,6 +545,32 @@ async function GameInMaintenance(i) {
                 document.getElementById("pragmaticallin").disabled = false;
             }
         }
+
+        if (walletData.data[i].walletType == "YeeBet Wallet" &&
+            walletData.data[i].isMaintenance == true) {
+            document.getElementById('YeeBetGame').style.filter = "grayscale(1)";
+            document.getElementById('YeeBetGame').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) document.getElementById("YeeBetAllIn").disabled = true;
+        }
+        else if (walletData.data[i].walletType == "YeeBet Wallet" &&
+            walletData.data[i].isMaintenance == false) {
+            document.getElementById('YeeBetGame').style.filter = "";
+            document.getElementById('YeeBetGame').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) document.getElementById("YeeBetAllIn").disabled = false;
+        }
+
+        if (walletData.data[i].walletType == "SBO Wallet" &&
+            walletData.data[i].isMaintenance == true) {
+            document.getElementById('SBOSports').style.filter = "grayscale(1)";
+            document.getElementById('SBOSports').title = "Game In Maintenance.";
+            if (window.location.href.toLowerCase().includes('account/profile')) document.getElementById("SBOAllIn").disabled = true;
+        }
+        else if (walletData.data[i].walletType == "SBO Wallet" &&
+            walletData.data[i].isMaintenance == false) {
+            document.getElementById('SBOSports').style.filter = "";
+            document.getElementById('SBOSports').title = "";
+            if (window.location.href.toLowerCase().includes('account/profile')) document.getElementById("SBOAllIn").disabled = false;
+        }
     }
 }
 
@@ -599,43 +604,37 @@ async function logingGame(gameName) {
     }
     if (GetLocalStorage('currentUser') !== null) {
         if (checkedValue) {
-            if (gameName == "M8")
-                TransferInAllWallet("M8 Wallet");
-            if (gameName == "MaxBet")
-                TransferInAllWallet("MaxBet Wallet");
-            if (gameName == "SexyBaccarat")
-                TransferInAllWallet("Sexy Wallet");
-            if (gameName == "SA")
-                TransferInAllWallet("SA Wallet");
-            if (gameName == "DG")
-                TransferInAllWallet("DG Wallet");
-            if (gameName == "918Kiss")
-                TransferInAllWallet("918Kiss Wallet");
-            if (gameName == "Mega888")
-                TransferInAllWallet("Mega888 Wallet");
-            if (gameName == "Joker")
-                TransferInAllWallet("Joker Wallet");
-            if (gameName == "Pussy888")
-                TransferInAllWallet("Pussy888 Wallet");
-            if (gameName == "AllBet")
-                TransferInAllWallet("AllBet Wallet");
-            if (gameName == "WM")
-                TransferInAllWallet("WM Wallet");
+            if (gameName == "M8") TransferInAllWallet("M8 Wallet");
+            if (gameName == "MaxBet") TransferInAllWallet("MaxBet Wallet");
+            if (gameName == "SexyBaccarat") TransferInAllWallet("Sexy Wallet");
+            if (gameName == "SA") TransferInAllWallet("SA Wallet");
+            if (gameName == "DG") TransferInAllWallet("DG Wallet");
+            if (gameName == "918Kiss") TransferInAllWallet("918Kiss Wallet");
+            if (gameName == "Mega888") TransferInAllWallet("Mega888 Wallet");
+            if (gameName == "Joker") TransferInAllWallet("Joker Wallet");
+            if (gameName == "Pussy888") TransferInAllWallet("Pussy888 Wallet");
+            if (gameName == "AllBet") TransferInAllWallet("AllBet Wallet");
+            if (gameName == "WM") TransferInAllWallet("WM Wallet");
             if (gameName == "Pragmatic") {
                 PragmaticBrokenStatusInterval();
                 TransferInAllWallet("Pragmatic Wallet");
             }
+            if (gameName == "YeeBet") TransferInAllWallet("YeeBet Wallet");
+            if (gameName == "SBO") TransferInAllWallet("SBO Wallet");
         }
 
-        if (gameName == "MaxBet" || gameName == "M8") {
-            GameLogin(gameName);
-        }
-        else {
-            if (gameName != "Pragmatic")
-                window.open("/Information/Game?gamename=" + gameName);
-            else
-                GameLogin("Pragmatic");
-        }
+        if (gameName != "Pragmatic") window.open("/Information/Game?gamename=" + gameName);
+        else GameLogin("Pragmatic");
+
+        //if (gameName == "MaxBet" ||
+        //    gameName == "M8" ||
+        //    gameName == "SBO") {
+        //    GameLogin(gameName);
+        //}
+        //else {
+        //    if (gameName != "Pragmatic") window.open("/Information/Game?gamename=" + gameName);
+        //    else GameLogin("Pragmatic");
+        //}
     }
     else {
         alert("Please Login");
@@ -645,7 +644,7 @@ async function logingGame(gameName) {
 //#region For Playtech game login
 function loadingPlaytechJS() {
     var imported = document.createElement('script');
-    imported.src = 'https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88'
+    imported.src = 'https://login.tothinkit.com/jswrapper/integration.js.php?casino=winforfun88'
     document.head.appendChild(imported);
 }
 
@@ -719,6 +718,7 @@ async function PlaytechIdentifiy(Slotvalue) {
 }
 
 //#region GameLogin
+
 function randomString() {
     var charsetOne = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetTwo = 'abcdefghiklmnopqrstuvwxyz', charsetThree = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ', charsetFour = '0123456789', randomstring = '', i = 0;
 
@@ -847,35 +847,38 @@ async function GameLogin(gamename) {
                             isMobile: false
                         };
                         var res = await PostMethod(apiEndPoints.loginMaxBet, userMaxBetlogin);
-                        if (res.data.error_code == 0) {
-                            document.getElementById("mainpagebody").style.display = "none";
-                            document.getElementById("iframeModel").style.display = "block";
-                            document.getElementById("gameFrame").src = res.data.gameUrl;
-                        }
-                        else {
-                            document.getElementById("mainpagebody").style.display = "";
-                            document.getElementById("iframeModel").style.display = "none";
-                        }
+                        if (res.data.error_code == 0) window.location.href = res.data.gameUrl;
+
+                        //if (res.data.error_code == 0) {
+                        //    document.getElementById("mainpagebody").style.display = "none";
+                        //    document.getElementById("iframeModel").style.display = "block";
+                        //    document.getElementById("gameFrame").src = res.data.gameUrl;
+                        //}
+                        //else {
+                        //    document.getElementById("mainpagebody").style.display = "";
+                        //    document.getElementById("iframeModel").style.display = "none";
+                        //}
                     }
-                    else {
-                        document.getElementById("mainpagebody").style.display = "";
-                        document.getElementById("iframeModel").style.display = "none";
-                    }
+                    //else {
+                    //    document.getElementById("mainpagebody").style.display = "";
+                    //    document.getElementById("iframeModel").style.display = "none";
+                    //}
                 }
                 else {
                     var userMaxBetlogin = {
                         isMobile: false
                     };
                     var res = await PostMethod(apiEndPoints.loginMaxBet, userMaxBetlogin);
-                    if (res.data.error_code == 0) {
-                        document.getElementById("mainpagebody").style.display = "none";
-                        document.getElementById("iframeModel").style.display = "block";
-                        document.getElementById("gameFrame").src = res.data.gameUrl;
-                    }
-                    else {
-                        document.getElementById("mainpagebody").style.display = "";
-                        document.getElementById("iframeModel").style.display = "none";
-                    }
+                    if (res.data.error_code == 0) window.location.href = res.data.gameUrl;
+                    //if (res.data.error_code == 0) {
+                    //    document.getElementById("mainpagebody").style.display = "none";
+                    //    document.getElementById("iframeModel").style.display = "block";
+                    //    document.getElementById("gameFrame").src = res.data.gameUrl;
+                    //}
+                    //else {
+                    //    document.getElementById("mainpagebody").style.display = "";
+                    //    document.getElementById("iframeModel").style.display = "none";
+                    //}
                 }
                 break;
             case 'M8':
@@ -1189,6 +1192,72 @@ async function GameLogin(gamename) {
                     window.open("../Information/PragmaticGame", "_blank")
                 }
                 break;
+            case 'YeeBet':
+                LoaderShow();
+                if (resSelectUser.data.YeeBet !== true) {
+                    var userRegisterModel = {
+                    }
+                    var res = await PostMethod(apiEndPoints.YeeBetRegister, userRegisterModel);
+                    if (res.data.result == 0) {
+                        var userLoginModel = {
+                            isMobile: false
+                        }
+                        var login = await PostMethod(apiEndPoints.YeeBetLogin, userLoginModel);
+                        if (login.data.result == 0) window.location.href = login.data.openurl;
+                    }
+                }
+                else {
+                    var Model = {
+                        isMobile: false
+                    }
+                    var login = await PostMethod(apiEndPoints.YeeBetLogin, Model);
+                    if (login.data.result == 0) window.location.href = login.data.openurl;
+                }
+                break;
+            case 'SBO':
+                LoaderShow();
+                if (resSelectUser.data.SBO !== true) {
+                    let model = {};
+                    var res = await PostMethod(apiEndPoints.SBORegister, model);
+                    if (res.data.error.id == 0) {
+                        model = {
+                            isMobile: false
+                        };
+                        var res = await PostMethod(apiEndPoints.SBOLogin, model);
+                        if (res != null && res.data.error.id == 0) window.location.href = res.data.url;
+
+                        //if (res.message != null) {
+                        //    document.getElementById("mainpagebody").style.display = "none";
+                        //    document.getElementById("iframeModel").style.display = "block";
+                        //    document.getElementById("gameFrame").src = res.message;
+                        //}
+                        //else {
+                        //    document.getElementById("mainpagebody").style.display = "";
+                        //    document.getElementById("iframeModel").style.display = "none";
+                        //}
+                    }
+                    //else {
+                    //    document.getElementById("mainpagebody").style.display = "";
+                    //    document.getElementById("iframeModel").style.display = "none";
+                    //}
+                }
+                else {
+                    var model = {
+                        isMobile: false
+                    };
+                    var res = await PostMethod(apiEndPoints.SBOLogin, model);
+                    if (res != null && res.data.error.id == 0) window.location.href = res.data.url;
+                    //if (res.message != null) {
+                    //    document.getElementById("mainpagebody").style.display = "none";
+                    //    document.getElementById("iframeModel").style.display = "block";
+                    //    document.getElementById("gameFrame").src = res.message;
+                    //}
+                    //else {
+                    //    document.getElementById("mainpagebody").style.display = "";
+                    //    document.getElementById("iframeModel").style.display = "none";
+                    //}
+                }
+                break;
         }
         LoaderHide();
     }
@@ -1197,6 +1266,7 @@ async function GameLogin(gamename) {
         LoaderHide();
     }
 }
+
 //#endregion GameLogin
 
 //#region sliderPromotion
@@ -1396,4 +1466,4 @@ function getCookie(cname) {
     }
     return "";
 }
-//#endregion
+    //#endregion

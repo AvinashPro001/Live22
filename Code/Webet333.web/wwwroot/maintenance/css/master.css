@@ -1,0 +1,193 @@
+body
+{
+	background:url(../images/body-bg.jpg) 0 0 repeat;
+	margin:0px;
+	padding:0px;
+	font-family:arial, sans-serif;
+	font-size:14px;
+	color:#333;
+}
+h1,h2,h3,h4,h5,ul,li,p{margin:0px;padding:0px;}
+.container{ max-width:1100px; margin:0px auto; overflow:hidden; }
+.header_section{width: 100%;float: left;background-color: #fff;padding: 15px 0px;}
+.logo_fl{width:20%;float: left;}
+.logo_fr{width:80%;float: right;}
+.logo_fl img{width: 100%;}
+.banner_section_wrap{width: 100%;float: left;background: url(../images/bg1.png) 0 0 no-repeat;
+background-size: cover;height: 500px;}
+.banner_sec_left{width:50%;float: left;padding-top: 50px;}
+.banner_sec_right{width: 50%;float: right;text-align: center;padding-top: 50px;}
+.banner_sec_left img{width: auto;text-align: center;}
+.banner_sec_left ul{width: 100%;float: left;}
+.banner_sec_left ul li{
+	width: 100%;
+    float: left;
+    list-style: none;
+    color: #FFE33E;
+    font-size: 15px;
+    padding-bottom: 15px;
+    background: url(../images/tickmark.png) 0% 50% no-repeat;
+    padding: 10px 10px 10px 25px;
+}
+.banner_sec_right img{width:auto;text-align: center;}
+.mainatanace_schedule_wrap{width: 100%;float: left;padding: 30px 0px;}
+.mainatanace_schedule_inner{
+	width: 100%;
+    float: left;
+    background-color: #f0fdfd;
+    border-radius: 20px;
+    padding-bottom: 10px;}
+.inner_maint_content{width: 100%;float: left;}
+.mainatanace_schedule_inner h1{
+    color: #ddb808;
+    font-size: 21px;
+    padding: 20px 3px 10px 25px;
+}
+h2.inner_mainatanace_schedule_left {
+    width: 50%;
+    float: left;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: left;
+    padding-bottom: 10px;
+    color: #848a8a;
+    background:url(../images/calendar.png) 0% 35% no-repeat;
+    padding: 10px 0px 15px 30px;
+    margin-left: 25px;
+
+}
+h2.inner_wmainatanace_schedule_right {
+   	width: 40%;
+    float: left;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    color: #4d5252;
+    padding: 10px 0px 15px 0px;
+}
+h2.inner_wmainatanace_schedule_right span{padding-left: 40px;}
+.contact_us_wrap{width: 100%;float: left;padding: 10px 0px;}
+.contact_us_head_wrap{width: 100%;float: left;padding-bottom: 10px;}
+.contact_us_head_wrap h1{font-size: 19px;border-bottom: 1px dashed #707070;padding-bottom:15px;}
+.contact_box_sec{width: 100%;float: left;padding: 20px 0px 10px 0px;}
+.contact_box_one{width: 23%;float: left;margin-left:1%;margin-right: 1%;text-align: center;}
+.contact_box_one img{width: 100%;border-radius:22px;border: 1px solid #eee;}
+a.live_chat_btn{
+	background-color: #187df9;
+    color: #fff;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    display: inline-block;
+    text-decoration: none;
+}
+a.whats_app_btn{
+	background-color: #1dc43d;
+    color: #fff;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    display: inline-block;
+    text-decoration: none;
+}
+a.telegram_app_btn{
+	background-color: #2aa4d5;
+    color: #fff;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    display: inline-block;
+    text-decoration: none;
+}
+a.wechat_app_btn{
+	background-color: #16a119;
+    color: #fff;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+
+
+
+
+
+/*responsive css start*/
+@media only screen and (max-width:599px) {
+
+.header_section{
+	padding-left: 0px;
+    width: 92%;
+    padding: 3%;}
+.logo_fl{width:100%;text-align: center;}
+.logo_fl img {
+    width: 150px;
+}
+.logo_fr{display: none;}
+.banner_sec_left{width: 100%;padding-top: 0px;}
+.banner_sec_right{width: 100%;padding-top: 10px;}
+.banner_sec_left img{width: 100%;}
+.banner_section_wrap{
+	height:670px;
+    padding: 5%;
+    width: 90%;
+}
+.mainatanace_schedule_wrap{
+    width: 90%;
+    float: left;
+    padding: 5%;
+}
+.mainatanace_schedule_inner h1 {
+    color: #ddb808;
+    font-size: 18px;
+    padding: 20px 25px 12px 25px;
+    text-align: center;
+}
+h2.inner_mainatanace_schedule_left{
+	width: 100%;
+	margin-left: 0px;
+	padding: 10px 0px 5px 0px;
+	text-align: center;
+	background: url(../images/calendar.png) 12% 100% no-repeat;
+}
+h2.inner_wmainatanace_schedule_right{
+	width: 100%;
+	margin-left:0px;
+	padding: 10px 0px 10px 0px;
+	text-align: center;
+}
+.contact_us_wrap{
+	width: 90%;
+	padding: 5%;
+}
+.contact_box_one{
+	width: 48%;
+    margin-left: 1%;
+    margin-right: 1%;
+    padding-bottom: 20px;
+}
+.contact_box_one img{
+width:95%;
+}
+h2.inner_wmainatanace_schedule_right span{
+	padding-left: 40px;
+}
+a.live_chat_btn{width: 100px;padding: 10px 20px;}
+a.whats_app_btn{width: 100px;padding: 10px 20px;}
+a.telegram_app_btn{width: 100px;padding: 10px 20px;}
+a.wechat_app_btn{width: 100px;padding: 10px 20px;}
+
+
+}
+/* css end */

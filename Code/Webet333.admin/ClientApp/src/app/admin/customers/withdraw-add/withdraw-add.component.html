@@ -22,8 +22,7 @@
                         <h3 class="col-md-4">Username</h3>
                         <h2 class="col-md-1">:</h2>
                         <div class="form-control col-md-4 mb-4">
-                            <ngx-select-dropdown tabindex="0" [multiple]="false"
-                                                 [config]="config" [options]="customerData" (change)="onChange($event)"></ngx-select-dropdown>
+                            <ngx-select-dropdown tabindex="0" [multiple]="false" [config]="config" [options]="customerData" (change)="onChange($event)"></ngx-select-dropdown>
                         </div>
                     </div>
                     <div class="row">
@@ -75,6 +74,12 @@
                                 <div class="row">
                                     <div class="col-sm-3 col-lg-3"><h5>Pragmatic :</h5></div>
                                     <div class="col-sm-3 col-lg-3"><h5>{{pragmaticBal == null ? 'N/A' : pragmaticBal}}</h5></div>
+                                    <div class="col-sm-3 col-lg-3"><h5>YeeBet :</h5></div>
+                                    <div class="col-sm-3 col-lg-3"><h5>{{YeeBetBalance == null ? 'N/A' : YeeBetBalance}}</h5></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 col-lg-3"><h5>SBO :</h5></div>
+                                    <div class="col-sm-3 col-lg-3"><h5>{{SBOBalance == null ? 'N/A' : SBOBalance}}</h5></div>
                                 </div>
                                 <!--</div>-->
                                 <br />
@@ -103,18 +108,17 @@
                                             </div>
                                         </li>
                                         <!--<li>
-                                            <div class="left-part">*Balance</div>
-                                            <div class="right-part">
-                                                {{balance}}
-                                            </div>
-                                        </li>-->
+                <div class="left-part">*Balance</div>
+                <div class="right-part">
+                    {{balance}}
+                </div>
+            </li>-->
                                         <li>
                                             <div class="left-part">Amount</div>
                                             <div class="right-part">
                                                 <input type="text" name="name" id="txt_amount" />
                                             </div>
                                         </li>
-
                                         <li>
                                             <div class="left-part">Remark</div>
                                             <div class="right-part  ">

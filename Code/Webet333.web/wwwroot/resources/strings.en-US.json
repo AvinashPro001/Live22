@@ -215,6 +215,8 @@
   "sexybaccarat_game": "Sexy B. Casino",
   "allBet_game": "AllBet Casino",
   "wm_game": "WM Casino",
+  "yeebet_game": "YeeBet Casino",
+  "SBO_Game": "SBO Sports",
   "coming_soon": "Coming Soon",
   "click_play": "Click to Play",
 
@@ -242,6 +244,7 @@
   "amount_greater_zero_error": "Please Enter Amount Greater than 0.",
   "promot_active_error": "You cannot apply promotion,Because have active promotion",
   "min_max_amount_error": "Minimun Amount 10 and Maximum Amount is 30000.",
+  "min_max_amount_error_parameter": "Minimun Amount 10 and Maximum Amount is ",
   "min1_max1000_amount_error": "Minimun Amount 1",
   "bnk_name_required_error": "Bank Name Filed is required.",
 

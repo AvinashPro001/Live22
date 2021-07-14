@@ -7,9 +7,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.account = exports.environment = void 0;
 exports.environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
     //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost/api/v1/'
+    apiUrl: 'http://localhost:8091/api/v1/'
+    //apiUrl: 'http://localhost:5000/api/v1/'
 };
 exports.account = {
     login: exports.environment.apiUrl + 'account/login',
@@ -64,7 +65,7 @@ exports.M8Game = {
     withdrawalAction: 'action=withdraw',
     secret: 'secret=a782988d',
     agent: 'agent=0a1a',
-    M8baseUrl: 'http://apid.mywinday.com/api.aspx?'
+    M8baseUrl: 'http://apir.mywinday.com/api.aspx?'
 };
 exports.AGGame = {
     AGbaseUrl: 'http://agent.avx99.com/API/',
@@ -186,6 +187,8 @@ exports.customer = {
     PlaytechBettingDetails: exports.environment.apiUrl + 'Game/Manually/Playtech_Betting_Details',
     M8BettingDetails: exports.environment.apiUrl + 'Game/Manually/M8_Betting_Details',
     MaxbetBettingDetails: exports.environment.apiUrl + 'Game/Manually/Maxbet_Betting_Details',
+    YeeBetBettingDetails: exports.environment.apiUrl + 'Game/Manually/YeeBet_Betting_Details',
+    SBOBettingDetails: exports.environment.apiUrl + 'Game/Manually/SBO_Betting_Details',
     Kiss918PlayerLog: exports.environment.apiUrl + '918kiss/playerlog',
     Pussy888PlayerLog: exports.environment.apiUrl + 'pussy888/playerlog',
     MaxbetDefaultBettingLimit: exports.environment.apiUrl + 'MaxBet/DefaultBettingLimitSet',
@@ -203,6 +206,8 @@ exports.customer = {
     SaveAllbetBettingDetails: exports.environment.apiUrl + 'Game/AllBetBettingDetailsSave',
     SaveWMBettingDetails: exports.environment.apiUrl + 'Game/WMBettingDetailsSave',
     SavePragmaticBettingDetails: exports.environment.apiUrl + 'Game/PragmaticBettingDetailsSave',
+    SaveYeeBetBettingDetails: exports.environment.apiUrl + 'Game/YeeBetBettingDetailsSave',
+    SaveSBOBettingDetails: exports.environment.apiUrl + 'Game/SBOBettingDetailsSave',
     approvalTimeInsert: exports.environment.apiUrl + 'payments/approvaltime/insert',
     approvalTimeSelect: exports.environment.apiUrl + 'payments/approvaltime/select',
     passwordResetSelect: exports.environment.apiUrl + 'account/gamepassword/select',
@@ -265,7 +270,16 @@ exports.customer = {
     freeCreditEventInsert: exports.environment.apiUrl + 'freecreditevent/insert',
     freeCreditEventUpdate: exports.environment.apiUrl + 'freecreditevent/update',
     freeCreditEventSetFreeCreditTerm: exports.environment.apiUrl + 'freecreditevent/setfreecreditterm',
-    freeCreditEventUsersSelect: exports.environment.apiUrl + 'freecreditevent/users/select'
+    freeCreditEventUsersSelect: exports.environment.apiUrl + 'freecreditevent/users/select',
+    promotionUsersSelect: exports.environment.apiUrl + 'promotions/users/select',
+    promotionSelectForDropdown: exports.environment.apiUrl + 'promotions/select/dropdown',
+    setSBOPlayerDefaultBetLimit: exports.environment.apiUrl + 'sbo/set/playerdefaultbetlimit',
+    updateSBOPlayerDefaultBetLimit: exports.environment.apiUrl + 'sbo/update/playerdefaultbetlimit',
+    getSBOPlayerDefaultBetLimit: exports.environment.apiUrl + 'sbo/get/playerdefaultbetlimit',
+    sboGetLeague: exports.environment.apiUrl + 'sbo/getLeague',
+    sboSetLeague: exports.environment.apiUrl + 'sbo/set/league',
+    getLeagueBetSetting: exports.environment.apiUrl + 'sbo/get/league-bet-setting',
+    sboGetBlankLeague: exports.environment.apiUrl + 'sbo/blank-getLeague'
 };
 exports.playtech = {
     playtechUrl: 'http://api.webet333.com/api/Default/playtech',
@@ -330,6 +344,8 @@ exports.gameBalance = {
     WM: exports.environment.apiUrl + 'gamebalance/wm',
     Pragmatic: exports.environment.apiUrl + 'gamebalance/pragmatic',
     walletBalance: exports.environment.apiUrl + 'customer/wallet/balance',
+    YeeBet: exports.environment.apiUrl + 'gamebalance/YeeBet',
+    SBO: exports.environment.apiUrl + 'gamebalance/SBO'
 };
 exports.smsConst = {
     SMSbaseUrl: 'http://cloudsms.trio-mobile.com/index.php/api/bulk_mt?',
@@ -367,6 +383,8 @@ exports.GameRegister = {
     registerWM: exports.environment.apiUrl + 'wm/register',
     registerAllBet: exports.environment.apiUrl + 'allbet/register',
     registerSexy: exports.environment.apiUrl + 'sexybaccarart/register',
-    registerPragmatic: exports.environment.apiUrl + 'pragmatic/register'
+    registerPragmatic: exports.environment.apiUrl + 'pragmatic/register',
+    registerYeeBet: exports.environment.apiUrl + 'yeebet/register',
+    registerSBO: exports.environment.apiUrl + 'sbo/register/player'
 };
 //# sourceMappingURL=environment.js.map

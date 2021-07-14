@@ -5,9 +5,10 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:8081/api/v1/'
+    //apiUrl: 'http://api.webet333.com/api/v1/'
+    apiUrl: 'http://uatapi.webet333.com/api/v1/'
+    //apiUrl: 'http://localhost:8091/api/v1/'
+    //apiUrl: 'http://localhost:5000/api/v1/'
 };
 
 export const account = {
@@ -73,7 +74,7 @@ export const M8Game = {
     withdrawalAction: 'action=withdraw',
     secret: 'secret=a782988d',
     agent: 'agent=0a1a',
-    M8baseUrl: 'http://apid.mywinday.com/api.aspx?'
+    M8baseUrl: 'http://apir.mywinday.com/api.aspx?'
 }
 
 export const AGGame = {
@@ -224,6 +225,8 @@ export const customer = {
     PlaytechBettingDetails: environment.apiUrl + 'Game/Manually/Playtech_Betting_Details',
     M8BettingDetails: environment.apiUrl + 'Game/Manually/M8_Betting_Details',
     MaxbetBettingDetails: environment.apiUrl + 'Game/Manually/Maxbet_Betting_Details',
+    YeeBetBettingDetails: environment.apiUrl + 'Game/Manually/YeeBet_Betting_Details',
+    SBOBettingDetails: environment.apiUrl + 'Game/Manually/SBO_Betting_Details',
 
     Kiss918PlayerLog: environment.apiUrl + '918kiss/playerlog',
     Pussy888PlayerLog: environment.apiUrl + 'pussy888/playerlog',
@@ -240,11 +243,12 @@ export const customer = {
     SaveM8BettingDetails: environment.apiUrl + 'Game/M8BettingDetailsSave',
     SavePlaytechBettingDetails: environment.apiUrl + 'Game/PlaytechBettingDetailsSave',
     SaveMaxBetBettingDetails: environment.apiUrl + 'Game/MaxBetBettingDetailsSave',
-
     SavePussy888BettingDetails: environment.apiUrl + 'Game/Pussy888BettingDetailsSave',
     SaveAllbetBettingDetails: environment.apiUrl + 'Game/AllBetBettingDetailsSave',
     SaveWMBettingDetails: environment.apiUrl + 'Game/WMBettingDetailsSave',
     SavePragmaticBettingDetails: environment.apiUrl + 'Game/PragmaticBettingDetailsSave',
+    SaveYeeBetBettingDetails: environment.apiUrl + 'Game/YeeBetBettingDetailsSave',
+    SaveSBOBettingDetails: environment.apiUrl + 'Game/SBOBettingDetailsSave',
 
     approvalTimeInsert: environment.apiUrl + 'payments/approvaltime/insert',
     approvalTimeSelect: environment.apiUrl + 'payments/approvaltime/select',
@@ -330,7 +334,20 @@ export const customer = {
     freeCreditEventInsert: environment.apiUrl + 'freecreditevent/insert',
     freeCreditEventUpdate: environment.apiUrl + 'freecreditevent/update',
     freeCreditEventSetFreeCreditTerm: environment.apiUrl + 'freecreditevent/setfreecreditterm',
-    freeCreditEventUsersSelect: environment.apiUrl + 'freecreditevent/users/select'
+    freeCreditEventUsersSelect: environment.apiUrl + 'freecreditevent/users/select',
+
+    promotionUsersSelect: environment.apiUrl + 'promotions/users/select',
+    promotionSelectForDropdown: environment.apiUrl + 'promotions/select/dropdown',
+
+    setSBOPlayerDefaultBetLimit: environment.apiUrl + 'sbo/set/playerdefaultbetlimit',
+    updateSBOPlayerDefaultBetLimit: environment.apiUrl + 'sbo/update/playerdefaultbetlimit',
+    getSBOPlayerDefaultBetLimit: environment.apiUrl + 'sbo/get/playerdefaultbetlimit',
+    sboGetLeague: environment.apiUrl + 'sbo/getLeague',
+    sboSetLeague: environment.apiUrl + 'sbo/set/league',
+    getLeagueBetSetting: environment.apiUrl + 'sbo/get/league-bet-setting',
+    sboGetBlankLeague: environment.apiUrl + 'sbo/blank-getLeague',
+
+    resendOTP: environment.apiUrl + 'account/send/otp'
 }
 
 export const playtech = {
@@ -401,6 +418,8 @@ export const gameBalance = {
     WM: environment.apiUrl + 'gamebalance/wm',
     Pragmatic: environment.apiUrl + 'gamebalance/pragmatic',
     walletBalance: environment.apiUrl + 'customer/wallet/balance',
+    YeeBet: environment.apiUrl + 'gamebalance/YeeBet',
+    SBO: environment.apiUrl + 'gamebalance/SBO'
 }
 
 export const smsConst = {
@@ -445,5 +464,7 @@ export const GameRegister = {
     registerWM: environment.apiUrl + 'wm/register',
     registerAllBet: environment.apiUrl + 'allbet/register',
     registerSexy: environment.apiUrl + 'sexybaccarart/register',
-    registerPragmatic: environment.apiUrl + 'pragmatic/register'
+    registerPragmatic: environment.apiUrl + 'pragmatic/register',
+    registerYeeBet: environment.apiUrl + 'yeebet/register',
+    registerSBO: environment.apiUrl + 'sbo/register/player'
 }

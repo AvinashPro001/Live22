@@ -216,6 +216,8 @@
   "sexybaccarat_game": "Sexy B. 视讯",
   "allBet_game": "AllBet 视讯",
   "wm_game": "WM 视讯",
+  "yeebet_game": "YeeBet 赌场",
+  "SBO_Game": "SBO体育",
   "coming_soon": "即将上市",
   "click_play": "点击游玩",
 
@@ -243,6 +245,7 @@
   "amount_greater_zero_error": "进输入金额多过0",
   "promot_active_error": "你无法申请此优惠因为已有有效优惠",
   "min_max_amount_error": "最低金额为10和最高金额为30000",
+  "min_max_amount_error_parameter": "最低金额为10和最高金额为",
   "min1_max1000_amount_error": "最低金额为1",
   "bnk_name_required_error": "银行名称为必填项",
 

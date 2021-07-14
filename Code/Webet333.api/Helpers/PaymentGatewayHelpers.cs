@@ -21,27 +21,23 @@ namespace Webet333.api.Helpers
 
         private string Connection = string.Empty;
 
-        private const string Url = "https://stageapi.vaderpay.net/";
+        private const string GetPaymentGatewayUrlEndpoint = "https://stagecorpapi.vaderpay.net/payin/deposit";
 
-        private const string GetPaymentGatewayUrlEndpoint = "setuppayment.asp";
-
-        private const string CheckStatusEndpoint = "transinfo.asp";
+        private const string CheckStatusEndpoint = "https://stagecorpapi.vaderpay.net/payin/transinfo";
 
         private const string SellerId = "webet";
 
         private const string Currency = "MYR";
 
-        private const string AuthKey = "cggJRTZHaJ58mwJ2tAT6vaEx9J9a7vJzVoCunC42log=";
+        private const string AuthKey = "SDwlKhkSVloGykuOLF30QSf1Oifs7Hpy4IOsOz7AtC8=";
 
 #elif STAG
 
         private string Connection = string.Empty;
 
-        private const string Url = "https://api.vaderpay.net/";
+        private const string GetPaymentGatewayUrlEndpoint = "https://btpayinapi.vaderpay.net/payin/deposit";
 
-        private const string GetPaymentGatewayUrlEndpoint = "setuppayment.asp";
-
-        private const string CheckStatusEndpoint = "transinfo.asp";
+        private const string CheckStatusEndpoint = "https://btpayinapi.vaderpay.net/payin/transinfo";
 
         private const string SellerId = "wbt02";
 
@@ -60,7 +56,7 @@ namespace Webet333.api.Helpers
 
         #region Call Third Party API and Encrpt Data
 
-        public static async Task<string> CallAPI(string Url, string Parameter, bool Method = true)
+        public static async Task<string> CallAPI(string Url, string Parameter=null, bool Method = true)
         {
             try
             {
@@ -114,8 +110,8 @@ namespace Webet333.api.Helpers
         public static async Task<GetUrlResponse> CallPaymentgetURL(string Name, decimal Amount)
         {
             var guid = Guid.NewGuid();
-            var parameters = $"Seller={SellerId}&ReturnURL={GameConst.BaseUrl}PaymentStatus?status=accept&FailedReturnURL={GameConst.BaseUrl}PaymentStatus?status=reject&HTTPPostURL={GameConst.APIUrl}online/payment/verified&Amount={Amount}&Currency={Currency}&ItemID={guid}&ItemDescription=Deposit Money {Amount} MYR&ClientName={Name}";
-            var url = Url + GetPaymentGatewayUrlEndpoint;
+            var parameters = $"Seller={SellerId}&ReturnURL={GameConst.BaseUrl}&FailedReturnURL={GameConst.BaseUrl}&HTTPPostURL={GameConst.APIUrl}online/payment/verified&Amount={Amount}&Currency={Currency}&ItemID={guid}&ItemDescription=Deposit Money {Amount} MYR&ClientName={Name}";
+            var url = GetPaymentGatewayUrlEndpoint;
             return JsonConvert.DeserializeObject<GetUrlResponse>(await CallAPI(url, parameters));
         }
 
@@ -125,8 +121,8 @@ namespace Webet333.api.Helpers
 
         public static async Task<CheckPaymentStatusResponse> CheckStatus(string token)
         {
-            var url = $"{Url}{CheckStatusEndpoint}?token={token}";
-            return JsonConvert.DeserializeObject<CheckPaymentStatusResponse>(await GameHelpers.CallGetMethodThirdPartyApi(url));
+            var url = $"{CheckStatusEndpoint}?token={token}";
+            return JsonConvert.DeserializeObject<CheckPaymentStatusResponse>(await CallAPI(url,Method:false));
         }
 
         #endregion Check Status

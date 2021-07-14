@@ -589,6 +589,27 @@ export class CustomerEditComponent implements OnInit {
         })
     }
 
+    //#region Resend OTP
+
+    ResendOTP() {
+        let data = {
+            id: this.data.id
+        };
+
+        if (this.commonService.CheckVariable(data.id)) {
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectUserForResendingOTP);
+            return;
+        }
+
+        this.adminService.add<any>(customer.resendOTP, data).subscribe(res => {
+            this.toasterService.pop('success', 'Success', res.message);
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
+    //#endregion
+
     //#region Check Permission
 
     async checkViewPermission() {

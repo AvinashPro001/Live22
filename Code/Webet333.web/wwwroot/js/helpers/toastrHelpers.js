@@ -3,7 +3,8 @@
     document.getElementById("ErrorMessage").innerHTML = message;
     var x = document.getElementById("error_snackbar");
     x.className = "show";
-    setTimeout(function () { x.className = x.className.replace("show", ""); }, 1800);
+    //setTimeout(function () { x.className = x.className.replace("show", ""); }, 1800);
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 4200);
 }
 
 function ShowWarning(message) {

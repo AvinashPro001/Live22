@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Webet333.models.Request.Promotions
@@ -65,7 +66,7 @@ namespace Webet333.models.Request.Promotions
         [JsonProperty(PropertyName = "discountType")]
         public string DiscountType { get; set; }
 
-        [Required]
+        //[Required]
         [JsonProperty(PropertyName = "discount")]
         public string Discount { get; set; }
 
@@ -81,9 +82,15 @@ namespace Webet333.models.Request.Promotions
         [JsonProperty(PropertyName = "winturn")]
         public int WinTurn { get; set; }
 
-        [Required]
+        //[Required]
         [JsonProperty(PropertyName = "maxbonus")]
         public decimal MaxBonus { get; set; }
+
+        [JsonProperty(PropertyName = "minDeposit")]
+        public decimal MinDeposit { get; set; }
+
+        [JsonProperty("fixedBonus")]
+        public System.Collections.Generic.List<PromotionFixedBonusAmount> FixedBonus { get; set; }
 
         [JsonProperty(PropertyName = "isLiveCategory")]
         public bool IsLiveCategory { get; set; }
@@ -115,6 +122,9 @@ namespace Webet333.models.Request.Promotions
         [JsonProperty(PropertyName = "isWM")]
         public bool IsWM { get; set; }
 
+        [JsonProperty(PropertyName = "isYeeBet")]
+        public bool IsYeeBet { get; set; }
+
         [JsonProperty(PropertyName = "isAllBet")]
         public bool IsAllBet { get; set; }
 
@@ -135,6 +145,9 @@ namespace Webet333.models.Request.Promotions
 
         [JsonProperty(PropertyName = "isJoker")]
         public bool IsJoker { get; set; }
+
+        [JsonProperty(PropertyName = "isSBO")]
+        public bool IsSBO { get; set; }
 
         [JsonProperty(PropertyName = "isNewMember")]
         public bool IsNewMember { get; set; }
@@ -171,6 +184,9 @@ namespace Webet333.models.Request.Promotions
 
         [JsonProperty(PropertyName = "isDiamond")]
         public bool IsDiamond { get; set; }
+
+        [JsonProperty(PropertyName = "isYeeBetBetLimit")]
+        public bool IsYeeBetBetLimit { get; set; }
     }
 
     public class PromotionUpdateRequest : PromotionRequest
@@ -178,5 +194,14 @@ namespace Webet333.models.Request.Promotions
         [Required]
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
+    }
+
+    public class PromotionFixedBonusAmount
+    {
+        public Guid? id { get; set; } = Guid.NewGuid();
+
+        public decimal? depositAmount { get; set; }
+
+        public decimal? bonusAmount { get; set; }
     }
 }

@@ -19,6 +19,8 @@ class ImageSnippet {
 })
 
 export class BonusAddComponent implements OnInit {
+    //#region variable
+
     disabled: boolean = false;
     playtechBal: any;
     m8Bal: any;
@@ -64,7 +66,6 @@ export class BonusAddComponent implements OnInit {
     api918Kiss: any;
     apiJoker: any;
 
-    //#region variable
     customerData: any
     customerWallet: any
     kissBal: any
@@ -91,17 +92,28 @@ export class BonusAddComponent implements OnInit {
     wmBal: any;
     wmUsername: any;
     userPassword: any;
+
+    YeeBetBalance: any;
+    YeeBetUsername: any;
+
+    SBOBalance: any;
+    SBOUsername: any;
+
     //#endregion
+
     //#region ngOnInit
+
     async ngOnInit() {
         if (await this.checkAddPermission()) {
             this.customerUser();
             this.retrieveDepositpage();
         }
     }
+
     //#endregion
 
     //#region onChange
+
     onChange(event) {
         this.newVal = event.value.id;
         this.userPassword = event.value.password;
@@ -120,14 +132,17 @@ export class BonusAddComponent implements OnInit {
         searchPlaceholder: 'Search', // label thats displayed in search input,
         searchOnKey: 'username' // key on which search should be performed this will be selective search. if undefined this will be extensive search on all keys
     }
+
     //#endregion
 
     //#region constructor
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
         private router: Router,
         private commonService: CommonService) { }
+
     //#endregion
 
     RegisterGame(userData) {
@@ -141,6 +156,7 @@ export class BonusAddComponent implements OnInit {
     }
 
     //#region Add BONUS
+
     addBonus() {
         this.disabled = true;
         let radioValue = $("input[name='promotion']:checked").val();
@@ -158,28 +174,28 @@ export class BonusAddComponent implements OnInit {
         if (dataSelect.userId === "0: undefined") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Selec User !!");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectUser);
         }
         if (dataSelect.walletTypeId === "0: undefined") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please select walllet !!");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectWalllet);
         }
         if (dataSelect.amount === "") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Insert Amount !!");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertAmount);
         }
         if (dataSelect.promotionId === undefined) {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Selec promotion !!");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectPromotion);
         }
 
         if (dataSelect.referenceNo === "") {
             this.disabled = false;
             this.ngOnInit();
-            return this.toasterService.pop('error', 'Error', "Please Add Remark !!");
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseAddRemark);
         }
 
         this.adminService.get<any>(account.walletSelect).subscribe(resData => {
@@ -191,18 +207,22 @@ export class BonusAddComponent implements OnInit {
             if (this.IsMaintenance) {
                 this.disabled = false;
                 this.ngOnInit();
-                return this.toasterService.pop('error', 'Error', "Game in Maintenance");
+                return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.GameInMaintenance);
             }
 
             this.adminService.add<any>(customer.addDeposit, dataSelect).subscribe(res => {
                 this.toasterService.pop('success', 'Successfully', res.message);
                 this.router.navigate(['admin/customers/bonus-list']);
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
             });
         });
     }
+
     //#endregion
 
     //#region uploadReceipt
+
     //urls = new Array<any>();
     uploadReceipt(id) {
         let data = {
@@ -248,9 +268,11 @@ export class BonusAddComponent implements OnInit {
         let imageindexupload = this.urls.map(singleUrl => { return singleUrl }).indexOf(files[0])
         this.urls.splice(imageindexupload, 1)
     }
+
     //#endregion
 
     //#region M8
+
     callApi(apiurl, postData) {
         if (postData == false) {
             let model = {
@@ -285,9 +307,11 @@ export class BonusAddComponent implements OnInit {
             });
         }
     }
+
     //#endregion M8
 
     //#region Playtech
+
     callApiPlaytech(apiurl, postData) {
         if (postData == false) {
             let model = {
@@ -322,9 +346,11 @@ export class BonusAddComponent implements OnInit {
             });
         }
     }
+
     //#endregion Playtech
 
     //#region AG
+
     callAG(apiurl, postData) {
         if (postData == false) {
             let model = {
@@ -359,9 +385,11 @@ export class BonusAddComponent implements OnInit {
             });
         }
     }
+
     //#endregion AG
 
     //#region 918Kiss
+
     call918Kiss(apiurl, postData) {
         if (postData == false) {
             let model = {
@@ -396,9 +424,11 @@ export class BonusAddComponent implements OnInit {
             });
         }
     }
+
     //#endregion
 
     //#region Joker
+
     callJoker(apiurl, parameter, postData) {
         if (postData == false) {
             let model = {
@@ -434,9 +464,11 @@ export class BonusAddComponent implements OnInit {
             });
         }
     }
+
     //#endregion
 
     //#region Generate GUID
+
     generateGuid() {
         var result, i, j;
         result = '';
@@ -448,9 +480,11 @@ export class BonusAddComponent implements OnInit {
         }
         return result;
     }
+
     //#endregion
 
     //#region Generate Number
+
     generate(n) {
         var add = 1, max = 12 - add;   // 12 is the min safe number Math.random() can generate without it starting to pad the end with zeros.
 
@@ -464,22 +498,26 @@ export class BonusAddComponent implements OnInit {
 
         return ("" + number).substring(add);
     }
+
     //#endregion Generate Number
 
-    //#endregion
-
     //#region customerUser
+
     customerUser() {
-        let model = {};
-        this.adminService.add<any>(customer.customerList, model).subscribe(res => {
+        let model = {
+            role: "user"
+        };
+        this.adminService.add<any>(customer.customerListForDropdown, model).subscribe(res => {
             this.customerData = res.data;
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
+
     //#endregion
 
     //#region walletData
+
     walletData(newVal) {
         let promtoionModel = {
             id: newVal
@@ -505,6 +543,8 @@ export class BonusAddComponent implements OnInit {
                 this.allbetUsername = res.data.allbetUsername;
                 this.wmUsername = res.data.wmUsername;
                 this.pragmaticUsername = res.data.pragmaticUsername;
+                this.YeeBetUsername = res.data.yeeBetUsername;
+                this.SBOUsername = res.data.sboUsername;
                 this.Kiss918Balance(newVal);
                 this.Mega888(newVal);
                 this.Maxbet(newVal);
@@ -520,12 +560,16 @@ export class BonusAddComponent implements OnInit {
                 this.AllBet(newVal);
                 this.WM(newVal);
                 this.Pragmatic(newVal);
+                this.YeeBet(newVal);
+                this.SBO(newVal);
             })
         });
     }
+
     //#endregion
 
     //#region retrieveDepositpage
+
     retrieveDepositpage() {
         this.adminService.getAll<any>(customer.bonusDdl).subscribe(res => {
             this.ddlData = res.data;
@@ -536,6 +580,7 @@ export class BonusAddComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
+
     //#endregion
 
     public fileOverBase(e: any): void {
@@ -547,6 +592,7 @@ export class BonusAddComponent implements OnInit {
     }
 
     //#region MaxBet
+
     MaxBet(apiurl, model) {
         return new Promise((resolve, reject) => {
             this.adminService.add<any>(apiurl, model).toPromise().then(res => {
@@ -562,9 +608,11 @@ export class BonusAddComponent implements OnInit {
             }
         });
     }
+
     //#endregion MaxBet
 
     //#region Wallet Balance
+
     convertDecimal(Balance) {
         return Number(Balance).toFixed(2);
     }
@@ -717,6 +765,26 @@ export class BonusAddComponent implements OnInit {
         }
         this.adminService.add<any>(gameBalance.Pragmatic, data).subscribe(res => {
             this.pragmaticBal = res.data.balance;
+        })
+    }
+
+    YeeBet(id) {
+        let data = {
+            id: id,
+            username: this.YeeBetUsername
+        }
+        this.adminService.add<any>(gameBalance.YeeBet, data).subscribe(res => {
+            this.YeeBetBalance = res.data.balance;
+        })
+    }
+
+    SBO(id) {
+        let data = {
+            id: id,
+            username: this.SBOUsername
+        }
+        this.adminService.add<any>(gameBalance.SBO, data).subscribe(res => {
+            this.SBOBalance = res.data.balance;
         })
     }
 

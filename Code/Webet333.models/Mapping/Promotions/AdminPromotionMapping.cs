@@ -46,6 +46,7 @@ namespace Webet333.models.Mapping.Promotions
                 IsPragmatic = x.IsPragmatic,
                 IsSexyBaccarat = x.IsSexyBaccarat,
                 IsWM = x.IsWM,
+                IsYeeBet = x.IsYeeBet,
                 IsAllBet = x.IsAllBet,
                 IsMaxbet = x.IsMaxbet,
                 IsM8 = x.IsM8,
@@ -53,6 +54,7 @@ namespace Webet333.models.Mapping.Promotions
                 IsPussy888 = x.IsPussy888,
                 IsMega888 = x.IsMega888,
                 IsJoker = x.IsJoker,
+                IsSBO = x.IsSBO,
                 IsNewMember = x.IsNewMember,
                 IsSports = x.IsSports,
                 IsCasino = x.IsCasino,
@@ -65,8 +67,12 @@ namespace Webet333.models.Mapping.Promotions
                 IsGold = x.IsGold,
                 IsPlatinum = x.IsPlatinum,
                 IsDiamond = x.IsDiamond,
-                Active = x.Active
+                Active = x.Active,
+                MinDeposit = x.MinDeposit,
+                PromotionFixedBonus = x.PromotionFixedBonus,
+                IsYeeBetBetLimit = x.IsYeeBetBetLimit
             }).ToList();
+
             return response;
         }
     }
