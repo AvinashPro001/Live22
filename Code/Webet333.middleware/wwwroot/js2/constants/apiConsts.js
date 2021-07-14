@@ -1,4 +1,4 @@
-﻿var baseUrl = "http://47.242.143.182:8083/api/v1/";
+﻿var baseUrl = "https://api.webet333.com/api/v1/";
 //var baseUrl = "http://api.webet333.com/api/v1/";
 //var baseUrl ="http://localhost:8091/api/v1/"
 

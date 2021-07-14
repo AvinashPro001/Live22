@@ -432,8 +432,8 @@ function OpenWhatsapp(mobileNo = '60174780045') {
     window.open('https://api.whatsapp.com/send?phone=' + mobileNo + '&text=Claim%20and%20Join', '_blank');
 }
 
-function OpenTelegram() {
-    window.open('https://t.me/mywbcs1', '_blank');
+function OpenTelegram(Id) {
+    window.open('https://t.me/mywbcs1' + Id, '_blank');
 }
 
 function ClickOnJoin() {

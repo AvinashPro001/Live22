@@ -366,7 +366,7 @@ async function OpenSBOGame() {
                 let modellogin = { isMobile: false };
                 var login = await PostMethod(gameLoginEndPoints.sboLogin, modellogin);
                 if (login.status == 200)
-                    if (login.data.error.id == 0)
+                    if (login.response.data.error.id == 0)
                         SetLocalStorage("gameURL", login.response.data.url);
             }
     }
@@ -374,7 +374,7 @@ async function OpenSBOGame() {
         let model = {};
         var login = await PostMethod(gameLoginEndPoints.sboLogin, model);
         if (login.status == 200)
-            if (login.data.error.id == 0)
+            if (login.response.data.error.id == 0)
                 SetLocalStorage("gameURL", login.response.data.url);
     }
 }

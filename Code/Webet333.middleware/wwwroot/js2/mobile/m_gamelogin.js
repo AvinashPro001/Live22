@@ -17,7 +17,7 @@ function WalletSignalR() {
     try {
         "use strict";
 
-        var connection = new signalR.HubConnectionBuilder().withUrl("http://api.webet333.com/signalrhub").build();
+        var connection = new signalR.HubConnectionBuilder().withUrl("https://api.webet333.com/signalrhub").build();
 
         connection.on("WalletUpdate", function (data) {
             walletData = data;
