@@ -361,23 +361,23 @@ async function OpenSBOGame() {
         let model = {
         };
         var resM8 = await PostMethod(gameRegisterEndPoints.sboRegister, model);
-        if (res.response.data.response.errcode == "0") {
-            let modellogin = { isMobile: false };
-            var login = await PostMethod(gameLoginEndPoints.m8Login, modellogin);
-            if (login.status == 200)
-                /*if (login.response.data.errorcode == "0")*/
-                SetLocalStorage("gameURL", login.response.message);
+        if (resM8.status == 200)
+            if (resM8.response.data.error.id == 0) {
+                let modellogin = { isMobile: false };
+                var login = await PostMethod(gameLoginEndPoints.sboLogin, modellogin);
+                if (login.status == 200)
+                    if (login.data.error.id == 0)
+                        SetLocalStorage("gameURL", login.response.data.url);
 
-        }
+            }
     }
     else {
-        let model= {  };
+        let model = {};
         var login = await PostMethod(gameLoginEndPoints.sboLogin, model);
         if (login.status == 200)
-            //if (login.response.data.errorcode == "0")
-            SetLocalStorage("gameURL", login.response.message);
+            if (login.data.error.id == 0)
+                SetLocalStorage("gameURL", login.response.data.url);
     }
-
 }
 
 async function OpenPragmaticGame() {
@@ -497,7 +497,7 @@ function GenratePragmaticSlotsGameHTML(GameList, SectionId, IsAppend) {
             SetAllValueInElement(SectionId, html)
     }
     else {
-        if ($("#" + SectionId).children().length <1) {
+        if ($("#" + SectionId).children().length < 1) {
             html = '<div class="col-sm-12 pl0" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
             SetAllValueInElement(SectionId, html)
         }
