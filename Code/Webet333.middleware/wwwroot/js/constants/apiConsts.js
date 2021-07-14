@@ -1,5 +1,5 @@
-﻿var baseUrl = "https://api.webet333.com/api/v1/";
-var baseUrlWithoutVersion = "https://api.webet333.com";
+﻿var baseUrl = "https://api.wb3my.com/api/v1/";
+var baseUrlWithoutVersion = "https://api.wb3my.com";
 
 var globalEndPoints = {
     globalParameter: "Game/GlobalParameters"

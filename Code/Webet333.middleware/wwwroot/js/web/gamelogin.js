@@ -395,7 +395,6 @@ async function OpenPragmaticGame() {
 }
 
 async function OpenPlaytechGame(IsSlots) {
-
     if (IsSlots) {
         window.open("../Web/slots");
     }
@@ -426,9 +425,6 @@ async function LoginPragmaticGame(GameCode) {
 async function LoginPlaytechGame(GameCode) {
     if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
 
-    var imported = document.createElement('script');
-    imported.src = 'https://login.tothinkit.com/jswrapper/integration.js.php?casino=winforfun88'
-    document.head.appendChild(imported);
     window.open("../Web/game");
 
     var languageCode = (GetLocalStorage('language') === "zh-Hans" ? "ZH-CN" : "EN")

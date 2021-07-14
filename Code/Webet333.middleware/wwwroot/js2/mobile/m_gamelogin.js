@@ -17,7 +17,7 @@ function WalletSignalR() {
     try {
         "use strict";
 
-        var connection = new signalR.HubConnectionBuilder().withUrl("https://api.webet333.com/signalrhub").build();
+        var connection = new signalR.HubConnectionBuilder().withUrl("https://api.wb3my.com/signalrhub").build();
 
         connection.on("WalletUpdate", function (data) {
             walletData = data;
@@ -550,7 +550,7 @@ function randomString() {
 async function M8Login(usernamePrifix) {
     var languageCode = (GetLocalStorage('language') === "zh-Hans" ? "ZH-CN" : "EN-US");
 
-    var resultM8Login = await callMe(M8ConstAction.loginAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + usernamePrifix + "&host=sport.mywinday.com&lang=" + languageCode + "&accType=DEC,IN,CN,US,ML,HK&ref=https://webet333.com");
+    var resultM8Login = await callMe(M8ConstAction.loginAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + usernamePrifix + "&host=sport.mywinday.com&lang=" + languageCode + "&accType=DEC,IN,CN,US,ML,HK&ref=https://wb3my.com");
 
     if (resultM8Login.response.errcode !== "0") {
         ShowError(resultM8Login.response.errtext);
@@ -736,7 +736,7 @@ async function GameLoginMobile(gamename) {
                 if (resSelectUser.data.MaxBet !== true) {
                     var userMaxBet = {
                         firstname: resUserData.data.name,
-                        lastname: "Webet333"
+                        lastname: "wb3my"
                     };
                     var res = await PostMethod(apiEndPoints.registerMaxBet, userMaxBet);
                     if (res.data.error_code == 0) {
@@ -771,7 +771,7 @@ async function GameLoginMobile(gamename) {
                             apiResponse: resultM8.response
                         };
                         var resM8 = await PostMethod(apiEndPoints.registerM8, modelM8);
-                        var resultM8LoginRegister = await callMe(M8ConstAction.loginAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username + "&host=sport.mywinday.com&lang=" + languageCode + "&accType=HK&ref=https://webet333.com");
+                        var resultM8LoginRegister = await callMe(M8ConstAction.loginAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username + "&host=sport.mywinday.com&lang=" + languageCode + "&accType=HK&ref=https://wb3my.com");
 
                         if (resultM8LoginRegister.response.errcode === '-1') {
                             return ShowError(resultM8LoginRegister.response.errtext);

@@ -85,6 +85,7 @@ namespace Webet333.service
             }
             catch (Exception ex)
             {
+                Program.Main();
                 WriteErrorTextToFile("Error :" + ex.Message);
             }
         }
