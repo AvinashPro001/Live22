@@ -368,7 +368,6 @@ async function OpenSBOGame() {
                 if (login.status == 200)
                     if (login.data.error.id == 0)
                         SetLocalStorage("gameURL", login.response.data.url);
-
             }
     }
     else {
