@@ -370,7 +370,7 @@ namespace Webet333.api.Helpers
 
         #endregion WM Services
 
-        #region WM Services
+        #region Pragmatic Services
 
         internal async Task PragmaticServicesInsert(string request)
         {
@@ -380,7 +380,41 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion WM Services
+        #endregion Pragmatic Services
+
+        #region YEEBET Services
+
+        internal async Task YEEBETServicesInsert(string request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var res = await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Game.YEEBETBettingDetailsInsert,
+                    new
+                    {
+                        jsonString = request
+                    });
+            }
+        }
+
+        #endregion YEEBET Services
+
+        #region SBO Services
+
+        internal async Task SBOServicesInsert(string request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var res = await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Game.SBOBettingDetailsInsert,
+                    new
+                    {
+                        jsonString = request
+                    });
+            }
+        }
+
+        #endregion SBO Services
 
         #region Kiss 918 Player Log Insert
 
@@ -544,7 +578,7 @@ namespace Webet333.api.Helpers
 
         #region Game Rebate
 
-        internal async Task<dynamic> GameRebate(string FromDate, string ToDate, string gameType, decimal totalUser, decimal betAmount, decimal rolling, decimal commAmount, decimal commPrecentage, string jsonData, string adminId = null)
+        internal async Task<dynamic> GameRebate(string FromDate, string ToDate, string gameType, decimal totalUser, decimal betAmount, decimal rolling, decimal commAmount, string jsonData, string adminId = null)
         {
             using (var GetRepository = new DapperRepository<dynamic>(Connection))
             {
@@ -559,7 +593,6 @@ namespace Webet333.api.Helpers
                         betAmount,
                         rolling,
                         commAmount,
-                        commPrecentage,
                         jsonData,
                         adminId
                     });
@@ -608,7 +641,7 @@ namespace Webet333.api.Helpers
             data = data.Where(s => responseList.Any(l => (l.GameName == s.GameName && s.APIUsername == l.APIUsername))).ToList();
 
             var jsonData = JsonConvert.SerializeObject(data);
-            await GameRebate(request.FromDate, request.ToDate, request.GameType, data.Count, BetTotal, Rollingtotal, CommTotal, request.Rebate, jsonData, adminId: adminId);
+            await GameRebate(request.FromDate, request.ToDate, request.GameType, data.Count, BetTotal, Rollingtotal, CommTotal, jsonData, adminId: adminId);
 
             return responseList;
         }
@@ -617,7 +650,7 @@ namespace Webet333.api.Helpers
 
         #region Rebate Delete
 
-        internal async Task<dynamic> GameRebateDelete(string userId, string adminId = null)
+        internal async Task<dynamic> GameRebateDelete(string RebateId, string adminId = null)
         {
             using (var GetRepository = new DapperRepository<dynamic>(Connection))
             {
@@ -625,7 +658,7 @@ namespace Webet333.api.Helpers
                     StoredProcConsts.Game.GameRebateDelete,
                     new
                     {
-                        userId,
+                        RebateId,
                         adminId
                     });
                 return users;
@@ -1186,12 +1219,37 @@ namespace Webet333.api.Helpers
                     decimal PussyBalance,
                     decimal AllbetBalance,
                     decimal WMBalance,
-                    decimal PragmaticBalance
+                    decimal PragmaticBalance,
+                    decimal YeeBetBalance,
+                    decimal SBOBalance
             )
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(StoredProcConsts.Game.UsersBalanceRestore, new { userId, Addedby, mainBalance, Mega888Balance, JokerBalance, M8Balance, MaxbetBalance, Kiss918Balance, DGBalance, AGBalance, PlaytechBalance, SexyBaccaratBalance, SABalance, PussyBalance, AllbetBalance, WMBalance, PragmaticBalance });
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Game.UsersBalanceRestore,
+                    new
+                    {
+                        userId,
+                        Addedby,
+                        mainBalance,
+                        Mega888Balance,
+                        JokerBalance,
+                        M8Balance,
+                        MaxbetBalance,
+                        Kiss918Balance,
+                        DGBalance,
+                        AGBalance,
+                        PlaytechBalance,
+                        SexyBaccaratBalance,
+                        SABalance,
+                        PussyBalance,
+                        AllbetBalance,
+                        WMBalance,
+                        PragmaticBalance,
+                        YeeBetBalance,
+                        SBOBalance
+                    });
             }
         }
 
@@ -1435,56 +1493,64 @@ namespace Webet333.api.Helpers
                 dynamic result;
                 switch (request.GameName)
                 {
-                    case "AG":
+                    case GameConst.GameName.AG:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_AG, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
-                    case "DG":
+                    case GameConst.GameName.DG:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_DG, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
-                    case "JOKER":
+                    case GameConst.GameName.Joker:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Joker, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
-                    case "M8":
+                    case GameConst.GameName.M8:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_M8, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
-                    case "MAXBET":
+                    case GameConst.GameName.MaxBet:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Maxbet, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
-                    case "MEGA888":
+                    case GameConst.GameName.Mega888:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Mega888, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
-                    case "918KISS":
+                    case GameConst.GameName._918Kiss:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Kiss918, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
-                    case "SA":
+                    case GameConst.GameName.SA:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_SA, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
-                    case "SEXYBACCARAT":
+                    case GameConst.GameName.SexyBaccarat:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Sexy, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
-                    case "PUSSY":
+                    case GameConst.GameName.Pussy888:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Pussy, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
-                    case "PLAYTECH":
+                    case GameConst.GameName.Playtech:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_Playtech, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
-                    case "ALLBET":
+                    case GameConst.GameName.AllBet:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_AllBet, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
-                    case "WM":
+                    case GameConst.GameName.WM:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_WM, new { request.UserId, request.FromDate, request.ToDate });
+                        break;
+
+                    case GameConst.GameName.YeeBet:
+                        result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_YeeBet, new { request.UserId, request.FromDate, request.ToDate });
+                        break;
+
+                    case GameConst.GameName.SBO:
+                        result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_SBO, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
                     default:

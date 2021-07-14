@@ -1,0 +1,175 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">SBO Set League Bet Limit</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="p-2 col-md-3">
+                    <div class="input-group">
+                        <h4 style="margin-top:10px;margin-right:10px;">Keyword: </h4><input class="form-control" placeholder="League Keyword" name="txt_league_keyword" id="txt_league_keyword">
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime" [(ngModel)]="datePickerfromdate">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp1" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime" [(ngModel)]="datePickertodate">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <div class="input-group">
+                        <button class="mb-1 btn btn-success" (click)='getLeagueList()' type="button">Get League List</button>
+                    </div>
+                </div>
+                <div class="p-2 col-md-2">
+                    <div class="input-group">
+                        <button class="mb-1 btn btn-success" (click)='getBlanckLeagueList()' type="button">Get Blank Value League List</button>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <form class="text-center border border-light">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="col-md-12 table-responsive">
+                                        <fieldset style="border-width:2px; border-style:groove; border-color:threedface; border-image:initial;">
+                                            <legend style="display:flex; width:auto; margin-left:30px; text-align:left;">Group Name</legend>
+                                            <div class="row col-12">
+                                                <div class="p-2">
+                                                    <h4 class="text-muted text-bold">MinBet</h4>
+                                                    <input id="main_minBet" type='number' class="form-control" />
+                                                </div>
+                                                <div class="p-2">
+                                                    <h4 class="text-muted text-bold">MaxBet</h4>
+                                                    <input id="main_maxBet" type='number' class="form-control" />
+                                                </div>
+                                                <div class="p-2">
+                                                    <h4 class="text-muted text-bold">MaxBetRatio</h4>
+                                                    <input id="main_maxBetRatio" type='number' class="form-control" />
+                                                </div>
+                                                <div class="p-2">
+                                                    <h4 class="text-muted text-bold">Group Type</h4>
+                                                    <select #groupTypeSelect
+                                                            class="form-control"
+                                                            id="ddl_groupType"
+                                                            [(ngModel)]="T"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            (change)='onGroupTypeSelected(groupTypeSelect.value)'>
+                                                        <option [value]="c.id"
+                                                                *ngFor="let c of groupType"
+                                                                [ngValue]="c">
+                                                            {{c.type}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="p-2">
+                                                    <h4 class="text-muted text-bold">&nbsp;</h4>
+                                                    <button class="mb-1 btn btn-success" (click)='setForChecked()' type="button">Set For Checked</button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <div class="row col-12">
+                                            <div class="col-sm-3 col-lg-3"></div>
+                                            <div class="col-sm-3 col-lg-3">
+                                                <input id="txt_search" type='search' class="form-control" />
+                                            </div>
+                                            <div class="col-sm-3 col-lg-3">
+                                                <button class="btn btn-info" style="text-align: center;font-size: 15px" type="submit" (click)="SearchInDataTable()">Search</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <ngx-datatable #table
+                                                           class='bootstrap no-detail-row'
+                                                           style="width: auto;"
+                                                           [columns]="columns"
+                                                           [rows]="rows"
+                                                           [columnMode]="'force'"
+                                                           [footerHeight]="60"
+                                                           [rowHeight]="'auto'"
+                                                           [limit]="10"
+                                                           [loadingIndicator]="loadingIndicator"
+                                                           [selected]="selectedLeagueList"
+                                                           [selectionType]="'checkbox'"
+                                                           (select)="onSelect($event)">
+                                                <ng-template #minBetTextBox
+                                                             ngx-datatable-row-detail-template
+                                                             let-rowIndex="rowIndex"
+                                                             let-row="row"
+                                                             let-expanded="expanded">
+                                                    <input id="{{rowIndex}}_minBet"
+                                                           type='number'
+                                                           class="form-control"
+                                                           [(ngModel)]="row.MinBet"
+                                                           [ngModelOptions]="{standalone: true}"
+                                                           style="width: 100px;" />
+                                                </ng-template>
+                                                <ng-template #maxBetTextBox
+                                                             ngx-datatable-row-detail-template
+                                                             let-rowIndex="rowIndex"
+                                                             let-row="row"
+                                                             let-expanded="expanded">
+                                                    <input id="{{rowIndex}}_maxBet"
+                                                           type='number'
+                                                           class="form-control"
+                                                           [(ngModel)]="row.MaxBet"
+                                                           [ngModelOptions]="{standalone: true}"
+                                                           style="width: 100px;" />
+                                                </ng-template>
+                                                <ng-template #maxBetRatioTextBox
+                                                             ngx-datatable-row-detail-template
+                                                             let-rowIndex="rowIndex"
+                                                             let-row="row"
+                                                             let-expanded="expanded">
+                                                    <input id="{{rowIndex}}_maxBetRatio"
+                                                           type='number'
+                                                           class="form-control"
+                                                           [(ngModel)]="row.MaxBetRatio"
+                                                           [ngModelOptions]="{standalone: true}"
+                                                           style="width: 100px;" />
+                                                </ng-template>
+                                                <ng-template #groupTypeDropdown
+                                                             ngx-datatable-row-detail-template
+                                                             let-rowIndex="rowIndex"
+                                                             let-row="row"
+                                                             let-expanded="expanded">
+                                                    <select class="form-control"
+                                                            id="ddl_groupType_{{rowIndex}}"
+                                                            [(ngModel)]="row.GroupType"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            style="width:100px;">
+                                                        <option *ngFor="let c of groupType"
+                                                                [ngValue]="c.id"
+                                                                [selected]="c.id == row.GroupType">
+                                                            {{c.type}}
+                                                        </option>
+                                                    </select>
+                                                </ng-template>
+                                            </ngx-datatable>
+                                        </div>
+                                        <span class="col-md-4 mb-4">
+                                            <button class="btn btn-info" style="text-align: center;font-size: 20px" type="submit" (click)="Update()" [disabled]="isDisable">Save</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

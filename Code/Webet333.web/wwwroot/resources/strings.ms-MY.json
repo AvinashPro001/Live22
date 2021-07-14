@@ -217,6 +217,8 @@
   "sexybaccarat_game": "Sexy B. Kasino",
   "allBet_game": "AllBet Kasino",
   "wm_game": "WM Kasino",
+  "yeebet_game": "YeeBet Kasino",
+  "SBO_Game": "SBO Sukan",
   "coming_soon": "Akan Datang",
   "click_play": "Kilk untuk Main",
 
@@ -244,6 +246,7 @@
   "amount_greater_zero_error": "Sila Masukkan Jumlah lebih daripada 0",
   "promot_active_error": "Anda tidak boleh memakai promosi, kerana mempunyai promosi aktif",
   "min_max_amount_error": "Jumlah Amaun Minimum adalah 10 dan Maximum 30000.",
+  "min_max_amount_error_parameter": "Jumlah Amaun Minimum adalah 10 dan Maximum ",
   "min1_max1000_amount_error": "Jumlah Amaun Minimum adalah 1",
   "bnk_name_required_error": "Nama Bank Diperlukan",
 

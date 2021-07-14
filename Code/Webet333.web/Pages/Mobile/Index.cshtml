@@ -1,0 +1,653 @@
+﻿@page
+@{ ViewData["Title"] = "";
+    Layout = null; }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="Webet333.com | Cash Market, Online Casino, Malaysia Online Casino, 918Kiss, AG Casino, Playtech Casino, Joker Casino, Joker Slot, M8 Sports, 24x7 Casino, Malaysia Casino, 100% Welcome Bonus Casino, 150% Welcome Bonus Casino, 10% Extra jackpot casino, 10% Extra bonus casino" />
+    <meta name="description" content="Webet333.com | Trusted Online Casino Malaysia, Malaysia Online Casino, 918Kiss, AG Casino, Playtech Casino, Joker Casino, Joker Slot, M8 Sports, 24x7 Casino, Malaysia Casino, 200% Welcome Bonus Casino, 150% Welcome Bonus Casino, 10% Extra jackpot casino, 10% Extra bonus casino" />
+    <meta name="author" content="" />
+    <meta name="title" content="Webet333 🥇" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Webet333 -🥇 Trusted Online Casino Malaysia</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="~/images/mobile/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/images/mobile/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/images/mobile/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/images/mobile/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/images/mobile/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/images/mobile/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/images/mobile/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/images/mobile/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/images/mobile/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="~/images/mobile/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/images/mobile/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/images/mobile/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/mobile/favicon/favicon-16x16.png">
+    <link rel="manifest" href="~/images/mobile/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/images/mobile/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <link href="~/css/jcf.css" rel="stylesheet" />
+    <link href="~/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/slick.css">
+    <link rel="stylesheet" href="~/css/slick-theme.css">
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/mobile/mob-style.css" rel="stylesheet" />
+    <link href="~/css/mobile/mobile-style.css" rel="stylesheet" />
+
+    <link href="../../css/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
+    <link href="../../css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+    <script src="../../js/datepicker.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/bootstrap-datetimepicker.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="~/js/constants/apiConsts.js"></script>
+    <script src="~/js/helpers/toastrHelpers.js"></script>
+    <script src="~/js/helpers/apiHelpers.js"></script>
+    <script src="~/js/helpers/storageHelpers.js"></script>
+
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/mobile/m_home.js"></script>
+    <script src="~/js/mobile/m_account.js"></script>
+    <script src="~/js/mobile/m_gamelogin.js"></script>
+    <script src="~/js/mobile/m_getbalance.js"></script>
+
+    <script src="~/js/mobile/m_bank.js"></script>
+    <script src="~/js/slick.js"></script>
+
+    <script src="~/js/constants/M8Consts.js"></script>
+    <script src="~/js/constants/918KissConsts.js"></script>
+    <script src="~/js/constants/AGConsts.js"></script>
+    <script src="~/js/constants/apiConsts.js"></script>
+    <script src="~/js/constants/JokerConsts.js"></script>
+    <script src="~/js/constants/PlaytechConsts.js"></script>
+    <script src="~/js/constants/SMSConsts.js"></script>
+    <script src="~/js/constants/SecurityConsts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $(".loadingImage").fadeOut("slow");;
+        });
+    </script>
+
+    <script>
+        function requestDesktopSite() {
+            if (document.getElementsByTagName('meta')['viewport'].content == 'width= 1440px;') {
+                document.getElementsByTagName('meta')['viewport'].content = 'width= 400px;';
+            } else {
+                window.location.replace = "/";
+                document.getElementsByTagName('meta')['viewport'].content = 'width= 1440px;';
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            announcementMobile();
+        });
+        async function announcementMobile() {
+            var marquee = document.getElementById('p_announcement_mobile');
+            var marquee_one = document.getElementById('p_announcement_mobile_one');
+
+            if (marquee !== null || marquee_one !== null) {
+                var res = await GetMethod(apiEndPoints.announcementList);
+                marquee.innerHTML = "";
+                marquee_one.innerHTML = "";
+                for (i = 0; i < res.data.length; i++) {
+                    marquee.innerHTML += '<span>' + res.data[i].announcement + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    marquee_one.innerHTML += '<span>' + res.data[i].announcement + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                }
+            }
+        }
+    </script>
+    <!-- Event snippet for Sign-up conversion page
+    In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+    <script>
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof (url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-480804860/17uwCMrko-4BEPz_oeUB',
+                'event_callback': callback
+            });
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="loadingImage" style="z-index: 2147483643;"></div>
+
+    <div id="success_snackbar">
+        <div>
+            <span><img class="Image" width="100px" height="100px" src="~/images/success.png" /></span>
+        </div>
+        <div class="message">
+            <span id="SuccessMessage">
+            </span>
+        </div>
+    </div>
+
+    <div id="error_snackbar">
+        <div>
+            <span><img class="Image" width="100px" height="100px" src="~/images/Error.png" /></span>
+        </div>
+        <div class="message">
+            <span id="ErrorMessage">
+            </span>
+        </div>
+    </div>
+
+    <div id="pageResponse">
+    </div>
+    <script>
+        setTimeout(() => {
+            var url_string = window.location;
+            var url = new URL(url_string);
+
+            var gameName = url.searchParams.get("id");
+
+            url.href = url.href.toLowerCase();
+            var name = url.searchParams.get("p");
+            if (name != null) {
+                switch (name) {
+                    case "home":
+                        loadPageHome();
+                        break;
+                    case "promotions":
+                        loadPagePromotions();
+                        break;
+                    case "contactus":
+                        loadPageContactus();
+                        break;
+                    case "about":
+                        loadPageAbout();
+                        break;
+                    case "account":
+                        loadPageAccount();
+                        break;
+                    case "deposit":
+                        loadPagedeposit()
+                        break;
+                    case "download":
+                        loadPagedownload(gameName);
+                        break;
+                    case "forgetpassword":
+                        loadPageForgetpassword()
+                        break;
+                    case "history":
+                        loadPageHistory()
+                        break;
+                    case "login":
+                        loadPageLogin()
+                        break;
+                    case "register":
+                        loadPageRegister()
+                        break;
+                    case "termandcondtion":
+                        loadPageTermandCondtion()
+                        break;
+                    case "transfer":
+                        loadPageTransfer()
+                        break;
+                    case "verifiedotp":
+                        loadPageVerifiedOtp()
+                        break;
+                    case "withdraw":
+                        loadPageWithdraw()
+                        break;
+                }
+            }
+            else {
+                loadPageHome();
+            }
+        }, 200);
+
+        function loadPageHome(obj) {
+
+            $('.content').empty();
+            $('#home').empty();
+            var cUser = GetLocalStorage('currentUser');
+            $.ajax({
+                url: '/mobile/home',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+
+                    pageName1 = pageName2 = "home";
+
+                    history.pushState(null, null, "/mobile?p=home");
+                    SliderPromotion();
+
+                    if (obj != undefined) {
+                        if (obj.backFrom == "about") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "termandCondi") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "login") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "deposit") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "transfer") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "widthraw") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "forgetpassword") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "download") $('body').css('padding-top', '35px');
+                        if (obj.backFrom == "history") $('body').css('padding-top', '35px');
+
+                        Walletdate();
+                        GameInMaintenance(0);
+                        WalletSignalR();
+                    }
+                    $('body').css('padding-top', '35px');
+                    if (cUser == null) {
+                        $('#afterlogin_mobile').show();
+                        $('#beforelogin_mobile').hide();
+                    } else {
+                        CheckUserVerified()
+                        WalletBalance();
+
+                        $('#afterlogin_mobile').hide();
+                        $('#beforelogin_mobile').show();
+                    }
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+        function loadPagePromotions() {
+            CheckUserVerified()
+            $('body').css('padding-top', '35px');
+            var cUser = GetLocalStorage('currentUser');
+            $.ajax({
+                url: '/mobile/promotions',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "promotions";
+                    history.pushState(null, null, "/mobile?p=promotions");
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                    if (cUser != null) {
+                        WalletBalance();
+                    }
+                    else {
+                        document.getElementById("balanceShow").innerHTML = "";
+                    }
+                }
+            });
+        }
+
+        function loadPageContactus() {
+            CheckUserVerified()
+            $('body').css('padding-top', '35px');
+            var cUser = GetLocalStorage('currentUser');
+            $.ajax({
+                url: '/mobile/contactus',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "contactus";
+                    history.pushState(null, null, "/mobile?p=contactus");
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                    if (cUser != null) {
+                        WalletBalance();
+                    }
+                    else {
+                        document.getElementById("balanceShow").innerHTML = "";
+                    }
+                }
+            });
+        }
+
+        function loadPageAbout() {
+            CheckUserVerified()
+            $.ajax({
+                url: '/mobile/about',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "about";
+                    $('body').attr('id', 'hideBody');
+                    history.pushState(null, null, "/mobile?p=about");
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+        function loadPageAccount() {
+            CheckUserVerified()
+            $('body').css('padding-top', '35px');
+            var cUser = GetLocalStorage('currentUser');
+            $.ajax({
+                url: '/mobile/account',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "account";
+                    $('body').attr('id', 'hideBody');
+                    $('#pageResponse').html(response);
+                    history.pushState(null, null, "/mobile?p=account");
+                    $('.loadingImage').hide();
+                    $("html").removeClass("intro");
+                    if (cUser != null) {
+                        WalletBalance();
+                    }
+                }
+            });
+        }
+
+        function loadPagedeposit() {
+            CheckUserVerified()
+            $.ajax({
+                url: '/mobile/deposit',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('body').attr('id', 'hideBody');
+
+                    pageName1 = pageName2 = "deposit";
+
+                    history.pushState(null, null, "/mobile?p=deposit");
+                    $('#pageResponse').html(response);
+                    $('body').attr('id', 'hideBody');
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+        function loadPagedownload(id) {
+            CheckUserVerified()
+            var url = '/mobile/download'
+
+            if (id != undefined && id != null) {
+                url = '/mobile/download?id=' + id
+            }
+
+            $.ajax({
+                url: url,
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "download";
+                    $('#pageResponse').html(response);
+                    if (id != undefined && id != null)
+                        history.pushState(null, null, "/mobile?p=download&id=" + id);
+                    else
+                        history.pushState(null, null, "/mobile?p=download");
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+        function loadPageForgetpassword() {
+            $.ajax({
+                url: '/mobile/forgetpassword',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "forgetpassword";
+                    $('#pageResponse').html(response);
+                    history.pushState(null, null, "/mobile?p=forgetpassword");
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+        function loadPageGame() {
+            $.ajax({
+                url: '/mobile/Game',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                }
+            });
+        }
+
+        function loadPageHistory() {
+            CheckUserVerified()
+            $.ajax({
+                url: '/mobile/history',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "history";
+                    $('#pageResponse').html(response);
+                    history.pushState(null, null, "/mobile?p=history");
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+        function loadPageJokerdownload() {
+            CheckUserVerified()
+            $.ajax({
+                url: '/mobile/jokerdownload',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    history.pushState(null, null, "/mobile?p=jokerdownload");
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+        function loadPageLogin() {
+            $.ajax({
+                url: '/mobile/login',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "login";
+                    history.pushState(null, null, "/mobile?p=login");
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+        function loadPagePragmaticGame() {
+            $.ajax({
+                url: '/mobile/PragmaticGame',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    $('#pageResponse').html(response);
+                }
+            });
+        }
+
+        function loadPageRegister() {
+            $.ajax({
+                url: '/mobile/register',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "register";
+                    $('#pageResponse').html(response);
+                    history.pushState(null, null, "/mobile?p=register");
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+        function loadPageTermandCondtion() {
+            $.ajax({
+                url: '/mobile/TermandCondtion',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "TermandCondtion";
+                    $('body').attr('id', 'hideBody');
+                    $('#pageResponse').html(response);
+                    history.pushState(null, null, "/mobile?p=TermandCondtion");
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+        function loadPageTransfer() {
+            CheckUserVerified()
+            $.ajax({
+                url: '/mobile/transfer',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "transfer";
+                    $('body').attr('id', 'hideBody');
+                    history.pushState(null, null, "/mobile?p=transfer");
+                    $('#pageResponse').html(response);
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+        function loadPageVerifiedOtp() {
+            $.ajax({
+                url: '/mobile/VerifiedOtp',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "VerifiedOtp";
+                    history.pushState(null, null, "/mobile?p=VerifiedOtp");
+                    $('#pageResponse').html(response);
+                }
+            });
+        }
+
+        function loadPageWithdraw() {
+            CheckUserVerified()
+            $.ajax({
+                url: '/mobile/withdraw',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "withdraw";
+                    $('#pageResponse').html(response);
+                    history.pushState(null, null, "/mobile?p=withdraw");
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+        $("html").click(async function (event) {
+            if (GetLocalStorage('currentUser') !== null) {
+                PostMethod(apiEndPoints.userLastTimeUpdate, {});
+            }
+        });
+
+        var pageName1;
+        var pageName2;
+
+        setTimeout(() => {
+            setInterval(function () {
+
+                var url_string = window.location;
+                var url = new URL(url_string);
+
+                var gameName = url.searchParams.get("id");
+
+                url.href = url.href.toLowerCase();
+                var name = url.searchParams.get("p");
+
+                pageName1 = name;
+
+                if (pageName1 != pageName2) {
+
+                    if (name != null) {
+                        switch (name) {
+                            case "home":
+                                loadPageHome();
+                                break;
+                            case "promotions":
+                                loadPagePromotions();
+                                break;
+                            case "contactus":
+                                loadPageContactus();
+                                break;
+                            case "about":
+                                loadPageAbout();
+                                break;
+                            case "account":
+                                loadPageAccount();
+                                break;
+                            case "deposit":
+                                loadPagedeposit()
+                                break;
+                            case "download":
+                                loadPagedownload(gameName);
+                                break;
+                            case "forgetpassword":
+                                loadPageForgetpassword()
+                                break;
+                            case "history":
+                                loadPageHistory()
+                                break;
+                            case "login":
+                                loadPageLogin()
+                                break;
+                            case "register":
+                                loadPageRegister()
+                                break;
+                            case "TermandCondtion":
+                                loadPageTermandCondtion()
+                                break;
+                            case "transfer":
+                                loadPageTransfer()
+                                break;
+                            case "VerifiedOtp":
+                                loadPageVerifiedOtp()
+                                break;
+                            case "withdraw":
+                                loadPageWithdraw()
+                                break;
+                        }
+                    }
+                    else {
+                        loadPageHome();
+                    }
+
+                    pageName2 = pageName1;
+
+                }
+
+            }, 200);
+        }, 5000);
+    </script>
+
+    <style>
+        body {
+            padding-top: 35px;
+        }
+    </style>
+</body>
+</html>

@@ -31,5 +31,9 @@
         public string WMGamePrefix { get; set; }
 
         public string PragmaticGamePrefix { get; set; }
+
+        public string YeeBetGamePrefix { get; set; }
+
+        public string SBOGamePrefix { get; set; }
     }
 }

@@ -275,6 +275,10 @@
             public const string PromotionGroupSelect = "[dbo].[PromotionGroup_SELECT]";
 
             public const string PromotionGroupDelete = "[dbo].[PromotionGroup_Delete]";
+
+            public const string PromotionUsersReport = "[dbo].[Users_Promotion_Select]";
+
+            public const string PromotionSelectForDropdown = "[dbo].[Promotion_Select_For_Dropdown]";
         }
 
         public class GameBalance
@@ -306,6 +310,10 @@
             public const string SABalanceUpdate = "[dbo].[Balance_SA_Update]";
 
             public const string PragmaticBalanceUpdate = "[dbo].[Balance_Pragmatic_Update]";
+
+            public const string YEEBETGameBalanceUpdate = "[dbo].[Balance_YEEBET_Update]";
+
+            public const string SBOGameBalanceUpdate = "[dbo].[Balance_SBO_Update]";
         }
 
         public class Game
@@ -429,6 +437,14 @@
             public const string BettingDetails_AllBet = "[dbo].[Allbet_BettingDetails_By_Username]";
 
             public const string PragmaticGameNotRegistredUsers = "[dbo].[GetUsersNotRegisteredInPragmaticGame]";
+
+            public const string YEEBETBettingDetailsInsert = "[dbo].[YEEBET_BettingDetails_Insert]";
+
+            public const string BettingDetails_YeeBet = "[dbo].[YeeBet_BettingDetails_By_Username]";
+
+            public const string SBOBettingDetailsInsert = "[dbo].[SBO_BettingDetails_Insert]";
+
+            public const string BettingDetails_SBO = "[dbo].[SBO_BettingDetails_By_Username]";
         }
 
         public class MaxBetGame
@@ -538,6 +554,8 @@
 
             public const string UserVIPLevelUpdate = "[dbo].[User_VIPLevel_Update]";
 
+            public const string UserVIPLevelDetails = "[dbo].[User_VIP_Details]";
+
             public const string VIPFreeCredit = "[dbo].[FreeCredit_On_Monday]";
 
             public const string VIPFreeCreditPromotionSetting = "[dbo].[FreeCredit_Promotion_Setting]";
@@ -575,6 +593,28 @@
             public const string FreeCreditEventUpdatDelete = "[dbo].[FreeCreditEvent_Delete]";
 
             public const string FreeCreditEventUsersSelect = "[dbo].[FreeCreditEvent_UsersSelect]";
+        }
+
+        public class YEEBET
+        {
+            public const string Register = "[dbo].[Users_Insert_YEEBET]";
+
+            public const string SaveGetBetLimit = "[dbo].[SetBet_Limit_YeeBet]";
+
+            public const string SetBetlimitDepositAmount = "[dbo].[Set_BetLimit_DepositAmount_YeeBet]";
+        }
+
+        public class SBO
+        {
+            public const string Register = "[dbo].[Users_Insert_SBO]";
+
+            public const string SetPlayerDefaultBetLimit = "[dbo].[Set_Default_Player_Betlimit_SBO]";
+
+            public const string SelectPlayerDefaultBetLimit = "[dbo].[Select_Default_Player_Betlimit_SBO]";
+
+            public const string UpdateLeagueBetSetting = "[dbo].[Update_League_Bet_Setting_SBO]";
+
+            public const string SelectLeagueBetSetting = "[dbo].[Select_League_Bet_Setting_SBO]";
         }
     }
 }

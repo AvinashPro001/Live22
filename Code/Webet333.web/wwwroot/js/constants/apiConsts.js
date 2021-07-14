@@ -1,6 +1,6 @@
-﻿//var baseUrl = "http://uatapi.webet333.com/api/v1/";
-var baseUrl = "http://api.webet333.com/api/v1/";
-//var baseUrl ="http://localhost/api/v1/"
+﻿var baseUrl = "http://api.webet333.com/api/v1/";
+//var baseUrl = "http://uatapi.webet333.com/api/v1/";
+//var baseUrl = "http://localhost:8091/api/v1/";
 
 var apiEndPoints = {
     login: "account/login",
@@ -114,6 +114,12 @@ var apiEndPoints = {
     dgRegister: "dg/register",
     dgLogin: "dg/login",
 
+    YeeBetRegister: "yeebet/register",
+    YeeBetLogin: "yeebet/login",
+
+    SBORegister: "sbo/register/player",
+    SBOLogin: "sbo/login",
+
     kiss918Balance: "gamebalance/918kiss",
     mega888Balance: "gamebalance/mega888",
     jokerBalance: "gamebalance/joker",
@@ -128,6 +134,8 @@ var apiEndPoints = {
     AllBetBalance: "gamebalance/allbet",
     WMBalance: "gamebalance/wm",
     PragmaticBalance: "gamebalance/pragmatic",
+    YeeBetBalance: "gamebalance/yeebet",
+    SBOBalance: "gamebalance/sbo",
 
     userDetaisSetGameBalance: "userdetails/set",
 
@@ -138,5 +146,7 @@ var apiEndPoints = {
 
     VaderPayMainteanceSelect: "account/vaderpay/maintenance/select",
 
-    GetGameSupport: "Game/User/GameSupport"
+    GetGameSupport: "Game/User/GameSupport",
+
+    UserVipDetails: "viplevel/user/details"
 };

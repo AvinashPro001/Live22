@@ -165,7 +165,8 @@ export class FreecrediteventEditComponent implements OnInit {
                 let i = 1;
                 this.rows = [];
                 this.customerData = res.data;
-                this.data = res.data;
+                // this.data = res.data;
+                this.data = this.customerData.map(({ userId, name, userName, phoneNumber, languageName, winLossAmount, freeCreditAmount }) => ({ userId, name, userName, phoneNumber, languageName, winLossAmount, freeCreditAmount }));
 
                 res.data.forEach(el => {
                     this.rows.push({

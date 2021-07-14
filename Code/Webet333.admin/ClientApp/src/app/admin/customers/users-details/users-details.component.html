@@ -3,9 +3,10 @@
         <div class="col-lg-2 col-xs-4" *ngIf="ShowDropDown">
             <ngx-select-dropdown tabindex="0" [multiple]="false" [config]="config" [options]="customerData" (change)="onChangeDropDown($event)"></ngx-select-dropdown>
         </div>
-        <div class="col-lg-1 col-xs-4">
+        <div class="col-1 col-xs-4">
             <button class="mb-1 btn btn-success" (click)='RetoreBalance()' type="button">Restore</button>
         </div>
+
         <div class="col-lg-2 col-xs-4">
             <button class="mb-1 btn btn-outline-primary" (click)="show(content)" type="button">Withdraw Amount &nbsp;&nbsp; <span id="lockIcon" class=""></span>&nbsp;&nbsp;{{totalWithdrawAmountWithMYR}}</button>
         </div>
@@ -86,7 +87,7 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-3"></div>
+        <div class="col-2"></div>
         <div class="col-2">
             <div class="text-center"><b>AllBet Wallet</b></div><div class="text-center"><b class="balance">{{allbetbalance == null || allbetbalance == undefined? 'N/A' : convertDecimal(allbetbalance)}}</b></div>
         </div>
@@ -95,6 +96,12 @@
         </div>
         <div class="col-2">
             <div class="text-center"><b>Pragmatic Wallet</b></div><div class="text-center"><b class="balance">{{pragmaticbalance == null || pragmaticbalance == undefined? 'N/A' : convertDecimal(pragmaticbalance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>YeeBet Wallet</b></div><div class="text-center"><b class="balance">{{YeeBetBalance == null || YeeBetBalance == undefined? 'N/A' : convertDecimal(YeeBetBalance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>SBO Wallet</b></div><div class="text-center"><b class="balance">{{SBOBalance == null || SBOBalance == undefined? 'N/A' : convertDecimal(SBOBalance)}}</b></div>
         </div>
     </div>
 </div>
@@ -120,32 +127,26 @@
                 </div>
             </div>
             <div class="col-11 offset-1">
-
                 <div class="row">
                     <h4 class="col-5 h4">Name :</h4>
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.name }}</h4>
                 </div>
-
                 <div class="row">
                     <h4 class="col-5 h4">Mobile No :</h4>
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.mobileNo }}</h4>
                 </div>
-
                 <div class="row">
                     <h4 class="col-5 h4">Role :</h4>
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.role }}</h4>
                 </div>
-
                 <div class="row">
                     <h4 class="col-5 h4">Username :</h4>
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.username }}</h4>
                 </div>
-
                 <div class="row">
                     <h4 class="col-5 h4">IC No :</h4>
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.UserICNumber }}</h4>
                 </div>
-
                 <div class="row">
                     <h4 class="col-5 h4">IC Image :</h4>
                     <span class="col-2 h4">
@@ -158,7 +159,6 @@
                         </div>
                     </span>
                 </div>
-
                 <div class="row">
                     <h4 class="col-5 h4">Registration Date :</h4>
                     <h4 class="col-6 h4">{{userdata== null ? 'Select username.' : userdata.registeredOn}}</h4>
@@ -172,7 +172,6 @@
             </div>
             <div>
                 <ngx-datatable #table class="material bootstrap no-detail-row" [rows]="bankRows" [loadingIndicator]="loadingIndicator" [columns]="bankColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="5"></ngx-datatable>
-
                 <!--
                     <div class="row">
                     <h4 class="col-5 h4">Account Name :</h4>
@@ -192,6 +191,7 @@
             </div>
 
             <br /><br /><br />
+
             <div class="row">
                 <div class="col-12">
                     <h3>User Unfinished Game</h3>
@@ -202,7 +202,6 @@
                     <h4 class="col-5 h4">Playtech Status :</h4>
                     <h4 class="col-6 h4">{{userPlaytechUnfinished == null ? 'Select username.' : userPlaytechUnfinished }}&nbsp;&nbsp;&nbsp; <span (click)="unfinishedShow(playtechUnfinishedList)" class="fa fa-question-circle"></span></h4>
                 </div>
-
                 <div class="row">
                     <h4 class="col-5 h4">Pragmatic Status :</h4>
                     <h4 class="col-6 h4">{{userPragmaticUnfinished == null ? 'Select username.' : userPragmaticUnfinished }}&nbsp;&nbsp;&nbsp; <span (click)="unfinishedShow(pragmaticUnfinishedList)" class="fa fa-question-circle"></span></h4>
@@ -224,7 +223,7 @@
                     <h4 class="col-2 h4">User's VIP Level :</h4>
                     <h4 class="col-10 h4">
                         <img style="width:100px;margin-top:-50px;margin-bottom:-50px;" src="{{vipLevelImage}}" />&nbsp;&nbsp;&nbsp;
-                        {{vipLevel == null ? 'Select username.' : vipLevel }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button (click)="unfinishedShow(jokerUnfinishedList)" class="btn btn-primary">Change VIP Level</button>
+                        {{vipLevel == null ? 'Select username.' : vipLevel }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button (click)="openWindowCustomClass(VIPLevel)" class="btn btn-primary">Change VIP Level</button>
                     </h4>
                 </div>
             </div>
@@ -315,6 +314,16 @@
                     <td>{{pragmaticUsername== null ? 'Select username.' : pragmaticUsername }}</td>
                     <td></td>
                 </tr>
+                <tr>
+                    <td>YeeBet Game:</td>
+                    <td>{{YeeBetUsername == null ? 'Select username.' : YeeBetUsername }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>SBO Game:</td>
+                    <td>{{SBOUsername == null ? 'Select username.' : SBOUsername }}</td>
+                    <td></td>
+                </tr>
             </table>
             <table style="text-align: center; margin-top: 10px;">
                 <tr>
@@ -368,7 +377,7 @@
             <button class="mb-1 btn btn-success" (click)='setThisYear("Deposit")' type="button">This Year</button>
         </div>
     </div>
-    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="depositRows" [loadingIndicator]="loadingIndicator" [columns]="depositColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="20"  [count]="totalRowCount" [offset]="offset" (page)="setPage($event)">
+    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="depositRows" [loadingIndicator]="loadingIndicator" [columns]="depositColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="20" [count]="totalRowCount" [offset]="offset" (page)="setPage($event)">
     </ngx-datatable>
 </div>
 
@@ -795,7 +804,6 @@
         </div>
     </div>
     <div class="modal-footer">
-
         <button type="button" class="btn btn-success" (click)="GamePasswordShow()">Yes</button>
         <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">No</button>
     </div>
@@ -834,7 +842,6 @@
         </div>
     </div>
     <div class="modal-footer">
-
         <button type="button" class="btn btn-success" (click)="VIPLevelUpdate()">Update</button>
         <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cancel</button>
     </div>

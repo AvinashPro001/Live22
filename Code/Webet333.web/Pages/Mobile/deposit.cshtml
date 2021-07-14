@@ -1,195 +1,197 @@
 @page
-@{
-    ViewData["Title"] = "Deposit";
-    Layout = "~/Pages/Shared/LayoutMobile.cshtml";
-}
-<script src="~/js/mobile/m_bank.js"></script>
-<script>
-    document.getElementById("navbarhide").style.display = "none";
-    document.getElementById("hideBody").style.padding = "0px";
-    document.getElementById("Translation_Option").innerHTML = "";
-    if (GetLocalStorage('currentUser') === null)
-        window.location = "../Mobile/home";
+@{ ViewData["Title"] = "Deposit";
+    Layout = ""; }
 
-    CheckMainteance();
-</script>
-<style>
-    #promotionInfo table {
-        background: #e5e5e5 !important;
-        text-align: center;
-        width: 95%;
-    }
+<div id="comContent"></div>
+<div id="mComContent">
 
-    #promotionInfo strong {
-        font-weight: 800;
-    }
+    <script>
+        document.getElementById("hideBody").style.padding = "0px";
+        if (GetLocalStorage('currentUser') === null)
+            loadPageHome({ backFrom: 'deposit' });
+        CheckMainteance();
+        DepositBankList();
+        DepositPromotionList();
+    </script>
 
-    #promotionInfo table tr:first-child td {
-        background: #858585;
-    }
-</style>
+    <style>
+        #promotionInfo table {
+            background: #e5e5e5 !important;
+            text-align: center;
+            width: 95%;
+        }
 
-<div id="Deposit" class="account-reg white-bg radius-border">
-    <div class="container">
-        <div class="info-form text-center">
-            <div class="row">
-                <div class="col-xs-2">
-                    <div class="back-btn"><a href="../Mobile/home" rel="prefetch"><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div>
-                </div>
-                <div class="col-xs-8">
-                    <h4 class="black-text lang" key="deposit_title"></h4>
+        #promotionInfo strong {
+            font-weight: 800;
+        }
+
+        #promotionInfo table tr:first-child td {
+            background: #858585;
+        }
+    </style>
+
+    <div id="Deposit" class="account-reg white-bg radius-border">
+        <div class="container">
+            <div class="info-form text-center">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <div class="back-btn"><a onclick="loadPageHome({backFrom:'deposit'})" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div>
+                    </div>
+                    <div class="col-xs-8">
+                        <h4 class="black-text lang" key="deposit_title">DEPOSIT</h4>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="formDiposit" class="row">
-            <div class="col-sm-12">
-                <div class="info-form deposit-section">
-                    <label class="company-deposit-list">
-                        <ul class="nav nav-tabs">
-                            <li class="tablinks">
-                                <a class="thm-txt" href="#EeziePay" data-toggle="tab">
-                                    <figure>
-                                        <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank-icon-detail/vaderpay2.jpg" alt="" />
-                                    </figure>
-                                    <p>VaderPay</p>
-                                </a>
-                            </li>
-                            <li class="active tablinks">
-                                <a class="thm-txt" href="#Bank-Transfer" data-toggle="tab">
-                                    <figure>
-                                        <img class="tab-bankicon" src="~/images/bank-icon-detail/bank_transfer_ori.png" alt="" />
-                                    </figure>
-                                    <p>Bank-Transfer</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </label>
-                    <div id="EeziePay" class="tabcontent" style="display: none;text-align:center">
-                        <div class="text-center" id="vaderpayMainteanceSection" style="display:none">
-                            <h3 class="text-center">Under Maintenance</h3>
-                        </div>
-                        <ul class="deposit-bank-listing password-upadte white-text" id="vaderpaySection">
-                            <li>
-                                <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_amount">Amount :</p></label>
-                                <label class="fright card-number mendatory">
-                                    <input id="online_txt_amount" name="txt_mail" type="number" pattern="\d*" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30,000.00"><p class="star">*</p>
-                                    <div class="min-max-limit">
-                                        <ul class="d-flex">
-                                            <li class="data-blog" onclick="setValue(50,true)">50</li>
-                                            <li class="data-blog" onclick="setValue(100,true)">100</li>
-                                            <li class="data-blog" onclick="setValue(300,true)">300</li>
-                                            <li class="data-blog" onclick="setValue(500,true)">500</li>
-                                            <li class="data-blog" onclick="setValue(1000,true)">1000</li>
-                                        </ul>
-                                    </div>
-                                </label>
-                            </li>
-                        </ul>
-                        <div class="row" id="vaderpayPromotionSection">
-                            <div class="col-lg-12">
-                                <section class="select-checkboxes">
-                                    <h3 class="mar-top-15">Please select Promotion below:</h3>
-                                    <ul class="mar-top-15 promotion-choose" id="onlinePromotion"></ul>
-                                </section>
-                                <div class="text-center mar-comman"><button name="" value="submit" class="submit lang" key="deposit_submit" data-toggle="modal" data-target="#profilemyModal" onclick="Deposit(true)"></button></div>
+            <div id="formDiposit" class="row">
+                <div class="col-sm-12">
+                    <div class="info-form deposit-section">
+                        <label class="company-deposit-list">
+                            <ul class="nav nav-tabs">
+                                <li class="tablinks">
+                                    <a class="thm-txt" href="#EeziePay" data-toggle="tab">
+                                        <figure>
+                                            <img style="object-position:center !important" class="tab-bankicon" src="~/images/bank-icon-detail/vaderpay2.jpg" alt="" />
+                                        </figure>
+                                        <p>VaderPay</p>
+                                    </a>
+                                </li>
+                                <li class="active tablinks">
+                                    <a class="thm-txt" href="#Bank-Transfer" data-toggle="tab">
+                                        <figure>
+                                            <img class="tab-bankicon" src="~/images/bank-icon-detail/bank_transfer_ori.png" alt="" />
+                                        </figure>
+                                        <p>Bank-Transfer</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </label>
+                        <div id="EeziePay" class="tabcontent" style="display: none;text-align:center">
+                            <div class="text-center" id="vaderpayMainteanceSection" style="display:none">
+                                <h3 class="text-center">Under Maintenance</h3>
+                            </div>
+                            <ul class="deposit-bank-listing password-upadte white-text" id="vaderpaySection">
+                                <li>
+                                    <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_amount">Amount :</p></label>
+                                    <label class="fright card-number mendatory">
+                                        <input id="online_txt_amount" name="txt_mail" type="number" pattern="\d*" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30,000.00"><p class="star">*</p>
+                                        <div class="min-max-limit">
+                                            <ul class="d-flex">
+                                                <li class="data-blog" onclick="setValue(50,true)">50</li>
+                                                <li class="data-blog" onclick="setValue(100,true)">100</li>
+                                                <li class="data-blog" onclick="setValue(300,true)">300</li>
+                                                <li class="data-blog" onclick="setValue(500,true)">500</li>
+                                                <li class="data-blog" onclick="setValue(1000,true)">1000</li>
+                                            </ul>
+                                        </div>
+                                    </label>
+                                </li>
+                            </ul>
+                            <div class="row" id="vaderpayPromotionSection">
+                                <div class="col-lg-12">
+                                    <section class="select-checkboxes">
+                                        <h3 class="mar-top-15">Please select Promotion below:</h3>
+                                        <ul class="mar-top-15 promotion-choose" id="onlinePromotion"></ul>
+                                    </section>
+                                    <div class="text-center mar-comman"><button name="" value="submit" class="submit lang" key="deposit_submit" data-toggle="modal" data-target="#profilemyModal" onclick="Deposit(true)"></button></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="Bank-Transfer" class="tabcontent active" style="display: none;">
-                        <ul class="deposit-bank-listing password-upadte white-text">
-                            <li>
-                                <div class="bank-selection">
-                                    <ul class="bank-listing step-2-desc highlight-bank" id="Deposit_bank_list">
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <label class="fleft"><p class="big no-mar blk-text lang">Bank Account :</p></label>
-                                <label class="fright mendatory black-text">
-                                    <p class="white-text"><span id="account_name"></span> <i onclick='copyText("account_name")' class="fa fa-files-o" aria-hidden="true" style="margin-left: 20px;"></i></p><br />
-                                    <p class="white-text" id="copy_text"><span id="account_number"></span><i onclick='copyText("account_number")' class="fa fa-files-o" aria-hidden="true" style="margin-left: 20px;"></i></p>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_amount">Amount :</p></label>
-                                <label class="fright card-number mendatory">
-                                    <input id="txt_amount" name="txt_mail" type="number" pattern="\d*" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30,000.00"><p class="star">*</p>
-                                    <div class="min-max-limit">
-                                        <ul class="d-flex">
-                                            <li class="data-blog" onclick="setValue(50,false)">50</li>
-                                            <li class="data-blog" onclick="setValue(100,false)">100</li>
-                                            <li class="data-blog" onclick="setValue(300,false)">300</li>
-                                            <li class="data-blog" onclick="setValue(500,false)">500</li>
-                                            <li class="data-blog" onclick="setValue(1000,false)">1000</li>
+                        <div id="Bank-Transfer" class="tabcontent active" style="display: none;">
+                            <ul class="deposit-bank-listing password-upadte white-text">
+                                <li>
+                                    <div class="bank-selection">
+                                        <ul class="bank-listing step-2-desc highlight-bank" id="Deposit_bank_list">
                                         </ul>
                                     </div>
-                                </label>
-                            </li>
-                            <br />
-                            <li class="pad-btm-ten">
-                                <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_date_time"></p></label>
-                                <label class="fright">
-                                    <label class="calender-part mendatory">
-                                        <input size="16" id="txt_datetime" name="txt_datetime" type="text" class="form_datetime reg-form main-wallet" readonly placeholder="select date.">
+                                </li>
+                                <li>
+                                    <label class="fleft"><p class="big no-mar blk-text lang">Bank Account :</p></label>
+                                    <label class="fright mendatory black-text">
+                                        <p class="white-text"><span id="account_name"></span> <i onclick='copyText("account_name")' class="fa fa-files-o" aria-hidden="true" style="margin-left: 20px;"></i></p><br />
+                                        <p class="white-text" id="copy_text"><span id="account_number"></span><i onclick='copyText("account_number")' class="fa fa-files-o" aria-hidden="true" style="margin-left: 20px;"></i></p>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_amount">Amount :</p></label>
+                                    <label class="fright card-number mendatory">
+                                        <input id="txt_amount" name="txt_mail" type="number" pattern="\d*" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30,000.00"><p class="star">*</p>
+                                        <div class="min-max-limit">
+                                            <ul class="d-flex">
+                                                <li class="data-blog" onclick="setValue(50,false)">50</li>
+                                                <li class="data-blog" onclick="setValue(100,false)">100</li>
+                                                <li class="data-blog" onclick="setValue(300,false)">300</li>
+                                                <li class="data-blog" onclick="setValue(500,false)">500</li>
+                                                <li class="data-blog" onclick="setValue(1000,false)">1000</li>
+                                            </ul>
+                                        </div>
+                                    </label>
+                                </li>
+                                <br />
+                                <li class="pad-btm-ten">
+                                    <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_date_time">Date time:</p></label>
+                                    <label class="fright">
+                                        <label class="calender-part mendatory">
+                                            <input size="16" id="txt_datetime" name="txt_datetime" type="text" class="form_datetime reg-form main-wallet" readonly placeholder="select date.">
+                                            <p class="star">*</p>
+                                        </label>
+                                    </label>
+                                </li>
+                                <li class="pad-btm-ten">
+                                    <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_reference_number">Reference Number:</p></label>
+                                    <label class="fright card-number mendatory">
+                                        <input id="txt_reference_number" name="txt_reference_number" type="text" class="reg-form " placeholder="Enter Reference Number" autocomplete="new-password">
                                         <p class="star">*</p>
                                     </label>
-                                </label>
-                            </li>
-                            <li class="pad-btm-ten">
-                                <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_reference_number"></p></label>
-                                <label class="fright card-number mendatory">
-                                    <input id="txt_reference_number" name="txt_reference_number" type="text" class="reg-form " placeholder="Enter Reference Number" autocomplete="new-password">
-                                    <p class="star">*</p>
-                                </label>
-                            </li>
-                            <li class="pad-btm-ten scanned-file">
-                                <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_scanned_receipt"></p></label>
-                                <div class="fright upload">
-                                    <div class="d-flex">
-                                        @* <button class="submit lang" data-toggle="modal" key="transfer_button" data-target="#profilemyModal" onclick="Checkbalance()" type="button">Submit</button> *@
-                                        <div class="fake-upload-btn upload-btn">
-                                            <span class="lang" key="deposit_upload_receipt"></span>
-                                            <input class="jcf-ignore" type="file" id="receipt" multiple />
+                                </li>
+                                <li class="pad-btm-ten scanned-file">
+                                    <label class="fleft"><p class="big no-mar lang blk-text" key="deposit_scanned_receipt">Scanned Receipt:</p></label>
+                                    <div class="fright upload">
+                                        <div class="d-flex">
+                                            @* <button class="submit lang" data-toggle="modal" key="transfer_button" data-target="#profilemyModal" onclick="Checkbalance()" type="button">Submit</button> *@
+                                            <div class="fake-upload-btn upload-btn">
+                                                <span class="lang" key="deposit_upload_receipt">Upload Receipts</span>
+                                                <input class="jcf-ignore" type="file" id="receipt" multiple />
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div>
+                                            <ul id="selectedFiles"></ul>
                                         </div>
                                     </div>
-                                    <div class="clearfix"></div>
-                                    <div>
-                                        <ul id="selectedFiles"></ul>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="row">
-                            <div class="col-md-4 col-lg-4">
-                                <div class="info-form notice-bank-transfer deposit-section pad-top-twentyfive" style="background-color: #eeeeee; border-radius: 6px;">
-                                    <div class="pad-lr-comman">
-                                        <h6 class="info-notice"><span class="lang" key="important_notice"></span></h6>
-                                        <ol>
-                                            <li><span class="lang" key="instruction_1"></span></li>
-                                            <li><span class="lang" key="instruction_2"></span></li>
-                                            <li><span class="lang" key="instruction_3"></span></li>
-                                            <li><span class="lang" key="instruction_4"></span></li>
-                                            <li><span class="lang" key="instruction_5"></span></li>
-                                            <li>
-                                                <span class="lang" key="instruction_6A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+                                </li>
+                            </ul>
+                            <div class="row">
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="info-form notice-bank-transfer deposit-section pad-top-twentyfive" style="background-color: #eeeeee; border-radius: 6px;">
+                                        <div class="pad-lr-comman">
+                                            <h6 class="info-notice"><span class="lang" key="important_notice">IMPORTANT NOTICE</span></h6>
+                                            <ol>
+                                                <li><span class="lang" key="instruction_1"></span></li>
+                                                <li><span class="lang" key="instruction_2"></span></li>
+                                                <li><span class="lang" key="instruction_3"></span></li>
+                                                <li><span class="lang" key="instruction_4"></span></li>
+                                                <li><span class="lang" key="instruction_5"></span></li>
+                                                <li>
+                                                    <span class="lang" key="instruction_6A"></span><a onclick="window.open('https://vue1.livelyhelp.chat/ChatWindow.aspx?siteId=233923&planId=a9010000-0000-0000-0000-008e000391c3', 'newwindow',
         'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a> <span class="lang" key="instruction_6B"></span>
-                                            </li>
-                                            <li>
-                                                <span class="lang" key="instruction_7A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+                                                </li>
+                                                <li>
+                                                    <span class="lang" key="instruction_7A"></span><a onclick="window.open('https://vue1.livelyhelp.chat/ChatWindow.aspx?siteId=233923&planId=a9010000-0000-0000-0000-008e000391c3', 'newwindow',
         'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a><span class="lang" key="instruction_7B"></span>
-                                            </li>
-                                        </ol>
+                                                </li>
+                                            </ol>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <section class="select-checkboxes">
-                                    <h3 class="mar-top-15">Please select Promotion below:</h3>
-                                    <ul class="mar-top-15 promotion-choose" id="promotion"></ul>
-                                </section>
-                                <div class="text-center mar-comman"><button name="" value="submit" class="submit lang" key="deposit_submit" data-toggle="modal" data-target="#profilemyModal" onclick="Deposit(false)"></button></div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <section class="select-checkboxes">
+                                        <h3 class="mar-top-15">Please select Promotion below:</h3>
+                                        <ul class="mar-top-15 promotion-choose" id="promotion"></ul>
+                                    </section>
+                                    <div class="text-center mar-comman"><button name="" value="submit" class="submit lang" key="deposit_submit" data-toggle="modal" data-target="#profilemyModal" onclick="Deposit(false)"></button></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -197,82 +199,231 @@
             </div>
         </div>
     </div>
-</div>
 
-<div class="container">
-    <div id="promotionDetails" class="modal fade" style="overflow-y: hidden;z-index: 2147483643;">
-        <div class="modal-dialog" style="width:95%;">
-            <div class="modal-content">
-                <div class="modal-body" style="padding-right: 0px;">
-                    <div><button type="button" class="close" data-dismiss="modal">&times;</button></div>
-                    <div id="promotionInfo" style="overflow-y: scroll;max-height:500px;margin-top: 50px !important;">
+    <div class="container">
+        <div id="promotionDetails" class="modal fade" style="overflow-y: hidden;z-index: 2147483643;">
+            <div class="modal-dialog" style="width:95%;">
+                <div class="modal-content">
+                    <div class="modal-body" style="padding-right: 0px;">
+                        <div><button type="button" class="close" data-dismiss="modal">&times;</button></div>
+                        <div id="promotionInfo" style="overflow-y: scroll;max-height:500px;margin-top: 50px !important;">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="container">
-    <div id="promotionNavigate" class="modal fade">
-        <div class="modal-dialog mail-width">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <p><span class="lang" key="msg_promotion_not_select"></span></p>
-                    <ul class="list-inline pad-top-ten">
-                        <li><button onclick="DepositAfterPromotion()" data-dismiss="modal" class="submit"><a asp-page="/Account/Profile" asp-fragment="deposit">Yes</a></button></li>
-                        <li><button class="submit" data-dismiss="modal"><a asp-page="/Home/home">No</a></button></li>
-                    </ul>
+    <div class="container">
+        <div id="promotionNavigate" class="modal fade">
+            <div class="modal-dialog mail-width">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <p><span class="lang" key="msg_promotion_not_select"></span></p>
+                        <ul class="list-inline pad-top-ten">
+                            <li><button onclick="DepositAfterPromotion()" data-dismiss="modal" class="submit"><a asp-page="/Account/Profile" asp-fragment="deposit">Yes</a></button></li>
+                            <li><button class="submit" data-dismiss="modal"><a asp-page="/Home/home">No</a></button></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="container">
-    <div id="promotionExpieryModel" class="modal fade">
-        <div class="modal-dialog mail-width">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <img src="~/images/warning.png" />
-                    <p><span class="lang" key="show_waring_deposit"></span></p>
-                    <ul class="list-inline pad-top-ten">
-                        <li><button onclick="PromotionApplyInsert()" data-dismiss="modal" class="submit">Yes I Know</button></li>
-                        <li><button class="submit" data-dismiss="modal">Cancel</button></li>
-                    </ul>
+    <div class="container">
+        <div id="promotionExpieryModel" class="modal fade">
+            <div class="modal-dialog mail-width">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <img src="~/images/warning.png" />
+                        <p><span class="lang" key="show_waring_deposit"></span></p>
+                        <ul class="list-inline pad-top-ten">
+                            <li><button onclick="PromotionApplyInsert()" data-dismiss="modal" class="submit">Yes I Know</button></li>
+                            <li><button class="submit" data-dismiss="modal">Cancel</button></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="container">
-    <div id="WithoutPromotionDeposit" class="modal fade">
-        <div class="modal-dialog mail-width">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <img src="~/images/warning.png" />
-                    <p><span class="lang" key="show_waring_deposit_withoutpromotion"></span></p>
-                    <ul class="list-inline pad-top-ten">
-                        <li><button onclick="DepositAfterPromotion()" data-dismiss="modal" class="submit">Yes I Know</button></li>
-                        <li><button class="submit" data-dismiss="modal">Cancel</button></li>
-                    </ul>
+    <div class="container">
+        <div id="WithoutPromotionDeposit" class="modal fade">
+            <div class="modal-dialog mail-width">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <img src="~/images/warning.png" />
+                        <p><span class="lang" key="show_waring_deposit_withoutpromotion"></span></p>
+                        <ul class="list-inline pad-top-ten">
+                            <li><button onclick="DepositAfterPromotion()" data-dismiss="modal" class="submit">Yes I Know</button></li>
+                            <li><button class="submit" data-dismiss="modal">Cancel</button></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        var today = new Date();
+        var date = today.getFullYear() + '-' + ((today.getMonth() + 1) < 10 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1)) + '-' + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
+        var time = (today.getHours() < 10 ? "0" + today.getHours() : today.getHours()) + ":" + (today.getMinutes() < 10 ? "0" + today.getMinutes() : today.getMinutes());
+        var dateTime = date + ' ' + time;
+        document.getElementById("txt_datetime").value = dateTime;
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+        $(".form_datetime").datetimepicker({ autoclose: true });
+    </script>
+
+    <div class="footer-widget" id="footerWidget">
+        <ul class="list-inline text-center">
+            <li id="homePagebottom">
+                <a onclick="loadPageHome()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-home"></i>
+                    <p class="white-text no-mar" data-translate="menu_home">Home</p>
+                </a>
+            </li>
+            <li id="promotionPagebottom">
+                <a onclick="loadPagePromotions()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-gift"></i>
+                    <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
+                </a>
+            </li>
+            <li id="contactusPagebottom">
+                <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-user"></i>
+                    <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="whatsapp()">
+                    <figure><img src="~/images/images-mobile/whatsapp.png" alt="Whats App" /></figure>
+                    <p class="white-text no-mar">Whatsapp</p>
+                </a>
+            </li>
+            @*
+                <li class="live-chat">
+                    <a class="live-chat-icon">
+                        <p class="white-text no-mar" data-translate="Live_chat">Live Chat</p>
+                    </a>
+                </li>
+            *@
+            <li>
+                <a href="#" onclick="LiveChat()">
+                    <figure><img src="~/images/images-mobile/livechat.png" alt="LiveChat" /></figure>
+                    <p class="white-text no-mar" data-translate="Live_chat">Live Chat</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <a id="mobileM8" style="display:none"></a>
+    </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
+            $("#chatting").toggle();
+        });
+        $(".contact-user").mouseover(function () {
+            $("#chatting").toggle();
+        });
+    });
+</script>
+
+<!--Begin Comm100 Live Chat Code-->
+<div></div>
+@*
+    <script type="text/javascript">
+        var OnlineHelpAPI = OnlineHelpAPI || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: "a9010000-0000-0000-0000-008e000391c3", div_id: "onlinehelp-button-a9010000-0000-0000-0000-008e000391c3" }), t.site_id = 233923, t.main_code_plan = "a9010000-0000-0000-0000-008e000391c3", e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 5e3) })(OnlineHelpAPI || {})
+    </script>
+*@
+<!--End Comm100 Live Chat Code-->
+<!-- Slider Section End -->
+<!-- Modal For Video -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".open-modal").click();
+    });
+    jQuery(".scroll-down-visible").hide();
+    jQuery("#more-arrow").click(function () {
+        jQuery(".scroll-down-visible").toggleClass("show");
+        jQuery("#more-arrow").toggleClass("rotate");
+    });
+</script>
+<!-- //Modal For Video -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".navbar-toggle,.canvas-overlay").click(function () {
+            if (!$("html").hasClass('intro')) {
+                $("html").addClass("intro");
+            }
+            else {
+                $("html").removeClass("intro");
+            }
+        });
+        $(".canvas-overlay").click(function () {
+            if ($(".navbar-collapse").hasClass('in')) {
+                $(".navbar-collapse").removeClass("in");
+            }
+        });
+    });
+</script>
+<!-- Slider Section End -->
+<script>
+    $(window).scroll(function () {
+        var scroll = $(window).scrollTop();
+        if (scroll >= 1) {
+            $("header").addClass("sticky-header");
+        }
+        else {
+            $("header").removeClass("sticky-header");
+        }
+    });
+</script>
 
 <script>
-    var today = new Date();
-    var date = today.getFullYear() + '-' + ((today.getMonth() + 1) < 10 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1)) + '-' + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
-    var time = (today.getHours() < 10 ? "0" + today.getHours() : today.getHours()) + ":" + (today.getMinutes() < 10 ? "0" + today.getMinutes() : today.getMinutes());
-    var dateTime = date + ' ' + time;
-    document.getElementById("txt_datetime").value = dateTime;
-</script>
-<script type="text/javascript" charset="utf-8">
-    $(".form_datetime").datetimepicker({ autoclose: true });
+    $(document).ready(function () {
+        init();
+    });
+
+    function language(value) {
+        SetLocalStorage('language', value);
+        get();
+    }
+
+    function get() {
+        (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
+
+        $.ajax({
+            url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
+            dataType: 'json',
+            async: false,
+            success: function (lang) {
+                $('.lang').each(function (index, element) {
+                    if (localStorage.getItem("language") === "ms-MY") {
+                        $('body').addClass('malay-font');
+                    }
+                    $(this).text(lang[$(this).attr('key')]);
+                });
+                $("[data-translate]").each(function () {
+                    if ($(this).is("input")) {
+                        $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    } else {
+                        $(this).text(lang[$(this).data("translate")]);
+                    }
+                });
+            }
+        });
+    }
+
+    setTimeout(() => {
+        get();
+    }, 200);
 </script>

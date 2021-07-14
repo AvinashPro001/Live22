@@ -22,6 +22,10 @@
 
         public string SexyUsername { get; set; }
 
+        public string YEEBETUsername { get; set; }
+
+        public string SBOUsername { get; set; }
+
         public decimal MainWalletBalance { get; set; }
 
         public string FromWalletName { get; set; }
@@ -37,6 +41,7 @@
         public string AllBetUsername { get; set; }
 
         public string WMUsername { get; set; }
+
         public string PragmaticUsername { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿var M8baseUrl = "http://apid.mywinday.com/api.aspx?";
+﻿var M8baseUrl = "http://apir.mywinday.com/api.aspx?";
 
 var M8ConstParameter = {
     secret: "secret=a782988d",

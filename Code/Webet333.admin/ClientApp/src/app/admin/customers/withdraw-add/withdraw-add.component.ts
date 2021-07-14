@@ -84,6 +84,12 @@ export class WithdrawAddComponent implements OnInit {
     allbetUsername: any;
     userPassword: any;
 
+    YeeBetBalance: any;
+    YeeBetUsername: any;
+
+    SBOBalance: any;
+    SBOUsername: any;
+
     //#endregion
 
     //#region ngOnInit
@@ -134,6 +140,8 @@ export class WithdrawAddComponent implements OnInit {
             this.pragmaticUsername = res.data.pragmaticUsername;
             this.allbetUsername = res.data.allbetUsername;
             this.wmUsername = res.data.wmUsername;
+            this.YeeBetUsername = res.data.yeeBetUsername;
+            this.SBOUsername = res.data.sboUsername;
             this.Kiss918Balance(newVal);
             this.Mega888(newVal);
             this.Maxbet(newVal);
@@ -149,6 +157,8 @@ export class WithdrawAddComponent implements OnInit {
             this.Pragmatic(newVal);
             this.AllBet(newVal);
             this.WM(newVal);
+            this.YeeBet(newVal);
+            this.SBO(newVal);
         });
     }
 
@@ -162,8 +172,10 @@ export class WithdrawAddComponent implements OnInit {
 
     //#region customerUser
     customerUser() {
-        var model = {};
-        this.adminService.add<any>(customer.customerList, model).subscribe(res => {
+        let model = {
+            role: "user"
+        };
+        this.adminService.add<any>(customer.customerListForDropdown, model).subscribe(res => {
             this.customerData = res.data;
         }, error => {
             this.toasterService.pop('error', 'Error', error.error.message);
@@ -191,6 +203,7 @@ export class WithdrawAddComponent implements OnInit {
             this.allbetUsername = res.data.allbetUsername;
             this.wmUsername = res.data.wmUsername;
             this.pragmaticUsername = res.data.pragmaticUsername;
+            this.YeeBetUsername = res.data.yeeBetUsername;
             this.Kiss918Balance(newVal);
             this.Mega888(newVal);
             this.Maxbet(newVal);
@@ -205,6 +218,7 @@ export class WithdrawAddComponent implements OnInit {
             this.AllBet(newVal);
             this.WM(newVal);
             this.Pragmatic(newVal);
+            this.YeeBet(newVal);
 
             this.adminService.getAll<any>(customer.depositDdl).subscribe(res => {
                 this.ddlData = res.data;
@@ -271,7 +285,7 @@ export class WithdrawAddComponent implements OnInit {
             if (CheckPromotionApply.data.Staus != null && CheckPromotionApply.data.TotalPromotionRow > 0) {
                 this.disabled = false;
                 this.ngOnInit();
-                return this.toasterService.pop('error', 'Error', "Your Promotion is on going, cannot withdraw till the promotion is completed");
+                return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.YourPromotionIsOnGoingCannotWithdrawTillThePromotionIsCompleted);
             }
 
             this.adminService.add<any>(account.profile, dataProfile).subscribe(async resUser => {
@@ -675,6 +689,26 @@ export class WithdrawAddComponent implements OnInit {
         }
         this.adminService.add<any>(gameBalance.Pragmatic, data).subscribe(res => {
             this.pragmaticBal = res.data.balance;
+        })
+    }
+
+    YeeBet(id) {
+        let data = {
+            id: id,
+            username: this.YeeBetUsername
+        }
+        this.adminService.add<any>(gameBalance.YeeBet, data).subscribe(res => {
+            this.YeeBetBalance = res.data.balance;
+        })
+    }
+
+    SBO(id) {
+        let data = {
+            id: id,
+            username: this.SBOUsername
+        }
+        this.adminService.add<any>(gameBalance.SBO, data).subscribe(res => {
+            this.SBOBalance = res.data.balance;
         })
     }
 

@@ -41,6 +41,9 @@
                                 <button class="mb-1 btn btn-success" (click)='openRejectConfirmationDialogForSelectedCustomer()' type="button">Delete</button>
                             </div>
                         </div>
+
+                        <br />
+
                         <div>
                             <ngx-datatable #table
                                            class='bootstrap no-detail-row'
@@ -61,7 +64,13 @@
                                              ngx-datatable-row-detail-template>
                                     <div class="row col-md-12">
                                         <label class="col-md-3">
-                                            <button id="rejectBtn" data-id="customerData[rowIndex].id" class="mb-1 btn btn-danger" type="button" data-toggle="modal" title="Delete" (click)='openRejectConfirmationDialog(row.id)'>
+                                            <button id="rejectBtn"
+                                                    data-id="customerData[rowIndex].id"
+                                                    class="mb-1 btn btn-danger"
+                                                    type="button"
+                                                    data-toggle="modal"
+                                                    title="Delete"
+                                                    (click)='openRejectConfirmationDialog(row.id)'>
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </button>
                                         </label>
