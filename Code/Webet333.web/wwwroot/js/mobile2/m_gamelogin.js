@@ -1047,7 +1047,7 @@ async function GameLoginMobile(gamename) {
                             isMobile: true
                         };
                         var res = await PostMethod(apiEndPoints.SBOLogin, model);
-                        if (res.message != null) location.href = res.message;
+                        if (res != null && res.data.error.id == 0) window.location.href = res.data.url;
                     }
                 }
                 else {
@@ -1055,7 +1055,7 @@ async function GameLoginMobile(gamename) {
                         isMobile: true
                     };
                     var res = await PostMethod(apiEndPoints.SBOLogin, model);
-                    if (res.message != null) location.href = res.message;
+                    if (res != null && res.data.error.id == 0) window.location.href = res.data.url;
                 }
                 break;
         }
