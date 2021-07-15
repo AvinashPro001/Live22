@@ -558,7 +558,7 @@ async function regisrationGame() {
                         };
 
                         var resM8 = await PostMethod(apiEndPoints.registerM8, modelM8);
-                        var resultM8LoginRegister = await callMe(M8ConstAction.loginAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username + "&host=sport.mywinday.com&lang=EN-US&accType=HK&ref=https://webet333.com");
+                        var resultM8LoginRegister = await callMe(M8ConstAction.loginAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username + "&host=sport.mywinday.com&lang=EN-US&accType=HK&ref=" + baseUrlWithoutVersion);
 
                         if (resultM8LoginRegister.response.errcode !== '0') {
                             return ShowError(resultM8LoginRegister.response.errtext);

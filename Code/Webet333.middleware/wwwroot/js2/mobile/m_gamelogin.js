@@ -17,7 +17,7 @@ function WalletSignalR() {
     try {
         "use strict";
 
-        var connection = new signalR.HubConnectionBuilder().withUrl("https://api.wb3my.com/signalrhub").build();
+        var connection = new signalR.HubConnectionBuilder().withUrl(baseUrlWithoutVersion + "/signalrhub").build();
 
         connection.on("WalletUpdate", function (data) {
             walletData = data;
@@ -550,7 +550,7 @@ function randomString() {
 async function M8Login(usernamePrifix) {
     var languageCode = (GetLocalStorage('language') === "zh-Hans" ? "ZH-CN" : "EN-US");
 
-    var resultM8Login = await callMe(M8ConstAction.loginAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + usernamePrifix + "&host=sport.mywinday.com&lang=" + languageCode + "&accType=DEC,IN,CN,US,ML,HK&ref=https://wb3my.com");
+    var resultM8Login = await callMe(M8ConstAction.loginAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + usernamePrifix + "&host=sport.mywinday.com&lang=" + languageCode + "&accType=DEC,IN,CN,US,ML,HK&ref=" + baseUrlWithoutVersion);
 
     if (resultM8Login.response.errcode !== "0") {
         ShowError(resultM8Login.response.errtext);
@@ -569,7 +569,7 @@ async function M8Login(usernamePrifix) {
 //#region For Playtech game login
 function loadingPlaytechJS() {
     var imported = document.createElement('script');
-    imported.src = 'https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88'
+    imported.src = playtehcJS
     document.head.appendChild(imported);
 }
 
@@ -771,7 +771,7 @@ async function GameLoginMobile(gamename) {
                             apiResponse: resultM8.response
                         };
                         var resM8 = await PostMethod(apiEndPoints.registerM8, modelM8);
-                        var resultM8LoginRegister = await callMe(M8ConstAction.loginAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username + "&host=sport.mywinday.com&lang=" + languageCode + "&accType=HK&ref=https://wb3my.com");
+                        var resultM8LoginRegister = await callMe(M8ConstAction.loginAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username + "&host=sport.mywinday.com&lang=" + languageCode + "&accType=HK&ref=" + baseUrlWithoutVersion);
 
                         if (resultM8LoginRegister.response.errcode === '-1') {
                             return ShowError(resultM8LoginRegister.response.errtext);

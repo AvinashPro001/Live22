@@ -179,7 +179,7 @@ async function callMe(endPoint) {
                 'Accept': 'application/json',
                 'Access-Control-Max-Age': 300
             },
-            url: 'http://api.wb3my.com/api/Default'
+            url: baseUrlWithoutVersion + '/api/Default'
         }).then(function (res) {
             var tosend = JSON.parse(res);
             tosend["error"] = false;
@@ -211,7 +211,7 @@ function PlaytechPostMethod(endPoint) {
                 'Accept': 'application/json',
                 'Access-Control-Max-Age': 300
             },
-            url: 'http://api.wb3my.com/api/Default/playtech'
+            url: baseUrlWithoutVersion + '/api/Default/playtech'
         }).then(function (res) {
             try {
                 var tosend = JSON.parse(res);
@@ -247,7 +247,7 @@ function AGPostMethod(endPoint) {
                 'Accept': 'application/json',
                 'Access-Control-Max-Age': 300
             },
-            url: 'http://api.wb3my.com/api/Default/ag'
+            url: baseUrlWithoutVersion + '/api/Default/ag'
         }).then(function (res) {
             var tosend = JSON.parse(res);
             tosend["error"] = false;
@@ -279,7 +279,7 @@ function _918KissPostMethod(endPoint) {
                 'Accept': 'application/json',
                 'Access-Control-Max-Age': 300
             },
-            url: 'http://api.wb3my.com/api/Default/ag'
+            url: baseUrlWithoutVersion + '/api/Default/ag'
         }).then(function (res) {
             try {
                 var tosend = JSON.parse(res);
@@ -345,7 +345,7 @@ function JokerPostMethod(endPoint, perameter) {
                 'Accept': 'application/json',
                 'Access-Control-Max-Age': 300
             },
-            url: 'http://api.wb3my.com/api/Default/joker',
+            url: baseUrlWithoutVersion + '/api/Default/joker',
             beforeSend: function () {
                 // setting a timeout
                 $(".loadingImage").fadeOut("slow");

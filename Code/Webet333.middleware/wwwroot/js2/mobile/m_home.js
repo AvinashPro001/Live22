@@ -116,14 +116,14 @@ function ChangeErroMessage(key, parameter = "") {
 }
 
 async function MobileDesktopReferenceInsert(url) {
-    if (url.href.toLowerCase() === "http://www.webet333.com/") {
+    if (url.href.toLowerCase() === webUrl) {
         var referenceKeywordModelDesktopElse = {
             keyword: 'DESKTOP'
         };
         await PostMethodWithParameter(apiEndPoints.socialMediaReference, referenceKeywordModelDesktopElse);
     }
 
-    if (url.href.toLowerCase() === "http://www.webet333.com/mobile") {
+    if (url.href.toLowerCase() === mobUrl) {
         var referenceKeywordModelPhoneElse = {
             keyword: 'PHONE'
         };
@@ -156,8 +156,8 @@ async function getReference() {
 
 //#region DetectMobileBrowser
 function DetectMobileBrowser() {
-    if (window.innerWidth <= 1000 && window.innerHeight <= 1691 && (window.location.href === 'http://www.webet333.com/' || window.location.href === 'http://webet333.com/' || window.location.href === 'webet333.com/' || window.location.href === 'http://webet333.com')) {
-        window.location = "http://www.webet333.com/Mobile/home";
+    if (window.innerWidth <= 1000 && window.innerHeight <= 1691 && (window.location.href === webUrl || window.location.href === webUrl || window.location.href === webUrl || window.location.href === webUrl)) {
+        window.location = mobUrl;
     }
 }
 //#endregion

@@ -1,6 +1,8 @@
-﻿var baseUrl = "http://api.wb3my.com/api/v1/";
-//var baseUrl = "http://api.wb3my.com/api/v1/";
-//var baseUrl ="http://localhost:8091/api/v1/"
+﻿var baseUrl = "https://api.wb3api.com/api/v1/";
+var baseUrlWithoutVersion = "https://api.wb3api.com";
+var webUrl = "https://www.wb3my.com/";
+var mobUrl = "https://www.wb3my.com/mobile/";
+var playtehcJS = "https://login.tothinkit.com/jswrapper/integration.js.php?casino=winforfun88";
 
 var apiEndPoints = {
     login: "account/login",
