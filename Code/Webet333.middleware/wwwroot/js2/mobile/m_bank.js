@@ -670,7 +670,7 @@ async function DepositAfterPromotion() {
     if (onlinePayment) {
         var res = await PostMethod(apiEndPoints.onlinePayment, depositModel);
         if (res !== null && res !== undefined) {
-            window.open("../PaymentStatus?url=" + res.data.redirect_to, "_blank")
+            window.open("../Web/payment?url=" + res.data.redirect_to)
         }
     }
     else {

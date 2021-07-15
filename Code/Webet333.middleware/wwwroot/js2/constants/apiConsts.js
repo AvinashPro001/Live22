@@ -1,4 +1,4 @@
-﻿var baseUrl = "https://api.wb3my.com/api/v1/";
+﻿var baseUrl = "http://api.wb3my.com/api/v1/";
 //var baseUrl = "http://api.wb3my.com/api/v1/";
 //var baseUrl ="http://localhost:8091/api/v1/"
 

@@ -69,7 +69,7 @@ function SetUsernamePassword(InputType = false) {
             for (i = 0; i < SlotsUsernamePasswordId.length; i++) {
                 switch (SlotsUsernamePasswordId[i]) {
                     case "kiss918_username": SetAllInputTextvalue(SlotsUsernamePasswordId[i], GameUsernames.Kiss918Username); break;
-                    case "joker_username": SetAllInputTextvalue(SlotsUsernamePasswordId[i], GameUsernames.JokerUsername); break;
+                    case "joker_username": SetAllInputTextvalue(SlotsUsernamePasswordId[i], gameSettingEndPoints.JokerGameId + GameUsernames.JokerUsername); break;
                     case "mega888_username": SetAllInputTextvalue(SlotsUsernamePasswordId[i], GameUsernames.Mega888Username); break;
                     case "pussy888_username": SetAllInputTextvalue(SlotsUsernamePasswordId[i], GameUsernames.Pussy888Username); break;
                     case "pussy888_password": SetAllInputTextvalue(SlotsUsernamePasswordId[i], data.passwordPussy888); break;
@@ -83,7 +83,7 @@ function SetUsernamePassword(InputType = false) {
             for (i = 0; i < SlotsUsernamePasswordId.length; i++) {
                 switch (SlotsUsernamePasswordId[i]) {
                     case "kiss918_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.Kiss918Username); break;
-                    case "joker_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.JokerUsername); break;
+                    case "joker_username": SetAllValueInElement(SlotsUsernamePasswordId[i], gameSettingEndPoints.JokerGameId + GameUsernames.JokerUsername); break;
                     case "mega888_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.Mega888Username); break;
                     case "pussy888_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.Pussy888Username); break;
                     case "pussy888_password": SetAllValueInElement(SlotsUsernamePasswordId[i], data.passwordPussy888); break;

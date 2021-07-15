@@ -288,7 +288,7 @@
 
     setTimeout(function () {
         SetUsernamePassword();
-    },3000)
+    },5000)
 
     setInterval(function () {
         if (document.getElementById("Pussy888IOS").src == "") CallDownloadLinkAPI();
@@ -297,6 +297,7 @@
     window.onhashchange = OpenTabOnHashChange;
 
     function OpenTabOnHashChange() {
+        SetUsernamePassword();
         if (window.location.hash) {
             var hash = window.location.hash.substring(1);
             debugger
@@ -314,6 +315,7 @@
     }
 
     function openCity(evt, cityName, linknum) {
+        SetUsernamePassword();
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
