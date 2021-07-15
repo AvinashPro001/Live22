@@ -63,7 +63,7 @@ namespace Webet333.api.Helpers
 
         internal static async Task<M8LoginResponse> CallLoginAPI(string Username,string Language)
         {
-            var url = $"{GameConst.M8.baseURL}?action={GameConst.M8.login}&secret={GameConst.M8.Secret}&agent={GameConst.M8.agent}&username={Username}&host=sport.mywinday.com&lang={Language}&accType=DEC,IN,CN,US,ML,HK&ref=https://webet333.com";
+            var url = $"{GameConst.M8.baseURL}?action={GameConst.M8.login}&secret={GameConst.M8.Secret}&agent={GameConst.M8.agent}&username={Username}&host=sport.mywinday.com&lang={Language}&accType=DEC,IN,CN,US,ML,HK&ref={GameConst.BaseUrl}";
             return JsonConvert.DeserializeObject<M8LoginResponse>(await CallAPI(url));
         }
 

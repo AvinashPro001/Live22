@@ -341,8 +341,6 @@
 
             public const string BettingDetailsURL = "https://tttint.onlinegames22.com/";
 
-            public const string RedirectURL = "http://webet333.com/";
-
             public const string gameType = "LIVE";
 
             public const string platform = "SEXYBCRT";
@@ -533,8 +531,6 @@
             public const string APPId = "xtd4M3E5YIN1";
 
             public const string SecretKey = "7caf026d508e35cb48136cf11d98b64c";
-
-            public const string ReturnURL = "http://uat.webet333.com/";
 
             public const string Currency = "MYR";
 
@@ -727,9 +723,9 @@
 
 #elif STAG
 
-        public const string BaseUrl = "http://webet333.com/";
+        public const string BaseUrl = "https://www.wb3my.com/";
 
-        public const string APIUrl = "http://api.webet333.com/api/v1/";
+        public const string APIUrl = "https://api.wb3api.com/api/v1/";
 
         public class MaxBet
         {
@@ -1029,8 +1025,6 @@
 
             public const string BettingDetailsURL = "https://fetch.onlinegames22.com/";
 
-            public const string RedirectURL = "http://webet333.com/";
-
             public const string gameType = "LIVE";
 
             public const string platform = "SEXYBCRT";
@@ -1221,8 +1215,6 @@
             public const string APPId = "xtd019R76QU5";
 
             public const string SecretKey = "1d6f1e05678290dba54ac00947404bbd";
-
-            public const string ReturnURL = "http://webet333.com/";
 
             public const string Currency = "MYR";
 

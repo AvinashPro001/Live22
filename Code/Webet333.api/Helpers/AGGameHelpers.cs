@@ -48,7 +48,7 @@ namespace Webet333.api.Helpers
                       $"&game_type={gameType}" +
                       $"&lang={langCode}" +
                       $"&odd_type={bettingLimit}" +
-                      $"&user_id={username}&dm=http://www.webet333.com/";
+                      $"&user_id={username}&dm="+GameConst.BaseUrl;
 
 
             return JsonConvert.DeserializeObject<AGLoginResponse>(await GameHelpers.CallThirdPartyApi(url));

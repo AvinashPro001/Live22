@@ -59,7 +59,7 @@ namespace Webet333.api.Helpers
         {
             var parameter = $"vendor_id={GameConst.MaxBet.VendorId}" +
               $"&vendor_member_id={VendorMemberId}" +
-              $"&domain=www.webet333.com";
+              $"&domain={GameConst.BaseUrl}";
             var url = $"{GameConst.MaxBet.baseURL}Login?{parameter}";
 
             var responseString = await CallThirdPartyApi(url, parameter);
