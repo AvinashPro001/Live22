@@ -33,8 +33,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webet333.web", "Webet333.we
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webet333.queue", "Webet333.queue\Webet333.queue.csproj", "{DF774FE1-7501-4070-A454-E0F792969D91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webet333.WindowsService", "Webet333.WindowsService\Webet333.WindowsService.csproj", "{6BBD12DC-8ADE-45C7-B8CB-D2EC9B406286}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webet333.service", "Webet333.service\Webet333.service.csproj", "{332F835A-D741-4EEC-ACE9-BA30BE8CFA9F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webet333.middleware", "Webet333.middleware\Webet333.middleware.csproj", "{B0F64C51-EA10-4034-94E9-D0D88840D5F9}"
@@ -130,12 +128,6 @@ Global
 		{DF774FE1-7501-4070-A454-E0F792969D91}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DF774FE1-7501-4070-A454-E0F792969D91}.Stag|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF774FE1-7501-4070-A454-E0F792969D91}.Stag|Any CPU.Build.0 = Debug|Any CPU
-		{6BBD12DC-8ADE-45C7-B8CB-D2EC9B406286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BBD12DC-8ADE-45C7-B8CB-D2EC9B406286}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BBD12DC-8ADE-45C7-B8CB-D2EC9B406286}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BBD12DC-8ADE-45C7-B8CB-D2EC9B406286}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BBD12DC-8ADE-45C7-B8CB-D2EC9B406286}.Stag|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BBD12DC-8ADE-45C7-B8CB-D2EC9B406286}.Stag|Any CPU.Build.0 = Debug|Any CPU
 		{332F835A-D741-4EEC-ACE9-BA30BE8CFA9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{332F835A-D741-4EEC-ACE9-BA30BE8CFA9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{332F835A-D741-4EEC-ACE9-BA30BE8CFA9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
