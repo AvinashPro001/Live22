@@ -1,0 +1,825 @@
+﻿@page
+@{
+    ViewData["Title"] = "Webet333 -🥇 Trusted Online Casino Malaysia ";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<!-- Main Banner Section and Promotion Slider -->
+<div class="main-banner">
+    <div class="container">
+        <div class="banner-inner">
+            <div class="home-slider text-center">
+                <div class="" id="slider_promotion" style="height:290px;">
+                    <div class="slick-carousel" id="slider_promotion_div"></div>
+                </div>
+            </div>
+            <div class="flag-icon"><img src="images/malaysia-flag.png" alt="logo" /></div>
+        </div>
+    </div>
+</div>
+<!-- Main Banner Section and Promotion Slider -->
+<!-- Join Now Section -->
+<div class="how_win_main_wrap">
+    <div class="container">
+        <div class="how-win">
+            <ul>
+
+                <li class="step1bg">
+                    <div class="process-game step-1" onclick="ClickOnJoin()">
+                        <a href="#">
+                            <h4><span class="lang" key="join"></span></h4>
+                            <p class="white-text"><span class="lang" key="create_a_free"></span> <br> <span class="lang" key="account_now"></span> </p>
+                        </a>
+                    </div>
+                </li>
+                <li class="step2bg">
+                    <div class="process-game step-2" onclick="ClickOnDeposit()">
+                        <a href="#">
+                            <h4><span class="lang" key="deposit"></span></h4>
+                            <p class="white-text"><span class="lang" key="fully_automated"></span> <br> &amp; <span class="lang" key="secured"></span> </p>
+                        </a>
+                    </div>
+                </li>
+                <li class=" step3bg">
+                    <div class="process-game step-3" onclick="ClickOnPlay()">
+                        <a href="#">
+                            <h4><span class="lang" key="play"></span></h4>
+                            <p class="white-text"><span class="lang" key="enjoy_your"></span> <br> <span class="lang" key="games_!"></span> </p>
+                        </a>
+                    </div>
+                </li>
+                <li class="step4bg">
+                    <div class="process-game step-4" onclick="ClickOnWithdraw()">
+                        <a href="#">
+                            <h4><span class="lang" key="withdraw"></span></h4>
+                            <p class="white-text"><span class="lang" key="your_winning"></span> <br> <span class="lang" key="money"></span></p>
+                        </a>
+                    </div>
+                </li>
+                <li class="step5bg">
+                    <a href="#"><img src="images/joinnow.png"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Join Now Section -->
+<!-- Accouncment Section -->
+<div class="annunce-section-wrap">
+    <div class="container">
+        <div class="annunce-section">
+            <p class="annunce-title">
+                <i class="fas fa-bullhorn"></i>
+            </p>
+            <p class="annunce-text">
+                <marquee class="announcment-font" id="announcements"></marquee>
+            </p>
+            <div class="clear-fix"></div>
+        </div>
+    </div>
+</div>
+<!-- Accouncment Section -->
+<!-- Contact Section -->
+<div class="row follow_up_wrraper_sec ml0 mr0">
+    <div class="container">
+        <div class="col-sm-4">
+            <div class="follow_up_facebook hand-curson" onclick="FollowOnFacebook()">
+                <h1><img src="images/titleicon2.png"> <span class="lang" key="follor_on_facbook"> FOLLOW US ON FACEBOOK </span> </h1>
+                <div class="facebook_logo_sec">
+                    <img src="images/fb2.png" alt="fb2" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="follow_up_facebook hand-curson" onclick="FollowOnInstagram()">
+                <h1><img src="images/titleicon6.png"> <span class="lang" key="follor_on_instagram"> FOLLOW US ON INSTAGRAM </span> </h1>
+                <div class="facebook_logo_sec">
+                    <img src="images/ig2.png" alt="ig2" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 follow_up_youtube_wrap">
+            <div class="follow_up_youtube hand-curson" onclick="FollowOnYoutube()">
+                <h1><img src="images/titleicon1.png"> <span class="lang" key="follor_on_youtube"> FOLLOW US ON YOUTUBE </span> </h1>
+                <div class="youtube_logo_sec">
+                    <img src="images/youtube2.png" alt="ig2" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 latest_video_wrap">
+            <div class="follow_up_lasteat_video">
+                <h1><img src="images/titleicon4.png"> <span class="lang" key="latest_high_video"> LATEST HIGHLIGHT VIDEO </span> </h1>
+                <div class="youtube_latest_video">
+                    <iframe width="560" height="315" id="youtube_video_link" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 our_support_wrap">
+            <div class="our_support_sec">
+                <h1><img src="images/titleicon3.png"> <span class="lang" key="our_support"> OUR SUPPORT </span> </h1>
+            </div>
+            <div class="our_suport_contact_sec hand-curson">
+                <div class="livechat_support" onclick="OpenChatWindow()">
+                    <h1 class="lang" key="live_chat">LIVE CHART</h1>
+                    <p><a href="#" class="lang" key="click_hear">CLICK HERE</a></p>
+                </div>
+                <div class="phone_support">
+                    <h1>PHONE</h1>
+                    <p><a href="tel:60135558826">+6013 555 8826</a></p>
+                </div>
+                <div class="whatsapp_support">
+                    <h1>WHATSAPP</h1>
+                    <p class="hand-curson" onclick="OpenWhatsapp('60135557800')"><a href="#">CS1 : +6013 555 7800</a></p>
+                    <p class="hand-curson" onclick="OpenWhatsapp('60135558826')"><a href="#">CS2 : +6013 555 8826</a></p>
+                </div>
+                <div class="wechat_support">
+                    <h1>WECHAT</h1>
+                    <p><img src="images/barcode.png"></p>
+                </div>
+                <div class="telegram_support">
+                    <h1>TELEGRAM</h1>
+                    <p onclick="OpenTelegram('mywbcs1')"><a>@@MYWBCS1 : : CS1</a></p>
+                    <p onclick="OpenTelegram('mywbcs2')"><a>@@MYWBCS2 : : CS2</a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Contact Section -->
+<!-- Bootstrap tabbing section start -->
+<div class="row bt-tabb-section casino_tabb_section ml0 mr0">
+    <div class="container">
+        <div>
+            <div class="leftProfileButon">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs nav-stacked" role="tablist">
+                    <li role="presentation" class="active"><a class="tablinks_account" href="#livcasino" aria-controls="livcasino" role="tab" data-toggle="tab"><img src="images/livecasino_hover.png"> <span class="lang" key="live_casino"></span></a></li>
+                    <li role="presentation"><a class="tablinks_account" href="#slots" aria-controls="slots" role="tab" data-toggle="tab"><img src="images/slot_hover.png"> <span class="lang" key="slots"></span></a></li>
+                    <li role="presentation"><a class="tablinks_account" href="#sports" aria-controls="sports" role="tab" data-toggle="tab"><img src="images/sport_hover.png"> <span class="lang" key="sports"></span></a></li>
+                    <li role="presentation"><a class="tablinks_account" href="#fishing" aria-controls="fishing" role="tab" data-toggle="tab"><img src="images/fish_hover.png"> <span class="lang" key="fishing"></span></a></li>
+                </ul>
+            </div>
+
+            <!-- Tab panes -->
+            <div class="tab-content genaral_wrapp">
+                <div role="tabpanel" class="tab-pane active tabcontent_account" id="livcasino">
+                    <div class="slider-nav slider">
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/yeebet_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/asia_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/dream_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/allbet_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/sexy_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/sa_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/playtech_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/wm_color.png">
+                            </figure>
+                        </div>
+                    </div>
+                    <section class="slider-for slider">
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/YeeBet.jpg" alt="Yeebet" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/yeebet.png" alt="asia_girl_right" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>YeeBet Casino</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('YeeBet Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/ag.jpg" alt="asiagaming" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/ag.png" alt="asia_girl_right" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>AG Casino</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('AG Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/dg.jpg" alt="dream_gaming" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/dg.png" alt="dg" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>DG Casino</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('DG Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/allbet.jpg" alt="Allbet" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/allbet.png" alt="ALlbet" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>AllBet Casino</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('AllBet Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/sexy.jpg" alt="" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/sexy.png" alt="" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>Sexy Baccarat Casino</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('Sexy Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/sa_gaming.jpg" alt="SA" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/sa.png" alt="SA" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>SA Casino</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('SA Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/playtech.jpg" alt="Playtech" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/pt.png" alt="Playtech" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>Playtech Casino</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('PlayTech Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/wm.jpg" alt="" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/wm.png" alt="" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>WM Casino</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('WM Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- live casino ends -->
+                <div role="tabpanel" class="tab-pane tabcontent_account" id="slots">
+                    <div class="slider-nav slider">
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/918kiss_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/joker_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/mega_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/pussy888_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/pragmatic_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/asia_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/playtech_color.png">
+                            </figure>
+                        </div>
+
+                    </div>
+                    <section class="slider-for slider">
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/918kiss.jpg" alt="" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/1.png" alt="" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a href="#">918 Kiss</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('918Kiss Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/joker.jpg" alt="Joker" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/2.png" alt="Joker" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>Joker</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('Joker Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/mega888.jpg" alt="Mega888" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/7.png" alt="Mega888" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>Mega888</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('Mega888 Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/pussy888.jpg" alt="Pussy888" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/4.png" alt="Pussy888" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>Pussy888</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('Pussy888 Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/pragmatic_play.jpg" alt="Pragmatic Play" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/8.png" alt="Pragmatic Play" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>Pragmatic Play</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('Pragmatic Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/agslots.jpg" alt="" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/3.png" alt="" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>AG Slots</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('AG Wallet', true)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/playtechslots.jpg" alt="" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/5.png" alt="" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>Playtech Slots</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('PlayTech Wallet',true)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- slots ends -->
+                <div role="tabpanel" class="tab-pane tabcontent_account" id="sports">
+                    <div class="slider-nav slider">
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/sbo_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/m8bet_color.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <figure>
+                                <img class="hover_icons" src="images/carousel_logos/maxbet_color.png">
+                            </figure>
+                        </div>
+                    </div>
+                    <section class="slider-for slider">
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/sbo.png" alt="SBO" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/sbo.png" alt="M8" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>SBO</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('SBO Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/m8.jpg" alt="M8" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/m8.png" alt="M8" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>M8</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('M8 Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="images/game_banners/maxbet.jpg" alt="MAXBET" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right">
+                                            <img src="images/dropdown_logos/maxbet.png" alt="MAXBET" />
+                                        </div>
+                                        <div class="ag_casino_btn">
+                                            <a>MaxBet</a>
+                                        </div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('MaxBet Wallet',false)"><img src="images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- sports ends -->
+                <div role="tabpanel" class="tab-pane tabcontent_account" id="fishing">
+                    ...
+                </div>
+                <!-- fishing ends -->
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap tabbing section ends -->
+<!-- Hot Game Section -->
+<div class="row hot_game_section_wrap ml0 mr0">
+    <div class="container">
+        <div class="hot_game_section_title">
+            <h1><img src="~/images/titleicon5.png" alt="titleicon5"><span class="lang" key="hot_game"> HOT GAMES </span></h1>
+            <a href="~/Web/slots" class="lang" key="more_games">More Games</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="item-slider">
+                <div class="game-slider" id="hot-game-section">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hot Game Section -->
+
+
+<script src='https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js'></script>
+
+
+<script>
+    // updated
+    $(document).ready(function () {
+        $('.slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            fade: true,
+            infinite: true,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            asNavFor: '.slider-nav'
+        })
+        $('.slider-nav').slick({
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            asNavFor: '.slider-for',
+            arrows: true,
+            focusOnSelect: true,
+            infinite: true,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            responsive: [
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 1,
+                        infinite: true
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        })
+
+        $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+            var hash_value = e.target.hash;
+            var split = hash_value.split('#');
+            console.log(hash_value);
+            $('.tab-pane').each(function () {
+                if ($(this).attr('id') == split[1]) {
+                    setTimeout(() => {
+                        if ($('.tab-pane div').hasClass('slick-slider')) {
+                            $('#' + split[1] + ' .slick-slider').slick('destroy');
+                        }
+                        $('#' + split[1] + ' .slider-for').slick({
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            arrows: true,
+                            fade: true,
+                            infinite: true,
+                            autoplay: true,
+                            autoplaySpeed: 3000,
+                            asNavFor: '#' + split[1] + ' .slider-nav'
+                        })
+                        $('#' + split[1] + ' .slider-nav').slick({
+                            slidesToShow: 6,
+                            slidesToScroll: 1,
+                            autoplay: true,
+                            asNavFor: '#' + split[1] + ' .slider-for',
+                            arrows: false,
+                            focusOnSelect: true,
+                            infinite: true,
+                            autoplay: true,
+                            autoplaySpeed: 3000,
+                            responsive: [
+                                {
+                                    breakpoint: 992,
+                                    settings: {
+                                        slidesToShow: 4,
+                                        slidesToScroll: 1,
+                                        infinite: true
+                                    }
+                                },
+                                {
+                                    breakpoint: 768,
+                                    settings: {
+                                        slidesToShow: 3,
+                                        slidesToScroll: 1
+                                    }
+                                }
+                            ]
+                        })
+                    }, 500);
+                }
+            })
+        })
+    })
+</script>
+
+<script>
+    CheckMobileNumberIsVerifiedOnly();
+
+    $(document).ready(function () {
+
+        AllAnnouncementsCallAPI();
+    });
+
+
+    $(window).on('load', function () {
+        HotSlotsgame()
+        SetYoutubeVideo();
+    });
+
+    setInterval(function () {
+        if ($('#slider_promotion_div').children().length == 0)
+            SetPromotionInMainPage();
+    }, 200);
+</script>

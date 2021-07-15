@@ -1,0 +1,408 @@
+@page
+@{ ViewData["Title"] = "Withdraw";
+    Layout = ""; }
+
+<div id="comContent"></div>
+<div id="mComContent">
+
+    <div id="afterlogin_mobile">
+        <div class="main-content" id="navbarhide">
+            <ul class="dropdown-menu wallet-dropdown">
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Main Wallet</strong></li>
+                        <li class="fright" id="ddlmainWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>918Kiss Wallet</strong></li>
+                        <li class="fright" id="ddl918KissWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>AG Wallet</strong></li>
+                        <li class="fright" id="ddlAGWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>M8 Wallet</strong></li>
+                        <li class="fright" id="ddlM8Wallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Joker Wallet</strong></li>
+                        <li class="fright" id="ddlJokerWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Playtech Wallet</strong></li>
+                        <li class="fright" id="ddlPlaytechWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>MaxBet Wallet</strong></li>
+                        <li class="fright" id="ddlMaxBetWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Mega888 Wallet</strong></li>
+                        <li class="fright" id="ddlMega888Wallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>DG Wallet</strong></li>
+                        <li class="fright" id="ddlDgWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Sexy B. Wallet</strong></li>
+                        <li class="fright" id="ddlSexyWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>SA Wallet</strong></li>
+                        <li class="fright" id="ddlSAWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Pussy888 Wallet</strong></li>
+                        <li class="fright" id="ddlPussy888Wallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>AllBet Wallet</strong></li>
+                        <li class="fright" id="ddlAllbetWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>WM Wallet</strong></li>
+                        <li class="fright" id="ddlWMWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Pragmatic Wallet</strong></li>
+                        <li class="fright" id="ddlPragmaticWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>YeeBet Wallet</strong></li>
+                        <li class="fright" id="ddlYeeBetWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>SBO Wallet</strong></li>
+                        <li class="fright" id="ddlSBOWallet">feching...</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        document.body.classList.add("no-pad-top");
+        $('body').css('padding-top', '0px');
+        if (GetLocalStorage('currentUser') === null)
+            loadPageHome({ backFrom: 'widthraw' });
+        WithdrawBankList();
+        UserBankDetails()
+        GetProfile();
+    </script>
+
+    <div id="Withdrawal" class="account-reg white-bg radius-border page-extra-padding">
+        <div class="info-form text-center">
+            <div class="row">
+                <div class="col-xs-2">
+                    <div class="back-btn"><a onclick="loadPageHome({backFrom:'widthraw'})" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div>
+                </div>
+                <div class="col-xs-8">
+                    <h4 class="black-text lang" key="withdrawal_title">WITHDRAW</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row transfer-header ">
+            <div class="col-sm-12 col-xs-12">
+                <div class="col-sm-offset-1 col-xs-offset-1 col-sm-10 col-xs-10">
+                    <ul class="margin-top">
+                        <li class="text-center black-text">Main Wallet</li>
+                        <li class="text-center menuwallet">MYR <span id="menuMainWallet" class="menu-main-wallet"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="fa fa-refresh refersh-btn"></span></li>
+                        <li class="text-center"><button class="btn btn-default" onclick="RestoreBalance()"><span class="lang" key="mobile_menu_Restore">Restore</span></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bank-multi-list">
+            <form id="formWithdrawal">
+                <ul class="password-upadte pad-top-ten">
+                    <li>
+                        <p class="big no-mar lang" key="withdrawal_bankname"></p>
+                        <div class="bank-selection mar-top-15">
+                            <ul class="bank-listing highlight-bank" id="withdraw_bank_list">
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="info-form bank-remain-list">
+            <div class="pad-lr-comman">
+                <form id="formWithdrawal">
+                    <ul class="password-upadte no-mar">
+                        <li class="mar-btm-fifteen" id="displayAccountNumber">
+                            <label class="fleft"><p class="big no-mar lang" key="withdrawal_account_number">Account Number</p></label>
+                            <label class="fright bank-icon bank-name mendatory">
+                                <input id="txt_withdrawalAccountNumber" name="txt_withdrawalAccountNumber" type="number" pattern="\d*" style="font-size:10px;" class="reg-form" placeholder="Enter Account Number">
+                                <p class="star">*</p>
+                            </label>
+                        </li>
+                        <li class="mar-btm-fifteen">
+                            <label class="fleft"><p class="big no-mar lang" key="withdrawal_from">From:</p></label>
+                            <label class="fright bank-name mendatory">Main Wallet</label>
+                        </li>
+                        <li class="mar-btm-fifteen">
+                            <label class="fleft"><p class="big lang" key="withdrawal_amount">Amount:</p></label>
+                            <label class="fright card-number bank-name mendatory">
+                                <input id="txt_withdrawalAmount" name="txt_withdrawalAmount" type="number" pattern="\d*" class="reg-form" style="font-size:10px;" placeholder="Min/Max Limit: 10.00/ 30,000.00">
+                                <p class="star">*</p>
+                            </label>
+                        </li>
+                        <li class="mar-btm-fifteen">
+                            <label class="fleft"></label>
+                            <label class="fright"><div data-toggle="modal" data-target="#WithdrawAmountList"><span class="fa fa-lock" id="lock_icon"></span><span class="fa fa-unlock" id="unlock_icon"></span>&nbsp;<span id="WithdrawAmount">MYR 700</span></div></label>
+                        </li>
+                        <li class="mar-btm-fifteen text-center">
+                            <button class="submit lang" key="withdrawal_submit" data-toggle="modal" data-target="#profilemyModal" onclick="Withdrawal()" type="button">SUBMIT</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-lg-4">
+                <div class="info-form deposit-section pad-top-twentyfive pad-btm-twentyfive" style="background-color: #eeeeee; border-radius: 6px;">
+                    <div class="pad-lr-comman notice-list">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <h6 class="info-notice" id="show"><a href="javascript:;"><span class="lang" key="important_notice"></span></a></h6>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="close-icon" id="hide">
+                                    <a href="javascript:;"><i class="fa fa-times text-danger" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <ol class="info-notice-list">
+                            <li>Kindly check with our <a onclick="window.open('https://vue1.livelyhelp.chat/ChatWindow.aspx?siteId=233923&planId=a9010000-0000-0000-0000-008e000391c3', 'newwindow','width=385,height=580');" target="_blank"><b>24/7 LIVECHAT</b></a> if your transaction is pending for more than 10 minutes.</li>
+                            <li>For further inquiries, kindly contact our <a onclick="window.open('https://vue1.livelyhelp.chat/ChatWindow.aspx?siteId=233923&planId=a9010000-0000-0000-0000-008e000391c3', 'newwindow', 'width=385,height=580');" target="_blank"><b>24/7 LIVECHAT</b></a>. Thank you.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="RestoreConfirmation" class="modal fade">
+            <div class="modal-dialog mail-width">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <p><span class="lang" key="msg_restore"></span></p>
+                        <ul class="list-inline pad-top-ten">
+                            <li><button onclick="RestoreBalance()" data-dismiss="modal" class="submit"><a asp-page="/Account/Profile" asp-fragment="deposit">Yes</a></button></li>
+                            <li><button class="submit" data-dismiss="modal"><a asp-page="/Home/home">No</a></button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="WithdrawAmountList" class="modal fade">
+            <div class="modal-dialog withdrawamount-model-width">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <div>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div id="WithdrawAmountList" class="tab-pane fade in ">
+                            <div class="table-responsive overflow-hidden">
+                                <table class="table table-bordered text-center" id="tbl_WithdrawAmountList">
+                                    <thead>
+                                        <tr class="blue-bg">
+                                            <th class="white-text text-center">No</th>
+                                            <th class="white-text text-center">Title</th>
+                                            <th class="white-text text-center">Before Promotion balance</th>
+                                            <th class="white-text text-center">Apply Date</th>
+                                            <th class="white-text text-center">Status</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <p><span class="fa fa-info-circle"></span> You are only allowed to withdraw the amount that has no wagering requirement. Other balance will be locked until bonus requirement has been meet</p>
+                            <p><span class="fa fa-info-circle"></span> Before Promotion balance is the balance remaining before you had applied new promotion,it is available to withdraw Amount</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(async function () {
+            $("#show").click(function () {
+                $(".info-notice-list").show();
+            });
+            $("#hide").click(function () {
+                $(".info-notice-list").hide();
+            });
+        });
+        CheckWithdrawAmountList();
+    </script>
+
+    <div class="footer-widget" id="footerWidget">
+        <ul class="list-inline text-center">
+            <li id="homePagebottom">
+                <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch">
+                    <i class="fa fa-home"></i>
+                    <p class="white-text no-mar" data-translate="menu_home">Home</p>
+                </a>
+            </li>
+            <li id="promotionPagebottom" class="">
+                <a onclick="loadPagePromotions()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-gift"></i>
+                    <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
+                </a>
+            </li>
+            <li id="contactusPagebottom">
+                <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-user"></i>
+                    <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="whatsapp()">
+                    <figure><img src="~/images/mobile/whatsapp.png" alt="Whats App" /></figure>
+                    <p class="white-text no-mar">Whatsapp</p>
+                </a>
+            </li>
+            <li class="live-chat">
+                <a class="live-chat-icon"><p class="white-text no-mar" data-translate="Live_chat">Live Chat</p></a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <a id="mobileM8" style="display:none"></a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
+            $("#chatting").toggle();
+        });
+        $(".contact-user").mouseover(function () {
+            $("#chatting").toggle();
+        });
+    });
+</script>
+
+<!--Begin Comm100 Live Chat Code-->
+<div></div>
+<script type="text/javascript">
+    var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 0) })(Comm100API || {})
+</script>
+<!--End Comm100 Live Chat Code-->
+<!-- Slider Section End -->
+<!-- Modal For Video -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".open-modal").click();
+    });
+    jQuery(".scroll-down-visible").hide();
+    jQuery("#more-arrow").click(function () {
+        jQuery(".scroll-down-visible").toggleClass("show");
+        jQuery("#more-arrow").toggleClass("rotate");
+    });
+</script>
+<!-- //Modal For Video -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".navbar-toggle,.canvas-overlay").click(function () {
+            if (!$("html").hasClass('intro')) {
+                $("html").addClass("intro");
+            }
+            else {
+                $("html").removeClass("intro");
+            }
+        });
+        $(".canvas-overlay").click(function () {
+            if ($(".navbar-collapse").hasClass('in')) {
+                $(".navbar-collapse").removeClass("in");
+            }
+        });
+    });
+</script>
+<!-- Slider Section End -->
+<script>
+    $(window).scroll(function () {
+        var scroll = $(window).scrollTop();
+        if (scroll >= 1) {
+            $("header").addClass("sticky-header");
+        }
+        else {
+            $("header").removeClass("sticky-header");
+        }
+    });
+</script>
+
+<script>
+    WalletBalance();
+
+    function get() {
+        (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
+
+        $.ajax({
+            url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
+            dataType: 'json',
+            async: false,
+            success: function (lang) {
+                $('.lang').each(function (index, element) {
+                    if (localStorage.getItem("language") === "ms-MY") {
+                        $('body').addClass('malay-font');
+                    }
+                    $(this).text(lang[$(this).attr('key')]);
+                });
+                $("[data-translate]").each(function () {
+                    if ($(this).is("input")) {
+                        $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    } else {
+                        $(this).text(lang[$(this).data("translate")]);
+                    }
+                });
+            }
+        });
+    }
+
+    setTimeout(() => {
+        get();
+    }, 200);
+</script>

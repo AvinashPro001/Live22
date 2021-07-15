@@ -92,6 +92,18 @@ namespace Webet333.api.Controllers
 
         #endregion AllBet game Login
 
+        #region AllBet game Login
+
+        
+        [HttpPost(ActionsConst.AllBet.Modified)]
+        public async Task<IActionResult> ALLBetModified([FromQuery]string Username,string hadicap,string VipHandicaps)
+        {
+            var result = await AllBetGameHelpers.CallModifiedClient(Username,hadicap, VipHandicaps);
+            return OkResponse(result);
+        }
+
+        #endregion AllBet game Login
+
         #region AllBet game Change password
 
         [Authorize]

@@ -51,7 +51,7 @@ namespace Webet333.api.Helpers
                 $"&user={Username}" +
                 $"&password={Password}" +
                 $"&ui={ui}" +
-                $"&returnurl=www.webet333.com" +
+                $"&returnurl={GameConst.BaseUrl}" +
                 $"&lang={lang}";
 
             var Url = $"{GameConst.WM.Url}?{Parameter}";

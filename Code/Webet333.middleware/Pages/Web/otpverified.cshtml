@@ -1,0 +1,41 @@
+﻿@page
+@{
+    ViewData["Title"] = "OTP Verified - Webet333 -🥇";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<script>CheckLoginOrNot();CheckMobileNumberIsVerifiedOnly()</script>
+<section class="article_sec_wrap">
+    <div class="promotion_wrap_sec">
+        <div class="container">
+            <div class="account-reg">
+                <h4 class="register symbol mar-btm-ten">
+                    <span class="lang text-capital" key="otp_verification_text">OTP Verified</span>
+                </h4>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="genaral_wrapp1">
+
+                            <p class="big-text no-mar"><strong><span class="lang" key="otp_text"></span></strong></p>
+                            <label style="display:block">
+                                <input id="txt_otp" name="txt_account_number" type="number" class="reg-form lang" placeholder="OTP">
+                            </label>
+                            <br />
+
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="genaral_wrapp1">
+                            <button type="button" name="" value="Verified OTP" class="submit" onclick="VerifiedOTP();"><span class="lang" key="verified_otp"> Verified OTP</span></button>
+                            <button type="button" id="button_resend" name="" value="Send OTP" class="submit" onclick="SendOTP(1)">
+                                <span class="lang" key="send_otp">Resend OTP</span>
+                                <span id="counter_txt"></span>
+                            </button>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

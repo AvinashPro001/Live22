@@ -350,6 +350,24 @@ namespace Webet333.api.Helpers
             }
         }
 
+        public async Task<List<WithdrawDepositSelectResponse>> WithdrawDepositRetrive(GlobalGetWithPaginationRequest request)
+        {
+            using (var repository = new DapperRepository<WithdrawDepositSelectResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Payments.UsersDepositWithdrawSelect, new { request.UserId, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                return result.ToList();
+            }
+        }
+
+        public async Task<List<TransferRetriveResponse>> TransferRetriver(GlobalGetWithPaginationRequest request)
+        {
+            using (var repository = new DapperRepository<TransferRetriveResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Payments.TransferList, new { request.UserId,request.Keyword, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                return result.ToList();
+            }
+        }
+
         #region House Keeping
 
         public void Dispose()

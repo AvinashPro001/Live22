@@ -1,0 +1,160 @@
+﻿@page
+@{
+    ViewData["Title"] = "Bank - Webet333 -🥇";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<script>
+    CheckLoginOrNot();
+    CheckMobileNumberIsVerifiedOnly();
+</script>
+
+
+<div class="row main_wallet_page_wrap ml0 mr0">
+    <div class="container">
+        <div class="silver_main_wallet_sec">
+            <div class="silver_wallet_main">
+                <div class="silver_wallet">
+                    <h1 id="vip_level_name">SILVER</h1>
+                    <p>Main Wallet</p>
+                </div>
+            </div>
+            <div class="restore_amount_sec_wrap">
+                <div class="restore_amount_left">
+                    <button onclick="RestoreBalance();"><span class="lang" key="restore"></span></button>
+                </div>
+                <div class="restore_amount_center">
+                    <div class="myr_cur">
+                        <h1>MYR</h1>
+                        <h2 id="main_balance"></h2>
+                    </div>
+                </div>
+                <div class="restore_amount_right">
+                    <button onclick="RefreshBalance();">&nbsp;</button>
+                </div>
+            </div>
+            <div class="table_section_black_wrap">
+                <div class="table_blacke">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td id="joker_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="playtech_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="kiss918_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="ag_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="m8_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="maxbet_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="mega888_balance"><img src="~/images/loading.gif" /></td>
+                            </tr>
+                            <tr>
+                                <td>Joker</td>
+                                <td>PlayTech</td>
+                                <td>918Kiss</td>
+                                <td>AG</td>
+                                <td>M8</td>
+                                <td>Maxbet</td>
+                                <td>Mega888</td>
+                            </tr>
+                            <tr>
+                                <td id="dg_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="sexy_baccarat_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="sa_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="pussy888_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="allbet_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="wm_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="pragmatic_balance"><img src="~/images/loading.gif" /></td>
+                            </tr>
+                            <tr>
+                                <td>DG</td>
+                                <td>Sexy Baccarat</td>
+                                <td>SA</td>
+                                <td>PUSSY 888</td>
+                                <td>Allbet</td>
+                                <td>WM</td>
+                                <td>Pragmatic</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td id="sbo_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="yeebet_balance"><img src="~/images/loading.gif" /></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>SBO</td>
+                                <td>YeeBet</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="article_sec_wrap profile-page">
+    <div class="download_page_wrapper">
+        <div class="container">
+            <div class="account-reg ">
+                <h4 class="bank-icon symbol"><span class="lang" key="bank_information">BANKING INFORMATION</span></h4>
+                <div class="bank-account-info">
+                    <p class="date-note"><span class="lang" key="last_update_on">Latest Update On : </span><span id="UpdateTime">4/7/2021, 11:14:13 AM</span></p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="bank-entry">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-center white-bg" id="bankdetail">
+                                        <thead>
+                                            <tr class="blue-bg">
+                                                <th class="black-text text-center"><span class="lang" key="bank_bankDetails"><span>Bank Details</span></span></th>
+                                                <th class="black-text text-center"><span class="lang" key="bank_accountname"><span>Account Name</span></span></th>
+                                                <th class="black-text text-center"><span class="lang" key="bank_accountnumber"><span>Account Number</span></span></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mar-comman">
+                        <span class="lang" key="bank_message"></span>
+                    </p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table width="100%" border="0" class="table table-bordered text-center transactions-limits" id="limits_table">
+                                    <thead>
+                                        <tr class="blue-bg">
+                                            <th rowspan="2" class="black-text left-width text-center pad-ten"><span class="lang" key="bank_bankingoptions">Banking Options</span></th>
+                                            <th class=" black-text table-bordered text-center transaction-limit" colspan="2"><span class="lang" key="bank_transactionlimit">Transaction Limit</span></th>
+                                            <th rowspan="2" class="black-text right-width text-center pad-ten"><span class="lang" key="bank_processingtime">Processing Time</span></th>
+                                        </tr>
+                                        <tr class="blue-bg">
+                                            <th class="black-text table-bordered custom-width text-center"><span class="lang" key="bank_Minimum">Minimum</span></th>
+                                            <th class="black-text table-bordered custom-width text-center"><span class="lang" key="bank_Maximum">Minimum</span></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <h5><strong><span class="lang" key="important_notes">IMPORTANT NOTICES</span></strong></h5>
+                    <ol style="width: 100%; padding-left: 20px; list-style-type: decimal;" id="imp_notes">
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script>
+    SetAdminBankPage()
+</script>

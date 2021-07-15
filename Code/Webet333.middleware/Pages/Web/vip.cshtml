@@ -1,0 +1,314 @@
+﻿@page
+@{
+    ViewData["Title"] = "VIP - Webet333 -🥇";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<script>
+    CheckMobileNumberIsVerifiedOnly();
+</script>
+<div class="vip-main-banner">
+    <div class="container">
+        &nbsp;
+    </div>
+</div>
+<div class="benefits_refeeral_sec">
+    <div class="containerr">
+        <div class="benefits_referal_tab_sec">
+            <div class="benefits_referal_left">
+                <ul>
+                    <li><a class="tablinks_benefits_referal active" onclick="openCity1(event, 'benefits')">Benefits</a></li>
+                    <li><a class="tablinks_benefits_referal" onclick="openCity1(event, 'faqs')">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="benefits_referal_genaral_wrapp">
+            <div class="container">
+                <div class="benefits_referal_tab_sec">
+                    <div id="benefits" class="tabcontent_benefits_referal" style="display: block;">
+                        <div class="benefits_content_tab_sec">
+                            <h1>Upgrade Your VIP Level</h1>
+                            <div class="col-md-12">
+                                <div class="steps-2">
+                                    <div class="progress" id="progress1">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 15%;"></div>
+                                    </div>
+                                    <div class="step">
+                                        <span class="point" id="normal-span">
+                                            <span class="step-title"> Minimum Step</span>
+                                            <span class="step-title1"> < 30,000 </span>
+                                            <span class="price">Normal</span>
+                                        </span>
+                                        <span class="point" id="bronze-span">
+                                            <span class="step-title"> Minimum Step</span>
+                                            <span class="step-title1"> > 30,000 </span>
+                                            <span class="price">Bronze</span>
+                                        </span>
+                                        <span class="point" id="silver-span">
+                                            <span class="step-title"> Minimum Step</span>
+                                            <span class="step-title1"> > 100,000 </span>
+                                            <span class="price">Silver</span>
+                                        </span>
+                                        <span class="point" id="gold-span">
+                                            <span class="step-title"> Minimum Step</span>
+                                            <span class="step-title1"> > 500,000 </span>
+                                            <span class="price">Gold</span>
+                                        </span>
+                                        <span class="point" id="platinum-span">
+                                            <span class="step-title"> Minimum Step</span>
+                                            <span class="step-title1"> > 1,000,000 </span>
+                                            <span class="price">Platinum</span>
+                                        </span>
+                                        <span class="point" id="diamond-span">
+                                            <span class="step-title"> Minimum Step</span>
+                                            <span class="step-title1"> > 4,000,000 </span>
+                                            <span class="price">Diamond</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ml0 mr0">
+                                <div class="col-sm-5">
+                                    <div class="vip_sec_logo_left">
+                                        <img id="login_user_vip_level" src="" alt="vip1" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-7 ">
+                                    <div class="vip_sec_form_right">
+                                        <form>
+                                            <div class="form-group current_deposit_form_sec">
+                                                <div class="row ml0 mr0 current_status_row">
+                                                    <div class="col-md-5 pr0 current_status_row_left">
+                                                        <label>Current Status :</label>
+                                                    </div>
+                                                    <div class="col-md-7 pr0 current_status_row_right">
+                                                        <input type="text" palceholder="" name="" id="currentStatus" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group current_deposit_form_sec">
+                                                <div class="row ml0 mr0 current_status_row">
+                                                    <div class="col-md-5 pr0 current_status_row_left">
+                                                        <label>Current Deposit :</label>
+                                                    </div>
+                                                    <div class="col-md-7 pr0 current_status_row_right">
+                                                        <input type="text" palceholder="" name="" id="currentDeposit" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group current_deposit_form_sec">
+                                                <div class="row ml0 mr0 current_status_row">
+                                                    <div class="col-md-5 pr0 current_status_row_left">
+                                                        <label>Amount Required for next tier upgrade :</label>
+                                                    </div>
+                                                    <div class="col-md-7 pr0 current_status_row_right">
+                                                        <input type="text" palceholder="" name="" id="nextLevelUpgradAmount" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div id="faqs" class="tabcontent_benefits_referal">
+                        <div class="benefits_content_tab_sec">
+                            <h1>How do I upgrade to WB3 VIP?</h1>
+                            <h3 class="step-title">There are multiple ways to become a WEBET333 VIP member :-</h3>
+                            <p>(1) By depositing the required amount</p>
+                            <p>(2) By special invite</p>
+                            <h3>How can the deposit amount be calculated?</h3>
+                            <p>
+                                Deposit and turnover requirements will be based on the accumulated amount from the first day register.
+                                and our deposit amount is never expired.
+                            </p>
+                            <h3>When my VIP level will upgraded when i archieve deposit amount?</h3>
+                            <p>Every 1st of month and 15th of month will automatically upgrade your VIP level.</p>
+                            <h3>My VIP level will downgrade after a period?</h3>
+                            <p>NO, your VIP level is permanent! never will downgrade !</p>
+                            <h1>Terms & Conditions</h1>
+                            <p>WEBET333 reserves the right to alter, cancel, terminate or suspend the Redemption or any part thereof or any part of the applicable terms and conditions from time to time, with or without any prior notice.</p>
+                            <p>Members participate in the VIP program must accept and comply with the above rules and terms as well as all relevant rules and terms of the website implement by WEBET333. General WEBET333 Terms & Conditions apply. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="vip_privilage_sec_credits">
+            <div class="container">
+                <div class="vip_privileges_inner_sec_credits">
+                    <h1>VIP PRIVILEGES</h1>
+                    <div class="table-credits-datas">
+                        <table id="tblData" class="hightligt_table">
+                            <thead class="table-vip-datas-img">
+                                <tr>
+                                    <th><span style="height: 30px;"><img src=""><br> </span></th>
+                                    <td class="col" style="text-align: center;"><span><img src="~/images/vip1.png"> <br> Normal</span></td>
+                                    <td class="col" style="text-align: center;"><span><img src="~/images/vip2.png"> <br> Bronze</span></td>
+                                    <td class="col" style="text-align: center;"><span><img src="~/images/vip3.png"> <br> Silver</span></td>
+                                    <td class="col" style="text-align: center;"><span><img src="~/images/vip4.png"> <br> Gold</span></td>
+                                    <td class="col" style="text-align: center;"><span><img src="~/images/vip5.png"> <br> Platinum</span></td>
+                                    <td class="col" style="text-align: center;"><span><img src="~/images/vip6.png"> <br> Diamond</span></td>
+                                </tr>
+                            </thead>
+                            <thead class="bg_orange">
+                                <tr style="background-color: #feb801;">
+                                    <th class="row"><span>WB Benefits </span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="row">Deposit Amount</th>
+                                    <td>< 30000</td>
+                                    <td>> 30000</td>
+                                    <td><span>> 100000</span></td>
+                                    <td><span>> 500000</span></td>
+                                    <td><span>> 1000000</span></td>
+                                    <td><span>> 4000000</span></td>
+                                </tr>
+                                <tr>
+                                    <th class="row">Weekly EXTRA FREE CREDIT**</th>
+                                    <td>0</td>
+                                    <td>38</td>
+                                    <td><span>88</span></td>
+                                    <td><span>288</span></td>
+                                    <td><span>388</span></td>
+                                    <td><span>588</span></td>
+                                </tr>
+                                <tr>
+                                    <th class="row"><span>Weekly Total Deposit Amount To Get Free Credit</span></th>
+                                    <td><span>0</span></td>
+                                    <td><span> > 388</span></td>
+                                    <td><span> > 1888  </span></td>
+                                    <td><span> > 18888 </span></td>
+                                    <td><span> > 38888 </span></td>
+                                    <td><span> > 88888 </span></td>
+                                </tr>
+                                <tr>
+                                    <th class="row"><span>Birthday Bonus</span></th>
+                                    <td><span>28</span></td>
+                                    <td><span>88</span></td>
+                                    <td><span>388</span></td>
+                                    <td><span>688</span></td>
+                                    <td><span>1888</span></td>
+                                    <td><span>8888</span></td>
+                                </tr>
+                            <tbody>
+                            <thead class="bg_orange">
+                                <tr style="background-color: #feb801;">
+                                    <th class="row"><span>Special Rebate</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="row"><span>Live Casino & Slot Rebate</span></th>
+                                    <td><span>0.70%</span></td>
+                                    <td><span>0.80%</span></td>
+                                    <td><span>0.90%</span></td>
+                                    <td><span>1%</span></td>
+                                    <td><span>1.10%</span></td>
+                                    <td><span>1.20%</span></td>
+                                </tr>
+                                <tr>
+                                    <th class="row"><span>Sportbook Rebate  </span></th>
+                                    <td><span>0.70%</span></td>
+                                    <td><span>0.80%</span></td>
+                                    <td><span>0.90%</span></td>
+                                    <td><span>1%</span></td>
+                                    <td><span>1.10%</span></td>
+                                    <td><span>1.20%</span></td>
+                                </tr>
+                                <tr>
+                                    <th class="row"><span>918kiss,Pussy888 and Mega888 Lose Rebate</span></th>
+                                    <td><span>5%</span></td>
+                                    <td><span>6%</span></td>
+                                    <td><span>6%</span></td>
+                                    <td><span>7%</span></td>
+                                    <td><span>7%</span></td>
+                                    <td><span>8%</span></td>
+                                </tr>
+                            <tbody>
+                            <thead class="bg_orange">
+                                <tr style="background-color: #feb801;">
+                                    <th class="row"><span>Others</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                    <th><span>&nbsp;</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="row"><span>Withdraw Times</span></th>
+                                    <td><span>Unlimited </span></td>
+                                    <td><span>Unlimited </span></td>
+                                    <td><span>Unlimited </span></td>
+                                    <td><span>Unlimited </span></td>
+                                    <td><span>Unlimited </span></td>
+                                    <td><span>Unlimited </span></td>
+                                </tr>
+                                <tr>
+                                    <th class="row"><span>Withdraw Amount</span></th>
+                                    <td><span>30,000</span></td>
+                                    <td><span>50,000</span></td>
+                                    <td><span>70,000</span></td>
+                                    <td><span>90,000</span></td>
+                                    <td><span>100,000</span></td>
+                                    <td><span>200,000</span></td>
+                                </tr>
+                                <tr>
+                                    <th class="row"><span>VIP Level Period  </span></th>
+                                    <td><span>Lifetime</span></td>
+                                    <td><span>Lifetime</span></td>
+                                    <td><span>Lifetime</span></td>
+                                    <td><span>Lifetime</span></td>
+                                    <td><span>Lifetime</span></td>
+                                    <td><span>Lifetime</span></td>
+                                </tr>
+                            <tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+                <p>** Weekly mon- sun MUST deposit more than free credit 1ox, free credit will auto into main wallet on monday 12AM</p>
+                <p>** Free credit all require 3x turnover for withdraw</p>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+    function openCity1(evt1, cityName1) {
+        var i, tabcontent_benefits_referal, tablinks_benefits_referal;
+        tabcontent_benefits_referal = document.getElementsByClassName("tabcontent_benefits_referal");
+        for (i = 0; i < tabcontent_benefits_referal.length; i++) {
+            tabcontent_benefits_referal[i].style.display = "none";
+        }
+        tablinks_benefits_referal = document.getElementsByClassName("tablinks_benefits_referal");
+        for (i = 0; i < tablinks_benefits_referal.length; i++) {
+            tablinks_benefits_referal[i].className = tablinks_benefits_referal[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName1).style.display = "block";
+        evt1.currentTarget.className += " active";
+    }
+</script>

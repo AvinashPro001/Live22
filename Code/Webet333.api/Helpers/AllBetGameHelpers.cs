@@ -162,6 +162,16 @@ namespace Webet333.api.Helpers
 
         #endregion Call Login Third Party API
 
+        public static async Task<dynamic> CallModifiedClient(string Username, string Handicaps, string VipHandicaps)
+        {
+            Username = Regex.Replace(Username, @"[^0-9a-zA-Z]+", "");
+
+            var Parameter = $"random={Random()}&client={Username}&vipHandicaps={VipHandicaps}&orHandicaps={Handicaps}";
+            var Url = $"{GameConst.AllBet.Url}{GameConst.AllBet.Modified}";
+            return JsonConvert.DeserializeObject<dynamic>(await CallAPI(Url, Parameter));
+        }
+
+
         #region Call Betting Details Third Party API
 
         public static async Task<AllBetServicesResponse> BettingDetailsCallAPI(string StartTime = null, string EndTime = null)

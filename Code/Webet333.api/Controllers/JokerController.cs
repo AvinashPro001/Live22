@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -11,6 +12,7 @@ using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Game;
 using Webet333.models.Request.GameBalance;
+using Webet333.models.Response.Game;
 
 namespace Webet333.api.Controllers
 {
@@ -90,6 +92,39 @@ namespace Webet333.api.Controllers
                 await joker_helper.GameJokerRegister(JokerRequest);
                 return OkResponse(result);
             }
+        }
+
+        #endregion Joker game Register
+
+        #region Joker game Register
+
+        [Authorize]
+        [HttpGet(ActionsConst.Joker.GameList)]
+        public async Task<IActionResult> JokerGameList()
+        {
+
+            if (GetUserRole(User) == RoleConst.Users)
+                BadResponse("forbid_error_access");
+
+            var result = await JokerHelpers.GameList();
+
+            var gameListModel = new List<GameListUploadResponse>();
+            result.ListGames.ForEach(game=> {
+                gameListModel.Add(new GameListUploadResponse
+                {
+                    GameCode = game.GameCode,
+                    GameName = game.GameName,
+                    GameType = game.GameType,
+                    ImagePath1 = game.Image1,
+                    ImagePath2 = game.Image1
+                });
+            });
+
+            using (var game_help = new GameHelpers(Connection))
+                await game_help.GameListInsert(gameListModel, "Joker Wallet", null);
+
+            return OkResponse(result.ListGames);
+
         }
 
         #endregion Joker game Register

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -11,6 +12,7 @@ using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Game;
 using Webet333.models.Request.GameBalance;
+using Webet333.models.Response.Game;
 
 namespace Webet333.api.Controllers
 {
@@ -94,11 +96,21 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> PragmaticGameList([FromBody] GameLoginRequest request)
         {
             var result = await PragmaticGameHelpers.GameListCallAPI();
+            var gameListModel = new List<GameListUploadResponse>();
             if (!request.IsMobile)
             {
                 result.gameList.ForEach(game =>
                 {
                     game.ImagePath = $"{GameConst.Pragmatic.ImageUrl}game_pic/square/200/{game.gameID}.png";
+
+                    gameListModel.Add(new GameListUploadResponse
+                    {
+                        GameCode = game.gameID,
+                        GameName = game.gameName,
+                        GameType = "Slots",
+                        ImagePath1 = game.ImagePath,
+                        ImagePath2 = $"{GameConst.Pragmatic.ImageUrl}game_pic/square/200/{game.gameID}.png"
+                    });
                 });
             }
             else
@@ -106,8 +118,24 @@ namespace Webet333.api.Controllers
                 result.gameList.ForEach(game =>
                 {
                     game.ImagePath = $"{GameConst.Pragmatic.ImageUrl}game_pic/rec/325/{game.gameID}.png";
+
+                    gameListModel.Add(new GameListUploadResponse
+                    {
+                        GameCode = game.gameID,
+                        GameName = game.gameName,
+                        GameType = "Slots",
+                        ImagePath1 = game.ImagePath,
+                        ImagePath2 = $"{GameConst.Pragmatic.ImageUrl}game_pic/square/200/{game.gameID}.png"
+                    });
+
                 });
             }
+
+
+            using (var game_help = new GameHelpers(Connection))
+                await game_help.GameListInsert(gameListModel, "Pragmatic Wallet", null);
+
+
             return OkResponse(result);
         }
 
