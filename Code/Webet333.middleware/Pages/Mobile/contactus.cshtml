@@ -1,0 +1,409 @@
+﻿@page
+@{ ViewData["Title"] = "Contact Us";
+    Layout = "";}
+<div id="comContent"></div>
+<div id="mComContent">
+
+    <style>
+        .promotion-title {
+            margin-top: 0px;
+        }
+    </style>
+
+    <div id="afterlogin_mobile">
+        <div class="sidebar">
+            <div class="navbar-collapse" id="myNavbar">
+                <ul class="nav text-center mob-menu">
+                    <li id="logout"><a onclick="logoutMain(1)"><i class="fa fa-sign-out" aria-hidden="true"></i><p class="lang" key="sidebar_Logout"></p></a></li>
+                    <li id="login"><a onclick="loadPageLogin()" href="javascript:void(0);" rel="prefetch"><i class="fa fa-sign-in" aria-hidden="true"></i><p class="lang" key="sidebar_login"></p></a></li>
+                    <li><a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
+                    <li id="downloadpage"><a href="~/Mobile/download?id=918DownloadTab" rel="prefetch"><img src="~/images/mobile/download.png" alt="mn-download"><p class="lang" key="sidebar_Download"></p></a></li>
+                    <li><a href="~/Home/home" rel="prefetch"><img src="~/images/mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
+                    <li><a onclick="loadPageAbout()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
+                    <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
+                    <li id="accountPage"><a onclick="loadPageAccount()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/profile.png" alt="Profile"><p class="lang" key="sidebar_Profile"></p></a></li>
+                    <li><a onclick="loadPageVIP()" href="javascript:void(0);" rel="prefetch"><img src="~/images/footericon1.png" alt="Profile"><p>VIP</p></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-content" id="navbarhide">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="navbar-header mob-layout">
+                    <ul>
+                        <li>
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </li>
+                        <li>
+                            <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch" class="navbar-brand"><img class="logo" id="MainLogo" src="~/images/mobile/webet-main-logo.png" alt="WEBET 333.com"></a>
+                        </li>
+                        <li id="balanceShow">
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle wallet" type="button" data-toggle="dropdown"><figure><img src="~/images/mobile/wallet.png" alt="f-wallet"></figure></i></button>
+                                <ul class="dropdown-menu wallet-dropdown">
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Main Wallet</strong></li>
+                                            <li class="fright" id="ddlmainWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>918Kiss Wallet</strong></li>
+                                            <li class="fright" id="ddl918KissWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>AG Wallet</strong></li>
+                                            <li class="fright" id="ddlAGWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>M8 Wallet</strong></li>
+                                            <li class="fright" id="ddlM8Wallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Joker Wallet</strong></li>
+                                            <li class="fright" id="ddlJokerWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Playtech Wallet</strong></li>
+                                            <li class="fright" id="ddlPlaytechWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>MaxBet Wallet</strong></li>
+                                            <li class="fright" id="ddlMaxBetWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Mega888 Wallet</strong></li>
+                                            <li class="fright" id="ddlMega888Wallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>DG Wallet</strong></li>
+                                            <li class="fright" id="ddlDgWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Sexy B. Wallet</strong></li>
+                                            <li class="fright" id="ddlSexyWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>SA Wallet</strong></li>
+                                            <li class="fright" id="ddlSAWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Pussy888 Wallet</strong></li>
+                                            <li class="fright" id="ddlPussy888Wallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>AllBet Wallet</strong></li>
+                                            <li class="fright" id="ddlAllbetWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>WM Wallet</strong></li>
+                                            <li class="fright" id="ddlWMWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>Pragmatic Wallet</strong></li>
+                                            <li class="fright" id="ddlPragmaticWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>YeeBet Wallet</strong></li>
+                                            <li class="fright" id="ddlYeeBetWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong>SBO Wallet</strong></li>
+                                            <li class="fright" id="ddlSBOWallet">feching...</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function () {
+            $('#contactusPagebottom').addClass("active-link");
+        }, 20);
+    </script>
+
+    <div class="promotion-title black-bg text-center">
+        <div class="container">
+            <h4 class="white-text lang" key="">Contact Us</h4>
+        </div>
+    </div>
+    <div class="account-reg white-bg radius-border account-page-extra-padding">
+        <div class="container" style="margin-bottom:100px;" id="Contact">
+            <div class="info-form text-center">
+                @* <div class="back-btn"><a href="../Mobile/home" rel="prefetch"><img class="tab-bankicon" src="~/images/mobile/BackArrow_svg.svg" alt="" /></a></div> *@
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <table cellpadding="0" cellspacing="0" style="text-align:center;width:100%;border-color:white;">
+                        <tr>
+                            <td colspan="2" style="padding:10px;"><h5 class=""><span>L</span>ive Chat <img src="../../images/mobile/hours_24.png" alt="hours 24"></h5></td>
+                        </tr>
+                    </table>
+                    <br /><br /><br />
+                    <table class="contact-details-info" cellpadding="0" cellspacing="0" style="text-align:center;width:100%;border-color:white; margin: 0 auto 10px; max-width: 320px;">
+                        <tr>
+                            <td class="text-right" width="30%"><img class="downloadIconMobile" src="../../images/mobile/call.png" alt="Call"><p class="" style="font-size:10px;margin:0px 5px 0px 0px;"><span>Phone</span></p></td>
+                            <td class="text-left"><label class="mobile-number"><a style="color:#ffb701" href="tel:0135558826"> 013-555 8826</a></label></td>
+                        </tr>
+                    </table>
+                    <table class="contact-details-info" cellpadding="0" cellspacing="0" style="text-align:center;width:100%;border-color:white; margin: 0 auto 10px; max-width: 320px;">
+                        <tr>
+                            <td rowspan="2" class="text-right" width="30%"><img class="downloadIconMobile" src="../../images/mobile/whatsapp.png" alt="Call"><p class="" style="font-size:10px;margin:0px 0px 0px 0px;"><span>Whatsapp</span></p></td>
+                            <td class="text-left"><label class="mobile-number"><a style="color:#ffb701" href="https://api.whatsapp.com/send?phone=60135557800&text=Claim%20and%20Join">+6013-5557800 (Click Chat)</a></label></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"><label class="mobile-number"><a style="color:#ffb701" href="https://api.whatsapp.com/send?phone=60135558826&text=Claim%20and%20Join">+6013-5558826  (Click Chat)</a></label></td>
+                        </tr>
+                    </table>
+                    <table class="contact-details-info" cellpadding="0" cellspacing="0" style="text-align:center;width:100%;border-color:white; margin: 0 auto 10px; max-width: 320px;">
+                        <tr>
+                            <td rowspan="2" class="text-right" width="30%"><img class="downloadIconMobile" src="../../images/mobile/wechat.png" alt="We Chat"><p class="" style="font-size:10px;margin:0px 0px 0px 0px;"><span>Wechat</span></p></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="text-align: center;">
+                                    <div style="border:2px solid black;width:69%;padding:10px; border-radius: 20px; width: 150px;">
+                                        <img style="width:100px;height:100px;text-align:center;" src="~/images/mobile/barcode-cs1.jpg" alt="barcode">
+                                        <p>Webet333</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="contact-details-info" cellpadding="0" cellspacing="0" style="text-align:center;width:100%;border-color:white; margin: 0 auto 10px; max-width: 320px;">
+                        <tr>
+                            <td rowspan="2" class="text-right" width="30%"><img class="downloadIconMobile" src="../../images/mobile/telegram.png" alt="Call"><p class="" style="font-size:10px;margin:0px 5px 0px 0px;"><span>Telegram</span></p></td>
+                            <td class="text-left"><label class="mobile-number"><a style="color:#ffb701" href="https://t.me/mywbcs1"> @@mywbcs1</a></label></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"><label class="mobile-number"><a style="color:#ffb701" href="https://t.me/mywbcs2"> @@mywbcs2</a></label></td>
+                        </tr>
+                    </table>
+                    <table cellpadding="0" cellspacing="0" style="text-align:center;width:100%;border-color:white;">
+                        <tr>
+                            <td colspan="2">
+                                <div class="footer-quote">
+                                    @*<p class="text-center  copyright-text">&copy; Webet333.com Copyright</p>*@
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="laguage">
+        <div id="language" class="modal fade">
+            <div class="modal-dialog mail-width">
+                <div class="modal-content">
+                    <div class="modal-body text-center lang-modal">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <p>Select Language.</p>
+                        <ul class="list-inline pad-top-ten">
+                            <li><button id="englishbtn" class="submit" type="button" data-dismiss="modal" onclick="language('en-US')">English</button></li>
+                            <li><button id="malaybtn" class="submit" type="button" data-dismiss="modal" onclick="language('ms-MY')">Malay</button></li>
+                            <li><button id="chinesebtn" class="submit" type="button" data-dismiss="modal" onclick="language('zh-Hans')">Chinese</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-widget" id="footerWidget">
+        <ul class="list-inline text-center">
+            <li id="homePagebottom">
+                <a onclick="loadPageHome()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-home"></i>
+                    <p class="white-text no-mar" data-translate="menu_home">Home</p>
+                </a>
+            </li>
+            <li id="promotionPagebottom" class="">
+                <a onclick="loadPagePromotions()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-gift"></i>
+                    <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
+                </a>
+            </li>
+            <li id="contactusPagebottom">
+                <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-user"></i>
+                    <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="whatsapp()">
+                    <figure><img src="~/images/mobile/whatsapp.png" alt="Whats App" /></figure>
+                    <p class="white-text no-mar">Whatsapp</p>
+                </a>
+            </li>
+            <li class="live-chat">
+                <a class="live-chat-icon"><p class="white-text no-mar" data-translate="Live_chat">Live Chat</p></a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <a id="mobileM8" style="display:none"></a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
+            $("#chatting").toggle();
+        });
+        $(".contact-user").mouseover(function () {
+            $("#chatting").toggle();
+        });
+    });
+</script>
+
+<!--Begin Comm100 Live Chat Code-->
+<div></div>
+<script type="text/javascript">
+    var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 0) })(Comm100API || {})
+</script>
+<!--End Comm100 Live Chat Code-->
+<!-- Slider Section End -->
+<!-- Modal For Video -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".open-modal").click();
+    });
+    jQuery(".scroll-down-visible").hide();
+    jQuery("#more-arrow").click(function () {
+        jQuery(".scroll-down-visible").toggleClass("show");
+        jQuery("#more-arrow").toggleClass("rotate");
+    });
+</script>
+
+<!-- //Modal For Video -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".navbar-toggle,.canvas-overlay").click(function () {
+            if (!$("html").hasClass('intro')) {
+                $("html").addClass("intro");
+            }
+            else {
+                $("html").removeClass("intro");
+            }
+        });
+        $(".canvas-overlay").click(function () {
+            if ($(".navbar-collapse").hasClass('in')) {
+                $(".navbar-collapse").removeClass("in");
+            }
+        });
+    });
+</script>
+<!-- Slider Section End -->
+<script>
+    $(window).scroll(function () {
+        var scroll = $(window).scrollTop();
+        if (scroll >= 1) {
+            $("header").addClass("sticky-header");
+        }
+        else {
+            $("header").removeClass("sticky-header");
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        if (localStorage.getItem('currentUser') == null) {
+            document.getElementById('logout').style.display = "none";
+            document.getElementById('accountPage').style.display = "none";
+            document.getElementById('downloadpage').style.display = "none";
+        }
+        else {
+            document.getElementById('login').style.display = "none";
+        }
+    });
+
+    function language(value) {
+        SetLocalStorage('language', value);
+        get();
+    }
+
+    function get() {
+        (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
+
+        document.getElementById("englishbtn").style.background = "";
+        document.getElementById("malaybtn").style.background = "";
+        document.getElementById("chinesebtn").style.background = "";
+
+        if (GetLocalStorage('language') == "en-US")
+            document.getElementById("englishbtn").style.background = "orange";
+
+        if (GetLocalStorage('language') == "ms-MY")
+            document.getElementById("malaybtn").style.background = "orange";
+
+        if (GetLocalStorage('language') == "zh-Hans")
+            document.getElementById("chinesebtn").style.background = "orange";
+
+        $.ajax({
+            url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
+            dataType: 'json',
+            async: false,
+            success: function (lang) {
+                $('.lang').each(function (index, element) {
+                    if (localStorage.getItem("language") === "ms-MY") {
+                        $('body').addClass('malay-font');
+                    }
+                    $(this).text(lang[$(this).attr('key')]);
+                });
+                $("[data-translate]").each(function () {
+                    if ($(this).is("input")) {
+                        $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    } else {
+                        $(this).text(lang[$(this).data("translate")]);
+                    }
+                });
+            }
+        });
+    }
+
+    setTimeout(() => {
+        get();
+    }, 200);
+</script>

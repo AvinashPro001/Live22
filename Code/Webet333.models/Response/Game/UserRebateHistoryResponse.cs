@@ -19,5 +19,9 @@ namespace Webet333.models.Response.Game
         public string GameType { get; set; }
 
         public Decimal Rolling { get; set; }
+
+        public int Total { get; set; }
+
+        public int OffSet { get; set; }
     }
 }

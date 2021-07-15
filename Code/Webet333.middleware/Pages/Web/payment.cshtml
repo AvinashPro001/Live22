@@ -1,0 +1,18 @@
+﻿@page
+@{
+    ViewData["Title"] = "Payment - Webet333 -🥇";
+}
+<script>
+        var url_string = window.location;
+        var url = new URL(url_string);
+        var paymentUrl = url.searchParams.get("url");
+        var status = url.searchParams.get("status");
+        var id = url.searchParams.get("id");
+        if (paymentUrl != null)
+            window.open(paymentUrl, '_self');
+        if (status != null) {
+            setTimeout(() => {
+                window.location.href = "./"
+            }, 3000);
+        }
+</script>

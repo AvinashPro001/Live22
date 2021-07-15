@@ -158,6 +158,8 @@
 
             public const string CreateUser = "create";
 
+            public const string login = "login";
+
             public const string fetch = "fetch2";
 
             public const string LanguageCode = "en-US";
@@ -172,6 +174,8 @@
             public const string Secret = "hgcqgcmgyxs6n";
 
             public const string EnsureUserAccount = "CU";
+
+            public const string ListGames = "ListGames";
 
             public const string GetCredit = "GC";
 
@@ -337,8 +341,6 @@
 
             public const string BettingDetailsURL = "https://tttint.onlinegames22.com/";
 
-            public const string RedirectURL = "http://webet333.com/";
-
             public const string gameType = "LIVE";
 
             public const string platform = "SEXYBCRT";
@@ -434,6 +436,8 @@
 
             public const string Login = "forward_game";
 
+            public const string Modified = "modify_client";
+
             public const string BettingDetails = "betlog_pieceof_histories_in30days";
 
             public const string BettingDetailsByUser = "client_betlog_query";
@@ -527,8 +531,6 @@
             public const string APPId = "xtd4M3E5YIN1";
 
             public const string SecretKey = "7caf026d508e35cb48136cf11d98b64c";
-
-            public const string ReturnURL = "http://uat.webet333.com/";
 
             public const string Currency = "MYR";
 
@@ -721,9 +723,9 @@
 
 #elif STAG
 
-        public const string BaseUrl = "http://webet333.com/";
+        public const string BaseUrl = "https://www.webet333.net/";
 
-        public const string APIUrl = "http://api.webet333.com/api/v1/";
+        public const string APIUrl = "https://api.wb3api.com/api/v1/";
 
         public class MaxBet
         {
@@ -745,7 +747,7 @@
 
             public const string Currency = "2";
 
-            #region Betting limit Constant
+        #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -773,7 +775,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-            #endregion Betting limit Constant
+        #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -840,6 +842,8 @@
 
             public const string CreateUser = "create";
 
+            public const string login = "login";
+
             public const string fetch = "fetch";
 
             public const string LanguageCode = "en-US";
@@ -854,6 +858,8 @@
             public const string Secret = "hgcqgcmgyxs6n";
 
             public const string EnsureUserAccount = "CU";
+
+            public const string ListGames = "ListGames";
 
             public const string GetCredit = "GC";
 
@@ -1019,8 +1025,6 @@
 
             public const string BettingDetailsURL = "https://fetch.onlinegames22.com/";
 
-            public const string RedirectURL = "http://webet333.com/";
-
             public const string gameType = "LIVE";
 
             public const string platform = "SEXYBCRT";
@@ -1116,6 +1120,8 @@
 
             public const string Login = "forward_game";
 
+            public const string Modified = "modify_client";
+
             public const string BettingDetails = "betlog_pieceof_histories_in30days";
 
             public const string BettingDetailsByUser = "client_betlog_query";
@@ -1209,8 +1215,6 @@
             public const string APPId = "xtd019R76QU5";
 
             public const string SecretKey = "1d6f1e05678290dba54ac00947404bbd";
-
-            public const string ReturnURL = "http://webet333.com/";
 
             public const string Currency = "MYR";
 

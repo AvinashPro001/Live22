@@ -5,10 +5,8 @@
 
 export const environment = {
     production: false,
-    //apiUrl: 'http://api.webet333.com/api/v1/'
-    apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    //apiUrl: 'http://localhost:8091/api/v1/'
-    //apiUrl: 'http://localhost:5000/api/v1/'
+    apiUrl: 'https://api.wb3api.com/api/v1/',
+    apiUrlWithVersion: 'https://api.wb3api.com/'
 };
 
 export const account = {
@@ -351,7 +349,7 @@ export const customer = {
 }
 
 export const playtech = {
-    playtechUrl: 'http://api.webet333.com/api/Default/playtech',
+    playtechUrl: 'https://api.wb3api.com/api/Default/playtech',
     PlaytechbaseUrl: 'https://kioskpublicapi-am.hotspin88.com/player/',
     Entity_Key: '2f024a8c55f1de8f588f9b540081d2de0b46d9deae4149dc24fbb58ee4adb069ca767bf4eb001dda2a85ffacc722cf869d210fec9e8d2805dd3e5dd2da15ee40',
     PlayerName: 'WEBET333',

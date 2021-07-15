@@ -85,9 +85,9 @@ namespace Webet333.api.Controllers
 
                 var setPlayerBetLimitResult = await SBO_helper.SetPlayerBetLimitAsync(username);
 
-                if (setPlayerBetLimitResult.Error.Msg != SBOConst.ErrorMessage.Success) return OkResponse(setPlayerBetLimitResult);
-
                 await SBO_helper.SBORegister(request.Id, username, JsonConvert.SerializeObject(result));
+
+                if (setPlayerBetLimitResult.Error.Msg != SBOConst.ErrorMessage.Success) return OkResponse(setPlayerBetLimitResult);
 
                 return OkResponse(result);
             }

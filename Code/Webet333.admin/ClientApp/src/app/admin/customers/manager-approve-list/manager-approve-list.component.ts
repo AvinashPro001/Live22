@@ -4,7 +4,7 @@ import { HubConnectionBuilder } from '@aspnet/signalr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterService } from 'angular2-toaster';
-import { account } from '../../../../environments/environment';
+import { account, environment } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
 
@@ -71,7 +71,7 @@ export class ManagerApproveListComponent implements OnInit {
     }
 
     hubConnection() {
-        let Connection = new HubConnectionBuilder().withUrl("http://api.webet333.com/signalrhub").build();
+        let Connection = new HubConnectionBuilder().withUrl(environment.apiUrlWithVersion+ "signalrhub").build();
 
         Connection.on("ManagerApprovalList", () => {
             this.AutoRefersh = (document.getElementById("chk_autorefersh") as HTMLInputElement).checked;

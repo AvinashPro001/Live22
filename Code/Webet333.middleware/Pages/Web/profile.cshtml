@@ -1,0 +1,1492 @@
+﻿@page
+@{
+    ViewData["Title"] = "Profile - Webet333 -🥇";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+<link href="~/css/bootstrap-datepicker.min.css" type="text/css" rel="stylesheet" />
+<script>
+    CheckLoginOrNot();
+    CheckMobileNumberIsVerifiedOnly();
+</script>
+<div class="row main_wallet_page_wrap ml0 mr0">
+    <div class="container">
+        <div class="silver_main_wallet_sec">
+            <div class="silver_wallet_main">
+                <div class="silver_wallet">
+                    <h1 id="vip_level_name">SILVER</h1>
+                    <p>Main Wallet</p>
+                </div>
+            </div>
+            <div class="restore_amount_sec_wrap">
+                <div class="restore_amount_left">
+                    <button onclick="RestoreBalance();" class="lang" key="restore" id="restore-btn-malay"></button>
+                </div>
+                <div class="restore_amount_center">
+                    <div class="myr_cur">
+                        <h1>MYR</h1>
+                        <h2 id="main_balance"></h2>
+                    </div>
+                </div>
+                <div class="restore_amount_right">
+                    <button onclick="RefreshBalance();">&nbsp;</button>
+                </div>
+            </div>
+            <div class="table_section_black_wrap">
+                <div class="table_blacke">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td id="joker_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="playtech_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="kiss918_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="ag_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="m8_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="maxbet_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="mega888_balance"><img src="~/images/loading.gif" /></td>
+                            </tr>
+                            <tr>
+                                <td>Joker</td>
+                                <td>PlayTech</td>
+                                <td>918Kiss</td>
+                                <td>AG</td>
+                                <td>M8</td>
+                                <td>Maxbet</td>
+                                <td>Mega888</td>
+                            </tr>
+                            <tr>
+                                <td id="dg_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="sexy_baccarat_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="sa_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="pussy888_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="allbet_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="wm_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="pragmatic_balance"><img src="~/images/loading.gif" /></td>
+                            </tr>
+                            <tr>
+                                <td>DG</td>
+                                <td>Sexy Baccarat</td>
+                                <td>SA</td>
+                                <td>PUSSY 888</td>
+                                <td>Allbet</td>
+                                <td>WM</td>
+                                <td>Pragmatic</td>
+                            </tr>
+
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td id="sbo_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="yeebet_balance"><img src="~/images/loading.gif" /></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>SBO</td>
+                                <td>YeeBet</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="article_sec_wrap profile-page">
+    <div class="download_page_wrapper">
+        <div class="container">
+            <div class="test">
+                <div class="profile-subdetail">
+                    <div class="tab white-bg-tab-panel">
+                        <h4 class="mar-btm-fifteen">BANKING</h4>
+
+                        <button id="deposit_tab" class="tablinks account-reg deposit opercity" onclick="openCity(event, 'deposit_amount')"><span class="lang" key="deposit">DEPOSIT</span></button>
+                        <button id="withdraw_tab" class="tablinks account-reg withdrawal opercity" onclick="openCity(event, 'withdraw_amount')"><span class="lang" key="withdraw">WITHDRAW</span></button>
+                        <button id="transfer_tab" class="tablinks account-reg transfer opercity" onclick="openCity(event, 'transfer_amount')"><span class="lang" key="transfer">TRANSFER</span></button>
+                        <button id="history_tab" class="tablinks mar-btm-fifteen account-reg history opercity" onclick="openCity(event, 'history_amount')"><span class="lang" key="history">HISTORY</span></button>
+
+                        <h4 class="mar-btm-fifteen">USER PROFILE</h4>
+
+                        <button id="profile_tab" class="tablinks account-reg profile active opercity" onclick="openCity(event, 'profile_amount')"><span class="lang" key="profile">PROFILE</span></button>
+                        <button id="change_password_tab" class="tablinks account-reg change_password opercity" onclick="openCity(event, 'change_passwrd_amount')">
+                            <span class="lang" key="change_password">CHANGE PASSWORD</span>
+                        </button>
+
+                    </div>
+
+                    <div id="deposit_amount" class="tabcontent account-reg radius-none" style="display: none;">
+                        <div class="info-form marginb-none">
+                            <h4 class="deposit-sub symbol bg-no-repeat blk-text lang" key="deposit">DEPOSIT</h4>
+                        </div>
+                        <div class="deposit_form_section_wrap">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8">
+                                    <ul class="deposit-bank-listing deposite-bank-sec password-upadte blk-text pad-top-ten">
+                                        <li>
+                                            <label class="fleft mob-padr-5">
+                                                <p class="big no-mar lang" key="deposit_company_bank_name" style="margin-left: -5px;">Deposit Options:</p>
+                                            </label>
+                                            <label class="company-deposit-list">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="tablinks">
+                                                        <a class="thm-txt" href="#Vader-Pay" data-toggle="tab">
+                                                            <figure class="hand-curson">
+                                                                <img style="object-position:center !important" class="tab-bankicon" src="~/images/deposit_option1.png" alt="" onclick="ResetPromotionId()" />
+                                                            </figure>
+                                                            <p>Vaderpay</p>
+                                                        </a>
+                                                    </li>
+                                                    <li class="active tablinks">
+                                                        <a class="thm-txt" href="#Bank-Transfer" data-toggle="tab">
+                                                            <figure class="hand-curson">
+                                                                <img style="object-position:center !important" class="tab-bankicon" src="~/images/deposit_option2.png" alt="" onclick="ResetPromotionId()" />
+                                                            </figure>
+                                                            <p>Bank-Transfer</p>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div id="Bank-Transfer" class="tabcontent active">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8">
+                                            <ul class="deposit-bank-listing password-upadte white-text">
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang blk-text" key="bankname">Bank Name:</p>
+                                                    </label>
+                                                    <label class="fright">
+                                                        <div class="bank-selection deposit-bank-selection">
+                                                            <ul class="bank-listing step-2-desc highlight-bank" id="Depsoit_bank_list">
+                                                            </ul>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar blk-text lang">Bank Account:</p>
+                                                    </label>
+                                                    <label class="fright mendatory black-text">
+                                                        <p class="account-details-fullwith" id="lbl_account_name">
+                                                        </p>
+                                                        <br>
+                                                        <p class="account-details-fullwith" id="lbl_account_number">
+                                                        </p>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang blk-text" key="deposit_amount">Amount:</p>
+                                                    </label>
+                                                    <label class="fright card-number mendatory">
+                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount" min="0" oninput="validity.valid||(value='');" step=".01">
+
+                                                        <div class="min-max-limit">
+                                                            <ul class="d-flex">
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(50,false)">50</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(100,false)">100</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(300,false)">300</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(500,false)">500</li>
+                                                                <li class="data-blog" onclick="SetAmountInTextBox(1000,false)">1000</li>
+                                                            </ul>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                <br>
+                                                <li class="pad-btm-ten">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang blk-text" key="deposit_date_time">Date Time:</p>
+                                                    </label>
+                                                    <label class="fright card-number mendatory">
+                                                        <input name="txt_reference_number" type="text" class="reg-form " placeholder="Select Date" autocomplete="off" id="datepicker0" data-date-format="yyyy-mm-dd hh:ii" value="" onkeydown="return false;">
+                                                    </label>
+                                                </li>
+                                                <li class="pad-btm-ten">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang blk-text" key="deposit_reference_number">Reference Number:</p>
+                                                    </label>
+                                                    <label class="fright card-number mendatory">
+                                                        <input id="txt_reference_number" type="text" class="reg-form " placeholder="Enter Reference Number" autocomplete="new-password">
+                                                    </label>
+                                                </li>
+                                                <li class="pad-btm-ten scanned-file">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang blk-text" key="deposit_scanned_receipt">Scanned Receipt:</p>
+                                                    </label>
+                                                    <div class="fright upload">
+                                                        <div class="d-flex">
+                                                            <div class="fake-upload-btn upload-btn">
+                                                                <span class="lang" key="deposit_upload_receipt">Upload Receipt</span>
+                                                                <input type="file" id="receipt" multiple="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div>
+                                                            <ul id="selectedFiles"></ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 pl0">
+                                            <div class="info-form notice-bank-transfer deposit-section pad-top-twentyfive" style="background-color: #ffffff; border-radius: 6px;border:1px solid #c7c7c7;">
+                                                <div class="pad-lr-comman">
+                                                    <h6 class="info-notice"><span class="lang" key="important_notice">IMPORTANT NOTICE</span></h6>
+                                                    <ol>
+                                                        <li><span class="lang" key="instruction_1"></span></li>
+                                                        <li><span class="lang" key="instruction_2"></span></li>
+                                                        <li><span class="lang" key="instruction_3"></span></li>
+                                                        <li><span class="lang" key="instruction_4"></span></li>
+                                                        <li><span class="lang" key="instruction_5"></span></li>
+                                                        <li>
+                                                            <span class="lang" key="instruction_6A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+        'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a> <span class="lang" key="instruction_6B"></span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="lang" key="instruction_7A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+        'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a><span class="lang" key="instruction_7B"></span>
+                                                        </li>
+
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <section class="select-checkboxes">
+                                                <h3 class="mar-top-15 lang" key="promotion_select">Please select Promotion below:</h3>
+                                                <ul class="mar-top-15 promotion-choose" id="deposit_promotion">
+                                                </ul>
+                                            </section>
+                                            <div class="text-left mar-comman">
+                                                <button name="" value="submit" class="submit" onclick="Deposit(false)"><span class="lang" key="deposit_submit"></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="Vader-Pay" class="tabcontent">
+                                    <div class="row" id="vader-pay-maintenance" style="display:none;">
+                                        <div class="col-lg-8 col-md-8 text-center">
+                                            <h4>Under Maintenance</h4>
+                                        </div>
+                                    </div>
+                                    <div id="vader-pay-non-maintenance">
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-8">
+                                                <ul class="deposit-bank-listing password-upadte white-text">
+                                                    <li>
+                                                        <label class="fleft">
+                                                            <p class="big no-mar lang blk-text">Amount:</p>
+                                                        </label>
+                                                        <label class="fright card-number mendatory">
+                                                            <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30000.00" id="txt_deposit_amount_online" min="0" oninput="validity.valid||(value='');" step=".01">
+
+                                                            <div class="min-max-limit">
+                                                                <ul class="d-flex">
+                                                                    <li class="data-blog" onclick="SetAmountInTextBox(50,true)">50</li>
+                                                                    <li class="data-blog" onclick="SetAmountInTextBox(100,true)">100</li>
+                                                                    <li class="data-blog" onclick="SetAmountInTextBox(300,true)">300</li>
+                                                                    <li class="data-blog" onclick="SetAmountInTextBox(500,true)">500</li>
+                                                                    <li class="data-blog" onclick="SetAmountInTextBox(1000,true)">1000</li>
+                                                                </ul>
+                                                            </div>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <section class="select-checkboxes">
+                                                    <h3 class="mar-top-15">Please select Promotion below:</h3>
+                                                    <ul class="mar-top-15 promotion-choose" id="deposit_promotion">
+                                                    </ul>
+                                                </section>
+                                                <div class="text-left mar-comman">
+                                                    <button name="" value="submit" class="submit" onclick="Deposit(true)">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div id="withdraw_amount" class="tabcontent white-bg-tab-panel account-reg radius-none"
+                         style="display: none;">
+                        <div class="info-form marginb-none">
+                            <h4 class="withdrawal-sub bg-no-repeat symbol lang" key="withdraw">WITHDRAW</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-lg-8">
+                                <div class="bank-multi-list">
+                                    <div class="pad-lr-comman">
+                                        <form id="formWithdrawal">
+                                            <ul class="password-upadte pad-top-ten">
+                                                <li>
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang" key="bankname">Bank Naame :</p>
+                                                    </label>
+                                                    <label class="fright">
+                                                        <div class="bank-selection">
+                                                            <ul class="bank-listing highlight-bank" id="withdraw_bank_list"></ul>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="info-form bank-remain-list">
+                                    <div class="pad-lr-comman">
+                                        <form id="formWithdrawal">
+                                            <ul class="password-upadte pad-btm-ten pad-top-ten">
+                                                <li class="mar-btm-fifteen" id="displayAccountNumber">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang" key="bank_accountnumber">Account Number:</p>
+                                                    </label>
+                                                    <label class="fright card-number mendatory">
+                                                        <input type="number" class="reg-form" placeholder="Enter Account Number" id="withdraw_account_number" oninput="validity.valid||(value='');"  step="0">
+                                                    </label>
+                                                </li>
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang" key="from">From:</p>
+                                                    </label>
+                                                    <label class="fright bank-name mendatory">
+                                                        Main Wallet
+                                                    </label>
+                                                </li>
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang" key="deposit_amount">Amount:</p>
+                                                    </label>
+                                                    <label class="fright card-number mendatory">
+                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30,000.00" id="txt_withdraw_amount"  min="0" oninput="validity.valid||(value='');"  step=".01">
+                                                    </label>
+                                                </li>
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft"></label>
+                                                    <label class="fright"><span id="unlock_icon" data-toggle="modal" data-target="#withdraw_availabe_amount_list"></span>&nbsp;<span data-toggle="modal" data-target="#withdraw_availabe_amount_list" id="WithdrawAmount"></span></label>
+                                                </li>
+                                                <li class="mar-btm-fifteen">
+                                                    <div class="fleft">
+                                                        <button class="submit lang" type="button" onclick="Withdraw();"><span class="lang" key="deposit_submit"></span></button>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="info-form deposit-section pad-top-twentyfive" style="background-color: #ffffff; border-radius: 6px;">
+                                    <div class="pad-lr-comman">
+                                        <h6 class="info-notice"><span class="lang" key="important_notice">IMPORTANT NOTICE</span></h6>
+                                        <ol>
+                                            <li>
+                                                <span class="lang" key="instruction_6A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+        'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a> <span class="lang" key="instruction_6B"></span>
+                                            </li>
+                                            <li>
+                                                <span class="lang" key="instruction_7A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+        'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a><span class="lang" key="instruction_7B"></span>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="transfer_amount" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display:none;">
+                        <div class="info-form marginb-none switch-middle">
+                            <h4 class="transfer-sub bg-no-repeat symbol lang" key="transfer">TRANSFER</h4>
+                            <div class="switch-middle">
+                                <p>Main Wallet Auto Transfer</p>
+                                <div class="toggle_switcer">
+                                    <label class="switch">
+                                        <input type="checkbox" id="auto_transfer_checkbox" onchange="UpdateAutoTransfer();">
+                                        <span class="slider_swither"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row ml0 mr0">
+                            <div class="col-sm-9">
+                                <div class="info-form">
+                                    <div class="pad-lr-comman">
+                                        <div class="step-portion">
+                                            <h5 class="mar-btm-ten lang" key="transfer_transfer_details"></h5>
+                                        </div>
+                                        <p class="big-text lang" key="transfer_please_fill_in_the_following_form"></p>
+                                        <form id="formTransfer">
+                                            <ul class="password-upadte transfer-page">
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang" key="from">From:</p>
+                                                    </label>
+                                                    <label class="fright bank-icon bank-name mendatory">
+                                                        <select class="main-wallet" id="from_wallet" onchange="SetHtmlInToWallet();">
+                                                            <option value="">-- Select --</option>
+                                                        </select>
+                                                        <!-- <p class="star">*</p> -->
+                                                    </label>
+                                                </li>
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang" key="to">To:</p>
+                                                    </label>
+                                                    <label class="fright bank-icon bank-name mendatory">
+                                                        <select class="main-wallet" id="to_wallet">
+                                                            <option value="">-- Select --</option>
+                                                        </select>
+                                                        <!-- <p class="star">*</p> -->
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ml0 mr0 amount_sec_erap">
+                            <div class="col-sm-12">
+                                <div class="info-form no-mar">
+                                    <div class="pad-lr-comman">
+                                        <form id="transferAmount">
+                                            <ul class="password-upadte transfer-ammount">
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar lang" key="deposit_amount">Amount:</p>
+                                                    </label>
+                                                    <label class="fleft minimum-ammount card-number mendatory">
+                                                        <input id="txt_transfer_amount" type="number" class="reg-form" placeholder="Max Limit: From Wallet"  min="0" oninput="validity.valid||(value='');" step=".01">
+                                                        <span>Add Minimum 1 MYR</span>
+                                                    </label>
+                                                    <label class="fright mar-btm-fifteen transfer-max hidden-xs">
+                                                        <a onclick="MaxTransfer();">
+                                                            <span>Transfer Max</span>
+                                                        </a>
+                                                    </label>
+                                                </li>
+                                                <li class="mar-btm-fifteen transfer-btns">
+                                                    <div class="fright_one">
+                                                        <button class="submit lang" key="transfer" type="button" onclick="Transfer()">TRANSFER</button>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ml0 mr0 mar-top-15 mar-btm-ten">
+                            <div class="col-lg-4 col-lg-offset-8 ">
+                                <div class="total-turnover">
+                                    <div class="total-turnover-chips">
+                                        <ul class="list-style d-flex">
+                                            <li>Total Daily Turnover</li>
+                                            <li><label class="marginb-none" id="total_turnover">0.00</label></li>
+                                            <li><span class="fa fa-refresh hand-curson" onclick="GetDailyTurnover();" id="refresh-turnover"></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ml0 mr0">
+                            <div class="col-lg-12 pl0 pr0">
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Joker</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Joker Wallet')" id="joker-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="joker_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Turnover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="joker_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Playtech</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('PlayTech Wallet')" id="playtech-wallet-allin">
+                                                        ALL In
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="playtech_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Turnover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="playtech_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>918 Kiss</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('918Kiss Wallet')" id="918kiss-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="kiss918_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Turnover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="kiss_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>AG</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('AG Wallet')" id="ag-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="ag_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Turnover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="ag_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>M8</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('M8 Wallet')" id="m8-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="m8_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Turnover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="m8_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Maxbet</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('MaxBet Wallet')" id="maxbet-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="maxbet_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Turnover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="maxbet_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Mega888</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Mega888 Wallet')" id="mega888-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="mega888_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Turnover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="mega888_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>DG</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('DG Wallet')" id="dg-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="dg_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Turnover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="dg_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Sexy</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Sexy Wallet')" id="sexy-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="sexy_baccarat_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Turnover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="sexy_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>SA</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('SA Wallet')" id="sa-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="sa_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Turnover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="sa_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Pussy888</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Pussy888 Wallet')" id="pussy888-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="pussy888_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>
+                                                    Daily Turnover
+                                                </li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="pussy_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>AllBet</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('AllBet Wallet')" id="allbet-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="allbet_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>
+                                                    Daily Turnover
+                                                </li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="allbet_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>WM</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('WM Wallet')" id="wm-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="wm_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>
+                                                    Daily Turnover
+                                                </li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="wm_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>Pragmatic</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Pragmatic Wallet')" id="pragmatic-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="pragmatic_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>
+                                                    Daily Turnover
+                                                </li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="pragmatic_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>YeeBet</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('YeeBet Wallet')" id="yeebet-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="yeebet_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>
+                                                    Daily Turnover
+                                                </li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="yeebet_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>SBO</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('SBO Wallet')" id="sbo-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="sbo_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>
+                                                    Daily Turnover
+                                                </li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="sbo_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="history_amount" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
+                        <div class="info-form marginb-none">
+                            <h4 class="history-sub bg-no-repeat symbol lang" key="history">HISTORY</h4>
+                        </div>
+                        <div class="form-group">
+                            <div class="row ml0 mr0">
+                                <div class="col-sm-3">
+                                    <label class="history_sec">Transaction Type *</label>
+                                </div>
+                                <div class="col-sm-9 pl0">
+                                    <div class="history-tabs">
+                                        <ul class="nav nav-tabs" id="history_tabs">
+                                            <li onclick="SetHistorySectionName('BettingSummery')">
+                                                <a class="hand-curson" data-toggle="tab" href="#Betting_Summary"><span>Betting Summary</span></a>
+                                            </li>
+                                            <li class="active" onclick="SetHistorySectionName('Transfer')">
+                                                <a class="hand-curson" data-toggle="tab" href="#Transfer_Summary"><span key="transfer_title" class="lang">Transfer</span></a>
+                                            </li>
+                                            <li onclick="SetHistorySectionName('WithdrawDeposit')">
+                                                <a class="hand-curson" data-toggle="tab" href="#Withdraw_Deposit_Summary"><span class="lang" key="">Withdraw / Deposit</span></a>
+                                            </li>
+                                            <li onclick="SetHistorySectionName('Promotion')">
+                                                <a class="hand-curson" data-toggle="tab" href="#Promotion_Summary"><span key="withdrawal_title" class="lang">Promotion Apply</span></a>
+                                            </li>
+                                            <li onclick="SetHistorySectionName('Rebate')">
+                                                <a class="hand-curson" data-toggle="tab" href="#Rebate_cash_Summary"><span key="rebate" class="lang">Rebate / Cashback </span></a>
+                                            </li>
+                                            <li onclick="SetHistorySectionName('Reward')">
+                                                <a class="hand-curson" data-toggle="tab" href="#Rewards_Summary"><span key="menu_promotion" class="lang">Rewards</span></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row ml0 mr0">
+                                <div class="col-sm-3">
+                                    <label class="history_sec">Transaction Date *</label>
+                                </div>
+
+
+                                <div class="col-sm-9 pl0">
+                                    <div class="history-tabs">
+                                        <ul class="nav nav-tabs remove-active-class" id="history_tabs">
+                                            <li class="active col-sm-3" onclick="GetTodayDate();" id="today-filter">
+                                                <a data-toggle="tab" class="hand-curson"><span>Today</span></a>
+                                            </li>
+                                            <li class="col-sm-3" onclick="Get3DayDate();">
+                                                <a data-toggle="tab" class="hand-curson"><span key="transfer_title" class="lang">In 3 days</span></a>
+                                            </li>
+                                            <li class="col-sm-3" onclick="GetInWeekDate();">
+                                                <a data-toggle="tab" class="hand-curson"><span class="lang">In a Week</span></a>
+                                            </li>
+                                            <li class="col-sm-3" onclick="GetInMonthDate();">
+                                                <a data-toggle="tab" class="hand-curson"><span key="withdrawal_title" class="lang">In a Month</span></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row ml0 mr0">
+                                <div class="col-sm-3">
+                                    <label class="history_sec">Start Date *</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="row ml0 mr0">
+                                        <div class="col-sm-4 pl0">
+                                            <div class="controls">
+                                                <div class="input-append">
+                                                    <input id="datepicker1" class="input-small form-control" type="text" placeholder="03/24/2021" onkeydown="return false;" />
+                                                    <button id="datepicker1btn" class="btn icondate" type="button"><i class="fa fa-calendar"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 pl0">To</div>
+                                        <div class="col-sm-4 pl0">
+                                            <div class="controls">
+                                                <div class="input-append">
+                                                    <input id="datepicker2" class="input-small form-control" type="text" placeholder="03/31/2021" onkeydown="return false;"/>
+                                                    <button id="datepicker1btn2" class="btn icondate" type="button"><i class="fa fa-calendar"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 pl0">
+                                            <button class="submit_height" type="button" onclick="GetDateRange();">SUBMIT</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ml0 mr0">
+                            <div class="col-sm-12">
+                                <div class="tab-content">
+                                    <div id="Betting_Summary" class="tab-pane fade in ">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_bettingsummeryHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Game Provide</th>
+                                                        <th class="white-text text-center">BetCount</th>
+                                                        <th class="white-text text-center">BetAmount</th>
+                                                        <th class="white-text text-center">VaildBet Amount</th>
+                                                        <th class="white-text text-center">Total Rebate</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables" id="tbl_bettingsummeryHistory_pagination">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Transfer_Summary" class="tab-pane fade in active">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_transferHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">Amount</th>
+                                                        <th class="white-text text-center">From</th>
+                                                        <th class="white-text text-center">To</th>
+                                                        <th class="white-text text-center">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables" id="tbl_transferHistory_pagination">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Withdraw_Deposit_Summary" class="tab-pane fade in">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_withdrawdepositHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">Amount</th>
+                                                        <th class="white-text text-center">Method</th>
+                                                        <th class="white-text text-center">Status</th>
+                                                        <th class="white-text text-center">Type</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables" id="tbl_withdrawdepositHistory_pagination">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Promotion_Summary" class="tab-pane fade">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_promotionHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">End Date</th>
+                                                        <th class="white-text text-center">Promotion Name</th>
+                                                        <th class="white-text text-center">Trasnfer Amount</th>
+                                                        <th class="white-text text-center">Bonus Amount</th>
+                                                        <th class="white-text text-center">Target Amount</th>
+                                                        <th class="white-text text-center">Target Achieved</th>
+                                                        <th class="white-text text-center">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables" id="tbl_promotionHistory_pagination">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Rebate_cash_Summary" class="tab-pane fade in ">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_RebateHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">Game Provider</th>
+                                                        <th class="white-text text-center">Turnover</th>
+                                                        <th class="white-text text-center">Rolling</th>
+                                                        <th class="white-text text-center">Bet</th>
+                                                        <th class="white-text text-center">Win Lose</th>
+                                                        <th class="white-text text-center">Comm Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables" id="tbl_RebateHistory_pagination">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Rewards_Summary" class="tab-pane fade in ">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_rewardHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">Transaction Type</th>
+                                                        <th class="white-text text-center">Amount</th>
+                                                        <th class="white-text text-center">Balance</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables" id="tbl_rewardHistory_pagination">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="profile_amount" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display:block;">
+                        <div class="info-form marginb-none">
+                            <h4 class="profile-sub bg-no-repeat symbol blk-text lang" key="profile">Profile</h4>
+                        </div>
+                        <div class="row ml0 mr0">
+                            <div class="col-md-10 col-lg-9">
+                                <div class="info-form change-pass">
+                                    <div class="pad-lr-comman">
+                                        <h5 class="blk-text no-mar lang" key="my_profile">My Profile</h5>
+                                        <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="username">User Name:</p>
+                                                </label>
+                                                <label class="fright lock">
+                                                    <label class="form-control" id="profile_username"></label>
+                                                </label>
+                                            </li>
+
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_contact_number">Contact Number :</p>
+                                                </label>
+                                                <label class="fright lock">
+                                                    <label class="form-control" id="profile_mobileNumber"></label>
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_full_name">Full Name :</p>
+                                                </label>
+                                                <label class="fright lock">
+                                                    <label class="form-control" id="profile_fullname"></label>
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="curreny">Currency:</p>
+                                                </label>
+                                                <label class="fright bank-name mendatory">
+                                                    MYR
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="banking_details">Banking Details:</p>
+                                                </label>
+                                                <label class="fright bank-name mendatory" id="users_bank_details">
+
+                                                </label>
+                                            </li>
+
+                                        </ul>
+                                        <h5 class="blk-text no-mar lang" key="profile_update_personal_details">UPDATE PERSONAL DETAILS</h5>
+                                        <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
+                                            <li class="mar-btm-fifteen pad-top-ten pad-btm-ten">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="username">Username :</p>
+                                                </label>
+                                                <label class="fright">
+                                                    <p class="big no-mar"><strong><span id="login_username"></span></strong></p>
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen pad-top-ten pad-btm-ten">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_full_name">Full Name :</p>
+                                                </label>
+                                                <label class="fright">
+                                                    <p class="big no-mar"><strong><span id="fullname"></span></strong></p>
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_mobile">Mobile :</p>
+                                                </label>
+                                                <label class="fright tel-icon">
+                                                    <input type="number" class="reg-form" placeholder="60167896532" id="mobile_number" onkeyup="MobileValidation('mobile_number','forgotPassword-error')">
+                                                    <label style="color:#ff0000;font-weight:bold" id="forgotPassword-error"></label>
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <div class="fright">
+                                                    <button class="submit" data-toggle="modal" data-target="#mobilenumber_update">
+                                                        <span class="lang" key="profile_update_personal_details">UPDATE PERSONAL DETAILS</span>
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="change_passwrd_amount" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
+                        <div class="info-form marginb-none">
+                            <h4 class="password-sub symbol bg-no-repeat blk-text lang" key="change_password">CHANGE PASSWORD</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 col-lg-9">
+                                <div class="info-form change-pass">
+                                    <div class="pad-lr-comman">
+                                        <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_current_password">Current Password :</p>
+                                                </label>
+                                                <label class="fright mar-btm-no lock">
+                                                    <input type="password" class="reg-form" placeholder="Current Password" value="" id="txt_currentPassword">
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_new_password">New Password :</p>
+                                                </label>
+                                                <label class="fright lock">
+                                                    <input type="password" class="reg-form" placeholder="New Password" id="txt_newPassword">
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <label class="fleft">
+                                                    <p class="big no-mar lang" key="profile_confirm_password">Confirm Password :</p>
+                                                </label>
+                                                <label class="fright lock">
+                                                    <input type="password" class="reg-form" placeholder="Confirm Password" id="txt_confirmPassword" onkeyup="CheckPasswordMatch(true)">
+                                                    <label style="color:#ff0000;font-weight:bold" class="registrationFormAlert" id="divCheckPasswordMatch"> </label>
+
+                                                </label>
+                                            </li>
+                                            <li class="mar-btm-fifteen">
+                                                <div class="fright">
+                                                    <button name="" class="submit" onclick="ChangePassword()">
+                                                        <span class="lang" key="change_password">CONFIRM CHANGE PASSWORD</span>
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="modal fade" id="withdraw_availabe_amount_list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title"><span>Withdraw Promotion List</span></h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered-one text-center">
+                    <thead>
+                        <tr class="white-gray-bg">
+                            <th class="white-text text-center">No</th>
+                            <th class="white-text text-center">Title</th>
+                            <th class="white-text text-center">Before Promotion Balance</th>
+                            <th class="white-text text-center">Apply Date</th>
+                            <th class="white-text text-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_withdraw_availabe_amount_list">
+                    </tbody>
+                </table>
+                <div class="total-available-withdraw-amount text-center">
+                    <p id="total_withdraw_amount"><p>
+                </div>
+                <div class="text-center">
+                    <p><span class="fa fa-info-circle"></span> You are only allowed to withdraw the amount that has no wagering requirement. Other balance will be locked until bonus requirement has been meet</p>
+                    <p><span class="fa fa-info-circle"></span> Before Promotion balance is the balance remaining before you had applied new promotion,it is available to withdraw Amount</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mobilenumber_update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title"><span>Enter your Password</span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
+                        <li class="mar-btm-fifteen pad-top-ten pad-btm-ten">
+                            <label class="fleft">
+                                <p class="big no-mar lang">Password :</p>
+                            </label>
+                            <label class="fright tel-icon">
+                                <input type="password" class="reg-form" placeholder="password" id="password-update-mobile">
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" onclick="UpdateMobileNumber()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="promotion_not_apply_confimation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title"><span>Confirmation</span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <p>You have not selected any promotion, Are you sure to proceed ?</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="DepositAfterPromotionCheck()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="deposit_promotion_description_section"></div>
+
+
+<script>
+    window.onhashchange = function () {
+        OpenTabOnHashChange()
+    }
+
+    $(document).ready(function () {
+        OpenTabOnHashChange();
+    });
+
+    function OpenTabOnHashChange() {
+        if (window.location.hash) {
+            var hash = window.location.hash.substring(1);
+            if (hash == 'deposit') {
+                document.getElementById("deposit_tab").click();
+            } if (hash == 'withdraw') {
+                document.getElementById("withdraw_tab").click();
+            } if (hash == 'transfer') {
+                document.getElementById("transfer_tab").click();
+            }
+        }
+        else
+            document.getElementById("profile_tab").click();
+    }
+
+    function openCity(evt, cityName, linknum) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("opercity");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        if (linknum != null && linknum != undefined) {
+            tablinks[linknum].className += " active";
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+<script type="text/javascript" src="~/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var date = new Date();
+        var day = date.getDate();
+        var Month = date.getMonth() + 1;
+        var Year = date.getFullYear();
+        Month = Month < 10 ? "0" + Month : Month;
+        day = day < 10 ? "0" + day : day;
+        var Hours = date.getHours();
+        var Minute = date.getMinutes();
+
+        $("#datepicker0").datetimepicker({
+            format: 'yyyy-mm-dd hh:ii',
+            autoclose: true,
+            minuteStep: 5
+        });
+        $("#datepicker0").val(Year + '-' + Month + '-' + day + ' ' + Hours + ':' + Minute)
+
+        $("#datepicker1").datepicker();
+        $("#datepicker1btn").click(function (event) {
+            event.preventDefault();
+            $("#datepicker1").focus();
+        });
+
+        $("#datepicker1btn2").click(function (event) {
+            event.preventDefault();
+            $("#datepicker2").focus();
+        })
+
+        $("#datepicker2").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+
+        $("#datepicker3").datepicker({
+            numberOfMonths: 3,
+            showButtonPanel: true
+        });
+
+        $("#datepicker4").datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+
+    });
+
+    $(document).ready(function () {
+        if (GetLocalStorage('currentUser') !== null) {
+            UsersBankDetails();
+            CallAllBankAPI();
+            SetWithdrawLimit();
+            SetHtmlInFromWallet();
+            SetDepositPageBank();
+            SetProfilePageBanks();
+            GetDailyTurnover();
+            SetProfilePageData();
+            CheckVaderPayMainteance();
+            CheckSupportGame();
+            SetUserDepositPromotion();
+            GetTodayDate();
+        }
+    });
+</script>

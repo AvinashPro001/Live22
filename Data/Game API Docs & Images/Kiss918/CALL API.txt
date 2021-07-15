@@ -1,0 +1,97 @@
+web£º
+android£º
+lobbykissandroid://lobbykissandroid?account=test22&password=1234
+
+Iphone 5s+£º
+LobbyKiss64://account=test22&password=1234
+
+Iphone 5 Or Iphone 5-£º
+ios32ÍøÒ³£ºLobbyKiss32://account=test22&password=1234
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+IOSAPP:
+Iphone 5s+£º
+NSURL *url = [NSURL URLWithString:@"LobbyKiss64://account=test99&password=1234"];
+[[UIApplication sharedApplication] openURL:url];
+
+
+Iphone 5 Or Iphone 5-£º
+NSURL *url = [NSURL URLWithString:@"LobbyKiss32://account=test99&password=1234"];
+[[UIApplication sharedApplication] openURL:url];
+ 
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+Android APP:
+
+package com.test.jinji.myapplication;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.content.ComponentName;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+    private final String pakName = "org.scr888.scr888";
+    public PackageInfo isAppInstalled(Context context, String packageName) {
+        final PackageManager packageManager = context.getPackageManager();
+        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
+        List<String> pName = new ArrayList<String>();
+        if (pinfo != null) {
+            for (int i = 0; i < pinfo.size(); i++) {
+                String pn = pinfo.get(i).packageName;
+                pName.add(pn);
+            }
+        }
+        if(pName.contains(packageName)) {
+            try {
+                PackageInfo packageInfo = packageManager.getPackageInfo(packageName, 0);
+                return packageInfo;
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        else
+            return null;
+    }
+    public void onLoadLobby(View view)
+    {
+        PackageInfo packageInfo = this.isAppInstalled(this,pakName);
+        if(packageInfo != null) {
+            if (packageInfo.versionName.compareTo("5.2") >= 0 ) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+
+                intent.setComponent(new ComponentName(pakName, "org.cocos2dx.lua.AppActivity"));
+		intent.setFlags(101);
+                intent.putExtra("account", "test1");
+                intent.putExtra("password", "1234");
+                startActivity(intent);
+            }
+            else
+            {
+                Toast toast = Toast.makeText(this,"The version is too old,please install the new app",Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
+        else
+        {
+            Toast toast = Toast.makeText(this,"App is not installed,please install and try again",Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+}
+

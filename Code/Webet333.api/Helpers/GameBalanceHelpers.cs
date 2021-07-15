@@ -412,6 +412,8 @@ namespace Webet333.api.Helpers
             {
                 var resultAllBet = JsonConvert.DeserializeObject<AllBetGameBalanceResponse>(await AllBetGameHelpers.CallAPI(Url, Parameter));
                 allBetBalance = resultAllBet != null ? (resultAllBet.error_code == "OK" ? resultAllBet.balance : null) : null;
+                if (resultAllBet != null && resultAllBet.error_code == "CLIENT_PASSWORD_INCORRECT")
+                    AllBetGameHelpers.ChangePasswordCallAPI(Username, Password);
             }
             catch (Exception ex)
             {
@@ -536,6 +538,19 @@ namespace Webet333.api.Helpers
         #endregion Call Third Party Game Balance API's
 
         #region Update ALL games balance in db
+
+        #region Main balance 
+
+        internal async Task<dynamic> MainBalance(string UserId)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.FindAsync(StoredProcConsts.User.GetWalletBalance, new { UserId, WalletName = "Main Wallet" });
+                return result;
+            }
+        }
+
+        #endregion Main balance 
 
         #region Kiss 918 balance update
 
