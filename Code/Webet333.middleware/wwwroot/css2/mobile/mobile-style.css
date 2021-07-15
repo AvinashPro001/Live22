@@ -289,7 +289,7 @@ select.main-wallet.jcf-hidden,
 .nav-tabs > li { margin-bottom: 0px;}
 .head-img-icon .nav-tabs li a img { max-width: 150px; width: 100%; }
 .head-img-icon .nav-tabs > li > a { border: 0px; margin: 0px 5px; padding: 0px;}
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border: 0px;  background-color: #ffb701;}
+.head-img-icon .nav-tabs > li.active > a, .head-img-icon .nav-tabs > li.active > a:focus, .head-img-icon .nav-tabs > li.active > a:hover {border: 0px;background-color: #ffb701;}
 .head-img-icon > .tab-content { margin: 0 -15px;}
 .head-img-icon > .tab-content { padding-top: 88px;}
 .menu-list-area .nav-pills > li.active > a,
