@@ -723,7 +723,7 @@
 
 #elif STAG
 
-        public const string BaseUrl = "https://www.wb3my.com/";
+        public const string BaseUrl = "https://www.webet333.net/";
 
         public const string APIUrl = "https://api.wb3api.com/api/v1/";
 
@@ -747,7 +747,7 @@
 
             public const string Currency = "2";
 
-            #region Betting limit Constant
+        #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -775,7 +775,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-            #endregion Betting limit Constant
+        #endregion Betting limit Constant
         }
 
         public class Kiss918

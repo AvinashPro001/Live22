@@ -1,7 +1,7 @@
 ﻿var baseUrl = "https://api.wb3api.com/api/v1/";
 var baseUrlWithoutVersion = "https://api.wb3api.com";
-var webUrl = "https://www.wb3my.com/";
-var mobUrl = "https://www.wb3my.com/mobile/";
+var webUrl = "https://www.webet333.net/";
+var mobUrl = "https://www.webet333.net/mobile/";
 var playtehcJS = "https://login.tothinkit.com/jswrapper/integration.js.php?casino=winforfun88";
 
 var apiEndPoints = {
