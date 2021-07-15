@@ -81,12 +81,19 @@ namespace Webet333.service
                     WriteTextToFile("Service recalled at " + DateTime.Now);
 
                     await CallRegisterGameAPIs();
+
+                    await Task.Delay(10000, stoppingToken);
                 }
             }
             catch (Exception ex)
             {
-                Program.Main();
                 WriteErrorTextToFile("Error :" + ex.Message);
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                var newobj = new CancellationToken();
+                await ExecuteAsync(newobj);
             }
         }
 
@@ -126,17 +133,13 @@ namespace Webet333.service
             if (!File.Exists(filepath))
             {
                 // Create a file to write to.
-                using (StreamWriter sw = File.CreateText(filepath))
-                {
-                    sw.WriteLine(Message);
-                }
+                using StreamWriter sw = File.CreateText(filepath);
+                sw.WriteLine(Message);
             }
             else
             {
-                using (StreamWriter sw = File.AppendText(filepath))
-                {
-                    sw.WriteLine(Message);
-                }
+                using StreamWriter sw = File.AppendText(filepath);
+                sw.WriteLine(Message);
             }
         }
 

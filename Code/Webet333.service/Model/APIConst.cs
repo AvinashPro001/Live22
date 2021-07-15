@@ -5,7 +5,7 @@
 #if DEBUG
         public const string baseUrl = "https://uatapi.webet333.com/api/v1/";
 #elif STAG
-        public const string baseUrl = "https://api.webet333.com/api/v1/";
+        public const string baseUrl = "https://api.wb3api.com/api/v1/";
 #endif
 
         public const string login = "account/login";
