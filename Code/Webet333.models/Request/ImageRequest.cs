@@ -37,4 +37,27 @@ namespace Webet333.models.Request
         [JsonProperty(PropertyName = "fileIcon")]
         public string FormIconFile { get; set; }
     }
+
+    public class HomePageBannerImageRequest : GetByIdRequest
+    {
+        [Required]
+        [JsonProperty("bannerWeb")]
+        public string BannerWeb { get; set; }
+
+        [Required]
+        [JsonProperty("bannerMobile")]
+        public string BannerMobile { get; set; }
+
+        [JsonIgnore]
+        public System.Guid AdminId { get; set; }
+    }
+
+    public class HomePageBannerImageUpdateRequest : GetByIdRequestWithRequired
+    {
+        [JsonProperty("bannerWeb")]
+        public string BannerWeb { get; set; }
+
+        [JsonProperty("bannerMobile")]
+        public string BannerMobile { get; set; }
+    }
 }

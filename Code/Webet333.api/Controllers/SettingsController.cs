@@ -19,12 +19,17 @@ namespace Webet333.api.Controllers
     [Route(ActionsConst.ApiVersion)]
     public class SettingsController : BaseController
     {
+        #region Variable & Constructor
+
         private IHubContext<SignalRHub> _hubContext;
+
         public SettingsController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, IHubContext<SignalRHub> hubContext) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
             _hubContext = hubContext;
         }
+
+        #endregion Variable & Constructor
 
         #region Retrieve list of Banks
 
@@ -431,5 +436,282 @@ namespace Webet333.api.Controllers
         #endregion Contact Type Details API's
 
         #endregion Contact Management
+
+        #region HomePage Banner (Add, Update, Update Status, Delete, Retrieve List)
+
+        #region HomePage Banner Insert
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerInsert)]
+        public async Task<IActionResult> HomePageBannerInsert([FromBody] HomePageBannerAddRequest request)
+        {
+            if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                var result = await Settings_Helpers.HomePageBannerInsertAsync(request);
+
+                await _hubContext.Clients.All.SendAsync("HomePageBannerInsertUpdate");
+
+                return OkResponse(result.Id);
+            }
+        }
+
+        #endregion HomePage Banner Insert
+
+        #region HomePage Banner Image Insert
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerImage)]
+        [Filters.RequestSizeLimit(valueCountLimit: 2)]
+        public async Task<IActionResult> HomePageBannerImage(
+            [FromBody] HomePageBannerImageRequest request,
+            [FromServices] IUploadManager uploadManager,
+            [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await ValidateUser();
+
+            var extensionWeb = "." + request.BannerWeb.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerWeb = request.BannerWeb.Split("base64,")[1];
+
+            var extensionMobile = "." + request.BannerMobile.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerMobile = request.BannerMobile.Split("base64,")[1];
+
+            request.AdminId = GetUserId(User);
+
+            using (var Generic_Helpers = new GenericHelpers(Connection))
+            {
+                Generic_Helpers.GetImageWithExtension(
+                    uploadManager,
+                    request.BannerWeb,
+                    BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
+                    request.Id.ToString(),
+                    extensionWeb);
+                Generic_Helpers.GetImageWithExtension(
+                    uploadManager,
+                    request.BannerMobile,
+                    BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
+                    request.Id.ToString(),
+                    extensionMobile);
+            }
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                await Settings_Helpers.HomePageBannerImageAsync(
+                    Guid.Parse(request.Id),
+                    extensionWeb,
+                    extensionMobile,
+                    adminId: request.AdminId.ToString());
+            }
+
+            return OkResponse();
+        }
+
+        #endregion HomePage Banner Image Insert
+
+        #region HomePage Banner Update
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerUpdate)]
+        public async Task<IActionResult> HomePageBannerUpdate([FromBody] HomePageBannerUpdateRequest request)
+        {
+            if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                var result = await Settings_Helpers.HomePageBannerUpdateAsync(request);
+
+                await _hubContext.Clients.All.SendAsync("HomePageBannerInsertUpdate");
+
+                return OkResponse(result.Id);
+            }
+        }
+
+        #endregion HomePage Banner Update
+
+        #region HomePage Banner Image Update
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerImageUpdate)]
+        [Filters.RequestSizeLimit(valueCountLimit: 2)]
+        public async Task<IActionResult> HomePageBannerImageUpdate(
+            [FromBody] HomePageBannerImageUpdateRequest request,
+            [FromServices] IUploadManager uploadManager,
+            [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await ValidateUser();
+
+            string extensionWeb = string.Empty, extensionMobile = string.Empty;
+
+            using (var generic_help = new GenericHelpers(Connection))
+            {
+                if (!string.IsNullOrWhiteSpace(request.BannerWeb))
+                {
+                    extensionWeb = "." + request.BannerWeb.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerWeb = request.BannerWeb.Split("base64,")[1];
+
+                    generic_help.DeleteImage(
+                        uploadManager,
+                        request.Id.ToString(),
+                        BaseUrlConfigsOptions.Value.HomePageBannerWebleImage);
+
+                    generic_help.GetImageWithExtension(
+                        uploadManager,
+                        request.BannerWeb,
+                        BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
+                        request.Id.ToString(),
+                        extensionWeb);
+                }
+
+                if (!string.IsNullOrWhiteSpace(request.BannerMobile))
+                {
+                    extensionMobile = "." + request.BannerMobile.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerMobile = request.BannerMobile.Split("base64,")[1];
+
+                    generic_help.DeleteImage(
+                        uploadManager,
+                        request.Id.ToString(),
+                        BaseUrlConfigsOptions.Value.HomePageBannerMobileImage);
+
+                    generic_help.GetImageWithExtension(
+                        uploadManager,
+                        request.BannerMobile,
+                        BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
+                        request.Id.ToString(),
+                        extensionMobile);
+                }
+            }
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                await Settings_Helpers.HomePageBannerImageAsync(
+                    Guid.Parse(request.Id),
+                    extensionWeb,
+                    extensionMobile);
+            }
+
+            return OkResponse();
+        }
+
+        #endregion HomePage Banner Image Update
+
+        #region HomePage Banner Delete
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerDelete)]
+        public async Task<IActionResult> HomePageBannerDelete([FromBody] GetByIdRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await CheckUserRole();
+
+            string adminId = GetUserId(User).ToString();
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                await Settings_Helpers.HomePageBannerDeleteAsync(Guid.Parse(request.Id), adminId);
+
+                await _hubContext.Clients.All.SendAsync("HomePageBannerInsertUpdate");
+
+                return OkResponse();
+            }
+        }
+
+        #endregion HomePage Banner Delete
+
+        #region HomePage Banner Status Active
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerUpdateStatus)]
+        public async Task<IActionResult> HomePageBannerUpdateStatus([FromBody] UpdateStatusWithAdminIdRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await CheckUserRole();
+
+            request.AdminId = GetUserId(User);
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                await Settings_Helpers.HomePageBannerUpdateStatusAsync(request);
+
+                await _hubContext.Clients.All.SendAsync("HomePageBannerInsertUpdate");
+
+                return OkResponse();
+            }
+        }
+
+        #endregion HomePage Banner Status Active
+
+        #region HomePage Banner Select By User
+
+        [HttpPost(ActionsConst.Settings.HomePageBannerSelectByUser)]
+        public async Task<IActionResult> HomePageBannerSelectByUser(
+            [FromBody] HomePageBannerRetriveRequest request,
+            [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            request.isUser = true;
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                var result = await Settings_Helpers.HomePageBannerSelectUserAsync(
+                    BaseUrlConfigsOptions.Value,
+                    Language.Id.ToString(),
+                    request);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion HomePage Banner Select By User
+
+        #region HomePage Banner Select By Admin
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerSelectByAdmin)]
+        public async Task<IActionResult> HomePageBannerSelectByAdmin(
+            [FromBody] HomePageBannerRetriveByAdminRequest request,
+            [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            request.isUser = false;
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                var result = await Settings_Helpers.HomePageBannerSelectByAdminAsync(
+                    BaseUrlConfigsOptions.Value,
+                    Language.Id.ToString(),
+                    request);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion HomePage Banner Select By Admin
+
+        #endregion HomePage Banner (Add, Update, Update Status, Delete, Retrieve List)
     }
 }
