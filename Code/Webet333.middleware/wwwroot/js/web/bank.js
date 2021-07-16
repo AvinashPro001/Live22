@@ -124,7 +124,7 @@ function SetAdminBankPage() {
     }
 }
 
-function SetDepositPageBank()    {
+function SetDepositPageBank() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
     if (data != null) {
         if (data.AdminBankPageData !== null && data.AdminBankPageData !== undefined) {
@@ -394,6 +394,12 @@ async function Deposit(IsOnlinePayment) {
 
     LoaderShow();
     if (model.promotionId != undefined) {
+
+        if (IsOnlinePayment) {
+            SetLocalStorage("IsWindowClose", false)
+            window.open("../Web/payment");
+        }
+
         await LoadAllBalance();
         var promotionModel = {
             userid: null,
@@ -403,25 +409,41 @@ async function Deposit(IsOnlinePayment) {
         walletData = walletData.response;
         if (walletData.data.IsPending == true) {
             LoaderHide();
+            if (IsOnlinePayment)
+                SetLocalStorage("IsWindowClose", true);
             return ShowError(ChangeErroMessage("pending_sports_deposit_error"));
         }
 
         if (walletData.data.InMaintenance == true) {
             LoaderHide();
+            if (IsOnlinePayment)
+                SetLocalStorage("IsWindowClose", true);
             return ShowError(ChangeErroMessage("game_in_maintenance_new_promotion"));
         }
 
         if (walletData.data.CheckPromotionApply === true && walletData.data.TotalPromotionRow > 0) {
+            if (IsOnlinePayment)
+                SetLocalStorage("IsWindowClose", true);
             if (confirm(ChangeErroMessage("promo_apply_balance_error"))) {
                 model.promotionApplyEligible = true;
+                if (IsOnlinePayment) {
+                    SetLocalStorage("IsWindowClose", false)
+                    window.open("../Web/payment");
+                }
             }
             else {
                 model.promotionId = "";
+                if (IsOnlinePayment) {
+                    SetLocalStorage("IsWindowClose", false)
+                    window.open("../Web/payment");
+                }
             }
         }
         else {
             if (walletData.data.Staus != null && walletData.data.CheckPromotionRemind == true) {
                 LoaderHide();
+                if (IsOnlinePayment)
+                    SetLocalStorage("IsWindowClose", true);
                 return ShowError(ChangeErroMessage("promot_active_error"));
             }
 
@@ -436,17 +458,24 @@ async function Deposit(IsOnlinePayment) {
         }
     }
     else {
+        if (OnlinePayment) {
+            SetLocalStorage("IsWindowClose", false)
+            window.open("../Web/payment");
+        }
+
         let data = {
         }
         var walletData = await PostMethod(accountEndPoints.depositCheckWithoutPromotion, data);
         walletData = walletData.response;
-        if (walletData.data.CheckPopupWithoutPromotion == true) {
+        if (walletData.data.CheckPopupWithoutPromotion !== true) {
             LoaderHide();
             DepositModel = model;
         }
         else {
             LoaderHide();
             DepositModel = model;
+            if (IsOnlinePayment)
+                SetLocalStorage("IsWindowClose", true);
             $('#promotion_not_apply_confimation').modal('show');
             return 0;
         }
@@ -469,10 +498,14 @@ async function Deposit(IsOnlinePayment) {
 async function DepositAfterPromotionCheck() {
     LoaderShow();
     if (OnlinePayment) {
+        if (model.promotionId == undefined || model.promotionId == null) {
+            SetLocalStorage("IsWindowClose", false);
+            window.open("../Web/payment");
+        }
         var res = await PostMethod(transactionEndPoints.onlinePayment, DepositModel);
         if (res.status == 200) {
             LoaderHide();
-            window.open("../Web/payment?url=" + res.response.data.redirect_to)
+            SetLocalStorage("gameURL", res.response.data.redirect_to);
         }
         else {
             ShowError(res.response.message)
