@@ -348,6 +348,10 @@ function ResetTransactionField(i) {
     }
 }
 
+function OpenPaymentPage() {
+    window.open("../Web/payment");
+}
+
 var DepositModel, OnlinePayment;
 async function Deposit(IsOnlinePayment) {
     OnlinePayment = IsOnlinePayment;
@@ -397,7 +401,7 @@ async function Deposit(IsOnlinePayment) {
 
         if (IsOnlinePayment) {
             SetLocalStorage("IsWindowClose", false)
-            window.open("../Web/payment");
+            OpenPaymentPage();
         }
 
         await LoadAllBalance();
@@ -428,14 +432,14 @@ async function Deposit(IsOnlinePayment) {
                 model.promotionApplyEligible = true;
                 if (IsOnlinePayment) {
                     SetLocalStorage("IsWindowClose", false)
-                    window.open("../Web/payment");
+                    OpenPaymentPage();
                 }
             }
             else {
                 model.promotionId = "";
                 if (IsOnlinePayment) {
                     SetLocalStorage("IsWindowClose", false)
-                    window.open("../Web/payment");
+                    OpenPaymentPage();
                 }
             }
         }
@@ -460,14 +464,14 @@ async function Deposit(IsOnlinePayment) {
     else {
         if (OnlinePayment) {
             SetLocalStorage("IsWindowClose", false)
-            window.open("../Web/payment");
+            OpenPaymentPage();
         }
 
         let data = {
         }
         var walletData = await PostMethod(accountEndPoints.depositCheckWithoutPromotion, data);
         walletData = walletData.response;
-        if (walletData.data.CheckPopupWithoutPromotion !== true) {
+        if (walletData.data.CheckPopupWithoutPromotion == true) {
             LoaderHide();
             DepositModel = model;
         }
@@ -498,9 +502,10 @@ async function Deposit(IsOnlinePayment) {
 async function DepositAfterPromotionCheck() {
     LoaderShow();
     if (OnlinePayment) {
+        
         if (model.promotionId == undefined || model.promotionId == null) {
             SetLocalStorage("IsWindowClose", false);
-            window.open("../Web/payment");
+            OpenPaymentPage();  
         }
         var res = await PostMethod(transactionEndPoints.onlinePayment, DepositModel);
         if (res.status == 200) {

@@ -2,7 +2,8 @@
 @{
     ViewData["Title"] = "Payment - Webet333 -🥇";
 }
-<script>var counter = 0;
+<script>
+    var counter = 0;
     setInterval(function () {
         var url = localStorage.getItem("gameURL");
         if (url != null && url != "null") {
@@ -10,13 +11,10 @@
             window.location.href = url;
         }
         else {
-
-            ++counter
             var IsWindowClose = localStorage.getItem("IsWindowClose");
-            console.log(IsWindowClose);
-            if (IsWindowClose)
-                window.close(); 
+            if (IsWindowClose == "true" || IsWindowClose == true)
+                window.close();
             if (counter == 30)
                 window.close();
         }
-    }, 1000)</script>
+    }, 500)</script>
