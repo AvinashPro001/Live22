@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
@@ -15,7 +14,6 @@ using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Payments;
-using Webet333.models.Response.Payments;
 using RequestSizeLimitAttribute = Webet333.api.Filters.RequestSizeLimitAttribute;
 
 namespace Webet333.api.Controllers
@@ -372,8 +370,6 @@ namespace Webet333.api.Controllers
                     pageSize = 0,
                     offset = 0,
                 });
-
-
             }
         }
 
@@ -627,7 +623,6 @@ namespace Webet333.api.Controllers
                 });
             }
         }
-
 
         #endregion Withdraw Deposit Retrive
     }

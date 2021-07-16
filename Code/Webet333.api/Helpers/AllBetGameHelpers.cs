@@ -171,7 +171,6 @@ namespace Webet333.api.Helpers
             return JsonConvert.DeserializeObject<dynamic>(await CallAPI(Url, Parameter));
         }
 
-
         #region Call Betting Details Third Party API
 
         public static async Task<AllBetServicesResponse> BettingDetailsCallAPI(string StartTime = null, string EndTime = null)

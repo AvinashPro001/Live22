@@ -233,7 +233,6 @@ namespace Webet333.api.Controllers
             if (!ModelState.IsValid) return BadResponse(ModelState);
             using (var account_help = new AccountHelpers(Connection))
             {
-
                 var uniqueId = Guid.NewGuid().ToString();
 
                 var user = await account_help.AddUser(Connection, request, RoleConst.Users, uniqueId);
