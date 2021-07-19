@@ -543,10 +543,10 @@ async function Withdraw() {
         return ShowError(ChangeErroMessage("min_max_amount_error_parameter", profile.withdrawLimit));
 
     if (WithdrawBankId === "" || WithdrawBankId === null || WithdrawBankId === undefined)
-        return ShowError(ChangeErroMessage("bnk_name_required_error"));
+        return ShowError(ChangeErroMessage("plz_selet_bnk_error"));
 
     if (WithdrawBankId == undefined)
-        return ShowError(ChangeErroMessage("select_bank_name_error"));
+        return ShowError(ChangeErroMessage("plz_selet_bnk_error"));
 
     var model = {
         bankId: WithdrawBankId,
