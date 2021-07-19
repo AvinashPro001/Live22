@@ -23,6 +23,7 @@
   "amount_greater_zero_error": "进输入金额多过0",
   "amount_greater_one_error": "进输入金额多过1",
   "promot_active_error": "您不能申请促销，因为您有活动促销",
+  "amount_required_error": "请输入金额。",
   "min_max_amount_error": "最低金额为 10，最高金额为 30000。",
   "min_max_amount_error_parameter": "最低金额 10 和最高金额是",
   "min1_max1000_amount_error": "最低金额 1",

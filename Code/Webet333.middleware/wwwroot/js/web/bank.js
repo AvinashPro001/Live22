@@ -502,10 +502,10 @@ async function Deposit(IsOnlinePayment) {
 async function DepositAfterPromotionCheck() {
     LoaderShow();
     if (OnlinePayment) {
-        
+
         if (model.promotionId == undefined || model.promotionId == null) {
             SetLocalStorage("IsWindowClose", false);
-            OpenPaymentPage();  
+            OpenPaymentPage();
         }
         var res = await PostMethod(transactionEndPoints.onlinePayment, DepositModel);
         if (res.status == 200) {
@@ -532,10 +532,12 @@ async function DepositAfterPromotionCheck() {
 }
 
 async function Withdraw() {
-    var amount = Number($("#txt_withdraw_amount").val());
+    var amount = $("#txt_withdraw_amount").val();
 
-    if (amount <= 0)
-        return ShowError(ChangeErroMessage("min_max_amount_error_parameter", profile.withdrawLimit));
+    if (amount === "" || amount === null || amount === undefined)
+        return ShowError(ChangeErroMessage("amount_required_error"));
+    else
+        amount = Number($("#txt_withdraw_amount").val());
 
     var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
 
