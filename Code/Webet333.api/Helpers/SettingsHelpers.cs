@@ -465,8 +465,8 @@ namespace Webet333.api.Helpers
                     homePageBanners.ForEach(
                         banner =>
                         {
-                            banner.BannerWeb = $"{baseUrl.ImageBase}{baseUrl.HomePageBannerWebleImage}/{banner.Id}{banner.BannerWeb}";
-                            banner.BannerMobile = $"{baseUrl.ImageBase}{baseUrl.HomePageBannerMobileImage}/{banner.Id}{banner.BannerMobile}";
+                            banner.BannerWeb = $"{baseUrl.ImageBase}{baseUrl.HomePageBannerWebleImage}/{banner.id}{banner.bannerWeb}";
+                            banner.BannerMobile = $"{baseUrl.ImageBase}{baseUrl.HomePageBannerMobileImage}/{banner.id}{banner.bannerMobile}";
                         }
                     );
                 }

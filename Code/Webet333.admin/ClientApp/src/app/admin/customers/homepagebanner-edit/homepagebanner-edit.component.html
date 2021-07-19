@@ -1,0 +1,80 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/admin/customers/homepage-banner-list">Homepage Banner List</a>
+    </li>
+    <li class="breadcrumb-item">Edit Homepage Banner</li>
+</ol>
+
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Homepage Banner Edit</legend>
+                </div>
+            </div>
+        </div>
+
+        <div class="row card-body">
+            <div class="col-md-12">
+                <form class="border border-light">
+                    <div class="row col-md-12">
+                        <div class="row col-md-12 p-2">
+                            <div class="row col-md-6">
+                                <div class="col-3">
+                                    <label style="float:right;clear:both;padding-top:6px">Title :</label>
+                                </div>
+                                <div class="input-group col-9">
+                                    <input id="txt_title" type="text" value="{{data.title}}" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row col-md-6">
+                                <div class="col-3">
+                                    <label style="float:right;clear:both;padding-top:6px">Sequence :</label>
+                                </div>
+                                <div class="input-group col-9">
+                                    <select class="form-control" [(ngModel)]="data.sequence" [ngModelOptions]="{standalone: true}" id="ddlSequence">
+                                        <option [value]="c.id" *ngFor="let c of sequenceList" [ngValue]="c">{{c.sequence}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-12  p-2">
+                            <div class="row col-md-6">
+                                <div class="col-3">
+                                    <label style="float:right;clear:both;padding-top:6px">Desktop Banner :</label>
+                                </div>
+                                <div class="input-group col-9">
+                                    <input type="file" (change)="fileSelectDestop($event)" />
+                                </div>
+                            </div>
+                            <div class="row col-md-6">
+                                <div class="col-3">
+                                    <label style="float:right;clear:both;padding-top:6px">Mobile Banner :</label>
+                                </div>
+                                <div class="input-group col-9">
+                                    <input type="file" (change)="fileSelectMobile($event)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-12  p-2">
+                            <div class="row col-md-6">
+                                <div class="col-3">
+                                    <label style="float:right;clear:both;padding-top:6px">Language :</label>
+                                </div>
+                                <div class="input-group col-9">
+                                    <select class="form-control" id="ddlLanguage">
+                                        <option [value]="c.id" *ngFor="let c of Language" [selected]="c.id==data.languageId" [ngValue]="c">{{c.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div align="center">
+                        <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)="editHomePageBanner()" style="max-width:200px;align-content:center">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

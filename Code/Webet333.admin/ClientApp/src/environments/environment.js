@@ -7,8 +7,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.account = exports.environment = void 0;
 exports.environment = {
     production: false,
-    apiUrl: 'https://api.wb3api.com/api/v1/',
-    apiUrlWithVersion: 'https://api.wb3api.com/'
+    //apiUrl: 'https://api.wb3api.com/api/v1/',
+    //apiUrlWithVersion: 'https://api.wb3api.com/'
+    apiUrl: 'http://127.0.0.1:8094/api/v1/',
+    apiUrlWithVersion: 'http://127.0.0.1:8094/'
 };
 exports.account = {
     login: exports.environment.apiUrl + 'account/login',
@@ -278,7 +280,9 @@ exports.customer = {
     sboSetLeague: exports.environment.apiUrl + 'sbo/set/league',
     getLeagueBetSetting: exports.environment.apiUrl + 'sbo/get/league-bet-setting',
     sboGetBlankLeague: exports.environment.apiUrl + 'sbo/blank-getLeague',
-    resendOTP: exports.environment.apiUrl + 'account/send/otp'
+    resendOTP: exports.environment.apiUrl + 'account/send/otp',
+    homePageBannerList: exports.environment.apiUrl + 'settings/homePage-banner/select/admin',
+    homePageBannerDelete: exports.environment.apiUrl + 'settings/homePage-banner/delete'
 };
 exports.playtech = {
     playtechUrl: 'https://api.wb3api.com/api/Default/playtech',

@@ -5,8 +5,10 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'https://api.wb3api.com/api/v1/',
-    apiUrlWithVersion: 'https://api.wb3api.com/'
+    //apiUrl: 'https://api.wb3api.com/api/v1/',
+    //apiUrlWithVersion: 'https://api.wb3api.com/'
+    apiUrl: 'http://127.0.0.1:8094/api/v1/',
+    apiUrlWithVersion: 'http://127.0.0.1:8094/'
 };
 
 export const account = {
@@ -345,7 +347,15 @@ export const customer = {
     getLeagueBetSetting: environment.apiUrl + 'sbo/get/league-bet-setting',
     sboGetBlankLeague: environment.apiUrl + 'sbo/blank-getLeague',
 
-    resendOTP: environment.apiUrl + 'account/send/otp'
+    resendOTP: environment.apiUrl + 'account/send/otp',
+
+    homePageBannerList: environment.apiUrl + 'settings/homePage-banner/select/admin',
+    homePageBannerDelete: environment.apiUrl + 'settings/homePage-banner/delete',
+    homePageBannerChangeStatus: environment.apiUrl + 'settings/homePage-banner/update/status',
+    homePageBannerAdd: environment.apiUrl + 'settings/homePage-banner/add',
+    homePageBannerUpdate: environment.apiUrl + 'settings/homePage-banner/update',
+    homePageBannerImage: environment.apiUrl + 'settings/homePage-banner/image',
+    homePageBannerImageUpdate: environment.apiUrl + 'settings/homePage-banner/image/update'
 }
 
 export const playtech = {

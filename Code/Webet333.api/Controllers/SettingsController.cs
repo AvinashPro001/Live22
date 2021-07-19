@@ -703,7 +703,7 @@ namespace Webet333.api.Controllers
             {
                 var result = await Settings_Helpers.HomePageBannerSelectByAdminAsync(
                     BaseUrlConfigsOptions.Value,
-                    Language.Id.ToString(),
+                    languageId: null,
                     request);
 
                 return OkResponse(result);
