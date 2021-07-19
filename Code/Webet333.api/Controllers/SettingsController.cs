@@ -536,7 +536,7 @@ namespace Webet333.api.Controllers
 
                 await _hubContext.Clients.All.SendAsync("HomePageBannerInsertUpdate");
 
-                return OkResponse(result.Id);
+                return OkResponse(result.id);
             }
         }
 
@@ -703,7 +703,7 @@ namespace Webet333.api.Controllers
             {
                 var result = await Settings_Helpers.HomePageBannerSelectByAdminAsync(
                     BaseUrlConfigsOptions.Value,
-                    languageId: null,
+                     request.LanguageId,
                     request);
 
                 return OkResponse(result);

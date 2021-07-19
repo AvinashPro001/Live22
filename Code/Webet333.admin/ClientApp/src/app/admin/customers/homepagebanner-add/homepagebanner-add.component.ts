@@ -109,7 +109,7 @@ export class HomepagebannerAddComponent implements OnInit {
 
     //#endregion
 
-    //#region AddPromotion
+    //#region Add HomePageBanner
 
     addHomePageBanner() {
         this.disabled = true;
@@ -139,7 +139,7 @@ export class HomepagebannerAddComponent implements OnInit {
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectDesktopBannerImage);
         }
 
-        this.adminService.add<any>(customer.promotionAdd, dataSelect).subscribe(res => {
+        this.adminService.add<any>(customer.homePageBannerAdd, dataSelect).subscribe(res => {
             this.uploadFile(res.data);
         }, error => {
             this.disabled = false;
