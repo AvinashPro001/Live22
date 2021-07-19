@@ -20,7 +20,7 @@ async function UserBankDetails() {
             UserBankName = userBank[i].bankName;
             UserAccountNumber = userBank[i].accountNo;
             UserAccountName = userBank[i].accountName;
-        }
+        }   
     }
     WithdrawUsernameSet();
 }
@@ -114,64 +114,7 @@ async function DepositPromotionList() {
 }
 
 async function BankList() {
-    //var res = await GetMethod(apiEndPoints.depositDdl);
-
-    //if (res !== null && res !== undefined) {
-    //var DepsoitBankList = document.getElementById("Deposit_bank_list");
-    //var name = res.data.bankDetails;
-    //depositMethodId = res.data.depositMethods.filter(x => x.method == 'Bank Transfer')[0].id;
-    //var firstSelect = true;
-    //if (DepsoitBankList != null)
-    //    $.each(name, function () {
-    //        if (firstSelect) {
-    //            DepsoitBankList.innerHTML += '<li onclick="LiSelectDepositFunction(\'' + this.id + '\',\'' + this.accountName + '\',\'' + this.accountNo + '\')" id="' + this.id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + this.id + '"/><label for="' + this.id + '" title="state" class="bank-list-deposit blk-text"><figure><img class="icon-bank-info" src="' + this.bankIconLogo + '" alt="Maybank" /></figure><p>' + this.bankName + '</p></label></li>';
-    //            firstSelect = false;
-    //            LiSelectDepositFunction(this.id, this.accountName, this.accountNo);
-    //        }
-    //        else {
-    //            DepsoitBankList.innerHTML += '<li onclick="LiSelectDepositFunction(\'' + this.id + '\',\'' + this.accountName + '\',\'' + this.accountNo + '\')" id="' + this.id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + this.id + '"/><label for="' + this.id + '" title="state" class="bank-list-deposit blk-text"><figure><img class="icon-bank-info" src="' + this.bankIconLogo + '" alt="Maybank" /></figure><p>' + this.bankName + '</p></label></li>';
-
-    //        }
-    //    });
-
-    //var wallet = res.data.walletTypes;
-    //allWalletList = res.data.walletTypes;
-    //$.each(wallet, function () {
-    //    $("#ddl_transferFromWallet").append($("<option />").val(this.id).text(this.walletType));
-    //});
-
-    //var x = screen.width;
-    //var model = {
-    //    id: null,
-    //    ismobile: true
-    //};
-    //var resPanel = await PostMethodWithParameter(apiEndPoints.promotionsDailyList, model);
-    //var promotion = resPanel.data;
-    //var promotionList = document.getElementById('promotion');
-    //var promotionInfo = document.getElementById('promotionInfo');
-    //var onlinePromotionList = document.getElementById('onlinePromotion');
-    //if (promotionList !== null) {
-    //    for (l = 0; l < promotion.length; l++) {
-    //        promotionList.innerHTML += '<li class="mar-btm-ten border" id=\'' + promotion[l].id + '\' onclick="LiSelectPromotion(\'' + promotion[l].id + '\')"><input type="radio" name="promotion" id="promotionId" value=\'' + promotion[l].id + '\'/><label><div class="promotion-content" for="rad1"><img class="full-img" src=\'' + promotion[l].bannerImage + '\' /><div class="deposit-promotion-details"><span class="fa fa-question-circle question-mark" data-toggle="modal" data-target="#promotionDetails" onclick="PromotionDetails(\'' + promotion[l].id + 'D' + '\')" style="margin-right:10px;"></span><p class="no-mar">' + promotion[l].promotionTitle + '</p></div></div></label></li>';
-    //        promotionInfo.innerHTML += '<div id=\'' + promotion[l].id + 'D' + '\' style="display:none;">' + promotion[l].description + '</div>';
-    //        onlinePromotionList.innerHTML += '<li class="mar-btm-ten border" id=\'online-' + promotion[l].id + '\' onclick="LiSelectPromotion(\'' + promotion[l].id + '\',true)"><input type="radio" name="promotion" id="promotionId" value=\'' + promotion[l].id + '\'/><label><div class="promotion-content" for="rad1"><img class="full-img" src=\'' + promotion[l].bannerImage + '\' /><div class="deposit-promotion-details"><span class="fa fa-question-circle question-mark" data-toggle="modal" data-target="#promotionDetails" onclick="PromotionDetails(\'' + promotion[l].id + 'D' + '\')" style="margin-right:10px;"></span><p class="no-mar">' + promotion[l].promotionTitle + '</p></div></div></label></li>';
-    //    }
-    //}
-
-    //var withdrawBankList = document.getElementById('withdraw_bank_list');
-    //var BankList = await GetMethod(apiEndPoints.bank);
-    //bankList = BankList.data;
-    //if (withdrawBankList != null) {
-    //    for (i = 0; i < BankList.data.length; i++) {
-    //        if (UserBankName != BankList.data[i].bankName)
-    //            withdrawBankList.innerHTML += '<li onclick="LISlectFunction(\'' + BankList.data[i].id + '\',\'' + BankList.data[i].bankName + '\')" id="' + BankList.data[i].id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + BankList.data[i].id + '"/><label for="' + BankList.data[i].id + '" title="state"><figure><img class="icon-bank-info" src="' + BankList.data[i].Logo + '" alt="Maybank" /></figure><p>' + BankList.data[i].bankName + '</p></label></li>';
-    //        else {
-    //            withdrawBankList.innerHTML += '<li class="active" onclick="LISlectFunction(\'' + BankList.data[i].id + '\',\'' + BankList.data[i].bankName + '\')" id="' + BankList.data[i].id + '" ><input type="radio" name="rtest" checked="" id="bankListId" values="' + BankList.data[i].id + '"/><label for="' + BankList.data[i].id + '" title="state"><figure><img class="icon-bank-info" src="' + BankList.data[i].Logo + '" alt="Maybank" /></figure><p>' + BankList.data[i].bankName + '</p></label></li>';
-    //            LISlectFunction(BankList.data[i].id, BankList.data[i].bankName);
-    //        }
-    //    }
-    //}
-    //}
+   
 }
 //#endregion
 
@@ -524,6 +467,11 @@ function filter_array(test_array) {
 //#endregion Filter Array
 
 //#region Deposit
+
+function OpenPaymentPage() {
+    window.open("../Mobile/payment");
+}
+
 var depositModel;
 var onlinePayment;
 async function Deposit(online) {
@@ -579,6 +527,12 @@ async function Deposit(online) {
             }
 
             if (model.promotionId != "") {
+
+                if (online) {
+                    localStorage.setItem("IsWindowClose", false)
+                    OpenPaymentPage();
+                }
+
                 await WalletBalance();
                 var promotionModel = {
                     userid: null,
@@ -589,16 +543,28 @@ async function Deposit(online) {
                 if (walletData.data.IsPending == false) {
                     if (walletData.data.InMaintenance == false) {
                         if (walletData.data.CheckPromotionApply === true && walletData.data.TotalPromotionRow > 0) {
+                            if (online)
+                                localStorage.setItem("IsWindowClose", true);
                             if (confirm(ChangeErroMessage("promo_apply_balance_error"))) {
+                                if (online) {
+                                    localStorage.setItem("IsWindowClose", false)
+                                    OpenPaymentPage();
+                                }
                                 model.promotionApplyEligible = true;
                             }
                             else {
+                                if (online) {
+                                    localStorage.setItem("IsWindowClose", false)
+                                    OpenPaymentPage();
+                                }
                                 model.promotionId = "";
                             }
                         }
                         else {
                             if (walletData.data.Staus != null && walletData.data.CheckPromotionRemind == true) {
                                 LoaderHide();
+                                if (online)
+                                    localStorage.setItem("IsWindowClose", true);
                                 return ShowError(ChangeErroMessage("promot_active_error"));
                             }
 
@@ -614,15 +580,23 @@ async function Deposit(online) {
                     }
                     else {
                         LoaderHide();
+                        if (online)
+                            localStorage.setItem("IsWindowClose", true);
                         return ShowError(ChangeErroMessage("game_in_maintenance_new_promotion"));
                     }
                 }
                 else {
                     LoaderHide();
+                    if (online)
+                        localStorage.setItem("IsWindowClose", true);
                     return ShowError(ChangeErroMessage("pending_sports_deposit_error"));
                 }
             }
             else {
+                if (online) {
+                    localStorage.setItem("IsWindowClose", false)
+                    OpenPaymentPage();
+                }   
                 let data = {
                 }
                 var walletData = await PostMethodWithParameter(apiEndPoints.DepositCheckWithoutPromotion, data);
@@ -633,6 +607,8 @@ async function Deposit(online) {
                 else {
                     LoaderHide();
                     depositModel = model;
+                    if (online)
+                        localStorage.setItem("IsWindowClose", true);
                     $("#promotionNavigate").modal();
                     return 0;
                 }
@@ -668,9 +644,13 @@ async function PromotionApplyInsert() {
 async function DepositAfterPromotion() {
     LoaderShow();
     if (onlinePayment) {
+        if (depositModel.promotionId == "") {
+            localStorage.setItem("IsWindowClose", false);
+            OpenPaymentPage();
+        }
         var res = await PostMethod(apiEndPoints.onlinePayment, depositModel);
         if (res !== null && res !== undefined) {
-            window.open("../Web/payment?url=" + res.data.redirect_to)
+            localStorage.setItem("gameURL", res.data.redirect_to)
         }
     }
     else {
