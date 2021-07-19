@@ -547,9 +547,6 @@ async function Withdraw() {
     if (WithdrawBankId === "" || WithdrawBankId === null || WithdrawBankId === undefined)
         return ShowError(ChangeErroMessage("plz_selet_bnk_error"));
 
-    if (WithdrawBankId == undefined)
-        return ShowError(ChangeErroMessage("plz_selet_bnk_error"));
-
     var model = {
         bankId: WithdrawBankId,
         amount: amount,
