@@ -206,8 +206,8 @@
                             </div>
                         </div>
                         <ol class="info-notice-list">
-                            <li>Kindly check with our <a onclick="window.open('https://vue1.livelyhelp.chat/ChatWindow.aspx?siteId=233923&planId=a9010000-0000-0000-0000-008e000391c3', 'newwindow','width=385,height=580');" target="_blank"><b>24/7 LIVECHAT</b></a> if your transaction is pending for more than 10 minutes.</li>
-                            <li>For further inquiries, kindly contact our <a onclick="window.open('https://vue1.livelyhelp.chat/ChatWindow.aspx?siteId=233923&planId=a9010000-0000-0000-0000-008e000391c3', 'newwindow', 'width=385,height=580');" target="_blank"><b>24/7 LIVECHAT</b></a>. Thank you.</li>
+                            <li>Kindly check with our <a onclick="LiveChat();"><b>24/7 LIVECHAT</b></a> if your transaction is pending for more than 10 minutes.</li>
+                            <li>For further inquiries, kindly contact our <a onclick="LiveChat();"><b>24/7 LIVECHAT</b></a>. Thank you.</li>
                         </ol>
                     </div>
                 </div>
@@ -303,8 +303,11 @@
                     <p class="white-text no-mar">Whatsapp</p>
                 </a>
             </li>
-            <li class="live-chat">
-                <a class="live-chat-icon"><p class="white-text no-mar" data-translate="Live_chat">Live Chat</p></a>
+            <li>
+                <a href="#" onclick="LiveChat()">
+                    <figure><img src="~/images/mobile/livechat.png" alt="LiveChat" /></figure>
+                    <p class="white-text no-mar" data-translate="Live_chat">Live Chat</p>
+                </a>
             </li>
         </ul>
     </div>
@@ -324,12 +327,6 @@
     });
 </script>
 
-<!--Begin Comm100 Live Chat Code-->
-<div></div>
-<script type="text/javascript">
-    var Comm100API = Comm100API || {}; (function (t) { function e(e) { var a = document.createElement("script"), c = document.getElementsByTagName("script")[0]; a.type = "text/javascript", a.async = !0, a.src = e + t.site_id, c.parentNode.insertBefore(a, c) } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://vue.livelyhelp.chat/livechat.ashx?siteId="), setTimeout(function () { t.loaded || e("https://vue1.livelyhelp.chat/livechat.ashx?siteId=") }, 0) })(Comm100API || {})
-</script>
-<!--End Comm100 Live Chat Code-->
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
