@@ -1,0 +1,841 @@
+﻿@page
+@{ Layout = null; }
+
+<div id="afterlogin_mobile">
+    <div class="sidebar">
+        <div class="navbar-collapse" id="myNavbar">
+            <ul class="nav text-center mob-menu">
+                <li><a onclick="loadPageLogin()" href="javascript:void(0);" rel="prefetch"><i class="fa fa-sign-in" aria-hidden="true"></i><p class="lang" key="sidebar_login"></p></a></li>
+                <li><a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
+                <li><a href="~/Web/Home" rel="prefetch"><img src="~/images/mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
+                <li><a onclick="loadPageVIP()" href="javascript:void(0);" rel="prefetch"><img src="~/images/footericon1.png" alt="Profile"><p>VIP</p></a></li>
+                <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
+                <li><a onclick="loadPageAbout()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
+                <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="navbar-header mob-layout">
+                <ul>
+                    <li>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </li>
+                    <li>
+                        <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch" class="navbar-brand"><img class="logo" style="margin-left:-30px;" src="~/images/mobile/webet-main-logo.png" alt="WEBET 333.com"></a>
+                    </li>
+                    <li><div class="dropdown"></div></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="scroll-content">
+            <div class="join-now-section">
+                <div class="hero-banner">
+                    <div class="login-top-slider slider" id="mobilePromotionSlider">
+                    </div>
+                </div>
+                <div class="login-join-btn-row">
+                    <button onclick="loadPageRegister()" rel="prefetch" class="btn btn-success join-btn "><span class="lang" key="signup">Sign Up</span></button>
+                    <button onclick="loadPageLogin()" rel="prefetch" class="btn btn-primary login-btn"><span class="lang" key="login">LOGIN</span></button>
+                </div>
+                <div class="nav-tabs-outer">
+                    <ul class="nav nav-tabs js-tabs game-tab-panel">
+                        <li class="active text-center casino"><a href="#casino-tile" data-toggle="tab"><span class="lang" key="gamecategory_casino">Casino</span></a></li>
+                        <li class="text-center sport"><a href="#sport-tile" data-toggle="tab"><span class="lang" key="gamecategory_sports">Sports</span></a></li>
+                        <li class="text-center slot"><a href="#slot-tile" data-toggle="tab"><span class="lang" key="gamecategory_slots">Slots</span></a></li>
+                        <li class="text-center fishing"><a href="#fishing-tile" data-toggle="tab"><span class="lang" key="gamecategory_fishing">Fishing</span></a></li>
+                    </ul>
+                </div>
+                <div class="white-bg">
+                    <div class="container">
+                        <div class="annunce-section d-flex">
+                            <p class="annunce-title"><img src="~/images/mobile/announcement.png" alt=""></p>
+                            <p class="annunce-text mobile-announcment "><marquee class="announcment-font" behavior="scroll" direction="left" scrollamount="10" id="p_announcement_mobile"></marquee></p>
+                            <div class="clear-fix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="body-content">
+                @* Tab Content *@
+                <div class="tab-area">
+                    <div class="tab-content">
+                        <div id="casino-tile" role="tabpanel" class="tab-pane active fade in">
+                            <ul class="game-series">
+                                <li data-toggle="modal" data-target="#gameLogin" id="YeeBetLive">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/yeebet.png" alt="YeeBet">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="yeebet_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="playtechlive">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/pt.png" alt="playtech">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="playtechlive_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="aglive">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/ag.png" alt="Asia Gaming">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="aglive_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="dglive">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/dg.png" alt="Dream Gaming">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="dg_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="salive">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/sa.png" alt="SA Gaming">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="sa_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="sexylive">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/sexy.png" alt="Sexy">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="sexybaccarat_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="allbetlive">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/allbet.png" alt="allbet">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="allBet_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="wmlive">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/wm.png" alt="WM">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="wm_game"></span></button>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="sport-tile" role="tabpanel" class="tab-pane fade in">
+                            <ul class="game-series">
+                                <li data-toggle="modal" data-target="#gameLogin" id="SBOSports">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/sbo.png" alt="SBO Bet">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="SBO_Game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="m8sports">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/m8.png" alt="M8 Bet">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="m8_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="maxbetsports">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/maxbet.png" alt="maxbet">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="maxbet_game"></span></button>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="slot-tile" role="tabpanel" class="tab-pane fade in">
+                            <ul class="game-series">
+                                <li data-toggle="modal" data-target="#gameLogin" id="kiss918slot">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/918kiss.png" alt="918kiss">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="kiss918slot_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="megaslot">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/mega888.png" alt="Mega888">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="mega888slot_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="pussy88slot">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/pussy888.png" alt="Pussy888">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="pussy888slot_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="playtechslot">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/playtech.png" alt="Playtech">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="playtechslot_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="agslot">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/ag-game.png" alt="Asia Gaming">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="agslot_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="jokerslot">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/joker.png" alt="joker">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="jokerslot_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="pragmaticslot">
+                                    <a>
+                                        <figure>
+                                            <img src="~/images/mobile/Pragmatic.png" alt="Pragmatic">
+                                        </figure>
+                                        <button class="game-title"><span class="lang" key="pragmaticslot_game"></span></button>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="fishing-tile" role="tabpanel" class="tab-pane fade in">
+                            <ul class="game-series">
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-quote">
+                    <p class="text-center"><img class="footer-copyright-section-img" src="~/images/mobile/reco-pagcor.png" /></p>
+                    <p class="text-center footer-copyright-section-p">WEBET333 offer wide range of highest quality gaming products to our players. Our Customer Support Team is available to assist you 24 hours a day. All personal information will be treated and stored at the strictest and most confidential way.</p>
+                </div>
+                <div class="footer-quote">
+                    <p class="text-center copyright-text">Copyright WEBET333 @@ 2020. All rights reserved</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-widget">
+            <ul class="list-inline text-center">
+                <li id="homePagebottom">
+                    <a onclick="loadPageHome()" href="javascript:void(0)" rel="prefetch">
+                        <i class="fa fa-home"></i>
+                        <p class="white-text no-mar" data-translate="menu_home">Home</p>
+                    </a>
+                </li>
+                <li id="promotionPagebottom">
+                    <a onclick="loadPagePromotions()" href="javascript:void(0)" rel="prefetch">
+                        <i class="fa fa-gift"></i>
+                        <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
+                    </a>
+                </li>
+                <li id="contactusPagebottom">
+                    <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
+                        <i class="fa fa-user"></i>
+                        <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="whatsapp()">
+                        <figure><img src="~/images/mobile/whatsapp.png" alt="Whats App" /></figure>
+                        <p class="white-text no-mar">Whatsapp</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="LiveChat()">
+                        <figure><img src="~/images/mobile/livechat.png" alt="LiveChat" /></figure>
+                        <p class="white-text no-mar" data-translate="Live_chat">Live Chat</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="canvas-overlay"></div>
+</div>
+
+<div>
+    <span style="display:none;" id="urlSportbook"></span>
+    <span style="display:none;" id="AGGame"></span>
+    <span style="display:none;" id="PTGame"></span>
+    <span style="display:none;" id="PTGameSlot"></span>
+    <span style="display:none;" id="918Game"></span>
+    <span style="display:none;" id="JokerGame"></span>
+    <span style="display:none;" id="MaxBetGame"></span>
+</div>
+
+<div id="beforelogin_mobile">
+    <div class="sidebar">
+        <div class="navbar-collapse" id="myNavbar">
+            <ul class="nav text-center mob-menu">
+                <li><a onclick="logoutMain()"><img src="~/images/mobile/logout.png" alt="mn-logout"><p class="lang" key="sidebar_Logout"></p></a></li>
+                <li><a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
+                <li><a onclick="loadPagedownload()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/download.png" alt="mn-download"><p class="lang" key="sidebar_Download"></p></a></li>
+                <li><a href="~/Web/Home" rel="prefetch"><img src="~/images/mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
+                <li><a onclick="loadPageVIP()" href="javascript:void(0);" rel="prefetch"><img src="~/images/footericon1.png" alt="Profile"><p>VIP</p></a></li>
+                <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
+                <li><a onclick="loadPageAbout()" href="javascript:void(0);"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US" rel="prefetch"></p></a></li>
+                <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
+                <li><a onclick="loadPageAccount()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/profile.png" alt="Profile"><p class="lang" key="sidebar_Profile"></p></a></li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="navbar-header mob-layout">
+                <ul>
+                    <li>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </li>
+                    <li>
+                        <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch" class="navbar-brand"><img class="logo" src="~/images/mobile/webet-main-logo.png" alt="WEBET 333.com"></a>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle wallet" type="button" data-toggle="dropdown"><figure><img src="~/images/mobile/wallet.png" alt="f-wallet"></figure></i></button>
+                            <ul class="dropdown-menu wallet-dropdown">
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>Main Wallet</strong></li>
+                                        <li class="fright" id="ddlmainWallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>918Kiss Wallet</strong></li>
+                                        <li class="fright" id="ddl918KissWallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>AG Wallet</strong></li>
+                                        <li class="fright" id="ddlAGWallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>M8 Wallet</strong></li>
+                                        <li class="fright" id="ddlM8Wallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>Joker Wallet</strong></li>
+                                        <li class="fright" id="ddlJokerWallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>Playtech Wallet</strong></li>
+                                        <li class="fright" id="ddlPlaytechWallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>MaxBet Wallet</strong></li>
+                                        <li class="fright" id="ddlMaxBetWallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>Mega888 Wallet</strong></li>
+                                        <li class="fright" id="ddlMega888Wallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>DG Wallet</strong></li>
+                                        <li class="fright" id="ddlDgWallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>Sexy B. Wallet</strong></li>
+                                        <li class="fright" id="ddlSexyWallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>SA Wallet</strong></li>
+                                        <li class="fright" id="ddlSAWallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>Pussy888 Wallet</strong></li>
+                                        <li class="fright" id="ddlPussy888Wallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>AllBet Wallet</strong></li>
+                                        <li class="fright" id="ddlAllbetWallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>WM Wallet</strong></li>
+                                        <li class="fright" id="ddlWMWallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>Pragmatic Wallet</strong></li>
+                                        <li class="fright" id="ddlPragmaticWallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>YeeBet Wallet</strong></li>
+                                        <li class="fright" id="ddlYeeBetWallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>SBO Wallet</strong></li>
+                                        <li class="fright" id="ddlSBOWallet">feching...</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="scroll-content">
+            <div class="join-now-section">
+                <div class="text-center myr-quote">
+                    <h4 class="main-wallet-bar">
+                        <img class="viplevelImage home-vip-image" id="viplevel_icon" />
+                         MYR <span id="menuMainWallet" class="main-wallet-bal-pad"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="fa fa-refresh"></span>
+                    </h4>
+                </div>
+                <ul class="account-icon list-inline text-center">
+                    <li class="mobile-icon deposit_icon"><a onclick="loadPagedeposit()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/menu-images/deposit.png" /><span data-translate="mobile_menu_deposit"></span></a></li>
+                    <li class="mobile-icon transfer_icon"><a onclick="loadPageTransfer()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/menu-images/transfer.png" /><span data-translate="mobile_menu_Transfer"></span></a></li>
+                    <li class="mobile-icon restore_icon" id="retore_li" onclick="RestoreBalance()"><a href="#"><img src="~/images/mobile/menu-images/restore.png" /><span data-translate="mobile_menu_Restore"></span></a></li>
+                    <li class="mobile-icon withdraw_icon"><a onclick="loadPageWithdraw()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/menu-images/withdraw.png" /><span data-translate="mobile_menu_Withdraw"></span></a></li>
+                    <li class="mobile-icon history_icon"><a onclick="loadPageHistory()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/menu-images/history.png" /><span data-translate="mobile_menu_History"></span></a></li>
+                </ul>
+
+                <div class="hero-banner">
+                    <div class="login-top-slider slider" id="mobilePromotionSliderLogin">
+                    </div>
+                </div>
+
+                <div class="nav-tabs-outer">
+                    <ul class="nav nav-pills game-tab-panel">
+                        <li class="active text-center casino"><a data-toggle="pill" href="#home"><span data-translate="gamecategory_casino">Casino</span></a></li>
+                        <li class="text-center sport"><a data-toggle="pill" href="#menu1"><span data-translate="gamecategory_sports">Sports</span></a></li>
+                        <li class="text-center slot"><a data-toggle="pill" href="#menu2"><span data-translate="gamecategory_slots">Slots</span></a></li>
+                        <li class="text-center fishing"><a data-toggle="pill" href="#menu3"><span data-translate="gamecategory_fishing">Fishing</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="white-bg"></div>
+                <div class="container">
+                    <div class="annunce-section d-flex">
+                        <p class="annunce-title"><img src="~/images/mobile/announcement.png" alt=""></p>
+                        <p class="annunce-text mobile-announcment"><marquee class="announcment-font" behavior="scroll" direction="left" scrollamount="10" id="p_announcement_mobile_one"></marquee></p>
+                        <div class="clear-fix"></div>
+                        @*<p class="white-text mar-top-ten text-center">Welcome <span id="lbl_usernameHeader"></span></p>*@
+                    </div>
+                </div>
+            </div>
+            <div class="body-content">
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <ul class="game-series">
+                            <li onclick="logingGame('YeeBet')" id="YeeBetLiveLogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/yeebet.png" alt="YeeBet">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="yeebet_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="PlaytechIdentifiy(false)" id="playtechlivelogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/pt.png" alt="playtech">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="playtechlive_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="AG(1)" id="aglivelogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/ag.png" alt="Asia Gaming">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="aglive_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="logingGame('DG')" id="dglivelogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/dg.png" alt="Dream Gaming">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="dg_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="logingGame('SA')" id="salivelogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/sa.png" alt="SA Gaming">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="sa_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="logingGame('SexyBaccarat')" id="sexylivelogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/sexy.png" alt="Sexy">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="sexybaccarat_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="logingGame('AllBet')" id="allbetlivelogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/allbet.png" alt="allbet">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="allBet_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="logingGame('WM')" id="wmlivelogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/wm.png" alt="WM">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="wm_game"></span></button>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <ul class="game-series">
+                            <li onclick="logingGame('SBO')" id="SBOSportsLogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/sbo.png" alt="SBO Bet">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="SBO_Game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="logingGame('M8')" id="m8sportslogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/m8.png" alt="M8 Bet">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="m8_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="logingGame('MaxBet')" id="maxbetsportslogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/maxbet.png" alt="maxbet">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="maxbet_game"></span></button>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <ul class="game-series">
+                            <li onclick="logingGame('918kiss')" id="kiss918slotlogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/918kiss.png" alt="918kiss">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="kiss918slot_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="logingGame('Mega888')" id="megaslotlogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/mega888.png" alt="Mega888">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="mega888slot_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="logingGame('Pussy888')" id="pussy88slotlogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/pussy888.png" alt="Pussy888">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="pussy888slot_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="PlaytechIdentifiy(true)" id="playtechslotlogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/playtech.png" alt="Playtech">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="playtechslot_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="AG(8)" id="agslotlogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/ag-game.png" alt="Asia Gaming">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="agslot_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="logingGame('Joker')" id="jokerslotlogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/joker.png" alt="joker">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="jokerslot_game"></span></button>
+                                </a>
+                            </li>
+
+                            <li onclick="logingGame('Pragmatic')" id="pragmaticslotlogin">
+                                <a>
+                                    <figure>
+                                        <img src="~/images/mobile/Pragmatic.png" alt="Pragmatic">
+                                    </figure>
+                                    <button class="game-title"><span class="lang" key="pragmaticslot_game"></span></button>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="menu3" class="tab-pane fade">
+                        <ul class="game-series">
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-quote">
+                    <p class="text-center"><img class="footer-copyright-section-img" src="~/images/mobile/reco-pagcor.png" /></p>
+                    <p class="text-center footer-copyright-section-p">WEBET333 offer wide range of highest quality gaming products to our players. Our Customer Support Team is available to assist you 24 hours a day. All personal information will be treated and stored at the strictest and most confidential way.</p>
+                </div>
+                <div class="footer-quote">
+                    <p class="text-center copyright-text">Copyright WEBET333 @@ 2020. All rights reserved</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-widget">
+            <ul class="list-inline text-center">
+                <li id="homeLoginPagebottom">
+                    <a href="javascript:void(0)" rel="prefetch">
+                        <i class="fa fa-home"></i>
+                        <p class="white-text no-mar" data-translate="menu_home">Home</p>
+                    </a>
+                </li>
+                <li id="promotionPagebottom">
+                    <a onclick="loadPagePromotions()" href="javascript:void(0)" rel="prefetch">
+                        <i class="fa fa-gift"></i>
+                        <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
+                    </a>
+                </li>
+                <li id="contactusPagebottom">
+                    <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
+                        <i class="fa fa-user"></i>
+                        <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="whatsapp()">
+                        <figure><img src="~/images/mobile/whatsapp.png" alt="Whats App" /></figure>
+                        <p class="white-text no-mar">Whatsapp</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="LiveChat()">
+                        <figure><img src="~/images/mobile/livechat.png" alt="LiveChat" /></figure>
+                        <p class="white-text no-mar" data-translate="Live_chat">Live Chat</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="canvas-overlay"></div>
+</div>
+
+<div class="form-login modal fade" id="gameLogin" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span class="lang" key="alert"></span></h4>
+            </div>
+            <div class="modal-body">
+                <p class="lang" key="noLogin"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" id="laguage">
+    <div id="language" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text-center lang-modal">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <p>Select Language.</p>
+                    <ul class="list-inline pad-top-ten">
+                        <li><button id="englishbtn" class="submit" type="button" data-dismiss="modal" onclick="language('en-US')">English</button></li>
+                        <li><button id="malaybtn" class="submit" type="button" data-dismiss="modal" onclick="language('ms-MY')">Malay</button></li>
+                        <li><button id="chinesebtn" class="submit" type="button" data-dismiss="modal" onclick="language('zh-Hans')">Chinese</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
+            $("#chatting").toggle();
+        });
+        $(".contact-user").mouseover(function () {
+            $("#chatting").toggle();
+        });
+
+    });
+</script>
+
+<!-- Slider Section End -->
+<!-- Modal For Video -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".open-modal").click();
+    });
+    jQuery(".scroll-down-visible").hide();
+    jQuery("#more-arrow").click(function () {
+        jQuery(".scroll-down-visible").toggleClass("show");
+        jQuery("#more-arrow").toggleClass("rotate");
+    });
+</script>
+
+<!-- //Modal For Video -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        let timerId = setInterval(() => {
+            $(".deposit_icon").trigger("hover");
+            $(".transfer_icon").trigger("hover");
+            $(".restore_icon").trigger("hover");
+            $(".withdraw_icon").trigger("hover");
+            $(".history_icon").trigger("hover");
+            $(".history_icon").trigger("hover");
+        }, 100);
+        setTimeout(() => { clearInterval(timerId); }, 30000);
+
+        $(".navbar-toggle,.canvas-overlay").click(function () {
+            if (!$("html").hasClass('intro')) {
+                $("html").addClass("intro");
+            }
+            else {
+                $("html").removeClass("intro");
+            }
+        });
+
+        $(".canvas-overlay").click(function () {
+            if ($(".navbar-collapse").hasClass('in')) {
+                $(".navbar-collapse").removeClass("in");
+            }
+        });
+
+    });
+</script>
+
+<!-- Slider Section End -->
+
+<script>
+    $(window).scroll(function () {
+        var scroll = $(window).scrollTop();
+        if (scroll >= 1) {
+            $("header").addClass("sticky-header");
+        }
+        else {
+            $("header").removeClass("sticky-header");
+        }
+    });
+
+    setTimeout(function () {
+        $('#homePagebottom').addClass("active-link");
+        $('#homeLoginPagebottom').addClass("active-link");
+
+    }, 200);
+</script>
+
+<script>
+    function language(value) {
+        SetLocalStorage('language', value);
+        get();
+    }
+
+    function get() {
+        (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
+
+        document.getElementById("englishbtn").style.background = "";
+        document.getElementById("malaybtn").style.background = "";
+        document.getElementById("chinesebtn").style.background = "";
+
+        if (GetLocalStorage('language') == "en-US")
+            document.getElementById("englishbtn").style.background = "orange";
+
+        if (GetLocalStorage('language') == "ms-MY")
+            document.getElementById("malaybtn").style.background = "orange";
+
+        if (GetLocalStorage('language') == "zh-Hans")
+            document.getElementById("chinesebtn").style.background = "orange";
+
+        $.ajax({
+            url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
+            dataType: 'json',
+            async: false,
+            success: function (lang) {
+                $('.lang').each(function (index, element) {
+                    if (localStorage.getItem("language") === "ms-MY") {
+                        $('body').addClass('malay-font');
+                    }
+                    $(this).text(lang[$(this).attr('key')]);
+                });
+                $("[data-translate]").each(function () {
+                    if ($(this).is("input")) {
+                        $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    } else {
+                        $(this).text(lang[$(this).data("translate")]);
+                    }
+                });
+            }
+        });
+        announcementMobile();
+    }
+
+    setTimeout(() => {
+        get();
+    }, 200);
+</script>

@@ -112,6 +112,8 @@
 
         public class User
         {
+            public const string GetUsersRewardList = "[dbo].[Users_Reward_Select]";
+
             public const string GetUsersByRole = "[dbo].[Users_Select_By_Role]";
 
             public const string GetUsersWinloseReport = "[dbo].[Users_Winlose_Report]";
@@ -159,6 +161,8 @@
 
         public class Payments
         {
+            public const string UsersDepositWithdrawSelect = "[dbo].[Users_Deposit_Withdraw_Select]";
+
             public const string Transaction = "[dbo].[UsersTransaction_Select]";
 
             public const string WalletTypes = "[dbo].[UsersDeposit_Select_Bank_Deposit_Wallet]";
@@ -260,6 +264,8 @@
 
             public const string SelectDailyPromotion = "[dbo].[UsersPromotion_Select_daily]";
 
+            public const string SelectWebPromotion = "[dbo].[Promotion_Select_for_Web]";
+
             public const string PromotionApplyCheck = "[dbo].[Promotion_Apply_Check]";
 
             public const string PromotionApplyList = "[dbo].[Promotion_Apply_Select]";
@@ -320,6 +326,14 @@
 
         public class Game
         {
+            public const string SlotsGameSelect = "[dbo].[Slots_Game_Select]";
+
+            public const string HotSlotsGameSelect = "[dbo].[Slots_Hot_Game_Select]";
+
+            public const string SlotsGameInsert = "[dbo].[Slots_Game_Insert]";
+
+            public const string BettingSummerySelect = "[dbo].[BettingSummery_Select]";
+
             public const string RebateMainWalletDepositWithdraw = "[dbo].[Rebate_Main_Wallet_Deposit_Withdraw]";
 
             public const string GetAllGameUsers = "[dbo].[gameUser_Select]";

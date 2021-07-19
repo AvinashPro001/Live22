@@ -689,7 +689,6 @@ async function DepositAfterPromotion() {
 
 //#region Withdrawal
 async function Withdrawal() {
-    debugger
     if ($('#txt_withdrawalAmount').val() <= Number(WithdrawLimit) && $('#txt_withdrawalAmount').val() >= 10) {
         LoaderShow();
         // await regisrationGame();

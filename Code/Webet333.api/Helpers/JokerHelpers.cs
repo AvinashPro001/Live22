@@ -58,6 +58,25 @@ namespace Webet333.api.Helpers
 
         #endregion Call Joker Register API
 
+        #region Call Joker Game List API
+
+        internal static async Task<JokerGameListResponse> GameList()
+        {
+            DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
+            var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
+            var perameter = $"Method={GameConst.Joker.ListGames}&Timestamp={temp}";
+            var stringContent = new StringContent(perameter, Encoding.UTF8, "application/x-www-form-urlencoded");
+
+            var jokerURL = $"{GameConst.Joker.jokerBaseUrl}?" +
+                           $"AppID={GameConst.Joker.AppID}&" +
+                           $"Signature={GameHelpers.GenerateHas(perameter)}";
+            dynamic apiResult = JsonConvert.DeserializeObject<JokerGameListResponse>(await GameHelpers.CallThirdPartyApi(jokerURL, stringContent));
+
+            return apiResult;
+        }
+
+        #endregion Call Joker Register API
+
         #region Register Joker Game in DB
 
         internal async Task<dynamic> GameJokerRegister(GameJokerRegisterRequest request)

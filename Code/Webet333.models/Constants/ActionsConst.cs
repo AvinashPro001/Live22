@@ -105,6 +105,8 @@
 
         public class Payments
         {
+            public const string WithdrawDepositRetrive = "payments/withdraw_deposit_select";
+
             public const string Transaction = "payments/transactions";
 
             public const string SimilarnameList = "payments/withdraw/similarname/list";
@@ -167,6 +169,8 @@
 
         public class Users
         {
+            public const string RewardList = "customer/reward/list";
+
             public const string Retrieve = "customer/list";
 
             public const string BankRegister = "customer/bank/register";
@@ -226,6 +230,8 @@
 
             public const string SelectDaily = "promotions/daily/list";
 
+            public const string WebRetrive = "promotions/web/retrieve";
+
             public const string AdminRetrive = "promotions/admin/retrive";
 
             public const string UpdateImage = "promotions/image/update";
@@ -233,6 +239,8 @@
             public const string PromotionApplyCheck = "promotions/promotionapply/check";
 
             public const string PromotionApplyList = "promotions/promotionapply/select";
+
+            public const string PromotionApplySelect= "promotions/promotionapply/list";
 
             public const string PromotionReport = "promotions/report";
 
@@ -293,6 +301,14 @@
 
         public class Game
         {
+            public const string SlotsGameSelect = "Game/slotsgame/list";
+
+            public const string HotSlotsGameSelect = "Game/hotslotsgame/list";
+
+            public const string GameListUpload = "Game/list/upload";
+
+            public const string BettingSummery = "Game/bettingsummery";
+
             public const string M8GameGetLimit = "Game/M8/GetDefaultLimit";
 
             public const string M8SetUsersBettingLimit = "Game/M8/SetUsersBettingLimit";
@@ -492,6 +508,8 @@
 
         public class GameBalance
         {
+            public const string MainBalance = "gamebalance/main";
+
             public const string Kiss918Balance = "gamebalance/918kiss";
 
             public const string AgBalance = "gamebalance/ag";
@@ -552,6 +570,8 @@
 
             public const string Login = "allbet/login";
 
+            public const string Modified = "allbet/modified";
+
             public const string ChangePassword = "allbet/changepassword";
         }
 
@@ -573,6 +593,8 @@
             public const string BrokenDetails = "joker/broken/details";
 
             public const string Register = "joker/register";
+
+            public const string GameList = "joker/game/list";
         }
 
         public class Kiss918

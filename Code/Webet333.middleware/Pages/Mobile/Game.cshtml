@@ -1,0 +1,59 @@
+﻿@page
+@{
+    ViewData["Title"] = "Game";
+    Layout = "";
+}
+<title>Webet333 - @ViewData["Title"] </title>
+<script src="~/js2/jquery.min.js"></script>
+<script src="~/js2/constants/apiConsts.js"></script>
+<script src="~/js2/helpers/storageHelpers.js"></script>
+<script src="~/js2/helpers/toastrHelpers.js"></script>
+<script src="~/js2/helpers/apiHelpers.js"></script>
+<script src="~/js2/constants/M8Consts.js"></script>
+<script src="~/js2/constants/AGConsts.js"></script>
+<script src="~/js2/helpers/crypto-js.js"></script>
+<script src="~/js2/constants/SecurityConsts.js"></script>
+<script src="~/js2/mobile/m_gamelogin.js"></script>
+<script src="https://login.tothinkit.com/jswrapper/integration.js.php?casino=winforfun88"></script>
+<style>
+    .loadingImage {
+        text-align: center;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: center no-repeat #0f203a;
+        opacity: .9;
+        background-image: url(../images/loading.gif);
+        background-size: 90px 100px;
+    }
+</style>
+<script>
+    //#region LoaderShow
+    function LoaderShow() {
+        $(".loadingImage").show();
+    }
+    function LoaderHide() {
+        $(".loadingImage").hide();
+    }
+    //#endregion
+    $(document).ready(function () {
+        LoaderShow();
+        var url_string = window.location;
+        var url = new URL(url_string);
+        var name = url.searchParams.get("gamename");
+        var code = url.searchParams.get("gamecode");
+        if (code != null && name=='Pragmatic')
+            return openPragmaticGame(code)
+        if (code != null && name == 'Playtech')
+            return openPlaytechGame(code)
+        GameLoginMobile(name);
+    });
+</script>
+<html>
+<body>
+    <!--<div class="loadingImage"></div>-->
+</body>
+</html>

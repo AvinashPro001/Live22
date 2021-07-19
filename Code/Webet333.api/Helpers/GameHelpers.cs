@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
@@ -18,6 +21,7 @@ using Webet333.models.Mapping.Game;
 using Webet333.models.Request;
 using Webet333.models.Request.Game;
 using Webet333.models.Request.Game.M8;
+using Webet333.models.Request.Payments;
 using Webet333.models.Response;
 using Webet333.models.Response.Account;
 using Webet333.models.Response.Game;
@@ -712,11 +716,11 @@ namespace Webet333.api.Helpers
 
         #region User Rebate History
 
-        internal async Task<List<UserRebateHistoryResponse>> getUserRebateHistory(GlobalListRequest request)
+        internal async Task<List<UserRebateHistoryResponse>> getUserRebateHistory(GlobalGetWithPaginationRequest request)
         {
             using (var GetRepository = new DapperRepository<UserRebateHistoryResponse>(Connection))
             {
-                var users = await GetRepository.GetDataAsync(StoredProcConsts.Game.UsersRebateHistory, new { request.UserId, request.FromDate, request.ToDate });
+                var users = await GetRepository.GetDataAsync(StoredProcConsts.Game.UsersRebateHistory, new { request.UserId, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
                 return users.ToList();
             }
         }
@@ -1612,6 +1616,139 @@ namespace Webet333.api.Helpers
         }
 
         #endregion KISS918 game Password Status Update
+
+        public async Task<List<BettingSummerySelectResponse>> BettingSummerySelect(GlobalGetWithPaginationRequest request)
+        {
+            using (var repository = new DapperRepository<BettingSummerySelectResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Game.BettingSummerySelect, new { request.UserId, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                return result.ToList();
+            }
+        }
+
+
+        public static string ReadExcelasJSON(string path)
+        {
+            try
+            {
+                DataTable dtTable = new DataTable();
+                //Lets open the existing excel file and read through its content . Open the excel using openxml sdk
+                using (SpreadsheetDocument doc = SpreadsheetDocument.Open(path, false))
+                {
+                    //create the object for workbook part  
+                    WorkbookPart workbookPart = doc.WorkbookPart;
+                    Sheets thesheetcollection = workbookPart.Workbook.GetFirstChild<Sheets>();
+
+                    //using for each loop to get the sheet from the sheetcollection  
+                    foreach (Sheet thesheet in thesheetcollection.OfType<Sheet>())
+                    {
+                        //statement to get the worksheet object by using the sheet id  
+                        Worksheet theWorksheet = ((WorksheetPart)workbookPart.GetPartById(thesheet.Id)).Worksheet;
+
+                        SheetData thesheetdata = theWorksheet.GetFirstChild<SheetData>();
+
+
+
+                        for (int rCnt = 0; rCnt < thesheetdata.ChildElements.Count(); rCnt++)
+                        {
+                            List<string> rowList = new List<string>();
+                            for (int rCnt1 = 0; rCnt1
+                                < thesheetdata.ElementAt(rCnt).ChildElements.Count(); rCnt1++)
+                            {
+
+                                Cell thecurrentcell = (Cell)thesheetdata.ElementAt(rCnt).ChildElements.ElementAt(rCnt1);
+                                //statement to take the integer value  
+                                string currentcellvalue = string.Empty;
+                                if (thecurrentcell.DataType != null)
+                                {
+                                    if (thecurrentcell.DataType == CellValues.SharedString)
+                                    {
+                                        int id;
+                                        if (Int32.TryParse(thecurrentcell.InnerText, out id))
+                                        {
+                                            SharedStringItem item = workbookPart.SharedStringTablePart.SharedStringTable.Elements<SharedStringItem>().ElementAt(id);
+                                            if (item.Text != null)
+                                            {
+                                                //first row will provide the column name.
+                                                if (rCnt == 0)
+                                                {
+                                                    dtTable.Columns.Add(item.Text.Text);
+                                                }
+                                                else
+                                                {
+                                                    rowList.Add(item.Text.Text);
+                                                }
+                                            }
+                                            else if (item.InnerText != null)
+                                            {
+                                                currentcellvalue = item.InnerText;
+                                            }
+                                            else if (item.InnerXml != null)
+                                            {
+                                                currentcellvalue = item.InnerXml;
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (rCnt != 0)//reserved for column values
+                                    {
+                                        rowList.Add(thecurrentcell.InnerText);
+                                    }
+                                }
+                            }
+                            if (rCnt != 0)//reserved for column values
+                                dtTable.Rows.Add(rowList.ToArray());
+
+                        }
+
+                    }
+
+                    return JsonConvert.SerializeObject(dtTable);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
+
+        internal async Task GameListInsert(List<GameListUploadResponse> request, string WalletId, string ImageBase)
+        {
+            if (request != null)
+            {
+                for (int i = 0; i <= request.Count(); i += 999)
+                {
+                    var response = JsonConvert.SerializeObject(request.OrderBy(x => x.GameCode).Skip(i).Take(999).ToList());
+                    using (var repository = new DapperRepository<dynamic>(Connection))
+                    {
+                        var res = await repository.AddOrUpdateAsync(StoredProcConsts.Game.SlotsGameInsert, new { jsonString = response, WalletId, ImageBase });
+                    }
+                }
+            }
+        }
+
+
+        internal async Task<List<GameListSelectResponse>> GameListSelect(GameListSelectRequest request)
+        {
+            using (var GetRepository = new DapperRepository<GameListSelectResponse>(Connection))
+            {
+                var list = await GetRepository.GetDataAsync(StoredProcConsts.Game.SlotsGameSelect, new { request.WalletName, request.Name, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                return list.ToList();
+            }
+        }
+
+        internal async Task<List<HotGameListSelectResponse>> HotGameListSelect(GameListSelectRequest request)
+        {
+            using (var GetRepository = new DapperRepository<HotGameListSelectResponse>(Connection))
+            {
+                var list = await GetRepository.GetDataAsync(StoredProcConsts.Game.HotSlotsGameSelect, new { request.PageNo, request.PageSize });
+                return list.ToList();
+            }
+        }
 
         #region House Keeping
 

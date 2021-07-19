@@ -1,0 +1,274 @@
+/*Dropdown Menu*/
+.yamm .nav,
+.yamm .collapse,
+.yamm .dropup,
+.yamm .dropdown {
+  position: static;
+}
+.yamm .dropdown-menu {
+  left: auto;
+}
+.yamm .yamm-content {
+  text-align: center;
+}
+.yamm .dropdown.yamm-fw .dropdown-menu {
+  left: 0;
+  right: 0;
+}
+
+
+
+
+/* Open state */
+.sb-search.sb-search-open,
+.no-js .sb-search {
+	width: 100%;
+}
+
+.sb-search.sb-search-open .sb-icon-search,
+.no-js .sb-search .sb-icon-search {
+	background: #ffffff;
+	color: #7d7d7d;
+	z-index: 11;
+}
+
+.sb-search.sb-search-open .sb-search-submit,
+.no-js .sb-search .sb-search-submit {
+	z-index: 90;
+}
+
+/*Flag Dropdown*/
+
+
+.ddcommon {position:relative;display:-moz-inline-stack; zoom:1; display:inline-block; *display:inline; cursor:default;}
+.ddcommon ul{padding:0;margin:0;}
+.ddcommon ul li{list-style-type:none;}
+
+.ddcommon .disabled img, .ddcommon .disabled span, .ddcommon.disabledAll{
+opacity: .5; /* standard: ff gt 1.5, opera, safari */
+-ms-filter:"alpha(opacity=50)"; /* ie 8 */
+filter:alpha(opacity=50); /* ie lt 7 */
+-khtml-opacity:.5; /* safari 1.x */
+-moz-opacity:.5; /* ff lt 1.5, netscape */
+color:#999999;
+}
+.ddcommon .clear{clear:both}
+.ddcommon .text{color:#7e7e7e;padding:0; position:absolute; background:#fff; display:block; width:98%; height:98%; left:2px; top:0; border:none;}
+.ddOutOfVision{position:relative; display:-moz-inline-stack; display:inline-block; zoom:1; *display:inline;}
+.ddcommon .divider{width:0; height:100%; position:absolute;}
+.ddcommon .arrow{display:inline-block; position:absolute; top:50%; right:4px;}
+.ddcommon .arrow:hover{background-position:0 100%;}
+.ddcommon .ddTitle{padding:0; position:relative; display:inline-block; width:100%}
+.ddcommon .ddTitle .ddTitleText{display:block; cursor: pointer;}
+.ddcommon .ddTitle .ddTitleText .ddTitleText{padding:0;}
+.ddcommon .ddTitle .description{display:block;}
+.ddcommon .ddTitle .ddTitleText img{position:relative; vertical-align:middle; float:left}
+.ddcommon .ddChild{position:absolute;display:none;width:100%;overflow-y:auto; overflow-x:hidden; zoom:1; cursor: pointer;}
+.ddcommon .ddChild li{clear:both;}
+.ddcommon .ddChild li .description{display:block;}
+.ddcommon .ddChild li img{border:0 none; position:relative;vertical-align:middle;float:left; height: 25px;}
+.ddcommon .ddChild li.optgroup{padding:0;}
+.ddcommon .ddChild li.optgroup .optgroupTitle{padding:0 5px; font-weight:bold; font-style:italic}
+.ddcommon .ddChild li.optgroup ul li{padding:5px 5px 5px 15px}
+.ddcommon .noBorderTop{border-top:none 0  !important; padding:0; margin:0;}
+
+/*************** default theme **********************/
+.dd .arrow:hover{background-position:0 100%;}
+.dd .ddTitle{color:#000;background:#ffffff;}
+.dd .ddTitle .ddTitleText .ddTitleText{padding:0;}
+.dd .ddTitle .description{font-size:12px; color:#666}
+.dd .ddTitle .ddTitleText img{float: left; height: 28px;}
+.dd .ddChild{border:1px solid #c3c3c3; background-color:#fff; left:-1px;}
+.dd .ddChild li{background-color:#fff;}
+.dd .ddChild li .description{color:#666;}
+.dd .ddChild li .ddlabel{color:#333;}
+.dd .ddChild li.hover{background-color:#f2f2f2}
+.dd .ddChild li.optgroup{padding:0;}
+.dd .ddChild li.optgroup .optgroupTitle{padding:0 5px; font-weight:bold; font-style:italic}
+.dd .ddChild li.optgroup ul li{padding:5px 5px 5px 15px}
+.dd .ddChild li.selected{background-color:#d5d5d5; color:#000;}
+#countries_msdd { width: 100% !important    ;}
+.ddlabel { float: left; margin-top: 5px; margin-left: 10px; text-transform: uppercase; width: 30px;}
+
+@media (min-width: 1024px) {
+	
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+	/* #countries_msdd { width: 100px !important;}*/
+}
+@media (max-width: 767px) {
+.yamm .yamm-content { text-align: left;}
+/*#countries_msdd { width: 100px !important;}*/
+}
+
+/* Responsive Full Background Image Using CSS
+ * Tutorial URL: http://sixrevisions.com/css/responsive-background-image/
+*/
+body.full-bg {
+  /* Location of the image */
+  background-image: url(../images/bg-big.jpg);
+  /* Image is centered vertically and horizontally at all times */
+  background-position: center center;
+  /* Image doesn't repeat */
+  background-repeat: no-repeat;
+  /* Makes the image fixed in the viewport so that it doesn't move when 
+     the content height is greater than the image height */
+  background-attachment: fixed;
+  /* This is what makes the background image rescale based on its container's size */
+  background-size: cover;
+  /* Pick a solid background color that will be displayed while the background image is loading */
+  background-color:#ffffff;
+}
+
+/* For mobile devices */
+@media only screen and (max-width: 767px) {
+  body.full-bg {
+    /* The file size of this background image is 93% smaller
+     * to improve page load speed on mobile internet connections */
+    background-image: url(../images/bg-small.jpg);
+  }
+	}
+	
+	
+/*Slider*/
+#full-width-slider {
+  width: 100%;
+  color: #000;
+}
+.coloredBlock {
+  padding: 12px;
+  background: rgba(255,0,0,0.6);
+  color: #FFF;
+   width: 200px;
+   left: 20%;
+   top: 5%;
+}
+.infoBlock {
+  position: absolute;
+  top: 150px;
+  right: 0px;
+  left: auto;
+  max-width: 40%;
+  padding-bottom: 0;
+  background: #FFF;
+  background: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  padding: 20px;
+}
+.homeinfoBlock {
+  position: absolute;
+  bottom: 0px !important;
+  right: 0px;
+  left: auto;
+  max-width: 100%;
+  padding-bottom: 0;
+  background: #FFF;
+  background: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  padding: 20px;
+  width: 100%;
+  height: 118px;
+}
+.royalSliderdesign2 .infoBlock {
+  position: absolute;
+  bottom: -150px;
+  right: 0px;
+  left: auto;
+  max-width: 40%;
+  padding-bottom: 0;
+  background: #FFF;
+  background: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  padding: 20px;
+}
+
+.infoBlock h1,.infoBlock p { color: #ffffff;}
+.infoBlock p { font-size: 12px;}
+.infoBlockLeftBlack {
+  color: #FFF;
+  background: #000;
+  background: rgba(0,0,0,0.75);
+  left: 30px;
+  right: auto;
+}
+
+.infoBlock h4 {
+  font-size: 20px;
+  line-height: 1.2;
+  margin: 0;
+  padding-bottom: 3px;
+}
+.infoBlock p {
+  font-size: 14px;
+  margin: 4px 0 0;
+}
+.infoBlock a {
+  color: #FFF;
+  text-transform: uppercase;
+
+}
+.infoBlock a:hover { text-decoration: underline;}
+.photosBy {
+  position: absolute;
+  line-height: 24px;
+  font-size: 12px;
+  background: #FFF;
+  color: #000;
+  padding: 0px 10px;
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  top: auto;
+  border-radius: 2px;
+  z-index: 25; 
+} 
+.photosBy a {
+  color: #000;
+}
+.fullWidth {
+  max-width: 1400px;
+  margin: 0 auto 24px;
+}
+
+@media screen and (min-width:960px) and (min-height:660px) {
+  .heroSlider .rsOverflow,
+  .royalSlider.heroSlider {
+      /*height: 520px !important;*/
+  }
+}
+
+@media screen and (min-width:960px) and (min-height:1000px) {
+    .heroSlider .rsOverflow,
+    .royalSlider.heroSlider {
+        /*height: 660px !important;*/
+    }
+}
+@media screen and (min-width: 0px) and (max-width: 800px) {
+  .royalSlider.heroSlider,
+  .royalSlider.heroSlider .rsOverflow {
+    /*height: 300px !important;*/
+  }
+  .infoBlock {
+    padding: 5px;
+    height: auto;
+    max-height: 100%;
+    min-width: 80%;
+    left: 5px;
+    top: 5px;
+    right: auto;
+    font-size: 12px;
+  }
+  .infoBlock h1 {
+     font-size: 15px;
+     line-height: 17px;
+	 margin-bottom: 0px;
+  }
+  .infoBlock p {
+     font-size: 12px;
+     line-height: 15px;
+  }
+}
+
+
+.homepage .rsABlock { bottom: 0px !important;}
+.homepage .infoBlock { height: 150px; width: 100% !important;}

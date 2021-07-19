@@ -62,7 +62,14 @@ namespace Webet333.api.Helpers
                 var data = await repository.GetMultiDataAsync(StoredProcConsts.Settings.AdminBankDetailsWithNoteTransactionLimitRetrieve, new { NoteType = NoteTypesContst.Bank, languageId });
                 List<dynamic> bankDetails = data.Read<dynamic>();
                 if (bankDetails != null && bankDetails.Count > 0)
-                    bankDetails.ForEach(bank => bank.bankLogo = (bank.bankLogo != null && !string.IsNullOrEmpty(bank.bankLogo)) ? $"{baseUrl.ImageBase}{baseUrl.BankImage}/{bank.id}{bank.bankLogo}" : "");
+                {
+                    bankDetails.ForEach(bank => {
+                        bank.bankLogo = (bank.bankLogo != null && !string.IsNullOrEmpty(bank.bankLogo)) ? $"{baseUrl.ImageBase}{baseUrl.BankImage}/{bank.id}{bank.bankLogo}" : "";
+                        bank.bankIconLogo=(bank.bankIconLogo != null && !string.IsNullOrEmpty(bank.bankIconLogo)) ? $"{baseUrl.ImageBase}{baseUrl.AdminBankIconImage}/{bank.id}{bank.bankIconLogo}" : "";
+                    }
+                    );
+                }
+
                 List<dynamic> trancations = data.Read<dynamic>();
                 dynamic trancationLimit = from trancation in trancations
                                           group trancation by new { trancation.transactionType } into trancation_group

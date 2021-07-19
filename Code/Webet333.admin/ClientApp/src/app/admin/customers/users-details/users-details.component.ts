@@ -1764,11 +1764,16 @@ export class UsersDetailsComponent implements OnInit {
             userid: this.userid,
             fromDate: fromdate,
             toDate: todate,
+            pageNo: this.pageNumber,
+            pageSize: 20
         }
         this.adminService.add<any>(customer.rebateHistory, data).subscribe(res => {
             this.rebateRows = [];
+            this.offset = res.data.offset;
+            this.totalRowCount = res.data.total;
             let i = 0;
-            res.data.forEach(el => {
+            i = ((this.pageNumber + 1) * 20) - 20;
+            res.data.result.forEach(el => {
                 this.rebateRows.push({
                     No: ++i,
                     GameName: el.gameName,
@@ -3283,5 +3288,16 @@ export class UsersDetailsComponent implements OnInit {
             this.depositlist(fromdate == "" ? null : fromdate, todate == "" ? null : todate);
         }
         else this.depositlist(null, null);
+    }
+
+    setPageRebate(pageInfo) {
+        this.pageNumber = pageInfo.offset;
+        if (this.isFilter) {
+            var fromdate, todate;
+            fromdate = (document.getElementById("d_fromdatetime") as HTMLInputElement).value;
+            todate = (document.getElementById("d_todatetime") as HTMLInputElement).value;
+            this.rebatelist(fromdate == "" ? null : fromdate, todate == "" ? null : todate);
+        }
+        else this.rebatelist(null, null);
     }
 }

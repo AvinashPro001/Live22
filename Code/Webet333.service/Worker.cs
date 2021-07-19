@@ -72,15 +72,28 @@ namespace Webet333.service
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            try
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+                while (!stoppingToken.IsCancellationRequested)
+                {
+                    _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
-                WriteTextToFile("Service recalled at " + DateTime.Now);
+                    WriteTextToFile("Service recalled at " + DateTime.Now);
 
-                await CallRegisterGameAPIs();
+                    await CallRegisterGameAPIs();
 
-                await Task.Delay(1000, stoppingToken);
+                    await Task.Delay(10000, stoppingToken);
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteErrorTextToFile("Error :" + ex.Message);
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                var newobj = new CancellationToken();
+                await ExecuteAsync(newobj);
             }
         }
 
@@ -90,7 +103,7 @@ namespace Webet333.service
 
             if (!Directory.Exists(checkPath)) Directory.CreateDirectory(checkPath);
 
-            string filepath = AppDomain.CurrentDomain.BaseDirectory + "\\LogsFile\\ServiceLog_" + DateTime.Now.Date.ToShortDateString().Replace('/', '_') + ".txt";
+            string filepath = AppDomain.CurrentDomain.BaseDirectory + "\\LogsFile\\ServiceLog_" + DateTime.Now.ToString("dd_MM_yyyy") + ".txt";
 
             if (!File.Exists(filepath))
             {
@@ -115,22 +128,18 @@ namespace Webet333.service
 
             if (!Directory.Exists(checkPath)) Directory.CreateDirectory(checkPath);
 
-            string filepath = AppDomain.CurrentDomain.BaseDirectory + "\\LogsFile\\ServiceErrorLog_" + DateTime.Now.Date.ToShortDateString().Replace('/', '_') + ".txt";
+            string filepath = AppDomain.CurrentDomain.BaseDirectory + "\\LogsFile\\ServiceErrorLog_" + DateTime.Now.ToString("dd_MM_yyyy") + ".txt";
 
             if (!File.Exists(filepath))
             {
                 // Create a file to write to.
-                using (StreamWriter sw = File.CreateText(filepath))
-                {
-                    sw.WriteLine(Message);
-                }
+                using StreamWriter sw = File.CreateText(filepath);
+                sw.WriteLine(Message);
             }
             else
             {
-                using (StreamWriter sw = File.AppendText(filepath))
-                {
-                    sw.WriteLine(Message);
-                }
+                using StreamWriter sw = File.AppendText(filepath);
+                sw.WriteLine(Message);
             }
         }
 
@@ -151,7 +160,7 @@ namespace Webet333.service
             if (Token != null)
             {
                 var userlist = JsonConvert.DeserializeObject<UserListResponse>(await APICallGet(APIConst.baseUrl + APIConst.nonRegisterUsers)).data;
-
+                WriteTextToFile("Service recalled at " + DateTime.Now + " || UserList Count --> " + userlist.Count);
                 //var agList = userlist.Where(x => x.GameName == "AG").ToList();
                 //var jokerList = userlist.Where(x => x.GameName == "JOKER").ToList();
                 //var m8List = userlist.Where(x => x.GameName == "M8").ToList();
@@ -344,6 +353,7 @@ namespace Webet333.service
                 {
                     if (yeeBetList.Count > 0)
                     {
+                        WriteTextToFile("Service recalled at " + DateTime.Now + " Yeebet Game || User Count--> " + yeeBetList.Count);
                         for (int i = 0; i < yeeBetList.Count; i++)
                         {
                             var model = new
@@ -352,6 +362,7 @@ namespace Webet333.service
                             };
 
                             var result = await APICallPost(APIConst.baseUrl + APIConst.registerYeeBet, request: model);
+                            WriteTextToFile("Service recalled at " + DateTime.Now + " Yeebet Game || Game Username-> " + model.Id + " || Response-->" + JsonConvert.SerializeObject(result));
 #if DEBUG
                             Console.WriteLine(result);
 #endif
@@ -370,6 +381,7 @@ namespace Webet333.service
                 {
                     if (SBOList.Count > 0)
                     {
+                        WriteTextToFile("Service recalled at " + DateTime.Now + " SBO Game || User Count--> " + SBOList.Count);
                         for (int i = 0; i < SBOList.Count; i++)
                         {
                             var model = new
@@ -378,6 +390,7 @@ namespace Webet333.service
                             };
 
                             var result = await APICallPost(APIConst.baseUrl + APIConst.RegisterSBO, request: model);
+                            WriteTextToFile("Service recalled at " + DateTime.Now + " SBO Game || Game Username-> " + model.Id + " || Response-->" + JsonConvert.SerializeObject(result));
 #if DEBUG
                             Console.WriteLine(result);
 #endif

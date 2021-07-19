@@ -7,10 +7,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.account = exports.environment = void 0;
 exports.environment = {
     production: false,
-    //apiUrl: 'http://api.webet333.com/api/v1/'
-    //apiUrl: 'http://uatapi.webet333.com/api/v1/'
-    apiUrl: 'http://localhost:8091/api/v1/'
-    //apiUrl: 'http://localhost:5000/api/v1/'
+    apiUrl: 'https://api.wb3api.com/api/v1/',
+    apiUrlWithVersion: 'https://api.wb3api.com/'
 };
 exports.account = {
     login: exports.environment.apiUrl + 'account/login',
@@ -279,10 +277,11 @@ exports.customer = {
     sboGetLeague: exports.environment.apiUrl + 'sbo/getLeague',
     sboSetLeague: exports.environment.apiUrl + 'sbo/set/league',
     getLeagueBetSetting: exports.environment.apiUrl + 'sbo/get/league-bet-setting',
-    sboGetBlankLeague: exports.environment.apiUrl + 'sbo/blank-getLeague'
+    sboGetBlankLeague: exports.environment.apiUrl + 'sbo/blank-getLeague',
+    resendOTP: exports.environment.apiUrl + 'account/send/otp'
 };
 exports.playtech = {
-    playtechUrl: 'http://api.webet333.com/api/Default/playtech',
+    playtechUrl: 'https://api.wb3api.com/api/Default/playtech',
     PlaytechbaseUrl: 'https://kioskpublicapi-am.hotspin88.com/player/',
     Entity_Key: '2f024a8c55f1de8f588f9b540081d2de0b46d9deae4149dc24fbb58ee4adb069ca767bf4eb001dda2a85ffacc722cf869d210fec9e8d2805dd3e5dd2da15ee40',
     PlayerName: 'WEBET333',

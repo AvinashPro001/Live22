@@ -544,7 +544,7 @@ async function M8Login(usernamePrifix) {
 //#region For Playtech game login
 function loadingPlaytechJS() {
     var imported = document.createElement('script');
-    imported.src = 'https://login.winforfun88.com/jswrapper/integration.js.php?casino=winforfun88'
+    imported.src = 'https://login.tothinkit.com/jswrapper/integration.js.php?casino=winforfun88'
     document.head.appendChild(imported);
 }
 
@@ -1056,7 +1056,7 @@ async function GameLoginMobile(gamename) {
                         };
 
                         var res = await PostMethod(apiEndPoints.SBOLogin, model);
-                        if (res.message != null) location.href = res.message;
+                        if (res != null && res.data.error.id == 0) window.location.href = res.data.url;
                     }
                 }
                 else {
@@ -1064,7 +1064,7 @@ async function GameLoginMobile(gamename) {
                         isMobile: true
                     };
                     var res = await PostMethod(apiEndPoints.SBOLogin, model);
-                    if (res.message != null) location.href = res.message;
+                    if (res != null && res.data.error.id == 0) window.location.href = res.data.url;
                 }
                 break;
         }
