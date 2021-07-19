@@ -128,7 +128,7 @@ body                                        { background-color: #ffffff; padding
 .footer-widget ul li.active-link a .white-text { color: #8e5502;}
 .footer-widget ul li:last-child             { display: block; }
 .footer-widget ul li:last-child,
-.live-chat                                  { position: relative; transform: unset; padding-top: 40px; bottom: unset; top: unset; right: unset; }
+.live-chat                                  { position: relative; transform: unset; padding-top: 11px; bottom: unset; top: unset; right: unset; }
 .live-chat:after                            { content:''; transition: 0.5s; width: 22px; height: 28px; position: absolute; top: 12px; left: 50%; 
                                             transform: translateX(-50%); }
 /* Deposite */
@@ -306,7 +306,9 @@ select.main-wallet.jcf-hidden,
 .grey-color{color:gray !important;}
 .green-color{color:green !important;}
 .no-game{width:100%;text-align:center;}
-
+.main-wallet-bal-pad{padding-left:0px !important;}
+.home-vip-image{margin-top:-4px;}
+.main-wallet-bar{line-height:20px;}
 
 
 
@@ -1887,6 +1889,7 @@ p.bonus_content a {
 
     .vip_privilage_sec_credits {
         padding: 20px 0px;
+        padding-bottom: 120px;
     }
 
     .vip_pri_btn,
