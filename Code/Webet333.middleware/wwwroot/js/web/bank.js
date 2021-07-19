@@ -651,12 +651,12 @@ function CreatePagination(Id, TotalPages, CurrentPage) {
                     html += '<a class="active hand-curson" onclick="ClickOnPageNumber(\'' + i + '\')">' + i + '</a>';
                 else
                     html += '<a class="hand-curson" onclick="ClickOnPageNumber(\'' + i + '\')">' + i + '</a>';
-            html += '<a onclick="ClickOnPageNumber(\'' + (CurrentPage + 1) + '\')">&raquo;</a>'
+            html += '<a class="hand-curson" onclick="ClickOnPageNumber(\'' + (CurrentPage + 1) + '\')">&raquo;</a>'
             $('#' + Id).html(html);
         }
         else {
             if (CurrentPage == TotalPages) {
-                var html = '<a>&laquo;</a>';
+                var html = '<a class="hand-curson">&laquo;</a>';
                 $('#' + Id).html(html);
                 for (i = TotalPages - 4; i <= TotalPages; i++)
                     if (i == CurrentPage)
@@ -674,7 +674,7 @@ function CreatePagination(Id, TotalPages, CurrentPage) {
                             html += '<a class="active hand-curson" onclick="ClickOnPageNumber(\'' + i + '\')">' + i + '</a>';
                         else
                             html += '<a class="hand-curson" onclick="ClickOnPageNumber(\'' + i + '\')">' + i + '</a>';
-                    html += '<a onclick="ClickOnPageNumber(\'' + (CurrentPage + 1) + '\')">&raquo;</a>'
+                    html += '<a class="hand-curson" onclick="ClickOnPageNumber(\'' + (CurrentPage + 1) + '\')">&raquo;</a>'
                     $('#' + Id).html(html);
                 }
                 else {
