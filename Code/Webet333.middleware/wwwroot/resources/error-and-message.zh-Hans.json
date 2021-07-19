@@ -16,7 +16,7 @@
   "enter_acc_name_error": "请输入帐户持有人名称",
   "enter_acc_no_error": "请输入帐户",
   "receipt_required_error": "请选择银行",
-  "plz_selet_bnk_error": "请选择日期时间",
+  "plz_selet_bnk_error": "请选择银行",
   "select_date_time_error": "请选择日期时间",
   "refer_no_error": "请输入参考编号",
   "promo_apply_balance_error": "您的余额低于存款余额的5 MYR，您可以申请新的促销活动，并且现有的促销活动将过期",
