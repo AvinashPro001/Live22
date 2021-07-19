@@ -33,7 +33,8 @@
                     <li id="login"><a onclick="loadPageLogin()" href="javascript:void(0);" rel="prefetch"><i class="fa fa-sign-in" aria-hidden="true"></i><p class="lang" key="sidebar_login"></p></a></li>
                     <li><a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
                     <li id="downloadpage"><a href="~/Mobile/download?id=918DownloadTab" rel="prefetch"><img src="~/images/mobile/download.png" alt="mn-download"><p class="lang" key="sidebar_Download"></p></a></li>
-                    <li><a href="~/Home/home" rel="prefetch"><img src="~/images/mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
+                    <li><a href="~/Web/Home" rel="prefetch"><img src="~/images/mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
+                    <li><a onclick="loadPageVIP()" href="javascript:void(0);" rel="prefetch"><img src="~/images/footericon1.png" alt="Profile"><p>VIP</p></a></li>
                     <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
                     <li><a onclick="loadPageAbout()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
                     <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
@@ -308,8 +309,11 @@
                     <p class="white-text no-mar">Whatsapp</p>
                 </a>
             </li>
-            <li class="live-chat">
-                <a class="live-chat-icon"><p class="white-text no-mar" data-translate="Live_chat">Live Chat</p></a>
+            <li>
+                <a href="#" onclick="LiveChat()">
+                    <figure><img src="~/images/mobile/livechat.png" alt="LiveChat" /></figure>
+                    <p class="white-text no-mar" data-translate="Live_chat">Live Chat</p>
+                </a>
             </li>
         </ul>
     </div>
@@ -386,22 +390,6 @@
     });
 </script>
 
-<!--Begin Comm100 Live Chat Code-->
-<div></div>
-<script type="text/javascript">
-    var Comm100API = Comm100API || {}; (function (t) {
-        function e(e) {
-            var a = document.createElement("script"),
-                c = document.getElementsByTagName("script")[0];
-            a.type = "text/javascript",
-                a.async = !0, a.src = e + t.site_id, a.target = "_blank"
-            c.parentNode.insertBefore(a, c)
-        } t.chat_buttons = t.chat_buttons || [], t.chat_buttons.push({ code_plan: 425, div_id: "comm100-button-425" }), t.site_id = 233923, t.main_code_plan = 425, e("https://chatserver.comm100.com/livechat.ashx?siteId="), setTimeout(function () {
-            t.loaded || e("https://hostedmax.comm100.com/chatserver/livechat.ashx?siteId=")
-        }, 5e3)
-    })(Comm100API || {})
-</script>
-<!--End Comm100 Live Chat Code-->
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
