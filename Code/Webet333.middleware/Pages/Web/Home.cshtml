@@ -6,7 +6,7 @@
 
 
 <!-- Main Banner Section and Promotion Slider -->
-<div class="main-banner">
+<div class="banner-inner-slider">
     <div class="container">
         <div class="banner-inner">
             <div class="home-slider text-center">
@@ -17,7 +17,20 @@
             <div class="flag-icon"><img src="images/malaysia-flag.png" alt="logo" /></div>
         </div>
     </div>
+    <div class="top-banner-slider lazy slider">
+        <div>
+            <div class="main-banner" style="background-image: url(images/banner111.png)"></div>
+        </div>
+        <div>
+            <div class="main-banner" style="background-image: url(images/banner111.png)"></div>
+        </div>
+        <div>
+            <div class="main-banner" style="background-image: url(images/banner111.png)"></div>
+        </div>
+    </div>
 </div>
+
+
 <!-- Main Banner Section and Promotion Slider -->
 <!-- Join Now Section -->
 <div class="how_win_main_wrap">
@@ -822,4 +835,17 @@
         if ($('#slider_promotion_div').children().length == 0)
             SetPromotionInMainPage();
     }, 200);
+</script>
+<script>
+    $(document).on('ready', function() {
+      $(".lazy").slick({
+        lazyLoad: 'ondemand', // ondemand progressive anticipated
+        arrows: false,
+        dots: false,
+        autoplay: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true
+      });
+    });
 </script>
