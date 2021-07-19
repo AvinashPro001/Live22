@@ -486,33 +486,51 @@
     });
 
     function SetDetailsInVIPPage() {
-        var VIPlevel = JSON.parse(dec(sessionStorage.getItem("UserVipDetails")));
-        var UserDetails = JSON.parse(dec(sessionStorage.getItem("UserDetails")));
-        document.getElementById("viplevel_icon").src = VIPlevel.data.VIPBanner;
+        if (localStorage.getItem("currentUser") !== null) {
+            var VIPlevel = JSON.parse(dec(sessionStorage.getItem("UserVipDetails")));
+            var UserDetails = JSON.parse(dec(sessionStorage.getItem("UserDetails")));
+            document.getElementById("viplevel_icon").src = VIPlevel.data.VIPBanner;
 
-        document.getElementById("currentStatus").value = VIPlevel.data.Name;
-        $("#currentDeposit").val(UserDetails.data.TotalDepositAmount);
-        $("#currentStatus").attr("disabled", "disabled");
-        $("#currentDeposit").attr("disabled", "disabled");
+            document.getElementById("currentStatus").value = VIPlevel.data.Name;
+            $("#currentDeposit").val(UserDetails.data.TotalDepositAmount);
+            $("#currentStatus").attr("disabled", "disabled");
+            $("#currentDeposit").attr("disabled", "disabled");
 
-        var percent = 0;
-        switch (VIPlevel.data.Name) {
-            case "Normal": percent = 0; break;
-            case "Bronze": percent = 16; break;
-            case "Silver": percent = 32; break;
-            case "Gold": percent = 64; break;
-            case "Platinum": percent = 80; break;
-            case "Diamond": percent = 100; break;
-        }
-        $(".progress-bar").css("width", percent + "%").attr("aria-valuenow", percent);
-        $(".progress-completed").text(percent + "%");
-        $("span").each(function () {
-            if ($(this).hasClass("activestep")) {
-                $(this).removeClass("activestep");
+            var percent = 0;
+            switch (VIPlevel.data.Name) {
+                case "Normal": percent = 0; break;
+                case "Bronze": percent = 16; break;
+                case "Silver": percent = 32; break;
+                case "Gold": percent = 64; break;
+                case "Platinum": percent = 80; break;
+                case "Diamond": percent = 100; break;
             }
-        });
-        $("#" + VIPlevel.data.Name.toLocaleLowerCase() + '-span').addClass("activestep");
+            $(".progress-bar").css("width", percent + "%").attr("aria-valuenow", percent);
+            $(".progress-completed").text(percent + "%");
+            $("span").each(function () {
+                if ($(this).hasClass("activestep")) {
+                    $(this).removeClass("activestep");
+                }
+            });
+            $("#" + VIPlevel.data.Name.toLocaleLowerCase() + '-span').addClass("activestep");
+        }
+        else {
+            $("#viplevel_icon").css("display", "none");
+            $("#currentStatus").val("");
+            $("#currentDeposit").val("");
+            $("#currentStatus").attr("disabled", "disabled");
+            $("#currentDeposit").attr("disabled", "disabled");
 
+            var percent = 0;
+            $(".progress-bar").css("width", percent + "%").attr("aria-valuenow", percent);
+            $(".progress-completed").text(percent + "%");
+            $("span").each(function () {
+                if ($(this).hasClass("activestep")) {
+                    $(this).removeClass("activestep");
+                }
+            });
+            $("#normal-span").addClass("activestep");
+        }
     }
 
 </script>
