@@ -39,7 +39,7 @@
   "user_not_login_error": "User is not Logged In.",
 
 
-  "pending_sports_deposit_error": "Sports Book still have pending bets yet to be unsettledplease wait until all bets has been settled",
+  "pending_sports_deposit_error": "Sports Book still have pending bets yet to be unsettled please wait until all bets has been settled",
   "game_in_maintenance_new_promotion": "You have balance under maintenance game, cannot apply new promotion. please try it later.",
   "Insufficient_balance_wallet": "Insufficient balance in wallet.",
   "file_format_error": "File Format not supported only PDF and Image Allow",
