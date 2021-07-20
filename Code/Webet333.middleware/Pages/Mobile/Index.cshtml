@@ -188,6 +188,10 @@
     </div>
     <script>
         setTimeout(() => {
+
+            setCookie('view-mode', 'mobile', 30);
+            SetDesktopMode();
+
             var url_string = window.location;
             var url = new URL(url_string);
 
@@ -724,6 +728,15 @@
             padding-top: 35px;
         }
     </style>
-
+    <script>
+        function SetDesktopMode() {
+            var viewMode = getCookie("view-mode");
+            if (viewMode == "desktop") {
+                $('meta[name="viewport"]').prop('content', 'width=1024');
+            } else if (viewMode == "mobile") {
+                $('meta[name="viewport"]').prop('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no');
+            }
+        }
+    </script>
 </body>
 </html>
