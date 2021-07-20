@@ -6,12 +6,16 @@ namespace Webet333.models.Request.Settings
     public class HomePageBannerAddRequest : BaseAdminLogRequest
     {
         [Required]
-        [JsonProperty("languageid")]
-        public string LanguageId { get; set; }
+        [JsonProperty("titleEnglish")]
+        public string TitleEnglish { get; set; }
 
         [Required]
-        [JsonProperty("title")]
-        public string Title { get; set; }
+        [JsonProperty("titleMalay")]
+        public string TitleMalay { get; set; }
+
+        [Required]
+        [JsonProperty("titleChinese")]
+        public string TitleChinese { get; set; }
 
         [Required]
         [JsonProperty("sequence")]

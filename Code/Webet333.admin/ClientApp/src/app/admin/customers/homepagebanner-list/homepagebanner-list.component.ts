@@ -27,6 +27,10 @@ export class HomepagebannerListComponent implements OnInit {
     data: any;
     forEach: any;
     confirmed: boolean;
+    pageNumber = 0;
+    pageSize = 10;
+    totalRowCount = 0;
+    offset = 0;
 
     constructor(
         private toasterService: ToasterService,
@@ -67,18 +71,26 @@ export class HomepagebannerListComponent implements OnInit {
     setPageData() {
         this.loadingIndicator = true;
 
-        let data = {};
+        let model = {
+            pageNo: this.pageNumber,
+            pageSize: this.pageSize
+        };
 
-        this.adminService.add<any>(customer.homePageBannerList, data).subscribe(res => {
+        this.adminService.add<any>(customer.homePageBannerList, model).subscribe(res => {
             this.rows = [];
-            let i = 0;
-            this.homepageBannerData = res.data;
-            res.data.forEach(el => {
+
+            //let i = 0;
+            let i = ((this.pageNumber + 1) * this.pageSize) - this.pageSize;
+            this.offset = res.data.offset;
+            this.totalRowCount = res.data.total;
+
+            this.homepageBannerData = res.data.result;
+            res.data.result.forEach(el => {
                 this.rows.push({
                     No: ++i,
                     Title: el.title,
-                    WebBanner: "<img src= '" + el.BannerWeb + "' height=30px width=60px />",
-                    MobileBanner: "<img src= '" + el.BannerMobile + "' height=30px width=60px/>",
+                    WebBanner: "<img src= '" + el.bannerWeb + "' height=30px width=60px />",
+                    MobileBanner: "<img src= '" + el.bannerMobile + "' height=30px width=60px/>",
                     Language: el.languageName,
                     Sequence: el.sequence,
                     id: el.id,

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using Webet333.models.Request.Payments;
 
 namespace Webet333.models.Request.Settings
 {
@@ -14,7 +15,7 @@ namespace Webet333.models.Request.Settings
         public bool isUser { get; set; }
     }
 
-    public class HomePageBannerRetriveByAdminRequest
+    public class HomePageBannerRetriveByAdminRequest : GlobalGetWithPaginationRequest
     {
         [JsonProperty("languageId")]
         public string LanguageId { get; set; }

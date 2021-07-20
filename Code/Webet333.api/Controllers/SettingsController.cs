@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Filters;
@@ -458,7 +459,7 @@ namespace Webet333.api.Controllers
 
                 await _hubContext.Clients.All.SendAsync("HomePageBannerInsertUpdate");
 
-                return OkResponse(result.Id);
+                return OkResponse(result);
             }
         }
 
@@ -468,7 +469,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.HomePageBannerImage)]
-        [Filters.RequestSizeLimit(valueCountLimit: 2)]
+        [Filters.RequestSizeLimit(valueCountLimit: 6)]
         public async Task<IActionResult> HomePageBannerImage(
             [FromBody] HomePageBannerImageRequest request,
             [FromServices] IUploadManager uploadManager,
@@ -479,11 +480,23 @@ namespace Webet333.api.Controllers
 
             await ValidateUser();
 
-            var extensionWeb = "." + request.BannerWeb.Split("base64,")[0].Split("/")[1].Replace(";", "");
-            request.BannerWeb = request.BannerWeb.Split("base64,")[1];
+            var extensionWebEnglish = "." + request.BannerWebEnglish.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerWebEnglish = request.BannerWebEnglish.Split("base64,")[1];
 
-            var extensionMobile = "." + request.BannerMobile.Split("base64,")[0].Split("/")[1].Replace(";", "");
-            request.BannerMobile = request.BannerMobile.Split("base64,")[1];
+            var extensionMobileEnglish = "." + request.BannerMobileEnglish.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerMobileEnglish = request.BannerMobileEnglish.Split("base64,")[1];
+
+            var extensionWebChinese = "." + request.BannerWebChinese.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerWebChinese = request.BannerWebChinese.Split("base64,")[1];
+
+            var extensionMobileChinese = "." + request.BannerMobileChinese.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerMobileChinese = request.BannerMobileChinese.Split("base64,")[1];
+
+            var extensionWebMalay = "." + request.BannerWebMalay.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerWebMalay = request.BannerWebMalay.Split("base64,")[1];
+
+            var extensionMobileMalay = "." + request.BannerMobileMalay.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerMobileMalay = request.BannerMobileMalay.Split("base64,")[1];
 
             request.AdminId = GetUserId(User);
 
@@ -491,25 +504,63 @@ namespace Webet333.api.Controllers
             {
                 Generic_Helpers.GetImageWithExtension(
                     uploadManager,
-                    request.BannerWeb,
+                    request.BannerWebChinese,
                     BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
-                    request.Id.ToString(),
-                    extensionWeb);
+                    request.BannerIdChinese.ToString(),
+                    extensionWebChinese);
                 Generic_Helpers.GetImageWithExtension(
                     uploadManager,
-                    request.BannerMobile,
+                    request.BannerMobileChinese,
                     BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
-                    request.Id.ToString(),
-                    extensionMobile);
+                    request.BannerIdChinese.ToString(),
+                    extensionMobileChinese);
+
+                Generic_Helpers.GetImageWithExtension(
+                    uploadManager,
+                    request.BannerWebEnglish,
+                    BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
+                    request.BannerIdEnglish.ToString(),
+                    extensionWebEnglish);
+                Generic_Helpers.GetImageWithExtension(
+                    uploadManager,
+                    request.BannerMobileEnglish,
+                    BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
+                    request.BannerIdEnglish.ToString(),
+                    extensionMobileEnglish);
+
+                Generic_Helpers.GetImageWithExtension(
+                    uploadManager,
+                    request.BannerWebMalay,
+                    BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
+                    request.BannerIdMalay.ToString(),
+                    extensionWebMalay);
+                Generic_Helpers.GetImageWithExtension(
+                    uploadManager,
+                    request.BannerMobileMalay,
+                    BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
+                    request.BannerIdMalay.ToString(),
+                    extensionMobileMalay);
             }
+
+            HomePageBannerImagePersist temp = new HomePageBannerImagePersist();
+            temp.Id = Guid.Parse(request.Id);
+            temp.AdminId = request.AdminId;
+
+            temp.BannerIdEnglish = Guid.Parse(request.BannerIdEnglish);
+            temp.ExtensionWebEnglish = extensionWebEnglish;
+            temp.ExtensionMobileEnglish = extensionMobileEnglish;
+
+            temp.BannerIdMalay = Guid.Parse(request.BannerIdMalay);
+            temp.ExtensionWebMalay = extensionWebMalay;
+            temp.ExtensionMobileMalay = extensionMobileMalay;
+
+            temp.BannerIdChinese = Guid.Parse(request.BannerIdChinese);
+            temp.ExtensionWebChinese = extensionWebChinese;
+            temp.ExtensionMobileChinese = extensionMobileChinese;
 
             using (var Settings_Helpers = new SettingsHelpers(Connection))
             {
-                await Settings_Helpers.HomePageBannerImageAsync(
-                    Guid.Parse(request.Id),
-                    extensionWeb,
-                    extensionMobile,
-                    adminId: request.AdminId.ToString());
+                await Settings_Helpers.HomePageBannerImageAsync(temp);
             }
 
             return OkResponse();
@@ -536,7 +587,7 @@ namespace Webet333.api.Controllers
 
                 await _hubContext.Clients.All.SendAsync("HomePageBannerInsertUpdate");
 
-                return OkResponse(result.id);
+                return OkResponse(result);
             }
         }
 
@@ -546,7 +597,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.HomePageBannerImageUpdate)]
-        [Filters.RequestSizeLimit(valueCountLimit: 2)]
+        [Filters.RequestSizeLimit(valueCountLimit: 6)]
         public async Task<IActionResult> HomePageBannerImageUpdate(
             [FromBody] HomePageBannerImageUpdateRequest request,
             [FromServices] IUploadManager uploadManager,
@@ -557,53 +608,122 @@ namespace Webet333.api.Controllers
 
             await ValidateUser();
 
-            string extensionWeb = string.Empty, extensionMobile = string.Empty;
+            HomePageBannerImagePersist temp = new HomePageBannerImagePersist();
+            temp.BannerIdChinese = Guid.Parse(request.BannerIdChinese);
+            temp.BannerIdEnglish = Guid.Parse(request.BannerIdEnglish);
+            temp.BannerIdMalay = Guid.Parse(request.BannerIdMalay);
 
             using (var generic_help = new GenericHelpers(Connection))
             {
-                if (!string.IsNullOrWhiteSpace(request.BannerWeb))
+                if (!string.IsNullOrWhiteSpace(request.BannerWebEnglish))
                 {
-                    extensionWeb = "." + request.BannerWeb.Split("base64,")[0].Split("/")[1].Replace(";", "");
-                    request.BannerWeb = request.BannerWeb.Split("base64,")[1];
+                    temp.ExtensionWebEnglish = "." + request.BannerWebEnglish.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerWebEnglish = request.BannerWebEnglish.Split("base64,")[1];
 
                     generic_help.DeleteImage(
                         uploadManager,
-                        request.Id.ToString(),
+                        request.BannerIdEnglish.ToString(),
                         BaseUrlConfigsOptions.Value.HomePageBannerWebleImage);
 
                     generic_help.GetImageWithExtension(
                         uploadManager,
-                        request.BannerWeb,
+                        request.BannerWebEnglish,
                         BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
-                        request.Id.ToString(),
-                        extensionWeb);
+                        request.BannerIdEnglish.ToString(),
+                        temp.ExtensionWebEnglish);
                 }
-
-                if (!string.IsNullOrWhiteSpace(request.BannerMobile))
+                if (!string.IsNullOrWhiteSpace(request.BannerMobileEnglish))
                 {
-                    extensionMobile = "." + request.BannerMobile.Split("base64,")[0].Split("/")[1].Replace(";", "");
-                    request.BannerMobile = request.BannerMobile.Split("base64,")[1];
+                    temp.ExtensionMobileEnglish = "." + request.BannerMobileEnglish.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerMobileEnglish = request.BannerMobileEnglish.Split("base64,")[1];
 
                     generic_help.DeleteImage(
                         uploadManager,
-                        request.Id.ToString(),
+                        request.BannerIdEnglish.ToString(),
                         BaseUrlConfigsOptions.Value.HomePageBannerMobileImage);
 
                     generic_help.GetImageWithExtension(
                         uploadManager,
-                        request.BannerMobile,
+                        request.BannerMobileEnglish,
                         BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
-                        request.Id.ToString(),
-                        extensionMobile);
+                        request.BannerIdEnglish.ToString(),
+                        temp.ExtensionMobileEnglish);
+                }
+
+                if (!string.IsNullOrWhiteSpace(request.BannerWebMalay))
+                {
+                    temp.ExtensionWebMalay = "." + request.BannerWebMalay.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerWebMalay = request.BannerWebMalay.Split("base64,")[1];
+
+                    generic_help.DeleteImage(
+                        uploadManager,
+                        request.BannerIdMalay.ToString(),
+                        BaseUrlConfigsOptions.Value.HomePageBannerWebleImage);
+
+                    generic_help.GetImageWithExtension(
+                        uploadManager,
+                        request.BannerWebMalay,
+                        BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
+                        request.BannerIdMalay.ToString(),
+                        temp.ExtensionWebMalay);
+                }
+                if (!string.IsNullOrWhiteSpace(request.BannerMobileMalay))
+                {
+                    temp.ExtensionMobileMalay = "." + request.BannerMobileMalay.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerMobileMalay = request.BannerMobileMalay.Split("base64,")[1];
+
+                    generic_help.DeleteImage(
+                        uploadManager,
+                        request.BannerIdMalay.ToString(),
+                        BaseUrlConfigsOptions.Value.HomePageBannerMobileImage);
+
+                    generic_help.GetImageWithExtension(
+                        uploadManager,
+                        request.BannerMobileMalay,
+                        BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
+                        request.BannerIdMalay.ToString(),
+                        temp.ExtensionMobileMalay);
+                }
+
+                if (!string.IsNullOrWhiteSpace(request.BannerWebChinese))
+                {
+                    temp.ExtensionWebChinese = "." + request.BannerWebChinese.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerWebChinese = request.BannerWebChinese.Split("base64,")[1];
+
+                    generic_help.DeleteImage(
+                        uploadManager,
+                        request.BannerIdChinese.ToString(),
+                        BaseUrlConfigsOptions.Value.HomePageBannerWebleImage);
+
+                    generic_help.GetImageWithExtension(
+                        uploadManager,
+                        request.BannerWebChinese,
+                        BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
+                        request.BannerIdChinese.ToString(),
+                        temp.ExtensionWebChinese);
+                }
+                if (!string.IsNullOrWhiteSpace(request.BannerMobileChinese))
+                {
+                    temp.ExtensionMobileChinese = "." + request.BannerMobileChinese.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerMobileChinese = request.BannerMobileChinese.Split("base64,")[1];
+
+                    generic_help.DeleteImage(
+                        uploadManager,
+                        request.BannerIdChinese.ToString(),
+                        BaseUrlConfigsOptions.Value.HomePageBannerMobileImage);
+
+                    generic_help.GetImageWithExtension(
+                        uploadManager,
+                        request.BannerMobileChinese,
+                        BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
+                        request.BannerIdChinese.ToString(),
+                        temp.ExtensionMobileChinese);
                 }
             }
 
             using (var Settings_Helpers = new SettingsHelpers(Connection))
             {
-                await Settings_Helpers.HomePageBannerImageAsync(
-                    Guid.Parse(request.Id),
-                    extensionWeb,
-                    extensionMobile);
+                await Settings_Helpers.HomePageBannerImageAsync(temp);
             }
 
             return OkResponse();
@@ -698,19 +818,64 @@ namespace Webet333.api.Controllers
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             request.isUser = false;
+            if (request.PageNo == null) request.PageSize = 0;
+            if (request.PageSize == null || request.PageSize == 0) request.PageSize = 10;
 
             using (var Settings_Helpers = new SettingsHelpers(Connection))
             {
                 var result = await Settings_Helpers.HomePageBannerSelectByAdminAsync(
                     BaseUrlConfigsOptions.Value,
-                     request.LanguageId,
+                    request.LanguageId,
                     request);
+
+                if (result.Any())
+                {
+                    var total = result.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? result.Count : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = result,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 10,
+                        offset = result.FirstOrDefault().OffSet,
+                    });
+                }
+
+                return OkResponse(new
+                {
+                    result = result,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
+            }
+        }
+
+        #endregion HomePage Banner Select By Admin
+
+        #region HomePage Banner Select By Admin By Id
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerSelectById)]
+        public async Task<IActionResult> HomePageBannerSelectById(
+            [FromBody] GetByIdRequestWithRequired request,
+            [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                var result = await Settings_Helpers.HomePageBannerSelectByIdAsync(request);
 
                 return OkResponse(result);
             }
         }
 
-        #endregion HomePage Banner Select By Admin
+        #endregion HomePage Banner Select By Admin By Id
 
         #endregion HomePage Banner (Add, Update, Update Status, Delete, Retrieve List)
     }

@@ -307,20 +307,24 @@ namespace Webet333.api.Helpers
 
         #region Insert
 
-        internal async Task<dynamic> HomePageBannerInsertAsync(HomePageBannerAddRequest request)
+        internal async Task<HomePageBannerAddResponse> HomePageBannerInsertAsync(HomePageBannerAddRequest request)
         {
-            using (var repository = new DapperRepository<dynamic>(Connection))
+            using (var repository = new DapperRepository<HomePageBannerAddResponse>(Connection))
             {
-                return await repository.FindAsync(
+                var result = await repository.FindAsync(
                     StoredProcConsts.Settings.HomePageBannersPersist,
                     new
                     {
-                        LanguageId = request.LanguageId,
-                        Title = request.Title,
+                        TitleEnglish = request.TitleEnglish,
+                        TitleChinese = request.TitleChinese,
+                        TitleMalay = request.TitleMalay,
+
                         Sequence = request.Sequence,
 
                         AdminId = request.AdminId
                     });
+
+                return result;
             }
         }
 
@@ -337,8 +341,11 @@ namespace Webet333.api.Helpers
                     new
                     {
                         Id = request.Id,
-                        LanguageId = request.LanguageId,
-                        Title = request.Title,
+
+                        TitleEnglish = request.TitleEnglish,
+                        TitleChinese = request.TitleChinese,
+                        TitleMalay = request.TitleMalay,
+
                         Sequence = request.Sequence,
 
                         AdminId = request.AdminId
@@ -350,19 +357,11 @@ namespace Webet333.api.Helpers
 
         #region Insert / Update Image
 
-        internal async Task HomePageBannerImageAsync(Guid Id, string ExtensionWeb, string ExtensionMobile, string adminId = null)
+        internal async Task HomePageBannerImageAsync(HomePageBannerImagePersist request)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                await repository.AddOrUpdateAsync(
-                    StoredProcConsts.Settings.HomePageBannersUpdateImage,
-                    new
-                    {
-                        Id,
-                        ExtensionWeb,
-                        ExtensionMobile,
-                        adminId
-                    });
+                await repository.AddOrUpdateAsync(StoredProcConsts.Settings.HomePageBannersUpdateImage, request);
             }
         }
 
@@ -407,12 +406,12 @@ namespace Webet333.api.Helpers
 
         #region Select By Users
 
-        internal async Task<dynamic> HomePageBannerSelectUserAsync(
+        internal async Task<List<HomePageBannerRetriveByUserResponse>> HomePageBannerSelectUserAsync(
             BaseUrlConfigs baseUrl,
             string languageId,
             HomePageBannerRetriveRequest request)
         {
-            using (var repository = new DapperRepository<dynamic>(Connection))
+            using (var repository = new DapperRepository<HomePageBannerRetriveByUserResponse>(Connection))
             {
                 var result = await repository.GetDataAsync(
                     StoredProcConsts.Settings.HomePageBannersSelect,
@@ -422,20 +421,16 @@ namespace Webet333.api.Helpers
                         request.isUser
                     });
 
-                List<dynamic> homePageBanners = result.ToList();
-
-                if (homePageBanners.Any())
+                if (result.Any())
                 {
-                    homePageBanners.ForEach(
-                        banner =>
-                        {
-                            banner.BannerWeb = $"{baseUrl.ImageBase}{baseUrl.HomePageBannerWebleImage}/{banner.Id}{banner.BannerWeb}";
-                            banner.BannerMobile = $"{baseUrl.ImageBase}{baseUrl.HomePageBannerMobileImage}/{banner.Id}{banner.BannerMobile}";
-                        }
-                    );
+                    foreach (var data in result)
+                    {
+                        data.BannerWeb = $"{baseUrl.ImageBase}{baseUrl.HomePageBannerWebleImage}/{data.Id}{data.BannerWeb}";
+                        data.BannerMobile = $"{baseUrl.ImageBase}{baseUrl.HomePageBannerMobileImage}/{data.Id}{data.BannerMobile}";
+                    }
                 }
 
-                return homePageBanners;
+                return result.ToList();
             }
         }
 
@@ -443,39 +438,47 @@ namespace Webet333.api.Helpers
 
         #region Select By Admin
 
-        internal async Task<dynamic> HomePageBannerSelectByAdminAsync(
+        internal async Task<List<HomePageBannerRetriveByAdminResponse>> HomePageBannerSelectByAdminAsync(
             BaseUrlConfigs baseUrl,
             string languageId,
             HomePageBannerRetriveByAdminRequest request)
         {
-            using (var repository = new DapperRepository<dynamic>(Connection))
+            using (var repository = new DapperRepository<HomePageBannerRetriveByAdminResponse>(Connection))
             {
                 var result = await repository.GetDataAsync(
                     StoredProcConsts.Settings.HomePageBannersSelect,
                     new
                     {
                         languageId,
-                        request.isUser
+                        request.isUser,
+                        request.PageNo,
+                        request.PageSize
                     });
 
-                List<dynamic> homePageBanners = result.ToList();
-
-                if (homePageBanners.Any())
-                {
-                    homePageBanners.ForEach(
-                        banner =>
-                        {
-                            banner.BannerWeb = $"{baseUrl.ImageBase}{baseUrl.HomePageBannerWebleImage}/{banner.id}{banner.bannerWeb}";
-                            banner.BannerMobile = $"{baseUrl.ImageBase}{baseUrl.HomePageBannerMobileImage}/{banner.id}{banner.bannerMobile}";
-                        }
-                    );
-                }
-
-                return homePageBanners;
+                return result.ToList();
             }
         }
 
         #endregion Select By Admin
+
+        #region Select By Admin By Id
+
+        internal async Task<dynamic> HomePageBannerSelectByIdAsync(GetByIdRequestWithRequired request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.FindAsync(
+                    StoredProcConsts.Settings.HomePageBannersSelectById,
+                    new
+                    {
+                        request.Id
+                    });
+
+                return result;
+            }
+        }
+
+        #endregion Select By Admin By Id
 
         #endregion Home Page Banner Management
     }

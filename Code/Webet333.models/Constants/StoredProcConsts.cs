@@ -252,6 +252,8 @@
             public const string HomePageBannersSelect = "[dbo].[HomePageBanners_Select]";
 
             public const string HomePageBannersDelete = "[dbo].[HomePageBanners_Delete]";
+
+            public const string HomePageBannersSelectById = "[dbo].[HomePageBanners_Select_By_Id]";
         }
 
         public class Promotions

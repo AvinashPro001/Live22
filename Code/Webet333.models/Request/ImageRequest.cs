@@ -41,12 +41,40 @@ namespace Webet333.models.Request
     public class HomePageBannerImageRequest : GetByIdRequest
     {
         [Required]
-        [JsonProperty("bannerWeb")]
-        public string BannerWeb { get; set; }
+        [JsonProperty("bannerIdEnglish")]
+        public string BannerIdEnglish { get; set; }
 
         [Required]
-        [JsonProperty("bannerMobile")]
-        public string BannerMobile { get; set; }
+        [JsonProperty("bannerWebEnglish")]
+        public string BannerWebEnglish { get; set; }
+
+        [Required]
+        [JsonProperty("bannerMobileEnglish")]
+        public string BannerMobileEnglish { get; set; }
+
+        [Required]
+        [JsonProperty("bannerIdMalay")]
+        public string BannerIdMalay { get; set; }
+
+        [Required]
+        [JsonProperty("bannerWebMalay")]
+        public string BannerWebMalay { get; set; }
+
+        [Required]
+        [JsonProperty("bannerMobileMalay")]
+        public string BannerMobileMalay { get; set; }
+
+        [Required]
+        [JsonProperty("bannerIdChinese")]
+        public string BannerIdChinese { get; set; }
+
+        [Required]
+        [JsonProperty("bannerWebChinese")]
+        public string BannerWebChinese { get; set; }
+
+        [Required]
+        [JsonProperty("bannerMobileChinese")]
+        public string BannerMobileChinese { get; set; }
 
         [JsonIgnore]
         public System.Guid AdminId { get; set; }
@@ -54,10 +82,34 @@ namespace Webet333.models.Request
 
     public class HomePageBannerImageUpdateRequest : GetByIdRequestWithRequired
     {
-        [JsonProperty("bannerWeb")]
-        public string BannerWeb { get; set; }
+        [JsonProperty("bannerIdEnglish")]
+        public string BannerIdEnglish { get; set; }
 
-        [JsonProperty("bannerMobile")]
-        public string BannerMobile { get; set; }
+        [JsonProperty("bannerWebEnglish")]
+        public string BannerWebEnglish { get; set; }
+
+        [JsonProperty("bannerMobileEnglish")]
+        public string BannerMobileEnglish { get; set; }
+
+        [JsonProperty("bannerIdMalay")]
+        public string BannerIdMalay { get; set; }
+
+        [JsonProperty("bannerWebMalay")]
+        public string BannerWebMalay { get; set; }
+
+        [JsonProperty("bannerMobileMalay")]
+        public string BannerMobileMalay { get; set; }
+
+        [JsonProperty("bannerIdChinese")]
+        public string BannerIdChinese { get; set; }
+
+        [JsonProperty("bannerWebChinese")]
+        public string BannerWebChinese { get; set; }
+
+        [JsonProperty("bannerMobileChinese")]
+        public string BannerMobileChinese { get; set; }
+
+        [JsonIgnore]
+        public System.Guid AdminId { get; set; }
     }
 }

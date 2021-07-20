@@ -318,6 +318,8 @@
             public const string HomePageBannerImage = "settings/homePage-banner/image";
 
             public const string HomePageBannerImageUpdate = "settings/homePage-banner/image/update";
+
+            public const string HomePageBannerSelectById = "settings/homePage-banner/select/id";
         }
 
         public class Game

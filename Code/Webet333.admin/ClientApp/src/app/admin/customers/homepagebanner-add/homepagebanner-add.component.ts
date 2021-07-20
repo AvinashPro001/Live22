@@ -41,8 +41,19 @@ export class HomepagebannerAddComponent implements OnInit {
     T: any;
     turnoverValue: any;
     WinTurn: any;
-    baseDesktop: any;
-    baseMobile: any;
+
+    languageIdEnglish: any;
+    baseDesktopEnglish: any;
+    baseMobileEnglish: any;
+
+    languageIdMalay: any;
+    baseDesktopMalay: any;
+    baseMobileMalay: any;
+
+    languageIdChinese: any;
+    baseDesktopChinese: any;
+    baseMobileChinese: any;
+
     toggleMeridian() {
         this.meridian = !this.meridian;
     }
@@ -76,6 +87,10 @@ export class HomepagebannerAddComponent implements OnInit {
     getLanguage() {
         this.adminService.get<any>(account.getLanguageList).subscribe(res => {
             this.Language = res.data;
+
+            this.languageIdEnglish = this.Language.find(x => x.name == 'English').id;
+            this.languageIdMalay = this.Language.find(x => x.name == 'Malay').id;
+            this.languageIdChinese = this.Language.find(x => x.name == 'Chinese').id;
         });
     }
 
@@ -83,14 +98,34 @@ export class HomepagebannerAddComponent implements OnInit {
 
     //#region Select image for web and mobile
 
-    async fileSelectDestop(event) {
+    async fileSelectDestopEnglish(event) {
         let file = event.target.files[0];
-        this.baseDesktop = await this.readUploadedFileAsDataURL(file);
+        this.baseDesktopEnglish = await this.readUploadedFileAsDataURL(file);
     }
 
-    async fileSelectMobile(event) {
+    async fileSelectMobileEnglish(event) {
         let file = event.target.files[0];
-        this.baseMobile = await this.readUploadedFileAsDataURL(file);
+        this.baseMobileEnglish = await this.readUploadedFileAsDataURL(file);
+    }
+
+    async fileSelectDestopMalay(event) {
+        let file = event.target.files[0];
+        this.baseDesktopMalay = await this.readUploadedFileAsDataURL(file);
+    }
+
+    async fileSelectMobileMalay(event) {
+        let file = event.target.files[0];
+        this.baseMobileMalay = await this.readUploadedFileAsDataURL(file);
+    }
+
+    async fileSelectDestopChinese(event) {
+        let file = event.target.files[0];
+        this.baseDesktopChinese = await this.readUploadedFileAsDataURL(file);
+    }
+
+    async fileSelectMobileChinese(event) {
+        let file = event.target.files[0];
+        this.baseMobileChinese = await this.readUploadedFileAsDataURL(file);
     }
 
     readUploadedFileAsDataURL(file) {
@@ -113,34 +148,61 @@ export class HomepagebannerAddComponent implements OnInit {
 
     addHomePageBanner() {
         this.disabled = true;
-        let dataSelect = {
-            title: (document.getElementById("txt_title") as HTMLInputElement).value,
-            sequence: (document.getElementById("ddlSequence") as HTMLInputElement).value,
-            languageid: (document.getElementById("ddlLanguage") as HTMLInputElement).value
-        }
 
-        if (dataSelect.sequence === "") {
+        let model = {
+            sequence: (document.getElementById("ddlSequence") as HTMLInputElement).value,
+            titleEnglish: (document.getElementById("txt_title_english") as HTMLInputElement).value,
+            titleMalay: (document.getElementById("txt_title_malay") as HTMLInputElement).value,
+            titleChinese: (document.getElementById("txt_title_chinese") as HTMLInputElement).value,
+        };
+
+        if (this.commonService.CheckVariable(model.sequence)) {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectSequence);
         }
 
-        if (dataSelect.title === "") {
+        if (this.commonService.CheckVariable(model.titleEnglish)) {
+            this.disabled = false;
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertTitle);
+        }
+        if (this.commonService.CheckVariable(model.titleChinese)) {
+            this.disabled = false;
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertTitle);
+        }
+        if (this.commonService.CheckVariable(model.titleMalay)) {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertTitle);
         }
 
-        if (this.baseMobile === undefined) {
+        if (this.commonService.CheckVariable(this.baseMobileEnglish)) {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectMobileBannerImage);
         }
-
-        if (this.baseDesktop === undefined) {
+        if (this.commonService.CheckVariable(this.baseDesktopEnglish)) {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectDesktopBannerImage);
         }
 
-        this.adminService.add<any>(customer.homePageBannerAdd, dataSelect).subscribe(res => {
-            this.uploadFile(res.data);
+        if (this.commonService.CheckVariable(this.baseMobileChinese)) {
+            this.disabled = false;
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectMobileBannerImage);
+        }
+        if (this.commonService.CheckVariable(this.baseDesktopChinese)) {
+            this.disabled = false;
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectDesktopBannerImage);
+        }
+
+        if (this.commonService.CheckVariable(this.baseMobileMalay)) {
+            this.disabled = false;
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectMobileBannerImage);
+        }
+        if (this.commonService.CheckVariable(this.baseDesktopMalay)) {
+            this.disabled = false;
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectDesktopBannerImage);
+        }
+
+        this.adminService.add<any>(customer.homePageBannerAdd, model).subscribe(res => {
+            this.uploadFile(res.data, res.data, res.data, res.data);
         }, error => {
             this.disabled = false;
             this.ngOnInit();
@@ -150,14 +212,24 @@ export class HomepagebannerAddComponent implements OnInit {
 
     //#endregion
 
-    //#region uploadImage
+    //#region UploadImage
 
-    uploadFile(Id) {
+    uploadFile(bannerWebIdEnglish, bannerWebIdMalay, bannerWebIdChinese, Id) {
         var dataSelect = {
-            bannerWeb: this.baseDesktop,
-            bannerMobile: this.baseMobile,
+            bannerIdEnglish: bannerWebIdEnglish,
+            bannerWebEnglish: this.baseDesktopEnglish,
+            bannerMobileEnglish: this.baseMobileEnglish,
+
+            bannerWebIdMalay: bannerWebIdMalay,
+            bannerWebMalay: this.baseDesktopMalay,
+            bannerMobileMalay: this.baseMobileMalay,
+
+            bannerWebChinese: this.baseDesktopChinese,
+            bannerMobileChinese: this.baseMobileChinese,
+
             id: Id
-        }
+        };
+
         this.adminService.add<any>(customer.homePageBannerImage, dataSelect).subscribe(res => {
             this.toasterService.pop('success', 'Success', res.message);
             this.router.navigate(['admin/customers/homepage-banner-list']);
