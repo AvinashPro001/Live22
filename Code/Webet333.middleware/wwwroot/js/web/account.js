@@ -518,7 +518,8 @@ async function VerifiedOTP() {
         if (res.status == 200) {
             if (res.response.data.errorCode == 0) {
                 await GetProfileAndSetInSessionStorage()
-                window.location.href = "/";
+                //window.location.href = "/";
+                await gtag_report_conversion("../");
             }
         }
         else {
