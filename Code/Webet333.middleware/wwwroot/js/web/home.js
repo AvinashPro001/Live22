@@ -6,7 +6,8 @@ let SiteData = {
     AdminBankPageData: null,
     DownloadPageData: null,
     AllBankPageData: null,
-    WalletData: null
+    WalletData: null,
+    HomeBannerData: null
 }
 
 //#endregion
@@ -21,6 +22,7 @@ $(window).on('load', function () {
     SetSiteDataVariable()
     SetLastUpdateTime();
     AllPromotionCallAPI();
+    HomeBannerCallAPI();
     GetWalletList();
     CheckGameMaintenance();
     SignalRConnect();
@@ -97,6 +99,7 @@ function SetSiteDataVariable() {
     SiteData.PromotionPageData = data.PromotionPageData;
     SiteData.AllBankPageData = data.AllBankPageData;
     SiteData.WalletData = data.WalletData;
+    SiteData.HomeBannerData = data.HomeBannerData;
 }
 
 //#endregion
@@ -110,6 +113,7 @@ function SetSiteData() {
     SiteData.DownloadPageData = null;
     SiteData.AllBankPageData = null;
     SiteData.WalletData = null;
+    SiteData.HomeBannerData = null;
     SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
 }
 
@@ -161,6 +165,40 @@ function PromotionSliderJsFunction() {
         infinite: false,
         autoplay: true,
     });
+}
+
+//#endregion
+
+//#region Promotion Slider Slick JS
+
+function HomeBannerSliderJsFunction() {
+    $(".lazy").slick({
+        lazyLoad: 'ondemand', // ondemand progressive anticipated
+        arrows: false,
+        dots: false,
+        autoplay: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true
+    });
+}
+
+//#endregion
+
+//#region Set Main Page Slider Html
+
+function SetHomeBannerInMainPage() {
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+
+    if (data != null && data.HomeBannerData != null) {
+        var homeBannerList = data.HomeBannerData;
+        var HomeData = "";
+        for (i = 0; i < homeBannerList.length; i++)HomeData += '<div><div class="main-banner" style="background-image:url(' + homeBannerList[i].banner + ')" ></div></div >'
+        document.getElementById("home_main_banner").innerHTML = "";
+        SetAllValueInElement("home_main_banner", HomeData)
+        HomeBannerSliderJsFunction();
+    }
+
 }
 
 //#endregion
@@ -288,6 +326,25 @@ async function AllPromotionCallAPI() {
 
         if (res.status == 200) {
             SiteData.PromotionPageData = res.response.data;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
+        }
+    }
+}
+
+//#endregion
+
+//#region "ASYNC" Call Home Banner API for Get data
+
+async function HomeBannerCallAPI() {
+
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+
+    if (data.HomeBannerData == null || data.HomeBannerData == undefined) {
+
+        let res = await GetMethodWithoutToken(promotionEndPoints.webRetrieve);
+
+        if (res.status == 200) {
+            SiteData.HomeBannerData = res.response.data;
             SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
         }
     }
@@ -553,3 +610,5 @@ function CheckTokenIsValid(StausCode, StatusMessage) {
             window.location.reload();
         }
 }
+
+
