@@ -95,7 +95,7 @@ async function WalletBalance() {
 //#endregion WalletBalance
 
 function RefershBalance() {
-    document.getElementById("refresh_btn_spin").classList.add("fa-spin");
+    $(".refresh").addClass('fa-spin');
     document.getElementById("ddlmainWallet").innerHTML = "feching..";
     document.getElementById("ddl918KissWallet").innerHTML = "feching..";
     document.getElementById("ddlAGWallet").innerHTML = "feching..";
@@ -113,8 +113,8 @@ function RefershBalance() {
     document.getElementById("ddlPragmaticWallet").innerHTML = "feching..";
     document.getElementById("ddlYeeBetWallet").innerHTML = "feching..";
     document.getElementById("ddlSBOWallet").innerHTML = "feching..";
-    document.getElementById("refresh_btn_spin").classList.remove("fa-spin");
     WalletBalance();
+    $(".refresh").removeClass('fa-spin');
 }
 
 function TransferPageWallets() {
@@ -211,7 +211,7 @@ async function RestoreBalance() {
 
 async function RestoreBalance() {
     //LoaderShow();
-    document.getElementById("refresh_btn_spin").classList.add("fa-spin");
+    $(".refresh").addClass('fa-spin');
     try {
         $('.values').html('');
         $('.img_load').css('display', 'block');
@@ -279,7 +279,7 @@ async function RestoreBalance() {
     $("#retore_li").css("pointer-events", "");
     WalletBalance();
     //LoaderHide();
-    document.getElementById("refresh_btn_spin").classList.remove("fa-spin");
+    $(".refresh").removeClass('fa-spin');
 }
 
 function numberWithCommas(x) {
