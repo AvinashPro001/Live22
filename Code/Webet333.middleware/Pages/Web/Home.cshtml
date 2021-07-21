@@ -17,16 +17,16 @@
             <div class="flag-icon"><img src="~/images/malaysia-flag.png" alt="logo" /></div>
         </div>
     </div>
-    <div class="top-banner-slider lazy slider" id="home_main_banner">
+    <div class="lazy top-banner-slider slider" id="home_main_banner">
         @*<div>
-            <div class="main-banner" style="background-image: url(images/banner111.png)"></div>
-        </div>
-        <div>
-            <div class="main-banner" style="background-image: url(images/banner111.png)"></div>
-        </div>
-        <div>
-            <div class="main-banner" style="background-image: url(images/banner111.png)"></div>
-        </div>*@
+                <div class="main-banner" style="background-image: url(images/banner111.png)"></div>
+            </div>
+            <div>
+                <div class="main-banner" style="background-image: url(images/banner111.png)"></div>
+            </div>
+            <div>
+                <div class="main-banner" style="background-image: url(images/banner111.png)"></div>
+            </div>*@
     </div>
 </div>
 
@@ -832,9 +832,8 @@
     });
 
     setInterval(function () {
-        if ($('#slider_promotion_div').children().length == 0)
-            SetPromotionInMainPage();
-        if ($('#home_main_banner').children().length == 0)
-            SetHomeBannerInMainPage()
+        if ($('#slider_promotion_div').children().length == 0) SetPromotionInMainPage();
+        if ($('#home_main_banner').children().length == 0) SetHomeBannerInMainPage();
     }, 200);
+
 </script>
