@@ -365,7 +365,7 @@
                                                         <p class="big no-mar lang" key="bank_accountnumber">Account Number:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input type="number" class="reg-form" placeholder="Enter Account Number" id="withdraw_account_number" oninput="validity.valid||(value='');"  step="0">
+                                                        <input type="number" class="reg-form" placeholder="Enter Account Number" id="withdraw_account_number" oninput="validity.valid||(value='');" step="0">
                                                     </label>
                                                 </li>
                                                 <li class="mar-btm-fifteen">
@@ -381,7 +381,7 @@
                                                         <p class="big no-mar lang" key="deposit_amount">Amount:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30,000.00" id="txt_withdraw_amount"  min="0" oninput="validity.valid||(value='');"  step=".01">
+                                                        <input type="number" class="reg-form" placeholder="Min/Max Limit: 10.00/ 30,000.00" id="txt_withdraw_amount" min="0" oninput="validity.valid||(value='');" step=".01">
                                                     </label>
                                                 </li>
                                                 <li class="mar-btm-fifteen">
@@ -481,7 +481,7 @@
                                                         <p class="big no-mar lang" key="deposit_amount">Amount:</p>
                                                     </label>
                                                     <label class="fleft minimum-ammount card-number mendatory">
-                                                        <input id="txt_transfer_amount" type="number" class="reg-form" placeholder="Max Limit: From Wallet"  min="0" oninput="validity.valid||(value='');" step=".01">
+                                                        <input id="txt_transfer_amount" type="number" class="reg-form" placeholder="Max Limit: From Wallet" min="0" oninput="validity.valid||(value='');" step=".01">
                                                         <span>Add Minimum 1 MYR</span>
                                                     </label>
                                                     <label class="fright mar-btm-fifteen transfer-max hidden-xs">
@@ -999,11 +999,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-1 pl0">To</div>
+                                        <div class="col-sm-1 pl0 text-center">
+                                            <label class="history_sec">To</label>
+                                        </div>
                                         <div class="col-sm-4 pl0">
                                             <div class="controls">
                                                 <div class="input-append">
-                                                    <input id="datepicker2" class="input-small form-control" type="text" placeholder="03/31/2021" onkeydown="return false;"/>
+                                                    <input id="datepicker2" class="input-small form-control" type="text" placeholder="03/31/2021" onkeydown="return false;" />
                                                     <button id="datepicker1btn2" class="btn icondate" type="button"><i class="fa fa-calendar"></i></button>
                                                 </div>
                                             </div>
@@ -1023,10 +1025,10 @@
                                             <table class="table table-bordered-one text-center" id="tbl_bettingsummeryHistory">
                                                 <thead>
                                                     <tr class="white-gray-bg">
-                                                        <th class="white-text text-center">Game Provide</th>
+                                                        <th class="white-text text-center">Game Provider</th>
                                                         <th class="white-text text-center">BetCount</th>
                                                         <th class="white-text text-center">BetAmount</th>
-                                                        <th class="white-text text-center">VaildBet Amount</th>
+                                                        <th class="white-text text-center">ValidBet Amount</th>
                                                         <th class="white-text text-center">Total Rebate</th>
                                                     </tr>
                                                 </thead>
@@ -1084,7 +1086,7 @@
                                                         <th class="white-text text-center">Transaction Date</th>
                                                         <th class="white-text text-center">End Date</th>
                                                         <th class="white-text text-center">Promotion Name</th>
-                                                        <th class="white-text text-center">Trasnfer Amount</th>
+                                                        <th class="white-text text-center">Transfer Amount</th>
                                                         <th class="white-text text-center">Bonus Amount</th>
                                                         <th class="white-text text-center">Target Amount</th>
                                                         <th class="white-text text-center">Target Achieved</th>

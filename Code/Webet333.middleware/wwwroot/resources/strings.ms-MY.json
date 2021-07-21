@@ -247,9 +247,9 @@
   "promo_apply_balance_error": "Baki anda adalah lebih rendah daripada 5 MYR baki deposit anda, anda boleh menggunakan promosi baru, dan promosi promosi anda sudah tamat tempoh.",
   "amount_greater_zero_error": "Sila Masukkan Jumlah lebih daripada 0",
   "promot_active_error": "Anda tidak boleh menggunakan promosi, Kerana anda mempunyai promosi yang aktif",
-  "min_max_amount_error": "Jumlah Amaun Minimum adalah 10 dan Maximum 30000.",
-  "min_max_amount_error_parameter": "Jumlah Amaun Minimum adalah 10 dan Maximum ",
-  "min1_max1000_amount_error": "Jumlah Amaun Minimum adalah 1",
+  "min_max_amount_error": "Amaun Minimum ialah 10 dan Maksimum ialah 300000.",
+  "min_max_amount_error_parameter": "Amaun Minimum 10 dan Amaun Maksimum ialah ",
+  "min1_max1000_amount_error": "Amaun Minimum 1",
   "bnk_name_required_error": "Nama Bank Diperlukan",
 
   "amt_req_error": "Amaun yang difailkan diperlukan.",
