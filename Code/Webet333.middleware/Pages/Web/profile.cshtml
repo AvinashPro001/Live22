@@ -1261,7 +1261,16 @@
                                                     <p class="big no-mar lang" key="profile_new_password">New Password :</p>
                                                 </label>
                                                 <label class="fright lock">
-                                                    <input type="password" class="reg-form" placeholder="New Password" id="txt_newPassword">
+                                                    <input type="password" class="reg-form" placeholder="New Password" id="txt_newPassword"  onkeyup="OnPasswordType('txt_newPassword','')" autocomplete="off"/>
+                                                    <p class="note no-mar mar-btm-ten grey-color" id="pass-len">
+                                                        <i class="fas fa-check"></i>&nbsp;&nbsp;<span class="lang" key="password_instruction"> </span>
+                                                    </p>
+                                                    <p class="note no-mar mar-btm-ten grey-color" id="pass-alpha">
+                                                        <i class="fas fa-check"></i>&nbsp;&nbsp;<span class="lang" key="password_alpha_instruction"></span>
+                                                    </p>
+                                                    <p class="note no-mar mar-btm-ten grey-color" id="pass-username-same">
+                                                        <i class="fas fa-check"></i>&nbsp;&nbsp;<span class="lang" key="password_username_same"></span>
+                                                    </p>
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">

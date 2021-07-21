@@ -204,6 +204,11 @@ async function ChangePassword(i) {
             return ShowError(ChangeErroMessage("username_pass_diff_error"));
         }
 
+        var res = JSON.parse(Decryption(GetSessionStorage("UserDetails")))
+        var username = res.username
+
+        if (username === password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
+
         var Char = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
         if (!Char.test(model.password)) {
             LoaderHide();
@@ -744,9 +749,14 @@ async function regisrationGame() {
 
 //#endregion RegistrationGame
 
-function OnPasswordType() {
-    var password = $("#m_regsiter_password").val();
-    var username = $('#m_regsiter_username').val();
+function OnPasswordType(PasswordTextboxId, UsernameTextboxId) {
+    var password = $("#" + PasswordTextboxId).val();
+    var username = $('#' + UsernameTextboxId).val();
+
+    if (GetLocalStorage("currentUser") !== null) {
+        var res = JSON.parse(dec(sessionStorage.getItem("UserDetails")))
+        username = res.username
+    }
 
     password.length >= 6 ? ($("#pass-len").addClass("green-color")) : ($("#pass-len").removeClass("green-color"));
 
