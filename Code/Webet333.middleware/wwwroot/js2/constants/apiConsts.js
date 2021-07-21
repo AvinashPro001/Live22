@@ -152,5 +152,7 @@ var apiEndPoints = {
 
     UserVipDetails: "viplevel/user/details",
 
-     slotsGameList: "Game/slotsgame/list"
+    slotsGameList: "Game/slotsgame/list",
+
+    homepageBannerList: "settings/homePage-banner/select/user"
 };

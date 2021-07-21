@@ -193,7 +193,7 @@ function SetHomeBannerInMainPage() {
     if (data != null && data.HomeBannerData != null) {
         var homeBannerList = data.HomeBannerData;
         var HomeData = "";
-        for (i = 0; i < homeBannerList.length; i++)HomeData += '<div><div class="main-banner" style="background-image:url(' + homeBannerList[i].banner + ')" ></div></div >'
+        for (i = 0; i < homeBannerList.length; i++)HomeData += '<div><div class="main-banner" style="background-image:url(' + homeBannerList[i].bannerWeb + ')" ></div></div >';
         document.getElementById("home_main_banner").innerHTML = "";
         SetAllValueInElement("home_main_banner", HomeData)
         HomeBannerSliderJsFunction();
@@ -341,7 +341,7 @@ async function HomeBannerCallAPI() {
 
     if (data.HomeBannerData == null || data.HomeBannerData == undefined) {
 
-        let res = await GetMethodWithoutToken(promotionEndPoints.webRetrieve);
+        let res = await GetMethodWithoutToken(settingEndPoints.homepageBannerList);
 
         if (res.status == 200) {
             SiteData.HomeBannerData = res.response.data;

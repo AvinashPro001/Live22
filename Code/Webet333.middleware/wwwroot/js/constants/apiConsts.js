@@ -40,6 +40,7 @@ var settingEndPoints = {
     walletList: "account/wallet/select",
     socialMediaReference: "account/socialmediastatics",
     VaderPayMainteanceSelect: "account/vaderpay/maintenance/select",
+    homepageBannerList: "settings/homePage-banner/select/user"
 };
 
 var gameBalanceEndPoints = {
