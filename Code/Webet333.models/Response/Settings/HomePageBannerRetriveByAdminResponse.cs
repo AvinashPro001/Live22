@@ -1,18 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Webet333.models.Response.Settings
+namespace Webet333.models.Response.Settings 
 {
     public class HomePageBannerRetriveByUserResponse
     {
         [JsonProperty("id")]
         public Guid Id { get; set; }
-
-        [JsonProperty("languageId")]
-        public Guid LanguageId { get; set; }
-
-        [JsonProperty("languageName")]
-        public string LanguageName { get; set; }
 
         [JsonProperty("title")]
         public string Title { get; set; }

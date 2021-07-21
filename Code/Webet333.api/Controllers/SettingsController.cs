@@ -783,15 +783,13 @@ namespace Webet333.api.Controllers
 
         #region HomePage Banner Select By User
 
-        [HttpPost(ActionsConst.Settings.HomePageBannerSelectByUser)]
-        public async Task<IActionResult> HomePageBannerSelectByUser(
-            [FromBody] HomePageBannerRetriveRequest request,
-            [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        [HttpGet(ActionsConst.Settings.HomePageBannerSelectByUser)]
+        public async Task<IActionResult> HomePageBannerSelectByUser([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
-            if (request == null) return BadResponse("error_empty_request");
-            if (!ModelState.IsValid) return BadResponse(ModelState);
-
-            request.isUser = true;
+            HomePageBannerRetriveRequest request = new HomePageBannerRetriveRequest
+            {
+                isUser = true
+            };
 
             using (var Settings_Helpers = new SettingsHelpers(Connection))
             {
