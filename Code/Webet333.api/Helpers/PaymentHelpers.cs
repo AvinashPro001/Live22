@@ -176,6 +176,16 @@ namespace Webet333.api.Helpers
             }
         }
 
+        internal async Task<List<PaymentWithdrawalListResponse>> WithdrawalList(string sp_name, string UserId = null, string Id = null, string Verified = null, string Keyword = null, string FromDate = null, string ToDate = null, int? PageSize = null, int? PageNo = null)
+        {
+            using (var repository = new DapperRepository<PaymentWithdrawalListResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(sp_name, new { UserId, Id, Verified, Keyword, FromDate, ToDate, PageSize, PageNo });
+
+                return result.ToList();
+            }
+        }
+
         #endregion Withdrawal
 
         #region Transfer

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
@@ -15,7 +14,6 @@ using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Payments;
-using Webet333.models.Response.Payments;
 using RequestSizeLimitAttribute = Webet333.api.Filters.RequestSizeLimitAttribute;
 
 namespace Webet333.api.Controllers
@@ -67,11 +65,11 @@ namespace Webet333.api.Controllers
         {
             await CheckUserRole();
 
-            if(string.IsNullOrWhiteSpace(request.UserId))return BadResponse("error_empty_request");
+            if (string.IsNullOrWhiteSpace(request.UserId)) return BadResponse("error_empty_request");
 
             using (var payment_help = new PaymentHelpers(Connection))
             {
-                var list=await payment_help.StatementRetriver(request);
+                var list = await payment_help.StatementRetriver(request);
                 if (list.Count != 0)
                 {
                     var total = list.FirstOrDefault().Total;
@@ -304,6 +302,53 @@ namespace Webet333.api.Controllers
                     return OkResponse(await payment_help.GetDynamicData(StoredProcConsts.Payments.WithdrawalList, request?.UserId, request?.Id, request?.Status, Keyword: request?.Keyword, FromDate: request.FromDate, ToDate: request.ToDate));
                 else
                     return OkResponse(await payment_help.GetDynamicData(StoredProcConsts.Payments.WithdrawalList, GetUserId(User).ToString(), request?.Id, request?.Status, Keyword: request?.Keyword));
+            }
+        }
+
+        [HttpPost(ActionsConst.Payments.WithdrawListTemp)]
+        public async Task<IActionResult> WithdrawListTemp([FromBody] GlobalGetWithPaginationRequest request)
+        {
+            // await ValidateUser();
+            var Role = GetUserRole(User);
+
+            if (request == null) request = new GlobalGetWithPaginationRequest();
+
+            using (var payment_help = new PaymentHelpers(Connection))
+            {
+                if (Role == RoleConst.Admin)
+                {
+                    var temp = await payment_help.WithdrawalList(StoredProcConsts.Payments.WithdrawalList, request?.UserId, request?.Id, request?.Status, Keyword: request?.Keyword, FromDate: request.FromDate, ToDate: request.ToDate, PageNo: request.PageNo, PageSize: request.PageSize);
+
+                    if (temp.Any())
+                    {
+                        var total = temp.FirstOrDefault().Total;
+                        var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? temp.Count : request.PageSize);
+
+                        return OkResponse(new
+                        {
+                            result = temp,
+                            total = total,
+                            totalPages = totalPages,
+                            pageSize = request.PageSize ?? 10,
+                            offset = temp.FirstOrDefault().OffSet,
+                        });
+                    }
+
+                    return OkResponse(new
+                    {
+                        result = temp,
+                        total = 0,
+                        totalPages = 0,
+                        pageSize = 0,
+                        offset = 0,
+                    });
+                }
+                else
+                {
+                    var temp = await payment_help.WithdrawalList(StoredProcConsts.Payments.WithdrawalList, GetUserId(User).ToString(), request?.Id, request?.Status, Keyword: request?.Keyword);
+
+                    return OkResponse(temp);
+                }
             }
         }
 
