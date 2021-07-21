@@ -275,10 +275,15 @@ async function ChangePassword() {
 
     if (newPassword !== confirmPassword) return ShowError(ChangeErroMessage("pass_not_match_error"));
 
+    var res = JSON.parse(Decryption(GetSessionStorage("userDetails")))
+    var username = res.username
+
+    if (username === password) return ShowError("Password and username must be different.");
+
     if (Decryption(GetLocalStorage("currentUserData")) !== currentPassword) return ShowError(ChangeErroMessage("current_pass_not_match"));
 
     var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
-    if (!reqExp.test(currentPassword)) return ShowError(ChangeErroMessage("pass_alpha_error"));
+    if (!reqExp.test(newPassword)) return ShowError(ChangeErroMessage("pass_alpha_error"));
 
     var model = {
         currentPassword: currentPassword,
@@ -829,9 +834,14 @@ function CheckTokenIsValid(StausCode, StatusMessage) {
         }
 }
 
-function OnPasswordType() {
-    var password = $("#txt_password").val();
-    var username = $('#txt_username').val();
+function OnPasswordType(PasswordTextboxId, UsernameTextboxId) {
+    var password = $("#" + PasswordTextboxId).val();
+    var username = $('#' + UsernameTextboxId).val();
+
+    if (GetLocalStorage("currentUser") !== null) {
+        var res = JSON.parse(Decryption(GetSessionStorage("userDetails")))
+        username = res.username
+    }
 
     password.length >= 6 ? ($("#pass-len").addClass("green-color")) : ($("#pass-len").removeClass("green-color"));
 
