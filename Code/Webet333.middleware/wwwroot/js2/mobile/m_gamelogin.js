@@ -1258,7 +1258,7 @@ async function openPlaytechGame(game) {
 
     function calloutLogin(response) {
         if (response.errorCode) {
-            alert("Error message: " + response.errorText + " Error code: " + response.errorCode);
+            alert("Error message: " + response.playerMessage + " Error code: " + response.errorCode);
         } else {
             launchMobileClient(response.rootSessionToken.sessionToken);
         }
