@@ -452,6 +452,8 @@ async function ForgotPassword() {
     };
 
     LoaderShow();
+    $('#forgotPassword').modal('hide');
+
     var res = await PostMethod(accountEndPoints.getUserByMobile, model);
     if (res.status == 200) {
         LoaderHide();
