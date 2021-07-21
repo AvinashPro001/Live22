@@ -20,7 +20,7 @@ using RequestSizeLimitAttribute = Webet333.api.Filters.RequestSizeLimitAttribute
 
 namespace Webet333.api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route(ActionsConst.ApiVersion)]
     public class PaymentController : BaseController
     {
@@ -63,15 +63,37 @@ namespace Webet333.api.Controllers
         #region User's transaction retrieve
 
         [HttpPost(ActionsConst.Payments.Transaction)]
-        public async Task<IActionResult> Transaction([FromBody] GlobalGetRequest request)
+        public async Task<IActionResult> Transaction([FromBody] GlobalGetWithPaginationRequest request)
         {
-            var Role = GetUserRole(User);
+            //var Role = GetUserRole(User);
 
-            request.UserId = Role == RoleConst.Admin ? request.UserId : GetUserId(User).ToString();
+            //request.UserId = Role == RoleConst.Admin ? request.UserId : GetUserId(User).ToString();
 
             using (var payment_help = new PaymentHelpers(Connection))
             {
-                return OkResponse(await payment_help.GetDynamicData(StoredProcConsts.Payments.Transaction, UserId: request.UserId, FromDate: request.FromDate, ToDate: request.ToDate));
+                var list=await payment_help.StatementRetriver(request);
+                if (list.Count != 0)
+                {
+                    var total = list.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 10,
+                        offset = list.FirstOrDefault().OffSet,
+                    });
+                }
+                return OkResponse(new
+                {
+                    result = list,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
             }
         }
 

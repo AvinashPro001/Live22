@@ -368,6 +368,15 @@ namespace Webet333.api.Helpers
             }
         }
 
+        public async Task<List<TransactionResponse>> StatementRetriver(GlobalGetWithPaginationRequest request)
+        {
+            using (var repository = new DapperRepository<TransactionResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Payments.Transaction, new { request.UserId, request.Keyword, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                return result.ToList();
+            }
+        }
+
         #region House Keeping
 
         public void Dispose()
