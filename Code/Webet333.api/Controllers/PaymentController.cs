@@ -20,7 +20,7 @@ using RequestSizeLimitAttribute = Webet333.api.Filters.RequestSizeLimitAttribute
 
 namespace Webet333.api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route(ActionsConst.ApiVersion)]
     public class PaymentController : BaseController
     {
@@ -65,9 +65,9 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Payments.Transaction)]
         public async Task<IActionResult> Transaction([FromBody] GlobalGetWithPaginationRequest request)
         {
-            //var Role = GetUserRole(User);
+            await CheckUserRole();
 
-            //request.UserId = Role == RoleConst.Admin ? request.UserId : GetUserId(User).ToString();
+            if(string.IsNullOrWhiteSpace(request.UserId))return BadResponse("error_empty_request");
 
             using (var payment_help = new PaymentHelpers(Connection))
             {
