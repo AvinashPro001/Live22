@@ -3,9 +3,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { ToasterService } from 'angular2-toaster';
-import { account, customer } from '../../../../environments/environment';
+import { customer } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
 
@@ -19,37 +18,23 @@ export class HomepagebannerEditComponent implements OnInit {
 
     //#region Variable
 
-    public Editor = DecoupledEditor;
-    overValue: any;
-    public hasBaseDropZoneOver: boolean = false;
-    public hasAnotherDropZoneOver: boolean = false;
     disabled: boolean = false;
-    meridian = true;
     files: any;
-    model1: any;
-    model: any;
-    list: any;
-    editorData: any;
-    Language: any;
     T: any;
-    baseDesktop: any;
-    baseMobile: any;
-    public quantities: Array<string> = [];
-    public WinTurnquantities: Array<string> = [];
     sequenceList: any = [];
     data: any;
-    isselected: Number;
-    toggleMeridian() {
-        this.meridian = !this.meridian;
-    }
-    public onReady(editor) {
-        editor.ui.getEditableElement().parentElement.insertBefore(
-            editor.ui.view.toolbar.element,
-            editor.ui.getEditableElement(),
 
-        );
-        editor.setData(this.data.description);
-    }
+    languageIdEnglish: any;
+    baseDesktopEnglish: any;
+    baseMobileEnglish: any;
+
+    languageIdMalay: any;
+    baseDesktopMalay: any;
+    baseMobileMalay: any;
+
+    languageIdChinese: any;
+    baseDesktopChinese: any;
+    baseMobileChinese: any;
 
     //#endregion
 
@@ -62,7 +47,6 @@ export class HomepagebannerEditComponent implements OnInit {
     async ngOnInit() {
         if (await this.checkUpdatePermission()) {
             this.getHomepageBanner();
-            this.getLanguage();
             Array(40).fill(0).map((x, i) => {
                 this.sequenceList.push({ id: i + 1, sequence: i + 1 })
             });
@@ -74,15 +58,16 @@ export class HomepagebannerEditComponent implements OnInit {
     getHomepageBanner() {
         let homepageBannerData = JSON.parse(localStorage.getItem('homepageBannerData'));
         this.data = homepageBannerData as object[];
-    }
 
-    //#endregion
+        let model = {
+            id: this.data.id
+        };
 
-    //#region Get Language
-
-    getLanguage() {
-        this.adminService.get<any>(account.getLanguageList).subscribe(res => {
-            this.Language = res.data;
+        this.adminService.add<any>(customer.homePageBannerSelectById, model).subscribe(res => {
+            this.data = res.data;
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+            this.router.navigate(['admin/customers/homepage-banner-list']);
         });
     }
 
@@ -93,9 +78,10 @@ export class HomepagebannerEditComponent implements OnInit {
     UpdateHomePageBanner() {
         let model = {
             id: this.data.id,
-            title: (document.getElementById("txt_title") as HTMLInputElement).value,
             sequence: (document.getElementById("ddlSequence") as HTMLInputElement).value,
-            languageid: (document.getElementById("ddlLanguage") as HTMLInputElement).value
+            titleEnglish: (document.getElementById("txt_title_english") as HTMLInputElement).value,
+            titleMalay: (document.getElementById("txt_title_malay") as HTMLInputElement).value,
+            titleChinese: (document.getElementById("txt_title_chinese") as HTMLInputElement).value,
         };
 
         if (this.commonService.CheckVariable(model.sequence)) {
@@ -103,24 +89,24 @@ export class HomepagebannerEditComponent implements OnInit {
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectSequence);
         }
 
-        if (this.commonService.CheckVariable(model.title)) {
+        if (this.commonService.CheckVariable(model.titleEnglish)) {
+            this.disabled = false;
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertTitle);
+        }
+        if (this.commonService.CheckVariable(model.titleChinese)) {
+            this.disabled = false;
+            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertTitle);
+        }
+        if (this.commonService.CheckVariable(model.titleMalay)) {
             this.disabled = false;
             return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseInsertTitle);
         }
 
-        if (this.baseMobile === undefined) {
-            this.disabled = false;
-            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectMobileBannerImage);
-        }
-
-        if (this.baseDesktop === undefined) {
-            this.disabled = false;
-            return this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectDesktopBannerImage);
-        }
-
         this.adminService.add<any>(customer.homePageBannerUpdate, model).subscribe(res => {
-            this.toasterService.pop('success', 'Success', res.message);
-            if (this.baseDesktop !== undefined || this.baseMobile !== undefined) this.uploadFile(res.data);
+            if (this.baseDesktopEnglish !== undefined || this.baseMobileEnglish !== undefined ||
+                this.baseMobileChinese !== undefined || this.baseDesktopChinese !== undefined ||
+                this.baseMobileMalay !== undefined || this.baseDesktopMalay !== undefined
+            ) this.uploadFile(res.data);
             else this.router.navigate(['admin/customers/homepage-banner-list']);
         }, error => {
             this.disabled = false;
@@ -133,11 +119,21 @@ export class HomepagebannerEditComponent implements OnInit {
 
     //#region uploadImage
 
-    uploadFile(Id) {
-        var model = {
-            bannerWeb: this.baseDesktop === undefined ? null : this.baseDesktop,
-            bannerMobile: this.baseMobile === undefined ? null : this.baseMobile,
-            id: Id
+    uploadFile(res) {
+        let model = {
+            bannerIdEnglish: res.idEnglish,
+            bannerWebEnglish: this.baseDesktopEnglish === undefined ? null : this.baseDesktopEnglish,
+            bannerMobileEnglish: this.baseMobileEnglish === undefined ? null : this.baseMobileEnglish,
+
+            bannerIdMalay: res.idMalay,
+            bannerWebMalay: this.baseDesktopMalay === undefined ? null : this.baseDesktopMalay,
+            bannerMobileMalay: this.baseMobileMalay === undefined ? null : this.baseMobileMalay,
+
+            bannerIdChinese: res.idChinese,
+            bannerWebChinese: this.baseDesktopChinese === undefined ? null : this.baseDesktopChinese,
+            bannerMobileChinese: this.baseMobileChinese === undefined ? null : this.baseMobileChinese,
+
+            id: res.id
         };
 
         this.adminService.add<any>(customer.homePageBannerImageUpdate, model).subscribe(res => {
@@ -153,14 +149,34 @@ export class HomepagebannerEditComponent implements OnInit {
 
     //#region File select
 
-    async fileSelectMobile(event) {
+    async fileSelectDestopEnglish(event) {
         let file = event.target.files[0];
-        this.baseMobile = await this.readUploadedFileAsDataURL(file);
+        this.baseDesktopEnglish = await this.readUploadedFileAsDataURL(file);
     }
 
-    async fileSelectDesktop(event) {
+    async fileSelectMobileEnglish(event) {
         let file = event.target.files[0];
-        this.baseDesktop = await this.readUploadedFileAsDataURL(file);
+        this.baseMobileEnglish = await this.readUploadedFileAsDataURL(file);
+    }
+
+    async fileSelectDestopMalay(event) {
+        let file = event.target.files[0];
+        this.baseDesktopMalay = await this.readUploadedFileAsDataURL(file);
+    }
+
+    async fileSelectMobileMalay(event) {
+        let file = event.target.files[0];
+        this.baseMobileMalay = await this.readUploadedFileAsDataURL(file);
+    }
+
+    async fileSelectDestopChinese(event) {
+        let file = event.target.files[0];
+        this.baseDesktopChinese = await this.readUploadedFileAsDataURL(file);
+    }
+
+    async fileSelectMobileChinese(event) {
+        let file = event.target.files[0];
+        this.baseMobileChinese = await this.readUploadedFileAsDataURL(file);
     }
 
     readUploadedFileAsDataURL(file) {

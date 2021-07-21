@@ -56,9 +56,6 @@ export class HomepagebannerListComponent implements OnInit {
         this.columns = [
             { prop: 'No', width: 90 },
             { prop: 'Title' },
-            { prop: 'WebBanner' },
-            { prop: 'MobileBanner' },
-            { prop: 'Language' },
             { prop: 'Sequence' },
             { prop: 'Actions', cellTemplate: this.status, sortable: true, width: 250 },
         ];
@@ -89,9 +86,6 @@ export class HomepagebannerListComponent implements OnInit {
                 this.rows.push({
                     No: ++i,
                     Title: el.title,
-                    WebBanner: "<img src= '" + el.bannerWeb + "' height=30px width=60px />",
-                    MobileBanner: "<img src= '" + el.bannerMobile + "' height=30px width=60px/>",
-                    Language: el.languageName,
                     Sequence: el.sequence,
                     id: el.id,
                 });

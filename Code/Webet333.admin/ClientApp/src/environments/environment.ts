@@ -355,7 +355,8 @@ export const customer = {
     homePageBannerAdd: environment.apiUrl + 'settings/homePage-banner/add',
     homePageBannerUpdate: environment.apiUrl + 'settings/homePage-banner/update',
     homePageBannerImage: environment.apiUrl + 'settings/homePage-banner/image',
-    homePageBannerImageUpdate: environment.apiUrl + 'settings/homePage-banner/image/update'
+    homePageBannerImageUpdate: environment.apiUrl + 'settings/homePage-banner/image/update',
+    homePageBannerSelectById: environment.apiUrl + 'settings/homePage-banner/select/id',
 }
 
 export const playtech = {

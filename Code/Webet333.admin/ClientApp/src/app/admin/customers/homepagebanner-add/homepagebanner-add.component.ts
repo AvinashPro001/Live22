@@ -3,9 +3,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { ToasterService } from 'angular2-toaster';
-import { account, customer } from '../../../../environments/environment';
+import { customer } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
 
@@ -19,28 +18,11 @@ export class HomepagebannerAddComponent implements OnInit {
 
     //#region Variable
 
-    public Editor = DecoupledEditor;
-    public onReady(editor) {
-        editor.ui.getEditableElement().parentElement.insertBefore(
-            editor.ui.view.toolbar.element,
-            editor.ui.getEditableElement()
-        );
-    }
-    selectOverCategory: any;
-    overValue: any;
-    public hasBaseDropZoneOver: boolean = false;
-    public hasAnotherDropZoneOver: boolean = false;
     disabled: boolean = false;
-    meridian = true;
     files: any;
-    model1: any;
-    model: any;
     list: any;
-    editorData: any;
     Language: any;
     T: any;
-    turnoverValue: any;
-    WinTurn: any;
 
     languageIdEnglish: any;
     baseDesktopEnglish: any;
@@ -54,10 +36,6 @@ export class HomepagebannerAddComponent implements OnInit {
     baseDesktopChinese: any;
     baseMobileChinese: any;
 
-    toggleMeridian() {
-        this.meridian = !this.meridian;
-    }
-    public quantities: Array<string> = [];
     sequenceList: any = [];
 
     //#endregion
@@ -72,8 +50,6 @@ export class HomepagebannerAddComponent implements OnInit {
 
     async ngOnInit() {
         if (await this.checkAddPermission()) {
-            this.getLanguage();
-
             Array(40).fill(0).map((x, i) => {
                 this.sequenceList.push({ id: i + 1, sequence: i + 1 })
             });
@@ -81,20 +57,6 @@ export class HomepagebannerAddComponent implements OnInit {
     }
 
     //#endregion ngOnInit
-
-    //#region GetLanguage
-
-    getLanguage() {
-        this.adminService.get<any>(account.getLanguageList).subscribe(res => {
-            this.Language = res.data;
-
-            this.languageIdEnglish = this.Language.find(x => x.name == 'English').id;
-            this.languageIdMalay = this.Language.find(x => x.name == 'Malay').id;
-            this.languageIdChinese = this.Language.find(x => x.name == 'Chinese').id;
-        });
-    }
-
-    //#endregion GetLanguage
 
     //#region Select image for web and mobile
 
@@ -202,7 +164,7 @@ export class HomepagebannerAddComponent implements OnInit {
         }
 
         this.adminService.add<any>(customer.homePageBannerAdd, model).subscribe(res => {
-            this.uploadFile(res.data, res.data, res.data, res.data);
+            this.uploadFile(res.data);
         }, error => {
             this.disabled = false;
             this.ngOnInit();
@@ -214,23 +176,24 @@ export class HomepagebannerAddComponent implements OnInit {
 
     //#region UploadImage
 
-    uploadFile(bannerWebIdEnglish, bannerWebIdMalay, bannerWebIdChinese, Id) {
-        var dataSelect = {
-            bannerIdEnglish: bannerWebIdEnglish,
+    uploadFile(res) {
+        let model = {
+            bannerIdEnglish: res.idEnglish,
             bannerWebEnglish: this.baseDesktopEnglish,
             bannerMobileEnglish: this.baseMobileEnglish,
 
-            bannerWebIdMalay: bannerWebIdMalay,
+            bannerIdMalay: res.idMalay,
             bannerWebMalay: this.baseDesktopMalay,
             bannerMobileMalay: this.baseMobileMalay,
 
+            bannerIdChinese: res.idChinese,
             bannerWebChinese: this.baseDesktopChinese,
             bannerMobileChinese: this.baseMobileChinese,
 
-            id: Id
+            id: res.id
         };
 
-        this.adminService.add<any>(customer.homePageBannerImage, dataSelect).subscribe(res => {
+        this.adminService.add<any>(customer.homePageBannerImage, model).subscribe(res => {
             this.toasterService.pop('success', 'Success', res.message);
             this.router.navigate(['admin/customers/homepage-banner-list']);
         }, error => {
