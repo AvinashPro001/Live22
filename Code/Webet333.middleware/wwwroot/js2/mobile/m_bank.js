@@ -959,10 +959,6 @@ async function CheckSupportGame() {
     }
 }
 
-
-
-
-
 var HistorySectionName = "WithdrawDeposit";
 var fromDate = null, toDate = null, pageSize = 20; pageNumber = 0;
 var NumberOfLine = 1;
@@ -1059,7 +1055,7 @@ function GetDateRange() {
 
 function Get30DayDate() {
     pageNumber = 0;
-    var fdate = new Date().addDays(-31);
+    var fdate = new Date();
     var tdate = new Date();
     GetDateFormate(fdate, tdate)
     CallFunctionAccordingToTab()
