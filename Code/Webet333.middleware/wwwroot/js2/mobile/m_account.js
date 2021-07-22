@@ -207,7 +207,7 @@ async function ChangePassword(i) {
         var userDetail = JSON.parse(Decryption(GetSessionStorage("UserDetails")))
         var username = userDetail.username
 
-        if (username === password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
+        if (username === model.password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
 
         var Char = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
         if (!Char.test(model.password)) {

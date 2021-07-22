@@ -277,7 +277,7 @@ async function ChangePassword() {
     var res = JSON.parse(Decryption(GetSessionStorage("userDetails")))
     var username = res.username
 
-    if (username === password) return ShowError("Password and username must be different.");
+    if (username === newPassword) return ShowError("Password and username must be different.");
 
     if (Decryption(GetLocalStorage("currentUserData")) !== currentPassword) return ShowError(ChangeErroMessage("current_pass_not_match"));
 
