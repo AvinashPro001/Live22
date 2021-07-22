@@ -94,7 +94,7 @@ namespace Webet333.api.Helpers.SexyBaccarat
             dict.Add("isMobileLogin", isMoible.ToString());
             dict.Add("gameType", GameConst.SexyBaccaratConst.gameType);
             dict.Add("platform", GameConst.SexyBaccaratConst.platform);
-            dict.Add("externalURL", GameConst.SexyBaccaratConst.RedirectURL);
+            dict.Add("externalURL", GameConst.BaseUrl);
 
             return JsonConvert.DeserializeObject<SexyBaccaratLoginResponse>(await CallThirdPartyApi(url, dict));
         }

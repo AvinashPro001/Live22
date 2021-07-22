@@ -7,6 +7,7 @@ using Webet333.dapper;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
+using Webet333.models.Request.Payments;
 using Webet333.models.Request.User;
 using Webet333.models.Response;
 using Webet333.models.Response.User;
@@ -138,6 +139,15 @@ namespace Webet333.api.Helpers
         }
 
         #endregion Get User's List
+
+        public async Task<List<RewardListResponse>> RewardList(GlobalGetWithPaginationRequest request)
+        {
+            using (var repository = new DapperRepository<RewardListResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.User.GetUsersRewardList, new { request.UserId, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                return result.ToList();
+            }
+        }
 
         #region House Keeping
 

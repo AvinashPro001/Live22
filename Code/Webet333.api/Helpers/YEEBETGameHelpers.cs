@@ -31,7 +31,7 @@ namespace Webet333.api.Helpers
         public static async Task<YEEBETResponse> RegisterCallAPI(string Username)
         {
             var temp = $"appid={GameConst.YEEBET.APPId}&" +
-                $"returnurl={GameConst.YEEBET.ReturnURL}&" +
+                $"returnurl={GameConst.BaseUrl}&" +
                 $"username={Username}";
 
             var tempMD5 = SecurityHelpers.MD5EncrptText($"{temp}&key={GameConst.YEEBET.SecretKey}");
@@ -66,7 +66,7 @@ namespace Webet333.api.Helpers
                 $"currency={GameConst.YEEBET.Currency}&" +
                 $"iscreate={GameConst.YEEBET.IsCreate}&" +
                 $"language={Language}&" +
-                $"returnurl={GameConst.YEEBET.ReturnURL}&" +
+                $"returnurl={GameConst.BaseUrl}&" +
                 $"username={Username}";
 
             var tempMD5 = SecurityHelpers.MD5EncrptText($"{temp}&key={GameConst.YEEBET.SecretKey}");

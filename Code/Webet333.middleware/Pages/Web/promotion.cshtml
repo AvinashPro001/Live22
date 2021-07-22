@@ -1,0 +1,127 @@
+﻿@page
+@{
+    ViewData["Title"] = "Promotion - Webet333 -🥇";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<script>
+    CheckMobileNumberIsVerifiedOnly();
+</script>
+<div class="annunce-section-wrap">
+    <div class="container">
+        <div class="annunce-section">
+            <p class="annunce-title">
+                <i class="fas fa-bullhorn"></i>
+            </p>
+            <p class="annunce-text">
+                <marquee class="announcment-font" id="announcements"></marquee>
+            </p>
+            <div class="clear-fix"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<section class="article_sec_wrap">
+    <div class="promotion_wrap_sec">
+        <div class="container">
+            <div class="account-reg">
+                <h4 class="promotion-icon symbol mar-btm-ten">
+                    <span class="lang" key="promotion">PROMOTIONS</span>
+                </h4>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="leftProfileButon1">
+                            <ul>
+                                <li>
+                                    <a class="tablinks_health active" onclick="openCity1(event, 'All')">All</a>
+                                </li>
+                                <li>
+                                    <a class="tablinks_health" onclick="openCity1(event, 'New_Member')">New Member</a>
+                                </li>
+                                <li>
+                                    <a class="tablinks_health" onclick="openCity1(event, 'Sport_Member')">Sport</a>
+                                </li>
+                                <li>
+                                    <a class="tablinks_health" onclick="openCity1(event, 'Live_Casino_Member')">Live Casino</a>
+                                </li>
+                                <li>
+                                    <a class="tablinks_health" onclick="openCity1(event, 'Slots_Member')">Slots</a>
+                                </li>
+                                <li>
+                                    <a class="tablinks_health" onclick="openCity1(event, 'Rebate_Member')">Rebate</a>
+                                </li>
+                                <li>
+                                    <a class="tablinks_health" onclick="openCity1(event, 'Limited_Time_Member')">Limited Time</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="genaral_wrapp1">
+                            <div id="All" class="tabcontent_health" style="display: block;">
+                                <div class="row all_promotion ml0 mr0" id="all_promotion">
+
+                                </div>
+                            </div>
+                            <div id="New_Member" class="tabcontent_health">
+                                <div class="row all_promotion ml0 mr0" id="newmember_promotion">
+
+                                </div>
+                            </div>
+                            <div id="Sport_Member" class="tabcontent_health">
+                                <div class="row all_promotion ml0 mr0" id="sports_promotion">
+
+                                </div>
+                            </div>
+                            <div id="Live_Casino_Member" class="tabcontent_health">
+                                <div class="row all_promotion ml0 mr0" id="live_promotion">
+
+                                </div>
+                            </div>
+                            <div id="Slots_Member" class="tabcontent_health">
+                                <div class="row all_promotion ml0 mr0" id="slots_promotion">
+
+                                </div>
+                            </div>
+                            <div id="Rebate_Member" class="tabcontent_health">
+                                <div class="row all_promotion ml0 mr0" id="rebate_promotion">
+
+                                </div>
+                            </div>
+                            <div id="Limited_Time_Member" class="tabcontent_health">
+                                <div class="row all_promotion ml0 mr0" id="limited_promotion">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="description_section">
+    
+</div>
+
+<script>
+    AllAnnouncementsCallAPI();
+    setInterval(function () {
+        if ($('#all_promotion').children().length == 0)
+            SetPromotionInPromotionPage()
+    }, 200);
+
+    function openCity1(evt1, cityName1) {
+        var i, tabcontent_health, tablinks_health;
+        tabcontent_health = document.getElementsByClassName("tabcontent_health");
+        for (i = 0; i < tabcontent_health.length; i++) {
+            tabcontent_health[i].style.display = "none";
+        }
+        tablinks_health = document.getElementsByClassName("tablinks_health");
+        for (i = 0; i < tablinks_health.length; i++) {
+            tablinks_health[i].className = tablinks_health[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName1).style.display = "block";
+        evt1.currentTarget.className += " active";
+    }
+</script>

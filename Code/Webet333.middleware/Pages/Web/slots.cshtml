@@ -1,0 +1,553 @@
+﻿@page
+@{
+    ViewData["Title"] = "Slots - Webet333 -🥇";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<script>
+    CheckMobileNumberIsVerifiedOnly();
+</script>
+<div class="annunce-section-wrap">
+    <div class="container">
+        <div class="annunce-section">
+            <p class="annunce-title">
+                <i class="fas fa-bullhorn"></i>
+            </p>
+            <p class="annunce-text">
+                <marquee class="announcment-font" id="announcements"></marquee>
+            </p>
+            <div class="clear-fix"></div>
+        </div>
+    </div>
+</div>
+
+<section class="article_sec_wrap">
+    <div class="promotion_wrap_sec">
+        <div class="container">
+
+            <div class="slider-nav">
+                <div>
+                    <div class="img-block text-center slot-menu-height">
+                        <div class="img-block-content">
+                            <figure><img class="hover_icons" src="~/images/carousel_logos/playtech_color.png" alt="logo"></figure>
+                            <p>PlayTech</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="img-block text-center slot-menu-height">
+                        <div class="img-block-content">
+                            <figure><img class="hover_icons" src="~/images/carousel_logos/asia_color.png" alt="logo"></figure>
+                            <p>Asia Gaming</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="img-block text-center slot-menu-height" id="pragmatic-game">
+                        <div class="img-block-content">
+                            <figure><img class="hover_icons" src="~/images/carousel_logos/pragmatic_color.png" alt="logo"></figure>
+                            <p>Pragmatic Play</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="img-block text-center slot-menu-height">
+                        <div class="img-block-content">
+                            <figure><img class="hover_icons" src="~/images/carousel_logos/joker_color.png" alt="logo"></figure>
+                            <p>Joker</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="img-block text-center slot-menu-height">
+                        <div class="img-block-content">
+                            <figure><img class="hover_icons" src="~/images/carousel_logos/mega_color.png" alt="logo"></figure>
+                            <p>Mega888</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="img-block text-center slot-menu-height">
+                        <div class="img-block-content">
+                            <figure><img class="hover_icons" src="~/images/carousel_logos/918kiss_color.png" alt="logo"></figure>
+                            <p>918 Kiss</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="img-block text-center slot-menu-height">
+                        <div class="img-block-content">
+                            <figure><img class="hover_icons" src="~/images/carousel_logos/pussy888_color.png" alt="logo"></figure>
+                            <p>Pussy888</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="slider-for-content">
+                <div>
+                    <div class="account-reg ">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="leftProfileButon1">
+                                    <ul>
+                                        <li><a class="tablinks_health active" onclick="openCity1(event, 'All_slot_playtech')">All</a></li>
+                                        <li><a class="tablinks_health" onclick="openCity1(event, 'hot_slot_playtech')">Hot</a></li>
+                                        <li><a class="tablinks_health" onclick="openCity1(event, 'new_slot_playtech')">New</a></li>
+                                        <li><a class="tablinks_health" onclick="openCity1(event, 'slot_slots_playtech')">Slots</a></li>
+                                        <li><a class="tablinks_health" onclick="openCity1(event, 'arcade_slots_playtech')">Arcade</a></li>
+                                        <li>
+                                            <div class="searchbar_bar_info">
+                                                <input type="text" placeholder="Search.." name="search" id="playtechSearch" onkeyup="SearchInPlaytechGameList()">
+                                                <button type="submit">
+                                                    <img src="~/images/search.png">
+                                                </button>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="genaral_wrapp1">
+                                    <div id="All_slot_playtech" class="tabcontent_health" style="display: block;">
+                                        <div class="row second_row_slot_game_wrap mr0 ml0">
+                                            <ul class="img-hover-block" id="playtech-all-section">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="hot_slot_playtech" class="tabcontent_health">
+                                    <div class="row second_row_slot_game_wrap mr0 ml0">
+                                        <ul class="img-hover-block" id="playtech-hot-section">
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div id="new_slot_playtech" class="tabcontent_health">
+                                    <div class="row second_row_slot_game_wrap mr0 ml0">
+                                        <ul class="img-hover-block" id="playtech-new-section">
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div id="slot_slots_playtech" class="tabcontent_health">
+                                    <div class="row second_row_slot_game_wrap mr0 ml0">
+                                        <ul class="img-hover-block" id="playtech-slot-section">
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div id="arcade_slots_playtech" class="tabcontent_health">
+                                    <div class="row second_row_slot_game_wrap mr0 ml0">
+                                        <ul class="img-hover-block" id="playtech-arcade-section">
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="account-reg ">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="leftProfileButon1">
+
+                                </div>
+                                <div class="genaral_wrapp1">
+                                    <div  style="display: block;">
+                                        <div class="row second_row_slot_game_wrap mr0 ml0" id="megaSlotsGameList">
+                                            <div class="inner_game_banner_wrap">
+                                                <div class="inner_game_banner_box_ag">
+                                                </div>
+                                                <div class="slot_bottom_boxs ag-games d-flex align-items-center">
+                                                    <div class="slot_inner_common_box ag-game-img img-box"> <img src="~/images/carousel_logos/asia_color.png" alt="Pussy888"></div>
+                                                    <div class="ml-auto thumb-arrow"><a href=""><figure><img src="~/images/hand-right-arrow.png" alt="hand"></figure></a></div>
+                                                    <div class="slot_inner_common_box ag-game-play">
+                                                        <div class="form-group ml0 mr0 slot_inner_formfield">
+                                                            <div class="play_now_btn">
+                                                                <a href="#" onclick="OpenGame('AG Wallet', true)"><img src="~/images/playnow.png" alt="playnow" /> Play</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="account-reg ">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="leftProfileButon1">
+                                    <ul>
+                                        <li><a class="tablinks_health active" onclick="openCity1(event, 'All_slot_pragmatic')">All</a></li>
+                                        <li><a class="tablinks_health" onclick="openCity1(event, 'hot_slot_pragmatic')">Hot</a></li>
+                                        <li>
+                                            <a class="tablinks_health" onclick="openCity1(event, 'new_slot_pragmatic')">New</a>
+                                        </li>
+                                        <li>
+                                            <a class="tablinks_health" onclick="openCity1(event, 'slot_slots_pragmatic')">Slots</a>
+                                        </li>
+                                        <li>
+                                            <a class="tablinks_health" onclick="openCity1(event, 'arcade_slots_pragmatic')">Arcade</a>
+                                        </li>
+                                        <li>
+                                            <div class="searchbar_bar_info">
+                                                <input type="text" placeholder="Search.." name="search" id="pragmaticSearch" onkeyup="SearchInPragmaticGameList()">
+                                                <button type="submit">
+                                                    <img src="~/images/search.png" style="width:20px;">
+                                                </button>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="genaral_wrapp1">
+                                    <div id="All_slot_pragmatic" class="tabcontent_health" style="display: block;">
+                                        <div class="row second_row_slot_game_wrap mr0 ml0">
+                                            <ul class="img-hover-block" id="pragmatic-all-section">
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                    <div id="hot_slot_pragmatic" class="tabcontent_health">
+                                        <div class="row second_row_slot_game_wrap mr0 ml0">
+                                            <ul class="img-hover-block" id="pragmatic-hot-section">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div id="new_slot_pragmatic" class="tabcontent_health">
+                                        <div class="row second_row_slot_game_wrap mr0 ml0">
+                                            <ul class="img-hover-block" id="pragmatic-new-section">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div id="slot_slots_pragmatic" class="tabcontent_health">
+                                        <div class="row second_row_slot_game_wrap mr0 ml0">
+                                            <ul class="img-hover-block" id="pragmatic-slot-section">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div id="arcade_slots_pragmatic" class="tabcontent_health">
+                                        <div class="row second_row_slot_game_wrap mr0 ml0">
+                                            <ul class="img-hover-block" id="pragmatic-arcade-section">
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="account-reg ">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="leftProfileButon1">
+
+                                </div>
+                                <div class="genaral_wrapp1">
+                                    <div style="display: block;">
+                                        <div class="row second_row_slot_game_wrap mr0 ml0" >
+                                            <div class="inner_game_banner_wrap">
+                                                <div class="inner_game_banner_box_joker"></div>
+                                                <div class="slot_bottom_boxs game-bg">
+                                                    <div class="slot_inner_common_box joker-game d-flex align-items-center"> <img src="~/images/carousel_logos/joker_color.png" alt="Joker"></div>
+                                                    <div class="slot_inner_common_box">
+                                                        <div class="form-group ml0 mr0 slot_inner_formfield">
+                                                            <label class="user-title">Username</label>
+                                                            <label class="user mendatory ">
+                                                                <input type="text" class="reg-form" placeholder="" id="joker_username" readonly/>
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-group ml0 mr0 slot_inner_formfield">
+                                                            <label class="user-title ">Password</label>
+                                                            <label class="lock mendatory ">
+                                                                <input type="text" class="reg-form" placeholder="" id="joker_password" readonly/>
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="slot_inner_common_box">
+                                                        <p>Instructions</p>
+                                                        <p>1. Download Joker apps at our <a href="~/Web/download"> Download Page</a></p>
+                                                        <p>2. Launch Joker apps on your Android/iphone</p>
+                                                        <p>3. Left side is your Joker Login ID and password, use it to login</p>
+                                                        <p>4. Enjoy and WIN JACKPOT!</p>
+                                                    </div>
+                                                </div>
+                                            </div><!-- inner_game_banner_wrap ends -->
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="account-reg ">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="leftProfileButon1">
+
+                                </div>
+                                <div class="genaral_wrapp1">
+                                    <div style="display: block;">
+                                        <div class="row second_row_slot_game_wrap mr0 ml0" id="megaSlotsGameList">
+                                            <div class="inner_game_banner_wrap">
+                                                <div class="inner_game_banner_box_mega"></div>
+                                                <div class="slot_bottom_boxs">
+                                                    <div class="slot_inner_common_box img-box mega-game d-flex align-items-center"> <img src="~/images/carousel_logos/mega_color.png" alt="MEGA-LOGO"></div>
+                                                    <div class="slot_inner_common_box game-bg">
+                                                        <div class="form-group ml0 mr0 slot_inner_formfield">
+                                                            <label class="user-title">Username</label>
+                                                            <label class="user mendatory ">
+                                                                <input type="text" class="reg-form" placeholder="" id="mega888_username" readonly/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group ml0 mr0 slot_inner_formfield">
+                                                            <label class="user-title ">Password</label>
+                                                            <label class="lock mendatory ">
+                                                                <input type="text" class="reg-form" placeholder="" id="mega888_password" readonly/>
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="slot_inner_common_box">
+                                                        <p>Instructions</p>
+                                                        <p>1. Download Mega888 apps at our <a href="~/Web/download"> Download Page</a></p>
+                                                        <p>2. Launch Mega888 apps on your Android/iphone</p>
+                                                        <p>3. Left side is your mega888 Login ID and password, use it to login</p>
+                                                        <p>4. Enjoy and WIN JACKPOT!</p>
+                                                    </div>
+                                                </div>
+                                            </div><!-- inner_game_banner_wrap ends -->
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="account-reg ">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="leftProfileButon1">
+
+                                </div>
+                                <div class="genaral_wrapp1">
+                                    <div style="display: block;">
+                                        <div class="row second_row_slot_game_wrap mr0 ml0" id="megaSlotsGameList">
+                                            <div class="inner_game_banner_wrap">
+                                                <div class="inner_game_banner_box_kiss">
+                                                </div>
+                                                <div class="slot_bottom_boxs">
+                                                    <div class="slot_inner_common_box d-flex align-items-center kiss-game img-box"> <img src="~/images/carousel_logos/918kiss_color.png" alt="918 Kiss"></div>
+                                                    <div class="slot_inner_common_box">
+                                                        <div class="form-group ml0 mr0 slot_inner_formfield">
+                                                            <label class="user-title">Username</label>
+                                                            <label class="user mendatory ">
+                                                                <input type="text" class="reg-form" placeholder="" disabled id="kiss918_username" />
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-group ml0 mr0 slot_inner_formfield">
+                                                            <label class="user-title ">Password</label>
+                                                            <label class="lock mendatory ">
+                                                                <input type="text" class="reg-form" placeholder="" disabled id="kiss918_password" />
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="slot_inner_common_box">
+                                                        <p>Instructions</p>
+                                                        <p>1. Download 918Kiss apps at our <a href="~/Web/download"> Download Page</a></p>
+                                                        <p>2. Launch 918Kiss apps on your Android/iphone</p>
+                                                        <p>3. Left side is your 918Kiss Login ID and password, use it to login</p>
+                                                        <p>4. Enjoy and WIN JACKPOT!</p>
+                                                    </div>
+                                                </div>
+                                            </div><!-- inner_game_banner_wrap ends -->
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="account-reg ">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="leftProfileButon1">
+
+                                </div>
+                                <div class="genaral_wrapp1">
+                                    <div style="display: block;">
+                                        <div class="row second_row_slot_game_wrap mr0 ml0" >
+                                            <div class="inner_game_banner_wrap">
+                                                <div class="inner_game_banner_box_pussy">
+                                                </div>
+                                                <div class="slot_bottom_boxs">
+                                                    <div class="slot_inner_common_box d-flex align-items-center pussy-game img-box"> <img src="~/images/carousel_logos/pussy888_color.png" alt="Pussy888"></div>
+                                                    <div class="slot_inner_common_box">
+                                                        <div class="form-group ml0 mr0 slot_inner_formfield">
+                                                            <label class="user-title">Username</label>
+                                                            <label class="user mendatory ">
+                                                                <input type="text" class="reg-form" placeholder="" disabled id="pussy888_username" />
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-group ml0 mr0 slot_inner_formfield">
+                                                            <label class="user-title ">Password</label>
+                                                            <label class="lock mendatory ">
+                                                                <input type="text" class="reg-form" placeholder="" disabled id="pussy888_password" />
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="slot_inner_common_box">
+                                                        <p>Instructions</p>
+                                                        <p>1. Download Pussy888 apps at our <a href="~/Web/download"> Download Page</a></p>
+                                                        <p>2. Launch Pussy888 apps on your Android/iphone</p>
+                                                        <p>3. Left side is your Pussy888 Login ID and password, use it to login</p>
+                                                        <p>4. Enjoy and WIN JACKPOT!</p>
+                                                    </div>
+                                                </div>
+                                            </div><!-- inner_game_banner_wrap ends -->
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    AllAnnouncementsCallAPI();
+
+    function openCity1(evt1, cityName1) {
+        var i, tabcontent_health, tablinks_health;
+        tabcontent_health = document.getElementsByClassName("tabcontent_health");
+        for (i = 0; i < tabcontent_health.length; i++) {
+            tabcontent_health[i].style.display = "none";
+        }
+        tablinks_health = document.getElementsByClassName("tablinks_health");
+        for (i = 0; i < tablinks_health.length; i++) {
+            tablinks_health[i].className = tablinks_health[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName1).style.display = "block";
+        evt1.currentTarget.className += " active";
+    }
+
+</script>
+<script src='https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js'></script>
+<script type="text/javascript">
+    $('.slider-for-content').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        fade: true,
+        infinite: true,
+        autoplay: false,
+        autoplaySpeed: 3000,
+        asNavFor: '.slider-nav',
+    });
+    $('.slider-nav').slick({
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        asNavFor: '.slider-for-content',
+        focusOnSelect: true,
+        infinite: true,
+        autoplay: false,
+        autoplaySpeed: 3000,
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    infinite: true
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        PragmaticSlotsGameList();
+        PlaytechSlotsGameList();
+        if (window.location.hash) {
+            var hash = window.location.hash.substring(1);
+            if (hash == 'pragmatic-game')
+                $("#pragmatic-game").click();
+        }
+    });
+
+    $(window).on('load', function () {
+        SetUsernamePassword(true);
+    });
+
+    $(document).ready(function () {
+        $('.slick-carousel').slick({
+            arrows: true,
+            centerPadding: "0px",
+            dots: true,
+            slidesToShow: 1,
+            infinite: false,
+            autoplay: true,
+        });
+
+        $('.slider').slick({
+            arrows: true,
+            centerPadding: "0px",
+            dots: true,
+            slidesToShow: 1,
+            infinite: false,
+        });
+    });
+
+    var callCounter = 1
+    $(document).on('scroll', function () {
+        if ((callCounter % 20) == 0) {
+            ++slotPageNumber
+            PlaytechSlotsGameList();
+            PragmaticSlotsGameList();
+        }
+        ++callCounter;
+    });
+</script>
