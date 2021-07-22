@@ -7,8 +7,8 @@ export const environment = {
     production: false,
     //apiUrl: 'https://api.wb3api.com/api/v1/',
     //apiUrlWithVersion: 'https://api.wb3api.com/'
-    apiUrl: 'http://127.0.0.1:8094/api/v1/',
-    apiUrlWithVersion: 'http://127.0.0.1:8094/'
+    apiUrl: 'http://127.0.0.1:9001/api/v1/',
+    apiUrlWithVersion: 'http://127.0.0.1:9001/'
 };
 
 export const account = {
