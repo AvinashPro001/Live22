@@ -332,11 +332,11 @@ namespace Webet333.api.Helpers
 
         #region Update
 
-        internal async Task<dynamic> HomePageBannerUpdateAsync(HomePageBannerUpdateRequest request)
+        internal async Task<HomePageBannerAddResponse> HomePageBannerUpdateAsync(HomePageBannerUpdateRequest request)
         {
-            using (var repository = new DapperRepository<dynamic>(Connection))
+            using (var repository = new DapperRepository<HomePageBannerAddResponse>(Connection))
             {
-                return await repository.FindAsync(
+                var result = await repository.FindAsync(
                     StoredProcConsts.Settings.HomePageBannersPersist,
                     new
                     {
@@ -350,6 +350,8 @@ namespace Webet333.api.Helpers
 
                         AdminId = request.AdminId
                     });
+
+                return result;
             }
         }
 
