@@ -732,7 +732,7 @@
         function SetDesktopMode() {
             var viewMode = getCookie("view-mode");
             if (viewMode == "desktop") {
-                $('meta[name="viewport"]').prop('content', 'width=1024');
+                $('meta[name="viewport"]').prop('content', 'width=1024,initial-scale=0.0');
             } else if (viewMode == "mobile") {
                 $('meta[name="viewport"]').prop('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no');
             }
