@@ -596,6 +596,12 @@ function SignalRConnect() {
             console.log("Not Connected with SignalR Hub");
             return console.error(err.toString());
         });
+
+        connection.on("HomePageBannerInsertUpdate", function () {
+            SiteData.HomeBannerData = null;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
+            HomeBannerCallAPI();
+        });
     }
     catch {
         SignalRConnect();
@@ -610,5 +616,3 @@ function CheckTokenIsValid(StausCode, StatusMessage) {
             window.location.reload();
         }
 }
-
-
