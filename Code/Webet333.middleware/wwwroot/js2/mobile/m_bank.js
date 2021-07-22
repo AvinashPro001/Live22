@@ -1100,7 +1100,7 @@ async function TransferHistory(FromDate = null, ToDate = null, PageSize = null, 
         var data = res.data.result;
         var html = ""
         for (i = 0; i < data.length; i++) {
-            html += '<li data-toggle="modal" data-target="#transfer-history-model" onclick="TransferHistoryDetailsSet(\'' + data[i].orderId + '\',\'' + data[i].created + '\',\'' + parseFloat(data[i].amount).toFixed(2) + '\',\'' + data[i].verified + '\',\'' + data[i].fromWallet + '\',\'' + data[i].toWallet + '\')" class="list-content"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].toWallet + '</h6><p>' + APIDateFormate(data[i].created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].amount).toFixed(2) + '</p><p class="product-available ' + data[i].verified.replace(" ", "_").toLowerCase() + '_color">' + data[i].verified + '</p></div></li>';
+            html += '<li data-toggle="modal" data-target="#transfer-history-model" onclick="TransferHistoryDetailsSet(\'' + data[i].orderId + '\',\'' + data[i].created + '\',\'' + parseFloat(data[i].amount).toFixed(2) + '\',\'' + data[i].verified + '\',\'' + data[i].fromWallet + '\',\'' + data[i].toWallet + '\')" class="list-content"><div class="back-btn rotate"><a><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].toWallet + '</h6><p>' + APIDateFormate(data[i].created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].amount).toFixed(2) + '</p><p class="product-available ' + data[i].verified.replace(" ", "_").toLowerCase() + '_color">' + data[i].verified + '</p></div></li>';
         }
         $("#transferHistory").append(html);
     }
@@ -1158,7 +1158,7 @@ async function PromotionHistory(FromDate = null, ToDate = null, PageSize = null,
         promotionHistoryData = data;
         var html = ""
         for (i = 0; i < data.length; i++) {
-            html += '<li data-toggle="modal" data-target="#promotion-history-model" onclick="PromotionHistoryDetailsSet(\'' + data[i].Id + '\')" class="list-content"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].Title + '</h6><p>' + APIDateFormate(data[i].Created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].UserTurnover).toFixed(2) + '</p><p class="product-available ' + data[i].Staus.replace(" ", "_").toLowerCase() + '_color">' + (data[i].Staus == "Manually Expired" ? "M. Expired" : data[i].Staus) + '</p></div></li>';
+            html += '<li data-toggle="modal" data-target="#promotion-history-model" onclick="PromotionHistoryDetailsSet(\'' + data[i].Id + '\')" class="list-content"><div class="back-btn rotate"><a><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].Title + '</h6><p>' + APIDateFormate(data[i].Created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].UserTurnover).toFixed(2) + '</p><p class="product-available ' + data[i].Staus.replace(" ", "_").toLowerCase() + '_color">' + (data[i].Staus == "Manually Expired" ? "M. Expired" : data[i].Staus) + '</p></div></li>';
         }
         $("#promotionHistory").append(html);
 
@@ -1187,7 +1187,7 @@ async function RebateHistory(FromDate = null, ToDate = null, PageSize = null, Pa
         var data = res.data.result;
         var html = ""
         for (i = 0; i < data.length; i++) {
-            html += '<li data-toggle="modal" data-target="#rebate-history-model"  onclick="RebateHistoryDetailsSet(\'' + data[i].gameName + '\',\'' + data[i].gameType + '\',\'' + parseFloat(data[i].bet).toFixed(2) + '\',\'' + parseFloat(data[i].rolling).toFixed(2) + '\',\'' + parseFloat(data[i].winLose).toFixed(2) + '\',\'' + parseFloat(data[i].turnover).toFixed(2) + '\',\'' + parseFloat(data[i].commAmount).toFixed(2) + '\',\'' + data[i].created + '\')"  class="list-content"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].gameName + '</h6><p>' + APIDateFormate(data[i].created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].commAmount).toFixed(2) + '</p><p class="product-available approved_color">' + data[i].gameType + '</p></div></li>';
+            html += '<li data-toggle="modal" data-target="#rebate-history-model"  onclick="RebateHistoryDetailsSet(\'' + data[i].gameName + '\',\'' + data[i].gameType + '\',\'' + parseFloat(data[i].bet).toFixed(2) + '\',\'' + parseFloat(data[i].rolling).toFixed(2) + '\',\'' + parseFloat(data[i].winLose).toFixed(2) + '\',\'' + parseFloat(data[i].turnover).toFixed(2) + '\',\'' + parseFloat(data[i].commAmount).toFixed(2) + '\',\'' + data[i].created + '\')"  class="list-content"><div class="back-btn rotate"><a><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].gameName + '</h6><p>' + APIDateFormate(data[i].created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].commAmount).toFixed(2) + '</p><p class="product-available approved_color">' + data[i].gameType + '</p></div></li>';
         }
         $("#rebateHistory").append(html);
     }
@@ -1215,7 +1215,7 @@ async function RewardHistory(FromDate = null, ToDate = null, PageSize = null, Pa
         var data = res.data.result;
         var html = ""
         for (i = 0; i < data.length; i++) {
-            html += '<li data-toggle="modal" data-target="#rebate-history-model"  class="list-content"><div class="back-btn rotate"><a href=""><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].TransactionType + '</h6><p>' + APIDateFormate(data[i].Created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].Amount).toFixed(2) + '</p><p class="product-available approved_color">' + parseFloat(data[i].CurrentBalance).toFixed(2) + '</p></div></li>';
+            html += '<li data-toggle="modal" data-target="#rebate-history-model"  class="list-content"><div class="back-btn rotate"><a><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].TransactionType + '</h6><p>' + APIDateFormate(data[i].Created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].Amount).toFixed(2) + '</p><p class="product-available approved_color">' + parseFloat(data[i].CurrentBalance).toFixed(2) + '</p></div></li>';
         }
         $("#rewardHistory").append(html);
 
