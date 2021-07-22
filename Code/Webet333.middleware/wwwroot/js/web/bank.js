@@ -361,9 +361,12 @@ async function Deposit(IsOnlinePayment) {
     else
         amount = $("#txt_deposit_amount").val();
 
+    if (amount < 10) {
+        return ShowError(ChangeErroMessage("min_amount_error"))
+    }
 
-    if (amount > 30000 || amount < 10) {
-        return ShowError(ChangeErroMessage("min_max_amount_error"));
+    if (amount > 30000) {
+        return ShowError(ChangeErroMessage("max_amount_error"));
     }
 
 
