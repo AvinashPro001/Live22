@@ -765,7 +765,7 @@ async function TransferAmount() {
     var modelBalance = {};
     // check insert amount is gereate then 0
     if ($('#txt_transferAmount').val() > 0) {
-        if ($('#txt_transferAmount').val() > 1) {
+        if ($('#txt_transferAmount').val() >= 1) {
             // get all wallete balance
             var resBalance = await PostMethod(apiEndPoints.walletBalance, modelBalance);
             var model = {
