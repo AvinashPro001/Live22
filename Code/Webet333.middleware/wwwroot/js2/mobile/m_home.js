@@ -68,11 +68,19 @@ async function SliderPromotion() {
                             '<div class="promotion-slide-hero-banner" ><a href="#"> <img src="' + panelData[i].bannerMobile + '" class="full-img"></a></div>'
                     }
 
-                    if (GetLocalStorage('currentUser') !== null)
-                        document.getElementById("mobilePromotionSliderLogin").className = "login-top-slider";
-                    else
-                        document.getElementById("mobilePromotionSlider").className = "login-top-slider";
-                    slider();
+                    try {
+                        if (GetLocalStorage('currentUser') !== null)
+                            document.getElementById("mobilePromotionSliderLogin").className = "login-top-slider";
+                        else
+                            document.getElementById("mobilePromotionSlider").className = "login-top-slider";
+
+                        slider();
+                    } catch (e) {
+                        slider();
+                    }
+                    finally {
+                        isPromotionExecute = false;
+                    }
                 }
             }
             else {
@@ -88,7 +96,7 @@ function slider() {
     $('.login-top-slider').slick({
         autoplay: true,
         autoplaySpeed: 5000,
-        dots: true,
+        dots: false,
         arrows: false,
         infinite: true,
         speed: 1000,

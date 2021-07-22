@@ -1,5 +1,7 @@
-﻿var baseUrl = "https://api.wb3api.com/api/v1/";
-var baseUrlWithoutVersion = "https://api.wb3api.com";
+﻿//var baseUrl = "https://api.wb3api.com/api/v1/";
+//var baseUrlWithoutVersion = "https://api.wb3api.com";
+var baseUrl = "http://127.0.0.1:9001/api/v1/";
+var baseUrlWithoutVersion = "http://127.0.0.1:9001";
 
 var globalEndPoints = {
     globalParameter: "Game/GlobalParameters"
@@ -115,5 +117,5 @@ var gameSettingEndPoints = {
     slotsGameList: "Game/slotsgame/list",
     pragmaticGameList: "pragmatic/game/list",
     HotGameList: "Game/hotslotsgame/list",
-    JokerGameId:"F2NZ."
+    JokerGameId: "F2NZ."
 }
