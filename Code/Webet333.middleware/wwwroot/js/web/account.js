@@ -277,8 +277,6 @@ async function ChangePassword() {
     if (Decryption(GetLocalStorage("currentUserData")) !== currentPassword) return ShowError(ChangeErroMessage("current_pass_not_match"));
 
     var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
-    if (!reqExp.test(currentPassword)) return ShowError(ChangeErroMessage("pass_alpha_error"));
-
     if (!reqExp.test(newPassword)) return ShowError(ChangeErroMessage("pass_alpha_error"));
 
     var model = {
