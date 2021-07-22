@@ -204,8 +204,8 @@ async function ChangePassword(i) {
             return ShowError(ChangeErroMessage("username_pass_diff_error"));
         }
 
-        var res = JSON.parse(Decryption(GetSessionStorage("UserDetails")))
-        var username = res.username
+        var userDetail = JSON.parse(Decryption(GetSessionStorage("UserDetails")))
+        var username = userDetail.username
 
         if (username === password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
 
