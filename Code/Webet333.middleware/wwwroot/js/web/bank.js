@@ -502,10 +502,10 @@ async function Deposit(IsOnlinePayment) {
 async function DepositAfterPromotionCheck() {
     LoaderShow();
     if (OnlinePayment) {
-        
+
         if (model.promotionId == undefined || model.promotionId == null) {
             SetLocalStorage("IsWindowClose", false);
-            OpenPaymentPage();  
+            OpenPaymentPage();
         }
         var res = await PostMethod(transactionEndPoints.onlinePayment, DepositModel);
         if (res.status == 200) {
@@ -532,10 +532,12 @@ async function DepositAfterPromotionCheck() {
 }
 
 async function Withdraw() {
-    var amount = Number($("#txt_withdraw_amount").val());
+    var amount = $("#txt_withdraw_amount").val();
 
-    if (amount <= 0)
-        return ShowError(ChangeErroMessage("min_max_amount_error_parameter", profile.withdrawLimit));
+    if (amount === "" || amount === null || amount === undefined)
+        return ShowError(ChangeErroMessage("amount_required_error"));
+    else
+        amount = Number($("#txt_withdraw_amount").val());
 
     var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
 
@@ -543,10 +545,7 @@ async function Withdraw() {
         return ShowError(ChangeErroMessage("min_max_amount_error_parameter", profile.withdrawLimit));
 
     if (WithdrawBankId === "" || WithdrawBankId === null || WithdrawBankId === undefined)
-        return ShowError(ChangeErroMessage("bnk_name_required_error"));
-
-    if (WithdrawBankId == undefined)
-        return ShowError(ChangeErroMessage("select_bank_name_error"));
+        return ShowError(ChangeErroMessage("plz_selet_bnk_error"));
 
     var model = {
         bankId: WithdrawBankId,
@@ -651,12 +650,12 @@ function CreatePagination(Id, TotalPages, CurrentPage) {
                     html += '<a class="active hand-curson" onclick="ClickOnPageNumber(\'' + i + '\')">' + i + '</a>';
                 else
                     html += '<a class="hand-curson" onclick="ClickOnPageNumber(\'' + i + '\')">' + i + '</a>';
-            html += '<a onclick="ClickOnPageNumber(\'' + (CurrentPage + 1) + '\')">&raquo;</a>'
+            html += '<a class="hand-curson" onclick="ClickOnPageNumber(\'' + (CurrentPage + 1) + '\')">&raquo;</a>'
             $('#' + Id).html(html);
         }
         else {
             if (CurrentPage == TotalPages) {
-                var html = '<a>&laquo;</a>';
+                var html = '<a class="hand-curson">&laquo;</a>';
                 $('#' + Id).html(html);
                 for (i = TotalPages - 4; i <= TotalPages; i++)
                     if (i == CurrentPage)
@@ -674,7 +673,7 @@ function CreatePagination(Id, TotalPages, CurrentPage) {
                             html += '<a class="active hand-curson" onclick="ClickOnPageNumber(\'' + i + '\')">' + i + '</a>';
                         else
                             html += '<a class="hand-curson" onclick="ClickOnPageNumber(\'' + i + '\')">' + i + '</a>';
-                    html += '<a onclick="ClickOnPageNumber(\'' + (CurrentPage + 1) + '\')">&raquo;</a>'
+                    html += '<a class="hand-curson" onclick="ClickOnPageNumber(\'' + (CurrentPage + 1) + '\')">&raquo;</a>'
                     $('#' + Id).html(html);
                 }
                 else {

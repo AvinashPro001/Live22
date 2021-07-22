@@ -175,7 +175,7 @@
   "Live_chat": "Live Chat",
   "NotSignIn": " Anda belum log masuk. Sila Daftar atau log masuk.",
 
-  "Description": "Bermain Casino Games online adalah menyeronokkan, mudah, dan tersedia 24/7, 365 hari setahun. Log masuk ke akaun anda dan nikmati teknologi permainan dalam talian terkini semasa anda memainkan pelbagai slot dalam talian bertema yang berbeza, termasuk ciri menarik seperti penyerakkan, liar, dan pengganda untuk membantu anda memaksimumkan pengalaman permainan anda. Permainan kasino klasik yang anda kenali dan suka juga boleh didapati secara dalam talian. Termasuk roulette dalam talian dan blackjack dalam talian dengan peraturan tradisional serta ciri khas seperti Blackjack Switch yang membolehkan anda menukar kad anda dan Roulette progresif dan Blackjack di mana pertaruhan sampingan tambahan membolehkan anda bermain untuk beberapa pembayaran yang paling lumayan di kasino dalam talian industri permainan.Bersenang-senang dan sila bermain dengan bertanggungjawab. www.webet333.com",
+  "Description": "Bermain Casino Games online adalah menyeronokkan, mudah, dan tersedia 24/7, 365 hari setahun. Log masuk ke akaun anda dan nikmati teknologi permainan dalam talian terkini semasa anda memainkan pelbagai slot dalam talian bertema yang berbeza, termasuk ciri menarik seperti penyerakkan, liar, dan pengganda untuk membantu anda memaksimumkan pengalaman permainan anda. Permainan kasino klasik yang anda kenali dan suka juga boleh didapati secara dalam talian. Termasuk roulette dalam talian dan blackjack dalam talian dengan peraturan tradisional serta ciri khas seperti Blackjack Switch yang membolehkan anda menukar kad anda dan Roulette progresif dan Blackjack di mana pertaruhan sampingan tambahan membolehkan anda bermain untuk beberapa pembayaran yang paling lumayan di kasino dalam talian industri permainan.Bersenang-senang dan sila bermain dengan bertanggungjawab. www.Webet333.net",
   "password": "Kata laluan",
   "load_more": "Lebih Banyak",
   "your_access_information": "Maklumat akses anda",
@@ -247,9 +247,9 @@
   "promo_apply_balance_error": "Baki anda adalah lebih rendah daripada 5 MYR baki deposit anda, anda boleh menggunakan promosi baru, dan promosi promosi anda sudah tamat tempoh.",
   "amount_greater_zero_error": "Sila Masukkan Jumlah lebih daripada 0",
   "promot_active_error": "Anda tidak boleh menggunakan promosi, Kerana anda mempunyai promosi yang aktif",
-  "min_max_amount_error": "Jumlah Amaun Minimum adalah 10 dan Maximum 30000.",
-  "min_max_amount_error_parameter": "Jumlah Amaun Minimum adalah 10 dan Maximum ",
-  "min1_max1000_amount_error": "Jumlah Amaun Minimum adalah 1",
+  "min_max_amount_error": "Amaun Minimum ialah 10 dan Maksimum ialah 300000.",
+  "min_max_amount_error_parameter": "Amaun Minimum 10 dan Amaun Maksimum ialah ",
+  "min1_max1000_amount_error": "Amaun Minimum 1",
   "bnk_name_required_error": "Nama Bank Diperlukan",
 
   "amt_req_error": "Amaun yang difailkan diperlukan.",

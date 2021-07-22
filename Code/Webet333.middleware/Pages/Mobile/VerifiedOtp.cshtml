@@ -59,7 +59,8 @@
             if (res.data.errorCode == 0) {
                 var Details = await GetMethod(apiEndPoints.getProfile);
                 sessionStorage.setItem('UserDetails', enc(JSON.stringify(Details)));
-                window.location = "../mobile";
+                /*window.location = "../mobile";*/
+                await gtag_report_conversion("../mobile");
 
             }
             LoaderHide();

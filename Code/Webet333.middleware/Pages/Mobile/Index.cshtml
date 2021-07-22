@@ -5,8 +5,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="keywords" content="Webet333.com | Cash Market, Online Casino, Malaysia Online Casino, 918Kiss, AG Casino, Playtech Casino, Joker Casino, Joker Slot, M8 Sports, 24x7 Casino, Malaysia Casino, 100% Welcome Bonus Casino, 150% Welcome Bonus Casino, 10% Extra jackpot casino, 10% Extra bonus casino" />
-    <meta name="description" content="Webet333.com | Trusted Online Casino Malaysia, Malaysia Online Casino, 918Kiss, AG Casino, Playtech Casino, Joker Casino, Joker Slot, M8 Sports, 24x7 Casino, Malaysia Casino, 200% Welcome Bonus Casino, 150% Welcome Bonus Casino, 10% Extra jackpot casino, 10% Extra bonus casino" />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168889054-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-168889054-1');
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Ads: 480804860 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-480804860"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-480804860');
+    </script>
+    <!-- Event snippet for youtube signup conversion page
+    In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+    <script>
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof (url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-480804860/17uwCMrko-4BEPz_oeUB',
+                'event_callback': callback
+            });
+            return false;
+        }
+    </script>
+    <!-- Event snippet for Sign-up conversion page -->
+    <!-- Global site tag (gtag.js) - Google Ads: 527506130 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-527506130"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-527506130');
+    </script>
+    <script>
+        gtag('event', 'conversion', { 'send_to': 'AW-527506130/BFpFCPDPiuQBENK1xPsB' });
+    </script>
+
+
+    <meta name="keywords" content="Webet333.net | Cash Market, Online Casino, Malaysia Online Casino, 918Kiss, AG Casino, Playtech Casino, Joker Casino, Joker Slot, M8 Sports, 24x7 Casino, Malaysia Casino, 100% Welcome Bonus Casino, 150% Welcome Bonus Casino, 10% Extra jackpot casino, 10% Extra bonus casino" />
+    <meta name="description" content="Webet333.net | Trusted Online Casino Malaysia, Malaysia Online Casino, 918Kiss, AG Casino, Playtech Casino, Joker Casino, Joker Slot, M8 Sports, 24x7 Casino, Malaysia Casino, 200% Welcome Bonus Casino, 150% Welcome Bonus Casino, 10% Extra jackpot casino, 10% Extra bonus casino" />
     <meta name="author" content="" />
     <meta name="title" content="Webet333 🥇" />
     <meta charset="utf-8">
@@ -108,23 +159,6 @@
             }
         }
     </script>
-    <!-- Event snippet for Sign-up conversion page
-    In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-    <script>
-        function gtag_report_conversion(url) {
-            var callback = function () {
-                if (typeof (url) != 'undefined') {
-                    window.location = url;
-                }
-            };
-            gtag('event', 'conversion', {
-                'send_to': 'AW-480804860/17uwCMrko-4BEPz_oeUB',
-                'event_callback': callback
-            });
-            return false;
-        }
-    </script>
-  
 </head>
 
 <body>
@@ -154,6 +188,10 @@
     </div>
     <script>
         setTimeout(() => {
+
+            setCookie('view-mode', 'mobile', 30);
+            SetDesktopMode();
+
             var url_string = window.location;
             var url = new URL(url_string);
 
@@ -690,6 +728,15 @@
             padding-top: 35px;
         }
     </style>
-
+    <script>
+        function SetDesktopMode() {
+            var viewMode = getCookie("view-mode");
+            if (viewMode == "desktop") {
+                $('meta[name="viewport"]').prop('content', 'width=1024,initial-scale=0.0');
+            } else if (viewMode == "mobile") {
+                $('meta[name="viewport"]').prop('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no');
+            }
+        }
+    </script>
 </body>
 </html>
