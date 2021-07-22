@@ -261,7 +261,7 @@ function SetProfilePageBanks() {
         if (UserBank.length > 0) {
             html = "";
             for (i = 0; i < UserBank.length; i++) {
-                html += '<div class="bank_details1"><div class="bank_details1_icon_box"><img src="' + UserBank[i].bankLogo + '" class="bank_details_icon"></div><div class="bank_details1-text"><h1>' + UserBank[i].accountNo + ' <span class="tickgray"><img src="/images/tickgray.png"></span></h1><p><a href="#">' + UserBank[i].accountName + '</a></p></div></div>';
+                html += '<div class="bank_details1"><div class="bank_details1_icon_box"><img src="' + UserBank[i].bankLogo + '" class="bank_details_icon"></div><div class="bank_details1-text"><h1>' + UserBank[i].accountNo + ' <span class="tickgray"><img src="/images/tickgray.png"></span></h1><p>' + UserBank[i].accountName + '</p></div></div>';
             }
             SetAllValueInElement("users_bank_details", html);
         }
