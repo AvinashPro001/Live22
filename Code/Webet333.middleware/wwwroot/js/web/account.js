@@ -266,12 +266,13 @@ async function ChangePassword() {
     var newPassword = $("#txt_newPassword").val();
     var confirmPassword = $("#txt_confirmPassword").val();
 
-
-    if (newPassword.length < 6) return ShowError(ChangeErroMessage("pass_length_error"));
-
     if (newPassword === "") return ShowError(ChangeErroMessage("password_required_error"));
 
     if (confirmPassword === "") return ShowError(ChangeErroMessage("confirm_password_required_error"));
+
+    if (newPassword.length < 6) return ShowError(ChangeErroMessage("pass_length_error"));
+
+    if (currentPassword === newPassword) return ShowError(ChangeErroMessage("new_password_check_error"))
 
     if (newPassword !== confirmPassword) return ShowError(ChangeErroMessage("pass_not_match_error"));
 

@@ -137,6 +137,8 @@
 
             public const string WithdrawList = "payments/withdraw/retrieve";
 
+            public const string WithdrawListTemp = "payments/withdraw/retrieve/temp";
+
             public const string WithdrawVerify = "payments/withdraw/verify";
 
             public const string Transfer = "payments/transfer";
