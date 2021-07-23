@@ -336,6 +336,14 @@ async function DoRegister() {
         return ShowError("Username Filed is required.");
     }
 
+    if (model.password === "") {
+        LoaderHide();
+        return ShowError("Password Filed is required.");
+    }
+    if (model.confirmPassword === "") {
+        LoaderHide();
+        return ShowError("Confirm Password Filed is required.");
+    }
     if (model.password.length < 6) {
         LoaderHide();
         return ShowError(ChangeErroMessage("pass_length_error"));
@@ -345,14 +353,7 @@ async function DoRegister() {
         LoaderHide();
         return ShowError("Username Length too short.");
     }
-    if (model.password === "") {
-        LoaderHide();
-        return ShowError("Password Filed is required.");
-    }
-    if (model.confirmPassword === "") {
-        LoaderHide();
-        return ShowError("Confirm Password Filed is required.");
-    }
+    
     if (model.name === "") {
         LoaderHide();
         return ShowError("Name Filed is required.");
