@@ -39,9 +39,9 @@
 
 #if DEBUG
 
-        public const string BaseUrl = "http://www.uatwb3.com/";
+        public const string BaseUrl = "https://www.uatwb3.com/";
 
-        public const string APIUrl = "http://uatapi.wb3api.com/api/v1/";
+        public const string APIUrl = "https://uatapi.wb3api.com/api/v1/";
 
         public class MaxBet
         {
