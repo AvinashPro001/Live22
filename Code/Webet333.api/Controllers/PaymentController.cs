@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
@@ -15,7 +14,6 @@ using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Payments;
-using Webet333.models.Response.Payments;
 using RequestSizeLimitAttribute = Webet333.api.Filters.RequestSizeLimitAttribute;
 
 namespace Webet333.api.Controllers
@@ -63,15 +61,37 @@ namespace Webet333.api.Controllers
         #region User's transaction retrieve
 
         [HttpPost(ActionsConst.Payments.Transaction)]
-        public async Task<IActionResult> Transaction([FromBody] GlobalGetRequest request)
+        public async Task<IActionResult> Transaction([FromBody] GlobalGetWithPaginationRequest request)
         {
-            var Role = GetUserRole(User);
+            await CheckUserRole();
 
-            request.UserId = Role == RoleConst.Admin ? request.UserId : GetUserId(User).ToString();
+            if (string.IsNullOrWhiteSpace(request.UserId)) return BadResponse("error_empty_request");
 
             using (var payment_help = new PaymentHelpers(Connection))
             {
-                return OkResponse(await payment_help.GetDynamicData(StoredProcConsts.Payments.Transaction, UserId: request.UserId, FromDate: request.FromDate, ToDate: request.ToDate));
+                var list = await payment_help.StatementRetriver(request);
+                if (list.Count != 0)
+                {
+                    var total = list.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 10,
+                        offset = list.FirstOrDefault().OffSet,
+                    });
+                }
+                return OkResponse(new
+                {
+                    result = list,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
             }
         }
 
@@ -282,6 +302,53 @@ namespace Webet333.api.Controllers
                     return OkResponse(await payment_help.GetDynamicData(StoredProcConsts.Payments.WithdrawalList, request?.UserId, request?.Id, request?.Status, Keyword: request?.Keyword, FromDate: request.FromDate, ToDate: request.ToDate));
                 else
                     return OkResponse(await payment_help.GetDynamicData(StoredProcConsts.Payments.WithdrawalList, GetUserId(User).ToString(), request?.Id, request?.Status, Keyword: request?.Keyword));
+            }
+        }
+
+        [HttpPost(ActionsConst.Payments.WithdrawListTemp)]
+        public async Task<IActionResult> WithdrawListTemp([FromBody] GlobalGetWithPaginationRequest request)
+        {
+            // await ValidateUser();
+            var Role = GetUserRole(User);
+
+            if (request == null) request = new GlobalGetWithPaginationRequest();
+
+            using (var payment_help = new PaymentHelpers(Connection))
+            {
+                if (Role == RoleConst.Admin)
+                {
+                    var temp = await payment_help.WithdrawalList(StoredProcConsts.Payments.WithdrawalList, request?.UserId, request?.Id, request?.Status, Keyword: request?.Keyword, FromDate: request.FromDate, ToDate: request.ToDate, PageNo: request.PageNo, PageSize: request.PageSize);
+
+                    if (temp.Any())
+                    {
+                        var total = temp.FirstOrDefault().Total;
+                        var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? temp.Count : request.PageSize);
+
+                        return OkResponse(new
+                        {
+                            result = temp,
+                            total = total,
+                            totalPages = totalPages,
+                            pageSize = request.PageSize ?? 10,
+                            offset = temp.FirstOrDefault().OffSet,
+                        });
+                    }
+
+                    return OkResponse(new
+                    {
+                        result = temp,
+                        total = 0,
+                        totalPages = 0,
+                        pageSize = 0,
+                        offset = 0,
+                    });
+                }
+                else
+                {
+                    var temp = await payment_help.WithdrawalList(StoredProcConsts.Payments.WithdrawalList, GetUserId(User).ToString(), request?.Id, request?.Status, Keyword: request?.Keyword);
+
+                    return OkResponse(temp);
+                }
             }
         }
 
