@@ -730,6 +730,8 @@ function GetDateFormate(Date1, Date2) {
     Month2 = Month2 < 10 ? "0" + Month2 : Month2;
     day2 = day2 < 10 ? "0" + day2 : day2;
 
+    $("#datepicker1").val(day1 + "/" + Month1 + "/" + Year1)
+    $("#datepicker2").val(day2 + "/" + Month2 + "/" + Year2)
 
     fromDate = Year1 + "-" + Month1 + "-" + day1 + " 00:00:00";
     toDate = Year2 + "-" + Month2 + "-" + day2 + " 23:59:59";
@@ -781,11 +783,11 @@ function GetDateRange() {
     pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");
-    if (fdate.length == 1 || tdate.length == 1)
-        return ShowError(ChangeErroMessage("error_select_both_date"))
-    $(".remove-active-class>li.active").removeClass("active");
-    fromDate = fdate[2] + "-" + fdate[0] + "-" + fdate[1] + " 00:00:00";
-    toDate = tdate[2] + "-" + tdate[0] + "-" + tdate[1] + " 23:59:59";
+    //if (fdate.length == 1 || tdate.length == 1)
+    //    return ShowError(ChangeErroMessage("error_select_both_date"))
+    //$(".remove-active-class>li.active").removeClass("active");
+    fromDate = fdate[2] + "-" + fdate[1] + "-" + fdate[0] + " 00:00:00";
+    toDate = tdate[2] + "-" + tdate[1] + "-" + tdate[0] + " 23:59:59";
     CallFunctionAccordingToTab();
 }
 
