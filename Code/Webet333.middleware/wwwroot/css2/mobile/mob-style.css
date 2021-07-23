@@ -337,17 +337,27 @@ header .sticky-header {
         margin: 0px;
     }
 
-        .join-now-section .hero-banner .slick-dots li {
-            background-color: white;
+        .join-now-section .hero-banner .slick-dots li, .join-now-section .hero-banner .slick-dots li.slick-active {
+            background-color: transparent;
             opacity: 1;
-            margin:0px 5px;
+            margin: 0px 3px;
+            font-size:0px;
+            line-height:0px;
         }
+
+            .join-now-section .hero-banner .slick-dots li.slick-active button{
+                background:white;
+            }
 
             .join-now-section .hero-banner .slick-dots li button {
                 font-size: 0px;
                 line-height: 0px;
                 padding: 0px;
-                display:none;
+                height: 6px;
+                width: 6px;
+                background: #cccccc;
+                border: 0;
+                border-radius: 50%;
             }
 
 
