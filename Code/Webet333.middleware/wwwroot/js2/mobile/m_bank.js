@@ -687,7 +687,7 @@ async function Withdrawal() {
 
             if (model.bankId === "" || model.bankId === null || model.bankId === undefined) {
                 //LoaderHide();
-                return ShowError(ChangeErroMessage("bnk_name_required_error"));
+                return ShowError(ChangeErroMessage("plz_selet_bnk_error"));
             }
             if (model.amount === "") {
                 //LoaderHide();
