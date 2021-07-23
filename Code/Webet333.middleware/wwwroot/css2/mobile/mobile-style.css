@@ -309,6 +309,7 @@ select.main-wallet.jcf-hidden,
 .main-wallet-bal-pad{padding-left:0px !important;}
 .home-vip-image{margin-top:-4px;}
 .main-wallet-bar{line-height:20px;}
+.wrap-swap-mob{display:flex;flex-direction:column-reverse}
 
 
 
@@ -1801,7 +1802,7 @@ p.bonus_content a {
 
     .steps-2 {
         z-index: 5;
-        padding-bottom: 50px;
+        padding-bottom: 225px;
     }
 
         .steps-2 .step {
@@ -1822,13 +1823,21 @@ p.bonus_content a {
             top: 22px;
             left: 0px;
             margin-left: 5px;
+            display:flex;
+            flex-wrap:wrap;
+            align-items:center;
+            padding-bottom:15px;
         }
+
+            .steps-2 .point:last-child{
+                padding-bottom:0px;
+            }
 
             .steps-2 .point:before {
                 content: '';
                 display: block;
                 left: 0;
-                top: 12px;
+                top: 17px;
                 width: 10px;
                 height: 2px;
                 background: #ffffff;
@@ -1839,10 +1848,18 @@ p.bonus_content a {
             .steps-2 .step-title1,
             .steps-2 .point .price {
                 position: unset;
-                margin: 0px 1px 15px;
                 font-size: 12px;
                 line-height: 15px;
                 cursor: pointer;
+                text-align:left;
+                margin:0px;
+            }
+
+            .steps-2 .step-title{
+                padding-left:15px;
+            }
+            .steps-2 .point .price {
+                margin: 0px 1px 5px;
             }
 
     .benefits_referal_tab_sec {
