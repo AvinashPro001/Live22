@@ -326,6 +326,8 @@
         {
             public const string SlotsGameSelect = "[dbo].[Slots_Game_Select]";
 
+            public const string SlotsGameUpdate= "[dbo].[Slots_Game_Update]";
+
             public const string HotSlotsGameSelect = "[dbo].[Slots_Hot_Game_Select]";
 
             public const string SlotsGameInsert = "[dbo].[Slots_Game_Insert]";

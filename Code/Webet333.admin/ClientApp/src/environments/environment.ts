@@ -127,6 +127,7 @@ export const customer = {
     restoreHistory: environment.apiUrl + 'Game/restore/list',
 
     slotsGameList: environment.apiUrl + 'Game/slotsgame/list',
+    slotsGameUpdate: environment.apiUrl + 'Game/slotsgame/update',
 
     ManuallyPromotionExpiery: environment.apiUrl + 'Game/ManuallyPromotionExpiry',
 

@@ -5,6 +5,9 @@ namespace Webet333.models.Response.Game
 {
     public class GameListSelectResponse
     {
+        [JsonProperty("Id")]
+        public Guid? Id { get; set; }
+
         [JsonProperty("GameName")]
         public string GameName { get; set; }
 

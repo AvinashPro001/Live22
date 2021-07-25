@@ -1724,6 +1724,14 @@ namespace Webet333.api.Helpers
             }
         }
 
+        internal async Task GameListUpdate(GameListUpdateRequest request, string Role,string UniqueId)
+        {
+            using (var GetRepository = new DapperRepository<dynamic>(Connection))
+            {
+                var list = await GetRepository.AddOrUpdateAsync(StoredProcConsts.Game.SlotsGameUpdate, new { request.Id,UniqueId,Role,request.GameName,request.GameCode,request.GameType, request.IsArcade, request.IsHot, request.IsNew, request.IsSlot, request.Active, request.Deleted});
+            }
+        }
+
         internal async Task<List<HotGameListSelectResponse>> HotGameListSelect(GameListSelectRequest request)
         {
             using (var GetRepository = new DapperRepository<HotGameListSelectResponse>(Connection))

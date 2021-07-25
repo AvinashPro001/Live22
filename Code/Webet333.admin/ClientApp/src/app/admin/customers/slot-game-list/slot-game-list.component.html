@@ -10,13 +10,132 @@
 
         <div class="card-body">
             <div class="row col-12">
-               
+                <div class="col-12">
+                    <div class="col-2" style="display:flex;">
+                        <p style="margin-top:5px;" >Refresh Pragmatic Game List</p>
+                        <button class="btn btn-primary" style="margin-left:5px;" (click)="RefreshPragmaticGame();"><i class="fa fa-refresh"></i></button>
+                    </div>
+                </div>
             </div>
-
+            <br />
             <ngx-datatable #table class='bootstrap no-detail-row ' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
-                           [rowHeight]="'auto'" [limit]="7" [sortType]="'multi'" [headerHeight]="50">
-     
+                           [rowHeight]="'auto'" [limit]="7" [sortType]="'multi'" [headerHeight]="50" [externalPaging]="true" [count]="totalRowCount" [offset]="offset" (page)="setPage($event)" [scrollbarH]="true">
+                <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <div class="row col-md-12" style="margin-right:0px">
+                        <label class="col-md-3">
+                            <button id="viewbtn" data-id="SlotGameData[rowIndex].Id" class="mb-1 btn btn-success" type="button" data-toggle="modal" title="View" (click)='show(SlotGameData[rowIndex],content)'>
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                        <label class="col-md-3">
+                            <button id="deleteBtn" data-id="SlotGameData[rowIndex].Id" class="mb-1 btn btn-danger" type="button" data-toggle="modal" style="margin-left:5px" title="Delete" (click)="SetDelete(SlotGameData[rowIndex].Id)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                        <label class="col-md-3">
+                            <ui-switch [(ngModel)]="SlotGameData[rowIndex].Active" data-toggle="modal" data-id="SlotGameData[rowIndex].Id" (change)="SetActive(SlotGameData[rowIndex].Id,$event)"></ui-switch>
+                        </label>
+                    </div>
+                </ng-template>
+
+                <ng-template #IsHot let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <div class="row col-sm-12">
+                        <label class="col-sm-12">
+                            <ui-switch size="small" [(ngModel)]="SlotGameData[rowIndex].IsHot" data-toggle="modal" data-id="SlotGameData[rowIndex].Id" (change)="SetIsHot(SlotGameData[rowIndex].Id,$event)"></ui-switch>
+                        </label>
+                    </div>
+                </ng-template>
+
+                <ng-template #IsNew let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <div class="row col-sm-12">
+                        <label class="col-sm-12">
+                            <ui-switch size="small" [(ngModel)]="SlotGameData[rowIndex].IsNew" data-toggle="modal" data-id="SlotGameData[rowIndex].Id" (change)="SetIsNew(SlotGameData[rowIndex].Id,$event)"></ui-switch>
+                        </label>
+                    </div>
+                </ng-template>
+
+                <ng-template #IsSlot let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <div class="row col-sm-12">
+                        <label class="col-sm-12">
+                            <ui-switch size="small" [(ngModel)]="SlotGameData[rowIndex].IsSlot" data-toggle="modal" data-id="SlotGameData[rowIndex].Id" (change)="SetIsSlot(SlotGameData[rowIndex].Id,$event)"></ui-switch>
+                        </label>
+                    </div>
+                </ng-template>
+
+                <ng-template #IsArcade let-rowIndex="rowIndex" let-row="row" let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <div class="row col-sm-12">
+                        <label class="col-sm-12">
+                            <ui-switch size="small" [(ngModel)]="SlotGameData[rowIndex].IsArcade" data-toggle="modal" data-id="SlotGameData[rowIndex].Id" (change)="SetIsArcade(SlotGameData[rowIndex].Id,$event)"></ui-switch>
+                        </label>
+                    </div>
+                </ng-template>
+
             </ngx-datatable>
         </div>
     </div>
 </div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">{{viewData.GameName}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body model-body-custom">
+        <div class="container">
+            <h4 class="heading"><i>Basic Info</i></h4>
+            <div class="col-12">
+
+                <label class="col-3"><b>Game Name</b></label>
+                <label class="col-3">{{viewData.GameName}}</label>
+
+                <label class="col-3"><b>Game Code</b></label>
+                <label class="col-3">{{viewData.GameCode}}</label>
+
+                <label class="col-3"><b>Game Type</b></label>
+                <label class="col-3">{{viewData.GameType}}</label>
+
+                <label class="col-3"><b>Sequence</b></label>
+                <label class="col-3"><b>{{viewData.Sequence}}</b></label>
+
+                <label class="col-3"><b>Create Date</b></label>
+                <label class="col-3"><b>{{viewData.Created.split("T", 1)}}</b></label>
+
+                <label class="col-3"><b>IsHot</b></label>
+                <label class="col-3"><b>{{viewData.IsHot}}</b></label>
+
+                <label class="col-3"><b>IsNew</b></label>
+                <label class="col-3"><b>{{viewData.IsNew}}</b></label>
+
+                <label class="col-3"><b>IsArcade</b></label>
+                <label class="col-3"><b>{{viewData.IsArcade}}</b></label>
+
+                <label class="col-3"><b>IsSlot</b></label>
+                <label class="col-3"><b>{{viewData.IsSlot}}</b></label>
+
+                <label class="col-3"><b>Wallet Name</b></label>
+                <label class="col-3"><b>{{viewData.WalletName}}</b></label>
+
+
+            </div>
+
+
+            <h4 class="heading"><i>Game Image</i></h4>
+            <div class="col-12" style="display:flex;">
+                <div class="col-6 text-center"><img class="banner-size" src="{{viewData.ImagePath1}}" /></div>
+                <div class="col-6 text-center"><img class="banner-size" src="{{viewData.ImagePath2}}" /></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

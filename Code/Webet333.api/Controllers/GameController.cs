@@ -3556,7 +3556,7 @@ namespace Webet333.api.Controllers
 
         #region Game List Excel file Upload
 
-        //[Authorize]
+        [Authorize]
         [HttpPost(ActionsConst.Game.GameListUpload)]
         public async Task<IActionResult> GameListUpload([FromBody] GameListUploadRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
@@ -3577,7 +3577,7 @@ namespace Webet333.api.Controllers
 
         #endregion Game List Excel file Upload
 
-        #region Game List Select
+        #region Slot Game List Select
 
         [HttpPost(ActionsConst.Game.SlotsGameSelect)]
         public async Task<IActionResult> SlotsGameSelect([FromBody] GameListSelectRequest request)
@@ -3585,9 +3585,9 @@ namespace Webet333.api.Controllers
             var role = RoleConst.Users;
             try
             {
-             role= GetUserRole(User);
+                role = GetUserRole(User);
             }
-            catch (Exception e){}
+            catch (Exception e) { }
 
             using (var game_helper = new GameHelpers(Connection: Connection))
             {
@@ -3617,7 +3617,26 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Game List Select
+        #endregion Slot Game List Select
+
+        #region Slot Game List Update
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.SlotsGameUpdate)]
+        public async Task<IActionResult> SlotsGameUpdate([FromBody] GameListUpdateRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+            var role = GetUserRole(User);
+            var uniqueId = GetUniqueId(User);
+            using (var game_helper = new GameHelpers(Connection: Connection))
+            {
+                await game_helper.GameListUpdate(request, role, uniqueId);
+                return OkResponse();
+            }
+        }
+
+        #endregion
 
         #region Hot Slots Game List Select
 
