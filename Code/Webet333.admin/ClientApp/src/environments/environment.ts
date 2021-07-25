@@ -5,8 +5,10 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'https://api.wb3api.com/api/v1/',
-    apiUrlWithVersion: 'https://api.wb3api.com/'
+    //apiUrl: 'https://api.wb3api.com/api/v1/',
+    //apiUrlWithVersion: 'https://api.wb3api.com/'
+    apiUrl: 'http://localhost:8080/api/v1/',
+    apiUrlWithVersion: 'http://localhost:8080/'
 };
 
 export const account = {
@@ -123,6 +125,8 @@ export const customer = {
     rebateHistory: environment.apiUrl + 'Game/Rebate/User/History',
     statementHistory: environment.apiUrl + 'payments/transactions',
     restoreHistory: environment.apiUrl + 'Game/restore/list',
+
+    slotsGameList: environment.apiUrl + 'Game/slotsgame/list',
 
     ManuallyPromotionExpiery: environment.apiUrl + 'Game/ManuallyPromotionExpiry',
 

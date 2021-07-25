@@ -1715,11 +1715,11 @@ namespace Webet333.api.Helpers
         }
 
 
-        internal async Task<List<GameListSelectResponse>> GameListSelect(GameListSelectRequest request)
+        internal async Task<List<GameListSelectResponse>> GameListSelect(GameListSelectRequest request,string Role)
         {
             using (var GetRepository = new DapperRepository<GameListSelectResponse>(Connection))
             {
-                var list = await GetRepository.GetDataAsync(StoredProcConsts.Game.SlotsGameSelect, new { request.WalletName, request.Name, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                var list = await GetRepository.GetDataAsync(StoredProcConsts.Game.SlotsGameSelect, new { request.WalletName, request.Name, request.FromDate, request.ToDate, request.PageNo, request.PageSize, Role });
                 return list.ToList();
             }
         }

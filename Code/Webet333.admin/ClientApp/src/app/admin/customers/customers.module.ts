@@ -91,6 +91,7 @@ import { PromotionsUsersReportComponent } from './promotions-users-report/promot
 import { SboPlayerDefaultBetLimitComponent } from './sbo-player-default-bet-limit/sbo-player-default-bet-limit.component';
 import { SboSetLeagueBetLimitComponent } from './sbo-set-league-bet-limit/sbo-set-league-bet-limit.component';
 import { SboGetLeagueLimitComponent } from './sbo-get-league-limit/sbo-get-league-limit.component';
+import { SlotGameListComponent } from './slot-game-list/slot-game-list.component';
 
 const routes: Routes = [
     { path: 'list', component: CustomerListComponent },
@@ -167,7 +168,8 @@ const routes: Routes = [
     { path: 'promotions-users-report', component: PromotionsUsersReportComponent },
     { path: 'sbo-Player-default-betLimit', component: SboPlayerDefaultBetLimitComponent },
     { path: 'sbo-set-league-betLimit', component: SboSetLeagueBetLimitComponent },
-    { path: 'sbo-get-league-betLimit', component: SboGetLeagueLimitComponent }
+    { path: 'sbo-get-league-betLimit', component: SboGetLeagueLimitComponent },
+    { path: 'slots-game-list', component: SlotGameListComponent }
 ];
 
 @NgModule({
@@ -189,7 +191,7 @@ const routes: Routes = [
         SelectDropDownModule,
         ButtonsModule,
     ],
-    declarations: [CustomerListComponent, DepositListComponent, WithdrawListComponent, TransferListComponent, CustomerEditComponent, DepositAddComponent, WithdrawAddComponent, ConfirmationDialogComponent, PromotionListComponent, PromotionAddComponent, BonusAddComponent, BonusListComponent, AnnouncementListComponent, TransferAddComponent, AnnouncementAddComponent, AdjustmentListComponent, AdjustmentAddComponent, MaintenanceComponent, BankListComponent, BankAddComponent, BankEditComponent, RefKeywordAddComponent, MaxbetLimitComponent, RefKeywordAnalyticsComponent, PromotionEditComponent, MaxbetMinmaxComponent, RebateCalculateComponent, RebateListComponent, BettingDetailsComponent, MaxbetBettingDetailsComponent, ApprovalDurationComponent, TrackingListComponent, BetdetailsLastupdateListComponent, UsersDetailsComponent, AnnouncementEditComponent, PromotionApplyComponent, DownloadLinkComponent, LoseRebateCalcComponent, m8LimitComponent, m8MinmaxComponent, MaxbetBettingLimitComponent, GameLastBettingUpdateComponent, BankWtihdrawComponent, BankDepositComponent, ManagerApproveListComponent, AllGameSetBetlimitComponent, SmsNotifyComponent, PromotionGroupingListComponent, PromotionGroupAddComponent, PromotionGroupingEditComponent, PromotionReportComponent, BettingdetailsCheckComponent, UsersWinloseReportComponent, RebateSettingComponent, UsersRegisterReportComponent, UsersBehaviourReportsComponent, GameresetPasswordReportComponent, VipPageComponent, TestingPaginationComponent, AdminListComponent, AdminAddComponent, AdminEditComponent, ContactDetailsListComponent, ContactDetailsAddComponent, AdminLogReportComponent, DailyReportComponent, UsergroupListComponent, UsergroupEditComponent, UsergroupAddComponent, FreecrediteventListComponent, FreecrediteventAddComponent, FreecrediteventEditComponent, PromotionsUsersReportComponent, SboPlayerDefaultBetLimitComponent, SboSetLeagueBetLimitComponent, SboGetLeagueLimitComponent],
+    declarations: [CustomerListComponent, DepositListComponent, WithdrawListComponent, TransferListComponent, CustomerEditComponent, DepositAddComponent, WithdrawAddComponent, ConfirmationDialogComponent, PromotionListComponent, PromotionAddComponent, BonusAddComponent, BonusListComponent, AnnouncementListComponent, TransferAddComponent, AnnouncementAddComponent, AdjustmentListComponent, AdjustmentAddComponent, MaintenanceComponent, BankListComponent, BankAddComponent, BankEditComponent, RefKeywordAddComponent, MaxbetLimitComponent, RefKeywordAnalyticsComponent, PromotionEditComponent, MaxbetMinmaxComponent, RebateCalculateComponent, RebateListComponent, BettingDetailsComponent, MaxbetBettingDetailsComponent, ApprovalDurationComponent, TrackingListComponent, BetdetailsLastupdateListComponent, UsersDetailsComponent, AnnouncementEditComponent, PromotionApplyComponent, DownloadLinkComponent, LoseRebateCalcComponent, m8LimitComponent, m8MinmaxComponent, MaxbetBettingLimitComponent, GameLastBettingUpdateComponent, BankWtihdrawComponent, BankDepositComponent, ManagerApproveListComponent, AllGameSetBetlimitComponent, SmsNotifyComponent, PromotionGroupingListComponent, PromotionGroupAddComponent, PromotionGroupingEditComponent, PromotionReportComponent, BettingdetailsCheckComponent, UsersWinloseReportComponent, RebateSettingComponent, UsersRegisterReportComponent, UsersBehaviourReportsComponent, GameresetPasswordReportComponent, VipPageComponent, TestingPaginationComponent, AdminListComponent, AdminAddComponent, AdminEditComponent, ContactDetailsListComponent, ContactDetailsAddComponent, AdminLogReportComponent, DailyReportComponent, UsergroupListComponent, UsergroupEditComponent, UsergroupAddComponent, FreecrediteventListComponent, FreecrediteventAddComponent, FreecrediteventEditComponent, PromotionsUsersReportComponent, SboPlayerDefaultBetLimitComponent, SboSetLeagueBetLimitComponent, SboGetLeagueLimitComponent, SlotGameListComponent],
     providers: [ConfirmationDialogService],
     entryComponents: [ConfirmationDialogComponent],
     exports: [

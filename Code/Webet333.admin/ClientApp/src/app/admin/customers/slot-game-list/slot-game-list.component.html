@@ -1,0 +1,22 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Slots Game List</legend>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row col-12">
+               
+            </div>
+
+            <ngx-datatable #table class='bootstrap no-detail-row ' [rows]="rows" [columns]="columns" [columnMode]="'force'" [footerHeight]="60"
+                           [rowHeight]="'auto'" [limit]="7" [sortType]="'multi'" [headerHeight]="50">
+     
+            </ngx-datatable>
+        </div>
+    </div>
+</div>

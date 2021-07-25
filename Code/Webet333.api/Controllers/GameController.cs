@@ -3582,9 +3582,16 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.SlotsGameSelect)]
         public async Task<IActionResult> SlotsGameSelect([FromBody] GameListSelectRequest request)
         {
+            var role = RoleConst.Users;
+            try
+            {
+             role= GetUserRole(User);
+            }
+            catch (Exception e){}
+
             using (var game_helper = new GameHelpers(Connection: Connection))
             {
-                var list = await game_helper.GameListSelect(request);
+                var list = await game_helper.GameListSelect(request, role);
                 if (list.Count != 0)
                 {
                     var total = list.FirstOrDefault().Total;

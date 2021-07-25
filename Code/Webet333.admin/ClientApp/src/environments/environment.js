@@ -7,8 +7,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.account = exports.environment = void 0;
 exports.environment = {
     production: false,
-    apiUrl: 'https://api.wb3api.com/api/v1/',
-    apiUrlWithVersion: 'https://api.wb3api.com/'
+    //apiUrl: 'https://api.wb3api.com/api/v1/',
+    //apiUrlWithVersion: 'https://api.wb3api.com/'
+    apiUrl: 'http://localhost:8080/api/v1/',
+    apiUrlWithVersion: 'http://localhost:8080/'
 };
 exports.account = {
     login: exports.environment.apiUrl + 'account/login',
@@ -110,6 +112,7 @@ exports.customer = {
     rebateHistory: exports.environment.apiUrl + 'Game/Rebate/User/History',
     statementHistory: exports.environment.apiUrl + 'payments/transactions',
     restoreHistory: exports.environment.apiUrl + 'Game/restore/list',
+    slotsGameList: exports.environment.apiUrl + 'Game/slotsgame/list',
     ManuallyPromotionExpiery: exports.environment.apiUrl + 'Game/ManuallyPromotionExpiry',
     similarNameList: exports.environment.apiUrl + 'payments/withdraw/similarname/list',
     usernamPrifix: exports.environment.apiUrl + 'Game/GlobalParameters',
