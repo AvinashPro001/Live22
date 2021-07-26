@@ -1,7 +1,8 @@
-﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
-let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
-let PortAPI = '9001';
-let PortWEB = '9002';
+﻿var baseUrl = "https://api.wb3api.com/api/v1/";
+var baseUrlWithoutVersion = "https://api.wb3api.com";
+var webUrl = "https://www.webet333.net/";
+var mobUrl = "https://www.webet333.net/mobile/";
+var playtehcJS = "https://login.tothinkit.com/jswrapper/integration.js.php?casino=winforfun88";
 
 switch (environmentName.toUpperCase()) {
     case 'DEBUG':
