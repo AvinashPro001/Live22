@@ -42,7 +42,11 @@ export class SlotGameListComponent implements OnInit {
     PlaytechImagePath = "../../../../assets/img/playtech.png";
     PragmaticImagePath = "../../../../assets/img/pragmatic.png";
     SlotGameData: any;
-    viewData:any;
+    viewData: any;
+    displayDIVFile: boolean = false;
+    displayDIVSingal: boolean = false;
+    filenames: any;
+    urls: any;
 
     ngOnInit() {
         this.LoadGameList();
@@ -51,15 +55,15 @@ export class SlotGameListComponent implements OnInit {
 
     coloumSet() {
         this.columns = [
-            { prop: 'No', sortable: false},
-            { prop: 'Wallet', sortable: false},
+            { prop: 'No', sortable: false },
+            { prop: 'Wallet', sortable: false },
             { prop: 'GameName', sortable: false },
             { prop: 'GameCode', sortable: false },
-            { prop: 'IsArcade', cellTemplate: this.IsArcade, sortable: false},
-            { prop: 'IsHot', cellTemplate: this.IsHot, sortable: false},
-            { prop: 'IsNew', cellTemplate: this.IsNew, sortable: false},
-            { prop: 'IsSlot', cellTemplate: this.IsSlot, sortable: false},
-            { prop: 'Created', sortable: false},
+            { prop: 'IsArcade', cellTemplate: this.IsArcade, sortable: false },
+            { prop: 'IsHot', cellTemplate: this.IsHot, sortable: false },
+            { prop: 'IsNew', cellTemplate: this.IsNew, sortable: false },
+            { prop: 'IsSlot', cellTemplate: this.IsSlot, sortable: false },
+            { prop: 'Created', sortable: false },
             { prop: 'Action', cellTemplate: this.status, sortable: false, width: 250 }
 
         ];
@@ -147,7 +151,7 @@ export class SlotGameListComponent implements OnInit {
         });
     }
 
-    SetIsHot(id,event) {
+    SetIsHot(id, event) {
         let data = {
             id: id,
             isHot: event
@@ -155,7 +159,7 @@ export class SlotGameListComponent implements OnInit {
         this.CallUpdateAPI(data);
     }
 
-    SetIsNew(id,event) {
+    SetIsNew(id, event) {
         let data = {
             id: id,
             isNew: event
@@ -189,6 +193,74 @@ export class SlotGameListComponent implements OnInit {
     }
 
     RefreshPragmaticGame() {
-        debugger
+        let data = {};
+        this.adminService.add<any>(customer.PragmaticGameListUpdate, data).subscribe(async res => {
+            this.ngOnInit();
+            this.toasterService.pop('success', 'Success', res.message);
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
+    ShowPlaytechUploadModel(content) {
+        this.modalService.open(content, { windowClass: 'dark-modal', });
+        this.displayDIVFile = false;
+        this.displayDIVSingal = true;
+    }
+
+    ShowHideDiv(event) {
+        if ((document.getElementById("check_hideUnhide") as HTMLInputElement).checked) {
+            this.displayDIVFile = true;
+            this.displayDIVSingal = false;
+        }
+        else {
+            this.displayDIVFile = false;
+            this.displayDIVSingal = true;
+        }
+    }
+
+    closeModel() {
+        this.modalService.dismissAll();
+        this.displayDIVFile = false;
+        this.displayDIVSingal = false;
+    }
+
+    //#region uploadReceipt
+
+    selectfile(event) {
+        if (event.target.files.length >= 0) {
+            var filesAmount = event.target.files.length;
+            for (let i = 0; i < filesAmount; i++) {
+                let files = event.target.files[i];
+                this.base64(files);
+            }
+        }
+        
+    }
+
+    base64(file) {
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+            this.urls = e.target.result;
+            console.log(this.urls);
+        }
+        reader.readAsDataURL(file);
+        
+    }
+
+  
+    //#endregion
+
+    fileUpload() {
+        let data = {
+            file: this.urls,
+            id:"PlayTech Wallet"
+        };
+        this.adminService.add<any>(customer.PragmaticGameListUpdate, data).subscribe(async res => {
+            this.ngOnInit();
+            this.toasterService.pop('success', 'Success', res.message);
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
     }
 }

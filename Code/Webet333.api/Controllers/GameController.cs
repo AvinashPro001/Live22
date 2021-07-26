@@ -3569,7 +3569,10 @@ namespace Webet333.api.Controllers
             var gameList = JsonConvert.DeserializeObject<List<GameListUploadResponse>>(GameHelpers.ReadExcelasJSON(BaseUrlConfigsOptions.Value.ExcelLocalPath + "\\" + filename + extension));
 
             using (var game_help = new GameHelpers(Connection))
-                await game_help.GameListInsert(gameList, request.Id, baseUrlConfigs.ImageBase);
+            {
+                await game_help.GameListDeleted("PlayTech Wallet");
+                await game_help.GameListInsert(gameList, request.Id);
+            }
 
             return OkResponse(gameList);
         }

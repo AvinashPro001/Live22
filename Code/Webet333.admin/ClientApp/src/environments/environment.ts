@@ -5,8 +5,8 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'https://api.wb3api.com/api/v1/',
-    apiUrlWithVersion: 'https://api.wb3api.com/'
+    apiUrl: 'http://localhost:8080/api/v1/',
+    apiUrlWithVersion: 'http://localhost:8080/'
 };
 
 export const account = {
@@ -128,6 +128,7 @@ export const customer = {
 
     slotsGameList: environment.apiUrl + 'Game/slotsgame/list',
     slotsGameUpdate: environment.apiUrl + 'Game/slotsgame/update',
+    PragmaticGameListUpdate: environment.apiUrl + 'pragmatic/game/list',
 
     ManuallyPromotionExpiery: environment.apiUrl + 'Game/ManuallyPromotionExpiry',
 

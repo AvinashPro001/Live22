@@ -328,6 +328,8 @@
 
             public const string SlotsGameUpdate= "[dbo].[Slots_Game_Update]";
 
+            public const string SlotsGameDelete = "[dbo].[Slots_Game_Delete]";
+
             public const string HotSlotsGameSelect = "[dbo].[Slots_Hot_Game_Select]";
 
             public const string SlotsGameInsert = "[dbo].[Slots_Game_Insert]";
