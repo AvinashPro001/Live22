@@ -24,7 +24,8 @@
   "amount_greater_one_error": "进输入金额多过1",
   "promot_active_error": "您不能申请促销，因为您有活动促销",
   "amount_required_error": "请输入金额。",
-  "min_max_amount_error": "最小金额 10 和最大金额为 30000。",
+  "min_amount_error": "请输入大于 10 的金额。",
+  "max_amount_error": "请输入金额小于30000。",
   "min_max_amount_error_parameter": "最小金额 10 和最大金额是",
   "min1_max1000_amount_error": "最低金额 1",
   "bnk_name_required_error": "银行名称为必填项",
@@ -47,7 +48,7 @@
   "otp_send_success": "OTP已发送至注册手机号码，请输入有效的OTP以激活该帐户。",
   "error_otp": "请插入6位OTP！",
 
-  "special_char_not_allowed": "不允許使用特殊字符。",
+  "special_char_not_allowed": "用户名中不允许使用特殊字符。",
   "space_not_allowed": "空間不允許。",
   "current_pass_not_match": "當前密碼不匹配。",
   "enter_full_name": "請輸入您的全名。",

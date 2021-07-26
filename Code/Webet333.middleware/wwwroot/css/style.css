@@ -135,7 +135,7 @@ header .custom-container {width: 1400px; }
 .navbar-default {background-color: transparent; border: 0; border-radius: 0; }
 .navbar-nav>li {/* padding: 0 15px;*/ padding: 0px 4px; }
 .navbar {margin-bottom: 0; }
-.navbar-brand {display: block; height: auto; }
+.navbar-brand {display: block; height: auto;padding: 0px 0px; }
 .navbar-nav {margin-top: 15px; }
 .row_two_navigation .navbar-nav {margin-top: 0px; float: left; width: 100%; }
 .row_two_navigation .navbar-nav>li a {text-align: center; position: relative; padding: 11px 9px 11px 9px; font-size: 12.1875px; line-height: 12px; text-transform: uppercase; display: flex; font-weight: 400; color: #fff; align-items: center;font-family: 'Poppins', sans-serif;}
@@ -163,7 +163,7 @@ header .custom-container {width: 1400px; }
 .navbar-default .navbar-nav>li.banking-info.active::before, .navbar-default .navbar-nav>li.banking-info:hover::before {bottom: -35px; }
 .navbar>.container .navbar-brand {margin-left: 0; /* padding:15px ​0 15px;*/ }
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover {background-color: transparent; color: #fff; }
-.logo {width: 100%; max-width: 465px; }
+.logo {width: 100%; max-width: 250px; }
 .restore-btn button {padding: 0 10px; border-radius: 4px; box-shadow: none; border: 0; background-color: #0166d2; }
 .navbar-nav li {background-position: top center; background-repeat: no-repeat; color: #6c737e; text-align: center; height:45px; transition: none; -moz-transition: none; -webkit-transition: none; }
 .navbar-nav li:hover {background-position: bottom center; }

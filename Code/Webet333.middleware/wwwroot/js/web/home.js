@@ -435,7 +435,7 @@ function SetYoutubeVideo() {
     var youtubLink = ""
 
     if (GetLocalStorage('language') == "en-US" || GetLocalStorage('language') == "ms-MY")
-        youtubLink = "https://www.youtube-nocookie.com/embed/Y0mB5txA0_I?autoplay=1&mute=1";
+        youtubLink = "https://www.youtube-nocookie.com/embed/wiiRGBVanQo?autoplay=1&mute=1";
     else
         youtubLink = "https://www.youtube.com/embed/Y0mB5txA0_I?autoplay=1&mute=1";
 
