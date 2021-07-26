@@ -127,6 +127,7 @@ var gameLoginEndPoints = {
     sboLogin: 'sbo/login'
 }
 
+var gameSettingEndPoints = {
     slotsGameList: 'Game/slotsgame/list',
     pragmaticGameList: 'pragmatic/game/list',
     HotGameList: 'Game/hotslotsgame/list',
