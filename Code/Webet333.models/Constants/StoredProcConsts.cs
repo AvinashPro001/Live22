@@ -242,18 +242,6 @@
             public const string AnnouncementDelete = "[dbo].[Announcements_Delete]";
 
             public const string AnnouncementUpdate = "[dbo].[Announcements_Update]";
-
-            public const string HomePageBannersPersist = "[dbo].[HomePageBanners_Persist]";
-
-            public const string HomePageBannersUpdateImage = "[dbo].[HomePageBanners_Update_Image]";
-
-            public const string HomePageBannersUpdateActiveStatus = "[dbo].[HomePageBanners_Update_Status]";
-
-            public const string HomePageBannersSelect = "[dbo].[HomePageBanners_Select]";
-
-            public const string HomePageBannersDelete = "[dbo].[HomePageBanners_Delete]";
-
-            public const string HomePageBannersSelectById = "[dbo].[HomePageBanners_Select_By_Id]";
         }
 
         public class Promotions

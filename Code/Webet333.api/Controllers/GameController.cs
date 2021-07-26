@@ -63,7 +63,6 @@ namespace Webet333.api.Controllers
         private IHostingEnvironment _hostingEnvironment;
 
         private IHubContext<SignalRHub> _hubContext;
-
         public GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, SerialQueue queue, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, ApiLogsManager LogManager, IHubContext<SignalRHub> hubContext) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.LogManager = LogManager;
@@ -3552,6 +3551,7 @@ namespace Webet333.api.Controllers
             }
         }
 
+
         #endregion Get Users Betting Summery
 
         #region Game List Excel file Upload
@@ -3573,6 +3573,7 @@ namespace Webet333.api.Controllers
 
             return OkResponse(gameList);
         }
+
 
         #endregion Game List Excel file Upload
 
@@ -3671,5 +3672,6 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Hot Slots Game List Select
+
     }
 }

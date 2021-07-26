@@ -294,34 +294,11 @@
             public const string AnnouncementDelete = "settings/announcement/delete";
 
             public const string ContactTypeSelect = "settings/contact/type/select";
-
             public const string ContactTypeUpdate = "settings/contact/type/update";
-
             public const string ContactTypeAdd = "settings/contact/type/add";
-
             public const string ContactDetailsSelect = "settings/contact/details/select";
-
             public const string ContactDetailsUpdate = "settings/contact/details/update";
-
             public const string ContactDetailsAdd = "settings/contact/details/add";
-
-            public const string HomePageBannerInsert = "settings/homePage-banner/add";
-
-            public const string HomePageBannerUpdate = "settings/homePage-banner/update";
-
-            public const string HomePageBannerUpdateStatus = "settings/homePage-banner/update/status";
-
-            public const string HomePageBannerDelete = "settings/homePage-banner/delete";
-
-            public const string HomePageBannerSelectByUser = "settings/homePage-banner/select/user";
-
-            public const string HomePageBannerSelectByAdmin = "settings/homePage-banner/select/admin";
-
-            public const string HomePageBannerImage = "settings/homePage-banner/image";
-
-            public const string HomePageBannerImageUpdate = "settings/homePage-banner/image/update";
-
-            public const string HomePageBannerSelectById = "settings/homePage-banner/select/id";
         }
 
         public class Game

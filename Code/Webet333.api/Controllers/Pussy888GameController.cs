@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -54,7 +55,7 @@ namespace Webet333.api.Controllers
                 MobileNo = user.MobileNo;
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
-
+            
             var result = await Pussy888GameHelpers.CallRegisterAPI(MobileNo, username, password);
             using (var pussy888_helper = new Pussy888GameHelpers(Connection))
             {

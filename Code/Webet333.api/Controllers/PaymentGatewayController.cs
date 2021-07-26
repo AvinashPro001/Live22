@@ -26,7 +26,7 @@ namespace Webet333.api.Controllers
 
         #endregion Variable
 
-        #region Payment Gateway URL
+        #region Payment Gateway URL 
 
         [Authorize]
         [HttpPost(ActionsConst.PaymentGateway.GetPaymentGatewayURL)]
@@ -54,7 +54,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Payment Gateway URL
+        #endregion Payment Gateway URL 
 
         #region Payment Auto Verifiy API
 
