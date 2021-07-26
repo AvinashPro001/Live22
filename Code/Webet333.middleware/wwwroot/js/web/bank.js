@@ -261,7 +261,7 @@ function SetProfilePageBanks() {
         if (UserBank.length > 0) {
             html = "";
             for (i = 0; i < UserBank.length; i++) {
-                html += '<div class="bank_details1"><div class="bank_details1_icon_box"><img src="' + UserBank[i].bankLogo + '" class="bank_details_icon"></div><div class="bank_details1-text"><h1>' + UserBank[i].accountNo + ' <span class="tickgray"><img src="/images/tickgray.png"></span></h1><p>' + UserBank[i].accountName + '</p></div></div>';
+                html += '<div class="bank_details1"><div class="bank_details1_icon_box"><img src="' + UserBank[i].bankLogo + '" class="bank_details_icon"></div><div class="bank_details1-text"><h1>' + UserBank[i].accountNo + ' <span class="tickgray"><img src="/images/tickgray.png"></span></h1><p><a href="#">' + UserBank[i].accountName + '</a></p></div></div>';
             }
             SetAllValueInElement("users_bank_details", html);
         }
@@ -361,12 +361,9 @@ async function Deposit(IsOnlinePayment) {
     else
         amount = $("#txt_deposit_amount").val();
 
-    if (amount < 10) {
-        return ShowError(ChangeErroMessage("min_amount_error"))
-    }
 
-    if (amount > 30000) {
-        return ShowError(ChangeErroMessage("max_amount_error"));
+    if (amount > 30000 || amount < 10) {
+        return ShowError(ChangeErroMessage("min_max_amount_error"));
     }
 
 
@@ -730,8 +727,6 @@ function GetDateFormate(Date1, Date2) {
     Month2 = Month2 < 10 ? "0" + Month2 : Month2;
     day2 = day2 < 10 ? "0" + day2 : day2;
 
-    $("#datepicker1").val(day1 + "/" + Month1 + "/" + Year1)
-    $("#datepicker2").val(day2 + "/" + Month2 + "/" + Year2)
 
     fromDate = Year1 + "-" + Month1 + "-" + day1 + " 00:00:00";
     toDate = Year2 + "-" + Month2 + "-" + day2 + " 23:59:59";
@@ -783,11 +778,11 @@ function GetDateRange() {
     pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");
-    //if (fdate.length == 1 || tdate.length == 1)
-    //    return ShowError(ChangeErroMessage("error_select_both_date"))
-    //$(".remove-active-class>li.active").removeClass("active");
-    fromDate = fdate[2] + "-" + fdate[1] + "-" + fdate[0] + " 00:00:00";
-    toDate = tdate[2] + "-" + tdate[1] + "-" + tdate[0] + " 23:59:59";
+    if (fdate.length == 1 || tdate.length == 1)
+        return ShowError(ChangeErroMessage("error_select_both_date"))
+    $(".remove-active-class>li.active").removeClass("active");
+    fromDate = fdate[2] + "-" + fdate[0] + "-" + fdate[1] + " 00:00:00";
+    toDate = tdate[2] + "-" + tdate[0] + "-" + tdate[1] + " 23:59:59";
     CallFunctionAccordingToTab();
 }
 

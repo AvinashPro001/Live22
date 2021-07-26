@@ -15,7 +15,6 @@ namespace Webet333.api.Filters
             await Clients.All.SendAsync("AnnouncementInsertUpdate");
             await Clients.All.SendAsync("AdminBankInsertUpdate");
             await Clients.All.SendAsync("DownloadLinkUpdate");
-            await Clients.All.SendAsync("HomePageBannerInsertUpdate");
         }
     }
 }

@@ -23,8 +23,7 @@
   "amount_greater_zero_error": "Sila Masukkan Jumlah lebih daripada 0",
   "amount_greater_one_error": "Sila Masukkan Jumlah lebih daripada 1",
   "promot_active_error": "Anda tidak boleh menggunakan promosi, Kerana anda mempunyai promosi yang aktif",
-  "min_amount_error": "Sila masukkan jumlah yang lebih besar daripada 10.",
-  "max_amount_error": "Sila masukkan amaun kurang daripada 30000.",
+  "min_max_amount_error": "Amaun Minimum ialah 10 dan Maksimum ialah 300000.",
   "amount_required_error": "Sila masukkan amaun.",
   "min_max_amount_error_parameter": "Amaun Minimum 10 dan Amaun Maksimum ialah ",
   "min1_max1000_amount_error": "Amaun Minimum 1",
@@ -48,7 +47,7 @@
   "otp_send_success": "OTP telah dikirim untuk mendaftarkan no telefon bimbit, masukkan OTP yang sah untuk mengaktifkan akaun ini.",
   "error_otp": "Sila Masukkan 6 Digit OTP !!",
 
-  "special_char_not_allowed": "Aksara Khas tidak dibenarkan dalam Nama Pengguna",
+  "special_char_not_allowed": "Watak Khas tidak dibenarkan.",
   "space_not_allowed": "Ruang tidak dibenarkan.",
   "current_pass_not_match": "Kata Laluan Semasa tidak sepadan.",
   "enter_full_name": "Sila masukkan nama penuh anda.",

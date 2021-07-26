@@ -4,15 +4,11 @@
 
     <div class="vip-main-banner">
         <div class="container">
-            @*<div class="row">
-                    <div class="back-btn"><a onclick="loadPageHome({backFrom: 'vip'})" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="~/images/mobile/BackArrow_svg.svg" alt="" /></a></div>
-            </div>*@
+            &nbsp;
         </div>
     </div>
-
     <div class="benefits_refeeral_sec">
         <div class="containerr">
-            
             <div class="benefits_referal_tab_sec">
                 <div class="benefits_referal_left">
                     <ul>
@@ -36,47 +32,33 @@
                                             <div class="step">
                                                 <span class="point" id="normal-span" onclick="javascript: resetActive(event, 0, 'step-1');">
                                                     <span class="step-title"> Minimum Step</span>
-                                                    <div class="wrap-swap-mob">
-                                                        <span class="step-title1"> < 30,000 </span>
-                                                        <span class="price">Normal</span>
-                                                    </div>
+                                                    <span class="step-title1"> < 30,000 </span>
+                                                    <span class="price">Normal</span>
                                                 </span>
                                                 <span class="point" id="bronze-span" onclick="javascript: resetActive(event,16, 'step-1');">
                                                     <span class="step-title"> Minimum Step</span>
-                                                    <div class="wrap-swap-mob">
-                                                        <span class="step-title1"> > 30,000 </span>
-                                                        <span class="price">Brooze</span>
-                                                    </div>
-                                                   
+                                                    <span class="step-title1"> > 30,000 </span>
+                                                    <span class="price">Brooze</span>
                                                 </span>
                                                 <span class="point" id="silver-span" onclick="javascript: resetActive(event, 32, 'step-1');">
                                                     <span class="step-title"> Minimum Step</span>
-                                                    <div class="wrap-swap-mob">
-                                                        <span class="step-title1"> > 100,000 </span>
-                                                        <span class="price">Silver</span>
-                                                    </div>
-                                                    
+                                                    <span class="step-title1"> > 100,000 </span>
+                                                    <span class="price">Silver</span>
                                                 </span>
                                                 <span class="point" id="gold-span" onclick="javascript: resetActive(event, 64, 'step-1');">
                                                     <span class="step-title"> Minimum Step</span>
-                                                    <div class="wrap-swap-mob">
-                                                        <span class="step-title1"> > 500,000 </span>
-                                                        <span class="price">Gold</span>
-                                                    </div>
+                                                    <span class="step-title1"> > 500,000 </span>
+                                                    <span class="price">Gold</span>
                                                 </span>
                                                 <span class="point" id="platinum-span" onclick="javascript: resetActive(event, 80, 'step-1');">
                                                     <span class="step-title"> Minimum Step</span>
-                                                    <div class="wrap-swap-mob">
-                                                        <span class="step-title1"> > 1,000,000 </span>
-                                                        <span class="price">Platinum</span>
-                                                    </div>
+                                                    <span class="step-title1"> > 1,000,000 </span>
+                                                    <span class="price">Platinum</span>
                                                 </span>
                                                 <span class="point" id="diamond-span" onclick="javascript: resetActive(event, 100, 'step-1');">
                                                     <span class="step-title"> Minimum Step</span>
-                                                    <div class="wrap-swap-mob">
-                                                        <span class="step-title1"> > 4,000,000 </span>
-                                                        <span class="price">Diamond</span>
-                                                    </div>
+                                                    <span class="step-title1"> > 4,000,000 </span>
+                                                    <span class="price">Diamond</span>
                                                 </span>
                                             </div>
                                         </div>
@@ -548,7 +530,7 @@
             document.getElementById("viplevel_icon").src = VIPlevel.data.VIPBanner;
 
             document.getElementById("currentStatus").value = VIPlevel.data.Name;
-            $("#currentDeposit").val(UserDetails.data.totalDepositAmount);
+            $("#currentDeposit").val(UserDetails.data.TotalDepositAmount);
             $("#currentStatus").attr("disabled", "disabled");
             $("#currentDeposit").attr("disabled", "disabled");
 

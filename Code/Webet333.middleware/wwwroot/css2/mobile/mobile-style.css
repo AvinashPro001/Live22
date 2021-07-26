@@ -74,7 +74,7 @@ body                                        { background-color: #ffffff; padding
 .game-tab-panel.nav-pills > li.active > a:focus, 
 .game-tab-panel.nav-pills > li.active > a:hover { background-color: transparent; }
 .game-tab-panel                             { display: flex; justify-content: space-between; background: #000; }
-.game-tab-panel li                          { background: #2a2a2a; width: calc(100% / 3); text-align: center;position: relative; }
+.game-tab-panel li                          { background: #2a2a2a; width: calc(100% / 4); text-align: center;position: relative; }
 .game-tab-panel li:before                   { content: '\f0de'; display: block; left: 50%; transform: translateX(-50%); width: 0; height: 0px; 
                                             position: absolute; bottom: 10px; font-family: fontAwesome; font-weight: 400; }
 .game-tab-panel li.active:before,
@@ -225,13 +225,8 @@ select.main-wallet.jcf-hidden,
 
 
 #beforelogin_mobile .hero-banner .slick-dots, #afterlogin_mobile .hero-banner .slick-dots {
-    right: auto;
-    position: absolute;
-    bottom: 5px;
-    text-align: center;
-    justify-content: center;
-    width: 100%;
-    z-index:1000;
+    bottom: 0px;
+    right: 0px;
 }
 
 #beforelogin_mobile .hero-banner .slick-dotted.slick-slider, #afterlogin_mobile .hero-banner .slick-dotted.slick-slider {
@@ -239,8 +234,8 @@ select.main-wallet.jcf-hidden,
 }
 
 #beforelogin_mobile .hero-banner .slick-dots li, #afterlogin_mobile .hero-banner .slick-dots li {
-    /*width: 7px;
-    height: 7px;*/
+    width: 7px;
+    height: 7px;
 }
 
 
@@ -254,7 +249,7 @@ select.main-wallet.jcf-hidden,
 }
 
 .promotion-slide-hero-banner{
-    margin-bottom:0px;
+    margin-bottom:-5px;
 }
 
 .promotion-slide-hero-banner .full-img {
@@ -314,7 +309,6 @@ select.main-wallet.jcf-hidden,
 .main-wallet-bal-pad{padding-left:0px !important;}
 .home-vip-image{margin-top:-4px;}
 .main-wallet-bar{line-height:20px;}
-.wrap-swap-mob{display:flex;flex-direction:column-reverse}
 
 
 
@@ -1807,7 +1801,7 @@ p.bonus_content a {
 
     .steps-2 {
         z-index: 5;
-        padding-bottom: 225px;
+        padding-bottom: 50px;
     }
 
         .steps-2 .step {
@@ -1828,21 +1822,13 @@ p.bonus_content a {
             top: 22px;
             left: 0px;
             margin-left: 5px;
-            display:flex;
-            flex-wrap:wrap;
-            align-items:center;
-            padding-bottom:15px;
         }
-
-            .steps-2 .point:last-child{
-                padding-bottom:0px;
-            }
 
             .steps-2 .point:before {
                 content: '';
                 display: block;
                 left: 0;
-                top: 17px;
+                top: 12px;
                 width: 10px;
                 height: 2px;
                 background: #ffffff;
@@ -1853,18 +1839,10 @@ p.bonus_content a {
             .steps-2 .step-title1,
             .steps-2 .point .price {
                 position: unset;
+                margin: 0px 1px 15px;
                 font-size: 12px;
                 line-height: 15px;
                 cursor: pointer;
-                text-align:left;
-                margin:0px;
-            }
-
-            .steps-2 .step-title{
-                padding-left:15px;
-            }
-            .steps-2 .point .price {
-                margin: 0px 1px 5px;
             }
 
     .benefits_referal_tab_sec {

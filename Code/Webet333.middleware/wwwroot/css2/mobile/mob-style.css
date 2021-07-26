@@ -138,6 +138,7 @@ br {
 
     .account-icon li a {
         color: #ffffff;
+         
         display: inline-block;
         position: relative;
         z-index: 2;
@@ -330,36 +331,6 @@ header .sticky-header {
 .join-now-section {
     padding: 0px 0px 5px;
 }
-
-    .join-now-section .hero-banner .slick-dots {
-        display: flex;
-        justify-content: center;
-        margin: 0px;
-    }
-
-        .join-now-section .hero-banner .slick-dots li, .join-now-section .hero-banner .slick-dots li.slick-active {
-            background-color: transparent;
-            opacity: 1;
-            margin: 0px 3px;
-            font-size:0px;
-            line-height:0px;
-        }
-
-            .join-now-section .hero-banner .slick-dots li.slick-active button{
-                background:white;
-            }
-
-            .join-now-section .hero-banner .slick-dots li button {
-                font-size: 0px;
-                line-height: 0px;
-                padding: 0px;
-                height: 6px;
-                width: 6px;
-                background: #cccccc;
-                border: 0;
-                border-radius: 50%;
-            }
-
 
 .myaccount-icon {
     position: relative;
@@ -627,11 +598,11 @@ header .sticky-header {
         color: #40434b;
         border-color: transparent;
         outline: none;
-        font-size: 12px;
+        font-size: 10px;
     }
 
 .step-screen p {
-    font-size: 12px;
+    font-size: 10px;
     line-height: 15px;
 }
 
@@ -974,12 +945,11 @@ header .sticky-header {
         }
 
 .title-bg {
-    background-image: linear-gradient(-180deg,#feb801 0,#feb801 100%) !important;
+    background-image: linear-gradient(-180deg,#feb801 0,#feb801 100%)!important; 
     padding: 10px;
 }
-
 body {
-    background-color: #ffffff !important;
+     background-color: #ffffff !important;
 }
 
 .hide-header {
@@ -1911,8 +1881,8 @@ input, select {
     color: #F58723
 }
 
-#filter-model .input-append {
-    display: flex;
+#filter-model .input-append{
+    display:flex;
 }
 
 #filter-model p {
@@ -1920,7 +1890,6 @@ input, select {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-
 #filter-model .text-center button {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -1935,33 +1904,13 @@ input, select {
     overflow-y: overlay;
 }
 
-.active_color {
-    color: #cccc00 !important;
-}
-
-.expired_color {
-    color: #ff3300 !important;
-}
-
-.manually_expired_color {
-    color: #ff33cc !important;
-}
-
-.completed_color {
-    color: #33cc33 !important;
-}
-
-.pending_color {
-    color: #ff9900 !important;
-}
-
-.approved_color {
-    color: #33cc33 !important;
-}
-
-.rejected_color {
-    color: #ff3300 !important;
-}
+.active_color{color:#cccc00 !important;}
+.expired_color{color:#ff3300 !important;}
+.manually_expired_color{color:#ff33cc !important;}
+.completed_color {color: #33cc33 !important;}
+.pending_color{color:#ff9900 !important;}
+.approved_color{color: #33cc33 !important;}
+.rejected_color{color: #ff3300 !important;}
 
 .history-model h5 {
     color: #bd9b66;

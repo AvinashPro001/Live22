@@ -3,7 +3,7 @@
     document.getElementById("ErrorMessage").innerHTML = message;
     var x = document.getElementById("error_snackbar");
     x.className = "show";
-    setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 1800);
 }
 
 function ShowWarning(message) {
@@ -19,7 +19,7 @@ function ShowSuccess(message) {
     document.getElementById("SuccessMessage").innerHTML = message;
     var x = document.getElementById("success_snackbar");
     x.className = "show";
-    setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 1800);
 }
 
 function SetToastr(message, type) {

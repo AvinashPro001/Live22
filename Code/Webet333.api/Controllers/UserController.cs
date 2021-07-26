@@ -138,16 +138,14 @@ namespace Webet333.api.Controllers
                 if (userRole != RoleConst.Admin)
                 {
                     var Adminlist = await user_help.GetData(StoredProcConsts.User.GetUsersBank, GetUserId(User), GetUniqueId(User), GetUserRole(User));
-                    Adminlist.ForEach(bank =>
-                    {
+                    Adminlist.ForEach(bank => {
                         bank.bankLogo = (bank.bankLogo != null && !string.IsNullOrEmpty(bank.bankLogo)) ? $"{baseUrl.ImageBase}{baseUrl.BankIconImage}/{bank.bankId}{bank.bankLogo}" : "";
                     });
                     return OkResponse(Adminlist);
                 }
                 var list = await user_help.GetData(StoredProcConsts.User.GetUsersBank, Guid.Parse(request.Id), GetUniqueId(User), GetUserRole(User));
 
-                list.ForEach(bank =>
-                {
+                list.ForEach(bank => {
                     bank.bankLogo = (bank.bankLogo != null && !string.IsNullOrEmpty(bank.bankLogo)) ? $"{baseUrl.ImageBase}{baseUrl.BankIconImage}/{bank.bankId}{bank.bankLogo}" : "";
                 });
 
@@ -560,6 +558,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Users Reward History
+
+        #endregion Promotion Apply List
     }
 }

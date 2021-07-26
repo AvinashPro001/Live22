@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using Webet333.api.Controllers.Base;
@@ -63,7 +64,7 @@ namespace Webet333.api.Controllers
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
                 username = user.Mega888GamePrefix + user.Username;
             }
-
+            
             var apiResponse = await Mega888GameHelpers.CallRegisterAPI(username);
             var result = JsonConvert.DeserializeObject(apiResponse);
             string error = Convert.ToString(result.error);

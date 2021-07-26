@@ -102,14 +102,14 @@ namespace Webet333.api.Controllers
         [HttpGet(ActionsConst.Joker.GameList)]
         public async Task<IActionResult> JokerGameList()
         {
+
             if (GetUserRole(User) == RoleConst.Users)
                 BadResponse("forbid_error_access");
 
             var result = await JokerHelpers.GameList();
 
             var gameListModel = new List<GameListUploadResponse>();
-            result.ListGames.ForEach(game =>
-            {
+            result.ListGames.ForEach(game=> {
                 gameListModel.Add(new GameListUploadResponse
                 {
                     GameCode = game.GameCode,
@@ -124,6 +124,7 @@ namespace Webet333.api.Controllers
                 await game_help.GameListInsert(gameListModel, "Joker Wallet", null);
 
             return OkResponse(result.ListGames);
+
         }
 
         #endregion Joker game Register

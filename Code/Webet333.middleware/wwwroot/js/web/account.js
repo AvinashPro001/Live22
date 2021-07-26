@@ -25,7 +25,6 @@ $(document).ready(function () {
                 if (data == null) {
                     SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
                     await AllPromotionCallAPI();
-                    await HomeBannerCallAPI();
                     await AllAnnouncementsCallAPI();
                     await CallDownloadLinkAPI();
                     await CallAPIForBankPages();
@@ -34,11 +33,9 @@ $(document).ready(function () {
                     AdminBankPageData();
                     SetPromotionInPromotionPage();
                     SetAnnouncementsOnAllPages();
-                    if ($('#home_main_banner').children().length == 0) SetHomeBannerInMainPage();
                 }
                 else {
                     if (data.PromotionPageData == null) { await AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
-                    if (data.HomeBannerData == null) { await HomeBannerCallAPI(); if ($('#home_main_banner').children().length == 0) SetHomeBannerInMainPage(); }
                     if (data.AnnouncementsData == null) { await AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
                     if (data.WalletData == null) { await GetWalletList(); }
                     if (data.AdminBankPageData == null) { await CallAPIForBankPages(); SetAdminBankPage() }
@@ -84,7 +81,7 @@ function DisplayCurrentTime() {
     hours = hours < 10 ? "0" + hours : hours;
     var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
     var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-    time = day + "/" + Month + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + " " + am_pm + " (GMT+8)";
+    time = day + "/" + Month + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + " " + am_pm + " (GMT=8)";
     return time;
 };
 
@@ -96,7 +93,9 @@ function LoginSectionHideUnhide() {
     if (GetLocalStorage("currentUser") == null) {
         document.getElementById("afterlogin").innerHTML = "";
         document.getElementById("bankMainMenu").innerHTML = "";
+        document.getElementById("vipMainMenu").innerHTML = "";
         $("#bankMainMenu").css("display", "none");
+        $("#vipMainMenu").css("display", "none");
     } else {
         document.getElementById("beforelogin").innerHTML = ""
     }
@@ -278,7 +277,7 @@ async function ChangePassword() {
     var res = JSON.parse(Decryption(GetSessionStorage("userDetails")))
     var username = res.username
 
-    if (username === newPassword) return ShowError("Password and username must be different.");
+    if (username === password) return ShowError("Password and username must be different.");
 
     if (Decryption(GetLocalStorage("currentUserData")) !== currentPassword) return ShowError(ChangeErroMessage("current_pass_not_match"));
 

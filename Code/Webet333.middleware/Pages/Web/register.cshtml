@@ -65,15 +65,15 @@
                                 <div class="row form-group ml0 mr0">
                                     <label class="user-title col-md-3 pl0">Password :</label>
                                     <label class="lock mendatory col-md-9 pl0">
-                                        <input type="password" class="reg-form" placeholder="" id="txt_password" onkeyup="OnPasswordType('txt_password','txt_username')" autocomplete="off" />
+                                        <input type="password" class="reg-form" placeholder="" id="txt_password" onkeyup="OnPasswordType('txt_password','txt_username')" autocomplete="off"/>
                                         <p class="star">*</p>
                                         <p class="note no-mar mar-btm-ten grey-color" id="pass-len">
                                             <i class="fas fa-check"></i>&nbsp;&nbsp;<span class="lang" key="password_instruction"> </span>
                                         </p>
-                                        <p class="note no-mar mar-btm-ten grey-color" id="pass-alpha">
+                                        <p class="note no-mar mar-btm-ten grey-color"  id="pass-alpha">
                                             <i class="fas fa-check"></i>&nbsp;&nbsp;<span class="lang" key="password_alpha_instruction"></span>
                                         </p>
-                                        <p class="note no-mar mar-btm-ten grey-color" id="pass-username-same">
+                                        <p class="note no-mar mar-btm-ten grey-color"  id="pass-username-same">
                                             <i class="fas fa-check"></i>&nbsp;&nbsp;<span class="lang" key="password_username_same"></span>
                                         </p>
                                     </label>
@@ -101,7 +101,7 @@
                                     </span>
                                 </p>
                                 <div class="row form-group ml0 mr0">
-                                    <label class="user-title col-md-3 pl0 lang" key="phone_number">Phone Number :</label>
+                                    <label class="user-title col-md-3 pl0 lang" key="phone_number" >Phone Number :</label>
                                     <label class="num mendatory col-md-9 pl0">
                                         <input type="number" p class="reg-form" placeholder="" id="txt_mobile_no" onkeyup="MobileValidation('txt_mobile_no','register-error')" />
                                         <p class="star">*</p>
@@ -166,23 +166,18 @@
     </div>
 </section>
 
-<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback'></script>
 <script type="text/javascript">
     AllAnnouncementsCallAPI();
     setTimeout(function () {
-        var CaptchaInterval = setInterval(() => {
-            if ($('#g-recaptcha1').children().length == 0) {
-                $('.recaptcha').each(function () {
-                    grecaptcha.render(this.id, {
-                        'sitekey': '6LdVkwkUAAAAACeeETRX--v9Js0vWyjQOTIZxxeB',
-                        "theme": "light"
-                    });
-                });
-            }
-            else {
-                clearInterval(CaptchaInterval);
-            }
-        }, 1000)
+
+        $('.recaptcha').each(function () {
+            grecaptcha.render(this.id, {
+                'sitekey': '6LdVkwkUAAAAACeeETRX--v9Js0vWyjQOTIZxxeB',
+                "theme": "light"
+            });
+        });
+
     }, 1000);
 
     function recaptchaCallback() {
