@@ -23,8 +23,7 @@
   "amount_greater_zero_error": "Please Enter Amount Greater than 0.",
   "amount_greater_one_error": "Please Enter Amount Greater than 1.",
   "promot_active_error": "You cannot apply promotion,Because you have active promotion",
-  "min_amount_error": "Please enter amount greater than 10.",
-  "max_amount_error": "Please enter amount less than 30000.",
+  "min_max_amount_error": "Minimum Amount is 10 and Maximum Amount is 30000.",
   "amount_required_error": "Please Enter Amount.",
   "min_max_amount_error_parameter": "Minimum Amount is 10 and Maximum Amount is ",
   "min1_max1000_amount_error": "Minimum Amount 1",
@@ -49,7 +48,7 @@
   "otp_send_success": "OTP had been sent to register mobile no , please enter valid OTP to activate this account.",
   "error_otp": "Please Insert 6 Digit OTP !!",
 
-  "special_char_not_allowed": "Special Characters not allowed in Username.",
+  "special_char_not_allowed": "Special Characters not allowed.",
   "space_not_allowed": "Space not allowed.",
   "current_pass_not_match": "Current Password not matched.",
   "enter_full_name": "Please enter your full name.",
