@@ -96,7 +96,7 @@ function slider() {
     $('.login-top-slider').slick({
         autoplay: true,
         autoplaySpeed: 5000,
-        dots: true,
+        dots: false,
         arrows: false,
         infinite: true,
         speed: 1000,

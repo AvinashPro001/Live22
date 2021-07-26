@@ -357,12 +357,12 @@ async function SetLastUpdateTime() {
     if (GetSessionStorage("siteData") == null) SetSiteData()
 
     if (GetLocalStorage("time") == null) {
-                SetSiteData();
+        SetSiteData();
         var date = new Date();
         SetLocalStorage("time", date);
     }
     else {
-                var Currentdate = new Date();
+        var Currentdate = new Date();
         var OldDate = new Date(GetLocalStorage("time"));
 
         var diff = (Currentdate.getTime() - OldDate.getTime()) / 1000;

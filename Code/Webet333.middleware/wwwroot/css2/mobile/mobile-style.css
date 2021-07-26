@@ -225,12 +225,8 @@ select.main-wallet.jcf-hidden,
 
 
 #beforelogin_mobile .hero-banner .slick-dots, #afterlogin_mobile .hero-banner .slick-dots {
-    right: auto;
-    position: absolute;
-    bottom: 15px;
-    text-align: center;
-    justify-content: center;
-    width: 100%;
+    bottom: 0px;
+    right: 0px;
 }
 
 #beforelogin_mobile .hero-banner .slick-dotted.slick-slider, #afterlogin_mobile .hero-banner .slick-dotted.slick-slider {
@@ -238,8 +234,8 @@ select.main-wallet.jcf-hidden,
 }
 
 #beforelogin_mobile .hero-banner .slick-dots li, #afterlogin_mobile .hero-banner .slick-dots li {
-    /*width: 7px;
-    height: 7px;*/
+    width: 7px;
+    height: 7px;
 }
 
 
