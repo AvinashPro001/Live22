@@ -108,7 +108,7 @@ footer .col-sm-2:last-child ul.bank-us:last-child li { width: calc(100% / 3); }
 .login-item .lock input, .login-item .user input { max-width: 100px; }
 .div-toggle .bellow_signt { max-width: 475px; margin-left: auto; margin-right: 0; }
 .home-slider .slick-dots { left: -220px; }
-.main-banner { min-height: 425px; }
+.main-banner { min-height: 355px; }
 .menu-area.row_two_navigation .navbar-nav { float: none; display: flex; align-items: center; justify-content: space-around; }
 .menu-area.row_two_navigation > .container { padding: 0px; }
 .menu-area.row_two_navigation .navbar-nav > li { padding: 0px; height: auto; }

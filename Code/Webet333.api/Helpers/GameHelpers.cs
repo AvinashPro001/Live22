@@ -1609,7 +1609,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-
         public static string ReadExcelasJSON(string path)
         {
             try
@@ -1618,19 +1617,17 @@ namespace Webet333.api.Helpers
                 //Lets open the existing excel file and read through its content . Open the excel using openxml sdk
                 using (SpreadsheetDocument doc = SpreadsheetDocument.Open(path, false))
                 {
-                    //create the object for workbook part  
+                    //create the object for workbook part
                     WorkbookPart workbookPart = doc.WorkbookPart;
                     Sheets thesheetcollection = workbookPart.Workbook.GetFirstChild<Sheets>();
 
-                    //using for each loop to get the sheet from the sheetcollection  
+                    //using for each loop to get the sheet from the sheetcollection
                     foreach (Sheet thesheet in thesheetcollection.OfType<Sheet>())
                     {
-                        //statement to get the worksheet object by using the sheet id  
+                        //statement to get the worksheet object by using the sheet id
                         Worksheet theWorksheet = ((WorksheetPart)workbookPart.GetPartById(thesheet.Id)).Worksheet;
 
                         SheetData thesheetdata = theWorksheet.GetFirstChild<SheetData>();
-
-
 
                         for (int rCnt = 0; rCnt < thesheetdata.ChildElements.Count(); rCnt++)
                         {
@@ -1638,9 +1635,8 @@ namespace Webet333.api.Helpers
                             for (int rCnt1 = 0; rCnt1
                                 < thesheetdata.ElementAt(rCnt).ChildElements.Count(); rCnt1++)
                             {
-
                                 Cell thecurrentcell = (Cell)thesheetdata.ElementAt(rCnt).ChildElements.ElementAt(rCnt1);
-                                //statement to take the integer value  
+                                //statement to take the integer value
                                 string currentcellvalue = string.Empty;
                                 if (thecurrentcell.DataType != null)
                                 {
@@ -1683,9 +1679,7 @@ namespace Webet333.api.Helpers
                             }
                             if (rCnt != 0)//reserved for column values
                                 dtTable.Rows.Add(rowList.ToArray());
-
                         }
-
                     }
 
                     return JsonConvert.SerializeObject(dtTable);
@@ -1697,7 +1691,6 @@ namespace Webet333.api.Helpers
                 throw;
             }
         }
-
 
         internal async Task GameListInsert(List<GameListUploadResponse> request, string WalletId, string ImageBase)
         {

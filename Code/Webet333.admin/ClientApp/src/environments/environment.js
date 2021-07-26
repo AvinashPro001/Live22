@@ -1,16 +1,27 @@
 "use strict";
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.account = exports.environment = void 0;
+var baseUrl = '', baseUrlWithoutVersion = '';
+var environmentName = 'DEBUG'; // 'DEBUG' OR 'STAG'
+var PortAPI = '9001';
+switch (environmentName.toUpperCase()) {
+    case 'DEBUG':
+        baseUrl = 'https://uatapi.wb3api.com/api/v1/';
+        baseUrlWithoutVersion = 'https://uatapi.wb3api.com';
+        break;
+    case 'STAG':
+        baseUrl = 'https://api.wb3api.com/api/v1/';
+        baseUrlWithoutVersion = 'https://api.wb3api.com';
+        break;
+    case 'LOCAL':
+        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        break;
+}
 exports.environment = {
     production: false,
-    //apiUrl: 'https://api.wb3api.com/api/v1/',
-    //apiUrlWithVersion: 'https://api.wb3api.com/'
-    apiUrl: 'http://localhost:8080/api/v1/',
-    apiUrlWithVersion: 'http://localhost:8080/'
+    apiUrl: baseUrl,
+    apiUrlWithVersion: baseUrlWithoutVersion
 };
 exports.account = {
     login: exports.environment.apiUrl + 'account/login',
@@ -103,12 +114,14 @@ exports.customer = {
     changeSatus: exports.environment.apiUrl + 'activate_customer',
     depositList: exports.environment.apiUrl + 'payments/deposit/retrieve',
     withdrawList: exports.environment.apiUrl + 'payments/withdraw/retrieve',
+    withdrawListTemp: exports.environment.apiUrl + 'payments/withdraw/retrieve/temp',
     transferList: exports.environment.apiUrl + 'payments/transfer/retrieve',
     transferAdd: exports.environment.apiUrl + 'payments/transfer',
     depositVerify: exports.environment.apiUrl + 'payments/deposit/verify',
     withdrawVerify: exports.environment.apiUrl + 'payments/withdraw/verify',
     walletBalance: exports.environment.apiUrl + 'customer/wallet/balance',
     promotionApplySelect: exports.environment.apiUrl + 'promotions/promotionapply/select',
+    promotionApplyList: exports.environment.apiUrl + 'promotions/promotionapply/list',
     rebateHistory: exports.environment.apiUrl + 'Game/Rebate/User/History',
     statementHistory: exports.environment.apiUrl + 'payments/transactions',
     restoreHistory: exports.environment.apiUrl + 'Game/restore/list',
@@ -281,7 +294,15 @@ exports.customer = {
     sboSetLeague: exports.environment.apiUrl + 'sbo/set/league',
     getLeagueBetSetting: exports.environment.apiUrl + 'sbo/get/league-bet-setting',
     sboGetBlankLeague: exports.environment.apiUrl + 'sbo/blank-getLeague',
-    resendOTP: exports.environment.apiUrl + 'account/send/otp'
+    resendOTP: exports.environment.apiUrl + 'account/send/otp',
+    homePageBannerList: exports.environment.apiUrl + 'settings/homePage-banner/select/admin',
+    homePageBannerDelete: exports.environment.apiUrl + 'settings/homePage-banner/delete',
+    homePageBannerChangeStatus: exports.environment.apiUrl + 'settings/homePage-banner/update/status',
+    homePageBannerAdd: exports.environment.apiUrl + 'settings/homePage-banner/add',
+    homePageBannerUpdate: exports.environment.apiUrl + 'settings/homePage-banner/update',
+    homePageBannerImage: exports.environment.apiUrl + 'settings/homePage-banner/image',
+    homePageBannerImageUpdate: exports.environment.apiUrl + 'settings/homePage-banner/image/update',
+    homePageBannerSelectById: exports.environment.apiUrl + 'settings/homePage-banner/select/id',
 };
 exports.playtech = {
     playtechUrl: 'https://api.wb3api.com/api/Default/playtech',

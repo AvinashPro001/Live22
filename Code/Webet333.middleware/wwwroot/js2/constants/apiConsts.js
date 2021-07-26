@@ -1,39 +1,61 @@
-﻿var baseUrl = "https://api.wb3api.com/api/v1/";
-var baseUrlWithoutVersion = "https://api.wb3api.com";
-var webUrl = "https://www.webet333.net/";
-var mobUrl = "https://www.webet333.net/mobile/";
-var playtehcJS = "https://login.tothinkit.com/jswrapper/integration.js.php?casino=winforfun88";
+﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let PortAPI = '9001';
+let PortWEB = '9002';
+
+switch (environmentName.toUpperCase()) {
+    case 'DEBUG':
+        baseUrl = 'https://uatapi.wb3api.com/api/v1/';
+        baseUrlWithoutVersion = 'https://uatapi.wb3api.com';
+        webUrl = 'https://www.uatwb3.com/';
+        mobUrl = 'https://www.uatwb3.com/mobile/';
+        break;
+    case 'STAG':
+        baseUrl = 'https://api.wb3api.com/api/v1/';
+        baseUrlWithoutVersion = 'https://api.wb3api.com';
+        webUrl = 'https://www.webet333.net/';
+        mobUrl = 'https://www.webet333.net/mobile/';
+        break;
+    case 'LOCAL':
+        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        webUrl = 'http://127.0.0.1:' + PortWEB;
+        mobUrl = 'http://127.0.0.1:' + PortWEB + '/mobile/';
+        break;
+}
+
+var playtehcJS = 'https://login.tothinkit.com/jswrapper/integration.js.php?casino=winforfun88';
 
 var apiEndPoints = {
-    login: "account/login",
-    register: "account/register",
-    forgotPassword: "account/forgot_password",
-    resetPassword: "account/reset_password",
-    resetPasswordData: "account/reset_password_data",
-    //confirmPassword: "account/confirm_email",
-    changePassword: "account/change_password",
-    getProfile: "customer/profile",
-    userLastTimeUpdate: "account/users/logintime/update",
-    updateProfile: "customer/profile/update",
-    updateBank: "customer/bank/update",
+    login: 'account/login',
+    register: 'account/register',
+    forgotPassword: 'account/forgot_password',
+    resetPassword: 'account/reset_password',
+    resetPasswordData: 'account/reset_password_data',
+    //confirmPassword: 'account/confirm_email',
+    changePassword: 'account/change_password',
+    getProfile: 'customer/profile',
+    userLastTimeUpdate: 'account/users/logintime/update',
+    updateProfile: 'customer/profile/update',
+    updateBank: 'customer/bank/update',
 
-    Change918PassWordReset: "Game/Kiss918/ResetPassword",
-    ChangePussy888PassWordReset: "pussy888/ResetPassword",
+    Change918PassWordReset: 'Game/Kiss918/ResetPassword',
+    ChangePussy888PassWordReset: 'pussy888/ResetPassword',
 
-    socialMediaReference: "account/socialmediastatics",
+    socialMediaReference: 'account/socialmediastatics',
 
-    contactInformationSelect: "contact/information/select",
+    contactInformationSelect: 'contact/information/select',
 
-    addBank: "customer/bank/register",
-    userBankDetail: "customer/bank",
-    walletBalance: "customer/wallet/balance",
-    walletUpdateBalance: "Game/AllWalletBalance",
-    restoreBalance: "Game/Balance/Restore",
+    addBank: 'customer/bank/register',
+    userBankDetail: 'customer/bank',
+    walletBalance: 'customer/wallet/balance',
+    walletUpdateBalance: 'Game/AllWalletBalance',
+    restoreBalance: 'Game/Balance/Restore',
 
-    downloadLinkList: "Game/DownloadLink/list",
+    downloadLinkList: 'Game/DownloadLink/list',
 
-    depositDdl: "payments/deposit/dropdown_deposit",
-    uploadReceipt: "payments/deposit/image",
+    depositDdl: 'payments/deposit/dropdown_deposit',
+    uploadReceipt: 'payments/deposit/image',
 
     walletSelect: 'account/wallet/select',
 
@@ -44,113 +66,115 @@ var apiEndPoints = {
 
     DepositCheckWithoutPromotion: 'payments/checkdepositwithoutpromotion',
 
-    addDeposite: "payments/deposit",
-    addWithdraw: "payments/withdraw",
-    paymentTransfer: "payments/transfer",
+    addDeposite: 'payments/deposit',
+    addWithdraw: 'payments/withdraw',
+    paymentTransfer: 'payments/transfer',
 
-    onlinePayment: "payment/get/url",
+    onlinePayment: 'payment/get/url',
 
-    paymentTransferInOneAPi: "transfer/balance",
+    paymentTransferInOneAPi: 'transfer/balance',
 
-    transferHistory: "payments/transfer/retrieve",
-    withdrawDepositHistroy: "payments/withdraw_deposit_select",
-    promotionHistroy: "promotions/promotionapply/list",
-    rebateHistroy: "Game/Rebate/User/History",
-    rewadHistroy: "customer/reward/list",
-    bettingSummeryHistroy: "Game/bettingsummery",
+    transferHistory: 'payments/transfer/retrieve',
+    withdrawDepositHistroy: 'payments/withdraw_deposit_select',
+    promotionHistroy: 'promotions/promotionapply/list',
+    rebateHistroy: 'Game/Rebate/User/History',
+    rewadHistroy: 'customer/reward/list',
+    bettingSummeryHistroy: 'Game/bettingsummery',
 
 
-    AllInWallet: "Game/Balance/InWallet",
+    AllInWallet: 'Game/Balance/InWallet',
 
-    admin_bank: "settings/admin_bank/list",
-    bank: "settings/banks/list",
+    admin_bank: 'settings/admin_bank/list',
+    bank: 'settings/banks/list',
 
-    promotionsList: "promotions/retrieve",
+    promotionsList: 'promotions/retrieve',
 
-    promotionsDailyList: "promotions/daily/list",
+    promotionsDailyList: 'promotions/daily/list',
 
-    announcementList: "settings/announcement/user/list",
+    announcementList: 'settings/announcement/user/list',
 
-    selectUser: "Game/SelectUser",
+    selectUser: 'Game/SelectUser',
 
-    PlaytechBrokenStatus: "playtech/broken",
-    PragmaticBrokenStatus: "pragmatic/broken",
+    PlaytechBrokenStatus: 'playtech/broken',
+    PragmaticBrokenStatus: 'pragmatic/broken',
 
-    globalParameter: "Game/GlobalParameters",
+    globalParameter: 'Game/GlobalParameters',
 
-    registerAG: "ag/register",
-    loginAG: "ag/login",
+    registerAG: 'ag/register',
+    loginAG: 'ag/login',
 
-    registerJoker: "joker/register",
-    registerPlaytech: "playtech/register",
-    register918Kiss: "918kiss/register",
-    registerM8: "m8/register",
+    registerJoker: 'joker/register',
+    registerPlaytech: 'playtech/register',
+    register918Kiss: '918kiss/register',
+    registerM8: 'm8/register',
 
-    registerMaxBet: "MaxBet/Register",
-    loginMaxBet: "MaxBet/Login",
-    getUserByMobile: "account/getuser",
+    registerMaxBet: 'MaxBet/Register',
+    loginMaxBet: 'MaxBet/Login',
+    getUserByMobile: 'account/getuser',
 
-    LoginRegisterTracking: "account/tracking/insert",
+    LoginRegisterTracking: 'account/tracking/insert',
 
-    mega888Register: "mega888/register",
-    mega888Logout: "mega888/logout",
+    mega888Register: 'mega888/register',
+    mega888Logout: 'mega888/logout',
 
-    sexyRegister: "sexybaccarart/register",
-    sexyLogin: "sexybaccarart/login",
+    sexyRegister: 'sexybaccarart/register',
+    sexyLogin: 'sexybaccarart/login',
 
-    saRegister: "sa/register",
-    saLogin: "sa/login",
+    saRegister: 'sa/register',
+    saLogin: 'sa/login',
 
-    pussyRegister: "pussy888/register",
+    pussyRegister: 'pussy888/register',
 
-    allBetRegister: "allbet/register",
-    allBetLogin: "allbet/login",
+    allBetRegister: 'allbet/register',
+    allBetLogin: 'allbet/login',
 
-    WMRegister: "wm/register",
-    WMLogin: "wm/login",
+    WMRegister: 'wm/register',
+    WMLogin: 'wm/login',
 
-    pragmaticRegister: "pragmatic/register",
-    pragmaticLogin: "pragmatic/login",
-    pragmaticList: "pragmatic/game/list",
+    pragmaticRegister: 'pragmatic/register',
+    pragmaticLogin: 'pragmatic/login',
+    pragmaticList: 'pragmatic/game/list',
 
-    dgRegister: "dg/register",
-    dgLogin: "dg/login",
+    dgRegister: 'dg/register',
+    dgLogin: 'dg/login',
 
-    YeeBetRegister: "yeebet/register",
-    YeeBetLogin: "yeebet/login",
+    YeeBetRegister: 'yeebet/register',
+    YeeBetLogin: 'yeebet/login',
 
-    SBORegister: "sbo/register/player",
-    SBOLogin: "sbo/login",
+    SBORegister: 'sbo/register/player',
+    SBOLogin: 'sbo/login',
 
-    kiss918Balance: "gamebalance/918kiss",
-    mega888Balance: "gamebalance/mega888",
-    jokerBalance: "gamebalance/joker",
-    maxbetBalance: "gamebalance/maxbet",
-    m8Balance: "gamebalance/m8",
-    agBalance: "gamebalance/ag",
-    playtechBalance: "gamebalance/playtech",
-    dgBalance: "gamebalance/dg",
-    sexyBalance: "gamebalance/sexybaccarat",
-    saBalance: "gamebalance/sa",
-    Pussy888Balance: "gamebalance/pussy888",
-    AllBetBalance: "gamebalance/allbet",
-    WMBalance: "gamebalance/wm",
-    PragmaticBalance: "gamebalance/pragmatic",
-    YeeBetBalance: "gamebalance/yeebet",
-    SBOBalance: "gamebalance/sbo",
+    kiss918Balance: 'gamebalance/918kiss',
+    mega888Balance: 'gamebalance/mega888',
+    jokerBalance: 'gamebalance/joker',
+    maxbetBalance: 'gamebalance/maxbet',
+    m8Balance: 'gamebalance/m8',
+    agBalance: 'gamebalance/ag',
+    playtechBalance: 'gamebalance/playtech',
+    dgBalance: 'gamebalance/dg',
+    sexyBalance: 'gamebalance/sexybaccarat',
+    saBalance: 'gamebalance/sa',
+    Pussy888Balance: 'gamebalance/pussy888',
+    AllBetBalance: 'gamebalance/allbet',
+    WMBalance: 'gamebalance/wm',
+    PragmaticBalance: 'gamebalance/pragmatic',
+    YeeBetBalance: 'gamebalance/yeebet',
+    SBOBalance: 'gamebalance/sbo',
 
-    userDetaisSetGameBalance: "userdetails/set",
+    userDetaisSetGameBalance: 'userdetails/set',
 
-    TotalTurnover: "Game/DailyTurnover",
+    TotalTurnover: 'Game/DailyTurnover',
 
-    SendOTP: "account/send/otp",
-    VerifiedOTP: "account/verified/otp",
+    SendOTP: 'account/send/otp',
+    VerifiedOTP: 'account/verified/otp',
 
-    VaderPayMainteanceSelect: "account/vaderpay/maintenance/select",
+    VaderPayMainteanceSelect: 'account/vaderpay/maintenance/select',
 
-    GetGameSupport: "Game/User/GameSupport",
+    GetGameSupport: 'Game/User/GameSupport',
 
-    UserVipDetails: "viplevel/user/details",
+    UserVipDetails: 'viplevel/user/details',
 
-     slotsGameList: "Game/slotsgame/list"
+    slotsGameList: 'Game/slotsgame/list',
+
+    homepageBannerList: 'settings/homePage-banner/select/user'
 };
