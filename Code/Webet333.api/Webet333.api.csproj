@@ -1,13 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-	<PropertyGroup>
-		<TargetFramework>netcoreapp2.1</TargetFramework>
-		<AssemblyName>Webet333.api</AssemblyName>
-		<RootNamespace>Webet333.api</RootNamespace>
-		<Configurations>Debug;Release;Stag</Configurations>
-		<UserSecretsId>edc22495-c487-4140-aab9-c53a6fd8c767</UserSecretsId>
-		<PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>Webet333.api</AssemblyName>
+    <RootNamespace>Webet333.api</RootNamespace>
+    <Configurations>Debug;Release;Stag</Configurations>
+    <UserSecretsId>edc22495-c487-4140-aab9-c53a6fd8c767</UserSecretsId>
+  </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
