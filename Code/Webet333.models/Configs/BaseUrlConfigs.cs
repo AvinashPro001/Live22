@@ -40,5 +40,9 @@
         public string VIPIcon { get; set; }
 
         public string ContactImage { get; set; }
+
+        public string HomePageBannerWebleImage { get; set; }
+
+        public string HomePageBannerMobileImage { get; set; }
     }
 }

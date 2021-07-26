@@ -6,7 +6,7 @@
 
 
 <!-- Main Banner Section and Promotion Slider -->
-<div class="main-banner">
+<div class="banner-inner-slider">
     <div class="container">
         <div class="banner-inner">
             <div class="home-slider text-center">
@@ -17,7 +17,11 @@
             <div class="flag-icon"><img src="~/images/malaysia-flag.png" alt="logo" /></div>
         </div>
     </div>
+    <div class="lazy top-banner-slider slider" id="home_main_banner">
+    </div>
 </div>
+
+
 <!-- Main Banner Section and Promotion Slider -->
 <!-- Join Now Section -->
 <div class="how_win_main_wrap">
@@ -808,18 +812,16 @@
     CheckMobileNumberIsVerifiedOnly();
 
     $(document).ready(function () {
-
         AllAnnouncementsCallAPI();
-    });
 
+        setInterval(function () {
+        if ($('#slider_promotion_div').children().length == 0) SetPromotionInMainPage();
+        if ($('#home_main_banner').children().length == 0) SetHomeBannerInMainPage();
+    }, 200);
+    });
 
     $(window).on('load', function () {
         HotSlotsgame()
         SetYoutubeVideo();
     });
-
-    setInterval(function () {
-        if ($('#slider_promotion_div').children().length == 0)
-            SetPromotionInMainPage();
-    }, 200);
 </script>

@@ -6,7 +6,8 @@ let SiteData = {
     AdminBankPageData: null,
     DownloadPageData: null,
     AllBankPageData: null,
-    WalletData: null
+    WalletData: null,
+    HomeBannerData: null
 }
 
 //#endregion
@@ -21,6 +22,7 @@ $(window).on('load', function () {
     SetSiteDataVariable()
     SetLastUpdateTime();
     AllPromotionCallAPI();
+    HomeBannerCallAPI();
     GetWalletList();
     CheckGameMaintenance();
     SignalRConnect();
@@ -97,6 +99,7 @@ function SetSiteDataVariable() {
     SiteData.PromotionPageData = data.PromotionPageData;
     SiteData.AllBankPageData = data.AllBankPageData;
     SiteData.WalletData = data.WalletData;
+    SiteData.HomeBannerData = data.HomeBannerData;
 }
 
 //#endregion
@@ -110,6 +113,7 @@ function SetSiteData() {
     SiteData.DownloadPageData = null;
     SiteData.AllBankPageData = null;
     SiteData.WalletData = null;
+    SiteData.HomeBannerData = null;
     SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
 }
 
@@ -161,6 +165,39 @@ function PromotionSliderJsFunction() {
         infinite: false,
         autoplay: true,
     });
+}
+
+//#endregion
+
+//#region Promotion Slider Slick JS
+
+function HomeBannerSliderJsFunction() {
+    $(".lazy").slick({
+        lazyLoad: 'ondemand', // ondemand progressive anticipated
+        arrows: false,
+        dots: false,
+        autoplay: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true
+    });
+}
+
+//#endregion
+
+//#region Set Main Page Banner
+
+function SetHomeBannerInMainPage() {
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+
+    if (data != null && data.HomeBannerData != null) {
+        var homeBannerList = data.HomeBannerData;
+        var HomeData = "";
+        for (i = 0; i < homeBannerList.length; i++)HomeData += '<div><div class="main-banner" style="background-image:url(' + homeBannerList[i].bannerWeb + ')" ></div></div >';
+        document.getElementById("home_main_banner").innerHTML = "";
+        SetAllValueInElement("home_main_banner", HomeData)
+        HomeBannerSliderJsFunction();
+    }
 }
 
 //#endregion
@@ -295,18 +332,37 @@ async function AllPromotionCallAPI() {
 
 //#endregion
 
+//#region "ASYNC" Call Home Banner API for Get data
+
+async function HomeBannerCallAPI() {
+
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+
+    if (data.HomeBannerData == null || data.HomeBannerData == undefined) {
+
+        let res = await GetMethodWithoutToken(settingEndPoints.homepageBannerList);
+
+        if (res.status == 200) {
+            SiteData.HomeBannerData = res.response.data;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
+        }
+    }
+}
+
+//#endregion
+
 //#region "ASYNC" Set LastUpdateTime of Sitedate Variable
 
 async function SetLastUpdateTime() {
     if (GetSessionStorage("siteData") == null) SetSiteData()
 
     if (GetLocalStorage("time") == null) {
-        SetSiteData();
+                SetSiteData();
         var date = new Date();
         SetLocalStorage("time", date);
     }
     else {
-        var Currentdate = new Date();
+                var Currentdate = new Date();
         var OldDate = new Date(GetLocalStorage("time"));
 
         var diff = (Currentdate.getTime() - OldDate.getTime()) / 1000;
@@ -539,6 +595,12 @@ function SignalRConnect() {
             console.log("Not Connected with SignalR Hub");
             return console.error(err.toString());
         });
+
+        connection.on("HomePageBannerInsertUpdate", function () {
+            SiteData.HomeBannerData = null;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
+            HomeBannerCallAPI();
+        });
     }
     catch {
         SignalRConnect();
@@ -546,10 +608,10 @@ function SignalRConnect() {
 }
 
 function CheckTokenIsValid(StausCode, StatusMessage) {
-    if (StausCode==400)
+    if (StausCode == 400)
         if (StatusMessage == "Your access token is expired, please login again." || StatusMessage == "Token akses anda tamat tempoh, sila log masuk sekali lagi." || StatusMessage == "您的访问令牌已过期，请重新登录。") {
-        localStorage.clear();
-        sessionStorage.clear();
-        window.location.reload();
-    }
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.reload();
+        }
 }
