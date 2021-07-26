@@ -37,7 +37,7 @@ $(document).ready(function () {
                 }
                 else {
                     if (data.PromotionPageData == null) { await AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
-                    if (data.HomeBannerData == null) { await HomeBannerCallAPI(); SetHomeBannerInMainPage(); }
+                    if (data.HomeBannerData == null) { await HomeBannerCallAPI(); if ($('#slider_promotion_div').children().length == 0) SetHomePageBanner(); }
                     if (data.AnnouncementsData == null) { await AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
                     if (data.WalletData == null) { await GetWalletList(); }
                     if (data.AdminBankPageData == null) { await CallAPIForBankPages(); SetAdminBankPage() }

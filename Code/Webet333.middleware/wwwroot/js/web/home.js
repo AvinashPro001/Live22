@@ -156,7 +156,7 @@ function SetBackgroudImagePath(ClassName, value) {
 
 //#region Promotion Slider Slick JS
 
-function PromotionSliderJsFunction() {
+function HomepageBannerSliderJsFunction() {
     $('.slick-carousel').slick({
         arrows: true,
         centerPadding: "0px",
@@ -169,54 +169,23 @@ function PromotionSliderJsFunction() {
 
 //#endregion
 
-//#region Promotion Slider Slick JS
-
-function HomeBannerSliderJsFunction() {
-    $(".lazy").slick({
-        lazyLoad: 'ondemand', // ondemand progressive anticipated
-        arrows: false,
-        dots: false,
-        autoplay: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: true
-    });
-}
-
-//#endregion
-
 //#region Set Main Page Slider Html
 
-function SetHomeBannerInMainPage() {
-    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+function SetHomePageBanner() {
+    let data = JSON.parse(Decryption(GetSessionStorage("siteData")));
 
     if (data != null && data.HomeBannerData != null) {
-        var homeBannerList = data.HomeBannerData;
-        var HomeData = "";
-        for (i = 0; i < homeBannerList.length; i++)HomeData += '<div><div class="main-banner" style="background-image:url(' + homeBannerList[i].bannerWeb + ')" ></div></div >';
-        document.getElementById("home_main_banner").innerHTML = "";
-        SetAllValueInElement("home_main_banner", HomeData)
-        HomeBannerSliderJsFunction();
-    }
 
-}
+        let homepageBanner = data.HomeBannerData;
+        let homepageBannerData = "";
 
-//#endregion
+        for (i = 0; i < homepageBanner.length; i++) homepageBannerData += '<div><img src="' + homepageBanner[i].bannerWeb + '"></div>'
 
-//#region Set Main Page Slider Html
-
-function SetPromotionInMainPage() {
-    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
-
-    if (data != null && data.PromotionPageData != null) {
-        var promotion = data.PromotionPageData.filter(x => x.IsMain == true);
-        var promotionData = "";
-        for (i = 0; i < promotion.length; i++)promotionData += '<div><img src="' + promotion[i].banner + '"></div>'
         document.getElementById("slider_promotion_div").innerHTML = "";
-        SetAllValueInElement("slider_promotion_div", promotionData)
-        PromotionSliderJsFunction();
-    }
+        SetAllValueInElement("slider_promotion_div", homepageBannerData)
 
+        HomepageBannerSliderJsFunction();
+    }
 }
 
 //#endregion
