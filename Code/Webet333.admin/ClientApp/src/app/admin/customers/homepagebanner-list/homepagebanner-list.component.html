@@ -1,0 +1,72 @@
+<div class="my-container">
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">Homepage Banner List</legend>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="p-2 col-md-2 offset-10">
+                    <button id="acceptbtn"
+                            class="mb-1 btn btn-success"
+                            type="button"
+                            (click)='navigateAdd()'
+                            data-toggle="modal">
+                        Add HomePage Banner
+                    </button>
+                </div>
+            </div>
+            <ngx-datatable #table
+                           class='bootstrap no-detail-row'
+                           [rows]="rows"
+                           [columns]="columns"
+                           [columnMode]="'force'"
+                           [footerHeight]="60"
+                           [rowHeight]="'auto'"
+                           [loadingIndicator]="loadingIndicator"
+                           [limit]="pageSize"
+                           [count]="totalRowCount"
+                           [offset]="offset">
+                <ng-template #status
+                             let-rowIndex="rowIndex"
+                             let-row="row"
+                             let-expanded="expanded"
+                             ngx-datatable-row-detail-template>
+                    <div class="row col-md-12" style="margin-right:0px">
+                        <label class="col-md-3">
+                            <button id="editBtn"
+                                    data-id="homepageBannerData[rowIndex].id"
+                                    class="mb-1 btn btn-success"
+                                    type="button"
+                                    data-toggle="modal"
+                                    title="Edit"
+                                    (click)='navigateEdit(homepageBannerData[rowIndex])'>
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                        <label class="col-md-3">
+                            <button id="deleteBtn"
+                                    data-id="homepageBannerData[rowIndex].id"
+                                    class="mb-1 btn btn-danger"
+                                    type="button"
+                                    (click)='openRejectConfirmationDialog(homepageBannerData[rowIndex].id)'
+                                    title="Reject"
+                                    style="margin-left:5px">
+                                <i class="fa fa-ban" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                        <label class="col-md-3">
+                            <ui-switch [(ngModel)]="homepageBannerData[rowIndex].active"
+                                       (change)="HomepageBannerActive(homepageBannerData[rowIndex].id,$event)"
+                                       data-toggle="modal"
+                                       data-id="customerData[rowIndex].id"></ui-switch>
+                        </label>
+                    </div>
+                </ng-template>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
