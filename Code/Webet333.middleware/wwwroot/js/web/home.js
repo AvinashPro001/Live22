@@ -185,7 +185,7 @@ function HomeBannerSliderJsFunction() {
 
 //#endregion
 
-//#region Set Main Page Banner
+//#region Set Main Page Slider Html
 
 function SetHomeBannerInMainPage() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
@@ -198,6 +198,7 @@ function SetHomeBannerInMainPage() {
         SetAllValueInElement("home_main_banner", HomeData)
         HomeBannerSliderJsFunction();
     }
+
 }
 
 //#endregion

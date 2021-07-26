@@ -34,11 +34,10 @@ $(document).ready(function () {
                     AdminBankPageData();
                     SetPromotionInPromotionPage();
                     SetAnnouncementsOnAllPages();
-                    if ($('#home_main_banner').children().length == 0) SetHomeBannerInMainPage();
                 }
                 else {
                     if (data.PromotionPageData == null) { await AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
-                    if (data.HomeBannerData == null) { await HomeBannerCallAPI(); if ($('#home_main_banner').children().length == 0) SetHomeBannerInMainPage(); }
+                    if (data.HomeBannerData == null) { await HomeBannerCallAPI(); SetHomeBannerInMainPage(); }
                     if (data.AnnouncementsData == null) { await AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
                     if (data.WalletData == null) { await GetWalletList(); }
                     if (data.AdminBankPageData == null) { await CallAPIForBankPages(); SetAdminBankPage() }

@@ -127,9 +127,9 @@ var gameLoginEndPoints = {
     sboLogin: 'sbo/login'
 }
 
-var gameSettingEndPoints = {
     slotsGameList: 'Game/slotsgame/list',
     pragmaticGameList: 'pragmatic/game/list',
     HotGameList: 'Game/hotslotsgame/list',
     JokerGameId: 'F2NZ.'
+    JokerGameId: "F2NZ."
 }
