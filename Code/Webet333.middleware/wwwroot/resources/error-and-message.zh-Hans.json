@@ -29,7 +29,7 @@
   "min1_max1000_amount_error": "最低金额 1",
   "bnk_name_required_error": "银行名称为必填项",
   "amt_req_error": "必须填写金额。",
-  "acc_no_req_error": "帐号为必填项。",
+  "acc_no_req_error": "需要帐号字段。",
   "promo_ongoing_withdraw_error": "你的优惠正在进行中，无法提现至到优惠完成",
   "trans_not_completd_error": "你的交易未完成",
   "maintainenance_error": "游戏正在维护",
