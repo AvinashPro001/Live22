@@ -1,12 +1,26 @@
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
+let baseUrl = '', baseUrlWithoutVersion = '';
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG'
+let PortAPI = '9001';
+
+switch (environmentName.toUpperCase()) {
+    case 'DEBUG':
+        baseUrl = 'https://uatapi.wb3api.com/api/v1/';
+        baseUrlWithoutVersion = 'https://uatapi.wb3api.com';
+        break;
+    case 'STAG':
+        baseUrl = 'https://api.wb3api.com/api/v1/';
+        baseUrlWithoutVersion = 'https://api.wb3api.com';
+        break;
+    case 'LOCAL':
+        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        break;
+}
 
 export const environment = {
     production: false,
-    apiUrl: 'https://api.wb3api.com/api/v1/',
-    apiUrlWithVersion: 'https://api.wb3api.com/'
+    apiUrl: baseUrl,
+    apiUrlWithVersion: baseUrlWithoutVersion
 };
 
 export const account = {
@@ -114,12 +128,14 @@ export const customer = {
     changeSatus: environment.apiUrl + 'activate_customer',
     depositList: environment.apiUrl + 'payments/deposit/retrieve',
     withdrawList: environment.apiUrl + 'payments/withdraw/retrieve',
+    withdrawListTemp: environment.apiUrl + 'payments/withdraw/retrieve/temp',
     transferList: environment.apiUrl + 'payments/transfer/retrieve',
     transferAdd: environment.apiUrl + 'payments/transfer',
     depositVerify: environment.apiUrl + 'payments/deposit/verify',
     withdrawVerify: environment.apiUrl + 'payments/withdraw/verify',
     walletBalance: environment.apiUrl + 'customer/wallet/balance',
     promotionApplySelect: environment.apiUrl + 'promotions/promotionapply/select',
+    promotionApplyList: environment.apiUrl + 'promotions/promotionapply/list',
     rebateHistory: environment.apiUrl + 'Game/Rebate/User/History',
     statementHistory: environment.apiUrl + 'payments/transactions',
     restoreHistory: environment.apiUrl + 'Game/restore/list',
@@ -345,7 +361,16 @@ export const customer = {
     getLeagueBetSetting: environment.apiUrl + 'sbo/get/league-bet-setting',
     sboGetBlankLeague: environment.apiUrl + 'sbo/blank-getLeague',
 
-    resendOTP: environment.apiUrl + 'account/send/otp'
+    resendOTP: environment.apiUrl + 'account/send/otp',
+
+    homePageBannerList: environment.apiUrl + 'settings/homePage-banner/select/admin',
+    homePageBannerDelete: environment.apiUrl + 'settings/homePage-banner/delete',
+    homePageBannerChangeStatus: environment.apiUrl + 'settings/homePage-banner/update/status',
+    homePageBannerAdd: environment.apiUrl + 'settings/homePage-banner/add',
+    homePageBannerUpdate: environment.apiUrl + 'settings/homePage-banner/update',
+    homePageBannerImage: environment.apiUrl + 'settings/homePage-banner/image',
+    homePageBannerImageUpdate: environment.apiUrl + 'settings/homePage-banner/image/update',
+    homePageBannerSelectById: environment.apiUrl + 'settings/homePage-banner/select/id',
 }
 
 export const playtech = {

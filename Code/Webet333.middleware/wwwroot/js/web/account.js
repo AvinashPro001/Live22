@@ -25,6 +25,7 @@ $(document).ready(function () {
                 if (data == null) {
                     SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
                     await AllPromotionCallAPI();
+                    await HomeBannerCallAPI();
                     await AllAnnouncementsCallAPI();
                     await CallDownloadLinkAPI();
                     await CallAPIForBankPages();
@@ -33,9 +34,11 @@ $(document).ready(function () {
                     AdminBankPageData();
                     SetPromotionInPromotionPage();
                     SetAnnouncementsOnAllPages();
+                    if ($('#home_main_banner').children().length == 0) SetHomeBannerInMainPage();
                 }
                 else {
                     if (data.PromotionPageData == null) { await AllPromotionCallAPI(); SetPromotionInPromotionPage(); }
+                    if (data.HomeBannerData == null) { await HomeBannerCallAPI(); if ($('#home_main_banner').children().length == 0) SetHomeBannerInMainPage(); }
                     if (data.AnnouncementsData == null) { await AllAnnouncementsCallAPI(); SetAnnouncementsOnAllPages(); }
                     if (data.WalletData == null) { await GetWalletList(); }
                     if (data.AdminBankPageData == null) { await CallAPIForBankPages(); SetAdminBankPage() }
@@ -264,12 +267,13 @@ async function ChangePassword() {
     var newPassword = $("#txt_newPassword").val();
     var confirmPassword = $("#txt_confirmPassword").val();
 
-
-    if (newPassword.length < 6) return ShowError(ChangeErroMessage("pass_length_error"));
-
     if (newPassword === "") return ShowError(ChangeErroMessage("password_required_error"));
 
     if (confirmPassword === "") return ShowError(ChangeErroMessage("confirm_password_required_error"));
+
+    if (newPassword.length < 6) return ShowError(ChangeErroMessage("pass_length_error"));
+
+    if (currentPassword === newPassword) return ShowError(ChangeErroMessage("new_password_check_error"))
 
     if (newPassword !== confirmPassword) return ShowError(ChangeErroMessage("pass_not_match_error"));
 

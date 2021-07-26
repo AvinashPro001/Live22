@@ -79,7 +79,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-               return await repository.FindAsync(StoredProcConsts.VIPCategory.UserVIPLevelDetails, new { UserId, UniqueId, Role });
+                return await repository.FindAsync(StoredProcConsts.VIPCategory.UserVIPLevelDetails, new { UserId, UniqueId, Role });
             }
         }
 

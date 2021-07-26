@@ -126,13 +126,12 @@ namespace Webet333.api.Controllers
 
             using (var vipCategory_help = new VIPCategoryHelpers(Connection))
             {
-                var result=await vipCategory_help.UserVIPLevelDetails(UserId,UniqueId,Role);
+                var result = await vipCategory_help.UserVIPLevelDetails(UserId, UniqueId, Role);
                 result.VIPBanner = (result.VIPBanner != null ? baseUrlConfigs.ImageBase + baseUrlConfigs.VIPIcon + "/" + result.VIPLevel + result.VIPBanner : null);
                 return OkResponse(result);
             }
         }
 
-        #endregion
-
+        #endregion VIP Details Select
     }
 }
