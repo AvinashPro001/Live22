@@ -176,7 +176,7 @@
                         <li class="mar-btm-fifteen">
                             <label class="fleft"><p class="big lang" key="withdrawal_amount">Amount:</p></label>
                             <label class="fright card-number bank-name mendatory">
-                                <input id="txt_withdrawalAmount" name="txt_withdrawalAmount" type="number" pattern="\d*" class="reg-form" style="font-size:10px;" placeholder="Min/Max Limit: 10.00/ 30,000.00">
+                                <input id="txt_withdrawalAmount" name="txt_withdrawalAmount" oninput="validity.valid||(value='');" min="0" type="number" pattern="\d*" class="reg-form" style="font-size:10px;" step=".01" placeholder="Min/Max Limit: 10.00/ 30,000.00">
                                 <p class="star">*</p>
                             </label>
                         </li>
