@@ -338,6 +338,15 @@ async function SetLastUpdateTime() {
         var diff = (Currentdate.getTime() - OldDate.getTime()) / 1000;
         diff /= 60;
         diff = Math.abs(Math.round(diff));
+
+        //#region TODO:: signleR not working in UAT.
+
+        if (environmentName.toUpperCase() == 'DEBUG') {
+            await HomeBannerCallAPI();
+        }
+
+        //#endregion
+
         if (diff > 9) {
             SetSiteData();
             var date = new Date();
