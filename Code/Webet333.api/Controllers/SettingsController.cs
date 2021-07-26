@@ -438,9 +438,9 @@ namespace Webet333.api.Controllers
 
         #endregion Contact Management
 
-        #region HomePage Banner (Add, Update, Update Status, Delete, Retrieve List)
+        #region 6. HomePage Banner (Add, Update, Update Status, Delete, Retrieve List)
 
-        #region HomePage Banner Insert
+        #region 6.1 HomePage Banner Insert
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.HomePageBannerInsert)]
@@ -449,7 +449,7 @@ namespace Webet333.api.Controllers
             if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
-            await CheckUserRole();
+            IsAdmin();
 
             request.AdminId = GetUserId(User);
 
@@ -463,9 +463,9 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion HomePage Banner Insert
+        #endregion 6.1 HomePage Banner Insert
 
-        #region HomePage Banner Image Insert
+        #region 6.2 HomePage Banner Image Insert
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.HomePageBannerImage)]
@@ -478,27 +478,33 @@ namespace Webet333.api.Controllers
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
-            await ValidateUser();
+            IsAdmin();
 
-            var extensionWebEnglish = "." + request.BannerWebEnglish.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            HomePageBannerImagePersist temp = new HomePageBannerImagePersist();
+            temp.Id = Guid.Parse(request.Id);
+            request.AdminId = GetUserId(User);
+
+            temp.BannerIdEnglish = Guid.Parse(request.BannerIdEnglish);
+            temp.BannerIdChinese = Guid.Parse(request.BannerIdChinese);
+            temp.BannerIdMalay = Guid.Parse(request.BannerIdMalay);
+
+            temp.ExtensionWebEnglish = "." + request.BannerWebEnglish.Split("base64,")[0].Split("/")[1].Replace(";", "");
             request.BannerWebEnglish = request.BannerWebEnglish.Split("base64,")[1];
 
-            var extensionMobileEnglish = "." + request.BannerMobileEnglish.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            temp.ExtensionMobileEnglish = "." + request.BannerMobileEnglish.Split("base64,")[0].Split("/")[1].Replace(";", "");
             request.BannerMobileEnglish = request.BannerMobileEnglish.Split("base64,")[1];
 
-            var extensionWebChinese = "." + request.BannerWebChinese.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            temp.ExtensionWebChinese = "." + request.BannerWebChinese.Split("base64,")[0].Split("/")[1].Replace(";", "");
             request.BannerWebChinese = request.BannerWebChinese.Split("base64,")[1];
 
-            var extensionMobileChinese = "." + request.BannerMobileChinese.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            temp.ExtensionMobileChinese = "." + request.BannerMobileChinese.Split("base64,")[0].Split("/")[1].Replace(";", "");
             request.BannerMobileChinese = request.BannerMobileChinese.Split("base64,")[1];
 
-            var extensionWebMalay = "." + request.BannerWebMalay.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            temp.ExtensionWebMalay = "." + request.BannerWebMalay.Split("base64,")[0].Split("/")[1].Replace(";", "");
             request.BannerWebMalay = request.BannerWebMalay.Split("base64,")[1];
 
-            var extensionMobileMalay = "." + request.BannerMobileMalay.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            temp.ExtensionMobileMalay = "." + request.BannerMobileMalay.Split("base64,")[0].Split("/")[1].Replace(";", "");
             request.BannerMobileMalay = request.BannerMobileMalay.Split("base64,")[1];
-
-            request.AdminId = GetUserId(User);
 
             using (var Generic_Helpers = new GenericHelpers(Connection))
             {
@@ -507,56 +513,40 @@ namespace Webet333.api.Controllers
                     request.BannerWebChinese,
                     BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
                     request.BannerIdChinese.ToString(),
-                    extensionWebChinese);
+                    temp.ExtensionWebChinese);
                 Generic_Helpers.GetImageWithExtension(
                     uploadManager,
                     request.BannerMobileChinese,
                     BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
                     request.BannerIdChinese.ToString(),
-                    extensionMobileChinese);
+                    temp.ExtensionMobileChinese);
 
                 Generic_Helpers.GetImageWithExtension(
                     uploadManager,
                     request.BannerWebEnglish,
                     BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
                     request.BannerIdEnglish.ToString(),
-                    extensionWebEnglish);
+                    temp.ExtensionWebEnglish);
                 Generic_Helpers.GetImageWithExtension(
                     uploadManager,
                     request.BannerMobileEnglish,
                     BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
                     request.BannerIdEnglish.ToString(),
-                    extensionMobileEnglish);
+                    temp.ExtensionMobileEnglish);
 
                 Generic_Helpers.GetImageWithExtension(
                     uploadManager,
                     request.BannerWebMalay,
                     BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
                     request.BannerIdMalay.ToString(),
-                    extensionWebMalay);
+                    temp.ExtensionWebMalay);
                 Generic_Helpers.GetImageWithExtension(
                     uploadManager,
                     request.BannerMobileMalay,
                     BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
                     request.BannerIdMalay.ToString(),
-                    extensionMobileMalay);
+                    temp.ExtensionMobileMalay);
             }
-
-            HomePageBannerImagePersist temp = new HomePageBannerImagePersist();
-            temp.Id = Guid.Parse(request.Id);
-            temp.AdminId = request.AdminId;
-
-            temp.BannerIdEnglish = Guid.Parse(request.BannerIdEnglish);
-            temp.ExtensionWebEnglish = extensionWebEnglish;
-            temp.ExtensionMobileEnglish = extensionMobileEnglish;
-
-            temp.BannerIdMalay = Guid.Parse(request.BannerIdMalay);
-            temp.ExtensionWebMalay = extensionWebMalay;
-            temp.ExtensionMobileMalay = extensionMobileMalay;
-
-            temp.BannerIdChinese = Guid.Parse(request.BannerIdChinese);
-            temp.ExtensionWebChinese = extensionWebChinese;
-            temp.ExtensionMobileChinese = extensionMobileChinese;
 
             using (var Settings_Helpers = new SettingsHelpers(Connection))
             {
@@ -566,9 +556,9 @@ namespace Webet333.api.Controllers
             return OkResponse();
         }
 
-        #endregion HomePage Banner Image Insert
+        #endregion 6.2 HomePage Banner Image Insert
 
-        #region HomePage Banner Update
+        #region 6.3 HomePage Banner Update
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.HomePageBannerUpdate)]
@@ -577,7 +567,7 @@ namespace Webet333.api.Controllers
             if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
-            await CheckUserRole();
+            IsAdmin();
 
             request.AdminId = GetUserId(User);
 
@@ -591,9 +581,9 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion HomePage Banner Update
+        #endregion 6.3 HomePage Banner Update
 
-        #region HomePage Banner Image Update
+        #region 6.4 HomePage Banner Image Update
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.HomePageBannerImageUpdate)]
@@ -606,7 +596,7 @@ namespace Webet333.api.Controllers
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
-            await ValidateUser();
+            IsAdmin();
 
             HomePageBannerImagePersist temp = new HomePageBannerImagePersist();
             temp.BannerIdChinese = Guid.Parse(request.BannerIdChinese);
@@ -729,9 +719,9 @@ namespace Webet333.api.Controllers
             return OkResponse();
         }
 
-        #endregion HomePage Banner Image Update
+        #endregion 6.4 HomePage Banner Image Update
 
-        #region HomePage Banner Delete
+        #region 6.5 HomePage Banner Delete
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.HomePageBannerDelete)]
@@ -740,7 +730,7 @@ namespace Webet333.api.Controllers
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
-            await CheckUserRole();
+            IsAdmin();
 
             string adminId = GetUserId(User).ToString();
 
@@ -754,9 +744,9 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion HomePage Banner Delete
+        #endregion 6.5 HomePage Banner Delete
 
-        #region HomePage Banner Status Active
+        #region 6.6 HomePage Banner Status Active
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.HomePageBannerUpdateStatus)]
@@ -765,7 +755,7 @@ namespace Webet333.api.Controllers
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
-            await CheckUserRole();
+            IsAdmin();
 
             request.AdminId = GetUserId(User);
 
@@ -779,9 +769,9 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion HomePage Banner Status Active
+        #endregion 6.6 HomePage Banner Status Active
 
-        #region HomePage Banner Select By User
+        #region 6.7 HomePage Banner Select By User
 
         [HttpGet(ActionsConst.Settings.HomePageBannerSelectByUser)]
         public async Task<IActionResult> HomePageBannerSelectByUser([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
@@ -802,9 +792,9 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion HomePage Banner Select By User
+        #endregion 6.7 HomePage Banner Select By User
 
-        #region HomePage Banner Select By Admin
+        #region 6.8 HomePage Banner Select By Admin
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.HomePageBannerSelectByAdmin)]
@@ -815,8 +805,10 @@ namespace Webet333.api.Controllers
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
+            IsAdmin();
+
             request.isUser = false;
-            if (request.PageNo == null) request.PageSize = 0;
+            if (request.PageNo == null) request.PageNo = 0;
             if (request.PageSize == null || request.PageSize == 0) request.PageSize = 10;
 
             using (var Settings_Helpers = new SettingsHelpers(Connection))
@@ -852,9 +844,9 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion HomePage Banner Select By Admin
+        #endregion 6.8 HomePage Banner Select By Admin
 
-        #region HomePage Banner Select By Admin By Id
+        #region 6.9 HomePage Banner Select By Admin By Id
 
         [Authorize]
         [HttpPost(ActionsConst.Settings.HomePageBannerSelectById)]
@@ -865,6 +857,8 @@ namespace Webet333.api.Controllers
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
+            IsAdmin();
+
             using (var Settings_Helpers = new SettingsHelpers(Connection))
             {
                 var result = await Settings_Helpers.HomePageBannerSelectByIdAsync(request);
@@ -873,8 +867,8 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion HomePage Banner Select By Admin By Id
+        #endregion 6.9 HomePage Banner Select By Admin By Id
 
-        #endregion HomePage Banner (Add, Update, Update Status, Delete, Retrieve List)
+        #endregion 6. HomePage Banner (Add, Update, Update Status, Delete, Retrieve List)
     }
 }
