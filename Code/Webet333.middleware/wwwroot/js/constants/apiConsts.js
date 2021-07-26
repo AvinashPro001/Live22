@@ -131,5 +131,4 @@ var gameLoginEndPoints = {
     pragmaticGameList: 'pragmatic/game/list',
     HotGameList: 'Game/hotslotsgame/list',
     JokerGameId: 'F2NZ.'
-    JokerGameId: "F2NZ."
 }
