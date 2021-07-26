@@ -274,10 +274,7 @@ ul.user-login {display: flex; }
 .input-field .money-type li.custom-width {width: 40%}
 .login-register .money-type li.icon:jcf-hover::after {color: #0e92bf; }
 .input-field .money-type li a:hover, .input-field .money-type li:hover a {color: #0e92bf; }
-.banner-inner-slider { position: relative; z-index: 1;}
-.main-banner {background: no-repeat 54% 0%; width: 100%; float: left; background-size: cover; min-height:580px; position: relative; }
-.banner-inner-slider > .container { position: relative; z-index: 10;}
-.top-banner-slider { position: absolute; top: 40px; left: 0; width: 100%; z-index: 0; height: 100%;}
+.main-banner {background: url(../images/banner111.png)54% 0% no-repeat; width: 100%; float: left; background-size: cover; min-height:520px; position: relative; }
 body.home-page {background-color: #fff; }
 .captcha-code {overflow: hidden; padding: 10px 15px; vertical-align: middle; background-color: #222; border: 1px solid #525252; }
 .captcha-code {display: flex; align-items: center; }
@@ -902,7 +899,7 @@ header .tooltip-inner {width: 100px!important; }
 .pussy-game.img-box::before { background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(0, 0, 0) 35%, rgb(194, 38, 38) 100%)}
 .pussy-game { background: rgba(194, 38, 38, 1);}
 .main-banner > .container { position: relative; }
-.flag-icon { position: absolute; left: -50px; top: 70px; }
+.flag-icon { position: absolute; left: -50px; top: 30px; }
 .flag-icon img { max-width: 75px; }
 
 
@@ -1312,38 +1309,34 @@ header .tooltip-inner {width: 100px!important; }
     .banner-inner {
     /*margin-top: 275px;*/margin-top: 263px;
 }
-.main-banner { min-height: 513px;}
 }
 @media(min-width:1500px) and (max-width:1700px) {
     .banner-inner {
     /*margin-top: 275px;*/margin-top: 220px;
 }
-.main-banner { min-height: 470px;}
 }
 
 @media(min-width:1400px) and (max-width:1500px) {
     .banner-inner {
     margin-top: 250px;
 }
-.main-banner { min-height: 500px;}
 }
 
 @media(min-width:1250px) and (max-width:1400px) {
     .banner-inner {
    /* margin-top: 275px;*/margin-top: 220px;
 }
-.main-banner { min-height: 472px;}
 }
 
 @media(min-width:1250px) and (max-width:1350px) {
-    .banner-inner {margin-top: 222px;}
-    .main-banner { min-height: 472px;}
+    .banner-inner {
+    margin-top: 222px;
+}
 }
 
 
 @media(min-width:992px) and (max-width:1250px) {
 .banner-inner {margin-top: 175px;}
-.main-banner { min-height: 425px;}
 }
 
 
@@ -2128,7 +2121,7 @@ div.tabcontent_health .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 .slot_inner_common_box .slot_inner_formfield:last-child,.slot_inner_common_box .slot_inner_formfield label.lock.mendatory { margin-bottom: 0px; }
 .slot_inner_common_box:last-child p:first-child { font-style: italic; }
 .hand-curson{cursor:pointer !important;}
-/* #onlinehelp-float-button-2 div{z-index:0 !important;} */
+#onlinehelp-float-button-2 div{z-index:0 !important;}
 .download-game-logos{width:100px;}
 .slot_inner_common_box p{margin-bottom:0px;font-size:12px;}
 #faqs h3{color:white}

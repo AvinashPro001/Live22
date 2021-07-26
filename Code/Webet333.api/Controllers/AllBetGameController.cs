@@ -94,10 +94,11 @@ namespace Webet333.api.Controllers
 
         #region AllBet game Login
 
+        
         [HttpPost(ActionsConst.AllBet.Modified)]
-        public async Task<IActionResult> ALLBetModified([FromQuery] string Username, string hadicap, string VipHandicaps)
+        public async Task<IActionResult> ALLBetModified([FromQuery]string Username,string hadicap,string VipHandicaps)
         {
-            var result = await AllBetGameHelpers.CallModifiedClient(Username, hadicap, VipHandicaps);
+            var result = await AllBetGameHelpers.CallModifiedClient(Username,hadicap, VipHandicaps);
             return OkResponse(result);
         }
 
