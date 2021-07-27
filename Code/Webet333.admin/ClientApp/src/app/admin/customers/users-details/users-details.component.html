@@ -377,7 +377,20 @@
             <button class="mb-1 btn btn-success" (click)='setThisYear("Deposit")' type="button">This Year</button>
         </div>
     </div>
-    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="depositRows" [loadingIndicator]="loadingIndicator" [columns]="depositColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="20" [count]="totalRowCount" [offset]="offset" (page)="setPage($event)">
+    <ngx-datatable #table
+                   class="material bootstrap no-detail-row"
+                   [rows]="depositRows"
+                   [loadingIndicator]="loadingIndicator"
+                   [columns]="depositColumns"
+                   [columnMode]="'force'"
+                   [headerHeight]="50"
+                   [footerHeight]="50"
+                   [rowHeight]="'auto'"
+                   [limit]="pageSize"
+                   [externalPaging]="true"
+                   [count]="totalRowCount"
+                   [offset]="offset"
+                   (page)="setPage($event)">
     </ngx-datatable>
 </div>
 
@@ -424,8 +437,20 @@
             <button class="mb-1 btn btn-success" (click)='setThisYear("Withdraw")' type="button">This Year</button>
         </div>
     </div>
-
-    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="withdrawRows" [loadingIndicator]="loadingIndicator" [columns]="withdrawColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
+    <ngx-datatable #table
+                   class="material bootstrap no-detail-row"
+                   [rows]="withdrawRows"
+                   [loadingIndicator]="loadingIndicator"
+                   [columns]="withdrawColumns"
+                   [columnMode]="'force'"
+                   [headerHeight]="50"
+                   [footerHeight]="50"
+                   [rowHeight]="'auto'"
+                   [limit]="pageSize"
+                   [externalPaging]="true"
+                   [count]="totalRowCount"
+                   [offset]="offset"
+                   (page)="setPageWithdraw($event)">
     </ngx-datatable>
 </div>
 
@@ -472,8 +497,20 @@
             <button class="mb-1 btn btn-success" (click)='setThisYear("Transfer")' type="button">This Year</button>
         </div>
     </div>
-
-    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="transferRows" [loadingIndicator]="loadingIndicator" [columns]="transferColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
+    <ngx-datatable #table
+                   class="material bootstrap no-detail-row"
+                   [rows]="transferRows"
+                   [loadingIndicator]="loadingIndicator"
+                   [columns]="transferColumns"
+                   [columnMode]="'force'"
+                   [headerHeight]="50"
+                   [footerHeight]="50"
+                   [rowHeight]="'auto'"
+                   [limit]="pageSize"
+                   [externalPaging]="true"
+                   [count]="totalRowCount"
+                   [offset]="offset"
+                   (page)="setPageTransfer($event)">
     </ngx-datatable>
 </div>
 
@@ -520,9 +557,25 @@
             <button class="mb-1 btn btn-success" (click)='setThisYear("Promotion")' type="button">This Year</button>
         </div>
     </div>
-
-    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="promotionRows" [loadingIndicator]="loadingIndicator" [columns]="promotionColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
-        <ng-template #status let-rowIndex="rowIndex" let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+    <ngx-datatable #table
+                   class="material bootstrap no-detail-row"
+                   [rows]="promotionRows"
+                   [loadingIndicator]="loadingIndicator"
+                   [columns]="promotionColumns"
+                   [columnMode]="'force'"
+                   [headerHeight]="50"
+                   [footerHeight]="50"
+                   [rowHeight]="'auto'"
+                   [limit]="pageSize"
+                   [externalPaging]="true"
+                   [count]="totalRowCount"
+                   [offset]="offset"
+                   (page)="setPagePromotion($event)">
+        <ng-template #status
+                     let-rowIndex="rowIndex"
+                     let-row="row"
+                     let-expanded="expanded"
+                     ngx-datatable-row-detail-template>
             <label>
                 <button id="rejectBtn" data-id="depositData[rowIndex].id" class="mb-1 button btn-danger" type="button" data-toggle="modal" (click)="ExpierPromoton(promotiondata[rowIndex].Id)" title="Expier Promotion" style="margin-left:5px">
                     <i class="fa fa-ban" aria-hidden="true"></i>
@@ -575,8 +628,20 @@
             <button class="mb-1 btn btn-success" (click)='setThisYear("Statement")' type="button">This Year</button>
         </div>
     </div>
-
-    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="statementRows" [loadingIndicator]="loadingIndicator" [columns]="statementColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
+    <ngx-datatable #table
+                   class="material bootstrap no-detail-row"
+                   [rows]="statementRows"
+                   [loadingIndicator]="loadingIndicator"
+                   [columns]="statementColumns"
+                   [columnMode]="'force'"
+                   [headerHeight]="50"
+                   [footerHeight]="50"
+                   [rowHeight]="'auto'"
+                   [limit]="pageSize"
+                   [externalPaging]="true"
+                   [count]="totalRowCount"
+                   [offset]="offset"
+                   (page)="setPageStatement($event)">
     </ngx-datatable>
 </div>
 
@@ -623,8 +688,20 @@
             <button class="mb-1 btn btn-success" (click)='setThisYear("Rebate")' type="button">This Year</button>
         </div>
     </div>
-
-    <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rebateRows" [loadingIndicator]="loadingIndicator" [columns]="rebateColumns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="20">
+    <ngx-datatable #table
+                   class="material bootstrap no-detail-row"
+                   [rows]="rebateRows"
+                   [loadingIndicator]="loadingIndicator"
+                   [columns]="rebateColumns"
+                   [columnMode]="'force'"
+                   [headerHeight]="50"
+                   [footerHeight]="50"
+                   [rowHeight]="'auto'"
+                   [limit]="pageSize"
+                   [externalPaging]="true"
+                   [count]="totalRowCount"
+                   [offset]="offset"
+                   (page)="setPageRebate($event)">
     </ngx-datatable>
 </div>
 
@@ -637,7 +714,6 @@
                 <option *ngFor="let c of listType" [ngValue]="c">{{c.gameName}}</option>
             </select>
         </div>
-
         <div class="p-2 col-md-2" id="fromDate" style="display:none">
             <h4 class="text-muted text-thin">From Date</h4>
             <div class="input-group">
@@ -658,7 +734,6 @@
                 <owl-date-time [disabled]="disable" #dt1></owl-date-time>
             </div>
         </div>
-
         <div class="p-2 col-md-2" id="startDate" style="display:none">
             <h4 class="text-muted text-thin">Start Date</h4>
             <div class="input-group">
@@ -669,7 +744,6 @@
                 <owl-date-time #dt3></owl-date-time>
             </div>
         </div>
-
         <div class="p-2 col-md-2" id="gmtDiv" style="display:none">
             <h4 class="text-muted text-thin">GMT</h4>
             <select class="form-control" id="Gmt" [disabled]="gmtDisable" (change)="SelectGMT($event)">
@@ -699,7 +773,17 @@
         </div>
     </div>
     <div>
-        <ngx-datatable class="material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'70'" [limit]="7" [scrollbarH]="true">
+        <ngx-datatable #table
+                       class="material bootstrap no-detail-row"
+                       [rows]="rows"
+                       [loadingIndicator]="loadingIndicator"
+                       [columns]="columns"
+                       [columnMode]="'force'"
+                       [headerHeight]="50"
+                       [footerHeight]="50"
+                       [rowHeight]="'70'"
+                       [limit]="7"
+                       [scrollbarH]="true">
         </ngx-datatable>
     </div>
 </div>

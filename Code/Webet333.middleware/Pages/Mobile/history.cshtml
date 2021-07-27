@@ -1,0 +1,455 @@
+@page
+@{ ViewData["Title"] = "History";
+    Layout = ""; }
+
+
+<style>
+    ::-webkit-scrollbar-track {
+        background: none;
+        border-radius: 0px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: none;
+        border-radius: 0px;
+    }
+</style>
+<div id="comContent"></div>
+<div id="mComContent">
+    <link href="~/css/bootstrap-datepicker.min.css" type="text/css" rel="stylesheet" />
+    <script>
+        document.body.classList.add("no-pad-top");
+        $('body').css('padding-top', '0px');
+        if (GetLocalStorage('currentUser') === null)
+            loadPageHome();
+    </script>
+    <div id="History" class="white-bg history-page">
+
+        <div class="container">
+            <div class="info-form text-center">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <div class="back-btn"><a onclick="loadPageHome({backFrom:'history'})" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div>
+                    </div>
+                    <div class="col-xs-8">
+                        <h4 class="black-text lang" key="history">HISTORY</h4>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="back-btn" data-toggle="modal" data-target="#filter-model"><a><i class="fa fa-filter" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-form history-tabs">
+            <ul class="nav nav-tabs">
+                <li onclick="SetHistorySectionName('WithdrawDeposit')" class="active"><a data-toggle="tab" href="#depositwithdraw"><span key="" class="lang"></span>Deposit / Withdraw</a></li>
+                <li onclick="SetHistorySectionName('BettingSummery')"><a data-toggle="tab" href="#profileBettingsummery"><span key="" class="lang">Betting Summary</span></a></li>
+                <li onclick="SetHistorySectionName('Transfer')"><a data-toggle="tab" href="#profileTransfer"><span key="transfer_title" class="lang">Transfer</span></a></li>
+                <li onclick="SetHistorySectionName('Promotion')"><a data-toggle="tab" href="#promotion-apply"><span key="menu_promotion" class="lang">Promotion</span></a></li>
+                <li onclick="SetHistorySectionName('Rebate')"><a data-toggle="tab" href="#rebate"><span key="rebate" class="lang">Rebate</span></a></li>
+                <li onclick="SetHistorySectionName('Reward')"><a data-toggle="tab" href="#reward"><span key="" class="lang">Reward</span></a></li>
+            </ul>
+        </div>
+
+        <div class="history-tabs">
+            <div class="tab-content">
+
+                <div id="profileTransfer" class="tab-pane fade in">
+                    <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
+                        <ul class="listing-for-deposite" id="transferHistory">
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="profileBettingsummery" class="tab-pane fade in">
+                    <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
+                        <ul class="listing-for-deposite" id="bettingsummery">
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="depositwithdraw" class="tab-pane fade in active">
+                    <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
+                        <ul class="listing-for-deposite" id="depositHistory">
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="promotion-apply" class="tab-pane fade in">
+                    <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
+                        <ul class="listing-for-deposite" id="promotionHistory">
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="rebate" class="tab-pane fade in">
+                    <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
+                        <ul class="listing-for-deposite" id="rebateHistory">
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="reward" class="tab-pane fade in">
+                    <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
+                        <ul class="listing-for-deposite" id="rewardHistory">
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer-widget" id="footerWidget">
+        <ul class="list-inline text-center">
+            <li id="homePagebottom">
+                <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch">
+                    <i class="fa fa-home"></i>
+                    <p class="white-text no-mar" data-translate="menu_home">Home</p>
+                </a>
+            </li>
+            <li id="promotionPagebottom" class="">
+                <a onclick="loadPagePromotions()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-gift"></i>
+                    <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
+                </a>
+            </li>
+            <li id="contactusPagebottom">
+                <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-user"></i>
+                    <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="whatsapp()">
+                    <figure><img src="~/images/mobile/whatsapp.png" alt="Whats App" /></figure>
+                    <p class="white-text no-mar">Whatsapp</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="LiveChat()">
+                    <figure><img src="~/images/mobile/livechat.png" alt="LiveChat" /></figure>
+                    <p class="white-text no-mar" data-translate="Live_chat">Live Chat</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <a id="mobileM8" style="display:none"></a>
+    </div>
+
+    <div class="modal fade" id="filter-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Filter</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div>
+                            <select class="form-control" onchange="OnDateFilterChange()" id="dateFilter">
+                                <option value="None" disabled="disabled" selected>None</option>
+                                <option value="Today">Today</option>
+                                <option value="In3Days">In 3 Days</option>
+                                <option value="InAWeek">In a Week</option>
+                                <option value="InAMonth">In a Month</option>
+                            </select>
+                        </div>
+                        <p>Start Date</p>
+                        <div class="input-append">
+                            <input id="datepicker1" class="input-small form-control" type="text" placeholder="01/01/1997" />
+                            <button id="datepicker1btn" class="btn icondate" type="button"><i class="fa fa-calendar"></i></button>
+                        </div>
+                        <p>To Date</p>
+                        <div class="input-append">
+                            <input id="datepicker2" class="input-small form-control" type="text" placeholder="01/01/1997" />
+                            <button id="datepicker1btn2" class="btn icondate" type="button"><i class="fa fa-calendar"></i></button>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary" onclick="GetDateRange()">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade history-model" id="depsoit-history-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Details</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <h5>Transaction Type</h5>
+                        <p id="depositHistoryType"></p>
+                        <h5>Payment Method</h5>
+                        <p id="depositHistoryMethod"></p>
+                        <h5>Amount</h5>
+                        <p id="depositHistoryAmount"></p>
+                        <h5>Transaction Date</h5>
+                        <p id="depositHistoryDate"></p>
+                        <h5>Transaction Status</h5>
+                        <p id="depositHistoryStatus"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade history-model" id="transfer-history-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Details</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <h5>From Wallet</h5>
+                        <p id="transferHistoryFrom"></p>
+                        <h5>To Wallet</h5>
+                        <p id="transferHistoryTo"></p>
+                        <h5>Transaction Id</h5>
+                        <p id="transferHistoryId"></p>
+                        <h5>Amount</h5>
+                        <p id="transferHistoryAmount"></p>
+                        <h5>Transaction Date</h5>
+                        <p id="transferHistoryDate"></p>
+                        <h5>Transaction Status</h5>
+                        <p id="transferHistoryStatus"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade history-model" id="betting-history-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Details</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <h5>Game Name</h5>
+                        <p id="bettingHistoryGameName"></p>
+                        <h5>Bet Count</h5>
+                        <p id="bettingHistoryBetCount"></p>
+                        <h5>Valid Bet Amount</h5>
+                        <p id="bettingHistoryVaildBet"></p>
+                        <h5>Bet Amount</h5>
+                        <p id="bettingHistoryBetAmount"></p>
+                        <h5>Total Rebate</h5>
+                        <p id="bettingHistoryRebate"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade history-model" id="promotion-history-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Details</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <h5>Promotion Title</h5>
+                        <p id="promotionHistoryTitle"></p>
+                        <h5>Deposit Amount</h5>
+                        <p id="promotionHistoryDAmount"></p>
+                        <h5>Bonus Amount</h5>
+                        <p id="promotionHistoryBAmount"></p>
+                        <h5>User Turnover</h5>
+                        <p id="promotionHistoryUTurnover"></p>
+                        <h5>Turnover Target</h5>
+                        <p id="promotionHistoryTurnoverTarget"></p>
+                        <h5>Turnover Time</h5>
+                        <p id="promotionHistoryTurnTime"></p>
+                        <h5>Remaining Day</h5>
+                        <p id="promotionHistoryRDay"></p>
+                        <h5>Status</h5>
+                        <p id="promotionHistoryStatus"></p>
+                        <h5>Expiry Date</h5>
+                        <p id="promotionHistoryExpiry"></p>
+                        <h5>Created</h5>
+                        <p id="promotionHistoryCreated"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade history-model" id="rebate-history-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Details</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <h5>Game Name</h5>
+                        <p id="rebateHistoryGameName"></p>
+                        <h5>Game Type</h5>
+                        <p id="rebateHistoryGameType"></p>
+                        <h5>Bet Amount</h5>
+                        <p id="rebateHistoryBAmount"></p>
+                        <h5>Rolling</h5>
+                        <p id="rebateHistoryRolling"></p>
+                        <h5>Win lose</h5>
+                        <p id="rebateHistoryWinlose"></p>
+                        <h5>Turnover</h5>
+                        <p id="rebateHistoryTurnover"></p>
+                        <h5>Comm Amount</h5>
+                        <p id="rebateHistoryCommAmount"></p>
+                        <h5>Created</h5>
+                        <p id="rebateHistoryCreated"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
+            $("#chatting").toggle();
+        });
+        $(".contact-user").mouseover(function () {
+            $("#chatting").toggle();
+        });
+    });
+</script>
+
+
+<!-- Slider Section End -->
+<!-- Modal For Video -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".open-modal").click();
+    });
+    jQuery(".scroll-down-visible").hide();
+    jQuery("#more-arrow").click(function () {
+        jQuery(".scroll-down-visible").toggleClass("show");
+        jQuery("#more-arrow").toggleClass("rotate");
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".navbar-toggle,.canvas-overlay").click(function () {
+            if (!$("html").hasClass('intro')) {
+                $("html").addClass("intro");
+            }
+            else {
+                $("html").removeClass("intro");
+            }
+        });
+        $(".canvas-overlay").click(function () {
+            if ($(".navbar-collapse").hasClass('in')) {
+                $(".navbar-collapse").removeClass("in");
+            }
+        });
+    });
+</script>
+<!-- Slider Section End -->
+<script>
+    $(window).scroll(function () {
+        var scroll = $(window).scrollTop();
+        if (scroll >= 1) {
+            $("header").addClass("sticky-header");
+        }
+        else {
+            $("header").removeClass("sticky-header");
+        }
+    });
+</script>
+
+<script>
+
+    function get() {
+        (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
+
+        $.ajax({
+            url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
+            dataType: 'json',
+            async: false,
+            success: function (lang) {
+                $('.lang').each(function (index, element) {
+                    if (localStorage.getItem("language") === "ms-MY") {
+                        $('body').addClass('malay-font');
+                    }
+                    $(this).text(lang[$(this).attr('key')]);
+                });
+                $("[data-translate]").each(function () {
+                    if ($(this).is("input")) {
+                        $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    } else {
+                        $(this).text(lang[$(this).data("translate")]);
+                    }
+                });
+            }
+        });
+    }
+
+    setTimeout(() => {
+        get();
+    }, 200);
+
+    async function OnScroll() {
+
+        if ((NumberOfLine % 5) == 0) {
+
+            NumberOfLine = NumberOfLine + 1;
+            if (!apiRunning) {
+                pageNumber = pageNumber + 1;
+                await CallFunctionAccordingToTab()
+            }
+        }
+        else {
+            NumberOfLine = NumberOfLine + 1;
+        }
+    }
+
+</script>
+
+
+<script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        Get30DayDate();
+        $("#datepicker1").datepicker({ dateFormat: "dd/mm/yy" });
+        $("#datepicker1btn").click(function (event) {
+            $("#dateFilter").val("None").change();
+            event.preventDefault();
+            $("#datepicker1").focus();
+        });
+
+        $("#datepicker1btn2").click(function (event) {
+            $("#dateFilter").val("None").change();
+            event.preventDefault();
+            $("#datepicker2").focus();
+        })
+
+        $("#datepicker2").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            dateFormat: "dd/mm/yy",
+        });
+    });
+</script>

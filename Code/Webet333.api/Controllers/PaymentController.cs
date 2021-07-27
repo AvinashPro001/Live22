@@ -61,15 +61,37 @@ namespace Webet333.api.Controllers
         #region User's transaction retrieve
 
         [HttpPost(ActionsConst.Payments.Transaction)]
-        public async Task<IActionResult> Transaction([FromBody] GlobalGetRequest request)
+        public async Task<IActionResult> Transaction([FromBody] GlobalGetWithPaginationRequest request)
         {
-            var Role = GetUserRole(User);
+            await CheckUserRole();
 
-            request.UserId = Role == RoleConst.Admin ? request.UserId : GetUserId(User).ToString();
+            if (string.IsNullOrWhiteSpace(request.UserId)) return BadResponse("error_empty_request");
 
             using (var payment_help = new PaymentHelpers(Connection))
             {
-                return OkResponse(await payment_help.GetDynamicData(StoredProcConsts.Payments.Transaction, UserId: request.UserId, FromDate: request.FromDate, ToDate: request.ToDate));
+                var list = await payment_help.StatementRetriver(request);
+                if (list.Count != 0)
+                {
+                    var total = list.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 10,
+                        offset = list.FirstOrDefault().OffSet,
+                    });
+                }
+                return OkResponse(new
+                {
+                    result = list,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
             }
         }
 
@@ -283,6 +305,53 @@ namespace Webet333.api.Controllers
             }
         }
 
+        [HttpPost(ActionsConst.Payments.WithdrawListTemp)]
+        public async Task<IActionResult> WithdrawListTemp([FromBody] GlobalGetWithPaginationRequest request)
+        {
+            // await ValidateUser();
+            var Role = GetUserRole(User);
+
+            if (request == null) request = new GlobalGetWithPaginationRequest();
+
+            using (var payment_help = new PaymentHelpers(Connection))
+            {
+                if (Role == RoleConst.Admin)
+                {
+                    var temp = await payment_help.WithdrawalList(StoredProcConsts.Payments.WithdrawalList, request?.UserId, request?.Id, request?.Status, Keyword: request?.Keyword, FromDate: request.FromDate, ToDate: request.ToDate, PageNo: request.PageNo, PageSize: request.PageSize);
+
+                    if (temp.Any())
+                    {
+                        var total = temp.FirstOrDefault().Total;
+                        var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? temp.Count : request.PageSize);
+
+                        return OkResponse(new
+                        {
+                            result = temp,
+                            total = total,
+                            totalPages = totalPages,
+                            pageSize = request.PageSize ?? 10,
+                            offset = temp.FirstOrDefault().OffSet,
+                        });
+                    }
+
+                    return OkResponse(new
+                    {
+                        result = temp,
+                        total = 0,
+                        totalPages = 0,
+                        pageSize = 0,
+                        offset = 0,
+                    });
+                }
+                else
+                {
+                    var temp = await payment_help.WithdrawalList(StoredProcConsts.Payments.WithdrawalList, GetUserId(User).ToString(), request?.Id, request?.Status, Keyword: request?.Keyword);
+
+                    return OkResponse(temp);
+                }
+            }
+        }
+
         [HttpPost(ActionsConst.Payments.WithdrawVerify)]
         public async Task<IActionResult> WithdrawVerify([FromBody] VerifyRequest request)
         {
@@ -342,26 +411,36 @@ namespace Webet333.api.Controllers
         }
 
         [HttpPost(ActionsConst.Payments.TransferList)]
-        public async Task<IActionResult> TransferList([FromBody] GlobalGetRequest request)
+        public async Task<IActionResult> TransferList([FromBody] GlobalGetWithPaginationRequest request)
         {
-            //await ValidateUser();
-            var Role = GetUserRole(User);
-
+            request.UserId = GetUserRole(User) == RoleConst.Users ? GetUserId(User).ToString() : request.UserId;
             using (var payment_help = new PaymentHelpers(Connection))
             {
-                if (Role == RoleConst.Admin)
-                    return OkResponse(await payment_help.GetDynamicData(StoredProcConsts.Payments.TransferList, request?.UserId, request?.Id, request?.Status, Keyword: request?.Keyword, FromDate: request.FromDate, ToDate: request.ToDate));
-                else
+                var list = await payment_help.TransferRetriver(request);
+                if (list.Count != 0)
                 {
-                    if (request == null) request = new GlobalGetRequest();
+                    var total = list.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
 
-                    request.UserId = GetUserId(User).ToString();
-
-                    if (request.UserId != null && GetUserId(User).ToString() != request.UserId)
-                        throw new ApiException("error_invalid_userid", 400);
-
-                    return OkResponse(await payment_help.GetDynamicData(StoredProcConsts.Payments.TransferList, request?.UserId, request?.Id, request?.Status, Keyword: request?.Keyword));
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 10,
+                        offset = list.FirstOrDefault().OffSet,
+                    });
                 }
+                return OkResponse(new
+                {
+                    result = list,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
+
+
             }
         }
 
@@ -578,5 +657,45 @@ namespace Webet333.api.Controllers
         }
 
         #endregion User Withdraw Amount
+
+        #region Withdraw Deposit Retrive
+
+        [HttpPost(ActionsConst.Payments.WithdrawDepositRetrive)]
+        public async Task<IActionResult> WithdrawDepositRetrive([FromBody] GlobalGetWithPaginationRequest request)
+        {
+            var Role = GetUserRole(User);
+
+            request.UserId = Role == RoleConst.Users ? GetUserId(User).ToString() : request.UserId;
+            using (var payment_helper = new PaymentHelpers(Connection))
+            {
+                var list = await payment_helper.WithdrawDepositRetrive(request);
+
+                if (list.Count != 0)
+                {
+                    var total = list.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 10,
+                        offset = list.FirstOrDefault().OffSet,
+                    });
+                }
+                return OkResponse(new
+                {
+                    result = list,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
+            }
+        }
+
+
+        #endregion Withdraw Deposit Retrive
     }
 }

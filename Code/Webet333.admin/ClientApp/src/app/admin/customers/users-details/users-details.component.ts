@@ -243,6 +243,9 @@ export class UsersDetailsComponent implements OnInit {
     SBOBalance: any;
     SBOUsername: any;
 
+    pageSize: number = 10;
+    pageNumber: number = 0;
+
     constructor(
         private datePipe: DatePipe,
         private adminService: AdminService,
@@ -562,6 +565,7 @@ export class UsersDetailsComponent implements OnInit {
     //#region onclick page set in tab menu
 
     openPage(pageName, elmnt) {
+        this.pageNumber = 0;
         this.datePickerfromdate = this.today
         this.datePickertodate = this.today
 
@@ -1087,12 +1091,12 @@ export class UsersDetailsComponent implements OnInit {
     OpenPageLoadData(Tab) {
         if (this.userid !== undefined && this.userid !== "") {
             if (Tab === "Deposit") { this.isFilter = false; this.depositlist(null, null); }
-            if (Tab === "Withdraw") this.withdrawlist(null, null);
-            if (Tab === "Transfer") this.transferlist(null, null);
-            if (Tab === "Promotion") this.promotionlist(null, null);
-            if (Tab === "Rebate") this.rebatelist(null, null);
-            if (Tab === "Statement") this.statementlist(null, null);
-            if (Tab === "Restore") { this.restorelist(); }
+            if (Tab === "Withdraw") { this.isFilter = false; this.withdrawlist(null, null); }
+            if (Tab === "Transfer") { this.isFilter = false; this.transferlist(null, null); }
+            if (Tab === "Promotion") { this.isFilter = false; this.promotionlist(null, null); }
+            if (Tab === "Rebate") { this.isFilter = false; this.rebatelist(null, null); }
+            if (Tab === "Statement") { this.isFilter = false; this.statementlist(null, null); }
+            if (Tab === "Restore") { this.isFilter = false; this.restorelist(); }
         }
         else {
             this.depositRows = [];
@@ -1127,12 +1131,12 @@ export class UsersDetailsComponent implements OnInit {
             this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
             if (Tab === "Deposit") { this.isFilter = true; this.depositlist(fromdate, todate); }
-            if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
-            if (Tab === "Transfer") this.transferlist(fromdate, todate);
-            if (Tab === "Promotion") this.promotionlist(fromdate, todate);
-            if (Tab === "Rebate") this.rebatelist(fromdate, todate);
-            if (Tab === "Statement") this.statementlist(fromdate, todate);
-            if (Tab === "BettingDetails") this.BettingDetails(fromdate, todate);
+            if (Tab === "Withdraw") { this.isFilter = true; this.withdrawlist(fromdate, todate); }
+            if (Tab === "Transfer") { this.isFilter = true; this.transferlist(fromdate, todate); }
+            if (Tab === "Promotion") { this.isFilter = true; this.promotionlist(fromdate, todate); }
+            if (Tab === "Rebate") { this.isFilter = true; this.rebatelist(fromdate, todate); }
+            if (Tab === "Statement") { this.isFilter = true; this.statementlist(fromdate, todate); }
+            if (Tab === "BettingDetails") { this.BettingDetails(fromdate, todate); }
         }
         else {
             this.depositRows = [];
@@ -1162,12 +1166,12 @@ export class UsersDetailsComponent implements OnInit {
             this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
             if (Tab === "Deposit") { this.isFilter = true; this.depositlist(fromdate, todate); }
-            if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
-            if (Tab === "Transfer") this.transferlist(fromdate, todate);
-            if (Tab === "Promotion") this.promotionlist(fromdate, todate);
-            if (Tab === "Rebate") this.rebatelist(fromdate, todate);
-            if (Tab === "Statement") this.statementlist(fromdate, todate);
-            if (Tab === "BettingDetails") this.BettingDetails(fromdate, todate);
+            if (Tab === "Withdraw") { this.isFilter = true; this.withdrawlist(fromdate, todate); }
+            if (Tab === "Transfer") { this.isFilter = true; this.transferlist(fromdate, todate); }
+            if (Tab === "Promotion") { this.isFilter = true; this.promotionlist(fromdate, todate); }
+            if (Tab === "Rebate") { this.isFilter = true; this.rebatelist(fromdate, todate); }
+            if (Tab === "Statement") { this.isFilter = true; this.statementlist(fromdate, todate); }
+            if (Tab === "BettingDetails") { this.BettingDetails(fromdate, todate); }
         }
         else {
             this.depositRows = [];
@@ -1197,12 +1201,12 @@ export class UsersDetailsComponent implements OnInit {
             this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
             if (Tab === "Deposit") { this.isFilter = true; this.depositlist(fromdate, todate); }
-            if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
-            if (Tab === "Transfer") this.transferlist(fromdate, todate);
-            if (Tab === "Promotion") this.promotionlist(fromdate, todate);
-            if (Tab === "Rebate") this.rebatelist(fromdate, todate);
-            if (Tab === "Statement") this.statementlist(fromdate, todate);
-            if (Tab === "BettingDetails") this.BettingDetails(fromdate, todate);
+            if (Tab === "Withdraw") { this.isFilter = true; this.withdrawlist(fromdate, todate); }
+            if (Tab === "Transfer") { this.isFilter = true; this.transferlist(fromdate, todate); }
+            if (Tab === "Promotion") { this.isFilter = true; this.promotionlist(fromdate, todate); }
+            if (Tab === "Rebate") { this.isFilter = true; this.rebatelist(fromdate, todate); }
+            if (Tab === "Statement") { this.isFilter = true; this.statementlist(fromdate, todate); }
+            if (Tab === "BettingDetails") { this.BettingDetails(fromdate, todate); }
         }
         else {
             this.depositRows = [];
@@ -1232,12 +1236,12 @@ export class UsersDetailsComponent implements OnInit {
             this.commonService.setDateOtherPicker(new Date(fromdate), new Date(todate));
 
             if (Tab === "Deposit") { this.isFilter = true; this.depositlist(fromdate, todate); }
-            if (Tab === "Withdraw") this.withdrawlist(fromdate, todate);
-            if (Tab === "Transfer") this.transferlist(fromdate, todate);
-            if (Tab === "Promotion") this.promotionlist(fromdate, todate);
-            if (Tab === "Rebate") this.rebatelist(fromdate, todate);
-            if (Tab === "Statement") this.statementlist(fromdate, todate);
-            if (Tab === "BettingDetails") this.BettingDetails(fromdate, todate);
+            if (Tab === "Withdraw") { this.isFilter = true; this.withdrawlist(fromdate, todate); }
+            if (Tab === "Transfer") { this.isFilter = true; this.transferlist(fromdate, todate); }
+            if (Tab === "Promotion") { this.isFilter = true; this.promotionlist(fromdate, todate); }
+            if (Tab === "Rebate") { this.isFilter = true; this.rebatelist(fromdate, todate); }
+            if (Tab === "Statement") { this.isFilter = true; this.statementlist(fromdate, todate); }
+            if (Tab === "BettingDetails") { this.BettingDetails(fromdate, todate); }
         }
         else {
             this.depositRows = [];
@@ -1611,7 +1615,6 @@ export class UsersDetailsComponent implements OnInit {
 
     //#region  User Deposit List
 
-    pageNumber = 0;
     depositlist(fromdate, todate) {
         this.loadingIndicator = true;
         let data = {
@@ -1619,12 +1622,12 @@ export class UsersDetailsComponent implements OnInit {
             fromDate: fromdate,
             toDate: todate,
             pageNo: this.pageNumber,
-            pageSize: 20
+            pageSize: this.pageSize
         }
         this.adminService.add<any>(customer.depositList, data).subscribe(res => {
             this.depositRows = [];
             //let i = 0;
-            let i = ((this.pageNumber + 1) * 20) - 20;
+            let i = ((this.pageNumber + 1) * this.pageSize) - this.pageSize;
             this.offset = res.data.offset;
             this.totalRowCount = res.data.total;
 
@@ -1658,11 +1661,19 @@ export class UsersDetailsComponent implements OnInit {
             userId: this.userid,
             fromDate: fromdate,
             toDate: todate,
+            pageNo: this.pageNumber,
+            pageSize: this.pageSize
         }
-        this.adminService.add<any>(customer.withdrawList, data).subscribe(res => {
+
+        this.adminService.add<any>(customer.withdrawListTemp, data).subscribe(res => {
             this.withdrawRows = [];
-            let i = 0;
-            res.data.forEach(el => {
+
+            // let i = 0;
+            let i = ((this.pageNumber + 1) * this.pageSize) - this.pageSize;
+            this.offset = res.data.offset;
+            this.totalRowCount = res.data.total;
+
+            res.data.result.forEach(el => {
                 this.withdrawRows.push({
                     No: ++i,
                     WithdrawNo: el.orderId,
@@ -1693,11 +1704,17 @@ export class UsersDetailsComponent implements OnInit {
             userId: this.userid,
             fromDate: fromdate,
             toDate: todate,
+            pageNo: this.pageNumber,
+            pageSize: this.pageSize
         }
         this.adminService.add<any>(customer.transferList, data).subscribe(res => {
             this.transferRows = [];
-            let i = 0;
-            res.data.forEach(el => {
+            //let i = 0;
+            let i = ((this.pageNumber + 1) * this.pageSize) - this.pageSize;
+            this.offset = res.data.offset;
+            this.totalRowCount = res.data.total;
+
+            res.data.result.forEach(el => {
                 this.transferRows.push({
                     No: ++i,
                     TransactionNo: el.orderId,
@@ -1726,12 +1743,18 @@ export class UsersDetailsComponent implements OnInit {
             userid: this.userid,
             fromDate: fromdate,
             toDate: todate,
+            pageNo: this.pageNumber,
+            pageSize: this.pageSize
         }
-        this.adminService.add<any>(customer.promotionApplySelect, data).subscribe(res => {
+        this.adminService.add<any>(customer.promotionApplyList, data).subscribe(res => {
             this.promotionRows = [];
-            let i = 0;
+            //let i = 0;
+            let i = ((this.pageNumber + 1) * this.pageSize) - this.pageSize;
+            this.offset = res.data.offset;
+            this.totalRowCount = res.data.total;
             this.promotiondata = res.data;
-            res.data.forEach(el => {
+
+            res.data.result.forEach(el => {
                 this.promotionRows.push({
                     No: ++i,
                     Turnover: el.UserTurnover,
@@ -1764,11 +1787,16 @@ export class UsersDetailsComponent implements OnInit {
             userid: this.userid,
             fromDate: fromdate,
             toDate: todate,
+            pageNo: this.pageNumber,
+            pageSize: this.pageSize
         }
         this.adminService.add<any>(customer.rebateHistory, data).subscribe(res => {
             this.rebateRows = [];
+            this.offset = res.data.offset;
+            this.totalRowCount = res.data.total;
             let i = 0;
-            res.data.forEach(el => {
+            i = ((this.pageNumber + 1) * this.pageSize) - this.pageSize;
+            res.data.result.forEach(el => {
                 this.rebateRows.push({
                     No: ++i,
                     GameName: el.gameName,
@@ -1798,11 +1826,17 @@ export class UsersDetailsComponent implements OnInit {
             userId: this.userid,
             fromDate: fromdate,
             toDate: todate,
+            pageNo: this.pageNumber,
+            pageSize: this.pageSize
         }
         this.adminService.add<any>(customer.statementHistory, data).subscribe(res => {
             this.statementRows = [];
-            let i = 0;
-            res.data.forEach(el => {
+            //let i = 0;
+            let i = ((this.pageNumber + 1) * this.pageSize) - this.pageSize;
+            this.offset = res.data.offset;
+            this.totalRowCount = res.data.total;
+
+            res.data.result.forEach(el => {
                 this.statementRows.push({
                     No: ++i,
                     DateTime: this.replaceDateTime(el.created),
@@ -3284,4 +3318,60 @@ export class UsersDetailsComponent implements OnInit {
         }
         else this.depositlist(null, null);
     }
+
+    setPageRebate(pageInfo) {
+        this.pageNumber = pageInfo.offset;
+        if (this.isFilter) {
+            var fromdate, todate;
+            fromdate = (document.getElementById("d_fromdatetime") as HTMLInputElement).value;
+            todate = (document.getElementById("d_todatetime") as HTMLInputElement).value;
+            this.rebatelist(fromdate == "" ? null : fromdate, todate == "" ? null : todate);
+        }
+        else this.rebatelist(null, null);
+    }
+
+    setPageWithdraw(pageInfo) {
+        this.pageNumber = pageInfo.offset;
+        if (this.isFilter) {
+            var fromdate, todate;
+            fromdate = (document.getElementById("d_fromdatetime") as HTMLInputElement).value;
+            todate = (document.getElementById("d_todatetime") as HTMLInputElement).value;
+            this.withdrawlist(fromdate == "" ? null : fromdate, todate == "" ? null : todate);
+        }
+        else this.withdrawlist(null, null);
+    }
+
+    setPageTransfer(pageInfo) {
+        this.pageNumber = pageInfo.offset;
+        if (this.isFilter) {
+            var fromdate, todate;
+            fromdate = (document.getElementById("d_fromdatetime") as HTMLInputElement).value;
+            todate = (document.getElementById("d_todatetime") as HTMLInputElement).value;
+            this.transferlist(fromdate == "" ? null : fromdate, todate == "" ? null : todate);
+        }
+        else this.transferlist(null, null);
+    }
+
+    setPagePromotion(pageInfo) {
+        this.pageNumber = pageInfo.offset;
+        if (this.isFilter) {
+            var fromdate, todate;
+            fromdate = (document.getElementById("d_fromdatetime") as HTMLInputElement).value;
+            todate = (document.getElementById("d_todatetime") as HTMLInputElement).value;
+            this.promotionlist(fromdate == "" ? null : fromdate, todate == "" ? null : todate);
+        }
+        else this.promotionlist(null, null);
+    }
+
+    setPageStatement(pageInfo) {
+        this.pageNumber = pageInfo.offset;
+        if (this.isFilter) {
+            var fromdate, todate;
+            fromdate = (document.getElementById("d_fromdatetime") as HTMLInputElement).value;
+            todate = (document.getElementById("d_todatetime") as HTMLInputElement).value;
+            this.statementlist(fromdate == "" ? null : fromdate, todate == "" ? null : todate);
+        }
+        else this.statementlist(null, null);
+    }
+
 }

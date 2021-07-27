@@ -1,0 +1,154 @@
+﻿@page
+@{ ViewData["Title"] = "Slots";
+    Layout = ""; }
+<div id="comContent"></div>
+<div id="mComContent">
+    <div class="account-reg pad-comman-fifteen white-bg-tab-panel white-bg radius-border" style="height:auto !important;padding-bottom:70px">
+        <div class="head-img-icon">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#playtech" data-toggle="tab"><img src="~/images/carousel_logos/playtech_color.png" alt="logo" /></a></li>
+                <li><a href="#pragmatic" data-toggle="tab"><img src="~/images/carousel_logos/pragmatic_color.png" alt="logo" /></a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="playtech" class="tab-pane fade in active">
+                    <div class="menu-list-area">
+                        <ul class="nav nav-pills">
+                            <li class="active"><a data-toggle="pill" href="#all">All</a></li>
+                            <li><a data-toggle="pill" href="#hot">Hot</a></li>
+                            <li><a data-toggle="pill" href="#new">New</a></li>
+                            <li><a data-toggle="pill" href="#arcade">Arcade</a></li>
+                            <li><a data-toggle="pill" href="#slot">slot</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="all" class="tab-pane fade in active">
+                              <ul id="playtech-all-section">
+                               
+                              </ul>
+                            </div>
+                            <div id="hot" class="tab-pane fade">
+                                <ul id="playtech-hot-section">
+                              
+                                </ul>
+                            </div>
+                            <div id="new" class="tab-pane fade">
+                                <ul id="playtech-new-section">
+                                   
+                                </ul>
+                            </div>
+                            <div id="arcade" class="tab-pane fade">
+                                <ul id="playtech-arcade-section">
+                                    
+                                </ul>
+                            </div>
+                            <div id="slot" class="tab-pane fade">
+                                <ul id="playtech-slot-section">
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="pragmatic" class="tab-pane fade">
+                    <div class="menu-list-area">
+                        <ul class="nav nav-pills">
+                            <li class="active"><a data-toggle="pill" href="#all1">All</a></li>
+                            <li><a data-toggle="pill" href="#hot1">Hot</a></li>
+                            <li><a data-toggle="pill" href="#new1">New</a></li>
+                            <li><a data-toggle="pill" href="#arcade1">Arcade</a></li>
+                            <li><a data-toggle="pill" href="#slot1">slot</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="all1" class="tab-pane fade in active">
+                                <ul id="pragmatic-all-section">
+                                </ul>
+                            </div>
+                            <div id="hot1" class="tab-pane fade">
+                                <ul id="pragmatic-hot-section">
+                                </ul>
+                            </div>
+                            <div id="new1" class="tab-pane fade">
+                                <ul id="pragmatic-new-section">
+                                </ul>
+                            </div>
+                            <div id="arcade1" class="tab-pane fade">
+                                <ul id="pragmatic-arcade-section">
+                                </ul>
+                            </div>
+                            <div id="slot1" class="tab-pane fade">
+                                <ul id="pragmatic-slot-section">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-widget" id="footerWidget">
+        <ul class="list-inline text-center">
+            <li id="homePagebottom">
+                <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch">
+                    <i class="fa fa-home"></i>
+                    <p class="white-text no-mar" data-translate="menu_home">Home</p>
+                </a>
+            </li>
+            <li id="promotionPagebottom" class="">
+                <a onclick="loadPagePromotions()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-gift"></i>
+                    <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
+                </a>
+            </li>
+            <li id="contactusPagebottom">
+                <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
+                    <i class="fa fa-user"></i>
+                    <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="whatsapp()">
+                    <figure><img src="~/images/mobile/whatsapp.png" alt="Whats App" /></figure>
+                    <p class="white-text no-mar">Whatsapp</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="LiveChat()">
+                    <figure><img src="~/images/mobile/livechat.png" alt="LiveChat" /></figure>
+                    <p class="white-text no-mar" data-translate="Live_chat">Live Chat</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <a id="mobileM8" style="display:none"></a>
+    </div>
+
+</div>
+
+<script>
+    $(window).scroll(function () {
+        var scroll = $(window).scrollTop();
+        if (scroll >= 1) {
+            $(".account-reg").addClass("sticky-gamemenu");
+        }
+        else {
+            $(".account-reg").removeClass("sticky-gamemenu");
+        }
+    });
+
+    $(document).ready(function () {
+        PragmaticSlotsGameList();
+        PlaytechSlotsGameList();
+      
+    });
+
+    var callCounter = 1
+    $(document).on('scroll', function () {
+        if ((callCounter % 20) == 0) {
+            ++slotPageNumber
+            PlaytechSlotsGameList();
+            PragmaticSlotsGameList();
+        }
+        ++callCounter;
+    });
+</script>

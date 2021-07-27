@@ -176,6 +176,16 @@ namespace Webet333.api.Helpers
             }
         }
 
+        internal async Task<List<PaymentWithdrawalListResponse>> WithdrawalList(string sp_name, string UserId = null, string Id = null, string Verified = null, string Keyword = null, string FromDate = null, string ToDate = null, int? PageSize = null, int? PageNo = null)
+        {
+            using (var repository = new DapperRepository<PaymentWithdrawalListResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(sp_name, new { UserId, Id, Verified, Keyword, FromDate, ToDate, PageSize, PageNo });
+
+                return result.ToList();
+            }
+        }
+
         #endregion Withdrawal
 
         #region Transfer
@@ -347,6 +357,33 @@ namespace Webet333.api.Helpers
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
                 await repository.AddOrUpdateAsync(StoredProcConsts.Payments.TurnoverTargetWinturnUpdate, new { UserId, Amount });
+            }
+        }
+
+        public async Task<List<WithdrawDepositSelectResponse>> WithdrawDepositRetrive(GlobalGetWithPaginationRequest request)
+        {
+            using (var repository = new DapperRepository<WithdrawDepositSelectResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Payments.UsersDepositWithdrawSelect, new { request.UserId, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                return result.ToList();
+            }
+        }
+
+        public async Task<List<TransferRetriveResponse>> TransferRetriver(GlobalGetWithPaginationRequest request)
+        {
+            using (var repository = new DapperRepository<TransferRetriveResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Payments.TransferList, new { request.UserId,request.Keyword, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                return result.ToList();
+            }
+        }
+
+        public async Task<List<TransactionResponse>> StatementRetriver(GlobalGetWithPaginationRequest request)
+        {
+            using (var repository = new DapperRepository<TransactionResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Payments.Transaction, new { request.UserId, request.Keyword, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                return result.ToList();
             }
         }
 
