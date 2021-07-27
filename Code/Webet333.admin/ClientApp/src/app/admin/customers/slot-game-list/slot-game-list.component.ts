@@ -71,6 +71,7 @@ export class SlotGameListComponent implements OnInit {
 
     LoadGameList() {
         let data = {
+            Name: (document.getElementById("searchBox") as HTMLInputElement).value == "" ? null : (document.getElementById("searchBox") as HTMLInputElement).value,
             pageNo: this.pageNumber,
             pageSize: this.pageSize
         }
@@ -178,7 +179,7 @@ export class SlotGameListComponent implements OnInit {
     SetDelete(id, event) {
         let data = {
             id: id,
-            active: true
+            deleted: true
         }
         this.CallUpdateAPI(data);
     }
@@ -242,7 +243,6 @@ export class SlotGameListComponent implements OnInit {
         let reader = new FileReader();
         reader.onload = (e: any) => {
             this.urls = e.target.result;
-            console.log(this.urls);
         }
         reader.readAsDataURL(file);
         
@@ -257,6 +257,21 @@ export class SlotGameListComponent implements OnInit {
             id:"PlayTech Wallet"
         };
         this.adminService.add<any>(customer.PragmaticGameListUpdate, data).subscribe(async res => {
+            this.ngOnInit();
+            this.toasterService.pop('success', 'Success', res.message);
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
+    AddGame() {
+        let data = {
+            gameType: (document.getElementById("txt_gameType") as HTMLInputElement).value,
+            gameCode: (document.getElementById("txt_gameCode") as HTMLInputElement).value,
+            gameName: (document.getElementById("txt_gameName") as HTMLInputElement).value,
+        };
+        this.adminService.add<any>(customer.slotsGameInsert, data).subscribe(async res => {
+            this.modalService.dismissAll();
             this.ngOnInit();
             this.toasterService.pop('success', 'Success', res.message);
         }, error => {

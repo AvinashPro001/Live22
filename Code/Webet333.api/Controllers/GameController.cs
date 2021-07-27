@@ -3640,6 +3640,26 @@ namespace Webet333.api.Controllers
 
         #endregion
 
+        #region Slot Game List Insert
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.SlotsGameInsert)]
+        public async Task<IActionResult> SlotsGameInsert([FromBody] GameListUploadResponse request)
+        {
+            await CheckUserRole();
+            using (var game_helper = new GameHelpers(Connection: Connection))
+            {
+                var list = new List<GameListUploadResponse>
+                {
+                    request
+                };
+                await game_helper.GameListInsert(list, "PlayTech Wallet");
+                return OkResponse();
+            }
+        }
+
+        #endregion
+
         #region Hot Slots Game List Select
 
         [HttpPost(ActionsConst.Game.HotSlotsGameSelect)]

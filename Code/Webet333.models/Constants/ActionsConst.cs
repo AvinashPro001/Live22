@@ -330,6 +330,8 @@
 
             public const string SlotsGameUpdate = "Game/slotsgame/update";
 
+            public const string SlotsGameInsert = "Game/slotsgame/insert";
+
             public const string HotSlotsGameSelect = "Game/hotslotsgame/list";
 
             public const string GameListUpload = "Game/list/upload";

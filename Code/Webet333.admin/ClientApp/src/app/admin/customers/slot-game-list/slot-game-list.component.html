@@ -19,6 +19,9 @@
                         <p style="margin-top:5px;">Upload Playtech Game List</p>
                         <button class="btn btn-primary" style="margin-left:5px;" (click)="ShowPlaytechUploadModel(playtechGame);">Upload</button>
                     </div>
+                    <div class="offset-4 col-2" style="display:flex;">
+                        <input type="text" class="form-control" (keyup)="LoadGameList()" id="searchBox" placeholder="Search By Game Name"/>
+                    </div>
                 </div>
             </div>
             <br />
@@ -177,18 +180,18 @@
                 <h4 class="heading"><i>Add Game</i></h4>
                 <div class="col-12">
                     <label class="col-3"><b>Game Name</b></label>
-                    <label class="col-3"><input type="text" class="form-control" /></label>
+                    <label class="col-3"><input id="txt_gameName" type="text" class="form-control" /></label>
                 </div>
                 <div class="col-12">
                     <label class="col-3"><b>Game Code</b></label>
-                    <label class="col-3"><input type="text" class="form-control" /></label>
+                    <label class="col-3"><input id="txt_gameCode" type="text" class="form-control" /></label>
                 </div>
                 <div class="col-12">
                     <label class="col-3"><b>Game Type</b></label>
-                    <label class="col-3"><input type="text" class="form-control" /></label>
+                    <label class="col-3"><input id="txt_gameType" type="text" class="form-control" /></label>
                 </div>
                 <div class="col-12 text-center">
-                    <button class="btn btn-success">Save</button>
+                    <button class="btn btn-success" (click)="AddGame();">Save</button>
                 </div>
             </div>
         </div>
