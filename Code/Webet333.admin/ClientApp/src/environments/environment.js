@@ -125,6 +125,7 @@ exports.customer = {
     rebateHistory: exports.environment.apiUrl + 'Game/Rebate/User/History',
     statementHistory: exports.environment.apiUrl + 'payments/transactions',
     restoreHistory: exports.environment.apiUrl + 'Game/restore/list',
+    slotsGameList: exports.environment.apiUrl + 'Game/slotsgame/list',
     ManuallyPromotionExpiery: exports.environment.apiUrl + 'Game/ManuallyPromotionExpiry',
     similarNameList: exports.environment.apiUrl + 'payments/withdraw/similarname/list',
     usernamPrifix: exports.environment.apiUrl + 'Game/GlobalParameters',

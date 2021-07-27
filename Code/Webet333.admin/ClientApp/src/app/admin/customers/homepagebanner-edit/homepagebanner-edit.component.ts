@@ -200,16 +200,10 @@ export class HomepagebannerEditComponent implements OnInit {
     async checkViewPermission() {
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[7].Permissions[0].IsChecked === true) {
-                if (usersPermissions.permissionsList[1].submenu[7].submenu[0].Permissions[0].IsChecked === true) {
-                    return true;
-                }
-                else {
-                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
-                    this.router.navigate(['admin/dashboard']);
-                    return false;
-                }
-            } else {
+            if (usersPermissions.permissionsList[1].submenu[17].Permissions[0].IsChecked === true) {
+                return true;
+            }
+            else {
                 this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
                 return false;
@@ -224,15 +218,8 @@ export class HomepagebannerEditComponent implements OnInit {
     async checkUpdatePermission() {
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[7].Permissions[1].IsChecked === true) {
-                if (usersPermissions.permissionsList[1].submenu[7].submenu[0].Permissions[1].IsChecked === true) {
-                    return true;
-                }
-                else {
-                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
-                    this.router.navigate(['admin/dashboard']);
-                    return false;
-                }
+            if (usersPermissions.permissionsList[1].submenu[17].Permissions[1].IsChecked === true) {
+                return true;
             } else {
                 this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);
@@ -248,15 +235,8 @@ export class HomepagebannerEditComponent implements OnInit {
     async checkAddPermission() {
         var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
         if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
-            if (usersPermissions.permissionsList[1].submenu[7].Permissions[2].IsChecked === true) {
-                if (usersPermissions.permissionsList[1].submenu[7].submenu[0].Permissions[2].IsChecked === true) {
-                    return true;
-                }
-                else {
-                    this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
-                    this.router.navigate(['admin/dashboard']);
-                    return false;
-                }
+            if (usersPermissions.permissionsList[1].submenu[17].Permissions[2].IsChecked === true) {
+                return true;
             } else {
                 this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
                 this.router.navigate(['admin/dashboard']);

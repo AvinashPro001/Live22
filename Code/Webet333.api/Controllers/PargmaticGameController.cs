@@ -101,7 +101,7 @@ namespace Webet333.api.Controllers
             {
                 result.gameList.ForEach(game =>
                 {
-                    game.ImagePath = $"{GameConst.Pragmatic.ImageUrl}game_pic/square/200/{game.gameID}.png";
+                    game.ImagePath = $"{GameConst.Pragmatic.ImageUrl}game_pic/rec/325/{game.gameID}.png";
 
                     gameListModel.Add(new GameListUploadResponse
                     {
@@ -131,7 +131,10 @@ namespace Webet333.api.Controllers
             }
 
             using (var game_help = new GameHelpers(Connection))
-                await game_help.GameListInsert(gameListModel, "Pragmatic Wallet", null);
+            {
+                await game_help.GameListDeleted("Pragmatic Wallet");
+                await game_help.GameListInsert(gameListModel, "Pragmatic Wallet");
+            }
 
             return OkResponse(result);
         }

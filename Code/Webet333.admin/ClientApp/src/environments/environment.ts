@@ -140,6 +140,10 @@ export const customer = {
     statementHistory: environment.apiUrl + 'payments/transactions',
     restoreHistory: environment.apiUrl + 'Game/restore/list',
 
+    slotsGameList: environment.apiUrl + 'Game/slotsgame/list',
+    slotsGameUpdate: environment.apiUrl + 'Game/slotsgame/update',
+    PragmaticGameListUpdate: environment.apiUrl + 'pragmatic/game/list',
+
     ManuallyPromotionExpiery: environment.apiUrl + 'Game/ManuallyPromotionExpiry',
 
     similarNameList: environment.apiUrl + 'payments/withdraw/similarname/list',
