@@ -48,7 +48,7 @@
   "otp_send_success": "OTP telah dikirim untuk mendaftarkan no telefon bimbit, masukkan OTP yang sah untuk mengaktifkan akaun ini.",
   "error_otp": "Sila Masukkan 6 Digit OTP !!",
 
-  "special_char_not_allowed": "Watak Khas tidak dibenarkan.",
+  "special_char_not_allowed": "Aksara Khas tidak dibenarkan dalam Nama Pengguna.",
   "space_not_allowed": "Ruang tidak dibenarkan.",
   "current_pass_not_match": "Kata Laluan Semasa tidak sepadan.",
   "enter_full_name": "Sila masukkan nama penuh anda.",

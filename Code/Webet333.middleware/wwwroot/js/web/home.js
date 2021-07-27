@@ -6,7 +6,8 @@ let SiteData = {
     AdminBankPageData: null,
     DownloadPageData: null,
     AllBankPageData: null,
-    WalletData: null
+    WalletData: null,
+    HomeBannerData: null
 }
 
 //#endregion
@@ -21,6 +22,7 @@ $(window).on('load', function () {
     SetSiteDataVariable()
     SetLastUpdateTime();
     AllPromotionCallAPI();
+    HomeBannerCallAPI();
     GetWalletList();
     CheckGameMaintenance();
     SignalRConnect();
@@ -97,6 +99,7 @@ function SetSiteDataVariable() {
     SiteData.PromotionPageData = data.PromotionPageData;
     SiteData.AllBankPageData = data.AllBankPageData;
     SiteData.WalletData = data.WalletData;
+    SiteData.HomeBannerData = data.HomeBannerData;
 }
 
 //#endregion
@@ -110,6 +113,7 @@ function SetSiteData() {
     SiteData.DownloadPageData = null;
     SiteData.AllBankPageData = null;
     SiteData.WalletData = null;
+    SiteData.HomeBannerData = null;
     SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
 }
 
@@ -152,7 +156,7 @@ function SetBackgroudImagePath(ClassName, value) {
 
 //#region Promotion Slider Slick JS
 
-function PromotionSliderJsFunction() {
+function HomepageBannerSliderJsFunction() {
     $('.slick-carousel').slick({
         arrows: true,
         centerPadding: "0px",
@@ -167,18 +171,21 @@ function PromotionSliderJsFunction() {
 
 //#region Set Main Page Slider Html
 
-function SetPromotionInMainPage() {
-    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+function SetHomePageBanner() {
+    let data = JSON.parse(Decryption(GetSessionStorage("siteData")));
 
-    if (data != null && data.PromotionPageData != null) {
-        var promotion = data.PromotionPageData.filter(x => x.IsMain == true);
-        var promotionData = "";
-        for (i = 0; i < promotion.length; i++)promotionData += '<div><img src="' + promotion[i].banner + '"></div>'
+    if (data != null && data.HomeBannerData != null) {
+
+        let homepageBanner = data.HomeBannerData;
+        let homepageBannerData = "";
+
+        for (i = 0; i < homepageBanner.length; i++) homepageBannerData += '<div><img src="' + homepageBanner[i].bannerWeb + '"></div>'
+
         document.getElementById("slider_promotion_div").innerHTML = "";
-        SetAllValueInElement("slider_promotion_div", promotionData)
-        PromotionSliderJsFunction();
-    }
+        SetAllValueInElement("slider_promotion_div", homepageBannerData)
 
+        HomepageBannerSliderJsFunction();
+    }
 }
 
 //#endregion
@@ -295,6 +302,25 @@ async function AllPromotionCallAPI() {
 
 //#endregion
 
+//#region "ASYNC" Call Home Banner API for Get data
+
+async function HomeBannerCallAPI() {
+
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+
+    if (data.HomeBannerData == null || data.HomeBannerData == undefined) {
+
+        let res = await GetMethodWithoutToken(settingEndPoints.homepageBannerList);
+
+        if (res.status == 200) {
+            SiteData.HomeBannerData = res.response.data;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
+        }
+    }
+}
+
+//#endregion
+
 //#region "ASYNC" Set LastUpdateTime of Sitedate Variable
 
 async function SetLastUpdateTime() {
@@ -312,6 +338,15 @@ async function SetLastUpdateTime() {
         var diff = (Currentdate.getTime() - OldDate.getTime()) / 1000;
         diff /= 60;
         diff = Math.abs(Math.round(diff));
+
+        //#region TODO:: signleR not working in UAT.
+
+        if (environmentName.toUpperCase() == 'DEBUG') {
+            await HomeBannerCallAPI();
+        }
+
+        //#endregion
+
         if (diff > 9) {
             SetSiteData();
             var date = new Date();
@@ -539,6 +574,12 @@ function SignalRConnect() {
         }).catch(function (err) {
             console.log("Not Connected with SignalR Hub");
             return console.error(err.toString());
+        });
+
+        connection.on("HomePageBannerInsertUpdate", function () {
+            SiteData.HomeBannerData = null;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
+            HomeBannerCallAPI();
         });
     }
     catch {

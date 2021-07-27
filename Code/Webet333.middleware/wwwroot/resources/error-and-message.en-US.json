@@ -49,7 +49,7 @@
   "otp_send_success": "OTP had been sent to register mobile no , please enter valid OTP to activate this account.",
   "error_otp": "Please Insert 6 Digit OTP !!",
 
-  "special_char_not_allowed": "Special Characters not allowed.",
+  "special_char_not_allowed": "Special Characters not allowed in Username.",
   "space_not_allowed": "Space not allowed.",
   "current_pass_not_match": "Current Password not matched.",
   "enter_full_name": "Please enter your full name.",
