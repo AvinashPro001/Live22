@@ -299,7 +299,7 @@
   "Insufficient_balance_wallet": "Insufficient balance in wallet.",
   "file_format_error": "File Format not supported only PDF and Image Allow",
   "send_otp": "Resend OTP",
-  "verified_otp": "Verified OTP",
+  "verified_otp": "Submit OTP",
   "error_otp_required": "Please Insert OTP !!",
   "otp_text": "Enter OTP sent to your mobile number",
   "otp_send_success": "OTP had been sent to register mobile no , please enter valid OTP to activate this account.",
