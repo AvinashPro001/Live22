@@ -39,7 +39,7 @@ namespace Webet333.api.Helpers
 
         #region User Management
 
-        public async Task<ProfileResponse> AddUser(string Connection, RegisterRequest request, string Role, string UniqueId)
+        public async Task<ProfileResponse> AddUser(string Connection, RegisterRequest request, string Role,string UniqueId)
         {
             if (new SystemHelpers().IsValidMobile(request.Mobile))
             {
@@ -341,7 +341,7 @@ namespace Webet333.api.Helpers
 
                 await WMGameHelpers.ChangePasswordCallAPI(info.WMGamePrefix + info.UserId, Password);
             }
-            catch (Exception ex) { }
+            catch(Exception ex) { }
         }
 
         #endregion User Game Password Update
