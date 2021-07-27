@@ -74,7 +74,7 @@ body                                        { background-color: #ffffff; padding
 .game-tab-panel.nav-pills > li.active > a:focus, 
 .game-tab-panel.nav-pills > li.active > a:hover { background-color: transparent; }
 .game-tab-panel                             { display: flex; justify-content: space-between; background: #000; }
-.game-tab-panel li                          { background: #2a2a2a; width: calc(100% / 4); text-align: center;position: relative; }
+.game-tab-panel li                          { background: #2a2a2a; width: calc(100% / 3); text-align: center;position: relative; }
 .game-tab-panel li:before                   { content: '\f0de'; display: block; left: 50%; transform: translateX(-50%); width: 0; height: 0px; 
                                             position: absolute; bottom: 10px; font-family: fontAwesome; font-weight: 400; }
 .game-tab-panel li.active:before,
