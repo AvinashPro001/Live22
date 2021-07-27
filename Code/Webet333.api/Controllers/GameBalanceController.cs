@@ -40,7 +40,6 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.GameBalance.MainBalance)]
         public async Task<IActionResult> MainBalance([FromBody] UserBalanceRequest request)
         {
-
             var Role = GetUserRole(User);
 
             if (Role == RoleConst.Users)
@@ -52,18 +51,17 @@ namespace Webet333.api.Controllers
                 if (string.IsNullOrEmpty(request.Id))
                     return BadResponse("error_invalid_modelstate");
 
-
             if (request.Id != null)
             {
                 using (var gamehelper = new GameBalanceHelpers(Connection))
                 {
                     var Balance = await gamehelper.MainBalance(request.Id);
 
-                    return OkResponse(new { balance = Balance.amount});
+                    return OkResponse(new { balance = Balance.amount });
                 }
             }
             string response = null;
-            return OkResponse(new { balance = response});
+            return OkResponse(new { balance = response });
         }
 
         #endregion Main balance

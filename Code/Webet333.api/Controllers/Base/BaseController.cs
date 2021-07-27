@@ -112,7 +112,13 @@ namespace Webet333.api.Controllers.Base
 
         protected async Task CheckUserRole()
         {
-            var role = GetUserRole(User);
+            string role = GetUserRole(User);
+            if (role != RoleConst.Admin) BadResponse("forbid_error_access");
+        }
+
+        protected void IsAdmin()
+        {
+            string role = GetUserRole(User);
             if (role != RoleConst.Admin) BadResponse("forbid_error_access");
         }
 
