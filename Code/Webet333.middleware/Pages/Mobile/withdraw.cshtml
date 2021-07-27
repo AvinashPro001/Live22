@@ -165,7 +165,7 @@
                         <li class="mar-btm-fifteen" id="displayAccountNumber">
                             <label class="fleft"><p class="big no-mar lang" key="withdrawal_account_number">Account Number</p></label>
                             <label class="fright bank-icon bank-name mendatory">
-                                <input id="txt_withdrawalAccountNumber" name="txt_withdrawalAccountNumber" type="number" pattern="\d*" style="font-size:10px;" class="reg-form" placeholder="Enter Account Number">
+                                <input id="txt_withdrawalAccountNumber" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  name="txt_withdrawalAccountNumber" type="number" pattern="\d*" style="font-size:10px;" class="reg-form" placeholder="Enter Account Number">
                                 <p class="star">*</p>
                             </label>
                         </li>
@@ -176,7 +176,7 @@
                         <li class="mar-btm-fifteen">
                             <label class="fleft"><p class="big lang" key="withdrawal_amount">Amount:</p></label>
                             <label class="fright card-number bank-name mendatory">
-                                <input id="txt_withdrawalAmount" name="txt_withdrawalAmount" type="number" pattern="\d*" class="reg-form" style="font-size:10px;" placeholder="Min/Max Limit: 10.00/ 30,000.00">
+                                <input id="txt_withdrawalAmount" name="txt_withdrawalAmount" oninput="validity.valid||(value='');" min="0" type="number" pattern="\d*" class="reg-form" style="font-size:10px;" step=".01" placeholder="Min/Max Limit: 10.00/ 30,000.00">
                                 <p class="star">*</p>
                             </label>
                         </li>

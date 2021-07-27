@@ -127,11 +127,14 @@ namespace Webet333.api.Controllers
                         ImagePath1 = game.ImagePath,
                         ImagePath2 = $"{GameConst.Pragmatic.ImageUrl}game_pic/square/200/{game.gameID}.png"
                     });
+
                 });
             }
 
+
             using (var game_help = new GameHelpers(Connection))
                 await game_help.GameListInsert(gameListModel, "Pragmatic Wallet", null);
+
 
             return OkResponse(result);
         }

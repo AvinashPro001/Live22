@@ -373,7 +373,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<TransferRetriveResponse>(Connection))
             {
-                var result = await repository.GetDataAsync(StoredProcConsts.Payments.TransferList, new { request.UserId, request.Keyword, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                var result = await repository.GetDataAsync(StoredProcConsts.Payments.TransferList, new { request.UserId,request.Keyword, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
                 return result.ToList();
             }
         }

@@ -75,7 +75,7 @@ namespace Webet333.api.Helpers
             return apiResult;
         }
 
-        #endregion Call Joker Game List API
+        #endregion Call Joker Register API
 
         #region Register Joker Game in DB
 
