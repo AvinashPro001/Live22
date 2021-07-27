@@ -279,7 +279,7 @@ namespace Webet333.api.Helpers
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
-                var result = await repository.GetDataAsync(StoredProcConsts.Promotions.SelectWebPromotion, new { LanguageCode});
+                var result = await repository.GetDataAsync(StoredProcConsts.Promotions.SelectWebPromotion, new { LanguageCode });
                 List<dynamic> promotions = result.ToList();
 
                 promotions.ForEach(promotion =>
@@ -328,12 +328,11 @@ namespace Webet333.api.Helpers
             }
         }
 
-
         public async Task<List<PromotionApplySelectResponse>> PromotionApplySelect(GlobalGetWithPaginationRequest request)
         {
             using (var repository = new DapperRepository<PromotionApplySelectResponse>(Connection))
             {
-                var result= await repository.GetDataAsync(StoredProcConsts.Promotions.PromotionApplyList, new { request.UserId, request.FromDate, request.ToDate, request.PageNo,request.PageSize });
+                var result = await repository.GetDataAsync(StoredProcConsts.Promotions.PromotionApplyList, new { request.UserId, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
                 return result.ToList();
             }
         }

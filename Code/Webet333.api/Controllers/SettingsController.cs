@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Filters;
@@ -19,12 +20,17 @@ namespace Webet333.api.Controllers
     [Route(ActionsConst.ApiVersion)]
     public class SettingsController : BaseController
     {
+        #region Variable & Constructor
+
         private IHubContext<SignalRHub> _hubContext;
+
         public SettingsController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, IHubContext<SignalRHub> hubContext) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
             _hubContext = hubContext;
         }
+
+        #endregion Variable & Constructor
 
         #region Retrieve list of Banks
 
