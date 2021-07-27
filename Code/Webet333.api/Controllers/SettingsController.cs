@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Filters;
@@ -19,12 +20,17 @@ namespace Webet333.api.Controllers
     [Route(ActionsConst.ApiVersion)]
     public class SettingsController : BaseController
     {
+        #region Variable & Constructor
+
         private IHubContext<SignalRHub> _hubContext;
+
         public SettingsController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, IHubContext<SignalRHub> hubContext) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
             _hubContext = hubContext;
         }
+
+        #endregion Variable & Constructor
 
         #region Retrieve list of Banks
 
@@ -431,5 +437,438 @@ namespace Webet333.api.Controllers
         #endregion Contact Type Details API's
 
         #endregion Contact Management
+
+        #region 6. HomePage Banner (Add, Update, Update Status, Delete, Retrieve List)
+
+        #region 6.1 HomePage Banner Insert
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerInsert)]
+        public async Task<IActionResult> HomePageBannerInsert([FromBody] HomePageBannerAddRequest request)
+        {
+            if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            IsAdmin();
+
+            request.AdminId = GetUserId(User);
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                var result = await Settings_Helpers.HomePageBannerInsertAsync(request);
+
+                await _hubContext.Clients.All.SendAsync("HomePageBannerInsertUpdate");
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion 6.1 HomePage Banner Insert
+
+        #region 6.2 HomePage Banner Image Insert
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerImage)]
+        [Filters.RequestSizeLimit(valueCountLimit: 6)]
+        public async Task<IActionResult> HomePageBannerImage(
+            [FromBody] HomePageBannerImageRequest request,
+            [FromServices] IUploadManager uploadManager,
+            [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            IsAdmin();
+
+            HomePageBannerImagePersist temp = new HomePageBannerImagePersist();
+            temp.Id = Guid.Parse(request.Id);
+            request.AdminId = GetUserId(User);
+
+            temp.BannerIdEnglish = Guid.Parse(request.BannerIdEnglish);
+            temp.BannerIdChinese = Guid.Parse(request.BannerIdChinese);
+            temp.BannerIdMalay = Guid.Parse(request.BannerIdMalay);
+
+            temp.ExtensionWebEnglish = "." + request.BannerWebEnglish.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerWebEnglish = request.BannerWebEnglish.Split("base64,")[1];
+
+            temp.ExtensionMobileEnglish = "." + request.BannerMobileEnglish.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerMobileEnglish = request.BannerMobileEnglish.Split("base64,")[1];
+
+            temp.ExtensionWebChinese = "." + request.BannerWebChinese.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerWebChinese = request.BannerWebChinese.Split("base64,")[1];
+
+            temp.ExtensionMobileChinese = "." + request.BannerMobileChinese.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerMobileChinese = request.BannerMobileChinese.Split("base64,")[1];
+
+            temp.ExtensionWebMalay = "." + request.BannerWebMalay.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerWebMalay = request.BannerWebMalay.Split("base64,")[1];
+
+            temp.ExtensionMobileMalay = "." + request.BannerMobileMalay.Split("base64,")[0].Split("/")[1].Replace(";", "");
+            request.BannerMobileMalay = request.BannerMobileMalay.Split("base64,")[1];
+
+            using (var Generic_Helpers = new GenericHelpers(Connection))
+            {
+                Generic_Helpers.GetImageWithExtension(
+                    uploadManager,
+                    request.BannerWebChinese,
+                    BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
+                    request.BannerIdChinese.ToString(),
+                    temp.ExtensionWebChinese);
+                Generic_Helpers.GetImageWithExtension(
+                    uploadManager,
+                    request.BannerMobileChinese,
+                    BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
+                    request.BannerIdChinese.ToString(),
+                    temp.ExtensionMobileChinese);
+
+                Generic_Helpers.GetImageWithExtension(
+                    uploadManager,
+                    request.BannerWebEnglish,
+                    BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
+                    request.BannerIdEnglish.ToString(),
+                    temp.ExtensionWebEnglish);
+                Generic_Helpers.GetImageWithExtension(
+                    uploadManager,
+                    request.BannerMobileEnglish,
+                    BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
+                    request.BannerIdEnglish.ToString(),
+                    temp.ExtensionMobileEnglish);
+
+                Generic_Helpers.GetImageWithExtension(
+                    uploadManager,
+                    request.BannerWebMalay,
+                    BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
+                    request.BannerIdMalay.ToString(),
+                    temp.ExtensionWebMalay);
+                Generic_Helpers.GetImageWithExtension(
+                    uploadManager,
+                    request.BannerMobileMalay,
+                    BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
+                    request.BannerIdMalay.ToString(),
+                    temp.ExtensionMobileMalay);
+            }
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                await Settings_Helpers.HomePageBannerImageAsync(temp);
+            }
+
+            return OkResponse();
+        }
+
+        #endregion 6.2 HomePage Banner Image Insert
+
+        #region 6.3 HomePage Banner Update
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerUpdate)]
+        public async Task<IActionResult> HomePageBannerUpdate([FromBody] HomePageBannerUpdateRequest request)
+        {
+            if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            IsAdmin();
+
+            request.AdminId = GetUserId(User);
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                var result = await Settings_Helpers.HomePageBannerUpdateAsync(request);
+
+                await _hubContext.Clients.All.SendAsync("HomePageBannerInsertUpdate");
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion 6.3 HomePage Banner Update
+
+        #region 6.4 HomePage Banner Image Update
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerImageUpdate)]
+        [Filters.RequestSizeLimit(valueCountLimit: 6)]
+        public async Task<IActionResult> HomePageBannerImageUpdate(
+            [FromBody] HomePageBannerImageUpdateRequest request,
+            [FromServices] IUploadManager uploadManager,
+            [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            IsAdmin();
+
+            HomePageBannerImagePersist temp = new HomePageBannerImagePersist();
+            temp.BannerIdChinese = Guid.Parse(request.BannerIdChinese);
+            temp.BannerIdEnglish = Guid.Parse(request.BannerIdEnglish);
+            temp.BannerIdMalay = Guid.Parse(request.BannerIdMalay);
+
+            using (var generic_help = new GenericHelpers(Connection))
+            {
+                if (!string.IsNullOrWhiteSpace(request.BannerWebEnglish))
+                {
+                    temp.ExtensionWebEnglish = "." + request.BannerWebEnglish.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerWebEnglish = request.BannerWebEnglish.Split("base64,")[1];
+
+                    generic_help.DeleteImage(
+                        uploadManager,
+                        request.BannerIdEnglish.ToString(),
+                        BaseUrlConfigsOptions.Value.HomePageBannerWebleImage);
+
+                    generic_help.GetImageWithExtension(
+                        uploadManager,
+                        request.BannerWebEnglish,
+                        BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
+                        request.BannerIdEnglish.ToString(),
+                        temp.ExtensionWebEnglish);
+                }
+                if (!string.IsNullOrWhiteSpace(request.BannerMobileEnglish))
+                {
+                    temp.ExtensionMobileEnglish = "." + request.BannerMobileEnglish.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerMobileEnglish = request.BannerMobileEnglish.Split("base64,")[1];
+
+                    generic_help.DeleteImage(
+                        uploadManager,
+                        request.BannerIdEnglish.ToString(),
+                        BaseUrlConfigsOptions.Value.HomePageBannerMobileImage);
+
+                    generic_help.GetImageWithExtension(
+                        uploadManager,
+                        request.BannerMobileEnglish,
+                        BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
+                        request.BannerIdEnglish.ToString(),
+                        temp.ExtensionMobileEnglish);
+                }
+
+                if (!string.IsNullOrWhiteSpace(request.BannerWebMalay))
+                {
+                    temp.ExtensionWebMalay = "." + request.BannerWebMalay.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerWebMalay = request.BannerWebMalay.Split("base64,")[1];
+
+                    generic_help.DeleteImage(
+                        uploadManager,
+                        request.BannerIdMalay.ToString(),
+                        BaseUrlConfigsOptions.Value.HomePageBannerWebleImage);
+
+                    generic_help.GetImageWithExtension(
+                        uploadManager,
+                        request.BannerWebMalay,
+                        BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
+                        request.BannerIdMalay.ToString(),
+                        temp.ExtensionWebMalay);
+                }
+                if (!string.IsNullOrWhiteSpace(request.BannerMobileMalay))
+                {
+                    temp.ExtensionMobileMalay = "." + request.BannerMobileMalay.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerMobileMalay = request.BannerMobileMalay.Split("base64,")[1];
+
+                    generic_help.DeleteImage(
+                        uploadManager,
+                        request.BannerIdMalay.ToString(),
+                        BaseUrlConfigsOptions.Value.HomePageBannerMobileImage);
+
+                    generic_help.GetImageWithExtension(
+                        uploadManager,
+                        request.BannerMobileMalay,
+                        BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
+                        request.BannerIdMalay.ToString(),
+                        temp.ExtensionMobileMalay);
+                }
+
+                if (!string.IsNullOrWhiteSpace(request.BannerWebChinese))
+                {
+                    temp.ExtensionWebChinese = "." + request.BannerWebChinese.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerWebChinese = request.BannerWebChinese.Split("base64,")[1];
+
+                    generic_help.DeleteImage(
+                        uploadManager,
+                        request.BannerIdChinese.ToString(),
+                        BaseUrlConfigsOptions.Value.HomePageBannerWebleImage);
+
+                    generic_help.GetImageWithExtension(
+                        uploadManager,
+                        request.BannerWebChinese,
+                        BaseUrlConfigsOptions.Value.HomePageBannerWebleImage,
+                        request.BannerIdChinese.ToString(),
+                        temp.ExtensionWebChinese);
+                }
+                if (!string.IsNullOrWhiteSpace(request.BannerMobileChinese))
+                {
+                    temp.ExtensionMobileChinese = "." + request.BannerMobileChinese.Split("base64,")[0].Split("/")[1].Replace(";", "");
+                    request.BannerMobileChinese = request.BannerMobileChinese.Split("base64,")[1];
+
+                    generic_help.DeleteImage(
+                        uploadManager,
+                        request.BannerIdChinese.ToString(),
+                        BaseUrlConfigsOptions.Value.HomePageBannerMobileImage);
+
+                    generic_help.GetImageWithExtension(
+                        uploadManager,
+                        request.BannerMobileChinese,
+                        BaseUrlConfigsOptions.Value.HomePageBannerMobileImage,
+                        request.BannerIdChinese.ToString(),
+                        temp.ExtensionMobileChinese);
+                }
+            }
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                await Settings_Helpers.HomePageBannerImageAsync(temp);
+            }
+
+            return OkResponse();
+        }
+
+        #endregion 6.4 HomePage Banner Image Update
+
+        #region 6.5 HomePage Banner Delete
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerDelete)]
+        public async Task<IActionResult> HomePageBannerDelete([FromBody] GetByIdRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            IsAdmin();
+
+            string adminId = GetUserId(User).ToString();
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                await Settings_Helpers.HomePageBannerDeleteAsync(Guid.Parse(request.Id), adminId);
+
+                await _hubContext.Clients.All.SendAsync("HomePageBannerInsertUpdate");
+
+                return OkResponse();
+            }
+        }
+
+        #endregion 6.5 HomePage Banner Delete
+
+        #region 6.6 HomePage Banner Status Active
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerUpdateStatus)]
+        public async Task<IActionResult> HomePageBannerUpdateStatus([FromBody] UpdateStatusWithAdminIdRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            IsAdmin();
+
+            request.AdminId = GetUserId(User);
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                await Settings_Helpers.HomePageBannerUpdateStatusAsync(request);
+
+                await _hubContext.Clients.All.SendAsync("HomePageBannerInsertUpdate");
+
+                return OkResponse();
+            }
+        }
+
+        #endregion 6.6 HomePage Banner Status Active
+
+        #region 6.7 HomePage Banner Select By User
+
+        [HttpGet(ActionsConst.Settings.HomePageBannerSelectByUser)]
+        public async Task<IActionResult> HomePageBannerSelectByUser([FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            HomePageBannerRetriveRequest request = new HomePageBannerRetriveRequest
+            {
+                isUser = true
+            };
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                var result = await Settings_Helpers.HomePageBannerSelectUserAsync(
+                    BaseUrlConfigsOptions.Value,
+                    Language.Id.ToString(),
+                    request);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion 6.7 HomePage Banner Select By User
+
+        #region 6.8 HomePage Banner Select By Admin
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerSelectByAdmin)]
+        public async Task<IActionResult> HomePageBannerSelectByAdmin(
+            [FromBody] HomePageBannerRetriveByAdminRequest request,
+            [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            IsAdmin();
+
+            request.isUser = false;
+            if (request.PageNo == null) request.PageNo = 0;
+            if (request.PageSize == null || request.PageSize == 0) request.PageSize = 10;
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                var result = await Settings_Helpers.HomePageBannerSelectByAdminAsync(
+                    BaseUrlConfigsOptions.Value,
+                    request.LanguageId,
+                    request);
+
+                if (result.Any())
+                {
+                    var total = result.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? result.Count : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = result,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 10,
+                        offset = result.FirstOrDefault().OffSet,
+                    });
+                }
+
+                return OkResponse(new
+                {
+                    result = result,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
+            }
+        }
+
+        #endregion 6.8 HomePage Banner Select By Admin
+
+        #region 6.9 HomePage Banner Select By Admin By Id
+
+        [Authorize]
+        [HttpPost(ActionsConst.Settings.HomePageBannerSelectById)]
+        public async Task<IActionResult> HomePageBannerSelectById(
+            [FromBody] GetByIdRequestWithRequired request,
+            [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            IsAdmin();
+
+            using (var Settings_Helpers = new SettingsHelpers(Connection))
+            {
+                var result = await Settings_Helpers.HomePageBannerSelectByIdAsync(request);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion 6.9 HomePage Banner Select By Admin By Id
+
+        #endregion 6. HomePage Banner (Add, Update, Update Status, Delete, Retrieve List)
     }
 }

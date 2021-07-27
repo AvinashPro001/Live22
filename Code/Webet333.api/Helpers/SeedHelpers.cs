@@ -16,9 +16,9 @@ namespace Webet333.api.Helpers
         private BaseUrlConfigs BaseUrlConfigs { get; set; }
 
         private string Connection = string.Empty;
-        
+
         private readonly string AdminEmail = "CustomerService2";
-        
+
         private readonly string AdminName = "Customer Service 2";
 
         public SeedHelpers(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
