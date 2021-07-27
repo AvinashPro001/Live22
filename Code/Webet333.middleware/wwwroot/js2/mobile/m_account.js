@@ -185,10 +185,26 @@ async function ChangePassword(i) {
             confirmPassword: $("#txt_confirmPassword").val()
         };
 
+        if (model.currentPassword === "" || model.currentPassword === null || model.currentPassword === undefined) {
+            LoaderHide();
+            return ShowError("Current " + ChangeErroMessage("password_required_error"));
+        }
+
+        if (model.password === "" || model.password === null || model.password === undefined) {
+            LoaderHide();
+            return ShowError("New " + ChangeErroMessage("password_required_error"));
+        }
+
+        if (model.confirmPassword === "" || model.confirmPassword === null || model.confirmPassword === undefined) {
+            LoaderHide();
+            return ShowError("Confirm " + ChangeErroMessage("password_required_error"));
+        }
+
         if (model.password.length < 6) {
             LoaderHide();
             return ShowError(ChangeErroMessage("pass_length_error"));
         }
+
 
         if (model.password === "") {
             LoaderHide();
