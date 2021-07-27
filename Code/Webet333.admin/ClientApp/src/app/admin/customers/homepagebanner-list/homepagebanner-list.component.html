@@ -43,7 +43,7 @@
                                     type="button"
                                     data-toggle="modal"
                                     title="Edit"
-                                    (click)='navigateEdit(homepageBannerData[rowIndex])'>
+                                    (click)='navigateEdit(row)'>
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
                         </label>
@@ -52,7 +52,7 @@
                                     data-id="homepageBannerData[rowIndex].id"
                                     class="mb-1 btn btn-danger"
                                     type="button"
-                                    (click)='openRejectConfirmationDialog(homepageBannerData[rowIndex].id)'
+                                    (click)='openRejectConfirmationDialog(row)'
                                     title="Reject"
                                     style="margin-left:5px">
                                 <i class="fa fa-ban" aria-hidden="true"></i>
@@ -60,9 +60,10 @@
                         </label>
                         <label class="col-md-3">
                             <ui-switch [(ngModel)]="homepageBannerData[rowIndex].active"
-                                       (change)="HomepageBannerActive(homepageBannerData[rowIndex].id,$event)"
+                                       (change)="HomepageBannerActive(row.id,$event)"
                                        data-toggle="modal"
-                                       data-id="customerData[rowIndex].id"></ui-switch>
+                                       data-id="customerData[rowIndex].id">
+                            </ui-switch>
                         </label>
                     </div>
                 </ng-template>
