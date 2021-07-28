@@ -205,22 +205,12 @@ async function ChangePassword(i) {
             return ShowError(ChangeErroMessage("pass_length_error"));
         }
 
-
-        if (model.password === "") {
-            LoaderHide();
-            return ShowError(ChangeErroMessage("password_required_error"));
-        }
-        if (model.confirmPassword === "") {
-            LoaderHide();
-            return ShowError(ChangeErroMessage("confirm_password_required_error"));
-        }
-
         if (localStorage.getItem("currentUserName") === model.password) {
             LoaderHide();
             return ShowError(ChangeErroMessage("username_pass_diff_error"));
         }
 
-        var userDetail = JSON.parse(Decryption(GetSessionStorage("UserDetails")))
+        var userDetail = JSON.parse(dec(sessionStorage.getItem('UserDetails')))
         var username = userDetail.username
 
         if (username === model.password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
