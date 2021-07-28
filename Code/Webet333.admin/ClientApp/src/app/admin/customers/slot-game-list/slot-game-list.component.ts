@@ -236,7 +236,7 @@ export class SlotGameListComponent implements OnInit {
                 this.base64(files);
             }
         }
-        
+
     }
 
     base64(file) {
@@ -245,10 +245,10 @@ export class SlotGameListComponent implements OnInit {
             this.urls = e.target.result;
         }
         reader.readAsDataURL(file);
-        
+
     }
 
-  
+
     //#endregion
 
     fileUpload() {

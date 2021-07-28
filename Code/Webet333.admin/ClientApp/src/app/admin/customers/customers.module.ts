@@ -94,7 +94,6 @@ import { SboGetLeagueLimitComponent } from './sbo-get-league-limit/sbo-get-leagu
 import { HomepagebannerListComponent } from './homepagebanner-list/homepagebanner-list.component';
 import { HomepagebannerAddComponent } from './homepagebanner-add/homepagebanner-add.component';
 import { HomepagebannerEditComponent } from './homepagebanner-edit/homepagebanner-edit.component';
-
 import { SlotGameListComponent } from './slot-game-list/slot-game-list.component';
 
 const routes: Routes = [
@@ -175,7 +174,7 @@ const routes: Routes = [
     { path: 'sbo-get-league-betLimit', component: SboGetLeagueLimitComponent },
     { path: 'homepage-banner-list', component: HomepagebannerListComponent },
     { path: 'homepage-banner-add', component: HomepagebannerAddComponent },
-    { path: 'homepage-banner-edit', component: HomepagebannerEditComponent }
+    { path: 'homepage-banner-edit', component: HomepagebannerEditComponent },
     { path: 'slots-game-list', component: SlotGameListComponent }
 ];
 
