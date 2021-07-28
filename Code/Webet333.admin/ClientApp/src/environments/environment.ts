@@ -375,6 +375,8 @@ export const customer = {
     homePageBannerImage: environment.apiUrl + 'settings/homePage-banner/image',
     homePageBannerImageUpdate: environment.apiUrl + 'settings/homePage-banner/image/update',
     homePageBannerSelectById: environment.apiUrl + 'settings/homePage-banner/select/id',
+
+    slotsGameInsert: environment.apiUrl + 'Game/slotsgame/insert'
 }
 
 export const playtech = {

@@ -17,7 +17,6 @@ export class HomepagebannerListComponent implements OnInit {
 
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('status') status: TemplateRef<any>;
-    @ViewChild('action') action: TemplateRef<any>;
     rows = [];
     columns = [];
     homepageBannerData: any;
@@ -123,11 +122,11 @@ export class HomepagebannerListComponent implements OnInit {
 
     //#region Delete
 
-    async openRejectConfirmationDialog(id) {
-        if (await this.checkUpdatePermission()) this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to Delete this home page banner ?')
+    async openRejectConfirmationDialog(row) {
+        if (await this.checkUpdatePermission()) this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to Delete this ' + row.Title + ' home page banner ?')
             .then((confirmed) => {
                 this.final = confirmed
-                this.HomepageBannerDelete(id)
+                this.HomepageBannerDelete(row.id)
             });
     }
 
@@ -161,6 +160,15 @@ export class HomepagebannerListComponent implements OnInit {
                 this.toasterService.pop('error', 'Error', error.error.message);
             });
         }
+    }
+
+    //#endregion
+
+    //#region Set next page data
+
+    setNextPage(pageInfo) {
+        this.pageNumber = pageInfo.offset;
+        this.setPageData();
     }
 
     //#endregion
