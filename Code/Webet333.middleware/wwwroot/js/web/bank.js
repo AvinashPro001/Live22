@@ -828,6 +828,7 @@ async function TransferHistory(FromDate = null, ToDate = null, PageSize = null, 
 
         }
         else {
+            $("#tbl_transferHistory_pagination").html("");
             var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
             $("#tbl_transferHistory").find('tbody').html(html);
         }
@@ -861,6 +862,7 @@ async function WithdrawDepositHistory(FromDate = null, ToDate = null, PageSize =
 
         }
         else {
+            $("#tbl_withdrawdepositHistory_pagination").html("");
             var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
             $("#tbl_withdrawdepositHistory").find('tbody').html(html);
         }
@@ -895,6 +897,7 @@ async function PromotionHistory(FromDate = null, ToDate = null, PageSize = null,
 
         }
         else {
+            $("#tbl_promotionHistory_pagination").html("");
             var html = '<tr><td colspan="8">No Transaction yet</td></tr>'
             $("#tbl_promotionHistory").find('tbody').html(html);
         }
@@ -929,6 +932,7 @@ async function RebateHistory(FromDate = null, ToDate = null, PageSize = null, Pa
 
         }
         else {
+            $("#tbl_promotionHistory_pagination").html("");
             var html = '<tr><td colspan="7">No Transaction yet</td></tr>'
             $("#tbl_RebateHistory").find('tbody').html(html);
         }
@@ -962,6 +966,7 @@ async function RewardHistory(FromDate = null, ToDate = null, PageSize = null, Pa
 
         }
         else {
+            $("#tbl_promotionHistory_pagination").html("");
             var html = '<tr><td colspan="4">No Transaction yet</td></tr>'
             $("#tbl_rewardHistory").find('tbody').html(html);
         }
@@ -996,6 +1001,7 @@ async function BettingHistory(FromDate = null, ToDate = null, PageSize = null, P
 
         }
         else {
+            $("#tbl_promotionHistory_pagination").html("");
             var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
             $("#tbl_bettingsummeryHistory").find('tbody').html(html);
         }

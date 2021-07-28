@@ -38,7 +38,7 @@
   "select_from_wallet_error": "请选择从那个钱包",
   "select_to_wallet_error": "请选择钱包。",
   "user_not_login_error": "用户未登入",
-
+  "new_password_check_error": "当前密码无效",
 
   "pending_sports_deposit_error": "体育投注仍有未结算，请稍等至所有投注已结算",
   "game_in_maintenance_new_promotion": "您在维护游戏中有余额，不能申请新的促销。请稍后再试。",
