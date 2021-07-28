@@ -46,8 +46,8 @@ export class SlotGameListComponent implements OnInit {
     filenames: any;
     urls: any;
 
-    ngOnInit() {
-        if (this.checkViewPermission) {
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
             this.LoadGameList();
             this.coloumSet();
         }
@@ -111,8 +111,8 @@ export class SlotGameListComponent implements OnInit {
         this.LoadGameList();
     }
 
-    SetIsSlot(id, event) {
-        if (this.checkUpdatePermission) {
+    async SetIsSlot(id, event) {
+        if (await this.checkUpdatePermission()) {
             let data = {
                 id: id,
                 isSlot: event
@@ -125,8 +125,8 @@ export class SlotGameListComponent implements OnInit {
         }
     }
 
-    SetIsArcade(id, event) {
-        if (this.checkUpdatePermission) {
+    async SetIsArcade(id, event) {
+        if (await this.checkUpdatePermission()) {
             let data = {
                 id: id,
                 isArcade: event
@@ -147,8 +147,8 @@ export class SlotGameListComponent implements OnInit {
         });
     }
 
-    SetIsHot(id, event) {
-        if (this.checkUpdatePermission) {
+    async SetIsHot(id, event) {
+        if (await this.checkUpdatePermission()) {
             let data = {
                 id: id,
                 isHot: event
@@ -157,8 +157,8 @@ export class SlotGameListComponent implements OnInit {
         }
     }
 
-    SetIsNew(id, event) {
-        if (this.checkUpdatePermission) {
+    async SetIsNew(id, event) {
+        if (await this.checkUpdatePermission()) {
             let data = {
                 id: id,
                 isNew: event
@@ -167,8 +167,8 @@ export class SlotGameListComponent implements OnInit {
         }
     }
 
-    SetActive(id, event) {
-        if (this.checkUpdatePermission) {
+    async SetActive(id, event) {
+        if (await this.checkUpdatePermission()) {
             let data = {
                 id: id,
                 active: event
@@ -177,8 +177,8 @@ export class SlotGameListComponent implements OnInit {
         }
     }
 
-    SetDelete(id, event) {
-        if (this.checkUpdatePermission) {
+    async SetDelete(id, event) {
+        if (await this.checkUpdatePermission()) {
             let data = {
                 id: id,
                 deleted: true
@@ -206,8 +206,8 @@ export class SlotGameListComponent implements OnInit {
         });
     }
 
-    ShowPlaytechUploadModel(content) {
-        if (this.checkAddPermission) {
+    async ShowPlaytechUploadModel(content) {
+        if (await this.checkAddPermission()) {
             this.modalService.open(content, { windowClass: 'dark-modal', });
             this.displayDIVFile = false;
             this.displayDIVSingal = true;
