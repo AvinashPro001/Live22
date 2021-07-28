@@ -325,5 +325,7 @@
   "no_record_found_statement": "没有找到记录",
 
   "special_not_allowed": "密码中不允许使用特殊字符！",
-  "amount_greater_one_error": "进输入金额多过1"
+  "amount_greater_one_error": "进输入金额多过1",
+
+  "pls_select_date": "请选择日期。"
 }

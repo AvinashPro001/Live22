@@ -1052,8 +1052,13 @@ function GetDateRange() {
     pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");
+    if (fdate == "" || tdate == "") {
+        return ShowError(ChangeErroMessage("pls_select_date"))
+    }
     fromDate = fdate[2] + "-" + fdate[1] + "-" + fdate[0] + " 00:00:00";
     toDate = tdate[2] + "-" + tdate[1] + "-" + tdate[0] + " 23:59:59";
+
+    
     CallFunctionAccordingToTab()
 }
 

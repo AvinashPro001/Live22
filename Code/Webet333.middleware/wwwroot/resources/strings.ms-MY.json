@@ -326,5 +326,7 @@
   "no_record_found_statement": "tiada rekod ditemui",
 
   "special_not_allowed": "Speical Charater tidak dibenarkan di Passsword !!",
-  "amount_greater_one_error": "Sila Masukkan Jumlah lebih daripada 1"
+  "amount_greater_one_error": "Sila Masukkan Jumlah lebih daripada 1",
+ 
+  "pls_select_date": "Sila pilih tarikh"
 }

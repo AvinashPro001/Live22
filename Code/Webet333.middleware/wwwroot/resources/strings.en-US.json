@@ -326,5 +326,7 @@
   "no_record_found_statement": "No Record Found",
 
   "special_not_allowed": "Speical Charater are not allowed in Passsword !!",
-  "amount_greater_one_error": "Please Enter Amount Greater than 1."
+  "amount_greater_one_error": "Please Enter Amount Greater than 1.",
+
+  "pls_select_date" : "Please select date"
 }
