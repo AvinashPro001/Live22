@@ -27,7 +27,7 @@
             var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
             if (resUserData.data.mobilenoConfirmed == false) {
                 LoaderShow();
-                var res = await GetMethodWithReturn(apiEndPoints.SendOTP);
+                var res = await PostMethod(apiEndPoints.SendOTP, {});
                 document.getElementById("txt_otp").value = "";
                 ShowSuccess(ChangeErroMessage("otp_send_success"));
                 LoaderHide();
@@ -50,8 +50,9 @@
                 LoaderHide();
                 return ShowError(ChangeErroMessage("error_otp"));
             }
+            var res;
             try {
-                var res = await PostMethod(apiEndPoints.VerifiedOTP, model);
+                res = await PostMethod(apiEndPoints.VerifiedOTP, model);
             }
             catch {
                 document.getElementById("txt_otp").value = "";
