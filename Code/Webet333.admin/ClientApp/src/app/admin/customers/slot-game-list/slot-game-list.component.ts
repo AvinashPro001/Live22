@@ -1,20 +1,18 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToasterService } from 'angular2-toaster';
-import { debug } from 'console';
 import { ConfirmationDialogService } from '../../../../app/confirmation-dialog/confirmation-dialog.service';
-import { account, customer } from '../../../../environments/environment';
+import { customer } from '../../../../environments/environment';
 import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
-
 
 @Component({
     selector: 'app-slot-game-list',
     templateUrl: './slot-game-list.component.html',
     styleUrls: ['./slot-game-list.component.scss']
 })
+
 export class SlotGameListComponent implements OnInit {
 
     @ViewChild('status') status: TemplateRef<any>;
@@ -49,8 +47,10 @@ export class SlotGameListComponent implements OnInit {
     urls: any;
 
     ngOnInit() {
-        this.LoadGameList();
-        this.coloumSet();
+        if (this.checkViewPermission) {
+            this.LoadGameList();
+            this.coloumSet();
+        }
     }
 
     coloumSet() {
@@ -76,7 +76,6 @@ export class SlotGameListComponent implements OnInit {
             pageSize: this.pageSize
         }
         this.adminService.add<any>(customer.slotsGameList, data).subscribe(async res => {
-
             this.rows = [];
             let i = ((this.pageNumber + 1) * this.pageSize) - this.pageSize;
             this.offset = res.data.offset;
@@ -85,13 +84,8 @@ export class SlotGameListComponent implements OnInit {
             res.data.result.forEach(el => {
 
                 var path = "";
-                if (el.WalletName == "Playtech Slot")
-                    path = this.PlaytechImagePath
-
-                if (el.WalletName == "Pragmatic Play")
-                    path = this.PragmaticImagePath
-
-
+                if (el.WalletName == "Playtech Slot") path = this.PlaytechImagePath
+                if (el.WalletName == "Pragmatic Play") path = this.PragmaticImagePath
 
                 this.rows.push({
                     No: ++i,
@@ -107,9 +101,6 @@ export class SlotGameListComponent implements OnInit {
             });
             this.rows = [...this.rows];
             this.loadingIndicator = false;
-
-
-
         });
     }
 
@@ -121,27 +112,31 @@ export class SlotGameListComponent implements OnInit {
     }
 
     SetIsSlot(id, event) {
-        let data = {
-            id: id,
-            isSlot: event
+        if (this.checkUpdatePermission) {
+            let data = {
+                id: id,
+                isSlot: event
+            }
+            this.adminService.add<any>(customer.slotsGameUpdate, data).subscribe(async res => {
+                this.toasterService.pop('success', 'Success', res.message);
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-        this.adminService.add<any>(customer.slotsGameUpdate, data).subscribe(async res => {
-            this.toasterService.pop('success', 'Success', res.message);
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
 
     SetIsArcade(id, event) {
-        let data = {
-            id: id,
-            isArcade: event
+        if (this.checkUpdatePermission) {
+            let data = {
+                id: id,
+                isArcade: event
+            }
+            this.adminService.add<any>(customer.slotsGameUpdate, data).subscribe(async res => {
+                this.toasterService.pop('success', 'Success', res.message);
+            }, error => {
+                this.toasterService.pop('error', 'Error', error.error.message);
+            });
         }
-        this.adminService.add<any>(customer.slotsGameUpdate, data).subscribe(async res => {
-            this.toasterService.pop('success', 'Success', res.message);
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
     }
 
     CallUpdateAPI(data) {
@@ -153,35 +148,43 @@ export class SlotGameListComponent implements OnInit {
     }
 
     SetIsHot(id, event) {
-        let data = {
-            id: id,
-            isHot: event
+        if (this.checkUpdatePermission) {
+            let data = {
+                id: id,
+                isHot: event
+            }
+            this.CallUpdateAPI(data);
         }
-        this.CallUpdateAPI(data);
     }
 
     SetIsNew(id, event) {
-        let data = {
-            id: id,
-            isNew: event
+        if (this.checkUpdatePermission) {
+            let data = {
+                id: id,
+                isNew: event
+            }
+            this.CallUpdateAPI(data);
         }
-        this.CallUpdateAPI(data);
     }
 
     SetActive(id, event) {
-        let data = {
-            id: id,
-            active: event
+        if (this.checkUpdatePermission) {
+            let data = {
+                id: id,
+                active: event
+            }
+            this.CallUpdateAPI(data);
         }
-        this.CallUpdateAPI(data);
     }
 
     SetDelete(id, event) {
-        let data = {
-            id: id,
-            deleted: true
+        if (this.checkUpdatePermission) {
+            let data = {
+                id: id,
+                deleted: true
+            }
+            this.CallUpdateAPI(data);
         }
-        this.CallUpdateAPI(data);
     }
 
     show(row, content) {
@@ -204,9 +207,11 @@ export class SlotGameListComponent implements OnInit {
     }
 
     ShowPlaytechUploadModel(content) {
-        this.modalService.open(content, { windowClass: 'dark-modal', });
-        this.displayDIVFile = false;
-        this.displayDIVSingal = true;
+        if (this.checkAddPermission) {
+            this.modalService.open(content, { windowClass: 'dark-modal', });
+            this.displayDIVFile = false;
+            this.displayDIVSingal = true;
+        }
     }
 
     ShowHideDiv(event) {
@@ -236,7 +241,6 @@ export class SlotGameListComponent implements OnInit {
                 this.base64(files);
             }
         }
-
     }
 
     base64(file) {
@@ -245,16 +249,14 @@ export class SlotGameListComponent implements OnInit {
             this.urls = e.target.result;
         }
         reader.readAsDataURL(file);
-
     }
-
 
     //#endregion
 
     fileUpload() {
         let data = {
             file: this.urls,
-            id:"PlayTech Wallet"
+            id: "PlayTech Wallet"
         };
         this.adminService.add<any>(customer.PragmaticGameListUpdate, data).subscribe(async res => {
             this.ngOnInit();
@@ -278,4 +280,60 @@ export class SlotGameListComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[18].Permissions[0].IsChecked === true) {
+                return true;
+            }
+            else {
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[18].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        var usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[1].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[1].submenu[18].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }
