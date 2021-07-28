@@ -164,6 +164,15 @@ export class HomepagebannerListComponent implements OnInit {
 
     //#endregion
 
+    //#region Set next page data
+
+    setNextPage(pageInfo) {
+        this.pageNumber = pageInfo.offset;
+        this.setPageData();
+    }
+
+    //#endregion
+
     //#region Check Permission
 
     async checkViewPermission() {

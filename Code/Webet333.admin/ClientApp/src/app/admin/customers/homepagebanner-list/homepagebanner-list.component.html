@@ -28,8 +28,10 @@
                            [rowHeight]="'auto'"
                            [loadingIndicator]="loadingIndicator"
                            [limit]="pageSize"
+                           [externalPaging]="true"
                            [count]="totalRowCount"
-                           [offset]="offset">
+                           [offset]="offset"
+                           (page)="setNextPage($event)">
                 <ng-template #status
                              let-rowIndex="rowIndex"
                              let-row="row"
