@@ -38,7 +38,7 @@
   "select_from_wallet_error": "Sila pilih dari dompet.",
   "select_to_wallet_error": "Sila pilih ke dompet.",
   "user_not_login_error": "Pengguna tidak log in.",
-
+  "new_password_check_error": "Kata laluan semasa tidak sah",
 
   "pending_sports_deposit_error": "Sportsbook anda masih mempunyai pertaruhan yang belum selesai, sila tunggu sehingga semua pertaruhan diselesaikan",
   "game_in_maintenance_new_promotion": "Anda mempunyai baki dalam permainan penyelenggaraan, tidak dapat menggunakan promosi baru. sila cuba kemudian.",
