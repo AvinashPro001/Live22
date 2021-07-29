@@ -328,7 +328,7 @@ async function DoRegister() {
     }
     if (model.username === "") {
         LoaderHide();
-        return ShowError("Username Filed is required.");
+        return ShowError("Username Field is required.");
     }
 
     if (model.password === "") {
