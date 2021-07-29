@@ -226,7 +226,7 @@ namespace Webet333.api.Helpers
 
             var DeserializeAPIResult = JsonConvert.DeserializeObject<GamePlayGameListResponse>(temp);
 
-            var callGetGameInageAPI = CallGetGameInageAPI(DeserializeAPIResult, Language);
+            var callGetGameInageAPI = CallGetGameImageAPI(DeserializeAPIResult, Language);
 
             return callGetGameInageAPI;
         }
@@ -235,13 +235,14 @@ namespace Webet333.api.Helpers
 
         #region Manage Game Image
 
-        private static GamePlayGameListResponse CallGetGameInageAPI(GamePlayGameListResponse GameList, string Language)
+        private static GamePlayGameListResponse CallGetGameImageAPI(GamePlayGameListResponse GameList, string Language)
         {
-            string temp = Language == GamePlayConst.LanguageCode.TraditionalChinese ? GamePlayConst.LanguageCode.SimplifiedChinese : GamePlayConst.LanguageCode.English;
+            //string languageCode = Language == GamePlayConst.LanguageCode.TraditionalChinese ? GamePlayConst.LanguageCode.SimplifiedChinese : GamePlayConst.LanguageCode.English;
+            string languageCode = GamePlayConst.LanguageCode.English;
 
             if (GameList.Games.Any())
             {
-                GameList.Games.ForEach(x => x.ImageURL = string.Format(GamePlayConst.ImageURLWithLanguage, GamePlayConst.ProductName, temp, x.TcgGameCode));
+                GameList.Games.ForEach(x => x.ImageURL = string.Format(GamePlayConst.ImageURLWithLanguage, GamePlayConst.ProductName, languageCode, x.TcgGameCode));
             }
 
             return GameList;
