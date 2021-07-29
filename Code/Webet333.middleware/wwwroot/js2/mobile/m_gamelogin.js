@@ -1124,7 +1124,10 @@ function OpenPragmaticGamePage(code) {
 }
 
 function OpenPlaytechGamePage(code) {
-    window.open("../mobile/Game?gamename=Playtech&gamecode=" + code, "_blank")
+    if (GetLocalStorage('currentUser') !== null) 
+        window.open("../mobile/Game?gamename=Playtech&gamecode=" + code, "_blank")
+    else 
+        alert(ChangeErroMessage("please_loign_error"));
 }
 
 function GenratePlaytechSlotsGameHTML(GameList, SectionId, IsAppend) {
