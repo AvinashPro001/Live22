@@ -200,7 +200,8 @@ async function ChangePassword(i) {
             return ShowError("Confirm " + ChangeErroMessage("password_required_error"));
         }
 
-        if (currentPassword === password) {
+        if (model.currentPassword === model.password) {
+            LoaderHide();
             return ShowError(ChangeErroMessage("new_password_check_error"));
         }
 
