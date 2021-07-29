@@ -1,16 +1,17 @@
 ﻿async function OpenGame(WalletName, IsSlots) {
-    if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
+    if (WalletName != "PlayTech Wallet" && IsSlots != true) if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
     var isMaintenance = data.WalletData.filter(x => x.walletType == WalletName);
     if (isMaintenance[0].isMaintenance) return ShowError(ChangeErroMessage("maintainenance_error"));
     CallGameLoginAPI(WalletName, IsSlots);
     var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
-    if (profile.autoTransfer)
-        AllInWallet(WalletName);
+    if (GetLocalStorage("currentUser") !== null)
+        if (profile.autoTransfer)
+            AllInWallet(WalletName);
 }
 
 function CallGameLoginAPI(WalletName, IsSlots) {
-    if (GetLocalStorage("currentUser") == null) return location.href = "/";
+    if (WalletName != "PlayTech Wallet" && IsSlots != true) if (GetLocalStorage("currentUser") == null) return location.href = "/";
     switch (WalletName) {
         case "918Kiss Wallet": Open918KissGame(); break;
         case "Joker Wallet": OpenJokerGame(); break;
@@ -396,7 +397,10 @@ async function OpenPragmaticGame() {
 
 async function OpenPlaytechGame(IsSlots) {
     if (IsSlots) {
-        window.open("../Web/slots");
+        return window.open("../Web/slots");
+    }
+    else {
+        if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
     }
     PlaytechBrokenStatusInterval();
     let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
