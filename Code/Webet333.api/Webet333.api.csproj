@@ -6,7 +6,6 @@
 		<RootNamespace>Webet333.api</RootNamespace>
 		<Configurations>Debug;Release;Stag</Configurations>
 		<UserSecretsId>edc22495-c487-4140-aab9-c53a6fd8c767</UserSecretsId>
-		<PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
