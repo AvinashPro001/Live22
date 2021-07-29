@@ -95,7 +95,7 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Pragmatic.GameList)]
         public async Task<IActionResult> PragmaticGameList([FromBody] GameLoginRequest request)
         {
-            await ValidateUser();
+            await CheckUserRole();
 
             string adminId = GetUserId(User).ToString();
 
