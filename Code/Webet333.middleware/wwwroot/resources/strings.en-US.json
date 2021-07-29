@@ -229,7 +229,7 @@
   "username_required_error": "Username Filed is required.",
   "username_length_error": "Username Length too short.",
   "password_required_error": "Password Field is required.",
-  "confirm_password_required_error": "Confirm Password Filed is required.",
+  "confirm_password_required_error": "Confirm Password Field is required.",
   "new_password_check_error": "It's your previous password, Please enter new password",
   "name_required_error": "Name Filed is required.",
   "username_pass_diff_error": "Password and username must be different.",

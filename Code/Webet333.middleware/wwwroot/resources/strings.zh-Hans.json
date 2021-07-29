@@ -230,7 +230,7 @@
   "username_required_error": "用户名为必填项",
   "username_length_error": "用户名太短",
   "password_required_error": "密码字段为必填项",
-  "confirm_password_required_error": "确认密码为必填项",
+  "confirm_password_required_error": "确认密码 字段为必填项",
   "new_password_check_error": "这是您以前的密码，请输入新密码",
   "name_required_error": "名称为必填项",
   "username_pass_diff_error": "密码和用户名一定不相同",
