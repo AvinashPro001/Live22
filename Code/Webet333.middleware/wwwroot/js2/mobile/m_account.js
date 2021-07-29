@@ -333,7 +333,7 @@ async function DoRegister() {
 
     if (model.password === "") {
         LoaderHide();
-        return ShowError("Password Filed is required.");
+        return ShowError("Password Field is required.");
     }
     if (model.confirmPassword === "") {
         LoaderHide();
