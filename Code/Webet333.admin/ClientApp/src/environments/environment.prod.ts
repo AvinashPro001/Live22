@@ -138,6 +138,7 @@ export const customer = {
     slotsGameList: environment.apiUrl + 'Game/slotsgame/list',
     slotsGameUpdate: environment.apiUrl + 'Game/slotsgame/update',
     PragmaticGameListUpdate: environment.apiUrl + 'pragmatic/game/list',
+    GameplayGameListUpdate: environment.apiUrl + 'gameplay/get/slot-gamelist',
     GameListFileUpload: environment.apiUrl + 'Game/list/upload',
 
     ManuallyPromotionExpiery: environment.apiUrl + 'Game/ManuallyPromotionExpiry',
