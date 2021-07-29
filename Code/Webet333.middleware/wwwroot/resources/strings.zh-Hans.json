@@ -225,7 +225,7 @@
 
   "mobile_no_required_error": "手机号码为必填项",
   "sms_error": "SMS 无法发送!!请联系客服",
-  "mobile_length_error": "请输入电话号码至少10数字",
+  "mobile_length_error": "请输入有效的手机号码",
   "pass_length_error": "密码长度至少6位数字。",
   "username_required_error": "用户名为必填项",
   "username_length_error": "用户名太短",

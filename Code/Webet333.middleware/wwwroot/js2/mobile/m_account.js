@@ -778,3 +778,17 @@ function OnPasswordType(PasswordTextboxId, UsernameTextboxId) {
     var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     regex.test(password) ? ($("#pass-alpha").addClass("green-color")) : ($("#pass-alpha").removeClass("green-color"))
 }
+
+//#region MobileValidation
+
+function MobileValidation(TextFieldId, ErrorShowId) {
+    var mobile = $('#' + TextFieldId).val();
+    if (mobile.length < 10 || mobile.length > 11) {
+        $("#" + ErrorShowId).text(ChangeErroMessage("mobile_length_error"));
+    }
+    else {
+        $("#" + ErrorShowId).text("");
+    }
+}
+
+//#endregion

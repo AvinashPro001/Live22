@@ -79,7 +79,8 @@
                     <div class="form-group register-password-icon"><input type="password" class="form-control" tabindex="3" aria-describedby="emailHelp" id="m_regsiter_confirmpassword" placeholder="Confirm Password" data-translate="confirm_password_placeholder" oninput="checkPasswordMatch();" required autocomplete="new-password"></div>
                     <div class="form-group"><label style="color:#ff0000;font-weight:bold" class="registrationFormAlert" id="divCheckPasswordMatch"> </label></div>
                     <div class="form-group register-mobile-icon">
-                        <input type="number" pattern="\d*" class="form-control" id="m_regsiter_mobile" placeholder="012-123456789" aria-describedby="emailHelp">
+                        <input type="number" pattern="\d*" class="form-control" id="m_regsiter_mobile" onkeyup="MobileValidation('m_regsiter_mobile','reg_mob_err')" placeholder="012-123456789" aria-describedby="emailHelp">
+                        <label style="color:#ff0000;font-weight:bold; font-size:12px;" id="reg_mob_err"></label>
                     </div>
                     <p class="note no-mar mar-btm-ten"><span class="lang" key="contact_instruction"></span></p>
                     <div class="form-group register-name-icon">
