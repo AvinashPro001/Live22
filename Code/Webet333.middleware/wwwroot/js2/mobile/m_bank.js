@@ -750,6 +750,10 @@ async function Checkbalance() {
     LoaderShow();
     if ($('#ddl_transferFromWallet').val() != "") {
         if ($('#ddl_transferToWallet').val() != "") {
+            if ($('#txt_transferAmount').val() === null || $('#txt_transferAmount').val() === "" || $('#txt_transferAmount').val() === undefined) {
+                LoaderHide();
+                return ShowError(ChangeErroMessage("amount_required_error"));
+            }
             if ($('#txt_transferAmount').val() >= 1) {
                 //WalletBalance();
                 await TransferAmount();
@@ -773,6 +777,7 @@ async function TransferAmount() {
     //await regisrationGame();
     var modelBalance = {};
     // check insert amount is gereate then 0
+    
     if ($('#txt_transferAmount').val() > 0) {
         if ($('#txt_transferAmount').val() >= 1) {
             // get all wallete balance
