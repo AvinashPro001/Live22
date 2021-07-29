@@ -258,7 +258,8 @@ export class SlotGameListComponent implements OnInit {
             file: this.urls,
             id: "PlayTech Wallet"
         };
-        this.adminService.add<any>(customer.PragmaticGameListUpdate, data).subscribe(async res => {
+        this.adminService.add<any>(customer.GameListFileUpload, data).subscribe(async res => {
+            this.modalService.dismissAll();
             this.ngOnInit();
             this.toasterService.pop('success', 'Success', res.message);
         }, error => {
