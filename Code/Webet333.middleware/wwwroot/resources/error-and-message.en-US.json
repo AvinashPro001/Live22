@@ -38,7 +38,7 @@
   "select_from_wallet_error": "Please select from wallet.",
   "select_to_wallet_error": "Please select to wallet.",
   "user_not_login_error": "User is not Logged In.",
-  "new_password_check_error": "Current password is not valid",
+  "new_password_check_error": "It is your previous password, please enter a new password",
 
 
   "pending_sports_deposit_error": "Sports Book still have pending bets yet to be unsettled please wait until all bets has been settled",
