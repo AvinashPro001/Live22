@@ -482,6 +482,11 @@ async function Deposit(online) {
     else
         amountId = "#txt_amount";
     onlinePayment = online;
+    if ($(amountId).val() === null || $(amountId).val() === "" || $(amountId).val() === undefined) {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("amount_required_error"));
+    }
+
     if ($(amountId).val() <= 30000 && $(amountId).val() >= 10) {
         if ($(amountId).val() > 0) {
             var radioValue = $("input[name='promotion']:checked").val();
