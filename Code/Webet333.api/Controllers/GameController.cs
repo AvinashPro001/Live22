@@ -3560,6 +3560,9 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.GameListUpload)]
         public async Task<IActionResult> GameListUpload([FromBody] GameListUploadRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
+            await CheckUserRole();
+            string adminid = GetUserId(User).ToString();
+
             var extension = ".xlsx";
             var filename = "gamelist" + DateTime.Now.ToString("yyyyMMddHHmmssffff");
             request.File = request.File.Split("base64,")[1] ?? request.File;
@@ -3571,7 +3574,7 @@ namespace Webet333.api.Controllers
             using (var game_help = new GameHelpers(Connection))
             {
                 await game_help.GameListDeleted("PlayTech Wallet");
-                await game_help.GameListInsert(gameList, request.Id);
+                await game_help.GameListInsert(gameList, request.Id, adminid);
             }
 
             return OkResponse(gameList);
@@ -3629,11 +3632,16 @@ namespace Webet333.api.Controllers
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await CheckUserRole();
+
             var role = GetUserRole(User);
             var uniqueId = GetUniqueId(User);
+            string adminId = GetUserId(User).ToString();
+
             using (var game_helper = new GameHelpers(Connection: Connection))
             {
-                await game_helper.GameListUpdate(request, role, uniqueId);
+                await game_helper.GameListUpdate(request, role, uniqueId, adminId);
                 return OkResponse();
             }
         }
@@ -3647,13 +3655,15 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> SlotsGameInsert([FromBody] GameListUploadResponse request)
         {
             await CheckUserRole();
+            string adminId = GetUserId(User).ToString();
+
             using (var game_helper = new GameHelpers(Connection: Connection))
             {
                 var list = new List<GameListUploadResponse>
                 {
                     request
                 };
-                await game_helper.GameListInsert(list, "PlayTech Wallet");
+                await game_helper.GameListInsert(list, "PlayTech Wallet", adminId);
                 return OkResponse();
             }
         }

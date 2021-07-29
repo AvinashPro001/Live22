@@ -1,5 +1,5 @@
 let baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG'
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG'
 
 switch (environmentName.toUpperCase()) {
     case 'DEBUG':

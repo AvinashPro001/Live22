@@ -95,6 +95,10 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Pragmatic.GameList)]
         public async Task<IActionResult> PragmaticGameList([FromBody] GameLoginRequest request)
         {
+            await CheckUserRole();
+
+            string adminId = GetUserId(User).ToString();
+
             var result = await PragmaticGameHelpers.GameListCallAPI();
             var gameListModel = new List<GameListUploadResponse>();
             if (!request.IsMobile)
@@ -133,7 +137,7 @@ namespace Webet333.api.Controllers
             using (var game_help = new GameHelpers(Connection))
             {
                 await game_help.GameListDeleted("Pragmatic Wallet");
-                await game_help.GameListInsert(gameListModel, "Pragmatic Wallet");
+                await game_help.GameListInsert(gameListModel, "Pragmatic Wallet", adminId);
             }
 
             return OkResponse(result);
