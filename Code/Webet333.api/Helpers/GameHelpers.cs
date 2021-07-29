@@ -1693,7 +1693,7 @@ namespace Webet333.api.Helpers
         }
 
 
-        internal async Task GameListInsert(List<GameListUploadResponse> request, string WalletId)
+        internal async Task GameListInsert(List<GameListUploadResponse> request, string WalletId, string AdminId)
         {
             if (request != null)
             {
@@ -1702,7 +1702,7 @@ namespace Webet333.api.Helpers
                     var response = JsonConvert.SerializeObject(request.OrderBy(x => x.GameCode).Skip(i).Take(999).ToList());
                     using (var repository = new DapperRepository<dynamic>(Connection))
                     {
-                        var res = await repository.AddOrUpdateAsync(StoredProcConsts.Game.SlotsGameInsert, new { jsonString = response, WalletId });
+                        var res = await repository.AddOrUpdateAsync(StoredProcConsts.Game.SlotsGameInsert, new { jsonString = response, WalletId, AdminId });
                     }
                 }
             }
@@ -1718,11 +1718,11 @@ namespace Webet333.api.Helpers
             }
         }
 
-        internal async Task GameListUpdate(GameListUpdateRequest request, string Role,string UniqueId)
+        internal async Task GameListUpdate(GameListUpdateRequest request, string Role, string UniqueId, string AdminId)
         {
             using (var GetRepository = new DapperRepository<dynamic>(Connection))
             {
-                var list = await GetRepository.AddOrUpdateAsync(StoredProcConsts.Game.SlotsGameUpdate, new { request.Id,UniqueId,Role,request.GameName,request.GameCode,request.GameType, request.IsArcade, request.IsHot, request.IsNew, request.IsSlot, request.Active, request.Deleted});
+                var list = await GetRepository.AddOrUpdateAsync(StoredProcConsts.Game.SlotsGameUpdate, new { request.Id, UniqueId, Role, request.GameName, request.GameCode, request.GameType, request.IsArcade, request.IsHot, request.IsNew, request.IsSlot, request.Active, request.Deleted, AdminId });
             }
         }
 
