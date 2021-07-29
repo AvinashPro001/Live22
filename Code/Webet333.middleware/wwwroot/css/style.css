@@ -129,7 +129,7 @@ p.big {font-size: 16px; line-height: 24px; }
 .modal-body .close {font-size: 50px; }
 .modal-body button.close:hover {opacity: .5; }
 .step-portion h5 .lang {display: inline-block; margin-right: 10px; }
-header {background-color: #fff; padding: 10px 0px 4px; }
+header {background-color: #fbfbfb; padding: 10px 0px 4px; }
 header .container {/* width: 1350px;*/ /* width: 1170px;*/ width: 1000px; }
 header .custom-container {width: 1400px; }
 .navbar-default {background-color: transparent; border: 0; border-radius: 0; }
