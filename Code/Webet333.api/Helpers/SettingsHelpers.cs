@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
+using Webet333.models.Request;
 using Webet333.models.Request.Settings;
 using Webet333.models.Response.Settings;
 
@@ -63,11 +64,11 @@ namespace Webet333.api.Helpers
                 List<dynamic> bankDetails = data.Read<dynamic>();
                 if (bankDetails != null && bankDetails.Count > 0)
                 {
-                    bankDetails.ForEach(bank => {
+                    bankDetails.ForEach(bank =>
+                    {
                         bank.bankLogo = (bank.bankLogo != null && !string.IsNullOrEmpty(bank.bankLogo)) ? $"{baseUrl.ImageBase}{baseUrl.BankImage}/{bank.id}{bank.bankLogo}" : "";
-                        bank.bankIconLogo=(bank.bankIconLogo != null && !string.IsNullOrEmpty(bank.bankIconLogo)) ? $"{baseUrl.ImageBase}{baseUrl.AdminBankIconImage}/{bank.id}{bank.bankIconLogo}" : "";
-                    }
-                    );
+                        bank.bankIconLogo = (bank.bankIconLogo != null && !string.IsNullOrEmpty(bank.bankIconLogo)) ? $"{baseUrl.ImageBase}{baseUrl.AdminBankIconImage}/{bank.id}{bank.bankIconLogo}" : "";
+                    });
                 }
 
                 List<dynamic> trancations = data.Read<dynamic>();
@@ -301,5 +302,186 @@ namespace Webet333.api.Helpers
         #endregion Contact Type Details API's
 
         #endregion Contact Management
+
+        #region Home Page Banner Management
+
+        #region Insert
+
+        internal async Task<HomePageBannerAddResponse> HomePageBannerInsertAsync(HomePageBannerAddRequest request)
+        {
+            using (var repository = new DapperRepository<HomePageBannerAddResponse>(Connection))
+            {
+                var result = await repository.FindAsync(
+                    StoredProcConsts.Settings.HomePageBannersPersist,
+                    new
+                    {
+                        TitleEnglish = request.TitleEnglish,
+                        TitleChinese = request.TitleChinese,
+                        TitleMalay = request.TitleMalay,
+
+                        Sequence = request.Sequence,
+
+                        AdminId = request.AdminId
+                    });
+
+                return result;
+            }
+        }
+
+        #endregion Insert
+
+        #region Update
+
+        internal async Task<HomePageBannerAddResponse> HomePageBannerUpdateAsync(HomePageBannerUpdateRequest request)
+        {
+            using (var repository = new DapperRepository<HomePageBannerAddResponse>(Connection))
+            {
+                var result = await repository.FindAsync(
+                    StoredProcConsts.Settings.HomePageBannersPersist,
+                    new
+                    {
+                        Id = request.Id,
+
+                        TitleEnglish = request.TitleEnglish,
+                        TitleChinese = request.TitleChinese,
+                        TitleMalay = request.TitleMalay,
+
+                        Sequence = request.Sequence,
+
+                        AdminId = request.AdminId
+                    });
+
+                return result;
+            }
+        }
+
+        #endregion Update
+
+        #region Insert / Update Image
+
+        internal async Task HomePageBannerImageAsync(HomePageBannerImagePersist request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(StoredProcConsts.Settings.HomePageBannersUpdateImage, request);
+            }
+        }
+
+        #endregion Insert / Update Image
+
+        #region Delete
+
+        internal async Task HomePageBannerDeleteAsync(Guid Id, string adminId = null)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Settings.HomePageBannersDelete,
+                    new
+                    {
+                        Id,
+                        adminId
+                    });
+            }
+        }
+
+        #endregion Delete
+
+        #region Update Status
+
+        internal async Task HomePageBannerUpdateStatusAsync(UpdateStatusWithAdminIdRequest request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Settings.HomePageBannersUpdateActiveStatus,
+                    new
+                    {
+                        request.Id,
+                        request.Active,
+                        request.AdminId
+                    });
+            }
+        }
+
+        #endregion Update Status
+
+        #region Select By Users
+
+        internal async Task<List<HomePageBannerRetriveByUserResponse>> HomePageBannerSelectUserAsync(
+            BaseUrlConfigs baseUrl,
+            string languageId,
+            HomePageBannerRetriveRequest request)
+        {
+            using (var repository = new DapperRepository<HomePageBannerRetriveByUserResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(
+                    StoredProcConsts.Settings.HomePageBannersSelect,
+                    new
+                    {
+                        languageId,
+                        request.isUser
+                    });
+
+                if (result.Any())
+                {
+                    foreach (var data in result)
+                    {
+                        data.BannerWeb = $"{baseUrl.ImageBase}{baseUrl.HomePageBannerWebleImage}/{data.Id}{data.BannerWeb}";
+                        data.BannerMobile = $"{baseUrl.ImageBase}{baseUrl.HomePageBannerMobileImage}/{data.Id}{data.BannerMobile}";
+                    }
+                }
+
+                return result.ToList();
+            }
+        }
+
+        #endregion Select By Users
+
+        #region Select By Admin
+
+        internal async Task<List<HomePageBannerRetriveByAdminResponse>> HomePageBannerSelectByAdminAsync(
+            BaseUrlConfigs baseUrl,
+            string languageId,
+            HomePageBannerRetriveByAdminRequest request)
+        {
+            using (var repository = new DapperRepository<HomePageBannerRetriveByAdminResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(
+                    StoredProcConsts.Settings.HomePageBannersSelect,
+                    new
+                    {
+                        languageId,
+                        request.isUser,
+                        request.PageNo,
+                        request.PageSize
+                    });
+
+                return result.ToList();
+            }
+        }
+
+        #endregion Select By Admin
+
+        #region Select By Admin By Id
+
+        internal async Task<dynamic> HomePageBannerSelectByIdAsync(GetByIdRequestWithRequired request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.FindAsync(
+                    StoredProcConsts.Settings.HomePageBannersSelectById,
+                    new
+                    {
+                        request.Id
+                    });
+
+                return result;
+            }
+        }
+
+        #endregion Select By Admin By Id
+
+        #endregion Home Page Banner Management
     }
 }

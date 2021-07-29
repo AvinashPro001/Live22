@@ -39,9 +39,9 @@
 
 #if DEBUG
 
-        public const string BaseUrl = "http://uat.webet333.com/";
+        public const string BaseUrl = "https://www.uatwb3.com/";
 
-        public const string APIUrl = "http://uatapi.webet333.com/api/v1/";
+        public const string APIUrl = "https://uatapi.wb3api.com/api/v1/";
 
         public class MaxBet
         {
@@ -63,7 +63,7 @@
 
             public const string Currency = "2";
 
-        #region Betting limit Constant
+            #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -91,7 +91,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-        #endregion Betting limit Constant
+            #endregion Betting limit Constant
         }
 
         public class Kiss918

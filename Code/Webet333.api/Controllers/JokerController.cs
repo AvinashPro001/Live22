@@ -96,37 +96,5 @@ namespace Webet333.api.Controllers
 
         #endregion Joker game Register
 
-        #region Joker game Register
-
-        [Authorize]
-        [HttpGet(ActionsConst.Joker.GameList)]
-        public async Task<IActionResult> JokerGameList()
-        {
-
-            if (GetUserRole(User) == RoleConst.Users)
-                BadResponse("forbid_error_access");
-
-            var result = await JokerHelpers.GameList();
-
-            var gameListModel = new List<GameListUploadResponse>();
-            result.ListGames.ForEach(game=> {
-                gameListModel.Add(new GameListUploadResponse
-                {
-                    GameCode = game.GameCode,
-                    GameName = game.GameName,
-                    GameType = game.GameType,
-                    ImagePath1 = game.Image1,
-                    ImagePath2 = game.Image1
-                });
-            });
-
-            using (var game_help = new GameHelpers(Connection))
-                await game_help.GameListInsert(gameListModel, "Joker Wallet", null);
-
-            return OkResponse(result.ListGames);
-
-        }
-
-        #endregion Joker game Register
     }
 }

@@ -1378,7 +1378,7 @@
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <p>You have not selected any promotion, Are you sure to proceed ?</p>
+                    <p>You didn't select any promotion. Are you sure you want to proceed?</p>
                 </div>
             </div>
             <div class="modal-footer">
@@ -1440,21 +1440,12 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        var date = new Date();
-        var day = date.getDate();
-        var Month = date.getMonth() + 1;
-        var Year = date.getFullYear();
-        Month = Month < 10 ? "0" + Month : Month;
-        day = day < 10 ? "0" + day : day;
-        var Hours = date.getHours();
-        var Minute = date.getMinutes();
-
         $("#datepicker0").datetimepicker({
             format: 'yyyy-mm-dd hh:ii',
             autoclose: true,
             minuteStep: 5
         });
-        $("#datepicker0").val(Year + '-' + Month + '-' + day + ' ' + Hours + ':' + Minute)
+        //$("#datepicker0").val(Year + '-' + Month + '-' + day + ' ' + Hours + ':' + Minute)
 
         $("#datepicker1").datepicker();
         $("#datepicker1btn").click(function (event) {

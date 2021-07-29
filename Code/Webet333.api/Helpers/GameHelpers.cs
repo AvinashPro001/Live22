@@ -1626,7 +1626,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-
         public static string ReadExcelasJSON(string path)
         {
             try
@@ -1635,19 +1634,17 @@ namespace Webet333.api.Helpers
                 //Lets open the existing excel file and read through its content . Open the excel using openxml sdk
                 using (SpreadsheetDocument doc = SpreadsheetDocument.Open(path, false))
                 {
-                    //create the object for workbook part  
+                    //create the object for workbook part
                     WorkbookPart workbookPart = doc.WorkbookPart;
                     Sheets thesheetcollection = workbookPart.Workbook.GetFirstChild<Sheets>();
 
-                    //using for each loop to get the sheet from the sheetcollection  
+                    //using for each loop to get the sheet from the sheetcollection
                     foreach (Sheet thesheet in thesheetcollection.OfType<Sheet>())
                     {
-                        //statement to get the worksheet object by using the sheet id  
+                        //statement to get the worksheet object by using the sheet id
                         Worksheet theWorksheet = ((WorksheetPart)workbookPart.GetPartById(thesheet.Id)).Worksheet;
 
                         SheetData thesheetdata = theWorksheet.GetFirstChild<SheetData>();
-
-
 
                         for (int rCnt = 0; rCnt < thesheetdata.ChildElements.Count(); rCnt++)
                         {
@@ -1655,9 +1652,8 @@ namespace Webet333.api.Helpers
                             for (int rCnt1 = 0; rCnt1
                                 < thesheetdata.ElementAt(rCnt).ChildElements.Count(); rCnt1++)
                             {
-
                                 Cell thecurrentcell = (Cell)thesheetdata.ElementAt(rCnt).ChildElements.ElementAt(rCnt1);
-                                //statement to take the integer value  
+                                //statement to take the integer value
                                 string currentcellvalue = string.Empty;
                                 if (thecurrentcell.DataType != null)
                                 {
@@ -1700,9 +1696,7 @@ namespace Webet333.api.Helpers
                             }
                             if (rCnt != 0)//reserved for column values
                                 dtTable.Rows.Add(rowList.ToArray());
-
                         }
-
                     }
 
                     return JsonConvert.SerializeObject(dtTable);
@@ -1716,7 +1710,7 @@ namespace Webet333.api.Helpers
         }
 
 
-        internal async Task GameListInsert(List<GameListUploadResponse> request, string WalletId, string ImageBase)
+        internal async Task GameListInsert(List<GameListUploadResponse> request, string WalletId, string AdminId)
         {
             if (request != null)
             {
@@ -1725,19 +1719,35 @@ namespace Webet333.api.Helpers
                     var response = JsonConvert.SerializeObject(request.OrderBy(x => x.GameCode).Skip(i).Take(999).ToList());
                     using (var repository = new DapperRepository<dynamic>(Connection))
                     {
-                        var res = await repository.AddOrUpdateAsync(StoredProcConsts.Game.SlotsGameInsert, new { jsonString = response, WalletId, ImageBase });
+                        var res = await repository.AddOrUpdateAsync(StoredProcConsts.Game.SlotsGameInsert, new { jsonString = response, WalletId, AdminId });
                     }
                 }
             }
         }
 
 
-        internal async Task<List<GameListSelectResponse>> GameListSelect(GameListSelectRequest request)
+        internal async Task<List<GameListSelectResponse>> GameListSelect(GameListSelectRequest request,string Role)
         {
             using (var GetRepository = new DapperRepository<GameListSelectResponse>(Connection))
             {
-                var list = await GetRepository.GetDataAsync(StoredProcConsts.Game.SlotsGameSelect, new { request.WalletName, request.Name, request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                var list = await GetRepository.GetDataAsync(StoredProcConsts.Game.SlotsGameSelect, new { request.WalletName, request.Name, request.FromDate, request.ToDate, request.PageNo, request.PageSize, Role });
                 return list.ToList();
+            }
+        }
+
+        internal async Task GameListUpdate(GameListUpdateRequest request, string Role, string UniqueId, string AdminId)
+        {
+            using (var GetRepository = new DapperRepository<dynamic>(Connection))
+            {
+                var list = await GetRepository.AddOrUpdateAsync(StoredProcConsts.Game.SlotsGameUpdate, new { request.Id, UniqueId, Role, request.GameName, request.GameCode, request.GameType, request.IsArcade, request.IsHot, request.IsNew, request.IsSlot, request.Active, request.Deleted, AdminId });
+            }
+        }
+
+        internal async Task GameListDeleted(string GameName)
+        {
+            using (var GetRepository = new DapperRepository<dynamic>(Connection))
+            {
+                await GetRepository.AddOrUpdateAsync(StoredProcConsts.Game.SlotsGameDelete, new { GameName });
             }
         }
 

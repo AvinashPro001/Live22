@@ -64,6 +64,7 @@ namespace Webet333.api.Controllers
         private IHostingEnvironment _hostingEnvironment;
 
         private IHubContext<SignalRHub> _hubContext;
+
         public GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, SerialQueue queue, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, ApiLogsManager LogManager, IHubContext<SignalRHub> hubContext) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.LogManager = LogManager;
@@ -3623,15 +3624,17 @@ namespace Webet333.api.Controllers
             }
         }
 
-
         #endregion Get Users Betting Summery
 
         #region Game List Excel file Upload
 
-        //[Authorize]
+        [Authorize]
         [HttpPost(ActionsConst.Game.GameListUpload)]
         public async Task<IActionResult> GameListUpload([FromBody] GameListUploadRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
+            await CheckUserRole();
+            string adminid = GetUserId(User).ToString();
+
             var extension = ".xlsx";
             var filename = "gamelist" + DateTime.Now.ToString("yyyyMMddHHmmssffff");
             request.File = request.File.Split("base64,")[1] ?? request.File;
@@ -3641,22 +3644,31 @@ namespace Webet333.api.Controllers
             var gameList = JsonConvert.DeserializeObject<List<GameListUploadResponse>>(GameHelpers.ReadExcelasJSON(BaseUrlConfigsOptions.Value.ExcelLocalPath + "\\" + filename + extension));
 
             using (var game_help = new GameHelpers(Connection))
-                await game_help.GameListInsert(gameList, request.Id, baseUrlConfigs.ImageBase);
+            {
+                await game_help.GameListDeleted("PlayTech Wallet");
+                await game_help.GameListInsert(gameList, request.Id, adminid);
+            }
 
             return OkResponse(gameList);
         }
 
-
         #endregion Game List Excel file Upload
 
-        #region Game List Select
+        #region Slot Game List Select
 
         [HttpPost(ActionsConst.Game.SlotsGameSelect)]
         public async Task<IActionResult> SlotsGameSelect([FromBody] GameListSelectRequest request)
         {
+            var role = RoleConst.Users;
+            try
+            {
+                role = GetUserRole(User);
+            }
+            catch (Exception e) { }
+
             using (var game_helper = new GameHelpers(Connection: Connection))
             {
-                var list = await game_helper.GameListSelect(request);
+                var list = await game_helper.GameListSelect(request, role);
                 if (list.Count != 0)
                 {
                     var total = list.FirstOrDefault().Total;
@@ -3682,7 +3694,53 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Game List Select
+        #endregion Slot Game List Select
+
+        #region Slot Game List Update
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.SlotsGameUpdate)]
+        public async Task<IActionResult> SlotsGameUpdate([FromBody] GameListUpdateRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await CheckUserRole();
+
+            var role = GetUserRole(User);
+            var uniqueId = GetUniqueId(User);
+            string adminId = GetUserId(User).ToString();
+
+            using (var game_helper = new GameHelpers(Connection: Connection))
+            {
+                await game_helper.GameListUpdate(request, role, uniqueId, adminId);
+                return OkResponse();
+            }
+        }
+
+        #endregion
+
+        #region Slot Game List Insert
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.SlotsGameInsert)]
+        public async Task<IActionResult> SlotsGameInsert([FromBody] GameListUploadResponse request)
+        {
+            await CheckUserRole();
+            string adminId = GetUserId(User).ToString();
+
+            using (var game_helper = new GameHelpers(Connection: Connection))
+            {
+                var list = new List<GameListUploadResponse>
+                {
+                    request
+                };
+                await game_helper.GameListInsert(list, "PlayTech Wallet", adminId);
+                return OkResponse();
+            }
+        }
+
+        #endregion
 
         #region Hot Slots Game List Select
 
@@ -3718,6 +3776,5 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Hot Slots Game List Select
-
     }
 }

@@ -598,11 +598,11 @@ header .sticky-header {
         color: #40434b;
         border-color: transparent;
         outline: none;
-        font-size: 10px;
+        font-size: 12px;
     }
 
 .step-screen p {
-    font-size: 10px;
+    font-size: 12px;
     line-height: 15px;
 }
 
@@ -1735,37 +1735,6 @@ input, select {
         z-index: 5;
         padding-bottom: 50px;
     }
-
-        .steps-2 .step {
-            flex-wrap: wrap;
-            flex-direction: column;
-            top: 0px;
-            padding: 0px;
-        }
-
-        .steps-2 .point {
-            width: 100%;
-            height: auto;
-            background: transparent;
-            border-left: 2px solid #ffffff;
-            border-radius: 0px;
-            text-align: left;
-            padding-left: 15px;
-            top: 22px;
-            left: 0px;
-            margin-left: 5px;
-        }
-
-            .steps-2 .point:before {
-                content: '';
-                display: block;
-                left: 0;
-                top: 12px;
-                width: 10px;
-                height: 2px;
-                background: #ffffff;
-                position: absolute;
-            }
 
             .steps-2 .step-title,
             .steps-2 .step-title1,

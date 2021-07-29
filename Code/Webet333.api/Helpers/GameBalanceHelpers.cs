@@ -572,7 +572,7 @@ namespace Webet333.api.Helpers
 
         #region Update ALL games balance in db
 
-        #region Main balance 
+        #region Main balance
 
         internal async Task<dynamic> MainBalance(string UserId)
         {
@@ -583,7 +583,7 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion Main balance 
+        #endregion Main balance
 
         #region Kiss 918 balance update
 

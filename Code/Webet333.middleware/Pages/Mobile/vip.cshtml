@@ -2,11 +2,8 @@
 @{ Layout = null; }
 
 
-    <div class="vip-main-banner">
-        <div class="container">
-            &nbsp;
-        </div>
-    </div>
+<div class="vip-main-banner">
+</div>
     <div class="benefits_refeeral_sec">
         <div class="containerr">
             <div class="benefits_referal_tab_sec">
@@ -31,34 +28,29 @@
                                             </div>
                                             <div class="step">
                                                 <span class="point" id="normal-span" onclick="javascript: resetActive(event, 0, 'step-1');">
-                                                    <span class="step-title"> Minimum Step</span>
-                                                    <span class="step-title1"> < 30,000 </span>
                                                     <span class="price">Normal</span>
+                                                    <span class="step-title1"> < 30k </span>
                                                 </span>
                                                 <span class="point" id="bronze-span" onclick="javascript: resetActive(event,16, 'step-1');">
-                                                    <span class="step-title"> Minimum Step</span>
-                                                    <span class="step-title1"> > 30,000 </span>
-                                                    <span class="price">Brooze</span>
+                                                    <span class="price">Bronze</span>
+                                                    <span class="step-title1"> > 30k </span>
                                                 </span>
                                                 <span class="point" id="silver-span" onclick="javascript: resetActive(event, 32, 'step-1');">
-                                                    <span class="step-title"> Minimum Step</span>
-                                                    <span class="step-title1"> > 100,000 </span>
                                                     <span class="price">Silver</span>
+                                                    <span class="step-title1"> > 100k </span>
                                                 </span>
                                                 <span class="point" id="gold-span" onclick="javascript: resetActive(event, 64, 'step-1');">
-                                                    <span class="step-title"> Minimum Step</span>
-                                                    <span class="step-title1"> > 500,000 </span>
                                                     <span class="price">Gold</span>
+                                                    <span class="step-title1"> > 500k </span>
                                                 </span>
                                                 <span class="point" id="platinum-span" onclick="javascript: resetActive(event, 80, 'step-1');">
-                                                    <span class="step-title"> Minimum Step</span>
-                                                    <span class="step-title1"> > 1,000,000 </span>
                                                     <span class="price">Platinum</span>
+                                                    <span class="step-title1"> > 10lkh </span>
                                                 </span>
                                                 <span class="point" id="diamond-span" onclick="javascript: resetActive(event, 100, 'step-1');">
-                                                    <span class="step-title"> Minimum Step</span>
-                                                    <span class="step-title1"> > 4,000,000 </span>
                                                     <span class="price">Diamond</span>
+                                                    <span class="step-title1"> > 40lkh </span>
+                                                    
                                                 </span>
                                             </div>
                                         </div>
@@ -145,7 +137,7 @@
                     <div class="scroll-vip-privilage">
                         <ul class="nav nav-tabs img-icon">
                             <li class="active"><a data-toggle="tab" href="#normal"><figure><img src="~/images/vip1.png" alt="Normal"></figure>normal</a></li>
-                            <li><a data-toggle="tab" href="#brooze"><figure><img src="~/images/vip2.png" alt="Brooze"></figure>brooze</a></li>
+                            <li><a data-toggle="tab" href="#bronze"><figure><img src="~/images/vip2.png" alt="Bronze"></figure>bronze</a></li>
                             <li><a data-toggle="tab" href="#silver"><figure><img src="~/images/vip3.png" alt="Silver"></figure>silver</a></li>
                             <li><a data-toggle="tab" href="#gold"><figure><img src="~/images/vip4.png" alt="Gold"></figure>gold</a></li>
                             <li><a data-toggle="tab" href="#platinum"><figure><img src="~/images/vip5.png" alt="Platinum"></figure>platinum</a></li>
@@ -203,7 +195,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div id="brooze" class="tab-pane fade">
+                            <div id="bronze" class="tab-pane fade">
                                 <div class="tab-area">
                                     <p class="title">WB Benefits</p>
                                     <ul class="tab-subtitle d-flex">
@@ -530,7 +522,7 @@
             document.getElementById("viplevel_icon").src = VIPlevel.data.VIPBanner;
 
             document.getElementById("currentStatus").value = VIPlevel.data.Name;
-            $("#currentDeposit").val(UserDetails.data.TotalDepositAmount);
+            $("#currentDeposit").val(UserDetails.data.totalDepositAmount);
             $("#currentStatus").attr("disabled", "disabled");
             $("#currentDeposit").attr("disabled", "disabled");
 
