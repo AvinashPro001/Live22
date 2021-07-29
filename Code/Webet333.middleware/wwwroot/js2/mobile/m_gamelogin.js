@@ -447,7 +447,7 @@ async function getDetails() {
         }
         checkedValue = resUserData.data.autoTransfer;
         //if (window.location.href.includes("?p=transfer"))
-            //await onclickSet(1);
+        //await onclickSet(1);
     }
 }
 
@@ -676,6 +676,9 @@ async function PlaytechIdentifiy(Slotvalue) {
         LoaderHide();
         return ShowError(ChangeErroMessage("maintainenance_error"));
     }
+
+    if (!Slotvalue) if (GetLocalStorage('currentUser') === null) return alert("Please Login");
+
     if (GetLocalStorage('currentUser') !== null) {
         LoaderShow();
         if (checkedValue)
@@ -685,8 +688,9 @@ async function PlaytechIdentifiy(Slotvalue) {
         LoaderHide();
         GameLoginMobile('Playtech');
     }
-    else {
-        alert("Please Login");
+
+    if (Slotvalue) {
+        window.open("../mobile?p=slot", "_blank")
     }
 }
 
