@@ -1,5 +1,5 @@
 let baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG'
+let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '9001';
 
 switch (environmentName.toUpperCase()) {
@@ -143,6 +143,7 @@ export const customer = {
     slotsGameList: environment.apiUrl + 'Game/slotsgame/list',
     slotsGameUpdate: environment.apiUrl + 'Game/slotsgame/update',
     PragmaticGameListUpdate: environment.apiUrl + 'pragmatic/game/list',
+    GameplayGameListUpdate: environment.apiUrl + 'gameplay/get/slot-gamelist',
 
     ManuallyPromotionExpiery: environment.apiUrl + 'Game/ManuallyPromotionExpiry',
 

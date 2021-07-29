@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.account = exports.environment = void 0;
 var baseUrl = '', baseUrlWithoutVersion = '';
-var environmentName = 'DEBUG'; // 'DEBUG' OR 'STAG'
+var environmentName = 'LOCAL'; // 'DEBUG' OR 'STAG' OR 'LOCAL'
 var PortAPI = '9001';
 switch (environmentName.toUpperCase()) {
     case 'DEBUG':
@@ -126,6 +126,9 @@ exports.customer = {
     statementHistory: exports.environment.apiUrl + 'payments/transactions',
     restoreHistory: exports.environment.apiUrl + 'Game/restore/list',
     slotsGameList: exports.environment.apiUrl + 'Game/slotsgame/list',
+    slotsGameUpdate: exports.environment.apiUrl + 'Game/slotsgame/update',
+    PragmaticGameListUpdate: exports.environment.apiUrl + 'pragmatic/game/list',
+    GameplayGameListUpdate: exports.environment.apiUrl + 'gameplay/get/slot-gamelist',
     ManuallyPromotionExpiery: exports.environment.apiUrl + 'Game/ManuallyPromotionExpiry',
     similarNameList: exports.environment.apiUrl + 'payments/withdraw/similarname/list',
     usernamPrifix: exports.environment.apiUrl + 'Game/GlobalParameters',
@@ -303,6 +306,7 @@ exports.customer = {
     homePageBannerImage: exports.environment.apiUrl + 'settings/homePage-banner/image',
     homePageBannerImageUpdate: exports.environment.apiUrl + 'settings/homePage-banner/image/update',
     homePageBannerSelectById: exports.environment.apiUrl + 'settings/homePage-banner/select/id',
+    slotsGameInsert: exports.environment.apiUrl + 'Game/slotsgame/insert'
 };
 exports.playtech = {
     playtechUrl: 'https://api.wb3api.com/api/Default/playtech',

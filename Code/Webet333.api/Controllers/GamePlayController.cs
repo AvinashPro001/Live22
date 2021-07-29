@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -10,6 +11,7 @@ using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
 using Webet333.models.Request.Game;
+using Webet333.models.Response.Game;
 using GamePlayConst = Webet333.models.Constants.GameConst.GamePlay;
 
 namespace Webet333.api.Controllers
@@ -153,11 +155,34 @@ namespace Webet333.api.Controllers
         [HttpGet(ActionsConst.GamePlay.GetSlotGameList)]
         public async Task<IActionResult> GetSlotGameList()
         {
+            await CheckUserRole();
+
+            string adminId = GetUserId(User).ToString();
+
             string language = Language.Code == LanguageConst.Chinese ? GamePlayConst.LanguageCode.TraditionalChinese : Language.Code == LanguageConst.Malay ? GamePlayConst.LanguageCode.Malay : GamePlayConst.LanguageCode.English;
 
             var result = await GamePlayGameHelpers.CallGetGameListAPI(language, GamePlayConst.GameType.Slot);
 
             if (result.Status != 0) return BadResponse(result.ErrorDesc);
+
+            var gameListModel = new List<GameListUploadResponse>();
+            result.Games.ForEach(game =>
+            {
+                gameListModel.Add(new GameListUploadResponse
+                {
+                    GameCode = game.TcgGameCode,
+                    GameName = game.GameName,
+                    GameType = "Slots",
+                    ImagePath1 = game.ImageURL,
+                    ImagePath2 = ""
+                });
+            });
+
+            using (var Game_Helpers = new GameHelpers(Connection))
+            {
+                await Game_Helpers.GameListDeleted(WalletConst.WalletName.GamePlay);
+                await Game_Helpers.GameListInsert(gameListModel, WalletConst.WalletName.GamePlay, adminId);
+            }
 
             return OkResponse(result);
         }
