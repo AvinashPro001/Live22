@@ -320,7 +320,7 @@ async function DoRegister() {
 
     if (model.mobile === "") {
         LoaderHide();
-        return ShowError("Mobile Filed is required.");
+        return ShowError("Mobile Field is required.");
     }
     if (model.mobile.length < 10) {
         LoaderHide();
