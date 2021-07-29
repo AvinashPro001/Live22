@@ -226,12 +226,13 @@
 
   "mobile_no_required_error": "Nombor Telefon diperlukan",
   "sms_error": "SMS tidak hantar !! Sila hubungi Live Chat",
-  "mobile_length_error": "Sila masukkan nombor telefon dengan 10 digit minimum",
+  "mobile_length_error": "Sila masukkan nombor telefon bimbit yang sah.",
   "pass_length_error": "Panjang kata laluan Minimum 6 digit.",
   "username_required_error": "Nama pengguna diperlukan",
   "username_length_error": "Name pengguna terlalu pendek",
-  "password_required_error": "Kata laluan diperlukan",
-  "confirm_password_required_error": "Sahkan kata luluan diperlukan",
+  "password_required_error": "Medan Kata Laluan diperlukan",
+  "confirm_password_required_error": "Sahkan kata laluan diperlukan",
+  "new_password_check_error": "Ini kata laluan anda sebelumnya, Masukkan kata laluan baru",
   "name_required_error": "Nama penuh diperlukan",
   "username_pass_diff_error": "Kata laluan dan nama pengunna mesti berbeza",
   "pass_alpha_error": "Kata laluan perlu abjad angka",
@@ -247,6 +248,7 @@
   "promo_apply_balance_error": "Baki anda adalah lebih rendah daripada 5 MYR baki deposit anda, anda boleh menggunakan promosi baru, dan promosi promosi anda sudah tamat tempoh.",
   "amount_greater_zero_error": "Sila Masukkan Jumlah lebih daripada 0",
   "promot_active_error": "Anda tidak boleh menggunakan promosi, Kerana anda mempunyai promosi yang aktif",
+  "amount_required_error": "Sila masukkan amaun.",
   "min_max_amount_error": "Amaun Minimum ialah 10 dan Maksimum ialah 300000.",
   "min_max_amount_error_parameter": "Amaun Minimum 10 dan Amaun Maksimum ialah ",
   "min1_max1000_amount_error": "Amaun Minimum 1",
@@ -327,6 +329,6 @@
 
   "special_not_allowed": "Speical Charater tidak dibenarkan di Passsword !!",
   "amount_greater_one_error": "Sila Masukkan Jumlah lebih daripada 1",
- 
+
   "pls_select_date": "Sila pilih tarikh"
 }

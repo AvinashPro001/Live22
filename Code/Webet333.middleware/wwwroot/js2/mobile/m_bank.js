@@ -482,6 +482,11 @@ async function Deposit(online) {
     else
         amountId = "#txt_amount";
     onlinePayment = online;
+    if ($(amountId).val() === null || $(amountId).val() === "" || $(amountId).val() === undefined) {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("amount_required_error"));
+    }
+
     if ($(amountId).val() <= 30000 && $(amountId).val() >= 10) {
         if ($(amountId).val() > 0) {
             var radioValue = $("input[name='promotion']:checked").val();
@@ -674,6 +679,10 @@ async function DepositAfterPromotion() {
 //#region Withdrawal
 async function Withdrawal() {
     //LoaderShow();
+    if ($('#txt_withdrawalAmount').val() === null || $('#txt_withdrawalAmount').val() === "" || $('#txt_withdrawalAmount').val() === undefined) {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("amount_required_error"));
+    }
     if ($('#txt_withdrawalAmount').val() <= Number(WithdrawLimit) && $('#txt_withdrawalAmount').val() >= 10) {
         //await regisrationGame();
         if ($('#txt_withdrawalAmount').val() > 0) {
@@ -741,6 +750,10 @@ async function Checkbalance() {
     LoaderShow();
     if ($('#ddl_transferFromWallet').val() != "") {
         if ($('#ddl_transferToWallet').val() != "") {
+            if ($('#txt_transferAmount').val() === null || $('#txt_transferAmount').val() === "" || $('#txt_transferAmount').val() === undefined) {
+                LoaderHide();
+                return ShowError(ChangeErroMessage("amount_required_error"));
+            }
             if ($('#txt_transferAmount').val() >= 1) {
                 //WalletBalance();
                 await TransferAmount();
@@ -764,6 +777,7 @@ async function TransferAmount() {
     //await regisrationGame();
     var modelBalance = {};
     // check insert amount is gereate then 0
+    
     if ($('#txt_transferAmount').val() > 0) {
         if ($('#txt_transferAmount').val() >= 1) {
             // get all wallete balance

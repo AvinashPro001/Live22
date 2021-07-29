@@ -207,7 +207,7 @@
                                     </li>
                                     <li class="mar-btm-fifteen">
                                         <label class="fleft"><p class="big no-mar lang" key="profile_mobile"></p></label>
-                                        <label class="fright tel-icon"><input id="txt_mobileUpdate" name="txt_mobileUpdate" type="number" pattern="\d*" style="border-style: solid;border-radius: 3px;border-width: 1px;" class="reg-form" placeholder="Enter new Mobile number"></label>
+                                        <label class="fright tel-icon"><input id="txt_mobileUpdate" name="txt_mobileUpdate" onkeyup="MobileValidation('txt_mobileUpdate','changePass_mob_err')" type="number" pattern="\d*" style="border-style: solid;border-radius: 3px;border-width: 1px;" class="reg-form" placeholder="Enter new Mobile number"><label style="color:#ff0000;font-weight:bold; font-size:12px;" id="changePass_mob_err"></label></label>
                                     </li>
                                     <li class="mar-btm-fifteen">
                                         <div class="fright"><button name="" class="submit" data-toggle="modal" data-target="#ConfirmUpdateProfie"><span class="lang" key="profile_update_personal_details_button"></span></button></div>

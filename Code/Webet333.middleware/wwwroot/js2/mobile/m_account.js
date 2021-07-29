@@ -200,6 +200,11 @@ async function ChangePassword(i) {
             return ShowError("Confirm " + ChangeErroMessage("password_required_error"));
         }
 
+        if (model.currentPassword === model.password) {
+            LoaderHide();
+            return ShowError(ChangeErroMessage("new_password_check_error"));
+        }
+
         if (model.password.length < 6) {
             LoaderHide();
             return ShowError(ChangeErroMessage("pass_length_error"));
@@ -211,7 +216,7 @@ async function ChangePassword(i) {
         }
 
         var userDetail = JSON.parse(dec(sessionStorage.getItem('UserDetails')))
-        var username = userDetail.username
+        var username = userDetail.data.username
 
         if (username === model.password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
 
@@ -315,7 +320,7 @@ async function DoRegister() {
 
     if (model.mobile === "") {
         LoaderHide();
-        return ShowError("Mobile Filed is required.");
+        return ShowError("Mobile Field is required.");
     }
     if (model.mobile.length < 10) {
         LoaderHide();
@@ -323,12 +328,12 @@ async function DoRegister() {
     }
     if (model.username === "") {
         LoaderHide();
-        return ShowError("Username Filed is required.");
+        return ShowError("Username Field is required.");
     }
 
     if (model.password === "") {
         LoaderHide();
-        return ShowError("Password Filed is required.");
+        return ShowError("Password Field is required.");
     }
     if (model.confirmPassword === "") {
         LoaderHide();
@@ -773,3 +778,17 @@ function OnPasswordType(PasswordTextboxId, UsernameTextboxId) {
     var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     regex.test(password) ? ($("#pass-alpha").addClass("green-color")) : ($("#pass-alpha").removeClass("green-color"))
 }
+
+//#region MobileValidation
+
+function MobileValidation(TextFieldId, ErrorShowId) {
+    var mobile = $('#' + TextFieldId).val();
+    if (mobile.length < 10 || mobile.length > 11) {
+        $("#" + ErrorShowId).text(ChangeErroMessage("mobile_length_error"));
+    }
+    else {
+        $("#" + ErrorShowId).text("");
+    }
+}
+
+//#endregion
