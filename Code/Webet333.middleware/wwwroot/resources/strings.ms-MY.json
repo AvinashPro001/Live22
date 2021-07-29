@@ -230,7 +230,7 @@
   "pass_length_error": "Panjang kata laluan Minimum 6 digit.",
   "username_required_error": "Nama pengguna diperlukan",
   "username_length_error": "Name pengguna terlalu pendek",
-  "password_required_error": "Kata laluan diperlukan",
+  "password_required_error": "Medan Kata Laluan diperlukan",
   "confirm_password_required_error": "Sahkan kata luluan diperlukan",
   "new_password_check_error": "Ini kata laluan anda sebelumnya, Masukkan kata laluan baru",
   "name_required_error": "Nama penuh diperlukan",
