@@ -200,6 +200,10 @@ async function ChangePassword(i) {
             return ShowError("Confirm " + ChangeErroMessage("password_required_error"));
         }
 
+        if (currentPassword === password) {
+            return ShowError(ChangeErroMessage("new_password_check_error"));
+        }
+
         if (model.password.length < 6) {
             LoaderHide();
             return ShowError(ChangeErroMessage("pass_length_error"));
@@ -211,7 +215,7 @@ async function ChangePassword(i) {
         }
 
         var userDetail = JSON.parse(dec(sessionStorage.getItem('UserDetails')))
-        var username = userDetail.username
+        var username = userDetail.data.username
 
         if (username === model.password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
 

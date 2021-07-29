@@ -232,6 +232,7 @@
   "username_length_error": "Name pengguna terlalu pendek",
   "password_required_error": "Kata laluan diperlukan",
   "confirm_password_required_error": "Sahkan kata luluan diperlukan",
+  "new_password_check_error": "Ini kata laluan anda sebelumnya, Masukkan kata laluan baru",
   "name_required_error": "Nama penuh diperlukan",
   "username_pass_diff_error": "Kata laluan dan nama pengunna mesti berbeza",
   "pass_alpha_error": "Kata laluan perlu abjad angka",
