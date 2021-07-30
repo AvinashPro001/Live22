@@ -137,7 +137,6 @@ async function CheckWithdrawAmountList() {
     sessionStorage.setItem("UserVipDetails", enc(JSON.stringify(resUserVIPlevel)))
 
     WithdrawLimit = parseFloat(resUserVIPlevel.data.WithdrawLimit).toFixed(2);
-    document.getElementById("txt_withdrawalAmount").placeholder = "Min/Max Limit: 10.00/ " + WithdrawLimit
 
     var WithdrawAmountList = await PostMethodWithParameter(apiEndPoints.withdrawListAmount, model);
     document.getElementById("WithdrawAmount").innerHTML = "MYR " + WithdrawAmountList.data.totalAmount;
@@ -739,7 +738,7 @@ async function Withdrawal() {
         }
     }
     else {
-        ShowError(ChangeErroMessage("min_max_amount_error_parameter", WithdrawLimit + "."));
+        ShowError(ChangeErroMessage("min_max_amount_error"));
     }
     //LoaderHide();
 }
