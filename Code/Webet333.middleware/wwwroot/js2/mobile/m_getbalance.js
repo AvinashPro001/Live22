@@ -136,78 +136,78 @@ function TransferPageWallets() {
     document.getElementById("SBOWallet").innerHTML = SBOWallet;
 }
 
-async function RestoreBalance() {
-    document.getElementById("refresh_btn_spin").classList.add("fa-spin");
-    //LoaderShow();
-    try {
-        $('.values').html('');
-        $('.img_load').css('display', 'block');
+//async function RestoreBalance() {
+//    document.getElementById("refresh_btn_spin").classList.add("fa-spin");
+//    //LoaderShow();
+//    try {
+//        $('.values').html('');
+//        $('.img_load').css('display', 'block');
 
-        $("#retore_li").css("pointer-events", "none");
+//        $("#retore_li").css("pointer-events", "none");
 
-        var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-        var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
+//        var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
+//        var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
 
-        if (userDetails == null) {
-            var res = await GetMethod(apiEndPoints.getProfile);
-            sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
-            userDetails = res;
-        }
+//        if (userDetails == null) {
+//            var res = await GetMethod(apiEndPoints.getProfile);
+//            sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
+//            userDetails = res;
+//        }
 
-        if (globalParameter == null) {
-            var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
-            sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
-            globalParameter = gamePrefix;
-        }
+//        if (globalParameter == null) {
+//            var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
+//            sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
+//            globalParameter = gamePrefix;
+//        }
 
-        //#region Get user walletId
-        await MainWalletBalance();
-        await Kiss918WalletBalance(userDetails.data.username918);
-        await AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username);
-        await PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username);
-        await Mega888WalletBalance(userDetails.data.loginid);
-        await M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username);
-        await MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username);
-        await JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username);
-        await DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username);
-        await SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username);
-        await SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username);
-        await Pussy888WalletBalance(userDetails.data.usernamePussy888);
-        await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
-        await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
-        await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
-        await YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
-        await SBOWalletBalance(globalParameter.data.sboGamePrefix + userDetails.data.userId);
+//        //#region Get user walletId
+//        await MainWalletBalance();
+//        await Kiss918WalletBalance(userDetails.data.username918);
+//        await AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username);
+//        await PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username);
+//        await Mega888WalletBalance(userDetails.data.loginid);
+//        await M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username);
+//        await MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username);
+//        await JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username);
+//        await DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username);
+//        await SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username);
+//        await SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username);
+//        await Pussy888WalletBalance(userDetails.data.usernamePussy888);
+//        await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
+//        await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
+//        await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
+//        await YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
+//        await SBOWalletBalance(globalParameter.data.sboGamePrefix + userDetails.data.userId);
 
-        let restoreModel = {
-            kiss918wallet: _918KissWallet == "N/A" ? "0.0" : _918KissWallet,
-            maxbetwallet: MaxBetWallet == "N/A" ? "0.0" : MaxBetWallet,
-            jokerwallet: JokerWallet == "N/A" ? "0.0" : JokerWallet,
-            agwallet: AGWallet == "N/A" ? "0.0" : AGWallet,
-            m8wallet: M8Wallet == "N/A" ? "0.0" : M8Wallet,
-            playtechwallet: PlayTechWallet == "N/A" ? "0.0" : PlayTechWallet,
-            mega888wallet: Mega888Wallet == "N/A" ? "0.0" : Mega888Wallet,
-            dgwallet: DgWallet == "N/A" ? "0.0" : DgWallet,
-            sexywallet: sexyWallet == "N/A" ? "0.0" : sexyWallet,
-            sawallet: saWallet == "N/A" ? "0.0" : saWallet,
-            pussy888wallet: Pussy888Wallet == "N/A" ? "0.0" : Pussy888Wallet,
-            allbetwallet: AllBetWallet == "N/A" ? "0.0" : AllBetWallet,
-            WMwallet: WMWallet == "N/A" ? "0.0" : WMWallet,
-            pragmaticwallet: PragmaticWallet == "N/A" ? "0.0" : PragmaticWallet,
-            yeebetwallet: YeeBetWallet == "N/A" ? "0.0" : YeeBetWallet,
-            sbowallet: SBOWallet == "N/A" ? "0.0" : SBOWallet,
-            id: null
-        }
-        await PostMethod(apiEndPoints.restoreBalance, restoreModel)
-        $("#retore_li").css("pointer-events", "");
-    }
-    catch (ex) {
-    }
-    $("#retore_li").css("pointer-events", "");
-    RefershBalance();
-    //LoaderHide();
-    document.getElementById("refresh_btn_spin").classList.add("fa-spin");
-}
+//        let restoreModel = {
+//            kiss918wallet: _918KissWallet == "N/A" ? "0.0" : _918KissWallet,
+//            maxbetwallet: MaxBetWallet == "N/A" ? "0.0" : MaxBetWallet,
+//            jokerwallet: JokerWallet == "N/A" ? "0.0" : JokerWallet,
+//            agwallet: AGWallet == "N/A" ? "0.0" : AGWallet,
+//            m8wallet: M8Wallet == "N/A" ? "0.0" : M8Wallet,
+//            playtechwallet: PlayTechWallet == "N/A" ? "0.0" : PlayTechWallet,
+//            mega888wallet: Mega888Wallet == "N/A" ? "0.0" : Mega888Wallet,
+//            dgwallet: DgWallet == "N/A" ? "0.0" : DgWallet,
+//            sexywallet: sexyWallet == "N/A" ? "0.0" : sexyWallet,
+//            sawallet: saWallet == "N/A" ? "0.0" : saWallet,
+//            pussy888wallet: Pussy888Wallet == "N/A" ? "0.0" : Pussy888Wallet,
+//            allbetwallet: AllBetWallet == "N/A" ? "0.0" : AllBetWallet,
+//            WMwallet: WMWallet == "N/A" ? "0.0" : WMWallet,
+//            pragmaticwallet: PragmaticWallet == "N/A" ? "0.0" : PragmaticWallet,
+//            yeebetwallet: YeeBetWallet == "N/A" ? "0.0" : YeeBetWallet,
+//            sbowallet: SBOWallet == "N/A" ? "0.0" : SBOWallet,
+//            id: null
+//        }
+//        await PostMethod(apiEndPoints.restoreBalance, restoreModel)
+//        $("#retore_li").css("pointer-events", "");
+//    }
+//    catch (ex) {
+//    }
+//    $("#retore_li").css("pointer-events", "");
+//    RefershBalance();
+//    //LoaderHide();
+//    document.getElementById("refresh_btn_spin").classList.add("fa-spin");
+//}
 
 async function RestoreBalance() {
     //LoaderShow();
