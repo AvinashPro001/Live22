@@ -73,14 +73,12 @@
                                 <td>WM</td>
                                 <td>Pragmatic</td>
                             </tr>
-
-
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td id="sbo_balance"><img src="~/images/loading.gif" /></td>
                                 <td id="yeebet_balance"><img src="~/images/loading.gif" /></td>
-                                <td></td>
+                                <td id="gameplay_balance"><img src="~/images/loading.gif" /></td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -89,12 +87,10 @@
                                 <td></td>
                                 <td>SBO</td>
                                 <td>YeeBet</td>
-                                <td></td>
+                                <td>GamePlay</td>
                                 <td></td>
                                 <td></td>
                             </tr>
-
-
                         </tbody>
                     </table>
                 </div>
@@ -917,6 +913,33 @@
                                     </div>
                                 </div>
 
+                                 <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>GamePlay</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('GamePlay Wallet')" id="gameplay-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="gameplay_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>
+                                                    Daily Turnover
+                                                </li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="gameplay_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -1074,7 +1097,6 @@
                                                 </tbody>
                                             </table>
                                             <div class="pagination_tables" id="tbl_withdrawdepositHistory_pagination">
-
                                             </div>
                                         </div>
                                     </div>
@@ -1097,7 +1119,6 @@
                                                 </tbody>
                                             </table>
                                             <div class="pagination_tables" id="tbl_promotionHistory_pagination">
-
                                             </div>
                                         </div>
                                     </div>
@@ -1119,7 +1140,6 @@
                                                 </tbody>
                                             </table>
                                             <div class="pagination_tables" id="tbl_RebateHistory_pagination">
-
                                             </div>
                                         </div>
                                     </div>
@@ -1138,7 +1158,6 @@
                                                 </tbody>
                                             </table>
                                             <div class="pagination_tables" id="tbl_rewardHistory_pagination">
-
                                             </div>
                                         </div>
                                     </div>
@@ -1263,7 +1282,7 @@
                                                     <p class="big no-mar lang" key="profile_new_password">New Password :</p>
                                                 </label>
                                                 <label class="fright lock">
-                                                    <input type="password" class="reg-form" placeholder="New Password" id="txt_newPassword"  onkeyup="OnPasswordType('txt_newPassword','')" autocomplete="off"/>
+                                                    <input type="password" class="reg-form" placeholder="New Password" id="txt_newPassword" onkeyup="OnPasswordType('txt_newPassword','')" autocomplete="off" />
                                                     <p class="note no-mar mar-btm-ten grey-color" id="pass-len">
                                                         <i class="fas fa-check"></i>&nbsp;&nbsp;<span class="lang" key="password_instruction"> </span>
                                                     </p>

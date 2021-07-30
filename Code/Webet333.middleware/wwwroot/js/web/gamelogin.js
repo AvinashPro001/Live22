@@ -29,6 +29,7 @@ function CallGameLoginAPI(WalletName, IsSlots) {
         case "MaxBet Wallet": OpenMaxbetGame(); break;
         case "YeeBet Wallet": OpenYeeBetGame(); break;
         case "SBO Wallet": OpenSBOGame(); break;
+        case "GamePlay Wallet": OpenGamePlayGame(IsSlots, ''); break;
     }
 }
 
@@ -380,6 +381,52 @@ async function OpenSBOGame() {
     }
 }
 
+async function OpenGamePlayGame(IsSlots, GameCode) {
+    if (IsSlots) {
+        window.open("../Web/slots#gameplay-game");
+        let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+
+        if (resSelectUser.GamePlay !== true) {
+            var model = {}
+            let res = await PostMethod(gameRegisterEndPoints.gameplayRegister, model);
+            if (res.status == 200) if (res.response.data.status == 0) { }
+        }
+    }
+    else {
+        if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
+        window.open("../Web/game");
+        let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+        var model = {};
+        if (resSelectUser.GamePlay !== true) {
+            let res = await PostMethod(gameRegisterEndPoints.gameplayRegister, model);
+            if (res.status == 200)
+                if (res.response.data.status == 0) {
+                    if (IsSlots) model = { isMobile: false, gameCode: GameCode };
+                    else model = { isMobile: false };
+                    var login = await PostMethod(gameLoginEndPoints.gameplayLogin, model);
+                    if (login.status == 200) if (res.response.data.status == 0) SetLocalStorage("gameURL", login.response.data.game_url);
+                }
+        }
+        else {
+            if (IsSlots) model = { isMobile: false, gameCode: GameCode };
+            else model = { isMobile: false };
+            let login = await PostMethod(gameLoginEndPoints.gameplayLogin, model);
+            if (login.status == 200) if (res.response.data.status == 0) SetLocalStorage("gameURL", login.response.data.game_url);
+        }
+    }
+}
+
+async function LoginGameplayGame(GameCode) {
+    if (GetLocalStorage('currentUser') == null) return ShowError(ChangeErroMessage('please_loign_error'));
+    window.open('../Web/game');
+    let model = {
+        gameCode: GameCode,
+        isMobile: false,
+    }
+    var res = await PostMethod(gameLoginEndPoints.gameplayLogin, model)
+    SetLocalStorage('gameURL', res.response.data.game_url);
+}
+
 async function OpenPragmaticGame() {
     window.open("../Web/slots#pragmatic-game");
     PragmaticBrokenStatusInterval();
@@ -411,7 +458,6 @@ async function OpenPlaytechGame(IsSlots) {
     else {
         LoginPlaytechGame("7bal")
     }
-
 }
 
 async function LoginPragmaticGame(GameCode) {
@@ -467,7 +513,6 @@ function GenratePlaytechSlotsGameHTML(GameList, SectionId, IsAppend) {
     var html = "";
     if (GameList.length > 0) {
         for (i = 0; i < GameList.length; i++) {
-
             html += '<li><div class="img-text-block"><div class="cmn-block"><figure><img src="' + GameList[i].ImagePath2 + '" alt="img"></figure><div class="text-content text-center"><h4>' + GameList[i].GameName + '</h4></div></div><div class="hover-block"><div class="text-content text-center"><h4>' + GameList[i].GameName + '</h4></div><figure><img src="' + GameList[i].ImagePath2 + '" alt="img"><div class="overlay"><button  onclick="LoginPlaytechGame(\'' + GameList[i].GameCode + '\')" >play</button></div></figure></div></div></li>';
         }
         if (IsAppend)
@@ -494,6 +539,23 @@ function GenratePragmaticSlotsGameHTML(GameList, SectionId, IsAppend) {
             $("#" + SectionId).append(html);
         else
             SetAllValueInElement(SectionId, html)
+    }
+    else {
+        if ($("#" + SectionId).children().length < 1) {
+            html = '<div class="col-sm-12 pl0" ><div class="all_promotion_left no_promotion">NO GAME</div></div>';
+            SetAllValueInElement(SectionId, html)
+        }
+    }
+}
+
+function GenrateGameplaySlotsGameHTML(GameList, SectionId, IsAppend) {
+    var html = "";
+    if (GameList.length > 0) {
+        for (i = 0; i < GameList.length; i++) {
+            html += '<li><div class="img-text-block"><div class="cmn-block"><figure><img src="' + GameList[i].ImagePath1 + '" alt="img"></figure><div class="text-content text-center"><h4>' + GameList[i].GameName + '</h4></div></div><div class="hover-block"><div class="text-content text-center"><h4>' + GameList[i].GameName + '</h4></div><figure><img src="' + GameList[i].ImagePath1 + '" alt="img"><div class="overlay"><button onclick="LoginGameplayGame(\'' + GameList[i].GameCode + '\')" >play</button></div></figure></div></div></li>';
+        }
+        if (IsAppend) $("#" + SectionId).append(html);
+        else SetAllValueInElement(SectionId, html)
     }
     else {
         if ($("#" + SectionId).children().length < 1) {
@@ -531,6 +593,9 @@ async function PlaytechSlotsGameList(PageNumber = null, IsAppend = true) {
 }
 
 async function PragmaticSlotsGameList(PageNumber = null, IsAppend = true) {
+
+    
+
     var model = {
         WalletName: "Pragmatic Wallet",
         pageNo: PageNumber == null ? slotPageNumber : PageNumber,
@@ -550,6 +615,29 @@ async function PragmaticSlotsGameList(PageNumber = null, IsAppend = true) {
         GenratePragmaticSlotsGameHTML(NewList, 'pragmatic-new-section', IsAppend)
         GenratePragmaticSlotsGameHTML(SlotsList, 'pragmatic-slot-section', IsAppend)
         GenratePragmaticSlotsGameHTML(ArcadeList, 'pragmatic-arcade-section', IsAppend)
+    }
+}
+
+async function GameplaySlotsGameList(PageNumber = null, IsAppend = true) {
+    var model = {
+        WalletName: "Gameplay Wallet",
+        pageNo: PageNumber == null ? slotPageNumber : PageNumber,
+        pageSize: 15,
+        Name: $("#gameplaySearch").val() == "" ? null : $("#gameplaySearch").val()
+    };
+    var list = await PostMethod(gameSettingEndPoints.slotsGameList, model)
+    if (list.status == 200) {
+        gameList = list.response.data.result;
+        let HotList = gameList.filter(x => x.IsHot == true);
+        let NewList = gameList.filter(x => x.IsNew == true);
+        let ArcadeList = gameList.filter(x => x.IsArcade == true);
+        let SlotsList = gameList.filter(x => x.IsSlot == true);
+
+        GenrateGameplaySlotsGameHTML(gameList, 'gameplay-all-section', IsAppend)
+        GenrateGameplaySlotsGameHTML(HotList, 'gameplay-hot-section', IsAppend)
+        GenrateGameplaySlotsGameHTML(NewList, 'gameplay-new-section', IsAppend)
+        GenrateGameplaySlotsGameHTML(SlotsList, 'gameplay-slot-section', IsAppend)
+        GenrateGameplaySlotsGameHTML(ArcadeList, 'gameplay-arcade-section', IsAppend)
     }
 }
 
@@ -574,8 +662,7 @@ async function HotSlotsgame() {
     }
 }
 
-function HotGameOpen(GameName, GameCode) {
-}
+function HotGameOpen(GameName, GameCode) { }
 
 function HotGameSLiderJs() {
     $('.game-slider').slick({
@@ -613,6 +700,11 @@ function SearchInPlaytechGameList() {
 function SearchInPragmaticGameList() {
     slotPageNumber = 0;
     PragmaticSlotsGameList(null, false);
+}
+
+function SearchInGameplayGameList() {
+    slotPageNumber = 0;
+    GameplaySlotsGameList(null, false);
 }
 
 function PlaytechBrokenStatusInterval() {

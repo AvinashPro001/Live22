@@ -295,6 +295,10 @@
                                                                 <td class="menu-padding" style="font-size: 12px;">SBO wallet</td>
                                                                 <td><span id="sbo_balance_dropdown" style="font-size: 12px;">fetching.....</span></td>
                                                             </tr>
+                                                            <tr>
+                                                                <td class="menu-padding" style="font-size: 12px;">GamePlay wallet</td>
+                                                                <td><span id="gameplay_balance_dropdown" style="font-size: 12px;">fetching.....</span></td>
+                                                            </tr>
                                                         </table>
                                                     </div>
                                                 </div>
@@ -399,6 +403,11 @@
                                     <img id="wm-wallet" onclick="OpenGame('WM Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/wm.png" alt="wm" />WM Casino
                                 </a>
                             </li>
+                            <li>
+                                <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="gameplay">
+                                    <img id="gameplay-wallet" onclick="OpenGame('GamePlay Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/wm.png" alt="wm" />GamePlay Casino
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -446,7 +455,11 @@
                                     <img id="pragmatic-wallet" onclick="OpenGame('Pragmatic Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/8.png" alt="Pragmatic" />Pragmatic Play
                                 </a>
                             </li>
-
+                            <li>
+                                <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="gp">
+                                    <img id="gameplay-wallet" onclick="OpenGame('GamePlay Wallet',true)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/8.png" alt="Gameplay" />Game Play
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -480,12 +493,12 @@
                 </li>
                 @*<li class="promotion">
                     <a href="#">
-                        <span class="lang" key="menu_promotion">
-                            <img class="normal_icons" src="~/images/fish.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="~/images/fish_hover.png" width="26" height="23" alt=""> Fish
-                        </span>
+                    <span class="lang" key="menu_promotion">
+                    <img class="normal_icons" src="~/images/fish.png" width="26" height="23" alt="">
+                    <img class="hover_icons" src="~/images/fish_hover.png" width="26" height="23" alt=""> Fish
+                    </span>
                     </a>
-                </li>*@
+                    </li>*@
                 <li class="promotion">
                     <a href="~/Web/promotion">
                         <span>

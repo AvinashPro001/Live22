@@ -199,6 +199,21 @@ async function GameInMaintenance(i) {
             document.getElementById('SBOSports').style.filter = "";
             document.getElementById('SBOSportsLogin').style.filter = "";
         }
+
+        if (walletData.data[i].walletType == "GamePlay Wallet" &&
+            walletData.data[i].isMaintenance == true) {
+            document.getElementById('gameplaylive').style.filter = "grayscale(1)";
+            document.getElementById('gameplayslot').style.filter = "grayscale(1)";
+            document.getElementById('gameplaylivelogin').style.filter = "grayscale(1)";
+            document.getElementById('gameplayslotlogin').style.filter = "grayscale(1)";
+        }
+        else if (walletData.data[i].walletType == "GamePlay Wallet" &&
+            walletData.data[i].isMaintenance == false) {
+            document.getElementById('gameplaylive').style.filter = "";
+            document.getElementById('gameplayslot').style.filter = "";
+            document.getElementById('gameplaylivelogin').style.filter = "";
+            document.getElementById('gameplayslotlogin').style.filter = "";
+        }
     }
 }
 
@@ -376,6 +391,19 @@ async function AllInButtonDisable(i) {
             walletData.data[i].isMaintenance == false) {
             if (window.location.href.toLowerCase().includes('?p=transfer')) document.getElementById("SBOAllIn").disabled = false;
         }
+
+        if (walletData.data[i].walletType == "GamePlay Wallet" &&
+            walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+                document.getElementById("gameplayallin").disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == "GamePlay Wallet" &&
+            walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+                document.getElementById("gameplayallin").disabled = false;
+            }
+        }
     }
 }
 
@@ -429,6 +457,8 @@ async function CheckGameInMaintenance(gameName) {
     if (gameName == "YeeBet") walletName = "YeeBet Wallet";
 
     if (gameName == "SBO") walletName = "SBO Wallet";
+
+    if (gameName == 'GamePlay') walletName = 'GamePlay Wallet';
 
     for (i = 0; i < walletData.data.length; i++)
         if (walletData.data[i].walletType == walletName && walletData.data[i].isMaintenance == true)
@@ -596,39 +626,27 @@ async function logingGame(gameName) {
     }
     if (GetLocalStorage('currentUser') !== null) {
         if (checkedValue) {
-            if (gameName == "M8")
-                TransferInAllWallet("M8 Wallet");
-            if (gameName == "MaxBet")
-                TransferInAllWallet("MaxBet Wallet");
-            if (gameName == "SexyBaccarat")
-                TransferInAllWallet("Sexy Wallet");
-            if (gameName == "SA")
-                TransferInAllWallet("SA Wallet");
-            if (gameName == "DG")
-                TransferInAllWallet("DG Wallet");
-            if (gameName == "918Kiss")
-                TransferInAllWallet("918Kiss Wallet");
-            if (gameName == "Mega888")
-                TransferInAllWallet("Mega888 Wallet");
-            if (gameName == "Joker")
-                TransferInAllWallet("Joker Wallet");
-            if (gameName == "Pussy888")
-                TransferInAllWallet("Pussy888 Wallet");
-            if (gameName == "AllBet")
-                TransferInAllWallet("AllBet Wallet");
-            if (gameName == "WM")
-                TransferInAllWallet("WM Wallet");
+            if (gameName == "M8") TransferInAllWallet("M8 Wallet");
+            if (gameName == "MaxBet") TransferInAllWallet("MaxBet Wallet");
+            if (gameName == "SexyBaccarat") TransferInAllWallet("Sexy Wallet");
+            if (gameName == "SA") TransferInAllWallet("SA Wallet");
+            if (gameName == "DG") TransferInAllWallet("DG Wallet");
+            if (gameName == "918Kiss") TransferInAllWallet("918Kiss Wallet");
+            if (gameName == "Mega888") TransferInAllWallet("Mega888 Wallet");
+            if (gameName == "Joker") TransferInAllWallet("Joker Wallet");
+            if (gameName == "Pussy888") TransferInAllWallet("Pussy888 Wallet");
+            if (gameName == "AllBet") TransferInAllWallet("AllBet Wallet");
+            if (gameName == "WM") TransferInAllWallet("WM Wallet");
             if (gameName == "Pragmatic") {
                 PragmaticBrokenStatusInterval();
                 TransferInAllWallet("Pragmatic Wallet");
             }
             if (gameName == "YeeBet") TransferInAllWallet("YeeBet Wallet");
             if (gameName == "SBO") TransferInAllWallet("SBO Wallet");
+            if (gameName == 'GamePlay') TransferInAllWallet("GamePlay Wallet");
         }
-        if (gameName != "Pragmatic")
-            window.open("/mobile/Game?gamename=" + gameName);
-        else
-            GameLoginMobile("Pragmatic");
+        if (gameName != "Pragmatic") window.open("/mobile/Game?gamename=" + gameName);
+        else GameLoginMobile("Pragmatic");
     }
     else {
         alert("Please Login");
@@ -1111,6 +1129,22 @@ async function GameLoginMobile(gamename) {
                     if (res.data.error.id == 0) location.href = res.data.url;
                 }
                 break;
+            case 'GamePlay':
+                if (resSelectUser.data.GamePlay !== true) {
+                    let model = {};
+                    var res = await PostMethod(apiEndPoints.GamePlayRegister, model);
+                    if (res.data.status == 0) {
+                        let model = { isMobile: true };
+                        let res = await PostMethod(apiEndPoints.GamePlayLogin, model);
+                        if (res.response.data.status == 0) location.href = res.data.game_url;
+                    }
+                }
+                else {
+                    let model = { isMobile: true };
+                    let res = await PostMethod(apiEndPoints.GamePlayLogin, model);
+                    if (res.response.data.status == 0) location.href = res.data.game_url;
+                }
+                break;
         }
     }
     else {
@@ -1124,9 +1158,9 @@ function OpenPragmaticGamePage(code) {
 }
 
 function OpenPlaytechGamePage(code) {
-    if (GetLocalStorage('currentUser') !== null) 
+    if (GetLocalStorage('currentUser') !== null)
         window.open("../mobile/Game?gamename=Playtech&gamecode=" + code, "_blank")
-    else 
+    else
         alert(ChangeErroMessage("please_loign_error"));
 }
 

@@ -1,5 +1,5 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '9001';
 let PortWEB = '9002';
 
@@ -143,6 +143,9 @@ var apiEndPoints = {
 
     SBORegister: 'sbo/register/player',
     SBOLogin: 'sbo/login',
+
+    GamePlayRegister: 'gameplay/register',
+    GamePlayLogin: 'gameplay/login',
 
     kiss918Balance: 'gamebalance/918kiss',
     mega888Balance: 'gamebalance/mega888',

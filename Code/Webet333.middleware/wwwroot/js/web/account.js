@@ -648,7 +648,8 @@ async function regisrationGame() {
                 resSelectUser.AllBet === false ||
                 resSelectUser.WM === false ||
                 resSelectUser.Pragmatic === false ||
-                resSelectUser.SBO === false
+                resSelectUser.SBO === false ||
+                resSelectUser.GamePlay === false
             ) {
                 var res = await PostMethod(accountEndPoints.gameRegisterCheck, userModel);
                 resSelectUser = res.response.data;
@@ -816,6 +817,14 @@ async function regisrationGame() {
                 }
                 catch {
                 }
+            }
+
+            if (resSelectUser.GamePlay !== true) {
+                let model = {}
+                try {
+                    await PostMethod(gameRegisterEndPoints.gameplayRegister, model);
+                }
+                catch { }
             }
 
             localStorage.setItem('IsExecute', false);
