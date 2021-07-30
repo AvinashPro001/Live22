@@ -93,7 +93,7 @@
   "confirm_password_placeholder": "Confirm Password",
   "contact_instruction": "Please enter valid phone number to received TAC number for activation account",
   "submit_button": "Submit",
-  "username_instruction": "Username must contain a length of 7 charaters.",
+  "username_instruction": "Username must contain a length of 7 Characters.",
   "username_specialCharacter_instruction": "Special characters not allowed.",
   "password_instruction": "Password must contain a length of 6 charaters",
   "password_alpha_instruction": "Password must be alphanumeric.",

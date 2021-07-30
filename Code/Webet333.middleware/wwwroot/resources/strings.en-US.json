@@ -192,7 +192,7 @@
   "mobile_login": "Login",
 
   "balance": "Balance",
-  "username_instruction": "Username must contain a length of 7 charaters.",
+  "username_instruction": "Username must contain a length of 7 characters.",
   "username_specialCharacter_instruction": "Special characters not allowed",
 
   "password_instruction": "Password must contain a length of 6 Characters",
@@ -226,12 +226,12 @@
   "sms_error": "SMS not send !! Please Contact to Administration.",
   "mobile_length_error": "Please enter valid Mobile Number",
   "pass_length_error": "Password length Minimum 6 digits.",
-  "username_required_error": "Username Filed is required.",
+  "username_required_error": "Username Field is required.",
   "username_length_error": "Username Length too short.",
   "password_required_error": "Password Field is required.",
   "confirm_password_required_error": "Confirm Password Field is required.",
   "new_password_check_error": "It's your previous password, Please enter new password",
-  "name_required_error": "Name Filed is required.",
+  "name_required_error": "Name Field is required.",
   "username_pass_diff_error": "Password and username must be different.",
   "pass_alpha_error": "Password must be alphanumeric.",
   "pass_not_match_error": "Passwords do not match!",
@@ -250,10 +250,10 @@
   "min_max_amount_error": "Minimum Amount 10 and Maximum Amount is 30000.",
   "min_max_amount_error_parameter": "Minimum Amount 10 and Maximum Amount is ",
   "min1_max1000_amount_error": "Minimum Amount MYR 1",
-  "bnk_name_required_error": "Bank Name Filed is required.",
+  "bnk_name_required_error": "Bank Name Field is required.",
 
-  "amt_req_error": "Amount Filed is required.",
-  "acc_no_req_error": "Account number Filed is required.",
+  "amt_req_error": "Amount Field is required.",
+  "acc_no_req_error": "Account number Field is required.",
 
   "promo_ongoing_withdraw_error": "Your Promotion is on going, cannot withdraw till the promotion is completed",
   "trans_not_completd_error": "Your Transaction is not completed.",
@@ -330,5 +330,8 @@
   "special_not_allowed": "Speical Charater are not allowed in Passsword !!",
   "amount_greater_one_error": "Please Enter Amount Greater than 1.",
 
-  "pls_select_date": "Please select date"
+  "pls_select_date": "Please select date",
+
+  "current_pass_req": "Please enter current password.",
+  "new_pass_req": "Please enter New Password"
 }
