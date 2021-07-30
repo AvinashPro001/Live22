@@ -400,8 +400,10 @@ async function DoRegister() {
 function checkPasswordMatch() {
     var password = $("#m_regsiter_password").val();
     var confirmPassword = $("#m_regsiter_confirmpassword").val();
-    if (password !== confirmPassword)
+    if (password !== confirmPassword) {
+        $("#divCheckPasswordMatch").css('display', 'block');
         $("#divCheckPasswordMatch").html(ChangeErroMessage("pass_not_match_error"));
+    }
     else
         $("#divCheckPasswordMatch").html("");
 }
@@ -784,6 +786,7 @@ function OnPasswordType(PasswordTextboxId, UsernameTextboxId) {
 function MobileValidation(TextFieldId, ErrorShowId) {
     var mobile = $('#' + TextFieldId).val();
     if (mobile.length < 10 || mobile.length > 11) {
+        $("#" + ErrorShowId).css('display', 'block');
         $("#" + ErrorShowId).text(ChangeErroMessage("mobile_length_error"));
     }
     else {
