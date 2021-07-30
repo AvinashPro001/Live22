@@ -211,7 +211,8 @@ function TransferPageWallets() {
 
 async function RestoreBalance() {
     //LoaderShow();
-    $(".refresh").addClass('fa-spin');
+    debugger
+    $(".refresh,#refreshBtn").addClass('fa-spin');
     try {
         $('.values').html('');
         $('.img_load').css('display', 'block');
@@ -279,7 +280,7 @@ async function RestoreBalance() {
     $("#retore_li").css("pointer-events", "");
     WalletBalance();
     //LoaderHide();
-    $(".refresh").removeClass('fa-spin');
+    $(".refresh,#refreshBtn").removeClass('fa-spin');
 }
 
 function numberWithCommas(x) {
