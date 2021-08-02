@@ -330,6 +330,8 @@ async function DoRegister() {
 
     if (username.length < 7) return ShowError(ChangeErroMessage("username_length_error"));
 
+    if (/^[a-zA-Z0-9- ]*$/.test(username) == false) return ShowError(ChangeErroMessage('special_char_not_allowed'));
+
     var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     if (!reqExp.test(username)) return ShowError(ChangeErroMessage("username_alpha_error"));
 
@@ -351,9 +353,6 @@ async function DoRegister() {
 
     var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     if (!regex.test(password)) return ShowError(ChangeErroMessage("pass_alpha_error"));
-
-    if (/^[a-zA-Z0-9- ]*$/.test(username) == false)
-        return ShowError(ChangeErroMessage('special_char_not_allowed'));
 
     if (/^[a-z0-9_]+$/i.test(username) == false)
         return ShowError(ChangeErroMessage('space_not_allowed'));
