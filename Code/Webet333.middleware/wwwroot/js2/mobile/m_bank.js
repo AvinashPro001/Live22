@@ -927,7 +927,7 @@ function LoadingImageShowAllInSection(GameName) {
         case "AG Wallet": document.getElementById("AGWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "PlayTech Wallet": document.getElementById("PlaytechWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "M8 Wallet": document.getElementById("M8Wallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
-        case "MaxBet Wallet": document.getElementById("MaxbetWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "MaxBet Wallet": document.getElementById("MaxBetWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "Mega888 Wallet": document.getElementById("Mega888Wallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "Joker Wallet": document.getElementById("JokerWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "DG Wallet": document.getElementById("DGWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
