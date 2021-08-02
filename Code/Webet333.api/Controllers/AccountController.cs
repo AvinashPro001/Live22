@@ -241,12 +241,12 @@ namespace Webet333.api.Controllers
 
                 if (user == null) return OkResponse();
 
-                await account_help.SendOtp(user.Id.ToString(), user.MobileNo);
+                //await account_help.SendOtp(user.Id.ToString(), user.MobileNo);
 
-                var registerMessage = Localizer["msg_register_msg"].Value;
+                //var registerMessage = Localizer["msg_register_msg"].Value;
 
-                var messageResponse = await account_help.SendSMSAPI(request.Mobile, String.Format(registerMessage, request.Username));
-                var count = messageResponse.Count(f => f == ',');
+                //var messageResponse = await account_help.SendSMSAPI(request.Mobile, String.Format(registerMessage, request.Username));
+                //var count = messageResponse.Count(f => f == ',');
 
                 var user_token = new TokenHelpers(Connection).GetAccessToken(AuthConfigOptions.Value, user, uniqueId);
 
@@ -256,12 +256,12 @@ namespace Webet333.api.Controllers
                 {
                     access_token = user_token,
                     user,
-                    totalBankAccount = user.BankAccount,
-                    messageResponse = new SMSResponse
-                    {
-                        smsMessage = Localizer["e_" + messageResponse].Value,
-                        statusCode = messageResponse
-                    }
+                    totalBankAccount = user.BankAccount
+                    //messageResponse = new SMSResponse
+                    //{
+                    //    smsMessage = Localizer["e_" + messageResponse].Value,
+                    //    statusCode = messageResponse
+                    //}
                 });
 
                 #endregion Sending SMS in queue
@@ -717,47 +717,48 @@ namespace Webet333.api.Controllers
 
         #region Send OTP
 
-        [Authorize]
         [HttpPost(ActionsConst.Account.SendOtp)]
-        public async Task<IActionResult> SendOtp([FromBody] GetByIdRequest request)
+        public async Task<IActionResult> SendOtp([FromBody] SendOtpRequest request)
         {
-            await ValidateUser();
+            if (HttpContext.User.Identity.IsAuthenticated)
+                await CheckUserRole();
 
             using (var account_help = new AccountHelpers(Connection))
             {
                 if (string.IsNullOrWhiteSpace(request.Id))  // Called by user
                 {
-                    var response = await account_help.SendOtp(UserEntity.Id.ToString(), UserEntity.MobileNo);
+                    var response = await account_help.SendOtp(request);
                     if (response.ErrorCode != 0) return BadResponse();
                 }
                 else // Called by Admin
                 {
                     var result = await account_help.FindUser(userId: request.Id);
-                    var response = await account_help.SendOtp(result.Id.ToString(), result.MobileNo);
+                    request.MobileNo = result.MobileNo;
+                    request.Role = GetUserRole(User);
+                    var response = await account_help.SendOtp(request);
                     if (response.ErrorCode != 0) return BadResponse();
                 }
-
                 return OkResponse();
             }
         }
 
         #endregion Send OTP
 
-        #region Verified OTP
+        //#region Verified OTP
 
-        [Authorize]
-        [HttpPost(ActionsConst.Account.VerifiedOtp)]
-        public async Task<IActionResult> VerifiedOTP([FromBody] OtpVerifiedRequest request)
-        {
-            await ValidateUser();
-            using (var account_help = new AccountHelpers(Connection))
-            {
-                var response = await account_help.VerifiedOtp(UserEntity.Id.ToString(), request.OTP);
-                return OkResponse(response);
-            }
-        }
+        //[Authorize]
+        //[HttpPost(ActionsConst.Account.VerifiedOtp)]
+        //public async Task<IActionResult> VerifiedOTP([FromBody] SendOtpRequest request)
+        //{
+        //    await ValidateUser();
+        //    using (var account_help = new AccountHelpers(Connection))
+        //    {
+        //        var response = await account_help.VerifiedOtp(UserEntity.Id.ToString(), request.OTP);
+        //        return OkResponse(response);
+        //    }
+        //}
 
-        #endregion Verified OTP
+        //#endregion Verified OTP
 
         #region Add IC Number
 
