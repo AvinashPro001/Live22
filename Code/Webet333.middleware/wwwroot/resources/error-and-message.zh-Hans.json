@@ -5,6 +5,7 @@
   "pass_length_error": "密码长度至少6位数字。",
   "username_required_error": "用户名为必填项",
   "username_length_error": "用户名太短",
+  "username_alpha_error": "用户名必须是字母数字。",
   "password_required_error": "请输入密码。",
   "confirm_password_required_error": "确认密码为必填项",
   "name_required_error": "名称为必填项",

@@ -5,6 +5,7 @@
   "pass_length_error": "Password length Minimum 6 digits.",
   "username_required_error": "Username Field is required.",
   "username_length_error": "Username Length too short.",
+  "username_alpha_error": "Username must be alphanumeric.",
   "password_required_error": "Please Enter Password.",
   "confirm_password_required_error": "Confirm Password Field is required.",
   "name_required_error": "Name Field is required.",

@@ -330,6 +330,9 @@ async function DoRegister() {
 
     if (username.length < 7) return ShowError(ChangeErroMessage("username_length_error"));
 
+    var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
+    if (!reqExp.test(username)) return ShowError(ChangeErroMessage("username_alpha_error"));
+
     if (password === "") return ShowError(ChangeErroMessage("password_required_error"));
 
     if (password.length < 6) return ShowError(ChangeErroMessage("pass_length_error"));
