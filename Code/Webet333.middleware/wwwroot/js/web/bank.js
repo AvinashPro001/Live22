@@ -716,7 +716,7 @@ Date.prototype.addDays = function (days) {
     return date;
 }
 
-function GetDateFormate(Date1, Date2) {
+function GetDateFormate (Date1, Date2) {
     var day1 = Date1.getDate();
     var Month1 = Date1.getMonth() + 1;
     var Year1 = Date1.getFullYear();
@@ -750,7 +750,7 @@ function Get3DayDate() {
     $("#datepicker1").val("")
     $("#datepicker2").val("")
     pageNumber = 0;
-    var fdate = new Date().addDays(-3);
+    var fdate = new Date().addDays(-2);
     var tdate = new Date();
     GetDateFormate(fdate, tdate)
     CallFunctionAccordingToTab();
