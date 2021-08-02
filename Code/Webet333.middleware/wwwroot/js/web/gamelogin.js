@@ -249,10 +249,10 @@ async function OpenMega888Game() {
         }
         var res = await PostMethod(gameRegisterEndPoints.mega888Register, userMegaa88Model);
         if (res.status == 200)
-            window.open("../Web/download");
+            window.open("../Web/download#MegaDownload");
     }
     else {
-        window.open("../Web/download");
+        window.open("../Web/download#MegaDownload");
     }
 }
 
@@ -265,10 +265,10 @@ async function OpenJokerGame() {
         var resJoker = await PostMethod(gameRegisterEndPoints.registerJoker, modelJoker);
         if (resJoker.status == 200)
             if (resJoker.response.data.Status != null)
-                window.open("../Web/download");
+                window.open("../Web/download#JokerDownload");
     }
     else {
-        window.open("../Web/download");
+        window.open("../Web/download#JokerDownload");
     }
 }
 
@@ -283,10 +283,10 @@ async function OpenPussy888Game() {
         }
         catch {
         }
-        window.open("../Web/download");
+        window.open("../Web/download#Pussy888Download");
     }
     else {
-        window.open("../Web/download");
+        window.open("../Web/download#Pussy888Download");
     }
 }
 
