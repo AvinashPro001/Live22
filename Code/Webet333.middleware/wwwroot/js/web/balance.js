@@ -172,7 +172,7 @@ async function ReturnBalanceBasedOnWalletName(WalletName) {
         case "Sexy Wallet": balance = UsersBalance.SexyBaccaratBalance; break;
         case "Pragmatic Wallet": balance = UsersBalance.PragmaticBalance; break;
         case "AllBet Wallet": balance = UsersBalance.Kiss918Balance; break;
-        case "M8 Wallet": balance = UsersBalance.Kiss918Balance; break;
+        case "M8 Wallet": balance = UsersBalance.M8Balance; break;
         case "MaxBet Wallet": balance = UsersBalance.Kiss918Balance; break;
         case "YeeBet Wallet": balance = UsersBalance.YeeBetBalance; break;
         case "SBO Wallet": balance = UsersBalance.SboBalance; break;
