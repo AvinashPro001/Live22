@@ -762,8 +762,8 @@ function GetInWeekDate() {
     pageNumber = 0;
     var curr = new Date(); // get current date
     var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-    var firstday = new Date(curr.setDate(first + 1))
-    var lastday = firstday.addDays(6)
+    var firstday = curr.addDays(-6)
+    var lastday = new Date(curr.setDate(first + 1))
     GetDateFormate(firstday, lastday);
     CallFunctionAccordingToTab();
 }
@@ -773,8 +773,8 @@ function GetInMonthDate() {
     $("#datepicker2").val("")
     pageNumber = 0;
     var date = new Date();
-    var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    var firstDay = new Date(date.getFullYear(), date.getMonth()-1, 1);
+    var lastDay = new Date(date.getFullYear(), date.getMonth() , 1);
     GetDateFormate(firstDay, lastDay);
     CallFunctionAccordingToTab();
 }
