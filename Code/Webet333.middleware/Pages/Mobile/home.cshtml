@@ -131,6 +131,12 @@
                                         <button class="game-title"><span class="lang" key="wm_game"></span></button>
                                     </a>
                                 </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="gameplaylive">
+                                    <a>
+                                        <figure><img src="~/images/mobile/wm.png" lt="GamePlay"></figure>
+                                        <button class="game-title"><span class="lang" key="gameplaylive_game"></span></button>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <div id="sport-tile" role="tabpanel" class="tab-pane fade in">
@@ -219,13 +225,15 @@
                                         <button class="game-title"><span class="lang" key="pragmaticslot_game"></span></button>
                                     </a>
                                 </li>
+                                <li onclick="GamePlayIdentifiy(true)" id="gameplayslotlogin">
+                                    <a>
+                                        <figure><img src="~/images/mobile/playtech.png" alt="Playtech"></figure>
+                                        <button class="game-title"><span class="lang" key="gameplayslot_game"></span></button>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
-                        @*<div id="fishing-tile" role="tabpanel" class="tab-pane fade in">
-                            <ul class="game-series">
-                                <li></li>
-                            </ul>
-                        </div>*@
+                        @*<div id="fishing-tile" role="tabpanel" class="tab-pane fade in"><ul class="game-series"><li></li></ul></div>*@
                     </div>
                 </div>
                 <div class="footer-quote">
@@ -298,7 +306,6 @@
                 <li><a onclick="loadPageAbout()" href="javascript:void(0);"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US" rel="prefetch"></p></a></li>
                 <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
                 <li><a onclick="loadPageAccount()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/profile.png" alt="Profile"><p class="lang" key="sidebar_Profile"></p></a></li>
-
             </ul>
         </div>
     </div>
@@ -439,7 +446,7 @@
                 <div class="text-center myr-quote">
                     <h4 class="main-wallet-bar">
                         <img class="viplevelImage home-vip-image" id="viplevel_icon" />
-                         MYR <span id="menuMainWallet" class="main-wallet-bal-pad"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="refresh fa fa-refresh"></span>
+                        MYR <span id="menuMainWallet" class="main-wallet-bal-pad"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="refresh fa fa-refresh"></span>
                     </h4>
                 </div>
                 <ul class="account-icon list-inline text-center">
@@ -542,6 +549,12 @@
                                     <button class="game-title"><span class="lang" key="wm_game"></span></button>
                                 </a>
                             </li>
+                            <li onclick="logingGame('GamePlay')" id="gameplaylivelogin">
+                                <a>
+                                    <figure><img src="~/images/mobile/pt.png" alt="gameplay"></figure>
+                                    <button class="game-title"><span class="lang" key="gameplaylive_game"></span></button>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div id="menu1" class="tab-pane fade">
@@ -622,7 +635,6 @@
                                     <button class="game-title"><span class="lang" key="jokerslot_game"></span></button>
                                 </a>
                             </li>
-
                             <li onclick="logingGame('Pragmatic')" id="pragmaticslotlogin">
                                 <a>
                                     <figure>
@@ -631,13 +643,15 @@
                                     <button class="game-title"><span class="lang" key="pragmaticslot_game"></span></button>
                                 </a>
                             </li>
+                            <li onclick="GamePlayIdentifiy(true)" id="gameplayslotlogin">
+                                <a>
+                                    <figure><img src="~/images/mobile/playtech.png" alt="GamePlay"></figure>
+                                    <button class="game-title"><span class="lang" key="gameplayslot_game"></span></button>
+                                </a>
+                            </li>
                         </ul>
                     </div>
-                    @*<div id="menu3" class="tab-pane fade">
-                        <ul class="game-series">
-                            <li></li>
-                        </ul>
-                    </div>*@
+                    @*<div id="menu3" class="tab-pane fade"><ul class="game-series"><li></li></ul></div>*@
                 </div>
                 <div class="footer-quote">
                     <p class="text-center"><img class="footer-copyright-section-img" src="~/images/mobile/reco-pagcor.png" /></p>

@@ -8,6 +8,7 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#playtech" data-toggle="tab"><img src="~/images/carousel_logos/playtech_color.png" alt="logo" /></a></li>
                 <li><a href="#pragmatic" data-toggle="tab"><img src="~/images/carousel_logos/pragmatic_color.png" alt="logo" /></a></li>
+                <li><a href="#gameplay" data-toggle="tab"><img src="~/images/carousel_logos/gameplay_color.png" alt="logo" /></a></li>
             </ul>
             <div class="tab-content">
                 <div id="playtech" class="tab-pane fade in active">
@@ -20,31 +21,11 @@
                             <li><a data-toggle="pill" href="#slot">slot</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div id="all" class="tab-pane fade in active">
-                              <ul id="playtech-all-section">
-                               
-                              </ul>
-                            </div>
-                            <div id="hot" class="tab-pane fade">
-                                <ul id="playtech-hot-section">
-                              
-                                </ul>
-                            </div>
-                            <div id="new" class="tab-pane fade">
-                                <ul id="playtech-new-section">
-                                   
-                                </ul>
-                            </div>
-                            <div id="arcade" class="tab-pane fade">
-                                <ul id="playtech-arcade-section">
-                                    
-                                </ul>
-                            </div>
-                            <div id="slot" class="tab-pane fade">
-                                <ul id="playtech-slot-section">
-                                    
-                                </ul>
-                            </div>
+                            <div id="all" class="tab-pane fade in active"><ul id="playtech-all-section"></ul></div>
+                            <div id="hot" class="tab-pane fade"><ul id="playtech-hot-section"></ul></div>
+                            <div id="new" class="tab-pane fade"><ul id="playtech-new-section"></ul></div>
+                            <div id="arcade" class="tab-pane fade"><ul id="playtech-arcade-section"></ul></div>
+                            <div id="slot" class="tab-pane fade"><ul id="playtech-slot-section"></ul></div>
                         </div>
                     </div>
                 </div>
@@ -58,26 +39,29 @@
                             <li><a data-toggle="pill" href="#slot1">slot</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div id="all1" class="tab-pane fade in active">
-                                <ul id="pragmatic-all-section">
-                                </ul>
-                            </div>
-                            <div id="hot1" class="tab-pane fade">
-                                <ul id="pragmatic-hot-section">
-                                </ul>
-                            </div>
-                            <div id="new1" class="tab-pane fade">
-                                <ul id="pragmatic-new-section">
-                                </ul>
-                            </div>
-                            <div id="arcade1" class="tab-pane fade">
-                                <ul id="pragmatic-arcade-section">
-                                </ul>
-                            </div>
-                            <div id="slot1" class="tab-pane fade">
-                                <ul id="pragmatic-slot-section">
-                                </ul>
-                            </div>
+                            <div id="all1" class="tab-pane fade in active"><ul id="pragmatic-all-section"></ul></div>
+                            <div id="hot1" class="tab-pane fade"><ul id="pragmatic-hot-section"></ul></div>
+                            <div id="new1" class="tab-pane fade"><ul id="pragmatic-new-section"></ul></div>
+                            <div id="arcade1" class="tab-pane fade"><ul id="pragmatic-arcade-section"></ul></div>
+                            <div id="slot1" class="tab-pane fade"><ul id="pragmatic-slot-section"></ul></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="gameplay" class="tab-pane fade">
+                    <div class="menu-list-area">
+                        <ul class="nav nav-pills">
+                            <li class="active"><a data-toggle="pill" href="#all2">All</a></li>
+                            <li><a data-toggle="pill" href="#hot2">Hot</a></li>
+                            <li><a data-toggle="pill" href="#new2">New</a></li>
+                            <li><a data-toggle="pill" href="#arcade2">Arcade</a></li>
+                            <li><a data-toggle="pill" href="#slot2">slot</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="all2" class="tab-pane fade in active"><ul id="gameplay-all-section"></ul></div>
+                            <div id="hot2" class="tab-pane fade"><ul id="gameplay-hot-section"></ul></div>
+                            <div id="new2" class="tab-pane fade"><ul id="gameplay-new-section"></ul></div>
+                            <div id="arcade2" class="tab-pane fade"><ul id="gameplay-arcade-section"></ul></div>
+                            <div id="slot2" class="tab-pane fade"><ul id="gameplay-slot-section"></ul></div>
                         </div>
                     </div>
                 </div>
@@ -122,24 +106,19 @@
     <div>
         <a id="mobileM8" style="display:none"></a>
     </div>
-
 </div>
 
 <script>
     $(window).scroll(function () {
-        var scroll = $(window).scrollTop();
-        if (scroll >= 1) {
-            $(".account-reg").addClass("sticky-gamemenu");
-        }
-        else {
-            $(".account-reg").removeClass("sticky-gamemenu");
-        }
+        let scroll = $(window).scrollTop();
+        if (scroll >= 1) $(".account-reg").addClass("sticky-gamemenu");
+        else $(".account-reg").removeClass("sticky-gamemenu");
     });
 
     $(document).ready(function () {
         PragmaticSlotsGameList();
         PlaytechSlotsGameList();
-      
+        GamePlaySlotsGameList();
     });
 
     var callCounter = 1
@@ -148,6 +127,7 @@
             ++slotPageNumber
             PlaytechSlotsGameList();
             PragmaticSlotsGameList();
+            GamePlaySlotsGameList();
         }
         ++callCounter;
     });

@@ -20,7 +20,7 @@ async function UserBankDetails() {
             UserBankName = userBank[i].bankName;
             UserAccountNumber = userBank[i].accountNo;
             UserAccountName = userBank[i].accountName;
-        }   
+        }
     }
     WithdrawUsernameSet();
 }
@@ -114,7 +114,7 @@ async function DepositPromotionList() {
 }
 
 async function BankList() {
-   
+
 }
 //#endregion
 
@@ -134,10 +134,10 @@ async function CheckWithdrawAmountList() {
     var model = {}
 
     var resUserVIPlevel = await GetMethodWithReturn(apiEndPoints.UserVipDetails);
-    sessionStorage.setItem("UserVipDetails", enc(JSON.stringify(resUserVIPlevel)))
+    sessionStorage.setItem("UserVipDetails", enc(JSON.stringify(resUserVIPlevel)));
 
     WithdrawLimit = parseFloat(resUserVIPlevel.data.WithdrawLimit).toFixed(2);
-    document.getElementById("txt_withdrawalAmount").placeholder = "Min/Max Limit: 10.00/ " + WithdrawLimit
+    document.getElementById("txt_withdrawalAmount").placeholder = "Min/Max Limit: 10.00/ " + WithdrawLimit;
 
     var WithdrawAmountList = await PostMethodWithParameter(apiEndPoints.withdrawListAmount, model);
     document.getElementById("WithdrawAmount").innerHTML = "MYR " + WithdrawAmountList.data.totalAmount;
@@ -596,7 +596,7 @@ async function Deposit(online) {
                 if (online) {
                     localStorage.setItem("IsWindowClose", false)
                     OpenPaymentPage();
-                }   
+                }
                 let data = {
                 }
                 var walletData = await PostMethodWithParameter(apiEndPoints.DepositCheckWithoutPromotion, data);
@@ -896,10 +896,8 @@ async function TransferInAllWallet(GameWalletName) {
     if (location.href.toLowerCase().includes("?p=transfer"))
         await LoadingImageShowAllInSection(GameWalletName);
     var GameName;
-    if (GameWalletName == undefined)
-        GameName = walletNameTransferInWallet;
-    else
-        GameName = GameWalletName
+    if (GameWalletName == undefined) GameName = walletNameTransferInWallet;
+    else GameName = GameWalletName
 
     let model = {
         walletName: GameName
@@ -924,6 +922,9 @@ function LoadingImageShowAllInSection(GameName) {
         case "AllBet Wallet": document.getElementById("AllBetWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "WM Wallet": document.getElementById("WMWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "Pragmatic Wallet": document.getElementById("PragmaticWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "YeeBet Wallet": document.getElementById("YeeBetWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "SBO Wallet": document.getElementById("SBOWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "GamePlay Wallet": document.getElementById("GamePlayWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
     }
 }
 
@@ -956,12 +957,11 @@ async function CheckSupportGame() {
         document.getElementById("saallin").disabled = !res.data[0].IsSA ? true : false;
         document.getElementById("sexyallin").disabled = !res.data[0].IsSexyBaccarat ? true : false;
         document.getElementById("wmallin").disabled = !res.data[0].IsWM ? true : false;
+        document.getElementById("YeeBetallin").disabled = !res.data[0].IsYeeBet ? true : false;
+        document.getElementById("SBOallin").disabled = !res.data[0].IsYeeBet ? true : false;
+        document.getElementById("gameplayallin").disabled = !res.data[0].IsGamePlayLive && !res.data[0].IsGamePlaySlot ? true : false;
     }
 }
-
-
-
-
 
 var HistorySectionName = "WithdrawDeposit";
 var fromDate = null, toDate = null, pageSize = 20; pageNumber = 0;

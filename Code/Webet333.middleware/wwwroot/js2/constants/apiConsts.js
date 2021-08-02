@@ -1,5 +1,5 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
-let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '9001';
 let PortWEB = '9002';
 
@@ -163,6 +163,7 @@ var apiEndPoints = {
     PragmaticBalance: 'gamebalance/pragmatic',
     YeeBetBalance: 'gamebalance/yeebet',
     SBOBalance: 'gamebalance/sbo',
+    GamePlayBalance: 'gamebalance/gameplay',
 
     userDetaisSetGameBalance: 'userdetails/set',
 
