@@ -927,7 +927,7 @@ function LoadingImageShowAllInSection(GameName) {
         case "AG Wallet": document.getElementById("AGWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "PlayTech Wallet": document.getElementById("PlaytechWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "M8 Wallet": document.getElementById("M8Wallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
-        case "MaxBet Wallet": document.getElementById("MaxbetWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case "MaxBet Wallet": document.getElementById("MaxBetWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "Mega888 Wallet": document.getElementById("Mega888Wallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "Joker Wallet": document.getElementById("JokerWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "DG Wallet": document.getElementById("DGWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
@@ -1043,7 +1043,7 @@ function GetInWeekDate() {
     var curr = new Date(); // get current date
     var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
     var firstday = new Date(curr.setDate(first + 1))
-    var lastday = new Date();
+    var lastday = firstday.addDays(6)
     GetDateFormate(firstday, lastday);
 }
 
@@ -1051,7 +1051,7 @@ function GetInMonthDate() {
     pageNumber = 0;
     var date = new Date();
     var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-    var lastDay = new Date();
+    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     GetDateFormate(firstDay, lastDay);
 }
 
@@ -1077,7 +1077,7 @@ function GetDateRange() {
 
 function Get30DayDate() {
     pageNumber = 0;
-    var fdate = new Date().addDays(-31);
+    var fdate = new Date();
     var tdate = new Date();
     GetDateFormate(fdate, tdate)
     CallFunctionAccordingToTab()
