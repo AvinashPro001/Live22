@@ -1043,7 +1043,7 @@ function GetInWeekDate() {
     var curr = new Date(); // get current date
     var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
     var firstday = new Date(curr.setDate(first + 1))
-    var lastday = new Date();
+    var lastday = firstday.addDays(6)
     GetDateFormate(firstday, lastday);
 }
 
@@ -1051,7 +1051,7 @@ function GetInMonthDate() {
     pageNumber = 0;
     var date = new Date();
     var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-    var lastDay = new Date();
+    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     GetDateFormate(firstDay, lastDay);
 }
 
