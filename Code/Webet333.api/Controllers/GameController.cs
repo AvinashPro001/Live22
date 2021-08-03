@@ -1915,7 +1915,8 @@ namespace Webet333.api.Controllers
                 AllbetUsername,
                 PragmaticUsername,
                 YeeBetUsername,
-                SBOUsername;
+                SBOUsername,
+                GamePlayUsername;
 
             using (var account_helper = new AccountHelpers(Connection))
             {
@@ -1933,6 +1934,7 @@ namespace Webet333.api.Controllers
                 PragmaticUsername = user.PragmaticGamePrefix + user.UserId;
                 YeeBetUsername = user.YEEBETGamePrefix + user.UserId;
                 SBOUsername = user.SBOGamePrefix + user.UserId;
+                GamePlayUsername = user.GamePlayGamePrefix + user.UserId;
             }
 
             decimal mainBalance = 0.0m,
@@ -1951,7 +1953,8 @@ namespace Webet333.api.Controllers
                 PragmaticBalance = 0.0m,
                 PussyBalance = 0.0m,
                 YeeBetBalance = 0.0m,
-                SBOBalance = 0.0m;
+                SBOBalance = 0.0m,
+                GamePlayBalance = 0.0m;
 
             using (var game_helper = new GameHelpers(Connection))
             {
@@ -2157,6 +2160,18 @@ namespace Webet333.api.Controllers
                     { }
                 }
 
+                if (request.GamePlayWallet != 0)
+                {
+                    try
+                    {
+                        var result = await GamePlayGameHelpers.CallTransferAPI(GamePlayUsername, Math.Abs(request.GamePlayWallet), GameConst.GamePlay.FundType.Withdraw);
+                        mainBalance += result.Status == 0 ? request.GamePlayWallet : 0;
+                        GamePlayBalance = result.Status == 0 ? request.GamePlayWallet : 0;
+                    }
+                    catch
+                    { }
+                }
+
                 await game_helper.BalanceRestore(
                     request.Id, UserId,
                     mainBalance,
@@ -2175,7 +2190,8 @@ namespace Webet333.api.Controllers
                     WMBalance,
                     PragmaticBalance,
                     YeeBetBalance,
-                    SBOBalance
+                    SBOBalance,
+                    GamePlayBalance
                 );
 
                 return OkResponse(new { mainBalance, MaxbetBalance });
