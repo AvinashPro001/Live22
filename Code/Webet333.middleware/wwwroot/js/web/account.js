@@ -319,6 +319,7 @@ async function DoRegister() {
     var username = $('#txt_username').val();
     var password = $("#txt_password").val();
     var confirmPassword = $("#txt_confirm_password").val();
+    var otp = $("#txt_otp").val();
 
     if (mobile === "") return ShowError(ChangeErroMessage("mobile_no_required_error"));
 
@@ -335,6 +336,10 @@ async function DoRegister() {
     if (password === "") return ShowError(ChangeErroMessage("password_required_error"));
 
     if (confirmPassword === "") return ShowError(ChangeErroMessage("confirm_password_required_error"));
+
+    if (otp == null || otp == undefined || otp == "")return ShowError(ChangeErroMessage("error_otp_required"));
+
+    if (otp.length > 6 || otp.length < 6)return ShowError(ChangeErroMessage("error_otp"));
 
     if (name === "") return ShowError(ChangeErroMessage("name_required_error"));
 
@@ -361,7 +366,8 @@ async function DoRegister() {
         username: username,
         password: password,
         confirmPassword: confirmPassword,
-        referenceKeyword: GetCookie("ref")
+        referenceKeyword: GetCookie("ref"),
+        otp: otp
     };
 
     LoaderShow();
@@ -478,6 +484,7 @@ setInterval(function () {
         regisrationGame();
 }, 2000)
 
+var smscounter = 1;
 function Counter() {
     document.getElementById("button_resend").disabled = true;
 
@@ -485,6 +492,7 @@ function Counter() {
     var timer = setInterval(function () {
         $("#counter_txt").html((count--) - 1);
         if (count == 0) {
+            ++smscounter;
             clearInterval(timer);
             document.getElementById("counter_txt").innerText = "";
             document.getElementById("button_resend").disabled = false;
@@ -493,19 +501,38 @@ function Counter() {
 }
 
 async function SendOTP(number) {
+
     if (number == 1)
         Counter();
-    var resUserData = JSON.parse(Decryption(GetSessionStorage('userDetails')));
-    if (resUserData.mobilenoConfirmed == false) {
-        LoaderShow();
-        var res = await PostMethod(accountEndPoints.SendOTP, {});
-        if (res.status == 200) {
-            document.getElementById("txt_otp").value = "";
-            ShowSuccess(ChangeErroMessage("otp_send_success"));
 
-        }
-        LoaderHide();
+    LoaderShow();
+
+    var model = {
+        mobileNo: $("#txt_mobile_no").val(),
+        tri: true,
+        etk: true
     }
+    if (smscounter % 2 == 0) {
+        model.etk = false; model.tri = true;
+    }
+    else {
+        model.etk = true; model.tri = false;
+    }
+
+    if (model.mobileNo === "") return ShowError(ChangeErroMessage("mobile_no_required_error"));
+
+    if (model.mobileNo.length < 10) return ShowError(ChangeErroMessage("mobile_length_error"));
+
+    if (model.mobileNo.length > 11) return ShowError(ChangeErroMessage("mobile_length_error"));
+
+    var res = await PostMethod(accountEndPoints.SendOTP, model);
+    if (res.status == 200) {
+        document.getElementById("txt_otp").value = "";
+        ShowSuccess(ChangeErroMessage("otp_send_success"));
+
+    }
+    LoaderHide();
+
 }
 
 async function VerifiedOTP() {

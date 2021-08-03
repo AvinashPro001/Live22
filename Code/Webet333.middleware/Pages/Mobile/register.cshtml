@@ -4,7 +4,7 @@
 <div id="comContent"></div>
 <div id="mComContent">
 
- 
+
     <style>
         .tooltip-text.main + .visible-content {
             display: block;
@@ -41,6 +41,53 @@
                 return false;
             }
         }
+
+        var smscounter = 1;
+        function Counter() {
+            document.getElementById("button_resend").disabled = true;
+
+            var count = 60;
+            var timer = setInterval(function () {
+                $("#counter_txt").html((count--) - 1);
+                if (count == 0) {
+                    ++smscounter;
+                    clearInterval(timer);
+                    document.getElementById("counter_txt").innerText = "";
+                    document.getElementById("button_resend").disabled = false;
+                }
+            }, 1000);
+        }
+
+        async function SendOTP(number) {
+            if (number == 1)
+                Counter();
+
+            var model = {
+                mobileNo: $("#m_regsiter_mobile").val(),
+                tri: true,
+                etk: true
+            }
+            if (smscounter % 2 == 0) {
+                model.etk = false; model.tri = true;
+            }
+            else {
+                model.etk = true; model.tri = false;
+            }
+
+            if (model.mobileNo === "") return ShowError(ChangeErroMessage("mobile_no_required_error"));
+
+            if (model.mobileNo.length < 10) return ShowError(ChangeErroMessage("mobile_length_error"));
+
+            if (model.mobileNo.length > 11) return ShowError(ChangeErroMessage("mobile_length_error"));
+
+            LoaderShow();
+            var res = await PostMethod(apiEndPoints.SendOTP, model);
+            document.getElementById("m_regsiter_otp").value = "";
+            ShowSuccess(ChangeErroMessage("otp_send_success"));
+            LoaderHide();
+
+        }
+
     </script>
     <div class="page-title white-bg text-center">
         <div class="container">
@@ -80,6 +127,13 @@
                     <div class="form-group"><label style="color:#ff0000;font-weight:bold" class="registrationFormAlert" id="divCheckPasswordMatch"> </label></div>
                     <div class="form-group register-mobile-icon">
                         <input type="number" pattern="\d*" class="form-control" id="m_regsiter_mobile" placeholder="012-123456789" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group" style="display:flex;">
+                        <input type="number" pattern="\d*" class="form-control mar-btm-ten" id="m_regsiter_otp" placeholder="otp" aria-describedby="emailHelp">
+                        <button type="button" class="join_btn btn btn-warning otp-btn" id="button_resend" onclick="SendOTP(1)">
+                            <span class="lang" key="send_otp"></span>
+                            <span id="counter_txt"></span>
+                        </button>
                     </div>
                     <p class="note no-mar mar-btm-ten"><span class="lang" key="contact_instruction"></span></p>
                     <div class="form-group register-name-icon">

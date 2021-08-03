@@ -243,10 +243,10 @@ namespace Webet333.api.Controllers
 
                 //await account_help.SendOtp(user.Id.ToString(), user.MobileNo);
 
-                //var registerMessage = Localizer["msg_register_msg"].Value;
+                var registerMessage = Localizer["msg_register_msg"].Value;
 
-                //var messageResponse = await account_help.SendSMSAPI(request.Mobile, String.Format(registerMessage, request.Username));
-                //var count = messageResponse.Count(f => f == ',');
+                var messageResponse = await account_help.SendSMSAPI(request.Mobile, String.Format(registerMessage, request.Username));
+                var count = messageResponse.Count(f => f == ',');
 
                 var user_token = new TokenHelpers(Connection).GetAccessToken(AuthConfigOptions.Value, user, uniqueId);
 
@@ -256,12 +256,12 @@ namespace Webet333.api.Controllers
                 {
                     access_token = user_token,
                     user,
-                    totalBankAccount = user.BankAccount
-                    //messageResponse = new SMSResponse
-                    //{
-                    //    smsMessage = Localizer["e_" + messageResponse].Value,
-                    //    statusCode = messageResponse
-                    //}
+                    totalBankAccount = user.BankAccount,
+                    messageResponse = new SMSResponse
+                    {
+                        smsMessage = Localizer["e_" + messageResponse].Value,
+                        statusCode = messageResponse
+                    }
                 });
 
                 #endregion Sending SMS in queue

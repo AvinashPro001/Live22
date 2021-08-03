@@ -320,12 +320,13 @@ async function DoRegister() {
         username: $('#m_regsiter_username').val(),
         password: $("#m_regsiter_password").val(),
         confirmPassword: $("#m_regsiter_confirmpassword").val(),
-        referenceKeyword: getCookie("ref")
+        referenceKeyword: getCookie("ref"),
+        otp: $("#m_regsiter_otp").val()
     };
 
     if (model.mobile === "") {
         LoaderHide();
-        return ShowError("Mobile Filed is required.");
+        return ShowError("mobile_no_required_error");
     }
     if (model.mobile.length < 10) {
         LoaderHide();
@@ -364,6 +365,16 @@ async function DoRegister() {
         return ShowError("Password and username must be different.");
     }
 
+    if (model.otp == null || model.otp == undefined || model.otp == "") {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("error_otp_required"));
+    }
+
+    if (model.otp.length > 6 || model.otp.length < 6) {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("error_otp"));
+    }
+
     var Char = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
     if (!Char.test(model.password)) {
         LoaderHide();
@@ -393,7 +404,7 @@ async function DoRegister() {
                 } catch (e) { }
                 localStorage.setItem('currentUserName', model.userName);
                 localStorage.setItem('currentUserData', enc(model.password));
-                loadPageVerifiedOtp();
+                loadPageHome();
             }
         }
         LoaderHide();

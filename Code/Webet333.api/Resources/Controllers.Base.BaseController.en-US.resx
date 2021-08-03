@@ -451,4 +451,7 @@ Please Contact our Customer Service if you have any enquiries. You can reach us 
   <data name="sql_error_user_not_found" xml:space="preserve">
     <value>User Not Found</value>
   </data>
+  <data name="sql_mobile_number_not_verified" xml:space="preserve">
+    <value>This Mobile no is not Verified.</value>
+  </data>
 </root>
