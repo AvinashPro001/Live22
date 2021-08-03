@@ -349,25 +349,24 @@ async function OpenSBOGame() {
 }
 
 async function OpenGamePlayGame(IsSlots) {
-    if (IsSlots) window.open("../Web/slots#gameplay-game");
-    else window.open("../Web/game");
+    let model, res;
 
     if (GetLocalStorage("currentUser") != null) {
         let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
         if (resSelectUser.GamePlay !== true) {
-            let model = {}
-            let res = await PostMethod(gameRegisterEndPoints.gameplayRegister, model);
-            if (!IsSlots &&
-                res.status == 200 &&
-                res.response.data.status == 0) {
-                model = { isMobile: false };
-                let login = await PostMethod(gameLoginEndPoints.gameplayLogin, model);
-                if (login.status == 200 &&
-                    res.response.data.status == 0)
-                    SetLocalStorage("gameURL", login.response.data.game_url);
-            }
+            model = {}
+            await PostMethod(gameRegisterEndPoints.gameplayRegister, model);
         }
     }
+
+    if (IsSlots) return window.open("../Web/slots#gameplay-game");
+
+    window.open("../Web/game");
+    model = { isMobile: false };
+    res = await PostMethod(gameLoginEndPoints.gameplayLogin, model);
+    if (res.status == 200 &&
+        res.response.data.status == 0)
+        SetLocalStorage("gameURL", res.response.data.game_url);
 }
 
 async function LoginGameplayGame(GameCode) {

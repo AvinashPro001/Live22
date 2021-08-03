@@ -644,7 +644,17 @@ async function PlaytechIdentifiy(Slotvalue) {
         GameLoginMobile('Playtech');
     }
 
-    if (Slotvalue) window.open("../mobile?p=slot", "_blank")
+    if (Slotvalue) window.open("../mobile?p=slot#playtech", "_blank")
+}
+
+async function PragmaticIdentifiy() {
+    let value = await CheckGameInMaintenance("Pragmatic");
+    if (value) {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("maintainenance_error"));
+    }
+
+    window.open("../mobile?p=slot#pragmatic", "_blank")
 }
 
 async function GamePlayIdentifiy(Slotvalue) {
@@ -654,18 +664,15 @@ async function GamePlayIdentifiy(Slotvalue) {
         return ShowError(ChangeErroMessage("maintainenance_error"));
     }
 
-    if (!Slotvalue) {
-        if (GetLocalStorage('currentUser') !== null) {
-            LoaderShow();
-            if (checkedValue) TransferInAllWallet("GamePlay Wallet");
-            localStorage.setItem("slotGame", Slotvalue);
-            LoaderHide();
-            GameLoginMobile('GamePlay');
-        }
-        else return alert("Please Login");
-    }
+    if (Slotvalue) return window.open("../mobile?p=slot#gameplay", "_blank")
 
-    if (Slotvalue) { window.open("../mobile?p=slot", "_blank") }
+    if (GetLocalStorage('currentUser') == null) return alert("Please Login");
+
+    LoaderShow();
+    if (checkedValue) TransferInAllWallet("GamePlay Wallet");
+    localStorage.setItem("slotGame", Slotvalue);
+    LoaderHide();
+    GameLoginMobile('GamePlay');
 }
 
 async function GameLoginMobile(gamename) {
@@ -1021,7 +1028,10 @@ async function GameLoginMobile(gamename) {
     LoaderHide();
 }
 
-function OpenPragmaticGamePage(code) { window.open("../mobile/Game?gamename=Pragmatic&gamecode=" + code, "_blank"); }
+function OpenPragmaticGamePage(code) {
+    if (GetLocalStorage('currentUser') !== null) window.open("../mobile/Game?gamename=Pragmatic&gamecode=" + code, "_blank");
+    else alert(ChangeErroMessage("please_loign_error"));
+}
 
 function OpenPlaytechGamePage(code) {
     if (GetLocalStorage('currentUser') !== null) window.open("../mobile/Game?gamename=Playtech&gamecode=" + code, "_blank")
