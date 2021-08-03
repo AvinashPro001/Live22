@@ -228,22 +228,16 @@ async function SetUsername() {
 
 //#endregion
 
-function SetLoadingImagesInBalance(Id) {
-    SetAllValueInElement(Id, '<img src="/images/loading.gif" />')
-}
+function SetLoadingImagesInBalance(Id) { SetAllValueInElement(Id, '<img src="/images/loading.gif" />') }
 
-function SetFetchingWordInBalance(Id) {
-    SetAllValueInElement(Id + "_dropdown", 'Fetching...')
-}
+function SetFetchingWordInBalance(Id) { SetAllValueInElement(Id + "_dropdown", 'Fetching...') }
 
 function SetBalanceOnAllPlace(Id, Value) {
     SetAllValueInElement(Id, Value);
     SetAllValueInElement(Id + "_dropdown", Value);
 }
 
-function FormatBalance(amount) {
-    return parseFloat(amount).toFixed(2)
-}
+function FormatBalance(amount) { return parseFloat(amount).toFixed(2) }
 
 function SetLoadingImageForAllId() {
     for (i = 0; i < walletIds.length; i++) {
@@ -281,9 +275,7 @@ function RefreshBalance() {
     LoadAllBalance();
 }
 
-function CheckNAorNot(Value) {
-    return Value == "N/A" ? "0.0" : Value;
-}
+function CheckNAorNot(Value) { return Value == "N/A" ? "0.0" : Value; }
 
 async function RestoreBalance() {
     $("#layout_restore_image").attr("src", "/images/loading.gif");

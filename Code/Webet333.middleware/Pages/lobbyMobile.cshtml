@@ -67,9 +67,7 @@
                     document.getElementById("main_body").style.display = "";
                     images();
                 }
-                else {
-                    openGame("7bal");
-                }
+                else openGame("7bal");
             }
             else {
                 alert("Please Login !");
@@ -78,7 +76,6 @@
         });
 
         async function openGame(game) {
-
             var languageCode = (localStorage.getItem('language') === "zh-Hans" ? "ZH-CN" : "EN")
             var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
             let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));

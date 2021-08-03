@@ -4,7 +4,6 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-
 <!-- Main Banner Section and Promotion Slider -->
 <div class="main-banner">
     <div class="container">
@@ -19,13 +18,11 @@
     </div>
 </div>
 <!-- Main Banner Section and Promotion Slider -->
-
 <!-- Join Now Section -->
 <div class="how_win_main_wrap">
     <div class="container">
         <div class="how-win">
             <ul>
-
                 <li class="step1bg">
                     <div class="process-game step-1" onclick="ClickOnJoin()">
                         <a href="#">
@@ -144,7 +141,6 @@
                     <p onclick="OpenTelegram('mywbcs2')"><a>@@MYWBCS2 : : CS2</a></p>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -162,7 +158,6 @@
                     @*<li role="presentation"><a class="tablinks_account" href="#fishing" aria-controls="fishing" role="tab" data-toggle="tab"><img src="~/images/fish_hover.png"> <span class="lang" key="fishing"></span></a></li>*@
                 </ul>
             </div>
-
             <!-- Tab panes -->
             <div class="tab-content genaral_wrapp">
                 <div role="tabpanel" class="tab-pane active tabcontent_account" id="livcasino">
@@ -563,7 +558,7 @@
                                             <a>Pragmatic Play</a>
                                         </div>
                                         <div class="play_now_btn">
-                                            <a href="#" onclick="OpenGame('Pragmatic Wallet',false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
+                                            <a href="#" onclick="OpenGame('Pragmatic Wallet', true, false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -607,7 +602,7 @@
                                             <a>Playtech Slots</a>
                                         </div>
                                         <div class="play_now_btn">
-                                            <a href="#" onclick="OpenGame('PlayTech Wallet',true)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
+                                            <a href="#" onclick="OpenGame('PlayTech Wallet', true, false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -629,7 +624,7 @@
                                             <a>GamePlay Slots</a>
                                         </div>
                                         <div class="play_now_btn">
-                                            <a href="#" onclick="OpenGame('GamePlay Wallet',true)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
+                                            <a href="#" onclick="OpenGame('GamePlay Wallet', true, false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -758,9 +753,7 @@
 </div>
 <!-- Hot Game Section -->
 
-
 <script src='https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js'></script>
-
 
 <script>
     // updated
@@ -862,7 +855,6 @@
     CheckMobileNumberIsVerifiedOnly();
 
     $(document).ready(function () {
-
         AllAnnouncementsCallAPI();
     });
 
@@ -875,5 +867,4 @@
     setInterval(function () {
         if ($('#slider_promotion_div').children().length == 0) SetHomePageBanner();
     }, 200);
-
 </script>
