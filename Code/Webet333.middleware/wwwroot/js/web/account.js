@@ -330,6 +330,8 @@ async function DoRegister() {
 
     if (username.length < 7) return ShowError(ChangeErroMessage("username_length_error"));
 
+    if (username.length > 8) return ShowError(ChangeErroMessage("username_max_length_error"));
+
     if (/^[a-zA-Z0-9- ]*$/.test(username) == false) return ShowError(ChangeErroMessage('special_char_not_allowed'));
 
     var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;

@@ -6,6 +6,7 @@
   "username_required_error": "Nama pengguna diperlukan",
   "username_length_error": "Name pengguna terlalu pendek",
   "username_alpha_error": "Nama pengguna mestilah abjad angka.",
+  "username_max_length_error": "Panjang Nama Pengguna kurang dari 9.",
   "password_required_error": "Sila Masukkan kata laluan.",
   "confirm_password_required_error": "Sahkan kata luluan diperlukan",
   "name_required_error": "Nama penuh diperlukan",
