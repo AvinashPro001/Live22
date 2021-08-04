@@ -54,7 +54,7 @@
   "name_special_char_not_allowed": "名称中不允许使用特殊字符。",
   "name_alpha_error": "名称必须是字母数字。",
   "space_not_allowed": "空間不允許。",
-  "current_pass_not_match": "當前密碼不匹配。",
+  "current_pass_not_match": "请输入正确的当前密码。",
   "enter_full_name": "請輸入您的全名。",
 
   "error_select_both_date": "请选择两个日期！",
