@@ -275,9 +275,19 @@ namespace Webet333.api.Helpers
 
         #region Call Betting Details 3rd Party API
 
+        private static int ManageBatchName(int Minute)
+        {
+            if (Minute >= 0 && Minute <= 14) return 0;      //  0   -   14
+            if (Minute >= 15 && Minute <= 29) return 15;    //  15  -   29
+            if (Minute >= 30 && Minute <= 44) return 30;    //  30  -   44
+            return 45;                                      //  45  -   59
+        }
+
         internal static async Task<GamePlayGetBettingDetailsAPIResponse> CallBettingDetailsAPI(PragmaticBettingDetailsRequest request)
         {
-            string dates = request.StartTimeStamp.ToString("yyyyMMddHHmm");
+            int minutes = ManageBatchName(request.StartTimeStamp.Minute);
+
+            string dates = $"{request.StartTimeStamp.ToString("yyyyMMddHH")}{minutes}";
             GamePlayGetBettingDetailsAPIResponse result = new GamePlayGetBettingDetailsAPIResponse();
 
             long count = 1;
