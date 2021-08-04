@@ -595,7 +595,3 @@ function CheckTokenIsValid(StausCode, StatusMessage) {
         window.location.reload();
     }
 }
-
-function ClickOnSignin() {
-    window.location.href = './Home';
-}
