@@ -124,7 +124,7 @@
     <script src="~/js2/constants/SecurityConsts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
     <script type="text/javascript">
-        $(window).load(function () {$(".loadingImage").fadeOut("slow");});
+        $(window).load(function () { $(".loadingImage").fadeOut("slow"); });
     </script>
 
     <script>
@@ -728,11 +728,8 @@
     <script>
         function SetDesktopMode() {
             var viewMode = getCookie("view-mode");
-            if (viewMode == "desktop") {
-                $('meta[name="viewport"]').prop('content', 'width=1024,initial-scale=0.0');
-            } else if (viewMode == "mobile") {
-                $('meta[name="viewport"]').prop('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no');
-            }
+            if (viewMode == "desktop") $('meta[name="viewport"]').prop('content', 'width=1024,initial-scale=0.0');
+            else if (viewMode == "mobile") $('meta[name="viewport"]').prop('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no');
         }
     </script>
 </body>
