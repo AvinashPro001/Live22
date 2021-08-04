@@ -352,184 +352,215 @@ function OpenPaymentPage() {
     window.open("../Web/payment");
 }
 
-var DepositModel, OnlinePayment;
+var DepositModel, OnlinePayment, IsDepositExecute = false;
 async function Deposit(IsOnlinePayment) {
-    OnlinePayment = IsOnlinePayment;
-    var amount = 0;
-    if (IsOnlinePayment)
-        amount = $("#txt_deposit_amount_online").val();
-    else
-        amount = $("#txt_deposit_amount").val();
-
-    if (amount < 10) {
-        return ShowError(ChangeErroMessage("min_amount_error"));
-    }
-
-    if (amount > 30000) {
-        return ShowError(ChangeErroMessage("max_amount_error"));
-    }
-
-
-    model = {
-        bankId: DepositBankId,
-        amount: amount,
-        depositMethodId: 'E14F22CF-686D-43CB-8DC0-669D7EBC23F5',
-        referenceNo: $('#txt_reference_number').val(),
-        depositeTime: Date.parse(document.getElementById("datepicker0").value.replace(" ", "T")).toString(),
-        promotionId: DepositPromotionId,
-        promotionApplyEligible: false
-    };
-
-
-    if (!IsOnlinePayment) {
-        if (model.bankId === null || model.bankId === "" || model.bankId === undefined) {
-            return ShowError(ChangeErroMessage("plz_selet_bnk_error"));
-        }
-
-        if (model.depositeTime === "NaN") {
-            return ShowError(ChangeErroMessage("select_date_time_error"));
-        }
-
-        if (model.referenceNo === "") {
-            return ShowError(ChangeErroMessage("refer_no_error"));
-        }
-
-        if (filter_array(TableData).length === 0) {
-            return ShowError(("receipt_required_error"));
-        }
-    }
-
-    LoaderShow();
-    if (model.promotionId != undefined) {
-
-        if (IsOnlinePayment) {
-            SetLocalStorage("IsWindowClose", false)
-            OpenPaymentPage();
-        }
-
-        await LoadAllBalance();
-        var promotionModel = {
-            userid: null,
-            amount: Number(model.amount)
-        };
-        var walletData = await PostMethod(accountEndPoints.promotionApplyCheck, promotionModel);
-        walletData = walletData.response;
-        if (walletData.data.IsPending == true) {
-            LoaderHide();
+    try {
+        if (!IsDepositExecute) {
+            IsDepositExecute = true;
+            OnlinePayment = IsOnlinePayment;
+            var amount = 0;
             if (IsOnlinePayment)
-                SetLocalStorage("IsWindowClose", true);
-            return ShowError(ChangeErroMessage("pending_sports_deposit_error"));
-        }
+                amount = $("#txt_deposit_amount_online").val();
+            else
+                amount = $("#txt_deposit_amount").val();
 
-        if (walletData.data.InMaintenance == true) {
-            LoaderHide();
-            if (IsOnlinePayment)
-                SetLocalStorage("IsWindowClose", true);
-            return ShowError(ChangeErroMessage("game_in_maintenance_new_promotion"));
-        }
+            if (amount < 10) {
+                IsDepositExecute = false;
+                return ShowError(ChangeErroMessage("min_amount_error"));
+            }
 
-        if (walletData.data.CheckPromotionApply === true && walletData.data.TotalPromotionRow > 0) {
-            if (IsOnlinePayment)
-                SetLocalStorage("IsWindowClose", true);
-            if (confirm(ChangeErroMessage("promo_apply_balance_error"))) {
-                model.promotionApplyEligible = true;
+            if (amount > 30000) {
+                IsDepositExecute = false;
+                return ShowError(ChangeErroMessage("max_amount_error"));
+            }
+
+
+            model = {
+                bankId: DepositBankId,
+                amount: amount,
+                depositMethodId: 'E14F22CF-686D-43CB-8DC0-669D7EBC23F5',
+                referenceNo: $('#txt_reference_number').val(),
+                depositeTime: Date.parse(document.getElementById("datepicker0").value.replace(" ", "T")).toString(),
+                promotionId: DepositPromotionId,
+                promotionApplyEligible: false
+            };
+
+
+            if (!IsOnlinePayment) {
+                if (model.bankId === null || model.bankId === "" || model.bankId === undefined) {
+                    IsDepositExecute = false;
+                    return ShowError(ChangeErroMessage("plz_selet_bnk_error"));
+                }
+
+                if (model.depositeTime === "NaN") {
+                    IsDepositExecute = false;
+                    return ShowError(ChangeErroMessage("select_date_time_error"));
+                }
+
+                if (model.referenceNo === "") {
+                    IsDepositExecute = false;
+                    return ShowError(ChangeErroMessage("refer_no_error"));
+                }
+
+                if (filter_array(TableData).length === 0) {
+                    IsDepositExecute = false;
+                    return ShowError(("receipt_required_error"));
+                }
+            }
+
+            LoaderShow();
+            if (model.promotionId != undefined) {
+
                 if (IsOnlinePayment) {
                     SetLocalStorage("IsWindowClose", false)
                     OpenPaymentPage();
+                }
+
+                await LoadAllBalance();
+                var promotionModel = {
+                    userid: null,
+                    amount: Number(model.amount)
+                };
+                var walletData = await PostMethod(accountEndPoints.promotionApplyCheck, promotionModel);
+                walletData = walletData.response;
+                if (walletData.data.IsPending == true) {
+                    LoaderHide();
+                    if (IsOnlinePayment)
+                        SetLocalStorage("IsWindowClose", true);
+                    IsDepositExecute = false;
+                    return ShowError(ChangeErroMessage("pending_sports_deposit_error"));
+                }
+
+                if (walletData.data.InMaintenance == true) {
+                    LoaderHide();
+                    if (IsOnlinePayment)
+                        SetLocalStorage("IsWindowClose", true);
+                    IsDepositExecute = false;
+                    return ShowError(ChangeErroMessage("game_in_maintenance_new_promotion"));
+                }
+
+                if (walletData.data.CheckPromotionApply === true && walletData.data.TotalPromotionRow > 0) {
+                    if (IsOnlinePayment)
+                        SetLocalStorage("IsWindowClose", true);
+                    if (confirm(ChangeErroMessage("promo_apply_balance_error"))) {
+                        model.promotionApplyEligible = true;
+                        if (IsOnlinePayment) {
+                            SetLocalStorage("IsWindowClose", false)
+                            OpenPaymentPage();
+                        }
+                    }
+                    else {
+                        model.promotionId = "";
+                        if (IsOnlinePayment) {
+                            SetLocalStorage("IsWindowClose", false)
+                            OpenPaymentPage();
+                        }
+                    }
+                }
+                else {
+                    if (walletData.data.Staus != null && walletData.data.CheckPromotionRemind == true) {
+                        LoaderHide();
+                        if (IsOnlinePayment)
+                            SetLocalStorage("IsWindowClose", true);
+                        IsDepositExecute = false;
+                        return ShowError(ChangeErroMessage("promot_active_error"));
+                    }
+
+                    if (walletData.data.CheckPromotionRemind == true) {
+                        model.promotionApplyEligible = true;
+                        DepositModel = model;
+                    }
+
+                    if (walletData.data.Staus == null) {
+                        model.promotionApplyEligible = true;
+                    }
                 }
             }
             else {
-                model.promotionId = "";
-                if (IsOnlinePayment) {
+                if (OnlinePayment) {
                     SetLocalStorage("IsWindowClose", false)
                     OpenPaymentPage();
                 }
-            }
-        }
-        else {
-            if (walletData.data.Staus != null && walletData.data.CheckPromotionRemind == true) {
-                LoaderHide();
-                if (IsOnlinePayment)
-                    SetLocalStorage("IsWindowClose", true);
-                return ShowError(ChangeErroMessage("promot_active_error"));
+
+                let data = {
+                }
+                var walletData = await PostMethod(accountEndPoints.depositCheckWithoutPromotion, data);
+                walletData = walletData.response;
+                if (walletData.data.CheckPopupWithoutPromotion == true) {
+                    LoaderHide();
+                    DepositModel = model;
+                }
+                else {
+                    LoaderHide();
+                    DepositModel = model;
+                    if (IsOnlinePayment)
+                        SetLocalStorage("IsWindowClose", true);
+                    $('#promotion_not_apply_confimation').modal('show');
+                    IsDepositExecute = false;
+                    return 0;
+                }
             }
 
-            if (walletData.data.CheckPromotionRemind == true) {
-                model.promotionApplyEligible = true;
+            if (!IsOnlinePayment) {
+                if (filter_array(TableData).length === 0) {
+                    LoaderHide();
+                    IsDepositExecute = false;
+                    return ShowError(ChangeErroMessage("receipt_required_error"));
+                } else {
+                    DepositModel = model;
+                    IsDepositExecute = false;
+                    await DepositAfterPromotionCheck();
+                }
+            } else {
                 DepositModel = model;
-            }
-
-            if (walletData.data.Staus == null) {
-                model.promotionApplyEligible = true;
+                IsDepositExecute = false;
+                await DepositAfterPromotionCheck();
             }
         }
     }
-    else {
-        if (OnlinePayment) {
-            SetLocalStorage("IsWindowClose", false)
-            OpenPaymentPage();
-        }
-
-        let data = {
-        }
-        var walletData = await PostMethod(accountEndPoints.depositCheckWithoutPromotion, data);
-        walletData = walletData.response;
-        if (walletData.data.CheckPopupWithoutPromotion == true) {
-            LoaderHide();
-            DepositModel = model;
-        }
-        else {
-            LoaderHide();
-            DepositModel = model;
-            if (IsOnlinePayment)
-                SetLocalStorage("IsWindowClose", true);
-            $('#promotion_not_apply_confimation').modal('show');
-            return 0;
-        }
-    }
-
-    if (!IsOnlinePayment) {
-        if (filter_array(TableData).length === 0) {
-            LoaderHide();
-            return ShowError(ChangeErroMessage("receipt_required_error"));
-        } else {
-            DepositModel = model;
-            await DepositAfterPromotionCheck();
-        }
-    } else {
-        DepositModel = model;
-        await DepositAfterPromotionCheck();
+    catch(e) {
+        IsDepositExecute = false;
     }
 }
 
 async function DepositAfterPromotionCheck() {
     LoaderShow();
-    if (OnlinePayment) {
+    try {
+        if (!IsDepositExecute) {
+            IsDepositExecute = true;
+            if (OnlinePayment) {
 
-        if (model.promotionId == undefined || model.promotionId == null) {
-            SetLocalStorage("IsWindowClose", false);
-            OpenPaymentPage();
-        }
-        var res = await PostMethod(transactionEndPoints.onlinePayment, DepositModel);
-        if (res.status == 200) {
-            LoaderHide();
-            SetLocalStorage("gameURL", res.response.data.redirect_to);
-        }
-        else {
-            ShowError(res.response.message)
+                if (model.promotionId == undefined || model.promotionId == null) {
+                    SetLocalStorage("IsWindowClose", false);
+                    OpenPaymentPage();
+                }
+                var res = await PostMethod(transactionEndPoints.onlinePayment, DepositModel);
+                if (res.status == 200) {
+                    LoaderHide();
+                    SetLocalStorage("gameURL", res.response.data.redirect_to);
+                }
+                else {
+                    ShowError(res.response.message)
+                }
+                IsDepositExecute = false;
+            }
+            else {
+                var res = await PostMethod(transactionEndPoints.addDeposite, DepositModel);
+                if (res.status == 200) {
+                    await handleFileSelect1(res.response.data.id);
+                    LoadAllBalance()
+                    ResetTransactionField(1);
+                    SetUserDepositPromotion();
+                }
+                else {
+                    ShowError(res.response.message)
+                }
+                IsDepositExecute = false;
+            }
         }
     }
-    else {
-        var res = await PostMethod(transactionEndPoints.addDeposite, DepositModel);
-        if (res.status == 200) {
-            await handleFileSelect1(res.response.data.id);
-            LoadAllBalance()
-            ResetTransactionField(1);
-            SetUserDepositPromotion();
-        }
-        else {
-            ShowError(res.response.message)
-        }
+    catch (e) {
+        IsDepositExecute = false;
     }
     LoaderHide();
 }
@@ -716,7 +747,7 @@ Date.prototype.addDays = function (days) {
     return date;
 }
 
-function GetDateFormate (Date1, Date2) {
+function GetDateFormate(Date1, Date2) {
     var day1 = Date1.getDate();
     var Month1 = Date1.getMonth() + 1;
     var Year1 = Date1.getFullYear();
