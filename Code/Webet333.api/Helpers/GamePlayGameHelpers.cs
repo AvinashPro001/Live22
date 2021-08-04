@@ -275,21 +275,9 @@ namespace Webet333.api.Helpers
 
         #region Call Betting Details 3rd Party API
 
-        private static string ManageBatchName(string s, string s2)
-        {
-            int length = s.Length;
-            int length2 = s2.Length;
-
-            var temp = s.Substring(0, length - length2) + s2;
-
-            return temp;
-        }
-
         internal static async Task<GamePlayGetBettingDetailsAPIResponse> CallBettingDetailsAPI(PragmaticBettingDetailsRequest request)
         {
-            var dates = request.StartTimeStamp.ToString("yyyyMMdd0000");
-            var minitus = (request.StartTimeStamp.Hour * 60) + request.StartTimeStamp.Minute;
-            var batchName = ManageBatchName(dates, minitus.ToString());
+            string dates = request.StartTimeStamp.ToString("yyyyMMddHHmm");
             GamePlayGetBettingDetailsAPIResponse result = new GamePlayGetBettingDetailsAPIResponse();
 
             long count = 1;
@@ -298,7 +286,7 @@ namespace Webet333.api.Helpers
             {
                 GamePlayGetBettingDetailsAPIRequest model = new GamePlayGetBettingDetailsAPIRequest
                 {
-                    BatchName = batchName,
+                    BatchName = dates,
                     Method = GamePlayConst.Method.GetBettingDetails,
                     Page = i + 1
                 };
@@ -308,7 +296,7 @@ namespace Webet333.api.Helpers
                 var tempResult = JsonConvert.DeserializeObject<GamePlayGetBettingDetailsAPIResponse>(temp);
 
                 if (result.Details == null) result = tempResult;
-                result.Details.AddRange(tempResult.Details);
+                else result.Details.AddRange(tempResult.Details);
 
                 if (i == 0 &&
                     result != null &&

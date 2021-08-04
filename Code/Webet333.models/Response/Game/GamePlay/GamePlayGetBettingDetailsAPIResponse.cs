@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Webet333.models.Response.Game.GamePlay
@@ -18,22 +19,22 @@ namespace Webet333.models.Response.Game.GamePlay
         public string Username { get; set; }
 
         [JsonProperty("betAmount")]
-        public string BetAmount { get; set; }
+        public decimal BetAmount { get; set; }
 
         [JsonProperty("validBetAmount")]
-        public string ValidBetAmount { get; set; }
+        public decimal ValidBetAmount { get; set; }
 
         [JsonProperty("winAmount")]
-        public string WinAmount { get; set; }
+        public decimal WinAmount { get; set; }
 
         [JsonProperty("netPnl")]
-        public string NetPnl { get; set; }
+        public decimal NetPnl { get; set; }
 
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
         [JsonProperty("transactionTime")]
-        public string TransactionTime { get; set; }
+        public DateTime TransactionTime { get; set; }
 
         [JsonProperty("gameCode")]
         public string GameCode { get; set; }
@@ -45,7 +46,7 @@ namespace Webet333.models.Response.Game.GamePlay
         public string BetOrderNo { get; set; }
 
         [JsonProperty("betTime")]
-        public string BetTime { get; set; }
+        public DateTime BetTime { get; set; }
 
         [JsonProperty("productType")]
         public long ProductType { get; set; }
@@ -54,9 +55,48 @@ namespace Webet333.models.Response.Game.GamePlay
         public string GameCategory { get; set; }
 
         [JsonProperty("sessionId")]
-        public string SessionId { get; set; }
+        public long SessionId { get; set; }
 
         [JsonProperty("additionalDetails")]
-        public string AdditionalDetails { get; set; }
+        public dynamic AdditionalDetails { get; set; }
     }
+
+    //public class GamePlayGetBettingDetailsAPIResponseAdditionalDetails
+    //{
+    //    [JsonProperty("bundleId")]
+    //    public string BundleId { get; set; }
+
+    //    [JsonProperty("tableId")]
+    //    public string TableId { get; set; }
+
+    //    [JsonProperty("freeRound")]
+    //    public string FreeRound { get; set; }
+
+    //    [JsonProperty("jackpotContribution")]
+    //    public decimal JackpotContribution { get; set; }
+
+    //    [JsonProperty("jackpotWin")]
+    //    public decimal JackpotWin { get; set; }
+
+    //    [JsonProperty("rebateAmount")]
+    //    public decimal RebateAmount { get; set; }
+
+    //    [JsonProperty("luckyNumber")]
+    //    public string LuckyNumber { get; set; }
+
+    //    [JsonProperty("gameResult")]
+    //    public string GameResult { get; set; }
+
+    //    [JsonProperty("playerHand")]
+    //    public string PlayerHand { get; set; }
+
+    //    [JsonProperty("platform")]
+    //    public long Platform { get; set; }
+
+    //    [JsonProperty("betContent")]
+    //    public string BetContent { get; set; }
+
+    //    [JsonProperty("betType")]
+    //    public long BetType { get; set; }
+    //}
 }
