@@ -52,6 +52,8 @@
   "error_otp": "Please Insert 6 Digit OTP !!",
 
   "special_char_not_allowed": "Special Characters not allowed in Username.",
+  "name_special_char_not_allowed": "Special Characters not allowed in Name.",
+  "name_alpha_error": "Name must be alphanumeric.",
   "space_not_allowed": "Space not allowed.",
   "current_pass_not_match": "Current Password not matched.",
   "enter_full_name": "Please enter your full name.",
