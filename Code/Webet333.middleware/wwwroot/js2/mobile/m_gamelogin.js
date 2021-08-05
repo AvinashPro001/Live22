@@ -1062,11 +1062,11 @@ async function GameLoginMobile(gamename) {
                     }
                     var res = await PostMethod(apiEndPoints.pragmaticRegister, userRegisterModel);
                     if (res.data.error == "0") {
-                        window.open("../mobile?p=slot", "_blank")
+                        window.open("../mobile?p=slot#pragmatic-game", "_blank")
                     }
                 }
                 else {
-                    window.open("../mobile?p=slot", "_blank")
+                    window.open("../mobile?p=slot#pragmatic-game", "_blank")
                 }
                 break;
             case 'YeeBet':
