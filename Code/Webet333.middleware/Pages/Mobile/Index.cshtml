@@ -8,27 +8,22 @@
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168889054-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+    <script>window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'UA-168889054-1');
-    </script>
+        gtag('config', 'UA-168889054-1');</script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <!-- Global site tag (gtag.js) - Google Ads: 480804860 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-480804860"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+    <script>window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'AW-480804860');
-    </script>
+        gtag('config', 'AW-480804860');</script>
     <!-- Event snippet for youtube signup conversion page
     In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-    <script>
-        function gtag_report_conversion(url) {
+    <script>function gtag_report_conversion(url) {
             var callback = function () {
                 if (typeof (url) != 'undefined') {
                     window.location = url;
@@ -39,21 +34,16 @@
                 'event_callback': callback
             });
             return false;
-        }
-    </script>
+        }</script>
     <!-- Event snippet for Sign-up conversion page -->
     <!-- Global site tag (gtag.js) - Google Ads: 527506130 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-527506130"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+    <script>window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'AW-527506130');
-    </script>
-    <script>
-        gtag('event', 'conversion', { 'send_to': 'AW-527506130/BFpFCPDPiuQBENK1xPsB' });
-    </script>
+        gtag('config', 'AW-527506130');</script>
+    <script>gtag('event', 'conversion', { 'send_to': 'AW-527506130/BFpFCPDPiuQBENK1xPsB' });</script>
 
 
     <meta name="keywords" content="Webet333.net | Cash Market, Online Casino, Malaysia Online Casino, 918Kiss, AG Casino, Playtech Casino, Joker Casino, Joker Slot, M8 Sports, 24x7 Casino, Malaysia Casino, 100% Welcome Bonus Casino, 150% Welcome Bonus Casino, 10% Extra jackpot casino, 10% Extra bonus casino" />
@@ -127,19 +117,16 @@
         $(window).load(function () { $(".loadingImage").fadeOut("slow"); });
     </script>
 
-    <script>
-        function requestDesktopSite() {
+    <script>function requestDesktopSite() {
             if (document.getElementsByTagName('meta')['viewport'].content == 'width= 1440px;') {
                 document.getElementsByTagName('meta')['viewport'].content = 'width= 400px;';
             } else {
                 window.location.replace = "/";
                 document.getElementsByTagName('meta')['viewport'].content = 'width= 1440px;';
             }
-        }
-    </script>
+        }</script>
 
-    <script>
-        $(document).ready(function () {
+    <script>$(document).ready(function () {
             announcementMobile();
         });
         async function announcementMobile() {
@@ -155,8 +142,7 @@
                     marquee_one.innerHTML += '<span>' + res.data[i].announcement + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                 }
             }
-        }
-    </script>
+        }</script>
 </head>
 
 <body>
@@ -627,7 +613,10 @@
                 success: function (response) {
                     pageName1 = pageName2 = "slot";
                     $('#pageResponse').html(response);
-                    history.pushState(null, null, "/mobile?p=slot");
+
+                    if (window.location.hash) history.pushState(null, null, "/mobile?p=slot" + window.location.hash);
+                    else history.pushState(null, null, "/mobile?p=slot");
+
                     $("html").removeClass("intro");
                 }
             });

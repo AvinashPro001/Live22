@@ -227,12 +227,13 @@
 
   "mobile_no_required_error": "手机号码为必填项",
   "sms_error": "SMS 无法发送!!请联系客服",
-  "mobile_length_error": "请输入电话号码至少10数字",
+  "mobile_length_error": "请输入有效的手机号码",
   "pass_length_error": "密码长度至少6位数字。",
   "username_required_error": "用户名为必填项",
   "username_length_error": "用户名太短",
-  "password_required_error": "密码为必填项",
-  "confirm_password_required_error": "确认密码为必填项",
+  "password_required_error": "密码字段为必填项",
+  "confirm_password_required_error": "确认密码 字段为必填项",
+  "new_password_check_error": "这是您以前的密码，请输入新密码",
   "name_required_error": "名称为必填项",
   "username_pass_diff_error": "密码和用户名一定不相同",
   "pass_alpha_error": "密码必须是母数字",
@@ -248,6 +249,7 @@
   "promo_apply_balance_error": "您的余额低于存款余额的5 MYR，您可以申请新的促销活动，并且现有的促销活动将过期",
   "amount_greater_zero_error": "进输入金额多过0",
   "promot_active_error": "您不能申请促销，因为您有活动促销",
+  "amount_required_error": "请输入金额。",
   "min_max_amount_error": "最小金额 10 和最大金额为 30000。",
   "min_max_amount_error_parameter": "最小金额 10 和最大金额是",
   "min1_max1000_amount_error": "最低金额 1",
@@ -327,5 +329,10 @@
   "no_record_found_statement": "没有找到记录",
 
   "special_not_allowed": "密码中不允许使用特殊字符！",
-  "amount_greater_one_error": "进输入金额多过1"
+  "amount_greater_one_error": "进输入金额多过1",
+
+  "pls_select_date": "请选择日期。",
+
+  "current_pass_req": "请输入当前密码。",
+  "new_pass_req": "请输入新密码。"
 }

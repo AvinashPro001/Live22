@@ -967,9 +967,13 @@ async function GameLoginMobile(gamename) {
                 if (resSelectUser.data.Pragmatic !== true) {
                     var userRegisterModel = {}
                     var res = await PostMethod(apiEndPoints.pragmaticRegister, userRegisterModel);
-                    if (res.data.error == "0") window.open("../mobile?p=slot", "_blank")
+                    if (res.data.error == "0") {
+                        window.open("../mobile?p=slot#pragmatic-game", "_blank")
+                    }
                 }
-                else window.open("../mobile?p=slot", "_blank")
+                else {
+                    window.open("../mobile?p=slot#pragmatic-game", "_blank")
+                }
                 break;
             case 'YeeBet':
                 LoaderShow();

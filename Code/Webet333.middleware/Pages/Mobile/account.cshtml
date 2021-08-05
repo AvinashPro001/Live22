@@ -13,7 +13,7 @@
                     <li id="login"><a onclick="loadPageLogin()" href="javascript:void(0);" rel="prefetch"><i class="fa fa-sign-in" aria-hidden="true"></i><p class="lang" key="sidebar_login"></p></a></li>
                     <li><a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
                     <li id="downloadpage"><a href="~/Mobile/download?id=918DownloadTab" rel="prefetch"><img src="~/images/mobile/download.png" alt="mn-download"><p class="lang" key="sidebar_Download"></p></a></li>
-                    <li><a href="~/Web/Home" rel="prefetch"><img src="~/images/mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
+                    <li><a href="../" rel="prefetch"><img src="~/images/mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
                     <li><a onclick="loadPageVIP()" href="javascript:void(0);" rel="prefetch"><img src="~/images/footericon1.png" alt="Profile"><p>VIP</p></a></li>
                     <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
                     <li><a onclick="loadPageAbout()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
@@ -155,6 +155,7 @@
                 </div>
             </nav>
         </div>
+        <div class="canvas-overlay"></div>
     </div>
 
     <link href="~/css2/style.css" rel="stylesheet" />
@@ -213,7 +214,7 @@
                                     </li>
                                     <li class="mar-btm-fifteen">
                                         <label class="fleft"><p class="big no-mar lang" key="profile_mobile"></p></label>
-                                        <label class="fright tel-icon"><input id="txt_mobileUpdate" name="txt_mobileUpdate" type="number" pattern="\d*" style="border-style: solid;border-radius: 3px;border-width: 1px;" class="reg-form" placeholder="Enter new Mobile number"></label>
+                                        <label class="fright tel-icon"><input id="txt_mobileUpdate" name="txt_mobileUpdate" onkeyup="MobileValidation('txt_mobileUpdate','changePass_mob_err')" type="number" pattern="\d*" style="border-style: solid;border-radius: 3px;border-width: 1px;" class="reg-form" placeholder="Enter new Mobile number"><label style="color:#ff0000;font-weight:bold; font-size:12px;" id="changePass_mob_err"></label></label>
                                     </li>
                                     <li class="mar-btm-fifteen">
                                         <div class="fright"><button name="" class="submit" data-toggle="modal" data-target="#ConfirmUpdateProfie"><span class="lang" key="profile_update_personal_details_button"></span></button></div>

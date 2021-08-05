@@ -3017,7 +3017,7 @@ label.bank-list-deposit {
 }
 
 .bank-selection ul {
-    display: flex;
+    display: -webkit-box;
     flex-wrap: wrap;
     justify-content: space-between;
 }

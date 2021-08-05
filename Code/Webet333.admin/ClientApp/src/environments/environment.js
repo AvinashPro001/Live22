@@ -128,6 +128,7 @@ exports.customer = {
     slotsGameList: exports.environment.apiUrl + 'Game/slotsgame/list',
     slotsGameUpdate: exports.environment.apiUrl + 'Game/slotsgame/update',
     PragmaticGameListUpdate: exports.environment.apiUrl + 'pragmatic/game/list',
+    GameListFileUpload: exports.environment.apiUrl + 'Game/list/upload',        
     GameplayGameListUpdate: exports.environment.apiUrl + 'gameplay/get/slot-gamelist',
     ManuallyPromotionExpiery: exports.environment.apiUrl + 'Game/ManuallyPromotionExpiry',
     similarNameList: exports.environment.apiUrl + 'payments/withdraw/similarname/list',

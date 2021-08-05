@@ -240,9 +240,12 @@ async function OpenMega888Game() {
     if (resSelectUser.Mega888 !== true) {
         var userMegaa88Model = {}
         var res = await PostMethod(gameRegisterEndPoints.mega888Register, userMegaa88Model);
-        if (res.status == 200) window.open("../Web/download");
+        if (res.status == 200)
+            window.open("../Web/download#MegaDownload");
     }
-    else window.open("../Web/download");
+    else {
+        window.open("../Web/download#MegaDownload");
+    }
 }
 
 async function OpenJokerGame() {
@@ -251,23 +254,31 @@ async function OpenJokerGame() {
     if (resSelectUser.Joker !== true) {
         let modelJoker = {};
         var resJoker = await PostMethod(gameRegisterEndPoints.registerJoker, modelJoker);
-        if (resJoker.status == 200 &&
-            resJoker.response.data.Status != null)
-            window.open("../Web/download");
+        if (resJoker.status == 200)
+            if (resJoker.response.data.Status != null)
+                window.open("../Web/download#JokerDownload");
     }
-    else window.open("../Web/download");
+    else {
+        window.open("../Web/download#JokerDownload");
+    }
 }
 
 async function OpenPussy888Game() {
     let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
 
     if (resSelectUser.Pussy888 !== true) {
-        var model = {}
-        try { var res = await PostMethodWithParameter(gameRegisterEndPoints.pussyRegister, model); }
-        catch (ex) { }
-        window.open("../Web/download");
+        var model = {
+        }
+        try {
+            var res = await PostMethodWithParameter(gameRegisterEndPoints.pussyRegister, model);
+        }
+        catch {
+        }
+        window.open("../Web/download#Pussy888Download");
     }
-    else window.open("../Web/download");
+    else {
+        window.open("../Web/download#Pussy888Download");
+    }
 }
 
 async function OpenMaxbetGame() {
