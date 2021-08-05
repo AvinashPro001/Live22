@@ -1752,7 +1752,7 @@ export class UsersDetailsComponent implements OnInit {
             let i = ((this.pageNumber + 1) * this.pageSize) - this.pageSize;
             this.offset = res.data.offset;
             this.totalRowCount = res.data.total;
-            this.promotiondata = res.data;
+            this.promotiondata = res.data.result;
 
             res.data.result.forEach(el => {
                 this.promotionRows.push({
