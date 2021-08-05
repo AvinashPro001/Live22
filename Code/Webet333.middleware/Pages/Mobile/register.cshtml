@@ -111,8 +111,10 @@
                 </ul>
                 <p class="note-text">- login info -</p>
                 <form>
-                    <div class="form-group register-username-icon"><input type="text" class="form-control" tabindex="1" aria-describedby="emailHelp" id="m_regsiter_username" data-translate="username_placeholder" placeholder="Username" value="" required="" onkeypress="space()" autocomplete="new-password"></div>
-                    <p class="note no-mar mar-btm-ten"><span class="lang" key="username_instruction"></span></p>
+                    <div class="form-group register-password-icon">
+                        <input type="text" class="form-control" tabindex="1" aria-describedby="emailHelp" id="m_regsiter_username" data-translate="username_placeholder" placeholder="Username" value="" required="" onkeypress="space()" autocomplete="new-password">
+                        <div><p class="note no-mar mar-btm-ten"><span class="lang" key="username_instruction"></span></p></div>
+                    </div>
                     <div class="form-group register-password-icon">
                         <input type="password" class="form-control" tabindex="2" aria-describedby="emailHelp" id="m_regsiter_password" placeholder="Password" data-translate="password_placeholder" onkeyup="OnPasswordType('m_regsiter_password','m_regsiter_username')" required autocomplete="new-password">
                         <a data-toggle="tooltip" class="tooltip-text"><span class="fa fa-question-circle"></span></a>
@@ -123,10 +125,14 @@
                             <p class="note no-mar mar-btm-ten" id="pass-username-same"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="lang" key="password_username_same"></span></p>
                         </div>
                     </div>
-                    <div class="form-group register-password-icon"><input type="password" class="form-control" tabindex="3" aria-describedby="emailHelp" id="m_regsiter_confirmpassword" placeholder="Confirm Password" data-translate="confirm_password_placeholder" oninput="checkPasswordMatch();" required autocomplete="new-password"></div>
-                    <div class="form-group"><label style="color:#ff0000;font-weight:bold" class="registrationFormAlert" id="divCheckPasswordMatch"> </label></div>
+                    <div class="form-group register-password-icon">
+                        <input type="password" class="form-control" tabindex="3" aria-describedby="emailHelp" id="m_regsiter_confirmpassword" placeholder="Confirm Password" data-translate="confirm_password_placeholder" oninput="checkPasswordMatch();" required autocomplete="new-password">
+                        <div><label style="color:#ff0000;font-weight:bold;display:none" class="registrationFormAlert" id="divCheckPasswordMatch"> </label></div>
+                    </div>
                     <div class="form-group register-mobile-icon">
-                        <input type="number" pattern="\d*" class="form-control" id="m_regsiter_mobile" placeholder="012-123456789" aria-describedby="emailHelp">
+                        <input type="number" pattern="\d*" class="form-control" id="m_regsiter_mobile" onkeyup="MobileValidation('m_regsiter_mobile','reg_mob_err')" placeholder="012-123456789" aria-describedby="emailHelp">
+                        <div><label style="color:#ff0000;font-weight:bold; font-size:12px; display:none;" id="reg_mob_err"></label></div>
+                        <div><p class="note no-mar mar-btm-ten"><span class="lang" key="contact_instruction"></span></p></div>
                     </div>
                     <div class="form-group" style="display:flex;">
                         <input type="number" pattern="\d*" class="form-control mar-btm-ten" id="m_regsiter_otp" placeholder="otp" aria-describedby="emailHelp">

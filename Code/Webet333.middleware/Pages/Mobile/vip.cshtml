@@ -4,500 +4,504 @@
 
 <div class="vip-main-banner">
 </div>
-    <div class="benefits_refeeral_sec">
-        <div class="containerr">
-            <div class="benefits_referal_tab_sec">
-                <div class="benefits_referal_left">
-                    <ul>
-                        <li><a class="tablinks_benefits_referal active" onclick="openCity1(event, 'benefits')">Benefits</a></li>
-                        <li><a class="tablinks_benefits_referal" onclick="openCity1(event, 'faqs')">FAQ</a></li>
-                    </ul>
-                </div>
+<div class="benefits_refeeral_sec">
+    <div class="containerr">
+        <div class="benefits_referal_tab_sec">
+            <div class="benefits_referal_left">
+                <ul>
+                    <li><a class="tablinks_benefits_referal active" onclick="openCity1(event, 'benefits')">Benefits</a></li>
+                    <li><a class="tablinks_benefits_referal" onclick="openCity1(event, 'faqs')">FAQ</a></li>
+                </ul>
             </div>
-            <div class="benefits_referal_genaral_wrapp">
-                <div class="container">
-                    <div class="benefits_referal_tab_sec">
-                        <div id="benefits" class="tabcontent_benefits_referal" style="display: block;">
-                            <div class="benefits_content_tab_sec">
-                                <h1>Upgrade Your VIP Level</h1>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="steps-2">
-                                            <div class="progress" id="progress1">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 15%;"></div>
+        </div>
+        <div class="benefits_referal_genaral_wrapp">
+            <div class="container">
+                <div class="benefits_referal_tab_sec">
+                    <div id="benefits" class="tabcontent_benefits_referal" style="display: block;">
+                        <div class="benefits_content_tab_sec">
+                            <h1>Upgrade Your VIP Level</h1>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="steps-2">
+                                        <div class="progress" id="progress1">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 15%;"></div>
+                                        </div>
+                                        <div class="step">
+                                            <span class="point" id="normal-span" onclick="javascript: resetActive(event, 0, 'step-1');">
+                                                <span class="price">Normal</span>
+                                                <span class="step-title1"> < 30k </span>
+                                            </span>
+                                            <span class="point" id="bronze-span" onclick="javascript: resetActive(event,16, 'step-1');">
+                                                <span class="price">Bronze</span>
+                                                <span class="step-title1"> > 30k </span>
+                                            </span>
+                                            <span class="point" id="silver-span" onclick="javascript: resetActive(event, 32, 'step-1');">
+                                                <span class="price">Silver</span>
+                                                <span class="step-title1"> > 100k </span>
+                                            </span>
+                                            <span class="point" id="gold-span" onclick="javascript: resetActive(event, 64, 'step-1');">
+                                                <span class="price">Gold</span>
+                                                <span class="step-title1"> > 500k </span>
+                                            </span>
+                                            <span class="point" id="platinum-span" onclick="javascript: resetActive(event, 80, 'step-1');">
+                                                <span class="price">Platinum</span>
+                                                <span class="step-title1"> > 10lkh </span>
+                                            </span>
+                                            <span class="point" id="diamond-span" onclick="javascript: resetActive(event, 100, 'step-1');">
+                                                <span class="price">Diamond</span>
+                                                <span class="step-title1"> > 40lkh </span>
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ml0 mr0">
+                                <div class="col-sm-5">
+                                    <div class="vip_sec_logo_left text-center">
+                                        <img id="viplevel_icon" src="" alt="vip1" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-7 ">
+                                    <div class="vip_sec_form_right">
+                                        <form>
+                                            <div class="form-group current_deposit_form_sec">
+                                                <div class="row ml0 mr0 current_status_row">
+                                                    <div class="col-md-5 pr0 current_status_row_left">
+                                                        <label>Current Status :</label>
+                                                    </div>
+                                                    <div class="col-md-7 pr0 current_status_row_right">
+                                                        <input type="text" palceholder="" name="" id="currentStatus" />
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="step">
-                                                <span class="point" id="normal-span" onclick="javascript: resetActive(event, 0, 'step-1');">
-                                                    <span class="price">Normal</span>
-                                                    <span class="step-title1"> < 30k </span>
-                                                </span>
-                                                <span class="point" id="bronze-span" onclick="javascript: resetActive(event,16, 'step-1');">
-                                                    <span class="price">Bronze</span>
-                                                    <span class="step-title1"> > 30k </span>
-                                                </span>
-                                                <span class="point" id="silver-span" onclick="javascript: resetActive(event, 32, 'step-1');">
-                                                    <span class="price">Silver</span>
-                                                    <span class="step-title1"> > 100k </span>
-                                                </span>
-                                                <span class="point" id="gold-span" onclick="javascript: resetActive(event, 64, 'step-1');">
-                                                    <span class="price">Gold</span>
-                                                    <span class="step-title1"> > 500k </span>
-                                                </span>
-                                                <span class="point" id="platinum-span" onclick="javascript: resetActive(event, 80, 'step-1');">
-                                                    <span class="price">Platinum</span>
-                                                    <span class="step-title1"> > 10lkh </span>
-                                                </span>
-                                                <span class="point" id="diamond-span" onclick="javascript: resetActive(event, 100, 'step-1');">
-                                                    <span class="price">Diamond</span>
-                                                    <span class="step-title1"> > 40lkh </span>
-                                                    
-                                                </span>
+                                            <div class="form-group current_deposit_form_sec">
+                                                <div class="row ml0 mr0 current_status_row">
+                                                    <div class="col-md-5 pr0 current_status_row_left">
+                                                        <label>Current Deposit :</label>
+                                                    </div>
+                                                    <div class="col-md-7 pr0 current_status_row_right">
+                                                        <input type="text" palceholder="" name="" id="currentDeposit" />
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row ml0 mr0">
-                                    <div class="col-sm-5">
-                                        <div class="vip_sec_logo_left text-center">
-                                            <img id="viplevel_icon" src="" alt="vip1" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-7 ">
-                                        <div class="vip_sec_form_right">
-                                            <form>
-                                                <div class="form-group current_deposit_form_sec">
-                                                    <div class="row ml0 mr0 current_status_row">
-                                                        <div class="col-md-5 pr0 current_status_row_left">
-                                                            <label>Current Status :</label>
-                                                        </div>
-                                                        <div class="col-md-7 pr0 current_status_row_right">
-                                                            <input type="text" palceholder="" name="" id="currentStatus" />
-                                                        </div>
+                                            <div class="form-group current_deposit_form_sec">
+                                                <div class="row ml0 mr0 current_status_row">
+                                                    <div class="col-md-5 pr0 current_status_row_left">
+                                                        <label>Amount Required for next tier upgrade :</label>
+                                                    </div>
+                                                    <div class="col-md-7 pr0 current_status_row_right">
+                                                        <input type="text" palceholder="" name="" />
                                                     </div>
                                                 </div>
-                                                <div class="form-group current_deposit_form_sec">
-                                                    <div class="row ml0 mr0 current_status_row">
-                                                        <div class="col-md-5 pr0 current_status_row_left">
-                                                            <label>Current Deposit :</label>
-                                                        </div>
-                                                        <div class="col-md-7 pr0 current_status_row_right">
-                                                            <input type="text" palceholder="" name="" id="currentDeposit" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group current_deposit_form_sec">
-                                                    <div class="row ml0 mr0 current_status_row">
-                                                        <div class="col-md-5 pr0 current_status_row_left">
-                                                            <label>Amount Required for next tier upgrade :</label>
-                                                        </div>
-                                                        <div class="col-md-7 pr0 current_status_row_right">
-                                                            <input type="text" palceholder="" name="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-
-
-
-                        </div>
-                        <div id="faqs" class="tabcontent_benefits_referal">
-                            <div class="benefits_content_tab_sec">
-                                <h1>How do I upgrade to WB3 VIP?</h1>
-                                <h3 class="step-title">There are multiple ways to become a WEBET333 VIP member :-</h3>
-                                <p>(1) By depositing the required amount</p>
-                                <p>(2) By special invite</p>
-                                <h3>How can the deposit amount be calculated?</h3>
-                                <p>
-                                    Deposit and turnover requirements will be based on the accumulated amount from the first day register.
-                                    and our deposit amount is never expired.
-                                </p>
-                                <h3>When my VIP level will upgraded when i archieve deposit amount?</h3>
-                                <p>Every 1st of month and 15th of month will automatically upgrade your VIP level.</p>
-                                <h3>My VIP level will downgrade after a period?</h3>
-                                <p>NO, your VIP level is permanent! never will downgrade !</p>
-                                <h1>Terms & Conditions</h1>
-                                <p>WEBET333 reserves the right to alter, cancel, terminate or suspend the Redemption or any part thereof or any part of the applicable terms and conditions from time to time, with or without any prior notice.</p>
-                                <p>Members participate in the VIP program must accept and comply with the above rules and terms as well as all relevant rules and terms of the website implement by WEBET333. General WEBET333 Terms & Conditions apply. </p>
-                            </div>
                         </div>
 
-                    </div>
-                </div>
-            </div>
-            <div class="vip_privilage_sec_credits">
-                <div class="container">
-                    <div class="vip_privileges_inner_sec_credits">
-                        <h1>VIP PRIVILEGES</h1>
+
 
                     </div>
-                    <div class="scroll-vip-privilage">
-                        <ul class="nav nav-tabs img-icon">
-                            <li class="active"><a data-toggle="tab" href="#normal"><figure><img src="~/images/vip1.png" alt="Normal"></figure>normal</a></li>
-                            <li><a data-toggle="tab" href="#bronze"><figure><img src="~/images/vip2.png" alt="Bronze"></figure>bronze</a></li>
-                            <li><a data-toggle="tab" href="#silver"><figure><img src="~/images/vip3.png" alt="Silver"></figure>silver</a></li>
-                            <li><a data-toggle="tab" href="#gold"><figure><img src="~/images/vip4.png" alt="Gold"></figure>gold</a></li>
-                            <li><a data-toggle="tab" href="#platinum"><figure><img src="~/images/vip5.png" alt="Platinum"></figure>platinum</a></li>
-                            <li><a data-toggle="tab" href="#diamond"><figure><img src="~/images/vip6.png" alt="Diamond"></figure>diamond</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div id="normal" class="tab-pane fade in active">
-                                <div class="tab-area">
-                                    <p class="title">WB Benefits</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Deposit Amount</li>
-                                        <li>< 30000</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Weekly EXTRA FREE CREDIT**</li>
-                                        <li>0</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Weekly Total Deposit Amount To Get Free Credit</li>
-                                        <li>0</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Birthday Bonus</li>
-                                        <li>28</li>
-                                    </ul>
-                                </div>
-                                <div class="tab-area">
-                                    <p class="title">Special Rebate</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Live Casino & Slot Rebate</li>
-                                        <li>0.70%</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Sportbook Rebate</li>
-                                        <li>0.70%</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>918kiss,Pussy888 and Mega888 Lose Rebate</li>
-                                        <li>5%</li>
-                                    </ul>
-                                </div>
-                                <div class="tab-area">
-                                    <p class="title">Others</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Withdraw Times</li>
-                                        <li>Unlimited </li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Withdraw Amount</li>
-                                        <li>30,000</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>VIP Level Period</li>
-                                        <li>Lifetime</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div id="bronze" class="tab-pane fade">
-                                <div class="tab-area">
-                                    <p class="title">WB Benefits</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Deposit Amount</li>
-                                        <li>> 30000</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Weekly EXTRA FREE CREDIT**</li>
-                                        <li>38</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Weekly Total Deposit Amount To Get Free Credit</li>
-                                        <li> > 388</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Birthday Bonus</li>
-                                        <li>88</li>
-                                    </ul>
-                                </div>
-                                <div class="tab-area">
-                                    <p class="title">Special Rebate</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Live Casino & Slot Rebate</li>
-                                        <li>0.80%</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Sportbook Rebate</li>
-                                        <li>0.80%</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>918kiss,Pussy888 and Mega888 Lose Rebate</li>
-                                        <li>6%</li>
-                                    </ul>
-                                </div>
-                                <div class="tab-area">
-                                    <p class="title">Others</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Withdraw Times</li>
-                                        <li>Unlimited </li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Withdraw Amount</li>
-                                        <li>50,000</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>VIP Level Period</li>
-                                        <li>Lifetime</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div id="silver" class="tab-pane fade">
-                                <div class="tab-area">
-                                    <p class="title">WB Benefits</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Deposit Amount</li>
-                                        <li>> 100000</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Weekly EXTRA FREE CREDIT**</li>
-                                        <li>88</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Weekly Total Deposit Amount To Get Free Credit</li>
-                                        <li> > 1888</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Birthday Bonus</li>
-                                        <li>388</li>
-                                    </ul>
-                                </div>
-                                <div class="tab-area">
-                                    <p class="title">Special Rebate</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Live Casino & Slot Rebate</li>
-                                        <li>0.90%</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Sportbook Rebate</li>
-                                        <li>0.90%</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>918kiss,Pussy888 and Mega888 Lose Rebate</li>
-                                        <li>6%</li>
-                                    </ul>
-                                </div>
-                                <div class="tab-area">
-                                    <p class="title">Others</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Withdraw Times</li>
-                                        <li>Unlimited </li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Withdraw Amount</li>
-                                        <li>70,000</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>VIP Level Period</li>
-                                        <li>Lifetime</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div id="gold" class="tab-pane fade">
-                                <div class="tab-area">
-                                    <p class="title">WB Benefits</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Deposit Amount</li>
-                                        <li>> 500000</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Weekly EXTRA FREE CREDIT**</li>
-                                        <li>288</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Weekly Total Deposit Amount To Get Free Credit</li>
-                                        <li> > 18888</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Birthday Bonus</li>
-                                        <li>688</li>
-                                    </ul>
-                                </div>
-                                <div class="tab-area">
-                                    <p class="title">Special Rebate</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Live Casino & Slot Rebate</li>
-                                        <li>1%</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Sportbook Rebate</li>
-                                        <li>1%</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>918kiss,Pussy888 and Mega888 Lose Rebate</li>
-                                        <li>7%</li>
-                                    </ul>
-                                </div>
-                                <div class="tab-area">
-                                    <p class="title">Others</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Withdraw Times</li>
-                                        <li>Unlimited </li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Withdraw Amount</li>
-                                        <li>90,000</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>VIP Level Period</li>
-                                        <li>Lifetime</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div id="platinum" class="tab-pane fade">
-                                <div class="tab-area">
-                                    <p class="title">WB Benefits</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Deposit Amount</li>
-                                        <li>> 1000000</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Weekly EXTRA FREE CREDIT</li>
-                                        <li>388</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Weekly Total Deposit Amount To Get Free Credit</li>
-                                        <li> > 38888</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Birthday Bonus</li>
-                                        <li>1888</li>
-                                    </ul>
-                                </div>
-                                <div class="tab-area">
-                                    <p class="title">Special Rebate</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Live Casino & Slot Rebate</li>
-                                        <li>1.10%</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Sportbook Rebate</li>
-                                        <li>1.10%</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>918kiss,Pussy888 and Mega888 Lose Rebate</li>
-                                        <li>7%</li>
-                                    </ul>
-                                </div>
-                                <div class="tab-area">
-                                    <p class="title">Others</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Withdraw Times</li>
-                                        <li>Unlimited </li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Withdraw Amount</li>
-                                        <li>100,000</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>VIP Level Period</li>
-                                        <li>Lifetime</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div id="diamond" class="tab-pane fade">
-                                <div class="tab-area">
-                                    <p class="title">WB Benefits</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Deposit Amount</li>
-                                        <li>> 4000000</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Weekly EXTRA FREE CREDIT</li>
-                                        <li>588</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Weekly Total Deposit Amount To Get Free Credit</li>
-                                        <li> > 88888</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Birthday Bonus</li>
-                                        <li>8888</li>
-                                    </ul>
-                                </div>
-                                <div class="tab-area">
-                                    <p class="title">Special Rebate</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Live Casino & Slot Rebate</li>
-                                        <li>1.20%</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Sportbook Rebate</li>
-                                        <li>1.20%</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>918kiss,Pussy888 and Mega888 Lose Rebate</li>
-                                        <li>8%</li>
-                                    </ul>
-                                </div>
-                                <div class="tab-area">
-                                    <p class="title">Others</p>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Withdraw Times</li>
-                                        <li>Unlimited </li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>Withdraw Amount</li>
-                                        <li>200,000</li>
-                                    </ul>
-                                    <ul class="tab-subtitle d-flex">
-                                        <li>VIP Level Period</li>
-                                        <li>Lifetime</li>
-                                    </ul>
-                                </div>
-                            </div>
+                    <div id="faqs" class="tabcontent_benefits_referal">
+                        <div class="benefits_content_tab_sec">
+                            <h1>How do I upgrade to WB3 VIP?</h1>
+                            <h3 class="step-title">There are multiple ways to become a WEBET333 VIP member :-</h3>
+                            <p>(1) By depositing the required amount</p>
+                            <p>(2) By special invite</p>
+                            <h3>How can the deposit amount be calculated?</h3>
+                            <p>
+                                Deposit and turnover requirements will be based on the accumulated amount from the first day register.
+                                and our deposit amount is never expired.
+                            </p>
+                            <h3>When my VIP level will upgraded when i archieve deposit amount?</h3>
+                            <p>Every 1st of month and 15th of month will automatically upgrade your VIP level.</p>
+                            <h3>My VIP level will downgrade after a period?</h3>
+                            <p>NO, your VIP level is permanent! never will downgrade !</p>
+                            <h1>Terms & Conditions</h1>
+                            <p>WEBET333 reserves the right to alter, cancel, terminate or suspend the Redemption or any part thereof or any part of the applicable terms and conditions from time to time, with or without any prior notice.</p>
+                            <p>Members participate in the VIP program must accept and comply with the above rules and terms as well as all relevant rules and terms of the website implement by WEBET333. General WEBET333 Terms & Conditions apply. </p>
                         </div>
                     </div>
-                    <p>** Weekly mon- sun MUST deposit more than free credit 1ox, free credit will auto into main wallet on monday 12AM</p>
-                    <p>** Free credit all require 3x turnover for withdraw</p>
+
                 </div>
             </div>
         </div>
-     
+        <div class="vip_privilage_sec_credits">
+            <div class="container">
+                <div class="vip_privileges_inner_sec_credits">
+                    <h1>VIP PRIVILEGES</h1>
+
+                </div>
+                <div class="scroll-vip-privilage">
+                    <ul class="nav nav-tabs img-icon">
+                        <li class="active"><a data-toggle="tab" href="#normal"><figure><img src="~/images/vip1.png" alt="Normal"></figure>normal</a></li>
+                        <li><a data-toggle="tab" href="#bronze"><figure><img src="~/images/vip2.png" alt="Bronze"></figure>bronze</a></li>
+                        <li><a data-toggle="tab" href="#silver"><figure><img src="~/images/vip3.png" alt="Silver"></figure>silver</a></li>
+                        <li><a data-toggle="tab" href="#gold"><figure><img src="~/images/vip4.png" alt="Gold"></figure>gold</a></li>
+                        <li><a data-toggle="tab" href="#platinum"><figure><img src="~/images/vip5.png" alt="Platinum"></figure>platinum</a></li>
+                        <li><a data-toggle="tab" href="#diamond"><figure><img src="~/images/vip6.png" alt="Diamond"></figure>diamond</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="normal" class="tab-pane fade in active">
+                            <div class="tab-area">
+                                <p class="title">WB Benefits</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Deposit Amount</li>
+                                    <li>< 30000</li>
+                                </ul>
+                                <!-- <ul class="tab-subtitle d-flex">
+                                    <li>Weekly EXTRA FREE CREDIT**</li>
+                                    <li>0</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Weekly Total Deposit Amount To Get Free Credit</li>
+                                    <li>0</li>
+                                </ul>-->
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Birthday Bonus</li>
+                                    <li>28</li>
+                                </ul>
+                            </div>
+                            <div class="tab-area">
+                                <p class="title">Special Rebate</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Live Casino & Slot Rebate</li>
+                                    <li>0.60%</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Sportbook Rebate</li>
+                                    <li>0.60%</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>918kiss,Pussy888,Joker and Mega888 Lose Rebate</li>
+                                    <li>3.0%</li>
+                                </ul>
+                            </div>
+                            <div class="tab-area">
+                                <p class="title">Others</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Withdraw Times</li>
+                                    <li>Unlimited </li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Withdraw Amount</li>
+                                    <li>30,000</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>VIP Level Period</li>
+                                    <li>Lifetime</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="bronze" class="tab-pane fade">
+                            <div class="tab-area">
+                                <p class="title">WB Benefits</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Deposit Amount</li>
+                                    <li>> 30000</li>
+                                </ul>
+                                <!--  <ul class="tab-subtitle d-flex">
+                                    <li>Weekly EXTRA FREE CREDIT**</li>
+                                    <li>38</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Weekly Total Deposit Amount To Get Free Credit</li>
+                                    <li> > 388</li>
+                                </ul>-->
+
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Birthday Bonus</li>
+                                    <li>88</li>
+                                </ul>
+                            </div>
+                            <div class="tab-area">
+                                <p class="title">Special Rebate</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Live Casino & Slot Rebate</li>
+                                    <li>0.70%</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Sportbook Rebate</li>
+                                    <li>0.70%</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>918kiss,Pussy888,Joker and Mega888 Lose Rebate</li>
+                                    <li>3.5%</li>
+                                </ul>
+                            </div>
+                            <div class="tab-area">
+                                <p class="title">Others</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Withdraw Times</li>
+                                    <li>Unlimited </li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Withdraw Amount</li>
+                                    <li>50,000</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>VIP Level Period</li>
+                                    <li>Lifetime</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="silver" class="tab-pane fade">
+                            <div class="tab-area">
+                                <p class="title">WB Benefits</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Deposit Amount</li>
+                                    <li>> 100000</li>
+                                </ul>
+                                <!--
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Weekly EXTRA FREE CREDIT**</li>
+                                    <li>88</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Weekly Total Deposit Amount To Get Free Credit</li>
+                                    <li> > 1888</li>
+                                </ul>-->
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Birthday Bonus</li>
+                                    <li>388</li>
+                                </ul>
+                            </div>
+                            <div class="tab-area">
+                                <p class="title">Special Rebate</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Live Casino & Slot Rebate</li>
+                                    <li>0.80%</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Sportbook Rebate</li>
+                                    <li>0.80%</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>918kiss,Pussy888,Joker and Mega888 Lose Rebate</li>
+                                    <li>4.0%</li>
+                                </ul>
+                            </div>
+                            <div class="tab-area">
+                                <p class="title">Others</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Withdraw Times</li>
+                                    <li>Unlimited </li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Withdraw Amount</li>
+                                    <li>100,000</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>VIP Level Period</li>
+                                    <li>Lifetime</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="gold" class="tab-pane fade">
+                            <div class="tab-area">
+                                <p class="title">WB Benefits</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Deposit Amount</li>
+                                    <li>> 500000</li>
+                                </ul>
+                                <!--
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Weekly EXTRA FREE CREDIT**</li>
+                                    <li>288</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Weekly Total Deposit Amount To Get Free Credit</li>
+                                    <li> > 18888</li>
+                                </ul>-->
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Birthday Bonus</li>
+                                    <li>688</li>
+                                </ul>
+                            </div>
+                            <div class="tab-area">
+                                <p class="title">Special Rebate</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Live Casino & Slot Rebate</li>
+                                    <li>0.90%</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Sportbook Rebate</li>
+                                    <li>0.90%</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>918kiss,Pussy888,Joker and Mega888 Lose Rebate</li>
+                                    <li>4.5%</li>
+                                </ul>
+                            </div>
+                            <div class="tab-area">
+                                <p class="title">Others</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Withdraw Times</li>
+                                    <li>Unlimited </li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Withdraw Amount</li>
+                                    <li>200,000</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>VIP Level Period</li>
+                                    <li>Lifetime</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="platinum" class="tab-pane fade">
+                            <div class="tab-area">
+                                <p class="title">WB Benefits</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Deposit Amount</li>
+                                    <li>> 1000000</li>
+                                </ul>
+                                <!--
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Weekly EXTRA FREE CREDIT</li>
+                                    <li>388</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Weekly Total Deposit Amount To Get Free Credit</li>
+                                    <li> > 38888</li>
+                                </ul>-->
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Birthday Bonus</li>
+                                    <li>1888</li>
+                                </ul>
+                            </div>
+                            <div class="tab-area">
+                                <p class="title">Special Rebate</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Live Casino & Slot Rebate</li>
+                                    <li>1.00%</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Sportbook Rebate</li>
+                                    <li>1.00%</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>918kiss,Pussy888,Joker and Mega888 Lose Rebate</li>
+                                    <li>5.0%</li>
+                                </ul>
+                            </div>
+                            <div class="tab-area">
+                                <p class="title">Others</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Withdraw Times</li>
+                                    <li>Unlimited </li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Withdraw Amount</li>
+                                    <li>500,000</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>VIP Level Period</li>
+                                    <li>Lifetime</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="diamond" class="tab-pane fade">
+                            <div class="tab-area">
+                                <p class="title">WB Benefits</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Deposit Amount</li>
+                                    <li>> 4000000</li>
+                                </ul>
+                                <!--
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Weekly EXTRA FREE CREDIT</li>
+                                    <li>588</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Weekly Total Deposit Amount To Get Free Credit</li>
+                                    <li> > 88888</li>
+                                </ul>-->
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Birthday Bonus</li>
+                                    <li>8888</li>
+                                </ul>
+                            </div>
+                            <div class="tab-area">
+                                <p class="title">Special Rebate</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Live Casino & Slot Rebate</li>
+                                    <li>1.20%</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Sportbook Rebate</li>
+                                    <li>1.20%</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>918kiss,Pussy888,Joker and Mega888 Lose Rebate</li>
+                                    <li>5.0%</li>
+                                </ul>
+                            </div>
+                            <div class="tab-area">
+                                <p class="title">Others</p>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Withdraw Times</li>
+                                    <li>Unlimited </li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>Withdraw Amount</li>
+                                    <li>500,000</li>
+                                </ul>
+                                <ul class="tab-subtitle d-flex">
+                                    <li>VIP Level Period</li>
+                                    <li>Lifetime</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>** Weekly mon- sun MUST deposit more than free credit 1ox, free credit will auto into main wallet on monday 12AM</p>
+                <p>** Free credit all require 3x turnover for withdraw</p>
+            </div>
+        </div>
     </div>
-    <div class="footer-widget" id="footerWidget">
-        <ul class="list-inline text-center">
-            <li id="homePagebottom">
-                <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch">
-                    <i class="fa fa-home"></i>
-                    <p class="white-text no-mar" data-translate="menu_home">Home</p>
-                </a>
-            </li>
-            <li id="promotionPagebottom" class="">
-                <a onclick="loadPagePromotions()" href="javascript:void(0)" rel="prefetch">
-                    <i class="fa fa-gift"></i>
-                    <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
-                </a>
-            </li>
-            <li id="contactusPagebottom">
-                <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
-                    <i class="fa fa-user"></i>
-                    <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
-                </a>
-            </li>
-            <li>
-                <a href="#" onclick="whatsapp()">
-                    <figure><img src="~/images/mobile/whatsapp.png" alt="Whats App" /></figure>
-                    <p class="white-text no-mar">Whatsapp</p>
-                </a>
-            </li>
-            <li>
-                <a href="#" onclick="LiveChat()">
-                    <figure><img src="~/images/mobile/livechat.png" alt="LiveChat" /></figure>
-                    <p class="white-text no-mar" data-translate="Live_chat">Live Chat</p>
-                </a>
-            </li>
-        </ul>
-    </div>    
+
+</div>
+<div class="footer-widget" id="footerWidget">
+    <ul class="list-inline text-center">
+        <li id="homePagebottom">
+            <a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch">
+                <i class="fa fa-home"></i>
+                <p class="white-text no-mar" data-translate="menu_home">Home</p>
+            </a>
+        </li>
+        <li id="promotionPagebottom" class="">
+            <a onclick="loadPagePromotions()" href="javascript:void(0)" rel="prefetch">
+                <i class="fa fa-gift"></i>
+                <p class="white-text no-mar" data-translate="Promotion">Promotion</p>
+            </a>
+        </li>
+        <li id="contactusPagebottom">
+            <a onclick="loadPageContactus()" href="javascript:void(0)" rel="prefetch">
+                <i class="fa fa-user"></i>
+                <p class="white-text no-mar lang" key="contact_us">Contact Us</p>
+            </a>
+        </li>
+        <li>
+            <a href="#" onclick="whatsapp()">
+                <figure><img src="~/images/mobile/whatsapp.png" alt="Whats App" /></figure>
+                <p class="white-text no-mar">Whatsapp</p>
+            </a>
+        </li>
+        <li>
+            <a href="#" onclick="LiveChat()">
+                <figure><img src="~/images/mobile/livechat.png" alt="LiveChat" /></figure>
+                <p class="white-text no-mar" data-translate="Live_chat">Live Chat</p>
+            </a>
+        </li>
+    </ul>
+</div>
 
 
 
-<script>
-    function openCity1(evt1, cityName1) {
+<script>function openCity1(evt1, cityName1) {
         var i, tabcontent_benefits_referal, tablinks_benefits_referal;
         tabcontent_benefits_referal = document.getElementsByClassName("tabcontent_benefits_referal");
         for (i = 0; i < tabcontent_benefits_referal.length; i++) {
@@ -561,6 +565,4 @@
             });
             $("#normal-span").addClass("activestep");
         }
-    }
-
-</script>
+    }</script>

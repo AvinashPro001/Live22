@@ -598,11 +598,11 @@ header .sticky-header {
         color: #40434b;
         border-color: transparent;
         outline: none;
-        font-size: 12px;
+        font-size: 13px;
     }
 
 .step-screen p {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 15px;
 }
 

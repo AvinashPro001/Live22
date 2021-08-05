@@ -187,17 +187,22 @@ async function ChangePassword(i) {
 
         if (model.currentPassword === "" || model.currentPassword === null || model.currentPassword === undefined) {
             LoaderHide();
-            return ShowError("Current " + ChangeErroMessage("password_required_error"));
+            return ShowError(ChangeErroMessage("password_required_error"));
         }
 
         if (model.password === "" || model.password === null || model.password === undefined) {
             LoaderHide();
-            return ShowError("New " + ChangeErroMessage("password_required_error"));
+            return ShowError(ChangeErroMessage("new_pass_req"));
         }
 
         if (model.confirmPassword === "" || model.confirmPassword === null || model.confirmPassword === undefined) {
             LoaderHide();
-            return ShowError("Confirm " + ChangeErroMessage("password_required_error"));
+            return ShowError(ChangeErroMessage("confirm_password_required_error"));
+        }
+
+        if (model.currentPassword === model.password) {
+            LoaderHide();
+            return ShowError(ChangeErroMessage("new_password_check_error"));
         }
 
         if (model.password.length < 6) {
@@ -205,23 +210,13 @@ async function ChangePassword(i) {
             return ShowError(ChangeErroMessage("pass_length_error"));
         }
 
-
-        if (model.password === "") {
-            LoaderHide();
-            return ShowError(ChangeErroMessage("password_required_error"));
-        }
-        if (model.confirmPassword === "") {
-            LoaderHide();
-            return ShowError(ChangeErroMessage("confirm_password_required_error"));
-        }
-
         if (localStorage.getItem("currentUserName") === model.password) {
             LoaderHide();
             return ShowError(ChangeErroMessage("username_pass_diff_error"));
         }
 
-        var userDetail = JSON.parse(Decryption(GetSessionStorage("UserDetails")))
-        var username = userDetail.username
+        var userDetail = JSON.parse(dec(sessionStorage.getItem('UserDetails')))
+        var username = userDetail.data.username
 
         if (username === model.password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
 
@@ -326,7 +321,7 @@ async function DoRegister() {
 
     if (model.mobile === "") {
         LoaderHide();
-        return ShowError("mobile_no_required_error");
+        return ShowError(ChangeErroMessage("mobile_no_required_error"));
     }
     if (model.mobile.length < 10) {
         LoaderHide();
@@ -334,16 +329,16 @@ async function DoRegister() {
     }
     if (model.username === "") {
         LoaderHide();
-        return ShowError("Username Filed is required.");
+        return ShowError(ChangeErroMessage("username_required_error"));
     }
 
     if (model.password === "") {
         LoaderHide();
-        return ShowError("Password Filed is required.");
+        return ShowError(ChangeErroMessage("password_required_error"));
     }
     if (model.confirmPassword === "") {
         LoaderHide();
-        return ShowError("Confirm Password Filed is required.");
+        return ShowError(ChangeErroMessage("confirm_password_required_error"));
     }
     if (model.password.length < 6) {
         LoaderHide();
@@ -352,17 +347,17 @@ async function DoRegister() {
 
     if (model.username.length < 7) {
         LoaderHide();
-        return ShowError("Username Length too short.");
+        return ShowError(ChangeErroMessage("username_length_error"));
     }
 
     if (model.name === "") {
         LoaderHide();
-        return ShowError("Name Filed is required.");
+        return ShowError(ChangeErroMessage("name_required_error"));
     }
 
     if (model.username === model.password) {
         LoaderHide();
-        return ShowError("Password and username must be different.");
+        return ShowError(ChangeErroMessage("username_pass_diff_error"));
     }
 
     if (model.otp == null || model.otp == undefined || model.otp == "") {
@@ -378,7 +373,7 @@ async function DoRegister() {
     var Char = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
     if (!Char.test(model.password)) {
         LoaderHide();
-        return ShowError("Password must be alphanumeric.");
+        return ShowError(ChangeErroMessage("pass_alpha_error"));
     }
 
     if (model.mobile !== "" && model.username !== "" && model.name !== "" && model.password !== "" && model.confirmPassword !== "" && model.username.length > 6) {
@@ -416,8 +411,10 @@ async function DoRegister() {
 function checkPasswordMatch() {
     var password = $("#m_regsiter_password").val();
     var confirmPassword = $("#m_regsiter_confirmpassword").val();
-    if (password !== confirmPassword)
+    if (password !== confirmPassword) {
+        $("#divCheckPasswordMatch").css('display', 'block');
         $("#divCheckPasswordMatch").html(ChangeErroMessage("pass_not_match_error"));
+    }
     else
         $("#divCheckPasswordMatch").html("");
 }
@@ -794,3 +791,18 @@ function OnPasswordType(PasswordTextboxId, UsernameTextboxId) {
     var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     regex.test(password) ? ($("#pass-alpha").addClass("green-color")) : ($("#pass-alpha").removeClass("green-color"))
 }
+
+//#region MobileValidation
+
+function MobileValidation(TextFieldId, ErrorShowId) {
+    var mobile = $('#' + TextFieldId).val();
+    if (mobile.length < 10 || mobile.length > 11) {
+        $("#" + ErrorShowId).css('display', 'block');
+        $("#" + ErrorShowId).text(ChangeErroMessage("mobile_length_error"));
+    }
+    else {
+        $("#" + ErrorShowId).text("");
+    }
+}
+
+//#endregion

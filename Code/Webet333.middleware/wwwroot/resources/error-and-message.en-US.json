@@ -5,7 +5,9 @@
   "pass_length_error": "Password length Minimum 6 digits.",
   "username_required_error": "Username Field is required.",
   "username_length_error": "Username Length too short.",
-  "password_required_error": "Password Field is required.",
+  "username_max_length_error": "Username Length less than 9.",
+  "username_alpha_error": "Username must be alphanumeric.",
+  "password_required_error": "Please Enter Password.",
   "confirm_password_required_error": "Confirm Password Field is required.",
   "name_required_error": "Name Field is required.",
   "username_pass_diff_error": "Password and username must be different.",
@@ -22,7 +24,7 @@
   "promo_apply_balance_error": "Your balance is lower than 5 MYR of your deposit balance, you are available to apply new promotion, and your existing promotion wil be expired.",
   "amount_greater_zero_error": "Please Enter Amount Greater than 0.",
   "amount_greater_one_error": "Please Enter Amount Greater than 1.",
-  "promot_active_error": "You cannot apply promotion,Because you have active promotion",
+  "promot_active_error": "You can not apply promotion. Because you have active promotion",
   "min_amount_error": "Please enter amount greater than 10.",
   "max_amount_error": "Please enter amount less than 30000.",
   "amount_required_error": "Please Enter Amount.",
@@ -38,7 +40,7 @@
   "select_from_wallet_error": "Please select from wallet.",
   "select_to_wallet_error": "Please select to wallet.",
   "user_not_login_error": "User is not Logged In.",
-  "new_password_check_error": "Current password is not valid",
+  "new_password_check_error": "It is your previous password, please enter a new password",
 
 
   "pending_sports_deposit_error": "Sports Book still have pending bets yet to be unsettled please wait until all bets has been settled",
@@ -50,8 +52,10 @@
   "error_otp": "Please Insert 6 Digit OTP !!",
 
   "special_char_not_allowed": "Special Characters not allowed in Username.",
+  "name_special_char_not_allowed": "Special Characters not allowed in Name.",
+  "name_alpha_error": "Name must be alphanumeric.",
   "space_not_allowed": "Space not allowed.",
-  "current_pass_not_match": "Current Password not matched.",
+  "current_pass_not_match": "Please Enter Correct Current Password.",
   "enter_full_name": "Please enter your full name.",
 
   "error_select_both_date": "Please Select Both date !",

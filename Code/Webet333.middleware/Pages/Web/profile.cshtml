@@ -365,7 +365,7 @@
                                                         <p class="big no-mar lang" key="bank_accountnumber">Account Number:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input type="number" class="reg-form" placeholder="Enter Account Number" id="withdraw_account_number" oninput="validity.valid||(value='');" step="0">
+                                                        <input type="number" class="reg-form" placeholder="Enter Account Number" id="withdraw_account_number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" min="0" oninput="validity.valid||(value='');" step="0">
                                                     </label>
                                                 </li>
                                                 <li class="mar-btm-fifteen">
@@ -928,7 +928,7 @@
                         <div class="form-group">
                             <div class="row ml0 mr0">
                                 <div class="col-sm-3">
-                                    <label class="history_sec">Transaction Type *</label>
+                                    <label class="history_sec history_lab_align">Transaction Type *</label>
                                 </div>
                                 <div class="col-sm-9 pl0">
                                     <div class="history-tabs">
@@ -959,7 +959,7 @@
                         <div class="form-group">
                             <div class="row ml0 mr0">
                                 <div class="col-sm-3">
-                                    <label class="history_sec">Transaction Date *</label>
+                                    <label class="history_sec history_lab_align">Transaction Date *</label>
                                 </div>
 
 
@@ -987,7 +987,7 @@
                         <div class="form-group">
                             <div class="row ml0 mr0">
                                 <div class="col-sm-3">
-                                    <label class="history_sec">Start Date *</label>
+                                    <label class="history_sec history_lab_align">Start Date *</label>
                                 </div>
                                 <div class="col-sm-9">
                                     <div class="row ml0 mr0">
@@ -1000,7 +1000,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-1 pl0 text-center">
-                                            <label class="history_sec">To</label>
+                                            <label class="history_sec history_lab_align">To *</label>
                                         </div>
                                         <div class="col-sm-4 pl0">
                                             <div class="controls">
