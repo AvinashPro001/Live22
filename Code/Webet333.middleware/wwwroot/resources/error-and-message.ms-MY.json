@@ -6,6 +6,7 @@
   "username_required_error": "Nama pengguna diperlukan",
   "username_length_error": "Name pengguna terlalu pendek",
   "username_alpha_error": "Nama pengguna mestilah abjad angka.",
+  "username_max_length_error": "Panjang Nama Pengguna kurang dari 9.",
   "password_required_error": "Sila Masukkan kata laluan.",
   "confirm_password_required_error": "Sahkan kata luluan diperlukan",
   "name_required_error": "Nama penuh diperlukan",
@@ -50,8 +51,10 @@
   "error_otp": "Sila Masukkan 6 Digit OTP !!",
 
   "special_char_not_allowed": "Aksara Khas tidak dibenarkan dalam Nama Pengguna.",
+  "name_special_char_not_allowed": "Watak Khas tidak dibenarkan dalam Nama.",
+  "name_alpha_error": "Nama mestilah abjad angka.",
   "space_not_allowed": "Ruang tidak dibenarkan.",
-  "current_pass_not_match": "Kata Laluan Semasa tidak sepadan.",
+  "current_pass_not_match": "Sila masukkan kata laluan semasa yang betul.",
   "enter_full_name": "Sila masukkan nama penuh anda.",
 
   "error_select_both_date": "Sila Pilih Kedua-dua tarikh!",
