@@ -771,9 +771,9 @@
 
             public class BackURL
             {
-                public const string UAT = "http://uat.webet333.com/";
+                public const string UAT = "https://uatwb3.com/";
 
-                public const string Live = "http://webet333.com/";
+                public const string Live = "https://webet333.com/";
             }
 
             public class LanguageCode
