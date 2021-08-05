@@ -966,16 +966,16 @@
                                 <div class="col-sm-9 pl0">
                                     <div class="history-tabs">
                                         <ul class="nav nav-tabs remove-active-class" id="history_tabs">
-                                            <li class="active col-sm-3 date_filter" onclick="GetTodayDate();" id="today-filter">
+                                            <li class="active col-sm-3" onclick="GetTodayDate();" id="today-filter">
                                                 <a data-toggle="tab" class="hand-curson"><span>Today</span></a>
                                             </li>
-                                            <li class="col-sm-3 date_filter" onclick="Get3DayDate();">
+                                            <li class="col-sm-3" onclick="Get3DayDate();">
                                                 <a data-toggle="tab" class="hand-curson"><span key="transfer_title" class="lang">In 3 days</span></a>
                                             </li>
-                                            <li class="col-sm-3 date_filter" onclick="GetInWeekDate();">
+                                            <li class="col-sm-3" onclick="GetInWeekDate();">
                                                 <a data-toggle="tab" class="hand-curson"><span class="lang">In a Week</span></a>
                                             </li>
-                                            <li class="col-sm-3 date_filter" onclick="GetInMonthDate();">
+                                            <li class="col-sm-3" onclick="GetInMonthDate();">
                                                 <a data-toggle="tab" class="hand-curson"><span key="withdrawal_title" class="lang">In a Month</span></a>
                                             </li>
                                         </ul>
@@ -1446,15 +1446,6 @@
             minuteStep: 5
         });
         //$("#datepicker0").val(Year + '-' + Month + '-' + day + ' ' + Hours + ':' + Minute)
-        $("#datepicker1").focus(function () {
-            debugger
-            $(".date_filter").removeClass("active");
-        })
-
-        $("#datepicker2").focus(function () {
-            debugger
-            $(".date_filter").removeClass("active");
-        })
 
         $("#datepicker1").datepicker();
         $("#datepicker1btn").click(function (event) {
