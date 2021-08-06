@@ -8,7 +8,7 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#playtech" data-toggle="tab"><img src="~/images/carousel_logos/playtech_color.png" alt="logo" /></a></li>
                 <li><a id="pragmatic-game" href="#pragmatic" data-toggle="tab"><img src="~/images/carousel_logos/pragmatic_color.png" alt="logo" /></a></li>
-                <li><a href="#gameplay" data-toggle="tab"><img src="~/images/carousel_logos/gameplay_color.png" alt="logo" /></a></li>
+                <li><a id="gameplay-game" href="#gameplay" data-toggle="tab"><img src="~/images/carousel_logos/gameplay_bw.png" alt="logo" /></a></li>
             </ul>
             <div class="tab-content">
                 <div id="playtech" class="tab-pane fade in active">
@@ -119,12 +119,12 @@
         PragmaticSlotsGameList();
         PlaytechSlotsGameList();
         GamePlaySlotsGameList();
-        
+
         if (window.location.hash) {
             var hash = window.location.hash.substring(1);
-            if (hash == 'pragmatic-game')
-                $("#pragmatic-game").click();
-        }        
+            if (hash == 'pragmatic-game') $("#pragmatic-game").click();
+            else if (hash == 'gameplay-game') $("#gameplay-game").click();
+        }
     });
 
     var callCounter = 1

@@ -8,7 +8,8 @@
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168889054-1"></script>
-    <script>window.dataLayer = window.dataLayer || [];
+    <script>
+        window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
@@ -16,14 +17,16 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <!-- Global site tag (gtag.js) - Google Ads: 480804860 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-480804860"></script>
-    <script>window.dataLayer = window.dataLayer || [];
+    <script>
+        window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'AW-480804860');</script>
     <!-- Event snippet for youtube signup conversion page
     In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-    <script>function gtag_report_conversion(url) {
+    <script>
+        function gtag_report_conversion(url) {
             var callback = function () {
                 if (typeof (url) != 'undefined') {
                     window.location = url;
@@ -38,7 +41,8 @@
     <!-- Event snippet for Sign-up conversion page -->
     <!-- Global site tag (gtag.js) - Google Ads: 527506130 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-527506130"></script>
-    <script>window.dataLayer = window.dataLayer || [];
+    <script>
+        window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
@@ -117,7 +121,8 @@
         $(window).load(function () { $(".loadingImage").fadeOut("slow"); });
     </script>
 
-    <script>function requestDesktopSite() {
+    <script>
+        function requestDesktopSite() {
             if (document.getElementsByTagName('meta')['viewport'].content == 'width= 1440px;') {
                 document.getElementsByTagName('meta')['viewport'].content = 'width= 400px;';
             } else {
@@ -126,9 +131,8 @@
             }
         }</script>
 
-    <script>$(document).ready(function () {
-            announcementMobile();
-        });
+    <script>
+        $(document).ready(function () { announcementMobile(); });
         async function announcementMobile() {
             var marquee = document.getElementById('p_announcement_mobile');
             var marquee_one = document.getElementById('p_announcement_mobile_one');
@@ -142,7 +146,8 @@
                     marquee_one.innerHTML += '<span>' + res.data[i].announcement + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                 }
             }
-        }</script>
+        }
+    </script>
 </head>
 
 <body>

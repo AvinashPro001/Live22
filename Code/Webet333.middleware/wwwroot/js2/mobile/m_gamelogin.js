@@ -664,7 +664,7 @@ async function GamePlayIdentifiy(Slotvalue) {
         return ShowError(ChangeErroMessage("maintainenance_error"));
     }
 
-    if (Slotvalue) return window.open("../mobile?p=slot#gameplay", "_blank")
+    if (Slotvalue) return window.open("../mobile?p=slot#gameplay-game", "_blank")
 
     if (GetLocalStorage('currentUser') == null) return alert("Please Login");
 
