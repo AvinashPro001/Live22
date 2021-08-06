@@ -330,12 +330,7 @@ async function DoRegister() {
 
     if (username.length < 7) return ShowError(ChangeErroMessage("username_length_error"));
 
-    if (username.length > 8) return ShowError(ChangeErroMessage("username_max_length_error"));
-
     if (/^[a-zA-Z0-9- ]*$/.test(username) == false) return ShowError(ChangeErroMessage('special_char_not_allowed'));
-
-    var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
-    if (!reqExp.test(username)) return ShowError(ChangeErroMessage("username_alpha_error"));
 
     if (password === "") return ShowError(ChangeErroMessage("password_required_error"));
 
@@ -346,12 +341,6 @@ async function DoRegister() {
     if (name === "") return ShowError(ChangeErroMessage("name_required_error"));
 
     if (/^[a-zA-Z0-9- ]*$/.test(name) == false) return ShowError(ChangeErroMessage('name_special_char_not_allowed'));
-
-    if (/^[a-z0-9_]+$/i.test(name) == false)
-        return ShowError(ChangeErroMessage('space_not_allowed'));
-
-    var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
-    if (!reqExp.test(name)) return ShowError(ChangeErroMessage("name_alpha_error"));
 
     if (username === password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
 

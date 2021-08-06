@@ -1088,14 +1088,14 @@ namespace Webet333.api.Controllers
 
         #endregion Contact Information
 
-        #region Check password
+        //#region Check password
 
-        [HttpPost("testpassword")]
-        public IActionResult checkpassword(string password)
-        {
-            return OkResponse(SecurityHelpers.DecryptPassword(password));
-        }
+        //[HttpPost("testpassword")]
+        //public IActionResult checkpassword(string password)
+        //{
+        //    return OkResponse(SecurityHelpers.DecryptPassword(password));
+        //}
 
-        #endregion Check password
+        //#endregion Check password
     }
 }

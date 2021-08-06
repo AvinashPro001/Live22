@@ -333,5 +333,7 @@
   "pls_select_date": "Please select date",
 
   "current_pass_req": "Please enter current password.",
-  "new_pass_req": "Please enter New Password"
+  "new_pass_req": "Please enter New Password",
+  "special_char_not_allowed": "Special Characters not allowed in Username.",
+  "name_special_char_not_allowed": "Special Characters not allowed in Name."
 }

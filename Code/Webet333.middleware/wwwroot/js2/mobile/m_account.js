@@ -322,7 +322,7 @@ async function DoRegister() {
         LoaderHide();
         return ShowError(ChangeErroMessage("mobile_no_required_error"));
     }
-    if (model.mobile.length < 10) {
+    if (model.mobile.length < 10 || model.mobile.length > 11) {
         LoaderHide();
         return ShowError(ChangeErroMessage("mobile_length_error"));
     }
@@ -358,6 +358,9 @@ async function DoRegister() {
         LoaderHide();
         return ShowError(ChangeErroMessage("username_pass_diff_error"));
     }
+
+    if (/^[a-zA-Z0-9- ]*$/.test(model.username) == false) { LoaderHide(); return ShowError(ChangeErroMessage('special_char_not_allowed')); }
+    if (/^[a-zA-Z0-9- ]*$/.test(model.name) == false) {LoaderHide(); return ShowError(ChangeErroMessage('name_special_char_not_allowed'));}
 
     var Char = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
     if (!Char.test(model.password)) {
