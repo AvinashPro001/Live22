@@ -65,8 +65,25 @@
                 <p class="note-text">- login info -</p>
                 <form>
                     <div class="form-group register-password-icon">
-                        <input type="text" class="form-control" tabindex="1" aria-describedby="emailHelp" id="m_regsiter_username" data-translate="username_placeholder" placeholder="Username" value="" required="" onkeypress="space()" autocomplete="new-password">
-                        <div><p class="note no-mar mar-btm-ten"><span class="lang" key="username_instruction"></span></p></div>
+                        <input type="text" class="form-control" tabindex="1" aria-describedby="emailHelp" id="m_regsiter_username" data-translate="username_placeholder" placeholder="Username" value="" required=""  onkeyup="OnUsernameType('m_regsiter_username')"  autocomplete="new-password">
+                        <div>
+                            <p class="note no-mar mar-btm-ten" id="username_already" style="display:none;">
+                                <i class="fa" id="username_already_check"></i>
+                                <span class="lang" id="already_text"></span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="note no-mar mar-btm-ten" id="username_len">
+                                <i class="fa" id="username_len_check"></i>
+                                <span class="lang" key="username_instruction"></span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="note no-mar mar-btm-ten" id="username_spec_char">
+                                <i class="fa" id="username_spec_char_check"></i>
+                                <span class="lang" key="username_specialCharacter_instruction"></span>
+                            </p>
+                        </div>
                     </div>
                     <div class="form-group register-password-icon">
                         <input type="password" class="form-control" tabindex="2" aria-describedby="emailHelp" id="m_regsiter_password" placeholder="Password" data-translate="password_placeholder" onkeyup="OnPasswordType('m_regsiter_password','m_regsiter_username')" required autocomplete="new-password">

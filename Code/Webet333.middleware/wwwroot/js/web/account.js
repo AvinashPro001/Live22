@@ -851,3 +851,49 @@ function OnPasswordType(PasswordTextboxId, UsernameTextboxId) {
     var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     regex.test(password) ? ($("#pass-alpha").addClass("green-color")) : ($("#pass-alpha").removeClass("green-color"))
 }
+
+function SetUsernameInstructionColorAndTick(TickId, InstructionId, IsRed) {
+    if (IsRed) {
+        $("#" + InstructionId).addClass("red-color");
+        $("#" + TickId).addClass("fa-times");
+        $("#" + InstructionId).removeClass("green-color");
+        $("#" + TickId).removeClass("fa-check");
+    }
+    else {
+        $("#" + TickId).addClass("fa-check");
+        $("#" + InstructionId).addClass("green-color");
+        $("#" + InstructionId).removeClass("red-color");
+        $("#" + TickId).removeClass("fa-times");
+    }
+}
+
+async function OnUsernameType(UsernameTextboxId) {
+    var username = $('#' + UsernameTextboxId).val();
+
+    if (username.length < 7) SetUsernameInstructionColorAndTick("username_len_check", "username_len", true)
+    else SetUsernameInstructionColorAndTick("username_len_check", "username_len", false)
+
+    if (/^[a-zA-Z0-9- ]*$/.test(username) == false) SetUsernameInstructionColorAndTick("username_spec_char_check", "username_spec_char", true)
+    else SetUsernameInstructionColorAndTick("username_spec_char_check", "username_spec_char", false)
+
+    if (username.length >= 7) {
+        $("#username_already").css("display", "");
+        var model = {
+            username: username
+        }
+        var res = await PostMethod(SettingEndPoints.checkUsernameExists, model);
+        if (res.status == 200) {
+            if (!res.response.data.isExists) {
+                $("#already_text").text(ChangeMessageText("username_avialble"));
+                SetUsernameInstructionColorAndTick("username_already_check", "username_already", false)
+            }
+            else {
+                $("#already_text").text(ChangeMessageText("username_exists"));
+                SetUsernameInstructionColorAndTick("username_already_check", "username_already", true)
+            }
+        }
+    }
+    else {
+        $("#username_already").css("display", "none");
+    }
+}

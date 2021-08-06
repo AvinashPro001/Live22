@@ -1,6 +1,6 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
-let PortAPI = '9001';
+let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let PortAPI = '8080';
 
 switch (environmentName.toUpperCase()) {
     case 'DEBUG':
@@ -132,4 +132,8 @@ var gameSettingEndPoints = {
     pragmaticGameList: 'pragmatic/game/list',
     HotGameList: 'Game/hotslotsgame/list',
     JokerGameId: 'F2NZ.'
+}
+
+var SettingEndPoints = {
+    checkUsernameExists:'account/check/username/exists'
 }
