@@ -21,6 +21,8 @@
 
         public class Account
         {
+            public const string CheckUsernamExists = "[dbo].[Check_Users_Username]";
+
             public const string UserICNumberInsert = "[dbo].[User_IC_Number_Insert]";
 
             public const string UserICImageInsert = "[dbo].[User_IC_Image_Insert]";

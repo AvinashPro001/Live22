@@ -635,6 +635,19 @@ namespace Webet333.api.Helpers
             }
         }
 
+        #region Check Username Exists
+
+        internal async Task<dynamic> CheckUsernameExists(CheckUsernameExistsRequest request)
+        {
+            using (var dapperRepository = new DapperRepository<dynamic>(Connection))
+            {
+                var res=await dapperRepository.FindAsync(StoredProcConsts.Account.CheckUsernamExists, request);
+                return res;
+            }
+        }
+
+        #endregion
+
         #region Send SMS API
 
         public async Task<string> SendSMSAPI(string MobileNo, string Message)
