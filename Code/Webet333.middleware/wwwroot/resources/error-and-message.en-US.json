@@ -52,7 +52,7 @@
 
   "special_char_not_allowed": "Special Characters not allowed in Username.",
   "name_special_char_not_allowed": "Special Characters not allowed in Name.",
-  "name_alpha_error": "Name must be alphanumeric.",
+ 
   "space_not_allowed": "Space not allowed.",
   "current_pass_not_match": "Please Enter Correct Current Password.",
   "enter_full_name": "Please enter your full name.",

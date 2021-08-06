@@ -347,12 +347,7 @@ async function DoRegister() {
 
     if (/^[a-zA-Z0-9- ]*$/.test(name) == false) return ShowError(ChangeErroMessage('name_special_char_not_allowed'));
 
-    if (/^[a-z0-9_]+$/i.test(name) == false)
-        return ShowError(ChangeErroMessage('space_not_allowed'));
-
-    var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
-    if (!reqExp.test(name)) return ShowError(ChangeErroMessage("name_alpha_error"));
-
+   
     if (username === password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
 
     if (password !== confirmPassword) return ShowError(ChangeErroMessage("pass_not_match_error"));
