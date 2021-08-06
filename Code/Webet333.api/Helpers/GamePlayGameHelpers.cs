@@ -311,9 +311,9 @@ namespace Webet333.api.Helpers
                 if (i == 0 &&
                     result != null &&
                     result.PageInfo != null &&
-                    result.PageInfo.TotalCount > 1)
+                    result.PageInfo.TotalPage > 1)
                 {
-                    count = result.PageInfo.TotalCount;
+                    count = result.PageInfo.TotalPage;
                 }
             }
 
