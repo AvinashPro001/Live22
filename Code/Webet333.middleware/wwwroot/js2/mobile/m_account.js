@@ -317,7 +317,7 @@ async function DoRegister() {
         confirmPassword: $("#m_regsiter_confirmpassword").val(),
         referenceKeyword: getCookie("ref")
     };
-
+    
     if (model.mobile === "") {
         LoaderHide();
         return ShowError(ChangeErroMessage("mobile_no_required_error"));
@@ -352,6 +352,10 @@ async function DoRegister() {
     if (model.name === "") {
         LoaderHide();
         return ShowError(ChangeErroMessage("name_required_error"));
+    }
+    if (/^[a-zA-Z0-9- ]*$/.test(model.name) == false) {
+        LoaderHide();
+        return ShowError(ChangeErroMessage('name_special_char_not_allowed'));
     }
 
     if (model.username === model.password) {
