@@ -3210,6 +3210,7 @@ namespace Webet333.api.Controllers
                 var PragmaticGame = result.Where(x => x.GameName == GameConst.GamesNames.Pragmatic).ToList();
                 var YeeBetGame = result.Where(x => x.GameName == GameConst.GamesNames.YeeBet).ToList();
                 var SBOGame = result.Where(x => x.GameName == GameConst.GamesNames.SBO).ToList();
+                var GamePlayGame = result.Where(x => x.GameName == GameConst.GamesNames.GamePlay).ToList();
 
                 var response = new
                 {
@@ -3228,9 +3229,11 @@ namespace Webet333.api.Controllers
                     WMTurover = WMGame.Count > 0 ? WMGame.FirstOrDefault().Turnover : 0,
                     PragmaticTurover = PragmaticGame.Count > 0 ? PragmaticGame.FirstOrDefault().Turnover : 0,
                     YeeBetTurover = YeeBetGame.Count > 0 ? YeeBetGame.FirstOrDefault().Turnover : 0,
-                    SBOTurover = SBOGame.Count > 0 ? SBOGame.FirstOrDefault().Turnover : 0
+                    SBOTurover = SBOGame.Count > 0 ? SBOGame.FirstOrDefault().Turnover : 0,
+                    GamePlayTurover = GamePlayGame.Count > 0 ? GamePlayGame.FirstOrDefault().Turnover : 0
                 };
-                decimal total = response.agTurover + response.m8Turover + response.maxbetTurover + response.playtechTurover + response.dgTurover + response.saTurover + response.sexyTurover + response.AllBetTurover + response.WMTurover + response.PragmaticTurover + response.YeeBetTurover + response.SBOTurover;
+
+                decimal total = response.agTurover + response.m8Turover + response.maxbetTurover + response.playtechTurover + response.dgTurover + response.saTurover + response.sexyTurover + response.AllBetTurover + response.WMTurover + response.PragmaticTurover + response.YeeBetTurover + response.SBOTurover + response.GamePlayTurover;
 
                 return OkResponse(new { response, Total = total });
             }

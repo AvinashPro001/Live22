@@ -236,6 +236,8 @@
             public const string YeeBet = "YeeBet";
 
             public const string SBO = "SBO";
+
+            public const string GamePlay = "GamePlay";
         }
 
         public class Mega888
