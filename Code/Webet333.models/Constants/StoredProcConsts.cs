@@ -340,7 +340,7 @@
         {
             public const string SlotsGameSelect = "[dbo].[Slots_Game_Select]";
 
-            public const string SlotsGameUpdate= "[dbo].[Slots_Game_Update]";
+            public const string SlotsGameUpdate = "[dbo].[Slots_Game_Update]";
 
             public const string SlotsGameDelete = "[dbo].[Slots_Game_Delete]";
 
@@ -479,6 +479,8 @@
             public const string BettingDetails_SBO = "[dbo].[SBO_BettingDetails_By_Username]";
 
             public const string GamePlayBettingDetailsInsert = "[dbo].[GamePlay_BettingDetails_Insert]";
+
+            public const string BettingDetails_GamePlay = "[dbo].[GamePlay_BettingDetails_By_Username]";
         }
 
         public class MaxBetGame

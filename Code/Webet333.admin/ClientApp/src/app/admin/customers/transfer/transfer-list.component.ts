@@ -83,7 +83,7 @@ export class TransferListComponent implements OnInit {
             this.rows = [];
             let i = 0;
             this.transferData = res.data;
-            res.data.forEach(el => {
+            res.data.result.forEach(el => {
                 this.rows.push({
                     No: ++i,
                     Id: el.id,

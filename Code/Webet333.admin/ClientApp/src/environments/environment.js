@@ -128,8 +128,8 @@ exports.customer = {
     slotsGameList: exports.environment.apiUrl + 'Game/slotsgame/list',
     slotsGameUpdate: exports.environment.apiUrl + 'Game/slotsgame/update',
     PragmaticGameListUpdate: exports.environment.apiUrl + 'pragmatic/game/list',
-    GameListFileUpload: exports.environment.apiUrl + 'Game/list/upload',        
-    GameplayGameListUpdate: exports.environment.apiUrl + 'gameplay/get/slot-gamelist',
+    GameListFileUpload: exports.environment.apiUrl + 'Game/list/upload',
+    GameplayGameListUpdate: exports.environment.apiUrl + 'gameplay/get/slot-gamelist',    
     ManuallyPromotionExpiery: exports.environment.apiUrl + 'Game/ManuallyPromotionExpiry',
     similarNameList: exports.environment.apiUrl + 'payments/withdraw/similarname/list',
     usernamPrifix: exports.environment.apiUrl + 'Game/GlobalParameters',
@@ -207,6 +207,7 @@ exports.customer = {
     MaxbetBettingDetails: exports.environment.apiUrl + 'Game/Manually/Maxbet_Betting_Details',
     YeeBetBettingDetails: exports.environment.apiUrl + 'Game/Manually/YeeBet_Betting_Details',
     SBOBettingDetails: exports.environment.apiUrl + 'Game/Manually/SBO_Betting_Details',
+    GamePlayBettingDetails: exports.environment.apiUrl + 'Game/Manually/GamePlay_Betting_Details',
     Kiss918PlayerLog: exports.environment.apiUrl + '918kiss/playerlog',
     Pussy888PlayerLog: exports.environment.apiUrl + 'pussy888/playerlog',
     MaxbetDefaultBettingLimit: exports.environment.apiUrl + 'MaxBet/DefaultBettingLimitSet',
@@ -373,7 +374,8 @@ exports.gameBalance = {
     Pragmatic: exports.environment.apiUrl + 'gamebalance/pragmatic',
     walletBalance: exports.environment.apiUrl + 'customer/wallet/balance',
     YeeBet: exports.environment.apiUrl + 'gamebalance/YeeBet',
-    SBO: exports.environment.apiUrl + 'gamebalance/SBO'
+    SBO: exports.environment.apiUrl + 'gamebalance/SBO',
+    GamePlay: exports.environment.apiUrl + 'gamebalance/GamePlay'
 };
 exports.smsConst = {
     SMSbaseUrl: 'http://cloudsms.trio-mobile.com/index.php/api/bulk_mt?',
@@ -413,6 +415,7 @@ exports.GameRegister = {
     registerSexy: exports.environment.apiUrl + 'sexybaccarart/register',
     registerPragmatic: exports.environment.apiUrl + 'pragmatic/register',
     registerYeeBet: exports.environment.apiUrl + 'yeebet/register',
-    registerSBO: exports.environment.apiUrl + 'sbo/register/player'
+    registerSBO: exports.environment.apiUrl + 'sbo/register/player',
+    registerGamePlay: exports.environment.apiUrl + 'gameplay/register'
 };
 //# sourceMappingURL=environment.js.map

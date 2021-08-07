@@ -103,6 +103,9 @@ export class TransferAddComponent implements OnInit {
     SBOBalance: any;
     SBOUsername: any;
 
+    GamePlayBalance: any;
+    GamePlayUsername: any;
+
     //#endregion
 
     //#region ngOnInit
@@ -116,7 +119,6 @@ export class TransferAddComponent implements OnInit {
 
     //#region onChange
     onChange(event) {
-        debugger
         this.newVal = event.value.id;
         this.userPassword = event.value.password;
         this.retriveUserbank(this.newVal);
@@ -192,6 +194,8 @@ export class TransferAddComponent implements OnInit {
             this.pragmaticUsername = res.data.pragmaticUsername;
             this.YeeBetUsername = res.data.yeeBetUsername;
             this.SBOUsername = res.data.sboUsername;
+            this.GamePlayUsername = res.data.gameplayUsername;
+
             this.Kiss918Balance(newVal);
             this.Mega888(newVal);
             this.Maxbet(newVal);
@@ -209,6 +213,7 @@ export class TransferAddComponent implements OnInit {
             this.Pragmatic(newVal);
             this.YeeBet(newVal);
             this.SBO(newVal);
+            this.GamePlay(newVal);
         })
 
         this.adminService.getAll<any>(customer.depositDdl).subscribe(res => {
@@ -536,6 +541,16 @@ export class TransferAddComponent implements OnInit {
         }
         this.adminService.add<any>(gameBalance.SBO, data).subscribe(res => {
             this.SBOBalance = res.data.balance;
+        })
+    }
+
+    GamePlay(id) {
+        let data = {
+            id: id,
+            username: this.GamePlayUsername
+        }
+        this.adminService.add<any>(gameBalance.GamePlay, data).subscribe(res => {
+            this.GamePlayBalance = res.data.balance;
         })
     }
 

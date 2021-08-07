@@ -55,6 +55,7 @@ namespace Webet333.models.Mapping.Promotions
                 IsMega888 = x.IsMega888,
                 IsJoker = x.IsJoker,
                 IsSBO = x.IsSBO,
+                IsGamePlay = x.IsGamePlay,
                 IsNewMember = x.IsNewMember,
                 IsSports = x.IsSports,
                 IsCasino = x.IsCasino,
