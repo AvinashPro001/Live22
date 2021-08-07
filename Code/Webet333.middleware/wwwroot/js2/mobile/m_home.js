@@ -69,10 +69,10 @@ async function SliderPromotion() {
                     }
 
                     if (GetLocalStorage('currentUser') !== null)
-                        document.getElementById("mobilePromotionSliderLogin").className = "login-top-slider";
+                        document.getElementById("mobilePromotionSliderLogin").className = "login-top-slider-s";
                     else
                         document.getElementById("mobilePromotionSlider").className = "login-top-slider";
-
+                    
                     try { slider(); }
                     catch (ex) { }
                 }
@@ -87,17 +87,30 @@ async function SliderPromotion() {
 }
 
 function slider() {
-    $('.login-top-slider').slick({
-        autoplay: true,
-        autoplaySpeed: 5000,
-        dots: true,
-        arrows: false,
-        infinite: true,
-        speed: 1000,
-        fade: true,
-        slide: 'div',
-        cssEase: 'linear'
-    });
+    if (GetLocalStorage('currentUser') !== null)
+        $('.login-top-slider-s').slick({
+            autoplay: true,
+            autoplaySpeed: 5000,
+            dots: true,
+            arrows: false,
+            infinite: true,
+            speed: 1000,
+            fade: true,
+            slide: 'div',
+            cssEase: 'linear'
+        });
+    else
+        $('.login-top-slider').slick({
+            autoplay: true,
+            autoplaySpeed: 5000,
+            dots: true,
+            arrows: false,
+            infinite: true,
+            speed: 1000,
+            fade: true,
+            slide: 'div',
+            cssEase: 'linear'
+        });
 }
 
 function ChangeErroMessage(key, parameter = "") {
