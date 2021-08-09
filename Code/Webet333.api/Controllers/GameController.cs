@@ -2726,6 +2726,7 @@ namespace Webet333.api.Controllers
                     WMUsername = user.WMGamePrefix + user.UserId,
                     YEEBETUsername = user.YEEBETGamePrefix + user.UserId,
                     SBOUsername = user.SBOGamePrefix + user.UserId,
+                    GamePlayUsername = user.GamePlayGamePrefix + user.UserId,
 
                     FromWalletIsMaintenance = false,
                     FromWalletName = "Main Wallet",
