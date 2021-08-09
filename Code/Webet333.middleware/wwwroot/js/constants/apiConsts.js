@@ -136,3 +136,7 @@ var gameSettingEndPoints = {
     HotGameList: 'Game/hotslotsgame/list',
     JokerGameId: 'F2NZ.'
 }
+
+var SettingEndPoints = {
+    checkUsernameExists:'account/check/username/exists'
+}

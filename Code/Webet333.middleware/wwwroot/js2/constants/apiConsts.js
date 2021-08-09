@@ -180,5 +180,7 @@ var apiEndPoints = {
 
     slotsGameList: 'Game/slotsgame/list',
 
-    homepageBannerList: 'settings/homePage-banner/select/user'
+    homepageBannerList: 'settings/homePage-banner/select/user',
+
+    checkUsernameExists: 'account/check/username/exists'
 };

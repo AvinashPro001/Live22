@@ -433,4 +433,7 @@ Sila Hubungi Perkhidmatan Pelanggan kami jika anda mempunyai pertanyaan. Anda bo
   <data name="sql_error_promotionmindepositamount" xml:space="preserve">
     <value>Untuk anda yang memohon promosi ini, jumlah deposit minimum: RM</value>
   </data>
+  <data name="sql_mobile_number_not_verified" xml:space="preserve">
+    <value>No Mudah Alih ini Tidak Disahkan.</value>
+  </data>
 </root>

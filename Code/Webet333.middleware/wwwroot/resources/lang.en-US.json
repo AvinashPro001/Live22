@@ -103,6 +103,8 @@
   "submit_button": "Submit",
   "username_instruction": "Username must contain a length of 7 Characters.",
   "username_specialCharacter_instruction": "Special characters not allowed.",
+  "username_exists": "Username already exists.",
+  "username_avialble": "Username is Available.",
   "password_instruction": "Password must contain a length of 6 charaters",
   "password_alpha_instruction": "Password must be alphanumeric.",
   "password_username_same": "Password and username must be different.",

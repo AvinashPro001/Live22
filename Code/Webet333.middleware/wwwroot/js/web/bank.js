@@ -666,8 +666,8 @@ function SetHistorySectionName(name) {
     toDate = null;
     pageNumber = 0;
     $(".remove-active-class>li.active").removeClass("active");
-    $("#today-filter").addClass("active");
-    GetTodayDate();
+    //$("#today-filter").addClass("active");
+    Get30DayDate();
 }
 
 function APIDateFormate(date) {
@@ -777,6 +777,16 @@ function GetTodayDate() {
     CallFunctionAccordingToTab();
 };
 
+function Get30DayDate() {
+    $("#datepicker1").val("")
+    $("#datepicker2").val("")
+    pageNumber = 0;
+    var fdate = new Date().addDays(-31);
+    var tdate = new Date();
+    GetDateFormate(fdate, tdate)
+    CallFunctionAccordingToTab();
+};
+
 function Get3DayDate() {
     $("#datepicker1").val("")
     $("#datepicker2").val("")
@@ -814,8 +824,8 @@ function GetDateRange() {
     pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");
-    fromDate = fdate[2] + "-" + fdate[1] + "-" + fdate[0] + " 00:00:00";
-    toDate = tdate[2] + "-" + tdate[1] + "-" + tdate[0] + " 23:59:59";
+    fromDate = fdate[2] + "-" + fdate[0] + "-" + fdate[1] + " 00:00:00";
+    toDate = tdate[2] + "-" + tdate[0] + "-" + tdate[1] + " 23:59:59";
     CallFunctionAccordingToTab();
 }
 

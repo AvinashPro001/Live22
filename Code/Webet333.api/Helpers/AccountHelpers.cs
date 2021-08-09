@@ -45,7 +45,7 @@ namespace Webet333.api.Helpers
             {
                 using (var repository = new DapperRepository<dynamic>(Connection))
                 {
-                    await repository.AddOrUpdateAsync(StoredProcConsts.Account.SetUsers, new { request.Name, UserName = request.Username, MobileNo = request.Mobile, Password = SecurityHelpers.EncryptPassword(request.Password), Role, request.ReferenceKeyword });
+                    await repository.AddOrUpdateAsync(StoredProcConsts.Account.SetUsers, new { request.Name, UserName = request.Username, MobileNo = request.Mobile, Password = SecurityHelpers.EncryptPassword(request.Password), Role, request.ReferenceKeyword,request.OTP });
                 }
             }
             return await FindUser(request.Username, request.Password, uniqueId: UniqueId, grantType: GrantTypeEnums.user.ToString());
@@ -526,20 +526,26 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<OtpResponse> SendOtp(string UserId, string MobileNo)
+        public async Task<OtpResponse> SendOtp(SendOtpRequest request)
         {
             OtpResponse response;
             using (var dapperRepository = new DapperRepository<OtpResponse>(Connection))
             {
-                response = await dapperRepository.FindAsync(StoredProcConsts.Account.GenrateOtp, new { UserId });
+                response = await dapperRepository.FindAsync(StoredProcConsts.Account.GenrateOtp, new { request.MobileNo, request.Role });
             }
 
-            if (response.ErrorCode == 0 && response.OTP != null)
-            {
-                var Message = response.OTP + " is your OTP and it is vaild for next 5 mins. Please do not share this OTP with anyone. Thank you";
+            request.MobileNo = request.MobileNo.Trim().Replace("+", "").Replace("-", "");
+            if (request.MobileNo.Substring(0, 1) != "6")
+                request.MobileNo = "6" + request.MobileNo;
 
-                await SendSMSAPI(MobileNo, Message);
-            }
+            var Message = response.OTP + " is your OTP and it is vaild for next 5 mins. Please do not share this OTP with anyone. Thank you";
+
+            if (request.Trio)
+                await CallTrioSMSAPI(request.MobileNo, Message);
+
+            if (request.Etracker)
+                await CallEtrackerSMSAPI(request.MobileNo, Message);
+            
             return response;
         }
 
@@ -635,6 +641,19 @@ namespace Webet333.api.Helpers
             }
         }
 
+        #region Check Username Exists
+
+        internal async Task<dynamic> CheckUsernameExists(CheckUsernameExistsRequest request)
+        {
+            using (var dapperRepository = new DapperRepository<dynamic>(Connection))
+            {
+                var res=await dapperRepository.FindAsync(StoredProcConsts.Account.CheckUsernamExists, request);
+                return res;
+            }
+        }
+
+        #endregion
+
         #region Send SMS API
 
         public async Task<string> SendSMSAPI(string MobileNo, string Message)
@@ -654,25 +673,31 @@ namespace Webet333.api.Helpers
             bool Trio = Convert.ToBoolean(response.Single(x => x.Name == "Trio").Value);
 
             if (Etracker)
-            {
-                var URL = $"{GameConst.SMSConst.Url}user={GameConst.SMSConst.User}&pass={GameConst.SMSConst.Password}&type={GameConst.SMSConst.Type}&to={MobileNo}&from={GameConst.SMSConst.From}&text={Message}&servid={GameConst.SMSConst.ServId}&title={GameConst.SMSConst.Title}";
-                return await GameHelpers.CallThirdPartyApi(URL);
-            }
+                return await CallEtrackerSMSAPI(MobileNo, Message);
 
             if (Trio)
-            {
-                var URL = $"{GameConst.SMSConst.TrioUrl}api_key={GameConst.SMSConst.TrioApiKey}&action=send&to={MobileNo}&msg={Message}&sender_id={GameConst.SMSConst.TrioSenderId}&content_type=1&mode=shortcode&campaign=";
-                var apiResponse = await GameHelpers.CallThirdPartyApi(URL);
-                if (apiResponse.Length > 3)
-                    return MobileNo + "," + apiResponse.Replace("\n\n", "") + "," + "200";
-
-                return apiResponse;
-            }
+                return await CallTrioSMSAPI(MobileNo, Message);
 
             return string.Empty;
         }
 
         #endregion Send SMS API
+
+        public async Task<string> CallEtrackerSMSAPI(string MobileNo, string Message)
+        {
+            var URL = $"{GameConst.SMSConst.Url}user={GameConst.SMSConst.User}&pass={GameConst.SMSConst.Password}&type={GameConst.SMSConst.Type}&to={MobileNo}&from={GameConst.SMSConst.From}&text={Message}&servid={GameConst.SMSConst.ServId}&title={GameConst.SMSConst.Title}";
+            return await GameHelpers.CallThirdPartyApi(URL);
+        }
+
+        public async Task<string> CallTrioSMSAPI(string MobileNo, string Message)
+        {
+            var URL = $"{GameConst.SMSConst.TrioUrl}api_key={GameConst.SMSConst.TrioApiKey}&action=send&to={MobileNo}&msg={Message}&sender_id={GameConst.SMSConst.TrioSenderId}&content_type=1&mode=shortcode&campaign=";
+            var apiResponse = await GameHelpers.CallThirdPartyApi(URL);
+            if (apiResponse.Length > 3)
+                return MobileNo + "," + apiResponse.Replace("\n\n", "") + "," + "200";
+
+            return apiResponse;
+        }
 
         #region House Keeping
 

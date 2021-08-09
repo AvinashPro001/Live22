@@ -305,10 +305,14 @@ select.main-wallet.jcf-hidden,
 .menu-list-area .tab-pane ul li img { width: 100%; max-width: 100%; object-fit: cover; }
 .grey-color{color:gray !important;}
 .green-color{color:green !important;}
+.red-color{color:red !important;}
 .no-game{width:100%;text-align:center;}
 .main-wallet-bal-pad{padding-left:0px !important;}
 .home-vip-image{margin-top:-4px;}
 .main-wallet-bar{line-height:20px;}
+.otp-btn {color: #fff !important;background: #f0ad4e !important;border-color: #eea236 !important;margin-left:10px;}
+.otp-btn span{font-size:10px;}
+#m_regsiter_otp{padding-left:10px;}
 
 
 

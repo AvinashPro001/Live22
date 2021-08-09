@@ -6,6 +6,8 @@
 
         public class Account
         {
+            public const string CheckUsernameExists = "account/check/username/exists";
+
             public const string Login = "account/login";
 
             public const string Register = "account/register";
