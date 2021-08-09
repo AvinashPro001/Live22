@@ -213,9 +213,9 @@ function TransferPageWallets() {
 
 async function RestoreBalance() {
     //LoaderShow();
-    debugger
-    $(".refresh,#refreshBtn").addClass('fa-spin');
+    $(".refresh").addClass('fa-spin');
     try {
+        $("#refreshBtn").attr("src", "../../images/loading.gif");
         $('.values').html('');
         $('.img_load').css('display', 'block');
         $("#retore_li").css("pointer-events", "none");
@@ -281,7 +281,7 @@ async function RestoreBalance() {
     catch (ex) { }
     $("#retore_li").css("pointer-events", "");
     WalletBalance();
-    //LoaderHide();
+    $("#refreshBtn").attr("src", "../../images/mobile/menu-images/restore.png");
     $(".refresh,#refreshBtn").removeClass('fa-spin');
 }
 
