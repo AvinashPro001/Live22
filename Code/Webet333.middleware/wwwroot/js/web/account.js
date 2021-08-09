@@ -14,7 +14,9 @@ $(window).on('load', function () {
 $(document).ready(function () {
     setInterval(async function () {
         SetAllValueInElement("current_time", DisplayCurrentTime());
+    }, 1000);
 
+    setInterval(async function () {
         try {
             if (GetLocalStorage("IsSedularExecute") == null) SetLocalStorage("IsSedularExecute", false);
 
@@ -45,15 +47,13 @@ $(document).ready(function () {
                     if (GetLocalStorage("currentUser") != null) if (data.AllBankPageData == null) await CallAllBankAPI();
 
                 }
-
                 SetLocalStorage("IsSedularExecute", false);
             }
         }
         catch (e) {
             SetLocalStorage("IsSedularExecute", false);
         }
-
-    }, 1000);
+    }, 5000);
 });
 
 //#endregion
