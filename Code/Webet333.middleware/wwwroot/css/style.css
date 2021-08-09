@@ -860,6 +860,7 @@ header .tooltip-inner {width: 100px!important; }
 #arcade_slots_playtech .img-text-block img { height: 120px; max-width: 100%; }
 /*  */
 
+
 .slick-slide .img-text-block img { height: 200px; max-width: 200px; margin: 0 auto; width: auto; object-fit: contain; transition: 0.5s; border-radius: 0px; }
 .hover-block { opacity: 0; position: absolute; top: 0; left: 0; border: 20px solid #ffffff; transform: scale(0); transition: 0.5s;}
 .hover-block figure { position: relative;}
@@ -902,7 +903,12 @@ header .tooltip-inner {width: 100px!important; }
 .flag-icon { position: absolute; left: -50px; top: 30px; }
 .flag-icon img { max-width: 75px; }
 
-
+/* 05/08/2021*/
+.menu-list li a{position:relative;}
+.new-tag{position:absolute;top:0px;right:0px;}
+.new-tag img{max-width:40px;}
+.hot-tag{position:absolute;top:0px;right:0px;}
+.hot-tag img{max-width:60px;}
 
 @media(min-width:1200px) and (max-width:1270px) {
     header .container {/* width: 1170px;*/ width: 1100px; }
@@ -2172,3 +2178,4 @@ div.tabcontent_health .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 .mar-left-25per {margin-left:25% !important;}
 .mar-right-0{margin-right:0px !important;}
 .font-size-16px{font-size:16px}
+.red-color{color:red !important;}

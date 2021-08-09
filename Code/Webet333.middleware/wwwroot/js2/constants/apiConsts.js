@@ -1,6 +1,6 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
 let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
-let PortAPI = '9001';
+let PortAPI = '8080';
 let PortWEB = '9002';
 
 switch (environmentName.toUpperCase()) {
@@ -176,5 +176,7 @@ var apiEndPoints = {
 
     slotsGameList: 'Game/slotsgame/list',
 
-    homepageBannerList: 'settings/homePage-banner/select/user'
+    homepageBannerList: 'settings/homePage-banner/select/user',
+
+    checkUsernameExists: 'account/check/username/exists'
 };

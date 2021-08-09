@@ -1089,14 +1089,31 @@ namespace Webet333.api.Controllers
 
         #endregion Contact Information
 
-        #region Check password
+        #region Check Username Exists or not
 
-        [HttpPost("testpassword")]
-        public IActionResult checkpassword(string password)
+        [HttpPost(ActionsConst.Account.CheckUsernameExists)]
+        public async Task<IActionResult> CheckUsernameExists([FromBody]CheckUsernameExistsRequest request)
         {
-            return OkResponse(SecurityHelpers.DecryptPassword(password));
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            using (var account_helper =new AccountHelpers(Connection))
+            {
+                var result=await account_helper.CheckUsernameExists(request);
+                return OkResponse(result);
+            }
         }
 
-        #endregion Check password
+        #endregion
+
+        //#region Check password
+
+        //[HttpPost("testpassword")]
+        //public IActionResult checkpassword(string password)
+        //{
+        //    return OkResponse(SecurityHelpers.DecryptPassword(password));
+        //}
+
+        //#endregion Check password
     }
 }

@@ -323,7 +323,7 @@ async function DoRegister() {
         LoaderHide();
         return ShowError(ChangeErroMessage("mobile_no_required_error"));
     }
-    if (model.mobile.length < 10) {
+    if (model.mobile.length < 10 || model.mobile.length > 11) {
         LoaderHide();
         return ShowError(ChangeErroMessage("mobile_length_error"));
     }
@@ -369,6 +369,9 @@ async function DoRegister() {
         LoaderHide();
         return ShowError(ChangeErroMessage("error_otp"));
     }
+
+    if (/^[a-zA-Z0-9- ]*$/.test(model.username) == false) { LoaderHide(); return ShowError(ChangeErroMessage('special_char_not_allowed')); }
+    if (/^[a-zA-Z0-9- ]*$/.test(model.name) == false) { LoaderHide(); return ShowError(ChangeErroMessage('name_special_char_not_allowed')); }
 
     var Char = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
     if (!Char.test(model.password)) {
@@ -806,3 +809,64 @@ function MobileValidation(TextFieldId, ErrorShowId) {
 }
 
 //#endregion
+
+//#region Change  Message
+
+function ChangeMessageText(key, parameter = "") {
+    var Message = "";
+    $.ajax({
+        url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
+        dataType: 'json',
+        async: false,
+        success: function (lang) {
+            Message = lang[key] + parameter;
+        }
+    });
+    return Message;
+}
+
+//#endregion
+
+function SetUsernameInstructionColorAndTick(TickId, InstructionId, IsRed) {
+    if (IsRed) {
+        $("#" + InstructionId).addClass("red-color");
+        $("#" + TickId).addClass("fa-times");
+        $("#" + InstructionId).removeClass("green-color");
+        $("#" + TickId).removeClass("fa-check");
+    }
+    else {
+        $("#" + TickId).addClass("fa-check");
+        $("#" + InstructionId).addClass("green-color");
+        $("#" + InstructionId).removeClass("red-color");
+        $("#" + TickId).removeClass("fa-times");
+    }
+}
+
+async function OnUsernameType(UsernameTextboxId) {
+    var username = $('#' + UsernameTextboxId).val();
+
+    if (username.length < 7) SetUsernameInstructionColorAndTick("username_len_check", "username_len", true)
+    else SetUsernameInstructionColorAndTick("username_len_check", "username_len", false)
+
+    if (/^[a-zA-Z0-9- ]*$/.test(username) == false) SetUsernameInstructionColorAndTick("username_spec_char_check", "username_spec_char", true)
+    else SetUsernameInstructionColorAndTick("username_spec_char_check", "username_spec_char", false)
+
+    if (username.length >= 7) {
+        $("#username_already").css("display", "");
+        var model = {
+            username: username
+        }
+        var res = await PostMethod(apiEndPoints.checkUsernameExists, model);
+        if (!res.data.isExists) {
+            $("#already_text").text(ChangeMessageText("username_avialble"));
+            SetUsernameInstructionColorAndTick("username_already_check", "username_already", false)
+        }
+        else {
+            $("#already_text").text(ChangeMessageText("username_exists"));
+            SetUsernameInstructionColorAndTick("username_already_check", "username_already", true)
+        }
+    }
+    else {
+        $("#username_already").css("display", "none");
+    }
+}

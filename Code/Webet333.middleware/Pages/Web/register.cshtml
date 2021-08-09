@@ -47,16 +47,21 @@
                                         </span> :
                                     </label>
                                     <label class="user mendatory col-md-9 pl0">
-                                        <input type="text" class="reg-form" placeholder="" id="txt_username" />
+                                        <input type="text" class="reg-form" placeholder="" id="txt_username" onkeyup="OnUsernameType('txt_username')" />
                                         <p class="star">*</p>
-                                        <p class="note no-mar mar-btm-ten">
-                                            <span class="lang" key="username_instruction">
-                                                Username must contain a length of 7-15 Characters.
+                                        <p class="note no-mar mar-btm-ten" id="username_already" style="display:none;">
+                                            <i class="fas" id="username_already_check"></i>
+                                            <span class="lang" id="already_text">
                                             </span>
                                         </p>
-                                        <p class="note no-mar mar-btm-ten">
+                                        <p class="note no-mar mar-btm-ten" id="username_len">
+                                            <i class="fas" id="username_len_check"></i>
+                                            <span class="lang" key="username_instruction">
+                                            </span>
+                                        </p>
+                                        <p class="note no-mar mar-btm-ten" id="username_spec_char">
+                                            <i class="fas" id="username_spec_char_check"></i>
                                             <span class="lang" key="username_specialCharacter_instruction">
-                                                Special characters not allowed.
                                             </span>
                                         </p>
                                     </label>
