@@ -89,6 +89,23 @@ function ChangeErroMessage(key, parameter = "") {
 
 //#endregion
 
+//#region Change  Message
+
+function ChangeMessageText(key, parameter = "") {
+    var Message = "";
+    $.ajax({
+        url: '../../resources/lang.' + GetLocalStorage('language') + '.json',
+        dataType: 'json',
+        async: false,
+        success: function (lang) {
+            Message = lang[key] + parameter;
+        }
+    });
+    return Message;
+}
+
+//#endregion
+
 //#region Set Sitedata Variable
 
 function SetSiteDataVariable() {

@@ -433,4 +433,7 @@
   <data name="sql_error_promotionmindepositamount" xml:space="preserve">
     <value>对于您申请此促销活动，最低存款金额： RM</value>
   </data>
+  <data name="sql_mobile_number_not_verified" xml:space="preserve">
+    <value>此手机号码未经验证。</value>
+  </data>
 </root>

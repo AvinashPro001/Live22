@@ -319,6 +319,7 @@ async function DoRegister() {
     var username = $('#txt_username').val();
     var password = $("#txt_password").val();
     var confirmPassword = $("#txt_confirm_password").val();
+    var otp = $("#txt_otp").val();
 
     if (mobile === "") return ShowError(ChangeErroMessage("mobile_no_required_error"));
 
@@ -330,12 +331,7 @@ async function DoRegister() {
 
     if (username.length < 7) return ShowError(ChangeErroMessage("username_length_error"));
 
-    //if (username.length > 8) return ShowError(ChangeErroMessage("username_max_length_error"));
-
     if (/^[a-zA-Z0-9- ]*$/.test(username) == false) return ShowError(ChangeErroMessage('special_char_not_allowed'));
-
-    var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
-    if (!reqExp.test(username)) return ShowError(ChangeErroMessage("username_alpha_error"));
 
     if (password === "") return ShowError(ChangeErroMessage("password_required_error"));
 
@@ -343,11 +339,14 @@ async function DoRegister() {
 
     if (confirmPassword === "") return ShowError(ChangeErroMessage("confirm_password_required_error"));
 
+    if (otp == null || otp == undefined || otp == "")return ShowError(ChangeErroMessage("error_otp_required"));
+
+    if (otp.length > 6 || otp.length < 6)return ShowError(ChangeErroMessage("error_otp"));
+
     if (name === "") return ShowError(ChangeErroMessage("name_required_error"));
 
     if (/^[a-zA-Z0-9- ]*$/.test(name) == false) return ShowError(ChangeErroMessage('name_special_char_not_allowed'));
 
-   
     if (username === password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
 
     if (password !== confirmPassword) return ShowError(ChangeErroMessage("pass_not_match_error"));
@@ -368,7 +367,8 @@ async function DoRegister() {
         username: username,
         password: password,
         confirmPassword: confirmPassword,
-        referenceKeyword: GetCookie("ref")
+        referenceKeyword: GetCookie("ref"),
+        otp: otp
     };
 
     LoaderShow();
@@ -485,6 +485,7 @@ setInterval(function () {
         regisrationGame();
 }, 2000)
 
+var smscounter = 1;
 function Counter() {
     document.getElementById("button_resend").disabled = true;
 
@@ -492,6 +493,7 @@ function Counter() {
     var timer = setInterval(function () {
         $("#counter_txt").html((count--) - 1);
         if (count == 0) {
+            ++smscounter;
             clearInterval(timer);
             document.getElementById("counter_txt").innerText = "";
             document.getElementById("button_resend").disabled = false;
@@ -500,19 +502,38 @@ function Counter() {
 }
 
 async function SendOTP(number) {
+
     if (number == 1)
         Counter();
-    var resUserData = JSON.parse(Decryption(GetSessionStorage('userDetails')));
-    if (resUserData.mobilenoConfirmed == false) {
-        LoaderShow();
-        var res = await PostMethod(accountEndPoints.SendOTP, {});
-        if (res.status == 200) {
-            document.getElementById("txt_otp").value = "";
-            ShowSuccess(ChangeErroMessage("otp_send_success"));
 
-        }
-        LoaderHide();
+    LoaderShow();
+
+    var model = {
+        mobileNo: $("#txt_mobile_no").val(),
+        tri: true,
+        etk: true
     }
+    if (smscounter % 2 == 0) {
+        model.etk = false; model.tri = true;
+    }
+    else {
+        model.etk = true; model.tri = false;
+    }
+
+    if (model.mobileNo === "") return ShowError(ChangeErroMessage("mobile_no_required_error"));
+
+    if (model.mobileNo.length < 10) return ShowError(ChangeErroMessage("mobile_length_error"));
+
+    if (model.mobileNo.length > 11) return ShowError(ChangeErroMessage("mobile_length_error"));
+
+    var res = await PostMethod(accountEndPoints.SendOTP, model);
+    if (res.status == 200) {
+        document.getElementById("txt_otp").value = "";
+        ShowSuccess(ChangeErroMessage("otp_send_success"));
+
+    }
+    LoaderHide();
+
 }
 
 async function VerifiedOTP() {
@@ -856,4 +877,50 @@ function OnPasswordType(PasswordTextboxId, UsernameTextboxId) {
 
     var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     regex.test(password) ? ($("#pass-alpha").addClass("green-color")) : ($("#pass-alpha").removeClass("green-color"))
+}
+
+function SetUsernameInstructionColorAndTick(TickId, InstructionId, IsRed) {
+    if (IsRed) {
+        $("#" + InstructionId).addClass("red-color");
+        $("#" + TickId).addClass("fa-times");
+        $("#" + InstructionId).removeClass("green-color");
+        $("#" + TickId).removeClass("fa-check");
+    }
+    else {
+        $("#" + TickId).addClass("fa-check");
+        $("#" + InstructionId).addClass("green-color");
+        $("#" + InstructionId).removeClass("red-color");
+        $("#" + TickId).removeClass("fa-times");
+    }
+}
+
+async function OnUsernameType(UsernameTextboxId) {
+    var username = $('#' + UsernameTextboxId).val();
+
+    if (username.length < 7) SetUsernameInstructionColorAndTick("username_len_check", "username_len", true)
+    else SetUsernameInstructionColorAndTick("username_len_check", "username_len", false)
+
+    if (/^[a-zA-Z0-9- ]*$/.test(username) == false) SetUsernameInstructionColorAndTick("username_spec_char_check", "username_spec_char", true)
+    else SetUsernameInstructionColorAndTick("username_spec_char_check", "username_spec_char", false)
+
+    if (username.length >= 7) {
+        $("#username_already").css("display", "");
+        var model = {
+            username: username
+        }
+        var res = await PostMethod(SettingEndPoints.checkUsernameExists, model);
+        if (res.status == 200) {
+            if (!res.response.data.isExists) {
+                $("#already_text").text(ChangeMessageText("username_avialble"));
+                SetUsernameInstructionColorAndTick("username_already_check", "username_already", false)
+            }
+            else {
+                $("#already_text").text(ChangeMessageText("username_exists"));
+                SetUsernameInstructionColorAndTick("username_already_check", "username_already", true)
+            }
+        }
+    }
+    else {
+        $("#username_already").css("display", "none");
+    }
 }

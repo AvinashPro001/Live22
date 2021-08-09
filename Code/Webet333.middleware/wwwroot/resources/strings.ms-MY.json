@@ -335,5 +335,9 @@
   "pls_select_date": "Sila pilih tarikh",
 
   "current_pass_req": "Sila masukkan kata laluan semasa.",
-  "new_pass_req": "Sila masukkan Kata Laluan Baru"
+  "new_pass_req": "Sila masukkan Kata Laluan Baru",
+  "special_char_not_allowed": "Aksara Khas tidak dibenarkan dalam Nama Pengguna.",
+  "name_special_char_not_allowed": "Watak Khas tidak dibenarkan dalam Nama.",
+  "username_exists": "Nama pengguna sudah wujud.",
+  "username_avialble": "Nama pengguna tersedia."
 }

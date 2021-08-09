@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Webet333.models.Request.Account
 {
-    public class OtpVerifiedRequest
+    public class CheckUsernameExistsRequest
     {
+        [JsonProperty(PropertyName ="username")]
         [Required]
-        [JsonProperty(PropertyName = "otp")]
-        public string OTP { get; set; }
+        public string Username { get; set; }
     }
 }

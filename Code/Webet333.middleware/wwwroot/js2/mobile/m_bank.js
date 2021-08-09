@@ -1111,7 +1111,7 @@ function GetDateRange() {
 
 function Get30DayDate() {
     pageNumber = 0;
-    var fdate = new Date();
+    var fdate = new Date().addDays(-31);
     var tdate = new Date();
     GetDateFormate(fdate, tdate)
     CallFunctionAccordingToTab()

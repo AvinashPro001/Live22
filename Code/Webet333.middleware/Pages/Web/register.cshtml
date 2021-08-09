@@ -47,16 +47,21 @@
                                         </span> :
                                     </label>
                                     <label class="user mendatory col-md-9 pl0">
-                                        <input type="text" class="reg-form" placeholder="" id="txt_username" />
+                                        <input type="text" class="reg-form" placeholder="" id="txt_username" onkeyup="OnUsernameType('txt_username')" />
                                         <p class="star">*</p>
-                                        <p class="note no-mar mar-btm-ten">
-                                            <span class="lang" key="username_instruction">
-                                                Username must contain a length of 7-15 Characters.
+                                        <p class="note no-mar mar-btm-ten" id="username_already" style="display:none;">
+                                            <i class="fas" id="username_already_check"></i>
+                                            <span class="lang" id="already_text">
                                             </span>
                                         </p>
-                                        <p class="note no-mar mar-btm-ten">
+                                        <p class="note no-mar mar-btm-ten" id="username_len">
+                                            <i class="fas" id="username_len_check"></i>
+                                            <span class="lang" key="username_instruction">
+                                            </span>
+                                        </p>
+                                        <p class="note no-mar mar-btm-ten" id="username_spec_char">
+                                            <i class="fas" id="username_spec_char_check"></i>
                                             <span class="lang" key="username_specialCharacter_instruction">
-                                                Special characters not allowed.
                                             </span>
                                         </p>
                                     </label>
@@ -107,6 +112,18 @@
                                         <p class="star">*</p>
                                         <label style="color:#ff0000;font-weight:bold" id="register-error"></label>
                                     </label>
+                                </div>
+                                <div class="row form-group ml0 mr0">
+                                    <div class="num mendatory col-md-5 pl0 mar-left-25per mar-right-0">
+                                        <input type="number" class="reg-form lang" placeholder="OTP" id="txt_otp" />
+                                    </div>
+
+                                    <div class="num col-md-4 pl0 mar-right-0">
+                                        <button type="button" id="button_resend" name="" value="Send OTP" class="btn btn-warning font-size-16px" onclick="SendOTP(1)">
+                                            <span class="lang" key="send_otp">Resend OTP</span>
+                                            <span id="counter_txt"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
