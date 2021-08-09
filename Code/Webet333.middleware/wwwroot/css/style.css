@@ -313,19 +313,19 @@ body.home-page {background-color: #fff; }
 .process-game {position: relative; padding-left: 80px; display: inline-block; }
 .process-game:before {position: absolute; content: ''; display: block; left: 0; bottom: 20px; width: 30px; height: 30px; background-repeat: no-repeat; background-size: cover; background-position: center; top: 10px; }
 .step-1:before {/*background-image: url(../images/step-1.png);*/ /*cursor: pointer;*/ /* display: block; */ /* bottom: 22px; */ /* background-repeat: no-repeat; */ /* background-size: cover; */ /* background-position: center; */ /* font-size: 38px; */
-    content: '1'; position: absolute; left: 27px; width: 30px; height: 60px; top: 15px; display: block; margin: -25px 0 0px 0; font-size: 53px; font-weight: 800; line-height: 80px; color: #dfb755; text-shadow:0 10px 18px #ac760c, 0 -12px 18px #ac760c;
+    content: '1'; position: absolute; left: 27px; width: 30px; height: 60px; display: block; margin: -25px 0 0px 0; font-size: 53px; font-weight: 800; line-height: 70px; color: #dfb755; text-shadow:0 10px 18px #ac760c, 0 -12px 18px #ac760c;
     letter-spacing: 0px; background: -webkit-linear-gradient(#e9c565, #ad720a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; -webkit-text-stroke: 1px #e5b853; font-family: fantasy; font-size: 42px; }
 .step-2:before {/* display: block; */ /* bottom: 22px; */ /* background-repeat: no-repeat; */ /* background-size: cover; */ /* background-position: center; */ /* font-size: 38px; */
-    content: '2'; position: absolute; width: 30px; height: 60px; left: 43px; top: 15px; display: block; margin: -25px 0 0px 0; font-size: 53px; font-weight: 800; line-height: 80px; color: #dfb755; text-shadow:0 10px 18px #ac760c, 0 -12px 18px #ac760c; 
+    content: '2'; position: absolute; width: 30px; height: 60px; left: 43px;  display: block; margin: -25px 0 0px 0; font-size: 53px; font-weight: 800; line-height: 70px; color: #dfb755; text-shadow:0 10px 18px #ac760c, 0 -12px 18px #ac760c; 
     letter-spacing: 0px; background: -webkit-linear-gradient(#e9c565, #ad720a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; -webkit-text-stroke: 1px #e5b853; font-family: fantasy; font-size: 42px;}
 .step-3:before { /*background-image: url(../images/step-3.png); cursor: pointer;*/
     /* display: block; */ /* bottom: 22px; */ /* background-repeat: no-repeat; */ /* background-size: cover; */ /* background-position: center; */ /* font-size: 38px; */
-    content: '3'; position: absolute; left: 43px; width: 30px; height: 60px;top: 15px; display: block; margin: -25px 0 0px 0; font-size: 53px; font-weight: 800; line-height: 80px; color: #dfb755; text-shadow:0 10px 18px #ac760c, 0 -12px 18px #ac760c;
+    content: '3'; position: absolute; left: 43px; width: 30px; height: 60px; display: block; margin: -25px 0 0px 0; font-size: 53px; font-weight: 800; line-height: 70px; color: #dfb755; text-shadow:0 10px 18px #ac760c, 0 -12px 18px #ac760c;
     letter-spacing: 0px; background: -webkit-linear-gradient(#e9c565, #ad720a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
     -webkit-text-stroke: 1px #e5b853; font-family: fantasy; font-size: 42px; }
-.step-4:before {top: 15px; content: '4'; position: absolute;left: 43px; width: 30px; height: 60px;
+.step-4:before { content: '4'; position: absolute;left: 43px; width: 30px; height: 60px;
     /*background-image: url(../images/step-4.png); cursor: pointer;*/ /* display: block; */ /* bottom: 22px; */ /* background-repeat: no-repeat; */ /* background-size: cover; */ /* background-position: center; */ /* font-size: 38px; */
-    display: block; margin: -25px 0 0px 0; font-size: 53px; font-weight: 800; line-height: 80px; color: #dfb755; text-shadow:0 10px 18px #ac760c, 0 -12px 18px #ac760c; 
+    display: block; margin: -25px 0 0px 0; font-size: 53px; font-weight: 800; line-height: 70px; color: #dfb755; text-shadow:0 10px 18px #ac760c, 0 -12px 18px #ac760c; 
     letter-spacing: 0px; background: -webkit-linear-gradient(#e9c565, #ad720a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
     -webkit-text-stroke: 1px #e5b853; font-family: fantasy; font-size: 42px; }
 .process-game figure {height: 25px; display: none; }
