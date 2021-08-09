@@ -1,5 +1,5 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '9001';
 
 switch (environmentName.toUpperCase()) {
@@ -138,5 +138,5 @@ var gameSettingEndPoints = {
 }
 
 var SettingEndPoints = {
-    checkUsernameExists:'account/check/username/exists'
+    checkUsernameExists: 'account/check/username/exists'
 }
