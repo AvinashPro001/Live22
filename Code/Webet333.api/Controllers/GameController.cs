@@ -1720,7 +1720,6 @@ namespace Webet333.api.Controllers
                 AGUsername,
                 PlaytechUsername,
                 Mega888Username,
-                Kiss918Username,
                 JokerUsername,
                 MaxbetUsername,
                 M8Username;
@@ -1729,18 +1728,17 @@ namespace Webet333.api.Controllers
 
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.Username;
-                kiss918UserName = user.Username918;
-                vendorMemeberId = user.VendorMemberId;
-                mega888LoginId = user.Mega888LoginId;
-                AGUsername = user.AGGamePrefix + user.Username;
-                PlaytechUsername = user.PlaytechGamePrefix + user.Username;
-                Mega888Username = user.Mega888GamePrefix + user.Username;
-                Kiss918Username = user.Kiss918GamePrefix + user.Username;
-                JokerUsername = user.JokerGamePrefix + user.Username;
-                MaxbetUsername = user.MaxbetGamePrefix + user.Username;
-                M8Username = user.M8GamePrefix + user.Username;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.UserName;
+                kiss918UserName = user.UserName918;
+                vendorMemeberId = user.MaxbetUsername;
+                mega888LoginId = user.Mega888Username;
+                AGUsername = user.AGUsername;
+                PlaytechUsername = user.PlaytechUsername;
+                Mega888Username = user.Mega888Username;
+                JokerUsername = user.JokerUsername;
+                MaxbetUsername = user.MaxbetUsername;
+                M8Username = user.M8Username;
             }
 
             DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
@@ -2442,8 +2440,8 @@ namespace Webet333.api.Controllers
                         string username;
                         using (var account_helper = new AccountHelpers(Connection))
                         {
-                            var user = await account_helper.UserGetBalanceInfo(result[i].Id.ToString());
-                            username = user.PragmaticGamePrefix + user.UserId;
+                            var user = await account_helper.GetUsernameInfo(result[i].Id.ToString());
+                            username = user.PragmaticUsername;
                         }
                         var resultRegister = await PragmaticGameHelpers.RegisterCallAPI(username);
                         using (var pragmatic_helper = new PragmaticGameHelpers(Connection))
@@ -3192,7 +3190,7 @@ namespace Webet333.api.Controllers
             string password;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(UserEntity.Id.ToString());
+                var user = await account_helper.GetUsernameInfo(UserEntity.Id.ToString());
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
             using (var game_helper = new GameHelpers(Connection))

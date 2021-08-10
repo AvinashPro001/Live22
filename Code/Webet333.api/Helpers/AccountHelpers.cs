@@ -330,11 +330,11 @@ namespace Webet333.api.Helpers
         {
             try
             {
-                var info = await UserGetBalanceInfo(UserId);
+                var info = await GetUsernameInfo(UserId);
 
                 DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
                 var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
-                var perameter = $"Method={GameConst.Joker.SetPassword}&Password={Password}&Timestamp={temp}&Username={info.JokerGamePrefix}{info.Username}";
+                var perameter = $"Method={GameConst.Joker.SetPassword}&Password={Password}&Timestamp={temp}&Username={info.JokerUsername}";
                 var stringContent = new StringContent(perameter, Encoding.UTF8, "application/x-www-form-urlencoded");
                 var jokerURL = $"{GameConst.Joker.jokerBaseUrl}?" +
                                 $"AppID={GameConst.Joker.AppID}&" +
@@ -343,16 +343,16 @@ namespace Webet333.api.Helpers
                 var jokerPasswordUpdate = JsonConvert.DeserializeObject(await GameHelpers.CallThirdPartyApi(jokerURL, stringContent));
 
                 var PlaytechURL = $"{GameConst.Playtech.playtechBaseUrl}" +
-                                    $"update?playername={info.PlaytechGamePrefix.ToUpper()}{info.Username.ToUpper()}&password={Password}";
+                                    $"update?playername={info.PlaytechUsername.ToUpper()}&password={Password}";
 
                 DefaultHelper defaultHelper = new DefaultHelper(_hostingEnvironment);
                 dynamic resultPlaytech = JsonConvert.DeserializeObject(await defaultHelper.PlaytechAPICertificate(PlaytechURL, true, true));
 
-                await DGGameHelpers.CallUpdateuserAPI(info.DGGamePrefix + info.Username, Password);
+                await DGGameHelpers.CallUpdateuserAPI(info.DGUsername, Password);
 
-                await AllBetGameHelpers.ChangePasswordCallAPI(info.AllBetGamePrefix + info.UserId, Password);
+                await AllBetGameHelpers.ChangePasswordCallAPI(info.AllBetUsername, Password);
 
-                await WMGameHelpers.ChangePasswordCallAPI(info.WMGamePrefix + info.UserId, Password);
+                await WMGameHelpers.ChangePasswordCallAPI(info.WMUsername, Password);
             }
             catch (Exception ex) { }
         }

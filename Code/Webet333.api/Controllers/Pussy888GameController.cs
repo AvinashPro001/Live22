@@ -76,7 +76,7 @@ namespace Webet333.api.Controllers
             string password;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(UserEntity.Id.ToString());
+                var user = await account_helper.GetUsernameInfo(UserEntity.Id.ToString());
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
             using (var pussygame_helper = new Pussy888GameHelpers(Connection))
