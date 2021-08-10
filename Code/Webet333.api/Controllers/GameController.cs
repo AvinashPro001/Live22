@@ -1390,7 +1390,7 @@ namespace Webet333.api.Controllers
 
             PragmaticBettingDetailsRequest request = new PragmaticBettingDetailsRequest
             {
-                StartTimeStamp = date.AddMinutes(-30)   //  Betting details getting after 20 - 30 min.
+                StartTimeStamp = date.AddMinutes(-15)   //  Betting details getting after 10 - 15 min.
             };
 
             var response = await GamePlayGameHelpers.CallBettingDetailsAPI(request);
