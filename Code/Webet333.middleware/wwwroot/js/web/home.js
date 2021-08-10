@@ -460,8 +460,8 @@ function ChangeLanguageText() {
 
 function ChangeLanguage(LangCode) {
     SetLocalStorage("language", LangCode);
-    sessionStorage.removeItem("siteData");
-    sessionStorage.removeItem("siteData");
+    for (i = 0; i < 5; i++)
+        sessionStorage.removeItem("siteData");
     window.location.reload();
 }
 
@@ -605,10 +605,10 @@ function SignalRConnect() {
 }
 
 function CheckTokenIsValid(StausCode, StatusMessage) {
-    if (StausCode==400)
+    if (StausCode == 400)
         if (StatusMessage == "Your access token is expired, please login again." || StatusMessage == "Token akses anda tamat tempoh, sila log masuk sekali lagi." || StatusMessage == "您的访问令牌已过期，请重新登录。") {
-        localStorage.clear();
-        sessionStorage.clear();
-        window.location.reload();
-    }
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.reload();
+        }
 }
