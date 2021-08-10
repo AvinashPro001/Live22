@@ -206,7 +206,7 @@ async function SetUsername() {
     GameUsernames.SAUsername = GameUsername.saUsername;
     GameUsernames.WMUsername = GameUsername.wmUsername;
     GameUsernames.SexyBaccaratUsername = GameUsername.sexyUsername;
-    GameUsernames.PlaytechUsername = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();;
+    GameUsernames.PlaytechUsername = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
     GameUsernames.PragmaticUsername = GameUsername.pragmaticUsername;
     GameUsernames.JokerUsername = GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, "");
     GameUsernames.Mega888Username = GameUsername.mega888Username;

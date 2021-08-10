@@ -432,10 +432,8 @@ async function LoginPlaytechGame(GameCode) {
     window.open("../Web/game");
 
     var languageCode = (GetLocalStorage('language') === "zh-Hans" ? "ZH-CN" : "EN")
-    var res = JSON.parse(Decryption(GetSessionStorage('userDetails')));
-    let globalParameters = JSON.parse(Decryption(GetSessionStorage('GamePreFix')));
-    var usernamePrifix = globalParameters.playtechGamePrefix
-    var username = (usernamePrifix + res.username.replace("#", "")).toUpperCase();
+    let GameUsername = JSON.parse(Decryption(GetSessionStorage('GameUsername')));
+    var username = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
     var password = Decryption(GetLocalStorage('currentUserData'));
     var mobiledomain = "tothinkit.com";
     var systemidvar = "424";
