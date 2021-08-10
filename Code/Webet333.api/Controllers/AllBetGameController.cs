@@ -80,8 +80,8 @@ namespace Webet333.api.Controllers
             string username, password;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.AllBetGamePrefix + user.UserId;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.AllBetUsername;
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
             var languageCode = Language.Name == "English" ? "en" : "zh_CN";
@@ -92,7 +92,7 @@ namespace Webet333.api.Controllers
 
         #endregion AllBet game Login
 
-        #region AllBet game Login
+        #region AllBet game Modified
 
         [HttpPost(ActionsConst.AllBet.Modified)]
         public async Task<IActionResult> ALLBetModified([FromQuery] string Username, string hadicap, string VipHandicaps)
@@ -101,7 +101,7 @@ namespace Webet333.api.Controllers
             return OkResponse(result);
         }
 
-        #endregion AllBet game Login
+        #endregion AllBet game Modified
 
         #region AllBet game Change password
 
@@ -121,8 +121,8 @@ namespace Webet333.api.Controllers
             string username, password;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.AllBetGamePrefix + user.UserId;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.AllBetUsername;
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
 
