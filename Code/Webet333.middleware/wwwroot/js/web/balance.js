@@ -185,18 +185,11 @@ async function ReturnBalanceBasedOnWalletName(WalletName) {
 
 //#region  Set GameUsername
 async function SetUsername() {
-    var userDetails = JSON.parse(Decryption(GetSessionStorage("userDetails")));
     var GameUsername = JSON.parse(Decryption(GetSessionStorage("GameUsername")));
 
-    if (userDetails == null) {
-        var res = await GetMethod(accountEndPoints.getProfile);
-        SetSessionStorage('userDetails', Encryption(JSON.stringify(res.response.data)));
-        userDetails = res.response.data;
-    }
     if (GameUsername == null) {
         var username = await PostMethod(accountEndPoints.getUsername, {});
-        console.log(username.response.data);
-        SetSessionStorage('GamePreFix', Encryption(JSON.stringify(username.response.data)));
+        SetSessionStorage('GameUsername', Encryption(JSON.stringify(username.response.data)));
         GameUsername = username.response.data;
     }
 

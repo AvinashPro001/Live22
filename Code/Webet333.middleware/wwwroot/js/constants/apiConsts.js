@@ -1,6 +1,6 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '';
 let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
-let PortAPI = '8080';
+let PortAPI = '';
 
 switch (environmentName.toUpperCase()) {
     case 'DEBUG':
@@ -12,8 +12,8 @@ switch (environmentName.toUpperCase()) {
         baseUrlWithoutVersion = 'https://api.wb3api.com';
         break;
     case 'LOCAL':
-        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        baseUrl = 'http://47.242.143.182:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://47.242.143.182:' + PortAPI;
         break;
 }
 
