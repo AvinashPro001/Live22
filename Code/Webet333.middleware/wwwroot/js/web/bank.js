@@ -689,7 +689,7 @@ function CreatePagination(Id, TotalPages, CurrentPage) {
         }
         else {
             if (CurrentPage == TotalPages) {
-                var html = '<a class="hand-curson">&laquo;</a>';
+                var html = '<a class="hand-curson" onclick="ClickOnPageNumber(\'' + (CurrentPage - 1) + '\')">&laquo;</a>';
                 $('#' + Id).html(html);
                 for (i = TotalPages - 4; i <= TotalPages; i++)
                     if (i == CurrentPage)
