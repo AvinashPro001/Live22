@@ -311,6 +311,19 @@ namespace Webet333.api.Helpers
 
         #endregion User Info Get for GetBalance
 
+
+        #region Get Username By ID
+
+        public async Task<GetUsernameByIdResponse> GetUsernameInfo(string UserId, string ToWalletName = null)
+        {
+            using (var Repository = new DapperRepository<GetUsernameByIdResponse>(Connection))
+            {
+                return await Repository.FindAsync(StoredProcConsts.Account.GameUsernameInfo, new { UserId, ToWalletName });
+            }
+        }
+
+        #endregion Get Username By ID
+
         #region User Game Password Update
 
         public async Task UserGamePasswordChange(string UserId, string Password, IHostingEnvironment _hostingEnvironment)

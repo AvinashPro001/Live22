@@ -50,7 +50,7 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.Pussy888GamePrefix + user.Username;
+                username = user.Pussy888GamePrefix + user.UserId;
                 MobileNo = user.MobileNo;
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }

@@ -75,7 +75,7 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.JokerGamePrefix + user.Username;
+                username = user.JokerGamePrefix + user.UserId;
             }
             var result = await JokerHelpers.JokerRegister(username);
 

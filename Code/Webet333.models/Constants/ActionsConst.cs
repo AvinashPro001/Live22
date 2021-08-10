@@ -6,6 +6,8 @@
 
         public class Account
         {
+            public const string GetUsername = "account/get_username_by_id";
+
             public const string CheckUsernameExists = "account/check/username/exists";
 
             public const string Login = "account/login";

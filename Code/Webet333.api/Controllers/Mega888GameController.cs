@@ -61,7 +61,7 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.Mega888GamePrefix + user.Username;
+                username = user.Mega888GamePrefix + user.UserId;
             }
 
             var apiResponse = await Mega888GameHelpers.CallRegisterAPI(username);
@@ -83,46 +83,6 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Mega888 game Register
-
-        #region Mega888 Depsoit Withdraw Amount
-
-        [Authorize]
-        [HttpPost(ActionsConst.Mega888Game.Mega888DepositWithdraw)]
-        private async Task<IActionResult> WithdrawDepsoit([FromBody] DepsoitWihtdrawRequest request)
-        {
-            if (!ModelState.IsValid) return BadResponse(ModelState);
-            if (request.Amount == 0) return BadResponse("error_invaild_amount");
-            if (request.Method != 1 && request.Method != 0) return BadResponse("error_invaild_method");
-
-            var Role = GetUserRole(User);
-
-            request.UserId = Role == RoleConst.Users ? GetUserId(User).ToString() : request.UserId;
-
-            GetBalanceUserResponse user;
-            using (var account_helper = new AccountHelpers(Connection))
-            {
-                user = await account_helper.UserGetBalanceInfo(request.UserId);
-            }
-
-            if (user.Mega888LoginId == null) return BadResponse("error_user_not_found_game");
-
-            if (request.Method == 1)
-                request.Amount = -Math.Abs(request.Amount);
-
-            var response = await Mega888GameHelpers.CallWithdrawDepositAPI(user.Mega888LoginId, request.Amount);
-
-            //var error = Convert.ToString(response.error);
-
-            //if (error != "")
-            //{
-            //    string message = Convert.ToString(response.error.message);
-            //    return BadResponse(message);
-            //}
-
-            return OkResponse(response);
-        }
-
-        #endregion Mega888 Depsoit Withdraw Amount
 
         #region Mega888 User Betting Details Total Win
 
@@ -258,13 +218,13 @@ namespace Webet333.api.Controllers
                 if (string.IsNullOrEmpty(request.Id))
                     return BadResponse("error_invalid_modelstate");
 
-            GetBalanceUserResponse user;
+            GetUsernameByIdResponse user;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                user = await account_helper.UserGetBalanceInfo(request.Id);
+                user = await account_helper.GetUsernameInfo(request.Id);
             }
 
-            dynamic response = Mega888GameHelpers.CallLogoutAPI(user.Mega888LoginId);
+            dynamic response = Mega888GameHelpers.CallLogoutAPI(user.Mega888Username);
 
             var error = Convert.ToString(response.error);
 
