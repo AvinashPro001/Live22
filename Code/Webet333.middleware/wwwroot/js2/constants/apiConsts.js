@@ -1,5 +1,5 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '';
 let PortWEB = '9002';
 
@@ -18,7 +18,7 @@ switch (environmentName.toUpperCase()) {
         break;
     case 'LOCAL':
         baseUrl = 'http://47.242.143.182:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        baseUrlWithoutVersion = 'http://47.242.143.182:' + PortAPI;
         webUrl = 'http://127.0.0.1:' + PortWEB;
         mobUrl = 'http://127.0.0.1:' + PortWEB + '/mobile/';
         break;

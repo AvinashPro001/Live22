@@ -71,7 +71,7 @@ async function WalletBalance() {
     MainWalletBalance();
     Kiss918WalletBalance(GameUsername.userName918);
     AgWalletBalance(GameUsername.agUsername);
-    PlaytechWalletBalance((GameUsernames.playtechUsername.replace("#", "")).toUpperCase());
+    PlaytechWalletBalance((GameUsername.playtechUsername.replace("#", "")).toUpperCase());
     Mega888WalletBalance(GameUsername.mega888Username);
     M8WalletBalance(GameUsername.m8Username);
     MaxbetWalletBalance(GameUsername.maxbetUsername);
@@ -153,7 +153,7 @@ async function RestoreBalance() {
         await MainWalletBalance();
         await Kiss918WalletBalance(GameUsername.userName918);
         await AgWalletBalance(GameUsername.agUsername);
-        await PlaytechWalletBalance((GameUsernames.playtechUsername.replace("#", "")).toUpperCase());
+        await PlaytechWalletBalance((GameUsername.playtechUsername.replace("#", "")).toUpperCase());
         await Mega888WalletBalance(GameUsername.mega888Username);
         await M8WalletBalance(GameUsername.m8Username);
         await MaxbetWalletBalance(GameUsername.maxbetUsername);
@@ -233,7 +233,7 @@ function StartTimerGameBalanceAPI(GameName) {
             setTimeout(() => { clearInterval(AGtimerId); AGTrigger = false; }, 301000);
             break;
         case 'Playtech':
-            let PlaytechtimerId = setInterval(() => { PlaytechWalletBalance((GameUsernames.playtechUsername.replace("#", "")).toUpperCase()); PlaytechTrigger = true; }, 30000);
+            let PlaytechtimerId = setInterval(() => { PlaytechWalletBalance((GameUsername.playtechUsername.replace("#", "")).toUpperCase()); PlaytechTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(PlaytechtimerId); PlaytechTrigger = false; }, 301000);
             break;
         case 'M8':
@@ -659,7 +659,7 @@ async function WalletBalanceMaxTransfer(walletData) {
         MainWalletBalance();
         Kiss918WalletBalance(GameUsername.userName918);
         AgWalletBalance(GameUsername.agUsername);
-        PlaytechWalletBalance((GameUsernames.playtechUsername.replace("#", "")).toUpperCase());
+        PlaytechWalletBalance((GameUsername.playtechUsername.replace("#", "")).toUpperCase());
         Mega888WalletBalance(GameUsername.mega888Username);
         M8WalletBalance(GameUsername.m8Username);
         MaxbetWalletBalance(GameUsername.maxbetUsername);

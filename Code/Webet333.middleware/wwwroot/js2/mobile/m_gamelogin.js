@@ -630,13 +630,13 @@ async function logingGame(gameName) {
         else
             GameLoginMobile("Pragmatic");
     }
-    else {
+    else {fv
         alert("Please Login");
     }
 }
 
 async function PlaytechBrokenStatus() {
-    var GameUsername = JSON.parse(Decryption(GetSessionStorage("GameUsername")));
+    var GameUsername = JSON.parse(dec(sessionStorage.getItem("GameUsername")));
     var PlaytechUsername = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
     let userModel = {
         username: PlaytechUsername
@@ -646,7 +646,7 @@ async function PlaytechBrokenStatus() {
 }
 
 async function PragmaticBrokenStatus() {
-    var GameUsername = JSON.parse(Decryption(GetSessionStorage("GameUsername")));
+    var GameUsername = JSON.parse(dec(sessionStorage.getItem("GameUsername")));
     var PragmaticUsername = GameUsername.pragmaticUsername;
     let userModel = {
         username: PragmaticUsername
