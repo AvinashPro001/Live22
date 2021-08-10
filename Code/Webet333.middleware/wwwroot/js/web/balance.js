@@ -275,7 +275,7 @@ function RefreshBalance() {
     LoadAllBalance();
 }
 
-function CheckNAorNot(Value) { return Value == "N/A" ? "0.0" : Value; }
+function CheckNAorNot(Value) { return Value == 'N/A' || Value == 'NaN' || Value == 'null' || Value == undefined || Value == null ? '0.0' : Value; }
 
 async function RestoreBalance() {
     $("#layout_restore_image").attr("src", "/images/loading.gif");

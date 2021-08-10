@@ -211,6 +211,8 @@ function TransferPageWallets() {
 //    document.getElementById("refresh_btn_spin").classList.add("fa-spin");
 //}
 
+function CheckNAorNot(Value) { return Value == 'N/A' || Value == 'NaN' || Value == 'null' || Value == undefined || Value == null ? '0.0' : Value; }
+
 async function RestoreBalance() {
     //LoaderShow();
     $(".refresh").addClass('fa-spin');
@@ -256,23 +258,23 @@ async function RestoreBalance() {
         await GamePlayWalletBalance(globalParameter.data.gameplayGamePrefix + userDetails.data.userId);
 
         let restoreModel = {
-            kiss918wallet: _918KissWallet == "N/A" ? "0.0" : _918KissWallet,
-            maxbetwallet: MaxBetWallet == "N/A" ? "0.0" : MaxBetWallet,
-            jokerwallet: JokerWallet == "N/A" ? "0.0" : JokerWallet,
-            agwallet: AGWallet == "N/A" ? "0.0" : AGWallet,
-            m8wallet: M8Wallet == "N/A" ? "0.0" : M8Wallet,
-            playtechwallet: PlayTechWallet == "N/A" ? "0.0" : PlayTechWallet,
-            mega888wallet: Mega888Wallet == "N/A" ? "0.0" : Mega888Wallet,
-            dgwallet: DgWallet == "N/A" ? "0.0" : DgWallet,
-            sexywallet: sexyWallet == "N/A" ? "0.0" : sexyWallet,
-            sawallet: saWallet == "N/A" ? "0.0" : saWallet,
-            pussy888wallet: Pussy888Wallet == "N/A" ? "0.0" : Pussy888Wallet,
-            allbetwallet: AllBetWallet == "N/A" ? "0.0" : AllBetWallet,
-            WMwallet: WMWallet == "N/A" ? "0.0" : WMWallet,
-            pragmaticwallet: PragmaticWallet == "N/A" ? "0.0" : PragmaticWallet,
-            yeebetwallet: YeeBetWallet == "N/A" ? "0.0" : YeeBetWallet,
-            sbowallet: SBOWallet == "N/A" ? "0.0" : SBOWallet,
-            gameplaywallet: GamePlayWallet == "N/A" ? "0.0" : GamePlayWallet,
+            kiss918wallet: CheckNAorNot(_918KissWallet),
+            maxbetwallet: CheckNAorNot(MaxBetWallet),
+            jokerwallet: CheckNAorNot(JokerWallet),
+            agwallet: CheckNAorNot(AGWallet),
+            m8wallet: CheckNAorNot(M8Wallet),
+            playtechwallet: CheckNAorNot(PlayTechWallet),
+            mega888wallet: CheckNAorNot(Mega888Wallet),
+            dgwallet: CheckNAorNot(DgWallet),
+            sexywallet: CheckNAorNot(sexyWallet),
+            sawallet: CheckNAorNot(saWallet),
+            pussy888wallet: CheckNAorNot(Pussy888Wallet),
+            allbetwallet: CheckNAorNot(AllBetWallet),
+            WMwallet: CheckNAorNot(WMWallet),
+            pragmaticwallet: CheckNAorNot(PragmaticWallet),
+            yeebetwallet: CheckNAorNot(YeeBetWallet),
+            sbowallet: CheckNAorNot(SBOWallet),
+            gameplaywallet: CheckNAorNot(GamePlayWallet),
             id: null
         }
         await PostMethod(apiEndPoints.restoreBalance, restoreModel)
