@@ -69,10 +69,10 @@ namespace Webet333.models.Response.Account
         public decimal MainWalletAmount { get; set; }
 
         [JsonProperty("mainWalletId")]
-        public Guid MainWalletId { get; set; }
+        public string MainWalletId { get; set; }
 
         [JsonProperty("toWalletId")]
-        public Guid ToWalletId { get; set; }
+        public string ToWalletId { get; set; }
 
         [JsonProperty("toWalletMaintenance")]
         public bool ToWalletMaintenance { get; set; }

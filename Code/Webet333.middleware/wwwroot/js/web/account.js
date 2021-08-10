@@ -208,11 +208,13 @@ async function GetProfileAndSetInSessionStorage() {
 
 async function GetGlobalParameterAndSetInSessionStorage() {
     if (GetLocalStorage('currentUser') !== null) {
-        var globalParameter = JSON.parse(Decryption(GetSessionStorage("GamePreFix")));
+        debugger
+        var globalParameter = JSON.parse(Decryption(GetSessionStorage("GameUsername")));
         if (globalParameter == null) {
-            var gamePrefix = await GetMethod(globalEndPoints.globalParameter);
-            SetSessionStorage('GamePreFix', Encryption(JSON.stringify(gamePrefix.response.data)));
-            globalParameter = gamePrefix.response.data;
+            var username = await GetMethod(accountEndPoints.getUsername);
+            debugger
+            SetSessionStorage('GameUsername', Encryption(JSON.stringify(username.response.data)));
+            globalParameter = username.response.data;
         }
     }
 }
@@ -683,15 +685,11 @@ async function regisrationGame() {
                 SetSessionStorage('userRegisterDetails', Encryption(JSON.stringify(res.response.data)));
             }
 
-            var globalParameters = JSON.parse(Decryption(GetSessionStorage("GamePreFix")));
-            if (globalParameters == null) {
-                var gamePrefix = await GetMethod(globalEndPoints.globalParameter);
-                SetSessionStorage('GamePreFix', Encryption(JSON.stringify(gamePrefix.response.data)));
-                globalParameters = gamePrefix.response.data;
+            var GameUsername = JSON.parse(Decryption(GetSessionStorage("GameUsername")));
+            if (GameUsername == null) {
+                var username = await PostMethod(accountEndPoints.getUsername, {});
+                SetSessionStorage('GameUsername', Encryption(JSON.stringify(username.response.data)));
             }
-
-            var username = resUserData.username
-            var M8Username = globalParameters.m8GamePrefix + username;
 
             if (resSelectUser.MaxBet !== true) {
                 var userMaxBet = {

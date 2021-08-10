@@ -84,7 +84,7 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.GetUsernameInfo(request.Id);
-                username = user.YEEBETUsername
+                username = user.YEEBETUsername;
             }
 
             int language = Language.Code == LanguageConst.Chinese ? 1 : 2;

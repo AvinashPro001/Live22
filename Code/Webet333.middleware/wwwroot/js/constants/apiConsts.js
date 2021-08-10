@@ -1,5 +1,5 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '8080';
 
 switch (environmentName.toUpperCase()) {
@@ -42,6 +42,7 @@ var accountEndPoints = {
     PlaytechBrokenStatus: 'playtech/broken',
     PragmaticBrokenStatus: 'pragmatic/broken',
     userLastTimeUpdate: 'account/users/logintime/update',
+    getUsername: 'account/get_username_by_id'
 };
 
 var promotionEndPoints = {
