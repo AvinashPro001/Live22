@@ -459,9 +459,9 @@ function ChangeLanguageText() {
 }
 
 function ChangeLanguage(LangCode) {
-    sessionStorage.removeItem("siteData");
-    sessionStorage.removeItem("siteData");
     SetLocalStorage("language", LangCode);
+    sessionStorage.removeItem("siteData");
+    sessionStorage.removeItem("siteData");
     window.location.reload();
 }
 
