@@ -1223,7 +1223,7 @@
                                                     <p class="big no-mar lang" key="profile_mobile">Mobile :</p>
                                                 </label>
                                                 <label class="fright tel-icon">
-                                                    <input type="number" class="reg-form" placeholder="60167896532" id="mobile_number" onkeyup="MobileValidation('mobile_number','forgotPassword-error')">
+                                                    <input type="number" class="reg-form" placeholder="60167896532" id="mobile_number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeyup="MobileValidation('mobile_number','forgotPassword-error')">
                                                     <label style="color:#ff0000;font-weight:bold" id="forgotPassword-error"></label>
                                                 </label>
                                             </li>
