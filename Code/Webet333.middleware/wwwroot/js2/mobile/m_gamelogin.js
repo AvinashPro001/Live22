@@ -439,19 +439,20 @@ var checkedValue;
 
 async function getDetails() {
     if (GetLocalStorage('currentUser') !== null) {
-        var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-        if (resUserData == null) {
-            var res = await GetMethod(apiEndPoints.getProfile);
-            sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
-            resUserData = res;
-        }
+
+        var res = await GetMethod(apiEndPoints.getProfile);
+        sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
+        var resUserData = res;
+
         checkedValue = resUserData.data.autoTransfer;
-        //if (window.location.href.includes("?p=transfer"))
-        //await onclickSet(1);
+        
+        if (window.location.href.includes("?p=transfer"))
+            await onclickSet(1);
     }
 }
 
 async function onclickSet(i) {
+    
     if (i == 0)
         checkedValue = checkedValue ? false : true;
     if (checkedValue) {
@@ -1124,9 +1125,9 @@ function OpenPragmaticGamePage(code) {
 }
 
 function OpenPlaytechGamePage(code) {
-    if (GetLocalStorage('currentUser') !== null) 
+    if (GetLocalStorage('currentUser') !== null)
         window.open("../mobile/Game?gamename=Playtech&gamecode=" + code, "_blank")
-    else 
+    else
         alert(ChangeErroMessage("please_loign_error"));
 }
 
