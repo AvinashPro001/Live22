@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.account = exports.environment = void 0;
 var baseUrl = '', baseUrlWithoutVersion = '';
-var environmentName = 'STAG'; // 'DEBUG' OR 'STAG'
-var PortAPI = '9001';
+var environmentName = 'LOCAL'; // 'DEBUG' OR 'STAG'
+var PortAPI = '8080';
 switch (environmentName.toUpperCase()) {
     case 'DEBUG':
         baseUrl = 'https://uatapi.wb3api.com/api/v1/';
@@ -14,8 +14,8 @@ switch (environmentName.toUpperCase()) {
         baseUrlWithoutVersion = 'https://api.wb3api.com';
         break;
     case 'LOCAL':
-        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        baseUrl = 'http://47.242.143.182:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://47.242.143.182:' + PortAPI;
         break;
 }
 exports.environment = {
