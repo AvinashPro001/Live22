@@ -417,7 +417,7 @@ async function OpenPlaytechGame(IsSlots) {
 async function LoginPragmaticGame(GameCode, IsAllInWalletChecked = false) {
     if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
     window.open("../Web/game");
-    debugger
+
     if (IsAllInWalletChecked) {
         var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
         if (profile.autoTransfer)
