@@ -275,7 +275,8 @@ export class PromotionAddComponent implements OnInit {
             isMega888: (document.getElementById("mega888_id") as HTMLInputElement).checked,
             isJoker: (document.getElementById("joker_id") as HTMLInputElement).checked,
             isSBO: (document.getElementById("SBO_id") as HTMLInputElement).checked,
-            isGamePlay: (document.getElementById("GamePlay_id") as HTMLInputElement).checked,
+            isGamePlayCasino: (document.getElementById("GamePlayCasino_id") as HTMLInputElement).checked,
+            isGamePlaySlot: (document.getElementById("GamePlaySlot_id") as HTMLInputElement).checked,
 
             isNewMember: (document.getElementById("newmember_id") as HTMLInputElement).checked,
             isSports: (document.getElementById("sports_id") as HTMLInputElement).checked,
@@ -305,7 +306,8 @@ export class PromotionAddComponent implements OnInit {
             dataSelect.isMaxbet = false;
             dataSelect.isM8 = false;
             dataSelect.isSBO = false;
-            dataSelect.isGamePlay = false;
+            dataSelect.isGamePlayCasino = false;
+            dataSelect.isGamePlaySlot = false;
         }
 
         if (this.selectOverCategory == 'Turnover') {
