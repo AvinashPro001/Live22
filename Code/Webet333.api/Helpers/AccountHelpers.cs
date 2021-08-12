@@ -332,15 +332,17 @@ namespace Webet333.api.Helpers
             {
                 var info = await GetUsernameInfo(UserId);
 
-                DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
-                var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
-                var perameter = $"Method={GameConst.Joker.SetPassword}&Password={Password}&Timestamp={temp}&Username={info.JokerUsername}";
-                var stringContent = new StringContent(perameter, Encoding.UTF8, "application/x-www-form-urlencoded");
-                var jokerURL = $"{GameConst.Joker.jokerBaseUrl}?" +
-                                $"AppID={GameConst.Joker.AppID}&" +
-                                $"Signature={GameHelpers.GenerateHas(perameter)}";
+                //DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
+                //var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
+                //var perameter = $"Method={GameConst.Joker.SetPassword}&Password={Password}&Timestamp={temp}&Username={info.JokerUsername}";
+                //var stringContent = new StringContent(perameter, Encoding.UTF8, "application/x-www-form-urlencoded");
+                //var jokerURL = $"{GameConst.Joker.jokerBaseUrl}?" +
+                //                $"AppID={GameConst.Joker.AppID}&" +
+                //                $"Signature={GameHelpers.GenerateHas(perameter)}";
 
-                var jokerPasswordUpdate = JsonConvert.DeserializeObject(await GameHelpers.CallThirdPartyApi(jokerURL, stringContent));
+                //var jokerPasswordUpdate = JsonConvert.DeserializeObject(await GameHelpers.CallThirdPartyApi(jokerURL, stringContent));
+
+                await JokerHelpers.JokerPasswordSet(info.JokerUsername, Password);
 
                 var PlaytechURL = $"{GameConst.Playtech.playtechBaseUrl}" +
                                     $"update?playername={info.PlaytechUsername.ToUpper()}&password={Password}";

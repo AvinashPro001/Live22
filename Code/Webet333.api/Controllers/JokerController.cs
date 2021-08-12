@@ -71,13 +71,15 @@ namespace Webet333.api.Controllers
                 if (string.IsNullOrEmpty(request.Id))
                     return BadResponse("error_invalid_modelstate");
 
-            string username;
+            string username,password;
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
                 username = user.JokerGamePrefix + user.UserId;
+                password = SecurityHelpers.DecryptPassword(user.Password);
             }
             var result = await JokerHelpers.JokerRegister(username);
+            await JokerHelpers.JokerPasswordSet(username, password);
 
             if (result.Status == null) return OkResponse(result);
 

@@ -1,6 +1,6 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
 let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
-let PortAPI = '';
+let PortAPI = '8080';
 let PortWEB = '9002';
 
 switch (environmentName.toUpperCase()) {

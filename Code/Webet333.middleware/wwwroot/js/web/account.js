@@ -684,7 +684,6 @@ async function regisrationGame() {
                 resSelectUser = res.response.data;
                 SetSessionStorage('userRegisterDetails', Encryption(JSON.stringify(res.response.data)));
             }
-
             var GameUsername = JSON.parse(Decryption(GetSessionStorage("GameUsername")));
             if (GameUsername == null) {
                 var username = await PostMethod(accountEndPoints.getUsername, {});
