@@ -341,9 +341,9 @@ async function DoRegister() {
 
     if (confirmPassword === "") return ShowError(ChangeErroMessage("confirm_password_required_error"));
 
-    if (otp == null || otp == undefined || otp == "")return ShowError(ChangeErroMessage("error_otp_required"));
+    if (otp == null || otp == undefined || otp == "") return ShowError(ChangeErroMessage("error_otp_required"));
 
-    if (otp.length > 6 || otp.length < 6)return ShowError(ChangeErroMessage("error_otp"));
+    if (otp.length > 6 || otp.length < 6) return ShowError(ChangeErroMessage("error_otp"));
 
     if (name === "") return ShowError(ChangeErroMessage("name_required_error"));
 
@@ -683,11 +683,10 @@ async function regisrationGame() {
                 var res = await PostMethod(accountEndPoints.gameRegisterCheck, userModel);
                 resSelectUser = res.response.data;
                 SetSessionStorage('userRegisterDetails', Encryption(JSON.stringify(res.response.data)));
-            }
-            var GameUsername = JSON.parse(Decryption(GetSessionStorage("GameUsername")));
-            if (GameUsername == null) {
+                
                 var username = await PostMethod(accountEndPoints.getUsername, {});
                 SetSessionStorage('GameUsername', Encryption(JSON.stringify(username.response.data)));
+                SetUsername();
             }
 
             if (resSelectUser.MaxBet !== true) {

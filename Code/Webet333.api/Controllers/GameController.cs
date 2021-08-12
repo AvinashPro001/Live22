@@ -1885,7 +1885,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var result = await game_helper.PlaytechWithdrawMehtod(user.Pussy888Username, request.PlayTechWallet, _hostingEnvironment);
+                        var result = await game_helper.PlaytechWithdrawMehtod(user.PlaytechUsername, request.PlayTechWallet, _hostingEnvironment);
                         dynamic resultPlaytech = JObject.Parse(result);
                         mainBalance += resultPlaytech.result == "Withdraw OK" ? request.PlayTechWallet : 0;
                         PlaytechBalance = resultPlaytech.result == "Withdraw OK" ? request.PlayTechWallet : 0;
