@@ -358,11 +358,19 @@ async function Deposit(IsOnlinePayment) {
         if (!IsDepositExecute) {
             IsDepositExecute = true;
             OnlinePayment = IsOnlinePayment;
-            var amount = 0;
+            var amount;
             if (IsOnlinePayment)
                 amount = $("#txt_deposit_amount_online").val();
             else
                 amount = $("#txt_deposit_amount").val();
+
+            if (amount === "" || amount === null || amount === undefined) {
+                IsDepositExecute = false;
+                return ShowError(ChangeErroMessage("amount_required_error"));
+            }
+            else {
+                amount = Number(amount);
+            }
 
             if (amount < 10) {
                 IsDepositExecute = false;
@@ -518,7 +526,7 @@ async function Deposit(IsOnlinePayment) {
             }
         }
     }
-    catch(e) {
+    catch (e) {
         IsDepositExecute = false;
     }
 }
