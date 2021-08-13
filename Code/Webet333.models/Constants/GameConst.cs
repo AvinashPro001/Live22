@@ -503,6 +503,11 @@
             public const string SecretKey = "testKey";
 
             public const string SecureLogin = "sc_webet33";
+
+            public static class Casino
+            {
+                public const string GameCode = "101";
+            }
         }
 
         public class SMSConst
