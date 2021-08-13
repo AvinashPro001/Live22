@@ -207,11 +207,6 @@
                                 <img class="hover_icons" src="~/images/carousel_logos/gameplay_bw.png">
                             </figure>
                         </div>
-                        <div>
-                            <figure>
-                                <img class="hover_icons" src="~/images/carousel_logos/PragmaticPlay_bw.png">
-                            </figure>
-                        </div>
                     </div>
                     <section class="slider-for slider">
                         <div>
@@ -407,28 +402,6 @@
                                         </div>
                                         <div class="play_now_btn">
                                             <a href="#" onclick="OpenGame('GamePlay Wallet',false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="row casino_wrapper_row ml0 mr0">
-                                <div class="col-sm-8  pl0 pr0 ">
-                                    <div class="casino_wrapper_left">
-                                        <img src="~/images/game_banners/pragmaticPlay_livecasino.jpg" alt="" />
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 pl0 pr0">
-                                    <div class="casino_wrapper_right">
-                                        <div class="asia_girl_right">
-                                            <img src="~/images/dropdown_logos/pragmaticPlay_livecasino.png" alt="" />
-                                        </div>
-                                        <div class="ag_casino_btn">
-                                            <a>pragmaticPlay Casino</a>
-                                        </div>
-                                        <div class="play_now_btn">
-                                            <a href="#" onclick="OpenGame('PragmaticPlay Wallet',false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -753,6 +726,7 @@
                     </div>*@
                 <!-- fishing ends -->
             </div>
+
         </div>
     </div>
 </div>
@@ -880,7 +854,10 @@
 <script>
     CheckMobileNumberIsVerifiedOnly();
 
-    $(document).ready(function () { AllAnnouncementsCallAPI(); });
+    $(document).ready(function () {
+        AllAnnouncementsCallAPI();
+    });
+
 
     $(window).on('load', function () {
         HotSlotsgame()

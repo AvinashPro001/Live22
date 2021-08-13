@@ -137,12 +137,6 @@
                                         <button class="game-title"><span class="lang" key="gameplaylive_game"></span></button>
                                     </a>
                                 </li>
-                                <li data-toggle="modal" data-target="#gameLogin" id="pragmaticplaylive">
-                                    <a>
-                                        <figure><img src="~/images/mobile/pragmaticplay_livecasino.png" lt="PragmaticPlay"></figure>
-                                        <button class="game-title"><span class="lang" key="pragmaticplaylive_game"></span></button>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                         <div id="sport-tile" role="tabpanel" class="tab-pane fade in">
@@ -561,12 +555,6 @@
                                     <button class="game-title"><span class="lang" key="gameplaylive_game"></span></button>
                                 </a>
                             </li>
-                            <li onclick="logingGame('PragmaticPlay')" id="pragmaticplaylivelogin">
-                                <a>
-                                    <figure><img src="~/images/mobile/pragmaticplay_livecasino.png" alt="pragmaticplay"></figure>
-                                    <button class="game-title"><span class="lang" key="pragmaticplaylive_game"></span></button>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                     <div id="menu1" class="tab-pane fade">
@@ -847,5 +835,7 @@
         SliderPromotion();  //  For home page banner on language.
     }
 
-    setTimeout(() => { get(); }, 200);
+    setTimeout(() => {
+        get();
+    }, 200);
 </script>

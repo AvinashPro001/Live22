@@ -75,19 +75,26 @@
     <div>
         <a id="mobileM8" style="display:none"></a>
     </div>
+
 </div>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".contact-us-btn,.contact-us-btn-footer").click(function () { $("#chatting").toggle(); });
-        $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
+            $("#chatting").toggle();
+        });
+        $(".contact-user").mouseover(function () {
+            $("#chatting").toggle();
+        });
     });
 </script>
-
+  
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
-    $(document).ready(function () { $(".open-modal").click(); });
+    $(document).ready(function () {
+        $(".open-modal").click();
+    });
     jQuery(".scroll-down-visible").hide();
     jQuery("#more-arrow").click(function () {
         jQuery(".scroll-down-visible").toggleClass("show");
@@ -95,11 +102,16 @@
     });
 </script>
 <!-- //Modal For Video -->
+
 <!-- Slider Section End -->
 <script>
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
-        if (scroll >= 1) $("header").addClass("sticky-header");
-        else $("header").removeClass("sticky-header");
+        if (scroll >= 1) {
+            $("header").addClass("sticky-header");
+        }
+        else {
+            $("header").removeClass("sticky-header");
+        }
     });
 </script>
