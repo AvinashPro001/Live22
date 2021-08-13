@@ -335,6 +335,7 @@
   "pls_select_date": "Please select date",
 
   "current_pass_req": "Please enter current password.",
+  "current_pass_not_match": "Current Password is not correct.",
   "new_pass_req": "Please enter New Password",
   "special_char_not_allowed": "Special Characters not allowed in Username.",
   "username_exists": "Username already exists.",
