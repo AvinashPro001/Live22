@@ -268,7 +268,12 @@ async function ChangePassword() {
 
     if (confirmPassword === "") return ShowError(ChangeErroMessage("confirm_password_required_error"));
 
+    if (Decryption(GetLocalStorage("currentUserData")) !== currentPassword) return ShowError(ChangeErroMessage("current_pass_not_match"));
+
     if (newPassword.length < 6) return ShowError(ChangeErroMessage("pass_length_error"));
+
+    var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
+    if (!reqExp.test(newPassword)) return ShowError(ChangeErroMessage("pass_alpha_error"));
 
     if (currentPassword === newPassword) return ShowError(ChangeErroMessage("new_password_check_error"))
 
@@ -278,11 +283,6 @@ async function ChangePassword() {
     var username = res.username
 
     if (username === newPassword) return ShowError("Password and username must be different.");
-
-    if (Decryption(GetLocalStorage("currentUserData")) !== currentPassword) return ShowError(ChangeErroMessage("current_pass_not_match"));
-
-    var reqExp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
-    if (!reqExp.test(newPassword)) return ShowError(ChangeErroMessage("pass_alpha_error"));
 
     var model = {
         currentPassword: currentPassword,
