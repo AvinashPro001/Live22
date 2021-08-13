@@ -83,7 +83,6 @@ namespace Webet333.api.Controllers
             }
             var languageCode = Language.Name == "English" ? "en" : (Language.Name == "Malay" ? "ms" : "zh");
             var platform = request.IsMobile ? "MOBILE" : "WEB";
-            if (string.IsNullOrWhiteSpace(request.GameId)) request.GameId = GameConst.Pragmatic.Casino.GameCode;
             var result = await PragmaticGameHelpers.LoginCallAPI(username, languageCode, platform, request.GameId);
             return OkResponse(result);
         }
