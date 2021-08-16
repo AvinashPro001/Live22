@@ -1,17 +1,19 @@
-﻿async function OpenGame(WalletName, IsSlots) {
-    if (WalletName != "PlayTech Wallet" && IsSlots != true) if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
+﻿async function OpenGame(WalletName, IsSlotsCheck, CheckLogin = true) {
+    if (CheckLogin) if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
+
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
     var isMaintenance = data.WalletData.filter(x => x.walletType == WalletName);
     if (isMaintenance[0].isMaintenance) return ShowError(ChangeErroMessage("maintainenance_error"));
-    CallGameLoginAPI(WalletName, IsSlots);
+    CallGameLoginAPI(WalletName, IsSlotsCheck, CheckLogin);
     var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
     if (GetLocalStorage("currentUser") !== null)
         if (profile.autoTransfer)
             AllInWallet(WalletName);
 }
 
-function CallGameLoginAPI(WalletName, IsSlots) {
-    if (WalletName != "PlayTech Wallet" && IsSlots != true) if (GetLocalStorage("currentUser") == null) return location.href = "/";
+function CallGameLoginAPI(WalletName, IsSlots, CheckLogin = true) {
+    if (CheckLogin) if (GetLocalStorage("currentUser") == null) return location.href = "/";
+
     switch (WalletName) {
         case "918Kiss Wallet": Open918KissGame(); break;
         case "Joker Wallet": OpenJokerGame(); break;
@@ -129,7 +131,17 @@ async function OpenSaGame() {
     }
 }
 
-async function OpenAgGame(IsSlots) {
+async function OpenAgGame(IsSlots, IsPlayNowClick = false) {
+    if (!IsPlayNowClick)
+        if (IsSlots) return window.open("../Web/slots#Ag-game");
+        else {
+            if (GetLocalStorage("currentUser") == null)
+                return ShowError(ChangeErroMessage("please_loign_error"));
+        }
+    else
+        if (GetLocalStorage("currentUser") == null)
+            return ShowError(ChangeErroMessage("please_loign_error"));
+
     window.open("../Web/game");
     let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
 
@@ -226,71 +238,57 @@ async function OpenWMGame() {
 }
 
 async function Open918KissGame() {
-    let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
-
-    if (resSelectUser._918Kiss !== true) {
-        let model918Kiss = {
-        };
-        var res918Kiss = await PostMethod(gameRegisterEndPoints.register918Kiss, model918Kiss);
-        if (res918Kiss.status == 200)
-            if (res918Kiss.response.data.code == 0)
-                window.open("../Web/download");
+    if (GetLocalStorage("currentUser") != null) {
+        let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+        if (resSelectUser._918Kiss !== true) {
+            let model918Kiss = {
+            };
+            await PostMethod(gameRegisterEndPoints.register918Kiss, model918Kiss);
+        }
     }
-    else {
-        window.open("../Web/download");
-    }
+    return window.open("../Web/slots#_918Kiss-game");
 }
 
 async function OpenMega888Game() {
-    let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
-
-    if (resSelectUser.Mega888 !== true) {
-        var userMegaa88Model = {
+    if (GetLocalStorage("currentUser") != null) {
+        let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+        if (resSelectUser.Mega888 !== true) {
+            let userMegaa88Model = {
+            };
+            await PostMethod(gameRegisterEndPoints.mega888Register, userMegaa88Model);
         }
-        var res = await PostMethod(gameRegisterEndPoints.mega888Register, userMegaa88Model);
-        if (res.status == 200)
-            window.open("../Web/download#MegaDownload");
     }
-    else {
-        window.open("../Web/download#MegaDownload");
-    }
+    return window.open("../Web/slots#Mega888-game");
+
 }
 
 async function OpenJokerGame() {
-    let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
-
-    if (resSelectUser.Joker !== true) {
-        let modelJoker = {
-        };
-        var resJoker = await PostMethod(gameRegisterEndPoints.registerJoker, modelJoker);
-        if (resJoker.status == 200)
-            if (resJoker.response.data.Status != null)
-                window.open("../Web/download#JokerDownload");
+    if (GetLocalStorage("currentUser") != null) {
+        let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+        if (resSelectUser.Joker !== true) {
+            let modelJoker = {
+            };
+            await PostMethod(gameRegisterEndPoints.registerJoker, modelJoker);
+        }
     }
-    else {
-        window.open("../Web/download#JokerDownload");
-    }
+    return window.open("../Web/slots#Joker-game");
 }
 
 async function OpenPussy888Game() {
-    let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+    if (GetLocalStorage("currentUser") != null) {
+        let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+        if (resSelectUser.Pussy888 !== true) {
+            let model = {
+            };
+            await PostMethod(gameRegisterEndPoints.pussyRegister, model);
+        }
+    }
+    return window.open("../Web/slots#Pussy888-game");
 
-    if (resSelectUser.Pussy888 !== true) {
-        var model = {
-        }
-        try {
-            var res = await PostMethodWithParameter(gameRegisterEndPoints.pussyRegister, model);
-        }
-        catch {
-        }
-        window.open("../Web/download#Pussy888Download");
-    }
-    else {
-        window.open("../Web/download#Pussy888Download");
-    }
 }
 
 async function OpenMaxbetGame() {
+
     window.open("../Web/game");
     let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
     var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
@@ -381,18 +379,19 @@ async function OpenSBOGame() {
 }
 
 async function OpenPragmaticGame() {
-    window.open("../Web/slots#pragmatic-game");
-    PragmaticBrokenStatusInterval();
-    let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
-
-    if (resSelectUser.Pragmatic !== true) {
-        var userRegisterModel = {
+    if (GetLocalStorage("currentUser") != null) {
+        PragmaticBrokenStatusInterval();
+        let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+        if (resSelectUser.Pragmatic !== true) {
+            let userRegisterModel = {
+            };
+            var res = await PostMethod(gameRegisterEndPoints.pragmaticRegister, userRegisterModel);
+            if (res.status == 200)
+                if (res.response.data.error == "0") {
+                }
         }
-        var res = await PostMethod(gameRegisterEndPoints.pragmaticRegister, userRegisterModel);
-        if (res.status == 200)
-            if (res.response.data.error == "0") {
-            }
     }
+    return window.open("../Web/slots#pragmatic-game");
 }
 
 async function OpenPlaytechGame(IsSlots) {
@@ -425,6 +424,7 @@ async function LoginPragmaticGame(GameCode) {
     SetLocalStorage("gameURL", res.response.data.gameURL);
 
 }
+
 
 async function LoginPlaytechGame(GameCode) {
     if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
