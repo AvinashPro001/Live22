@@ -66,7 +66,7 @@ namespace Webet333.api.Controllers
                     UserId = request.Id,
                     APIResponse = JObject.FromObject(result)
                 };
-                await kiss_helper.Game918KissRegister(kiss918Request);
+                await kiss_helper.Game918KissRegister(kiss918Request,password);
                 return OkResponse(result);
             }
         }

@@ -49,7 +49,7 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.AGGamePrefix + user.Username;
+                username = user.AGGamePrefix + user.UserId;
                 bettingLimits = account_helper.GlobalSelect("AGLimit").Result.Value;
             }
             try
@@ -93,8 +93,8 @@ namespace Webet333.api.Controllers
             string username, bettingLimits;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.AGGamePrefix + user.Username;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.AGUsername;
                 bettingLimits = account_helper.GlobalSelect("AGLimit").Result.Value;
             }
             try

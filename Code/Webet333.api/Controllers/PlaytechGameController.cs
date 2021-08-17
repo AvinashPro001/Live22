@@ -83,7 +83,7 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.PlaytechGamePrefix + user.Username;
+                username = user.PlaytechGamePrefix + user.UserId;
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
 

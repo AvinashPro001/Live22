@@ -132,7 +132,7 @@ namespace Webet333.api.Helpers
             string JokerBalance = null, status = null;
             try
             {
-                dynamic resultJoker = JsonConvert.DeserializeObject(await GameBalanceHelpers.CallThirdPartyApi(jokerURL, stringContent));
+                dynamic resultJoker = JsonConvert.DeserializeObject(await CallThirdPartyApi(jokerURL, stringContent));
 
                 if (returnData)
                     return resultJoker;

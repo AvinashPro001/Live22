@@ -57,7 +57,7 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.SexyGamePrefix + user.Username;
+                username = user.SexyGamePrefix + user.UserId;
                 bettingLimits = account_helper.GlobalSelect("SexyLimit").Result.Value;
             }
             try
@@ -109,8 +109,8 @@ namespace Webet333.api.Controllers
             string username;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.SexyGamePrefix + user.Username;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.SexyUsername;
             }
 
             try
@@ -127,81 +127,6 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Login Member
-
-        #region Deposit Member
-
-        [Authorize]
-        [HttpPost(ActionsConst.SexyBaccaratConst.SexyBaccarartDeposit)]
-        private async Task<IActionResult> SexyBaccaratDeposit([FromBody] SexybaccaratTransfer request)
-        {
-            if (!ModelState.IsValid) return BadResponse(ModelState);
-
-            var Role = GetUserRole(User);
-
-            if (Role == RoleConst.Users)
-                request.Id = GetUserId(User).ToString();
-
-            if (Role == RoleConst.Admin)
-                if (string.IsNullOrEmpty(request.Id))
-                    return BadResponse("error_invalid_modelstate");
-
-            string username;
-            using (var account_helper = new AccountHelpers(Connection))
-            {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.SexyGamePrefix + user.Username;
-            }
-            try
-            {
-                var response = await SexyBaccaratGameHelpers.CallDepositAPI(username, request.Amount);
-
-                return OkResponse(response);
-            }
-            catch
-            {
-                var response = new SexyBaccaratAPIResponse { status = "8585", desc = "maintenance" };
-                return OkResponse(response);
-            }
-        }
-
-        #endregion Deposit Member
-
-        #region Withdraw Member
-
-        [Authorize]
-        [HttpPost(ActionsConst.SexyBaccaratConst.SexyBaccarartWithdraw)]
-        private async Task<IActionResult> SexyBaccaratWithdraw([FromBody] SexybaccaratTransfer request)
-        {
-            if (!ModelState.IsValid) return BadResponse(ModelState);
-
-            var Role = GetUserRole(User);
-
-            if (Role == RoleConst.Users)
-                request.Id = GetUserId(User).ToString();
-
-            if (Role == RoleConst.Admin)
-                if (string.IsNullOrEmpty(request.Id))
-                    return BadResponse("error_invalid_modelstate");
-
-            string username;
-            using (var account_helper = new AccountHelpers(Connection))
-            {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.SexyGamePrefix + user.Username;
-            }
-            try
-            {
-                var response = await SexyBaccaratGameHelpers.CallWithdrawAPI(username, request.Amount);
-                return OkResponse(response);
-            }
-            catch
-            {
-                var response = new SexyBaccaratAPIResponse { status = "8585", desc = "maintenance" };
-                return OkResponse(response);
-            }
-        }
-
-        #endregion Withdraw Member
 
         #region Set default Bet Limit
 

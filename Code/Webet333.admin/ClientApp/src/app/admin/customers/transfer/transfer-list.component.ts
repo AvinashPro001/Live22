@@ -82,8 +82,8 @@ export class TransferListComponent implements OnInit {
         this.adminService.add<any>(customer.transferList, data).subscribe(res => {
             this.rows = [];
             let i = 0;
-            this.transferData = res.data;
-            res.data.forEach(el => {
+            this.transferData = res.data.result;
+            res.data.result.forEach(el => {
                 this.rows.push({
                     No: ++i,
                     Id: el.id,
