@@ -45,7 +45,7 @@ namespace Webet333.api.Helpers
             {
                 using (var repository = new DapperRepository<dynamic>(Connection))
                 {
-                    await repository.AddOrUpdateAsync(StoredProcConsts.Account.SetUsers, new { request.Name, UserName = request.Username, MobileNo = request.Mobile, Password = SecurityHelpers.EncryptPassword(request.Password), Role, request.ReferenceKeyword,request.OTP });
+                    await repository.AddOrUpdateAsync(StoredProcConsts.Account.SetUsers, new { request.Name, UserName = request.Username, MobileNo = request.Mobile, Password = SecurityHelpers.EncryptPassword(request.Password), Role, request.ReferenceKeyword, request.OTP });
                 }
             }
             return await FindUser(request.Username, request.Password, uniqueId: UniqueId, grantType: GrantTypeEnums.user.ToString());
@@ -558,10 +558,14 @@ namespace Webet333.api.Helpers
             var resMessage = string.Empty;
 
             if (request.Trio)
-               resMessage= await CallTrioSMSAPI(request.MobileNo, Message);
+                resMessage = await CallTrioSMSAPI(request.MobileNo, Message);
+
 
             if (request.Etracker)
                 resMessage = await CallEtrackerSMSAPI(request.MobileNo, Message);
+
+            if (resMessage.Length <= 3)
+                response.ErrorCode = 1;
 
             response.response = resMessage.ToString();
 
@@ -666,7 +670,7 @@ namespace Webet333.api.Helpers
         {
             using (var dapperRepository = new DapperRepository<dynamic>(Connection))
             {
-                var res=await dapperRepository.FindAsync(StoredProcConsts.Account.CheckUsernamExists, request);
+                var res = await dapperRepository.FindAsync(StoredProcConsts.Account.CheckUsernamExists, request);
                 return res;
             }
         }
