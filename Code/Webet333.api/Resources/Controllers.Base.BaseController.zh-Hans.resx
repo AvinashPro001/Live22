@@ -268,7 +268,7 @@
     <value>您的优惠不支持此游戏</value>
   </data>
   <data name="error_promotion_withdraw_already_claim" xml:space="preserve">
-    <value>您无法提款，因为您之前曾领取过欢迎奖金。请联系我们的实时支持</value>
+    <value>您无法提款，因为您之前曾领取过欢迎奖金。请联系我们客服</value>
   </data>
   <data name="error_sequence_already_used" xml:space="preserve">
     <value>序列号已被使用。</value>

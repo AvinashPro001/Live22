@@ -536,8 +536,8 @@ header .sticky-header {
 }
 
 .step-screen {
-    max-width: 225px;
-    margin: 0 auto;
+    max-width: 300px;
+    margin: auto auto;
 }
 
 .step-icon {
