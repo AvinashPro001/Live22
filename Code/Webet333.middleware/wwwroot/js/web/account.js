@@ -522,11 +522,20 @@ async function SendOTP(number) {
         model.etk = true; model.tri = false;
     }
 
-    if (model.mobileNo === "") return ShowError(ChangeErroMessage("mobile_no_required_error"));
+    if (model.mobileNo === "") {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("mobile_no_required_error"));
+    } 
 
-    if (model.mobileNo.length < 10) return ShowError(ChangeErroMessage("mobile_length_error"));
+    if (model.mobileNo.length < 10) {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("mobile_length_error"));
+    } 
 
-    if (model.mobileNo.length > 11) return ShowError(ChangeErroMessage("mobile_length_error"));
+    if (model.mobileNo.length > 11) {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("mobile_length_error"));
+    } 
 
     var res = await PostMethod(accountEndPoints.SendOTP, model);
     if (res.status == 200) {
