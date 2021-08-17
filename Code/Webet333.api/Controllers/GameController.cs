@@ -2134,7 +2134,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var result = await GamePlayGameHelpers.CallTransferAPI(GamePlayUsername, Math.Abs(request.GamePlayWallet), GameConst.GamePlay.FundType.Withdraw);
+                        var result = await GamePlayGameHelpers.CallTransferAPI(user.GamePlayUsername, Math.Abs(request.GamePlayWallet), GameConst.GamePlay.FundType.Withdraw);
                         mainBalance += result.Status == 0 ? request.GamePlayWallet : 0;
                         GamePlayBalance = result.Status == 0 ? request.GamePlayWallet : 0;
                     }
@@ -2696,7 +2696,7 @@ namespace Webet333.api.Controllers
                     WMUsername = user.WMUsername,
                     YEEBETUsername = user.YEEBETUsername,
                     SBOUsername = user.SBOUsername,
-                    GamePlayUsername = user.GamePlayGamePrefix,
+                    GamePlayUsername = user.GamePlayUsername,
 
                     FromWalletIsMaintenance = false,
                     FromWalletName = "Main Wallet",
