@@ -729,6 +729,7 @@ namespace Webet333.api.Controllers
                 {
                     var response = await account_help.SendOtp(request);
                     if (response.ErrorCode != 0) return BadResponse();
+                    return OkResponse(response);
                 }
                 else // Called by Admin
                 {
@@ -737,8 +738,8 @@ namespace Webet333.api.Controllers
                     request.Role = GetUserRole(User);
                     var response = await account_help.SendOtp(request);
                     if (response.ErrorCode != 0) return BadResponse();
+                    return OkResponse(response);
                 }
-                return OkResponse();
             }
         }
 

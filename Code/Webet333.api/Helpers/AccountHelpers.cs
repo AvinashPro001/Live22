@@ -541,10 +541,10 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<OtpResponse> SendOtp(SendOtpRequest request)
+        public async Task<OTPResponseWithSMSApiResponse> SendOtp(SendOtpRequest request)
         {
-            OtpResponse response;
-            using (var dapperRepository = new DapperRepository<OtpResponse>(Connection))
+            OTPResponseWithSMSApiResponse response;
+            using (var dapperRepository = new DapperRepository<OTPResponseWithSMSApiResponse>(Connection))
             {
                 response = await dapperRepository.FindAsync(StoredProcConsts.Account.GenrateOtp, new { request.MobileNo, request.Role });
             }
@@ -555,12 +555,16 @@ namespace Webet333.api.Helpers
 
             var Message = response.OTP + " is your OTP and it is vaild for next 5 mins. Please do not share this OTP with anyone. Thank you";
 
+            var resMessage = string.Empty;
+
             if (request.Trio)
-                await CallTrioSMSAPI(request.MobileNo, Message);
+               resMessage= await CallTrioSMSAPI(request.MobileNo, Message);
 
             if (request.Etracker)
-                await CallEtrackerSMSAPI(request.MobileNo, Message);
-            
+                resMessage = await CallEtrackerSMSAPI(request.MobileNo, Message);
+
+            response.response = resMessage.ToString();
+
             return response;
         }
 
