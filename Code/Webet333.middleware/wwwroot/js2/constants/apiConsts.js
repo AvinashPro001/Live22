@@ -17,8 +17,8 @@ switch (environmentName.toUpperCase()) {
         mobUrl = 'https://www.webet333.net/mobile/';
         break;
     case 'LOCAL':
-        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        baseUrl = 'http://47.242.143.182:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://47.242.143.182:' + PortAPI;
         webUrl = 'http://127.0.0.1:' + PortWEB;
         mobUrl = 'http://127.0.0.1:' + PortWEB + '/mobile/';
         break;
@@ -182,5 +182,7 @@ var apiEndPoints = {
 
     homepageBannerList: 'settings/homePage-banner/select/user',
 
-    checkUsernameExists: 'account/check/username/exists'
+    checkUsernameExists: 'account/check/username/exists',
+
+    getUsername: '/api/v1/account/get_username_by_id'
 };

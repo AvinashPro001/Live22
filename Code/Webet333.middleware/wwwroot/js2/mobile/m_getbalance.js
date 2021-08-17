@@ -58,39 +58,33 @@ if (GetLocalStorage('currentUser') !== null) setInterval(async function () { awa
 var PlayTechWallet, _918KissWallet, JokerWallet, mainWallet, AGWallet, M8Wallet, MaxBetWallet, Mega888Wallet, DgWallet, sexyWallet, saWallet, Pussy888Wallet, AllBetWallet, WMWallet, PragmaticWallet, YeeBetWallet, SBOWallet, GamePlayWallet;
 
 async function WalletBalance() {
-    var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
+    var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
 
-    if (userDetails == null) {
-        var res = await GetMethod(apiEndPoints.getProfile);
-        sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
-        userDetails = res;
-    }
-
-    if (globalParameter == null) {
-        var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
-        sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
-        globalParameter = gamePrefix;
+    if (GameUsername == null) {
+        var username = await PostMethod(apiEndPoints.getUsername, {});
+        debugger
+        sessionStorage.setItem('GameUsername', enc(JSON.stringify(username)));
+        GameUsername = username;
     }
     //#region Get user walletId
     MainWalletBalance();
-    Kiss918WalletBalance(userDetails.data.username918);
-    AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username);
-    PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username);
-    Mega888WalletBalance(userDetails.data.loginid);
-    M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username);
-    MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username);
-    JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username);
-    DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username);
-    SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username);
-    SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username);
-    Pussy888WalletBalance(userDetails.data.usernamePussy888);
-    AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
-    WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
-    PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
-    YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
-    SBOWalletBalance(globalParameter.data.sboGamePrefix + userDetails.data.userId);
-    GamePlayWalletBalance(globalParameter.data.gamePlayGamePrefix + userDetails.data.userId);
+    Kiss918WalletBalance(GameUsername.userName918);
+    AgWalletBalance(GameUsername.agUsername);
+    PlaytechWalletBalance((GameUsername.playtechUsername.replace("#", "")).toUpperCase());
+    Mega888WalletBalance(GameUsername.mega888Username);
+    M8WalletBalance(GameUsername.m8Username);
+    MaxbetWalletBalance(GameUsername.maxbetUsername);
+    JokerWalletBalance(GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, ""));
+    DGWalletBalance(GameUsername.dgUsername);
+    SexyWalletBalance(GameUsername.sexyUsername);
+    SAWalletBalance(GameUsername.saUsername);
+    Pussy888WalletBalance(GameUsername.pussy888Username);
+    AllBetWalletBalance(GameUsername.allBetUsername);
+    WMWalletBalance(GameUsername.wmUsername);
+    PragmaticWalletBalance(GameUsername.pragmaticUsername);
+    YeeBetWalletBalance(GameUsername.yeebetUsername);
+    SBOWalletBalance(GameUsername.sboUsername);
+    GamePlayWalletBalance(GameUsername.gameplayUsername);
 }
 //#endregion WalletBalance
 
@@ -138,79 +132,6 @@ function TransferPageWallets() {
     document.getElementById("gameplayWallet").innerHTML = GamePlayWallet;
 }
 
-//async function RestoreBalance() {
-//    document.getElementById("refresh_btn_spin").classList.add("fa-spin");
-//    //LoaderShow();
-//    try {
-//        $('.values').html('');
-//        $('.img_load').css('display', 'block');
-
-//        $("#retore_li").css("pointer-events", "none");
-
-//        var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-//        var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
-
-//        if (userDetails == null) {
-//            var res = await GetMethod(apiEndPoints.getProfile);
-//            sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
-//            userDetails = res;
-//        }
-
-//        if (globalParameter == null) {
-//            var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
-//            sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
-//            globalParameter = gamePrefix;
-//        }
-
-//        //#region Get user walletId
-//        await MainWalletBalance();
-//        await Kiss918WalletBalance(userDetails.data.username918);
-//        await AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username);
-//        await PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username);
-//        await Mega888WalletBalance(userDetails.data.loginid);
-//        await M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username);
-//        await MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username);
-//        await JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username);
-//        await DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username);
-//        await SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username);
-//        await SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username);
-//        await Pussy888WalletBalance(userDetails.data.usernamePussy888);
-//        await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
-//        await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
-//        await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
-//        await YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
-//        await SBOWalletBalance(globalParameter.data.sboGamePrefix + userDetails.data.userId);
-
-//        let restoreModel = {
-//            kiss918wallet: _918KissWallet == "N/A" ? "0.0" : _918KissWallet,
-//            maxbetwallet: MaxBetWallet == "N/A" ? "0.0" : MaxBetWallet,
-//            jokerwallet: JokerWallet == "N/A" ? "0.0" : JokerWallet,
-//            agwallet: AGWallet == "N/A" ? "0.0" : AGWallet,
-//            m8wallet: M8Wallet == "N/A" ? "0.0" : M8Wallet,
-//            playtechwallet: PlayTechWallet == "N/A" ? "0.0" : PlayTechWallet,
-//            mega888wallet: Mega888Wallet == "N/A" ? "0.0" : Mega888Wallet,
-//            dgwallet: DgWallet == "N/A" ? "0.0" : DgWallet,
-//            sexywallet: sexyWallet == "N/A" ? "0.0" : sexyWallet,
-//            sawallet: saWallet == "N/A" ? "0.0" : saWallet,
-//            pussy888wallet: Pussy888Wallet == "N/A" ? "0.0" : Pussy888Wallet,
-//            allbetwallet: AllBetWallet == "N/A" ? "0.0" : AllBetWallet,
-//            WMwallet: WMWallet == "N/A" ? "0.0" : WMWallet,
-//            pragmaticwallet: PragmaticWallet == "N/A" ? "0.0" : PragmaticWallet,
-//            yeebetwallet: YeeBetWallet == "N/A" ? "0.0" : YeeBetWallet,
-//            sbowallet: SBOWallet == "N/A" ? "0.0" : SBOWallet,
-//            id: null
-//        }
-//        await PostMethod(apiEndPoints.restoreBalance, restoreModel)
-//        $("#retore_li").css("pointer-events", "");
-//    }
-//    catch (ex) {
-//    }
-//    $("#retore_li").css("pointer-events", "");
-//    RefershBalance();
-//    //LoaderHide();
-//    document.getElementById("refresh_btn_spin").classList.add("fa-spin");
-//}
-
 function CheckNAorNot(Value) { return Value == 'N/A' || Value == 'NaN' || Value == 'null' || Value == undefined || Value == null ? '0.0' : Value; }
 
 async function RestoreBalance() {
@@ -222,40 +143,34 @@ async function RestoreBalance() {
         $('.img_load').css('display', 'block');
         $("#retore_li").css("pointer-events", "none");
 
-        var balanceModel = {};
-        var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-        var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
+        var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
 
-        if (userDetails == null) {
-            var res = await GetMethod(apiEndPoints.getProfile);
-            sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
-            userDetails = res;
+        if (GameUsername == null) {
+            var username = await PostMethod(apiEndPoints.getUsername, {});
+            debugger
+            sessionStorage.setItem('GameUsername', enc(JSON.stringify(username)));
+            GameUsername = username;
         }
 
-        if (globalParameter == null) {
-            var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
-            sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
-            globalParameter = gamePrefix;
-        }
         //#region Get user walletId
         await MainWalletBalance();
-        await Kiss918WalletBalance(userDetails.data.username918);
-        await AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username);
-        await PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username);
-        await Mega888WalletBalance(userDetails.data.loginid);
-        await M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username);
-        await MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username);
-        await JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username);
-        await DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username);
-        await SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username);
-        await SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username);
-        await Pussy888WalletBalance(userDetails.data.usernamePussy888);
-        await AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
-        await WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
-        await PragmaticWalletBalance(globalParameter.data.pragmaticGamePrefix + userDetails.data.userId);
-        await YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
-        await SBOWalletBalance(globalParameter.data.sboGamePrefix + userDetails.data.userId);
-        await GamePlayWalletBalance(globalParameter.data.gameplayGamePrefix + userDetails.data.userId);
+        await Kiss918WalletBalance(GameUsername.userName918);
+        await AgWalletBalance(GameUsername.agUsername);
+        await PlaytechWalletBalance((GameUsername.playtechUsername.replace("#", "")).toUpperCase());
+        await Mega888WalletBalance(GameUsername.mega888Username);
+        await M8WalletBalance(GameUsername.m8Username);
+        await MaxbetWalletBalance(GameUsername.maxbetUsername);
+        await JokerWalletBalance(GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, ""));
+        await DGWalletBalance(GameUsername.dgUsername);
+        await SexyWalletBalance(GameUsername.sexyUsername);
+        await SAWalletBalance(GameUsername.saUsername);
+        await Pussy888WalletBalance(GameUsername.pussy888Username);
+        await AllBetWalletBalance(GameUsername.allBetUsername);
+        await WMWalletBalance(GameUsername.wmUsername);
+        await PragmaticWalletBalance(GameUsername.pragmaticUsername);
+        await YeeBetWalletBalance(GameUsername.yeebetUsername);
+        await SBOWalletBalance(GameUsername.sboUsername);
+        await GamePlayWalletBalance(GameUsername.gameplayUsername);
 
         let restoreModel = {
             kiss918wallet: CheckNAorNot(_918KissWallet),
@@ -309,56 +224,55 @@ var AGTrigger = false,
     GameplayTrigger = false;;
 
 function StartTimerGameBalanceAPI(GameName) {
-    var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
+    var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
 
     switch (GameName) {
         case 'AG':
-            let AGtimerId = setInterval(() => { AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username); AGTrigger = true; }, 30000);
+            let AGtimerId = setInterval(() => { AgWalletBalance(GameUsername.agUsername); AGTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(AGtimerId); AGTrigger = false; }, 301000);
             break;
         case 'Playtech':
-            let PlaytechtimerId = setInterval(() => { PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username); PlaytechTrigger = true; }, 30000);
+            let PlaytechtimerId = setInterval(() => { PlaytechWalletBalance((GameUsername.playtechUsername.replace("#", "")).toUpperCase()); PlaytechTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(PlaytechtimerId); PlaytechTrigger = false; }, 301000);
             break;
         case 'M8':
-            let M8timerId = setInterval(() => { M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username); M8Trigger = true; }, 30000);
+            let M8timerId = setInterval(() => { M8WalletBalance(GameUsername.m8Username); M8Trigger = true; }, 30000);
             setTimeout(() => { clearInterval(M8timerId); M8Trigger = false; }, 301000);
             break;
         case 'MaxBet':
-            let MaxbettimerId = setInterval(() => { MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username); MaxbetTrigger = true; }, 30000);
+            let MaxbettimerId = setInterval(() => { MaxbetWalletBalance(GameUsername.maxbetUsername); MaxbetTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(MaxbettimerId); MaxbetTrigger = false; }, 301000);
             break;
         case 'DG':
-            let dgtimerId = setInterval(() => { DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username); DGTrigger = true; }, 30000);
+            let dgtimerId = setInterval(() => { DGWalletBalance(GameUsername.dgUsername); DGTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(dgtimerId); DGTrigger = false; }, 301000);
             break;
         case 'Sexy':
-            let SexytimerId = setInterval(() => { SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username); SexyTrigger = true; }, 30000);
+            let SexytimerId = setInterval(() => { SexyWalletBalance(GameUsername.sexyUsername); SexyTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(SexytimerId); SexyTrigger = false; }, 301000);
             break;
         case 'SA':
-            let SAtimerId = setInterval(() => { SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username); SATrigger = true; }, 30000);
+            let SAtimerId = setInterval(() => { SAWalletBalance(GameUsername.saUsername); SATrigger = true; }, 30000);
             setTimeout(() => { clearInterval(SAtimerId); SATrigger = false; }, 301000);
             break;
         case 'AllBet':
-            let AllbettimerId = setInterval(() => { AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId); AllbetTrigger = true; }, 30000);
+            let AllbettimerId = setInterval(() => { AllBetWalletBalance(GameUsername.allBetUsername); AllbetTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(AllbettimerId); AllbetTrigger = false; }, 301000);
             break;
         case 'WM':
-            let WmtimerId = setInterval(() => { WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId); WMTrigger = true; }, 30000);
+            let WmtimerId = setInterval(() => { WMWalletBalance(GameUsername.wmUsername); WMTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(WmtimerId); WMTrigger = false; }, 301000);
             break;
         case 'YeeBet':
-            let YeeBetTimerId = setInterval(() => { YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId); YeeBetTrigger = true; }, 30000);
+            let YeeBetTimerId = setInterval(() => { YeeBetWalletBalance(GameUsername.yeebetUsername); YeeBetTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(YeeBetTimerId); YeeBetTrigger = false; }, 301000);
             break;
         case 'SBO':
-            let SBOTimerId = setInterval(() => { SBOWalletBalance(globalParameter.data.sboGamePrefix + userDetails.data.userId); SBOTrigger = true; }, 30000);
+            let SBOTimerId = setInterval(() => { SBOWalletBalance(GameUsername.sboUsername); SBOTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(SBOTimerId); SBOTrigger = false; }, 301000);
             break;
         case 'Gameplay':
-            let gameplayId = setInterval(() => { GamePlayWalletBalance(globalParameter.data.gameplayGamePrefix + userDetails.data.userId); GamePlayTrigger = true; }, 30000);
+            let gameplayId = setInterval(() => { GamePlayWalletBalance(GameUsername.gameplayUsername); GamePlayTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(gameplayId); GamePlayTrigger = false; }, 301000);
             break;
     }
@@ -664,55 +578,53 @@ async function GamePlayWalletBalance(Username) {
 }
 
 async function WalletBalanceMaxTransfer(walletData) {
-    var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
+    var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
 
-    if (userDetails == null) {
-        var res = await GetMethod(apiEndPoints.getProfile);
-        sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
-        userDetails = res;
+    if (GameUsername == null) {
+        var username = await PostMethod(apiEndPoints.getUsername, {});
+        sessionStorage.setItem('GameUsername', enc(JSON.stringify(username)));
+        GameUsername = username;
     }
 
-    if (globalParameter == null) {
-        var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
-        sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
-        globalParameter = gamePrefix;
-    }
     //#region Get user walletId
     if (walletData != undefined) {
         if (walletData == "Main Wallet") MainWalletBalance();
-        if (walletData == "918Kiss Wallet") Kiss918WalletBalance(userDetails.data.username918);
-        if (walletData == "AG Wallet") AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username);
-        if (walletData == "PlayTech Wallet") PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username);
-        if (walletData == "Mega888 Wallet") Mega888WalletBalance(userDetails.data.loginid);
-        if (walletData == "M8 Wallet") M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username);
-        if (walletData == "MaxBet Wallet") MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username);
-        if (walletData == "Joker Wallet") JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username);
-        if (walletData == "DG Wallet") DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username);
-        if (walletData == "Sexy Wallet") SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username);
-        if (walletData == "SA Wallet") SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username);
-        if (walletData == "AllBet Wallet") AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
-        if (walletData == "WM Wallet") WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
-        if (walletData == "YeeBet Wallet") YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
-        if (walletData == "SBO Wallet") SBOWalletBalance(globalParameter.data.sboGamePrefix + userDetails.data.userId);
-        if (walletData == "GamePlay Wallet") GamePlayWalletBalance(globalParameter.data.gamePlayGamePrefix + userDetails.data.userId);
+        if (walletData == "918Kiss Wallet") Kiss918WalletBalance(GameUsername.userName918);
+        if (walletData == "AG Wallet") AgWalletBalance(GameUsername.agUsername);
+        if (walletData == "PlayTech Wallet") PlaytechWalletBalance((GameUsername.playtechUsername.replace("#", "")).toUpperCase());
+        if (walletData == "Mega888 Wallet") Mega888WalletBalance(GameUsername.mega888Username);
+        if (walletData == "M8 Wallet") M8WalletBalance(GameUsername.m8Username);
+        if (walletData == "MaxBet Wallet") MaxbetWalletBalance(GameUsername.maxbetUsername);
+        if (walletData == "Joker Wallet") JokerWalletBalance(GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, ""));
+        if (walletData == "DG Wallet") DGWalletBalance(GameUsername.dgUsername);
+        if (walletData == "Sexy Wallet") SexyWalletBalance(GameUsername.sexyUsername);
+        if (walletData == "SA Wallet") SAWalletBalance(GameUsername.saUsername);
+        if (walletData == "AllBet Wallet") AllBetWalletBalance(GameUsername.allBetUsername);
+        if (walletData == "WM Wallet") WMWalletBalance(GameUsername.wmUsername);
+        if (walletData == "YeeBet Wallet") YeeBetWalletBalance(GameUsername.yeebetUsername);
+        if (walletData == "SBO Wallet") SBOWalletBalance(GameUsername.sboUsername);
+        if (walletData == "Pussy888 Wallet") Pussy888WalletBalance(GameUsername.pussy888Username);
+        if (walletData == "Pragmatic Wallet") PragmaticWalletBalance(GameUsername.pragmaticUsername);
+        if (walletData == "GamePlay Wallet") GamePlayWalletBalance(GameUsername.gameplayUsername);
     }
     else {
         MainWalletBalance();
-        Kiss918WalletBalance(userDetails.data.username918);
-        AgWalletBalance(globalParameter.data.agGamePrefix + userDetails.data.username);
-        PlaytechWalletBalance(globalParameter.data.playtechGamePrefix + userDetails.data.username);
-        Mega888WalletBalance(userDetails.data.loginid);
-        M8WalletBalance(globalParameter.data.m8GamePrefix + userDetails.data.username);
-        MaxbetWalletBalance(globalParameter.data.maxbetGamePrefix + userDetails.data.username);
-        JokerWalletBalance(globalParameter.data.jokerGamePrefix + userDetails.data.username);
-        DGWalletBalance(globalParameter.data.dgGamePrefix + userDetails.data.username);
-        SexyWalletBalance(globalParameter.data.sexyGamePrefix + userDetails.data.username);
-        SAWalletBalance(globalParameter.data.saGamePrefix + userDetails.data.username);
-        AllBetWalletBalance(globalParameter.data.allBetGamePrefix + userDetails.data.userId);
-        WMWalletBalance(globalParameter.data.wmGamePrefix + userDetails.data.userId);
-        YeeBetWalletBalance(globalParameter.data.yeeBetGamePrefix + userDetails.data.userId);
-        SBOWalletBalance(globalParameter.data.sboGamePrefix + userDetails.data.userId);
-        GamePlayWalletBalance(globalParameter.data.gamePlayGamePrefix + userDetails.data.userId);
+        Kiss918WalletBalance(GameUsername.userName918);
+        AgWalletBalance(GameUsername.agUsername);
+        PlaytechWalletBalance((GameUsername.playtechUsername.replace("#", "")).toUpperCase());
+        Mega888WalletBalance(GameUsername.mega888Username);
+        M8WalletBalance(GameUsername.m8Username);
+        MaxbetWalletBalance(GameUsername.maxbetUsername);
+        JokerWalletBalance(GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, ""));
+        DGWalletBalance(GameUsername.dgUsername);
+        SexyWalletBalance(GameUsername.sexyUsername);
+        SAWalletBalance(GameUsername.saUsername);
+        Pussy888WalletBalance(GameUsername.pussy888Username);
+        AllBetWalletBalance(GameUsername.allBetUsername);
+        WMWalletBalance(GameUsername.wmUsername);
+        PragmaticWalletBalance(GameUsername.pragmaticUsername);
+        YeeBetWalletBalance(GameUsername.yeebetUsername);
+        SBOWalletBalance(GameUsername.sboUsername);
+        GamePlayWalletBalance(GameUsername.gameplayUsername);
     }
 }

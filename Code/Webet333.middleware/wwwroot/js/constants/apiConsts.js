@@ -12,8 +12,8 @@ switch (environmentName.toUpperCase()) {
         baseUrlWithoutVersion = 'https://api.wb3api.com';
         break;
     case 'LOCAL':
-        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        baseUrl = 'http://47.242.143.182:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://47.242.143.182:' + PortAPI;
         break;
 }
 
@@ -42,6 +42,7 @@ var accountEndPoints = {
     PlaytechBrokenStatus: 'playtech/broken',
     PragmaticBrokenStatus: 'pragmatic/broken',
     userLastTimeUpdate: 'account/users/logintime/update',
+    getUsername: 'account/get_username_by_id'
 };
 
 var promotionEndPoints = {

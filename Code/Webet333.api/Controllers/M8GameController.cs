@@ -44,7 +44,7 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.M8GamePrefix + user.Username;
+                username = user.M8GamePrefix + user.UserId;
             }
             var result = await M8GameHelpers.CallRegisterAPI(username);
             if (result.response.errcode != "0") return OkResponse(result);
@@ -109,8 +109,8 @@ namespace Webet333.api.Controllers
             string username;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.M8GamePrefix + user.Username;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.M8Username;
             }
 
             var lang = Language.Code == "zh-Hans" ? "ZH-CN" : "EN-US";

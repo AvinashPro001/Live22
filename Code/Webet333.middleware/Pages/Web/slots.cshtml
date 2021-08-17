@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="img-block text-center slot-menu-height" onclick="SetBackGroundHeight(true)">
+                    <div class="img-block text-center slot-menu-height" id="Ag-game" onclick="SetBackGroundHeight(true)">
                         <div class="img-block-content">
                             <figure>
                                 <img class="hover_icons" src="~/images/carousel_logos/asia_color.png" alt="logo">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="img-block text-center slot-menu-height" onclick="SetBackGroundHeight(true)">
+                    <div class="img-block text-center slot-menu-height" id="Joker-game" onclick="SetBackGroundHeight(true)">
                         <div class="img-block-content">
                             <figure>
                                 <img class="hover_icons" src="~/images/carousel_logos/joker_color.png" alt="logo">
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="img-block text-center slot-menu-height" onclick="SetBackGroundHeight(true)">
+                    <div class="img-block text-center slot-menu-height" id="Mega888-game" onclick="SetBackGroundHeight(true)">
                         <div class="img-block-content">
                             <figure>
                                 <img class="hover_icons" src="~/images/carousel_logos/mega_color.png" alt="logo">
@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="img-block text-center slot-menu-height" onclick="SetBackGroundHeight(true)">
+                    <div class="img-block text-center slot-menu-height" id="_918Kiss-game" onclick="SetBackGroundHeight(true)">
                         <div class="img-block-content">
                             <figure>
                                 <img class="hover_icons" src="~/images/carousel_logos/918kiss_color.png" alt="logo">
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="img-block text-center slot-menu-height" onclick="SetBackGroundHeight(true)">
+                    <div class="img-block text-center slot-menu-height" id="Pussy888-game" onclick="SetBackGroundHeight(true)">
                         <div class="img-block-content">
                             <figure>
                                 <img class="hover_icons" src="~/images/carousel_logos/pussy888_color.png" alt="logo">
@@ -197,10 +197,7 @@
                                                     <div class="slot_inner_common_box ag-game-play">
                                                         <div class="form-group ml0 mr0 slot_inner_formfield">
                                                             <div class="play_now_btn">
-                                                                <a href="#" onclick="OpenGame('AG Wallet', true)">
-                                                                    <img src="~/images/playnow.png" alt="playnow" />
-                                                                    Play
-                                                                </a>
+                                                                <a href="#" onclick="OpenAgGame(true, true)"><img src="~/images/playnow.png" alt="playnow" /> Play</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -357,14 +354,9 @@
                                                     </div>
                                                     <div class="slot_inner_common_box">
                                                         <p>Instructions</p>
-                                                        <p>
-                                                            1. Download Mega888 apps at our <a href="~/Web/download#MegaDownload"> Download Page</a>
-                                                        </p>
+                                                        <p>1. Download Mega888 apps at our <a href="~/Web/download#MegaDownload"> Download Page</a></p>
                                                         <p>2. Launch Mega888 apps on your Android/iphone</p>
-                                                        <p>
-                                                            3. Left side is your mega888 Login ID and password, use it to
-                                                            login
-                                                        </p>
+                                                        <p>3. Left side is your mega888 Login ID and password, use it to login</p>
                                                         <p>4. Enjoy and WIN JACKPOT!</p>
                                                     </div>
                                                 </div>
@@ -407,16 +399,9 @@
                                                     </div>
                                                     <div class="slot_inner_common_box">
                                                         <p>Instructions</p>
-                                                        <p>
-                                                            1. Download 918Kiss apps at our <a href="~/Web/download">
-                                                                Download Page
-                                                            </a>
-                                                        </p>
+                                                        <p>1. Download 918Kiss apps at our <a href="~/Web/download">Download Page</a></p>
                                                         <p>2. Launch 918Kiss apps on your Android/iphone</p>
-                                                        <p>
-                                                            3. Left side is your 918Kiss Login ID and password, use it to
-                                                            login
-                                                        </p>
+                                                        <p>3. Left side is your 918Kiss Login ID and password, use it to login</p>
                                                         <p>4. Enjoy and WIN JACKPOT!</p>
                                                     </div>
                                                 </div>
@@ -459,17 +444,9 @@
                                                     </div>
                                                     <div class="slot_inner_common_box">
                                                         <p>Instructions</p>
-                                                        <p>
-                                                            1. Download Pussy888 apps at our <a href="~/Web/download#Pussy888Download">
-                                                                Download
-                                                                Page
-                                                            </a>
-                                                        </p>
+                                                        <p>1. Download Pussy888 apps at our <a href="~/Web/download#Pussy888Download">Download Page</a></p>
                                                         <p>2. Launch Pussy888 apps on your Android/iphone</p>
-                                                        <p>
-                                                            3. Left side is your Pussy888 Login ID and password, use it
-                                                            to login
-                                                        </p>
+                                                        <p>3. Left side is your Pussy888 Login ID and password, use it to login</p>
                                                         <p>4. Enjoy and WIN JACKPOT!</p>
                                                     </div>
                                                 </div>
@@ -569,7 +546,7 @@
         asNavFor: '.slider-nav',
     });
     $('.slider-nav').slick({
-        slidesToShow: 6,
+        slidesToShow: 7,
         slidesToScroll: 1,
         asNavFor: '.slider-for-content',
         focusOnSelect: true,
@@ -603,32 +580,37 @@
         if (window.location.hash) {
             var hash = window.location.hash.substring(1);
             if (hash == 'pragmatic-game') $("#pragmatic-game").click();
+            if (hash == '_918Kiss-game') $("#_918Kiss-game").click();
+            if (hash == 'Mega888-game') $("#Mega888-game").click();
+            if (hash == 'Joker-game') $("#Joker-game").click();
+            if (hash == 'Pussy888-game') $("#Pussy888-game").click();
+            if (hash == 'Ag-game') $("#Ag-game").click();
             if (hash == 'gameplay-game') $("#gameplay-game").click();
-        }
+            }
     });
 
     $(window).on('load', function () {
         SetUsernamePassword(true);
     });
 
-    $(document).ready(function () {
-        $('.slick-carousel').slick({
-            arrows: true,
-            centerPadding: "0px",
-            dots: true,
-            slidesToShow: 1,
-            infinite: false,
-            autoplay: true,
-        });
+    //$(document).ready(function () {
+    //    $('.slick-carousel').slick({
+    //        arrows: true,
+    //        centerPadding: "0px",
+    //        dots: true,
+    //        slidesToShow: 1,
+    //        infinite: false,
+    //        autoplay: true,
+    //    });
 
-        $('.slider').slick({
-            arrows: true,
-            centerPadding: "0px",
-            dots: true,
-            slidesToShow: 1,
-            infinite: false,
-        });
-    });
+    //    $('.slider').slick({
+    //        arrows: true,
+    //        centerPadding: "0px",
+    //        dots: true,
+    //        slidesToShow: 1,
+    //        infinite: false,
+    //    });
+    //});
 
     var callCounter = 1
     $(document).on('scroll', function () {
