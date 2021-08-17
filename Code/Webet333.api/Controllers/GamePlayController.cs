@@ -131,8 +131,8 @@ namespace Webet333.api.Controllers
 
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.GamePlayGamePrefix + user.UserId;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.GamePlayUsername;
             }
 
             string language = Language.Code == LanguageConst.Chinese ? GamePlayConst.LanguageCode.TraditionalChinese : Language.Code == LanguageConst.Malay ? GamePlayConst.LanguageCode.Malay : GamePlayConst.LanguageCode.English;
