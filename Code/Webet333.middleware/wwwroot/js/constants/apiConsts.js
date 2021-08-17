@@ -12,8 +12,8 @@ switch (environmentName.toUpperCase()) {
         baseUrlWithoutVersion = 'https://api.wb3api.com';
         break;
     case 'LOCAL':
-        baseUrl = 'http://47.242.143.182:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://47.242.143.182:' + PortAPI;
+        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
         break;
 }
 
