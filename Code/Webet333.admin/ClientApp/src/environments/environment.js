@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.account = exports.environment = void 0;
 var baseUrl = '', baseUrlWithoutVersion = '';
-var environmentName = 'LOCAL'; // 'DEBUG' OR 'STAG' OR 'LOCAL'
+var environmentName = 'DEBUG'; // 'DEBUG' OR 'STAG' OR 'LOCAL'
 var PortAPI = '9001';
 switch (environmentName.toUpperCase()) {
     case 'DEBUG':
@@ -128,8 +128,8 @@ exports.customer = {
     slotsGameList: exports.environment.apiUrl + 'Game/slotsgame/list',
     slotsGameUpdate: exports.environment.apiUrl + 'Game/slotsgame/update',
     PragmaticGameListUpdate: exports.environment.apiUrl + 'pragmatic/game/list',
+    GameplayGameListUpdate: exports.environment.apiUrl + 'gameplay/get/slot-gamelist',
     GameListFileUpload: exports.environment.apiUrl + 'Game/list/upload',
-    GameplayGameListUpdate: exports.environment.apiUrl + 'gameplay/get/slot-gamelist',    
     ManuallyPromotionExpiery: exports.environment.apiUrl + 'Game/ManuallyPromotionExpiry',
     similarNameList: exports.environment.apiUrl + 'payments/withdraw/similarname/list',
     usernamPrifix: exports.environment.apiUrl + 'Game/GlobalParameters',
@@ -227,6 +227,7 @@ exports.customer = {
     SavePragmaticBettingDetails: exports.environment.apiUrl + 'Game/PragmaticBettingDetailsSave',
     SaveYeeBetBettingDetails: exports.environment.apiUrl + 'Game/YeeBetBettingDetailsSave',
     SaveSBOBettingDetails: exports.environment.apiUrl + 'Game/SBOBettingDetailsSave',
+    SaveGamePlayBettingDetails: exports.environment.apiUrl + 'Game/GamePlayBettingDetailsSave',
     approvalTimeInsert: exports.environment.apiUrl + 'payments/approvaltime/insert',
     approvalTimeSelect: exports.environment.apiUrl + 'payments/approvaltime/select',
     passwordResetSelect: exports.environment.apiUrl + 'account/gamepassword/select',
