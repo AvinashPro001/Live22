@@ -415,13 +415,7 @@ async function Deposit(IsOnlinePayment) {
                 }
             }
 
-
-
-
-
-
-
-            Show();
+            LoaderShow();
             if (model.promotionId != undefined) {
 
                 if (IsOnlinePayment) {
