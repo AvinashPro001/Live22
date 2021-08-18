@@ -1,5 +1,5 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
-let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '8080';
 let PortWEB = '9002';
 
@@ -180,5 +180,5 @@ var apiEndPoints = {
 
     checkUsernameExists: 'account/check/username/exists',
 
-    getUsername: '/api/v1/account/get_username_by_id'
+    getUsername: 'api/v1/account/get_username_by_id'
 };

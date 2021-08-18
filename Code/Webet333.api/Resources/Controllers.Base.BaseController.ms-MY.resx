@@ -258,6 +258,9 @@
   <data name="error_otp_incorrect" xml:space="preserve">
     <value>Anda telah memasukkan OTP yang tidak sah.</value>
   </data>
+  <data name="error_otp_not_send" xml:space="preserve">
+    <value>Pintu masuk SMS sedang dalam proses penyelenggaraan, sila cuba setelah beberapa lama atau hubungi perkhidmatan pelanggan.</value>
+  </data>
   <data name="error_password_length" xml:space="preserve">
     <value>Kata laluan anda hendaklah sekurang-kurangnya 6 perkataan.</value>
   </data>

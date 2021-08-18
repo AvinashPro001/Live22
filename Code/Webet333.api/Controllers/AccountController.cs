@@ -728,7 +728,8 @@ namespace Webet333.api.Controllers
                 if (string.IsNullOrWhiteSpace(request.Id))  // Called by user
                 {
                     var response = await account_help.SendOtp(request);
-                    if (response.ErrorCode != 0) return BadResponse();
+                    if (response.ErrorCode != 0) return BadResponse("error_otp_not_send");
+                    return OkResponse(response);
                 }
                 else // Called by Admin
                 {
@@ -736,9 +737,9 @@ namespace Webet333.api.Controllers
                     request.MobileNo = result.MobileNo;
                     request.Role = GetUserRole(User);
                     var response = await account_help.SendOtp(request);
-                    if (response.ErrorCode != 0) return BadResponse();
+                    if (response.ErrorCode != 0) return BadResponse("error_otp_not_send");
+                    return OkResponse(response);
                 }
-                return OkResponse();
             }
         }
 
