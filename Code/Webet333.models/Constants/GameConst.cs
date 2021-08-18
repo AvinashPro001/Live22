@@ -507,6 +507,8 @@
             public static class Casino
             {
                 public const string GameCode = "101";
+
+                public const string SecureLogin = "1xp_webet333";
             }
         }
 
