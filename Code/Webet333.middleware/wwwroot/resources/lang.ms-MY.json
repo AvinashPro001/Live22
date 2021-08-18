@@ -31,6 +31,7 @@
   "vip": "VIP",
   "bank": "Bank",
   "download": "Muat turun",
+  "new_download": "Muat turun",
   "deposit_home_section": "Deposit",
   "withdraw_home_section": "Pengeluaran",
   "join": "Join",
@@ -91,6 +92,7 @@
   "faq": "Faqs",
   "how_to_join": "cara menyertai",
   "contact_us": "Hubungi Kami",
+  "new_contact_us": "Hubungi Kami",
 
   "basic_information": "Maklumat asas",
   "account_information": "Maklumat Akaun",

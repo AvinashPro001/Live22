@@ -31,6 +31,7 @@
   "vip": "VIP",
   "bank": "Bank",
   "download": "Download",
+  "new_download": "Download",
   "deposit_home_section": "Deposit",
   "withdraw_home_section": "Withdraw",
   "join": "Join",
@@ -91,7 +92,7 @@
   "faq": "faqs",
   "how_to_join": "How To Join",
   "contact_us": "Contact Us",
-
+  "new_contact_us": "Contact Us",
   "basic_information": "Basic Information",
   "account_information": "Account Information",
   "contact_details": "Contact Details",
