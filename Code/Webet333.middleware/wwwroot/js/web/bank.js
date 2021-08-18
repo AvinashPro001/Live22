@@ -393,7 +393,6 @@ async function Deposit(IsOnlinePayment) {
                 promotionApplyEligible: false
             };
 
-
             if (!IsOnlinePayment) {
                 if (model.bankId === null || model.bankId === "" || model.bankId === undefined) {
                     IsDepositExecute = false;

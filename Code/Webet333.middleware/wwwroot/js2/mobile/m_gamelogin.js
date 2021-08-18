@@ -701,8 +701,8 @@ async function GameLoginMobile(gamename) {
 
     if (GameUsername == null) {
         var username = await PostMethod(apiEndPoints.getUsername, {});
-        sessionStorage.setItem('GameUsername', enc(JSON.stringify(username)));
-        GameUsername = username;
+        sessionStorage.setItem('GameUsername', enc(JSON.stringify(username.data)));
+        GameUsername = username.data;
     }
 
     var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
