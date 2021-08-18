@@ -1439,13 +1439,23 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        var Dates = new Date();
+        var day = Dates.getDate();
+        var Month = Dates.getMonth() + 1;
+        var Year = Dates.getFullYear();
+        Month = Month < 10 ? "0" + Month : Month;
+        day = day < 10 ? "0" + day : day;
+        var Hours = Dates.getHours();
+        var Minute = Dates.getMinutes();
+        Minute = Minute < 10 ? "0" + Minute : Minute;
 
         $("#datepicker0").datetimepicker({
             format: 'yyyy-mm-dd hh:ii',
             autoclose: true,
             minuteStep: 5
         });
-        //$("#datepicker0").val(Year + '-' + Month + '-' + day + ' ' + Hours + ':' + Minute)
+
+        $("#datepicker0").val(Year + '-' + Month + '-' + day + ' ' + Hours + ':' + Minute)
 
         $("#datepicker1").datepicker();
         $("#datepicker1btn").click(function (event) {
