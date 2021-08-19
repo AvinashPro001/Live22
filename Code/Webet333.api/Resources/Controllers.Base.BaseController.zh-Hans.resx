@@ -258,6 +258,9 @@
   <data name="error_otp_incorrect" xml:space="preserve">
     <value>您输入了无效的OTP。</value>
   </data>
+  <data name="error_otp_not_send" xml:space="preserve">
+    <value>短信网关正在维护中，请稍后尝试或联系客服。</value>
+  </data>
   <data name="error_password_length" xml:space="preserve">
     <value>密码长度必须为6个字符</value>
   </data>
@@ -268,7 +271,7 @@
     <value>您的优惠不支持此游戏</value>
   </data>
   <data name="error_promotion_withdraw_already_claim" xml:space="preserve">
-    <value>您无法提款，因为您之前曾领取过欢迎奖金。请联系我们的实时支持</value>
+    <value>您无法提款，因为您之前曾领取过欢迎奖金。请联系我们客服</value>
   </data>
   <data name="error_sequence_already_used" xml:space="preserve">
     <value>序列号已被使用。</value>
@@ -432,5 +435,8 @@
   </data>
   <data name="sql_error_promotionmindepositamount" xml:space="preserve">
     <value>对于您申请此促销活动，最低存款金额： RM</value>
+  </data>
+  <data name="sql_mobile_number_not_verified" xml:space="preserve">
+    <value>此手机号码未经验证。</value>
   </data>
 </root>

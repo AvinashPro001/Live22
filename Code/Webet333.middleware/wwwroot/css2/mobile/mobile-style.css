@@ -74,7 +74,7 @@ body                                        { background-color: #ffffff; padding
 .game-tab-panel.nav-pills > li.active > a:focus, 
 .game-tab-panel.nav-pills > li.active > a:hover { background-color: transparent; }
 .game-tab-panel                             { display: flex; justify-content: space-between; background: #000; }
-.game-tab-panel li                          { background: #2a2a2a; width: calc(100% / 4); text-align: center;position: relative; }
+.game-tab-panel li                          { background: #2a2a2a; width: calc(100% / 3); text-align: center;position: relative; }
 .game-tab-panel li:before                   { content: '\f0de'; display: block; left: 50%; transform: translateX(-50%); width: 0; height: 0px; 
                                             position: absolute; bottom: 10px; font-family: fontAwesome; font-weight: 400; }
 .game-tab-panel li.active:before,
@@ -305,10 +305,14 @@ select.main-wallet.jcf-hidden,
 .menu-list-area .tab-pane ul li img { width: 100%; max-width: 100%; object-fit: cover; }
 .grey-color{color:gray !important;}
 .green-color{color:green !important;}
+.red-color{color:red !important;}
 .no-game{width:100%;text-align:center;}
 .main-wallet-bal-pad{padding-left:0px !important;}
 .home-vip-image{margin-top:-4px;}
 .main-wallet-bar{line-height:20px;}
+.otp-btn {color: #fff !important;background: #f0ad4e !important;border-color: #eea236 !important;margin-left:10px;}
+.otp-btn span{font-size:10px;}
+#m_regsiter_otp{padding-left:10px;}
 
 
 
@@ -391,8 +395,8 @@ no-js #loader {
     z-index: 9999;
     background: center no-repeat #0f203a;
     opacity: .9;
-    background-image: url(../images/loading2.gif);
-    background-size: 90px 100px;
+    background-image: url('../../images/loading.gif');
+    background-size: 40px 40px;
 }
 
 .restore {
@@ -1057,7 +1061,6 @@ box-shadow: 0 0 5px 1px rgb(0 0 0 / 10%);*/
         position: absolute;
         top: 68px;
         margin: 0 0 0 -15px;
-        width: 118px;
         color: #fff;
         font-size: 12px;
         cursor: pointer;
@@ -1067,16 +1070,13 @@ box-shadow: 0 0 5px 1px rgb(0 0 0 / 10%);*/
     .steps-2 .point {
         cursor: pointer;
         position: relative;
-        width: 2px;
-        height: 14px;
-        margin: 0 0 0 10px;
-        padding: 3px 0 0 0;
+        margin: 0 0 0 5px;
+        padding: 10px 0 0 0;
         border-radius: 25px;
         text-align: center;
         vertical-align: middle;
-        background: #fff;
-        top: 36px;
-        left: -35px;
+        top: 22px;
+        width: calc(100% / 6);
     }
 
         .steps-2 .point .price {
@@ -1801,16 +1801,15 @@ p.bonus_content a {
 
     .steps-2 {
         z-index: 5;
-        padding-bottom: 50px;
+        padding-bottom: 0px;
+        margin-bottom:75px;
     }
 
         .steps-2 .step {
-            flex-wrap: wrap;
-            flex-direction: column;
             top: 0px;
             padding: 0px;
         }
-
+/*
         .steps-2 .point {
             width: 100%;
             height: auto;
@@ -1822,18 +1821,19 @@ p.bonus_content a {
             top: 22px;
             left: 0px;
             margin-left: 5px;
-        }
+        }*/
 
-            .steps-2 .point:before {
-                content: '';
-                display: block;
-                left: 0;
-                top: 12px;
-                width: 10px;
-                height: 2px;
-                background: #ffffff;
-                position: absolute;
-            }
+        .steps-2 .point:before {
+            content: '';
+            display: block;
+            left: 50%;
+            top: 0px;
+            width: 2px;
+            height: 10px;
+            background: #ffffff;
+            position: absolute;
+            transform: translateX(-50%);
+        }
 
             .steps-2 .step-title,
             .steps-2 .step-title1,
@@ -1845,9 +1845,13 @@ p.bonus_content a {
                 cursor: pointer;
             }
 
-    .benefits_referal_tab_sec {
-        width: 100%;
-    }
+        .steps-2 .step-title1{
+            display:block;
+        }
+
+        .benefits_referal_tab_sec {
+            width: 100%;
+        }
 
     .benefits_referal_left ul {
         display: flex;

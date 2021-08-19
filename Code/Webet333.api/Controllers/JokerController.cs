@@ -71,13 +71,15 @@ namespace Webet333.api.Controllers
                 if (string.IsNullOrEmpty(request.Id))
                     return BadResponse("error_invalid_modelstate");
 
-            string username;
+            string username,password;
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.JokerGamePrefix + user.Username;
+                username = user.JokerGamePrefix + user.UserId;
+                password = SecurityHelpers.DecryptPassword(user.Password);
             }
             var result = await JokerHelpers.JokerRegister(username);
+            await JokerHelpers.JokerPasswordSet(username, password);
 
             if (result.Status == null) return OkResponse(result);
 
@@ -96,37 +98,5 @@ namespace Webet333.api.Controllers
 
         #endregion Joker game Register
 
-        #region Joker game Register
-
-        [Authorize]
-        [HttpGet(ActionsConst.Joker.GameList)]
-        public async Task<IActionResult> JokerGameList()
-        {
-
-            if (GetUserRole(User) == RoleConst.Users)
-                BadResponse("forbid_error_access");
-
-            var result = await JokerHelpers.GameList();
-
-            var gameListModel = new List<GameListUploadResponse>();
-            result.ListGames.ForEach(game=> {
-                gameListModel.Add(new GameListUploadResponse
-                {
-                    GameCode = game.GameCode,
-                    GameName = game.GameName,
-                    GameType = game.GameType,
-                    ImagePath1 = game.Image1,
-                    ImagePath2 = game.Image1
-                });
-            });
-
-            using (var game_help = new GameHelpers(Connection))
-                await game_help.GameListInsert(gameListModel, "Joker Wallet", null);
-
-            return OkResponse(result.ListGames);
-
-        }
-
-        #endregion Joker game Register
     }
 }

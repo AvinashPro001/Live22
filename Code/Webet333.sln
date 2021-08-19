@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29009.5
+VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{73A22D53-2675-4449-9AD9-97BBC1EDDB69}"
 EndProject
@@ -28,8 +28,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webet333.notify.interfaces", "Webet333.notify.interfaces\Webet333.notify.interfaces.csproj", "{94589D3E-3A92-4462-AA0B-97AC399161C3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webet333.api", "Webet333.api\Webet333.api.csproj", "{78AC1CBF-786C-47EF-85F7-67A336602D17}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webet333.web", "Webet333.web\Webet333.web.csproj", "{84BD6D1B-19FD-4D55-AFBD-4D3B9D41C934}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webet333.queue", "Webet333.queue\Webet333.queue.csproj", "{DF774FE1-7501-4070-A454-E0F792969D91}"
 EndProject
@@ -116,12 +114,6 @@ Global
 		{78AC1CBF-786C-47EF-85F7-67A336602D17}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78AC1CBF-786C-47EF-85F7-67A336602D17}.Stag|Any CPU.ActiveCfg = Stag|Any CPU
 		{78AC1CBF-786C-47EF-85F7-67A336602D17}.Stag|Any CPU.Build.0 = Stag|Any CPU
-		{84BD6D1B-19FD-4D55-AFBD-4D3B9D41C934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84BD6D1B-19FD-4D55-AFBD-4D3B9D41C934}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84BD6D1B-19FD-4D55-AFBD-4D3B9D41C934}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84BD6D1B-19FD-4D55-AFBD-4D3B9D41C934}.Release|Any CPU.Build.0 = Release|Any CPU
-		{84BD6D1B-19FD-4D55-AFBD-4D3B9D41C934}.Stag|Any CPU.ActiveCfg = Stag|Any CPU
-		{84BD6D1B-19FD-4D55-AFBD-4D3B9D41C934}.Stag|Any CPU.Build.0 = Stag|Any CPU
 		{DF774FE1-7501-4070-A454-E0F792969D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF774FE1-7501-4070-A454-E0F792969D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF774FE1-7501-4070-A454-E0F792969D91}.Release|Any CPU.ActiveCfg = Release|Any CPU

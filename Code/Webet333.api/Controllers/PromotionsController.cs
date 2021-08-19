@@ -25,6 +25,7 @@ namespace Webet333.api.Controllers
         #region variable
 
         private IHubContext<SignalRHub> _hubContext;
+
         public PromotionsController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, IHubContext<SignalRHub> hubContext) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
@@ -252,7 +253,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Promotion Select For User
+        #endregion Promotion Select For Web
 
         #endregion Promotion Insert, Update, Delete, Retrieve
 
@@ -308,18 +309,18 @@ namespace Webet333.api.Controllers
 
         #endregion Promotion Apply List
 
-        #region Promotion Apply List 
+        #region Promotion Apply List
 
         [Authorize]
         [HttpPost(ActionsConst.Promotions.PromotionApplySelect)]
         public async Task<IActionResult> PromotionApplySelect([FromBody] GlobalGetWithPaginationRequest request)
         {
             var Role = GetUserRole(User);
-            
+
             request.UserId = Role == RoleConst.Users ? GetUserId(User).ToString() : request.UserId;
             using (var promotion_helper = new PromotionsHelpers(Connection))
             {
-                var list=await promotion_helper.PromotionApplySelect(request);
+                var list = await promotion_helper.PromotionApplySelect(request);
 
                 if (list.Count != 0)
                 {
@@ -345,7 +346,6 @@ namespace Webet333.api.Controllers
                 });
             }
         }
-
 
         #endregion Promotion Apply List
 

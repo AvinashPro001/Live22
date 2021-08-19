@@ -29,6 +29,10 @@ namespace Webet333.models.Request.Account
 
         [JsonProperty(PropertyName = "referenceKeyword")]
         public string ReferenceKeyword { get; set; }
+
+        [Required]
+        [JsonProperty(PropertyName = "otp")]
+        public string OTP { get; set; }
     }
 
     public class RegisterAdminRequest : BaseValidateRequest

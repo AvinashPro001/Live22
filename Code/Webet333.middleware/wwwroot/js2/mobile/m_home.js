@@ -51,11 +51,7 @@ async function SliderPromotion() {
     if (url.includes("?p=home")) {
         if (!isPromotionExecute) {
             isPromotionExecute = true;
-            var model = {
-                ismobile: true,
-                ismain: true
-            };
-            var resPanel = await PostMethod(apiEndPoints.promotionsList, model);
+            var resPanel = await GetMethod(apiEndPoints.homepageBannerList);
             if (resPanel !== null && resPanel !== undefined) {
                 var panelData = resPanel.data;
                 var panel;
@@ -69,14 +65,16 @@ async function SliderPromotion() {
 
                     for (i = 0; i < panelData.length; i++) {
                         panel.innerHTML +=
-                            '<div class="promotion-slide-hero-banner" ><a href="#"> <img src="' + panelData[i].banner + '" class="full-img"></a></div>'
+                            '<div class="promotion-slide-hero-banner" ><a href="#"> <img src="' + panelData[i].bannerMobile + '" class="full-img"></a></div>'
                     }
 
                     if (GetLocalStorage('currentUser') !== null)
-                        document.getElementById("mobilePromotionSliderLogin").className = "login-top-slider";
+                        document.getElementById("mobilePromotionSliderLogin").className = "login-top-slider-s";
                     else
                         document.getElementById("mobilePromotionSlider").className = "login-top-slider";
-                    slider();
+                    
+                    try { slider(); }
+                    catch (ex) { }
                 }
             }
             else {
@@ -89,17 +87,30 @@ async function SliderPromotion() {
 }
 
 function slider() {
-    $('.login-top-slider').slick({
-        autoplay: true,
-        autoplaySpeed: 5000,
-        dots: true,
-        arrows: false,
-        infinite: true,
-        speed: 1000,
-        fade: true,
-        slide: 'div',
-        cssEase: 'linear'
-    });
+    if (GetLocalStorage('currentUser') !== null)
+        $('.login-top-slider-s').slick({
+            autoplay: true,
+            autoplaySpeed: 5000,
+            dots: true,
+            arrows: false,
+            infinite: true,
+            speed: 1000,
+            fade: true,
+            slide: 'div',
+            cssEase: 'linear'
+        });
+    else
+        $('.login-top-slider').slick({
+            autoplay: true,
+            autoplaySpeed: 5000,
+            dots: true,
+            arrows: false,
+            infinite: true,
+            speed: 1000,
+            fade: true,
+            slide: 'div',
+            cssEase: 'linear'
+        });
 }
 
 function ChangeErroMessage(key, parameter = "") {

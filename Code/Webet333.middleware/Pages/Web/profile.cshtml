@@ -211,7 +211,7 @@
                                                         <p class="big no-mar lang blk-text" key="deposit_date_time">Date Time:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input name="txt_reference_number" type="text" class="reg-form " placeholder="Select Date" autocomplete="off" id="datepicker0" data-date-format="yyyy-mm-dd hh:ii" value="" onkeydown="return false;">
+                                                        <input  type="text" class="reg-form " placeholder="Select Date" autocomplete="off" id="datepicker0" data-date-format="yyyy-mm-dd hh:ii" value="" onkeydown="return false;">
                                                     </label>
                                                 </li>
                                                 <li class="pad-btm-ten">
@@ -365,7 +365,7 @@
                                                         <p class="big no-mar lang" key="bank_accountnumber">Account Number:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input type="number" class="reg-form" placeholder="Enter Account Number" id="withdraw_account_number" oninput="validity.valid||(value='');" step="0">
+                                                        <input type="number" class="reg-form" placeholder="Enter Account Number" id="withdraw_account_number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" min="0" oninput="validity.valid||(value='');" step="0">
                                                     </label>
                                                 </li>
                                                 <li class="mar-btm-fifteen">
@@ -928,7 +928,7 @@
                         <div class="form-group">
                             <div class="row ml0 mr0">
                                 <div class="col-sm-3">
-                                    <label class="history_sec">Transaction Type *</label>
+                                    <label class="history_sec history_lab_align">Transaction Type *</label>
                                 </div>
                                 <div class="col-sm-9 pl0">
                                     <div class="history-tabs">
@@ -959,14 +959,14 @@
                         <div class="form-group">
                             <div class="row ml0 mr0">
                                 <div class="col-sm-3">
-                                    <label class="history_sec">Transaction Date *</label>
+                                    <label class="history_sec history_lab_align">Transaction Date *</label>
                                 </div>
 
 
                                 <div class="col-sm-9 pl0">
                                     <div class="history-tabs">
                                         <ul class="nav nav-tabs remove-active-class" id="history_tabs">
-                                            <li class="active col-sm-3" onclick="GetTodayDate();" id="today-filter">
+                                            <li class="col-sm-3" onclick="GetTodayDate();" id="today-filter">
                                                 <a data-toggle="tab" class="hand-curson"><span>Today</span></a>
                                             </li>
                                             <li class="col-sm-3" onclick="Get3DayDate();">
@@ -987,7 +987,7 @@
                         <div class="form-group">
                             <div class="row ml0 mr0">
                                 <div class="col-sm-3">
-                                    <label class="history_sec">Start Date *</label>
+                                    <label class="history_sec history_lab_align">Start Date *</label>
                                 </div>
                                 <div class="col-sm-9">
                                     <div class="row ml0 mr0">
@@ -1000,7 +1000,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-1 pl0 text-center">
-                                            <label class="history_sec">To</label>
+                                            <label class="history_sec history_lab_align">To *</label>
                                         </div>
                                         <div class="col-sm-4 pl0">
                                             <div class="controls">
@@ -1378,7 +1378,7 @@
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <p>You have not selected any promotion, Are you sure to proceed ?</p>
+                    <p>You didn't select any promotion. Are you sure you want to proceed?</p>
                 </div>
             </div>
             <div class="modal-footer">
@@ -1439,21 +1439,22 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-
-        var date = new Date();
-        var day = date.getDate();
-        var Month = date.getMonth() + 1;
-        var Year = date.getFullYear();
+        var Dates = new Date();
+        var day = Dates.getDate();
+        var Month = Dates.getMonth() + 1;
+        var Year = Dates.getFullYear();
         Month = Month < 10 ? "0" + Month : Month;
         day = day < 10 ? "0" + day : day;
-        var Hours = date.getHours();
-        var Minute = date.getMinutes();
+        var Hours = Dates.getHours();
+        var Minute = Dates.getMinutes();
+        Minute = Minute < 10 ? "0" + Minute : Minute;
 
         $("#datepicker0").datetimepicker({
             format: 'yyyy-mm-dd hh:ii',
             autoclose: true,
             minuteStep: 5
         });
+
         $("#datepicker0").val(Year + '-' + Month + '-' + day + ' ' + Hours + ':' + Minute)
 
         $("#datepicker1").datepicker();
@@ -1497,7 +1498,7 @@
             CheckVaderPayMainteance();
             CheckSupportGame();
             SetUserDepositPromotion();
-            GetTodayDate();
+            SetHistorySectionName('Transfer');
         }
     });
 </script>

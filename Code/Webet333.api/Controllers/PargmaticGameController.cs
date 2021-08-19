@@ -78,8 +78,8 @@ namespace Webet333.api.Controllers
             string username;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.PragmaticGamePrefix + user.UserId;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.PragmaticUsername;
             }
             var languageCode = Language.Name == "English" ? "en" : (Language.Name == "Malay" ? "ms" : "zh");
             var platform = request.IsMobile ? "MOBILE" : "WEB";
@@ -95,13 +95,17 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Pragmatic.GameList)]
         public async Task<IActionResult> PragmaticGameList([FromBody] GameLoginRequest request)
         {
+            await CheckUserRole();
+
+            string adminId = GetUserId(User).ToString();
+
             var result = await PragmaticGameHelpers.GameListCallAPI();
             var gameListModel = new List<GameListUploadResponse>();
             if (!request.IsMobile)
             {
                 result.gameList.ForEach(game =>
                 {
-                    game.ImagePath = $"{GameConst.Pragmatic.ImageUrl}game_pic/square/200/{game.gameID}.png";
+                    game.ImagePath = $"{GameConst.Pragmatic.ImageUrl}game_pic/rec/325/{game.gameID}.png";
 
                     gameListModel.Add(new GameListUploadResponse
                     {
@@ -127,14 +131,14 @@ namespace Webet333.api.Controllers
                         ImagePath1 = game.ImagePath,
                         ImagePath2 = $"{GameConst.Pragmatic.ImageUrl}game_pic/square/200/{game.gameID}.png"
                     });
-
                 });
             }
 
-
             using (var game_help = new GameHelpers(Connection))
-                await game_help.GameListInsert(gameListModel, "Pragmatic Wallet", null);
-
+            {
+                await game_help.GameListDeleted("Pragmatic Wallet");
+                await game_help.GameListInsert(gameListModel, "Pragmatic Wallet", adminId);
+            }
 
             return OkResponse(result);
         }

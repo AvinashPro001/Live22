@@ -1,4 +1,6 @@
-﻿namespace Webet333.models.Response.Account
+﻿using Newtonsoft.Json;
+
+namespace Webet333.models.Response.Account
 {
     public class OtpResponse
     {
@@ -6,6 +8,12 @@
 
         public int ErrorCode { get; set; }
 
+        [JsonIgnore]
         public int? OTP { get; set; }
+    }
+
+    public class OTPResponseWithSMSApiResponse:OtpResponse
+    {
+        public string response { get; set; }
     }
 }

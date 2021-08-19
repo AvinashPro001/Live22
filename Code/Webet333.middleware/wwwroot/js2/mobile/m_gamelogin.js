@@ -447,7 +447,7 @@ async function getDetails() {
         }
         checkedValue = resUserData.data.autoTransfer;
         //if (window.location.href.includes("?p=transfer"))
-            //await onclickSet(1);
+        //await onclickSet(1);
     }
 }
 
@@ -630,15 +630,14 @@ async function logingGame(gameName) {
         else
             GameLoginMobile("Pragmatic");
     }
-    else {
+    else {fv
         alert("Please Login");
     }
 }
 
 async function PlaytechBrokenStatus() {
-    var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
-    var PlaytechUsername = globalParameters.data.playtechGamePrefix + resUserData.data.username;
+    var GameUsername = JSON.parse(dec(sessionStorage.getItem("GameUsername")));
+    var PlaytechUsername = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
     let userModel = {
         username: PlaytechUsername
     };
@@ -647,9 +646,8 @@ async function PlaytechBrokenStatus() {
 }
 
 async function PragmaticBrokenStatus() {
-    var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
-    var PragmaticUsername = globalParameters.data.pragmaticGamePrefix + resUserData.data.userId;
+    var GameUsername = JSON.parse(dec(sessionStorage.getItem("GameUsername")));
+    var PragmaticUsername = GameUsername.pragmaticUsername;
     let userModel = {
         username: PragmaticUsername
     };
@@ -676,6 +674,9 @@ async function PlaytechIdentifiy(Slotvalue) {
         LoaderHide();
         return ShowError(ChangeErroMessage("maintainenance_error"));
     }
+
+    if (!Slotvalue) if (GetLocalStorage('currentUser') === null) return alert("Please Login");
+
     if (GetLocalStorage('currentUser') !== null) {
         LoaderShow();
         if (checkedValue)
@@ -685,28 +686,22 @@ async function PlaytechIdentifiy(Slotvalue) {
         LoaderHide();
         GameLoginMobile('Playtech');
     }
-    else {
-        alert("Please Login");
+
+    if (Slotvalue) {
+        window.open("../mobile?p=slot", "_blank")
     }
 }
 
 async function GameLoginMobile(gamename) {
     LoaderShow();
 
-    var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
+    var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
     let resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
 
-    if (userDetails == null) {
-        var res = await GetMethod(apiEndPoints.getProfile);
-        sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
-        userDetails = res;
-    }
-
-    if (globalParameter == null) {
-        var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
-        sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
-        globalParameter = gamePrefix;
+    if (GameUsername == null) {
+        var username = await PostMethod(apiEndPoints.getUsername, {});
+        sessionStorage.setItem('GameUsername', enc(JSON.stringify(username.data)));
+        GameUsername = username.data;
     }
 
     var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
@@ -724,16 +719,13 @@ async function GameLoginMobile(gamename) {
             };
             let resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
             sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
+            resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
         }
+        
 
-        resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
-        let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
-
-        var username = resUserData.data.username;
-
-        var JokerUsername = globalParameters.data.jokerGamePrefix + username;
-        var M8Username = globalParameters.data.m8GamePrefix + username;
-        var PlaytechUsername = globalParameters.data.playtechGamePrefix + username;
+        var JokerUsername = GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, "")
+        var M8Username = GameUsername.m8Username;
+        var PlaytechUsername = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
 
         switch (gamename) {
             case 'MaxBet':
@@ -1058,11 +1050,11 @@ async function GameLoginMobile(gamename) {
                     }
                     var res = await PostMethod(apiEndPoints.pragmaticRegister, userRegisterModel);
                     if (res.data.error == "0") {
-                        window.open("../mobile?p=slot", "_blank")
+                        window.open("../mobile?p=slot#pragmatic-game", "_blank")
                     }
                 }
                 else {
-                    window.open("../mobile?p=slot", "_blank")
+                    window.open("../mobile?p=slot#pragmatic-game", "_blank")
                 }
                 break;
             case 'YeeBet':
@@ -1120,7 +1112,10 @@ function OpenPragmaticGamePage(code) {
 }
 
 function OpenPlaytechGamePage(code) {
-    window.open("../mobile/Game?gamename=Playtech&gamecode=" + code, "_blank")
+    if (GetLocalStorage('currentUser') !== null) 
+        window.open("../mobile/Game?gamename=Playtech&gamecode=" + code, "_blank")
+    else 
+        alert(ChangeErroMessage("please_loign_error"));
 }
 
 function GenratePlaytechSlotsGameHTML(GameList, SectionId, IsAppend) {
@@ -1234,10 +1229,8 @@ function openPragmaticGame(GameID) {
 async function openPlaytechGame(game) {
 
     var languageCode = (localStorage.getItem('language') === "zh-Hans" ? "ZH-CN" : "EN")
-    var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
-    var usernamePrifix = globalParameters.data.playtechGamePrefix
-    var username = (usernamePrifix + res.data.username.replace("#", "")).toUpperCase();
+    var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
+    var username = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
     var password = dec(localStorage.getItem('currentUserData'));
     var mobiledomain = "tothinkit.com";
     var systemidvar = "424";

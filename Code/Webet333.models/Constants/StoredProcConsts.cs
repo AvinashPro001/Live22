@@ -21,6 +21,8 @@
 
         public class Account
         {
+            public const string CheckUsernamExists = "[dbo].[Check_Users_Username]";
+
             public const string UserICNumberInsert = "[dbo].[User_IC_Number_Insert]";
 
             public const string UserICImageInsert = "[dbo].[User_IC_Image_Insert]";
@@ -36,6 +38,8 @@
             public const string GameUsernameSelect = "[dbo].[User_Game_Username]";
 
             public const string GameBalanceInfo = "[dbo].[Users_GameBalance_Info_Select]";
+
+            public const string GameUsernameInfo = "[dbo].[Get_Username_By_UserId]";
 
             public const string SetSeedData = "[dbo].[Seed_INSERT]";
 
@@ -242,6 +246,18 @@
             public const string AnnouncementDelete = "[dbo].[Announcements_Delete]";
 
             public const string AnnouncementUpdate = "[dbo].[Announcements_Update]";
+
+            public const string HomePageBannersPersist = "[dbo].[HomePageBanners_Persist]";
+
+            public const string HomePageBannersUpdateImage = "[dbo].[HomePageBanners_Update_Image]";
+
+            public const string HomePageBannersUpdateActiveStatus = "[dbo].[HomePageBanners_Update_Status]";
+
+            public const string HomePageBannersSelect = "[dbo].[HomePageBanners_Select]";
+
+            public const string HomePageBannersDelete = "[dbo].[HomePageBanners_Delete]";
+
+            public const string HomePageBannersSelectById = "[dbo].[HomePageBanners_Select_By_Id]";
         }
 
         public class Promotions
@@ -325,6 +341,10 @@
         public class Game
         {
             public const string SlotsGameSelect = "[dbo].[Slots_Game_Select]";
+
+            public const string SlotsGameUpdate= "[dbo].[Slots_Game_Update]";
+
+            public const string SlotsGameDelete = "[dbo].[Slots_Game_Delete]";
 
             public const string HotSlotsGameSelect = "[dbo].[Slots_Hot_Game_Select]";
 

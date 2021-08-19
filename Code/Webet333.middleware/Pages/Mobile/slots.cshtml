@@ -7,7 +7,7 @@
         <div class="head-img-icon">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#playtech" data-toggle="tab"><img src="~/images/carousel_logos/playtech_color.png" alt="logo" /></a></li>
-                <li><a href="#pragmatic" data-toggle="tab"><img src="~/images/carousel_logos/pragmatic_color.png" alt="logo" /></a></li>
+                <li><a id="pragmatic-game" href="#pragmatic" data-toggle="tab"><img src="~/images/carousel_logos/pragmatic_color.png" alt="logo" /></a></li>
             </ul>
             <div class="tab-content">
                 <div id="playtech" class="tab-pane fade in active">
@@ -139,7 +139,12 @@
     $(document).ready(function () {
         PragmaticSlotsGameList();
         PlaytechSlotsGameList();
-      
+        
+        if (window.location.hash) {
+            var hash = window.location.hash.substring(1);
+            if (hash == 'pragmatic-game')
+                $("#pragmatic-game").click();
+        }
     });
 
     var callCounter = 1
