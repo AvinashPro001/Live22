@@ -185,18 +185,29 @@ async function ChangePassword(i) {
             confirmPassword: $("#txt_confirmPassword").val()
         };
 
-        if (model.password.length < 6) {
-            LoaderHide();
-            return ShowError(ChangeErroMessage("pass_length_error"));
-        }
-
-        if (model.password === "") {
+        if (model.currentPassword === "" || model.currentPassword === null || model.currentPassword === undefined) {
             LoaderHide();
             return ShowError(ChangeErroMessage("password_required_error"));
         }
-        if (model.confirmPassword === "") {
+
+        if (model.password === "" || model.password === null || model.password === undefined) {
+            LoaderHide();
+            return ShowError(ChangeErroMessage("new_pass_req"));
+        }
+
+        if (model.confirmPassword === "" || model.confirmPassword === null || model.confirmPassword === undefined) {
             LoaderHide();
             return ShowError(ChangeErroMessage("confirm_password_required_error"));
+        }
+
+        if (model.currentPassword === model.password) {
+            LoaderHide();
+            return ShowError(ChangeErroMessage("new_password_check_error"));
+        }
+
+        if (model.password.length < 6) {
+            LoaderHide();
+            return ShowError(ChangeErroMessage("pass_length_error"));
         }
 
         if (localStorage.getItem("currentUserName") === model.password) {
@@ -204,10 +215,10 @@ async function ChangePassword(i) {
             return ShowError(ChangeErroMessage("username_pass_diff_error"));
         }
 
-        var userDetail = JSON.parse(Decryption(GetSessionStorage("UserDetails")))
-        var username = userDetail.username
+        var userDetail = JSON.parse(dec(sessionStorage.getItem('UserDetails')))
+        var username = userDetail.data.username
 
-        if (username === password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
+        if (username === model.password) return ShowError(ChangeErroMessage("username_pass_diff_error"));
 
         var Char = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
         if (!Char.test(model.password)) {
@@ -304,22 +315,31 @@ async function DoRegister() {
         username: $('#m_regsiter_username').val(),
         password: $("#m_regsiter_password").val(),
         confirmPassword: $("#m_regsiter_confirmpassword").val(),
-        referenceKeyword: getCookie("ref")
+        referenceKeyword: getCookie("ref"),
+        otp: $("#m_regsiter_otp").val()
     };
 
     if (model.mobile === "") {
         LoaderHide();
-        return ShowError("Mobile Filed is required.");
+        return ShowError(ChangeErroMessage("mobile_no_required_error"));
     }
-    if (model.mobile.length < 10) {
+    if (model.mobile.length < 10 || model.mobile.length > 11) {
         LoaderHide();
         return ShowError(ChangeErroMessage("mobile_length_error"));
     }
     if (model.username === "") {
         LoaderHide();
-        return ShowError("Username Filed is required.");
+        return ShowError(ChangeErroMessage("username_required_error"));
     }
 
+    if (model.password === "") {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("password_required_error"));
+    }
+    if (model.confirmPassword === "") {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("confirm_password_required_error"));
+    }
     if (model.password.length < 6) {
         LoaderHide();
         return ShowError(ChangeErroMessage("pass_length_error"));
@@ -327,30 +347,36 @@ async function DoRegister() {
 
     if (model.username.length < 7) {
         LoaderHide();
-        return ShowError("Username Length too short.");
+        return ShowError(ChangeErroMessage("username_length_error"));
     }
-    if (model.password === "") {
-        LoaderHide();
-        return ShowError("Password Filed is required.");
-    }
-    if (model.confirmPassword === "") {
-        LoaderHide();
-        return ShowError("Confirm Password Filed is required.");
-    }
+
     if (model.name === "") {
         LoaderHide();
-        return ShowError("Name Filed is required.");
+        return ShowError(ChangeErroMessage("name_required_error"));
     }
 
     if (model.username === model.password) {
         LoaderHide();
-        return ShowError("Password and username must be different.");
+        return ShowError(ChangeErroMessage("username_pass_diff_error"));
     }
+
+    if (model.otp == null || model.otp == undefined || model.otp == "") {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("error_otp_required"));
+    }
+
+    if (model.otp.length > 6 || model.otp.length < 6) {
+        LoaderHide();
+        return ShowError(ChangeErroMessage("error_otp"));
+    }
+
+    if (/^[a-zA-Z0-9- ]*$/.test(model.username) == false) { LoaderHide(); return ShowError(ChangeErroMessage('special_char_not_allowed')); }
+    if (/^[a-zA-Z0-9- ]*$/.test(model.name) == false) { LoaderHide(); return ShowError(ChangeErroMessage('name_special_char_not_allowed')); }
 
     var Char = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
     if (!Char.test(model.password)) {
         LoaderHide();
-        return ShowError("Password must be alphanumeric.");
+        return ShowError(ChangeErroMessage("pass_alpha_error"));
     }
 
     if (model.mobile !== "" && model.username !== "" && model.name !== "" && model.password !== "" && model.confirmPassword !== "" && model.username.length > 6) {
@@ -376,7 +402,7 @@ async function DoRegister() {
                 } catch (e) { }
                 localStorage.setItem('currentUserName', model.userName);
                 localStorage.setItem('currentUserData', enc(model.password));
-                loadPageVerifiedOtp();
+                loadPageHome();
             }
         }
         LoaderHide();
@@ -388,8 +414,10 @@ async function DoRegister() {
 function checkPasswordMatch() {
     var password = $("#m_regsiter_password").val();
     var confirmPassword = $("#m_regsiter_confirmpassword").val();
-    if (password !== confirmPassword)
+    if (password !== confirmPassword) {
+        $("#divCheckPasswordMatch").css('display', 'block');
         $("#divCheckPasswordMatch").html(ChangeErroMessage("pass_not_match_error"));
+    }
     else
         $("#divCheckPasswordMatch").html("");
 }
@@ -409,12 +437,10 @@ async function logoutMain(i) {
             getLanguage();
             localStorage.clear();
         }
-        var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-        var globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
-        var username = res.data.username;
-        var JokerUsername = globalParameters.data.jokerGamePrefix + username;
-        var M8Username = globalParameters.data.m8GamePrefix + username;
-        var PlaytechUsername = globalParameters.data.playtechGamePrefix + username;
+        var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
+        var JokerUsername = GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, "");
+        var M8Username = GameUsername.m8Username;
+        var PlaytechUsername = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
 
         //M8 Account Logout
         callMe(M8ConstAction.logoutAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username);
@@ -536,6 +562,12 @@ async function regisrationGame() {
             }
             let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
             var username = resUserData.data.username
+
+            if (globalParameters == null) {
+                var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
+                sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
+                globalParameters = gamePrefix;
+            }
 
             var JokerUsername = globalParameters.data.jokerGamePrefix + username;
             var M8Username = globalParameters.data.m8GamePrefix + username;
@@ -765,4 +797,80 @@ function OnPasswordType(PasswordTextboxId, UsernameTextboxId) {
 
     var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     regex.test(password) ? ($("#pass-alpha").addClass("green-color")) : ($("#pass-alpha").removeClass("green-color"))
+}
+
+//#region MobileValidation
+
+function MobileValidation(TextFieldId, ErrorShowId) {
+    var mobile = $('#' + TextFieldId).val();
+    if (mobile.length < 10 || mobile.length > 11) {
+        $("#" + ErrorShowId).css('display', 'block');
+        $("#" + ErrorShowId).text(ChangeErroMessage("mobile_length_error"));
+    }
+    else {
+        $("#" + ErrorShowId).text("");
+    }
+}
+
+//#endregion
+
+//#region Change  Message
+
+function ChangeMessageText(key, parameter = "") {
+    var Message = "";
+    $.ajax({
+        url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
+        dataType: 'json',
+        async: false,
+        success: function (lang) {
+            Message = lang[key] + parameter;
+        }
+    });
+    return Message;
+}
+
+//#endregion
+
+function SetUsernameInstructionColorAndTick(TickId, InstructionId, IsRed) {
+    if (IsRed) {
+        $("#" + InstructionId).addClass("red-color");
+        $("#" + TickId).addClass("fa-times");
+        $("#" + InstructionId).removeClass("green-color");
+        $("#" + TickId).removeClass("fa-check");
+    }
+    else {
+        $("#" + TickId).addClass("fa-check");
+        $("#" + InstructionId).addClass("green-color");
+        $("#" + InstructionId).removeClass("red-color");
+        $("#" + TickId).removeClass("fa-times");
+    }
+}
+
+async function OnUsernameType(UsernameTextboxId) {
+    var username = $('#' + UsernameTextboxId).val();
+
+    if (username.length < 7) SetUsernameInstructionColorAndTick("username_len_check", "username_len", true)
+    else SetUsernameInstructionColorAndTick("username_len_check", "username_len", false)
+
+    if (/^[a-zA-Z0-9- ]*$/.test(username) == false) SetUsernameInstructionColorAndTick("username_spec_char_check", "username_spec_char", true)
+    else SetUsernameInstructionColorAndTick("username_spec_char_check", "username_spec_char", false)
+
+    if (username.length >= 7) {
+        $("#username_already").css("display", "");
+        var model = {
+            username: username
+        }
+        var res = await PostMethod(apiEndPoints.checkUsernameExists, model);
+        if (!res.data.isExists) {
+            $("#already_text").text(ChangeMessageText("username_avialble"));
+            SetUsernameInstructionColorAndTick("username_already_check", "username_already", false)
+        }
+        else {
+            $("#already_text").text(ChangeMessageText("username_exists"));
+            SetUsernameInstructionColorAndTick("username_already_check", "username_already", true)
+        }
+    }
+    else {
+        $("#username_already").css("display", "none");
+    }
 }

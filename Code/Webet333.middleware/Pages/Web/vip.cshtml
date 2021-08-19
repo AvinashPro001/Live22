@@ -3,9 +3,7 @@
     ViewData["Title"] = "VIP - Webet333 -🥇";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-<script>
-    CheckMobileNumberIsVerifiedOnly();
-</script>
+<script>CheckMobileNumberIsVerifiedOnly();</script>
 <div class="vip-main-banner">
     <div class="container">
         &nbsp;
@@ -176,7 +174,7 @@
                                     <td><span>> 1000000</span></td>
                                     <td><span>> 4000000</span></td>
                                 </tr>
-                                <tr>
+                                <!--<tr>
                                     <th class="row">Weekly EXTRA FREE CREDIT**</th>
                                     <td>0</td>
                                     <td>38</td>
@@ -193,7 +191,7 @@
                                     <td><span> > 18888 </span></td>
                                     <td><span> > 38888 </span></td>
                                     <td><span> > 88888 </span></td>
-                                </tr>
+                                </tr>-->
                                 <tr>
                                     <th class="row"><span>Birthday Bonus</span></th>
                                     <td><span>28</span></td>
@@ -218,30 +216,30 @@
                             <tbody>
                                 <tr>
                                     <th class="row"><span>Live Casino & Slot Rebate</span></th>
+                                    <td><span>0.60%</span></td>
                                     <td><span>0.70%</span></td>
                                     <td><span>0.80%</span></td>
                                     <td><span>0.90%</span></td>
-                                    <td><span>1%</span></td>
-                                    <td><span>1.10%</span></td>
+                                    <td><span>1.00%</span></td>
                                     <td><span>1.20%</span></td>
                                 </tr>
                                 <tr>
                                     <th class="row"><span>Sportbook Rebate  </span></th>
+                                    <td><span>0.60%</span></td>
                                     <td><span>0.70%</span></td>
                                     <td><span>0.80%</span></td>
                                     <td><span>0.90%</span></td>
-                                    <td><span>1%</span></td>
-                                    <td><span>1.10%</span></td>
+                                    <td><span>1.00%</span></td>
                                     <td><span>1.20%</span></td>
                                 </tr>
                                 <tr>
-                                    <th class="row"><span>918kiss,Pussy888 and Mega888 Lose Rebate</span></th>
-                                    <td><span>5%</span></td>
-                                    <td><span>6%</span></td>
-                                    <td><span>6%</span></td>
-                                    <td><span>7%</span></td>
-                                    <td><span>7%</span></td>
-                                    <td><span>8%</span></td>
+                                    <th class="row"><span>918kiss,Pussy888,Joker and Mega888 Lose Rebate</span></th>
+                                    <td><span>3.0%</span></td>
+                                    <td><span>3.5%</span></td>
+                                    <td><span>4.0%</span></td>
+                                    <td><span>4.5%</span></td>
+                                    <td><span>5.0%</span></td>
+                                    <td><span>5.0%</span></td>
                                 </tr>
                             <tbody>
                             <thead class="bg_orange">
@@ -269,10 +267,10 @@
                                     <th class="row"><span>Withdraw Amount</span></th>
                                     <td><span>30,000</span></td>
                                     <td><span>50,000</span></td>
-                                    <td><span>70,000</span></td>
-                                    <td><span>90,000</span></td>
                                     <td><span>100,000</span></td>
                                     <td><span>200,000</span></td>
+                                    <td><span>500,000</span></td>
+                                    <td><span>500,000</span></td>
                                 </tr>
                                 <tr>
                                     <th class="row"><span>VIP Level Period  </span></th>
@@ -293,12 +291,11 @@
                 <p>** Free credit all require 3x turnover for withdraw</p>
             </div>
         </div>
-        
+
     </div>
 </div>
 
-<script>
-    function openCity1(evt1, cityName1) {
+<script>function openCity1(evt1, cityName1) {
         var i, tabcontent_benefits_referal, tablinks_benefits_referal;
         tabcontent_benefits_referal = document.getElementsByClassName("tabcontent_benefits_referal");
         for (i = 0; i < tabcontent_benefits_referal.length; i++) {
@@ -311,4 +308,7 @@
         document.getElementById(cityName1).style.display = "block";
         evt1.currentTarget.className += " active";
     }
-</script>
+
+    if (GetLocalStorage('currentUser') == null) {
+        $(".vip_sec_logo_left").hide();
+    }</script>

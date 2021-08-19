@@ -261,7 +261,7 @@ function SetProfilePageBanks() {
         if (UserBank.length > 0) {
             html = "";
             for (i = 0; i < UserBank.length; i++) {
-                html += '<div class="bank_details1"><div class="bank_details1_icon_box"><img src="' + UserBank[i].bankLogo + '" class="bank_details_icon"></div><div class="bank_details1-text"><h1>' + UserBank[i].accountNo + ' <span class="tickgray"><img src="/images/tickgray.png"></span></h1><p><a href="#">' + UserBank[i].accountName + '</a></p></div></div>';
+                html += '<div class="bank_details1"><div class="bank_details1_icon_box"><img src="' + UserBank[i].bankLogo + '" class="bank_details_icon"></div><div class="bank_details1-text"><h1>' + UserBank[i].accountNo + ' <span class="tickgray"><img src="/images/tickgray.png"></span></h1><p>' + UserBank[i].accountName + '</p></div></div>';
             }
             SetAllValueInElement("users_bank_details", html);
         }
@@ -352,181 +352,214 @@ function OpenPaymentPage() {
     window.open("../Web/payment");
 }
 
-var DepositModel, OnlinePayment;
+var DepositModel, OnlinePayment, IsDepositExecute = false;
 async function Deposit(IsOnlinePayment) {
-    OnlinePayment = IsOnlinePayment;
-    var amount = 0;
-    if (IsOnlinePayment)
-        amount = $("#txt_deposit_amount_online").val();
-    else
-        amount = $("#txt_deposit_amount").val();
-
-
-    if (amount > 30000 || amount < 10) {
-        return ShowError(ChangeErroMessage("min_max_amount_error"));
-    }
-
-
-    model = {
-        bankId: DepositBankId,
-        amount: amount,
-        depositMethodId: 'E14F22CF-686D-43CB-8DC0-669D7EBC23F5',
-        referenceNo: $('#txt_reference_number').val(),
-        depositeTime: Date.parse(document.getElementById("datepicker0").value.replace(" ", "T")).toString(),
-        promotionId: DepositPromotionId,
-        promotionApplyEligible: false
-    };
-
-
-    if (!IsOnlinePayment) {
-        if (model.bankId === null || model.bankId === "" || model.bankId === undefined) {
-            return ShowError(ChangeErroMessage("plz_selet_bnk_error"));
-        }
-
-        if (model.depositeTime === "NaN") {
-            return ShowError(ChangeErroMessage("select_date_time_error"));
-        }
-
-        if (model.referenceNo === "") {
-            return ShowError(ChangeErroMessage("refer_no_error"));
-        }
-
-        if (filter_array(TableData).length === 0) {
-            return ShowError(("receipt_required_error"));
-        }
-    }
-
-    LoaderShow();
-    if (model.promotionId != undefined) {
-
-        if (IsOnlinePayment) {
-            SetLocalStorage("IsWindowClose", false)
-            OpenPaymentPage();
-        }
-
-        await LoadAllBalance();
-        var promotionModel = {
-            userid: null,
-            amount: Number(model.amount)
-        };
-        var walletData = await PostMethod(accountEndPoints.promotionApplyCheck, promotionModel);
-        walletData = walletData.response;
-        if (walletData.data.IsPending == true) {
-            LoaderHide();
+    try {
+        if (!IsDepositExecute) {
+            IsDepositExecute = true;
+            OnlinePayment = IsOnlinePayment;
+            var amount = 0;
             if (IsOnlinePayment)
-                SetLocalStorage("IsWindowClose", true);
-            return ShowError(ChangeErroMessage("pending_sports_deposit_error"));
-        }
+                amount = $("#txt_deposit_amount_online").val();
+            else
+                amount = $("#txt_deposit_amount").val();
 
-        if (walletData.data.InMaintenance == true) {
-            LoaderHide();
-            if (IsOnlinePayment)
-                SetLocalStorage("IsWindowClose", true);
-            return ShowError(ChangeErroMessage("game_in_maintenance_new_promotion"));
-        }
+            if (amount < 10) {
+                IsDepositExecute = false;
+                return ShowError(ChangeErroMessage("min_amount_error"));
+            }
 
-        if (walletData.data.CheckPromotionApply === true && walletData.data.TotalPromotionRow > 0) {
-            if (IsOnlinePayment)
-                SetLocalStorage("IsWindowClose", true);
-            if (confirm(ChangeErroMessage("promo_apply_balance_error"))) {
-                model.promotionApplyEligible = true;
+            if (amount > 30000) {
+                IsDepositExecute = false;
+                return ShowError(ChangeErroMessage("max_amount_error"));
+            }
+
+
+            model = {
+                bankId: DepositBankId,
+                amount: amount,
+                depositMethodId: 'E14F22CF-686D-43CB-8DC0-669D7EBC23F5',
+                referenceNo: $('#txt_reference_number').val(),
+                depositeTime: Date.parse(document.getElementById("datepicker0").value.replace(" ", "T")).toString(),
+                promotionId: DepositPromotionId,
+                promotionApplyEligible: false
+            };
+
+            if (!IsOnlinePayment) {
+                if (model.bankId === null || model.bankId === "" || model.bankId === undefined) {
+                    IsDepositExecute = false;
+                    return ShowError(ChangeErroMessage("plz_selet_bnk_error"));
+                }
+
+                if (model.depositeTime === "NaN") {
+                    IsDepositExecute = false;
+                    return ShowError(ChangeErroMessage("select_date_time_error"));
+                }
+
+                if (model.referenceNo === "") {
+                    IsDepositExecute = false;
+                    return ShowError(ChangeErroMessage("refer_no_error"));
+                }
+
+                if (filter_array(TableData).length === 0) {
+                    IsDepositExecute = false;
+                    return ShowError(("receipt_required_error"));
+                }
+            }
+
+            LoaderShow();
+            if (model.promotionId != undefined) {
+
                 if (IsOnlinePayment) {
                     SetLocalStorage("IsWindowClose", false)
                     OpenPaymentPage();
+                }
+
+                await LoadAllBalance();
+                var promotionModel = {
+                    userid: null,
+                    amount: Number(model.amount)
+                };
+                var walletData = await PostMethod(accountEndPoints.promotionApplyCheck, promotionModel);
+                walletData = walletData.response;
+                if (walletData.data.IsPending == true) {
+                    LoaderHide();
+                    if (IsOnlinePayment)
+                        SetLocalStorage("IsWindowClose", true);
+                    IsDepositExecute = false;
+                    return ShowError(ChangeErroMessage("pending_sports_deposit_error"));
+                }
+
+                if (walletData.data.InMaintenance == true) {
+                    LoaderHide();
+                    if (IsOnlinePayment)
+                        SetLocalStorage("IsWindowClose", true);
+                    IsDepositExecute = false;
+                    return ShowError(ChangeErroMessage("game_in_maintenance_new_promotion"));
+                }
+
+                if (walletData.data.CheckPromotionApply === true && walletData.data.TotalPromotionRow > 0) {
+                    if (IsOnlinePayment)
+                        SetLocalStorage("IsWindowClose", true);
+                    if (confirm(ChangeErroMessage("promo_apply_balance_error"))) {
+                        model.promotionApplyEligible = true;
+                        if (IsOnlinePayment) {
+                            SetLocalStorage("IsWindowClose", false)
+                            OpenPaymentPage();
+                        }
+                    }
+                    else {
+                        model.promotionId = "";
+                        if (IsOnlinePayment) {
+                            SetLocalStorage("IsWindowClose", false)
+                            OpenPaymentPage();
+                        }
+                    }
+                }
+                else {
+                    if (walletData.data.Staus != null && walletData.data.CheckPromotionRemind == true) {
+                        LoaderHide();
+                        if (IsOnlinePayment)
+                            SetLocalStorage("IsWindowClose", true);
+                        IsDepositExecute = false;
+                        return ShowError(ChangeErroMessage("promot_active_error"));
+                    }
+
+                    if (walletData.data.CheckPromotionRemind == true) {
+                        model.promotionApplyEligible = true;
+                        DepositModel = model;
+                    }
+
+                    if (walletData.data.Staus == null) {
+                        model.promotionApplyEligible = true;
+                    }
                 }
             }
             else {
-                model.promotionId = "";
-                if (IsOnlinePayment) {
+                if (OnlinePayment) {
                     SetLocalStorage("IsWindowClose", false)
                     OpenPaymentPage();
                 }
-            }
-        }
-        else {
-            if (walletData.data.Staus != null && walletData.data.CheckPromotionRemind == true) {
-                LoaderHide();
-                if (IsOnlinePayment)
-                    SetLocalStorage("IsWindowClose", true);
-                return ShowError(ChangeErroMessage("promot_active_error"));
+
+                let data = {
+                }
+                var walletData = await PostMethod(accountEndPoints.depositCheckWithoutPromotion, data);
+                walletData = walletData.response;
+                if (walletData.data.CheckPopupWithoutPromotion == true) {
+                    LoaderHide();
+                    DepositModel = model;
+                }
+                else {
+                    LoaderHide();
+                    DepositModel = model;
+                    if (IsOnlinePayment)
+                        SetLocalStorage("IsWindowClose", true);
+                    $('#promotion_not_apply_confimation').modal('show');
+                    IsDepositExecute = false;
+                    return 0;
+                }
             }
 
-            if (walletData.data.CheckPromotionRemind == true) {
-                model.promotionApplyEligible = true;
+            if (!IsOnlinePayment) {
+                if (filter_array(TableData).length === 0) {
+                    LoaderHide();
+                    IsDepositExecute = false;
+                    return ShowError(ChangeErroMessage("receipt_required_error"));
+                } else {
+                    DepositModel = model;
+                    IsDepositExecute = false;
+                    await DepositAfterPromotionCheck();
+                }
+            } else {
                 DepositModel = model;
-            }
-
-            if (walletData.data.Staus == null) {
-                model.promotionApplyEligible = true;
+                IsDepositExecute = false;
+                await DepositAfterPromotionCheck();
             }
         }
     }
-    else {
-        if (OnlinePayment) {
-            SetLocalStorage("IsWindowClose", false)
-            OpenPaymentPage();
-        }
-
-        let data = {
-        }
-        var walletData = await PostMethod(accountEndPoints.depositCheckWithoutPromotion, data);
-        walletData = walletData.response;
-        if (walletData.data.CheckPopupWithoutPromotion == true) {
-            LoaderHide();
-            DepositModel = model;
-        }
-        else {
-            LoaderHide();
-            DepositModel = model;
-            if (IsOnlinePayment)
-                SetLocalStorage("IsWindowClose", true);
-            $('#promotion_not_apply_confimation').modal('show');
-            return 0;
-        }
-    }
-
-    if (!IsOnlinePayment) {
-        if (filter_array(TableData).length === 0) {
-            LoaderHide();
-            return ShowError(ChangeErroMessage("receipt_required_error"));
-        } else {
-            DepositModel = model;
-            await DepositAfterPromotionCheck();
-        }
-    } else {
-        DepositModel = model;
-        await DepositAfterPromotionCheck();
+    catch(e) {
+        IsDepositExecute = false;
     }
 }
 
 async function DepositAfterPromotionCheck() {
     LoaderShow();
-    if (OnlinePayment) {
+    try {
+        if (!IsDepositExecute) {
+            IsDepositExecute = true;
+            if (OnlinePayment) {
 
-        if (model.promotionId == undefined || model.promotionId == null) {
-            SetLocalStorage("IsWindowClose", false);
-            OpenPaymentPage();
-        }
-        var res = await PostMethod(transactionEndPoints.onlinePayment, DepositModel);
-        if (res.status == 200) {
-            LoaderHide();
-            SetLocalStorage("gameURL", res.response.data.redirect_to);
-        }
-        else {
-            ShowError(res.response.message)
+                if (model.promotionId == undefined || model.promotionId == null) {
+                    SetLocalStorage("IsWindowClose", false);
+                    OpenPaymentPage();
+                }
+                var res = await PostMethod(transactionEndPoints.onlinePayment, DepositModel);
+                if (res.status == 200) {
+                    LoaderHide();
+                    SetLocalStorage("gameURL", res.response.data.redirect_to);
+                }
+                else {
+                    ShowError(res.response.message)
+                }
+                IsDepositExecute = false;
+            }
+            else {
+                var res = await PostMethod(transactionEndPoints.addDeposite, DepositModel);
+                if (res.status == 200) {
+                    await handleFileSelect1(res.response.data.id);
+                    LoadAllBalance()
+                    ResetTransactionField(1);
+                    SetUserDepositPromotion();
+                }
+                else {
+                    ShowError(res.response.message)
+                }
+                IsDepositExecute = false;
+            }
         }
     }
-    else {
-        var res = await PostMethod(transactionEndPoints.addDeposite, DepositModel);
-        if (res.status == 200) {
-            await handleFileSelect1(res.response.data.id);
-            LoadAllBalance()
-            ResetTransactionField(1);
-            SetUserDepositPromotion();
-        }
-        else {
-            ShowError(res.response.message)
-        }
+    catch (e) {
+        IsDepositExecute = false;
     }
     LoaderHide();
 }
@@ -632,8 +665,8 @@ function SetHistorySectionName(name) {
     toDate = null;
     pageNumber = 0;
     $(".remove-active-class>li.active").removeClass("active");
-    $("#today-filter").addClass("active");
-    GetTodayDate();
+    //$("#today-filter").addClass("active");
+    Get30DayDate();
 }
 
 function APIDateFormate(date) {
@@ -727,6 +760,8 @@ function GetDateFormate(Date1, Date2) {
     Month2 = Month2 < 10 ? "0" + Month2 : Month2;
     day2 = day2 < 10 ? "0" + day2 : day2;
 
+    $("#datepicker1").val(day1 + "/" + Month1 + "/" + Year1)
+    $("#datepicker2").val(day2 + "/" + Month2 + "/" + Year2)
 
     fromDate = Year1 + "-" + Month1 + "-" + day1 + " 00:00:00";
     toDate = Year2 + "-" + Month2 + "-" + day2 + " 23:59:59";
@@ -741,11 +776,21 @@ function GetTodayDate() {
     CallFunctionAccordingToTab();
 };
 
+function Get30DayDate() {
+    $("#datepicker1").val("")
+    $("#datepicker2").val("")
+    pageNumber = 0;
+    var fdate = new Date().addDays(-31);
+    var tdate = new Date();
+    GetDateFormate(fdate, tdate)
+    CallFunctionAccordingToTab();
+};
+
 function Get3DayDate() {
     $("#datepicker1").val("")
     $("#datepicker2").val("")
     pageNumber = 0;
-    var fdate = new Date().addDays(-3);
+    var fdate = new Date().addDays(-2);
     var tdate = new Date();
     GetDateFormate(fdate, tdate)
     CallFunctionAccordingToTab();
@@ -778,9 +823,6 @@ function GetDateRange() {
     pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");
-    if (fdate.length == 1 || tdate.length == 1)
-        return ShowError(ChangeErroMessage("error_select_both_date"))
-    $(".remove-active-class>li.active").removeClass("active");
     fromDate = fdate[2] + "-" + fdate[0] + "-" + fdate[1] + " 00:00:00";
     toDate = tdate[2] + "-" + tdate[0] + "-" + tdate[1] + " 23:59:59";
     CallFunctionAccordingToTab();
@@ -826,6 +868,7 @@ async function TransferHistory(FromDate = null, ToDate = null, PageSize = null, 
 
         }
         else {
+            $("#tbl_transferHistory_pagination").html("");
             var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
             $("#tbl_transferHistory").find('tbody').html(html);
         }
@@ -859,6 +902,7 @@ async function WithdrawDepositHistory(FromDate = null, ToDate = null, PageSize =
 
         }
         else {
+            $("#tbl_withdrawdepositHistory_pagination").html("");
             var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
             $("#tbl_withdrawdepositHistory").find('tbody').html(html);
         }
@@ -893,6 +937,7 @@ async function PromotionHistory(FromDate = null, ToDate = null, PageSize = null,
 
         }
         else {
+            $("#tbl_promotionHistory_pagination").html("");
             var html = '<tr><td colspan="8">No Transaction yet</td></tr>'
             $("#tbl_promotionHistory").find('tbody').html(html);
         }
@@ -927,6 +972,7 @@ async function RebateHistory(FromDate = null, ToDate = null, PageSize = null, Pa
 
         }
         else {
+            $("#tbl_promotionHistory_pagination").html("");
             var html = '<tr><td colspan="7">No Transaction yet</td></tr>'
             $("#tbl_RebateHistory").find('tbody').html(html);
         }
@@ -960,6 +1006,7 @@ async function RewardHistory(FromDate = null, ToDate = null, PageSize = null, Pa
 
         }
         else {
+            $("#tbl_promotionHistory_pagination").html("");
             var html = '<tr><td colspan="4">No Transaction yet</td></tr>'
             $("#tbl_rewardHistory").find('tbody').html(html);
         }
@@ -994,6 +1041,7 @@ async function BettingHistory(FromDate = null, ToDate = null, PageSize = null, P
 
         }
         else {
+            $("#tbl_promotionHistory_pagination").html("");
             var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
             $("#tbl_bettingsummeryHistory").find('tbody').html(html);
         }

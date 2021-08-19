@@ -5,6 +5,9 @@ namespace Webet333.models.Response.Game
 {
     public class GameListSelectResponse
     {
+        [JsonProperty("Id")]
+        public Guid? Id { get; set; }
+
         [JsonProperty("GameName")]
         public string GameName { get; set; }
 
@@ -34,6 +37,9 @@ namespace Webet333.models.Response.Game
 
         [JsonProperty("ImagePath2")]
         public string ImagePath2 { get; set; }
+
+        [JsonProperty("WalletName")]
+        public string WalletName { get; set; }
 
         [JsonProperty("Active")]
         public bool? Active { get; set; }

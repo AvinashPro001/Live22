@@ -7,7 +7,7 @@
             <ul class="nav text-center mob-menu">
                 <li><a onclick="loadPageLogin()" href="javascript:void(0);" rel="prefetch"><i class="fa fa-sign-in" aria-hidden="true"></i><p class="lang" key="sidebar_login"></p></a></li>
                 <li><a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
-                <li><a href="~/Web/Home" rel="prefetch"><img src="~/images/mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
+                <li><a href="../" rel="prefetch"><img src="~/images/mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
                 <li><a onclick="loadPageVIP()" href="javascript:void(0);" rel="prefetch"><img src="~/images/footericon1.png" alt="Profile"><p>VIP</p></a></li>
                 <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
                 <li><a onclick="loadPageAbout()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
@@ -48,7 +48,7 @@
                         <li class="active text-center casino"><a href="#casino-tile" data-toggle="tab"><span class="lang" key="gamecategory_casino">Casino</span></a></li>
                         <li class="text-center sport"><a href="#sport-tile" data-toggle="tab"><span class="lang" key="gamecategory_sports">Sports</span></a></li>
                         <li class="text-center slot"><a href="#slot-tile" data-toggle="tab"><span class="lang" key="gamecategory_slots">Slots</span></a></li>
-                        <li class="text-center fishing"><a href="#fishing-tile" data-toggle="tab"><span class="lang" key="gamecategory_fishing">Fishing</span></a></li>
+                        @*<li class="text-center fishing"><a href="#fishing-tile" data-toggle="tab"><span class="lang" key="gamecategory_fishing">Fishing</span></a></li>*@
                     </ul>
                 </div>
                 <div class="white-bg">
@@ -187,7 +187,7 @@
                                         <button class="game-title"><span class="lang" key="pussy888slot_game"></span></button>
                                     </a>
                                 </li>
-                                <li data-toggle="modal" data-target="#gameLogin" id="playtechslot">
+                                <li onclick="PlaytechIdentifiy(true)" id="playtechslotlogin">
                                     <a>
                                         <figure>
                                             <img src="~/images/mobile/playtech.png" alt="Playtech">
@@ -221,11 +221,11 @@
                                 </li>
                             </ul>
                         </div>
-                        <div id="fishing-tile" role="tabpanel" class="tab-pane fade in">
+                        @*<div id="fishing-tile" role="tabpanel" class="tab-pane fade in">
                             <ul class="game-series">
                                 <li></li>
                             </ul>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
                 <div class="footer-quote">
@@ -292,7 +292,7 @@
                 <li><a onclick="logoutMain()"><img src="~/images/mobile/logout.png" alt="mn-logout"><p class="lang" key="sidebar_Logout"></p></a></li>
                 <li><a onclick="loadPageHome()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/home_side.png" alt="mn-home"><p class="lang" key="menu_home"></p></a></li>
                 <li><a onclick="loadPagedownload()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/download.png" alt="mn-download"><p class="lang" key="sidebar_Download"></p></a></li>
-                <li><a href="~/Web/Home" rel="prefetch"><img src="~/images/mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
+                <li><a href="../" rel="prefetch"><img src="~/images/mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
                 <li><a onclick="loadPageVIP()" href="javascript:void(0);" rel="prefetch"><img src="~/images/footericon1.png" alt="Profile"><p>VIP</p></a></li>
                 <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
                 <li><a onclick="loadPageAbout()" href="javascript:void(0);"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US" rel="prefetch"></p></a></li>
@@ -433,19 +433,19 @@
                 <div class="text-center myr-quote">
                     <h4 class="main-wallet-bar">
                         <img class="viplevelImage home-vip-image" id="viplevel_icon" />
-                         MYR <span id="menuMainWallet" class="main-wallet-bal-pad"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="fa fa-refresh"></span>
+                         MYR <span id="menuMainWallet" class="main-wallet-bal-pad"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="refresh fa fa-refresh"></span>
                     </h4>
                 </div>
                 <ul class="account-icon list-inline text-center">
                     <li class="mobile-icon deposit_icon"><a onclick="loadPagedeposit()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/menu-images/deposit.png" /><span data-translate="mobile_menu_deposit"></span></a></li>
                     <li class="mobile-icon transfer_icon"><a onclick="loadPageTransfer()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/menu-images/transfer.png" /><span data-translate="mobile_menu_Transfer"></span></a></li>
-                    <li class="mobile-icon restore_icon" id="retore_li" onclick="RestoreBalance()"><a href="#"><img src="~/images/mobile/menu-images/restore.png" /><span data-translate="mobile_menu_Restore"></span></a></li>
+                    <li class="mobile-icon restore_icon" id="retore_li" onclick="RestoreBalance()"><a href="#"><img id="refreshBtn" src="~/images/mobile/menu-images/restore.png" /><span data-translate="mobile_menu_Restore"></span></a></li>
                     <li class="mobile-icon withdraw_icon"><a onclick="loadPageWithdraw()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/menu-images/withdraw.png" /><span data-translate="mobile_menu_Withdraw"></span></a></li>
                     <li class="mobile-icon history_icon"><a onclick="loadPageHistory()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/menu-images/history.png" /><span data-translate="mobile_menu_History"></span></a></li>
                 </ul>
 
                 <div class="hero-banner">
-                    <div class="login-top-slider slider" id="mobilePromotionSliderLogin">
+                    <div class="login-top-slider-s slider" id="mobilePromotionSliderLogin">
                     </div>
                 </div>
 
@@ -454,7 +454,7 @@
                         <li class="active text-center casino"><a data-toggle="pill" href="#home"><span data-translate="gamecategory_casino">Casino</span></a></li>
                         <li class="text-center sport"><a data-toggle="pill" href="#menu1"><span data-translate="gamecategory_sports">Sports</span></a></li>
                         <li class="text-center slot"><a data-toggle="pill" href="#menu2"><span data-translate="gamecategory_slots">Slots</span></a></li>
-                        <li class="text-center fishing"><a data-toggle="pill" href="#menu3"><span data-translate="gamecategory_fishing">Fishing</span></a></li>
+                        @*<li class="text-center fishing"><a data-toggle="pill" href="#menu3"><span data-translate="gamecategory_fishing">Fishing</span></a></li>*@
                     </ul>
                 </div>
 
@@ -627,11 +627,11 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="menu3" class="tab-pane fade">
+                    @*<div id="menu3" class="tab-pane fade">
                         <ul class="game-series">
                             <li></li>
                         </ul>
-                    </div>
+                    </div>*@
                 </div>
                 <div class="footer-quote">
                     <p class="text-center"><img class="footer-copyright-section-img" src="~/images/mobile/reco-pagcor.png" /></p>
@@ -833,6 +833,7 @@
             }
         });
         announcementMobile();
+        SliderPromotion();  //  For home page banner on language.
     }
 
     setTimeout(() => {

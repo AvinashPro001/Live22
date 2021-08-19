@@ -27,7 +27,7 @@
             var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
             if (resUserData.data.mobilenoConfirmed == false) {
                 LoaderShow();
-                var res = await GetMethodWithReturn(apiEndPoints.SendOTP);
+                var res = await PostMethod(apiEndPoints.SendOTP, {});
                 document.getElementById("txt_otp").value = "";
                 ShowSuccess(ChangeErroMessage("otp_send_success"));
                 LoaderHide();
@@ -50,8 +50,9 @@
                 LoaderHide();
                 return ShowError(ChangeErroMessage("error_otp"));
             }
+            var res;
             try {
-                var res = await PostMethod(apiEndPoints.VerifiedOTP, model);
+                res = await PostMethod(apiEndPoints.VerifiedOTP, model);
             }
             catch {
                 document.getElementById("txt_otp").value = "";
@@ -108,11 +109,12 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
+                            <button type="button" class="btn btn-success login_btn join_btn no-mar-btm" onclick="VerifiedOTP()"><span class="lang" key="verified_otp"></span></button>
                             <button type="button" id="button_resend" class="btn btn-primary login_btn join_btn no-mar-btm" onclick="SendOTP(1)">
                                 <span class="lang" key="send_otp"></span>
                                 <span id="counter_txt"></span>
                             </button>
-                            <button type="button" class="btn btn-success login_btn join_btn no-mar-btm" onclick="VerifiedOTP()"><span class="lang" key="verified_otp"></span></button>
+
                             <button type="button" class="btn btn-success login_btn join_btn no-mar-btm" onclick="logoutMain(1)"><span class="lang" key="sidebar_Logout"></span></button>
                         </div>
                     </div>

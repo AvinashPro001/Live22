@@ -233,7 +233,6 @@ namespace Webet333.api.Controllers
             if (!ModelState.IsValid) return BadResponse(ModelState);
             using (var account_help = new AccountHelpers(Connection))
             {
-
                 var uniqueId = Guid.NewGuid().ToString();
 
                 var user = await account_help.AddUser(Connection, request, RoleConst.Users, uniqueId);
@@ -242,7 +241,7 @@ namespace Webet333.api.Controllers
 
                 if (user == null) return OkResponse();
 
-                await account_help.SendOtp(user.Id.ToString(), user.MobileNo);
+                //await account_help.SendOtp(user.Id.ToString(), user.MobileNo);
 
                 var registerMessage = Localizer["msg_register_msg"].Value;
 
@@ -718,47 +717,49 @@ namespace Webet333.api.Controllers
 
         #region Send OTP
 
-        [Authorize]
         [HttpPost(ActionsConst.Account.SendOtp)]
-        public async Task<IActionResult> SendOtp([FromBody] GetByIdRequest request)
+        public async Task<IActionResult> SendOtp([FromBody] SendOtpRequest request)
         {
-            await ValidateUser();
+            if (HttpContext.User.Identity.IsAuthenticated)
+                await CheckUserRole();
 
             using (var account_help = new AccountHelpers(Connection))
             {
                 if (string.IsNullOrWhiteSpace(request.Id))  // Called by user
                 {
-                    var response = await account_help.SendOtp(UserEntity.Id.ToString(), UserEntity.MobileNo);
-                    if (response.ErrorCode != 0) return BadResponse();
+                    var response = await account_help.SendOtp(request);
+                    if (response.ErrorCode != 0) return BadResponse("error_otp_not_send");
+                    return OkResponse(response);
                 }
                 else // Called by Admin
                 {
                     var result = await account_help.FindUser(userId: request.Id);
-                    var response = await account_help.SendOtp(result.Id.ToString(), result.MobileNo);
-                    if (response.ErrorCode != 0) return BadResponse();
+                    request.MobileNo = result.MobileNo;
+                    request.Role = GetUserRole(User);
+                    var response = await account_help.SendOtp(request);
+                    if (response.ErrorCode != 0) return BadResponse("error_otp_not_send");
+                    return OkResponse(response);
                 }
-
-                return OkResponse();
             }
         }
 
         #endregion Send OTP
 
-        #region Verified OTP
+        //#region Verified OTP
 
-        [Authorize]
-        [HttpPost(ActionsConst.Account.VerifiedOtp)]
-        public async Task<IActionResult> VerifiedOTP([FromBody] OtpVerifiedRequest request)
-        {
-            await ValidateUser();
-            using (var account_help = new AccountHelpers(Connection))
-            {
-                var response = await account_help.VerifiedOtp(UserEntity.Id.ToString(), request.OTP);
-                return OkResponse(response);
-            }
-        }
+        //[Authorize]
+        //[HttpPost(ActionsConst.Account.VerifiedOtp)]
+        //public async Task<IActionResult> VerifiedOTP([FromBody] SendOtpRequest request)
+        //{
+        //    await ValidateUser();
+        //    using (var account_help = new AccountHelpers(Connection))
+        //    {
+        //        var response = await account_help.VerifiedOtp(UserEntity.Id.ToString(), request.OTP);
+        //        return OkResponse(response);
+        //    }
+        //}
 
-        #endregion Verified OTP
+        //#endregion Verified OTP
 
         #region Add IC Number
 
@@ -1089,10 +1090,46 @@ namespace Webet333.api.Controllers
 
         #endregion Contact Information
 
+        #region Check Username Exists or not
+
+        [HttpPost(ActionsConst.Account.CheckUsernameExists)]
+        public async Task<IActionResult> CheckUsernameExists([FromBody]CheckUsernameExistsRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            using (var account_helper =new AccountHelpers(Connection))
+            {
+                var result=await account_helper.CheckUsernameExists(request);
+                return OkResponse(result);
+            }
+        }
+
+        #endregion
+
+        #region Get Username by UserId
+        [HttpPost(ActionsConst.Account.GetUsername)]
+        public async Task<IActionResult> GetUsernameById([FromBody]GetByIdRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            if (GetUserRole(User) == RoleConst.Users)
+                request.Id = GetUserId(User).ToString();
+
+            using (var account_helper = new AccountHelpers(Connection))
+            {
+                var result = await account_helper.GetUsernameInfo(request.Id);
+                return OkResponse(result);
+            }
+        }
+
+        #endregion
+
         #region Check password
 
         [HttpPost("testpassword")]
-        public IActionResult checkpassword(string password)
+        private IActionResult checkpassword(string password)
         {
             return OkResponse(SecurityHelpers.DecryptPassword(password));
         }

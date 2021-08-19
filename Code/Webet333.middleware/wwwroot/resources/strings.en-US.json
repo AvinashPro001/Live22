@@ -192,10 +192,10 @@
   "mobile_login": "Login",
 
   "balance": "Balance",
-  "username_instruction": "Username must contain a length of 7 charaters.",
+  "username_instruction": "Username must contain a length of 7 characters.",
   "username_specialCharacter_instruction": "Special characters not allowed",
 
-  "password_instruction": "Password must contain a length of 6 charaters",
+  "password_instruction": "Password must contain a length of 6 Characters",
   "password_alpha_instruction": "Password must be alphanumeric.",
   "password_username_same": "Password and username must be different.",
   "join": "JOIN",
@@ -224,13 +224,14 @@
 
   "mobile_no_required_error": "Mobile Number is required.",
   "sms_error": "SMS not send !! Please Contact to Administration.",
-  "mobile_length_error": "Please enter Mobile number Minimum 10 digits.",
+  "mobile_length_error": "Please enter valid Mobile Number",
   "pass_length_error": "Password length Minimum 6 digits.",
-  "username_required_error": "Username Filed is required.",
+  "username_required_error": "Username Field is required.",
   "username_length_error": "Username Length too short.",
-  "password_required_error": "Password Filed is required.",
-  "confirm_password_required_error": "Confirm Password Filed is required.",
-  "name_required_error": "Name Filed is required.",
+  "password_required_error": "Password Field is required.",
+  "confirm_password_required_error": "Confirm Password Field is required.",
+  "new_password_check_error": "It's your previous password, Please enter new password",
+  "name_required_error": "Name Field is required.",
   "username_pass_diff_error": "Password and username must be different.",
   "pass_alpha_error": "Password must be alphanumeric.",
   "pass_not_match_error": "Passwords do not match!",
@@ -244,14 +245,15 @@
   "refer_no_error": "Please Insert Reference no",
   "promo_apply_balance_error": "Your balance is lower than 5 MYR of your deposit balance, you are available to apply new promotion, and your existing promotion wil be expired.",
   "amount_greater_zero_error": "Please Enter Amount Greater than 0.",
-  "promot_active_error": "You cannot apply promotion,Because you have active promotion",
+  "promot_active_error": "You can not apply promotion. Because you have active promotion",
+  "amount_required_error": "Please Enter Amount.",
   "min_max_amount_error": "Minimum Amount 10 and Maximum Amount is 30000.",
   "min_max_amount_error_parameter": "Minimum Amount 10 and Maximum Amount is ",
   "min1_max1000_amount_error": "Minimum Amount MYR 1",
-  "bnk_name_required_error": "Bank Name Filed is required.",
+  "bnk_name_required_error": "Bank Name Field is required.",
 
-  "amt_req_error": "Amount Filed is required.",
-  "acc_no_req_error": "Account number Filed is required.",
+  "amt_req_error": "Amount Field is required.",
+  "acc_no_req_error": "Account number Field is required.",
 
   "promo_ongoing_withdraw_error": "Your Promotion is on going, cannot withdraw till the promotion is completed",
   "trans_not_completd_error": "Your Transaction is not completed.",
@@ -299,7 +301,7 @@
   "Insufficient_balance_wallet": "Insufficient balance in wallet.",
   "file_format_error": "File Format not supported only PDF and Image Allow",
   "send_otp": "Resend OTP",
-  "verified_otp": "Verified OTP",
+  "verified_otp": "Submit OTP",
   "error_otp_required": "Please Insert OTP !!",
   "otp_text": "Enter OTP sent to your mobile number",
   "otp_send_success": "OTP had been sent to register mobile no , please enter valid OTP to activate this account.",
@@ -326,5 +328,14 @@
   "no_record_found_statement": "No Record Found",
 
   "special_not_allowed": "Speical Charater are not allowed in Passsword !!",
-  "amount_greater_one_error": "Please Enter Amount Greater than 1."
+  "amount_greater_one_error": "Please Enter Amount Greater than 1.",
+
+  "pls_select_date": "Please select date",
+
+  "current_pass_req": "Please enter current password.",
+  "new_pass_req": "Please enter New Password",
+  "special_char_not_allowed": "Special Characters not allowed in Username.",
+  "name_special_char_not_allowed": "Special Characters not allowed in Name.",
+  "username_exists": "Username already exists.",
+  "username_avialble": "Username is Available."
 }

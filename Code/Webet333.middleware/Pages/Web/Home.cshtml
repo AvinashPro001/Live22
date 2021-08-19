@@ -19,6 +19,7 @@
     </div>
 </div>
 <!-- Main Banner Section and Promotion Slider -->
+
 <!-- Join Now Section -->
 <div class="how_win_main_wrap">
     <div class="container">
@@ -36,12 +37,12 @@
                 <li class="step2bg">
                     <div class="process-game step-2" onclick="ClickOnDeposit()">
                         <a href="#">
-                            <h4><span class="lang" key="deposit"></span></h4>
-                            <p class="white-text"><span class="lang" key="fully_automated"></span> <br> &amp; <span class="lang" key="secured"></span> </p>
+                            <h4><span class="lang" key="deposit_home_section"></span></h4>
+                            <p class="white-text"><span class="lang" key="fully_automated"></span> <br><span class="lang" key="secured"></span> </p>
                         </a>
                     </div>
                 </li>
-                <li class=" step3bg">
+                <li class=" step3bg">   
                     <div class="process-game step-3" onclick="ClickOnPlay()">
                         <a href="#">
                             <h4><span class="lang" key="play"></span></h4>
@@ -52,13 +53,13 @@
                 <li class="step4bg">
                     <div class="process-game step-4" onclick="ClickOnWithdraw()">
                         <a href="#">
-                            <h4><span class="lang" key="withdraw"></span></h4>
+                            <h4><span class="lang" key="withdraw_home_section"></span></h4>
                             <p class="white-text"><span class="lang" key="your_winning"></span> <br> <span class="lang" key="money"></span></p>
                         </a>
                     </div>
                 </li>
                 <li class="step5bg">
-                    <a href="#"><img src="~/images/joinnow.png"></a>
+                    <a href="#"><img onclick="ClickOnJoin()" src="~/images/joinnow.png"></a>
                 </li>
             </ul>
         </div>
@@ -158,7 +159,7 @@
                     <li role="presentation" class="active"><a class="tablinks_account" href="#livcasino" aria-controls="livcasino" role="tab" data-toggle="tab"><img src="~/images/livecasino_hover.png"> <span class="lang" key="live_casino"></span></a></li>
                     <li role="presentation"><a class="tablinks_account" href="#slots" aria-controls="slots" role="tab" data-toggle="tab"><img src="~/images/slot_hover.png"> <span class="lang" key="slots"></span></a></li>
                     <li role="presentation"><a class="tablinks_account" href="#sports" aria-controls="sports" role="tab" data-toggle="tab"><img src="~/images/sport_hover.png"> <span class="lang" key="sports"></span></a></li>
-                    <li role="presentation"><a class="tablinks_account" href="#fishing" aria-controls="fishing" role="tab" data-toggle="tab"><img src="~/images/fish_hover.png"> <span class="lang" key="fishing"></span></a></li>
+                    @*<li role="presentation"><a class="tablinks_account" href="#fishing" aria-controls="fishing" role="tab" data-toggle="tab"><img src="~/images/fish_hover.png"> <span class="lang" key="fishing"></span></a></li>*@
                 </ul>
             </div>
 
@@ -443,7 +444,7 @@
                                             <a href="#">918 Kiss</a>
                                         </div>
                                         <div class="play_now_btn">
-                                            <a href="#" onclick="OpenGame('918Kiss Wallet',false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
+                                            <a href="#" onclick="OpenGame('918Kiss Wallet', false, false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -465,7 +466,7 @@
                                             <a>Joker</a>
                                         </div>
                                         <div class="play_now_btn">
-                                            <a href="#" onclick="OpenGame('Joker Wallet',false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
+                                            <a href="#" onclick="OpenGame('Joker Wallet',false,false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -487,7 +488,7 @@
                                             <a>Mega888</a>
                                         </div>
                                         <div class="play_now_btn">
-                                            <a href="#" onclick="OpenGame('Mega888 Wallet',false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
+                                            <a href="#" onclick="OpenGame('Mega888 Wallet',false,false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -509,7 +510,7 @@
                                             <a>Pussy888</a>
                                         </div>
                                         <div class="play_now_btn">
-                                            <a href="#" onclick="OpenGame('Pussy888 Wallet',false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
+                                            <a href="#" onclick="OpenGame('Pussy888 Wallet',false,false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -531,7 +532,7 @@
                                             <a>Pragmatic Play</a>
                                         </div>
                                         <div class="play_now_btn">
-                                            <a href="#" onclick="OpenGame('Pragmatic Wallet',false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
+                                            <a href="#" onclick="OpenGame('Pragmatic Wallet',false,false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -553,7 +554,7 @@
                                             <a>AG Slots</a>
                                         </div>
                                         <div class="play_now_btn">
-                                            <a href="#" onclick="OpenGame('AG Wallet', true)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
+                                            <a href="#" onclick="OpenGame('AG Wallet', true,false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -575,7 +576,7 @@
                                             <a>Playtech Slots</a>
                                         </div>
                                         <div class="play_now_btn">
-                                            <a href="#" onclick="OpenGame('PlayTech Wallet',true)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
+                                            <a href="#" onclick="OpenGame('PlayTech Wallet',true,false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -672,9 +673,9 @@
                     </section>
                 </div>
                 <!-- sports ends -->
-                <div role="tabpanel" class="tab-pane tabcontent_account" id="fishing">
+                @*<div role="tabpanel" class="tab-pane tabcontent_account" id="fishing">
                     ...
-                </div>
+                </div>*@
                 <!-- fishing ends -->
             </div>
 
@@ -819,7 +820,7 @@
     });
 
     setInterval(function () {
-        if ($('#slider_promotion_div').children().length == 0)
-            SetPromotionInMainPage();
+        if ($('#slider_promotion_div').children().length == 0) SetHomePageBanner();
     }, 200);
+
 </script>

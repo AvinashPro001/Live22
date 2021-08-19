@@ -58,24 +58,26 @@ namespace Webet333.api.Helpers
 
         #endregion Call Joker Register API
 
-        #region Call Joker Game List API
+        #region Call Joker Password API
 
-        internal static async Task<JokerGameListResponse> GameList()
+        internal static async Task<dynamic> JokerPasswordSet(string Username,string Password)
         {
+            Username = Regex.Replace(Username, @"[^0-9a-zA-Z]+", "");
             DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
-            var perameter = $"Method={GameConst.Joker.ListGames}&Timestamp={temp}";
-            var stringContent = new StringContent(perameter, Encoding.UTF8, "application/x-www-form-urlencoded");
 
+            var perameter = $"Method={GameConst.Joker.SetPassword}&Password={Password}&Timestamp={temp}&Username={Username}";
+            var stringContent = new StringContent(perameter, Encoding.UTF8, "application/x-www-form-urlencoded");
             var jokerURL = $"{GameConst.Joker.jokerBaseUrl}?" +
-                           $"AppID={GameConst.Joker.AppID}&" +
-                           $"Signature={GameHelpers.GenerateHas(perameter)}";
-            dynamic apiResult = JsonConvert.DeserializeObject<JokerGameListResponse>(await GameHelpers.CallThirdPartyApi(jokerURL, stringContent));
+                            $"AppID={GameConst.Joker.AppID}&" +
+                            $"Signature={GameHelpers.GenerateHas(perameter)}";
+
+            dynamic apiResult = JsonConvert.DeserializeObject<dynamic>(await GameHelpers.CallThirdPartyApi(jokerURL, stringContent));
 
             return apiResult;
         }
 
-        #endregion Call Joker Register API
+        #endregion Call Joker Password API
 
         #region Register Joker Game in DB
 

@@ -6,7 +6,8 @@ let SiteData = {
     AdminBankPageData: null,
     DownloadPageData: null,
     AllBankPageData: null,
-    WalletData: null
+    WalletData: null,
+    HomeBannerData: null
 }
 
 //#endregion
@@ -21,6 +22,7 @@ $(window).on('load', function () {
     SetSiteDataVariable()
     SetLastUpdateTime();
     AllPromotionCallAPI();
+    HomeBannerCallAPI();
     GetWalletList();
     CheckGameMaintenance();
     SignalRConnect();
@@ -87,6 +89,23 @@ function ChangeErroMessage(key, parameter = "") {
 
 //#endregion
 
+//#region Change  Message
+
+function ChangeMessageText(key, parameter = "") {
+    var Message = "";
+    $.ajax({
+        url: '../../resources/lang.' + GetLocalStorage('language') + '.json',
+        dataType: 'json',
+        async: false,
+        success: function (lang) {
+            Message = lang[key] + parameter;
+        }
+    });
+    return Message;
+}
+
+//#endregion
+
 //#region Set Sitedata Variable
 
 function SetSiteDataVariable() {
@@ -97,6 +116,7 @@ function SetSiteDataVariable() {
     SiteData.PromotionPageData = data.PromotionPageData;
     SiteData.AllBankPageData = data.AllBankPageData;
     SiteData.WalletData = data.WalletData;
+    SiteData.HomeBannerData = data.HomeBannerData;
 }
 
 //#endregion
@@ -110,6 +130,7 @@ function SetSiteData() {
     SiteData.DownloadPageData = null;
     SiteData.AllBankPageData = null;
     SiteData.WalletData = null;
+    SiteData.HomeBannerData = null;
     SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
 }
 
@@ -152,7 +173,7 @@ function SetBackgroudImagePath(ClassName, value) {
 
 //#region Promotion Slider Slick JS
 
-function PromotionSliderJsFunction() {
+function HomepageBannerSliderJsFunction() {
     $('.slick-carousel').slick({
         arrows: true,
         centerPadding: "0px",
@@ -167,18 +188,21 @@ function PromotionSliderJsFunction() {
 
 //#region Set Main Page Slider Html
 
-function SetPromotionInMainPage() {
-    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+function SetHomePageBanner() {
+    let data = JSON.parse(Decryption(GetSessionStorage("siteData")));
 
-    if (data != null && data.PromotionPageData != null) {
-        var promotion = data.PromotionPageData.filter(x => x.IsMain == true);
-        var promotionData = "";
-        for (i = 0; i < promotion.length; i++)promotionData += '<div><img src="' + promotion[i].banner + '"></div>'
+    if (data != null && data.HomeBannerData != null) {
+
+        let homepageBanner = data.HomeBannerData;
+        let homepageBannerData = "";
+
+        for (i = 0; i < homepageBanner.length; i++) homepageBannerData += '<div><img src="' + homepageBanner[i].bannerWeb + '"></div>'
+
         document.getElementById("slider_promotion_div").innerHTML = "";
-        SetAllValueInElement("slider_promotion_div", promotionData)
-        PromotionSliderJsFunction();
-    }
+        SetAllValueInElement("slider_promotion_div", homepageBannerData)
 
+        HomepageBannerSliderJsFunction();
+    }
 }
 
 //#endregion
@@ -295,6 +319,25 @@ async function AllPromotionCallAPI() {
 
 //#endregion
 
+//#region "ASYNC" Call Home Banner API for Get data
+
+async function HomeBannerCallAPI() {
+
+    var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
+
+    if (data.HomeBannerData == null || data.HomeBannerData == undefined) {
+
+        let res = await GetMethodWithoutToken(settingEndPoints.homepageBannerList);
+
+        if (res.status == 200) {
+            SiteData.HomeBannerData = res.response.data;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)))
+        }
+    }
+}
+
+//#endregion
+
 //#region "ASYNC" Set LastUpdateTime of Sitedate Variable
 
 async function SetLastUpdateTime() {
@@ -312,6 +355,15 @@ async function SetLastUpdateTime() {
         var diff = (Currentdate.getTime() - OldDate.getTime()) / 1000;
         diff /= 60;
         diff = Math.abs(Math.round(diff));
+
+        //#region TODO:: signleR not working in UAT.
+
+        if (environmentName.toUpperCase() == 'DEBUG') {
+            await HomeBannerCallAPI();
+        }
+
+        //#endregion
+
         if (diff > 9) {
             SetSiteData();
             var date = new Date();
@@ -379,7 +431,7 @@ function SetYoutubeVideo() {
     var youtubLink = ""
 
     if (GetLocalStorage('language') == "en-US" || GetLocalStorage('language') == "ms-MY")
-        youtubLink = "https://www.youtube-nocookie.com/embed/Y0mB5txA0_I?autoplay=1&mute=1";
+        youtubLink = "https://www.youtube-nocookie.com/embed/wiiRGBVanQo?autoplay=1&mute=1";
     else
         youtubLink = "https://www.youtube.com/embed/Y0mB5txA0_I?autoplay=1&mute=1";
 
@@ -407,8 +459,9 @@ function ChangeLanguageText() {
 }
 
 function ChangeLanguage(LangCode) {
-    sessionStorage.removeItem("siteData");
     SetLocalStorage("language", LangCode);
+    for (i = 0; i < 5; i++)
+        sessionStorage.removeItem("siteData");
     window.location.reload();
 }
 
@@ -539,6 +592,12 @@ function SignalRConnect() {
             console.log("Not Connected with SignalR Hub");
             return console.error(err.toString());
         });
+
+        connection.on("HomePageBannerInsertUpdate", function () {
+            SiteData.HomeBannerData = null;
+            SetSessionStorage("siteData", Encryption(JSON.stringify(SiteData)));
+            HomeBannerCallAPI();
+        });
     }
     catch {
         SignalRConnect();
@@ -546,10 +605,10 @@ function SignalRConnect() {
 }
 
 function CheckTokenIsValid(StausCode, StatusMessage) {
-    if (StausCode==400)
+    if (StausCode == 400)
         if (StatusMessage == "Your access token is expired, please login again." || StatusMessage == "Token akses anda tamat tempoh, sila log masuk sekali lagi." || StatusMessage == "您的访问令牌已过期，请重新登录。") {
-        localStorage.clear();
-        sessionStorage.clear();
-        window.location.reload();
-    }
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.reload();
+        }
 }

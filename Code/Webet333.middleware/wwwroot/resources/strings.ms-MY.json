@@ -226,12 +226,13 @@
 
   "mobile_no_required_error": "Nombor Telefon diperlukan",
   "sms_error": "SMS tidak hantar !! Sila hubungi Live Chat",
-  "mobile_length_error": "Sila masukkan nombor telefon dengan 10 digit minimum",
+  "mobile_length_error": "Sila masukkan nombor telefon bimbit yang sah.",
   "pass_length_error": "Panjang kata laluan Minimum 6 digit.",
   "username_required_error": "Nama pengguna diperlukan",
   "username_length_error": "Name pengguna terlalu pendek",
-  "password_required_error": "Kata laluan diperlukan",
-  "confirm_password_required_error": "Sahkan kata luluan diperlukan",
+  "password_required_error": "Medan Kata Laluan diperlukan",
+  "confirm_password_required_error": "Sahkan kata laluan diperlukan",
+  "new_password_check_error": "Ini kata laluan anda sebelumnya, Masukkan kata laluan baru",
   "name_required_error": "Nama penuh diperlukan",
   "username_pass_diff_error": "Kata laluan dan nama pengunna mesti berbeza",
   "pass_alpha_error": "Kata laluan perlu abjad angka",
@@ -247,6 +248,7 @@
   "promo_apply_balance_error": "Baki anda adalah lebih rendah daripada 5 MYR baki deposit anda, anda boleh menggunakan promosi baru, dan promosi promosi anda sudah tamat tempoh.",
   "amount_greater_zero_error": "Sila Masukkan Jumlah lebih daripada 0",
   "promot_active_error": "Anda tidak boleh menggunakan promosi, Kerana anda mempunyai promosi yang aktif",
+  "amount_required_error": "Sila masukkan amaun.",
   "min_max_amount_error": "Amaun Minimum ialah 10 dan Maksimum ialah 300000.",
   "min_max_amount_error_parameter": "Amaun Minimum 10 dan Amaun Maksimum ialah ",
   "min1_max1000_amount_error": "Amaun Minimum 1",
@@ -298,8 +300,8 @@
   "show_waring_deposit_withoutpromotion": "Harap Diingatkan, Jika Anda Deposit Sekarang, Anda Harus Menyelesaikan Turnover / Winover Sebelum Anda Boleh Mengeluarkan Baki Anda",
   "Insufficient_balance_wallet": "Baki tidak mencukupi dalam wallet.",
   "file_format_error": "Format Fail tidak disokong hanya PDF dan Image Allow",
-  "send_otp": "Hantar semula OTP",
-  "verified_otp": "OTP yang disahkan",
+  "send_otp": "Dapat semula OTP",
+  "verified_otp": "Hantar OTP",
   "error_otp_required": "Sila Masukkan OTP !!",
   "otp_text": "Masukkan Otp yang dihantar ke nombor telefon bimbit anda",
   "otp_send_success": "OTP telah dikirim untuk mendaftarkan no telefon bimbit, masukkan OTP yang sah untuk mengaktifkan akaun ini.",
@@ -326,5 +328,14 @@
   "no_record_found_statement": "tiada rekod ditemui",
 
   "special_not_allowed": "Speical Charater tidak dibenarkan di Passsword !!",
-  "amount_greater_one_error": "Sila Masukkan Jumlah lebih daripada 1"
+  "amount_greater_one_error": "Sila Masukkan Jumlah lebih daripada 1",
+
+  "pls_select_date": "Sila pilih tarikh",
+
+  "current_pass_req": "Sila masukkan kata laluan semasa.",
+  "new_pass_req": "Sila masukkan Kata Laluan Baru",
+  "special_char_not_allowed": "Aksara Khas tidak dibenarkan dalam Nama Pengguna.",
+  "name_special_char_not_allowed": "Watak Khas tidak dibenarkan dalam Nama.",
+  "username_exists": "Nama pengguna sudah wujud.",
+  "username_avialble": "Nama pengguna tersedia."
 }

@@ -63,6 +63,7 @@ namespace Webet333.api.Controllers
         private IHostingEnvironment _hostingEnvironment;
 
         private IHubContext<SignalRHub> _hubContext;
+
         public GameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IHostingEnvironment environment, SerialQueue queue, IOptions<BaseUrlConfigs> BaseUrlConfigsOption, ApiLogsManager LogManager, IHubContext<SignalRHub> hubContext) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.LogManager = LogManager;
@@ -1719,7 +1720,6 @@ namespace Webet333.api.Controllers
                 AGUsername,
                 PlaytechUsername,
                 Mega888Username,
-                Kiss918Username,
                 JokerUsername,
                 MaxbetUsername,
                 M8Username;
@@ -1728,18 +1728,17 @@ namespace Webet333.api.Controllers
 
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.Username;
-                kiss918UserName = user.Username918;
-                vendorMemeberId = user.VendorMemberId;
-                mega888LoginId = user.Mega888LoginId;
-                AGUsername = user.AGGamePrefix + user.Username;
-                PlaytechUsername = user.PlaytechGamePrefix + user.Username;
-                Mega888Username = user.Mega888GamePrefix + user.Username;
-                Kiss918Username = user.Kiss918GamePrefix + user.Username;
-                JokerUsername = user.JokerGamePrefix + user.Username;
-                MaxbetUsername = user.MaxbetGamePrefix + user.Username;
-                M8Username = user.M8GamePrefix + user.Username;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.UserName;
+                kiss918UserName = user.UserName918;
+                vendorMemeberId = user.MaxbetUsername;
+                mega888LoginId = user.Mega888Username;
+                AGUsername = user.AGUsername;
+                PlaytechUsername = user.PlaytechUsername;
+                Mega888Username = user.Mega888Username;
+                JokerUsername = user.JokerUsername;
+                MaxbetUsername = user.MaxbetUsername;
+                M8Username = user.M8Username;
             }
 
             DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
@@ -1829,37 +1828,11 @@ namespace Webet333.api.Controllers
 
             if (Role == RoleConst.Admin) if (string.IsNullOrEmpty(request.Id)) return BadResponse("error_invalid_modelstate");
 
-            GetBalanceUserResponse user;
-            string AGUsername,
-                PlaytechUsername,
-                DGUsername,
-                SAUsername,
-                SexyUsername,
-                JokerUsername,
-                M8Username,
-                MaxBetUsername,
-                WMUsername,
-                AllbetUsername,
-                PragmaticUsername,
-                YeeBetUsername,
-                SBOUsername;
+            GetUsernameByIdResponse user;
 
             using (var account_helper = new AccountHelpers(Connection))
             {
-                user = await account_helper.UserGetBalanceInfo(request.Id);
-                AllbetUsername = user.AllBetGamePrefix + user.UserId;
-                AGUsername = user.AGGamePrefix + user.Username;
-                PlaytechUsername = user.PlaytechGamePrefix + user.Username;
-                DGUsername = user.DGGamePrefix + user.Username;
-                SAUsername = user.SAGamePrefix + user.Username;
-                SexyUsername = user.SexyGamePrefix + user.Username;
-                JokerUsername = user.JokerGamePrefix + user.Username;
-                M8Username = user.M8GamePrefix + user.Username;
-                MaxBetUsername = user.MaxbetGamePrefix + user.Username;
-                WMUsername = user.WMGamePrefix + user.UserId;
-                PragmaticUsername = user.PragmaticGamePrefix + user.UserId;
-                YeeBetUsername = user.YEEBETGamePrefix + user.UserId;
-                SBOUsername = user.SBOGamePrefix + user.UserId;
+                user = await account_helper.GetUsernameInfo(request.Id);
             }
 
             decimal mainBalance = 0.0m,
@@ -1886,7 +1859,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var resultAG = await game_helper.AGDepositWithdrawMethod(AGUsername, request.AGWallet, GameConst.AG.Withdraw);
+                        var resultAG = await game_helper.AGDepositWithdrawMethod(user.AGUsername, request.AGWallet, GameConst.AG.Withdraw);
                         mainBalance += resultAG.error_code == 0 ? request.AGWallet : 0;
                         AGBalance = resultAG.error_code == 0 ? request.AGWallet : 0;
                     }
@@ -1912,7 +1885,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var result = await game_helper.PlaytechWithdrawMehtod(PlaytechUsername, request.PlayTechWallet, _hostingEnvironment);
+                        var result = await game_helper.PlaytechWithdrawMehtod(user.PlaytechUsername, request.PlayTechWallet, _hostingEnvironment);
                         dynamic resultPlaytech = JObject.Parse(result);
                         mainBalance += resultPlaytech.result == "Withdraw OK" ? request.PlayTechWallet : 0;
                         PlaytechBalance = resultPlaytech.result == "Withdraw OK" ? request.PlayTechWallet : 0;
@@ -1926,7 +1899,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        dynamic resultJoker = JObject.Parse(await game_helper.JokerDepsoitWithdrawMethod(JokerUsername, -Math.Abs(request.JokerWallet)));
+                        dynamic resultJoker = JObject.Parse(await game_helper.JokerDepsoitWithdrawMethod(user.JokerUsername, -Math.Abs(request.JokerWallet)));
                         mainBalance += resultJoker.Message == null ? request.JokerWallet : 0;
                         JokerBalance = resultJoker.Message == null ? request.JokerWallet : 0;
                     }
@@ -1939,7 +1912,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var resultM8 = XDocument.Parse(await game_helper.M8DepsoitWithdrawMethod(M8Username, request.M8Wallet, GameConst.M8.Withdraw));
+                        var resultM8 = XDocument.Parse(await game_helper.M8DepsoitWithdrawMethod(user.M8Username, request.M8Wallet, GameConst.M8.Withdraw));
                         mainBalance += resultM8.Descendants("errcode").Single().Value == "0" ? request.M8Wallet : 0;
                         M8Balance = resultM8.Descendants("errcode").Single().Value == "0" ? request.M8Wallet : 0;
                     }
@@ -1952,7 +1925,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var resultMaxBet = await MaxBetGameHelper.CallMaxbetDepsoitWithdrawAPI(user.VendorMemberId, request.MaxBetWallet, 0);
+                        var resultMaxBet = await MaxBetGameHelper.CallMaxbetDepsoitWithdrawAPI(user.MaxbetUsername, request.MaxBetWallet, 0);
                         mainBalance += resultMaxBet.ErrorCode == 0 ? request.MaxBetWallet : 0;
                         MaxbetBalance = resultMaxBet.ErrorCode == 0 ? request.MaxBetWallet : 0;
                     }
@@ -1965,7 +1938,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        dynamic result918Kiss = JObject.Parse(await game_helper.Kiss918DepsoitWithdrawMehtod(user.Username918, -Math.Abs(request.Kiss918Wallet)));
+                        dynamic result918Kiss = JObject.Parse(await game_helper.Kiss918DepsoitWithdrawMehtod(user.UserName918, -Math.Abs(request.Kiss918Wallet)));
                         mainBalance += result918Kiss.success == true ? request.Kiss918Wallet : 0;
                         Kiss918Balance = result918Kiss.success == true ? request.Kiss918Wallet : 0;
                     }
@@ -1977,7 +1950,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var resultMega888 = await Mega888GameHelpers.CallWithdrawDepositAPI(user.Mega888LoginId, -Math.Abs(request.Mega888Wallet));
+                        var resultMega888 = await Mega888GameHelpers.CallWithdrawDepositAPI(user.Mega888Username, -Math.Abs(request.Mega888Wallet));
                         mainBalance += resultMega888.error == null ? request.Mega888Wallet : 0;
                         Mega888Balance = resultMega888.error == null ? request.Mega888Wallet : 0;
                     }
@@ -1988,7 +1961,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var resultDg = await DGGameHelpers.CallWithdrawDepsoitAPI(DGUsername, "-" + request.DgWallet);
+                        var resultDg = await DGGameHelpers.CallWithdrawDepsoitAPI(user.DGUsername, "-" + request.DgWallet);
                         mainBalance += resultDg.codeId == 0 ? request.DgWallet : 0;
                         DGBalance = resultDg.codeId == 0 ? request.DgWallet : 0;
                     }
@@ -1999,7 +1972,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var resultSexy = await SexyBaccaratGameHelpers.CallWithdrawAPI(SexyUsername, request.SexyBaccaratWallet);
+                        var resultSexy = await SexyBaccaratGameHelpers.CallWithdrawAPI(user.SexyUsername, request.SexyBaccaratWallet);
                         mainBalance += resultSexy.status == "0000" ? request.SexyBaccaratWallet : 0;
                         SexyBaccaratBalance = resultSexy.status == "0000" ? request.SexyBaccaratWallet : 0;
                     }
@@ -2010,7 +1983,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var resultSA = await SAGameHelpers.CallAPIWithdraw(SAUsername, request.SAWallet);
+                        var resultSA = await SAGameHelpers.CallAPIWithdraw(user.SAUsername, request.SAWallet);
                         mainBalance += resultSA.Descendants("ErrorMsgId").Single().Value == "0" ? request.SAWallet : 0;
                         SABalance = resultSA.Descendants("ErrorMsgId").Single().Value == "0" ? request.SAWallet : 0;
                     }
@@ -2023,7 +1996,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var resultAllbet = await AllBetGameHelpers.DepositWithdrawCallAPI(AllbetUsername, 0, request.AllBetWallet);
+                        var resultAllbet = await AllBetGameHelpers.DepositWithdrawCallAPI(user.AllBetUsername, 0, request.AllBetWallet);
                         mainBalance += resultAllbet.error_code == "OK" ? request.AllBetWallet : 0;
                         AllbetBalance = resultAllbet.error_code == "OK" ? request.AllBetWallet : 0;
                     }
@@ -2036,7 +2009,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var resultWM = await WMGameHelpers.TransferCallAPI(WMUsername, -Math.Abs(request.WMWallet));
+                        var resultWM = await WMGameHelpers.TransferCallAPI(user.WMUsername, -Math.Abs(request.WMWallet));
                         mainBalance += resultWM.errorCode == 0 ? request.WMWallet : 0;
                         WMBalance = resultWM.errorCode == 0 ? request.WMWallet : 0;
                     }
@@ -2049,7 +2022,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var resultPragmatic = await PragmaticGameHelpers.TransferBalance(PragmaticUsername, -Math.Abs(request.PragmaticWallet));
+                        var resultPragmatic = await PragmaticGameHelpers.TransferBalance(user.PragmaticUsername, -Math.Abs(request.PragmaticWallet));
                         mainBalance += resultPragmatic.error == "0" ? request.PragmaticWallet : 0;
                         PragmaticBalance = resultPragmatic.error == "0" ? request.PragmaticWallet : 0;
                     }
@@ -2062,7 +2035,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var resultYeeBet = await YEEBETGameHelpers.TransferBalanceAsync(YeeBetUsername, -Math.Abs(request.YeeBetWallet));
+                        var resultYeeBet = await YEEBETGameHelpers.TransferBalanceAsync(user.YEEBETUsername, -Math.Abs(request.YeeBetWallet));
                         mainBalance += resultYeeBet.result == 0 ? request.YeeBetWallet : 0;
                         YeeBetBalance = resultYeeBet.result == 0 ? request.YeeBetWallet : 0;
                     }
@@ -2074,7 +2047,7 @@ namespace Webet333.api.Controllers
                 {
                     try
                     {
-                        var result = await SBOGameHelpers.CallWithdrawAPI(SBOUsername, Math.Abs(request.SBOWallet));
+                        var result = await SBOGameHelpers.CallWithdrawAPI(user.SBOUsername, Math.Abs(request.SBOWallet));
 
                         mainBalance += result.Error.Id == 0 ? request.SBOWallet : 0;
 
@@ -2105,7 +2078,7 @@ namespace Webet333.api.Controllers
                     SBOBalance
                 );
 
-                return OkResponse(new { mainBalance, MaxbetBalance });
+                return OkResponse(new { mainBalance });
             }
         }
 
@@ -2467,8 +2440,8 @@ namespace Webet333.api.Controllers
                         string username;
                         using (var account_helper = new AccountHelpers(Connection))
                         {
-                            var user = await account_helper.UserGetBalanceInfo(result[i].Id.ToString());
-                            username = user.PragmaticGamePrefix + user.UserId;
+                            var user = await account_helper.GetUsernameInfo(result[i].Id.ToString());
+                            username = user.PragmaticUsername;
                         }
                         var resultRegister = await PragmaticGameHelpers.RegisterCallAPI(username);
                         using (var pragmatic_helper = new PragmaticGameHelpers(Connection))
@@ -2618,35 +2591,35 @@ namespace Webet333.api.Controllers
             UserDetailsTransferResponse userDetails;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.UserId, request.WalletName);
+                var user = await account_helper.GetUsernameInfo(request.UserId, request.WalletName);
                 userDetails = new UserDetailsTransferResponse()
                 {
-                    AGUserName = user.AGGamePrefix + user.Username,
-                    AllBetUsername = user.AllBetGamePrefix + user.UserId,
-                    DGUsername = user.DGGamePrefix + user.Username,
-                    JokerUserName = user.JokerGamePrefix + user.Username,
-                    M8UserName = user.M8GamePrefix + user.Username,
-                    MaxBetUsername = user.VendorMemberId,
-                    MegaUsername = user.Mega888LoginId,
-                    _918KissUserName = user.Username918,
-                    PlaytechUserName = user.PlaytechGamePrefix + user.Username,
-                    PragmaticUsername = user.PragmaticGamePrefix + user.UserId,
+                    AGUserName = user.AGUsername,
+                    AllBetUsername = user.AllBetUsername,
+                    DGUsername = user.DGUsername,
+                    JokerUserName = user.JokerUsername,
+                    M8UserName = user.M8Username,
+                    MaxBetUsername = user.MaxbetUsername,
+                    MegaUsername = user.Mega888Username,
+                    _918KissUserName = user.UserName918,
+                    PlaytechUserName = user.PlaytechUsername,
+                    PragmaticUsername = user.PragmaticUsername,
                     Pussy888Username = user.Pussy888Username,
-                    SAUsername = user.SAGamePrefix + user.Username,
-                    SexyUsername = user.SexyGamePrefix + user.Username,
-                    WMUsername = user.WMGamePrefix + user.UserId,
-                    YEEBETUsername = user.YEEBETGamePrefix + user.UserId,
-                    SBOUsername = user.SBOGamePrefix + user.UserId,
+                    SAUsername = user.SAUsername,
+                    SexyUsername = user.SexyUsername,
+                    WMUsername = user.WMUsername,
+                    YEEBETUsername = user.YEEBETUsername,
+                    SBOUsername = user.SBOUsername,
 
                     FromWalletIsMaintenance = false,
                     FromWalletName = "Main Wallet",
-                    MainWalletBalance = (decimal)user.MainWalletAmount,
-                    ToWalletIsMaintenance = (bool)user.ToWalletMaintenance,
+                    MainWalletBalance = user.MainWalletAmount,
+                    ToWalletIsMaintenance = user.ToWalletMaintenance,
                     ToWalletName = request.WalletName
                 };
-                request.ToWalletId = user.ToWalletId;
-                request.FromWalletId = user.MainWalletId;
-                request.Amount = (decimal)user.MainWalletAmount;
+                request.ToWalletId = user.ToWalletId.ToString();
+                request.FromWalletId = user.MainWalletId.ToString();
+                request.Amount = user.MainWalletAmount;
             }
 
             var responseId = await ApiLogsManager.APITransactionLogsInsert(new ApiLogTransactionRequest { Amount = request.Amount.ToString(), UserId = request.UserId, WalletId = request.ToWalletId, Request = JsonConvert.SerializeObject(request) });
@@ -3217,7 +3190,7 @@ namespace Webet333.api.Controllers
             string password;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(UserEntity.Id.ToString());
+                var user = await account_helper.GetUsernameInfo(UserEntity.Id.ToString());
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
             using (var game_helper = new GameHelpers(Connection))
@@ -3551,15 +3524,17 @@ namespace Webet333.api.Controllers
             }
         }
 
-
         #endregion Get Users Betting Summery
 
         #region Game List Excel file Upload
 
-        //[Authorize]
+        [Authorize]
         [HttpPost(ActionsConst.Game.GameListUpload)]
         public async Task<IActionResult> GameListUpload([FromBody] GameListUploadRequest request, [FromServices] IUploadManager uploadManager, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
+            await CheckUserRole();
+            string adminid = GetUserId(User).ToString();
+
             var extension = ".xlsx";
             var filename = "gamelist" + DateTime.Now.ToString("yyyyMMddHHmmssffff");
             request.File = request.File.Split("base64,")[1] ?? request.File;
@@ -3569,22 +3544,31 @@ namespace Webet333.api.Controllers
             var gameList = JsonConvert.DeserializeObject<List<GameListUploadResponse>>(GameHelpers.ReadExcelasJSON(BaseUrlConfigsOptions.Value.ExcelLocalPath + "\\" + filename + extension));
 
             using (var game_help = new GameHelpers(Connection))
-                await game_help.GameListInsert(gameList, request.Id, baseUrlConfigs.ImageBase);
+            {
+                await game_help.GameListDeleted("PlayTech Wallet");
+                await game_help.GameListInsert(gameList, request.Id, adminid);
+            }
 
             return OkResponse(gameList);
         }
 
-
         #endregion Game List Excel file Upload
 
-        #region Game List Select
+        #region Slot Game List Select
 
         [HttpPost(ActionsConst.Game.SlotsGameSelect)]
         public async Task<IActionResult> SlotsGameSelect([FromBody] GameListSelectRequest request)
         {
+            var role = RoleConst.Users;
+            try
+            {
+                role = GetUserRole(User);
+            }
+            catch (Exception e) { }
+
             using (var game_helper = new GameHelpers(Connection: Connection))
             {
-                var list = await game_helper.GameListSelect(request);
+                var list = await game_helper.GameListSelect(request, role);
                 if (list.Count != 0)
                 {
                     var total = list.FirstOrDefault().Total;
@@ -3610,7 +3594,53 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Game List Select
+        #endregion Slot Game List Select
+
+        #region Slot Game List Update
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.SlotsGameUpdate)]
+        public async Task<IActionResult> SlotsGameUpdate([FromBody] GameListUpdateRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await CheckUserRole();
+
+            var role = GetUserRole(User);
+            var uniqueId = GetUniqueId(User);
+            string adminId = GetUserId(User).ToString();
+
+            using (var game_helper = new GameHelpers(Connection: Connection))
+            {
+                await game_helper.GameListUpdate(request, role, uniqueId, adminId);
+                return OkResponse();
+            }
+        }
+
+        #endregion
+
+        #region Slot Game List Insert
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.SlotsGameInsert)]
+        public async Task<IActionResult> SlotsGameInsert([FromBody] GameListUploadResponse request)
+        {
+            await CheckUserRole();
+            string adminId = GetUserId(User).ToString();
+
+            using (var game_helper = new GameHelpers(Connection: Connection))
+            {
+                var list = new List<GameListUploadResponse>
+                {
+                    request
+                };
+                await game_helper.GameListInsert(list, "PlayTech Wallet", adminId);
+                return OkResponse();
+            }
+        }
+
+        #endregion
 
         #region Hot Slots Game List Select
 
@@ -3646,6 +3676,5 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Hot Slots Game List Select
-
     }
 }
