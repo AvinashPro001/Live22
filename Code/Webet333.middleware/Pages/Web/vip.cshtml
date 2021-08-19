@@ -295,7 +295,8 @@
     </div>
 </div>
 
-<script>function openCity1(evt1, cityName1) {
+<script>
+    function openCity1(evt1, cityName1) {
         var i, tabcontent_benefits_referal, tablinks_benefits_referal;
         tabcontent_benefits_referal = document.getElementsByClassName("tabcontent_benefits_referal");
         for (i = 0; i < tabcontent_benefits_referal.length; i++) {
@@ -309,6 +310,5 @@
         evt1.currentTarget.className += " active";
     }
 
-    if (GetLocalStorage('currentUser') == null) {
-        $(".vip_sec_logo_left").hide();
-    }</script>
+    if (GetLocalStorage('currentUser') == null) $(".vip_sec_logo_left").hide();
+</script>

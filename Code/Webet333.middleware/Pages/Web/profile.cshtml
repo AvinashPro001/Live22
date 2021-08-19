@@ -207,7 +207,7 @@
                                                         <p class="big no-mar lang blk-text" key="deposit_date_time">Date Time:</p>
                                                     </label>
                                                     <label class="fright card-number mendatory">
-                                                        <input  type="text" class="reg-form " placeholder="Select Date" autocomplete="off" id="datepicker0" data-date-format="yyyy-mm-dd hh:ii" value="" onkeydown="return false;">
+                                                        <input type="text" class="reg-form " placeholder="Select Date" autocomplete="off" id="datepicker0" data-date-format="yyyy-mm-dd hh:ii" value="" onkeydown="return false;">
                                                     </label>
                                                 </li>
                                                 <li class="pad-btm-ten">
@@ -321,10 +321,7 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
-
                     </div>
 
                     <div id="withdraw_amount" class="tabcontent white-bg-tab-panel account-reg radius-none"
@@ -913,7 +910,7 @@
                                     </div>
                                 </div>
 
-                                 <div class="col-sm-12 col-lg-3 col-sm-4">
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
                                     <div class="in-wallet-chips">
                                         <div class="chip-margin">
                                             <ul>
@@ -1408,32 +1405,21 @@
     </div>
 </div>
 
-
 <div id="deposit_promotion_description_section"></div>
 
-
 <script>
-    window.onhashchange = function () {
-        OpenTabOnHashChange()
-    }
+    window.onhashchange = function () { OpenTabOnHashChange() }
 
-    $(document).ready(function () {
-        OpenTabOnHashChange();
-    });
+    $(document).ready(function () { OpenTabOnHashChange(); });
 
     function OpenTabOnHashChange() {
         if (window.location.hash) {
             var hash = window.location.hash.substring(1);
-            if (hash == 'deposit') {
-                document.getElementById("deposit_tab").click();
-            } if (hash == 'withdraw') {
-                document.getElementById("withdraw_tab").click();
-            } if (hash == 'transfer') {
-                document.getElementById("transfer_tab").click();
-            }
+            if (hash == 'deposit') document.getElementById("deposit_tab").click();
+            if (hash == 'withdraw') document.getElementById("withdraw_tab").click();
+            if (hash == 'transfer') document.getElementById("transfer_tab").click();
         }
-        else
-            document.getElementById("profile_tab").click();
+        else document.getElementById("profile_tab").click();
     }
 
     function openCity(evt, cityName, linknum) {
