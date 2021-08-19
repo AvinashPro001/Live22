@@ -561,5 +561,25 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Users Reward History
+
+        #region VIP Level Repost
+
+        [HttpPost(ActionsConst.Users.VIPLevelReportSelect)]
+        public async Task<IActionResult> VIPLevelReportSelect([FromBody] DateRangeFilterRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            await ValidateUser(role: RoleConst.Admin);
+
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.User.DailyReportSelect, request);
+
+                return OkResponse(result);
+            }
+        }
+
+        #endregion
     }
 }

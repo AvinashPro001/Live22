@@ -216,6 +216,8 @@
             public const string AdminModuleSelectForDropdown = "admin/module/select_for_dropdown";
 
             public const string DailyReportSelect = "daily/report/select";
+
+            public const string VIPLevelReportSelect = "VIPLevel/report/select";
         }
 
         public class Promotions
