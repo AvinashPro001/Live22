@@ -517,7 +517,7 @@ async function Deposit(IsOnlinePayment) {
             }
         }
     }
-    catch(e) {
+    catch (e) {
         IsDepositExecute = false;
     }
 }
@@ -1233,5 +1233,7 @@ async function CheckSupportGame() {
         ButtonDisabled("sexy-wallet-allin", !res.response.data[0].IsSexyBaccarat);
         ButtonDisabled("wm-wallet-allin", !res.response.data[0].IsWM);
         ButtonDisabled("yeebet-wallet-allin", !res.response.data[0].IsYEEBET);
+        ButtonDisabled("sbo-wallet-allin", !res.response.data[0].IsSBO);
+        ButtonDisabled("gameplay-wallet-allin", !res.response.data[0].IsGamePlay);
     }
 }

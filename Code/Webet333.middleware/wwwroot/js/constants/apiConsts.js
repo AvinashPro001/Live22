@@ -1,6 +1,6 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
-let PortAPI = '8080';
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let PortAPI = '9001';
 
 switch (environmentName.toUpperCase()) {
     case 'DEBUG':
@@ -12,8 +12,8 @@ switch (environmentName.toUpperCase()) {
         baseUrlWithoutVersion = 'https://api.wb3api.com';
         break;
     case 'LOCAL':
-        baseUrl = 'http://47.242.143.182:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://47.242.143.182:' + PortAPI;
+        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
         break;
 }
 
@@ -78,6 +78,7 @@ var gameBalanceEndPoints = {
     pragmaticBalance: 'gamebalance/pragmatic',
     yeebetBalance: 'gamebalance/yeebet',
     sboBalance: 'gamebalance/sbo',
+    gameplayBalance: 'gamebalance/gamePlay'
 };
 
 var transactionEndPoints = {
@@ -112,6 +113,7 @@ var gameRegisterEndPoints = {
     pragmaticRegister: 'pragmatic/register',
     dgRegister: 'dg/register',
     sboRegister: 'sbo/register/player',
+    gameplayRegister: 'gameplay/register'
 }
 
 var gameLoginEndPoints = {
@@ -125,7 +127,8 @@ var gameLoginEndPoints = {
     dgLogin: 'dg/login',
     m8Login: 'm8/login',
     yeebetLogin: 'yeebet/login',
-    sboLogin: 'sbo/login'
+    sboLogin: 'sbo/login',
+    gameplayLogin: 'gameplay/login'
 }
 
 var gameSettingEndPoints = {
@@ -136,5 +139,5 @@ var gameSettingEndPoints = {
 }
 
 var SettingEndPoints = {
-    checkUsernameExists:'account/check/username/exists'
+    checkUsernameExists: 'account/check/username/exists'
 }

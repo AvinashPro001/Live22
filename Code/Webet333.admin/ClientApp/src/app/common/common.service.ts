@@ -281,7 +281,8 @@ export class CommonService {
         PragmaticPlay: 'Pragmatic Play',
         MaxBet: 'MaxBet',
         YeeBet: 'YeeBet',
-        SBO: 'SBO'
+        SBO: 'SBO',
+        GamePlay: 'GamePlay'
     }
 
     //#endregion Game List
@@ -304,7 +305,8 @@ export class CommonService {
         PragmaticPlay: 'Pragmatic Wallet',
         MaxBet: 'MaxBet Wallet',
         YeeBet: 'YeeBet Wallet',
-        SBO: 'SBO Wallet'
+        SBO: 'SBO Wallet',
+        GamePlay: 'GamePlay Wallet'
     }
 
     //#endregion Game List
