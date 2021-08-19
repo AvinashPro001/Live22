@@ -587,6 +587,7 @@ function HotGameSLiderJs() {
         cssEase: 'linear',
         slidesToShow: 4,
         slidesToScroll: 1,
+        arrows: false,
         infinite: true,
         swipeToSlide: true,
         pauseOnHover: true,
