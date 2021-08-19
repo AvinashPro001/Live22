@@ -1,6 +1,6 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
-let PortAPI = '8080';
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let PortAPI = '9001';
 let PortWEB = '9002';
 
 switch (environmentName.toUpperCase()) {
@@ -17,8 +17,8 @@ switch (environmentName.toUpperCase()) {
         mobUrl = 'https://www.webet333.net/mobile/';
         break;
     case 'LOCAL':
-        baseUrl = 'http://47.242.143.182:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://47.242.143.182:' + PortAPI;
+        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
         webUrl = 'http://127.0.0.1:' + PortWEB;
         mobUrl = 'http://127.0.0.1:' + PortWEB + '/mobile/';
         break;
@@ -144,6 +144,9 @@ var apiEndPoints = {
     SBORegister: 'sbo/register/player',
     SBOLogin: 'sbo/login',
 
+    GamePlayRegister: 'gameplay/register',
+    GamePlayLogin: 'gameplay/login',
+
     kiss918Balance: 'gamebalance/918kiss',
     mega888Balance: 'gamebalance/mega888',
     jokerBalance: 'gamebalance/joker',
@@ -160,6 +163,7 @@ var apiEndPoints = {
     PragmaticBalance: 'gamebalance/pragmatic',
     YeeBetBalance: 'gamebalance/yeebet',
     SBOBalance: 'gamebalance/sbo',
+    GamePlayBalance: 'gamebalance/gameplay',
 
     userDetaisSetGameBalance: 'userdetails/set',
 

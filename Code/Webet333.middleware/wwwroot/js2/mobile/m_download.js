@@ -16,7 +16,7 @@ async function authorize() {
         document.getElementById('Jokerresetpassword').innerText = 'Plase Login !';
         document.getElementById('Pussy888userName').innerText = 'Plase Login !';
         document.getElementById('Pussy888password').innerText = 'Plase Login !';
-        if (window.location.href.toLowerCase().includes("mobile?p=download") )
+        if (window.location.href.toLowerCase().includes("mobile?p=download"))
             document.getElementById('reset918password').style.display = 'none';
     }
     else {
@@ -40,7 +40,7 @@ async function authorize() {
 
         if ($('#M8Download').prop('id') !== '') {
             document.getElementById('JokeruserName').innerText = jokerConstParameterValue.AppID + '.' + usernamePrifix;
-            document.getElementById('Jokerresetpassword').innerText = dec(localStorage.getItem('currentUserData')); 
+            document.getElementById('Jokerresetpassword').innerText = dec(localStorage.getItem('currentUserData'));
             document.getElementById('_918userName').innerText = res.data.username918;
             document.getElementById('_918resetpasswordDownload').innerText = res.data.password918;
             document.getElementById('Pussy888userName').innerText = res.data.usernamePussy888;
@@ -121,7 +121,7 @@ async function Mega888UserName() {
     if (GetLocalStorage('currentUser') !== null) {
         var resUserData = await GetMethod(apiEndPoints.getProfile);
         document.getElementById("mega888username").innerText = resUserData.data.loginid;
-        document.getElementById("mega888password").innerText = dec(localStorage.getItem('currentUserData')); 
+        document.getElementById("mega888password").innerText = dec(localStorage.getItem('currentUserData'));
     }
     else {
         document.getElementById("mega888username").innerText = "Please Login !";
@@ -185,81 +185,45 @@ async function GameAppBarcode() {
 }
 
 let resUserData;
-try {
-    resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-}
-catch{
-
-}
+try { resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails'))); }
+catch { }
 
 function LaunchGameAndroid(gameid) {
     let resUserData;
-    try {
-        resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    }
-    catch{
-
-    }
+    try { resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails'))); }
+    catch { }
     if (gameid == 1) {
-        try {
-            window.location = "lobbykissandroid://lobbykissandroid?account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918
-        }
-        catch{
-            self.location = kiss918_apkURL;
-        }
+        try { window.location = "lobbykissandroid://lobbykissandroid?account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918 }
+        catch { self.location = kiss918_apkURL; }
     }
     if (gameid == 2) {
-        try {
-            window.location = "pussy888://pussy888.com?user=" + resUserData.data.usernamePussy888 + "&password=" + resUserData.data.passwordPussy888
-        }
-        catch{
-            self.location = pussy888_apkURL;
-        }
+        try { window.location = "pussy888://pussy888.com?user=" + resUserData.data.usernamePussy888 + "&password=" + resUserData.data.passwordPussy888 }
+        catch { self.location = pussy888_apkURL; }
     }
 }
 
 function LaunchGameIOS64(gameid) {
     let resUserData;
-    try {
-        resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    }
-    catch{
-
-    }
+    try { resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails'))); }
+    catch { }
     if (gameid == 1) {
-        try {
-            window.location = "LobbyKiss64://account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918
-        }
-        catch{
-            self.location = kiss918_iosURL;
-        }
+        try { window.location = "LobbyKiss64://account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918 }
+        catch { self.location = kiss918_iosURL; }
     }
 
     if (gameid == 2) {
-        try {
-            window.location = "pussy888://pussy888.com?user" + resUserData.data.usernamePussy888 + "&password=" + resUserData.data.passwordPussy888
-        }
-        catch{
-            self.location = pussy888_iosURL;
-        }
+        try { window.location = "pussy888://pussy888.com?user" + resUserData.data.usernamePussy888 + "&password=" + resUserData.data.passwordPussy888 }
+        catch { self.location = pussy888_iosURL; }
     }
 }
 
 function LaunchGameIOS32(gameid) {
     let resUserData;
-    try {
-        resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    }
-    catch{
-
-    }
+    try { resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails'))); }
+    catch { }
     if (gameid == 1) {
-        try {
-            window.location = "LobbyKiss32://account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918
-        }
-        catch{
-            self.location = kiss_ios32URL;
-        }
+        try { window.location = "LobbyKiss32://account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918 }
+        catch { self.location = kiss_ios32URL; }
     }
 }
 

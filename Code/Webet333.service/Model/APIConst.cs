@@ -3,7 +3,7 @@
     public class APIConst
     {
 #if DEBUG
-        public const string baseUrl = "https://uatapi.webet333.com/api/v1/";
+        public const string baseUrl = "https://uatapi.wb3api.com/api/v1/";
 #elif STAG
         public const string baseUrl = "https://api.wb3api.com/api/v1/";
 #endif
@@ -22,12 +22,14 @@
 
         public const string registerM8 = "Game/Register/M8";
 
-        public const string registerMaxBet = "https://uatapi.webet333.com/api/v1/";
+        public const string registerMaxBet = "https://uatapi.wb3api.com/api/v1/";
 
-        public const string registerMega888 = "https://uatapi.webet333.com/api/v1/";
+        public const string registerMega888 = "https://uatapi.wb3api.com/api/v1/";
 
         public const string registerYeeBet = "yeebet/register";
 
         public const string RegisterSBO = "sbo/register/player";
+
+        public const string RegisterGamePlay = "gameplay/register";
     }
 }

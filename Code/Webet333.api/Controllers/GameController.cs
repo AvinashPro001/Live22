@@ -38,6 +38,7 @@ using Webet333.models.Request.User;
 using Webet333.models.Response.Account;
 using Webet333.models.Response.Game;
 using Webet333.models.Response.Game.DG;
+using Webet333.models.Response.Game.GamePlay;
 using Webet333.models.Response.Game.Joker;
 using Webet333.models.Response.Game.Kiss918;
 using Webet333.models.Response.Game.Pussy888;
@@ -833,6 +834,21 @@ namespace Webet333.api.Controllers
 
         #endregion SBO Game
 
+        #region GamePlay Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.Manually_GamePlay_Betting_Details)]
+        public async Task<IActionResult> Manually_GamePlay_Betting_Details([FromBody] PragmaticBettingDetailsRequest request)
+        {
+            await CheckUserRole();
+
+            var response = await GamePlayGameHelpers.CallBettingDetailsAPI(request);
+
+            return OkResponse(response);
+        }
+
+        #endregion GamePlay Game
+
         #endregion Manually Game Betting Details
 
         #region GAME BETTING DETAILS
@@ -1365,6 +1381,36 @@ namespace Webet333.api.Controllers
 
         #endregion SBO Betting Details
 
+        #region GamePlay Betting Details
+
+        [HttpGet(ActionsConst.Game.GamePlay_Betting_Details)]
+        public async Task<IActionResult> GamePlay_Betting_Details()
+        {
+            DateTime date = DateTime.Now;
+
+            PragmaticBettingDetailsRequest request = new PragmaticBettingDetailsRequest
+            {
+                StartTimeStamp = date.AddMinutes(-15)   //  Betting details getting after 10 - 15 min.
+            };
+
+            var response = await GamePlayGameHelpers.CallBettingDetailsAPI(request);
+
+            if (response.Status == 0 &&
+                response.Details.Any())
+                using (var game_helper = new GameHelpers(Connection))
+                {
+                    var jsonString = JsonConvert.SerializeObject(response.Details);
+                    await game_helper.GamePlayServicesInsert(jsonString);
+                }
+
+            return OkResponse(new
+            {
+                jsonString = JsonConvert.SerializeObject(response)
+            });
+        }
+
+        #endregion GamePlay Betting Details
+
         #endregion GAME BETTING DETAILS
 
         #region Game Category
@@ -1696,6 +1742,32 @@ namespace Webet333.api.Controllers
 
         #endregion SBO Game
 
+        #region GamePlay Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.GamePlayBettingDetailsSave)]
+        public async Task<IActionResult> GamePlayBettingDetails_Insert([FromBody] GameBettingDetailsInsertRequest request)
+        {
+            await CheckUserRole();
+
+            if (request.JsonData != null)
+            {
+                List<GamePlayGetBettingDetailsAPIResponseDetail> result = JsonConvert.DeserializeObject<List<GamePlayGetBettingDetailsAPIResponseDetail>>(request.JsonData.ToString());
+
+                if (result.Any())
+                {
+                    using (var game_help = new GameHelpers(Connection: Connection))
+                    {
+                        await game_help.GamePlayServicesInsert(request.JsonData);
+                    }
+                }
+            }
+
+            return OkResponse();
+        }
+
+        #endregion GamePlay Game
+
         #endregion Game Betting Details save
 
         #region User Balance
@@ -1851,7 +1923,8 @@ namespace Webet333.api.Controllers
                 PragmaticBalance = 0.0m,
                 PussyBalance = 0.0m,
                 YeeBetBalance = 0.0m,
-                SBOBalance = 0.0m;
+                SBOBalance = 0.0m,
+                GamePlayBalance = 0.0m;
 
             using (var game_helper = new GameHelpers(Connection))
             {
@@ -2057,6 +2130,18 @@ namespace Webet333.api.Controllers
                     { }
                 }
 
+                if (request.GamePlayWallet != 0)
+                {
+                    try
+                    {
+                        var result = await GamePlayGameHelpers.CallTransferAPI(user.GamePlayUsername, Math.Abs(request.GamePlayWallet), GameConst.GamePlay.FundType.Withdraw);
+                        mainBalance += result.Status == 0 ? request.GamePlayWallet : 0;
+                        GamePlayBalance = result.Status == 0 ? request.GamePlayWallet : 0;
+                    }
+                    catch
+                    { }
+                }
+
                 await game_helper.BalanceRestore(
                     request.Id, UserId,
                     mainBalance,
@@ -2075,7 +2160,8 @@ namespace Webet333.api.Controllers
                     WMBalance,
                     PragmaticBalance,
                     YeeBetBalance,
-                    SBOBalance
+                    SBOBalance,
+                    GamePlayBalance
                 );
 
                 return OkResponse(new { mainBalance });
@@ -2610,6 +2696,7 @@ namespace Webet333.api.Controllers
                     WMUsername = user.WMUsername,
                     YEEBETUsername = user.YEEBETUsername,
                     SBOUsername = user.SBOUsername,
+                    GamePlayUsername = user.GamePlayUsername,
 
                     FromWalletIsMaintenance = false,
                     FromWalletName = "Main Wallet",
@@ -3094,6 +3181,7 @@ namespace Webet333.api.Controllers
                 var PragmaticGame = result.Where(x => x.GameName == GameConst.GamesNames.Pragmatic).ToList();
                 var YeeBetGame = result.Where(x => x.GameName == GameConst.GamesNames.YeeBet).ToList();
                 var SBOGame = result.Where(x => x.GameName == GameConst.GamesNames.SBO).ToList();
+                var GamePlayGame = result.Where(x => x.GameName == GameConst.GamesNames.GamePlay).ToList();
 
                 var response = new
                 {
@@ -3112,9 +3200,11 @@ namespace Webet333.api.Controllers
                     WMTurover = WMGame.Count > 0 ? WMGame.FirstOrDefault().Turnover : 0,
                     PragmaticTurover = PragmaticGame.Count > 0 ? PragmaticGame.FirstOrDefault().Turnover : 0,
                     YeeBetTurover = YeeBetGame.Count > 0 ? YeeBetGame.FirstOrDefault().Turnover : 0,
-                    SBOTurover = SBOGame.Count > 0 ? SBOGame.FirstOrDefault().Turnover : 0
+                    SBOTurover = SBOGame.Count > 0 ? SBOGame.FirstOrDefault().Turnover : 0,
+                    GamePlayTurover = GamePlayGame.Count > 0 ? GamePlayGame.FirstOrDefault().Turnover : 0
                 };
-                decimal total = response.agTurover + response.m8Turover + response.maxbetTurover + response.playtechTurover + response.dgTurover + response.saTurover + response.sexyTurover + response.AllBetTurover + response.WMTurover + response.PragmaticTurover + response.YeeBetTurover + response.SBOTurover;
+
+                decimal total = response.agTurover + response.m8Turover + response.maxbetTurover + response.playtechTurover + response.dgTurover + response.saTurover + response.sexyTurover + response.AllBetTurover + response.WMTurover + response.PragmaticTurover + response.YeeBetTurover + response.SBOTurover + response.GamePlayTurover;
 
                 return OkResponse(new { response, Total = total });
             }

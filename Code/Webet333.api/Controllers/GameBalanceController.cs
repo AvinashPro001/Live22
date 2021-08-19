@@ -656,5 +656,35 @@ namespace Webet333.api.Controllers
         }
 
         #endregion SBO Balance
+
+        #region GamePlay Balance
+
+        [Authorize]
+        [HttpPost(ActionsConst.GameBalance.GamePlayBalance)]
+        public async Task<IActionResult> GamePlayBalance([FromBody] UserBalanceRequest request)
+        {
+            if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            if (GetUserRole(User) == RoleConst.Users) request.Id = GetUserId(User).ToString();
+
+            if (string.IsNullOrWhiteSpace(request.Id)) return BadResponse(ErrorConsts.InvalidModelstate);
+
+            dynamic previousBalance = 0.00;
+
+            using (var gamehelper = new GameBalanceHelpers(Connection))
+            {
+                string balance = await gamehelper.CallGamePlayGameBalance(request.Username);
+                previousBalance = await gamehelper.GamePlayBalanceUpdate(request.Id, balance);
+
+                return OkResponse(new
+                {
+                    balance = balance,
+                    previousBalance.PreviousBalance
+                });
+            }
+        }
+
+        #endregion GamePlay Balance
     }
 }

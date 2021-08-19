@@ -39,6 +39,7 @@ export class SlotGameListComponent implements OnInit {
     loadingIndicator = false;
     PlaytechImagePath = "../../../../assets/img/playtech.png";
     PragmaticImagePath = "../../../../assets/img/pragmatic.png";
+    GamePlayImagePath = "../../../../assets/img/gameplay.png";
     SlotGameData: any;
     viewData: any;
     displayDIVFile: boolean = false;
@@ -84,8 +85,14 @@ export class SlotGameListComponent implements OnInit {
             res.data.result.forEach(el => {
 
                 var path = "";
-                if (el.WalletName == "Playtech Slot") path = this.PlaytechImagePath
-                if (el.WalletName == "Pragmatic Play") path = this.PragmaticImagePath
+                switch (el.WalletName) {
+                    case 'Playtech Slot': path = this.PlaytechImagePath;
+                        break;
+                    case 'Pragmatic Play': path = this.PragmaticImagePath;
+                        break;
+                    case this.commonService.GameName.GamePlay: path = this.GamePlayImagePath;
+                        break;
+                }
 
                 this.rows.push({
                     No: ++i,
@@ -199,6 +206,15 @@ export class SlotGameListComponent implements OnInit {
     RefreshPragmaticGame() {
         let data = {};
         this.adminService.add<any>(customer.PragmaticGameListUpdate, data).subscribe(async res => {
+            this.ngOnInit();
+            this.toasterService.pop('success', 'Success', res.message);
+        }, error => {
+            this.toasterService.pop('error', 'Error', error.error.message);
+        });
+    }
+
+    RefreshGameplayGame() {
+        this.adminService.get<any>(customer.GameplayGameListUpdate).subscribe(async res => {
             this.ngOnInit();
             this.toasterService.pop('success', 'Success', res.message);
         }, error => {
