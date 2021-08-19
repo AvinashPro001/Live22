@@ -32,8 +32,8 @@ async function authorize() {
 
         if (GameUsername == null) {
             var username = await PostMethod(apiEndPoints.getUsername, {});
-            sessionStorage.setItem('GameUsername', enc(JSON.stringify(username)));
-            GameUsername = username;
+            sessionStorage.setItem('GameUsername', enc(JSON.stringify(username.data)));
+            GameUsername = username.data;
         }
 
         var usernamePrifix = GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, "")

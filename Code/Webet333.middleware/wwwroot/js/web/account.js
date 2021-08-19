@@ -534,8 +534,10 @@ async function SendOTP(number) {
         ShowSuccess(ChangeErroMessage("otp_send_success"));
 
     }
+    else {
+        ShowError(res.response.message)
+    }
     LoaderHide();
-
 }
 
 async function VerifiedOTP() {
