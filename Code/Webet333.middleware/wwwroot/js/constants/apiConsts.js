@@ -112,6 +112,7 @@ var gameRegisterEndPoints = {
     WMRegister: 'wm/register',
     pragmaticRegister: 'pragmatic/register',
     dgRegister: 'dg/register',
+    yeebetRegister: 'yeebet/register',
     sboRegister: 'sbo/register/player',
     gameplayRegister: 'gameplay/register'
 }

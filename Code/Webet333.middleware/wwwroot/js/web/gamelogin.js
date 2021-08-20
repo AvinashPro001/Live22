@@ -231,6 +231,7 @@ async function OpenWMGame() {
 }
 
 async function Open918KissGame() {
+    window.open("../Web/slots#_918Kiss-game");
     if (GetLocalStorage("currentUser") != null) {
         let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
         if (resSelectUser._918Kiss !== true) {
@@ -239,10 +240,10 @@ async function Open918KissGame() {
             await PostMethod(gameRegisterEndPoints.register918Kiss, model918Kiss);
         }
     }
-    return window.open("../Web/slots#_918Kiss-game");
 }
 
 async function OpenMega888Game() {
+    window.open("../Web/slots#Mega888-game");
     if (GetLocalStorage("currentUser") != null) {
         let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
         if (resSelectUser.Mega888 !== true) {
@@ -251,11 +252,10 @@ async function OpenMega888Game() {
             await PostMethod(gameRegisterEndPoints.mega888Register, userMegaa88Model);
         }
     }
-    return window.open("../Web/slots#Mega888-game");
-
 }
 
 async function OpenJokerGame() {
+    window.open("../Web/slots#Joker-game");
     if (GetLocalStorage("currentUser") != null) {
         let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
         if (resSelectUser.Joker !== true) {
@@ -264,10 +264,10 @@ async function OpenJokerGame() {
             await PostMethod(gameRegisterEndPoints.registerJoker, modelJoker);
         }
     }
-    return window.open("../Web/slots#Joker-game");
 }
 
 async function OpenPussy888Game() {
+    window.open("../Web/slots#Pussy888-game");
     if (GetLocalStorage("currentUser") != null) {
         let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
         if (resSelectUser.Pussy888 !== true) {
@@ -276,7 +276,6 @@ async function OpenPussy888Game() {
             await PostMethod(gameRegisterEndPoints.pussyRegister, model);
         }
     }
-    return window.open("../Web/slots#Pussy888-game");
 
 }
 
@@ -392,30 +391,34 @@ async function LoginGameplayGame(GameCode) {
 }
 
 async function OpenPragmaticGame() {
+    window.open("../Web/slots#pragmatic-game");
     if (GetLocalStorage("currentUser") != null) {
         PragmaticBrokenStatusInterval();
         let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
         if (resSelectUser.Pragmatic !== true) {
             let userRegisterModel = {
             };
-            var res = await PostMethod(gameRegisterEndPoints.pragmaticRegister, userRegisterModel);
-            if (res.status == 200)
-                if (res.response.data.error == "0") {
-                }
+            await PostMethod(gameRegisterEndPoints.pragmaticRegister, userRegisterModel);
         }
     }
-    return window.open("../Web/slots#pragmatic-game");
 }
 
 async function OpenPlaytechGame(IsSlots) {
-    if (IsSlots) window.open("../Web/slots");
+    if (IsSlots) {
+        return window.open("../Web/slots");
+    }
+    else {
+        if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
+    }
 
-    if (GetLocalStorage("currentUser") != null) {
-        let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
-        if (resSelectUser.Playtech === false) await PostMethod(gameRegisterEndPoints.registerPlaytech, modelAG);
-        if (!IsSlots) LoginPlaytechGame("7bal");
+    LoginPlaytechGame("7bal")
+    PlaytechBrokenStatusInterval();
+    let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+    if (resSelectUser.Playtech === false) {
+        await PostMethod(gameRegisterEndPoints.registerPlaytech, modelAG);
     }
 }
+
 async function LoginPragmaticGame(GameCode) {
     if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
     window.open("../Web/game");
@@ -424,7 +427,9 @@ async function LoginPragmaticGame(GameCode) {
         isMobile: false,
     }
     var res = await PostMethod(gameLoginEndPoints.pragmaticLogin, model)
-    SetLocalStorage("gameURL", res.response.data.gameURL);
+    if (res.status == 200)
+        if (res.response.data.error == "0")
+            SetLocalStorage("gameURL", res.response.data.gameURL);
 }
 
 

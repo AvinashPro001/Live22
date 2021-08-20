@@ -184,5 +184,5 @@ var apiEndPoints = {
 
     checkUsernameExists: 'account/check/username/exists',
 
-    getUsername: '/api/v1/account/get_username_by_id'
+    getUsername: 'api/v1/account/get_username_by_id'
 };

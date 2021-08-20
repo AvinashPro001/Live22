@@ -62,9 +62,8 @@ async function WalletBalance() {
 
     if (GameUsername == null) {
         var username = await PostMethod(apiEndPoints.getUsername, {});
-        debugger
-        sessionStorage.setItem('GameUsername', enc(JSON.stringify(username)));
-        GameUsername = username;
+        sessionStorage.setItem('GameUsername', enc(JSON.stringify(username.data)));
+        GameUsername = username.data;
     }
     //#region Get user walletId
     MainWalletBalance();
@@ -147,9 +146,8 @@ async function RestoreBalance() {
 
         if (GameUsername == null) {
             var username = await PostMethod(apiEndPoints.getUsername, {});
-            debugger
-            sessionStorage.setItem('GameUsername', enc(JSON.stringify(username)));
-            GameUsername = username;
+            sessionStorage.setItem('GameUsername', enc(JSON.stringify(username.data)));
+            GameUsername = username.data;
         }
 
         //#region Get user walletId
@@ -582,8 +580,8 @@ async function WalletBalanceMaxTransfer(walletData) {
 
     if (GameUsername == null) {
         var username = await PostMethod(apiEndPoints.getUsername, {});
-        sessionStorage.setItem('GameUsername', enc(JSON.stringify(username)));
-        GameUsername = username;
+        sessionStorage.setItem('GameUsername', enc(JSON.stringify(username.data)));
+        GameUsername = username.data;
     }
 
     //#region Get user walletId
