@@ -607,10 +607,13 @@ async function HotSlotsgame() {
         gameList = list.response.data.result;
         var html = "";
         for (i = 0; i < gameList.length; i++) {
-            if (gameList[i].WalletName == "Playtech Slot")
-                html += '<div class="item"><div class="game_boxes hand-curson" onclick="LoginPlaytechGame(\'' + gameList[i].GameCode + '\')"><img src="' + gameList[i].ImagePath2 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
-            else
-                html += '<div class="item"><div class="game_boxes hand-curson" onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\')"><img src="' + gameList[i].ImagePath1 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
+
+            if (gameList[i].WalletName == "Playtech Slot") {
+                html += '<div class="item"><div class="game_boxes hand-curson" onclick="LoginPlaytechGame(\'' + gameList[i].GameCode +'\','+ true +')"><img src="' + gameList[i].ImagePath2 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
+            }
+            else {
+                html += '<div class="item"><div class="game_boxes hand-curson" onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\',' + true +')"><img src="' + gameList[i].ImagePath1 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
+            }
         }
         SetAllValueInElement("hot-game-section", html)
         HotGameSLiderJs()
