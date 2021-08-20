@@ -66,6 +66,9 @@ export class AdjustmentAddComponent implements OnInit {
     SBOBalance: any;
     SBOUsername: any;
 
+    GamePlayBalance: any;
+    GamePlayUsername: any;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -109,6 +112,8 @@ export class AdjustmentAddComponent implements OnInit {
             this.pragmaticUsername = res.data.pragmaticUsername;
             this.YeeBetUsername = res.data.yeeBetUsername;
             this.SBOUsername = res.data.sboUsername;
+            this.GamePlayUsername = res.data.gameplayUsername;
+
             this.Kiss918Balance(newVal);
             this.Mega888(newVal);
             this.Maxbet(newVal);
@@ -126,6 +131,7 @@ export class AdjustmentAddComponent implements OnInit {
             this.Pragmatic(newVal);
             this.YeeBet(newVal);
             this.SBO(newVal);
+            this.GamePlay(newVal);
         })
     }
 
@@ -402,6 +408,15 @@ export class AdjustmentAddComponent implements OnInit {
         })
     }
 
+    GamePlay(id) {
+        let data = {
+            id: id,
+            username: this.GamePlayUsername
+        }
+        this.adminService.add<any>(gameBalance.GamePlay, data).subscribe(res => {
+            this.GamePlayBalance = res.data.balance;
+        })
+    }
     //#endregion Wallet Balance
 
     //#region Check Permission

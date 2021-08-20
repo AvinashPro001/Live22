@@ -46,13 +46,19 @@ export class GameLastBettingUpdateComponent implements OnInit {
                     No: ++i,
                     Id: el.id,
                     GameName: el.GameName,
-                    LastUpdate: el.LastUpdate
+                    LastUpdate: this.ReplaceDateTime(el.LastUpdate)
                 });
                 this.loadingIndicator = false;
                 this.rows = [...this.rows]
             })
         });
     }
+
+    //#region Replace Time
+
+    ReplaceDateTime(date) { return date.replace("T", " "); }
+
+    //#endregion
 
     //#region Check Permission
 

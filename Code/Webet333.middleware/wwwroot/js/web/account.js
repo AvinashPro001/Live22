@@ -669,9 +669,7 @@ async function regisrationGame() {
                 SetSessionStorage('userDetails', Encryption(JSON.stringify(res.response.data)));
             }
 
-            let userModel = {
-                id: resUserData.id
-            };
+            let userModel = { id: resUserData.id };
             let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
             if (
                 resSelectUser === null ||
@@ -689,7 +687,8 @@ async function regisrationGame() {
                 resSelectUser.AllBet === false ||
                 resSelectUser.WM === false ||
                 resSelectUser.Pragmatic === false ||
-                resSelectUser.SBO === false
+                resSelectUser.SBO === false ||
+                resSelectUser.GamePlay === false
             ) {
                 var res = await PostMethod(accountEndPoints.gameRegisterCheck, userModel);
                 resSelectUser = res.response.data;
@@ -705,165 +704,111 @@ async function regisrationGame() {
                     firstname: resUserData.name,
                     lastname: "Webet333"
                 };
-                try {
-                    await PostMethod(gameRegisterEndPoints.registerMaxBet, userMaxBet);
-                }
-                catch (e) {
-                }
+                try { await PostMethod(gameRegisterEndPoints.registerMaxBet, userMaxBet); }
+                catch (e) { }
             }
 
             if (resSelectUser.M8 !== true) {
-                try {
-                    let modelM8 = {
-                    };
-                    await PostMethod(gameRegisterEndPoints.registerM8, modelM8);
-                }
-                catch (ex) {
-                }
+                let modelM8 = {};
+                try { await PostMethod(gameRegisterEndPoints.registerM8, modelM8); }
+                catch (ex) { }
             }
 
             if (resSelectUser.AG !== true) {
-                try {
-                    let modelAG = {
-                    };
-                    await PostMethod(gameRegisterEndPoints.registerAG, modelAG);
-                }
-                catch (ex) {
-                }
+                let modelAG = {};
+                try { await PostMethod(gameRegisterEndPoints.registerAG, modelAG); }
+                catch (ex) { }
             }
 
             if (resSelectUser.Playtech !== true) {
-                try {
-                    let modelPlaytech = {
-                    };
-                    await PostMethod(gameRegisterEndPoints.registerPlaytech, modelPlaytech);
-                }
-                catch (ex) {
-                }
+                let modelPlaytech = {};
+                try { await PostMethod(gameRegisterEndPoints.registerPlaytech, modelPlaytech); }
+                catch (ex) { }
             }
 
             if (resSelectUser._918Kiss !== true) {
-                try {
-                    let model918Kiss = {
-                    };
-                    await PostMethod(gameRegisterEndPoints.register918Kiss, model918Kiss);
-                }
-                catch (ex) {
-                }
+                let model918Kiss = {};
+                try { await PostMethod(gameRegisterEndPoints.register918Kiss, model918Kiss); }
+                catch (ex) { }
             }
 
             if (resSelectUser.Joker !== true) {
-                try {
-                    let modelJoker = {
-                    };
-                    await PostMethod(gameRegisterEndPoints.registerJoker, modelJoker);
-
-                }
-                catch (ex) {
-                }
+                let modelJoker = {};
+                try { await PostMethod(gameRegisterEndPoints.registerJoker, modelJoker); }
+                catch (ex) { }
             }
 
             if (resSelectUser.Mega888 !== true) {
-                var userMegaa88Model = {
-                }
-                try {
-                    await PostMethod(gameRegisterEndPoints.mega888Register, userMegaa88Model);
-                }
-                catch {
-                }
+                var userMegaa88Model = {}
+                try { await PostMethod(gameRegisterEndPoints.mega888Register, userMegaa88Model); }
+                catch { }
             }
 
             if (resSelectUser.DG !== true) {
-                var model = {
-                }
-                try {
-                    await PostMethod(gameRegisterEndPoints.dgRegister, model);
-                }
-                catch {
-                }
+                var model = {}
+                try { await PostMethod(gameRegisterEndPoints.dgRegister, model); }
+                catch { }
             }
 
             if (resSelectUser.SexyBaccarat !== true) {
-                var model = {
-                }
-                try {
-                    await PostMethod(gameRegisterEndPoints.sexyRegister, model);
-                }
-                catch {
-                }
+                var model = {}
+                try { await PostMethod(gameRegisterEndPoints.sexyRegister, model); }
+                catch { }
             }
 
             if (resSelectUser.SA !== true) {
-                var model = {
-                }
-                try {
-                    await PostMethod(gameRegisterEndPoints.saRegister, model);
-                }
-                catch {
-                }
+                var model = {}
+                try { await PostMethod(gameRegisterEndPoints.saRegister, model); }
+                catch { }
             }
 
             if (resSelectUser.Pussy888 !== true) {
-                var model = {
-                }
-                try {
-                    await PostMethod(gameRegisterEndPoints.pussyRegister, model);
-                }
-                catch {
-                }
+                var model = {}
+                try { await PostMethod(gameRegisterEndPoints.pussyRegister, model); }
+                catch { }
             }
 
             if (resSelectUser.AllBet !== true) {
-                var model = {
-                }
-                try {
-                    await PostMethod(gameRegisterEndPoints.allBetRegister, model);
-                }
-                catch {
-                }
+                var model = {}
+                try { await PostMethod(gameRegisterEndPoints.allBetRegister, model); }
+                catch { }
             }
 
             if (resSelectUser.WM !== true) {
-                var model = {
-                }
-                try {
-                    await PostMethod(gameRegisterEndPoints.WMRegister, model);
-                }
-                catch {
-                }
+                var model = {}
+                try { await PostMethod(gameRegisterEndPoints.WMRegister, model); }
+                catch { }
             }
 
             if (resSelectUser.Pragmatic !== true) {
-                var model = {
-                }
-                try {
-                    await PostMethod(gameRegisterEndPoints.pragmaticRegister, model);
-                }
-                catch {
-                }
+                var model = {}
+                try { await PostMethod(gameRegisterEndPoints.pragmaticRegister, model); }
+                catch { }
             }
 
             if (resSelectUser.SBO !== true) {
-                var model = {
-                }
-                try {
-                    await PostMethod(gameRegisterEndPoints.sboRegister, model);
-                }
-                catch {
-                }
+                var model = {}
+                try { await PostMethod(gameRegisterEndPoints.sboRegister, model); }
+                catch { }
+            }
+
+            if (resSelectUser.GamePlay !== true) {
+                let model = {}
+                try { await PostMethod(gameRegisterEndPoints.gameplayRegister, model); }
+                catch { }
             }
 
             localStorage.setItem('IsExecute', false);
         }
     }
-    catch {
-        localStorage.setItem('IsExecute', false);
-    }
+    catch { localStorage.setItem('IsExecute', false); }
 }
 
 function CheckTokenIsValid(StausCode, StatusMessage) {
     if (StausCode == 400)
-        if (StatusMessage == "Your access token is expired, please login again." || StatusMessage == "Token akses anda tamat tempoh, sila log masuk sekali lagi." || StatusMessage == "您的访问令牌已过期，请重新登录。") {
+        if (StatusMessage == "Your access token is expired, please login again." ||
+            StatusMessage == "Token akses anda tamat tempoh, sila log masuk sekali lagi." ||
+            StatusMessage == "您的访问令牌已过期，请重新登录。") {
             DoLogout();
         }
 }
@@ -879,8 +824,7 @@ function OnPasswordType(PasswordTextboxId, UsernameTextboxId) {
 
     password.length >= 6 ? ($("#pass-len").addClass("green-color")) : ($("#pass-len").removeClass("green-color"));
 
-    if (password != "")
-        username !== password ? ($("#pass-username-same").addClass("green-color")) : ($("#pass-username-same").removeClass("green-color"))
+    if (password != "") username !== password ? ($("#pass-username-same").addClass("green-color")) : ($("#pass-username-same").removeClass("green-color"))
 
     var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     regex.test(password) ? ($("#pass-alpha").addClass("green-color")) : ($("#pass-alpha").removeClass("green-color"))

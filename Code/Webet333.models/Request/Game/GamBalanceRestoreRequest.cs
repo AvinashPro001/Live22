@@ -68,5 +68,9 @@ namespace Webet333.models.Request.Game
         [Required]
         [JsonProperty(PropertyName = "sbowallet")]
         public decimal SBOWallet { get; set; }
+
+        [Required]
+        [JsonProperty(PropertyName = "gameplaywallet")]
+        public decimal GamePlayWallet { get; set; }
     }
 }
