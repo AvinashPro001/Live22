@@ -684,7 +684,7 @@ async function regisrationGame() {
                 var res = await PostMethod(accountEndPoints.gameRegisterCheck, userModel);
                 resSelectUser = res.response.data;
                 SetSessionStorage('userRegisterDetails', Encryption(JSON.stringify(res.response.data)));
-                
+
                 var username = await PostMethod(accountEndPoints.getUsername, {});
                 SetSessionStorage('GameUsername', Encryption(JSON.stringify(username.response.data)));
                 SetUsername();
@@ -775,6 +775,12 @@ async function regisrationGame() {
                 var model = {}
                 try { await PostMethod(gameRegisterEndPoints.pragmaticRegister, model); }
                 catch { }
+            }
+
+            if (resSelectUser.YeeBet !== true) {
+                let model = {}
+                try { await PostMethod(gameRegisterEndPoints.yeebetRegister, model); }
+                catch (e) { }
             }
 
             if (resSelectUser.SBO !== true) {
