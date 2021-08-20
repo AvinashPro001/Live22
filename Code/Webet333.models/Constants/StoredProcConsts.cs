@@ -161,6 +161,8 @@
             public const string MasterModule_Select_For_Dropdown = "[dbo].[MasterModule_Select_For_Dropdown]";
 
             public const string DailyReportSelect = "[dbo].[DailyReport_Select]";
+
+            public const string VIPLevelReportSelect = "[dbo].[VIP_Level_Report]";
         }
 
         public class Payments

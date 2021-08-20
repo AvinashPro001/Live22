@@ -565,18 +565,46 @@ namespace Webet333.api.Controllers
         #region VIP Level Repost
 
         [HttpPost(ActionsConst.Users.VIPLevelReportSelect)]
-        public async Task<IActionResult> VIPLevelReportSelect([FromBody] DateRangeFilterRequest request)
+        public async Task<IActionResult> VIPLevelReportSelect([FromBody] VIPLevelReportSelectRequest request)
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
-            await ValidateUser(role: RoleConst.Admin);
+            IsAdmin();
 
-            using (var repository = new DapperRepository<dynamic>(Connection))
+            using (var repository = new DapperRepository<VIPLevelReportSelectResponse>(Connection))
             {
-                var result = await repository.GetDataAsync(StoredProcConsts.User.DailyReportSelect, request);
+                var result = await repository.GetDataAsync(
+                    StoredProcConsts.User.VIPLevelReportSelect,
+                    new
+                    {
+                        VIPLevel = request.VIPLevelId,
+                        PageNo = request.PageNo,
+                        PageSize = request.PageSize
+                    });
 
-                return OkResponse(result);
+                if (result.Any())
+                {
+                    var total = result.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? result.Count() : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = result,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 20,
+                        offset = result.FirstOrDefault().OffSet,
+                    });
+                }
+                return OkResponse(new
+                {
+                    result = result,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
             }
         }
 
