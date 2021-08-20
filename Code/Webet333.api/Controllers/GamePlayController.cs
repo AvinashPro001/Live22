@@ -61,6 +61,8 @@ namespace Webet333.api.Controllers
 
             using (var GamePlay_Helpers = new GamePlayGameHelpers(Connection))
             {
+                if (password.Length > 12) password = password.Substring(0, 11);
+
                 var result = await GamePlay_Helpers.CallRegisterPlayerAPI(username, password);
 
                 if (result.Status != 0) return BadResponse(result.ErrorDesc);
