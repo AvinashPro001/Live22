@@ -1,6 +1,6 @@
 let baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG'
-let PortAPI = '8080';
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let PortAPI = '9001';
 
 switch (environmentName.toUpperCase()) {
     case 'DEBUG':
@@ -12,8 +12,8 @@ switch (environmentName.toUpperCase()) {
         baseUrlWithoutVersion = 'https://api.wb3api.com';
         break;
     case 'LOCAL':
-        baseUrl = 'http://47.242.143.182:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://47.242.143.182:' + PortAPI;
+        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
         break;
 }
 
@@ -143,6 +143,7 @@ export const customer = {
     slotsGameList: environment.apiUrl + 'Game/slotsgame/list',
     slotsGameUpdate: environment.apiUrl + 'Game/slotsgame/update',
     PragmaticGameListUpdate: environment.apiUrl + 'pragmatic/game/list',
+    GameplayGameListUpdate: environment.apiUrl + 'gameplay/get/slot-gamelist',
     GameListFileUpload: environment.apiUrl + 'Game/list/upload',
 
     ManuallyPromotionExpiery: environment.apiUrl + 'Game/ManuallyPromotionExpiry',
@@ -246,6 +247,7 @@ export const customer = {
     MaxbetBettingDetails: environment.apiUrl + 'Game/Manually/Maxbet_Betting_Details',
     YeeBetBettingDetails: environment.apiUrl + 'Game/Manually/YeeBet_Betting_Details',
     SBOBettingDetails: environment.apiUrl + 'Game/Manually/SBO_Betting_Details',
+    GamePlayBettingDetails: environment.apiUrl + 'Game/Manually/GamePlay_Betting_Details',
 
     Kiss918PlayerLog: environment.apiUrl + '918kiss/playerlog',
     Pussy888PlayerLog: environment.apiUrl + 'pussy888/playerlog',
@@ -268,6 +270,7 @@ export const customer = {
     SavePragmaticBettingDetails: environment.apiUrl + 'Game/PragmaticBettingDetailsSave',
     SaveYeeBetBettingDetails: environment.apiUrl + 'Game/YeeBetBettingDetailsSave',
     SaveSBOBettingDetails: environment.apiUrl + 'Game/SBOBettingDetailsSave',
+    SaveGamePlayBettingDetails: environment.apiUrl + 'Game/GamePlayBettingDetailsSave',
 
     approvalTimeInsert: environment.apiUrl + 'payments/approvaltime/insert',
     approvalTimeSelect: environment.apiUrl + 'payments/approvaltime/select',
@@ -449,7 +452,8 @@ export const gameBalance = {
     Pragmatic: environment.apiUrl + 'gamebalance/pragmatic',
     walletBalance: environment.apiUrl + 'customer/wallet/balance',
     YeeBet: environment.apiUrl + 'gamebalance/YeeBet',
-    SBO: environment.apiUrl + 'gamebalance/SBO'
+    SBO: environment.apiUrl + 'gamebalance/SBO',
+    GamePlay: environment.apiUrl + 'gamebalance/GamePlay'
 }
 
 export const smsConst = {
@@ -496,5 +500,6 @@ export const GameRegister = {
     registerSexy: environment.apiUrl + 'sexybaccarart/register',
     registerPragmatic: environment.apiUrl + 'pragmatic/register',
     registerYeeBet: environment.apiUrl + 'yeebet/register',
-    registerSBO: environment.apiUrl + 'sbo/register/player'
+    registerSBO: environment.apiUrl + 'sbo/register/player',
+    registerGamePlay: environment.apiUrl + 'gameplay/register'
 }

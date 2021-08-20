@@ -31,24 +31,26 @@
     }
 </style>
 <script>
-    //#region Show Loader
-    function LoaderShow() {
-        $(".loadingImage").show();
-    }
-    function LoaderHide() {
-        $(".loadingImage").hide();
-    }
+    //#region LoaderShow
+
+    function LoaderShow() { $(".loadingImage").show(); }
+    function LoaderHide() { $(".loadingImage").hide(); }
+
     //#endregion
+
     $(document).ready(function () {
         LoaderShow();
-        var url_string = window.location;
-        var url = new URL(url_string);
-        var name = url.searchParams.get("gamename");
-        var code = url.searchParams.get("gamecode");
-        if (code != null && name=='Pragmatic')
-            return openPragmaticGame(code)
-        if (code != null && name == 'Playtech')
-            return openPlaytechGame(code)
+        let url_string = window.location;
+        let url = new URL(url_string);
+        let name = url.searchParams.get("gamename");
+        let code = url.searchParams.get("gamecode");
+        if (code != null) {
+            switch (name) {
+                case 'Pragmatic': return openPragmaticGame(code);
+                case 'Playtech': return openPlaytechGame(code);
+                case 'GamePlay': return openGamePlayGame(code);
+            }
+        }
         GameLoginMobile(name);
     });
 </script>

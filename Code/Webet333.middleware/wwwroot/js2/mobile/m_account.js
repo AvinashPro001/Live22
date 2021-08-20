@@ -565,7 +565,8 @@ async function regisrationGame() {
                 resSelectUser.data.WM === false ||
                 resSelectUser.data.Pragmatic === false ||
                 resSelectUser.data.YeeBet === false ||
-                resSelectUser.data.SBO === false
+                resSelectUser.data.SBO === false ||
+                resSelectUser.data.GamePlay === false
             ) {
                 resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
                 sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
@@ -619,10 +620,8 @@ async function regisrationGame() {
             }
 
             if (resSelectUser.data.AG === false) {
-                try {
-                    let modelAG = {};
-                    var resAG = await PostMethod(apiEndPoints.registerAG, modelAG);
-                }
+                let modelAG = {};
+                try { await PostMethod(apiEndPoints.registerAG, modelAG); }
                 catch (ex) { }
             }
 
@@ -631,12 +630,9 @@ async function regisrationGame() {
                     var resultPlaytechDeposit = await PlaytechPostMethod(PlaytechConstAction.CreateAccount + "playername=" + PlaytechUsername + "&" + PlaytechConstParameter.adminname + "&" + PlaytechConstParameter.kioskname + "&firstname=" + resUserData.data.name + "&firstname=Webet333" + "&countrycode=MY" + "&viplevel=1" + "&languagecode=EN" + "&" + "password=" + dec(GetLocalStorage("currentUserData")));
 
                     if (typeof resultPlaytechDeposit === "string") {
-                        try {
-                            JSON.parse(resultPlaytechDeposit);
-                        } catch (e) {
-                            var jObject = {
-                                data: resultPlaytechDeposit
-                            };
+                        try { JSON.parse(resultPlaytechDeposit); }
+                        catch (e) {
+                            var jObject = { data: resultPlaytechDeposit };
                         }
                     }
                     else {
@@ -654,14 +650,9 @@ async function regisrationGame() {
             if (resSelectUser.data._918Kiss !== true) {
                 try {
                     var randamUserName = await generateRandomUserName();
-
                     var randomPasswordString = randomPassword();
-
                     var password = "Wb3@" + dec(GetLocalStorage("currentUserData"));
-
-                    if (password.length > 14)
-                        password = password.substring(0, 14)
-
+                    if (password.length > 14) password = password.substring(0, 14)
                     var result981Kiss = await _918KissPostMethod("account.ashx?" + _918KissActionConst.AddUser + "&" + _918KissConstParameter.agent + "&" + "userName=" + randamUserName + "&" + "PassWd=" + password.substring(0, 14) + "&" + "Name=" + resUserData.data.name + "&" + "Tel=" + resUserData.data.mobileNo + "&" + "Memo=" + null + "&" + "UserType=" + _918KissUserType.realplayer + "&" + "UserAreaId=" + _918KissUserAreaId.Malaysia + "&" + "time=" + UTCTime + "&" + _918KissConstParameter.authcode + "&" + "sign=" + generateHasValue(randamUserName) + "&" + _918KissConstParameter.pwdtype);
                     if (result981Kiss.code == 0) {
                         var modelUpdateProfile = {
@@ -700,86 +691,72 @@ async function regisrationGame() {
             }
 
             if (resSelectUser.data.Mega888 !== true) {
-                var userMegaa88Model = {}
-                try {
-                    var res = await PostMethodWithParameter(apiEndPoints.mega888Register, userMegaa88Model);
-                }
+                let userMegaa88Model = {}
+                try { await PostMethodWithParameter(apiEndPoints.mega888Register, userMegaa88Model); }
                 catch (e) { }
             }
 
             if (resSelectUser.data.DG !== true) {
-                var model = {}
-                try {
-                    var res = await PostMethodWithParameter(apiEndPoints.dgRegister, model);
-                }
+                let model = {}
+                try { await PostMethodWithParameter(apiEndPoints.dgRegister, model); }
                 catch (e) { }
             }
 
             if (resSelectUser.data.SexyBaccarat !== true) {
-                var model = {}
-                try {
-                    var res = await PostMethodWithParameter(apiEndPoints.sexyRegister, model);
-                }
+                let model = {}
+                try { await PostMethodWithParameter(apiEndPoints.sexyRegister, model); }
                 catch (e) { }
             }
 
             if (resSelectUser.data.SA !== true) {
-                var model = {}
-                try {
-                    var res = await PostMethodWithParameter(apiEndPoints.saRegister, model);
-                }
+                let model = {}
+                try { await PostMethodWithParameter(apiEndPoints.saRegister, model); }
                 catch (e) { }
             }
 
             if (resSelectUser.data.Pussy888 !== true) {
-                var model = {}
-                try {
-                    var res = await PostMethodWithParameter(apiEndPoints.pussyRegister, model);
-                }
+                let model = {}
+                try { await PostMethodWithParameter(apiEndPoints.pussyRegister, model); }
                 catch (e) {
                 }
             }
 
             if (resSelectUser.data.AllBet !== true) {
-                var model = {}
-                try {
-                    var res = await PostMethodWithParameter(apiEndPoints.allBetRegister, model);
-                }
+                let model = {}
+                try { await PostMethodWithParameter(apiEndPoints.allBetRegister, model); }
                 catch (e) {
                 }
             }
 
             if (resSelectUser.data.WM !== true) {
-                var model = {}
-                try {
-                    var res = await PostMethodWithParameter(apiEndPoints.WMRegister, model);
-                }
+                let model = {}
+                try { await PostMethodWithParameter(apiEndPoints.WMRegister, model); }
                 catch (e) {
                 }
             }
 
             if (resSelectUser.data.Pragmatic !== true) {
-                var model = {}
-                try {
-                    var res = await PostMethodWithParameter(apiEndPoints.pragmaticRegister, model);
-                }
+                let model = {}
+                try { await PostMethodWithParameter(apiEndPoints.pragmaticRegister, model); }
                 catch (e) {
                 }
             }
 
             if (resSelectUser.data.YeeBet !== true) {
-                var model = {}
-                try {
-                    var res = await PostMethodWithParameter(apiEndPoints.YeeBetRegister, model);
-                }
+                let model = {}
+                try { await PostMethodWithParameter(apiEndPoints.YeeBetRegister, model); }
                 catch (e) { }
             }
 
             if (resSelectUser.data.SBO !== true) {
-                var model = {};
-                try {
-                    await PostMethodWithParameter(apiEndPoints.SBORegister, model);
-                }
+                let model = {};
+                try { await PostMethodWithParameter(apiEndPoints.SBORegister, model); }
+                catch (e) { }
+            }
+
+            if (resSelectUser.data.GamePlay !== true) {
+                let model = {};
+                try { await PostMethodWithParameter(apiEndPoints.GamePlayRegister, model); }
                 catch (e) { }
             }
 
@@ -801,9 +778,7 @@ function OnPasswordType(PasswordTextboxId, UsernameTextboxId) {
     }
 
     password.length >= 6 ? ($("#pass-len").addClass("green-color")) : ($("#pass-len").removeClass("green-color"));
-
-    if (password != "")
-        username !== password ? ($("#pass-username-same").addClass("green-color")) : ($("#pass-username-same").removeClass("green-color"))
+    if (password != "") username !== password ? ($("#pass-username-same").addClass("green-color")) : ($("#pass-username-same").removeClass("green-color"))
 
     var regex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))$/i;
     regex.test(password) ? ($("#pass-alpha").addClass("green-color")) : ($("#pass-alpha").removeClass("green-color"))

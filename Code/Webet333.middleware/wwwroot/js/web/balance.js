@@ -2,7 +2,7 @@
 var walletIds = [
     "joker_balance", "playtech_balance", "kiss918_balance", "ag_balance", "m8_balance", "mega888_balance", "maxbet_balance",
     "dg_balance", "sexy_baccarat_balance", "sa_balance", "pussy888_balance", "allbet_balance", "wm_balance", "pragmatic_balance",
-    "yeebet_balance", "sbo_balance"
+    "yeebet_balance", "sbo_balance", 'gameplay_balance'
 ];
 
 let UsersBalance = {
@@ -22,7 +22,8 @@ let UsersBalance = {
     M8Balance: null,
     MaxBetBalance: null,
     YeeBetBalance: null,
-    SboBalance: null
+    SboBalance: null,
+    GamePlayBalance: null
 }
 
 let GameUsernames = {
@@ -42,7 +43,8 @@ let GameUsernames = {
     M8Username: null,
     MaxBetUsername: null,
     YeeBetUsername: null,
-    SboUsername: null
+    SboUsername: null,
+    GamePlayUsername: null
 }
 
 var AGTrigger = false,
@@ -54,11 +56,13 @@ var AGTrigger = false,
     AllbetTrigger = false,
     WMTrigger = false,
     M8Trigger = false,
-    YeeBetTrigger = false;
+    YeeBetTrigger = false,
+    GamePlayTrigger = false;
 
 //#endregion Declare Vairable
 
 //#region Onload
+
 $(window).on('load', function () {
     if (GetLocalStorage('currentUser') !== null) {
         SetUsername();
@@ -67,7 +71,6 @@ $(window).on('load', function () {
         PragmaticBrokenStatus(false)
         setTimeout(function () {
             setInterval(function () {
-
                 if (UsersBalance.MainBalance == null) MainWallet();
                 if (UsersBalance.Kiss918Balance == null) Kiss918Wallet(GameUsernames.Kiss918Username);
                 if (UsersBalance.JokerBalance == null) JokerWallet(GameUsernames.JokerUsername);
@@ -85,12 +88,12 @@ $(window).on('load', function () {
                 if (UsersBalance.M8Balance == null) MaxBetWallet(GameUsernames.MaxBetUsername);
                 if (UsersBalance.YeeBetBalance == null) YeeBetWallet(GameUsernames.YeeBetUsername);
                 if (UsersBalance.SboBalance == null) SboWallet(GameUsernames.SboUsername);
-
-
+                if (UsersBalance.GamePlayBalance == null) GamePlayWallet(GameUsernames.GamePlayUsername);
             }, 1000);
         }, 15000);
     }
 });
+
 //#endregion Onload
 
 function LoadAllBalance() {
@@ -111,6 +114,7 @@ function LoadAllBalance() {
     if (GameUsernames.MaxBetUsername != null) MaxBetWallet(GameUsernames.MaxBetUsername);
     if (GameUsernames.YeeBetUsername != null) YeeBetWallet(GameUsernames.YeeBetUsername);
     if (GameUsernames.SboUsername != null) SboWallet(GameUsernames.SboUsername);
+    if (GameUsernames.GamePlayUsername != null) GamePlayWallet(GameUsernames.GamePlayUsername);
 }
 
 async function LoadAllBalanceAsync() {
@@ -131,10 +135,10 @@ async function LoadAllBalanceAsync() {
     if (GameUsernames.MaxBetUsername != null) await MaxBetWallet(GameUsernames.MaxBetUsername, false);
     if (GameUsernames.YeeBetUsername != null) await YeeBetWallet(GameUsernames.YeeBetUsername, false);
     if (GameUsernames.SboUsername != null) await SboWallet(GameUsernames.SboUsername);
+    if (GameUsernames.GamePlayUsername != null) await GamePlayWallet(GameUsernames.GamePlayUsername);
 }
 
 async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
-
     switch (WalletName) {
         case "Main Wallet": MainWallet(); break;
         case "918Kiss Wallet": if (GameUsernames.Kiss918Username != null) await Kiss918Wallet(GameUsernames.Kiss918Username); break;
@@ -153,6 +157,7 @@ async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
         case "MaxBet Wallet": if (GameUsernames.MaxBetUsername != null) await MaxBetWallet(GameUsernames.MaxBetUsername); break;
         case "YeeBet Wallet": if (GameUsernames.YeeBetUsername != null) await YeeBetWallet(GameUsernames.YeeBetUsername); break;
         case "SBO Wallet": if (GameUsernames.SboUsername != null) await SboWallet(GameUsernames.SboUsername); break;
+        case "GamePlay Wallet": if (GameUsernames.GamePlayUsername != null) await GamePlayWallet(GameUsernames.GamePlayUsername); break;
     }
 }
 
@@ -176,14 +181,16 @@ async function ReturnBalanceBasedOnWalletName(WalletName) {
         case "MaxBet Wallet": balance = UsersBalance.MaxBetBalance; break;
         case "YeeBet Wallet": balance = UsersBalance.YeeBetBalance; break;
         case "SBO Wallet": balance = UsersBalance.SboBalance; break;
+        case "GamePlay Wallet": balance = UsersBalance.GamePlayBalance; break;
     }
 
-    if (balance == "N/A")
-        balance = "0.00";
+    if (balance == "N/A") balance = "0.00";
+
     return balance.replace(",", "");
 }
 
 //#region  Set GameUsername
+
 async function SetUsername() {
     var GameUsername = JSON.parse(Decryption(GetSessionStorage("GameUsername")));
 
@@ -209,26 +216,21 @@ async function SetUsername() {
     GameUsernames.MaxBetUsername = GameUsername.maxbetUsername;
     GameUsernames.YeeBetUsername = GameUsername.yeebetUsername;
     GameUsernames.SboUsername = GameUsername.sboUsername;
-
-}
-//#endregion 
-
-function SetLoadingImagesInBalance(Id) {
-    SetAllValueInElement(Id, '<img src="/images/loading.gif" />')
+    GameUsernames.GamePlayUsername = GameUsername.gameplayUsername;
 }
 
-function SetFetchingWordInBalance(Id) {
-    SetAllValueInElement(Id + "_dropdown", 'Fetching...')
-}
+//#endregion
+
+function SetLoadingImagesInBalance(Id) { SetAllValueInElement(Id, '<img src="/images/loading.gif" />') }
+
+function SetFetchingWordInBalance(Id) { SetAllValueInElement(Id + "_dropdown", 'Fetching...') }
 
 function SetBalanceOnAllPlace(Id, Value) {
     SetAllValueInElement(Id, Value);
     SetAllValueInElement(Id + "_dropdown", Value);
 }
 
-function FormatBalance(amount) {
-    return parseFloat(amount).toFixed(2)
-}
+function FormatBalance(amount) { return parseFloat(amount).toFixed(2) }
 
 function SetLoadingImageForAllId() {
     for (i = 0; i < walletIds.length; i++) {
@@ -240,7 +242,6 @@ function SetLoadingImageForAllId() {
 }
 
 function SetLoadingImageBaseOnWalletName(WalletName) {
-
     switch (WalletName) {
         case "918Kiss Wallet": SetLoadingImagesInBalance("kiss918_balance"); SetFetchingWordInBalance("kiss918_balance"); break;
         case "Joker Wallet": SetLoadingImagesInBalance("joker_balance"); SetFetchingWordInBalance("joker_balance"); break;
@@ -258,6 +259,7 @@ function SetLoadingImageBaseOnWalletName(WalletName) {
         case "MaxBet Wallet": SetLoadingImagesInBalance("maxbet_balance"); SetFetchingWordInBalance("maxbet_balance"); break;
         case "YeeBet Wallet": SetLoadingImagesInBalance("yeebet_balance"); SetFetchingWordInBalance("yeebet_balance"); break;
         case "SBO Wallet": SetLoadingImagesInBalance("sbo_balance"); SetFetchingWordInBalance("sbo_balance"); break;
+        case "GamePlay Wallet": SetLoadingImagesInBalance("gameplay_balance"); SetFetchingWordInBalance("gameplay_balance"); break;
     }
 }
 
@@ -266,9 +268,7 @@ function RefreshBalance() {
     LoadAllBalance();
 }
 
-function CheckNAorNot(Value) {
-    return Value == "N/A" ? "0.0" : Value;
-}
+function CheckNAorNot(Value) { return Value == 'N/A' || Value == 'NaN' || Value == 'null' || Value == undefined || Value == null ? '0.0' : Value; }
 
 async function RestoreBalance() {
     $("#layout_restore_image").attr("src", "/images/loading.gif");
@@ -293,6 +293,7 @@ async function RestoreBalance() {
         pragmaticwallet: CheckNAorNot(UsersBalance.PragmaticBalance),
         YeeBetWallet: CheckNAorNot(UsersBalance.YeeBetBalance),
         sbowallet: CheckNAorNot(UsersBalance.SboBalance),
+        gameplaywallet: CheckNAorNot(UsersBalance.GamePlayBalance),
         id: null
     }
     await PostMethod(transactionEndPoints.restore, restoreModel);
@@ -337,7 +338,7 @@ async function GetDailyTurnover() {
         SetAllValueInElement("pragmatic_turnover", FormatBalance(res.response.data.response.pragmaticTurover))
         SetAllValueInElement("yeebet_turnover", FormatBalance(res.response.data.response.yeeBetTurover))
         SetAllValueInElement("sbo_turnover", FormatBalance(res.response.data.response.sboTurover))
-
+        SetAllValueInElement('gameplay_turnover', FormatBalance(res.response.data.response.gamePlayTurover))
     }
     $("#refresh-turnover").removeClass("rotate");
 }
@@ -763,6 +764,22 @@ async function SboWallet(Username, IsDivValueSet = true) {
     }
 }
 
+async function GamePlayWallet(Username, IsDivValueSet = true) {
+    let model = { username: Username };
+    try {
+        var res = await PostMethod(gameBalanceEndPoints.gameplayBalance, model);
+
+        if (res.status == 200) UsersBalance.GamePlayBalance = ConvertBalanceIntoCommasValue(res.response.data.balance);
+        else UsersBalance.GamePlayBalance = "N/A";
+        if (IsDivValueSet) SetBalanceOnAllPlace("gameplay_balance", UsersBalance.GamePlayBalance);
+
+    }
+    catch (e) {
+        UsersBalance.GamePlayBalance = "N/A";
+        if (IsDivValueSet) SetBalanceOnAllPlace("gameplay_balance", UsersBalance.GamePlayBalance);
+    }
+}
+
 //#endregion All Wallet Balance
 
 function StartTimerGameBalanceAPI(GameName) {
@@ -806,6 +823,10 @@ function StartTimerGameBalanceAPI(GameName) {
         case 'YeeBet':
             let YeeBetTimerId = setInterval(() => { YeeBetWallet(GameUsernames.YeeBetUsername); YeeBetTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(YeeBetTimerId); YeeBetTrigger = false; }, 301000);
+            break;
+        case 'GamePlay':
+            let GamePlayTimerId = setInterval(() => { GamePlayWallet(GameUsernames.GamePlayUsername); GamePlayTrigger = true; }, 30000);
+            setTimeout(() => { clearInterval(GamePlayTimerId); GamePlayTrigger = false; }, 301000);
             break;
     }
 }

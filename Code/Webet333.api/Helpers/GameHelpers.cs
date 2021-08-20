@@ -420,6 +420,23 @@ namespace Webet333.api.Helpers
 
         #endregion SBO Services
 
+        #region GamePlay Services
+
+        internal async Task GamePlayServicesInsert(string request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var res = await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Game.GamePlayBettingDetailsInsert,
+                    new
+                    {
+                        jsonString = request
+                    });
+            }
+        }
+
+        #endregion GamePlay Services
+
         #region Kiss 918 Player Log Insert
 
         internal async Task<int> Kiss918PlayerLogInsert(List<PlayerGameLogResult> request, string Username)
@@ -1225,7 +1242,8 @@ namespace Webet333.api.Helpers
                     decimal WMBalance,
                     decimal PragmaticBalance,
                     decimal YeeBetBalance,
-                    decimal SBOBalance
+                    decimal SBOBalance,
+                    decimal GamePlayBalance
             )
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -1252,7 +1270,8 @@ namespace Webet333.api.Helpers
                         WMBalance,
                         PragmaticBalance,
                         YeeBetBalance,
-                        SBOBalance
+                        SBOBalance,
+                        GamePlayBalance
                     });
             }
         }
@@ -1557,6 +1576,10 @@ namespace Webet333.api.Helpers
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_SBO, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
+                    case GameConst.GameName.GamePlay:
+                        result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_GamePlay, new { request.UserId, request.FromDate, request.ToDate });
+                        break;
+
                     default:
                         result = null;
                         break;
@@ -1709,7 +1732,7 @@ namespace Webet333.api.Helpers
         }
 
 
-        internal async Task<List<GameListSelectResponse>> GameListSelect(GameListSelectRequest request,string Role)
+        internal async Task<List<GameListSelectResponse>> GameListSelect(GameListSelectRequest request, string Role)
         {
             using (var GetRepository = new DapperRepository<GameListSelectResponse>(Connection))
             {

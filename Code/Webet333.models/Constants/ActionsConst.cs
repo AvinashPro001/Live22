@@ -436,6 +436,8 @@
 
             public const string SBO_Betting_Details = "Game/SBO_Betting_Details";
 
+            public const string GamePlay_Betting_Details = "Game/GamePlay_Betting_Details";
+
             public const string Manually_Joker_Betting_Details = "Game/Manually/Joker_Betting_Details";
 
             public const string Manually_AG_Betting_Details = "Game/Manually/AG_Betting_Details";
@@ -469,6 +471,8 @@
             public const string Manually_YEEBET_Betting_Details = "Game/Manually/YEEBET_Betting_Details";
 
             public const string Manually_SBO_Betting_Details = "Game/Manually/SBO_Betting_Details";
+
+            public const string Manually_GamePlay_Betting_Details = "Game/Manually/GamePlay_Betting_Details";
 
             public const string Playtech_Betting_Details = "Game/Playtech_Betting_Details";
 
@@ -522,6 +526,8 @@
 
             public const string SBOBettingDetailsSave = "Game/SBOBettingDetailsSave";
 
+            public const string GamePlayBettingDetailsSave = "Game/GamePlayBettingDetailsSave";
+
             public const string GameWalletBalance = "Game/AllWalletBalance";
 
             public const string GameWalletBalanceRestore = "Game/Balance/Restore";
@@ -574,6 +580,8 @@
             public const string SBOBalance = "gamebalance/sbo";
 
             public const string CheckSBOBalance = "check/gamebalance/sbo";
+
+            public const string GamePlayBalance = "gamebalance/gamePlay";
         }
 
         public class TransferMoney
@@ -835,6 +843,19 @@
             public const string GetPlayerDefaultBetLimit = "sbo/get/playerdefaultbetlimit";
 
             public const string GetLeagueBetSetting = "sbo/get/league-bet-setting";
+        }
+
+        public class GamePlay
+        {
+            public const string Register = "gameplay/register";
+
+            public const string UpdatePassword = "gameplay/update/password ";
+
+            public const string Login = "gameplay/login";
+
+            public const string GetSlotGameList = "gameplay/get/slot-gamelist";
+
+            public const string GetFishGameList = "gameplay/get/fish-gamelist";
         }
     }
 }

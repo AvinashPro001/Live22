@@ -336,13 +336,15 @@
             public const string YEEBETGameBalanceUpdate = "[dbo].[Balance_YEEBET_Update]";
 
             public const string SBOGameBalanceUpdate = "[dbo].[Balance_SBO_Update]";
+
+            public const string GamePlayGameBalanceUpdate = "[dbo].[Balance_GamePlay_Update]";
         }
 
         public class Game
         {
             public const string SlotsGameSelect = "[dbo].[Slots_Game_Select]";
 
-            public const string SlotsGameUpdate= "[dbo].[Slots_Game_Update]";
+            public const string SlotsGameUpdate = "[dbo].[Slots_Game_Update]";
 
             public const string SlotsGameDelete = "[dbo].[Slots_Game_Delete]";
 
@@ -479,6 +481,10 @@
             public const string SBOBettingDetailsInsert = "[dbo].[SBO_BettingDetails_Insert]";
 
             public const string BettingDetails_SBO = "[dbo].[SBO_BettingDetails_By_Username]";
+
+            public const string GamePlayBettingDetailsInsert = "[dbo].[GamePlay_BettingDetails_Insert]";
+
+            public const string BettingDetails_GamePlay = "[dbo].[GamePlay_BettingDetails_By_Username]";
         }
 
         public class MaxBetGame
@@ -649,6 +655,13 @@
             public const string UpdateLeagueBetSetting = "[dbo].[Update_League_Bet_Setting_SBO]";
 
             public const string SelectLeagueBetSetting = "[dbo].[Select_League_Bet_Setting_SBO]";
+        }
+
+        public class GamePlay
+        {
+            public const string Register = "[dbo].[Users_Insert_GamePlay]";
+
+            public const string PasswordUpdate = "[dbo].[GameGamePLay_Password_Update]";
         }
     }
 }
