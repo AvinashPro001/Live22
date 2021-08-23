@@ -35,6 +35,7 @@ export class VipLevelReportComponent implements OnInit {
 
     ngOnInit() {
         this.GetVIPLevel();
+        this.SetColumns();
     }
 
     //#region Get VIP Category
