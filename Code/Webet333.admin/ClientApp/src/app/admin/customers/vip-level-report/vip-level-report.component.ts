@@ -1,10 +1,11 @@
 //#region
 //#endregion
 
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { customer, VIPSetting } from '../../../../environments/environment';
+import { CommonService } from '../../../common/common.service';
 import { AdminService } from '../../admin.service';
 
 @Component({
@@ -29,15 +30,19 @@ export class VipLevelReportComponent implements OnInit {
 
     constructor(
         private adminService: AdminService,
-        private toasterService: ToasterService) { }
+        private toasterService: ToasterService,
+        private router: Router,
+        private commonService: CommonService) { }
 
     //#endregion 
 
     //#region On Load
 
-    ngOnInit() {
-        this.GetVIPLevel();
-        this.SetColumns();
+    async ngOnInit() {
+        if (await this.checkViewPermission()) {
+            this.GetVIPLevel();
+            this.SetColumns();
+        }
     }
 
     //#endregion
@@ -154,4 +159,59 @@ export class VipLevelReportComponent implements OnInit {
         this.pageNumber = pageInfo.offset;
         this.GetUserList();
     }
+
+    //#region Check Permission
+
+    async checkViewPermission() {
+        const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[0].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[18].Permissions[0].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkUpdatePermission() {
+        const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[1].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[18].Permissions[1].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    async checkAddPermission() {
+        const usersPermissions = JSON.parse(localStorage.getItem("currentUser"));
+        if (usersPermissions.permissionsList[3].Permissions[2].IsChecked === true) {
+            if (usersPermissions.permissionsList[3].submenu[18].Permissions[2].IsChecked === true) {
+                return true;
+            } else {
+                this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+                this.router.navigate(['admin/dashboard']);
+                return false;
+            }
+        } else {
+            this.toasterService.pop('error', 'Error', this.commonService.errorMessage.unAuthorized);
+            this.router.navigate(['admin/dashboard']);
+            return false;
+        }
+    }
+
+    //#endregion Check Permission
 }
