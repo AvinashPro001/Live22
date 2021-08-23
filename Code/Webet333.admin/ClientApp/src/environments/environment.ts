@@ -1,5 +1,5 @@
 let baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '9001';
 
 switch (environmentName.toUpperCase()) {
@@ -380,7 +380,9 @@ export const customer = {
     homePageBannerImageUpdate: environment.apiUrl + 'settings/homePage-banner/image/update',
     homePageBannerSelectById: environment.apiUrl + 'settings/homePage-banner/select/id',
 
-    slotsGameInsert: environment.apiUrl + 'Game/slotsgame/insert'
+    slotsGameInsert: environment.apiUrl + 'Game/slotsgame/insert',
+
+    getVIPLevelReport: environment.apiUrl + 'VIPLevel/report/select'
 }
 
 export const playtech = {
