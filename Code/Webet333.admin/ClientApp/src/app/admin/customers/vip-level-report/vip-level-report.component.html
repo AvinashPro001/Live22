@@ -1,0 +1,108 @@
+<div class="my-container">
+    <div class="card card-default">
+
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-4">
+                    <legend class="main-title">VIP Level Report</legend>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row col-12">
+
+                <div *ngFor="let VIPLevel of VIPLevelData; let i = index" class="p-2 col-md-2" style="display: flex;">
+                    <div class="">
+                        <label class="container">
+                            <input type="checkbox" id="{{VIPLevel.Id}}" name="{{VIPLevel.Name}}" (change)="AddVIPLevelId(VIPLevel.Id)">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div><b>{{VIPLevel.Name}}</b></div>
+                </div>
+
+                <!--<div class="p-2 col-md-2" style="display: flex;">
+                    <div class="">
+                        <label class="container">
+                            <input type="checkbox" id="chk_Normal" (change)="AddVIPLevelId('Normal')">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div><b>Normal</b></div>
+                </div>
+                <div class="p-2 col-md-2" style="display: flex;">
+                    <div class="">
+                        <label class="container">
+                            <input type="checkbox" id="chk_Bronze" (change)="AddVIPLevelId()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div><b>Bronze</b></div>
+                </div>
+                <div class="p-2 col-md-2" style="display: flex;">
+                    <div class="">
+                        <label class="container">
+                            <input type="checkbox" id="chk_Silver" (change)="AddVIPLevelId()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div><b>Silver</b></div>
+                </div>
+                <div class="p-2 col-md-2" style="display: flex;">
+                    <div class="">
+                        <label class="container">
+                            <input type="checkbox" id="chk_Gold" (change)="AddVIPLevelId()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div><b>Gold</b></div>
+                </div>
+                <div class="p-2 col-md-2" style="display: flex;">
+                    <div class="">
+                        <label class="container">
+                            <input type="checkbox" id="chk_Platinum" (change)="AddVIPLevelId()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div><b>Platinum</b></div>
+                </div>
+                <div class="p-2 col-md-2" style="display: flex;">
+                    <div class="">
+                        <label class="container">
+                            <input type="checkbox" id="chk_Diamond" (change)="AddVIPLevelId()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div><b>Diamond</b></div>
+                </div>-->
+
+            </div>
+            <div class="row col-12">
+                <div class="p-2">
+                    <h4 class="text-muted text-thin">&nbsp;</h4>
+                    <button class="mb-1 btn btn-success" (click)='GetUserList()' type="button">Search</button>
+                </div>
+            </div>
+
+            <div>
+                <ngx-datatable #table
+                               class="material bootstrap no-detail-row"
+                               [rows]="UserListRows"
+                               [loadingIndicator]="loadingIndicator"
+                               [columns]="UserListColumns"
+                               [columnMode]="'force'"
+                               [headerHeight]="50"
+                               [footerHeight]="50"
+                               [rowHeight]="'auto'"
+                               [limit]="pageSize"
+                               [externalPaging]="true"
+                               [count]="totalRowCount"
+                               [offset]="offset"
+                               (page)="Next_Previous_Page($event)">
+                </ngx-datatable>
+            </div>
+
+        </div>
+    </div>
+</div>

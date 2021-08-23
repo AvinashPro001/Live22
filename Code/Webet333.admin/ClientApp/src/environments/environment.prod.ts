@@ -1,5 +1,5 @@
 let baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG'
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG'
 
 switch (environmentName.toUpperCase()) {
     case 'DEBUG':
@@ -375,7 +375,9 @@ export const customer = {
     homePageBannerImageUpdate: environment.apiUrl + 'settings/homePage-banner/image/update',
     homePageBannerSelectById: environment.apiUrl + 'settings/homePage-banner/select/id',
 
-    slotsGameInsert: environment.apiUrl + 'Game/slotsgame/insert'
+    slotsGameInsert: environment.apiUrl + 'Game/slotsgame/insert',
+
+    getVIPLevelReport: environment.apiUrl + 'VIPLevel/report/select'
 }
 
 export const playtech = {
