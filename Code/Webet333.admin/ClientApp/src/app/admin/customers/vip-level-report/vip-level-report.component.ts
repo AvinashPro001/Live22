@@ -33,10 +33,14 @@ export class VipLevelReportComponent implements OnInit {
 
     //#endregion 
 
+    //#region On Load
+
     ngOnInit() {
         this.GetVIPLevel();
         this.SetColumns();
     }
+
+    //#endregion
 
     //#region Get VIP Category
 
@@ -95,8 +99,6 @@ export class VipLevelReportComponent implements OnInit {
             }
         }
 
-        console.log(temp);
-
         let model = {
             VIPLevelId: temp,
             pageNo: this.pageNumber,
@@ -152,5 +154,4 @@ export class VipLevelReportComponent implements OnInit {
         this.pageNumber = pageInfo.offset;
         this.GetUserList();
     }
-
 }
