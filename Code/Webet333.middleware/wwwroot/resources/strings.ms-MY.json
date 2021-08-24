@@ -196,6 +196,8 @@
   "username_instruction": "Nama pengguna mesti melebihi 6 perkataan.",
   "username_specialCharacter_instruction": "Aksara khas tidak dibenarkan.",
 
+  "name_special_char_not_allowed": "Watak Khas tidak dibenarkan dalam Nama.",
+
   "password_instruction": "Kata Laluan mesti melebihi 6 perkataan",
   "password_alpha_instruction": "Kata laluan mestilah abjad angka",
   "password_username_same": "Kata laluan dan nama pengguna mestilah berbeza.",
@@ -335,9 +337,9 @@
   "pls_select_date": "Sila pilih tarikh",
 
   "current_pass_req": "Sila masukkan kata laluan semasa.",
+  "current_pass_not_match": "Kata Laluan Semasa tidak betul.",
   "new_pass_req": "Sila masukkan Kata Laluan Baru",
   "special_char_not_allowed": "Aksara Khas tidak dibenarkan dalam Nama Pengguna.",
-  "name_special_char_not_allowed": "Watak Khas tidak dibenarkan dalam Nama.",
   "username_exists": "Nama pengguna sudah wujud.",
   "username_avialble": "Nama pengguna tersedia."
 }

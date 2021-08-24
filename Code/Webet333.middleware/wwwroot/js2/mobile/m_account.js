@@ -200,6 +200,12 @@ async function ChangePassword(i) {
             return ShowError(ChangeErroMessage("confirm_password_required_error"));
         }
 
+        if (dec(GetLocalStorage("currentUserData")) !== model.currentPassword) {
+            LoaderHide();
+            return ShowError(ChangeErroMessage("current_pass_not_match"));
+        }
+            
+
         if (model.currentPassword === model.password) {
             LoaderHide();
             return ShowError(ChangeErroMessage("new_password_check_error"));
@@ -318,7 +324,7 @@ async function DoRegister() {
         referenceKeyword: getCookie("ref"),
         otp: $("#m_regsiter_otp").val()
     };
-
+    
     if (model.mobile === "") {
         LoaderHide();
         return ShowError(ChangeErroMessage("mobile_no_required_error"));
@@ -353,6 +359,10 @@ async function DoRegister() {
     if (model.name === "") {
         LoaderHide();
         return ShowError(ChangeErroMessage("name_required_error"));
+    }
+    if (/^[a-zA-Z0-9- ]*$/.test(model.name) == false) {
+        LoaderHide();
+        return ShowError(ChangeErroMessage('name_special_char_not_allowed'));
     }
 
     if (model.username === model.password) {

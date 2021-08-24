@@ -432,15 +432,15 @@ var checkedValue;
 
 async function getDetails() {
     if (GetLocalStorage('currentUser') !== null) {
-        var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-        if (resUserData == null) {
-            var res = await GetMethod(apiEndPoints.getProfile);
-            sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
-            resUserData = res;
-        }
+
+        var res = await GetMethod(apiEndPoints.getProfile);
+        sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
+        var resUserData = res;
+
         checkedValue = resUserData.data.autoTransfer;
-        //if (window.location.href.includes("?p=transfer"))
-        //await onclickSet(1);
+        
+        if (window.location.href.includes("?p=transfer"))
+            await onclickSet(1);
     }
 }
 

@@ -195,6 +195,8 @@
   "username_instruction": "Username must contain a length of 7 characters.",
   "username_specialCharacter_instruction": "Special characters not allowed",
 
+  "name_special_char_not_allowed": "Special Characters not allowed in Name.",
+
   "password_instruction": "Password must contain a length of 6 Characters",
   "password_alpha_instruction": "Password must be alphanumeric.",
   "password_username_same": "Password and username must be different.",
@@ -335,9 +337,9 @@
   "pls_select_date": "Please select date",
 
   "current_pass_req": "Please enter current password.",
+  "current_pass_not_match": "Current Password is not correct.",
   "new_pass_req": "Please enter New Password",
   "special_char_not_allowed": "Special Characters not allowed in Username.",
-  "name_special_char_not_allowed": "Special Characters not allowed in Name.",
   "username_exists": "Username already exists.",
   "username_avialble": "Username is Available."
 }

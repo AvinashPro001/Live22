@@ -27,7 +27,7 @@ export class VipPageComponent implements OnInit {
     async ngOnInit() {
         if (await this.checkViewPermission()) {
             this.getVIPcategory();
-            this.FreeCreditSetting();
+            //this.FreeCreditSetting();
         }
     }
 
@@ -45,14 +45,15 @@ export class VipPageComponent implements OnInit {
     }
 
     //#region customerUser
-    FreeCreditSetting() {
-        this.adminService.getAll<any>(VIPSetting.VIPFreeCreditPromotionSetting).subscribe(res => {
-            this.promotionData = res.data;
-            (document.getElementById("freeCreditTurnover") as HTMLInputElement).value = this.promotionData.TurnoverTime
-        }, error => {
-            this.toasterService.pop('error', 'Error', error.error.message);
-        });
-    }
+    //FreeCreditSetting() {
+    //    this.adminService.getAll<any>(VIPSetting.VIPFreeCreditPromotionSetting).subscribe(res => {
+    //        this.promotionData = res.data;
+    //        debugger
+    //        (document.getElementById("freeCreditTurnover") as HTMLInputElement).value = this.promotionData.TurnoverTime
+    //    }, error => {
+    //        this.toasterService.pop('error', 'Error', error.error.message);
+    //    });
+    //}
     //#endregion
 
     //#region customerUser
@@ -204,28 +205,32 @@ export class VipPageComponent implements OnInit {
                 weeklyFreeCreditMinDepositAmountDiamond: (document.getElementById("weeklyFreeCreditMinDepositAmountDiamond") as HTMLInputElement).value
             }
             this.adminService.add<any>(VIPSetting.addVIP, dataSelect).subscribe(res => {
-                let freeCreditUpdateModel = {
-                    id: this.promotionData.Id,
-                    turnovertime: (document.getElementById("freeCreditTurnover") as HTMLInputElement).value,
-                    isAG: (document.getElementById("ck_ag") as HTMLInputElement).checked,
-                    isDG: (document.getElementById("ck_dg") as HTMLInputElement).checked,
-                    isSA: (document.getElementById("ck_sa") as HTMLInputElement).checked,
-                    isPlaytech: (document.getElementById("ck_playtech") as HTMLInputElement).checked,
-                    isPragmatic: (document.getElementById("ck_pragmatic") as HTMLInputElement).checked,
-                    isSexyBaccarat: (document.getElementById("ck_sexy") as HTMLInputElement).checked,
-                    isWM: (document.getElementById("ck_wm") as HTMLInputElement).checked,
-                    isAllBet: (document.getElementById("ck_allbet") as HTMLInputElement).checked,
-                    isMaxbet: (document.getElementById("ck_maxbet") as HTMLInputElement).checked,
-                    isM8: (document.getElementById("ck_m8") as HTMLInputElement).checked
-                }
-                this.adminService.add<any>(customer.promotionUpdate, freeCreditUpdateModel).subscribe(res => {
-                    this.disabled = false;
-                    this.toasterService.pop('success', 'Success', res.message);
-                }, error => {
-                    this.disabled = false;
-                    this.ngOnInit();
-                    this.toasterService.pop('error', 'Error', error.error.message);
-                });
+                this.disabled = false;
+                this.ngOnInit();
+                this.toasterService.pop('success', 'Success', res.message);
+
+                //let freeCreditUpdateModel = {
+                //    id: this.promotionData.Id,
+                //    turnovertime: (document.getElementById("freeCreditTurnover") as HTMLInputElement).value,
+                //    isAG: (document.getElementById("ck_ag") as HTMLInputElement).checked,
+                //    isDG: (document.getElementById("ck_dg") as HTMLInputElement).checked,
+                //    isSA: (document.getElementById("ck_sa") as HTMLInputElement).checked,
+                //    isPlaytech: (document.getElementById("ck_playtech") as HTMLInputElement).checked,
+                //    isPragmatic: (document.getElementById("ck_pragmatic") as HTMLInputElement).checked,
+                //    isSexyBaccarat: (document.getElementById("ck_sexy") as HTMLInputElement).checked,
+                //    isWM: (document.getElementById("ck_wm") as HTMLInputElement).checked,
+                //    isAllBet: (document.getElementById("ck_allbet") as HTMLInputElement).checked,
+                //    isMaxbet: (document.getElementById("ck_maxbet") as HTMLInputElement).checked,
+                //    isM8: (document.getElementById("ck_m8") as HTMLInputElement).checked
+                //}
+                //this.adminService.add<any>(customer.promotionUpdate, freeCreditUpdateModel).subscribe(res => {
+                //    this.disabled = false;
+                //    this.toasterService.pop('success', 'Success', res.message);
+                //}, error => {
+                //    this.disabled = false;
+                //    this.ngOnInit();
+                //    this.toasterService.pop('error', 'Error', error.error.message);
+                //});
             }, error => {
                 this.disabled = false;
                 this.ngOnInit();
