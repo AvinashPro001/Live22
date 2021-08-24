@@ -102,15 +102,13 @@ namespace Webet333.api.Helpers
                 Cashier = GameConst.BaseUrl + "Account/Profile";
             }
 
-            string secureLogin = GameId == GameConst.Pragmatic.Casino.GameCode ? GameConst.Pragmatic.Casino.SecureLogin : GameConst.Pragmatic.SecureLogin;
-
             var Parameter = $"cashier={Cashier}" +
                 $"&externalPlayerId={Username}" +
                 $"&gameId={GameId}" +
                 $"&language={langCode}" +
                 $"&lobbyURL={lobbyURL}" +
                 $"&platform={platform}" +
-                $"&secureLogin={secureLogin}";
+                $"&secureLogin={GameConst.Pragmatic.SecureLogin}";
             var Url = $"{GameConst.Pragmatic.Url}{GameConst.Pragmatic.Login}";
             return JsonConvert.DeserializeObject<dynamic>(await CallAPI(Url, Parameter));
         }
