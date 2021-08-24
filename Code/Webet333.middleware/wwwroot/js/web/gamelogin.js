@@ -23,7 +23,7 @@ function CallGameLoginAPI(WalletName, IsSlots, CheckLogin = true) {
         case "WM Wallet": OpenWMGame(); break;
         case "PlayTech Wallet": OpenPlaytechGame(IsSlots); break;
         case "Sexy Wallet": OpenSexyBaccaratGame(); break;
-        case "Pragmatic Wallet": OpenPragmaticGame(); break;
+        case "Pragmatic Wallet": OpenPragmaticGame(IsSlots); break;
         case "AllBet Wallet": OpenAllBetGame(); break;
         case "M8 Wallet": OpenM8Game(); break;
         case "MaxBet Wallet": OpenMaxbetGame(); break;
@@ -390,17 +390,27 @@ async function LoginGameplayGame(GameCode) {
     SetLocalStorage('gameURL', res.response.data.game_url);
 }
 
-async function OpenPragmaticGame() {
-    window.open("../Web/slots#pragmatic-game");
+async function OpenPragmaticGame(IsSlots) {
+    let model, res;
+
     if (GetLocalStorage("currentUser") != null) {
         PragmaticBrokenStatusInterval();
+
         let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
         if (resSelectUser.Pragmatic !== true) {
-            let userRegisterModel = {
-            };
-            await PostMethod(gameRegisterEndPoints.pragmaticRegister, userRegisterModel);
+            model = {}
+            await PostMethod(gameRegisterEndPoints.pragmaticRegister, model);
         }
     }
+
+    if (IsSlots) return window.open("../Web/slots#pragmatic-game");
+
+    window.open("../Web/game");
+    model = { isMobile: false };
+    res = await PostMethod(gameLoginEndPoints.pragmaticLogin, model);
+    if (res.status == 200 &&
+        res.response.data.error == '0')
+        SetLocalStorage("gameURL", res.response.data.gameURL);
 }
 
 async function OpenPlaytechGame(IsSlots) {
@@ -447,7 +457,7 @@ async function LoginPlaytechGame(GameCode, IsAllInWalletChecked = false) {
         if (profile.autoTransfer)
             AllInWallet('PlayTech Wallet');
     }
-    
+
 
     PlaytechBrokenStatusInterval();
 
@@ -609,10 +619,10 @@ async function HotSlotsgame() {
         for (i = 0; i < gameList.length; i++) {
 
             if (gameList[i].WalletName == "Playtech Slot") {
-                html += '<div class="item"><div class="game_boxes hand-curson" onclick="LoginPlaytechGame(\'' + gameList[i].GameCode +'\','+ true +')"><img src="' + gameList[i].ImagePath2 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
+                html += '<div class="item"><div class="game_boxes hand-curson" onclick="LoginPlaytechGame(\'' + gameList[i].GameCode + '\',' + true + ')"><img src="' + gameList[i].ImagePath2 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
             }
             else {
-                html += '<div class="item"><div class="game_boxes hand-curson" onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\',' + true +')"><img src="' + gameList[i].ImagePath1 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
+                html += '<div class="item"><div class="game_boxes hand-curson" onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\',' + true + ')"><img src="' + gameList[i].ImagePath1 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
             }
         }
         SetAllValueInElement("hot-game-section", html)

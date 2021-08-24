@@ -133,14 +133,14 @@
                                 </li>
                                 <li data-toggle="modal" data-target="#gameLogin" id="gameplaylive">
                                     <a>
-                                        <figure><img src="~/images/mobile/gameplay_livecasino.png" lt="GamePlay"></figure>
+                                        <figure><img src="~/images/mobile/gameplay_livecasino.png" alt="GamePlay"></figure>
                                         <button class="game-title"><span class="lang" key="gameplaylive_game"></span></button>
                                     </a>
                                 </li>
-                                <li data-toggle="modal" data-target="#gameLogin" id="pragmaticplaylive">
+                                <li data-toggle="modal" data-target="#gameLogin" id="pragmaticlive">
                                     <a>
-                                        <figure><img src="~/images/mobile/pragmaticplay_livecasino.png" lt="PragmaticPlay"></figure>
-                                        <button class="game-title"><span class="lang" key="pragmaticplaylive_game"></span></button>
+                                        <figure><img src="~/images/mobile/gameplay_livecasino.png" alt="PragmaticPlay"></figure>
+                                        <button class="game-title"><span class="lang" key="pragmaticlive_game"></span></button>
                                     </a>
                                 </li>
                             </ul>
@@ -223,7 +223,7 @@
                                         <button class="game-title"><span class="lang" key="jokerslot_game"></span></button>
                                     </a>
                                 </li>
-                                <li onclick="PragmaticIdentifiy()" data-toggle="modal" data-target="#gameLogin" id="pragmaticslot">
+                                <li onclick="PragmaticIdentifiy(true)" id="pragmaticslot">
                                     <a>
                                         <figure>
                                             <img src="~/images/mobile/Pragmatic.png" alt="Pragmatic">
@@ -464,8 +464,7 @@
                 </ul>
 
                 <div class="hero-banner">
-                    <div class="login-top-slider-s slider" id="mobilePromotionSliderLogin">
-                    </div>
+                    <div class="login-top-slider-s slider" id="mobilePromotionSliderLogin"></div>
                 </div>
 
                 <div class="nav-tabs-outer">
@@ -561,10 +560,10 @@
                                     <button class="game-title"><span class="lang" key="gameplaylive_game"></span></button>
                                 </a>
                             </li>
-                            <li onclick="logingGame('PragmaticPlay')" id="pragmaticplaylivelogin">
+                            <li onclick="logingGame('Pragmatic')" id="pragmaticlivelogin">
                                 <a>
-                                    <figure><img src="~/images/mobile/pragmaticplay_livecasino.png" alt="pragmaticplay"></figure>
-                                    <button class="game-title"><span class="lang" key="pragmaticplaylive_game"></span></button>
+                                    <figure><img src="~/images/mobile/gameplay_livecasino.png" alt="pragmaticplay"></figure>
+                                    <button class="game-title"><span class="lang" key="pragmaticlive_game"></span></button>
                                 </a>
                             </li>
                         </ul>
@@ -647,7 +646,7 @@
                                     <button class="game-title"><span class="lang" key="jokerslot_game"></span></button>
                                 </a>
                             </li>
-                            <li onclick="PragmaticIdentifiy()" id="pragmaticslotlogin">
+                            <li onclick="PragmaticIdentifiy(true)" id="pragmaticslotlogin">
                                 <a>
                                     <figure>
                                         <img src="~/images/mobile/Pragmatic.png" alt="Pragmatic">
@@ -750,10 +749,8 @@
         $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
     });
 </script>
-
 <!-- Slider Section End -->
 <!-- Modal For Video -->
-
 <script type="text/javascript">
     $(document).ready(function () { $(".open-modal").click(); });
     jQuery(".scroll-down-visible").hide();
@@ -762,9 +759,7 @@
         jQuery("#more-arrow").toggleClass("rotate");
     });
 </script>
-
 <!-- //Modal For Video -->
-
 <script type="text/javascript">
     $(document).ready(function () {
         let timerId = setInterval(() => {
@@ -787,9 +782,7 @@
         });
     });
 </script>
-
 <!-- Slider Section End -->
-
 <script>
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
@@ -802,7 +795,6 @@
         $('#homeLoginPagebottom').addClass("active-link");
     }, 200);
 </script>
-
 <script>
     function language(value) {
         SetLocalStorage('language', value);
