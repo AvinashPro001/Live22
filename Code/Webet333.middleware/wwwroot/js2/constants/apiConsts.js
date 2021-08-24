@@ -182,5 +182,7 @@ var apiEndPoints = {
 
     homepageBannerList: 'settings/homePage-banner/select/user',
 
-    checkUsernameExists: 'account/check/username/exists'
+    checkUsernameExists: 'account/check/username/exists',
+
+    getUsername: 'api/v1/account/get_username_by_id'
 };

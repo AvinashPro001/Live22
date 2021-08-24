@@ -437,12 +437,10 @@ async function logoutMain(i) {
             getLanguage();
             localStorage.clear();
         }
-        var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-        var globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
-        var username = res.data.username;
-        var JokerUsername = globalParameters.data.jokerGamePrefix + username;
-        var M8Username = globalParameters.data.m8GamePrefix + username;
-        var PlaytechUsername = globalParameters.data.playtechGamePrefix + username;
+        var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
+        var JokerUsername = GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, "");
+        var M8Username = GameUsername.m8Username;
+        var PlaytechUsername = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
 
         //M8 Account Logout
         callMe(M8ConstAction.logoutAction + "&" + M8ConstParameter.secret + "&" + M8ConstParameter.agent + "&" + "username=" + M8Username);
@@ -565,6 +563,12 @@ async function regisrationGame() {
             }
             let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
             var username = resUserData.data.username
+
+            if (globalParameters == null) {
+                var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
+                sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
+                globalParameters = gamePrefix;
+            }
 
             var JokerUsername = globalParameters.data.jokerGamePrefix + username;
             var M8Username = globalParameters.data.m8GamePrefix + username;

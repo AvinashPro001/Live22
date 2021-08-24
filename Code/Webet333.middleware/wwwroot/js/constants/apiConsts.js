@@ -42,6 +42,7 @@ var accountEndPoints = {
     PlaytechBrokenStatus: 'playtech/broken',
     PragmaticBrokenStatus: 'pragmatic/broken',
     userLastTimeUpdate: 'account/users/logintime/update',
+    getUsername: 'account/get_username_by_id'
 };
 
 var promotionEndPoints = {
@@ -111,6 +112,7 @@ var gameRegisterEndPoints = {
     WMRegister: 'wm/register',
     pragmaticRegister: 'pragmatic/register',
     dgRegister: 'dg/register',
+    yeebetRegister: 'yeebet/register',
     sboRegister: 'sbo/register/player',
     gameplayRegister: 'gameplay/register'
 }

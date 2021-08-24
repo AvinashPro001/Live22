@@ -50,7 +50,7 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.DGGamePrefix + user.Username;
+                username = user.DGGamePrefix + user.UserId;
                 password = SecurityHelpers.MD5EncrptText(SecurityHelpers.DecryptPassword(user.Password));
                 bettingLimits = account_helper.GlobalSelect("DGLimit").Result.Value;
             }
@@ -83,8 +83,8 @@ namespace Webet333.api.Controllers
             string username, password;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.DGGamePrefix + user.Username;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.DGUsername;
                 password = SecurityHelpers.MD5EncrptText(SecurityHelpers.DecryptPassword(user.Password));
             }
 
@@ -96,39 +96,6 @@ namespace Webet333.api.Controllers
         }
 
         #endregion DG game Login
-
-        #region DG game Transfer
-
-        [Authorize]
-        [HttpPost(ActionsConst.DGGame.DGTransfer)]
-        private async Task<IActionResult> DGTransfer([FromBody] DgTransferRequest request)
-        {
-            if (!ModelState.IsValid) return BadResponse(ModelState);
-
-            var Role = GetUserRole(User);
-
-            if (Role == RoleConst.Users)
-                request.Id = GetUserId(User).ToString();
-
-            if (Role == RoleConst.Admin)
-                if (string.IsNullOrEmpty(request.Id))
-                    return BadResponse("error_invalid_modelstate");
-
-            if (request.Method == "Withdraw")
-                request.Amount = "-" + request.Amount;
-
-            string username;
-            using (var account_helper = new AccountHelpers(Connection))
-            {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.DGGamePrefix + user.Username;
-            }
-
-            var result = await DGGameHelpers.CallWithdrawDepsoitAPI(username, request.Amount);
-            return OkResponse(result);
-        }
-
-        #endregion DG game Transfer
 
         #region Set default Bet Limit
 

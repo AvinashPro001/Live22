@@ -192,38 +192,31 @@ async function ReturnBalanceBasedOnWalletName(WalletName) {
 //#region  Set GameUsername
 
 async function SetUsername() {
-    var userDetails = JSON.parse(Decryption(GetSessionStorage("userDetails")));
-    var globalParameter = JSON.parse(Decryption(GetSessionStorage("GamePreFix")));
+    var GameUsername = JSON.parse(Decryption(GetSessionStorage("GameUsername")));
 
-    if (userDetails == null) {
-        var res = await GetMethod(accountEndPoints.getProfile);
-        SetSessionStorage('userDetails', Encryption(JSON.stringify(res.response.data)));
-        userDetails = res.response.data;
+    if (GameUsername == null) {
+        var username = await PostMethod(accountEndPoints.getUsername, {});
+        SetSessionStorage('GameUsername', Encryption(JSON.stringify(username.response.data)));
+        GameUsername = username.response.data;
     }
 
-    if (globalParameter == null) {
-        var gamePrefix = await GetMethod(globalEndPoints.globalParameter);
-        SetSessionStorage('GamePreFix', Encryption(JSON.stringify(gamePrefix.response.data)));
-        globalParameter = gamePrefix.response.data;
-    }
-
-    GameUsernames.AGUsername = globalParameter.agGamePrefix + userDetails.username;
-    GameUsernames.AllBetUsername = globalParameter.allBetGamePrefix + userDetails.userId;
-    GameUsernames.DGUsername = globalParameter.dgGamePrefix + userDetails.username;
-    GameUsernames.SAUsername = globalParameter.saGamePrefix + userDetails.username;
-    GameUsernames.WMUsername = globalParameter.wmGamePrefix + userDetails.userId;
-    GameUsernames.SexyBaccaratUsername = globalParameter.sexyGamePrefix + userDetails.username;
-    GameUsernames.PlaytechUsername = (globalParameter.playtechGamePrefix + userDetails.username.replace("#", "")).toUpperCase();;
-    GameUsernames.PragmaticUsername = globalParameter.pragmaticGamePrefix + userDetails.userId;
-    GameUsernames.JokerUsername = globalParameter.jokerGamePrefix + userDetails.username.replace(/[^0-9a-zA-Z]+/g, "");
-    GameUsernames.Mega888Username = userDetails.loginid;
-    GameUsernames.Pussy888Username = userDetails.usernamePussy888;
-    GameUsernames.Kiss918Username = userDetails.username918;
-    GameUsernames.M8Username = globalParameter.m8GamePrefix + userDetails.username;
-    GameUsernames.MaxBetUsername = userDetails.vendorememberid;
-    GameUsernames.YeeBetUsername = globalParameter.yeeBetGamePrefix + userDetails.userId;
-    GameUsernames.SboUsername = globalParameter.sboGamePrefix + userDetails.userId;
-    GameUsernames.GamePlayUsername = globalParameter.gamePlayGamePrefix + userDetails.userId;
+    GameUsernames.AGUsername = GameUsername.agUsername;
+    GameUsernames.AllBetUsername = GameUsername.allBetUsername;
+    GameUsernames.DGUsername = GameUsername.dgUsername;
+    GameUsernames.SAUsername = GameUsername.saUsername;
+    GameUsernames.WMUsername = GameUsername.wmUsername;
+    GameUsernames.SexyBaccaratUsername = GameUsername.sexyUsername;
+    GameUsernames.PlaytechUsername = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
+    GameUsernames.PragmaticUsername = GameUsername.pragmaticUsername;
+    GameUsernames.JokerUsername = GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, "");
+    GameUsernames.Mega888Username = GameUsername.mega888Username;
+    GameUsernames.Pussy888Username = GameUsername.pussy888Username;
+    GameUsernames.Kiss918Username = GameUsername.userName918;
+    GameUsernames.M8Username = GameUsername.m8Username;
+    GameUsernames.MaxBetUsername = GameUsername.maxbetUsername;
+    GameUsernames.YeeBetUsername = GameUsername.yeebetUsername;
+    GameUsernames.SboUsername = GameUsername.sboUsername;
+    GameUsernames.GamePlayUsername = GameUsername.gameplayUsername;
 }
 
 //#endregion
@@ -790,9 +783,6 @@ async function GamePlayWallet(Username, IsDivValueSet = true) {
 //#endregion All Wallet Balance
 
 function StartTimerGameBalanceAPI(GameName) {
-    var userDetails = JSON.parse(Decryption(GetSessionStorage('userDetails')));
-    var globalParameter = JSON.parse(Decryption(GetSessionStorage('GamePreFix')));
-
     switch (GameName) {
         case 'AG':
             let AGtimerId = setInterval(() => { AGWallet(GameUsernames.AGUsername); AGTrigger = true; }, 30000);

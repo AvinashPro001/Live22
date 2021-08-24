@@ -258,6 +258,9 @@
   <data name="error_otp_incorrect" xml:space="preserve">
     <value>You have entered invalid OTP.</value>
   </data>
+  <data name="error_otp_not_send" xml:space="preserve">
+    <value>SMS gateway is under maintenance , please try after some time or contact  customer service .</value>
+  </data>
   <data name="error_password_length" xml:space="preserve">
     <value>The password must be at least 6 characters long</value>
   </data>

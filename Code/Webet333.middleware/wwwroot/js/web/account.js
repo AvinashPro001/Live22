@@ -208,11 +208,13 @@ async function GetProfileAndSetInSessionStorage() {
 
 async function GetGlobalParameterAndSetInSessionStorage() {
     if (GetLocalStorage('currentUser') !== null) {
-        var globalParameter = JSON.parse(Decryption(GetSessionStorage("GamePreFix")));
+        debugger
+        var globalParameter = JSON.parse(Decryption(GetSessionStorage("GameUsername")));
         if (globalParameter == null) {
-            var gamePrefix = await GetMethod(globalEndPoints.globalParameter);
-            SetSessionStorage('GamePreFix', Encryption(JSON.stringify(gamePrefix.response.data)));
-            globalParameter = gamePrefix.response.data;
+            var username = await GetMethod(accountEndPoints.getUsername);
+            debugger
+            SetSessionStorage('GameUsername', Encryption(JSON.stringify(username.response.data)));
+            globalParameter = username.response.data;
         }
     }
 }
@@ -339,9 +341,9 @@ async function DoRegister() {
 
     if (confirmPassword === "") return ShowError(ChangeErroMessage("confirm_password_required_error"));
 
-    if (otp == null || otp == undefined || otp == "")return ShowError(ChangeErroMessage("error_otp_required"));
+    if (otp == null || otp == undefined || otp == "") return ShowError(ChangeErroMessage("error_otp_required"));
 
-    if (otp.length > 6 || otp.length < 6)return ShowError(ChangeErroMessage("error_otp"));
+    if (otp.length > 6 || otp.length < 6) return ShowError(ChangeErroMessage("error_otp"));
 
     if (name === "") return ShowError(ChangeErroMessage("name_required_error"));
 
@@ -532,8 +534,10 @@ async function SendOTP(number) {
         ShowSuccess(ChangeErroMessage("otp_send_success"));
 
     }
+    else {
+        ShowError(res.response.message)
+    }
     LoaderHide();
-
 }
 
 async function VerifiedOTP() {
@@ -680,17 +684,11 @@ async function regisrationGame() {
                 var res = await PostMethod(accountEndPoints.gameRegisterCheck, userModel);
                 resSelectUser = res.response.data;
                 SetSessionStorage('userRegisterDetails', Encryption(JSON.stringify(res.response.data)));
-            }
 
-            var globalParameters = JSON.parse(Decryption(GetSessionStorage("GamePreFix")));
-            if (globalParameters == null) {
-                var gamePrefix = await GetMethod(globalEndPoints.globalParameter);
-                SetSessionStorage('GamePreFix', Encryption(JSON.stringify(gamePrefix.response.data)));
-                globalParameters = gamePrefix.response.data;
+                var username = await PostMethod(accountEndPoints.getUsername, {});
+                SetSessionStorage('GameUsername', Encryption(JSON.stringify(username.response.data)));
+                SetUsername();
             }
-
-            var username = resUserData.username
-            var M8Username = globalParameters.m8GamePrefix + username;
 
             if (resSelectUser.MaxBet !== true) {
                 var userMaxBet = {
@@ -777,6 +775,12 @@ async function regisrationGame() {
                 var model = {}
                 try { await PostMethod(gameRegisterEndPoints.pragmaticRegister, model); }
                 catch { }
+            }
+
+            if (resSelectUser.YeeBet !== true) {
+                let model = {}
+                try { await PostMethod(gameRegisterEndPoints.yeebetRegister, model); }
+                catch (e) { }
             }
 
             if (resSelectUser.SBO !== true) {

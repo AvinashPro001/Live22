@@ -595,19 +595,21 @@ async function logingGame(gameName) {
 }
 
 async function PlaytechBrokenStatus() {
-    var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
-    var PlaytechUsername = globalParameters.data.playtechGamePrefix + resUserData.data.username;
-    let userModel = { username: PlaytechUsername };
+    var GameUsername = JSON.parse(dec(sessionStorage.getItem("GameUsername")));
+    var PlaytechUsername = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
+    let userModel = {
+        username: PlaytechUsername
+    };
     PlaytechWalletBalance(PlaytechUsername);
     await PostMethod(apiEndPoints.PlaytechBrokenStatus, userModel);
 }
 
 async function PragmaticBrokenStatus() {
-    var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
-    var PragmaticUsername = globalParameters.data.pragmaticGamePrefix + resUserData.data.userId;
-    let userModel = { username: PragmaticUsername };
+    var GameUsername = JSON.parse(dec(sessionStorage.getItem("GameUsername")));
+    var PragmaticUsername = GameUsername.pragmaticUsername;
+    let userModel = {
+        username: PragmaticUsername
+    };
     PragmaticWalletBalance(PragmaticUsername);
     await PostMethod(apiEndPoints.PragmaticBrokenStatus, userModel);
 }
@@ -678,20 +680,13 @@ async function GamePlayIdentifiy(Slotvalue) {
 async function GameLoginMobile(gamename) {
     LoaderShow();
 
-    var userDetails = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    var globalParameter = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
+    var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
     let resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
 
-    if (userDetails == null) {
-        var res = await GetMethod(apiEndPoints.getProfile);
-        sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
-        userDetails = res;
-    }
-
-    if (globalParameter == null) {
-        var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
-        sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
-        globalParameter = gamePrefix;
+    if (GameUsername == null) {
+        var username = await PostMethod(apiEndPoints.getUsername, {});
+        sessionStorage.setItem('GameUsername', enc(JSON.stringify(username.data)));
+        GameUsername = username.data;
     }
 
     var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
@@ -706,16 +701,13 @@ async function GameLoginMobile(gamename) {
             let userModel = { id: resUserData.data.id };
             let resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
             sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
+            resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
         }
+        
 
-        resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
-        let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
-
-        var username = resUserData.data.username;
-
-        var JokerUsername = globalParameters.data.jokerGamePrefix + username;
-        var M8Username = globalParameters.data.m8GamePrefix + username;
-        var PlaytechUsername = globalParameters.data.playtechGamePrefix + username;
+        var JokerUsername = GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, "")
+        var M8Username = GameUsername.m8Username;
+        var PlaytechUsername = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
 
         switch (gamename) {
             case 'MaxBet':
@@ -1219,10 +1211,8 @@ function openGamePlayGame(GameID) {
 async function openPlaytechGame(game) {
 
     var languageCode = (localStorage.getItem('language') === "zh-Hans" ? "ZH-CN" : "EN")
-    var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-    let globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
-    var usernamePrifix = globalParameters.data.playtechGamePrefix
-    var username = (usernamePrifix + res.data.username.replace("#", "")).toUpperCase();
+    var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
+    var username = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
     var password = dec(localStorage.getItem('currentUserData'));
     var mobiledomain = "tothinkit.com";
     var systemidvar = "424";

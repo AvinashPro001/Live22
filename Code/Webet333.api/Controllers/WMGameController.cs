@@ -76,8 +76,8 @@ namespace Webet333.api.Controllers
             string username, password;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.WMGamePrefix + user.UserId;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.WMUsername;
                 password = SecurityHelpers.DecryptPassword(user.Password);
             }
             int lang = Language.Code == LanguageConst.English ? 1 : (Language.Code == LanguageConst.Chinese ? 0 : 7);

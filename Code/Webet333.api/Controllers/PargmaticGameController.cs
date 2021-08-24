@@ -78,8 +78,8 @@ namespace Webet333.api.Controllers
             string username;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.PragmaticGamePrefix + user.UserId;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.PragmaticUsername;
             }
             var languageCode = Language.Name == "English" ? "en" : (Language.Name == "Malay" ? "ms" : "zh");
             var platform = request.IsMobile ? "MOBILE" : "WEB";

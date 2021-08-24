@@ -55,7 +55,7 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.SAGamePrefix + user.Username;
+                username = user.SAGamePrefix + user.UserId;
             }
             try
             {
@@ -104,8 +104,8 @@ namespace Webet333.api.Controllers
             string username;
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.SAGamePrefix + user.Username;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.SAUsername;
             }
 
             try
@@ -129,110 +129,5 @@ namespace Webet333.api.Controllers
         }
 
         #endregion SA game Login
-
-        #region Deposit Member
-
-        [Authorize]
-        [HttpPost(ActionsConst.SA.SADeposit)]
-        private async Task<IActionResult> SADeposit([FromBody] SADepositWithdrawRequest request)
-        {
-            if (!ModelState.IsValid) return BadResponse(ModelState);
-
-            var Role = GetUserRole(User);
-
-            if (Role == RoleConst.Users)
-                request.Id = GetUserId(User).ToString();
-
-            if (Role == RoleConst.Admin)
-                if (string.IsNullOrEmpty(request.Id))
-                    return BadResponse("error_invalid_modelstate");
-
-            string username;
-            using (var account_helper = new AccountHelpers(Connection))
-            {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.SAGamePrefix + user.Username;
-            }
-            try
-            {
-                var response = await SAGameHelpers.CallAPIDeposit(username, request.Amount);
-
-                if (response.Descendants("ErrorMsgId").Single().Value == "0")
-                {
-                    return OkResponse(new SADepositWithdrawResponse
-                    {
-                        status = response.Descendants("ErrorMsgId").Single().Value,
-                        Message = response.Descendants("ErrorMsg").Single().Value,
-                        Amount = Convert.ToDecimal(response.Descendants("CreditAmount").Single().Value),
-                        Balance = Convert.ToDecimal(response.Descendants("Balance").Single().Value),
-                        OrderId = response.Descendants("OrderId").Single().Value
-                    });
-                }
-
-                return OkResponse(new SADepositWithdrawResponse
-                {
-                    status = response.Descendants("ErrorMsgId").Single().Value,
-                    Message = response.Descendants("ErrorMsg").Single().Value,
-                });
-            }
-            catch
-            {
-                return OkResponse(new SARegisterResponse { status = "8585", Message = "Maintenance" });
-            }
-        }
-
-        #endregion Deposit Member
-
-        #region Withdraw Member
-
-        [Authorize]
-        [HttpPost(ActionsConst.SA.SAWithdraw)]
-        private async Task<IActionResult> SAWithdraw([FromBody] SADepositWithdrawRequest request)
-        {
-            if (!ModelState.IsValid) return BadResponse(ModelState);
-
-            var Role = GetUserRole(User);
-
-            if (Role == RoleConst.Users)
-                request.Id = GetUserId(User).ToString();
-
-            if (Role == RoleConst.Admin)
-                if (string.IsNullOrEmpty(request.Id))
-                    return BadResponse("error_invalid_modelstate");
-
-            string username;
-            using (var account_helper = new AccountHelpers(Connection))
-            {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.SAGamePrefix + user.Username;
-            }
-
-            try
-            {
-                var response = await SAGameHelpers.CallAPIWithdraw(username, request.Amount);
-                if (response.Descendants("ErrorMsgId").Single().Value == "0")
-                {
-                    return OkResponse(new SADepositWithdrawResponse
-                    {
-                        status = response.Descendants("ErrorMsgId").Single().Value,
-                        Message = response.Descendants("ErrorMsg").Single().Value,
-                        Amount = Convert.ToDecimal(response.Descendants("DebitAmount").Single().Value),
-                        Balance = Convert.ToDecimal(response.Descendants("Balance").Single().Value),
-                        OrderId = response.Descendants("OrderId").Single().Value
-                    });
-                }
-                return OkResponse(new SADepositWithdrawResponse
-                {
-                    status = response.Descendants("ErrorMsgId").Single().Value,
-                    Message = response.Descendants("ErrorMsg").Single().Value,
-                });
-            }
-            catch
-            {
-                return OkResponse(new SARegisterResponse { status = "8585", Message = "Maintenance" });
-            }
-        }
-
-        #endregion Withdraw Member
     }
 }

@@ -728,7 +728,8 @@ namespace Webet333.api.Controllers
                 if (string.IsNullOrWhiteSpace(request.Id))  // Called by user
                 {
                     var response = await account_help.SendOtp(request);
-                    if (response.ErrorCode != 0) return BadResponse();
+                    if (response.ErrorCode != 0) return BadResponse("error_otp_not_send");
+                    return OkResponse(response);
                 }
                 else // Called by Admin
                 {
@@ -736,9 +737,9 @@ namespace Webet333.api.Controllers
                     request.MobileNo = result.MobileNo;
                     request.Role = GetUserRole(User);
                     var response = await account_help.SendOtp(request);
-                    if (response.ErrorCode != 0) return BadResponse();
+                    if (response.ErrorCode != 0) return BadResponse("error_otp_not_send");
+                    return OkResponse(response);
                 }
-                return OkResponse();
             }
         }
 
@@ -1106,14 +1107,33 @@ namespace Webet333.api.Controllers
 
         #endregion
 
-        //#region Check password
+        #region Get Username by UserId
+        [HttpPost(ActionsConst.Account.GetUsername)]
+        public async Task<IActionResult> GetUsernameById([FromBody]GetByIdRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
 
-        //[HttpPost("testpassword")]
-        //public IActionResult checkpassword(string password)
-        //{
-        //    return OkResponse(SecurityHelpers.DecryptPassword(password));
-        //}
+            if (GetUserRole(User) == RoleConst.Users)
+                request.Id = GetUserId(User).ToString();
 
-        //#endregion Check password
+            using (var account_helper = new AccountHelpers(Connection))
+            {
+                var result = await account_helper.GetUsernameInfo(request.Id);
+                return OkResponse(result);
+            }
+        }
+
+        #endregion
+
+        #region Check password
+
+        [HttpPost("testpassword")]
+        private IActionResult checkpassword(string password)
+        {
+            return OkResponse(SecurityHelpers.DecryptPassword(password));
+        }
+
+        #endregion Check password
     }
 }

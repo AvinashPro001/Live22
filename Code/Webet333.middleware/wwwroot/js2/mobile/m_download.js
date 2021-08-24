@@ -22,7 +22,7 @@ async function authorize() {
     else {
 
         var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
-        var globalParameters = JSON.parse(dec(sessionStorage.getItem('GamePreFix')));
+        var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
 
         if (res == null || res.data.username == null || res.data.usernamePussy888 == null) {
             var response = await GetMethod(apiEndPoints.getProfile);
@@ -30,13 +30,13 @@ async function authorize() {
             userDetails = response;
         }
 
-        if (globalParameters == null) {
-            var gamePrefix = await GetMethodWithReturn(apiEndPoints.globalParameter);
-            sessionStorage.setItem('GamePreFix', enc(JSON.stringify(gamePrefix)));
-            globalParameters = gamePrefix;
+        if (GameUsername == null) {
+            var username = await PostMethod(apiEndPoints.getUsername, {});
+            sessionStorage.setItem('GameUsername', enc(JSON.stringify(username.data)));
+            GameUsername = username.data;
         }
 
-        var usernamePrifix = globalParameters.data.jokerGamePrefix + res.data.username.replace(/[^0-9a-zA-Z]+/g, "");
+        var usernamePrifix = GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, "")
 
         if ($('#M8Download').prop('id') !== '') {
             document.getElementById('JokeruserName').innerText = jokerConstParameterValue.AppID + '.' + usernamePrifix;

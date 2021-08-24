@@ -258,6 +258,9 @@
   <data name="error_otp_incorrect" xml:space="preserve">
     <value>您输入了无效的OTP。</value>
   </data>
+  <data name="error_otp_not_send" xml:space="preserve">
+    <value>短信网关正在维护中，请稍后尝试或联系客服。</value>
+  </data>
   <data name="error_password_length" xml:space="preserve">
     <value>密码长度必须为6个字符</value>
   </data>

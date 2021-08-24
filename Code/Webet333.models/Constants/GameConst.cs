@@ -39,6 +39,43 @@
             public const string GamePlay = "GamePlay";
         }
 
+        public class GamesNames
+        {
+            public const string M8Game = "M8";
+
+            public const string AGGame = "AG";
+
+            public const string PlaytechGame = "PLAYTECH";
+
+            public const string JokerGame = "JOKER";
+
+            public const string Mega888 = "MEGA888";
+
+            public const string _918KisGame = "918 KISS";
+
+            public const string DGGame = "DG";
+
+            public const string Sexy = "SEXY";
+
+            public const string SA = "SA";
+
+            public const string Pussy888 = "PUSSY888";
+
+            public const string AllBet = "AllBet";
+
+            public const string WM = "WM";
+
+            public const string Pragmatic = "PRAGMATIC";
+
+            public const string MaxbetGame = "MAXBET";
+
+            public const string YeeBet = "YeeBet";
+
+            public const string SBO = "SBO";
+
+            public const string GamePlay = "GamePlay";
+        }
+
 #if DEBUG
 
         public const string BaseUrl = "https://www.uatwb3.com/";
@@ -65,7 +102,7 @@
 
             public const string Currency = "2";
 
-            #region Betting limit Constant
+        #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -93,7 +130,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-            #endregion Betting limit Constant
+        #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -201,43 +238,6 @@
             public const string CountryCode = "MY";
 
             public const string VipLevel = "1";
-        }
-
-        public class GamesNames
-        {
-            public const string JokerGame = "JOKER";
-
-            public const string AGGame = "AG";
-
-            public const string DGGame = "DG";
-
-            public const string PlaytechGame = "PLAYTECH";
-
-            public const string _918KisGame = "918 KISS";
-
-            public const string M8Game = "M8";
-
-            public const string MaxbetGame = "MAXBET";
-
-            public const string Mega888 = "MEGA888";
-
-            public const string SA = "SA";
-
-            public const string Sexy = "SEXY";
-
-            public const string Pussy888 = "PUSSY888";
-
-            public const string AllBet = "AllBet";
-
-            public const string WM = "WM";
-
-            public const string Pragmatic = "PRAGMATIC";
-
-            public const string YeeBet = "YeeBet";
-
-            public const string SBO = "SBO";
-
-            public const string GamePlay = "GamePlay";
         }
 
         public class Mega888
@@ -869,7 +869,7 @@
 
             public const string Currency = "2";
 
-        #region Betting limit Constant
+            #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -897,7 +897,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-        #endregion Betting limit Constant
+            #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -1005,41 +1005,6 @@
             public const string CountryCode = "MY";
 
             public const string VipLevel = "1";
-        }
-
-        public class GamesNames
-        {
-            public const string JokerGame = "JOKER";
-
-            public const string AGGame = "AG";
-
-            public const string DGGame = "DG";
-
-            public const string PlaytechGame = "PLAYTECH";
-
-            public const string _918KisGame = "918 KISS";
-
-            public const string M8Game = "M8";
-
-            public const string MaxbetGame = "MAXBET";
-
-            public const string Mega888 = "MEGA888";
-
-            public const string SA = "SA";
-
-            public const string Sexy = "SEXY";
-
-            public const string Pussy888 = "PUSSY888";
-
-            public const string AllBet = "AllBet";
-
-            public const string WM = "WM";
-
-            public const string Pragmatic = "PRAGMATIC";
-
-            public const string YeeBet = "YeeBet";
-
-            public const string SBO = "SBO";
         }
 
         public class Mega888
@@ -1524,6 +1489,117 @@
             public static class ErrorMessage
             {
                 public const string Success = "No Error";
+            }
+        }
+
+        public class GamePlay
+        {
+            public const string APIURL = "http://www.connect6play.com/doBusiness.do";
+
+            public const string MerchantCode = "xpwebetmyr";
+
+            public const string DESKey = "1iwsvpQ6";
+
+            public const string SHA256Key = "3v35vr2aggPcJGUx";
+
+            public const string Currency = "MYR";
+
+            public const int ProductType = 76;
+
+            public const string ProductName = "GPI";
+
+            public const string Prefix = "02g";
+
+            public const string GameCode = "GPI001";
+
+            /*
+             * URL  =>  https://images.b332411.com:42666/TCG_GAME_ICONS/productname/gameid.png
+             * Example  =>  https://images.b332411.com:42666/TCG_GAME_ICONS/GPI/GPI200.png
+             */
+            public const string ImageURL = "https://images.b332411.com:42666/TCG_GAME_ICONS/{0}/{1}.png";
+
+            /*
+             * URL  =>  https://images.b332411.com:42666/TCG_GAME_ICONS/productname/languagecode/gameid.png
+             * Example  =>  https://images.b332411.com:42666/TCG_GAME_ICONS/GPI/EN/GPI200.png
+             */
+            public const string ImageURLWithLanguage = "https://images.b332411.com:42666/TCG_GAME_ICONS/{0}/{1}/{2}.png";
+
+            public class GameType
+            {
+                public const string Slot = "RNG";
+
+                public const string Fish = "FISH";
+            }
+
+            public class GameMode
+            {
+                public const string Real = "1";
+
+                public const string Trial = "0";
+            }
+
+            public class BackURL
+            {
+                public const string UAT = "https://uatwb3.com/";
+
+                public const string Live = "https://webet333.com/";
+            }
+
+            public class LanguageCode
+            {
+                public const string TraditionalChinese = "TW";
+
+                public const string SimplifiedChinese = "CN";
+
+                public const string English = "EN";
+
+                public const string Malay = "MS";
+            }
+
+            public class Method
+            {
+                public const string Register = "cm";
+
+                public const string UpdatePassword = "up";
+
+                public const string Login = "lg";
+
+                public const string GetGameList = "tgl";
+
+                public const string Transfer = "ft";
+
+                public const string GetBalance = "gb";
+
+                public const string GetBettingDetails = "bd";
+            }
+
+            public class Platform
+            {
+                public const string All = "all";
+
+                public const string Web = "html5-desktop";
+
+                public const string Mobile = "html5";
+            }
+
+            public class ClientType
+            {
+                public const string All = "all";
+
+                public const string Cmputer = "pc";
+
+                public const string Mobile = "phone";
+
+                public const string ComputerWeb = "web";
+
+                public const string MobileWeb = "html5";
+            }
+
+            public class FundType
+            {
+                public const string Deposit = "1";
+
+                public const string Withdraw = "2";
             }
         }
 

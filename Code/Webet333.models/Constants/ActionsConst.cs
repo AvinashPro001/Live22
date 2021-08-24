@@ -6,6 +6,8 @@
 
         public class Account
         {
+            public const string GetUsername = "account/get_username_by_id";
+
             public const string CheckUsernameExists = "account/check/username/exists";
 
             public const string Login = "account/login";
@@ -214,6 +216,8 @@
             public const string AdminModuleSelectForDropdown = "admin/module/select_for_dropdown";
 
             public const string DailyReportSelect = "daily/report/select";
+
+            public const string VIPLevelReportSelect = "VIPLevel/report/select";
         }
 
         public class Promotions

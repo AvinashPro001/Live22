@@ -22,9 +22,9 @@
 
         public const string registerM8 = "Game/Register/M8";
 
-        public const string registerMaxBet = "https://uatapi.wb3api.com/api/v1/";
+        public const string registerMaxBet = baseUrl;
 
-        public const string registerMega888 = "https://uatapi.wb3api.com/api/v1/";
+        public const string registerMega888 = baseUrl;
 
         public const string registerYeeBet = "yeebet/register";
 

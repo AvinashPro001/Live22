@@ -36,25 +36,6 @@ namespace Webet333.api.Controllers
 
         #endregion Global Variable
 
-        #region Registration Agent
-
-        [AllowAnonymous]
-        [HttpPost(ActionsConst.SBO.RegisterAgent)]
-        public async Task<IActionResult> RegisterAgentAsync([FromBody] SBORegistrationAgentRequest request)
-        {
-            if (request == null) return BadResponse("error_empty_request");
-            if (!ModelState.IsValid) return BadResponse(ModelState);
-
-            using (var SBO_helper = new SBOGameHelpers())
-            {
-                var result = await SBO_helper.CallRegisterAgentAPI(request);
-
-                return OkResponse(result);
-            }
-        }
-
-        #endregion Registration Agent
-
         #region Registration Player
 
         [HttpPost(ActionsConst.SBO.RegisterPlayer)]
@@ -113,8 +94,8 @@ namespace Webet333.api.Controllers
 
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.SBOGamePrefix + user.UserId;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.SBOUsername;
             }
 
             var loginToken = await SBOGameHelpers.CallLoginAPI(username);

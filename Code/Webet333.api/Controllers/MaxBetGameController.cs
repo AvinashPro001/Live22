@@ -50,7 +50,7 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var userdata = await account_helper.UserGetBalanceInfo(request.UserId);
-                request.Username = userdata.MaxbetGamePrefix + userdata.Username;
+                request.Username = userdata.MaxbetGamePrefix + userdata.UserId;
             }
 
             var vendorMemberId = request.Username;
@@ -170,8 +170,8 @@ namespace Webet333.api.Controllers
             string VendorMemberId;
             using (var account_help = new AccountHelpers(Connection: Connection))
             {
-                var globalparameters = await account_help.UserGetBalanceInfo(request.Id);
-                VendorMemberId = globalparameters.VendorMemberId;
+                var user = await account_help.GetUsernameInfo(request.Id);
+                VendorMemberId = user.MaxbetUsername;
             }
 
             string Url = "";
@@ -191,65 +191,6 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Game Login
-
-        #region Max Bet Token Update
-
-        [Authorize]
-        [HttpPost(ActionsConst.MaxBetGame.MaxBetGameTokenUpdate)]
-        public async Task<IActionResult> MaxBetTokenUpdate([FromBody] GameMaxBetTokenUpdateRequest request)
-        {
-            if (!ModelState.IsValid) return BadResponse(ModelState);
-            if (request == null) return BadResponse("error_empty_request");
-
-            await ValidateUser();
-
-            request.Token = $"WB333_{GameConst.MaxBet.VendorId}{request.Token}";
-
-            using (var game_help = new MaxBetGameHelper(Connection: Connection))
-            {
-                var result = await game_help.MaxBetTokenUpdate(request: request, UserEntity.Id.ToString());
-                var updateToken = await game_help.FindUserMaxBetToken(request.Token);
-                return OkResponse(updateToken);
-            }
-        }
-
-        #endregion Max Bet Token Update
-
-        #region Max Bet Game Deposit and Withdraw API
-
-        [Authorize]
-        [HttpPost(ActionsConst.MaxBetGame.MaxBetGameDepositeWithdrawl)]
-        private async Task<IActionResult> MaxBetDepositAndWithdrawl([FromBody] GameMaxBetDepositAndWithdrawlRequest request)
-        {
-            if (!ModelState.IsValid) return BadResponse(ModelState);
-
-            var Role = GetUserRole(User);
-
-            if (Role == RoleConst.Users)
-                request.UserId = GetUserId(User).ToString();
-
-            if (Role == RoleConst.Admin)
-                if (string.IsNullOrEmpty(request.UserId))
-                    return BadResponse("error_invalid_modelstate");
-
-            string vendorMemberId;
-            using (var account_help = new AccountHelpers(Connection: Connection))
-            {
-                var globalparameters = await account_help.UserGetBalanceInfo(request.UserId);
-                vendorMemberId = globalparameters.VendorMemberId;
-            }
-
-            var response = await MaxBetGameHelper.CallMaxbetDepsoitWithdrawAPI(vendorMemberId, request.Amount, request.Method);
-
-            if (response.ErrorCode == 0)
-            {
-                return OkResponse(response);
-            }
-
-            return OkResponse(response);
-        }
-
-        #endregion Max Bet Game Deposit and Withdraw API
 
         #region SetMemberBetSetting
 

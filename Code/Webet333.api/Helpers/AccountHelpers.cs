@@ -45,7 +45,7 @@ namespace Webet333.api.Helpers
             {
                 using (var repository = new DapperRepository<dynamic>(Connection))
                 {
-                    await repository.AddOrUpdateAsync(StoredProcConsts.Account.SetUsers, new { request.Name, UserName = request.Username, MobileNo = request.Mobile, Password = SecurityHelpers.EncryptPassword(request.Password), Role, request.ReferenceKeyword,request.OTP });
+                    await repository.AddOrUpdateAsync(StoredProcConsts.Account.SetUsers, new { request.Name, UserName = request.Username, MobileNo = request.Mobile, Password = SecurityHelpers.EncryptPassword(request.Password), Role, request.ReferenceKeyword, request.OTP });
                 }
             }
             return await FindUser(request.Username, request.Password, uniqueId: UniqueId, grantType: GrantTypeEnums.user.ToString());
@@ -311,35 +311,50 @@ namespace Webet333.api.Helpers
 
         #endregion User Info Get for GetBalance
 
+
+        #region Get Username By ID
+
+        public async Task<GetUsernameByIdResponse> GetUsernameInfo(string UserId, string ToWalletName = null)
+        {
+            using (var Repository = new DapperRepository<GetUsernameByIdResponse>(Connection))
+            {
+                return await Repository.FindAsync(StoredProcConsts.Account.GameUsernameInfo, new { UserId, ToWalletName });
+            }
+        }
+
+        #endregion Get Username By ID
+
         #region User Game Password Update
 
         public async Task UserGamePasswordChange(string UserId, string Password, IHostingEnvironment _hostingEnvironment)
         {
             try
             {
-                var info = await UserGetBalanceInfo(UserId);
+                var info = await GetUsernameInfo(UserId);
 
-                DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
-                var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
-                var perameter = $"Method={GameConst.Joker.SetPassword}&Password={Password}&Timestamp={temp}&Username={info.JokerGamePrefix}{info.Username}";
-                var stringContent = new StringContent(perameter, Encoding.UTF8, "application/x-www-form-urlencoded");
-                var jokerURL = $"{GameConst.Joker.jokerBaseUrl}?" +
-                                $"AppID={GameConst.Joker.AppID}&" +
-                                $"Signature={GameHelpers.GenerateHas(perameter)}";
+                //DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
+                //var temp = (long)DateTime.UtcNow.Subtract(UnixEpoch).TotalSeconds;
+                //var perameter = $"Method={GameConst.Joker.SetPassword}&Password={Password}&Timestamp={temp}&Username={info.JokerUsername}";
+                //var stringContent = new StringContent(perameter, Encoding.UTF8, "application/x-www-form-urlencoded");
+                //var jokerURL = $"{GameConst.Joker.jokerBaseUrl}?" +
+                //                $"AppID={GameConst.Joker.AppID}&" +
+                //                $"Signature={GameHelpers.GenerateHas(perameter)}";
 
-                var jokerPasswordUpdate = JsonConvert.DeserializeObject(await GameHelpers.CallThirdPartyApi(jokerURL, stringContent));
+                //var jokerPasswordUpdate = JsonConvert.DeserializeObject(await GameHelpers.CallThirdPartyApi(jokerURL, stringContent));
+
+                await JokerHelpers.JokerPasswordSet(info.JokerUsername, Password);
 
                 var PlaytechURL = $"{GameConst.Playtech.playtechBaseUrl}" +
-                                    $"update?playername={info.PlaytechGamePrefix.ToUpper()}{info.Username.ToUpper()}&password={Password}";
+                                    $"update?playername={info.PlaytechUsername.ToUpper()}&password={Password}";
 
                 DefaultHelper defaultHelper = new DefaultHelper(_hostingEnvironment);
                 dynamic resultPlaytech = JsonConvert.DeserializeObject(await defaultHelper.PlaytechAPICertificate(PlaytechURL, true, true));
 
-                await DGGameHelpers.CallUpdateuserAPI(info.DGGamePrefix + info.Username, Password);
+                await DGGameHelpers.CallUpdateuserAPI(info.DGUsername, Password);
 
-                await AllBetGameHelpers.ChangePasswordCallAPI(info.AllBetGamePrefix + info.UserId, Password);
+                await AllBetGameHelpers.ChangePasswordCallAPI(info.AllBetUsername, Password);
 
-                await WMGameHelpers.ChangePasswordCallAPI(info.WMGamePrefix + info.UserId, Password);
+                await WMGameHelpers.ChangePasswordCallAPI(info.WMUsername, Password);
             }
             catch (Exception ex) { }
         }
@@ -526,10 +541,10 @@ namespace Webet333.api.Helpers
             }
         }
 
-        public async Task<OtpResponse> SendOtp(SendOtpRequest request)
+        public async Task<OTPResponseWithSMSApiResponse> SendOtp(SendOtpRequest request)
         {
-            OtpResponse response;
-            using (var dapperRepository = new DapperRepository<OtpResponse>(Connection))
+            OTPResponseWithSMSApiResponse response;
+            using (var dapperRepository = new DapperRepository<OTPResponseWithSMSApiResponse>(Connection))
             {
                 response = await dapperRepository.FindAsync(StoredProcConsts.Account.GenrateOtp, new { request.MobileNo, request.Role });
             }
@@ -540,12 +555,20 @@ namespace Webet333.api.Helpers
 
             var Message = response.OTP + " is your OTP and it is vaild for next 5 mins. Please do not share this OTP with anyone. Thank you";
 
+            var resMessage = string.Empty;
+
             if (request.Trio)
-                await CallTrioSMSAPI(request.MobileNo, Message);
+                resMessage = await CallTrioSMSAPI(request.MobileNo, Message);
+
 
             if (request.Etracker)
-                await CallEtrackerSMSAPI(request.MobileNo, Message);
-            
+                resMessage = await CallEtrackerSMSAPI(request.MobileNo, Message);
+
+            if (resMessage.Length <= 3)
+                response.ErrorCode = 1;
+
+            response.response = resMessage.ToString();
+
             return response;
         }
 
@@ -647,7 +670,7 @@ namespace Webet333.api.Helpers
         {
             using (var dapperRepository = new DapperRepository<dynamic>(Connection))
             {
-                var res=await dapperRepository.FindAsync(StoredProcConsts.Account.CheckUsernamExists, request);
+                var res = await dapperRepository.FindAsync(StoredProcConsts.Account.CheckUsernamExists, request);
                 return res;
             }
         }

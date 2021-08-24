@@ -4,6 +4,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -57,6 +58,10 @@ namespace Webet333.api.Controllers
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
                 username = user.GamePlayGamePrefix + user.UserId;
                 password = SecurityHelpers.DecryptPassword(user.Password);
+
+                password = Regex.Replace(password, @"[^0-9a-zA-Z]+", "");
+                if (password.Length < 6) password = $"{user.GamePlayGamePrefix}{password}";
+                else if (password.Length > 12) password = password.Substring(0, 11);
             }
 
             using (var GamePlay_Helpers = new GamePlayGameHelpers(Connection))
@@ -131,8 +136,8 @@ namespace Webet333.api.Controllers
 
             using (var account_helper = new AccountHelpers(Connection))
             {
-                var user = await account_helper.UserGetBalanceInfo(request.Id);
-                username = user.GamePlayGamePrefix + user.UserId;
+                var user = await account_helper.GetUsernameInfo(request.Id);
+                username = user.GamePlayUsername;
             }
 
             string language = Language.Code == LanguageConst.Chinese ? GamePlayConst.LanguageCode.TraditionalChinese : Language.Code == LanguageConst.Malay ? GamePlayConst.LanguageCode.Malay : GamePlayConst.LanguageCode.English;
