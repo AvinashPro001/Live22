@@ -1,7 +1,8 @@
 @page
-@{ ViewData["Title"] = "History";
-    Layout = ""; }
-
+@{
+    ViewData["Title"] = "History";
+    Layout = "";
+}
 
 <style>
     ::-webkit-scrollbar-track {
@@ -20,11 +21,9 @@
     <script>
         document.body.classList.add("no-pad-top");
         $('body').css('padding-top', '0px');
-        if (GetLocalStorage('currentUser') === null)
-            loadPageHome();
+        if (GetLocalStorage('currentUser') === null) loadPageHome();
     </script>
     <div id="History" class="white-bg history-page">
-
         <div class="container">
             <div class="info-form text-center">
                 <div class="row">
@@ -54,54 +53,43 @@
 
         <div class="history-tabs">
             <div class="tab-content">
-
                 <div id="profileTransfer" class="tab-pane fade in">
                     <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
-                        <ul class="listing-for-deposite" id="transferHistory">
-                        </ul>
+                        <ul class="listing-for-deposite" id="transferHistory"></ul>
                     </div>
                 </div>
 
                 <div id="profileBettingsummery" class="tab-pane fade in">
                     <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
-                        <ul class="listing-for-deposite" id="bettingsummery">
-                        </ul>
+                        <ul class="listing-for-deposite" id="bettingsummery"></ul>
                     </div>
                 </div>
 
                 <div id="depositwithdraw" class="tab-pane fade in active">
                     <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
-                        <ul class="listing-for-deposite" id="depositHistory">
-                        </ul>
+                        <ul class="listing-for-deposite" id="depositHistory"></ul>
                     </div>
                 </div>
 
                 <div id="promotion-apply" class="tab-pane fade in">
                     <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
-                        <ul class="listing-for-deposite" id="promotionHistory">
-                        </ul>
+                        <ul class="listing-for-deposite" id="promotionHistory"></ul>
                     </div>
                 </div>
 
                 <div id="rebate" class="tab-pane fade in">
                     <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
-                        <ul class="listing-for-deposite" id="rebateHistory">
-                        </ul>
+                        <ul class="listing-for-deposite" id="rebateHistory"></ul>
                     </div>
                 </div>
 
                 <div id="reward" class="tab-pane fade in">
                     <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
-                        <ul class="listing-for-deposite" id="rewardHistory">
-                        </ul>
-
+                        <ul class="listing-for-deposite" id="rewardHistory"></ul>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <div class="footer-widget" id="footerWidget">
@@ -327,21 +315,14 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
-            $("#chatting").toggle();
-        });
-        $(".contact-user").mouseover(function () {
-            $("#chatting").toggle();
-        });
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () { $("#chatting").toggle(); });
+        $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
     });
 </script>
-
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".open-modal").click();
-    });
+    $(document).ready(function () { $(".open-modal").click(); });
     jQuery(".scroll-down-visible").hide();
     jQuery("#more-arrow").click(function () {
         jQuery(".scroll-down-visible").toggleClass("show");
@@ -351,17 +332,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(".navbar-toggle,.canvas-overlay").click(function () {
-            if (!$("html").hasClass('intro')) {
-                $("html").addClass("intro");
-            }
-            else {
-                $("html").removeClass("intro");
-            }
+            if (!$("html").hasClass('intro')) $("html").addClass("intro");
+            else $("html").removeClass("intro");
         });
         $(".canvas-overlay").click(function () {
-            if ($(".navbar-collapse").hasClass('in')) {
-                $(".navbar-collapse").removeClass("in");
-            }
+            if ($(".navbar-collapse").hasClass('in')) $(".navbar-collapse").removeClass("in");
         });
     });
 </script>
@@ -369,15 +344,10 @@
 <script>
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
-        if (scroll >= 1) {
-            $("header").addClass("sticky-header");
-        }
-        else {
-            $("header").removeClass("sticky-header");
-        }
+        if (scroll >= 1) $("header").addClass("sticky-header");
+        else $("header").removeClass("sticky-header");
     });
 </script>
-
 <script>
 
     function get() {
@@ -389,67 +359,49 @@
             async: false,
             success: function (lang) {
                 $('.lang').each(function (index, element) {
-                    if (localStorage.getItem("language") === "ms-MY") {
-                        $('body').addClass('malay-font');
-                    }
+                    if (localStorage.getItem("language") === "ms-MY") $('body').addClass('malay-font');
                     $(this).text(lang[$(this).attr('key')]);
                 });
                 $("[data-translate]").each(function () {
-                    if ($(this).is("input")) {
-                        $(this).attr('placeholder', lang[$(this).data("translate")]);
-                    } else {
-                        $(this).text(lang[$(this).data("translate")]);
-                    }
+                    if ($(this).is("input")) $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    else $(this).text(lang[$(this).data("translate")]);
                 });
             }
         });
     }
 
-    setTimeout(() => {
-        get();
-    }, 200);
+    setTimeout(() => { get(); }, 200);
 
     async function OnScroll() {
-
         if ((NumberOfLine % 5) == 0) {
-
             NumberOfLine = NumberOfLine + 1;
             if (!apiRunning) {
                 pageNumber = pageNumber + 1;
                 await CallFunctionAccordingToTab()
             }
         }
-        else {
-            NumberOfLine = NumberOfLine + 1;
-        }
+        else NumberOfLine = NumberOfLine + 1;
     }
 
 </script>
-
 <script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         Get30DayDate();
         $("#datepicker1").datepicker({ dateFormat: "dd/mm/yy" });
-        $("#datepicker1").focus(function () {
-            $("#dateFilter").val("None").change();
-        })
-        $("#datepicker2").focus(function () {
-            $("#dateFilter").val("None").change();
-        })
+        $("#datepicker1").focus(function () { $("#dateFilter").val("None").change(); })
+        $("#datepicker2").focus(function () { $("#dateFilter").val("None").change(); })
         $("#datepicker1btn").click(function (event) {
             $("#dateFilter").val("None").change();
             event.preventDefault();
             $("#datepicker1").focus();
         });
-
         $("#datepicker1btn2").click(function (event) {
             $("#dateFilter").val("None").change();
             event.preventDefault();
             $("#datepicker2").focus();
         })
-
         $("#datepicker2").datepicker({
             showOtherMonths: true,
             selectOtherMonths: true,

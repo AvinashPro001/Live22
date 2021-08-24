@@ -1,6 +1,9 @@
 ﻿@page
-@{ ViewData["Title"] = "Register";
-    Layout = ""; }
+@{
+    ViewData["Title"] = "Register";
+    Layout = "";
+}
+
 <div id="comContent"></div>
 <div id="mComContent">
     <style>
@@ -55,8 +58,7 @@
         }
 
         async function SendOTP(number) {
-            if (number == 1)
-                Counter();
+            if (number == 1) Counter();
 
             var model = {
                 mobileNo: $("#m_regsiter_mobile").val(),
@@ -81,9 +83,7 @@
             document.getElementById("m_regsiter_otp").value = "";
             ShowSuccess(ChangeErroMessage("otp_send_success"));
             LoaderHide();
-
         }
-
     </script>
     <div class="page-title white-bg text-center">
         <div class="container">
@@ -184,7 +184,6 @@
         $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
     });
 </script>
-
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
@@ -195,7 +194,6 @@
         jQuery("#more-arrow").toggleClass("rotate");
     });
 </script>
-
 <script>
     function get() {
         (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
@@ -218,5 +216,4 @@
     }
 
     setTimeout(() => { get(); }, 200);
-
 </script>

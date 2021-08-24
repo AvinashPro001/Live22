@@ -1,9 +1,7 @@
 ﻿@page
 @{ Layout = null; }
 
-
-<div class="vip-main-banner">
-</div>
+<div class="vip-main-banner"></div>
 <div class="benefits_refeeral_sec">
     <div class="containerr">
         <div class="benefits_referal_tab_sec">
@@ -50,7 +48,6 @@
                                             <span class="point" id="diamond-span" onclick="javascript: resetActive(event, 100, 'step-1');">
                                                 <span class="price">Diamond</span>
                                                 <span class="step-title1"> > 40lkh </span>
-
                                             </span>
                                         </div>
                                     </div>
@@ -100,9 +97,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
                     <div id="faqs" class="tabcontent_benefits_referal">
                         <div class="benefits_content_tab_sec">
@@ -111,10 +105,7 @@
                             <p>(1) By depositing the required amount</p>
                             <p>(2) By special invite</p>
                             <h3>How can the deposit amount be calculated?</h3>
-                            <p>
-                                Deposit and turnover requirements will be based on the accumulated amount from the first day register.
-                                and our deposit amount is never expired.
-                            </p>
+                            <p>Deposit and turnover requirements will be based on the accumulated amount from the first day register. and our deposit amount is never expired.</p>
                             <h3>When my VIP level will upgraded when i archieve deposit amount?</h3>
                             <p>Every 1st of month and 15th of month will automatically upgrade your VIP level.</p>
                             <h3>My VIP level will downgrade after a period?</h3>
@@ -124,7 +115,6 @@
                             <p>Members participate in the VIP program must accept and comply with the above rules and terms as well as all relevant rules and terms of the website implement by WEBET333. General WEBET333 Terms & Conditions apply. </p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -132,7 +122,6 @@
             <div class="container">
                 <div class="vip_privileges_inner_sec_credits">
                     <h1>VIP PRIVILEGES</h1>
-
                 </div>
                 <div class="scroll-vip-privilage">
                     <ul class="nav nav-tabs img-icon">
@@ -539,9 +528,7 @@
             $(".progress-bar").css("width", percent + "%").attr("aria-valuenow", percent);
             $(".progress-completed").text(percent + "%");
             $("span").each(function () {
-                if ($(this).hasClass("activestep")) {
-                    $(this).removeClass("activestep");
-                }
+                if ($(this).hasClass("activestep")) $(this).removeClass("activestep");
             });
             $("#" + VIPlevel.data.Name.toLocaleLowerCase() + '-span').addClass("activestep");
         }
@@ -556,9 +543,7 @@
             $(".progress-bar").css("width", percent + "%").attr("aria-valuenow", percent);
             $(".progress-completed").text(percent + "%");
             $("span").each(function () {
-                if ($(this).hasClass("activestep")) {
-                    $(this).removeClass("activestep");
-                }
+                if ($(this).hasClass("activestep")) $(this).removeClass("activestep");
             });
             $("#normal-span").addClass("activestep");
         }

@@ -1,15 +1,14 @@
 @page
-@{ ViewData["Title"] = "Deposit";
-    Layout = ""; }
-
+@{
+    ViewData["Title"] = "Deposit";
+    Layout = "";
+}
 
 <div id="comContent"></div>
 <div id="mComContent">
-
     <script>
         document.getElementById("hideBody").style.padding = "0px";
-        if (GetLocalStorage('currentUser') === null)
-            loadPageHome({ backFrom: 'deposit' });
+        if (GetLocalStorage('currentUser') === null) loadPageHome({ backFrom: 'deposit' });
         CheckMainteance();
         DepositBankList();
         DepositPromotionList();
@@ -172,12 +171,8 @@
                                                 <li><span class="lang" key="instruction_3"></span></li>
                                                 <li><span class="lang" key="instruction_4"></span></li>
                                                 <li><span class="lang" key="instruction_5"></span></li>
-                                                <li>
-                                                    <span class="lang" key="instruction_6A"></span><a onclick="LiveChat();"><b><span class="lang" key="livechat"></span></b></a> <span class="lang" key="instruction_6B"></span>
-                                                </li>
-                                                <li>
-                                                    <span class="lang" key="instruction_7A"></span><a onclick="LiveChat()"><b><span class="lang" key="livechat"></span></b></a><span class="lang" key="instruction_7B"></span>
-                                                </li>
+                                                <li><span class="lang" key="instruction_6A"></span><a onclick="LiveChat();"><b><span class="lang" key="livechat"></span></b></a> <span class="lang" key="instruction_6B"></span></li>
+                                                <li><span class="lang" key="instruction_7A"></span><a onclick="LiveChat()"><b><span class="lang" key="livechat"></span></b></a><span class="lang" key="instruction_7B"></span></li>
                                             </ol>
                                         </div>
                                     </div>
@@ -206,7 +201,6 @@
                     <div class="modal-body" style="padding-right: 0px;">
                         <div><button type="button" class="close" data-dismiss="modal">&times;</button></div>
                         <div id="promotionInfo" style="overflow-y: scroll;max-height:500px;margin-top: 50px !important;">
-
                         </div>
                     </div>
                 </div>
@@ -320,21 +314,14 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
-            $("#chatting").toggle();
-        });
-        $(".contact-user").mouseover(function () {
-            $("#chatting").toggle();
-        });
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () { $("#chatting").toggle(); });
+        $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
     });
 </script>
-
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".open-modal").click();
-    });
+    $(document).ready(function () { $(".open-modal").click(); });
     jQuery(".scroll-down-visible").hide();
     jQuery("#more-arrow").click(function () {
         jQuery(".scroll-down-visible").toggleClass("show");
@@ -342,21 +329,14 @@
     });
 </script>
 <!-- //Modal For Video -->
-
 <script type="text/javascript">
     $(document).ready(function () {
         $(".navbar-toggle,.canvas-overlay").click(function () {
-            if (!$("html").hasClass('intro')) {
-                $("html").addClass("intro");
-            }
-            else {
-                $("html").removeClass("intro");
-            }
+            if (!$("html").hasClass('intro')) $("html").addClass("intro");
+            else $("html").removeClass("intro");
         });
         $(".canvas-overlay").click(function () {
-            if ($(".navbar-collapse").hasClass('in')) {
-                $(".navbar-collapse").removeClass("in");
-            }
+            if ($(".navbar-collapse").hasClass('in')) $(".navbar-collapse").removeClass("in");
         });
     });
 </script>
@@ -364,19 +344,12 @@
 <script>
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
-        if (scroll >= 1) {
-            $("header").addClass("sticky-header");
-        }
-        else {
-            $("header").removeClass("sticky-header");
-        }
+        if (scroll >= 1) $("header").addClass("sticky-header");
+        else $("header").removeClass("sticky-header");
     });
 </script>
-
 <script>
-    $(document).ready(function () {
-        init();
-    });
+    $(document).ready(function () { init(); });
 
     function language(value) {
         SetLocalStorage('language', value);
@@ -392,24 +365,16 @@
             async: false,
             success: function (lang) {
                 $('.lang').each(function (index, element) {
-                    if (localStorage.getItem("language") === "ms-MY") {
-                        $('body').addClass('malay-font');
-                    }
+                    if (localStorage.getItem("language") === "ms-MY") $('body').addClass('malay-font');
                     $(this).text(lang[$(this).attr('key')]);
                 });
                 $("[data-translate]").each(function () {
-                    if ($(this).is("input")) {
-                        $(this).attr('placeholder', lang[$(this).data("translate")]);
-                    } else {
-                        $(this).text(lang[$(this).data("translate")]);
-                    }
+                    if ($(this).is("input")) $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    else $(this).text(lang[$(this).data("translate")]);
                 });
             }
         });
     }
 
-    setTimeout(() => {
-        get();
-    }, 200);
-
+    setTimeout(() => { get(); }, 200);
 </script>

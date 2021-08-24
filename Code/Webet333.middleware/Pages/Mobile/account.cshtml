@@ -1,6 +1,8 @@
 ﻿@page
-@{ ViewData["Title"] = "Account";
-    Layout = "";}
+@{
+    ViewData["Title"] = "Account";
+    Layout = "";
+}
 
 <div id="comContent"></div>
 <div id="mComContent">
@@ -163,8 +165,7 @@
 
     <script>
         GetUser();
-        if (GetLocalStorage('currentUser') === null)
-            loadPageHome();
+        if (GetLocalStorage('currentUser') === null) loadPageHome();
     </script>
 
     <div id="Profile" class="account-reg white-bg radius-border flexible-height account-page-extra-padding profile-page">
@@ -315,7 +316,6 @@
         $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
     });
 </script>
-
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
@@ -326,7 +326,6 @@
         jQuery("#more-arrow").toggleClass("rotate");
     });
 </script>
-
 <script type="text/javascript">
     $(document).ready(function () {
         $(".navbar-toggle,.canvas-overlay").click(function () {
@@ -346,7 +345,6 @@
         else $("header").removeClass("sticky-header");
     });
 </script>
-
 <script>
     $(document).ready(function () {
         if (localStorage.getItem('currentUser') == null) {
@@ -354,9 +352,7 @@
             document.getElementById('accountPage').style.display = "none";
             document.getElementById('downloadpage').style.display = "none";
         }
-        else {
-            document.getElementById('login').style.display = "none";
-        }
+        else document.getElementById('login').style.display = "none";
     });
 
     function language(value) {
