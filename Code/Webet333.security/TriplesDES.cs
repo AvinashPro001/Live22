@@ -13,7 +13,7 @@ namespace Webet333.security
         {
             TripleDESCryptoServiceProvider des = new TripleDESCryptoServiceProvider();
             des.Mode = CipherMode.CBC;
-            des.BlockSize = 64;
+            des.BlockSize = 64; 
             des.Padding = PaddingMode.PKCS7;
             des.Key = Convert.FromBase64String(base64edKey);
             des.IV = base64edIv == null ? NULL_IV : Convert.FromBase64String(base64edIv);

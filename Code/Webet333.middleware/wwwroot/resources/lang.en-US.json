@@ -147,6 +147,7 @@
   "promotion_select": "Please select Promotion below:",
 
   "bankname": "Bank Name",
+  "bankAccount": "Bank Account",
   "important_notice": "IMPORTANT NOTICE",
   "instruction_1": "Always check for the latest active deposit bank details before making a deposit.",
   "instruction_2": "For using deposit option \"Bank Transfer\", Please make the transfer before submit the transaction to avoid the transaction is delay.",

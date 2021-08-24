@@ -278,6 +278,8 @@ export class PromotionEditComponent implements OnInit {
             isMega888: (document.getElementById("mega888_id") as HTMLInputElement).checked,
             isJoker: (document.getElementById("joker_id") as HTMLInputElement).checked,
             isSBO: (document.getElementById("SBO_id") as HTMLInputElement).checked,
+            isGamePlayCasino: (document.getElementById("GamePlayCasino_id") as HTMLInputElement).checked,
+            isGamePlaySlot: (document.getElementById("GamePlaySlot_id") as HTMLInputElement).checked,
 
             isNewMember: (document.getElementById("newmember_id") as HTMLInputElement).checked,
             isSports: (document.getElementById("sports_id") as HTMLInputElement).checked,
@@ -294,27 +296,29 @@ export class PromotionEditComponent implements OnInit {
             isDiamond: (document.getElementById("diamond_id") as HTMLInputElement).checked,
         }
 
-        if (this.selectOverCategory == 'Winover') {
-            dataSelect.isAG = false;
-            dataSelect.isDG = false;
-            dataSelect.isSA = false;
-            dataSelect.isPlaytech = false;
-            dataSelect.isPragmatic = false;
-            dataSelect.isSexyBaccarat = false;
-            dataSelect.isWM = false;
-            dataSelect.isYeeBet = false;
-            dataSelect.isAllBet = false;
-            dataSelect.isMaxbet = false;
-            dataSelect.isM8 = false;
-            dataSelect.isSBO = false;
-        }
+        //if (this.selectOverCategory == 'Winover') {
+        //    dataSelect.isAG = false;
+        //    dataSelect.isDG = false;
+        //    dataSelect.isSA = false;
+        //    dataSelect.isPlaytech = false;
+        //    dataSelect.isPragmatic = false;
+        //    dataSelect.isSexyBaccarat = false;
+        //    dataSelect.isWM = false;
+        //    dataSelect.isYeeBet = false;
+        //    dataSelect.isAllBet = false;
+        //    dataSelect.isMaxbet = false;
+        //    dataSelect.isM8 = false;
+        //    dataSelect.isSBO = false;
+        //    dataSelect.isGamePlayCasino = false;
+        //    dataSelect.isGamePlaySlot = false;
+        //}
 
-        if (this.selectOverCategory == 'Turnover') {
-            dataSelect.is918Kiss = false;
-            dataSelect.isPussy888 = false;
-            dataSelect.isMega888 = false;
-            dataSelect.isJoker = false;
-        }
+        //if (this.selectOverCategory == 'Turnover') {
+        //    dataSelect.is918Kiss = false;
+        //    dataSelect.isPussy888 = false;
+        //    dataSelect.isMega888 = false;
+        //    dataSelect.isJoker = false;
+        //}
 
         if (dataSelect.turnovertime == 0 &&
             dataSelect.winturn == 0) {

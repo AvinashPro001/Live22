@@ -35,5 +35,7 @@
         public string YeeBetGamePrefix { get; set; }
 
         public string SBOGamePrefix { get; set; }
+
+        public string GamePlayGamePrefix { get; set; }
     }
 }

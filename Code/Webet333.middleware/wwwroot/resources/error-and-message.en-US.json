@@ -5,7 +5,6 @@
   "pass_length_error": "Password length Minimum 6 digits.",
   "username_required_error": "Username Field is required.",
   "username_length_error": "Username Length too short.",
-  "username_max_length_error": "Username Length less than 9.",
   "username_alpha_error": "Username must be alphanumeric.",
   "password_required_error": "Please Enter Password.",
   "confirm_password_required_error": "Confirm Password Field is required.",
@@ -53,7 +52,7 @@
 
   "special_char_not_allowed": "Special Characters not allowed in Username.",
   "name_special_char_not_allowed": "Special Characters not allowed in Name.",
-  "name_alpha_error": "Name must be alphanumeric.",
+ 
   "space_not_allowed": "Space not allowed.",
   "current_pass_not_match": "Please Enter Correct Current Password.",
   "enter_full_name": "Please enter your full name.",
