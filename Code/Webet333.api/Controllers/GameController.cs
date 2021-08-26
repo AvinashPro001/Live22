@@ -3204,7 +3204,24 @@ namespace Webet333.api.Controllers
                     GamePlayTurover = GamePlayGame.Count > 0 ? GamePlayGame.FirstOrDefault().Turnover : 0
                 };
 
-                decimal total = response.agTurover + response.m8Turover + response.maxbetTurover + response.playtechTurover + response.dgTurover + response.saTurover + response.sexyTurover + response.AllBetTurover + response.WMTurover + response.PragmaticTurover + response.YeeBetTurover + response.SBOTurover + response.GamePlayTurover;
+                decimal total =
+                    response.jokerWinover +
+                    response.kiss918Winover +
+                    response.agTurover + 
+                    response.m8Turover + 
+                    response.maxbetTurover + 
+                    response.playtechTurover +
+                    response.mega888Winover +
+                    response.dgTurover + 
+                    response.saTurover +
+                    response.sexyTurover +
+                    response.pussy888Turover+
+                    response.AllBetTurover + 
+                    response.WMTurover + 
+                    response.PragmaticTurover + 
+                    response.YeeBetTurover + 
+                    response.SBOTurover + 
+                    response.GamePlayTurover;
 
                 return OkResponse(new { response, Total = total });
             }
