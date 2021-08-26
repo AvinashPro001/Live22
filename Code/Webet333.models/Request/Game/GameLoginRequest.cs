@@ -19,4 +19,10 @@ namespace Webet333.models.Request.Game
         [JsonProperty(PropertyName = "gameCode")]
         public string GameCode { get; set; }
     }
+
+    public class CQ9GameLoginRequest : GameLoginRequest
+    {
+        [JsonProperty("isSlot")]
+        public bool IsSlot { get; set; }
+    }
 }

@@ -340,6 +340,8 @@
             public const string SBOGameBalanceUpdate = "[dbo].[Balance_SBO_Update]";
 
             public const string GamePlayGameBalanceUpdate = "[dbo].[Balance_GamePlay_Update]";
+
+            public const string CQ9GameBalanceUpdate = "[dbo].[Balance_CQ9_Update]";
         }
 
         public class Game
@@ -664,6 +666,13 @@
             public const string Register = "[dbo].[Users_Insert_GamePlay]";
 
             public const string PasswordUpdate = "[dbo].[GameGamePLay_Password_Update]";
+        }
+
+        public class CQ9
+        {
+            public const string Register = "[dbo].[Users_Insert_CQ9]";
+
+            public const string PasswordUpdate = "[dbo].[GameCQ9_Password_Update]";
         }
     }
 }

@@ -102,7 +102,7 @@
 
             public const string Currency = "2";
 
-        #region Betting limit Constant
+            #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -130,7 +130,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-        #endregion Betting limit Constant
+            #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -836,6 +836,39 @@
             }
         }
 
+        public class CQ9
+        {
+            public const string APIURL = "https://api.cqgame.games";
+
+            public const string APIToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2MTI3MWZjMjczNjNjZjAwMDFhMDk3ZjkiLCJhY2NvdW50Ijoid2ViZXQzMzMiLCJvd25lciI6IjYxMjcxZmMyNzM2M2NmMDAwMWEwOTdmOSIsInBhcmVudCI6InNlbGYiLCJjdXJyZW5jeSI6Ik1ZUiIsImp0aSI6Ijk3OTE0NTE2OCIsImlhdCI6MTYyOTk1Mzk4NiwiaXNzIjoiQ3lwcmVzcyIsInN1YiI6IlNTVG9rZW4ifQ.nj2sb4HTJdrsVcdCUzToZ-km64RdUsVEyhm9g78X2Lo";
+
+            public class EndPoint
+            {
+                public const string Register = "gameboy/player";
+
+                public const string UpdatePassword = "gameboy/player/pwd";
+
+                public const string Login = "gameboy/player/login";
+
+                public const string GameLobby = "gameboy/player/lobbylink";
+
+                public const string TableGameLobby = "gameboy/player/lobbylink/table";
+
+                public const string GetBalance = "gameboy/player/balance/";
+
+                public const string Withdraw = "gameboy/player/withdraw";
+
+                public const string Deposit = "gameboy/player/deposit";
+            }
+
+            public class LanguageCode
+            {
+                public static string Chinese = "zh-cn";
+
+                public static string English = "en";
+            }
+        }
+
 #elif STAG
 
         public const string BaseUrl = "https://www.webet333.net/";
@@ -862,7 +895,7 @@
 
             public const string Currency = "2";
 
-            #region Betting limit Constant
+        #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -890,7 +923,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-            #endregion Betting limit Constant
+        #endregion Betting limit Constant
         }
 
         public class Kiss918

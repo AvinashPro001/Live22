@@ -584,6 +584,8 @@
             public const string CheckSBOBalance = "check/gamebalance/sbo";
 
             public const string GamePlayBalance = "gamebalance/gamePlay";
+
+            public const string CQ9Balance = "gamebalance/cq9";
         }
 
         public class TransferMoney
@@ -851,13 +853,22 @@
         {
             public const string Register = "gameplay/register";
 
-            public const string UpdatePassword = "gameplay/update/password ";
+            public const string UpdatePassword = "gameplay/update/password";
 
             public const string Login = "gameplay/login";
 
             public const string GetSlotGameList = "gameplay/get/slot-gamelist";
 
             public const string GetFishGameList = "gameplay/get/fish-gamelist";
+        }
+
+        public class CQ9
+        {
+            public const string Register = "cq9/register";
+
+            public const string UpdatePassword = "cq9/update/password";
+
+            public const string Login = "cq9/login";
         }
     }
 }
