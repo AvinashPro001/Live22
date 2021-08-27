@@ -1,5 +1,5 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
-let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '8080';
 let PortWEB = '9002';
 
