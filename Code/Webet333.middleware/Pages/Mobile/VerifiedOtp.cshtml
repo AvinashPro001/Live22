@@ -1,9 +1,6 @@
 @page
-@{
-    ViewData["Title"] = "Verified Mobile Number";
-    Layout = "";
-}
-
+@{ ViewData["Title"] = "Verified Mobile Number";
+    Layout = ""; }
 <div id="comContent"></div>
 <div id="mComContent">
 
@@ -37,6 +34,7 @@
             }
         }
 
+
         async function VerifiedOTP() {
             LoaderShow();
             let model = {
@@ -69,8 +67,13 @@
             LoaderHide();
         }
 
-        if (GetLocalStorage('currentUser') === null) window.location.href = "../mobile";
-        else { }
+
+        if (GetLocalStorage('currentUser') === null) {
+            window.location.href = "../mobile";
+        }
+        else {
+
+        }
     </script>
     <div class="white-bg forget-pswd">
         <div class="container">
@@ -92,6 +95,7 @@
             <div class="reg_nav mar-top-15">
                 <div class="loin-window">
                     <div class="row">
+
                         <div class="col-xs-12">
                             <form>
                                 <div class="mar-btm-ten">
@@ -110,6 +114,7 @@
                                 <span class="lang" key="send_otp"></span>
                                 <span id="counter_txt"></span>
                             </button>
+
                             <button type="button" class="btn btn-success login_btn join_btn no-mar-btm" onclick="logoutMain(1)"><span class="lang" key="sidebar_Logout"></span></button>
                         </div>
                     </div>
@@ -177,35 +182,54 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".contact-us-btn,.contact-us-btn-footer").click(function () { $("#chatting").toggle(); });
-        $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
+            $("#chatting").toggle();
+        });
+        $(".contact-user").mouseover(function () {
+            $("#chatting").toggle();
+        });
     });
 </script>
+
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
-    $(document).ready(function () { $(".open-modal").click(); });
+    $(document).ready(function () {
+        $(".open-modal").click();
+    });
     jQuery(".scroll-down-visible").hide();
     jQuery("#more-arrow").click(function () {
         jQuery(".scroll-down-visible").toggleClass("show");
         jQuery("#more-arrow").toggleClass("rotate");
     });
 </script>
+
 <!-- //Modal For Video -->
 <script src="~/js2/jcf/jcf.js"></script>
 <script src="~/js2/jcf/jcf.select.js"></script>
 <script src="~/js2/jcf/jcf.checkbox.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () { $(function () { jcf.replaceAll(); }); });
+    $(document).ready(function () {
+        $(function () {
+            jcf.replaceAll();
+        });
+    });
+
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".navbar-toggle,.canvas-overlay").click(function () {
-            if (!$("html").hasClass('intro')) $("html").addClass("intro");
-            else $("html").removeClass("intro");
+            if (!$("html").hasClass('intro')) {
+                $("html").addClass("intro");
+            }
+            else {
+                $("html").removeClass("intro");
+            }
         });
         $(".canvas-overlay").click(function () {
-            if ($(".navbar-collapse").hasClass('in')) $(".navbar-collapse").removeClass("in");
+            if ($(".navbar-collapse").hasClass('in')) {
+                $(".navbar-collapse").removeClass("in");
+            }
         });
     });
 </script>
@@ -213,15 +237,22 @@
 <script>
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
-        if (scroll >= 1) $("header").addClass("sticky-header");
-        else $("header").removeClass("sticky-header");
+        if (scroll >= 1) {
+            $("header").addClass("sticky-header");
+        }
+        else {
+            $("header").removeClass("sticky-header");
+        }
     });
 </script>
 <script>
 
     $("html").click(async function (event) {
-        if (GetLocalStorage('currentUser') !== null) await PostMethod(apiEndPoints.userLastTimeUpdate, {});
+        if (GetLocalStorage('currentUser') !== null) {
+            await PostMethod(apiEndPoints.userLastTimeUpdate, {});
+        }
     });
+
 
     function get() {
         (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
@@ -232,17 +263,23 @@
             async: false,
             success: function (lang) {
                 $('.lang').each(function (index, element) {
-                    if (localStorage.getItem("language") === "ms-MY") $('body').addClass('malay-font');
+                    if (localStorage.getItem("language") === "ms-MY") {
+                        $('body').addClass('malay-font');
+                    }
                     $(this).text(lang[$(this).attr('key')]);
                 });
                 $("[data-translate]").each(function () {
-                    if ($(this).is("input")) $(this).attr('placeholder', lang[$(this).data("translate")]);
-                    else $(this).text(lang[$(this).data("translate")]);
+                    if ($(this).is("input")) {
+                        $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    } else {
+                        $(this).text(lang[$(this).data("translate")]);
+                    }
                 });
             }
         });
         announcementMobile();
     }
+
 
     get();
 </script>

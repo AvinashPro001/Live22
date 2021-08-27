@@ -1,8 +1,6 @@
 ﻿@page
-@{
-    ViewData["Title"] = "";
-    Layout = null;
-}
+@{ ViewData["Title"] = "";
+    Layout = null; }
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,15 +28,16 @@
     <script>
         function gtag_report_conversion(url) {
             var callback = function () {
-                if (typeof (url) != 'undefined') window.location = url;
+                if (typeof (url) != 'undefined') {
+                    window.location = url;
+                }
             };
             gtag('event', 'conversion', {
                 'send_to': 'AW-480804860/17uwCMrko-4BEPz_oeUB',
                 'event_callback': callback
             });
             return false;
-        }
-    </script>
+        }</script>
     <!-- Event snippet for Sign-up conversion page -->
     <!-- Global site tag (gtag.js) - Google Ads: 527506130 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-527506130"></script>
@@ -49,6 +48,7 @@
 
         gtag('config', 'AW-527506130');</script>
     <script>gtag('event', 'conversion', { 'send_to': 'AW-527506130/BFpFCPDPiuQBENK1xPsB' });</script>
+
 
     <meta name="keywords" content="Webet333.net | Cash Market, Online Casino, Malaysia Online Casino, 918Kiss, AG Casino, Playtech Casino, Joker Casino, Joker Slot, M8 Sports, 24x7 Casino, Malaysia Casino, 100% Welcome Bonus Casino, 150% Welcome Bonus Casino, 10% Extra jackpot casino, 10% Extra bonus casino" />
     <meta name="description" content="Webet333.net | Trusted Online Casino Malaysia, Malaysia Online Casino, 918Kiss, AG Casino, Playtech Casino, Joker Casino, Joker Slot, M8 Sports, 24x7 Casino, Malaysia Casino, 200% Welcome Bonus Casino, 150% Welcome Bonus Casino, 10% Extra jackpot casino, 10% Extra bonus casino" />
@@ -129,8 +129,7 @@
                 window.location.replace = "/";
                 document.getElementsByTagName('meta')['viewport'].content = 'width= 1440px;';
             }
-        }
-    </script>
+        }</script>
 
     <script>
         $(document).ready(function () { announcementMobile(); });
@@ -159,7 +158,8 @@
             <span><img class="Image" width="100px" height="100px" src="~/images/mobile/success.png" /></span>
         </div>
         <div class="message">
-            <span id="SuccessMessage"></span>
+            <span id="SuccessMessage">
+            </span>
         </div>
     </div>
 
@@ -168,7 +168,8 @@
             <span><img class="Image" width="100px" height="100px" src="~/images/mobile/Error.png" /></span>
         </div>
         <div class="message">
-            <span id="ErrorMessage"></span>
+            <span id="ErrorMessage">
+            </span>
         </div>
     </div>
 
@@ -238,7 +239,9 @@
                         break;
                 }
             }
-            else loadPageHome();
+            else {
+                loadPageHome();
+            }
         }, 200);
 
         function loadPageHome(obj) {
@@ -305,8 +308,12 @@
                     history.pushState(null, null, "/mobile?p=promotions");
                     $('#pageResponse').html(response);
                     $("html").removeClass("intro");
-                    if (cUser != null) WalletBalance();
-                    else document.getElementById("balanceShow").innerHTML = "";
+                    if (cUser != null) {
+                        WalletBalance();
+                    }
+                    else {
+                        document.getElementById("balanceShow").innerHTML = "";
+                    }
                 }
             });
         }
@@ -325,8 +332,12 @@
                     history.pushState(null, null, "/mobile?p=contactus");
                     $('#pageResponse').html(response);
                     $("html").removeClass("intro");
-                    if (cUser != null) WalletBalance();
-                    else document.getElementById("balanceShow").innerHTML = "";
+                    if (cUser != null) {
+                        WalletBalance();
+                    }
+                    else {
+                        document.getElementById("balanceShow").innerHTML = "";
+                    }
                 }
             });
         }
@@ -364,7 +375,9 @@
                     history.pushState(null, null, "/mobile?p=account");
                     $('.loadingImage').hide();
                     $("html").removeClass("intro");
-                    if (cUser != null) WalletBalance();
+                    if (cUser != null) {
+                        WalletBalance();
+                    }
                 }
             });
         }
@@ -393,7 +406,9 @@
             CheckUserVerified()
             var url = '/mobile/download'
 
-            if (id != undefined && id != null) url = '/mobile/download?id=' + id
+            if (id != undefined && id != null) {
+                url = '/mobile/download?id=' + id
+            }
 
             $.ajax({
                 url: url,
@@ -403,8 +418,10 @@
                 success: function (response) {
                     pageName1 = pageName2 = "download";
                     $('#pageResponse').html(response);
-                    if (id != undefined && id != null) history.pushState(null, null, "/mobile?p=download&id=" + id);
-                    else history.pushState(null, null, "/mobile?p=download");
+                    if (id != undefined && id != null)
+                        history.pushState(null, null, "/mobile?p=download&id=" + id);
+                    else
+                        history.pushState(null, null, "/mobile?p=download");
                     $("html").removeClass("intro");
                 }
             });
@@ -611,7 +628,9 @@
         }
 
         $("html").click(async function (event) {
-            if (GetLocalStorage('currentUser') !== null) PostMethod(apiEndPoints.userLastTimeUpdate, {});
+            if (GetLocalStorage('currentUser') !== null) {
+                PostMethod(apiEndPoints.userLastTimeUpdate, {});
+            }
         });
 
         var pageName1;
@@ -684,10 +703,14 @@
                                 break;
                         }
                     }
-                    else loadPageHome();
+                    else {
+                        loadPageHome();
+                    }
 
                     pageName2 = pageName1;
+
                 }
+
             }, 200);
         }, 5000);
     </script>

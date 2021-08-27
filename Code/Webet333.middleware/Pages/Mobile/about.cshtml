@@ -3,7 +3,6 @@
     ViewData["Title"] = "About Us";
     Layout = "";
 }
-
 <div id="comContent"></div>
 <div id="mComContent">
     <script>
@@ -24,7 +23,9 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="about-content white-text">
-                    <p>WEBET333 is the Malaysia Trusted Online Casino that focused mainly on sportsbook betting, live casino,slot game & lottery.  Players can easy get in touch with us anytime, anywhere as just able to access internet. Our services are available 24hours a day, 7days a week.</p>
+                    <p>
+                        WEBET333 is the Malaysia Trusted Online Casino that focused mainly on sportsbook betting, live casino,slot game & lottery.  Players can easy get in touch with us anytime, anywhere as just able to access internet. Our services are available 24hours a day, 7days a week.
+                    </p>
                     <p>Join us now, we guaranteed WEBET333 is platform providing the BEST online betting enviroment you never enjoy compare with others.</p>
                     <p>WEBET333 is rapidly growing in Online Casino Malaysia market that you won’t want to miss. Here Webet333 Top Malaysia Online Casino allowing everyone to play Online Betting Malaysia games or bet on their favourite sports matches easily with peace of mind.</p>
                     <p>We also provide the most elite online slot games- Likes 918 KISS .</p>
@@ -34,7 +35,8 @@
                 </div>
             </div>
         </div>
-        <div class="mar-comman"></div>
+        <div class="mar-comman">
+        </div>
     </div>
     <div class="footer-widget" id="footerWidget">
         <ul class="list-inline text-center">
@@ -73,18 +75,26 @@
     <div>
         <a id="mobileM8" style="display:none"></a>
     </div>
+
 </div>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".contact-us-btn,.contact-us-btn-footer").click(function () { $("#chatting").toggle(); });
-        $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
+            $("#chatting").toggle();
+        });
+        $(".contact-user").mouseover(function () {
+            $("#chatting").toggle();
+        });
     });
 </script>
+
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
-    $(document).ready(function () { $(".open-modal").click(); });
+    $(document).ready(function () {
+        $(".open-modal").click();
+    });
     jQuery(".scroll-down-visible").hide();
     jQuery("#more-arrow").click(function () {
         jQuery(".scroll-down-visible").toggleClass("show");
@@ -96,7 +106,11 @@
 <script>
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
-        if (scroll >= 1) $("header").addClass("sticky-header");
-        else $("header").removeClass("sticky-header");
+        if (scroll >= 1) {
+            $("header").addClass("sticky-header");
+        }
+        else {
+            $("header").removeClass("sticky-header");
+        }
     });
 </script>
