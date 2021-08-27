@@ -1,6 +1,6 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
-let PortAPI = '8080';
+let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let PortAPI = '9001';
 let PortWEB = '9002';
 
 switch (environmentName.toUpperCase()) {
@@ -146,6 +146,9 @@ var apiEndPoints = {
 
     GamePlayRegister: 'gameplay/register',
     GamePlayLogin: 'gameplay/login',
+
+    CQ9Register: 'cq9/register',
+    CQ9Login: 'cq9/login',
 
     kiss918Balance: 'gamebalance/918kiss',
     mega888Balance: 'gamebalance/mega888',

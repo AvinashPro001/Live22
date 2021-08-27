@@ -108,6 +108,14 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <div class="img-block text-center slot-menu-height" id="cq9-game" onclick="SetBackGroundHeight(true)">
+                        <div class="img-block-content">
+                            <figure><img class="hover_icons" src="~/images/carousel_logos/asia_color.png" alt="cq9-logo"></figure>
+                            <p>CQ9</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <section class="slider-for-content">
@@ -509,6 +517,42 @@
                         </div>
                     </div>
                 </div>
+
+                <div>
+                    <div class="account-reg ">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="leftProfileButon1"></div>
+                                <div class="genaral_wrapp1">
+                                    <div style="display: block;">
+                                        <div class="row second_row_slot_game_wrap mr0 ml0" id="megaSlotsGameList">
+                                            <div class="inner_game_banner_wrap">
+                                                <div class="inner_game_banner_box_ag"></div>
+                                                <div class="slot_bottom_boxs ag-games d-flex align-items-center">
+                                                    <div class="slot_inner_common_box ag-game-img img-box">
+                                                        <img src="~/images/carousel_logos/asia_color.png" alt="cq9-logo">
+                                                    </div>
+                                                    <div class="ml-auto thumb-arrow">
+                                                        <figure>
+                                                            <img src="~/images/hand-right-arrow.png" alt="hand">
+                                                        </figure>
+                                                    </div>
+                                                    <div class="slot_inner_common_box ag-game-play">
+                                                        <div class="form-group ml0 mr0 slot_inner_formfield">
+                                                            <div class="play_now_btn">
+                                                                <a href="#" onclick="OpenCQ9Game(true, true)"><img src="~/images/playnow.png" alt="playnow" /> Play</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
     </div>
@@ -531,7 +575,6 @@
         try { evt1.currentTarget.className += " active"; }
         catch (e) { evt1.className += " active"; }
     }
-
 </script>
 <script src='https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js'></script>
 <script type="text/javascript">
@@ -586,6 +629,7 @@
             if (hash == 'Pussy888-game') $("#Pussy888-game").click();
             if (hash == 'Ag-game') $("#Ag-game").click();
             if (hash == 'gameplay-game') $("#gameplay-game").click();
+            if (hash == 'cq9-game') $("#cq9-game").click();
         }
     });
 

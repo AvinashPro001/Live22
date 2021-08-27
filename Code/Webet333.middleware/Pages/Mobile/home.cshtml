@@ -136,8 +136,14 @@
                                 </li>
                                 <li data-toggle="modal" data-target="#gameLogin" id="gameplaylive">
                                     <a>
-                                        <figure><img src="~/images/mobile/gameplay_livecasino.png" lt="GamePlay"></figure>
+                                        <figure><img src="~/images/mobile/gameplay_livecasino.png" alt="GamePlay"></figure>
                                         <button class="game-title"><span class="lang" key="gameplaylive_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="cq9live">
+                                    <a>
+                                        <figure><img src="~/images/mobile/gameplay_livecasino.png" alt="CQ9"></figure>
+                                        <button class="game-title"><span class="lang" key="cq9live_game"></span></button>
                                     </a>
                                 </li>
                             </ul>
@@ -223,7 +229,7 @@
                                         <button class="game-title"><span class="lang" key="jokerslot_game"></span></button>
                                     </a>
                                 </li>
-                                <li onclick="PragmaticIdentifiy()" data-toggle="modal" data-target="#gameLogin" id="pragmaticslot">
+                                <li onclick="PragmaticIdentifiy()" id="pragmaticslot">
                                     <a>
                                         <figure>
                                             <img src="~/images/mobile/Pragmatic.png" alt="Pragmatic">
@@ -231,10 +237,16 @@
                                         <button class="game-title"><span class="lang" key="pragmaticslot_game"></span></button>
                                     </a>
                                 </li>
-                                <li onclick="GamePlayIdentifiy(true)" id="gameplayslotlogin">
+                                <li onclick="GamePlayIdentifiy(true)" id="gameplayslot">
                                     <a>
                                         <figure><img src="~/images/mobile/gameplay_slot.png" alt="Playtech"></figure>
                                         <button class="game-title"><span class="lang" key="gameplayslot_game"></span></button>
+                                    </a>
+                                </li>
+                                <li onclick="CQ9Identifiy(true)" id="cq9slot">
+                                    <a>
+                                        <figure><img src="~/images/mobile/gameplay_slot.png" alt="CQ9"></figure>
+                                        <button class="game-title"><span class="lang" key="cq9slot_game"></span></button>
                                     </a>
                                 </li>
                             </ul>
@@ -441,6 +453,12 @@
                                         <li class="fright" id="ddlGamePlayWallet">feching...</li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>CQ9 Wallet</strong></li>
+                                        <li class="fright" id="ddlCQ9Wallet">feching...</li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -564,6 +582,12 @@
                                     <button class="game-title"><span class="lang" key="gameplaylive_game"></span></button>
                                 </a>
                             </li>
+                            <li onclick="logingGame('CQ9')" id="cq9livelogin">
+                                <a>
+                                    <figure><img src="~/images/mobile/gameplay_livecasino.png" alt="cq9-casino"></figure>
+                                    <button class="game-title"><span class="lang" key="cq9live_game"></span></button>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div id="menu1" class="tab-pane fade">
@@ -659,6 +683,12 @@
                                 <a>
                                     <figure><img src="~/images/mobile/gameplay_slot.png" alt="GamePlay"></figure>
                                     <button class="game-title"><span class="lang" key="gameplayslot_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="CQ9Identifiy(true)" id="cq9slotlogin">
+                                <a>
+                                    <figure><img src="~/images/mobile/gameplay_slot.png" alt="cq9-slot"></figure>
+                                    <button class="game-title"><span class="lang" key="cq9slot_game"></span></button>
                                 </a>
                             </li>
                         </ul>

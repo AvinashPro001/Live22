@@ -438,7 +438,7 @@ async function getDetails() {
         var resUserData = res;
 
         checkedValue = resUserData.data.autoTransfer;
-        
+
         if (window.location.href.includes("?p=transfer"))
             await onclickSet(1);
     }
@@ -587,6 +587,7 @@ async function logingGame(gameName) {
             if (gameName == "YeeBet") TransferInAllWallet("YeeBet Wallet");
             if (gameName == "SBO") TransferInAllWallet("SBO Wallet");
             if (gameName == 'GamePlay') TransferInAllWallet("GamePlay Wallet");
+            if (gameName == 'CQ9') TransferInAllWallet("CQ9 Wallet");
         }
         if (gameName != "Pragmatic") window.open("/mobile/Game?gamename=" + gameName);
         else GameLoginMobile("Pragmatic");
@@ -677,6 +678,27 @@ async function GamePlayIdentifiy(Slotvalue) {
     GameLoginMobile('GamePlay');
 }
 
+async function CQ9Identifiy(Slotvalue) {
+
+    debugger;
+
+    let value = await CheckGameInMaintenance('CQ9');
+    if (value) {
+        LoaderHide();
+        return ShowError(ChangeErroMessage('maintainenance_error'));
+    }
+
+    if (Slotvalue) return window.open('../mobile?p=slot#cq9-game', '_blank');
+
+    if (GetLocalStorage('currentUser') == null) return alert('Please Login');
+
+    LoaderShow();
+    if (checkedValue) TransferInAllWallet('CQ9 Wallet');
+    localStorage.setItem('slotGame', Slotvalue);
+    LoaderHide();
+    GameLoginMobile('CQ9');
+}
+
 async function GameLoginMobile(gamename) {
     LoaderShow();
 
@@ -703,7 +725,7 @@ async function GameLoginMobile(gamename) {
             sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
             resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
         }
-        
+
 
         var JokerUsername = GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, "")
         var M8Username = GameUsername.m8Username;
@@ -1015,6 +1037,27 @@ async function GameLoginMobile(gamename) {
                     let model = { isMobile: true };
                     let res = await PostMethod(apiEndPoints.GamePlayLogin, model);
                     if (res.data.status == 0) location.href = res.data.game_url;
+                }
+                break;
+            case 'CQ9':
+                LoaderShow();
+
+                let model = {}, res, temp = localStorage.getItem('slotGame');
+
+                if (temp == null || temp == NaN || temp == undefined || temp == 'null') temp = false;
+
+                if (resSelectUser.data.CQ9 !== true) {
+                    res = await PostMethod(apiEndPoints.CQ9Register, model);
+                    if (res.data.status.code == '0') {
+                        model = { isMobile: true, isSlot: temp };
+                        res = await PostMethod(apiEndPoints.CQ9Login, model);
+                        if (res.response.data.status.code == '0') location.href = res.response.data.data.url;
+                    }
+                }
+                else {
+                    model = { isMobile: true, isSlot: temp };
+                    res = await PostMethod(apiEndPoints.CQ9Login, model);
+                    if (res.response.data.status.code == '0') location.href = res.response.data.data.url;
                 }
                 break;
         }
