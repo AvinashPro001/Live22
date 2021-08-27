@@ -657,7 +657,7 @@ async function PragmaticIdentifiy() {
         return ShowError(ChangeErroMessage("maintainenance_error"));
     }
 
-    window.open("../mobile?p=slot#pragmatic", "_blank")
+    window.open("../mobile?p=slot#pragmatic-game", "_blank")
 }
 
 async function GamePlayIdentifiy(Slotvalue) {
@@ -703,7 +703,7 @@ async function GameLoginMobile(gamename) {
     LoaderShow();
 
     var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
-    let resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
+    
 
     if (GameUsername == null) {
         var username = await PostMethod(apiEndPoints.getUsername, {});
@@ -713,19 +713,25 @@ async function GameLoginMobile(gamename) {
 
     var resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
 
+    if (resUserData == null) {
+        var res = await GetMethod(apiEndPoints.getProfile);
+        sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
+        var resUserData = res;
+    }
+
     if (resUserData.data.mobilenoConfirmed == false) {
         var url = window.location.href.toLowerCase();
         if (!url.includes("?p=verifiedotp")) loadPageVerifiedOtp();
     }
 
     if (GetLocalStorage('currentUser') !== null) {
+        let resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
+        debugger
         if (resSelectUser == null) {
             let userModel = { id: resUserData.data.id };
-            let resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
+            resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
             sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
-            resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
         }
-
 
         var JokerUsername = GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, "")
         var M8Username = GameUsername.m8Username;
