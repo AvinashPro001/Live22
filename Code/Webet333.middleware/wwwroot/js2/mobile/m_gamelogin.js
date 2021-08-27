@@ -432,7 +432,6 @@ var checkedValue;
 
 async function getDetails() {
     if (GetLocalStorage('currentUser') !== null) {
-
         var res = await GetMethod(apiEndPoints.getProfile);
         sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
         var resUserData = res;
@@ -679,9 +678,6 @@ async function GamePlayIdentifiy(Slotvalue) {
 }
 
 async function CQ9Identifiy(Slotvalue) {
-
-    debugger;
-
     let value = await CheckGameInMaintenance('CQ9');
     if (value) {
         LoaderHide();
@@ -703,7 +699,6 @@ async function GameLoginMobile(gamename) {
     LoaderShow();
 
     var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
-    
 
     if (GameUsername == null) {
         var username = await PostMethod(apiEndPoints.getUsername, {});
@@ -1159,7 +1154,6 @@ async function PlaytechSlotsGameList(PageNumber = null, IsAppend = true) {
     GenratePlaytechSlotsGameHTML(NewList, 'playtech-new-section', IsAppend)
     GenratePlaytechSlotsGameHTML(SlotsList, 'playtech-slot-section', IsAppend)
     GenratePlaytechSlotsGameHTML(ArcadeList, 'playtech-arcade-section', IsAppend)
-
 }
 
 async function PragmaticSlotsGameList(PageNumber = null, IsAppend = true) {
@@ -1258,7 +1252,6 @@ function openGamePlayGame(GameID) {
 }
 
 async function openPlaytechGame(game) {
-
     var languageCode = (localStorage.getItem('language') === "zh-Hans" ? "ZH-CN" : "EN")
     var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
     var username = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
