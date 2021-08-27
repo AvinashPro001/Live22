@@ -81,7 +81,6 @@ var apiEndPoints = {
     rewadHistroy: 'customer/reward/list',
     bettingSummeryHistroy: 'Game/bettingsummery',
 
-
     AllInWallet: 'Game/Balance/InWallet',
 
     admin_bank: 'settings/admin_bank/list',

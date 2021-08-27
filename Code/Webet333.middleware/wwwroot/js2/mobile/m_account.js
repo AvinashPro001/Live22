@@ -204,7 +204,6 @@ async function ChangePassword(i) {
             LoaderHide();
             return ShowError(ChangeErroMessage("current_pass_not_match"));
         }
-            
 
         if (model.currentPassword === model.password) {
             LoaderHide();
@@ -324,7 +323,7 @@ async function DoRegister() {
         referenceKeyword: getCookie("ref"),
         otp: $("#m_regsiter_otp").val()
     };
-    
+
     if (model.mobile === "") {
         LoaderHide();
         return ShowError(ChangeErroMessage("mobile_no_required_error"));

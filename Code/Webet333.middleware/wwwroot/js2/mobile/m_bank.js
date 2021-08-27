@@ -114,7 +114,6 @@ async function DepositPromotionList() {
 }
 
 async function BankList() {
-
 }
 //#endregion
 
@@ -541,7 +540,6 @@ async function Deposit(online) {
                     }
 
                     if (model.promotionId != "") {
-
                         if (online) {
                             localStorage.setItem("IsWindowClose", false)
                             OpenPaymentPage();
@@ -875,7 +873,6 @@ function generateGuid() {
 }
 //#endregion
 
-
 var userbalance;
 //#region TransferValidation
 async function select() {
@@ -1045,7 +1042,6 @@ function GetDateFormate(Date1, Date2) {
     Month1 = Month1 < 10 ? "0" + Month1 : Month1;
     day1 = day1 < 10 ? "0" + day1 : day1;
 
-
     var day2 = Date2.getDate();
     var Month2 = Date2.getMonth() + 1;
     var Year2 = Date2.getFullYear();
@@ -1104,7 +1100,6 @@ function GetDateRange() {
     }
     fromDate = fdate[2] + "-" + fdate[1] + "-" + fdate[0] + " 00:00:00";
     toDate = tdate[2] + "-" + tdate[1] + "-" + tdate[0] + " 23:59:59";
-
 
     CallFunctionAccordingToTab()
 }
@@ -1213,7 +1208,6 @@ async function PromotionHistory(FromDate = null, ToDate = null, PageSize = null,
             html += '<li data-toggle="modal" data-target="#promotion-history-model" onclick="PromotionHistoryDetailsSet(\'' + data[i].Id + '\')" class="list-content"><div class="back-btn rotate"><a><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].Title + '</h6><p>' + APIDateFormate(data[i].Created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].UserTurnover).toFixed(2) + '</p><p class="product-available ' + data[i].Staus.replace(" ", "_").toLowerCase() + '_color">' + (data[i].Staus == "Manually Expired" ? "M. Expired" : data[i].Staus) + '</p></div></li>';
         }
         $("#promotionHistory").append(html);
-
     }
     else {
         if (res.data.total == 0)
@@ -1270,7 +1264,6 @@ async function RewardHistory(FromDate = null, ToDate = null, PageSize = null, Pa
             html += '<li data-toggle="modal" data-target="#rebate-history-model"  class="list-content"><div class="back-btn rotate"><a><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].TransactionType + '</h6><p>' + APIDateFormate(data[i].Created) + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].Amount).toFixed(2) + '</p><p class="product-available approved_color">' + parseFloat(data[i].CurrentBalance).toFixed(2) + '</p></div></li>';
         }
         $("#rewardHistory").append(html);
-
     }
     else {
         if (res.data.total == 0)
@@ -1299,7 +1292,6 @@ async function BettingHistory(FromDate = null, ToDate = null, PageSize = null, P
             html += '<li data-toggle="modal" data-target="#betting-history-model" onclick="BettingHistoryDetailsSet(\'' + data[i].GameName + '\',\'' + data[i].BetCount + '\',\'' + parseFloat(data[i].VaildBetAmount).toFixed(2) + '\',\'' + parseFloat(data[i].TotalRebate).toFixed(2) + '\',\'' + parseFloat(data[i].BetAmount).toFixed(2) + '\')" class="list-content"><div class="back-btn rotate"><a><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].GameName + '</h6><p>' + data[i].BetCount + '</p></div><div class="product-subdesc"><p class="product-amount">MYR ' + parseFloat(data[i].VaildBetAmount).toFixed(2) + '</p><p class="product-available approved_color">' + parseFloat(data[i].TotalRebate).toFixed(2) + '</p></div></li>';
         }
         $("#bettingsummery").append(html);
-
     }
     else {
         if (res.data.total == 0)
@@ -1350,7 +1342,6 @@ function PromotionHistoryDetailsSet(id) {
     $("#promotionHistoryExpiry").html(data[0].ExpiryDate.replace("T", " "))
     $("#promotionHistoryCreated").html(data[0].Created.replace("T", " "))
     $("#promotionHistoryTurnoverTarget").html(parseFloat(data[0].TurnoverTarget).toFixed(2))
-
 }
 
 function RebateHistoryDetailsSet(GameName, GameType, BetAmount, Rolling, winlose, Turnover, CommAmount, created) {

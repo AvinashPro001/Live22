@@ -473,7 +473,6 @@ async function AGWallet(Username, IsDivValueSet = true) {
 
         if (UsersBalance.AGBalance == 0 && res.response.data.previousBalance > 0 && AGTrigger == false)
             StartTimerGameBalanceAPI("AG");
-
     }
     catch (e) {
         UsersBalance.AGBalance = "N/A";
@@ -578,7 +577,6 @@ async function PlaytechWallet(Username, IsDivValueSet = true) {
 
         if (UsersBalance.PlaytechBalance == 0 && res.response.data.previousBalance > 0 && PlaytechTrigger == false)
             StartTimerGameBalanceAPI("Playtech");
-
     }
     catch (e) {
         UsersBalance.PlaytechBalance = "N/A";
@@ -755,7 +753,6 @@ async function SboWallet(Username, IsDivValueSet = true) {
         }
         if (IsDivValueSet)
             SetBalanceOnAllPlace("sbo_balance", UsersBalance.SboBalance);
-
     }
     catch (e) {
         UsersBalance.SboBalance = "N/A";
@@ -772,7 +769,6 @@ async function GamePlayWallet(Username, IsDivValueSet = true) {
         if (res.status == 200) UsersBalance.GamePlayBalance = ConvertBalanceIntoCommasValue(res.response.data.balance);
         else UsersBalance.GamePlayBalance = "N/A";
         if (IsDivValueSet) SetBalanceOnAllPlace("gameplay_balance", UsersBalance.GamePlayBalance);
-
     }
     catch (e) {
         UsersBalance.GamePlayBalance = "N/A";
