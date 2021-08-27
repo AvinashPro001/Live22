@@ -74,9 +74,7 @@
                                 </li>
                                 <div class="clear-fix"></div>
                             </ul>
-
                         </div>
-
                         <div class="access-info download-info">
                             <p class="white-text blue-bg text-center no-mar"><spam class="lang" key="your_access_information">Your Access Information</spam></p>
                             <div class="row border-bottom no-mar">
@@ -94,13 +92,12 @@
                                 <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7">
                                     <p class="grey-text text-center" id="kiss918_password">
                                         @*<label class="grey-text text-center" id="reset918password">
-                                            <a onclick="ChangePassword(1)" class="grey-text">&nbsp;&nbsp;&nbsp;&nbsp;Reset</a>
-                                        </label>*@
+                                                <a onclick="ChangePassword(1)" class="grey-text">&nbsp;&nbsp;&nbsp;&nbsp;Reset</a>
+                                            </label>*@
                                     </p>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div id="JokerDownload" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
                         <div class="info-form marginb-none">
@@ -132,9 +129,7 @@
                                 </li>
                                 <div class="clear-fix"></div>
                             </ul>
-
                         </div>
-
                         <div class="access-info download-info">
                             <p class="white-text blue-bg text-center no-mar"><spam class="lang" key="your_access_information">Your Access Information</spam></p>
                             <div class="row border-bottom no-mar">
@@ -151,12 +146,10 @@
                                 </div>
                                 <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7">
                                     <p class="grey-text text-center" id="joker_password">
-                                       
                                     </p>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div id="MegaDownload" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
                         <div class="info-form marginb-none">
@@ -215,7 +208,6 @@
                                     </div>
                                     <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7">
                                         <p class="grey-text text-center" id="mega888_password">
-                                            
                                         </p>
                                     </div>
                                 </div>
@@ -286,9 +278,7 @@
         OpenTabOnHashChange();
     });
 
-    setTimeout(function () {
-        SetUsernamePassword();
-    },5000)
+    setTimeout(function () { SetUsernamePassword(); }, 5000)
 
     setInterval(function () {
         if (document.getElementById("Pussy888IOS").src == "") CallDownloadLinkAPI();
@@ -300,17 +290,12 @@
         SetUsernamePassword();
         if (window.location.hash) {
             var hash = window.location.hash.substring(1);
-            if (hash == '918Download') 
-                document.getElementById("defaultOpen").click();
-            if (hash == 'JokerDownload') 
-                document.getElementById("JokerDownloadOpen").click();
-            if (hash == 'MegaDownload') 
-                document.getElementById("MegaDownloadOpen").click();
-            if (hash == 'Pussy888Download')
-                document.getElementById("PussyDownloadOpen").click();
+            if (hash == '918Download') document.getElementById("defaultOpen").click();
+            if (hash == 'JokerDownload') document.getElementById("JokerDownloadOpen").click();
+            if (hash == 'MegaDownload') document.getElementById("MegaDownloadOpen").click();
+            if (hash == 'Pussy888Download') document.getElementById("PussyDownloadOpen").click();
         }
-        else
-            document.getElementById("defaultOpen").click();
+        else document.getElementById("defaultOpen").click();
     }
 
     function openCity(evt, cityName, linknum) {
