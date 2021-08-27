@@ -678,21 +678,21 @@ async function GamePlayIdentifiy(Slotvalue) {
 }
 
 async function CQ9Identifiy(Slotvalue) {
+    if (GetLocalStorage('currentUser') == null) return alert('Please Login');
+
+    LoaderShow();
+
     let value = await CheckGameInMaintenance('CQ9');
     if (value) {
         LoaderHide();
         return ShowError(ChangeErroMessage('maintainenance_error'));
     }
 
-    if (Slotvalue) return window.open('../mobile?p=slot#cq9-game', '_blank');
-
-    if (GetLocalStorage('currentUser') == null) return alert('Please Login');
-
-    LoaderShow();
-    if (checkedValue) TransferInAllWallet('CQ9 Wallet');
     localStorage.setItem('slotGame', Slotvalue);
+
     LoaderHide();
-    GameLoginMobile('CQ9');
+
+    logingGame('CQ9');
 }
 
 async function GameLoginMobile(gamename) {
@@ -1043,22 +1043,23 @@ async function GameLoginMobile(gamename) {
             case 'CQ9':
                 LoaderShow();
 
-                let model = {}, res, temp = localStorage.getItem('slotGame');
+                let temp = localStorage.getItem('slotGame');
 
                 if (temp == null || temp == NaN || temp == undefined || temp == 'null') temp = false;
 
                 if (resSelectUser.data.CQ9 !== true) {
-                    res = await PostMethod(apiEndPoints.CQ9Register, model);
+                    let model = {};
+                    let res = await PostMethod(apiEndPoints.CQ9Register, model);
                     if (res.data.status.code == '0') {
-                        model = { isMobile: true, isSlot: temp };
-                        res = await PostMethod(apiEndPoints.CQ9Login, model);
-                        if (res.response.data.status.code == '0') location.href = res.response.data.data.url;
+                        let model = { isMobile: true, isSlot: temp };
+                        let res = await PostMethod(apiEndPoints.CQ9Login, model);
+                        if (res.data.status.code == '0') location.href = res.data.data.url;
                     }
                 }
                 else {
-                    model = { isMobile: true, isSlot: temp };
-                    res = await PostMethod(apiEndPoints.CQ9Login, model);
-                    if (res.response.data.status.code == '0') location.href = res.response.data.data.url;
+                    let model = { isMobile: true, isSlot: temp };
+                    let res = await PostMethod(apiEndPoints.CQ9Login, model);
+                    if (res.data.status.code == '0') location.href = res.data.data.url;
                 }
                 break;
         }
