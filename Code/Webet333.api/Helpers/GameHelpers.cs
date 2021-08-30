@@ -1224,26 +1224,27 @@ namespace Webet333.api.Helpers
         #region User Balance Restore
 
         public async Task BalanceRestore(
-                    string userId,
-                    string Addedby,
-                    decimal mainBalance,
-                    decimal AGBalance,
-                    decimal DGBalance,
-                    decimal PlaytechBalance,
-                    decimal Kiss918Balance,
-                    decimal MaxbetBalance,
-                    decimal M8Balance,
-                    decimal JokerBalance,
-                    decimal Mega888Balance,
-                    decimal SexyBaccaratBalance,
-                    decimal SABalance,
-                    decimal PussyBalance,
-                    decimal AllbetBalance,
-                    decimal WMBalance,
-                    decimal PragmaticBalance,
-                    decimal YeeBetBalance,
-                    decimal SBOBalance,
-                    decimal GamePlayBalance
+            string userId,
+            string Addedby,
+            decimal mainBalance,
+            decimal AGBalance,
+            decimal DGBalance,
+            decimal PlaytechBalance,
+            decimal Kiss918Balance,
+            decimal MaxbetBalance,
+            decimal M8Balance,
+            decimal JokerBalance,
+            decimal Mega888Balance,
+            decimal SexyBaccaratBalance,
+            decimal SABalance,
+            decimal PussyBalance,
+            decimal AllbetBalance,
+            decimal WMBalance,
+            decimal PragmaticBalance,
+            decimal YeeBetBalance,
+            decimal SBOBalance,
+            decimal GamePlayBalance,
+            decimal CQ9Balance
             )
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -1271,7 +1272,8 @@ namespace Webet333.api.Helpers
                         PragmaticBalance,
                         YeeBetBalance,
                         SBOBalance,
-                        GamePlayBalance
+                        GamePlayBalance,
+                        CQ9Balance
                     });
             }
         }

@@ -1894,10 +1894,10 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.GameWalletBalanceRestore)]
         public async Task<IActionResult> UserBalanceRestore([FromBody] GamBalanceRestoreRequest request)
         {
-            var Role = GetUserRole(User);
             var UserId = GetUserId(User).ToString();
-            if (Role == RoleConst.Users) request.Id = UserId;
 
+            var Role = GetUserRole(User);
+            if (Role == RoleConst.Users) request.Id = UserId;
             if (Role == RoleConst.Admin) if (string.IsNullOrEmpty(request.Id)) return BadResponse("error_invalid_modelstate");
 
             GetUsernameByIdResponse user;
@@ -1924,7 +1924,8 @@ namespace Webet333.api.Controllers
                 PussyBalance = 0.0m,
                 YeeBetBalance = 0.0m,
                 SBOBalance = 0.0m,
-                GamePlayBalance = 0.0m;
+                GamePlayBalance = 0.0m,
+                CQ9Balance = 0.0m;
 
             using (var game_helper = new GameHelpers(Connection))
             {
@@ -2142,6 +2143,18 @@ namespace Webet333.api.Controllers
                     { }
                 }
 
+                if (request.CQ9Wallet != 0)
+                {
+                    try
+                    {
+                        var result = await CQ9GameHelpers.CallTransferAPI(user.CQ9Username, Math.Abs(request.CQ9Wallet), GameConst.CQ9.EndPoint.Withdraw);
+                        mainBalance += result.Status.Code == "0" ? request.CQ9Wallet : 0;
+                        CQ9Balance = result.Status.Code == "0" ? request.CQ9Wallet : 0;
+                    }
+                    catch
+                    { }
+                }
+
                 await game_helper.BalanceRestore(
                     request.Id, UserId,
                     mainBalance,
@@ -2161,7 +2174,8 @@ namespace Webet333.api.Controllers
                     PragmaticBalance,
                     YeeBetBalance,
                     SBOBalance,
-                    GamePlayBalance
+                    GamePlayBalance,
+                    CQ9Balance
                 );
 
                 return OkResponse(new { mainBalance });
@@ -2670,6 +2684,7 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> BalacneInWallet([FromBody] AllInWalletRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
+
             var role = GetUserRole(User);
             if (role == RoleConst.Users) request.UserId = GetUserId(User).ToString();
             else if (String.IsNullOrEmpty(request.UserId)) return BadResponse("error_invalid_modelstate");
@@ -2697,6 +2712,7 @@ namespace Webet333.api.Controllers
                     YEEBETUsername = user.YEEBETUsername,
                     SBOUsername = user.SBOUsername,
                     GamePlayUsername = user.GamePlayUsername,
+                    CQ9Username = user.CQ9Username,
 
                     FromWalletIsMaintenance = false,
                     FromWalletName = "Main Wallet",
@@ -3207,20 +3223,20 @@ namespace Webet333.api.Controllers
                 decimal total =
                     response.jokerWinover +
                     response.kiss918Winover +
-                    response.agTurover + 
-                    response.m8Turover + 
-                    response.maxbetTurover + 
+                    response.agTurover +
+                    response.m8Turover +
+                    response.maxbetTurover +
                     response.playtechTurover +
                     response.mega888Winover +
-                    response.dgTurover + 
+                    response.dgTurover +
                     response.saTurover +
                     response.sexyTurover +
-                    response.pussy888Turover+
-                    response.AllBetTurover + 
-                    response.WMTurover + 
-                    response.PragmaticTurover + 
-                    response.YeeBetTurover + 
-                    response.SBOTurover + 
+                    response.pussy888Turover +
+                    response.AllBetTurover +
+                    response.WMTurover +
+                    response.PragmaticTurover +
+                    response.YeeBetTurover +
+                    response.SBOTurover +
                     response.GamePlayTurover;
 
                 return OkResponse(new { response, Total = total });
@@ -3725,7 +3741,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Slot Game List Update
 
         #region Slot Game List Insert
 
@@ -3747,7 +3763,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Slot Game List Insert
 
         #region Hot Slots Game List Select
 
