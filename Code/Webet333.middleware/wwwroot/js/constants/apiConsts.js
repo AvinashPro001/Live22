@@ -78,7 +78,8 @@ var gameBalanceEndPoints = {
     pragmaticBalance: 'gamebalance/pragmatic',
     yeebetBalance: 'gamebalance/yeebet',
     sboBalance: 'gamebalance/sbo',
-    gameplayBalance: 'gamebalance/gamePlay'
+    gameplayBalance: 'gamebalance/gamePlay',
+    cq9Balance: 'gamebalance/cq9'
 };
 
 var transactionEndPoints = {

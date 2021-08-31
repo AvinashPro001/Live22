@@ -166,6 +166,7 @@ var apiEndPoints = {
     YeeBetBalance: 'gamebalance/yeebet',
     SBOBalance: 'gamebalance/sbo',
     GamePlayBalance: 'gamebalance/gameplay',
+    CQ9Balance: 'gamebalance/cq9',
 
     userDetaisSetGameBalance: 'userdetails/set',
 

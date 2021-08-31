@@ -678,7 +678,8 @@ async function regisrationGame() {
                 resSelectUser.WM === false ||
                 resSelectUser.Pragmatic === false ||
                 resSelectUser.SBO === false ||
-                resSelectUser.GamePlay === false
+                resSelectUser.GamePlay === false ||
+                resSelectUser.CQ9 === false
             ) {
                 var res = await PostMethod(accountEndPoints.gameRegisterCheck, userModel);
                 resSelectUser = res.response.data;
@@ -791,6 +792,12 @@ async function regisrationGame() {
             if (resSelectUser.GamePlay !== true) {
                 let model = {}
                 try { await PostMethod(gameRegisterEndPoints.gameplayRegister, model); }
+                catch { }
+            }
+
+            if (resSelectUser.CQ9 !== true) {
+                let model = {}
+                try { await PostMethod(gameRegisterEndPoints.cq9Register, model); }
                 catch { }
             }
 
