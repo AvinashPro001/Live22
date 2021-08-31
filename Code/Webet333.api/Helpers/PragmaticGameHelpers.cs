@@ -90,7 +90,8 @@ namespace Webet333.api.Helpers
 
         public static async Task<dynamic> LoginCallAPI(string Username, string langCode, string platform, string GameId = "vs7776secrets")
         {
-            string lobbyURL, Cashier;
+            string lobbyURL, Cashier, Parameter;
+
             if (platform == "MOBILE")
             {
                 lobbyURL = GameConst.BaseUrl + "Mobile/PragmaticGame";
@@ -102,13 +103,27 @@ namespace Webet333.api.Helpers
                 Cashier = GameConst.BaseUrl + "Account/Profile";
             }
 
-            var Parameter = $"cashier={Cashier}" +
-                $"&externalPlayerId={Username}" +
-                $"&gameId={GameId}" +
-                $"&language={langCode}" +
-                $"&lobbyURL={lobbyURL}" +
-                $"&platform={platform}" +
-                $"&secureLogin={GameConst.Pragmatic.SecureLogin}";
+            if (GameId == GameConst.Pragmatic.Casino.GameCode)  //  It's for only casino game.
+            {
+                Parameter = $"cashierURL={Cashier}" +
+                    $"&externalPlayerId={Username}" +
+                    $"&gameId={GameId}" +
+                    $"&language={langCode}" +
+                    $"&lobbyURL={lobbyURL}" +
+                    $"&platform={platform}" +
+                    $"&secureLogin={GameConst.Pragmatic.SecureLogin}";
+            }
+            else
+            {
+                Parameter = $"cashier={Cashier}" +
+                    $"&externalPlayerId={Username}" +
+                    $"&gameId={GameId}" +
+                    $"&language={langCode}" +
+                    $"&lobbyURL={lobbyURL}" +
+                    $"&platform={platform}" +
+                    $"&secureLogin={GameConst.Pragmatic.SecureLogin}";
+            }
+
             var Url = $"{GameConst.Pragmatic.Url}{GameConst.Pragmatic.Login}";
             return JsonConvert.DeserializeObject<dynamic>(await CallAPI(Url, Parameter));
         }
