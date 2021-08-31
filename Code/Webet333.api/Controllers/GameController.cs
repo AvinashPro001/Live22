@@ -37,6 +37,7 @@ using Webet333.models.Request.Payments;
 using Webet333.models.Request.User;
 using Webet333.models.Response.Account;
 using Webet333.models.Response.Game;
+using Webet333.models.Response.Game.CQ9;
 using Webet333.models.Response.Game.DG;
 using Webet333.models.Response.Game.GamePlay;
 using Webet333.models.Response.Game.Joker;
@@ -849,6 +850,27 @@ namespace Webet333.api.Controllers
 
         #endregion GamePlay Game
 
+        #region CQ9 Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.Manually_CQ9_Betting_Details)]
+        public async Task<IActionResult> Manually_CQ9_Betting_Details([FromBody] GlobalBettingDetailsRequest request)
+        {
+            IsAdmin();
+
+            /*
+             * Game used GMT-4 time zone and Malaysia have GMT+8 timezone. So, we manage time zone.
+             */
+            request.FromDate = request.FromDate.AddHours(-12);
+            request.ToDate = request.ToDate.AddHours(-12);
+
+            var response = await CQ9GameHelpers.CallBettingDetailsAPI(request);
+
+            return OkResponse(response);
+        }
+
+        #endregion CQ9 Game
+
         #endregion Manually Game Betting Details
 
         #region GAME BETTING DETAILS
@@ -1411,6 +1433,40 @@ namespace Webet333.api.Controllers
 
         #endregion GamePlay Betting Details
 
+        #region CQ9 Betting Details
+
+        [HttpGet(ActionsConst.Game.CQ9_Betting_Details)]
+        public async Task<IActionResult> CQ9_Betting_Details()
+        {
+            DateTime date = DateTime.Now;
+
+            GlobalBettingDetailsRequest request = new GlobalBettingDetailsRequest
+            {
+                /*
+                 * Game used GMT-4 time zone and Malaysia have GMT+8 timezone. So, we manage time zone.
+                 */
+                FromDate = date.AddHours(-12).AddHours(-1),
+                ToDate = date.AddHours(-12).AddHours(1)
+            };
+
+            var response = await CQ9GameHelpers.CallBettingDetailsAPI(request);
+
+            if (response.Status.Code == "0" &&
+                response.Data.Data.Any())
+                using (var game_helper = new GameHelpers(Connection))
+                {
+                    var jsonString = JsonConvert.SerializeObject(response.Data.Data);
+                    await game_helper.CQ9ServicesInsert(jsonString);
+                }
+
+            return OkResponse(new
+            {
+                jsonString = JsonConvert.SerializeObject(response)
+            });
+        }
+
+        #endregion CQ9 Betting Details
+
         #endregion GAME BETTING DETAILS
 
         #region Game Category
@@ -1759,6 +1815,32 @@ namespace Webet333.api.Controllers
                     using (var game_help = new GameHelpers(Connection: Connection))
                     {
                         await game_help.GamePlayServicesInsert(request.JsonData);
+                    }
+                }
+            }
+
+            return OkResponse();
+        }
+
+        #endregion GamePlay Game
+
+        #region GamePlay Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.CQ9BettingDetailsSave)]
+        public async Task<IActionResult> CQ9BettingDetails_Insert([FromBody] GameBettingDetailsInsertRequest request)
+        {
+            await CheckUserRole();
+
+            if (request.JsonData != null)
+            {
+                List<CQ9GetBettingDetailsResponseDataData> result = JsonConvert.DeserializeObject<List<CQ9GetBettingDetailsResponseDataData>>(request.JsonData.ToString());
+
+                if (result.Any())
+                {
+                    using (var game_help = new GameHelpers(Connection: Connection))
+                    {
+                        await game_help.CQ9ServicesInsert(request.JsonData);
                     }
                 }
             }

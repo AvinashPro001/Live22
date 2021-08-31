@@ -859,6 +859,8 @@
                 public const string Withdraw = "gameboy/player/withdraw";
 
                 public const string Deposit = "gameboy/player/deposit";
+
+                public const string GetBettingDetails = "gameboy/order/view";
             }
 
             public class LanguageCode

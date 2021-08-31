@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Webet333.dapper;
+using Webet333.models.Request.Game;
 using Webet333.models.Response.Game.CQ9;
 using CQ9Const = Webet333.models.Constants.GameConst.CQ9;
 using SPConst = Webet333.models.Constants.StoredProcConsts;
@@ -184,7 +185,52 @@ namespace Webet333.api.Helpers
             return DeserializeAPIResult;
         }
 
-        #endregion Call Login 3rd Party API
+        #endregion Call Withdraw & Deposit 3rd Party API
+
+        #region Call Betting Details 3rd Party API
+
+        internal static async Task<CQ9GetBettingDetailsResponse> CallBettingDetailsAPI(GlobalBettingDetailsRequest request)
+        {
+            CQ9GetBettingDetailsResponse result = new CQ9GetBettingDetailsResponse();
+
+            long count = 1, page = 1, pagesize = 20000;
+            string timezone = "-04:00";
+            string timeFormate = "yyyy-MM-ddTHH:mm:ss.fff";
+
+            string startTime = request.FromDate.ToString($"{timeFormate}{timezone}");
+            string endTime = request.ToDate.ToString($"{timeFormate}{timezone}");
+
+            for (int i = 0; i < count; i++)
+            {
+                string model = $"starttime={startTime}&" +
+                    $"endtime={endTime}&" +
+                    $"page={i + page}&" +
+                    //$"account={}&" +
+                    $"pagesize={pagesize}";
+
+                string temp = await CallGETAPIAsync($"{CQ9Const.EndPoint.GetBettingDetails}?{model}");
+
+                var tempResult = JsonConvert.DeserializeObject<CQ9GetBettingDetailsResponse>(temp);
+
+                if (result.Data == null) result = tempResult;
+                else result.Data.Data.AddRange(tempResult.Data.Data);
+
+                if (i == 0 &&
+                    result != null &&
+                    result.Data != null &&
+                    result.Data.Totalsize > 1)
+                {
+                    var total = result.Data.Totalsize;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, (int)pagesize);
+
+                    count = totalPages;
+                }
+            }
+
+            return result;
+        }
+
+        #endregion Call Betting Details 3rd Party API
 
         #region House Keeping
 

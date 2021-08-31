@@ -440,6 +440,8 @@
 
             public const string GamePlay_Betting_Details = "Game/GamePlay_Betting_Details";
 
+            public const string CQ9_Betting_Details = "Game/CQ9_Betting_Details";
+
             public const string Manually_Joker_Betting_Details = "Game/Manually/Joker_Betting_Details";
 
             public const string Manually_AG_Betting_Details = "Game/Manually/AG_Betting_Details";
@@ -475,6 +477,8 @@
             public const string Manually_SBO_Betting_Details = "Game/Manually/SBO_Betting_Details";
 
             public const string Manually_GamePlay_Betting_Details = "Game/Manually/GamePlay_Betting_Details";
+
+            public const string Manually_CQ9_Betting_Details = "Game/Manually/CQ9_Betting_Details";
 
             public const string Playtech_Betting_Details = "Game/Playtech_Betting_Details";
 
@@ -529,6 +533,8 @@
             public const string SBOBettingDetailsSave = "Game/SBOBettingDetailsSave";
 
             public const string GamePlayBettingDetailsSave = "Game/GamePlayBettingDetailsSave";
+
+            public const string CQ9BettingDetailsSave = "Game/CQ9BettingDetailsSave";
 
             public const string GameWalletBalance = "Game/AllWalletBalance";
 
