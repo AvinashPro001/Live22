@@ -491,6 +491,8 @@
             public const string BettingDetails_GamePlay = "[dbo].[GamePlay_BettingDetails_By_Username]";
 
             public const string CQ9BettingDetailsInsert = "[dbo].[CQ9_BettingDetails_Insert]";
+
+            public const string BettingDetails_CQ9 = "[dbo].[CQ9_BettingDetails_By_Username]";
         }
 
         public class MaxBetGame

@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.account = exports.environment = void 0;
 var baseUrl = '', baseUrlWithoutVersion = '';
-var environmentName = 'LOCAL'; // 'DEBUG' OR 'STAG' OR 'LOCAL'
-var PortAPI = '9001';
+var environmentName = 'DEBUG'; // 'DEBUG' OR 'STAG'
+var PortAPI = '8080';
 switch (environmentName.toUpperCase()) {
     case 'DEBUG':
         baseUrl = 'https://uatapi.wb3api.com/api/v1/';
@@ -309,7 +309,8 @@ exports.customer = {
     homePageBannerImage: exports.environment.apiUrl + 'settings/homePage-banner/image',
     homePageBannerImageUpdate: exports.environment.apiUrl + 'settings/homePage-banner/image/update',
     homePageBannerSelectById: exports.environment.apiUrl + 'settings/homePage-banner/select/id',
-    slotsGameInsert: exports.environment.apiUrl + 'Game/slotsgame/insert'
+    slotsGameInsert: exports.environment.apiUrl + 'Game/slotsgame/insert',
+    getVIPLevelReport: exports.environment.apiUrl + 'VIPLevel/report/select'
 };
 exports.playtech = {
     playtechUrl: 'https://api.wb3api.com/api/Default/playtech',
@@ -417,6 +418,7 @@ exports.GameRegister = {
     registerPragmatic: exports.environment.apiUrl + 'pragmatic/register',
     registerYeeBet: exports.environment.apiUrl + 'yeebet/register',
     registerSBO: exports.environment.apiUrl + 'sbo/register/player',
-    registerGamePlay: exports.environment.apiUrl + 'gameplay/register'
+    registerGamePlay: exports.environment.apiUrl + 'gameplay/register',
+    registerCQ9: exports.environment.apiUrl + 'cq9/register'
 };
 //# sourceMappingURL=environment.js.map

@@ -93,6 +93,9 @@ export class WithdrawAddComponent implements OnInit {
     GamePlayBalance: any;
     GamePlayUsername: any;
 
+    CQ9Balance: any;
+    CQ9Username: any;
+
     //#endregion
 
     //#region ngOnInit
@@ -146,6 +149,7 @@ export class WithdrawAddComponent implements OnInit {
             this.YeeBetUsername = res.data.yeeBetUsername;
             this.SBOUsername = res.data.sboUsername;
             this.GamePlayUsername = res.data.gameplayUsername;
+            this.CQ9Username = res.data.cq9Username;
 
             this.Kiss918Balance(newVal);
             this.Mega888(newVal);
@@ -165,6 +169,7 @@ export class WithdrawAddComponent implements OnInit {
             this.YeeBet(newVal);
             this.SBO(newVal);
             this.GamePlay(newVal);
+            this.CQ9(newVal);
         });
     }
 
@@ -212,6 +217,7 @@ export class WithdrawAddComponent implements OnInit {
             this.YeeBetUsername = res.data.yeeBetUsername;
             this.SBOUsername = res.data.sboUsername;
             this.GamePlayUsername = res.data.gameplayUsername;
+            this.CQ9Username = res.data.cq9Username;
 
             this.Kiss918Balance(newVal);
             this.Mega888(newVal);
@@ -230,6 +236,7 @@ export class WithdrawAddComponent implements OnInit {
             this.YeeBet(newVal);
             this.SBO(newVal);
             this.GamePlay(newVal);
+            this.CQ9(newVal);
 
             this.adminService.getAll<any>(customer.depositDdl).subscribe(res => {
                 this.ddlData = res.data;
@@ -317,8 +324,6 @@ export class WithdrawAddComponent implements OnInit {
         });
     }
     //#endregion
-
-
 
     //#region Wallet Balance
     convertDecimal(Balance) {
@@ -503,6 +508,16 @@ export class WithdrawAddComponent implements OnInit {
         }
         this.adminService.add<any>(gameBalance.GamePlay, data).subscribe(res => {
             this.GamePlayBalance = res.data.balance;
+        })
+    }
+
+    CQ9(id) {
+        let data = {
+            id: id,
+            username: this.CQ9Username
+        }
+        this.adminService.add<any>(gameBalance.CQ9, data).subscribe(res => {
+            this.CQ9Balance = res.data.balance;
         })
     }
 

@@ -277,6 +277,8 @@ export class PromotionAddComponent implements OnInit {
             isSBO: (document.getElementById("SBO_id") as HTMLInputElement).checked,
             isGamePlayCasino: (document.getElementById("GamePlayCasino_id") as HTMLInputElement).checked,
             isGamePlaySlot: (document.getElementById("GamePlaySlot_id") as HTMLInputElement).checked,
+            isCQ9Casino: (document.getElementById("CQ9Casino_id") as HTMLInputElement).checked,
+            isCQ9Slot: (document.getElementById("CQ9Slot_id") as HTMLInputElement).checked,
 
             isNewMember: (document.getElementById("newmember_id") as HTMLInputElement).checked,
             isSports: (document.getElementById("sports_id") as HTMLInputElement).checked,

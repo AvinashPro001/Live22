@@ -1599,6 +1599,10 @@ namespace Webet333.api.Helpers
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_GamePlay, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
+                    case GameConst.GameName.CQ9:
+                        result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_GamePlay, new { request.UserId, request.FromDate, request.ToDate });
+                        break;
+
                     default:
                         result = null;
                         break;
