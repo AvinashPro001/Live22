@@ -1600,7 +1600,7 @@ namespace Webet333.api.Helpers
                         break;
 
                     case GameConst.GameName.CQ9:
-                        result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_GamePlay, new { request.UserId, request.FromDate, request.ToDate });
+                        result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_CQ9, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
                     default:
