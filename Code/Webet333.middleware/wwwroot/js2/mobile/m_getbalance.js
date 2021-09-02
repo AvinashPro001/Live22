@@ -27,7 +27,7 @@ async function UserGameTurnover() {
         document.getElementById("YeeBetTurnover").innerHTML = parseFloat(turnover.data.response.yeeBetTurover).toFixed(2);
         document.getElementById("SBOTurnover").innerHTML = parseFloat(turnover.data.response.sboTurover).toFixed(2);
         document.getElementById("GamePlayTurnover").innerHTML = parseFloat(turnover.data.response.gamePlayTurover).toFixed(2);
-        document.getElementById('CQ9Turnover').innerHTML = parseFloat(turnover.data.response.cq9Turover).toFixed(2);
+        document.getElementById('CQ9Turnover').innerHTML = parseFloat(turnover.data.response.cQ9Turover).toFixed(2);
         document.getElementById("spinrefesh").classList.remove("fa-spin");
     }
     catch (e) {

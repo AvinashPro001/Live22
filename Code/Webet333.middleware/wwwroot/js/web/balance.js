@@ -350,7 +350,7 @@ async function GetDailyTurnover() {
         SetAllValueInElement("yeebet_turnover", FormatBalance(res.response.data.response.yeeBetTurover))
         SetAllValueInElement("sbo_turnover", FormatBalance(res.response.data.response.sboTurover))
         SetAllValueInElement('gameplay_turnover', FormatBalance(res.response.data.response.gamePlayTurover))
-        SetAllValueInElement('cq9_turnover', FormatBalance(res.response.data.response.cq9Turover))
+        SetAllValueInElement('cq9_turnover', FormatBalance(res.response.data.response.cQ9Turover))
     }
     $("#refresh-turnover").removeClass("rotate");
 }
