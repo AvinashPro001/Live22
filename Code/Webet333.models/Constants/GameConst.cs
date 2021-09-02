@@ -76,6 +76,8 @@
             public const string SBO = "SBO";
 
             public const string GamePlay = "GamePlay";
+
+            public const string CQ9 = "CQ9";
         }
 
 #if DEBUG
