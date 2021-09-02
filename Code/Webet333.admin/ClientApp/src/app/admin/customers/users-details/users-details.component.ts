@@ -3257,7 +3257,7 @@ export class UsersDetailsComponent implements OnInit {
                     let model = { fromdate: this.fromDate, todate: this.toDate };
                     this.adminService.add<any>(customer.CQ9BettingDetails, model).subscribe(res => {
                         if (res.data.status.code == '0' &&
-                            res.data.data.length > 0) {
+                            res.data.data.totalsize > 0) {
                             this.rows = [];
 
                             res.data.data.data.forEach(el => {

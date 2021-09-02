@@ -1289,10 +1289,11 @@ export class BettingDetailsComponent implements OnInit {
                 break;
             }
             case this.commonService.GameName.CQ9: {
-                let model = { fromdate: this.fromDate, todate: this.toDate };
-                this.adminService.add<any>(customer.CQ9BettingDetails, model).subscribe(res => {
+                //let model = { fromdate: this.fromDate, todate: this.toDate };
+                //this.adminService.add<any>(customer.CQ9BettingDetails, model).subscribe(res => {
+                this.adminService.add<any>(customer.CQ9BettingDetails, Model).subscribe(res => {
                     if (res.data.status.code == '0' &&
-                        res.data.data.length > 0) {
+                        res.data.data.totalsize > 0) {
                         this.rows = [];
                         this.TableData = res.data.data.data;
 
