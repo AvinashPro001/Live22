@@ -156,10 +156,21 @@ namespace Webet333.api.Helpers
 
         #region Call Get the game Lobby/table URL 3rd Party API
 
-        internal static async Task<CQ9GetLoginURLResponse> CallGetLoginURLAPI(string Token, string Language, string EndPoint)
+        internal static async Task<CQ9GetLoginURLResponse> CallGetLoginURLAPI(string Token, string Language, string EndPoint, bool IsSlot = true, string Gameplat = null)
         {
-            string model = $"usertoken={Token}&" +
-                $"lang={Language}";
+            string model;
+
+            if (IsSlot)
+                model = $"usertoken={Token}&" +
+                    $"lang={Language}";
+            else
+                model = $"usertoken={Token}&" +
+                    $"gamehall={CQ9Const.GameHall}&" +
+                    $"gamecode={CQ9Const.GameCode}&" +
+                    $"gameplat={Gameplat}&" +
+                    $"lang={Language}&" +
+                    $"app=N&" +     //  Optional
+                    $"detect=N";    //  Optional
 
             string temp = await CallPostAPIAsync(EndPoint, model);
 

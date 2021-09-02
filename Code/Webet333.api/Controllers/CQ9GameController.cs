@@ -145,7 +145,7 @@ namespace Webet333.api.Controllers
 
             CQ9GetLoginURLResponse res;
             if (request.IsSlot) res = await CQ9GameHelpers.CallGetLoginURLAPI(result.Data.Usertoken, language, CQ9Const.EndPoint.GameLobby);
-            else res = await CQ9GameHelpers.CallGetLoginURLAPI(result.Data.Usertoken, language, CQ9Const.EndPoint.TableGameLobby);
+            else res = await CQ9GameHelpers.CallGetLoginURLAPI(result.Data.Usertoken, language, CQ9Const.EndPoint.GetCasinoLobby, false, request.IsMobile == true ? CQ9Const.GamePlatform.Mobile : CQ9Const.GamePlatform.Web);
 
             if (res.Status.Code != "0") return BadResponse(res.Status.Message);
 
