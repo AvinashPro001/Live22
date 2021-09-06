@@ -119,7 +119,7 @@ namespace Webet333.api.Controllers
         #region Login
 
         [HttpPost(ActionsConst.CQ9.Login)]
-        public async Task<IActionResult> LoginAsync([FromBody] CQ9GameLoginRequest request)
+        public async Task<IActionResult> LoginAsync([FromBody] GameLoginRequest request)
         {
             if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
             if (!ModelState.IsValid) return BadResponse(ModelState);
@@ -143,9 +143,7 @@ namespace Webet333.api.Controllers
 
             string language = Language.Code == LanguageConst.Chinese ? CQ9Const.LanguageCode.Chinese : CQ9Const.LanguageCode.English;
 
-            CQ9GetLoginURLResponse res;
-            if (request.IsSlot) res = await CQ9GameHelpers.CallGetLoginURLAPI(result.Data.Usertoken, language, CQ9Const.EndPoint.GameLobby);
-            else res = await CQ9GameHelpers.CallGetLoginURLAPI(result.Data.Usertoken, language, CQ9Const.EndPoint.GetCasinoLobby, false, request.IsMobile == true ? CQ9Const.GamePlatform.Mobile : CQ9Const.GamePlatform.Web);
+            CQ9GetLoginURLResponse res = await CQ9GameHelpers.CallGetLoginURLAPI(result.Data.Usertoken, language);
 
             if (res.Status.Code != "0") return BadResponse(res.Status.Message);
 

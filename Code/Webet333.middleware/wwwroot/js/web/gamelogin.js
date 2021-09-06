@@ -2,9 +2,12 @@
     if (CheckLogin) if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
 
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
+
     var isMaintenance = data.WalletData.filter(x => x.walletType == WalletName);
     if (isMaintenance[0].isMaintenance) return ShowError(ChangeErroMessage("maintainenance_error"));
+
     CallGameLoginAPI(WalletName, IsSlotsCheck, CheckLogin);
+
     var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
     if (GetLocalStorage("currentUser") !== null) if (profile.autoTransfer) AllInWallet(WalletName);
 }
@@ -30,7 +33,7 @@ function CallGameLoginAPI(WalletName, IsSlots, CheckLogin = true) {
         case "YeeBet Wallet": OpenYeeBetGame(); break;
         case "SBO Wallet": OpenSBOGame(); break;
         case "GamePlay Wallet": OpenGamePlayGame(IsSlots); break;
-        case "CQ9 Wallet": OpenCQ9Game(IsSlots); break;
+        case "CQ9 Wallet": OpenCQ9Game(); break;
     }
 }
 
@@ -376,24 +379,18 @@ async function OpenGamePlayGame(IsSlots) {
         SetLocalStorage("gameURL", res.response.data.game_url);
 }
 
-async function OpenCQ9Game(IsSlots, IsPlayNowClick = false) {
+async function OpenCQ9Game(IsSlots = true, IsPlayNowClick = false) {
     let model = {}, res, resSelectUser;
 
-    if ((GetLocalStorage("currentUser") != null)) {
-        resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
-        if (resSelectUser.CQ9 !== true) await PostMethod(gameRegisterEndPoints.gameplayRegister, model);
-    }
+    if (!IsPlayNowClick) return window.open("../Web/slots#cq9-game");
 
-    if (IsSlots) {
-        if (IsPlayNowClick) {
-            if ((GetLocalStorage("currentUser") == null))
-                return ShowError(ChangeErroMessage("please_loign_error"));
-        }
-        else return window.open("../Web/slots#cq9-game");
-    }
+    if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
+
+    resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+    if (resSelectUser.CQ9 !== true) await PostMethod(gameRegisterEndPoints.gameplayRegister, model);
 
     window.open("../Web/game");
-    model = { isMobile: false, isSlot: IsSlots };
+    model = { isMobile: false };
     res = await PostMethod(gameLoginEndPoints.cq9Login, model);
     if (res.status == 200 &&
         res.response.data.status.code == '0')

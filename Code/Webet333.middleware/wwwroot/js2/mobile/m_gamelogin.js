@@ -212,16 +212,12 @@ async function GameInMaintenance(i) {
 
         if (walletData.data[i].walletType == 'CQ9 Wallet' &&
             walletData.data[i].isMaintenance == true) {
-            document.getElementById('cq9live').style.filter = 'grayscale(1)';
             document.getElementById('cq9slot').style.filter = 'grayscale(1)';
-            document.getElementById('cq9livelogin').style.filter = 'grayscale(1)';
             document.getElementById('cq9slotlogin').style.filter = 'grayscale(1)';
         }
         else if (walletData.data[i].walletType == 'CQ9 Wallet' &&
             walletData.data[i].isMaintenance == false) {
-            document.getElementById('cq9live').style.filter = '';
             document.getElementById('cq9slot').style.filter = '';
-            document.getElementById('cq9livelogin').style.filter = '';
             document.getElementById('cq9slotlogin').style.filter = '';
         }
     }
@@ -1072,21 +1068,17 @@ async function GameLoginMobile(gamename) {
             case 'CQ9':
                 LoaderShow();
 
-                let temp = localStorage.getItem('slotGame');
-
-                if (temp == null || temp == NaN || temp == undefined || temp == 'null') temp = false;
-
                 if (resSelectUser.data.CQ9 !== true) {
                     let model = {};
                     let res = await PostMethod(apiEndPoints.CQ9Register, model);
                     if (res.data.status.code == '0') {
-                        let model = { isMobile: true, isSlot: temp };
+                        let model = { isMobile: true };
                         let res = await PostMethod(apiEndPoints.CQ9Login, model);
                         if (res.data.status.code == '0') location.href = res.data.data.url;
                     }
                 }
                 else {
-                    let model = { isMobile: true, isSlot: temp };
+                    let model = { isMobile: true };
                     let res = await PostMethod(apiEndPoints.CQ9Login, model);
                     if (res.data.status.code == '0') location.href = res.data.data.url;
                 }

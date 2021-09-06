@@ -846,10 +846,6 @@
 
             public const string APIToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2MTI3MWZjMjczNjNjZjAwMDFhMDk3ZjkiLCJhY2NvdW50Ijoid2ViZXQzMzMiLCJvd25lciI6IjYxMjcxZmMyNzM2M2NmMDAwMWEwOTdmOSIsInBhcmVudCI6InNlbGYiLCJjdXJyZW5jeSI6Ik1ZUiIsImp0aSI6Ijk3OTE0NTE2OCIsImlhdCI6MTYyOTk1Mzk4NiwiaXNzIjoiQ3lwcmVzcyIsInN1YiI6IlNTVG9rZW4ifQ.nj2sb4HTJdrsVcdCUzToZ-km64RdUsVEyhm9g78X2Lo";
 
-            public const string GameHall = "cq9";
-
-            public const string GameCode = "CA01";
-
             public class EndPoint
             {
                 public const string Register = "gameboy/player";
@@ -859,10 +855,6 @@
                 public const string Login = "gameboy/player/login";
 
                 public const string GameLobby = "gameboy/player/lobbylink";
-
-                public const string GetCasinoLobby = "gameboy/player/gamelink";
-
-                public const string TableGameLobby = "gameboy/player/lobbylink/table";
 
                 public const string GetBalance = "gameboy/player/balance/";
 
@@ -878,13 +870,6 @@
                 public static string Chinese = "zh-cn";
 
                 public static string English = "en";
-            }
-
-            public class GamePlatform
-            {
-                public const string Web = "WEB";
-
-                public const string Mobile = "MOBILE";
             }
         }
 
