@@ -232,20 +232,26 @@ async function DoLogin() {
         grantType: 'User'
     };
     let res = await PostMethod(accountEndPoints.login, model);
-
     if (res.status !== 200) {
         if (res.status === 400) {
             if (res.response.message == "Your account is not active." || res.response.message == "Akaun anda belum aktif." || res.response.message == "您的帐户无效。") {
-                DoLogout();
+                ShowError(res.response.message);
+                setTimeout(function () {
+                    DoLogout();
+                },5000);
             }
 
             if (res.response.message == "Your access token is expired, please login again." || res.response.message == "Token akses anda tamat tempoh, sila log masuk sekali lagi." || res.response.message == "您的访问令牌已过期，请重新登录。") {
-                DoLogout();
+                ShowError(res.response.message);
+                setTimeout(function () {
+                    DoLogout();
+                }, 5000);
             }
         }
         ShowError(res.response.message);
         return 0;
     }
+
     SetTrackingData(model.userName, "loginCookies");
     SetCookie('trackLogin', true, 1000);
     SetLocalStorage('currentUserData', Encryption($("#txt_login_password").val()));
