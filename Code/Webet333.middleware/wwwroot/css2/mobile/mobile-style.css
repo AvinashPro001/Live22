@@ -313,6 +313,10 @@ select.main-wallet.jcf-hidden,
 .otp-btn {color: #fff !important;background: #f0ad4e !important;border-color: #eea236 !important;margin-left:10px;}
 .otp-btn span{font-size:10px;}
 #m_regsiter_otp{padding-left:10px;}
+.game-series li a .game-tag {position: absolute;right: -15px;top: -10px;z-index: 5;}
+.game-series li a{display:block;position:relative;}
+.game-series li a .game-tag img{max-width:50px;}
+.game-series li a .game-tag.new-high-light img {max-width: 30px;}
 
 
 
