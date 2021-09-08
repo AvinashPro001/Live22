@@ -807,6 +807,8 @@
             public const string FreeCreditEventDelete = "freecreditevent/delete";
 
             public const string FreeCreditEventUsersSelect = "freecreditevent/users/select";
+
+            public const string FreeCreditEventReport = "freecreditevent/report";
         }
 
         public class YEEBET

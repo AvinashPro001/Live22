@@ -1,5 +1,5 @@
 let baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG'
+let environmentName = 'STAG';  // 'DEBUG' OR 'STAG'
 let PortAPI = '8080';
 
 switch (environmentName.toUpperCase()) {
@@ -382,7 +382,9 @@ export const customer = {
 
     slotsGameInsert: environment.apiUrl + 'Game/slotsgame/insert',
 
-    getVIPLevelReport: environment.apiUrl + 'VIPLevel/report/select'
+    getVIPLevelReport: environment.apiUrl + 'VIPLevel/report/select',
+
+    freeCreditReport: environment.apiUrl + 'freecreditevent/report'
 }
 
 export const playtech = {
