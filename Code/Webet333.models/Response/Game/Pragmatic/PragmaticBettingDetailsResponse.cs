@@ -29,5 +29,7 @@
         public string jackpot { get; set; }
 
         public string bonusCode { get; set; }
+
+        public string gameType { get; set; }
     }
 }

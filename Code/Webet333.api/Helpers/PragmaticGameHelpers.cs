@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -206,6 +207,7 @@ namespace Webet333.api.Helpers
                 $"dataType={GameConst.Pragmatic.DataType.Slot}";
 
             List<PragmaticBettingDetailsResponse> slotBettingDetails = await GetBettingDetails(URL);
+            if (slotBettingDetails.Any()) slotBettingDetails.ForEach(x => x.gameType = "slot");
 
             URL = $"{GameConst.Pragmatic.BettingDetailsUrl}{GameConst.Pragmatic.BettingDetails}?" +
                 $"login={GameConst.Pragmatic.SecureLogin}&" +
@@ -214,6 +216,7 @@ namespace Webet333.api.Helpers
                 $"dataType={GameConst.Pragmatic.DataType.Casino}";
 
             List<PragmaticBettingDetailsResponse> casinoBettingDetails = await GetBettingDetails(URL);
+            if (casinoBettingDetails.Any()) casinoBettingDetails.ForEach(x => x.gameType = "casino");
 
             result = slotBettingDetails;
             result.AddRange(casinoBettingDetails);
