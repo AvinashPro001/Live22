@@ -508,6 +508,13 @@
             {
                 public const string GameCode = "101";
             }
+
+            public static class DataType
+            {
+                public const string Slot = "RNG";
+
+                public const string Casino = "LC";
+            }
         }
 
         public class SMSConst
