@@ -384,7 +384,9 @@ export const customer = {
 
     slotsGameInsert: environment.apiUrl + 'Game/slotsgame/insert',
 
-    getVIPLevelReport: environment.apiUrl + 'VIPLevel/report/select'
+    getVIPLevelReport: environment.apiUrl + 'VIPLevel/report/select',
+
+    freeCreditReport: environment.apiUrl + 'freecreditevent/report'
 }
 
 export const playtech = {
