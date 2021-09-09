@@ -696,7 +696,7 @@ async function GameLoginMobile(gamename) {
     LoaderShow();
 
     var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
-    
+
 
     if (GameUsername == null) {
         var username = await PostMethod(apiEndPoints.getUsername, {});
@@ -990,13 +990,13 @@ async function GameLoginMobile(gamename) {
                     if (res.data.error == '0') {
                         let model = { isMobile: true };
                         let res = await PostMethod(apiEndPoints.pragmaticLogin, model);
-                        if (res.data.error == '0') location.href = res.data.game_url;
+                        if (res.data.error == '0') location.href = res.data.gameURL;
                     }
                 }
                 else {
                     let model = { isMobile: true };
                     let res = await PostMethod(apiEndPoints.pragmaticLogin, model);
-                    if (res.data.error == '0') location.href = res.data.game_url;
+                    if (res.data.error == '0') location.href = res.data.gameURL;
                 }
                 break;
             case 'YeeBet':
