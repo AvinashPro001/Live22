@@ -635,6 +635,8 @@
             public const string FreeCreditEventUpdatDelete = "[dbo].[FreeCreditEvent_Delete]";
 
             public const string FreeCreditEventUsersSelect = "[dbo].[FreeCreditEvent_UsersSelect]";
+
+            public const string FreeCreditEventReport = "[dbo].[Admin_Free_Credit_Report]";
         }
 
         public class YEEBET

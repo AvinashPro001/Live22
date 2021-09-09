@@ -7,16 +7,19 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using Webet333.api.Controllers.Base;
+using Webet333.api.Helpers;
 using Webet333.dapper;
 using Webet333.models.Configs;
 using Webet333.models.Constants;
 using Webet333.models.Request;
+using Webet333.models.Request.Payments;
 using Webet333.models.Response;
+using Webet333.models.Response.FreeCreditEvent;
 
 namespace Webet333.api.Controllers
 {
     [Route(ActionsConst.ApiVersion)]
-    [Authorize]
+    //[Authorize]
     public class FreeCreditEventController : BaseController
     {
         #region Global Variable
@@ -247,5 +250,47 @@ namespace Webet333.api.Controllers
         }
 
         #endregion FreeCreditEvent Users Select
+
+
+        #region Free Credit Event Report
+
+        [HttpPost(ActionsConst.FreeCreditEvent.FreeCreditEventReport)]
+        public async System.Threading.Tasks.Task<IActionResult> FreeCreditEventReport([FromBody] GlobalGetWithPaginationRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+            
+            await CheckUserRole();
+
+            using (var repository = new DapperRepository<FreeCreditEventReportResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.FreeCreditEvent.FreeCreditEventReport, new { request.FromDate, request.ToDate, request.PageNo, request.PageSize });
+                var list = result.ToList();
+                if (list.Count != 0)
+                {
+                    var total = list.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? list.Count : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = list,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 10,
+                        offset = list.FirstOrDefault().OffSet,
+                    });
+                }
+                return OkResponse(new
+                {
+                    result = list,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
+            }
+        }
+
+        #endregion 
     }
 }
