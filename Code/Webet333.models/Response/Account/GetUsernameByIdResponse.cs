@@ -56,6 +56,9 @@ namespace Webet333.models.Response.Account
         [JsonProperty("gameplayUsername")]
         public string GamePlayUsername { get; set; }
 
+        [JsonProperty("jdbUsername")]
+        public string JDBUsername { get; set; }
+
         [JsonProperty("maxbetUsername")]
         public string MaxbetUsername { get; set; }
 

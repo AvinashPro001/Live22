@@ -584,6 +584,8 @@
             public const string CheckSBOBalance = "check/gamebalance/sbo";
 
             public const string GamePlayBalance = "gamebalance/gamePlay";
+
+            public const string JDBBalance = "gamebalance/jdb";
         }
 
         public class TransferMoney
@@ -860,6 +862,13 @@
             public const string GetSlotGameList = "gameplay/get/slot-gamelist";
 
             public const string GetFishGameList = "gameplay/get/fish-gamelist";
+        }
+
+        public static class JDB
+        {
+            public const string Register = "jdb/register";
+
+            public const string Login = "jdb/login";
         }
     }
 }

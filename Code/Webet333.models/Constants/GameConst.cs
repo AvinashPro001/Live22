@@ -102,7 +102,7 @@
 
             public const string Currency = "2";
 
-        #region Betting limit Constant
+            #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -130,7 +130,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-        #endregion Betting limit Constant
+            #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -836,6 +836,50 @@
             }
         }
 
+        public static class JDB
+        {
+            public const string APIURL = "https://tttint.onlinegames22.com/";
+
+            public const string CertKey = "gqs5DvSTnc8IhDAVTAm";
+
+            public const string AgentId = "wb3api";
+
+            public const string Currency = "MYR";
+
+            public const string Language = "en";
+
+            public const string Platform = "JDB";
+
+            public const string GameType = "SLOT";
+
+            public static class SuccessResponse
+            {
+                public const string Desc = "Success";
+
+                public const string Status = "0000";
+            }
+
+            public static class EndPoint
+            {
+                public const string Register = "wallet/createMember";
+
+                public const string Login = "wallet/login";
+
+                public const string GetBalance = "wallet/getBalance";
+
+                public const string Withdraw = "wallet/withdraw";
+
+                public const string Deposit = "wallet/deposit";
+            }
+
+            public static class LanguageCode
+            {
+                public const string English = "en";
+
+                public const string SimplifiedChinese = "cn";
+            }
+        }
+
 #elif STAG
 
         public const string BaseUrl = "https://www.webet333.net/";
@@ -862,7 +906,7 @@
 
             public const string Currency = "2";
 
-            #region Betting limit Constant
+        #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -890,7 +934,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-            #endregion Betting limit Constant
+        #endregion Betting limit Constant
         }
 
         public class Kiss918

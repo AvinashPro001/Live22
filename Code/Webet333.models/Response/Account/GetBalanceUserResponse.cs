@@ -52,6 +52,8 @@ namespace Webet333.models.Response.Account
 
         public string GamePlayGamePrefix { get; set; }
 
+        public string JDBGamePrefix { get; set; }
+
         public string MobileNo { get; set; }
 
         public string GameSupport { get; set; }
@@ -108,5 +110,8 @@ namespace Webet333.models.Response.Account
 
         [JsonProperty("IsPussy888")]
         public bool IsPussy888 { get; set; }
+
+        [JsonProperty("IsJDB")]
+        public bool IsJDB { get; set; }
     }
 }

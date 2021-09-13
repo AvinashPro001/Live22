@@ -16,6 +16,7 @@ using Webet333.dapper;
 using Webet333.models.Constants;
 using Webet333.models.Response.Game.AG;
 using Webet333.models.Response.TransferMoney;
+using JDBGameConst = Webet333.models.Constants.GameConst.JDB;
 
 namespace Webet333.api.Helpers
 {
@@ -581,6 +582,25 @@ namespace Webet333.api.Helpers
                         response.GameResponse = ex.Message;
                     }
                     break;
+
+                case WalletConst.WalletName.JDB:
+                    try
+                    {
+                        var result = await JDBGameHelpers.CallWithdrawAPI(UsernameResponse.JDBUsername, Math.Abs(Amount));
+                        if (result.Status != JDBGameConst.SuccessResponse.Status)
+                        {
+                            response.ErrorMessage = result.Desc;
+                            response.GameName = "JDB Game";
+                            response.GameResponse = JsonConvert.SerializeObject(result);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response.ErrorMessage = Localizer["error_transaction_failed"].Value;
+                        response.GameName = "JDB Game";
+                        response.GameResponse = ex.Message;
+                    }
+                    break;
             }
 
             return response;
@@ -939,6 +959,25 @@ namespace Webet333.api.Helpers
                     {
                         response.ErrorMessage = Localizer["error_transaction_failed"].Value;
                         response.GameName = "GamePlay Game";
+                        response.GameResponse = ex.Message;
+                    }
+                    break;
+
+                case WalletConst.WalletName.JDB:
+                    try
+                    {
+                        var result = await JDBGameHelpers.CallDepositAPI(UsernameResponse.JDBUsername, Math.Abs(Amount));
+                        if (result.Status != JDBGameConst.SuccessResponse.Status)
+                        {
+                            response.ErrorMessage = result.Desc;
+                            response.GameName = "JDB Game";
+                            response.GameResponse = JsonConvert.SerializeObject(result);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response.ErrorMessage = Localizer["error_transaction_failed"].Value;
+                        response.GameName = "JDB Game";
                         response.GameResponse = ex.Message;
                     }
                     break;
