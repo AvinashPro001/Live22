@@ -30,6 +30,7 @@ function CallGameLoginAPI(WalletName, IsSlots, CheckLogin = true) {
         case "YeeBet Wallet": OpenYeeBetGame(); break;
         case "SBO Wallet": OpenSBOGame(); break;
         case "GamePlay Wallet": OpenGamePlayGame(IsSlots); break;
+        case 'JDB Wallet': OpenJDBGame(); break;
     }
 }
 
@@ -173,7 +174,6 @@ async function OpenAgGame(IsSlots, IsPlayNowClick = false) {
             if (AGLogin.response.data.error_code == 0)
                 SetLocalStorage("gameURL", AGLogin.response.data.url);
     }
-
 }
 
 async function OpenAllBetGame() {
@@ -203,7 +203,6 @@ async function OpenAllBetGame() {
             if (login.response.data.error_code == "OK")
                 SetLocalStorage("gameURL", login.response.data.gameLoginUrl);
     }
-
 }
 
 async function OpenWMGame() {
@@ -276,11 +275,9 @@ async function OpenPussy888Game() {
             await PostMethod(gameRegisterEndPoints.pussyRegister, model);
         }
     }
-
 }
 
 async function OpenMaxbetGame() {
-
     window.open("../Web/game");
     let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
     var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
@@ -390,6 +387,29 @@ async function LoginGameplayGame(GameCode) {
     SetLocalStorage('gameURL', res.response.data.game_url);
 }
 
+async function OpenJDBGame() {
+    let model = {}, resSelectUser;
+
+    if (GetLocalStorage("currentUser") != null) {
+        resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+        if (resSelectUser.JDB !== true) await PostMethod(gameRegisterEndPoints.jdbRegister, model);
+    }
+
+    return window.open("../Web/slots#jdb-game");
+}
+
+async function LoginJDBGame(GameCode) {
+    let model, res;
+
+    if (GetLocalStorage('currentUser') == null) return ShowError(ChangeErroMessage('please_loign_error'));
+
+    window.open('../Web/game');
+
+    model = { isMobile: false }
+    res = await PostMethod(gameLoginEndPoints.jdbLogin, model);
+    SetLocalStorage('gameURL', res.response.data.game_url);
+}
+
 async function OpenPragmaticGame() {
     window.open("../Web/slots#pragmatic-game");
     if (GetLocalStorage("currentUser") != null) {
@@ -447,7 +467,6 @@ async function LoginPlaytechGame(GameCode, IsAllInWalletChecked = false) {
         if (profile.autoTransfer)
             AllInWallet('PlayTech Wallet');
     }
-    
 
     PlaytechBrokenStatusInterval();
 
@@ -607,12 +626,11 @@ async function HotSlotsgame() {
         gameList = list.response.data.result;
         var html = "";
         for (i = 0; i < gameList.length; i++) {
-
             if (gameList[i].WalletName == "Playtech Slot") {
-                html += '<div class="item"><div class="game_boxes hand-curson" onclick="LoginPlaytechGame(\'' + gameList[i].GameCode +'\','+ true +')"><img src="' + gameList[i].ImagePath2 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
+                html += '<div class="item"><div class="game_boxes hand-curson" onclick="LoginPlaytechGame(\'' + gameList[i].GameCode + '\',' + true + ')"><img src="' + gameList[i].ImagePath2 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
             }
             else {
-                html += '<div class="item"><div class="game_boxes hand-curson" onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\',' + true +')"><img src="' + gameList[i].ImagePath1 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
+                html += '<div class="item"><div class="game_boxes hand-curson" onclick="LoginPragmaticGame(\'' + gameList[i].GameCode + '\',' + true + ')"><img src="' + gameList[i].ImagePath1 + '" alt="games_boxes1" /><h1>' + gameList[i].GameName + '</h1><p>' + gameList[i].WalletName + '</p></div></div >'
             }
         }
         SetAllValueInElement("hot-game-section", html)

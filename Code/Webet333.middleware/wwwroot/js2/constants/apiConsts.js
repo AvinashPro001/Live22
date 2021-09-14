@@ -1,5 +1,5 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '8080';
 let PortWEB = '9002';
 
@@ -147,6 +147,9 @@ var apiEndPoints = {
     GamePlayRegister: 'gameplay/register',
     GamePlayLogin: 'gameplay/login',
 
+    JDBRegister: 'jdb/register',
+    JDBLogin: 'jdb/login',
+
     kiss918Balance: 'gamebalance/918kiss',
     mega888Balance: 'gamebalance/mega888',
     jokerBalance: 'gamebalance/joker',
@@ -164,6 +167,7 @@ var apiEndPoints = {
     YeeBetBalance: 'gamebalance/yeebet',
     SBOBalance: 'gamebalance/sbo',
     GamePlayBalance: 'gamebalance/gameplay',
+    JDBBalance: 'gamebalance/jdb',
 
     userDetaisSetGameBalance: 'userdetails/set',
 

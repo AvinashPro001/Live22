@@ -27,6 +27,7 @@ async function UserGameTurnover() {
         document.getElementById("YeeBetTurnover").innerHTML = parseFloat(turnover.data.response.yeeBetTurover).toFixed(2);
         document.getElementById("SBOTurnover").innerHTML = parseFloat(turnover.data.response.sboTurover).toFixed(2);
         document.getElementById("GamePlayTurnover").innerHTML = parseFloat(turnover.data.response.gamePlayTurover).toFixed(2);
+        document.getElementById('JDBTurnover').innerHTML = parseFloat(turnover.data.response.jdbTurover).toFixed(2);
         document.getElementById("spinrefesh").classList.remove("fa-spin");
     }
     catch (e) {
@@ -49,13 +50,14 @@ async function UserGameTurnover() {
         document.getElementById("YeeBetTurnover").innerHTML = "0.0";
         document.getElementById("SBOTurnover").innerHTML = "0.0";
         document.getElementById("GamePlayTurnover").innerHTML = "0.0";
+        document.getElementById('JDBTurnover').innerHTML = '0.0';
     }
 }
 
 //#region WalletBalance
 if (GetLocalStorage('currentUser') !== null) setInterval(async function () { await regisrationGame() }, 5000);
 
-var PlayTechWallet, _918KissWallet, JokerWallet, mainWallet, AGWallet, M8Wallet, MaxBetWallet, Mega888Wallet, DgWallet, sexyWallet, saWallet, Pussy888Wallet, AllBetWallet, WMWallet, PragmaticWallet, YeeBetWallet, SBOWallet, GamePlayWallet;
+var PlayTechWallet, _918KissWallet, JokerWallet, mainWallet, AGWallet, M8Wallet, MaxBetWallet, Mega888Wallet, DgWallet, sexyWallet, saWallet, Pussy888Wallet, AllBetWallet, WMWallet, PragmaticWallet, YeeBetWallet, SBOWallet, GamePlayWallet, JDBWallet;
 
 async function WalletBalance() {
     var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
@@ -84,6 +86,7 @@ async function WalletBalance() {
     YeeBetWalletBalance(GameUsername.yeebetUsername);
     SBOWalletBalance(GameUsername.sboUsername);
     GamePlayWalletBalance(GameUsername.gameplayUsername);
+    JDBWalletBalance(GameUsername.jdbUsername);
 }
 //#endregion WalletBalance
 
@@ -107,6 +110,7 @@ function RefershBalance() {
     document.getElementById("ddlYeeBetWallet").innerHTML = "feching..";
     document.getElementById("ddlSBOWallet").innerHTML = "feching..";
     document.getElementById("ddlGamePlayWallet").innerHTML = "feching..";
+    document.getElementById("ddlJDBWallet").innerHTML = "feching..";
     WalletBalance();
     $(".refresh").removeClass('fa-spin');
 }
@@ -129,6 +133,7 @@ function TransferPageWallets() {
     document.getElementById("YeeBetWallet").innerHTML = YeeBetWallet;
     document.getElementById("SBOWallet").innerHTML = SBOWallet;
     document.getElementById("gameplayWallet").innerHTML = GamePlayWallet;
+    document.getElementById('jdbWallet').innerHTML = JDBWallet;
 }
 
 function CheckNAorNot(Value) { return Value == 'N/A' || Value == 'NaN' || Value == 'null' || Value == undefined || Value == null ? '0.0' : Value; }
@@ -169,6 +174,7 @@ async function RestoreBalance() {
         await YeeBetWalletBalance(GameUsername.yeebetUsername);
         await SBOWalletBalance(GameUsername.sboUsername);
         await GamePlayWalletBalance(GameUsername.gameplayUsername);
+        await JDBWalletBalance(GameUsername.jdbUsername);
 
         let restoreModel = {
             kiss918wallet: CheckNAorNot(_918KissWallet),
@@ -188,6 +194,7 @@ async function RestoreBalance() {
             yeebetwallet: CheckNAorNot(YeeBetWallet),
             sbowallet: CheckNAorNot(SBOWallet),
             gameplaywallet: CheckNAorNot(GamePlayWallet),
+            jdbwallet: CheckNAorNot(JDBWallet),
             id: null
         }
         await PostMethod(apiEndPoints.restoreBalance, restoreModel)
@@ -219,7 +226,8 @@ var AGTrigger = false,
     M8Trigger = false,
     YeeBetTrigger = false,
     SBOTrigger = false,
-    GameplayTrigger = false;;
+    GameplayTrigger = false,
+    JDBTrigger = false;
 
 function StartTimerGameBalanceAPI(GameName) {
     var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
@@ -272,6 +280,10 @@ function StartTimerGameBalanceAPI(GameName) {
         case 'Gameplay':
             let gameplayId = setInterval(() => { GamePlayWalletBalance(GameUsername.gameplayUsername); GamePlayTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(gameplayId); GamePlayTrigger = false; }, 301000);
+            break;
+        case 'JDB':
+            let jdbId = setInterval(() => { JDBWalletBalance(GameUsername.jdbUsername); JDBTrigger = true; }, 30000);
+            setTimeout(() => { clearInterval(jdbId); JDBTrigger = false; }, 301000);
             break;
     }
 }
@@ -575,6 +587,27 @@ async function GamePlayWalletBalance(Username) {
     }
 }
 
+async function JDBWalletBalance(Username) {
+    let model, balance;
+
+    try {
+        model = { username: Username };
+        balance = await GameBalancePostMethod(apiEndPoints.JDBBalance, model);
+        JDBWallet = numberWithCommas(parseFloat(balance.data.balance).toFixed(2));
+        document.getElementById('ddlJDBWallet').innerHTML = JDBWallet;
+        if (location.href.toLowerCase().includes('?p=transfer')) document.getElementById('JDBWallet').innerHTML = JDBWallet;
+        if (JDBWallet == 0 &&
+            JDBTrigger == false &&
+            balance.data.previousBalance > 0)
+            StartTimerGameBalanceAPI('JDB');
+    }
+    catch (ex) {
+        JDBWallet = 'N/A';
+        document.getElementById('ddlJDBWallet').innerHTML = 'N/A';
+        if (location.href.toLowerCase().includes('?p=transfer')) document.getElementById('JDBWallet').innerHTML = 'N/A';
+    }
+}
+
 async function WalletBalanceMaxTransfer(walletData) {
     var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
 
@@ -604,6 +637,7 @@ async function WalletBalanceMaxTransfer(walletData) {
         if (walletData == "Pussy888 Wallet") Pussy888WalletBalance(GameUsername.pussy888Username);
         if (walletData == "Pragmatic Wallet") PragmaticWalletBalance(GameUsername.pragmaticUsername);
         if (walletData == "GamePlay Wallet") GamePlayWalletBalance(GameUsername.gameplayUsername);
+        if (walletData == 'JDB Wallet') JDBWalletBalance(GameUsername.jdbUsername);
     }
     else {
         MainWalletBalance();
@@ -624,5 +658,6 @@ async function WalletBalanceMaxTransfer(walletData) {
         YeeBetWalletBalance(GameUsername.yeebetUsername);
         SBOWalletBalance(GameUsername.sboUsername);
         GamePlayWalletBalance(GameUsername.gameplayUsername);
+        JDBWalletBalance(GameUsername.jdbUsername);
     }
 }

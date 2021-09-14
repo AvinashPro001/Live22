@@ -1243,5 +1243,6 @@ async function CheckSupportGame() {
         ButtonDisabled("yeebet-wallet-allin", !res.response.data[0].IsYEEBET);
         ButtonDisabled("sbo-wallet-allin", !res.response.data[0].IsSBO);
         ButtonDisabled("gameplay-wallet-allin", !res.response.data[0].IsGamePlay);
+        ButtonDisabled('jdb-wallet-allin', !res.response.data[0].IsJDB);
     }
 }

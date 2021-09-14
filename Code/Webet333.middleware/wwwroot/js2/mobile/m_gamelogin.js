@@ -209,6 +209,17 @@ async function GameInMaintenance(i) {
             document.getElementById('gameplaylivelogin').style.filter = "";
             document.getElementById('gameplayslotlogin').style.filter = "";
         }
+
+        if (walletData.data[i].walletType == 'JDB Wallet' &&
+            walletData.data[i].isMaintenance == true) {
+            document.getElementById('jdbslot').style.filter = 'grayscale(1)';
+            document.getElementById('jdbslotlogin').style.filter = 'grayscale(1)';
+        }
+        else if (walletData.data[i].walletType == 'JDB Wallet' &&
+            walletData.data[i].isMaintenance == false) {
+            document.getElementById('jdbslot').style.filter = '';
+            document.getElementById('jdbslotlogin').style.filter = '';
+        }
     }
 }
 
@@ -398,6 +409,19 @@ async function AllInButtonDisable(i) {
                 document.getElementById("gameplayallin").disabled = false;
             }
         }
+
+        if (walletData.data[i].walletType == 'JDB Wallet' &&
+            walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+                document.getElementById('jdballin').disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == 'JDB Wallet' &&
+            walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+                document.getElementById('jdballin').disabled = false;
+            }
+        }
     }
 }
 
@@ -422,6 +446,7 @@ async function CheckGameInMaintenance(gameName) {
     if (gameName == "YeeBet") walletName = "YeeBet Wallet";
     if (gameName == "SBO") walletName = "SBO Wallet";
     if (gameName == 'GamePlay') walletName = 'GamePlay Wallet';
+    if (gameName == 'JDB') walletName = 'JDB Wallet';
 
     for (i = 0; i < walletData.data.length; i++)
         if (walletData.data[i].walletType == walletName && walletData.data[i].isMaintenance == true)
@@ -432,7 +457,6 @@ var checkedValue;
 
 async function getDetails() {
     if (GetLocalStorage('currentUser') !== null) {
-
         var res = await GetMethod(apiEndPoints.getProfile);
         sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
         var resUserData = res;
@@ -587,6 +611,7 @@ async function logingGame(gameName) {
             if (gameName == "YeeBet") TransferInAllWallet("YeeBet Wallet");
             if (gameName == "SBO") TransferInAllWallet("SBO Wallet");
             if (gameName == 'GamePlay') TransferInAllWallet("GamePlay Wallet");
+            if (gameName == 'JDB') TransferInAllWallet('JDB Wallet');
         }
         if (gameName != "Pragmatic") window.open("/mobile/Game?gamename=" + gameName);
         else GameLoginMobile("Pragmatic");
@@ -681,7 +706,6 @@ async function GameLoginMobile(gamename) {
     LoaderShow();
 
     var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
-    
 
     if (GameUsername == null) {
         var username = await PostMethod(apiEndPoints.getUsername, {});
@@ -704,7 +728,7 @@ async function GameLoginMobile(gamename) {
 
     if (GetLocalStorage('currentUser') !== null) {
         let resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
-        debugger
+
         if (resSelectUser == null) {
             let userModel = { id: resUserData.data.id };
             resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
@@ -1023,6 +1047,23 @@ async function GameLoginMobile(gamename) {
                     if (res.data.status == 0) location.href = res.data.game_url;
                 }
                 break;
+            case 'JDB':
+                LoaderShow();
+                if (resSelectUser.data.JDB !== true) {
+                    let model = {};
+                    var res = await PostMethod(apiEndPoints.JDBRegister, model);
+                    if (res.data.status == 0) {
+                        let model = { isMobile: true };
+                        let res = await PostMethod(apiEndPoints.JDBLogin, model);
+                        if (res.data.status == 0) location.href = res.data.game_url;
+                    }
+                }
+                else {
+                    let model = { isMobile: true };
+                    let res = await PostMethod(apiEndPoints.JDBLogin, model);
+                    if (res.data.status == 0) location.href = res.data.game_url;
+                }
+                break;
         }
     }
     else alert(ChangeErroMessage("please_loign_error"));
@@ -1116,7 +1157,6 @@ async function PlaytechSlotsGameList(PageNumber = null, IsAppend = true) {
     GenratePlaytechSlotsGameHTML(NewList, 'playtech-new-section', IsAppend)
     GenratePlaytechSlotsGameHTML(SlotsList, 'playtech-slot-section', IsAppend)
     GenratePlaytechSlotsGameHTML(ArcadeList, 'playtech-arcade-section', IsAppend)
-
 }
 
 async function PragmaticSlotsGameList(PageNumber = null, IsAppend = true) {
@@ -1215,7 +1255,6 @@ function openGamePlayGame(GameID) {
 }
 
 async function openPlaytechGame(game) {
-
     var languageCode = (localStorage.getItem('language') === "zh-Hans" ? "ZH-CN" : "EN")
     var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
     var username = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();

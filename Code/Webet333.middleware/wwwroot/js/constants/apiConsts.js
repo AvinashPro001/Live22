@@ -1,5 +1,5 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '8080';
 
 switch (environmentName.toUpperCase()) {
@@ -78,7 +78,8 @@ var gameBalanceEndPoints = {
     pragmaticBalance: 'gamebalance/pragmatic',
     yeebetBalance: 'gamebalance/yeebet',
     sboBalance: 'gamebalance/sbo',
-    gameplayBalance: 'gamebalance/gamePlay'
+    gameplayBalance: 'gamebalance/gamePlay',
+    jdbBalance: 'gamebalance/jdb'
 };
 
 var transactionEndPoints = {
@@ -114,7 +115,8 @@ var gameRegisterEndPoints = {
     dgRegister: 'dg/register',
     yeebetRegister: 'yeebet/register',
     sboRegister: 'sbo/register/player',
-    gameplayRegister: 'gameplay/register'
+    gameplayRegister: 'gameplay/register',
+    jdbRegister: 'jdb/register'
 }
 
 var gameLoginEndPoints = {
@@ -129,7 +131,8 @@ var gameLoginEndPoints = {
     m8Login: 'm8/login',
     yeebetLogin: 'yeebet/login',
     sboLogin: 'sbo/login',
-    gameplayLogin: 'gameplay/login'
+    gameplayLogin: 'gameplay/login',
+    jdbLogin: 'jdb/login'
 }
 
 var gameSettingEndPoints = {

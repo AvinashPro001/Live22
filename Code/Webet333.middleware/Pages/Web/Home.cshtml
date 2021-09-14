@@ -452,6 +452,7 @@
                                 <img class="hover_icons" src="~/images/carousel_logos/gameplay_bw.png">
                             </figure>
                         </div>
+                        <div><figure><img class="hover_icons" src="~/images/carousel_logos/jdb_color.png"></figure></div>
                     </div>
                     <section class="slider-for slider">
                         <div>
@@ -630,6 +631,24 @@
                                 </div>
                             </div>
                         </div>
+                        <div>
+                            <div class="row casino_wrapper_row ml0 mr0">
+                                <div class="col-sm-8  pl0 pr0 ">
+                                    <div class="casino_wrapper_left">
+                                        <img src="~/images/game_banners/gameplay_slot.jpg" alt="jdb" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pl0 pr0">
+                                    <div class="casino_wrapper_right">
+                                        <div class="asia_girl_right"><img src="~/images/dropdown_logos/jdb_slot.png" alt="jdb-logo" /></div>
+                                        <div class="ag_casino_btn"><a>JDB Slots</a></div>
+                                        <div class="play_now_btn">
+                                            <a href="#" onclick="OpenGame('JDB Wallet', true, false)"><img src="~/images/playnow.png" alt="playnow" /> Play Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </section>
                 </div>
                 <!-- slots ends -->
@@ -741,12 +760,9 @@
                     </section>
                 </div>
                 <!-- sports ends -->
-                @*<div role="tabpanel" class="tab-pane tabcontent_account" id="fishing">
-                    ...
-                    </div>*@
+                @*<div role="tabpanel" class="tab-pane tabcontent_account" id="fishing"></div>*@
                 <!-- fishing ends -->
             </div>
-
         </div>
     </div>
 </div>
@@ -877,7 +893,6 @@
     $(document).ready(function () {
         AllAnnouncementsCallAPI();
     });
-
 
     $(window).on('load', function () {
         HotSlotsgame()

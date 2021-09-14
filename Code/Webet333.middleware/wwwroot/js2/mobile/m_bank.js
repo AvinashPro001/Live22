@@ -972,6 +972,7 @@ function LoadingImageShowAllInSection(GameName) {
         case "YeeBet Wallet": document.getElementById("YeeBetWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "SBO Wallet": document.getElementById("SBOWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
         case "GamePlay Wallet": document.getElementById("GamePlayWallet").innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
+        case 'JDB Wallet': document.getElementById('JDBWallet').innerHTML = '<img class="img_load" src="/images/loading.gif" height="13" >'; break;
     }
 }
 
@@ -1007,6 +1008,7 @@ async function CheckSupportGame() {
         document.getElementById("YeeBetallin").disabled = !res.data[0].IsYeeBet ? true : false;
         document.getElementById("SBOallin").disabled = !res.data[0].IsYeeBet ? true : false;
         document.getElementById("gameplayallin").disabled = !res.data[0].IsGamePlayLive && !res.data[0].IsGamePlaySlot ? true : false;
+        document.getElementById('jdballin').disabled = !res.data[0].IsJDBSlot ? true : false;
     }
 }
 
