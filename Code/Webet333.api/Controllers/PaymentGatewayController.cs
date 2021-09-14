@@ -36,7 +36,7 @@ namespace Webet333.api.Controllers
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             var Role = GetUserRole(User);
-            var Name = GetUserName(User);
+            var Name = $"{GetName(User)} - ({GetUserName(User)})";
             var uniqueId = GetUniqueId(User);
             var userId = GetUserId(User).ToString();
 
