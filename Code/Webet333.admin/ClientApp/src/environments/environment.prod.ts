@@ -1,5 +1,5 @@
 let baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG'
+let environmentName = 'STAG';  // 'DEBUG' OR 'STAG'
 
 switch (environmentName.toUpperCase()) {
     case 'DEBUG':
@@ -380,7 +380,7 @@ export const customer = {
     slotsGameInsert: environment.apiUrl + 'Game/slotsgame/insert',
 
     getVIPLevelReport: environment.apiUrl + 'VIPLevel/report/select',
-    
+
     freeCreditReport: environment.apiUrl + 'freecreditevent/report'
 }
 

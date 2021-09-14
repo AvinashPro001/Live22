@@ -13,18 +13,18 @@
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">From Date</h4>
                     <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="datePickerfromdate" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d_1="ngbDatepicker" id="txt_fromdatetime">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" (change)='searchHandlerByDate()' type="button"></button>
+                            <button class="btn btn-outline-secondary calendar" (click)="d_1.toggle()" type="button"></button>
                         </div>
                     </div>
                 </div>
                 <div class="p-2 col-md-2">
                     <h4 class="text-muted text-thin">To Date</h4>
                     <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp1" [(ngModel)]="datePickertodate" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp1" ngbDatepicker #d_2="ngbDatepicker" id="txt_todatetime">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()" (change)='searchHandlerByDate()' type="button"></button>
+                            <button class="btn btn-outline-secondary calendar" (click)="d_2.toggle()"  type="button"></button>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div>
-                <ngx-datatable class="table table-responsive material bootstrap no-detail-row" #table [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="7" [count]="totalRowCount" [offset]="offset" (page)="setPage($event)">
+                <ngx-datatable class="table table-responsive material bootstrap no-detail-row" #table [rows]="rows"  [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="7" [count]="totalRowCount" [offset]="offset" (page)="setPage($event)">
                 </ngx-datatable>
             </div>
         </div>
