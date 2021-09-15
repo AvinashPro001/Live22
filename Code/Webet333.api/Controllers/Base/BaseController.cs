@@ -96,7 +96,7 @@ namespace Webet333.api.Controllers.Base
 
         protected string GetUserName(ClaimsPrincipal User)
         {
-            var username = User.Claims.Where(x => x.Type == JwtRegisteredClaimNames.UniqueName)?.FirstOrDefault().Value;
+            var username = User.Claims.Where(x => x.Type == ClaimTypes.Name)?.FirstOrDefault().Value;
             return new security.AesAlgoridhm().Decrypt(username);
         }
 
