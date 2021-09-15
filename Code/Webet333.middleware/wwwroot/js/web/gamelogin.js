@@ -407,7 +407,7 @@ async function LoginJDBGame(GameCode) {
 
     model = { isMobile: false }
     res = await PostMethod(gameLoginEndPoints.jdbLogin, model);
-    SetLocalStorage('gameURL', res.response.data.game_url);
+    SetLocalStorage('gameURL', res.response.data.url);
 }
 
 async function OpenPragmaticGame() {

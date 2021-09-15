@@ -1052,16 +1052,16 @@ async function GameLoginMobile(gamename) {
                 if (resSelectUser.data.JDB !== true) {
                     let model = {};
                     var res = await PostMethod(apiEndPoints.JDBRegister, model);
-                    if (res.data.status == 0) {
+                    if (res.data.status == '0000') {
                         let model = { isMobile: true };
                         let res = await PostMethod(apiEndPoints.JDBLogin, model);
-                        if (res.data.status == 0) location.href = res.data.game_url;
+                        if (res.data.status == '0000') location.href = res.data.url;
                     }
                 }
                 else {
                     let model = { isMobile: true };
                     let res = await PostMethod(apiEndPoints.JDBLogin, model);
-                    if (res.data.status == 0) location.href = res.data.game_url;
+                    if (res.data.status == '0000') location.href = res.data.url;
                 }
                 break;
         }
