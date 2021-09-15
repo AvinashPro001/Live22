@@ -1897,7 +1897,6 @@ namespace Webet333.api.Controllers
             var Role = GetUserRole(User);
             var UserId = GetUserId(User).ToString();
             if (Role == RoleConst.Users) request.Id = UserId;
-
             if (Role == RoleConst.Admin) if (string.IsNullOrEmpty(request.Id)) return BadResponse("error_invalid_modelstate");
 
             GetUsernameByIdResponse user;
@@ -1924,7 +1923,8 @@ namespace Webet333.api.Controllers
                 PussyBalance = 0.0m,
                 YeeBetBalance = 0.0m,
                 SBOBalance = 0.0m,
-                GamePlayBalance = 0.0m;
+                GamePlayBalance = 0.0m,
+                JDBBalance = 0.0m;
 
             using (var game_helper = new GameHelpers(Connection))
             {
@@ -2142,6 +2142,18 @@ namespace Webet333.api.Controllers
                     { }
                 }
 
+                if (request.JDBWallet != 0)
+                {
+                    try
+                    {
+                        var result = await JDBGameHelpers.CallWithdrawAPI(user.JDBUsername, Math.Abs(request.JDBWallet));
+                        mainBalance += result.Status == GameConst.JDB.SuccessResponse.Status ? request.JDBWallet : 0;
+                        JDBBalance = result.Status == GameConst.JDB.SuccessResponse.Status ? request.JDBWallet : 0;
+                    }
+                    catch
+                    { }
+                }
+
                 await game_helper.BalanceRestore(
                     request.Id, UserId,
                     mainBalance,
@@ -2161,7 +2173,8 @@ namespace Webet333.api.Controllers
                     PragmaticBalance,
                     YeeBetBalance,
                     SBOBalance,
-                    GamePlayBalance
+                    GamePlayBalance,
+                    JDBBalance
                 );
 
                 return OkResponse(new { mainBalance });
@@ -3207,20 +3220,20 @@ namespace Webet333.api.Controllers
                 decimal total =
                     response.jokerWinover +
                     response.kiss918Winover +
-                    response.agTurover + 
-                    response.m8Turover + 
-                    response.maxbetTurover + 
+                    response.agTurover +
+                    response.m8Turover +
+                    response.maxbetTurover +
                     response.playtechTurover +
                     response.mega888Winover +
-                    response.dgTurover + 
+                    response.dgTurover +
                     response.saTurover +
                     response.sexyTurover +
-                    response.pussy888Turover+
-                    response.AllBetTurover + 
-                    response.WMTurover + 
-                    response.PragmaticTurover + 
-                    response.YeeBetTurover + 
-                    response.SBOTurover + 
+                    response.pussy888Turover +
+                    response.AllBetTurover +
+                    response.WMTurover +
+                    response.PragmaticTurover +
+                    response.YeeBetTurover +
+                    response.SBOTurover +
                     response.GamePlayTurover;
 
                 return OkResponse(new { response, Total = total });
@@ -3725,7 +3738,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Slot Game List Update
 
         #region Slot Game List Insert
 
@@ -3747,7 +3760,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Slot Game List Insert
 
         #region Hot Slots Game List Select
 
