@@ -34,6 +34,8 @@ namespace Webet333.api.Controllers
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
+            if (request.Amount <= 0) return BadResponse("error_invaild_amount");
+
 
             var Role = GetUserRole(User);
             var Name = $"{GetName(User)} - ({GetUserName(User)})";
@@ -69,7 +71,6 @@ namespace Webet333.api.Controllers
             using (var paymentgateway_helpers = new PaymentGatewayHelpers(Connection))
             {
                 result = await paymentgateway_helpers.GetPendingTokenList();
-
                 foreach (var token in result)
                 {
                     var response = await PaymentGatewayHelpers.CheckStatus(token.Token);
@@ -80,11 +81,10 @@ namespace Webet333.api.Controllers
                         status_message = response.StatusDescription,
                         decline_reason = response.BankReference,
                         src_bank_account = response.SrcBankAccount,
-                        created_at = response.CreatedAt,
-                        apikey = "TransactionCheckStatusOfVaderPayCustomerService2"
+                        created_at = response.CreatedAt
                     };
                     responseList.Add(updateResponse);
-                    await paymentgateway_helpers.PaymentVerified(updateResponse);
+                    //await paymentgateway_helpers.PaymentVerified(updateResponse,"Status Check API");
                 }
             }
             return OkResponse(responseList);
