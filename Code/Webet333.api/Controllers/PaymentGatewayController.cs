@@ -84,7 +84,7 @@ namespace Webet333.api.Controllers
                         created_at = response.CreatedAt
                     };
                     responseList.Add(updateResponse);
-                    //await paymentgateway_helpers.PaymentVerified(updateResponse,"Status Check API");
+                    await paymentgateway_helpers.PaymentVerified(updateResponse,"Status Check API");
                 }
             }
             return OkResponse(responseList);
