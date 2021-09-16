@@ -2,9 +2,12 @@
     if (CheckLogin) if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
 
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
+
     var isMaintenance = data.WalletData.filter(x => x.walletType == WalletName);
     if (isMaintenance[0].isMaintenance) return ShowError(ChangeErroMessage("maintainenance_error"));
+
     CallGameLoginAPI(WalletName, IsSlotsCheck, CheckLogin);
+
     var profile = JSON.parse(Decryption(GetSessionStorage("userDetails")));
     if (GetLocalStorage("currentUser") !== null) if (profile.autoTransfer) AllInWallet(WalletName);
 }
@@ -398,7 +401,7 @@ async function OpenJDBGame() {
     return window.open("../Web/slots#jdb-game");
 }
 
-async function LoginJDBGame(GameCode) {
+async function LoginJDBGame() {
     let model, res;
 
     if (GetLocalStorage('currentUser') == null) return ShowError(ChangeErroMessage('please_loign_error'));
