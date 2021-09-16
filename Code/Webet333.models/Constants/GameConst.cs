@@ -74,6 +74,8 @@
             public const string SBO = "SBO";
 
             public const string GamePlay = "GamePlay";
+
+            public const string JDB = "JDB";
         }
 
 #if DEBUG
