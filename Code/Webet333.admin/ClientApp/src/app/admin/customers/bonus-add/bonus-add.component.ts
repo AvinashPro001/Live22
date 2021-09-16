@@ -102,6 +102,9 @@ export class BonusAddComponent implements OnInit {
     GamePlayBalance: any;
     GamePlayUsername: any;
 
+    JDBBalance: any;
+    JDBUsername: any;
+
     //#endregion
 
     //#region ngOnInit
@@ -319,6 +322,7 @@ export class BonusAddComponent implements OnInit {
                 this.YeeBetUsername = res.data.yeeBetUsername;
                 this.SBOUsername = res.data.sboUsername;
                 this.GamePlayUsername = res.data.gameplayUsername;
+                this.JDBUsername = res.data.jdbUsername;
 
                 this.Kiss918Balance(newVal);
                 this.Mega888(newVal);
@@ -338,6 +342,7 @@ export class BonusAddComponent implements OnInit {
                 this.YeeBet(newVal);
                 this.SBO(newVal);
                 this.GamePlay(newVal);
+                this.JDB(newVal);
             })
         });
     }
@@ -551,6 +556,16 @@ export class BonusAddComponent implements OnInit {
         }
         this.adminService.add<any>(gameBalance.GamePlay, data).subscribe(res => {
             this.GamePlayBalance = res.data.balance;
+        })
+    }
+
+    JDB(id) {
+        let data = {
+            id: id,
+            username: this.JDBUsername
+        }
+        this.adminService.add<any>(gameBalance.JDB, data).subscribe(res => {
+            this.JDBBalance = res.data.balance;
         })
     }
 

@@ -107,6 +107,18 @@
             <div class="text-center"><b class="balance">{{GamePlayBalance == null || GamePlayBalance == undefined? 'N/A' : convertDecimal(GamePlayBalance)}}</b></div>
         </div>
     </div>
+    <br />
+    <div class="row">
+        <div class="col-2">
+            <div class="text-center"><b>JDB Wallet</b></div>
+            <div class="text-center"><b class="balance">{{JDBBalance == null || JDBBalance == undefined? 'N/A' : convertDecimal(JDBBalance)}}</b></div>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-2"></div>
+        <div class="col-2"></div>
+        <div class="col-2"></div>
+        <div class="col-2"></div>
+    </div>
 </div>
 <br />
 <br />
@@ -330,6 +342,11 @@
                 <tr>
                     <td>GamePlay Game:</td>
                     <td>{{GamePlayUsername == null ? 'Select username.' : GamePlayUsername }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>JDB Game:</td>
+                    <td>{{JDBUsername == null ? 'Select username.' : JDBUsername }}</td>
                     <td></td>
                 </tr>
             </table>

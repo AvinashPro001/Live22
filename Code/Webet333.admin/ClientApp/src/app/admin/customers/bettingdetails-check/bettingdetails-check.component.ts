@@ -35,7 +35,8 @@ export class BettingdetailsCheckComponent implements OnInit {
         { gameName: this.commonService.GameName.WM },
         { gameName: this.commonService.GameName.YeeBet },
         { gameName: this.commonService.GameName.SBO },
-        { gameName: this.commonService.GameName.GamePlay }
+        { gameName: this.commonService.GameName.GamePlay },
+        { gameName: this.commonService.GameName.JDB }
     ];
 
     constructor(
@@ -436,6 +437,32 @@ export class BettingdetailsCheckComponent implements OnInit {
                 { prop: 'GameCategory' },
                 { prop: 'SessionId' },
                 { prop: 'AdditionalDetails' }
+            ];
+        }
+        else if (selectedList == this.commonService.GameName.JDB) {
+            this.columns = [
+                { prop: 'GameType' },
+                { prop: 'WinAmount' },
+                { prop: 'TxTime' },
+                { prop: 'SettleStatus' },
+                { prop: 'GameInfo' },
+                { prop: 'RealWinAmount' },
+                { prop: 'UpdateTime' },
+                { prop: 'RealBetAmount' },
+                { prop: 'UserId' },
+                { prop: 'BetType' },
+                { prop: 'Platform' },
+                { prop: 'TxStatus' },
+                { prop: 'BetAmount' },
+                { prop: 'GameName' },
+                { prop: 'PlatformTxId' },
+                { prop: 'BetTime' },
+                { prop: 'GameCode' },
+                { prop: 'Currency' },
+                { prop: 'JackpotWinAmount' },
+                { prop: 'JackpotBetAmount' },
+                { prop: 'Turnover' },
+                { prop: 'RoundId' }
             ];
         }
         else {
@@ -1070,6 +1097,39 @@ export class BettingdetailsCheckComponent implements OnInit {
                                 GameCategory: el.GameCategory,
                                 SessionId: el.SessionId,
                                 AdditionalDetails: el.AdditionalDetails
+                            });
+                        });
+                        this.rows = [...this.rows];
+                        this.loadingIndicator = false;
+                        break;
+                    }
+                    case this.commonService.GameName.JDB: {
+                        this.setColumn(this.commonService.GameName.JDB);
+                        this.rows = [];
+                        res.data.forEach(el => {
+                            this.rows.push({
+                                GameType: el.GameType,
+                                WinAmount: el.WinAmount,
+                                TxTime: this.ReplaceDateTime(el.TxTime),
+                                SettleStatus: el.SettleStatus,
+                                GameInfo: JSON.stringify(el.GameInfo),
+                                RealWinAmount: el.RealWinAmount,
+                                UpdateTime: this.ReplaceDateTime(el.UpdateTime),
+                                RealBetAmount: el.RealBetAmount,
+                                UserId: el.UserId,
+                                BetType: el.BetType,
+                                Platform: el.Platform,
+                                TxStatus: el.TxStatus,
+                                BetAmount: el.BetAmount,
+                                GameName: el.GameName,
+                                PlatformTxId: el.PlatformTxId,
+                                BetTime: this.ReplaceDateTime(el.BetTime),
+                                GameCode: el.GameCode,
+                                Currency: el.Currency,
+                                JackpotWinAmount: el.JackpotWinAmount,
+                                JackpotBetAmount: el.JackpotBetAmount,
+                                Turnover: el.Turnover,
+                                RoundId: el.RoundId
                             });
                         });
                         this.rows = [...this.rows];

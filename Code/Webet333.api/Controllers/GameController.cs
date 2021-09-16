@@ -858,6 +858,12 @@ namespace Webet333.api.Controllers
         {
             await CheckUserRole();
 
+            string timeformate = "yyyy-MM-ddTHH:mm:ss";
+
+            if (DateTime.Parse(request.ToDate.ToString(timeformate)).Subtract(DateTime.Parse(request.FromDate.ToString(timeformate))).TotalMinutes > 60) return BadResponse(ErrorConsts.ATimeDifferenceOfMoreThan60MinutesIsNotAllowed);
+
+            if (DateTime.Parse(request.ToDate.ToString(timeformate)).Subtract(DateTime.Parse(request.FromDate.ToString(timeformate))).TotalMinutes < 0) return BadResponse(ErrorConsts.FromDateIsGreaterThanToDate);
+
             var response = await JDBGameHelpers.CallBettingDetailsAPI(request);
 
             return OkResponse(response);

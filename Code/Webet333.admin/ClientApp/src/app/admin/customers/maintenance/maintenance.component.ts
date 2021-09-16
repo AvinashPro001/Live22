@@ -57,6 +57,9 @@ export class MaintenanceComponent implements OnInit {
     GamePlayMainteance: boolean;
     GamePlayId: any;
 
+    JDBMainteance: boolean;
+    JDBId: any;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -142,6 +145,10 @@ export class MaintenanceComponent implements OnInit {
                 if (res.data[i].walletType === this.commonService.WalletName.GamePlay) {
                     this.GamePlayMainteance = res.data[i].isMaintenance
                     this.GamePlayId = res.data[i].id
+                }
+                if (res.data[i].walletType === this.commonService.WalletName.JDB) {
+                    this.JDBMainteance = res.data[i].isMaintenance
+                    this.JDBId = res.data[i].id
                 }
             }
         })

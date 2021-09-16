@@ -155,6 +155,9 @@ namespace Webet333.models.Request.Promotions
         [JsonProperty(PropertyName = "isGamePlaySlot")]
         public bool IsGamePlaySlot { get; set; }
 
+        [JsonProperty(PropertyName = "isJDBSlot")]
+        public bool IsJDBSlot { get; set; }
+
         [JsonProperty(PropertyName = "isNewMember")]
         public bool IsNewMember { get; set; }
 
