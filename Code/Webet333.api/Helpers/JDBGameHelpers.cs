@@ -1,10 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Webet333.dapper;
 using Webet333.models.Constants;
+using Webet333.models.Mapping.Game;
+using Webet333.models.Request.Game;
 using Webet333.models.Response.Game.JDB;
 using JDBGameConst = Webet333.models.Constants.GameConst.JDB;
 
@@ -161,6 +165,67 @@ namespace Webet333.api.Helpers
         }
 
         #endregion Call Deposit 3rd Party API
+
+        #region Call Betting Details 3rd Party API
+
+        internal static async Task<dynamic> CallBettingDetailsAPI(GlobalBettingDetailsRequest request)
+        {
+            var url = $"{JDBGameConst.APIURL}{JDBGameConst.EndPoint.BettingDetails}";
+            string timeZone = "+08:00";
+            string timeformate = "yyyy-MM-ddTHH:mm:ss";
+
+            var dict = new Dictionary<string, string>();
+            dict.Add("cert", JDBGameConst.CertKey);
+            dict.Add("agentId", JDBGameConst.AgentId);
+            dict.Add("startTime", request.FromDate.ToString($"{timeformate}{timeZone}"));
+            dict.Add("endTime", request.ToDate.ToString($"{timeformate}{timeZone}"));
+            if (!string.IsNullOrWhiteSpace(request.Username)) dict.Add("userId", request.Username);
+            //dict.Add("status", string.Empty);
+            dict.Add("platform", JDBGameConst.Platform);
+            dict.Add("gameType", JDBGameConst.GameType);
+            //dict.Add("gameCode", string.Empty);
+            //dict.Add("currency", string.Empty);
+
+            HttpClientHandler handler = new HttpClientHandler()
+            {
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+            };
+
+            using (var httpClient = new HttpClient(handler))
+            {
+                using (var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, url) { Content = new FormUrlEncodedContent(dict) })
+                {
+                    var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+                    var temp = await httpResponseMessage.Content.ReadAsStringAsync();
+                    var response = JsonConvert.DeserializeObject<JDBBettingDetailsAPIResponse>(temp);
+
+                    if (response.Status == JDBGameConst.SuccessResponse.Status &&
+                        response.Transactions.Any())
+                    {
+                        foreach (var data in response.Transactions)
+                        {
+                            if (data.GameInfo != null) data.GameInfoData = JsonConvert.DeserializeObject<JDBBettingDetailsAPIResponseTransactionGameInfo>(data.GameInfo);
+                        }
+
+                        JDBServicesMapping JDBServicesMapping = new JDBServicesMapping();
+                        var result = JDBServicesMapping.Map(response.Transactions).ToList();
+
+                        var tempResponse = new JDBBettingDetailsAPIResponseInsert
+                        {
+                            Desc = response.Desc,
+                            Status = response.Status,
+                            Transactions = result
+                        };
+
+                        return tempResponse;
+                    }
+
+                    return response;
+                }
+            }
+        }
+
+        #endregion Call Betting Details 3rd Party API
 
         #region House Keeping
 

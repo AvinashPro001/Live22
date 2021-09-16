@@ -437,6 +437,23 @@ namespace Webet333.api.Helpers
 
         #endregion GamePlay Services
 
+        #region JDB Services
+
+        internal async Task JDBServicesInsert(string request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var res = await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Game.JDBBettingDetailsInsert,
+                    new
+                    {
+                        jsonString = request
+                    });
+            }
+        }
+
+        #endregion JDB Services
+
         #region Kiss 918 Player Log Insert
 
         internal async Task<int> Kiss918PlayerLogInsert(List<PlayerGameLogResult> request, string Username)
@@ -1717,7 +1734,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-
         internal async Task GameListInsert(List<GameListUploadResponse> request, string WalletId, string AdminId)
         {
             if (request != null)
@@ -1732,7 +1748,6 @@ namespace Webet333.api.Helpers
                 }
             }
         }
-
 
         internal async Task<List<GameListSelectResponse>> GameListSelect(GameListSelectRequest request, string Role)
         {

@@ -39,6 +39,7 @@ using Webet333.models.Response.Account;
 using Webet333.models.Response.Game;
 using Webet333.models.Response.Game.DG;
 using Webet333.models.Response.Game.GamePlay;
+using Webet333.models.Response.Game.JDB;
 using Webet333.models.Response.Game.Joker;
 using Webet333.models.Response.Game.Kiss918;
 using Webet333.models.Response.Game.Pussy888;
@@ -849,6 +850,21 @@ namespace Webet333.api.Controllers
 
         #endregion GamePlay Game
 
+        #region JDB Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.Manually_JDB_Betting_Details)]
+        public async Task<IActionResult> Manually_JDB_Betting_Details([FromBody] GlobalBettingDetailsRequest request)
+        {
+            await CheckUserRole();
+
+            var response = await JDBGameHelpers.CallBettingDetailsAPI(request);
+
+            return OkResponse(response);
+        }
+
+        #endregion JDB Game
+
         #endregion Manually Game Betting Details
 
         #region GAME BETTING DETAILS
@@ -1411,6 +1427,37 @@ namespace Webet333.api.Controllers
 
         #endregion GamePlay Betting Details
 
+        #region JDB Betting Details
+
+        [HttpGet(ActionsConst.Game.JDB_Betting_Details)]
+        public async Task<IActionResult> JDB_Betting_Details()
+        {
+            DateTime date = DateTime.Now;
+
+            GlobalBettingDetailsRequest request = new GlobalBettingDetailsRequest
+            {
+                FromDate = date.AddMinutes(-30),
+                ToDate = date
+            };
+
+            var response = await JDBGameHelpers.CallBettingDetailsAPI(request);
+
+            if (response.Status == GameConst.JDB.SuccessResponse.Status &&
+                response.Transactions.Any())
+                using (var game_helper = new GameHelpers(Connection))
+                {
+                    var jsonString = JsonConvert.SerializeObject(response.Transactions);
+                    await game_helper.JDBServicesInsert(jsonString);
+                }
+
+            return OkResponse(new
+            {
+                jsonString = JsonConvert.SerializeObject(response)
+            });
+        }
+
+        #endregion JDB Betting Details
+
         #endregion GAME BETTING DETAILS
 
         #region Game Category
@@ -1767,6 +1814,32 @@ namespace Webet333.api.Controllers
         }
 
         #endregion GamePlay Game
+
+        #region JDB Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.JDBBettingDetailsSave)]
+        public async Task<IActionResult> JDBBettingDetails_Insert([FromBody] GameBettingDetailsInsertRequest request)
+        {
+            await CheckUserRole();
+
+            if (request.JsonData != null)
+            {
+                List<JDBBettingDetailsAPIResponse> result = JsonConvert.DeserializeObject<List<JDBBettingDetailsAPIResponse>>(request.JsonData.ToString());
+
+                if (result.Any())
+                {
+                    using (var game_help = new GameHelpers(Connection: Connection))
+                    {
+                        await game_help.JDBServicesInsert(request.JsonData);
+                    }
+                }
+            }
+
+            return OkResponse();
+        }
+
+        #endregion JDB Game
 
         #endregion Game Betting Details save
 
@@ -2683,6 +2756,7 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> BalacneInWallet([FromBody] AllInWalletRequest request)
         {
             if (!ModelState.IsValid) return BadResponse(ModelState);
+
             var role = GetUserRole(User);
             if (role == RoleConst.Users) request.UserId = GetUserId(User).ToString();
             else if (String.IsNullOrEmpty(request.UserId)) return BadResponse("error_invalid_modelstate");
@@ -2710,6 +2784,7 @@ namespace Webet333.api.Controllers
                     YEEBETUsername = user.YEEBETUsername,
                     SBOUsername = user.SBOUsername,
                     GamePlayUsername = user.GamePlayUsername,
+                    JDBUsername = user.JDBUsername,
 
                     FromWalletIsMaintenance = false,
                     FromWalletName = "Main Wallet",

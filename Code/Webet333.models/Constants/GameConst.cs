@@ -870,6 +870,8 @@
                 public const string Withdraw = "wallet/withdraw";
 
                 public const string Deposit = "wallet/deposit";
+
+                public const string BettingDetails = "fetch/getTransactionByTxTime";
             }
 
             public static class LanguageCode

@@ -489,6 +489,10 @@
             public const string GamePlayBettingDetailsInsert = "[dbo].[GamePlay_BettingDetails_Insert]";
 
             public const string BettingDetails_GamePlay = "[dbo].[GamePlay_BettingDetails_By_Username]";
+
+            public const string JDBBettingDetailsInsert = "[dbo].[JDB_BettingDetails_Insert]";
+
+            public const string BettingDetails_JDB = "[dbo].[JDB_BettingDetails_By_Username]";
         }
 
         public class MaxBetGame

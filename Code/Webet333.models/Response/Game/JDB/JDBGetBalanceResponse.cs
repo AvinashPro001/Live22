@@ -7,7 +7,7 @@ namespace Webet333.models.Response.Game.JDB
     public class JDBGetBalanceResponse : JDBDefaultResponse
     {
         [JsonProperty("results")]
-        public List<Result> Results { get; set; }
+        public List<JDBGetBalanceResponseResult> Results { get; set; }
 
         [JsonProperty("count")]
         public long Count { get; set; }
@@ -16,7 +16,7 @@ namespace Webet333.models.Response.Game.JDB
         public DateTime Querytime { get; set; }
     }
 
-    public partial class Result
+    public class JDBGetBalanceResponseResult
     {
         [JsonProperty("userId")]
         public string UserId { get; set; }
