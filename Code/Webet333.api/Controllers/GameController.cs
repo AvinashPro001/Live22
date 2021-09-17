@@ -1449,7 +1449,8 @@ namespace Webet333.api.Controllers
             var response = await JDBGameHelpers.CallBettingDetailsAPI(request);
 
             if (response.Status == GameConst.JDB.SuccessResponse.Status &&
-                response.Transactions.Any())
+                response.Transactions != null &&
+                response.Transactions.Count > 0)
                 using (var game_helper = new GameHelpers(Connection))
                 {
                     var jsonString = JsonConvert.SerializeObject(response.Transactions);
