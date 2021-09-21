@@ -602,22 +602,23 @@ namespace Webet333.api.Controllers
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
             #region Admin Log
-
-            string adminId = GetUserId(User).ToString();
-
-            using (var repository = new DapperRepository<dynamic>(Connection))
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
-                await repository.AddOrUpdateAsync(
-                    StoredProcConsts.Global.AdminLog,
-                    new
-                    {
-                        adminId,
-                        Action = "Add",
-                        Module = "SMS Announcement",
-                        Description = $"Send {request.Message} as SMS to users"
-                    });
-            }
+                string adminId = GetUserId(User).ToString();
 
+                using (var repository = new DapperRepository<dynamic>(Connection))
+                {
+                    await repository.AddOrUpdateAsync(
+                        StoredProcConsts.Global.AdminLog,
+                        new
+                        {
+                            adminId,
+                            Action = "Add",
+                            Module = "SMS Announcement",
+                            Description = $"Send {request.Message} as SMS to users"
+                        });
+                }
+            }
             #endregion Admin Log
 
             using (var account_helper = new AccountHelpers(Connection))

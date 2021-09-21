@@ -561,5 +561,53 @@ namespace Webet333.api.Controllers
         }
 
         #endregion Users Reward History
+
+        #region VIP Level Repost
+
+        [HttpPost(ActionsConst.Users.VIPLevelReportSelect)]
+        public async Task<IActionResult> VIPLevelReportSelect([FromBody] VIPLevelReportSelectRequest request)
+        {
+            if (request == null) return BadResponse("error_empty_request");
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            IsAdmin();
+
+            using (var repository = new DapperRepository<VIPLevelReportSelectResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(
+                    StoredProcConsts.User.VIPLevelReportSelect,
+                    new
+                    {
+                        VIPLevel = request.VIPLevelId,
+                        PageNo = request.PageNo,
+                        PageSize = request.PageSize
+                    });
+
+                if (result.Any())
+                {
+                    var total = result.FirstOrDefault().Total;
+                    var totalPages = GenericHelpers.CalculateTotalPages(total, request.PageSize == null ? result.Count() : request.PageSize);
+
+                    return OkResponse(new
+                    {
+                        result = result,
+                        total = total,
+                        totalPages = totalPages,
+                        pageSize = request.PageSize ?? 20,
+                        offset = result.FirstOrDefault().OffSet,
+                    });
+                }
+                return OkResponse(new
+                {
+                    result = result,
+                    total = 0,
+                    totalPages = 0,
+                    pageSize = 0,
+                    offset = 0,
+                });
+            }
+        }
+
+        #endregion
     }
 }

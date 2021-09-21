@@ -336,7 +336,6 @@
     });
 </script>
 
-
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
@@ -427,13 +426,18 @@
 
 </script>
 
-
 <script src="~/js/datepicker.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         Get30DayDate();
         $("#datepicker1").datepicker({ dateFormat: "dd/mm/yy" });
+        $("#datepicker1").focus(function () {
+            $("#dateFilter").val("None").change();
+        })
+        $("#datepicker2").focus(function () {
+            $("#dateFilter").val("None").change();
+        })
         $("#datepicker1btn").click(function (event) {
             $("#dateFilter").val("None").change();
             event.preventDefault();

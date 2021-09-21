@@ -34,7 +34,8 @@ export class BettingdetailsCheckComponent implements OnInit {
         { gameName: this.commonService.GameName.SexyBaccarat },
         { gameName: this.commonService.GameName.WM },
         { gameName: this.commonService.GameName.YeeBet },
-        { gameName: this.commonService.GameName.SBO }
+        { gameName: this.commonService.GameName.SBO },
+        { gameName: this.commonService.GameName.GamePlay }
     ];
 
     constructor(
@@ -416,6 +417,25 @@ export class BettingdetailsCheckComponent implements OnInit {
                 { prop: 'Status' },
                 { prop: 'TopDownline' },
                 { prop: 'SubBet' }
+            ];
+        }
+        else if (selectedList == this.commonService.GameName.GamePlay) {
+            this.columns = [
+                { prop: 'Username' },
+                { prop: 'BetAmount' },
+                { prop: 'ValidBetAmount' },
+                { prop: 'WinAmount' },
+                { prop: 'NetPnl' },
+                { prop: 'Currency' },
+                { prop: 'TransactionTime' },
+                { prop: 'GameCode' },
+                { prop: 'GameName' },
+                { prop: 'BetOrderNo' },
+                { prop: 'BetTime' },
+                { prop: 'ProductType' },
+                { prop: 'GameCategory' },
+                { prop: 'SessionId' },
+                { prop: 'AdditionalDetails' }
             ];
         }
         else {
@@ -1012,10 +1032,10 @@ export class BettingdetailsCheckComponent implements OnInit {
                                 IP: el.IP,
                                 IsSystemTagRisky: el.IsSystemTagRisky,
                                 IsCustomerTagRisky: el.IsCustomerTagRisky,
-                                OrderTime: el.OrderTime,
-                                ModifyDate: el.ModifyDate,
-                                SettleTime: el.SettleTime,
-                                WinLostDate: el.WinLostDate,
+                                OrderTime: this.ReplaceDateTime(el.OrderTime),
+                                ModifyDate: this.ReplaceDateTime(el.ModifyDate),
+                                SettleTime: this.ReplaceDateTime(el.SettleTime),
+                                WinLostDate: this.ReplaceDateTime(el.WinLostDate),
                                 RefNo: el.RefNo,
                                 Username: el.Username,
                                 Currency: el.Currency,
@@ -1023,7 +1043,33 @@ export class BettingdetailsCheckComponent implements OnInit {
                                 WinLost: el.WinLost,
                                 Status: el.Status,
                                 TopDownline: el.TopDownline,
-                                SubBet: JSON.stringify(el.SubBet)
+                                SubBet: el.SubBet
+                            });
+                        });
+                        this.rows = [...this.rows];
+                        this.loadingIndicator = false;
+                        break;
+                    }
+                    case this.commonService.GameName.GamePlay: {
+                        this.setColumn(this.commonService.GameName.GamePlay);
+                        this.rows = [];
+                        res.data.forEach(el => {
+                            this.rows.push({
+                                Username: el.Username,
+                                BetAmount: el.BetAmount,
+                                ValidBetAmount: el.ValidBetAmount,
+                                WinAmount: el.WinAmount,
+                                NetPnl: el.NetPnl,
+                                Currency: el.Currency,
+                                TransactionTime: this.ReplaceDateTime(el.TransactionTime),
+                                GameCode: el.GameCode,
+                                GameName: el.GameName,
+                                BetOrderNo: el.BetOrderNo,
+                                BetTime: this.ReplaceDateTime(el.BetTime),
+                                ProductType: el.ProductType,
+                                GameCategory: el.GameCategory,
+                                SessionId: el.SessionId,
+                                AdditionalDetails: el.AdditionalDetails
                             });
                         });
                         this.rows = [...this.rows];
@@ -1039,6 +1085,12 @@ export class BettingdetailsCheckComponent implements OnInit {
             this.toasterService.pop('error', 'Error', error.error.message);
         });
     }
+
+    //#region Replace Time
+
+    ReplaceDateTime(date) { return date.replace("T", " "); }
+
+    //#endregion
 
     //#region Check Permission
 

@@ -102,7 +102,7 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpGet(ActionsConst.VIPCategory.VIPFreeCreditPromotionSetting)]
-        public async Task<IActionResult> FreeCreditPromotionSetting()
+        private async Task<IActionResult> FreeCreditPromotionSetting()
         {
             var Role = GetUserRole(User);
 

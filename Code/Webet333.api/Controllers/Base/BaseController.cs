@@ -88,10 +88,16 @@ namespace Webet333.api.Controllers.Base
             return Guid.Parse(new security.AesAlgoridhm().Decrypt(user_id));
         }
 
+        protected string GetName(ClaimsPrincipal User)
+        {
+            var name = User.Claims.Where(x => x.Type == ClaimTypes.GivenName)?.FirstOrDefault().Value;
+            return new security.AesAlgoridhm().Decrypt(name);
+        }
+
         protected string GetUserName(ClaimsPrincipal User)
         {
-            var email = User.Claims.Where(x => x.Type == ClaimTypes.GivenName)?.FirstOrDefault().Value;
-            return new security.AesAlgoridhm().Decrypt(email);
+            var username = User.Claims.Where(x => x.Type == ClaimTypes.Name)?.FirstOrDefault().Value;
+            return new security.AesAlgoridhm().Decrypt(username);
         }
 
         protected string GetUniqueId(ClaimsPrincipal User)

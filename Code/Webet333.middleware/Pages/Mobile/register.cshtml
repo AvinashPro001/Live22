@@ -3,8 +3,6 @@
     Layout = ""; }
 <div id="comContent"></div>
 <div id="mComContent">
-
-
     <style>
         .tooltip-text.main + .visible-content {
             display: block;
@@ -28,9 +26,7 @@
         document.body.classList.add("no-pad-top");
         $('body').css('padding-top', '0px');
         $(document).ready(function () {
-            if (GetLocalStorage('currentUser') !== null) {
-                window.location.href = "../mobile";
-            }
+            if (GetLocalStorage('currentUser') !== null) window.location.href = "../mobile";
         });
 
         function space() {
@@ -112,7 +108,7 @@
                 <p class="note-text">- login info -</p>
                 <form>
                     <div class="form-group register-password-icon">
-                        <input type="text" class="form-control" tabindex="1" aria-describedby="emailHelp" id="m_regsiter_username" data-translate="username_placeholder" placeholder="Username" value="" required=""  onkeyup="OnUsernameType('m_regsiter_username')"  autocomplete="new-password">
+                        <input type="text" class="form-control" tabindex="1" aria-describedby="emailHelp" id="m_regsiter_username" data-translate="username_placeholder" placeholder="Username" value="" required="" onkeyup="OnUsernameType('m_regsiter_username')" autocomplete="new-password">
                         <div>
                             <p class="note no-mar mar-btm-ten" id="username_already" style="display:none;">
                                 <i class="fa" id="username_already_check"></i>
@@ -169,7 +165,6 @@
         </div>
     </div>
 
-
     <script>
         //$(document).ready(function () {
         //    $('[data-toggle="tooltip"]').tooltip();
@@ -185,21 +180,15 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
-            $("#chatting").toggle();
-        });
-        $(".contact-user").mouseover(function () {
-            $("#chatting").toggle();
-        });
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () { $("#chatting").toggle(); });
+        $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
     });
 </script>
 
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".open-modal").click();
-    });
+    $(document).ready(function () { $(".open-modal").click(); });
     jQuery(".scroll-down-visible").hide();
     jQuery("#more-arrow").click(function () {
         jQuery(".scroll-down-visible").toggleClass("show");
@@ -208,7 +197,6 @@
 </script>
 
 <script>
-
     function get() {
         (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
 
@@ -218,22 +206,17 @@
             async: false,
             success: function (lang) {
                 $('.lang').each(function (index, element) {
-                    if (localStorage.getItem("language") === "ms-MY") {
-                        $('body').addClass('malay-font');
-                    }
+                    if (localStorage.getItem("language") === "ms-MY") $('body').addClass('malay-font');
                     $(this).text(lang[$(this).attr('key')]);
                 });
                 $("[data-translate]").each(function () {
-                    if ($(this).is("input")) {
-                        $(this).attr('placeholder', lang[$(this).data("translate")]);
-                    } else {
-                        $(this).text(lang[$(this).data("translate")]);
-                    }
+                    if ($(this).is("input")) $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    else $(this).text(lang[$(this).data("translate")]);
                 });
             }
         });
-
     }
+
     setTimeout(() => {
         get();
     }, 200);

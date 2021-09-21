@@ -77,7 +77,8 @@ var CommonService = /** @class */ (function () {
             PleaseEnterMinBet: 'Please enter min bet value.',
             PleaseEnterMaxBetRatio: 'Please Enter Valid MaxBetRatio.',
             PleaseEnterSelectGroupType: 'Please Enter Group Type.',
-            PleaseSelectMinimumOneLeague: 'Please Select Minimum One League.'
+            PleaseSelectMinimumOneLeague: 'Please Select Minimum One League.',
+            PleaseSelectUserForResendingOTP: 'Please select user for resending OTP.'
         };
         //#endregion Check variable null, undefined, NaN
         //#region Game List
@@ -97,7 +98,8 @@ var CommonService = /** @class */ (function () {
             PragmaticPlay: 'Pragmatic Play',
             MaxBet: 'MaxBet',
             YeeBet: 'YeeBet',
-            SBO: 'SBO'
+            SBO: 'SBO',
+            GamePlay: 'GamePlay'
         };
         //#endregion Game List
         //#region Wallet List
@@ -117,7 +119,8 @@ var CommonService = /** @class */ (function () {
             PragmaticPlay: 'Pragmatic Wallet',
             MaxBet: 'MaxBet Wallet',
             YeeBet: 'YeeBet Wallet',
-            SBO: 'SBO Wallet'
+            SBO: 'SBO Wallet',
+            GamePlay: 'GamePlay Wallet'
         };
     }
     CommonService.prototype.add = function (apiPath, data) {

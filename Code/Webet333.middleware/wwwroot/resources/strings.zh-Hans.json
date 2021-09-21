@@ -195,6 +195,8 @@
   "username_instruction": "用户名必须包含7个字符",
   "username_specialCharacter_instruction": "不允許特殊字元",
 
+  "name_special_char_not_allowed": "名称中不允许使用特殊字符。",
+
   "password_instruction": "密码长度必须为6个字符",
   "password_alpha_instruction": "密码必须是字母数字",
   "password_username_same": "密码和用户名必须不同。",
@@ -219,7 +221,9 @@
   "sexybaccarat_game": "Sexy B. 视讯",
   "allBet_game": "AllBet 视讯",
   "wm_game": "WM 视讯",
-  "yeebet_game": "YeeBet赌场",
+  "yeebet_game": "YeeBet 赌场",
+  "gameplayslot_game": "游戏老虎机",
+  "gameplaylive_game": "游戏娱乐场",
   "coming_soon": "即将上市",
   "click_play": "点击游玩",
 
@@ -332,9 +336,9 @@
   "pls_select_date": "请选择日期。",
 
   "current_pass_req": "请输入当前密码。",
+  "current_pass_not_match": "当前密码不正确。",
   "new_pass_req": "请输入新密码。",
   "special_char_not_allowed": "用户名中不允许使用特殊字符。",
-  "name_special_char_not_allowed": "名称中不允许使用特殊字符。",
   "username_exists": "此用户名已存在。",
   "username_avialble": "用户名可用。"
 }

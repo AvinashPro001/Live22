@@ -358,11 +358,19 @@ async function Deposit(IsOnlinePayment) {
         if (!IsDepositExecute) {
             IsDepositExecute = true;
             OnlinePayment = IsOnlinePayment;
-            var amount = 0;
+            var amount;
             if (IsOnlinePayment)
                 amount = $("#txt_deposit_amount_online").val();
             else
                 amount = $("#txt_deposit_amount").val();
+
+            if (amount === "" || amount === null || amount === undefined) {
+                IsDepositExecute = false;
+                return ShowError(ChangeErroMessage("amount_required_error"));
+            }
+            else {
+                amount = Number(amount);
+            }
 
             if (amount < 10) {
                 IsDepositExecute = false;
@@ -517,7 +525,7 @@ async function Deposit(IsOnlinePayment) {
             }
         }
     }
-    catch(e) {
+    catch (e) {
         IsDepositExecute = false;
     }
 }
@@ -688,7 +696,7 @@ function CreatePagination(Id, TotalPages, CurrentPage) {
         }
         else {
             if (CurrentPage == TotalPages) {
-                var html = '<a class="hand-curson">&laquo;</a>';
+                var html = '<a class="hand-curson" onclick="ClickOnPageNumber(\'' + (CurrentPage - 1) + '\')">&laquo;</a>';
                 $('#' + Id).html(html);
                 for (i = TotalPages - 4; i <= TotalPages; i++)
                     if (i == CurrentPage)
@@ -823,8 +831,8 @@ function GetDateRange() {
     pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");
-    fromDate = fdate[2] + "-" + fdate[0] + "-" + fdate[1] + " 00:00:00";
-    toDate = tdate[2] + "-" + tdate[0] + "-" + tdate[1] + " 23:59:59";
+    fromDate = fdate[2] + "-" + fdate[1] + "-" + fdate[0] + " 00:00:00";
+    toDate = tdate[2] + "-" + tdate[1] + "-" + tdate[0] + " 23:59:59";
     CallFunctionAccordingToTab();
 }
 
@@ -1233,5 +1241,7 @@ async function CheckSupportGame() {
         ButtonDisabled("sexy-wallet-allin", !res.response.data[0].IsSexyBaccarat);
         ButtonDisabled("wm-wallet-allin", !res.response.data[0].IsWM);
         ButtonDisabled("yeebet-wallet-allin", !res.response.data[0].IsYEEBET);
+        ButtonDisabled("sbo-wallet-allin", !res.response.data[0].IsSBO);
+        ButtonDisabled("gameplay-wallet-allin", !res.response.data[0].IsGamePlay);
     }
 }

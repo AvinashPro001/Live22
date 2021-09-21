@@ -4,7 +4,6 @@
 
 <div id="comContent"></div>
 <div id="mComContent">
-
     <div id="afterlogin_mobile">
         <div class="main-content" id="navbarhide">
             <ul class="dropdown-menu wallet-dropdown">
@@ -110,14 +109,19 @@
                         <li class="fright" id="ddlSBOWallet">feching...</li>
                     </ul>
                 </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>GamePlay Wallet</strong></li>
+                        <li class="fright" id="ddlGamePlayWallet">feching...</li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
     <script>
         document.body.classList.add("no-pad-top");
         $('body').css('padding-top', '0px');
-        if (GetLocalStorage('currentUser') === null)
-            loadPageHome({ backFrom: 'widthraw' });
+        if (GetLocalStorage('currentUser') === null) loadPageHome({ backFrom: 'widthraw' });
         WithdrawBankList();
         UserBankDetails()
         GetProfile();
@@ -165,7 +169,7 @@
                         <li class="mar-btm-fifteen" id="displayAccountNumber">
                             <label class="fleft"><p class="big no-mar lang" key="withdrawal_account_number">Account Number</p></label>
                             <label class="fright bank-icon bank-name mendatory">
-                                <input id="txt_withdrawalAccountNumber" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  name="txt_withdrawalAccountNumber" type="number" pattern="\d*" style="font-size:8px;" class="reg-form" placeholder="Enter Account Number">
+                                <input id="txt_withdrawalAccountNumber" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="txt_withdrawalAccountNumber" type="number" pattern="\d*" style="font-size:8px;" class="reg-form" placeholder="Enter Account Number">
                                 <p class="star">*</p>
                             </label>
                         </li>
@@ -267,12 +271,8 @@
 
     <script type="text/javascript">
         $(document).ready(async function () {
-            $("#show").click(function () {
-                $(".info-notice-list").show();
-            });
-            $("#hide").click(function () {
-                $(".info-notice-list").hide();
-            });
+            $("#show").click(function () { $(".info-notice-list").show(); });
+            $("#hide").click(function () { $(".info-notice-list").hide(); });
         });
         CheckWithdrawAmountList();
     </script>
@@ -318,21 +318,15 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
-            $("#chatting").toggle();
-        });
-        $(".contact-user").mouseover(function () {
-            $("#chatting").toggle();
-        });
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () { $("#chatting").toggle(); });
+        $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
     });
 </script>
 
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".open-modal").click();
-    });
+    $(document).ready(function () { $(".open-modal").click(); });
     jQuery(".scroll-down-visible").hide();
     jQuery("#more-arrow").click(function () {
         jQuery(".scroll-down-visible").toggleClass("show");
@@ -344,17 +338,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(".navbar-toggle,.canvas-overlay").click(function () {
-            if (!$("html").hasClass('intro')) {
-                $("html").addClass("intro");
-            }
-            else {
-                $("html").removeClass("intro");
-            }
+            if (!$("html").hasClass('intro')) $("html").addClass("intro");
+            else $("html").removeClass("intro");
         });
         $(".canvas-overlay").click(function () {
-            if ($(".navbar-collapse").hasClass('in')) {
-                $(".navbar-collapse").removeClass("in");
-            }
+            if ($(".navbar-collapse").hasClass('in')) $(".navbar-collapse").removeClass("in");
         });
     });
 </script>
@@ -362,12 +350,8 @@
 <script>
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
-        if (scroll >= 1) {
-            $("header").addClass("sticky-header");
-        }
-        else {
-            $("header").removeClass("sticky-header");
-        }
+        if (scroll >= 1) $("header").addClass("sticky-header");
+        else $("header").removeClass("sticky-header");
     });
 </script>
 

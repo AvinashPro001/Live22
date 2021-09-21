@@ -31,6 +31,7 @@
   "vip": "",
   "bank": "银行",
   "download": "下载",
+  "new_download": "载下",
   "deposit_home_section": "快速存款",
   "withdraw_home_section": "快速提款",
   "join": "欢迎加入",
@@ -91,6 +92,7 @@
   "faq": "常见问题",
   "how_to_join": "如何注册用户",
   "contact_us": "联系我们",
+  "new_contact_us": "们我系联",
 
   "basic_information": "基本信息",
   "account_information": "户口信息",
@@ -146,6 +148,7 @@
   "promotion_select": "请选择以下促销：",
 
   "bankname": "银行名字",
+  "bankAccount": "银行账户",
   "important_notice": "重要告示",
   "instruction_1": "在进行存款之前，请务必检查公司最新活跃银行详细。",
   "instruction_2": "对于使用“银行转账”存款选项，请在确保转账后才提交交易单，以免批准程序被拖延。",
