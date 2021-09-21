@@ -60,6 +60,30 @@
             <br />
             <div class="row ">
                 <div class="col-xs-2">
+                    <h4>Weekly Extra Free CREDIT**</h4>
+                </div>
+                <div class="col-xs-2">
+                    <input id="weekelyCredNormal" type="number" />
+                </div>
+                <div class="col-xs-2">
+                    <input id="weekelyCredBrooze" type="number" />
+                </div>
+                <div class="col-xs-2">
+                    <input id="weekelyCredSilver" type="number" />
+                </div>
+                <div class="col-xs-2">
+                    <input id="weekelyCredGold" type="number" />
+                </div>
+                <div class="col-xs-2">
+                    <input id="weekelyCredPlatinum" type="number" />
+                </div>
+                <div class="col-xs-2">
+                    <input id="weekelyCredDiamond" type="number" />
+                </div>
+            </div>
+            <br />
+            <div class="row ">
+                <div class="col-xs-2">
                     <h4>Weekly Free Credit Min Deposit Amount</h4>
                 </div>
                 <div class="col-xs-2">
@@ -82,29 +106,7 @@
                 </div>
             </div>
             <br />
-            <div class="row ">
-                <div class="col-xs-2">
-                    <h4>Weekly Extra Free CREDIT**</h4>
-                </div>
-                <div class="col-xs-2">
-                    <input id="weekelyCredNormal" type="number" />
-                </div>
-                <div class="col-xs-2">
-                    <input id="weekelyCredBrooze" type="number" />
-                </div>
-                <div class="col-xs-2">
-                    <input id="weekelyCredSilver" type="number" />
-                </div>
-                <div class="col-xs-2">
-                    <input id="weekelyCredGold" type="number" />
-                </div>
-                <div class="col-xs-2">
-                    <input id="weekelyCredPlatinum" type="number" />
-                </div>
-                <div class="col-xs-2">
-                    <input id="weekelyCredDiamond" type="number" />
-                </div>
-            </div>
+
             <br />
             <div class="row ">
                 <div class="col-xs-2">
@@ -251,79 +253,79 @@
             </div>
             <br />
             <br />
-            <div class="row col-12">
-                <div class="col-4">
-                    <h3>WEEKLY FREE CREDIT TURNOVER WITHDRAW</h3>
-                </div>
-                <div class="">
-                    <input id="freeCreditTurnover" type="number" />
-                </div>
-                <div>
-                    <label style="margin-left:10px">Times</label>
-                </div>
-            </div>
-            <div class="row col-12">
-                <div class="">
-                    <input id="ck_ag" type="checkbox" [checked]="promotionData.IsAG" />
-                </div>
-                <div>
-                    <label style="margin-right:10px;">AG</label>
-                </div>
-                <div class="">
-                    <input id="ck_dg" type="checkbox" [checked]="promotionData.IsDG" />
-                </div>
-                <div>
-                    <label style="margin-right:10px;">DG</label>
-                </div>
-                <div class="">
-                    <input id="ck_sexy" type="checkbox" [checked]="promotionData.IsSexyBaccarat" />
-                </div>
-                <div>
-                    <label style="margin-right:10px;">SEXY</label>
-                </div>
-                <div class="">
-                    <input id="ck_sa" type="checkbox" [checked]="promotionData.IsSA" />
-                </div>
-                <div>
-                    <label style="margin-right:10px;">SA</label>
-                </div>
-                <div class="">
-                    <input id="ck_playtech" type="checkbox" [checked]="promotionData.IsPlaytech" />
-                </div>
-                <div>
-                    <label style="margin-right:10px;">PLAYTECH</label>
-                </div>
-                <div class="">
-                    <input id="ck_allbet" type="checkbox" [checked]="promotionData.IsAllBet" />
-                </div>
-                <div>
-                    <label style="margin-right:10px;">ALLBET</label>
-                </div>
-                <div class="">
-                    <input id="ck_wm" type="checkbox" [checked]="promotionData.IsWM" />
-                </div>
-                <div>
-                    <label style="margin-right:10px;">WM</label>
-                </div>
-                <div class="">
-                    <input id="ck_maxbet" type="checkbox" [checked]="promotionData.IsMaxbet" />
-                </div>
-                <div>
-                    <label style="margin-right:10px;">MAXBET</label>
-                </div>
-                <div class="">
-                    <input id="ck_m8" type="checkbox" [checked]="promotionData.IsM8" />
-                </div>
-                <div>
-                    <label style="margin-right:10px;">M8</label>
-                </div>
-                <div class="">
-                    <input id="ck_pragmatic" type="checkbox" [checked]="promotionData.IsPragmatic" />
-                </div>
-                <div>
-                    <label style="margin-right:10px;">PRAGMATIC</label>
-                </div>
-            </div>
+            <!--<div class="row col-12">
+        <div class="col-4">
+            <h3>WEEKLY FREE CREDIT TURNOVER WITHDRAW</h3>
+        </div>
+        <div class="">
+            <input id="freeCreditTurnover" type="number" />
+        </div>
+        <div>
+            <label style="margin-left:10px">Times</label>
+        </div>
+    </div>
+    <div class="row col-12">
+        <div class="">
+            <input id="ck_ag" type="checkbox" [checked]="promotionData.IsAG" />
+        </div>
+        <div>
+            <label style="margin-right:10px;">AG</label>
+        </div>
+        <div class="">
+            <input id="ck_dg" type="checkbox" [checked]="promotionData.IsDG" />
+        </div>
+        <div>
+            <label style="margin-right:10px;">DG</label>
+        </div>
+        <div class="">
+            <input id="ck_sexy" type="checkbox" [checked]="promotionData.IsSexyBaccarat" />
+        </div>
+        <div>
+            <label style="margin-right:10px;">SEXY</label>
+        </div>
+        <div class="">
+            <input id="ck_sa" type="checkbox" [checked]="promotionData.IsSA" />
+        </div>
+        <div>
+            <label style="margin-right:10px;">SA</label>
+        </div>
+        <div class="">
+            <input id="ck_playtech" type="checkbox" [checked]="promotionData.IsPlaytech" />
+        </div>
+        <div>
+            <label style="margin-right:10px;">PLAYTECH</label>
+        </div>
+        <div class="">
+            <input id="ck_allbet" type="checkbox" [checked]="promotionData.IsAllBet" />
+        </div>
+        <div>
+            <label style="margin-right:10px;">ALLBET</label>
+        </div>
+        <div class="">
+            <input id="ck_wm" type="checkbox" [checked]="promotionData.IsWM" />
+        </div>
+        <div>
+            <label style="margin-right:10px;">WM</label>
+        </div>
+        <div class="">
+            <input id="ck_maxbet" type="checkbox" [checked]="promotionData.IsMaxbet" />
+        </div>
+        <div>
+            <label style="margin-right:10px;">MAXBET</label>
+        </div>
+        <div class="">
+            <input id="ck_m8" type="checkbox" [checked]="promotionData.IsM8" />
+        </div>
+        <div>
+            <label style="margin-right:10px;">M8</label>
+        </div>
+        <div class="">
+            <input id="ck_pragmatic" type="checkbox" [checked]="promotionData.IsPragmatic" />
+        </div>
+        <div>
+            <label style="margin-right:10px;">PRAGMATIC</label>
+        </div>
+    </div>-->
         </div>
     </div>
     <button class="btn btn-block btn-primary mt-3" [disabled]="disabled" type="submit" (click)="addVIPcategory()" style="max-width:200px;align-content:center">Submit</button>

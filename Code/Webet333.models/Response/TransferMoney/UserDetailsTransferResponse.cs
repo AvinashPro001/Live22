@@ -26,6 +26,8 @@
 
         public string SBOUsername { get; set; }
 
+        public string GamePlayUsername { get; set; }
+
         public decimal MainWalletBalance { get; set; }
 
         public string FromWalletName { get; set; }

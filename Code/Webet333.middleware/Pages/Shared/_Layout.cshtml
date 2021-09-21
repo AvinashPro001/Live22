@@ -26,9 +26,7 @@
     <script>
         function gtag_report_conversion(url) {
             var callback = function () {
-                if (typeof (url) != 'undefined') {
-                    window.location = url;
-                }
+                if (typeof (url) != 'undefined') window.location = url;
             };
             gtag('event', 'conversion', {
                 'send_to': 'AW-480804860/17uwCMrko-4BEPz_oeUB',
@@ -101,9 +99,7 @@
     <title>@ViewBag.Title</title>
 
     <script>
-        $(window).on('load', function () {
-            $(".loadingImage").fadeOut();
-        });
+        $(window).on('load', function () { $(".loadingImage").fadeOut(); });
     </script>
 
 </head>
@@ -192,12 +188,7 @@
                                                     <span style="font-size:larger">
                                                         <span class="lang" key="username"></span>
                                                     </span> : <span style="white-space: nowrap; overflow: unset; text-overflow: ellipsis;font-size:larger;" id="login_username"></span>
-
                                                 </li>
-
-
-
-
                                             </ul>
                                         </li>
                                         <li class="logout-item signin form-icon log-out">
@@ -212,7 +203,6 @@
                                                 </button>
                                             </a>
                                         </li>
-
                                     </ul>
                                     <div class="after-logion">
                                         <ul class="money-type list-inline">
@@ -295,6 +285,10 @@
                                                                 <td class="menu-padding" style="font-size: 12px;">SBO wallet</td>
                                                                 <td><span id="sbo_balance_dropdown" style="font-size: 12px;">fetching.....</span></td>
                                                             </tr>
+                                                            <tr>
+                                                                <td class="menu-padding" style="font-size: 12px;">GamePlay wallet</td>
+                                                                <td><span id="gameplay_balance_dropdown" style="font-size: 12px;">fetching.....</span></td>
+                                                            </tr>
                                                         </table>
                                                     </div>
                                                 </div>
@@ -325,7 +319,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </nav>
@@ -403,6 +396,11 @@
                                     <img id="wm-wallet" onclick="OpenGame('WM Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/wm.png" alt="wm" />WM Casino
                                 </a>
                             </li>
+                            <li>
+                                <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="gameplay">
+                                    <img id="gameplay-wallet" onclick="OpenGame('GamePlay Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/gameplay_livecasino.png" alt="wm" />GamePlay Casino
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -447,10 +445,14 @@
                             </li>
                             <li>
                                 <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="Pragmatic">
-                                    <img id="pragmatic-wallet" onclick="OpenGame('Pragmatic Wallet',false,false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/8.png" alt="Pragmatic" />Pragmatic Play
+                                    <img id="pragmatic-wallet" onclick="OpenGame('Pragmatic Wallet', true, false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/8.png" alt="Pragmatic" />Pragmatic Play
                                 </a>
                             </li>
-
+                            <li>
+                                <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="gp">
+                                    <img id="gameplay-wallet" onclick="OpenGame('GamePlay Wallet', true, false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/gameplay_slot.png" alt="Gameplay" />Game Play
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -487,12 +489,12 @@
                 </li>
                 @*<li class="promotion">
                     <a href="#">
-                        <span class="lang" key="menu_promotion">
-                            <img class="normal_icons" src="~/images/fish.png" width="26" height="23" alt="">
-                            <img class="hover_icons" src="~/images/fish_hover.png" width="26" height="23" alt=""> Fish
-                        </span>
+                    <span class="lang" key="menu_promotion">
+                    <img class="normal_icons" src="~/images/fish.png" width="26" height="23" alt="">
+                    <img class="hover_icons" src="~/images/fish_hover.png" width="26" height="23" alt=""> Fish
+                    </span>
                     </a>
-                </li>*@
+                    </li>*@
                 <li class="promotion">
                     <a href="~/Web/promotion">
                         <span>
@@ -733,6 +735,12 @@
                                 <img class="pink-logo hover_icons" src="~/images/carousel_logos/sbo_color.png" alt="">
                             </figure>
                         </li>
+                        <li>
+                            <figure class="pad-top-ten">
+                                <img class="pink-logo normal_icons" src="~/images/carousel_logos/gameplay_bw.png" alt="">
+                                <img class="pink-logo hover_icons" src="~/images/carousel_logos/gameplay_color.png" alt="">
+                            </figure>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
@@ -815,7 +823,6 @@
                             </figure>
                         </li>
                     </ul>
-
                     <h5 class="black-text our_partner lang" key="follow_us">Follow us</h5>
                     <ul class="list-inline bank-us">
                         <li class="hand-curson" onclick="FollowOnFacebook()">
@@ -836,7 +843,6 @@
                                 <img class="menu-social-icon hover_icons" src="~/images/footerlogo/footerlogo28_color.png" alt="">
                             </a>
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -862,7 +868,7 @@
 
     <div class="contact-us-btn">
         <div class="contact-user" id="ContactUsPopUp" href="#">
-            <span class="lang" style="font-size:15px;color:#000;font-weight: 600;" key="contact_us">Contact Us</span>&nbsp;<span class="contact-img"></span>
+            <span class="lang" style="font-size:15px;color:#000;font-weight: 600;" key="new_contact_us">Contact Us</span>&nbsp;<span class="contact-img"></span>
         </div>
         <ul class="chatting" id="chatting">
             <li class="support-live">
@@ -905,7 +911,7 @@
 
     <div class="contact-us-btn1">
         <div class="contact-user1" id="ContactUsPopUp1" href="#">
-            <span class="lang" style="font-size:15px;color:#000;font-weight: 600;" key="download">DOWNLOAD</span>&nbsp;<span class="contact-img1"></span>
+            <span class="lang" style="font-size:15px;color:#000;font-weight: 600;" key="new_download">DOWNLOAD</span>&nbsp;<span class="contact-img1"></span>
         </div>
         <ul class="chatting text-center" id="chatting1">
             <li class="android-contact">
@@ -1048,53 +1054,28 @@
 
     <script src="~/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 
-
     <script type="text/javascript" charset="utf-8">
-
         $(document).ready(function () {
-            $(".contact-us-btn,.contact-us-btn-footer").click(function () {
-                $("#chatting").toggle();
-            });
-            $(".contact-user").mouseover(function () {
-                $("#chatting").toggle();
-            });
-            $('#chatting').mouseleave(function () {
-                $("#chatting").toggle();
-            });
+            $(".contact-us-btn,.contact-us-btn-footer").click(function () { $("#chatting").toggle(); });
+            $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
+            $('#chatting').mouseleave(function () { $("#chatting").toggle(); });
         });
 
+        function OpenChatting() { $("#chatting").toggle(); }
 
-        function OpenChatting() {
-            $("#chatting").toggle();
-        }
-
-        $(".dropdown").hover(function () {
-            $(this).toggleClass("open");
-        },
-            function () {
-                $(this).removeClass("open");
-            }
+        $(".dropdown").hover(
+            function () { $(this).toggleClass("open"); },
+            function () { $(this).removeClass("open"); }
         );
-
     </script>
 
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function () {
-            $(".contact-us-btn1,.contact-us-btn-footer1").click(function () {
-                $("#chatting1").toggle();
-            });
-            $(".contact-user1").mouseover(function () {
-                $("#chatting1").toggle();
-            });
-
-            $('#chatting1').mouseleave(function () {
-                $("#chatting1").toggle();
-            });
+            $(".contact-us-btn1,.contact-us-btn-footer1").click(function () { $("#chatting1").toggle(); });
+            $(".contact-user1").mouseover(function () { $("#chatting1").toggle(); });
+            $('#chatting1').mouseleave(function () { $("#chatting1").toggle(); });
         });
-
-        $(document).click(function () {
-            $("#myDropdown").removeClass("in");
-        });
+        $(document).click(function () { $("#myDropdown").removeClass("in"); });
 
         var MouseMoveCounter = 0;
 
@@ -1115,7 +1096,6 @@
                 CheckTokenIsValid(res.status, res.response.message);
             }
         });
-
     </script>
 
     <script type="text/javascript">
@@ -1124,11 +1104,8 @@
     <script>
         function SetDesktopMode() {
             var viewMode = GetCookie("view-mode");
-            if (viewMode == "desktop") {
-                $('meta[name="viewport"]').prop('content', 'width=1024,initial-scale=0.0');
-            } else if (viewMode == "mobile") {
-                $('meta[name="viewport"]').prop('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no');
-            }
+            if (viewMode == "desktop") $('meta[name="viewport"]').prop('content', 'width=1024,initial-scale=0.0');
+            else if (viewMode == "mobile") $('meta[name="viewport"]').prop('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no');
         }
         SetCookie('view-mode', 'desktop', 30);
         SetDesktopMode();

@@ -87,7 +87,6 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-2"></div>
         <div class="col-2">
             <div class="text-center"><b>AllBet Wallet</b></div><div class="text-center"><b class="balance">{{allbetbalance == null || allbetbalance == undefined? 'N/A' : convertDecimal(allbetbalance)}}</b></div>
         </div>
@@ -102,6 +101,10 @@
         </div>
         <div class="col-2">
             <div class="text-center"><b>SBO Wallet</b></div><div class="text-center"><b class="balance">{{SBOBalance == null || SBOBalance == undefined? 'N/A' : convertDecimal(SBOBalance)}}</b></div>
+        </div>
+        <div class="col-2">
+            <div class="text-center"><b>GamePlay Wallet</b></div>
+            <div class="text-center"><b class="balance">{{GamePlayBalance == null || GamePlayBalance == undefined? 'N/A' : convertDecimal(GamePlayBalance)}}</b></div>
         </div>
     </div>
 </div>
@@ -274,7 +277,7 @@
                 </tr>
                 <tr>
                     <td>Joker Game:</td>
-                    <td>{{jokerUsername== null ? 'Select username.' :jokerUsername }}</td>
+                    <td>{{jokerUsername== null ? 'Select username.' : 'F2NZ.'+jokerUsername}}</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -295,6 +298,8 @@
                 <tr>
                     <td>Pussy888 Game:</td>
                     <td>{{pussyUsername== null ? 'Select username.' : pussyUsername }}</td>
+
+
 
                     <!--<td>{{Pussy888Password}}</td>-->
                     <td><button class="btn btn-primary" (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Pussy888')">Pussy Pass</button>&nbsp;<button class="btn btn-primary" (click)="ResetPassword('Pussy888')">Reset</button></td>
@@ -322,6 +327,11 @@
                 <tr>
                     <td>SBO Game:</td>
                     <td>{{SBOUsername == null ? 'Select username.' : SBOUsername }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>GamePlay Game:</td>
+                    <td>{{GamePlayUsername == null ? 'Select username.' : GamePlayUsername }}</td>
                     <td></td>
                 </tr>
             </table>

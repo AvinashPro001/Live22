@@ -9,8 +9,8 @@ namespace Webet333.security
     {
         public string DESEncrypt(string textToDecrypt, string key)
         {
-            if (string.IsNullOrEmpty(textToDecrypt))
-                return textToDecrypt;
+            if (string.IsNullOrEmpty(textToDecrypt)) return textToDecrypt;
+
             return DESEncryptText(textToDecrypt, key);
         }
 
@@ -27,7 +27,7 @@ namespace Webet333.security
             cs.FlushFinalBlock();
             sw.Flush();
 
-            return Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length); ;
+            return Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length);
         }
     }
 }

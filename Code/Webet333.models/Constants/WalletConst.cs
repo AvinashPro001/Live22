@@ -7,6 +7,8 @@
             public const string YeeBet = "YeeBet Wallet";
 
             public const string SBO = "SBO Wallet";
+
+            public const string GamePlay = "GamePlay Wallet";
         }
     }
 }

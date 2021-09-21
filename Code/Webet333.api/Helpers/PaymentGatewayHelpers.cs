@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Webet333.dapper;
+using Webet333.logs;
 using Webet333.models.Constants;
 using Webet333.models.Request.PaymentGateway;
 using Webet333.models.Response.PaymentGateway;
@@ -142,17 +143,24 @@ namespace Webet333.api.Helpers
 
         #region Payment Token Verified in DB
 
-        public async Task PaymentVerified(PaymentGatewayVerifiedRequest request)
+        public async Task PaymentVerified(PaymentGatewayVerifiedRequest request,string Type="Call Back Url")
         {
-            if (request.apikey == "TransactionCheckStatusOfVaderPayCustomerService2")
-                request.apikey = AuthKey;
-
-            if (request.apikey == AuthKey)
+            try
             {
                 using (var repository = new DapperRepository<dynamic>(Connection))
                 {
                     await repository.AddOrUpdateAsync(StoredProcConsts.PaymentGateway.VerifiedToken, new { request.transaction, request.status, request.status_message, request.decline_reason, request.src_bank_account, request.created_at, response = JsonConvert.SerializeObject(request) });
                 }
+            }
+            catch (Exception ex)
+            {
+                await ApiLogsManager.APITransactionLogsInsert(
+              new ApiLogTransactionRequest
+              {
+                  Id = Guid.NewGuid().ToString(),
+                  Response = $"Vader Pay Issue:{Type} --> {ex.Message}--> {ex.StackTrace}",
+                  FromWalletResponse = ex.ToString()
+              });
             }
         }
 

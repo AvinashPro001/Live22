@@ -72,6 +72,9 @@
                                         <figure>
                                             <img src="~/images/mobile/yeebet.png" alt="YeeBet">
                                         </figure>
+                                        <figure class="game-tag new-high-light">
+                                            <img src="~/images/new-tage.png" alt="YeeBet">
+                                        </figure>
                                         <button class="game-title"><span class="lang" key="yeebet_game"></span></button>
                                     </a>
                                 </li>
@@ -131,6 +134,12 @@
                                         <button class="game-title"><span class="lang" key="wm_game"></span></button>
                                     </a>
                                 </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="gameplaylive">
+                                    <a>
+                                        <figure><img src="~/images/mobile/gameplay_livecasino.png" lt="GamePlay"></figure>
+                                        <button class="game-title"><span class="lang" key="gameplaylive_game"></span></button>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <div id="sport-tile" role="tabpanel" class="tab-pane fade in">
@@ -139,6 +148,9 @@
                                     <a>
                                         <figure>
                                             <img src="~/images/mobile/sbo.png" alt="SBO Bet">
+                                        </figure>
+                                        <figure class="game-tag">
+                                            <img src="~/images/high_limit.png" alt="SBO Bet">
                                         </figure>
                                         <button class="game-title"><span class="lang" key="SBO_Game"></span></button>
                                     </a>
@@ -211,7 +223,7 @@
                                         <button class="game-title"><span class="lang" key="jokerslot_game"></span></button>
                                     </a>
                                 </li>
-                                <li data-toggle="modal" data-target="#gameLogin" id="pragmaticslot">
+                                <li onclick="PragmaticIdentifiy()" data-toggle="modal" data-target="#gameLogin" id="pragmaticslot">
                                     <a>
                                         <figure>
                                             <img src="~/images/mobile/Pragmatic.png" alt="Pragmatic">
@@ -219,13 +231,15 @@
                                         <button class="game-title"><span class="lang" key="pragmaticslot_game"></span></button>
                                     </a>
                                 </li>
+                                <li onclick="GamePlayIdentifiy(true)" id="gameplayslotlogin">
+                                    <a>
+                                        <figure><img src="~/images/mobile/gameplay_slot.png" alt="Playtech"></figure>
+                                        <button class="game-title"><span class="lang" key="gameplayslot_game"></span></button>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
-                        @*<div id="fishing-tile" role="tabpanel" class="tab-pane fade in">
-                            <ul class="game-series">
-                                <li></li>
-                            </ul>
-                        </div>*@
+                        @*<div id="fishing-tile" role="tabpanel" class="tab-pane fade in"><ul class="game-series"><li></li></ul></div>*@
                     </div>
                 </div>
                 <div class="footer-quote">
@@ -298,7 +312,6 @@
                 <li><a onclick="loadPageAbout()" href="javascript:void(0);"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US" rel="prefetch"></p></a></li>
                 <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
                 <li><a onclick="loadPageAccount()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/profile.png" alt="Profile"><p class="lang" key="sidebar_Profile"></p></a></li>
-
             </ul>
         </div>
     </div>
@@ -422,6 +435,12 @@
                                         <li class="fright" id="ddlSBOWallet">feching...</li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>GamePlay Wallet</strong></li>
+                                        <li class="fright" id="ddlGamePlayWallet">feching...</li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -433,7 +452,7 @@
                 <div class="text-center myr-quote">
                     <h4 class="main-wallet-bar">
                         <img class="viplevelImage home-vip-image" id="viplevel_icon" />
-                         MYR <span id="menuMainWallet" class="main-wallet-bal-pad"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="refresh fa fa-refresh"></span>
+                        MYR <span id="menuMainWallet" class="main-wallet-bal-pad"><img class="loading-gif" src="~/images/loading.gif" /></span><span onclick="RefershBalance()" class="refresh fa fa-refresh"></span>
                     </h4>
                 </div>
                 <ul class="account-icon list-inline text-center">
@@ -476,6 +495,9 @@
                                 <a>
                                     <figure>
                                         <img src="~/images/mobile/yeebet.png" alt="YeeBet">
+                                    </figure>
+                                    <figure class="game-tag new-high-light">
+                                        <img src="~/images/new-tage.png" alt="YeeBet">
                                     </figure>
                                     <button class="game-title"><span class="lang" key="yeebet_game"></span></button>
                                 </a>
@@ -536,6 +558,12 @@
                                     <button class="game-title"><span class="lang" key="wm_game"></span></button>
                                 </a>
                             </li>
+                            <li onclick="logingGame('GamePlay')" id="gameplaylivelogin">
+                                <a>
+                                    <figure><img src="~/images/mobile/gameplay_livecasino.png" alt="gameplay"></figure>
+                                    <button class="game-title"><span class="lang" key="gameplaylive_game"></span></button>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div id="menu1" class="tab-pane fade">
@@ -544,6 +572,9 @@
                                 <a>
                                     <figure>
                                         <img src="~/images/mobile/sbo.png" alt="SBO Bet">
+                                    </figure>
+                                    <figure class="game-tag">
+                                        <img src="~/images/high_limit.png" alt="SBO Bet">
                                     </figure>
                                     <button class="game-title"><span class="lang" key="SBO_Game"></span></button>
                                 </a>
@@ -616,8 +647,7 @@
                                     <button class="game-title"><span class="lang" key="jokerslot_game"></span></button>
                                 </a>
                             </li>
-
-                            <li onclick="logingGame('Pragmatic')" id="pragmaticslotlogin">
+                            <li onclick="PragmaticIdentifiy()" id="pragmaticslotlogin">
                                 <a>
                                     <figure>
                                         <img src="~/images/mobile/Pragmatic.png" alt="Pragmatic">
@@ -625,13 +655,15 @@
                                     <button class="game-title"><span class="lang" key="pragmaticslot_game"></span></button>
                                 </a>
                             </li>
+                            <li onclick="GamePlayIdentifiy(true)" id="gameplayslotlogin">
+                                <a>
+                                    <figure><img src="~/images/mobile/gameplay_slot.png" alt="GamePlay"></figure>
+                                    <button class="game-title"><span class="lang" key="gameplayslot_game"></span></button>
+                                </a>
+                            </li>
                         </ul>
                     </div>
-                    @*<div id="menu3" class="tab-pane fade">
-                        <ul class="game-series">
-                            <li></li>
-                        </ul>
-                    </div>*@
+                    @*<div id="menu3" class="tab-pane fade"><ul class="game-series"><li></li></ul></div>*@
                 </div>
                 <div class="footer-quote">
                     <p class="text-center"><img class="footer-copyright-section-img" src="~/images/mobile/reco-pagcor.png" /></p>
@@ -714,13 +746,8 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
-            $("#chatting").toggle();
-        });
-        $(".contact-user").mouseover(function () {
-            $("#chatting").toggle();
-        });
-
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () { $("#chatting").toggle(); });
+        $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
     });
 </script>
 
@@ -728,9 +755,7 @@
 <!-- Modal For Video -->
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".open-modal").click();
-    });
+    $(document).ready(function () { $(".open-modal").click(); });
     jQuery(".scroll-down-visible").hide();
     jQuery("#more-arrow").click(function () {
         jQuery(".scroll-down-visible").toggleClass("show");
@@ -753,20 +778,13 @@
         setTimeout(() => { clearInterval(timerId); }, 30000);
 
         $(".navbar-toggle,.canvas-overlay").click(function () {
-            if (!$("html").hasClass('intro')) {
-                $("html").addClass("intro");
-            }
-            else {
-                $("html").removeClass("intro");
-            }
+            if (!$("html").hasClass('intro')) $("html").addClass("intro");
+            else $("html").removeClass("intro");
         });
 
         $(".canvas-overlay").click(function () {
-            if ($(".navbar-collapse").hasClass('in')) {
-                $(".navbar-collapse").removeClass("in");
-            }
+            if ($(".navbar-collapse").hasClass('in')) $(".navbar-collapse").removeClass("in");
         });
-
     });
 </script>
 
@@ -775,18 +793,13 @@
 <script>
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
-        if (scroll >= 1) {
-            $("header").addClass("sticky-header");
-        }
-        else {
-            $("header").removeClass("sticky-header");
-        }
+        if (scroll >= 1) $("header").addClass("sticky-header");
+        else $("header").removeClass("sticky-header");
     });
 
     setTimeout(function () {
         $('#homePagebottom').addClass("active-link");
         $('#homeLoginPagebottom').addClass("active-link");
-
     }, 200);
 </script>
 
@@ -803,14 +816,17 @@
         document.getElementById("malaybtn").style.background = "";
         document.getElementById("chinesebtn").style.background = "";
 
-        if (GetLocalStorage('language') == "en-US")
-            document.getElementById("englishbtn").style.background = "orange";
-
-        if (GetLocalStorage('language') == "ms-MY")
-            document.getElementById("malaybtn").style.background = "orange";
-
-        if (GetLocalStorage('language') == "zh-Hans")
-            document.getElementById("chinesebtn").style.background = "orange";
+        let language = GetLocalStorage('language');
+        switch (language) {
+            case 'ms-MY':
+                document.getElementById("malaybtn").style.background = "orange";
+                break;
+            case 'zh-Hans':
+                document.getElementById("chinesebtn").style.background = "orange";
+                break;
+            default:
+                document.getElementById("englishbtn").style.background = "orange";
+        }
 
         $.ajax({
             url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
@@ -818,17 +834,12 @@
             async: false,
             success: function (lang) {
                 $('.lang').each(function (index, element) {
-                    if (localStorage.getItem("language") === "ms-MY") {
-                        $('body').addClass('malay-font');
-                    }
+                    if (localStorage.getItem("language") === "ms-MY") $('body').addClass('malay-font');
                     $(this).text(lang[$(this).attr('key')]);
                 });
                 $("[data-translate]").each(function () {
-                    if ($(this).is("input")) {
-                        $(this).attr('placeholder', lang[$(this).data("translate")]);
-                    } else {
-                        $(this).text(lang[$(this).data("translate")]);
-                    }
+                    if ($(this).is("input")) $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    else $(this).text(lang[$(this).data("translate")]);
                 });
             }
         });

@@ -192,7 +192,8 @@
                 $('.recaptcha').each(function () {
                     grecaptcha.render(this.id, {
                         'sitekey': '6LdVkwkUAAAAACeeETRX--v9Js0vWyjQOTIZxxeB',
-                        "theme": "light"
+                        "theme": "light",
+                        'expired-callback': expCallback
                     });
                 });
             }
@@ -201,6 +202,11 @@
             }
         }, 1000)
     }, 1000);
+
+    var expCallback = function () {
+        grecaptcha.reset();
+        CapchaChecked = false;
+    };
 
     function recaptchaCallback() {
         CapchaChecked = true

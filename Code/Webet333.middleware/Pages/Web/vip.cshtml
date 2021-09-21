@@ -174,7 +174,7 @@
                                     <td><span>> 1000000</span></td>
                                     <td><span>> 4000000</span></td>
                                 </tr>
-                                <!--<tr>
+                                <tr>
                                     <th class="row">Weekly EXTRA FREE CREDIT**</th>
                                     <td>0</td>
                                     <td>38</td>
@@ -186,12 +186,12 @@
                                 <tr>
                                     <th class="row"><span>Weekly Total Deposit Amount To Get Free Credit</span></th>
                                     <td><span>0</span></td>
-                                    <td><span> > 388</span></td>
-                                    <td><span> > 1888  </span></td>
-                                    <td><span> > 18888 </span></td>
-                                    <td><span> > 38888 </span></td>
-                                    <td><span> > 88888 </span></td>
-                                </tr>-->
+                                    <td><span> > 3888</span></td>
+                                    <td><span> > 18888  </span></td>
+                                    <td><span> > 188888 </span></td>
+                                    <td><span> > 388888 </span></td>
+                                    <td><span> > 888888 </span></td>
+                                </tr>
                                 <tr>
                                     <th class="row"><span>Birthday Bonus</span></th>
                                     <td><span>28</span></td>
@@ -287,15 +287,16 @@
                     </div>
 
                 </div>
-                <p>** Weekly mon- sun MUST deposit more than free credit 1ox, free credit will auto into main wallet on monday 12AM</p>
-                <p>** Free credit all require 3x turnover for withdraw</p>
+                <p>** Weekly mon- sun MUST deposit more than free credit 1ox, free credit will auto into main wallet on Monday 12:00 PM</p>
+                @*<p>** Free credit all require 3x turnover for withdraw</p>*@
             </div>
         </div>
 
     </div>
 </div>
 
-<script>function openCity1(evt1, cityName1) {
+<script>
+    function openCity1(evt1, cityName1) {
         var i, tabcontent_benefits_referal, tablinks_benefits_referal;
         tabcontent_benefits_referal = document.getElementsByClassName("tabcontent_benefits_referal");
         for (i = 0; i < tabcontent_benefits_referal.length; i++) {
@@ -309,6 +310,5 @@
         evt1.currentTarget.className += " active";
     }
 
-    if (GetLocalStorage('currentUser') == null) {
-        $(".vip_sec_logo_left").hide();
-    }</script>
+    if (GetLocalStorage('currentUser') == null) $(".vip_sec_logo_left").hide();
+</script>
