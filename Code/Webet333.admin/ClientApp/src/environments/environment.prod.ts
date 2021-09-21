@@ -2,13 +2,13 @@ let baseUrl = '', baseUrlWithoutVersion = '';
 let environmentName = 'STAG';  // 'DEBUG' OR 'STAG'
 
 switch (environmentName.toUpperCase()) {
-    case 'DEBUG':
-        baseUrl = 'https://uatapi.wb3api.com/api/v1/';
-        baseUrlWithoutVersion = 'https://uatapi.wb3api.com';
-        break;
     case 'STAG':
         baseUrl = 'https://api.wb3api.com/api/v1/';
         baseUrlWithoutVersion = 'https://api.wb3api.com';
+        break;
+    case 'DEBUG':
+        baseUrl = 'https://uatapi.wb3api.com/api/v1/';
+        baseUrlWithoutVersion = 'https://uatapi.wb3api.com';
         break;
 }
 
