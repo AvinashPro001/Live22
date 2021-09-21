@@ -277,7 +277,7 @@
                 </tr>
                 <tr>
                     <td>Joker Game:</td>
-                    <td>{{jokerUsername== null ? 'Select username.' :jokerUsername }}</td>
+                    <td>{{jokerUsername== null ? 'Select username.' : 'F2NZ.'+jokerUsername}}</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -298,6 +298,8 @@
                 <tr>
                     <td>Pussy888 Game:</td>
                     <td>{{pussyUsername== null ? 'Select username.' : pussyUsername }}</td>
+
+
 
                     <!--<td>{{Pussy888Password}}</td>-->
                     <td><button class="btn btn-primary" (click)="ManagerPasswordVerifiedShow(ManagerDailog,'Pussy888')">Pussy Pass</button>&nbsp;<button class="btn btn-primary" (click)="ResetPassword('Pussy888')">Reset</button></td>

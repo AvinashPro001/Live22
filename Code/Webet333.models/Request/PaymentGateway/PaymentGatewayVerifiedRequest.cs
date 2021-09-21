@@ -8,9 +8,6 @@ namespace Webet333.models.Request.PaymentGateway
         public string contract { get; set; }
 
         [Required]
-        public string apikey { get; set; }
-
-        [Required]
         public string transaction { get; set; }
 
         [Required]
@@ -29,9 +26,6 @@ namespace Webet333.models.Request.PaymentGateway
 
         [Required]
         public string Amount { get; set; }
-
-        [Required]
-        public string total_fees { get; set; }
 
         [Required]
         public string Currency { get; set; }
