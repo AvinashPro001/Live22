@@ -1,6 +1,8 @@
 @page
-@{ ViewData["Title"] = "Withdraw";
-    Layout = ""; }
+@{
+    ViewData["Title"] = "Withdraw";
+    Layout = "";
+}
 
 <div id="comContent"></div>
 <div id="mComContent">
@@ -354,7 +356,6 @@
         else $("header").removeClass("sticky-header");
     });
 </script>
-
 <script>
     WalletBalance();
 
@@ -367,23 +368,16 @@
             async: false,
             success: function (lang) {
                 $('.lang').each(function (index, element) {
-                    if (localStorage.getItem("language") === "ms-MY") {
-                        $('body').addClass('malay-font');
-                    }
+                    if (localStorage.getItem("language") === "ms-MY") $('body').addClass('malay-font');
                     $(this).text(lang[$(this).attr('key')]);
                 });
                 $("[data-translate]").each(function () {
-                    if ($(this).is("input")) {
-                        $(this).attr('placeholder', lang[$(this).data("translate")]);
-                    } else {
-                        $(this).text(lang[$(this).data("translate")]);
-                    }
+                    if ($(this).is("input")) $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    else $(this).text(lang[$(this).data("translate")]);
                 });
             }
         });
     }
 
-    setTimeout(() => {
-        get();
-    }, 200);
+    setTimeout(() => { get(); }, 200);
 </script>
