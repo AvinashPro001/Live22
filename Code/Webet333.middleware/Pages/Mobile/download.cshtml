@@ -1,6 +1,9 @@
 ﻿@page
-@{ ViewData["Title"] = "Download";
-    Layout = ""; }
+@{
+    ViewData["Title"] = "Download";
+    Layout = "";
+}
+
 <div id="comContent"></div>
 <div id="mComContent">
     <script>
@@ -356,7 +359,6 @@
         $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
     });
 </script>
-
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
@@ -368,7 +370,6 @@
     });
 </script>
 <!-- //Modal For Video -->
-
 <script type="text/javascript">
     $(document).ready(function () {
         $(".navbar-toggle,.canvas-overlay").click(function () {
@@ -388,7 +389,6 @@
         else $("header").removeClass("sticky-header");
     });
 </script>
-
 <script>
     $(document).ready(function () {
         var url_string = window.location;
@@ -410,7 +410,6 @@
         }
     });
 
-
     function language(value) {
         SetLocalStorage('language', value);
         get();
@@ -425,24 +424,17 @@
             async: false,
             success: function (lang) {
                 $('.lang').each(function (index, element) {
-                    if (localStorage.getItem("language") === "ms-MY") {
-                        $('body').addClass('malay-font');
-                    }
+                    if (localStorage.getItem("language") === "ms-MY") $('body').addClass('malay-font');
                     $(this).text(lang[$(this).attr('key')]);
                 });
                 $("[data-translate]").each(function () {
-                    if ($(this).is("input")) {
-                        $(this).attr('placeholder', lang[$(this).data("translate")]);
-                    } else {
-                        $(this).text(lang[$(this).data("translate")]);
-                    }
+                    if ($(this).is("input")) $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    else $(this).text(lang[$(this).data("translate")]);
                 });
             }
         });
         announcementMobile();
     }
 
-    setTimeout(() => {
-        get();
-    }, 200);
+    setTimeout(() => { get(); }, 200);
 </script>

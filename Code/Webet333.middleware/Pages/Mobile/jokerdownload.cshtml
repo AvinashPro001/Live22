@@ -1,6 +1,9 @@
 ﻿@page
-@{ ViewData["Title"] = "Joker Slots Apps Download";
-    Layout = ""; }
+@{
+    ViewData["Title"] = "Joker Slots Apps Download";
+    Layout = "";
+}
+
 <div id="comContent"></div>
 <div id="mComContent">
     <!--<div class="loadingImage" style="z-index: 2147483643;"></div>-->
@@ -10,8 +13,7 @@
             <span><img class="Image" width="100px" height="100px" src="~/images/mobile/success.png" /></span>
         </div>
         <div class="message">
-            <span id="SuccessMessage">
-            </span>
+            <span id="SuccessMessage"></span>
         </div>
     </div>
 
@@ -20,8 +22,7 @@
             <span><img class="Image" width="100px" height="100px" src="~/images/mobile/Error.png" /></span>
         </div>
         <div class="message">
-            <span id="ErrorMessage">
-            </span>
+            <span id="ErrorMessage"></span>
         </div>
     </div>
 
@@ -202,9 +203,7 @@
 
     <title>Webet333 - @ViewData["Title"] </title>
     <script>
-        if (localStorage.getItem('currentUser') == null) {
-            location.href = 'home';
-        }
+        if (localStorage.getItem('currentUser') == null) location.href = 'home';
         else {
             document.getElementById('login').style.display = "none";
             document.getElementById('AccountBeforeLogin').style.display = "none";
@@ -256,8 +255,7 @@
                     <div class="col-sm-5">
                         <p class="grey-text">Joker Password : <span id="Jokerresetpassword"><a href="#" class="grey-text">Your Webet333.net Password</a></span></p>
                     </div>
-                    <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7">
-                    </div>
+                    <div class="col-sm-7 text-center" style="border-left:1px solid #d7d7d7"></div>
                 </div>
             </div>
         </div>
@@ -393,53 +391,35 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
-            $("#chatting").toggle();
-        });
-        $(".contact-user").mouseover(function () {
-            $("#chatting").toggle();
-        });
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () { $("#chatting").toggle(); });
+        $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
     });
 </script>
-
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".open-modal").click();
-    });
+    $(document).ready(function () { $(".open-modal").click(); });
     jQuery(".scroll-down-visible").hide();
     jQuery("#more-arrow").click(function () {
         jQuery(".scroll-down-visible").toggleClass("show");
         jQuery("#more-arrow").toggleClass("rotate");
     });
 </script>
-
 <!-- //Modal For Video -->
 <script src="~/js/jcf/jcf.js"></script>
 <script src="~/js/jcf/jcf.select.js"></script>
 <script src="~/js/jcf/jcf.checkbox.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(function () {
-            jcf.replaceAll();
-        });
-    });
+    $(document).ready(function () { $(function () { jcf.replaceAll(); }); });
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".navbar-toggle,.canvas-overlay").click(function () {
-            if (!$("html").hasClass('intro')) {
-                $("html").addClass("intro");
-            }
-            else {
-                $("html").removeClass("intro");
-            }
+            if (!$("html").hasClass('intro')) $("html").addClass("intro");
+            else $("html").removeClass("intro");
         });
         $(".canvas-overlay").click(function () {
-            if ($(".navbar-collapse").hasClass('in')) {
-                $(".navbar-collapse").removeClass("in");
-            }
+            if ($(".navbar-collapse").hasClass('in')) $(".navbar-collapse").removeClass("in");
         });
     });
 </script>
@@ -447,12 +427,8 @@
 <script>
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
-        if (scroll >= 1) {
-            $("header").addClass("sticky-header");
-        }
-        else {
-            $("header").removeClass("sticky-header");
-        }
+        if (scroll >= 1) $("header").addClass("sticky-header");
+        else $("header").removeClass("sticky-header");
     });
 </script>
 <script>
@@ -470,26 +446,23 @@
             document.getElementById('accountPage').style.display = "none";
             document.getElementById('downloadpage').style.display = "none";
 
-            if (!window.location.href.toLowerCase().includes("mobile/login") && !window.location.href.toLowerCase().includes("mobile/register")) {
+            if (!window.location.href.toLowerCase().includes("mobile/login") &&
+                !window.location.href.toLowerCase().includes("mobile/register")) {
                 document.getElementById('balanceShow').style.textIndent = "-999px";
                 document.getElementById("MainLogo").style.marginLeft = "-30px";
             }
         }
-        else {
-            document.getElementById('login').style.display = "none";
-        }
+        else document.getElementById('login').style.display = "none";
 
-        if (location.href.toLowerCase().includes("mobile/login") || location.href.toLowerCase().includes("mobile/register") || location.href.toLowerCase().includes("mobile/forgetpassword")) {
+        if (location.href.toLowerCase().includes("mobile/login") ||
+            location.href.toLowerCase().includes("mobile/register") ||
+            location.href.toLowerCase().includes("mobile/forgetpassword")) {
             document.getElementById("footerWidget").innerHTML = "";
         }
     });
 
     $("html").click(async function (event) {
-        if (GetLocalStorage('currentUser') !== null) {
-            await PostMethod(apiEndPoints.userLastTimeUpdate, {});
-        }
+        if (GetLocalStorage('currentUser') !== null) await PostMethod(apiEndPoints.userLastTimeUpdate, {});
     });
-    setTimeout(() => {
-        get();
-    }, 200);
+    setTimeout(() => { get(); }, 200);
 </script>

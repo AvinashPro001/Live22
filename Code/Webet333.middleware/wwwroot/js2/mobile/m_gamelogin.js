@@ -164,13 +164,19 @@ async function GameInMaintenance(i) {
             document.getElementById('wmlivelogin').style.filter = "";
         }
 
-        if (walletData.data[i].walletType == "Pragmatic Wallet" && walletData.data[i].isMaintenance == true) {
+        if (walletData.data[i].walletType == "Pragmatic Wallet" &&
+            walletData.data[i].isMaintenance == true) {
             document.getElementById('pragmaticslot').style.filter = "grayscale(1)";
             document.getElementById('pragmaticslotlogin').style.filter = "grayscale(1)";
+            document.getElementById('pragmaticlive').style.filter = "grayscale(1)";
+            document.getElementById('pragmaticlivelogin').style.filter = "grayscale(1)";
         }
-        else if (walletData.data[i].walletType == "Pragmatic Wallet" && walletData.data[i].isMaintenance == false) {
+        else if (walletData.data[i].walletType == "Pragmatic Wallet" &&
+            walletData.data[i].isMaintenance == false) {
             document.getElementById('pragmaticslot').style.filter = "";
             document.getElementById('pragmaticslotlogin').style.filter = "";
+            document.getElementById('pragmaticlive').style.filter = '';
+            document.getElementById('pragmaticlivelogin').style.filter = '';
         }
 
         if (walletData.data[i].walletType == "YeeBet Wallet" &&
@@ -588,8 +594,9 @@ async function logingGame(gameName) {
             if (gameName == "SBO") TransferInAllWallet("SBO Wallet");
             if (gameName == 'GamePlay') TransferInAllWallet("GamePlay Wallet");
         }
-        if (gameName != "Pragmatic") window.open("/mobile/Game?gamename=" + gameName);
-        else GameLoginMobile("Pragmatic");
+        window.open("/mobile/Game?gamename=" + gameName);
+        //if (gameName != "Pragmatic") window.open("/mobile/Game?gamename=" + gameName);
+        //else GameLoginMobile("Pragmatic");
     }
     else alert("Please Login");
 }
@@ -649,14 +656,22 @@ async function PlaytechIdentifiy(Slotvalue) {
     if (Slotvalue) window.open("../mobile?p=slot#playtech", "_blank")
 }
 
-async function PragmaticIdentifiy() {
+async function PragmaticIdentifiy(Slotvalue) {
     let value = await CheckGameInMaintenance("Pragmatic");
     if (value) {
         LoaderHide();
         return ShowError(ChangeErroMessage("maintainenance_error"));
     }
 
-    window.open("../mobile?p=slot#pragmatic-game", "_blank")
+    if (Slotvalue) return window.open("../mobile?p=slot#pragmatic-game", "_blank");
+
+    if (GetLocalStorage('currentUser') == null) return alert("Please Login");
+
+    LoaderShow();
+    if (checkedValue) TransferInAllWallet("Pragmatic Wallet");
+    localStorage.setItem("slotGame", Slotvalue);
+    LoaderHide();
+    GameLoginMobile('Pragmatic');
 }
 
 async function GamePlayIdentifiy(Slotvalue) {
@@ -666,7 +681,7 @@ async function GamePlayIdentifiy(Slotvalue) {
         return ShowError(ChangeErroMessage("maintainenance_error"));
     }
 
-    if (Slotvalue) return window.open("../mobile?p=slot#gameplay-game", "_blank")
+    if (Slotvalue) return window.open("../mobile?p=slot#gameplay-game", "_blank");
 
     if (GetLocalStorage('currentUser') == null) return alert("Please Login");
 
@@ -681,7 +696,7 @@ async function GameLoginMobile(gamename) {
     LoaderShow();
 
     var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
-    
+
 
     if (GameUsername == null) {
         var username = await PostMethod(apiEndPoints.getUsername, {});
@@ -962,15 +977,26 @@ async function GameLoginMobile(gamename) {
                 break;
             case 'Pragmatic':
                 LoaderShow();
+                //if (resSelectUser.data.Pragmatic !== true) {
+                //    var model = {}
+                //    var res = await PostMethod(apiEndPoints.pragmaticRegister, model);
+                //    if (res.data.error == "0") window.open("../mobile?p=slot#pragmatic-game", "_blank")
+                //}
+                //else window.open("../mobile?p=slot#pragmatic-game", "_blank")
+
                 if (resSelectUser.data.Pragmatic !== true) {
-                    var userRegisterModel = {}
-                    var res = await PostMethod(apiEndPoints.pragmaticRegister, userRegisterModel);
-                    if (res.data.error == "0") {
-                        window.open("../mobile?p=slot#pragmatic-game", "_blank")
+                    let model = {};
+                    var res = await PostMethod(apiEndPoints.pragmaticRegister, model);
+                    if (res.data.error == '0') {
+                        let model = { isMobile: true };
+                        let res = await PostMethod(apiEndPoints.pragmaticLogin, model);
+                        if (res.data.error == '0') location.href = res.data.gameURL;
                     }
                 }
                 else {
-                    window.open("../mobile?p=slot#pragmatic-game", "_blank")
+                    let model = { isMobile: true };
+                    let res = await PostMethod(apiEndPoints.pragmaticLogin, model);
+                    if (res.data.error == '0') location.href = res.data.gameURL;
                 }
                 break;
             case 'YeeBet':
