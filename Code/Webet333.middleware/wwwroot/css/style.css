@@ -2117,6 +2117,7 @@ div.tabcontent_health .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 .inner_game_banner_box_ag                     { padding-top: 240px; background: url('../images/AG-GAMING.jpg') no-repeat center center; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain; }
 .inner_game_banner_box_kiss                     { padding-top: 240px; background: url('../images/918KISS.jpg') no-repeat center center; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain; }
 .inner_game_banner_box_joker                     { padding-top: 240px; background: url('../images/Joker_banner.jpg') no-repeat center center; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain; }
+.inner_game_banner_box_jdb                  { padding-top: 240px; background: url('../images/jdb_slotpage_banner.jpg') no-repeat center center; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain; }
 .slot_bottom_boxs                           { display: flex; }
 .slot_inner_common_box img                  { height: auto; }
 .slot_inner_common_box:first-child          { flex-basis: 25%; }
