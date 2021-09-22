@@ -136,7 +136,7 @@ function SetSiteData() {
 
 //#endregion
 
-//#region  Set All Element Value 
+//#region  Set All Element Value
 
 function SetAllValueInElement(id, value) {
     $("[id='" + id + "']").each(function () {
@@ -161,7 +161,7 @@ function SetAllImagePath(id, value) {
 }
 //#endregion
 
-//#region Set Image in Backgroud in CSS 
+//#region Set Image in Backgroud in CSS
 
 function SetBackgroudImagePath(ClassName, value) {
     $("." + ClassName).each(function () {
@@ -192,7 +192,6 @@ function SetHomePageBanner() {
     let data = JSON.parse(Decryption(GetSessionStorage("siteData")));
 
     if (data != null && data.HomeBannerData != null) {
-
         let homepageBanner = data.HomeBannerData;
         let homepageBannerData = "";
 
@@ -272,18 +271,16 @@ function SetAnnouncementsOnAllPages() {
 
 //#endregion
 
-//#endregion 
+//#endregion
 
 //#region "ASYNC" Function Section
 
 //#region "ASYNC" Call Announcements API for Get Data
 
 async function AllAnnouncementsCallAPI() {
-
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
     if (data.AnnouncementsData === null || data.AnnouncementsData == undefined) {
-
         let res = await GetMethodWithoutToken(settingEndPoints.announcementList);
 
         if (res.status == 200) {
@@ -295,7 +292,6 @@ async function AllAnnouncementsCallAPI() {
     else {
         SetAnnouncementsOnAllPages();
     }
-
 }
 
 //#endregion
@@ -303,11 +299,9 @@ async function AllAnnouncementsCallAPI() {
 //#region "ASYNC" Call Promotion API for Get data
 
 async function AllPromotionCallAPI() {
-
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
     if (data.PromotionPageData == null || data.PromotionPageData == undefined) {
-
         let res = await GetMethodWithoutToken(promotionEndPoints.webRetrieve);
 
         if (res.status == 200) {
@@ -322,11 +316,9 @@ async function AllPromotionCallAPI() {
 //#region "ASYNC" Call Home Banner API for Get data
 
 async function HomeBannerCallAPI() {
-
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
     if (data.HomeBannerData == null || data.HomeBannerData == undefined) {
-
         let res = await GetMethodWithoutToken(settingEndPoints.homepageBannerList);
 
         if (res.status == 200) {
@@ -377,11 +369,9 @@ async function SetLastUpdateTime() {
 //#region "ASYNC" Get Wallet List
 
 async function GetWalletList() {
-
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
     if (data.WalletData == null || data.WalletData == undefined) {
-
         let res = await GetMethod(settingEndPoints.walletList);
         if (res.status == 200) {
             SiteData.WalletData = res.response.data;

@@ -9,6 +9,8 @@
             public const string SBO = "SBO Wallet";
 
             public const string GamePlay = "GamePlay Wallet";
+
+            public const string CQ9 = "CQ9 Wallet";
         }
     }
 }
