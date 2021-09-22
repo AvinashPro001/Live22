@@ -680,5 +680,10 @@
 
             public const string PasswordUpdate = "[dbo].[GameCQ9_Password_Update]";
         }
+
+        public class ReferralBonus
+        {
+            public const string ReferralBonusRetrive = "[dbo].[ReferralBonus_Select]";
+        }
     }
 }
