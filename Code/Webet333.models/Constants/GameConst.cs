@@ -345,7 +345,7 @@
 
             public const string BettingLimit = @"{""SEXYBCRT"":{""LIVE"":{""limitId"":[340102]}}}";
 
-            public const string APIURL = "https://testapi.onlinegames22.com/";
+            public const string APIURL = "https://tttint.onlinegames22.com/";
 
             public const string BettingDetailsURL = "https://tttint.onlinegames22.com/";
 
