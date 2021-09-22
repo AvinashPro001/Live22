@@ -282,7 +282,8 @@ export class CommonService {
         MaxBet: 'MaxBet',
         YeeBet: 'YeeBet',
         SBO: 'SBO',
-        GamePlay: 'GamePlay'
+        GamePlay: 'GamePlay',
+        CQ9: 'CQ9'
     }
 
     //#endregion Game List
@@ -306,7 +307,8 @@ export class CommonService {
         MaxBet: 'MaxBet Wallet',
         YeeBet: 'YeeBet Wallet',
         SBO: 'SBO Wallet',
-        GamePlay: 'GamePlay Wallet'
+        GamePlay: 'GamePlay Wallet',
+        CQ9: 'CQ9 Wallet'
     }
 
     //#endregion Game List

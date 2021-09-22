@@ -1094,23 +1094,24 @@ namespace Webet333.api.Controllers
         #region Check Username Exists or not
 
         [HttpPost(ActionsConst.Account.CheckUsernameExists)]
-        public async Task<IActionResult> CheckUsernameExists([FromBody]CheckUsernameExistsRequest request)
+        public async Task<IActionResult> CheckUsernameExists([FromBody] CheckUsernameExistsRequest request)
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
 
-            using (var account_helper =new AccountHelpers(Connection))
+            using (var account_helper = new AccountHelpers(Connection))
             {
-                var result=await account_helper.CheckUsernameExists(request);
+                var result = await account_helper.CheckUsernameExists(request);
                 return OkResponse(result);
             }
         }
 
-        #endregion
+        #endregion Check Username Exists or not
 
         #region Get Username by UserId
+
         [HttpPost(ActionsConst.Account.GetUsername)]
-        public async Task<IActionResult> GetUsernameById([FromBody]GetByIdRequest request)
+        public async Task<IActionResult> GetUsernameById([FromBody] GetByIdRequest request)
         {
             if (request == null) return BadResponse("error_empty_request");
             if (!ModelState.IsValid) return BadResponse(ModelState);
@@ -1125,7 +1126,7 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion
+        #endregion Get Username by UserId
 
         #region Check password
 

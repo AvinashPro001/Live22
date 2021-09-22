@@ -209,6 +209,17 @@ async function GameInMaintenance(i) {
             document.getElementById('gameplaylivelogin').style.filter = "";
             document.getElementById('gameplayslotlogin').style.filter = "";
         }
+
+        if (walletData.data[i].walletType == 'CQ9 Wallet' &&
+            walletData.data[i].isMaintenance == true) {
+            document.getElementById('cq9slot').style.filter = 'grayscale(1)';
+            document.getElementById('cq9slotlogin').style.filter = 'grayscale(1)';
+        }
+        else if (walletData.data[i].walletType == 'CQ9 Wallet' &&
+            walletData.data[i].isMaintenance == false) {
+            document.getElementById('cq9slot').style.filter = '';
+            document.getElementById('cq9slotlogin').style.filter = '';
+        }
     }
 }
 
@@ -398,6 +409,19 @@ async function AllInButtonDisable(i) {
                 document.getElementById("gameplayallin").disabled = false;
             }
         }
+
+        if (walletData.data[i].walletType == 'CQ9 Wallet' &&
+            walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+                document.getElementById('cq9allin').disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == 'CQ9 Wallet' &&
+            walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+                document.getElementById('cq9allin').disabled = false;
+            }
+        }
     }
 }
 
@@ -422,6 +446,7 @@ async function CheckGameInMaintenance(gameName) {
     if (gameName == "YeeBet") walletName = "YeeBet Wallet";
     if (gameName == "SBO") walletName = "SBO Wallet";
     if (gameName == 'GamePlay') walletName = 'GamePlay Wallet';
+    if (gameName == 'CQ9') walletName = 'CQ9 Wallet';
 
     for (i = 0; i < walletData.data.length; i++)
         if (walletData.data[i].walletType == walletName && walletData.data[i].isMaintenance == true)
@@ -432,7 +457,6 @@ var checkedValue;
 
 async function getDetails() {
     if (GetLocalStorage('currentUser') !== null) {
-
         var res = await GetMethod(apiEndPoints.getProfile);
         sessionStorage.setItem('UserDetails', enc(JSON.stringify(res)));
         var resUserData = res;
@@ -587,6 +611,7 @@ async function logingGame(gameName) {
             if (gameName == "YeeBet") TransferInAllWallet("YeeBet Wallet");
             if (gameName == "SBO") TransferInAllWallet("SBO Wallet");
             if (gameName == 'GamePlay') TransferInAllWallet("GamePlay Wallet");
+            if (gameName == 'CQ9') TransferInAllWallet('CQ9 Wallet');
         }
         if (gameName != "Pragmatic") window.open("/mobile/Game?gamename=" + gameName);
         else GameLoginMobile("Pragmatic");
@@ -677,11 +702,28 @@ async function GamePlayIdentifiy(Slotvalue) {
     GameLoginMobile('GamePlay');
 }
 
+async function CQ9Identifiy(Slotvalue) {
+    if (GetLocalStorage('currentUser') == null) return alert('Please Login');
+
+    LoaderShow();
+
+    let value = await CheckGameInMaintenance('CQ9');
+    if (value) {
+        LoaderHide();
+        return ShowError(ChangeErroMessage('maintainenance_error'));
+    }
+
+    localStorage.setItem('slotGame', Slotvalue);
+
+    LoaderHide();
+
+    logingGame('CQ9');
+}
+
 async function GameLoginMobile(gamename) {
     LoaderShow();
 
     var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
-    
 
     if (GameUsername == null) {
         var username = await PostMethod(apiEndPoints.getUsername, {});
@@ -1023,6 +1065,24 @@ async function GameLoginMobile(gamename) {
                     if (res.data.status == 0) location.href = res.data.game_url;
                 }
                 break;
+            case 'CQ9':
+                LoaderShow();
+
+                if (resSelectUser.data.CQ9 !== true) {
+                    let model = {};
+                    let res = await PostMethod(apiEndPoints.CQ9Register, model);
+                    if (res.data.status.code == '0') {
+                        let model = { isMobile: true };
+                        let res = await PostMethod(apiEndPoints.CQ9Login, model);
+                        if (res.data.status.code == '0') location.href = res.data.data.url;
+                    }
+                }
+                else {
+                    let model = { isMobile: true };
+                    let res = await PostMethod(apiEndPoints.CQ9Login, model);
+                    if (res.data.status.code == '0') location.href = res.data.data.url;
+                }
+                break;
         }
     }
     else alert(ChangeErroMessage("please_loign_error"));
@@ -1116,7 +1176,6 @@ async function PlaytechSlotsGameList(PageNumber = null, IsAppend = true) {
     GenratePlaytechSlotsGameHTML(NewList, 'playtech-new-section', IsAppend)
     GenratePlaytechSlotsGameHTML(SlotsList, 'playtech-slot-section', IsAppend)
     GenratePlaytechSlotsGameHTML(ArcadeList, 'playtech-arcade-section', IsAppend)
-
 }
 
 async function PragmaticSlotsGameList(PageNumber = null, IsAppend = true) {
@@ -1215,7 +1274,6 @@ function openGamePlayGame(GameID) {
 }
 
 async function openPlaytechGame(game) {
-
     var languageCode = (localStorage.getItem('language') === "zh-Hans" ? "ZH-CN" : "EN")
     var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
     var username = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();

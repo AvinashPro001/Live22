@@ -1,6 +1,6 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
-let PortAPI = '8080';
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let PortAPI = '9001';
 let PortWEB = '9002';
 
 switch (environmentName.toUpperCase()) {
@@ -81,7 +81,6 @@ var apiEndPoints = {
     rewadHistroy: 'customer/reward/list',
     bettingSummeryHistroy: 'Game/bettingsummery',
 
-
     AllInWallet: 'Game/Balance/InWallet',
 
     admin_bank: 'settings/admin_bank/list',
@@ -147,6 +146,9 @@ var apiEndPoints = {
     GamePlayRegister: 'gameplay/register',
     GamePlayLogin: 'gameplay/login',
 
+    CQ9Register: 'cq9/register',
+    CQ9Login: 'cq9/login',
+
     kiss918Balance: 'gamebalance/918kiss',
     mega888Balance: 'gamebalance/mega888',
     jokerBalance: 'gamebalance/joker',
@@ -164,6 +166,7 @@ var apiEndPoints = {
     YeeBetBalance: 'gamebalance/yeebet',
     SBOBalance: 'gamebalance/sbo',
     GamePlayBalance: 'gamebalance/gameplay',
+    CQ9Balance: 'gamebalance/cq9',
 
     userDetaisSetGameBalance: 'userdetails/set',
 

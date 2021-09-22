@@ -72,7 +72,7 @@ async function SliderPromotion() {
                         document.getElementById("mobilePromotionSliderLogin").className = "login-top-slider-s";
                     else
                         document.getElementById("mobilePromotionSlider").className = "login-top-slider";
-                    
+
                     try { slider(); }
                     catch (ex) { }
                 }
