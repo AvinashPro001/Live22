@@ -1635,9 +1635,9 @@
 
         public class CQ9
         {
-            public const string APIURL = "https://api.cqgame.games";
+            public const string APIURL = "https://apif.cqgame.cc";
 
-            public const string APIToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2MTI3MWZjMjczNjNjZjAwMDFhMDk3ZjkiLCJhY2NvdW50Ijoid2ViZXQzMzMiLCJvd25lciI6IjYxMjcxZmMyNzM2M2NmMDAwMWEwOTdmOSIsInBhcmVudCI6InNlbGYiLCJjdXJyZW5jeSI6Ik1ZUiIsImp0aSI6Ijk3OTE0NTE2OCIsImlhdCI6MTYyOTk1Mzk4NiwiaXNzIjoiQ3lwcmVzcyIsInN1YiI6IlNTVG9rZW4ifQ.nj2sb4HTJdrsVcdCUzToZ-km64RdUsVEyhm9g78X2Lo";
+            public const string APIToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2MTRhZjEzYzk3NzFiZTAwMDE2YWEwODkiLCJhY2NvdW50Ijoid2ViZXQzMzMiLCJvd25lciI6IjYxNGFmMTNjOTc3MWJlMDAwMTZhYTA4OSIsInBhcmVudCI6InNlbGYiLCJjdXJyZW5jeSI6Ik1ZUiIsImp0aSI6IjU3NjMwMDcyNyIsImlhdCI6MTYzMjMwMTM3MiwiaXNzIjoiQ3lwcmVzcyIsInN1YiI6IlNTVG9rZW4ifQ.cxi1D3AL7v0kmrnGjSSuTQHdXUzvi9mcz5tWT82DpJY";
 
             public class EndPoint
             {
