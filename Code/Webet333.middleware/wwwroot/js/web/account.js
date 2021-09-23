@@ -1,15 +1,15 @@
-﻿//#region OnLoad 
+﻿//#region OnLoad
 $(window).on('load', function () {
     LoginSectionHideUnhide();
     GetProfileAndSetInSessionStorage();
     ProfileData();
     CallTrackingDataAPI();
 });
-//#endregion 
+//#endregion
 
 //#region Non "ASYNC" Function Section
 
-//#region Update Time and Interval 
+//#region Update Time and Interval
 
 $(document).ready(function () {
     setInterval(async function () {
@@ -45,7 +45,6 @@ $(document).ready(function () {
                     if (data.AdminBankPageData == null) { await CallAPIForBankPages(); SetAdminBankPage() }
                     if (data.DownloadPageData == null) { await CallDownloadLinkAPI(); }
                     if (GetLocalStorage("currentUser") != null) if (data.AllBankPageData == null) await CallAllBankAPI();
-
                 }
                 SetLocalStorage("IsSedularExecute", false);
             }
@@ -66,12 +65,11 @@ function DoLogout() {
     sessionStorage.clear();
     SetSessionStorage('siteData', Data)
     CheckLoginOrNot()
-
 }
 
 //#endregion
 
-//#region Get Current Time 
+//#region Get Current Time
 
 function DisplayCurrentTime() {
     var date = new Date();
@@ -225,7 +223,6 @@ function OnPressEnter() {
     if (event.keyCode === 13) DoLogin();
 }
 
-
 //#region "ASYNC" Login Function
 
 async function DoLogin() {
@@ -263,7 +260,7 @@ async function DoLogin() {
     window.location.reload();
 }
 
-//#endregion 
+//#endregion
 
 //#region "ASYNC" Change Password
 
@@ -321,7 +318,6 @@ async function ChangePassword() {
 var CapchaChecked = false;
 
 async function DoRegister() {
-
     var name = $('#txt_name').val();
     var mobile = $('#txt_mobile_no').val();
     var username = $('#txt_username').val();
@@ -399,7 +395,6 @@ async function DoRegister() {
         LoaderHide();
         ShowError(res.response.message);
     }
-
 }
 
 //#endregion
@@ -510,7 +505,6 @@ function Counter() {
 }
 
 async function SendOTP(number) {
-
     if (number == 1)
         Counter();
 
@@ -547,7 +541,6 @@ async function SendOTP(number) {
     if (res.status == 200) {
         document.getElementById("txt_otp").value = "";
         ShowSuccess(ChangeErroMessage("otp_send_success"));
-
     }
     else {
         ShowError(res.response.message)
@@ -556,7 +549,6 @@ async function SendOTP(number) {
 }
 
 async function VerifiedOTP() {
-
     let model = {
         otp: document.getElementById("txt_otp").value
     }
@@ -629,7 +621,6 @@ function SetTrackingData(username, cookiesName) {
 }
 
 async function CallTrackingDataAPI() {
-
     if (GetCookie("trackRegister") == true || GetCookie("trackRegister") == "true") {
         result = GetCookie('registerCookies');
         var data = result.split(",");
@@ -659,7 +650,6 @@ async function CallTrackingDataAPI() {
             }
         }
     }
-
 }
 
 async function regisrationGame() {
@@ -695,6 +685,7 @@ async function regisrationGame() {
                 resSelectUser.Pragmatic === false ||
                 resSelectUser.SBO === false ||
                 resSelectUser.GamePlay === false ||
+                resSelectUser.CQ9 === false ||
                 resSelectUser.JDB === false
             ) {
                 var res = await PostMethod(accountEndPoints.gameRegisterCheck, userModel);
@@ -808,6 +799,12 @@ async function regisrationGame() {
             if (resSelectUser.GamePlay !== true) {
                 let model = {}
                 try { await PostMethod(gameRegisterEndPoints.gameplayRegister, model); }
+                catch { }
+            }
+
+            if (resSelectUser.CQ9 !== true) {
+                let model = {}
+                try { await PostMethod(gameRegisterEndPoints.cq9Register, model); }
                 catch { }
             }
 

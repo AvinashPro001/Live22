@@ -440,6 +440,8 @@
 
             public const string GamePlay_Betting_Details = "Game/GamePlay_Betting_Details";
 
+            public const string CQ9_Betting_Details = "Game/CQ9_Betting_Details";
+
             public const string JDB_Betting_Details = "Game/JDB_Betting_Details";
 
             public const string Manually_Joker_Betting_Details = "Game/Manually/Joker_Betting_Details";
@@ -477,6 +479,8 @@
             public const string Manually_SBO_Betting_Details = "Game/Manually/SBO_Betting_Details";
 
             public const string Manually_GamePlay_Betting_Details = "Game/Manually/GamePlay_Betting_Details";
+
+            public const string Manually_CQ9_Betting_Details = "Game/Manually/CQ9_Betting_Details";
 
             public const string Manually_JDB_Betting_Details = "Game/Manually/JDB_Betting_Details";
 
@@ -534,6 +538,8 @@
 
             public const string GamePlayBettingDetailsSave = "Game/GamePlayBettingDetailsSave";
 
+            public const string CQ9BettingDetailsSave = "Game/CQ9BettingDetailsSave";
+
             public const string JDBBettingDetailsSave = "Game/JDBBettingDetailsSave";
 
             public const string GameWalletBalance = "Game/AllWalletBalance";
@@ -590,6 +596,8 @@
             public const string CheckSBOBalance = "check/gamebalance/sbo";
 
             public const string GamePlayBalance = "gamebalance/gamePlay";
+
+            public const string CQ9Balance = "gamebalance/cq9";
 
             public const string JDBBalance = "gamebalance/jdb";
         }
@@ -861,13 +869,22 @@
         {
             public const string Register = "gameplay/register";
 
-            public const string UpdatePassword = "gameplay/update/password ";
+            public const string UpdatePassword = "gameplay/update/password";
 
             public const string Login = "gameplay/login";
 
             public const string GetSlotGameList = "gameplay/get/slot-gamelist";
 
             public const string GetFishGameList = "gameplay/get/fish-gamelist";
+        }
+
+        public class CQ9
+        {
+            public const string Register = "cq9/register";
+
+            public const string UpdatePassword = "cq9/update/password";
+
+            public const string Login = "cq9/login";
         }
 
         public static class JDB

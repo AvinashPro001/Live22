@@ -37,6 +37,7 @@ using Webet333.models.Request.Payments;
 using Webet333.models.Request.User;
 using Webet333.models.Response.Account;
 using Webet333.models.Response.Game;
+using Webet333.models.Response.Game.CQ9;
 using Webet333.models.Response.Game.DG;
 using Webet333.models.Response.Game.GamePlay;
 using Webet333.models.Response.Game.JDB;
@@ -850,6 +851,27 @@ namespace Webet333.api.Controllers
 
         #endregion GamePlay Game
 
+        #region CQ9 Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.Manually_CQ9_Betting_Details)]
+        public async Task<IActionResult> Manually_CQ9_Betting_Details([FromBody] GlobalBettingDetailsRequest request)
+        {
+            IsAdmin();
+
+            /*
+             * Game used GMT-4 time zone and Malaysia have GMT+8 timezone. So, we manage time zone.
+             */
+            request.FromDate = request.FromDate.AddHours(-12);
+            request.ToDate = request.ToDate.AddHours(-12);
+
+            var response = await CQ9GameHelpers.CallBettingDetailsAPI(request);
+
+            return OkResponse(response);
+        }
+
+        #endregion CQ9 Game
+
         #region JDB Game
 
         [Authorize]
@@ -861,7 +883,6 @@ namespace Webet333.api.Controllers
             string timeformate = "yyyy-MM-ddTHH:mm:ss";
 
             if (DateTime.Parse(request.ToDate.ToString(timeformate)).Subtract(DateTime.Parse(request.FromDate.ToString(timeformate))).TotalMinutes > 60) return BadResponse(ErrorConsts.ATimeDifferenceOfMoreThan60MinutesIsNotAllowed);
-
             if (DateTime.Parse(request.ToDate.ToString(timeformate)).Subtract(DateTime.Parse(request.FromDate.ToString(timeformate))).TotalMinutes < 0) return BadResponse(ErrorConsts.FromDateIsGreaterThanToDate);
 
             var response = await JDBGameHelpers.CallBettingDetailsAPI(request);
@@ -1433,6 +1454,40 @@ namespace Webet333.api.Controllers
 
         #endregion GamePlay Betting Details
 
+        #region CQ9 Betting Details
+
+        [HttpGet(ActionsConst.Game.CQ9_Betting_Details)]
+        public async Task<IActionResult> CQ9_Betting_Details()
+        {
+            DateTime date = DateTime.Now;
+
+            GlobalBettingDetailsRequest request = new GlobalBettingDetailsRequest
+            {
+                /*
+                 * Game used GMT-4 time zone and Malaysia have GMT+8 timezone. So, we manage time zone.
+                 */
+                FromDate = date.AddHours(-12).AddHours(-1),
+                ToDate = date.AddHours(-12).AddHours(1)
+            };
+
+            var response = await CQ9GameHelpers.CallBettingDetailsAPI(request);
+
+            if (response.Status.Code == "0" &&
+                response.Data.Data.Any())
+                using (var game_helper = new GameHelpers(Connection))
+                {
+                    var jsonString = JsonConvert.SerializeObject(response.Data.Data);
+                    await game_helper.CQ9ServicesInsert(jsonString);
+                }
+
+            return OkResponse(new
+            {
+                jsonString = JsonConvert.SerializeObject(response)
+            });
+        }
+
+        #endregion CQ9 Betting Details
+
         #region JDB Betting Details
 
         [HttpGet(ActionsConst.Game.JDB_Betting_Details)]
@@ -1822,6 +1877,32 @@ namespace Webet333.api.Controllers
 
         #endregion GamePlay Game
 
+        #region CQ9 Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.CQ9BettingDetailsSave)]
+        public async Task<IActionResult> CQ9BettingDetails_Insert([FromBody] GameBettingDetailsInsertRequest request)
+        {
+            await CheckUserRole();
+
+            if (request.JsonData != null)
+            {
+                List<CQ9GetBettingDetailsResponseDataData> result = JsonConvert.DeserializeObject<List<CQ9GetBettingDetailsResponseDataData>>(request.JsonData.ToString());
+
+                if (result.Any())
+                {
+                    using (var game_help = new GameHelpers(Connection: Connection))
+                    {
+                        await game_help.CQ9ServicesInsert(request.JsonData);
+                    }
+                }
+            }
+
+            return OkResponse();
+        }
+
+        #endregion CQ9 Game
+
         #region JDB Game
 
         [Authorize]
@@ -1974,8 +2055,9 @@ namespace Webet333.api.Controllers
         [HttpPost(ActionsConst.Game.GameWalletBalanceRestore)]
         public async Task<IActionResult> UserBalanceRestore([FromBody] GamBalanceRestoreRequest request)
         {
-            var Role = GetUserRole(User);
             var UserId = GetUserId(User).ToString();
+
+            var Role = GetUserRole(User);
             if (Role == RoleConst.Users) request.Id = UserId;
             if (Role == RoleConst.Admin) if (string.IsNullOrEmpty(request.Id)) return BadResponse("error_invalid_modelstate");
 
@@ -2004,6 +2086,7 @@ namespace Webet333.api.Controllers
                 YeeBetBalance = 0.0m,
                 SBOBalance = 0.0m,
                 GamePlayBalance = 0.0m,
+                CQ9Balance = 0.0m,
                 JDBBalance = 0.0m;
 
             using (var game_helper = new GameHelpers(Connection))
@@ -2222,6 +2305,18 @@ namespace Webet333.api.Controllers
                     { }
                 }
 
+                if (request.CQ9Wallet != 0)
+                {
+                    try
+                    {
+                        var result = await CQ9GameHelpers.CallTransferAPI(user.CQ9Username, Math.Abs(request.CQ9Wallet), GameConst.CQ9.EndPoint.Withdraw);
+                        mainBalance += result.Status.Code == "0" ? request.CQ9Wallet : 0;
+                        CQ9Balance = result.Status.Code == "0" ? request.CQ9Wallet : 0;
+                    }
+                    catch
+                    { }
+                }
+
                 if (request.JDBWallet != 0)
                 {
                     try
@@ -2254,6 +2349,7 @@ namespace Webet333.api.Controllers
                     YeeBetBalance,
                     SBOBalance,
                     GamePlayBalance,
+                    CQ9Balance,
                     JDBBalance
                 );
 
@@ -2791,6 +2887,7 @@ namespace Webet333.api.Controllers
                     YEEBETUsername = user.YEEBETUsername,
                     SBOUsername = user.SBOUsername,
                     GamePlayUsername = user.GamePlayUsername,
+                    CQ9Username = user.CQ9Username,
                     JDBUsername = user.JDBUsername,
 
                     FromWalletIsMaintenance = false,
@@ -3277,6 +3374,7 @@ namespace Webet333.api.Controllers
                 var YeeBetGame = result.Where(x => x.GameName == GameConst.GamesNames.YeeBet).ToList();
                 var SBOGame = result.Where(x => x.GameName == GameConst.GamesNames.SBO).ToList();
                 var GamePlayGame = result.Where(x => x.GameName == GameConst.GamesNames.GamePlay).ToList();
+                var CQ9Game = result.Where(x => x.GameName == GameConst.GamesNames.CQ9).ToList();
                 var JDBGame = result.Where(x => x.GameName == GameConst.GamesNames.JDB).ToList();
 
                 var response = new
@@ -3298,6 +3396,7 @@ namespace Webet333.api.Controllers
                     YeeBetTurover = YeeBetGame.Count > 0 ? YeeBetGame.FirstOrDefault().Turnover : 0,
                     SBOTurover = SBOGame.Count > 0 ? SBOGame.FirstOrDefault().Turnover : 0,
                     GamePlayTurover = GamePlayGame.Count > 0 ? GamePlayGame.FirstOrDefault().Turnover : 0,
+                    CQ9Turover = CQ9Game.Count > 0 ? CQ9Game.FirstOrDefault().Turnover : 0,
                     JDBTurover = JDBGame.Count > 0 ? JDBGame.FirstOrDefault().Turnover : 0
                 };
 
@@ -3319,6 +3418,7 @@ namespace Webet333.api.Controllers
                     response.YeeBetTurover +
                     response.SBOTurover +
                     response.GamePlayTurover +
+                    response.CQ9Turover +
                     response.JDBTurover;
 
                 return OkResponse(new { response, Total = total });

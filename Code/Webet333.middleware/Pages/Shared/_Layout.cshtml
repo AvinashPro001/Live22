@@ -101,7 +101,6 @@
     <script>
         $(window).on('load', function () { $(".loadingImage").fadeOut(); });
     </script>
-
 </head>
 <body class="home-page">
     <div class="loadingImage"></div>
@@ -160,7 +159,6 @@
                                         <a id="current_time">7/1/2021 9:29:16pm (GMT=8)</a>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 
@@ -290,6 +288,10 @@
                                                                 <td><span id="gameplay_balance_dropdown" style="font-size: 12px;">fetching.....</span></td>
                                                             </tr>
                                                             <tr>
+                                                                <td class="menu-padding" style="font-size: 12px;">CQ9 wallet</td>
+                                                                <td><span id="cq9_balance_dropdown" style="font-size: 12px;">fetching.....</span></td>
+                                                            </tr>
+                                                            <tr>
                                                                 <td class="menu-padding" style="font-size: 12px;">JDB wallet</td>
                                                                 <td><span id="jdb_balance_dropdown" style="font-size: 12px;">fetching.....</span></td>
                                                             </tr>
@@ -362,7 +364,6 @@
                                         <img src="~/images/new-tage.png" />
                                     </div>
                                     <img id="yeebet-wallet" onclick="OpenGame('YeeBet Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive" src="~/images/dropdown_logos/yeebet.png" alt="dg" />YEEBET CASINO
-
                                 </a>
                             </li>
                             <li>
@@ -402,7 +403,7 @@
                             </li>
                             <li>
                                 <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="gameplay">
-                                    <img id="gameplay-wallet" onclick="OpenGame('GamePlay Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/gameplay_livecasino.png" alt="wm" />GamePlay Casino
+                                    <img id="gameplay-wallet" onclick="OpenGame('GamePlay Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive " src="~/images/dropdown_logos/gameplay_livecasino.png" alt="gameplay" />GamePlay Casino
                                 </a>
                             </li>
                         </ul>
@@ -458,6 +459,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="cq9Slot">
+                                    <img id="cq9-wallet" onclick="OpenGame('CQ9 Wallet', true, false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/cq9_slot.png" alt="CQ9" />CQ9
+                                </a>
+                            </li>
+                            <li>
                                 <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" id="jdb">
                                     <img id="jdb-wallet" onclick="OpenGame('JDB Wallet', true, false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/jdb_slot.png" alt="JDB" />JDB
                                 </a>
@@ -492,7 +498,6 @@
                                     <img id="maxbet-wallet" onclick="OpenGame('MaxBet Wallet',false)" data-toggle="tooltip" data-placement="bottom" class="img-responsive img-filter" src="~/images/dropdown_logos/maxbet.png" alt="maxbet" />Maxbet
                                 </a>
                             </li>
-
                         </ul>
                     </div>
                 </li>
@@ -748,6 +753,12 @@
                             <figure class="pad-top-ten">
                                 <img class="pink-logo normal_icons" src="~/images/carousel_logos/gameplay_bw.png" alt="">
                                 <img class="pink-logo hover_icons" src="~/images/carousel_logos/gameplay_color.png" alt="">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure class="pad-top-ten">
+                                <img class="pink-logo normal_icons" src="~/images/carousel_logos/cq9_bw.png" alt="cq9">
+                                <img class="pink-logo hover_icons" src="~/images/carousel_logos/cq9_color.png" alt="cq9">
                             </figure>
                         </li>
                         <li>

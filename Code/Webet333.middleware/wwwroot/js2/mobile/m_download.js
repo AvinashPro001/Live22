@@ -20,7 +20,6 @@ async function authorize() {
             document.getElementById('reset918password').style.display = 'none';
     }
     else {
-
         var res = JSON.parse(dec(sessionStorage.getItem('UserDetails')));
         var GameUsername = JSON.parse(dec(sessionStorage.getItem('GameUsername')));
 
@@ -61,7 +60,6 @@ function downloadgame(i) {
         }
     }
 }
-
 
 var mega888_apkURL, mega888_iosURL, mega888_ios32URL, kiss918_apkURL, kiss918_iosURL, kiss_ios32URL, joker_apkURL, joker_iosURL
 
@@ -115,7 +113,6 @@ function isWeiXin() {
         return false;
     }
 }
-
 
 async function Mega888UserName() {
     if (GetLocalStorage('currentUser') !== null) {

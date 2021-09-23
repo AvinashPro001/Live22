@@ -583,6 +583,25 @@ namespace Webet333.api.Helpers
                     }
                     break;
 
+                case WalletConst.WalletName.CQ9:
+                    try
+                    {
+                        var result = await CQ9GameHelpers.CallTransferAPI(UsernameResponse.CQ9Username, Math.Abs(Amount), GameConst.CQ9.EndPoint.Withdraw);
+                        if (result.Status.Code != "0")
+                        {
+                            response.ErrorMessage = result.Status.Message;
+                            response.GameName = "CQ9 Game";
+                            response.GameResponse = JsonConvert.SerializeObject(result);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response.ErrorMessage = Localizer["error_transaction_failed"].Value;
+                        response.GameName = "CQ9 Game";
+                        response.GameResponse = ex.Message;
+                    }
+                    break;
+
                 case WalletConst.WalletName.JDB:
                     try
                     {
@@ -959,6 +978,25 @@ namespace Webet333.api.Helpers
                     {
                         response.ErrorMessage = Localizer["error_transaction_failed"].Value;
                         response.GameName = "GamePlay Game";
+                        response.GameResponse = ex.Message;
+                    }
+                    break;
+
+                case WalletConst.WalletName.CQ9:
+                    try
+                    {
+                        var result = await CQ9GameHelpers.CallTransferAPI(UsernameResponse.CQ9Username, Amount, GameConst.CQ9.EndPoint.Deposit);
+                        if (result.Status.Code != "0")
+                        {
+                            response.ErrorMessage = result.Status.Message;
+                            response.GameName = "CQ9 Game";
+                            response.GameResponse = JsonConvert.SerializeObject(result);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response.ErrorMessage = Localizer["error_transaction_failed"].Value;
+                        response.GameName = "CQ9 Game";
                         response.GameResponse = ex.Message;
                     }
                     break;

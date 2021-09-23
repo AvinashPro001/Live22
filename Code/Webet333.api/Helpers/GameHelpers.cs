@@ -437,6 +437,23 @@ namespace Webet333.api.Helpers
 
         #endregion GamePlay Services
 
+        #region CQ9 Services
+
+        internal async Task CQ9ServicesInsert(string request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var res = await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Game.CQ9BettingDetailsInsert,
+                    new
+                    {
+                        jsonString = request
+                    });
+            }
+        }
+
+        #endregion CQ9 Services
+
         #region JDB Services
 
         internal async Task JDBServicesInsert(string request)
@@ -1261,6 +1278,7 @@ namespace Webet333.api.Helpers
             decimal YeeBetBalance,
             decimal SBOBalance,
             decimal GamePlayBalance,
+            decimal CQ9Balance,
             decimal JDBBalance
             )
         {
@@ -1290,6 +1308,7 @@ namespace Webet333.api.Helpers
                         YeeBetBalance,
                         SBOBalance,
                         GamePlayBalance,
+                        CQ9Balance,
                         JDBBalance
                     });
             }
@@ -1597,6 +1616,10 @@ namespace Webet333.api.Helpers
 
                     case GameConst.GameName.GamePlay:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_GamePlay, new { request.UserId, request.FromDate, request.ToDate });
+                        break;
+
+                    case GameConst.GameName.CQ9:
+                        result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_CQ9, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
                     case GameConst.GameName.JDB:

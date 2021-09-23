@@ -50,7 +50,7 @@ async function SetHtmlInToWallet() {
 
 //#endregion
 
-//#region "ASYNC" Max Balance transfer Set in Text Box 
+//#region "ASYNC" Max Balance transfer Set in Text Box
 
 async function MaxTransfer() {
     var fromWallet = $("#from_wallet").val();
@@ -76,7 +76,6 @@ async function CallAPIForBankPages() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
 
     if (data.AdminBankPageData == null || data.AdminBankPageData == undefined) {
-
         let res = await GetMethodWithoutToken(settingEndPoints.admin_page_bank);
 
         if (res.status == 200) {
@@ -100,7 +99,6 @@ function SetAdminBankPage() {
             }
 
             $("#bankdetail").find('thead').append(bankDetailsData);
-
 
             var bankPageHTML = ""
             transactionLimit = data.AdminBankPageData.trancationLimit;
@@ -187,7 +185,6 @@ async function CallAllBankAPI() {
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")));
 
     if (data.AllBankPageData == null || data.AllBankPageData == undefined) {
-
         let res = await GetMethodWithoutToken(settingEndPoints.allbank);
 
         if (res.status == 200) {
@@ -269,7 +266,6 @@ function SetProfilePageBanks() {
             var html = '<div class="bank_details1"><div class="bank_details1_icon_box"><p class="big bank_details_icon">No Details</p></div></div>'
             SetAllValueInElement("users_bank_details", html);
         }
-
     }
     else {
         setTimeout(function () {
@@ -382,7 +378,6 @@ async function Deposit(IsOnlinePayment) {
                 return ShowError(ChangeErroMessage("max_amount_error"));
             }
 
-
             model = {
                 bankId: DepositBankId,
                 amount: amount,
@@ -417,7 +412,6 @@ async function Deposit(IsOnlinePayment) {
 
             LoaderShow();
             if (model.promotionId != undefined) {
-
                 if (IsOnlinePayment) {
                     SetLocalStorage("IsWindowClose", false)
                     OpenPaymentPage();
@@ -536,7 +530,6 @@ async function DepositAfterPromotionCheck() {
         if (!IsDepositExecute) {
             IsDepositExecute = true;
             if (OnlinePayment) {
-
                 if (model.promotionId == undefined || model.promotionId == null) {
                     SetLocalStorage("IsWindowClose", false);
                     OpenPaymentPage();
@@ -664,7 +657,6 @@ async function Transfer() {
     catch (e) {
         LoaderHide()
     }
-
 }
 
 function SetHistorySectionName(name) {
@@ -729,7 +721,6 @@ function CreatePagination(Id, TotalPages, CurrentPage) {
                 }
             }
         }
-
     }
     else {
         var html = "";
@@ -760,7 +751,6 @@ function GetDateFormate(Date1, Date2) {
     var Year1 = Date1.getFullYear();
     Month1 = Month1 < 10 ? "0" + Month1 : Month1;
     day1 = day1 < 10 ? "0" + day1 : day1;
-
 
     var day2 = Date2.getDate();
     var Month2 = Date2.getMonth() + 1;
@@ -873,7 +863,6 @@ async function TransferHistory(FromDate = null, ToDate = null, PageSize = null, 
             else {
                 $("#tbl_transferHistory_pagination").html("");
             }
-
         }
         else {
             $("#tbl_transferHistory_pagination").html("");
@@ -907,7 +896,6 @@ async function WithdrawDepositHistory(FromDate = null, ToDate = null, PageSize =
             else {
                 $("#tbl_withdrawdepositHistory_pagination").html("");
             }
-
         }
         else {
             $("#tbl_withdrawdepositHistory_pagination").html("");
@@ -942,7 +930,6 @@ async function PromotionHistory(FromDate = null, ToDate = null, PageSize = null,
             else {
                 $("#tbl_promotionHistory_pagination").html("");
             }
-
         }
         else {
             $("#tbl_promotionHistory_pagination").html("");
@@ -977,7 +964,6 @@ async function RebateHistory(FromDate = null, ToDate = null, PageSize = null, Pa
             else {
                 $("#tbl_RebateHistory_pagination").html("");
             }
-
         }
         else {
             $("#tbl_promotionHistory_pagination").html("");
@@ -1011,7 +997,6 @@ async function RewardHistory(FromDate = null, ToDate = null, PageSize = null, Pa
             else {
                 $("#tbl_rewardHistory_pagination").html("");
             }
-
         }
         else {
             $("#tbl_promotionHistory_pagination").html("");
@@ -1046,7 +1031,6 @@ async function BettingHistory(FromDate = null, ToDate = null, PageSize = null, P
             else {
                 $("#tbl_bettingsummeryHistory_pagination").html("");
             }
-
         }
         else {
             $("#tbl_promotionHistory_pagination").html("");
@@ -1243,6 +1227,7 @@ async function CheckSupportGame() {
         ButtonDisabled("yeebet-wallet-allin", !res.response.data[0].IsYEEBET);
         ButtonDisabled("sbo-wallet-allin", !res.response.data[0].IsSBO);
         ButtonDisabled("gameplay-wallet-allin", !res.response.data[0].IsGamePlay);
+        ButtonDisabled("cq9-wallet-allin", !res.response.data[0].IsCQ9);
         ButtonDisabled('jdb-wallet-allin', !res.response.data[0].IsJDB);
     }
 }

@@ -110,10 +110,13 @@
     <br />
     <div class="row">
         <div class="col-2">
+            <div class="text-center"><b>CQ9 Wallet</b></div>
+            <div class="text-center"><b class="balance">{{CQ9Balance == null || CQ9Balance == undefined? 'N/A' : convertDecimal(CQ9Balance)}}</b></div>
+        </div>
+        <div class="col-2">
             <div class="text-center"><b>JDB Wallet</b></div>
             <div class="text-center"><b class="balance">{{JDBBalance == null || JDBBalance == undefined? 'N/A' : convertDecimal(JDBBalance)}}</b></div>
         </div>
-        <div class="col-2"></div>
         <div class="col-2"></div>
         <div class="col-2"></div>
         <div class="col-2"></div>
@@ -344,6 +347,11 @@
                 <tr>
                     <td>GamePlay Game:</td>
                     <td>{{GamePlayUsername == null ? 'Select username.' : GamePlayUsername }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>CQ9 Game:</td>
+                    <td>{{CQ9Username == null ? 'Select username.' : CQ9Username }}</td>
                     <td></td>
                 </tr>
                 <tr>

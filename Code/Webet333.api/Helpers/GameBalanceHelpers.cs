@@ -16,6 +16,7 @@ using Webet333.models.Request.Game.DG;
 using Webet333.models.Request.Game.GamePlay;
 using Webet333.models.Request.Game.SBO;
 using Webet333.models.Response.Game.AllBet;
+using Webet333.models.Response.Game.CQ9;
 using Webet333.models.Response.Game.DG;
 using Webet333.models.Response.Game.GamePlay;
 using Webet333.models.Response.Game.JDB;
@@ -570,6 +571,30 @@ namespace Webet333.api.Helpers
 
         #endregion Call API of GamePlay Game
 
+        #region Call API of CQ9 Game
+
+        internal async Task<string> CallCQ9GameBalance(string Username)
+        {
+            string balance = null;
+
+            try
+            {
+                string temp = await CQ9GameHelpers.CallGETAPIAsync($"{GameConst.CQ9.EndPoint.GetBalance}{Username}");
+
+                var DeserializeAPIResult = JsonConvert.DeserializeObject<CQ9GetBalanceResponse>(temp);
+
+                balance = DeserializeAPIResult != null ? (DeserializeAPIResult.Status.Code == "0" ? DeserializeAPIResult.Data.Balance.ToString() : null) : null;
+            }
+            catch (Exception ex)
+            {
+                balance = null;
+            }
+
+            return balance;
+        }
+
+        #endregion Call API of CQ9 Game
+
         #region Call API of JDB Game
 
         internal async Task<string> CallJDBGameBalance(string Username)
@@ -841,6 +866,24 @@ namespace Webet333.api.Helpers
         }
 
         #endregion GamePlay Balance Update
+
+        #region CQ9 Balance Update
+
+        internal async Task<dynamic> CQ9BalanceUpdate(string UserId, string Amount)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.FindAsync(
+                    StoredProcConsts.GameBalance.CQ9GameBalanceUpdate,
+                    new
+                    {
+                        UserId,
+                        Amount
+                    });
+            }
+        }
+
+        #endregion CQ9 Balance Update
 
         #region JDB Balance Update
 

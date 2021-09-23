@@ -283,6 +283,7 @@ export class CommonService {
         YeeBet: 'YeeBet',
         SBO: 'SBO',
         GamePlay: 'GamePlay',
+        CQ9: 'CQ9',
         JDB: 'JDB'
     }
 
@@ -308,6 +309,7 @@ export class CommonService {
         YeeBet: 'YeeBet Wallet',
         SBO: 'SBO Wallet',
         GamePlay: 'GamePlay Wallet',
+        CQ9: 'CQ9 Wallet',
         JDB: 'JDB Wallet'
     }
 

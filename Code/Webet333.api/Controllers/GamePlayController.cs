@@ -99,13 +99,15 @@ namespace Webet333.api.Controllers
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
                 username = user.GamePlayGamePrefix + user.UserId;
                 password = SecurityHelpers.DecryptPassword(user.Password);
+
+                password = $"WB4@{password}";
+                password = Regex.Replace(password, @"[^0-9a-zA-Z]+", "");
+                if (password.Length < 6) password = $"{user.GamePlayGamePrefix}{password}";
+                else if (password.Length > 12) password = password.Substring(0, 11);
             }
 
             using (var GamePlay_Helpers = new GamePlayGameHelpers(Connection))
             {
-                password = $"WB4@{password}";
-                if (password.Length > 12) password = password.Substring(0, 12);
-
                 var result = await GamePlay_Helpers.CallUpdatePasswordAPI(username, password);
 
                 if (result.Status != 0) return BadResponse(result.ErrorDesc);

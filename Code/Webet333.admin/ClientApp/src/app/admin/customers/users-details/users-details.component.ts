@@ -195,6 +195,7 @@ export class UsersDetailsComponent implements OnInit {
         { gameName: this.commonService.GameName.YeeBet },
         { gameName: this.commonService.GameName.SBO },
         { gameName: this.commonService.GameName.GamePlay },
+        { gameName: this.commonService.GameName.CQ9 },
         { gameName: this.commonService.GameName.JDB }
     ];
 
@@ -247,6 +248,9 @@ export class UsersDetailsComponent implements OnInit {
 
     GamePlayBalance: any;
     GamePlayUsername: any;
+
+    CQ9Balance: any;
+    CQ9Username: any;
 
     JDBBalance: any;
     JDBUsername: any;
@@ -557,6 +561,7 @@ export class UsersDetailsComponent implements OnInit {
             this.YeeBetUsername = res.data.yeeBetUsername;
             this.SBOUsername = res.data.sboUsername;
             this.GamePlayUsername = res.data.gameplayUsername;
+            this.CQ9Username = res.data.cq9Username;
             this.JDBUsername = res.data.jdbUsername;
             this.WalletBalance(id);
             this.UserBrokenStaus();
@@ -1110,6 +1115,38 @@ export class UsersDetailsComponent implements OnInit {
                 { prop: 'AdditionalDetails' }
             ];
         }
+        else if (selectedList == this.commonService.GameName.CQ9) {
+            this.columns = [
+                { prop: 'GameHall' },
+                { prop: 'GameType' },
+                { prop: 'GamePlat' },
+                { prop: 'GameCode' },
+                { prop: 'Account' },
+                { prop: 'Round' },
+                { prop: 'Balance' },
+                { prop: 'Win' },
+                { prop: 'Bet' },
+                { prop: 'ValidBet' },
+                { prop: 'Jackpot' },
+                { prop: 'JackpotContribution' },
+                { prop: 'JackpotType' },
+                { prop: 'Status' },
+                { prop: 'EndroundTime' },
+                { prop: 'CreateTime' },
+                { prop: 'BetTime' },
+                { prop: 'Detail' },
+                { prop: 'SingleRowBet' },
+                { prop: 'GameRole' },
+                { prop: 'BankerType' },
+                { prop: 'Rake' },
+                { prop: 'RoomFee' },
+                { prop: 'TableType' },
+                { prop: 'TableId' },
+                { prop: 'RoundNumber' },
+                { prop: 'BetType' },
+                { prop: 'GameResult' }
+            ];
+        }
         else if (selectedList == this.commonService.GameName.JDB) {
             this.columns = [
                 { prop: 'GameType' },
@@ -1399,6 +1436,7 @@ export class UsersDetailsComponent implements OnInit {
         this.YeeBet(id);
         this.SBO(id);
         this.GamePlay(id);
+        this.CQ9(id);
         this.JDB(id);
     }
 
@@ -1649,6 +1687,20 @@ export class UsersDetailsComponent implements OnInit {
                         this.adminService.add<any>(GameRegister.registerGamePlay, data).subscribe(res => {
                             this.getUsername(Id);
                             this.GamePlay(Id);
+                        });
+                    }
+                    catch (e) { }
+                }
+
+                //#endregion
+
+                //#region CQ9 Game Register
+
+                if (!res.data.CQ9) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerCQ9, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.CQ9(Id);
                         });
                     }
                     catch (e) { }
@@ -2012,6 +2064,7 @@ export class UsersDetailsComponent implements OnInit {
             await this.YeeBet(id);
             await this.SBO(id);
             await this.GamePlay(id);
+            await this.CQ9(id);
             await this.JDB(id);
 
             let balanceRestore = {
@@ -2032,6 +2085,7 @@ export class UsersDetailsComponent implements OnInit {
                 YeeBetWallet: this.YeeBetBalance == null ? 0.0 : this.YeeBetBalance,
                 SBOWallet: this.SBOBalance == null ? 0.0 : this.SBOBalance,
                 GamePlayWallet: this.GamePlayBalance == null ? 0.0 : this.GamePlayBalance,
+                CQ9Wallet: this.CQ9Balance == null ? 0.0 : this.CQ9Balance,
                 JDBWallet: this.JDBBalance == null ? 0.0 : this.JDBBalance,
                 id: id
             }
@@ -2291,6 +2345,19 @@ export class UsersDetailsComponent implements OnInit {
         catch (e) { }
     }
 
+    async CQ9(id) {
+        try {
+            let data = {
+                id: id,
+                username: this.CQ9Username,
+            }
+            this.adminService.add<any>(gameBalance.CQ9, data).subscribe(res => {
+                this.CQ9Balance = res.data.balance;
+            })
+        }
+        catch (e) { }
+    }
+
     async JDB(id) {
         try {
             let data = {
@@ -2329,6 +2396,7 @@ export class UsersDetailsComponent implements OnInit {
                 await this.YeeBet(id);
                 await this.SBO(id);
                 await this.GamePlay(id);
+                await this.CQ9(id);
                 await this.JDB(id);
 
                 let data = {
@@ -2349,6 +2417,7 @@ export class UsersDetailsComponent implements OnInit {
                     YeeBetwallet: this.YeeBetBalance == null ? 0.0 : this.YeeBetBalance,
                     SBOwallet: this.SBOBalance == null ? 0.0 : this.SBOBalance,
                     GamePlaywallet: this.GamePlayBalance == null ? 0.0 : this.GamePlayBalance,
+                    CQ9wallet: this.CQ9Balance == null ? 0.0 : this.CQ9Balance,
                     JDBwallet: this.JDBBalance == null ? 0.0 : this.JDBBalance,
                     id: id
                 }
@@ -3234,6 +3303,56 @@ export class UsersDetailsComponent implements OnInit {
                                     GameCategory: el.gameCategory,
                                     SessionId: el.sessionId,
                                     AdditionalDetails: JSON.stringify(el.additionalDetails)
+                                });
+                            });
+                            this.rows = [...this.rows];
+                        }
+                        else this.setBettingDetailsColumn(this.selectedList);
+
+                        this.loadingIndicator = false;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                    });
+                    break;
+                }
+                case this.commonService.GameName.CQ9: {
+                    let model = { fromdate: this.fromDate, todate: this.toDate };
+                    this.adminService.add<any>(customer.CQ9BettingDetails, model).subscribe(res => {
+                        if (res.data.status.code == '0' &&
+                            res.data.data.totalsize > 0) {
+                            this.rows = [];
+
+                            res.data.data.data.forEach(el => {
+                                this.rows.push({
+                                    GameHall: el.gameHall,
+                                    GameType: el.gameType,
+                                    GamePlat: el.gamePlat,
+                                    GameCode: el.gameCode,
+                                    Account: el.account,
+                                    Round: el.round,
+                                    Balance: el.balance,
+                                    Win: el.win,
+                                    Bet: el.bet,
+                                    ValidBet: el.validBet,
+                                    Jackpot: el.jackpot,
+                                    JackpotContribution: el.jackpotContribution,
+                                    JackpotType: el.jackpotType,
+                                    Status: el.status,
+                                    EndroundTime: el.endroundTime,
+                                    CreateTime: el.createTime,
+                                    BetTime: el.betTime,
+                                    Detail: el.detail == null ? null : JSON.stringify(el.detail),
+                                    SingleRowBet: el.singleRowBet,
+                                    GameRole: el.gameRole,
+                                    BankerType: el.bankerType,
+                                    Rake: el.rake,
+                                    RoomFee: el.roomFee,
+                                    TableType: el.tableType,
+                                    TableId: el.tableId,
+                                    RoundNumber: el.roundNumber,
+                                    BetType: el.betType,
+                                    GameResult: JSON.stringify(el.gameResult)
                                 });
                             });
                             this.rows = [...this.rows];

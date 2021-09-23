@@ -33,6 +33,7 @@ function CallGameLoginAPI(WalletName, IsSlots, CheckLogin = true) {
         case "YeeBet Wallet": OpenYeeBetGame(); break;
         case "SBO Wallet": OpenSBOGame(); break;
         case "GamePlay Wallet": OpenGamePlayGame(IsSlots); break;
+        case "CQ9 Wallet": OpenCQ9Game(); break;
         case 'JDB Wallet': OpenJDBGame(); break;
     }
 }
@@ -377,6 +378,24 @@ async function OpenGamePlayGame(IsSlots) {
     if (res.status == 200 &&
         res.response.data.status == 0)
         SetLocalStorage("gameURL", res.response.data.game_url);
+}
+
+async function OpenCQ9Game(IsSlots = true, IsPlayNowClick = false) {
+    let model = {}, res, resSelectUser;
+
+    if (!IsPlayNowClick) return window.open("../Web/slots#cq9-game");
+
+    if (GetLocalStorage("currentUser") == null) return ShowError(ChangeErroMessage("please_loign_error"));
+
+    resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+    if (resSelectUser.CQ9 !== true) await PostMethod(gameRegisterEndPoints.gameplayRegister, model);
+
+    window.open("../Web/game");
+    model = { isMobile: false };
+    res = await PostMethod(gameLoginEndPoints.cq9Login, model);
+    if (res.status == 200 &&
+        res.response.data.status.code == '0')
+        SetLocalStorage("gameURL", res.response.data.data.url);
 }
 
 async function LoginGameplayGame(GameCode) {

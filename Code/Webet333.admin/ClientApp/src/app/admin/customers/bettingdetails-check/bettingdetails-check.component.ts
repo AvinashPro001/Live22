@@ -36,6 +36,7 @@ export class BettingdetailsCheckComponent implements OnInit {
         { gameName: this.commonService.GameName.YeeBet },
         { gameName: this.commonService.GameName.SBO },
         { gameName: this.commonService.GameName.GamePlay },
+        { gameName: this.commonService.GameName.CQ9 },
         { gameName: this.commonService.GameName.JDB }
     ];
 
@@ -437,6 +438,38 @@ export class BettingdetailsCheckComponent implements OnInit {
                 { prop: 'GameCategory' },
                 { prop: 'SessionId' },
                 { prop: 'AdditionalDetails' }
+            ];
+        }
+        else if (selectedList == this.commonService.GameName.CQ9) {
+            this.columns = [
+                { prop: 'GameHall' },
+                { prop: 'GameType' },
+                { prop: 'GamePlat' },
+                { prop: 'GameCode' },
+                { prop: 'Account' },
+                { prop: 'Round' },
+                { prop: 'Balance' },
+                { prop: 'Win' },
+                { prop: 'Bet' },
+                { prop: 'ValidBet' },
+                { prop: 'Jackpot' },
+                { prop: 'JackpotContribution' },
+                { prop: 'JackpotType' },
+                { prop: 'Status' },
+                { prop: 'EndroundTime' },
+                { prop: 'CreateTime' },
+                { prop: 'BetTime' },
+                { prop: 'Detail' },
+                { prop: 'SingleRowBet' },
+                { prop: 'GameRole' },
+                { prop: 'BankerType' },
+                { prop: 'Rake' },
+                { prop: 'RoomFee' },
+                { prop: 'TableType' },
+                { prop: 'TableId' },
+                { prop: 'RoundNumber' },
+                { prop: 'BetType' },
+                { prop: 'GameResult' }
             ];
         }
         else if (selectedList == this.commonService.GameName.JDB) {
@@ -1097,6 +1130,45 @@ export class BettingdetailsCheckComponent implements OnInit {
                                 GameCategory: el.GameCategory,
                                 SessionId: el.SessionId,
                                 AdditionalDetails: el.AdditionalDetails
+                            });
+                        });
+                        this.rows = [...this.rows];
+                        this.loadingIndicator = false;
+                        break;
+                    }
+                    case this.commonService.GameName.CQ9: {
+                        this.setColumn(this.commonService.GameName.CQ9);
+                        this.rows = [];
+                        res.data.forEach(el => {
+                            this.rows.push({
+                                GameHall: el.GameHall,
+                                GameType: el.GameType,
+                                GamePlat: el.GamePlat,
+                                GameCode: el.GameCode,
+                                Account: el.Account,
+                                Round: el.Round,
+                                Balance: el.Balance,
+                                Win: el.Win,
+                                Bet: el.Bet,
+                                ValidBet: el.ValidBet,
+                                Jackpot: el.Jackpot,
+                                JackpotContribution: el.JackpotContribution,
+                                JackpotType: el.JackpotType,
+                                Status: el.Status,
+                                EndroundTime: el.EndroundTime,
+                                CreateTime: el.CreateTime,
+                                BetTime: el.BetTime,
+                                Detail: el.Detail == null ? null : JSON.stringify(el.Detail),
+                                SingleRowBet: el.SingleRowBet,
+                                GameRole: el.GameRole,
+                                BankerType: el.BankerType,
+                                Rake: el.Rake,
+                                RoomFee: el.RoomFee,
+                                TableType: el.TableType,
+                                TableId: el.TableId,
+                                RoundNumber: el.RoundNumber,
+                                BetType: el.BetType,
+                                GameResult: JSON.stringify(el.GameResult)
                             });
                         });
                         this.rows = [...this.rows];

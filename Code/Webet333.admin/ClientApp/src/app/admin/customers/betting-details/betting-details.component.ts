@@ -43,6 +43,7 @@ export class BettingDetailsComponent implements OnInit {
         { gameName: this.commonService.GameName.YeeBet },
         { gameName: this.commonService.GameName.SBO },
         { gameName: this.commonService.GameName.GamePlay },
+        { gameName: this.commonService.GameName.CQ9 },
         { gameName: this.commonService.GameName.JDB }
     ];
 
@@ -453,6 +454,38 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: 'GameCategory' },
                 { prop: 'SessionId' },
                 { prop: 'AdditionalDetails' }
+            ];
+        }
+        else if (selectedList == this.commonService.GameName.CQ9) {
+            this.columns = [
+                { prop: 'GameHall' },
+                { prop: 'GameType' },
+                { prop: 'GamePlat' },
+                { prop: 'GameCode' },
+                { prop: 'Account' },
+                { prop: 'Round' },
+                { prop: 'Balance' },
+                { prop: 'Win' },
+                { prop: 'Bet' },
+                { prop: 'ValidBet' },
+                { prop: 'Jackpot' },
+                { prop: 'JackpotContribution' },
+                { prop: 'JackpotType' },
+                { prop: 'Status' },
+                { prop: 'EndroundTime' },
+                { prop: 'CreateTime' },
+                { prop: 'BetTime' },
+                { prop: 'Detail' },
+                { prop: 'SingleRowBet' },
+                { prop: 'GameRole' },
+                { prop: 'BankerType' },
+                { prop: 'Rake' },
+                { prop: 'RoomFee' },
+                { prop: 'TableType' },
+                { prop: 'TableId' },
+                { prop: 'RoundNumber' },
+                { prop: 'BetType' },
+                { prop: 'GameResult' }
             ];
         }
         else if (selectedList == this.commonService.GameName.JDB) {
@@ -1282,6 +1315,57 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
+            case this.commonService.GameName.CQ9: {
+                //let model = { fromdate: this.fromDate, todate: this.toDate };
+                //this.adminService.add<any>(customer.CQ9BettingDetails, model).subscribe(res => {
+                this.adminService.add<any>(customer.CQ9BettingDetails, Model).subscribe(res => {
+                    if (res.data.status.code == '0' &&
+                        res.data.data.totalsize > 0) {
+                        this.rows = [];
+                        this.TableData = res.data.data.data;
+
+                        res.data.data.data.forEach(el => {
+                            this.rows.push({
+                                GameHall: el.gameHall,
+                                GameType: el.gameType,
+                                GamePlat: el.gamePlat,
+                                GameCode: el.gameCode,
+                                Account: el.account,
+                                Round: el.round,
+                                Balance: el.balance,
+                                Win: el.win,
+                                Bet: el.bet,
+                                ValidBet: el.validBet,
+                                Jackpot: el.jackpot,
+                                JackpotContribution: el.jackpotContribution,
+                                JackpotType: el.jackpotType,
+                                Status: el.status,
+                                EndroundTime: el.endroundTime,
+                                CreateTime: el.createTime,
+                                BetTime: el.betTime,
+                                Detail: el.detail == null ? null : JSON.stringify(el.detail),
+                                SingleRowBet: el.singleRowBet,
+                                GameRole: el.gameRole,
+                                BankerType: el.bankerType,
+                                Rake: el.rake,
+                                RoomFee: el.roomFee,
+                                TableType: el.tableType,
+                                TableId: el.tableId,
+                                RoundNumber: el.roundNumber,
+                                BetType: el.betType,
+                                GameResult: JSON.stringify(el.gameResult)
+                            });
+                        });
+                        this.rows = [...this.rows];
+                    }
+                    else this.setColumn("");
+                    this.loadingIndicator = false;
+                }, error => {
+                    this.loadingIndicator = false;
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
+                break;
+            }
             case this.commonService.GameName.JDB: {
                 this.adminService.add<any>(customer.JDBBettingDetails, Model).subscribe(res => {
                     if (res.data.status == '0000' &&
@@ -1596,6 +1680,21 @@ export class BettingDetailsComponent implements OnInit {
                 }
                 case this.commonService.GameName.GamePlay: {
                     this.adminService.add<any>(customer.SaveGamePlayBettingDetails, model).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
+                }
+                case this.commonService.GameName.CQ9: {
+                    this.adminService.add<any>(customer.SaveCQ9BettingDetails, model).subscribe(res => {
                         this.toasterService.pop('success', 'Successfully', res.message);
                         this.loadingIndicator = false;
                         this.rows = [];

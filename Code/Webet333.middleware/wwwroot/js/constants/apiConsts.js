@@ -1,8 +1,12 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '9001';
 
 switch (environmentName.toUpperCase()) {
+    case 'LOCAL':
+        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        break;
     case 'DEBUG':
         baseUrl = 'https://uatapi.wb3api.com/api/v1/';
         baseUrlWithoutVersion = 'https://uatapi.wb3api.com';
@@ -10,10 +14,6 @@ switch (environmentName.toUpperCase()) {
     case 'STAG':
         baseUrl = 'https://api.wb3api.com/api/v1/';
         baseUrlWithoutVersion = 'https://api.wb3api.com';
-        break;
-    case 'LOCAL':
-        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
         break;
 }
 
@@ -79,6 +79,7 @@ var gameBalanceEndPoints = {
     yeebetBalance: 'gamebalance/yeebet',
     sboBalance: 'gamebalance/sbo',
     gameplayBalance: 'gamebalance/gamePlay',
+    cq9Balance: 'gamebalance/cq9',
     jdbBalance: 'gamebalance/jdb'
 };
 
@@ -116,6 +117,7 @@ var gameRegisterEndPoints = {
     yeebetRegister: 'yeebet/register',
     sboRegister: 'sbo/register/player',
     gameplayRegister: 'gameplay/register',
+    cq9Register: 'cq9/register',
     jdbRegister: 'jdb/register'
 }
 
@@ -132,6 +134,7 @@ var gameLoginEndPoints = {
     yeebetLogin: 'yeebet/login',
     sboLogin: 'sbo/login',
     gameplayLogin: 'gameplay/login',
+    cq9Login: 'cq9/login',
     jdbLogin: 'jdb/login'
 }
 

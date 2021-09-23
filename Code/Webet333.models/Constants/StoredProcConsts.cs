@@ -341,6 +341,8 @@
 
             public const string GamePlayGameBalanceUpdate = "[dbo].[Balance_GamePlay_Update]";
 
+            public const string CQ9GameBalanceUpdate = "[dbo].[Balance_CQ9_Update]";
+
             public const string JDBGameBalanceUpdate = "[dbo].[Balance_JDB_Update]";
         }
 
@@ -489,6 +491,10 @@
             public const string GamePlayBettingDetailsInsert = "[dbo].[GamePlay_BettingDetails_Insert]";
 
             public const string BettingDetails_GamePlay = "[dbo].[GamePlay_BettingDetails_By_Username]";
+
+            public const string CQ9BettingDetailsInsert = "[dbo].[CQ9_BettingDetails_Insert]";
+
+            public const string BettingDetails_CQ9 = "[dbo].[CQ9_BettingDetails_By_Username]";
 
             public const string JDBBettingDetailsInsert = "[dbo].[JDB_BettingDetails_Insert]";
 
@@ -672,6 +678,13 @@
             public const string Register = "[dbo].[Users_Insert_GamePlay]";
 
             public const string PasswordUpdate = "[dbo].[GameGamePLay_Password_Update]";
+        }
+
+        public class CQ9
+        {
+            public const string Register = "[dbo].[Users_Insert_CQ9]";
+
+            public const string PasswordUpdate = "[dbo].[GameCQ9_Password_Update]";
         }
 
         public class JDB

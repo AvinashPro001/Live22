@@ -223,7 +223,7 @@
                                         <button class="game-title"><span class="lang" key="jokerslot_game"></span></button>
                                     </a>
                                 </li>
-                                <li onclick="PragmaticIdentifiy()" data-toggle="modal" data-target="#gameLogin" id="pragmaticslot">
+                                <li onclick="PragmaticIdentifiy()" id="pragmaticslot">
                                     <a>
                                         <figure>
                                             <img src="~/images/mobile/Pragmatic.png" alt="Pragmatic">
@@ -235,6 +235,12 @@
                                     <a>
                                         <figure><img src="~/images/mobile/gameplay_slot.png" alt="Playtech"></figure>
                                         <button class="game-title"><span class="lang" key="gameplayslot_game"></span></button>
+                                    </a>
+                                </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="cq9slotlogin">
+                                    <a>
+                                        <figure><img src="~/images/mobile/cq9_slot.png" alt="CQ9"></figure>
+                                        <button class="game-title"><span class="lang" key="cq9slot_game"></span></button>
                                     </a>
                                 </li>
                                 <li data-toggle="modal" data-target="#gameLogin" id="jdb-slot">
@@ -451,6 +457,12 @@
                                     <ul class="list-inline">
                                         <li><strong>CQ9 Wallet</strong></li>
                                         <li class="fright" id="ddlCQ9Wallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>JDB Wallet</strong></li>
+                                        <li class="fright" id="ddlJDBWallet">feching...</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -671,6 +683,12 @@
                                 <a>
                                     <figure><img src="~/images/mobile/gameplay_slot.png" alt="GamePlay"></figure>
                                     <button class="game-title"><span class="lang" key="gameplayslot_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="CQ9Identifiy(true)" id="cq9slotlogin">
+                                <a>
+                                    <figure><img src="~/images/mobile/cq9_slot.png" alt="cq9-slot"></figure>
+                                    <button class="game-title"><span class="lang" key="cq9slot_game"></span></button>
                                 </a>
                             </li>
                             <li onclick="logingGame('JDB')" id="jdbslotlogin">

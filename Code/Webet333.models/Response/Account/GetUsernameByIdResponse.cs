@@ -47,6 +47,15 @@ namespace Webet333.models.Response.Account
         [JsonProperty("pragmaticUsername")]
         public string PragmaticUsername { get; set; }
 
+        [JsonProperty("maxbetUsername")]
+        public string MaxbetUsername { get; set; }
+
+        [JsonProperty("mega888Username")]
+        public string Mega888Username { get; set; }
+
+        [JsonProperty("pussy888Username")]
+        public string Pussy888Username { get; set; }
+
         [JsonProperty("yeebetUsername")]
         public string YEEBETUsername { get; set; }
 
@@ -56,17 +65,14 @@ namespace Webet333.models.Response.Account
         [JsonProperty("gameplayUsername")]
         public string GamePlayUsername { get; set; }
 
+        [JsonProperty("cq9Username")]
+        public string CQ9Username { get; set; }
+
+        [JsonProperty("cq9Password")]
+        public string CQ9Password { get; set; }
+
         [JsonProperty("jdbUsername")]
         public string JDBUsername { get; set; }
-
-        [JsonProperty("maxbetUsername")]
-        public string MaxbetUsername { get; set; }
-
-        [JsonProperty("mega888Username")]
-        public string Mega888Username { get; set; }
-
-        [JsonProperty("pussy888Username")]
-        public string Pussy888Username { get; set; }
 
         [JsonProperty("mainWalletAmount")]
         public decimal MainWalletAmount { get; set; }
