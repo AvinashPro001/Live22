@@ -1,4 +1,5 @@
 ﻿//#region Declare SiteData Variable
+var referralCode=""
 
 let SiteData = {
     PromotionPageData: null,
@@ -651,4 +652,11 @@ function InviteViaCopyToClipboard() {
     
     navigator.clipboard.writeText(message);
     alert(message)
+}
+
+function SetReferralCode(Code) {
+    referralCode = Code;
+    var domainName = window.location.origin;
+    document.getElementById("referral-code").innerHTML = '<span class="fa fa-copy hand-curson" onclick=CopyToClipboard("referral-code")></span> &nbsp;&nbsp;' + referralCode;
+    document.getElementById("referral-link").innerHTML = '<span class="fa fa-copy hand-curson" onclick=CopyToClipboard("referral-link")></span> &nbsp;&nbsp;' + domainName + "/Web/register?refCode="+referralCode;
 }

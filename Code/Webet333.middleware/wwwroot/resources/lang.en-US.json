@@ -163,5 +163,7 @@
   "to": "To :",
   "verified_otp": "Verify OTP",
   "otp_verification_text": "OTP Verification",
-  "send_otp": "Resend OTP"
+  "send_otp": "Resend OTP",
+  "referral_code": "Referral Code",
+  "referral_link": "Referral Link"
 }

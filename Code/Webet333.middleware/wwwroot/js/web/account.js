@@ -150,6 +150,7 @@ async function ProfileData() {
             SetAllValueInElement("vip_level_name", res.vipLevelName)
             $('#auto_transfer_checkbox').prop('checked', res.autoTransfer ? "checked" : "");
             SetVIPageProgressBar(res.vipLevelName, res.totalDepositAmount);
+            SetReferralCode(res.referralCode);
         }
         else {
             await GetProfileAndSetInSessionStorage();

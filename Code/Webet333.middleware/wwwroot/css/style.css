@@ -2186,7 +2186,7 @@ div.tabcontent_health .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 .mar-right-0{margin-right:0px !important;}
 .font-size-16px{font-size:16px}
 .red-color{color:red !important;}
-#referral_bonus{height:500px;}
+#referral_bonus{height:600px;}
 .btn-50-pec-witdh{width:50%;}
 .invite-dropbtn {background-color: #04AA6D;color: white;padding: 16px;font-size: 16px;border: none;}
 .invite-dropdown {position: relative;display: inline-block;}
@@ -2195,3 +2195,4 @@ div.tabcontent_health .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
         .invite-dropdown-content a:hover {background-color: #ddd;cursor: pointer;}
 .invite-dropdown:hover .invite-dropdown-content {display: block;}
 .invite-dropdown:hover .invite-dropbtn {background-color: #3e8e41;}
+.w-100{width:100% !important;margin-top:5px !important;}
