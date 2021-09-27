@@ -12,7 +12,7 @@
 
         public const string nonRegisterUsers = "Game/CheckAllGameRegister";
 
-        public const string register918kiss = "Game/Register/918Kiss";
+        public const string register918kiss = "918kiss/register";
 
         public const string registerAG = "Game/Register/AG";
 
