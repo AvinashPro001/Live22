@@ -938,15 +938,15 @@
 
             public const string disableAccount = "action=disable";
 
-            public const string authcode = "swQjTbHQdnAHUyfvgMdN";
+            public const string authcode = "NGXMSzTYxtZcaMCVCcGb";
 
-            public const string SecretKey = "N4nnU6aQ939p733t5Etw";
+            public const string SecretKey = "kC7S5JYW74Bm352bTda6";
 
             public const string WidthdrawDeposit = "setServerScore";
 
             public const string AddUser = "AddUser";
 
-            public const string agent = "webet333-api";
+            public const string agent = "wb333api";
 
             public const string randomUsername = "RandomUserName";
 
