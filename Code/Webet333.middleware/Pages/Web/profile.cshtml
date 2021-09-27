@@ -114,9 +114,8 @@
                         <h4 class="mar-btm-fifteen">USER PROFILE</h4>
 
                         <button id="profile_tab" class="tablinks account-reg profile active opercity" onclick="openCity(event, 'profile_amount')"><span class="lang" key="profile">PROFILE</span></button>
-                        <button id="change_password_tab" class="tablinks account-reg change_password opercity" onclick="openCity(event, 'change_passwrd_amount')">
-                            <span class="lang" key="change_password">CHANGE PASSWORD</span>
-                        </button>
+                        <button id="change_password_tab" class="tablinks account-reg change_password opercity" onclick="openCity(event, 'change_passwrd_amount')"><span class="lang" key="change_password">CHANGE PASSWORD</span>                        </button>
+                        <button id="" class="tablinks account-reg referral opercity" onclick="openCity(event, 'referral_bonus')"><span class="lang" key="">Referral</span></button>
                     </div>
 
                     <div id="deposit_amount" class="tabcontent account-reg radius-none" style="display: none;">
@@ -322,8 +321,7 @@
                         </div>
                     </div>
 
-                    <div id="withdraw_amount" class="tabcontent white-bg-tab-panel account-reg radius-none"
-                         style="display: none;">
+                    <div id="withdraw_amount" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
                         <div class="info-form marginb-none">
                             <h4 class="withdrawal-sub bg-no-repeat symbol lang" key="withdraw">WITHDRAW</h4>
                         </div>
@@ -1327,6 +1325,89 @@
                                                 </div>
                                             </li>
                                         </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="referral_bonus" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
+                        <div class="info-form marginb-none">
+                            <h4 class="referral-sub bg-no-repeat symbol lang" key="">Referral Bonus</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-lg-8">
+                                <div class="bank-multi-list">
+                                    <div class="pad-lr-comman">
+                                        <form id="formWithdrawal">
+                                            <ul class="password-upadte pad-top-ten">
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar blk-text lang" key="">Referral Code:</p>
+                                                    </label>
+                                                    <label class="fright mendatory black-text">
+                                                        <p class="account-details-fullwith" id="">
+                                                            XXXXXXXX
+                                                        </p>
+                                                    </label>
+                                                </li>
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar blk-text lang" key="">Referral Link:</p>
+                                                    </label>
+                                                    <label class="fright mendatory black-text">
+                                                        <p class="account-details-fullwith" id="">
+                                                            XXXXXXXX
+                                                        </p>
+                                                    </label>
+                                                </li>
+
+                                                <li class="mar-btm-fifteen" style="display:none">
+                                                    <label class="fleft">
+                                                        <p id="invit-text-copy"></p>
+                                                    </label>
+                                                </li>
+
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="">
+                                                        <p class="big no-mar blk-text lang" key="">Share your favorite offers to your friends!:</p>
+                                                    </label>
+                                                    <br />
+                                                    <br />
+                                                    <label class="fright mendatory black-text">
+                                                        <div class="invite-dropdown">
+                                                            <button class="invite-dropbtn btn btn-default">INVITE FRIENDS</button>
+                                                            <div class="invite-dropdown-content">
+                                                                <a onclick="InviteViaCopyToClipboard()"><i class="fas fa-copy"></i>&nbsp;&nbsp;<span>Copy to Clipboard</span></a>
+                                                                <a onclick="InviteViaFacebook()"><i class="fab fa-facebook-square"></i>&nbsp;&nbsp;<span>Facebook</span></a>
+                                                                <a onclick="InviteViaEmail()"><i class="fas fa-envelope"></i>&nbsp;&nbsp;<span>Email</span></a>
+                                                                <a onclick="InviteViaWhatsApp()"><i class="fab fa-whatsapp"></i>&nbsp;&nbsp;<span>Whatsapp</span></a>
+                                                                <a onclick="InviteViaTelegram()"><i class="fab fa-telegram"></i>&nbsp;&nbsp;<span>Telegram</span></a>
+                                                                <a onclick="InviteViaLine()"><i class="fab fa-line"></i>&nbsp;&nbsp;<span>Line</span></a>
+                                                                <a onclick="InviteViaSkype()"><i class="fab fa-skype"></i>&nbsp;&nbsp;<span>Skype</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="info-form deposit-section pad-top-twentyfive" style="background-color: #ffffff; border-radius: 6px;">
+                                    <div class="pad-lr-comman">
+                                        <h6 class="info-notice"><span class="lang" key="important_notice">IMPORTANT NOTICE</span></h6>
+                                        <ol>
+                                            <li>
+                                                <span class="lang" key="instruction_6A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+        'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a> <span class="lang" key="instruction_6B"></span>
+                                            </li>
+                                            <li>
+                                                <span class="lang" key="instruction_7A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+        'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a><span class="lang" key="instruction_7B"></span>
+                                            </li>
+                                        </ol>
                                     </div>
                                 </div>
                             </div>

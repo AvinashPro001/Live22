@@ -603,12 +603,14 @@ label.mar-btm-no {margin-bottom: 0; }
 .profile-page .change_password:before {background-image: url(../images/password_yellow.png); }
 .profile-page .profile:before {background-image: url(../images/profile_yellow.png); }
 .profile-page .deposit:before {background-image: url(../images/deposit_yellow.png); }
+.profile-page .referral:before {background-image: url(../images/deposit_yellow.png); }
 .profile-page .withdrawal:before {background-image: url(../images/withdraw_yellow.png); }
 .profile-page .transfer:before {background-image: url(../images/transfer_yellow.png); }
 .profile-page .history:before {background-image: url(../images/history_yellow.png); }
 .profile-page .statement:before {background-image: url(../images/statement-blue.png); }
 .profile-sub:before {background-image: url(../images/profile_yellow.png); }
 .deposit-sub:before {background-image: url(../images/deposit_yellow.png); }
+.referral-sub:before {background-image: url(../images/deposit_yellow.png); }
 .withdrawal-sub:before {background-image: url(../images/withdraw_yellow.png); }
 .transfer-sub:before {background-image: url(../images/transfer_yellow.png); }
 .history-sub:before {background-image: url(../images/history_yellow.png); }
@@ -618,8 +620,12 @@ label.mar-btm-no {margin-bottom: 0; }
 .profile-page .change_password:hover:before {background-image: url(../images/password_hover.png); }
 .profile-page .profile.active:before, 
 .profile-page .profile:hover:before {background-image: url(../images/profile_hover.png); }
-.profile-page .deposit.active:before, 
-.profile-page .deposit:hover:before {background-image: url(../images/deposit_hover.png); }
+.profile-page .referral.active:before,
+.profile-page .referral:hover:before {
+    background-image: url(../images/deposit_hover.png);
+}
+.profile-page .deposit.active:before,
+.profile-page .deposit:hover:before {background-image: url(../images/deposit_hover.png);}
 .profile-page .withdrawal.active:before, 
 .profile-page .withdrawal:hover:before {background-image: url(../images/withdraw_hover.png); }
 .profile-page .transfer.active:before, 
@@ -2180,3 +2186,12 @@ div.tabcontent_health .col-sm-3.pl0.pb15 { position: relative; height: 200px; }
 .mar-right-0{margin-right:0px !important;}
 .font-size-16px{font-size:16px}
 .red-color{color:red !important;}
+#referral_bonus{height:500px;}
+.btn-50-pec-witdh{width:50%;}
+.invite-dropbtn {background-color: #04AA6D;color: white;padding: 16px;font-size: 16px;border: none;}
+.invite-dropdown {position: relative;display: inline-block;}
+.invite-dropdown-content {display: none;position: relative;background-color: #f1f1f1;min-width: 160px;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);z-index: 1;}
+    .invite-dropdown-content a {color: black;padding: 5px 5px;text-decoration: none;display: block;font-size:13px;cursor:pointer;}
+        .invite-dropdown-content a:hover {background-color: #ddd;cursor: pointer;}
+.invite-dropdown:hover .invite-dropdown-content {display: block;}
+.invite-dropdown:hover .invite-dropbtn {background-color: #3e8e41;}
