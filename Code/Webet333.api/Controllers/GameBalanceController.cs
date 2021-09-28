@@ -686,5 +686,35 @@ namespace Webet333.api.Controllers
         }
 
         #endregion GamePlay Balance
+
+        #region CQ9 Balance
+
+        [Authorize]
+        [HttpPost(ActionsConst.GameBalance.CQ9Balance)]
+        public async Task<IActionResult> CQ9Balance([FromBody] UserBalanceRequest request)
+        {
+            if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            if (GetUserRole(User) == RoleConst.Users) request.Id = GetUserId(User).ToString();
+
+            if (string.IsNullOrWhiteSpace(request.Id)) return BadResponse(ErrorConsts.InvalidModelstate);
+
+            dynamic previousBalance = 0.00;
+
+            using (var gamehelper = new GameBalanceHelpers(Connection))
+            {
+                string balance = await gamehelper.CallCQ9GameBalance(request.Username);
+                previousBalance = await gamehelper.CQ9BalanceUpdate(request.Id, balance);
+
+                return OkResponse(new
+                {
+                    balance = balance,
+                    previousBalance.PreviousBalance
+                });
+            }
+        }
+
+        #endregion CQ9 Balance
     }
 }

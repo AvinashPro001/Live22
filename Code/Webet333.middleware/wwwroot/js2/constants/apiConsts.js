@@ -4,11 +4,11 @@ let PortAPI = '9001';
 let PortWEB = '9002';
 
 switch (environmentName.toUpperCase()) {
-    case 'STAG':
-        baseUrl = 'https://api.wb3api.com/api/v1/';
-        baseUrlWithoutVersion = 'https://api.wb3api.com';
-        webUrl = 'https://www.webet333.net/';
-        mobUrl = 'https://www.webet333.net/mobile/';
+    case 'LOCAL':
+        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        webUrl = 'http://127.0.0.1:' + PortWEB;
+        mobUrl = 'http://127.0.0.1:' + PortWEB + '/mobile/';
         break;
     case 'DEBUG':
         baseUrl = 'https://uatapi.wb3api.com/api/v1/';
@@ -16,11 +16,11 @@ switch (environmentName.toUpperCase()) {
         webUrl = 'https://www.uatwb3.com/';
         mobUrl = 'https://www.uatwb3.com/mobile/';
         break;
-    case 'LOCAL':
-        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
-        webUrl = 'http://127.0.0.1:' + PortWEB;
-        mobUrl = 'http://127.0.0.1:' + PortWEB + '/mobile/';
+    case 'STAG':
+        baseUrl = 'https://api.wb3api.com/api/v1/';
+        baseUrlWithoutVersion = 'https://api.wb3api.com';
+        webUrl = 'https://www.webet333.net/';
+        mobUrl = 'https://www.webet333.net/mobile/';
         break;
 }
 
@@ -80,7 +80,6 @@ var apiEndPoints = {
     rebateHistroy: 'Game/Rebate/User/History',
     rewadHistroy: 'customer/reward/list',
     bettingSummeryHistroy: 'Game/bettingsummery',
-
 
     AllInWallet: 'Game/Balance/InWallet',
 
@@ -147,6 +146,9 @@ var apiEndPoints = {
     GamePlayRegister: 'gameplay/register',
     GamePlayLogin: 'gameplay/login',
 
+    CQ9Register: 'cq9/register',
+    CQ9Login: 'cq9/login',
+
     kiss918Balance: 'gamebalance/918kiss',
     mega888Balance: 'gamebalance/mega888',
     jokerBalance: 'gamebalance/joker',
@@ -164,6 +166,7 @@ var apiEndPoints = {
     YeeBetBalance: 'gamebalance/yeebet',
     SBOBalance: 'gamebalance/sbo',
     GamePlayBalance: 'gamebalance/gameplay',
+    CQ9Balance: 'gamebalance/cq9',
 
     userDetaisSetGameBalance: 'userdetails/set',
 

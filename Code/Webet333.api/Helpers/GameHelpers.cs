@@ -437,6 +437,23 @@ namespace Webet333.api.Helpers
 
         #endregion GamePlay Services
 
+        #region CQ9 Services
+
+        internal async Task CQ9ServicesInsert(string request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var res = await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Game.CQ9BettingDetailsInsert,
+                    new
+                    {
+                        jsonString = request
+                    });
+            }
+        }
+
+        #endregion CQ9 Services
+
         #region Kiss 918 Player Log Insert
 
         internal async Task<int> Kiss918PlayerLogInsert(List<PlayerGameLogResult> request, string Username)
@@ -1224,26 +1241,27 @@ namespace Webet333.api.Helpers
         #region User Balance Restore
 
         public async Task BalanceRestore(
-                    string userId,
-                    string Addedby,
-                    decimal mainBalance,
-                    decimal AGBalance,
-                    decimal DGBalance,
-                    decimal PlaytechBalance,
-                    decimal Kiss918Balance,
-                    decimal MaxbetBalance,
-                    decimal M8Balance,
-                    decimal JokerBalance,
-                    decimal Mega888Balance,
-                    decimal SexyBaccaratBalance,
-                    decimal SABalance,
-                    decimal PussyBalance,
-                    decimal AllbetBalance,
-                    decimal WMBalance,
-                    decimal PragmaticBalance,
-                    decimal YeeBetBalance,
-                    decimal SBOBalance,
-                    decimal GamePlayBalance
+            string userId,
+            string Addedby,
+            decimal mainBalance,
+            decimal AGBalance,
+            decimal DGBalance,
+            decimal PlaytechBalance,
+            decimal Kiss918Balance,
+            decimal MaxbetBalance,
+            decimal M8Balance,
+            decimal JokerBalance,
+            decimal Mega888Balance,
+            decimal SexyBaccaratBalance,
+            decimal SABalance,
+            decimal PussyBalance,
+            decimal AllbetBalance,
+            decimal WMBalance,
+            decimal PragmaticBalance,
+            decimal YeeBetBalance,
+            decimal SBOBalance,
+            decimal GamePlayBalance,
+            decimal CQ9Balance
             )
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -1271,7 +1289,8 @@ namespace Webet333.api.Helpers
                         PragmaticBalance,
                         YeeBetBalance,
                         SBOBalance,
-                        GamePlayBalance
+                        GamePlayBalance,
+                        CQ9Balance
                     });
             }
         }
@@ -1580,6 +1599,10 @@ namespace Webet333.api.Helpers
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_GamePlay, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
+                    case GameConst.GameName.CQ9:
+                        result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_CQ9, new { request.UserId, request.FromDate, request.ToDate });
+                        break;
+
                     default:
                         result = null;
                         break;
@@ -1715,7 +1738,6 @@ namespace Webet333.api.Helpers
             }
         }
 
-
         internal async Task GameListInsert(List<GameListUploadResponse> request, string WalletId, string AdminId)
         {
             if (request != null)
@@ -1730,7 +1752,6 @@ namespace Webet333.api.Helpers
                 }
             }
         }
-
 
         internal async Task<List<GameListSelectResponse>> GameListSelect(GameListSelectRequest request, string Role)
         {

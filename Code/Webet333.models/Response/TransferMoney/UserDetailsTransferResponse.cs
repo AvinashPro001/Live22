@@ -28,6 +28,8 @@
 
         public string GamePlayUsername { get; set; }
 
+        public string CQ9Username { get; set; }
+
         public decimal MainWalletBalance { get; set; }
 
         public string FromWalletName { get; set; }

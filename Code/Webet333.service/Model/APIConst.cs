@@ -31,5 +31,7 @@
         public const string RegisterSBO = "sbo/register/player";
 
         public const string RegisterGamePlay = "gameplay/register";
+
+        public const string RegisterCQ9 = "cq9/register";
     }
 }
