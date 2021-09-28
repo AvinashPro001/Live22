@@ -166,5 +166,6 @@
   "otp_verification_text": "Pengesahan OTP",
   "send_otp": "Hantar semula OTP",
   "referral_code": "Kod rujukan",
-  "referral_link": "Pautan Rujukan"
+  "referral_link": "Pautan Rujukan",
+  "referral": "Rujukan"
 }

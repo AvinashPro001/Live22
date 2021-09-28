@@ -95,6 +95,7 @@ var transactionEndPoints = {
     rebateHistroy: 'Game/Rebate/User/History',
     rewadHistroy: 'customer/reward/list',
     bettingSummeryHistroy: 'Game/bettingsummery',
+    referralSummeryHistroy: 'referral_bonus_given/list',
     uploadReceipt: 'payments/deposit/image',
 }
 

@@ -115,7 +115,7 @@
 
                         <button id="profile_tab" class="tablinks account-reg profile active opercity" onclick="openCity(event, 'profile_amount')"><span class="lang" key="profile">PROFILE</span></button>
                         <button id="change_password_tab" class="tablinks account-reg change_password opercity" onclick="openCity(event, 'change_passwrd_amount')"><span class="lang" key="change_password">CHANGE PASSWORD</span>                        </button>
-                        <button id="" class="tablinks account-reg referral opercity" onclick="openCity(event, 'referral_bonus')"><span class="lang" key="">Referral</span></button>
+                        <button id="referra_tab" class="tablinks account-reg referral opercity" onclick="openCity(event, 'referral_bonus')"><span class="lang" key="referral">Referral</span></button>
                     </div>
 
                     <div id="deposit_amount" class="tabcontent account-reg radius-none" style="display: none;">
@@ -992,6 +992,9 @@
                                             <li onclick="SetHistorySectionName('Reward')">
                                                 <a class="hand-curson" data-toggle="tab" href="#Rewards_Summary"><span key="menu_promotion" class="lang">Rewards</span></a>
                                             </li>
+                                            <li onclick="SetHistorySectionName('Referral')">
+                                                <a class="hand-curson" data-toggle="tab" href="#Referral_Bonus_Summary"><span key="referral" class="lang">Referral</span></a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -1177,6 +1180,28 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div id="Referral_Bonus_Summary" class="tab-pane fade in ">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_referralHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">Refer Username</th>
+                                                        <th class="white-text text-center">Turnover</th>
+                                                        <th class="white-text text-center">Refer Percentage</th>
+                                                        <th class="white-text text-center">Refer Bonus</th>
+                                                        <th class="white-text text-center">Date of Bonus</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables" id="tbl_referralHistory_pagination">
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

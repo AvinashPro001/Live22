@@ -33,6 +33,9 @@ namespace Webet333.models.Request.Account
         [Required]
         [JsonProperty(PropertyName = "otp")]
         public string OTP { get; set; }
+
+        [JsonProperty(PropertyName = "referralCode")]
+        public string ReferralCode { get; set; }
     }
 
     public class RegisterAdminRequest : BaseValidateRequest
