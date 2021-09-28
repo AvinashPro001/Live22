@@ -108,6 +108,9 @@ namespace Webet333.models.Response.Promotions
         [JsonProperty(PropertyName = "isPragmatic")]
         public bool IsPragmatic { get; set; }
 
+        [JsonProperty(PropertyName = "isPragmaticCasino")]
+        public bool IsPragmaticCasino { get; set; }
+
         [JsonProperty(PropertyName = "isSexyBaccarat")]
         public bool IsSexyBaccarat { get; set; }
 
