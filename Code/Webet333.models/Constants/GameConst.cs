@@ -102,7 +102,7 @@
 
             public const string Currency = "2";
 
-            #region Betting limit Constant
+        #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -130,7 +130,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-            #endregion Betting limit Constant
+        #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -874,7 +874,7 @@
 
             public const string Currency = "2";
 
-        #region Betting limit Constant
+            #region Betting limit Constant
 
             public const string SportMin = "SportMin";
 
@@ -902,7 +902,7 @@
 
             public const string MaxbetSportsType1Min = "MaxbetSportsType1Min";
 
-        #endregion Betting limit Constant
+            #endregion Betting limit Constant
         }
 
         public class Kiss918
@@ -1275,6 +1275,18 @@
             public const string SecretKey = "C9Z9Tdhg3ThbqUzP";
 
             public const string SecureLogin = "1xp_webet333";
+
+            public static class Casino
+            {
+                public const string GameCode = "101";
+            }
+
+            public static class DataType
+            {
+                public const string Slot = "RNG";
+
+                public const string Casino = "LC";
+            }
         }
 
         public class SMSConst
