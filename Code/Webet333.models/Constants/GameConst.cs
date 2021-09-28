@@ -157,7 +157,7 @@
 
             public const string randomUsername = "RandomUserName";
 
-            public const string PlayerType = "100";
+            public const string PlayerType = "11";
         }
 
         public class AG
