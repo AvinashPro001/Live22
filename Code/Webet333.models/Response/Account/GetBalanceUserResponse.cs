@@ -52,6 +52,8 @@ namespace Webet333.models.Response.Account
 
         public string GamePlayGamePrefix { get; set; }
 
+        public string CQ9GamePrefix { get; set; }
+
         public string MobileNo { get; set; }
 
         public string GameSupport { get; set; }

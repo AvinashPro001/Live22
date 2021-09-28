@@ -72,8 +72,6 @@
         <div class="row ">
             <div class="container col-12">
                 <div class="col-lg-12" style="display:inline-flex">
-                    <div class="col-lg-1">
-                    </div>
                     <div class="col-lg-2">
                         <div><h3>WM</h3></div>
                         <div><ui-switch [checked]="WMMainteance" (change)="WalletMaintenanceUpdate(WMId,$event)"></ui-switch></div>
@@ -93,6 +91,10 @@
                     <div class="col-lg-2">
                         <div><h3>GamePlay</h3></div>
                         <div><ui-switch [checked]="GamePlayMainteance" (change)="WalletMaintenanceUpdate(GamePlayId,$event)"></ui-switch></div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div><h3>CQ9</h3></div>
+                        <div><ui-switch [checked]="CQ9Mainteance" (change)="WalletMaintenanceUpdate(CQ9Id,$event)"></ui-switch></div>
                     </div>
                 </div>
             </div>

@@ -74,20 +74,20 @@
                                 <td>Pragmatic</td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td></td>
                                 <td id="sbo_balance"><img src="~/images/loading.gif" /></td>
                                 <td id="yeebet_balance"><img src="~/images/loading.gif" /></td>
                                 <td id="gameplay_balance"><img src="~/images/loading.gif" /></td>
+                                <td id="cq9_balance"><img src="~/images/loading.gif" /></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td></td>
                                 <td>SBO</td>
                                 <td>YeeBet</td>
                                 <td>GamePlay</td>
+                                <td>CQ9</td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -117,7 +117,6 @@
                         <button id="change_password_tab" class="tablinks account-reg change_password opercity" onclick="openCity(event, 'change_passwrd_amount')">
                             <span class="lang" key="change_password">CHANGE PASSWORD</span>
                         </button>
-
                     </div>
 
                     <div id="deposit_amount" class="tabcontent account-reg radius-none" style="display: none;">
@@ -255,7 +254,6 @@
                                                             <span class="lang" key="instruction_7A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
         'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a><span class="lang" key="instruction_7B"></span>
                                                         </li>
-
                                                     </ol>
                                                 </div>
                                             </div>
@@ -423,7 +421,6 @@
                                     </label>
                                 </div>
                             </div>
-
                         </div>
                         <div class="row ml0 mr0">
                             <div class="col-sm-9">
@@ -937,6 +934,32 @@
                                     </div>
                                 </div>
 
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>CQ9</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('CQ9 Wallet')" id="cq9-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="cq9_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>
+                                                    Daily Turnover
+                                                </li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="cq9_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -982,7 +1005,6 @@
                                     <label class="history_sec history_lab_align">Transaction Date *</label>
                                 </div>
 
-
                                 <div class="col-sm-9 pl0">
                                     <div class="history-tabs">
                                         <ul class="nav nav-tabs remove-active-class" id="history_tabs">
@@ -1001,7 +1023,6 @@
                                         </ul>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="form-group">
@@ -1211,10 +1232,8 @@
                                                     <p class="big no-mar lang" key="banking_details">Banking Details:</p>
                                                 </label>
                                                 <label class="fright bank-name mendatory" id="users_bank_details">
-
                                                 </label>
                                             </li>
-
                                         </ul>
                                         <h5 class="blk-text no-mar lang" key="profile_update_personal_details">UPDATE PERSONAL DETAILS</h5>
                                         <ul class="password-upadte blk-text pad-btm-ten pad-top-ten">
@@ -1298,7 +1317,6 @@
                                                 <label class="fright lock">
                                                     <input type="password" class="reg-form" placeholder="Confirm Password" id="txt_confirmPassword" onkeyup="CheckPasswordMatch(true)">
                                                     <label style="color:#ff0000;font-weight:bold" class="registrationFormAlert" id="divCheckPasswordMatch"> </label>
-
                                                 </label>
                                             </li>
                                             <li class="mar-btm-fifteen">
@@ -1314,14 +1332,11 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 
 <div class="modal fade" id="withdraw_availabe_amount_list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

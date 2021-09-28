@@ -8,6 +8,7 @@ $(document).ready(function () {
 });
 //#endregion
 
+
 //#region Users Bank Details
 async function UserBankDetails() {
     var model = {

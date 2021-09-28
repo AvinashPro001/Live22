@@ -57,7 +57,7 @@ function SetPleaseLoginText(InputType = false) {
 
 //#endregion
 
-//#region Set Username Password in Download Page 
+//#region Set Username Password in Download Page
 
 function SetUsernamePassword(InputType = false) {
     if (GetLocalStorage("currentUser") == null) {
@@ -105,11 +105,9 @@ function SetUsernamePassword(InputType = false) {
 //#region "ASYNC"  Call Download Link API and Set Barcode
 
 async function CallDownloadLinkAPI() {
-
     var data = JSON.parse(Decryption(GetSessionStorage("siteData")))
 
     if (data.DownloadPageData == null || data.DownloadPageData == undefined) {
-
         var res = await GetMethod(settingEndPoints.downloadLinkList);
 
         if (res.status == 200) {

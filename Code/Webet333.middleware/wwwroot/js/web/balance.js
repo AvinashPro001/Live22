@@ -2,7 +2,7 @@
 var walletIds = [
     "joker_balance", "playtech_balance", "kiss918_balance", "ag_balance", "m8_balance", "mega888_balance", "maxbet_balance",
     "dg_balance", "sexy_baccarat_balance", "sa_balance", "pussy888_balance", "allbet_balance", "wm_balance", "pragmatic_balance",
-    "yeebet_balance", "sbo_balance", 'gameplay_balance'
+    "yeebet_balance", "sbo_balance", 'gameplay_balance', 'cq9_balance'
 ];
 
 let UsersBalance = {
@@ -23,7 +23,8 @@ let UsersBalance = {
     MaxBetBalance: null,
     YeeBetBalance: null,
     SboBalance: null,
-    GamePlayBalance: null
+    GamePlayBalance: null,
+    CQ9Balance: null
 }
 
 let GameUsernames = {
@@ -44,7 +45,8 @@ let GameUsernames = {
     MaxBetUsername: null,
     YeeBetUsername: null,
     SboUsername: null,
-    GamePlayUsername: null
+    GamePlayUsername: null,
+    CQ9Username: null
 }
 
 var AGTrigger = false,
@@ -57,7 +59,8 @@ var AGTrigger = false,
     WMTrigger = false,
     M8Trigger = false,
     YeeBetTrigger = false,
-    GamePlayTrigger = false;
+    GamePlayTrigger = false,
+    CQ9Trigger = false;
 
 //#endregion Declare Vairable
 
@@ -89,6 +92,7 @@ $(window).on('load', function () {
                 if (UsersBalance.YeeBetBalance == null) YeeBetWallet(GameUsernames.YeeBetUsername);
                 if (UsersBalance.SboBalance == null) SboWallet(GameUsernames.SboUsername);
                 if (UsersBalance.GamePlayBalance == null) GamePlayWallet(GameUsernames.GamePlayUsername);
+                if (UsersBalance.CQ9Balance == null) CQ9Wallet(GameUsernames.CQ9Username);
             }, 1000);
         }, 15000);
     }
@@ -115,6 +119,7 @@ function LoadAllBalance() {
     if (GameUsernames.YeeBetUsername != null) YeeBetWallet(GameUsernames.YeeBetUsername);
     if (GameUsernames.SboUsername != null) SboWallet(GameUsernames.SboUsername);
     if (GameUsernames.GamePlayUsername != null) GamePlayWallet(GameUsernames.GamePlayUsername);
+    if (GameUsernames.CQ9Username != null) CQ9Wallet(GameUsernames.CQ9Username);
 }
 
 async function LoadAllBalanceAsync() {
@@ -136,6 +141,7 @@ async function LoadAllBalanceAsync() {
     if (GameUsernames.YeeBetUsername != null) await YeeBetWallet(GameUsernames.YeeBetUsername, false);
     if (GameUsernames.SboUsername != null) await SboWallet(GameUsernames.SboUsername);
     if (GameUsernames.GamePlayUsername != null) await GamePlayWallet(GameUsernames.GamePlayUsername);
+    if (GameUsernames.CQ9Username != null) await CQ9Wallet(GameUsernames.CQ9Username);
 }
 
 async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
@@ -158,6 +164,7 @@ async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
         case "YeeBet Wallet": if (GameUsernames.YeeBetUsername != null) await YeeBetWallet(GameUsernames.YeeBetUsername); break;
         case "SBO Wallet": if (GameUsernames.SboUsername != null) await SboWallet(GameUsernames.SboUsername); break;
         case "GamePlay Wallet": if (GameUsernames.GamePlayUsername != null) await GamePlayWallet(GameUsernames.GamePlayUsername); break;
+        case "CQ9 Wallet": if (GameUsernames.CQ9Username != null) await CQ9Wallet(GameUsernames.CQ9Username); break;
     }
 }
 
@@ -182,6 +189,7 @@ async function ReturnBalanceBasedOnWalletName(WalletName) {
         case "YeeBet Wallet": balance = UsersBalance.YeeBetBalance; break;
         case "SBO Wallet": balance = UsersBalance.SboBalance; break;
         case "GamePlay Wallet": balance = UsersBalance.GamePlayBalance; break;
+        case 'CQ9 Wallet': balance = UsersBalance.CQ9Balance; break;
     }
 
     if (balance == "N/A") balance = "0.00";
@@ -206,9 +214,9 @@ async function SetUsername() {
     GameUsernames.SAUsername = GameUsername.saUsername;
     GameUsernames.WMUsername = GameUsername.wmUsername;
     GameUsernames.SexyBaccaratUsername = GameUsername.sexyUsername;
-    GameUsernames.PlaytechUsername = (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
+    GameUsernames.PlaytechUsername = GameUsername.playtechUsername == null ? null : (GameUsername.playtechUsername.replace("#", "")).toUpperCase();
     GameUsernames.PragmaticUsername = GameUsername.pragmaticUsername;
-    GameUsernames.JokerUsername = GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, "");
+    GameUsernames.JokerUsername = GameUsername.jokerUsername == null ? null : GameUsername.jokerUsername.replace(/[^0-9a-zA-Z]+/g, "");
     GameUsernames.Mega888Username = GameUsername.mega888Username;
     GameUsernames.Pussy888Username = GameUsername.pussy888Username;
     GameUsernames.Kiss918Username = GameUsername.userName918;
@@ -217,6 +225,7 @@ async function SetUsername() {
     GameUsernames.YeeBetUsername = GameUsername.yeebetUsername;
     GameUsernames.SboUsername = GameUsername.sboUsername;
     GameUsernames.GamePlayUsername = GameUsername.gameplayUsername;
+    GameUsernames.CQ9Username = GameUsername.cq9Username;
 }
 
 //#endregion
@@ -260,6 +269,7 @@ function SetLoadingImageBaseOnWalletName(WalletName) {
         case "YeeBet Wallet": SetLoadingImagesInBalance("yeebet_balance"); SetFetchingWordInBalance("yeebet_balance"); break;
         case "SBO Wallet": SetLoadingImagesInBalance("sbo_balance"); SetFetchingWordInBalance("sbo_balance"); break;
         case "GamePlay Wallet": SetLoadingImagesInBalance("gameplay_balance"); SetFetchingWordInBalance("gameplay_balance"); break;
+        case 'CQ9 Wallet': SetLoadingImagesInBalance('cq9_balance'); SetFetchingWordInBalance('cq9_balance'); break;
     }
 }
 
@@ -294,6 +304,7 @@ async function RestoreBalance() {
         YeeBetWallet: CheckNAorNot(UsersBalance.YeeBetBalance),
         sbowallet: CheckNAorNot(UsersBalance.SboBalance),
         gameplaywallet: CheckNAorNot(UsersBalance.GamePlayBalance),
+        cq9wallet: CheckNAorNot(UsersBalance.CQ9Balance),
         id: null
     }
     await PostMethod(transactionEndPoints.restore, restoreModel);
@@ -339,6 +350,7 @@ async function GetDailyTurnover() {
         SetAllValueInElement("yeebet_turnover", FormatBalance(res.response.data.response.yeeBetTurover))
         SetAllValueInElement("sbo_turnover", FormatBalance(res.response.data.response.sboTurover))
         SetAllValueInElement('gameplay_turnover', FormatBalance(res.response.data.response.gamePlayTurover))
+        SetAllValueInElement('cq9_turnover', FormatBalance(res.response.data.response.cQ9Turover))
     }
     $("#refresh-turnover").removeClass("rotate");
 }
@@ -473,7 +485,6 @@ async function AGWallet(Username, IsDivValueSet = true) {
 
         if (UsersBalance.AGBalance == 0 && res.response.data.previousBalance > 0 && AGTrigger == false)
             StartTimerGameBalanceAPI("AG");
-
     }
     catch (e) {
         UsersBalance.AGBalance = "N/A";
@@ -578,7 +589,6 @@ async function PlaytechWallet(Username, IsDivValueSet = true) {
 
         if (UsersBalance.PlaytechBalance == 0 && res.response.data.previousBalance > 0 && PlaytechTrigger == false)
             StartTimerGameBalanceAPI("Playtech");
-
     }
     catch (e) {
         UsersBalance.PlaytechBalance = "N/A";
@@ -755,7 +765,6 @@ async function SboWallet(Username, IsDivValueSet = true) {
         }
         if (IsDivValueSet)
             SetBalanceOnAllPlace("sbo_balance", UsersBalance.SboBalance);
-
     }
     catch (e) {
         UsersBalance.SboBalance = "N/A";
@@ -772,11 +781,25 @@ async function GamePlayWallet(Username, IsDivValueSet = true) {
         if (res.status == 200) UsersBalance.GamePlayBalance = ConvertBalanceIntoCommasValue(res.response.data.balance);
         else UsersBalance.GamePlayBalance = "N/A";
         if (IsDivValueSet) SetBalanceOnAllPlace("gameplay_balance", UsersBalance.GamePlayBalance);
-
     }
     catch (e) {
         UsersBalance.GamePlayBalance = "N/A";
         if (IsDivValueSet) SetBalanceOnAllPlace("gameplay_balance", UsersBalance.GamePlayBalance);
+    }
+}
+
+async function CQ9Wallet(Username, IsDivValueSet = true) {
+    let model = { username: Username }, res;
+    try {
+        res = await PostMethod(gameBalanceEndPoints.cq9Balance, model);
+
+        if (res.status == 200) UsersBalance.CQ9Balance = ConvertBalanceIntoCommasValue(res.response.data.balance);
+        else UsersBalance.CQ9Balance = "N/A";
+        if (IsDivValueSet) SetBalanceOnAllPlace("cq9_balance", UsersBalance.CQ9Balance);
+    }
+    catch (e) {
+        UsersBalance.CQ9Balance = "N/A";
+        if (IsDivValueSet) SetBalanceOnAllPlace("cq9_balance", UsersBalance.CQ9Balance);
     }
 }
 
@@ -827,6 +850,10 @@ function StartTimerGameBalanceAPI(GameName) {
         case 'GamePlay':
             let GamePlayTimerId = setInterval(() => { GamePlayWallet(GameUsernames.GamePlayUsername); GamePlayTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(GamePlayTimerId); GamePlayTrigger = false; }, 301000);
+            break;
+        case 'CQ9':
+            let CQ9TimerId = setInterval(() => { CQ9Wallet(GameUsernames.CQ9Username); CQ9Trigger = true; }, 30000);
+            setTimeout(() => { clearInterval(CQ9TimerId); CQ9Trigger = false; }, 301000);
             break;
     }
 }

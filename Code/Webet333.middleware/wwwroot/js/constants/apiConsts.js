@@ -3,17 +3,17 @@ let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '9001';
 
 switch (environmentName.toUpperCase()) {
-    case 'STAG':
-        baseUrl = 'https://api.wb3api.com/api/v1/';
-        baseUrlWithoutVersion = 'https://api.wb3api.com';
+    case 'LOCAL':
+        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
         break;
     case 'DEBUG':
         baseUrl = 'https://uatapi.wb3api.com/api/v1/';
         baseUrlWithoutVersion = 'https://uatapi.wb3api.com';
         break;
-    case 'LOCAL':
-        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+    case 'STAG':
+        baseUrl = 'https://api.wb3api.com/api/v1/';
+        baseUrlWithoutVersion = 'https://api.wb3api.com';
         break;
 }
 
@@ -78,7 +78,8 @@ var gameBalanceEndPoints = {
     pragmaticBalance: 'gamebalance/pragmatic',
     yeebetBalance: 'gamebalance/yeebet',
     sboBalance: 'gamebalance/sbo',
-    gameplayBalance: 'gamebalance/gamePlay'
+    gameplayBalance: 'gamebalance/gamePlay',
+    cq9Balance: 'gamebalance/cq9'
 };
 
 var transactionEndPoints = {
@@ -114,7 +115,8 @@ var gameRegisterEndPoints = {
     dgRegister: 'dg/register',
     yeebetRegister: 'yeebet/register',
     sboRegister: 'sbo/register/player',
-    gameplayRegister: 'gameplay/register'
+    gameplayRegister: 'gameplay/register',
+    cq9Register: 'cq9/register'
 }
 
 var gameLoginEndPoints = {
@@ -129,7 +131,8 @@ var gameLoginEndPoints = {
     m8Login: 'm8/login',
     yeebetLogin: 'yeebet/login',
     sboLogin: 'sbo/login',
-    gameplayLogin: 'gameplay/login'
+    gameplayLogin: 'gameplay/login',
+    cq9Login: 'cq9/login'
 }
 
 var gameSettingEndPoints = {
