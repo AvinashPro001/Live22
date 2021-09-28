@@ -26,7 +26,7 @@ function CallGameLoginAPI(WalletName, IsSlots, CheckLogin = true) {
         case "WM Wallet": OpenWMGame(); break;
         case "PlayTech Wallet": OpenPlaytechGame(IsSlots); break;
         case "Sexy Wallet": OpenSexyBaccaratGame(); break;
-        case "Pragmatic Wallet": OpenPragmaticGame(); break;
+        case "Pragmatic Wallet": OpenPragmaticGame(IsSlots); break;
         case "AllBet Wallet": OpenAllBetGame(); break;
         case "M8 Wallet": OpenM8Game(); break;
         case "MaxBet Wallet": OpenMaxbetGame(); break;
@@ -409,6 +409,29 @@ async function LoginGameplayGame(GameCode) {
     SetLocalStorage('gameURL', res.response.data.game_url);
 }
 
+async function OpenPragmaticGame(IsSlots) {
+    let model, res;
+
+    if (GetLocalStorage("currentUser") != null) {
+        PragmaticBrokenStatusInterval();
+
+        let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+        if (resSelectUser.Pragmatic !== true) {
+            model = {}
+            await PostMethod(gameRegisterEndPoints.pragmaticRegister, model);
+        }
+    }
+
+    if (IsSlots) return window.open("../Web/slots#pragmatic-game");
+
+    window.open("../Web/game");
+    model = { isMobile: false };
+    res = await PostMethod(gameLoginEndPoints.pragmaticLogin, model);
+    if (res.status == 200 &&
+        res.response.data.error == '0')
+        SetLocalStorage("gameURL", res.response.data.gameURL);
+}
+
 async function OpenJDBGame() {
     let model = {}, resSelectUser;
 
@@ -430,19 +453,6 @@ async function LoginJDBGame() {
     model = { isMobile: false }
     res = await PostMethod(gameLoginEndPoints.jdbLogin, model);
     SetLocalStorage('gameURL', res.response.data.url);
-}
-
-async function OpenPragmaticGame() {
-    window.open("../Web/slots#pragmatic-game");
-    if (GetLocalStorage("currentUser") != null) {
-        PragmaticBrokenStatusInterval();
-        let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
-        if (resSelectUser.Pragmatic !== true) {
-            let userRegisterModel = {
-            };
-            await PostMethod(gameRegisterEndPoints.pragmaticRegister, userRegisterModel);
-        }
-    }
 }
 
 async function OpenPlaytechGame(IsSlots) {

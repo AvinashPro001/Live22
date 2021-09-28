@@ -44,6 +44,7 @@ namespace Webet333.models.Mapping.Promotions
                 IsPlaytech = x.IsPlaytech,
                 IsPlaytechSlot = x.IsPlaytechSlot,
                 IsPragmatic = x.IsPragmatic,
+                IsPragmaticCasino = x.IsPragmaticCasino,
                 IsSexyBaccarat = x.IsSexyBaccarat,
                 IsWM = x.IsWM,
                 IsYeeBet = x.IsYeeBet,

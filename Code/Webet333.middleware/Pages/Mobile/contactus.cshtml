@@ -1,6 +1,9 @@
 ﻿@page
-@{ ViewData["Title"] = "Contact Us";
-    Layout = "";}
+@{
+    ViewData["Title"] = "Contact Us";
+    Layout = "";
+}
+
 <div id="comContent"></div>
 <div id="mComContent">
 
@@ -305,43 +308,29 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".contact-us-btn,.contact-us-btn-footer").click(function () {
-            $("#chatting").toggle();
-        });
-        $(".contact-user").mouseover(function () {
-            $("#chatting").toggle();
-        });
+        $(".contact-us-btn,.contact-us-btn-footer").click(function () { $("#chatting").toggle(); });
+        $(".contact-user").mouseover(function () { $("#chatting").toggle(); });
     });
 </script>
-
 <!-- Slider Section End -->
 <!-- Modal For Video -->
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".open-modal").click();
-    });
+    $(document).ready(function () { $(".open-modal").click(); });
     jQuery(".scroll-down-visible").hide();
     jQuery("#more-arrow").click(function () {
         jQuery(".scroll-down-visible").toggleClass("show");
         jQuery("#more-arrow").toggleClass("rotate");
     });
 </script>
-
 <!-- //Modal For Video -->
 <script type="text/javascript">
     $(document).ready(function () {
         $(".navbar-toggle,.canvas-overlay").click(function () {
-            if (!$("html").hasClass('intro')) {
-                $("html").addClass("intro");
-            }
-            else {
-                $("html").removeClass("intro");
-            }
+            if (!$("html").hasClass('intro')) $("html").addClass("intro");
+            else $("html").removeClass("intro");
         });
         $(".canvas-overlay").click(function () {
-            if ($(".navbar-collapse").hasClass('in')) {
-                $(".navbar-collapse").removeClass("in");
-            }
+            if ($(".navbar-collapse").hasClass('in')) $(".navbar-collapse").removeClass("in");
         });
     });
 </script>
@@ -349,15 +338,10 @@
 <script>
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
-        if (scroll >= 1) {
-            $("header").addClass("sticky-header");
-        }
-        else {
-            $("header").removeClass("sticky-header");
-        }
+        if (scroll >= 1) $("header").addClass("sticky-header");
+        else $("header").removeClass("sticky-header");
     });
 </script>
-
 <script>
     $(document).ready(function () {
         if (localStorage.getItem('currentUser') == null) {
@@ -365,9 +349,7 @@
             document.getElementById('accountPage').style.display = "none";
             document.getElementById('downloadpage').style.display = "none";
         }
-        else {
-            document.getElementById('login').style.display = "none";
-        }
+        else document.getElementById('login').style.display = "none";
     });
 
     function language(value) {
@@ -382,14 +364,9 @@
         document.getElementById("malaybtn").style.background = "";
         document.getElementById("chinesebtn").style.background = "";
 
-        if (GetLocalStorage('language') == "en-US")
-            document.getElementById("englishbtn").style.background = "orange";
-
-        if (GetLocalStorage('language') == "ms-MY")
-            document.getElementById("malaybtn").style.background = "orange";
-
-        if (GetLocalStorage('language') == "zh-Hans")
-            document.getElementById("chinesebtn").style.background = "orange";
+        if (GetLocalStorage('language') == "en-US") document.getElementById("englishbtn").style.background = "orange";
+        if (GetLocalStorage('language') == "ms-MY") document.getElementById("malaybtn").style.background = "orange";
+        if (GetLocalStorage('language') == "zh-Hans") document.getElementById("chinesebtn").style.background = "orange";
 
         $.ajax({
             url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
@@ -397,23 +374,16 @@
             async: false,
             success: function (lang) {
                 $('.lang').each(function (index, element) {
-                    if (localStorage.getItem("language") === "ms-MY") {
-                        $('body').addClass('malay-font');
-                    }
+                    if (localStorage.getItem("language") === "ms-MY") $('body').addClass('malay-font');
                     $(this).text(lang[$(this).attr('key')]);
                 });
                 $("[data-translate]").each(function () {
-                    if ($(this).is("input")) {
-                        $(this).attr('placeholder', lang[$(this).data("translate")]);
-                    } else {
-                        $(this).text(lang[$(this).data("translate")]);
-                    }
+                    if ($(this).is("input")) $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    else $(this).text(lang[$(this).data("translate")]);
                 });
             }
         });
     }
 
-    setTimeout(() => {
-        get();
-    }, 200);
+    setTimeout(() => { get(); }, 200);
 </script>

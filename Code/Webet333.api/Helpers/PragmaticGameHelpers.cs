@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -90,7 +91,8 @@ namespace Webet333.api.Helpers
 
         public static async Task<dynamic> LoginCallAPI(string Username, string langCode, string platform, string GameId = "vs7776secrets")
         {
-            string lobbyURL, Cashier;
+            string lobbyURL, Cashier, Parameter;
+
             if (platform == "MOBILE")
             {
                 lobbyURL = GameConst.BaseUrl + "Mobile/PragmaticGame";
@@ -102,13 +104,27 @@ namespace Webet333.api.Helpers
                 Cashier = GameConst.BaseUrl + "Account/Profile";
             }
 
-            var Parameter = $"cashier={Cashier}" +
-                $"&externalPlayerId={Username}" +
-                $"&gameId={GameId}" +
-                $"&language={langCode}" +
-                $"&lobbyURL={lobbyURL}" +
-                $"&platform={platform}" +
-                $"&secureLogin={GameConst.Pragmatic.SecureLogin}";
+            if (GameId == GameConst.Pragmatic.Casino.GameCode)  //  It's for only casino game.
+            {
+                Parameter = $"cashierURL={Cashier}" +
+                    $"&externalPlayerId={Username}" +
+                    $"&gameId={GameId}" +
+                    $"&language={langCode}" +
+                    $"&lobbyURL={lobbyURL}" +
+                    $"&platform={platform}" +
+                    $"&secureLogin={GameConst.Pragmatic.SecureLogin}";
+            }
+            else
+            {
+                Parameter = $"cashier={Cashier}" +
+                    $"&externalPlayerId={Username}" +
+                    $"&gameId={GameId}" +
+                    $"&language={langCode}" +
+                    $"&lobbyURL={lobbyURL}" +
+                    $"&platform={platform}" +
+                    $"&secureLogin={GameConst.Pragmatic.SecureLogin}";
+            }
+
             var Url = $"{GameConst.Pragmatic.Url}{GameConst.Pragmatic.Login}";
             return JsonConvert.DeserializeObject<dynamic>(await CallAPI(Url, Parameter));
         }
@@ -151,10 +167,66 @@ namespace Webet333.api.Helpers
 
         #region Call Game Betting Details Third Party API
 
+        //public static async Task<List<PragmaticBettingDetailsResponse>> BettingDetails(long timestamp)
+        //{
+        //    var Url = $"{GameConst.Pragmatic.BettingDetailsUrl}{GameConst.Pragmatic.BettingDetails}?" +
+        //        $"login={GameConst.Pragmatic.SecureLogin}&" +
+        //        $"password={GameConst.Pragmatic.SecretKey}&" +
+        //        $"timepoint={timestamp}&" +
+        //        $"dataType={GameConst.Pragmatic.SecretKey}":
+        //    var result = await GameHelpers.CallGetMethodThirdPartyApi(Url);
+        //    var data = result.Split("\n");
+        //    var columnsName = data[1].Split(",");
+
+        //    DataTable csvData = new DataTable();
+
+        //    foreach (string column in columnsName)
+        //    {
+        //        DataColumn datecolumn = new DataColumn(column);
+        //        datecolumn.AllowDBNull = true;
+        //        csvData.Columns.Add(datecolumn);
+        //    }
+
+        //    if (data.Length > 3)
+        //        for (int i = 2; i < data.Length - 1; i++)
+        //            csvData.Rows.Add(data[i].Split(","));
+
+        //    var tableDataAsString = JsonConvert.SerializeObject(csvData);
+        //    return JsonConvert.DeserializeObject<List<PragmaticBettingDetailsResponse>>(tableDataAsString);
+        //}
+
         public static async Task<List<PragmaticBettingDetailsResponse>> BettingDetails(long timestamp)
         {
-            var Url = $"{GameConst.Pragmatic.BettingDetailsUrl}{GameConst.Pragmatic.BettingDetails}?login={GameConst.Pragmatic.SecureLogin}&password={GameConst.Pragmatic.SecretKey}&timepoint={timestamp}";
-            var result = await GameHelpers.CallGetMethodThirdPartyApi(Url);
+            List<PragmaticBettingDetailsResponse> result;
+            string URL;
+
+            URL = $"{GameConst.Pragmatic.BettingDetailsUrl}{GameConst.Pragmatic.BettingDetails}?" +
+                $"login={GameConst.Pragmatic.SecureLogin}&" +
+                $"password={GameConst.Pragmatic.SecretKey}&" +
+                $"timepoint={timestamp}&" +
+                $"dataType={GameConst.Pragmatic.DataType.Slot}";
+
+            List<PragmaticBettingDetailsResponse> slotBettingDetails = await GetBettingDetails(URL);
+            if (slotBettingDetails.Any()) slotBettingDetails.ForEach(x => x.gameType = "slot");
+
+            URL = $"{GameConst.Pragmatic.BettingDetailsUrl}{GameConst.Pragmatic.BettingDetails}?" +
+                $"login={GameConst.Pragmatic.SecureLogin}&" +
+                $"password={GameConst.Pragmatic.SecretKey}&" +
+                $"timepoint={timestamp}&" +
+                $"dataType={GameConst.Pragmatic.DataType.Casino}";
+
+            List<PragmaticBettingDetailsResponse> casinoBettingDetails = await GetBettingDetails(URL);
+            if (casinoBettingDetails.Any()) casinoBettingDetails.ForEach(x => x.gameType = "casino");
+
+            result = slotBettingDetails;
+            result.AddRange(casinoBettingDetails);
+
+            return result;
+        }
+
+        private static async Task<List<PragmaticBettingDetailsResponse>> GetBettingDetails(string URL)
+        {
+            var result = await GameHelpers.CallGetMethodThirdPartyApi(URL);
             var data = result.Split("\n");
             var columnsName = data[1].Split(",");
 

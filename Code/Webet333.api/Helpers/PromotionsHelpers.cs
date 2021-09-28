@@ -118,6 +118,7 @@ namespace Webet333.api.Helpers
                         IsSBO = request.IsSBO,
                         IsGamePlayCasino = request.IsGamePlayCasino,
                         IsGamePlaySlot = request.IsGamePlaySlot,
+                        IsPragmaticCasino = request.IsPragmaticCasino,
                         IsCQ9Slot = request.IsCQ9Slot,
                         IsJDBSlot = request.IsJDBSlot,
 
@@ -197,6 +198,7 @@ namespace Webet333.api.Helpers
                         IsSBO = request.IsSBO,
                         IsGamePlayCasino = request.IsGamePlayCasino,
                         IsGamePlaySlot = request.IsGamePlaySlot,
+                        IsPragmaticCasino = request.IsPragmaticCasino,
                         IsCQ9Slot = request.IsCQ9Slot,
                         IsJDBSlot = request.IsJDBSlot,
 

@@ -511,6 +511,18 @@
             public const string SecretKey = "testKey";
 
             public const string SecureLogin = "sc_webet33";
+
+            public static class Casino
+            {
+                public const string GameCode = "101";
+            }
+
+            public static class DataType
+            {
+                public const string Slot = "RNG";
+
+                public const string Casino = "LC";
+            }
         }
 
         public class SMSConst
@@ -1350,6 +1362,18 @@
             public const string SecretKey = "C9Z9Tdhg3ThbqUzP";
 
             public const string SecureLogin = "1xp_webet333";
+
+            public static class Casino
+            {
+                public const string GameCode = "101";
+            }
+
+            public static class DataType
+            {
+                public const string Slot = "RNG";
+
+                public const string Casino = "LC";
+            }
         }
 
         public class SMSConst
