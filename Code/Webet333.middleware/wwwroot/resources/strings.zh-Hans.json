@@ -341,5 +341,8 @@
   "new_pass_req": "请输入新密码。",
   "special_char_not_allowed": "用户名中不允许使用特殊字符。",
   "username_exists": "此用户名已存在。",
-  "username_avialble": "用户名可用。"
+  "username_avialble": "用户名可用。",
+  "referral_code": "推荐代码",
+  "referral_link": "推荐链接",
+  "referral": "转介"
 }
