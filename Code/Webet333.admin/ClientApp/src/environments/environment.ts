@@ -1,6 +1,6 @@
 let baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
-let PortAPI = '9001';
+let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let PortAPI = '8081';
 
 switch (environmentName.toUpperCase()) {
     case 'DEBUG':
@@ -386,7 +386,8 @@ export const customer = {
 
     getVIPLevelReport: environment.apiUrl + 'VIPLevel/report/select',
 
-    freeCreditReport: environment.apiUrl + 'freecreditevent/report'
+    freeCreditReport: environment.apiUrl + 'freecreditevent/report',
+    referralBonusReport: environment.apiUrl + 'referral_bonus_given/list'
 }
 
 export const playtech = {
