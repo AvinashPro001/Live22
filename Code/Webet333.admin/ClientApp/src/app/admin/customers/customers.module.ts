@@ -180,7 +180,7 @@ const routes: Routes = [
     { path: 'homepage-banner-edit', component: HomepagebannerEditComponent },
     { path: 'slots-game-list', component: SlotGameListComponent },
     { path: 'vip-level-report', component: VipLevelReportComponent },
-    { path: 'free-credit-report', component: FreeCreditReportComponent }
+    { path: 'free-credit-report', component: FreeCreditReportComponent },
     { path: 'referral-code-report', component: ReferralCodeReportComponent }
 ];
 
