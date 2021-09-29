@@ -1,9 +1,15 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
-let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
-let PortAPI = '8081';
+let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let PortAPI = '9001';
 let PortWEB = '9002';
 
 switch (environmentName.toUpperCase()) {
+    case 'LOCAL':
+        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        webUrl = 'http://127.0.0.1:' + PortWEB;
+        mobUrl = 'http://127.0.0.1:' + PortWEB + '/mobile/';
+        break;
     case 'DEBUG':
         baseUrl = 'https://uatapi.wb3api.com/api/v1/';
         baseUrlWithoutVersion = 'https://uatapi.wb3api.com';
@@ -15,12 +21,6 @@ switch (environmentName.toUpperCase()) {
         baseUrlWithoutVersion = 'https://api.wb3api.com';
         webUrl = 'https://www.webet333.net/';
         mobUrl = 'https://www.webet333.net/mobile/';
-        break;
-    case 'LOCAL':
-        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
-        webUrl = 'http://127.0.0.1:' + PortWEB;
-        mobUrl = 'http://127.0.0.1:' + PortWEB + '/mobile/';
         break;
 }
 

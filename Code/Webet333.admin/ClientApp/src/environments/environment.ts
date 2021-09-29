@@ -3,6 +3,10 @@ let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '8081';
 
 switch (environmentName.toUpperCase()) {
+    case 'LOCAL':
+        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        break;
     case 'DEBUG':
         baseUrl = 'https://uatapi.wb3api.com/api/v1/';
         baseUrlWithoutVersion = 'https://uatapi.wb3api.com';
@@ -10,10 +14,6 @@ switch (environmentName.toUpperCase()) {
     case 'STAG':
         baseUrl = 'https://api.wb3api.com/api/v1/';
         baseUrlWithoutVersion = 'https://api.wb3api.com';
-        break;
-    case 'LOCAL':
-        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
         break;
 }
 

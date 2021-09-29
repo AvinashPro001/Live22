@@ -1,8 +1,7 @@
 ﻿@page
 @{ Layout = null; }
 
-<div class="vip-main-banner">
-</div>
+<div class="vip-main-banner"></div>
 <div class="benefits_refeeral_sec">
     <div class="containerr">
         <div class="benefits_referal_tab_sec">
@@ -106,10 +105,7 @@
                             <p>(1) By depositing the required amount</p>
                             <p>(2) By special invite</p>
                             <h3>How can the deposit amount be calculated?</h3>
-                            <p>
-                                Deposit and turnover requirements will be based on the accumulated amount from the first day register.
-                                and our deposit amount is never expired.
-                            </p>
+                            <p>Deposit and turnover requirements will be based on the accumulated amount from the first day register. and our deposit amount is never expired.</p>
                             <h3>When my VIP level will upgraded when i archieve deposit amount?</h3>
                             <p>Every 1st of month and 15th of month will automatically upgrade your VIP level.</p>
                             <h3>My VIP level will downgrade after a period?</h3>
@@ -531,9 +527,7 @@
             $(".progress-bar").css("width", percent + "%").attr("aria-valuenow", percent);
             $(".progress-completed").text(percent + "%");
             $("span").each(function () {
-                if ($(this).hasClass("activestep")) {
-                    $(this).removeClass("activestep");
-                }
+                if ($(this).hasClass("activestep")) $(this).removeClass("activestep");
             });
             $("#" + VIPlevel.data.Name.toLocaleLowerCase() + '-span').addClass("activestep");
         }
@@ -548,9 +542,7 @@
             $(".progress-bar").css("width", percent + "%").attr("aria-valuenow", percent);
             $(".progress-completed").text(percent + "%");
             $("span").each(function () {
-                if ($(this).hasClass("activestep")) {
-                    $(this).removeClass("activestep");
-                }
+                if ($(this).hasClass("activestep")) $(this).removeClass("activestep");
             });
             $("#normal-span").addClass("activestep");
         }
