@@ -2002,3 +2002,7 @@ p.bonus_content a {
 }
 
 .w-100{width:100% !important}
+
+.referral-img{width:80px;}
+.referral-container{position: fixed;bottom: 80px;left: 10px;z-index: 1000;}
+.referral-close{position:fixed;bottom:152px;left:100px;}
