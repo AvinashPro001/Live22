@@ -151,7 +151,7 @@ async function ProfileData() {
             $('#auto_transfer_checkbox').prop('checked', res.autoTransfer ? "checked" : "");
             SetVIPageProgressBar(res.vipLevelName, res.totalDepositAmount);
             SetReferralCode(res.referralCode);
-            if (res.vipLevelName !== "Bronze") {
+            if (res.vipLevelName.toLowerCase() == "normal") {
                 $("#referra_tab").css("display", "none");
                 $("#referral_bonus").css("display", "none");
             }
@@ -378,7 +378,7 @@ async function DoRegister() {
         confirmPassword: confirmPassword,
         referenceKeyword: GetCookie("ref"),
         otp: otp,
-        referralCode: $('#txt_refCode').val()
+        referralCode: $('#txt_refCode').val() == "" ? null : $('#txt_refCode').val()
     };
     debugger
     LoaderShow();

@@ -358,13 +358,13 @@
             document.getElementById('logout').style.display = "none";
             document.getElementById('accountPage').style.display = "none";
             document.getElementById('downloadpage').style.display = "none";
-             document.getElementById('ref_code').style.display = "none";
+            document.getElementById('ref_code').style.display = "none";
         }
         else {
             document.getElementById('login').style.display = "none";
-            var VIPlevel = JSON.parse(dec(sessionStorage.getItem("UserVipDetails")));
-            if(VIPlevel.data.Name!=="Bronze")
-            document.getElementById('ref_code').style.display = "none";
+                    var VIPlevel = JSON.parse(dec(sessionStorage.getItem("UserVipDetails")));
+        if (VIPlevel.data.Name.toLowerCase() == "normal")
+        document.getElementById('ref_code').style.display = "none";
         }
     });
 

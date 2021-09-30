@@ -246,7 +246,7 @@
          SetReferralCode();
          if (localStorage.getItem("currentUser") !== null) {
             var VIPlevel = JSON.parse(dec(sessionStorage.getItem("UserVipDetails")));
-            if(VIPlevel.data.Name!=="Bronze")
+        if (VIPlevel.data.Name.toLowerCase() == "normal")
             loadPageHome();
          }
          else{

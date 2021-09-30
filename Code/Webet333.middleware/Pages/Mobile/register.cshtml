@@ -158,6 +158,9 @@
                     <div class="form-group register-name-icon">
                         <input type="text" class="form-control" data-translate="nric_placeholder" id="m_regsiter_name" placeholder="Full Name as NRIC" value="" required="">
                     </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" data-translate="referral" id="m_regsiter_referral" placeholder="" value="" required="">
+                    </div>
                     <p class="register-note">By clicking the SUBMIT button, I hereby acknowledge that I am above 18 years old and have read and accepted your terms & conditions.</p>
                     <button type="button" class="btn btn-danger join_btn" onclick="DoRegister()"><span class="lang" key="submit_button"></span></button>
                 </form>
@@ -216,4 +219,18 @@
     }
 
     setTimeout(() => { get(); }, 200);
+
+     $(document).ready(function () {
+        var url_string = window.location.href.toLowerCase();
+        var url = new URL(url_string);
+        var Code = url.searchParams.get("refcode");
+        if(Code!=null & Code!="" && Code!=undefined ){
+            $("#m_regsiter_referral").val(Code);
+            $("#m_regsiter_referral").attr("disabled","true");
+        }
+        else{
+            $("#m_regsiter_referral").val("");
+            $("#m_regsiter_referral").removeAttr("disabled");
+        }
+    });
 </script>

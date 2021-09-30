@@ -508,7 +508,12 @@
                 success: function (response) {
                     pageName1 = pageName2 = "register";
                     $('#pageResponse').html(response);
-                    history.pushState(null, null, "/mobile?p=register");
+
+                    var url_string = window.location.href.toLowerCase();
+                    var url = new URL(url_string);
+                    var Code = url.searchParams.get("refcode");
+                    history.pushState(null, null, "/mobile?p=register&refcode="+Code);
+
                     $("html").removeClass("intro");
                 }
             });
