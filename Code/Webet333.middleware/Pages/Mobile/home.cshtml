@@ -745,7 +745,7 @@
     <div class="canvas-overlay"></div>
 
 </div>
-<div class="container-fluid referral-container" id="referral-container">
+<div class="container-fluid referral-container" id="referral-container" onclick="loadPageReferralBonus()">
     <span class="referral-close text-red"><i><b id="second30">30s</b></i>&nbsp;<i class="fas fa-times-circle"></i></span>
     <img class="referral-img" src="~/images/mobile/referral2.png">
 </div>
@@ -891,8 +891,6 @@
 
             let refferalId = setInterval(() => {
                 second=second-1;
-                console.clear();
-                console.log(second);
                 if(second>=0)
                 document.getElementById("second30").innerHTML=second+"s ";
                 if(second==0){
