@@ -1,22 +1,20 @@
-﻿$(document).ready(function () {
-    getUTCTime();
-});
+﻿$(document).ready(function () { getUTCTime(); });
 
 var UTCTime;
 
 var _918KissbaseUrl = 'http://api.918kiss.com:9991/ashx/account/';
 
 var _918KissConstParameterValue = {
-    authcode: 'swQjTbHQdnAHUyfvgMdN',
-    Secretkey: 'N4nnU6aQ939p733t5Etw',
-    agent: 'webet333-api',
+    authcode: 'NGXMSzTYxtZcaMCVCcGb',
+    Secretkey: 'kC7S5JYW74Bm352bTda6',
+    agent: 'wb333api',
     pwdtype: '1'
 };
 
 var _918KissConstParameter = {
-    authcode: 'authcode=swQjTbHQdnAHUyfvgMdN',
-    Secretkey: 'Secretkey=N4nnU6aQ939p733t5Etw',
-    agent: 'agent=webet333-api',
+    authcode: 'authcode=NGXMSzTYxtZcaMCVCcGb',
+    Secretkey: 'Secretkey=kC7S5JYW74Bm352bTda6',
+    agent: 'agent=wb333api',
     pwdtype: 'pwdtype=1'
 };
 
