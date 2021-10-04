@@ -79,6 +79,9 @@ namespace Webet333.models.Response.Account
         [JsonProperty(PropertyName = "totalDepositAmount")]
         public decimal TotalDepositAmount { get; set; }
 
+        [JsonProperty(PropertyName = "referralCode")]
+        public string ReferralCode { get; set; }
+
         public ICollection<MenusResponse> PermissionsList { get; set; }
 
         [JsonIgnore]

@@ -321,7 +321,8 @@ async function DoRegister() {
         password: $("#m_regsiter_password").val(),
         confirmPassword: $("#m_regsiter_confirmpassword").val(),
         referenceKeyword: getCookie("ref"),
-        otp: $("#m_regsiter_otp").val()
+        otp: $("#m_regsiter_otp").val(),
+        referralCode: $('#m_regsiter_referral').val() == "" ? null : $('#m_regsiter_referral').val()
     };
 
     if (model.mobile === "") {

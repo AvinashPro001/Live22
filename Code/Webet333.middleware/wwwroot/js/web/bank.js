@@ -835,6 +835,7 @@ function CallFunctionAccordingToTab() {
             case "Promotion": PromotionHistory(); break;
             case "Rebate": RebateHistory(); break;
             case "Reward": RewardHistory(); break;
+            case "Referral": RewardHistory(); break;
         }
 }
 
@@ -1036,6 +1037,40 @@ async function BettingHistory(FromDate = null, ToDate = null, PageSize = null, P
             $("#tbl_promotionHistory_pagination").html("");
             var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
             $("#tbl_bettingsummeryHistory").find('tbody').html(html);
+        }
+    }
+}
+
+async function RewardHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    let model = {
+        pageNo: PageNumber == null ? pageNumber : PageNumber,
+        pageSize: PageSize == null ? pageSize : PageSize,
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
+    }
+    var res = await PostMethod(transactionEndPoints.referralSummeryHistroy, model);
+
+    if (res.status == 200) {
+        if (res.response.data.result.length > 0) {
+            var data = res.response.data.result;
+            $("#tbl_referralHistory").find("tr:gt(0)").remove();
+            var html = ""
+            for (i = 0; i < data.length; i++) {
+                html += '<tr><td>' + APIDateFormate(data[i].Created) + '</td><td><span>' + data[i].ReferUsername + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].Turnover).toFixed(2) + '</span></td><td><span class="blue_color_text">' + parseFloat(data[i].ReferPercentage).toFixed(2) + ' %</span></td><td><span class="blue_color_text">' + parseFloat(data[i].ReferralBonus).toFixed(2) + '</span></td><td><span>' + data[i].CalculationDate.split("T")[0]; + '</span></td></tr>';
+            }
+            $("#tbl_referralHistory").find('tbody').html(html);
+
+            if (res.response.data.total > 8) {
+                CreatePagination('tbl_referralHistory_pagination', res.response.data.totalPages, res.response.data.offset + 1);
+            }
+            else {
+                $("#tbl_referralHistory_pagination").html("");
+            }
+        }
+        else {
+            $("#tbl_referralHistory_pagination").html("");
+            var html = '<tr><td colspan="5">No Transaction yet</td></tr>'
+            $("#tbl_referralHistory").find('tbody').html(html);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'DEBUG';  // 'LOCAL' OR 'DEBUG' OR 'STAG'
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '9001';
 
 switch (environmentName.toUpperCase()) {
@@ -95,6 +95,7 @@ var transactionEndPoints = {
     rebateHistroy: 'Game/Rebate/User/History',
     rewadHistroy: 'customer/reward/list',
     bettingSummeryHistroy: 'Game/bettingsummery',
+    referralSummeryHistroy: 'referral_bonus_given/list',
     uploadReceipt: 'payments/deposit/image',
 }
 

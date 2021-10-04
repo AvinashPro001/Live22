@@ -878,5 +878,12 @@
 
             public const string Login = "cq9/login";
         }
+
+        public class ReferralBonus
+        {
+
+            public const string retrive = "referral_bonus_given/list";
+
+        }
     }
 }

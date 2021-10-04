@@ -79,7 +79,9 @@
     <script src="~/js2/jquery-3.3.1.min.js"></script>
     <script src="~/js2/signalr/dist/browser/signalr.js"></script>
     <link href="~/css2/jcf.css" rel="stylesheet" />
-    <link href="~/css2/fontawesome.css" rel="stylesheet" />
+    @*<link href="~/css2/fontawesome.css" rel="stylesheet" />*@
+        <link rel="stylesheet" type="text/css" href="~/css/fontawesome.all.min.css" />
+    <link href="~/css/fontawesome.css" type="text/css" rel="stylesheet" />
     <link href="~/css2/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css2/slick.css">
     <link rel="stylesheet" href="~/css2/slick-theme.css">
@@ -235,6 +237,9 @@
                         break;
                     case "slot":
                         loadPageSlots()
+                        break;
+                    case "referral":
+                        loadPageReferralBonus()
                         break;
                 }
             }
@@ -503,7 +508,12 @@
                 success: function (response) {
                     pageName1 = pageName2 = "register";
                     $('#pageResponse').html(response);
-                    history.pushState(null, null, "/mobile?p=register");
+
+                    var url_string = window.location.href.toLowerCase();
+                    var url = new URL(url_string);
+                    var Code = url.searchParams.get("refcode");
+                    history.pushState(null, null, "/mobile?p=register&refcode="+Code);
+
                     $("html").removeClass("intro");
                 }
             });
@@ -604,6 +614,24 @@
                     if (window.location.hash) history.pushState(null, null, "/mobile?p=slot" + window.location.hash);
                     else history.pushState(null, null, "/mobile?p=slot");
 
+                    $("html").removeClass("intro");
+                }
+            });
+        }
+
+                function loadPageReferralBonus() {
+            CheckUserVerified()
+            $('body').css('padding-top', '0px');
+            $.ajax({
+                url: '/mobile/referralbonus',
+                type: "Get",
+                dataType: "text",
+                cache: true,
+                success: function (response) {
+                    pageName1 = pageName2 = "referral";
+                    $('#pageResponse').html(response);
+
+                    history.pushState(null, null, "/mobile?p=referral");
                     $("html").removeClass("intro");
                 }
             });

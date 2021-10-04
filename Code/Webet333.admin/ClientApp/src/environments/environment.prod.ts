@@ -1,5 +1,5 @@
 let baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG'
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG'
 
 switch (environmentName.toUpperCase()) {
     case 'STAG':
@@ -17,6 +17,7 @@ export const environment = {
     apiUrl: baseUrl,
     apiUrlWithVersion: baseUrlWithoutVersion
 };
+
 
 export const account = {
     login: environment.apiUrl + 'account/login',
@@ -381,7 +382,8 @@ export const customer = {
 
     getVIPLevelReport: environment.apiUrl + 'VIPLevel/report/select',
 
-    freeCreditReport: environment.apiUrl + 'freecreditevent/report'
+    freeCreditReport: environment.apiUrl + 'freecreditevent/report',
+    referralBonusReport: environment.apiUrl + 'referral_bonus_given/list'
 }
 
 export const playtech = {
