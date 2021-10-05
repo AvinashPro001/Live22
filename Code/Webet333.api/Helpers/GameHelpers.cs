@@ -1793,9 +1793,8 @@ namespace Webet333.api.Helpers
         {
             try
             {
-                if (!File.Exists($"{ImagePath}\\{FileName}"))
-                    using (WebClient webClient = new WebClient())
-                        webClient.DownloadFile(FileURL, $"{ImagePath}\\{FileName}");
+                using (WebClient webClient = new WebClient())
+                    webClient.DownloadFile(FileURL, $"{ImagePath}\\{FileName}");
             }
             catch (Exception ex)
             {
