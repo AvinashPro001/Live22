@@ -149,7 +149,10 @@ namespace Webet333.api.Helpers
         {
             var Parameter = $"secureLogin={GameConst.Pragmatic.SecureLogin}";
             var Url = $"{GameConst.Pragmatic.Url}{GameConst.Pragmatic.GameList}";
-            return JsonConvert.DeserializeObject<PragmaticGameList>(await CallAPI(Url, Parameter));
+            
+            var result=JsonConvert.DeserializeObject<PragmaticGameList>(await CallAPI(Url, Parameter));
+            result.gameList = result.gameList.Where(x => x.gameTypeID != "lg").Select(x=>x).ToList();
+            return result;
         }
 
         #endregion Call Game List Third Party API

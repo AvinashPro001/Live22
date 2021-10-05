@@ -4,6 +4,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Webet333.api.Controllers.Base;
 using Webet333.api.Helpers;
@@ -94,46 +95,33 @@ namespace Webet333.api.Controllers
 
         [Authorize]
         [HttpPost(ActionsConst.Pragmatic.GameList)]
-        public async Task<IActionResult> PragmaticGameList([FromBody] GameLoginRequest request)
+        public async Task<IActionResult> PragmaticGameList([FromBody] GameLoginRequest request, [FromServices] IOptions<BaseUrlConfigs> BaseUrlConfigsOptions)
         {
             await CheckUserRole();
 
             string adminId = GetUserId(User).ToString();
 
+            var imagesPath = $"{BaseUrlConfigsOptions.Value.ImageLocalPath}\\pragmaticnew";
+
+            if (!Directory.Exists(imagesPath))
+                Directory.CreateDirectory(imagesPath);
+
             var result = await PragmaticGameHelpers.GameListCallAPI();
             var gameListModel = new List<GameListUploadResponse>();
-            if (!request.IsMobile)
+            result.gameList.ForEach(game =>
             {
-                result.gameList.ForEach(game =>
+                gameListModel.Add(new GameListUploadResponse
                 {
-                    game.ImagePath = $"{GameConst.Pragmatic.ImageUrl}game_pic/rec/325/{game.gameID}.png";
-
-                    gameListModel.Add(new GameListUploadResponse
-                    {
-                        GameCode = game.gameID,
-                        GameName = game.gameName,
-                        GameType = "Slots",
-                        ImagePath1 = game.ImagePath,
-                        ImagePath2 = $"{GameConst.Pragmatic.ImageUrl}game_pic/square/200/{game.gameID}.png"
-                    });
+                    GameCode = game.gameID,
+                    GameName = game.gameName,
+                    GameType = "Slots",
+                    ImagePath1 = $"{BaseUrlConfigsOptions.Value.ImageBase}pragmaticnew/{game.gameID}.png",
+                    ImagePath2 = $"{GameConst.Pragmatic.ImageUrl}game_pic/rec/325/{game.gameID}.png"
                 });
-            }
-            else
-            {
-                result.gameList.ForEach(game =>
-                {
-                    game.ImagePath = $"{GameConst.Pragmatic.ImageUrl}game_pic/rec/325/{game.gameID}.png";
 
-                    gameListModel.Add(new GameListUploadResponse
-                    {
-                        GameCode = game.gameID,
-                        GameName = game.gameName,
-                        GameType = "Slots",
-                        ImagePath1 = game.ImagePath,
-                        ImagePath2 = $"{GameConst.Pragmatic.ImageUrl}game_pic/square/200/{game.gameID}.png"
-                    });
-                });
-            }
+                GameHelpers.GameImageStore($"{GameConst.Pragmatic.ImageUrl}game_pic/rec/325/{game.gameID}.png", imagesPath, $"{game.gameID}.png");
+            });
+
 
             using (var game_help = new GameHelpers(Connection))
             {
@@ -141,7 +129,7 @@ namespace Webet333.api.Controllers
                 await game_help.GameListInsert(gameListModel, "Pragmatic Wallet", adminId);
             }
 
-            return OkResponse(result);
+            return OkResponse();
         }
 
         #endregion Pragmatic game List

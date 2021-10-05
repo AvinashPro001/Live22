@@ -6,7 +6,9 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
@@ -1784,6 +1786,20 @@ namespace Webet333.api.Helpers
             {
                 var list = await GetRepository.GetDataAsync(StoredProcConsts.Game.HotSlotsGameSelect, new { request.PageNo, request.PageSize });
                 return list.ToList();
+            }
+        }
+
+        internal static void GameImageStore(string FileURL, string ImagePath, string FileName)
+        {
+            try
+            {
+                if (!File.Exists($"{ImagePath}\\{FileName}"))
+                    using (WebClient webClient = new WebClient())
+                        webClient.DownloadFile(FileURL, $"{ImagePath}\\{FileName}");
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
