@@ -18,11 +18,11 @@ using Webet333.models.Response.Game;
 namespace Webet333.api.Controllers
 {
     [Route(ActionsConst.ApiVersion)]
-    public class PargmaticGameController : BaseController
+    public class PragmaticGameController : BaseController
     {
         #region Global Variable
 
-        public PargmaticGameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
+        public PragmaticGameController(IStringLocalizer<BaseController> Localizer, IOptions<ConnectionConfigs> ConnectionStringsOptions, IOptions<BaseUrlConfigs> BaseUrlConfigsOption) : base(ConnectionStringsOptions.Value, Localizer, BaseUrlConfigsOption.Value)
         {
             this.Localizer = Localizer;
         }
