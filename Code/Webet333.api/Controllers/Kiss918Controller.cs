@@ -44,7 +44,8 @@ namespace Webet333.api.Controllers
             using (var account_helper = new AccountHelpers(Connection))
             {
                 var user = await account_helper.UserGetBalanceInfo(request.Id);
-                password = SecurityHelpers.DecryptPassword(user.Password);
+                password = "WB3@" + SecurityHelpers.DecryptPassword(user.Password);
+                if (password.Length > 14) password = password.Substring(0, 14);
                 MobileNo = user.MobileNo;
             }
 
@@ -66,7 +67,7 @@ namespace Webet333.api.Controllers
                     UserId = request.Id,
                     APIResponse = JObject.FromObject(result)
                 };
-                await kiss_helper.Game918KissRegister(kiss918Request,password);
+                await kiss_helper.Game918KissRegister(kiss918Request, password);
                 return OkResponse(result);
             }
         }
