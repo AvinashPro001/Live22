@@ -167,7 +167,7 @@ namespace Webet333.service
                 //var maxbetList = userlist.Where(x => x.GameName == "MAXBET").ToList();
                 //var mega888List = userlist.Where(x => x.GameName == "MEGA888").ToList();
                 //var playtechList = userlist.Where(x => x.GameName == "PLAYTECH").ToList();
-                //var kiss918List = userlist.Where(x => x.GameName == "KISS918").ToList();
+                var kiss918List = userlist.Where(x => x.GameName == "KISS918").ToList();
                 var yeeBetList = userlist.Where(x => x.GameName == "YeeBet").ToList();
                 var SBOList = userlist.Where(x => x.GameName == "SBO").ToList();
                 var GamePlayList = userlist.Where(x => x.GameName == "GamePlay").ToList();
@@ -325,30 +325,31 @@ namespace Webet333.service
                 //    Console.WriteLine(ex.Message.ToString());
                 //}
 
-                //try
-                //{
-                //    if (kiss918List.Count > 0)
-                //    {
-                //        for (int i = 0; i < kiss918List.Count; i++)
-                //        {
-                //            var RegisterRequest = new RegisterRequest()
-                //            {
-                //                GamePrefix = kiss918List[i].Prefix,
-                //                Name = kiss918List[i].Name,
-                //                Password = kiss918List[i].Password,
-                //                MobileNo = kiss918List[i].Mobile,
-                //                UserId = kiss918List[i].UserId,
-                //                Username = kiss918List[i].Username
-                //            };
-                //            var kiss918result = await APICallPost(APIConst.baseUrl + APIConst.register918kiss, request: RegisterRequest);
-                //            Console.WriteLine(kiss918result);
-                //        }
-                //    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    Console.WriteLine(ex.Message.ToString());
-                //}
+                try
+                {
+                    if (kiss918List.Any())
+                    {
+                        foreach (var data in kiss918List)
+                        {
+                            var model = new
+                            {
+                                Id = data.UserId
+                            };
+
+                            var result = await APICallPost(APIConst.baseUrl + APIConst.register918kiss, request: model);
+#if DEBUG
+                            Console.WriteLine(result);
+#endif
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WriteErrorTextToFile("Error :" + ex.Message);
+#if DEBUG
+                    Console.WriteLine(ex.Message.ToString());
+#endif
+                }
 
                 try
                 {

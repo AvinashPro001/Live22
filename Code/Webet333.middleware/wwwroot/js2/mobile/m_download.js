@@ -190,7 +190,9 @@ function LaunchGameAndroid(gameid) {
     try { resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails'))); }
     catch { }
     if (gameid == 1) {
-        try { window.location = "lobbykissandroid://lobbykissandroid?account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918 }
+        try {
+            window.location = "lobbykiss://lobbykiss?account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918
+        }
         catch { self.location = kiss918_apkURL; }
     }
     if (gameid == 2) {
@@ -204,7 +206,7 @@ function LaunchGameIOS64(gameid) {
     try { resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails'))); }
     catch { }
     if (gameid == 1) {
-        try { window.location = "LobbyKiss64://account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918 }
+        try { window.location = "lobbykissgame://account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918 }
         catch { self.location = kiss918_iosURL; }
     }
 
@@ -219,7 +221,7 @@ function LaunchGameIOS32(gameid) {
     try { resUserData = JSON.parse(dec(sessionStorage.getItem('UserDetails'))); }
     catch { }
     if (gameid == 1) {
-        try { window.location = "LobbyKiss32://account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918 }
+        try { window.location = "lobbykissgame://account=" + resUserData.data.username918 + "&password=" + resUserData.data.password918 }
         catch { self.location = kiss_ios32URL; }
     }
 }

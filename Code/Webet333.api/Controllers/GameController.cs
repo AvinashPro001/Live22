@@ -532,7 +532,7 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> ManuallyKiss918BettingDetails([FromBody] GlobalBettingDetailsRequest request)
         {
             await CheckUserRole();
-            string kiss918UserName = "webet333-api";
+            string kiss918UserName = GameConst.Kiss918.agent;
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             var kiss918URL = $"http://api.918kiss.com:9919/ashx/AgentTotalReport.ashx?" +
                              $"Type=ServerTotalReport" +
@@ -1077,7 +1077,7 @@ namespace Webet333.api.Controllers
         [HttpGet(ActionsConst.Game.Kiss918_Betting_Details)]
         public async Task<IActionResult> Kiss918BettingDetails()
         {
-            string kiss918UserName = "webet333-api";
+            string kiss918UserName = GameConst.Kiss918.agent;
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             var kiss918URL = $"http://api.918kiss.com:9919/ashx/AgentTotalReport.ashx?" +
                              $"Type=ServerTotalReport" +
