@@ -3502,7 +3502,7 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> Kiss918PlayerGameLog([FromBody] SlotsPlayerLogRequest request)
         {
             string kiss918UserName = request.Username;
-            string startDate = request.StartDate.AddMinutes(-5).ToString("yyyy-MM-dd HH:mm:ss");
+            string startDate = request.StartDate.AddMinutes(-60).ToString("yyyy-MM-dd HH:mm:ss");
             string endDate = request.EndDate.ToString("yyyy-MM-dd HH:mm:ss");
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             int pageSize = 100;
