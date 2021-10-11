@@ -82,6 +82,9 @@ namespace Webet333.models.Response.Account
         [JsonProperty(PropertyName = "referralCode")]
         public string ReferralCode { get; set; }
 
+        [JsonProperty(PropertyName = "totalReferralUser")]
+        public string TotalReferralUser { get; set; }
+
         public ICollection<MenusResponse> PermissionsList { get; set; }
 
         [JsonIgnore]
