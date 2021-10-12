@@ -1951,3 +1951,80 @@ p.bonus_content a {
 
 
 }
+
+.invite-dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+.invite-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.invite-dropdown-content {
+    display: none;
+    position: relative;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .invite-dropdown-content a {
+        color: black;
+        padding: 5px 5px;
+        text-decoration: none;
+        display: flex;
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+        .invite-dropdown-content a:hover {
+            background-color: #ddd;
+            cursor: pointer;
+        }
+
+.invite-dropdown:hover .invite-dropdown-content {
+    display: block;
+}
+
+.invite-dropdown:hover .invite-dropbtn {
+    background-color: #3e8e41;
+}
+
+.invite-span{
+    font-size:13px !important;
+    padding-top:0px !important;
+}
+
+.w-100{width:100% !important}
+
+.referral-img{width:80px;}
+.referral-container{position: fixed;bottom: 80px;left: 10px;z-index: 1000;}
+.referral-close{position:fixed;bottom:160px;left:75px;}
+.referral-gradient {
+    background: linear-gradient(#D3D3D3, #BDBDBD) !important;
+    color: black !important;
+    text-align: center;
+    font-weight: 600;
+    padding: 25px;
+    width: 100%;
+    border: 34px;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: cornsilk;
+}
+
+    .referral-gradient span {
+        color: blue;
+    }
+
+.referral-lable {
+    display: flex;
+    font-weight: 100;
+}

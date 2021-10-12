@@ -36,5 +36,7 @@ namespace Webet333.models.Response.Game.Pragmatic
         public string gameName { get; set; }
 
         public string ImagePath { get; set; }
+
+        public string gameTypeID { get; set; }
     }
 }

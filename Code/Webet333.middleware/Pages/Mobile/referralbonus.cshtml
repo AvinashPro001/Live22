@@ -1,0 +1,261 @@
+﻿@page
+@{
+    ViewData["Title"] = "Promotion";
+    Layout = "";
+}
+<div id="comContent"></div>
+<div id="mComContent">
+    <div id="afterlogin_mobile">
+        <div class="main-content" id="navbarhide">
+            <ul class="dropdown-menu wallet-dropdown">
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Main Wallet</strong></li>
+                        <li class="fright" id="ddlmainWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>918Kiss Wallet</strong></li>
+                        <li class="fright" id="ddl918KissWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>AG Wallet</strong></li>
+                        <li class="fright" id="ddlAGWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>M8 Wallet</strong></li>
+                        <li class="fright" id="ddlM8Wallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Joker Wallet</strong></li>
+                        <li class="fright" id="ddlJokerWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Playtech Wallet</strong></li>
+                        <li class="fright" id="ddlPlaytechWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>MaxBet Wallet</strong></li>
+                        <li class="fright" id="ddlMaxBetWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Mega888 Wallet</strong></li>
+                        <li class="fright" id="ddlMega888Wallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>DG Wallet</strong></li>
+                        <li class="fright" id="ddlDgWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Sexy B. Wallet</strong></li>
+                        <li class="fright" id="ddlSexyWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>SA Wallet</strong></li>
+                        <li class="fright" id="ddlSAWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Pussy888 Wallet</strong></li>
+                        <li class="fright" id="ddlPussy888Wallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>AllBet Wallet</strong></li>
+                        <li class="fright" id="ddlAllbetWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>WM Wallet</strong></li>
+                        <li class="fright" id="ddlWMWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>Pragmatic Wallet</strong></li>
+                        <li class="fright" id="ddlPragmaticWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>YeeBet Wallet</strong></li>
+                        <li class="fright" id="ddlYeeBetWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>SBO Wallet</strong></li>
+                        <li class="fright" id="ddlSBOWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>GamePlay Wallet</strong></li>
+                        <li class="fright" id="ddlGamePlayWallet">feching...</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-inline">
+                        <li><strong>CQ9 Wallet</strong></li>
+                        <li class="fright" id="ddlCQ9Wallet">feching...</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div id="Deposit" class="account-reg white-bg radius-border">
+        <div class="container">
+            <div class="info-form text-center">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <div class="back-btn"><a onclick="loadPageHome({backFrom:'deposit'})" href="javascript:void(0);" rel="prefetch"><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt=""></a></div>
+                    </div>
+                    <div class="col-xs-8">
+                        <h4 class="black-text lang" key="referral">REFERRAL</h4>
+                    </div>
+                </div>
+            </div>
+            <div id="formDiposit" class="row">
+                <div class="col-sm-12">
+                    <div class="info-form deposit-section">
+                        <div id="referral_Bonus" class="tabcontent active">
+                            <ul class="deposit-bank-listing password-upadte white-text">
+                                <li>
+                                    <label class="fleft"><p class="big no-mar blk-text lang" key="referral_code"></p></label>
+                                    <label class="fright mendatory black-text">
+                                        <p class="white-text" id="copy_text"><span id="referral-code"></span></p>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="fleft"><p class="big no-mar blk-text lang" key="referral_link"></p></label>
+                                    <label class="fright mendatory black-text">
+                                        <p class="white-text" id="copy_text"><span id="referral-link"></span></p>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="w-100"><p class="big no-mar lang blk-text">Share your favorite offers to your friends!:</p></label>
+                                    <label class="fright text-center">
+                                        <div class="invite-dropdown">
+                                            <button class="invite-dropbtn btn btn-default">INVITE FRIENDS</button>
+                                            <div class="invite-dropdown-content">
+                                                <a onclick="InviteViaCopyToClipboard()"><i class="fa fa-copy"></i>&nbsp;&nbsp;<span class="invite-span">Copy to Clipboard</span></a>
+                                                <a onclick="InviteViaFacebook()"><i class="fa fa-facebook-square"></i>&nbsp;&nbsp;<span class="invite-span">Facebook</span></a>
+                                                <a onclick="InviteViaEmail()"><i class="fa fa-envelope"></i>&nbsp;&nbsp;<span class="invite-span">Email</span></a>
+                                                <a onclick="InviteViaWhatsApp()"><i class="fa fa-whatsapp"></i>&nbsp;&nbsp;<span class="invite-span">Whatsapp</span></a>
+                                                <a onclick="InviteViaTelegram()"><i class="fab fa-telegram"></i>&nbsp;&nbsp;<span class="invite-span">Telegram</span></a>
+                                                <a onclick="InviteViaLine()"><i class="fab fa-line"></i>&nbsp;&nbsp;<span class="invite-span">Line</span></a>
+                                                <a onclick="InviteViaSkype()"><i class="fa fa-skype"></i>&nbsp;&nbsp;<span class="invite-span">Skype</span></a>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </li>
+                            </ul>
+                            <hr />
+                            <div>
+                                <label class="referral-lable">Your Referral Status</label>
+                                <label class="referral-lable"><p class="referral-gradient "><b>Invitation Accepted </b> <span id="referral-code-status">0</span></p></label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="info-form notice-bank-transfer deposit-section pad-top-twentyfive" style="background-color: #eeeeee; border-radius: 6px;">
+                                        <div class="pad-lr-comman">
+                                            <h6 class="info-notice"><span class="lang" key="important_notice">IMPORTANT NOTICE</span></h6>
+                                            <ol>
+                                                <li><span class="lang" key="instruction_1"></span></li>
+                                                <li><span class="lang" key="instruction_2"></span></li>
+                                                <li><span class="lang" key="instruction_3"></span></li>
+                                                <li><span class="lang" key="instruction_4"></span></li>
+                                                <li><span class="lang" key="instruction_5"></span></li>
+                                                <li>
+                                                    <span class="lang" key="instruction_6A"></span><a onclick="LiveChat();"><b><span class="lang" key="livechat"></span></b></a> <span class="lang" key="instruction_6B"></span>
+                                                </li>
+                                                <li>
+                                                    <span class="lang" key="instruction_7A"></span><a onclick="LiveChat()"><b><span class="lang" key="livechat"></span></b></a><span class="lang" key="instruction_7B"></span>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function language(value) {
+        SetLocalStorage('language', value);
+        get();
+
+    }
+
+
+
+
+    function get() {
+        (GetLocalStorage('language') === null) ? SetLocalStorage('language', 'en-US') : false;
+
+        $.ajax({
+            url: '../../resources/strings.' + GetLocalStorage('language') + '.json',
+            dataType: 'json',
+            async: false,
+            success: function (lang) {
+                $('.lang').each(function (index, element) {
+                    if (localStorage.getItem("language") === "ms-MY") {
+                        $('body').addClass('malay-font');
+                    }
+                    $(this).text(lang[$(this).attr('key')]);
+                });
+                $("[data-translate]").each(function () {
+                    if ($(this).is("input")) {
+                        $(this).attr('placeholder', lang[$(this).data("translate")]);
+                    } else {
+                        $(this).text(lang[$(this).data("translate")]);
+                    }
+                });
+            }
+        });
+    }
+
+    setTimeout(() => {
+        get();
+         SetReferralCode();
+         if (localStorage.getItem("currentUser") !== null) {
+            var VIPlevel = JSON.parse(dec(sessionStorage.getItem("UserVipDetails")));
+        if (VIPlevel.data.Name.toLowerCase() == "normal")
+            loadPageHome();
+         }
+         else{
+             loadPageHome();
+         }
+    }, 200);
+</script>

@@ -48,6 +48,7 @@
                 <li onclick="SetHistorySectionName('Promotion')"><a data-toggle="tab" href="#promotion-apply"><span key="menu_promotion" class="lang">Promotion</span></a></li>
                 <li onclick="SetHistorySectionName('Rebate')"><a data-toggle="tab" href="#rebate"><span key="rebate" class="lang">Rebate</span></a></li>
                 <li onclick="SetHistorySectionName('Reward')"><a data-toggle="tab" href="#reward"><span key="" class="lang">Reward</span></a></li>
+                <li onclick="SetHistorySectionName('Referral')"><a data-toggle="tab" href="#referral"><span key="referral" class="lang">Reward</span></a></li>
             </ul>
         </div>
 
@@ -86,6 +87,12 @@
                 <div id="reward" class="tab-pane fade in">
                     <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
                         <ul class="listing-for-deposite" id="rewardHistory"></ul>
+                    </div>
+                </div>
+                <div id="referral" class="tab-pane fade in">
+                    <div class="container full-height listing extra-bottom-padding" onscroll="OnScroll(event)">
+                        <ul class="listing-for-deposite" id="referralHistory">
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -305,6 +312,39 @@
                         <p id="rebateHistoryCommAmount"></p>
                         <h5>Created</h5>
                         <p id="rebateHistoryCreated"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="modal fade history-model" id="referral-history-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title"><span>Details</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <h5>Transaction Date</h5>
+                        <p id="referralHistoryTransactionDate"></p>
+
+                        <h5>Refer Username</h5>
+                        <p id="referralHistoryReferUsername"></p>
+
+                        <h5>Turnover</h5>
+                        <p id="referralHistoryTurnover"></p>
+
+                         <h5>Refer Percentage</h5>
+                        <p id="referralHistoryPercentage"></p>
+
+                         <h5>Refer Bonus</h5>
+                        <p id="referralHistoryBonus"></p>
+
+                        <h5>Date of Bonus</h5>
+                        <p id="referralHistoryDateBonus"></p>
+
                     </div>
                 </div>
             </div>

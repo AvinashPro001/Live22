@@ -416,7 +416,7 @@ export class DepositAddComponent implements OnInit {
             this.uploadReceipt(res.data.id);
             this.router.navigate(['admin/customers/deposit-list']);
         }, error => {
-            this.toasterService.pop('error', 'Error', error.message);
+            this.toasterService.pop('error', 'Error', error.error.message);
             this.disabled = false;
             this.ngOnInit();
         });

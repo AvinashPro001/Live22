@@ -691,5 +691,10 @@
         {
             public const string Register = "[dbo].[Users_Insert_JDB]";
         }
+
+        public class ReferralBonus
+        {
+            public const string ReferralBonusRetrive = "[dbo].[ReferralBonus_Select]";
+        }
     }
 }

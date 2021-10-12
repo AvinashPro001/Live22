@@ -114,9 +114,8 @@
                         <h4 class="mar-btm-fifteen">USER PROFILE</h4>
 
                         <button id="profile_tab" class="tablinks account-reg profile active opercity" onclick="openCity(event, 'profile_amount')"><span class="lang" key="profile">PROFILE</span></button>
-                        <button id="change_password_tab" class="tablinks account-reg change_password opercity" onclick="openCity(event, 'change_passwrd_amount')">
-                            <span class="lang" key="change_password">CHANGE PASSWORD</span>
-                        </button>
+                        <button id="change_password_tab" class="tablinks account-reg change_password opercity" onclick="openCity(event, 'change_passwrd_amount')"><span class="lang" key="change_password">CHANGE PASSWORD</span>                        </button>
+                        <button id="referra_tab" class="tablinks account-reg referral opercity" onclick="openCity(event, 'referral_bonus')"><span class="lang" key="referral">Referral</span></button>
                     </div>
 
                     <div id="deposit_amount" class="tabcontent account-reg radius-none" style="display: none;">
@@ -322,8 +321,7 @@
                         </div>
                     </div>
 
-                    <div id="withdraw_amount" class="tabcontent white-bg-tab-panel account-reg radius-none"
-                         style="display: none;">
+                    <div id="withdraw_amount" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
                         <div class="info-form marginb-none">
                             <h4 class="withdrawal-sub bg-no-repeat symbol lang" key="withdraw">WITHDRAW</h4>
                         </div>
@@ -1011,6 +1009,9 @@
                                             <li onclick="SetHistorySectionName('Reward')">
                                                 <a class="hand-curson" data-toggle="tab" href="#Rewards_Summary"><span key="menu_promotion" class="lang">Rewards</span></a>
                                             </li>
+                                            <li onclick="SetHistorySectionName('Referral')">
+                                                <a class="hand-curson" data-toggle="tab" href="#Referral_Bonus_Summary"><span key="referral" class="lang">Referral</span></a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -1196,6 +1197,28 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div id="Referral_Bonus_Summary" class="tab-pane fade in ">
+                                        <div class="table-responsive overflow-hidden">
+                                            <table class="table table-bordered-one text-center" id="tbl_referralHistory">
+                                                <thead>
+                                                    <tr class="white-gray-bg">
+                                                        <th class="white-text text-center">Transaction Date</th>
+                                                        <th class="white-text text-center">Refer Username</th>
+                                                        <th class="white-text text-center">Turnover</th>
+                                                        <th class="white-text text-center">Refer Percentage</th>
+                                                        <th class="white-text text-center">Refer Bonus</th>
+                                                        <th class="white-text text-center">Date of Bonus</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            <div class="pagination_tables" id="tbl_referralHistory_pagination">
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -1344,6 +1367,94 @@
                                                 </div>
                                             </li>
                                         </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="referral_bonus" class="tabcontent white-bg-tab-panel account-reg radius-none" style="display: none;">
+                        <div class="info-form marginb-none">
+                            <h4 class="referral-sub bg-no-repeat symbol lang" key="">Referral Bonus</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-lg-8">
+                                <div class="bank-multi-list">
+                                    <div class="pad-lr-comman">
+                                        <form id="formWithdrawal">
+                                            <ul class="password-upadte pad-top-ten">
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar blk-text lang" key="referral_code">Referral Code:</p>
+                                                    </label>
+                                                    <label class="fright mendatory black-text w-100">
+                                                        <p class="account-details-fullwith" id="referral-code">
+                                                            XXXXXXXX
+                                                        </p>
+                                                    </label>
+                                                </li>
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="fleft">
+                                                        <p class="big no-mar blk-text lang" key="referral_link">Referral Link:</p>
+                                                    </label>
+                                                    <label class="fright mendatory black-text w-100">
+                                                        <p class="account-details-fullwith" id="referral-link">
+                                                            XXXXXXXX
+                                                        </p>
+                                                    </label>
+                                                </li>
+
+                                                <li class="mar-btm-fifteen" style="display:none">
+                                                    <label class="fleft">
+                                                        <p id="invit-text-copy"></p>
+                                                    </label>
+                                                </li>
+
+                                                <li class="mar-btm-fifteen">
+                                                    <label class="">
+                                                        <p class="big no-mar blk-text lang" key="">Share your favorite offers to your friends!:</p>
+                                                    </label>
+                                                    <br />
+                                                    <br />
+                                                    <label class="fright mendatory black-text">
+                                                        <div class="invite-dropdown">
+                                                            <button class="invite-dropbtn btn btn-default">INVITE FRIENDS</button>
+                                                            <div class="invite-dropdown-content">
+                                                                <a onclick="InviteViaCopyToClipboard()"><i class="fas fa-copy"></i>&nbsp;&nbsp;<span>Copy to Clipboard</span></a>
+                                                                <a onclick="InviteViaFacebook()"><i class="fab fa-facebook-square"></i>&nbsp;&nbsp;<span>Facebook</span></a>
+                                                                <a onclick="InviteViaEmail()"><i class="fas fa-envelope"></i>&nbsp;&nbsp;<span>Email</span></a>
+                                                                <a onclick="InviteViaWhatsApp()"><i class="fab fa-whatsapp"></i>&nbsp;&nbsp;<span>Whatsapp</span></a>
+                                                                <a onclick="InviteViaTelegram()"><i class="fab fa-telegram"></i>&nbsp;&nbsp;<span>Telegram</span></a>
+                                                                <a onclick="InviteViaLine()"><i class="fab fa-line"></i>&nbsp;&nbsp;<span>Line</span></a>
+                                                                <a onclick="InviteViaSkype()"><i class="fab fa-skype"></i>&nbsp;&nbsp;<span>Skype</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                        <hr />
+                                        <div >
+                                            <label class="referral-lable">Your Referral Status</label>
+                                            <label class="referral-lable"><p class="referral-gradient "><b>Invitation Accepted </b> <span id="referral-code-status">0</span></p></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="info-form deposit-section pad-top-twentyfive" style="background-color: #ffffff; border-radius: 6px;">
+                                    <div class="pad-lr-comman">
+                                        <h6 class="info-notice"><span class="lang" key="important_notice">IMPORTANT NOTICE</span></h6>
+                                        <ol>
+                                            <li>
+                                                <span class="lang" key="instruction_6A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+        'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a> <span class="lang" key="instruction_6B"></span>
+                                            </li>
+                                            <li>
+                                                <span class="lang" key="instruction_7A"></span><a onclick="window.open('https://chatserver.comm100.com/ChatWindow.aspx?siteId=233923&amp;planId=425', 'newwindow',
+        'width=385,height=580');" target="_blank"><b><span class="lang" key="livechat"></span></b></a><span class="lang" key="instruction_7B"></span>
+                                            </li>
+                                        </ol>
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,7 @@
 ﻿@page
-@{ Layout = null; }
+@{
+    Layout = null;
+}
 
 <div id="afterlogin_mobile">
     <div class="sidebar">
@@ -10,8 +12,9 @@
                 <li><a href="../" rel="prefetch"><img src="~/images/mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
                 <li><a onclick="loadPageVIP()" href="javascript:void(0);" rel="prefetch"><img src="~/images/footericon1.png" alt="Profile"><p>VIP</p></a></li>
                 <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
-                <li><a onclick="loadPageAbout()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
-                <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
+                @* <li><a onclick="loadPageAbout()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US"></p></a></li>
+                    <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>*@
+
             </ul>
         </div>
     </div>
@@ -205,7 +208,7 @@
                                         <button class="game-title"><span class="lang" key="pussy888slot_game"></span></button>
                                     </a>
                                 </li>
-                                <li onclick="PlaytechIdentifiy(true)" id="playtechslotlogin">
+                                <li onclick="PlaytechIdentifiy(true)" id="playtechslot">
                                     <a>
                                         <figure>
                                             <img src="~/images/mobile/playtech.png" alt="Playtech">
@@ -237,13 +240,13 @@
                                         <button class="game-title"><span class="lang" key="pragmaticslot_game"></span></button>
                                     </a>
                                 </li>
-                                <li onclick="GamePlayIdentifiy(true)" id="gameplayslotlogin">
+                                <li onclick="GamePlayIdentifiy(true)" id="gameplayslot">
                                     <a>
                                         <figure><img src="~/images/mobile/gameplay_slot.png" alt="Playtech"></figure>
                                         <button class="game-title"><span class="lang" key="gameplayslot_game"></span></button>
                                     </a>
                                 </li>
-                                <li data-toggle="modal" data-target="#gameLogin" id="cq9slotlogin">
+                                <li data-toggle="modal" data-target="#gameLogin" id="cq9slot">
                                     <a>
                                         <figure><img src="~/images/mobile/cq9_slot.png" alt="CQ9"></figure>
                                         <button class="game-title"><span class="lang" key="cq9slot_game"></span></button>
@@ -326,9 +329,10 @@
                 <li><a onclick="loadPagedownload()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/download.png" alt="mn-download"><p class="lang" key="sidebar_Download"></p></a></li>
                 <li><a href="../" rel="prefetch"><img src="~/images/mobile/desktop.png" alt="mn-desktop"><p class="lang" key="sidebar_Desktop"></p></a></li>
                 <li><a onclick="loadPageVIP()" href="javascript:void(0);" rel="prefetch"><img src="~/images/footericon1.png" alt="Profile"><p>VIP</p></a></li>
+                <li id="ref_code"><a onclick="loadPageReferralBonus()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/deposit.png" alt="referral bonus"><p class="lang" key="referral"></p></a></li>
                 <li><a href="#" data-toggle="modal" data-target="#language"><img src="~/images/mobile/language.png" alt="mn-lang"><p class="lang" key="sidebar_Language"></p></a></li>
-                <li><a onclick="loadPageAbout()" href="javascript:void(0);"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US" rel="prefetch"></p></a></li>
-                <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>
+                @* <li><a onclick="loadPageAbout()" href="javascript:void(0);"><img src="~/images/mobile/about.png" alt="about-us"><p class="lang" key="sidebar_About_US" rel="prefetch"></p></a></li>
+                    <li><a onclick="loadPageTermandCondtion()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/tc.png" alt="Terms & Condition"><p class="lang" key="sidebar_T_&_C"></p></a></li>*@
                 <li><a onclick="loadPageAccount()" href="javascript:void(0);" rel="prefetch"><img src="~/images/mobile/profile.png" alt="Profile"><p class="lang" key="sidebar_Profile"></p></a></li>
             </ul>
         </div>
@@ -757,6 +761,11 @@
         </div>
     </div>
     <div class="canvas-overlay"></div>
+
+</div>
+<div class="container-fluid referral-container" id="referral-container" onclick="loadPageReferralBonus()">
+    <span class="referral-close"><i><b id="second30">30s</b></i><i class="fas fa-times-circle"></i></span>
+    <img class="referral-img" src="~/images/mobile/referral2.png">
 </div>
 
 <div class="form-login modal fade" id="gameLogin" role="dialog">
@@ -887,5 +896,31 @@
         SliderPromotion();  //  For home page banner on language.
     }
 
-    setTimeout(() => { get(); }, 200);
+    setTimeout(() => {
+        get();
+        var VIPlevel = JSON.parse(dec(sessionStorage.getItem("UserVipDetails")));
+        if (VIPlevel.data.Name.toLowerCase() == "normal"){
+            document.getElementById('ref_code').style.display = "none";
+        }
+        else{
+             $("#referral-container").fadeIn("slow");
+
+            var second=31;
+
+            let refferalId = setInterval(() => {
+                second=second-1;
+                if(second>=0)
+                document.getElementById("second30").innerHTML=second+"s ";
+                if(second==0){
+                    document.getElementById("referral-container").style.display="none";
+                    $("#referral-container").fadeOut(3000);
+                }
+            }, 1000);
+
+            setTimeout(() => {
+                clearInterval(refferalId);
+            }, 31000);
+        }
+    }, 200);
+
 </script>

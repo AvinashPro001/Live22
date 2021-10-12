@@ -1,4 +1,5 @@
 ﻿//#region Declare SiteData Variable
+var referralCode=""
 
 let SiteData = {
     PromotionPageData: null,
@@ -601,4 +602,62 @@ function CheckTokenIsValid(StausCode, StatusMessage) {
             sessionStorage.clear();
             window.location.reload();
         }
+}
+
+function InviteViaFacebook() {
+    var domainName = window.location.origin;
+    var fbUrl = "https://www.facebook.com/sharer/sharer.php?u=" + domainName + "/Web/register?refCode=" + referralCode;
+    window.open(encodeURI(fbUrl), '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+}
+
+function InviteViaEmail() {
+    var domainName = window.location.origin;
+    var message = "Welcome to WB3! Your friend has invited you to join the fun at WB3. Click on the link below and register yourself. We can’t wait to share exciting offers with you.%0D%0A%0D%0A" + domainName + "/Web/register?refCode=" + referralCode;
+    var emailUrl = "mailto:?subject=Share Refferal Code Of Webet333 &body=" + message;
+    window.location.href = emailUrl;
+}
+
+function InviteViaWhatsApp() {
+    var domainName = window.location.origin;
+    var message = "Welcome to WB3! Your friend has invited you to join the fun at WB3. Click on the link below and register yourself. We can’t wait to share exciting offers with you.%0D%0A%0D%0A" + domainName + "/Web/register?refCode=" + referralCode;
+    var whatsappUrl = "https://api.whatsapp.com/send?text=" + message;
+    window.open(whatsappUrl);
+}
+
+function InviteViaTelegram() {
+    var domainName = window.location.origin;
+    var message = "Welcome to WB3! Your friend has invited you to join the fun at WB3. Click on the link below and register yourself. We can’t wait to share exciting offers with you.%0D%0A%0D%0A" + domainName + "/Web/register?refCode=" + referralCode;
+    var telegramUrl = "https://telegram.me/share/url?url=" + domainName + "/Web/register?refCode=XXXXXXXXXXX&text=" + message;
+    window.open(encodeURI(telegramUrl));
+}
+
+function InviteViaLine() {
+    var domainName = window.location.origin;
+    var message = "Welcome to WB3! Your friend has invited you to join the fun at WB3. Click on the link below and register yourself. We can’t wait to share exciting offers with you.%0D%0A%0D%0A" + domainName + "/Web/register?refCode=" + referralCode;
+    var lineUrl = "https://line.me/R/share?text=" + message;
+    window.open(encodeURI(lineUrl));
+}
+
+function InviteViaSkype() {
+    var domainName = window.location.origin;
+    var message = "Welcome to WB3! Your friend has invited you to join the fun at WB3. Click on the link below and register yourself. We can’t wait to share exciting offers with you. " + domainName + "/Web/register?refCode=" + referralCode;
+    var skypeUrl = "https://web.skype.com/share?url=" + encodeURIComponent(message);
+    window.open(skypeUrl, '_blank');
+}
+
+function InviteViaCopyToClipboard() {
+    var Id ="invit-text-copy"
+    var domainName = window.location.origin;
+    var message = "Welcome to WB3! Your friend has invited you to join the fun at WB3. Click on the link below and register yourself. We can’t wait to share exciting offers with you. \n\n" + domainName + "/Web/register?refCode=" + referralCode;
+    
+    navigator.clipboard.writeText(message);
+    alert(message)
+}
+
+function SetReferralCode(Code,totalReferralusers) {
+    referralCode = Code;
+    var domainName = window.location.origin;
+    document.getElementById("referral-code").innerHTML = '<span class="fa fa-copy hand-curson" onclick=CopyToClipboard("referral-code")></span> &nbsp;&nbsp;' + referralCode;
+    document.getElementById("referral-link").innerHTML = '<span class="fa fa-copy hand-curson" onclick=CopyToClipboard("referral-link")></span> &nbsp;&nbsp;' + domainName + "/Web/register?refCode=" + referralCode;
+    document.getElementById("referral-code-status").innerHTML = totalReferralusers;
 }

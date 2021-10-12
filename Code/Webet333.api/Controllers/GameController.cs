@@ -533,7 +533,7 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> ManuallyKiss918BettingDetails([FromBody] GlobalBettingDetailsRequest request)
         {
             await CheckUserRole();
-            string kiss918UserName = "webet333-api";
+            string kiss918UserName = GameConst.Kiss918.agent;
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             var kiss918URL = $"http://api.918kiss.com:9919/ashx/AgentTotalReport.ashx?" +
                              $"Type=ServerTotalReport" +
@@ -1098,7 +1098,7 @@ namespace Webet333.api.Controllers
         [HttpGet(ActionsConst.Game.Kiss918_Betting_Details)]
         public async Task<IActionResult> Kiss918BettingDetails()
         {
-            string kiss918UserName = "webet333-api";
+            string kiss918UserName = GameConst.Kiss918.agent;
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             var kiss918URL = $"http://api.918kiss.com:9919/ashx/AgentTotalReport.ashx?" +
                              $"Type=ServerTotalReport" +
@@ -3599,7 +3599,7 @@ namespace Webet333.api.Controllers
         public async Task<IActionResult> Kiss918PlayerGameLog([FromBody] SlotsPlayerLogRequest request)
         {
             string kiss918UserName = request.Username;
-            string startDate = request.StartDate.AddMinutes(-5).ToString("yyyy-MM-dd HH:mm:ss");
+            string startDate = request.StartDate.AddMinutes(-60).ToString("yyyy-MM-dd HH:mm:ss");
             string endDate = request.EndDate.ToString("yyyy-MM-dd HH:mm:ss");
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             int pageSize = 100;

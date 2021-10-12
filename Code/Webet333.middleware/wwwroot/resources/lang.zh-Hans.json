@@ -164,5 +164,8 @@
   "to": "向 ：",
   "verified_otp": "验证一次性密码",
   "otp_verification_text": "一次性密码验证",
-  "send_otp": "重新发送动态密码"
+  "send_otp": "重新发送动态密码",
+  "referral_code": "推荐代码",
+  "referral_link": "推荐链接",
+  "referral": "转介"
 }

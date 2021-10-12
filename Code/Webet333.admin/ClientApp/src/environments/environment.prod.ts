@@ -18,6 +18,7 @@ export const environment = {
     apiUrlWithVersion: baseUrlWithoutVersion
 };
 
+
 export const account = {
     login: environment.apiUrl + 'account/login',
     logout: environment.apiUrl + 'account/logout',
@@ -383,7 +384,8 @@ export const customer = {
 
     getVIPLevelReport: environment.apiUrl + 'VIPLevel/report/select',
 
-    freeCreditReport: environment.apiUrl + 'freecreditevent/report'
+    freeCreditReport: environment.apiUrl + 'freecreditevent/report',
+    referralBonusReport: environment.apiUrl + 'referral_bonus_given/list'
 }
 
 export const playtech = {

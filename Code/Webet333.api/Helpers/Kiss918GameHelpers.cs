@@ -49,10 +49,6 @@ namespace Webet333.api.Helpers
 
         internal static async Task<Kiss918RegisterResponse> Kiss918Register(string Username, string Password, string MobileNo)
         {
-            Password = "WB3@" + Password;
-            if (Password.Length > 14)
-                Password = Password.Substring(0, 14);
-
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
             var URL = $"{GameConst.Kiss918.baseURL}account.ashx?" +
@@ -81,7 +77,7 @@ namespace Webet333.api.Helpers
 
         #region Kiss Register API
 
-        internal async Task<dynamic> Game918KissRegister(Game918KissRegisterRequest request,string Password)
+        internal async Task<dynamic> Game918KissRegister(Game918KissRegisterRequest request, string Password)
         {
             string response = request.APIResponse.ToString(Newtonsoft.Json.Formatting.None);
             using (var repository = new DapperRepository<dynamic>(Connection))

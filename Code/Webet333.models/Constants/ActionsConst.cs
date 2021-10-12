@@ -893,5 +893,12 @@
 
             public const string Login = "jdb/login";
         }
+
+        public class ReferralBonus
+        {
+
+            public const string retrive = "referral_bonus_given/list";
+
+        }
     }
 }

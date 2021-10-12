@@ -143,6 +143,13 @@
 
                                 <p class="note no-mar lang" key="name_instruction">Registered name must match your bank account name for banking purpose.You wont able to change your name after registered</p>
 
+                                <div class="row form-group ml0 mr0 mar-top-15">
+                                    <label class="user-title col-md-3 pl0 lang" key="referral_code"> Referral Code</label>
+                                    <label class="mar-btm-no user mendatory col-md-9 pl0">
+                                        <input type="text" class="reg-form" placeholder="(Optional)" value="" id="txt_refCode" />
+                                    </label>
+                                </div>
+
                                 <div class="row important_notice_register mr0 ml0">
                                     <!-- <div class="col-lg-2">&nbsp;</div> -->
                                     <div class="col-lg-10">
@@ -210,4 +217,19 @@
     function recaptchaCallback() {
         CapchaChecked = true
     }
+
+    $(document).ready(function () {
+        var url_string = window.location.href.toLowerCase();
+        var url = new URL(url_string);
+        var Code = url.searchParams.get("refcode");
+        if(Code!=null & Code!="" && Code!=undefined ){
+            $("#txt_refCode").val(Code);
+            $("#txt_refCode").attr("disabled","true");
+        }
+        else{
+            $("#txt_refCode").val("");
+            $("#txt_refCode").removeAttr("disabled");
+        }
+    });
+
 </script>

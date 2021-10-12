@@ -45,7 +45,7 @@ namespace Webet333.api.Helpers
             {
                 using (var repository = new DapperRepository<dynamic>(Connection))
                 {
-                    await repository.AddOrUpdateAsync(StoredProcConsts.Account.SetUsers, new { request.Name, UserName = request.Username, MobileNo = request.Mobile, Password = SecurityHelpers.EncryptPassword(request.Password), Role, request.ReferenceKeyword, request.OTP });
+                    await repository.AddOrUpdateAsync(StoredProcConsts.Account.SetUsers, new { request.Name, UserName = request.Username, MobileNo = request.Mobile, Password = SecurityHelpers.EncryptPassword(request.Password), Role, request.ReferenceKeyword, request.OTP,request.ReferralCode });
                 }
             }
             return await FindUser(request.Username, request.Password, uniqueId: UniqueId, grantType: GrantTypeEnums.user.ToString());

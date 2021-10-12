@@ -6,7 +6,9 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
@@ -1157,13 +1159,13 @@ namespace Webet333.api.Helpers
         {
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
-            var DisableUrl = $"{GameConst.Kiss918.baseURL}account.ashx?" +
-                $"action={GameConst.Kiss918.disableAccount}" +
-                $"&userName={kiss918UserName}" +
-                $"&time={timestamp}" +
-                $"&authcode={GameConst.Kiss918.authcode}" +
-                $"&sign={SecurityHelpers.MD5EncrptText(GameConst.Kiss918.authcode.ToLower() + kiss918UserName + timestamp + GameConst.Kiss918.SecretKey.ToLower()).ToUpper()}";
-            await CallThirdPartyApi(DisableUrl, null);
+            //var DisableUrl = $"{GameConst.Kiss918.baseURL}account.ashx?" +
+            //    $"action={GameConst.Kiss918.disableAccount}" +
+            //    $"&userName={kiss918UserName}" +
+            //    $"&time={timestamp}" +
+            //    $"&authcode={GameConst.Kiss918.authcode}" +
+            //    $"&sign={SecurityHelpers.MD5EncrptText(GameConst.Kiss918.authcode.ToLower() + kiss918UserName + timestamp + GameConst.Kiss918.SecretKey.ToLower()).ToUpper()}";
+            //await CallThirdPartyApi(DisableUrl, null);
 
             var url = $"{GameConst.Kiss918.baseURL}setScore.ashx?" +
                             $"action={GameConst.Kiss918.WidthdrawDeposit}" +
@@ -1807,6 +1809,19 @@ namespace Webet333.api.Helpers
             {
                 var list = await GetRepository.GetDataAsync(StoredProcConsts.Game.HotSlotsGameSelect, new { request.PageNo, request.PageSize });
                 return list.ToList();
+            }
+        }
+
+        internal static void GameImageStore(string FileURL, string ImagePath, string FileName)
+        {
+            try
+            {
+                using (WebClient webClient = new WebClient())
+                    webClient.DownloadFile(FileURL, $"{ImagePath}\\{FileName}");
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 

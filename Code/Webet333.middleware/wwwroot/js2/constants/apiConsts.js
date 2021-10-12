@@ -1,5 +1,5 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '', webUrl = '', mobUrl = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+let environmentName = 'DEBUG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
 let PortAPI = '9001';
 let PortWEB = '9002';
 
@@ -80,6 +80,7 @@ var apiEndPoints = {
     rebateHistroy: 'Game/Rebate/User/History',
     rewadHistroy: 'customer/reward/list',
     bettingSummeryHistroy: 'Game/bettingsummery',
+    referralSummeryHistroy: 'referral_bonus_given/list',
 
     AllInWallet: 'Game/Balance/InWallet',
 

@@ -1022,6 +1022,7 @@ function SetHistorySectionName(name) {
     $("#bettingsummery").html("");
     $("#promotionHistory").html("");
     $("#rebateHistory").html("");
+    $("#referralHistory").html("");
     HistorySectionName = name;
     fromDate = null;
     toDate = null;
@@ -1096,6 +1097,7 @@ function GetDateRange() {
     $("#bettingsummery").html("");
     $("#promotionHistory").html("");
     $("#rebateHistory").html("");
+    $("#referralHistory").html("");
     pageNumber = 0;
     var fdate = $("#datepicker1").val().split("/");
     var tdate = $("#datepicker2").val().split("/");
@@ -1125,6 +1127,7 @@ function CallFunctionAccordingToTab() {
             case "Promotion": PromotionHistory(); break;
             case "Rebate": RebateHistory(); break;
             case "Reward": RewardHistory(); break;
+            case "Referral": ReferralHistory(); break;
         }
 }
 
@@ -1308,6 +1311,34 @@ async function BettingHistory(FromDate = null, ToDate = null, PageSize = null, P
     apiRunning = false;
 }
 
+async function ReferralHistory(FromDate = null, ToDate = null, PageSize = null, PageNumber = null) {
+    apiRunning = true;
+    let model = {
+        pageNo: PageNumber == null ? pageNumber : PageNumber,
+        pageSize: PageSize == null ? pageSize : PageSize,
+        fromDate: FromDate == null ? fromDate : FromDate,
+        toDate: ToDate == null ? toDate : ToDate
+    }
+    var res = await PostMethod(apiEndPoints.referralSummeryHistroy, model);
+    if (res.data.result.length > 0) {
+        var data = res.data.result;
+        var html = ""
+        for (i = 0; i < data.length; i++) {
+            html += '<li data-toggle="modal" data-target="#referral-history-model" onclick="ReferralHistoryDetailsSet(\'' + data[i].Created + '\',\'' + data[i].ReferUsername + '\',\'' + parseFloat(data[i].Turnover).toFixed(2) + '\',\'' + parseFloat(data[i].ReferPercentage).toFixed(2) + '\',\'' + parseFloat(data[i].ReferralBonus).toFixed(2) + '\',\'' + data[i].CalculationDate + '\',\'' + '\')" class="list-content"><div class="back-btn rotate"><a><img class="tab-bankicon" src="/images/mobile/BackArrow_svg.svg" alt="" /></a></div><div class="product-name-time"><h6>' + data[i].ReferUsername + '</h6><p>' + data[i].Created + '</p></div><div class="product-subdesc"><p class="product-amount">T ' + parseFloat(data[i].Turnover).toFixed(2) + '</p><p class="product-available approved_color">' + parseFloat(data[i].ReferralBonus).toFixed(2) + '</p></div></li>';
+        }
+        $("#referralHistory").append(html);
+    }
+    else {
+        if (res.data.total == 0)
+            if ($("#referralHistory li").length == 0) {
+                var html = '<div class="row transfer-content"><div class="col-xs-12 display-flex"><p class="bank-name-detail text-center mar-top-15"><span class="lang" key="no_record_found_deposit"></span></p></div></div>'
+                $("#referralHistory").html(html);
+            }
+    }
+    getLanguage(false);
+    apiRunning = false;
+}
+
 function WithdrawDepositHistoryDetailsSet(Type, Created, Amount, Status, Method) {
     $("#depositHistoryType").html(Type)
     $("#depositHistoryMethod").html(Method)
@@ -1357,4 +1388,13 @@ function RebateHistoryDetailsSet(GameName, GameType, BetAmount, Rolling, winlose
     $("#rebateHistoryTurnover").html(Turnover)
     $("#rebateHistoryCommAmount").html(CommAmount)
     $("#rebateHistoryCreated").html(created.replace("T", " "))
+}
+
+function ReferralHistoryDetailsSet(TransactionDate, ReferUsername, Turnover, ReferPercentage, ReferBonus, DateofBonus) {
+    $("#referralHistoryTransactionDate").html(TransactionDate.replace("T", " "))
+    $("#referralHistoryReferUsername").html(ReferUsername)
+    $("#referralHistoryTurnover").html(Turnover)
+    $("#referralHistoryPercentage").html(ReferPercentage+ " %")
+    $("#referralHistoryBonus").html(ReferBonus)
+    $("#referralHistoryDateBonus").html(DateofBonus.split("T")[0])
 }
