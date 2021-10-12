@@ -227,22 +227,20 @@ async function GameInMaintenance(i) {
                 document.getElementById('cq9slot').style.filter = '';
                 document.getElementById('cq9slotlogin').style.filter = '';
             }
-        }
-<<<<<<< HEAD
 
-        if (walletData.data[i].walletType == 'JDB Wallet' &&
-            walletData.data[i].isMaintenance == true) {
-            document.getElementById('jdbslot').style.filter = 'grayscale(1)';
-            document.getElementById('jdbslotlogin').style.filter = 'grayscale(1)';
+            if (walletData.data[i].walletType == 'JDB Wallet' &&
+                walletData.data[i].isMaintenance == true) {
+                document.getElementById('jdbslot').style.filter = 'grayscale(1)';
+                document.getElementById('jdbslotlogin').style.filter = 'grayscale(1)';
+            }
+            else if (walletData.data[i].walletType == 'JDB Wallet' &&
+                walletData.data[i].isMaintenance == false) {
+                document.getElementById('jdbslot').style.filter = '';
+                document.getElementById('jdbslotlogin').style.filter = '';
+            }
         }
-        else if (walletData.data[i].walletType == 'JDB Wallet' &&
-            walletData.data[i].isMaintenance == false) {
-            document.getElementById('jdbslot').style.filter = '';
-            document.getElementById('jdbslotlogin').style.filter = '';
-        }
-=======
         catch (e) {}
->>>>>>> UAT
+        
     }
 }
 
