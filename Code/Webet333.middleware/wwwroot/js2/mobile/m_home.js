@@ -416,6 +416,7 @@ async function SetReferralCode() {
         var domainName = window.location.origin;
         document.getElementById("referral-code").innerHTML = '<span class="fa fa-copy hand-curson" onclick=copyText("referral-code")></span> &nbsp;&nbsp;' + referralCode;
         document.getElementById("referral-link").innerHTML = '<span class="fa fa-copy hand-curson" onclick=copyText("referral-link")></span> &nbsp;&nbsp;' + domainName + "/Web/register?refCode=" + referralCode;
+        document.getElementById("referral-code-status").innerHTML = data.data.totalReferralUser;
     }
     else {
         var res = await GetMethod(apiEndPoints.getProfile);
@@ -424,5 +425,6 @@ async function SetReferralCode() {
         var domainName = window.location.origin;
         document.getElementById("referral-code").innerHTML = '<span class="fa fa-copy hand-curson" onclick=copyText("referral-code")></span> &nbsp;&nbsp;' + referralCode;
         document.getElementById("referral-link").innerHTML = '<span class="fa fa-copy hand-curson" onclick=copyText("referral-link")></span> &nbsp;&nbsp;' + domainName + "/Web/register?refCode=" + referralCode;
+        document.getElementById("referral-code-status").innerHTML = data.data.totalReferralUser;
     }
 }

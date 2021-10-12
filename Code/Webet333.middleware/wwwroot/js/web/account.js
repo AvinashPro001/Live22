@@ -150,7 +150,7 @@ async function ProfileData() {
             SetAllValueInElement("vip_level_name", res.vipLevelName)
             $('#auto_transfer_checkbox').prop('checked', res.autoTransfer ? "checked" : "");
             SetVIPageProgressBar(res.vipLevelName, res.totalDepositAmount);
-            SetReferralCode(res.referralCode);
+            SetReferralCode(res.referralCode, res.totalReferralUser);
             if (res.vipLevelName.toLowerCase() == "normal") {
                 $("#referra_tab").css("display", "none");
                 $("#referral_bonus").css("display", "none");
@@ -380,7 +380,6 @@ async function DoRegister() {
         otp: otp,
         referralCode: $('#txt_refCode').val() == "" ? null : $('#txt_refCode').val()
     };
-    debugger
     LoaderShow();
     var res = await PostMethod(accountEndPoints.register, model);
     if (res.status == 200) {

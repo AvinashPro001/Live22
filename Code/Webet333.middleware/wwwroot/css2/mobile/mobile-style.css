@@ -2006,3 +2006,25 @@ p.bonus_content a {
 .referral-img{width:80px;}
 .referral-container{position: fixed;bottom: 80px;left: 10px;z-index: 1000;}
 .referral-close{position:fixed;bottom:160px;left:75px;}
+.referral-gradient {
+    background: linear-gradient(#D3D3D3, #BDBDBD) !important;
+    color: black !important;
+    text-align: center;
+    font-weight: 600;
+    padding: 25px;
+    width: 100%;
+    border: 34px;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: cornsilk;
+}
+
+    .referral-gradient span {
+        color: blue;
+    }
+
+.referral-lable {
+    display: flex;
+    font-weight: 100;
+}
