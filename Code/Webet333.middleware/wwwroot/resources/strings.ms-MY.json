@@ -346,5 +346,12 @@
   "username_avialble": "Nama pengguna tersedia.",
   "referral_code": "Kod rujukan",
   "referral_link": "Pautan Rujukan",
-  "referral": "Rujukan"
+  "referral": "Rujukan",
+  "referral_bonus": "Bonus rujukan",
+  "referral_bonus_share_offer_your_friend": "Kongsi tawaran kegemaran anda kepada rakan-rakan anda!",
+  "invite_frineds": "Rujuk Kawan",
+  "referral_status": "Referral Staus Anda",
+  "invitation_accept": "Jemputan Diterima",
+  "referral_instruction_1": "Rakan yang berdaftar dengan pautan rujukan / ID unik, anda akan mendapat 0.3% bonus dari turnover pertaruhan mereka.",
+  "referral_instruction_2": " Untuk pertanyaan lebih lanjut, sila hubungi LIVECHAT 24/7 kami. Terima kasih."
 }

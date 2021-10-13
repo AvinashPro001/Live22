@@ -166,5 +166,12 @@
   "send_otp": "Resend OTP",
   "referral_code": "Referral Code",
   "referral_link": "Referral Link",
-  "referral": "Referral"
+  "referral": "Referral",
+  "referral_bonus": "REFERRAL BONUS",
+  "referral_bonus_share_offer_your_friend": "Share your favorite offers to your friends!:",
+  "invite_frineds": "INVITE FRIENDS",
+  "referral_status": "Your Referral Status",
+  "invitation_accept": "Invitation Accepted",
+  "referral_instruction_1": "Friends registered through your unique referral link/ID,you will get 0.3% referral bonus from thier turnover betting.",
+  "referral_instruction_2": "For further inquiries, kindly contact our 24/7 LIVECHAT. Thank you."  
 }
