@@ -1742,7 +1742,7 @@
 
          public static class JDB
         {
-            public const string APIURL = "https://tttint.onlinegames22.com/";
+            public const string APIURL = "https://api.onlinegames22.com/";
 
             public const string FetchURL =  "https://fetch.onlinegames22.com/";
 
