@@ -167,5 +167,12 @@
   "send_otp": "重新发送动态密码",
   "referral_code": "推荐代码",
   "referral_link": "推荐链接",
-  "referral": "转介"
+  "referral": "推荐",
+  "referral_bonus": "推荐奖金",
+  "referral_bonus_share_offer_your_friend": "请分享此优惠给予您朋友：",
+  "invite_frineds": "邀请朋友",
+  "referral_status": "您的推荐状态",
+  "invitation_accept": "接受邀请",
+  "referral_instruction_1": "通过您独特的推荐链接/ID注册,你将根据注册朋友投注流水倍获取 0.3%推荐奖金。",
+  "referral_instruction_2": "如有任何疑问，请联系我们24/7在线客服。谢谢。"
 }
