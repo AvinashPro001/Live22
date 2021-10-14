@@ -716,5 +716,34 @@ namespace Webet333.api.Controllers
         }
 
         #endregion CQ9 Balance
+
+        #region JDB Balance
+
+        [Authorize]
+        [HttpPost(ActionsConst.GameBalance.JDBBalance)]
+        public async Task<IActionResult> JDBBalance([FromBody] UserBalanceRequest request)
+        {
+            if (request == null) return BadResponse(ErrorConsts.EmptyRequest);
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            if (GetUserRole(User) == RoleConst.Users) request.Id = GetUserId(User).ToString();
+            if (string.IsNullOrWhiteSpace(request.Id)) return BadResponse(ErrorConsts.InvalidModelstate);
+
+            dynamic previousBalance = 0.00;
+
+            using (var gamehelper = new GameBalanceHelpers(Connection))
+            {
+                string balance = await gamehelper.CallJDBGameBalance(request.Username);
+                previousBalance = await gamehelper.JDBBalanceUpdate(request.Id, balance);
+
+                return OkResponse(new
+                {
+                    balance = balance,
+                    previousBalance.PreviousBalance
+                });
+            }
+        }
+
+        #endregion JDB Balance
     }
 }

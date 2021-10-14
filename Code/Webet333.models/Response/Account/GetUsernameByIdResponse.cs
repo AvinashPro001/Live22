@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace Webet333.models.Response.Account
 {
@@ -69,6 +70,9 @@ namespace Webet333.models.Response.Account
 
         [JsonProperty("cq9Password")]
         public string CQ9Password { get; set; }
+
+        [JsonProperty("jdbUsername")]
+        public string JDBUsername { get; set; }
 
         [JsonProperty("mainWalletAmount")]
         public decimal MainWalletAmount { get; set; }

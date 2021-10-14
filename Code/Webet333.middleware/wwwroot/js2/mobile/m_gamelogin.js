@@ -227,8 +227,20 @@ async function GameInMaintenance(i) {
                 document.getElementById('cq9slot').style.filter = '';
                 document.getElementById('cq9slotlogin').style.filter = '';
             }
+
+            if (walletData.data[i].walletType == 'JDB Wallet' &&
+                walletData.data[i].isMaintenance == true) {
+                document.getElementById('jdbslot').style.filter = 'grayscale(1)';
+                document.getElementById('jdbslotlogin').style.filter = 'grayscale(1)';
+            }
+            else if (walletData.data[i].walletType == 'JDB Wallet' &&
+                walletData.data[i].isMaintenance == false) {
+                document.getElementById('jdbslot').style.filter = '';
+                document.getElementById('jdbslotlogin').style.filter = '';
+            }
         }
         catch (e) {}
+        
     }
 }
 
@@ -431,6 +443,19 @@ async function AllInButtonDisable(i) {
                 document.getElementById('cq9allin').disabled = false;
             }
         }
+
+        if (walletData.data[i].walletType == 'JDB Wallet' &&
+            walletData.data[i].isMaintenance == true) {
+            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+                document.getElementById('jdballin').disabled = true;
+            }
+        }
+        else if (walletData.data[i].walletType == 'JDB Wallet' &&
+            walletData.data[i].isMaintenance == false) {
+            if (window.location.href.toLowerCase().includes('?p=transfer')) {
+                document.getElementById('jdballin').disabled = false;
+            }
+        }
     }
 }
 
@@ -456,6 +481,7 @@ async function CheckGameInMaintenance(gameName) {
     if (gameName == "SBO") walletName = "SBO Wallet";
     if (gameName == 'GamePlay') walletName = 'GamePlay Wallet';
     if (gameName == 'CQ9') walletName = 'CQ9 Wallet';
+    if (gameName == 'JDB') walletName = 'JDB Wallet';
 
     for (i = 0; i < walletData.data.length; i++)
         if (walletData.data[i].walletType == walletName && walletData.data[i].isMaintenance == true)
@@ -621,6 +647,7 @@ async function logingGame(gameName) {
             if (gameName == "SBO") TransferInAllWallet("SBO Wallet");
             if (gameName == 'GamePlay') TransferInAllWallet("GamePlay Wallet");
             if (gameName == 'CQ9') TransferInAllWallet('CQ9 Wallet');
+            if (gameName == 'JDB') TransferInAllWallet('JDB Wallet');
         }
         window.open("/mobile/Game?gamename=" + gameName);
         //if (gameName != "Pragmatic") window.open("/mobile/Game?gamename=" + gameName);
@@ -764,7 +791,7 @@ async function GameLoginMobile(gamename) {
 
     if (GetLocalStorage('currentUser') !== null) {
         let resSelectUser = JSON.parse(dec(sessionStorage.getItem('UserRegisterDetails')));
-        debugger
+
         if (resSelectUser == null) {
             let userModel = { id: resUserData.data.id };
             resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
@@ -1110,6 +1137,23 @@ async function GameLoginMobile(gamename) {
                     let model = { isMobile: true };
                     let res = await PostMethod(apiEndPoints.CQ9Login, model);
                     if (res.data.status.code == '0') location.href = res.data.data.url;
+                }
+                break;
+            case 'JDB':
+                LoaderShow();
+                if (resSelectUser.data.JDB !== true) {
+                    let model = {};
+                    var res = await PostMethod(apiEndPoints.JDBRegister, model);
+                    if (res.data.status == '0000') {
+                        let model = { isMobile: true };
+                        let res = await PostMethod(apiEndPoints.JDBLogin, model);
+                        if (res.data.status == '0000') location.href = res.data.url;
+                    }
+                }
+                else {
+                    let model = { isMobile: true };
+                    let res = await PostMethod(apiEndPoints.JDBLogin, model);
+                    if (res.data.status == '0000') location.href = res.data.url;
                 }
                 break;
         }

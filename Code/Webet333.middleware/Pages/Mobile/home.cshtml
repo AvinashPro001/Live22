@@ -252,6 +252,12 @@
                                         <button class="game-title"><span class="lang" key="cq9slot_game"></span></button>
                                     </a>
                                 </li>
+                                <li data-toggle="modal" data-target="#gameLogin" id="jdb-slot">
+                                    <a>
+                                        <figure><img src="~/images/mobile/jdb_slot.png" alt="jdb-slot"></figure>
+                                        <button class="game-title"><span class="lang" key="jdbslot_game"></span></button>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         @*<div id="fishing-tile" role="tabpanel" class="tab-pane fade in"><ul class="game-series"><li></li></ul></div>*@
@@ -461,6 +467,12 @@
                                     <ul class="list-inline">
                                         <li><strong>CQ9 Wallet</strong></li>
                                         <li class="fright" id="ddlCQ9Wallet">feching...</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><strong>JDB Wallet</strong></li>
+                                        <li class="fright" id="ddlJDBWallet">feching...</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -692,6 +704,12 @@
                                 <a>
                                     <figure><img src="~/images/mobile/cq9_slot.png" alt="cq9-slot"></figure>
                                     <button class="game-title"><span class="lang" key="cq9slot_game"></span></button>
+                                </a>
+                            </li>
+                            <li onclick="logingGame('JDB')" id="jdbslotlogin">
+                                <a>
+                                    <figure><img src="~/images/mobile/jdb_slot.png" alt="jdb-logo"></figure>
+                                    <button class="game-title"><span class="lang" key="jdbslot_game"></span></button>
                                 </a>
                             </li>
                         </ul>

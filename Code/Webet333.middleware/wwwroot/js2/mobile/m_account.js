@@ -567,7 +567,8 @@ async function regisrationGame() {
                 resSelectUser.data.YeeBet === false ||
                 resSelectUser.data.SBO === false ||
                 resSelectUser.data.GamePlay === false ||
-                resSelectUser.data.CQ9 === false
+                resSelectUser.data.CQ9 === false ||
+                resSelectUser.data.JDB === false
             ) {
                 resSelectUser = await PostMethod(apiEndPoints.selectUser, userModel);
                 sessionStorage.setItem('UserRegisterDetails', enc(JSON.stringify(resSelectUser)));
@@ -764,6 +765,12 @@ async function regisrationGame() {
             if (resSelectUser.data.CQ9 !== true) {
                 let model = {};
                 try { await PostMethodWithParameter(apiEndPoints.CQ9Register, model); }
+                catch (e) { }
+            }
+
+            if (resSelectUser.data.JDB !== true) {
+                let model = {};
+                try { await PostMethodWithParameter(apiEndPoints.JDBRegister, model); }
                 catch (e) { }
             }
 

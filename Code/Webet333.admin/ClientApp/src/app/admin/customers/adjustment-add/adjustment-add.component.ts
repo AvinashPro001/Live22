@@ -72,6 +72,9 @@ export class AdjustmentAddComponent implements OnInit {
     CQ9Balance: any;
     CQ9Username: any;
 
+    JDBBalance: any;
+    JDBUsername: any;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -117,6 +120,7 @@ export class AdjustmentAddComponent implements OnInit {
             this.SBOUsername = res.data.sboUsername;
             this.GamePlayUsername = res.data.gameplayUsername;
             this.CQ9Username = res.data.cq9Username;
+            this.JDBUsername = res.data.jdbUsername;
 
             this.Kiss918Balance(newVal);
             this.Mega888(newVal);
@@ -137,6 +141,7 @@ export class AdjustmentAddComponent implements OnInit {
             this.SBO(newVal);
             this.GamePlay(newVal);
             this.CQ9(newVal);
+            this.JDB(newVal);
         })
     }
 
@@ -430,6 +435,16 @@ export class AdjustmentAddComponent implements OnInit {
         }
         this.adminService.add<any>(gameBalance.CQ9, data).subscribe(res => {
             this.CQ9Balance = res.data.balance;
+        })
+    }
+
+    JDB(id) {
+        let data = {
+            id: id,
+            username: this.JDBUsername
+        }
+        this.adminService.add<any>(gameBalance.JDB, data).subscribe(res => {
+            this.JDBBalance = res.data.balance;
         })
     }
 

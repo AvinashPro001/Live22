@@ -78,7 +78,7 @@
                                 <td id="yeebet_balance"><img src="~/images/loading.gif" /></td>
                                 <td id="gameplay_balance"><img src="~/images/loading.gif" /></td>
                                 <td id="cq9_balance"><img src="~/images/loading.gif" /></td>
-                                <td></td>
+                                <td id="jdb_balance"><img src="~/images/loading.gif" /></td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -87,7 +87,7 @@
                                 <td>YeeBet</td>
                                 <td>GamePlay</td>
                                 <td>CQ9</td>
-                                <td></td>
+                                <td>JDB</td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -920,14 +920,8 @@
                                             </ul>
                                         </div>
                                         <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>
-                                                    Daily Turnover
-                                                </li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="gameplay_turnover">0.00</li>
-                                            </ul>
+                                            <ul class="list-style"><li>Daily Turnover</li></ul>
+                                            <ul class="list-style"><li id="gameplay_turnover">0.00</li></ul>
                                         </div>
                                     </div>
                                 </div>
@@ -948,12 +942,35 @@
                                         </div>
                                         <div class="box-title">
                                             <ul class="list-style">
-                                                <li>
-                                                    Daily Turnover
-                                                </li>
+                                                <li>Daily Turnover</li>
                                             </ul>
                                             <ul class="list-style">
                                                 <li id="cq9_turnover">0.00</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-lg-3 col-sm-4">
+                                    <div class="in-wallet-chips">
+                                        <div class="chip-margin">
+                                            <ul>
+                                                <li class="mb5"><b>JDB</b></li>
+                                                <li class="text-primary">
+                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('JDB Wallet')" id="jdb-wallet-allin">ALL In</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="text-primary mb5">MYR</li>
+                                                <li class="text-primary" id="jdb_balance">0.00</li>
+                                            </ul>
+                                        </div>
+                                        <div class="box-title">
+                                            <ul class="list-style">
+                                                <li>Daily Turnover</li>
+                                            </ul>
+                                            <ul class="list-style">
+                                                <li id="jdb_turnover">0.00</li>
                                             </ul>
                                         </div>
                                     </div>

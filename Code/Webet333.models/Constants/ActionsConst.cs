@@ -442,6 +442,8 @@
 
             public const string CQ9_Betting_Details = "Game/CQ9_Betting_Details";
 
+            public const string JDB_Betting_Details = "Game/JDB_Betting_Details";
+
             public const string Manually_Joker_Betting_Details = "Game/Manually/Joker_Betting_Details";
 
             public const string Manually_AG_Betting_Details = "Game/Manually/AG_Betting_Details";
@@ -479,6 +481,8 @@
             public const string Manually_GamePlay_Betting_Details = "Game/Manually/GamePlay_Betting_Details";
 
             public const string Manually_CQ9_Betting_Details = "Game/Manually/CQ9_Betting_Details";
+
+            public const string Manually_JDB_Betting_Details = "Game/Manually/JDB_Betting_Details";
 
             public const string Playtech_Betting_Details = "Game/Playtech_Betting_Details";
 
@@ -536,6 +540,8 @@
 
             public const string CQ9BettingDetailsSave = "Game/CQ9BettingDetailsSave";
 
+            public const string JDBBettingDetailsSave = "Game/JDBBettingDetailsSave";
+
             public const string GameWalletBalance = "Game/AllWalletBalance";
 
             public const string GameWalletBalanceRestore = "Game/Balance/Restore";
@@ -592,6 +598,8 @@
             public const string GamePlayBalance = "gamebalance/gamePlay";
 
             public const string CQ9Balance = "gamebalance/cq9";
+
+            public const string JDBBalance = "gamebalance/jdb";
         }
 
         public class TransferMoney
@@ -877,6 +885,13 @@
             public const string UpdatePassword = "cq9/update/password";
 
             public const string Login = "cq9/login";
+        }
+
+        public static class JDB
+        {
+            public const string Register = "jdb/register";
+
+            public const string Login = "jdb/login";
         }
 
         public class ReferralBonus

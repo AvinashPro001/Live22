@@ -279,6 +279,7 @@ export class PromotionAddComponent implements OnInit {
             isGamePlayCasino: (document.getElementById("GamePlayCasino_id") as HTMLInputElement).checked,
             isGamePlaySlot: (document.getElementById("GamePlaySlot_id") as HTMLInputElement).checked,
             isCQ9Slot: (document.getElementById("CQ9Slot_id") as HTMLInputElement).checked,
+            isJDBSlot: (document.getElementById('JDBSlot_id') as HTMLInputElement).checked,
 
             isNewMember: (document.getElementById("newmember_id") as HTMLInputElement).checked,
             isSports: (document.getElementById("sports_id") as HTMLInputElement).checked,

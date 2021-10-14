@@ -30,6 +30,8 @@
 
         public string CQ9Username { get; set; }
 
+        public string JDBUsername { get; set; }
+
         public decimal MainWalletBalance { get; set; }
 
         public string FromWalletName { get; set; }

@@ -456,6 +456,23 @@ namespace Webet333.api.Helpers
 
         #endregion CQ9 Services
 
+        #region JDB Services
+
+        internal async Task JDBServicesInsert(string request)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                var res = await repository.AddOrUpdateAsync(
+                    StoredProcConsts.Game.JDBBettingDetailsInsert,
+                    new
+                    {
+                        jsonString = request
+                    });
+            }
+        }
+
+        #endregion JDB Services
+
         #region Kiss 918 Player Log Insert
 
         internal async Task<int> Kiss918PlayerLogInsert(List<PlayerGameLogResult> request, string Username)
@@ -1263,7 +1280,8 @@ namespace Webet333.api.Helpers
             decimal YeeBetBalance,
             decimal SBOBalance,
             decimal GamePlayBalance,
-            decimal CQ9Balance
+            decimal CQ9Balance,
+            decimal JDBBalance
             )
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
@@ -1292,7 +1310,8 @@ namespace Webet333.api.Helpers
                         YeeBetBalance,
                         SBOBalance,
                         GamePlayBalance,
-                        CQ9Balance
+                        CQ9Balance,
+                        JDBBalance
                     });
             }
         }
@@ -1603,6 +1622,10 @@ namespace Webet333.api.Helpers
 
                     case GameConst.GameName.CQ9:
                         result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_CQ9, new { request.UserId, request.FromDate, request.ToDate });
+                        break;
+
+                    case GameConst.GameName.JDB:
+                        result = await repository.GetDataAsync(StoredProcConsts.Game.BettingDetails_JDB, new { request.UserId, request.FromDate, request.ToDate });
                         break;
 
                     default:

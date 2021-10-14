@@ -172,6 +172,7 @@ namespace Webet333.service
                 var SBOList = userlist.Where(x => x.GameName == "SBO").ToList();
                 var GamePlayList = userlist.Where(x => x.GameName == "GamePlay").ToList();
                 var CQ9List = userlist.Where(x => x.GameName == "CQ9").ToList();
+                var JDBList = userlist.Where(x => x.GameName == "JDB").ToList();
 
                 //try
                 //{
@@ -445,6 +446,32 @@ namespace Webet333.service
                             };
 
                             var result = await APICallPost(APIConst.baseUrl + APIConst.RegisterCQ9, request: model);
+#if DEBUG
+                            Console.WriteLine(result);
+#endif
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WriteErrorTextToFile("Error :" + ex.Message);
+#if DEBUG
+                    Console.WriteLine(ex.Message.ToString());
+#endif
+                }
+
+                try
+                {
+                    if (JDBList.Any())
+                    {
+                        foreach (var data in JDBList)
+                        {
+                            var model = new
+                            {
+                                Id = data.UserId
+                            };
+
+                            var result = await APICallPost(APIConst.baseUrl + APIConst.RegisterJDB, request: model);
 #if DEBUG
                             Console.WriteLine(result);
 #endif

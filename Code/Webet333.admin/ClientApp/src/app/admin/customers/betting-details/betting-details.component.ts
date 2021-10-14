@@ -43,7 +43,8 @@ export class BettingDetailsComponent implements OnInit {
         { gameName: this.commonService.GameName.YeeBet },
         { gameName: this.commonService.GameName.SBO },
         { gameName: this.commonService.GameName.GamePlay },
-        { gameName: this.commonService.GameName.CQ9 }
+        { gameName: this.commonService.GameName.CQ9 },
+        { gameName: this.commonService.GameName.JDB }
     ];
 
     gmtList: any = [
@@ -485,6 +486,32 @@ export class BettingDetailsComponent implements OnInit {
                 { prop: 'RoundNumber' },
                 { prop: 'BetType' },
                 { prop: 'GameResult' }
+            ];
+        }
+        else if (selectedList == this.commonService.GameName.JDB) {
+            this.columns = [
+                { prop: 'GameType' },
+                { prop: 'WinAmount' },
+                { prop: 'TxTime' },
+                { prop: 'SettleStatus' },
+                { prop: 'GameInfo' },
+                { prop: 'RealWinAmount' },
+                { prop: 'UpdateTime' },
+                { prop: 'RealBetAmount' },
+                { prop: 'UserId' },
+                { prop: 'BetType' },
+                { prop: 'Platform' },
+                { prop: 'TxStatus' },
+                { prop: 'BetAmount' },
+                { prop: 'GameName' },
+                { prop: 'PlatformTxId' },
+                { prop: 'BetTime' },
+                { prop: 'GameCode' },
+                { prop: 'Currency' },
+                { prop: 'JackpotWinAmount' },
+                { prop: 'JackpotBetAmount' },
+                { prop: 'Turnover' },
+                { prop: 'RoundId' }
             ];
         }
         else {
@@ -1339,6 +1366,49 @@ export class BettingDetailsComponent implements OnInit {
                 });
                 break;
             }
+            case this.commonService.GameName.JDB: {
+                this.adminService.add<any>(customer.JDBBettingDetails, Model).subscribe(res => {
+                    if (res.data.status == '0000' &&
+                        res.data.transactions.length > 0) {
+                        this.rows = [];
+                        this.TableData = res.data.transactions;
+
+                        res.data.transactions.forEach(el => {
+                            this.rows.push({
+                                GameType: el.gameType,
+                                WinAmount: el.winAmount,
+                                TxTime: this.ReplaceDateTime(el.txTime),
+                                SettleStatus: el.settleStatus,
+                                GameInfo: JSON.stringify(el.gameInfo),
+                                RealWinAmount: el.realWinAmount,
+                                UpdateTime: this.ReplaceDateTime(el.updateTime),
+                                RealBetAmount: el.realBetAmount,
+                                UserId: el.userId,
+                                BetType: el.betType,
+                                Platform: el.platform,
+                                TxStatus: el.txStatus,
+                                BetAmount: el.betAmount,
+                                GameName: el.gameName,
+                                PlatformTxId: el.platformTxId,
+                                BetTime: this.ReplaceDateTime(el.betTime),
+                                GameCode: el.gameCode,
+                                Currency: el.currency,
+                                JackpotWinAmount: el.jackpotWinAmount,
+                                JackpotBetAmount: el.jackpotBetAmount,
+                                Turnover: el.turnover,
+                                RoundId: el.roundId
+                            });
+                        });
+                        this.rows = [...this.rows];
+                    }
+                    else this.setColumn("");
+                    this.loadingIndicator = false;
+                }, error => {
+                    this.loadingIndicator = false;
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
+                break;
+            }
             default: {
                 this.toasterService.pop('error', 'Error', this.commonService.errorMessage.PleaseSelectGame);
             }
@@ -1625,6 +1695,21 @@ export class BettingDetailsComponent implements OnInit {
                 }
                 case this.commonService.GameName.CQ9: {
                     this.adminService.add<any>(customer.SaveCQ9BettingDetails, model).subscribe(res => {
+                        this.toasterService.pop('success', 'Successfully', res.message);
+                        this.loadingIndicator = false;
+                        this.rows = [];
+                        this.setColumn("");
+                        this.TableData = null;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                        this.rows = [];
+                        this.setColumn("");
+                    });
+                    break;
+                }
+                case this.commonService.GameName.JDB: {
+                    this.adminService.add<any>(customer.SaveJDBBettingDetails, model).subscribe(res => {
                         this.toasterService.pop('success', 'Successfully', res.message);
                         this.loadingIndicator = false;
                         this.rows = [];

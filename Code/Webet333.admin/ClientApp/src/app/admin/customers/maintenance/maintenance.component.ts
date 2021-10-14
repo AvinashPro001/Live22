@@ -60,6 +60,9 @@ export class MaintenanceComponent implements OnInit {
     CQ9Mainteance: boolean;
     CQ9Id: any;
 
+    JDBMainteance: boolean;
+    JDBId: any;
+
     constructor(
         private adminService: AdminService,
         private toasterService: ToasterService,
@@ -149,6 +152,10 @@ export class MaintenanceComponent implements OnInit {
                 if (res.data[i].walletType === this.commonService.WalletName.CQ9) {
                     this.CQ9Mainteance = res.data[i].isMaintenance
                     this.CQ9Id = res.data[i].id
+                }
+                if (res.data[i].walletType === this.commonService.WalletName.JDB) {
+                    this.JDBMainteance = res.data[i].isMaintenance
+                    this.JDBId = res.data[i].id
                 }
             }
         })

@@ -19,12 +19,14 @@ using Webet333.models.Response.Game.AllBet;
 using Webet333.models.Response.Game.CQ9;
 using Webet333.models.Response.Game.DG;
 using Webet333.models.Response.Game.GamePlay;
+using Webet333.models.Response.Game.JDB;
 using Webet333.models.Response.Game.MAXBet;
 using Webet333.models.Response.Game.Pragmatic;
 using Webet333.models.Response.Game.SBO;
 using Webet333.models.Response.Game.SexyBaccarat;
 using Webet333.models.Response.Game.WM;
 using Webet333.models.Response.Game.YEEBET;
+using JDBGameConst = Webet333.models.Constants.GameConst.JDB;
 
 namespace Webet333.api.Helpers
 {
@@ -593,6 +595,39 @@ namespace Webet333.api.Helpers
 
         #endregion Call API of CQ9 Game
 
+        #region Call API of JDB Game
+
+        internal async Task<string> CallJDBGameBalance(string Username)
+        {
+            string balance = null;
+
+            try
+            {
+                var url = $"{JDBGameConst.APIURL}{JDBGameConst.EndPoint.GetBalance}";
+
+                var dict = new Dictionary<string, string>();
+                dict.Add("cert", JDBGameConst.CertKey);
+                dict.Add("agentId", JDBGameConst.AgentId);
+                dict.Add("alluser", "0");
+                dict.Add("userIds", Username);
+                dict.Add("isFilterBalance", "0");
+
+                string temp = await JDBGameHelpers.CallThirdPartyAPI(url, dict);
+
+                var deserializeAPIResult = JsonConvert.DeserializeObject<JDBGetBalanceResponse>(temp);
+
+                balance = deserializeAPIResult != null ? (deserializeAPIResult.Status == JDBGameConst.SuccessResponse.Status ? deserializeAPIResult.Results.FirstOrDefault().Balance.ToString() : null) : null;
+            }
+            catch (Exception ex)
+            {
+                balance = null;
+            }
+
+            return balance;
+        }
+
+        #endregion Call API of JDB Game
+
         #endregion Call Third Party Game Balance API's
 
         #region Update ALL games balance in db
@@ -849,6 +884,24 @@ namespace Webet333.api.Helpers
         }
 
         #endregion CQ9 Balance Update
+
+        #region JDB Balance Update
+
+        internal async Task<dynamic> JDBBalanceUpdate(string UserId, string Amount)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.FindAsync(
+                    StoredProcConsts.GameBalance.JDBGameBalanceUpdate,
+                    new
+                    {
+                        UserId,
+                        Amount
+                    });
+            }
+        }
+
+        #endregion JDB Balance Update
 
         #endregion Update ALL games balance in db
 
