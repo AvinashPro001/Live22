@@ -1740,6 +1740,53 @@
             }
         }
 
+         public static class JDB
+        {
+            public const string APIURL = "https://tttint.onlinegames22.com/";
+
+            public const string FetchURL =  "https://fetch.onlinegames22.com/";
+
+            public const string CertKey = "IyEMzNJ6Q5XhU81udNx";
+
+            public const string AgentId = "webetapi";
+
+            public const string Currency = "MYR";
+
+            public const string Language = "en";
+
+            public const string Platform = "JDB";
+
+            public const string GameType = "SLOT";
+
+            public static class SuccessResponse
+            {
+                public const string Desc = "Success";
+
+                public const string Status = "0000";
+            }
+
+            public static class EndPoint
+            {
+                public const string Register = "wallet/createMember";
+
+                public const string Login = "wallet/login";
+
+                public const string GetBalance = "wallet/getBalance";
+
+                public const string Withdraw = "wallet/withdraw";
+
+                public const string Deposit = "wallet/deposit";
+
+                public const string BettingDetails = "fetch/getTransactionByTxTime";
+            }
+
+            public static class LanguageCode
+            {
+                public const string English = "en";
+
+                public const string SimplifiedChinese = "cn";
+            }
+        }
 #endif
     }
 }

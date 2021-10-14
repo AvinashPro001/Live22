@@ -170,7 +170,14 @@ namespace Webet333.api.Helpers
 
         internal static async Task<dynamic> CallBettingDetailsAPI(GlobalBettingDetailsRequest request)
         {
-            var url = $"{JDBGameConst.APIURL}{JDBGameConst.EndPoint.BettingDetails}";
+#if DEBUG
+              var url = $"{JDBGameConst.APIURL}{JDBGameConst.EndPoint.BettingDetails}";
+
+#elif STAG
+            var url = $"{JDBGameConst.FetchURL}{JDBGameConst.EndPoint.BettingDetails}";
+#endif
+
+            //var url = $"{JDBGameConst.APIURL}{JDBGameConst.EndPoint.BettingDetails}";
             string timeZone = "+08:00";
             string timeformate = "yyyy-MM-ddTHH:mm:ss";
 
@@ -225,9 +232,9 @@ namespace Webet333.api.Helpers
             }
         }
 
-        #endregion Call Betting Details 3rd Party API
+#endregion Call Betting Details 3rd Party API
 
-        #region House Keeping
+#region House Keeping
 
         public void Dispose()
         {
@@ -240,6 +247,6 @@ namespace Webet333.api.Helpers
             if (dispose) Connection = string.Empty;
         }
 
-        #endregion House Keeping
+#endregion House Keeping
     }
 }
