@@ -11,6 +11,8 @@
             public const string GamePlay = "GamePlay Wallet";
 
             public const string CQ9 = "CQ9 Wallet";
+
+            public const string JDB = "JDB Wallet";
         }
     }
 }

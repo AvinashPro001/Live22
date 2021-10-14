@@ -2,7 +2,7 @@
 var walletIds = [
     "joker_balance", "playtech_balance", "kiss918_balance", "ag_balance", "m8_balance", "mega888_balance", "maxbet_balance",
     "dg_balance", "sexy_baccarat_balance", "sa_balance", "pussy888_balance", "allbet_balance", "wm_balance", "pragmatic_balance",
-    "yeebet_balance", "sbo_balance", 'gameplay_balance', 'cq9_balance'
+    "yeebet_balance", "sbo_balance", 'gameplay_balance', 'cq9_balance', 'jdb_balance'
 ];
 
 let UsersBalance = {
@@ -24,7 +24,8 @@ let UsersBalance = {
     YeeBetBalance: null,
     SboBalance: null,
     GamePlayBalance: null,
-    CQ9Balance: null
+    CQ9Balance: null,
+    JDBBalance: null
 }
 
 let GameUsernames = {
@@ -46,7 +47,8 @@ let GameUsernames = {
     YeeBetUsername: null,
     SboUsername: null,
     GamePlayUsername: null,
-    CQ9Username: null
+    CQ9Username: null,
+    JDBUsername: null
 }
 
 var AGTrigger = false,
@@ -60,7 +62,8 @@ var AGTrigger = false,
     M8Trigger = false,
     YeeBetTrigger = false,
     GamePlayTrigger = false,
-    CQ9Trigger = false;
+    CQ9Trigger = false,
+    JDBTrigger = false;
 
 //#endregion Declare Vairable
 
@@ -93,6 +96,7 @@ $(window).on('load', function () {
                 if (UsersBalance.SboBalance == null) SboWallet(GameUsernames.SboUsername);
                 if (UsersBalance.GamePlayBalance == null) GamePlayWallet(GameUsernames.GamePlayUsername);
                 if (UsersBalance.CQ9Balance == null) CQ9Wallet(GameUsernames.CQ9Username);
+                if (UsersBalance.JDBBalance == null) JDBWallet(GameUsernames.JDBUsername);
             }, 1000);
         }, 15000);
     }
@@ -120,6 +124,7 @@ function LoadAllBalance() {
     if (GameUsernames.SboUsername != null) SboWallet(GameUsernames.SboUsername);
     if (GameUsernames.GamePlayUsername != null) GamePlayWallet(GameUsernames.GamePlayUsername);
     if (GameUsernames.CQ9Username != null) CQ9Wallet(GameUsernames.CQ9Username);
+    if (GameUsernames.JDBUsername != null) JDBWallet(GameUsernames.JDBUsername);
 }
 
 async function LoadAllBalanceAsync() {
@@ -142,6 +147,7 @@ async function LoadAllBalanceAsync() {
     if (GameUsernames.SboUsername != null) await SboWallet(GameUsernames.SboUsername);
     if (GameUsernames.GamePlayUsername != null) await GamePlayWallet(GameUsernames.GamePlayUsername);
     if (GameUsernames.CQ9Username != null) await CQ9Wallet(GameUsernames.CQ9Username);
+    if (GameUsernames.JDBUsername != null) await JDBWallet(GameUsernames.JDBUsername);
 }
 
 async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
@@ -165,6 +171,7 @@ async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
         case "SBO Wallet": if (GameUsernames.SboUsername != null) await SboWallet(GameUsernames.SboUsername); break;
         case "GamePlay Wallet": if (GameUsernames.GamePlayUsername != null) await GamePlayWallet(GameUsernames.GamePlayUsername); break;
         case "CQ9 Wallet": if (GameUsernames.CQ9Username != null) await CQ9Wallet(GameUsernames.CQ9Username); break;
+        case 'JDB Wallet': if (GameUsernames.JDBUsername != null) await JDBWallet(GameUsernames.JDBUsername); break;
     }
 }
 
@@ -190,6 +197,7 @@ async function ReturnBalanceBasedOnWalletName(WalletName) {
         case "SBO Wallet": balance = UsersBalance.SboBalance; break;
         case "GamePlay Wallet": balance = UsersBalance.GamePlayBalance; break;
         case 'CQ9 Wallet': balance = UsersBalance.CQ9Balance; break;
+        case 'JDB Wallet': balance = UsersBalance.JDBBalance; break;
     }
 
     if (balance == "N/A") balance = "0.00";
@@ -226,6 +234,7 @@ async function SetUsername() {
     GameUsernames.SboUsername = GameUsername.sboUsername;
     GameUsernames.GamePlayUsername = GameUsername.gameplayUsername;
     GameUsernames.CQ9Username = GameUsername.cq9Username;
+    GameUsernames.JDBUsername = GameUsername.jdbUsername;
 }
 
 //#endregion
@@ -270,6 +279,7 @@ function SetLoadingImageBaseOnWalletName(WalletName) {
         case "SBO Wallet": SetLoadingImagesInBalance("sbo_balance"); SetFetchingWordInBalance("sbo_balance"); break;
         case "GamePlay Wallet": SetLoadingImagesInBalance("gameplay_balance"); SetFetchingWordInBalance("gameplay_balance"); break;
         case 'CQ9 Wallet': SetLoadingImagesInBalance('cq9_balance'); SetFetchingWordInBalance('cq9_balance'); break;
+        case 'JDB Wallet': SetLoadingImagesInBalance('jdb_balance'); SetFetchingWordInBalance('jdb_balance'); break;
     }
 }
 
@@ -305,6 +315,7 @@ async function RestoreBalance() {
         sbowallet: CheckNAorNot(UsersBalance.SboBalance),
         gameplaywallet: CheckNAorNot(UsersBalance.GamePlayBalance),
         cq9wallet: CheckNAorNot(UsersBalance.CQ9Balance),
+        jdbwallet: CheckNAorNot(UsersBalance.JDBBalance),
         id: null
     }
     await PostMethod(transactionEndPoints.restore, restoreModel);
@@ -351,6 +362,7 @@ async function GetDailyTurnover() {
         SetAllValueInElement("sbo_turnover", FormatBalance(res.response.data.response.sboTurover))
         SetAllValueInElement('gameplay_turnover', FormatBalance(res.response.data.response.gamePlayTurover))
         SetAllValueInElement('cq9_turnover', FormatBalance(res.response.data.response.cQ9Turover))
+        SetAllValueInElement('jdb_turnover', FormatBalance(res.response.data.response.jdbTurover))
     }
     $("#refresh-turnover").removeClass("rotate");
 }
@@ -803,6 +815,20 @@ async function CQ9Wallet(Username, IsDivValueSet = true) {
     }
 }
 
+async function JDBWallet(Username, IsDivValueSet = true) {
+    let model = { username: Username };
+    try {
+        var res = await PostMethod(gameBalanceEndPoints.jdbBalance, model);
+
+        if (res.status == 200) UsersBalance.JDBBalance = ConvertBalanceIntoCommasValue(res.response.data.balance);
+        else UsersBalance.JDBBalance = 'N/A';
+        if (IsDivValueSet) SetBalanceOnAllPlace('jdb_balance', UsersBalance.JDBBalance);
+    }
+    catch (e) {
+        UsersBalance.JDBBalance = 'N/A';
+        if (IsDivValueSet) SetBalanceOnAllPlace('jdb_balance', UsersBalance.JDBBalance);
+    }
+}
 //#endregion All Wallet Balance
 
 function StartTimerGameBalanceAPI(GameName) {
@@ -854,6 +880,10 @@ function StartTimerGameBalanceAPI(GameName) {
         case 'CQ9':
             let CQ9TimerId = setInterval(() => { CQ9Wallet(GameUsernames.CQ9Username); CQ9Trigger = true; }, 30000);
             setTimeout(() => { clearInterval(CQ9TimerId); CQ9Trigger = false; }, 301000);
+            break;
+        case 'JDB':
+            let JDBTimerId = setInterval(() => { JDBWallet(GameUsernames.JDBUsername); JDBTrigger = true; }, 30000);
+            setTimeout(() => { clearInterval(JDBTimerId); JDBTrigger = false; }, 301000);
             break;
     }
 }

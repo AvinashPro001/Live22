@@ -40,6 +40,7 @@ using Webet333.models.Response.Game;
 using Webet333.models.Response.Game.CQ9;
 using Webet333.models.Response.Game.DG;
 using Webet333.models.Response.Game.GamePlay;
+using Webet333.models.Response.Game.JDB;
 using Webet333.models.Response.Game.Joker;
 using Webet333.models.Response.Game.Kiss918;
 using Webet333.models.Response.Game.Pussy888;
@@ -871,6 +872,26 @@ namespace Webet333.api.Controllers
 
         #endregion CQ9 Game
 
+        #region JDB Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.Manually_JDB_Betting_Details)]
+        public async Task<IActionResult> Manually_JDB_Betting_Details([FromBody] GlobalBettingDetailsRequest request)
+        {
+            await CheckUserRole();
+
+            string timeformate = "yyyy-MM-ddTHH:mm:ss";
+
+            if (DateTime.Parse(request.ToDate.ToString(timeformate)).Subtract(DateTime.Parse(request.FromDate.ToString(timeformate))).TotalMinutes > 60) return BadResponse(ErrorConsts.ATimeDifferenceOfMoreThan60MinutesIsNotAllowed);
+            if (DateTime.Parse(request.ToDate.ToString(timeformate)).Subtract(DateTime.Parse(request.FromDate.ToString(timeformate))).TotalMinutes < 0) return BadResponse(ErrorConsts.FromDateIsGreaterThanToDate);
+
+            var response = await JDBGameHelpers.CallBettingDetailsAPI(request);
+
+            return OkResponse(response);
+        }
+
+        #endregion JDB Game
+
         #endregion Manually Game Betting Details
 
         #region GAME BETTING DETAILS
@@ -1467,6 +1488,38 @@ namespace Webet333.api.Controllers
 
         #endregion CQ9 Betting Details
 
+        #region JDB Betting Details
+
+        [HttpGet(ActionsConst.Game.JDB_Betting_Details)]
+        public async Task<IActionResult> JDB_Betting_Details()
+        {
+            DateTime date = DateTime.Now;
+
+            GlobalBettingDetailsRequest request = new GlobalBettingDetailsRequest
+            {
+                FromDate = date.AddMinutes(-30),
+                ToDate = date
+            };
+
+            var response = await JDBGameHelpers.CallBettingDetailsAPI(request);
+
+            if (response.Status == GameConst.JDB.SuccessResponse.Status &&
+                response.Transactions != null &&
+                response.Transactions.Count > 0)
+                using (var game_helper = new GameHelpers(Connection))
+                {
+                    var jsonString = JsonConvert.SerializeObject(response.Transactions);
+                    await game_helper.JDBServicesInsert(jsonString);
+                }
+
+            return OkResponse(new
+            {
+                jsonString = JsonConvert.SerializeObject(response)
+            });
+        }
+
+        #endregion JDB Betting Details
+
         #endregion GAME BETTING DETAILS
 
         #region Game Category
@@ -1824,7 +1877,7 @@ namespace Webet333.api.Controllers
 
         #endregion GamePlay Game
 
-        #region GamePlay Game
+        #region CQ9 Game
 
         [Authorize]
         [HttpPost(ActionsConst.Game.CQ9BettingDetailsSave)]
@@ -1848,7 +1901,33 @@ namespace Webet333.api.Controllers
             return OkResponse();
         }
 
-        #endregion GamePlay Game
+        #endregion CQ9 Game
+
+        #region JDB Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.JDBBettingDetailsSave)]
+        public async Task<IActionResult> JDBBettingDetails_Insert([FromBody] GameBettingDetailsInsertRequest request)
+        {
+            await CheckUserRole();
+
+            if (request.JsonData != null)
+            {
+                List<JDBBettingDetailsAPIResponse> result = JsonConvert.DeserializeObject<List<JDBBettingDetailsAPIResponse>>(request.JsonData.ToString());
+
+                if (result.Any())
+                {
+                    using (var game_help = new GameHelpers(Connection: Connection))
+                    {
+                        await game_help.JDBServicesInsert(request.JsonData);
+                    }
+                }
+            }
+
+            return OkResponse();
+        }
+
+        #endregion JDB Game
 
         #endregion Game Betting Details save
 
@@ -2007,7 +2086,8 @@ namespace Webet333.api.Controllers
                 YeeBetBalance = 0.0m,
                 SBOBalance = 0.0m,
                 GamePlayBalance = 0.0m,
-                CQ9Balance = 0.0m;
+                CQ9Balance = 0.0m,
+                JDBBalance = 0.0m;
 
             using (var game_helper = new GameHelpers(Connection))
             {
@@ -2237,6 +2317,18 @@ namespace Webet333.api.Controllers
                     { }
                 }
 
+                if (request.JDBWallet != 0)
+                {
+                    try
+                    {
+                        var result = await JDBGameHelpers.CallWithdrawAPI(user.JDBUsername, Math.Abs(request.JDBWallet));
+                        mainBalance += result.Status == GameConst.JDB.SuccessResponse.Status ? request.JDBWallet : 0;
+                        JDBBalance = result.Status == GameConst.JDB.SuccessResponse.Status ? request.JDBWallet : 0;
+                    }
+                    catch
+                    { }
+                }
+
                 await game_helper.BalanceRestore(
                     request.Id, UserId,
                     mainBalance,
@@ -2257,7 +2349,8 @@ namespace Webet333.api.Controllers
                     YeeBetBalance,
                     SBOBalance,
                     GamePlayBalance,
-                    CQ9Balance
+                    CQ9Balance,
+                    JDBBalance
                 );
 
                 return OkResponse(new { mainBalance });
@@ -2795,6 +2888,7 @@ namespace Webet333.api.Controllers
                     SBOUsername = user.SBOUsername,
                     GamePlayUsername = user.GamePlayUsername,
                     CQ9Username = user.CQ9Username,
+                    JDBUsername = user.JDBUsername,
 
                     FromWalletIsMaintenance = false,
                     FromWalletName = "Main Wallet",
@@ -3281,6 +3375,7 @@ namespace Webet333.api.Controllers
                 var SBOGame = result.Where(x => x.GameName == GameConst.GamesNames.SBO).ToList();
                 var GamePlayGame = result.Where(x => x.GameName == GameConst.GamesNames.GamePlay).ToList();
                 var CQ9Game = result.Where(x => x.GameName == GameConst.GamesNames.CQ9).ToList();
+                var JDBGame = result.Where(x => x.GameName == GameConst.GamesNames.JDB).ToList();
 
                 var response = new
                 {
@@ -3301,7 +3396,8 @@ namespace Webet333.api.Controllers
                     YeeBetTurover = YeeBetGame.Count > 0 ? YeeBetGame.FirstOrDefault().Turnover : 0,
                     SBOTurover = SBOGame.Count > 0 ? SBOGame.FirstOrDefault().Turnover : 0,
                     GamePlayTurover = GamePlayGame.Count > 0 ? GamePlayGame.FirstOrDefault().Turnover : 0,
-                    CQ9Turover = CQ9Game.Count > 0 ? CQ9Game.FirstOrDefault().Turnover : 0
+                    CQ9Turover = CQ9Game.Count > 0 ? CQ9Game.FirstOrDefault().Turnover : 0,
+                    JDBTurover = JDBGame.Count > 0 ? JDBGame.FirstOrDefault().Turnover : 0
                 };
 
                 decimal total =
@@ -3322,7 +3418,8 @@ namespace Webet333.api.Controllers
                     response.YeeBetTurover +
                     response.SBOTurover +
                     response.GamePlayTurover +
-                    response.CQ9Turover;
+                    response.CQ9Turover +
+                    response.JDBTurover;
 
                 return OkResponse(new { response, Total = total });
             }

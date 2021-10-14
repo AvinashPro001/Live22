@@ -243,7 +243,7 @@ async function DoLogin() {
                 ShowError(res.response.message);
                 setTimeout(function () {
                     DoLogout();
-                },5000);
+                }, 5000);
             }
 
             if (res.response.message == "Your access token is expired, please login again." || res.response.message == "Token akses anda tamat tempoh, sila log masuk sekali lagi." || res.response.message == "您的访问令牌已过期，请重新登录。") {
@@ -690,7 +690,8 @@ async function regisrationGame() {
                 resSelectUser.Pragmatic === false ||
                 resSelectUser.SBO === false ||
                 resSelectUser.GamePlay === false ||
-                resSelectUser.CQ9 === false
+                resSelectUser.CQ9 === false ||
+                resSelectUser.JDB === false
             ) {
                 var res = await PostMethod(accountEndPoints.gameRegisterCheck, userModel);
                 resSelectUser = res.response.data;
@@ -809,6 +810,12 @@ async function regisrationGame() {
             if (resSelectUser.CQ9 !== true) {
                 let model = {}
                 try { await PostMethod(gameRegisterEndPoints.cq9Register, model); }
+                catch { }
+            }
+
+            if (resSelectUser.JDB !== true) {
+                let model = {}
+                try { await PostMethod(gameRegisterEndPoints.jdbRegister, model); }
                 catch { }
             }
 

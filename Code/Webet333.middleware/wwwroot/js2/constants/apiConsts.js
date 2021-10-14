@@ -150,6 +150,9 @@ var apiEndPoints = {
     CQ9Register: 'cq9/register',
     CQ9Login: 'cq9/login',
 
+    JDBRegister: 'jdb/register',
+    JDBLogin: 'jdb/login',
+
     kiss918Balance: 'gamebalance/918kiss',
     mega888Balance: 'gamebalance/mega888',
     jokerBalance: 'gamebalance/joker',
@@ -168,6 +171,7 @@ var apiEndPoints = {
     SBOBalance: 'gamebalance/sbo',
     GamePlayBalance: 'gamebalance/gameplay',
     CQ9Balance: 'gamebalance/cq9',
+    JDBBalance: 'gamebalance/jdb',
 
     userDetaisSetGameBalance: 'userdetails/set',
 

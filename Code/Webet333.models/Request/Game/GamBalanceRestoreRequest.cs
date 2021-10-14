@@ -76,5 +76,9 @@ namespace Webet333.models.Request.Game
         [Required]
         [JsonProperty(PropertyName = "cq9wallet")]
         public decimal CQ9Wallet { get; set; }
+
+        [Required]
+        [JsonProperty(PropertyName = "jdbwallet")]
+        public decimal JDBWallet { get; set; }
     }
 }

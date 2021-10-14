@@ -249,6 +249,7 @@ export const customer = {
     SBOBettingDetails: environment.apiUrl + 'Game/Manually/SBO_Betting_Details',
     GamePlayBettingDetails: environment.apiUrl + 'Game/Manually/GamePlay_Betting_Details',
     CQ9BettingDetails: environment.apiUrl + 'Game/Manually/CQ9_Betting_Details',
+    JDBBettingDetails: environment.apiUrl + 'Game/Manually/JDB_Betting_Details',
 
     Kiss918PlayerLog: environment.apiUrl + '918kiss/playerlog',
     Pussy888PlayerLog: environment.apiUrl + 'pussy888/playerlog',
@@ -273,6 +274,7 @@ export const customer = {
     SaveSBOBettingDetails: environment.apiUrl + 'Game/SBOBettingDetailsSave',
     SaveGamePlayBettingDetails: environment.apiUrl + 'Game/GamePlayBettingDetailsSave',
     SaveCQ9BettingDetails: environment.apiUrl + 'Game/CQ9BettingDetailsSave',
+    SaveJDBBettingDetails: environment.apiUrl + 'Game/JDBBettingDetailsSave',
 
     approvalTimeInsert: environment.apiUrl + 'payments/approvaltime/insert',
     approvalTimeSelect: environment.apiUrl + 'payments/approvaltime/select',
@@ -461,7 +463,8 @@ export const gameBalance = {
     YeeBet: environment.apiUrl + 'gamebalance/YeeBet',
     SBO: environment.apiUrl + 'gamebalance/SBO',
     GamePlay: environment.apiUrl + 'gamebalance/GamePlay',
-    CQ9: environment.apiUrl + 'gamebalance/CQ9'
+    CQ9: environment.apiUrl + 'gamebalance/CQ9',
+    JDB: environment.apiUrl + 'gamebalance/JDB'
 }
 
 export const smsConst = {
@@ -510,5 +513,6 @@ export const GameRegister = {
     registerYeeBet: environment.apiUrl + 'yeebet/register',
     registerSBO: environment.apiUrl + 'sbo/register/player',
     registerGamePlay: environment.apiUrl + 'gameplay/register',
-    registerCQ9: environment.apiUrl + 'cq9/register'
+    registerCQ9: environment.apiUrl + 'cq9/register',
+    registerJDB: environment.apiUrl + 'jdb/register'
 }

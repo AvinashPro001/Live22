@@ -34,6 +34,7 @@ function CallGameLoginAPI(WalletName, IsSlots, CheckLogin = true) {
         case "SBO Wallet": OpenSBOGame(); break;
         case "GamePlay Wallet": OpenGamePlayGame(IsSlots); break;
         case "CQ9 Wallet": OpenCQ9Game(); break;
+        case 'JDB Wallet': OpenJDBGame(); break;
     }
 }
 
@@ -429,6 +430,29 @@ async function OpenPragmaticGame(IsSlots) {
     if (res.status == 200 &&
         res.response.data.error == '0')
         SetLocalStorage("gameURL", res.response.data.gameURL);
+}
+
+async function OpenJDBGame() {
+    let model = {}, resSelectUser;
+
+    if (GetLocalStorage("currentUser") != null) {
+        resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+        if (resSelectUser.JDB !== true) await PostMethod(gameRegisterEndPoints.jdbRegister, model);
+    }
+
+    return window.open("../Web/slots#jdb-game");
+}
+
+async function LoginJDBGame() {
+    let model, res;
+
+    if (GetLocalStorage('currentUser') == null) return ShowError(ChangeErroMessage('please_loign_error'));
+
+    window.open('../Web/game');
+
+    model = { isMobile: false }
+    res = await PostMethod(gameLoginEndPoints.jdbLogin, model);
+    SetLocalStorage('gameURL', res.response.data.url);
 }
 
 async function OpenPlaytechGame(IsSlots) {

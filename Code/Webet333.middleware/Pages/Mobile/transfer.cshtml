@@ -127,6 +127,12 @@
                                 <li class="fright" id="ddlCQ9Wallet">feching...</li>
                             </ul>
                         </li>
+                        <li>
+                            <ul class="list-inline">
+                                <li><strong>JDB Wallet</strong></li>
+                                <li class="fright" id="ddlJDBWallet">feching...</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -500,6 +506,20 @@
                         <div class="turnover-show">
                             <label>Daily Turnover</label>
                             <label id="CQ9Turnover">-</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4  transfer-wallet">
+                    <div class="transfer-wallet-div">
+                        <ul class="text-center">
+                            <li class="">JDB</li>
+                            <li class="text-primary">MYR</li>
+                            <li class="text-primary" id="JDBWallet">0.00</li>
+                            <li><button id="JDBAllIn" class="btn btn-default btn-default-border" onclick="TransferInAllWallet('JDB Wallet')"><span class="text-primary">ALL IN</span></button></li>
+                        </ul>
+                        <div class="turnover-show">
+                            <label>Daily Turnover</label>
+                            <label id="JDBTurnover">-</label>
                         </div>
                     </div>
                 </div>

@@ -30,7 +30,8 @@ export class BetdetailsLastupdateListComponent implements OnInit {
         { Type: this.commonService.GameName.PragmaticPlay },
         { Type: this.commonService.GameName.YeeBet },
         { Type: this.commonService.GameName.SBO },
-        { Type: this.commonService.GameName.GamePlay }
+        { Type: this.commonService.GameName.GamePlay },
+        { Type: this.commonService.GameName.JDB }
     ];
     selectedlist: any;
     loadingIndicator: boolean = false;

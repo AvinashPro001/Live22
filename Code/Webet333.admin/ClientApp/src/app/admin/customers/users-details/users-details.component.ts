@@ -195,7 +195,8 @@ export class UsersDetailsComponent implements OnInit {
         { gameName: this.commonService.GameName.YeeBet },
         { gameName: this.commonService.GameName.SBO },
         { gameName: this.commonService.GameName.GamePlay },
-        { gameName: this.commonService.GameName.CQ9 }
+        { gameName: this.commonService.GameName.CQ9 },
+        { gameName: this.commonService.GameName.JDB }
     ];
 
     gmtList: any = [
@@ -250,6 +251,9 @@ export class UsersDetailsComponent implements OnInit {
 
     CQ9Balance: any;
     CQ9Username: any;
+
+    JDBBalance: any;
+    JDBUsername: any;
 
     pageSize: number = 10;
     pageNumber: number = 0;
@@ -558,6 +562,7 @@ export class UsersDetailsComponent implements OnInit {
             this.SBOUsername = res.data.sboUsername;
             this.GamePlayUsername = res.data.gameplayUsername;
             this.CQ9Username = res.data.cq9Username;
+            this.JDBUsername = res.data.jdbUsername;
             this.WalletBalance(id);
             this.UserBrokenStaus();
         });
@@ -1142,6 +1147,32 @@ export class UsersDetailsComponent implements OnInit {
                 { prop: 'GameResult' }
             ];
         }
+        else if (selectedList == this.commonService.GameName.JDB) {
+            this.columns = [
+                { prop: 'GameType' },
+                { prop: 'WinAmount' },
+                { prop: 'TxTime' },
+                { prop: 'SettleStatus' },
+                { prop: 'GameInfo' },
+                { prop: 'RealWinAmount' },
+                { prop: 'UpdateTime' },
+                { prop: 'RealBetAmount' },
+                { prop: 'UserId' },
+                { prop: 'BetType' },
+                { prop: 'Platform' },
+                { prop: 'TxStatus' },
+                { prop: 'BetAmount' },
+                { prop: 'GameName' },
+                { prop: 'PlatformTxId' },
+                { prop: 'BetTime' },
+                { prop: 'GameCode' },
+                { prop: 'Currency' },
+                { prop: 'JackpotWinAmount' },
+                { prop: 'JackpotBetAmount' },
+                { prop: 'Turnover' },
+                { prop: 'RoundId' }
+            ];
+        }
         else {
             this.columns = [];
         }
@@ -1406,6 +1437,7 @@ export class UsersDetailsComponent implements OnInit {
         this.SBO(id);
         this.GamePlay(id);
         this.CQ9(id);
+        this.JDB(id);
     }
 
     //#endregion
@@ -1669,6 +1701,20 @@ export class UsersDetailsComponent implements OnInit {
                         this.adminService.add<any>(GameRegister.registerCQ9, data).subscribe(res => {
                             this.getUsername(Id);
                             this.CQ9(Id);
+                        });
+                    }
+                    catch (e) { }
+                }
+
+                //#endregion
+
+                //#region JDB Game Register
+
+                if (!res.data.JDB) {
+                    try {
+                        this.adminService.add<any>(GameRegister.registerJDB, data).subscribe(res => {
+                            this.getUsername(Id);
+                            this.JDB(Id);
                         });
                     }
                     catch (e) { }
@@ -2019,6 +2065,7 @@ export class UsersDetailsComponent implements OnInit {
             await this.SBO(id);
             await this.GamePlay(id);
             await this.CQ9(id);
+            await this.JDB(id);
 
             let balanceRestore = {
                 kiss918wallet: this.kiss918balance == null ? 0.0 : this.kiss918balance,
@@ -2039,6 +2086,7 @@ export class UsersDetailsComponent implements OnInit {
                 SBOWallet: this.SBOBalance == null ? 0.0 : this.SBOBalance,
                 GamePlayWallet: this.GamePlayBalance == null ? 0.0 : this.GamePlayBalance,
                 CQ9Wallet: this.CQ9Balance == null ? 0.0 : this.CQ9Balance,
+                JDBWallet: this.JDBBalance == null ? 0.0 : this.JDBBalance,
                 id: id
             }
 
@@ -2310,6 +2358,19 @@ export class UsersDetailsComponent implements OnInit {
         catch (e) { }
     }
 
+    async JDB(id) {
+        try {
+            let data = {
+                id: id,
+                username: this.JDBUsername,
+            }
+            this.adminService.add<any>(gameBalance.JDB, data).subscribe(res => {
+                this.JDBBalance = res.data.balance;
+            })
+        }
+        catch (e) { }
+    }
+
     //#endregion Wallet Balance
 
     //#region Restore Balance of user
@@ -2336,6 +2397,7 @@ export class UsersDetailsComponent implements OnInit {
                 await this.SBO(id);
                 await this.GamePlay(id);
                 await this.CQ9(id);
+                await this.JDB(id);
 
                 let data = {
                     kiss918wallet: this.kiss918balance == null ? 0.0 : this.kiss918balance,
@@ -2356,6 +2418,7 @@ export class UsersDetailsComponent implements OnInit {
                     SBOwallet: this.SBOBalance == null ? 0.0 : this.SBOBalance,
                     GamePlaywallet: this.GamePlayBalance == null ? 0.0 : this.GamePlayBalance,
                     CQ9wallet: this.CQ9Balance == null ? 0.0 : this.CQ9Balance,
+                    JDBwallet: this.JDBBalance == null ? 0.0 : this.JDBBalance,
                     id: id
                 }
                 this.adminService.add<any>(gameBalance.restoreBalance, data).subscribe(res => {
@@ -3290,6 +3353,49 @@ export class UsersDetailsComponent implements OnInit {
                                     RoundNumber: el.roundNumber,
                                     BetType: el.betType,
                                     GameResult: JSON.stringify(el.gameResult)
+                                });
+                            });
+                            this.rows = [...this.rows];
+                        }
+                        else this.setBettingDetailsColumn(this.selectedList);
+
+                        this.loadingIndicator = false;
+                    }, error => {
+                        this.loadingIndicator = false;
+                        this.toasterService.pop('error', 'Error', error.error.message);
+                    });
+                    break;
+                }
+                case this.commonService.GameName.JDB: {
+                    this.adminService.add<any>(customer.JDBBettingDetails, Model).subscribe(res => {
+                        if (res.data.status == '0000' &&
+                            res.data.transactions.length > 0) {
+                            this.rows = [];
+
+                            res.data.transactions.forEach(el => {
+                                this.rows.push({
+                                    GameType: el.gameType,
+                                    WinAmount: el.winAmount,
+                                    TxTime: this.replaceDateTime(el.txTime),
+                                    SettleStatus: el.settleStatus,
+                                    GameInfo: JSON.stringify(el.gameInfo),
+                                    RealWinAmount: el.realWinAmount,
+                                    UpdateTime: this.replaceDateTime(el.updateTime),
+                                    RealBetAmount: el.realBetAmount,
+                                    UserId: el.userId,
+                                    BetType: el.betType,
+                                    Platform: el.platform,
+                                    TxStatus: el.txStatus,
+                                    BetAmount: el.betAmount,
+                                    GameName: el.gameName,
+                                    PlatformTxId: el.platformTxId,
+                                    BetTime: this.replaceDateTime(el.betTime),
+                                    GameCode: el.gameCode,
+                                    Currency: el.currency,
+                                    JackpotWinAmount: el.jackpotWinAmount,
+                                    JackpotBetAmount: el.jackpotBetAmount,
+                                    Turnover: el.turnover,
+                                    RoundId: el.roundId
                                 });
                             });
                             this.rows = [...this.rows];

@@ -79,7 +79,8 @@ var gameBalanceEndPoints = {
     yeebetBalance: 'gamebalance/yeebet',
     sboBalance: 'gamebalance/sbo',
     gameplayBalance: 'gamebalance/gamePlay',
-    cq9Balance: 'gamebalance/cq9'
+    cq9Balance: 'gamebalance/cq9',
+    jdbBalance: 'gamebalance/jdb'
 };
 
 var transactionEndPoints = {
@@ -117,7 +118,8 @@ var gameRegisterEndPoints = {
     yeebetRegister: 'yeebet/register',
     sboRegister: 'sbo/register/player',
     gameplayRegister: 'gameplay/register',
-    cq9Register: 'cq9/register'
+    cq9Register: 'cq9/register',
+    jdbRegister: 'jdb/register'
 }
 
 var gameLoginEndPoints = {
@@ -133,7 +135,8 @@ var gameLoginEndPoints = {
     yeebetLogin: 'yeebet/login',
     sboLogin: 'sbo/login',
     gameplayLogin: 'gameplay/login',
-    cq9Login: 'cq9/login'
+    cq9Login: 'cq9/login',
+    jdbLogin: 'jdb/login'
 }
 
 var gameSettingEndPoints = {
