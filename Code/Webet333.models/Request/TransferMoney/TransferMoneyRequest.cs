@@ -19,5 +19,6 @@ namespace Webet333.models.Request.TransferMoney
         [Required]
         [JsonProperty(PropertyName = "amount")]
         public decimal Amount { get; set; }
+
     }
 }

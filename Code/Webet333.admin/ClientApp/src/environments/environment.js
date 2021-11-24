@@ -2,12 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameRegister = exports.ErrorMessages = exports.VIPSetting = exports.smsConst = exports.gameBalance = exports._918Kiss = exports.Joker = exports.playtech = exports.customer = exports.AGGame = exports.M8Game = exports.account = exports.environment = void 0;
 var baseUrl = '', baseUrlWithoutVersion = '';
-var environmentName = 'STAG'; // 'DEBUG' OR 'STAG' OR 'LOCAL'
-var PortAPI = '9001';
+var environmentName = 'LOCAL'; // 'DEBUG' OR 'STAG' OR 'LOCAL'
+//let PortAPI = '8081';
+//var PortAPI = '61743';
+var PortAPI = '5001';
 switch (environmentName.toUpperCase()) {
     case 'LOCAL':
-        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        // baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrl = 'http://localhost:' + PortAPI + '/api/v1/';
+      //  baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
         break;
     case 'DEBUG':
         baseUrl = 'https://uatapi.wb3api.com/api/v1/';
@@ -209,6 +212,7 @@ exports.customer = {
     SBOBettingDetails: exports.environment.apiUrl + 'Game/Manually/SBO_Betting_Details',
     GamePlayBettingDetails: exports.environment.apiUrl + 'Game/Manually/GamePlay_Betting_Details',
     CQ9BettingDetails: exports.environment.apiUrl + 'Game/Manually/CQ9_Betting_Details',
+    JDBBettingDetails: exports.environment.apiUrl + 'Game/Manually/JDB_Betting_Details',
     Kiss918PlayerLog: exports.environment.apiUrl + '918kiss/playerlog',
     Pussy888PlayerLog: exports.environment.apiUrl + 'pussy888/playerlog',
     MaxbetDefaultBettingLimit: exports.environment.apiUrl + 'MaxBet/DefaultBettingLimitSet',
@@ -230,6 +234,7 @@ exports.customer = {
     SaveSBOBettingDetails: exports.environment.apiUrl + 'Game/SBOBettingDetailsSave',
     SaveGamePlayBettingDetails: exports.environment.apiUrl + 'Game/GamePlayBettingDetailsSave',
     SaveCQ9BettingDetails: exports.environment.apiUrl + 'Game/CQ9BettingDetailsSave',
+    SaveJDBBettingDetails: exports.environment.apiUrl + 'Game/JDBBettingDetailsSave',
     approvalTimeInsert: exports.environment.apiUrl + 'payments/approvaltime/insert',
     approvalTimeSelect: exports.environment.apiUrl + 'payments/approvaltime/select',
     passwordResetSelect: exports.environment.apiUrl + 'account/gamepassword/select',
@@ -313,7 +318,8 @@ exports.customer = {
     homePageBannerSelectById: exports.environment.apiUrl + 'settings/homePage-banner/select/id',
     slotsGameInsert: exports.environment.apiUrl + 'Game/slotsgame/insert',
     getVIPLevelReport: exports.environment.apiUrl + 'VIPLevel/report/select',
-    freeCreditReport: exports.environment.apiUrl + 'freecreditevent/report'
+    freeCreditReport: exports.environment.apiUrl + 'freecreditevent/report',
+    referralBonusReport: exports.environment.apiUrl + 'referral_bonus_given/list'
 };
 exports.playtech = {
     playtechUrl: 'https://api.wb3api.com/api/Default/playtech',
@@ -381,7 +387,8 @@ exports.gameBalance = {
     YeeBet: exports.environment.apiUrl + 'gamebalance/YeeBet',
     SBO: exports.environment.apiUrl + 'gamebalance/SBO',
     GamePlay: exports.environment.apiUrl + 'gamebalance/GamePlay',
-    CQ9: exports.environment.apiUrl + 'gamebalance/CQ9'
+    CQ9: exports.environment.apiUrl + 'gamebalance/CQ9',
+    JDB: exports.environment.apiUrl + 'gamebalance/JDB'
 };
 exports.smsConst = {
     SMSbaseUrl: 'http://cloudsms.trio-mobile.com/index.php/api/bulk_mt?',
@@ -423,6 +430,7 @@ exports.GameRegister = {
     registerYeeBet: exports.environment.apiUrl + 'yeebet/register',
     registerSBO: exports.environment.apiUrl + 'sbo/register/player',
     registerGamePlay: exports.environment.apiUrl + 'gameplay/register',
-    registerCQ9: exports.environment.apiUrl + 'cq9/register'
+    registerCQ9: exports.environment.apiUrl + 'cq9/register',
+    registerJDB: exports.environment.apiUrl + 'jdb/register'
 };
 //# sourceMappingURL=environment.js.map

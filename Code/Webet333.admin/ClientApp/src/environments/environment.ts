@@ -1,12 +1,16 @@
 let baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
-let PortAPI = '8081';
+let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+//let PortAPI = '4203';
+let PortAPI = '5001';
 
 switch (environmentName.toUpperCase()) {
     case 'LOCAL':
-        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
-        break;
+        //baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        //baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        //baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        baseUrl = 'http://localhost:' + PortAPI + '/api/v1/';
+        // baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        break; 
     case 'DEBUG':
         baseUrl = 'https://uatapi.wb3api.com/api/v1/';
         baseUrlWithoutVersion = 'https://uatapi.wb3api.com';
@@ -234,6 +238,7 @@ export const customer = {
     JokerBettingDetails: environment.apiUrl + 'Game/Manually/Joker_Betting_Details',
     Mega888BettingDetails: environment.apiUrl + 'Game/Manually/Mega888_Betting_Details',
     Kiss918BettingDetails: environment.apiUrl + 'Game/Manually/918Kiss_Betting_Details',
+    Live22BettingDetails: environment.apiUrl + 'Game/Manually/Live22_Betting_Details',
     AGBettingDetails: environment.apiUrl + 'Game/Manually/AG_Betting_Details',
     DGBettingDetails: environment.apiUrl + 'Game/Manually/DG_Betting_Details',
     SexyBettingDetails: environment.apiUrl + 'Game/Manually/Sexy_Betting_Details',

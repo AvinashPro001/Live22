@@ -1,11 +1,16 @@
 ﻿var baseUrl = '', baseUrlWithoutVersion = '';
-let environmentName = 'STAG';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
-let PortAPI = '9001';
+let environmentName = 'LOCAL';  // 'DEBUG' OR 'STAG' OR 'LOCAL'
+/*let PortAPI = '9001';*/
+let PortAPI = '5001';
+
 
 switch (environmentName.toUpperCase()) {
     case 'LOCAL':
-        baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
-        baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+        //baseUrl = 'http://127.0.0.1:' + PortAPI + '/api/v1/';
+        //baseUrlWithoutVersion = 'http://127.0.0.1:' + PortAPI;
+
+        baseUrl = 'http://localhost:' + PortAPI + '/api/v1/';
+        baseUrlWithoutVersion = 'http://localhost:' + PortAPI;
         break;
     case 'DEBUG':
         baseUrl = 'https://uatapi.wb3api.com/api/v1/';
@@ -80,7 +85,9 @@ var gameBalanceEndPoints = {
     sboBalance: 'gamebalance/sbo',
     gameplayBalance: 'gamebalance/gamePlay',
     cq9Balance: 'gamebalance/cq9',
-    jdbBalance: 'gamebalance/jdb'
+    jdbBalance: 'gamebalance/jdb',
+    live22Balance: 'gamebalance/live22',
+    
 };
 
 var transactionEndPoints = {
@@ -119,7 +126,8 @@ var gameRegisterEndPoints = {
     sboRegister: 'sbo/register/player',
     gameplayRegister: 'gameplay/register',
     cq9Register: 'cq9/register',
-    jdbRegister: 'jdb/register'
+    jdbRegister: 'jdb/register',
+    registerLive22: 'Live22/register'
 }
 
 var gameLoginEndPoints = {
@@ -137,6 +145,7 @@ var gameLoginEndPoints = {
     gameplayLogin: 'gameplay/login',
     cq9Login: 'cq9/login',
     jdbLogin: 'jdb/login'
+
 }
 
 var gameSettingEndPoints = {
@@ -148,4 +157,8 @@ var gameSettingEndPoints = {
 
 var SettingEndPoints = {
     checkUsernameExists: 'account/check/username/exists'
+}
+
+var GameLaunchEndPoints = {
+    live22GameLaunch: 'Live22/Live22Launch'
 }

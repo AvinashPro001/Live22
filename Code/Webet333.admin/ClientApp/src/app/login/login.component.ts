@@ -48,11 +48,13 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.valid) {
             this.showloader = true;
             this.commonService.add<any>(account.login, value).subscribe((res) => {
+                debugger
                 this.showloader = true;
                 localStorage.setItem('currentUser', JSON.stringify(res.data));
                 localStorage.setItem('isReload', 'true');
                 this.router.navigate(['/admin/dashboard']);
             }, error => {
+                debugger
                 this.showloader = false;
                 this.toasterService.pop('error', 'Error', error.error.message);
                 this.router.navigate(['/']);

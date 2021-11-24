@@ -16,6 +16,7 @@ function CallGameLoginAPI(WalletName, IsSlots, CheckLogin = true) {
     if (CheckLogin) if (GetLocalStorage("currentUser") == null) return location.href = "/";
 
     switch (WalletName) {
+        case "Live22 Wallet": OpenLive22Game(); break;
         case "918Kiss Wallet": Open918KissGame(); break;
         case "Joker Wallet": OpenJokerGame(); break;
         case "Mega888 Wallet": OpenMega888Game(); break;
@@ -230,6 +231,18 @@ async function OpenWMGame() {
         if (login.status == 200 &&
             login.response.data.errorCode == 0)
             SetLocalStorage("gameURL", login.response.data.result);
+    }
+} 
+
+async function OpenLive22Game() {
+    window.open("../Web/slots#live22-game");
+    if (GetLocalStorage("currentUser") != null) {
+        let resSelectUser = JSON.parse(Decryption(GetSessionStorage('userRegisterDetails')));
+        //if (resSelectUser._918Kiss !== true) {
+        //    let model918Kiss = {
+        //    };
+        //    await PostMethod(gameRegisterEndPoints.register918Kiss, model918Kiss);
+        //}
     }
 }
 

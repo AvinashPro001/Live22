@@ -2,7 +2,7 @@
 var walletIds = [
     "joker_balance", "playtech_balance", "kiss918_balance", "ag_balance", "m8_balance", "mega888_balance", "maxbet_balance",
     "dg_balance", "sexy_baccarat_balance", "sa_balance", "pussy888_balance", "allbet_balance", "wm_balance", "pragmatic_balance",
-    "yeebet_balance", "sbo_balance", 'gameplay_balance', 'cq9_balance', 'jdb_balance'
+    "yeebet_balance", "sbo_balance", 'gameplay_balance', 'cq9_balance', 'jdb_balance',"live22_balance"
 ];
 
 let UsersBalance = {
@@ -25,7 +25,8 @@ let UsersBalance = {
     SboBalance: null,
     GamePlayBalance: null,
     CQ9Balance: null,
-    JDBBalance: null
+    JDBBalance: null,
+    Live22Balance: null
 }
 
 let GameUsernames = {
@@ -48,7 +49,8 @@ let GameUsernames = {
     SboUsername: null,
     GamePlayUsername: null,
     CQ9Username: null,
-    JDBUsername: null
+    JDBUsername: null,
+    Live22Username: null
 }
 
 var AGTrigger = false,
@@ -64,6 +66,7 @@ var AGTrigger = false,
     GamePlayTrigger = false,
     CQ9Trigger = false,
     JDBTrigger = false;
+    Live22Trigger = false;
 
 //#endregion Declare Vairable
 
@@ -97,6 +100,7 @@ $(window).on('load', function () {
                 if (UsersBalance.GamePlayBalance == null) GamePlayWallet(GameUsernames.GamePlayUsername);
                 if (UsersBalance.CQ9Balance == null) CQ9Wallet(GameUsernames.CQ9Username);
                 if (UsersBalance.JDBBalance == null) JDBWallet(GameUsernames.JDBUsername);
+                if (UsersBalance.Live22Balance != null) Live22Wallet(GameUsernames.Live22Username);
             }, 1000);
         }, 15000);
     }
@@ -125,6 +129,8 @@ function LoadAllBalance() {
     if (GameUsernames.GamePlayUsername != null) GamePlayWallet(GameUsernames.GamePlayUsername);
     if (GameUsernames.CQ9Username != null) CQ9Wallet(GameUsernames.CQ9Username);
     if (GameUsernames.JDBUsername != null) JDBWallet(GameUsernames.JDBUsername);
+    if (GameUsernames.Live22Username != null) Live22Wallet(GameUsernames.Live22Username);
+
 }
 
 async function LoadAllBalanceAsync() {
@@ -148,6 +154,7 @@ async function LoadAllBalanceAsync() {
     if (GameUsernames.GamePlayUsername != null) await GamePlayWallet(GameUsernames.GamePlayUsername);
     if (GameUsernames.CQ9Username != null) await CQ9Wallet(GameUsernames.CQ9Username);
     if (GameUsernames.JDBUsername != null) await JDBWallet(GameUsernames.JDBUsername);
+    if (GameUsernames.Live22Username != null) Live22Wallet(GameUsernames.Live22Username);
 }
 
 async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
@@ -172,6 +179,7 @@ async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
         case "GamePlay Wallet": if (GameUsernames.GamePlayUsername != null) await GamePlayWallet(GameUsernames.GamePlayUsername); break;
         case "CQ9 Wallet": if (GameUsernames.CQ9Username != null) await CQ9Wallet(GameUsernames.CQ9Username); break;
         case 'JDB Wallet': if (GameUsernames.JDBUsername != null) await JDBWallet(GameUsernames.JDBUsername); break;
+        case 'JDB Wallet': if (GameUsernames.Live22Username != null) await JDBWallet(GameUsernames.Live22Username); break;
     }
 }
 
@@ -198,6 +206,7 @@ async function ReturnBalanceBasedOnWalletName(WalletName) {
         case "GamePlay Wallet": balance = UsersBalance.GamePlayBalance; break;
         case 'CQ9 Wallet': balance = UsersBalance.CQ9Balance; break;
         case 'JDB Wallet': balance = UsersBalance.JDBBalance; break;
+        case 'Live22 Wallet': balance = UsersBalance.Live22Balance; break;
     }
 
     if (balance == "N/A") balance = "0.00";
@@ -235,6 +244,8 @@ async function SetUsername() {
     GameUsernames.GamePlayUsername = GameUsername.gameplayUsername;
     GameUsernames.CQ9Username = GameUsername.cq9Username;
     GameUsernames.JDBUsername = GameUsername.jdbUsername;
+    GameUsernames.Live22Username = GameUsername.userLive22;
+
 }
 
 //#endregion
@@ -280,6 +291,7 @@ function SetLoadingImageBaseOnWalletName(WalletName) {
         case "GamePlay Wallet": SetLoadingImagesInBalance("gameplay_balance"); SetFetchingWordInBalance("gameplay_balance"); break;
         case 'CQ9 Wallet': SetLoadingImagesInBalance('cq9_balance'); SetFetchingWordInBalance('cq9_balance'); break;
         case 'JDB Wallet': SetLoadingImagesInBalance('jdb_balance'); SetFetchingWordInBalance('jdb_balance'); break;
+        case 'JDB Wallet': SetLoadingImagesInBalance('live22_balance'); SetFetchingWordInBalance('live22_balance'); break;
     }
 }
 
@@ -316,6 +328,7 @@ async function RestoreBalance() {
         gameplaywallet: CheckNAorNot(UsersBalance.GamePlayBalance),
         cq9wallet: CheckNAorNot(UsersBalance.CQ9Balance),
         jdbwallet: CheckNAorNot(UsersBalance.JDBBalance),
+        live22wallet: CheckNAorNot(UsersBalance.Live22Balance),
         id: null
     }
     await PostMethod(transactionEndPoints.restore, restoreModel);
@@ -363,6 +376,7 @@ async function GetDailyTurnover() {
         SetAllValueInElement('gameplay_turnover', FormatBalance(res.response.data.response.gamePlayTurover))
         SetAllValueInElement('cq9_turnover', FormatBalance(res.response.data.response.cQ9Turover))
         SetAllValueInElement('jdb_turnover', FormatBalance(res.response.data.response.jdbTurover))
+        SetAllValueInElement('live22_turnover', FormatBalance(res.response.data.response.live22Turover))
     }
     $("#refresh-turnover").removeClass("rotate");
 }
@@ -827,6 +841,29 @@ async function JDBWallet(Username, IsDivValueSet = true) {
     catch (e) {
         UsersBalance.JDBBalance = 'N/A';
         if (IsDivValueSet) SetBalanceOnAllPlace('jdb_balance', UsersBalance.JDBBalance);
+    }
+}
+
+async function Live22Wallet(Username, IsDivValueSet = true) {
+    let model = {
+        username: Username
+    };
+    try {
+        var res = await PostMethod(gameBalanceEndPoints.live22Balance, model);
+
+        if (res.status == 200) {
+            UsersBalance.Live22Balance = ConvertBalanceIntoCommasValue(res.response.data.balance);
+        }
+        else {
+            UsersBalance.Live22Balance = "N/A";
+        }
+        if (IsDivValueSet)
+            SetBalanceOnAllPlace("live22_balance", UsersBalance.Live22Balance);
+    }
+    catch (e) {
+        UsersBalance.Live22Balance = "N/A";
+        if (IsDivValueSet)
+            SetBalanceOnAllPlace("live22_balance", UsersBalance.Live22Balance);
     }
 }
 //#endregion All Wallet Balance

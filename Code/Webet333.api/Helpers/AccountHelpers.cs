@@ -51,11 +51,14 @@ namespace Webet333.api.Helpers
             return await FindUser(request.Username, request.Password, uniqueId: UniqueId, grantType: GrantTypeEnums.user.ToString());
         }
 
-        public async Task<ProfileResponse> FindUser(string email = null, string password = null, string password918 = null, string userId = null, string userName = null, string uniqueId = null, string grantType = null, string mobileNo = null, string userName918 = null)
+        public async Task<ProfileResponse> FindUser(string email = null, string password = null, string password918 = null, string userId = null, string userName = null, string uniqueId = null, string grantType = null, string mobileNo = null, string userName918 = null, string userName22= null, string password22 = null)
         {
             using (var GetProfileRepository = new DapperRepository<ProfileResponse>(Connection))
+
             {
-                ProfileResponse user = await GetProfileRepository.FindAsync(StoredProcConsts.Account.GetProfile, new { email, Password = SecurityHelpers.EncryptPassword(password), userId, userName, uniqueId, Role = grantType, mobileNo, userName918, Password918 = password918 });
+
+                var ab = SecurityHelpers.EncryptPassword(password);
+                ProfileResponse user = await GetProfileRepository.FindAsync(StoredProcConsts.Account.GetProfile, new { email, Password = SecurityHelpers.EncryptPassword(password), userId, userName, uniqueId, Role = grantType, mobileNo, userName918, Password918 = password918, UserName22 = userName22 , Password22 = password22 });
 
                 if (user != null)
                 {

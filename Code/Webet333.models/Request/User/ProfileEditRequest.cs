@@ -34,5 +34,11 @@ namespace Webet333.models.Request.User
 
         [JsonProperty(propertyName: "autoTransfer")]
         public bool AutoTransfer { get; set; }
-    }
+
+		[JsonProperty(propertyName: "username22")]
+		public string UserName22 { get; set; }
+
+		[JsonProperty(propertyName: "password22")]
+		public string Password22 { get; set; }
+	}
 }

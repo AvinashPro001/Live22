@@ -1264,5 +1264,6 @@ async function CheckSupportGame() {
         ButtonDisabled("gameplay-wallet-allin", !res.response.data[0].IsGamePlay);
         ButtonDisabled("cq9-wallet-allin", !res.response.data[0].IsCQ9);
         ButtonDisabled('jdb-wallet-allin', !res.response.data[0].IsJDB);
+        ButtonDisabled('Live22-wallet-allin', !res.response.data[0].IsLive22);
     }
 }

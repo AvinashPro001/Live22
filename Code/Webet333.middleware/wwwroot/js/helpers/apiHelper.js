@@ -82,7 +82,7 @@ async function PostMethod(endPoint, model) {
                 'Access-Control-Max-Age': 300,
                 'Accept-Language': GetLocalStorage('language')
             },
-            url: baseUrl + endPoint,
+            url: baseUrl + endPoint,        
             success: (result, status, xhr) => {
                 var response = {
                     "status": 200,

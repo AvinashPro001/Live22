@@ -44,7 +44,9 @@ export class BettingDetailsComponent implements OnInit {
         { gameName: this.commonService.GameName.SBO },
         { gameName: this.commonService.GameName.GamePlay },
         { gameName: this.commonService.GameName.CQ9 },
-        { gameName: this.commonService.GameName.JDB }
+        { gameName: this.commonService.GameName.JDB },
+        { gameName: this.commonService.GameName.Live22}
+
     ];
 
     gmtList: any = [
@@ -522,6 +524,7 @@ export class BettingDetailsComponent implements OnInit {
     //#endregion
 
     onChange($event) {
+        debugger
         let gameName = $event.target.value;
 
         if (gameName === this.commonService.GameName.M8 ||
@@ -892,6 +895,41 @@ export class BettingDetailsComponent implements OnInit {
                             });
                         });
                         this.rows = [...this.rows];
+                    }
+                    else this.setColumn("");
+                    this.loadingIndicator = false;
+                }, error => {
+                    this.loadingIndicator = false;
+                    this.toasterService.pop('error', 'Error', error.error.message);
+                });
+                break;
+            }
+            case this.commonService.GameName.Live22: {
+                this.adminService.add<any>(customer.Live22BettingDetails, Model).subscribe(res => {
+                    debugger;
+                    this.loadingIndicator = true;
+                    this.rows = [];
+                    if (res.data.results.length > 0) {
+                        this.TableData = res.data;
+                        // res.data.results.forEach(el => {
+                        //     this.rows.push({
+                        //         Account: el.account,
+                        //         Agentwin: el.agentwin,
+                        //         Idx: el.idx,
+                        //         Jtime: el.jtime,
+                        //         Win: el.win,
+                        //         Press: el.press,
+                        //         Pump: el.pump,
+                        //         SelfWin: el.selfwin,
+                        //         Type: el.type,
+                        //         Yield: el.yield,
+                        //         Memo: el.memo,
+                        //         MyDate: el.mydate,
+                        //         Name: el.name,
+                        //         Tel: el.tel,
+                        //     });
+                        // });
+                        // this.rows = [...this.rows];
                     }
                     else this.setColumn("");
                     this.loadingIndicator = false;

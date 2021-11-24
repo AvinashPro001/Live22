@@ -284,7 +284,8 @@ export class CommonService {
         SBO: 'SBO',
         GamePlay: 'GamePlay',
         CQ9: 'CQ9',
-        JDB: 'JDB'
+        JDB: 'JDB',
+        Live22: 'Live22'
     }
 
     //#endregion Game List
@@ -310,7 +311,8 @@ export class CommonService {
         SBO: 'SBO Wallet',
         GamePlay: 'GamePlay Wallet',
         CQ9: 'CQ9 Wallet',
-        JDB: 'JDB Wallet'
+        JDB: 'JDB Wallet',
+        Live22: 'Live Wallet'
     }
 
     //#endregion Game List

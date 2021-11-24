@@ -41,6 +41,8 @@
             public const string CQ9 = "CQ9";
 
             public const string JDB = "JDB";
+
+            public const string Live22 = "Live22";
         }
 
         public class GamesNames
@@ -82,6 +84,8 @@
             public const string CQ9 = "CQ9";
 
             public const string JDB = "JDB";
+
+            public const string Live22 = "Live22";
         }
 
 #if DEBUG
@@ -933,6 +937,39 @@
 
                 public const string SimplifiedChinese = "cn";
             }
+        }
+
+        public class Live22
+        {
+            public const string baseURL = "http://gsmd.336699bet.com/";
+
+            public const string logURL = "http://gslog.336699bet.com/";
+
+            public const string userInfo = "getUserInfo";
+
+            public const string disableAccount = "disable";
+
+            public const string authcode = "NGXMSzTYxtZcaMCVCcGb";
+
+            public const string SecretKey = "b62e2396cd8a70e7212a6e70cb205941";
+
+            public const string withdraw = "1";
+
+            public const string deposit = "0";
+
+            public const string AddUser = "AddUser";
+
+            public const string agent = "wb333api";
+
+            public const string randomUsername = "RandomUserName";
+
+            public const string PlayerType = "1";
+
+            public const string OperatorCode = "x1wm";
+
+            public const string providerCode  = "L4";
+
+
         }
 
 #elif STAG

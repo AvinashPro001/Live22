@@ -79,7 +79,7 @@ namespace Webet333.api.Helpers
             try
             {
                 dynamic resultKiss918 = JsonConvert.DeserializeObject(await CallThirdPartyApi(kiss918URL, null));
-                Kiss918Balance = resultKiss918 != null ? (resultKiss918.success == true ? resultKiss918.ScoreNum : null) : null;
+                Kiss918Balance =  resultKiss918 != null ? (resultKiss918.success == true ? resultKiss918.ScoreNum : null) : null;
             }
             catch (Exception ex)
             {
@@ -628,6 +628,38 @@ namespace Webet333.api.Helpers
 
         #endregion Call API of JDB Game
 
+        #region Call API of Live22 game
+
+        public async Task<string> CallLive22GameBalance(string Live22UserName)
+        {
+
+            string password = "Qwer124";
+            //Signature = MD5(operatorcode + password + providercode + username + secret_key), then convert to uppercase
+            //<API_URL>/ getBalance.aspx ? operatorcode = xxx & providercode = xxx & username = xxx & password = xxx & signature = xxx
+            string Live22Balance = null;            
+           
+                var Live22URL = $"{GameConst.Live22.baseURL}getBalance.aspx?" +
+                            $"operatorcode={GameConst.Live22.OperatorCode}" +
+                            $"&providercode={GameConst.Live22.providerCode}" +
+                            $"&username={Live22UserName}" +                           
+                            $"&password={password}" +
+                            $"&signature={SecurityHelpers.MD5EncrptText(GameConst.Live22.OperatorCode + password+ GameConst.Live22.providerCode + Live22UserName +  GameConst.Live22.SecretKey).ToUpper()}";
+                try
+                {
+                dynamic resultLive22 = JsonConvert.DeserializeObject(await CallThirdPartyApi(Live22URL, null));                
+                Live22Balance = resultLive22.balance;
+                    //resultLive22 != null ? (resultLive22.balance == JDBGameConst.SuccessResponse.Status ? Live22Balance.FirstOrDefault().ToString() : null) : null;
+                }
+            catch (Exception ex)
+            {
+                Live22Balance = null;
+            }
+
+            return Live22Balance;
+        }
+
+        #endregion Call API of 918 Kiss game
+
         #endregion Call Third Party Game Balance API's
 
         #region Update ALL games balance in db
@@ -902,6 +934,18 @@ namespace Webet333.api.Helpers
         }
 
         #endregion JDB Balance Update
+
+        #region Live 22 balance update
+
+        internal async Task<dynamic> Live22BalanceUpdate(string UserId, string Amount)
+        {
+            using (var repository = new DapperRepository<dynamic>(Connection))
+            {
+                return await repository.FindAsync(StoredProcConsts.GameBalance.Live22GameBalanceUpdate, new { UserId, Amount });
+            }
+        }
+
+        #endregion Live 22 balance update
 
         #endregion Update ALL games balance in db
 

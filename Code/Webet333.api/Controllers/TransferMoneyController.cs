@@ -116,6 +116,8 @@ namespace Webet333.api.Controllers
                     string.IsNullOrEmpty(WithdrawResponse.GameName) &&
                     string.IsNullOrEmpty(WithdrawResponse.GameResponse))
                 {
+
+
                     // Deposit From Wallet
                     var DepositResponse = await transferMoney_helper.DepositInWallet(
                         userDetails,
@@ -193,7 +195,7 @@ namespace Webet333.api.Controllers
 
                             return BadResponse("Completed Transaction Is Failed So We Add Money in Main Wallet");
                         }
-
+                        
                         transferMoney_helper.UserBalanceIsBeginUpdate(request.UserId, false);
 
                         await ApiLogsManager.APITransactionLogsInsert(

@@ -49,5 +49,7 @@
         public string WMUsername { get; set; }
 
         public string PragmaticUsername { get; set; }
+
+        public string Live22Username { get; set; }
     }
 }

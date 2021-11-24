@@ -79,7 +79,7 @@
                                 <td id="gameplay_balance"><img src="~/images/loading.gif" /></td>
                                 <td id="cq9_balance"><img src="~/images/loading.gif" /></td>
                                 <td id="jdb_balance"><img src="~/images/loading.gif" /></td>
-                                <td></td>
+								<td id="live22_balance"><img src="~/images/loading.gif" /></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -88,7 +88,7 @@
                                 <td>GamePlay</td>
                                 <td>CQ9</td>
                                 <td>JDB</td>
-                                <td></td>
+                                <td>Live22</td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -503,479 +503,503 @@
                             </div>
                         </div>
                         <div class="row ml0 mr0">
-                            <div class="col-lg-12 pl0 pr0">
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>Joker</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Joker Wallet')" id="joker-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="joker_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>Daily Turnover</li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="joker_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>Playtech</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('PlayTech Wallet')" id="playtech-wallet-allin">
-                                                        ALL In
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="playtech_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>Daily Turnover</li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="playtech_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>918 Kiss</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('918Kiss Wallet')" id="918kiss-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="kiss918_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>Daily Turnover</li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="kiss_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>AG</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('AG Wallet')" id="ag-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="ag_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>Daily Turnover</li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="ag_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>M8</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('M8 Wallet')" id="m8-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="m8_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>Daily Turnover</li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="m8_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>Maxbet</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('MaxBet Wallet')" id="maxbet-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="maxbet_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>Daily Turnover</li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="maxbet_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>Mega888</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Mega888 Wallet')" id="mega888-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="mega888_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>Daily Turnover</li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="mega888_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>DG</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('DG Wallet')" id="dg-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="dg_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>Daily Turnover</li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="dg_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>Sexy</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Sexy Wallet')" id="sexy-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="sexy_baccarat_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>Daily Turnover</li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="sexy_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>SA</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('SA Wallet')" id="sa-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="sa_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>Daily Turnover</li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="sa_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>Pussy888</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Pussy888 Wallet')" id="pussy888-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="pussy888_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>
-                                                    Daily Turnover
-                                                </li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="pussy_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>AllBet</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('AllBet Wallet')" id="allbet-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="allbet_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>
-                                                    Daily Turnover
-                                                </li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="allbet_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>WM</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('WM Wallet')" id="wm-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="wm_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>
-                                                    Daily Turnover
-                                                </li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="wm_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>Pragmatic</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('Pragmatic Wallet')" id="pragmatic-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="pragmatic_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>
-                                                    Daily Turnover
-                                                </li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="pragmatic_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+							<div class="col-lg-12 pl0 pr0">
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>Joker</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('Joker Wallet')" id="joker-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="joker_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>Daily Turnover</li>
+											</ul>
+											<ul class="list-style">
+												<li id="joker_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>Playtech</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('PlayTech Wallet')" id="playtech-wallet-allin">
+														ALL In
+													</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="playtech_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>Daily Turnover</li>
+											</ul>
+											<ul class="list-style">
+												<li id="playtech_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>918 Kiss</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('918Kiss Wallet')" id="918kiss-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="kiss918_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>Daily Turnover</li>
+											</ul>
+											<ul class="list-style">
+												<li id="kiss_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>AG</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('AG Wallet')" id="ag-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="ag_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>Daily Turnover</li>
+											</ul>
+											<ul class="list-style">
+												<li id="ag_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>M8</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('M8 Wallet')" id="m8-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="m8_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>Daily Turnover</li>
+											</ul>
+											<ul class="list-style">
+												<li id="m8_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>Maxbet</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('MaxBet Wallet')" id="maxbet-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="maxbet_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>Daily Turnover</li>
+											</ul>
+											<ul class="list-style">
+												<li id="maxbet_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>Mega888</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('Mega888 Wallet')" id="mega888-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="mega888_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>Daily Turnover</li>
+											</ul>
+											<ul class="list-style">
+												<li id="mega888_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>DG</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('DG Wallet')" id="dg-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="dg_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>Daily Turnover</li>
+											</ul>
+											<ul class="list-style">
+												<li id="dg_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>Sexy</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('Sexy Wallet')" id="sexy-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="sexy_baccarat_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>Daily Turnover</li>
+											</ul>
+											<ul class="list-style">
+												<li id="sexy_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>SA</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('SA Wallet')" id="sa-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="sa_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>Daily Turnover</li>
+											</ul>
+											<ul class="list-style">
+												<li id="sa_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>Pussy888</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('Pussy888 Wallet')" id="pussy888-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="pussy888_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>
+													Daily Turnover
+												</li>
+											</ul>
+											<ul class="list-style">
+												<li id="pussy_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>AllBet</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('AllBet Wallet')" id="allbet-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="allbet_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>
+													Daily Turnover
+												</li>
+											</ul>
+											<ul class="list-style">
+												<li id="allbet_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>WM</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('WM Wallet')" id="wm-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="wm_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>
+													Daily Turnover
+												</li>
+											</ul>
+											<ul class="list-style">
+												<li id="wm_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>Pragmatic</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('Pragmatic Wallet')" id="pragmatic-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="pragmatic_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>
+													Daily Turnover
+												</li>
+											</ul>
+											<ul class="list-style">
+												<li id="pragmatic_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>YeeBet</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('YeeBet Wallet')" id="yeebet-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="yeebet_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>
-                                                    Daily Turnover
-                                                </li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="yeebet_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>YeeBet</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('YeeBet Wallet')" id="yeebet-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="yeebet_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>
+													Daily Turnover
+												</li>
+											</ul>
+											<ul class="list-style">
+												<li id="yeebet_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>SBO</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('SBO Wallet')" id="sbo-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="sbo_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>
-                                                    Daily Turnover
-                                                </li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="sbo_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>SBO</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('SBO Wallet')" id="sbo-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="sbo_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>
+													Daily Turnover
+												</li>
+											</ul>
+											<ul class="list-style">
+												<li id="sbo_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>GamePlay</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('GamePlay Wallet')" id="gameplay-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="gameplay_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style"><li>Daily Turnover</li></ul>
-                                            <ul class="list-style"><li id="gameplay_turnover">0.00</li></ul>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>GamePlay</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('GamePlay Wallet')" id="gameplay-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="gameplay_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style"><li>Daily Turnover</li></ul>
+											<ul class="list-style"><li id="gameplay_turnover">0.00</li></ul>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>CQ9</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('CQ9 Wallet')" id="cq9-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="cq9_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>Daily Turnover</li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="cq9_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>CQ9</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('CQ9 Wallet')" id="cq9-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="cq9_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>Daily Turnover</li>
+											</ul>
+											<ul class="list-style">
+												<li id="cq9_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-12 col-lg-3 col-sm-4">
-                                    <div class="in-wallet-chips">
-                                        <div class="chip-margin">
-                                            <ul>
-                                                <li class="mb5"><b>JDB</b></li>
-                                                <li class="text-primary">
-                                                    <button class="btn btn-default btn-default-border" onclick="AllInWallet('JDB Wallet')" id="jdb-wallet-allin">ALL In</button>
-                                                </li>
-                                            </ul>
-                                            <ul>
-                                                <li class="text-primary mb5">MYR</li>
-                                                <li class="text-primary" id="jdb_balance">0.00</li>
-                                            </ul>
-                                        </div>
-                                        <div class="box-title">
-                                            <ul class="list-style">
-                                                <li>Daily Turnover</li>
-                                            </ul>
-                                            <ul class="list-style">
-                                                <li id="jdb_turnover">0.00</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>JDB</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('JDB Wallet')" id="jdb-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="jdb_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>Daily Turnover</li>
+											</ul>
+											<ul class="list-style">
+												<li id="jdb_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-lg-3 col-sm-4">
+									<div class="in-wallet-chips">
+										<div class="chip-margin">
+											<ul>
+												<li class="mb5"><b>Live22</b></li>
+												<li class="text-primary">
+													<button class="btn btn-default btn-default-border" onclick="AllInWallet('Live22 Wallet')" id="live22-wallet-allin">ALL In</button>
+												</li>
+											</ul>
+											<ul>
+												<li class="text-primary mb5">MYR</li>
+												<li class="text-primary" id="live22_balance">0.00</li>
+											</ul>
+										</div>
+										<div class="box-title">
+											<ul class="list-style">
+												<li>Daily Turnover</li>
+											</ul>
+											<ul class="list-style">
+												<li id="live22_turnover">0.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
                         </div>
                     </div>
 

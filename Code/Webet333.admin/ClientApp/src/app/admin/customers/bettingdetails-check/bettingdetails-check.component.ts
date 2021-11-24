@@ -37,7 +37,8 @@ export class BettingdetailsCheckComponent implements OnInit {
         { gameName: this.commonService.GameName.SBO },
         { gameName: this.commonService.GameName.GamePlay },
         { gameName: this.commonService.GameName.CQ9 },
-        { gameName: this.commonService.GameName.JDB }
+        { gameName: this.commonService.GameName.JDB },
+        { gameName: this.commonService.GameName.Live22 }
     ];
 
     constructor(

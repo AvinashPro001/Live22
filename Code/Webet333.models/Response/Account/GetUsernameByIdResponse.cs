@@ -88,5 +88,12 @@ namespace Webet333.models.Response.Account
 
         [JsonProperty("gameSupport")]
         public string GameSupport { get; set; }
+
+        [JsonProperty("userLive22")]
+        public string UsernameLive22 { get; set; }
+
+        [JsonProperty("password22")]
+        public string password22 { get; set; }
+
     }
 }

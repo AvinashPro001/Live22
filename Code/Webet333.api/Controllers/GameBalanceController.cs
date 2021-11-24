@@ -745,5 +745,40 @@ namespace Webet333.api.Controllers
         }
 
         #endregion JDB Balance
+
+        #region live 22 game balance
+
+        [Authorize]
+        [HttpPost(ActionsConst.GameBalance.Live22Balance)]
+        public async Task<IActionResult> Live22Balance([FromBody] UserBalanceRequest request)
+        {
+            if (!ModelState.IsValid) return BadResponse(ModelState);
+
+            var Role = GetUserRole(User);
+
+            if (Role == RoleConst.Users)
+                request.Id = GetUserId(User).ToString();
+
+            if (Role == RoleConst.Admin)
+                if (string.IsNullOrEmpty(request.Id))
+                    return BadResponse("error_invalid_modelstate");
+
+            dynamic previousBalance = 0.00;
+
+            if (request.Username != null)
+            {
+                using (var gamehelper = new GameBalanceHelpers(Connection))
+                {
+                    string Live22Balance = await gamehelper.CallLive22GameBalance(request.Username);
+                    previousBalance = await gamehelper.Live22BalanceUpdate(request.Id, Live22Balance);
+
+                    return OkResponse(new { balance = Live22Balance, previousBalance.PreviousBalance });
+                }
+            }
+            string response = null;
+            return OkResponse(new { balance = response, previousBalance });
+        }
+
+        #endregion live22 game balance
     }
 }

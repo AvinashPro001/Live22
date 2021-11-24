@@ -1534,9 +1534,23 @@ namespace Webet333.api.Helpers
 
         #endregion GET ALL 918 Kiss GAME USERS
 
+        #region GET ALL Live22 GAME USERS
+       
+        public async Task<List<Live22GamePasswordResetResponse>> GetAllLive22Usersname()
+        {
+            using (var repository = new DapperRepository<Live22GamePasswordResetResponse>(Connection))
+            {
+                var result = await repository.GetDataAsync(StoredProcConsts.Game.Live22UserPasswordResetSelect, new { });
+                return result.ToList(); ;
+            }
+
+}
+
+#endregion GET ALL Livw22 GAME USERS
+
         #region Get users List of Promotion Expiery
 
-        internal async Task<List<ExpieryPromotionResponse>> GetListPromotionExpiery()
+internal async Task<List<ExpieryPromotionResponse>> GetListPromotionExpiery()
         {
             using (var repository = new DapperRepository<ExpieryPromotionResponse>(Connection))
             {
@@ -1657,11 +1671,32 @@ namespace Webet333.api.Helpers
             return response;
         }
 
-        #endregion 918 Kiss game password reset
+		#endregion 918 Kiss game password reset
 
-        #region KISS918 game Password Status Update
+		#region Live22 game password reset
 
-        internal async Task ResetPasswordStatusUpdate(bool ResetPassword, string RowId)
+		internal async Task<Live22PasswordResetResponse> Live22GamePasswordReset(ProfileResponse request, string NewPassword)
+		{
+			//<API_URL>/changePassword.aspx?operatorcode=xxx&providercode=xxx&username=xxx&password=xxx&opassword=xxx&signature=xxx
+			//Signature = MD5(opassword + operatorcode + password + providercode + username + secret_key), then convert to uppercase 加密后转大写.
+			var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+			var url = $"{GameConst.Live22.baseURL}changePassword.ashx?" +
+				   $"operatorcode={GameConst.Live22.OperatorCode}" +
+				   $"&providercode={GameConst.Live22.providerCode}" +
+				   $"&username={request.UserName22}" +
+				   $"&password={NewPassword}" +
+				   $"&opassword={request.Password22}" +
+				   $"&signature={SecurityHelpers.MD5EncrptText(request.Password22 + GameConst.Live22.OperatorCode + NewPassword + GameConst.Live22.providerCode + request.UserName22 + GameConst.Live22.SecretKey).ToUpper()}";
+
+			var response = JsonConvert.DeserializeObject<Live22PasswordResetResponse>(await GameHelpers.CallThirdPartyApi(url));
+			return response;
+		}
+
+		#endregion Live22 game password reset
+
+		#region KISS918 game Password Status Update
+
+		internal async Task ResetPasswordStatusUpdate(bool ResetPassword, string RowId)
         {
             using (var repository = new DapperRepository<dynamic>(Connection))
             {
@@ -1816,7 +1851,7 @@ namespace Webet333.api.Helpers
         {
             try
             {
-                using (WebClient webClient = new WebClient())
+               using (WebClient webClient = new WebClient())
                     webClient.DownloadFile(FileURL, $"{ImagePath}\\{FileName}");
             }
             catch (Exception ex)

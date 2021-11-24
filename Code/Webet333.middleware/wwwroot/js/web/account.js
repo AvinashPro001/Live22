@@ -211,11 +211,10 @@ async function GetProfileAndSetInSessionStorage() {
 
 async function GetGlobalParameterAndSetInSessionStorage() {
     if (GetLocalStorage('currentUser') !== null) {
-        debugger
+        //debugger
         var globalParameter = JSON.parse(Decryption(GetSessionStorage("GameUsername")));
         if (globalParameter == null) {
             var username = await GetMethod(accountEndPoints.getUsername);
-            debugger
             SetSessionStorage('GameUsername', Encryption(JSON.stringify(username.response.data)));
             globalParameter = username.response.data;
         }
@@ -659,6 +658,7 @@ async function CallTrackingDataAPI() {
 
 async function regisrationGame() {
     try {
+        
         if (localStorage.getItem('IsExecute') == "false" || localStorage.getItem('IsExecute') == false || localStorage.getItem('IsExecute') == null) {
             localStorage.setItem('IsExecute', true);
 
@@ -691,8 +691,11 @@ async function regisrationGame() {
                 resSelectUser.SBO === false ||
                 resSelectUser.GamePlay === false ||
                 resSelectUser.CQ9 === false ||
-                resSelectUser.JDB === false
+                resSelectUser.JDB === false ||
+                resSelectUser.Live22 === false
+
             ) {
+
                 var res = await PostMethod(accountEndPoints.gameRegisterCheck, userModel);
                 resSelectUser = res.response.data;
                 SetSessionStorage('userRegisterDetails', Encryption(JSON.stringify(res.response.data)));
@@ -817,6 +820,11 @@ async function regisrationGame() {
                 let model = {}
                 try { await PostMethod(gameRegisterEndPoints.jdbRegister, model); }
                 catch { }
+            }
+            if (resSelectUser.Live22 == true) {
+                let modelLive22 = {};
+                try { await PostMethod(gameRegisterEndPoints.registerLive22, modelLive22); }
+                catch (ex) { }
             }
 
             localStorage.setItem('IsExecute', false);

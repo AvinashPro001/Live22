@@ -550,6 +550,23 @@ namespace Webet333.api.Controllers
 
         #endregion 918 Kiss Game
 
+        #region Live22 Game
+
+        [Authorize]
+        [HttpPost(ActionsConst.Game.Manually_Live22_Betting_Details)]
+        public async Task<IActionResult> ManuallyLive22BettingDetails([FromBody] GlobalBettingDetailsRequest request)
+        {
+			var url = $"{GameConst.Live22.logURL}fetchbykey.aspx?" +
+							 $"operatorcode={GameConst.Live22.OperatorCode}" +
+							 $"&versionkey=0" +
+							 $"&signature={SecurityHelpers.MD5EncrptText(GameConst.Live22.OperatorCode + GameConst.Live22.SecretKey).ToUpper()}";
+			var result = JsonConvert.DeserializeObject<Live22ServicesResponse>(await GameHelpers.CallThirdPartyApi(url, null));
+			return OkResponse(result);
+			
+        }
+
+        #endregion Live22 Game
+
         #region Pussy888 Game
 
         [Authorize]
@@ -1955,7 +1972,8 @@ namespace Webet333.api.Controllers
                 Mega888Username,
                 JokerUsername,
                 MaxbetUsername,
-                M8Username;
+                M8Username,
+                LiveUsername;
 
             DefaultHelper defaultHelper = new DefaultHelper(_hostingEnvironment);
 
@@ -3376,6 +3394,7 @@ namespace Webet333.api.Controllers
                 var GamePlayGame = result.Where(x => x.GameName == GameConst.GamesNames.GamePlay).ToList();
                 var CQ9Game = result.Where(x => x.GameName == GameConst.GamesNames.CQ9).ToList();
                 var JDBGame = result.Where(x => x.GameName == GameConst.GamesNames.JDB).ToList();
+                var Live22Game = result.Where(x => x.GameName == GameConst.GamesNames.Live22).ToList();
 
                 var response = new
                 {
@@ -3397,7 +3416,8 @@ namespace Webet333.api.Controllers
                     SBOTurover = SBOGame.Count > 0 ? SBOGame.FirstOrDefault().Turnover : 0,
                     GamePlayTurover = GamePlayGame.Count > 0 ? GamePlayGame.FirstOrDefault().Turnover : 0,
                     CQ9Turover = CQ9Game.Count > 0 ? CQ9Game.FirstOrDefault().Turnover : 0,
-                    JDBTurover = JDBGame.Count > 0 ? JDBGame.FirstOrDefault().Turnover : 0
+                    JDBTurover = JDBGame.Count > 0 ? JDBGame.FirstOrDefault().Turnover : 0,
+                    Live22Turover = Live22Game.Count > 0 ? Live22Game.FirstOrDefault().Turnover : 0
                 };
 
                 decimal total =
@@ -3419,7 +3439,8 @@ namespace Webet333.api.Controllers
                     response.SBOTurover +
                     response.GamePlayTurover +
                     response.CQ9Turover +
-                    response.JDBTurover;
+                    response.JDBTurover+
+                    response.Live22Turover;
 
                 return OkResponse(new { response, Total = total });
             }
@@ -3794,6 +3815,8 @@ namespace Webet333.api.Controllers
 
         #endregion Joker Player Log
 
+    
+
         #region Get Users Betting Summery
 
         [Authorize]
@@ -3980,6 +4003,116 @@ namespace Webet333.api.Controllers
             }
         }
 
-        #endregion Hot Slots Game List Select
-    }
+		#endregion Hot Slots Game List Select
+
+		#region Live22 password reset
+
+		[Authorize]
+		[HttpGet(ActionsConst.Game.Live22_ResetPassword)]
+		public async Task<IActionResult> Live22GamePasswordReset()
+		{
+			await ValidateUser();
+			string password;
+			using (var account_helper = new AccountHelpers(Connection))
+			{
+				var user = await account_helper.GetUsernameInfo(UserEntity.Id.ToString());
+				password = SecurityHelpers.DecryptPassword(user.Password);
+			}
+			using (var game_helper = new GameHelpers(Connection))
+			{
+				var newPassword = "Wb3@" + SecurityHelpers.DecryptPassword(password);
+
+				if (newPassword.Length > 14)
+					newPassword = newPassword.Substring(0, 14);
+
+				var result = await game_helper.Live22GamePasswordReset(UserEntity, newPassword);
+				if (result.errCode != null) return BadResponse(result.errMsg);
+				var profileUpdateRequest = new ProfileEditRequest();
+				profileUpdateRequest.Id = UserEntity.Id;
+				profileUpdateRequest.Password22 = newPassword;
+				using (var user_help = new UserHelpers(Connection))
+					await user_help.UpdateProfile(profileUpdateRequest);
+				return OkResponse(new { newPassword });
+			}
+		}
+
+		#endregion Live22 game password reset
+
+		#region Live22 game password reset by Admin
+
+		[Authorize]
+		[HttpPost(ActionsConst.Game.Live22_ResetPassword_By_Admin)]
+		public async Task<IActionResult> Live22GamePasswordResetByAdmin([FromBody] SlotsGamePasswordResertByAdmin request)
+		{
+			await ValidateUser(role: RoleConst.Admin);
+			using (var game_helper = new GameHelpers(Connection))
+			{
+				var newPassword = "Wb3@" + SecurityHelpers.DecryptPassword(request.Password);
+
+				if (newPassword.Length > 14)
+					newPassword = newPassword.Substring(0, 14);
+
+				var PasswordUpdateRequest = new ProfileResponse
+				{
+					UserName = request.Username,
+					UserName22 = request.GameUsername,
+					Password22 = request.GamePassword,
+				};
+
+				var result = await game_helper.Live22GamePasswordReset(PasswordUpdateRequest, newPassword);
+				if (result.errCode != "0") return BadResponse(result.errMsg);
+				var profileUpdateRequest = new ProfileEditRequest();
+				profileUpdateRequest.Id = request.UserId;
+				profileUpdateRequest.Password22 = newPassword;
+				using (var user_help = new UserHelpers(Connection))
+					await user_help.UpdateProfile(profileUpdateRequest);
+				await game_helper.ResetPasswordStatusUpdate(true, request.RowId);
+				return OkResponse(new { newPassword });
+			}
+		}
+
+		#endregion Live22 game password reset by Admin
+
+		#region All Live22 game users password reset
+
+		[Authorize]
+		[HttpGet(ActionsConst.Game.AllUsers_Live22_ResetPassword)]
+		public async Task<IActionResult> Live22GameAllUsersPasswordReset()
+		{
+			await ValidateUser();
+			using (var game_helper = new GameHelpers(Connection))
+			{
+				var users = await game_helper.GetAllLive22Usersname();
+
+				List<Live22PasswordResetResponse> list = new List<Live22PasswordResetResponse>();
+				foreach (var user in users)
+				{
+					var newPassword = "Wb3@" + SecurityHelpers.DecryptPassword(user.Password);
+					if (newPassword.Length > 14)
+						newPassword = newPassword.Substring(0, 14);
+
+					var request = new ProfileResponse();
+					request.Password22 = user.Live22Password;
+					request.UserName22 = user.Live22Username;
+					request.UserName = user.Username;
+
+					var result = await game_helper.Live22GamePasswordReset(request, newPassword);
+					if (result.errMsg == null)
+					{
+						var profileUpdateRequest = new ProfileEditRequest();
+						profileUpdateRequest.Id = user.Id;
+						profileUpdateRequest.Password22 = newPassword;
+						using (var user_help = new UserHelpers(Connection))
+							await user_help.UpdateProfile(profileUpdateRequest);
+					}
+					list.Add(result);
+				}
+				return OkResponse(new { list });
+			}
+		}
+
+		#endregion All Live22 game users password reset
+
+
+	}
 }

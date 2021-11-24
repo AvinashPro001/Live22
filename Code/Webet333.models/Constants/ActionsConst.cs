@@ -551,6 +551,14 @@
             public const string Pussy888PlayerLog = "pussy888/playerlog";
 
             public const string JokerPlayerLog = "joker/playerlog";
+
+            public const string Manually_Live22_Betting_Details = "Game/Manually/Live22_Betting_Details";
+
+            public const string AllUsers_Live22_ResetPassword = "Game/Live22_AllUsers/ResetPassword";
+
+            public const string Live22_ResetPassword = "Game/Live22/ResetPassword";
+
+            public const string Live22_ResetPassword_By_Admin = "Game/Live22/ResetPassword/ByAdmin";
         }
 
         public class GameBalance
@@ -600,6 +608,10 @@
             public const string CQ9Balance = "gamebalance/cq9";
 
             public const string JDBBalance = "gamebalance/jdb";
+
+            public const string Live22Balance = "gamebalance/live22";
+
+
         }
 
         public class TransferMoney
@@ -898,6 +910,13 @@
         {
 
             public const string retrive = "referral_bonus_given/list";
+
+        }
+
+        public class Live22
+        {
+            public const string Register = "Live22/register";
+            public const string GameLaunch = "Live22/Live22Launch";
 
         }
     }

@@ -1,6 +1,6 @@
 ﻿//#region Variable Declare
 
-var SlotsUsernamePasswordId = ["pussy888_password", "pussy888_username", "mega888_password", "mega888_username", "joker_password", "joker_username", "kiss918_password", "kiss918_username"]
+var SlotsUsernamePasswordId = ["pussy888_password", "pussy888_username", "mega888_password", "mega888_username", "joker_password", "joker_username", "kiss918_password", "kiss918_username", "live22_username","live22_password"]
 
 let DownloadLinks = {
     mega888_apkURL: null,
@@ -12,7 +12,9 @@ let DownloadLinks = {
     joker_apkURL: null,
     joker_iosURL: null,
     pussy888_apkURL: null,
-    pussy888_iosURL: null
+    pussy888_iosURL: null,
+    live22_apkURL: null
+
 }
 
 //#endregion
@@ -43,6 +45,26 @@ function AppDownload(Id) {
 }
 
 //#endregion
+async function LaunchLive22() {
+    
+    var data = JSON.parse(Decryption(GetSessionStorage("userDetails")))
+    console.log(GameUsernames.Live22Username)
+    console.log(data.password22)
+    let model = {
+        username: GameUsernames.Live22Username,
+        password: data.password22
+    };
+    let res = await PostMethod(GameLaunchEndPoints.live22GameLaunch, model);
+    var aa = res.response.data.gameUrl;
+    if (res.status == 200) {
+        window.open(aa, '_blank');
+    // ShowError(res.response.message);
+    }
+    
+    
+  
+}
+   
 
 //#region Set 'Please Login !!' Text
 
@@ -60,10 +82,12 @@ function SetPleaseLoginText(InputType = false) {
 //#region Set Username Password in Download Page
 
 function SetUsernamePassword(InputType = false) {
+
     if (GetLocalStorage("currentUser") == null) {
         SetPleaseLoginText(InputType)
     }
     else {
+        
         var data = JSON.parse(Decryption(GetSessionStorage("userDetails")));
         if (InputType) {
             for (i = 0; i < SlotsUsernamePasswordId.length; i++) {
@@ -76,6 +100,9 @@ function SetUsernamePassword(InputType = false) {
                     case "mega888_password": SetAllInputTextvalue(SlotsUsernamePasswordId[i], Decryption(GetLocalStorage('currentUserData'))); break;
                     case "joker_password": SetAllInputTextvalue(SlotsUsernamePasswordId[i], Decryption(GetLocalStorage('currentUserData'))); break;
                     case "kiss918_password": SetAllInputTextvalue(SlotsUsernamePasswordId[i], data.password918); break;
+                    case "live22_username": SetAllInputTextvalue(SlotsUsernamePasswordId[i], GameUsernames.Live22Username); break;
+                    case "live22_password": SetAllInputTextvalue(SlotsUsernamePasswordId[i], data.password22); break;
+
                 }
             }
         }
@@ -90,6 +117,8 @@ function SetUsernamePassword(InputType = false) {
                     case "mega888_password": SetAllValueInElement(SlotsUsernamePasswordId[i], Decryption(GetLocalStorage('currentUserData'))); break;
                     case "joker_password": SetAllValueInElement(SlotsUsernamePasswordId[i], Decryption(GetLocalStorage('currentUserData'))); break;
                     case "kiss918_password": SetAllValueInElement(SlotsUsernamePasswordId[i], data.password918); break;
+                    case "live22_username": SetAllValueInElement(SlotsUsernamePasswordId[i], GameUsernames.Live22Username); break;
+                    case "live22_password": SetAllValueInElement(SlotsUsernamePasswordId[i], data.password22); break;
                 }
             }
         }

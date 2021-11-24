@@ -24,6 +24,12 @@ namespace Webet333.models.Response.Account
         [JsonProperty(PropertyName = "password918")]
         public string Password918 { get; set; }
 
+        [JsonProperty(PropertyName = "username22")]
+        public string UserName22 { get; set; }
+
+        [JsonProperty(PropertyName = "password22")]
+        public string Password22 { get; set; }
+
         [JsonProperty(PropertyName = "usernamePussy888")]
         public string UserNamePussy888 { get; set; }
 

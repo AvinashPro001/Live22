@@ -67,6 +67,9 @@ namespace Webet333.models.Response.Account
         public string ToWalletId { get; set; }
 
         public bool? ToWalletMaintenance { get; set; }
+
+        public string Live22GamePrefix { get; set; }
+
     }
 
     public class GameSupport
@@ -118,5 +121,9 @@ namespace Webet333.models.Response.Account
 
         [JsonProperty("IsJDB")]
         public bool IsJDB { get; set; }
+
+        [JsonProperty("IsLive22")]
+        public bool IsLive22 { get; set; }
+
     }
 }

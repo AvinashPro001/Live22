@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="Enums\MaxBet\" />
+    <Folder Include="Response\Game\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>

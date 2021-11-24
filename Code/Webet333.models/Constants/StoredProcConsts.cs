@@ -344,6 +344,8 @@
             public const string CQ9GameBalanceUpdate = "[dbo].[Balance_CQ9_Update]";
 
             public const string JDBGameBalanceUpdate = "[dbo].[Balance_JDB_Update]";
+
+            public const string Live22GameBalanceUpdate = "[dbo].[Balance_Live22_Update]";
         }
 
         public class Game
@@ -365,6 +367,8 @@
             public const string GetAllGameUsers = "[dbo].[gameUser_Select]";
 
             public const string Kiss918UserPasswordResetSelect = "[dbo].[Kiss918_User_Password_Reset_Select]";
+
+            public const string Live22UserPasswordResetSelect = "[dbo].[Live22_User_Password_Reset_Select]";
 
             public const string ManuallyPromotionExpiery = "[dbo].[Manually_Promotion_Expiery]";
 
@@ -499,6 +503,8 @@
             public const string JDBBettingDetailsInsert = "[dbo].[JDB_BettingDetails_Insert]";
 
             public const string BettingDetails_JDB = "[dbo].[JDB_BettingDetails_By_Username]";
+
+            public const string GameLive22Register = "[dbo].[Users_Insert_Live22]";
         }
 
         public class MaxBetGame

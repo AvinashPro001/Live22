@@ -178,8 +178,8 @@ namespace Webet333.dapper
         /// <returns>number changes in DB</returns>
         public int AddOrUpdate(string query, TEntity entity, CommandType type = CommandType.StoredProcedure)
         {
-            if (connection == null) throw new ArgumentNullException(nameof(entity), $"The parameter {nameof(entity)} can't be null");
-            int result = connection.Execute(query, entity, dbTransaction, commandTimeout, type);
+            //if (connection == null) throw new ArgumentNullException(nameof(entity), $"The parameter {nameof(entity)} can't be null");
+            int result =0;// = connection.Execute(query, entity, dbTransaction, commandTimeout, type);
             return result;
         }
 
