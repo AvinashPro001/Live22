@@ -48,8 +48,7 @@ function AppDownload(Id) {
 async function LaunchLive22() {
     
     var data = JSON.parse(Decryption(GetSessionStorage("userDetails")))
-    console.log(GameUsernames.Live22Username)
-    console.log(data.password22)
+  
     let model = {
         username: GameUsernames.Live22Username,
         password: data.password22

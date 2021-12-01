@@ -205,53 +205,27 @@ namespace Webet333.api.Helpers
 
         #region Live22 game Withdraw & Deposit
 
-        public static async Task<Live22DepositWithdrawResponse> Live22DepsoitWithdrawMehtod(string Live22UserName,string password,  decimal amount)
+        public static async Task<Live22DepositWithdrawResponse> Live22DepsoitWithdrawMehtod(string Live22UserName, string password, decimal amount, string type)
         {
-            //ignature = MD5(operatorcode + password + providercode + type + username + secret_key),
 
-			// MD5(operatorcode + providercode + secret_key), then convert to uppercase 加
-			var referenceid = Guid.NewGuid().ToString("N").Substring(0, 20);
-			var url = $"{GameConst.Live22.baseURL}launchGames.aspx?" +
-							$"operatorcode={GameConst.Live22.OperatorCode}" +
-							$"&providercode={GameConst.Live22.providerCode}" +
-							$"&userName={Live22UserName}" +
-							$"&password={password}" +
-                            $"&type=SL" +
-                            $"&signature={SecurityHelpers.MD5EncrptText(GameConst.Live22.OperatorCode + password + GameConst.Live22.providerCode+ "SL" + Live22UserName + GameConst.Live22.SecretKey).ToUpper()}";
+            var referenceid = Guid.NewGuid().ToString("N").Substring(0, 20);
+            var url = $"{GameConst.Live22.baseURL}makeTransfer.aspx?" +
+                            $"operatorcode={GameConst.Live22.OperatorCode}" +
+                            $"&providercode={GameConst.Live22.providerCode}" +
+                            $"&userName={Live22UserName}" +
+                            $"&password={password}" +
+                            $"&referenceid={referenceid}" +
+                            $"&type={type}" +
+                            $"&amount={amount}" +
+                            $"&signature={SecurityHelpers.MD5EncrptText(amount + GameConst.Live22.OperatorCode + password + GameConst.Live22.providerCode + referenceid + type + Live22UserName + GameConst.Live22.SecretKey).ToUpper()}";
 
-			//var url1 = $"{GameConst.Live22.baseURL}checkAgentCredit.aspx?" +
-			//			   $"operatorcode={GameConst.Live22.OperatorCode}" +
-			//			   $"&signature={SecurityHelpers.MD5EncrptText(GameConst.Live22.OperatorCode + GameConst.Live22.SecretKey).ToUpper()}";
+            //var url1 = $"{GameConst.Live22.baseURL}checkAgentCredit.aspx?" +
+            //			   $"operatorcode={GameConst.Live22.OperatorCode}" +
+            //			   $"&signature={SecurityHelpers.MD5EncrptText(GameConst.Live22.OperatorCode + GameConst.Live22.SecretKey).ToUpper()}";
 
-			var res = JsonConvert.DeserializeObject<Live22DepositWithdrawResponse>(await CallThirdPartyApi(url, null));
+            var res = JsonConvert.DeserializeObject<Live22DepositWithdrawResponse>(await CallThirdPartyApi(url, null));
             return res;
-
-
-
-			//string type = GameConst.Live22.deposit;
-			//if (amount < 0){
-			//	type = GameConst.Live22.withdraw;
-			//}
-
-			//         amount = 1;
-			//var referenceid = Guid.NewGuid().ToString("N").Substring(0, 20);
-			//var url = $"{GameConst.Live22.baseURL}makeTransfer.aspx?" +
-			//				$"operatorcode={GameConst.Live22.OperatorCode}" +
-			//				$"&providercode={GameConst.Live22.providerCode}" +
-			//				$"&userName={Live22UserName}" +
-			//				$"&password={password}" +
-			//				$"&referenceid={referenceid}" +
-			//				$"&type={type}" +
-			//				$"&amount={amount}" +
-			//				$"&signature={SecurityHelpers.MD5EncrptText(amount + GameConst.Live22.OperatorCode + password + GameConst.Live22.providerCode + referenceid + type + Live22UserName + GameConst.Live22.SecretKey).ToUpper()}";
-
-			////var url1 = $"{GameConst.Live22.baseURL}checkAgentCredit.aspx?" +
-			////			   $"operatorcode={GameConst.Live22.OperatorCode}" +
-			////			   $"&signature={SecurityHelpers.MD5EncrptText(GameConst.Live22.OperatorCode + GameConst.Live22.SecretKey).ToUpper()}";
-
-			//var res = JsonConvert.DeserializeObject<Live22DepositWithdrawResponse>(await CallThirdPartyApi(url, null));
-			//return res;
-		}
+        }
 
         #endregion Live22 game Withdraw & Deposit
 
@@ -696,7 +670,9 @@ namespace Webet333.api.Helpers
                             }
 
                         }
-                        var Live22Response = await Live22DepsoitWithdrawMehtod(UsernameResponse.Live22Username, actualPassword.Trim(), - Math.Abs(Amount));
+
+                        string type = GameConst.Live22.withdraw;
+                        var Live22Response = await Live22DepsoitWithdrawMehtod(UsernameResponse.Live22Username, actualPassword.Trim(), Math.Abs(Amount), type);
                         if (Live22Response.errCode != "0")
                         {
                             response.ErrorMessage = Live22Response.errMsg;
@@ -1116,26 +1092,26 @@ namespace Webet333.api.Helpers
                 case "Live22 Wallet":
                     try
                     {
-                        string actualPassword = string.Empty;             
+                        string actualPassword = string.Empty;
                         System.Collections.Generic.List<object> Genpass = Getpassword(UserId);
-                        foreach(var node in Genpass)
-						{
-                           string pass= node.ToString();
-                           string[] arrList= pass.Split(',');                           
-                            foreach(var item in arrList)
-							{
-                                if(item.Contains("password22"))
-								{
+                        foreach (var node in Genpass)
+                        {
+                            string pass = node.ToString();
+                            string[] arrList = pass.Split(',');
+                            foreach (var item in arrList)
+                            {
+                                if (item.Contains("password22"))
+                                {
                                     string[] paswordsegment = item.Split('=');
-                                     actualPassword = (paswordsegment[1]).Replace("'","");
+                                    actualPassword = (paswordsegment[1]).Replace("'", "");
 
 
                                 }
-							}
+                            }
 
-						}
-                       
-                           var Live22Response = await Live22DepsoitWithdrawMehtod(UsernameResponse.Live22Username, (actualPassword).Trim(), Math.Abs(Amount));
+                        }
+                        string type = GameConst.Live22.deposit;
+                        var Live22Response = await Live22DepsoitWithdrawMehtod(UsernameResponse.Live22Username, (actualPassword).Trim(), Math.Abs(Amount), type);
                         if (Live22Response.errCode != "0")
                         {
                             response.ErrorMessage = Live22Response.errMsg;

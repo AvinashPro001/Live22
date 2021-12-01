@@ -595,7 +595,7 @@
 
         public class TransferMoney
         {
-            public const string UserDetails = "[dbo].[User_TransferInformation_Select_1]";
+            public const string UserDetails = "[dbo].[User_TransferInformation_Select]";
 
             public const string MainWalletTransfer = "[dbo].[MainWallet_Withdraw_Deposit]";
 

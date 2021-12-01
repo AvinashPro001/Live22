@@ -179,7 +179,7 @@ async function LoadBalanceBasedOnWalletNameAsync(WalletName) {
         case "GamePlay Wallet": if (GameUsernames.GamePlayUsername != null) await GamePlayWallet(GameUsernames.GamePlayUsername); break;
         case "CQ9 Wallet": if (GameUsernames.CQ9Username != null) await CQ9Wallet(GameUsernames.CQ9Username); break;
         case 'JDB Wallet': if (GameUsernames.JDBUsername != null) await JDBWallet(GameUsernames.JDBUsername); break;
-        case 'JDB Wallet': if (GameUsernames.Live22Username != null) await JDBWallet(GameUsernames.Live22Username); break;
+        case 'Live22 Wallet': if (GameUsernames.Live22Username != null) await JDBWallet(GameUsernames.Live22Username); break;
     }
 }
 
@@ -291,7 +291,7 @@ function SetLoadingImageBaseOnWalletName(WalletName) {
         case "GamePlay Wallet": SetLoadingImagesInBalance("gameplay_balance"); SetFetchingWordInBalance("gameplay_balance"); break;
         case 'CQ9 Wallet': SetLoadingImagesInBalance('cq9_balance'); SetFetchingWordInBalance('cq9_balance'); break;
         case 'JDB Wallet': SetLoadingImagesInBalance('jdb_balance'); SetFetchingWordInBalance('jdb_balance'); break;
-        case 'JDB Wallet': SetLoadingImagesInBalance('live22_balance'); SetFetchingWordInBalance('live22_balance'); break;
+        case 'Live22 Wallet': SetLoadingImagesInBalance('live22_balance'); SetFetchingWordInBalance('live22_balance'); break;
     }
 }
 
@@ -382,6 +382,7 @@ async function GetDailyTurnover() {
 }
 
 //#region All Wallet Balance
+
 
 async function MainWallet() {
     let model = {}
@@ -845,8 +846,11 @@ async function JDBWallet(Username, IsDivValueSet = true) {
 }
 
 async function Live22Wallet(Username, IsDivValueSet = true) {
+    var data = JSON.parse(Decryption(GetSessionStorage("userDetails")))    
+    console.log(data.password22)
     let model = {
-        username: Username
+        username: Username,
+        password: data.password22
     };
     try {
         var res = await PostMethod(gameBalanceEndPoints.live22Balance, model);
@@ -921,6 +925,10 @@ function StartTimerGameBalanceAPI(GameName) {
         case 'JDB':
             let JDBTimerId = setInterval(() => { JDBWallet(GameUsernames.JDBUsername); JDBTrigger = true; }, 30000);
             setTimeout(() => { clearInterval(JDBTimerId); JDBTrigger = false; }, 301000);
+            break;
+        case 'Live22':
+            let Live22TimerId = setInterval(() => { Live22Wallet(GameUsernames.Live22Username); Live22Trigger = true; }, 30000);
+            setTimeout(() => { clearInterval(Live22TimerId); Live22Trigger = false; }, 301000);
             break;
     }
 }
